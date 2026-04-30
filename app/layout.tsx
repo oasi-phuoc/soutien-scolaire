@@ -13,8 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Soutien scolaire",
-  description: "Plateforme de soutien scolaire",
+  title: {
+    default: "Soutien scolaire",
+    template: "%s · Soutien scolaire",
+  },
+  description:
+    "Français et mathématiques pour jeunes réfugiés — littératie, thèmes du quotidien, maths débutantes.",
 };
 
 export default function RootLayout({
