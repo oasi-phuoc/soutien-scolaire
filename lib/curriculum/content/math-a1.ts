@@ -21,27 +21,110 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         fr: [
           "Un nombre entier s’écrit avec des chiffres (0 à 9). En français, on sépare souvent les milliers par une espace fine : 125 000.",
           "Pour comparer deux nombres, on regarde d’abord le nombre de chiffres, puis les chiffres de gauche à droite (centaines, dizaines, unités…).",
-          "Les exercices de cette section reprennent l’écriture des nombres, le comptage oral et le dénombrement de collections (fiches CSC 01.01 à 01.04).",
+          "La partie « Compter en français » ci-dessous reprend la prononciation des nombres (fiche CSC MATH_EX_01.02). En Suisse romande, on utilise souvent septante, huitante et nonante pour 70, 80 et 90. Écoute l’enregistrement puis répète à voix haute.",
+          "Les exercices reprennent aussi l’écriture, le dénombrement et les fiches 01.01 à 01.04.",
         ],
         ar: [
-          "نكتب العدد الصحيح باستعمال الأرقام من 0 إلى 9. في الفرنسية نفصل الآلاف أحيانًا بمسافة رفيعة: 125 000.",
-          "لمقارنة عددين ننظر أولًا إلى عدد الأرقام، ثم نقرأ الأرقام من اليسار إلى اليمين (مئات، عشرات، آحاد…).",
-          "تمارين هذا الجزء تعيد كتابة الأعداد، العدّ الشفهي، وعدّ عناصر مجموعة (مراجع 01.01 إلى 01.04).",
+          "نكتب العدد الصحيح بأرقام من 0 إلى 9، ونفصل الآلاف أحيانًا بمسافة في الفرنسية.",
+          "لمقارنة عددين ننظر إلى عدد الأرقام ثم من اليسار إلى اليمين.",
+          "قسم « العدّ بالفرنسية » يعرض كيفية نطق الأرقام (مطابقة لبرنامج CSC). في الروماندي السويسري يقال غالبًا سبعون وثمانون وتسعون لـ 70 و80 و90. استمع ثم كرّر بصوت عالٍ.",
+          "التطبيقات تشمل الكتابة والعدّ وفقرات 01.01 إلى 01.04.",
         ],
         fa: [
-          "عدد صحیح را با رقم‌های ۰ تا ۹ می‌نویسیم. در فرانسه هزارگان را گاه با فاصلهٔ نازک جدا می‌کنند: 125 000.",
-          "برای مقایسهٔ دو عدد نخست تعداد رقم‌ها، سپس رقم‌ها را از چپ به راست می‌خوانیم (صدها، ده‌ها، یک‌ها…).",
-          "تمرین‌های این بخش نوشتن اعداد، شمارش شفاهی و شمارش اشیاء را پوشش می‌دهد (برگه‌های ۰۱.۰۱ تا ۰۱.۰۴).",
+          "عدد صحیح را با ارقام ۰ تا ۹ می‌نویسیم؛ در فرانسوی هزارگان را گاه با فاصله می‌نویسند.",
+          "برای مقایسه نخست تعداد رقم‌ها، سپس از چپ به راست می‌خوانیم.",
+          "بخش « شمردن به فرانسوی » تلفظ اعداد را نشان می‌دهد (CSC). در سوئیس رماند معمولاً ۷۰ و ۸۰ و ۹۰ را septante، huitante، nonante می‌گویند. گوش کن و بلند تکرار کن.",
+          "تمرین‌ها نوشتن و شمردن و برگه‌های ۰۱.۰۱ تا ۰۱.۰۴ را پوشش می‌دهد.",
         ],
         ti: [
-          "ከፊል ኣኃዝቲ ብኣሃዝቲ 0 ክሳብ 9 ይጽዓን። ኣብ ፈረንሳይ ሽሕታት ገይርካ ርሑቕ ምስ ጥዕና ዝተሓሓዘ ልዝብ ምፍላይ: 125 000።",
-          "ክልተ ኣኃዝቲ ንምምካኽ እዋናዊ ክቕየር ንሕዝቶ ኣሃዝቲ፣ ድሓር ካብ ንደቓይቕ ክሳዕ የማን እናኸድኩም ንርአ (ሚእታት፡ ዓደቦታት፡ ውልቃት…)።",
-          "እዚ ክፍሊ ብምጽሓፍ ኣኃዝቲ፡ ብናይ ድምጺ ምቕታልን ብምስፍራሕ ነገራትን ይምርከ (መርሓ 01.01 ክሳብ 01.04)።",
+          "ኣኃዝቲ ብኣሃዝቲ 0-9 ይጽዓን፣ ኣብ ፈረንሳይ ሽሕታት ብልዝብ ክፈልጹ ይኽእሉ።",
+          "ክልተ ኣኃዝቲ ንምምካኽ ብዝተሓሓዘ ኣሃዝቲ ካብ ንደቓይቕ ክሳዕ የማን እንተርእዩ።",
+          "እዚ « ብፈረንሳይ ምቕታል » እዚ ንምውጻእ ቁጽርታት (CSC) ይምርኩ። ኣብ ስዊዘርላንድ 70-80-90 ብ septante ፡ huitante ፡ nonante ይበሃሉ ። ስምዑ እሞ ብድምጺ ድግሞ ።",
+          "መስርሕታት ምጽሓፍን ምስፍራሕን ንመርሓ 01.01-01.04 የምሕርዩ።",
         ],
         uk: [
-          "Ціле число записують цифрами від 0 до 9. У французькій тисячі іноді відокремлюють тонким пробілом: 125 000.",
-          "Щоб порівняти два числа, спершу дивимося на кількість цифр, потім зліва направо (сотні, десятки, одиниці…).",
-          "Вправи цього розділу відповідають листам CSC 01.01–01.04: запис чисел, усний рахунок і лічба предметів.",
+          "Ціле число пишуть цифрами від 0 до 9; тисячі у французькій часто відокремлюють пробілом.",
+          "Щоб порівняти два числа, спершу кількість цифр, далі зліва направо.",
+          "Розділ « Рахувати французькою » показує вимову чисел (CSC). У романській Швейцарії для 70, 80, 90 часто кажуть septante, huitante, nonante. Прослухай запис і повтори вголос.",
+          "Вправи також охоплюють запис, лічбу та аркуші 01.01–01.04.",
+        ],
+      },
+      readAloud: {
+        headingFr: "Compter en français (lire et écouter)",
+        introFr: [
+          "Les couleurs des colonnes rappellent le code du support papier : rouge (un seul son pour la syllabe accentuée), gris (pas de son / préparation), noir (son régulier).",
+        ],
+        introPivot: {
+          ar: [
+            "ألوان الأعمدة توافق رمز الدفتر: أحمر (مقطع نطق واحد بارز)، رمادي (لا صوت / تحضير)، أسود (نطق عادي).",
+          ],
+          fa: [
+            "رنگ ستون‌ها همان کد برگه است: قرمز (یک هجای تأکیدی)، خاکستری (بدون صوت / آماده‌سازی)، سیاه (صدای عادی).",
+          ],
+          ti: [
+            "ነገራዊ ሕብራት ንዓምዲ ንስነ-ኣእምሮ መጽሓፍ ምስ ኣሰር፡ ቀይሕ (ናይ ሓደ ድምጺ) ፡ ግራጫ (ዘይኮነ ድምጺ) ፡ ጸሊም (ስነ-ጽሑፍ ከም ዝተመርኰሰ) ።",
+          ],
+          uk: [
+            "Кольори стовпчиків відповідають коду навчального аркуша: червоний (один наголошений звук), сірий (без звуку / підготовка), чорний (звичайний вимовний звук).",
+          ],
+        },
+        columnTones: ["red", "gray", "black"],
+        legendFr: [
+          { tone: "red", labelFr: "Rouge : un seul son" },
+          { tone: "gray", labelFr: "Gris : pas de son" },
+          { tone: "black", labelFr: "Noir : son" },
+        ],
+        rows: [
+          {
+            col1: { num: "1", word: "un" },
+            col2: { num: "11", word: "onze" },
+            col3: { num: "21", word: "vingt et un" },
+          },
+          {
+            col1: { num: "2", word: "deux" },
+            col2: { num: "12", word: "douze" },
+            col3: { num: "22", word: "vingt-deux" },
+          },
+          {
+            col1: { num: "3", word: "trois" },
+            col2: { num: "13", word: "treize" },
+            col3: { num: "30", word: "trente" },
+          },
+          {
+            col1: { num: "4", word: "quatre" },
+            col2: { num: "14", word: "quatorze" },
+            col3: { num: "40", word: "quarante" },
+          },
+          {
+            col1: { num: "5", word: "cinq" },
+            col2: { num: "15", word: "quinze" },
+            col3: { num: "50", word: "cinquante" },
+          },
+          {
+            col1: { num: "6", word: "six" },
+            col2: { num: "16", word: "seize" },
+            col3: { num: "60", word: "soixante" },
+          },
+          {
+            col1: { num: "7", word: "sept" },
+            col2: { num: "17", word: "dix-sept" },
+            col3: { num: "70", word: "septante" },
+          },
+          {
+            col1: { num: "8", word: "huit" },
+            col2: { num: "18", word: "dix-huit" },
+            col3: { num: "80", word: "huitante" },
+          },
+          {
+            col1: { num: "9", word: "neuf" },
+            col2: { num: "19", word: "dix-neuf" },
+            col3: { num: "90", word: "nonante" },
+          },
+          {
+            col1: { num: "10", word: "dix" },
+            col2: { num: "20", word: "vingt" },
+            col3: { num: "100", word: "cent" },
+          },
         ],
       },
       cscRefs: [
@@ -52,7 +135,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         "MATH_EX_01.04_Denombrement_02.docx",
       ],
       mediaHint: {
-        fr: "Audio/vidéo du comptage : copie le fichier dans public/csc/ puis indique le chemin.",
+        fr: "Enregistrement CSC : place « MATH_EX_01.02_AUDIO.mp4 » dans le dossier public/csc/ du projet (chemin attendu ci-dessous).",
         publicPath: "/csc/MATH_EX_01.02_AUDIO.mp4",
       },
     },

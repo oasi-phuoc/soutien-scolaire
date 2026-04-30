@@ -2,11 +2,30 @@ import type { PivotCode } from "@/lib/pivot-langs";
 
 export type LocaleKey = "fr" | PivotCode;
 
+export type LegendTone = "red" | "gray" | "black";
+
+/** Section « lire / compter » (table + légende couleurs + audio). */
+export type TheoryReadAloud = {
+  headingFr: string;
+  introFr?: string[];
+  /** Même idée que introFr, affichée sous « Traduire » (une langue pivot à la fois). */
+  introPivot?: Partial<Record<PivotCode, string[]>>;
+  rows: {
+    col1: { num: string; word: string };
+    col2: { num: string; word: string };
+    col3: { num: string; word: string };
+  }[];
+  /** Colonne 1 = rouge, 2 = gris, 3 = noir (cf. matériel CSC). */
+  columnTones: [LegendTone, LegendTone, LegendTone];
+  legendFr: { tone: LegendTone; labelFr: string }[];
+};
+
 export type MathTheoryBlock = {
-  /** Titre affiché au-dessus de la théorie. */
+  /** Titre principal toujours affiché en français (langue d’étude). */
   title: Record<LocaleKey, string>;
-  /** Paragraphes (HTML évité ; retours à la ligne via \n ou plusieurs strings). */
+  /** Paragraphes : français + traductions pivot (sous « Traduire » uniquement). */
   paragraphs: Record<LocaleKey, string[]>;
+  readAloud?: TheoryReadAloud;
   /** Référence matériels CSC / fichiers source (affichage informatif). */
   cscRefs?: string[];
   /** Chemin public optionnel si vous copiez la vidéo dans /public. */
@@ -54,4 +73,21 @@ export function pickTheoryForPivot(
   const title = block.title[pivot] ?? block.title.fr;
   const paragraphs = block.paragraphs[pivot] ?? block.paragraphs.fr;
   return { title, paragraphs };
+}
+
+/** Titre et texte français (affichage principal). */
+export function pickTheoryFrench(block: MathTheoryBlock): { title: string; paragraphs: string[] } {
+  return { title: block.title.fr, paragraphs: block.paragraphs.fr };
+}
+
+/** Traduction pivot pour zone sous le français (si présente). */
+export function pickTheoryPivotTranslation(
+  pivot: PivotCode,
+  block: MathTheoryBlock,
+): string[] | null {
+  const t = block.paragraphs[pivot];
+  if (!t) return null;
+  const fr = block.paragraphs.fr;
+  if (t.length === fr.length && t.every((line, i) => line === fr[i])) return null;
+  return t;
 }

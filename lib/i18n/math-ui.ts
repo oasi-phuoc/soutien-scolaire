@@ -7,7 +7,9 @@ export type MathExerciseUiKey =
   | "yourAnswer"
   | "correct"
   | "incorrect"
-  | "answersRecorded";
+  | "answersRecorded"
+  | "translateShow"
+  | "translateHide";
 
 const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   validate: {
@@ -58,6 +60,20 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     fa: "پاسخ‌ها ثبت شد. می‌توانی بررسی کنی.",
     ti: "መልስታት ተሓቚሞም። ምርግጋጽ ክትገብር ትኽእል።",
     uk: "Відповіді збережено. Можеш перевірити.",
+  },
+  translateShow: {
+    fr: "Traduire",
+    ar: "ترجمة",
+    fa: "ترجمه",
+    ti: "ምትርጓም",
+    uk: "Переклад",
+  },
+  translateHide: {
+    fr: "Masquer la traduction",
+    ar: "إخفاء الترجمة",
+    fa: "پنهان کردن ترجمه",
+    ti: "ምትርጓም ምእላይ",
+    uk: "Сховати переклад",
   },
 };
 
