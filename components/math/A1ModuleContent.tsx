@@ -40,6 +40,8 @@ export function A1ModuleContent() {
   const pivotLines = [...(pivotBody ?? []), ...(introPivotBlock ?? [])];
   const canTranslate = pivotLines.length > 0;
   const pivotMeta = PIVOT_LANGS.find((l) => l.code === pivot);
+  const pivotTranslationHeading =
+    pivotMeta === undefined ? pivot : `${pivotMeta.label} (${pivotMeta.labelFr})`;
   const read = lesson.theory.readAloud;
   const [tone1, tone2, tone3] = read?.columnTones ?? ["black", "black", "black"];
 
@@ -203,7 +205,7 @@ export function A1ModuleContent() {
             dir={pivot === "ar" || pivot === "fa" ? "rtl" : "ltr"}
           >
             <p className="mb-2 text-[length:var(--font-size-xs)] font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">
-              Traduction — {pivotMeta?.label ?? pivotMeta?.labelFr}
+              Traduction — {pivotTranslationHeading}
             </p>
             <div className="space-y-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
               {pivotLines.map((p, i) => (
