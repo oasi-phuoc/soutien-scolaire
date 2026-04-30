@@ -39,3 +39,7 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# extractions locales (docx)
+tmp_geom_outline.txt
+tmp_algo_outline.txt

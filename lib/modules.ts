@@ -1,5 +1,8 @@
 export type Track = "literacy" | "fle" | "math_elem";
 
+/** Sous-thème des modules mathématiques (niveau primaire). */
+export type MathAxis = "calculs" | "geometrie";
+
 export type ModuleItem = {
   slug: string;
   track: Track;
@@ -9,12 +12,19 @@ export type ModuleItem = {
   hasPdf: boolean;
   /** Slugs recommandés avant de commencer (affichage seulement) */
   recommendedAfterSlugs: string[];
+  /** Obligatoire si `track === "math_elem"` */
+  mathAxis?: MathAxis;
 };
 
 export const TRACK_LABELS: Record<Track, string> = {
   literacy: "Littératie",
   fle: "Français (thèmes)",
-  math_elem: "Maths (début)",
+  math_elem: "Mathématiques",
+};
+
+export const MATH_AXIS_LABELS: Record<MathAxis, string> = {
+  calculs: "Calculs",
+  geometrie: "Géométrie",
 };
 
 export const MODULES: ModuleItem[] = [
@@ -129,6 +139,7 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-0-20",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Nombres de 0 à 20",
     summaryFr: "Lire, écrire et compter avec des images.",
     estimatedMinutes: 35,
@@ -138,6 +149,7 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-jusqua-100",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Nombres jusqu’à 100",
     summaryFr: "Dizaines et unités, compter plus loin.",
     estimatedMinutes: 40,
@@ -145,8 +157,20 @@ export const MODULES: ModuleItem[] = [
     recommendedAfterSlugs: ["math-0-20"],
   },
   {
+    slug: "math-cfr-calculs",
+    track: "math_elem",
+    mathAxis: "calculs",
+    titleFr: "Calculs et algèbre (cours CFR)",
+    summaryFr:
+      "Les 19 chapitres du livret CFR : numération, comparaison, suites, opérations, décimaux, fractions, relatifs, équations, proportionnalité…",
+    estimatedMinutes: 90,
+    hasPdf: false,
+    recommendedAfterSlugs: [],
+  },
+  {
     slug: "math-add-sous-visuel",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Addition et soustraction (visuel)",
     summaryFr: "Ajouter et enlever avec des dessins.",
     estimatedMinutes: 38,
@@ -156,6 +180,7 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-longueur-poids",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Longueur et poids (introduction)",
     summaryFr: "Comparer grand / petit, lourd / léger.",
     estimatedMinutes: 30,
@@ -165,8 +190,10 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-formes-espace",
     track: "math_elem",
+    mathAxis: "geometrie",
     titleFr: "Formes et repérage",
-    summaryFr: "Carré, rond, au-dessus, à côté…",
+    summaryFr:
+      "Les 13 chapitres du cours CFR géométrie : formes, angles, reproductions, symétrie, rotation, quadrillage, périmètres, aires, problèmes…",
     estimatedMinutes: 32,
     hasPdf: true,
     recommendedAfterSlugs: [],
@@ -174,6 +201,7 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-monnaie-prix",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Monnaie et prix (très guidé)",
     summaryFr: "Reconnaître des pièces et bills simplifiés.",
     estimatedMinutes: 36,
@@ -183,6 +211,7 @@ export const MODULES: ModuleItem[] = [
   {
     slug: "math-problemes-pictos",
     track: "math_elem",
+    mathAxis: "calculs",
     titleFr: "Petits problèmes avec pictos",
     summaryFr: "Comprendre l’énoncé grâce aux images.",
     estimatedMinutes: 34,
@@ -199,4 +228,21 @@ export function getRecommendedTitles(slugs: string[]): string[] {
   return slugs
     .map((s) => getModuleBySlug(s)?.titleFr)
     .filter(Boolean) as string[];
+}
+
+/** Ligne liste (ex. bibliothèque) : axe maths + durée */
+export function getModuleListSubtitle(mod: ModuleItem): string {
+  const tail = `${mod.estimatedMinutes} min${mod.hasPdf ? " · PDF" : ""}`;
+  if (mod.track === "math_elem" && mod.mathAxis) {
+    return `${MATH_AXIS_LABELS[mod.mathAxis]} · ${tail}`;
+  }
+  return `${TRACK_LABELS[mod.track]} · ${tail}`;
+}
+
+/** Badge fiche module */
+export function getModulePillLabel(mod: ModuleItem): string {
+  if (mod.track === "math_elem" && mod.mathAxis) {
+    return `${TRACK_LABELS.math_elem} · ${MATH_AXIS_LABELS[mod.mathAxis]}`;
+  }
+  return TRACK_LABELS[mod.track];
 }

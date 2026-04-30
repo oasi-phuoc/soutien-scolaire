@@ -39,7 +39,6 @@ export default async function AccueilPage({ searchParams }: Props) {
   return (
     <>
       <AppHeader
-        title="Soutien scolaire"
         rightSlot={
           <Link
             href="/compte"
@@ -53,78 +52,105 @@ export default async function AccueilPage({ searchParams }: Props) {
           </Link>
         }
       />
-      <main className="mx-auto w-full max-w-2xl flex-1 space-y-6 px-4 py-6">
+      <main className="mx-auto w-full max-w-2xl flex-1 space-y-8 px-4 py-8">
         {q.msg ? (
           <p className="rounded-xl border border-teal-300 bg-teal-50 px-4 py-3 text-sm text-teal-950 dark:border-teal-800 dark:bg-teal-950/40 dark:text-teal-50">
             {q.msg}
           </p>
         ) : null}
-        <p className="text-lg font-medium text-zinc-700 dark:text-zinc-300">
-          Bonjour
-        </p>
-        <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-          Français et maths, pas à pas. Choisis un thème ci-dessous ou ouvre la bibliothèque pour
-          tout voir.
-        </p>
 
-        <HomeContinue remoteLast={remoteLast} isLoggedIn={isLoggedIn} />
-
-        <section aria-labelledby="par-ou">
-          <h2 id="par-ou" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Par où commencer ?
+        <section aria-labelledby="themes">
+          <h2 id="themes" className="sr-only">
+            Choisir un thème
           </h2>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             <Link
-              href="/bibliotheque?fil=literacy"
-              className="flex min-h-[5.5rem] flex-col justify-center rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm hover:border-teal-400 hover:bg-teal-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-teal-700"
+              href="/bibliotheque?fil=francais"
+              className="group flex min-h-[11rem] flex-col justify-center rounded-3xl border-2 border-zinc-200 bg-gradient-to-br from-white to-teal-50/80 p-8 shadow-md transition-all hover:border-teal-500 hover:shadow-lg active:scale-[0.99] dark:border-zinc-700 dark:from-zinc-900 dark:to-teal-950/40 dark:hover:border-teal-600"
             >
-              <span className="text-2xl" aria-hidden>
-                🔤
+              <span className="text-4xl drop-shadow-sm" aria-hidden>
+                🇫🇷
               </span>
-              <span className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">Lire et écrire</span>
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">Alphabet et lectures courtes</span>
-            </Link>
-            <Link
-              href="/bibliotheque?fil=fle"
-              className="flex min-h-[5.5rem] flex-col justify-center rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm hover:border-teal-400 hover:bg-teal-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-teal-700"
-            >
-              <span className="text-2xl" aria-hidden>
-                💬
+              <span className="mt-4 text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                Français
               </span>
-              <span className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">Français thèmes</span>
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">Salut, santé, école…</span>
-            </Link>
-            <Link
-              href="/bibliotheque?fil=math_elem"
-              className="flex min-h-[5.5rem] flex-col justify-center rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm hover:border-teal-400 hover:bg-teal-50/40 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-teal-700"
-            >
-              <span className="text-2xl" aria-hidden>
-                🔢
+              <span className="mt-2 text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+                Lire, écrire et thèmes du quotidien
               </span>
-              <span className="mt-1 font-semibold text-zinc-900 dark:text-zinc-50">Maths début</span>
-              <span className="text-sm text-zinc-600 dark:text-zinc-400">Nombres et formes</span>
-            </Link>
-            <Link
-              href="/bibliotheque"
-              className="flex min-h-[5.5rem] flex-col justify-center rounded-2xl border-2 border-dashed border-teal-300 bg-teal-50/30 p-4 hover:bg-teal-50/60 dark:border-teal-800 dark:bg-teal-950/20 dark:hover:bg-teal-950/40"
-            >
-              <span className="text-2xl" aria-hidden>
-                📚
+              <span className="mt-4 inline-flex items-center gap-2 text-base font-semibold text-teal-800 group-hover:underline dark:text-teal-300">
+                Ouvrir
+                <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                  →
+                </span>
               </span>
-              <span className="mt-1 font-semibold text-teal-900 dark:text-teal-100">Tout voir</span>
-              <span className="text-sm text-teal-800/90 dark:text-teal-300/90">Bibliothèque complète</span>
             </Link>
+            <div className="flex flex-col gap-4">
+              <p className="text-center text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400 sm:text-left">
+                Mathématiques
+              </p>
+              <Link
+                href="/bibliotheque?fil=math_elem&axe=calculs"
+                className="group flex min-h-[5.25rem] flex-1 flex-col justify-center rounded-3xl border-2 border-zinc-200 bg-gradient-to-br from-white to-amber-50/70 p-6 shadow-md transition-all hover:border-amber-500 hover:shadow-lg active:scale-[0.99] dark:border-zinc-700 dark:from-zinc-900 dark:to-amber-950/30 dark:hover:border-amber-600"
+              >
+                <span className="text-3xl drop-shadow-sm" aria-hidden>
+                  🔢
+                </span>
+                <span className="mt-2 text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                  Calculs
+                </span>
+                <span className="mt-1 text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+                  Nombres, opérations, mesures et problèmes
+                </span>
+                <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-amber-800 group-hover:underline dark:text-amber-200">
+                  Ouvrir
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </span>
+              </Link>
+              <Link
+                href="/bibliotheque?fil=math_elem&axe=geometrie"
+                className="group flex min-h-[5.25rem] flex-1 flex-col justify-center rounded-3xl border-2 border-zinc-200 bg-gradient-to-br from-white to-violet-50/70 p-6 shadow-md transition-all hover:border-violet-400 hover:shadow-lg active:scale-[0.99] dark:border-zinc-700 dark:from-zinc-900 dark:to-violet-950/35 dark:hover:border-violet-500"
+              >
+                <span className="text-3xl drop-shadow-sm" aria-hidden>
+                  📐
+                </span>
+                <span className="mt-2 text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
+                  Géométrie
+                </span>
+                <span className="mt-1 text-sm leading-snug text-zinc-600 dark:text-zinc-400">
+                  Formes, repérage dans l&apos;espace
+                </span>
+                <span className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-violet-900 group-hover:underline dark:text-violet-200">
+                  Ouvrir
+                  <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                    →
+                  </span>
+                </span>
+              </Link>
+            </div>
           </div>
         </section>
 
-        <p className="text-center">
+        <HomeContinue remoteLast={remoteLast} isLoggedIn={isLoggedIn} />
+
+        <nav className="flex flex-wrap items-center justify-center gap-4 pb-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
+          <Link
+            href="/bibliotheque"
+            className="font-semibold text-teal-800 underline underline-offset-4 hover:text-teal-900 dark:text-teal-400"
+          >
+            Toute la bibliothèque
+          </Link>
+          <span className="hidden sm:inline" aria-hidden>
+            ·
+          </span>
           <Link
             href="/placement"
-            className="inline-flex min-h-12 items-center justify-center rounded-xl px-6 text-base font-semibold text-teal-700 underline-offset-4 hover:underline dark:text-teal-400"
+            className="font-semibold text-teal-800 underline underline-offset-4 dark:text-teal-400"
           >
-            Placement rapide (5 min)
+            Placement rapide
           </Link>
-        </p>
+        </nav>
       </main>
     </>
   );

@@ -1,12 +1,15 @@
 import Link from "next/link";
 
 type Props = {
-  title: string;
+  /** Si absent ou vide : pas de titre visible (accueil épurée). */
+  title?: string;
   backHref?: string;
   rightSlot?: React.ReactNode;
 };
 
 export function AppHeader({ title, backHref, rightSlot }: Props) {
+  const showTitle = Boolean(title?.trim());
+
   return (
     <header className="print:hidden sticky top-0 z-40 border-b border-zinc-200 bg-white/90 px-4 py-3 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/90">
       <div className="mx-auto flex max-w-2xl items-center gap-3">
@@ -21,9 +24,13 @@ export function AppHeader({ title, backHref, rightSlot }: Props) {
             </svg>
           </Link>
         ) : null}
-        <h1 className="min-w-0 flex-1 text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
-          {title}
-        </h1>
+        {showTitle ? (
+          <h1 className="min-w-0 flex-1 text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+            {title}
+          </h1>
+        ) : (
+          <div className="min-w-0 flex-1" aria-hidden="true" />
+        )}
         {rightSlot ? <div className="shrink-0">{rightSlot}</div> : null}
       </div>
     </header>
