@@ -157,17 +157,6 @@ export const MODULES: ModuleItem[] = [
     recommendedAfterSlugs: ["math-0-20"],
   },
   {
-    slug: "math-cfr-calculs",
-    track: "math_elem",
-    mathAxis: "calculs",
-    titleFr: "Calculs et algèbre (cours CFR)",
-    summaryFr:
-      "Les 19 chapitres du livret CFR : numération, comparaison, suites, opérations, décimaux, fractions, relatifs, équations, proportionnalité…",
-    estimatedMinutes: 90,
-    hasPdf: false,
-    recommendedAfterSlugs: [],
-  },
-  {
     slug: "math-add-sous-visuel",
     track: "math_elem",
     mathAxis: "calculs",
@@ -184,17 +173,6 @@ export const MODULES: ModuleItem[] = [
     titleFr: "Longueur et poids (introduction)",
     summaryFr: "Comparer grand / petit, lourd / léger.",
     estimatedMinutes: 30,
-    hasPdf: true,
-    recommendedAfterSlugs: [],
-  },
-  {
-    slug: "math-formes-espace",
-    track: "math_elem",
-    mathAxis: "geometrie",
-    titleFr: "Formes et repérage",
-    summaryFr:
-      "Les 13 chapitres du cours CFR géométrie : formes, angles, reproductions, symétrie, rotation, quadrillage, périmètres, aires, problèmes…",
-    estimatedMinutes: 32,
     hasPdf: true,
     recommendedAfterSlugs: [],
   },

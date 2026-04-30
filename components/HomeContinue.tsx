@@ -54,7 +54,8 @@ export function HomeContinue({
 
   const mod = getModuleBySlug(merged.slug);
   const displayTitle = mod?.titleFr ?? `Module (${merged.slug})`;
-  const href = mod ? `/modules/${merged.slug}` : "/bibliotheque";
+  const listHrefFallback = "/francais";
+  const href = mod ? `/modules/${merged.slug}` : listHrefFallback;
 
   return (
     <article className="rounded-2xl border border-teal-200 bg-teal-50/80 p-4 dark:border-teal-900 dark:bg-teal-950/40">
@@ -68,8 +69,8 @@ export function HomeContinue({
         {!mod ? (
           <span>
             Pas encore de titre pour ce module —{" "}
-            <Link href="/bibliotheque" className="text-teal-800 underline dark:text-teal-400">
-              bibliothèque
+            <Link href="/francais" className="text-teal-800 underline dark:text-teal-400">
+              modules français
             </Link>
           </span>
         ) : (

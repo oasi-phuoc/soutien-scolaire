@@ -11,6 +11,9 @@ type Props = {
   passingPercent: number;
   items: QuizItem[];
   moduleTitle: string;
+  /** Liste après le quiz : /francais ou /mathematiques… */
+  modulesIndexHref: string;
+  modulesIndexLabel: string;
 };
 
 export function ModuleQuizClient({
@@ -18,6 +21,8 @@ export function ModuleQuizClient({
   passingPercent,
   items,
   moduleTitle,
+  modulesIndexHref,
+  modulesIndexLabel,
 }: Props) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -149,10 +154,10 @@ export function ModuleQuizClient({
                 Retour au module
               </Link>
               <Link
-                href="/bibliotheque"
+                href={modulesIndexHref}
                 className="flex min-h-12 flex-1 items-center justify-center rounded-xl bg-teal-700 text-center font-semibold text-white dark:bg-teal-600"
               >
-                Bibliothèque
+                {modulesIndexLabel}
               </Link>
             </div>
           </div>

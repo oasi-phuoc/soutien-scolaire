@@ -7,7 +7,7 @@ export default function MainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 dark:bg-zinc-950">
+    <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-950">
       {children}
       <footer className="print:hidden mx-auto mt-auto w-full max-w-2xl px-4 pb-28 pt-8 text-center text-xs text-zinc-500 dark:text-zinc-500">
         <p>

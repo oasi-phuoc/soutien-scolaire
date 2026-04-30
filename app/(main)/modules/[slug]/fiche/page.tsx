@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { AppHeader } from "@/components/AppHeader";
 import { PrintButton } from "@/components/PrintButton";
 import { MODULES, TRACK_LABELS, getModuleBySlug, getRecommendedTitles } from "@/lib/modules";
 
@@ -19,8 +18,16 @@ export default async function ModuleFichePage({ params }: Props) {
 
   return (
     <>
-      <AppHeader title="Fiche" backHref={`/modules/${slug}`} />
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-6 print:max-w-none print:px-8 print:py-6">
+        <div className="mb-4 print:hidden">
+          <Link
+            href={`/modules/${slug}`}
+            className="text-sm font-semibold text-teal-800 underline underline-offset-2 hover:text-teal-950 dark:text-teal-400"
+          >
+            ← Retour au module
+          </Link>
+          <h1 className="sr-only">Fiche · {mod.titleFr}</h1>
+        </div>
         <div className="mb-4 flex flex-wrap gap-2 print:hidden">
           <PrintButton label="Imprimer ou enregistrer en PDF" />
           <Link

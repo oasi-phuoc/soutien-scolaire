@@ -81,8 +81,8 @@ export function CompteDashboard({
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-zinc-200 bg-white/90 px-4 py-3 backdrop-blur-md print:hidden dark:border-zinc-800 dark:bg-zinc-950/90">
-        <div className="mx-auto flex max-w-2xl items-center gap-3">
+      <main className="mx-auto w-full max-w-2xl flex-1 space-y-8 px-4 py-6">
+        <div className="flex items-center gap-3 pb-4">
           <Link
             href="/"
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
@@ -94,8 +94,6 @@ export function CompteDashboard({
           </Link>
           <h1 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50">Réglages</h1>
         </div>
-      </header>
-      <main className="mx-auto w-full max-w-2xl flex-1 space-y-8 px-4 py-6">
         {supabaseConfigured && user ? (
           <section aria-labelledby="compte-connected">
             <h2 id="compte-connected" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
