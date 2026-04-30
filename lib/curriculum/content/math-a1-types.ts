@@ -2,7 +2,33 @@ import type { PivotCode } from "@/lib/pivot-langs";
 
 export type LocaleKey = "fr" | PivotCode;
 
-export type LegendTone = "red" | "gray" | "black";
+/** Voyelles / graphèmes vocaliques (rouge), consonnes prononcées (noir), lettres muettes (gris). */
+export type WordPhonemeKind = "vowel" | "consonant" | "silent";
+
+export type ReadAloudWordPart = {
+  text: string;
+  kind: WordPhonemeKind;
+};
+
+/** Une case : chiffre en bleu thème + mot découpé phonétiquement. */
+export type ReadAloudCell = {
+  num: string;
+  parts: ReadAloudWordPart[];
+  /** Double soulignement bleu (ex. cinq, sept, cent sur la fiche CSC). */
+  wordUnderline?: boolean;
+};
+
+export type ReadAloudRow = {
+  col1: ReadAloudCell;
+  col2: ReadAloudCell;
+  col3: ReadAloudCell;
+};
+
+/** Légende sous le tableau (point de couleur + libellé). */
+export type ReadAloudLegendItem = {
+  swatch: "accentAlg" | "red" | "text" | "gray";
+  labelFr: string;
+};
 
 /** Section « lire / compter » (table + légende couleurs + audio). */
 export type TheoryReadAloud = {
@@ -10,14 +36,10 @@ export type TheoryReadAloud = {
   introFr?: string[];
   /** Même idée que introFr, affichée sous « Traduire » (une langue pivot à la fois). */
   introPivot?: Partial<Record<PivotCode, string[]>>;
-  rows: {
-    col1: { num: string; word: string };
-    col2: { num: string; word: string };
-    col3: { num: string; word: string };
-  }[];
-  /** Colonne 1 = rouge, 2 = gris, 3 = noir (cf. matériel CSC). */
-  columnTones: [LegendTone, LegendTone, LegendTone];
-  legendFr: { tone: LegendTone; labelFr: string }[];
+  rows: ReadAloudRow[];
+  legendFr: ReadAloudLegendItem[];
+  /** Audio / vidéo pédagogique dans `public/` (ex. « compter en français »). */
+  audioSrc?: string;
 };
 
 export type MathTheoryBlock = {
@@ -26,10 +48,6 @@ export type MathTheoryBlock = {
   /** Paragraphes : français + traductions pivot (sous « Traduire » uniquement). */
   paragraphs: Record<LocaleKey, string[]>;
   readAloud?: TheoryReadAloud;
-  /** Référence matériels CSC / fichiers source (affichage informatif). */
-  cscRefs?: string[];
-  /** Chemin public optionnel si vous copiez la vidéo dans /public. */
-  mediaHint?: { fr: string; publicPath?: string };
 };
 
 export type MathExerciseItem = {

@@ -2,13 +2,11 @@
 
 import { revalidatePath } from "next/cache";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import type { PivotCode } from "@/lib/pivot-langs";
-
-const PIVOT_SET = new Set<PivotCode>(["ar", "fa", "ti", "uk"]);
+import { isPivotCode } from "@/lib/pivot-langs";
 
 /** Enregistre la langue pivot dans `profiles` (RLS + utilisateur connecté). */
 export async function updateRemotePivotLang(lang: string) {
-  if (!PIVOT_SET.has(lang as PivotCode)) {
+  if (!isPivotCode(lang)) {
     return { ok: false as const, reason: "invalid_lang" };
   }
 

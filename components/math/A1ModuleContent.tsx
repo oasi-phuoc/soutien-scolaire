@@ -6,29 +6,63 @@ import { AppCard } from "@/components/ui/AppCard";
 import { MathExerciseRunner } from "@/components/math/MathExerciseRunner";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
-import type { LegendTone } from "@/lib/curriculum/content/math-a1-types";
+import type {
+  ReadAloudCell,
+  ReadAloudLegendItem,
+  WordPhonemeKind,
+} from "@/lib/curriculum/content/math-a1-types";
 import {
   pickTheoryFrench,
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math-a1-types";
-import { mathExerciseUi } from "@/lib/i18n/math-ui";
+import { mathExerciseFrenchUi } from "@/lib/i18n/math-ui";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
-function toneClass(t: LegendTone): string {
-  if (t === "red") return "text-red-600 dark:text-red-400";
-  if (t === "gray") return "text-zinc-500 dark:text-zinc-400";
+function partClass(kind: WordPhonemeKind): string {
+  if (kind === "vowel") return "text-red-600 dark:text-red-400";
+  if (kind === "silent") return "text-zinc-500 dark:text-zinc-400";
   return "text-[var(--color-text-primary)]";
+}
+
+function ReadAloudNumberCell({ cell }: { cell: ReadAloudCell }) {
+  const { num, parts, wordUnderline } = cell;
+  return (
+    <span className="inline-flex max-w-full flex-wrap items-baseline">
+      <span className="font-medium tabular-nums text-[var(--color-accent-alg)]">{num}</span>
+      <span className="select-none px-1" aria-hidden>
+        {"\u00a0"}
+      </span>
+      <span
+        className={
+          wordUnderline
+            ? "border-b-[3px] border-double border-[var(--color-accent-alg)] pb-0.5"
+            : undefined
+        }
+      >
+        {parts.map((part, i) => (
+          <span key={i} className={partClass(part.kind)}>
+            {part.text}
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+}
+
+function legendSwatchClass(swatch: ReadAloudLegendItem["swatch"]): string {
+  if (swatch === "accentAlg") return "bg-[var(--color-accent-alg)]";
+  if (swatch === "red") return "bg-red-500";
+  if (swatch === "gray") return "bg-zinc-400";
+  return "bg-[var(--color-text-primary)]";
 }
 
 export function A1ModuleContent() {
   const pivot = usePivotLang();
   const [activeIdx, setActiveIdx] = useState(0);
-  const [videoFailed, setVideoFailed] = useState(false);
   const [showPivotTranslation, setShowPivotTranslation] = useState(false);
   const lesson = MATH_A1_LESSONS[activeIdx];
 
   useEffect(() => {
-    setVideoFailed(false);
     setShowPivotTranslation(false);
   }, [activeIdx]);
 
@@ -39,11 +73,14 @@ export function A1ModuleContent() {
   const introPivotBlock = lesson.theory.readAloud?.introPivot?.[pivot];
   const pivotLines = [...(pivotBody ?? []), ...(introPivotBlock ?? [])];
   const canTranslate = pivotLines.length > 0;
+  const canTranslateExercises = lesson.exercises.some(
+    (e) => e.promptPivot?.[pivot] != null && String(e.promptPivot[pivot]).trim().length > 0,
+  );
+  const canTranslateAny = canTranslate || canTranslateExercises;
   const pivotMeta = PIVOT_LANGS.find((l) => l.code === pivot);
   const pivotTranslationHeading =
     pivotMeta === undefined ? pivot : `${pivotMeta.label} (${pivotMeta.labelFr})`;
   const read = lesson.theory.readAloud;
-  const [tone1, tone2, tone3] = read?.columnTones ?? ["black", "black", "black"];
 
   return (
     <div className="space-y-6">
@@ -72,7 +109,7 @@ export function A1ModuleContent() {
 
       <p className="text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
         Langue principale : <strong className="text-[var(--color-text-primary)]">français</strong>.
-        Les consignes d’exercice restent en français ; appuie sur « {mathExerciseUi(pivot, "translateShow")} » pour
+        Les consignes d’exercice restent en français ; appuie sur « {mathExerciseFrenchUi("translateShow")} » pour
         afficher la langue pivot ({pivotMeta?.labelFr ?? pivot}) <strong>sous</strong> le texte français.
       </p>
 
@@ -107,83 +144,53 @@ export function A1ModuleContent() {
             ) : null}
             <ul className="mb-3 mt-3 flex flex-wrap gap-3 text-[length:var(--font-size-xs)]">
               {read.legendFr.map((leg) => (
-                <li key={leg.tone} className="flex items-center gap-1.5">
+                <li key={leg.labelFr} className="flex items-center gap-1.5">
                   <span
-                    className={`h-2.5 w-2.5 rounded-full ${
-                      leg.tone === "red"
-                        ? "bg-red-500"
-                        : leg.tone === "gray"
-                          ? "bg-zinc-400"
-                          : "bg-[var(--color-text-primary)]"
-                    }`}
+                    className={`h-2.5 w-2.5 shrink-0 rounded-full ${legendSwatchClass(leg.swatch)}`}
                     aria-hidden
                   />
-                  <span className={toneClass(leg.tone)}>{leg.labelFr}</span>
+                  <span className="text-[var(--color-text-secondary)]">{leg.labelFr}</span>
                 </li>
               ))}
             </ul>
             <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
-              <table className="w-full min-w-[280px] text-left text-sm">
+              <table className="w-full min-w-[280px] border-collapse text-left text-sm">
                 <tbody>
                   {read.rows.map((row, ri) => (
-                    <tr key={ri} className="border-t border-[var(--color-border-default)] first:border-t-0">
-                      <td className={`px-3 py-2 font-medium ${toneClass(tone1)}`}>
-                        <span className="tabular-nums">{row.col1.num}</span> {row.col1.word}
+                    <tr key={ri}>
+                      <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <ReadAloudNumberCell cell={row.col1} />
                       </td>
-                      <td className={`border-l border-[var(--color-border-default)] px-3 py-2 ${toneClass(tone2)}`}>
-                        <span className="tabular-nums">{row.col2.num}</span> {row.col2.word}
+                      <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <ReadAloudNumberCell cell={row.col2} />
                       </td>
-                      <td className={`border-l border-[var(--color-border-default)] px-3 py-2 ${toneClass(tone3)}`}>
-                        <span className="tabular-nums">{row.col3.num}</span> {row.col3.word}
+                      <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                        <ReadAloudNumberCell cell={row.col3} />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
+            {read.audioSrc ? (
+              <div className="mt-4">
+                <p className="mb-2 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
+                  Enregistrement : écoute puis répète à voix haute.
+                </p>
+                <video
+                  className="max-h-72 w-full rounded-[var(--radius-md)] bg-black/80"
+                  controls
+                  preload="metadata"
+                  src={read.audioSrc}
+                >
+                  <track kind="captions" />
+                </video>
+              </div>
+            ) : null}
           </div>
         ) : null}
 
-        {lesson.theory.mediaHint?.publicPath && lesson.submoduleId === "A1-1" ? (
-          !videoFailed ? (
-            <div className="mt-6">
-              <p className="mb-2 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-                {lesson.theory.mediaHint.fr}
-              </p>
-              <video
-                className="max-h-72 w-full rounded-[var(--radius-md)] bg-black/80"
-                controls
-                preload="metadata"
-                src={lesson.theory.mediaHint.publicPath}
-                onError={() => setVideoFailed(true)}
-              >
-                <track kind="captions" />
-              </video>
-            </div>
-          ) : (
-            <p className="mt-6 text-[length:var(--font-size-xs)] text-[var(--color-warning)]">
-              Fichier média introuvable. Copie{" "}
-              <code className="rounded bg-[var(--color-bg-secondary)] px-1">MATH_EX_01.02_AUDIO.mp4</code> dans{" "}
-              <code className="rounded bg-[var(--color-bg-secondary)] px-1">public/csc/</code> (ouvre le dossier du
-              projet).
-            </p>
-          )
-        ) : null}
-
-        {lesson.theory.cscRefs?.length ? (
-          <div className="mt-4 border-t border-[var(--color-border-default)] pt-3">
-            <p className="text-[length:var(--font-size-xs)] font-medium text-[var(--color-text-primary)]">
-              Ressources CSC (fichiers sources)
-            </p>
-            <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-              {lesson.theory.cscRefs.map((r) => (
-                <li key={r}>{r}</li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
-
-        {canTranslate ? (
+        {canTranslateAny ? (
           <div className="mt-4 flex flex-wrap gap-2">
             <AppButton
               accent="fr"
@@ -192,8 +199,8 @@ export function A1ModuleContent() {
               onClick={() => setShowPivotTranslation((v) => !v)}
             >
               {showPivotTranslation
-                ? mathExerciseUi(pivot, "translateHide")
-                : `${mathExerciseUi(pivot, "translateShow")} (${pivotMeta?.labelFr ?? pivot})`}
+                ? mathExerciseFrenchUi("translateHide")
+                : `${mathExerciseFrenchUi("translateShow")} (${pivotMeta?.labelFr ?? pivot})`}
             </AppButton>
           </div>
         ) : null}
@@ -201,7 +208,7 @@ export function A1ModuleContent() {
         {showPivotTranslation && canTranslate ? (
           <div
             className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-[color-mix(in_oklch,var(--color-accent-fr)_6%,transparent)] p-4"
-            lang={pivot === "uk" ? "uk" : pivot === "ar" ? "ar" : pivot === "fa" ? "fa" : "ti"}
+            lang={pivot}
             dir={pivot === "ar" || pivot === "fa" ? "rtl" : "ltr"}
           >
             <p className="mb-2 text-[length:var(--font-size-xs)] font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">
@@ -227,7 +234,11 @@ export function A1ModuleContent() {
           </div>
         }
       >
-        <MathExerciseRunner exercises={lesson.exercises} pivot={pivot} />
+        <MathExerciseRunner
+          exercises={lesson.exercises}
+          pivot={pivot}
+          showPivotTranslation={showPivotTranslation}
+        />
       </AppCard>
     </div>
   );

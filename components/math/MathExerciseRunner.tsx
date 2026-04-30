@@ -4,18 +4,25 @@ import { useMemo, useState } from "react";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppInput } from "@/components/ui/AppInput";
 import type { PivotCode } from "@/lib/pivot-langs";
+import { PIVOT_LANGS } from "@/lib/pivot-langs";
 import {
   answerMatches,
   type MathExerciseItem,
 } from "@/lib/curriculum/content/math-a1-types";
-import { mathExerciseUi } from "@/lib/i18n/math-ui";
+import { mathExerciseFrenchUi } from "@/lib/i18n/math-ui";
 
 type Props = {
   exercises: MathExerciseItem[];
   pivot: PivotCode;
+  /** Même logique que la théorie : énoncés en FR, traduction si true. */
+  showPivotTranslation: boolean;
 };
 
-export function MathExerciseRunner({ exercises, pivot }: Props) {
+export function MathExerciseRunner({
+  exercises,
+  pivot,
+  showPivotTranslation,
+}: Props) {
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(exercises.map((e) => [e.id, ""])),
   );
@@ -27,14 +34,16 @@ export function MathExerciseRunner({ exercises, pivot }: Props) {
     [exercises, values],
   );
 
-  function promptFor(ex: MathExerciseItem) {
-    return ex.promptPivot?.[pivot] ?? ex.promptFr;
-  }
+  const pivotTranslationHeading = useMemo(() => {
+    const m = PIVOT_LANGS.find((l) => l.code === pivot);
+    return m === undefined ? pivot : `${m.label} (${m.labelFr})`;
+  }, [pivot]);
 
   return (
     <div className="space-y-5">
       {exercises.map((ex) => {
         const ok = showCorrections ? answerMatches(values[ex.id] ?? "", ex.acceptable) : null;
+        const pivotPrompt = ex.promptPivot?.[pivot];
         return (
           <div
             key={ex.id}
@@ -47,15 +56,29 @@ export function MathExerciseRunner({ exercises, pivot }: Props) {
             }`}
           >
             <p className="mb-2 text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-text-secondary)]">{ex.id}</span> — {promptFor(ex)}
+              <span className="text-[var(--color-text-secondary)]">{ex.id}</span> — {ex.promptFr}
             </p>
+            {showPivotTranslation && pivotPrompt ? (
+              <div
+                className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-[color-mix(in_oklch,var(--color-accent-fr)_6%,transparent)] px-3 py-2"
+                lang={pivot}
+                dir={pivot === "ar" || pivot === "fa" ? "rtl" : "ltr"}
+              >
+                <p className="text-[length:var(--font-size-xs)] font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">
+                  Traduction — {pivotTranslationHeading}
+                </p>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {pivotPrompt}
+                </p>
+              </div>
+            ) : null}
             <p className="mb-2 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-              {mathExerciseUi(pivot, "yourAnswer")} :
+              {mathExerciseFrenchUi("yourAnswer")} :
             </p>
             <AppInput
               label=""
               id={`ex-input-${ex.id}`}
-              aria-label={promptFor(ex)}
+              aria-label={ex.promptFr}
               value={values[ex.id] ?? ""}
               onChange={(ev) =>
                 setValues((s) => ({ ...s, [ex.id]: ev.target.value }))
@@ -66,12 +89,12 @@ export function MathExerciseRunner({ exercises, pivot }: Props) {
             {showCorrections ? (
               <p className="mt-2 text-sm">
                 <span className="font-medium">
-                  {ok ? mathExerciseUi(pivot, "correct") : mathExerciseUi(pivot, "incorrect")}.
+                  {ok ? mathExerciseFrenchUi("correct") : mathExerciseFrenchUi("incorrect")}.
                 </span>
                 {!ok ? (
                   <span className="text-[var(--color-text-secondary)]">
                     {" "}
-                    {mathExerciseUi(pivot, "expected")} : {ex.acceptable[0]}
+                    {mathExerciseFrenchUi("expected")} : {ex.acceptable[0]}
                   </span>
                 ) : null}
               </p>
@@ -89,7 +112,7 @@ export function MathExerciseRunner({ exercises, pivot }: Props) {
           }}
           disabled={filledCount < exercises.length}
         >
-          {mathExerciseUi(pivot, "validate")}
+          {mathExerciseFrenchUi("validate")}
         </AppButton>
         <AppButton
           accent="quiz"
@@ -97,12 +120,12 @@ export function MathExerciseRunner({ exercises, pivot }: Props) {
           onClick={() => setShowCorrections(true)}
           disabled={filledCount < exercises.length}
         >
-          {mathExerciseUi(pivot, "checkAnswers")}
+          {mathExerciseFrenchUi("checkAnswers")}
         </AppButton>
       </div>
       {validated && !showCorrections ? (
         <p className="text-sm text-[var(--color-text-secondary)]">
-          {mathExerciseUi(pivot, "answersRecorded")}
+          {mathExerciseFrenchUi("answersRecorded")}
         </p>
       ) : null}
     </div>

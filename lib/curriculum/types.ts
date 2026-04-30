@@ -61,8 +61,9 @@ export type MathModuleProgress = {
   reviewFlag?: boolean;
 };
 
+/** v1 : ancienne numérotation algèbre A1–A12. v2 : A2 add./soust., A3–A13 (anciennement A2–A12). */
 export type StoredProgressV1 = {
-  version: 1;
+  version: 1 | 2;
   math: Record<string, MathModuleProgress>;
   /** Dernier module maths terminé (pour règle 1). */
   lastCompletedMathModuleId?: string;

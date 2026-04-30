@@ -14,6 +14,7 @@ export type MathExerciseUiKey =
 const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   validate: {
     fr: "Valider",
+    en: "Submit",
     ar: "تأكيد",
     fa: "تأیید",
     ti: "ኣረጋግጽ",
@@ -21,6 +22,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   checkAnswers: {
     fr: "Contrôler les réponses",
+    en: "Check answers",
     ar: "التحقق من الإجابات",
     fa: "بررسی پاسخ‌ها",
     ti: "ምርግጋጽ መልስታት",
@@ -28,6 +30,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   expected: {
     fr: "Attendu",
+    en: "Expected",
     ar: "المتوقع",
     fa: "پاسخ درست",
     ti: "እተጸበየ",
@@ -35,6 +38,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   yourAnswer: {
     fr: "Ta réponse",
+    en: "Your answer",
     ar: "إجابتك",
     fa: "پاسخ تو",
     ti: "መልስካ",
@@ -42,6 +46,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   correct: {
     fr: "Correct",
+    en: "Correct",
     ar: "صحيح",
     fa: "درست",
     ti: "ትኽክር",
@@ -49,6 +54,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   incorrect: {
     fr: "À revoir",
+    en: "Needs review",
     ar: "يحتاج مراجعة",
     fa: "نیاز به مرور",
     ti: "እንደገና ርአ",
@@ -56,6 +62,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   answersRecorded: {
     fr: "Réponses enregistrées. Tu peux afficher le contrôle.",
+    en: "Answers saved. You can check them.",
     ar: "تم حفظ الإجابات. يمكنك التحقق.",
     fa: "پاسخ‌ها ثبت شد. می‌توانی بررسی کنی.",
     ti: "መልስታት ተሓቚሞም። ምርግጋጽ ክትገብር ትኽእል።",
@@ -63,6 +70,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   translateShow: {
     fr: "Traduire",
+    en: "Translate",
     ar: "ترجمة",
     fa: "ترجمه",
     ti: "ምትርጓም",
@@ -70,6 +78,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
   },
   translateHide: {
     fr: "Masquer la traduction",
+    en: "Hide translation",
     ar: "إخفاء الترجمة",
     fa: "پنهان کردن ترجمه",
     ti: "ምትርጓም ምእላይ",
@@ -80,4 +89,9 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
 export function mathExerciseUi(lang: PivotCode, key: MathExerciseUiKey): string {
   const row = STRINGS[key];
   return row[lang] ?? row.fr;
+}
+
+/** Libellés interface exercices en français (langue d’étude), comme les énoncés. */
+export function mathExerciseFrenchUi(key: MathExerciseUiKey): string {
+  return STRINGS[key].fr;
 }

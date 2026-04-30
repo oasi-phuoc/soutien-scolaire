@@ -1,6 +1,6 @@
 import { CompteDashboard } from "@/components/CompteDashboard";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import type { PivotCode } from "@/lib/pivot-langs";
+import { isPivotCode } from "@/lib/pivot-langs";
 
 export default async function ComptePage() {
   const supabase = await createSupabaseServerClient();
@@ -27,7 +27,7 @@ export default async function ComptePage() {
     .eq("id", user.id)
     .maybeSingle();
 
-  const piv = profile?.preferred_pivot_lang as PivotCode | undefined;
+  const piv = profile?.preferred_pivot_lang;
 
   return (
     <CompteDashboard
@@ -35,9 +35,7 @@ export default async function ComptePage() {
         id: user.id,
         email: user.email ?? "",
       }}
-      profilePivot={
-        piv === "ar" || piv === "fa" || piv === "ti" || piv === "uk" ? piv : null
-      }
+      profilePivot={isPivotCode(piv) ? piv : null}
       supabaseConfigured
     />
   );

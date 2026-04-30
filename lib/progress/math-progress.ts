@@ -1,10 +1,12 @@
 import {
+  ALGEBRA_LEGACY_ID_MAP,
   MATH_MODULES,
   prerequisitesMet,
   getMathModule,
 } from "@/lib/curriculum/math-data";
 import type {
   MathModuleProgress,
+  ModuleProgressState,
   StoredProgressV1,
 } from "@/lib/curriculum/types";
 import {
@@ -16,7 +18,7 @@ import {
 
 export const MATH_PROGRESS_KEY = "soutien-learning-progress-v1";
 
-export function createInitialProgress(): StoredProgressV1 {
+function defaultMathRecord(): Record<string, MathModuleProgress> {
   const math: Record<string, MathModuleProgress> = {};
   for (const m of MATH_MODULES) {
     math[m.id] = {
@@ -25,9 +27,96 @@ export function createInitialProgress(): StoredProgressV1 {
       subTotal: m.submodules.length,
     };
   }
-  const next: StoredProgressV1 = {
-    version: 1,
+  return math;
+}
+
+const STATE_RANK: Record<ModuleProgressState, number> = {
+  locked: 0,
+  available: 1,
+  in_progress: 2,
+  completed: 3,
+};
+
+function pickRicherProgress(a: MathModuleProgress, b: MathModuleProgress): MathModuleProgress {
+  const ra = STATE_RANK[a.state];
+  const rb = STATE_RANK[b.state];
+  if (ra !== rb) return ra > rb ? a : b;
+  if (a.subProgress !== b.subProgress) return a.subProgress >= b.subProgress ? a : b;
+  const ga = a.grade ?? -1;
+  const gb = b.grade ?? -1;
+  if (ga !== gb) return ga >= gb ? a : b;
+  return { ...a, ...b };
+}
+
+function mapAlgebraModuleId(id: string): string {
+  return id in ALGEBRA_LEGACY_ID_MAP ? ALGEBRA_LEGACY_ID_MAP[id]! : id;
+}
+
+function remapNumericRecordByAlgebraId(
+  rec: Record<string, number> | undefined,
+  merge: (a: number, b: number) => number,
+): Record<string, number> {
+  if (!rec) return {};
+  const out: Record<string, number> = {};
+  for (const [k, v] of Object.entries(rec)) {
+    const nk = mapAlgebraModuleId(k);
+    out[nk] = out[nk] === undefined ? v : merge(out[nk]!, v);
+  }
+  return out;
+}
+
+function remapIsoRecordByAlgebraId(
+  rec: Record<string, string> | undefined,
+): Record<string, string> | undefined {
+  if (!rec) return undefined;
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(rec)) {
+    const nk = mapAlgebraModuleId(k);
+    const prev = out[nk];
+    if (!prev || Date.parse(v) > Date.parse(prev)) out[nk] = v;
+  }
+  return Object.keys(out).length ? out : undefined;
+}
+
+/** v1 → v2 : insertion A2 add./soust., ancien A2…A12 devient A3…A13. */
+export function migrateProgressV1ToV2(p: StoredProgressV1): StoredProgressV1 {
+  const math = defaultMathRecord();
+  const algebraId = /^A\d+$/;
+  for (const m of MATH_MODULES) {
+    const vid = m.id;
+    if (!algebraId.test(vid)) {
+      const ex = p.math[vid];
+      if (ex) math[vid] = { ...ex, subTotal: m.submodules.length };
+      continue;
+    }
+    let merged: MathModuleProgress = math[vid]!;
+    for (const [oldId, newId] of Object.entries(ALGEBRA_LEGACY_ID_MAP)) {
+      if (newId !== vid) continue;
+      const ex = p.math[oldId];
+      if (ex) merged = pickRicherProgress(merged, { ...ex, subTotal: m.submodules.length });
+    }
+    math[vid] = { ...merged, subTotal: m.submodules.length };
+  }
+  const lastQuizGrades = remapNumericRecordByAlgebraId(p.lastQuizGrades, Math.max);
+  const evaluationSnoozeUntil = remapIsoRecordByAlgebraId(p.evaluationSnoozeUntil);
+  const lastCompleted =
+    p.lastCompletedMathModuleId !== undefined
+      ? mapAlgebraModuleId(p.lastCompletedMathModuleId)
+      : undefined;
+  return recomputeLocks({
+    ...p,
+    version: 2,
     math,
+    lastQuizGrades,
+    evaluationSnoozeUntil,
+    lastCompletedMathModuleId: lastCompleted,
+  });
+}
+
+export function createInitialProgress(): StoredProgressV1 {
+  const next: StoredProgressV1 = {
+    version: 2,
+    math: defaultMathRecord(),
     lastActivityAt: new Date().toISOString(),
     lastQuizGrades: {},
     frenchLevel: "PA",
@@ -40,8 +129,13 @@ export function loadProgress(): StoredProgressV1 {
   try {
     const raw = localStorage.getItem(MATH_PROGRESS_KEY);
     if (!raw) return createInitialProgress();
-    const p = JSON.parse(raw) as StoredProgressV1;
-    if (p?.version !== 1 || !p.math) return createInitialProgress();
+    let p = JSON.parse(raw) as StoredProgressV1;
+    if (!p?.math) return createInitialProgress();
+    if (p.version !== 2) {
+      if (p.version != null && p.version !== 1) return createInitialProgress();
+      p = migrateProgressV1ToV2({ ...p, version: 1 });
+      localStorage.setItem(MATH_PROGRESS_KEY, JSON.stringify(p));
+    }
     for (const m of MATH_MODULES) {
       if (!p.math[m.id]) {
         p.math[m.id] = {
@@ -50,7 +144,7 @@ export function loadProgress(): StoredProgressV1 {
           subTotal: m.submodules.length,
         };
       } else {
-        p.math[m.id].subTotal = m.submodules.length;
+        p.math[m.id]!.subTotal = m.submodules.length;
       }
     }
     return recomputeLocks(p);

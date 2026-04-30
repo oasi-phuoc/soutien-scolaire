@@ -1,10 +1,7 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
+import { A1_COMPTER_EN_FRANCAIS_ROWS } from "./math-a1-readaloud-rows";
 
-/**
- * Contenu A1 aligné sur les fiches CSC « Écrire et compter » et « C-D-U ».
- * Les .docx / .mp4 restent sur ton disque : copie éventuelle vers /public/csc/…
- * et renseigne mediaHint.publicPath.
- */
+/** Contenu A1 (module « Nombres entiers naturels »), théorie multilingue et exercices. */
 export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
   {
     submoduleId: "A1-1",
@@ -12,6 +9,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: {
         fr: "Lire, écrire et comparer les nombres",
+        en: "Read, write and compare numbers",
         ar: "قراءة الأعداد وكتابتها ومقارنتها",
         fa: "خواندن، نوشتن و مقایسهٔ اعداد",
         ti: "ምንባቕ፡ መጽሓፍን መፈልጸምን ኣኃዝቲ",
@@ -19,124 +17,52 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
       },
       paragraphs: {
         fr: [
-          "Un nombre entier s’écrit avec des chiffres (0 à 9). En français, on sépare souvent les milliers par une espace fine : 125 000.",
-          "Pour comparer deux nombres, on regarde d’abord le nombre de chiffres, puis les chiffres de gauche à droite (centaines, dizaines, unités…).",
-          "La partie « Compter en français » ci-dessous reprend la prononciation des nombres (fiche CSC MATH_EX_01.02). En Suisse romande, on utilise souvent septante, huitante et nonante pour 70, 80 et 90. Écoute l’enregistrement puis répète à voix haute.",
-          "Les exercices reprennent aussi l’écriture, le dénombrement et les fiches 01.01 à 01.04.",
+          "Un nombre entier s’écrit avec des chiffres (0 à 9).",
+          "En français, on sépare souvent les milliers par une espace fine : 125 000.",
+          "En Suisse romande, on utilise souvent septante, huitante et nonante pour",
+          "70, 80 et 90. Écoute l’enregistrement puis répète à voix haute.",
         ],
         ar: [
-          "نكتب العدد الصحيح بأرقام من 0 إلى 9، ونفصل الآلاف أحيانًا بمسافة في الفرنسية.",
-          "لمقارنة عددين ننظر إلى عدد الأرقام ثم من اليسار إلى اليمين.",
-          "قسم « العدّ بالفرنسية » يعرض كيفية نطق الأرقام (مطابقة لبرنامج CSC). في الروماندي السويسري يقال غالبًا سبعون وثمانون وتسعون لـ 70 و80 و90. استمع ثم كرّر بصوت عالٍ.",
-          "التطبيقات تشمل الكتابة والعدّ وفقرات 01.01 إلى 01.04.",
+          "نكتب العدد الصحيح بأرقام من 0 إلى 9.",
+          "في الفرنسية، نفصل الآلاف أحيانًا بمسافة رفيعة : 125 000.",
+          "في الروماندي السويسري يقال غالبًا septante وhuitante وnonante لـ",
+          "70 و80 و90. استمع إلى التسجيل ثم كرّر بصوت عالٍ.",
         ],
         fa: [
-          "عدد صحیح را با ارقام ۰ تا ۹ می‌نویسیم؛ در فرانسوی هزارگان را گاه با فاصله می‌نویسند.",
-          "برای مقایسه نخست تعداد رقم‌ها، سپس از چپ به راست می‌خوانیم.",
-          "بخش « شمردن به فرانسوی » تلفظ اعداد را نشان می‌دهد (CSC). در سوئیس رماند معمولاً ۷۰ و ۸۰ و ۹۰ را septante، huitante، nonante می‌گویند. گوش کن و بلند تکرار کن.",
-          "تمرین‌ها نوشتن و شمردن و برگه‌های ۰۱.۰۱ تا ۰۱.۰۴ را پوشش می‌دهد.",
+          "عدد صحیح را با ارقام ۰ تا ۹ می‌نویسیم.",
+          "در فرانسوی، هزارگان را گاه با فاصلهٔ ظریف جدا می‌کنند: ۱۲۵ ۰۰۰.",
+          "در سوئیس رماند معمولاً برای",
+          "۷۰ و ۸۰ و ۹۰ می‌گویند septante، huitante، nonante. گوش کن و بلند تکرار کن.",
         ],
         ti: [
-          "ኣኃዝቲ ብኣሃዝቲ 0-9 ይጽዓን፣ ኣብ ፈረንሳይ ሽሕታት ብልዝብ ክፈልጹ ይኽእሉ።",
-          "ክልተ ኣኃዝቲ ንምምካኽ ብዝተሓሓዘ ኣሃዝቲ ካብ ንደቓይቕ ክሳዕ የማን እንተርእዩ።",
-          "እዚ « ብፈረንሳይ ምቕታል » እዚ ንምውጻእ ቁጽርታት (CSC) ይምርኩ። ኣብ ስዊዘርላንድ 70-80-90 ብ septante ፡ huitante ፡ nonante ይበሃሉ ። ስምዑ እሞ ብድምጺ ድግሞ ።",
-          "መስርሕታት ምጽሓፍን ምስፍራሕን ንመርሓ 01.01-01.04 የምሕርዩ።",
+          "ኣኃዝቲ ብኣሃዝቲ 0-9 ይጽዓን።",
+          "ኣብ ፈረንሳይ ሽሕታት ብልዝብ ክፈልጹ ይኽእሉ።",
+          "ኣብ ስዊዘርላንድ ብ",
+          "70-80-90 septante ፡ huitante ፡ nonante ይበሃሉ ። ስምዑ እሞ ብድምጺ ድግሞ ።",
         ],
         uk: [
-          "Ціле число пишуть цифрами від 0 до 9; тисячі у французькій часто відокремлюють пробілом.",
-          "Щоб порівняти два числа, спершу кількість цифр, далі зліва направо.",
-          "Розділ « Рахувати французькою » показує вимову чисел (CSC). У романській Швейцарії для 70, 80, 90 часто кажуть septante, huitante, nonante. Прослухай запис і повтори вголос.",
-          "Вправи також охоплюють запис, лічбу та аркуші 01.01–01.04.",
+          "Ціле число записують цифрами від 0 до 9.",
+          "У французькій тисячі часто відокремлюють тонким пробілом: 125 000.",
+          "У романській Швейцарії для",
+          "70, 80 і 90 часто кажуть septante, huitante, nonante. Прослухай запис і повтори вголос.",
+        ],
+        en: [
+          "A whole number is written with digits (0 to 9).",
+          "In French, thousands are often separated by a thin space: 125 000.",
+          "In French-speaking Switzerland, people often say septante, huitante and nonante for",
+          "70, 80 and 90. Listen to the recording, then repeat aloud.",
         ],
       },
       readAloud: {
         headingFr: "Compter en français (lire et écouter)",
-        introFr: [
-          "Les couleurs des colonnes rappellent le code du support papier : rouge (un seul son pour la syllabe accentuée), gris (pas de son / préparation), noir (son régulier).",
-        ],
-        introPivot: {
-          ar: [
-            "ألوان الأعمدة توافق رمز الدفتر: أحمر (مقطع نطق واحد بارز)، رمادي (لا صوت / تحضير)، أسود (نطق عادي).",
-          ],
-          fa: [
-            "رنگ ستون‌ها همان کد برگه است: قرمز (یک هجای تأکیدی)، خاکستری (بدون صوت / آماده‌سازی)، سیاه (صدای عادی).",
-          ],
-          ti: [
-            "ነገራዊ ሕብራት ንዓምዲ ንስነ-ኣእምሮ መጽሓፍ ምስ ኣሰር፡ ቀይሕ (ናይ ሓደ ድምጺ) ፡ ግራጫ (ዘይኮነ ድምጺ) ፡ ጸሊም (ስነ-ጽሑፍ ከም ዝተመርኰሰ) ።",
-          ],
-          uk: [
-            "Кольори стовпчиків відповідають коду навчального аркуша: червоний (один наголошений звук), сірий (без звуку / підготовка), чорний (звичайний вимовний звук).",
-          ],
-        },
-        columnTones: ["red", "gray", "black"],
         legendFr: [
-          { tone: "red", labelFr: "Rouge : un seul son" },
-          { tone: "gray", labelFr: "Gris : pas de son" },
-          { tone: "black", labelFr: "Noir : son" },
+          { swatch: "accentAlg", labelFr: "Bleu : chiffres" },
+          { swatch: "red", labelFr: "Rouge : voyelles / graphèmes vocaliques" },
+          { swatch: "text", labelFr: "Noir : consonnes prononcées" },
+          { swatch: "gray", labelFr: "Gris : lettres muettes" },
         ],
-        rows: [
-          {
-            col1: { num: "1", word: "un" },
-            col2: { num: "11", word: "onze" },
-            col3: { num: "21", word: "vingt et un" },
-          },
-          {
-            col1: { num: "2", word: "deux" },
-            col2: { num: "12", word: "douze" },
-            col3: { num: "22", word: "vingt-deux" },
-          },
-          {
-            col1: { num: "3", word: "trois" },
-            col2: { num: "13", word: "treize" },
-            col3: { num: "30", word: "trente" },
-          },
-          {
-            col1: { num: "4", word: "quatre" },
-            col2: { num: "14", word: "quatorze" },
-            col3: { num: "40", word: "quarante" },
-          },
-          {
-            col1: { num: "5", word: "cinq" },
-            col2: { num: "15", word: "quinze" },
-            col3: { num: "50", word: "cinquante" },
-          },
-          {
-            col1: { num: "6", word: "six" },
-            col2: { num: "16", word: "seize" },
-            col3: { num: "60", word: "soixante" },
-          },
-          {
-            col1: { num: "7", word: "sept" },
-            col2: { num: "17", word: "dix-sept" },
-            col3: { num: "70", word: "septante" },
-          },
-          {
-            col1: { num: "8", word: "huit" },
-            col2: { num: "18", word: "dix-huit" },
-            col3: { num: "80", word: "huitante" },
-          },
-          {
-            col1: { num: "9", word: "neuf" },
-            col2: { num: "19", word: "dix-neuf" },
-            col3: { num: "90", word: "nonante" },
-          },
-          {
-            col1: { num: "10", word: "dix" },
-            col2: { num: "20", word: "vingt" },
-            col3: { num: "100", word: "cent" },
-          },
-        ],
-      },
-      cscRefs: [
-        "MATH_EX_01.01_EcrireLesNombres.docx",
-        "MATH_EX_01.02_CompterEnFrancais.docx",
-        "MATH_EX_01.02_AUDIO.mp4",
-        "MATH_EX_01.03_Denombrement_01.docx",
-        "MATH_EX_01.04_Denombrement_02.docx",
-      ],
-      mediaHint: {
-        fr: "Enregistrement CSC : place « MATH_EX_01.02_AUDIO.mp4 » dans le dossier public/csc/ du projet (chemin attendu ci-dessous).",
-        publicPath: "/csc/MATH_EX_01.02_AUDIO.mp4",
+        rows: A1_COMPTER_EN_FRANCAIS_ROWS,
+        audioSrc: "/audio/a1-1-compter-fr.mp4",
       },
     },
     exercises: [
@@ -144,6 +70,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a11-1",
         promptFr: "Écris en chiffres : trois cent quarante-sept.",
         promptPivot: {
+          en: "Write in digits: three hundred forty-seven.",
           ar: "اكتب بالأرقام: ثلاثمئة وسبعة وأربعون.",
           fa: "به رقم بنویس: سیصد و چهل و هفت.",
           uk: "Запиши цифрами: триста сорок сім.",
@@ -155,6 +82,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a11-2",
         promptFr: "Écris en lettres (en un seul mot en français) : 508",
         promptPivot: {
+          en: "Write in words as a single French word: 508",
           ar: "اكتب بالحروف (بالفرنسية): 508",
           fa: "به حروف (فرانسوی، یک کلمه): ۵۰۸",
           uk: "Одним словом французькою: 508",
@@ -166,6 +94,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a11-3",
         promptFr: "Combien y a-t-il d’unités dans 60 ?",
         promptPivot: {
+          en: "How many units are in 60?",
           ar: "كم وحدة في العدد 60؟",
           fa: "در ۶۰ چند یکی وجود دارد؟",
           uk: "Скільки одиниць у числі 60?",
@@ -177,6 +106,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a11-4",
         promptFr: "Quel est le plus grand : 892 ou 928 ? (écris le nombre gagnant)",
         promptPivot: {
+          en: "Which is greater: 892 or 928? (write the larger number)",
           ar: "أيهما أكبر: 892 أم 928؟ (اكتب العدد الأكبر)",
           fa: "کدام بزرگ‌تر است: ۸۹۲ یا ۹۲۸؟ (عدد بزرگ‌تر را بنویس)",
           uk: "Що більше: 892 чи 928? (запиши більше)",
@@ -192,6 +122,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: {
         fr: "Valeur positionnelle — lire et comprendre les nombres",
+        en: "Place value — reading and understanding numbers",
         ar: "القيمة حسب المنزلة — قراءة الأعداد وفهمها",
         fa: "ارزش مکانی — خواندن و فهمیدن اعداد",
         ti: "ናይ ቦታ ዋጋ — ኣኃዝቲ ምንባብን ምርዳእን",
@@ -200,56 +131,66 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
       paragraphs: {
         fr: [
           "La numération est la manière d’écrire, lire et comprendre les nombres. Dans notre système décimal, chaque chiffre a une valeur selon sa position.",
+          "Pour comparer deux nombres, on regarde d’abord le nombre de chiffres, puis les chiffres de gauche à droite (centaines, dizaines, unités…).",
           "1. Dans le nombre 452, le chiffre 2 vaut deux unités (2).",
           "2. Dans le nombre 524, le chiffre 2 vaut deux dizaines (20).",
           "3. Dans le nombre 245, le chiffre 2 vaut deux centaines (200).",
           "4. Dans le nombre 2453, le chiffre 2 vaut deux milliers (2000).",
-          "On parle aussi de centaines (C), dizaines (D), unités (U) pour décomposer un nombre (fiches CSC 02.01 à 02.03).",
+          "On parle aussi de centaines (C), dizaines (D), unités (U) pour décomposer un nombre.",
         ],
         ar: [
           "الترقيم هو طريقة كتابة الأعداد وقراءتها وفهمها. في النظام العشري، لكل رقم قيمة حسب مكانه.",
+          "لمقارنة عددين ننظر أولًا إلى عدد الأرقام، ثم إلى الأرقام من اليسار إلى اليمين (مئات، عشرات، وحدات…).",
           "1. في العدد 452، الرقم 2 يساوي وحدتين (2).",
           "2. في العدد 524، الرقم 2 يساوي عشرات (20).",
           "3. في العدد 245، الرقم 2 يساوي مئتين (200).",
           "4. في العدد 2453، الرقم 2 يساوي ألفين (2000).",
-          "نحلّل العدد أيضًا إلى مئات (م)، عشرات (ع)، ووحدات (و) — راجع أوراق 02.01 إلى 02.03.",
+          "نحلّل العدد أيضًا إلى مئات (م)، عشرات (ع)، ووحدات (و).",
         ],
         fa: [
           "عددگذاری یعنی نوشتن، خواندن و فهمیدن اعداد. در دهدهی، هر رقم بسته به جایگاهش ارزش دارد.",
+          "برای مقایسهٔ دو عدد، نخست تعداد رقم‌ها را می‌بینیم، سپس از چپ به راست (صدها، ده‌ها، یک‌ها…).",
           "۱. در ۴۵۲، رقم ۲ برابر دو یکی (۲) است.",
           "۲. در ۵۲۴، رقم ۲ برابر دو ده (۲۰) است.",
           "۳. در ۲۴۵، رقم ۲ برابر دویست (۲۰۰) است.",
           "۴. در ۲۴۵۳، رقم ۲ برابر دو هزار (۲۰۰۰) است.",
-          "عدد را به صدها، ده‌ها و یک‌ها هم تجزیه می‌کنیم (برگه‌های ۰۲.۰۱ تا ۰۲.۰۳).",
+          "عدد را به صدها، ده‌ها و یک‌ها هم تجزیه می‌کنیم.",
         ],
         ti: [
           "ኣኃዝቲ ምጽሓፍ ፡ ምንባብን ምርዳእን ማለት እዩ። ኣብ ዴሲማል ፡ ነፍሪ ዝርከብ ኣሃዝቲ ብኣባጺኡ ዋጋ ኣለዎ።",
+          "ክልተ ኣኃዝቲ ንምምካኽ ብዝተሓሓዜ ኣሃዝቲ ካብ ንደቓይቕ ክሳዕ የማን እንተርእዩ።",
           "1. ኣብ 452 እቲ 2 ክልተ ውልቃት (2) ማለት እዩ።",
           "2. ኣብ 524 እቲ 2 ክልተ ዓሰርተታት (20) ማለት እዩ።",
           "3. ኣብ 245 እቲ 2 ክልተ ሚእታት (200) ማለት እዩ።",
           "4. ኣብ 2453 እቲ 2 ክልተ ሽሕታት (2000) ማለት እዩ።",
-          "ኣኃዝቲ ናብ ሚእታት ፡ ዓሰርተታት ፡ ውልቃት ይፈልጹ — መርሓ 02.01 ክሳብ 02.03።",
+          "ኣኃዝቲ ናብ ሚእታት ፡ ዓሰርተታት ፡ ውልቃት ይፈልጹ ።",
         ],
         uk: [
           "Нумерація — це спосіб записувати, читати й розуміти числа. У десятковій системі кожна цифра має значення залежно від розряду.",
+          "Щоб порівняти два числа, спершу кількість цифр, далі зліва направо (сотні, десятки, одиниці…).",
           "1. У числі 452 цифра 2 означає два одиниці (2).",
           "2. У числі 524 цифра 2 означає два десятки (20).",
           "3. У числі 245 цифра 2 означає дві сотні (200).",
           "4. У числі 2453 цифра 2 означає дві тисячі (2000).",
-          "Число також розкладають на сотні (C), десятки (D) та одиниці (U) — аркуші 02.01–02.03.",
+          "Число також розкладають на сотні (C), десятки (D) та одиниці (U).",
+        ],
+        en: [
+          "Numeration is how we write, read and understand numbers. In our decimal system, each digit has a value according to its place.",
+          "To compare two numbers, first look at how many digits they have, then compare from left to right (hundreds, tens, units…).",
+          "1. In 452, the digit 2 is worth two units (2).",
+          "2. In 524, the digit 2 is worth two tens (20).",
+          "3. In 245, the digit 2 is worth two hundreds (200).",
+          "4. In 2453, the digit 2 is worth two thousands (2000).",
+          "We also break numbers down into hundreds (H), tens (T) and units (U).",
         ],
       },
-      cscRefs: [
-        "MATH_EX_02.01_Centaine-Dizaine-Unite_01.docx",
-        "MATH_EX_02.02_Centaine-Dizaine-Unite_02.docx",
-        "MATH_EX_02.03_Denombrement_03.docx",
-      ],
     },
     exercises: [
       {
         id: "a12-1",
         promptFr: "Dans 3 864, combien vaut le chiffre 8 ?",
         promptPivot: {
+          en: "In 3 864, what is the digit 8 worth?",
           ar: "في 3 864، ما قيمة الرقم 8؟",
           fa: "در ۳ ۸۶۴، ارزش رقم ۸ چند است؟",
           uk: "У 3 864 яке значення цифри 8?",
@@ -261,6 +202,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a12-2",
         promptFr: "Dans 5 240, la valeur du chiffre 4 est :",
         promptPivot: {
+          en: "In 5 240, the value of the digit 4 is:",
           ar: "في 5 240، قيمة الرقم 4 هي:",
           fa: "در ۵ ۲۴۰، ارزش رقم ۴:",
           uk: "У 5 240 значення цифри 4:",
@@ -273,6 +215,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         promptFr:
           "Décompose 637 : combien de centaines ? (écris seulement le nombre de centaines)",
         promptPivot: {
+          en: "Split 637: how many hundreds? (write only the number of hundreds)",
           ar: "حلّل 637: كم مئة؟ (اكتب عدد المئات فقط)",
           fa: "۶۳۷ را تجزیه کن: چند صد؟ (فقط عدد صدها)",
           uk: "Розклади 637: скільки сотень? (лише число сотень)",
@@ -284,6 +227,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         id: "a12-4",
         promptFr: "Dans 9 102, que vaut le chiffre en position des milliers ?",
         promptPivot: {
+          en: "In 9 102, what is the digit in the thousands place worth?",
           ar: "في 9 102، ما قيمة الرقم في خانة الآلاف؟",
           fa: "در ۹ ۱۰۲، رقم جایگاه هزارگان چند است؟",
           uk: "У 9 102 яке значення цифри тисяч?",
@@ -299,6 +243,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: {
         fr: "Droite numérique",
+        en: "Number line",
         ar: "المستقيم العددي",
         fa: "خط اعداد",
         ti: "ቁፅሪ ቁጽሪ ቀጽሪ",
@@ -325,25 +270,37 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
           "На числовій прямій числа розташовують у порядку зростання зліва направо. Крок може бути 1, 10, 100 тощо.",
           "Щоб знайти число «між» двома, читаємо масштаб: між 450 і 460 з кроком 1 буде, наприклад, 455.",
         ],
+        en: [
+          "On a number line, numbers are placed in increasing order from left to right. The gap between two neighbours can be 1, 10, 100… depending on the scale.",
+          "To find a number between two others, read the scale: for example between 450 and 460 with step 1, you can place 455.",
+        ],
       },
-      cscRefs: ["Activité type PER — droite numérique"],
     },
     exercises: [
       {
         id: "a13-1",
         promptFr: "Quel nombre entier est juste après 899 ?",
+        promptPivot: {
+          en: "Which whole number comes right after 899?",
+        },
         type: "number",
         acceptable: ["900"],
       },
       {
         id: "a13-2",
         promptFr: "Quel nombre est entre 12 et 14 ?",
+        promptPivot: {
+          en: "Which number is between 12 and 14?",
+        },
         type: "number",
         acceptable: ["13"],
       },
       {
         id: "a13-3",
         promptFr: "On saute de 100 en 100 : 300, 400, ?",
+        promptPivot: {
+          en: "Count by hundreds: 300, 400, ?",
+        },
         type: "number",
         acceptable: ["500"],
       },
@@ -355,6 +312,7 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: {
         fr: "Suites numériques et régularités",
+        en: "Number patterns and rules",
         ar: "تسلسلات عددية وانتظام",
         fa: "دنباله‌های عددی و قاعده",
         ti: "ናይ ቁፅሪ ተኸታታላዊ መርሕታት",
@@ -381,24 +339,37 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
           "Послідовність — це список чисел за правилом: +1, +10, подвоєння тощо.",
           "Знайди крок між сусідніми членами, щоб передбачити наступний.",
         ],
+        en: [
+          "A sequence is a list of numbers that follows a rule: +1, +10, doubling, and so on.",
+          "Find the step between two consecutive terms to predict the next one.",
+        ],
       },
     },
     exercises: [
       {
         id: "a14-1",
         promptFr: "Suite : 4, 7, 10, 13, ? (écris le terme suivant)",
+        promptPivot: {
+          en: "Sequence: 4, 7, 10, 13, ? (write the next term)",
+        },
         type: "number",
         acceptable: ["16"],
       },
       {
         id: "a14-2",
         promptFr: "Suite : 1000, 900, 800, ?",
+        promptPivot: {
+          en: "Sequence: 1000, 900, 800, ?",
+        },
         type: "number",
         acceptable: ["700"],
       },
       {
         id: "a14-3",
         promptFr: "Double à chaque fois : 3, 6, 12, ?",
+        promptPivot: {
+          en: "Double each time: 3, 6, 12, ?",
+        },
         type: "number",
         acceptable: ["24"],
       },
