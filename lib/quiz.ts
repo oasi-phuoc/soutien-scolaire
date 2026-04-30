@@ -41,8 +41,16 @@ function pickDistractorTitles(mod: ModuleItem): [string, string] {
   return a === b ? [a, pool[(h + 3) % pool.length] ?? "Rien à voir"] : [a, b];
 }
 
+/** Données brutes avant construction des `choices` + `correctId`. */
+type TrackGuessRow = {
+  id: string;
+  question: string;
+  correct: string;
+  wrong: [string, string];
+};
+
 function trackGuessQuestion(track: Track, slugSeed: string): QuizItem {
-  const rows: Record<Track, Omit<QuizItem, "choices"> & { correct: string; wrong: [string, string] }> = {
+  const rows: Record<Track, TrackGuessRow> = {
     literacy: {
       id: "guess-lit",
       question: "Dans les modules « lire et écrire », on travaille surtout :",
