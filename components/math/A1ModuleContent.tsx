@@ -6,6 +6,7 @@ import { AppCard } from "@/components/ui/AppCard";
 import { MathExerciseRunner } from "@/components/math/MathExerciseRunner";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
+import type { LegendTone } from "@/lib/curriculum/content/math-a1-types";
 import {
   pickTheoryFrench,
   pickTheoryPivotTranslation,
