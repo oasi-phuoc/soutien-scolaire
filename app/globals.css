@@ -3,6 +3,36 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f4f4f5;
+  --color-text-primary: #18181b;
+  --color-text-secondary: #52525b;
+  --color-border-default: rgba(24, 24, 27, 0.12);
+  --color-border-emphasis: rgba(24, 24, 27, 0.22);
+  --color-accent-fr: #1d9e75;
+  --color-accent-alg: #378add;
+  --color-accent-geo: #7f77dd;
+  --color-accent-quiz: #ba7517;
+  --color-success: #1d9e75;
+  --color-warning: #ba7517;
+  --color-danger: #e24b4a;
+  --color-marker-prereq-bg: #faeeda;
+  --color-marker-prereq-text: #633806;
+  --color-marker-cross-bg: #e6f1fb;
+  --color-marker-cross-text: #185fa5;
+  --color-marker-quiz-bg: #eeedfe;
+  --color-marker-quiz-text: #534ab7;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --font-size-xs: 0.625rem;
+  --font-size-sm: 0.75rem;
+  --font-size-base: 0.875rem;
+  --font-size-lg: 1rem;
+  --font-size-xl: 1.125rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
 }
 
 @theme inline {
@@ -16,6 +46,18 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #18181b;
+    --color-text-primary: #fafafa;
+    --color-text-secondary: #a1a1aa;
+    --color-border-default: rgba(250, 250, 250, 0.12);
+    --color-border-emphasis: rgba(250, 250, 250, 0.22);
+    --color-marker-prereq-bg: #422006;
+    --color-marker-prereq-text: #fde68a;
+    --color-marker-cross-bg: #0c2a4a;
+    --color-marker-cross-text: #93c5fd;
+    --color-marker-quiz-bg: #1e1b4b;
+    --color-marker-quiz-text: #c4b5fd;
   }
 }
 

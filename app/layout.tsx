@@ -17,8 +17,7 @@ export const metadata: Metadata = {
     default: "Soutien scolaire",
     template: "%s · Soutien scolaire",
   },
-  description:
-    "Français et mathématiques pour jeunes réfugiés — littératie, thèmes du quotidien, maths débutantes.",
+  description: "Base Next.js + Supabase Auth — à compléter.",
 };
 
 export default function RootLayout({

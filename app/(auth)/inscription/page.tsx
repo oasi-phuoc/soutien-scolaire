@@ -14,8 +14,7 @@ export default async function InscriptionPage({ searchParams }: Props) {
         Créer un compte
       </h1>
       <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-        Les données gardées sur cet appareil peuvent ensuite être envoyées depuis les
-        réglages (« synchroniser ») une fois connecté.
+        Après inscription, vérifie ton e-mail si la confirmation est activée dans Supabase.
       </p>
       {q.erreur ? (
         <p className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800 dark:bg-red-950/50 dark:text-red-200">

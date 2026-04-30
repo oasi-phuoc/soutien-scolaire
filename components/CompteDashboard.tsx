@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState, useTransition } from "react";
-import { mergeLocalProgressPayload, updateRemotePivotLang } from "@/app/actions/progress";
+import { useEffect, useState } from "react";
+import { updateRemotePivotLang } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
-import { collectLocalProgressSnapshot } from "@/lib/progress-local";
 import { PIVOT_LANGS, type PivotCode } from "@/lib/pivot-langs";
 
 const STORAGE_KEY = "soutien:pivot";
@@ -27,8 +26,7 @@ export function CompteDashboard({
       : "ar",
   );
   const [saved, setSaved] = useState(false);
-  const [syncMsg, setSyncMsg] = useState<string | null>(null);
-  const [pending, startTransition] = useTransition();
+  const [pivotMsg, setPivotMsg] = useState<string | null>(null);
 
   useEffect(() => {
     if (
@@ -49,34 +47,18 @@ export function CompteDashboard({
   }
 
   async function savePivot(next: PivotCode) {
+    setPivotMsg(null);
     savePivotLocal(next);
     if (user && supabaseConfigured) {
       const r = await updateRemotePivotLang(next);
       setSaved(true);
-      if (!r.ok) setSyncMsg(r.reason ?? "Erreur enregistrement pivot");
-      else setSyncMsg(null);
+      if (!r.ok) setPivotMsg(r.reason ?? "Erreur enregistrement langue");
+      else setPivotMsg(null);
       window.setTimeout(() => setSaved(false), 2000);
     } else {
       setSaved(true);
       window.setTimeout(() => setSaved(false), 2000);
     }
-  }
-
-  function syncNow() {
-    setSyncMsg(null);
-    startTransition(async () => {
-      const snap = collectLocalProgressSnapshot();
-      const r = await mergeLocalProgressPayload(snap);
-      if (r.ok) {
-        setSyncMsg(`Synchronisation envoyée (${r.importedQuizzes} tentative(s) quiz importées).`);
-      } else {
-        const reasons: Record<string, string> = {
-          no_supabase: "Supabase non configuré.",
-          unauthenticated: "Connecte-toi d’abord.",
-        };
-        setSyncMsg(reasons[r.reason ?? ""] ?? r.reason ?? "Erreur inconnue");
-      }
-    });
   }
 
   return (
@@ -100,7 +82,7 @@ export function CompteDashboard({
               Compte connecté
             </h2>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{user.email}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-4">
               <form action={signOutAction}>
                 <button
                   type="submit"
@@ -109,26 +91,13 @@ export function CompteDashboard({
                   Déconnexion
                 </button>
               </form>
-              <button
-                type="button"
-                disabled={pending}
-                onClick={syncNow}
-                className="min-h-11 rounded-xl bg-teal-700 px-4 font-semibold text-white disabled:opacity-60 dark:bg-teal-600"
-              >
-                {pending ? "Envoi…" : "Synchroniser cette progression (mémo locale)"}
-              </button>
             </div>
-            {syncMsg && !saved ? (
-              <p className="mt-3 text-sm text-zinc-700 dark:text-zinc-300" role="status">
-                {syncMsg}
-              </p>
-            ) : null}
           </section>
         ) : supabaseConfigured ? (
           <section>
             <h2 className="text-base font-semibold text-zinc-900 dark:text-zinc-50">Compte</h2>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-              Connecte-toi pour garder quiz et progression sur plusieurs appareils.
+              Connecte-toi pour retrouver ta session sur cet appareil.
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
@@ -156,9 +125,8 @@ export function CompteDashboard({
             Langue d’aide (pivot)
           </h2>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            Enregistré sur cet appareil
-            {user && supabaseConfigured ? " et sur ton compte" : ""}. Les textes dans chaque langue pourront être ajoutés
-            ensuite dans les modules.
+            Choix enregistré sur cet appareil
+            {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
           </p>
           <ul className="mt-4 space-y-2">
             {PIVOT_LANGS.map((l) => {
@@ -194,7 +162,12 @@ export function CompteDashboard({
           </ul>
           {saved ? (
             <p className="mt-2 text-sm text-teal-700 dark:text-teal-400" role="status">
-              Choix langue pivot enregistré.
+              Choix enregistré.
+            </p>
+          ) : null}
+          {pivotMsg ? (
+            <p className="mt-2 text-sm text-amber-800 dark:text-amber-200" role="status">
+              {pivotMsg}
             </p>
           ) : null}
         </section>

@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 const links = [
   { href: "/", label: "Accueil", icon: HomeIcon },
-  { href: "/francais", label: "Français", icon: FrancaisNavIcon },
-  { href: "/mathematiques", label: "Maths", icon: MathsNavIcon },
+  { href: "/francais", label: "Français", icon: FrIcon },
+  { href: "/mathematiques", label: "Maths", icon: MathIcon },
   { href: "/compte", label: "Réglages", icon: GearIcon },
 ] as const;
 
@@ -17,7 +17,7 @@ export function MainNav() {
       className="print:hidden fixed bottom-0 left-0 right-0 z-50 border-t border-zinc-200 bg-white/95 pb-[env(safe-area-inset-bottom)] pt-2 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/95"
       aria-label="Navigation principale"
     >
-      <ul className="mx-auto flex max-w-xl justify-between gap-1 px-3 sm:justify-around sm:gap-2">
+      <ul className="mx-auto flex max-w-lg justify-around px-1">
         {links.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/"
@@ -27,7 +27,7 @@ export function MainNav() {
             <li key={href}>
               <Link
                 href={href}
-                className={`flex min-h-12 min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl px-1.5 py-1 text-[11px] font-medium transition-colors sm:min-w-[3.25rem] sm:px-3 sm:text-xs ${
+                className={`flex min-h-12 min-w-[3.5rem] flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 text-[10px] font-medium leading-tight transition-colors sm:text-xs ${
                   active
                     ? "text-teal-700 dark:text-teal-400"
                     : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"
@@ -61,7 +61,7 @@ function HomeIcon({ active }: { active: boolean }) {
   );
 }
 
-function FrancaisNavIcon({ active }: { active: boolean }) {
+function FrIcon({ active }: { active: boolean }) {
   return (
     <svg
       width="22"
@@ -73,14 +73,12 @@ function FrancaisNavIcon({ active }: { active: boolean }) {
       className={active ? "text-teal-600 dark:text-teal-400" : undefined}
       aria-hidden
     >
-      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
-      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z" />
-      <path d="M8 7h8M8 11h5" />
+      <path d="M4 6h16M4 12h10M4 18h14" />
     </svg>
   );
 }
 
-function MathsNavIcon({ active }: { active: boolean }) {
+function MathIcon({ active }: { active: boolean }) {
   return (
     <svg
       width="22"
@@ -92,8 +90,8 @@ function MathsNavIcon({ active }: { active: boolean }) {
       className={active ? "text-teal-600 dark:text-teal-400" : undefined}
       aria-hidden
     >
-      <path d="M4 5h4v14H4zM10 5h10M10 12h7M10 19h10" />
-      <path d="M12 9h6M15 6v6" />
+      <rect x="3" y="3" width="18" height="18" rx="2" />
+      <path d="M8 8v8M12 8v8M16 8v8M8 12h8" />
     </svg>
   );
 }
