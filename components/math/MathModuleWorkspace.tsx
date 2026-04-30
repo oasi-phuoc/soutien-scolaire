@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { AppButton } from "@/components/ui/AppButton";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
@@ -101,15 +102,20 @@ export function MathModuleWorkspace({ moduleId }: { moduleId: string }) {
             </div>
           </AppCard>
 
-          <AppCard header="Sous-modules (référence)">
-            <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--color-text-secondary)]">
-              {mod.submodules.map((s) => (
-                <li key={s.id}>
-                  <span className="font-medium text-[var(--color-text-primary)]">{s.code}</span> — {s.title}
-                </li>
-              ))}
-            </ol>
-          </AppCard>
+          {moduleId === "A1" ? (
+            <A1ModuleContent />
+          ) : (
+            <AppCard header="Sous-modules (référence)">
+              <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--color-text-secondary)]">
+                {mod.submodules.map((s) => (
+                  <li key={s.id}>
+                    <span className="font-medium text-[var(--color-text-primary)]">{s.code}</span> —{" "}
+                    {s.title}
+                  </li>
+                ))}
+              </ol>
+            </AppCard>
+          )}
         </>
       )}
     </div>

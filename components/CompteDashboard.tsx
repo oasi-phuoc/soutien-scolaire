@@ -44,6 +44,9 @@ export function CompteDashboard({
   function savePivotLocal(next: PivotCode) {
     setCode(next);
     localStorage.setItem(STORAGE_KEY, next);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("soutien-pivot-updated"));
+    }
   }
 
   async function savePivot(next: PivotCode) {

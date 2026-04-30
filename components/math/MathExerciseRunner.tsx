@@ -1,0 +1,110 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { AppButton } from "@/components/ui/AppButton";
+import { AppInput } from "@/components/ui/AppInput";
+import type { PivotCode } from "@/lib/pivot-langs";
+import {
+  answerMatches,
+  type MathExerciseItem,
+} from "@/lib/curriculum/content/math-a1-types";
+import { mathExerciseUi } from "@/lib/i18n/math-ui";
+
+type Props = {
+  exercises: MathExerciseItem[];
+  pivot: PivotCode;
+};
+
+export function MathExerciseRunner({ exercises, pivot }: Props) {
+  const [values, setValues] = useState<Record<string, string>>(() =>
+    Object.fromEntries(exercises.map((e) => [e.id, ""])),
+  );
+  const [validated, setValidated] = useState(false);
+  const [showCorrections, setShowCorrections] = useState(false);
+
+  const filledCount = useMemo(
+    () => exercises.filter((e) => values[e.id]?.trim()).length,
+    [exercises, values],
+  );
+
+  function promptFor(ex: MathExerciseItem) {
+    return ex.promptPivot?.[pivot] ?? ex.promptFr;
+  }
+
+  return (
+    <div className="space-y-5">
+      {exercises.map((ex) => {
+        const ok = showCorrections ? answerMatches(values[ex.id] ?? "", ex.acceptable) : null;
+        return (
+          <div
+            key={ex.id}
+            className={`rounded-[var(--radius-md)] border p-3 ${
+              showCorrections
+                ? ok
+                  ? "border-[var(--color-success)]/50 bg-[color-mix(in_oklch,var(--color-success)_8%,transparent)]"
+                  : "border-[var(--color-danger)]/45 bg-[color-mix(in_oklch,var(--color-danger)_6%,transparent)]"
+                : "border-[var(--color-border-default)]"
+            }`}
+          >
+            <p className="mb-2 text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-text-secondary)]">{ex.id}</span> — {promptFor(ex)}
+            </p>
+            <p className="mb-2 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
+              {mathExerciseUi(pivot, "yourAnswer")} :
+            </p>
+            <AppInput
+              label=""
+              id={`ex-input-${ex.id}`}
+              aria-label={promptFor(ex)}
+              value={values[ex.id] ?? ""}
+              onChange={(ev) =>
+                setValues((s) => ({ ...s, [ex.id]: ev.target.value }))
+              }
+              inputMode={ex.type === "number" ? "numeric" : "text"}
+              autoComplete="off"
+            />
+            {showCorrections ? (
+              <p className="mt-2 text-sm">
+                <span className="font-medium">
+                  {ok ? mathExerciseUi(pivot, "correct") : mathExerciseUi(pivot, "incorrect")}.
+                </span>
+                {!ok ? (
+                  <span className="text-[var(--color-text-secondary)]">
+                    {" "}
+                    {mathExerciseUi(pivot, "expected")} : {ex.acceptable[0]}
+                  </span>
+                ) : null}
+              </p>
+            ) : null}
+          </div>
+        );
+      })}
+
+      <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap">
+        <AppButton
+          accent="alg"
+          onClick={() => {
+            setValidated(true);
+            setShowCorrections(false);
+          }}
+          disabled={filledCount < exercises.length}
+        >
+          {mathExerciseUi(pivot, "validate")}
+        </AppButton>
+        <AppButton
+          accent="quiz"
+          variant="secondary"
+          onClick={() => setShowCorrections(true)}
+          disabled={filledCount < exercises.length}
+        >
+          {mathExerciseUi(pivot, "checkAnswers")}
+        </AppButton>
+      </div>
+      {validated && !showCorrections ? (
+        <p className="text-sm text-[var(--color-text-secondary)]">
+          {mathExerciseUi(pivot, "answersRecorded")}
+        </p>
+      ) : null}
+    </div>
+  );
+}
