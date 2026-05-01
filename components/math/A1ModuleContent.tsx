@@ -259,11 +259,11 @@ const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex
     ti: "ስምዔ፤ ቁጽሩ ብቑጽሪ ጸሓፍ።",
   },
   ex7: {
-    en: "Complete the number grid from 10 to 99.",
-    ar: "أكمل شبكة الأرقام من 10 إلى 99.",
-    fa: "جدول اعداد ۱۰ تا ۹۹ را کامل کنید.",
-    uk: "Заповніть таблицю чисел від 10 до 99.",
-    ti: "ናይ ቁጽርታት ሰሌዳ ካብ 10 ክሳዕ 99 ምልኡ።",
+    en: "Fill in the blue cells in the table.",
+    ar: "أكمل الخلايا الزرقاء في الجدول.",
+    fa: "خانه‌های آبی جدول را پر کنید.",
+    uk: "Заповніть сині клітинки таблиці.",
+    ti: "ናይ ሰሌዳ ሰማያዊ ኩርናዕታት ምልኡ።",
   },
   ex8: {
     en: "Complete the number series.",
@@ -1097,31 +1097,21 @@ export function A1ModuleContent() {
           }
         >
           <div className="mb-4">
-            <p className="text-sm text-[var(--color-text-secondary)]">Complétez la grille des nombres de 10 à 99.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Complétez les cases bleues du tableau.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex7[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
                 lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                 {CONSIGNE_PIVOT.ex7[pivot]}
               </p>
             ) : null}
-            <p className="mt-2 flex flex-wrap gap-4 text-xs text-[var(--color-text-secondary)]">
-              <span className="flex items-center gap-1">
-                <span className="inline-block h-3 w-3 rounded border border-dashed border-red-400 bg-white" />
-                Nombre donné
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="inline-block h-3 w-3 rounded bg-green-100" />
-                À compléter
-              </span>
-            </p>
           </div>
           <div className="overflow-x-auto">
-            <table className="border-collapse text-xs">
+            <table className="mx-auto border-collapse text-xs">
               <thead>
                 <tr>
-                  <th className="w-8 border border-zinc-300 bg-zinc-100 px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
+                  <th className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
                   {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
-                    <th key={u} className="w-8 border border-zinc-300 bg-zinc-100 px-1 py-1.5 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                    <th key={u} className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                       {u}
                     </th>
                   ))}
@@ -1130,7 +1120,7 @@ export function A1ModuleContent() {
               <tbody>
                 {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
                   <tr key={d}>
-                    <th className="border border-zinc-300 bg-zinc-100 px-1 py-1 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                    <th className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                       {d}
                     </th>
                     {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
@@ -1141,35 +1131,35 @@ export function A1ModuleContent() {
 
                       if (state === "revealed") {
                         return (
-                          <td key={u} className="border border-dashed border-red-400 px-0.5 py-1 text-center">
-                            <span className="font-bold tabular-nums text-red-500">{value}</span>
+                          <td key={u} className="h-9 w-9 border border-zinc-300 text-center dark:border-zinc-600">
+                            <span className="font-bold tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
                           </td>
                         );
                       }
                       if (state === "fill") {
                         if (ex7Validated && result !== null) {
                           return (
-                            <td key={u} className={`border px-0.5 py-1 text-center ${result ? "border-green-400 bg-green-50 dark:bg-green-950/20" : "border-red-400 bg-red-50 dark:bg-red-950/20"}`}>
+                            <td key={u} className={`h-9 w-9 border text-center ${result ? "border-green-400 bg-green-50 dark:bg-green-950/20" : "border-red-400 bg-red-50 dark:bg-red-950/20"}`}>
                               {result
                                 ? <span className="font-medium tabular-nums text-green-600">{ex7Answers[key] ?? ""}</span>
-                                : <span className="font-medium tabular-nums text-[var(--color-text-primary)]">{value}</span>
+                                : <span className="font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
                               }
                             </td>
                           );
                         }
                         return (
-                          <td key={u} className="border border-zinc-300 bg-green-50 px-0 py-0 dark:bg-green-950/20">
+                          <td key={u} className="h-9 w-9 border border-zinc-300 bg-blue-100 p-0 dark:border-zinc-600 dark:bg-blue-900/30">
                             <input
                               type="text" inputMode="numeric"
                               value={ex7Answers[key] ?? ""}
                               onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value }))}
-                              className="h-8 w-8 bg-transparent text-center text-[11px] font-medium tabular-nums outline-none"
+                              className="h-9 w-9 bg-transparent text-center text-[11px] font-medium tabular-nums outline-none"
                               aria-label={`Cellule ${value}`}
                             />
                           </td>
                         );
                       }
-                      return <td key={u} className="border border-zinc-200 px-1 py-1 dark:border-zinc-700" />;
+                      return <td key={u} className="h-9 w-9 border border-zinc-300 dark:border-zinc-600" />;
                     })}
                   </tr>
                 ))}
