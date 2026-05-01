@@ -28,6 +28,7 @@ export type ReadAloudRow = {
 export type ReadAloudLegendItem = {
   swatch: "accentAlg" | "red" | "text" | "gray";
   labelFr: string;
+  labelPivot?: Partial<Record<PivotCode, string>>;
 };
 
 /** Section « lire / compter » (table + légende couleurs + audio). */

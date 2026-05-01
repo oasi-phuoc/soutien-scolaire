@@ -33,12 +33,16 @@
   --font-size-xl: 1.125rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
+  /* Thème vert pastel */
+  --color-theme: #5a9e78;
+  --color-theme-light: #e8f5ee;
+  --color-theme-muted: #7cbf9a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
@@ -58,13 +62,16 @@
     --color-marker-cross-text: #93c5fd;
     --color-marker-quiz-bg: #1e1b4b;
     --color-marker-quiz-text: #c4b5fd;
+    --color-theme: #7cbf9a;
+    --color-theme-light: #1a3326;
+    --color-theme-muted: #5a9e78;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans), system-ui, sans-serif;
 }
 
 @media print {

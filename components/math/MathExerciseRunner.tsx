@@ -59,18 +59,13 @@ export function MathExerciseRunner({
               <span className="text-[var(--color-text-secondary)]">{ex.id}</span> — {ex.promptFr}
             </p>
             {showPivotTranslation && pivotPrompt ? (
-              <div
-                className="mb-3 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-[color-mix(in_oklch,var(--color-accent-fr)_6%,transparent)] px-3 py-2"
+              <p
+                className="mb-3 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
                 lang={pivot}
                 dir={pivot === "ar" || pivot === "fa" ? "rtl" : "ltr"}
               >
-                <p className="text-[length:var(--font-size-xs)] font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">
-                  Traduction — {pivotTranslationHeading}
-                </p>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  {pivotPrompt}
-                </p>
-              </div>
+                {pivotPrompt}
+              </p>
             ) : null}
             <p className="mb-2 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
               {mathExerciseFrenchUi("yourAnswer")} :

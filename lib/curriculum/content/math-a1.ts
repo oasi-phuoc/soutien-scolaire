@@ -19,50 +19,61 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
         fr: [
           "Un nombre entier s’écrit avec des chiffres (0 à 9).",
           "En français, on sépare souvent les milliers par une espace fine : 125 000.",
-          "En Suisse romande, on utilise souvent septante, huitante et nonante pour",
-          "70, 80 et 90. Écoute l’enregistrement puis répète à voix haute.",
+          "En Suisse romande, on utilise souvent septante, huitante et nonante pour 70, 80 et 90.",
         ],
         ar: [
           "نكتب العدد الصحيح بأرقام من 0 إلى 9.",
           "في الفرنسية، نفصل الآلاف أحيانًا بمسافة رفيعة : 125 000.",
-          "في الروماندي السويسري يقال غالبًا septante وhuitante وnonante لـ",
-          "70 و80 و90. استمع إلى التسجيل ثم كرّر بصوت عالٍ.",
+          "في الروماندي السويسري يقال غالبًا septante وhuitante وnonante لـ 70 و80 و90.",
         ],
         fa: [
           "عدد صحیح را با ارقام ۰ تا ۹ می‌نویسیم.",
           "در فرانسوی، هزارگان را گاه با فاصلهٔ ظریف جدا می‌کنند: ۱۲۵ ۰۰۰.",
-          "در سوئیس رماند معمولاً برای",
-          "۷۰ و ۸۰ و ۹۰ می‌گویند septante، huitante، nonante. گوش کن و بلند تکرار کن.",
+          "در سوئیس رماند معمولاً برای ۷۰ و ۸۰ و ۹۰ می‌گویند septante، huitante، nonante.",
         ],
         ti: [
           "ኣኃዝቲ ብኣሃዝቲ 0-9 ይጽዓን።",
           "ኣብ ፈረንሳይ ሽሕታት ብልዝብ ክፈልጹ ይኽእሉ።",
-          "ኣብ ስዊዘርላንድ ብ",
-          "70-80-90 septante ፡ huitante ፡ nonante ይበሃሉ ። ስምዑ እሞ ብድምጺ ድግሞ ።",
+          "ኣብ ስዊዘርላንድ ብ 70-80-90 septante ፡ huitante ፡ nonante ይበሃሉ ።",
         ],
         uk: [
           "Ціле число записують цифрами від 0 до 9.",
           "У французькій тисячі часто відокремлюють тонким пробілом: 125 000.",
-          "У романській Швейцарії для",
-          "70, 80 і 90 часто кажуть septante, huitante, nonante. Прослухай запис і повтори вголос.",
+          "У романській Швейцарії для 70, 80 і 90 часто кажуть septante, huitante, nonante.",
         ],
         en: [
           "A whole number is written with digits (0 to 9).",
           "In French, thousands are often separated by a thin space: 125 000.",
-          "In French-speaking Switzerland, people often say septante, huitante and nonante for",
-          "70, 80 and 90. Listen to the recording, then repeat aloud.",
+          "In French-speaking Switzerland, people often say septante, huitante and nonante for 70, 80 and 90.",
         ],
       },
       readAloud: {
-        headingFr: "Compter en français (lire et écouter)",
+        headingFr: "Enregistrement",
         legendFr: [
-          { swatch: "accentAlg", labelFr: "Bleu : chiffres" },
-          { swatch: "red", labelFr: "Rouge : voyelles / graphèmes vocaliques" },
-          { swatch: "text", labelFr: "Noir : consonnes prononcées" },
-          { swatch: "gray", labelFr: "Gris : lettres muettes" },
+          {
+            swatch: "red", labelFr: "Rouge : un seul son",
+            labelPivot: {
+              en: "Red: one sound", ar: "أحمر: صوت واحد",
+              fa: "قرمز: یک صدا", uk: "Червоний: один звук", ti: "ቀይሕ: ሓደ ድምጺ",
+            },
+          },
+          {
+            swatch: "text", labelFr: "Noir : son",
+            labelPivot: {
+              en: "Black: sound", ar: "أسود: صوت",
+              fa: "سیاه: صدا", uk: "Чорний: звук", ti: "ጸሊም: ድምጺ",
+            },
+          },
+          {
+            swatch: "gray", labelFr: "Gris : pas de son",
+            labelPivot: {
+              en: "Gray: silent", ar: "رمادي: بدون صوت",
+              fa: "خاکستری: بی‌صدا", uk: "Сірий: без звуку", ti: "ሕምብርቲ: ድምጺ የብሉን",
+            },
+          },
         ],
         rows: A1_COMPTER_EN_FRANCAIS_ROWS,
-        audioSrc: "/audio/a1-1-compter-fr.mp4",
+        audioSrc: "/audio/a1-1-compter-fr.m4a",
       },
     },
     exercises: [

@@ -63,7 +63,7 @@ export default async function HomePage({ searchParams }: Props) {
         </Link>
         <Link
           href="/compte"
-          className="inline-flex min-h-12 items-center justify-center rounded-xl bg-teal-700 px-6 text-base font-semibold text-white dark:bg-teal-600 sm:col-span-2"
+          className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--color-theme)] px-6 text-base font-semibold text-white dark:bg-[var(--color-theme-muted)] sm:col-span-2"
         >
           Réglages
         </Link>
