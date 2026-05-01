@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
 
 export async function signInWithPasswordAction(formData: FormData) {
@@ -61,7 +62,17 @@ export async function signOutAction() {
   if (supabase) {
     await supabase.auth.signOut();
   }
+  (await cookies()).delete("guest_mode");
   revalidatePath("/", "layout");
+  redirect("/connexion");
+}
+
+export async function continueAsGuestAction() {
+  (await cookies()).set("guest_mode", "1", {
+    path: "/",
+    sameSite: "lax",
+    maxAge: 60 * 60 * 24,
+  });
   redirect("/");
 }
 

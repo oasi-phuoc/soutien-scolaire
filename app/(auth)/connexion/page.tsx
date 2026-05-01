@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { signInWithPasswordAction } from "@/app/actions/auth";
+import { signInWithPasswordAction, continueAsGuestAction } from "@/app/actions/auth";
 
 type Props = { searchParams?: Promise<{ erreur?: string; msg?: string }> };
 
@@ -11,9 +11,6 @@ export default async function ConnexionPage({ searchParams }: Props) {
       <h1 className="text-xl font-semibold text-zinc-900 dark:text-zinc-50">
         Connexion
       </h1>
-      <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-        E-mail et mot de passe (compte créé depuis la page inscription).
-      </p>
       {q.erreur ? (
         <p className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-800 dark:bg-red-950/50 dark:text-red-200">
           {q.erreur}
@@ -47,7 +44,7 @@ export default async function ConnexionPage({ searchParams }: Props) {
               href="/mot-de-passe-oublie"
               className="text-xs font-medium text-teal-700 underline underline-offset-2 dark:text-teal-400"
             >
-              Oublié ?
+              Mot de passe oublié ?
             </Link>
           </div>
           <input
@@ -63,15 +60,27 @@ export default async function ConnexionPage({ searchParams }: Props) {
           type="submit"
           className="min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white dark:bg-teal-600"
         >
-          Me connecter
+          Se connecter
         </button>
       </form>
-      <p className="mt-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
+
+      <p className="mt-5 text-center text-sm text-zinc-600 dark:text-zinc-400">
         Pas encore de compte ?{" "}
         <Link href="/inscription" className="font-semibold text-teal-800 underline dark:text-teal-400">
           Créer un compte
         </Link>
       </p>
+
+      <div className="mt-5 border-t border-zinc-200 pt-5 text-center dark:border-zinc-700">
+        <form action={continueAsGuestAction}>
+          <button
+            type="submit"
+            className="text-sm text-zinc-400 underline underline-offset-2 hover:text-zinc-600 dark:text-zinc-500 dark:hover:text-zinc-300"
+          >
+            Continuer sans compte →
+          </button>
+        </form>
+      </div>
     </main>
   );
 }

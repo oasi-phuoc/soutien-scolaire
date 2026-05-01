@@ -81,6 +81,49 @@ function generateDizaineNumbers(): number[] {
   return shuffle([10, 20, 30, 40, 50, 60, 70, 80, 90]).slice(0, 5);
 }
 
+// ─── Exercice 7 — grille 10–99 ───────────────────────────────────────────────
+
+type CellState = "fill" | "revealed" | "empty";
+type GridConfig = Record<string, CellState>; // clé : `${dizaine}-${unité}`
+
+function generateEx7Grid(): GridConfig {
+  const dizaines = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+  const unites = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const all: string[] = [];
+  for (const d of dizaines) for (const u of unites) all.push(`${d}-${u}`);
+  const sh = shuffle(all);
+  const cfg: GridConfig = {};
+  for (const k of all) cfg[k] = "empty";
+  for (let i = 0; i < 10; i++) cfg[sh[i]!] = "fill";
+  for (let i = 10; i < 19; i++) cfg[sh[i]!] = "revealed";
+  return cfg;
+}
+
+// ─── Exercice 8 — séries de nombres ──────────────────────────────────────────
+
+interface NumberSeries {
+  start: number;
+  count: number;
+  blanks: number[];
+}
+
+function generateEx8(): NumberSeries[] {
+  const series: NumberSeries[] = [];
+  const used = new Set<number>();
+  for (let s = 0; s < 3; s++) {
+    const count = 8;
+    let start = Math.floor(Math.random() * 82) + 10;
+    for (let tries = 0; tries < 30; tries++) {
+      if (!Array.from({ length: count }, (_, j) => start + j).some(n => used.has(n))) break;
+      start = Math.floor(Math.random() * 82) + 10;
+    }
+    const blanks = shuffle([0, 1, 2, 3, 4, 5, 6, 7]).slice(0, 3);
+    for (let j = 0; j < count; j++) used.add(start + j);
+    series.push({ start, count, blanks });
+  }
+  return series;
+}
+
 function nombreAudioSrc(num: number): string {
   if (num >= 100) return `/audio/nombres/centaine/${num}.mp3`;
   if (num >= 10)  return `/audio/nombres/dizaine/${num}.mp3`;
@@ -172,7 +215,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6", Partial<Record<PivotCode, string>>> = {
+const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8", Partial<Record<PivotCode, string>>> = {
   ex1: {
     en: "Follow the stroke to write the digits.",
     ar: "اتبع الخط لكتابة الأرقام.",
@@ -215,11 +258,25 @@ const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6", Part
     uk: "Послухай і запиши число цифрами.",
     ti: "ስምዔ፤ ቁጽሩ ብቑጽሪ ጸሓፍ።",
   },
+  ex7: {
+    en: "Complete the number grid from 10 to 99.",
+    ar: "أكمل شبكة الأرقام من 10 إلى 99.",
+    fa: "جدول اعداد ۱۰ تا ۹۹ را کامل کنید.",
+    uk: "Заповніть таблицю чисел від 10 до 99.",
+    ti: "ናይ ቁጽርታት ሰሌዳ ካብ 10 ክሳዕ 99 ምልኡ።",
+  },
+  ex8: {
+    en: "Complete the number series.",
+    ar: "أكمل سلاسل الأرقام.",
+    fa: "دنباله‌های عددی را کامل کنید.",
+    uk: "Доповніть числові ряди.",
+    ti: "ናይ ቁጽርታት ተኸታተልቲ ምልኡ።",
+  },
 };
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6";
+type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8";
 
 function partClass(kind: WordPhonemeKind): string {
   if (kind === "vowel") return "text-red-600 dark:text-red-400";
@@ -523,6 +580,32 @@ export function A1ModuleContent() {
     setEx6Validated(false);
   };
 
+  // Exercice 7 — grille 10–99
+  const [ex7Grid, setEx7Grid] = useState<GridConfig>(generateEx7Grid);
+  const [ex7Answers, setEx7Answers] = useState<Record<string, string>>({});
+  const [ex7Results, setEx7Results] = useState<Record<string, boolean | null>>({});
+  const [ex7Validated, setEx7Validated] = useState(false);
+
+  const resetExercise7 = () => {
+    setEx7Grid(generateEx7Grid());
+    setEx7Answers({});
+    setEx7Results({});
+    setEx7Validated(false);
+  };
+
+  // Exercice 8 — séries de nombres
+  const [ex8Series, setEx8Series] = useState<NumberSeries[]>(generateEx8);
+  const [ex8Answers, setEx8Answers] = useState<Record<string, string>>({});
+  const [ex8Results, setEx8Results] = useState<Record<string, boolean | null>>({});
+  const [ex8Validated, setEx8Validated] = useState(false);
+
+  const resetExercise8 = () => {
+    setEx8Series(generateEx8());
+    setEx8Answers({});
+    setEx8Results({});
+    setEx8Validated(false);
+  };
+
   const lesson = MATH_A1_LESSONS[activeIdx];
   if (!lesson) return null;
 
@@ -533,11 +616,11 @@ export function A1ModuleContent() {
   const isRtl = pivot === "ar" || pivot === "fa";
 
   const steps: Step[] = read
-    ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6"]
-    : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6"];
+    ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
+    : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"];
   const stepIdx = steps.indexOf(step);
 
-  const allStepCounts = MATH_A1_LESSONS.map((l) => (l.theory.readAloud ? 8 : 7));
+  const allStepCounts = MATH_A1_LESSONS.map((l) => (l.theory.readAloud ? 10 : 9));
   const totalSteps = allStepCounts.reduce((a, b) => a + b, 0);
   const completedSteps = allStepCounts.slice(0, activeIdx).reduce((a, b) => a + b, 0) + stepIdx;
   const overallPct = Math.round((completedSteps / totalSteps) * 100);
@@ -560,8 +643,8 @@ export function A1ModuleContent() {
       const prevIdx = activeIdx - 1;
       const prevLesson = MATH_A1_LESSONS[prevIdx];
       const prevSteps: Step[] = prevLesson?.theory.readAloud
-        ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6"]
-        : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6"];
+        ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
+        : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"];
       setActiveIdx(prevIdx); setStep(prevSteps[prevSteps.length - 1]);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -994,6 +1077,207 @@ export function A1ModuleContent() {
                 disabled={ex6Validated}
               />
               <ActionIconButton action="recommencer" onClick={resetExercise6} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>
+              {isLastStep ? "Terminer ✓" : "Suivant →"}
+            </AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 7 — Grille 10–99 ───────────────────────────────────────── */}
+      {step === "ex7" && (
+        <AppCard
+          variant="elevated"
+          header={
+            <div>
+              <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 7</p>
+              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Grille des nombres</h2>
+            </div>
+          }
+        >
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Complétez la grille des nombres de 10 à 99.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex7[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
+                lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                {CONSIGNE_PIVOT.ex7[pivot]}
+              </p>
+            ) : null}
+            <p className="mt-2 flex flex-wrap gap-4 text-xs text-[var(--color-text-secondary)]">
+              <span className="flex items-center gap-1">
+                <span className="inline-block h-3 w-3 rounded border border-dashed border-red-400 bg-white" />
+                Nombre donné
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="inline-block h-3 w-3 rounded bg-green-100" />
+                À compléter
+              </span>
+            </p>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="border-collapse text-xs">
+              <thead>
+                <tr>
+                  <th className="w-8 border border-zinc-300 bg-zinc-100 px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
+                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
+                    <th key={u} className="w-8 border border-zinc-300 bg-zinc-100 px-1 py-1.5 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                      {u}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
+                  <tr key={d}>
+                    <th className="border border-zinc-300 bg-zinc-100 px-1 py-1 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                      {d}
+                    </th>
+                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
+                      const key = `${d}-${u}`;
+                      const value = d + u;
+                      const state = ex7Grid[key] ?? "empty";
+                      const result = ex7Results[key] ?? null;
+
+                      if (state === "revealed") {
+                        return (
+                          <td key={u} className="border border-dashed border-red-400 px-0.5 py-1 text-center">
+                            <span className="font-bold tabular-nums text-red-500">{value}</span>
+                          </td>
+                        );
+                      }
+                      if (state === "fill") {
+                        if (ex7Validated && result !== null) {
+                          return (
+                            <td key={u} className={`border px-0.5 py-1 text-center ${result ? "border-green-400 bg-green-50 dark:bg-green-950/20" : "border-red-400 bg-red-50 dark:bg-red-950/20"}`}>
+                              {result
+                                ? <span className="font-medium tabular-nums text-green-600">{ex7Answers[key] ?? ""}</span>
+                                : <span className="font-medium tabular-nums text-[var(--color-text-primary)]">{value}</span>
+                              }
+                            </td>
+                          );
+                        }
+                        return (
+                          <td key={u} className="border border-zinc-300 bg-green-50 px-0 py-0 dark:bg-green-950/20">
+                            <input
+                              type="text" inputMode="numeric"
+                              value={ex7Answers[key] ?? ""}
+                              onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value }))}
+                              className="h-8 w-8 bg-transparent text-center text-[11px] font-medium tabular-nums outline-none"
+                              aria-label={`Cellule ${value}`}
+                            />
+                          </td>
+                        );
+                      }
+                      return <td key={u} className="border border-zinc-200 px-1 py-1 dark:border-zinc-700" />;
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton
+                action="valider"
+                onClick={() => {
+                  const results: Record<string, boolean | null> = {};
+                  for (const [key, state] of Object.entries(ex7Grid)) {
+                    if (state === "fill") {
+                      const parts = key.split("-").map(Number);
+                      results[key] = parseInt(ex7Answers[key] ?? "", 10) === (parts[0]! + parts[1]!);
+                    }
+                  }
+                  setEx7Results(results);
+                  setEx7Validated(true);
+                }}
+                disabled={ex7Validated}
+              />
+              <ActionIconButton action="recommencer" onClick={resetExercise7} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>
+              {isLastStep ? "Terminer ✓" : "Suivant →"}
+            </AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 8 — Séries de nombres ──────────────────────────────────── */}
+      {step === "ex8" && (
+        <AppCard
+          variant="elevated"
+          header={
+            <div>
+              <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 8</p>
+              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Séries de nombres</h2>
+            </div>
+          }
+        >
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Complétez les séries de nombres.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
+                lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                {CONSIGNE_PIVOT.ex8[pivot]}
+              </p>
+            ) : null}
+          </div>
+          <div className="space-y-4">
+            {ex8Series.map((series, si) => (
+              <div key={si} className="flex flex-wrap gap-1">
+                {Array.from({ length: series.count }, (_, i) => {
+                  const num = series.start + i;
+                  const isBlank = series.blanks.includes(i);
+                  const ansKey = `${si}-${i}`;
+                  const result = ex8Results[ansKey] ?? null;
+
+                  if (isBlank) {
+                    if (ex8Validated && result !== null) {
+                      return (
+                        <div key={i} className={`flex h-10 w-12 items-center justify-center rounded-[var(--radius-md)] border-2 text-sm font-medium tabular-nums ${result ? "border-green-400 bg-green-50 text-green-600 dark:bg-green-950/20" : "border-red-400 bg-red-50 text-[var(--color-text-primary)] dark:bg-red-950/20"}`}>
+                          {result ? ex8Answers[ansKey] : num}
+                        </div>
+                      );
+                    }
+                    return (
+                      <input
+                        key={i} type="text" inputMode="numeric"
+                        value={ex8Answers[ansKey] ?? ""}
+                        onChange={(e) => setEx8Answers((prev) => ({ ...prev, [ansKey]: e.target.value }))}
+                        className="h-10 w-12 rounded-[var(--radius-md)] border-2 border-[var(--color-accent-alg)] bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:bg-blue-950/20"
+                        aria-label={`Série ${si + 1}, position ${i + 1}`}
+                      />
+                    );
+                  }
+                  return (
+                    <div key={i} className="flex h-10 w-12 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-orange-50 text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-orange-950/20 dark:text-zinc-300">
+                      {num}
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton
+                action="valider"
+                onClick={() => {
+                  const results: Record<string, boolean | null> = {};
+                  for (const [si, series] of ex8Series.entries()) {
+                    for (const i of series.blanks) {
+                      const ansKey = `${si}-${i}`;
+                      results[ansKey] = parseInt(ex8Answers[ansKey] ?? "", 10) === series.start + i;
+                    }
+                  }
+                  setEx8Results(results);
+                  setEx8Validated(true);
+                }}
+                disabled={ex8Validated}
+              />
+              <ActionIconButton action="recommencer" onClick={resetExercise8} />
             </div>
             <AppButton accent="alg" onClick={goNext}>
               {isLastStep ? "Terminer ✓" : "Suivant →"}

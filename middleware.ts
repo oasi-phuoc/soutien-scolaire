@@ -1,12 +1,12 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-/**
- * Maintient les cookies de session Auth à jour lorsque Supabase est configuré.
- */
 export async function middleware(request: NextRequest) {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anon = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  const path = request.nextUrl.pathname;
+
   if (!url || !anon) {
     return NextResponse.next({ request });
   }
@@ -30,7 +30,19 @@ export async function middleware(request: NextRequest) {
     },
   });
 
-  await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  // Déjà connecté → pas besoin de la page de connexion
+  if (path === "/connexion" && user) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  // Accueil sans session ni mode invité → page de connexion
+  if (path === "/" && !user && !request.cookies.get("guest_mode")) {
+    return NextResponse.redirect(new URL("/connexion", request.url));
+  }
 
   return response;
 }
