@@ -38,3 +38,23 @@ export function basePointsForDifficultyBand(
 
 export const PASSING_GRADE = 4.0;
 export const MAX_EVAL_ATTEMPTS = 3;
+
+export type LevelKey = "base" | "moyen" | "avance";
+
+export const LEVEL_PASSING_GRADES: Record<LevelKey, number> = {
+  base: 4,
+  moyen: 5,
+  avance: 5.5,
+};
+
+export const LEVEL_LABELS: Record<LevelKey, string> = {
+  base: "Base (≥ 4/6)",
+  moyen: "Moyen (≥ 5/6)",
+  avance: "Avancé (≥ 5.5/6)",
+};
+
+/** Barème suisse linéaire : (obtenus / max) × 5 + 1, arrondi à 0.1. */
+export function linearSwissGrade(obtained: number, max: number): number {
+  if (max === 0) return 1;
+  return Math.round(((obtained / max) * 5 + 1) * 10) / 10;
+}

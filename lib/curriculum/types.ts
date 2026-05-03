@@ -71,7 +71,12 @@ export type StoredProgressV1 = {
   /** Note du dernier quiz par module (maths). */
   lastQuizGrades: Record<string, number>;
   frenchLevel: FrenchSection | "PA";
-  /** Heure à partir de laquelle repasser une éval après échec (<4). */
   /** ISO : masquer le bloc évaluation jusqu'à cette date. */
   evaluationSnoozeUntil?: Record<string, string>;
+  /** Niveau de validation : base (≥4), moyen (≥5), avancé (≥5.5). */
+  level?: "base" | "moyen" | "avance";
+  /** Suivi de complétion par sous-module, ex. "A1-1" → "completed". */
+  submoduleStates?: Record<string, ModuleProgressState>;
+  /** Score brut des évaluations par sous-module. */
+  submoduleScores?: Record<string, { score: number; max: number; grade: number }>;
 };

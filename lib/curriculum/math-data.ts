@@ -18,8 +18,8 @@ export const MATH_MODULES: MathModule[] = [
     branch: "algebra",
     prerequisiteIds: [],
     submodules: [
-      sm("A1.1", "Lire, écrire, comparer (0 à 1 000 000)"),
-      sm("A1.2", "Valeur positionnelle"),
+      sm("A1.1", "Compter en français"),
+      sm("A1.2", "Comparer les nombres"),
       sm("A1.3", "Droite numérique"),
       sm("A1.4", "Suites et régularités"),
     ],

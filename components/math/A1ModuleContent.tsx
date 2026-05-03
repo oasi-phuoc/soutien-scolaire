@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AppCard } from "@/components/ui/AppCard";
 import { AppButton } from "@/components/ui/AppButton";
@@ -10,15 +10,29 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
 import type {
+  MathExerciseItem,
+  MathSubmoduleLesson,
   ReadAloudCell,
   ReadAloudLegendItem,
   WordPhonemeKind,
 } from "@/lib/curriculum/content/math-a1-types";
 import {
+  answerMatches,
   pickTheoryFrench,
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
+import {
+  LEVEL_PASSING_GRADES,
+  LEVEL_LABELS,
+  linearSwissGrade,
+  type LevelKey,
+} from "@/lib/scoring";
+import {
+  loadProgress,
+  saveProgress,
+  completeSubmodule,
+} from "@/lib/progress/math-progress";
 
 // ─── Vocabulaire ──────────────────────────────────────────────────────────────
 
@@ -88,14 +102,34 @@ type GridConfig = Record<string, CellState>; // clé : `${dizaine}-${unité}`
 
 function generateEx7Grid(): GridConfig {
   const dizaines = [10, 20, 30, 40, 50, 60, 70, 80, 90];
-  const unites = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const unites = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const all: string[] = [];
   for (const d of dizaines) for (const u of unites) all.push(`${d}-${u}`);
   const sh = shuffle(all);
   const cfg: GridConfig = {};
   for (const k of all) cfg[k] = "empty";
-  for (let i = 0; i < 10; i++) cfg[sh[i]!] = "fill";
-  for (let i = 10; i < 19; i++) cfg[sh[i]!] = "revealed";
+
+  const isAdjacent = (a: string, b: string) => {
+    const [ad, au] = a.split("-").map(Number);
+    const [bd, bu] = b.split("-").map(Number);
+    return (ad === bd && Math.abs(au! - bu!) === 1) || (au === bu && Math.abs(ad! - bd!) === 10);
+  };
+
+  const fills: string[] = [];
+  for (const key of sh) {
+    if (fills.length >= 10) break;
+    if (!fills.some(f => isAdjacent(f, key))) {
+      fills.push(key);
+      cfg[key] = "fill";
+    }
+  }
+
+  let rev = 0;
+  for (const key of sh) {
+    if (rev >= 9) break;
+    if (cfg[key] === "empty") { cfg[key] = "revealed"; rev++; }
+  }
+
   return cfg;
 }
 
@@ -110,7 +144,7 @@ interface NumberSeries {
 function generateEx8(): NumberSeries[] {
   const series: NumberSeries[] = [];
   const used = new Set<number>();
-  for (let s = 0; s < 3; s++) {
+  for (let s = 0; s < 5; s++) {
     const count = 8;
     let start = Math.floor(Math.random() * 82) + 10;
     for (let tries = 0; tries < 30; tries++) {
@@ -215,7 +249,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8", Partial<Record<PivotCode, string>>> = {
+const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12", Partial<Record<PivotCode, string>>> = {
   ex1: {
     en: "Follow the stroke to write the digits.",
     ar: "اتبع الخط لكتابة الأرقام.",
@@ -272,11 +306,367 @@ const CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex
     uk: "Доповніть числові ряди.",
     ti: "ናይ ቁጽርታት ተኸታተልቲ ምልኡ።",
   },
+  ex9: {
+    en: "Choose how many units there are.",
+    ar: "اختر كم عدد الوحدات.",
+    fa: "انتخاب کنید چند واحد وجود دارد.",
+    uk: "Виберіть, скільки одиниць.",
+    ti: "ክንደይ ውልቃት ከምዘሎ ምረጽ።",
+  },
+  ex10: {
+    en: "Count how many units there are.",
+    ar: "عدّ كم عدد الوحدات.",
+    fa: "بشمارید چند واحد وجود دارد.",
+    uk: "Порахуйте, скільки одиниць.",
+    ti: "ክንደይ ውልቃት ከምዘሎ ቁጸር።",
+  },
+  ex11: {
+    en: "Write how many thousands, hundreds, tens and units.",
+    ar: "اكتب كم من الآلاف والمئات والعشرات والوحدات.",
+    fa: "بنویسید چند هزار، صد، ده و یک وجود دارد.",
+    uk: "Напишіть, скільки тисяч, сотень, десятків та одиниць.",
+    ti: "ክንደይ ሽሕ፡ ሚእቲ፡ ዓሰርተ፡ ውልቂ ምጽሓፍ።",
+  },
+  ex12: {
+    en: "Count how many cubes there are.",
+    ar: "عدّ كم عدد المكعبات.",
+    fa: "بشمارید چند مکعب وجود دارد.",
+    uk: "Порахуйте, скільки кубиків.",
+    ti: "ክንደይ ኪዩብታት ከምዘሎ ቁጸር።",
+  },
 };
+
+// ─── Évaluation ───────────────────────────────────────────────────────────────
+
+interface EvalItem extends MathExerciseItem {
+  audioSrc?: string;
+  clips?: string[];
+  numValue?: number;
+  seriesNums?: number[];
+  blankIdx?: number;
+}
+
+const EVAL_INTRO_PIVOT: Partial<Record<PivotCode, string>> = {
+  en: "Answer the questions to validate this sub-module.",
+  ar: "أجب على الأسئلة للتحقق من إتقانك لهذا الجزء.",
+  fa: "برای تأیید این بخش به سؤالات پاسخ دهید.",
+  uk: "Дайте відповіді на запитання, щоб підтвердити цей підмодуль.",
+  ti: "ነቲ ሕቶታት መልሲ ሃቡ ነዚ ምዑዝ ምፍጣር ንምርግጋጽ።",
+};
+
+function generateA11EvalItems(): EvalItem[] {
+  const all = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const sh = shuffle(all);
+
+  // 4 questions Ex2 style : chiffre → lettres
+  const numToLetters: EvalItem[] = sh.slice(0, 4).map((num) => ({
+    id: `eval-nl-${num}`,
+    promptFr: `Écris en lettres : ${num}`,
+    type: "short_text" as const,
+    acceptable: num === 1 ? ["un", "une"] : [FR_WORDS[num]!],
+    numValue: num,
+  }));
+
+  // 4 questions Ex6 style : écouter → chiffres (centaines, SequentialAudioButton)
+  const audioItems: EvalItem[] = Array.from({ length: 4 }, (_, idx) => {
+    const comp = generateEx6Composition();
+    return {
+      id: `eval-audio-${idx}`,
+      promptFr: "",
+      type: "number" as const,
+      acceptable: [String(comp.value)],
+      clips: comp.clips,
+    };
+  });
+
+  // 2 questions Ex8 style : 2 séries différentes, chacune avec un blanc distinct
+  const s1Start = Math.floor(Math.random() * 83) + 10;
+  let s2Start = Math.floor(Math.random() * 83) + 10;
+  while (Math.abs(s2Start - s1Start) < 5) s2Start = Math.floor(Math.random() * 83) + 10;
+  const nums1 = Array.from({ length: 8 }, (_, i) => s1Start + i);
+  const nums2 = Array.from({ length: 8 }, (_, i) => s2Start + i);
+  const bi1 = shuffle([0, 1, 2, 3, 4, 5, 6, 7])[0]!;
+  const bi2 = shuffle([0, 1, 2, 3, 4, 5, 6, 7])[0]!;
+  const seriesItems: EvalItem[] = [
+    { id: "eval-series-0", promptFr: "", type: "number" as const, acceptable: [String(nums1[bi1]!)], seriesNums: nums1, blankIdx: bi1 },
+    { id: "eval-series-1", promptFr: "", type: "number" as const, acceptable: [String(nums2[bi2]!)], seriesNums: nums2, blankIdx: bi2 },
+  ];
+
+  return [...numToLetters, ...audioItems, ...seriesItems];
+}
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8";
+type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "eval";
+
+function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
+  const hasAudio = !!lesson.theory.readAloud;
+  if (lesson.submoduleId === "A1-1") {
+    return hasAudio
+      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"]
+      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
+  }
+  if (lesson.submoduleId === "A1-2") {
+    return ["theory", "ex9", "ex10", "ex11", "ex12", "eval"];
+  }
+  return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
+}
+
+// ─── Ex9 — choix multiple blocs (dizaines + unités) ──────────────────────────
+
+type Ex9Question = { tens: number; units: number; choices: [number, number, number] };
+
+function generateEx9(): Ex9Question[] {
+  const used = new Set<string>();
+  const questions: Ex9Question[] = [];
+  let guard = 0;
+  while (questions.length < 3 && guard++ < 500) {
+    // tens : 0–9 barres, units : tel que total éléments ∈ [2,30] et valeur ≤ 99
+    const tens = Math.floor(Math.random() * 10);
+    const maxUnits = Math.min(30 - tens, 99 - tens * 10);
+    const minUnits = Math.max(0, 2 - tens);
+    if (maxUnits < minUnits) continue;
+    const units = Math.floor(Math.random() * (maxUnits - minUnits + 1)) + minUnits;
+    if (tens === 0 && units === 0) continue;
+    const key = `${tens}-${units}`;
+    if (used.has(key)) continue;
+    used.add(key);
+    const value = tens * 10 + units;
+    const candidateDeltas = [-10, 10, -1, 1, -11, 11, -9, 9, -2, 2, -12, 12];
+    const candidates = shuffle(
+      candidateDeltas.map(d => value + d).filter(v => v > 0 && v !== value)
+    );
+    const chosen = new Set<number>([value]);
+    for (const c of candidates) {
+      if (chosen.size >= 3) break;
+      chosen.add(c);
+    }
+    let extra = 1;
+    while (chosen.size < 3) { if (!chosen.has(extra)) chosen.add(extra); extra++; }
+    questions.push({ tens, units, choices: shuffle([...chosen]) as [number, number, number] });
+  }
+  return questions;
+}
+
+// ─── SVG dizaine horizontale (pour Ex9) ──────────────────────────────────────
+
+function SvgDizaineH({ s = 8 }: { s?: number }) {
+  return (
+    <svg width={s * 10 + 1} height={s + 1} aria-hidden>
+      {Array.from({ length: 10 }, (_, i) => (
+        <rect key={i} x={i * s + 0.5} y={0.5} width={s - 1} height={s - 1}
+          fill="#FED7AA" stroke="#F97316" strokeWidth="0.5" rx="0.5" />
+      ))}
+    </svg>
+  );
+}
+
+// ─── Ex12 — tours de cubes isométriques ──────────────────────────────────────
+
+const CUBE_COLOR_SETS = [
+  { front: "#7DD3FC", right: "#38BDF8", top: "#BAE6FD", stroke: "#0284C7" },
+  { front: "#C4B5FD", right: "#8B5CF6", top: "#DDD6FE", stroke: "#6D28D9" },
+  { front: "#FCD34D", right: "#F59E0B", top: "#FEF08A", stroke: "#B45309" },
+  { front: "#6EE7B7", right: "#34D399", top: "#A7F3D0", stroke: "#059669" },
+] as const;
+
+type CubeColorSet = (typeof CUBE_COLOR_SETS)[number];
+type Ex12Question = { heights: number[]; colors: CubeColorSet };
+
+function generateEx12(): Ex12Question[] {
+  return CUBE_COLOR_SETS.map((colors) => {
+    const n = Math.floor(Math.random() * 3) + 2; // 2–4 tours
+    const heights = Array.from({ length: n }, () => Math.floor(Math.random() * 5) + 1);
+    return { heights, colors };
+  });
+}
+
+function IsoCubeTower({ heights, colors, cw = 28, ch = 24, oh = 13, ov = 8 }: {
+  heights: number[];
+  colors: CubeColorSet;
+  cw?: number; ch?: number; oh?: number; ov?: number;
+}) {
+  const maxH = Math.max(...heights);
+  const gap = oh + 4;
+  const totalW = heights.length * cw + (heights.length - 1) * gap + oh;
+  const totalH = maxH * ch + ov;
+
+  const cubes: React.ReactNode[] = [];
+  heights.forEach((h, ti) => {
+    const tx = ti * (cw + gap);
+    Array.from({ length: h }, (_, ri) => {
+      const isTop = ri === h - 1;
+      const ty = totalH - (ri + 1) * ch - ov;
+      cubes.push(
+        <g key={`${ti}-${ri}`}>
+          <rect x={tx} y={ty} width={cw} height={ch}
+            fill={colors.front} stroke={colors.stroke} strokeWidth="0.5" />
+          <polygon
+            points={`${tx+cw},${ty} ${tx+cw+oh},${ty-ov} ${tx+cw+oh},${ty+ch-ov} ${tx+cw},${ty+ch}`}
+            fill={colors.right} stroke={colors.stroke} strokeWidth="0.5" />
+          {isTop && (
+            <polygon
+              points={`${tx},${ty} ${tx+oh},${ty-ov} ${tx+cw+oh},${ty-ov} ${tx+cw},${ty}`}
+              fill={colors.top} stroke={colors.stroke} strokeWidth="0.5" />
+          )}
+        </g>
+      );
+    });
+  });
+
+  return <svg width={totalW} height={totalH} aria-hidden>{cubes}</svg>;
+}
+
+// ─── Ex10 — comptage blocs éparpillés (centaines + dizaines + unités) ────────
+
+type BlockPos = { kind: "m" | "h" | "d" | "u"; x: number; y: number };
+
+type Ex10Question = { h: number; d: number; u: number; positions: BlockPos[]; canvasH: number };
+
+function generateEx10(): Ex10Question[] {
+  const W = 420;
+  const SIZES: Record<"m" | "h" | "d" | "u", [number, number]> = { m: [50, 50], h: [51, 51], d: [9, 81], u: [15, 15] };
+
+  function placeBlock(kind: "m" | "h" | "d" | "u", placed: BlockPos[], H: number): BlockPos {
+    const [bw, bh] = SIZES[kind]!;
+    // 500 tentatives aléatoires sans chevauchement
+    for (let attempt = 0; attempt < 500; attempt++) {
+      const x = Math.random() * (W - bw);
+      const y = Math.random() * (H - bh);
+      const ok = placed.every(p => {
+        const [pw, ph] = SIZES[p.kind]!;
+        return x + bw < p.x - 2 || x > p.x + pw + 2 || y + bh < p.y - 2 || y > p.y + ph + 2;
+      });
+      if (ok) return { kind, x, y };
+    }
+    // Fallback : scan de grille → position avec minimum de recouvrement
+    let bestX = 0, bestY = 0, bestOverlap = Infinity;
+    const step = 16;
+    outer: for (let gx = 0; gx + bw <= W; gx += step) {
+      for (let gy = 0; gy + bh <= H; gy += step) {
+        let overlap = 0;
+        for (const p of placed) {
+          const [pw, ph] = SIZES[p.kind]!;
+          const ox = Math.max(0, Math.min(gx + bw, p.x + pw) - Math.max(gx, p.x));
+          const oy = Math.max(0, Math.min(gy + bh, p.y + ph) - Math.max(gy, p.y));
+          overlap += ox * oy;
+          if (overlap >= bestOverlap) break;
+        }
+        if (overlap < bestOverlap) { bestOverlap = overlap; bestX = gx; bestY = gy; }
+        if (bestOverlap === 0) break outer;
+      }
+    }
+    return { kind, x: bestX, y: bestY };
+  }
+
+  return Array.from({ length: 3 }, () => {
+    // 20–50 éléments, valeur ≤ 999 — chaque type peut dépasser 9
+    let h = 0, d = 2, u = 18;
+    for (let guard = 0; guard < 500; guard++) {
+      const _h = Math.floor(Math.random() * 10);   // 0–9 plaques (10×100=1000>999 impossible)
+      const _d = Math.floor(Math.random() * 50);   // 0–49 barres, filtré par contraintes
+      const minU = Math.max(0, 20 - _h - _d);
+      const maxU = Math.min(50 - _h - _d, 999 - _h * 100 - _d * 10);
+      if (maxU < 0 || maxU < minU) continue;
+      const _u = Math.floor(Math.random() * (maxU - minU + 1)) + minU;
+      if (_h + _d + _u < 20 || _h + _d + _u > 50) continue;
+      h = _h; d = _d; u = _u;
+      break;
+    }
+    const total = h + d + u;
+    const canvasH = Math.max(220, 180 + Math.max(0, total - 25) * 5);
+    const kinds: ("m" | "h" | "d" | "u")[] = [
+      ...Array(h).fill("h"), ...Array(d).fill("d"), ...Array(u).fill("u"),
+    ];
+    const positions: BlockPos[] = [];
+    for (const kind of shuffle(kinds)) positions.push(placeBlock(kind, positions, canvasH));
+    return { h, d, u, positions, canvasH };
+  });
+}
+
+// ─── Ex11 — décomposition M+C+D+U ────────────────────────────────────────────
+
+type Ex11Question = { m: number; c: number; d: number; u: number; positions: BlockPos[]; canvasH: number };
+
+function generateEx11(): Ex11Question[] {
+  const W = 420;
+  const SIZES: Record<"m" | "h" | "d" | "u", [number, number]> = { m: [50, 50], h: [51, 51], d: [10, 91], u: [17, 17] };
+
+  function placeBlock(kind: "m" | "h" | "d" | "u", placed: BlockPos[], H: number): BlockPos {
+    const [bw, bh] = SIZES[kind]!;
+    for (let attempt = 0; attempt < 500; attempt++) {
+      const x = Math.random() * (W - bw);
+      const y = Math.random() * (H - bh);
+      const ok = placed.every(p => {
+        const [pw, ph] = SIZES[p.kind]!;
+        return x + bw < p.x - 2 || x > p.x + pw + 2 || y + bh < p.y - 2 || y > p.y + ph + 2;
+      });
+      if (ok) return { kind, x, y };
+    }
+    let bestX = 0, bestY = 0, bestOverlap = Infinity;
+    const step = 16;
+    outer: for (let gx = 0; gx + bw <= W; gx += step) {
+      for (let gy = 0; gy + bh <= H; gy += step) {
+        let overlap = 0;
+        for (const p of placed) {
+          const [pw, ph] = SIZES[p.kind]!;
+          const ox = Math.max(0, Math.min(gx + bw, p.x + pw) - Math.max(gx, p.x));
+          const oy = Math.max(0, Math.min(gy + bh, p.y + ph) - Math.max(gy, p.y));
+          overlap += ox * oy;
+          if (overlap >= bestOverlap) break;
+        }
+        if (overlap < bestOverlap) { bestOverlap = overlap; bestX = gx; bestY = gy; }
+        if (bestOverlap === 0) break outer;
+      }
+    }
+    return { kind, x: bestX, y: bestY };
+  }
+
+  return Array.from({ length: 3 }, () => {
+    // 10–50 éléments — chaque type peut dépasser 9 (sauf m capé à 9)
+    const target = Math.floor(Math.random() * 41) + 10; // 10–50
+    const m = Math.floor(Math.random() * Math.min(9, target)) + 1; // 1–9 milliers
+    const rem1 = target - m;
+    const c = Math.floor(Math.random() * (rem1 + 1));
+    const rem2 = rem1 - c;
+    const d = Math.floor(Math.random() * (rem2 + 1));
+    const u = rem2 - d;
+    const total = m + c + d + u;
+    const canvasH = Math.max(240, 200 + Math.max(0, total - 10) * 10);
+    const kinds: ("m" | "h" | "d" | "u")[] = [
+      ...Array(m).fill("m"), ...Array(c).fill("h"), ...Array(d).fill("d"), ...Array(u).fill("u"),
+    ];
+    const positions: BlockPos[] = [];
+    for (const kind of shuffle(kinds)) positions.push(placeBlock(kind, positions, canvasH));
+    return { m, c, d, u, positions, canvasH };
+  });
+}
+
+const A1_POS_KEY = "soutien:a1-pos";
+
+function loadA1Position(): { lessonIdx: number; step: Step } {
+  if (typeof window === "undefined") return { lessonIdx: 0, step: "theory" };
+  try {
+    const raw = localStorage.getItem(A1_POS_KEY);
+    if (!raw) return { lessonIdx: 0, step: "theory" };
+    const data = JSON.parse(raw) as { lessonIdx?: number; step?: string };
+    const lessonIdx =
+      typeof data.lessonIdx === "number" &&
+      data.lessonIdx >= 0 &&
+      data.lessonIdx < MATH_A1_LESSONS.length
+        ? data.lessonIdx
+        : 0;
+    const lesson = MATH_A1_LESSONS[lessonIdx]!;
+    const validSteps = getLessonSteps(lesson);
+    const step =
+      data.step && validSteps.includes(data.step as Step)
+        ? (data.step as Step)
+        : "theory";
+    return { lessonIdx, step };
+  } catch {
+    return { lessonIdx: 0, step: "theory" };
+  }
+}
 
 function partClass(kind: WordPhonemeKind): string {
   if (kind === "vowel") return "text-red-600 dark:text-red-400";
@@ -296,6 +686,74 @@ function ReadAloudNumberCell({ cell }: { cell: ReadAloudCell }) {
         ))}
       </span>
     </span>
+  );
+}
+
+// ─── SVG blocs valeur positionnelle ──────────────────────────────────────────
+
+function SvgMillier({ s = 4, d = 9 }: { s?: number; d?: number }) {
+  const fw = s * 10, fh = s * 10;
+  return (
+    <svg width={fw + d + 1} height={fh + d + 1} aria-hidden>
+      <polygon points={`0,${d} ${fw},${d} ${fw + d},0 ${d},0`} fill="#BBF7D0" stroke="#6EE7B7" strokeWidth="0.5" />
+      <polygon points={`${fw},${d} ${fw + d},0 ${fw + d},${fh} ${fw},${fh + d}`} fill="#34D399" stroke="#10B981" strokeWidth="0.5" />
+      {Array.from({ length: 10 }, (_, row) =>
+        Array.from({ length: 10 }, (_, col) => (
+          <rect key={`${row}-${col}`} x={col * s + 0.5} y={d + row * s + 0.5} width={s - 1} height={s - 1} fill="#6EE7B7" stroke="#34D399" strokeWidth="0.5" rx="0.5" />
+        ))
+      )}
+    </svg>
+  );
+}
+function SvgCentaine({ s = 7 }: { s?: number }) {
+  return (
+    <svg width={s * 10 + 1} height={s * 10 + 1} aria-hidden>
+      {Array.from({ length: 10 }, (_, row) =>
+        Array.from({ length: 10 }, (_, col) => (
+          <rect key={`${row}-${col}`} x={col * s + 0.5} y={row * s + 0.5} width={s - 1} height={s - 1} fill="#C4B5FD" stroke="#8B5CF6" strokeWidth="0.5" rx="0.5" />
+        ))
+      )}
+    </svg>
+  );
+}
+function SvgDizaine({ s = 7 }: { s?: number }) {
+  return (
+    <svg width={s + 1} height={s * 10 + 1} aria-hidden>
+      {Array.from({ length: 10 }, (_, i) => (
+        <rect key={i} x={0.5} y={i * s + 0.5} width={s - 1} height={s - 1} fill="#FED7AA" stroke="#F97316" strokeWidth="0.5" rx="0.5" />
+      ))}
+    </svg>
+  );
+}
+function SvgUnite({ s = 16 }: { s?: number }) {
+  return (
+    <svg width={s + 1} height={s + 1} aria-hidden>
+      <rect x={0.5} y={0.5} width={s - 1} height={s - 1} fill="#BAE6FD" stroke="#38BDF8" strokeWidth="0.5" rx="1.5" />
+    </svg>
+  );
+}
+
+// ─── Illustration valeur positionnelle (A1-2) ────────────────────────────────
+
+function PlaceValueIllustration() {
+  return (
+    <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-zinc-950">
+      <div className="grid w-full grid-cols-4">
+        {([
+          { label: "1 Millier = 1000", color: "text-emerald-600 dark:text-emerald-400", svg: <SvgMillier s={4} d={9} /> },
+          { label: "1 Centaine = 100", color: "text-violet-600 dark:text-violet-400",   svg: <SvgCentaine s={7} /> },
+          { label: "1 Dizaine = 10",   color: "text-orange-500 dark:text-orange-400",   svg: <SvgDizaine s={9} /> },
+          { label: "1 Unité",          color: "text-sky-500 dark:text-sky-400",          svg: <SvgUnite s={22} /> },
+        ] as const).map(({ label, color, svg }) => (
+          <div key={label} className="flex flex-col items-center gap-2">
+            <span className={`text-xs font-bold ${color}`}>{label}</span>
+            <div className="flex h-20 w-full items-center justify-center">
+              {svg}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -496,7 +954,8 @@ function ExerciseRow({
       ) : (
         <AppInput label="" id={inputId} value={answer}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="en lettres…" autoComplete="off" />
+          placeholder="en lettres…" autoComplete="off"
+          className="!bg-blue-50 dark:!bg-blue-950/30" />
       )}
     </div>
   );
@@ -508,8 +967,8 @@ export function A1ModuleContent() {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
-  const [activeIdx, setActiveIdx] = useState(0);
-  const [step, setStep] = useState<Step>("theory");
+  const [activeIdx, setActiveIdx] = useState(() => loadA1Position().lessonIdx);
+  const [step, setStep] = useState<Step>(() => loadA1Position().step);
 
   // Exercice 1 — tracer les chiffres (0–9)
   const [ex1Digits, setEx1Digits] = useState<number[]>(generateDigits);
@@ -606,6 +1065,83 @@ export function A1ModuleContent() {
     setEx8Validated(false);
   };
 
+  // Ex9 — choix multiple
+  const [ex9Questions, setEx9Questions] = useState<Ex9Question[]>(generateEx9);
+  const [ex9Selected, setEx9Selected] = useState<(number | null)[]>(Array(3).fill(null));
+  const [ex9Validated, setEx9Validated] = useState(false);
+
+  const resetEx9 = () => { setEx9Questions(generateEx9()); setEx9Selected(Array(3).fill(null)); setEx9Validated(false); };
+
+  // Ex10 — comptage blocs éparpillés
+  const [ex10Questions, setEx10Questions] = useState<Ex10Question[]>(generateEx10);
+  const [ex10Answers, setEx10Answers] = useState<string[]>(Array(3).fill(""));
+  const [ex10Results, setEx10Results] = useState<(boolean | null)[]>(Array(3).fill(null));
+  const [ex10Validated, setEx10Validated] = useState(false);
+
+  const resetEx10 = () => { setEx10Questions(generateEx10()); setEx10Answers(Array(3).fill("")); setEx10Results(Array(3).fill(null)); setEx10Validated(false); };
+
+  // Ex11 — décomposition
+  const [ex11Questions, setEx11Questions] = useState<Ex11Question[]>(generateEx11);
+  const [ex11Answers, setEx11Answers] = useState<Array<{m:string;c:string;d:string;u:string}>>(
+    Array(3).fill(null).map(() => ({m:"",c:"",d:"",u:""}))
+  );
+  const [ex11Results, setEx11Results] = useState<(boolean|null)[]>(Array(3).fill(null));
+  const [ex11Validated, setEx11Validated] = useState(false);
+
+  const resetEx11 = () => {
+    setEx11Questions(generateEx11());
+    setEx11Answers(Array(3).fill(null).map(() => ({m:"",c:"",d:"",u:""})));
+    setEx11Results(Array(3).fill(null));
+    setEx11Validated(false);
+  };
+
+  // Ex12 — tours de cubes isométriques
+  const [ex12Questions, setEx12Questions] = useState<Ex12Question[]>(generateEx12);
+  const [ex12Answers, setEx12Answers] = useState<string[]>(Array(4).fill(""));
+  const [ex12Results, setEx12Results] = useState<(boolean | null)[]>(Array(4).fill(null));
+  const [ex12Validated, setEx12Validated] = useState(false);
+
+  const resetEx12 = () => { setEx12Questions(generateEx12()); setEx12Answers(Array(4).fill("")); setEx12Results(Array(4).fill(null)); setEx12Validated(false); };
+
+  // Évaluation sous-module
+  const [evalItems, setEvalItems] = useState<EvalItem[]>(() => {
+    const initIdx = loadA1Position().lessonIdx;
+    return MATH_A1_LESSONS[initIdx]?.submoduleId === "A1-1" ? generateA11EvalItems() : [];
+  });
+  const [evalAnswers, setEvalAnswers] = useState<Record<string, string>>({});
+  const [evalResults, setEvalResults] = useState<Record<string, boolean>>({});
+  const [evalGrade, setEvalGrade] = useState<number | null>(null);
+  const [evalSubmitted, setEvalSubmitted] = useState(false);
+
+  // Niveau de validation (chargé depuis localStorage)
+  const [level, setCurrentLevel] = useState<LevelKey>("base");
+  useEffect(() => {
+    const prog = loadProgress();
+    setCurrentLevel(prog.level ?? "base");
+  }, []);
+  const passingGrade = LEVEL_PASSING_GRADES[level];
+
+  // Sous-module déjà validé → "Suivant" débloqué sans refaire l'éval
+  const [submoduleAlreadyPassed, setSubmoduleAlreadyPassed] = useState(() => {
+    try {
+      const p = loadProgress();
+      const sub = MATH_A1_LESSONS[loadA1Position().lessonIdx]?.submoduleId;
+      return sub ? p.submoduleStates?.[sub] === "completed" : false;
+    } catch { return false; }
+  });
+  useEffect(() => {
+    const p = loadProgress();
+    const sub = MATH_A1_LESSONS[activeIdx]?.submoduleId;
+    setSubmoduleAlreadyPassed(sub ? p.submoduleStates?.[sub] === "completed" : false);
+  }, [activeIdx]);
+
+  // Sauvegarde de la position courante
+  useEffect(() => {
+    try {
+      localStorage.setItem(A1_POS_KEY, JSON.stringify({ lessonIdx: activeIdx, step }));
+    } catch { /* ignore */ }
+  }, [activeIdx, step]);
+
   const lesson = MATH_A1_LESSONS[activeIdx];
   if (!lesson) return null;
 
@@ -615,24 +1151,33 @@ export function A1ModuleContent() {
   const read = lesson.theory.readAloud;
   const isRtl = pivot === "ar" || pivot === "fa";
 
-  const steps: Step[] = read
-    ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
-    : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"];
+  const steps = getLessonSteps(lesson);
   const stepIdx = steps.indexOf(step);
 
-  const allStepCounts = MATH_A1_LESSONS.map((l) => (l.theory.readAloud ? 10 : 9));
+  const allStepCounts = MATH_A1_LESSONS.map((l) => getLessonSteps(l).length);
   const totalSteps = allStepCounts.reduce((a, b) => a + b, 0);
   const completedSteps = allStepCounts.slice(0, activeIdx).reduce((a, b) => a + b, 0) + stepIdx;
   const overallPct = Math.round((completedSteps / totalSteps) * 100);
 
   const goTo = (s: Step) => { setStep(s); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
+  const changeLesson = (idx: number, targetStep: Step = "theory") => {
+    setActiveIdx(idx);
+    setStep(targetStep);
+    setEvalAnswers({});
+    setEvalResults({});
+    setEvalGrade(null);
+    setEvalSubmitted(false);
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const goNext = () => {
     const nextStep = steps[stepIdx + 1];
     if (nextStep) { goTo(nextStep); }
     else if (activeIdx < MATH_A1_LESSONS.length - 1) {
-      setActiveIdx((i) => i + 1); setStep("theory");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      changeLesson(activeIdx + 1);
     } else { router.push("/mathematiques"); }
   };
 
@@ -641,12 +1186,8 @@ export function A1ModuleContent() {
     if (prevStep) { goTo(prevStep); }
     else if (activeIdx > 0) {
       const prevIdx = activeIdx - 1;
-      const prevLesson = MATH_A1_LESSONS[prevIdx];
-      const prevSteps: Step[] = prevLesson?.theory.readAloud
-        ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"]
-        : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8"];
-      setActiveIdx(prevIdx); setStep(prevSteps[prevSteps.length - 1]);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      const prevSteps = getLessonSteps(MATH_A1_LESSONS[prevIdx]!);
+      changeLesson(prevIdx, prevSteps[prevSteps.length - 1]);
     }
   };
 
@@ -669,18 +1210,29 @@ export function A1ModuleContent() {
           }
         >
           <div className="space-y-3 text-sm leading-relaxed">
-            {theoryFr.paragraphs.map((p, i) => (
-              <div key={`${lesson.submoduleId}-fr-${i}`}>
-                <p className="text-[var(--color-text-secondary)]">{p}</p>
-                {showPivotTranslation && pivotBody?.[i] ? (
-                  <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
-                    lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                    {pivotBody[i]}
-                  </p>
-                ) : null}
-              </div>
-            ))}
+            {theoryFr.paragraphs.map((p, i) => {
+              const isA12 = lesson.submoduleId === "A1-2";
+              const illustrationA12: Record<number, React.ReactNode> = isA12 ? {
+                1: <div className="mt-2 flex justify-center gap-2"><SvgUnite s={20} /><SvgUnite s={20} /></div>,
+                2: <div className="mt-2 flex justify-center gap-3"><SvgDizaine s={9} /><SvgDizaine s={9} /></div>,
+                3: <div className="mt-2 flex justify-center gap-2"><SvgCentaine s={5} /><SvgCentaine s={5} /></div>,
+                4: <div className="mt-2 flex justify-center gap-2"><SvgMillier s={4} d={9} /><SvgMillier s={4} d={9} /></div>,
+              } : {};
+              return (
+                <div key={`${lesson.submoduleId}-fr-${i}`}>
+                  <p className="text-[var(--color-text-secondary)]">{p}</p>
+                  {showPivotTranslation && pivotBody?.[i] ? (
+                    <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
+                      lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                      {pivotBody[i]}
+                    </p>
+                  ) : null}
+                  {illustrationA12[i] ?? null}
+                </div>
+              );
+            })}
           </div>
+          {lesson.submoduleId === "A1-2" && <PlaceValueIllustration />}
           <div className="mt-6 flex items-center justify-between">
             {!isFirstStep ? (
               <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
@@ -719,7 +1271,7 @@ export function A1ModuleContent() {
 
           <div className="mb-3">
             <p className="text-[14px] text-[var(--color-text-secondary)]">
-              Écoute l'enregistrement puis répète à voix haute.
+              Écoutez l'enregistrement puis répètez à voix haute.
             </p>
             {showPivotTranslation && LISTEN_REPEAT_PIVOT[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
@@ -899,8 +1451,6 @@ export function A1ModuleContent() {
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex4Validated && result !== null ? (
                     <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
-                      <span className="tabular-nums font-bold text-[var(--color-accent-alg)]">{num}</span>
-                      <span className="text-[var(--color-text-secondary)]">—</span>
                       {result ? (
                         <span className="text-sm font-medium text-green-600">{ex4Answers[i]}</span>
                       ) : (
@@ -913,7 +1463,7 @@ export function A1ModuleContent() {
                   ) : (
                     <AppInput label="" id={`ex4-${i}`} value={ex4Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex4Answers]; n[i] = e.target.value; setEx4Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
                   )}
                 </div>
               );
@@ -985,7 +1535,7 @@ export function A1ModuleContent() {
                   ) : (
                     <AppInput label="" id={`ex5-${i}`} value={ex5Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex5Answers]; n[i] = e.target.value; setEx5Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
                   )}
                 </div>
               );
@@ -1057,7 +1607,7 @@ export function A1ModuleContent() {
                   ) : (
                     <AppInput label="" id={`ex6-${i}`} value={ex6Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex6Answers]; n[i] = e.target.value; setEx6Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
                   )}
                 </div>
               );
@@ -1106,12 +1656,12 @@ export function A1ModuleContent() {
             ) : null}
           </div>
           <div className="overflow-x-auto">
-            <table className="mx-auto border-collapse text-xs">
+            <table className="mx-auto border-collapse">
               <thead>
                 <tr>
-                  <th className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
-                  {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
-                    <th key={u} className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                  <th className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
+                    <th key={u} className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                       {u}
                     </th>
                   ))}
@@ -1120,10 +1670,10 @@ export function A1ModuleContent() {
               <tbody>
                 {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
                   <tr key={d}>
-                    <th className="h-9 w-9 border border-zinc-300 bg-zinc-100 text-center text-[11px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                    <th className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                       {d}
                     </th>
-                    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
                       const key = `${d}-${u}`;
                       const value = d + u;
                       const state = ex7Grid[key] ?? "empty";
@@ -1131,35 +1681,37 @@ export function A1ModuleContent() {
 
                       if (state === "revealed") {
                         return (
-                          <td key={u} className="h-9 w-9 border border-zinc-300 text-center dark:border-zinc-600">
-                            <span className="font-bold tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
+                          <td key={u} className="h-[41px] w-[41px] border border-zinc-300 text-center dark:border-zinc-600">
+                            <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
                           </td>
                         );
                       }
                       if (state === "fill") {
                         if (ex7Validated && result !== null) {
                           return (
-                            <td key={u} className={`h-9 w-9 border text-center ${result ? "border-green-400 bg-green-50 dark:bg-green-950/20" : "border-red-400 bg-red-50 dark:bg-red-950/20"}`}>
-                              {result
-                                ? <span className="font-medium tabular-nums text-green-600">{ex7Answers[key] ?? ""}</span>
-                                : <span className="font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
-                              }
+                            <td key={u} className={`h-[41px] w-[41px] p-0 text-center ${result ? "ring-2 ring-inset ring-green-400 bg-green-50 dark:bg-green-950/20" : "ring-2 ring-inset ring-red-400 bg-red-50 dark:bg-red-950/20"}`}>
+                              <div className="flex h-[41px] w-[41px] items-center justify-center">
+                                {result
+                                  ? <span className="text-sm font-medium tabular-nums text-green-600">{ex7Answers[key] ?? ""}</span>
+                                  : <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
+                                }
+                              </div>
                             </td>
                           );
                         }
                         return (
-                          <td key={u} className="h-9 w-9 border border-zinc-300 bg-blue-100 p-0 dark:border-zinc-600 dark:bg-blue-900/30">
+                          <td key={u} className="h-[41px] w-[41px] border border-zinc-300 bg-blue-100 p-0 dark:border-zinc-600 dark:bg-blue-900/30">
                             <input
                               type="text" inputMode="numeric"
                               value={ex7Answers[key] ?? ""}
                               onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value }))}
-                              className="h-9 w-9 bg-transparent text-center text-[11px] font-medium tabular-nums outline-none"
+                              className="h-[41px] w-[41px] bg-transparent text-center text-sm font-medium tabular-nums outline-none"
                               aria-label={`Cellule ${value}`}
                             />
                           </td>
                         );
                       }
-                      return <td key={u} className="h-9 w-9 border border-zinc-300 dark:border-zinc-600" />;
+                      return <td key={u} className="h-[41px] w-[41px] border border-zinc-300 dark:border-zinc-600" />;
                     })}
                   </tr>
                 ))}
@@ -1213,39 +1765,44 @@ export function A1ModuleContent() {
               </p>
             ) : null}
           </div>
-          <div className="space-y-4">
+          <div className="space-y-3">
             {ex8Series.map((series, si) => (
-              <div key={si} className="flex flex-wrap gap-1">
-                {Array.from({ length: series.count }, (_, i) => {
-                  const num = series.start + i;
-                  const isBlank = series.blanks.includes(i);
-                  const ansKey = `${si}-${i}`;
-                  const result = ex8Results[ansKey] ?? null;
+              <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div className="flex items-center gap-2 overflow-hidden">
+                  <span className="w-8 shrink-0 text-left text-2xl font-bold tabular-nums text-[var(--color-accent-alg)]">{si + 1}.</span>
+                  <div className="flex min-w-0 flex-1 gap-1">
+                    {Array.from({ length: series.count }, (_, i) => {
+                      const num = series.start + i;
+                      const isBlank = series.blanks.includes(i);
+                      const ansKey = `${si}-${i}`;
+                      const result = ex8Results[ansKey] ?? null;
 
-                  if (isBlank) {
-                    if (ex8Validated && result !== null) {
+                      if (isBlank) {
+                        if (ex8Validated && result !== null) {
+                          return (
+                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-green-400 bg-green-50 text-green-600 dark:bg-green-950/20" : "border-red-400 bg-red-50 text-[var(--color-text-primary)] dark:bg-red-950/20"}`}>
+                              {result ? ex8Answers[ansKey] : num}
+                            </div>
+                          );
+                        }
+                        return (
+                          <input
+                            key={i} type="text" inputMode="numeric"
+                            value={ex8Answers[ansKey] ?? ""}
+                            onChange={(e) => setEx8Answers((prev) => ({ ...prev, [ansKey]: e.target.value }))}
+                            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                            aria-label={`Série ${si + 1}, position ${i + 1}`}
+                          />
+                        );
+                      }
                       return (
-                        <div key={i} className={`flex h-10 w-12 items-center justify-center rounded-[var(--radius-md)] border-2 text-sm font-medium tabular-nums ${result ? "border-green-400 bg-green-50 text-green-600 dark:bg-green-950/20" : "border-red-400 bg-red-50 text-[var(--color-text-primary)] dark:bg-red-950/20"}`}>
-                          {result ? ex8Answers[ansKey] : num}
+                        <div key={i} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
+                          {num}
                         </div>
                       );
-                    }
-                    return (
-                      <input
-                        key={i} type="text" inputMode="numeric"
-                        value={ex8Answers[ansKey] ?? ""}
-                        onChange={(e) => setEx8Answers((prev) => ({ ...prev, [ansKey]: e.target.value }))}
-                        className="h-10 w-12 rounded-[var(--radius-md)] border-2 border-[var(--color-accent-alg)] bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:bg-blue-950/20"
-                        aria-label={`Série ${si + 1}, position ${i + 1}`}
-                      />
-                    );
-                  }
-                  return (
-                    <div key={i} className="flex h-10 w-12 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-orange-50 text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-orange-950/20 dark:text-zinc-300">
-                      {num}
-                    </div>
-                  );
-                })}
+                    })}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -1275,6 +1832,493 @@ export function A1ModuleContent() {
           </div>
         </AppCard>
       )}
+
+      {/* ── Exercice 9 — Choix multiple dizaines+unités ─────────────────────── */}
+      {step === "ex9" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 9</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez combien il y a d'unités</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le nombre représenté par les blocs.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex9[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex9[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-3">
+            {ex9Questions.map((q, i) => {
+              const value = q.tens * 10 + q.units;
+              const sel = ex9Selected[i] ?? null;
+              const correct = ex9Validated ? sel === value : null;
+              return (
+                <div key={i} className={`rounded-[var(--radius-md)] border transition-colors ${correct === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : correct === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                  {/* Zone d'affichage, blocs centrés, largeur complète */}
+                  <div className="flex min-h-28 w-full flex-col items-center justify-center gap-1 rounded-t px-3 py-2">
+                    {q.tens > 0 && (
+                      <div className="flex w-full flex-wrap justify-center gap-0.5">
+                        {Array.from({ length: q.tens }, (_, ti) => <SvgDizaineH key={ti} s={8} />)}
+                      </div>
+                    )}
+                    {q.units > 0 && (
+                      <div className="flex w-full flex-wrap justify-center gap-0.5">
+                        {Array.from({ length: q.units }, (_, ui) => <SvgUnite key={ui} s={11} />)}
+                      </div>
+                    )}
+                  </div>
+                  {/* Réponses alignées en bas au centre */}
+                  <div className="flex justify-center gap-2 px-3 py-2">
+                    {q.choices.map(c => {
+                      const isSelected = sel === c;
+                      const isCorrect = ex9Validated && c === value;
+                      const isWrong = ex9Validated && isSelected && c !== value;
+                      return (
+                        <button key={c} type="button"
+                          onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
+                          className={`w-16 rounded py-1.5 text-sm font-bold border transition-colors ${isCorrect ? "border-green-400 bg-green-100 text-green-700 dark:bg-green-950/40" : isWrong ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-950/40" : isSelected ? "border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                          {c}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" onClick={() => setEx9Validated(true)} disabled={ex9Validated || ex9Selected.some(s => s === null)} />
+              <ActionIconButton action="recommencer" onClick={resetEx9} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 10 — Comptage blocs éparpillés ─────────────────────────── */}
+      {step === "ex10" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 10</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a d'unités</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Comptez tous les blocs et écrivez le nombre total.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex10[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex10[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-4">
+            {ex10Questions.map((q, qi) => {
+              const total = q.h * 100 + q.d * 10 + q.u;
+              const result = ex10Results[qi] ?? null;
+              return (
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                  <div className="relative overflow-hidden rounded" style={{width:"100%",height:q.canvasH}}>
+                    {q.positions.map((pos, pi) => (
+                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                        {pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-2">
+                    {ex10Validated && result !== null ? (
+                      <div className="flex items-center gap-2">
+                        {result
+                          ? <span className="text-sm font-medium text-green-600">{ex10Answers[qi]}</span>
+                          : <><span className="text-sm text-red-500 line-through">{ex10Answers[qi] || "—"}</span><span className="text-sm font-medium text-[var(--color-text-primary)]"> → {total}</span></>
+                        }
+                      </div>
+                    ) : (
+                      <AppInput label="" id={`ex10-${qi}`} value={ex10Answers[qi] ?? ""}
+                        onChange={e => { const n = [...ex10Answers]; n[qi] = e.target.value; setEx10Answers(n); }}
+                        placeholder="Total…" inputMode="numeric" autoComplete="off"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex10Validated}
+                onClick={() => {
+                  const res = ex10Questions.map((q, qi) => parseInt(ex10Answers[qi] ?? "", 10) === q.h*100 + q.d*10 + q.u);
+                  setEx10Results(res);
+                  setEx10Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx10} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 11 — Décomposition M+C+D+U ────────────────────────────── */}
+      {step === "ex11" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 11</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex11[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex11[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-6">
+            {ex11Questions.map((q, qi) => {
+              const result = ex11Results[qi] ?? null;
+              const ans = ex11Answers[qi]!;
+              const mVal = q.m * 1000, cVal = q.c * 100, dVal = q.d * 10, uVal = q.u;
+              const inputClass = "w-14 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 px-1 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20";
+              return (
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                  <div className="relative overflow-hidden rounded" style={{width:"100%", height:q.canvasH}}>
+                    {q.positions.map((pos, pi) => (
+                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                        {pos.kind === "m" ? <SvgMillier s={4} d={9} /> : pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+                    <span className="shrink-0">=</span>
+                    {ex11Validated && result !== null ? (
+                      <>
+                        <span className={`flex-1 text-center ${parseInt(ans.m) === mVal ? "text-green-600" : "text-red-500"}`}>{ans.m || "—"}</span>
+                        <span className="shrink-0">+</span>
+                        <span className={`flex-1 text-center ${parseInt(ans.c) === cVal ? "text-green-600" : "text-red-500"}`}>{ans.c || "—"}</span>
+                        <span className="shrink-0">+</span>
+                        <span className={`flex-1 text-center ${parseInt(ans.d) === dVal ? "text-green-600" : "text-red-500"}`}>{ans.d || "—"}</span>
+                        <span className="shrink-0">+</span>
+                        <span className={`flex-1 text-center ${parseInt(ans.u) === uVal ? "text-green-600" : "text-red-500"}`}>{ans.u || "—"}</span>
+                      </>
+                    ) : (
+                      <>
+                        <input type="text" inputMode="numeric" value={ans.m}
+                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.m = e.target.value; return n; })}
+                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                          placeholder="M×1000" />
+                        <span className="shrink-0">+</span>
+                        <input type="text" inputMode="numeric" value={ans.c}
+                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.c = e.target.value; return n; })}
+                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                          placeholder="C×100" />
+                        <span className="shrink-0">+</span>
+                        <input type="text" inputMode="numeric" value={ans.d}
+                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.d = e.target.value; return n; })}
+                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                          placeholder="D×10" />
+                        <span className="shrink-0">+</span>
+                        <input type="text" inputMode="numeric" value={ans.u}
+                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.u = e.target.value; return n; })}
+                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                          placeholder="U×1" />
+                      </>
+                    )}
+                  </div>
+                  {ex11Validated && result === false && (
+                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">correct : {mVal} + {cVal} + {dVal} + {uVal}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex11Validated}
+                onClick={() => {
+                  const res = ex11Questions.map((q, qi) => {
+                    const a = ex11Answers[qi]!;
+                    return parseInt(a.m) === q.m*1000 && parseInt(a.c) === q.c*100 && parseInt(a.d) === q.d*10 && parseInt(a.u) === q.u;
+                  });
+                  setEx11Results(res);
+                  setEx11Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx11} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 12 — Tours de cubes isométriques ─────────────────────── */}
+      {step === "ex12" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 12</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans chaque figure.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex12[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex12[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="grid grid-cols-2 gap-3">
+            {ex12Questions.map((q, qi) => {
+              const total = q.heights.reduce((a, b) => a + b, 0);
+              const result = ex12Results[qi] ?? null;
+              return (
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                  <div className="flex items-center justify-center overflow-hidden rounded bg-[var(--color-bg-secondary)] py-3">
+                    <IsoCubeTower heights={q.heights} colors={q.colors} />
+                  </div>
+                  <div className="mt-2">
+                    {ex12Validated && result !== null ? (
+                      <div className="flex items-center gap-2">
+                        {result
+                          ? <span className="text-sm font-medium text-green-600">{ex12Answers[qi]}</span>
+                          : <><span className="text-sm text-red-500 line-through">{ex12Answers[qi] || "—"}</span><span className="text-sm font-medium text-[var(--color-text-primary)]"> → {total}</span></>
+                        }
+                      </div>
+                    ) : (
+                      <AppInput label="" id={`ex12-${qi}`} value={ex12Answers[qi] ?? ""}
+                        onChange={e => { const n = [...ex12Answers]; n[qi] = e.target.value; setEx12Answers(n); }}
+                        placeholder="Cubes…" inputMode="numeric" autoComplete="off"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex12Validated}
+                onClick={() => {
+                  const res = ex12Questions.map((q, qi) => parseInt(ex12Answers[qi] ?? "", 10) === q.heights.reduce((a, b) => a + b, 0));
+                  setEx12Results(res);
+                  setEx12Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx12} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Évaluation sous-module ──────────────────────────────────────────── */}
+      {step === "eval" && (() => {
+        const items = lesson.submoduleId === "A1-1" ? evalItems : (lesson.exercises as EvalItem[]);
+        const totalPts = items.length;
+        return (
+          <AppCard
+            variant="elevated"
+            header={
+              <div>
+                <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Évaluation — {lesson.submoduleCode}</p>
+                <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
+              </div>
+            }
+          >
+            <div className="mb-4">
+              <p className="text-sm text-[var(--color-text-secondary)]">
+                Répondez aux questions pour valider ce sous-module.
+              </p>
+              {showPivotTranslation && EVAL_INTRO_PIVOT[pivot] ? (
+                <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]"
+                  lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                  {EVAL_INTRO_PIVOT[pivot]}
+                </p>
+              ) : null}
+            </div>
+
+            <div className="space-y-3">
+              {items.map((ex, i) => {
+                const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
+
+                const header = i === 0 ? (
+                  <div key="hdr-ex2" className="pb-1 pt-2">
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">1. Écrivez les nombres en lettres correctement.</p>
+                    {showPivotTranslation && CONSIGNE_PIVOT.ex2[pivot] ? (
+                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex2[pivot]}</p>
+                    ) : null}
+                  </div>
+                ) : i === 4 ? (
+                  <div key="hdr-ex6" className="pb-1 pt-4">
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">2. Écoutez et écrivez les nombres.</p>
+                    {showPivotTranslation && CONSIGNE_PIVOT.ex6[pivot] ? (
+                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex6[pivot]}</p>
+                    ) : null}
+                  </div>
+                ) : i === 8 ? (
+                  <div key="hdr-ex8" className="pb-1 pt-4">
+                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">3. Complétez les séries de nombres.</p>
+                    {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
+                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex8[pivot]}</p>
+                    ) : null}
+                  </div>
+                ) : null;
+
+                /* ── Ex8 style : série de nombres (sans numéro) ── */
+                if (ex.seriesNums) {
+                  return (
+                    <div key={ex.id}>
+                      {header}
+                      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                        <div className="flex min-w-0 gap-1">
+                          {ex.seriesNums.map((num, ni) => {
+                            if (ni === ex.blankIdx) {
+                              if (evalSubmitted && result !== null) {
+                                return (
+                                  <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-green-400 bg-green-50 text-green-600 dark:bg-green-950/20" : "border-red-400 bg-red-50 text-[var(--color-text-primary)] dark:bg-red-950/20"}`}>
+                                    {result ? evalAnswers[ex.id] : num}
+                                  </div>
+                                );
+                              }
+                              return (
+                                <input
+                                  key={ni} type="text" inputMode="numeric"
+                                  value={evalAnswers[ex.id] ?? ""}
+                                  onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value }))}
+                                  className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                                  aria-label={`Question ${i + 1}`}
+                                />
+                              );
+                            }
+                            return (
+                              <div key={ni} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
+                                {num}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                /* ── Ex6 style : audio centaines → chiffre ── */
+                if (ex.clips) {
+                  return (
+                    <div key={ex.id}>
+                      {header}
+                      <div className={`flex items-center gap-3 rounded-[var(--radius-md)] border p-3 transition-colors ${
+                        result === null
+                          ? "border-[var(--color-border-default)]"
+                          : result
+                            ? "border-green-400 bg-green-50 dark:bg-green-950/20"
+                            : "border-red-400 bg-red-50 dark:bg-red-950/20"
+                      }`}>
+                        <SequentialAudioButton clips={ex.clips} />
+                        {evalSubmitted && result !== null ? (
+                          <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+                            {result ? (
+                              <span className="text-sm font-medium text-green-600">{evalAnswers[ex.id]}</span>
+                            ) : (
+                              <>
+                                <span className="text-sm text-red-500 line-through">{evalAnswers[ex.id] || "—"}</span>
+                                <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                              </>
+                            )}
+                          </div>
+                        ) : (
+                          <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
+                            onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value }))}
+                            placeholder="chiffre…" autoComplete="off" inputMode="numeric"
+                            className="!bg-blue-50 dark:!bg-blue-950/30" />
+                        )}
+                      </div>
+                    </div>
+                  );
+                }
+
+                /* ── Ex2 style : chiffre → lettres ── */
+                return (
+                  <div key={ex.id}>
+                    {header}
+                    <ExerciseRow
+                      num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
+                      answer={evalAnswers[ex.id] ?? ""} result={evalResults[ex.id] ?? null}
+                      validated={evalSubmitted} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
+                      pivotWord={undefined} pivot={pivot} showPivot={false}
+                      onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+
+            {evalSubmitted && evalGrade !== null ? (
+              <div className={`mt-4 rounded-[var(--radius-md)] border p-4 text-center ${
+                evalGrade >= passingGrade
+                  ? "border-green-400 bg-green-50 dark:bg-green-950/20"
+                  : "border-amber-400 bg-amber-50 dark:bg-amber-950/20"
+              }`}>
+                <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+                  {evalGrade.toFixed(1)}<span className="text-base font-normal text-[var(--color-text-secondary)]">/6</span>
+                  <span className="ml-3 text-lg font-semibold text-[var(--color-text-secondary)]">
+                    ({Object.values(evalResults).filter(Boolean).length}/{totalPts} pts)
+                  </span>
+                </p>
+                <p className="mt-1 text-sm font-medium">
+                  {evalGrade >= passingGrade
+                    ? "✓ Sous-module validé !"
+                    : `Requis : ${passingGrade}/6 — Réessaie !`}
+                </p>
+              </div>
+            ) : null}
+
+            <div className="mt-6 flex items-center justify-between">
+              <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+              <div className="flex gap-2">
+                {!evalSubmitted ? (
+                  <ActionIconButton
+                    action="valider"
+                    onClick={() => {
+                      const results: Record<string, boolean> = {};
+                      let correct = 0;
+                      for (const ex of items) {
+                        const ok = answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable);
+                        results[ex.id] = ok;
+                        if (ok) correct++;
+                      }
+                      const grade = linearSwissGrade(correct, totalPts);
+                      setEvalResults(results);
+                      setEvalGrade(grade);
+                      setEvalSubmitted(true);
+                      if (grade >= passingGrade) {
+                        const prog = loadProgress();
+                        saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, correct, totalPts, grade));
+                        setSubmoduleAlreadyPassed(true);
+                      }
+                    }}
+                  />
+                ) : evalGrade !== null && evalGrade < passingGrade ? (
+                  <ActionIconButton
+                    action="recommencer"
+                    onClick={() => {
+                      setEvalAnswers({});
+                      setEvalResults({});
+                      setEvalGrade(null);
+                      setEvalSubmitted(false);
+                      if (lesson.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
+                    }}
+                  />
+                ) : null}
+              </div>
+              <AppButton
+                accent="alg"
+                onClick={goNext}
+                disabled={!submoduleAlreadyPassed && (!evalSubmitted || (evalGrade !== null && evalGrade < passingGrade))}
+              >
+                {isLastStep ? "Terminer ✓" : "Suivant →"}
+              </AppButton>
+            </div>
+          </AppCard>
+        );
+      })()}
 
       {/* ── Exercice 3 — Écrire les dizaines ────────────────────────────────── */}
       {step === "ex3" && (

@@ -15,7 +15,6 @@ import {
 import {
   computeRecommendation,
   findPendingEvaluationModule,
-  mathGlobalStats,
   type MathTabId,
 } from "@/lib/curriculum/recommendation";
 import {
@@ -67,8 +66,6 @@ export function MathematiquesClient() {
   );
   const pendingModule = pendingEvalId ? getMathModule(pendingEvalId) : undefined;
 
-  const stats = useMemo(() => mathGlobalStats(progress), [progress]);
-
   const branchProgress = useMemo(() => {
     const total = order.length;
     const done = completedPassingIds(progress);
@@ -85,44 +82,10 @@ export function MathematiquesClient() {
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
           Algèbre, géométrie et statistiques
         </h1>
-        <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-          Parcours PER : onglets indépendants, prérequis croisés et quiz notés sur le barème suisse.
-        </p>
       </header>
 
-      <section
-        aria-label="Statistiques globales"
-        className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/60 p-4"
-      >
-        <div className="grid grid-cols-3 gap-3 text-center text-sm">
-          <div>
-            <p className="text-2xl font-semibold text-[var(--color-text-primary)]">
-              {stats.finished}/{stats.total}
-            </p>
-            <p className="text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-              Modules terminés
-            </p>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-[var(--color-text-primary)]">
-              {stats.avgGrade != null ? `${stats.avgGrade}` : "—"}
-            </p>
-            <p className="text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-              Note moyenne /6
-            </p>
-          </div>
-          <div>
-            <p className="text-2xl font-semibold text-[var(--color-text-primary)]">
-              {stats.minutes > 0 ? `${stats.minutes} min` : "—"}
-            </p>
-            <p className="text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-              Temps (bientôt)
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <div
+<div
         role="tablist"
         aria-label="Branches mathématiques"
         className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
@@ -155,53 +118,7 @@ export function MathematiquesClient() {
         </button>
       </div>
 
-      <AppCard variant="info" header="Prochaine étape recommandée">
-        <p className="text-base font-semibold text-[var(--color-text-primary)]">{reco.title}</p>
-        <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-[var(--color-text-secondary)]">
-          {reco.reasonLines.map((line) => (
-            <li key={line}>{line}</li>
-          ))}
-        </ul>
-        {reco.prerequisiteTags.length ? (
-          <div className="mt-3 flex flex-wrap gap-1">
-            {reco.prerequisiteTags.map((t) => (
-              <AppBadge key={t.label} tone={t.ok ? "alg" : "quiz"}>
-                {t.label}
-                {t.ok ? " ✓" : ""}
-              </AppBadge>
-            ))}
-          </div>
-        ) : null}
-        {reco.moduleId && reco.ctaLabel ? (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {reco.kind === "prereq_algebra" ? (
-              <AppButton
-                accent="alg"
-                iconRight={<ArrowIcon />}
-                onClick={() => {
-                  setTab("algebra");
-                  router.push("/mathematiques");
-                }}
-              >
-                {reco.ctaLabel}
-              </AppButton>
-            ) : (
-              <AppButton
-                accent={tab === "geometry" ? "geo" : "alg"}
-                iconRight={<ArrowIcon />}
-                onClick={() => router.push(`/mathematiques/${reco.moduleId}`)}
-              >
-                {reco.ctaLabel}
-              </AppButton>
-            )}
-          </div>
-        ) : null}
-        {!hydrated ? (
-          <p className="mt-2 text-xs text-[var(--color-text-secondary)]">Chargement du suivi…</p>
-        ) : null}
-      </AppCard>
-
-      <div className="space-y-2">
+<div className="space-y-2">
         <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
           <span>Progression de la branche</span>
           <span>{branchProgress}%</span>
@@ -280,6 +197,33 @@ export function MathematiquesClient() {
                         color={tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)"}
                       />
                     </div>
+                  ) : null}
+                  {m.submodules.length > 0 ? (
+                    <ul className="mt-3 space-y-1.5 border-t border-[var(--color-border-default)] pt-3">
+                      {m.submodules.map((sub) => {
+                        const subState = progress.submoduleStates?.[sub.id];
+                        const done = subState === "completed";
+                        return (
+                          <li key={sub.id} className="flex items-center gap-2">
+                            <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
+                              done
+                                ? "bg-green-500 text-white"
+                                : "border border-zinc-300 dark:border-zinc-600"
+                            }`}>
+                              {done ? "✓" : null}
+                            </span>
+                            <span className={`min-w-0 flex-1 text-xs ${done ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}>
+                              <span className="font-medium">{sub.code}</span> — {sub.title}
+                            </span>
+                            {done && progress.submoduleScores?.[sub.id] ? (
+                              <span className="shrink-0 text-[10px] text-[var(--color-text-secondary)]">
+                                {progress.submoduleScores[sub.id]!.score}/{progress.submoduleScores[sub.id]!.max} · {progress.submoduleScores[sub.id]!.grade.toFixed(1)}/6
+                              </span>
+                            ) : null}
+                          </li>
+                        );
+                      })}
+                    </ul>
                   ) : null}
                 </AppCard>
               </li>

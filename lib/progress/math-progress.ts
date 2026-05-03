@@ -267,6 +267,36 @@ function addDays(isoStart: string, days: number): string {
   return d.toISOString();
 }
 
+/** Marque un sous-module comme complété et avance le compteur du module parent.
+ *  Idempotent : sans effet si déjà marqué complété. */
+export function completeSubmodule(
+  p: StoredProgressV1,
+  moduleId: string,
+  submoduleId: string,
+  score?: number,
+  scoreMax?: number,
+  grade?: number,
+): StoredProgressV1 {
+  const alreadyCompleted = p.submoduleStates?.[submoduleId] === "completed";
+  const submoduleStates = {
+    ...(p.submoduleStates ?? {}),
+    [submoduleId]: "completed" as const,
+  };
+  const submoduleScores =
+    score !== undefined && scoreMax !== undefined && grade !== undefined
+      ? { ...(p.submoduleScores ?? {}), [submoduleId]: { score, max: scoreMax, grade } }
+      : p.submoduleScores;
+  if (alreadyCompleted) return { ...p, submoduleStates, submoduleScores };
+  return advanceSubmodule({ ...p, submoduleStates, submoduleScores }, moduleId);
+}
+
+export function setLevel(
+  p: StoredProgressV1,
+  level: "base" | "moyen" | "avance",
+): StoredProgressV1 {
+  return { ...p, level };
+}
+
 export function snoozeEvaluation(
   p: StoredProgressV1,
   moduleId: string,
