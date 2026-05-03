@@ -1271,7 +1271,7 @@ export function A1ModuleContent() {
 
           <div className="mb-3">
             <p className="text-[14px] text-[var(--color-text-secondary)]">
-              Écoutez l'enregistrement puis répètez à voix haute.
+              Écoutez l&apos;enregistrement puis répètez à voix haute.
             </p>
             {showPivotTranslation && LISTEN_REPEAT_PIVOT[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
@@ -1838,7 +1838,7 @@ export function A1ModuleContent() {
         <AppCard variant="elevated" header={
           <div>
             <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 9</p>
-            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez combien il y a d'unités</h2>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez combien il y a d&apos;unités</h2>
           </div>
         }>
           <div className="mb-4">
@@ -1904,7 +1904,7 @@ export function A1ModuleContent() {
         <AppCard variant="elevated" header={
           <div>
             <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 10</p>
-            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a d'unités</h2>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a d&apos;unités</h2>
           </div>
         }>
           <div className="mb-4">
