@@ -70,6 +70,12 @@ const PIVOT_TENS: Partial<Record<PivotCode, Record<number, string>>> = {
 
 // ─── Générateurs de nombres ───────────────────────────────────────────────────
 
+function renderBold(text: string): React.ReactNode {
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  if (parts.length === 1) return text;
+  return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part);
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -249,7 +255,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12", Partial<Record<PivotCode, string>>> = {
+const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13", Partial<Record<PivotCode, string>>> = {
   ex1: {
     en: "Follow the stroke to write the digits.",
     ar: "اتبع الخط لكتابة الأرقام.",
@@ -334,6 +340,13 @@ const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex
     uk: "Порахуйте, скільки кубиків.",
     ti: "ክንደይ ኪዩብታት ከምዘሎ ቁጸር።",
   },
+  ex13: {
+    en: "Count how many cubes there are.",
+    ar: "عدّ كم عدد المكعبات.",
+    fa: "بشمارید چند مکعب وجود دارد.",
+    uk: "Порахуйте, скільки кубиків.",
+    ti: "ክንደይ ኪዩብታት ከምዘሎ ቁጸር።",
+  },
 };
 
 // ─── Évaluation ───────────────────────────────────────────────────────────────
@@ -397,7 +410,7 @@ function generateA11EvalItems(): EvalItem[] {
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "eval";
+type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "eval";
 
 function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
@@ -407,7 +420,7 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
       : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
   }
   if (lesson.submoduleId === "A1-2") {
-    return ["theory", "ex9", "ex10", "ex11", "ex12", "eval"];
+    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "eval"];
   }
   return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
 }
@@ -461,61 +474,24 @@ function SvgDizaineH({ s = 8 }: { s?: number }) {
   );
 }
 
-// ─── Ex12 — tours de cubes isométriques ──────────────────────────────────────
+// ─── Ex12 & Ex13 — assemblages de cubes (images réelles) ─────────────────────
 
-const CUBE_COLOR_SETS = [
-  { front: "#7DD3FC", right: "#38BDF8", top: "#BAE6FD", stroke: "#0284C7" },
-  { front: "#C4B5FD", right: "#8B5CF6", top: "#DDD6FE", stroke: "#6D28D9" },
-  { front: "#FCD34D", right: "#F59E0B", top: "#FEF08A", stroke: "#B45309" },
-  { front: "#6EE7B7", right: "#34D399", top: "#A7F3D0", stroke: "#059669" },
-] as const;
+const ASSEMBLE_IMAGES = [
+  "cubes-14", "cubes-19", "cubes-30", "cubes-35", "cubes-44",
+  "cubes-61", "cubes-65", "cubes-68", "cubes-79", "cubes-81",
+  "cubes-84", "cubes-90", "cubes-95", "cubes-98", "cubes-105", "cubes-108",
+];
 
-type CubeColorSet = (typeof CUBE_COLOR_SETS)[number];
-type Ex12Question = { heights: number[]; colors: CubeColorSet };
+type Ex12Question = { src: string; answer: number };
 
-function generateEx12(): Ex12Question[] {
-  return CUBE_COLOR_SETS.map((colors) => {
-    const n = Math.floor(Math.random() * 3) + 2; // 2–4 tours
-    const heights = Array.from({ length: n }, () => Math.floor(Math.random() * 5) + 1);
-    return { heights, colors };
-  });
+function pickAssembleImage(exclude?: string): Ex12Question {
+  const pool = exclude ? ASSEMBLE_IMAGES.filter(n => n !== exclude) : ASSEMBLE_IMAGES;
+  const name = pool[Math.floor(Math.random() * pool.length)]!;
+  return { src: `/images/cubes/assemble/${name}.png`, answer: parseInt(name.split("-")[1]!, 10) };
 }
 
-function IsoCubeTower({ heights, colors, cw = 28, ch = 24, oh = 13, ov = 8 }: {
-  heights: number[];
-  colors: CubeColorSet;
-  cw?: number; ch?: number; oh?: number; ov?: number;
-}) {
-  const maxH = Math.max(...heights);
-  const gap = oh + 4;
-  const totalW = heights.length * cw + (heights.length - 1) * gap + oh;
-  const totalH = maxH * ch + ov;
-
-  const cubes: React.ReactNode[] = [];
-  heights.forEach((h, ti) => {
-    const tx = ti * (cw + gap);
-    Array.from({ length: h }, (_, ri) => {
-      const isTop = ri === h - 1;
-      const ty = totalH - (ri + 1) * ch - ov;
-      cubes.push(
-        <g key={`${ti}-${ri}`}>
-          <rect x={tx} y={ty} width={cw} height={ch}
-            fill={colors.front} stroke={colors.stroke} strokeWidth="0.5" />
-          <polygon
-            points={`${tx+cw},${ty} ${tx+cw+oh},${ty-ov} ${tx+cw+oh},${ty+ch-ov} ${tx+cw},${ty+ch}`}
-            fill={colors.right} stroke={colors.stroke} strokeWidth="0.5" />
-          {isTop && (
-            <polygon
-              points={`${tx},${ty} ${tx+oh},${ty-ov} ${tx+cw+oh},${ty-ov} ${tx+cw},${ty}`}
-              fill={colors.top} stroke={colors.stroke} strokeWidth="0.5" />
-          )}
-        </g>
-      );
-    });
-  });
-
-  return <svg width={totalW} height={totalH} aria-hidden>{cubes}</svg>;
-}
+function generateEx12(): Ex12Question[] { return [pickAssembleImage()]; }
+function generateEx13(): Ex12Question[] { return [pickAssembleImage()]; }
 
 // ─── Ex10 — comptage blocs éparpillés (centaines + dizaines + unités) ────────
 
@@ -559,17 +535,16 @@ function generateEx10(): Ex10Question[] {
     return { kind, x: bestX, y: bestY };
   }
 
-  return Array.from({ length: 3 }, () => {
-    // 20–50 éléments, valeur ≤ 999 — chaque type peut dépasser 9
-    let h = 0, d = 2, u = 18;
+  return Array.from({ length: 2 }, () => {
+    // 20–50 éléments — plaque ≤ 10, barre ≤ 15, unité ≤ 20, valeur ≤ 999
+    let h = 0, d = 5, u = 15;
     for (let guard = 0; guard < 500; guard++) {
-      const _h = Math.floor(Math.random() * 10);   // 0–9 plaques (10×100=1000>999 impossible)
-      const _d = Math.floor(Math.random() * 50);   // 0–49 barres, filtré par contraintes
-      const minU = Math.max(0, 20 - _h - _d);
-      const maxU = Math.min(50 - _h - _d, 999 - _h * 100 - _d * 10);
-      if (maxU < 0 || maxU < minU) continue;
-      const _u = Math.floor(Math.random() * (maxU - minU + 1)) + minU;
-      if (_h + _d + _u < 20 || _h + _d + _u > 50) continue;
+      const target = Math.floor(Math.random() * 31) + 20; // 20–50
+      const _h = Math.floor(Math.random() * 10);          // 0–9 (10×100=1000>999)
+      const _d = Math.floor(Math.random() * 16);          // 0–15
+      const _u = target - _h - _d;
+      if (_u < 0 || _u > 20) continue;
+      if (_h * 100 + _d * 10 + _u > 999) continue;
       h = _h; d = _d; u = _u;
       break;
     }
@@ -622,15 +597,19 @@ function generateEx11(): Ex11Question[] {
     return { kind, x: bestX, y: bestY };
   }
 
-  return Array.from({ length: 3 }, () => {
-    // 10–50 éléments — chaque type peut dépasser 9 (sauf m capé à 9)
-    const target = Math.floor(Math.random() * 41) + 10; // 10–50
-    const m = Math.floor(Math.random() * Math.min(9, target)) + 1; // 1–9 milliers
-    const rem1 = target - m;
-    const c = Math.floor(Math.random() * (rem1 + 1));
-    const rem2 = rem1 - c;
-    const d = Math.floor(Math.random() * (rem2 + 1));
-    const u = rem2 - d;
+  return Array.from({ length: 1 }, () => {
+    // 10–50 éléments — millier ≤ 9, plaque ≤ 10, barre ≤ 15, unité ≤ 20
+    let m = 1, c = 3, d = 3, u = 3;
+    for (let guard = 0; guard < 500; guard++) {
+      const target = Math.floor(Math.random() * 41) + 10; // 10–50
+      const _m = Math.floor(Math.random() * 9) + 1;  // 1–9
+      const _c = Math.floor(Math.random() * 11);      // 0–10
+      const _d = Math.floor(Math.random() * 16);      // 0–15
+      const _u = target - _m - _c - _d;
+      if (_u < 0 || _u > 20) continue;
+      m = _m; c = _c; d = _d; u = _u;
+      break;
+    }
     const total = m + c + d + u;
     const canvasH = Math.max(240, 200 + Math.max(0, total - 10) * 10);
     const kinds: ("m" | "h" | "d" | "u")[] = [
@@ -736,23 +715,34 @@ function SvgUnite({ s = 16 }: { s?: number }) {
 // ─── Illustration valeur positionnelle (A1-2) ────────────────────────────────
 
 function PlaceValueIllustration() {
+  const items = [
+    { label: "1 Millier = 1000", color: "text-emerald-600 dark:text-emerald-400", svg: <SvgMillier s={4} d={9} /> },
+    { label: "1 Centaine = 100", color: "text-violet-600 dark:text-violet-400",   svg: <SvgCentaine s={7} /> },
+    { label: "1 Dizaine = 10",   color: "text-orange-500 dark:text-orange-400",   svg: <SvgDizaine s={9} /> },
+    { label: "1 Unité",          color: "text-sky-500 dark:text-sky-400",          svg: <SvgUnite s={22} /> },
+  ];
   return (
     <div className="mt-4 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-4 dark:bg-zinc-950">
-      <div className="grid w-full grid-cols-4">
-        {([
-          { label: "1 Millier = 1000", color: "text-emerald-600 dark:text-emerald-400", svg: <SvgMillier s={4} d={9} /> },
-          { label: "1 Centaine = 100", color: "text-violet-600 dark:text-violet-400",   svg: <SvgCentaine s={7} /> },
-          { label: "1 Dizaine = 10",   color: "text-orange-500 dark:text-orange-400",   svg: <SvgDizaine s={9} /> },
-          { label: "1 Unité",          color: "text-sky-500 dark:text-sky-400",          svg: <SvgUnite s={22} /> },
-        ] as const).map(({ label, color, svg }) => (
-          <div key={label} className="flex flex-col items-center gap-2">
-            <span className={`text-xs font-bold ${color}`}>{label}</span>
-            <div className="flex h-20 w-full items-center justify-center">
-              {svg}
-            </div>
-          </div>
-        ))}
-      </div>
+      <table className="w-full table-fixed border-0 border-collapse">
+        <tbody>
+          <tr>
+            {items.map(({ label, color }) => (
+              <td key={label} className="border-0 pb-1 text-center">
+                <span className={`text-xs font-bold ${color}`}>{label}</span>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            {items.map(({ label, svg }) => (
+              <td key={label} className="border-0 text-center align-middle">
+                <div className="flex h-20 items-center justify-center">
+                  {svg}
+                </div>
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -1074,34 +1064,39 @@ export function A1ModuleContent() {
 
   // Ex10 — comptage blocs éparpillés
   const [ex10Questions, setEx10Questions] = useState<Ex10Question[]>(generateEx10);
-  const [ex10Answers, setEx10Answers] = useState<string[]>(Array(3).fill(""));
-  const [ex10Results, setEx10Results] = useState<(boolean | null)[]>(Array(3).fill(null));
+  const [ex10Answers, setEx10Answers] = useState<string[]>(Array(2).fill(""));
+  const [ex10Results, setEx10Results] = useState<(boolean | null)[]>(Array(2).fill(null));
   const [ex10Validated, setEx10Validated] = useState(false);
 
-  const resetEx10 = () => { setEx10Questions(generateEx10()); setEx10Answers(Array(3).fill("")); setEx10Results(Array(3).fill(null)); setEx10Validated(false); };
+  const resetEx10 = () => { setEx10Questions(generateEx10()); setEx10Answers(Array(2).fill("")); setEx10Results(Array(2).fill(null)); setEx10Validated(false); };
 
   // Ex11 — décomposition
   const [ex11Questions, setEx11Questions] = useState<Ex11Question[]>(generateEx11);
-  const [ex11Answers, setEx11Answers] = useState<Array<{m:string;c:string;d:string;u:string}>>(
-    Array(3).fill(null).map(() => ({m:"",c:"",d:"",u:""}))
-  );
-  const [ex11Results, setEx11Results] = useState<(boolean|null)[]>(Array(3).fill(null));
+  const [ex11Answers, setEx11Answers] = useState<string[]>(Array(1).fill(""));
+  const [ex11Results, setEx11Results] = useState<(boolean|null)[]>(Array(1).fill(null));
   const [ex11Validated, setEx11Validated] = useState(false);
 
   const resetEx11 = () => {
     setEx11Questions(generateEx11());
-    setEx11Answers(Array(3).fill(null).map(() => ({m:"",c:"",d:"",u:""})));
-    setEx11Results(Array(3).fill(null));
+    setEx11Answers(Array(1).fill(""));
+    setEx11Results(Array(1).fill(null));
     setEx11Validated(false);
   };
 
-  // Ex12 — tours de cubes isométriques
+  // Ex12 & Ex13 — assemblages de cubes (images réelles)
   const [ex12Questions, setEx12Questions] = useState<Ex12Question[]>(generateEx12);
-  const [ex12Answers, setEx12Answers] = useState<string[]>(Array(4).fill(""));
-  const [ex12Results, setEx12Results] = useState<(boolean | null)[]>(Array(4).fill(null));
+  const [ex12Answers, setEx12Answers] = useState<string[]>(Array(1).fill(""));
+  const [ex12Results, setEx12Results] = useState<(boolean | null)[]>(Array(1).fill(null));
   const [ex12Validated, setEx12Validated] = useState(false);
 
-  const resetEx12 = () => { setEx12Questions(generateEx12()); setEx12Answers(Array(4).fill("")); setEx12Results(Array(4).fill(null)); setEx12Validated(false); };
+  const resetEx12 = () => { setEx12Questions(generateEx12()); setEx12Answers(Array(1).fill("")); setEx12Results(Array(1).fill(null)); setEx12Validated(false); };
+
+  const [ex13Questions, setEx13Questions] = useState<Ex12Question[]>(generateEx13);
+  const [ex13Answers, setEx13Answers] = useState<string[]>(Array(1).fill(""));
+  const [ex13Results, setEx13Results] = useState<(boolean | null)[]>(Array(1).fill(null));
+  const [ex13Validated, setEx13Validated] = useState(false);
+
+  const resetEx13 = () => { setEx13Questions(generateEx13()); setEx13Answers(Array(1).fill("")); setEx13Results(Array(1).fill(null)); setEx13Validated(false); };
 
   // Évaluation sous-module
   const [evalItems, setEvalItems] = useState<EvalItem[]>(() => {
@@ -1169,7 +1164,7 @@ export function A1ModuleContent() {
     setEvalGrade(null);
     setEvalSubmitted(false);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
-    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -1220,7 +1215,7 @@ export function A1ModuleContent() {
               } : {};
               return (
                 <div key={`${lesson.submoduleId}-fr-${i}`}>
-                  <p className="text-[var(--color-text-secondary)]">{p}</p>
+                  <p className="text-[var(--color-text-secondary)]">{renderBold(p)}</p>
                   {showPivotTranslation && pivotBody?.[i] ? (
                     <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
                       lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
@@ -1889,7 +1884,9 @@ export function A1ModuleContent() {
           <div className="mt-6 flex items-center justify-between">
             <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
             <div className="flex gap-2">
-              <ActionIconButton action="valider" onClick={() => setEx9Validated(true)} disabled={ex9Validated || ex9Selected.some(s => s === null)} />
+              <ActionIconButton action="valider"
+                disabled={ex9Validated}
+                onClick={() => { if (!ex9Validated) setEx9Validated(true); }} />
               <ActionIconButton action="recommencer" onClick={resetEx9} />
             </div>
             <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
@@ -1925,19 +1922,15 @@ export function A1ModuleContent() {
                     ))}
                   </div>
                   <div className="mt-2">
-                    {ex10Validated && result !== null ? (
-                      <div className="flex items-center gap-2">
-                        {result
-                          ? <span className="text-sm font-medium text-green-600">{ex10Answers[qi]}</span>
-                          : <><span className="text-sm text-red-500 line-through">{ex10Answers[qi] || "—"}</span><span className="text-sm font-medium text-[var(--color-text-primary)]"> → {total}</span></>
-                        }
-                      </div>
-                    ) : (
-                      <AppInput label="" id={`ex10-${qi}`} value={ex10Answers[qi] ?? ""}
-                        onChange={e => { const n = [...ex10Answers]; n[qi] = e.target.value; setEx10Answers(n); }}
-                        placeholder="Total…" inputMode="numeric" autoComplete="off"
-                        className="!bg-blue-50 dark:!bg-blue-950/30" />
-                    )}
+                    <AppInput label="" id={`ex10-${qi}`}
+                      value={ex10Validated && result === false ? String(total) : (ex10Answers[qi] ?? "")}
+                      onChange={e => { if (!ex10Validated) { const n = [...ex10Answers]; n[qi] = e.target.value; setEx10Answers(n); } }}
+                      placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
+                      className={
+                        ex10Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
+                        ex10Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        "!bg-blue-50 dark:!bg-blue-950/30"
+                      } />
                   </div>
                 </div>
               );
@@ -1973,12 +1966,10 @@ export function A1ModuleContent() {
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex11[pivot]}</p>
             ) : null}
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4">
             {ex11Questions.map((q, qi) => {
+              const total = q.m * 1000 + q.c * 100 + q.d * 10 + q.u;
               const result = ex11Results[qi] ?? null;
-              const ans = ex11Answers[qi]!;
-              const mVal = q.m * 1000, cVal = q.c * 100, dVal = q.d * 10, uVal = q.u;
-              const inputClass = "w-14 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 px-1 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20";
               return (
                 <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
                   <div className="relative overflow-hidden rounded" style={{width:"100%", height:q.canvasH}}>
@@ -1988,45 +1979,17 @@ export function A1ModuleContent() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
-                    <span className="shrink-0">=</span>
-                    {ex11Validated && result !== null ? (
-                      <>
-                        <span className={`flex-1 text-center ${parseInt(ans.m) === mVal ? "text-green-600" : "text-red-500"}`}>{ans.m || "—"}</span>
-                        <span className="shrink-0">+</span>
-                        <span className={`flex-1 text-center ${parseInt(ans.c) === cVal ? "text-green-600" : "text-red-500"}`}>{ans.c || "—"}</span>
-                        <span className="shrink-0">+</span>
-                        <span className={`flex-1 text-center ${parseInt(ans.d) === dVal ? "text-green-600" : "text-red-500"}`}>{ans.d || "—"}</span>
-                        <span className="shrink-0">+</span>
-                        <span className={`flex-1 text-center ${parseInt(ans.u) === uVal ? "text-green-600" : "text-red-500"}`}>{ans.u || "—"}</span>
-                      </>
-                    ) : (
-                      <>
-                        <input type="text" inputMode="numeric" value={ans.m}
-                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.m = e.target.value; return n; })}
-                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
-                          placeholder="M×1000" />
-                        <span className="shrink-0">+</span>
-                        <input type="text" inputMode="numeric" value={ans.c}
-                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.c = e.target.value; return n; })}
-                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
-                          placeholder="C×100" />
-                        <span className="shrink-0">+</span>
-                        <input type="text" inputMode="numeric" value={ans.d}
-                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.d = e.target.value; return n; })}
-                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
-                          placeholder="D×10" />
-                        <span className="shrink-0">+</span>
-                        <input type="text" inputMode="numeric" value={ans.u}
-                          onChange={e => setEx11Answers(prev => { const n = prev.map(a => ({...a})); n[qi]!.u = e.target.value; return n; })}
-                          className="min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 py-1 text-center text-sm font-medium outline-none dark:border-zinc-500 dark:bg-blue-950/20"
-                          placeholder="U×1" />
-                      </>
-                    )}
+                  <div className="mt-2">
+                    <AppInput label="" id={`ex11-${qi}`}
+                      value={ex11Validated && result === false ? String(total) : (ex11Answers[qi] ?? "")}
+                      onChange={e => { if (!ex11Validated) { const n = [...ex11Answers]; n[qi] = e.target.value; setEx11Answers(n); } }}
+                      placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex11Validated}
+                      className={
+                        ex11Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
+                        ex11Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        "!bg-blue-50 dark:!bg-blue-950/30"
+                      } />
                   </div>
-                  {ex11Validated && result === false && (
-                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">correct : {mVal} + {cVal} + {dVal} + {uVal}</p>
-                  )}
                 </div>
               );
             })}
@@ -2036,10 +1999,7 @@ export function A1ModuleContent() {
             <div className="flex gap-2">
               <ActionIconButton action="valider" disabled={ex11Validated}
                 onClick={() => {
-                  const res = ex11Questions.map((q, qi) => {
-                    const a = ex11Answers[qi]!;
-                    return parseInt(a.m) === q.m*1000 && parseInt(a.c) === q.c*100 && parseInt(a.d) === q.d*10 && parseInt(a.u) === q.u;
-                  });
+                  const res = ex11Questions.map((q, qi) => parseInt(ex11Answers[qi] ?? "", 10) === q.m*1000 + q.c*100 + q.d*10 + q.u);
                   setEx11Results(res);
                   setEx11Validated(true);
                 }} />
@@ -2059,34 +2019,29 @@ export function A1ModuleContent() {
           </div>
         }>
           <div className="mb-4">
-            <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans chaque figure.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex12[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex12[pivot]}</p>
             ) : null}
           </div>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="flex flex-col gap-4">
             {ex12Questions.map((q, qi) => {
-              const total = q.heights.reduce((a, b) => a + b, 0);
               const result = ex12Results[qi] ?? null;
               return (
                 <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
-                  <div className="flex items-center justify-center overflow-hidden rounded bg-[var(--color-bg-secondary)] py-3">
-                    <IsoCubeTower heights={q.heights} colors={q.colors} />
+                  <div className="flex items-center justify-center py-3">
+                    <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
                   </div>
                   <div className="mt-2">
-                    {ex12Validated && result !== null ? (
-                      <div className="flex items-center gap-2">
-                        {result
-                          ? <span className="text-sm font-medium text-green-600">{ex12Answers[qi]}</span>
-                          : <><span className="text-sm text-red-500 line-through">{ex12Answers[qi] || "—"}</span><span className="text-sm font-medium text-[var(--color-text-primary)]"> → {total}</span></>
-                        }
-                      </div>
-                    ) : (
-                      <AppInput label="" id={`ex12-${qi}`} value={ex12Answers[qi] ?? ""}
-                        onChange={e => { const n = [...ex12Answers]; n[qi] = e.target.value; setEx12Answers(n); }}
-                        placeholder="Cubes…" inputMode="numeric" autoComplete="off"
-                        className="!bg-blue-50 dark:!bg-blue-950/30" />
-                    )}
+                    <AppInput label="" id={`ex12-${qi}`}
+                      value={ex12Validated && result === false ? String(q.answer) : (ex12Answers[qi] ?? "")}
+                      onChange={e => { if (!ex12Validated) { const n = [...ex12Answers]; n[qi] = e.target.value; setEx12Answers(n); } }}
+                      placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
+                      className={
+                        ex12Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
+                        ex12Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        "!bg-blue-50 dark:!bg-blue-950/30"
+                      } />
                   </div>
                 </div>
               );
@@ -2097,11 +2052,63 @@ export function A1ModuleContent() {
             <div className="flex gap-2">
               <ActionIconButton action="valider" disabled={ex12Validated}
                 onClick={() => {
-                  const res = ex12Questions.map((q, qi) => parseInt(ex12Answers[qi] ?? "", 10) === q.heights.reduce((a, b) => a + b, 0));
+                  const res = ex12Questions.map((q, qi) => parseInt(ex12Answers[qi] ?? "", 10) === q.answer);
                   setEx12Results(res);
                   setEx12Validated(true);
                 }} />
               <ActionIconButton action="recommencer" onClick={resetEx12} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {step === "ex13" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 13</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex13[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex13[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="flex flex-col gap-4">
+            {ex13Questions.map((q, qi) => {
+              const result = ex13Results[qi] ?? null;
+              return (
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                  <div className="flex items-center justify-center py-3">
+                    <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
+                  </div>
+                  <div className="mt-2">
+                    <AppInput label="" id={`ex13-${qi}`}
+                      value={ex13Validated && result === false ? String(q.answer) : (ex13Answers[qi] ?? "")}
+                      onChange={e => { if (!ex13Validated) { const n = [...ex13Answers]; n[qi] = e.target.value; setEx13Answers(n); } }}
+                      placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
+                      className={
+                        ex13Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
+                        ex13Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        "!bg-blue-50 dark:!bg-blue-950/30"
+                      } />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex13Validated}
+                onClick={() => {
+                  const res = ex13Questions.map((q, qi) => parseInt(ex13Answers[qi] ?? "", 10) === q.answer);
+                  setEx13Results(res);
+                  setEx13Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx13} />
             </div>
             <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
@@ -2217,10 +2224,7 @@ export function A1ModuleContent() {
                             {result ? (
                               <span className="text-sm font-medium text-green-600">{evalAnswers[ex.id]}</span>
                             ) : (
-                              <>
-                                <span className="text-sm text-red-500 line-through">{evalAnswers[ex.id] || "—"}</span>
-                                <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
-                              </>
+                              <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                             )}
                           </div>
                         ) : (

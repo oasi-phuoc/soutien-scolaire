@@ -142,11 +142,11 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
       paragraphs: {
         fr: [
           "La numération est la manière d’écrire, lire et comprendre les nombres. Dans notre système décimal, chaque chiffre a une valeur selon sa position.",
-          "• Dans le nombre 452, le chiffre 2 vaut deux unités (2).",
-          "• Dans le nombre 524, le chiffre 2 vaut deux dizaines (20).",
-          "• Dans le nombre 245, le chiffre 2 vaut deux centaines (200).",
-          "• Dans le nombre 2453, le chiffre 2 vaut deux milliers (2000).",
-          "On parle aussi de milliers (M), centaines (C), dizaines (D), unités (U) pour décomposer un nombre.",
+          "• Dans le nombre 452, le chiffre **2** vaut deux unités (**2**).",
+          "• Dans le nombre 524, le chiffre **2** vaut deux dizaines (**20**).",
+          "• Dans le nombre 245, le chiffre **2** vaut deux centaines (**200**).",
+          "• Dans le nombre 2453, le chiffre **2** vaut deux milliers (**2000**).",
+          "On parle aussi de milliers (**M**), centaines (**C**), dizaines (**D**), unités (**U**) pour décomposer un nombre.",
         ],
         ar: [
           "الترقيم هو طريقة كتابة الأعداد وقراءتها وفهمها. في النظام العشري، لكل رقم قيمة حسب مكانه.",
