@@ -2183,7 +2183,7 @@ export function A1ModuleContent() {
                   <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Évaluation — {lesson.submoduleCode}</p>
                   <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
                 </div>
-                {hasTimer && evalStarted && !evalSubmitted && evalTimeLeft !== null && (
+                {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
                   <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
                     evalTimeLeft < 60
                       ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
@@ -2209,7 +2209,7 @@ export function A1ModuleContent() {
             </div>
 
             {/* ── Écran de démarrage (avant Commencer) ── */}
-            {hasTimer && !evalStarted && !evalSubmitted && !submoduleAlreadyPassed && (
+            {!evalStarted && !evalSubmitted && (
               <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
                 <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-alg)]">5:00</p>
                 <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
@@ -2218,7 +2218,7 @@ export function A1ModuleContent() {
             )}
 
             {/* ── Exercices (visibles après Commencer ou si déjà validé) ── */}
-            {(!hasTimer || evalStarted || evalSubmitted || submoduleAlreadyPassed) && <div className="space-y-3">
+            {(evalStarted || evalSubmitted) && <div className="space-y-3">
               {evalItems_curr.map((ex, i) => {
                 const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
 
@@ -2354,7 +2354,7 @@ export function A1ModuleContent() {
             <div className="mt-6 flex items-center justify-between">
               <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
               <div className="flex gap-2">
-                {hasTimer && !evalStarted && !evalSubmitted && !submoduleAlreadyPassed ? (
+                {!evalStarted && !evalSubmitted ? (
                   <ActionIconButton action="commencer"
                     onClick={() => { setEvalStarted(true); setEvalTimeLeft(300); }} />
                 ) : !evalSubmitted ? (
