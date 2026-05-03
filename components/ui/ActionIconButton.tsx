@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-export type ActionKind = "valider" | "controler" | "recommencer";
+export type ActionKind = "valider" | "controler" | "recommencer" | "commencer";
 
 function ValidateIcon() {
   return (
@@ -31,6 +31,14 @@ function RestartIcon() {
   );
 }
 
+function PlayIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M8 5v14l11-7z" />
+    </svg>
+  );
+}
+
 const config: Record<ActionKind, { label: string; className: string; Icon: () => React.JSX.Element }> = {
   valider: {
     label: "Valider",
@@ -46,6 +54,11 @@ const config: Record<ActionKind, { label: string; className: string; Icon: () =>
     label: "Recommencer",
     className: "bg-zinc-100 hover:bg-zinc-200 text-zinc-500 shadow-sm dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:text-zinc-300",
     Icon: RestartIcon,
+  },
+  commencer: {
+    label: "Commencer",
+    className: "bg-green-500 hover:bg-green-600 text-white shadow-sm shadow-green-200 dark:shadow-green-900",
+    Icon: PlayIcon,
   },
 };
 

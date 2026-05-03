@@ -76,6 +76,12 @@ function renderBold(text: string): React.ReactNode {
   return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part);
 }
 
+function formatTime(secs: number): string {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
 function shuffle<T>(arr: T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
@@ -1113,6 +1119,26 @@ export function A1ModuleContent() {
   const [evalGrade, setEvalGrade] = useState<number | null>(null);
   const [evalSubmitted, setEvalSubmitted] = useState(false);
 
+  // Timer évaluation
+  const [evalStarted, setEvalStarted] = useState(false);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const evalAutoSubmitRef = useRef<(() => void) | null>(null);
+
+  useEffect(() => {
+    if (!evalStarted || evalSubmitted || evalTimeLeft === null || evalTimeLeft <= 0) return;
+    const id = setTimeout(() => setEvalTimeLeft(t => Math.max(0, (t ?? 1) - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [evalStarted, evalSubmitted, evalTimeLeft]);
+
+  useEffect(() => {
+    if (evalTimeLeft !== 0 || evalSubmitted) return;
+    evalAutoSubmitRef.current?.();
+  }, [evalTimeLeft, evalSubmitted]);
+
+  useEffect(() => {
+    if (step !== "eval") { setEvalStarted(false); setEvalTimeLeft(null); }
+  }, [step]);
+
   // Niveau de validation (chargé depuis localStorage)
   const [level, setCurrentLevel] = useState<LevelKey>("base");
   useEffect(() => {
@@ -1145,6 +1171,30 @@ export function A1ModuleContent() {
   const lesson = MATH_A1_LESSONS[activeIdx];
   if (!lesson) return null;
 
+  // Items et logique de soumission de l'évaluation (utilisés par le timer)
+  const evalItems_curr = lesson.submoduleId === "A1-1" ? evalItems : (lesson.exercises as EvalItem[]);
+  const evalTotalPts = evalItems_curr.length;
+  evalAutoSubmitRef.current = () => {
+    if (evalSubmitted) return;
+    const results: Record<string, boolean> = {};
+    let correct = 0;
+    for (const ex of evalItems_curr) {
+      const ok = answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable);
+      results[ex.id] = ok;
+      if (ok) correct++;
+    }
+    const grade = linearSwissGrade(correct, evalTotalPts);
+    setEvalResults(results);
+    setEvalGrade(grade);
+    setEvalSubmitted(true);
+    setEvalStarted(false);
+    if (grade >= passingGrade) {
+      const prog = loadProgress();
+      saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, correct, evalTotalPts, grade));
+      setSubmoduleAlreadyPassed(true);
+    }
+  };
+
   const theoryFr = pickTheoryFrench(lesson.theory);
   const pivotBody = pickTheoryPivotTranslation(pivot, lesson.theory);
   const introPivotBlock = lesson.theory.readAloud?.introPivot?.[pivot];
@@ -1168,6 +1218,8 @@ export function A1ModuleContent() {
     setEvalResults({});
     setEvalGrade(null);
     setEvalSubmitted(false);
+    setEvalStarted(false);
+    setEvalTimeLeft(null);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); }
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1876,7 +1928,7 @@ export function A1ModuleContent() {
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded py-1.5 text-sm font-bold border transition-colors ${isCorrect ? "border-green-400 bg-green-100 text-green-700 dark:bg-green-950/40" : isWrong ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-950/40" : isSelected ? "border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                          className={`w-16 rounded py-1.5 text-sm font-bold transition-colors ${isCorrect ? "border-2 border-green-500 bg-green-100 text-green-700 ring-2 ring-green-200 dark:bg-green-950/40 dark:ring-green-900" : isWrong ? "border border-red-400 bg-red-100 text-red-600 line-through dark:bg-red-950/40" : isSelected ? "border border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "border border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
                           {c}
                         </button>
                       );
@@ -1933,7 +1985,7 @@ export function A1ModuleContent() {
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
                       className={
                         ex10Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex10Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        ex10Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -1991,7 +2043,7 @@ export function A1ModuleContent() {
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex11Validated}
                       className={
                         ex11Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex11Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        ex11Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2044,7 +2096,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
                       className={
                         ex12Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex12Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        ex12Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2096,7 +2148,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
                       className={
                         ex13Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex13Validated && result === false ? "!bg-red-50 !border-red-400 dark:!bg-red-950/20" :
+                        ex13Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2121,16 +2173,25 @@ export function A1ModuleContent() {
       )}
 
       {/* ── Évaluation sous-module ──────────────────────────────────────────── */}
-      {step === "eval" && (() => {
-        const items = lesson.submoduleId === "A1-1" ? evalItems : (lesson.exercises as EvalItem[]);
-        const totalPts = items.length;
-        return (
+      {step === "eval" && (
           <AppCard
             variant="elevated"
             header={
-              <div>
-                <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Évaluation — {lesson.submoduleCode}</p>
-                <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Évaluation — {lesson.submoduleCode}</p>
+                  <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
+                </div>
+                {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
+                  <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
+                    evalTimeLeft < 60
+                      ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
+                      : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+                  }`}>
+                    <span aria-hidden>⏱</span>
+                    <span>{formatTime(evalTimeLeft)}</span>
+                  </div>
+                )}
               </div>
             }
           >
@@ -2146,8 +2207,18 @@ export function A1ModuleContent() {
               ) : null}
             </div>
 
-            <div className="space-y-3">
-              {items.map((ex, i) => {
+            {/* ── Écran de démarrage (avant Commencer) ── */}
+            {!evalStarted && !evalSubmitted && !submoduleAlreadyPassed && (
+              <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
+                <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-alg)]">5:00</p>
+                <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
+                <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+              </div>
+            )}
+
+            {/* ── Exercices (visibles après Commencer ou si déjà validé) ── */}
+            {(evalStarted || evalSubmitted || submoduleAlreadyPassed) && <div className="space-y-3">
+              {evalItems_curr.map((ex, i) => {
                 const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
 
                 const header = i === 0 ? (
@@ -2257,7 +2328,7 @@ export function A1ModuleContent() {
                   </div>
                 );
               })}
-            </div>
+            </div>}
 
             {evalSubmitted && evalGrade !== null ? (
               <div className={`mt-4 rounded-[var(--radius-md)] border p-4 text-center ${
@@ -2268,7 +2339,7 @@ export function A1ModuleContent() {
                 <p className="text-3xl font-bold text-[var(--color-text-primary)]">
                   {evalGrade.toFixed(1)}<span className="text-base font-normal text-[var(--color-text-secondary)]">/6</span>
                   <span className="ml-3 text-lg font-semibold text-[var(--color-text-secondary)]">
-                    ({Object.values(evalResults).filter(Boolean).length}/{totalPts} pts)
+                    ({Object.values(evalResults).filter(Boolean).length}/{evalTotalPts} pts)
                   </span>
                 </p>
                 <p className="mt-1 text-sm font-medium">
@@ -2282,36 +2353,21 @@ export function A1ModuleContent() {
             <div className="mt-6 flex items-center justify-between">
               <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
               <div className="flex gap-2">
-                {!evalSubmitted ? (
-                  <ActionIconButton
-                    action="valider"
-                    onClick={() => {
-                      const results: Record<string, boolean> = {};
-                      let correct = 0;
-                      for (const ex of items) {
-                        const ok = answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable);
-                        results[ex.id] = ok;
-                        if (ok) correct++;
-                      }
-                      const grade = linearSwissGrade(correct, totalPts);
-                      setEvalResults(results);
-                      setEvalGrade(grade);
-                      setEvalSubmitted(true);
-                      if (grade >= passingGrade) {
-                        const prog = loadProgress();
-                        saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, correct, totalPts, grade));
-                        setSubmoduleAlreadyPassed(true);
-                      }
-                    }}
-                  />
+                {!evalStarted && !evalSubmitted && !submoduleAlreadyPassed ? (
+                  <ActionIconButton action="commencer"
+                    onClick={() => { setEvalStarted(true); setEvalTimeLeft(300); }} />
+                ) : !evalSubmitted ? (
+                  <ActionIconButton action="valider"
+                    onClick={() => evalAutoSubmitRef.current?.()} />
                 ) : evalGrade !== null && evalGrade < passingGrade ? (
-                  <ActionIconButton
-                    action="recommencer"
+                  <ActionIconButton action="recommencer"
                     onClick={() => {
                       setEvalAnswers({});
                       setEvalResults({});
                       setEvalGrade(null);
                       setEvalSubmitted(false);
+                      setEvalStarted(false);
+                      setEvalTimeLeft(null);
                       if (lesson.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
                     }}
                   />
@@ -2326,8 +2382,7 @@ export function A1ModuleContent() {
               </AppButton>
             </div>
           </AppCard>
-        );
-      })()}
+      )}
 
       {/* ── Exercice 3 — Écrire les dizaines ────────────────────────────────── */}
       {step === "ex3" && (
