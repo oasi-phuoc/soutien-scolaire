@@ -477,8 +477,8 @@ function SvgDizaineH({ s = 8 }: { s?: number }) {
 // ─── Ex12 & Ex13 — cubes (images réelles) ────────────────────────────────────
 
 const DECOMPOSE_IMAGES = [
-  "cubes-30", "cubes-35", "cubes-42", "cubes-60",
-  "cubes-dec-20", "cubes-dec-27", "cubes-dec-46",
+  "cubes-dec-20", "cubes-dec-27", "cubes-dec-30", "cubes-dec-35",
+  "cubes-dec-42", "cubes-dec-46", "cubes-dec-60",
 ];
 
 const ASSEMBLE_IMAGES = [
