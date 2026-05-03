@@ -1986,7 +1986,7 @@ export function A1ModuleContent() {
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
                       className={
                         ex10Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex10Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
+                        ex10Validated && result === false ? "" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2044,7 +2044,7 @@ export function A1ModuleContent() {
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex11Validated}
                       className={
                         ex11Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex11Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
+                        ex11Validated && result === false ? "" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2097,7 +2097,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
                       className={
                         ex12Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex12Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
+                        ex12Validated && result === false ? "" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2149,7 +2149,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
                       className={
                         ex13Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex13Validated && result === false ? "!bg-red-50 dark:!bg-red-950/20" :
+                        ex13Validated && result === false ? "" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
