@@ -474,7 +474,12 @@ function SvgDizaineH({ s = 8 }: { s?: number }) {
   );
 }
 
-// ─── Ex12 & Ex13 — assemblages de cubes (images réelles) ─────────────────────
+// ─── Ex12 & Ex13 — cubes (images réelles) ────────────────────────────────────
+
+const DECOMPOSE_IMAGES = [
+  "cubes-30", "cubes-35", "cubes-42", "cubes-60",
+  "cubes-dec-20", "cubes-dec-27", "cubes-dec-46",
+];
 
 const ASSEMBLE_IMAGES = [
   "cubes-14", "cubes-19", "cubes-30", "cubes-35", "cubes-44",
@@ -484,14 +489,14 @@ const ASSEMBLE_IMAGES = [
 
 type Ex12Question = { src: string; answer: number };
 
-function pickAssembleImage(exclude?: string): Ex12Question {
-  const pool = exclude ? ASSEMBLE_IMAGES.filter(n => n !== exclude) : ASSEMBLE_IMAGES;
+function pickImage(pool: string[], folder: string): Ex12Question {
   const name = pool[Math.floor(Math.random() * pool.length)]!;
-  return { src: `/images/cubes/assemble/${name}.png`, answer: parseInt(name.split("-")[1]!, 10) };
+  const answer = parseInt(name.split("-").at(-1)!, 10);
+  return { src: `/images/cubes/${folder}/${name}.png`, answer };
 }
 
-function generateEx12(): Ex12Question[] { return [pickAssembleImage()]; }
-function generateEx13(): Ex12Question[] { return [pickAssembleImage()]; }
+function generateEx12(): Ex12Question[] { return [pickImage(DECOMPOSE_IMAGES, "decompose")]; }
+function generateEx13(): Ex12Question[] { return [pickImage(ASSEMBLE_IMAGES, "assemble")]; }
 
 // ─── Ex10 — comptage blocs éparpillés (centaines + dizaines + unités) ────────
 
