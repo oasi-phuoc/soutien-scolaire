@@ -297,29 +297,37 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
       {
         id: "a13-1",
         promptFr: "Quel nombre entier est juste après 899 ?",
-        promptPivot: {
-          en: "Which whole number comes right after 899?",
-        },
+        promptPivot: { en: "Which whole number comes right after 899?" },
         type: "number",
         acceptable: ["900"],
       },
       {
         id: "a13-2",
         promptFr: "Quel nombre est entre 12 et 14 ?",
-        promptPivot: {
-          en: "Which number is between 12 and 14?",
-        },
+        promptPivot: { en: "Which number is between 12 and 14?" },
         type: "number",
         acceptable: ["13"],
       },
       {
         id: "a13-3",
         promptFr: "On saute de 100 en 100 : 300, 400, ?",
-        promptPivot: {
-          en: "Count by hundreds: 300, 400, ?",
-        },
+        promptPivot: { en: "Count by hundreds: 300, 400, ?" },
         type: "number",
         acceptable: ["500"],
+      },
+      {
+        id: "a13-4",
+        promptFr: "Le nombre 46 est-il pair ou impair ? (écris pair ou impair)",
+        promptPivot: { en: "Is 46 even or odd? (write even or odd)" },
+        type: "short_text",
+        acceptable: ["pair", "even"],
+      },
+      {
+        id: "a13-5",
+        promptFr: "Le nombre 35 est-il pair ou impair ? (écris pair ou impair)",
+        promptPivot: { en: "Is 35 even or odd? (write even or odd)" },
+        type: "short_text",
+        acceptable: ["impair", "odd"],
       },
     ],
   },
