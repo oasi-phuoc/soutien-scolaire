@@ -189,31 +189,21 @@ const _U = (n: number) => `/audio/nombres/unité/${n}.mp3`;
 const _S = (n: number) => `/audio/nombres/spécial/${n}.mp3`;
 const _ET = () => `/audio/nombres/spécial/et.mp3`;
 
-function generateEx6Composition(): NumberComposition {
-  const c = shuffle([100, 200, 300, 400, 500, 600, 700, 800, 900])[0]!;
-  const struct = Math.floor(Math.random() * 5);
+const SPECIAL_NUMS = [
+  12,13,14,15,16,17,18,19,
+  21,22,23,24,25,26,27,28,29,
+  31,32,33,34,35,36,37,38,39,
+  41,42,43,44,45,46,47,48,49,
+  51,52,53,54,55,56,57,58,59,
+  61,62,63,64,65,66,67,68,69,
+  71,72,73,74,75,76,77,78,79,
+  81,82,83,84,85,86,87,88,89,
+  91,92,93,94,95,96,97,98,99,
+];
 
-  if (struct === 1) {
-    const s = shuffle([11, 12, 13, 14, 15, 16])[0]!;
-    return { value: c + s, clips: [_C(c), _S(s)] };
-  }
-  if (struct === 2) {
-    const d = shuffle([10, 20, 30, 40, 50, 60, 70, 80, 90])[0]!;
-    return { value: c + d, clips: [_C(c), _D(d)] };
-  }
-  if (struct === 3) {
-    const u = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0]!;
-    return { value: c + u, clips: [_C(c), _U(u)] };
-  }
-  if (struct === 4) {
-    const d = shuffle([20, 30, 40, 50, 60, 70, 80, 90])[0]!;
-    const u = shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0]!;
-    const clips = [_C(c), _D(d)];
-    if (u === 1) clips.push(_ET());
-    clips.push(_U(u));
-    return { value: c + d + u, clips };
-  }
-  return { value: c, clips: [_C(c)] };
+function generateEx6Composition(): NumberComposition {
+  const n = shuffle(SPECIAL_NUMS)[0]!;
+  return { value: n, clips: [_S(n)] };
 }
 
 function generateEx6Numbers(): NumberComposition[] {
@@ -261,7 +251,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13", Partial<Record<PivotCode, string>>> = {
+const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16", Partial<Record<PivotCode, string>>> = {
   ex1: {
     en: "Follow the stroke to write the digits.",
     ar: "اتبع الخط لكتابة الأرقام.",
@@ -353,6 +343,27 @@ const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex
     uk: "Порахуйте, скільки кубиків.",
     ti: "ክንደይ ኪዩብታት ከምዘሎ ቁጸር።",
   },
+  ex14: {
+    en: "Choose the tag(s) showing the same number.",
+    ar: "اختر البطاقة (البطاقات) التي تُظهر نفس العدد.",
+    fa: "برچسب‌هایی را انتخاب کنید که همان عدد را نشان می‌دهند.",
+    uk: "Виберіть ярлик(и) з однаковим числом.",
+    ti: "ናይ ሓደ ቁጽሪ ዝርዝር ምረጽ።",
+  },
+  ex15: {
+    en: "Complete the boxes following the arrows.",
+    ar: "أكمل الخانات باتباع الأسهم.",
+    fa: "جعبه‌ها را با دنبال کردن فلش‌ها کامل کنید.",
+    uk: "Заповніть клітинки, слідуючи стрілкам.",
+    ti: "ካብ ሕርሲ ዝሰዓቡ ናይ ቁጽሪ ኩርናዕታት ምልኣ።",
+  },
+  ex16: {
+    en: "Write the numbers indicated by the arrows on the number line.",
+    ar: "اكتب الأرقام التي تشير إليها الأسهم على المستقيم العددي.",
+    fa: "اعدادی که توسط فلش‌ها روی خط اعداد نشان داده شده‌اند را بنویسید.",
+    uk: "Запишіть числа, на які вказують стрілки на числовій прямій.",
+    ti: "ናይ ቁፅሪ መስመር ብኣኽናፍ ዝሕብሩ ቁጽርታት ጸሓፍ።",
+  },
 };
 
 // ─── Évaluation ───────────────────────────────────────────────────────────────
@@ -416,7 +427,7 @@ function generateA11EvalItems(): EvalItem[] {
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "eval";
+type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "ex14" | "ex15" | "ex16" | "eval";
 
 function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
@@ -426,7 +437,10 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
       : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
   }
   if (lesson.submoduleId === "A1-2") {
-    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "eval"];
+    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "eval"];
+  }
+  if (lesson.submoduleId === "A1-3") {
+    return ["theory", "eval", "ex16"];
   }
   return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
 }
@@ -503,6 +517,111 @@ function pickImage(pool: string[], folder: string): Ex12Question {
 
 function generateEx12(): Ex12Question[] { return [pickImage(DECOMPOSE_IMAGES, "decompose")]; }
 function generateEx13(): Ex12Question[] { return [pickImage(ASSEMBLE_IMAGES, "assemble")]; }
+
+// ─── Ex14 — appariement d'étiquettes ─────────────────────────────────────────
+
+type Ex14TagDef = { label: string; correct: boolean };
+type Ex14Question = { refNum: number; refDisplay: string; tags: Ex14TagDef[] };
+
+const EX14_POOL: Ex14Question[] = [
+  { refNum: 346, refDisplay: "346", tags: [
+    { label: "300 + 40 + 6", correct: true }, { label: "3 C + 4 D + 6 U", correct: true },
+    { label: "364", correct: false }, { label: "3 000 + 40 + 6", correct: false },
+  ]},
+  { refNum: 207, refDisplay: "207", tags: [
+    { label: "200 + 7", correct: true }, { label: "2 C + 7 U", correct: true },
+    { label: "270", correct: false }, { label: "2 000 + 7", correct: false },
+  ]},
+  { refNum: 560, refDisplay: "560", tags: [
+    { label: "500 + 60", correct: true }, { label: "5 C + 6 D", correct: true },
+    { label: "506", correct: false }, { label: "5 600", correct: false },
+  ]},
+  { refNum: 1003, refDisplay: "1 003", tags: [
+    { label: "1 000 + 3", correct: true }, { label: "1 M + 3 U", correct: true },
+    { label: "1 030", correct: false }, { label: "103", correct: false },
+  ]},
+  { refNum: 912, refDisplay: "912", tags: [
+    { label: "900 + 12", correct: true }, { label: "9 C + 1 D + 2 U", correct: true },
+    { label: "921", correct: false }, { label: "9 120", correct: false },
+  ]},
+  { refNum: 1010, refDisplay: "1 010", tags: [
+    { label: "1 000 + 10", correct: true }, { label: "1 M + 1 D", correct: true },
+    { label: "1 001", correct: false }, { label: "1 100", correct: false },
+  ]},
+  { refNum: 415, refDisplay: "415", tags: [
+    { label: "400 + 15", correct: true }, { label: "4 C + 1 D + 5 U", correct: true },
+    { label: "451", correct: false }, { label: "145", correct: false },
+  ]},
+  { refNum: 166, refDisplay: "166", tags: [
+    { label: "100 + 60 + 6", correct: true }, { label: "1 C + 6 D + 6 U", correct: true },
+    { label: "616", correct: false }, { label: "1 060", correct: false },
+  ]},
+];
+
+function generateEx14(): Ex14Question[] {
+  return shuffle(EX14_POOL).slice(0, 4).map(q => ({ ...q, tags: shuffle(q.tags) }));
+}
+
+// ─── Ex15 — chaîne de flèches ─────────────────────────────────────────────────
+
+type ArrowKind = "millier" | "centaine" | "dizaine";
+type ArrowDir = "right" | "left";
+interface Ex15Arrow { kind: ArrowKind; dir: ArrowDir }
+interface Ex15Box { value: number; blank: boolean }
+interface Ex15Question {
+  boxes: [Ex15Box, Ex15Box, Ex15Box];
+  arrows: [Ex15Arrow, Ex15Arrow];
+  colorTheme: "orange" | "sky" | "emerald";
+}
+
+function generateEx15(): Ex15Question[] {
+  const themes = ["orange", "sky", "emerald"] as const;
+  const kinds: ArrowKind[] = ["millier", "centaine", "dizaine"];
+  const steps: Record<ArrowKind, number> = { millier: 1000, centaine: 100, dizaine: 10 };
+  return themes.map(colorTheme => {
+    let mid = 5000, a1: Ex15Arrow = { kind: "centaine", dir: "right" }, a2: Ex15Arrow = { kind: "dizaine", dir: "right" };
+    let leftVal = 4900, rightVal = 5010;
+    for (let g = 0; g < 300; g++) {
+      const _a1: Ex15Arrow = { kind: kinds[Math.floor(Math.random() * 3)]!, dir: Math.random() < 0.5 ? "right" : "left" };
+      const _a2: Ex15Arrow = { kind: kinds[Math.floor(Math.random() * 3)]!, dir: Math.random() < 0.5 ? "right" : "left" };
+      const _mid = Math.floor(Math.random() * 7000) + 1500;
+      const _left = _a1.dir === "right" ? _mid - steps[_a1.kind] : _mid + steps[_a1.kind];
+      const _right = _a2.dir === "right" ? _mid + steps[_a2.kind] : _mid - steps[_a2.kind];
+      if (_left > 0 && _left <= 9999 && _right > 0 && _right <= 9999) {
+        mid = _mid; a1 = _a1; a2 = _a2; leftVal = _left; rightVal = _right; break;
+      }
+    }
+    return {
+      boxes: [{ value: leftVal, blank: true }, { value: mid, blank: false }, { value: rightVal, blank: true }] as [Ex15Box, Ex15Box, Ex15Box],
+      arrows: [a1, a2] as [Ex15Arrow, Ex15Arrow],
+      colorTheme,
+    };
+  });
+}
+
+// ─── Ex16 — droite numérique (A1.3) ──────────────────────────────────────────
+
+interface Ex16Line {
+  min: number; max: number;
+  arrows: [number, number];
+  color: "orange" | "sky" | "pink" | "green";
+}
+
+function generateEx16(): Ex16Line[] {
+  const ranges: Array<{ min: number; max: number; color: Ex16Line["color"] }> = [
+    { min: 0,  max: 30,  color: "orange" },
+    { min: 30, max: 50,  color: "sky"    },
+    { min: 50, max: 70,  color: "pink"   },
+    { min: 80, max: 100, color: "green"  },
+  ];
+  return ranges.map(({ min, max, color }) => {
+    const candidates: number[] = [];
+    for (let v = min + 1; v < max; v++) { if (v % 10 !== 0) candidates.push(v); }
+    const sh = shuffle(candidates);
+    const a1 = sh[0]!, a2 = sh[1]!;
+    return { min, max, arrows: [Math.min(a1, a2), Math.max(a1, a2)], color };
+  });
+}
 
 // ─── Ex10 — comptage blocs éparpillés (centaines + dizaines + unités) ────────
 
@@ -930,7 +1049,7 @@ function ExerciseRow({
         ? "border-[var(--color-border-default)]"
         : result
           ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-          : "border-red-400 bg-red-50 dark:bg-red-950/20"
+          : "border-[var(--color-border-default)]"
     }`}>
       <span className="w-10 shrink-0 text-center text-2xl font-bold tabular-nums text-[var(--color-accent-alg)]">
         {num}
@@ -942,7 +1061,7 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
           {result ? (
             <span className="text-sm font-medium text-green-600">{answer}</span>
           ) : (
@@ -1081,15 +1200,17 @@ export function A1ModuleContent() {
 
   const resetEx10 = () => { setEx10Questions(generateEx10()); setEx10Answers(Array(2).fill("")); setEx10Results(Array(2).fill(null)); setEx10Validated(false); };
 
-  // Ex11 — décomposition
+  // Ex11 — décomposition M/C/D/U
   const [ex11Questions, setEx11Questions] = useState<Ex11Question[]>(generateEx11);
-  const [ex11Answers, setEx11Answers] = useState<string[]>(Array(1).fill(""));
+  const [ex11Answers, setEx11Answers] = useState<Array<{m:string;c:string;d:string;u:string}>>(
+    Array(1).fill(null).map(() => ({m:"",c:"",d:"",u:""}))
+  );
   const [ex11Results, setEx11Results] = useState<(boolean|null)[]>(Array(1).fill(null));
   const [ex11Validated, setEx11Validated] = useState(false);
 
   const resetEx11 = () => {
     setEx11Questions(generateEx11());
-    setEx11Answers(Array(1).fill(""));
+    setEx11Answers(Array(1).fill(null).map(() => ({m:"",c:"",d:"",u:""})));
     setEx11Results(Array(1).fill(null));
     setEx11Validated(false);
   };
@@ -1108,6 +1229,68 @@ export function A1ModuleContent() {
   const [ex13Validated, setEx13Validated] = useState(false);
 
   const resetEx13 = () => { setEx13Questions(generateEx13()); setEx13Answers(Array(1).fill("")); setEx13Results(Array(1).fill(null)); setEx13Validated(false); };
+
+  // Ex14 — appariement d'étiquettes
+  const [ex14Questions, setEx14Questions] = useState<Ex14Question[]>(generateEx14);
+  const [ex14Selected, setEx14Selected] = useState<boolean[][]>(() =>
+    Array(4).fill(null).map(() => Array(4).fill(false))
+  );
+  const [ex14Validated, setEx14Validated] = useState(false);
+  const resetEx14 = () => {
+    setEx14Questions(generateEx14());
+    setEx14Selected(Array(4).fill(null).map(() => Array(4).fill(false)));
+    setEx14Validated(false);
+  };
+
+  // Ex15 — chaîne de flèches
+  const [ex15Questions, setEx15Questions] = useState<Ex15Question[]>(generateEx15);
+  const [ex15Answers, setEx15Answers] = useState<string[][]>(() =>
+    Array(3).fill(null).map(() => ["", "", ""])
+  );
+  const [ex15Results, setEx15Results] = useState<(boolean | null)[]>(Array(3).fill(null));
+  const [ex15Validated, setEx15Validated] = useState(false);
+  const resetEx15 = () => {
+    setEx15Questions(generateEx15());
+    setEx15Answers(Array(3).fill(null).map(() => ["", "", ""]));
+    setEx15Results(Array(3).fill(null));
+    setEx15Validated(false);
+  };
+
+  // Ex16 — droite numérique (A1.3)
+  const [ex16Lines, setEx16Lines] = useState<Ex16Line[]>(generateEx16);
+  const [ex16Answers, setEx16Answers] = useState<string[][]>(() =>
+    Array(4).fill(null).map(() => ["", ""])
+  );
+  const [ex16Results, setEx16Results] = useState<(boolean | null)[][]>(() =>
+    Array(4).fill(null).map(() => [null, null])
+  );
+  const [ex16Validated, setEx16Validated] = useState(false);
+  const resetEx16 = () => {
+    setEx16Lines(generateEx16());
+    setEx16Answers(Array(4).fill(null).map(() => ["", ""]));
+    setEx16Results(Array(4).fill(null).map(() => [null, null]));
+    setEx16Validated(false);
+  };
+
+  // A1.2 Évaluation — une question par exercice
+  const [a12EvalQ9, setA12EvalQ9] = useState<Ex9Question>(() => generateEx9()[0]!);
+  const [a12EvalQ9Sel, setA12EvalQ9Sel] = useState<number | null>(null);
+  const [a12EvalQ10, setA12EvalQ10] = useState<Ex10Question>(() => generateEx10()[0]!);
+  const [a12EvalQ10Ans, setA12EvalQ10Ans] = useState("");
+  const [a12EvalQ11, setA12EvalQ11] = useState<Ex11Question>(() => generateEx11()[0]!);
+  const [a12EvalQ11Ans, setA12EvalQ11Ans] = useState<{m:string;c:string;d:string;u:string}>({m:"",c:"",d:"",u:""});
+  const [a12EvalQ12, setA12EvalQ12] = useState<Ex12Question>(() => generateEx12()[0]!);
+  const [a12EvalQ12Ans, setA12EvalQ12Ans] = useState("");
+  const [a12EvalQ13, setA12EvalQ13] = useState<Ex12Question>(() => generateEx13()[0]!);
+  const [a12EvalQ13Ans, setA12EvalQ13Ans] = useState("");
+
+  const resetA12Eval = () => {
+    setA12EvalQ9(generateEx9()[0]!); setA12EvalQ9Sel(null);
+    setA12EvalQ10(generateEx10()[0]!); setA12EvalQ10Ans("");
+    setA12EvalQ11(generateEx11()[0]!); setA12EvalQ11Ans({m:"",c:"",d:"",u:""});
+    setA12EvalQ12(generateEx12()[0]!); setA12EvalQ12Ans("");
+    setA12EvalQ13(generateEx13()[0]!); setA12EvalQ13Ans("");
+  };
 
   // Évaluation sous-module
   const [evalItems, setEvalItems] = useState<EvalItem[]>(() => {
@@ -1172,11 +1355,32 @@ export function A1ModuleContent() {
   if (!lesson) return null;
 
   // Items et logique de soumission de l'évaluation (utilisés par le timer)
-  const hasTimer = lesson.submoduleId === "A1-1";
   const evalItems_curr = lesson.submoduleId === "A1-1" ? evalItems : (lesson.exercises as EvalItem[]);
-  const evalTotalPts = evalItems_curr.length;
+  const evalTotalPts = lesson.submoduleId === "A1-2" ? 10 : evalItems_curr.length;
   evalAutoSubmitRef.current = () => {
     if (evalSubmitted) return;
+    if (lesson.submoduleId === "A1-2") {
+      const q9val = a12EvalQ9.tens * 10 + a12EvalQ9.units;
+      const q10val = a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u;
+      const r9  = a12EvalQ9Sel === q9val;
+      const r10 = parseInt(a12EvalQ10Ans) === q10val;
+      const r11 = parseInt(a12EvalQ11Ans.m) === a12EvalQ11.m * 1000 && parseInt(a12EvalQ11Ans.c) === a12EvalQ11.c * 100 && parseInt(a12EvalQ11Ans.d) === a12EvalQ11.d * 10 && parseInt(a12EvalQ11Ans.u) === a12EvalQ11.u;
+      const r12 = parseInt(a12EvalQ12Ans) === a12EvalQ12.answer;
+      const r13 = parseInt(a12EvalQ13Ans) === a12EvalQ13.answer;
+      const correct = [r9, r10, r11, r12, r13].filter(Boolean).length;
+      const pts = correct * 2;
+      const grade = linearSwissGrade(pts, 10);
+      setEvalResults({ q9: r9, q10: r10, q11: r11, q12: r12, q13: r13 });
+      setEvalGrade(grade);
+      setEvalSubmitted(true);
+      setEvalStarted(false);
+      if (grade >= passingGrade) {
+        const prog = loadProgress();
+        saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, pts, 10, grade));
+        setSubmoduleAlreadyPassed(true);
+      }
+      return;
+    }
     const results: Record<string, boolean> = {};
     let correct = 0;
     for (const ex of evalItems_curr) {
@@ -1222,7 +1426,8 @@ export function A1ModuleContent() {
     setEvalStarted(false);
     setEvalTimeLeft(null);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
-    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetA12Eval(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx16(); }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -1499,11 +1704,11 @@ export function A1ModuleContent() {
                     ? "border-[var(--color-border-default)]"
                     : result
                       ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-                      : "border-red-400 bg-red-50 dark:bg-red-950/20"
+                      : "border-[var(--color-border-default)]"
                 }`}>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex4Validated && result !== null ? (
-                    <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
                       {result ? (
                         <span className="text-sm font-medium text-green-600">{ex4Answers[i]}</span>
                       ) : (
@@ -1571,11 +1776,11 @@ export function A1ModuleContent() {
                     ? "border-[var(--color-border-default)]"
                     : result
                       ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-                      : "border-red-400 bg-red-50 dark:bg-red-950/20"
+                      : "border-[var(--color-border-default)]"
                 }`}>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex5Validated && result !== null ? (
-                    <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
                       {result ? (
                         <span className="text-sm font-medium text-green-600">{ex5Answers[i]}</span>
                       ) : (
@@ -1621,7 +1826,7 @@ export function A1ModuleContent() {
           header={
             <div>
               <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 6</p>
-              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Dictée — centaines</h2>
+              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Dictée — nombres spéciaux</h2>
             </div>
           }
         >
@@ -1643,11 +1848,11 @@ export function A1ModuleContent() {
                     ? "border-[var(--color-border-default)]"
                     : result
                       ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-                      : "border-red-400 bg-red-50 dark:bg-red-950/20"
+                      : "border-[var(--color-border-default)]"
                 }`}>
-                  <SequentialAudioButton clips={comp.clips} />
+                  <AudioPlayButton src={comp.clips[0]!} />
                   {ex6Validated && result !== null ? (
-                    <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
                       {result ? (
                         <span className="text-sm font-medium text-green-600">{ex6Answers[i]}</span>
                       ) : (
@@ -1742,7 +1947,7 @@ export function A1ModuleContent() {
                       if (state === "fill") {
                         if (ex7Validated && result !== null) {
                           return (
-                            <td key={u} className={`h-[41px] w-[41px] p-0 text-center ${result ? "ring-2 ring-inset ring-green-400 bg-green-50 dark:bg-green-950/20" : "ring-2 ring-inset ring-red-400 bg-red-50 dark:bg-red-950/20"}`}>
+                            <td key={u} className={`h-[41px] w-[41px] p-0 text-center ${result ? "ring-2 ring-inset ring-green-400 bg-green-50 dark:bg-green-950/20" : "ring-1 ring-inset ring-red-400 bg-[var(--color-bg-primary)]"}`}>
                               <div className="flex h-[41px] w-[41px] items-center justify-center">
                                 {result
                                   ? <span className="text-sm font-medium tabular-nums text-green-600">{ex7Answers[key] ?? ""}</span>
@@ -1906,7 +2111,7 @@ export function A1ModuleContent() {
               const sel = ex9Selected[i] ?? null;
               const correct = ex9Validated ? sel === value : null;
               return (
-                <div key={i} className={`rounded-[var(--radius-md)] border transition-colors ${correct === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : correct === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                <div key={i} className={`rounded-[var(--radius-md)] border transition-colors ${correct === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : correct === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
                   {/* Zone d'affichage, blocs centrés, largeur complète */}
                   <div className="flex min-h-28 w-full flex-col items-center justify-center gap-1 rounded-t px-3 py-2">
                     {q.tens > 0 && (
@@ -1929,7 +2134,7 @@ export function A1ModuleContent() {
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded py-1.5 text-sm font-bold transition-colors ${isCorrect ? "border-2 border-green-500 bg-green-100 text-green-700 ring-2 ring-green-200 dark:bg-green-950/40 dark:ring-green-900" : isWrong ? "border border-red-400 bg-red-100 text-red-600 line-through dark:bg-red-950/40" : isSelected ? "border border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "border border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                          className={`w-16 rounded py-1.5 text-sm transition-colors ${isCorrect && isSelected ? "border-2 border-green-500 bg-green-100 font-bold text-green-700 ring-2 ring-green-200 dark:bg-green-950/40 dark:ring-green-900" : isCorrect ? "border border-zinc-200 bg-white font-bold text-red-600 dark:border-zinc-700 dark:bg-zinc-900" : isWrong ? "border border-zinc-200 bg-white font-normal text-zinc-800 line-through decoration-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200" : isSelected ? "font-bold border border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "font-bold border border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
                           {c}
                         </button>
                       );
@@ -1971,7 +2176,7 @@ export function A1ModuleContent() {
               const total = q.h * 100 + q.d * 10 + q.u;
               const result = ex10Results[qi] ?? null;
               return (
-                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
                   <div className="relative overflow-hidden rounded" style={{width:"100%",height:q.canvasH}}>
                     {q.positions.map((pos, pi) => (
                       <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -1986,7 +2191,7 @@ export function A1ModuleContent() {
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
                       className={
                         ex10Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex10Validated && result === false ? "" :
+                        ex10Validated && result === false ? "!border-red-400" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2026,10 +2231,9 @@ export function A1ModuleContent() {
           </div>
           <div className="space-y-4">
             {ex11Questions.map((q, qi) => {
-              const total = q.m * 1000 + q.c * 100 + q.d * 10 + q.u;
               const result = ex11Results[qi] ?? null;
               return (
-                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
                   <div className="relative overflow-hidden rounded" style={{width:"100%", height:q.canvasH}}>
                     {q.positions.map((pos, pi) => (
                       <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -2037,16 +2241,44 @@ export function A1ModuleContent() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-2">
-                    <AppInput label="" id={`ex11-${qi}`}
-                      value={ex11Validated && result === false ? String(total) : (ex11Answers[qi] ?? "")}
-                      onChange={e => { if (!ex11Validated) { const n = [...ex11Answers]; n[qi] = e.target.value; setEx11Answers(n); } }}
-                      placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex11Validated}
-                      className={
-                        ex11Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex11Validated && result === false ? "" :
-                        "!bg-blue-50 dark:!bg-blue-950/30"
-                      } />
+                  <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+                    <span className="shrink-0">=</span>
+                    {(() => {
+                      const ans = ex11Answers[qi] ?? {m:"",c:"",d:"",u:""};
+                      const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
+                      if (ex11Validated && result !== null) {
+                        const mOk = parseInt(ans.m) === q.m * 1000;
+                        const cOk = parseInt(ans.c) === q.c * 100;
+                        const dOk = parseInt(ans.d) === q.d * 10;
+                        const uOk = parseInt(ans.u) === q.u;
+                        return (
+                          <>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${mOk ? "border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20" : "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"}`}>{mOk ? ans.m : String(q.m * 1000)}</span>
+                            <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${cOk ? "border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20" : "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"}`}>{cOk ? ans.c : String(q.c * 100)}</span>
+                            <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${dOk ? "border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20" : "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"}`}>{dOk ? ans.d : String(q.d * 10)}</span>
+                            <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${uOk ? "border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20" : "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"}`}>{uOk ? ans.u : String(q.u)}</span>
+                          </>
+                        );
+                      }
+                      return (
+                        <>
+                          <input className={inputCls} placeholder="M×1000" inputMode="numeric" autoComplete="off" value={ans.m}
+                            onChange={e => { const n = ex11Answers.map((a, i) => i === qi ? {...a, m: e.target.value} : a); setEx11Answers(n); }} />
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <input className={inputCls} placeholder="C×100" inputMode="numeric" autoComplete="off" value={ans.c}
+                            onChange={e => { const n = ex11Answers.map((a, i) => i === qi ? {...a, c: e.target.value} : a); setEx11Answers(n); }} />
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <input className={inputCls} placeholder="D×10" inputMode="numeric" autoComplete="off" value={ans.d}
+                            onChange={e => { const n = ex11Answers.map((a, i) => i === qi ? {...a, d: e.target.value} : a); setEx11Answers(n); }} />
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <input className={inputCls} placeholder="U×1" inputMode="numeric" autoComplete="off" value={ans.u}
+                            onChange={e => { const n = ex11Answers.map((a, i) => i === qi ? {...a, u: e.target.value} : a); setEx11Answers(n); }} />
+                        </>
+                      );
+                    })()}
                   </div>
                 </div>
               );
@@ -2057,7 +2289,7 @@ export function A1ModuleContent() {
             <div className="flex gap-2">
               <ActionIconButton action="valider" disabled={ex11Validated}
                 onClick={() => {
-                  const res = ex11Questions.map((q, qi) => parseInt(ex11Answers[qi] ?? "", 10) === q.m*1000 + q.c*100 + q.d*10 + q.u);
+                  const res = ex11Questions.map((q, qi) => { const a = ex11Answers[qi] ?? {m:"",c:"",d:"",u:""}; return parseInt(a.m) === q.m*1000 && parseInt(a.c) === q.c*100 && parseInt(a.d) === q.d*10 && parseInt(a.u) === q.u; });
                   setEx11Results(res);
                   setEx11Validated(true);
                 }} />
@@ -2086,7 +2318,7 @@ export function A1ModuleContent() {
             {ex12Questions.map((q, qi) => {
               const result = ex12Results[qi] ?? null;
               return (
-                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
                   <div className="flex items-center justify-center py-3">
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
                   </div>
@@ -2097,7 +2329,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
                       className={
                         ex12Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex12Validated && result === false ? "" :
+                        ex12Validated && result === false ? "!border-red-400" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2138,7 +2370,7 @@ export function A1ModuleContent() {
             {ex13Questions.map((q, qi) => {
               const result = ex13Results[qi] ?? null;
               return (
-                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)]"}`}>
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
                   <div className="flex items-center justify-center py-3">
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
                   </div>
@@ -2149,7 +2381,7 @@ export function A1ModuleContent() {
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
                       className={
                         ex13Validated && result === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" :
-                        ex13Validated && result === false ? "" :
+                        ex13Validated && result === false ? "!border-red-400" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -2167,6 +2399,173 @@ export function A1ModuleContent() {
                   setEx13Validated(true);
                 }} />
               <ActionIconButton action="recommencer" onClick={resetEx13} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 14 — Appariement d'étiquettes ──────────────────────────── */}
+      {step === "ex14" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 14</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez le(s) étiquette(s) avec le même nombre</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex14[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-5">
+            {ex14Questions.map((q, qi) => (
+              <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                <div className="mb-3 flex justify-center">
+                  <div className="rounded-full border-2 border-rose-300 bg-rose-100 px-8 py-2 text-2xl font-bold tabular-nums text-rose-700 dark:bg-rose-950/30 dark:text-rose-300">
+                    {q.refDisplay}
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  {q.tags.map((tag, ti) => {
+                    const isSelected = ex14Selected[qi]?.[ti] ?? false;
+                    const tagPastel = [
+                      "border-yellow-300 bg-yellow-50 text-yellow-800 dark:bg-yellow-950/20 dark:text-yellow-200",
+                      "border-sky-300 bg-sky-50 text-sky-800 dark:bg-sky-950/20 dark:text-sky-200",
+                      "border-emerald-300 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/20 dark:text-emerald-200",
+                      "border-purple-300 bg-purple-50 text-purple-800 dark:bg-purple-950/20 dark:text-purple-200",
+                    ][ti % 4]!;
+                    let cls = tagPastel;
+                    if (ex14Validated) {
+                      if (tag.correct && isSelected) cls = "border-green-500 bg-green-100 text-green-800 dark:bg-green-950/30 dark:text-green-200";
+                      else if (tag.correct && !isSelected) cls = "border-amber-400 bg-amber-100 text-amber-800 dark:bg-amber-950/30 dark:text-amber-200";
+                      else if (!tag.correct && isSelected) cls = "border-red-400 bg-red-100 text-red-700 dark:bg-red-950/30 dark:text-red-300";
+                    } else if (isSelected) {
+                      cls = "border-teal-400 bg-teal-50 text-teal-800 dark:bg-teal-950/20 dark:text-teal-200";
+                    }
+                    return (
+                      <button key={ti} type="button"
+                        onClick={() => {
+                          if (ex14Validated) return;
+                          setEx14Selected(prev => prev.map((row, ri) =>
+                            ri === qi ? row.map((v, vi) => vi === ti ? !v : v) : row
+                          ));
+                        }}
+                        className={`flex items-center gap-2 rounded-[var(--radius-md)] border-2 p-2.5 text-sm text-left transition-colors ${cls}`}>
+                        <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${isSelected ? "border-current bg-current" : "border-current/40"}`}>
+                          {isSelected && <span className="h-2 w-2 rounded-full bg-white" />}
+                        </span>
+                        <span className="font-medium">{tag.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex14Validated}
+                onClick={() => setEx14Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx14} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 15 — Chaîne de flèches ─────────────────────────────────── */}
+      {step === "ex15" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 15</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Complétez les cases</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Suivez les flèches pour trouver les nombres manquants.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex15[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex15[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="mb-3 flex flex-wrap gap-4 text-xs font-medium">
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
+            <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
+          </div>
+          <div className="space-y-4">
+            {ex15Questions.map((q, qi) => {
+              const result = ex15Results[qi] ?? null;
+              const themeCls = {
+                orange: "border-orange-200 bg-orange-50 dark:bg-orange-950/20",
+                sky: "border-sky-200 bg-sky-50 dark:bg-sky-950/20",
+                emerald: "border-emerald-200 bg-emerald-50 dark:bg-emerald-950/20",
+              }[q.colorTheme];
+              const arrowColorCls = (k: ArrowKind) => ({ millier: "text-blue-600 dark:text-blue-400", centaine: "text-red-500 dark:text-red-400", dizaine: "text-emerald-600 dark:text-emerald-400" }[k]);
+              const arrowLabel = (k: ArrowKind) => ({ millier: "+1 000", centaine: "+100", dizaine: "+10" }[k]);
+              const containerCls = result === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : result === false ? "border-[var(--color-border-default)]" : themeCls;
+              return (
+                <div key={qi} className={`rounded-[var(--radius-md)] border p-4 transition-colors ${containerCls}`}>
+                  <div className="flex items-center justify-center gap-2">
+                    {q.boxes.map((box, bi) => (
+                      <React.Fragment key={bi}>
+                        {bi > 0 && (() => {
+                          const arr = q.arrows[bi - 1]!;
+                          return (
+                            <div className={`flex flex-col items-center gap-0 min-w-[52px] ${arrowColorCls(arr.kind)}`}>
+                              <span className="text-[11px] font-bold leading-none">{arrowLabel(arr.kind)}</span>
+                              <span className="text-xl font-bold leading-none">{arr.dir === "right" ? "→" : "←"}</span>
+                            </div>
+                          );
+                        })()}
+                        {box.blank ? (
+                          ex15Validated ? (
+                            <div className={`flex h-12 w-20 items-center justify-center rounded-[var(--radius-md)] border text-sm font-bold tabular-nums ${
+                              parseInt(ex15Answers[qi]?.[bi] ?? "") === box.value
+                                ? "border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20"
+                                : "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
+                            }`}>
+                              {parseInt(ex15Answers[qi]?.[bi] ?? "") === box.value ? (ex15Answers[qi]?.[bi] ?? "") : String(box.value)}
+                            </div>
+                          ) : (
+                            <input type="text" inputMode="numeric"
+                              value={ex15Answers[qi]?.[bi] ?? ""}
+                              onChange={e => {
+                                setEx15Answers(prev => prev.map((row, ri) =>
+                                  ri === qi ? row.map((v, vi) => vi === bi ? e.target.value : v) : row
+                                ));
+                              }}
+                              className="h-12 w-20 rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                            />
+                          )
+                        ) : (
+                          <div className="flex h-12 w-20 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
+                            {box.value.toLocaleString("fr-CH")}
+                          </div>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex15Validated}
+                onClick={() => {
+                  const res = ex15Questions.map((q, qi) =>
+                    q.boxes.every((box, bi) =>
+                      !box.blank || parseInt(ex15Answers[qi]?.[bi] ?? "") === box.value
+                    )
+                  );
+                  setEx15Results(res);
+                  setEx15Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx15} />
             </div>
             <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
@@ -2217,8 +2616,133 @@ export function A1ModuleContent() {
               </div>
             )}
 
-            {/* ── Exercices (visibles après Commencer ou si déjà validé) ── */}
-            {(evalStarted || evalSubmitted) && <div className="space-y-3">
+            {/* ── Exercices A1.2 (visibles après Commencer ou si déjà validé) ── */}
+            {(evalStarted || evalSubmitted) && lesson.submoduleId === "A1-2" && (() => {
+              const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
+              const q9val  = a12EvalQ9.tens * 10 + a12EvalQ9.units;
+              const q10val = a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u;
+              const r9  = evalSubmitted ? (evalResults["q9"] ?? null) : null;
+              const r10 = evalSubmitted ? (evalResults["q10"] ?? null) : null;
+              const r11 = evalSubmitted ? (evalResults["q11"] ?? null) : null;
+              const r12 = evalSubmitted ? (evalResults["q12"] ?? null) : null;
+              const r13 = evalSubmitted ? (evalResults["q13"] ?? null) : null;
+              return (
+                <div className="space-y-4">
+                  {/* Q1 — Ex9 style MCQ */}
+                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">1. Choisissez le nombre représenté par les blocs. <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span></p></div>
+                  <div className={`rounded-[var(--radius-md)] border p-3 transition-colors ${r9 === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : r9 === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
+                    <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
+                      {a12EvalQ9.tens > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={8} />)}</div>}
+                      {a12EvalQ9.units > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.units},(_,ui)=><SvgUnite key={ui} s={11} />)}</div>}
+                    </div>
+                    <div className="flex justify-center gap-2 px-3 py-2">
+                      {a12EvalQ9.choices.map(c => {
+                        const isSelected = a12EvalQ9Sel === c;
+                        const isCorrect  = evalSubmitted && c === q9val;
+                        const isWrong    = evalSubmitted && isSelected && c !== q9val;
+                        return (
+                          <button key={c} type="button"
+                            onClick={() => { if (!evalSubmitted) setA12EvalQ9Sel(c); }}
+                            className={`w-16 rounded py-1.5 text-sm transition-colors ${isCorrect && isSelected ? "border-2 border-green-500 bg-green-100 font-bold text-green-700 ring-2 ring-green-200 dark:bg-green-950/40 dark:ring-green-900" : isCorrect ? "border border-zinc-200 bg-white font-bold text-red-600 dark:border-zinc-700 dark:bg-zinc-900" : isWrong ? "border border-zinc-200 bg-white font-normal text-zinc-800 line-through decoration-red-500 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200" : isSelected ? "font-bold border border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30" : "font-bold border border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                            {c}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Q2 — Ex10 style SVG + input */}
+                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">2. Comptez tous les blocs et écrivez le nombre total. <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span></p></div>
+                  <div className={`rounded-[var(--radius-md)] border p-3 transition-colors ${r10 === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : r10 === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
+                    <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ10.canvasH}}>
+                      {a12EvalQ10.positions.map((pos,pi)=>(
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={8}/>:<SvgUnite s={14}/>}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-2">
+                      <AppInput label="" id="a12eval-q10"
+                        value={evalSubmitted && r10 === false ? String(q10val) : a12EvalQ10Ans}
+                        onChange={e => { if (!evalSubmitted) setA12EvalQ10Ans(e.target.value); }}
+                        placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={evalSubmitted}
+                        className={r10 === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" : r10 === false ? "!border-red-400" : "!bg-blue-50 dark:!bg-blue-950/30"} />
+                    </div>
+                  </div>
+
+                  {/* Q3 — Ex11 style SVG + 4 fields */}
+                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">3. Écrivez combien il y a de milliers, centaines, dizaines, unités. <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span></p></div>
+                  <div className={`rounded-[var(--radius-md)] border p-3 transition-colors ${r11 === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : r11 === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
+                    <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ11.canvasH}}>
+                      {a12EvalQ11.positions.map((pos,pi)=>(
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind==="m"?<SvgMillier s={4} d={9}/>:pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={9}/>:<SvgUnite s={16}/>}
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium">
+                      <span className="shrink-0">=</span>
+                      {evalSubmitted && r11 !== null ? (() => {
+                        const mOk = parseInt(a12EvalQ11Ans.m) === a12EvalQ11.m * 1000;
+                        const cOk = parseInt(a12EvalQ11Ans.c) === a12EvalQ11.c * 100;
+                        const dOk = parseInt(a12EvalQ11Ans.d) === a12EvalQ11.d * 10;
+                        const uOk = parseInt(a12EvalQ11Ans.u) === a12EvalQ11.u;
+                        return (<>
+                          <span className={`flex-1 rounded border px-1 py-1 text-center ${mOk?"border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20":"border-red-400 bg-[var(--color-bg-primary)]"}`}>{mOk?a12EvalQ11Ans.m:String(a12EvalQ11.m*1000)}</span>
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <span className={`flex-1 rounded border px-1 py-1 text-center ${cOk?"border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20":"border-red-400 bg-[var(--color-bg-primary)]"}`}>{cOk?a12EvalQ11Ans.c:String(a12EvalQ11.c*100)}</span>
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <span className={`flex-1 rounded border px-1 py-1 text-center ${dOk?"border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20":"border-red-400 bg-[var(--color-bg-primary)]"}`}>{dOk?a12EvalQ11Ans.d:String(a12EvalQ11.d*10)}</span>
+                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <span className={`flex-1 rounded border px-1 py-1 text-center ${uOk?"border-green-400 bg-green-50 text-green-700 dark:bg-green-950/20":"border-red-400 bg-[var(--color-bg-primary)]"}`}>{uOk?a12EvalQ11Ans.u:String(a12EvalQ11.u)}</span>
+                        </>);
+                      })() : (<>
+                        <input className={inputCls} placeholder="M×1000" inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.m} onChange={e=>setA12EvalQ11Ans(p=>({...p,m:e.target.value}))} />
+                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                        <input className={inputCls} placeholder="C×100"  inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.c} onChange={e=>setA12EvalQ11Ans(p=>({...p,c:e.target.value}))} />
+                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                        <input className={inputCls} placeholder="D×10"   inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.d} onChange={e=>setA12EvalQ11Ans(p=>({...p,d:e.target.value}))} />
+                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                        <input className={inputCls} placeholder="U×1"    inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.u} onChange={e=>setA12EvalQ11Ans(p=>({...p,u:e.target.value}))} />
+                      </>)}
+                    </div>
+                  </div>
+
+                  {/* Q4 — Ex12 style image + input */}
+                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">4. Comptez combien il y a de cubes (décomposé). <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span></p></div>
+                  <div className={`rounded-[var(--radius-md)] border p-3 transition-colors ${r12 === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : r12 === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
+                    <div className="flex items-center justify-center py-3">
+                      <img src={a12EvalQ12.src} alt="cubes décomposés" className="max-h-72 w-auto object-contain" />
+                    </div>
+                    <div className="mt-2">
+                      <AppInput label="" id="a12eval-q12"
+                        value={evalSubmitted && r12 === false ? String(a12EvalQ12.answer) : a12EvalQ12Ans}
+                        onChange={e => { if (!evalSubmitted) setA12EvalQ12Ans(e.target.value); }}
+                        placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={evalSubmitted}
+                        className={r12 === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" : r12 === false ? "!border-red-400" : "!bg-blue-50 dark:!bg-blue-950/30"} />
+                    </div>
+                  </div>
+
+                  {/* Q5 — Ex13 style image + input */}
+                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">5. Comptez combien il y a de cubes (assemblé). <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span></p></div>
+                  <div className={`rounded-[var(--radius-md)] border p-3 transition-colors ${r13 === true ? "border-green-400 bg-green-50 dark:bg-green-950/20" : r13 === false ? "border-[var(--color-border-default)]" : "border-[var(--color-border-default)]"}`}>
+                    <div className="flex items-center justify-center py-3">
+                      <img src={a12EvalQ13.src} alt="cubes assemblés" className="max-h-72 w-auto object-contain" />
+                    </div>
+                    <div className="mt-2">
+                      <AppInput label="" id="a12eval-q13"
+                        value={evalSubmitted && r13 === false ? String(a12EvalQ13.answer) : a12EvalQ13Ans}
+                        onChange={e => { if (!evalSubmitted) setA12EvalQ13Ans(e.target.value); }}
+                        placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={evalSubmitted}
+                        className={r13 === true ? "!bg-green-50 !border-green-400 dark:!bg-green-950/20" : r13 === false ? "!border-red-400" : "!bg-blue-50 dark:!bg-blue-950/30"} />
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* ── Exercices A1.1 (visibles après Commencer ou si déjà validé) ── */}
+            {(evalStarted || evalSubmitted) && lesson.submoduleId === "A1-1" && <div className="space-y-3">
               {evalItems_curr.map((ex, i) => {
                 const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
 
@@ -2293,11 +2817,11 @@ export function A1ModuleContent() {
                           ? "border-[var(--color-border-default)]"
                           : result
                             ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-                            : "border-red-400 bg-red-50 dark:bg-red-950/20"
+                            : "border-[var(--color-border-default)]"
                       }`}>
                         <SequentialAudioButton clips={ex.clips} />
                         {evalSubmitted && result !== null ? (
-                          <div className="flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3">
+                          <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
                             {result ? (
                               <span className="text-sm font-medium text-green-600">{evalAnswers[ex.id]}</span>
                             ) : (
@@ -2340,7 +2864,7 @@ export function A1ModuleContent() {
                 <p className="text-3xl font-bold text-[var(--color-text-primary)]">
                   {evalGrade.toFixed(1)}<span className="text-base font-normal text-[var(--color-text-secondary)]">/6</span>
                   <span className="ml-3 text-lg font-semibold text-[var(--color-text-secondary)]">
-                    ({Object.values(evalResults).filter(Boolean).length}/{evalTotalPts} pts)
+                    ({lesson.submoduleId === "A1-2" ? Object.values(evalResults).filter(Boolean).length * 2 : Object.values(evalResults).filter(Boolean).length}/{evalTotalPts} pts)
                   </span>
                 </p>
                 <p className="mt-1 text-sm font-medium">
@@ -2370,6 +2894,7 @@ export function A1ModuleContent() {
                       setEvalStarted(false);
                       setEvalTimeLeft(null);
                       if (lesson.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
+                      if (lesson.submoduleId === "A1-2") resetA12Eval();
                     }}
                   />
                 ) : null}
@@ -2383,6 +2908,117 @@ export function A1ModuleContent() {
               </AppButton>
             </div>
           </AppCard>
+      )}
+
+      {/* ── Exercice 16 — Droite numérique (A1.3) ───────────────────────────── */}
+      {step === "ex16" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 16</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Lisez l&apos;échelle et trouvez le nombre pointé par chaque flèche.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex16[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex16[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-6">
+            {ex16Lines.map((line, li) => {
+              const lineColor = { orange: "#F97316", sky: "#38BDF8", pink: "#EC4899", green: "#22C55E" }[line.color];
+              const bgCls = { orange: "bg-orange-50 dark:bg-orange-950/20", sky: "bg-sky-50 dark:bg-sky-950/20", pink: "bg-pink-50 dark:bg-pink-950/20", green: "bg-emerald-50 dark:bg-emerald-950/20" }[line.color];
+              const W = 300, ML = 24, MR = 24, lineW = W - ML - MR;
+              const totalUnits = line.max - line.min;
+              const pos = (v: number) => ML + ((v - line.min) / totalUnits) * lineW;
+              const boxH = 26, boxW = 44, boxY = 4;
+              const arrowTipY = 58, lineY = 64;
+              const svgH = 100;
+              return (
+                <div key={li} className={`rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 ${bgCls}`}>
+                  <div className="overflow-x-auto">
+                    <svg viewBox={`0 0 ${W} ${svgH}`} width={W} height={svgH} style={{ display: "block", maxWidth: "100%" }}>
+                      {/* Number line */}
+                      <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke={lineColor} strokeWidth="2" strokeLinecap="round" />
+                      {/* Right arrowhead on line */}
+                      <polygon points={`${ML + lineW},${lineY} ${ML + lineW - 6},${lineY - 3} ${ML + lineW - 6},${lineY + 3}`} fill={lineColor} />
+                      {/* Tick marks */}
+                      {Array.from({ length: totalUnits + 1 }, (_, i) => {
+                        const v = line.min + i;
+                        const x = pos(v);
+                        const isMajor = v % 10 === 0;
+                        return (
+                          <g key={v}>
+                            <line x1={x} y1={lineY} x2={x} y2={isMajor ? lineY + 10 : lineY + 5} stroke={lineColor} strokeWidth={isMajor ? 2 : 1} />
+                            {isMajor && (
+                              <text x={x} y={svgH - 4} textAnchor="middle" fontSize="10" fill={lineColor} fontWeight="600">{v}</text>
+                            )}
+                          </g>
+                        );
+                      })}
+                      {/* Arrows + input boxes for each question */}
+                      {line.arrows.map((v, ai) => {
+                        const x = pos(v);
+                        const result = ex16Results[li]?.[ai] ?? null;
+                        const ans = ex16Answers[li]?.[ai] ?? "";
+                        const isCorrect = result === true;
+                        const isWrong = result === false;
+                        const boxX = Math.min(Math.max(x - boxW / 2, 0), W - boxW);
+                        const boxColor = isCorrect ? "#22c55e" : isWrong ? "#ef4444" : lineColor;
+                        const boxFill = isCorrect ? "#f0fdf4" : isWrong ? "#fff1f1" : "#ffffff";
+                        return (
+                          <g key={ai}>
+                            {/* Vertical shaft */}
+                            <line x1={x} y1={boxY + boxH} x2={x} y2={arrowTipY - 4} stroke={lineColor} strokeWidth="1.5" />
+                            {/* Arrowhead pointing down */}
+                            <polygon points={`${x},${arrowTipY} ${x - 4},${arrowTipY - 7} ${x + 4},${arrowTipY - 7}`} fill={lineColor} />
+                            {/* Box */}
+                            <rect x={boxX} y={boxY} width={boxW} height={boxH} rx="4" fill={boxFill} stroke={boxColor} strokeWidth="1.5" />
+                            {/* Display text if validated */}
+                            {ex16Validated ? (
+                              <text x={boxX + boxW / 2} y={boxY + boxH / 2 + 4} textAnchor="middle" fontSize="11" fontWeight="700"
+                                fill={isCorrect ? "#16a34a" : "#dc2626"}>
+                                {isCorrect ? ans : String(v)}
+                              </text>
+                            ) : (
+                              <foreignObject x={boxX + 2} y={boxY + 2} width={boxW - 4} height={boxH - 4}>
+                                <input
+                                  type="text" inputMode="numeric"
+                                  value={ans}
+                                  onChange={e => {
+                                    setEx16Answers(prev => prev.map((row, ri) =>
+                                      ri === li ? row.map((val, vi) => vi === ai ? e.target.value : val) : row
+                                    ));
+                                  }}
+                                  style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", fontWeight: "700", background: "transparent", border: "none", outline: "none" }}
+                                />
+                              </foreignObject>
+                            )}
+                          </g>
+                        );
+                      })}
+                    </svg>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex16Validated}
+                onClick={() => {
+                  const res = ex16Lines.map((line, li) =>
+                    line.arrows.map((v, ai) => parseInt(ex16Answers[li]?.[ai] ?? "") === v)
+                  );
+                  setEx16Results(res);
+                  setEx16Validated(true);
+                }} />
+              <ActionIconButton action="recommencer" onClick={resetEx16} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
       )}
 
       {/* ── Exercice 3 — Écrire les dizaines ────────────────────────────────── */}
