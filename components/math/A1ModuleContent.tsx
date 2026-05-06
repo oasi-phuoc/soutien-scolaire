@@ -471,6 +471,9 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   if (lesson.submoduleId === "A1-4") {
     return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27", "eval"];
   }
+  if (lesson.submoduleId === "A1-5") {
+    return ["theory", "eval"];
+  }
   return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
 }
 
@@ -1911,6 +1914,52 @@ export function A1ModuleContent() {
                 3: <div className="mt-2 flex justify-center gap-2"><SvgCentaine s={5} /><SvgCentaine s={5} /></div>,
                 4: <div className="mt-2 flex justify-center gap-2"><SvgMillier s={4} d={9} /><SvgMillier s={4} d={9} /></div>,
               } : {};
+              const isA15 = lesson.submoduleId === "A1-5";
+              const illustrationA15: Record<number, React.ReactNode> = isA15 ? {
+                3: (
+                  <div className="mt-3 overflow-x-auto">
+                    <svg viewBox="0 0 320 52" width="100%" style={{display:"block",maxWidth:380}}>
+                      {/* line */}
+                      <line x1="16" y1="34" x2="290" y2="34" stroke="#374151" strokeWidth="1.5"/>
+                      <polygon points="290,34 282,29 282,39" fill="#374151"/>
+                      {/* ticks + labels */}
+                      {[2,5,8,11,14].map((v,idx)=>{
+                        const x = 24 + idx * 62;
+                        return <g key={v}><line x1={x} y1="28" x2={x} y2="40" stroke="#374151" strokeWidth="1.5"/><text x={x} y="50" textAnchor="middle" fontSize="10" fill="#374151" fontWeight={idx===4?"bold":"normal"}>{v}</text></g>;
+                      })}
+                      {/* +3 arcs */}
+                      {[0,1,2,3].map(idx=>{
+                        const x1 = 24 + idx * 62, x2 = 24 + (idx+1) * 62, mx = (x1+x2)/2;
+                        return <g key={idx}>
+                          <path d={`M${x1},28 Q${mx},10 ${x2},28`} fill="none" stroke="#6366f1" strokeWidth="1.5" markerEnd="url(#arr)"/>
+                          <text x={mx} y="8" textAnchor="middle" fontSize="9" fill="#6366f1">+3</text>
+                        </g>;
+                      })}
+                      <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#6366f1"/></marker></defs>
+                    </svg>
+                  </div>
+                ),
+                4: (
+                  <div className="mt-3 overflow-x-auto">
+                    <svg viewBox="0 0 320 52" width="100%" style={{display:"block",maxWidth:380}}>
+                      <line x1="16" y1="34" x2="290" y2="34" stroke="#374151" strokeWidth="1.5"/>
+                      <polygon points="16,34 24,29 24,39" fill="#374151"/>
+                      {[100,90,80,70].map((v,idx)=>{
+                        const x = 280 - idx * 72;
+                        return <g key={v}><line x1={x} y1="28" x2={x} y2="40" stroke="#374151" strokeWidth="1.5"/><text x={x} y="50" textAnchor="middle" fontSize="10" fill="#374151" fontWeight={idx===3?"bold":"normal"}>{v}</text></g>;
+                      })}
+                      {[0,1,2].map(idx=>{
+                        const x1 = 280 - idx * 72, x2 = 280 - (idx+1) * 72, mx = (x1+x2)/2;
+                        return <g key={idx}>
+                          <path d={`M${x1},28 Q${mx},10 ${x2},28`} fill="none" stroke="#ef4444" strokeWidth="1.5" markerEnd="url(#arr2)"/>
+                          <text x={mx} y="8" textAnchor="middle" fontSize="9" fill="#ef4444">−10</text>
+                        </g>;
+                      })}
+                      <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#ef4444"/></marker></defs>
+                    </svg>
+                  </div>
+                ),
+              } : {};
               const isA13 = lesson.submoduleId === "A1-3";
               const illustrationA13: Record<number, React.ReactNode> = isA13 ? {
                 0: (
@@ -1944,6 +1993,7 @@ export function A1ModuleContent() {
                   ) : null}
                   {illustrationA12[i] ?? null}
                   {illustrationA13[i] ?? null}
+                  {illustrationA15[i] ?? null}
                 </div>
               );
             })}

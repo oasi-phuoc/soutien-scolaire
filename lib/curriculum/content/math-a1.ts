@@ -400,6 +400,87 @@ export const MATH_A1_LESSONS: MathSubmoduleLesson[] = [
       },
     ],
   },
+  {
+    submoduleId: "A1-5",
+    submoduleCode: "A1.5",
+    theory: {
+      title: {
+        fr: "Suites numériques",
+        en: "Number sequences",
+        ar: "المتتاليات العددية",
+        fa: "دنباله‌های عددی",
+        ti: "ናይ ቁጽሪ ተኸታታሊ",
+        uk: "Числові послідовності",
+      },
+      paragraphs: {
+        fr: [
+          "Une **suite de nombres** est une liste ordonnée où chaque terme est obtenu en appliquant la même règle.",
+          "Pour trouver la règle, calcule la différence entre deux termes consécutifs : c'est le **pas** (ou saut).",
+          "Le pas peut être positif (suite croissante) ou négatif (suite décroissante).",
+          "Exemple croissant : **2, 5, 8, 11, ?** → pas = +3 → terme suivant = **14**",
+          "Exemple décroissant : **100, 90, 80, ?** → pas = −10 → terme suivant = **70**",
+        ],
+        en: [
+          "A **number sequence** is an ordered list where each term is found by applying the same rule.",
+          "To find the rule, calculate the difference between two consecutive terms — that is the **step**.",
+          "The step can be positive (increasing sequence) or negative (decreasing sequence).",
+          "Increasing example: **2, 5, 8, 11, ?** → step = +3 → next term = **14**",
+          "Decreasing example: **100, 90, 80, ?** → step = −10 → next term = **70**",
+        ],
+        ar: [
+          "**المتتالية العددية** قائمة مرتبة تُحسب فيها كل حلقة بتطبيق نفس القاعدة.",
+          "لإيجاد القاعدة، احسب الفرق بين حلقتين متتاليتين — هذا هو **الخطوة**.",
+          "يمكن أن تكون الخطوة موجبة (متتالية تصاعدية) أو سالبة (تنازلية).",
+          "مثال تصاعدي: **2, 5, 8, 11, ?** → خطوة = +3 → الحد التالي = **14**",
+          "مثال تنازلي: **100, 90, 80, ?** → خطوة = −10 → الحد التالي = **70**",
+        ],
+        fa: [
+          "**دنباله عددی** فهرستی مرتب است که در آن هر جمله با اعمال همان قانون به دست می‌آید.",
+          "برای یافتن قانون، تفاوت بین دو جملهٔ پشت‌سرهم را حساب کن — این **گام** است.",
+          "گام می‌تواند مثبت (دنبالهٔ صعودی) یا منفی (دنبالهٔ نزولی) باشد.",
+          "مثال صعودی: **2, 5, 8, 11, ?** → گام = +3 → جملهٔ بعدی = **14**",
+          "مثال نزولی: **100, 90, 80, ?** → گام = −10 → جملهٔ بعدی = **70**",
+        ],
+        ti: [
+          "**ተኸታታሊ ቁጽሪ** ስርዓታዊ ዝርዝር ኣኃዝቲ እዩ፤ ነፍሲ ወከፍ ቁጽሪ ብሓደ ሕጊ ይርከብ።",
+          "ሕጊ ንምርካብ፡ ኣብ ክልተ ተኸታተምቲ ናይ ደገ ኣኃዝቲ ፍልልይ ሓስብ — ንሱ **ስጉምቲ** ይበሃል።",
+          "ስጉምቲ ኣወንታዊ (ዝዓቢ ተኸታታሊ) ወይ ኣሉታዊ (ዝነኪ ተኸታታሊ) ክኸውን ይኽእል።",
+          "ኣወንታዊ ኣብነት: **2, 5, 8, 11, ?** → ስጉምቲ = +3 → ዝቕጽል ቁጽሪ = **14**",
+          "ኣሉታዊ ኣብነት: **100, 90, 80, ?** → ስጉምቲ = −10 → ዝቕጽል ቁጽሪ = **70**",
+        ],
+        uk: [
+          "**Числова послідовність** — це впорядкований список, де кожен член отримується за однаковим правилом.",
+          "Щоб знайти правило, обчисли різницю між двома сусідніми членами — це **крок**.",
+          "Крок може бути позитивним (зростаюча послідовність) або від'ємним (спадаюча).",
+          "Приклад зростаючої: **2, 5, 8, 11, ?** → крок = +3 → наступний член = **14**",
+          "Приклад спадаючої: **100, 90, 80, ?** → крок = −10 → наступний член = **70**",
+        ],
+      },
+    },
+    exercises: [
+      {
+        id: "a15-1",
+        promptFr: "Suite : 3, 6, 9, 12, ? (écris le terme suivant)",
+        promptPivot: { en: "Sequence: 3, 6, 9, 12, ? (write the next term)" },
+        type: "number",
+        acceptable: ["15"],
+      },
+      {
+        id: "a15-2",
+        promptFr: "Suite : 50, 45, 40, 35, ?",
+        promptPivot: { en: "Sequence: 50, 45, 40, 35, ?" },
+        type: "number",
+        acceptable: ["30"],
+      },
+      {
+        id: "a15-3",
+        promptFr: "Suite : 100, 200, 300, 400, ?",
+        promptPivot: { en: "Sequence: 100, 200, 300, 400, ?" },
+        type: "number",
+        acceptable: ["500"],
+      },
+    ],
+  },
 ];
 
 export function getA1Lesson(submoduleId: string): MathSubmoduleLesson | undefined {
