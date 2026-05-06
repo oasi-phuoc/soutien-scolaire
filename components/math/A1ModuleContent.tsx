@@ -530,59 +530,52 @@ function generateEx13(): Ex12Question[] { return [pickImage(ASSEMBLE_IMAGES, "as
 type Ex14TagDef = { label: string; correct: boolean };
 type Ex14Question = { refNum: number; refDisplay: string; tags: Ex14TagDef[] };
 
-const EX14_POOL: Ex14Question[] = [
-  { refNum: 346, refDisplay: "346", tags: [
-    { label: "300 + 40 + 6", correct: true },
-    { label: "3 centaines, 4 dizaines et 6 unités", correct: true },
-    { label: "364", correct: false },
-    { label: "3 000 + 40 + 6", correct: false },
-  ]},
-  { refNum: 207, refDisplay: "207", tags: [
-    { label: "200 + 7", correct: true },
-    { label: "2 centaines et 7 unités", correct: true },
-    { label: "270", correct: false },
-    { label: "2 × 100 + 7 × 10", correct: false },
-  ]},
-  { refNum: 560, refDisplay: "560", tags: [
-    { label: "500 + 60", correct: true },
-    { label: "5 centaines et 6 dizaines", correct: true },
-    { label: "506", correct: false },
-    { label: "5 600", correct: false },
-  ]},
-  { refNum: 1003, refDisplay: "1 003", tags: [
-    { label: "1 000 + 3", correct: true },
-    { label: "1 millier et 3 unités", correct: true },
-    { label: "1 × 1000 + 3 × 10", correct: false },
-    { label: "103", correct: false },
-  ]},
-  { refNum: 912, refDisplay: "912", tags: [
-    { label: "900 + 10 + 2", correct: true },
-    { label: "9 centaines, 1 dizaine et 2 unités", correct: true },
-    { label: "921", correct: false },
-    { label: "9 × 100 + 2 × 10 + 1", correct: false },
-  ]},
-  { refNum: 1010, refDisplay: "1 010", tags: [
-    { label: "1 000 + 10", correct: true },
-    { label: "1 millier et 1 dizaine", correct: true },
-    { label: "1 001", correct: false },
-    { label: "1 100", correct: false },
-  ]},
-  { refNum: 415, refDisplay: "415", tags: [
-    { label: "400 + 10 + 5", correct: true },
-    { label: "4 centaines, 1 dizaine et 5 unités", correct: true },
-    { label: "451", correct: false },
-    { label: "4 × 100 + 5 × 10 + 1", correct: false },
-  ]},
-  { refNum: 2304, refDisplay: "2 304", tags: [
-    { label: "2 000 + 300 + 4", correct: true },
-    { label: "2 milliers, 3 centaines et 4 unités", correct: true },
-    { label: "2 340", correct: false },
-    { label: "2 034", correct: false },
-  ]},
+type Ex14PoolItem = { refNum: number; refDisplay: string; correctOptions: string[]; wrongOptions: string[] };
+
+const EX14_POOL: Ex14PoolItem[] = [
+  { refNum: 346, refDisplay: "346",
+    correctOptions: ["300 + 40 + 6", "3 centaines, 4 dizaines et 6 unités"],
+    wrongOptions:   ["3 dizaines, 4 centaines et 6 unités", "300 + 60 + 4"],
+  },
+  { refNum: 207, refDisplay: "207",
+    correctOptions: ["200 + 7", "2 centaines et 7 unités"],
+    wrongOptions:   ["2 centaines et 7 dizaines", "2 dizaines et 7 centaines"],
+  },
+  { refNum: 560, refDisplay: "560",
+    correctOptions: ["500 + 60", "5 centaines et 6 dizaines"],
+    wrongOptions:   ["5 dizaines et 6 centaines", "500 + 6"],
+  },
+  { refNum: 1003, refDisplay: "1 003",
+    correctOptions: ["1 000 + 3", "1 millier et 3 unités"],
+    wrongOptions:   ["1 millier et 3 dizaines", "1 millier et 3 centaines"],
+  },
+  { refNum: 912, refDisplay: "912",
+    correctOptions: ["900 + 10 + 2", "9 centaines, 1 dizaine et 2 unités"],
+    wrongOptions:   ["9 centaines, 2 dizaines et 1 unité", "9 dizaines, 1 centaine et 2 unités"],
+  },
+  { refNum: 1010, refDisplay: "1 010",
+    correctOptions: ["1 000 + 10", "1 millier et 1 dizaine"],
+    wrongOptions:   ["1 millier et 1 centaine", "1 millier et 1 unité"],
+  },
+  { refNum: 415, refDisplay: "415",
+    correctOptions: ["400 + 10 + 5", "4 centaines, 1 dizaine et 5 unités"],
+    wrongOptions:   ["4 centaines, 5 dizaines et 1 unité", "4 dizaines, 1 centaine et 5 unités"],
+  },
+  { refNum: 2304, refDisplay: "2 304",
+    correctOptions: ["2 000 + 300 + 4", "2 milliers, 3 centaines et 4 unités"],
+    wrongOptions:   ["2 milliers, 4 centaines et 3 unités", "2 milliers, 3 dizaines et 4 unités"],
+  },
 ];
 
 function generateEx14(): Ex14Question[] {
-  return shuffle(EX14_POOL).slice(0, 2).map(q => ({ ...q, tags: shuffle(q.tags) }));
+  return shuffle(EX14_POOL).slice(0, 2).map(q => {
+    const numCorrect = Math.random() < 0.5 ? 1 : 2;
+    const correct = shuffle(q.correctOptions).slice(0, numCorrect)
+      .map(label => ({ label, correct: true as const }));
+    const wrong = shuffle(q.wrongOptions).slice(0, 3 - numCorrect)
+      .map(label => ({ label, correct: false as const }));
+    return { refNum: q.refNum, refDisplay: q.refDisplay, tags: shuffle([...correct, ...wrong]) };
+  });
 }
 
 // ─── Ex16 — grille de flèches 3×3 ────────────────────────────────────────────
@@ -590,21 +583,74 @@ function generateEx14(): Ex14Question[] {
 interface Ex15Question {
   tl: number; tr: number; bl: number; br: number;
   givenIdx: number; // 0=TL, 1=TR, 2=BL, 3=BR
+  cfgIdx: number;
 }
+
+interface Ex16ArrowDef { row: number; col: number; symbol: string; colorCls: string }
+interface Ex16Cfg { offsets: [number, number, number, number]; arrows: Ex16ArrowDef[] }
+
+// 8 configs: offsets = [tl, tr, bl, br] relative to base. Arrow grid pos (row/col in 3×3).
+const EX16_CONFIGS: Ex16Cfg[] = [
+  // 0: classic L-shape — →blue top, ↓red left, →green bottom
+  { offsets: [0, 1000, 100, 110],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-red-500 dark:text-red-400" },
+             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+  // 1: →red top, ↓blue left, →green bottom
+  { offsets: [0, 100, 1000, 1010],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-red-500 dark:text-red-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:2,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+  // 2: →green top, ↓red left, →blue bottom
+  { offsets: [0, 10, 100, 1100],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-emerald-600 dark:text-emerald-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-red-500 dark:text-red-400" },
+             { row:2,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" }]},
+  // 3: →blue top, ↓green left, →red bottom
+  { offsets: [0, 1000, 10, 110],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
+             { row:2,col:1,symbol:"→",colorCls:"text-red-500 dark:text-red-400" }]},
+  // 4: diagonal star from TL — →red top, ↓green left, ↘blue center
+  { offsets: [0, 100, 10, 1000],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-red-500 dark:text-red-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
+             { row:1,col:1,symbol:"↘",colorCls:"text-blue-600 dark:text-blue-400" }]},
+  // 5: diagonal star from TL — →blue top, ↓green left, ↘red center
+  { offsets: [0, 1000, 10, 100],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" },
+             { row:1,col:1,symbol:"↘",colorCls:"text-red-500 dark:text-red-400" }]},
+  // 6: upside-down L — →blue top, ↓red left, ↓green right
+  { offsets: [0, 1000, 100, 1010],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-red-500 dark:text-red-400" },
+             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+  // 7: upside-down L — →red top, ↓blue left, ↓green right
+  { offsets: [0, 100, 1000, 110],
+    arrows: [{ row:0,col:1,symbol:"→",colorCls:"text-red-500 dark:text-red-400" },
+             { row:1,col:0,symbol:"↓",colorCls:"text-blue-600 dark:text-blue-400" },
+             { row:1,col:2,symbol:"↓",colorCls:"text-emerald-600 dark:text-emerald-400" }]},
+];
 
 function generateEx15(): Ex15Question[] {
   const results: Ex15Question[] = [];
+  const usedCfgs = new Set<number>();
   for (let s = 0; s < 2; s++) {
-    let tl = 1000;
+    // pick a cfg not yet used this session
+    let cfgIdx: number;
+    do { cfgIdx = Math.floor(Math.random() * EX16_CONFIGS.length); } while (usedCfgs.has(cfgIdx));
+    usedCfgs.add(cfgIdx);
+    const cfg = EX16_CONFIGS[cfgIdx]!;
+    const maxOffset = Math.max(...cfg.offsets);
+    let tl = 100;
     for (let g = 0; g < 400; g++) {
-      const b = Math.floor(Math.random() * 8900) + 100; // 100–9000
-      if (b + 1000 <= 9999 && b + 100 <= 9999 && b + 110 <= 9999) { tl = b; break; }
+      const b = Math.floor(Math.random() * (9999 - maxOffset - 100)) + 100;
+      if (b + maxOffset <= 9999) { tl = b; break; }
     }
-    const tr = tl + 1000;
-    const bl = tl + 100;
-    const br = bl + 10;
-    const givenIdx = Math.floor(Math.random() * 4);
-    results.push({ tl, tr, bl, br, givenIdx });
+    const [o0, o1, o2, o3] = cfg.offsets;
+    results.push({ tl: tl + o0, tr: tl + o1, bl: tl + o2, br: tl + o3,
+                   givenIdx: Math.floor(Math.random() * 4), cfgIdx });
   }
   return results;
 }
@@ -1250,12 +1296,12 @@ export function A1ModuleContent() {
   // Ex15 — appariement d'étiquettes (ex-14)
   const [ex15Questions, setEx15Questions] = useState<Ex14Question[]>(generateEx14);
   const [ex15Selected, setEx15Selected] = useState<boolean[][]>(() =>
-    Array(2).fill(null).map(() => Array(4).fill(false))
+    Array(2).fill(null).map(() => Array(3).fill(false))
   );
   const [ex15Validated, setEx15Validated] = useState(false);
   const resetEx15 = () => {
     setEx15Questions(generateEx14());
-    setEx15Selected(Array(2).fill(null).map(() => Array(4).fill(false)));
+    setEx15Selected(Array(2).fill(null).map(() => Array(3).fill(false)));
     setEx15Validated(false);
   };
 
@@ -2533,7 +2579,7 @@ export function A1ModuleContent() {
                     {q.refDisplay}
                   </span>
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="flex flex-col gap-2">
                   {q.tags.map((tag, ti) => {
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
                     let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
@@ -2598,59 +2644,55 @@ export function A1ModuleContent() {
           <div className="space-y-6">
             {ex16Questions.map((q, qi) => {
               const corners = [q.tl, q.tr, q.bl, q.br];
+              const cfg = EX16_CONFIGS[q.cfgIdx]!;
+              const CORNER_POS = [{r:0,c:0},{r:0,c:2},{r:2,c:0},{r:2,c:2}];
               const cornerCell = (idx: number) => {
                 const val = corners[idx]!;
                 const isGiven = idx === q.givenIdx;
                 const ansKey = ["tl","tr","bl","br"][idx]!;
-                const ansIdx = idx;
                 if (isGiven) {
                   return (
-                    <div className="flex h-14 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
+                    <div className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
                       {val.toLocaleString("fr-CH")}
                     </div>
                   );
                 }
-                const ans = ex16Answers[qi]?.[ansIdx] ?? "";
+                const ans = ex16Answers[qi]?.[idx] ?? "";
                 const isCorrect = ex16Validated ? parseInt(ans) === val : null;
                 return ex16Validated ? (
-                  <div className={`flex h-14 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isCorrect ? "border-green-400" : "border-red-400"}`}>
+                  <div className={`flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isCorrect ? "border-green-400" : "border-red-400"}`}>
                     {isCorrect ? ans : val.toLocaleString("fr-CH")}
                   </div>
                 ) : (
                   <input type="text" inputMode="numeric" value={ans}
                     onChange={e => setEx16Answers(prev => prev.map((row, ri) =>
-                      ri === qi ? row.map((v, vi) => vi === ansIdx ? e.target.value : v) : row
+                      ri === qi ? row.map((v, vi) => vi === idx ? e.target.value : v) : row
                     ))}
-                    className="h-14 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                    className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
                     aria-label={ansKey}
                   />
                 );
               };
+              const cells: React.ReactNode[] = [];
+              for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                  const ci = CORNER_POS.findIndex(p => p.r === r && p.c === c);
+                  if (ci !== -1) {
+                    cells.push(<div key={`${r}${c}`}>{cornerCell(ci)}</div>);
+                  } else {
+                    const arrow = cfg.arrows.find(a => a.row === r && a.col === c);
+                    cells.push(
+                      <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl font-bold ${arrow.colorCls}` : undefined}>
+                        {arrow?.symbol}
+                      </div>
+                    );
+                  }
+                }
+              }
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                  {/* 3×3 grid: corners=inputs, edge-middles=arrows, center=empty */}
                   <div className="grid grid-cols-3 items-center gap-2">
-                    {/* Row 0: TL | +1M→ | TR */}
-                    <div>{cornerCell(0)}</div>
-                    <div className="flex flex-col items-center text-xs font-bold text-blue-600 dark:text-blue-400">
-                      <span>+1 000</span>
-                      <span className="text-lg leading-none">→</span>
-                    </div>
-                    <div>{cornerCell(1)}</div>
-                    {/* Row 1: +1C↓ | empty | empty */}
-                    <div className="flex flex-col items-center text-xs font-bold text-red-500 dark:text-red-400">
-                      <span>+100</span>
-                      <span className="text-lg leading-none">↓</span>
-                    </div>
-                    <div />
-                    <div />
-                    {/* Row 2: BL | +1D→ | BR */}
-                    <div>{cornerCell(2)}</div>
-                    <div className="flex flex-col items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                      <span>+10</span>
-                      <span className="text-lg leading-none">→</span>
-                    </div>
-                    <div>{cornerCell(3)}</div>
+                    {cells}
                   </div>
                 </div>
               );
