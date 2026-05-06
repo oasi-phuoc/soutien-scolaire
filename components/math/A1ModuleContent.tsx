@@ -251,7 +251,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16"|"ex17"|"ex18"|"ex19"|"ex20", Partial<Record<PivotCode, string>>> = {
+const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16"|"ex17"|"ex18"|"ex19"|"ex20"|"ex21"|"ex22"|"ex23"|"ex24"|"ex25"|"ex26"|"ex27", Partial<Record<PivotCode, string>>> = {
   ex1: {
     en: "Follow the stroke to write the digits.",
     ar: "اتبع الخط لكتابة الأرقام.",
@@ -383,6 +383,13 @@ const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex
     en: "Find the hundreds neighbours of each number.",
     ar: "أوجد المئات المجاورة لكل عدد.",
   },
+  ex21: { en: "Select the numbers that match the instruction." },
+  ex22: { en: "Fill in the comparison sign: < > =" },
+  ex23: { en: "Fill in the comparison sign for each pair." },
+  ex24: { en: "Select all numbers matching the condition." },
+  ex25: { en: "Click each number to color it in the right colour." },
+  ex26: { en: "Check which numbers belong inside each bubble." },
+  ex27: { en: "Write a number between the two given numbers." },
 };
 
 // ─── Évaluation ───────────────────────────────────────────────────────────────
@@ -446,7 +453,7 @@ function generateA11EvalItems(): EvalItem[] {
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "ex14" | "ex15" | "ex16" | "ex17" | "ex18" | "ex19" | "ex20" | "eval";
+type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "ex14" | "ex15" | "ex16" | "ex17" | "ex18" | "ex19" | "ex20" | "ex21" | "ex22" | "ex23" | "ex24" | "ex25" | "ex26" | "ex27" | "eval";
 
 function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
@@ -460,6 +467,9 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   }
   if (lesson.submoduleId === "A1-3") {
     return ["theory", "ex17", "ex18", "ex19", "ex20", "eval"];
+  }
+  if (lesson.submoduleId === "A1-4") {
+    return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27", "eval"];
   }
   return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
 }
@@ -921,6 +931,136 @@ function generateEx11(): Ex11Question[] {
     for (const kind of shuffle(kinds)) positions.push(placeBlock(kind, positions, canvasH));
     return { m, c, d, u, positions, canvasH };
   });
+}
+
+// ─── Ex21 — Sélection comparative (A1.4) ─────────────────────────────────────
+
+type Ex21Mode = "plus_grand" | "plus_petit" | "entre";
+interface Ex21Series { mode: Ex21Mode; numbers: number[]; limitLo: number; limitHi: number }
+
+function generateEx21(): Ex21Series[] {
+  const allModes = shuffle<Ex21Mode>(["plus_grand", "plus_petit", "entre"]);
+  return allModes.map(mode => {
+    const nums: number[] = [];
+    const used = new Set<number>();
+    while (nums.length < 5) {
+      const n = Math.floor(Math.random() * 800) + 100;
+      if (!used.has(n)) { nums.push(n); used.add(n); }
+    }
+    const sorted = [...nums].sort((a, b) => a - b);
+    return { mode, numbers: shuffle(nums), limitLo: sorted[1]!, limitHi: sorted[3]! };
+  });
+}
+
+// ─── Ex22 — Comparaison avec blocs (A1.4) ────────────────────────────────────
+
+interface Ex22Pair { a: number; b: number }
+
+function generateEx22(): Ex22Pair[] {
+  const pairs: Ex22Pair[] = [];
+  const used = new Set<string>();
+  while (pairs.length < 3) {
+    const a = Math.floor(Math.random() * 800) + 100;
+    const b = Math.floor(Math.random() * 800) + 100;
+    if (a !== b && !used.has(`${a}-${b}`)) { pairs.push({ a, b }); used.add(`${a}-${b}`); }
+  }
+  return pairs;
+}
+
+// ─── Ex23 — Grille de comparaison 20 paires (A1.4) ───────────────────────────
+
+function generateEx23(): Ex22Pair[] {
+  const pairs: Ex22Pair[] = [];
+  const used = new Set<string>();
+  for (let i = 0; i < 3; i++) {
+    const a = Math.floor(Math.random() * 800) + 100;
+    if (!used.has(`${a}-${a}`)) { pairs.push({ a, b: a }); used.add(`${a}-${a}`); }
+  }
+  while (pairs.length < 20) {
+    const a = Math.floor(Math.random() * 800) + 100;
+    const b = Math.floor(Math.random() * 800) + 100;
+    const key = `${a}-${b}`;
+    if (!used.has(key)) { pairs.push({ a, b }); used.add(key); }
+  }
+  return shuffle(pairs);
+}
+
+// ─── Ex24 — Mur de briques (A1.4) ────────────────────────────────────────────
+
+type Ex24Mode = "moins_que" | "plus_que" | "entre";
+interface Ex24Config { numbers: number[]; mode: Ex24Mode; threshold: number; limitLo: number; limitHi: number }
+
+function generateEx24(): Ex24Config[] {
+  const modes = shuffle<Ex24Mode>(["moins_que", "plus_que", "entre"]);
+  return modes.map(mode => {
+    const nums: number[] = [];
+    const used = new Set<number>();
+    while (nums.length < 12) {
+      const n = Math.floor(Math.random() * 800) + 100;
+      if (!used.has(n)) { nums.push(n); used.add(n); }
+    }
+    const sorted = [...nums].sort((a, b) => a - b);
+    return { numbers: shuffle(nums), mode, threshold: sorted[5]!, limitLo: sorted[3]!, limitHi: sorted[8]! };
+  });
+}
+
+// ─── Ex25 — Colorier par plage (A1.4) ────────────────────────────────────────
+
+function generateEx25Numbers(): number[] {
+  const pool: number[] = [];
+  const used = new Set<number>();
+  const ranges: [number, number, number][] = [
+    [350, 600, 4], [711, 900, 3], [50, 299, 3], [301, 349, 1], [601, 710, 1],
+  ];
+  for (const [lo, hi, count] of ranges) {
+    let added = 0, tries = 0;
+    while (added < count && tries < 200) {
+      tries++;
+      const n = Math.floor(Math.random() * (hi - lo + 1)) + lo;
+      if (!used.has(n)) { pool.push(n); used.add(n); added++; }
+    }
+  }
+  return shuffle(pool);
+}
+
+function ex25CorrectColor(n: number): string | null {
+  if (n >= 350 && n <= 600) return "vert";
+  if (n > 710) return "bleu";
+  if (n < 300) return "jaune";
+  return null;
+}
+
+// ─── Ex26 — Nombres dans les bulles (A1.4) ───────────────────────────────────
+
+const EX26_NUMBERS = [12, 710, 553, 34, 908, 199, 48, 587, 200, 330, 815, 242, 261, 498, 890, 699, 314];
+const EX26_BUBBLES = [
+  { lo: 10, hi: 250, bgCls: "bg-red-50 dark:bg-red-950/20", borderCls: "border-red-400 dark:border-red-600", textCls: "text-red-600 dark:text-red-400", btnBase: "border-red-300 dark:border-red-700 hover:bg-red-100 dark:hover:bg-red-900/30", btnSel: "bg-red-200 dark:bg-red-800/40 border-red-500" },
+  { lo: 250, hi: 700, bgCls: "bg-violet-50 dark:bg-violet-950/20", borderCls: "border-violet-400 dark:border-violet-600", textCls: "text-violet-600 dark:text-violet-400", btnBase: "border-violet-300 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-900/30", btnSel: "bg-violet-200 dark:bg-violet-800/40 border-violet-500" },
+  { lo: 700, hi: 920, bgCls: "bg-blue-50 dark:bg-blue-950/20", borderCls: "border-blue-400 dark:border-blue-600", textCls: "text-blue-600 dark:text-blue-400", btnBase: "border-blue-300 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/30", btnSel: "bg-blue-200 dark:bg-blue-800/40 border-blue-500" },
+] as const;
+
+// ─── Ex27 — Écrire entre deux bornes (A1.4) ──────────────────────────────────
+
+interface Ex27Item { lo: number; hi: number; reversed: boolean }
+
+function generateEx27(): Ex27Item[][] {
+  const series: Ex27Item[][] = [];
+  for (let s = 0; s < 2; s++) {
+    const items: Ex27Item[] = [];
+    const used = new Set<string>();
+    while (items.length < 4) {
+      const gap = Math.floor(Math.random() * 8) + 2;
+      const lo = Math.floor(Math.random() * (999 - gap)) + 1;
+      const hi = lo + gap;
+      const key = `${lo}-${hi}`;
+      if (!used.has(key) && hi <= 999) {
+        used.add(key);
+        items.push({ lo, hi, reversed: Math.random() < 0.5 });
+      }
+    }
+    series.push(items);
+  }
+  return series;
 }
 
 const A1_POS_KEY = "soutien:a1-pos";
@@ -1491,6 +1631,47 @@ export function A1ModuleContent() {
     setEx20Validated(false);
   };
 
+  // Ex21 — Sélection comparative (A1.4)
+  const [ex21Data, setEx21Data] = useState<Ex21Series[]>(generateEx21);
+  const [ex21Selected, setEx21Selected] = useState<boolean[][]>(() => Array(3).fill(null).map(() => Array(5).fill(false)));
+  const [ex21Validated, setEx21Validated] = useState(false);
+  const resetEx21 = () => { setEx21Data(generateEx21()); setEx21Selected(Array(3).fill(null).map(() => Array(5).fill(false))); setEx21Validated(false); };
+
+  // Ex22 — Comparaison avec blocs (A1.4)
+  const [ex22Pairs, setEx22Pairs] = useState<Ex22Pair[]>(generateEx22);
+  const [ex22Syms, setEx22Syms] = useState<string[]>(Array(3).fill(""));
+  const [ex22Validated, setEx22Validated] = useState(false);
+  const resetEx22 = () => { setEx22Pairs(generateEx22()); setEx22Syms(Array(3).fill("")); setEx22Validated(false); };
+
+  // Ex23 — Grille de comparaison (A1.4)
+  const [ex23Pairs, setEx23Pairs] = useState<Ex22Pair[]>(generateEx23);
+  const [ex23Syms, setEx23Syms] = useState<string[]>(Array(20).fill(""));
+  const [ex23Validated, setEx23Validated] = useState(false);
+  const resetEx23 = () => { setEx23Pairs(generateEx23()); setEx23Syms(Array(20).fill("")); setEx23Validated(false); };
+
+  // Ex24 — Mur de briques (A1.4)
+  const [ex24Data, setEx24Data] = useState<Ex24Config[]>(generateEx24);
+  const [ex24Selected, setEx24Selected] = useState<boolean[][]>(() => Array(3).fill(null).map(() => Array(12).fill(false)));
+  const [ex24Validated, setEx24Validated] = useState(false);
+  const resetEx24 = () => { setEx24Data(generateEx24()); setEx24Selected(Array(3).fill(null).map(() => Array(12).fill(false))); setEx24Validated(false); };
+
+  // Ex25 — Colorier insectes (A1.4)
+  const [ex25Numbers, setEx25Numbers] = useState<number[]>(generateEx25Numbers);
+  const [ex25Colors, setEx25Colors] = useState<(string | null)[]>(() => Array(12).fill(null));
+  const [ex25Validated, setEx25Validated] = useState(false);
+  const resetEx25 = () => { setEx25Numbers(generateEx25Numbers()); setEx25Colors(Array(12).fill(null)); setEx25Validated(false); };
+
+  // Ex26 — Nombres dans les bulles (A1.4)
+  const [ex26Checked, setEx26Checked] = useState<boolean[][]>(() => Array(17).fill(null).map(() => Array(3).fill(false)));
+  const [ex26Validated, setEx26Validated] = useState(false);
+  const resetEx26 = () => { setEx26Checked(Array(17).fill(null).map(() => Array(3).fill(false))); setEx26Validated(false); };
+
+  // Ex27 — Écrire entre deux bornes (A1.4)
+  const [ex27Data, setEx27Data] = useState<Ex27Item[][]>(generateEx27);
+  const [ex27Ans, setEx27Ans] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(4).fill("")));
+  const [ex27Validated, setEx27Validated] = useState(false);
+  const resetEx27 = () => { setEx27Data(generateEx27()); setEx27Ans(Array(2).fill(null).map(() => Array(4).fill(""))); setEx27Validated(false); };
+
   // A1.2 Évaluation — une question par exercice
   const [a12EvalQ9, setA12EvalQ9] = useState<Ex9Question>(() => generateEx9()[0]!);
   const [a12EvalQ9Sel, setA12EvalQ9Sel] = useState<number | null>(null);
@@ -1681,6 +1862,7 @@ export function A1ModuleContent() {
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetEx16(); resetA12Eval(); }
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-4") { resetEx21(); resetEx22(); resetEx23(); resetEx24(); resetEx25(); resetEx26(); resetEx27(); }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -3737,6 +3919,436 @@ export function A1ModuleContent() {
             <div className="flex gap-2">
               <ActionIconButton action="valider" disabled={ex20Validated} onClick={() => setEx20Validated(true)} />
               <ActionIconButton action="recommencer" onClick={resetEx20} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 21 — Sélection comparative (A1.4) ──────────────────────── */}
+      {step === "ex21" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 21</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Sélectionnez les nombres</h2>
+        </div>}>
+          <div className="mb-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les nombres qui correspondent à la consigne.</p>
+          </div>
+          <div className="space-y-4">
+            {ex21Data.map((series, si) => {
+              const max = Math.max(...series.numbers);
+              const min = Math.min(...series.numbers);
+              const consigne = series.mode === "plus_grand"
+                ? "Entourez le plus grand nombre."
+                : series.mode === "plus_petit"
+                ? "Entourez le plus petit nombre."
+                : `Entourez tous les nombres entre ${series.limitLo.toLocaleString("fr-CH")} et ${series.limitHi.toLocaleString("fr-CH")}.`;
+              const isCorrect = (n: number) =>
+                series.mode === "plus_grand" ? n === max
+                : series.mode === "plus_petit" ? n === min
+                : n > series.limitLo && n < series.limitHi;
+              return (
+                <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{consigne}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {series.numbers.map((n, ni) => {
+                      const sel = ex21Selected[si]?.[ni] ?? false;
+                      const correct = isCorrect(n);
+                      let cls = "rounded-[var(--radius-md)] border px-4 py-2 text-sm font-bold tabular-nums transition-colors";
+                      if (ex21Validated) {
+                        if (correct && sel) cls += " border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-300";
+                        else if (correct && !sel) cls += " border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+                        else if (!correct && sel) cls += " border-red-400 bg-[var(--color-bg-primary)] text-red-500 line-through";
+                        else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+                      } else {
+                        cls += sel
+                          ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
+                          : " border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                      }
+                      return (
+                        <button key={ni} type="button" className={cls}
+                          onClick={() => { if (ex21Validated) return; setEx21Selected(prev => prev.map((s2, si2) => si2 === si ? s2.map((v, vi) => vi === ni ? !v : v) : s2)); }}>
+                          {n.toLocaleString("fr-CH")}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex21Validated} onClick={() => setEx21Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx21} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 22 — Comparaison avec blocs (A1.4) ─────────────────────── */}
+      {step === "ex22" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 22</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comparez les nombres</h2>
+        </div>}>
+          <div className="mb-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">Complétez avec le symbole de comparaison.</p>
+          </div>
+          <div className="space-y-4">
+            {ex22Pairs.map((pair, pi) => {
+              const correct = pair.a < pair.b ? "<" : pair.a > pair.b ? ">" : "=";
+              const sel = ex22Syms[pi] ?? "";
+              const validated = ex22Validated;
+              const renderBlocks = (n: number) => {
+                const c = Math.floor(n / 100), d = Math.floor((n % 100) / 10), u = n % 10;
+                return (
+                  <div className="flex flex-col items-center gap-1 min-w-0 flex-1">
+                    <span className="text-xl font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+                    {c > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:c},(_,i)=><SvgCentaine key={i} s={4} />)}</div>}
+                    {d > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:d},(_,i)=><SvgDizaine key={i} s={6} />)}</div>}
+                    {u > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:u},(_,i)=><SvgUnite key={i} s={10} />)}</div>}
+                  </div>
+                );
+              };
+              return (
+                <div key={pi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${validated ? (sel === correct ? "border-green-400" : "border-red-400") : "border-[var(--color-border-default)]"}`}>
+                  <div className="flex items-center gap-2">
+                    {renderBlocks(pair.a)}
+                    <div className="flex flex-col gap-1 shrink-0">
+                      {(["<", ">", "="] as const).map(sym => {
+                        let cls = "w-10 rounded border py-1 text-center text-sm font-bold transition-colors";
+                        if (validated) {
+                          cls += sym === correct ? " border-green-400 bg-[var(--color-bg-primary)] text-green-700 dark:text-green-300"
+                            : sym === sel && sym !== correct ? " border-red-400 bg-[var(--color-bg-primary)] text-red-500 line-through"
+                            : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+                        } else {
+                          cls += sel === sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
+                            : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                        }
+                        return (
+                          <button key={sym} type="button" className={cls}
+                            onClick={() => { if (!validated) setEx22Syms(prev => prev.map((s, i) => i === pi ? sym : s)); }}>
+                            {sym}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    {renderBlocks(pair.b)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex22Validated} onClick={() => setEx22Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx22} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 23 — Grille de comparaison (A1.4) ──────────────────────── */}
+      {step === "ex23" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 23</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Complétez avec les symboles de comparaison</h2>
+        </div>}>
+          <div className="mb-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur □ pour faire défiler &lt; &gt; =</p>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            {ex23Pairs.map((pair, pi) => {
+              const correct = pair.a < pair.b ? "<" : pair.a > pair.b ? ">" : "=";
+              const sym = ex23Syms[pi] ?? "";
+              const CYCLE = ["", "<", ">", "="];
+              const nextSym = CYCLE[(CYCLE.indexOf(sym) + 1) % CYCLE.length]!;
+              let symCls = "w-8 h-8 rounded border text-center text-sm font-bold leading-8 transition-colors shrink-0";
+              if (ex23Validated) {
+                symCls += sym === correct ? " border-green-400 bg-[var(--color-bg-primary)] text-green-700 dark:text-green-300"
+                  : sym !== correct ? " border-red-400 bg-[var(--color-bg-primary)] text-red-500"
+                  : " border-[var(--color-border-default)]";
+              } else {
+                symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
+                  : " border-zinc-300 dark:border-zinc-600 text-zinc-400 cursor-pointer hover:border-teal-400";
+              }
+              return (
+                <div key={pi} className="flex items-center gap-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] px-2 py-1.5">
+                  <span className="flex-1 text-right text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{pair.a}</span>
+                  <button type="button" className={symCls}
+                    onClick={() => { if (!ex23Validated) setEx23Syms(prev => prev.map((s, i) => i === pi ? nextSym : s)); }}>
+                    {sym || "□"}
+                  </button>
+                  <span className="flex-1 text-left text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{pair.b}</span>
+                  {ex23Validated && sym !== correct && (
+                    <span className="text-xs text-green-600 dark:text-green-400 shrink-0">→{correct}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex23Validated} onClick={() => setEx23Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx23} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 24 — Mur de briques (A1.4) ─────────────────────────────── */}
+      {step === "ex24" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 24</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Sélectionnez les nombres</h2>
+        </div>}>
+          <div className="space-y-5">
+            {ex24Data.map((cfg, si) => {
+              const consigne = cfg.mode === "moins_que"
+                ? `Sélectionnez tous les nombres plus petits que ${cfg.threshold.toLocaleString("fr-CH")}.`
+                : cfg.mode === "plus_que"
+                ? `Sélectionnez tous les nombres plus grands que ${cfg.threshold.toLocaleString("fr-CH")}.`
+                : `Sélectionnez tous les nombres entre ${cfg.limitLo.toLocaleString("fr-CH")} et ${cfg.limitHi.toLocaleString("fr-CH")}.`;
+              const isCorrect = (n: number) =>
+                cfg.mode === "moins_que" ? n < cfg.threshold
+                : cfg.mode === "plus_que" ? n > cfg.threshold
+                : n > cfg.limitLo && n < cfg.limitHi;
+              const rows = [[0,1,2,3], [4,5,6], [7,8,9,10], [11]];
+              return (
+                <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{consigne}</p>
+                  <div className="space-y-1">
+                    {rows.map((rowIdxs, ri) => (
+                      <div key={ri} className={`flex gap-1 ${ri % 2 === 1 ? "pl-4" : ""}`}>
+                        {rowIdxs.map(idx => {
+                          const n = cfg.numbers[idx]!;
+                          const sel = ex24Selected[si]?.[idx] ?? false;
+                          const correct = isCorrect(n);
+                          let cls = "flex-1 rounded border px-1 py-2 text-center text-xs font-bold tabular-nums transition-colors";
+                          if (ex24Validated) {
+                            cls += correct && sel ? " border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-300"
+                              : correct && !sel ? " border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
+                              : !correct && sel ? " border-red-400 bg-[var(--color-bg-primary)] text-red-500 line-through"
+                              : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+                          } else {
+                            cls += sel ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
+                              : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                          }
+                          return (
+                            <button key={idx} type="button" className={cls}
+                              onClick={() => { if (ex24Validated) return; setEx24Selected(prev => prev.map((s2, si2) => si2 === si ? s2.map((v, vi) => vi === idx ? !v : v) : s2)); }}>
+                              {n.toLocaleString("fr-CH")}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex24Validated} onClick={() => setEx24Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx24} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 25 — Colorier par plage (A1.4) ──────────────────────────── */}
+      {step === "ex25" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 25</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Coloriez les insectes</h2>
+        </div>}>
+          <div className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
+            <p>Cliquez sur chaque nombre pour lui attribuer la bonne couleur.</p>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-green-400" />En vert : 350 – 600</span>
+              <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-400" />En bleu : &gt; 710</span>
+              <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-yellow-400" />En jaune : &lt; 300</span>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {ex25Numbers.map((n, ni) => {
+              const col = ex25Colors[ni];
+              const correctCol = ex25CorrectColor(n);
+              const COLOR_BG: Record<string, string> = {
+                vert: "bg-green-100 dark:bg-green-900/40 border-green-400",
+                bleu: "bg-blue-100 dark:bg-blue-900/40 border-blue-400",
+                jaune: "bg-yellow-100 dark:bg-yellow-900/40 border-yellow-400",
+              };
+              const COLOR_CYCLE = [null, "vert", "bleu", "jaune"];
+              const nextCol = COLOR_CYCLE[(COLOR_CYCLE.indexOf(col) + 1) % COLOR_CYCLE.length] as string | null;
+              let cls = "flex flex-col items-center justify-center rounded-[var(--radius-md)] border p-2 transition-colors";
+              if (ex25Validated) {
+                const ok = col === correctCol;
+                cls += ok ? " border-green-400 bg-green-50 dark:bg-green-950/20"
+                  : " border-red-400 bg-red-50 dark:bg-red-950/20";
+              } else {
+                cls += col ? ` ${COLOR_BG[col] ?? "border-[var(--color-border-default)]"} cursor-pointer`
+                  : " border-[var(--color-border-default)] hover:border-teal-400 cursor-pointer";
+              }
+              return (
+                <button key={ni} type="button" className={cls}
+                  onClick={() => { if (!ex25Validated) setEx25Colors(prev => prev.map((c, ci) => ci === ni ? nextCol : c)); }}>
+                  <span className="text-2xl" aria-hidden>🪰</span>
+                  <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+                  {ex25Validated && (
+                    <span className={`text-xs font-medium ${col === correctCol ? "text-green-600 dark:text-green-400" : "text-red-500"}`}>
+                      {col === correctCol ? "✓" : `→ ${correctCol ?? "sans"}`}
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex25Validated} onClick={() => setEx25Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx25} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 26 — Nombres dans les bulles (A1.4) ─────────────────────── */}
+      {step === "ex26" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 26</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez les nombres dans les bulles</h2>
+        </div>}>
+          <div className="mb-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">Cochez chaque nombre dans la bonne bulle (un nombre peut être dans plusieurs bulles).</p>
+          </div>
+          <div className="mb-3 flex flex-wrap gap-2">
+            {EX26_NUMBERS.map(n => (
+              <span key={n} className="rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-2 py-0.5 text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+            ))}
+          </div>
+          <div className="space-y-3">
+            {EX26_BUBBLES.map((bubble, bi) => {
+              const correctSet = new Set(EX26_NUMBERS.filter(n => n > bubble.lo && n < bubble.hi));
+              return (
+                <div key={bi} className={`rounded-[var(--radius-md)] border p-3 ${bubble.bgCls} ${bubble.borderCls}`}>
+                  <p className={`mb-2 text-sm font-semibold ${bubble.textCls}`}>
+                    Entre {bubble.lo} et {bubble.hi}
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {EX26_NUMBERS.map((n, ni) => {
+                      const checked = ex26Checked[ni]?.[bi] ?? false;
+                      const isCorrect = correctSet.has(n);
+                      let cls = "rounded border px-2 py-0.5 text-xs font-bold tabular-nums transition-colors";
+                      if (ex26Validated) {
+                        cls += checked && isCorrect ? " border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-300"
+                          : checked && !isCorrect ? " border-red-400 bg-red-50 dark:bg-red-950/20 text-red-500 line-through"
+                          : !checked && isCorrect ? " border-green-400 bg-[var(--color-bg-primary)] text-green-600 dark:text-green-400"
+                          : " border-transparent text-[var(--color-text-secondary)]";
+                      } else {
+                        cls += checked ? ` ${bubble.btnSel} text-[var(--color-text-primary)] cursor-pointer`
+                          : ` ${bubble.btnBase} bg-transparent text-[var(--color-text-primary)] cursor-pointer`;
+                      }
+                      return (
+                        <button key={n} type="button" className={cls}
+                          onClick={() => { if (!ex26Validated) setEx26Checked(prev => prev.map((row, ri) => ri === ni ? row.map((v, vi) => vi === bi ? !v : v) : row)); }}>
+                          {n}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex26Validated} onClick={() => setEx26Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx26} />
+            </div>
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
+
+      {/* ── Exercice 27 — Écrire entre deux bornes (A1.4) ────────────────────── */}
+      {step === "ex27" && (
+        <AppCard variant="elevated" header={<div>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 27</p>
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez un nombre entre les deux nombres</h2>
+        </div>}>
+          <div className="mb-3">
+            <p className="text-sm text-[var(--color-text-secondary)]">Écrivez n&apos;importe quel nombre entier entre les deux bornes.</p>
+          </div>
+          <div className="space-y-4">
+            {ex27Data.map((items, si) => (
+              <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                <p className="mb-2 text-xs font-semibold uppercase text-[var(--color-text-secondary)]">Série {si + 1}</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {items.map((item, ii) => {
+                    const ans = ex27Ans[si]?.[ii] ?? "";
+                    const parsed = parseInt(ans);
+                    const ok = ex27Validated ? (!isNaN(parsed) && parsed > item.lo && parsed < item.hi) : null;
+                    const fieldCls = "w-20 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
+                    const valCls = ok === true ? "border-green-400 bg-[var(--color-bg-primary)]" : ok === false ? "border-red-400 bg-[var(--color-bg-primary)]" : "";
+                    return (
+                      <div key={ii} className={`flex items-center justify-center gap-1 rounded-[var(--radius-md)] border px-2 py-2 text-sm font-bold tabular-nums transition-colors ${ok === true ? "border-green-400" : ok === false ? "border-red-400" : "border-[var(--color-border-default)]"}`}>
+                        {item.reversed ? (
+                          <>
+                            <span className="text-blue-600 dark:text-blue-400">{item.hi}</span>
+                            <span className="text-[var(--color-text-secondary)]">&gt;</span>
+                            {ex27Validated ? (
+                              <span className={`w-16 rounded border px-1 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
+                                {ok ? ans : `${item.lo + 1}–${item.hi - 1}`}
+                              </span>
+                            ) : (
+                              <input type="text" inputMode="numeric" className={fieldCls} value={ans}
+                                onChange={e => { const v = e.target.value.replace(/[^0-9]/g, ""); setEx27Ans(prev => prev.map((s2, si2) => si2 === si ? s2.map((q, qi) => qi === ii ? v : q) : s2)); }} />
+                            )}
+                            <span className="text-[var(--color-text-secondary)]">&gt;</span>
+                            <span className="text-green-600 dark:text-green-400">{item.lo}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-blue-600 dark:text-blue-400">{item.lo}</span>
+                            <span className="text-[var(--color-text-secondary)]">&lt;</span>
+                            {ex27Validated ? (
+                              <span className={`w-16 rounded border px-1 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
+                                {ok ? ans : `${item.lo + 1}–${item.hi - 1}`}
+                              </span>
+                            ) : (
+                              <input type="text" inputMode="numeric" className={fieldCls} value={ans}
+                                onChange={e => { const v = e.target.value.replace(/[^0-9]/g, ""); setEx27Ans(prev => prev.map((s2, si2) => si2 === si ? s2.map((q, qi) => qi === ii ? v : q) : s2)); }} />
+                            )}
+                            <span className="text-[var(--color-text-secondary)]">&lt;</span>
+                            <span className="text-green-600 dark:text-green-400">{item.hi}</span>
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex27Validated} onClick={() => setEx27Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx27} />
             </div>
             <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
