@@ -532,78 +532,81 @@ type Ex14Question = { refNum: number; refDisplay: string; tags: Ex14TagDef[] };
 
 const EX14_POOL: Ex14Question[] = [
   { refNum: 346, refDisplay: "346", tags: [
-    { label: "300 + 40 + 6", correct: true }, { label: "3 C + 4 D + 6 U", correct: true },
-    { label: "364", correct: false }, { label: "3 000 + 40 + 6", correct: false },
+    { label: "300 + 40 + 6", correct: true },
+    { label: "3 centaines, 4 dizaines et 6 unités", correct: true },
+    { label: "364", correct: false },
+    { label: "3 000 + 40 + 6", correct: false },
   ]},
   { refNum: 207, refDisplay: "207", tags: [
-    { label: "200 + 7", correct: true }, { label: "2 C + 7 U", correct: true },
-    { label: "270", correct: false }, { label: "2 000 + 7", correct: false },
+    { label: "200 + 7", correct: true },
+    { label: "2 centaines et 7 unités", correct: true },
+    { label: "270", correct: false },
+    { label: "2 × 100 + 7 × 10", correct: false },
   ]},
   { refNum: 560, refDisplay: "560", tags: [
-    { label: "500 + 60", correct: true }, { label: "5 C + 6 D", correct: true },
-    { label: "506", correct: false }, { label: "5 600", correct: false },
+    { label: "500 + 60", correct: true },
+    { label: "5 centaines et 6 dizaines", correct: true },
+    { label: "506", correct: false },
+    { label: "5 600", correct: false },
   ]},
   { refNum: 1003, refDisplay: "1 003", tags: [
-    { label: "1 000 + 3", correct: true }, { label: "1 M + 3 U", correct: true },
-    { label: "1 030", correct: false }, { label: "103", correct: false },
+    { label: "1 000 + 3", correct: true },
+    { label: "1 millier et 3 unités", correct: true },
+    { label: "1 × 1000 + 3 × 10", correct: false },
+    { label: "103", correct: false },
   ]},
   { refNum: 912, refDisplay: "912", tags: [
-    { label: "900 + 12", correct: true }, { label: "9 C + 1 D + 2 U", correct: true },
-    { label: "921", correct: false }, { label: "9 120", correct: false },
+    { label: "900 + 10 + 2", correct: true },
+    { label: "9 centaines, 1 dizaine et 2 unités", correct: true },
+    { label: "921", correct: false },
+    { label: "9 × 100 + 2 × 10 + 1", correct: false },
   ]},
   { refNum: 1010, refDisplay: "1 010", tags: [
-    { label: "1 000 + 10", correct: true }, { label: "1 M + 1 D", correct: true },
-    { label: "1 001", correct: false }, { label: "1 100", correct: false },
+    { label: "1 000 + 10", correct: true },
+    { label: "1 millier et 1 dizaine", correct: true },
+    { label: "1 001", correct: false },
+    { label: "1 100", correct: false },
   ]},
   { refNum: 415, refDisplay: "415", tags: [
-    { label: "400 + 15", correct: true }, { label: "4 C + 1 D + 5 U", correct: true },
-    { label: "451", correct: false }, { label: "145", correct: false },
+    { label: "400 + 10 + 5", correct: true },
+    { label: "4 centaines, 1 dizaine et 5 unités", correct: true },
+    { label: "451", correct: false },
+    { label: "4 × 100 + 5 × 10 + 1", correct: false },
   ]},
-  { refNum: 166, refDisplay: "166", tags: [
-    { label: "100 + 60 + 6", correct: true }, { label: "1 C + 6 D + 6 U", correct: true },
-    { label: "616", correct: false }, { label: "1 060", correct: false },
+  { refNum: 2304, refDisplay: "2 304", tags: [
+    { label: "2 000 + 300 + 4", correct: true },
+    { label: "2 milliers, 3 centaines et 4 unités", correct: true },
+    { label: "2 340", correct: false },
+    { label: "2 034", correct: false },
   ]},
 ];
 
 function generateEx14(): Ex14Question[] {
-  return shuffle(EX14_POOL).slice(0, 4).map(q => ({ ...q, tags: shuffle(q.tags) }));
+  return shuffle(EX14_POOL).slice(0, 2).map(q => ({ ...q, tags: shuffle(q.tags) }));
 }
 
-// ─── Ex15 — chaîne de flèches ─────────────────────────────────────────────────
+// ─── Ex16 — grille de flèches 3×3 ────────────────────────────────────────────
 
-type ArrowKind = "millier" | "centaine" | "dizaine";
-type ArrowDir = "right" | "left";
-interface Ex15Arrow { kind: ArrowKind; dir: ArrowDir }
-interface Ex15Box { value: number; blank: boolean }
 interface Ex15Question {
-  boxes: [Ex15Box, Ex15Box, Ex15Box];
-  arrows: [Ex15Arrow, Ex15Arrow];
-  colorTheme: "orange" | "sky" | "emerald";
+  tl: number; tr: number; bl: number; br: number;
+  givenIdx: number; // 0=TL, 1=TR, 2=BL, 3=BR
 }
 
 function generateEx15(): Ex15Question[] {
-  const themes = ["orange", "sky", "emerald"] as const;
-  const kinds: ArrowKind[] = ["millier", "centaine", "dizaine"];
-  const steps: Record<ArrowKind, number> = { millier: 1000, centaine: 100, dizaine: 10 };
-  return themes.map(colorTheme => {
-    let mid = 5000, a1: Ex15Arrow = { kind: "centaine", dir: "right" }, a2: Ex15Arrow = { kind: "dizaine", dir: "right" };
-    let leftVal = 4900, rightVal = 5010;
-    for (let g = 0; g < 300; g++) {
-      const _a1: Ex15Arrow = { kind: kinds[Math.floor(Math.random() * 3)]!, dir: Math.random() < 0.5 ? "right" : "left" };
-      const _a2: Ex15Arrow = { kind: kinds[Math.floor(Math.random() * 3)]!, dir: Math.random() < 0.5 ? "right" : "left" };
-      const _mid = Math.floor(Math.random() * 7000) + 1500;
-      const _left = _a1.dir === "right" ? _mid - steps[_a1.kind] : _mid + steps[_a1.kind];
-      const _right = _a2.dir === "right" ? _mid + steps[_a2.kind] : _mid - steps[_a2.kind];
-      if (_left > 0 && _left <= 9999 && _right > 0 && _right <= 9999) {
-        mid = _mid; a1 = _a1; a2 = _a2; leftVal = _left; rightVal = _right; break;
-      }
+  const results: Ex15Question[] = [];
+  for (let s = 0; s < 2; s++) {
+    let tl = 1000;
+    for (let g = 0; g < 400; g++) {
+      const b = Math.floor(Math.random() * 8900) + 100; // 100–9000
+      if (b + 1000 <= 9999 && b + 100 <= 9999 && b + 110 <= 9999) { tl = b; break; }
     }
-    return {
-      boxes: [{ value: leftVal, blank: true }, { value: mid, blank: false }, { value: rightVal, blank: true }] as [Ex15Box, Ex15Box, Ex15Box],
-      arrows: [a1, a2] as [Ex15Arrow, Ex15Arrow],
-      colorTheme,
-    };
-  });
+    const tr = tl + 1000;
+    const bl = tl + 100;
+    const br = bl + 10;
+    const givenIdx = Math.floor(Math.random() * 4);
+    results.push({ tl, tr, bl, br, givenIdx });
+  }
+  return results;
 }
 
 // ─── Ex16 — droite numérique (A1.3) ──────────────────────────────────────────
@@ -1244,26 +1247,26 @@ export function A1ModuleContent() {
   // Ex15 — appariement d'étiquettes (ex-14)
   const [ex15Questions, setEx15Questions] = useState<Ex14Question[]>(generateEx14);
   const [ex15Selected, setEx15Selected] = useState<boolean[][]>(() =>
-    Array(4).fill(null).map(() => Array(4).fill(false))
+    Array(2).fill(null).map(() => Array(4).fill(false))
   );
   const [ex15Validated, setEx15Validated] = useState(false);
   const resetEx15 = () => {
     setEx15Questions(generateEx14());
-    setEx15Selected(Array(4).fill(null).map(() => Array(4).fill(false)));
+    setEx15Selected(Array(2).fill(null).map(() => Array(4).fill(false)));
     setEx15Validated(false);
   };
 
-  // Ex16 — chaîne de flèches (ex-15)
+  // Ex16 — grille de flèches 3×3 (ex-15)
   const [ex16Questions, setEx16Questions] = useState<Ex15Question[]>(generateEx15);
   const [ex16Answers, setEx16Answers] = useState<string[][]>(() =>
-    Array(3).fill(null).map(() => ["", "", ""])
+    Array(2).fill(null).map(() => ["", "", "", ""])
   );
-  const [ex16Results, setEx16Results] = useState<(boolean | null)[]>(Array(3).fill(null));
+  const [ex16Results, setEx16Results] = useState<(boolean | null)[]>(Array(2).fill(null));
   const [ex16Validated, setEx16Validated] = useState(false);
   const resetEx16 = () => {
     setEx16Questions(generateEx15());
-    setEx16Answers(Array(3).fill(null).map(() => ["", "", ""]));
-    setEx16Results(Array(3).fill(null));
+    setEx16Answers(Array(2).fill(null).map(() => ["", "", "", ""]));
+    setEx16Results(Array(2).fill(null));
     setEx16Validated(false);
   };
 
@@ -2533,19 +2536,13 @@ export function A1ModuleContent() {
                 <div className="grid grid-cols-2 gap-2">
                   {q.tags.map((tag, ti) => {
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
-                    const tagPastel = [
-                      "border-yellow-300 bg-yellow-50 text-yellow-800 dark:bg-yellow-950/20 dark:text-yellow-200",
-                      "border-sky-300 bg-sky-50 text-sky-800 dark:bg-sky-950/20 dark:text-sky-200",
-                      "border-emerald-300 bg-emerald-50 text-emerald-800 dark:bg-emerald-950/20 dark:text-emerald-200",
-                      "border-purple-300 bg-purple-50 text-purple-800 dark:bg-purple-950/20 dark:text-purple-200",
-                    ][ti % 4]!;
-                    let cls = tagPastel;
+                    let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                     if (ex15Validated) {
                       if (tag.correct && isSelected) cls = "border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                      else if (tag.correct && !isSelected) cls = "border-amber-400 bg-amber-100 text-amber-800 dark:bg-amber-950/30 dark:text-amber-200";
+                      else if (tag.correct && !isSelected) cls = "border-amber-400 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/20";
                       else if (!tag.correct && isSelected) cls = "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
                     } else if (isSelected) {
-                      cls = "border-teal-400 bg-teal-50 text-teal-800 dark:bg-teal-950/20 dark:text-teal-200";
+                      cls = "border-teal-500 bg-teal-50 text-[var(--color-text-primary)] dark:bg-teal-950/20";
                     }
                     return (
                       <button key={ti} type="button"
@@ -2598,58 +2595,62 @@ export function A1ModuleContent() {
             <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
             <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
           </div>
-          <div className="space-y-4">
+          <div className="space-y-6">
             {ex16Questions.map((q, qi) => {
-              const result = ex16Results[qi] ?? null;
-              const themeCls = {
-                orange: "border-orange-200 bg-orange-50 dark:bg-orange-950/20",
-                sky: "border-sky-200 bg-sky-50 dark:bg-sky-950/20",
-                emerald: "border-emerald-200 bg-emerald-50 dark:bg-emerald-950/20",
-              }[q.colorTheme];
-              const arrowColorCls = (k: ArrowKind) => ({ millier: "text-blue-600 dark:text-blue-400", centaine: "text-red-500 dark:text-red-400", dizaine: "text-emerald-600 dark:text-emerald-400" }[k]);
-              const arrowLabel = (k: ArrowKind) => ({ millier: "+1 000", centaine: "+100", dizaine: "+10" }[k]);
-              const containerCls = result === null ? (themeCls ?? "border-[var(--color-border-default)]") : "border-[var(--color-border-default)]";
-              return (
-                <div key={qi} className={`rounded-[var(--radius-md)] border p-4 transition-colors ${containerCls}`}>
-                  <div className="flex items-center justify-center gap-2">
-                    {q.boxes.map((box, bi) => (
-                      <React.Fragment key={bi}>
-                        {bi > 0 && (() => {
-                          const arr = q.arrows[bi - 1]!;
-                          return (
-                            <div className={`flex flex-col items-center gap-0 min-w-[52px] ${arrowColorCls(arr.kind)}`}>
-                              <span className="text-[11px] font-bold leading-none">{arrowLabel(arr.kind)}</span>
-                              <span className="text-xl font-bold leading-none">{arr.dir === "right" ? "→" : "←"}</span>
-                            </div>
-                          );
-                        })()}
-                        {box.blank ? (
-                          ex16Validated ? (
-                            <div className={`flex h-12 w-20 items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${
-                              parseInt(ex16Answers[qi]?.[bi] ?? "") === box.value
-                                ? "border-green-400"
-                                : "border-red-400"
-                            }`}>
-                              {parseInt(ex16Answers[qi]?.[bi] ?? "") === box.value ? (ex16Answers[qi]?.[bi] ?? "") : String(box.value)}
-                            </div>
-                          ) : (
-                            <input type="text" inputMode="numeric"
-                              value={ex16Answers[qi]?.[bi] ?? ""}
-                              onChange={e => {
-                                setEx16Answers(prev => prev.map((row, ri) =>
-                                  ri === qi ? row.map((v, vi) => vi === bi ? e.target.value : v) : row
-                                ));
-                              }}
-                              className="h-12 w-20 rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
-                            />
-                          )
-                        ) : (
-                          <div className="flex h-12 w-20 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
-                            {box.value.toLocaleString("fr-CH")}
-                          </div>
-                        )}
-                      </React.Fragment>
+              const corners = [q.tl, q.tr, q.bl, q.br];
+              const cornerCell = (idx: number) => {
+                const val = corners[idx]!;
+                const isGiven = idx === q.givenIdx;
+                const ansKey = ["tl","tr","bl","br"][idx]!;
+                const ansIdx = idx;
+                if (isGiven) {
+                  return (
+                    <div className="flex h-14 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">
+                      {val.toLocaleString("fr-CH")}
+                    </div>
+                  );
+                }
+                const ans = ex16Answers[qi]?.[ansIdx] ?? "";
+                const isCorrect = ex16Validated ? parseInt(ans) === val : null;
+                return ex16Validated ? (
+                  <div className={`flex h-14 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isCorrect ? "border-green-400" : "border-red-400"}`}>
+                    {isCorrect ? ans : val.toLocaleString("fr-CH")}
+                  </div>
+                ) : (
+                  <input type="text" inputMode="numeric" value={ans}
+                    onChange={e => setEx16Answers(prev => prev.map((row, ri) =>
+                      ri === qi ? row.map((v, vi) => vi === ansIdx ? e.target.value : v) : row
                     ))}
+                    className="h-14 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                    aria-label={ansKey}
+                  />
+                );
+              };
+              return (
+                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  {/* 3×3 grid: corners=inputs, edge-middles=arrows, center=empty */}
+                  <div className="grid grid-cols-3 items-center gap-2">
+                    {/* Row 0: TL | +1M→ | TR */}
+                    <div>{cornerCell(0)}</div>
+                    <div className="flex flex-col items-center text-xs font-bold text-blue-600 dark:text-blue-400">
+                      <span>+1 000</span>
+                      <span className="text-lg leading-none">→</span>
+                    </div>
+                    <div>{cornerCell(1)}</div>
+                    {/* Row 1: +1C↓ | empty | empty */}
+                    <div className="flex flex-col items-center text-xs font-bold text-red-500 dark:text-red-400">
+                      <span>+100</span>
+                      <span className="text-lg leading-none">↓</span>
+                    </div>
+                    <div />
+                    <div />
+                    {/* Row 2: BL | +1D→ | BR */}
+                    <div>{cornerCell(2)}</div>
+                    <div className="flex flex-col items-center text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                      <span>+10</span>
+                      <span className="text-lg leading-none">→</span>
+                    </div>
+                    <div>{cornerCell(3)}</div>
                   </div>
                 </div>
               );
@@ -2660,11 +2661,12 @@ export function A1ModuleContent() {
             <div className="flex gap-2">
               <ActionIconButton action="valider" disabled={ex16Validated}
                 onClick={() => {
-                  const res = ex16Questions.map((q, qi) =>
-                    q.boxes.every((box, bi) =>
-                      !box.blank || parseInt(ex16Answers[qi]?.[bi] ?? "") === box.value
-                    )
-                  );
+                  const res = ex16Questions.map((q, qi) => {
+                    const corners = [q.tl, q.tr, q.bl, q.br];
+                    return corners.every((val, idx) =>
+                      idx === q.givenIdx || parseInt(ex16Answers[qi]?.[idx] ?? "") === val
+                    );
+                  });
                   setEx16Results(res);
                   setEx16Validated(true);
                 }} />
