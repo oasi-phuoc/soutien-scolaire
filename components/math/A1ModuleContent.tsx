@@ -2494,7 +2494,7 @@ export function A1ModuleContent() {
                         <div className="flex flex-1 flex-col items-center gap-0.5">
                           {ex14Validated ? (
                             <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(mOk)}`}>
-                              {mOk ? ans.m : String(m * 1000)}
+                              {(mOk && ans.m) ? ans.m : String(m * 1000)}
                             </span>
                           ) : (
                             <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.m}
@@ -2508,7 +2508,7 @@ export function A1ModuleContent() {
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
                         <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(cOk)}`}>
-                          {cOk ? ans.c : String(c * 100)}
+                          {(cOk && ans.c) ? ans.c : String(c * 100)}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.c}
@@ -2520,7 +2520,7 @@ export function A1ModuleContent() {
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
                         <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(dOk)}`}>
-                          {dOk ? ans.d : String(d * 10)}
+                          {(dOk && ans.d) ? ans.d : String(d * 10)}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.d}
@@ -2532,7 +2532,7 @@ export function A1ModuleContent() {
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
                         <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(uOk)}`}>
-                          {uOk ? ans.u : String(u)}
+                          {(uOk && ans.u) ? ans.u : String(u)}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.u}
