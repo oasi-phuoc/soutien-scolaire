@@ -1234,13 +1234,16 @@ export function A1ModuleContent() {
 
   const resetEx13 = () => { setEx13Questions(generateEx13()); setEx13Answers(Array(1).fill("")); setEx13Results(Array(1).fill(null)); setEx13Validated(false); };
 
-  // Ex14 — décomposition nombre (nouveau)
-  const [ex14Number, setEx14Number] = useState<number>(() => Math.floor(Math.random() * 9899) + 101);
-  const [ex14Ans, setEx14Ans] = useState<{m:string;c:string;d:string;u:string}>({m:"",c:"",d:"",u:""});
+  // Ex14 — décomposition nombre (2 séries)
+  const genEx14Nums = () => Array.from({length: 2}, () => Math.floor(Math.random() * 9899) + 101);
+  const [ex14Numbers, setEx14Numbers] = useState<number[]>(genEx14Nums);
+  const [ex14Ans, setEx14Ans] = useState<{m:string;c:string;d:string;u:string}[]>(() =>
+    Array(2).fill(null).map(() => ({m:"",c:"",d:"",u:""}))
+  );
   const [ex14Validated, setEx14Validated] = useState(false);
   const resetEx14 = () => {
-    setEx14Number(Math.floor(Math.random() * 9899) + 101);
-    setEx14Ans({m:"",c:"",d:"",u:""});
+    setEx14Numbers(genEx14Nums());
+    setEx14Ans(Array(2).fill(null).map(() => ({m:"",c:"",d:"",u:""})));
     setEx14Validated(false);
   };
 
@@ -2402,114 +2405,111 @@ export function A1ModuleContent() {
       )}
 
       {/* ── Exercice 14 — Décomposer un nombre ─────────────────────────────── */}
-      {step === "ex14" && (() => {
-        const n = ex14Number;
-        const m = Math.floor(n / 1000);
-        const c = Math.floor((n % 1000) / 100);
-        const d = Math.floor((n % 100) / 10);
-        const u = n % 10;
-        const hasM = m > 0;
-        const mOk = ex14Validated ? parseInt(ex14Ans.m) === m * 1000 : null;
-        const cOk = ex14Validated ? parseInt(ex14Ans.c) === c * 100 : null;
-        const dOk = ex14Validated ? parseInt(ex14Ans.d) === d * 10 : null;
-        const uOk = ex14Validated ? parseInt(ex14Ans.u) === u : null;
-        const fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
-        const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-green-400 bg-[var(--color-bg-primary)]" : "border-red-400 bg-[var(--color-bg-primary)]";
-        return (
-          <AppCard variant="elevated" header={
-            <div>
-              <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 14</p>
-              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Décomposez le nombre</h2>
-            </div>
-          }>
-            <div className="mb-4">
-              <p className="text-sm text-[var(--color-text-secondary)]">Décomposez le nombre en milliers, centaines, dizaines et unités.</p>
-              {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
-                <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex14[pivot]}</p>
-              ) : null}
-            </div>
-            <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-              <div className="mb-4 flex justify-center">
-                <span className="rounded-full border-2 border-violet-300 bg-violet-50 px-8 py-2 text-2xl font-bold tabular-nums text-violet-700 dark:bg-violet-950/30 dark:text-violet-300">
-                  {n.toLocaleString("fr-CH")}
-                </span>
-              </div>
-              <div className="flex items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
-                <span className="shrink-0">=</span>
-                {hasM && (
-                  <>
-                    {ex14Validated ? (
-                      <span className={`flex-1 rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(mOk)}`}>
-                        {mOk ? ex14Ans.m : String(m * 1000)}
-                      </span>
-                    ) : (
-                      <input className={`${fieldCls} border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ex14Ans.m}
-                        onChange={e => setEx14Ans(p => ({...p, m: e.target.value}))} />
+      {step === "ex14" && (
+        <AppCard variant="elevated" header={
+          <div>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 14</p>
+            <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Décomposez le nombre</h2>
+          </div>
+        }>
+          <div className="mb-4">
+            <p className="text-sm text-[var(--color-text-secondary)]">Décomposez le nombre en milliers, centaines, dizaines et unités.</p>
+            {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
+              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex14[pivot]}</p>
+            ) : null}
+          </div>
+          <div className="space-y-4">
+            {ex14Numbers.map((n, qi) => {
+              const m = Math.floor(n / 1000);
+              const c = Math.floor((n % 1000) / 100);
+              const d = Math.floor((n % 100) / 10);
+              const u = n % 10;
+              const hasM = m > 0;
+              const ans = ex14Ans[qi] ?? {m:"",c:"",d:"",u:""};
+              const mOk = ex14Validated ? (ans.m === "" ? 0 : parseInt(ans.m)) === m * 1000 : null;
+              const cOk = ex14Validated ? (ans.c === "" ? 0 : parseInt(ans.c)) === c * 100 : null;
+              const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
+              const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
+              const fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
+              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-green-400 bg-[var(--color-bg-primary)]" : "border-red-400 bg-[var(--color-bg-primary)]";
+              const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
+                setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
+              return (
+                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+                  <div className="mb-3 flex justify-center">
+                    <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
+                      {n.toLocaleString("fr-CH")}
+                    </span>
+                  </div>
+                  <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+                    <span className="mt-[7px] shrink-0">=</span>
+                    {hasM && (
+                      <>
+                        <div className="flex flex-1 flex-col items-center gap-0.5">
+                          {ex14Validated ? (
+                            <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(mOk)}`}>
+                              {mOk ? ans.m : String(m * 1000)}
+                            </span>
+                          ) : (
+                            <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.m}
+                              onChange={e => setAns({m: e.target.value})} />
+                          )}
+                          <span className="text-xs text-[var(--color-text-secondary)]">millier</span>
+                        </div>
+                        <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                      </>
                     )}
-                    <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                  </>
-                )}
-                {ex14Validated ? (
-                  <span className={`flex-1 rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(cOk)}`}>
-                    {cOk ? ex14Ans.c : String(c * 100)}
-                  </span>
-                ) : (
-                  <input className={`${fieldCls} border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ex14Ans.c}
-                    onChange={e => setEx14Ans(p => ({...p, c: e.target.value}))} />
-                )}
-                <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                {ex14Validated ? (
-                  <span className={`flex-1 rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(dOk)}`}>
-                    {dOk ? ex14Ans.d : String(d * 10)}
-                  </span>
-                ) : (
-                  <input className={`${fieldCls} border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ex14Ans.d}
-                    onChange={e => setEx14Ans(p => ({...p, d: e.target.value}))} />
-                )}
-                <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                {ex14Validated ? (
-                  <span className={`flex-1 rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(uOk)}`}>
-                    {uOk ? ex14Ans.u : String(u)}
-                  </span>
-                ) : (
-                  <input className={`${fieldCls} border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ex14Ans.u}
-                    onChange={e => setEx14Ans(p => ({...p, u: e.target.value}))} />
-                )}
-              </div>
-              {hasM && (
-                <div className="mt-2 flex gap-1 text-xs text-[var(--color-text-secondary)]">
-                  <span className="flex-1 text-center">milliers</span>
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">centaines</span>
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">dizaines</span>
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">unités</span>
+                    <div className="flex flex-1 flex-col items-center gap-0.5">
+                      {ex14Validated ? (
+                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(cOk)}`}>
+                          {cOk ? ans.c : String(c * 100)}
+                        </span>
+                      ) : (
+                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.c}
+                          onChange={e => setAns({c: e.target.value})} />
+                      )}
+                      <span className="text-xs text-[var(--color-text-secondary)]">centaine</span>
+                    </div>
+                    <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                    <div className="flex flex-1 flex-col items-center gap-0.5">
+                      {ex14Validated ? (
+                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(dOk)}`}>
+                          {dOk ? ans.d : String(d * 10)}
+                        </span>
+                      ) : (
+                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.d}
+                          onChange={e => setAns({d: e.target.value})} />
+                      )}
+                      <span className="text-xs text-[var(--color-text-secondary)]">dizaine</span>
+                    </div>
+                    <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                    <div className="flex flex-1 flex-col items-center gap-0.5">
+                      {ex14Validated ? (
+                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(uOk)}`}>
+                          {uOk ? ans.u : String(u)}
+                        </span>
+                      ) : (
+                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.u}
+                          onChange={e => setAns({u: e.target.value})} />
+                      )}
+                      <span className="text-xs text-[var(--color-text-secondary)]">unité</span>
+                    </div>
+                  </div>
                 </div>
-              )}
-              {!hasM && (
-                <div className="mt-2 flex gap-1 text-xs text-[var(--color-text-secondary)]">
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">centaines</span>
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">dizaines</span>
-                  <span className="w-4 shrink-0" />
-                  <span className="flex-1 text-center">unités</span>
-                </div>
-              )}
+              );
+            })}
+          </div>
+          <div className="mt-6 flex items-center justify-between">
+            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
+            <div className="flex gap-2">
+              <ActionIconButton action="valider" disabled={ex14Validated}
+                onClick={() => setEx14Validated(true)} />
+              <ActionIconButton action="recommencer" onClick={resetEx14} />
             </div>
-            <div className="mt-6 flex items-center justify-between">
-              <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-              <div className="flex gap-2">
-                <ActionIconButton action="valider" disabled={ex14Validated}
-                  onClick={() => setEx14Validated(true)} />
-                <ActionIconButton action="recommencer" onClick={resetEx14} />
-              </div>
-              <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-            </div>
-          </AppCard>
-        );
-      })()}
+            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
+          </div>
+        </AppCard>
+      )}
 
       {/* ── Exercice 15 — Appariement d'étiquettes ──────────────────────────── */}
       {step === "ex15" && (
@@ -2529,9 +2529,9 @@ export function A1ModuleContent() {
             {ex15Questions.map((q, qi) => (
               <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                 <div className="mb-3 flex justify-center">
-                  <div className="rounded-full border-2 border-rose-300 bg-rose-100 px-8 py-2 text-2xl font-bold tabular-nums text-rose-700 dark:bg-rose-950/30 dark:text-rose-300">
+                  <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
                     {q.refDisplay}
-                  </div>
+                  </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   {q.tags.map((tag, ti) => {
