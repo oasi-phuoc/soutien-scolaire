@@ -1,0 +1,268 @@
+import type { MathSubmoduleLesson } from "./math-a1-types";
+
+export const MATH_A2_LESSONS: MathSubmoduleLesson[] = [
+  {
+    submoduleId: "A2-1",
+    submoduleCode: "A2.1",
+    theory: {
+      title: {
+        fr: "Addition (avec et sans retenue)",
+        en: "Addition (with and without carrying)",
+        ar: "الجمع (مع وبدون احتياط)",
+        fa: "جمع (با و بدون نقلی)",
+        ti: "ድምር (ምስ ዘይምስ ምስጓዝ)",
+        uk: "Додавання (з переносом і без)",
+      },
+      paragraphs: {
+        fr: [
+          "L'addition permet de réunir plusieurs quantités. Le signe de l'addition est « + » (plus). Les nombres à additionner sont les termes. Le résultat de l'addition est la somme.",
+          "Propriété 1 — Commutativité : si l'on change l'ordre des termes d'une addition, la somme ne change pas. Exemple : 57 + 49 = 49 + 57 = 106.",
+          "Propriété 2 — Associativité : on peut additionner plus de deux termes dans l'ordre que l'on veut. Exemple : 15 + 37 + 22 = 52 + 22 = 74.",
+          "Addition en colonnes : écrivez les nombres en alignant les unités, les dizaines, les centaines. Commencez par additionner les unités. Si la somme dépasse 9, retenez le chiffre des dizaines (retenue). Continuez avec les dizaines, puis les centaines.",
+          "Exemple : 579 + 24 → unités : 9 + 4 = 13 (on pose 3, on retient 1) → dizaines : 1 + 7 + 2 = 10 (on pose 0, on retient 1) → centaines : 1 + 5 = 6 → résultat : 603.",
+        ],
+        en: [
+          "Addition combines several quantities. The addition sign is « + » (plus). The numbers being added are called terms. The result is the sum.",
+          "Property 1 — Commutativity: changing the order of the terms does not change the sum. Example: 57 + 49 = 49 + 57 = 106.",
+          "Property 2 — Associativity: you can add more than two terms in any order. Example: 15 + 37 + 22 = 74.",
+          "Column addition: write the numbers aligned by units, tens, hundreds. Start with the units. If the sum exceeds 9, carry the tens digit. Then do the tens, then the hundreds.",
+          "Example: 579 + 24 → units: 9 + 4 = 13 (write 3, carry 1) → tens: 1 + 7 + 2 = 10 (write 0, carry 1) → hundreds: 1 + 5 = 6 → result: 603.",
+        ],
+        ar: [
+          "الجمع يجمع عدة كميات معًا. علامة الجمع « + » (زائد). الأعداد المجموعة تسمى الحدود. الناتج يسمى المجموع.",
+          "الخاصية 1 — الإبدال: تغيير ترتيب الحدود لا يغير المجموع. مثال: 57 + 49 = 49 + 57 = 106.",
+          "الخاصية 2 — التجميع: يمكن جمع أكثر من حدين بأي ترتيب. مثال: 15 + 37 + 22 = 74.",
+          "الجمع في أعمدة: اكتب الأعداد محاذيًا الآحاد والعشرات والمئات. ابدأ بجمع الآحاد. إذا تجاوز المجموع 9، احمل رقم العشرات (الاحتياط). ثم العشرات، ثم المئات.",
+          "مثال: 579 + 24 → آحاد: 9 + 4 = 13 (اكتب 3 واحمل 1) → عشرات: 1 + 7 + 2 = 10 (اكتب 0 واحمل 1) → مئات: 1 + 5 = 6 → الناتج: 603.",
+        ],
+        fa: [
+          "جمع چند مقدار را با هم ترکیب می‌کند. علامت جمع « + » است. اعداد جمع‌شونده را جملات می‌گویند. نتیجه مجموع نام دارد.",
+          "ویژگی ۱ — جابجایی: تغییر ترتیب جملات مجموع را تغییر نمی‌دهد. مثال: ۵۷ + ۴۹ = ۴۹ + ۵۷ = ۱۰۶.",
+          "ویژگی ۲ — انجمنی: می‌توان بیش از دو جمله را به هر ترتیبی جمع کرد. مثال: ۱۵ + ۳۷ + ۲۲ = ۷۴.",
+          "جمع ستونی: اعداد را با تراز کردن یکان، دهگان، صدگان بنویسید. از یکان‌ها شروع کنید. اگر مجموع از ۹ بیشتر شد، دهگان را نقل دهید. سپس دهگان‌ها و صدگان‌ها.",
+          "مثال: ۵۷۹ + ۲۴ → یکان: ۹ + ۴ = ۱۳ (بنویس ۳، نقل ۱) → دهگان: ۱ + ۷ + ۲ = ۱۰ (بنویس ۰، نقل ۱) → صدگان: ۱ + ۵ = ۶ → نتیجه: ۶۰۳.",
+        ],
+        ti: [
+          "ምደማር ብዙ መጠናት ሓቢሩ ይሰርዕ። ምልክት ምደማር « + » (ደሚርካ) እዩ። ዝጽምሙ ቁጽሪታት ውጽኢት ኮይኖም ድምር ይፍጠር።",
+          "ኣቃውማ ፩ — ቅደም-ሰዓበ: ምስዓብ ቅደም ዝሓልፍ ድምር ኣይቅይርን። ኣብነት: 57 + 49 = 49 + 57 = 106.",
+          "ኣቃውማ ፪ — ምጽምባር: ዝበዝሑ ቁጽርታት ብዝደለዮ ቅደም ክድምር ይከኣል። ኣብነት: 15 + 37 + 22 = 74.",
+          "ኣብ ዓምዲ ምደማር: ቁጽርታት ኣሃዱ፡ ዓሰርተ፡ ሚእቲ ብምስልሳልና። ካብ ኣሃዱ ጀምር። ውጽኢቱ ካብ 9 ዝበዝሕ እንተኾነ ናብ ዓሰርተ ሃሊዝ። ድሕሪኡ ዓሰርተ ቀጽል ሚእቲ።",
+          "ኣብነት: 579 + 24 → ኣሃዱ: 9 + 4 = 13 (3 ጽሓፍ፡ 1 ሃሊዝ) → ዓሰርተ: 1+7+2=10 (0 ጽሓፍ፡ 1 ሃሊዝ) → ሚእቲ: 1+5=6 → ውጽኢት: 603.",
+        ],
+        uk: [
+          "Додавання об'єднує кілька величин. Знак додавання « + » (плюс). Числа, що додаються, — доданки. Результат — сума.",
+          "Властивість 1 — Комутативність: зміна порядку доданків не змінює суму. Приклад: 57 + 49 = 49 + 57 = 106.",
+          "Властивість 2 — Асоціативність: можна додавати більше двох доданків у будь-якому порядку. Приклад: 15 + 37 + 22 = 74.",
+          "Додавання в стовпчик: запишіть числа, вирівнюючи одиниці, десятки, сотні. Починайте з одиниць. Якщо сума перевищує 9, запам'ятайте десяток (перенос). Потім десятки та сотні.",
+          "Приклад: 579 + 24 → одиниці: 9 + 4 = 13 (пишемо 3, переносимо 1) → десятки: 1+7+2=10 (пишемо 0, переносимо 1) → сотні: 1+5=6 → результат: 603.",
+        ],
+      },
+    },
+    exercises: [
+      {
+        id: "a2-1-e1",
+        promptFr: "Quel est le résultat de 57 + 49 ?",
+        type: "number",
+        acceptable: ["106"],
+      },
+      {
+        id: "a2-1-e2",
+        promptFr: "Quel est le résultat de 348 + 276 ?",
+        type: "number",
+        acceptable: ["624"],
+      },
+      {
+        id: "a2-1-e3",
+        promptFr: "Comment appelle-t-on le résultat d'une addition ?",
+        type: "short_text",
+        acceptable: ["somme", "la somme"],
+      },
+      {
+        id: "a2-1-e4",
+        promptFr: "Vrai ou faux : 84 + 37 = 37 + 84 ?",
+        type: "short_text",
+        acceptable: ["vrai", "true"],
+      },
+      {
+        id: "a2-1-e5",
+        promptFr: "Calculez 579 + 24.",
+        type: "number",
+        acceptable: ["603"],
+      },
+    ],
+  },
+  {
+    submoduleId: "A2-2",
+    submoduleCode: "A2.2",
+    theory: {
+      title: {
+        fr: "Soustraction (avec et sans emprunt)",
+        en: "Subtraction (with and without borrowing)",
+        ar: "الطرح (مع وبدون استلاف)",
+        fa: "تفریق (با و بدون قرض)",
+        ti: "ምቅናስ (ምስ ዘይምስ ምልቃሕ)",
+        uk: "Віднімання (з позикою і без)",
+      },
+      paragraphs: {
+        fr: [
+          "La soustraction permet de retirer une quantité à une autre. Le signe de la soustraction est « − » (moins). Les nombres de la soustraction sont les termes. Le résultat de la soustraction est la différence.",
+          "La soustraction n'est pas commutative : si l'on change l'ordre des termes, on n'obtient pas le même résultat. Exemple : 57 − 49 = 8, mais 49 − 57 est impossible (dans les entiers naturels).",
+          "Soustraction en colonnes : écrivez les nombres en alignant les unités, les dizaines, les centaines. Commencez par soustraire les unités.",
+          "Si la soustraction des unités est impossible (ex. 3 − 7), on effectue un emprunt : on prend 1 dizaine au voisin pour l'ajouter aux unités (1 dizaine = 10 unités). Exemple : 863 − 427 → 3 − 7 impossible → 6 dizaines deviennent 5 dizaines et 10 unités → 10 + 3 − 7 = 6.",
+          "Continuez ensuite avec les dizaines (en tenant compte de l'emprunt), puis avec les centaines. Résultat : 436.",
+        ],
+        en: [
+          "Subtraction removes a quantity from another. The sign is « − » (minus). The numbers are called terms, the result is the difference.",
+          "Subtraction is NOT commutative: reversing the order gives a different result. Example: 57 − 49 = 8, but 49 − 57 is impossible (in natural numbers).",
+          "Column subtraction: write the numbers aligned by units, tens, hundreds. Start by subtracting the units.",
+          "If subtracting the units is impossible (e.g. 3 − 7), borrow 1 ten from the tens column and add it to the units (1 ten = 10 units). Example: 863 − 427 → 3 − 7 impossible → borrow: 10 + 3 − 7 = 6.",
+          "Continue with the tens (adjusted for the borrow), then the hundreds. Result: 436.",
+        ],
+        ar: [
+          "الطرح يزيل كمية من أخرى. علامة الطرح « − » (ناقص). الأعداد تسمى الحدود، والناتج يسمى الفرق.",
+          "الطرح ليس تبديليًا: تغيير الترتيب يعطي نتيجة مختلفة. مثال: 57 − 49 = 8، لكن 49 − 57 مستحيل (في الأعداد الطبيعية).",
+          "الطرح في أعمدة: اكتب الأعداد محاذيًا الآحاد والعشرات والمئات. ابدأ بطرح الآحاد.",
+          "إذا كان طرح الآحاد مستحيلًا (مثلًا 3 − 7)، استعر 1 عشرة من خانة العشرات وأضفها إلى الآحاد (1 عشرة = 10 آحاد). مثال: 863 − 427 → 3 − 7 مستحيل → الاستعارة: 10 + 3 − 7 = 6.",
+          "ثم انتقل إلى العشرات (مع مراعاة الاستعارة)، ثم المئات. الناتج: 436.",
+        ],
+        fa: [
+          "تفریق مقداری را از مقدار دیگری کم می‌کند. علامت تفریق « − » است. اعداد را جملات و نتیجه را تفاوت می‌نامند.",
+          "تفریق جابجایی‌پذیر نیست: تغییر ترتیب نتیجه متفاوتی می‌دهد. مثال: ۵۷ − ۴۹ = ۸، اما ۴۹ − ۵۷ ممکن نیست (در اعداد طبیعی).",
+          "تفریق ستونی: اعداد را با تراز کردن یکان، دهگان، صدگان بنویسید. از یکان‌ها شروع کنید.",
+          "اگر تفریق یکان‌ها ممکن نبود (مثلاً ۳ − ۷)، ۱ دهگان از ستون دهگان‌ها قرض بگیرید و به یکان‌ها اضافه کنید. مثال: ۸۶۳ − ۴۲۷ → ۳ − ۷ ممکن نیست → قرض: ۱۰ + ۳ − ۷ = ۶.",
+          "سپس دهگان‌ها (با احتساب قرض) و بعد صدگان‌ها را ادامه دهید. نتیجه: ۴۳۶.",
+        ],
+        ti: [
+          "ምቅናስ ሓደ መጠን ካብ ካሊእ ነቀላ። ምልክት ምቅናስ « − » (ዉሒድ) እዩ። ቁጽሪታት ሓደስሓደ ክብሮምን ፍልልዮምን ይብሃሉ።",
+          "ምቅናስ ቅደምሰዓባዊ ኣይኮነን: ቅደም ምቕያር ፍልልይ ይቕይር። ኣብነት: 57 − 49 = 8 ኮነ 49 − 57 ዘይከኣል።",
+          "ኣብ ዓምዲ ምቅናስ: ቁጽርታት ኣሃዱ፡ ዓሰርተ፡ ሚእቲ ብምስልሳልና። ካብ ኣሃዱ ጀምር።",
+          "ምቅናስ ኣሃዱ ዘይከኣል እንተኾነ (ኣብነት 3 − 7)፡ 1 ዓሰርተ ካብ ዓሰርተ ዓምዲ ልቃሕ (1 ዓሰርተ = 10 ኣሃዱ)። ኣብነት: 863 − 427 → 3 − 7 ዘይከኣል → ልቃሕ: 10 + 3 − 7 = 6.",
+          "ቀጺልካ ዓሰርተ (ምስ ልቃሕ ቁጸር) ድሕሪ ሚእቲ ጽሓፍ። ውጽኢት: 436.",
+        ],
+        uk: [
+          "Віднімання вилучає одну величину з іншої. Знак « − » (мінус). Числа — доданки, результат — різниця.",
+          "Віднімання не є комутативним: зміна порядку дає інший результат. Приклад: 57 − 49 = 8, але 49 − 57 неможливе (в натуральних числах).",
+          "Віднімання в стовпчик: запишіть числа, вирівнюючи одиниці, десятки, сотні. Починайте з одиниць.",
+          "Якщо відняти одиниці неможливо (напр. 3 − 7), позичте 1 десяток із стовпця десятків і додайте до одиниць. Приклад: 863 − 427 → 3 − 7 неможливо → позика: 10 + 3 − 7 = 6.",
+          "Продовжте з десятками (з урахуванням позики), потім сотнями. Результат: 436.",
+        ],
+      },
+    },
+    exercises: [
+      {
+        id: "a2-2-e1",
+        promptFr: "Quel est le résultat de 57 − 49 ?",
+        type: "number",
+        acceptable: ["8"],
+      },
+      {
+        id: "a2-2-e2",
+        promptFr: "Calculez 863 − 427.",
+        type: "number",
+        acceptable: ["436"],
+      },
+      {
+        id: "a2-2-e3",
+        promptFr: "Comment appelle-t-on le résultat d'une soustraction ?",
+        type: "short_text",
+        acceptable: ["différence", "la différence"],
+      },
+      {
+        id: "a2-2-e4",
+        promptFr: "Calculez 1005 − 348.",
+        type: "number",
+        acceptable: ["657"],
+      },
+      {
+        id: "a2-2-e5",
+        promptFr: "Calculez 700 − 256.",
+        type: "number",
+        acceptable: ["444"],
+      },
+    ],
+  },
+  {
+    submoduleId: "A2-3",
+    submoduleCode: "A2.3",
+    theory: {
+      title: {
+        fr: "Estimation et arrondi",
+        en: "Estimation and rounding",
+        ar: "التقدير والتقريب",
+        fa: "تخمین و گرد کردن",
+        ti: "ቅምሻ ምግምጋም",
+        uk: "Оцінювання та округлення",
+      },
+      paragraphs: {
+        fr: [
+          "L'arrondi permet de simplifier un calcul en remplaçant un nombre par un nombre « proche » mais plus simple. On arrondit souvent à la dizaine, à la centaine ou au millier le plus proche.",
+          "Règle : si le chiffre suivant (celui qu'on supprime) est ≥ 5, on arrondit vers le haut. S'il est < 5, on arrondit vers le bas. Exemples : 347 arrondi à la centaine → 300 (car 4 < 5). 850 arrondi à la centaine → 900 (car 5 ≥ 5).",
+          "L'estimation consiste à trouver un résultat approximatif avant de calculer exactement. On commence par arrondir chaque nombre, puis on calcule. Exemple : 348 + 276 ≈ 350 + 280 = 630 (résultat exact : 624).",
+          "L'estimation est utile pour vérifier rapidement si une réponse est plausible.",
+        ],
+        en: [
+          "Rounding simplifies a calculation by replacing a number with a nearby round number. We often round to the nearest ten, hundred, or thousand.",
+          "Rule: if the next digit (the one being dropped) is ≥ 5, round up; if < 5, round down. Examples: 347 rounded to the hundred → 300 (because 4 < 5). 850 rounded to the hundred → 900 (because 5 ≥ 5).",
+          "Estimation means finding an approximate result before calculating exactly. Round each number first, then calculate. Example: 348 + 276 ≈ 350 + 280 = 630 (exact: 624).",
+          "Estimation is useful for quickly checking if an answer is reasonable.",
+        ],
+        ar: [
+          "التقريب يبسّط الحساب باستبدال عدد بعدد قريب منه وأسهل. نقرّب عادةً إلى أقرب عشرة أو مئة أو ألف.",
+          "القاعدة: إذا كان الرقم التالي (المحذوف) ≥ 5 نقرّب للأعلى، وإذا كان < 5 نقرّب للأسفل. أمثلة: 347 مقرّب إلى المئة ← 300 (لأن 4 < 5). 850 مقرّب إلى المئة ← 900 (لأن 5 ≥ 5).",
+          "التقدير يعني إيجاد نتيجة تقريبية قبل الحساب الدقيق. قرّب كل عدد أولًا ثم احسب. مثال: 348 + 276 ≈ 350 + 280 = 630 (الدقيق: 624).",
+          "التقدير مفيد للتحقق السريع من معقولية الإجابة.",
+        ],
+        fa: [
+          "گرد کردن محاسبه را با جایگزین کردن یک عدد با یک عدد نزدیک ساده‌تر ساده می‌کند. معمولاً به نزدیک‌ترین ده، صد یا هزار گرد می‌کنیم.",
+          "قانون: اگر رقم بعدی (که حذف می‌شود) ≥ ۵ باشد، به بالا گرد می‌کنیم؛ اگر < ۵ باشد، به پایین. مثال‌ها: ۳۴۷ گرد شده به صد ← ۳۰۰ (چون ۴ < ۵). ۸۵۰ گرد شده به صد ← ۹۰۰ (چون ۵ ≥ ۵).",
+          "تخمین یعنی یافتن نتیجه‌ای تقریبی پیش از محاسبه دقیق. ابتدا هر عدد را گرد کنید سپس محاسبه کنید. مثال: ۳۴۸ + ۲۷۶ ≈ ۳۵۰ + ۲۸۰ = ۶۳۰ (دقیق: ۶۲۴).",
+          "تخمین برای بررسی سریع معقول بودن پاسخ مفید است.",
+        ],
+        ti: [
+          "ምልካዕ ናይ ቁጽሪ ምቅርራብ ናብ ቀረቡ ቀሊል ቁጽሪ ናይ ሕሳብ ቅምሻ ይሰርሕ። ናብ ቀሪቡ ዓሰርተ ሚእቲ ወይ ሽሕ ይምልካዕ።",
+          "ሕጊ: ዝቕጽል ቁጽሪ ≥ 5 እንተኾነ ዓቢ ኣቅጣጫ ምልካዕ ይጥቀም። < 5 እንተኾነ ንታሕቲ ምልካዕ ይጥቀም። ኣብነት: 347 ናብ ሚእቲ → 300 (ምኽንያቱ 4 < 5). 850 ናብ ሚእቲ → 900 (ምኽንያቱ 5 ≥ 5).",
+          "ቅምሻ ቅድሚ ትኽክለኛ ሕሳብ ምሕሳብ ናይ ቅምሻ ናይ ሕሳብ ምኩናን ምርካብ ማለት እዩ። ኣቐዲምካ ቁጽሪ ምልካዕ ድሕሪ ሕሳብ ጌር። ኣብነት: 348 + 276 ≈ 350 + 280 = 630 (ትኽክለኛ: 624).",
+          "ቅምሻ ናይ ምምርምር ቅዱስ ምዃን ናይ ምላሽ ቅልጡፍ ምርጋጸ ጠቃሚ እዩ።",
+        ],
+        uk: [
+          "Округлення спрощує обчислення, замінюючи число близьким круглим числом. Зазвичай округляємо до найближчого десятка, сотні або тисячі.",
+          "Правило: якщо наступна цифра ≥ 5 — округляємо вгору; якщо < 5 — вниз. Приклади: 347 до сотні → 300 (бо 4 < 5). 850 до сотні → 900 (бо 5 ≥ 5).",
+          "Оцінювання — це знаходження наближеного результату перед точним обчисленням. Спочатку округлюємо числа, потім рахуємо. Приклад: 348 + 276 ≈ 350 + 280 = 630 (точно: 624).",
+          "Оцінювання корисне для швидкої перевірки правдоподібності відповіді.",
+        ],
+      },
+    },
+    exercises: [
+      {
+        id: "a2-3-e1",
+        promptFr: "Arrondissez 347 à la centaine la plus proche.",
+        type: "number",
+        acceptable: ["300"],
+      },
+      {
+        id: "a2-3-e2",
+        promptFr: "Arrondissez 850 à la centaine la plus proche.",
+        type: "number",
+        acceptable: ["900"],
+      },
+      {
+        id: "a2-3-e3",
+        promptFr: "Arrondissez 4 682 au millier le plus proche.",
+        type: "number",
+        acceptable: ["5000"],
+      },
+      {
+        id: "a2-3-e4",
+        promptFr: "Estimez 348 + 276 en arrondissant à la centaine (donnez votre estimation).",
+        type: "number",
+        acceptable: ["600", "630"],
+      },
+      {
+        id: "a2-3-e5",
+        promptFr: "Arrondissez 73 à la dizaine la plus proche.",
+        type: "number",
+        acceptable: ["70"],
+      },
+    ],
+  },
+];

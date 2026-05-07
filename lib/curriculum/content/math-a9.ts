@@ -1,0 +1,358 @@
+import type { MathSubmoduleLesson } from "./math-a1-types";
+
+export const MATH_A9_LESSONS: MathSubmoduleLesson[] = [
+  {
+    submoduleId: "A9-1",
+    submoduleCode: "A9.1",
+    theory: {
+      title: {
+        fr: "Variable et inconnue",
+        en: "Variable and unknown",
+        ar: "المتغير والمجهول",
+        fa: "متغیر و مجهول",
+        ti: "ተለዋዋጢ ቁጽርን ዘይፍለጥ ቁጽርን",
+        uk: "Змінна і невідома",
+      },
+      paragraphs: {
+        fr: [
+          "En algèbre, une lettre peut représenter un nombre. On l'appelle une variable ou une inconnue selon le contexte.",
+          "Une variable représente un nombre qui peut changer (ex. : x désigne la longueur d'un rectangle). Une inconnue est un nombre fixe mais inconnu à trouver.",
+          "Exemple : dans l'expression 3x + 5, x est la variable. Si on cherche x tel que 3x + 5 = 20, x est une inconnue.",
+          "Convention : on utilise souvent les lettres x, y, z pour les variables et a, b, c pour les constantes.",
+        ],
+        en: [
+          "In algebra, a letter can represent a number. It is called a variable or an unknown depending on context.",
+          "A variable is a number that can change (e.g., x is the length of a rectangle). An unknown is a fixed but unknown number to find.",
+          "Example: in 3x + 5, x is the variable. If we look for x such that 3x + 5 = 20, x is an unknown.",
+          "Convention: x, y, z are used for variables; a, b, c for constants.",
+        ],
+        ar: [
+          "في الجبر، تُمثل الحرف عدداً. يُسمى متغيراً أو مجهولاً حسب السياق.",
+          "المتغير عدد يمكن أن يتغير. المجهول عدد ثابت لكن غير معروف.",
+          "مثال: في 3x + 5، x متغير. إذا بحثنا عن x بحيث 3x + 5 = 20، فـ x مجهول.",
+          "اصطلاح: x, y, z للمتغيرات؛ a, b, c للثوابت.",
+        ],
+        fa: [
+          "در جبر، یک حرف می‌تواند نشان‌دهنده یک عدد باشد. بسته به موقعیت متغیر یا مجهول نامیده می‌شود.",
+          "متغیر عددی است که می‌تواند تغییر کند. مجهول عددی ثابت اما ناشناخته است.",
+          "مثال: در 3x + 5، x متغیر است. اگر دنبال x بگردیم که 3x + 5 = 20، x مجهول است.",
+          "قرارداد: x, y, z برای متغیرها؛ a, b, c برای ثابت‌ها.",
+        ],
+        ti: [
+          "ኣልጀብራ ሓደ ፊደል ቁጽሪ ዘርኢ ክኸውን ይኽእል ዩ. ሰምዩ ተለዋዋጢ ወይ ዘይፍለጥ ይብሃሉ.",
+          "ተለዋዋጢ ዝለዋወጥ ቁጽሪ ዩ. ዘይፍለጥ ቁጽሪ ወሰን ዘለዎ ግን ዘይፍለጥ ቁጽሪ ዩ.",
+          "ምሳሌ: 3x + 5 ዘሎ x ተለዋዋጢ ዩ. 3x + 5 = 20 ምስ ዝኸውን x ዘይፍለጥ ዩ.",
+          "ስምምዕ: x, y, z ንተለዋዋጢ; a, b, c ንቋሚ.",
+        ],
+        uk: [
+          "В алгебрі буква може позначати число. Залежно від контексту її називають змінною або невідомою.",
+          "Змінна — число, що може змінюватися. Невідома — фіксоване, але невідоме число.",
+          "Приклад: у виразі 3x + 5, x — змінна. Якщо шукаємо x таке, що 3x + 5 = 20, x — невідома.",
+          "Угода: x, y, z для змінних; a, b, c для сталих.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-1-e1", promptFr: "Dans 2y + 7, quelle est la variable ?", type: "short_text", acceptable: ["y"] },
+      { id: "a9-1-e2", promptFr: "Si a = 4, calcule 3a.", type: "number", acceptable: ["12"] },
+      { id: "a9-1-e3", promptFr: "Si x = 5, calcule 2x + 1.", type: "number", acceptable: ["11"] },
+      { id: "a9-1-e4", promptFr: "Dans l'équation 4x = 20, x est-il une variable ou une inconnue ? (réponse : 'variable' ou 'inconnue')", type: "short_text", acceptable: ["inconnue"] },
+      { id: "a9-1-e5", promptFr: "Si n = 3, calcule n² − 1.", type: "number", acceptable: ["8"] },
+    ],
+  },
+  {
+    submoduleId: "A9-2",
+    submoduleCode: "A9.2",
+    theory: {
+      title: {
+        fr: "Lire et écrire une expression algébrique",
+        en: "Reading and writing an algebraic expression",
+        ar: "قراءة وكتابة تعبير جبري",
+        fa: "خواندن و نوشتن عبارت جبری",
+        ti: "ናይ ኣልጀብራ ኣዝማሪ ምንባብን ምጽሓፍን",
+        uk: "Читання та запис алгебраїчного виразу",
+      },
+      paragraphs: {
+        fr: [
+          "Une expression algébrique est une combinaison de nombres, de variables et d'opérations. Exemples : 3x + 2 ; 5a − b ; x² + 4x − 7.",
+          "Conventions d'écriture : on omet le signe × entre un nombre et une variable (3x signifie 3 × x). On écrit le coefficient avant la variable.",
+          "Vocabulaire : terme (partie séparée par + ou −), coefficient (nombre devant la variable), terme constant (sans variable).",
+          "Exemples : dans 4x² − 3x + 7, les termes sont 4x², −3x, et 7. Les coefficients sont 4 et −3. 7 est le terme constant.",
+        ],
+        en: [
+          "An algebraic expression is a combination of numbers, variables, and operations. Examples: 3x + 2; 5a − b; x² + 4x − 7.",
+          "Writing conventions: omit the × sign between a number and a variable (3x means 3 × x). Write the coefficient before the variable.",
+          "Vocabulary: term (part separated by + or −), coefficient (number in front of variable), constant term (no variable).",
+          "Examples: in 4x² − 3x + 7, the terms are 4x², −3x, and 7; coefficients are 4 and −3; 7 is constant.",
+        ],
+        ar: [
+          "التعبير الجبري هو تركيبة من أعداد ومتغيرات وعمليات. أمثلة: 3x + 2؛ x² + 4x − 7.",
+          "قواعد الكتابة: نحذف علامة × بين عدد ومتغير (3x تعني 3 × x). يُكتب المعامل قبل المتغير.",
+          "مفردات: حد (قسم يفصله + أو −)، معامل (عدد أمام المتغير)، حد ثابت (بدون متغير).",
+          "مثال: في 4x² − 3x + 7، الحدود هي 4x² و −3x و 7. المعاملات 4 و−3.",
+        ],
+        fa: [
+          "عبارت جبری ترکیبی از اعداد، متغیرها و عملگرهاست. مثال: 3x + 2؛ x² + 4x − 7.",
+          "قراردادهای نوشتن: علامت × بین عدد و متغیر حذف می‌شود (3x یعنی 3 × x).",
+          "واژگان: جمله (بخشی که با + یا − جدا می‌شود)، ضریب (عدد جلوی متغیر)، جمله ثابت (بدون متغیر).",
+          "مثال: در 4x² − 3x + 7، جملات 4x²، −3x، و 7 هستند.",
+        ],
+        ti: [
+          "ናይ ኣልጀብራ ኣዝማሪ ናይ ቁጽርታትን ተለዋዋጢን ናይ ስራሕ ጥምረት ዩ. ምሳሌ: 3x + 2; x² + 4x − 7.",
+          "ናይ ምጽሓፍ ስምምዕ: × ምልክት ካብ ቁጽርን ተለዋዋጢ ጊዜ ይምሕዶ (3x ዘምልክት 3 × x ዩ).",
+          "ቃለ-ቃለ: ወጽዓ (ካብ + ወይ − ዝፈለ ክፋል), ኮፊሺየንት (ቁጽሪ ቅድሚ ተለዋዋጢ), ቋሚ ወጽዓ (ብዘይ ተለዋዋጢ).",
+          "ምሳሌ: 4x² − 3x + 7 ዘሎ ወጽዓ 4x², −3x, 7 ዩ.",
+        ],
+        uk: [
+          "Алгебраїчний вираз — це поєднання чисел, змінних і операцій. Приклади: 3x + 2; x² + 4x − 7.",
+          "Правила запису: знак × між числом і змінною опускається (3x означає 3 × x). Коефіцієнт пишуть перед змінною.",
+          "Словник: доданок (частина, відділена + або −), коефіцієнт (число перед змінною), вільний член (без змінної).",
+          "Приклад: у 4x² − 3x + 7 доданки: 4x², −3x, 7; коефіцієнти: 4 і −3; 7 — вільний член.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-2-e1", promptFr: "Dans 5x − 3, quel est le coefficient de x ?", type: "number", acceptable: ["5"] },
+      { id: "a9-2-e2", promptFr: "Dans 7x² + 2x − 9, quel est le terme constant ?", type: "number", acceptable: ["-9", "−9"] },
+      { id: "a9-2-e3", promptFr: "Combien de termes a l'expression 4a + 3b − 1 ?", type: "number", acceptable: ["3"] },
+      { id: "a9-2-e4", promptFr: "Écris 'deux fois x plus cinq' comme expression.", type: "short_text", acceptable: ["2x+5", "2x + 5"] },
+      { id: "a9-2-e5", promptFr: "Dans 6y, quel est le coefficient ?", type: "number", acceptable: ["6"] },
+    ],
+  },
+  {
+    submoduleId: "A9-3",
+    submoduleCode: "A9.3",
+    theory: {
+      title: {
+        fr: "Substitution (évaluation)",
+        en: "Substitution (evaluation)",
+        ar: "الإحلال (التقييم)",
+        fa: "جایگذاری (ارزیابی)",
+        ti: "ምትካእ (ምምዛን)",
+        uk: "Підстановка (обчислення значення)",
+      },
+      paragraphs: {
+        fr: [
+          "Évaluer une expression signifie remplacer les variables par des valeurs numériques et calculer le résultat.",
+          "Méthode : remplace chaque variable par sa valeur, puis effectue les calculs en respectant les priorités opératoires.",
+          "Exemple : évalue 3x² − 2x + 1 pour x = 3. → 3(3)² − 2(3) + 1 = 3 × 9 − 6 + 1 = 27 − 6 + 1 = 22.",
+          "Exemple avec deux variables : évalue a² + b pour a = 4, b = −3. → 16 + (−3) = 13.",
+        ],
+        en: [
+          "Evaluating an expression means replacing variables with numerical values and computing the result.",
+          "Method: replace each variable with its value, then compute following order of operations.",
+          "Example: evaluate 3x² − 2x + 1 for x = 3. → 3(9) − 6 + 1 = 27 − 6 + 1 = 22.",
+          "Two-variable example: evaluate a² + b for a = 4, b = −3. → 16 + (−3) = 13.",
+        ],
+        ar: [
+          "تقييم تعبير يعني استبدال المتغيرات بقيم عددية وحساب النتيجة.",
+          "الطريقة: استبدل كل متغير بقيمته ثم احسب مراعياً أولويات العمليات.",
+          "مثال: قيّم 3x² − 2x + 1 عند x = 3. → 27 − 6 + 1 = 22.",
+          "مثال بمتغيرين: a² + b عند a=4, b=−3. → 16 − 3 = 13.",
+        ],
+        fa: [
+          "ارزیابی عبارت یعنی جایگذاری متغیرها با مقادیر عددی و محاسبه نتیجه.",
+          "روش: هر متغیر را با مقدارش جایگزین کن، سپس با رعایت اولویت عملیات حساب کن.",
+          "مثال: 3x² − 2x + 1 را برای x = 3 ارزیابی کن. → 27 − 6 + 1 = 22.",
+          "مثال دو متغیره: a² + b برای a=4, b=−3 → 16 − 3 = 13.",
+        ],
+        ti: [
+          "ምምዛን ኣዝማሪ ዘምልክት ተለዋዋጢ ብቁጽሪ ምትካእን ፍጻሜ ምሕሳብን ዩ.",
+          "ኣፈጻጽማ: ነፍሲ ወከፍ ተለዋዋጢ ብዋጋኡ ተካኡ ብዘሎ ናብ ስሌት ምስ ቀዳምነት ስራሕ.",
+          "ምሳሌ: 3x² − 2x + 1 ምስ x=3 → 27 − 6 + 1 = 22.",
+          "ክልተ ተለዋዋጢ ምሳሌ: a² + b ምስ a=4, b=−3 → 16 − 3 = 13.",
+        ],
+        uk: [
+          "Обчислити значення виразу означає підставити числа замість змінних і знайти результат.",
+          "Метод: замінити кожну змінну її значенням, потім обчислити з урахуванням пріоритету операцій.",
+          "Приклад: обчисли 3x² − 2x + 1 для x = 3. → 27 − 6 + 1 = 22.",
+          "Приклад з двома змінними: a² + b при a = 4, b = −3 → 16 − 3 = 13.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-3-e1", promptFr: "Évalue 4x − 3 pour x = 5.", type: "number", acceptable: ["17"] },
+      { id: "a9-3-e2", promptFr: "Évalue x² + 2x pour x = 4.", type: "number", acceptable: ["24"] },
+      { id: "a9-3-e3", promptFr: "Évalue 3a + 2b pour a = 2, b = 5.", type: "number", acceptable: ["16"] },
+      { id: "a9-3-e4", promptFr: "Évalue 2x² − x + 1 pour x = 3.", type: "number", acceptable: ["16"] },
+      { id: "a9-3-e5", promptFr: "Évalue (a + b)² pour a = 1, b = 2.", type: "number", acceptable: ["9"] },
+    ],
+  },
+  {
+    submoduleId: "A9-4",
+    submoduleCode: "A9.4",
+    theory: {
+      title: {
+        fr: "Réduction (termes semblables)",
+        en: "Simplification (like terms)",
+        ar: "التبسيط (الحدود المتشابهة)",
+        fa: "ساده‌سازی (جملات مشابه)",
+        ti: "ምቅናስ (ተመሳሳሊ ወጽዓ)",
+        uk: "Зведення подібних доданків",
+      },
+      paragraphs: {
+        fr: [
+          "Des termes semblables sont des termes qui ont la même variable portée au même exposant. On peut les additionner ou soustraire.",
+          "Règle : pour additionner des termes semblables, on additionne leurs coefficients. Les termes constants se regroupent entre eux.",
+          "Exemples : 3x + 5x = 8x ; 7a − 2a = 5a ; 4x + 3 + 2x − 1 = 6x + 2.",
+          "Important : 3x et 3x² ne sont PAS des termes semblables (exposants différents). 3x et 3y non plus (variables différentes).",
+        ],
+        en: [
+          "Like terms have the same variable raised to the same exponent. They can be added or subtracted.",
+          "Rule: add like terms by adding their coefficients. Constant terms group together.",
+          "Examples: 3x + 5x = 8x; 7a − 2a = 5a; 4x + 3 + 2x − 1 = 6x + 2.",
+          "Important: 3x and 3x² are NOT like terms (different exponents); 3x and 3y are not either.",
+        ],
+        ar: [
+          "الحدود المتشابهة هي حدود لها نفس المتغير ونفس الأس. يمكن جمعها أو طرحها.",
+          "القاعدة: اجمع معاملات الحدود المتشابهة. الحدود الثابتة تُجمع مع بعضها.",
+          "أمثلة: 3x + 5x = 8x؛ 4x + 3 + 2x − 1 = 6x + 2.",
+          "مهم: 3x و 3x² ليسا حدين متشابهين (أسس مختلفة).",
+        ],
+        fa: [
+          "جملات مشابه جملاتی هستند که متغیر یکسان با توان یکسان دارند. می‌توان آن‌ها را جمع یا تفریق کرد.",
+          "قانون: برای جمع جملات مشابه، ضرایبشان را جمع کن.",
+          "مثال‌ها: 3x + 5x = 8x؛ 4x + 3 + 2x − 1 = 6x + 2.",
+          "مهم: 3x و 3x² جملات مشابه نیستند (توان متفاوت).",
+        ],
+        ti: [
+          "ተመሳሳሊ ወጽዓ ብሓደ ተለዋዋጢ ብሓደ ኣስፋፊሐ ዘቕርቦ ወጽዓ ዩ. ምኽፋሎምን ምጭናቕን ይከኣሉ.",
+          "ሕጊ: ናይ ተመሳሳሊ ወጽዓ ኮፊሺየንት ምኽፋሎም. ቋሚ ወጽዓ ምስ ናቶም ይጥርነፉ.",
+          "ምሳሌ: 3x + 5x = 8x; 4x + 3 + 2x − 1 = 6x + 2.",
+          "ኣገዳሲ: 3x ን 3x² ተመሳሳሊ ወጽዓ ኣይኮኑን.",
+        ],
+        uk: [
+          "Подібні доданки мають однакову змінну з однаковим показником. Їх можна додавати або віднімати.",
+          "Правило: зводимо подібні доданки, додаючи їхні коефіцієнти.",
+          "Приклади: 3x + 5x = 8x; 7a − 2a = 5a; 4x + 3 + 2x − 1 = 6x + 2.",
+          "Важливо: 3x і 3x² НЕ є подібними (різні показники); 3x і 3y — теж ні.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-4-e1", promptFr: "Réduis 5x + 3x.", type: "short_text", acceptable: ["8x"] },
+      { id: "a9-4-e2", promptFr: "Réduis 7a − 2a + 4.", type: "short_text", acceptable: ["5a+4", "5a + 4"] },
+      { id: "a9-4-e3", promptFr: "Réduis 3x + 2 + 4x − 5.", type: "short_text", acceptable: ["7x-3", "7x − 3"] },
+      { id: "a9-4-e4", promptFr: "Réduis 6y − y.", type: "short_text", acceptable: ["5y"] },
+      { id: "a9-4-e5", promptFr: "Est-ce que 4x et 4x² sont des termes semblables ? (oui/non)", type: "short_text", acceptable: ["non"] },
+    ],
+  },
+  {
+    submoduleId: "A9-5",
+    submoduleCode: "A9.5",
+    theory: {
+      title: {
+        fr: "Développement simple",
+        en: "Simple expansion",
+        ar: "التوسيع البسيط",
+        fa: "توسعه ساده",
+        ti: "ቀሊል ምስፋሕ",
+        uk: "Просте розкриття дужок",
+      },
+      paragraphs: {
+        fr: [
+          "Développer signifie supprimer les parenthèses en distribuant la multiplication. Propriété distributive : a(b + c) = ab + ac.",
+          "Exemples : 3(x + 4) = 3x + 12 ; 2(a − 5) = 2a − 10 ; −3(2x + 1) = −6x − 3.",
+          "Quand le facteur est négatif, tous les signes changent : −2(x − 3) = −2x + 6.",
+          "Développement de (a + b)(c + d) = ac + ad + bc + bd (double distribution).",
+        ],
+        en: [
+          "Expanding means removing parentheses by distributing multiplication. Distributive property: a(b + c) = ab + ac.",
+          "Examples: 3(x + 4) = 3x + 12; 2(a − 5) = 2a − 10; −3(2x + 1) = −6x − 3.",
+          "When the factor is negative, all signs change: −2(x − 3) = −2x + 6.",
+          "Expansion of (a + b)(c + d) = ac + ad + bc + bd.",
+        ],
+        ar: [
+          "التوسيع يعني إزالة الأقواس بتوزيع الضرب. الخاصية التوزيعية: a(b + c) = ab + ac.",
+          "أمثلة: 3(x + 4) = 3x + 12؛ −3(2x + 1) = −6x − 3.",
+          "عندما يكون العامل سالباً تتغير جميع الإشارات: −2(x − 3) = −2x + 6.",
+          "(a + b)(c + d) = ac + ad + bc + bd.",
+        ],
+        fa: [
+          "توسعه یعنی حذف پرانتز با توزیع ضرب. ویژگی توزیعی: a(b + c) = ab + ac.",
+          "مثال‌ها: 3(x + 4) = 3x + 12؛ −3(2x + 1) = −6x − 3.",
+          "وقتی ضریب منفی است همه علائم عوض می‌شوند: −2(x − 3) = −2x + 6.",
+          "(a + b)(c + d) = ac + ad + bc + bd.",
+        ],
+        ti: [
+          "ምስፋሕ ዘምልክት ምርባሕ ብምስፋሕ ቅርሕ ምኹናን ዩ. ናይ ምክፋል ንብረት: a(b + c) = ab + ac.",
+          "ምሳሌ: 3(x + 4) = 3x + 12; −3(2x + 1) = −6x − 3.",
+          "ምስ ኣሉታዊ ኮፊሺየንት ኩሉ ምልክት ይቐይር: −2(x − 3) = −2x + 6.",
+          "(a + b)(c + d) = ac + ad + bc + bd.",
+        ],
+        uk: [
+          "Розкрити дужки — означає прибрати їх, розподіляючи множення. Розподільна властивість: a(b + c) = ab + ac.",
+          "Приклади: 3(x + 4) = 3x + 12; −3(2x + 1) = −6x − 3.",
+          "Якщо множник від'ємний, усі знаки змінюються: −2(x − 3) = −2x + 6.",
+          "(a + b)(c + d) = ac + ad + bc + bd.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-5-e1", promptFr: "Développe 4(x + 3).", type: "short_text", acceptable: ["4x+12", "4x + 12"] },
+      { id: "a9-5-e2", promptFr: "Développe 2(3a − 5).", type: "short_text", acceptable: ["6a-10", "6a − 10"] },
+      { id: "a9-5-e3", promptFr: "Développe −3(x + 2).", type: "short_text", acceptable: ["-3x-6", "−3x − 6"] },
+      { id: "a9-5-e4", promptFr: "Développe et réduis 2(x + 1) + 3x.", type: "short_text", acceptable: ["5x+2", "5x + 2"] },
+      { id: "a9-5-e5", promptFr: "Développe −2(x − 4).", type: "short_text", acceptable: ["-2x+8", "−2x + 8"] },
+    ],
+  },
+  {
+    submoduleId: "A9-6",
+    submoduleCode: "A9.6",
+    theory: {
+      title: {
+        fr: "Factorisation simple",
+        en: "Simple factoring",
+        ar: "التحليل البسيط",
+        fa: "فاکتورگیری ساده",
+        ti: "ቀሊል ምፍራድ",
+        uk: "Просте винесення за дужки",
+      },
+      paragraphs: {
+        fr: [
+          "Factoriser est l'opération inverse du développement : on met en facteur commun.",
+          "Méthode : identifier le plus grand facteur commun (GCF) des termes, le mettre devant une parenthèse.",
+          "Exemples : 6x + 9 = 3(2x + 3) ; 10a − 15 = 5(2a − 3) ; 4x² + 8x = 4x(x + 2).",
+          "Vérification : en développant, on doit retrouver l'expression de départ.",
+        ],
+        en: [
+          "Factoring is the inverse of expanding: we extract a common factor.",
+          "Method: identify the greatest common factor (GCF) of all terms, place it before a bracket.",
+          "Examples: 6x + 9 = 3(2x + 3); 10a − 15 = 5(2a − 3); 4x² + 8x = 4x(x + 2).",
+          "Check: by expanding, you should get back the original expression.",
+        ],
+        ar: [
+          "التحليل هو العكس من التوسيع: نستخرج العامل المشترك.",
+          "الطريقة: حدد أكبر قاسم مشترك لجميع الحدود وضعه أمام قوس.",
+          "أمثلة: 6x + 9 = 3(2x + 3)؛ 4x² + 8x = 4x(x + 2).",
+          "تحقق: بالتوسيع يجب أن تعود إلى التعبير الأصلي.",
+        ],
+        fa: [
+          "فاکتورگیری عکس توسعه است: عامل مشترک را بیرون می‌آوریم.",
+          "روش: بزرگ‌ترین عامل مشترک همه جملات را پیدا کن و جلوی پرانتز بگذار.",
+          "مثال‌ها: 6x + 9 = 3(2x + 3)؛ 4x² + 8x = 4x(x + 2).",
+          "تأیید: با توسعه باید به عبارت اولیه برگردی.",
+        ],
+        ti: [
+          "ምፍራድ ናይ ምስፋሕ ተቃራኒ ዩ: ናይ ሓባር ሰረት ምሃብ.",
+          "ኣፈጻጽማ: ዝለቀ ናይ ሓባር ሰረት ኩሉ ወጽዓ ምርካብ ቅድሚ ቅርሕ ምስፋሕ.",
+          "ምሳሌ: 6x + 9 = 3(2x + 3); 4x² + 8x = 4x(x + 2).",
+          "ፍተሻ: ምስ ምስፋሕ ናብ ናህሰ ኣዝማሪ ምምላስ.",
+        ],
+        uk: [
+          "Факторизація — операція, обернена до розкриття дужок: виносимо спільний множник.",
+          "Метод: знайти НСД усіх доданків і винести його за дужки.",
+          "Приклади: 6x + 9 = 3(2x + 3); 10a − 15 = 5(2a − 3); 4x² + 8x = 4x(x + 2).",
+          "Перевірка: після розкриття дужок має вийти початковий вираз.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a9-6-e1", promptFr: "Factorise 4x + 8.", type: "short_text", acceptable: ["4(x+2)", "4(x + 2)"] },
+      { id: "a9-6-e2", promptFr: "Factorise 9a − 12.", type: "short_text", acceptable: ["3(3a-4)", "3(3a − 4)"] },
+      { id: "a9-6-e3", promptFr: "Factorise 6x² + 9x.", type: "short_text", acceptable: ["3x(2x+3)", "3x(2x + 3)"] },
+      { id: "a9-6-e4", promptFr: "Quel est le facteur commun de 10x + 15 ?", type: "number", acceptable: ["5"] },
+      { id: "a9-6-e5", promptFr: "Factorise 8a − 4.", type: "short_text", acceptable: ["4(2a-1)", "4(2a − 1)"] },
+    ],
+  },
+];

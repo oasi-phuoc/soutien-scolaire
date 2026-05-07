@@ -686,28 +686,67 @@ const ARROW_FLIP: Record<string, string> = {
   "→": "←", "←": "→", "↓": "↑", "↑": "↓", "↘": "↖", "↖": "↘",
 };
 
+function arrowColorValue(colorCls: string): number {
+  if (colorCls.includes("blue")) return 1000;
+  if (colorCls.includes("red")) return 100;
+  return 10;
+}
+
+// Compute signed offsets [TL, TR, BL, BR] relative to TL (base=0),
+// taking into account the ACTUAL (possibly flipped) arrow symbols.
+// Rule: following an arrow in its direction always ADDS the colour value.
+//   →/↓/↘ : destination = source + value  (positive offset)
+//   ←/↑/↖ : destination = source + value, but destination is the LEFT/TOP cell
+//            → source (right/bottom) = destination (left/top) - value
+function computeSignedOffsets(arrows: Ex16ArrowDef[]): [number, number, number, number] {
+  const o: [number, number, number, number] = [0, 0, 0, 0];
+  for (const a of arrows) {
+    const v = arrowColorValue(a.colorCls);
+    if (a.row === 0 && a.col === 1) {
+      // between TL(0) and TR(1)
+      o[1] = a.symbol === "→" ? v : -v;
+    } else if (a.row === 1 && a.col === 0) {
+      // between TL(0) and BL(2)
+      o[2] = a.symbol === "↓" ? v : -v;
+    } else if (a.row === 2 && a.col === 1) {
+      // between BL(2) and BR(3)
+      o[3] = o[2] + (a.symbol === "→" ? v : -v);
+    } else if (a.row === 1 && a.col === 2) {
+      // between TR(1) and BR(3)
+      o[3] = o[1] + (a.symbol === "↓" ? v : -v);
+    } else if (a.row === 1 && a.col === 1) {
+      // diagonal TL(0) → BR(3)
+      o[3] = a.symbol === "↘" ? v : -v;
+    }
+  }
+  return o;
+}
+
 function generateEx15(): Ex15Question[] {
   const results: Ex15Question[] = [];
   const usedCfgs = new Set<number>();
   for (let s = 0; s < 2; s++) {
-    // pick a cfg not yet used this session
     let cfgIdx: number;
     do { cfgIdx = Math.floor(Math.random() * EX16_CONFIGS.length); } while (usedCfgs.has(cfgIdx));
     usedCfgs.add(cfgIdx);
     const cfg = EX16_CONFIGS[cfgIdx]!;
-    const maxOffset = Math.max(...cfg.offsets);
-    let tl = 100;
-    for (let g = 0; g < 400; g++) {
-      const b = Math.floor(Math.random() * (9999 - maxOffset - 100)) + 100;
-      if (b + maxOffset <= 9999) { tl = b; break; }
-    }
-    const [o0, o1, o2, o3] = cfg.offsets;
+    // Flip arrows randomly first
     const arrows = cfg.arrows.map(a => {
       const flip = Math.random() < 0.5;
       const sym = flip ? (ARROW_FLIP[a.symbol] ?? a.symbol) : a.symbol;
       return { ...a, symbol: sym };
     });
-    results.push({ tl: tl + o0!, tr: tl + o1!, bl: tl + o2!, br: tl + o3!,
+    // Compute signed offsets from the actual (flipped) symbols
+    const o = computeSignedOffsets(arrows);
+    const minOff = Math.min(...o);
+    const maxOff = Math.max(...o);
+    const minBase = 100 - minOff;
+    const maxBase = 9999 - maxOff;
+    let base = minBase;
+    if (maxBase > minBase) {
+      base = Math.floor(Math.random() * (maxBase - minBase + 1)) + minBase;
+    }
+    results.push({ tl: base + o[0]!, tr: base + o[1]!, bl: base + o[2]!, br: base + o[3]!,
                    givenIdx: Math.floor(Math.random() * 4), cfgIdx, arrows });
   }
   return results;
@@ -3029,11 +3068,10 @@ export function A1ModuleContent() {
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
                     let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                     if (ex15Validated) {
-                      if (tag.correct && isSelected) cls = "border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                      else if (tag.correct && !isSelected) cls = "border-amber-400 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/20";
-                      else if (!tag.correct && isSelected) cls = "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+                      if (tag.correct) cls = "border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+                      else if (isSelected) cls = "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
                     } else if (isSelected) {
-                      cls = "border-teal-500 bg-teal-50 text-[var(--color-text-primary)] dark:bg-teal-950/20";
+                      cls = "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400";
                     }
                     return (
                       <button key={ti} type="button"
@@ -3126,8 +3164,12 @@ export function A1ModuleContent() {
                   } else {
                     const arrow = q.arrows.find(a => a.row === r && a.col === c);
                     cells.push(
-                      <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl font-bold ${arrow.colorCls}` : undefined}>
-                        {arrow?.symbol}
+                      <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl ${arrow.colorCls}` : undefined}>
+                        {arrow && (
+                          <span style={c === 1 ? { display: "inline-block", transform: "scaleX(2)" } : undefined}>
+                            {arrow.symbol}
+                          </span>
+                        )}
                       </div>
                     );
                   }
@@ -3378,82 +3420,99 @@ export function A1ModuleContent() {
                     );
                   })}
 
-                  {/* Q7a+Q7b — Ex15 tag-matching (2 questions, 1 pt each) */}
-                  {a12EvalEx15Qs.map((q, qi) => {
-                    const r15q = evalSubmitted ? (evalResults[`q15_${qi}`] ?? null) : null;
-                    return (
-                      <div key={qi}>
-                        <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">{7 + qi}. Choisissez les étiquettes correspondant au nombre <span className="font-bold">{q.refDisplay}</span>. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                          <div className="flex flex-wrap gap-2">
+                  {/* Q7+Q8 — Ex15 tag-matching (grouped, 1 pt each) */}
+                  <div>
+                    <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">7-8. Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p></div>
+                    <div className="space-y-4">
+                      {a12EvalEx15Qs.map((q, qi) => (
+                        <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                          <div className="mb-3 flex justify-center">
+                            <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">{q.refDisplay}</span>
+                          </div>
+                          <div className="flex flex-col gap-2">
                             {q.tags.map((tag, ti) => {
                               const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
-                              const correct = evalSubmitted ? tag.correct : null;
-                              const isWrong = evalSubmitted && sel && !tag.correct;
-                              const isMissed = evalSubmitted && !sel && tag.correct;
+                              let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                              if (evalSubmitted) {
+                                if (tag.correct) cls = "border-green-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+                                else if (sel) cls = "border-red-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+                              } else if (sel) {
+                                cls = "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400";
+                              }
                               return (
                                 <button key={ti} type="button"
                                   onClick={() => { if (!evalSubmitted) setA12EvalEx15Sel(prev => prev.map((row, ri) => ri === qi ? row.map((v, vi) => vi === ti ? !v : v) : row)); }}
-                                  className={`rounded border px-2 py-1 text-xs transition-colors ${correct === true ? "border-green-400 bg-green-50 text-[var(--color-text-primary)]" : isWrong ? "border-red-400 bg-red-50 text-[var(--color-text-primary)] line-through" : isMissed ? "border-amber-400 bg-amber-50 text-[var(--color-text-primary)]" : sel ? "border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 text-[var(--color-text-primary)] hover:border-teal-400"}`}>
-                                  {tag.label}
+                                  className={`flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ${cls}`}>
+                                  <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${sel ? "border-current bg-current" : "border-current/40"}`}>
+                                    {sel && <span className="h-2 w-2 rounded-full bg-white" />}
+                                  </span>
+                                  <span className="font-normal">{tag.label}</span>
                                 </button>
                               );
                             })}
                           </div>
-                          {evalSubmitted && r15q !== null && (
-                            <p className={`mt-2 text-xs font-medium ${r15q ? "text-green-600" : "text-red-500"}`}>{r15q ? "✓ Correct" : "✗ Incorrect"}</p>
-                          )}
                         </div>
-                      </div>
-                    );
-                  })}
+                      ))}
+                    </div>
+                  </div>
 
-                  {/* Q9a+Q9b — Ex16 arrow-grid (2 questions, 1 pt each) */}
-                  {a12EvalEx16Qs.map((q, qi) => {
-                    const vals = [q.tl, q.tr, q.bl, q.br];
-                    const CORNER_POS16 = [{r:0,c:0},{r:0,c:2},{r:2,c:0},{r:2,c:2}];
-                    const r16q = evalSubmitted ? (evalResults[`q16_${qi}`] ?? null) : null;
-                    const cells16: React.ReactNode[] = [];
-                    for (let r = 0; r < 3; r++) {
-                      for (let c = 0; c < 3; c++) {
-                        const ci = CORNER_POS16.findIndex(p => p.r === r && p.c === c);
-                        if (ci !== -1) {
-                          const isGiven = ci === q.givenIdx;
-                          const val = vals[ci]!;
-                          const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
-                          const isOk = evalSubmitted ? parseInt(ans) === val : null;
-                          if (isGiven) {
-                            cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded border border-[var(--color-border-default)] bg-amber-50 text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:bg-amber-950/30">{val.toLocaleString("fr-CH")}</div>);
-                          } else {
-                            cells16.push(evalSubmitted ? (
-                              <div key={`${r}${c}`} className={`flex h-10 w-full items-center justify-center rounded border bg-[var(--color-bg-primary)] text-sm tabular-nums text-[var(--color-text-primary)] ${isOk ? "border-green-400" : "border-red-400"}`}>{isOk ? ans : val.toLocaleString("fr-CH")}</div>
-                            ) : (
-                              <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans}
-                                onChange={e => { const v = e.target.value.replace(/[^0-9]/g,""); setA12EvalEx16Ans(prev => prev.map((row2, ri) => ri === qi ? row2.map((cv, ci2) => ci2 === ci ? v : cv) : row2)); }}
-                                className="h-10 w-full rounded border border-[var(--color-border-default)] bg-blue-50 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]"
-                              />
-                            ));
+                  {/* Q9+Q10 — Ex16 arrow-grid (grouped, 1 pt each) */}
+                  <div>
+                    <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">9-10. Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p></div>
+                    <div className="mb-3 flex flex-wrap gap-4 text-xs font-medium">
+                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
+                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
+                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
+                    </div>
+                    <div className="space-y-4">
+                      {a12EvalEx16Qs.map((q, qi) => {
+                        const vals = [q.tl, q.tr, q.bl, q.br];
+                        const CORNER_POS16 = [{r:0,c:0},{r:0,c:2},{r:2,c:0},{r:2,c:2}];
+                        const cells16: React.ReactNode[] = [];
+                        for (let r = 0; r < 3; r++) {
+                          for (let c = 0; c < 3; c++) {
+                            const ci = CORNER_POS16.findIndex(p => p.r === r && p.c === c);
+                            if (ci !== -1) {
+                              const isGiven = ci === q.givenIdx;
+                              const val = vals[ci]!;
+                              const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
+                              const isOk = evalSubmitted ? parseInt(ans) === val : null;
+                              if (isGiven) {
+                                cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
+                              } else {
+                                cells16.push(evalSubmitted ? (
+                                  <div key={`${r}${c}`} className={`flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isOk ? "border-green-400" : "border-red-400"}`}>{isOk ? ans : val.toLocaleString("fr-CH")}</div>
+                                ) : (
+                                  <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans}
+                                    onChange={e => { const v = e.target.value.replace(/[^0-9]/g,""); setA12EvalEx16Ans(prev => prev.map((row2, ri) => ri === qi ? row2.map((cv, ci2) => ci2 === ci ? v : cv) : row2)); }}
+                                    className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                                  />
+                                ));
+                              }
+                            } else {
+                              const arrow = q.arrows.find(a => a.row === r && a.col === c);
+                              cells16.push(
+                                <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl ${arrow.colorCls}` : undefined}>
+                                  {arrow && (
+                                    <span style={c === 1 ? { display: "inline-block", transform: "scaleX(2)" } : undefined}>
+                                      {arrow.symbol}
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            }
                           }
-                        } else {
-                          const arrow = q.arrows.find(a => a.row === r && a.col === c);
-                          cells16.push(<div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl font-bold ${arrow.colorCls}` : undefined}>{arrow?.symbol}</div>);
                         }
-                      }
-                    }
-                    return (
-                      <div key={qi}>
-                        <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">{9 + qi}. Complétez les cases selon les flèches. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                          <div className="grid grid-cols-3 items-center gap-2">
-                            {cells16}
+                        return (
+                          <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                            <div className="grid grid-cols-3 items-center gap-2">
+                              {cells16}
+                            </div>
                           </div>
-                          {evalSubmitted && r16q !== null && (
-                            <p className={`mt-2 text-xs font-medium ${r16q ? "text-green-600" : "text-red-500"}`}>{r16q ? "✓ Correct" : "✗ Incorrect"}</p>
-                          )}
-                        </div>
-                      </div>
-                    );
-                  })}
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               );
             })()}

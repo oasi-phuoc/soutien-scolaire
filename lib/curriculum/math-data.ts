@@ -22,6 +22,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A1.2", "Comparer les nombres"),
       sm("A1.3", "Droite numérique"),
       sm("A1.4", "Suites et régularités"),
+      sm("A1.5", "Suites numériques"),
     ],
   },
   {

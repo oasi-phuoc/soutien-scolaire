@@ -1,0 +1,358 @@
+import type { MathSubmoduleLesson } from "./math-a1-types";
+
+export const MATH_A10_LESSONS: MathSubmoduleLesson[] = [
+  {
+    submoduleId: "A10-1",
+    submoduleCode: "A10.1",
+    theory: {
+      title: {
+        fr: "Principe d'une équation",
+        en: "Principle of an equation",
+        ar: "مبدأ المعادلة",
+        fa: "اصل معادله",
+        ti: "ናይ ምዕርርያ መምርሒ",
+        uk: "Принцип рівняння",
+      },
+      paragraphs: {
+        fr: [
+          "Une équation est une égalité contenant une inconnue (ex. : 2x + 3 = 11). Résoudre une équation, c'est trouver la valeur de l'inconnue qui rend l'égalité vraie.",
+          "Principe fondamental : on peut effectuer la même opération des deux côtés de l'égalité sans la modifier. C'est comme une balance : ce qu'on ajoute à gauche, on l'ajoute aussi à droite.",
+          "Solution et vérification : quand on trouve x = 4, on vérifie en substituant : 2(4) + 3 = 11 ✓.",
+          "Une équation du 1er degré a une seule inconnue à la puissance 1, et elle admet exactement une solution.",
+        ],
+        en: [
+          "An equation is an equality containing an unknown (e.g., 2x + 3 = 11). Solving means finding the value that makes the equality true.",
+          "Fundamental principle: you can perform the same operation on both sides without changing the equation — like a balance scale.",
+          "Solution and check: when we find x = 4, we verify: 2(4) + 3 = 11 ✓.",
+          "A first-degree equation has one unknown to the power 1 and exactly one solution.",
+        ],
+        ar: [
+          "المعادلة مساواة تحتوي على مجهول (مثال: 2x + 3 = 11). الحل يعني إيجاد القيمة التي تجعل المساواة صحيحة.",
+          "المبدأ الأساسي: يمكن إجراء نفس العملية على طرفي المعادلة دون تغييرها — مثل الميزان.",
+          "التحقق: عند إيجاد x = 4 نتحقق: 2(4) + 3 = 11 ✓.",
+          "معادلة الدرجة الأولى لها مجهول واحد بالأس 1 ولها حل واحد بالضبط.",
+        ],
+        fa: [
+          "معادله برابری‌ای است که حاوی مجهول است (مثل 2x + 3 = 11). حل به معنی یافتن مقداری است که برابری را درست می‌کند.",
+          "اصل اساسی: می‌توان همان عملیات را روی هر دو طرف معادله انجام داد — مثل ترازو.",
+          "تأیید: وقتی x = 4 می‌یابیم: 2(4) + 3 = 11 ✓.",
+          "معادله درجه اول یک مجهول با توان 1 دارد و دقیقاً یک جواب دارد.",
+        ],
+        ti: [
+          "ምዕርርያ ዘይፍለጥ ቁጽሪ ዘሎ ማዕርነት ዩ (ምሳሌ: 2x + 3 = 11). ምፍታሕ ዘምልክት ማዕርነት ሓቂ ዝገብር ቁጽሪ ምርካብ ዩ.",
+          "ዋና መምርሒ: ኣብ ክልቲ ሸነኽ ሓደ ስራሕ ምትእትታው — ከም ሚዛን.",
+          "ፍተሻ: x = 4 ምስ ረኸብና: 2(4) + 3 = 11 ✓.",
+          "ናይ 1ይ ደርቢ ምዕርርያ ሓደ ዘይፍለጥ ቁጽሪ ብ1 ሓይሊ ዘለዎ ሓደ ፍትሒ ዩ.",
+        ],
+        uk: [
+          "Рівняння — це рівність, що містить невідому (напр., 2x + 3 = 11). Розв'язати — знайти значення, що робить рівність правильною.",
+          "Основний принцип: до обох частин рівняння можна застосовувати одну й ту саму операцію — як терези.",
+          "Перевірка: знайшовши x = 4, підставляємо: 2(4) + 3 = 11 ✓.",
+          "Рівняння першого степеня має одну невідому у степені 1 і рівно один розв'язок.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-1-e1", promptFr: "Résous x + 5 = 12.", type: "number", acceptable: ["7"] },
+      { id: "a10-1-e2", promptFr: "Résous x − 3 = 8.", type: "number", acceptable: ["11"] },
+      { id: "a10-1-e3", promptFr: "Résous 2x = 14.", type: "number", acceptable: ["7"] },
+      { id: "a10-1-e4", promptFr: "Résous x/4 = 5.", type: "number", acceptable: ["20"] },
+      { id: "a10-1-e5", promptFr: "Vérifie si x = 3 est solution de 2x + 1 = 7. (oui/non)", type: "short_text", acceptable: ["oui"] },
+    ],
+  },
+  {
+    submoduleId: "A10-2",
+    submoduleCode: "A10.2",
+    theory: {
+      title: {
+        fr: "Résolution : ax = b",
+        en: "Solving: ax = b",
+        ar: "الحل: ax = b",
+        fa: "حل: ax = b",
+        ti: "ምፍታሕ: ax = b",
+        uk: "Розв'язання: ax = b",
+      },
+      paragraphs: {
+        fr: [
+          "La forme ax = b se résout en divisant les deux membres par a (a ≠ 0) : x = b/a.",
+          "Exemple : 3x = 15 → x = 15/3 = 5. Vérification : 3 × 5 = 15 ✓.",
+          "Si a est négatif, on divise par a négatif : −4x = 20 → x = 20/(−4) = −5.",
+          "Cas particulier : si a = 0 et b = 0, tout nombre est solution. Si a = 0 et b ≠ 0, il n'y a pas de solution.",
+        ],
+        en: [
+          "The form ax = b is solved by dividing both sides by a (a ≠ 0): x = b/a.",
+          "Example: 3x = 15 → x = 15/3 = 5. Check: 3 × 5 = 15 ✓.",
+          "If a is negative: −4x = 20 → x = 20/(−4) = −5.",
+          "Special case: if a = 0 and b = 0, every number is a solution; if a = 0 and b ≠ 0, no solution exists.",
+        ],
+        ar: [
+          "الشكل ax = b يُحل بقسمة الطرفين على a (a ≠ 0): x = b/a.",
+          "مثال: 3x = 15 → x = 5. التحقق: 3 × 5 = 15 ✓.",
+          "إذا كان a سالباً: −4x = 20 → x = −5.",
+          "حالة خاصة: إذا a = 0 وb = 0، كل عدد حل؛ إذا a = 0 وb ≠ 0، لا يوجد حل.",
+        ],
+        fa: [
+          "فرم ax = b با تقسیم هر دو طرف بر a (a ≠ 0) حل می‌شود: x = b/a.",
+          "مثال: 3x = 15 → x = 5. تأیید: 3 × 5 = 15 ✓.",
+          "اگر a منفی باشد: −4x = 20 → x = −5.",
+          "حالت خاص: اگر a = 0 و b = 0، هر عددی جواب است؛ اگر a = 0 و b ≠ 0، جوابی ندارد.",
+        ],
+        ti: [
+          "ax = b ክልቲ ሸነኽ ብ a (a ≠ 0) ምምቃሉ: x = b/a.",
+          "ምሳሌ: 3x = 15 → x = 5. ፍተሻ: 3 × 5 = 15 ✓.",
+          "a ኣሉታዊ ምስ ዝኸውን: −4x = 20 → x = −5.",
+          "ፍሉይ ኩነት: a = 0 ን b = 0 ምስ ዝኸውን ዝኾነ ቁጽሪ ፍትሒ ዩ.",
+        ],
+        uk: [
+          "Форма ax = b розв'язується діленням обох частин на a (a ≠ 0): x = b/a.",
+          "Приклад: 3x = 15 → x = 5. Перевірка: 3 × 5 = 15 ✓.",
+          "Якщо a від'ємне: −4x = 20 → x = −5.",
+          "Особливий випадок: якщо a = 0 і b = 0 — будь-яке число є розв'язком; якщо a = 0 і b ≠ 0 — розв'язків немає.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-2-e1", promptFr: "Résous 5x = 35.", type: "number", acceptable: ["7"] },
+      { id: "a10-2-e2", promptFr: "Résous −3x = 12.", type: "number", acceptable: ["-4", "−4"] },
+      { id: "a10-2-e3", promptFr: "Résous 7x = 0.", type: "number", acceptable: ["0"] },
+      { id: "a10-2-e4", promptFr: "Résous x/3 = 6.", type: "number", acceptable: ["18"] },
+      { id: "a10-2-e5", promptFr: "Résous 4x = 10 (donne x sous forme décimale).", type: "short_text", acceptable: ["2,5", "2.5"] },
+    ],
+  },
+  {
+    submoduleId: "A10-3",
+    submoduleCode: "A10.3",
+    theory: {
+      title: {
+        fr: "Résolution : ax + b = c",
+        en: "Solving: ax + b = c",
+        ar: "الحل: ax + b = c",
+        fa: "حل: ax + b = c",
+        ti: "ምፍታሕ: ax + b = c",
+        uk: "Розв'язання: ax + b = c",
+      },
+      paragraphs: {
+        fr: [
+          "Méthode en deux étapes : (1) isoler le terme en x en soustrayant b des deux membres ; (2) diviser par a.",
+          "Exemple : 2x + 5 = 13 → 2x = 13 − 5 = 8 → x = 8/2 = 4.",
+          "Si des termes en x apparaissent des deux côtés, on les regroupe d'un côté : 3x + 2 = x + 10 → 3x − x = 10 − 2 → 2x = 8 → x = 4.",
+          "Toujours vérifier en substituant la valeur trouvée dans l'équation originale.",
+        ],
+        en: [
+          "Two-step method: (1) isolate the x-term by subtracting b from both sides; (2) divide by a.",
+          "Example: 2x + 5 = 13 → 2x = 8 → x = 4.",
+          "If x appears on both sides, collect them: 3x + 2 = x + 10 → 2x = 8 → x = 4.",
+          "Always check by substituting the found value into the original equation.",
+        ],
+        ar: [
+          "الطريقة بخطوتين: (1) عزل حد x بطرح b من الطرفين؛ (2) القسمة على a.",
+          "مثال: 2x + 5 = 13 → 2x = 8 → x = 4.",
+          "إذا ظهر x على الطرفين، نجمعه: 3x + 2 = x + 10 → 2x = 8 → x = 4.",
+          "تحقق دائماً بالتعويض.",
+        ],
+        fa: [
+          "روش دو مرحله‌ای: (1) جمله x را با تفریق b از هر دو طرف جدا کن؛ (2) بر a تقسیم کن.",
+          "مثال: 2x + 5 = 13 → 2x = 8 → x = 4.",
+          "اگر x در هر دو طرف ظاهر شد، جمع کن: 3x + 2 = x + 10 → 2x = 8 → x = 4.",
+          "همیشه با جایگذاری مقدار یافته‌شده تأیید کن.",
+        ],
+        ti: [
+          "ብክልተ ስጉምቲ ኣፈጻጽማ: (1) ብ b ካብ ክልቲ ሸነኽ ምቕናስ ናይ x ወጽዓ ምፍላይ; (2) ብ a ምምቃሉ.",
+          "ምሳሌ: 2x + 5 = 13 → 2x = 8 → x = 4.",
+          "x ኣብ ክልቲ ሸነኽ ምስ ዝህልው ምጥርናፍ: 3x + 2 = x + 10 → 2x = 8 → x = 4.",
+          "ብምትካእ ምፍሳሽ ክትፍትሽ ኣይትረስዕ.",
+        ],
+        uk: [
+          "Метод двох кроків: (1) виділити доданок із x, відніманням b від обох частин; (2) поділити на a.",
+          "Приклад: 2x + 5 = 13 → 2x = 8 → x = 4.",
+          "Якщо x є в обох частинах, зберемо їх: 3x + 2 = x + 10 → 2x = 8 → x = 4.",
+          "Завжди перевіряти підстановкою знайденого значення.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-3-e1", promptFr: "Résous 3x + 4 = 19.", type: "number", acceptable: ["5"] },
+      { id: "a10-3-e2", promptFr: "Résous 2x − 7 = 11.", type: "number", acceptable: ["9"] },
+      { id: "a10-3-e3", promptFr: "Résous 5x + 3 = 2x + 12.", type: "number", acceptable: ["3"] },
+      { id: "a10-3-e4", promptFr: "Résous 4x − 2 = 10.", type: "number", acceptable: ["3"] },
+      { id: "a10-3-e5", promptFr: "Résous 6x + 1 = 4x + 9.", type: "number", acceptable: ["4"] },
+    ],
+  },
+  {
+    submoduleId: "A10-4",
+    submoduleCode: "A10.4",
+    theory: {
+      title: {
+        fr: "Équations avec parenthèses",
+        en: "Equations with parentheses",
+        ar: "معادلات بالأقواس",
+        fa: "معادلات با پرانتز",
+        ti: "ምዕርርያ ምስ ቅርሕ",
+        uk: "Рівняння з дужками",
+      },
+      paragraphs: {
+        fr: [
+          "Quand une équation contient des parenthèses, on commence par les développer, puis on réduit, puis on résout.",
+          "Exemple : 3(2x + 1) = 21 → 6x + 3 = 21 → 6x = 18 → x = 3.",
+          "Exemple plus complexe : 2(x + 3) − (x − 1) = 8 → 2x + 6 − x + 1 = 8 → x + 7 = 8 → x = 1.",
+          "Attention au signe − devant une parenthèse : −(x − 5) = −x + 5.",
+        ],
+        en: [
+          "When an equation contains parentheses, first expand them, then simplify, then solve.",
+          "Example: 3(2x + 1) = 21 → 6x + 3 = 21 → 6x = 18 → x = 3.",
+          "More complex: 2(x + 3) − (x − 1) = 8 → 2x + 6 − x + 1 = 8 → x = 1.",
+          "Caution: −(x − 5) = −x + 5.",
+        ],
+        ar: [
+          "عندما تحتوي المعادلة على أقواس، نوسعها أولاً ثم نبسط ثم نحل.",
+          "مثال: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
+          "أكثر تعقيداً: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
+          "تنبه: −(x − 5) = −x + 5.",
+        ],
+        fa: [
+          "وقتی معادله‌ای حاوی پرانتز است، ابتدا توسعه دهید، سپس ساده کنید، سپس حل کنید.",
+          "مثال: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
+          "پیچیده‌تر: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
+          "توجه: −(x − 5) = −x + 5.",
+        ],
+        ti: [
+          "ምዕርርያ ቅርሕ ምስ ዘሎ ቅድም ምስፋሕ ድሕሪ ምቅናስ ድሕሪ ምፍታሕ.",
+          "ምሳሌ: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
+          "ዝኸበደ: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
+          "ጥንቃቐ: −(x − 5) = −x + 5.",
+        ],
+        uk: [
+          "Якщо рівняння містить дужки, спочатку розкрити їх, потім звести подібні, потім розв'язати.",
+          "Приклад: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
+          "Складніший: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
+          "Увага: −(x − 5) = −x + 5.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-4-e1", promptFr: "Résous 2(x + 3) = 14.", type: "number", acceptable: ["4"] },
+      { id: "a10-4-e2", promptFr: "Résous 3(2x − 1) = 15.", type: "number", acceptable: ["3"] },
+      { id: "a10-4-e3", promptFr: "Résous 4(x + 2) − 3 = 21.", type: "number", acceptable: ["4"] },
+      { id: "a10-4-e4", promptFr: "Résous 2(x + 5) − (x + 3) = 9.", type: "number", acceptable: ["2"] },
+      { id: "a10-4-e5", promptFr: "Développe −(2x − 4) puis résous −(2x − 4) = 6.", type: "number", acceptable: ["-1", "−1"] },
+    ],
+  },
+  {
+    submoduleId: "A10-5",
+    submoduleCode: "A10.5",
+    theory: {
+      title: {
+        fr: "Équations avec fractions",
+        en: "Equations with fractions",
+        ar: "معادلات بالكسور",
+        fa: "معادلات با کسر",
+        ti: "ምዕርርያ ምስ ምምቅቅዮ",
+        uk: "Рівняння з дробами",
+      },
+      paragraphs: {
+        fr: [
+          "Pour éliminer les fractions, on multiplie tous les termes par le dénominateur commun (ou le PPCM des dénominateurs).",
+          "Exemple : x/2 + 3 = 7 → multiplie par 2 → x + 6 = 14 → x = 8.",
+          "Exemple avec deux fractions : x/3 + x/6 = 5 → PPCM(3,6) = 6 → multiplie par 6 → 2x + x = 30 → 3x = 30 → x = 10.",
+          "Vérification indispensable : remplace x dans l'équation originale pour valider.",
+        ],
+        en: [
+          "To eliminate fractions, multiply all terms by the common denominator (or LCM of denominators).",
+          "Example: x/2 + 3 = 7 → multiply by 2 → x + 6 = 14 → x = 8.",
+          "Two fractions: x/3 + x/6 = 5 → LCM = 6 → multiply by 6 → 3x = 30 → x = 10.",
+          "Always check by substituting back.",
+        ],
+        ar: [
+          "لإزالة الكسور نضرب جميع الحدود بالمقام المشترك (أو مضاعف مشترك أصغر).",
+          "مثال: x/2 + 3 = 7 → اضرب في 2 → x = 8.",
+          "كسران: x/3 + x/6 = 5 → م.م.أ = 6 → 3x = 30 → x = 10.",
+          "تحقق دائماً بالتعويض.",
+        ],
+        fa: [
+          "برای حذف کسرها همه جملات را در مخرج مشترک (یا م.م.م مخرج‌ها) ضرب می‌کنیم.",
+          "مثال: x/2 + 3 = 7 → ضرب در 2 → x = 8.",
+          "دو کسر: x/3 + x/6 = 5 → م.م.م = 6 → 3x = 30 → x = 10.",
+          "همیشه با جایگذاری تأیید کن.",
+        ],
+        ti: [
+          "ምምቅቅዮ ንምኻናን ኩሉ ወጽዓ ብናይ ሓባር ዴኖሚነተር ምርባሕ.",
+          "ምሳሌ: x/2 + 3 = 7 → ብ 2 ምርባሕ → x = 8.",
+          "ክልተ ምምቅቅዮ: x/3 + x/6 = 5 → 3x = 30 → x = 10.",
+          "ብምትካእ ምፍሳሽ ምፍተሻ ኣይትረስዕ.",
+        ],
+        uk: [
+          "Щоб позбутися дробів, перемножити всі члени на спільний знаменник.",
+          "Приклад: x/2 + 3 = 7 → множимо на 2 → x + 6 = 14 → x = 8.",
+          "Два дроби: x/3 + x/6 = 5 → НСК = 6 → 3x = 30 → x = 10.",
+          "Обов'язково перевіряти підстановкою.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-5-e1", promptFr: "Résous x/3 = 4.", type: "number", acceptable: ["12"] },
+      { id: "a10-5-e2", promptFr: "Résous x/2 + 1 = 5.", type: "number", acceptable: ["8"] },
+      { id: "a10-5-e3", promptFr: "Résous x/4 + x/2 = 6.", type: "number", acceptable: ["8"] },
+      { id: "a10-5-e4", promptFr: "Résous 2x/3 = 8.", type: "number", acceptable: ["12"] },
+      { id: "a10-5-e5", promptFr: "Résous x/5 + 2 = x/2 − 1 (multiplie par 10).", type: "number", acceptable: ["30"] },
+    ],
+  },
+  {
+    submoduleId: "A10-6",
+    submoduleCode: "A10.6",
+    theory: {
+      title: {
+        fr: "Problèmes concrets (mise en équation)",
+        en: "Concrete problems (setting up equations)",
+        ar: "مسائل ملموسة (إنشاء المعادلة)",
+        fa: "مسائل ملموس (تشکیل معادله)",
+        ti: "ናይ ሓቂ ዓለም ጸገማት (ምዕርርያ ምትእትታው)",
+        uk: "Прикладні задачі (складання рівняння)",
+      },
+      paragraphs: {
+        fr: [
+          "Mise en équation : (1) nommer l'inconnue (ex. : soit x l'âge de Marc) ; (2) traduire l'énoncé en équation ; (3) résoudre ; (4) répondre à la question.",
+          "Exemple : « Lucie a 8 ans de plus que son frère. La somme de leurs âges est 30. Quel est l'âge du frère ? » → Frère : x, Lucie : x + 8 → x + (x + 8) = 30 → 2x + 8 = 30 → x = 11.",
+          "Exemple périmètre : « Un rectangle a un périmètre de 36 cm. La longueur est le double de la largeur. Trouve la largeur. » → largeur = x, longueur = 2x → 2(x + 2x) = 36 → 6x = 36 → x = 6 cm.",
+          "Relire l'énoncé après avoir résolu pour vérifier la cohérence de la réponse.",
+        ],
+        en: [
+          "Setting up: (1) name the unknown; (2) translate the statement into an equation; (3) solve; (4) answer the question.",
+          "Example: 'Lucie is 8 years older than her brother. Their ages sum to 30.' → x + (x+8)=30 → x=11.",
+          "Perimeter example: 'Length is twice the width, perimeter is 36 cm.' → 2(x+2x)=36 → x=6 cm.",
+          "Re-read the problem after solving to check the answer makes sense.",
+        ],
+        ar: [
+          "إنشاء المعادلة: (1) تسمية المجهول؛ (2) ترجمة النص؛ (3) الحل؛ (4) الإجابة.",
+          "مثال: «لوسي أكبر من أخيها بـ8 سنوات. مجموع أعمارهما 30.» → x + (x+8) = 30 → x = 11.",
+          "مثال المحيط: «طول المستطيل ضعف عرضه، محيطه 36 سم.» → 6x = 36 → x = 6 سم.",
+          "أعد قراءة النص بعد الحل للتحقق من المنطقية.",
+        ],
+        fa: [
+          "تشکیل معادله: (1) مجهول را نام‌گذاری کن؛ (2) جمله را به معادله ترجمه کن؛ (3) حل کن؛ (4) جواب بده.",
+          "مثال: «لوسی 8 سال از برادرش بزرگ‌تر است. مجموع سنشان 30 است.» → x + (x+8) = 30 → x = 11.",
+          "مثال محیط: «طول دو برابر عرض، محیط 36 سانتیمتر.» → 6x = 36 → x = 6 سانتیمتر.",
+          "بعد از حل مسئله را مجدداً بخوان تا منطقی بودن جواب را تأیید کنی.",
+        ],
+        ti: [
+          "ምትእትታው: (1) ዘይፍለጥ ምስማዩ; (2) ቃል ናብ ምዕርርያ ምትርጓም; (3) ምፍታሕ; (4) ናብ ሕቶ ምምላስ.",
+          "ምሳሌ: «ሉሲ ካብ ሓዋ 8 ዓመት ዓቢ ዩ. ዕድሚኦም ጠቅላሊ 30 ዩ.» → x + (x+8) = 30 → x = 11.",
+          "ናይ ዙሪያ ምሳሌ: «ቁመት ናይ ወርሓ ካልኦቲ ዩ ዙሪያ 36 ሰም.» → 6x = 36 → x = 6 ሰም.",
+          "ምፍትሒ ምስ ርኸብካ ናይ ቃል ሕቶ ደጊምካ ኣንብቦ.",
+        ],
+        uk: [
+          "Складання рівняння: (1) назвати невідому; (2) перекласти умову на мову рівняння; (3) розв'язати; (4) відповісти на запитання.",
+          "Приклад: «Люсі на 8 років старша за брата. Сума їх віків 30.» → x + (x+8) = 30 → x = 11.",
+          "Задача про периметр: «Довжина вдвічі більша за ширину, периметр 36 см.» → 6x = 36 → x = 6 см.",
+          "Після розв'язання перечитати умову, щоб перевірити відповідь.",
+        ],
+      },
+    },
+    exercises: [
+      { id: "a10-6-e1", promptFr: "Un nombre augmenté de 7 donne 23. Quel est ce nombre ?", type: "number", acceptable: ["16"] },
+      { id: "a10-6-e2", promptFr: "Deux fois un nombre plus 3 égale 15. Quel est ce nombre ?", type: "number", acceptable: ["6"] },
+      { id: "a10-6-e3", promptFr: "Léa a 5 ans de moins que Marc. Ensemble ils ont 31 ans. Quel est l'âge de Léa ?", type: "number", acceptable: ["13"] },
+      { id: "a10-6-e4", promptFr: "Un rectangle a pour longueur le triple de la largeur. Périmètre = 40 cm. Trouve la largeur.", type: "number", acceptable: ["5"] },
+      { id: "a10-6-e5", promptFr: "3 stylos coûtent autant que 2 stylos + 4 €. Quel est le prix d'un stylo ?", type: "number", acceptable: ["4"] },
+    ],
+  },
+];
