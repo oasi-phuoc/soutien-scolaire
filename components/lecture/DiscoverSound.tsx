@@ -54,11 +54,15 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
           <img
             src={exampleImagePath}
             alt={exampleWord}
-            className="max-h-48 w-auto object-contain"
+            className="max-h-48 w-auto object-contain border-0 outline-none"
           />
         )}
         <p className="text-base text-[var(--color-text-secondary)]">
-          <HighlightedWord word={exampleWord} letter={letter} letterLower={letterLower} />
+          <HighlightedWord
+            word={`${letter} comme dans ${exampleWord.toLowerCase()}`}
+            letter={letter}
+            letterLower={letterLower}
+          />
         </p>
       </div>
     </section>
