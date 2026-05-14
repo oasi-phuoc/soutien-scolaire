@@ -172,8 +172,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       <div className="min-h-[280px]">{renderStep()}</div>
 
       {/* Fixed nav bar — sits above MainNav (≈68 px) */}
-      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 z-40">
-        <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
+      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
+        <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
           <button
             type="button"
             onClick={goBack}
@@ -184,10 +184,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             </svg>
             Retour
           </button>
-
-          <span className="text-xs font-medium text-[var(--color-text-secondary)]">
-            {stepIdx + 1} / {steps.length}
-          </span>
 
           <button
             type="button"
