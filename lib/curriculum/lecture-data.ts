@@ -10,6 +10,7 @@ export type VowelData = {
   phoneme: string;
   exampleWord: string;
   exampleImagePath?: string;
+  exampleAudioPath?: string;
   upperGrid: string[];
   lowerGrid: string[];
   upperWords: string[];
@@ -25,6 +26,7 @@ export type ConsonantData = {
   phoneme: string;
   exampleWord: string;
   exampleImagePath?: string;
+  exampleAudioPath?: string;
   upperGrid: string[];
   lowerGrid: string[];
   upperWordsSet1: string[];
@@ -92,6 +94,7 @@ export const VOWELS: VowelData[] = [
     phoneme: "/a/",
     exampleWord: "Arbre",
     exampleImagePath: "/assets/letters/a-arbre.jpg",
+    exampleAudioPath: "/assets/letters/a-arbre.mp3",
     upperGrid: ["C","A","Q","G","F","T","Z","A","W","H","Z","B","Q","A","C","Y","X","A","A","J"],
     lowerGrid: ["k","a","h","q","a","r","r","a","o","l","c","h","p","g","a","a","d","w","m","b"],
     upperWords: ["ÉLÉPHANT","AUTOBUS","EXAMEN","AMANDE","PLAGE"],

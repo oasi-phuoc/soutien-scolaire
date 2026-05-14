@@ -94,6 +94,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             letterLower={data.letterLower}
             exampleWord={data.exampleWord}
             exampleImagePath={data.exampleImagePath}
+            exampleAudioPath={data.exampleAudioPath}
           />
         );
       case "vowel-recall":

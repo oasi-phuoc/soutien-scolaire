@@ -8,6 +8,7 @@ interface Props {
   letterLower: string;
   exampleWord: string;
   exampleImagePath?: string;
+  exampleAudioPath?: string;
 }
 
 function HighlightedWord({ word, letter, letterLower }: { word: string; letter: string; letterLower: string }) {
@@ -26,11 +27,25 @@ function HighlightedWord({ word, letter, letterLower }: { word: string; letter: 
   );
 }
 
-export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePath }: Props) {
+export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePath, exampleAudioPath }: Props) {
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Découverte du son</h2>
-      <div className="flex flex-col items-center gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-8">
+      <div className="relative flex flex-col items-center gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-8">
+        <button
+          type="button"
+          aria-label="Écouter"
+          onClick={() => {
+            if (exampleAudioPath) {
+              new Audio(exampleAudioPath).play();
+            } else {
+              speak(exampleWord);
+            }
+          }}
+          className="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm active:opacity-80"
+        >
+          <SpeakerIcon />
+        </button>
         <p className="text-6xl font-bold tracking-tight text-[var(--color-text-primary)]">
           {letter}{letterLower}
         </p>
@@ -45,14 +60,6 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
         <p className="text-base text-[var(--color-text-secondary)]">
           <HighlightedWord word={exampleWord} letter={letter} letterLower={letterLower} />
         </p>
-        <button
-          type="button"
-          onClick={() => speak(exampleWord)}
-          className="flex items-center gap-2 rounded-full bg-[var(--color-text-primary)] px-6 py-2.5 text-sm font-semibold text-white active:opacity-80"
-        >
-          <SpeakerIcon />
-          Écouter
-        </button>
       </div>
     </section>
   );
