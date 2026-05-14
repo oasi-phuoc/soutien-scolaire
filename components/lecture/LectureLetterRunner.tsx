@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
-import { LetterGrid } from "./LetterGrid";
+import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import { WordSpotter } from "./WordSpotter";
 import { SoundPicker } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
@@ -56,10 +56,12 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const steps = getSteps(data);
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
+  const gridRef = useRef<LetterGridHandle>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
   const step = steps[stepIdx]!;
+  const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
 
   function goBack() {
     if (isFirst) {
@@ -101,11 +103,11 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <VowelRecall key={k} />;
       case "grid-upper":
         return (
-          <LetterGrid key={k} target={data.letter} grid={data.upperGrid} isUppercase={true} />
+          <LetterGrid key={k} ref={gridRef} target={data.letter} isUppercase={true} />
         );
       case "grid-lower":
         return (
-          <LetterGrid key={k} target={data.letterLower} grid={data.lowerGrid} isUppercase={false} />
+          <LetterGrid key={k} ref={gridRef} target={data.letterLower} isUppercase={false} />
         );
       case "word-upper":
         if (data.type !== "vowel") return null;
@@ -186,6 +188,32 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             </svg>
             Retour
           </button>
+
+          {isGridStep && (
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Recommencer"
+                onClick={() => gridRef.current?.reset()}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M1 4v6h6" />
+                  <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                aria-label="Valider"
+                onClick={() => gridRef.current?.validate()}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </button>
+            </div>
+          )}
 
           <button
             type="button"
