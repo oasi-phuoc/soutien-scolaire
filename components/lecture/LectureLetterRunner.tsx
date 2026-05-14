@@ -171,8 +171,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
 
       <div className="min-h-[280px]">{renderStep()}</div>
 
-      {/* Fixed nav bar */}
-      <div className="fixed bottom-0 left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
+      {/* Fixed nav bar — sits above MainNav (≈68 px) */}
+      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 z-40">
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
           <button
             type="button"

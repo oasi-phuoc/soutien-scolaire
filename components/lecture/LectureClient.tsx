@@ -75,10 +75,12 @@ function ModuleCard({
   mod,
   progress,
   hydrated,
+  highlighted,
 }: {
   mod: (typeof LECTURE_MODULES)[number];
   progress: LectureProgressV2;
   hydrated: boolean;
+  highlighted?: boolean;
 }) {
   const modState = hydrated ? getModuleState(progress, mod.id) : "locked";
   const locked = modState === "locked";
@@ -92,8 +94,12 @@ function ModuleCard({
 
   return (
     <div
-      className={`rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] transition-colors ${
-        locked ? "opacity-50" : ""
+      className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
+        locked
+          ? "border-[var(--color-border-default)] opacity-50"
+          : highlighted
+            ? "border-[var(--color-accent-lecture)]/50"
+            : "border-[var(--color-border-default)]"
       }`}
     >
       {/* Module header */}
@@ -184,7 +190,7 @@ function StoriesList() {
         <li key={story.id}>
           <Link
             href={`/lecture/histoires/${story.id}`}
-            className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 transition-colors hover:border-[var(--color-accent-lecture)]/40"
+            className="flex w-full items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 transition-colors hover:border-[var(--color-accent-lecture)]/40"
           >
             <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -228,6 +234,11 @@ export function LectureClient() {
   const completedCount = hydrated
     ? Object.values(progress.submodules).filter((s) => s === "completed").length
     : 0;
+
+  const activeModuleId = hydrated
+    ? (LECTURE_MODULES.find((m) => getModuleState(progress, m.id) === "in_progress")?.id ??
+       LECTURE_MODULES.find((m) => getModuleState(progress, m.id) === "available")?.id)
+    : null;
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
@@ -288,7 +299,13 @@ export function LectureClient() {
           {/* Module cards */}
           <section className="space-y-4" aria-label="Modules de lecture">
             {LECTURE_MODULES.map((mod) => (
-              <ModuleCard key={mod.id} mod={mod} progress={progress} hydrated={hydrated} />
+              <ModuleCard
+                key={mod.id}
+                mod={mod}
+                progress={progress}
+                hydrated={hydrated}
+                highlighted={hydrated && mod.id === activeModuleId}
+              />
             ))}
           </section>
         </>

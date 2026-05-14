@@ -65,7 +65,7 @@ function StateBadge({ state, missing }: { state: ModuleDisplayState; missing?: s
   );
 }
 
-function SubDot({ done, accent }: { done: boolean; accent: string }) {
+function SubDot({ done, accent, moduleLocked }: { done: boolean; accent: string; moduleLocked: boolean }) {
   if (done)
     return (
       <span
@@ -77,13 +77,17 @@ function SubDot({ done, accent }: { done: boolean; accent: string }) {
         </svg>
       </span>
     );
+  if (moduleLocked)
+    return (
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <rect x="3" y="11" width="18" height="11" rx="2" />
+          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+        </svg>
+      </span>
+    );
   return (
-    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
-      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-        <rect x="3" y="11" width="18" height="11" rx="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </svg>
-    </span>
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)]" />
   );
 }
 
@@ -281,7 +285,7 @@ export function MathematiquesClient() {
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
                           <li key={sub.id} className="flex items-center gap-3 px-4 py-2.5">
-                            <SubDot done={subDone} accent={accentColor} />
+                            <SubDot done={subDone} accent={accentColor} moduleLocked={isLocked} />
                             <div className="flex-1 min-w-0">
                               <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
                                 {sub.code}
