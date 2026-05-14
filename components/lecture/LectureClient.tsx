@@ -56,12 +56,7 @@ function ModuleStateBadge({ state }: { state: ModuleState }) {
         En cours
       </span>
     );
-  if (state === "available")
-    return (
-      <span className="rounded-full bg-[var(--color-bg-secondary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        Disponible
-      </span>
-    );
+  if (state === "available") return null;
   return (
     <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
       Verrouillé
@@ -133,7 +128,9 @@ function ModuleCard({
           const isLocked = subState === "locked";
           const subCode = `${mod.code}.${i + 1}`;
 
-          const row = (
+          const isAvailable = subState === "available";
+
+          const rowContent = (
             <div className="flex items-center gap-3 px-4 py-2.5">
               <SubStateDot state={subState} />
               <div className="flex-1 min-w-0">
@@ -147,24 +144,30 @@ function ModuleCard({
                   {letter.phoneme}
                 </span>
               </div>
-              {!isLocked && (
+              {isAvailable ? (
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "var(--color-accent-lecture)" }} aria-hidden>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </span>
+              ) : !isLocked && subState === "completed" ? (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
                   <path d="M9 18l6-6-6-6" />
                 </svg>
-              )}
+              ) : null}
             </div>
           );
 
           return (
             <li key={letter.letterLower}>
               {isLocked ? (
-                row
+                rowContent
               ) : (
                 <Link
                   href={`/lecture/${mod.id}/${letter.letterLower}`}
                   className="block transition-colors hover:bg-[var(--color-bg-secondary)]"
                 >
-                  {row}
+                  {rowContent}
                 </Link>
               )}
             </li>

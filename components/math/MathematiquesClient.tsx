@@ -49,12 +49,7 @@ function StateBadge({ state, missing }: { state: ModuleDisplayState; missing?: s
         En cours
       </span>
     );
-  if (state === "available")
-    return (
-      <span className="rounded-full bg-[var(--color-bg-secondary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        Disponible
-      </span>
-    );
+  if (state === "available") return null;
   return (
     <span
       className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]"
@@ -214,6 +209,18 @@ export function MathematiquesClient() {
                 ? Math.round((prog.subProgress / prog.subTotal) * 100)
                 : 0;
 
+            // Compute which submodule is next (sequential unlocking)
+            const completedSubIds = new Set(
+              !isLocked && hydrated
+                ? m.submodules
+                    .filter((sub) => progress.submoduleStates?.[sub.id] === "completed")
+                    .map((sub) => sub.id)
+                : [],
+            );
+            const firstAvailableSubIdx = !isLocked
+              ? m.submodules.findIndex((sub) => !completedSubIds.has(sub.id))
+              : -1;
+
             return (
               <li key={m.id}>
                 <div
@@ -278,14 +285,14 @@ export function MathematiquesClient() {
                   {/* Submodule list */}
                   {m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-                      {m.submodules.map((sub) => {
-                        const subDone = hydrated
-                          ? progress.submoduleStates?.[sub.id] === "completed"
-                          : false;
+                      {m.submodules.map((sub, idx) => {
+                        const subDone = completedSubIds.has(sub.id);
+                        const subAvailable = idx === firstAvailableSubIdx;
+                        const subLocked = !subDone && !subAvailable;
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
                           <li key={sub.id} className="flex items-center gap-3 px-4 py-2.5">
-                            <SubDot done={subDone} accent={accentColor} moduleLocked={isLocked} />
+                            <SubDot done={subDone} accent={accentColor} moduleLocked={subLocked} />
                             <div className="flex-1 min-w-0">
                               <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
                                 {sub.code}
@@ -298,6 +305,18 @@ export function MathematiquesClient() {
                               <span className="shrink-0 text-[10px] text-[var(--color-text-secondary)]">
                                 {score.grade.toFixed(1)}/6
                               </span>
+                            ) : subAvailable ? (
+                              <button
+                                type="button"
+                                onClick={(e) => { e.stopPropagation(); router.push(`/mathematiques/${m.id}`); }}
+                                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-80 active:opacity-70"
+                                style={{ background: accentColor }}
+                                aria-label={`Commencer ${sub.code}`}
+                              >
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                  <polygon points="8,5 19,12 8,19" />
+                                </svg>
+                              </button>
                             ) : null}
                           </li>
                         );
