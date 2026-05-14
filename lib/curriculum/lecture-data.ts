@@ -1,0 +1,1202 @@
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+export type SoundItem = { label: string; hasSound: boolean };
+export type PronStep = { phoneme: string; syllable: string; word: string };
+
+export type VowelData = {
+  type: "vowel";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  exampleWord: string;
+  upperGrid: string[];
+  lowerGrid: string[];
+  upperWords: string[];
+  lowerWords: string[];
+  soundItems: SoundItem[];
+  pronunciationChain: PronStep[];
+};
+
+export type ConsonantData = {
+  type: "consonant";
+  letter: string;
+  letterLower: string;
+  phoneme: string;
+  exampleWord: string;
+  upperGrid: string[];
+  lowerGrid: string[];
+  upperWordsSet1: string[];
+  upperWordsSet2: string[];
+  lowerWords: string[];
+  soundItems: SoundItem[];
+  syllableGrid: string[];
+  pronunciationChain: PronStep[];
+};
+
+export type LetterData = VowelData | ConsonantData;
+
+export type RevisionData = {
+  pair: string;
+  title: string;
+  letterA: string;
+  letterB: string;
+  phonemeA: string;
+  phonemeB: string;
+  mixedGrid: string[];
+  soundWords: { word: string; answer: "A" | "B" }[];
+  readWords: { letter: string; word: string }[];
+};
+
+export type EvaluationData = {
+  id: string;
+  title: string;
+  subtitle: string;
+  letters: { letter: string; phoneme: string }[];
+  mixedGrid: string[];
+  soundWords: { word: string; answer: string }[];
+  readWords: { letter: string; word: string }[];
+};
+
+export type Story = {
+  id: string;
+  title: string;
+  level: "débutant" | "intermédiaire" | "avancé";
+  sentences: string[];
+};
+
+// ─── Helper ────────────────────────────────────────────────────────────────────
+
+function g(
+  target: string,
+  distractors: string[],
+  positions: number[],
+  size = 20,
+): string[] {
+  const out: string[] = [];
+  let di = 0;
+  for (let i = 0; i < size; i++) {
+    out.push(positions.includes(i) ? target : distractors[di++ % distractors.length]);
+  }
+  return out;
+}
+
+// ─── Vowels ───────────────────────────────────────────────────────────────────
+
+export const VOWELS: VowelData[] = [
+  {
+    type: "vowel",
+    letter: "A",
+    letterLower: "a",
+    phoneme: "/a/",
+    exampleWord: "Arbre",
+    upperGrid: ["C","A","Q","G","F","T","Z","A","W","H","Z","B","Q","A","C","Y","X","A","A","J"],
+    lowerGrid: ["k","a","h","q","a","r","r","a","o","l","c","h","p","g","a","a","d","w","m","b"],
+    upperWords: ["ÉLÉPHANT","AUTOBUS","EXAMEN","AMANDE","PLAGE"],
+    lowerWords: ["fromage","stade","image","kayak","valise"],
+    soundItems: [
+      { label: "LIVRE", hasSound: false },
+      { label: "ANANAS", hasSound: true },
+      { label: "OEUF", hasSound: false },
+      { label: "RADIO", hasSound: true },
+      { label: "PANDA", hasSound: true },
+      { label: "MIROIR", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "a", syllable: "a-mi", word: "ami" },
+      { phoneme: "a", syllable: "a-li", word: "ali" },
+      { phoneme: "a", syllable: "a-na", word: "ana" },
+      { phoneme: "a", syllable: "a-ller", word: "aller" },
+    ],
+  },
+  {
+    type: "vowel",
+    letter: "O",
+    letterLower: "o",
+    phoneme: "/o/",
+    exampleWord: "Orange",
+    upperGrid: g("O", ["A","C","B","G","Q","H","J","F","R","D","K","N","P","L","M"], [1,4,7,11,14,19]),
+    lowerGrid: g("o", ["c","k","j","n","d","r","g","a","l","v","p","u","e","m","f"], [1,4,7,11,14,19]),
+    upperWords: ["ÉCOLE","ROBOT","PHOTO","DODO","STYLO"],
+    lowerWords: ["rose","solo","porte","domino","vélo"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "ROBOT", hasSound: true },
+      { label: "LIVRE", hasSound: false },
+      { label: "VÉLO", hasSound: true },
+      { label: "MOTO", hasSound: true },
+      { label: "CHAT", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "o", syllable: "ro-se", word: "rose" },
+      { phoneme: "o", syllable: "mo-to", word: "moto" },
+      { phoneme: "o", syllable: "so-lo", word: "solo" },
+      { phoneme: "o", syllable: "o-li", word: "oli" },
+    ],
+  },
+  {
+    type: "vowel",
+    letter: "I",
+    letterLower: "i",
+    phoneme: "/i/",
+    exampleWord: "Île",
+    upperGrid: g("I", ["T","J","L","F","N","V","K","D","H","B","M","P","Z","R","C"], [1,4,7,11,14,18,19]),
+    lowerGrid: g("i", ["j","p","k","n","d","f","g","h","t","l","v","u","c","m","b"], [1,4,7,11,14,18,19]),
+    upperWords: ["IBIS","GIRAFE","MIDI","VISITE","TAXI"],
+    lowerWords: ["livre","tigre","stylo","midi","nuit"],
+    soundItems: [
+      { label: "OISEAU", hasSound: false },
+      { label: "IBIS", hasSound: true },
+      { label: "CHAT", hasSound: false },
+      { label: "STYLO", hasSound: true },
+      { label: "MIDI", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "i", syllable: "î-le", word: "île" },
+      { phoneme: "i", syllable: "li-re", word: "lire" },
+      { phoneme: "i", syllable: "mi-di", word: "midi" },
+      { phoneme: "i", syllable: "pi-ste", word: "piste" },
+    ],
+  },
+  {
+    type: "vowel",
+    letter: "U",
+    letterLower: "u",
+    phoneme: "/y/",
+    exampleWord: "Usine",
+    upperGrid: g("U", ["P","N","R","G","F","J","M","D","K","B","V","H","S","L","T"], [1,4,7,11,14,18,19]),
+    lowerGrid: g("u", ["n","h","g","f","j","p","d","k","r","v","l","m","b","s","t"], [1,4,7,11,14,18,19]),
+    upperWords: ["USINE","NUAGE","TUBE","FUSÉE","BULLE"],
+    lowerWords: ["rue","lune","usine","musée","statue"],
+    soundItems: [
+      { label: "ÉTOILE", hasSound: false },
+      { label: "LUNE", hasSound: true },
+      { label: "CHAT", hasSound: false },
+      { label: "TUBE", hasSound: true },
+      { label: "BULLE", hasSound: true },
+      { label: "RADIO", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "u", syllable: "u-ne", word: "une" },
+      { phoneme: "u", syllable: "lu-ne", word: "lune" },
+      { phoneme: "u", syllable: "mu-sée", word: "musée" },
+      { phoneme: "u", syllable: "ru-se", word: "ruse" },
+    ],
+  },
+  {
+    type: "vowel",
+    letter: "E",
+    letterLower: "e",
+    phoneme: "/e/",
+    exampleWord: "École",
+    upperGrid: g("E", ["A","I","B","T","N","R","H","M","K","V","D","P","L","C","F"], [1,4,7,11,14,18,19]),
+    lowerGrid: g("e", ["n","h","k","b","r","p","f","g","l","v","j","c","u","m","d"], [1,4,7,11,14,18,19]),
+    upperWords: ["ÉCOLE","BÉBÉ","ÉTÉ","ÉLÈVE","ÉPÉE"],
+    lowerWords: ["épée","bébé","été","école","élève"],
+    soundItems: [
+      { label: "CHAT", hasSound: false },
+      { label: "BÉBÉ", hasSound: true },
+      { label: "LIVRE", hasSound: false },
+      { label: "ÉTÉ", hasSound: true },
+      { label: "ÉLÈVE", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "e", syllable: "é-té", word: "été" },
+      { phoneme: "e", syllable: "bé-bé", word: "bébé" },
+      { phoneme: "e", syllable: "é-co-le", word: "école" },
+      { phoneme: "e", syllable: "fé-e", word: "fée" },
+    ],
+  },
+  {
+    type: "vowel",
+    letter: "Y",
+    letterLower: "y",
+    phoneme: "/i/",
+    exampleWord: "Stylo",
+    upperGrid: g("Y", ["K","P","J","V","N","F","M","B","H","D","T","R","L","C","S"], [1,4,7,11,14,18,19]),
+    lowerGrid: g("y", ["k","p","j","v","n","f","g","h","t","l","d","r","m","b","c"], [1,4,7,11,14,18,19]),
+    upperWords: ["YEUX","STYLO","KAYAK","YOGA","PYRAMIDE"],
+    lowerWords: ["yacht","style","yoyo","mystère","gym"],
+    soundItems: [
+      { label: "ANANAS", hasSound: false },
+      { label: "STYLO", hasSound: true },
+      { label: "CHAT", hasSound: false },
+      { label: "YOGA", hasSound: true },
+      { label: "PYRAMIDE", hasSound: true },
+      { label: "LIVRE", hasSound: false },
+    ],
+    pronunciationChain: [
+      { phoneme: "y", syllable: "sty-lo", word: "stylo" },
+      { phoneme: "y", syllable: "yo-ga", word: "yoga" },
+      { phoneme: "y", syllable: "ka-yak", word: "kayak" },
+      { phoneme: "y", syllable: "gym", word: "gym" },
+    ],
+  },
+];
+
+// ─── Consonants ────────────────────────────────────────────────────────────────
+
+export const CONSONANTS: ConsonantData[] = [
+  {
+    type: "consonant",
+    letter: "B",
+    letterLower: "b",
+    phoneme: "/b/",
+    exampleWord: "Ballon",
+    upperGrid: ["G","B","B","V","R","B","J","B","U","B","F","I","B","H","E","B","N","F","H","B"],
+    lowerGrid: ["m","g","b","b","l","b","z","u","q","b","c","a","e","p","u","k","o","y","u","b"],
+    upperWordsSet1: ["HIBOU","HABITUDE","BRIOCHE","ALPHABET"],
+    upperWordsSet2: ["ENSEMBLE","BONJOUR","HERBE","NOMBRE","BRACELET"],
+    lowerWords: ["abricot","brioche","bras","habitude","habit"],
+    soundItems: [
+      { label: "CHAT", hasSound: false },
+      { label: "BALLON", hasSound: true },
+      { label: "ROBE", hasSound: true },
+      { label: "ÉCOLE", hasSound: false },
+      { label: "BÉBÉ", hasSound: true },
+      { label: "BANANE", hasSound: true },
+    ],
+    syllableGrid: ["bibi","beb","Bo","Ba","bY","bebe","bobo","ByB","bi","OB","by","BaB","byb","eb","bu"],
+    pronunciationChain: [
+      { phoneme: "b", syllable: "ba-lle", word: "balle" },
+      { phoneme: "b", syllable: "ro-be", word: "robe" },
+      { phoneme: "b", syllable: "ba-na-ne", word: "banane" },
+      { phoneme: "b", syllable: "tu-be", word: "tube" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "C",
+    letterLower: "c",
+    phoneme: "/k/",
+    exampleWord: "Carotte",
+    upperGrid: g("C", ["G","B","V","R","J","U","F","I","H","E","N","K","L","M","D"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("c", ["m","g","b","l","z","u","q","a","e","p","k","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["CAROTTE","CANARD","COULEUR","CRAYON"],
+    upperWordsSet2: ["CROCODILE","CAFÉ","ABRICOT","ÉCLAIR","ÉCOLE"],
+    lowerWords: ["carotte","canard","crayon","cacao","abricot"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "CAROTTE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "CANARD", hasSound: true },
+      { label: "CRAYON", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["coco","cac","Co","Ca","cU","cece","CaCo","CaC","cu","AC","cy","CaC","cac","ec","ca"],
+    pronunciationChain: [
+      { phoneme: "c", syllable: "ca-fe", word: "café" },
+      { phoneme: "c", syllable: "ca-nard", word: "canard" },
+      { phoneme: "c", syllable: "co-co", word: "coco" },
+      { phoneme: "c", syllable: "cra-yon", word: "crayon" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "D",
+    letterLower: "d",
+    phoneme: "/d/",
+    exampleWord: "Domino",
+    upperGrid: g("D", ["G","B","V","R","J","U","F","I","H","E","N","K","L","M","C"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("d", ["m","g","b","l","z","u","q","a","e","p","k","o","y","f","c"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["DOMINO","DODO","DIMANCHE","DRAGON"],
+    upperWordsSet2: ["BANDE","RADIS","SOLDAT","MONDE","CANARD"],
+    lowerWords: ["domino","radis","monde","canard","idée"],
+    soundItems: [
+      { label: "LUNE", hasSound: false },
+      { label: "DOMINO", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+      { label: "RADIS", hasSound: true },
+      { label: "CANARD", hasSound: true },
+      { label: "TUBE", hasSound: false },
+    ],
+    syllableGrid: ["dodo","dad","Do","Da","dU","dede","DoD","DeD","du","AD","dy","DaD","dad","ed","di"],
+    pronunciationChain: [
+      { phoneme: "d", syllable: "do-do", word: "dodo" },
+      { phoneme: "d", syllable: "ra-dis", word: "radis" },
+      { phoneme: "d", syllable: "ca-nard", word: "canard" },
+      { phoneme: "d", syllable: "dra-gon", word: "dragon" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "G",
+    letterLower: "g",
+    phoneme: "/g/",
+    exampleWord: "Girafe",
+    upperGrid: g("G", ["B","C","V","R","J","U","F","I","H","E","N","K","L","M","D"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("g", ["m","b","c","l","z","u","q","a","e","p","k","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["GORILLE","GARE","GÂTEAU","DRAGON"],
+    upperWordsSet2: ["BAGUE","CIGARE","LÉGUME","FIGURE","GUITARE"],
+    lowerWords: ["gorille","gare","gâteau","légume","cigare"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "GARE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "GÂTEAU", hasSound: true },
+      { label: "GORILLE", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["gaga","gag","Go","Ga","gU","gege","GoG","GeG","gu","AG","gy","GaG","gag","eg","gi"],
+    pronunciationChain: [
+      { phoneme: "g", syllable: "ga-teau", word: "gâteau" },
+      { phoneme: "g", syllable: "go-rille", word: "gorille" },
+      { phoneme: "g", syllable: "lé-gu-me", word: "légume" },
+      { phoneme: "g", syllable: "gui-tare", word: "guitare" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "K",
+    letterLower: "k",
+    phoneme: "/k/",
+    exampleWord: "Kangourou",
+    upperGrid: g("K", ["G","B","C","V","R","J","U","F","I","H","E","N","L","M","D"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("k", ["m","g","b","l","z","u","q","a","e","p","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["KOALA","KAYAK","KILO","KIOSQUE"],
+    upperWordsSet2: ["KAYAK","YOGA","FAKIR","PARKING","WEEK-END"],
+    lowerWords: ["koala","kayak","kilo","fakir","parking"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "KAYAK", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "KOALA", hasSound: true },
+      { label: "KIOSQUE", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["kaka","kak","Ko","Ka","kU","keke","KoK","KeK","ku","AK","ky","KaK","kak","ek","ki"],
+    pronunciationChain: [
+      { phoneme: "k", syllable: "ka-yak", word: "kayak" },
+      { phoneme: "k", syllable: "ko-a-la", word: "koala" },
+      { phoneme: "k", syllable: "ki-lo", word: "kilo" },
+      { phoneme: "k", syllable: "ki-osque", word: "kiosque" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "P",
+    letterLower: "p",
+    phoneme: "/p/",
+    exampleWord: "Papillon",
+    upperGrid: g("P", ["G","B","C","V","R","J","U","F","I","H","E","N","K","L","M"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("p", ["m","g","b","l","z","u","q","a","e","k","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["PAPILLON","POMME","PAIN","PLAGE"],
+    upperWordsSet2: ["LAMPE","TAPIS","VAMPIRE","CARPE","CHIMPANZÉ"],
+    lowerWords: ["papillon","pomme","pain","lampe","tapis"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "PAPILLON", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "POMME", hasSound: true },
+      { label: "PLAGE", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["papa","pap","Po","Pa","pU","pepe","PoP","PeP","pu","AP","py","PaP","pap","ep","pi"],
+    pronunciationChain: [
+      { phoneme: "p", syllable: "pom-me", word: "pomme" },
+      { phoneme: "p", syllable: "pa-pain", word: "pain" },
+      { phoneme: "p", syllable: "pa-pi-llon", word: "papillon" },
+      { phoneme: "p", syllable: "plage", word: "plage" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "Q",
+    letterLower: "q",
+    phoneme: "/k/",
+    exampleWord: "Queue",
+    upperGrid: g("Q", ["G","B","C","V","R","J","U","F","I","H","E","N","K","L","O"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("q", ["m","g","b","l","z","u","p","a","e","k","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["QUEUE","QUATRE","QUALITÉ","SQUARE"],
+    upperWordsSet2: ["MARQUE","MASQUE","FABRIQUE","LAQUE","CLIQUE"],
+    lowerWords: ["queue","quatre","marque","masque","laque"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "QUEUE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "QUATRE", hasSound: true },
+      { label: "MARQUE", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["quoi","qui","Qu","qu","QU","queux","QuQ","qua","qui","AQ","qua","QuA","quoi","eq","que"],
+    pronunciationChain: [
+      { phoneme: "qu", syllable: "qua-tre", word: "quatre" },
+      { phoneme: "qu", syllable: "mar-que", word: "marque" },
+      { phoneme: "qu", syllable: "mas-que", word: "masque" },
+      { phoneme: "qu", syllable: "queue", word: "queue" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "T",
+    letterLower: "t",
+    phoneme: "/t/",
+    exampleWord: "Tomate",
+    upperGrid: g("T", ["G","B","C","V","R","J","U","F","I","H","E","N","K","L","M"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("t", ["m","g","b","l","z","u","q","a","e","k","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["TOMATE","TRAIN","TABLE","TORTUE"],
+    upperWordsSet2: ["BATEAU","CAROTTE","FORÊT","LETTRE","PATATE"],
+    lowerWords: ["tomate","train","tortue","bateau","carotte"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "TOMATE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "TRAIN", hasSound: true },
+      { label: "BATEAU", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["tata","tat","To","Ta","tU","tete","ToT","TeT","tu","AT","ty","TaT","tat","et","ti"],
+    pronunciationChain: [
+      { phoneme: "t", syllable: "to-mate", word: "tomate" },
+      { phoneme: "t", syllable: "tor-tue", word: "tortue" },
+      { phoneme: "t", syllable: "ba-teau", word: "bateau" },
+      { phoneme: "t", syllable: "pa-tate", word: "patate" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "F",
+    letterLower: "f",
+    phoneme: "/f/",
+    exampleWord: "Forêt",
+    upperGrid: g("F", ["G","B","C","V","R","J","U","T","I","H","E","N","K","L","M"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("f", ["m","g","b","l","z","u","q","a","e","k","c","o","y","t","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["FORÊT","FLEUR","FLAMME","FARINE"],
+    upperWordsSet2: ["CAFÉ","GIFLE","DAUPHIN","ÉLÉPHANT","CARAFE"],
+    lowerWords: ["forêt","fleur","farine","café","carafe"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "FORÊT", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "FLEUR", hasSound: true },
+      { label: "CAFÉ", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["fafa","faf","Fo","Fa","fU","fefe","FoF","FeF","fu","AF","fy","FaF","faf","ef","fi"],
+    pronunciationChain: [
+      { phoneme: "f", syllable: "fo-rêt", word: "forêt" },
+      { phoneme: "f", syllable: "fleur", word: "fleur" },
+      { phoneme: "f", syllable: "ca-fé", word: "café" },
+      { phoneme: "f", syllable: "ca-ra-fe", word: "carafe" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "J",
+    letterLower: "j",
+    phoneme: "/ʒ/",
+    exampleWord: "Jus",
+    upperGrid: g("J", ["G","B","C","V","R","F","U","T","I","H","E","N","K","L","M"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("j", ["m","g","b","l","z","u","q","a","e","k","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["JUS","JARDIN","JOUET","JAMBON"],
+    upperWordsSet2: ["BIJOU","PYJAMA","DÉJEUNER","PROJET","BONJOUR"],
+    lowerWords: ["jus","jardin","jouet","bijou","bonjour"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: false },
+      { label: "JUS", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "JARDIN", hasSound: true },
+      { label: "BIJOU", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["jaja","jaj","Jo","Ja","jU","jeje","JoJ","JeJ","ju","AJ","jy","JaJ","jaj","ej","ji"],
+    pronunciationChain: [
+      { phoneme: "j", syllable: "jar-din", word: "jardin" },
+      { phoneme: "j", syllable: "jou-et", word: "jouet" },
+      { phoneme: "j", syllable: "bi-jou", word: "bijou" },
+      { phoneme: "j", syllable: "bon-jour", word: "bonjour" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "L",
+    letterLower: "l",
+    phoneme: "/l/",
+    exampleWord: "Lune",
+    upperGrid: g("L", ["G","B","C","V","R","J","U","F","I","H","E","N","K","T","M"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("l", ["m","g","b","j","z","u","q","a","e","k","c","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["LUNE","LION","LAPIN","LIVRE"],
+    upperWordsSet2: ["SOLEIL","BALLON","FLEUR","PLAGE","BELLE"],
+    lowerWords: ["lune","lion","lapin","soleil","ballon"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "LUNE", hasSound: true },
+      { label: "CRAYON", hasSound: false },
+      { label: "LAPIN", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["lala","lal","Lo","La","lU","lele","LoL","LeL","lu","AL","ly","LaL","lal","el","li"],
+    pronunciationChain: [
+      { phoneme: "l", syllable: "lu-ne", word: "lune" },
+      { phoneme: "l", syllable: "la-pin", word: "lapin" },
+      { phoneme: "l", syllable: "so-leil", word: "soleil" },
+      { phoneme: "l", syllable: "bal-lon", word: "ballon" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "M",
+    letterLower: "m",
+    phoneme: "/m/",
+    exampleWord: "Maison",
+    upperGrid: g("M", ["G","B","C","V","R","J","U","F","I","H","E","N","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("m", ["g","b","c","l","z","u","q","a","e","k","j","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["MAISON","MOUTON","MAMAN","MONTAGNE"],
+    upperWordsSet2: ["POMME","FLAMME","CAMÉRA","DOMINO","COSTUME"],
+    lowerWords: ["maison","mouton","maman","pomme","domino"],
+    soundItems: [
+      { label: "MAISON", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+      { label: "MOUTON", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "POMME", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+    ],
+    syllableGrid: ["mama","mam","Mo","Ma","mU","meme","MoM","MeM","mu","AM","my","MaM","mam","em","mi"],
+    pronunciationChain: [
+      { phoneme: "m", syllable: "mou-ton", word: "mouton" },
+      { phoneme: "m", syllable: "ma-man", word: "maman" },
+      { phoneme: "m", syllable: "pom-me", word: "pomme" },
+      { phoneme: "m", syllable: "do-mi-no", word: "domino" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "N",
+    letterLower: "n",
+    phoneme: "/n/",
+    exampleWord: "Nid",
+    upperGrid: g("N", ["G","B","C","V","R","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("n", ["g","b","c","l","z","u","q","a","e","k","j","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["NID","NUIT","NUAGE","NOISETTE"],
+    upperWordsSet2: ["CANARD","BANANE","LUNE","FONTAINE","ANANAS"],
+    lowerWords: ["nid","nuit","nuage","canard","banane"],
+    soundItems: [
+      { label: "NID", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+      { label: "NUAGE", hasSound: true },
+      { label: "LUNE", hasSound: true },
+      { label: "BANANE", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+    ],
+    syllableGrid: ["nana","nan","No","Na","nU","nene","NoN","NeN","nu","AN","ny","NaN","nan","en","ni"],
+    pronunciationChain: [
+      { phoneme: "n", syllable: "nu-age", word: "nuage" },
+      { phoneme: "n", syllable: "noi-sette", word: "noisette" },
+      { phoneme: "n", syllable: "ca-nard", word: "canard" },
+      { phoneme: "n", syllable: "ba-na-ne", word: "banane" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "R",
+    letterLower: "r",
+    phoneme: "/r/",
+    exampleWord: "Rivière",
+    upperGrid: g("R", ["G","B","C","V","N","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("r", ["g","b","c","l","z","u","q","a","e","k","j","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["RIVIÈRE","ROSE","RENARD","RADIS"],
+    upperWordsSet2: ["FORÊT","CAROTTE","CRAYON","FROMAGE","MIROIR"],
+    lowerWords: ["rivière","rose","renard","forêt","crayon"],
+    soundItems: [
+      { label: "ROSE", hasSound: true },
+      { label: "SOLEIL", hasSound: false },
+      { label: "RENARD", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "CRAYON", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+    ],
+    syllableGrid: ["rara","rar","Ro","Ra","rU","rere","RoR","ReR","ru","AR","ry","RaR","rar","er","ri"],
+    pronunciationChain: [
+      { phoneme: "r", syllable: "ro-se", word: "rose" },
+      { phoneme: "r", syllable: "re-nard", word: "renard" },
+      { phoneme: "r", syllable: "cra-yon", word: "crayon" },
+      { phoneme: "r", syllable: "mi-roir", word: "miroir" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "S",
+    letterLower: "s",
+    phoneme: "/s/",
+    exampleWord: "Soleil",
+    upperGrid: g("S", ["G","B","C","V","N","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("s", ["g","b","c","l","z","u","q","a","e","k","j","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["SOLEIL","SAPIN","SOURIS","SUCRE"],
+    upperWordsSet2: ["MAISON","ROSE","USINE","DESSIN","POISSON"],
+    lowerWords: ["soleil","sapin","souris","maison","poisson"],
+    soundItems: [
+      { label: "SOLEIL", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "SOURIS", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "SAPIN", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["sasa","sas","So","Sa","sU","sese","SoS","SeS","su","AS","sy","SaS","sas","es","si"],
+    pronunciationChain: [
+      { phoneme: "s", syllable: "so-leil", word: "soleil" },
+      { phoneme: "s", syllable: "sou-ris", word: "souris" },
+      { phoneme: "s", syllable: "sa-pin", word: "sapin" },
+      { phoneme: "s", syllable: "mai-son", word: "maison" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "V",
+    letterLower: "v",
+    phoneme: "/v/",
+    exampleWord: "Vélo",
+    upperGrid: g("V", ["G","B","C","N","R","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("v", ["g","b","c","l","z","u","q","a","e","k","j","o","y","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["VÉLO","VACHE","VIOLON","VALISE"],
+    upperWordsSet2: ["AVION","RIVIÈRE","LIVRE","CRAVATE","CAVE"],
+    lowerWords: ["vélo","vache","violon","avion","livre"],
+    soundItems: [
+      { label: "VÉLO", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "VACHE", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "VIOLON", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["vava","vav","Vo","Va","vU","veve","VoV","VeV","vu","AV","vy","VaV","vav","ev","vi"],
+    pronunciationChain: [
+      { phoneme: "v", syllable: "vé-lo", word: "vélo" },
+      { phoneme: "v", syllable: "va-che", word: "vache" },
+      { phoneme: "v", syllable: "a-vion", word: "avion" },
+      { phoneme: "v", syllable: "vi-o-lon", word: "violon" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "Z",
+    letterLower: "z",
+    phoneme: "/z/",
+    exampleWord: "Zèbre",
+    upperGrid: g("Z", ["G","B","C","N","R","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("z", ["g","b","c","l","n","u","q","a","e","k","j","o","m","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["ZÈBRE","ZÉRO","ZONE","PUZZLE"],
+    upperWordsSet2: ["GAZELLE","BRONZE","BALZAC","SEIZIÈME","ONZE"],
+    lowerWords: ["zèbre","zéro","zone","puzzle","gazelle"],
+    soundItems: [
+      { label: "ZÈBRE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "ZÉRO", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "GAZELLE", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["zaza","zaz","Zo","Za","zU","zeze","ZoZ","ZeZ","zu","AZ","zy","ZaZ","zaz","ez","zi"],
+    pronunciationChain: [
+      { phoneme: "z", syllable: "zé-ro", word: "zéro" },
+      { phoneme: "z", syllable: "zè-bre", word: "zèbre" },
+      { phoneme: "z", syllable: "ga-zelle", word: "gazelle" },
+      { phoneme: "z", syllable: "puz-zle", word: "puzzle" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "W",
+    letterLower: "w",
+    phoneme: "/w/",
+    exampleWord: "Wagon",
+    upperGrid: g("W", ["G","B","C","N","R","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("w", ["g","b","c","l","n","u","q","a","e","k","j","o","m","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["WAGON","WEEK-END","WIFI","WESTERN"],
+    upperWordsSet2: ["SANDWICH","KIWI","BOWLING","CLOWN","SHOW"],
+    lowerWords: ["wagon","week-end","wifi","kiwi","bowling"],
+    soundItems: [
+      { label: "WAGON", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "KIWI", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "CLOWN", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["wawa","waw","Wo","Wa","wU","wawa","WoW","WeW","wu","AW","wy","WaW","waw","ew","wi"],
+    pronunciationChain: [
+      { phoneme: "w", syllable: "wa-gon", word: "wagon" },
+      { phoneme: "w", syllable: "ki-wi", word: "kiwi" },
+      { phoneme: "w", syllable: "clown", word: "clown" },
+      { phoneme: "w", syllable: "wi-fi", word: "wifi" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "X",
+    letterLower: "x",
+    phoneme: "/ks/",
+    exampleWord: "Xylophone",
+    upperGrid: g("X", ["G","B","C","N","R","J","U","F","I","H","E","M","K","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("x", ["g","b","c","l","n","u","q","a","e","k","j","o","m","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["TAXE","TEXTE","BOXE","LUXE"],
+    upperWordsSet2: ["XYLOPHONE","SAXOPHONE","EXEMPLE","EXAMEN","EXPLIQUER"],
+    lowerWords: ["taxe","texte","boxe","saxo","examen"],
+    soundItems: [
+      { label: "TAXE", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "BOXE", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "SAXO", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["xaxa","xax","Xo","Xa","xU","xexe","XoX","XeX","xu","AX","xy","XaX","xax","ex","xi"],
+    pronunciationChain: [
+      { phoneme: "x", syllable: "ta-xe", word: "taxe" },
+      { phoneme: "x", syllable: "tex-te", word: "texte" },
+      { phoneme: "x", syllable: "bo-xe", word: "boxe" },
+      { phoneme: "x", syllable: "sa-xo", word: "saxo" },
+    ],
+  },
+  {
+    type: "consonant",
+    letter: "H",
+    letterLower: "h",
+    phoneme: "/∅/",
+    exampleWord: "Hibou",
+    upperGrid: g("H", ["G","B","C","N","R","J","U","F","I","K","E","M","V","L","T"], [1,2,5,8,11,14,18,19]),
+    lowerGrid: g("h", ["g","b","c","l","n","u","q","a","e","k","j","o","m","f","d"], [2,3,5,9,15,19]),
+    upperWordsSet1: ["HIBOU","HERBE","HOMME","HÔPITAL"],
+    upperWordsSet2: ["CHAT","CAHIER","BONHEUR","DEHORS","THÉÂTRE"],
+    lowerWords: ["hibou","herbe","homme","cahier","dehors"],
+    soundItems: [
+      { label: "HIBOU", hasSound: true },
+      { label: "LUNE", hasSound: false },
+      { label: "HERBE", hasSound: true },
+      { label: "BATEAU", hasSound: false },
+      { label: "CAHIER", hasSound: true },
+      { label: "BÉBÉ", hasSound: false },
+    ],
+    syllableGrid: ["haha","hah","Ho","Ha","hU","hehe","HoH","HeH","hu","AH","hy","HaH","hah","eh","hi"],
+    pronunciationChain: [
+      { phoneme: "h", syllable: "hi-bou", word: "hibou" },
+      { phoneme: "h", syllable: "her-be", word: "herbe" },
+      { phoneme: "h", syllable: "ca-hier", word: "cahier" },
+      { phoneme: "h", syllable: "hô-pi-tal", word: "hôpital" },
+    ],
+  },
+];
+
+// ─── Revisions ─────────────────────────────────────────────────────────────────
+
+export const VOWEL_REVISIONS: RevisionData[] = [
+  {
+    pair: "a-o",
+    title: "Révision A & O",
+    letterA: "A",
+    letterB: "O",
+    phonemeA: "/a/",
+    phonemeB: "/o/",
+    mixedGrid: ["A","B","E","A","M","I","A","O","R","L","A","N","C","T","F","A","X","K","O","B","E","O","M","I","O"],
+    soundWords: [
+      { word: "avion", answer: "A" },
+      { word: "chat", answer: "A" },
+      { word: "panda", answer: "A" },
+      { word: "orange", answer: "B" },
+    ],
+    readWords: [
+      { letter: "a", word: "ami" },
+      { letter: "a", word: "ali" },
+      { letter: "a", word: "ana" },
+      { letter: "o", word: "oli" },
+    ],
+  },
+  {
+    pair: "i-u",
+    title: "Révision I & U",
+    letterA: "I",
+    letterB: "U",
+    phonemeA: "/i/",
+    phonemeB: "/y/",
+    mixedGrid: ["I","B","E","I","M","A","I","U","R","L","I","N","C","T","F","I","X","K","U","B","E","U","M","A","U"],
+    soundWords: [
+      { word: "île", answer: "A" },
+      { word: "usine", answer: "B" },
+      { word: "midi", answer: "A" },
+      { word: "lune", answer: "B" },
+    ],
+    readWords: [
+      { letter: "i", word: "île" },
+      { letter: "i", word: "lire" },
+      { letter: "u", word: "une" },
+      { letter: "u", word: "lune" },
+    ],
+  },
+  {
+    pair: "e-y",
+    title: "Révision E & Y",
+    letterA: "E",
+    letterB: "Y",
+    phonemeA: "/e/",
+    phonemeB: "/i/",
+    mixedGrid: ["E","B","A","E","M","I","E","Y","R","L","E","N","C","T","F","E","X","K","Y","B","A","Y","M","I","Y"],
+    soundWords: [
+      { word: "école", answer: "A" },
+      { word: "stylo", answer: "B" },
+      { word: "été", answer: "A" },
+      { word: "yoga", answer: "B" },
+    ],
+    readWords: [
+      { letter: "e", word: "épée" },
+      { letter: "e", word: "bébé" },
+      { letter: "y", word: "stylo" },
+      { letter: "y", word: "yoga" },
+    ],
+  },
+];
+
+export const CONSONANT_REVISIONS: RevisionData[] = [
+  {
+    pair: "b-c",
+    title: "Révision B & C",
+    letterA: "B",
+    letterB: "C",
+    phonemeA: "/b/",
+    phonemeB: "/k/",
+    mixedGrid: ["B","C","E","B","M","A","B","C","R","L","B","N","C","T","F","B","X","C","B","M","E","C","M","A","C"],
+    soundWords: [
+      { word: "ballon", answer: "A" },
+      { word: "carotte", answer: "B" },
+      { word: "banane", answer: "A" },
+      { word: "canard", answer: "B" },
+    ],
+    readWords: [
+      { letter: "b", word: "balle" },
+      { letter: "b", word: "robe" },
+      { letter: "c", word: "café" },
+      { letter: "c", word: "coco" },
+    ],
+  },
+  {
+    pair: "d-g",
+    title: "Révision D & G",
+    letterA: "D",
+    letterB: "G",
+    phonemeA: "/d/",
+    phonemeB: "/g/",
+    mixedGrid: ["D","G","E","D","M","A","D","G","R","L","D","N","G","T","F","D","X","G","D","M","E","G","M","A","G"],
+    soundWords: [
+      { word: "domino", answer: "A" },
+      { word: "gâteau", answer: "B" },
+      { word: "radis", answer: "A" },
+      { word: "gorille", answer: "B" },
+    ],
+    readWords: [
+      { letter: "d", word: "dodo" },
+      { letter: "d", word: "canard" },
+      { letter: "g", word: "gâteau" },
+      { letter: "g", word: "légume" },
+    ],
+  },
+  {
+    pair: "k-p",
+    title: "Révision K & P",
+    letterA: "K",
+    letterB: "P",
+    phonemeA: "/k/",
+    phonemeB: "/p/",
+    mixedGrid: ["K","P","E","K","M","A","K","P","R","L","K","N","P","T","F","K","X","P","K","M","E","P","M","A","P"],
+    soundWords: [
+      { word: "kayak", answer: "A" },
+      { word: "pomme", answer: "B" },
+      { word: "koala", answer: "A" },
+      { word: "pain", answer: "B" },
+    ],
+    readWords: [
+      { letter: "k", word: "kayak" },
+      { letter: "k", word: "koala" },
+      { letter: "p", word: "pomme" },
+      { letter: "p", word: "papillon" },
+    ],
+  },
+  {
+    pair: "q-t",
+    title: "Révision Q & T",
+    letterA: "Q",
+    letterB: "T",
+    phonemeA: "/k/",
+    phonemeB: "/t/",
+    mixedGrid: ["Q","T","E","Q","M","A","Q","T","R","L","Q","N","T","F","Q","X","T","Q","M","E","T","M","A","Q","T"],
+    soundWords: [
+      { word: "queue", answer: "A" },
+      { word: "tomate", answer: "B" },
+      { word: "quatre", answer: "A" },
+      { word: "train", answer: "B" },
+    ],
+    readWords: [
+      { letter: "q", word: "queue" },
+      { letter: "q", word: "quatre" },
+      { letter: "t", word: "tomate" },
+      { letter: "t", word: "tortue" },
+    ],
+  },
+  {
+    pair: "f-j",
+    title: "Révision F & J",
+    letterA: "F",
+    letterB: "J",
+    phonemeA: "/f/",
+    phonemeB: "/ʒ/",
+    mixedGrid: ["F","J","E","F","M","A","F","J","R","L","F","N","J","T","F","X","J","F","M","E","J","M","A","F","J"],
+    soundWords: [
+      { word: "forêt", answer: "A" },
+      { word: "jardin", answer: "B" },
+      { word: "fleur", answer: "A" },
+      { word: "bijou", answer: "B" },
+    ],
+    readWords: [
+      { letter: "f", word: "forêt" },
+      { letter: "f", word: "fleur" },
+      { letter: "j", word: "jus" },
+      { letter: "j", word: "bijou" },
+    ],
+  },
+  {
+    pair: "l-m",
+    title: "Révision L & M",
+    letterA: "L",
+    letterB: "M",
+    phonemeA: "/l/",
+    phonemeB: "/m/",
+    mixedGrid: ["L","M","E","L","A","L","M","R","L","N","M","T","F","L","X","M","L","A","M","E","L","M","A","L","M"],
+    soundWords: [
+      { word: "lune", answer: "A" },
+      { word: "maison", answer: "B" },
+      { word: "lapin", answer: "A" },
+      { word: "mouton", answer: "B" },
+    ],
+    readWords: [
+      { letter: "l", word: "lune" },
+      { letter: "l", word: "ballon" },
+      { letter: "m", word: "maman" },
+      { letter: "m", word: "pomme" },
+    ],
+  },
+  {
+    pair: "n-r",
+    title: "Révision N & R",
+    letterA: "N",
+    letterB: "R",
+    phonemeA: "/n/",
+    phonemeB: "/r/",
+    mixedGrid: ["N","R","E","N","A","N","R","L","N","M","R","T","F","N","X","R","N","A","R","E","N","R","A","N","R"],
+    soundWords: [
+      { word: "nid", answer: "A" },
+      { word: "rose", answer: "B" },
+      { word: "nuage", answer: "A" },
+      { word: "renard", answer: "B" },
+    ],
+    readWords: [
+      { letter: "n", word: "nuit" },
+      { letter: "n", word: "banane" },
+      { letter: "r", word: "rose" },
+      { letter: "r", word: "crayon" },
+    ],
+  },
+  {
+    pair: "s-v",
+    title: "Révision S & V",
+    letterA: "S",
+    letterB: "V",
+    phonemeA: "/s/",
+    phonemeB: "/v/",
+    mixedGrid: ["S","V","E","S","A","S","V","L","S","M","V","T","F","S","X","V","S","A","V","E","S","V","A","S","V"],
+    soundWords: [
+      { word: "soleil", answer: "A" },
+      { word: "vélo", answer: "B" },
+      { word: "sapin", answer: "A" },
+      { word: "vache", answer: "B" },
+    ],
+    readWords: [
+      { letter: "s", word: "soleil" },
+      { letter: "s", word: "souris" },
+      { letter: "v", word: "vélo" },
+      { letter: "v", word: "avion" },
+    ],
+  },
+  {
+    pair: "z-w",
+    title: "Révision Z & W",
+    letterA: "Z",
+    letterB: "W",
+    phonemeA: "/z/",
+    phonemeB: "/w/",
+    mixedGrid: ["Z","W","E","Z","A","Z","W","L","Z","M","W","T","F","Z","X","W","Z","A","W","E","Z","W","A","Z","W"],
+    soundWords: [
+      { word: "zèbre", answer: "A" },
+      { word: "wagon", answer: "B" },
+      { word: "zéro", answer: "A" },
+      { word: "kiwi", answer: "B" },
+    ],
+    readWords: [
+      { letter: "z", word: "zéro" },
+      { letter: "z", word: "gazelle" },
+      { letter: "w", word: "wagon" },
+      { letter: "w", word: "kiwi" },
+    ],
+  },
+  {
+    pair: "x-h",
+    title: "Révision X & H",
+    letterA: "X",
+    letterB: "H",
+    phonemeA: "/ks/",
+    phonemeB: "/∅/",
+    mixedGrid: ["X","H","E","X","A","X","H","L","X","M","H","T","F","X","H","X","A","H","E","X","H","A","X","H","X"],
+    soundWords: [
+      { word: "taxe", answer: "A" },
+      { word: "hibou", answer: "B" },
+      { word: "boxe", answer: "A" },
+      { word: "herbe", answer: "B" },
+    ],
+    readWords: [
+      { letter: "x", word: "taxe" },
+      { letter: "x", word: "texte" },
+      { letter: "h", word: "hibou" },
+      { letter: "h", word: "herbe" },
+    ],
+  },
+];
+
+// ─── Evaluation (Voyelles) ─────────────────────────────────────────────────────
+
+export const VOWEL_EVALUATION: EvaluationData = {
+  id: "voyelles",
+  title: "Évaluation — Les Voyelles",
+  subtitle: "Test de toutes les voyelles : A, O, I, U, E, Y",
+  letters: [
+    { letter: "A", phoneme: "/a/" },
+    { letter: "O", phoneme: "/o/" },
+    { letter: "I", phoneme: "/i/" },
+    { letter: "U", phoneme: "/y/" },
+    { letter: "E", phoneme: "/e/" },
+    { letter: "Y", phoneme: "/i/" },
+  ],
+  mixedGrid: [
+    "A","O","B","A","I","U","E","Y","C","A","O","I","F","U","E","A","Y","O","I","U",
+    "N","E","Y","A","O","I","T","U","E","Y",
+  ],
+  soundWords: [
+    { word: "ami", answer: "A" },
+    { word: "orange", answer: "O" },
+    { word: "île", answer: "I" },
+    { word: "usine", answer: "U" },
+    { word: "école", answer: "E" },
+    { word: "stylo", answer: "Y" },
+  ],
+  readWords: [
+    { letter: "a", word: "chat" },
+    { letter: "o", word: "moto" },
+    { letter: "i", word: "midi" },
+    { letter: "u", word: "lune" },
+    { letter: "e", word: "bébé" },
+    { letter: "y", word: "yoga" },
+  ],
+};
+
+// ─── Stories ───────────────────────────────────────────────────────────────────
+
+export const STORIES: Story[] = [
+  {
+    id: "le-chat",
+    title: "Le chat",
+    level: "débutant",
+    sentences: [
+      "Le chat est là.",
+      "Il est gros et roux.",
+      "Il dort sur le tapis.",
+      "Il aime le lait.",
+      "Le chat est content.",
+    ],
+  },
+  {
+    id: "la-pomme",
+    title: "La pomme",
+    level: "débutant",
+    sentences: [
+      "Voici une pomme rouge.",
+      "Elle est sur la table.",
+      "Lila prend la pomme.",
+      "Elle mange la pomme.",
+      "C'est bon et sucré.",
+    ],
+  },
+  {
+    id: "au-marche",
+    title: "Au marché",
+    level: "intermédiaire",
+    sentences: [
+      "Mama va au marché.",
+      "Elle achète des tomates et des carottes.",
+      "Elle prend aussi du pain et du fromage.",
+      "Le vendeur est gentil.",
+      "Mama rentre à la maison avec son panier.",
+    ],
+  },
+  {
+    id: "mon-ami-paul",
+    title: "Mon ami Paul",
+    level: "intermédiaire",
+    sentences: [
+      "Paul est mon ami.",
+      "Il a huit ans, comme moi.",
+      "Il habite dans ma rue.",
+      "Nous allons à l'école ensemble.",
+      "Après l'école, nous jouons dans le jardin.",
+      "Paul aime les livres et les ballons.",
+    ],
+  },
+  {
+    id: "a-l-ecole",
+    title: "À l'école",
+    level: "avancé",
+    sentences: [
+      "Ce matin, Nora arrive à l'école de bonne heure.",
+      "Sa maîtresse s'appelle Madame Blanc.",
+      "En classe, les élèves apprennent les lettres et les chiffres.",
+      "Nora aime surtout les histoires que la maîtresse lit à voix haute.",
+      "À la récréation, elle joue à la corde avec ses amies.",
+      "Elle rentre chez elle le soir, le cartable plein de dessins.",
+    ],
+  },
+  {
+    id: "la-famille",
+    title: "La famille",
+    level: "avancé",
+    sentences: [
+      "Dans ma famille, nous sommes cinq.",
+      "Il y a papa, mama, ma grande sœur, mon petit frère et moi.",
+      "Papa travaille dans un bureau en ville.",
+      "Mama prépare de bons repas pour toute la famille.",
+      "Le soir, nous mangeons tous ensemble et nous parlons de notre journée.",
+      "Le week-end, nous faisons des promenades dans la forêt.",
+    ],
+  },
+];
+
+// ─── Lookup helpers ────────────────────────────────────────────────────────────
+
+export function getLetterData(letter: string): LetterData | undefined {
+  const l = letter.toLowerCase();
+  return (
+    VOWELS.find((v) => v.letterLower === l) ??
+    CONSONANTS.find((c) => c.letterLower === l)
+  );
+}
+
+export function getRevision(pair: string): RevisionData | undefined {
+  return (
+    VOWEL_REVISIONS.find((r) => r.pair === pair) ??
+    CONSONANT_REVISIONS.find((r) => r.pair === pair)
+  );
+}
+
+export function getStory(id: string): Story | undefined {
+  return STORIES.find((s) => s.id === id);
+}
+
+export const VOWEL_ORDER = ["a","o","i","u","e","y"] as const;
+export const CONSONANT_ORDER = ["b","c","d","g","k","p","q","t","f","j","l","m","n","r","s","v","z","w","x","h"] as const;

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {
-  ALPHA_TO_A0_THRESHOLD,
   FRENCH_THEMES,
   frenchThemesBySection,
 } from "@/lib/curriculum/french-data";
@@ -12,9 +11,8 @@ const SECTIONS: { id: FrenchSection | "INTRO"; title: string; blurb?: string }[]
     id: "INTRO",
     title: "Contexte",
     blurb:
-      "Français sur toute la ligne : pré-alphabétisation (ALPHA), puis A0 à B2, pour publics allophones, démarche PER et volet professionnel.",
+      "Français de A0 à B2 pour publics allophones, démarche PER et volet professionnel.",
   },
-  { id: "ALPHA", title: "Section 0 — Pré-alphabétisation (ALPHA)" },
   { id: "A0", title: "Niveau A0 — Débutant lecteur" },
   { id: "A1", title: "Niveau A1 — Découverte" },
   { id: "A2", title: "Niveau A2 — Survie / élémentaire" },
@@ -111,8 +109,6 @@ export default function FrancaisPage() {
         </section>
       ))}
 
-      <AppCardFrenchThreshold />
-
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
         Test de positionnement : voir{" "}
         <Link href="/placement" className="underline text-[var(--color-accent-fr)]">
@@ -121,25 +117,5 @@ export default function FrancaisPage() {
         .
       </p>
     </main>
-  );
-}
-
-function AppCardFrenchThreshold() {
-  return (
-    <div className="rounded-[var(--radius-lg)] border-2 border-[var(--color-marker-prereq-text)]/30 bg-[var(--color-marker-prereq-bg)]/40 p-4 dark:bg-[var(--color-marker-prereq-bg)]/20">
-      <div className="flex flex-wrap items-center gap-2">
-        {ALPHA_TO_A0_THRESHOLD.markers.map((m) => (
-          <PedagogicMarkerBadge key={`alpha-${m}`} marker={m} />
-        ))}
-        <h3 className="w-full text-base font-semibold text-[var(--color-text-primary)]">
-          {ALPHA_TO_A0_THRESHOLD.title}
-        </h3>
-      </div>
-      <ul className="mt-3 list-disc space-y-1 pl-4 text-sm text-[var(--color-text-secondary)]">
-        {ALPHA_TO_A0_THRESHOLD.criteria.map((c) => (
-          <li key={c}>{c}</li>
-        ))}
-      </ul>
-    </div>
   );
 }

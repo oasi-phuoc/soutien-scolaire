@@ -7,6 +7,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 const links = [
   { href: "/", label: "Accueil", icon: HomeIcon },
   { href: "/francais", label: "Français", icon: FrIcon },
+  { href: "/lecture", label: "Lecture", icon: LectureIcon },
   { href: "/mathematiques", label: "Maths", icon: MathIcon },
   { href: "/compte", label: "Réglages", icon: GearIcon },
 ] as const;
@@ -108,6 +109,24 @@ function MathIcon({ active }: { active: boolean }) {
     >
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <path d="M8 8v8M12 8v8M16 8v8M8 12h8" />
+    </svg>
+  );
+}
+
+function LectureIcon({ active }: { active: boolean }) {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className={active ? "text-[var(--color-theme)]" : undefined}
+      aria-hidden
+    >
+      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
     </svg>
   );
 }
