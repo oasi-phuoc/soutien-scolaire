@@ -2,9 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AppBadge } from "@/components/ui/AppBadge";
-import { AppButton } from "@/components/ui/AppButton";
-import { AppCard } from "@/components/ui/AppCard";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
 import {
   MATH_ALGEBRA_ORDER,
@@ -21,19 +18,72 @@ import {
   completedPassingIds,
   createInitialProgress,
   loadProgress,
-  recordMathEvaluation,
   saveProgress,
-  snoozeEvaluation,
 } from "@/lib/progress/math-progress";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
-import { PASSING_GRADE, MAX_EVAL_ATTEMPTS } from "@/lib/scoring";
+import { PASSING_GRADE } from "@/lib/scoring";
 
-function ArrowIcon() {
+type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
+
+function getModuleDisplayState(
+  prog: StoredProgressV1["math"][string] | undefined,
+  prereqOk: boolean,
+): ModuleDisplayState {
+  if (!prereqOk) return "locked";
+  if (!prog || prog.state === "locked") return "available";
+  if (prog.state === "in_progress") return "in_progress";
+  if (prog.state === "completed") return "completed";
+  return "available";
+}
+
+function StateBadge({ state, missing }: { state: ModuleDisplayState; missing?: string[] }) {
+  if (state === "completed")
+    return (
+      <span className="rounded-full bg-[var(--color-accent-alg)]/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">
+        Terminé
+      </span>
+    );
+  if (state === "in_progress")
+    return (
+      <span className="rounded-full bg-[var(--color-accent-alg)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">
+        En cours
+      </span>
+    );
+  if (state === "available")
+    return (
+      <span className="rounded-full bg-[var(--color-bg-secondary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        Disponible
+      </span>
+    );
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-      <path d="M7 17 17 7" />
-      <path d="M9 7h8v8" />
-    </svg>
+    <span
+      className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]"
+      title={missing?.length ? `Terminer : ${missing.join(", ")}` : undefined}
+    >
+      Verrouillé
+    </span>
+  );
+}
+
+function SubDot({ done, accent }: { done: boolean; accent: string }) {
+  if (done)
+    return (
+      <span
+        className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
+        style={{ background: accent }}
+      >
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </span>
+    );
+  return (
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
+    </span>
   );
 }
 
@@ -73,9 +123,11 @@ export function MathematiquesClient() {
     return total ? Math.round((n / total) * 100) : 0;
   }, [order, progress]);
 
+  const accentColor = tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)";
+
   return (
     <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <header className="space-y-2">
+      <header className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
           Mathématiques
         </p>
@@ -84,8 +136,8 @@ export function MathematiquesClient() {
         </h1>
       </header>
 
-
-<div
+      {/* Tab toggle */}
+      <div
         role="tablist"
         aria-label="Branches mathématiques"
         className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
@@ -118,160 +170,145 @@ export function MathematiquesClient() {
         </button>
       </div>
 
-<div className="space-y-2">
-        <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-          <span>Progression de la branche</span>
-          <span>{branchProgress}%</span>
+      {/* Branch progress */}
+      {hydrated && (
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
+            <span>Progression de la branche</span>
+            <span>{branchProgress}%</span>
+          </div>
+          <AppProgressBar value={branchProgress} color={accentColor} height={6} />
         </div>
-        <AppProgressBar
-          value={branchProgress}
-          color={tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)"}
-          height={6}
-        />
-      </div>
+      )}
 
-      <section aria-label="Liste des modules" className="space-y-3">
+      {/* Pending evaluation banner */}
+      {hydrated && pendingModule && pendingEvalId ? (
+        <div className="rounded-[var(--radius-lg)] border border-amber-400/50 bg-amber-50 px-4 py-3 dark:bg-amber-950/20">
+          <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">
+            Module {pendingModule.code} terminé — bravo !
+          </p>
+          <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400">
+            Évalue tes connaissances avant de continuer (seuil {PASSING_GRADE}/6).
+          </p>
+        </div>
+      ) : null}
+
+      {/* Module cards */}
+      <section aria-label="Liste des modules" className="space-y-4">
         <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">Modules</h2>
-        <ul className="space-y-3">
+        <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;
-            const prog = progress.math[m.id];
-            const done = completedPassingIds(progress);
+            const prog = hydrated ? progress.math[m.id] : undefined;
+            const done = hydrated ? completedPassingIds(progress) : new Set<string>();
             const pre = prerequisitesMet(m, done);
-            const recoHighlight = reco.moduleId === m.id && reco.kind !== "revision_grade";
-            const locked = prog?.state === "locked";
-            const pct =
+            const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
+            const isLocked = displayState === "locked";
+            const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
+            const subPct =
               prog && prog.subTotal
                 ? Math.round((prog.subProgress / prog.subTotal) * 100)
                 : 0;
 
             return (
               <li key={m.id}>
-                <AppCard
-                  variant={recoHighlight ? "info" : "default"}
-                  className={recoHighlight ? "ring-2 ring-[var(--color-accent-alg)]/30" : ""}
+                <div
+                  className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
+                    isLocked
+                      ? "border-[var(--color-border-default)] opacity-60"
+                      : recoHighlight
+                        ? "border-[var(--color-accent-alg)]/50"
+                        : "border-[var(--color-border-default)]"
+                  }`}
                 >
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div>
-                      <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-                        {m.code} — {m.title}
+                  {/* Module header — clickable */}
+                  <button
+                    type="button"
+                    disabled={isLocked}
+                    onClick={() => { if (!isLocked) router.push(`/mathematiques/${m.id}`); }}
+                    className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left disabled:cursor-not-allowed"
+                  >
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                      style={{ background: `color-mix(in srgb, ${accentColor} 15%, transparent)` }}
+                    >
+                      <span className="text-sm font-bold" style={{ color: accentColor }}>
+                        {m.code}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                      <p className="text-xs text-[var(--color-text-secondary)]">
+                        {displayState === "completed"
+                          ? `Terminé · note ${prog?.grade?.toFixed(1) ?? "—"}/6`
+                          : displayState === "in_progress"
+                            ? `${prog?.subProgress ?? 0} / ${prog?.subTotal ?? m.submodules.length} sous-modules`
+                            : isLocked
+                              ? `Terminer : ${pre.ok ? "" : pre.missing.join(", ")}`
+                              : `${m.submodules.length} sous-module${m.submodules.length > 1 ? "s" : ""}`}
                       </p>
-                      <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        {prog?.state === "completed"
-                          ? `Terminé — note ${prog.grade?.toFixed(1) ?? "—"}/6`
-                          : prog?.state === "in_progress"
-                            ? `${prog.subProgress}/${prog.subTotal} sous-modules`
-                            : locked
-                              ? pre.ok
-                                ? "Disponible"
-                                : `Verrouillé : terminer ${pre.missing.join(", ")}`
-                              : "Disponible"}
+                    </div>
+                    <div className="flex shrink-0 items-center gap-2">
+                      {prog?.medal ? (
+                        <span className="text-sm">{prog.medal}</span>
+                      ) : null}
+                      <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
+                      {!isLocked && (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-text-secondary)]" aria-hidden>
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
+                      )}
+                    </div>
+                  </button>
+
+                  {/* Progress bar (in_progress only) */}
+                  {displayState === "in_progress" && hydrated && (
+                    <div className="px-4 pb-2">
+                      <AppProgressBar value={subPct} color={accentColor} height={4} />
+                      <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
+                        {subPct}%
                       </p>
-                      {m.algebraRefs?.length ? (
-                        <p className="mt-1 text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-                          Références algèbre : {m.algebraRefs.join(", ")}
-                        </p>
-                      ) : null}
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                      {prog?.state === "completed" && prog.medal ? (
-                        <AppBadge variant="medal">{prog.medal}</AppBadge>
-                      ) : null}
-                      <AppButton
-                        size="sm"
-                        variant="secondary"
-                        disabled={locked}
-                        accent="alg"
-                        onClick={() => {
-                          if (!locked) router.push(`/mathematiques/${m.id}`);
-                        }}
-                      >
-                        Ouvrir
-                      </AppButton>
-                    </div>
-                  </div>
-                  {prog?.state === "in_progress" ? (
-                    <div className="mt-3">
-                      <AppProgressBar
-                        value={pct}
-                        color={tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)"}
-                      />
-                    </div>
-                  ) : null}
-                  {m.submodules.length > 0 ? (
-                    <ul className="mt-3 space-y-1.5 border-t border-[var(--color-border-default)] pt-3">
+                  )}
+
+                  {/* Submodule list */}
+                  {m.submodules.length > 0 && (
+                    <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                       {m.submodules.map((sub) => {
-                        const subState = progress.submoduleStates?.[sub.id];
-                        const done = subState === "completed";
+                        const subDone = hydrated
+                          ? progress.submoduleStates?.[sub.id] === "completed"
+                          : false;
+                        const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
-                          <li key={sub.id} className="flex items-center gap-2">
-                            <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
-                              done
-                                ? "bg-[var(--color-accent-alg)] text-white"
-                                : "border border-zinc-300 dark:border-zinc-600"
-                            }`}>
-                              {done ? "✓" : null}
-                            </span>
-                            <span className={`min-w-0 flex-1 text-xs ${done ? "text-[var(--color-text-primary)]" : "text-[var(--color-text-secondary)]"}`}>
-                              <span className="font-medium">{sub.code}</span> — {sub.title}
-                            </span>
-                            {done && progress.submoduleScores?.[sub.id] ? (
+                          <li key={sub.id} className="flex items-center gap-3 px-4 py-2.5">
+                            <SubDot done={subDone} accent={accentColor} />
+                            <div className="flex-1 min-w-0">
+                              <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                                {sub.code}
+                              </span>
+                              <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">
+                                {sub.title}
+                              </span>
+                            </div>
+                            {subDone && score ? (
                               <span className="shrink-0 text-[10px] text-[var(--color-text-secondary)]">
-                                {progress.submoduleScores[sub.id]!.score}/{progress.submoduleScores[sub.id]!.max} · {progress.submoduleScores[sub.id]!.grade.toFixed(1)}/6
+                                {score.grade.toFixed(1)}/6
                               </span>
                             ) : null}
                           </li>
                         );
                       })}
                     </ul>
-                  ) : null}
-                </AppCard>
+                  )}
+                </div>
               </li>
             );
           })}
         </ul>
       </section>
 
-      {pendingModule && pendingEvalId ? (
-        <AppCard
-          variant="warning"
-          header={
-            <div>
-              <p className="text-sm font-semibold">
-                Module {pendingModule.code} terminé — bravo !
-              </p>
-              <p className="text-xs text-[var(--color-text-secondary)]">
-                Évalue tes connaissances avant de continuer (seuil {PASSING_GRADE}/6, max{" "}
-                {MAX_EVAL_ATTEMPTS} tentatives).
-              </p>
-            </div>
-          }
-          footer={
-            <>
-              <AppButton
-                accent="quiz"
-                onClick={() => persist(recordMathEvaluation(progress, pendingEvalId, 65))}
-              >
-                Simuler une évaluation réussie (65 % → {PASSING_GRADE}/6)
-              </AppButton>
-              <AppButton
-                variant="secondary"
-                onClick={() => persist(snoozeEvaluation(progress, pendingEvalId))}
-              >
-                Passer pour l&apos;instant
-              </AppButton>
-            </>
-          }
-        >
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            Métadonnées type quiz : 20 questions, chronomètre, corrections détaillées — à brancher sur le
-            moteur de questions.
-          </p>
-        </AppCard>
-      ) : null}
-
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-        Données de progression : stockage local (aperçu). Branche-les à Supabase pour synchro multi-appareils.
+        Progression stockée localement.
       </p>
     </div>
   );
