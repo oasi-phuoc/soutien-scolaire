@@ -7,18 +7,44 @@ interface Props {
   letter: string;
   letterLower: string;
   exampleWord: string;
+  exampleImagePath?: string;
 }
 
-export function DiscoverSound({ phoneme, letter, letterLower, exampleWord }: Props) {
+function HighlightedWord({ word, letter, letterLower }: { word: string; letter: string; letterLower: string }) {
+  return (
+    <span>
+      {word.split("").map((char, i) =>
+        char === letter || char === letterLower ? (
+          <strong key={i} className="font-bold" style={{ color: "var(--color-accent-lecture)" }}>
+            {char}
+          </strong>
+        ) : (
+          <span key={i}>{char}</span>
+        ),
+      )}
+    </span>
+  );
+}
+
+export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePath }: Props) {
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Découverte du son</h2>
       <div className="flex flex-col items-center gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-8">
-        <p className="text-base font-medium text-[var(--color-accent-alg)]">{phoneme}</p>
         <p className="text-6xl font-bold tracking-tight text-[var(--color-text-primary)]">
           {letter}{letterLower}
         </p>
-        <p className="text-base text-[var(--color-text-secondary)]">{exampleWord}</p>
+        {exampleImagePath && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={exampleImagePath}
+            alt={exampleWord}
+            className="max-h-48 w-auto object-contain"
+          />
+        )}
+        <p className="text-base text-[var(--color-text-secondary)]">
+          <HighlightedWord word={exampleWord} letter={letter} letterLower={letterLower} />
+        </p>
         <button
           type="button"
           onClick={() => speak(exampleWord)}
