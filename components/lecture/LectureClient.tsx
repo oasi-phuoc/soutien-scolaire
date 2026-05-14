@@ -138,7 +138,7 @@ function ModuleCard({
                   {subCode}
                 </span>
                 <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">
-                  Lettre {letter.letter} / {letter.letterLower}
+                  Lettre {letter.letter} - {letter.letterLower}
                 </span>
                 <span className="ml-1 text-[10px] text-[var(--color-text-secondary)]">
                   {letter.phoneme}

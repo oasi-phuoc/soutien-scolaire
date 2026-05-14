@@ -147,7 +147,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           Lecture · {data.type === "vowel" ? "Voyelle" : "Consonne"}
         </p>
         <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-          {data.letter} / {data.letterLower} — {data.phoneme}
+          {data.letter} - {data.letterLower} — {data.phoneme}
         </h1>
       </header>
 
