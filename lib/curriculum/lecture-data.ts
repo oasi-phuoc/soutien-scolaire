@@ -1200,3 +1200,60 @@ export function getStory(id: string): Story | undefined {
 
 export const VOWEL_ORDER = ["a","o","i","u","e","y"] as const;
 export const CONSONANT_ORDER = ["b","c","d","g","k","p","q","t","f","j","l","m","n","r","s","v","z","w","x","h"] as const;
+
+// ─── Module structure (L1–L4) ──────────────────────────────────────────────────
+
+export type LectureModule = {
+  id: string;
+  code: string;
+  title: string;
+  description: string;
+  letters: LetterData[];
+};
+
+const L2_IDS = ["b","c","d","g","k","p","q","t"];
+const L3_IDS = ["f","j","l","m","n","r","s","v","z"];
+const L4_IDS = ["w","x","h"];
+
+export const LECTURE_MODULES: LectureModule[] = [
+  {
+    id: "l1",
+    code: "L1",
+    title: "Voyelles",
+    description: "A, O, I, U, E, Y",
+    letters: VOWELS,
+  },
+  {
+    id: "l2",
+    code: "L2",
+    title: "Consonnes qui claquent",
+    description: "B, C, D, G, K, P, Q, T",
+    letters: CONSONANTS.filter((c) => L2_IDS.includes(c.letterLower)),
+  },
+  {
+    id: "l3",
+    code: "L3",
+    title: "Consonnes qui sifflent",
+    description: "F, J, L, M, N, R, S, V, Z",
+    letters: CONSONANTS.filter((c) => L3_IDS.includes(c.letterLower)),
+  },
+  {
+    id: "l4",
+    code: "L4",
+    title: "Consonnes spéciales",
+    description: "W, X, H",
+    letters: CONSONANTS.filter((c) => L4_IDS.includes(c.letterLower)),
+  },
+];
+
+export function getLectureModule(id: string): LectureModule | undefined {
+  return LECTURE_MODULES.find((m) => m.id === id);
+}
+
+export function getLetterInModule(moduleId: string, letterLower: string): LetterData | undefined {
+  return getLectureModule(moduleId)?.letters.find((l) => l.letterLower === letterLower);
+}
+
+export function getLectureModuleForLetter(letterLower: string): LectureModule | undefined {
+  return LECTURE_MODULES.find((m) => m.letters.some((l) => l.letterLower === letterLower));
+}

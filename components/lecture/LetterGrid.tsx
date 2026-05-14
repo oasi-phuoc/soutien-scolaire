@@ -46,9 +46,9 @@ export function LetterGrid({ target, grid, isUppercase, cols = 4 }: Props) {
               onClick={() => tap(i)}
               className={`flex items-center justify-center rounded-[var(--radius-lg)] border p-3 text-lg font-bold transition-colors ${
                 s === "correct"
-                  ? "border-green-500 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
+                  ? "border-blue-500 bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
                   : s === "wrong"
-                    ? "border-red-400 bg-red-50 text-red-500 dark:bg-red-900/20"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -58,7 +58,7 @@ export function LetterGrid({ target, grid, isUppercase, cols = 4 }: Props) {
         })}
       </div>
       {allFound && (
-        <p className="text-center text-sm font-semibold text-green-600 dark:text-green-400">
+        <p className="text-center text-sm font-semibold text-blue-600 dark:text-blue-400">
           Bravo ! Toutes les lettres trouvées.
         </p>
       )}

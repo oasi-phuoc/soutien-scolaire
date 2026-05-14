@@ -3,175 +3,219 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
-import { VOWELS, CONSONANTS, VOWEL_REVISIONS, CONSONANT_REVISIONS } from "@/lib/curriculum/lecture-data";
+import { LECTURE_MODULES, STORIES } from "@/lib/curriculum/lecture-data";
 import {
   loadLectureProgress,
   computeLecturePercent,
-  getItemState,
+  getSubmoduleState,
+  getModuleState,
+  SUBMODULE_SEQUENCE,
   TOTAL_LETTERS,
 } from "@/lib/progress/lecture-progress";
-import type { LectureProgress, ItemState } from "@/lib/progress/lecture-progress";
+import type { LectureProgressV2, ItemState, ModuleState } from "@/lib/progress/lecture-progress";
 
-// ── State badge ────────────────────────────────────────────────────────────────
+type TabId = "apprendre" | "histoires";
 
-function StateBadge({ state }: { state: ItemState }) {
+// ── State badges ───────────────────────────────────────────────────────────────
+
+function SubStateDot({ state }: { state: ItemState }) {
   if (state === "completed")
     return (
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-green-500 text-white">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
           <path d="M20 6L9 17l-5-5" />
         </svg>
       </span>
     );
-  if (state === "locked")
+  if (state === "available")
     return (
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)] text-[var(--color-text-secondary)]">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-          <rect x="3" y="11" width="18" height="11" rx="2" />
-          <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-        </svg>
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent-lecture)]">
+        <span className="h-2 w-2 rounded-full bg-[var(--color-accent-lecture)]" />
       </span>
     );
   return (
-    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent-lecture)] text-[var(--color-accent-lecture)]">
-      <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor" aria-hidden>
-        <circle cx="4" cy="4" r="4" />
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
       </svg>
     </span>
   );
 }
 
-// ── Letter card ────────────────────────────────────────────────────────────────
-
-function LetterCard({
-  letter,
-  letterLower,
-  phoneme,
-  state,
-}: {
-  letter: string;
-  letterLower: string;
-  phoneme: string;
-  state: ItemState;
-}) {
-  const locked = state === "locked";
-  const content = (
-    <div
-      className={`flex items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 transition-colors ${
-        state === "completed"
-          ? "border-green-500/40 bg-green-50/50 dark:bg-green-900/10"
-          : state === "available"
-            ? "border-[var(--color-accent-lecture)]/40 bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-lecture)]"
-            : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] opacity-50"
-      }`}
-    >
-      <span
-        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-lg font-bold ${
-          locked
-            ? "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
-            : "bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
-        }`}
-      >
-        {letter}
+function ModuleStateBadge({ state }: { state: ModuleState }) {
+  if (state === "completed")
+    return (
+      <span className="rounded-full bg-[var(--color-accent-lecture)]/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">
+        Terminé
       </span>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-          {letter} / {letterLower}
-        </p>
-        <p className="text-xs text-[var(--color-text-secondary)]">
-          {locked ? "Verrouillé" : state === "completed" ? "Terminé" : `Son ${phoneme}`}
-        </p>
-      </div>
-      <StateBadge state={state} />
-    </div>
-  );
-
-  if (locked) return <li>{content}</li>;
+    );
+  if (state === "in_progress")
+    return (
+      <span className="rounded-full bg-[var(--color-accent-lecture)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">
+        En cours
+      </span>
+    );
+  if (state === "available")
+    return (
+      <span className="rounded-full bg-[var(--color-bg-secondary)] px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        Disponible
+      </span>
+    );
   return (
-    <li>
-      <Link href={`/lecture/${letterLower}`}>{content}</Link>
-    </li>
+    <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
+      Verrouillé
+    </span>
   );
 }
 
-// ── Revision card ──────────────────────────────────────────────────────────────
+// ── Module card ────────────────────────────────────────────────────────────────
 
-function RevisionCard({
-  title,
-  pair,
-  state,
+function ModuleCard({
+  mod,
+  progress,
+  hydrated,
 }: {
-  title: string;
-  pair: string;
-  state: ItemState;
+  mod: (typeof LECTURE_MODULES)[number];
+  progress: LectureProgressV2;
+  hydrated: boolean;
 }) {
-  const locked = state === "locked";
-  const content = (
+  const modState = hydrated ? getModuleState(progress, mod.id) : "locked";
+  const locked = modState === "locked";
+
+  const moduleLetters = SUBMODULE_SEQUENCE.filter((s) => s.moduleId === mod.id);
+  const completedCount = hydrated
+    ? moduleLetters.filter((s) => getSubmoduleState(progress, s.moduleId, s.letterId) === "completed").length
+    : 0;
+  const totalCount = moduleLetters.length;
+  const pct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+
+  return (
     <div
-      className={`flex items-center gap-3 rounded-[var(--radius-lg)] border-2 border-dashed px-4 py-3 transition-colors ${
-        state === "completed"
-          ? "border-green-500/50 bg-green-50/30 dark:bg-green-900/10"
-          : state === "available"
-            ? "border-[var(--color-accent-lecture)]/50 bg-[var(--color-accent-lecture)]/5 hover:border-[var(--color-accent-lecture)]"
-            : "border-[var(--color-border-default)] opacity-40"
+      className={`rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] transition-colors ${
+        locked ? "opacity-50" : ""
       }`}
     >
-      <span className="text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-        RÉVISION
-      </span>
-      <p className="flex-1 text-sm font-semibold text-[var(--color-text-primary)]">{title}</p>
-      <StateBadge state={state} />
-    </div>
-  );
+      {/* Module header */}
+      <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10">
+          <span className="text-sm font-bold text-[var(--color-accent-lecture)]">{mod.code}</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-bold text-[var(--color-text-primary)]">{mod.title}</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">{mod.description}</p>
+        </div>
+        <ModuleStateBadge state={modState} />
+      </div>
 
-  if (locked) return <li>{content}</li>;
-  return (
-    <li>
-      <Link href={`/lecture/revision/${pair}`}>{content}</Link>
-    </li>
+      {/* Progress bar (only when started) */}
+      {modState !== "locked" && modState !== "available" && (
+        <div className="px-4 pb-2">
+          <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={4} />
+          <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
+            {completedCount} / {totalCount}
+          </p>
+        </div>
+      )}
+
+      {/* Submodule list */}
+      <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
+        {mod.letters.map((letter, i) => {
+          const subState = hydrated
+            ? getSubmoduleState(progress, mod.id, letter.letterLower)
+            : "locked";
+          const isLocked = subState === "locked";
+          const subCode = `${mod.code}.${i + 1}`;
+
+          const row = (
+            <div className="flex items-center gap-3 px-4 py-2.5">
+              <SubStateDot state={subState} />
+              <div className="flex-1 min-w-0">
+                <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                  {subCode}
+                </span>
+                <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">
+                  Lettre {letter.letter} / {letter.letterLower}
+                </span>
+                <span className="ml-1 text-[10px] text-[var(--color-text-secondary)]">
+                  {letter.phoneme}
+                </span>
+              </div>
+              {!isLocked && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              )}
+            </div>
+          );
+
+          return (
+            <li key={letter.letterLower}>
+              {isLocked ? (
+                row
+              ) : (
+                <Link
+                  href={`/lecture/${mod.id}/${letter.letterLower}`}
+                  className="block transition-colors hover:bg-[var(--color-bg-secondary)]"
+                >
+                  {row}
+                </Link>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 
-// ── Evaluation card ────────────────────────────────────────────────────────────
+// ── Stories tab ────────────────────────────────────────────────────────────────
 
-function EvaluationCard({ state }: { state: ItemState }) {
-  const locked = state === "locked";
-  const content = (
-    <div
-      className={`flex items-center gap-3 rounded-[var(--radius-lg)] border-2 px-4 py-4 transition-colors ${
-        state === "completed"
-          ? "border-green-500 bg-green-50 dark:bg-green-900/20"
-          : state === "available"
-            ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 hover:bg-[var(--color-accent-lecture)]/20"
-            : "border-[var(--color-border-default)] opacity-40"
-      }`}
-    >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-        </svg>
-      </span>
-      <div className="flex-1">
-        <p className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Évaluation
-        </p>
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Toutes les voyelles</p>
-      </div>
-      <StateBadge state={state} />
-    </div>
+const LEVEL_COLORS: Record<string, string> = {
+  "débutant": "bg-teal-100 text-teal-800 dark:bg-teal-900/30 dark:text-teal-300",
+  "intermédiaire": "bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300",
+  "avancé": "bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300",
+};
+
+function StoriesList() {
+  return (
+    <ul className="space-y-3">
+      {STORIES.map((story) => (
+        <li key={story.id}>
+          <Link
+            href={`/lecture/histoires/${story.id}`}
+            className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 transition-colors hover:border-[var(--color-accent-lecture)]/40"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">{story.title}</p>
+              <p className="text-xs text-[var(--color-text-secondary)]">
+                {story.sentences.length} phrases
+              </p>
+            </div>
+            <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold ${LEVEL_COLORS[story.level] ?? ""}`}>
+              {story.level}
+            </span>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
-
-  if (locked) return <>{content}</>;
-  return <Link href="/lecture/evaluation">{content}</Link>;
 }
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export function LectureClient() {
-  const [progress, setProgress] = useState<LectureProgress>(() => ({
-    letters: {},
-    revisions: {},
-    evaluation: "locked",
+  const [tab, setTab] = useState<TabId>("apprendre");
+  const [progress, setProgress] = useState<LectureProgressV2>(() => ({
+    version: 2,
+    modules: { l1: "locked", l2: "locked", l3: "locked", l4: "locked" },
+    submodules: {},
   }));
   const [hydrated, setHydrated] = useState(false);
 
@@ -181,120 +225,78 @@ export function LectureClient() {
   }, []);
 
   const pct = hydrated ? computeLecturePercent(progress) : 0;
-  const completedCount = Object.values(progress.letters).filter((s) => s === "completed").length;
+  const completedCount = hydrated
+    ? Object.values(progress.submodules).filter((s) => s === "completed").length
+    : 0;
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <header className="space-y-2">
+      <header className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Alphabétisation</h1>
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          Apprenez les lettres et leurs sons dans l&apos;ordre.
-        </p>
       </header>
 
-      {hydrated && (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-            <span>Progression globale</span>
-            <span>{completedCount} / {TOTAL_LETTERS} lettres · {pct}%</span>
-          </div>
-          <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={6} />
-        </div>
-      )}
-
-      {/* ── Voyelles ── */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          [ I ] Les Voyelles
-        </p>
-        <ul className="space-y-2">
-          {VOWELS.map((v, i) => {
-            const letterState = getItemState(progress, "letter", v.letterLower);
-            const pairIndex = Math.floor(i / 2);
-            const isSecondInPair = i % 2 === 1;
-            const revision = isSecondInPair ? VOWEL_REVISIONS[pairIndex] : null;
-            const revState = revision ? getItemState(progress, "revision", revision.pair) : "locked";
-            return (
-              <li key={v.letterLower} className="space-y-2">
-                <LetterCard
-                  letter={v.letter}
-                  letterLower={v.letterLower}
-                  phoneme={v.phoneme}
-                  state={hydrated ? letterState : "locked"}
-                />
-                {revision && (
-                  <RevisionCard
-                    title={revision.title}
-                    pair={revision.pair}
-                    state={hydrated ? revState : "locked"}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-
-        <EvaluationCard state={hydrated ? progress.evaluation : "locked"} />
-      </section>
-
-      {/* ── Consonnes ── */}
-      <section className="space-y-3">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          [ II ] Les Consonnes
-        </p>
-        <ul className="space-y-2">
-          {CONSONANTS.map((c, i) => {
-            const letterState = getItemState(progress, "letter", c.letterLower);
-            const pairIndex = Math.floor(i / 2);
-            const isSecondInPair = i % 2 === 1;
-            const revision = isSecondInPair ? CONSONANT_REVISIONS[pairIndex] : null;
-            const revState = revision ? getItemState(progress, "revision", revision.pair) : "locked";
-            return (
-              <li key={c.letterLower} className="space-y-2">
-                <LetterCard
-                  letter={c.letter}
-                  letterLower={c.letterLower}
-                  phoneme={c.phoneme}
-                  state={hydrated ? letterState : "locked"}
-                />
-                {revision && (
-                  <RevisionCard
-                    title={revision.title}
-                    pair={revision.pair}
-                    state={hydrated ? revState : "locked"}
-                  />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </section>
-
-      {/* ── Histoires ── */}
-      <section className="space-y-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Histoires à lire
-        </p>
-        <Link
-          href="/lecture/histoires"
-          className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-4 transition-colors hover:border-[var(--color-accent-lecture)]/50"
+      {/* Tab toggle */}
+      <div
+        role="tablist"
+        aria-label="Sections lecture"
+        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+      >
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "apprendre"}
+          onClick={() => setTab("apprendre")}
+          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+            tab === "apprendre"
+              ? "bg-white text-[var(--color-accent-lecture)] shadow-sm dark:bg-zinc-900"
+              : "text-[var(--color-text-secondary)]"
+          }`}
         >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-            </svg>
-          </span>
-          <div>
-            <p className="text-sm font-semibold text-[var(--color-text-primary)]">Histoires à lire</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">6 histoires · débutant → avancé</p>
-          </div>
-          <span className="ml-auto text-[var(--color-accent-lecture)]">→</span>
-        </Link>
-      </section>
+          Apprendre
+        </button>
+        <button
+          type="button"
+          role="tab"
+          aria-selected={tab === "histoires"}
+          onClick={() => setTab("histoires")}
+          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+            tab === "histoires"
+              ? "bg-white text-[var(--color-accent-lecture)] shadow-sm dark:bg-zinc-900"
+              : "text-[var(--color-text-secondary)]"
+          }`}
+        >
+          Histoires
+        </button>
+      </div>
+
+      {tab === "apprendre" ? (
+        <>
+          {/* Global progress */}
+          {hydrated && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
+                <span>Progression globale</span>
+                <span>{completedCount} / {TOTAL_LETTERS} lettres · {pct}%</span>
+              </div>
+              <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={6} />
+            </div>
+          )}
+
+          {/* Module cards */}
+          <section className="space-y-4" aria-label="Modules de lecture">
+            {LECTURE_MODULES.map((mod) => (
+              <ModuleCard key={mod.id} mod={mod} progress={progress} hydrated={hydrated} />
+            ))}
+          </section>
+        </>
+      ) : (
+        <section aria-label="Histoires à lire">
+          <StoriesList />
+        </section>
+      )}
     </div>
   );
 }

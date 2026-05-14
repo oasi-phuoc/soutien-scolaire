@@ -48,7 +48,7 @@ export function WordSpotter({ target, words, isUppercase }: Props) {
                     isTapped && isTarget
                       ? "text-[var(--color-accent-lecture)] underline underline-offset-4"
                       : isTapped && !isTarget
-                        ? "text-red-400"
+                        ? "text-[var(--color-text-secondary)] line-through"
                         : "text-[var(--color-text-primary)]"
                   }`}
                 >

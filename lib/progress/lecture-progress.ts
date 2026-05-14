@@ -1,129 +1,135 @@
-export const LECTURE_PROGRESS_KEY = "soutien-lecture-v1";
+export const LECTURE_PROGRESS_KEY = "soutien-lecture-v2";
 
 export type ItemState = "locked" | "available" | "completed";
+export type ModuleState = "locked" | "available" | "in_progress" | "completed";
 
-export type LectureProgress = {
-  letters: Record<string, ItemState>;
-  revisions: Record<string, ItemState>;
-  evaluation: ItemState;
+export type LectureProgressV2 = {
+  version: 2;
+  modules: Record<string, ModuleState>;
+  submodules: Record<string, ItemState>;
 };
 
-type SequenceItem =
-  | { type: "letter"; id: string }
-  | { type: "revision"; id: string }
-  | { type: "evaluation"; id: "voyelles" };
+type SubEntry = { moduleId: string; letterId: string };
 
-export const SEQUENCE: SequenceItem[] = [
-  { type: "letter", id: "a" },
-  { type: "letter", id: "o" },
-  { type: "revision", id: "a-o" },
-  { type: "letter", id: "i" },
-  { type: "letter", id: "u" },
-  { type: "revision", id: "i-u" },
-  { type: "letter", id: "e" },
-  { type: "letter", id: "y" },
-  { type: "revision", id: "e-y" },
-  { type: "evaluation", id: "voyelles" },
-  { type: "letter", id: "b" },
-  { type: "letter", id: "c" },
-  { type: "revision", id: "b-c" },
-  { type: "letter", id: "d" },
-  { type: "letter", id: "g" },
-  { type: "revision", id: "d-g" },
-  { type: "letter", id: "k" },
-  { type: "letter", id: "p" },
-  { type: "revision", id: "k-p" },
-  { type: "letter", id: "q" },
-  { type: "letter", id: "t" },
-  { type: "revision", id: "q-t" },
-  { type: "letter", id: "f" },
-  { type: "letter", id: "j" },
-  { type: "revision", id: "f-j" },
-  { type: "letter", id: "l" },
-  { type: "letter", id: "m" },
-  { type: "revision", id: "l-m" },
-  { type: "letter", id: "n" },
-  { type: "letter", id: "r" },
-  { type: "revision", id: "n-r" },
-  { type: "letter", id: "s" },
-  { type: "letter", id: "v" },
-  { type: "revision", id: "s-v" },
-  { type: "letter", id: "z" },
-  { type: "letter", id: "w" },
-  { type: "revision", id: "z-w" },
-  { type: "letter", id: "x" },
-  { type: "letter", id: "h" },
-  { type: "revision", id: "x-h" },
+export const SUBMODULE_SEQUENCE: SubEntry[] = [
+  // L1 — Voyelles
+  { moduleId: "l1", letterId: "a" },
+  { moduleId: "l1", letterId: "o" },
+  { moduleId: "l1", letterId: "i" },
+  { moduleId: "l1", letterId: "u" },
+  { moduleId: "l1", letterId: "e" },
+  { moduleId: "l1", letterId: "y" },
+  // L2 — Consonnes qui claquent
+  { moduleId: "l2", letterId: "b" },
+  { moduleId: "l2", letterId: "c" },
+  { moduleId: "l2", letterId: "d" },
+  { moduleId: "l2", letterId: "g" },
+  { moduleId: "l2", letterId: "k" },
+  { moduleId: "l2", letterId: "p" },
+  { moduleId: "l2", letterId: "q" },
+  { moduleId: "l2", letterId: "t" },
+  // L3 — Consonnes qui sifflent
+  { moduleId: "l3", letterId: "f" },
+  { moduleId: "l3", letterId: "j" },
+  { moduleId: "l3", letterId: "l" },
+  { moduleId: "l3", letterId: "m" },
+  { moduleId: "l3", letterId: "n" },
+  { moduleId: "l3", letterId: "r" },
+  { moduleId: "l3", letterId: "s" },
+  { moduleId: "l3", letterId: "v" },
+  { moduleId: "l3", letterId: "z" },
+  // L4 — Consonnes spéciales
+  { moduleId: "l4", letterId: "w" },
+  { moduleId: "l4", letterId: "x" },
+  { moduleId: "l4", letterId: "h" },
 ];
 
-export const TOTAL_LETTERS = SEQUENCE.filter((s) => s.type === "letter").length;
+export const TOTAL_LETTERS = SUBMODULE_SEQUENCE.length;
 
-export function createInitialProgress(): LectureProgress {
-  const letters: Record<string, ItemState> = {};
-  const revisions: Record<string, ItemState> = {};
-  for (const item of SEQUENCE) {
-    if (item.type === "letter") letters[item.id] = "locked";
-    else if (item.type === "revision") revisions[item.id] = "locked";
+function subKey(moduleId: string, letterId: string): string {
+  return `${moduleId}-${letterId}`;
+}
+
+export function createInitialProgress(): LectureProgressV2 {
+  const modules: Record<string, ModuleState> = {
+    l1: "available",
+    l2: "locked",
+    l3: "locked",
+    l4: "locked",
+  };
+  const submodules: Record<string, ItemState> = {};
+  for (const { moduleId, letterId } of SUBMODULE_SEQUENCE) {
+    submodules[subKey(moduleId, letterId)] = "locked";
   }
-  letters["a"] = "available";
-  return { letters, revisions, evaluation: "locked" };
+  submodules["l1-a"] = "available";
+  return { version: 2, modules, submodules };
 }
 
-export function getItemState(
-  p: LectureProgress,
-  type: SequenceItem["type"],
-  id: string,
+export function getSubmoduleState(
+  p: LectureProgressV2,
+  moduleId: string,
+  letterId: string,
 ): ItemState {
-  if (type === "letter") return p.letters[id] ?? "locked";
-  if (type === "revision") return p.revisions[id] ?? "locked";
-  return p.evaluation;
+  return p.submodules[subKey(moduleId, letterId)] ?? "locked";
 }
 
-export function markCompleted(
-  p: LectureProgress,
-  type: SequenceItem["type"],
-  id: string,
-): LectureProgress {
-  const next: LectureProgress = {
-    letters: { ...p.letters },
-    revisions: { ...p.revisions },
-    evaluation: p.evaluation,
+export function getModuleState(p: LectureProgressV2, moduleId: string): ModuleState {
+  return p.modules[moduleId] ?? "locked";
+}
+
+export function markSubmoduleCompleted(
+  p: LectureProgressV2,
+  moduleId: string,
+  letterId: string,
+): LectureProgressV2 {
+  const next: LectureProgressV2 = {
+    version: 2,
+    modules: { ...p.modules },
+    submodules: { ...p.submodules },
   };
 
-  if (type === "letter") next.letters[id] = "completed";
-  else if (type === "revision") next.revisions[id] = "completed";
-  else next.evaluation = "completed";
+  next.submodules[subKey(moduleId, letterId)] = "completed";
 
-  const idx = SEQUENCE.findIndex((s) => s.type === type && s.id === id);
-  if (idx >= 0 && idx < SEQUENCE.length - 1) {
-    const nx = SEQUENCE[idx + 1]!;
-    if (nx.type === "letter") next.letters[nx.id] = "available";
-    else if (nx.type === "revision") next.revisions[nx.id] = "available";
-    else next.evaluation = "available";
+  const idx = SUBMODULE_SEQUENCE.findIndex(
+    (s) => s.moduleId === moduleId && s.letterId === letterId,
+  );
+
+  if (idx >= 0 && idx < SUBMODULE_SEQUENCE.length - 1) {
+    const nx = SUBMODULE_SEQUENCE[idx + 1]!;
+    next.submodules[subKey(nx.moduleId, nx.letterId)] = "available";
+    if (nx.moduleId !== moduleId) {
+      next.modules[nx.moduleId] = "available";
+    }
   }
+
+  const moduleLetters = SUBMODULE_SEQUENCE.filter((s) => s.moduleId === moduleId);
+  const allDone = moduleLetters.every(
+    (s) => next.submodules[subKey(s.moduleId, s.letterId)] === "completed",
+  );
+  next.modules[moduleId] = allDone ? "completed" : "in_progress";
 
   return next;
 }
 
-export function loadLectureProgress(): LectureProgress {
+export function loadLectureProgress(): LectureProgressV2 {
   if (typeof window === "undefined") return createInitialProgress();
   try {
     const raw = localStorage.getItem(LECTURE_PROGRESS_KEY);
     if (!raw) return createInitialProgress();
-    const parsed = JSON.parse(raw) as LectureProgress;
-    if (!parsed.letters) return createInitialProgress();
-    return parsed;
+    const parsed = JSON.parse(raw) as { version?: number };
+    if (!parsed.version || parsed.version < 2) return createInitialProgress();
+    return parsed as LectureProgressV2;
   } catch {
     return createInitialProgress();
   }
 }
 
-export function saveLectureProgress(p: LectureProgress): void {
+export function saveLectureProgress(p: LectureProgressV2): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(LECTURE_PROGRESS_KEY, JSON.stringify(p));
 }
 
-export function computeLecturePercent(p: LectureProgress): number {
-  const completed = Object.values(p.letters).filter((s) => s === "completed").length;
+export function computeLecturePercent(p: LectureProgressV2): number {
+  const completed = Object.values(p.submodules).filter((s) => s === "completed").length;
   return TOTAL_LETTERS > 0 ? Math.round((completed / TOTAL_LETTERS) * 100) : 0;
 }

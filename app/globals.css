@@ -9,14 +9,22 @@
   --color-text-secondary: #52525b;
   --color-border-default: rgba(24, 24, 27, 0.12);
   --color-border-emphasis: rgba(24, 24, 27, 0.22);
-  --color-accent-fr: #1d9e75;
-  --color-accent-lecture: #ea580c;
-  --color-accent-alg: #378add;
-  --color-accent-geo: #7f77dd;
-  --color-accent-quiz: #ba7517;
-  --color-success: #1d9e75;
-  --color-warning: #ba7517;
-  --color-danger: #e24b4a;
+  /* Accent colors — colorblind-safe (orange / cyan-blue / indigo / violet) */
+  --color-accent-fr: #0891B2;
+  --color-accent-lecture: #D97706;
+  --color-accent-alg: #2563EB;
+  --color-accent-geo: #7C3AED;
+  --color-accent-quiz: #B45309;
+  /* Feedback — blue (correct) / amber (wrong) — safe for all colorblindness types */
+  --color-success: #2563EB;
+  --color-warning: #B45309;
+  --color-danger: #B91C1C;
+  --color-correct: #2563EB;
+  --color-correct-bg: #DBEAFE;
+  --color-correct-text: #1E40AF;
+  --color-wrong: #D97706;
+  --color-wrong-bg: #FEF3C7;
+  --color-wrong-text: #92400E;
   --color-marker-prereq-bg: #faeeda;
   --color-marker-prereq-text: #633806;
   --color-marker-cross-bg: #e6f1fb;

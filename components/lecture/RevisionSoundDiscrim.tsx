@@ -55,8 +55,8 @@ export function RevisionSoundDiscrim({ phonemeA, phonemeB, words }: Props) {
                     className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
                       showResult
                         ? isCorrect
-                          ? "border-green-500 bg-green-100 text-green-700"
-                          : "border-red-400 bg-red-50 text-red-500"
+                          ? "border-blue-500 bg-blue-100 text-blue-700"
+                          : "border-amber-400 bg-amber-50 text-amber-700"
                         : isChosen
                           ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                           : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"

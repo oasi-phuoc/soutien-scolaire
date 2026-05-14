@@ -56,7 +56,7 @@ export function RevisionMixedGrid({ letterA, letterB, phonemeA, phonemeB, grid }
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                   : s === "wrong"
-                    ? "border-red-400 bg-red-50 text-red-500 dark:bg-red-900/20"
+                    ? "border-amber-400 bg-amber-50 text-amber-700 dark:bg-amber-900/20"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
               }`}
             >
@@ -66,7 +66,7 @@ export function RevisionMixedGrid({ letterA, letterB, phonemeA, phonemeB, grid }
         })}
       </div>
       {allFound && (
-        <p className="text-center text-sm font-semibold text-green-600 dark:text-green-400">
+        <p className="text-center text-sm font-semibold text-blue-600 dark:text-blue-400">
           Excellent ! Toutes les lettres trouvées.
         </p>
       )}

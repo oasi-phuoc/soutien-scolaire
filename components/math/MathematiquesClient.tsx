@@ -207,7 +207,7 @@ export function MathematiquesClient() {
                           <li key={sub.id} className="flex items-center gap-2">
                             <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${
                               done
-                                ? "bg-green-500 text-white"
+                                ? "bg-[var(--color-accent-alg)] text-white"
                                 : "border border-zinc-300 dark:border-zinc-600"
                             }`}>
                               {done ? "✓" : null}

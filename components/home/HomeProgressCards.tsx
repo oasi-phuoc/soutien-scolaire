@@ -11,7 +11,7 @@ import {
 import { loadProgress, MATH_PROGRESS_KEY } from "@/lib/progress/math-progress";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
-import type { LectureProgress } from "@/lib/progress/lecture-progress";
+import type { LectureProgressV2 } from "@/lib/progress/lecture-progress";
 
 const FRENCH_LEVEL_LABELS: Record<string, string> = {
   PA: "Pré-alpha",
@@ -73,7 +73,7 @@ function CardShell({
 }
 
 export function HomeProgressCards() {
-  const [lectureP, setLectureP] = useState<LectureProgress | null>(null);
+  const [lectureP, setLectureP] = useState<LectureProgressV2 | null>(null);
   const [mathP, setMathP] = useState<StoredProgressV1 | null>(null);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ export function HomeProgressCards() {
 
   // ── Lecture ──
   const lectureCompleted = lectureP
-    ? Object.values(lectureP.letters).filter((s) => s === "completed").length
+    ? Object.values(lectureP.submodules).filter((s) => s === "completed").length
     : 0;
   const lecturePct = lectureP ? computeLecturePercent(lectureP) : 0;
 

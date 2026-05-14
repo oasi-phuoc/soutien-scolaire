@@ -4,44 +4,44 @@ import { useRouter } from "next/navigation";
 import {
   loadLectureProgress,
   saveLectureProgress,
-  markCompleted,
-  getItemState,
-  SEQUENCE,
+  markSubmoduleCompleted,
+  SUBMODULE_SEQUENCE,
 } from "@/lib/progress/lecture-progress";
-import type { ItemState } from "@/lib/progress/lecture-progress";
-
-type ItemType = "letter" | "revision" | "evaluation";
+import { getLectureModuleForLetter } from "@/lib/curriculum/lecture-data";
 
 interface Props {
-  type: ItemType;
+  type: "letter" | "revision" | "evaluation";
   id: string;
-}
-
-function getNextHref(type: ItemType, id: string): string {
-  const idx = SEQUENCE.findIndex((s) => s.type === type && s.id === id);
-  if (idx >= 0 && idx < SEQUENCE.length - 1) {
-    const nx = SEQUENCE[idx + 1]!;
-    if (nx.type === "letter") return `/lecture/${nx.id}`;
-    if (nx.type === "revision") return `/lecture/revision/${nx.id}`;
-    if (nx.type === "evaluation") return `/lecture/evaluation`;
-  }
-  return "/lecture";
 }
 
 export function CompleteButton({ type, id }: Props) {
   const router = useRouter();
 
   function handle() {
+    if (type !== "letter") {
+      router.push("/lecture");
+      return;
+    }
+
+    const mod = getLectureModuleForLetter(id);
+    if (!mod) {
+      router.push("/lecture");
+      return;
+    }
+
     const progress = loadLectureProgress();
-    const current: ItemState = getItemState(progress, type, id);
-
-    if (current === "locked") return;
-
-    const next = markCompleted(progress, type, id);
+    const next = markSubmoduleCompleted(progress, mod.id, id);
     saveLectureProgress(next);
 
-    const href = getNextHref(type, id);
-    router.push(href);
+    const idx = SUBMODULE_SEQUENCE.findIndex(
+      (s) => s.moduleId === mod.id && s.letterId === id,
+    );
+    if (idx >= 0 && idx < SUBMODULE_SEQUENCE.length - 1) {
+      const nx = SUBMODULE_SEQUENCE[idx + 1]!;
+      router.push(`/lecture/${nx.moduleId}/${nx.letterId}`);
+    } else {
+      router.push("/lecture");
+    }
   }
 
   return (

@@ -8,14 +8,18 @@ interface Props {
   phoneme: string;
   items: SoundItem[];
   mode: "image" | "audio";
+  externalValidated?: boolean;
 }
 
-export function SoundPicker({ phoneme, items, mode }: Props) {
+export function SoundPicker({ phoneme, items, mode, externalValidated }: Props) {
   const [selected, setSelected] = useState<Set<number>>(() => new Set());
   const [revealed, setRevealed] = useState(false);
 
+  const isRevealed = revealed || externalValidated;
+
   function toggle(i: number) {
-    speak(items[i].label);
+    if (isRevealed) return;
+    speak(items[i]!.label);
     setSelected((prev) => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
@@ -33,7 +37,9 @@ export function SoundPicker({ phoneme, items, mode }: Props) {
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre le son</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Écoutez et touchez les images où vous entendez{" "}
+        {mode === "image"
+          ? "Touchez les images où vous entendez "
+          : "Écoutez et touchez ceux où vous entendez "}
         <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
       </p>
       <div className="grid grid-cols-2 gap-2">
@@ -46,13 +52,13 @@ export function SoundPicker({ phoneme, items, mode }: Props) {
               type="button"
               onClick={() => toggle(i)}
               className={`flex min-h-20 flex-col items-center justify-center gap-2 rounded-[var(--radius-lg)] border p-4 transition-colors ${
-                revealed
+                isRevealed
                   ? isSelected && isCorrect
-                    ? "border-green-500 bg-green-100 dark:bg-green-900/30"
+                    ? "border-blue-500 bg-blue-100 dark:bg-blue-900/30"
                     : isSelected && !isCorrect
-                      ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+                      ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
                       : !isSelected && isCorrect
-                        ? "border-amber-400 bg-amber-50 dark:bg-amber-900/20"
+                        ? "border-blue-300 bg-blue-50 dark:bg-blue-900/10 opacity-70"
                         : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]"
                   : isSelected
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
@@ -66,26 +72,34 @@ export function SoundPicker({ phoneme, items, mode }: Props) {
               ) : (
                 <SpeakerIcon />
               )}
+              {isRevealed && isSelected && isCorrect && (
+                <span className="text-xs font-bold text-blue-600">✓</span>
+              )}
+              {isRevealed && isSelected && !isCorrect && (
+                <span className="text-xs font-bold text-amber-600">✗</span>
+              )}
             </button>
           );
         })}
       </div>
-      {!revealed ? (
-        <button
-          type="button"
-          onClick={() => setRevealed(true)}
-          className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-2 text-sm font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-        >
-          Vérifier
-        </button>
-      ) : (
-        <button
-          type="button"
-          onClick={reset}
-          className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-2 text-sm font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-        >
-          Recommencer
-        </button>
+      {!externalValidated && (
+        !isRevealed ? (
+          <button
+            type="button"
+            onClick={() => setRevealed(true)}
+            className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-2 text-sm font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+          >
+            Vérifier
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={reset}
+            className="w-full rounded-[var(--radius-lg)] border border-[var(--color-border-default)] py-2 text-sm font-medium text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+          >
+            Recommencer
+          </button>
+        )
       )}
     </section>
   );
