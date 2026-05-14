@@ -3,6 +3,7 @@ import { VOWEL_EVALUATION } from "@/lib/curriculum/lecture-data";
 import { RevisionMixedGrid } from "@/components/lecture/RevisionMixedGrid";
 import { RevisionSoundDiscrim } from "@/components/lecture/RevisionSoundDiscrim";
 import { RevisionWordRead } from "@/components/lecture/RevisionWordRead";
+import { CompleteButton } from "@/components/lecture/CompleteButton";
 
 export default function EvaluationPage() {
   const ev = VOWEL_EVALUATION;
@@ -29,7 +30,7 @@ export default function EvaluationPage() {
       </div>
 
       <section className="space-y-3">
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Les 6 voyelles</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Les 6 voyelles</h2>
         <div className="grid grid-cols-6 gap-2">
           {ev.letters.map(({ letter, phoneme }) => (
             <div
@@ -58,6 +59,8 @@ export default function EvaluationPage() {
       />
 
       <RevisionWordRead words={ev.readWords} />
+
+      <CompleteButton type="evaluation" id="voyelles" />
     </main>
   );
 }

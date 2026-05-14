@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { HomeProgressCards } from "@/components/home/HomeProgressCards";
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
@@ -32,32 +33,22 @@ export default async function HomePage({ searchParams }: Props) {
         ) : null}
       </div>
 
-      <nav className="grid gap-3 pt-2 sm:grid-cols-2">
-        <Link
-          href="/francais"
-          className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--color-accent-fr)] px-6 text-base font-semibold text-white"
-        >
-          Français
-        </Link>
-        <Link
-          href="/mathematiques"
-          className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--color-accent-alg)] px-6 text-base font-semibold text-white"
-        >
-          Mathématiques
-        </Link>
+      <HomeProgressCards />
+
+      <div className="flex gap-3 pt-2">
         <Link
           href="/placement"
-          className="inline-flex min-h-12 items-center justify-center rounded-xl border border-zinc-300 px-6 text-base font-semibold dark:border-zinc-600 sm:col-span-2"
+          className="flex-1 inline-flex min-h-11 items-center justify-center rounded-xl border border-zinc-300 px-4 text-sm font-semibold dark:border-zinc-600"
         >
           Test de positionnement
         </Link>
         <Link
           href="/compte"
-          className="inline-flex min-h-12 items-center justify-center rounded-xl bg-[var(--color-theme)] px-6 text-base font-semibold text-white dark:bg-[var(--color-theme-muted)] sm:col-span-2"
+          className="flex-1 inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 text-sm font-semibold text-white dark:bg-[var(--color-theme-muted)]"
         >
           Réglages
         </Link>
-      </nav>
+      </div>
     </main>
   );
 }

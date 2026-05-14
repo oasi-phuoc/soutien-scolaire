@@ -8,6 +8,7 @@ import { WordSpotter } from "@/components/lecture/WordSpotter";
 import { SoundPicker } from "@/components/lecture/SoundPicker";
 import { SyllableGrid } from "@/components/lecture/SyllableGrid";
 import { PronunciationChain } from "@/components/lecture/PronunciationChain";
+import { CompleteButton } from "@/components/lecture/CompleteButton";
 
 type Props = { params: Promise<{ letter: string }> };
 
@@ -69,6 +70,8 @@ export default async function LetterPage({ params }: Props) {
           <PronunciationChain phoneme={data.phoneme} chain={data.pronunciationChain} />
         </>
       )}
+
+      <CompleteButton type="letter" id={letter} />
     </main>
   );
 }

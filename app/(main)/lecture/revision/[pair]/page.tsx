@@ -4,6 +4,7 @@ import { getRevision } from "@/lib/curriculum/lecture-data";
 import { RevisionMixedGrid } from "@/components/lecture/RevisionMixedGrid";
 import { RevisionSoundDiscrim } from "@/components/lecture/RevisionSoundDiscrim";
 import { RevisionWordRead } from "@/components/lecture/RevisionWordRead";
+import { CompleteButton } from "@/components/lecture/CompleteButton";
 
 type Props = { params: Promise<{ pair: string }> };
 
@@ -26,7 +27,7 @@ export default async function RevisionPage({ params }: Props) {
         </Link>
         <div>
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">
-            REVIEW
+            RÉVISION
           </p>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">{data.title}</h1>
         </div>
@@ -47,6 +48,8 @@ export default async function RevisionPage({ params }: Props) {
       />
 
       <RevisionWordRead words={data.readWords} />
+
+      <CompleteButton type="revision" id={pair} />
     </main>
   );
 }

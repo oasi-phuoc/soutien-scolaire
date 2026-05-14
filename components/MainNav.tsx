@@ -6,8 +6,8 @@ import { useTranslation } from "@/components/TranslationProvider";
 
 const links = [
   { href: "/", label: "Accueil", icon: HomeIcon },
-  { href: "/francais", label: "Français", icon: FrIcon },
   { href: "/lecture", label: "Lecture", icon: LectureIcon },
+  { href: "/francais", label: "Français", icon: FrIcon },
   { href: "/mathematiques", label: "Maths", icon: MathIcon },
   { href: "/compte", label: "Réglages", icon: GearIcon },
 ] as const;
