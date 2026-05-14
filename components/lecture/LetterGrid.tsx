@@ -92,14 +92,12 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
                 disabled={validated}
                 className={`flex items-center justify-center rounded-[var(--radius-lg)] border p-3 text-lg font-bold transition-colors ${
                   s === "correct"
-                    ? "border-green-500 bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                    : s === "wrong"
+                    ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
+                    : s === "wrong" || s === "missed"
                       ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400"
-                      : s === "missed"
-                        ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)] opacity-60"
-                        : s === "selected"
-                          ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
-                          : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
+                      : s === "selected"
+                        ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
+                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] active:scale-95"
                 }`}
               >
                 {letter}

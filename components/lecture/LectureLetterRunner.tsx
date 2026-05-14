@@ -6,8 +6,8 @@ import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
 import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
-import { WordSpotter } from "./WordSpotter";
-import { SoundPicker } from "./SoundPicker";
+import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
+import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
 import { PronunciationChain } from "./PronunciationChain";
 import {
@@ -57,11 +57,27 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);
   const gridRef = useRef<LetterGridHandle>(null);
+  const wordRef = useRef<WordSpotterHandle>(null);
+  const soundImageRef = useRef<SoundPickerHandle>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
   const step = steps[stepIdx]!;
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
+  const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
+  const isSoundImageStep = step.key === "sound-image";
+  const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep;
+
+  function exerciseReset() {
+    if (isGridStep) gridRef.current?.reset();
+    else if (isWordStep) wordRef.current?.reset();
+    else if (isSoundImageStep) soundImageRef.current?.reset();
+  }
+  function exerciseValidate() {
+    if (isGridStep) gridRef.current?.validate();
+    else if (isWordStep) wordRef.current?.validate();
+    else if (isSoundImageStep) soundImageRef.current?.validate();
+  }
 
   function goBack() {
     if (isFirst) {
@@ -111,25 +127,17 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         );
       case "word-upper":
         if (data.type !== "vowel") return null;
-        return (
-          <WordSpotter key={k} target={data.letter} words={data.upperWords} isUppercase={true} />
-        );
+        return <WordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
       case "word-upper-1":
         if (data.type !== "consonant") return null;
-        return (
-          <WordSpotter key={k} target={data.letter} words={data.upperWordsSet1} isUppercase={true} />
-        );
+        return <WordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
       case "word-upper-2":
         if (data.type !== "consonant") return null;
-        return (
-          <WordSpotter key={k} target={data.letter} words={data.upperWordsSet2} isUppercase={true} />
-        );
+        return <WordSpotter key={k} ref={wordRef} target={data.letter} isUppercase={true} />;
       case "word-lower":
-        return (
-          <WordSpotter key={k} target={data.letterLower} words={data.lowerWords} isUppercase={false} />
-        );
+        return <WordSpotter key={k} ref={wordRef} target={data.letterLower} isUppercase={false} />;
       case "sound-image":
-        return <SoundPicker key={k} phoneme={data.phoneme} items={data.soundItems} mode="image" />;
+        return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
       case "sound-audio":
         return <SoundPicker key={k} phoneme={data.phoneme} items={data.soundItems} mode="audio" />;
       case "syllables":
@@ -189,12 +197,12 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             Retour
           </button>
 
-          {isGridStep && (
+          {showExerciseButtons && (
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 aria-label="Recommencer"
-                onClick={() => gridRef.current?.reset()}
+                onClick={exerciseReset}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -205,7 +213,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               <button
                 type="button"
                 aria-label="Valider"
-                onClick={() => gridRef.current?.validate()}
+                onClick={exerciseValidate}
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
