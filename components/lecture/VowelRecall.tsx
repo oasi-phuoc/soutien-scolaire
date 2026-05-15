@@ -1,6 +1,8 @@
 "use client";
 
 import { speak } from "@/lib/utils/speech";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 const VOWELS = [
   { letter: "A", phoneme: "/a/" },
@@ -12,10 +14,14 @@ const VOWELS = [
 ];
 
 export function VowelRecall() {
+  const lang = usePivotLang();
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Rappel des sons déjà vus</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Touchez chaque lettre pour entendre son son.</p>
+      <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+        {lectureUi(lang, "tapLetterToHear")}
+      </p>
       <div className="grid grid-cols-3 gap-2">
         {VOWELS.map(({ letter, phoneme }) => (
           <button

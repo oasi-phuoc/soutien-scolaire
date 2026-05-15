@@ -3,6 +3,8 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { getWordAudioPath } from "@/lib/utils/audio";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface RevisionSoundStepHandle {
   reset: () => void;
@@ -20,6 +22,7 @@ type CardSelection = { A: boolean; B: boolean };
 
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
   function RevisionSoundStep({ phonemeA, phonemeB, words, mode }, ref) {
+    const lang = usePivotLang();
     const [selections, setSelections] = useState<CardSelection[]>(() =>
       words.map(() => ({ A: false, B: false }))
     );
@@ -55,6 +58,9 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre les sons</h2>
         <p className="text-sm text-[var(--color-text-secondary)]">
           Touchez le ou les sons que vous entendez
+        </p>
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "tapSoundsYouHear")}
         </p>
         <div className="grid grid-cols-2 gap-3">
           {words.map(({ word, answer }, i) => {

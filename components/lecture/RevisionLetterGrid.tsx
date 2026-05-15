@@ -1,6 +1,8 @@
 "use client";
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface RevisionLetterGridHandle {
   reset: () => void;
@@ -43,6 +45,7 @@ function makeGrid(letterA: string, letterB: string, isUppercase: boolean): strin
 
 export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
   function RevisionLetterGrid({ letterA, letterB, isUppercase }, ref) {
+    const lang = usePivotLang();
     const a = isUppercase ? letterA : letterA.toLowerCase();
     const b = isUppercase ? letterB : letterB.toLowerCase();
 
@@ -91,6 +94,9 @@ export const RevisionLetterGrid = forwardRef<RevisionLetterGridHandle, Props>(
           <strong className="text-[var(--color-accent-lecture)]">{a}</strong>
           {" "}et toutes les{" "}
           <strong className="text-[var(--color-accent-lecture)]">{b}</strong>
+        </p>
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "tapAllAandB", { a, b })}
         </p>
         <div className="grid grid-cols-5 gap-2">
           {grid.map((letter, i) => {

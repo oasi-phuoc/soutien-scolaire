@@ -3,6 +3,8 @@
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import type { PronStep } from "@/lib/curriculum/lecture-data";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface PronunciationChainHandle {
   reset: () => void;
@@ -31,6 +33,7 @@ function randomIdx(len: number) {
 
 export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
   function PronunciationChain({ phoneme: _phoneme, chain }, ref) {
+    const lang = usePivotLang();
     const [idx, setIdx] = useState(() => randomIdx(chain.length));
     const [recState, setRecState] = useState<RecState>("idle");
     const [heard, setHeard] = useState<string>("");
@@ -97,6 +100,9 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer le mot</h2>
         <p className="text-sm text-[var(--color-text-secondary)]">
           Prononcez le mot à voix haute
+        </p>
+        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+          {lectureUi(lang, "sayWordAloud")}
         </p>
 
         {/* Word card */}
@@ -172,8 +178,8 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
             </button>
 
             <p className="text-sm text-[var(--color-text-secondary)]">
-              {recState === "idle" && "Appuyez pour parler"}
-              {recState === "listening" && "J'écoute…"}
+              {recState === "idle" && <span>{lectureUi(lang, "pressToSpeak")}</span>}
+              {recState === "listening" && <span>{lectureUi(lang, "listening")}</span>}
               {recState === "correct" && (
                 <span className="font-semibold text-[var(--color-accent-lecture)]">Bravo ! 🎉</span>
               )}

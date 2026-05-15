@@ -2,6 +2,8 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "react";
 import { speak } from "@/lib/utils/speech";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface RevisionPronounceHandle {
   reset: () => void;
@@ -42,6 +44,7 @@ function pickOnePerLetter(words: { letter: string; word: string }[]): { letter: 
 
 export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
   function RevisionPronounce({ words }, ref) {
+    const lang = usePivotLang();
     const [selected] = useState(() => pickOnePerLetter(words));
     const [recStates, setRecStates] = useState<RecState[]>(() => selected.map(() => "idle"));
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -88,6 +91,9 @@ export const RevisionPronounce = forwardRef<RevisionPronounceHandle, Props>(
     return (
       <section className="space-y-4">
         <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Prononcer les mots</h2>
+      <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+        {lectureUi(lang, "pronounceWords")}
+      </p>
 
         {selected.map((entry, wi) => {
           const recState = recStates[wi]!;
