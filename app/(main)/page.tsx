@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { HomeProgressCards } from "@/components/home/HomeProgressCards";
 
