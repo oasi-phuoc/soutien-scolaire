@@ -88,7 +88,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
