@@ -3,10 +3,18 @@ export const LECTURE_PROGRESS_KEY = "soutien-lecture-v2";
 export type ItemState = "locked" | "available" | "completed";
 export type ModuleState = "locked" | "available" | "in_progress" | "completed";
 
+export type EvalResult = {
+  grade: number;
+  passed: boolean;
+  total: number;
+  date: string;
+};
+
 export type LectureProgressV2 = {
   version: 2;
   modules: Record<string, ModuleState>;
   submodules: Record<string, ItemState>;
+  evaluations?: Record<string, EvalResult>;
 };
 
 type SubEntry = { moduleId: string; letterId: string };
@@ -127,6 +135,30 @@ export function loadLectureProgress(): LectureProgressV2 {
 export function saveLectureProgress(p: LectureProgressV2): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(LECTURE_PROGRESS_KEY, JSON.stringify(p));
+}
+
+export function saveEvaluationResult(
+  p: LectureProgressV2,
+  moduleId: string,
+  letterId: string,
+  result: Omit<EvalResult, "date">,
+): LectureProgressV2 {
+  const key = subKey(moduleId, letterId);
+  return {
+    ...p,
+    evaluations: {
+      ...p.evaluations,
+      [key]: { ...result, date: new Date().toISOString() },
+    },
+  };
+}
+
+export function getEvaluationResult(
+  p: LectureProgressV2,
+  moduleId: string,
+  letterId: string,
+): EvalResult | undefined {
+  return p.evaluations?.[subKey(moduleId, letterId)];
 }
 
 export function computeLecturePercent(p: LectureProgressV2): number {

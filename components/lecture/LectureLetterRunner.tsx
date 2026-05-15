@@ -14,7 +14,9 @@ import {
   loadLectureProgress,
   saveLectureProgress,
   markSubmoduleCompleted,
+  saveEvaluationResult,
 } from "@/lib/progress/lecture-progress";
+import { LectureEvaluation } from "./LectureEvaluation";
 
 interface Props {
   data: LetterData;
@@ -34,6 +36,7 @@ function getSteps(data: LetterData): Step[] {
       { key: "sound-image", label: "Images" },
       { key: "sound-audio", label: "Audio" },
       { key: "pronounce", label: "Prononcer" },
+      { key: "eval", label: "Évaluation" },
     ];
   }
   return [
@@ -48,6 +51,7 @@ function getSteps(data: LetterData): Step[] {
     { key: "sound-audio", label: "Audio" },
     { key: "syllables", label: "Syllabes" },
     { key: "pronounce", label: "Prononcer" },
+    { key: "eval", label: "Évaluation" },
   ];
 }
 
@@ -69,6 +73,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isSoundImageStep = step.key === "sound-image";
   const isSoundAudioStep = step.key === "sound-audio";
   const isPronounceStep = step.key === "pronounce";
+  const isEvalStep = step.key === "eval";
   const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
@@ -102,6 +107,14 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       setStepIdx((s) => s + 1);
       setResetKey((k) => k + 1);
     }
+  }
+
+  function handleEvalDone(grade: number, passed: boolean, total: number) {
+    const prog = loadLectureProgress();
+    const withEval = saveEvaluationResult(prog, moduleId, data.letterLower, { grade, passed, total });
+    const withCompleted = markSubmoduleCompleted(withEval, moduleId, data.letterLower);
+    saveLectureProgress(withCompleted);
+    router.push("/lecture");
   }
 
   function renderStep() {
@@ -149,6 +162,15 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         return <SyllableGrid key={k} syllables={data.syllableGrid} />;
       case "pronounce":
         return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+      case "eval":
+        return (
+          <LectureEvaluation
+            key={k}
+            data={data}
+            onBack={goBack}
+            onDone={handleEvalDone}
+          />
+        );
       default:
         return null;
     }
@@ -187,8 +209,8 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
 
       <div className="min-h-[280px]">{renderStep()}</div>
 
-      {/* Fixed nav bar — sits above MainNav (≈68 px) */}
-      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
+      {/* Fixed nav bar — sits above MainNav (≈68 px) — hidden on eval step (LectureEvaluation has its own) */}
+      {!isEvalStep && <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
         <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
           <button
             type="button"
@@ -251,7 +273,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             )}
           </button>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }
