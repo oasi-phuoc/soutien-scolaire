@@ -187,7 +187,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-44">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · {data.type === "vowel" ? "Voyelle" : "Consonne"}

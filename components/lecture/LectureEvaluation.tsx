@@ -330,7 +330,7 @@ function SoundImageExercise({
               type="button"
               onClick={() => toggle(i)}
               disabled={validated}
-              className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
+              className={`relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
@@ -339,7 +339,7 @@ function SoundImageExercise({
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={imgSrc} alt={word.label} className="absolute inset-0 h-full w-full object-contain p-1" />
+              <img src={imgSrc} alt={word.label} className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]" />
               <button
                 type="button"
                 aria-label={`Écouter ${word.label}`}
@@ -653,7 +653,7 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const progressIdx = isResults ? exerciseSteps.length : stepIdx;
 
   return (
-    <div className="w-full flex-1 pb-32">
+    <div className="w-full flex-1 pb-44">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Évaluation

@@ -88,7 +88,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
+                className={`relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
@@ -102,7 +102,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <img
                   src={imgSrc}
                   alt={word.label}
-                  className="absolute inset-0 h-full w-full object-contain p-1"
+                  className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]"
                 />
                 <button
                   type="button"
@@ -181,7 +181,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
+                className={`relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
