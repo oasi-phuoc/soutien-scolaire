@@ -24,7 +24,6 @@ import {
 import type { PivotCode } from "@/lib/pivot-langs";
 import {
   LEVEL_PASSING_GRADES,
-  LEVEL_LABELS,
   linearSwissGrade,
   type LevelKey,
 } from "@/lib/scoring";
@@ -46,7 +45,7 @@ const FR_TENS: Record<number, string> = {
   60: "soixante", 70: "septante", 80: "huitante", 90: "nonante", 100: "cent",
 };
 
-const PIVOT_WORDS: Partial<Record<PivotCode, Record<number, string>>> = {
+const _PIVOT_WORDS: Partial<Record<PivotCode, Record<number, string>>> = {
   en: { 1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
         6: "six", 7: "seven", 8: "eight", 9: "nine", 10: "ten" },
   ar: { 1: "واحد", 2: "اثنان", 3: "ثلاثة", 4: "أربعة", 5: "خمسة",
@@ -59,7 +58,7 @@ const PIVOT_WORDS: Partial<Record<PivotCode, Record<number, string>>> = {
         6: "ሽዱሽተ", 7: "ሸውዓተ", 8: "ሸሞንተ", 9: "ትሽዓተ", 10: "ዓሰርተ" },
 };
 
-const PIVOT_TENS: Partial<Record<PivotCode, Record<number, string>>> = {
+const _PIVOT_TENS: Partial<Record<PivotCode, Record<number, string>>> = {
   en: { 10: "ten", 20: "twenty", 30: "thirty", 40: "forty", 50: "fifty",
         60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety", 100: "one hundred" },
   ar: { 10: "عشرة", 20: "عشرون", 30: "ثلاثون", 40: "أربعون", 50: "خمسون",
@@ -1608,7 +1607,7 @@ export function A1ModuleContent() {
   const [ex16Answers, setEx16Answers] = useState<string[][]>(() =>
     Array(2).fill(null).map(() => ["", "", "", ""])
   );
-  const [ex16Results, setEx16Results] = useState<(boolean | null)[]>(Array(2).fill(null));
+  const [_ex16Results, setEx16Results] = useState<(boolean | null)[]>(Array(2).fill(null));
   const [ex16Validated, setEx16Validated] = useState(false);
   const resetEx16 = () => {
     setEx16Questions(generateEx15());
@@ -2638,7 +2637,7 @@ export function A1ModuleContent() {
             {ex9Questions.map((q, i) => {
               const value = q.tens * 10 + q.units;
               const sel = ex9Selected[i] ?? null;
-              const correct = ex9Validated ? sel === value : null;
+              const _correct = ex9Validated ? sel === value : null;
               return (
                 <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] transition-colors">
                   {/* Zone d'affichage, blocs centrés, largeur complète */}
@@ -2960,7 +2959,7 @@ export function A1ModuleContent() {
               const cOk = ex14Validated ? (ans.c === "" ? 0 : parseInt(ans.c)) === c * 100 : null;
               const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
               const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
-              const fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
+              const _fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
               const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : "border-amber-400 bg-[var(--color-bg-primary)]";
               const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                 setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
@@ -3254,7 +3253,7 @@ export function A1ModuleContent() {
               const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
               const q9val  = a12EvalQ9.tens * 10 + a12EvalQ9.units;
               const q10val = a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u;
-              const r9  = evalSubmitted ? (evalResults["q9"] ?? null) : null;
+              const _r9  = evalSubmitted ? (evalResults["q9"] ?? null) : null;
               const r10 = evalSubmitted ? (evalResults["q10"] ?? null) : null;
               const r11 = evalSubmitted ? (evalResults["q11"] ?? null) : null;
               const r12 = evalSubmitted ? (evalResults["q12"] ?? null) : null;
@@ -3728,7 +3727,7 @@ export function A1ModuleContent() {
           </div>
           <div className="space-y-6">
             {ex17Lines.map((line, li) => {
-              const ML = 30, MR = 20, lineW = 450;
+              const ML = 30, _MR = 20, lineW = 450;
               const totalUnits = line.max - line.min;
               const pos = (v: number) => ML + ((v - line.min) / totalUnits) * lineW;
               const svgH = 130, lineY = 112, arrowTipY = 108, boxW = 52, boxH = 24;
@@ -3833,7 +3832,7 @@ export function A1ModuleContent() {
           </div>
           <div className="space-y-6">
             {ex18Lines.map((line, li) => {
-              const ML = 30, MR = 20, lineW = 450;
+              const ML = 30, _MR = 20, lineW = 450;
               const totalUnits = line.max - line.min;
               const pos = (v: number) => ML + ((v - line.min) / totalUnits) * lineW;
               const svgH = 130, lineY = 112, arrowTipY = 108, boxW = 56, boxH = 24;

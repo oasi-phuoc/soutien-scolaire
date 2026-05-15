@@ -34,7 +34,7 @@ export function MathExerciseRunner({
     [exercises, values],
   );
 
-  const pivotTranslationHeading = useMemo(() => {
+  const _pivotTranslationHeading = useMemo(() => {
     const m = PIVOT_LANGS.find((l) => l.code === pivot);
     return m === undefined ? pivot : `${m.label} (${m.labelFr})`;
   }, [pivot]);

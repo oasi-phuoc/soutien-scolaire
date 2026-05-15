@@ -97,7 +97,7 @@ export function MathematiquesClient() {
     setHydrated(true);
   }, []);
 
-  const persist = useCallback((next: StoredProgressV1) => {
+  const _persist = useCallback((next: StoredProgressV1) => {
     setProgress(next);
     saveProgress(next);
   }, []);
