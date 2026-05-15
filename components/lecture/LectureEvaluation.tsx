@@ -680,7 +680,7 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const progressIdx = isResults ? exerciseSteps.length : stepIdx;
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+    <div className="w-full flex-1 pb-32">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Évaluation
