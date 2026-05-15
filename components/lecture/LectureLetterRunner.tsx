@@ -213,10 +213,6 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         ))}
       </div>
 
-      <p className="mb-6 text-xs text-[var(--color-text-secondary)]">
-        Étape {stepIdx + 1} sur {steps.length} — {step.label}
-      </p>
-
       <div className="min-h-[280px]">{renderStep()}</div>
 
       {/* Fixed nav bar — sits above MainNav (≈68 px) — hidden on eval step (LectureEvaluation has its own) */}
