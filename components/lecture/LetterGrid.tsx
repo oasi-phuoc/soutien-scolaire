@@ -2,6 +2,7 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface LetterGridHandle {
@@ -41,6 +42,7 @@ function makeGrid(target: string, isUppercase: boolean): string[] {
 export const LetterGrid = forwardRef<LetterGridHandle, Props>(
   function LetterGrid({ target, isUppercase, cols = 5 }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const [grid, setGrid] = useState(() => makeGrid(target, isUppercase));
     const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -84,9 +86,11 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
             {isUppercase ? target.toUpperCase() : target.toLowerCase()}
           </strong>
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "tapEachLetter", { x: isUppercase ? target.toUpperCase() : target.toLowerCase() })}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "tapEachLetter", { x: isUppercase ? target.toUpperCase() : target.toLowerCase() })}
+          </p>
+        )}
         <div className={`grid gap-2 ${cols === 5 ? "grid-cols-5" : "grid-cols-4"}`}>
           {grid.map((letter, i) => {
             const s = states[i];

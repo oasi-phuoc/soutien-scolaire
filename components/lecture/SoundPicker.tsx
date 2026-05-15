@@ -5,6 +5,7 @@ import { speak } from "@/lib/utils/speech";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { getWordAudioPath } from "@/lib/utils/audio";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface SoundPickerHandle {
@@ -40,6 +41,7 @@ export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
 const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   function ImagePicker({ phoneme }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const [items, setItems] = useState(() => randomSoundItems(phoneme, 16));
     const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -81,9 +83,11 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
           Touchez les images où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "tapImagesWithSound", { x: phoneme })}
+          </p>
+        )}
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
@@ -136,6 +140,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
 const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   function AudioPicker({ phoneme }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const [items, setItems] = useState(() => randomSoundItems(phoneme, 16));
     const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -179,9 +184,11 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
           Écoutez et touchez ceux où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "listenTapWithSound", { x: phoneme })}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "listenTapWithSound", { x: phoneme })}
+          </p>
+        )}
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;

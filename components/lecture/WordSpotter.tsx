@@ -3,6 +3,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { randomWordsWithLetter } from "@/lib/curriculum/word-pool";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface WordSpotterHandle {
@@ -28,6 +29,7 @@ function buildWords(target: string, isUppercase: boolean): string[] {
 export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
   function WordSpotter({ target, isUppercase }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const [words, setWords] = useState(() => buildWords(target, isUppercase));
     // states keyed by "wi-li"
     const [states, setStates] = useState<Record<string, CharState>>({});
@@ -81,9 +83,11 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
           <strong className="text-[var(--color-accent-lecture)]">{target}</strong>{" "}
           dans chaque mot
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "tapLetterInWords", { x: target })}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "tapLetterInWords", { x: target })}
+          </p>
+        )}
         <ul className="space-y-2">
           {words.map((word, wi) => (
             <li

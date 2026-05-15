@@ -2,6 +2,7 @@
 
 import { speak } from "@/lib/utils/speech";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 interface Props {
@@ -31,12 +32,10 @@ function HighlightedWord({ word, letter, letterLower }: { word: string; letter: 
 
 export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePath, exampleAudioPath }: Props) {
   const lang = usePivotLang();
+  const { showPivot } = useTranslation();
   return (
     <section className="space-y-3">
       <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Découverte du son</h2>
-      <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-        {letter} {lectureUi(lang, "asIn")} {exampleWord}
-      </p>
       <div className="relative flex flex-col items-center gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-6 py-8">
         <button
           type="button"
@@ -68,6 +67,11 @@ export function DiscoverSound({ letter, letterLower, exampleWord, exampleImagePa
           {" comme dans "}
           <HighlightedWord word={exampleWord.toLowerCase()} letter={letter} letterLower={letterLower} />
         </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {letter} {lectureUi(lang, "asIn")} {exampleWord}
+          </p>
+        )}
       </div>
     </section>
   );

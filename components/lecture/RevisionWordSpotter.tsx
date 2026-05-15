@@ -3,6 +3,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { randomWordsWithLetter } from "@/lib/curriculum/word-pool";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface RevisionWordSpotterHandle {
@@ -32,6 +33,7 @@ function buildWords(letterA: string, letterB: string, isUppercase: boolean): str
 export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
   function RevisionWordSpotter({ letterA, letterB, isUppercase }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const a = isUppercase ? letterA : letterA.toLowerCase();
     const b = isUppercase ? letterB : letterB.toLowerCase();
 
@@ -91,9 +93,11 @@ export const RevisionWordSpotter = forwardRef<RevisionWordSpotterHandle, Props>(
           <strong className="text-[var(--color-accent-lecture)]">{b}</strong>
           {" "}dans chaque mot
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "tapLettersAandBInWords", { a, b })}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "tapLettersAandBInWords", { a, b })}
+          </p>
+        )}
         <ul className="space-y-2">
           {words.map((word, wi) => (
             <li

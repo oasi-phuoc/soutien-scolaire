@@ -4,6 +4,7 @@ import { forwardRef, useCallback, useImperativeHandle, useRef, useState } from "
 import { speak } from "@/lib/utils/speech";
 import type { PronStep } from "@/lib/curriculum/lecture-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 import { lectureUi } from "@/lib/i18n/lecture-ui";
 
 export interface PronunciationChainHandle {
@@ -34,6 +35,7 @@ function randomIdx(len: number) {
 export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
   function PronunciationChain({ phoneme: _phoneme, chain }, ref) {
     const lang = usePivotLang();
+    const { showPivot } = useTranslation();
     const [idx, setIdx] = useState(() => randomIdx(chain.length));
     const [recState, setRecState] = useState<RecState>("idle");
     const [heard, setHeard] = useState<string>("");
@@ -101,9 +103,11 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
         <p className="text-sm text-[var(--color-text-secondary)]">
           Prononcez le mot à voix haute
         </p>
-        <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
-          {lectureUi(lang, "sayWordAloud")}
-        </p>
+        {showPivot && (
+          <p className="border-l-2 border-[var(--color-accent-lecture)]/40 pl-2 text-xs italic text-[var(--color-text-secondary)]" dir={lang === "ar" || lang === "fa" ? "rtl" : "ltr"} lang={lang}>
+            {lectureUi(lang, "sayWordAloud")}
+          </p>
+        )}
 
         {/* Word card */}
         <div className={`flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border-2 px-6 py-8 text-center transition-colors ${
