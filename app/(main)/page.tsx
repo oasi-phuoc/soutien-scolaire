@@ -33,6 +33,10 @@ export default async function HomePage({ searchParams }: Props) {
       </div>
 
       <HomeProgressCards />
+
+      <footer className="pt-4 text-center text-xs text-zinc-400 dark:text-zinc-600">
+        Lecture &amp; Alphabétisation — Mélina Schröter &amp; Phuoc Van
+      </footer>
     </main>
   );
 }

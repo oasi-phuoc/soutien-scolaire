@@ -64,9 +64,43 @@ export type EvaluationData = {
 export type Story = {
   id: string;
   title: string;
-  level: "débutant" | "intermédiaire" | "avancé";
+  level: "A1" | "A2" | "B1";
   sentences: string[];
 };
+
+export type StorySegment = { text: string; kind?: "complex" | "silent" };
+
+export function parseAnnotated(s: string): StorySegment[] {
+  const segments: StorySegment[] = [];
+  let i = 0;
+  while (i < s.length) {
+    if (s[i] === "[") {
+      const end = s.indexOf("]", i + 1);
+      if (end !== -1) {
+        segments.push({ text: s.slice(i + 1, end), kind: "complex" });
+        i = end + 1;
+        continue;
+      }
+    }
+    if (s[i] === "{") {
+      const end = s.indexOf("}", i + 1);
+      if (end !== -1) {
+        segments.push({ text: s.slice(i + 1, end), kind: "silent" });
+        i = end + 1;
+        continue;
+      }
+    }
+    let j = i + 1;
+    while (j < s.length && s[j] !== "[" && s[j] !== "{") j++;
+    segments.push({ text: s.slice(i, j) });
+    i = j;
+  }
+  return segments;
+}
+
+export function stripAnnotations(s: string): string {
+  return s.replace(/\[([^\]]*)\]/g, "$1").replace(/\{([^}]*)\}/g, "$1");
+}
 
 // ─── Helper ────────────────────────────────────────────────────────────────────
 
@@ -1131,79 +1165,192 @@ export const VOWEL_EVALUATION: EvaluationData = {
 // ─── Stories ───────────────────────────────────────────────────────────────────
 
 export const STORIES: Story[] = [
+  // ── A1 : Débutant ─────────────────────────────────────────────────────────────
   {
     id: "le-chat",
     title: "Le chat",
-    level: "débutant",
+    level: "A1",
     sentences: [
-      "Le chat est là.",
-      "Il est gros et roux.",
+      "Le [ch]at est là.",
+      "Il est r[ou]x et gros.",
       "Il dort sur le tapis.",
-      "Il aime le lait.",
-      "Le chat est content.",
+      "Il [ai]me le lait.",
+      "Le [ch]at est content.",
     ],
   },
   {
     id: "la-pomme",
     title: "La pomme",
-    level: "débutant",
+    level: "A1",
     sentences: [
-      "Voici une pomme rouge.",
+      "V[oi]ci une pomme r[ou]ge.",
       "Elle est sur la table.",
       "Lila prend la pomme.",
-      "Elle mange la pomme.",
-      "C'est bon et sucré.",
+      "Elle m[an]ge la pomme.",
+      "C'est b[on] et sucré.",
     ],
   },
   {
+    id: "le-chien",
+    title: "Le chien",
+    level: "A1",
+    sentences: [
+      "Le [ch]i[en] s'appelle Rex.",
+      "Rex est blanc et petit.",
+      "Il [ai]me j[ou]er.",
+      "Il dort dans son panier.",
+      "Rex est un bon ami.",
+    ],
+  },
+  {
+    id: "le-soleil",
+    title: "Le soleil",
+    level: "A1",
+    sentences: [
+      "Le sol[ei]l brille.",
+      "Il fait [ch]aud.",
+      "Tom sort d[an]s le jardin.",
+      "Il j[ou]e avec s[on] ball[on].",
+      "Quelle belle j[our]née !",
+    ],
+  },
+  {
+    id: "la-maison",
+    title: "La maison",
+    level: "A1",
+    sentences: [
+      "Ma m[ai]s[on] est gr[an]de.",
+      "Elle est bl[an][ch]e.",
+      "Il y a un jardin.",
+      "N[ou]s j[ou][on]s ded[an]s.",
+      "C'est notre m[ai]s[on].",
+    ],
+  },
+  // ── A2 : Moyen ────────────────────────────────────────────────────────────────
+  {
     id: "au-marche",
     title: "Au marché",
-    level: "intermédiaire",
+    level: "A2",
     sentences: [
-      "Mama va au marché.",
-      "Elle achète des tomates et des carottes.",
+      "Mama va au mar[ch]é.",
+      "Elle a[ch]ète des tomates et des carottes.",
       "Elle prend aussi du pain et du fromage.",
-      "Le vendeur est gentil.",
-      "Mama rentre à la maison avec son panier.",
+      "Le v[en]d[eu]r est g[en]til.",
+      "Mama r[en]tre à la m[ai]s[on] avec s[on] panier.",
     ],
   },
   {
     id: "mon-ami-paul",
     title: "Mon ami Paul",
-    level: "intermédiaire",
+    level: "A2",
     sentences: [
-      "Paul est mon ami.",
-      "Il a huit ans, comme moi.",
+      "Paul est m[on] ami.",
+      "Il a h[ui]t ans, comme m[oi].",
       "Il habite dans ma rue.",
-      "Nous allons à l'école ensemble.",
-      "Après l'école, nous jouons dans le jardin.",
-      "Paul aime les livres et les ballons.",
+      "N[ou]s all[on]s à l'école [en]semble.",
+      "Après l'école, n[ou]s j[ou][on]s dans le jardin.",
+      "Paul [ai]me les livres et les ball[on]s.",
     ],
   },
   {
+    id: "le-jardin",
+    title: "Le jardin",
+    level: "A2",
+    sentences: [
+      "Notre jardin est beau au pr[in]t[em]ps.",
+      "Papa plante des légumes.",
+      "Il y a des tomates, des carottes et de la salade.",
+      "N[ou]s arr[os][on]s les plantes [ch]aque j[our].",
+      "En été, n[ou]s cueil[l][on]s les légumes.",
+    ],
+  },
+  {
+    id: "les-animaux",
+    title: "Les animaux",
+    level: "A2",
+    sentences: [
+      "Léon visite une ferme.",
+      "Il y a des va[ch]es et des m[ou]t[on]s.",
+      "La va[ch]e d[on]ne du lait.",
+      "Les m[ou]t[on]s [on]t une l[ai]ne d[ou]ce.",
+      "Léon v[eu]t rev[en]ir dem[ain].",
+    ],
+  },
+  {
+    id: "ma-journee",
+    title: "Ma journée",
+    level: "A2",
+    sentences: [
+      "Le mat[in], je me lève tôt.",
+      "Je mange du pain avec de la confiture.",
+      "Je prends m[on] sac et je vais à l'école.",
+      "J'apprends à lire et à écrire.",
+      "Le s[oir], je lis une hist[oir]e.",
+    ],
+  },
+  // ── B1 : Avancé ───────────────────────────────────────────────────────────────
+  {
     id: "a-l-ecole",
     title: "À l'école",
-    level: "avancé",
+    level: "B1",
     sentences: [
-      "Ce matin, Nora arrive à l'école de bonne heure.",
+      "Ce mat[in], Nora arrive à l'école de b[on]ne h[eu]re.",
       "Sa maîtresse s'appelle Madame Blanc.",
-      "En classe, les élèves apprennent les lettres et les chiffres.",
-      "Nora aime surtout les histoires que la maîtresse lit à voix haute.",
-      "À la récréation, elle joue à la corde avec ses amies.",
-      "Elle rentre chez elle le soir, le cartable plein de dessins.",
+      "En classe, les élèves appr[en]n{ent} les lettres et les [ch]iffres.",
+      "Nora [ai]me surt[ou]t les hist[oir]es que la maîtresse lit.",
+      "À la récréati[on], elle j[ou]e avec ses amies.",
+      "Elle r[en]tre [ch]ez elle le s[oir], le cartable plein de dess[in]s.",
     ],
   },
   {
     id: "la-famille",
     title: "La famille",
-    level: "avancé",
+    level: "B1",
     sentences: [
-      "Dans ma famille, nous sommes cinq.",
-      "Il y a papa, mama, ma grande sœur, mon petit frère et moi.",
-      "Papa travaille dans un bureau en ville.",
-      "Mama prépare de bons repas pour toute la famille.",
-      "Le soir, nous mangeons tous ensemble et nous parlons de notre journée.",
-      "Le week-end, nous faisons des promenades dans la forêt.",
+      "Dans ma famille, n[ou]s s[om]mes c[in]q.",
+      "Il y a papa, mama, ma gr[an]de sœur et m[on] petit frère.",
+      "Papa travaille dans un bur[eau] en ville.",
+      "Mama prépare de b[on]s repas p[our] t[ou]te la famille.",
+      "Le s[oir], n[ou]s mang[eon]s t[ou]s [en]semble.",
+      "Le week-[en]d, n[ou]s all[on]s dans la forêt.",
+    ],
+  },
+  {
+    id: "les-saisons",
+    title: "Les saisons",
+    level: "B1",
+    sentences: [
+      "En France, il y a quatre s[ai]s[on]s.",
+      "En hiver, il fait froid et il p[eu]t neiger.",
+      "Au pr[in]t[em]ps, les fl[eu]rs éclos{ent} et les [oi]s[eau]x [ch][an]t{ent}.",
+      "En été, il fait [ch][au]d et les [en]f[an]ts j[ou]{ent} deh[or]s.",
+      "En automne, les f[eu][ill]es dev[ien]n{ent} r[ou]ges et j[au]nes.",
+    ],
+  },
+  {
+    id: "le-voyage",
+    title: "Le voyage",
+    level: "B1",
+    sentences: [
+      "La famille part en voyage en tr[ain].",
+      "Ils v[oy]ag{ent} jusqu'à Lyon.",
+      "Dans le tr[ain], ils regard{ent} le paysage par la fen[êt]re.",
+      "Ils v[oi]{ent} des rivi[èr]es et des montagnes.",
+      "Arrivés à Lyon, ils visit{ent} la vieille ville.",
+      "C'est un beau voyage !",
+    ],
+  },
+  {
+    id: "la-foret",
+    title: "La forêt",
+    level: "B1",
+    sentences: [
+      "La forêt est un [en]dr[oi]t mystéri[eux].",
+      "Les arbres s[on]t très gr[an]ds et t[ou]ffus.",
+      "Des [oi]s[eau]x [ch][an]t{ent} dans les br[an][ch]es.",
+      "Un éc[ur][eu]il s[au]te de branche en branche.",
+      "Le sol[ei]l filtre à travers les f[eu][ill]es.",
+      "N[ou]s mar[ch][on]s doucement p[our] ne pas dér[an]ger les anim[aux].",
     ],
   },
 ];

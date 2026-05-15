@@ -96,7 +96,7 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
                 type="button"
                 onClick={() => tap(i)}
                 disabled={validated}
-                className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
+                className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-4xl font-bold transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
