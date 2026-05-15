@@ -68,6 +68,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [resetKey, setResetKey] = useState(0);
+  const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number } | null>(null);
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
@@ -179,6 +180,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             data={data}
             onBack={goBack}
             onDone={handleEvalDone}
+            onEvalStepChange={(idx, total) => setEvalSubStep({ idx, total })}
           />
         );
       default:
@@ -190,7 +192,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-44">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture · {data.type === "vowel" ? "Voyelle" : "Consonne"}
+          Lecture · {isEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : "Consonne"}
         </p>
         <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
           {data.letter} - {data.letterLower} — {data.phoneme}
@@ -198,7 +200,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       </header>
 
       {/* Step progress bar */}
-      <div className="mb-6 flex gap-1">
+      <div className={`flex gap-1 ${isEvalStep ? "mb-2" : "mb-6"}`}>
         {steps.map((s, i) => (
           <div
             key={s.key}
@@ -212,6 +214,24 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           />
         ))}
       </div>
+
+      {/* Eval sub-progress bar */}
+      {isEvalStep && evalSubStep && (
+        <div className="mb-6 flex gap-1">
+          {Array.from({ length: evalSubStep.total }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-1 flex-1 rounded-full transition-colors ${
+                i < evalSubStep.idx
+                  ? "bg-[var(--color-accent-fr)]"
+                  : i === evalSubStep.idx
+                    ? "bg-[var(--color-accent-fr)] opacity-60"
+                    : "bg-[var(--color-border-default)]"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="min-h-[280px]">{renderStep()}</div>
 

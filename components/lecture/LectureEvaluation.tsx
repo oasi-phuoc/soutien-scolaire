@@ -12,6 +12,7 @@ interface Props {
   data: LetterData;
   onBack: () => void;
   onDone: (grade: number, passed: boolean, total: number) => void;
+  onEvalStepChange?: (idx: number, total: number) => void;
 }
 
 type EvalStep = "grid" | "words" | "sound-image" | "sound-audio" | "pronounce" | "results";
@@ -593,7 +594,7 @@ function ResultsScreen({ scores }: { scores: (number | null)[] }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function LectureEvaluation({ data, onBack, onDone }: Props) {
+export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const [stepIdx, setStepIdx] = useState(0);
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
@@ -644,27 +645,12 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const exerciseSteps = EVAL_STEPS.filter((s) => s !== "results");
   const progressIdx = isResults ? exerciseSteps.length : stepIdx;
 
+  useEffect(() => {
+    onEvalStepChange?.(progressIdx, exerciseSteps.length);
+  }, [progressIdx, exerciseSteps.length, onEvalStepChange]);
+
   return (
     <div className="w-full flex-1 pb-44">
-      <header className="mb-5 space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture · Évaluation
-        </p>
-        <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-          {letter} - {letterLower} — {phoneme}
-        </h1>
-      </header>
-
-      <div className="mb-6 flex gap-1">
-        {exerciseSteps.map((_, i) => (
-          <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-            i < progressIdx ? "bg-[var(--color-accent-lecture)]"
-              : i === progressIdx ? "bg-[var(--color-accent-lecture)] opacity-60"
-                : "bg-[var(--color-border-default)]"
-          }`} />
-        ))}
-      </div>
-
       <div className="min-h-[280px]">
         {step === "grid" && (
           <GridExercise key={`${evalKey}-${stepIdx}`} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
