@@ -231,6 +231,7 @@ function checkTensWord(input: string, num: number): boolean {
 
 function DigitGuide({ digit }: { digit: number }) {
   return (
+    {/* eslint-disable-next-line @next/next/no-img-element */}
     <img
       src={`/images/digits/${digit}.png`}
       alt={`Guide de tracé pour le chiffre ${digit}`}
@@ -2848,6 +2849,7 @@ export function A1ModuleContent() {
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                   <div className="flex items-center justify-center py-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
                   </div>
                   <div className="mt-2">
@@ -2900,6 +2902,7 @@ export function A1ModuleContent() {
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                   <div className="flex items-center justify-center py-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
                   </div>
                   <div className="mt-2">
@@ -3343,6 +3346,7 @@ export function A1ModuleContent() {
                   <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">4. Comptez combien il y a de cubes. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                     <div className="flex items-center justify-center py-3">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={a12EvalQ12.src} alt="cubes" className="max-h-72 w-auto object-contain" />
                     </div>
                     <div className="mt-2">
