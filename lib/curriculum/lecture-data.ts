@@ -47,7 +47,7 @@ export type RevisionData = {
   phonemeA: string;
   phonemeB: string;
   mixedGrid: string[];
-  soundWords: { word: string; answer: "A" | "B" }[];
+  soundWords: { word: string; answer: "A" | "B" | "AB" }[];
   readWords: { letter: string; word: string }[];
 };
 
@@ -826,7 +826,7 @@ export const VOWEL_REVISIONS: RevisionData[] = [
       { word: "avion", answer: "A" },
       { word: "chat", answer: "A" },
       { word: "panda", answer: "A" },
-      { word: "orange", answer: "B" },
+      { word: "orange", answer: "AB" },
     ],
     readWords: [
       { letter: "a", word: "ami" },

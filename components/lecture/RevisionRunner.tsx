@@ -24,7 +24,8 @@ const STEPS: Step[] = [
   { key: "grid-lower", label: "min" },
   { key: "word-upper", label: "Mots MAJ" },
   { key: "word-lower", label: "Mots min" },
-  { key: "sound", label: "Sons" },
+  { key: "sound-image", label: "Sons images" },
+  { key: "sound-audio", label: "Sons audio" },
   { key: "pronounce", label: "Prononcer" },
 ];
 
@@ -44,7 +45,7 @@ export function RevisionRunner({ data }: Props) {
 
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = step.key === "word-upper" || step.key === "word-lower";
-  const isSoundStep = step.key === "sound";
+  const isSoundStep = step.key === "sound-image" || step.key === "sound-audio";
   const isPronounceStep = step.key === "pronounce";
   const showExerciseButtons = isGridStep || isWordStep || isSoundStep || isPronounceStep;
 
@@ -124,7 +125,7 @@ export function RevisionRunner({ data }: Props) {
             isUppercase={false}
           />
         );
-      case "sound":
+      case "sound-image":
         return (
           <RevisionSoundStep
             key={k}
@@ -132,6 +133,18 @@ export function RevisionRunner({ data }: Props) {
             phonemeA={data.phonemeA}
             phonemeB={data.phonemeB}
             words={data.soundWords}
+            mode="image"
+          />
+        );
+      case "sound-audio":
+        return (
+          <RevisionSoundStep
+            key={k}
+            ref={soundRef}
+            phonemeA={data.phonemeA}
+            phonemeB={data.phonemeB}
+            words={data.soundWords}
+            mode="audio"
           />
         );
       case "pronounce":

@@ -11,18 +11,23 @@ export interface RevisionSoundStepHandle {
 interface Props {
   phonemeA: string;
   phonemeB: string;
-  words: { word: string; answer: "A" | "B" }[];
+  words: { word: string; answer: "A" | "B" | "AB" }[];
+  mode: "image" | "audio";
 }
 
+type CardSelection = { A: boolean; B: boolean };
+
 export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
-  function RevisionSoundStep({ phonemeA, phonemeB, words }, ref) {
-    const [answers, setAnswers] = useState<Record<number, "A" | "B">>({});
+  function RevisionSoundStep({ phonemeA, phonemeB, words, mode }, ref) {
+    const [selections, setSelections] = useState<CardSelection[]>(() =>
+      words.map(() => ({ A: false, B: false }))
+    );
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setAnswers({});
+      setSelections(words.map(() => ({ A: false, B: false })));
       setValidated(false);
-    }, []);
+    }, [words]);
 
     const validate = useCallback(() => {
       if (validated) return;
@@ -31,72 +36,108 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
-    function pick(i: number, choice: "A" | "B") {
+    function toggle(i: number, phoneme: "A" | "B") {
       if (validated) return;
-      setAnswers((prev) => ({ ...prev, [i]: choice }));
+      setSelections((prev) => {
+        const next = [...prev] as CardSelection[];
+        next[i] = { ...next[i]!, [phoneme]: !next[i]![phoneme] };
+        return next;
+      });
+    }
+
+    function playAudio(word: string) {
+      new Audio(`/assets/words/son/${word}.mp3`).play().catch(() => speak(word));
     }
 
     return (
       <section className="space-y-3 pb-8">
-        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entre les sons</h2>
+        <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Entendre les sons</h2>
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Écoutez le mot. Quel son entendez-vous ?
+          Touchez le ou les sons que vous entendez
         </p>
-        <ul className="space-y-2">
+        <div className="grid grid-cols-2 gap-3">
           {words.map(({ word, answer }, i) => {
-            const chosen = answers[i];
+            const sel = selections[i]!;
+            const isCorrectA = answer === "A" || answer === "AB";
+            const isCorrectB = answer === "B" || answer === "AB";
+
             return (
-              <li
+              <div
                 key={i}
-                className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3"
+                className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2"
               >
-                <button
-                  type="button"
-                  onClick={() => speak(word)}
-                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--color-text-primary)] text-white"
-                  aria-label={`Écouter ${word}`}
-                >
-                  <SpeakerIcon />
-                </button>
-                <span className="flex-1 text-sm font-medium text-[var(--color-text-primary)]">{word}</span>
-                {(["A", "B"] as const).map((opt) => {
-                  const isChosen = chosen === opt;
-                  const isCorrect = answer === opt;
-                  const showResult = validated && isChosen;
-                  return (
+                {mode === "image" ? (
+                  <div className="relative aspect-square w-full overflow-hidden rounded-lg">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/assets/words/img/${word}.jpg`}
+                      alt=""
+                      className="h-full w-full object-contain p-1"
+                    />
                     <button
-                      key={opt}
                       type="button"
-                      onClick={() => pick(i, opt)}
-                      disabled={validated}
-                      className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
-                        showResult
-                          ? isCorrect
-                            ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                            : "border-red-400 bg-red-50 text-red-700"
-                          : isChosen
-                            ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
-                            : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
-                      }`}
+                      onClick={() => playAudio(word)}
+                      className="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm"
+                      aria-label={`Écouter ${word}`}
                     >
-                      {opt === "A" ? phonemeA : phonemeB}
+                      <SmallSpeakerIcon />
                     </button>
-                  );
-                })}
-              </li>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => playAudio(word)}
+                    className="flex aspect-square w-full items-center justify-center rounded-lg bg-[var(--color-bg-secondary)]"
+                    aria-label={`Écouter ${word}`}
+                  >
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-accent-lecture)]" aria-hidden>
+                      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    </svg>
+                  </button>
+                )}
+
+                <div className="flex gap-2">
+                  {(["A", "B"] as const).map((opt) => {
+                    const isSelected = sel[opt];
+                    const isCorrect = opt === "A" ? isCorrectA : isCorrectB;
+                    return (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => toggle(i, opt)}
+                        disabled={validated}
+                        className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+                          validated && isSelected
+                            ? isCorrect
+                              ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                              : "border-red-400 bg-red-50 text-red-700"
+                            : validated && !isSelected && isCorrect
+                              ? "border-amber-400 bg-amber-50 text-amber-700"
+                              : isSelected
+                                ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
+                        }`}
+                      >
+                        {opt === "A" ? phonemeA : phonemeB}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </section>
     );
   },
 );
 
-function SpeakerIcon() {
+function SmallSpeakerIcon() {
   return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-      <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
     </svg>
   );
 }
