@@ -15,7 +15,7 @@ interface Props {
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
-const GRID_SIZE = 20;
+const GRID_SIZE = 25;
 
 function makeGrid(target: string, isUppercase: boolean): string[] {
   const alpha = isUppercase
@@ -37,7 +37,7 @@ function makeGrid(target: string, isUppercase: boolean): string[] {
 }
 
 export const LetterGrid = forwardRef<LetterGridHandle, Props>(
-  function LetterGrid({ target, isUppercase, cols = 4 }, ref) {
+  function LetterGrid({ target, isUppercase, cols = 5 }, ref) {
     const [grid, setGrid] = useState(() => makeGrid(target, isUppercase));
     const [states, setStates] = useState<CellState[]>(() => Array(GRID_SIZE).fill("idle"));
     const [validated, setValidated] = useState(false);
@@ -90,7 +90,7 @@ export const LetterGrid = forwardRef<LetterGridHandle, Props>(
                 type="button"
                 onClick={() => tap(i)}
                 disabled={validated}
-                className={`flex items-center justify-center rounded-[var(--radius-lg)] border p-3 text-lg font-bold transition-colors ${
+                className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
