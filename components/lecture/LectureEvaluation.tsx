@@ -160,7 +160,7 @@ function GridExercise({
               type="button"
               onClick={() => tap(i)}
               disabled={validated}
-              className={`flex items-center justify-center rounded-[var(--radius-lg)] border p-3 text-lg font-bold transition-colors ${
+              className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border text-lg font-bold transition-colors ${
                 s === "correct" || s === "selected"
                   ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10 text-[var(--color-accent-lecture)]"
                   : s === "wrong" || s === "missed"
