@@ -181,7 +181,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-primary)] transition-colors ${
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
@@ -191,9 +191,6 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                         : "border-[var(--color-border-default)]"
                 }`}
               >
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <LargeSpeakerIcon state={s} />
-                </span>
                 <button
                   type="button"
                   aria-label={`Écouter`}
@@ -201,9 +198,12 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                     e.stopPropagation();
                     new Audio(audioSrc).play().catch(() => speak(word.label));
                   }}
-                  className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
+                  className="absolute inset-0 m-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
                 >
-                  <SmallSpeakerIcon />
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                  </svg>
                 </button>
               </button>
             );
