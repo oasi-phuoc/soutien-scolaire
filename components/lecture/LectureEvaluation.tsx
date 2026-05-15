@@ -263,7 +263,7 @@ function WordsExercise({
       <ul className="space-y-2">
         {words.map((word, wi) => (
           <li key={wi} className="flex items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
-            <span className="flex flex-wrap gap-1">
+            <span className="flex flex-1 flex-wrap gap-0.5">
               {word.split("").map((char, ci) => {
                 const key = `${wi}-${ci}`;
                 const s = states[key] ?? "idle";
@@ -273,7 +273,7 @@ function WordsExercise({
                     type="button"
                     disabled={validated}
                     onClick={() => tap(wi, ci)}
-                    className={`flex h-9 w-9 items-center justify-center rounded-lg border text-sm font-bold transition-colors ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors ${
                       s === "correct" || s === "selected"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
@@ -287,7 +287,7 @@ function WordsExercise({
               })}
             </span>
             {lineScores[wi] !== null && (
-              <span className={`ml-auto text-sm font-bold ${lineScores[wi] === 1 ? "text-green-600" : "text-red-500"}`}>
+              <span className={`shrink-0 text-sm font-bold ${lineScores[wi] === 1 ? "text-green-600" : "text-red-500"}`}>
                 {lineScores[wi]}/1
               </span>
             )}
