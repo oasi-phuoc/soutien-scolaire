@@ -96,21 +96,21 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-secondary)] transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
                       ? "border-red-400"
                       : s === "selected"
                         ? "border-[var(--color-accent-lecture)]"
-                        : "border-transparent"
+                        : "border-[var(--color-border-default)]"
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imgSrc}
                   alt={word.label}
-                  className="absolute inset-0 h-full w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-contain p-1"
                 />
                 <button
                   type="button"
