@@ -183,7 +183,8 @@ function WordsExercise({
   letter, letterLower, onScore, shouldValidate,
 }: { letter: string; letterLower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [words] = useState(() => {
-    const pool = shuffle(randomWordsWithLetter(letterLower, 10)).slice(0, 4);
+    const raw = randomWordsWithLetter(letterLower, 20);
+    const pool = shuffle(raw.filter((w) => w.length <= 9)).slice(0, 4);
     return [
       (pool[0] ?? "MAISON").toUpperCase(),
       (pool[1] ?? "BALLON").toUpperCase(),
@@ -722,11 +723,6 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
                 aria-label="Valider">
                 <IconCheck />
               </button>
-            )}
-            {!isResults && scores.filter((s) => s !== null).length > 0 && (
-              <span className="text-xs text-[var(--color-text-secondary)]">
-                {scores.reduce<number>((a, b) => a + (b ?? 0), 0)} pts
-              </span>
             )}
           </div>
 

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getLetterInModule } from "@/lib/curriculum/lecture-data";
 import { LectureLetterRunner } from "@/components/lecture/LectureLetterRunner";
@@ -11,7 +12,9 @@ export default async function LectureLetterPage({ params }: Props) {
 
   return (
     <main>
-      <LectureLetterRunner data={data} moduleId={moduleId} />
+      <Suspense fallback={null}>
+        <LectureLetterRunner data={data} moduleId={moduleId} />
+      </Suspense>
     </main>
   );
 }

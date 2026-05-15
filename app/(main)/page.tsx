@@ -34,21 +34,6 @@ export default async function HomePage({ searchParams }: Props) {
       </div>
 
       <HomeProgressCards />
-
-      <div className="flex gap-3 pt-2">
-        <Link
-          href="/placement"
-          className="flex-1 inline-flex min-h-11 items-center justify-center rounded-xl border border-zinc-300 px-4 text-sm font-semibold dark:border-zinc-600"
-        >
-          Test de positionnement
-        </Link>
-        <Link
-          href="/compte"
-          className="flex-1 inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 text-sm font-semibold text-white dark:bg-[var(--color-theme-muted)]"
-        >
-          Réglages
-        </Link>
-      </div>
     </main>
   );
 }

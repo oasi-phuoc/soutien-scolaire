@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
 import { LECTURE_MODULES, STORIES } from "@/lib/curriculum/lecture-data";
 import {
@@ -9,6 +10,7 @@ import {
   computeLecturePercent,
   getSubmoduleState,
   getModuleState,
+  getEvaluationResult,
   SUBMODULE_SEQUENCE,
   TOTAL_LETTERS,
 } from "@/lib/progress/lecture-progress";
@@ -77,6 +79,7 @@ function ModuleCard({
   hydrated: boolean;
   highlighted?: boolean;
 }) {
+  const router = useRouter();
   const modState = hydrated ? getModuleState(progress, mod.id) : "locked";
   const locked = modState === "locked";
 
@@ -129,6 +132,8 @@ function ModuleCard({
           const subCode = `${mod.code}.${i + 1}`;
 
           const isAvailable = subState === "available";
+          const evalResult = hydrated ? getEvaluationResult(progress, mod.id, letter.letterLower) : undefined;
+          const hasFailedEval = isAvailable && evalResult !== undefined && !evalResult.passed;
 
           const rowContent = (
             <div className="flex items-center gap-3 px-4 py-2.5">
@@ -145,11 +150,25 @@ function ModuleCard({
                 </span>
               </div>
               {isAvailable ? (
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "var(--color-accent-lecture)" }} aria-hidden>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </span>
+                <div className="flex shrink-0 items-center gap-1">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full text-white" style={{ background: "var(--color-accent-lecture)" }} aria-hidden>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="8,5 19,12 8,19" />
+                    </svg>
+                  </span>
+                  {hasFailedEval && (
+                    <button
+                      type="button"
+                      aria-label="Aller à l'évaluation"
+                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); router.push(`/lecture/${mod.id}/${letter.letterLower}?eval=1`); }}
+                      className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-accent-lecture)] text-[var(--color-accent-lecture)] transition-colors hover:bg-[var(--color-accent-lecture)]/10"
+                    >
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </button>
+                  )}
+                </div>
               ) : !isLocked && subState === "completed" ? (
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
                   <path d="M9 18l6-6-6-6" />

@@ -18,8 +18,9 @@ type CharState = "idle" | "selected" | "correct" | "wrong" | "missed";
 const WORD_COUNT = 5;
 
 function buildWords(target: string, isUppercase: boolean): string[] {
-  const raw = randomWordsWithLetter(target.toLowerCase(), WORD_COUNT);
-  return raw.map((w) => (isUppercase ? w.toUpperCase() : w.toLowerCase()));
+  const raw = randomWordsWithLetter(target.toLowerCase(), 20);
+  const filtered = raw.filter((w) => w.length <= 9).slice(0, WORD_COUNT);
+  return filtered.map((w) => (isUppercase ? w.toUpperCase() : w.toLowerCase()));
 }
 
 export const WordSpotter = forwardRef<WordSpotterHandle, Props>(

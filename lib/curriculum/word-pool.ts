@@ -25,7 +25,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "usine",      phonemes: ["/y/", "/z/", "/i/", "/n/"] },
   { label: "uniforme",   phonemes: ["/y/", "/n/", "/i/", "/f/", "/r/", "/m/"] },
   { label: "école",      phonemes: ["/e/", "/k/", "/l/"] },
-  { label: "étoile",     phonemes: ["/e/", "/t/", "/w/", "/a/", "/l/"] },
+  { label: "étoile",     phonemes: ["/e/", "/t/", "/w/", "/l/"] },
   { label: "épée",       phonemes: ["/e/", "/p/"] },
   { label: "éléphant",   phonemes: ["/e/", "/l/", "/f/"] },
   { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/"] },
@@ -96,22 +96,22 @@ export const WORD_ITEMS: WordItem[] = [
   // ── M ──────────────────────────────────────────────────────────────────────
   { label: "maison",     phonemes: ["/m/", "/e/", "/z/"] },           // ai = /e/
   { label: "maman",      phonemes: ["/m/", "/a/"] },
-  { label: "miroir",     phonemes: ["/m/", "/i/", "/r/", "/w/", "/a/"] }, // oi = /wa/
+  { label: "miroir",     phonemes: ["/m/", "/i/", "/r/", "/w/"] },        // oi = /wa/
   { label: "montagne",   phonemes: ["/m/", "/t/", "/a/"] },
   { label: "moto",       phonemes: ["/m/", "/o/", "/t/"] },
   // ── N ──────────────────────────────────────────────────────────────────────
   { label: "nid",        phonemes: ["/n/", "/i/"] },
-  { label: "noisette",   phonemes: ["/n/", "/w/", "/a/", "/z/", "/t/"] }, // oi = /wa/
+  { label: "noisette",   phonemes: ["/n/", "/w/", "/z/", "/t/"] },         // oi = /wa/
   { label: "nuage",      phonemes: ["/n/", "/y/", "/a/", "/ʒ/"] },
   { label: "nuit",       phonemes: ["/n/", "/i/"] },
   // ── O ──────────────────────────────────────────────────────────────────────
-  { label: "oiseau",     phonemes: ["/w/", "/a/", "/z/", "/o/"] },    // oi=/wa/, eau=/o/
+  { label: "oiseau",     phonemes: ["/w/", "/z/", "/o/"] },            // oi=/wa/, eau=/o/
   { label: "orange",     phonemes: ["/o/", "/r/", "/ʒ/"] },
   // ── P ──────────────────────────────────────────────────────────────────────
   { label: "panda",      phonemes: ["/p/", "/a/", "/d/"] },
   { label: "papillon",   phonemes: ["/p/", "/a/", "/i/", "/l/"] },
   { label: "piano",      phonemes: ["/p/", "/a/", "/n/", "/o/"] },
-  { label: "poisson",    phonemes: ["/p/", "/w/", "/a/", "/s/"] },    // oi = /wa/
+  { label: "poisson",    phonemes: ["/p/", "/w/", "/s/"] },            // oi = /wa/
   { label: "pomme",      phonemes: ["/p/", "/m/"] },
   { label: "puzzle",     phonemes: ["/p/", "/y/", "/z/", "/l/"] },
   { label: "piste",      phonemes: ["/p/", "/i/", "/s/", "/t/"] },

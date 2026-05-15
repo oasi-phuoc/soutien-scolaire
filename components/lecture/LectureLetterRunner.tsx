@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
@@ -57,8 +57,16 @@ function getSteps(data: LetterData): Step[] {
 
 export function LectureLetterRunner({ data, moduleId }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const steps = getSteps(data);
   const [stepIdx, setStepIdx] = useState(0);
+
+  useEffect(() => {
+    if (searchParams.get("eval") === "1") {
+      setStepIdx(steps.length - 1);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const [resetKey, setResetKey] = useState(0);
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
