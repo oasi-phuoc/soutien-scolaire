@@ -223,9 +223,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
               key={i}
               className={`h-1 flex-1 rounded-full transition-colors ${
                 i < evalSubStep.idx
-                  ? "bg-[var(--color-accent-fr)]"
+                  ? "bg-[var(--color-accent-lecture)]"
                   : i === evalSubStep.idx
-                    ? "bg-[var(--color-accent-fr)] opacity-60"
+                    ? "bg-[var(--color-accent-lecture)] opacity-60"
                     : "bg-[var(--color-border-default)]"
               }`}
             />
