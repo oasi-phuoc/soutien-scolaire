@@ -608,10 +608,7 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const isPronounceStep = step === "pronounce";
   const showValidateBtn = !isResults && !isPronounceStep && !stepScored;
 
-  function recordScore(exIdx: number, score: number) {
-    setScores((prev) => { const next = [...prev]; next[exIdx] = score; return next; });
-    setStepScored(true);
-  }
+  const goNextRef = useRef<() => void>(() => {});
 
   function goNext() {
     if (isResults) {
@@ -620,9 +617,22 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
       onDone(grade, grade >= getPassGrade(), total);
       return;
     }
+    if (isPronounceStep && !stepScored) {
+      setScores((prev) => { const next = [...prev]; next[4] = 0; return next; });
+    }
     setShouldValidate(false);
     setStepIdx((i) => i + 1);
     setStepScored(false);
+  }
+
+  goNextRef.current = goNext;
+
+  function recordScore(exIdx: number, score: number) {
+    setScores((prev) => { const next = [...prev]; next[exIdx] = score; return next; });
+    setStepScored(true);
+    if (exIdx === 4) {
+      setTimeout(() => goNextRef.current(), 700);
+    }
   }
 
   const exerciseSteps = EVAL_STEPS.filter((s) => s !== "results");
@@ -690,9 +700,9 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
           )}
 
           <button type="button" onClick={goNext}
-            disabled={!isResults && !stepScored}
+            disabled={!isResults && !stepScored && !isPronounceStep}
             className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
-              isResults || stepScored ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
+              isResults || stepScored || isPronounceStep ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
             }`}>
             {isResults ? (<>Terminer <IconCheck /></>) : (<>Suivant <IconRight /></>)}
           </button>
