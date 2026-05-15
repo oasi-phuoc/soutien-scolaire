@@ -155,7 +155,7 @@ export function RevisionRunner({ data }: Props) {
   }
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-44">
+    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
           Lecture · Révision
@@ -184,69 +184,73 @@ export function RevisionRunner({ data }: Props) {
       <div className="min-h-[280px]">{renderStep()}</div>
 
       {/* Fixed nav bar */}
-      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
-        <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-          <button
-            type="button"
-            onClick={goBack}
-            className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M15 18l-6-6 6-6" />
-            </svg>
-            Retour
-          </button>
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            <button
+              type="button"
+              onClick={goBack}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              Retour
+            </button>
 
-          {showExerciseButtons && (
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                aria-label="Recommencer"
-                onClick={exerciseReset}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                  <path d="M1 4v6h6" />
-                  <path d="M3.51 15a9 9 0 1 0 .49-4" />
-                </svg>
-              </button>
-              {!isPronounceStep && (
+            {showExerciseButtons && (
+              <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  aria-label="Valider"
-                  onClick={exerciseValidate}
-                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                  aria-label="Recommencer"
+                  onClick={exerciseReset}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                    <path d="M20 6L9 17l-5-5" />
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M1 4v6h6" />
+                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
                   </svg>
                 </button>
-              )}
-            </div>
-          )}
-
-          <button
-            type="button"
-            onClick={goNext}
-            className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-          >
-            {isLast ? (
-              <>
-                Terminer
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </>
-            ) : (
-              <>
-                Suivant
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                  <path d="M9 18l6-6-6-6" />
-                </svg>
-              </>
+                {!isPronounceStep && (
+                  <button
+                    type="button"
+                    aria-label="Valider"
+                    onClick={exerciseValidate}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </button>
+                )}
+              </div>
             )}
-          </button>
+
+            <button
+              type="button"
+              onClick={goNext}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              {isLast ? (
+                <>
+                  Terminer
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </>
+              ) : (
+                <>
+                  Suivant
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </>
+              )}
+            </button>
+          </div>
         </div>
+        {/* Spacer covers main nav area so scrolled content can't show through */}
+        <div className="h-[68px]" />
       </div>
     </div>
   );

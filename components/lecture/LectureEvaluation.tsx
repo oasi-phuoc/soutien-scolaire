@@ -650,7 +650,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
   }, [progressIdx, exerciseSteps.length, onEvalStepChange]);
 
   return (
-    <div className="w-full flex-1 pb-44">
+    <div className="w-full flex-1 pb-56">
       <div className="min-h-[280px]">
         {step === "grid" && (
           <GridExercise key={`${evalKey}-${stepIdx}`} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
@@ -672,42 +672,46 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
         )}
       </div>
 
-      <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
-        <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-          <button type="button" onClick={onBack}
-            className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
-            <IconLeft /> Retour
-          </button>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Recommencer l'évaluation"
-              onClick={restart}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                <path d="M1 4v6h6" />
-                <path d="M3.51 15a9 9 0 1 0 .49-4" />
-              </svg>
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            <button type="button" onClick={onBack}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
+              <IconLeft /> Retour
             </button>
-            {showValidateBtn && (
-              <button type="button" onClick={() => setShouldValidate(true)}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
-                aria-label="Valider">
-                <IconCheck />
-              </button>
-            )}
-          </div>
 
-          <button type="button" onClick={goNext}
-            disabled={!isResults && !stepScored && !isPronounceStep}
-            className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
-              isResults || stepScored || isPronounceStep ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
-            }`}>
-            {isResults ? (<>Terminer <IconCheck /></>) : (<>Suivant <IconRight /></>)}
-          </button>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                aria-label="Recommencer l'évaluation"
+                onClick={restart}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+              >
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M1 4v6h6" />
+                  <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                </svg>
+              </button>
+              {showValidateBtn && (
+                <button type="button" onClick={() => setShouldValidate(true)}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                  aria-label="Valider">
+                  <IconCheck />
+                </button>
+              )}
+            </div>
+
+            <button type="button" onClick={goNext}
+              disabled={!isResults && !stepScored && !isPronounceStep}
+              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
+                isResults || stepScored || isPronounceStep ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
+              }`}>
+              {isResults ? (<>Terminer <IconCheck /></>) : (<>Suivant <IconRight /></>)}
+            </button>
+          </div>
         </div>
+        {/* Spacer covers the main nav area so scrolled content can't show through */}
+        <div className="h-[68px]" />
       </div>
     </div>
   );

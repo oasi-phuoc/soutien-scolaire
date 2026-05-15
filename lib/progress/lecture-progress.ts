@@ -119,7 +119,32 @@ export function getRevisionState(p: LectureProgressV2, pair: string): ItemState 
 }
 
 export function markRevisionCompleted(p: LectureProgressV2, pair: string): LectureProgressV2 {
-  return { ...p, revisions: { ...p.revisions, [pair]: "completed" } };
+  const nextRevisions = { ...p.revisions, [pair]: "completed" as ItemState };
+  const checkpoint = REVISION_CHECKPOINTS.find((r) => r.pair === pair);
+  if (!checkpoint) return { ...p, revisions: nextRevisions };
+
+  const idx = SUBMODULE_SEQUENCE.findIndex(
+    (s) => s.moduleId === checkpoint.afterModuleId && s.letterId === checkpoint.afterLetterId,
+  );
+  if (idx < 0 || idx >= SUBMODULE_SEQUENCE.length - 1) {
+    return { ...p, revisions: nextRevisions };
+  }
+
+  const nx = SUBMODULE_SEQUENCE[idx + 1]!;
+  const nextSubmodules = { ...p.submodules };
+  const nextModules = { ...p.modules };
+
+  if (nextSubmodules[subKey(nx.moduleId, nx.letterId)] !== "completed") {
+    nextSubmodules[subKey(nx.moduleId, nx.letterId)] = "available";
+  }
+  if (nx.moduleId !== checkpoint.afterModuleId) {
+    const ms = nextModules[nx.moduleId];
+    if (ms !== "in_progress" && ms !== "completed") {
+      nextModules[nx.moduleId] = "available";
+    }
+  }
+
+  return { ...p, revisions: nextRevisions, submodules: nextSubmodules, modules: nextModules };
 }
 
 export function markSubmoduleCompleted(
@@ -140,22 +165,29 @@ export function markSubmoduleCompleted(
   const revCheckpoint = REVISION_CHECKPOINTS.find(
     (r) => r.afterModuleId === moduleId && r.afterLetterId === letterId,
   );
-  if (revCheckpoint) {
-    const revs = next.revisions ?? {};
-    if (revs[revCheckpoint.pair] !== "completed") {
-      next.revisions = { ...revs, [revCheckpoint.pair]: "available" };
-    }
-  }
+  const revAlreadyDone = revCheckpoint
+    ? (next.revisions ?? {})[revCheckpoint.pair] === "completed"
+    : false;
 
-  const idx = SUBMODULE_SEQUENCE.findIndex(
-    (s) => s.moduleId === moduleId && s.letterId === letterId,
-  );
-
-  if (idx >= 0 && idx < SUBMODULE_SEQUENCE.length - 1) {
-    const nx = SUBMODULE_SEQUENCE[idx + 1]!;
-    next.submodules[subKey(nx.moduleId, nx.letterId)] = "available";
-    if (nx.moduleId !== moduleId) {
-      next.modules[nx.moduleId] = "available";
+  if (revCheckpoint && !revAlreadyDone) {
+    // Revision gates the next letter — only unlock the revision for now
+    next.revisions = { ...(next.revisions ?? {}), [revCheckpoint.pair]: "available" };
+  } else {
+    // No revision checkpoint (or already done) — unlock next letter directly
+    const idx = SUBMODULE_SEQUENCE.findIndex(
+      (s) => s.moduleId === moduleId && s.letterId === letterId,
+    );
+    if (idx >= 0 && idx < SUBMODULE_SEQUENCE.length - 1) {
+      const nx = SUBMODULE_SEQUENCE[idx + 1]!;
+      if (next.submodules[subKey(nx.moduleId, nx.letterId)] !== "completed") {
+        next.submodules[subKey(nx.moduleId, nx.letterId)] = "available";
+      }
+      if (nx.moduleId !== moduleId) {
+        const ms = next.modules[nx.moduleId];
+        if (ms !== "in_progress" && ms !== "completed") {
+          next.modules[nx.moduleId] = "available";
+        }
+      }
     }
   }
 
