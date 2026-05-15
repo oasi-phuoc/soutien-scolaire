@@ -18,14 +18,6 @@ type EvalStep = "grid" | "words" | "sound-image" | "sound-audio" | "pronounce" |
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
 const EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "pronounce", "results"];
-const STEP_LABELS: Record<EvalStep, string> = {
-  grid: "Reconnaître",
-  words: "Repérer",
-  "sound-image": "Écouter (images)",
-  "sound-audio": "Écouter (sons)",
-  pronounce: "Prononcer",
-  results: "Résultats",
-};
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
