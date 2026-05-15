@@ -147,6 +147,10 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "violon",     phonemes: ["/v/", "/i/", "/l/"] },
   // ── W ──────────────────────────────────────────────────────────────────────
   { label: "wagon",      phonemes: ["/w/", "/a/", "/g/"] },
+  // ── Y ──────────────────────────────────────────────────────────────────────
+  { label: "yaourt",     phonemes: ["/a/", "/r/"] },
+  { label: "yoga",       phonemes: ["/o/", "/g/", "/a/"] },
+  { label: "yoyo",       phonemes: ["/o/"] },
   // ── X ──────────────────────────────────────────────────────────────────────
   { label: "saxophone",  phonemes: ["/s/", "/a/", "/ks/", "/f/"] },
   { label: "xylophone",  phonemes: ["/ks/", "/i/", "/l/", "/f/"] },
