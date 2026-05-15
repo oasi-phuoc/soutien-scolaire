@@ -30,7 +30,7 @@ function randomIdx(len: number) {
 }
 
 export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
-  function PronunciationChain({ phoneme, chain }, ref) {
+  function PronunciationChain({ phoneme: _phoneme, chain }, ref) {
     const [idx, setIdx] = useState(() => randomIdx(chain.length));
     const [recState, setRecState] = useState<RecState>("idle");
     const [heard, setHeard] = useState<string>("");
@@ -178,16 +178,16 @@ export const PronunciationChain = forwardRef<PronunciationChainHandle, Props>(
                 <span className="font-semibold text-[var(--color-accent-lecture)]">Bravo ! 🎉</span>
               )}
               {recState === "wrong" && heard && (
-                <span className="text-red-500">J'ai entendu « {heard} » — réessaie !</span>
+                <span className="text-red-500">J&apos;ai entendu « {heard} » — réessaie !</span>
               )}
               {recState === "wrong" && !heard && (
-                <span className="text-red-500">Je n'ai pas compris — réessaie !</span>
+                <span className="text-red-500">Je n&apos;ai pas compris — réessaie !</span>
               )}
             </p>
           </div>
         ) : (
           <p className="text-center text-sm text-[var(--color-text-secondary)]">
-            La reconnaissance vocale n'est pas disponible sur ce navigateur.
+            La reconnaissance vocale n&apos;est pas disponible sur ce navigateur.
           </p>
         )}
       </section>

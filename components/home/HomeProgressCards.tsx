@@ -12,7 +12,6 @@ import {
 } from "@/lib/progress/lecture-progress";
 import {
   loadProgress,
-  completedPassingIds,
 } from "@/lib/progress/math-progress";
 import {
   MATH_ALGEBRA_ORDER,

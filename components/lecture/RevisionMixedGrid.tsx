@@ -13,7 +13,7 @@ interface Props {
 
 type State = "idle" | "correct" | "wrong";
 
-export function RevisionMixedGrid({ letterA, letterB, phonemeA, phonemeB, grid }: Props) {
+export function RevisionMixedGrid({ letterA, letterB, phonemeA: _phonemeA, phonemeB: _phonemeB, grid }: Props) {
   const targets = new Set([letterA, letterB, letterA.toLowerCase(), letterB.toLowerCase()]);
   const [states, setStates] = useState<State[]>(() => grid.map(() => "idle"));
 
