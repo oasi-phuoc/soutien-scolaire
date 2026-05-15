@@ -187,8 +187,8 @@ function WordsExercise({
     const pool = shuffle(raw.filter((w) => w.length <= 9)).slice(0, 4);
     return [
       (pool[0] ?? "MAISON").toUpperCase(),
-      (pool[1] ?? "BALLON").toUpperCase(),
-      (pool[2] ?? "maison").toLowerCase(),
+      (pool[1] ?? "maison").toLowerCase(),
+      (pool[2] ?? "BALLON").toUpperCase(),
       (pool[3] ?? "ballon").toLowerCase(),
     ];
   });
@@ -202,7 +202,7 @@ function WordsExercise({
     let total = 0;
 
     words.forEach((word, wi) => {
-      const target = wi < 2 ? letter : letterLower;
+      const target = wi % 2 === 0 ? letter : letterLower;
       let lineOk = true;
       word.split("").forEach((char, ci) => {
         const key = `${wi}-${ci}`;
