@@ -81,7 +81,7 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
           {words.map((word, wi) => (
             <li
               key={wi}
-              className="flex flex-wrap items-center justify-center gap-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
+              className="flex flex-wrap items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
             >
               {word.split("").map((char, li) => {
                 const key = `${wi}-${li}`;
@@ -92,7 +92,7 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
                     type="button"
                     disabled={validated}
                     onClick={() => tap(wi, li)}
-                    className={`flex h-9 w-9 items-center justify-center rounded-lg border text-sm font-bold transition-colors ${
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border text-base font-bold transition-colors ${
                       s === "correct"
                         ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
