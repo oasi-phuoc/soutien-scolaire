@@ -426,7 +426,7 @@ function SoundAudioExercise({
                 type="button"
                 aria-label="Écouter"
                 onClick={(e) => { e.stopPropagation(); new Audio(audioSrc).play().catch(() => speak(word.label)); }}
-                className={`absolute inset-0 m-auto flex h-14 w-14 items-center justify-center rounded-full shadow-sm z-10 ${
+                className={`absolute inset-0 m-auto flex h-7 w-7 items-center justify-center rounded-full shadow-sm z-10 ${
                   s === "correct" || s === "selected"
                     ? "bg-[var(--color-accent-lecture)] text-white"
                     : s === "wrong" || s === "missed"
@@ -434,7 +434,7 @@ function SoundAudioExercise({
                       : "bg-[var(--color-accent-lecture)] text-white"
                 }`}
               >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                   <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
                   <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                 </svg>
