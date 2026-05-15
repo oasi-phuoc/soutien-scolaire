@@ -3,7 +3,6 @@
 import { useState, useRef } from "react";
 import type { LetterData, PronStep } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
-import type { WordItem } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
 import { speak } from "@/lib/utils/speech";
 
