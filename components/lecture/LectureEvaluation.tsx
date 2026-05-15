@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { LetterData, PronStep } from "@/lib/curriculum/lecture-data";
 import { randomWordsWithLetter, randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
@@ -103,50 +103,14 @@ function IconSpeaker() {
   );
 }
 
-// ─── Shared UI ────────────────────────────────────────────────────────────────
-
-function ScoreBadge({ score, max }: { score: number; max: number }) {
-  const color = score === max ? "text-green-600" : score > 0 ? "text-amber-600" : "text-red-500";
-  return (
-    <div className={`text-center text-sm font-bold ${color}`}>
-      {score}/{max} pt{max > 1 ? "s" : ""}
-    </div>
-  );
-}
-
-function ValidateBtn({ onClick, disabled }: { onClick: () => void; disabled?: boolean }) {
-  return (
-    <div className="flex justify-center pt-3">
-      <button
-        type="button"
-        onClick={onClick}
-        disabled={disabled}
-        className="flex h-11 items-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-6 text-sm font-bold text-white disabled:opacity-40"
-      >
-        <IconCheck /> Valider
-      </button>
-    </div>
-  );
-}
-
 // ─── Exercise 1 — Mixed Grid (4 pts, all or nothing) ─────────────────────────
 
 function GridExercise({
-  upper, lower, onScore,
-}: { upper: string; lower: string; onScore: (s: number) => void }) {
+  upper, lower, onScore, shouldValidate,
+}: { upper: string; lower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [grid] = useState(() => makeMixedGrid(upper, lower));
   const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
   const [validated, setValidated] = useState(false);
-  const [score, setScore] = useState<number | null>(null);
-
-  function tap(i: number) {
-    if (validated) return;
-    setStates((prev) => {
-      const next = [...prev] as CellState[];
-      next[i] = prev[i] === "selected" ? "idle" : "selected";
-      return next;
-    });
-  }
 
   function validate() {
     if (validated) return;
@@ -159,9 +123,20 @@ function GridExercise({
     });
     setStates(newStates);
     const perfect = !newStates.some((s) => s === "wrong" || s === "missed");
-    const pts = perfect ? 4 : 0;
-    setScore(pts);
-    onScore(pts);
+    onScore(perfect ? 4 : 0);
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function tap(i: number) {
+    if (validated) return;
+    setStates((prev) => {
+      const next = [...prev] as CellState[];
+      next[i] = prev[i] === "selected" ? "idle" : "selected";
+      return next;
+    });
   }
 
   return (
@@ -194,8 +169,6 @@ function GridExercise({
           );
         })}
       </div>
-      {!validated && <ValidateBtn onClick={validate} />}
-      {score !== null && <ScoreBadge score={score} max={4} />}
     </section>
   );
 }
@@ -203,8 +176,8 @@ function GridExercise({
 // ─── Exercise 2 — Word Spotting (1 pt per line × 4 lines) ────────────────────
 
 function WordsExercise({
-  letter, letterLower, onScore,
-}: { letter: string; letterLower: string; onScore: (s: number) => void }) {
+  letter, letterLower, onScore, shouldValidate,
+}: { letter: string; letterLower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [words] = useState(() => {
     const pool = shuffle(randomWordsWithLetter(letterLower, 10)).slice(0, 4);
     return [
@@ -216,19 +189,12 @@ function WordsExercise({
   });
   const [states, setStates] = useState<Record<string, CellState>>({});
   const [validated, setValidated] = useState(false);
-  const [lineScores, setLineScores] = useState<(number | null)[]>([null, null, null, null]);
-
-  function tap(wi: number, ci: number) {
-    if (validated) return;
-    const key = `${wi}-${ci}`;
-    setStates((prev) => ({ ...prev, [key]: prev[key] === "selected" ? "idle" : "selected" }));
-  }
 
   function validate() {
     if (validated) return;
     setValidated(true);
     const newStates: Record<string, CellState> = {};
-    const scores: number[] = [];
+    let total = 0;
 
     words.forEach((word, wi) => {
       const target = wi < 2 ? letter : letterLower;
@@ -244,12 +210,21 @@ function WordsExercise({
           if (s === "selected") { newStates[key] = "wrong"; lineOk = false; }
         }
       });
-      scores.push(lineOk ? 1 : 0);
+      if (lineOk) total++;
     });
 
     setStates(newStates);
-    setLineScores(scores);
-    onScore(scores.reduce((a, b) => a + b, 0));
+    onScore(total);
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function tap(wi: number, ci: number) {
+    if (validated) return;
+    const key = `${wi}-${ci}`;
+    setStates((prev) => ({ ...prev, [key]: prev[key] === "selected" ? "idle" : "selected" }));
   }
 
   return (
@@ -262,8 +237,8 @@ function WordsExercise({
       </p>
       <ul className="space-y-2">
         {words.map((word, wi) => (
-          <li key={wi} className="flex items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
-            <span className="flex flex-1 flex-wrap gap-0.5">
+          <li key={wi} className="flex items-center justify-center rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
+            <span className="flex flex-wrap justify-center gap-0.5">
               {word.split("").map((char, ci) => {
                 const key = `${wi}-${ci}`;
                 const s = states[key] ?? "idle";
@@ -286,18 +261,9 @@ function WordsExercise({
                 );
               })}
             </span>
-            {lineScores[wi] !== null && (
-              <span className={`shrink-0 text-sm font-bold ${lineScores[wi] === 1 ? "text-green-600" : "text-red-500"}`}>
-                {lineScores[wi]}/1
-              </span>
-            )}
           </li>
         ))}
       </ul>
-      {!validated && <ValidateBtn onClick={validate} />}
-      {validated && (
-        <ScoreBadge score={lineScores.reduce<number>((a, b) => a + (b ?? 0), 0)} max={4} />
-      )}
     </section>
   );
 }
@@ -305,21 +271,11 @@ function WordsExercise({
 // ─── Exercise 3 — Sound Image (2 pts) ────────────────────────────────────────
 
 function SoundImageExercise({
-  phoneme, onScore,
-}: { phoneme: string; onScore: (s: number) => void }) {
+  phoneme, onScore, shouldValidate,
+}: { phoneme: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [items] = useState(() => randomSoundItems(phoneme, 4));
   const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
-  const [score, setScore] = useState<number | null>(null);
-
-  function toggle(i: number) {
-    if (validated) return;
-    setCellStates((prev) => {
-      const next = [...prev] as CellState[];
-      next[i] = prev[i] === "selected" ? "idle" : "selected";
-      return next;
-    });
-  }
 
   function validate() {
     if (validated) return;
@@ -335,9 +291,20 @@ function SoundImageExercise({
     const half =
       newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
       newStates.filter((s) => s === "wrong").length <= 1;
-    const pts = perfect ? 2 : half ? 1 : 0;
-    setScore(pts);
-    onScore(pts);
+    onScore(perfect ? 2 : half ? 1 : 0);
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function toggle(i: number) {
+    if (validated) return;
+    setCellStates((prev) => {
+      const next = [...prev] as CellState[];
+      next[i] = prev[i] === "selected" ? "idle" : "selected";
+      return next;
+    });
   }
 
   return (
@@ -380,8 +347,6 @@ function SoundImageExercise({
           );
         })}
       </div>
-      {!validated && <ValidateBtn onClick={validate} />}
-      {score !== null && <ScoreBadge score={score} max={2} />}
     </section>
   );
 }
@@ -389,23 +354,11 @@ function SoundImageExercise({
 // ─── Exercise 4 — Sound Audio (2 pts) ────────────────────────────────────────
 
 function SoundAudioExercise({
-  phoneme, onScore,
-}: { phoneme: string; onScore: (s: number) => void }) {
+  phoneme, onScore, shouldValidate,
+}: { phoneme: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [items] = useState(() => randomSoundItems(phoneme, 4));
   const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
-  const [score, setScore] = useState<number | null>(null);
-
-  function toggle(i: number) {
-    if (validated) return;
-    const word = items[i]!;
-    new Audio(`/assets/words/son/${word.label}.mp3`).play().catch(() => speak(word.label));
-    setCellStates((prev) => {
-      const next = [...prev] as CellState[];
-      next[i] = prev[i] === "selected" ? "idle" : "selected";
-      return next;
-    });
-  }
 
   function validate() {
     if (validated) return;
@@ -421,9 +374,22 @@ function SoundAudioExercise({
     const half =
       newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
       newStates.filter((s) => s === "wrong").length <= 1;
-    const pts = perfect ? 2 : half ? 1 : 0;
-    setScore(pts);
-    onScore(pts);
+    onScore(perfect ? 2 : half ? 1 : 0);
+  }
+
+  const validateRef = useRef(validate);
+  validateRef.current = validate;
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
+
+  function toggle(i: number) {
+    if (validated) return;
+    const word = items[i]!;
+    new Audio(`/assets/words/son/${word.label}.mp3`).play().catch(() => speak(word.label));
+    setCellStates((prev) => {
+      const next = [...prev] as CellState[];
+      next[i] = prev[i] === "selected" ? "idle" : "selected";
+      return next;
+    });
   }
 
   return (
@@ -472,8 +438,6 @@ function SoundAudioExercise({
           );
         })}
       </div>
-      {!validated && <ValidateBtn onClick={validate} />}
-      {score !== null && <ScoreBadge score={score} max={2} />}
     </section>
   );
 }
@@ -485,7 +449,6 @@ function PronounceExercise({
 }: { chain: PronStep[]; onScore: (s: number) => void }) {
   const [step] = useState(() => chain[Math.floor(Math.random() * chain.length)]!);
   const [recState, setRecState] = useState<"idle" | "listening" | "correct" | "wrong">("idle");
-  const [heard, setHeard] = useState("");
   const recRef = useRef<unknown>(null);
   const [scored, setScored] = useState(false);
 
@@ -506,15 +469,10 @@ function PronounceExercise({
       let matched = false;
       for (let a = 0; a < e.results[0].length; a++) {
         const t: string = e.results[0][a].transcript.trim();
-        if (isMatch(t, step.word)) { matched = true; setHeard(t); break; }
+        if (isMatch(t, step.word)) { matched = true; break; }
       }
-      if (!matched) setHeard(e.results[0][0].transcript.trim());
-      const result = matched ? "correct" : "wrong";
-      setRecState(result);
-      if (!scored) {
-        setScored(true);
-        onScore(matched ? 3 : 0);
-      }
+      setRecState(matched ? "correct" : "wrong");
+      if (!scored) { setScored(true); onScore(matched ? 3 : 0); }
     };
     rec.onerror = () => setRecState("idle");
     rec.onend = () => setRecState((s) => s === "listening" ? "idle" : s);
@@ -570,13 +528,7 @@ function PronounceExercise({
                 : <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden><rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 10a7 7 0 0 0 14 0" fill="none" stroke="currentColor" strokeWidth="2" /><line x1="12" y1="19" x2="12" y2="22" stroke="currentColor" strokeWidth="2" /></svg>
             }
           </button>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            {recState === "idle" && "Appuyez pour parler"}
-            {recState === "listening" && "J&apos;écoute…"}
-            {recState === "correct" && <span className="font-semibold text-[var(--color-accent-lecture)]">Bravo ! 🎉</span>}
-            {recState === "wrong" && <span className="text-red-500">{heard ? `J'ai entendu « ${heard} »` : "Non reconnu"} — réessaie !</span>}
-          </p>
-          {scored && <ScoreBadge score={recState === "correct" ? 3 : 0} max={3} />}
+          <p className="text-sm text-[var(--color-text-secondary)]">Appuyez pour parler</p>
         </div>
       ) : (
         <div className="flex flex-col items-center gap-3">
@@ -591,7 +543,6 @@ function PronounceExercise({
               Non ✗
             </button>
           </div>
-          {scored && <ScoreBadge score={recState === "correct" ? 3 : 0} max={3} />}
         </div>
       )}
     </section>
@@ -651,9 +602,12 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const [stepIdx, setStepIdx] = useState(0);
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
   const [stepScored, setStepScored] = useState(false);
+  const [shouldValidate, setShouldValidate] = useState(false);
 
   const step = EVAL_STEPS[stepIdx]!;
   const isResults = step === "results";
+  const isPronounceStep = step === "pronounce";
+  const showValidateBtn = !isResults && !isPronounceStep && !stepScored;
 
   function recordScore(exIdx: number, score: number) {
     setScores((prev) => { const next = [...prev]; next[exIdx] = score; return next; });
@@ -667,13 +621,9 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
       onDone(grade, grade >= getPassGrade(), total);
       return;
     }
+    setShouldValidate(false);
     setStepIdx((i) => i + 1);
     setStepScored(false);
-  }
-
-  function goBackInternal() {
-    if (stepIdx === 0) onBack();
-    else { setStepIdx((i) => i - 1); setStepScored(false); }
   }
 
   const exerciseSteps = EVAL_STEPS.filter((s) => s !== "results");
@@ -706,16 +656,16 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
 
       <div className="min-h-[280px]">
         {step === "grid" && (
-          <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} />
+          <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
         )}
         {step === "words" && (
-          <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} />
+          <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
         )}
         {step === "sound-image" && (
-          <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} />
+          <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
         )}
         {step === "sound-audio" && (
-          <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} />
+          <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
         )}
         {step === "pronounce" && (
           <PronounceExercise key={stepIdx} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
@@ -727,17 +677,17 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
 
       <div className="fixed bottom-[68px] left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] z-40">
         <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-          <button type="button" onClick={goBackInternal}
+          <button type="button" onClick={onBack}
             className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
             <IconLeft /> Retour
           </button>
 
-          {!isResults && (
-            <span className="text-xs text-[var(--color-text-secondary)]">
-              {scores.filter((s) => s !== null).length > 0
-                ? `${scores.reduce<number>((a, b) => a + (b ?? 0), 0)} / ${scores.filter(s => s !== null).length * 2} pts`
-                : ""}
-            </span>
+          {showValidateBtn && (
+            <button type="button" onClick={() => setShouldValidate(true)}
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+              aria-label="Valider">
+              <IconCheck />
+            </button>
           )}
 
           <button type="button" onClick={goNext}
