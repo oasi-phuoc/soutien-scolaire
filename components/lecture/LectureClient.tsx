@@ -4,14 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
-import { LECTURE_MODULES, STORIES } from "@/lib/curriculum/lecture-data";
+import { LECTURE_MODULES, STORIES, getRevision } from "@/lib/curriculum/lecture-data";
 import {
   loadLectureProgress,
   computeLecturePercent,
   getSubmoduleState,
   getModuleState,
   getEvaluationResult,
+  getRevisionState,
   SUBMODULE_SEQUENCE,
+  REVISION_CHECKPOINTS,
   TOTAL_LETTERS,
 } from "@/lib/progress/lecture-progress";
 import type { LectureProgressV2, ItemState, ModuleState } from "@/lib/progress/lecture-progress";
@@ -124,7 +126,7 @@ function ModuleCard({
 
       {/* Submodule list */}
       <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-        {mod.letters.map((letter, i) => {
+        {mod.letters.flatMap((letter, i) => {
           const subState = hydrated
             ? getSubmoduleState(progress, mod.id, letter.letterLower)
             : "locked";
@@ -177,7 +179,7 @@ function ModuleCard({
             </div>
           );
 
-          return (
+          const letterLi = (
             <li key={letter.letterLower}>
               {isLocked ? (
                 rowContent
@@ -191,6 +193,54 @@ function ModuleCard({
               )}
             </li>
           );
+
+          const revCheckpoint = REVISION_CHECKPOINTS.find(
+            (r) => r.afterModuleId === mod.id && r.afterLetterId === letter.letterLower,
+          );
+
+          if (!revCheckpoint) return [letterLi];
+
+          const revState = hydrated ? getRevisionState(progress, revCheckpoint.pair) : "locked";
+          const revData = getRevision(revCheckpoint.pair);
+          const revTitle = revData?.title ?? `Révision ${revCheckpoint.pair}`;
+          const revLocked = revState === "locked";
+
+          const revRowContent = (
+            <div className="flex items-center gap-3 px-4 py-2">
+              <SubStateDot state={revState} />
+              <div className="flex-1 min-w-0 flex items-center gap-1.5">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0 text-[var(--color-accent-lecture)]" aria-hidden>
+                  <path d="M1 4v6h6" />
+                  <path d="M3.51 15a9 9 0 1 0 .49-4.5" />
+                </svg>
+                <span className="text-xs font-medium text-[var(--color-text-primary)]">
+                  {revTitle}
+                </span>
+              </div>
+              {!revLocked && revState !== "completed" && (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              )}
+            </div>
+          );
+
+          const revLi = (
+            <li key={`rev-${revCheckpoint.pair}`} className="bg-[var(--color-bg-secondary)]/40">
+              {revLocked ? (
+                <div className="opacity-40">{revRowContent}</div>
+              ) : (
+                <Link
+                  href={`/lecture/revision/${revCheckpoint.pair}`}
+                  className="block transition-colors hover:bg-[var(--color-bg-secondary)]"
+                >
+                  {revRowContent}
+                </Link>
+              )}
+            </li>
+          );
+
+          return [letterLi, revLi];
         })}
       </ul>
     </div>

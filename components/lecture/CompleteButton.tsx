@@ -5,6 +5,7 @@ import {
   loadLectureProgress,
   saveLectureProgress,
   markSubmoduleCompleted,
+  markRevisionCompleted,
   SUBMODULE_SEQUENCE,
 } from "@/lib/progress/lecture-progress";
 import { getLectureModuleForLetter } from "@/lib/curriculum/lecture-data";
@@ -18,6 +19,13 @@ export function CompleteButton({ type, id }: Props) {
   const router = useRouter();
 
   function handle() {
+    if (type === "revision") {
+      const progress = loadLectureProgress();
+      saveLectureProgress(markRevisionCompleted(progress, id));
+      router.push("/lecture");
+      return;
+    }
+
     if (type !== "letter") {
       router.push("/lecture");
       return;

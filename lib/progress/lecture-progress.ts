@@ -15,7 +15,29 @@ export type LectureProgressV2 = {
   modules: Record<string, ModuleState>;
   submodules: Record<string, ItemState>;
   evaluations?: Record<string, EvalResult>;
+  revisions?: Record<string, ItemState>;
 };
+
+export type RevisionCheckpoint = {
+  afterModuleId: string;
+  afterLetterId: string;
+  pair: string;
+};
+
+export const REVISION_CHECKPOINTS: RevisionCheckpoint[] = [
+  { afterModuleId: "l1", afterLetterId: "o", pair: "a-o" },
+  { afterModuleId: "l1", afterLetterId: "u", pair: "i-u" },
+  { afterModuleId: "l1", afterLetterId: "y", pair: "e-y" },
+  { afterModuleId: "l2", afterLetterId: "c", pair: "b-c" },
+  { afterModuleId: "l2", afterLetterId: "g", pair: "d-g" },
+  { afterModuleId: "l2", afterLetterId: "p", pair: "k-p" },
+  { afterModuleId: "l2", afterLetterId: "t", pair: "q-t" },
+  { afterModuleId: "l3", afterLetterId: "j", pair: "f-j" },
+  { afterModuleId: "l3", afterLetterId: "n", pair: "l-m" },
+  { afterModuleId: "l3", afterLetterId: "s", pair: "n-r" },
+  { afterModuleId: "l3", afterLetterId: "z", pair: "s-v" },
+  { afterModuleId: "l4", afterLetterId: "x", pair: "z-w" },
+];
 
 type SubEntry = { moduleId: string; letterId: string };
 
@@ -85,6 +107,21 @@ export function getModuleState(p: LectureProgressV2, moduleId: string): ModuleSt
   return p.modules[moduleId] ?? "locked";
 }
 
+export function getRevisionState(p: LectureProgressV2, pair: string): ItemState {
+  const stored = p.revisions?.[pair];
+  if (stored === "completed") return "completed";
+  const checkpoint = REVISION_CHECKPOINTS.find((r) => r.pair === pair);
+  if (checkpoint) {
+    const prevState = getSubmoduleState(p, checkpoint.afterModuleId, checkpoint.afterLetterId);
+    if (prevState === "completed") return "available";
+  }
+  return stored ?? "locked";
+}
+
+export function markRevisionCompleted(p: LectureProgressV2, pair: string): LectureProgressV2 {
+  return { ...p, revisions: { ...p.revisions, [pair]: "completed" } };
+}
+
 export function markSubmoduleCompleted(
   p: LectureProgressV2,
   moduleId: string,
@@ -94,9 +131,21 @@ export function markSubmoduleCompleted(
     version: 2,
     modules: { ...p.modules },
     submodules: { ...p.submodules },
+    evaluations: { ...p.evaluations },
+    revisions: { ...p.revisions },
   };
 
   next.submodules[subKey(moduleId, letterId)] = "completed";
+
+  const revCheckpoint = REVISION_CHECKPOINTS.find(
+    (r) => r.afterModuleId === moduleId && r.afterLetterId === letterId,
+  );
+  if (revCheckpoint) {
+    const revs = next.revisions ?? {};
+    if (revs[revCheckpoint.pair] !== "completed") {
+      next.revisions = { ...revs, [revCheckpoint.pair]: "available" };
+    }
+  }
 
   const idx = SUBMODULE_SEQUENCE.findIndex(
     (s) => s.moduleId === moduleId && s.letterId === letterId,
