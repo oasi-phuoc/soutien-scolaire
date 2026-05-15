@@ -66,17 +66,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isGridStep = step.key === "grid-upper" || step.key === "grid-lower";
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isSoundImageStep = step.key === "sound-image";
-  const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep;
+  const isSoundAudioStep = step.key === "sound-audio";
+  const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
     if (isGridStep) gridRef.current?.reset();
     else if (isWordStep) wordRef.current?.reset();
-    else if (isSoundImageStep) soundImageRef.current?.reset();
+    else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
   }
   function exerciseValidate() {
     if (isGridStep) gridRef.current?.validate();
     else if (isWordStep) wordRef.current?.validate();
-    else if (isSoundImageStep) soundImageRef.current?.validate();
+    else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.validate();
   }
 
   function goBack() {
@@ -139,7 +140,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       case "sound-image":
         return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="image" />;
       case "sound-audio":
-        return <SoundPicker key={k} phoneme={data.phoneme} items={data.soundItems} mode="audio" />;
+        return <SoundPicker key={k} ref={soundImageRef} phoneme={data.phoneme} mode="audio" />;
       case "syllables":
         if (data.type !== "consonant") return null;
         return <SyllableGrid key={k} syllables={data.syllableGrid} />;

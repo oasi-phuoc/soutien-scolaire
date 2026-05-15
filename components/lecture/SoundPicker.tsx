@@ -3,22 +3,16 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
-import type { SoundItem } from "@/lib/curriculum/lecture-data";
 
 export interface SoundPickerHandle {
   reset: () => void;
   validate: () => void;
 }
 
-// ── audio-only mode (unchanged) ───────────────────────────────────────────────
-
 interface AudioProps {
   phoneme: string;
-  items: SoundItem[];
   mode: "audio";
 }
-
-// ── image mode (new 4×4 grid) ─────────────────────────────────────────────────
 
 interface ImageProps {
   phoneme: string;
@@ -29,12 +23,10 @@ type Props = AudioProps | ImageProps;
 
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
 
-// ── Image grid component ──────────────────────────────────────────────────────
-
 export const SoundPicker = forwardRef<SoundPickerHandle, Props>(
   function SoundPicker(props, ref) {
     if (props.mode === "audio") {
-      return <AudioPicker {...props} ref={ref} />;
+      return <AudioPicker phoneme={props.phoneme} ref={ref} />;
     }
     return <ImagePicker phoneme={props.phoneme} ref={ref} />;
   },
@@ -121,10 +113,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                   }}
                   className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
                 >
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                  </svg>
+                  <SmallSpeakerIcon />
                 </button>
               </button>
             );
@@ -135,31 +124,42 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
   },
 );
 
-// ── AudioPicker (original behaviour, unchanged) ───────────────────────────────
+// ── AudioPicker ───────────────────────────────────────────────────────────────
 
-const AudioPicker = forwardRef<SoundPickerHandle, AudioProps>(
-  function AudioPicker({ phoneme, items }, ref) {
-    const [selected, setSelected] = useState<Set<number>>(() => new Set());
+const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
+  function AudioPicker({ phoneme }, ref) {
+    const [items, setItems] = useState(() => randomSoundItems(phoneme, 16));
+    const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
     const [validated, setValidated] = useState(false);
 
     const reset = useCallback(() => {
-      setSelected(new Set());
+      setItems(randomSoundItems(phoneme, 16));
+      setStates(Array(16).fill("idle"));
       setValidated(false);
-    }, []);
+    }, [phoneme]);
 
     const validate = useCallback(() => {
       if (validated) return;
       setValidated(true);
-    }, [validated]);
+      setStates((prev) =>
+        prev.map((s, i) => {
+          const isCorrect = wordHasPhoneme(items[i]!, phoneme);
+          if (s === "selected") return isCorrect ? "correct" : "wrong";
+          if (isCorrect) return "missed";
+          return "idle";
+        }),
+      );
+    }, [validated, items, phoneme]);
 
     useImperativeHandle(ref, () => ({ reset, validate }), [reset, validate]);
 
     function toggle(i: number) {
       if (validated) return;
-      speak(items[i]!.label);
-      setSelected((prev) => {
-        const next = new Set(prev);
-        if (next.has(i)) next.delete(i); else next.add(i);
+      const word = items[i]!;
+      new Audio(`/assets/words/son/${word.label}.mp3`).play().catch(() => speak(word.label));
+      setStates((prev) => {
+        const next = [...prev] as CellState[];
+        next[i] = prev[i] === "selected" ? "idle" : "selected";
         return next;
       });
     }
@@ -171,34 +171,40 @@ const AudioPicker = forwardRef<SoundPickerHandle, AudioProps>(
           Écoutez et touchez ceux où vous entendez{" "}
           <strong className="text-[var(--color-accent-lecture)]">{phoneme}</strong>
         </p>
-        <div className="grid grid-cols-2 gap-2">
-          {items.map((item, i) => {
-            const isSel = selected.has(i);
-            const isCorrect = item.hasSound;
+        <div className="grid grid-cols-4 gap-2">
+          {items.map((word, i) => {
+            const s = states[i]!;
+            const audioSrc = `/assets/words/son/${word.label}.mp3`;
             return (
               <button
-                key={i}
+                key={`${word.label}-${i}`}
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`flex min-h-20 flex-col items-center justify-center gap-2 rounded-[var(--radius-lg)] border p-4 transition-colors ${
-                  validated
-                    ? isSel && isCorrect
-                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                      : isSel && !isCorrect
-                        ? "border-red-400 bg-red-50 dark:bg-red-900/20"
-                        : !isSel && isCorrect
-                          ? "border-red-400 bg-red-50 dark:bg-red-900/20"
-                          : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]"
-                    : isSel
-                      ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 bg-[var(--color-bg-secondary)] transition-colors ${
+                  s === "correct"
+                    ? "border-[var(--color-accent-lecture)]"
+                    : s === "wrong" || s === "missed"
+                      ? "border-red-400"
+                      : s === "selected"
+                        ? "border-[var(--color-accent-lecture)]"
+                        : "border-[var(--color-border-default)]"
                 }`}
               >
-                <SpeakerIcon />
-                <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
-                  {item.label}
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <LargeSpeakerIcon state={s} />
                 </span>
+                <button
+                  type="button"
+                  aria-label={`Écouter`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    new Audio(audioSrc).play().catch(() => speak(word.label));
+                  }}
+                  className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
+                >
+                  <SmallSpeakerIcon />
+                </button>
               </button>
             );
           })}
@@ -208,9 +214,26 @@ const AudioPicker = forwardRef<SoundPickerHandle, AudioProps>(
   },
 );
 
-function SpeakerIcon() {
+function SmallSpeakerIcon() {
   return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-text-secondary)]" aria-hidden>
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+      <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+    </svg>
+  );
+}
+
+function LargeSpeakerIcon({ state }: { state: CellState }) {
+  const color =
+    state === "correct"
+      ? "var(--color-accent-lecture)"
+      : state === "wrong" || state === "missed"
+        ? "rgb(248 113 113)"
+        : state === "selected"
+          ? "var(--color-accent-lecture)"
+          : "var(--color-text-secondary)";
+  return (
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" aria-hidden>
       <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
       <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
     </svg>
