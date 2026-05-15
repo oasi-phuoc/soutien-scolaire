@@ -3,6 +3,7 @@
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
 import { randomSoundItems, wordHasPhoneme } from "@/lib/curriculum/word-pool";
+import { getWordAudioPath } from "@/lib/utils/audio";
 
 export interface SoundPickerHandle {
   reset: () => void;
@@ -81,7 +82,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
           {items.map((word, i) => {
             const s = states[i]!;
             const imgSrc = `/assets/words/img/${word.label}.jpg`;
-            const audioSrc = `/assets/words/son/${word.label}.mp3`;
+            const audioSrc = getWordAudioPath(word.label);
             return (
               <button
                 key={`${word.label}-${i}`}
@@ -156,7 +157,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
     function toggle(i: number) {
       if (validated) return;
       const word = items[i]!;
-      new Audio(`/assets/words/son/${word.label}.mp3`).play().catch(() => speak(word.label));
+      new Audio(getWordAudioPath(word.label)).play().catch(() => speak(word.label));
       setStates((prev) => {
         const next = [...prev] as CellState[];
         next[i] = prev[i] === "selected" ? "idle" : "selected";
@@ -174,7 +175,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const audioSrc = `/assets/words/son/${word.label}.mp3`;
+            const audioSrc = getWordAudioPath(word.label);
             return (
               <button
                 key={`${word.label}-${i}`}

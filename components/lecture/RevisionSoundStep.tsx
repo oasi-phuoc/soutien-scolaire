@@ -2,6 +2,7 @@
 
 import { forwardRef, useCallback, useImperativeHandle, useState } from "react";
 import { speak } from "@/lib/utils/speech";
+import { getWordAudioPath } from "@/lib/utils/audio";
 
 export interface RevisionSoundStepHandle {
   reset: () => void;
@@ -46,7 +47,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
     }
 
     function playAudio(word: string) {
-      new Audio(`/assets/words/son/${word}.mp3`).play().catch(() => speak(word));
+      new Audio(getWordAudioPath(word)).play().catch(() => speak(word));
     }
 
     return (

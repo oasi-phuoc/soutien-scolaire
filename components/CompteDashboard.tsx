@@ -10,6 +10,8 @@ import { loadProgress, saveProgress, setLevel } from "@/lib/progress/math-progre
 import { LEVEL_LABELS, type LevelKey } from "@/lib/scoring";
 
 const STORAGE_KEY = "soutien:pivot";
+const GENRE_KEY = "soutien-genre";
+type GenreKey = "f" | "m";
 
 export type CompteDashboardProps = {
   user: { id: string; email: string } | null;
@@ -30,10 +32,13 @@ export function CompteDashboard({
   const [saved, setSaved] = useState(false);
   const [pivotMsg, setPivotMsg] = useState<string | null>(null);
   const [level, setLevelState] = useState<LevelKey>("base");
+  const [genre, setGenreState] = useState<GenreKey>("f");
 
   useEffect(() => {
     const prog = loadProgress();
     setLevelState(prog.level ?? "base");
+    const g = localStorage.getItem(GENRE_KEY) as GenreKey | null;
+    if (g === "f" || g === "m") setGenreState(g);
   }, []);
 
   useEffect(() => {
@@ -166,6 +171,48 @@ export function CompteDashboard({
                     </span>
                     <span className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
                       {LEVEL_LABELS[lvl]}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+
+        <section aria-labelledby="genre-heading">
+          <h2 id="genre-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+            Voix
+          </h2>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            Voix utilisée pour les sons des mots en lecture.
+          </p>
+          <ul className="mt-4 space-y-2">
+            {([["f", "Féminine"], ["m", "Masculine"]] as [GenreKey, string][]).map(([key, label]) => {
+              const checked = genre === key;
+              return (
+                <li key={key}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setGenreState(key);
+                      localStorage.setItem(GENRE_KEY, key);
+                    }}
+                    className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 text-left transition-colors ${
+                      checked
+                        ? "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40"
+                        : "border-zinc-200 hover:border-teal-300 dark:border-zinc-700 dark:hover:border-teal-800"
+                    }`}
+                  >
+                    <span
+                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                        checked ? "border-teal-600 bg-teal-600" : "border-zinc-400"
+                      }`}
+                      aria-hidden
+                    >
+                      {checked ? <span className="block h-2 w-2 rounded-full bg-white" /> : null}
+                    </span>
+                    <span className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                      {label}
                     </span>
                   </button>
                 </li>
