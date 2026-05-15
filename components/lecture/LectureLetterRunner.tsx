@@ -9,7 +9,7 @@ import { LetterGrid, type LetterGridHandle } from "./LetterGrid";
 import { WordSpotter, type WordSpotterHandle } from "./WordSpotter";
 import { SoundPicker, type SoundPickerHandle } from "./SoundPicker";
 import { SyllableGrid } from "./SyllableGrid";
-import { PronunciationChain } from "./PronunciationChain";
+import { PronunciationChain, type PronunciationChainHandle } from "./PronunciationChain";
 import {
   loadLectureProgress,
   saveLectureProgress,
@@ -59,6 +59,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
+  const pronounceRef = useRef<PronunciationChainHandle>(null);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === steps.length - 1;
@@ -67,12 +68,14 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   const isWordStep = ["word-upper", "word-upper-1", "word-upper-2", "word-lower"].includes(step.key);
   const isSoundImageStep = step.key === "sound-image";
   const isSoundAudioStep = step.key === "sound-audio";
+  const isPronounceStep = step.key === "pronounce";
   const showExerciseButtons = isGridStep || isWordStep || isSoundImageStep || isSoundAudioStep;
 
   function exerciseReset() {
     if (isGridStep) gridRef.current?.reset();
     else if (isWordStep) wordRef.current?.reset();
     else if (isSoundImageStep || isSoundAudioStep) soundImageRef.current?.reset();
+    else if (isPronounceStep) pronounceRef.current?.reset();
   }
   function exerciseValidate() {
     if (isGridStep) gridRef.current?.validate();
@@ -145,7 +148,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
         if (data.type !== "consonant") return null;
         return <SyllableGrid key={k} syllables={data.syllableGrid} />;
       case "pronounce":
-        return <PronunciationChain key={k} phoneme={data.phoneme} chain={data.pronunciationChain} />;
+        return <PronunciationChain key={k} ref={pronounceRef} phoneme={data.phoneme} chain={data.pronunciationChain} />;
       default:
         return null;
     }
@@ -198,7 +201,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             Retour
           </button>
 
-          {showExerciseButtons && (
+          {(showExerciseButtons || isPronounceStep) && (
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -211,16 +214,18 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
                   <path d="M3.51 15a9 9 0 1 0 .49-4" />
                 </svg>
               </button>
-              <button
-                type="button"
-                aria-label="Valider"
-                onClick={exerciseValidate}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                  <path d="M20 6L9 17l-5-5" />
-                </svg>
-              </button>
+              {!isPronounceStep && (
+                <button
+                  type="button"
+                  aria-label="Valider"
+                  onClick={exerciseValidate}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </button>
+              )}
             </div>
           )}
 
