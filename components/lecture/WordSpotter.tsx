@@ -81,7 +81,7 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
           {words.map((word, wi) => (
             <li
               key={wi}
-              className="flex items-center justify-center gap-0.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3"
+              className="flex flex-wrap items-center justify-center gap-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-3"
             >
               {word.split("").map((char, li) => {
                 const key = `${wi}-${li}`;
@@ -92,14 +92,14 @@ export const WordSpotter = forwardRef<WordSpotterHandle, Props>(
                     type="button"
                     disabled={validated}
                     onClick={() => tap(wi, li)}
-                    className={`min-w-[1.25rem] text-center text-base tracking-widest transition-colors ${
+                    className={`flex h-9 w-9 items-center justify-center rounded-lg border text-sm font-bold transition-colors ${
                       s === "correct"
-                        ? "font-bold text-[var(--color-accent-lecture)]"
+                        ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
                         : s === "wrong" || s === "missed"
-                          ? "font-bold text-red-500"
+                          ? "border-red-400 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400"
                           : s === "selected"
-                            ? "font-bold text-[var(--color-accent-lecture)]"
-                            : "font-semibold text-[var(--color-text-primary)]"
+                            ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/15 text-[var(--color-accent-lecture)]"
+                            : "border-transparent text-[var(--color-text-primary)]"
                     }`}
                   >
                     {char}
