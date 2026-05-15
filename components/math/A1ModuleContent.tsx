@@ -231,7 +231,7 @@ function checkTensWord(input: string, num: number): boolean {
 
 function DigitGuide({ digit }: { digit: number }) {
   return (
-    {/* eslint-disable-next-line @next/next/no-img-element */}
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`/images/digits/${digit}.png`}
       alt={`Guide de tracé pour le chiffre ${digit}`}
