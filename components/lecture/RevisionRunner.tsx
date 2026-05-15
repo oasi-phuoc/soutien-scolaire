@@ -150,9 +150,6 @@ export function RevisionRunner({ data }: Props) {
         <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
           {data.title}
         </h1>
-        <p className="text-sm text-[var(--color-text-secondary)]">
-          {data.phonemeA} · {data.phonemeB}
-        </p>
       </header>
 
       {/* Progress bar */}
