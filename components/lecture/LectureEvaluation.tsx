@@ -673,10 +673,6 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
         ))}
       </div>
 
-      <p className="mb-6 text-xs text-[var(--color-text-secondary)]">
-        {isResults ? "Résultats finaux" : `Exercice ${stepIdx + 1} sur 5 — ${STEP_LABELS[step]}`}
-      </p>
-
       <div className="min-h-[280px]">
         {step === "grid" && (
           <GridExercise key={`${evalKey}-${stepIdx}`} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
