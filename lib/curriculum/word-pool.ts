@@ -161,6 +161,144 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "zoo",        phonemes: ["/z/"] },
 ];
 
+// ── Large word list for WordSpotter (letter recognition only, no phoneme data) ─
+
+export const LETTER_WORDS: string[] = [
+  // ── A ──
+  "arbre","ami","ananas","abricot","avion","animal","araignée","alphabet","autobus",
+  "ambulance","abeille","aigle","arc","armoire","assiette","artiste","agenda",
+  "antilope","astronaute","accordéon","acrobate","alligator","anniversaire",
+  "aquarium","arrosoir","aspirateur","araignée","avocado","albatros","araignée",
+  "alouette","agrafeuse","aimant","ampoule","ancre","antenne","armure","atlas",
+  "avalanche","azote","arlequin","abricot","anneau","atome","arène","arche",
+  // ── B ──
+  "ballon","banane","bateau","bébé","biberon","bras","bureau","balle","bus",
+  "bouton","bijou","biche","botte","bougie","branche","brosse","boulanger",
+  "bouteille","boîte","baleine","bonbon","botte","bosquet","brocoli","baguette",
+  "bleuet","biscuit","bobine","bœuf","bombardier","bouclier","bourdon","bouvreuil",
+  "brebis","brindille","brochet","bulle","bûcheron","buisson","bulldozer",
+  // ── C ──
+  "café","canard","carotte","casque","cube","crayon","crocodile","citron","cerise",
+  "chat","chien","chapeau","château","cheval","cochon","crabe","champignon","camion",
+  "coussin","corde","clef","cigogne","clown","cactus","canon","carpe","cloche",
+  "couteau","chenille","calcul","calendrier","canari","canif","capuchon","carnaval",
+  "castor","cerf","cerf-volant","chameau","château","chimie","chouette","chute",
+  "cigare","ciment","ciseaux","cloche","cloison","clôture","cobra","colimaçon",
+  "colombe","comète","compas","coquille","corail","corde","corbeau","cornichon",
+  // ── D ──
+  "dauphin","domino","dragon","drapeau","dodo","danse","dindon","diplôme","dent",
+  "doigt","dalmatien","dessert","dinosaure","detective","daim","décoration",
+  "déluge","dentiste","désert","diable","dictionnaire","dinde","diplôme","divan",
+  "dolmen","donjon","dossier","douve","dromadaire","dunette","durion",
+  // ── E ──
+  "école","étoile","épée","éléphant","escalier","écharpe","écureuil","enfant",
+  "enveloppe","éponge","épingle","église","étable","escargot","éventail","érable",
+  "étagère","échelle","épaule","éclair","écran","édredon","effrayant","égout",
+  "éléphant","émeu","encre","endroit","entonnoir","épice","équipe","erreur",
+  "espace","étang","étiquette","étoffe","étudiant","éveil","évier",
+  // ── F ──
+  "farine","flamme","fleur","forêt","fraise","fromage","fusée","flûte","fée",
+  "fenêtre","fourmi","fanfare","famille","foulard","fantôme","framboise","flaçon",
+  "fontaine","falaise","feuille","fauteuil","faucon","fée","fer","ferme","feston",
+  "ficelle","filet","flamant","flan","flèche","flore","flotte","foin","fondue",
+  "fourche","fourchette","fracture","fragment","frein","frise","frontière","fruit",
+  // ── G ──
+  "gâteau","girafe","gorille","grenouille","guitare","gare","grue","glace","globe",
+  "gomme","grotte","guêpe","géant","glacier","glaçon","géranium","gilet","girouette",
+  "glacier","gland","glouton","gobelet","goéland","goémon","gorge","gourde",
+  "gousse","gouttière","goyave","grain","grappe","gravier","grenade","grillon",
+  "grippe","grizzly","grotte","groupe","guépard","guirlande","guitoune",
+  // ── H ──
+  "herbe","hibou","hôpital","hélicoptère","horloge","hamster","harpe","héron",
+  "hérisson","haricot","hippopotame","hamac","hangar","harnais","harfang",
+  "harmonica","hélice","hermine","hibou","hippocampe","hirondelle","hiver",
+  "homard","horizon","houe","houx","huître","hyène",
+  // ── I ──
+  "île","ibis","image","igloo","iris","insecte","infirmière","imprimante",
+  "iguane","index","indien","industrie","infini","instrument","interrupteur",
+  "invitation","iode","isotope","ivoire","if",
+  // ── J ──
+  "jardin","jouet","jus","bijou","jonquille","jungle","journal","jambe","jupe",
+  "jument","jeton","jongleur","jetée","javelot","judo","jaguar","jalousie",
+  "jambon","japon","jasmin","jet","jeu","jeune","jonc","joue","joujou","joyau",
+  // ── K ──
+  "kangourou","kayak","kiwi","koala","képi","karaté","kimono","ketchup","klaxon",
+  "kermesse","kérosène","kilo","kirsch","krakenite","kremlin","kyste",
+  // ── L ──
+  "lapin","légume","livre","lune","loto","lime","lion","lézard","lampe","lettre",
+  "libellule","locomotive","loup","loutre","lanterne","licorne","lunettes",
+  "lac","lama","langouste","lanière","lapin","laque","larme","lavande","levier",
+  "liège","lierre","limace","linotte","lionceau","liseron","litchi","litige",
+  "loir","lombric","lotte","louche","lucarne","luciole","lutin","lynx",
+  // ── M ──
+  "maison","maman","miroir","montagne","moto","marteau","mouton","mouche",
+  "médecin","melon","moustique","manteau","monstre","musique","miel","mandarine",
+  "mappemonde","marguerite","marsouin","martin","martinet","masque","mât",
+  "médaille","menhir","merle","mésange","météore","miette","milan","mimosa",
+  "moineau","moule","mûre","muret","myrtille","mystère","méduse",
+  // ── N ──
+  "nid","noisette","nuage","nuit","neige","nénuphar","nœud","nounours","nougat",
+  "narval","naseau","navet","naïade","nasse","nautile","navette","navet",
+  "nébuleuse","nectarine","nenuphar","névé","nickel","nigelle","niveau","noix",
+  "nomade","noyau","numéro","nymphe",
+  // ── O ──
+  "oiseau","orange","ours","oreille","ordinateur","olive","otarie","ogre",
+  "obélisque","océan","oeillet","ombre","omelette","ongle","opossum","oranger",
+  "orchidée","orgue","ortie","oscille","oubli","outarde","outre","ovale","ovni",
+  // ── P ──
+  "panda","papillon","piano","poisson","pomme","puzzle","piste","perroquet",
+  "poney","pieuvre","pirate","pantalon","pelican","phoque","panthère","poire",
+  "pastèque","pinceau","parapluie","patate","poulpe","peigne","pelote","pendule",
+  "péniche","perche","perdrix","pétiole","phacochère","pie","pigeon","pilote",
+  "piment","pinède","pintade","piscine","pivot","placard","planète","platane",
+  "plinthe","plongeon","plume","poireau","polaire","pompon","ponctuation",
+  "portail","portique","potager","poulain","poutre","prairie","praire","prisme",
+  "propulseur","prunier","puce","puma","punaise","python",
+  // ── Q ──
+  "queue","quille","quiche","quartier","quinze","quille","quetzal","quinquet",
+  "quinconce","quiproquo","quota",
+  // ── R ──
+  "radis","renard","requin","rivière","robot","rose","rue","raisin","robe",
+  "rhinocéros","rouleau","raquette","rame","ruban","roseau","ragondin","rainette",
+  "rameau","ramier","rasoir","rateau","rayon","récif","réglisse","rémora","rennet",
+  "reptile","réseau","rhododendron","rigole","ronce","rosier","rouget","rouille",
+  "rouleau","roussette","ruche","ruisseau","rutabaga",
+  // ── S ──
+  "sapin","serpent","singe","soleil","souris","stylo","solo","cire","sac",
+  "sandwich","sanglier","salade","sauterelle","saucisse","saumon","scarabée",
+  "sorcière","sirop","seau","sabot","safran","saule","sauterelle","scorpion",
+  "seiche","sentier","séquoia","serre","silex","siphon","sittelle","socle",
+  "soupe","sous-marin","spatule","sphère","spirale","stalactite","stalagmite",
+  "starlette","station","steppe","stimulus","stuc","stylet","submerge","succès",
+  "suisse","sultan","superbe","surface","suricate","sycomore",
+  // ── T ──
+  "tapis","tigre","tomate","tortue","train","tulipe","table","tasse","tambour",
+  "tournesol","taupe","théière","tonnerre","télescope","toile","trompette",
+  "trottoir","tacot","tamanoir","tamarin","taon","tartan","teckel","termite",
+  "terrier","tige","timon","tisserin","toboggan","toucan","trèfle","trident",
+  "triton","tronc","troupeau","truffe","truite","tube","tunnel","turbine","tuyau",
+  // ── U ──
+  "usine","uniforme","ukulélé","ultrason","urne","urus","utopie",
+  // ── V ──
+  "vache","valise","vampire","vélo","violon","verre","vêtement","voiture",
+  "ville","vitre","violette","vacances","vipère","volcan","voisin","vaisseau",
+  "vallée","vanille","varech","vautour","végétal","ventouse","verdure","verrou",
+  "veste","vinaigre","vinaigrette","vison","vitrail","volaille","volet","volute",
+  "vortex","voûte","voyage","vulture",
+  // ── W ──
+  "wagon","western","wombat","wok","wifi","wapiti","walrus","waterpolo",
+  // ── X ──
+  "saxophone","xylophone","taxi","boxe","index","luxe","texte","oxygène",
+  "exercice","maximum","hexagone","préfixe","silex","sphinx","vexant",
+  // ── Y ──
+  "yaourt","yoga","yoyo","yeux","yacht","yak","kayak","crayon","stylo","xylophone",
+  "pyramide","mystère","système","cycle","gymnase","type","encyclopédie","pyjama",
+  "crayons","tuyau","joyau","mayonnaise","voyou","ayant","crayon","yucca",
+  // ── Z ──
+  "zèbre","zéro","zigzag","zoo","zombie","zone","zapper","zénith","zinc","zircon",
+  "zombie","zonard","zoologie","zouave","zut","pizza","trapèze","bronze","gazette",
+];
+
 // ── helpers ───────────────────────────────────────────────────────────────────
 
 export function wordHasPhoneme(item: WordItem, phoneme: string): boolean {
@@ -179,10 +317,8 @@ function shuffle<T>(arr: T[]): T[] {
 /** Random labels (for WordSpotter): words whose written form contains the letter. */
 export function randomWordsWithLetter(letter: string, n: number): string[] {
   const lc = letter.toLowerCase();
-  const pool = WORD_ITEMS.filter((w) => w.label.toLowerCase().includes(lc));
-  return shuffle(pool)
-    .slice(0, n)
-    .map((w) => w.label);
+  const pool = LETTER_WORDS.filter((w) => w.toLowerCase().includes(lc));
+  return shuffle(pool).slice(0, n);
 }
 
 /**
