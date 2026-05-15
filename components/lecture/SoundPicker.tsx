@@ -88,11 +88,11 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const imgSrc = `/assets/words/img/${word}.jpg`;
-            const audioSrc = `/assets/words/son/${word}.mp3`;
+            const imgSrc = `/assets/words/img/${word.label}.jpg`;
+            const audioSrc = `/assets/words/son/${word.label}.mp3`;
             return (
               <button
-                key={`${word}-${i}`}
+                key={`${word.label}-${i}`}
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
@@ -109,10 +109,10 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 {/* Speaker button top-right */}
                 <button
                   type="button"
-                  aria-label={`Écouter ${word}`}
+                  aria-label={`Écouter ${word.label}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    new Audio(audioSrc).play().catch(() => speak(word));
+                    new Audio(audioSrc).play().catch(() => speak(word.label));
                   }}
                   className="absolute top-1 right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm z-10"
                 >
@@ -125,11 +125,11 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={imgSrc}
-                  alt={word}
+                  alt={word.label}
                   className="h-16 w-full object-cover"
                 />
                 <span className="mt-0.5 text-[10px] font-semibold text-[var(--color-text-secondary)] leading-tight px-1 text-center">
-                  {word}
+                  {word.label}
                 </span>
               </button>
             );
