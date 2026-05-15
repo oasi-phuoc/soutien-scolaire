@@ -48,7 +48,7 @@ function makeMixedGrid(upper: string, lower: string): string[] {
     }
   }
   const targets = [upper, upper, upper, lower, lower, lower];
-  return shuffle([...targets, ...shuffle(distractors).slice(0, 10)]);
+  return shuffle([...targets, ...shuffle(distractors).slice(0, 19)]);
 }
 
 function normalize(s: string): string {
@@ -109,7 +109,7 @@ function GridExercise({
   upper, lower, onScore, shouldValidate,
 }: { upper: string; lower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
   const [grid] = useState(() => makeMixedGrid(upper, lower));
-  const [states, setStates] = useState<CellState[]>(() => Array(16).fill("idle"));
+  const [states, setStates] = useState<CellState[]>(() => Array(25).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   function validate() {
@@ -151,7 +151,7 @@ function GridExercise({
         <strong className="text-[var(--color-accent-lecture)]">{upper}</strong> et{" "}
         <strong className="text-[var(--color-accent-lecture)]">{lower}</strong>
       </p>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {grid.map((cell, i) => {
           const s = states[i]!;
           return (
