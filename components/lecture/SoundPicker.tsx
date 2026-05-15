@@ -181,7 +181,7 @@ const AudioPicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
                   s === "correct"
                     ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
