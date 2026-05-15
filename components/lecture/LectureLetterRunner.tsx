@@ -112,8 +112,10 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   function handleEvalDone(grade: number, passed: boolean, total: number) {
     const prog = loadLectureProgress();
     const withEval = saveEvaluationResult(prog, moduleId, data.letterLower, { grade, passed, total });
-    const withCompleted = markSubmoduleCompleted(withEval, moduleId, data.letterLower);
-    saveLectureProgress(withCompleted);
+    const final = passed
+      ? markSubmoduleCompleted(withEval, moduleId, data.letterLower)
+      : withEval;
+    saveLectureProgress(final);
     router.push("/lecture");
   }
 

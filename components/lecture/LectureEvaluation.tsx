@@ -103,7 +103,7 @@ function IconSpeaker() {
   );
 }
 
-// ─── Exercise 1 — Mixed Grid (4 pts, all or nothing) ─────────────────────────
+// ─── Exercise 1 — Mixed Grid (4 pts or 2 pts partial) ────────────────────────
 
 function GridExercise({
   upper, lower, onScore, shouldValidate,
@@ -122,8 +122,12 @@ function GridExercise({
       return "idle" as CellState;
     });
     setStates(newStates);
-    const perfect = !newStates.some((s) => s === "wrong" || s === "missed");
-    onScore(perfect ? 4 : 0);
+    const correctCount = newStates.filter((s) => s === "correct").length;
+    const wrongCount = newStates.filter((s) => s === "wrong").length;
+    const missedCount = newStates.filter((s) => s === "missed").length;
+    const perfect = wrongCount === 0 && missedCount === 0;
+    const halfPassed = correctCount >= 3 && wrongCount === 0; // 3 = half of 6 targets
+    onScore(perfect ? 4 : halfPassed ? 2 : 0);
   }
 
   const validateRef = useRef(validate);
@@ -602,6 +606,7 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
   const [stepScored, setStepScored] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [evalKey, setEvalKey] = useState(0);
 
   const step = EVAL_STEPS[stepIdx]!;
   const isResults = step === "results";
@@ -609,6 +614,14 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
   const showValidateBtn = !isResults && !isPronounceStep && !stepScored;
 
   const goNextRef = useRef<() => void>(() => {});
+
+  function restart() {
+    setStepIdx(0);
+    setScores([null, null, null, null, null]);
+    setStepScored(false);
+    setShouldValidate(false);
+    setEvalKey((k) => k + 1);
+  }
 
   function goNext() {
     if (isResults) {
@@ -665,19 +678,19 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
 
       <div className="min-h-[280px]">
         {step === "grid" && (
-          <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
+          <GridExercise key={`${evalKey}-${stepIdx}`} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
         )}
         {step === "words" && (
-          <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
+          <WordsExercise key={`${evalKey}-${stepIdx}`} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
         )}
         {step === "sound-image" && (
-          <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
+          <SoundImageExercise key={`${evalKey}-${stepIdx}`} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
         )}
         {step === "sound-audio" && (
-          <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
+          <SoundAudioExercise key={`${evalKey}-${stepIdx}`} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
         )}
         {step === "pronounce" && (
-          <PronounceExercise key={stepIdx} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
+          <PronounceExercise key={`${evalKey}-${stepIdx}`} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
         )}
         {step === "results" && (
           <ResultsScreen scores={scores} />
@@ -691,13 +704,31 @@ export function LectureEvaluation({ data, onBack, onDone }: Props) {
             <IconLeft /> Retour
           </button>
 
-          {showValidateBtn && (
-            <button type="button" onClick={() => setShouldValidate(true)}
-              className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
-              aria-label="Valider">
-              <IconCheck />
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              aria-label="Recommencer l'évaluation"
+              onClick={restart}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <path d="M1 4v6h6" />
+                <path d="M3.51 15a9 9 0 1 0 .49-4" />
+              </svg>
             </button>
-          )}
+            {showValidateBtn && (
+              <button type="button" onClick={() => setShouldValidate(true)}
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
+                aria-label="Valider">
+                <IconCheck />
+              </button>
+            )}
+            {!isResults && scores.filter((s) => s !== null).length > 0 && (
+              <span className="text-xs text-[var(--color-text-secondary)]">
+                {scores.reduce<number>((a, b) => a + (b ?? 0), 0)} pts
+              </span>
+            )}
+          </div>
 
           <button type="button" onClick={goNext}
             disabled={!isResults && !stepScored && !isPronounceStep}
