@@ -96,17 +96,22 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 type="button"
                 onClick={() => toggle(i)}
                 disabled={validated}
-                className={`relative flex flex-col items-center justify-end overflow-hidden rounded-[var(--radius-lg)] border pb-1 transition-colors ${
+                className={`relative aspect-square overflow-hidden rounded-[var(--radius-lg)] border-2 transition-colors ${
                   s === "correct"
-                    ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
+                    ? "border-[var(--color-accent-lecture)]"
                     : s === "wrong" || s === "missed"
-                      ? "border-red-400 bg-red-50 dark:bg-red-900/20"
+                      ? "border-red-400"
                       : s === "selected"
-                        ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10"
-                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
+                        ? "border-[var(--color-accent-lecture)]"
+                        : "border-transparent"
                 }`}
               >
-                {/* Speaker button top-right */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgSrc}
+                  alt={word.label}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
                 <button
                   type="button"
                   aria-label={`Écouter ${word.label}`}
@@ -121,16 +126,6 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                     <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
                   </svg>
                 </button>
-
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={imgSrc}
-                  alt={word.label}
-                  className="h-16 w-full object-cover"
-                />
-                <span className="mt-0.5 text-[10px] font-semibold text-[var(--color-text-secondary)] leading-tight px-1 text-center">
-                  {word.label}
-                </span>
               </button>
             );
           })}
