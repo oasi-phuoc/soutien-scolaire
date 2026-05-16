@@ -9,6 +9,8 @@ import type {
   FillItem,
   MatchPair,
 } from "@/lib/curriculum/conjugation-data";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -48,19 +50,25 @@ function renderArrow(text: string) {
   );
 }
 
-function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
+function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
+  const isRtl = pivot === "ar" || pivot === "fa";
+
   return (
     <div className="space-y-5">
       {blocks.map((block, i) => {
         switch (block.type) {
           case "heading":
             return (
-              <h2
-                key={i}
-                className="text-lg font-bold text-[var(--color-text-primary)]"
-              >
-                {block.text}
-              </h2>
+              <div key={i} className={block.trans?.[pivot as keyof typeof block.trans] ? "space-y-0.5" : ""}>
+                <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+                  {block.text}
+                </h2>
+                {showTrans && block.trans?.[pivot as keyof typeof block.trans] && (
+                  <p className="text-sm text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                    {block.trans[pivot as keyof typeof block.trans]}
+                  </p>
+                )}
+              </div>
             );
 
           case "table":
@@ -163,33 +171,68 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
               </div>
             );
 
-          case "grid":
+          case "grid": {
+            const transH = block.transHeaders?.[pivot as keyof typeof block.transHeaders];
+            const transR = block.transRows?.[pivot as keyof typeof block.transRows];
             return (
-              <div key={i} className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="bg-[var(--color-accent-fr)]/15">
-                      {block.headers.map((h, hi) => (
-                        <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
-                          {h}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {block.rows.map((row, ri) => (
-                      <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
-                        {row.map((cell, ci) => (
-                          <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
-                            {renderArrow(cell)}
-                          </td>
+              <div key={i} className="space-y-2">
+                <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-[var(--color-accent-fr)]/15">
+                        {block.headers.map((h, hi) => (
+                          <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
+                            {h}
+                          </th>
                         ))}
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {block.rows.map((row, ri) => (
+                        <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
+                          {row.map((cell, ci) => (
+                            <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
+                              {renderArrow(cell)}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+                {showTrans && (transH || transR) && (
+                  <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]/60" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                    <table className="w-full text-sm">
+                      {transH && (
+                        <thead>
+                          <tr className="bg-[var(--color-accent-fr)]/8">
+                            {transH.map((h, hi) => (
+                              <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+                                {h}
+                              </th>
+                            ))}
+                          </tr>
+                        </thead>
+                      )}
+                      {transR && (
+                        <tbody>
+                          {transR.map((row, ri) => (
+                            <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
+                              {row.map((cell, ci) => (
+                                <td key={ci} className="px-3 py-2 text-xs text-[var(--color-text-secondary)]">
+                                  {renderArrow(cell)}
+                                </td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                )}
               </div>
             );
+          }
 
           case "plain_list":
             return (
@@ -201,29 +244,55 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
                 )}
                 <ul className="space-y-1.5">
                   {block.items.map((item, ii) => (
-                    <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                      <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
-                      <span>{renderArrow(item)}</span>
+                    <li key={ii} className="space-y-0.5">
+                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                        <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
+                        <span>{renderArrow(item)}</span>
+                      </div>
+                      {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
+                        <div className="ml-4 flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          <span className="mt-0.5 shrink-0">•</span>
+                          <span>{renderArrow(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
               </div>
             );
 
-          case "highlight":
+          case "highlight": {
+            const transLabel = block.transLabel?.[pivot as keyof typeof block.transLabel];
+            const transItems = block.transItems?.[pivot as keyof typeof block.transItems];
             return (
               <div key={i} className="space-y-1.5">
-                <p className="text-sm font-bold text-[var(--color-accent-fr)]">{block.label}</p>
+                <div className="space-y-0.5">
+                  <p className="text-sm font-bold text-[var(--color-accent-fr)]">{block.label}</p>
+                  {showTrans && transLabel && (
+                    <p className="text-xs font-bold text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                      {transLabel}
+                    </p>
+                  )}
+                </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {block.items.map((item, ii) => (
-                    <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                      <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>
-                      <span>{renderArrow(item)}</span>
+                    <li key={ii} className="space-y-0.5">
+                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                        <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>
+                        <span>{renderArrow(item)}</span>
+                      </div>
+                      {showTrans && transItems?.[ii] && (
+                        <div className="ml-4 flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          <span className="mt-0.5 shrink-0">•</span>
+                          <span>{renderArrow(transItems[ii]!)}</span>
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
               </div>
             );
+          }
 
           default:
             return null;
@@ -707,6 +776,9 @@ function ExerciseView({
 
 export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
+  const pivot = usePivotLang();
+  const pivotLabel = PIVOT_LANGS.find(l => l.code === pivot)?.label ?? pivot;
+  const [showTrans, setShowTrans] = useState(false);
   // theory pages: lesson.theory (always) + lesson.theory2 (optional)
   const theoryPages = lesson.theory2
     ? [lesson.theory, lesson.theory2]
@@ -784,10 +856,23 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           : `Exercice ${stepIdx - theoryCount + 1} / ${lesson.exercises.length}`}
       </p>
 
+      {/* Translate toggle (theory only) */}
+      {isTheory && pivot && (
+        <div className="mb-3 flex justify-end">
+          <button
+            type="button"
+            onClick={() => setShowTrans((s: boolean) => !s)}
+            className="text-xs text-[var(--color-text-secondary)] underline"
+          >
+            {showTrans ? "Masquer la traduction" : `Traduire (${pivotLabel})`}
+          </button>
+        </div>
+      )}
+
       {/* Content */}
       <div className="min-h-[280px]">
         {isTheory ? (
-          <TheoryView blocks={theoryPages[stepIdx]!} />
+          <TheoryView blocks={theoryPages[stepIdx]!} pivot={pivot} showTrans={showTrans} />
         ) : currentExercise ? (
           <ExerciseView
             key={exerciseKey}

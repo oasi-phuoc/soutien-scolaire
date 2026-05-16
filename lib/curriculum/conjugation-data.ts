@@ -3,15 +3,18 @@
 export type ConjugRow = { pronoun: string; form: string; phonetic?: string };
 export type ConjugTable = { verb: string; rows: ConjugRow[] };
 
+type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
+type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
+
 export type TheoryBlock =
-  | { type: "heading"; text: string }
+  | { type: "heading"; text: string; trans?: Trans }
   | { type: "table"; tables: ConjugTable[] }
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
-  | { type: "grid"; headers: string[]; rows: string[][] }
-  | { type: "plain_list"; label?: string; items: string[] }
-  | { type: "highlight"; label: string; items: string[] };
+  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>> }
+  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
+  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -40,7 +43,11 @@ const a1ConjL00: ConjLesson = {
   level: "A1",
   title: "Les pronoms personnels sujets",
   theory: [
-    { type: "heading", text: "Pourquoi utiliser un pronom ?" },
+    {
+      type: "heading",
+      text: "Pourquoi utiliser un pronom ?",
+      trans: { en: "Why use a pronoun?", ar: "لماذا نستخدم ضميراً؟", fa: "چرا از ضمیر استفاده می‌کنیم؟", ti: "ስለምንታይ ጸጋ ቃል ንጥቀም?", uk: "Навіщо використовувати займенник?" },
+    },
     {
       type: "plain_list",
       items: [
@@ -48,8 +55,19 @@ const a1ConjL00: ConjLesson = {
         "Ali parle. Ali travaille. Ali habite en Suisse.",
         "→ Ali parle. Il travaille. Il habite en Suisse.",
       ],
+      transItems: {
+        en: ["A pronoun replaces a person or a noun to avoid repetition.", "Ali speaks. Ali works. Ali lives in Switzerland.", "→ Ali speaks. He works. He lives in Switzerland."],
+        ar: ["الضمير يحل محل شخص أو اسم لتجنب التكرار.", "علي يتكلم. علي يعمل. علي يسكن في سويسرا.", "→ علي يتكلم. هو يعمل. هو يسكن في سويسرا."],
+        fa: ["ضمیر یک شخص یا اسم را جایگزین می‌کند تا از تکرار جلوگیری شود.", "علی صحبت می‌کند. علی کار می‌کند. علی در سوئیس زندگی می‌کند.", "→ علی صحبت می‌کند. او کار می‌کند. او در سوئیس زندگی می‌کند."],
+        ti: ["ጸጋ ቃል ሰብ ወይ ስም ንምምካን ናይ ምድጋም ሸልሚ ዝካፍሎ ቃል እዩ።", "ዓሊ ይዛረብ። ዓሊ ይሰርሕ። ዓሊ ኣብ ስዊዘርላንድ ይቐንዕ።", "→ ዓሊ ይዛረብ። ንሱ ይሰርሕ። ንሱ ኣብ ስዊዘርላንድ ይቐንዕ።"],
+        uk: ["Займенник замінює особу або іменник, щоб уникнути повторення.", "Алі говорить. Алі працює. Алі живе у Швейцарії.", "→ Алі говорить. Він працює. Він живе у Швейцарії."],
+      },
     },
-    { type: "heading", text: "Les pronoms personnels sujets" },
+    {
+      type: "heading",
+      text: "Les pronoms personnels sujets",
+      trans: { en: "Subject personal pronouns", ar: "ضمائر الفاعل الشخصية", fa: "ضمایر شخصی فاعلی", ti: "ናይ ርእሲ ውልቃዊ ጸጋ ቃላት", uk: "Особові займенники підмета" },
+    },
     {
       type: "grid",
       headers: ["Singulier", "Pluriel"],
@@ -59,8 +77,26 @@ const a1ConjL00: ConjLesson = {
         ["il → un homme", "ils → plusieurs hommes"],
         ["elle → une femme", "elles → plusieurs femmes"],
       ],
+      transHeaders: {
+        en: ["Singular", "Plural"],
+        ar: ["المفرد", "الجمع"],
+        fa: ["مفرد", "جمع"],
+        ti: ["ነጠላ", "ብዙሕ"],
+        uk: ["Однина", "Множина"],
+      },
+      transRows: {
+        en: [["je → me / I", "nous → we (me + others)"], ["tu → a friend, family", "vous → several people"], ["il → a man", "ils → several men"], ["elle → a woman", "elles → several women"]],
+        ar: [["je → أنا", "nous → نحن (أنا + الآخرون)"], ["tu → صديق، عائلة", "vous → عدة أشخاص"], ["il → رجل", "ils → عدة رجال"], ["elle → امرأة", "elles → عدة نساء"]],
+        fa: [["je → من", "nous → ما (من + دیگران)"], ["tu → دوست، خانواده", "vous → چند نفر"], ["il → مرد", "ils → چند مرد"], ["elle → زن", "elles → چند زن"]],
+        ti: [["je → ኣነ", "nous → ንሕና (ኣነ + ካልኦት)"], ["tu → ዓርኪ፡ ስድራ", "vous → ሓያሎ ሰባት"], ["il → ሓደ ወዲ", "ils → ሓያሎ ኣወዳት"], ["elle → ሓንቲ ጓል", "elles → ሓያሎ ኣዋልድ"]],
+        uk: [["je → я", "nous → ми (я + інші)"], ["tu → друг, сім'я", "vous → кілька осіб"], ["il → чоловік", "ils → кілька чоловіків"], ["elle → жінка", "elles → кілька жінок"]],
+      },
     },
-    { type: "heading", text: "Cas spéciaux" },
+    {
+      type: "heading",
+      text: "Cas spéciaux",
+      trans: { en: "Special cases", ar: "حالات خاصة", fa: "موارد ویژه", ti: "ፍሉያት ጉዳያት", uk: "Особливі випадки" },
+    },
     {
       type: "highlight",
       label: "ON",
@@ -71,6 +107,14 @@ const a1ConjL00: ConjLesson = {
         "On va au magasin. → Nous allons au magasin.",
         "En Suisse, on parle français. → Les gens parlent français.",
       ],
+      transLabel: { en: "ON", ar: "ON", fa: "ON", ti: "ON", uk: "ON" },
+      transItems: {
+        en: ["«On» represents one or more people (= we).", "Very common in spoken French.", "The verb is always singular.", "On va au magasin. → We go to the shop.", "En Suisse, on parle français. → People speak French in Switzerland."],
+        ar: ["«on» يعبّر عن شخص واحد أو أكثر (= نحن).", "شائع جداً في الفرنسية المحكية.", "الفعل دائماً في صيغة المفرد.", "On va au magasin. → نحن نذهب إلى المتجر.", "En Suisse, on parle français. → الناس يتكلمون الفرنسية في سويسرا."],
+        fa: ["«on» یک یا چند نفر را نشان می‌دهد (= ما).", "در فرانسه محاوره‌ای بسیار رایج است.", "فعل همیشه مفرد است.", "On va au magasin. → ما به فروشگاه می‌رویم.", "En Suisse, on parle français. → مردم در سوئیس فرانسوی صحبت می‌کنند."],
+        ti: ["«on» ሓደ ወይ ሓያሎ ሰባት ይወክል (= ንሕና).", "ኣብ ኣፋዊ ፈረንሳዊ ብዙሕ ይጥቀሙሉ.", "ግሲ ኩሉ ሳዕ ነጠላ እዩ.", "On va au magasin. → ናብ ዕዳጋ ንኸይድ.", "En Suisse, on parle français. → ሰባት ኣብ ስዊዘርላንድ ፈረንሳይ ይዛረቡ."],
+        uk: ["«on» представляє одну або кілька осіб (= ми).", "Дуже поширене в розмовній французькій.", "Дієслово завжди в однині.", "On va au magasin. → Ми йдемо до магазину.", "En Suisse, on parle français. → У Швейцарії люди говорять французькою."],
+      },
     },
     {
       type: "highlight",
@@ -80,6 +124,14 @@ const a1ConjL00: ConjLesson = {
         "On appelle cela la forme de politesse.",
         "Madame, vous allez bien ?",
       ],
+      transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", ti: "VOUS", uk: "VOUS" },
+      transItems: {
+        en: ["«Vous» is used when you don't know the person or the status is different (student–teacher).", "This is called the polite/formal form.", "Madame, vous allez bien ? → Madam, are you well?"],
+        ar: ["«vous» يُستخدم عندما لا تعرف الشخص أو عندما يختلف المستوى الاجتماعي (طالب–أستاذ).", "يُسمى هذا الصيغة المؤدّبة.", "Madame, vous allez bien ? → سيدتي، هل أنتِ بخير؟"],
+        fa: ["از «vous» استفاده می‌شود وقتی شخص را نمی‌شناسید یا جایگاه متفاوت است (دانش‌آموز–استاد).", "این را فرم رسمی/مودبانه می‌نامند.", "Madame, vous allez bien ? → خانم، حالتان خوب است؟"],
+        ti: ["«vous» ከምዘይትፈልጥዎ ሰብ ወይ ደረጃ ዝተፈለየ ምስ ዝኸውን ትጥቀሙሉ (ተምሃራይ–መምህር).", "እዚ ናይ ክብሪ ቅጺ ይብሃሃሉ.", "Madame, vous allez bien ? → ወይዘሮ፣ ጽቡቕ ዶ ሎኹም?"],
+        uk: ["«vous» використовується, коли ви не знаєте людину або є різниця в статусі (учень–вчитель).", "Це називається форма ввічливості.", "Madame, vous allez bien ? → Пані, ви добре?"],
+      },
     },
     {
       type: "highlight",
@@ -89,8 +141,20 @@ const a1ConjL00: ConjLesson = {
         "Même s'il y a beaucoup de femmes et un seul homme → ils.",
         "Ali ♂ et Alona ♀ → ils",
       ],
+      transLabel: { en: "ILS", ar: "ILS", fa: "ILS", ti: "ILS", uk: "ILS" },
+      transItems: {
+        en: ["«Ils» is used for a mixed group of women and men.", "Even if there are many women and only one man → ils.", "Ali ♂ and Alona ♀ → ils"],
+        ar: ["«ils» يُستخدم للمجموعة المختلطة من الرجال والنساء.", "حتى لو كان هناك نساء كثيرات ورجل واحد → ils.", "علي ♂ وألونا ♀ → ils"],
+        fa: ["از «ils» برای گروه مختلط زنان و مردان استفاده می‌شود.", "حتی اگر زنان زیاد و یک مرد باشد → ils.", "علی ♂ و آلونا ♀ → ils"],
+        ti: ["«ils» ንዝሓወሰ ጉጅለ ደቂ ኣንስትዮን ደቂ ተባዕትዮን ትጥቀሙሉ.", "ብዙሕ ኣዋልድ ሓደ ወዲ እኳ ተዀኑ → ils.", "ዓሊ ♂ ን ኣሎና ♀ → ils"],
+        uk: ["«Ils» використовується для змішаної групи жінок і чоловіків.", "Навіть якщо багато жінок і лише один чоловік → ils.", "Алі ♂ і Алона ♀ → ils"],
+      },
     },
-    { type: "heading", text: "Comment choisir ?" },
+    {
+      type: "heading",
+      text: "Comment choisir ?",
+      trans: { en: "How to choose?", ar: "كيف تختار؟", fa: "چطور انتخاب کنیم؟", ti: "ብኸመይ ትምረጽ?", uk: "Як вибрати?" },
+    },
     {
       type: "grid",
       headers: ["Nom", "Pronom"],
@@ -110,6 +174,14 @@ const a1ConjL00: ConjLesson = {
       items: [
         "Posez la question « Qui fait l'action ? », c'est le sujet de la phrase.",
       ],
+      transLabel: { en: "Tip", ar: "نصيحة", fa: "نکته", ti: "ሓጋዚ ሓሳብ", uk: "Порада" },
+      transItems: {
+        en: ["Ask «Who is doing the action?» — that is the subject of the sentence."],
+        ar: ["اسأل «من يقوم بالفعل؟» — هذا هو فاعل الجملة."],
+        fa: ["بپرسید «چه کسی کار را انجام می‌دهد؟» — این فاعل جمله است."],
+        ti: ["ሕቶ «መን ምዃኑ ዝገብሮ?» ሕተት — እዚ እዩ ርእሲ ሓሳቡ."],
+        uk: ["Запитайте «Хто виконує дію?» — це підмет речення."],
+      },
     },
     {
       type: "grid",
@@ -118,6 +190,20 @@ const a1ConjL00: ConjLesson = {
         ["Alona ♀ mange.", "Qui mange ?", "Alona", "Elle mange."],
         ["Ali ♂ et Alona ♀ jouent.", "Qui jouent ?", "Ali et Alona", "Ils jouent."],
       ],
+      transHeaders: {
+        en: ["Sentence", "Question", "Subject", "Result"],
+        ar: ["الجملة", "السؤال", "الفاعل", "النتيجة"],
+        fa: ["جمله", "سؤال", "فاعل", "نتیجه"],
+        ti: ["ሓሳብ", "ሕቶ", "ርእሲ", "ውጺኢት"],
+        uk: ["Речення", "Питання", "Підмет", "Результат"],
+      },
+      transRows: {
+        en: [["Alona ♀ eats.", "Who eats?", "Alona", "She eats."], ["Ali ♂ and Alona ♀ play.", "Who plays?", "Ali and Alona", "They play."]],
+        ar: [["ألونا ♀ تأكل.", "من يأكل؟", "ألونا", "هي تأكل."], ["علي ♂ وألونا ♀ يلعبان.", "من يلعب؟", "علي وألونا", "هم يلعبون."]],
+        fa: [["آلونا ♀ می‌خورد.", "چه کسی می‌خورد؟", "آلونا", "او می‌خورد."], ["علی ♂ و آلونا ♀ بازی می‌کنند.", "چه کسی بازی می‌کند؟", "علی و آلونا", "آن‌ها بازی می‌کنند."]],
+        ti: [["ኣሎና ♀ ትበልዕ.", "መን ይበልዕ?", "ኣሎና", "ንሳ ትበልዕ."], ["ዓሊ ♂ ን ኣሎና ♀ ይጻወቱ.", "መን ይጻወት?", "ዓሊ ን ኣሎና", "ንሳቶም ይጻወቱ."]],
+        uk: [["Алона ♀ їсть.", "Хто їсть?", "Алона", "Вона їсть."], ["Алі ♂ і Алона ♀ грають.", "Хто грає?", "Алі і Алона", "Вони грають."]],
+      },
     },
   ],
   exercises: [
