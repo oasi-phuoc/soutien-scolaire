@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { frenchThemesBySection } from "@/lib/curriculum/french-data";
-import type { FrenchSection } from "@/lib/curriculum/types";
+import { FRENCH_THEMES, frenchThemesBySection } from "@/lib/curriculum/french-data";
+import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { loadProgress } from "@/lib/progress/math-progress";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
 
 type SectionDef = { id: FrenchSection; code: string; title: string; description: string };
 type SectionState = "locked" | "in_progress" | "completed";
-type FrenchTab = "general" | "vocabulaire" | "grammaire" | "conjugaison";
 
 const SECTIONS: SectionDef[] = [
   { id: "ALPHA", code: "PA", title: "Pré-alphabétisation", description: "Sens de l'écrit, phonèmes, alphabet latin, syllabes" },
@@ -21,15 +20,6 @@ const SECTIONS: SectionDef[] = [
 ];
 
 const SECTION_ORDER: FrenchSection[] = ["ALPHA", "A0", "A1", "A2", "B1", "B2"];
-
-const SECTION_TAB: Record<FrenchSection, FrenchTab> = {
-  ALPHA: "general",
-  A0: "general",
-  A1: "general",
-  A2: "general",
-  B1: "general",
-  B2: "general",
-};
 
 const TABS: { id: FrenchTab; label: string }[] = [
   { id: "general",     label: "Général" },
@@ -73,7 +63,7 @@ function SectionStateBadge({ state }: { state: SectionState }) {
   );
 }
 
-// ── Section card ───────────────────────────────────────────────────────────────
+// ── Section card (Général tab) ─────────────────────────────────────────────────
 
 function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: SectionState; isActive: boolean }) {
   const themes = frenchThemesBySection(sec.id);
@@ -141,6 +131,38 @@ function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: Section
   );
 }
 
+// ── Lesson list (Grammaire / Vocabulaire / Conjugaison tabs) ───────────────────
+
+function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[] }) {
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center gap-2 px-1">
+        <span className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">{sec.code}</span>
+        <span className="text-xs text-[var(--color-text-secondary)]">{sec.title}</span>
+      </div>
+      <ul className="divide-y divide-[var(--color-border-default)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+        {themes.map((th) => (
+          <li key={th.id}>
+            <Link
+              href={`/francais/${th.slug}`}
+              className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-secondary)]"
+            >
+              <span className="w-14 shrink-0 text-[10px] font-bold text-[var(--color-accent-fr)]">{th.code}</span>
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-[var(--color-text-primary)]">{th.title}</p>
+                <p className="mt-0.5 text-xs leading-snug text-[var(--color-text-secondary)]">{th.summary}</p>
+              </div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export function FrancaisClient() {
@@ -153,7 +175,6 @@ export function FrancaisClient() {
     const level = prog.frenchLevel ?? "PA";
     const section = LEVEL_TO_SECTION[level] ?? "ALPHA";
     setCurrentSection(section);
-    setTab(SECTION_TAB[section]);
     setHydrated(true);
   }, []);
 
@@ -162,7 +183,13 @@ export function FrancaisClient() {
   const totalSections = SECTION_ORDER.length;
   const pct = Math.round((completedCount / totalSections) * 100);
 
-  const tabSections = SECTIONS.filter((sec) => SECTION_TAB[sec.id] === tab);
+  const lessonGroups =
+    tab !== "general"
+      ? SECTIONS.map((sec) => ({
+          sec,
+          themes: FRENCH_THEMES.filter((th) => th.section === sec.id && th.tab === tab),
+        })).filter((g) => g.themes.length > 0)
+      : [];
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
@@ -195,8 +222,8 @@ export function FrancaisClient() {
         ))}
       </div>
 
-      {/* Global progress */}
-      {hydrated && (
+      {/* Global progress — only on Général tab */}
+      {hydrated && tab === "general" && (
         <div className="space-y-2">
           <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
             <span>Progression globale</span>
@@ -206,17 +233,32 @@ export function FrancaisClient() {
         </div>
       )}
 
-      {/* Section cards */}
-      <section className="space-y-4" aria-label="Modules de français">
-        {tabSections.map((sec) => (
-          <SectionCard
-            key={sec.id}
-            sec={sec}
-            state={getSectionState(sec.id, currentSection)}
-            isActive={hydrated && sec.id === currentSection}
-          />
-        ))}
-      </section>
+      {tab === "general" ? (
+        /* Section cards */
+        <section className="space-y-4" aria-label="Modules de français">
+          {SECTIONS.map((sec) => (
+            <SectionCard
+              key={sec.id}
+              sec={sec}
+              state={getSectionState(sec.id, currentSection)}
+              isActive={hydrated && sec.id === currentSection}
+            />
+          ))}
+        </section>
+      ) : (
+        /* Lesson lists */
+        <section className="space-y-6" aria-label={`Leçons — ${tab}`}>
+          {lessonGroups.length > 0 ? (
+            lessonGroups.map(({ sec, themes }) => (
+              <LessonSection key={sec.id} sec={sec} themes={themes} />
+            ))
+          ) : (
+            <p className="text-center text-sm text-[var(--color-text-secondary)]">
+              Contenu à venir.
+            </p>
+          )}
+        </section>
+      )}
 
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
         Test de positionnement :{" "}

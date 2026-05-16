@@ -1,4 +1,4 @@
-import type { FrenchSection, FrenchTheme } from "./types";
+import type { FrenchSection, FrenchTab, FrenchTheme } from "./types";
 
 const Q = ["quiz"] as const;
 const Qp = ["prerequisite", "quiz"] as const;
@@ -22,6 +22,17 @@ function t(
     markers,
     ...extra,
   };
+}
+
+function lesson(
+  section: FrenchSection,
+  slug: string,
+  code: string,
+  title: string,
+  summary: string,
+  tab: Exclude<FrenchTab, "general">,
+): FrenchTheme {
+  return { id: `${section}-${slug}`, slug, code, title, section, summary, markers: [], tab };
 }
 
 /** Parcours complet français — aligné sur la structure v2 du document. */
@@ -89,6 +100,42 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   t("B2", "b2-3", "B2.3", "Écrits professionnels et formels", "Rapports, tournures nominales.", [...Q]),
   t("B2", "b2-4", "B2.4", "Économie et société", "PIB, politique CH, connecteurs de réfutation.", [...Q]),
   t("B2", "b2-5", "B2.5", "Préparation au TCF", "Format, entraînement CO/CE/PO/PE.", [...Q]),
+
+  // ── A1 — Grammaire au quotidien A1 — Grammaire ────────────────────────────
+  lesson("A1", "a1-gr-l01", "A1.L01", "Pronoms sujets et le verbe être", "Je suis, tu es, il/elle est… : bases de l'identification et de la présentation.", "grammaire"),
+  lesson("A1", "a1-gr-l02", "A1.L02", "La négation et l'interrogation de base", "Ne…pas et est-ce que : construire une phrase négative et une question simple.", "grammaire"),
+  lesson("A1", "a1-gr-l03", "A1.L03", "Le genre des noms et des adjectifs", "Masculin/féminin : noms courants et adjectifs de nationalité.", "grammaire"),
+  lesson("A1", "a1-gr-l04", "A1.L04", "Les articles définis et indéfinis", "Le, la, l', les / un, une, des : choisir le bon article selon le contexte.", "grammaire"),
+  lesson("A1", "a1-gr-l05", "A1.L05", "Le verbe avoir et les adjectifs possessifs", "J'ai, tu as… + mon, ma, mes / ton, ta, tes / son, sa, ses…", "grammaire"),
+  lesson("A1", "a1-gr-l06", "A1.L06", "Être et avoir — révision et approfondissement", "Consolider les deux verbes essentiels dans des contextes variés.", "grammaire"),
+  lesson("A1", "a1-gr-l10", "A1.L10", "L'interrogation avec les mots interrogatifs", "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.", "grammaire"),
+  lesson("A1", "a1-gr-l11", "A1.L11", "Les prépositions de lieu", "Dans, sur, sous, devant, derrière, à côté de, en face de…", "grammaire"),
+  lesson("A1", "a1-gr-l14", "A1.L14", "Les articles partitifs et la quantité", "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…", "grammaire"),
+  lesson("A1", "a1-gr-l17", "A1.L17", "Il y a et les prépositions dans la maison", "Il y a / il n'y a pas de + localiser les meubles et les pièces.", "grammaire"),
+  lesson("A1", "a1-gr-l18", "A1.L18", "Les adjectifs démonstratifs", "Ce, cet, cette, ces : désigner et montrer quelque chose.", "grammaire"),
+  lesson("A1", "a1-gr-l19", "A1.L19", "Les adjectifs possessifs", "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.", "grammaire"),
+  lesson("A1", "a1-gr-l22", "A1.L22", "La fréquence", "Toujours, souvent, parfois, rarement, jamais : situer une action dans le temps.", "grammaire"),
+  lesson("A1", "a1-gr-l23", "A1.L23", "Les adjectifs qualificatifs", "Genre, nombre et place de l'adjectif dans la phrase.", "grammaire"),
+  lesson("A1", "a1-gr-l24", "A1.L24", "Le comparatif et le superlatif", "Plus…que, moins…que, aussi…que + le plus / le moins.", "grammaire"),
+  lesson("A1", "a1-gr-l25", "A1.L25", "Savoir ou connaître ?", "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.", "grammaire"),
+
+  // ── A1 — Grammaire au quotidien A1 — Vocabulaire ─────────────────────────
+  lesson("A1", "a1-voc-l13", "A1.L13", "Les moyens de transport", "En voiture, à vélo, en avion… + prépositions et verbes de transport.", "vocabulaire"),
+  lesson("A1", "a1-voc-l16", "A1.L16", "La nourriture et le restaurant", "Aliments, repas de la journée, commander et payer au restaurant.", "vocabulaire"),
+  lesson("A1", "a1-voc-l21", "A1.L21", "Les expressions de temps", "Aujourd'hui, demain, après-demain, la semaine prochaine…", "vocabulaire"),
+  lesson("A1", "a1-voc-l26", "A1.L26", "Le corps humain", "Parties du corps + avoir mal à + article contracté (au/à la/aux).", "vocabulaire"),
+
+  // ── A1 — Grammaire au quotidien A1 — Conjugaison ─────────────────────────
+  lesson("A1", "a1-conj-l07", "A1.L07", "Les verbes en -er au présent", "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…", "conjugaison"),
+  lesson("A1", "a1-conj-l08", "A1.L08", "Les verbes aller et venir", "Conjuguer aller et venir au présent + prépositions de lieu (à, au, aux, en).", "conjugaison"),
+  lesson("A1", "a1-conj-l09", "A1.L09", "Les verbes pronominaux", "Se lever, se coucher, s'appeler : les pronominaux du quotidien.", "conjugaison"),
+  lesson("A1", "a1-conj-l12", "A1.L12", "Les verbes de mouvement", "Partir, arriver, entrer, sortir, monter, descendre au présent.", "conjugaison"),
+  lesson("A1", "a1-conj-l15", "A1.L15", "Vouloir, pouvoir, devoir", "Les trois verbes modaux essentiels : conjugaison et emploi au présent.", "conjugaison"),
+  lesson("A1", "a1-conj-l20", "A1.L20", "Le futur proche", "Aller + infinitif : parler de ce qui va arriver bientôt.", "conjugaison"),
+  lesson("A1", "a1-conj-l27", "A1.L27", "Pronominaux réfléchis et réciproques", "Se laver, se regarder, se parler, s'écrire : formes et sens.", "conjugaison"),
+  lesson("A1", "a1-conj-l28", "A1.L28", "Passé récent et présent continu", "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.", "conjugaison"),
+  lesson("A1", "a1-conj-l29", "A1.L29", "Passé composé avec avoir", "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).", "conjugaison"),
+  lesson("A1", "a1-conj-l30", "A1.L30", "Passé composé avec être", "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.", "conjugaison"),
 ];
 
 export const ALPHA_TO_A0_THRESHOLD = {
@@ -107,6 +154,5 @@ export function getFrenchThemeBySlug(slug: string): FrenchTheme | undefined {
 }
 
 export function frenchThemesBySection(section: FrenchSection): FrenchTheme[] {
-  if (section === "ALPHA") return FRENCH_THEMES.filter((x) => x.section === "ALPHA");
-  return FRENCH_THEMES.filter((x) => x.section === section);
+  return FRENCH_THEMES.filter((x) => x.section === section && !x.tab);
 }

@@ -6,6 +6,8 @@ export type CompetenceCode = "CO" | "CE" | "PO" | "PE";
 
 export type FrenchSection = "ALPHA" | "A0" | "A1" | "A2" | "B1" | "B2";
 
+export type FrenchTab = "general" | "vocabulaire" | "grammaire" | "conjugaison";
+
 export type FrenchTheme = {
   id: string;
   slug: string;
@@ -14,6 +16,8 @@ export type FrenchTheme = {
   section: FrenchSection;
   summary: string;
   markers: PedagogicMarker[];
+  /** Onglet d'affichage : undefined = "general". */
+  tab?: FrenchTab;
   /** Seuil de passage vers la section suivante (ex. Alpha → A0). */
   milestoneExit?: boolean;
   prerequisiteSlugs?: string[];
