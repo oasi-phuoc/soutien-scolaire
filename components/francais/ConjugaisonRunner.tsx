@@ -29,6 +29,25 @@ interface Props {
 
 // ── Theory view ───────────────────────────────────────────────────────────────
 
+function renderArrow(text: string) {
+  const parts = text.split(" → ");
+  if (parts.length <= 1) return <>{text}</>;
+  return (
+    <>
+      {parts.map((part, i) =>
+        i === 0 ? (
+          <span key={i}>{part}</span>
+        ) : (
+          <span key={i}>
+            <br />
+            → {part}
+          </span>
+        ),
+      )}
+    </>
+  );
+}
+
 function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
   return (
     <div className="space-y-5">
@@ -149,9 +168,9 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
               <div key={i} className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
                 <table className="w-full text-sm">
                   <thead>
-                    <tr className="bg-[var(--color-bg-secondary)]">
+                    <tr className="bg-[var(--color-accent-fr)]/15">
                       {block.headers.map((h, hi) => (
-                        <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+                        <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
                           {h}
                         </th>
                       ))}
@@ -162,7 +181,7 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
                       <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                         {row.map((cell, ci) => (
                           <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
-                            {cell}
+                            {renderArrow(cell)}
                           </td>
                         ))}
                       </tr>
@@ -182,8 +201,9 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
                 )}
                 <ul className="space-y-1.5">
                   {block.items.map((item, ii) => (
-                    <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-                      {item}
+                    <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                      <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
+                      <span>{renderArrow(item)}</span>
                     </li>
                   ))}
                 </ul>
@@ -196,8 +216,9 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
                 <p className="text-sm font-bold text-[var(--color-accent-fr)]">{block.label}</p>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {block.items.map((item, ii) => (
-                    <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-                      {item}
+                    <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                      <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>
+                      <span>{renderArrow(item)}</span>
                     </li>
                   ))}
                 </ul>
