@@ -73,27 +73,35 @@ function lessonHref(th: FrenchTheme): string {
 
 function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: SectionState; isActive: boolean }) {
   const themes = frenchThemesBySection(sec.id);
-  const isCollapsible = state === "locked" || state === "completed";
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     if (state === "in_progress") setExpanded(true);
   }, [state]);
 
+  // Locked / completed : titre + badge seulement, pas d'expansion
+  if (state === "locked" || state === "completed") {
+    return (
+      <div
+        className={`flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 ${state === "locked" ? "opacity-50" : ""}`}
+      >
+        <p className="flex-1 text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+        <SectionStateBadge state={state} />
+      </div>
+    );
+  }
+
+  // En cours : carte complète avec dropdown
   return (
     <div
       className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
-        state === "locked"
-          ? "border-[var(--color-border-default)] opacity-50"
-          : isActive
-            ? "border-[var(--color-accent-fr)]/50"
-            : "border-[var(--color-border-default)]"
+        isActive ? "border-[var(--color-accent-fr)]/50" : "border-[var(--color-border-default)]"
       }`}
     >
       <button
         type="button"
-        onClick={() => isCollapsible && setExpanded((e) => !e)}
-        className={`flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left ${isCollapsible ? "" : "cursor-default"}`}
+        onClick={() => setExpanded((e) => !e)}
+        className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
       >
         <div
           className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
@@ -105,12 +113,10 @@ function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: Section
           <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
           <p className="text-xs text-[var(--color-text-secondary)]">{sec.description}</p>
         </div>
-        <SectionStateBadge state={state} />
-        {isCollapsible && (
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
-            <path d="M9 18l6-6-6-6" />
-          </svg>
-        )}
+        <SectionStateBadge state="in_progress" />
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
+          <path d="M9 18l6-6-6-6" />
+        </svg>
       </button>
 
       {expanded && themes.length > 0 && (
