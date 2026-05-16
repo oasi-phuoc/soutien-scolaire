@@ -59,7 +59,8 @@ function renderPronounCell(text: string) {
   return (
     <>
       <span className="font-bold text-[var(--color-accent-fr)]">{pronoun}</span>
-      <span className="text-[var(--color-text-secondary)]"> {rest}</span>
+      <br />
+      <span className="text-[var(--color-text-secondary)]">{rest}</span>
     </>
   );
 }
