@@ -291,7 +291,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                 </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {block.items.map((item, ii) => {
-                    const skipBullet = block.noFirstBullet && ii === 0;
+                    const skipBullet = block.noFirstBullet && !item.includes(" → ");
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">

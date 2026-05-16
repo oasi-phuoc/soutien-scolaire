@@ -174,6 +174,7 @@ const a1ConjL00: ConjLesson = {
     {
       type: "highlight",
       label: "Astuce",
+      noFirstBullet: true,
       items: [
         "Posez la question « Qui fait l'action ? », c'est le sujet de la phrase.",
       ],
