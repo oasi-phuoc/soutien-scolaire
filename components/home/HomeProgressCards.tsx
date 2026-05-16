@@ -7,7 +7,9 @@ import {
   loadLectureProgress,
   computeLecturePercent,
   getSubmoduleState,
+  getRevisionState,
   SUBMODULE_SEQUENCE,
+  REVISION_CHECKPOINTS,
   TOTAL_LETTERS,
 } from "@/lib/progress/lecture-progress";
 import {
@@ -23,13 +25,13 @@ import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { LectureProgressV2 } from "@/lib/progress/lecture-progress";
 
 const FRENCH_LEVEL_LABELS: Record<string, string> = {
-  PA: "Pré-alpha",
-  ALPHA: "Alpha",
-  A0: "A0 — Débutant",
-  A1: "A1 — Découverte",
-  A2: "A2 — Élémentaire",
-  B1: "B1 — Autonomie",
-  B2: "B2 — Avancé",
+  PA:    "A0 — Débutant",
+  ALPHA: "A0 — Débutant",
+  A0:    "A0 — Débutant",
+  A1:    "A1 — Découverte",
+  A2:    "A2 — Élémentaire",
+  B1:    "B1 — Autonomie",
+  B2:    "B2 — Avancé",
 };
 
 function CardShell({
@@ -116,15 +118,35 @@ export function HomeProgressCards() {
     : 0;
   const lecturePct = lectureP ? computeLecturePercent(lectureP) : 0;
 
-  const lectureNext = lectureP
-    ? SUBMODULE_SEQUENCE.find((s) => getSubmoduleState(lectureP, s.moduleId, s.letterId) === "available")
+  // Find next letter: prefer an available letter; if a revision gates the next one, look past it
+  const lectureNextEntry = (() => {
+    if (!lectureP) return null;
+    const avail = SUBMODULE_SEQUENCE.find(
+      (s) => getSubmoduleState(lectureP, s.moduleId, s.letterId) === "available",
+    );
+    if (avail) return avail;
+    // No letter available — check if a revision is pending and derive the letter it will unlock
+    const pendingRev = REVISION_CHECKPOINTS.find(
+      (r) => getRevisionState(lectureP, r.pair) === "available",
+    );
+    if (pendingRev) {
+      const idx = SUBMODULE_SEQUENCE.findIndex(
+        (s) => s.moduleId === pendingRev.afterModuleId && s.letterId === pendingRev.afterLetterId,
+      );
+      if (idx >= 0 && idx < SUBMODULE_SEQUENCE.length - 1) return SUBMODULE_SEQUENCE[idx + 1]!;
+    }
+    return null;
+  })();
+
+  const lectureContinuePath = lectureNextEntry
+    ? `/lecture/${lectureNextEntry.moduleId}/${lectureNextEntry.letterId}`
     : null;
-  const lectureContinuePath = lectureNext
-    ? `/lecture/${lectureNext.moduleId}/${lectureNext.letterId}`
-    : null;
-  const lectureContinueLabel = lectureNext
-    ? `${lectureNext.moduleId.toUpperCase()} — ${lectureNext.letterId.toUpperCase()} / ${lectureNext.letterId}`
-    : null;
+  const lectureContinueLabel = (() => {
+    if (!lectureNextEntry) return null;
+    const moduleLetters = SUBMODULE_SEQUENCE.filter((s) => s.moduleId === lectureNextEntry.moduleId);
+    const pos = moduleLetters.findIndex((s) => s.letterId === lectureNextEntry.letterId) + 1;
+    return `${lectureNextEntry.moduleId.toUpperCase()}.${pos} — ${lectureNextEntry.letterId.toUpperCase()} / ${lectureNextEntry.letterId}`;
+  })();
 
   // ── Maths ──
   const totalMath = MATH_MODULES.length;
@@ -169,7 +191,7 @@ export function HomeProgressCards() {
         icon={<FrIcon />}
         label="Français"
         title={frLabel}
-        stat="PA → B2 · 36 thèmes"
+        stat="A0 → B2 · 61 leçons"
         pct={frPct}
       />
       <CardShell
