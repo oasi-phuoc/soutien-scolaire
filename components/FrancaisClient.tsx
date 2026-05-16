@@ -141,22 +141,29 @@ function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: Section
 
 function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[] }) {
   return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-2 px-1">
-        <span className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">{sec.code}</span>
-        <span className="text-xs text-[var(--color-text-secondary)]">{sec.title}</span>
+    <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+      <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+        <div
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+          style={{ background: "color-mix(in srgb, var(--color-accent-fr) 15%, transparent)" }}
+        >
+          <span className="text-sm font-bold text-[var(--color-accent-fr)]">{sec.code}</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">{sec.description}</p>
+        </div>
       </div>
-      <ul className="divide-y divide-[var(--color-border-default)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+      <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
         {themes.map((th) => (
           <li key={th.id}>
             <Link
               href={lessonHref(th)}
-              className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-secondary)]"
+              className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[var(--color-bg-secondary)]"
             >
-              <span className="w-14 shrink-0 text-[10px] font-bold text-[var(--color-accent-fr)]">{th.code}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-[var(--color-text-primary)]">{th.title}</p>
-                <p className="mt-0.5 text-xs leading-snug text-[var(--color-text-secondary)]">{th.summary}</p>
+                <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
+                <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
               </div>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
                 <path d="M9 18l6-6-6-6" />
@@ -201,7 +208,7 @@ export function FrancaisClient() {
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <header className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">A0 → B2</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Compréhension et expression</h1>
       </header>
 
       {/* Tab toggle */}
