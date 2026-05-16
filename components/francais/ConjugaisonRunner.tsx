@@ -22,6 +22,7 @@ export interface LessonLike {
   title: string;
   theory: TheoryBlock[];
   theory2?: TheoryBlock[];
+  midExercises?: Exercise[];
   exercises: Exercise[];
 }
 
@@ -75,7 +76,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "heading":
             return (
               <div key={i} className={block.trans?.[pivot as keyof typeof block.trans] ? "space-y-0.5" : ""}>
-                <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
+                <h2 className={`font-bold text-[var(--color-text-primary)] ${block.sub ? "text-base" : "text-lg"}`}>
                   {block.text}
                 </h2>
                 {showTrans && block.trans?.[pivot as keyof typeof block.trans] && (
@@ -783,6 +784,62 @@ function MatchExercise({
   );
 }
 
+// ── Write exercise ────────────────────────────────────────────────────────────
+
+function WriteExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "write" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
+  const [validated, setValidated] = useState(false);
+
+  const allFilled = inputs.every((s) => s.trim() !== "");
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allFilled) {
+      setValidated(true);
+      onValidated(true);
+    }
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(allFilled && !validated);
+  }, [allFilled, validated]);
+
+  function setInput(i: number, val: string) {
+    setInputs((prev) => prev.map((v, idx) => (idx === i ? val : v)));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {exercise.prompts.map((prompt, i) => (
+        <div key={i} className="space-y-1.5">
+          <p className="text-sm font-medium text-[var(--color-text-primary)]">{prompt}</p>
+          <input
+            type="text"
+            value={inputs[i]}
+            onChange={(e) => setInput(i, e.target.value)}
+            disabled={validated}
+            placeholder="Écrivez votre phrase…"
+            className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] focus:border-[var(--color-accent-fr)] focus:outline-none disabled:opacity-60"
+          />
+          {validated && inputs[i].trim() !== "" && (
+            <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ Réponse enregistrée</p>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 // ── Exercise wrapper ──────────────────────────────────────────────────────────
 
 function ExerciseView({
@@ -810,6 +867,9 @@ function ExerciseView({
       {exercise.type === "match" && (
         <MatchExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
+      {exercise.type === "write" && (
+        <WriteExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
     </div>
   );
 }
@@ -820,20 +880,26 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
-  const theoryPages = lesson.theory2
-    ? [lesson.theory, lesson.theory2]
-    : [lesson.theory];
-  const theoryCount = theoryPages.length;
+  const midExercises = lesson.midExercises ?? [];
+  const theory2Idx = 1 + midExercises.length;
+  const exStart = theory2Idx + (lesson.theory2 ? 1 : 0);
+  const totalSteps = 1 + midExercises.length + (lesson.theory2 ? 1 : 0) + lesson.exercises.length;
+
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
   const [canValidate, setCanValidate] = useState(false);
   const [validateCommand, setValidateCommand] = useState(0);
 
-  const totalSteps = theoryCount + lesson.exercises.length;
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
-  const isTheory = stepIdx < theoryCount;
-  const currentExercise = isTheory ? null : lesson.exercises[stepIdx - theoryCount] ?? null;
+  const isTheory1 = stepIdx === 0;
+  const isMidEx = stepIdx >= 1 && stepIdx <= midExercises.length;
+  const isTheory2 = lesson.theory2 ? stepIdx === theory2Idx : false;
+  const isTheory = isTheory1 || isTheory2;
+  const isExercise = stepIdx >= exStart;
+  const currentMidEx = isMidEx ? midExercises[stepIdx - 1] ?? null : null;
+  const currentExercise = isExercise ? lesson.exercises[stepIdx - exStart] ?? null : null;
+  const currentBlocks = isTheory1 ? lesson.theory : isTheory2 ? lesson.theory2! : null;
 
   // Reset exercise state when moving to a new step
   useEffect(() => {
@@ -899,18 +965,24 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       {/* Step label */}
       <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
         {isTheory
-          ? theoryCount > 1 ? `${stepIdx + 1} / ${theoryCount}` : ""
-          : `Exercice ${stepIdx - theoryCount + 1} / ${lesson.exercises.length}`}
+          ? (lesson.theory2 || midExercises.length > 0
+              ? isTheory2 ? "Théorie 2" : "Théorie 1"
+              : "")
+          : (() => {
+              const exNum = isMidEx ? stepIdx : stepIdx - exStart + 1 + midExercises.length;
+              const exTotal = midExercises.length + lesson.exercises.length;
+              return `Exercice ${exNum} / ${exTotal}`;
+            })()}
       </p>
 
       {/* Content */}
       <div className="min-h-[280px]">
         {isTheory ? (
-          <TheoryView blocks={theoryPages[stepIdx]!} pivot={pivot} showTrans={showTrans} />
-        ) : currentExercise ? (
+          <TheoryView blocks={currentBlocks!} pivot={pivot} showTrans={showTrans} />
+        ) : (currentMidEx ?? currentExercise) ? (
           <ExerciseView
             key={exerciseKey}
-            exercise={currentExercise}
+            exercise={(currentMidEx ?? currentExercise)!}
             onValidated={handleValidated}
             validateCommand={validateCommand}
             onCanValidateChange={setCanValidate}
@@ -943,7 +1015,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             </button>
 
             {/* Reset + Validate (exercises only) */}
-            {!isTheory && (
+            {(isMidEx || isExercise) && (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
