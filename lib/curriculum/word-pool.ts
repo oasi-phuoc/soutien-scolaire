@@ -174,10 +174,46 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "saxophone",  phonemes: ["/s/", "/a/", "/ks/", "/o/", "/f/"] },
   { label: "xylophone",  phonemes: ["/ks/", "/i/", "/l/", "/f/"] },
   // ── Z ──────────────────────────────────────────────────────────────────────
-  { label: "zebre",      phonemes: ["/z/", "/b/", "/r/"] },
-  { label: "zéro",       phonemes: ["/z/", "/e/", "/r/", "/o/"] },
-  { label: "zigzag",     phonemes: ["/z/", "/i/", "/g/", "/a/"] },
-  { label: "zoo",        phonemes: ["/z/"] },
+  { label: "zebre",          phonemes: ["/z/", "/b/", "/r/"] },
+  { label: "zéro",           phonemes: ["/z/", "/e/", "/r/", "/o/"] },
+  { label: "zigzag",         phonemes: ["/z/", "/i/", "/g/", "/a/"] },
+  { label: "zoo",            phonemes: ["/z/"] },
+  // ── Légumes & Fruits ───────────────────────────────────────────────────────
+  { label: "asperge",        phonemes: ["/a/", "/s/", "/p/", "/r/", "/ʒ/"] },
+  { label: "aubergine",      phonemes: ["/o/", "/b/", "/r/", "/ʒ/", "/i/", "/n/"] },
+  { label: "avocat",         phonemes: ["/a/", "/v/", "/o/", "/k/"] },
+  { label: "basilic",        phonemes: ["/b/", "/a/", "/z/", "/i/", "/l/", "/k/"] },
+  { label: "betterave",      phonemes: ["/b/", "/t/", "/r/", "/a/", "/v/"] },
+  { label: "brocoli",        phonemes: ["/b/", "/r/", "/o/", "/k/", "/l/", "/i/"] },
+  { label: "celeri",         phonemes: ["/s/", "/l/", "/r/", "/i/"] },
+  { label: "champignon",     phonemes: ["/p/", "/a/", "/i/", "/o/"] },
+  { label: "chou",           phonemes: [] },
+  { label: "citrouille",     phonemes: ["/s/", "/i/", "/t/", "/r/"] },
+  { label: "concombre",      phonemes: ["/k/", "/o/", "/b/", "/r/"] },
+  { label: "coriandre",      phonemes: ["/k/", "/o/", "/r/", "/i/", "/a/", "/d/"] },
+  { label: "courgette",      phonemes: ["/k/", "/r/", "/ʒ/", "/t/"] },
+  { label: "echalote",       phonemes: ["/e/", "/a/", "/l/", "/t/"] },
+  { label: "epinard",        phonemes: ["/e/", "/p/", "/i/", "/n/", "/a/", "/r/"] },
+  { label: "framboise",      phonemes: ["/f/", "/r/", "/b/", "/wa/", "/z/"] },
+  { label: "mangue",         phonemes: ["/m/", "/a/", "/g/"] },
+  { label: "melon",          phonemes: ["/m/", "/l/", "/o/"] },
+  { label: "menthe",         phonemes: ["/m/", "/t/"] },
+  { label: "mure",           phonemes: ["/m/", "/y/", "/r/"] },
+  { label: "myrtille",       phonemes: ["/m/", "/i/", "/r/", "/t/"] },
+  { label: "nectarine",      phonemes: ["/n/", "/k/", "/t/", "/r/", "/i/"] },
+  { label: "oignon",         phonemes: ["/wa/", "/o/", "/n/"] },
+  { label: "olive",          phonemes: ["/o/", "/l/", "/i/", "/v/"] },
+  { label: "pasteque",       phonemes: ["/p/", "/a/", "/s/", "/t/", "/k/"] },
+  { label: "persil",         phonemes: ["/p/", "/r/", "/s/", "/i/", "/l/"] },
+  { label: "piment",         phonemes: ["/p/", "/i/", "/m/"] },
+  { label: "poire",          phonemes: ["/p/", "/wa/", "/r/"] },
+  { label: "poireau",        phonemes: ["/p/", "/wa/", "/r/", "/o/"] },
+  { label: "poivron",        phonemes: ["/p/", "/wa/", "/v/", "/r/"] },
+  { label: "pomme-de-terre", phonemes: ["/p/", "/m/", "/d/", "/t/", "/r/"] },
+  { label: "raisin",         phonemes: ["/r/", "/z/"] },
+  { label: "romarin",        phonemes: ["/r/", "/m/", "/a/"] },
+  { label: "salade",         phonemes: ["/s/", "/a/", "/l/", "/d/"] },
+  { label: "thym",           phonemes: ["/t/", "/m/"] },
 ];
 
 // ── Large word list for WordSpotter (letter recognition only, no phoneme data) ─
@@ -185,6 +221,7 @@ export const WORD_ITEMS: WordItem[] = [
 export const LETTER_WORDS: string[] = [
   // ── A ──
   "arbre","ami","ananas","abricot","avion","animal","araignée","alphabet","autobus",
+  "asperge","aubergine","avocat",
   "ambulance","abeille","aigle","arc","armoire","assiette","artiste","agenda",
   "antilope","astronaute","accordéon","acrobate","alligator","anniversaire",
   "aquarium","arrosoir","aspirateur","araignée","avocado","albatros","araignée",
@@ -196,6 +233,7 @@ export const LETTER_WORDS: string[] = [
   "bouteille","boîte","baleine","bonbon","botte","bosquet","brocoli","baguette",
   "bleuet","biscuit","bobine","bœuf","bombardier","bouclier","bourdon","bouvreuil",
   "brebis","brindille","brochet","bulle","bûcheron","buisson","bulldozer",
+  "basilic","betterave",
   // ── C ──
   "café","canard","carotte","casque","cube","crayon","crocodile","citron","cerise",
   "chat","chien","chapeau","château","cheval","cochon","crabe","champignon","camion",
@@ -204,6 +242,7 @@ export const LETTER_WORDS: string[] = [
   "castor","cerf","cerf-volant","chameau","château","chimie","chouette","chute",
   "cigare","ciment","ciseaux","cloche","cloison","clôture","cobra","colimaçon",
   "colombe","comète","compas","coquille","corail","corde","corbeau","cornichon",
+  "céleri","chou","citrouille","concombre","coriandre","courgette",
   // ── D ──
   "dauphin","domino","dragon","drapeau","dodo","danse","dindon","diplôme","dent",
   "doigt","dalmatien","dessert","dinosaure","detective","daim","décoration",
@@ -215,6 +254,7 @@ export const LETTER_WORDS: string[] = [
   "étagère","échelle","épaule","éclair","écran","édredon","effrayant","égout",
   "éléphant","émeu","encre","endroit","entonnoir","épice","équipe","erreur",
   "espace","étang","étiquette","étoffe","étudiant","éveil","évier",
+  "épinard","échalote",
   // ── F ──
   "farine","flamme","fleur","forêt","fraise","fromage","fusée","flûte","fée",
   "fenêtre","fourmi","fanfare","famille","foulard","fantôme","framboise","flaçon",
@@ -255,6 +295,7 @@ export const LETTER_WORDS: string[] = [
   "mappemonde","marguerite","marsouin","martin","martinet","masque","mât",
   "médaille","menhir","merle","mésange","météore","miette","milan","mimosa",
   "moineau","moule","mûre","muret","myrtille","mystère","méduse",
+  "mangue","menthe",
   // ── N ──
   "nid","noisette","nuage","nuit","neige","nénuphar","nœud","nounours","nougat",
   "narval","naseau","navet","naïade","nasse","nautile","navette","navet",
@@ -264,6 +305,7 @@ export const LETTER_WORDS: string[] = [
   "oiseau","orange","ours","oreille","ordinateur","olive","otarie","ogre",
   "obélisque","océan","oeillet","ombre","omelette","ongle","opossum","oranger",
   "orchidée","orgue","ortie","oscille","oubli","outarde","outre","ovale","ovni",
+  "oignon",
   // ── P ──
   "panda","papillon","piano","poisson","pomme","puzzle","piste","perroquet",
   "poney","pieuvre","pirate","pantalon","pelican","phoque","panthère","poire",
@@ -273,6 +315,7 @@ export const LETTER_WORDS: string[] = [
   "plinthe","plongeon","plume","poireau","polaire","pompon","ponctuation",
   "portail","portique","potager","poulain","poutre","prairie","praire","prisme",
   "propulseur","prunier","puce","puma","punaise","python",
+  "persil","pomme-de-terre","poivron",
   // ── Q ──
   "queue","quille","quiche","quartier","quinze","quille","quetzal","quinquet",
   "quinconce","quiproquo","quota",
@@ -282,6 +325,7 @@ export const LETTER_WORDS: string[] = [
   "rameau","ramier","rasoir","rateau","rayon","récif","réglisse","rémora","rennet",
   "reptile","réseau","rhododendron","rigole","ronce","rosier","rouget","rouille",
   "rouleau","roussette","ruche","ruisseau","rutabaga",
+  "romarin","raisin",
   // ── S ──
   "sapin","serpent","singe","soleil","souris","stylo","solo","cire","sac",
   "sandwich","sanglier","salade","sauterelle","saucisse","saumon","scarabée",
@@ -296,6 +340,7 @@ export const LETTER_WORDS: string[] = [
   "trottoir","tacot","tamanoir","tamarin","taon","tartan","teckel","termite",
   "terrier","tige","timon","tisserin","toboggan","toucan","trèfle","trident",
   "triton","tronc","troupeau","truffe","truite","tube","tunnel","turbine","tuyau",
+  "thym",
   // ── U ──
   "usine","uniforme","ukulélé","ultrason","urne","urus","utopie",
   // ── V ──

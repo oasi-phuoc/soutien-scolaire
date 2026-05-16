@@ -21,9 +21,9 @@ function AnnotatedText({ text }: { text: string }) {
     <>
       {segments.map((seg: StorySegment, i: number) =>
         seg.kind === "complex" ? (
-          <span key={i} className="font-semibold text-[var(--color-accent-lecture)]">{seg.text}</span>
+          <span key={i} className="font-semibold" style={{ color: "var(--color-accent-lecture)" }}>{seg.text}</span>
         ) : seg.kind === "silent" ? (
-          <span key={i} className="text-[var(--color-text-secondary)]">{seg.text}</span>
+          <span key={i} style={{ color: "var(--color-text-secondary)" }}>{seg.text}</span>
         ) : (
           <span key={i}>{seg.text}</span>
         )
