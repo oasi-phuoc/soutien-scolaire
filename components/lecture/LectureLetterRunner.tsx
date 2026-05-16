@@ -129,7 +129,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
     } catch {
       // ignore storage errors
     }
-    router.push("/lecture");
+    window.location.href = "/lecture";
   }
 
   function renderStep() {
