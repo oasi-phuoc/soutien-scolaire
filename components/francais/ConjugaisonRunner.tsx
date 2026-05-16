@@ -556,30 +556,36 @@ function FillExercise({
       </div>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
-        const correct =
-          normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+        const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+        const parts = item.sentence.split("___");
         return (
-          <div key={i} className="space-y-2">
-            <p className="text-sm font-medium text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
+          <div key={i} className="space-y-1">
+            <p className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+              {parts.map((part, pi) => (
+                <React.Fragment key={pi}>
+                  {part}
+                  {pi < parts.length - 1 && (
+                    <input
+                      type="text"
+                      value={userAnswer}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+                      disabled={validated}
+                      className={`inline-block w-20 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+                        validated
+                          ? correct
+                            ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
+                            : "border-red-400 text-red-500 dark:text-red-400"
+                          : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
+                      }`}
+                    />
+                  )}
+                </React.Fragment>
+              ))}
             </p>
-            <input
-              type="text"
-              value={userAnswer}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
-              disabled={validated}
-              placeholder="Votre réponse…"
-              className={`w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[var(--color-accent-fr)]/30 ${
-                validated
-                  ? correct
-                    ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                    : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
-              }`}
-            />
             {validated && !correct && (
-              <p className="text-xs text-emerald-600 dark:text-emerald-400">
-                Réponse correcte : <strong>{item.answer}</strong>
+              <p className="ml-4 text-xs text-emerald-600 dark:text-emerald-400">
+                ✓ <strong>{item.answer}</strong>
               </p>
             )}
           </div>
