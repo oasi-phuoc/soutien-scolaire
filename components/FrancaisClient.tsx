@@ -65,6 +65,7 @@ function SectionStateBadge({ state }: { state: SectionState }) {
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
   if (th.tab === "grammaire") return `/francais/grammaire/${th.slug}`;
+  if (th.tab === "vocabulaire") return `/francais/vocabulaire/${th.slug}`;
   return `/francais/${th.slug}`;
 }
 

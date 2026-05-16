@@ -1,0 +1,1927 @@
+// Vocabulary lesson content: types + data for all 16 A1/A2 vocabulary lessons.
+// Types are imported from conjugation-data to avoid duplication.
+
+import type { TheoryBlock, Exercise } from "./conjugation-data";
+
+export type { TheoryBlock, Exercise };
+
+export type VocabLesson = {
+  slug: string;
+  code: string;
+  level: "A1" | "A2";
+  title: string;
+  theory: TheoryBlock[];
+  exercises: Exercise[];
+};
+
+// ── A1 Lessons ────────────────────────────────────────────────────────────────
+
+const a1VocL13: VocabLesson = {
+  slug: "a1-voc-l13",
+  code: "V.1",
+  level: "A1",
+  title: "Les moyens de transport",
+  theory: [
+    { type: "heading", text: "Les modes de transport" },
+    {
+      type: "vocab",
+      title: "Les transports courants",
+      items: [
+        "en voiture",
+        "à vélo",
+        "en avion",
+        "en train",
+        "en bus",
+        "en métro",
+        "en tramway",
+        "à pied",
+        "en taxi",
+        "en bateau",
+      ],
+    },
+    {
+      type: "rule",
+      text: "EN + transport motorisé ou fermé ; À + transport non motorisé ou monture.",
+      examples: [
+        { correct: "Je vais au travail en voiture.", wrong: "Je vais au travail à voiture." },
+        { correct: "Elle va à l'école à vélo.", wrong: "Elle va à l'école en vélo." },
+        { correct: "Nous partons en avion.", wrong: "Nous partons à avion." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Verbes utiles",
+      items: [
+        "prendre (le bus / le train / le métro)",
+        "aller (en voiture / à pied)",
+        "mettre (30 minutes / 2 heures)",
+        "arriver / partir",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Pour indiquer la durée : mettre + durée.",
+      examples: [
+        { correct: "Je mets 20 minutes en vélo." },
+        { correct: "Le train met 3 heures." },
+      ],
+    },
+    {
+      type: "note",
+      text: "À pied = walking. On dit toujours « à pied » et non « en pied ».",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le transport et la préposition",
+      instruction: "Reliez chaque moyen de transport à la bonne préposition (en ou à).",
+      pairs: [
+        { left: "___ voiture", right: "en" },
+        { left: "___ vélo", right: "à" },
+        { left: "___ avion", right: "en" },
+        { left: "___ pied", right: "à" },
+        { left: "___ métro", right: "en" },
+        { left: "___ bus", right: "en" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon moyen de transport.",
+      items: [
+        { sentence: "Pour traverser l'Atlantique, on prend l'___.", hint: "avion", answer: "avion" },
+        { sentence: "Paris a un réseau de ___ très développé.", hint: "métro", answer: "métro" },
+        { sentence: "Elle va à l'université à ___ car c'est près de chez elle.", hint: "pied", answer: "pied" },
+        { sentence: "Je prends le ___ pour aller de Lyon à Paris.", hint: "train", answer: "train" },
+        { sentence: "Il met 10 minutes à ___ pour aller au bureau.", hint: "vélo", answer: "vélo" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir la bonne préposition",
+      instruction: "Choisissez la bonne préposition pour chaque transport.",
+      items: [
+        { sentence: "Ils vont à la mer ___ voiture.", choices: ["en", "à", "par", "de"], correctIdx: 0 },
+        { sentence: "Je préfère aller ___ vélo en été.", choices: ["à", "en", "par", "avec"], correctIdx: 0 },
+        { sentence: "On prend le TGV ; on est ___ train.", choices: ["en", "à", "au", "par"], correctIdx: 0 },
+        { sentence: "Tu vas ___ pied ou en bus ?", choices: ["à", "en", "par", "de"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL16: VocabLesson = {
+  slug: "a1-voc-l16",
+  code: "V.2",
+  level: "A1",
+  title: "La nourriture et le restaurant",
+  theory: [
+    { type: "heading", text: "Les repas de la journée" },
+    {
+      type: "vocab",
+      title: "Les trois repas",
+      items: [
+        "le petit-déjeuner (le matin)",
+        "le déjeuner (à midi)",
+        "le dîner (le soir)",
+      ],
+    },
+    {
+      type: "heading", text: "Les aliments courants",
+    },
+    {
+      type: "vocab",
+      title: "Nourriture et boissons",
+      items: [
+        "le pain",
+        "le fromage",
+        "le vin",
+        "l'eau (f.)",
+        "le café",
+        "le thé",
+        "la viande",
+        "le poisson",
+        "les légumes (m.pl.)",
+        "les fruits (m.pl.)",
+        "le riz",
+        "les pâtes (f.pl.)",
+      ],
+    },
+    {
+      type: "heading", text: "Au restaurant",
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire du restaurant",
+      items: [
+        "commander",
+        "l'addition (f.)",
+        "un plat (principal)",
+        "une entrée",
+        "un dessert",
+        "un serveur / une serveuse",
+        "la carte / le menu",
+        "une table pour deux",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Pour commander, on dit : « Je voudrais... » ou « Je vais prendre... »",
+      examples: [
+        { correct: "Je voudrais une entrée et un plat, s'il vous plaît." },
+        { correct: "Je vais prendre le menu à 15 euros." },
+      ],
+    },
+    {
+      type: "note",
+      text: "L'addition = the bill. On dit : « L'addition, s'il vous plaît ! » pour demander l'addition.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer l'aliment et sa catégorie",
+      instruction: "Reliez chaque aliment à sa catégorie.",
+      pairs: [
+        { left: "le pain", right: "boulangerie" },
+        { left: "le fromage", right: "produit laitier" },
+        { left: "le poisson", right: "protéine" },
+        { left: "les carottes", right: "légume" },
+        { left: "les pommes", right: "fruit" },
+        { left: "le vin", right: "boisson alcoolisée" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Au restaurant",
+      instruction: "Complétez les phrases avec le bon mot.",
+      items: [
+        { sentence: "Pour demander à payer, on dit : « L'___, s'il vous plaît ! »", hint: "addition", answer: "addition" },
+        { sentence: "Le ___ apporte les plats à table.", hint: "serveur", answer: "serveur" },
+        { sentence: "Pour commencer, je prends une ___ : une soupe à l'oignon.", hint: "entrée", answer: "entrée" },
+        { sentence: "Comme ___, je voudrais un steak frites.", hint: "plat", answer: "plat" },
+        { sentence: "En France, le ___ du soir s'appelle le dîner.", hint: "repas", answer: "repas" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "Le matin, je prends le ___.", choices: ["petit-déjeuner", "dîner", "déjeuner", "goûter"], correctIdx: 0 },
+        { sentence: "À midi, les Français mangent le ___.", choices: ["déjeuner", "dîner", "petit-déjeuner", "souper"], correctIdx: 0 },
+        { sentence: "Pour commencer le repas, on prend une ___.", choices: ["entrée", "addition", "carte", "note"], correctIdx: 0 },
+        { sentence: "Je voudrais ___ la carte, s'il vous plaît.", choices: ["voir", "prendre", "manger", "boire"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL21: VocabLesson = {
+  slug: "a1-voc-l21",
+  code: "V.3",
+  level: "A1",
+  title: "Les expressions de temps",
+  theory: [
+    { type: "heading", text: "Situer dans le temps" },
+    {
+      type: "vocab",
+      title: "Jours autour d'aujourd'hui",
+      items: [
+        "aujourd'hui (ce jour)",
+        "demain (le jour suivant)",
+        "après-demain (dans 2 jours)",
+        "hier (le jour précédent)",
+        "avant-hier (il y a 2 jours)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Les semaines",
+      items: [
+        "cette semaine",
+        "la semaine prochaine",
+        "la semaine dernière",
+        "le week-end prochain",
+        "le week-end dernier",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Moments de la journée",
+      items: [
+        "ce matin",
+        "cet après-midi",
+        "ce soir",
+        "cette nuit",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Dans + durée = futur. Il y a + durée = passé.",
+      examples: [
+        { correct: "Le cours commence dans 3 jours." },
+        { correct: "J'ai mangé il y a 2 heures." },
+        { correct: "Il a appelé il y a une semaine." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Autres expressions utiles",
+      items: [
+        "maintenant",
+        "bientôt",
+        "tout à l'heure",
+        "en ce moment",
+        "d'abord / ensuite / enfin",
+        "pendant (during)",
+        "depuis (since/for)",
+      ],
+    },
+    {
+      type: "note",
+      text: "Tout à l'heure = in a little while (futur) ou a little while ago (passé) selon le contexte.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer l'expression et sa signification",
+      instruction: "Reliez chaque expression de temps à sa définition.",
+      pairs: [
+        { left: "aujourd'hui", right: "ce jour" },
+        { left: "demain", right: "le lendemain" },
+        { left: "avant-hier", right: "il y a deux jours" },
+        { left: "la semaine prochaine", right: "après cette semaine" },
+        { left: "hier", right: "le jour précédent" },
+        { left: "après-demain", right: "dans deux jours" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter avec la bonne expression",
+      instruction: "Complétez chaque phrase avec la bonne expression de temps.",
+      items: [
+        { sentence: "Le cours a commencé ___ 10 minutes.", hint: "il y a", answer: "il y a" },
+        { sentence: "La réunion est ___ 3 jours.", hint: "dans", answer: "dans" },
+        { sentence: "J'ai mangé au restaurant ___.", hint: "hier", answer: "hier" },
+        { sentence: "___, il fait beau et chaud.", hint: "aujourd'hui", answer: "aujourd'hui" },
+        { sentence: "Il part en vacances ___.", hint: "demain", answer: "demain" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Futur ou passé ?",
+      instruction: "Choisissez l'expression correcte pour chaque phrase.",
+      items: [
+        { sentence: "Nous avons visité le musée ___ deux jours.", choices: ["il y a", "dans", "depuis", "pendant"], correctIdx: 0 },
+        { sentence: "Le concert commence ___ une heure.", choices: ["dans", "il y a", "hier", "avant"], correctIdx: 0 },
+        { sentence: "Elle travaille ici ___ trois ans.", choices: ["depuis", "dans", "il y a", "après"], correctIdx: 0 },
+        { sentence: "___ je vais au cinéma avec des amis.", choices: ["Ce soir", "Hier soir", "Il y a soir", "Avant soir"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL26: VocabLesson = {
+  slug: "a1-voc-l26",
+  code: "V.4",
+  level: "A1",
+  title: "Le corps humain",
+  theory: [
+    { type: "heading", text: "Les parties du corps" },
+    {
+      type: "vocab",
+      title: "La tête",
+      items: [
+        "la tête",
+        "le visage",
+        "les yeux (sing. : l'œil)",
+        "le nez",
+        "la bouche",
+        "les oreilles (f.pl.)",
+        "les cheveux (m.pl.)",
+        "les dents (f.pl.)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Le corps",
+      items: [
+        "le cou",
+        "les épaules (f.pl.)",
+        "le dos",
+        "la poitrine",
+        "le ventre",
+        "le bras / les bras",
+        "la main / les mains",
+        "la jambe / les jambes",
+        "le pied / les pieds",
+        "le genou / les genoux",
+      ],
+    },
+    {
+      type: "heading", text: "Exprimer la douleur : avoir mal à…",
+    },
+    {
+      type: "rule",
+      text: "Avoir mal à + article contracté : au (masc.), à la (fém.), à l' (voyelle), aux (pluriel).",
+      examples: [
+        { correct: "J'ai mal au dos. (le dos → au dos)" },
+        { correct: "Il a mal à la gorge. (la gorge → à la gorge)" },
+        { correct: "Elle a mal à l'estomac. (l'estomac → à l'estomac)" },
+        { correct: "Nous avons mal aux pieds. (les pieds → aux pieds)" },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Douleurs courantes",
+      items: [
+        "avoir mal à la tête (= avoir mal à la tête)",
+        "avoir mal au dos",
+        "avoir mal à la gorge",
+        "avoir mal au ventre",
+        "avoir mal au bras",
+        "avoir mal à la jambe",
+        "avoir mal aux yeux",
+        "avoir mal aux oreilles",
+      ],
+    },
+    {
+      type: "note",
+      text: "Pour demander où quelqu'un a mal : « Où est-ce que vous avez mal ? » ou « Où avez-vous mal ? »",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le mot et l'article contracté",
+      instruction: "Reliez chaque partie du corps à la bonne forme de « à + article ».",
+      pairs: [
+        { left: "le dos", right: "au dos" },
+        { left: "la gorge", right: "à la gorge" },
+        { left: "les pieds", right: "aux pieds" },
+        { left: "l'estomac", right: "à l'estomac" },
+        { left: "le bras", right: "au bras" },
+        { left: "les oreilles", right: "aux oreilles" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "J'ai mal à...",
+      instruction: "Complétez avec la bonne forme de « à + article ».",
+      items: [
+        { sentence: "Je lis trop et j'ai mal ___ yeux.", hint: "aux", answer: "aux" },
+        { sentence: "Il a couru et maintenant il a mal ___ jambes.", hint: "aux", answer: "aux" },
+        { sentence: "Tu as mal ___ tête ? Prends une aspirine.", hint: "à la", answer: "à la" },
+        { sentence: "Elle a mal ___ dos depuis ce matin.", hint: "au", answer: "au" },
+        { sentence: "Ouvre la bouche, vous avez mal ___ gorge ?", hint: "à la", answer: "à la" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Quel article contracté ?",
+      instruction: "Choisissez la bonne forme pour compléter la phrase.",
+      items: [
+        { sentence: "J'ai mal ___ ventre.", choices: ["au", "à la", "à l'", "aux"], correctIdx: 0 },
+        { sentence: "Elle a mal ___ oreilles.", choices: ["aux", "à l'", "au", "à la"], correctIdx: 0 },
+        { sentence: "Tu as mal ___ épaule gauche ?", choices: ["à l'", "au", "à la", "aux"], correctIdx: 0 },
+        { sentence: "Il a mal ___ pieds après la randonnée.", choices: ["aux", "au", "à la", "à l'"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL12: VocabLesson = {
+  slug: "a1-voc-l12",
+  code: "V.5",
+  level: "A1",
+  title: "La ville et les lieux",
+  theory: [
+    { type: "heading", text: "Les lieux en ville" },
+    {
+      type: "vocab",
+      title: "Lieux culturels et de loisirs",
+      items: [
+        "un cinéma",
+        "un musée",
+        "un théâtre",
+        "une bibliothèque",
+        "un parc",
+        "une piscine",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Commerces et services",
+      items: [
+        "un restaurant",
+        "une boulangerie",
+        "un café / un bar",
+        "un supermarché",
+        "une pharmacie",
+        "un marché",
+        "un hôtel",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Institutions et espaces publics",
+      items: [
+        "une mairie",
+        "une église",
+        "une mosquée",
+        "une place (publique)",
+        "une rue",
+        "un boulevard",
+        "une gare",
+      ],
+    },
+    {
+      type: "heading", text: "Prépositions de localisation",
+    },
+    {
+      type: "rule",
+      text: "Localiser un endroit avec des prépositions.",
+      examples: [
+        { correct: "La boulangerie est à côté de la banque." },
+        { correct: "Le musée est en face de la mairie." },
+        { correct: "La pharmacie est près de l'hôpital." },
+        { correct: "L'église est entre la place et la rue principale." },
+        { correct: "Le café est à droite de la boulangerie." },
+        { correct: "Le parking est derrière le supermarché." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Prépositions de lieu",
+      items: [
+        "à côté de (next to)",
+        "près de (near)",
+        "loin de (far from)",
+        "en face de (opposite)",
+        "devant (in front of)",
+        "derrière (behind)",
+        "entre (between)",
+        "à droite de (to the right of)",
+        "à gauche de (to the left of)",
+      ],
+    },
+    {
+      type: "note",
+      text: "Attention : à côté de + le → à côté du. À côté de + les → à côté des.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le lieu et sa description",
+      instruction: "Reliez chaque lieu à sa description.",
+      pairs: [
+        { left: "une boulangerie", right: "on achète du pain" },
+        { left: "une pharmacie", right: "on achète des médicaments" },
+        { left: "une mairie", right: "services administratifs municipaux" },
+        { left: "un musée", right: "on regarde des œuvres d'art" },
+        { left: "une piscine", right: "on fait de la natation" },
+        { left: "une bibliothèque", right: "on emprunte des livres" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Décrire la localisation",
+      instruction: "Complétez avec la bonne préposition de lieu.",
+      items: [
+        { sentence: "La banque est ___ ___ la boulangerie et la pharmacie.", hint: "entre", answer: "entre" },
+        { sentence: "Le café est ___ ___ (opposite) la poste.", hint: "en face de", answer: "en face de" },
+        { sentence: "Le parc est ___ ___ (near) du musée.", hint: "près", answer: "près" },
+        { sentence: "La mairie est ___ (behind) l'église.", hint: "derrière", answer: "derrière" },
+        { sentence: "La boulangerie est à ___ ___ du café.", hint: "côté", answer: "côté" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon lieu",
+      instruction: "Choisissez le bon endroit selon la description.",
+      items: [
+        { sentence: "On achète une baguette et des croissants à ___.", choices: ["la boulangerie", "la pharmacie", "la mairie", "la piscine"], correctIdx: 0 },
+        { sentence: "Pour nager, on va à ___.", choices: ["la piscine", "la bibliothèque", "la place", "la gare"], correctIdx: 0 },
+        { sentence: "Pour emprunter des livres gratuitement, on va à ___.", choices: ["la bibliothèque", "la librairie", "le cinéma", "le musée"], correctIdx: 0 },
+        { sentence: "Le train arrive à ___.", choices: ["la gare", "la mairie", "l'église", "la pharmacie"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL17: VocabLesson = {
+  slug: "a1-voc-l17",
+  code: "V.6",
+  level: "A1",
+  title: "Le logement",
+  theory: [
+    { type: "heading", text: "Les pièces de la maison" },
+    {
+      type: "vocab",
+      title: "Les pièces",
+      items: [
+        "un salon (living room)",
+        "une cuisine (kitchen)",
+        "une chambre (bedroom)",
+        "une salle de bain (bathroom)",
+        "des toilettes / les WC (toilet)",
+        "une salle à manger (dining room)",
+        "un couloir (hallway)",
+        "un balcon / une terrasse",
+        "un garage",
+        "une cave (cellar)",
+      ],
+    },
+    {
+      type: "heading", text: "Les meubles et équipements",
+    },
+    {
+      type: "vocab",
+      title: "Dans le salon",
+      items: [
+        "un canapé (sofa)",
+        "une table basse (coffee table)",
+        "un fauteuil (armchair)",
+        "une télévision",
+        "une étagère (shelf)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Dans la cuisine",
+      items: [
+        "un frigo / un réfrigérateur",
+        "une plaque de cuisson (hob)",
+        "un four (oven)",
+        "un lave-vaisselle (dishwasher)",
+        "un micro-ondes (microwave)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Dans la chambre",
+      items: [
+        "un lit",
+        "une armoire (wardrobe)",
+        "une commode (chest of drawers)",
+        "une lampe de chevet",
+      ],
+    },
+    {
+      type: "heading", text: "Location et déménagement",
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire de la location",
+      items: [
+        "louer (to rent)",
+        "un appartement",
+        "une maison",
+        "un studio (bedsit)",
+        "le loyer (rent)",
+        "les charges (utilities)",
+        "déménager (to move house)",
+        "emménager (to move in)",
+        "un propriétaire / un locataire",
+      ],
+    },
+    {
+      type: "note",
+      text: "Un studio = un seul espace de vie + une salle de bain. Un appartement T2 = une chambre séparée.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le meuble et la pièce",
+      instruction: "Reliez chaque meuble à la pièce où on le trouve habituellement.",
+      pairs: [
+        { left: "un canapé", right: "le salon" },
+        { left: "un lit", right: "la chambre" },
+        { left: "un frigo", right: "la cuisine" },
+        { left: "une baignoire", right: "la salle de bain" },
+        { left: "une table à manger", right: "la salle à manger" },
+        { left: "une armoire", right: "la chambre" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases sur le logement",
+      instruction: "Complétez chaque phrase avec le mot correct.",
+      items: [
+        { sentence: "Je cherche un ___ : juste une pièce avec une kitchenette.", hint: "studio", answer: "studio" },
+        { sentence: "Le ___ mensuel est de 850 euros.", hint: "loyer", answer: "loyer" },
+        { sentence: "Nous allons ___ le mois prochain dans notre nouvel appartement.", hint: "emménager", answer: "emménager" },
+        { sentence: "On regarde les films dans le ___.", hint: "salon", answer: "salon" },
+        { sentence: "La ___ est à côté de la chambre principale.", hint: "salle de bain", answer: "salle de bain" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "On fait la cuisine dans ___.", choices: ["la cuisine", "le salon", "la chambre", "le couloir"], correctIdx: 0 },
+        { sentence: "Pour dormir, on va dans ___.", choices: ["la chambre", "la salle de bain", "le salon", "la cave"], correctIdx: 0 },
+        { sentence: "Je ___ mon appartement 900 euros par mois.", choices: ["loue", "vends", "achète", "donne"], correctIdx: 0 },
+        { sentence: "Le ___ conserve les aliments au froid.", choices: ["frigo", "four", "micro-ondes", "lave-vaisselle"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL27: VocabLesson = {
+  slug: "a1-voc-l27",
+  code: "V.7",
+  level: "A1",
+  title: "Les vêtements et les achats",
+  theory: [
+    { type: "heading", text: "Les vêtements" },
+    {
+      type: "vocab",
+      title: "Vêtements féminins et mixtes",
+      items: [
+        "une robe (dress)",
+        "une jupe (skirt)",
+        "un pantalon (trousers)",
+        "un jean",
+        "un pull / un pullover (sweater)",
+        "un t-shirt",
+        "une chemise (shirt)",
+        "une veste (jacket)",
+        "un manteau (coat)",
+        "une écharpe (scarf)",
+        "un chapeau (hat)",
+        "des chaussures (f.pl.) (shoes)",
+        "des chaussettes (f.pl.) (socks)",
+        "un sac (bag)",
+        "des lunettes (f.pl.) (glasses)",
+      ],
+    },
+    {
+      type: "heading", text: "Les verbes pour les achats",
+    },
+    {
+      type: "rule",
+      text: "Verbes importants pour faire du shopping.",
+      examples: [
+        { correct: "J'achète une robe bleue." },
+        { correct: "Elle porte un jean et un pull rouge." },
+        { correct: "Tu peux essayer ce manteau ?" },
+        { correct: "Vous faites quelle taille ?" },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Verbes utiles",
+      items: [
+        "acheter (to buy)",
+        "porter (to wear)",
+        "essayer (to try on)",
+        "choisir (to choose)",
+        "payer (to pay)",
+        "faire quelle taille ? (what size?)",
+      ],
+    },
+    {
+      type: "heading", text: "Adjectifs pour décrire les vêtements",
+    },
+    {
+      type: "vocab",
+      title: "Adjectifs courants",
+      items: [
+        "cher / chère (expensive)",
+        "bon marché / pas cher (cheap)",
+        "joli(e) (pretty)",
+        "élégant(e)",
+        "grand(e) / petit(e)",
+        "court(e) / long(ue)",
+        "serré(e) (tight) / ample (loose)",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Pour demander la taille : « Vous faites quelle taille ? » — Réponse : « Je fais du 38 / du M. »",
+      examples: [
+        { correct: "— Vous faites quelle taille ? — Je fais du 42." },
+        { correct: "— Ce manteau est trop grand. Vous avez du 38 ?" },
+      ],
+    },
+    {
+      type: "note",
+      text: "En France, les tailles pour les vêtements féminins vont de 34 à 48 ; pour les hommes de 38 à 60.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le vêtement et sa description",
+      instruction: "Reliez chaque vêtement à sa définition.",
+      pairs: [
+        { left: "une robe", right: "vêtement féminin une seule pièce" },
+        { left: "un manteau", right: "vêtement chaud pour l'extérieur" },
+        { left: "une écharpe", right: "on la porte autour du cou" },
+        { left: "des chaussettes", right: "on les porte dans les chaussures" },
+        { left: "une veste", right: "vêtement court sur la chemise" },
+        { left: "un jean", right: "pantalon en denim" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon verbe ou mot.",
+      items: [
+        { sentence: "Je voudrais ___ cette robe avant de l'acheter.", hint: "essayer", answer: "essayer" },
+        { sentence: "Elle ___ toujours des vêtements élégants au bureau.", hint: "porte", answer: "porte" },
+        { sentence: "Ce manteau est trop cher ! Je cherche quelque chose de moins ___.", hint: "cher", answer: "cher" },
+        { sentence: "Tu fais quelle ___ ? Du 40 ou du 42 ?", hint: "taille", answer: "taille" },
+        { sentence: "J'___ une nouvelle veste pour l'hiver.", hint: "achète", answer: "achète" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon vêtement",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "En hiver, je mets toujours un ___ pour avoir chaud.", choices: ["manteau", "t-shirt", "short", "maillot"], correctIdx: 0 },
+        { sentence: "Pour une occasion formelle, elle porte une ___.", choices: ["robe", "écharpe", "chaussette", "casquette"], correctIdx: 0 },
+        { sentence: "Le vendeur demande : « Vous faites quelle ___ ? »", choices: ["taille", "couleur", "marque", "pointure"], correctIdx: 0 },
+        { sentence: "Ces chaussures sont très ___ : elles coûtent 200 euros.", choices: ["chères", "jolies", "petites", "amples"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a1VocL18: VocabLesson = {
+  slug: "a1-voc-l18",
+  code: "V.8",
+  level: "A1",
+  title: "Les loisirs et le sport",
+  theory: [
+    { type: "heading", text: "Les sports" },
+    {
+      type: "vocab",
+      title: "Sports courants",
+      items: [
+        "le football (foot)",
+        "le tennis",
+        "le vélo / le cyclisme",
+        "la natation (swimming)",
+        "la course à pied (running)",
+        "le yoga",
+        "le basket-ball",
+        "le volleyball",
+        "la randonnée (hiking)",
+        "la danse",
+        "le ski",
+      ],
+    },
+    {
+      type: "heading", text: "Activités artistiques",
+    },
+    {
+      type: "vocab",
+      title: "Activités créatives",
+      items: [
+        "la musique (jouer de la guitare, du piano…)",
+        "le dessin",
+        "la peinture",
+        "la photographie",
+        "le cinéma",
+        "la lecture (reading)",
+        "le jardinage (gardening)",
+        "la cuisine",
+      ],
+    },
+    {
+      type: "heading", text: "Expressions avec FAIRE",
+    },
+    {
+      type: "rule",
+      text: "Faire + du/de la/de l'/des + activité. On utilise « faire » pour les sports et activités.",
+      examples: [
+        { correct: "Je fais du vélo le week-end." },
+        { correct: "Elle fait de la natation trois fois par semaine." },
+        { correct: "Nous faisons du yoga le mardi." },
+        { correct: "Ils font des randonnées en montagne." },
+      ],
+    },
+    {
+      type: "rule",
+      text: "Jouer à + sport d'équipe. Jouer de + instrument de musique.",
+      examples: [
+        { correct: "Je joue au tennis.", wrong: "Je fais du tennis." },
+        { correct: "Elle joue de la guitare.", wrong: "Elle fait de la guitare." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Autres expressions avec faire",
+      items: [
+        "faire une pause (to take a break)",
+        "faire la fête (to party)",
+        "faire les courses (to do the grocery shopping)",
+        "faire du shopping",
+        "faire une promenade (to go for a walk)",
+        "faire la cuisine (to cook)",
+      ],
+    },
+    {
+      type: "note",
+      text: "Jouer AU (masc.) / À LA (fém.) / AUX (plur.) pour les sports. Ex : jouer au foot, jouer à la pétanque, jouer aux cartes.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer l'activité et la bonne expression",
+      instruction: "Reliez chaque activité à la bonne expression avec faire ou jouer.",
+      pairs: [
+        { left: "le vélo", right: "faire du vélo" },
+        { left: "la natation", right: "faire de la natation" },
+        { left: "le tennis", right: "jouer au tennis" },
+        { left: "la guitare", right: "jouer de la guitare" },
+        { left: "le yoga", right: "faire du yoga" },
+        { left: "le foot", right: "jouer au foot" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter avec du, de la ou de l'",
+      instruction: "Complétez chaque phrase avec la bonne forme.",
+      items: [
+        { sentence: "Il fait ___ vélo tous les matins.", hint: "du", answer: "du" },
+        { sentence: "Nous faisons ___ natation à la piscine.", hint: "de la", answer: "de la" },
+        { sentence: "Tu fais ___ escalade le week-end ?", hint: "de l'", answer: "de l'" },
+        { sentence: "Elle fait ___ yoga pour se détendre.", hint: "du", answer: "du" },
+        { sentence: "Ils font ___ randonnée en montagne.", hint: "de la", answer: "de la" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon verbe",
+      instruction: "Choisissez le bon verbe (faire ou jouer) pour compléter la phrase.",
+      items: [
+        { sentence: "Elle ___ au basketball avec son équipe.", choices: ["joue", "fait", "aime", "va"], correctIdx: 0 },
+        { sentence: "Je ___ de la course à pied trois fois par semaine.", choices: ["fais", "joue", "pratique", "aime"], correctIdx: 0 },
+        { sentence: "Il ___ du piano depuis l'âge de 5 ans.", choices: ["joue", "fait", "prend", "écoute"], correctIdx: 0 },
+        { sentence: "Nous ___ une promenade dans le parc le dimanche.", choices: ["faisons", "jouons", "prenons", "marchons"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+// ── A2 Lessons ────────────────────────────────────────────────────────────────
+
+const a2VocL01: VocabLesson = {
+  slug: "a2-voc-l01",
+  code: "V.9",
+  level: "A2",
+  title: "Les voyages et les transports",
+  theory: [
+    { type: "heading", text: "Vocabulaire des voyages" },
+    {
+      type: "vocab",
+      title: "À la gare et à l'aéroport",
+      items: [
+        "une gare (train station)",
+        "un aéroport (airport)",
+        "un billet (ticket)",
+        "un vol (flight)",
+        "un trajet (journey)",
+        "une durée (duration)",
+        "un itinéraire (itinerary)",
+        "une escale (stopover)",
+        "un quai (platform)",
+        "une salle d'attente (waiting room)",
+        "un contrôle de sécurité (security check)",
+        "l'embarquement (boarding)",
+      ],
+    },
+    {
+      type: "heading", text: "Verbes de déplacement",
+    },
+    {
+      type: "rule",
+      text: "Verbes pour exprimer le voyage et le déplacement.",
+      examples: [
+        { correct: "Je pars pour Rome vendredi." },
+        { correct: "Elle arrive à Paris à 18h." },
+        { correct: "Nous retournons en France la semaine prochaine." },
+        { correct: "Il revient de vacances demain." },
+        { correct: "Le trajet met 2 heures." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Verbes essentiels",
+      items: [
+        "partir pour / de (to leave for/from)",
+        "arriver à / de (to arrive at/from)",
+        "retourner (to go back)",
+        "revenir (to come back)",
+        "voyager (to travel)",
+        "prendre (le train, l'avion)",
+        "mettre (2 heures) (to take 2 hours)",
+        "réserver (to book)",
+        "annuler (to cancel)",
+        "valider (son billet) (to validate)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Types de trajet",
+      items: [
+        "un vol direct (direct flight)",
+        "un vol avec escale (connecting flight)",
+        "un aller simple (one-way ticket)",
+        "un aller-retour (return ticket)",
+        "un trajet rapide / long",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Lieux de vacances",
+      items: [
+        "la plage (beach)",
+        "la mer (sea)",
+        "le port (port / harbour)",
+        "la montagne (mountain)",
+        "la campagne (countryside)",
+        "une île (island)",
+        "une station de ski (ski resort)",
+      ],
+    },
+    {
+      type: "note",
+      text: "En France, le TGV (Train à Grande Vitesse) relie les grandes villes à grande vitesse. Paris–Lyon = environ 2h.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le mot et sa définition",
+      instruction: "Reliez chaque mot de voyage à sa définition.",
+      pairs: [
+        { left: "un billet", right: "titre de transport" },
+        { left: "une escale", right: "arrêt intermédiaire dans un vol" },
+        { left: "un aller-retour", right: "billet pour partir et revenir" },
+        { left: "embarquement", right: "monter dans l'avion" },
+        { left: "un quai", right: "là où on attend le train" },
+        { left: "un itinéraire", right: "le plan du trajet" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon mot ou verbe.",
+      items: [
+        { sentence: "Le vol ___ (to take) 3 heures de Paris à Barcelone.", hint: "met", answer: "met" },
+        { sentence: "Je voudrais ___ (to book) deux billets pour Marseille.", hint: "réserver", answer: "réserver" },
+        { sentence: "Nous ___ (to leave for) Paris vendredi matin.", hint: "partons pour", answer: "partons pour" },
+        { sentence: "L'avion ___ (to arrive) à 15h30 à l'aéroport.", hint: "arrive", answer: "arrive" },
+        { sentence: "Je préfère un vol ___ sans escale.", hint: "direct", answer: "direct" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "Pour aller de Paris à Lyon, je prends le ___.", choices: ["train", "billet", "quai", "vol"], correctIdx: 0 },
+        { sentence: "Nous passons nos vacances à la ___, on aime nager.", choices: ["mer", "montagne", "campagne", "ville"], correctIdx: 0 },
+        { sentence: "Je veux un ___ Paris–Rome, je reviens dans une semaine.", choices: ["aller-retour", "aller simple", "vol direct", "billet d'escale"], correctIdx: 0 },
+        { sentence: "L'avion ___ de Genève à 8h du matin.", choices: ["part", "arrive", "revient", "réserve"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL02: VocabLesson = {
+  slug: "a2-voc-l02",
+  code: "V.10",
+  level: "A2",
+  title: "La santé et le médecin",
+  theory: [
+    { type: "heading", text: "Chez le médecin" },
+    {
+      type: "vocab",
+      title: "Personnes et lieux",
+      items: [
+        "un médecin / un docteur",
+        "un(e) infirmier/infirmière (nurse)",
+        "un(e) pharmacien/pharmacienne",
+        "un hôpital",
+        "une clinique",
+        "une pharmacie",
+        "un cabinet médical (doctor's office)",
+        "une salle d'attente",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Documents médicaux",
+      items: [
+        "prendre un rendez-vous (to make an appointment)",
+        "une ordonnance (prescription)",
+        "un médicament (medicine)",
+        "un comprimé (tablet)",
+        "une gélule (capsule)",
+        "un sirop (syrup)",
+        "une prise de sang (blood test)",
+      ],
+    },
+    {
+      type: "heading", text: "Les symptômes" },
+    {
+      type: "vocab",
+      title: "Expressions pour décrire la santé",
+      items: [
+        "avoir de la fièvre (to have a fever)",
+        "tousser (to cough)",
+        "éternuer (to sneeze)",
+        "avoir mal à... (to have a pain in...)",
+        "être fatigué(e) (to be tired)",
+        "être enrhumé(e) (to have a cold)",
+        "avoir des nausées (to feel nauseous)",
+        "vomir (to vomit)",
+        "être blessé(e) (to be injured)",
+        "saigner (to bleed)",
+      ],
+    },
+    {
+      type: "heading", text: "Donner des conseils médicaux",
+    },
+    {
+      type: "rule",
+      text: "Il faut + infinitif ou Vous devez + infinitif pour donner des conseils ou instructions.",
+      examples: [
+        { correct: "Il faut se reposer et boire beaucoup d'eau." },
+        { correct: "Vous devez prendre un comprimé trois fois par jour." },
+        { correct: "Il ne faut pas sortir avec de la fièvre." },
+        { correct: "Vous devez éviter le sport pendant une semaine." },
+      ],
+    },
+    {
+      type: "note",
+      text: "En France, pour un remboursement des frais médicaux, il faut être inscrit à la Sécurité sociale.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le symptôme et sa description",
+      instruction: "Reliez chaque expression à sa signification en français.",
+      pairs: [
+        { left: "avoir de la fièvre", right: "température élevée" },
+        { left: "tousser", right: "faire le son « touh touh »" },
+        { left: "une ordonnance", right: "document du médecin pour les médicaments" },
+        { left: "être enrhumé(e)", right: "avoir un rhume" },
+        { left: "un comprimé", right: "médicament solide à avaler" },
+        { left: "une prise de sang", right: "analyse du sang" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Chez le médecin",
+      instruction: "Complétez les phrases avec le bon mot.",
+      items: [
+        { sentence: "Je dois ___ un rendez-vous chez le médecin.", hint: "prendre", answer: "prendre" },
+        { sentence: "Le médecin me donne une ___ pour acheter les médicaments.", hint: "ordonnance", answer: "ordonnance" },
+        { sentence: "J'ai de la fièvre, je dois ___ au lit.", hint: "rester", answer: "rester" },
+        { sentence: "Prenez ce ___ deux fois par jour après les repas.", hint: "comprimé", answer: "comprimé" },
+        { sentence: "Il ___ beaucoup depuis ce matin, il est peut-être malade.", hint: "tousse", answer: "tousse" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon conseil médical",
+      instruction: "Choisissez la bonne expression pour compléter la phrase.",
+      items: [
+        { sentence: "Tu as 39° de fièvre. Il faut ___ et boire beaucoup d'eau.", choices: ["te reposer", "faire du sport", "travailler", "sortir"], correctIdx: 0 },
+        { sentence: "Le médecin me dit : « Vous ___ prendre ce médicament trois fois par jour. »", choices: ["devez", "pouvez", "voulez", "aimez"], correctIdx: 0 },
+        { sentence: "Pour acheter les médicaments, j'ai besoin d'une ___.", choices: ["ordonnance", "prise de sang", "fièvre", "gélule"], correctIdx: 0 },
+        { sentence: "J'ai mal à la gorge et je ___.", choices: ["tousse", "saigne", "éternue", "vomis"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL03: VocabLesson = {
+  slug: "a2-voc-l03",
+  code: "V.11",
+  level: "A2",
+  title: "Le monde du travail",
+  theory: [
+    { type: "heading", text: "Les métiers" },
+    {
+      type: "vocab",
+      title: "Professions courantes",
+      items: [
+        "un médecin / une médecin (doctor)",
+        "un professeur / une professeure (teacher)",
+        "un vendeur / une vendeuse (salesperson)",
+        "un cuisinier / une cuisinière (cook)",
+        "un informaticien / une informaticienne (IT specialist)",
+        "un comptable (accountant)",
+        "un avocat / une avocate (lawyer)",
+        "un infirmier / une infirmière (nurse)",
+        "un ingénieur / une ingénieure (engineer)",
+        "un directeur / une directrice (manager)",
+        "un secrétaire / une secrétaire",
+        "un plombier (plumber)",
+        "un électricien / une électricienne",
+      ],
+    },
+    {
+      type: "heading", text: "Les lieux de travail",
+    },
+    {
+      type: "vocab",
+      title: "Où travaille-t-on ?",
+      items: [
+        "une entreprise (company)",
+        "un bureau (office)",
+        "une usine (factory)",
+        "un magasin (shop)",
+        "un hôpital",
+        "une école / un lycée",
+        "un restaurant",
+        "un chantier (construction site)",
+        "à domicile / en télétravail (working from home)",
+      ],
+    },
+    {
+      type: "heading", text: "Expressions avec AVOIR",
+    },
+    {
+      type: "rule",
+      text: "Expressions idiomatiques avec AVOIR dans le monde du travail.",
+      examples: [
+        { correct: "Il a de la chance : il a un bon salaire." },
+        { correct: "J'ai besoin de plus d'expérience." },
+        { correct: "Elle a le choix entre deux offres d'emploi." },
+        { correct: "Il a une bonne situation (= stable job)." },
+        { correct: "Tu as de l'expérience dans ce domaine ?" },
+      ],
+    },
+    {
+      type: "heading", text: "Chercher du travail",
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire de la recherche d'emploi",
+      items: [
+        "un CV (curriculum vitae)",
+        "une offre d'emploi (job offer)",
+        "un entretien d'embauche (job interview)",
+        "poser sa candidature (to apply)",
+        "un employeur (employer)",
+        "un employé (employee)",
+        "un salaire (salary)",
+        "un contrat (contract)",
+        "le temps plein / le temps partiel (full-time / part-time)",
+        "un stage (internship)",
+        "être au chômage (to be unemployed)",
+      ],
+    },
+    {
+      type: "note",
+      text: "En France, Pôle Emploi est l'agence nationale pour l'emploi (remplacée par France Travail depuis 2024).",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le métier et le lieu de travail",
+      instruction: "Reliez chaque métier à son lieu de travail habituel.",
+      pairs: [
+        { left: "un médecin", right: "un hôpital / un cabinet" },
+        { left: "un professeur", right: "une école / un lycée" },
+        { left: "un cuisinier", right: "un restaurant" },
+        { left: "un vendeur", right: "un magasin" },
+        { left: "un comptable", right: "un bureau / une entreprise" },
+        { left: "un plombier", right: "chez les clients" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon mot.",
+      items: [
+        { sentence: "Pour postuler, j'envoie mon ___ et une lettre de motivation.", hint: "CV", answer: "CV" },
+        { sentence: "Elle a un ___ d'embauche demain pour un poste de comptable.", hint: "entretien", answer: "entretien" },
+        { sentence: "Il cherche une ___ d'emploi dans le secteur informatique.", hint: "offre", answer: "offre" },
+        { sentence: "Je travaille à temps ___ : 20 heures par semaine.", hint: "partiel", answer: "partiel" },
+        { sentence: "J'ai ___ de prendre des vacances, je suis épuisé.", hint: "besoin", answer: "besoin" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "Elle ___ dans une grande entreprise depuis 5 ans.", choices: ["travaille", "habite", "étudie", "voyage"], correctIdx: 0 },
+        { sentence: "Un ___ est un accord entre l'employeur et l'employé.", choices: ["contrat", "CV", "stage", "salaire"], correctIdx: 0 },
+        { sentence: "Il n'a pas de travail en ce moment, il est au ___.", choices: ["chômage", "bureau", "stage", "congé"], correctIdx: 0 },
+        { sentence: "Je ___ de la chance : j'ai trouvé un emploi rapidement.", choices: ["ai", "suis", "fais", "prends"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL04: VocabLesson = {
+  slug: "a2-voc-l04",
+  code: "V.12",
+  level: "A2",
+  title: "Les sorties et les invitations",
+  theory: [
+    { type: "heading", text: "Organiser une sortie" },
+    {
+      type: "vocab",
+      title: "Types de sorties",
+      items: [
+        "une soirée (party / evening out)",
+        "une fête (celebration)",
+        "un pique-nique",
+        "un apéro / apéritif (pre-dinner drinks)",
+        "une expo(sition) (exhibition)",
+        "un spectacle (show)",
+        "un concert",
+        "un repas entre amis",
+        "boire un verre (to go for a drink)",
+        "un jour férié (public holiday)",
+      ],
+    },
+    {
+      type: "heading", text: "Inviter et répondre",
+    },
+    {
+      type: "rule",
+      text: "Formules pour inviter quelqu'un.",
+      examples: [
+        { correct: "Ça te dit de venir pique-niquer samedi ?" },
+        { correct: "Tu es dispo vendredi soir ?" },
+        { correct: "On organise une soirée, tu viens ?" },
+        { correct: "Je t'invite à dîner chez moi." },
+      ],
+    },
+    {
+      type: "rule",
+      text: "Formules pour accepter ou refuser.",
+      examples: [
+        { correct: "Oui, ça marche ! / Parfait, avec plaisir !" },
+        { correct: "Je suis dispo, je viens avec plaisir." },
+        { correct: "Désolé(e), je ne peux pas, j'ai déjà quelque chose." },
+        { correct: "C'est dommage, je suis pris(e)." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Formules informelles",
+      items: [
+        "Ça te / vous dit de... ? (Do you fancy...?)",
+        "Je suis dispo (I'm available / free)",
+        "Ça marche ! (It works! / OK!)",
+        "C'est sympa ! (That's nice!)",
+        "À plus (tard) ! (See you later!)",
+        "À bientôt ! (See you soon!)",
+        "apporter à boire / à manger (to bring drinks / food)",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Organiser un événement : penser aux détails.",
+      examples: [
+        { correct: "Où est-ce qu'on se retrouve ? — On se retrouve au parc." },
+        { correct: "C'est à quelle heure ? — C'est à 19h." },
+        { correct: "Qu'est-ce qu'on apporte ? — Apporte une bouteille de vin." },
+      ],
+    },
+    {
+      type: "note",
+      text: "L'apéro est une tradition française : boissons et petits snacks avant le repas principal. On dit souvent « Je t'invite à l'apéro ».",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer l'expression et sa signification",
+      instruction: "Reliez chaque expression informelle à sa définition.",
+      pairs: [
+        { left: "Ça te dit ?", right: "Est-ce que tu veux ?" },
+        { left: "Ça marche !", right: "D'accord !" },
+        { left: "Je suis dispo", right: "Je suis libre" },
+        { left: "À plus !", right: "À bientôt !" },
+        { left: "C'est sympa", right: "C'est agréable" },
+        { left: "Je suis pris(e)", right: "Je ne suis pas libre" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter le dialogue",
+      instruction: "Complétez les phrases avec le bon mot ou expression.",
+      items: [
+        { sentence: "— Ça te dit de venir à mon ___  samedi soir ?", hint: "apéro", answer: "apéro" },
+        { sentence: "— Oui, je suis ___ ! J'arrive vers 19h.", hint: "dispo", answer: "dispo" },
+        { sentence: "— Qu'est-ce que j'___ ? Du vin ou de la bière ?", hint: "apporte", answer: "apporte" },
+        { sentence: "— Apporte ce que tu veux. ___ marche !", hint: "Ça", answer: "Ça" },
+        { sentence: "— Super, ___ bientôt !", hint: "à", answer: "à" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir la bonne réponse",
+      instruction: "Choisissez la bonne réponse pour chaque situation.",
+      items: [
+        { sentence: "Ton ami dit : « Ça te dit de venir au cinéma ? » Tu acceptes :", choices: ["Oui, ça marche !", "Non, je suis dispo.", "Désolé, c'est sympa.", "Je suis pris."], correctIdx: 0 },
+        { sentence: "Tu veux inviter un ami à un pique-nique. Tu dis :", choices: ["Ça te dit de venir pique-niquer ?", "Tu es pris dimanche ?", "Je ne suis pas dispo.", "C'est dommage !"], correctIdx: 0 },
+        { sentence: "Pour une soirée, on dit aux invités d'___.", choices: ["apporter à boire", "être pris", "ne pas venir", "rester chez eux"], correctIdx: 0 },
+        { sentence: "Un ___ est un apéritif entre amis.", choices: ["apéro", "pique-nique", "spectacle", "concert"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL05: VocabLesson = {
+  slug: "a2-voc-l05",
+  code: "V.13",
+  level: "A2",
+  title: "La cuisine et les recettes",
+  theory: [
+    { type: "heading", text: "Les ingrédients" },
+    {
+      type: "vocab",
+      title: "Ingrédients de base",
+      items: [
+        "de la farine (flour)",
+        "du beurre (butter)",
+        "des œufs (m.pl.) (eggs)",
+        "du sucre (sugar)",
+        "du lait (milk)",
+        "du sel (salt)",
+        "du poivre (pepper)",
+        "de l'huile (f.) (oil)",
+        "de la levure (baking powder / yeast)",
+        "du chocolat",
+        "de la crème (cream)",
+      ],
+    },
+    {
+      type: "heading", text: "Les ustensiles de cuisine",
+    },
+    {
+      type: "vocab",
+      title: "Ce qu'on utilise pour cuisiner",
+      items: [
+        "un bol (bowl)",
+        "un moule (baking tin)",
+        "une poêle (frying pan)",
+        "une casserole (saucepan)",
+        "un four (oven)",
+        "un fouet (whisk)",
+        "une cuillère en bois (wooden spoon)",
+        "un couteau (knife)",
+        "une planche à découper (chopping board)",
+      ],
+    },
+    {
+      type: "heading", text: "Les actions en cuisine",
+    },
+    {
+      type: "vocab",
+      title: "Verbes de cuisine",
+      items: [
+        "mélanger (to mix)",
+        "verser (to pour)",
+        "ajouter (to add)",
+        "mettre au four (to put in the oven)",
+        "faire cuire (to cook)",
+        "couper (to cut)",
+        "éplucher (to peel)",
+        "faire chauffer (to heat up)",
+        "fouetter (to whisk)",
+        "incorporer (to fold in)",
+      ],
+    },
+    {
+      type: "heading", text: "Exprimer les quantités",
+    },
+    {
+      type: "rule",
+      text: "Indiquer les quantités dans une recette.",
+      examples: [
+        { correct: "une cuillère à soupe de sucre" },
+        { correct: "100 grammes de farine" },
+        { correct: "un litre de lait" },
+        { correct: "une pincée de sel (a pinch of salt)" },
+        { correct: "une noisette de beurre (a small knob of butter)" },
+      ],
+    },
+    {
+      type: "note",
+      text: "Dans une recette française, les instructions sont souvent à l'infinitif : « Mélanger les œufs et le sucre. Ajouter la farine. »",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer l'ustensile et son utilisation",
+      instruction: "Reliez chaque ustensile à son utilisation.",
+      pairs: [
+        { left: "un fouet", right: "battre les œufs" },
+        { left: "un moule", right: "cuire un gâteau" },
+        { left: "une poêle", right: "faire sauter les légumes" },
+        { left: "un couteau", right: "couper les légumes" },
+        { left: "un bol", right: "mélanger les ingrédients" },
+        { left: "une casserole", right: "faire bouillir de l'eau" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter une recette",
+      instruction: "Complétez chaque étape de la recette avec le bon verbe.",
+      items: [
+        { sentence: "___ (mix) les œufs et le sucre dans un bol.", hint: "Mélangez", answer: "Mélangez" },
+        { sentence: "___ (add) la farine petit à petit.", hint: "Ajoutez", answer: "Ajoutez" },
+        { sentence: "___ (pour) le lait dans le mélange.", hint: "Versez", answer: "Versez" },
+        { sentence: "___ (put in the oven) à 180° pendant 30 minutes.", hint: "Mettez au four", answer: "Mettez au four" },
+        { sentence: "___ les légumes avant de les couper.", hint: "Épluchez", answer: "Épluchez" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon ingrédient",
+      instruction: "Choisissez le bon ingrédient pour compléter la phrase.",
+      items: [
+        { sentence: "Pour faire un gâteau, on a besoin de ___, de beurre et d'œufs.", choices: ["farine", "poivre", "sel", "huile"], correctIdx: 0 },
+        { sentence: "On ajoute une pincée de ___ pour assaisonner les plats.", choices: ["sel", "sucre", "lait", "farine"], correctIdx: 0 },
+        { sentence: "Pour faire une omelette, on utilise des ___ et du beurre.", choices: ["œufs", "légumes", "gâteaux", "farines"], correctIdx: 0 },
+        { sentence: "Pour faire chauffer les légumes, on utilise une ___.", choices: ["poêle", "casserole", "four", "bol"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL06: VocabLesson = {
+  slug: "a2-voc-l06",
+  code: "V.14",
+  level: "A2",
+  title: "La famille et les relations",
+  theory: [
+    { type: "heading", text: "La famille" },
+    {
+      type: "vocab",
+      title: "Membres de la famille",
+      items: [
+        "un père / une mère (father / mother)",
+        "un frère / une sœur (brother / sister)",
+        "un fils / une fille (son / daughter)",
+        "un grand-père / une grand-mère (grandfather / grandmother)",
+        "un petit-fils / une petite-fille (grandson / granddaughter)",
+        "un oncle / une tante (uncle / aunt)",
+        "un cousin / une cousine (cousin)",
+        "un neveu / une nièce (nephew / niece)",
+        "les parents (parents)",
+        "les grands-parents (grandparents)",
+        "un enfant / les enfants (child / children)",
+      ],
+    },
+    {
+      type: "heading", text: "La description physique",
+    },
+    {
+      type: "rule",
+      text: "Décrire les cheveux et les yeux.",
+      examples: [
+        { correct: "Il est blond / brun / châtain / roux." },
+        { correct: "Elle a les cheveux longs / courts / frisés / raides." },
+        { correct: "Il a les yeux bleus / verts / marron / noirs." },
+        { correct: "Elle est grande / petite / de taille moyenne." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Apparence physique",
+      items: [
+        "blond(e) / brun(e) / châtain / roux (blonde/dark/chestnut/redhead)",
+        "les cheveux longs / courts / mi-longs",
+        "les cheveux frisés / raides / ondulés",
+        "les yeux bleus / verts / marron / noirs / gris",
+        "grand(e) / petit(e) / de taille moyenne",
+        "mince / corpulent(e) (slim / heavy)",
+        "avoir une barbe / des lunettes / un tatouage",
+      ],
+    },
+    {
+      type: "heading", text: "La personnalité",
+    },
+    {
+      type: "vocab",
+      title: "Adjectifs de caractère",
+      items: [
+        "sympa(thique) (nice)",
+        "drôle / amusant(e) (funny)",
+        "sérieux/sérieuse",
+        "gentil/gentille (kind)",
+        "timide (shy)",
+        "bavard(e) (talkative)",
+        "courageux/courageuse (brave)",
+        "patient(e) / impatient(e)",
+        "généreux/généreuse (generous)",
+        "égoïste (selfish)",
+      ],
+    },
+    {
+      type: "heading", text: "Les relations",
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire des relations",
+      items: [
+        "un(e) ami(e) (friend)",
+        "un(e) copain/copine (amical(e)) (friend, informal)",
+        "mon copain / ma copine (amoureux/amoureuse) (boyfriend/girlfriend)",
+        "mon mari / ma femme (husband / wife)",
+        "un(e) partenaire (partner)",
+        "se marier (to get married)",
+        "divorcer (to divorce)",
+        "se ressembler (to look alike)",
+        "s'entendre bien avec (to get on well with)",
+      ],
+    },
+    {
+      type: "note",
+      text: "Attention : « copain/copine » peut être amical (friend) ou amoureux (boyfriend/girlfriend) selon le contexte. On dit « mon copain » pour le petit ami.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer les membres de la famille",
+      instruction: "Reliez chaque membre de la famille à sa définition.",
+      pairs: [
+        { left: "un oncle", right: "le frère du père ou de la mère" },
+        { left: "une nièce", right: "la fille du frère ou de la sœur" },
+        { left: "un cousin", right: "l'enfant de l'oncle ou de la tante" },
+        { left: "une grand-mère", right: "la mère du père ou de la mère" },
+        { left: "un gendre", right: "le mari de la fille" },
+        { left: "une belle-sœur", right: "la femme du frère" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Décrire une personne",
+      instruction: "Complétez les phrases avec le bon adjectif.",
+      items: [
+        { sentence: "Il a les cheveux ___ et les yeux verts.", hint: "roux", answer: "roux" },
+        { sentence: "Elle est très ___ : elle parle tout le temps !", hint: "bavarde", answer: "bavarde" },
+        { sentence: "Mon frère est ___ : il fait tout pour aider les autres.", hint: "généreux", answer: "généreux" },
+        { sentence: "Elle est ___ et n'aime pas parler en public.", hint: "timide", answer: "timide" },
+        { sentence: "Il est ___ : toujours sérieux, jamais de blague.", hint: "sérieux", answer: "sérieux" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "La sœur de mon père est ma ___.", choices: ["tante", "cousine", "nièce", "belle-sœur"], correctIdx: 0 },
+        { sentence: "Il a les cheveux ___ et frisés.", choices: ["châtain", "bleus", "verts", "grands"], correctIdx: 0 },
+        { sentence: "Elle est très ___ : elle aide toujours les autres.", choices: ["généreuse", "égoïste", "timide", "impatiente"], correctIdx: 0 },
+        { sentence: "Ils ___ beaucoup : même couleur de cheveux, même taille.", choices: ["se ressemblent", "se marient", "s'entendent", "se parlent"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL07: VocabLesson = {
+  slug: "a2-voc-l07",
+  code: "V.15",
+  level: "A2",
+  title: "Les médias et Internet",
+  theory: [
+    { type: "heading", text: "Internet et les réseaux sociaux" },
+    {
+      type: "vocab",
+      title: "Vocabulaire numérique",
+      items: [
+        "un site internet / un site web",
+        "sur Internet / en ligne (online)",
+        "un blog",
+        "les réseaux sociaux (social networks)",
+        "poster un commentaire (to post a comment)",
+        "un like / liker",
+        "un abonné / s'abonner (subscriber / to subscribe)",
+        "un lien (link)",
+        "un mot de passe (password)",
+        "un compte (account)",
+        "une appli / application (app)",
+      ],
+    },
+    {
+      type: "heading", text: "La presse",
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire de la presse écrite",
+      items: [
+        "un journal (newspaper)",
+        "un magazine",
+        "un article",
+        "une actualité / les actualités (news)",
+        "les informations / les infos (the news)",
+        "un titre (headline)",
+        "un reporter / un journaliste",
+        "un éditorial (editorial)",
+      ],
+    },
+    {
+      type: "heading", text: "La télévision et la radio",
+    },
+    {
+      type: "vocab",
+      title: "TV et radio",
+      items: [
+        "une chaîne (TV channel)",
+        "un programme / une émission (programme)",
+        "regarder les infos / la télé (to watch the news / TV)",
+        "écouter la radio (to listen to the radio)",
+        "un documentaire",
+        "une série (TV series)",
+        "un film",
+        "une publicité / une pub (advert)",
+        "zapper (to channel-hop)",
+      ],
+    },
+    {
+      type: "rule",
+      text: "Verbes numériques courants.",
+      examples: [
+        { correct: "Je télécharge de la musique sur Internet." },
+        { correct: "Elle envoie un email à son collègue." },
+        { correct: "On cherche des informations en ligne." },
+        { correct: "Il partage des photos sur les réseaux sociaux." },
+        { correct: "Tu as trouvé l'adresse sur Google Maps ?" },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Verbes numériques",
+      items: [
+        "télécharger (to download)",
+        "envoyer (un email / un message) (to send)",
+        "chercher (to search)",
+        "trouver (to find)",
+        "partager (to share)",
+        "commenter (to comment)",
+        "supprimer (to delete)",
+        "se connecter (to log in)",
+        "se déconnecter (to log out)",
+      ],
+    },
+    {
+      type: "note",
+      text: "TF1, France 2, France 3, M6 et Arte sont les principales chaînes de télévision françaises.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le mot et sa définition",
+      instruction: "Reliez chaque terme des médias à sa définition.",
+      pairs: [
+        { left: "un abonné", right: "quelqu'un qui suit un compte" },
+        { left: "zapper", right: "changer de chaîne souvent" },
+        { left: "un titre", right: "l'en-tête d'un article" },
+        { left: "télécharger", right: "copier un fichier depuis Internet" },
+        { left: "une chaîne", right: "une station de télévision" },
+        { left: "se connecter", right: "accéder à son compte" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon mot ou verbe.",
+      items: [
+        { sentence: "Je lis les ___ tous les matins sur mon téléphone.", hint: "infos", answer: "infos" },
+        { sentence: "Elle ___ une photo de ses vacances sur Instagram.", hint: "partage", answer: "partage" },
+        { sentence: "Il regarde un ___ sur la nature sur France 5.", hint: "documentaire", answer: "documentaire" },
+        { sentence: "Tu peux m'envoyer le ___ de cet article ?", hint: "lien", answer: "lien" },
+        { sentence: "J'ai oublié mon ___ pour accéder à mon compte.", hint: "mot de passe", answer: "mot de passe" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon verbe numérique",
+      instruction: "Choisissez le verbe correct pour compléter la phrase.",
+      items: [
+        { sentence: "Il ___ de la musique depuis Spotify.", choices: ["télécharge", "envoie", "cherche", "supprime"], correctIdx: 0 },
+        { sentence: "Elle ___ un email à son professeur pour s'excuser.", choices: ["envoie", "télécharge", "partage", "commente"], correctIdx: 0 },
+        { sentence: "Nous ___ des informations sur cette ville avant notre voyage.", choices: ["cherchons", "zapons", "téléchargeons", "supprimons"], correctIdx: 0 },
+        { sentence: "Pour voir les nouvelles de ses amis, il ___ sur Facebook.", choices: ["se connecte", "se déconnecte", "télécharge", "supprime"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+const a2VocL08: VocabLesson = {
+  slug: "a2-voc-l08",
+  code: "V.16",
+  level: "A2",
+  title: "La ville et les services",
+  theory: [
+    { type: "heading", text: "Les services publics" },
+    {
+      type: "vocab",
+      title: "Services et administrations",
+      items: [
+        "une mairie (town hall)",
+        "une préfecture (prefecture)",
+        "La Poste (post office)",
+        "une banque (bank)",
+        "une bibliothèque (library)",
+        "un hôpital",
+        "une école / un lycée / une université",
+        "un commissariat (police station)",
+        "un tribunal (court)",
+      ],
+    },
+    {
+      type: "heading", text: "Les commerces",
+    },
+    {
+      type: "vocab",
+      title: "Magasins et boutiques",
+      items: [
+        "une boulangerie (bakery)",
+        "une pharmacie (pharmacy)",
+        "un supermarché / une grande surface",
+        "un magasin de vêtements (clothes shop)",
+        "une librairie (bookshop)",
+        "une épicerie (grocery store)",
+        "un marché (market)",
+        "un coiffeur / une coiffeuse (hairdresser)",
+        "une banque (bank)",
+      ],
+    },
+    {
+      type: "heading", text: "S'orienter dans la ville",
+    },
+    {
+      type: "rule",
+      text: "Donner et comprendre des directions.",
+      examples: [
+        { correct: "Tournez à droite au feu rouge." },
+        { correct: "Allez tout droit jusqu'au carrefour." },
+        { correct: "Traversez la rue et prenez la deuxième rue à gauche." },
+        { correct: "C'est à 5 minutes à pied." },
+        { correct: "Prenez le bus numéro 12, descendez à l'arrêt « Mairie »." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Vocabulaire de l'orientation",
+      items: [
+        "tourner à droite / à gauche (to turn right / left)",
+        "aller tout droit (to go straight on)",
+        "traverser (to cross)",
+        "continuer (to continue)",
+        "prendre la rue... (to take ... street)",
+        "au carrefour (at the crossroads)",
+        "au coin de (at the corner of)",
+        "au feu rouge (at the traffic lights)",
+        "à l'arrêt de bus (at the bus stop)",
+        "à 5 minutes à pied (5 minutes' walk away)",
+      ],
+    },
+    {
+      type: "heading", text: "Les pronoms Y et EN",
+    },
+    {
+      type: "rule",
+      text: "Y remplace un lieu ou un complément introduit par À. EN remplace un complément introduit par DE.",
+      examples: [
+        { correct: "Tu vas à la banque ? — Oui, j'y vais. (y = à la banque)" },
+        { correct: "Il y a une pharmacie ici ? (il y a = there is/are)" },
+        { correct: "Tu viens de la mairie ? — Oui, j'en viens. (en = de la mairie)" },
+        { correct: "Tu as besoin d'aide ? — Oui, j'en ai besoin. (en = d'aide)" },
+      ],
+    },
+    {
+      type: "note",
+      text: "Attention : librairie = bookshop (NOT library). Bibliothèque = library.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le lieu et le service",
+      instruction: "Reliez chaque lieu à ce qu'on y fait.",
+      pairs: [
+        { left: "La Poste", right: "envoyer des lettres et des colis" },
+        { left: "une mairie", right: "déclarer une naissance, se marier" },
+        { left: "une pharmacie", right: "acheter des médicaments" },
+        { left: "une bibliothèque", right: "emprunter des livres" },
+        { left: "une boulangerie", right: "acheter du pain frais" },
+        { left: "un commissariat", right: "signaler une perte ou un vol" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "S'orienter dans la ville",
+      instruction: "Complétez les phrases avec le bon mot ou expression.",
+      items: [
+        { sentence: "Allez tout ___ et tournez à gauche.", hint: "droit", answer: "droit" },
+        { sentence: "La pharmacie est au ___ de la rue et du boulevard.", hint: "coin", answer: "coin" },
+        { sentence: "___ la rue et continuez jusqu'à la mairie.", hint: "Traversez", answer: "Traversez" },
+        { sentence: "La bibliothèque est ___ 10 minutes à pied d'ici.", hint: "à", answer: "à" },
+        { sentence: "Tu vas à la poste ? — Oui, j'___ vais maintenant.", hint: "y", answer: "y" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon pronom ou le bon lieu",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "Pour acheter un roman, je vais à ___.", choices: ["la librairie", "la bibliothèque", "la pharmacie", "la mairie"], correctIdx: 0 },
+        { sentence: "Il revient de la banque : il ___ vient.", choices: ["en", "y", "le", "la"], correctIdx: 0 },
+        { sentence: "Pour aller à la gare, tournez à droite au ___ rouge.", choices: ["feu", "coin", "carrefour", "arrêt"], correctIdx: 0 },
+        { sentence: "Vous allez à la mairie ? — Oui, nous ___ allons.", choices: ["y", "en", "le", "lui"], correctIdx: 0 },
+      ],
+    },
+  ],
+};
+
+// ── Registry ──────────────────────────────────────────────────────────────────
+
+const ALL_VOCAB_LESSONS: VocabLesson[] = [
+  a1VocL13,
+  a1VocL16,
+  a1VocL21,
+  a1VocL26,
+  a1VocL12,
+  a1VocL17,
+  a1VocL27,
+  a1VocL18,
+  a2VocL01,
+  a2VocL02,
+  a2VocL03,
+  a2VocL04,
+  a2VocL05,
+  a2VocL06,
+  a2VocL07,
+  a2VocL08,
+];
+
+export function getVocabLesson(slug: string): VocabLesson | undefined {
+  return ALL_VOCAB_LESSONS.find((l) => l.slug === slug);
+}
+
+export function getAllVocabLessons(): VocabLesson[] {
+  return ALL_VOCAB_LESSONS;
+}

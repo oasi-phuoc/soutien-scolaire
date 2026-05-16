@@ -147,6 +147,20 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-voc-l16", "V.2", "La nourriture et le restaurant", "Aliments, repas de la journée, commander et payer au restaurant.",         "vocabulaire"),
   lesson("A1", "a1-voc-l21", "V.3", "Les expressions de temps",   "Aujourd'hui, demain, après-demain, la semaine prochaine…",                    "vocabulaire"),
   lesson("A1", "a1-voc-l26", "V.4", "Le corps humain",            "Parties du corps + avoir mal à + article contracté (au/à la/aux).",            "vocabulaire"),
+  lesson("A1", "a1-voc-l12", "V.5",  "La ville et les lieux",          "Cinéma, boulangerie, mairie, restaurant… + prépositions de localisation.",   "vocabulaire"),
+  lesson("A1", "a1-voc-l17", "V.6",  "Le logement",                    "Pièces de l'appartement, meubles et équipements du quotidien.",              "vocabulaire"),
+  lesson("A1", "a1-voc-l27", "V.7",  "Les vêtements et les achats",    "Robe, pantalon, taille, marque + verbes acheter/porter/essayer.",            "vocabulaire"),
+  lesson("A1", "a1-voc-l18", "V.8",  "Les loisirs et le sport",        "Sports, activités artistiques, expressions avec faire + du/de la/de l'.",   "vocabulaire"),
+
+  // ── A2 — Vocabulaire ────────────────────────────────────────────────────
+  lesson("A2", "a2-voc-l01", "V.9",  "Les voyages et les transports",  "Gare, aéroport, billet, itinéraire + verbes de déplacement A2.",           "vocabulaire"),
+  lesson("A2", "a2-voc-l02", "V.10", "La santé et le médecin",         "Rendez-vous médical, symptômes, conseils + verbes de santé.",               "vocabulaire"),
+  lesson("A2", "a2-voc-l03", "V.11", "Le monde du travail",            "Métiers, lieu de travail, chercher un emploi, expressions avec avoir.",     "vocabulaire"),
+  lesson("A2", "a2-voc-l04", "V.12", "Les sorties et les invitations", "Sortir, organiser, apéro, expo, pique-nique + formules informelles.",       "vocabulaire"),
+  lesson("A2", "a2-voc-l05", "V.13", "La cuisine et les recettes",     "Ingrédients, ustensiles, actions de cuisine + recette simple.",             "vocabulaire"),
+  lesson("A2", "a2-voc-l06", "V.14", "La famille et les relations",    "Description physique, personnalité, relations amoureuses et amicales.",     "vocabulaire"),
+  lesson("A2", "a2-voc-l07", "V.15", "Les médias et Internet",         "Site web, réseaux sociaux, presse, TV, radio + verbes numériques.",         "vocabulaire"),
+  lesson("A2", "a2-voc-l08", "V.16", "La ville et les services",       "Services publics, commerces, orientation dans la ville + y et en.",         "vocabulaire"),
 
   // ── A1 — Grammaire au quotidien A1 — Conjugaison ────────────────────────
   lesson("A1", "a1-conj-l07", "C.1",  "Les verbes en -er au présent",           "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…",              "conjugaison"),
