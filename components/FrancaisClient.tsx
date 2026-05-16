@@ -62,6 +62,12 @@ function SectionStateBadge({ state }: { state: SectionState }) {
   );
 }
 
+function lessonHref(th: FrenchTheme): string {
+  if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
+  if (th.tab === "grammaire") return `/francais/grammaire/${th.slug}`;
+  return `/francais/${th.slug}`;
+}
+
 // ── Section card (Général tab) ─────────────────────────────────────────────────
 
 function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: SectionState; isActive: boolean }) {
@@ -111,7 +117,7 @@ function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: Section
           {themes.map((th) => (
             <li key={th.id}>
               <Link
-                href={`/francais/${th.slug}`}
+                href={lessonHref(th)}
                 className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
                 <div className="min-w-0 flex-1">
@@ -143,7 +149,7 @@ function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[]
         {themes.map((th) => (
           <li key={th.id}>
             <Link
-              href={th.tab === "conjugaison" ? `/francais/conjugaison/${th.slug}` : `/francais/${th.slug}`}
+              href={lessonHref(th)}
               className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-secondary)]"
             >
               <span className="w-14 shrink-0 text-[10px] font-bold text-[var(--color-accent-fr)]">{th.code}</span>
