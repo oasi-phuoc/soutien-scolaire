@@ -402,9 +402,9 @@ function QcmExercise({
                     ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
                     : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                 } else {
-                  if (isSelected && isCorrect) {
+                  if (isSelected) {
                     cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
-                  } else if (isSelected && !isCorrect) {
+                  } else if (isCorrect) {
                     cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
                   } else {
                     cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
@@ -429,10 +429,10 @@ function QcmExercise({
                     ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                 } else {
-                  if (isSelected && isCorrect) {
+                  if (isSelected) {
                     cls +=
                       "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-                  } else if (isSelected && !isCorrect) {
+                  } else if (isCorrect) {
                     cls +=
                       "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
                   } else {
@@ -681,10 +681,10 @@ function MatchExercise({
               "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ";
             if (validated) {
               cls += isConnected
-                ? isCorrect
-                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : isCorrect
+                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
               cls += isSelected
                 ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -725,10 +725,10 @@ function MatchExercise({
               "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors ";
             if (validated) {
               cls += isTargetted
-                ? isCorrect
-                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : isCorrect
+                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
               cls +=
                 selectedLeft !== null
@@ -915,6 +915,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     } else {
       setStepIdx((s: number) => s - 1);
       setExerciseKey((k: number) => k + 1);
+      setValidateCommand(0);
     }
   }
 
@@ -925,11 +926,13 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     } else {
       setStepIdx((s: number) => s + 1);
       setExerciseKey((k: number) => k + 1);
+      setValidateCommand(0);
     }
   }
 
   function resetExercise() {
     setExerciseKey((k: number) => k + 1);
+    setValidateCommand(0);
   }
 
   return (
