@@ -312,7 +312,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>}
+                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                           <span>{renderArrow(item)}</span>
                         </div>
                         {showTrans && transItems?.[ii] && (
