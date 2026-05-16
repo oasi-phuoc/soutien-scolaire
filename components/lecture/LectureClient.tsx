@@ -279,7 +279,7 @@ function StoriesList() {
 
   return (
     <div className="space-y-5">
-      {groups.map(({ level, label, color, stories }) => (
+      {groups.map(({ level, label, stories }) => (
         <section key={level} className="space-y-2">
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold text-[var(--color-text-primary)]">{label}</span>
