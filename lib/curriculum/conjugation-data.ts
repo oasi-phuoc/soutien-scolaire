@@ -12,7 +12,7 @@ export type TheoryBlock =
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
-  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean }
+  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean };
 
@@ -567,12 +567,13 @@ const a1ConjL01: ConjLesson = {
     {
       type: "grid",
       headers: ["", "Exemple"],
+      boldFirstCol: true,
       rows: [
-        ["identité", "Je suis Ali."],
-        ["nationalité", "Elle est française."],
-        ["profession", "Nous sommes étudiants."],
-        ["description", "Il est grand."],
-        ["situation", "Tu es à Genève."],
+        ["Identité", "Je suis Ali."],
+        ["Nationalité", "Elle est française."],
+        ["Profession", "Nous sommes étudiants."],
+        ["Description", "Il est grand."],
+        ["Situation", "Tu es à Genève."],
       ],
       transHeaders: {
         en: ["", "Example"],
@@ -582,11 +583,11 @@ const a1ConjL01: ConjLesson = {
         uk: ["", "Приклад"],
       },
       transRows: {
-        en: [["identity", "I am Ali."], ["nationality", "She is French."], ["profession", "We are students."], ["description", "He is tall."], ["location", "You are in Geneva."]],
+        en: [["Identity", "I am Ali."], ["Nationality", "She is French."], ["Profession", "We are students."], ["Description", "He is tall."], ["Location", "You are in Geneva."]],
         ar: [["هوية", "أنا علي."], ["جنسية", "هي فرنسية."], ["مهنة", "نحن طلاب."], ["وصف", "هو طويل."], ["موقع", "أنت في جنيف."]],
         fa: [["هویت", "من علی هستم."], ["ملیت", "او فرانسوی است."], ["شغل", "ما دانش‌آموز هستیم."], ["توصیف", "او قد بلند است."], ["موقعیت", "تو در ژنو هستی."]],
         ti: [["መንነት", "ኣነ ዓሊ እየ."], ["ዜግነት", "ንሳ ፈረንሳዊት እያ."], ["ሞያ", "ንሕና ተምሃሮ ኢና."], ["ምግላጽ", "ንሱ ነውሕ እዩ."], ["ቦታ", "ንስኻ ኣብ ጀኔቫ ኢኻ."]],
-        uk: [["ідентичність", "Я — Алі."], ["національність", "Вона француженка."], ["професія", "Ми студенти."], ["опис", "Він високий."], ["місцезнаходження", "Ти у Женеві."]],
+        uk: [["Ідентичність", "Я — Алі."], ["Національність", "Вона француженка."], ["Професія", "Ми студенти."], ["Опис", "Він високий."], ["Місцезнаходження", "Ти у Женеві."]],
       },
     },
     {
@@ -597,11 +598,12 @@ const a1ConjL01: ConjLesson = {
     {
       type: "grid",
       headers: ["", "Exemple"],
+      boldFirstCol: true,
       rows: [
-        ["possession", "J'ai un téléphone."],
-        ["âge", "Elle a 25 ans."],
-        ["sensations", "Nous avons faim."],
-        ["expressions", "Il a de la chance."],
+        ["Possession", "J'ai un téléphone."],
+        ["Âge", "Elle a 25 ans."],
+        ["Sensations", "Nous avons faim."],
+        ["Expressions", "Il a de la chance."],
       ],
       transHeaders: {
         en: ["", "Example"],
@@ -611,11 +613,11 @@ const a1ConjL01: ConjLesson = {
         uk: ["", "Приклад"],
       },
       transRows: {
-        en: [["possession", "I have a phone."], ["age", "She is 25 years old."], ["sensations", "We are hungry."], ["expressions", "He is lucky."]],
+        en: [["Possession", "I have a phone."], ["Age", "She is 25 years old."], ["Sensations", "We are hungry."], ["Expressions", "He is lucky."]],
         ar: [["امتلاك", "لدي هاتف."], ["عمر", "عمرها 25 سنة."], ["أحاسيس", "نحن جائعون."], ["تعابير", "هو محظوظ."]],
         fa: [["مالکیت", "من یک تلفن دارم."], ["سن", "او ۲۵ ساله است."], ["احساسات", "ما گرسنه هستیم."], ["اصطلاحات", "او خوش‌شانس است."]],
         ti: [["ምሓዝ", "ሓደ ስልኪ ኣሎኒ."], ["ዕድሜ", "ዕድሚኣ 25 ዓመት እዩ."], ["ስምዒታት", "ጠምዮና ኣሎ."], ["ዝርዝር ቃላት", "ዕድሉ ጽቡቕ እዩ."]],
-        uk: [["власність", "У мене є телефон."], ["вік", "Їй 25 років."], ["відчуття", "Ми голодні."], ["вирази", "Йому щастить."]],
+        uk: [["Власність", "У мене є телефон."], ["Вік", "Їй 25 років."], ["Відчуття", "Ми голодні."], ["Вирази", "Йому щастить."]],
       },
     },
     {
