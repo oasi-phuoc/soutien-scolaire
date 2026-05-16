@@ -25,10 +25,10 @@ const SECTION_ORDER: FrenchSection[] = ["ALPHA", "A0", "A1", "A2", "B1", "B2"];
 const SECTION_TAB: Record<FrenchSection, FrenchTab> = {
   ALPHA: "general",
   A0: "general",
-  A1: "vocabulaire",
-  A2: "grammaire",
-  B1: "grammaire",
-  B2: "conjugaison",
+  A1: "general",
+  A2: "general",
+  B1: "general",
+  B2: "general",
 };
 
 const TABS: { id: FrenchTab; label: string }[] = [
