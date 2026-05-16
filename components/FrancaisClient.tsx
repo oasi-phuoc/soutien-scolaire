@@ -2,13 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FRENCH_THEMES, frenchThemesBySection } from "@/lib/curriculum/french-data";
 import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { loadProgress } from "@/lib/progress/math-progress";
+import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 import { AppProgressBar } from "@/components/ui/AppProgressBar";
 
 type SectionDef = { id: FrenchSection; code: string; title: string; description: string };
 type SectionState = "locked" | "in_progress" | "completed";
+type LessonState = "locked" | "available" | "completed";
 
 const SECTIONS: SectionDef[] = [
   { id: "A0", code: "A0", title: "Niveau A0 — Débutant",    description: "Salutations, chiffres, couleurs, famille, corps, objets de classe" },
@@ -58,6 +61,33 @@ function SectionStateBadge({ state }: { state: SectionState }) {
   return (
     <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
       Verrouillé
+    </span>
+  );
+}
+
+// ── Lesson state dot (Lecture-style) ──────────────────────────────────────────
+
+function LessonDot({ state }: { state: LessonState }) {
+  if (state === "completed")
+    return (
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
+          <path d="M20 6L9 17l-5-5" />
+        </svg>
+      </span>
+    );
+  if (state === "available")
+    return (
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)]">
+        <span className="h-2 w-2 rounded-full bg-[var(--color-accent-fr)]" />
+      </span>
+    );
+  return (
+    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-emphasis)]">
+      <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <rect x="3" y="11" width="18" height="11" rx="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </svg>
     </span>
   );
 }
@@ -145,7 +175,25 @@ function SectionCard({ sec, state, isActive }: { sec: SectionDef; state: Section
 
 // ── Lesson list (Grammaire / Vocabulaire / Conjugaison tabs) ───────────────────
 
-function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[] }) {
+function LessonSection({
+  sec,
+  themes,
+  completedSlugs,
+  firstAvailableSlug,
+}: {
+  sec: SectionDef;
+  themes: FrenchTheme[];
+  completedSlugs: Set<string>;
+  firstAvailableSlug: string | null;
+}) {
+  const router = useRouter();
+
+  function lessonState(th: FrenchTheme): LessonState {
+    if (completedSlugs.has(th.slug)) return "completed";
+    if (th.slug === firstAvailableSlug) return "available";
+    return "locked";
+  }
+
   return (
     <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
       <div className="flex items-center gap-3 px-4 pt-4 pb-3">
@@ -161,22 +209,50 @@ function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[]
         </div>
       </div>
       <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-        {themes.map((th) => (
-          <li key={th.id}>
-            <Link
-              href={lessonHref(th)}
-              className="flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-[var(--color-bg-secondary)]"
-            >
+        {themes.map((th) => {
+          const state = lessonState(th);
+          const isLocked = state === "locked";
+          const isAvailable = state === "available";
+
+          const inner = (
+            <div className={`flex items-center gap-3 px-4 py-2.5 ${isLocked ? "opacity-40" : ""}`}>
+              <LessonDot state={state} />
               <div className="min-w-0 flex-1">
                 <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
                 <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
               </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </Link>
-          </li>
-        ))}
+              {isAvailable ? (
+                <span
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white"
+                  style={{ background: "var(--color-accent-fr)" }}
+                  aria-hidden
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </span>
+              ) : state === "completed" ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              ) : null}
+            </div>
+          );
+
+          if (isLocked) return <li key={th.id}>{inner}</li>;
+
+          return (
+            <li key={th.id}>
+              <button
+                type="button"
+                className="w-full text-left transition-colors hover:bg-[var(--color-bg-secondary)]"
+                onClick={() => router.push(lessonHref(th))}
+              >
+                {inner}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
@@ -187,20 +263,41 @@ function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[]
 export function FrancaisClient() {
   const [tab, setTab] = useState<FrenchTab>("general");
   const [currentSection, setCurrentSection] = useState<FrenchSection | null>(null);
+  const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
     const prog = loadProgress();
     const level = prog.frenchLevel ?? "PA";
     const section = LEVEL_TO_SECTION[level] ?? "ALPHA";
-    setCurrentSection(section);
+    setCurrentSection(section as FrenchSection);
+    setCompletedSlugs(getCompletedFrenchLessons());
     setHydrated(true);
+
+    function onComplete() {
+      setCompletedSlugs(getCompletedFrenchLessons());
+    }
+    window.addEventListener("soutien-french-lesson-complete", onComplete);
+    return () => window.removeEventListener("soutien-french-lesson-complete", onComplete);
   }, []);
 
   const currentIdx = currentSection ? SECTION_ORDER.indexOf(currentSection) : -1;
   const completedCount = currentIdx >= 0 ? currentIdx : 0;
   const totalSections = SECTION_ORDER.length;
   const pct = Math.round((completedCount / totalSections) * 100);
+
+  // For each tab, all lessons ordered across all sections — find first uncompleted
+  const allTabThemes = (t: FrenchTab) =>
+    FRENCH_THEMES.filter((th) => th.tab === t);
+
+  function firstAvailableSlugForTab(t: FrenchTab): string | null {
+    if (!hydrated) return null;
+    const themes = allTabThemes(t);
+    for (const th of themes) {
+      if (!completedSlugs.has(th.slug)) return th.slug;
+    }
+    return null;
+  }
 
   const lessonGroups =
     tab !== "general"
@@ -209,6 +306,8 @@ export function FrancaisClient() {
           themes: FRENCH_THEMES.filter((th) => th.section === sec.id && th.tab === tab),
         })).filter((g) => g.themes.length > 0)
       : [];
+
+  const tabFirstAvailable = tab !== "general" ? firstAvailableSlugForTab(tab) : null;
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
@@ -265,11 +364,17 @@ export function FrancaisClient() {
           ))}
         </section>
       ) : (
-        /* Lesson lists */
+        /* Lesson lists with sequential locking */
         <section className="space-y-6" aria-label={`Leçons — ${tab}`}>
           {lessonGroups.length > 0 ? (
             lessonGroups.map(({ sec, themes }) => (
-              <LessonSection key={sec.id} sec={sec} themes={themes} />
+              <LessonSection
+                key={sec.id}
+                sec={sec}
+                themes={themes}
+                completedSlugs={hydrated ? completedSlugs : new Set()}
+                firstAvailableSlug={hydrated ? tabFirstAvailable : null}
+              />
             ))
           ) : (
             <p className="text-center text-sm text-[var(--color-text-secondary)]">
