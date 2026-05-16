@@ -43,7 +43,7 @@ const a1ConjL00: ConjLesson = {
   slug: "a1-conj-l00",
   code: "C.1",
   level: "A1",
-  title: "Les pronoms personnels sujets",
+  title: "Les pronoms personnels",
   theory: [
     {
       type: "heading",
@@ -220,7 +220,7 @@ const a1ConjL00: ConjLesson = {
       transInstruction: { en: "Which pronoun replaces this group?", ar: "أي ضمير يحل محل هذه المجموعة؟", fa: "کدام ضمیر جای این گروه را می‌گیرد؟", ti: "ኣየናይ ተካኢ ቃል ነዚ ጉጅለ ይትካእ?", uk: "Який займенник замінює цю групу?" },
       toggleChoices: true,
       items: [],
-      poolSize: 6,
+      poolSize: 5,
       pool: [
         // singulier masculin → il
         { sentence: "Mon frère", choices: ["il", "elle", "ils"], correctIdx: 0 },
@@ -290,7 +290,7 @@ const a1ConjL00: ConjLesson = {
       instruction: "Écris le pronom qui remplace le nom souligné.",
       transInstruction: { en: "Write the pronoun that replaces the noun.", ar: "اكتب الضمير الذي يحل محل الاسم.", fa: "ضمیری بنویسید که جای اسم را می‌گیرد.", ti: "ጽሓፍ ተካኢ ቃል ነቲ ስም ዝትካእ.", uk: "Напишіть займенник, який замінює іменник." },
       items: [],
-      poolSize: 6,
+      poolSize: 5,
       pool: [
         { sentence: "___ parle français. (Fatima ♀)", hint: "Fatima ♀ = ?", answer: "Elle" },
         { sentence: "___ jouent. (Hamed ♂ et Omar ♂)", hint: "groupe masculin", answer: "Ils" },
@@ -469,10 +469,10 @@ const a1ConjL00: ConjLesson = {
     {
       type: "fill",
       title: "Exercice 5 — Réécris avec le pronom",
-      instruction: "Remplace le nom par le bon pronom et réécris uniquement le pronom.",
+      instruction: "Remplace le nom par le bon pronom.",
       transInstruction: { en: "Replace the noun with the correct pronoun.", ar: "استبدل الاسم بالضمير الصحيح.", fa: "اسم را با ضمیر صحیح جایگزین کنید.", ti: "ኣልቅሕ ነቲ ስም ብትኽክለኛ ተካኢ ቃል.", uk: "Замініть іменник правильним займенником." },
       items: [],
-      poolSize: 6,
+      poolSize: 5,
       pool: [
         { sentence: "Fatima ♀ mange. → ___ mange.", hint: "Fatima ♀ = ?", answer: "Elle" },
         { sentence: "Ali ♂ travaille. → ___ travaille.", hint: "Ali ♂ = ?", answer: "Il" },
@@ -551,24 +551,24 @@ const a1ConjL01: ConjLesson = {
     { type: "heading", text: "ÊTRE est utilisé pour" },
     {
       type: "grid",
-      headers: ["Emploi", "Exemple"],
+      headers: ["", "Exemple"],
       rows: [
-        ["l'identité", "Je suis Ali."],
-        ["la nationalité", "Elle est française."],
-        ["la profession", "Nous sommes étudiants."],
-        ["la description", "Il est grand."],
-        ["la situation", "Tu es à Genève."],
+        ["identité", "Je suis Ali."],
+        ["nationalité", "Elle est française."],
+        ["profession", "Nous sommes étudiants."],
+        ["description", "Il est grand."],
+        ["situation", "Tu es à Genève."],
       ],
     },
     { type: "heading", text: "AVOIR est utilisé pour" },
     {
       type: "grid",
-      headers: ["Emploi", "Exemple"],
+      headers: ["", "Exemple"],
       rows: [
-        ["la possession", "J'ai un téléphone."],
-        ["l'âge", "Elle a 25 ans."],
-        ["les sensations", "Nous avons faim."],
-        ["les expressions", "Il a de la chance."],
+        ["possession", "J'ai un téléphone."],
+        ["âge", "Elle a 25 ans."],
+        ["sensations", "Nous avons faim."],
+        ["expressions", "Il a de la chance."],
       ],
     },
     { type: "heading", text: "Expressions avec AVOIR", sub: true },

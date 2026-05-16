@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FRENCH_THEMES, frenchThemesBySection } from "@/lib/curriculum/french-data";
 import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { loadProgress } from "@/lib/progress/math-progress";
@@ -260,8 +260,14 @@ function LessonSection({
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
+const VALID_TABS: FrenchTab[] = ["general", "vocabulaire", "grammaire", "conjugaison"];
+
 export function FrancaisClient() {
-  const [tab, setTab] = useState<FrenchTab>("general");
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get("tab") as FrenchTab | null);
+  const [tab, setTab] = useState<FrenchTab>(
+    initialTab && VALID_TABS.includes(initialTab) ? initialTab : "general"
+  );
   const [currentSection, setCurrentSection] = useState<FrenchSection | null>(null);
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);

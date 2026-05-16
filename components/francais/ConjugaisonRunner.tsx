@@ -199,7 +199,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {block.headers.map((h, hi) => (
                           <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
                             {h}
-                            {block.pronounGrid && showTrans && transH?.[hi] && (
+                            {showTrans && transH?.[hi] && (
                               <span className="block text-[10px] font-normal normal-case tracking-normal text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                                 {transH[hi]}
                               </span>
@@ -212,9 +212,9 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                       {block.rows.map((row, ri) => (
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                           {row.map((cell, ci) => {
-                            const transCell = block.pronounGrid && showTrans && transR ? transR[ri]?.[ci] : undefined;
+                            const transCell = showTrans && transR ? transR[ri]?.[ci] : undefined;
                             const transText = transCell
-                              ? (transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
+                              ? (block.pronounGrid && transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
                               : undefined;
                             return (
                               <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
@@ -232,36 +232,6 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     </tbody>
                   </table>
                 </div>
-                {showTrans && (transH || transR) && !block.pronounGrid && (
-                  <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]/60" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                    <table className="w-full text-sm">
-                      {transH && (
-                        <thead>
-                          <tr className="bg-[var(--color-accent-fr)]/8">
-                            {transH.map((h, hi) => (
-                              <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
-                                {h}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                      )}
-                      {transR && (
-                        <tbody>
-                          {transR.map((row, ri) => (
-                            <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
-                              {row.map((cell, ci) => (
-                                <td key={ci} className="px-3 py-2 text-xs text-[var(--color-text-secondary)]">
-                                  {renderArrow(cell)}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      )}
-                    </table>
-                  </div>
-                )}
               </div>
             );
           }
@@ -392,16 +362,14 @@ function QcmExercise({
     onValidated(allCorrect);
   }
 
-  const allAnswered = selected.every((s: number | null) => s !== null);
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allAnswered && !validated);
-  }, [allAnswered, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
@@ -434,8 +402,8 @@ function QcmExercise({
                     ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
                     : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                 } else {
-                  if (isCorrect) {
-                    cls += "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400";
+                  if (isSelected && isCorrect) {
+                    cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                   } else if (isSelected && !isCorrect) {
                     cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
                   } else {
@@ -461,9 +429,9 @@ function QcmExercise({
                     ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                     : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                 } else {
-                  if (isCorrect) {
+                  if (isSelected && isCorrect) {
                     cls +=
-                      "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700";
+                      "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                   } else if (isSelected && !isCorrect) {
                     cls +=
                       "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
@@ -563,16 +531,14 @@ function FillExercise({
     onValidated(allCorrect);
   }
 
-  const allFilled = inputs.every((s: string) => s.trim() !== "");
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
-  }, [allFilled, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
@@ -606,7 +572,7 @@ function FillExercise({
               className={`w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[var(--color-accent-fr)]/30 ${
                 validated
                   ? correct
-                    ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                    ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                     : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
               }`}
@@ -675,16 +641,14 @@ function MatchExercise({
     onValidated(allCorrect);
   }
 
-  const allConnected = exercise.pairs.every((_, li) => connections.has(li));
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allConnected && !validated);
-  }, [allConnected, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
 
   return (
     <div className="space-y-5">
@@ -712,7 +676,7 @@ function MatchExercise({
             if (validated) {
               cls += isConnected
                 ? isCorrect
-                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                   : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
                 : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
@@ -756,7 +720,7 @@ function MatchExercise({
             if (validated) {
               cls += isTargetted
                 ? isCorrect
-                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                   : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
                 : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
@@ -821,18 +785,18 @@ function WriteExercise({
   const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
   const [validated, setValidated] = useState(false);
 
-  const allFilled = inputs.every((s) => s.trim() !== "");
-
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allFilled) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
-  }, [allFilled, validated]);
+    onCanValidateChange(!validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated]);
 
   function setInput(i: number, val: string) {
     setInputs((prev) => prev.map((v, idx) => (idx === i ? val : v)));
@@ -897,8 +861,16 @@ function ExerciseView({
 
 // ── Main runner ───────────────────────────────────────────────────────────────
 
+function subjectToTab(subject: string): string {
+  const s = subject.toLowerCase();
+  if (s === "grammaire") return "grammaire";
+  if (s === "vocabulaire") return "vocabulaire";
+  return "conjugaison";
+}
+
 export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
+  const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
   const midExercises = lesson.midExercises ?? [];
@@ -934,7 +906,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   function goBack() {
     if (isFirst) {
-      router.push("/francais");
+      router.push(returnUrl);
     } else {
       setStepIdx((s: number) => s - 1);
       setExerciseKey((k: number) => k + 1);
@@ -944,7 +916,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   function goNext() {
     if (isLast) {
       markFrenchLessonComplete(lesson.slug);
-      router.push("/francais");
+      router.push(returnUrl);
     } else {
       setStepIdx((s: number) => s + 1);
       setExerciseKey((k: number) => k + 1);
@@ -984,17 +956,11 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       </div>
 
       {/* Step label */}
-      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        {isTheory
-          ? (lesson.theory2 || midExercises.length > 0
-              ? isTheory2 ? "Théorie 2" : "Théorie 1"
-              : "")
-          : (() => {
-              const exNum = isMidEx ? stepIdx : stepIdx - exStart + 1 + midExercises.length;
-              const exTotal = midExercises.length + lesson.exercises.length;
-              return `Exercice ${exNum} / ${exTotal}`;
-            })()}
-      </p>
+      {isTheory && (lesson.theory2 || midExercises.length > 0) && (
+        <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+          {isTheory2 ? "Théorie 2" : "Théorie 1"}
+        </p>
+      )}
 
       {/* Content */}
       <div className="min-h-[280px]">
