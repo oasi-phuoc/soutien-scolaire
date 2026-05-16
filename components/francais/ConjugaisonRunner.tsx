@@ -198,6 +198,11 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {block.headers.map((h, hi) => (
                           <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
                             {h}
+                            {block.pronounGrid && showTrans && transH?.[hi] && (
+                              <span className="block text-[10px] font-normal normal-case tracking-normal text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                                {transH[hi]}
+                              </span>
+                            )}
                           </th>
                         ))}
                       </tr>
@@ -205,17 +210,28 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     <tbody>
                       {block.rows.map((row, ri) => (
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
-                          {row.map((cell, ci) => (
-                            <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
-                              {block.pronounGrid ? renderPronounCell(cell) : renderArrow(cell)}
-                            </td>
-                          ))}
+                          {row.map((cell, ci) => {
+                            const transCell = block.pronounGrid && showTrans && transR ? transR[ri]?.[ci] : undefined;
+                            const transText = transCell
+                              ? (transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
+                              : undefined;
+                            return (
+                              <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
+                                {block.pronounGrid ? renderPronounCell(cell) : renderArrow(cell)}
+                                {transText && (
+                                  <span className="block text-xs text-[var(--color-text-secondary)] mt-0.5" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                                    {transText}
+                                  </span>
+                                )}
+                              </td>
+                            );
+                          })}
                         </tr>
                       ))}
                     </tbody>
                   </table>
                 </div>
-                {showTrans && (transH || transR) && (
+                {showTrans && (transH || transR) && !block.pronounGrid && (
                   <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]/60" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                     <table className="w-full text-sm">
                       {transH && (
