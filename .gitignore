@@ -44,3 +44,6 @@ yarn-error.log*
 # extractions locales (docx)
 tmp_geom_outline.txt
 tmp_algo_outline.txt
+
+# PDFs de référence (non versionnés)
+ref/*.pdf

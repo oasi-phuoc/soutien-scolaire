@@ -1,0 +1,820 @@
+﻿Total pages: 322
+--- PAGE 1 ---
+FLE
+Français langue étrangère
+La grammaire
+au quotidien
+Manuel de grammaire
+communicative
+A2
+Manon Grimaud
+duamirG
+.M
+evitacinummoc
+eriammarg
+ed
+leunaM
+neiditouq
+ua
+eriammarg
+aL
+--- PAGE 2 ---
+FLE
+Français langue étrangère
+La grammaire
+au quotidien
+Manuel de grammaire
+communicative
+A2
+Manon Grimaud
+--- PAGE 3 ---
+« La réforme portant sur l’accent circonflexe des verbes
+a été appliquée dans cet ouvrage. Elle le supprime,
+par exemple :
+Ê connaître : connaitre,
+Ê dîner : diner,
+Ê disparaître : disparaitre. »
+ISBN 9782340-036826
+© Ellipses Édition Marketing S.A., 2020
+32, rue Bargue 75740 Paris cedex 15
+--- PAGE 4 ---
+Introduction
+La Grammaire au quotidien s’adresse aux adultes et adolescents débutants ainsi qu’aux
+enseignants de Français langue étrangère en charge d’apprenants visant l’acquisition
+du niveau A2 du Cadre européen commun de référence des langues (CECRL).
+L’idée de ce livre s’inspire de mon expérience de terrain en tant qu’enseignante de
+FLE : bien souvent, lorsque l’enseignant de FLE a en charge une classe de débutants, il
+construit sa progression de cours en utilisant un ou deux manuels de référence. Ceux-ci
+proposent des exercices de systématisation ayant pour objectif la fixation des règles
+abordées en classe, cependant ces exercices sont parfois en nombre insuffisant. Ainsi,
+certains apprenants en réclament davantage ou bien l’enseignant estime qu’il est
+nécessaire d’en rajouter afin que les formes étudiées soient mieux maitrisées. C’est là
+que le manuel de grammaire intervient. Enseignants et apprenants y sélectionnent des
+exercices complémentaires afin de compléter ce qui est proposé dans le(s) manuel(s)
+de référence. Or, bien souvent, les ouvrages de grammaire sont organisés par entrées
+linguistiques et non sémantiques ce qui peut poser problème à plusieurs niveaux.
+D’une part, cela isole les contenus grammaticaux du sens qu’ils véhiculent dans la
+communication authentique (de ce fait, l’apprenant, s’il les réalise en autonomie, ne
+sera pas toujours capable de les utiliser en contexte réel). D’autre part, le vocabulaire
+utilisé dans les exercices n’est pas toujours connu, ce qui peut faire obstacle à une
+bonne compréhension et donc à la réalisation de l’exercice. En effet, des activités
+décontextualisées ont souvent l’inconvénient d’être opaques au niveau du sens, ce
+qui pose problème à l’enseignant comme à l’apprenant. Le premier doit procéder à
+un travail de re-contextualisation ou de modification de l’exercice afin que celui-ci soit
+compréhensible par l’apprenant. Ce dernier, s’il travaille en autonomie, doit élucider le
+sens des mots utilisés dans l’activité avant de pouvoir s’y atteler, ce qui peut s’avérer
+décourageant et fatigant d’un point de vue cognitif. Enfin, enseignant et apprenant
+se voient contraints d’aller chercher dans quelles situations telle ou telle formule
+peut être employée. Finalement, aucune des deux parties ne peut utiliser l’ouvrage
+tel quel sous peine de rencontrer des difficultés de compréhension, de logique ou
+d’adéquation au réel.
+C’est pourquoi notre ouvrage propose d’aborder la grammaire pour débutants non
+par entrées linguistiques mais par entrées sémantiques, comme le font la plupart des
+méthodes de français général. À chaque acte de parole correspondra un ensemble
+de contenus grammaticaux, ainsi qu’un ou plusieurs champs lexicaux bien précis.
+Les exercices seront toujours contextualisés afin de se rapprocher au maximum de
+situations authentiques que l’apprenant pourrait rencontrer dans la vie réelle.
+3
+--- PAGE 5 ---
+[no text extracted]
+--- PAGE 6 ---
+Sommaire
+Introduction .......................................................................................................................................................... 3
+Chapitre 1. Le présent de l’indicatif – L’apprentissage au quotidien ......... 9
+1. Les verbes en « -er » ............................................................................................................................. 10
+2. Les verbes en « -er » – Particularités ..................................................................................... 15
+3. Les verbes en « -ir » (2e et 3e groupes) .................................................................................. 19
+4. Les verbes irréguliers (verbes courants du 3e groupe) ......................................... 24
+5. Les verbes pronominaux ................................................................................................................ 28
+Chapitre 2. A pprendre une langue – Parler de ses motivations /
+Caractériser ...................................................................................................................... 31
+6. Les verbes « prendre », « apprendre », « comprendre » au présent ........... 32
+7. L’interrogation (1/5) – Les questions fermées (1/2) .................................................. 36
+8. L’interrogation (1/5) – Les questions fermées (2/2) – La question avec
+inversion ........................................................................................................................................................ 40
+9. Répondre aux questions fermées ........................................................................................... 46
+10. L’interrogation (2/5) – Pourquoi ? « Pour » ou « Parce que » ............................. 50
+11. Les adjectifs (1/3) – Généralités ................................................................................................. 54
+12. Les adjectifs (2/3) – Cas particuliers et place de l’adjectif ................................. 59
+13. Les adjectifs (3/3) – « C’est + adjectif invariable » – « Tout le » / « Toute
+la » / « Tous les » / « Toutes les » .............................................................................................................. 63
+Chapitre 3. Se déplacer – Localiser et choisir un moyen de transport ...... 67
+14. Les verbes pour se déplacer : « aller », « venir », « rentrer »,
+« retourner », « revenir », « partir », « arriver » .............................................................. 68
+15. Les verbes pour se déplacer : le choix de la préposition ..................................... 74
+16. Les prépositions pour les villes et les pays ..................................................................... 78
+17. Les moyens de transport et leurs prépositions .......................................................... 81
+5
+--- PAGE 7 ---
+18. Les prépositions de lieu ................................................................................................................... 84
+19. Les pronoms relatifs simples (1/2) – « qui » et « que » ............................................ 88
+20. Les pronoms relatifs simples (2/2) – « où » et « dont » ........................................... 91
+Chapitre 4. Prendre, décaler, annuler un rendez-vous médical ...................... 95
+21. Les verbes en « -dre » au présent de l’indicatif ............................................................ 96
+22. Le « conditionnel de politesse » (1/2) – Demander quelque chose
+(« vouloir », « pouvoir », « aimer », « souhaiter ») ............................................................... 100
+23. L’interrogation (3/5) – « Quel(le)(s) + nom » .................................................................... 104
+24. L’interrogation (4/5) – Les pronoms interrogatifs « lequel, laquelle,
+lesquels, lesquelles » / Exprimer la douleur et les sensations ....................... 109
+25. La négation (1/2) (ne … pas / ne … plus) et la restriction (ne … que) ....... 113
+26. Le conditionnel de politesse (2/2) – Donner un conseil
+(« devoir », « falloir », « pouvoir ») ............................................................................................... 117
+Chapitre 5. Commencer un nouveau travail – Découvrir un nouvel
+environnement ............................................................................................................. 121
+27. « Savoir » ou « connaitre » – Quelques verbes de communication ............... 122
+28. Les adjectifs possessifs (rappel) – Les pronoms possessifs .............................. 129
+29. Les adjectifs démonstratifs (rappel) – Les pronoms démonstratifs ......... 134
+30. L’interrogation (5/5) avec « où », « quand », « qui », « combien »,
+« comment », « que/quoi » ................................................................................................................ 139
+31. Les pronoms toniques ....................................................................................................................... 146
+32. Les adverbes de temps et de fréquence ............................................................................ 150
+Chapitre 6. Organiser une soirée crêpes – Inviter quelqu’un,
+faire des courses, donner des instructions .......................................... 155
+33. Les articles définis et indéfinis (rappel) ............................................................................. 156
+34. L’expression de la quantité (les partitifs et « quantité + de ») ........................ 160
+35. Les pronoms compléments (pronoms COD et COI) ................................................. 166
+36. Les pronoms neutres Y et EN ....................................................................................................... 172
+37. L’impératif .........................................................................................
+--- PAGE 8 ---
+Chapitre 7. Raconter un changement de vie – Situer et comparer ............... 185
+38. Le passé récent / être en train de / le futur proche .................................................. 186
+39. Le comparatif ............................................................................................................................................ 190
+40. « Bon(ne)(s) » ou « Bien » / « Meilleur(e)(s) » ou « Mieux » .................................... 195
+41. Le superlatif ................................................................................................................................................ 197
+42. La négation (2/2) (ne… jamais / rien / personne) ........................................................ 200
+43. Le participe présent et le gérondif ........................................................................................ 204
+Chapitre 8. Le passé composé – Parler de ses expériences ................................. 209
+44. Le passé composé avec l’auxiliaire « avoir » ................................................................... 210
+45. Le passé composé avec l’auxiliaire « être » ..................................................................... 216
+46. Les verbes qui utilisent les deux auxiliaires .................................................................. 221
+47. Le passé composé des verbes pronominaux ................................................................. 225
+48. Les marqueurs chronologiques ................................................................................................ 229
+Chapitre 9. L’imparfait – Décrire le passé ............................................................................ 235
+49. L’imparfait .................................................................................................................................................... 236
+50. L’imparfait (cas particuliers) ........................................................................................................ 241
+51. Passé composé ou imparfait ? ..................................................................................................... 245
+52. Les relations logiques – La cause et la conséquence ............................................. 250
+Chapitre 10. Le futur simple – Parler de l’avenir et faire des projets .......... 255
+53. Le futur simple (verbes réguliers) ........................................................................................... 256
+54. Le futur simple (verbes irréguliers) – Futur simple ou futur proche ? ..... 261
+55. Les repères chronologiques ......................................................................................................... 266
+56. L’hypothèse sur le futur ................................................................................................................... 270
+Annexes ..................................................................................................................................
+--- PAGE 9 ---
+[no text extracted]
+--- PAGE 10 ---
+Chapitre 1. Le présent de l’indicatif
+L’apprentissage au quotidien
+--- PAGE 11 ---
+1
+Les verbes en « -er »
+Lisez et observez (pour la prononciation des chiffres et des nombres, voir annexe 2).
+(À la cafétéria de l’école)
+Camila : — Tu vis en France depuis 2 ans mais tu ne parles pas couramment
+français ?
+Max : — En fait, j’habite à Paris et j’ai une colocataire. Nous venons de pays
+différents. Moi, je suis hollandais et elle, elle s’appelle Vaiva et elle est
+lituanienne. À la maison et au travail, nous parlons anglais et quand nous
+sortons, nous allons souvent chez des amis étrangers aussi… Mais comme
+nous finissons le travail à 18 h, nous avons le temps de prendre des cours du
+soir. À deux, c’est plus motivant !
+Camila : — Et vous aimez apprendre le français ?
+Max : — Oui ! En plus, nous avons un bon professeur. Les élèves aiment beaucoup
+ses cours. Nous étudions la langue mais ce n’est pas ennuyeux. Il demande
+souvent : « Vous comprenez ? Vous souhaitez réviser la règle avant de conti-
+nuer ? » et il choisit toujours des documents intéressants qui enrichissent
+notre vocabulaire. Je me souviens facilement des exceptions grâce à ses
+exemples et je réussis presque toujours mes exercices. On progresse vite !
+Camila : — Tu réfléchis parfois en français maintenant ? Parce que moi, oui !
+Max : — Oui ! Et je rêve aussi en français parfois ! C’est fou !
+Il y a trois groupes de verbes au présent de l’indicatif.
+Les verbes en « -er »
+ Les verbes en « -er » sont les verbes du 1er (premier) groupe.
+ Pour conjuguer ces verbes, on remplace « -er » par les terminaisons : -e, -es, -e,
+-ons, -ez, -ent.
+Parler(infinitif) Phonétique (voir annexe 1)
+Je parle On ne prononce pas le « e ».
+Tu parles [paʁl] On ne prononce pas le « es ».
+Base « parl- » Il/Elle/On parle On ne prononce pas le « e ».
++ terminaisons Nous parlons [paʁlɔ̃] On ne prononce pas le « -s ».
+Vous parlez [paʁle] « ez » se prononce « é ».
+Ils/Elles parlent [paʁl] On ne prononce pas le « ent ».
+10
+--- PAGE 12 ---
+1
+Ê Autres exemples
+J’aime (Aimer) Nous habitons (Habiter)
+z
+Tu demandes (Demander) Vous souhaitez (Souhaiter)
+Il/Elle/On progresse (Progresser) Ils/Elles travaillent (Travailler)
+▲ Remarque
+Le verbe « aller » ne se conjugue pas comme les verbes du 1er groupe, il est donc
+irrégulier et fait partie du 3e (troisième) groupe (voir leçon 4, chapitre 1).
+Les verbes en « -ier »
+Le verbe « étudier » est un verbe du premier groupe. La base du verbe est « étudi- »
+et la terminaison est « -er ». Il ne faut pas oublier le « i » de la base :
+Étudier Phonétique
+J’étudie
+Tu étudies [etydi]
+Il/Elle/On étudie
+Base « étudi- » n
++ terminaisons Nous étudions
+[etydjɔ̃]
+z
+Vous étudiez
+[etydje]
+z
+Ils/Elles étudient
+[etydi]
+z
+Autres verbes courants en « -ier » : oublier, remercier, apprécier, crier, etc.
+▲ Remarque
+Les verbes en « -uer » fonctionnent de la même façon. Exemple : distribuer (je distri-
+bue, nous distribuons).
+La négation
+La négation se place avant et après le verbe : ne + verbe + pas.
+Ê Exemple
+Je ne parle pas français.
+11
+--- PAGE 13 ---
+1
+L’élision
+« Je » ou « ne » deviennent « j’ » (« j » apostrophe) ou « n’ » (« n » apostrophe) devant
+une voyelle ou un « h muet » (voir annexe 4). Cela s’appelle « l’élision ».
+Ê Exemples
+J’habite / Je n’habite pas en France.
+J’étudie / Je n’étudie pas le français.
+▲ Rappel
+« On » a plusieurs sens :
+ On = nous (familier)
+Ê Ma colocataire et moi, on prend des cours.
+ On = généralité (= tout le monde/personne)
+Ê En France, on parle français, on aime le vin, on s’intéresse à la culture et on
+mange bien.
+ On = quelqu’un/quelques personnes
+Ê Au travail, on me dit souvent que mon accent est joli.
+Vocabulaire
+• Un cours de français, des cours du soir
+• Prendre des cours, avoir cours, donner des cours
+• Une école (à l’école, à la cafétéria de l’école)
+• À la maison, au travail
+• Étudier (une langue)
+• Distribuer (un document)
+• Un colocataire / une colocataire, un ami / une amie, un professeur / une
+professeure, un élève / une élève, un étudiant / une étudiante
+• Un étranger / une étrangère
+• Réviser, comprendre, réussir, progresser, enrichir, réfléchir
+• Un exercice, une exception, une règle, un document
+• Une apostrophe
+12
+--- PAGE 14 ---
+1
+Ѣ Exercices
+1 Que signifie « on » dans ces phrases ? Cochez la bonne réponse.
+« Tout « Quelqu’un »
+« Nous » le monde » « Quelques
+« Personne » personnes »
+En cours, on regarde des vidéos en
+X
+français. Je trouve cela intéressant.
+On s’intéresse beaucoup à la politique
+en France ?
+On habite ensemble, c’est ma
+colocataire !
+Parfois, on m’appelle « Madame »,
+parfois « Mademoiselle », ça dépend…
+On ne mange pas pendant les cours, ce
+n’est pas poli.
+2 Dans ces phrases, faites les élisions nécessaires (je ➜ j’ / ne ➜ n’).
+(Je) habite et (je) travaille à Paris, en France et (je) prends
+des cours du soir dans une école de langue. (Je) aime beaucoup la langue
+française mais (je ne) aime pas la grammaire. (Je) ai de la chance, mon
+colocataire, Max, est dans ma classe et il adore faire des exercices. (Je ne) ai
+pas d’excuses pour ne pas réviser à la maison. Grâce à lui, (je) progresse vite !
+3 Conjuguez ces verbes du premier groupe au présent de l’indicatif.
+Sur un site internet de petites annonces
+Référence : 19 Référence : 24
+Bonjour ! Salut à tous !
+Je (souhaiter) Nous (chercher)
+trouver une personne pour prati- un ou une colocataire.
+quer le français. En échange, Nous (habiter)
+je (donner) des dans un quartier calme et sympa.
+cours d’espagnol. Pour avoir des détails, merci
+A bientôt ! d’envoyer un mail à Max.
+Camila Max et Vaiva
+13
+--- PAGE 15 ---
+1
+4 Complétez ce mail. Faites l’élision si nécessaire.
+De : giacomo@email.fr*
+À : max@email.fr
+Objet : Annonce pour la colocation (réf : 24)
+Bonjour !
+Je (arriver) à Paris la semaine prochaine. Je suis italien,
+je (étudier) à Rome mais je (participer) à un
+programme d’échange avec l’université et je (rêver) de Paris
+depuis longtemps. Je (aimer) faire la cuisine (surtout les pâtes)
+et je (adorer) le cinéma. Je (ne pas habiter) en
+colocation à Rome mais tous mes amis (penser) que c’est une
+expérience géniale !
+J’aimerais vous rencontrer et visiter l’appartement.
+A bientôt !
+Giacomo
+* giacomo@email.fr = « giacomo arobase email point F R »
+14
+--- PAGE 16 ---
+2
+Les verbes en « -er »
+Particularités
+Les verbes en « -ger » et « -cer »
+Ils ont une particularité à la 1re personne du pluriel, pour des raisons phonétiques.
+Nous commençons les cours à 8 h. Ils finissent à midi. Nous mangeons avec
+les autres élèves du groupe à la cafétéria avant de rentrer à la maison.
+Ê Ne dites pas : Dites :
+Nous mangons Nous mangeons [mɑʒ̃ ɔ̃]
+Nous commencons Nous commençons [komɑs̃ ɔ̃] (ç = « c » cédille)
+Autres verbes courants : déplacer, prononcer, avancer, changer, nager, voyager,
+mélanger, protéger, obliger, etc.
+Les verbes à deux bases
+ Certains verbes ont deux bases. C’est le cas des verbes qui terminent par
+« e + consonne + er » (ex : s’appeler, acheter, jeter, emmener). Ces verbes ont
+une irrégularité phonétique pour toutes les personnes sauf « nous » et « vous ».
+Il y a alors deux cas :
+– les verbes avec « e + double consonne » comme « appeler » ➜ j’appelle
+– les verbes avec un accent grave (è) comme « acheter » ➜ j’achète
+Dans les deux cas, le « e » avant deux consonnes et le « è » se prononcent [ɛ].
+ Avec double consonne :
+Appeler Phonétique
+J’appelle
+Base 1 : « appell- » Tu appelles [apɛl]
+Il/Elle/On appelle
+n
+Nous appelons
+[apəlɔ̃]
+z
+Base 2 : « appel- »
+Vous appelez
+[apəle]
+z
+Ils/Elles appellent
+Base 1 [apɛl]
+z
+Autres verbes courants avec double consonne : jeter (je jette, nous jetons),
+se rappeler (je me rappelle, nous nous rappelons), épeler (j’épelle, nous épelons), etc.
+15
+--- PAGE 17 ---
+2
+ Avec un accent grave (è)
+Acheter Phonétique
+J’achète
+Base 1 : « achèt- » Tu achètes [aʃɛt]
+Il/Elle/On achète
+n
+Nous achetons
+[aʃətɔ̃]
+z
+Base 2 : « achet- »
+Vous achetez
+[aʃəte]
+z
+Ils/Elles achètent
+Base 1 [aʃɛt]
+z
+Autres verbes courants avec un accent grave : emmener (j’emmène, nous
+emmenons), enlever (j’enlève, nous enlevons), etc.
+▲ Remarque
+On fait la même chose si le verbe a un infinitif en « é + consonne + er » comme le verbe
+« espérer » : J’espère, tu espères, il espère, nous espérons, vous espérez, ils espèrent.
+Autres verbes courants : répéter , interpréter, etc.
+La négation
+La négation se place avant et après le verbe : ne + verbe + pas.
+Ê Exemple
+Nous ne commençons pas les cours à 8 h.
+L’élision
+« Je » ou « ne » deviennent « j’ » ou « n’ » devant une voyelle ou un « h muet ».
+Vocabulaire
+• Commencer quelque chose
+• Manger quelque chose
+• Appeler quelqu’un
+• Acheter quelque chose
+• La phonétique
+• Une irrégularité
+• Une consonne ≠ une voyelle
+• Un accent grave (è) / un accent aigu (é)
+• Muet ≠ sonore / prononcé
+• ç = « c » cédille
+16
+--- PAGE 18 ---
+2
+Ѣ Exercices
+1 Entourez la bonne réponse.
+1. Je préfére / Je préfère prendre des cours le matin.
+2. Tu répétes / Tu répètes ce que dit le professeur.
+3. Il épèle / Il épelle son nom.
+4. Nous changeons / Nous changons de professeur lundi prochain.
+5. Vous jettez / Vous jetez les documents inutiles ?
+6. Ils appellent / Ils appelent leur professeur par son prénom.
+7. Nous commencons / Nous commençons les cours demain.
+2 Complétez ces conjugaisons en ajoutant des accents (graves « è » ou
+aigus « é ») si nécessaire.
+Espérer Acheter Répéter
+J’espere J’achete Je répete
+Tu esperes Tu achetes Tu répetes
+Il/Elle/On espere Il/Elle achete Il/Elle répete
+Nous esperons Nous achetons Nous répetons
+Vous esperez Vous achetez Vous répetez
+Ils/Elles esperent Ils/Elles achetent Ils/Elles répetent
+17
+--- PAGE 19 ---
+2
+3 Conjuguez ces verbes du premier groupe au présent de l’indicatif.
+Faites l’élision si nécessaire.
+Sur le forum de l’école, rubrique « Questions et Réponses »
+Objet : Questions avant de commencer les cours
+Bonjour !
+Ma petite amie et moi (commencer) les cours à l’école la semaine
+prochaine. Nous sommes très contents mais nous avons quelques questions.
+1) En général, vous (manger) à la cafétéria le midi ou
+vous (amener) votre repas ? Je (espérer)
+qu’il y a de la bonne cuisine française dans les plats proposés ! J
+2) Est-ce que je (acheter) un cahier pour prendre des notes
+ou est-ce que les professeurs (distribuer) des photocopies ?
+Merci d’avance pour vos réponses.
+Karen et Bryan
+Réponse
+Salut !
+Pour la cafétéria, c’est comme vous (préférer).
+Moi, je (préférer) amener ma nourriture parce qu’il y a beaucoup
+de choses que je (ne pas aimer). Et si vous (amener)
+vos plats, c’est plus rapide. Il y a beaucoup de monde à la cafétéria le midi…
+Sofia
+Réponse
+Bonjour à vous deux !
+Pour le livre, ça dépend. En général, le prof (donner) des
+documents mais pour un cours de plusieurs semaines, c’est mieux si vous
+(acheter) le livre de l’école (et ça fait un souvenir après). J
+Je pense que c’est mieux si tu (acheter) un cahier, c’est important
+de pouvoir noter des choses pendant le cours.
+A bientôt à la cafétéria ou en classe !
+Mohamed
+18
+--- PAGE 20 ---
+3
+Les verbes en « -ir »
+(2e et 3e groupes)
+Lisez et observez.
+Quand nous sortons de cours, Max et moi sommes contents. Nous sentons
+que nous progressons. Le week-end, pas de cours ! Nous choisissons entre
+faire du sport et une sortie culturelle. Parfois nous courons dans un parc et
+parfois nous partons visiter un musée ou simplement explorer la ville. Nous
+vivons à Paris, il y a toujours quelque chose à faire!
+Les verbes en « -ir » font partie des 2e (deuxième) et 3e (troisième) groupes. Les
+terminaisons sont : -s, -s, -t, -ons, -ez, -ent.
+Les verbes du 2e groupe
+Ils ont deux bases, une pour le singulier et une pour le pluriel.
+Pour conjuguer ces verbes, on remplace « -r » par les terminaisons. On rajoute « ss »
+avant les terminaisons pour les personnes du pluriel.
+Finir (infinitif) Phonétique
+Je finis
+Base 1 : « fini- » Tu finis [fini]
+Il/Elle/On finit
+Nous finissons [finisɔ]̃
+Base 2 : « finiss- » Vous finissez [finise]
+Ils/Elles finissent [finis]
+Ê Autres exemples
+Je réussis (Réussir) Nous finissons (Finir)
+Tu réfléchis (Réfléchir) Vous remplissez (Remplir)
+Il/Elle/On choisit (Choisir) Ils/Elles enrichissent (Enrichir)
+z
+Autres verbes courants : grossir, grandir, vieillir, atterrir, etc.
+▲ Remarque
+Les verbes « naitre » et « connaitre » sont des verbes en « -tre » mais ils se conjuguent
+de la même façon (je nais, nous naissons / je connais, nous connaissons).
+19
+--- PAGE 21 ---
+3
+Les verbes en « -ir » du 3e groupe
+Il existe beaucoup de cas différents mais les terminaisons sont les mêmes.
+ Cas 1 : Verbes avec deux bases (différentes des bases du 2e groupe)
+Base du singulier : sans la consonne avant « ir » (Sor-tir)
+Base du pluriel : infinitif sans « ir » (Sort-ir)
+Sortir Partir Dormir
+Je sors Je pars Je dors
+Base 1 :
+« sor- », « par- », Tu sors Tu pars Tu dors
+« dor- »
+Il/Elle/On sort Il/Elle/On part Il dort
+Nous sortons Nous partons Nous dormons
+Base 2 :
+« sort- », « part- », Vous sortez Vous partez Vous dormez
+« dorm- »
+Ils/Elles sortent Ils/Elles partent Ils dorment
+Autres verbes courants : mentir, servir, s’endormir, (se) sentir, ressentir, etc.
+▲ Remarque
+Les verbes « vivre » et « suivre » sont des verbes en « -re » mais ils se conjuguent de
+la même façon.
+ Vivre : Je vis, tu vis, il vit, nous vivons, vous vivez, ils vivent.
+ Suivre : Je suis, tu suis, il suit, nous suivons, vous suivez, ils suivent.
+ Cas 2 : Verbes avec trois bases
+Base du singulier : irrégulière
+Base des 1re et 2e personnes du pluriel : infinitif sans « ir » (Ven-ir)
+Base de la 3e personne du pluriel : base du singulier + double consonne
+Venir Tenir
+Je viens Je tiens
+Base 1 :
+Tu viens Tu tiens
+« vien- », « tien- »
+Il/Elle/On vient Il/Elle/On tient
+Nous venons Nous tenons
+Base 2 :
+« ven- », « ten- »
+Vous venez Vous tenez
+Base 3 : « vienn- », « tienn- » Ils/Elles viennent Ils/Elles tiennent
+Autres verbes courants : les verbes qui finissent par « venir » (devenir, revenir, etc.)
+et « tenir » (obtenir, soutenir, appartenir, etc.)
+20
+--- PAGE 22 ---
+3
+ Cas 3 : Verbes qui se conjuguent comme les verbes en « -er ».
+Ouvrir Offrir Souffrir
+J’ouvre J’offre Je souffre
+Tu ouvres Tu offres Tu souffres
+Il/Elle/On ouvre Il/Elle/On offre
+Il/Elle/On souffre
+n n
+Nous ouvrons Nous offrons
+Nous souffrons
+z z
+Vous ouvrez Vous offrez
+Vous souffrez
+z z
+Ils/Elles ouvrent Ils/Elles offrent
+Ils/Elles souffrent
+z z
+▲ Cas particuliers
+ Le verbe « courir » a seulement une base : Je cours, tu cours, il court, nous courons,
+vous courez, ils courent. Les verbes « rire » et « sourire » sont des verbes en « -ire »
+mais ils se conjuguent de la même façon que le verbe « courir » : Je ris, tu ris, il rit,
+nous rions, vous riez, ils rient.
+ Le verbe « mourir » change complètement sauf pour « nous » et « vous » : Je meurs,
+tu meurs, il meurt, nous mourons, vous mourez, ils meurent.
+La négation
+La négation se place avant et après le verbe : ne + verbe + pas
+Ê Exemples
+Ils ne finissent pas l’exercice.
+Je n’ouvre pas mon livre.
+L’élision
+« Je » ou « ne » deviennent « j’ » ou « n’ » devant une voyelle ou un « h muet ».
+Vocabulaire
+• Finir, choisir, réussir, enrichir, sentir (quelque chose)
+• Réfléchir (à quelque chose)
+• Remplir (un document / un formulaire d’inscription)
+• Suivre (des cours)
+• Venir (en cours / à l’école)
+• Sortir, partir (de + lieu)
+• Connaitre (quelqu’un ou quelque chose)
+• Dormir, courir
+• Vivre (à Paris, avec quelqu’un, en colocation)
+• Naitre ≠ Mourir
+21
+--- PAGE 23 ---
+3
+Ѣ Exercices
+1 2e groupe ou 3e groupe ? Cochez la bonne réponse.
+2e groupe 3e groupe Infinitif
+Nous partons X Partir
+Nous choisissons X Choisir
+Ils dorment Dormir
+Tu ouvres Ouvrir
+Ils grandissent Grandir
+Nous offrons Offrir
+Vous finissez Finir
+Je tiens Tenir
+Tu cours Courir
+Nous réfléchissons Réfléchir
+Il vient Venir
+Ils meurent Mourir
+Vous sentez Sentir
+2 Conjuguez les verbes entre parenthèses au présent.
+Dans mon école de français
+1. L’école (ouvrir) à 8 h.
+2. Les élèves (choisir) entre les cours en groupe et les cours
+particuliers.
+3. Pendant les cours, nous (réfléchir) et nous parlons beaucoup !
+4. À midi, nous (courir) à la cafétéria, nous avons trop faim !
+5. Nous (finir) les cours à 16 h.
+6. Le groupe est très divers. Les élèves (venir) de plusieurs pays.
+7. Nous (ne pas partir) tout de suite après les cours, nous
+restons boire un café tous ensemble.
+22
+--- PAGE 24 ---
+3
+3 Conjuguez ces verbes en « -ir » au présent de l’indicatif. Faites l’élision
+si nécessaire.
+(Au secrétariat de l’école)
+Le secrétaire : — Je peux vous renseigner ?
+Camila : — Je (réfléchir). Je crois que je vais m’inscrire dans
+les cours du matin. Ils (finir) à 12 h 30, c’est bien ça ?
+Le secrétaire : — C’est ça ! Ils commencent à 9 h 30. L’école et la cafétéria
+(ouvrir) à 9 h.
+Camila : — Je regarde combien de temps il me faut pour venir… 30 minutes
+si je (venir) en métro. Alors, si je (dormir)
+jusqu’à 7 h 30 et que je (partir) de la maison à 8 h 30, c’est
+bon. Pardon, je pense à voix haute.
+Le secrétaire : — Ahah*, pas de problème. Alors, si vous (choisir)
+les cours du matin, vous devez remplir ce formulaire.
+Camila : — Dans le cours de madame Bérato ?
+Le secrétaire : — Oui, vous la (connaitre) ?
+Camila : Non, je (ne pas connaitre) la professeure personnellement
+mais j’ai une amie qui (suivre) ses cours. Elle dit que c’est génial.
+Je (sentir) que je vais progresser !
+Le secrétaire : Encore une bonne nouvelle : l’école (offrir) un
+petit-déjeuner de bienvenue le jour de la rentrée.
+Camila : Je (mourir) d’envie* de commencer les cours !
+* Ahah = transcription du bruit des rires, en français.
+* mourir de + sensation/sentiment = structure familière pour exagérer l’expression (mourir
+de faim, mourir de rire, mourir de chaud, mourir d'envie, etc.)
+23
+--- PAGE 25 ---
+4
+Les verbes irréguliers
+(verbes courants du 3e groupe)
+Quelques verbes du troisième groupe très courants :
+Être Avoir Aller
+Je suis [syi] J’ai [e] Je vais [vɛ]
+Tu es Tu as Tu vas
+[ɛ] [a] [va]
+Il/Elle/On est Il/Elle/On a
+Il/Elle/On va
+n n
+Nous avons Nous allons
+Nous sommes [sɔm] [avɔ]̃ [alɔ]̃
+z z
+Vous êtes Vous avez Vous allez
+[ɛt] [ave] [ale]
+z z z
+Ils/Elles ont
+Ils/Elles sont [sɔ̃] [ɔ]̃ Ils/Elles vont [vɔ]̃
+z
+Faire Pouvoir Vouloir
+Je fais Je peux Je veux
+Tu fais [fɛ] Tu peux [pø] Tu veux [vø]
+Il/Elle/On fait Il/Elle/On peut Il/Elle/On veut
+Nous faisons [fəzɔ]̃ Nous pouvons [puvɔ]̃ Nous voulons [vulɔ]̃
+Vous faites [fɛt] Vous pouvez [puve] Vous voulez [vule]
+Ils/Elles font [fɔ]̃ Ils/Elles peuvent [pœv] Ils/Elles veulent [vœl]
+Voir Croire Devoir
+Je vois Je crois Je dois
+Tu vois [vwa] Tu crois [kʁwa] Tu dois [dwa]
+Il/Elle/On voit Il/Elle/On croit Il/Elle/On doit
+Nous voyons [vwajɔ]̃ Nous croyons [kʁwajɔ̃] Nous devons [dəvɔ]̃
+Vous voyez [vwaje] Vous croyez [kʁwaje] Vous devez [dəve]
+Ils/Elles voient [vwa] Ils/Elles croient [kʁwa] Ils/Elles doivent [dwav]
+24
+--- PAGE 26 ---
+4
+Savoir Boire
+Je sais Je bois
+Tu sais [sɛ] Tu bois [bwa]
+Il/Elle/On sait Il/Elle/On boit
+Nous savons [savɔ]̃ Nous buvons [byvɔ]̃
+Vous savez [save] Vous buvez [byve]
+Ils/Elles savent [sav] Ils/Elles boivent [bwav]
+Les verbes « falloir » et « pleuvoir » se conjuguent seulement avec « il ». Ce sont des
+verbes impersonnels (il ≠ quelqu’un).
+Ê Falloir : il faut [fo]
+Ê Pleuvoir : il pleut [plø]
+La négation
+La négation se place avant et après le verbe : ne + verbe + pas.
+Ê Exemple
+Nous ne sommes pas français.
+C’est ➜ Ce n’est pas
+Il y a beaucoup d’autres verbes dans le 3e groupe. Quelques verbes peuvent être
+regroupés en catégorie. Ils sont expliqués dans les chapitres suivants.
+L’élision
+« Je » ou « ne » deviennent « j’ » ou « n’ » devant une voyelle ou un « h muet ».
+Vocabulaire
+Les verbes de cette leçon
+25
+--- PAGE 27 ---
+4
+Ѣ Exercices
+1 Complétez avec les verbes « être », « avoir » ou « aller ». Faites l’élision
+si nécessaire.
+1. Ils à l’école en voiture.
+2. Il un appartement à Paris.
+3. Tu étudiant.
+4. Nous ne pas français.
+5. Vous le temps de prendre des cours ?
+6. Elles françaises.
+7. Ils cours le week-end.
+2 Conjuguez les verbes au présent. Faites l’élision si nécessaire.
+Sur le forum de l’école, rubrique « Questions et Réponses »
+Objet : Activités après les cours pour progresser en français ?
+Bonjour !
+Qu’est-ce que vous (faire) après les cours pour pratiquer le
+français ? Je (vouloir) progresser vite.
+Merci d’avance pour vos idées.
+Bryan
+Réponse
+Salut !
+Tu (devoir) rencontrer des Français !
+Quand tu (sortir) avec eux, c’est comme un cours intensif et tu
+apprends des expressions familières… C’est drôle !
+Sofia
+26
+--- PAGE 28 ---
+4
+Réponse
+Coucou !
+Tu (être) dans mon cours je (croire) ! Le mercredi,
+nous (aller) dans un café qui propose des « ateliers de conversa-
+tion ». Si tu (vouloir), tu (pouvoir) venir avec nous
+la prochaine fois !
+Lin
+Réponse
+Salut !
+Tu (savoir), il (falloir) mettre du français dans ton
+quotidien : radio, télévision. Lire, écouter. Quand il (pleuvoir) par
+exemple, je regarde des films en français, avec les sous-titres en français ! Pour
+le vocabulaire, c’est super !
+Darya
+Réponse
+Je fais du sport avec des Français ! Tu (connaitre) l’association
+« Bla Bla Sport » ? Elle (avoir) un bureau dans l’école. Les membres
+de l’association (savoir) que ce (ne pas être) facile
+de rencontrer des Français donc ils organisent des évènements sportifs et
+ils (faire) des équipes mixtes. Ensuite, les gens (boire)
+un verre et parfois, des amitiés (naitre). Moi, je (faire)
+partie de l’équipe de basketball. À bientôt ! J
+Shota
+27
+--- PAGE 29 ---
+5
+Les verbes pronominaux
+ Pour les verbes pronominaux (se + infinitif), il faut rajouter un pronom.
+Se souvenir S’appeler
+Je me souviens Je m’appelle
+Tu te souviens Tu t’appelles
+Il/Elle/On se souvient Il/Elle/On s’appelle
+Nous nous appelons
+Nous nous souvenons
+z
+Vous vous appelez
+Vous vous souvenez
+z
+Ils/Elles se souviennent Ils/Elles s’appellent
+Autres verbes courants : se lever, se coucher, se laver, s’habiller, se promener,
+s’occuper de, s’intéresser à, se dépêcher, etc.
+ Beaucoup de verbes peuvent être à la forme pronominale ou non. Cela change
+le sens.
+– Laver : Je lave mes vêtements (Sujet + verbe + complément) : Ce sont les
+vêtements que je lave.
+– Se laver : Je me lave (le sujet et le complément sont la même personne) : C’est
+moi-même que je lave (= je prends une douche / je prends un bain)
+La négation
+Pour les verbes pronominaux, le pronom reste attaché au verbe.
+Ê Exemple
+Je ne me souviens pas de cette règle de grammaire.
+Je ne m’appelle pas Maria, je m’appelle Giulia.
+L’élision
+« Je », « me », « te » et « se » deviennent « j’ », « m’ », « t’ », « s’ » devant une voyelle
+ou un « h muet ».
+Vocabulaire
+• Se souvenir de quelqu’un / de quelque chose
+• S’appeler + prénom / nom
+• La grammaire, une règle (de grammaire)
+28
+--- PAGE 30 ---
+5
+Ѣ Exercices
+1 Pronominal ou non ? Choisissez le verbe qui convient.
+1. J’appelle / Je m’appelle Julien. Et toi, quel est ton prénom ?
+2. Je viens à l’école à pied. Comme ça, je me promène / je promène un peu.
+3. Dans votre pays, vous appelez / vous vous appelez le professeur par son prénom ?
+4. La langue française intéresse / s’intéresse Camila depuis toujours.
+5. Nous ne souvenons pas / Nous ne nous souvenons pas de ce mot… Qu’est-ce
+qu’il veut dire ?
+6. Les élèves s’intéressent / intéressent souvent à la culture française aussi !
+2 Complétez ces phrases avec les verbes ci-dessous et conjuguez-les
+à la forme qui convient : « s’occuper » – « se lever » – « se dépêcher » –
+« s’intéresser » – « se coucher » – « s’appeler ».
+1. Je à 8 h tous les jours, sauf le dimanche.
+2. Tu tard ?
+3. Elle de la cafétéria de l’école.
+4. Nous parce que nous sommes en retard !
+5. Vous à la culture ?
+6. Elles presque pareil, Julie et Julia !
+3 Répondez à ces questions à la forme négative. Faites l’élision si
+nécessaire.
+1. Tu te souviens de cette règle ?
+Non, je de cette règle.
+2. Il se lève tôt pour venir à l’école ?
+Non, il tôt, il a cours l’après-midi !
+3. Vous vous occupez de l’organisation des cours ?
+Non, je de cela.
+4. Ils s’intéressent à la grammaire ?
+Non, ils à la grammaire.
+5. Tu t’appelles Camila ?
+Non, je Camila…
+29
