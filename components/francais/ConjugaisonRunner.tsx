@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type {
   TheoryBlock,
@@ -11,6 +11,7 @@ import type {
 } from "@/lib/curriculum/conjugation-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
+import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -316,9 +317,13 @@ function shuffle<T>(arr: T[]): T[] {
 function QcmExercise({
   exercise,
   onValidated,
+  validateCommand,
+  onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "qcm" }>;
   onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
 }) {
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
@@ -342,6 +347,7 @@ function QcmExercise({
   }
 
   function validate() {
+    if (validated) return;
     setValidated(true);
     const allCorrect = items.every(
       (item, i) => selected[i] === item.correctIdx,
@@ -349,12 +355,16 @@ function QcmExercise({
     onValidated(allCorrect);
   }
 
-  function reset() {
-    setSelected(new Array(items.length).fill(null));
-    setValidated(false);
-  }
-
   const allAnswered = selected.every((s: number | null) => s !== null);
+
+  useEffect(() => {
+    if (validateCommand > 0) validate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(allAnswered && !validated);
+  }, [allAnswered, validated, onCanValidateChange]);
 
   return (
     <div className="space-y-5">
@@ -366,12 +376,12 @@ function QcmExercise({
           <p className="text-sm font-medium text-[var(--color-text-primary)]">
             {i + 1}. {item.sentence}
           </p>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {item.choices.map((choice, ci) => {
               const isSelected = selected[i] === ci;
               const isCorrect = ci === item.correctIdx;
               let cls =
-                "rounded-[var(--radius-md)] border px-3 py-2.5 text-left text-sm font-medium transition-colors ";
+                "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
               if (!validated) {
                 cls += isSelected
                   ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -403,19 +413,6 @@ function QcmExercise({
           </div>
         </div>
       ))}
-
-      {!validated && (
-        <button
-          type="button"
-          onClick={validate}
-          disabled={!allAnswered}
-          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          Valider
-        </button>
-      )}
-
-      <ResetButton onReset={reset} />
     </div>
   );
 }
@@ -435,9 +432,13 @@ function normalizeAnswer(s: string): string {
 function FillExercise({
   exercise,
   onValidated,
+  validateCommand,
+  onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "fill" }>;
   onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
 }) {
   const [items] = useState<typeof exercise.items>(() => {
     if (exercise.pool && exercise.pool.length > 0) {
@@ -461,6 +462,7 @@ function FillExercise({
   }
 
   function validate() {
+    if (validated) return;
     setValidated(true);
     const allCorrect = items.every(
       (item: FillItem, i) =>
@@ -469,12 +471,16 @@ function FillExercise({
     onValidated(allCorrect);
   }
 
-  function reset() {
-    setInputs(new Array(items.length).fill(""));
-    setValidated(false);
-  }
-
   const allFilled = inputs.every((s: string) => s.trim() !== "");
+
+  useEffect(() => {
+    if (validateCommand > 0) validate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(allFilled && !validated);
+  }, [allFilled, validated, onCanValidateChange]);
 
   return (
     <div className="space-y-5">
@@ -489,9 +495,6 @@ function FillExercise({
           <div key={i} className="space-y-2">
             <p className="text-sm font-medium text-[var(--color-text-primary)]">
               {i + 1}. {item.sentence}
-            </p>
-            <p className="text-xs text-[var(--color-text-secondary)]">
-              ({item.hint})
             </p>
             <input
               type="text"
@@ -515,19 +518,6 @@ function FillExercise({
           </div>
         );
       })}
-
-      {!validated && (
-        <button
-          type="button"
-          onClick={validate}
-          disabled={!allFilled}
-          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          Valider
-        </button>
-      )}
-
-      <ResetButton onReset={reset} />
     </div>
   );
 }
@@ -537,9 +527,13 @@ function FillExercise({
 function MatchExercise({
   exercise,
   onValidated,
+  validateCommand,
+  onCanValidateChange,
 }: {
   exercise: Extract<Exercise, { type: "match" }>;
   onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
 }) {
   const [rightItems] = useState<MatchPair[]>(() => shuffle(exercise.pairs));
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
@@ -570,6 +564,7 @@ function MatchExercise({
   }
 
   function validate() {
+    if (validated) return;
     setValidated(true);
     const allCorrect = exercise.pairs.every((pair, li) => {
       const connectedRightIdx = connections.get(li);
@@ -579,13 +574,16 @@ function MatchExercise({
     onValidated(allCorrect);
   }
 
-  function reset() {
-    setConnections(new Map());
-    setSelectedLeft(null);
-    setValidated(false);
-  }
-
   const allConnected = exercise.pairs.every((_, li) => connections.has(li));
+
+  useEffect(() => {
+    if (validateCommand > 0) validate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(allConnected && !validated);
+  }, [allConnected, validated, onCanValidateChange]);
 
   return (
     <div className="space-y-5">
@@ -702,46 +700,7 @@ function MatchExercise({
         </div>
       )}
 
-      {!validated && (
-        <button
-          type="button"
-          onClick={validate}
-          disabled={!allConnected}
-          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
-        >
-          Valider
-        </button>
-      )}
-
-      <ResetButton onReset={reset} />
     </div>
-  );
-}
-
-// ── Reset button ──────────────────────────────────────────────────────────────
-
-function ResetButton({ onReset }: { onReset: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onReset}
-      aria-label="Recommencer l'exercice"
-      className="flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-    >
-      <svg
-        width="13"
-        height="13"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        aria-hidden
-      >
-        <path d="M1 4v6h6" />
-        <path d="M3.51 15a9 9 0 1 0 .49-4" />
-      </svg>
-      Recommencer
-    </button>
   );
 }
 
@@ -750,9 +709,13 @@ function ResetButton({ onReset }: { onReset: () => void }) {
 function ExerciseView({
   exercise,
   onValidated,
+  validateCommand,
+  onCanValidateChange,
 }: {
   exercise: Exercise;
   onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -760,13 +723,13 @@ function ExerciseView({
         {exercise.title}
       </h2>
       {exercise.type === "qcm" && (
-        <QcmExercise exercise={exercise} onValidated={onValidated} />
+        <QcmExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "fill" && (
-        <FillExercise exercise={exercise} onValidated={onValidated} />
+        <FillExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "match" && (
-        <MatchExercise exercise={exercise} onValidated={onValidated} />
+        <MatchExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
     </div>
   );
@@ -779,14 +742,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const pivot = usePivotLang();
   const pivotLabel = PIVOT_LANGS.find(l => l.code === pivot)?.label ?? pivot;
   const [showTrans, setShowTrans] = useState(false);
-  // theory pages: lesson.theory (always) + lesson.theory2 (optional)
   const theoryPages = lesson.theory2
     ? [lesson.theory, lesson.theory2]
     : [lesson.theory];
   const theoryCount = theoryPages.length;
-  // stepIdx 0..theoryCount-1 = theory pages; theoryCount..N = exercises
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
+  const [canValidate, setCanValidate] = useState(false);
+  const [validateCommand, setValidateCommand] = useState(0);
 
   const totalSteps = theoryCount + lesson.exercises.length;
   const isFirst = stepIdx === 0;
@@ -794,9 +757,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const isTheory = stepIdx < theoryCount;
   const currentExercise = isTheory ? null : lesson.exercises[stepIdx - theoryCount] ?? null;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // Reset exercise state when moving to a new step
+  useEffect(() => {
+    setCanValidate(false);
+    setValidateCommand(0);
+  }, [stepIdx, exerciseKey]);
+
   const handleValidated = useCallback<(allCorrect: boolean) => void>((_allCorrect: boolean) => {
-    // Feedback is shown inline; "Suivant" becomes available after validation
+    setCanValidate(false);
   }, []);
 
   function goBack() {
@@ -810,6 +778,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   function goNext() {
     if (isLast) {
+      markFrenchLessonComplete(lesson.slug);
       router.push("/francais");
     } else {
       setStepIdx((s: number) => s + 1);
@@ -852,7 +821,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       {/* Step label */}
       <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
         {isTheory
-          ? theoryCount > 1 ? `Cours · ${stepIdx + 1} / ${theoryCount}` : "Cours"
+          ? theoryCount > 1 ? `${stepIdx + 1} / ${theoryCount}` : ""
           : `Exercice ${stepIdx - theoryCount + 1} / ${lesson.exercises.length}`}
       </p>
 
@@ -878,6 +847,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             key={exerciseKey}
             exercise={currentExercise}
             onValidated={handleValidated}
+            validateCommand={validateCommand}
+            onCanValidateChange={setCanValidate}
           />
         ) : null}
       </div>
@@ -906,27 +877,32 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               Retour
             </button>
 
-            {/* Reset (exercises only) */}
+            {/* Reset + Validate (exercises only) */}
             {!isTheory && (
-              <button
-                type="button"
-                aria-label="Recommencer l'exercice"
-                onClick={resetExercise}
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-              >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  aria-label="Recommencer l'exercice"
+                  onClick={resetExercise}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                 >
-                  <path d="M1 4v6h6" />
-                  <path d="M3.51 15a9 9 0 1 0 .49-4" />
-                </svg>
-              </button>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M1 4v6h6" />
+                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  aria-label="Valider l'exercice"
+                  onClick={() => setValidateCommand((c: number) => c + 1)}
+                  disabled={!canValidate}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </button>
+              </div>
             )}
 
             {/* Next */}
