@@ -76,7 +76,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "heading":
             return (
               <div key={i} className={block.trans?.[pivot as keyof typeof block.trans] ? "space-y-0.5" : ""}>
-                <h2 className={`font-bold text-[var(--color-text-primary)] ${block.sub ? "text-base" : "text-lg"}`}>
+                <h2 className={`font-bold ${block.sub ? "text-base" : "text-lg"} ${block.accent ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
                   {block.text}
                 </h2>
                 {showTrans && block.trans?.[pivot as keyof typeof block.trans] && (

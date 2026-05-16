@@ -7,7 +7,7 @@ export type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
 type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
 
 export type TheoryBlock =
-  | { type: "heading"; text: string; trans?: Trans; sub?: boolean }
+  | { type: "heading"; text: string; trans?: Trans; sub?: boolean; accent?: boolean }
   | { type: "table"; tables: ConjugTable[] }
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
@@ -624,20 +624,22 @@ const a1ConjL01: ConjLesson = {
       type: "heading",
       text: "Expressions avec AVOIR",
       sub: true,
+      accent: true,
       trans: { en: "Expressions with AVOIR", ar: "تعابير مع فعل AVOIR", fa: "اصطلاحات با فعل AVOIR", ti: "ዝርዝር ቃላት ምስ AVOIR", uk: "Вирази з AVOIR" },
     },
     {
       type: "grid",
       headers: ["Expression", "Signification"],
+      boldFirstCol: true,
       rows: [
-        ["avoir faim", "vouloir manger"],
-        ["avoir soif", "vouloir boire"],
-        ["avoir froid", "ressentir le froid"],
-        ["avoir chaud", "ressentir la chaleur"],
-        ["avoir peur", "être effrayé(e)"],
-        ["avoir mal", "ressentir une douleur"],
-        ["avoir raison", "être correct(e)"],
-        ["avoir tort", "se tromper"],
+        ["Avoir faim", "vouloir manger"],
+        ["Avoir soif", "vouloir boire"],
+        ["Avoir froid", "ressentir le froid"],
+        ["Avoir chaud", "ressentir la chaleur"],
+        ["Avoir peur", "être effrayé(e)"],
+        ["Avoir mal", "ressentir une douleur"],
+        ["Avoir raison", "être correct(e)"],
+        ["Avoir tort", "se tromper"],
       ],
       transHeaders: {
         en: ["Expression", "Meaning"],
@@ -647,11 +649,11 @@ const a1ConjL01: ConjLesson = {
         uk: ["Вираз", "Значення"],
       },
       transRows: {
-        en: [["to be hungry", "to want to eat"], ["to be thirsty", "to want to drink"], ["to be cold", "to feel cold"], ["to be hot", "to feel hot"], ["to be afraid", "to be frightened"], ["to be in pain", "to feel pain"], ["to be right", "to be correct"], ["to be wrong", "to make a mistake"]],
+        en: [["To be hungry", "to want to eat"], ["To be thirsty", "to want to drink"], ["To be cold", "to feel cold"], ["To be hot", "to feel hot"], ["To be afraid", "to be frightened"], ["To be in pain", "to feel pain"], ["To be right", "to be correct"], ["To be wrong", "to make a mistake"]],
         ar: [["أكون جائعاً", "أريد أن آكل"], ["أكون عطشاناً", "أريد أن أشرب"], ["أشعر بالبرد", "أحس بالبرودة"], ["أشعر بالحر", "أحس بالحرارة"], ["أكون خائفاً", "أكون مذعوراً"], ["أشعر بالألم", "أحس بالأذى"], ["أكون على حق", "أكون صحيحاً"], ["أكون مخطئاً", "أرتكب خطأً"]],
         fa: [["گرسنه بودن", "خواستن خوردن"], ["تشنه بودن", "خواستن آشامیدن"], ["سرد بودن", "احساس سرما کردن"], ["گرم بودن", "احساس گرما کردن"], ["ترسیدن", "وحشت‌زده بودن"], ["درد داشتن", "احساس درد کردن"], ["حق داشتن", "درست بودن"], ["اشتباه کردن", "اشتباه کردن"]],
         ti: [["ጠሚኻ ምዃን", "ምብላዕ ምደላይ"], ["ጸሚኻ ምዃን", "ምስታይ ምደላይ"], ["ቁሪ ምስምዓ", "ቁሪ ምስማዕ"], ["ሙቐት ምስምዓ", "ሙቐት ምስማዕ"], ["ፈሪሕካ ምዃን", "ፍርሒ ምስምዓ"], ["ቃንዛ ምስምዓ", "ቃንዛ ምስማዕ"], ["ልክዕ ምዃን", "ትኽክለኛ ምዃን"], ["ጌጋ ምዃን", "ምስሓቱ"]],
-        uk: [["бути голодним", "хотіти їсти"], ["бути спраглим", "хотіти пити"], ["бути холодним", "відчувати холод"], ["бути гарячим", "відчувати тепло"], ["боятися", "бути наляканим"], ["боліти", "відчувати біль"], ["бути правим", "бути правильним"], ["помилятися", "робити помилку"]],
+        uk: [["Бути голодним", "хотіти їсти"], ["Бути спраглим", "хотіти пити"], ["Бути холодним", "відчувати холод"], ["Бути гарячим", "відчувати тепло"], ["Боятися", "бути наляканим"], ["Боліти", "відчувати біль"], ["Бути правим", "бути правильним"], ["Помилятися", "робити помилку"]],
       },
     },
   ],
