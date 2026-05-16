@@ -91,6 +91,16 @@ export function MathematiquesClient() {
   const [tab, setTab] = useState<MathTabId>("algebra");
   const [progress, setProgress] = useState<StoredProgressV1>(createInitialProgress);
   const [hydrated, setHydrated] = useState(false);
+  const [manualOverrides, setManualOverrides] = useState<Record<string, boolean>>({});
+
+  function isModuleExpanded(id: string, state: ModuleDisplayState): boolean {
+    if (id in manualOverrides) return manualOverrides[id]!;
+    return state === "in_progress" || state === "available";
+  }
+
+  function toggleModule(id: string, state: ModuleDisplayState) {
+    setManualOverrides((prev) => ({ ...prev, [id]: !isModuleExpanded(id, state) }));
+  }
 
   useEffect(() => {
     setProgress(loadProgress());
@@ -221,6 +231,8 @@ export function MathematiquesClient() {
               ? m.submodules.findIndex((sub) => !completedSubIds.has(sub.id))
               : -1;
 
+            const expanded = isModuleExpanded(m.id, displayState);
+
             return (
               <li key={m.id}>
                 <div
@@ -232,12 +244,17 @@ export function MathematiquesClient() {
                         : "border-[var(--color-border-default)]"
                   }`}
                 >
-                  {/* Module header — clickable */}
+                  {/* Module header */}
                   <button
                     type="button"
-                    disabled={isLocked}
-                    onClick={() => { if (!isLocked) router.push(`/mathematiques/${m.id}`); }}
-                    className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left disabled:cursor-not-allowed"
+                    onClick={() => {
+                      if (displayState === "in_progress" || displayState === "available") {
+                        router.push(`/mathematiques/${m.id}`);
+                      } else {
+                        toggleModule(m.id, displayState);
+                      }
+                    }}
+                    className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
                   >
                     <div
                       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
@@ -264,16 +281,16 @@ export function MathematiquesClient() {
                         <span className="text-sm">{prog.medal}</span>
                       ) : null}
                       <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
-                      {!isLocked && (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-text-secondary)]" aria-hidden>
+                      {(displayState === "locked" || displayState === "completed") && (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
                           <path d="M9 18l6-6-6-6" />
                         </svg>
                       )}
                     </div>
                   </button>
 
-                  {/* Progress bar (in_progress only) */}
-                  {displayState === "in_progress" && hydrated && (
+                  {/* Progress bar (in_progress only, when expanded) */}
+                  {expanded && displayState === "in_progress" && hydrated && (
                     <div className="px-4 pb-2">
                       <AppProgressBar value={subPct} color={accentColor} height={4} />
                       <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
@@ -283,7 +300,7 @@ export function MathematiquesClient() {
                   )}
 
                   {/* Submodule list */}
-                  {m.submodules.length > 0 && (
+                  {expanded && m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                       {m.submodules.map((sub, idx) => {
                         const subDone = completedSubIds.has(sub.id);

@@ -672,7 +672,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
         )}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-[60]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button type="button" onClick={onBack}

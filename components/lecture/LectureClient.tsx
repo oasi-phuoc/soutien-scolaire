@@ -84,6 +84,12 @@ function ModuleCard({
   const router = useRouter();
   const modState = hydrated ? getModuleState(progress, mod.id) : "locked";
   const locked = modState === "locked";
+  const isCollapsible = modState === "locked" || modState === "completed";
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    if (hydrated && !isCollapsible) setExpanded(true);
+  }, [hydrated, isCollapsible]);
 
   const moduleLetters = SUBMODULE_SEQUENCE.filter((s) => s.moduleId === mod.id);
   const completedCount = hydrated
@@ -103,7 +109,11 @@ function ModuleCard({
       }`}
     >
       {/* Module header */}
-      <div className="flex items-center gap-3 px-4 pt-4 pb-3">
+      <button
+        type="button"
+        onClick={() => isCollapsible && setExpanded((e) => !e)}
+        className={`flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left ${isCollapsible ? "" : "cursor-default"}`}
+      >
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)]/10">
           <span className="text-sm font-bold text-[var(--color-accent-lecture)]">{mod.code}</span>
         </div>
@@ -112,10 +122,15 @@ function ModuleCard({
           <p className="text-xs text-[var(--color-text-secondary)]">{mod.description}</p>
         </div>
         <ModuleStateBadge state={modState} />
-      </div>
+        {isCollapsible && (
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        )}
+      </button>
 
-      {/* Progress bar (only when started) */}
-      {modState !== "locked" && modState !== "available" && (
+      {/* Progress bar (only when started and expanded) */}
+      {expanded && modState !== "locked" && modState !== "available" && (
         <div className="px-4 pb-2">
           <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={4} />
           <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
@@ -125,7 +140,7 @@ function ModuleCard({
       )}
 
       {/* Submodule list */}
-      <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
+      {expanded && <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
         {mod.letters.flatMap((letter, i) => {
           const subState = hydrated
             ? getSubmoduleState(progress, mod.id, letter.letterLower)
@@ -242,7 +257,7 @@ function ModuleCard({
 
           return [letterLi, revLi];
         })}
-      </ul>
+      </ul>}
     </div>
   );
 }
@@ -268,7 +283,6 @@ function StoriesList() {
         <section key={level} className="space-y-2">
           <div className="flex items-center gap-2">
             <span className="text-sm font-bold text-[var(--color-text-primary)]">{label}</span>
-            <span className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${color}`}>{level}</span>
           </div>
           <ul className="space-y-2">
             {stories.map((story) => (

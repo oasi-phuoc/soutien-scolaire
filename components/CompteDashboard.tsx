@@ -79,7 +79,7 @@ export function CompteDashboard({
 
   return (
     <>
-      <main className="mx-auto w-full max-w-2xl flex-1 space-y-8 px-4 py-6 pb-32">
+      <main className="mx-auto w-full max-w-xl flex-1 space-y-8 px-4 py-6 pb-32">
         <div className="flex items-center gap-3 pb-4">
           <Link
             href="/"

@@ -113,7 +113,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
                 <img
                   src={imgSrc}
                   alt={word.label}
-                  className="absolute inset-0 h-full w-full object-contain p-1 rounded-[var(--radius-md)]"
+                  className="absolute inset-0 h-full w-full object-contain p-1 pt-7 pr-7 rounded-[var(--radius-md)]"
                 />
                 <button
                   type="button"
