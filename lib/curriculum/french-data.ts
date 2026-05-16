@@ -145,6 +145,16 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-conj-l28", "C.8",  "Passé récent et présent continu",        "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",       "conjugaison"),
   lesson("A1", "a1-conj-l29", "C.9",  "Passé composé avec avoir",               "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).",                 "conjugaison"),
   lesson("A1", "a1-conj-l30", "C.10", "Passé composé avec être",                "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",           "conjugaison"),
+
+  // ── A2 — Grammaire au quotidien A2 — Conjugaison ─────────────────────────
+  lesson("A2", "a2-conj-l01", "C.11", "Les verbes en -er — révision et particularités",   "Verbes en -ger/-cer, deux bases (préférer, acheter, appeler) ; élision et liaisons.",    "conjugaison"),
+  lesson("A2", "a2-conj-l02", "C.12", "Les verbes en -ir (2e et 3e groupes)",              "Finir/choisir (2e groupe) vs partir/venir/ouvrir (3e groupe) : formes et différences.",  "conjugaison"),
+  lesson("A2", "a2-conj-l03", "C.13", "Les verbes irréguliers courants",                   "Avoir, être, faire, aller, vouloir, pouvoir, devoir, sortir, boire, croire, connaître…", "conjugaison"),
+  lesson("A2", "a2-conj-l04", "C.14", "Le conditionnel de politesse",                      "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.","conjugaison"),
+  lesson("A2", "a2-conj-l05", "C.15", "L'impératif",                                       "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.","conjugaison"),
+  lesson("A2", "a2-conj-l06", "C.16", "Le passé composé — avoir et être",                 "Révision complète : participes, double auxiliaire, verbes pronominaux au PC.",            "conjugaison"),
+  lesson("A2", "a2-conj-l07", "C.17", "L'imparfait",                                       "Formation (base nous + -ais…), emploi (habitude, description) vs passé composé.",        "conjugaison"),
+  lesson("A2", "a2-conj-l08", "C.18", "Le futur simple",                                   "Formation régulière et irrégulière + hypothèse si + présent → futur simple.",            "conjugaison"),
 ];
 
 export function getFrenchThemeBySlug(slug: string): FrenchTheme | undefined {
