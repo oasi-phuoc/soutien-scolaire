@@ -880,7 +880,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
-  const [canValidate, setCanValidate] = useState(false);
+  const [canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
 
   const isFirst = stepIdx === 0;
@@ -894,9 +894,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const currentExercise = isExercise ? lesson.exercises[stepIdx - exStart] ?? null : null;
   const currentBlocks = isTheory1 ? lesson.theory : isTheory2 ? lesson.theory2! : null;
 
-  // Reset exercise state when moving to a new step
+  // Reset validate command when moving to a new step
   useEffect(() => {
-    setCanValidate(false);
     setValidateCommand(0);
   }, [stepIdx, exerciseKey]);
 
