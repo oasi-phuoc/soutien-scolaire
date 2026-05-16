@@ -11,25 +11,24 @@ type SectionDef = { id: FrenchSection; code: string; title: string; description:
 type SectionState = "locked" | "in_progress" | "completed";
 
 const SECTIONS: SectionDef[] = [
-  { id: "ALPHA", code: "PA", title: "Pré-alphabétisation", description: "Sens de l'écrit, phonèmes, alphabet latin, syllabes" },
-  { id: "A0",    code: "A0", title: "Niveau A0 — Débutant",    description: "Salutations, chiffres, couleurs, famille, corps, classe" },
-  { id: "A1",    code: "A1", title: "Niveau A1 — Découverte",  description: "Quotidien, logement, nourriture, transports, météo, achats" },
-  { id: "A2",    code: "A2", title: "Niveau A2 — Élémentaire", description: "Passé composé, imparfait, santé, travail, loisirs, services" },
-  { id: "B1",    code: "B1", title: "Niveau B1 — Seuil",       description: "Opinions, projets, monde du travail, société, documents" },
-  { id: "B2",    code: "B2", title: "Niveau B2 — Avancé",      description: "Argumentation, littérature, écrits professionnels, TCF" },
+  { id: "A0", code: "A0", title: "Niveau A0 — Débutant",    description: "Salutations, chiffres, couleurs, famille, corps, objets de classe" },
+  { id: "A1", code: "A1", title: "Niveau A1 — Découverte",  description: "Se présenter, se loger, organiser sa journée, consommer, se soigner, se déplacer" },
+  { id: "A2", code: "A2", title: "Niveau A2 — Élémentaire", description: "Vie quotidienne, vie sociale, loisirs, santé et bien-être, études et travail" },
+  { id: "B1", code: "B1", title: "Niveau B1 — Seuil",       description: "Opinions, projets, monde du travail, société, documents" },
+  { id: "B2", code: "B2", title: "Niveau B2 — Avancé",      description: "Argumentation, littérature, écrits professionnels, TCF" },
 ];
 
-const SECTION_ORDER: FrenchSection[] = ["ALPHA", "A0", "A1", "A2", "B1", "B2"];
+const SECTION_ORDER: FrenchSection[] = ["A0", "A1", "A2", "B1", "B2"];
 
 const TABS: { id: FrenchTab; label: string }[] = [
-  { id: "general",     label: "Général" },
+  { id: "general",     label: "Apprendre" },
   { id: "vocabulaire", label: "Vocabulaire" },
   { id: "grammaire",   label: "Grammaire" },
   { id: "conjugaison", label: "Conjugaison" },
 ];
 
 const LEVEL_TO_SECTION: Record<string, FrenchSection> = {
-  PA: "ALPHA", ALPHA: "ALPHA", A0: "A0", A1: "A1", A2: "A2", B1: "B1", B2: "B2",
+  PA: "A0", ALPHA: "A0", A0: "A0", A1: "A1", A2: "A2", B1: "B1", B2: "B2",
 };
 
 function getSectionState(sectionId: FrenchSection, currentSection: FrenchSection | null): SectionState {
@@ -195,7 +194,7 @@ export function FrancaisClient() {
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <header className="space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Pré-alpha → B2</h1>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">A0 → B2</h1>
       </header>
 
       {/* Tab toggle */}
