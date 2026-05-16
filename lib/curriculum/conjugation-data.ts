@@ -36,6 +36,38 @@ const a1ConjL07: ConjLesson = {
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [
+    { type: "heading", text: "Les pronoms personnels sujets" },
+    {
+      type: "vocab",
+      title: "Singulier",
+      items: [
+        "je (j') — 1re personne : la personne qui parle",
+        "tu — 2e personne : la personne à qui on parle (informel)",
+        "il — 3e personne masculin : un homme, un garçon, une chose masculine",
+        "elle — 3e personne féminin : une femme, une fille, une chose féminine",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Pluriel",
+      items: [
+        "nous — 1re personne : le groupe qui parle",
+        "vous — 2e personne : plusieurs personnes, ou une personne (vouvoiement formel)",
+        "ils — 3e personne masculin (ou groupe mixte)",
+        "elles — 3e personne féminin uniquement",
+      ],
+    },
+    {
+      type: "rule",
+      text: "« Vous » s'utilise pour parler à plusieurs personnes OU pour parler poliment à une seule personne.",
+      examples: [
+        { correct: "Vous parlez français, Monsieur Dupont ?", wrong: "Tu parles français, Monsieur Dupont ?" },
+      ],
+    },
+    {
+      type: "note",
+      text: "« On » remplace souvent « nous » à l'oral : On habite à Paris = Nous habitons à Paris. On se conjugue comme il/elle.",
+    },
     { type: "heading", text: "Conjugaison des verbes en -er" },
     {
       type: "table",
