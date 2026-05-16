@@ -481,6 +481,23 @@ function QcmExercise({
 
 // ── Fill exercise ─────────────────────────────────────────────────────────────
 
+function renderFillSentence(sentence: string) {
+  const parts = sentence.split("___");
+  if (parts.length <= 1) return <>{sentence}</>;
+  return (
+    <>
+      {parts.map((part, i) => (
+        <React.Fragment key={i}>
+          {part}
+          {i < parts.length - 1 && (
+            <span className="inline-block w-10 border-b-2 border-current mx-0.5 align-bottom" />
+          )}
+        </React.Fragment>
+      ))}
+    </>
+  );
+}
+
 function normalizeAnswer(s: string): string {
   return s
     .trim()
@@ -556,7 +573,7 @@ function FillExercise({
         return (
           <div key={i} className="space-y-2">
             <p className="text-sm font-medium text-[var(--color-text-primary)]">
-              {i + 1}. {item.sentence}
+              {i + 1}. {renderFillSentence(item.sentence)}
             </p>
             <input
               type="text"
