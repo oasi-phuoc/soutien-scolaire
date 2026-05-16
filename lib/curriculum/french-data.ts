@@ -128,6 +128,20 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-l24", "G.15", "Le comparatif et le superlatif",              "Plus…que, moins…que, aussi…que + le plus / le moins.",                                 "grammaire"),
   lesson("A1", "a1-gr-l25", "G.16", "Savoir ou connaître ?",                       "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",                  "grammaire"),
 
+  // ── A2 — Grammaire au quotidien A2 — Grammaire ───────────────────────────
+  lesson("A2", "a2-gr-l07", "G.17", "L'interrogation (questions fermées)",       "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",  "grammaire"),
+  lesson("A2", "a2-gr-l09", "G.18", "Répondre aux questions fermées",            "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",            "grammaire"),
+  lesson("A2", "a2-gr-l11", "G.19", "Les adjectifs — généralités",               "Genre, nombre, accord des adjectifs qualificatifs en contexte.",                      "grammaire"),
+  lesson("A2", "a2-gr-l12", "G.20", "Les adjectifs — cas particuliers et place", "Nouveau/beau/vieux, adjectifs invariables, place avant ou après le nom.",             "grammaire"),
+  lesson("A2", "a2-gr-l18", "G.21", "Les prépositions de lieu",                  "Dans, sur, sous, à côté de, près de, loin de, en face de, entre, derrière, devant.", "grammaire"),
+  lesson("A2", "a2-gr-l19", "G.22", "Les pronoms relatifs qui et que",           "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",    "grammaire"),
+  lesson("A2", "a2-gr-l25", "G.23", "La négation — ne…pas, ne…plus, ne…que",    "Ne…pas (action absente), ne…plus (arrêt), ne…que (restriction) : formes et sens.",   "grammaire"),
+  lesson("A2", "a2-gr-l35", "G.24", "Les pronoms COD et COI",                    "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",          "grammaire"),
+  lesson("A2", "a2-gr-l36", "G.25", "Les pronoms Y et EN",                       "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                   "grammaire"),
+  lesson("A2", "a2-gr-l39", "G.26", "Le comparatif",                             "Plus/aussi/moins + adjectif/adverbe/verbe/nom + que : formes régulières.",            "grammaire"),
+  lesson("A2", "a2-gr-l42", "G.27", "La négation — ne…jamais, ne…rien, ne…personne", "Négation totale : formes, place, emploi comme sujet (rien/personne).",          "grammaire"),
+  lesson("A2", "a2-gr-l52", "G.28", "La cause et la conséquence",                "Parce que/car/comme/à cause de/grâce à ; donc/c'est pourquoi/par conséquent.",      "grammaire"),
+
   // ── A1 — Grammaire au quotidien A1 — Vocabulaire ────────────────────────
   lesson("A1", "a1-voc-l13", "V.1", "Les moyens de transport",    "En voiture, à vélo, en avion… + prépositions et verbes de transport.",         "vocabulaire"),
   lesson("A1", "a1-voc-l16", "V.2", "La nourriture et le restaurant", "Aliments, repas de la journée, commander et payer au restaurant.",         "vocabulaire"),

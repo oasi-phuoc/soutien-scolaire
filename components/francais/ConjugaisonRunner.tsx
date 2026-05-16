@@ -3,7 +3,6 @@
 import React, { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type {
-  ConjLesson,
   TheoryBlock,
   Exercise,
   QcmItem,
@@ -13,8 +12,18 @@ import type {
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
+export interface LessonLike {
+  slug: string;
+  code: string;
+  level: string;
+  title: string;
+  theory: TheoryBlock[];
+  exercises: Exercise[];
+}
+
 interface Props {
-  lesson: ConjLesson;
+  lesson: LessonLike;
+  subject?: string;
 }
 
 // ── Theory view ───────────────────────────────────────────────────────────────
@@ -600,7 +609,7 @@ function ExerciseView({
 
 // ── Main runner ───────────────────────────────────────────────────────────────
 
-export function ConjugaisonRunner({ lesson }: Props) {
+export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   // stepIdx 0 = theory; 1..N = exercises
   const [stepIdx, setStepIdx] = useState(0);
@@ -644,7 +653,7 @@ export function ConjugaisonRunner({ lesson }: Props) {
       {/* Header */}
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">
-          Français · Conjugaison · {lesson.level}
+          Français · {subject} · {lesson.level}
         </p>
         <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
           {lesson.code} — {lesson.title}
