@@ -25,6 +25,7 @@ export type ConjLesson = {
   level: "A1" | "A2";
   title: string;
   theory: TheoryBlock[];
+  theory2?: TheoryBlock[];
   exercises: Exercise[];
 };
 
@@ -36,38 +37,112 @@ const a1ConjL07: ConjLesson = {
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [
+    { type: "heading", text: "Pourquoi utiliser un pronom ?" },
+    {
+      type: "rule",
+      text: "Un pronom remplace une personne ou un nom pour éviter la répétition.",
+      examples: [
+        { correct: "Ali parle. Il travaille. Il habite en Suisse." },
+        { correct: "Fatou chante. → Elle chante." },
+      ],
+    },
     { type: "heading", text: "Les pronoms personnels sujets" },
     {
       type: "vocab",
       title: "Singulier",
       items: [
-        "je (j') — 1re personne : la personne qui parle",
-        "tu — 2e personne : la personne à qui on parle (informel)",
-        "il — 3e personne masculin : un homme, un garçon, une chose masculine",
-        "elle — 3e personne féminin : une femme, une fille, une chose féminine",
+        "je → moi",
+        "tu → une personne proche (ami, famille, enfant)",
+        "il → un homme, un garçon",
+        "elle → une femme, une fille",
+        "on → une ou plusieurs personnes (souvent = nous)",
       ],
     },
     {
       type: "vocab",
       title: "Pluriel",
       items: [
-        "nous — 1re personne : le groupe qui parle",
-        "vous — 2e personne : plusieurs personnes, ou une personne (vouvoiement formel)",
-        "ils — 3e personne masculin (ou groupe mixte)",
-        "elles — 3e personne féminin uniquement",
+        "nous → plusieurs personnes avec moi",
+        "vous → plusieurs personnes OU politesse",
+        "ils → plusieurs hommes ou groupe mixte",
+        "elles → plusieurs femmes",
       ],
     },
+    { type: "heading", text: "JE / J'" },
     {
       type: "rule",
-      text: "« Vous » s'utilise pour parler à plusieurs personnes OU pour parler poliment à une seule personne.",
+      text: "je = moi. Devant une voyelle, je devient j'.",
       examples: [
-        { correct: "Vous parlez français, Monsieur Dupont ?", wrong: "Tu parles français, Monsieur Dupont ?" },
+        { correct: "Je mange. Je parle français." },
+        { correct: "J'aime le café. J'habite en Suisse." },
+      ],
+    },
+    { type: "heading", text: "TU" },
+    {
+      type: "rule",
+      text: "tu = une personne proche (ami, famille, enfant).",
+      examples: [
+        { correct: "Tu habites ici. Tu parles français." },
+      ],
+    },
+    { type: "heading", text: "IL / ELLE" },
+    {
+      type: "rule",
+      text: "il = un homme ou un garçon. elle = une femme ou une fille.",
+      examples: [
+        { correct: "Ali parle. → Il parle." },
+        { correct: "Fatou travaille. → Elle travaille." },
+      ],
+    },
+    { type: "heading", text: "ON" },
+    {
+      type: "rule",
+      text: "on = une ou plusieurs personnes. Très utilisé à l'oral. Souvent on = nous.",
+      examples: [
+        { correct: "On va au magasin. = Nous allons au magasin." },
+        { correct: "En Suisse, on parle français. = Les gens parlent français." },
       ],
     },
     {
       type: "note",
-      text: "« On » remplace souvent « nous » à l'oral : On habite à Paris = Nous habitons à Paris. On se conjugue comme il/elle.",
+      text: "Avec 'on', le verbe est toujours au singulier : On parle. On mange. ❌ On parlons.",
     },
+    { type: "heading", text: "NOUS / VOUS" },
+    {
+      type: "rule",
+      text: "nous = plusieurs personnes avec moi. vous = plusieurs personnes OU politesse avec une personne.",
+      examples: [
+        { correct: "Nous allons à l'école." },
+        { correct: "Vous êtes prêts ? (plusieurs personnes)" },
+        { correct: "Madame, vous allez bien ? (politesse)" },
+      ],
+    },
+    { type: "heading", text: "ILS / ELLES" },
+    {
+      type: "rule",
+      text: "ils = plusieurs hommes OU groupe mixte (homme + femme). elles = plusieurs femmes seulement.",
+      examples: [
+        { correct: "Les garçons jouent. → Ils jouent." },
+        { correct: "Ali et Fatou travaillent. → Ils travaillent." },
+        { correct: "Les filles chantent. → Elles chantent." },
+      ],
+    },
+    { type: "heading", text: "Comment choisir ?" },
+    {
+      type: "vocab",
+      title: "Tableau : nom → pronom",
+      items: ["Ali → il", "Fatou → elle", "Ali et moi → nous", "Les garçons → ils", "Les filles → elles", "Ali et Fatou → ils"],
+    },
+    {
+      type: "rule",
+      text: "Astuce : posez la question « Qui fait l'action ? »",
+      examples: [
+        { correct: "Fatou mange. Qui mange ? → Fatou → Elle mange." },
+        { correct: "Les enfants jouent. Qui joue ? → les enfants → Ils jouent." },
+      ],
+    },
+  ],
+  theory2: [
     { type: "heading", text: "Conjugaison des verbes en -er" },
     {
       type: "table",
@@ -77,7 +152,7 @@ const a1ConjL07: ConjLesson = {
           rows: [
             { pronoun: "je", form: "parle" },
             { pronoun: "tu", form: "parles" },
-            { pronoun: "il / elle", form: "parle" },
+            { pronoun: "il / elle / on", form: "parle" },
             { pronoun: "nous", form: "parlons" },
             { pronoun: "vous", form: "parlez" },
             { pronoun: "ils / elles", form: "parlent" },
@@ -87,20 +162,24 @@ const a1ConjL07: ConjLesson = {
     },
     {
       type: "rule",
-      text: "Les verbes en -er perdent le -r à l'infinitif et prennent les terminaisons : -e, -es, -e, -ons, -ez, -ent.",
+      text: "Formation : infinitif sans -r + terminaisons : -e, -es, -e, -ons, -ez, -ent.",
+      examples: [
+        { correct: "parler → je parle, tu parles, il parle…" },
+        { correct: "aimer → j'aime, tu aimes, elle aime…" },
+      ],
     },
     {
       type: "note",
-      text: "Élision : « je » + voyelle → j' (j'aime, j'étudie).",
+      text: "Élision : je + voyelle → j' (j'aime, j'étudie, j'habite).",
     },
     {
       type: "vocab",
-      title: "Autres verbes en -er courants",
-      items: ["aimer", "habiter", "travailler", "étudier", "parler"],
+      title: "Verbes en -er courants",
+      items: ["aimer", "habiter", "travailler", "étudier", "parler", "manger", "regarder", "écouter"],
     },
     {
       type: "rule",
-      text: "Forme négative",
+      text: "Forme négative : ne … pas autour du verbe.",
       examples: [
         { correct: "je ne parle pas", wrong: "je parle pas" },
         { correct: "je n'aime pas", wrong: "je aime pas" },

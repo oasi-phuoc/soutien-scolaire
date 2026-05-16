@@ -18,6 +18,7 @@ export interface LessonLike {
   level: string;
   title: string;
   theory: TheoryBlock[];
+  theory2?: TheoryBlock[];
   exercises: Exercise[];
 }
 
@@ -611,15 +612,20 @@ function ExerciseView({
 
 export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
-  // stepIdx 0 = theory; 1..N = exercises
+  // theory pages: lesson.theory (always) + lesson.theory2 (optional)
+  const theoryPages = lesson.theory2
+    ? [lesson.theory, lesson.theory2]
+    : [lesson.theory];
+  const theoryCount = theoryPages.length;
+  // stepIdx 0..theoryCount-1 = theory pages; theoryCount..N = exercises
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
 
-  const totalSteps = 1 + lesson.exercises.length;
+  const totalSteps = theoryCount + lesson.exercises.length;
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
-  const isTheory = stepIdx === 0;
-  const currentExercise = isTheory ? null : lesson.exercises[stepIdx - 1] ?? null;
+  const isTheory = stepIdx < theoryCount;
+  const currentExercise = isTheory ? null : lesson.exercises[stepIdx - theoryCount] ?? null;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleValidated = useCallback<(allCorrect: boolean) => void>((_allCorrect: boolean) => {
@@ -678,13 +684,15 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
       {/* Step label */}
       <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        {isTheory ? "Cours" : `Exercice ${stepIdx} / ${lesson.exercises.length}`}
+        {isTheory
+          ? theoryCount > 1 ? `Cours · ${stepIdx + 1} / ${theoryCount}` : "Cours"
+          : `Exercice ${stepIdx - theoryCount + 1} / ${lesson.exercises.length}`}
       </p>
 
       {/* Content */}
       <div className="min-h-[280px]">
         {isTheory ? (
-          <TheoryView blocks={lesson.theory} />
+          <TheoryView blocks={theoryPages[stepIdx]!} />
         ) : currentExercise ? (
           <ExerciseView
             key={exerciseKey}
