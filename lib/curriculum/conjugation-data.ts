@@ -8,16 +8,19 @@ export type TheoryBlock =
   | { type: "table"; tables: ConjugTable[] }
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
-  | { type: "vocab"; title: string; items: string[] };
+  | { type: "vocab"; title: string; items: string[] }
+  | { type: "grid"; headers: string[]; rows: string[][] }
+  | { type: "plain_list"; label?: string; items: string[] }
+  | { type: "highlight"; label: string; items: string[] };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =
-  | { type: "qcm"; title: string; instruction: string; items: QcmItem[] }
-  | { type: "fill"; title: string; instruction: string; items: FillItem[] }
-  | { type: "match"; title: string; instruction: string; pairs: MatchPair[] };
+  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number }
+  | { type: "fill"; title: string; instruction: string; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
+  | { type: "match"; title: string; instruction: string; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number };
 
 export type ConjLesson = {
   slug: string;
@@ -31,118 +34,390 @@ export type ConjLesson = {
 
 // ── A1 Lessons ────────────────────────────────────────────────────────────────
 
-const a1ConjL07: ConjLesson = {
-  slug: "a1-conj-l07",
+const a1ConjL00: ConjLesson = {
+  slug: "a1-conj-l00",
   code: "C.1",
   level: "A1",
-  title: "Les verbes en -er au présent",
+  title: "Les pronoms personnels sujets",
   theory: [
     { type: "heading", text: "Pourquoi utiliser un pronom ?" },
     {
-      type: "rule",
-      text: "Un pronom remplace une personne ou un nom pour éviter la répétition.",
-      examples: [
-        { correct: "Ali parle. Il travaille. Il habite en Suisse." },
-        { correct: "Fatou chante. → Elle chante." },
+      type: "plain_list",
+      items: [
+        "Un pronom remplace une personne ou un nom pour éviter la répétition.",
+        "Ali parle. Ali travaille. Ali habite en Suisse.",
+        "→ Ali parle. Il travaille. Il habite en Suisse.",
       ],
     },
     { type: "heading", text: "Les pronoms personnels sujets" },
     {
-      type: "vocab",
-      title: "Singulier",
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      rows: [
+        ["je → moi", "nous → plusieurs personnes et moi"],
+        ["tu → un ami, la famille", "vous → plusieurs personnes"],
+        ["il → un homme", "ils → plusieurs hommes"],
+        ["elle → une femme", "elles → plusieurs femmes"],
+      ],
+    },
+    { type: "heading", text: "Cas spéciaux" },
+    {
+      type: "highlight",
+      label: "ON",
       items: [
-        "je → moi",
-        "tu → une personne proche (ami, famille, enfant)",
-        "il → un homme, un garçon",
-        "elle → une femme, une fille",
-        "on → une ou plusieurs personnes (souvent = nous)",
+        "On utilise « on » pour représenter une ou plusieurs personnes (= nous).",
+        "Il est très utilisé à l'oral familier.",
+        "Le verbe est toujours au singulier.",
+        "On va au magasin. → Nous allons au magasin.",
+        "En Suisse, on parle français. → Les gens parlent français.",
       ],
     },
     {
-      type: "vocab",
-      title: "Pluriel",
+      type: "highlight",
+      label: "VOUS",
       items: [
-        "nous → plusieurs personnes avec moi",
-        "vous → plusieurs personnes OU politesse",
-        "ils → plusieurs hommes ou groupe mixte",
-        "elles → plusieurs femmes",
-      ],
-    },
-    { type: "heading", text: "JE / J'" },
-    {
-      type: "rule",
-      text: "je = moi. Devant une voyelle, je devient j'.",
-      examples: [
-        { correct: "Je mange. Je parle français." },
-        { correct: "J'aime le café. J'habite en Suisse." },
-      ],
-    },
-    { type: "heading", text: "TU" },
-    {
-      type: "rule",
-      text: "tu = une personne proche (ami, famille, enfant).",
-      examples: [
-        { correct: "Tu habites ici. Tu parles français." },
-      ],
-    },
-    { type: "heading", text: "IL / ELLE" },
-    {
-      type: "rule",
-      text: "il = un homme ou un garçon. elle = une femme ou une fille.",
-      examples: [
-        { correct: "Ali parle. → Il parle." },
-        { correct: "Fatou travaille. → Elle travaille." },
-      ],
-    },
-    { type: "heading", text: "ON" },
-    {
-      type: "rule",
-      text: "on = une ou plusieurs personnes. Très utilisé à l'oral. Souvent on = nous.",
-      examples: [
-        { correct: "On va au magasin. = Nous allons au magasin." },
-        { correct: "En Suisse, on parle français. = Les gens parlent français." },
+        "On utilise « vous » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur).",
+        "On appelle cela la forme de politesse.",
+        "Madame, vous allez bien ?",
       ],
     },
     {
-      type: "note",
-      text: "Avec 'on', le verbe est toujours au singulier : On parle. On mange. ❌ On parlons.",
-    },
-    { type: "heading", text: "NOUS / VOUS" },
-    {
-      type: "rule",
-      text: "nous = plusieurs personnes avec moi. vous = plusieurs personnes OU politesse avec une personne.",
-      examples: [
-        { correct: "Nous allons à l'école." },
-        { correct: "Vous êtes prêts ? (plusieurs personnes)" },
-        { correct: "Madame, vous allez bien ? (politesse)" },
-      ],
-    },
-    { type: "heading", text: "ILS / ELLES" },
-    {
-      type: "rule",
-      text: "ils = plusieurs hommes OU groupe mixte (homme + femme). elles = plusieurs femmes seulement.",
-      examples: [
-        { correct: "Les garçons jouent. → Ils jouent." },
-        { correct: "Ali et Fatou travaillent. → Ils travaillent." },
-        { correct: "Les filles chantent. → Elles chantent." },
+      type: "highlight",
+      label: "ILS",
+      items: [
+        "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes.",
+        "Même s'il y a beaucoup de femmes et un seul homme → ils.",
+        "Ali ♂ et Alona ♀ → ils",
       ],
     },
     { type: "heading", text: "Comment choisir ?" },
     {
-      type: "vocab",
-      title: "Tableau : nom → pronom",
-      items: ["Ali → il", "Fatou → elle", "Ali et moi → nous", "Les garçons → ils", "Les filles → elles", "Ali et Fatou → ils"],
+      type: "grid",
+      headers: ["Nom", "Pronom"],
+      rows: [
+        ["Ali ♂", "il"],
+        ["Alona ♀", "elle"],
+        ["Ali ♂ et moi", "nous"],
+        ["Alona ♀ et toi", "vous"],
+        ["Ali ♂ et Hamed ♂", "ils"],
+        ["Alona ♀ et Iryna ♀", "elles"],
+        ["Ali ♂ et Alona ♀", "ils"],
+      ],
     },
     {
-      type: "rule",
-      text: "Astuce : posez la question « Qui fait l'action ? »",
-      examples: [
-        { correct: "Fatou mange. Qui mange ? → Fatou → Elle mange." },
-        { correct: "Les enfants jouent. Qui joue ? → les enfants → Ils jouent." },
+      type: "highlight",
+      label: "Astuce",
+      items: [
+        "Posez la question « Qui fait l'action ? », c'est le sujet de la phrase.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Phrase", "Question", "Sujet", "Résultat"],
+      rows: [
+        ["Alona ♀ mange.", "Qui mange ?", "Alona", "Elle mange."],
+        ["Ali ♂ et Alona ♀ jouent.", "Qui jouent ?", "Ali et Alona", "Ils jouent."],
       ],
     },
   ],
-  theory2: [
+  exercises: [
+    {
+      type: "qcm",
+      title: "Exercice 1 — Choisis le bon pronom",
+      instruction: "Sélectionne le pronom correct pour chaque personne ou groupe.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "Samira ♀ →", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Viktor ♂ →", choices: ["il", "elle", "elles"], correctIdx: 0 },
+        { sentence: "Ahmed ♂ et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Mariam ♀ et Youssef ♂ →", choices: ["elles", "ils", "nous"], correctIdx: 1 },
+        { sentence: "Toi et Olena ♀ →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Le chat ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Ma mère ♀ →", choices: ["il", "elle", "elles"], correctIdx: 1 },
+        { sentence: "Mon père ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Iryna ♀ →", choices: ["il", "elle", "elles"], correctIdx: 1 },
+        { sentence: "Hamid ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Lemlem ♀ et Selam ♀ →", choices: ["elles", "ils", "nous"], correctIdx: 0 },
+        { sentence: "Alona ♀ et Dmytro ♂ →", choices: ["elles", "ils", "vous"], correctIdx: 1 },
+        { sentence: "Hassan ♂ et Omar ♂ →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Ma sœur ♀ →", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Mon frère ♂ →", choices: ["il", "elle", "elles"], correctIdx: 0 },
+        { sentence: "Tesfay ♂ →", choices: ["il", "elle", "elles"], correctIdx: 0 },
+        { sentence: "Nour ♀ →", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Zara ♀ et Parisa ♀ →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mon professeur ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Natalia ♀ et Ivan ♂ →", choices: ["elles", "ils", "nous"], correctIdx: 1 },
+        { sentence: "Le chien ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "La voiture ♀ →", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Rasoul ♂ →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Maryam ♀ →", choices: ["il", "elle", "elles"], correctIdx: 1 },
+        { sentence: "Oleksiy ♂ et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 2 — Remplace par le bon pronom",
+      instruction: "Écris le pronom qui remplace le nom souligné.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "___ parle français. (Fatima ♀)", hint: "Fatima ♀ = ?", answer: "Elle" },
+        { sentence: "___ jouent. (Hamed ♂ et Omar ♂)", hint: "groupe masculin", answer: "Ils" },
+        { sentence: "___ habite à Genève. (Iryna ♀)", hint: "Iryna ♀ = ?", answer: "Elle" },
+        { sentence: "___ étudient. (Zahra ♀ et Olena ♀)", hint: "groupe féminin", answer: "Elles" },
+        { sentence: "___ travaillent. (Ahmed ♂ et Alona ♀)", hint: "groupe mixte", answer: "Ils" },
+        { sentence: "___ mange. (le chat ♂)", hint: "le chat ♂ = ?", answer: "Il" },
+        { sentence: "___ dort. (ma mère ♀)", hint: "ma mère ♀ = ?", answer: "Elle" },
+        { sentence: "___ court. (mon père ♂)", hint: "mon père ♂ = ?", answer: "Il" },
+        { sentence: "___ apprennent le français. (Hamid ♂ et Parisa ♀)", hint: "groupe mixte", answer: "Ils" },
+        { sentence: "___ chante. (Selam ♀)", hint: "Selam ♀ = ?", answer: "Elle" },
+        { sentence: "___ travaille. (Tesfay ♂)", hint: "Tesfay ♂ = ?", answer: "Il" },
+        { sentence: "___ sont à l'école. (Lemlem ♀ et Miriam ♀)", hint: "groupe féminin", answer: "Elles" },
+        { sentence: "___ part demain. (Viktor ♂)", hint: "Viktor ♂ = ?", answer: "Il" },
+        { sentence: "___ parle doucement. (Nour ♀)", hint: "Nour ♀ = ?", answer: "Elle" },
+        { sentence: "___ jouent ensemble. (Dmytro ♂ et Oleksiy ♂)", hint: "groupe masculin", answer: "Ils" },
+        { sentence: "___ mange. (ma sœur ♀)", hint: "ma sœur ♀ = ?", answer: "Elle" },
+        { sentence: "___ rit. (mon frère ♂)", hint: "mon frère ♂ = ?", answer: "Il" },
+        { sentence: "___ lisent. (Natalia ♀ et Iryna ♀)", hint: "groupe féminin", answer: "Elles" },
+        { sentence: "___ travaille à Genève. (Ibrahim ♂)", hint: "Ibrahim ♂ = ?", answer: "Il" },
+        { sentence: "___ apprend vite. (Mariam ♀)", hint: "Mariam ♀ = ?", answer: "Elle" },
+        { sentence: "___ joue. (le chien ♂)", hint: "le chien ♂ = ?", answer: "Il" },
+        { sentence: "___ roule vite. (la voiture ♀)", hint: "la voiture ♀ = ?", answer: "Elle" },
+        { sentence: "___ étudient. (Rasoul ♂ et Zara ♀)", hint: "groupe mixte", answer: "Ils" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 3 — Mettre au pluriel",
+      instruction: "Choisis le pronom pluriel qui correspond.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "il → au pluriel :", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "elle → au pluriel :", choices: ["elles", "ils", "nous"], correctIdx: 0 },
+        { sentence: "je → au pluriel :", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "tu → au pluriel :", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Il parle. → ___ parlent.", choices: ["Ils", "Elles", "Nous"], correctIdx: 0 },
+        { sentence: "Elle chante. → ___ chantent.", choices: ["Elles", "Ils", "Nous"], correctIdx: 0 },
+        { sentence: "Je mange. → ___ mangeons.", choices: ["Nous", "Vous", "Ils"], correctIdx: 0 },
+        { sentence: "Tu parles. → ___ parlez.", choices: ["Vous", "Nous", "Ils"], correctIdx: 0 },
+        { sentence: "Il travaille. → ___ travaillent.", choices: ["Ils", "Elles", "Vous"], correctIdx: 0 },
+        { sentence: "Elle étudie. → ___ étudient.", choices: ["Elles", "Ils", "Nous"], correctIdx: 0 },
+        { sentence: "on (= nous) → au pluriel :", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 4 — Mettre au singulier",
+      instruction: "Choisis le pronom singulier qui correspond.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "ils → au singulier :", choices: ["il", "elle", "on"], correctIdx: 0 },
+        { sentence: "elles → au singulier :", choices: ["elle", "il", "on"], correctIdx: 0 },
+        { sentence: "nous → au singulier :", choices: ["je", "tu", "on"], correctIdx: 0 },
+        { sentence: "vous → au singulier :", choices: ["tu", "je", "il"], correctIdx: 0 },
+        { sentence: "Ils parlent. → ___ parle.", choices: ["Il", "Elle", "On"], correctIdx: 0 },
+        { sentence: "Elles étudient. → ___ étudie.", choices: ["Elle", "Il", "On"], correctIdx: 0 },
+        { sentence: "Nous mangeons. → ___ mange.", choices: ["Je", "Tu", "Il"], correctIdx: 0 },
+        { sentence: "Vous parlez. → ___ parles.", choices: ["Tu", "Je", "Il"], correctIdx: 0 },
+        { sentence: "Ils travaillent. → ___ travaille.", choices: ["Il", "Elle", "On"], correctIdx: 0 },
+        { sentence: "Elles chantent. → ___ chante.", choices: ["Elle", "Il", "On"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 5 — Réécris avec le pronom",
+      instruction: "Remplace le nom par le bon pronom et réécris uniquement le pronom.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "Fatima ♀ mange. → ___ mange.", hint: "Fatima ♀ = ?", answer: "Elle" },
+        { sentence: "Ali ♂ travaille. → ___ travaille.", hint: "Ali ♂ = ?", answer: "Il" },
+        { sentence: "Iryna ♀ et Olena ♀ étudient. → ___ étudient.", hint: "groupe féminin", answer: "Elles" },
+        { sentence: "Hamid ♂ et Maryam ♀ parlent. → ___ parlent.", hint: "groupe mixte", answer: "Ils" },
+        { sentence: "Le chat ♂ dort. → ___ dort.", hint: "le chat ♂ = ?", answer: "Il" },
+        { sentence: "Ma mère ♀ cuisine. → ___ cuisine.", hint: "ma mère ♀ = ?", answer: "Elle" },
+        { sentence: "Tesfay ♂ et Berhe ♂ jouent. → ___ jouent.", hint: "groupe masculin", answer: "Ils" },
+        { sentence: "Selam ♀ étudie. → ___ étudie.", hint: "Selam ♀ = ?", answer: "Elle" },
+        { sentence: "Viktor ♂ parle. → ___ parle.", hint: "Viktor ♂ = ?", answer: "Il" },
+        { sentence: "Alona ♀ et Natalia ♀ chantent. → ___ chantent.", hint: "groupe féminin", answer: "Elles" },
+        { sentence: "Ahmed ♂ et Hamid ♂ arrivent. → ___ arrivent.", hint: "groupe masculin", answer: "Ils" },
+        { sentence: "La voiture ♀ roule. → ___ roule.", hint: "la voiture ♀ = ?", answer: "Elle" },
+        { sentence: "Mon père ♂ travaille. → ___ travaille.", hint: "mon père ♂ = ?", answer: "Il" },
+        { sentence: "Rasoul ♂ et Zara ♀ arrivent. → ___ arrivent.", hint: "groupe mixte", answer: "Ils" },
+        { sentence: "Nour ♀ et Mariam ♀ parlent. → ___ parlent.", hint: "groupe féminin", answer: "Elles" },
+      ],
+    },
+  ],
+};
+
+const a1ConjL01: ConjLesson = {
+  slug: "a1-conj-l01",
+  code: "C.2",
+  level: "A1",
+  title: "Les verbes être et avoir",
+  theory: [
+    { type: "heading", text: "Le verbe ÊTRE" },
+    {
+      type: "table",
+      tables: [
+        {
+          verb: "être",
+          rows: [
+            { pronoun: "je", form: "suis" },
+            { pronoun: "tu", form: "es" },
+            { pronoun: "il / elle / on", form: "est" },
+            { pronoun: "nous", form: "sommes" },
+            { pronoun: "vous", form: "êtes" },
+            { pronoun: "ils / elles", form: "sont" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Utiliser ÊTRE pour",
+      items: ["l'identité", "la nationalité", "la profession", "la description", "la situation"],
+    },
+    {
+      type: "plain_list",
+      label: "Exemples",
+      items: [
+        "Je suis Ali. (identité)",
+        "Elle est française. (nationalité)",
+        "Nous sommes étudiants. (profession)",
+        "Il est grand. (description)",
+      ],
+    },
+    { type: "heading", text: "Le verbe AVOIR" },
+    {
+      type: "table",
+      tables: [
+        {
+          verb: "avoir",
+          rows: [
+            { pronoun: "j'", form: "ai" },
+            { pronoun: "tu", form: "as" },
+            { pronoun: "il / elle / on", form: "a" },
+            { pronoun: "nous", form: "avons" },
+            { pronoun: "vous", form: "avez" },
+            { pronoun: "ils / elles", form: "ont" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Utiliser AVOIR pour",
+      items: ["la possession", "l'âge", "les sensations", "les expressions"],
+    },
+    {
+      type: "plain_list",
+      label: "Exemples",
+      items: [
+        "J'ai un téléphone. (possession)",
+        "Elle a 25 ans. (âge)",
+        "Nous avons faim. (sensation)",
+        "Il a de la chance. (expression)",
+      ],
+    },
+    { type: "heading", text: "Expressions avec AVOIR" },
+    {
+      type: "grid",
+      headers: ["Expression", "Signification"],
+      rows: [
+        ["avoir faim", "vouloir manger"],
+        ["avoir soif", "vouloir boire"],
+        ["avoir froid", "ressentir le froid"],
+        ["avoir chaud", "ressentir la chaleur"],
+        ["avoir peur", "être effrayé(e)"],
+        ["avoir mal", "ressentir une douleur"],
+        ["avoir raison", "être correct(e)"],
+        ["avoir tort", "se tromper"],
+      ],
+    },
+    { type: "heading", text: "Forme négative" },
+    {
+      type: "plain_list",
+      items: [
+        "ÊTRE : je ne suis pas, tu n'es pas, il n'est pas…",
+        "AVOIR : je n'ai pas, tu n'as pas, il n'a pas…",
+      ],
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Exercice 1 — Être ou avoir ?",
+      instruction: "Choisissez le bon verbe pour compléter la phrase.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "Fatima ♀ ___ 23 ans.", choices: ["est", "a", "ont"], correctIdx: 1 },
+        { sentence: "Je ___ étudiant.", choices: ["suis", "ai", "est"], correctIdx: 0 },
+        { sentence: "Nous ___ faim.", choices: ["sommes", "avons", "sont"], correctIdx: 1 },
+        { sentence: "Viktor ♂ ___ ukrainien.", choices: ["est", "a", "ont"], correctIdx: 0 },
+        { sentence: "Ils ___ un appartement à Genève.", choices: ["sont", "ont", "avez"], correctIdx: 1 },
+        { sentence: "Tu ___ peur ?", choices: ["es", "as", "est"], correctIdx: 1 },
+        { sentence: "Elle ___ professeure.", choices: ["est", "a", "ont"], correctIdx: 0 },
+        { sentence: "Vous ___ soif ?", choices: ["êtes", "avez", "ont"], correctIdx: 1 },
+        { sentence: "On ___ fatigués.", choices: ["est", "a", "ont"], correctIdx: 0 },
+        { sentence: "Ils ___ afghans.", choices: ["ont", "sont", "avons"], correctIdx: 1 },
+        { sentence: "J'___ froid.", choices: ["suis", "ai", "est"], correctIdx: 1 },
+        { sentence: "Hamid ♂ ___ un vélo.", choices: ["est", "a", "ont"], correctIdx: 1 },
+        { sentence: "Nous ___ érythréens.", choices: ["avons", "sommes", "sont"], correctIdx: 1 },
+        { sentence: "Tu ___ raison.", choices: ["es", "as", "est"], correctIdx: 1 },
+        { sentence: "Elle ___ chaud.", choices: ["est", "a", "ont"], correctIdx: 1 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 2 — Conjugue le verbe",
+      instruction: "Écris la bonne forme du verbe indiqué entre parenthèses.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "Ali ♂ ___ ingénieur. (être)", hint: "il → est", answer: "est" },
+        { sentence: "Nous ___ à Genève. (être)", hint: "nous → sommes", answer: "sommes" },
+        { sentence: "J'___ 30 ans. (avoir)", hint: "j' → ai", answer: "ai" },
+        { sentence: "Elles ___ faim. (avoir)", hint: "elles → ont", answer: "ont" },
+        { sentence: "Tu ___ érythréen ? (être)", hint: "tu → es", answer: "es" },
+        { sentence: "Vous ___ un rendez-vous ? (avoir)", hint: "vous → avez", answer: "avez" },
+        { sentence: "On ___ froid. (avoir)", hint: "on → a", answer: "a" },
+        { sentence: "Iryna ♀ ___ ukrainienne. (être)", hint: "elle → est", answer: "est" },
+        { sentence: "Ils ___ tort. (avoir)", hint: "ils → ont", answer: "ont" },
+        { sentence: "Je ___ étudiant(e). (être)", hint: "je → suis", answer: "suis" },
+        { sentence: "Hamid ♂ ___ 28 ans. (avoir)", hint: "il → a", answer: "a" },
+        { sentence: "Nous ___ peur. (avoir)", hint: "nous → avons", answer: "avons" },
+        { sentence: "Viktor ♂ ___ médecin. (être)", hint: "il → est", answer: "est" },
+        { sentence: "Tu ___ soif ? (avoir)", hint: "tu → as", answer: "as" },
+        { sentence: "Elles ___ afghanes. (être)", hint: "elles → sont", answer: "sont" },
+      ],
+    },
+    {
+      type: "match",
+      title: "Exercice 3 — Associe l'expression",
+      instruction: "Relie chaque expression AVOIR à sa signification.",
+      pairs: [
+        { left: "avoir faim", right: "vouloir manger" },
+        { left: "avoir soif", right: "vouloir boire" },
+        { left: "avoir peur", right: "être effrayé" },
+        { left: "avoir froid", right: "ressentir le froid" },
+        { left: "avoir raison", right: "être correct" },
+        { left: "avoir tort", right: "se tromper" },
+      ],
+    },
+  ],
+};
+
+const a1ConjL07: ConjLesson = {
+  slug: "a1-conj-l07",
+  code: "C.3",
+  level: "A1",
+  title: "Les verbes en -er au présent",
+  theory: [
     { type: "heading", text: "Conjugaison des verbes en -er" },
     {
       type: "table",
@@ -245,7 +520,7 @@ const a1ConjL07: ConjLesson = {
 
 const a1ConjL08: ConjLesson = {
   slug: "a1-conj-l08",
-  code: "C.2",
+  code: "C.4",
   level: "A1",
   title: "Les verbes aller et venir",
   theory: [
@@ -339,7 +614,7 @@ const a1ConjL08: ConjLesson = {
 
 const a1ConjL09: ConjLesson = {
   slug: "a1-conj-l09",
-  code: "C.3",
+  code: "C.5",
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
@@ -420,7 +695,7 @@ const a1ConjL09: ConjLesson = {
 
 const a1ConjL12: ConjLesson = {
   slug: "a1-conj-l12",
-  code: "C.4",
+  code: "C.6",
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [
@@ -501,7 +776,7 @@ const a1ConjL12: ConjLesson = {
 
 const a1ConjL15: ConjLesson = {
   slug: "a1-conj-l15",
-  code: "C.5",
+  code: "C.7",
   level: "A1",
   title: "Vouloir, pouvoir, devoir",
   theory: [
@@ -606,7 +881,7 @@ const a1ConjL15: ConjLesson = {
 
 const a1ConjL20: ConjLesson = {
   slug: "a1-conj-l20",
-  code: "C.6",
+  code: "C.8",
   level: "A1",
   title: "Le futur proche",
   theory: [
@@ -673,7 +948,7 @@ const a1ConjL20: ConjLesson = {
 
 const a1ConjL27: ConjLesson = {
   slug: "a1-conj-l27",
-  code: "C.7",
+  code: "C.9",
   level: "A1",
   title: "Pronominaux réfléchis et réciproques",
   theory: [
@@ -744,7 +1019,7 @@ const a1ConjL27: ConjLesson = {
 
 const a1ConjL28: ConjLesson = {
   slug: "a1-conj-l28",
-  code: "C.8",
+  code: "C.10",
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [
@@ -811,7 +1086,7 @@ const a1ConjL28: ConjLesson = {
 
 const a1ConjL29: ConjLesson = {
   slug: "a1-conj-l29",
-  code: "C.9",
+  code: "C.11",
   level: "A1",
   title: "Passé composé avec avoir",
   theory: [
@@ -911,7 +1186,7 @@ const a1ConjL29: ConjLesson = {
 
 const a1ConjL30: ConjLesson = {
   slug: "a1-conj-l30",
-  code: "C.10",
+  code: "C.12",
   level: "A1",
   title: "Passé composé avec être",
   theory: [
@@ -980,7 +1255,7 @@ const a1ConjL30: ConjLesson = {
 
 const a2ConjL01: ConjLesson = {
   slug: "a2-conj-l01",
-  code: "C.11",
+  code: "C.13",
   level: "A2",
   title: "Les verbes en -er — révision et particularités",
   theory: [
@@ -1077,7 +1352,7 @@ const a2ConjL01: ConjLesson = {
 
 const a2ConjL02: ConjLesson = {
   slug: "a2-conj-l02",
-  code: "C.12",
+  code: "C.14",
   level: "A2",
   title: "Les verbes en -ir (2e et 3e groupes)",
   theory: [
@@ -1167,7 +1442,7 @@ const a2ConjL02: ConjLesson = {
 
 const a2ConjL03: ConjLesson = {
   slug: "a2-conj-l03",
-  code: "C.13",
+  code: "C.15",
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [
@@ -1254,7 +1529,7 @@ const a2ConjL03: ConjLesson = {
 
 const a2ConjL04: ConjLesson = {
   slug: "a2-conj-l04",
-  code: "C.14",
+  code: "C.16",
   level: "A2",
   title: "Le conditionnel de politesse",
   theory: [
@@ -1320,7 +1595,7 @@ const a2ConjL04: ConjLesson = {
 
 const a2ConjL05: ConjLesson = {
   slug: "a2-conj-l05",
-  code: "C.15",
+  code: "C.17",
   level: "A2",
   title: "L'impératif",
   theory: [
@@ -1395,7 +1670,7 @@ const a2ConjL05: ConjLesson = {
 
 const a2ConjL06: ConjLesson = {
   slug: "a2-conj-l06",
-  code: "C.16",
+  code: "C.18",
   level: "A2",
   title: "Le passé composé — avoir et être",
   theory: [
@@ -1471,7 +1746,7 @@ const a2ConjL06: ConjLesson = {
 
 const a2ConjL07: ConjLesson = {
   slug: "a2-conj-l07",
-  code: "C.17",
+  code: "C.19",
   level: "A2",
   title: "L'imparfait",
   theory: [
@@ -1550,7 +1825,7 @@ const a2ConjL07: ConjLesson = {
 
 const a2ConjL08: ConjLesson = {
   slug: "a2-conj-l08",
-  code: "C.18",
+  code: "C.20",
   level: "A2",
   title: "Le futur simple",
   theory: [
@@ -1636,6 +1911,8 @@ const a2ConjL08: ConjLesson = {
 // ── Registry ──────────────────────────────────────────────────────────────────
 
 const ALL_LESSONS: ConjLesson[] = [
+  a1ConjL00,
+  a1ConjL01,
   a1ConjL07,
   a1ConjL08,
   a1ConjL09,

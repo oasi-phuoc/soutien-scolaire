@@ -144,6 +144,66 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
               </div>
             );
 
+          case "grid":
+            return (
+              <div key={i} className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="bg-[var(--color-bg-secondary)]">
+                      {block.headers.map((h, hi) => (
+                        <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
+                          {h}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.rows.map((row, ri) => (
+                      <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
+                        {row.map((cell, ci) => (
+                          <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
+                            {cell}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+
+          case "plain_list":
+            return (
+              <div key={i} className="space-y-1">
+                {block.label && (
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+                    {block.label}
+                  </p>
+                )}
+                <ul className="space-y-1.5">
+                  {block.items.map((item, ii) => (
+                    <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+
+          case "highlight":
+            return (
+              <div key={i} className="space-y-1.5">
+                <p className="text-sm font-bold text-[var(--color-accent-fr)]">{block.label}</p>
+                <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
+                  {block.items.map((item, ii) => (
+                    <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            );
+
           default:
             return null;
         }
@@ -154,6 +214,15 @@ function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
 
 // ── QCM exercise ──────────────────────────────────────────────────────────────
 
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
 function QcmExercise({
   exercise,
   onValidated,
@@ -161,8 +230,15 @@ function QcmExercise({
   exercise: Extract<Exercise, { type: "qcm" }>;
   onValidated: (allCorrect: boolean) => void;
 }) {
+  const [items] = useState<typeof exercise.items>(() => {
+    if (exercise.pool && exercise.pool.length > 0) {
+      const size = exercise.poolSize ?? 5;
+      return shuffle(exercise.pool).slice(0, size);
+    }
+    return exercise.items;
+  });
   const [selected, setSelected] = useState<(number | null)[]>(
-    () => new Array(exercise.items.length).fill(null),
+    () => new Array(items.length).fill(null),
   );
   const [validated, setValidated] = useState(false);
 
@@ -177,14 +253,14 @@ function QcmExercise({
 
   function validate() {
     setValidated(true);
-    const allCorrect = exercise.items.every(
+    const allCorrect = items.every(
       (item, i) => selected[i] === item.correctIdx,
     );
     onValidated(allCorrect);
   }
 
   function reset() {
-    setSelected(new Array(exercise.items.length).fill(null));
+    setSelected(new Array(items.length).fill(null));
     setValidated(false);
   }
 
@@ -195,7 +271,7 @@ function QcmExercise({
       <p className="text-sm text-[var(--color-text-secondary)]">
         {exercise.instruction}
       </p>
-      {exercise.items.map((item: QcmItem, i) => (
+      {items.map((item: QcmItem, i) => (
         <div key={i} className="space-y-2">
           <p className="text-sm font-medium text-[var(--color-text-primary)]">
             {i + 1}. {item.sentence}
@@ -273,8 +349,15 @@ function FillExercise({
   exercise: Extract<Exercise, { type: "fill" }>;
   onValidated: (allCorrect: boolean) => void;
 }) {
+  const [items] = useState<typeof exercise.items>(() => {
+    if (exercise.pool && exercise.pool.length > 0) {
+      const size = exercise.poolSize ?? 5;
+      return shuffle(exercise.pool).slice(0, size);
+    }
+    return exercise.items;
+  });
   const [inputs, setInputs] = useState<string[]>(
-    () => new Array(exercise.items.length).fill(""),
+    () => new Array(items.length).fill(""),
   );
   const [validated, setValidated] = useState(false);
 
@@ -289,7 +372,7 @@ function FillExercise({
 
   function validate() {
     setValidated(true);
-    const allCorrect = exercise.items.every(
+    const allCorrect = items.every(
       (item: FillItem, i) =>
         normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(item.answer),
     );
@@ -297,7 +380,7 @@ function FillExercise({
   }
 
   function reset() {
-    setInputs(new Array(exercise.items.length).fill(""));
+    setInputs(new Array(items.length).fill(""));
     setValidated(false);
   }
 
@@ -308,7 +391,7 @@ function FillExercise({
       <p className="text-sm text-[var(--color-text-secondary)]">
         {exercise.instruction}
       </p>
-      {exercise.items.map((item: FillItem, i) => {
+      {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
         const correct =
           normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
@@ -360,15 +443,6 @@ function FillExercise({
 }
 
 // ── Match exercise ────────────────────────────────────────────────────────────
-
-function shuffle<T>(arr: T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j]!, a[i]!];
-  }
-  return a;
-}
 
 function MatchExercise({
   exercise,
