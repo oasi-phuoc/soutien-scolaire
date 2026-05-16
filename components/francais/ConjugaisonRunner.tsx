@@ -559,35 +559,35 @@ function FillExercise({
         const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
         const parts = item.sentence.split("___");
         return (
-          <div key={i} className="space-y-1">
+          <div key={i}>
             <p className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
               {parts.map((part, pi) => (
                 <React.Fragment key={pi}>
                   {part}
                   {pi < parts.length - 1 && (
-                    <input
-                      type="text"
-                      value={userAnswer}
-                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
-                      disabled={validated}
-                      className={`inline-block w-20 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
-                        validated
-                          ? correct
+                    validated && !correct ? (
+                      <span className="inline-flex flex-col items-center justify-center border-b-2 border-red-400 mx-1 min-w-[4rem] leading-tight align-bottom">
+                        <span className="text-[10px] line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
+                        <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
+                      </span>
+                    ) : (
+                      <input
+                        type="text"
+                        value={userAnswer}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+                        disabled={validated}
+                        className={`inline-block w-20 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+                          validated
                             ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
-                            : "border-red-400 text-red-500 dark:text-red-400"
-                          : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
-                      }`}
-                    />
+                            : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
+                        }`}
+                      />
+                    )
                   )}
                 </React.Fragment>
               ))}
             </p>
-            {validated && !correct && (
-              <p className="ml-4 text-xs text-emerald-600 dark:text-emerald-400">
-                ✓ <strong>{item.answer}</strong>
-              </p>
-            )}
           </div>
         );
       })}
