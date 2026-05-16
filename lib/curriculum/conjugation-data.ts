@@ -21,7 +21,7 @@ export type FillItem = { sentence: string; hint: string; answer: string };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =
-  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean }
+  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
   | { type: "fill"; title: string; instruction: string; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "match"; title: string; instruction: string; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number }
   | { type: "write"; title: string; instruction: string; prompts: string[] };
@@ -218,6 +218,7 @@ const a1ConjL00: ConjLesson = {
       title: "Exercice 1 — Choisis le bon pronom",
       instruction: "Quel pronom remplace ce groupe ?",
       toggleChoices: true,
+      inlineChoices: true,
       items: [],
       poolSize: 6,
       pool: [

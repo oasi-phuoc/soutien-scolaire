@@ -406,8 +406,8 @@ function QcmExercise({
         {exercise.instruction}
       </p>
       {items.map((item: QcmItem, i) => (
-        <div key={i} className="space-y-2">
-          <p className="text-sm font-medium text-[var(--color-text-primary)]">
+        <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
+          <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
             {i + 1}. {item.sentence}
           </p>
           {exercise.toggleChoices ? (
@@ -415,7 +415,7 @@ function QcmExercise({
               {item.choices.map((choice, ci) => {
                 const isSelected = selected[i] === ci;
                 const isCorrect = ci === item.correctIdx;
-                let cls = "flex-1 py-2.5 text-sm font-medium text-center transition-colors ";
+                let cls = `${exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
                 if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
                 if (!validated) {
                   cls += isSelected
