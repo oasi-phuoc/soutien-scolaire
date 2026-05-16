@@ -51,6 +51,19 @@ function renderArrow(text: string) {
   );
 }
 
+function renderPronounCell(text: string) {
+  const idx = text.indexOf(" → ");
+  if (idx === -1) return <span className="font-bold text-[var(--color-accent-fr)]">{text}</span>;
+  const pronoun = text.slice(0, idx);
+  const rest = text.slice(idx + 3);
+  return (
+    <>
+      <span className="font-bold text-[var(--color-accent-fr)]">{pronoun}</span>
+      <span className="text-[var(--color-text-secondary)]"> {rest}</span>
+    </>
+  );
+}
+
 function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
   const isRtl = pivot === "ar" || pivot === "fa";
 
@@ -193,7 +206,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                           {row.map((cell, ci) => (
                             <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
-                              {renderArrow(cell)}
+                              {block.pronounGrid ? renderPronounCell(cell) : renderArrow(cell)}
                             </td>
                           ))}
                         </tr>
@@ -247,12 +260,12 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                   {block.items.map((item, ii) => (
                     <li key={ii} className="space-y-0.5">
                       <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                        <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
+                        {ii > 0 && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                         <span>{renderArrow(item)}</span>
                       </div>
                       {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
-                        <div className="ml-4 flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                          <span className="mt-0.5 shrink-0">•</span>
+                        <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${ii > 0 ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          {ii > 0 && <span className="mt-0.5 shrink-0">•</span>}
                           <span>{renderArrow(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
                         </div>
                       )}
@@ -276,20 +289,23 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                   )}
                 </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
-                  {block.items.map((item, ii) => (
-                    <li key={ii} className="space-y-0.5">
-                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                        <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>
-                        <span>{renderArrow(item)}</span>
-                      </div>
-                      {showTrans && transItems?.[ii] && (
-                        <div className="ml-4 flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                          <span className="mt-0.5 shrink-0">•</span>
-                          <span>{renderArrow(transItems[ii]!)}</span>
+                  {block.items.map((item, ii) => {
+                    const skipBullet = block.noFirstBullet && ii === 0;
+                    return (
+                      <li key={ii} className="space-y-0.5">
+                        <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>}
+                          <span>{renderArrow(item)}</span>
                         </div>
-                      )}
-                    </li>
-                  ))}
+                        {showTrans && transItems?.[ii] && (
+                          <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                            {!skipBullet && <span className="mt-0.5 shrink-0">•</span>}
+                            <span>{renderArrow(transItems[ii]!)}</span>
+                          </div>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             );
@@ -376,41 +392,70 @@ function QcmExercise({
           <p className="text-sm font-medium text-[var(--color-text-primary)]">
             {i + 1}. {item.sentence}
           </p>
-          <div className="grid grid-cols-3 gap-2">
-            {item.choices.map((choice, ci) => {
-              const isSelected = selected[i] === ci;
-              const isCorrect = ci === item.correctIdx;
-              let cls =
-                "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
-              if (!validated) {
-                cls += isSelected
-                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-              } else {
-                if (isCorrect) {
-                  cls +=
-                    "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700";
-                } else if (isSelected && !isCorrect) {
-                  cls +=
-                    "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+          {exercise.toggleChoices ? (
+            <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+              {item.choices.map((choice, ci) => {
+                const isSelected = selected[i] === ci;
+                const isCorrect = ci === item.correctIdx;
+                let cls = "flex-1 py-2.5 text-sm font-medium text-center transition-colors ";
+                if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
+                if (!validated) {
+                  cls += isSelected
+                    ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+                    : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                 } else {
-                  cls +=
-                    "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                  if (isCorrect) {
+                    cls += "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400";
+                  } else if (isSelected && !isCorrect) {
+                    cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+                  } else {
+                    cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+                  }
                 }
-              }
-              return (
-                <button
-                  key={ci}
-                  type="button"
-                  className={cls}
-                  onClick={() => select(i, ci)}
-                  disabled={validated}
-                >
-                  {choice}
-                </button>
-              );
-            })}
-          </div>
+                return (
+                  <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
+                    {choice}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-2">
+              {item.choices.map((choice, ci) => {
+                const isSelected = selected[i] === ci;
+                const isCorrect = ci === item.correctIdx;
+                let cls =
+                  "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
+                if (!validated) {
+                  cls += isSelected
+                    ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+                } else {
+                  if (isCorrect) {
+                    cls +=
+                      "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700";
+                  } else if (isSelected && !isCorrect) {
+                    cls +=
+                      "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                  } else {
+                    cls +=
+                      "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                  }
+                }
+                return (
+                  <button
+                    key={ci}
+                    type="button"
+                    className={cls}
+                    onClick={() => select(i, ci)}
+                    disabled={validated}
+                  >
+                    {choice}
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       ))}
     </div>

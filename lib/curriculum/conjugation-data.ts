@@ -12,16 +12,16 @@ export type TheoryBlock =
   | { type: "rule"; text: string; examples?: { correct: string; wrong?: string }[] }
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
-  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>> }
+  | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
-  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList };
+  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =
-  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number }
+  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean }
   | { type: "fill"; title: string; instruction: string; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "match"; title: string; instruction: string; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number };
 
@@ -53,14 +53,13 @@ const a1ConjL00: ConjLesson = {
       items: [
         "Un pronom remplace une personne ou un nom pour éviter la répétition.",
         "Ali parle. Ali travaille. Ali habite en Suisse.",
-        "→ Ali parle. Il travaille. Il habite en Suisse.",
       ],
       transItems: {
-        en: ["A pronoun replaces a person or a noun to avoid repetition.", "Ali speaks. Ali works. Ali lives in Switzerland.", "→ Ali speaks. He works. He lives in Switzerland."],
-        ar: ["الضمير يحل محل شخص أو اسم لتجنب التكرار.", "علي يتكلم. علي يعمل. علي يسكن في سويسرا.", "→ علي يتكلم. هو يعمل. هو يسكن في سويسرا."],
-        fa: ["ضمیر یک شخص یا اسم را جایگزین می‌کند تا از تکرار جلوگیری شود.", "علی صحبت می‌کند. علی کار می‌کند. علی در سوئیس زندگی می‌کند.", "→ علی صحبت می‌کند. او کار می‌کند. او در سوئیس زندگی می‌کند."],
-        ti: ["ጸጋ ቃል ሰብ ወይ ስም ንምምካን ናይ ምድጋም ሸልሚ ዝካፍሎ ቃል እዩ።", "ዓሊ ይዛረብ። ዓሊ ይሰርሕ። ዓሊ ኣብ ስዊዘርላንድ ይቐንዕ።", "→ ዓሊ ይዛረብ። ንሱ ይሰርሕ። ንሱ ኣብ ስዊዘርላንድ ይቐንዕ።"],
-        uk: ["Займенник замінює особу або іменник, щоб уникнути повторення.", "Алі говорить. Алі працює. Алі живе у Швейцарії.", "→ Алі говорить. Він працює. Він живе у Швейцарії."],
+        en: ["A pronoun replaces a person or a noun to avoid repetition.", "Ali speaks. Ali works. Ali lives in Switzerland."],
+        ar: ["الضمير يحل محل شخص أو اسم لتجنب التكرار.", "علي يتكلم. علي يعمل. علي يسكن في سويسرا."],
+        fa: ["ضمیر یک شخص یا اسم را جایگزین می‌کند تا از تکرار جلوگیری شود.", "علی صحبت می‌کند. علی کار می‌کند. علی در سوئیس زندگی می‌کند."],
+        ti: ["ጸጋ ቃል ሰብ ወይ ስም ንምምካን ናይ ምድጋም ሸልሚ ዝካፍሎ ቃል እዩ።", "ዓሊ ይዛረብ። ዓሊ ይሰርሕ። ዓሊ ኣብ ስዊዘርላንድ ይቐንዕ።"],
+        uk: ["Займенник замінює особу або іменник, щоб уникнути повторення.", "Алі говорить. Алі працює. Алі живе у Швейцарії."],
       },
     },
     {
@@ -70,10 +69,11 @@ const a1ConjL00: ConjLesson = {
     },
     {
       type: "grid",
+      pronounGrid: true,
       headers: ["Singulier", "Pluriel"],
       rows: [
         ["je → moi", "nous → plusieurs personnes et moi"],
-        ["tu → un ami, la famille", "vous → plusieurs personnes"],
+        ["tu → un ami", "vous → plusieurs personnes"],
         ["il → un homme", "ils → plusieurs hommes"],
         ["elle → une femme", "elles → plusieurs femmes"],
       ],
@@ -85,11 +85,11 @@ const a1ConjL00: ConjLesson = {
         uk: ["Однина", "Множина"],
       },
       transRows: {
-        en: [["je → me / I", "nous → we (me + others)"], ["tu → a friend, family", "vous → several people"], ["il → a man", "ils → several men"], ["elle → a woman", "elles → several women"]],
-        ar: [["je → أنا", "nous → نحن (أنا + الآخرون)"], ["tu → صديق، عائلة", "vous → عدة أشخاص"], ["il → رجل", "ils → عدة رجال"], ["elle → امرأة", "elles → عدة نساء"]],
-        fa: [["je → من", "nous → ما (من + دیگران)"], ["tu → دوست، خانواده", "vous → چند نفر"], ["il → مرد", "ils → چند مرد"], ["elle → زن", "elles → چند زن"]],
-        ti: [["je → ኣነ", "nous → ንሕና (ኣነ + ካልኦት)"], ["tu → ዓርኪ፡ ስድራ", "vous → ሓያሎ ሰባት"], ["il → ሓደ ወዲ", "ils → ሓያሎ ኣወዳት"], ["elle → ሓንቲ ጓል", "elles → ሓያሎ ኣዋልድ"]],
-        uk: [["je → я", "nous → ми (я + інші)"], ["tu → друг, сім'я", "vous → кілька осіб"], ["il → чоловік", "ils → кілька чоловіків"], ["elle → жінка", "elles → кілька жінок"]],
+        en: [["je → me / I", "nous → we (me + others)"], ["tu → a friend", "vous → several people"], ["il → a man", "ils → several men"], ["elle → a woman", "elles → several women"]],
+        ar: [["je → أنا", "nous → نحن (أنا + الآخرون)"], ["tu → صديق", "vous → عدة أشخاص"], ["il → رجل", "ils → عدة رجال"], ["elle → امرأة", "elles → عدة نساء"]],
+        fa: [["je → من", "nous → ما (من + دیگران)"], ["tu → دوست", "vous → چند نفر"], ["il → مرد", "ils → چند مرد"], ["elle → زن", "elles → چند زن"]],
+        ti: [["je → ኣነ", "nous → ንሕና (ኣነ + ካልኦት)"], ["tu → ዓርኪ", "vous → ሓያሎ ሰባት"], ["il → ሓደ ወዲ", "ils → ሓያሎ ኣወዳት"], ["elle → ሓንቲ ጓል", "elles → ሓያሎ ኣዋልድ"]],
+        uk: [["je → я", "nous → ми (я + інші)"], ["tu → друг", "vous → кілька осіб"], ["il → чоловік", "ils → кілька чоловіків"], ["elle → жінка", "elles → кілька жінок"]],
       },
     },
     {
@@ -100,6 +100,7 @@ const a1ConjL00: ConjLesson = {
     {
       type: "highlight",
       label: "ON",
+      noFirstBullet: true,
       items: [
         "On utilise « on » pour représenter une ou plusieurs personnes (= nous).",
         "Il est très utilisé à l'oral familier.",
@@ -119,6 +120,7 @@ const a1ConjL00: ConjLesson = {
     {
       type: "highlight",
       label: "VOUS",
+      noFirstBullet: true,
       items: [
         "On utilise « vous » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur).",
         "On appelle cela la forme de politesse.",
@@ -136,18 +138,19 @@ const a1ConjL00: ConjLesson = {
     {
       type: "highlight",
       label: "ILS",
+      noFirstBullet: true,
       items: [
         "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes.",
-        "Même s'il y a beaucoup de femmes et un seul homme → ils.",
+        "Même s'il y a beaucoup de femmes et un seul homme.",
         "Ali ♂ et Alona ♀ → ils",
       ],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", ti: "ILS", uk: "ILS" },
       transItems: {
-        en: ["«Ils» is used for a mixed group of women and men.", "Even if there are many women and only one man → ils.", "Ali ♂ and Alona ♀ → ils"],
-        ar: ["«ils» يُستخدم للمجموعة المختلطة من الرجال والنساء.", "حتى لو كان هناك نساء كثيرات ورجل واحد → ils.", "علي ♂ وألونا ♀ → ils"],
-        fa: ["از «ils» برای گروه مختلط زنان و مردان استفاده می‌شود.", "حتی اگر زنان زیاد و یک مرد باشد → ils.", "علی ♂ و آلونا ♀ → ils"],
-        ti: ["«ils» ንዝሓወሰ ጉጅለ ደቂ ኣንስትዮን ደቂ ተባዕትዮን ትጥቀሙሉ.", "ብዙሕ ኣዋልድ ሓደ ወዲ እኳ ተዀኑ → ils.", "ዓሊ ♂ ን ኣሎና ♀ → ils"],
-        uk: ["«Ils» використовується для змішаної групи жінок і чоловіків.", "Навіть якщо багато жінок і лише один чоловік → ils.", "Алі ♂ і Алона ♀ → ils"],
+        en: ["«Ils» is used for a mixed group of women and men.", "Even if there are many women and only one man.", "Ali ♂ and Alona ♀ → ils"],
+        ar: ["«ils» يُستخدم للمجموعة المختلطة من الرجال والنساء.", "حتى لو كان هناك نساء كثيرات ورجل واحد.", "علي ♂ وألونا ♀ → ils"],
+        fa: ["از «ils» برای گروه مختلط زنان و مردان استفاده می‌شود.", "حتی اگر زنان زیاد و یک مرد باشد.", "علی ♂ و آلونا ♀ → ils"],
+        ti: ["«ils» ንዝሓወሰ ጉጅለ ደቂ ኣንስትዮን ደቂ ተባዕትዮን ትጥቀሙሉ.", "ብዙሕ ኣዋልድ ሓደ ወዲ እኳ ተዀኑ.", "ዓሊ ♂ ን ኣሎና ♀ → ils"],
+        uk: ["«Ils» використовується для змішаної групи жінок і чоловіків.", "Навіть якщо багато жінок і лише один чоловік.", "Алі ♂ і Алона ♀ → ils"],
       },
     },
     {
@@ -211,6 +214,7 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 1 — Choisis le bon pronom",
       instruction: "Sélectionne le pronom correct pour chaque personne ou groupe.",
+      toggleChoices: true,
       items: [],
       poolSize: 6,
       pool: [
@@ -277,6 +281,7 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 3 — Mettre au pluriel",
       instruction: "Choisis le pronom pluriel qui correspond.",
+      toggleChoices: true,
       items: [],
       poolSize: 5,
       pool: [
@@ -297,6 +302,7 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 4 — Mettre au singulier",
       instruction: "Choisis le pronom singulier qui correspond.",
+      toggleChoices: true,
       items: [],
       poolSize: 5,
       pool: [
@@ -361,32 +367,22 @@ const a1ConjL01: ConjLesson = {
     {
       type: "highlight",
       label: "1. ÊTRE est utilisé pour",
-      items: ["l'identité", "la nationalité", "la profession", "la description", "la situation"],
-    },
-    {
-      type: "plain_list",
-      label: "Exemples",
       items: [
-        "Je suis Ali.",
-        "Elle est française.",
-        "Nous sommes étudiants.",
-        "Il est grand.",
-        "Tu es à Genève.",
+        "l'identité : Je suis Ali.",
+        "la nationalité : Elle est française.",
+        "la profession : Nous sommes étudiants.",
+        "la description : Il est grand.",
+        "la situation : Tu es à Genève.",
       ],
     },
     {
       type: "highlight",
       label: "2. AVOIR est utilisé pour",
-      items: ["la possession", "l'âge", "les sensations", "les expressions courantes"],
-    },
-    {
-      type: "plain_list",
-      label: "Exemples",
       items: [
-        "J'ai un téléphone.",
-        "Elle a 25 ans.",
-        "Nous avons faim.",
-        "Il a de la chance.",
+        "la possession : J'ai un téléphone.",
+        "l'âge : Elle a 25 ans.",
+        "les sensations : Nous avons faim.",
+        "les expressions : Il a de la chance.",
       ],
     },
     { type: "heading", text: "Expressions avec AVOIR" },
