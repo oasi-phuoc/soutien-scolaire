@@ -360,11 +360,14 @@ function QcmExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const [items] = useState<typeof exercise.items>(() => {
-    if (exercise.pool && exercise.pool.length > 0) {
-      const size = exercise.poolSize ?? 5;
-      return shuffle(exercise.pool).slice(0, size);
-    }
-    return exercise.items;
+    const raw = exercise.pool && exercise.pool.length > 0
+      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5)
+      : exercise.items;
+    return raw.map(item => {
+      const indexed = item.choices.map((c, i) => ({ c, isCorrect: i === item.correctIdx }));
+      const sh = shuffle(indexed);
+      return { ...item, choices: sh.map(x => x.c), correctIdx: sh.findIndex(x => x.isCorrect) };
+    });
   });
   const [selected, setSelected] = useState<(number | null)[]>(
     () => new Array(items.length).fill(null),
@@ -408,7 +411,7 @@ function QcmExercise({
       {items.map((item: QcmItem, i) => (
         <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
           <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
-            {i + 1}. {item.sentence}
+            {i + 1}. {renderFillSentence(item.sentence)}
           </p>
           {exercise.toggleChoices ? (
             <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
