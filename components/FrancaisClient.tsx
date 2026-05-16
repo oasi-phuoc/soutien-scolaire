@@ -143,7 +143,7 @@ function LessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[]
         {themes.map((th) => (
           <li key={th.id}>
             <Link
-              href={`/francais/${th.slug}`}
+              href={th.tab === "conjugaison" ? `/francais/conjugaison/${th.slug}` : `/francais/${th.slug}`}
               className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-secondary)]"
             >
               <span className="w-14 shrink-0 text-[10px] font-bold text-[var(--color-accent-fr)]">{th.code}</span>

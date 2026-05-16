@@ -1,0 +1,780 @@
+"use client";
+
+import React, { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import type {
+  ConjLesson,
+  TheoryBlock,
+  Exercise,
+  QcmItem,
+  FillItem,
+  MatchPair,
+} from "@/lib/curriculum/conjugation-data";
+
+// ── Props ─────────────────────────────────────────────────────────────────────
+
+interface Props {
+  lesson: ConjLesson;
+}
+
+// ── Theory view ───────────────────────────────────────────────────────────────
+
+function TheoryView({ blocks }: { blocks: TheoryBlock[] }) {
+  return (
+    <div className="space-y-5">
+      {blocks.map((block, i) => {
+        switch (block.type) {
+          case "heading":
+            return (
+              <h2
+                key={i}
+                className="text-lg font-bold text-[var(--color-text-primary)]"
+              >
+                {block.text}
+              </h2>
+            );
+
+          case "table":
+            return (
+              <div key={i} className="space-y-3">
+                {block.tables.map((tbl, ti) => (
+                  <div
+                    key={ti}
+                    className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
+                  >
+                    <div className="border-b border-[var(--color-border-default)] bg-[var(--color-accent-fr)]/10 px-3 py-2">
+                      <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
+                        {tbl.verb}
+                      </span>
+                    </div>
+                    <table className="w-full text-sm">
+                      <tbody>
+                        {tbl.rows.map((row, ri) => (
+                          <tr
+                            key={ri}
+                            className={
+                              ri % 2 === 0
+                                ? "bg-[var(--color-bg-primary)]"
+                                : "bg-[var(--color-bg-secondary)]"
+                            }
+                          >
+                            <td className="w-32 px-3 py-2 font-medium text-[var(--color-text-secondary)]">
+                              {row.pronoun}
+                            </td>
+                            <td className="px-3 py-2 font-semibold text-[var(--color-text-primary)]">
+                              {row.form}
+                            </td>
+                            {row.phonetic && (
+                              <td className="px-3 py-2 text-xs text-[var(--color-text-secondary)]">
+                                [{row.phonetic}]
+                              </td>
+                            )}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ))}
+              </div>
+            );
+
+          case "rule":
+            return (
+              <div key={i} className="space-y-2">
+                <p className="flex gap-2 text-sm text-[var(--color-text-primary)]">
+                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
+                  <span>{block.text}</span>
+                </p>
+                {block.examples && block.examples.length > 0 && (
+                  <div className="ml-5 space-y-1">
+                    {block.examples.map((ex, ei) => (
+                      <div key={ei} className="space-y-0.5">
+                        <code className="block rounded bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400">
+                          ✓ {ex.correct}
+                        </code>
+                        {ex.wrong && (
+                          <code className="block rounded bg-red-50 px-2 py-1 text-xs font-medium text-red-600 line-through dark:bg-red-900/20 dark:text-red-400">
+                            ✗ {ex.wrong}
+                          </code>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            );
+
+          case "note":
+            return (
+              <div
+                key={i}
+                className="rounded-[var(--radius-lg)] border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-900/20 dark:text-amber-300"
+              >
+                <span className="mr-1.5">ℹ</span>
+                {block.text}
+              </div>
+            );
+
+          case "vocab":
+            return (
+              <div key={i} className="space-y-2">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+                  {block.title}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {block.items.map((item, ii) => (
+                    <span
+                      key={ii}
+                      className="rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-1 text-xs font-medium text-[var(--color-text-primary)]"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+
+          default:
+            return null;
+        }
+      })}
+    </div>
+  );
+}
+
+// ── QCM exercise ──────────────────────────────────────────────────────────────
+
+function QcmExercise({
+  exercise,
+  onValidated,
+}: {
+  exercise: Extract<Exercise, { type: "qcm" }>;
+  onValidated: (allCorrect: boolean) => void;
+}) {
+  const [selected, setSelected] = useState<(number | null)[]>(
+    () => new Array(exercise.items.length).fill(null),
+  );
+  const [validated, setValidated] = useState(false);
+
+  function select(itemIdx: number, choiceIdx: number) {
+    if (validated) return;
+    setSelected((prev: (number | null)[]) => {
+      const next = [...prev];
+      next[itemIdx] = choiceIdx;
+      return next;
+    });
+  }
+
+  function validate() {
+    setValidated(true);
+    const allCorrect = exercise.items.every(
+      (item, i) => selected[i] === item.correctIdx,
+    );
+    onValidated(allCorrect);
+  }
+
+  function reset() {
+    setSelected(new Array(exercise.items.length).fill(null));
+    setValidated(false);
+  }
+
+  const allAnswered = selected.every((s: number | null) => s !== null);
+
+  return (
+    <div className="space-y-5">
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        {exercise.instruction}
+      </p>
+      {exercise.items.map((item: QcmItem, i) => (
+        <div key={i} className="space-y-2">
+          <p className="text-sm font-medium text-[var(--color-text-primary)]">
+            {i + 1}. {item.sentence}
+          </p>
+          <div className="grid grid-cols-2 gap-2">
+            {item.choices.map((choice, ci) => {
+              const isSelected = selected[i] === ci;
+              const isCorrect = ci === item.correctIdx;
+              let cls =
+                "rounded-[var(--radius-md)] border px-3 py-2.5 text-left text-sm font-medium transition-colors ";
+              if (!validated) {
+                cls += isSelected
+                  ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+              } else {
+                if (isCorrect) {
+                  cls +=
+                    "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700";
+                } else if (isSelected && !isCorrect) {
+                  cls +=
+                    "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                } else {
+                  cls +=
+                    "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                }
+              }
+              return (
+                <button
+                  key={ci}
+                  type="button"
+                  className={cls}
+                  onClick={() => select(i, ci)}
+                  disabled={validated}
+                >
+                  {choice}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+
+      {!validated && (
+        <button
+          type="button"
+          onClick={validate}
+          disabled={!allAnswered}
+          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Valider
+        </button>
+      )}
+
+      <ResetButton onReset={reset} />
+    </div>
+  );
+}
+
+// ── Fill exercise ─────────────────────────────────────────────────────────────
+
+function normalizeAnswer(s: string): string {
+  return s
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/['']/g, "'")
+    .replace(/\s+/g, " ");
+}
+
+function FillExercise({
+  exercise,
+  onValidated,
+}: {
+  exercise: Extract<Exercise, { type: "fill" }>;
+  onValidated: (allCorrect: boolean) => void;
+}) {
+  const [inputs, setInputs] = useState<string[]>(
+    () => new Array(exercise.items.length).fill(""),
+  );
+  const [validated, setValidated] = useState(false);
+
+  function setInput(i: number, val: string) {
+    if (validated) return;
+    setInputs((prev: string[]) => {
+      const next = [...prev];
+      next[i] = val;
+      return next;
+    });
+  }
+
+  function validate() {
+    setValidated(true);
+    const allCorrect = exercise.items.every(
+      (item: FillItem, i) =>
+        normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(item.answer),
+    );
+    onValidated(allCorrect);
+  }
+
+  function reset() {
+    setInputs(new Array(exercise.items.length).fill(""));
+    setValidated(false);
+  }
+
+  const allFilled = inputs.every((s: string) => s.trim() !== "");
+
+  return (
+    <div className="space-y-5">
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        {exercise.instruction}
+      </p>
+      {exercise.items.map((item: FillItem, i) => {
+        const userAnswer = inputs[i] ?? "";
+        const correct =
+          normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+        return (
+          <div key={i} className="space-y-2">
+            <p className="text-sm font-medium text-[var(--color-text-primary)]">
+              {i + 1}. {item.sentence}
+            </p>
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              ({item.hint})
+            </p>
+            <input
+              type="text"
+              value={userAnswer}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+              disabled={validated}
+              placeholder="Votre réponse…"
+              className={`w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[var(--color-accent-fr)]/30 ${
+                validated
+                  ? correct
+                    ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                    : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
+              }`}
+            />
+            {validated && !correct && (
+              <p className="text-xs text-emerald-600 dark:text-emerald-400">
+                Réponse correcte : <strong>{item.answer}</strong>
+              </p>
+            )}
+          </div>
+        );
+      })}
+
+      {!validated && (
+        <button
+          type="button"
+          onClick={validate}
+          disabled={!allFilled}
+          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Valider
+        </button>
+      )}
+
+      <ResetButton onReset={reset} />
+    </div>
+  );
+}
+
+// ── Match exercise ────────────────────────────────────────────────────────────
+
+function shuffle<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+function MatchExercise({
+  exercise,
+  onValidated,
+}: {
+  exercise: Extract<Exercise, { type: "match" }>;
+  onValidated: (allCorrect: boolean) => void;
+}) {
+  const [rightItems] = useState<MatchPair[]>(() => shuffle(exercise.pairs));
+  const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
+  const [connections, setConnections] = useState<Map<number, number>>(
+    new Map(),
+  );
+  const [validated, setValidated] = useState(false);
+
+  // connections: Map<leftIdx, rightIdx>
+
+  function clickLeft(idx: number) {
+    if (validated) return;
+    setSelectedLeft((prev: number | null) => (prev === idx ? null : idx));
+  }
+
+  function clickRight(rightIdx: number) {
+    if (validated || selectedLeft === null) return;
+    setConnections((prev: Map<number, number>) => {
+      const next = new Map(prev);
+      // Remove any existing connection to this right item
+      for (const [k, v] of next.entries()) {
+        if (v === rightIdx) next.delete(k);
+      }
+      next.set(selectedLeft, rightIdx);
+      return next;
+    });
+    setSelectedLeft(null);
+  }
+
+  function validate() {
+    setValidated(true);
+    const allCorrect = exercise.pairs.every((pair, li) => {
+      const connectedRightIdx = connections.get(li);
+      if (connectedRightIdx === undefined) return false;
+      return rightItems[connectedRightIdx]?.right === pair.right;
+    });
+    onValidated(allCorrect);
+  }
+
+  function reset() {
+    setConnections(new Map());
+    setSelectedLeft(null);
+    setValidated(false);
+  }
+
+  const allConnected = exercise.pairs.every((_, li) => connections.has(li));
+
+  return (
+    <div className="space-y-5">
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        {exercise.instruction}
+      </p>
+
+      <div className="grid grid-cols-2 gap-3">
+        {/* Left column */}
+        <div className="space-y-2">
+          <p className="text-center text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+            Pronoms
+          </p>
+          {exercise.pairs.map((pair, li) => {
+            const isSelected = selectedLeft === li;
+            const connectedRightIdx = connections.get(li);
+            const isConnected = connectedRightIdx !== undefined;
+            let isCorrect = false;
+            if (validated && isConnected) {
+              isCorrect =
+                rightItems[connectedRightIdx]?.right === pair.right;
+            }
+            let cls =
+              "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ";
+            if (validated) {
+              cls += isConnected
+                ? isCorrect
+                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+            } else {
+              cls += isSelected
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : isConnected
+                  ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+            }
+            return (
+              <button
+                key={li}
+                type="button"
+                className={cls}
+                onClick={() => clickLeft(li)}
+                disabled={validated}
+              >
+                {pair.left}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Right column */}
+        <div className="space-y-2">
+          <p className="text-center text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+            Formes
+          </p>
+          {rightItems.map((pair: MatchPair, ri: number) => {
+            const isTargetted = [...connections.values()].includes(ri);
+            const connectingLeft = [...connections.entries()].find(
+              ([, v]) => v === ri,
+            )?.[0];
+            let isCorrect = false;
+            if (validated && isTargetted && connectingLeft !== undefined) {
+              isCorrect =
+                pair.right === exercise.pairs[connectingLeft]?.right;
+            }
+            let cls =
+              "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors ";
+            if (validated) {
+              cls += isTargetted
+                ? isCorrect
+                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
+                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+            } else {
+              cls +=
+                selectedLeft !== null
+                  ? isTargetted
+                    ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] cursor-pointer"
+                    : "border-[var(--color-accent-fr)]/30 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] cursor-pointer"
+                  : isTargetted
+                    ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+            }
+            return (
+              <button
+                key={ri}
+                type="button"
+                className={cls}
+                onClick={() => clickRight(ri)}
+                disabled={validated}
+              >
+                {pair.right}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {validated && (
+        <div className="space-y-1">
+          {exercise.pairs.map((pair, li) => {
+            const connectedRightIdx = connections.get(li);
+            const isCorrect =
+              connectedRightIdx !== undefined &&
+              rightItems[connectedRightIdx]?.right === pair.right;
+            if (isCorrect) return null;
+            return (
+              <p key={li} className="text-xs text-emerald-600 dark:text-emerald-400">
+                {pair.left} → <strong>{pair.right}</strong>
+              </p>
+            );
+          })}
+        </div>
+      )}
+
+      {!validated && (
+        <button
+          type="button"
+          onClick={validate}
+          disabled={!allConnected}
+          className="mt-2 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-3 text-sm font-bold text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+        >
+          Valider
+        </button>
+      )}
+
+      <ResetButton onReset={reset} />
+    </div>
+  );
+}
+
+// ── Reset button ──────────────────────────────────────────────────────────────
+
+function ResetButton({ onReset }: { onReset: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onReset}
+      aria-label="Recommencer l'exercice"
+      className="flex items-center gap-1.5 text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+    >
+      <svg
+        width="13"
+        height="13"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        aria-hidden
+      >
+        <path d="M1 4v6h6" />
+        <path d="M3.51 15a9 9 0 1 0 .49-4" />
+      </svg>
+      Recommencer
+    </button>
+  );
+}
+
+// ── Exercise wrapper ──────────────────────────────────────────────────────────
+
+function ExerciseView({
+  exercise,
+  onValidated,
+}: {
+  exercise: Exercise;
+  onValidated: (allCorrect: boolean) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+        {exercise.title}
+      </h2>
+      {exercise.type === "qcm" && (
+        <QcmExercise exercise={exercise} onValidated={onValidated} />
+      )}
+      {exercise.type === "fill" && (
+        <FillExercise exercise={exercise} onValidated={onValidated} />
+      )}
+      {exercise.type === "match" && (
+        <MatchExercise exercise={exercise} onValidated={onValidated} />
+      )}
+    </div>
+  );
+}
+
+// ── Main runner ───────────────────────────────────────────────────────────────
+
+export function ConjugaisonRunner({ lesson }: Props) {
+  const router = useRouter();
+  // stepIdx 0 = theory; 1..N = exercises
+  const [stepIdx, setStepIdx] = useState(0);
+  const [exerciseKey, setExerciseKey] = useState(0);
+
+  const totalSteps = 1 + lesson.exercises.length;
+  const isFirst = stepIdx === 0;
+  const isLast = stepIdx === totalSteps - 1;
+  const isTheory = stepIdx === 0;
+  const currentExercise = isTheory ? null : lesson.exercises[stepIdx - 1] ?? null;
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const handleValidated = useCallback<(allCorrect: boolean) => void>((_allCorrect: boolean) => {
+    // Feedback is shown inline; "Suivant" becomes available after validation
+  }, []);
+
+  function goBack() {
+    if (isFirst) {
+      router.push("/francais");
+    } else {
+      setStepIdx((s: number) => s - 1);
+      setExerciseKey((k: number) => k + 1);
+    }
+  }
+
+  function goNext() {
+    if (isLast) {
+      router.push("/francais");
+    } else {
+      setStepIdx((s: number) => s + 1);
+      setExerciseKey((k: number) => k + 1);
+    }
+  }
+
+  function resetExercise() {
+    setExerciseKey((k: number) => k + 1);
+  }
+
+  return (
+    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+      {/* Header */}
+      <header className="mb-5 space-y-1">
+        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">
+          Français · Conjugaison · {lesson.level}
+        </p>
+        <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+          {lesson.code} — {lesson.title}
+        </h1>
+      </header>
+
+      {/* Progress bar */}
+      <div className="mb-6 flex gap-1">
+        {Array.from({ length: totalSteps }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${
+              i < stepIdx
+                ? "bg-[var(--color-accent-fr)]"
+                : i === stepIdx
+                  ? "bg-[var(--color-accent-fr)] opacity-60"
+                  : "bg-[var(--color-border-default)]"
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Step label */}
+      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
+        {isTheory ? "Cours" : `Exercice ${stepIdx} / ${lesson.exercises.length}`}
+      </p>
+
+      {/* Content */}
+      <div className="min-h-[280px]">
+        {isTheory ? (
+          <TheoryView blocks={lesson.theory} />
+        ) : currentExercise ? (
+          <ExerciseView
+            key={exerciseKey}
+            exercise={currentExercise}
+            onValidated={handleValidated}
+          />
+        ) : null}
+      </div>
+
+      {/* Fixed bottom nav */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            {/* Back */}
+            <button
+              type="button"
+              onClick={goBack}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                aria-hidden
+              >
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+              Retour
+            </button>
+
+            {/* Reset (exercises only) */}
+            {!isTheory && (
+              <button
+                type="button"
+                aria-label="Recommencer l'exercice"
+                onClick={resetExercise}
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden
+                >
+                  <path d="M1 4v6h6" />
+                  <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                </svg>
+              </button>
+            )}
+
+            {/* Next */}
+            <button
+              type="button"
+              onClick={goNext}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              {isLast ? (
+                <>
+                  Terminer
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    aria-hidden
+                  >
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </>
+              ) : (
+                <>
+                  Suivant
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+        {/* Spacer for bottom nav */}
+        <div className="h-[68px]" />
+      </div>
+    </div>
+  );
+}
