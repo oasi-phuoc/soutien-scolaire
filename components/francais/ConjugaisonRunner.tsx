@@ -403,15 +403,24 @@ function QcmExercise({
     onCanValidateChange(allAnswered && !validated);
   }, [allAnswered, validated, onCanValidateChange]);
 
+  const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
+  const isRtl = pivot === "ar" || pivot === "fa";
+
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        {exercise.instruction}
-      </p>
+      <div>
+        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
+          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
+          </p>
+        )}
+      </div>
       {items.map((item: QcmItem, i) => (
         <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
           <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
-            {i + 1}. {renderFillSentence(item.sentence)}
+            <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
           </p>
           {exercise.toggleChoices ? (
             <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
@@ -565,11 +574,20 @@ function FillExercise({
     onCanValidateChange(allFilled && !validated);
   }, [allFilled, validated, onCanValidateChange]);
 
+  const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
+  const isRtl = pivot === "ar" || pivot === "fa";
+
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        {exercise.instruction}
-      </p>
+      <div>
+        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
+          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
+          </p>
+        )}
+      </div>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
         const correct =
@@ -577,7 +595,7 @@ function FillExercise({
         return (
           <div key={i} className="space-y-2">
             <p className="text-sm font-medium text-[var(--color-text-primary)]">
-              {i + 1}. {renderFillSentence(item.sentence)}
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
             </p>
             <input
               type="text"

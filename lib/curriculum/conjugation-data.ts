@@ -3,7 +3,7 @@
 export type ConjugRow = { pronoun: string; form: string; phonetic?: string };
 export type ConjugTable = { verb: string; rows: ConjugRow[] };
 
-type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
+export type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
 type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
 
 export type TheoryBlock =
@@ -21,10 +21,10 @@ export type FillItem = { sentence: string; hint: string; answer: string };
 export type MatchPair = { left: string; right: string };
 
 export type Exercise =
-  | { type: "qcm"; title: string; instruction: string; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
-  | { type: "fill"; title: string; instruction: string; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
-  | { type: "match"; title: string; instruction: string; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number }
-  | { type: "write"; title: string; instruction: string; prompts: string[] };
+  | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
+  | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
+  | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts: string[] };
 
 export type ConjLesson = {
   slug: string;
@@ -217,77 +217,78 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 1 — Choisis le bon pronom",
       instruction: "Quel pronom remplace ce groupe ?",
+      transInstruction: { en: "Which pronoun replaces this group?", ar: "أي ضمير يحل محل هذه المجموعة؟", fa: "کدام ضمیر جای این گروه را می‌گیرد؟", ti: "ኣየናይ ተካኢ ቃል ነዚ ጉጅለ ይትካእ?", uk: "Який займенник замінює цю групу?" },
       toggleChoices: true,
-      inlineChoices: true,
       items: [],
       poolSize: 6,
       pool: [
         // singulier masculin → il
-        { sentence: "Mon frère →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon père →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon cousin →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon oncle →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon grand-père →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon fils →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon mari →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon voisin →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon neveu →", choices: ["il", "elle", "ils"], correctIdx: 0 },
-        { sentence: "Mon ami →", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon frère", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon père", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon cousin", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon oncle", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon grand-père", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon fils", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon mari", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon voisin", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon neveu", choices: ["il", "elle", "ils"], correctIdx: 0 },
+        { sentence: "Mon ami", choices: ["il", "elle", "ils"], correctIdx: 0 },
         // singulier féminin → elle
-        { sentence: "Ma sœur →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma mère →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma cousine →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma tante →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma grand-mère →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma fille →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma femme →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma voisine →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Ma nièce →", choices: ["il", "elle", "ils"], correctIdx: 1 },
-        { sentence: "Mon amie →", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma sœur", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma mère", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma cousine", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma tante", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma grand-mère", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma fille", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma femme", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma voisine", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Ma nièce", choices: ["il", "elle", "ils"], correctIdx: 1 },
+        { sentence: "Mon amie", choices: ["il", "elle", "ils"], correctIdx: 1 },
         // groupe avec moi → nous
-        { sentence: "Mon frère et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
-        { sentence: "Ma mère et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
-        { sentence: "Mon père et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
-        { sentence: "Ma femme et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
-        { sentence: "Mes amis et moi →", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Mon frère et moi", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Ma mère et moi", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Mon père et moi", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Ma femme et moi", choices: ["nous", "vous", "ils"], correctIdx: 0 },
+        { sentence: "Mes amis et moi", choices: ["nous", "vous", "ils"], correctIdx: 0 },
         // groupe avec toi → vous
-        { sentence: "Ta sœur et toi →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
-        { sentence: "Ton frère et toi →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
-        { sentence: "Les enfants et toi →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
-        { sentence: "Ta mère et toi →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
-        { sentence: "Ton ami et toi →", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Ta sœur et toi", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Ton frère et toi", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Les enfants et toi", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Ta mère et toi", choices: ["vous", "nous", "ils"], correctIdx: 0 },
+        { sentence: "Ton ami et toi", choices: ["vous", "nous", "ils"], correctIdx: 0 },
         // pluriel masculin → ils
-        { sentence: "Mes frères →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mes cousins →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mes parents →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mes enfants →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mes fils →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mes voisins →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes frères", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes cousins", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes parents", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes enfants", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes fils", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mes voisins", choices: ["ils", "elles", "nous"], correctIdx: 0 },
         // pluriel féminin → elles
-        { sentence: "Mes sœurs →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes cousines →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes filles →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes voisines →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes amies →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes tantes →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes sœurs", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes cousines", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes filles", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes voisines", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes amies", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes tantes", choices: ["ils", "elles", "nous"], correctIdx: 1 },
         // groupe mixte → ils
-        { sentence: "Mon frère et ma sœur →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mon père et ma mère →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Ma cousine et mon cousin →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Ma tante et mon oncle →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
-        { sentence: "Mon oncle et sa femme →", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mon frère et ma sœur", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mon père et ma mère", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Ma cousine et mon cousin", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Ma tante et mon oncle", choices: ["ils", "elles", "nous"], correctIdx: 0 },
+        { sentence: "Mon oncle et sa femme", choices: ["ils", "elles", "nous"], correctIdx: 0 },
         // groupe féminin pluriel → elles
-        { sentence: "Ma sœur et sa copine →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Ma mère et ma tante →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Mes cousines et ma sœur →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Ma fille et son amie →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
-        { sentence: "Ma grand-mère et ma tante →", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Ma sœur et sa copine", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Ma mère et ma tante", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Mes cousines et ma sœur", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Ma fille et son amie", choices: ["ils", "elles", "nous"], correctIdx: 1 },
+        { sentence: "Ma grand-mère et ma tante", choices: ["ils", "elles", "nous"], correctIdx: 1 },
       ],
     },
     {
       type: "fill",
       title: "Exercice 2 — Remplace par le bon pronom",
       instruction: "Écris le pronom qui remplace le nom souligné.",
+      transInstruction: { en: "Write the pronoun that replaces the noun.", ar: "اكتب الضمير الذي يحل محل الاسم.", fa: "ضمیری بنویسید که جای اسم را می‌گیرد.", ti: "ጽሓፍ ተካኢ ቃል ነቲ ስም ዝትካእ.", uk: "Напишіть займенник, який замінює іменник." },
       items: [],
       poolSize: 6,
       pool: [
@@ -347,6 +348,7 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 3 — Mettre au pluriel",
       instruction: "Choisis le pronom pluriel qui correspond.",
+      transInstruction: { en: "Choose the correct plural pronoun.", ar: "اختر ضمير الجمع المناسب.", fa: "ضمیر جمع مناسب را انتخاب کنید.", ti: "ምረጽ ትኽክለኛ ብዙሕ ቁጽሪ ተካኢ ቃል.", uk: "Оберіть правильний займенник множини." },
       toggleChoices: true,
       items: [],
       poolSize: 5,
@@ -407,6 +409,7 @@ const a1ConjL00: ConjLesson = {
       type: "qcm",
       title: "Exercice 4 — Mettre au singulier",
       instruction: "Choisis le pronom singulier qui correspond.",
+      transInstruction: { en: "Choose the correct singular pronoun.", ar: "اختر ضمير المفرد المناسب.", fa: "ضمیر مفرد مناسب را انتخاب کنید.", ti: "ምረጽ ትኽክለኛ ነጠላ ቁጽሪ ተካኢ ቃል.", uk: "Оберіть правильний займенник однини." },
       toggleChoices: true,
       items: [],
       poolSize: 5,
@@ -467,6 +470,7 @@ const a1ConjL00: ConjLesson = {
       type: "fill",
       title: "Exercice 5 — Réécris avec le pronom",
       instruction: "Remplace le nom par le bon pronom et réécris uniquement le pronom.",
+      transInstruction: { en: "Replace the noun with the correct pronoun.", ar: "استبدل الاسم بالضمير الصحيح.", fa: "اسم را با ضمیر صحیح جایگزین کنید.", ti: "ኣልቅሕ ነቲ ስም ብትኽክለኛ ተካኢ ቃል.", uk: "Замініть іменник правильним займенником." },
       items: [],
       poolSize: 6,
       pool: [
