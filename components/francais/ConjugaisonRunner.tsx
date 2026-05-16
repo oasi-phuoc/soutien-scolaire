@@ -10,8 +10,8 @@ import type {
   MatchPair,
 } from "@/lib/curriculum/conjugation-data";
 import { usePivotLang } from "@/components/math/usePivotLang";
-import { PIVOT_LANGS } from "@/lib/pivot-langs";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
+import { useTranslation } from "@/components/TranslationProvider";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -740,8 +740,7 @@ function ExerciseView({
 export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   const pivot = usePivotLang();
-  const pivotLabel = PIVOT_LANGS.find(l => l.code === pivot)?.label ?? pivot;
-  const [showTrans, setShowTrans] = useState(false);
+  const { showPivot: showTrans } = useTranslation();
   const theoryPages = lesson.theory2
     ? [lesson.theory, lesson.theory2]
     : [lesson.theory];
@@ -824,19 +823,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           ? theoryCount > 1 ? `${stepIdx + 1} / ${theoryCount}` : ""
           : `Exercice ${stepIdx - theoryCount + 1} / ${lesson.exercises.length}`}
       </p>
-
-      {/* Translate toggle (theory only) */}
-      {isTheory && pivot && (
-        <div className="mb-3 flex justify-end">
-          <button
-            type="button"
-            onClick={() => setShowTrans((s: boolean) => !s)}
-            className="text-xs text-[var(--color-text-secondary)] underline"
-          >
-            {showTrans ? "Masquer la traduction" : `Traduire (${pivotLabel})`}
-          </button>
-        </div>
-      )}
 
       {/* Content */}
       <div className="min-h-[280px]">
