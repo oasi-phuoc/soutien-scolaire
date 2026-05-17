@@ -138,7 +138,12 @@ function VerbToggleView({ verbs, negation }: { verbs: VerbToggleVerb[]; negation
                   {negation && (
                     <span className="font-bold text-[var(--color-accent-fr)]">{nePrefix}</span>
                   )}
-                  <span className="text-[var(--color-text-primary)]">{verb.radical}</span>
+                  {verb.reflexivePronouns?.[ri] !== undefined && (
+                    <span className="font-bold text-[var(--color-accent-fr)]">
+                      {verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}
+                    </span>
+                  )}
+                  {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
                   <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
                   {negation && (
                     <span className="font-bold text-[var(--color-accent-fr)]"> pas</span>

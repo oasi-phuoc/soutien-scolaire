@@ -9,6 +9,7 @@ type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
 export type VerbToggleVerb = {
   infinitive: string;
   radical: string;
+  reflexivePronouns?: string[];
   rows: Array<{ pronoun: string; ending: string }>;
 };
 
@@ -1223,6 +1224,129 @@ const a1ConjL08: ConjLesson = {
   exercises: [],
 };
 
+const g9Verbs: VerbToggleVerb[] = [
+  {
+    infinitive: "se lever", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "lève" },
+      { pronoun: "tu",           ending: "lèves" },
+      { pronoun: "il / elle / on", ending: "lève" },
+      { pronoun: "nous",         ending: "levons" },
+      { pronoun: "vous",         ending: "levez" },
+      { pronoun: "ils / elles",  ending: "lèvent" },
+    ],
+  },
+  {
+    infinitive: "se coucher", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "couche" },
+      { pronoun: "tu",           ending: "couches" },
+      { pronoun: "il / elle / on", ending: "couche" },
+      { pronoun: "nous",         ending: "couchons" },
+      { pronoun: "vous",         ending: "couchez" },
+      { pronoun: "ils / elles",  ending: "couchent" },
+    ],
+  },
+  {
+    infinitive: "se laver", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "lave" },
+      { pronoun: "tu",           ending: "laves" },
+      { pronoun: "il / elle / on", ending: "lave" },
+      { pronoun: "nous",         ending: "lavons" },
+      { pronoun: "vous",         ending: "lavez" },
+      { pronoun: "ils / elles",  ending: "lavent" },
+    ],
+  },
+  {
+    infinitive: "se doucher", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "douche" },
+      { pronoun: "tu",           ending: "douches" },
+      { pronoun: "il / elle / on", ending: "douche" },
+      { pronoun: "nous",         ending: "douchons" },
+      { pronoun: "vous",         ending: "douchez" },
+      { pronoun: "ils / elles",  ending: "douchent" },
+    ],
+  },
+  {
+    infinitive: "se brosser", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "brosse" },
+      { pronoun: "tu",           ending: "brosses" },
+      { pronoun: "il / elle / on", ending: "brosse" },
+      { pronoun: "nous",         ending: "brossons" },
+      { pronoun: "vous",         ending: "brossez" },
+      { pronoun: "ils / elles",  ending: "brossent" },
+    ],
+  },
+  {
+    infinitive: "se raser", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "rase" },
+      { pronoun: "tu",           ending: "rases" },
+      { pronoun: "il / elle / on", ending: "rase" },
+      { pronoun: "nous",         ending: "rasons" },
+      { pronoun: "vous",         ending: "rasez" },
+      { pronoun: "ils / elles",  ending: "rasent" },
+    ],
+  },
+  {
+    infinitive: "se maquiller", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "maquille" },
+      { pronoun: "tu",           ending: "maquilles" },
+      { pronoun: "il / elle / on", ending: "maquille" },
+      { pronoun: "nous",         ending: "maquillons" },
+      { pronoun: "vous",         ending: "maquillez" },
+      { pronoun: "ils / elles",  ending: "maquillent" },
+    ],
+  },
+  {
+    infinitive: "se coiffer", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "coiffe" },
+      { pronoun: "tu",           ending: "coiffes" },
+      { pronoun: "il / elle / on", ending: "coiffe" },
+      { pronoun: "nous",         ending: "coiffons" },
+      { pronoun: "vous",         ending: "coiffez" },
+      { pronoun: "ils / elles",  ending: "coiffent" },
+    ],
+  },
+  {
+    infinitive: "s'habiller", radical: "",
+    reflexivePronouns: ["m'", "t'", "s'", "nous", "vous", "s'"],
+    rows: [
+      { pronoun: "je",           ending: "habille" },
+      { pronoun: "tu",           ending: "habilles" },
+      { pronoun: "il / elle / on", ending: "habille" },
+      { pronoun: "nous",         ending: "habillons" },
+      { pronoun: "vous",         ending: "habillez" },
+      { pronoun: "ils / elles",  ending: "habillent" },
+    ],
+  },
+  {
+    infinitive: "se reposer", radical: "",
+    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
+    rows: [
+      { pronoun: "je",           ending: "repose" },
+      { pronoun: "tu",           ending: "reposes" },
+      { pronoun: "il / elle / on", ending: "repose" },
+      { pronoun: "nous",         ending: "reposons" },
+      { pronoun: "vous",         ending: "reposez" },
+      { pronoun: "ils / elles",  ending: "reposent" },
+    ],
+  },
+];
+
 const a1ConjL09: ConjLesson = {
   slug: "a1-conj-l09",
   code: "G.9",
@@ -1249,46 +1373,16 @@ const a1ConjL09: ConjLesson = {
         ["{a}ils / elles{/a}", "{a}se (s'){/a}"],
       ],
     },
-    {
-      type: "table",
-      tables: [
-        {
-          verb: "se lever", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "me lève" },
-            { pronoun: "tu", form: "te lèves" },
-            { pronoun: "il / elle", form: "se lève" },
-            { pronoun: "nous", form: "nous levons" },
-            { pronoun: "vous", form: "vous levez" },
-            { pronoun: "ils / elles", form: "se lèvent" },
-          ],
-        },
-        {
-          verb: "se coucher", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "me couche" },
-            { pronoun: "tu", form: "te couches" },
-            { pronoun: "il / elle", form: "se couche" },
-            { pronoun: "nous", form: "nous couchons" },
-            { pronoun: "vous", form: "vous couchez" },
-            { pronoun: "ils / elles", form: "se couchent" },
-          ],
-        },
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Verbes pronominaux courants",
-      items: [
-        "se réveiller, se lever, se laver, se doucher",
-        "s'habiller, se préparer, se dépêcher",
-        "se coucher, se reposer, s'ennuyer",
-      ],
-    },
-    { type: "heading", text: "La négation", sub: true },
+    { type: "heading", text: "Verbes pronominaux courants" },
+    { type: "verb_toggle", verbs: g9Verbs },
+    { type: "verb_toggle", negation: true, verbs: g9Verbs },
+    { type: "heading", text: "La négation" },
     {
       type: "plain_list",
-      items: ["La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe."],
+      items: [
+        "La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe.",
+        "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
+      ],
     },
     {
       type: "grid",
@@ -1301,11 +1395,12 @@ const a1ConjL09: ConjLesson = {
     },
     {
       type: "highlight",
-      label: "Attention : élision",
+      label: "Attention à l'élision du pronom",
+      inlineArrows: true,
       items: [
         "me / te / se + voyelle → m' / t' / s'",
-        "je {s}me{/s} appelle → je {a}m'{/a}appelle",
-        "il {s}se{/s} habille → il {a}s'{/a}habille",
+        "je m{s}e{/s} appelle → je m'appelle",
+        "il s{s}e{/s} habille → il s'habille",
       ],
       noBulletItems: [0],
     },
