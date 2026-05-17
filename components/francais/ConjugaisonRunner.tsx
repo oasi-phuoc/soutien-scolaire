@@ -972,6 +972,270 @@ function WriteExercise({
   );
 }
 
+// ── TrueFalse exercise ────────────────────────────────────────────────────────
+
+function TrueFalseExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "trueFalse" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(exercise.items.length).fill(null));
+  const [validated, setValidated] = useState(false);
+
+  const allAnswered = answers.every((a) => a !== null);
+
+  useEffect(() => {
+    onCanValidateChange(allAnswered && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allAnswered, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allAnswered) {
+      setValidated(true);
+      onValidated(answers.every((a, i) => a === exercise.items[i]!.answer));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function pick(i: number, val: boolean) {
+    if (validated) return;
+    setAnswers((prev) => prev.map((v, idx) => (idx === i ? val : v)));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="space-y-3">
+        {exercise.items.map((item, i) => {
+          const chosen = answers[i];
+          const correct = item.answer;
+          const isRight = chosen === correct;
+          const btnBase = "px-3 py-1 rounded text-xs font-medium border transition-colors";
+          const mkCls = (val: boolean) => {
+            if (chosen !== val) return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
+            if (!validated) return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
+            return isRight
+              ? `${btnBase} border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400`
+              : `${btnBase} border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400`;
+          };
+          return (
+            <div key={i} className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
+              <div className="flex-1 space-y-2">
+                <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => pick(i, true)} className={mkCls(true)}>Vrai ✓</button>
+                  <button onClick={() => pick(i, false)} className={mkCls(false)}>Faux ✗</button>
+                  {validated && !isRight && (
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                      → {correct ? "Vrai" : "Faux"}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Order exercise ────────────────────────────────────────────────────────────
+
+function OrderExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "order" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [pools, setPools] = useState<string[][]>(() =>
+    exercise.items.map((item) => shuffle(item.sentence.split(" "))),
+  );
+  const [builts, setBuilts] = useState<string[][]>(() => exercise.items.map(() => []));
+  const [validated, setValidated] = useState(false);
+
+  const allDone = builts.every((b, i) => b.length === exercise.items[i]!.sentence.split(" ").length);
+
+  useEffect(() => {
+    onCanValidateChange(allDone && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allDone, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allDone) {
+      setValidated(true);
+      onValidated(builts.every((b, i) => b.join(" ") === exercise.items[i]!.sentence));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function addWord(itemIdx: number, poolIdx: number) {
+    if (validated) return;
+    const word = pools[itemIdx]![poolIdx]!;
+    setPools((prev) => prev.map((p, i) => i === itemIdx ? p.filter((_, j) => j !== poolIdx) : p));
+    setBuilts((prev) => prev.map((b, i) => i === itemIdx ? [...b, word] : b));
+  }
+
+  function removeWord(itemIdx: number, builtIdx: number) {
+    if (validated) return;
+    const word = builts[itemIdx]![builtIdx]!;
+    setBuilts((prev) => prev.map((b, i) => i === itemIdx ? b.filter((_, j) => j !== builtIdx) : b));
+    setPools((prev) => prev.map((p, i) => i === itemIdx ? [...p, word] : p));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {exercise.items.map((item, i) => {
+        const built = builts[i]!;
+        const pool = pools[i]!;
+        const correct = built.join(" ") === item.sentence;
+        return (
+          <div key={i} className="space-y-2 rounded-lg border border-[var(--color-border)] p-3">
+            {item.hint && (
+              <p className="text-xs text-[var(--color-text-secondary)] italic">{item.hint}</p>
+            )}
+            {/* answer area */}
+            <div className={`min-h-9 flex flex-wrap gap-1.5 rounded border-2 p-2 transition-colors ${
+              validated
+                ? correct
+                  ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30"
+                  : "border-red-400 bg-red-50 dark:bg-red-950/30"
+                : "border-[var(--color-accent-fr)]/40 bg-[var(--color-surface)]"
+            }`}>
+              {built.length === 0 && (
+                <span className="text-xs text-[var(--color-text-secondary)] italic">Clique les mots ci-dessous…</span>
+              )}
+              {built.map((w, j) => (
+                <button
+                  key={j}
+                  onClick={() => removeWord(i, j)}
+                  disabled={validated}
+                  className="rounded bg-[var(--color-accent-fr)] px-2 py-0.5 text-xs font-medium text-white disabled:opacity-70"
+                >
+                  {w}
+                </button>
+              ))}
+            </div>
+            {validated && !correct && (
+              <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ {item.sentence}</p>
+            )}
+            {/* word pool */}
+            <div className="flex flex-wrap gap-1.5">
+              {pool.map((w, j) => (
+                <button
+                  key={j}
+                  onClick={() => addWord(i, j)}
+                  disabled={validated}
+                  className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-xs text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)] disabled:opacity-70"
+                >
+                  {w}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Classify exercise ─────────────────────────────────────────────────────────
+
+function ClassifyExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "classify" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [items] = useState<typeof exercise.items>(() => {
+    const raw = exercise.pool && exercise.pool.length > 0
+      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 8)
+      : exercise.items;
+    return shuffle(raw);
+  });
+  const [chosen, setChosen] = useState<(number | null)[]>(() => new Array(items.length).fill(null));
+  const [validated, setValidated] = useState(false);
+
+  const allChosen = chosen.every((c) => c !== null);
+
+  useEffect(() => {
+    onCanValidateChange(allChosen && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allChosen, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allChosen) {
+      setValidated(true);
+      onValidated(chosen.every((c, i) => c === items[i]!.categoryIdx));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="space-y-2">
+        {items.map((item, i) => {
+          const sel = chosen[i];
+          const isRight = sel === item.categoryIdx;
+          return (
+            <div key={i} className="flex items-center gap-3">
+              <span className="min-w-[8rem] text-sm font-medium text-[var(--color-text-primary)]">{item.word}</span>
+              <div className="flex flex-wrap gap-2">
+                {exercise.categories.map((cat, ci) => {
+                  const active = sel === ci;
+                  let cls = "rounded border px-2.5 py-1 text-xs font-medium transition-colors ";
+                  if (!active) {
+                    cls += "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-fr)]";
+                  } else if (!validated) {
+                    cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                  } else if (isRight) {
+                    cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
+                  } else {
+                    cls += "border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+                  }
+                  return (
+                    <button
+                      key={ci}
+                      onClick={() => !validated && setChosen((prev) => prev.map((v, idx) => idx === i ? ci : v))}
+                      className={cls}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+                {validated && !isRight && (
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                    → {exercise.categories[item.categoryIdx]}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Exercise wrapper ──────────────────────────────────────────────────────────
 
 function ExerciseView({
@@ -1001,6 +1265,15 @@ function ExerciseView({
       )}
       {exercise.type === "write" && (
         <WriteExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "trueFalse" && (
+        <TrueFalseExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "order" && (
+        <OrderExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "classify" && (
+        <ClassifyExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
     </div>
   );
