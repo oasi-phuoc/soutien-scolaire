@@ -1,7 +1,7 @@
 // Conjugaison lesson content: types + data for all 18 A1/A2 conjugation lessons.
 
 export type ConjugRow = { pronoun: string; form: string; phonetic?: string };
-export type ConjugTable = { verb: string; rows: ConjugRow[] };
+export type ConjugTable = { verb: string; rows: ConjugRow[]; accentForms?: boolean; verbBold?: boolean };
 
 export type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
 type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
@@ -1134,7 +1134,7 @@ const a1ConjL07: ConjLesson = {
     {
       type: "plain_list",
       items: [
-        "Les verbes en **-er** sont les verbes les plus fréquents en français. Les verbes du 1er groupe finissent en **-er**.",
+        "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Les verbes du 1er groupe finissent en {a}-er{/a}.",
       ],
     },
     {
@@ -1143,30 +1143,22 @@ const a1ConjL07: ConjLesson = {
       items: ["parler", "aimer", "travailler", "regarder"],
     },
     { type: "heading", text: "Comment former le verbe ?" },
-    { type: "heading", text: "Étape 1 : enlever -er", sub: true, accent: true },
-    {
-      type: "rule",
-      text: "On prend le verbe et on enlève **-er**.",
-      examples: [
-        { correct: "parler → parl" },
-        { correct: "aimer → aim" },
-        { correct: "travailler → travaill" },
-      ],
-    },
-    {
-      type: "note",
-      text: "Cette partie s'appelle le radical.",
-    },
-    { type: "heading", text: "Étape 2 : ajouter la terminaison", sub: true, accent: true },
     {
       type: "plain_list",
-      items: ["Au présent, on ajoute :"],
+      items: [
+        "On prend le verbe et on enlève {a}-er{/a}.",
+        "parler → parl",
+        "aimer → aim",
+        "travailler → travaill",
+      ],
     },
     {
       type: "table",
       tables: [
         {
           verb: "parler",
+          verbBold: false,
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "parle" },
             { pronoun: "tu", form: "parles" },
@@ -1182,7 +1174,7 @@ const a1ConjL07: ConjLesson = {
       type: "highlight",
       label: "Attention à « je »",
       items: [
-        "Quand le verbe commence par une **voyelle** ou un **h**, **je** devient **j'**.",
+        "Quand le verbe commence par une voyelle ou un {a}h{/a}, {a}je{/a} devient {a}j'{/a}.",
         "j'aime",
         "j'écoute",
         "j'habite",

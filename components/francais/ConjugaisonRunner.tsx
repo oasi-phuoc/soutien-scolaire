@@ -116,7 +116,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"
                   >
                     <div className="border-b border-[var(--color-border-default)] bg-[var(--color-accent-fr)]/10 px-3 py-2">
-                      <span className="text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
+                      <span className={`text-xs uppercase tracking-wide text-[var(--color-accent-fr)] ${tbl.verbBold === false ? "font-normal" : "font-bold"}`}>
                         {tbl.verb}
                       </span>
                     </div>
@@ -134,7 +134,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                             <td className="w-32 px-3 py-2 font-medium text-[var(--color-text-secondary)]">
                               {row.pronoun}
                             </td>
-                            <td className="px-3 py-2 font-semibold text-[var(--color-text-primary)]">
+                            <td className={`px-3 py-2 font-semibold ${tbl.accentForms ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
                               {row.form}
                             </td>
                             {row.phonetic && (
