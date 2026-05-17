@@ -121,10 +121,16 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
         ))}
       </div>
       {(verb.meaning || verb.example) && (
-        <div className="flex items-baseline gap-2 rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-3 py-2 text-xs">
-          {verb.meaning && <span className="text-[var(--color-text-secondary)]">{verb.meaning}</span>}
-          {verb.meaning && verb.example && <span className="text-[var(--color-border-emphasis)]">·</span>}
-          {verb.example && <span className="italic text-[var(--color-text-primary)]">{verb.example}</span>}
+        <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-3 py-2 text-xs space-y-1">
+          {verb.meaning && (
+            <p>
+              <span className="font-bold text-[var(--color-accent-fr)]">Signification </span>
+              <span className="text-[var(--color-text-primary)]">{verb.meaning}</span>
+            </p>
+          )}
+          {verb.example && (
+            <p className="text-[var(--color-text-secondary)]">• {verb.example}</p>
+          )}
         </div>
       )}
       <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">

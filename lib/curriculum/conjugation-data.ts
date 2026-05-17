@@ -1534,8 +1534,7 @@ const a1ConjL12: ConjLesson = {
   title: "Les verbes de mouvement",
   theory: [
     { type: "heading", text: "Les verbes de mouvement" },
-    { type: "heading", text: "Les verbes courants", sub: true, accent: true },
-    { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position."], noBulletItems: [0] },
+    { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0] },
     { type: "verb_toggle", verbs: g10Verbs, buttonCols: 4 },
   ],
   exercises: [],
