@@ -897,20 +897,16 @@ function WriteExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      {exercise.prompts.map((prompt, i) => (
-        <div key={i} className="space-y-1.5">
-          <p className="text-sm font-medium text-[var(--color-text-primary)]">{prompt}</p>
+      {exercise.prompts.map((_, i) => (
+        <div key={i} className="flex items-end gap-2">
+          <span className="shrink-0 pb-1 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
           <input
             type="text"
             value={inputs[i]}
             onChange={(e) => setInput(i, e.target.value)}
             disabled={validated}
-            placeholder="Écrivez votre phrase…"
-            className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] focus:border-[var(--color-accent-fr)] focus:outline-none disabled:opacity-60"
+            className="flex-1 border-b-2 border-[var(--color-text-secondary)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70"
           />
-          {validated && inputs[i].trim() !== "" && (
-            <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ Réponse enregistrée</p>
-          )}
         </div>
       ))}
     </div>
