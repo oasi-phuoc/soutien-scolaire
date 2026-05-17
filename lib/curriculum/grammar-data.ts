@@ -240,6 +240,7 @@ const a1GrL04: GrammarLesson = {
     {
       type: "grid",
       headers: ["Masculin", "Féminin", "Pluriel"],
+      equalCols: true,
       rows: [
         ["{a}le{/a} téléphone", "{a}la{/a} chaise", "{a}les{/a} élèves"],
       ],
@@ -260,6 +261,7 @@ const a1GrL04: GrammarLesson = {
     {
       type: "grid",
       headers: ["Masculin", "Féminin", "Pluriel"],
+      equalCols: true,
       rows: [
         ["{a}un{/a} livre", "{a}une{/a} voiture", "{a}des{/a} chaussures"],
       ],

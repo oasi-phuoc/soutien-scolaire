@@ -287,7 +287,14 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             return (
               <div key={i} className="space-y-2">
                 <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
-                  <table className="w-full text-sm">
+                  <table className="w-full text-sm" style={block.equalCols ? { tableLayout: "fixed" } : undefined}>
+                    {block.equalCols && (
+                      <colgroup>
+                        {block.headers.map((_, ci) => (
+                          <col key={ci} style={{ width: `${100 / block.headers.length}%` }} />
+                        ))}
+                      </colgroup>
+                    )}
                     <thead>
                       <tr className="bg-[var(--color-accent-fr)]/15">
                         {block.headers.map((h, hi) => (
