@@ -282,7 +282,7 @@ const a1GrL04: GrammarLesson = {
       headers: ["Masculin", "Féminin", "Pluriel"],
       rows: [
         ["{a}le{/a}", "{a}la{/a}", "{a}les{/a}"],
-        ["le téléphone", "la chaise", "les élèves"],
+        ["{a}le{/a} téléphone", "{a}la{/a} chaise", "{a}les{/a} élèves"],
       ],
     },
     {
@@ -303,7 +303,7 @@ const a1GrL04: GrammarLesson = {
       headers: ["Masculin", "Féminin", "Pluriel"],
       rows: [
         ["{a}un{/a}", "{a}une{/a}", "{a}des{/a}"],
-        ["un livre", "une voiture", "des chaussures"],
+        ["{a}un{/a} livre", "{a}une{/a} voiture", "{a}des{/a} chaussures"],
       ],
     },
     { type: "heading", text: "Différence entre défini et indéfini", sub: true },
