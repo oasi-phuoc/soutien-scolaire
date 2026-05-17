@@ -90,7 +90,7 @@ const a1GrL01: GrammarLesson = {
 
 const a1GrL02: GrammarLesson = {
   slug: "a1-gr-l02",
-  code: "G.2",
+  code: "G.5",
   level: "A1",
   title: "La négation et l'interrogation de base",
   theory: [
@@ -120,49 +120,12 @@ const a1GrL02: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Forme négative",
-      instruction: "Choisissez la bonne négation.",
-      items: [
-        { sentence: "Elle ___ française, elle est belge.", choices: ["n'est pas", "ne est pas", "n'est", "pas est"], correctIdx: 0 },
-        { sentence: "Je ___ cours le vendredi.", choices: ["n'ai pas", "ne ai pas", "n'ai", "ne pas ai"], correctIdx: 0 },
-        { sentence: "Ils ___ étudiants.", choices: ["ne sont pas", "ne pas sont", "n'est pas", "sont ne pas"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Mettez à la forme négative",
-      instruction: "Transformez la phrase à la forme négative.",
-      items: [
-        { sentence: "Je ___ (être) français. (négatif)", hint: "ne…pas", answer: "ne suis pas" },
-        { sentence: "Tu ___ (avoir) cours le samedi. (négatif)", hint: "ne…pas", answer: "n'as pas" },
-        { sentence: "Elle ___ (s'appeler) Zoe. (négatif)", hint: "ne…pas", answer: "ne s'appelle pas" },
-        { sentence: "Ils ___ (être) disponibles. (négatif)", hint: "ne…pas", answer: "ne sont pas" },
-      ],
-    },
-      {
-      type: "trueFalse",
-      title: "Exercice 3 — Vrai ou faux ?",
-      instruction: "La forme négative est-elle correcte ?",
-      items: [
-        { statement: "Martin n'est pas anglais, il est allemand.", answer: true },
-        { statement: "Amy et Michael ne sont canadiens, ils sont américains.", answer: false },
-        { statement: "Je n'ai pas cours le vendredi.", answer: true },
-        { statement: "Je ne ai pas de temps.", answer: false },
-        { statement: "Il n'est pas libre samedi.", answer: true },
-        { statement: "Nous n'avons pas cours.", answer: true },
-        { statement: "Elle ne suis pas française.", answer: false },
-        { statement: "Tu n'as pas de rendez-vous.", answer: true },
-      ],
-    },
-],
+  exercises: [],
 };
 
 const a1GrL03: GrammarLesson = {
   slug: "a1-gr-l03",
-  code: "G.3",
+  code: "G.4",
   level: "A1",
   title: "Le genre des noms et des adjectifs",
   theory: [
@@ -240,75 +203,12 @@ const a1GrL03: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Masculin ou féminin ?",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Aiko est ___.", choices: ["japonaise", "japonais", "japonaisel", "japonaises"], correctIdx: 0 },
-        { sentence: "Marco est ___.", choices: ["italien", "italienne", "italiens", "italiennes"], correctIdx: 0 },
-        { sentence: "Sarah et Emma sont ___.", choices: ["américaines", "américain", "américaine", "américains"], correctIdx: 0 },
-        { sentence: "Pablo est ___.", choices: ["argentin", "argentine", "argentines", "argentins"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "match",
-      title: "Masculin → Féminin",
-      instruction: "Associez le masculin avec le féminin.",
-      pairs: [
-        { left: "français", right: "française" },
-        { left: "espagnol", right: "espagnole" },
-        { left: "américain", right: "américaine" },
-        { left: "australien", right: "australienne" },
-        { left: "belge", right: "belge" },
-      ],
-    },
-      {
-      type: "classify",
-      title: "Exercice 3 — Masculin ou féminin ?",
-      instruction: "Classez ces adjectifs de nationalité.",
-      categories: ["Masculin", "Féminin"],
-      items: [
-        { word: "japonais", categoryIdx: 0 },
-        { word: "japonaise", categoryIdx: 1 },
-        { word: "américain", categoryIdx: 0 },
-        { word: "américaine", categoryIdx: 1 },
-        { word: "espagnol", categoryIdx: 0 },
-        { word: "espagnole", categoryIdx: 1 },
-        { word: "chinois", categoryIdx: 0 },
-        { word: "chinoise", categoryIdx: 1 },
-        { word: "français", categoryIdx: 0 },
-        { word: "française", categoryIdx: 1 },
-        { word: "allemand", categoryIdx: 0 },
-        { word: "allemande", categoryIdx: 1 },
-      ],
-      pool: [
-        { word: "japonais", categoryIdx: 0 },
-        { word: "japonaise", categoryIdx: 1 },
-        { word: "américain", categoryIdx: 0 },
-        { word: "américaine", categoryIdx: 1 },
-        { word: "espagnol", categoryIdx: 0 },
-        { word: "espagnole", categoryIdx: 1 },
-        { word: "chinois", categoryIdx: 0 },
-        { word: "chinoise", categoryIdx: 1 },
-        { word: "français", categoryIdx: 0 },
-        { word: "française", categoryIdx: 1 },
-        { word: "allemand", categoryIdx: 0 },
-        { word: "allemande", categoryIdx: 1 },
-        { word: "mexicain", categoryIdx: 0 },
-        { word: "mexicaine", categoryIdx: 1 },
-        { word: "australien", categoryIdx: 0 },
-        { word: "australienne", categoryIdx: 1 },
-      ],
-      poolSize: 8,
-    },
-],
+  exercises: [],
 };
 
 const a1GrL04: GrammarLesson = {
   slug: "a1-gr-l04",
-  code: "G.4",
+  code: "G.3",
   level: "A1",
   title: "Les articles définis et indéfinis",
   theory: [
@@ -362,7 +262,7 @@ const a1GrL04: GrammarLesson = {
 
 const a1GrL05: GrammarLesson = {
   slug: "a1-gr-l05",
-  code: "G.5",
+  code: "G.14",
   level: "A1",
   title: "Le verbe avoir et les adjectifs possessifs",
   theory: [
@@ -422,42 +322,7 @@ const a1GrL05: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Verbe AVOIR",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Sophie ___ 30 ans.", choices: ["a", "ai", "as", "ont"], correctIdx: 0 },
-        { sentence: "Nous ___ du temps libre.", choices: ["avons", "ai", "a", "avez"], correctIdx: 0 },
-        { sentence: "___ un rendez-vous mardi.", choices: ["J'ai", "Je ai", "J'est", "J'être"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Adjectifs possessifs",
-      instruction: "Choisissez le bon possessif.",
-      items: [
-        { sentence: "C'est ___ livre. (à moi)", choices: ["mon", "ton", "son", "ma"], correctIdx: 0 },
-        { sentence: "C'est ___ amie. (à toi, féminin + voyelle)", choices: ["ton", "ta", "son", "mon"], correctIdx: 0 },
-        { sentence: "Nous avons ___ cours le lundi.", choices: ["notre", "nos", "votre", "leur"], correctIdx: 0 },
-        { sentence: "Ils ont ___ disponibilités le mardi.", choices: ["leurs", "leur", "son", "mes"], correctIdx: 0 },
-      ],
-    },
-      {
-      type: "match",
-      title: "Exercice 3 — Associez le sujet à la forme de «avoir»",
-      instruction: "Reliez chaque sujet à la bonne expression avec avoir.",
-      pairs: [
-        { left: "Zoe", right: "a 23 ans." },
-        { left: "Sarah et Edward", right: "ont un niveau A1." },
-        { left: "Nous", right: "avons cours tous les jours." },
-        { left: "Vous", right: "avez du temps le samedi ?" },
-        { left: "J'", right: "ai rendez-vous avec un tuteur." },
-        { left: "Tu", right: "as des amis français ?" },
-      ],
-    },
-],
+  exercises: [],
 };
 
 const a1GrL06: GrammarLesson = {
@@ -500,51 +365,12 @@ const a1GrL06: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Être ou Avoir ?",
-      instruction: "Choisissez le bon verbe.",
-      items: [
-        { sentence: "Ivan ___ disponible le vendredi.", choices: ["est", "a", "sont", "ont"], correctIdx: 0 },
-        { sentence: "Les professeurs ___ cours tous les jours.", choices: ["ont", "sont", "a", "est"], correctIdx: 0 },
-        { sentence: "Julien et Charlotte ___ français.", choices: ["sont", "ont", "a", "est"], correctIdx: 0 },
-        { sentence: "Elena ___ 25 ans.", choices: ["a", "est", "ont", "ai"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez avec être ou avoir",
-      instruction: "Conjuguez le bon verbe à la forme correcte.",
-      items: [
-        { sentence: "Julien ___ (être/avoir) professeur.", hint: "être ou avoir ?", answer: "est" },
-        { sentence: "Les tuteurs ___ (être/avoir) un bureau.", hint: "être ou avoir ?", answer: "ont" },
-        { sentence: "Tu ___ (être/avoir) libre ce soir ?", hint: "être ou avoir ?", answer: "es" },
-        { sentence: "Nous ___ (être/avoir) rendez-vous à 14h.", hint: "être ou avoir ?", answer: "avons" },
-        { sentence: "Sophie ___ (être/avoir) jeune et dynamique.", hint: "être ou avoir ?", answer: "est" },
-      ],
-    },
-      {
-      type: "trueFalse",
-      title: "Exercice 3 — Être ou avoir : vrai ou faux ?",
-      instruction: "L'usage de «être» ou «avoir» est-il correct ?",
-      items: [
-        { statement: "Les étudiants sont 20 ans.", answer: false },
-        { statement: "Elle est étudiante.", answer: true },
-        { statement: "Il est 25 ans.", answer: false },
-        { statement: "Nous sommes libres le week-end.", answer: true },
-        { statement: "Ils ont professeurs.", answer: false },
-        { statement: "J'ai faim.", answer: true },
-        { statement: "Tu as française.", answer: false },
-        { statement: "Vous avez cours demain.", answer: true },
-      ],
-    },
-],
+  exercises: [],
 };
 
 const a1GrL10: GrammarLesson = {
   slug: "a1-gr-l10",
-  code: "G.7",
+  code: "G.11",
   level: "A1",
   title: "L'interrogation avec les mots interrogatifs",
   theory: [
@@ -582,36 +408,12 @@ const a1GrL10: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Associez question et réponse",
-      instruction: "Reliez chaque question à la bonne réponse.",
-      pairs: [
-        { left: "Tu habites où ?", right: "J'habite à Paris." },
-        { left: "Tu t'appelles comment ?", right: "Je m'appelle Marco." },
-        { left: "Tu pars quand ?", right: "Je pars demain." },
-        { left: "Tu as combien d'amis ?", right: "J'ai beaucoup d'amis." },
-        { left: "Pourquoi tu étudies ?", right: "Pour travailler en France." },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Quel mot interrogatif ?",
-      instruction: "Choisissez le mot interrogatif correct.",
-      items: [
-        { sentence: "___ tu t'appelles ?", choices: ["Comment", "Où", "Quand", "Combien"], correctIdx: 0 },
-        { sentence: "___ tu habites ?", choices: ["Où", "Qui", "Comment", "Pourquoi"], correctIdx: 0 },
-        { sentence: "___ est-ce que vous partez ?", choices: ["Quand", "Où", "Comment", "Combien"], correctIdx: 0 },
-        { sentence: "___ tu étudies le français ?", choices: ["Pourquoi", "Où", "Qui", "Comment"], correctIdx: 0 },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL11: GrammarLesson = {
   slug: "a1-gr-l11",
-  code: "G.8",
+  code: "G.12",
   level: "A1",
   title: "Les prépositions de lieu",
   theory: [
@@ -650,35 +452,12 @@ const a1GrL11: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quelle préposition ?",
-      instruction: "Choisissez la bonne préposition.",
-      items: [
-        { sentence: "Le livre est ___ la table.", choices: ["sur", "sous", "dans", "devant"], correctIdx: 0 },
-        { sentence: "L'école est ___ le cinéma.", choices: ["en face de", "sur", "sous", "derrière"], correctIdx: 0 },
-        { sentence: "Le chat est ___ la chaise.", choices: ["sous", "sur", "dans", "devant"], correctIdx: 0 },
-        { sentence: "La boulangerie est ___ la pharmacie.", choices: ["à côté de", "sous", "dans", "sur"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec la bonne préposition.",
-      items: [
-        { sentence: "Le sac est ___ la chaise.", hint: "au-dessous", answer: "sous" },
-        { sentence: "Je vais ___ cinéma ce soir.", hint: "à + le", answer: "au" },
-        { sentence: "Elle habite ___ de la gare.", hint: "vis-à-vis", answer: "en face" },
-        { sentence: "Mon bureau est ___ la bibliothèque.", hint: "proximité", answer: "à côté de" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL14: GrammarLesson = {
   slug: "a1-gr-l14",
-  code: "G.9",
+  code: "G.13",
   level: "A1",
   title: "Les articles partitifs et la quantité",
   theory: [
@@ -724,74 +503,12 @@ const a1GrL14: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quel article partitif ?",
-      instruction: "Choisissez l'article correct.",
-      items: [
-        { sentence: "Je bois ___ café le matin.", choices: ["du", "de la", "de l'", "des"], correctIdx: 0 },
-        { sentence: "Elle mange ___ viande chaque jour.", choices: ["de la", "du", "de l'", "un"], correctIdx: 0 },
-        { sentence: "Il y a ___ eau dans le frigo.", choices: ["de l'", "du", "de la", "des"], correctIdx: 0 },
-        { sentence: "Je ne mange pas ___ sucre.", choices: ["de", "du", "de la", "des"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Choisissez le bon article ou la bonne préposition.",
-      items: [
-        { sentence: "Je voudrais un kilo ___ carottes.", hint: "quantité + ?", answer: "de" },
-        { sentence: "Elle boit ___ thé tous les matins.", hint: "partitif masculin", answer: "du" },
-        { sentence: "Il n'y a pas ___ beurre dans le frigo.", hint: "négation + partitif", answer: "de" },
-        { sentence: "Beaucoup ___ gens aiment le café.", hint: "quantité + de", answer: "de" },
-      ],
-    },
-      {
-      type: "classify",
-      title: "Exercice 3 — Quel article partitif ?",
-      instruction: "Choisissez l'article partitif correct pour chaque aliment.",
-      categories: ["du (masc.)", "de la (fém.)", "de l' (voyelle)", "des (pluriel)"],
-      items: [
-        { word: "café", categoryIdx: 0 },
-        { word: "salade", categoryIdx: 1 },
-        { word: "eau", categoryIdx: 2 },
-        { word: "légumes", categoryIdx: 3 },
-        { word: "jambon", categoryIdx: 0 },
-        { word: "viande", categoryIdx: 1 },
-        { word: "alcool", categoryIdx: 2 },
-        { word: "pâtes", categoryIdx: 3 },
-        { word: "riz", categoryIdx: 0 },
-        { word: "moutarde", categoryIdx: 1 },
-        { word: "ail", categoryIdx: 2 },
-        { word: "haricots", categoryIdx: 3 },
-      ],
-      pool: [
-        { word: "café", categoryIdx: 0 },
-        { word: "salade", categoryIdx: 1 },
-        { word: "eau", categoryIdx: 2 },
-        { word: "légumes", categoryIdx: 3 },
-        { word: "jambon", categoryIdx: 0 },
-        { word: "viande", categoryIdx: 1 },
-        { word: "alcool", categoryIdx: 2 },
-        { word: "pâtes", categoryIdx: 3 },
-        { word: "riz", categoryIdx: 0 },
-        { word: "moutarde", categoryIdx: 1 },
-        { word: "ail", categoryIdx: 2 },
-        { word: "haricots", categoryIdx: 3 },
-        { word: "fromage", categoryIdx: 0 },
-        { word: "crème", categoryIdx: 1 },
-        { word: "huile", categoryIdx: 1 },
-        { word: "oeufs", categoryIdx: 3 },
-      ],
-      poolSize: 8,
-    },
-],
+  exercises: [],
 };
 
 const a1GrL17: GrammarLesson = {
   slug: "a1-gr-l17",
-  code: "G.10",
+  code: "G.15",
   level: "A1",
   title: "Il y a et les prépositions dans la maison",
   theory: [
@@ -835,34 +552,12 @@ const a1GrL17: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Il y a ou Il n'y a pas ?",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Dans mon quartier, ___ un cinéma.", choices: ["il y a", "il n'y a pas de", "il y a de", "il n'y a"], correctIdx: 0 },
-        { sentence: "Il ___ de piscine ici, c'est dommage.", choices: ["n'y a pas", "y a", "n'y a pas un", "n'y a"], correctIdx: 0 },
-        { sentence: "Il n'y a pas ___ école dans ce quartier.", choices: ["d'", "de la", "un", "des"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Décrivez",
-      instruction: "Complétez avec il y a ou il n'y a pas de/d'.",
-      items: [
-        { sentence: "___ un marché le samedi matin. (existence)", hint: "affirmatif", answer: "Il y a" },
-        { sentence: "___ musées ici. (absence)", hint: "négatif", answer: "Il n'y a pas de" },
-        { sentence: "___ tramway et des bus. (existence)", hint: "affirmatif", answer: "Il y a un" },
-        { sentence: "___ restaurants dans ce quartier ? (question)", hint: "interrogatif", answer: "Il y a des" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL18: GrammarLesson = {
   slug: "a1-gr-l18",
-  code: "G.11",
+  code: "G.16",
   level: "A1",
   title: "Les adjectifs démonstratifs",
   theory: [
@@ -898,35 +593,12 @@ const a1GrL18: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quel démonstratif ?",
-      instruction: "Choisissez le bon adjectif démonstratif.",
-      items: [
-        { sentence: "___ appartement est grand.", choices: ["Cet", "Ce", "Cette", "Ces"], correctIdx: 0 },
-        { sentence: "___ école est connue.", choices: ["Cette", "Cet", "Ce", "Ces"], correctIdx: 0 },
-        { sentence: "___ livres sont intéressants.", choices: ["Ces", "Ce", "Cet", "Cette"], correctIdx: 0 },
-        { sentence: "___ film est super !", choices: ["Ce", "Cet", "Cette", "Ces"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Ajoutez le bon adjectif démonstratif.",
-      items: [
-        { sentence: "___ hôtel est très confortable.", hint: "masc. sing. + voyelle", answer: "Cet" },
-        { sentence: "___ restaurants sont excellents.", hint: "pluriel", answer: "Ces" },
-        { sentence: "___ ville est magnifique.", hint: "féminin singulier", answer: "Cette" },
-        { sentence: "___ étudiant est sérieux.", hint: "masc. sing. + voyelle", answer: "Cet" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL19: GrammarLesson = {
   slug: "a1-gr-l19",
-  code: "G.12",
+  code: "G.17",
   level: "A1",
   title: "Les adjectifs possessifs",
   theory: [
@@ -964,50 +636,12 @@ const a1GrL19: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quel possessif ?",
-      instruction: "Choisissez le bon adjectif possessif.",
-      items: [
-        { sentence: "C'est ___ livre. (à moi, livre = masc.)", choices: ["mon", "ma", "son", "ton"], correctIdx: 0 },
-        { sentence: "C'est ___ amie. (à toi, amie = fém. + voyelle)", choices: ["ton", "ta", "son", "mon"], correctIdx: 0 },
-        { sentence: "Ce sont ___ parents. (à lui)", choices: ["ses", "sa", "son", "leurs"], correctIdx: 0 },
-        { sentence: "C'est ___ voiture. (à nous)", choices: ["notre", "votre", "leur", "nos"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez avec le possessif",
-      instruction: "Ajoutez le bon adjectif possessif.",
-      items: [
-        { sentence: "J'aime ___ professeur de français.", hint: "à moi, masc.", answer: "mon" },
-        { sentence: "Elle a ___ cours le lundi.", hint: "à elle, masc.", answer: "son" },
-        { sentence: "Ils ont ___ réunion demain.", hint: "à eux, fém.", answer: "leur" },
-        { sentence: "C'est ___ école préférée. (à nous)", hint: "à nous, fém.", answer: "notre" },
-      ],
-    },
-      {
-      type: "trueFalse",
-      title: "Exercice 3 — Vrai ou faux ?",
-      instruction: "L'adjectif possessif est-il correct ?",
-      items: [
-        { statement: "C'est le numéro de Pablo. → C'est son numéro.", answer: true },
-        { statement: "Ce sont les notes de Pablo. → Ce sont son notes.", answer: false },
-        { statement: "C'est le visa de Diego. → C'est sa visa.", answer: false },
-        { statement: "C'est le professeur des étudiants. → C'est leur professeur.", answer: true },
-        { statement: "Ce sont les coordonnées des tuteurs. → Ce sont leurs coordonnées.", answer: true },
-        { statement: "C'est le passeport de Michael. → C'est sa passeport.", answer: false },
-        { statement: "C'est la photo de Monsieur Minot. → C'est sa photo.", answer: true },
-        { statement: "C'est le vélo de Marie. → C'est son vélo.", answer: true },
-      ],
-    },
-],
+  exercises: [],
 };
 
 const a1GrL22: GrammarLesson = {
   slug: "a1-gr-l22",
-  code: "G.13",
+  code: "G.18",
   level: "A1",
   title: "La fréquence",
   theory: [
@@ -1042,33 +676,12 @@ const a1GrL22: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quel adverbe de fréquence ?",
-      instruction: "Choisissez l'adverbe correct.",
-      items: [
-        { sentence: "Je ___ mange au restaurant, une fois par an.", choices: ["rarement", "toujours", "souvent", "jamais"], correctIdx: 0 },
-        { sentence: "Elle ___ au travail le lundi, c'est son jour.", choices: ["va toujours", "toujours va", "va jamais", "jamais va"], correctIdx: 0 },
-        { sentence: "Je ne fais ___ de sport.", choices: ["jamais", "souvent", "toujours", "parfois"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Ajoutez l'adverbe de fréquence à la bonne place.",
-      items: [
-        { sentence: "Il ___ au cinéma le vendredi. (souvent)", hint: "après le verbe", answer: "va souvent" },
-        { sentence: "Elle ne mange ___ de sucre. (jamais)", hint: "ne…jamais", answer: "jamais" },
-        { sentence: "Nous ___ du yoga le matin. (parfois)", hint: "après le verbe", answer: "faisons parfois" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL23: GrammarLesson = {
   slug: "a1-gr-l23",
-  code: "G.14",
+  code: "G.19",
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [
@@ -1119,48 +732,12 @@ const a1GrL23: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Masculin ou féminin ?",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Une ville ___.", choices: ["moderne", "moderné", "modernes", "modernes"], correctIdx: 0 },
-        { sentence: "Une femme ___.", choices: ["grande", "grand", "grands", "grandes"], correctIdx: 0 },
-        { sentence: "Un homme ___.", choices: ["sympa", "sympas", "sympe", "sympal"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Place de l'adjectif",
-      instruction: "Choisissez la phrase correcte.",
-      items: [
-        { sentence: "Un ___ restaurant.", choices: ["bon", "intéressant", "moderne", "sympa"], correctIdx: 0 },
-        { sentence: "Une ville ___.", choices: ["intéressante", "belle ville", "bonne", "grande"], correctIdx: 3 },
-        { sentence: "Je lis un livre ___.", choices: ["passionnant", "bon livre", "vieux", "grand"], correctIdx: 0 },
-      ],
-    },
-      {
-      type: "fill",
-      title: "Exercice 3 — Accordez l'adjectif",
-      instruction: "Mettez l'adjectif entre parenthèses à la bonne forme.",
-      items: [
-        { sentence: "Isabelle a une robe ___. (nouveau)", hint: "nouvelle", answer: "nouvelle" },
-        { sentence: "Thomas porte un pull ___. (nouveau)", hint: "nouveau", answer: "nouveau" },
-        { sentence: "Marie a de ___ chaussures. (vieux)", hint: "vieilles", answer: "vieilles" },
-        { sentence: "C'est un ___ appartement. (beau)", hint: "bel", answer: "bel" },
-        { sentence: "J'aime cette ___ écharpe. (vieux)", hint: "vieille", answer: "vieille" },
-        { sentence: "Manon porte une ___ jupe. (beau)", hint: "belle", answer: "belle" },
-        { sentence: "C'est une ___ idée ! (bon)", hint: "bonne", answer: "bonne" },
-        { sentence: "Ce magasin a de ___ prix. (bon)", hint: "bons", answer: "bons" },
-      ],
-    },
-],
+  exercises: [],
 };
 
 const a1GrL24: GrammarLesson = {
   slug: "a1-gr-l24",
-  code: "G.15",
+  code: "G.25",
   level: "A1",
   title: "Le comparatif et le superlatif",
   theory: [
@@ -1202,33 +779,12 @@ const a1GrL24: GrammarLesson = {
       text: "Comparatif irrégulier : bon → meilleur / bien → mieux.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Comparatif",
-      instruction: "Choisissez la bonne forme.",
-      items: [
-        { sentence: "Paris est ___ Lyon.", choices: ["plus grande que", "plus grand que", "plus grande de", "aussi grande"], correctIdx: 0 },
-        { sentence: "Ce film est ___ intéressant ___ l'autre.", choices: ["aussi ... que", "plus ... de", "moins ... que", "aussi ... de"], correctIdx: 0 },
-        { sentence: "Ce restaurant est ___ cher ___ l'autre.", choices: ["moins ... que", "plus ... de", "aussi ... de", "moins ... de"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez avec le comparatif",
-      instruction: "Utilisez plus/aussi/moins + que.",
-      items: [
-        { sentence: "Le TGV est ___ (rapide) ___ le bus. (+)", hint: "supériorité", answer: "plus rapide que" },
-        { sentence: "Ce livre est ___ (cher) ___ l'autre. (=)", hint: "égalité", answer: "aussi cher que" },
-        { sentence: "Cette ville est ___ (grande) ___ Paris. (-)", hint: "infériorité", answer: "moins grande que" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL25: GrammarLesson = {
   slug: "a1-gr-l25",
-  code: "G.16",
+  code: "G.26",
   level: "A1",
   title: "Savoir ou connaître ?",
   theory: [
@@ -1277,30 +833,7 @@ const a1GrL25: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Savoir ou Connaître ?",
-      instruction: "Associez chaque phrase avec le bon verbe.",
-      pairs: [
-        { left: "Je ___ nager.", right: "sais" },
-        { left: "Tu ___ Marco ?", right: "connais" },
-        { left: "Il ___ Paris.", right: "connaît" },
-        { left: "Nous ___ parler français.", right: "savons" },
-        { left: "Elles ___ cette chanson.", right: "connaissent" },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Savoir ou Connaître ?",
-      instruction: "Choisissez le bon verbe.",
-      items: [
-        { sentence: "Tu ___ conduire ?", choices: ["sais", "connais", "savoir", "connaître"], correctIdx: 0 },
-        { sentence: "Elle ___ bien ce quartier.", choices: ["connaît", "sait", "connais", "savons"], correctIdx: 0 },
-        { sentence: "Je ne ___ pas son adresse.", choices: ["connais", "sais", "connaît", "savoir"], correctIdx: 0 },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 // ── New A1 Lessons (G.17–G.19) ────────────────────────────────────────────────
@@ -1352,51 +885,7 @@ const a1GrLCest: GrammarLesson = {
       text: "C'est / Ce sont = on identifie. Il/Elle est = on caractérise.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Exercice 1 — C'est ou Il/Elle est ?",
-      instruction: "Choisissez la bonne forme.",
-      items: [
-        { sentence: "___ mon ami Paul.", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
-        { sentence: "___ très intelligent.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
-        { sentence: "___ les nouveaux étudiants.", choices: ["Ce sont", "C'est", "Ils sont", "Il est"], correctIdx: 0 },
-        { sentence: "___ médecin.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
-        { sentence: "___ une bonne idée !", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
-        { sentence: "___ ma professeure de français.", choices: ["C'est", "Elle est", "Ce sont", "Il est"], correctIdx: 0 },
-        { sentence: "___ contentes de te voir.", choices: ["Elles sont", "Ce sont", "C'est", "Il est"], correctIdx: 0 },
-        { sentence: "___ espagnole.", choices: ["Elle est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
-      ],
-      pool: [
-        { sentence: "___ mon ami Paul.", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
-        { sentence: "___ très intelligent.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
-        { sentence: "___ les nouveaux étudiants.", choices: ["Ce sont", "C'est", "Ils sont", "Il est"], correctIdx: 0 },
-        { sentence: "___ médecin.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
-        { sentence: "___ une bonne idée !", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
-        { sentence: "___ ma professeure de français.", choices: ["C'est", "Elle est", "Ce sont", "Il est"], correctIdx: 0 },
-        { sentence: "___ contentes de te voir.", choices: ["Elles sont", "Ce sont", "C'est", "Il est"], correctIdx: 0 },
-        { sentence: "___ espagnole.", choices: ["Elle est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
-        { sentence: "___ un beau film.", choices: ["C'est", "Il est", "Ce sont", "Elle est"], correctIdx: 0 },
-        { sentence: "___ fatigué après le travail.", choices: ["Il est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
-      ],
-      poolSize: 6,
-    },
-    {
-      type: "trueFalse",
-      title: "Exercice 2 — Vrai ou faux ?",
-      instruction: "Ces phrases sont-elles correctes ?",
-      items: [
-        { statement: "C'est un docteur très compétent.", answer: true },
-        { statement: "Il est un professeur.", answer: false },
-        { statement: "Ce sont mes amis.", answer: true },
-        { statement: "C'est française.", answer: false },
-        { statement: "Il est intelligent et sympa.", answer: true },
-        { statement: "Elle est professeure.", answer: true },
-        { statement: "C'est ma sœur. Elle est étudiante.", answer: true },
-        { statement: "Il est un médecin.", answer: false },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrLQuel: GrammarLesson = {
@@ -1448,71 +937,7 @@ const a1GrLQuel: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Exercice 1 — Quelle forme de «quel» ?",
-      instruction: "Choisissez la bonne forme.",
-      items: [
-        { sentence: "___ est ton nom ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ est ta nationalité ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes numéros de téléphone ?", choices: ["Quels", "Quel", "Quelle", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes langues ?", choices: ["Quelles", "Quelle", "Quel", "Quels"], correctIdx: 0 },
-        { sentence: "___ cours tu préfères ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ heure est-il ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes objectifs professionnels ?", choices: ["Quels", "Quelle", "Quel", "Quelles"], correctIdx: 0 },
-        { sentence: "___ est votre adresse ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-      ],
-      pool: [
-        { sentence: "___ est ton nom ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ est ta nationalité ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes numéros de téléphone ?", choices: ["Quels", "Quel", "Quelle", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes langues ?", choices: ["Quelles", "Quelle", "Quel", "Quels"], correctIdx: 0 },
-        { sentence: "___ cours tu préfères ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ heure est-il ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ sont tes objectifs professionnels ?", choices: ["Quels", "Quelle", "Quel", "Quelles"], correctIdx: 0 },
-        { sentence: "___ est votre adresse ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ film tu regardes ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
-        { sentence: "___ matières tu étudies ?", choices: ["Quelles", "Quel", "Quelle", "Quels"], correctIdx: 0 },
-      ],
-      poolSize: 6,
-    },
-    {
-      type: "classify",
-      title: "Exercice 2 — Quel ou Quelle ?",
-      instruction: "Ces noms sont-ils masculins ou féminins ?",
-      categories: ["Quel (masculin)", "Quelle (féminin)"],
-      items: [
-        { word: "prénom", categoryIdx: 0 },
-        { word: "nationalité", categoryIdx: 1 },
-        { word: "adresse", categoryIdx: 1 },
-        { word: "numéro", categoryIdx: 0 },
-        { word: "date", categoryIdx: 1 },
-        { word: "objectif", categoryIdx: 0 },
-        { word: "ville", categoryIdx: 1 },
-        { word: "pays", categoryIdx: 0 },
-        { word: "langue", categoryIdx: 1 },
-        { word: "document", categoryIdx: 0 },
-        { word: "heure", categoryIdx: 1 },
-        { word: "âge", categoryIdx: 0 },
-      ],
-      pool: [
-        { word: "prénom", categoryIdx: 0 },
-        { word: "nationalité", categoryIdx: 1 },
-        { word: "adresse", categoryIdx: 1 },
-        { word: "numéro", categoryIdx: 0 },
-        { word: "date", categoryIdx: 1 },
-        { word: "objectif", categoryIdx: 0 },
-        { word: "ville", categoryIdx: 1 },
-        { word: "pays", categoryIdx: 0 },
-        { word: "langue", categoryIdx: 1 },
-        { word: "document", categoryIdx: 0 },
-        { word: "heure", categoryIdx: 1 },
-        { word: "âge", categoryIdx: 0 },
-      ],
-      poolSize: 8,
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrLFutur: GrammarLesson = {
@@ -1565,34 +990,7 @@ const a1GrLFutur: GrammarLesson = {
       text: "Forme négative : ne + aller + pas + infinitif → «Il ne va pas venir.»",
     },
   ],
-  exercises: [
-    {
-      type: "fill",
-      title: "Exercice 1 — Conjuguez au futur proche",
-      instruction: "Complétez avec la bonne forme de «aller».",
-      items: [
-        { sentence: "Je ___ partir en vacances. (aller)", hint: "vais", answer: "vais" },
-        { sentence: "Tu ___ manger au restaurant ? (aller)", hint: "vas", answer: "vas" },
-        { sentence: "Elle ___ arriver à midi. (aller)", hint: "va", answer: "va" },
-        { sentence: "Nous ___ travailler demain. (aller)", hint: "allons", answer: "allons" },
-        { sentence: "Vous ___ voyager cet été ? (aller)", hint: "allez", answer: "allez" },
-        { sentence: "Ils ___ finir le projet. (aller)", hint: "vont", answer: "vont" },
-        { sentence: "On ___ visiter le musée. (aller)", hint: "va", answer: "va" },
-      ],
-    },
-    {
-      type: "order",
-      title: "Exercice 2 — Remettez dans l'ordre",
-      instruction: "Formez une phrase au futur proche.",
-      items: [
-        { sentence: "Je vais regarder un film.", hint: "je — vais — regarder — un — film" },
-        { sentence: "Nous allons partir demain.", hint: "nous — allons — partir — demain" },
-        { sentence: "Elle va visiter le musée.", hint: "elle — va — visiter — le — musée" },
-        { sentence: "Ils vont travailler ensemble.", hint: "ils — vont — travailler — ensemble" },
-        { sentence: "Tu vas manger avec tes amis.", hint: "tu — vas — manger — avec — tes — amis" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrLImperatif: GrammarLesson = {
@@ -1641,53 +1039,14 @@ const a1GrLImperatif: GrammarLesson = {
       text: "Attention : ÊTRE → Sois / Soyons / Soyez — AVOIR → Aie / Ayons / Ayez",
     },
   ],
-  exercises: [
-    {
-      type: "fill",
-      title: "Exercice 1 — Conjuguez à l'impératif (vous)",
-      instruction: "Répondez aux questions en utilisant l'impératif.",
-      items: [
-        { sentence: "À quelle heure on vient ? → ___ à partir de 20 h ! (Venir)", hint: "Venez", answer: "Venez" },
-        { sentence: "Qu'est-ce que je prends à boire ? → ___ des boissons. (Prendre)", hint: "Prenez", answer: "Prenez" },
-        { sentence: "Qu'est-ce qu'on achète ? → ___ des chips. (Acheter)", hint: "Achetez", answer: "Achetez" },
-        { sentence: "Je vais où ? → ___ au supermarché. (Aller)", hint: "Allez", answer: "Allez" },
-        { sentence: "On commence maintenant ? → ___ tout de suite ! (Commencer)", hint: "Commencez", answer: "Commencez" },
-        { sentence: "Je peux partir ? → Non, ___ encore ! (Rester)", hint: "Restez", answer: "Restez" },
-      ],
-    },
-    {
-      type: "trueFalse",
-      title: "Exercice 2 — Impératif négatif : vrai ou faux ?",
-      instruction: "La forme négative de l'impératif est-elle correcte ?",
-      items: [
-        { statement: "N'apporte pas de gâteau !", answer: true },
-        { statement: "Ne viens pas à 19 h !", answer: true },
-        { statement: "Pas hésite à téléphoner !", answer: false },
-        { statement: "Ne mange pas vite !", answer: true },
-        { statement: "N'allez pas là !", answer: true },
-        { statement: "Ne parle pas français !", answer: true },
-        { statement: "Finissez ne pas maintenant !", answer: false },
-      ],
-    },
-    {
-      type: "order",
-      title: "Exercice 3 — Remettez dans l'ordre",
-      instruction: "Formez une phrase à l'impératif.",
-      items: [
-        { sentence: "Parlez plus lentement s'il vous plaît.", hint: "parlez — plus — lentement — s'il — vous — plaît" },
-        { sentence: "Ne mangez pas trop vite.", hint: "ne — mangez — pas — trop — vite" },
-        { sentence: "Prenons un taxi ensemble.", hint: "prenons — un — taxi — ensemble" },
-        { sentence: "Allez tout droit puis tournez à gauche.", hint: "allez — tout — droit — puis — tournez — à — gauche" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 // ── A2 Lessons ────────────────────────────────────────────────────────────────
 
 const a2GrL07: GrammarLesson = {
   slug: "a2-gr-l07",
-  code: "G.20",
+  code: "G.30",
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [
@@ -1722,33 +1081,12 @@ const a2GrL07: GrammarLesson = {
       text: "Inversion avec -t- quand le verbe finit par voyelle + il/elle/on. Ex: va-t-il, a-t-elle.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Reformulez la question",
-      instruction: "Choisissez la forme correcte avec inversion.",
-      items: [
-        { sentence: "Tu comprends ? → ___", choices: ["Comprends-tu ?", "Comprends-vous ?", "Comprend-tu ?", "Tu comprends ?"], correctIdx: 0 },
-        { sentence: "Il part ? → ___", choices: ["Part-il ?", "Parte-il ?", "Il part-il ?", "Parti-il ?"], correctIdx: 0 },
-        { sentence: "Elle va ? → ___", choices: ["Va-t-elle ?", "Vas-elle ?", "Elle va ?", "Va-elle ?"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Transformez",
-      instruction: "Reformulez avec est-ce que.",
-      items: [
-        { sentence: "Tu aimes la musique ? → Est-ce que ___", hint: "est-ce que + sujet + verbe", answer: "tu aimes la musique ?" },
-        { sentence: "Il comprend ? → Est-ce qu'___", hint: "élision devant voyelle", answer: "il comprend ?" },
-        { sentence: "Vous prenez le bus ? → Est-ce que ___", hint: "est-ce que + sujet + verbe", answer: "vous prenez le bus ?" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL09: GrammarLesson = {
   slug: "a2-gr-l09",
-  code: "G.21",
+  code: "G.31",
   level: "A2",
   title: "Répondre aux questions fermées",
   theory: [
@@ -1790,33 +1128,12 @@ const a2GrL09: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Oui, non ou si ?",
-      instruction: "Choisissez la bonne réponse.",
-      items: [
-        { sentence: "Tu ne comprends pas ? — ___, je comprends très bien !", choices: ["Si", "Oui", "Non", "Moi si"], correctIdx: 0 },
-        { sentence: "Tu aimes le cinéma ? — ___, je n'aime pas ça.", choices: ["Non", "Si", "Oui", "Moi non"], correctIdx: 0 },
-        { sentence: "Tu ne viens pas demain ? — ___, je viens !", choices: ["Si", "Oui", "Non", "Moi"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Moi aussi / Moi non plus / Moi si",
-      instruction: "Choisissez la réponse correcte.",
-      items: [
-        { sentence: "Je parle anglais. — ___", choices: ["Moi aussi !", "Moi non plus !", "Moi si !", "Moi pas !"], correctIdx: 0 },
-        { sentence: "Je ne fume pas. — ___", choices: ["Moi non plus !", "Moi aussi !", "Moi si !", "Moi pas !"], correctIdx: 0 },
-        { sentence: "Je n'aime pas le sport. — ___ (tu aimes le sport)", choices: ["Moi si !", "Moi aussi !", "Moi non plus !", "Moi pas !"], correctIdx: 0 },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL11: GrammarLesson = {
   slug: "a2-gr-l11",
-  code: "G.22",
+  code: "G.35",
   level: "A2",
   title: "Les adjectifs — généralités",
   theory: [
@@ -1857,33 +1174,12 @@ const a2GrL11: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Accord de l'adjectif",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Une ville ___.", choices: ["ancienne", "ancien", "anciens", "anciennes"], correctIdx: 0 },
-        { sentence: "Des hommes ___.", choices: ["heureux", "heureuse", "heureuses", "heureux"], correctIdx: 0 },
-        { sentence: "Elle est très ___.", choices: ["intelligente", "intelligent", "intelligents", "intelligentes"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Accordez l'adjectif",
-      instruction: "Mettez l'adjectif à la bonne forme.",
-      items: [
-        { sentence: "C'est une ville ___. (ancien)", hint: "féminin singulier", answer: "ancienne" },
-        { sentence: "Ils sont très ___. (heureux)", hint: "masculin pluriel", answer: "heureux" },
-        { sentence: "Ce sont des règles ___. (normal)", hint: "féminin pluriel", answer: "normales" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL12: GrammarLesson = {
   slug: "a2-gr-l12",
-  code: "G.23",
+  code: "G.36",
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [
@@ -1922,33 +1218,12 @@ const a2GrL12: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Beau, nouveau, vieux",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "___ appartement (nouveau + voyelle, masc.)", choices: ["Nouvel", "Nouveau", "Nouvelle", "Nouveaux"], correctIdx: 0 },
-        { sentence: "C'est ___ homme. (vieux + voyelle)", choices: ["un vieil", "un vieux", "une vieille", "des vieux"], correctIdx: 0 },
-        { sentence: "J'ai ___ voiture. (beau, féminin)", choices: ["une belle", "un bel", "un beau", "des belles"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Place de l'adjectif",
-      instruction: "Choisissez la phrase correcte.",
-      items: [
-        { sentence: "Logement spacieux :", choices: ["un grand appartement", "un appartement grand", "un grand-appartement", "appartement grand"], correctIdx: 0 },
-        { sentence: "Film de qualité :", choices: ["un film intéressant", "un intéressant film", "film intéressant", "un intéressant-film"], correctIdx: 0 },
-        { sentence: "Restaurant de qualité :", choices: ["un bon restaurant", "un restaurant bon", "bon restaurant", "un bon-restaurant"], correctIdx: 0 },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL18: GrammarLesson = {
   slug: "a2-gr-l18",
-  code: "G.24",
+  code: "G.34",
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [
@@ -1982,33 +1257,12 @@ const a2GrL18: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quelle préposition ?",
-      instruction: "Choisissez la bonne préposition.",
-      items: [
-        { sentence: "Je suis ___ de la station de métro.", choices: ["à côté", "loin", "dans", "sur"], correctIdx: 0 },
-        { sentence: "Le bureau est ___ la mairie.", choices: ["en face de", "dans", "loin de", "entre"], correctIdx: 0 },
-        { sentence: "Je suis dans un taxi, on est ___ le boulevard.", choices: ["sur", "dans", "sous", "loin"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec la bonne préposition.",
-      items: [
-        { sentence: "Elle est ___ la station de métro, elle attend le bus.", hint: "proximité", answer: "près de" },
-        { sentence: "Le café est ___ la boulangerie et la pharmacie.", hint: "au milieu de deux choses", answer: "entre" },
-        { sentence: "Notre bureau est ___ du centre-ville.", hint: "éloigné", answer: "loin" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL19: GrammarLesson = {
   slug: "a2-gr-l19",
-  code: "G.25",
+  code: "G.37",
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [
@@ -2042,35 +1296,12 @@ const a2GrL19: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Qui ou Que ?",
-      instruction: "Choisissez le pronom relatif correct.",
-      items: [
-        { sentence: "C'est le film ___ j'aime.", choices: ["que", "qui", "qu'", "dont"], correctIdx: 0 },
-        { sentence: "C'est un professeur ___ parle très bien.", choices: ["qui", "que", "qu'", "dont"], correctIdx: 0 },
-        { sentence: "C'est la règle ___ nous apprenons aujourd'hui.", choices: ["que", "qui", "qu'", "dont"], correctIdx: 0 },
-        { sentence: "C'est l'étudiant ___ comprend vite.", choices: ["qui", "que", "qu'", "dont"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez avec qui ou que/qu'",
-      instruction: "Choisissez qui ou que/qu'.",
-      items: [
-        { sentence: "C'est le livre ___ il recommande.", hint: "objet → que/qu'", answer: "qu'" },
-        { sentence: "C'est une ville ___ est très belle.", hint: "sujet → qui", answer: "qui" },
-        { sentence: "C'est la chanson ___ j'écoute tous les matins.", hint: "objet → que", answer: "que" },
-        { sentence: "Le bus ___ passe ici va au centre.", hint: "sujet → qui", answer: "qui" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL25: GrammarLesson = {
   slug: "a2-gr-l25",
-  code: "G.26",
+  code: "G.38",
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [
@@ -2102,33 +1333,12 @@ const a2GrL25: GrammarLesson = {
       text: "NE → N' devant voyelle : il n'y a plus de café. / Elle n'a que 20 ans.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quelle négation ?",
-      instruction: "Choisissez la bonne forme de négation.",
-      items: [
-        { sentence: "Il travaille ici. (→ cessé) → Il ___ travaille ___ ici.", choices: ["ne…plus", "ne…pas", "ne…que", "ne…jamais"], correctIdx: 0 },
-        { sentence: "Je mange des légumes seulement. → Je ___ mange ___ des légumes.", choices: ["ne…que", "ne…pas", "ne…plus", "ne…jamais"], correctIdx: 0 },
-        { sentence: "Il ne vient ___ à cette école depuis 2 mois.", choices: ["plus", "pas", "que", "jamais"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Transformez",
-      instruction: "Complétez avec la négation correcte.",
-      items: [
-        { sentence: "Je n'ai ___ d'argent. (seulement 10€)", hint: "restriction", answer: "que" },
-        { sentence: "Il ne travaille ___ ici, il a déménagé.", hint: "cessation", answer: "plus" },
-        { sentence: "Elle ne mange ___ de viande. (végétarienne)", hint: "absence", answer: "pas" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL35: GrammarLesson = {
   slug: "a2-gr-l35",
-  code: "G.27",
+  code: "G.40",
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
@@ -2183,34 +1393,12 @@ const a2GrL35: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "COD ou COI ?",
-      instruction: "Choisissez le bon pronom.",
-      items: [
-        { sentence: "Je connais Marie. → Je ___ connais.", choices: ["la", "lui", "les", "me"], correctIdx: 0 },
-        { sentence: "Je parle à Paul. → Je ___ parle.", choices: ["lui", "le", "la", "leur"], correctIdx: 0 },
-        { sentence: "Elle appelle ses amis. → Elle ___ appelle.", choices: ["les", "leur", "lui", "le"], correctIdx: 0 },
-        { sentence: "Il écrit à ses parents. → Il ___ écrit.", choices: ["leur", "les", "lui", "le"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Remplacez par un pronom",
-      instruction: "Remplacez le groupe souligné par le bon pronom.",
-      items: [
-        { sentence: "Je regarde (le film) tous les soirs. → Je ___ regarde tous les soirs.", hint: "COD masculin", answer: "le" },
-        { sentence: "Elle téléphone (à son amie) chaque jour. → Elle ___ téléphone chaque jour.", hint: "COI féminin sing.", answer: "lui" },
-        { sentence: "Nous invitons (nos collègues). → Nous ___ invitons.", hint: "COD pluriel", answer: "les" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL36: GrammarLesson = {
   slug: "a2-gr-l36",
-  code: "G.28",
+  code: "G.41",
   level: "A2",
   title: "Les pronoms Y et EN",
   theory: [
@@ -2245,34 +1433,12 @@ const a2GrL36: GrammarLesson = {
       text: "Y et EN se placent AVANT le verbe (comme tous les pronoms).",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Y ou EN ?",
-      instruction: "Choisissez le bon pronom.",
-      items: [
-        { sentence: "Je vais à Lyon demain. → J'___ vais demain.", choices: ["y", "en", "le", "lui"], correctIdx: 0 },
-        { sentence: "Je mange du chocolat. → J'___ mange.", choices: ["en", "y", "le", "la"], correctIdx: 0 },
-        { sentence: "Je pense souvent à mes vacances. → J'___ pense souvent.", choices: ["y", "en", "le", "les"], correctIdx: 0 },
-        { sentence: "Il a des amis français. → Il ___ a.", choices: ["en", "y", "les", "leur"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Remplacez par Y ou EN",
-      instruction: "Remplacez le groupe souligné.",
-      items: [
-        { sentence: "Tu vas au marché ? → Tu ___ vas ?", hint: "à + lieu → Y", answer: "y" },
-        { sentence: "Elle mange de la salade. → Elle ___ mange.", hint: "partitif → EN", answer: "en" },
-        { sentence: "Ils pensent à leur avenir. → Ils ___ pensent.", hint: "à + chose → Y", answer: "y" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "G.29",
+  code: "G.45",
   level: "A2",
   title: "Le comparatif",
   theory: [
@@ -2317,33 +1483,12 @@ const a2GrL39: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Comparatif",
-      instruction: "Choisissez la forme correcte.",
-      items: [
-        { sentence: "Ce film est ___ intéressant ___ l'autre.", choices: ["plus ... que", "plus ... de", "aussi ... de", "moins ... à"], correctIdx: 0 },
-        { sentence: "Elle chante ___ que son frère.", choices: ["mieux", "meilleur", "plus bien", "plus mieux"], correctIdx: 0 },
-        { sentence: "Ce restaurant est ___ ___ l'autre.", choices: ["meilleur que", "plus bon que", "plus meilleur que", "bien que"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez le comparatif",
-      instruction: "Utilisez plus/aussi/moins/meilleur/mieux + que.",
-      items: [
-        { sentence: "Le train est ___ (rapide) ___ le bus. (+)", hint: "supériorité", answer: "plus rapide que" },
-        { sentence: "Ce hôtel est ___ (cher) ___ l'autre. (=)", hint: "égalité", answer: "aussi cher que" },
-        { sentence: "Il cuisine ___ que l'année dernière. (amélioration)", hint: "mieux", answer: "mieux" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "G.30",
+  code: "G.39",
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [
@@ -2385,33 +1530,12 @@ const a2GrL42: GrammarLesson = {
       text: "Au passé composé : jamais/rien → AVANT le participe ; personne → APRÈS le participe. Ex: Je n'ai jamais voyagé. / Il n'a rien dit. / Nous n'avons vu personne.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quelle négation totale ?",
-      instruction: "Choisissez la bonne négation.",
-      items: [
-        { sentence: "Je ne mange ___ de poisson. (à aucun moment)", choices: ["jamais", "rien", "personne", "plus"], correctIdx: 0 },
-        { sentence: "Elle ne connaît ___ dans cette ville. (aucune personne)", choices: ["personne", "rien", "jamais", "plus"], correctIdx: 0 },
-        { sentence: "Il ne fait ___ ce week-end. (aucune chose)", choices: ["rien", "personne", "jamais", "plus"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Complétez avec jamais, rien ou personne.",
-      items: [
-        { sentence: "Je ne dis ___ à mes collègues.", hint: "aucune chose", answer: "rien" },
-        { sentence: "___ ne comprend cette règle.", hint: "sujet + ne", answer: "Personne" },
-        { sentence: "Il n'a ___ mangé au restaurant.", hint: "à aucun moment", answer: "jamais" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2GrL52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "G.31",
+  code: "G.46",
   level: "A2",
   title: "La cause et la conséquence",
   theory: [
@@ -2450,28 +1574,7 @@ const a2GrL52: GrammarLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Cause ou conséquence ?",
-      instruction: "Choisissez le connecteur correct.",
-      items: [
-        { sentence: "Elle a réussi ___ son travail acharné.", choices: ["grâce à", "à cause de", "parce que", "donc"], correctIdx: 0 },
-        { sentence: "Il est en retard ___ les embouteillages.", choices: ["à cause de", "grâce à", "donc", "comme"], correctIdx: 0 },
-        { sentence: "J'ai faim, ___ je vais manger.", choices: ["donc", "parce que", "comme", "grâce à"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez",
-      instruction: "Choisissez le bon connecteur.",
-      items: [
-        { sentence: "___ il fait beau, nous allons au parc.", hint: "cause en début de phrase", answer: "Comme" },
-        { sentence: "Je prends des cours ___ je veux parler français.", hint: "cause = parce que/car", answer: "parce que" },
-        { sentence: "Elle est malade, ___ elle ne vient pas.", hint: "conséquence = donc", answer: "donc" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 // ── Registry ──────────────────────────────────────────────────────────────────

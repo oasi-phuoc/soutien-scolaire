@@ -44,7 +44,7 @@ export type ConjLesson = {
 
 const a1ConjL00: ConjLesson = {
   slug: "a1-conj-l00",
-  code: "C.1",
+  code: "G.1",
   level: "A1",
   title: "Les pronoms personnels",
   theory: [
@@ -534,7 +534,7 @@ const a1ConjL00: ConjLesson = {
 
 const a1ConjL01: ConjLesson = {
   slug: "a1-conj-l01",
-  code: "C.2",
+  code: "G.2",
   level: "A1",
   title: "Les verbes être et avoir",
   theory: [
@@ -1127,7 +1127,7 @@ const a1ConjL01: ConjLesson = {
 
 const a1ConjL07: ConjLesson = {
   slug: "a1-conj-l07",
-  code: "C.3",
+  code: "G.6",
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [
@@ -1182,66 +1182,12 @@ const a1ConjL07: ConjLesson = {
       noBulletItems: [0],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Associer le pronom et la forme",
-      instruction: "Reliez chaque pronom sujet à la bonne forme de « parler ».",
-      pairs: [
-        { left: "Je", right: "parle" },
-        { left: "Tu", right: "parles" },
-        { left: "Il / Elle", right: "parle" },
-        { left: "Nous", right: "parlons" },
-        { left: "Vous", right: "parlez" },
-        { left: "Ils / Elles", right: "parlent" },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter les phrases",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Hiro ___ anglais ?", hint: "parler", answer: "parle" },
-        { sentence: "Je ___ à Paris.", hint: "habiter", answer: "habite" },
-        { sentence: "Nous ___ le français.", hint: "étudier", answer: "étudions" },
-        { sentence: "Tu ___ le samedi ?", hint: "travailler", answer: "travailles" },
-        { sentence: "Elles ___ la musique.", hint: "aimer", answer: "aiment" },
-        { sentence: "Vous ___ quoi ?", hint: "étudier", answer: "étudiez" },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Charlotte ___ le matin.",
-          choices: ["travaille", "travailles", "travaillent", "travaillons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ à Paris.",
-          choices: ["habitons", "habitez", "habites", "habite"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ le français.",
-          choices: ["parlent", "parle", "parlez", "parlons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Tu ___ l'anglais ?",
-          choices: ["parles", "parlons", "parle", "parlez"],
-          correctIdx: 0,
-        },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL08: ConjLesson = {
   slug: "a1-conj-l08",
-  code: "C.4",
+  code: "G.7",
   level: "A1",
   title: "Les verbes aller et venir",
   theory: [
@@ -1282,60 +1228,12 @@ const a1ConjL08: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Aller — associer pronom et forme",
-      instruction: "Reliez chaque pronom sujet à la bonne forme de « aller ».",
-      pairs: [
-        { left: "Je", right: "vais" },
-        { left: "Tu", right: "vas" },
-        { left: "Il", right: "va" },
-        { left: "Nous", right: "allons" },
-        { left: "Vous", right: "allez" },
-        { left: "Ils", right: "vont" },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter avec aller ou venir",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Je ___ au cinéma ce soir.", hint: "aller", answer: "vais" },
-        { sentence: "Tu ___ d'où ?", hint: "venir", answer: "viens" },
-        { sentence: "Nous ___ en France cet été.", hint: "aller", answer: "allons" },
-        { sentence: "Ils ___ de Paris.", hint: "venir", answer: "viennent" },
-        { sentence: "Vous ___ au marché ?", hint: "aller", answer: "allez" },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Elle ___ au travail en bus.",
-          choices: ["va", "vais", "vont", "allez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ de Lyon.",
-          choices: ["viennent", "vient", "venons", "venez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Tu ___ à la bibliothèque ?",
-          choices: ["vas", "vais", "allez", "vont"],
-          correctIdx: 0,
-        },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL09: ConjLesson = {
   slug: "a1-conj-l09",
-  code: "C.5",
+  code: "G.8",
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
@@ -1376,47 +1274,12 @@ const a1ConjL09: ConjLesson = {
       text: "me / te / se → m' / t' / s' devant une voyelle.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme pronominale correcte.",
-      items: [
-        {
-          sentence: "Je ___ à 7 heures.",
-          choices: ["me lève", "te lèves", "se lève", "nous levons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Il ___ Paul.",
-          choices: ["s'appelle", "m'appelle", "t'appelles", "vous appelez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ tôt le matin.",
-          choices: ["nous levons", "se lèvent", "vous levez", "me lève"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter avec le verbe pronominal",
-      instruction: "Conjuguez le verbe pronominal au présent.",
-      items: [
-        { sentence: "Je ___ Marie.", hint: "s'appeler", answer: "m'appelle" },
-        { sentence: "Il ___ à 22h.", hint: "se coucher", answer: "se couche" },
-        { sentence: "Tu ___ à quelle heure ?", hint: "se lever", answer: "te lèves" },
-        { sentence: "Nous ___ vite le matin.", hint: "s'habiller", answer: "nous habillons" },
-        { sentence: "Elles ___ ensemble.", hint: "se préparer", answer: "se préparent" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL12: ConjLesson = {
   slug: "a1-conj-l12",
-  code: "C.6",
+  code: "G.9",
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [
@@ -1458,46 +1321,12 @@ const a1ConjL12: ConjLesson = {
       text: "Ces verbes se conjuguent en 2 bases : radical court (je / tu / il) + radical long (nous / vous / ils).",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Elle ___ du bureau à 18h.",
-          choices: ["sort", "sortir", "sortons", "sortez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ de Paris demain.",
-          choices: ["partons", "partez", "partent", "pars"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Le train ___ à 8h30.",
-          choices: ["arrive", "arriver", "arrivons", "arrivez"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter les phrases",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Je ___ en vacances demain.", hint: "partir", answer: "pars" },
-        { sentence: "Tu ___ ce soir ?", hint: "sortir", answer: "sors" },
-        { sentence: "Ils ___ à l'aéroport à 10h.", hint: "arriver", answer: "arrivent" },
-        { sentence: "Nous ___ dans le train.", hint: "monter", answer: "montons" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL15: ConjLesson = {
   slug: "a1-conj-l15",
-  code: "C.7",
+  code: "G.10",
   level: "A1",
   title: "Vouloir, pouvoir, devoir",
   theory: [
@@ -1550,59 +1379,12 @@ const a1ConjL15: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Associer pronom et forme",
-      instruction: "Reliez chaque pronom à la bonne forme de « vouloir ».",
-      pairs: [
-        { left: "je", right: "veux" },
-        { left: "tu", right: "peux" },
-        { left: "il", right: "doit" },
-        { left: "nous", right: "voulons" },
-        { left: "vous", right: "pouvez" },
-        { left: "ils", right: "doivent" },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme modale",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Je ___ partir maintenant.",
-          choices: ["dois", "doit", "devons", "devez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Tu ___ m'aider ?",
-          choices: ["peux", "peut", "peuvent", "pouvons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ travailler ce weekend.",
-          choices: ["veulent", "veut", "voulons", "voulez"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter avec le bon modal",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Je ___ venir demain.", hint: "pouvoir", answer: "peux" },
-        { sentence: "Elle ___ partir maintenant.", hint: "devoir", answer: "doit" },
-        { sentence: "Nous ___ apprendre le français.", hint: "vouloir", answer: "voulons" },
-        { sentence: "Vous ___ m'aider ?", hint: "pouvoir", answer: "pouvez" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL20: ConjLesson = {
   slug: "a1-conj-l20",
-  code: "C.8",
+  code: "G.20",
   level: "A1",
   title: "Le futur proche",
   theory: [
@@ -1630,46 +1412,12 @@ const a1ConjL20: ConjLesson = {
       text: "Le futur proche exprime un événement imminent ou prévu avec certitude.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme d'aller",
-      instruction: "Sélectionnez la forme correcte du verbe « aller ».",
-      items: [
-        {
-          sentence: "Il ___ partir en vacances.",
-          choices: ["va", "vais", "vont", "allez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ manger au restaurant ce soir.",
-          choices: ["allons", "allez", "vais", "va"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Elle ne ___ pas venir à la fête.",
-          choices: ["va", "vais", "vont", "allons"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le futur proche",
-      instruction: "Construisez le futur proche avec les éléments donnés.",
-      items: [
-        { sentence: "Je ___ demain.", hint: "aller + étudier", answer: "vais étudier" },
-        { sentence: "Tu ___ à Paris ?", hint: "aller + partir", answer: "vas partir" },
-        { sentence: "Nous ___ un film.", hint: "aller + regarder", answer: "allons regarder" },
-        { sentence: "Ils ___ bientôt.", hint: "aller + arriver", answer: "vont arriver" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL27: ConjLesson = {
   slug: "a1-conj-l27",
-  code: "C.9",
+  code: "G.21",
   level: "A1",
   title: "Pronominaux réfléchis et réciproques",
   theory: [
@@ -1706,41 +1454,12 @@ const a1ConjL27: ConjLesson = {
       items: ["se regarder", "se parler", "s'écrire", "se téléphoner"],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme pronominale",
-      instruction: "Sélectionnez la forme correcte.",
-      items: [
-        {
-          sentence: "Le matin, je ___ les dents.",
-          choices: ["me brosse", "te brosses", "se brosse", "nous brossons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ tous les jours.",
-          choices: ["se téléphonent", "me téléphone", "te téléphones", "vous téléphonez"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter avec le pronominal",
-      instruction: "Conjuguez le verbe pronominal au présent.",
-      items: [
-        { sentence: "Elle ___ avant de sortir.", hint: "se maquiller", answer: "se maquille" },
-        { sentence: "Nous ___ en français.", hint: "se parler", answer: "nous parlons" },
-        { sentence: "Tu ___ ?", hint: "se dépêcher", answer: "te dépêches" },
-        { sentence: "Ils ___ dans les yeux.", hint: "se regarder", answer: "se regardent" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL28: ConjLesson = {
   slug: "a1-conj-l28",
-  code: "C.10",
+  code: "G.22",
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [
@@ -1773,41 +1492,12 @@ const a1ConjL28: ConjLesson = {
       examples: [{ correct: "Je suis en train de travailler. (I'm working right now.)" }],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Passé récent ou présent continu ?",
-      instruction: "Sélectionnez la bonne option.",
-      items: [
-        {
-          sentence: "Je ___ de finir mon travail.",
-          choices: ["viens", "vais", "suis", "fais"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Il est ___ lire un livre.",
-          choices: ["en train de", "en train à", "au train de", "en cours à"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Construire les formes",
-      instruction: "Complétez avec la structure indiquée.",
-      items: [
-        { sentence: "Je ___.", hint: "venir de + manger", answer: "viens de manger" },
-        { sentence: "Elle ___.", hint: "être en train de + travailler", answer: "est en train de travailler" },
-        { sentence: "Nous ___.", hint: "venir de + arriver", answer: "venons d'arriver" },
-        { sentence: "Ils ___.", hint: "être en train de + discuter", answer: "sont en train de discuter" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL29: ConjLesson = {
   slug: "a1-conj-l29",
-  code: "C.11",
+  code: "G.23",
   level: "A1",
   title: "Passé composé avec avoir",
   theory: [
@@ -1856,58 +1546,12 @@ const a1ConjL29: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "match",
-      title: "Infinitif → participe passé",
-      instruction: "Reliez chaque infinitif à son participe passé.",
-      pairs: [
-        { left: "parler", right: "parlé" },
-        { left: "finir", right: "fini" },
-        { left: "faire", right: "fait" },
-        { left: "voir", right: "vu" },
-        { left: "prendre", right: "pris" },
-        { left: "dire", right: "dit" },
-      ],
-    },
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du passé composé.",
-      items: [
-        {
-          sentence: "Hier, j'___ un film.",
-          choices: ["ai regardé", "ai regarder", "avoir regardé", "a regardé"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ notre déjeuner.",
-          choices: ["avons fini", "ont fini", "avez fini", "ai fini"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Elle ___ ses clés !",
-          choices: ["a perdu", "ai perdu", "ont perdu", "avons perdu"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le passé composé",
-      instruction: "Conjuguez le verbe au passé composé.",
-      items: [
-        { sentence: "J'___ à ma mère hier.", hint: "téléphoner", answer: "ai téléphoné" },
-        { sentence: "Tu ___ tes devoirs ?", hint: "finir", answer: "as fini" },
-        { sentence: "Il ___ le bus ce matin.", hint: "prendre", answer: "a pris" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1ConjL30: ConjLesson = {
   slug: "a1-conj-l30",
-  code: "C.12",
+  code: "G.24",
   level: "A1",
   title: "Passé composé avec être",
   theory: [
@@ -1935,48 +1579,14 @@ const a1ConjL30: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme avec être",
-      instruction: "Sélectionnez la forme correcte du passé composé.",
-      items: [
-        {
-          sentence: "Marie ___ à Paris hier.",
-          choices: ["est allée", "a allé", "est allé", "ont allé"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Les enfants ___ à 18h.",
-          choices: ["sont rentrés", "ont rentrés", "est rentré", "sont rentré"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Paul et Claire ___ du cinéma à 22h.",
-          choices: ["sont sortis", "ont sorti", "est sorti", "sont sortie"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le passé composé avec être",
-      instruction: "Conjuguez le verbe au passé composé avec être. Accordez le participe.",
-      items: [
-        { sentence: "Elle ___ en voyage.", hint: "partir", answer: "est partie" },
-        { sentence: "Ils ___ hier soir.", hint: "arriver", answer: "sont arrivés" },
-        { sentence: "Nous ___ en train.", hint: "venir", answer: "sommes venus" },
-        { sentence: "Tu ___ en quelle année ?", hint: "naître", answer: "es né(e)" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 // ── A2 Lessons ────────────────────────────────────────────────────────────────
 
 const a2ConjL01: ConjLesson = {
   slug: "a2-conj-l01",
-  code: "C.13",
+  code: "G.27",
   level: "A2",
   title: "Les verbes en -er — révision et particularités",
   theory: [
@@ -2034,46 +1644,12 @@ const a2ConjL01: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Nous ___ de la pizza.",
-          choices: ["mangeons", "mangons", "mangez", "mangent"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Je ___ aller en vacances en été.",
-          choices: ["préfère", "préférons", "préférez", "préfèrent"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ le français au lycée.",
-          choices: ["commencent", "commençons", "commencer", "commencez"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter les phrases",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Nous ___ le cours à 9h.", hint: "commencer", answer: "commençons" },
-        { sentence: "J'___ ma mère tous les soirs.", hint: "appeler", answer: "appelle" },
-        { sentence: "Tu ___ quoi au marché ?", hint: "acheter", answer: "achètes" },
-        { sentence: "Nous ___ ensemble ce midi ?", hint: "manger", answer: "mangeons" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL02: ConjLesson = {
   slug: "a2-conj-l02",
-  code: "C.14",
+  code: "G.28",
   level: "A2",
   title: "Les verbes en -ir (2e et 3e groupes)",
   theory: [
@@ -2124,46 +1700,12 @@ const a2ConjL02: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Nous ___ notre travail à midi.",
-          choices: ["finissons", "finons", "finissez", "finons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Le magasin ___ à 9h.",
-          choices: ["ouvre", "ouvrir", "ouvrons", "ouvert"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Tu ___ quand ?",
-          choices: ["pars", "partir", "partz", "part"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter les phrases",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Je ___ le menu végétarien.", hint: "choisir", answer: "choisis" },
-        { sentence: "Ils ___ en vacances demain.", hint: "partir", answer: "partent" },
-        { sentence: "Elle ___ la fenêtre.", hint: "ouvrir", answer: "ouvre" },
-        { sentence: "Nous ___ le projet vendredi.", hint: "finir", answer: "finissons" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL03: ConjLesson = {
   slug: "a2-conj-l03",
-  code: "C.15",
+  code: "G.29",
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [
@@ -2211,46 +1753,12 @@ const a2ConjL03: ConjLesson = {
       text: "boire, croire, voir suivent des patterns similaires à prendre.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du verbe.",
-      items: [
-        {
-          sentence: "Qu'est-ce que tu ___ ?",
-          choices: ["fais", "fait", "faites", "faisons"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Nous ___ le bus tous les matins.",
-          choices: ["prenons", "prend", "prennent", "prenez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Il ___ bien Paris.",
-          choices: ["connaît", "connait", "connais", "connaissons"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter les phrases",
-      instruction: "Conjuguez le verbe entre parenthèses au présent.",
-      items: [
-        { sentence: "Je ___ du sport le matin.", hint: "faire", answer: "fais" },
-        { sentence: "Ils ___ le train.", hint: "prendre", answer: "prennent" },
-        { sentence: "Tu ___ ce quartier ?", hint: "connaître", answer: "connais" },
-        { sentence: "Nous ___ la cuisine ensemble.", hint: "faire", answer: "faisons" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL04: ConjLesson = {
   slug: "a2-conj-l04",
-  code: "C.16",
+  code: "G.32",
   level: "A2",
   title: "Le conditionnel de politesse",
   theory: [
@@ -2278,45 +1786,12 @@ const a2ConjL04: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme conditionnelle",
-      instruction: "Sélectionnez la forme correcte du conditionnel.",
-      items: [
-        {
-          sentence: "Je ___ un verre d'eau, s'il vous plaît.",
-          choices: ["voudrais", "veux", "voulons", "voulez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Vous ___ m'aider ?",
-          choices: ["pourriez", "pouvez", "peuvent", "pourrions"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Tu ___ faire plus de sport.",
-          choices: ["devrais", "dois", "devez", "devrait"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le conditionnel",
-      instruction: "Conjuguez le verbe entre parenthèses au conditionnel présent.",
-      items: [
-        { sentence: "Je ___ visiter Paris un jour.", hint: "aimer", answer: "aimerais" },
-        { sentence: "Nous ___ se retrouver demain ?", hint: "pouvoir", answer: "pourrions" },
-        { sentence: "Il ___ partir plus tôt.", hint: "devoir", answer: "devrait" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL05: ConjLesson = {
   slug: "a2-conj-l05",
-  code: "C.17",
+  code: "G.33",
   level: "A2",
   title: "L'impératif",
   theory: [
@@ -2353,45 +1828,12 @@ const a2ConjL05: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme impérative",
-      instruction: "Sélectionnez la forme correcte de l'impératif.",
-      items: [
-        {
-          sentence: "___ tes devoirs avant de jouer !",
-          choices: ["Fais", "Faire", "Faisons", "Faisez"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "___ calme ! (tu)",
-          choices: ["Sois", "Être", "Êtes", "Sommes"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "___ à la maison ! (vous)",
-          choices: ["Restez", "Restez-vous", "Rester", "Reste"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former l'impératif",
-      instruction: "Donnez la forme impérative du verbe.",
-      items: [
-        { sentence: "___ moins vite !", hint: "parler (tu)", answer: "Parle" },
-        { sentence: "___ ce travail ensemble !", hint: "finir (nous)", answer: "Finissons" },
-        { sentence: "Ne ___ pas encore !", hint: "partir (vous)", answer: "partez" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL06: ConjLesson = {
   slug: "a2-conj-l06",
-  code: "C.18",
+  code: "G.42",
   level: "A2",
   title: "Le passé composé — avoir et être",
   theory: [
@@ -2429,45 +1871,12 @@ const a2ConjL06: ConjLesson = {
       text: "Pronominaux : toujours conjugués avec être. Elle s'est levée.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du passé composé.",
-      items: [
-        {
-          sentence: "Elle ___ à 8h.",
-          choices: ["s'est levée", "s'a levée", "s'est levé", "a levée"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "J'___ la porte.",
-          choices: ["ai ouvert", "suis ouvert", "ai ouvrit", "a ouvert"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Ils ___ leurs clés.",
-          choices: ["ont perdu", "sont perdu", "a perdu", "avons perdu"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le passé composé",
-      instruction: "Conjuguez le verbe au passé composé. Faites les accords nécessaires.",
-      items: [
-        { sentence: "Elle ___ à 6h ce matin.", hint: "se réveiller", answer: "s'est réveillée" },
-        { sentence: "Nous ___ les poubelles hier.", hint: "sortir (avec COD)", answer: "avons sorti" },
-        { sentence: "Il ___ au cinéma.", hint: "aller", answer: "est allé" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL07: ConjLesson = {
   slug: "a2-conj-l07",
-  code: "C.19",
+  code: "G.43",
   level: "A2",
   title: "L'imparfait",
   theory: [
@@ -2496,57 +1905,12 @@ const a2ConjL07: ConjLesson = {
       text: "PC vs imparfait : passé composé = action ponctuelle ; imparfait = habitude ou description.",
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte : imparfait ou passé composé ?",
-      items: [
-        {
-          sentence: "Quand j'étais enfant, je ___ beaucoup.",
-          choices: ["jouais", "ai joué", "joue", "jouerai"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Il ___ beau quand nous sommes arrivés.",
-          choices: ["faisait", "a fait", "fait", "fera"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Avant, tu ___ le train pour aller au travail.",
-          choices: ["prenais", "as pris", "prends", "prendras"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Compléter à l'imparfait",
-      instruction: "Conjuguez le verbe entre parenthèses à l'imparfait.",
-      items: [
-        {
-          sentence: "Quand j'___ petit, j'___ à Lyon.",
-          hint: "être / habiter",
-          answer: "étais / habitais",
-        },
-        {
-          sentence: "Il ___ tous les soirs à cette époque.",
-          hint: "travailler",
-          answer: "travaillait",
-        },
-        {
-          sentence: "Nous ___ la télé tous les dimanches.",
-          hint: "regarder",
-          answer: "regardions",
-        },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a2ConjL08: ConjLesson = {
   slug: "a2-conj-l08",
-  code: "C.20",
+  code: "G.44",
   level: "A2",
   title: "Le futur simple",
   theory: [
@@ -2592,41 +1956,7 @@ const a2ConjL08: ConjLesson = {
       ],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Choisir la bonne forme",
-      instruction: "Sélectionnez la forme correcte du futur simple.",
-      items: [
-        {
-          sentence: "Demain, je ___ mes parents.",
-          choices: ["appellerai", "appelais", "appelle", "appelé"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "S'il fait beau, nous ___ au parc.",
-          choices: ["irons", "allons", "allions", "serons allés"],
-          correctIdx: 0,
-        },
-        {
-          sentence: "Elle ___ médecin plus tard.",
-          choices: ["sera", "est", "serait", "était"],
-          correctIdx: 0,
-        },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Former le futur simple",
-      instruction: "Conjuguez le verbe entre parenthèses au futur simple.",
-      items: [
-        { sentence: "Demain, il ___ beau.", hint: "faire", answer: "fera" },
-        { sentence: "Je ___ te voir ce weekend.", hint: "venir", answer: "viendrai" },
-        { sentence: "Si tu travailles, tu ___.", hint: "réussir", answer: "réussiras" },
-        { sentence: "Nous ___ une réunion vendredi.", hint: "avoir", answer: "aurons" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 // ── Registry ──────────────────────────────────────────────────────────────────
