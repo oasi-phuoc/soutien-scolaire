@@ -131,9 +131,9 @@ function SectionCard({
   function lessonState(th: FrenchTheme): LessonState {
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Completed/unlocked sections: all undone lessons are still accessible
-    if (state === "completed" || state === "unlocked") return "available";
-    // In-progress: only first uncompleted is available; rest locked
+    // Only fully-completed sections (all lessons done) have every lesson accessible
+    if (state === "completed") return "available";
+    // In-progress or unlocked: only first uncompleted is available; rest locked
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
   }
