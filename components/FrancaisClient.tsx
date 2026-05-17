@@ -26,14 +26,13 @@ const TABS: { id: FrenchTab; label: string }[] = [
   { id: "general",     label: "Apprendre" },
   { id: "vocabulaire", label: "Vocabulaire" },
   { id: "grammaire",   label: "Grammaire" },
-  { id: "conjugaison", label: "Conjugaison" },
 ];
 
 const LEVEL_TO_SECTION: Record<string, FrenchSection> = {
   PA: "A0", ALPHA: "A0", A0: "A0", A1: "A1", A2: "A2", B1: "B1", B2: "B2",
 };
 
-const VALID_TABS: FrenchTab[] = ["general", "vocabulaire", "grammaire", "conjugaison"];
+const VALID_TABS: FrenchTab[] = ["general", "vocabulaire", "grammaire"];
 
 function getSectionState(sectionId: FrenchSection, currentSection: FrenchSection | null): SectionState {
   if (!currentSection) return "locked";
@@ -280,7 +279,7 @@ export function FrancaisClient() {
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-4 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
       >
         {TABS.map(({ id, label }) => (
           <button
@@ -328,7 +327,8 @@ export function FrancaisClient() {
             const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
             const state: SectionState = rawState === "locked" ? "completed" : rawState;
             const themes = FRENCH_THEMES.filter(
-              (th) => th.section === sec.id && th.tab === tab,
+              (th) => th.section === sec.id &&
+                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
             );
             if (themes.length === 0) return null;
             return (
