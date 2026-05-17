@@ -125,13 +125,6 @@ export function MathematiquesClient() {
   );
   const pendingModule = pendingEvalId ? getMathModule(pendingEvalId) : undefined;
 
-  const branchProgress = useMemo(() => {
-    const total = order.length;
-    const done = completedPassingIds(progress);
-    const n = order.filter((id) => done.has(id)).length;
-    return total ? Math.round((n / total) * 100) : 0;
-  }, [order, progress]);
-
   const accentColor = tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)";
 
   return (

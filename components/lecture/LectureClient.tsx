@@ -3,18 +3,14 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AppProgressBar } from "@/components/ui/AppProgressBar";
 import { LECTURE_MODULES, STORIES, getRevision } from "@/lib/curriculum/lecture-data";
 import {
   loadLectureProgress,
-  computeLecturePercent,
   getSubmoduleState,
   getModuleState,
   getEvaluationResult,
   getRevisionState,
-  SUBMODULE_SEQUENCE,
   REVISION_CHECKPOINTS,
-  TOTAL_LETTERS,
 } from "@/lib/progress/lecture-progress";
 import type { LectureProgressV2, ItemState, ModuleState } from "@/lib/progress/lecture-progress";
 
@@ -91,12 +87,6 @@ function ModuleCard({
     if (hydrated && !isCollapsible) setExpanded(true);
   }, [hydrated, isCollapsible]);
 
-  const moduleLetters = SUBMODULE_SEQUENCE.filter((s) => s.moduleId === mod.id);
-  const completedCount = hydrated
-    ? moduleLetters.filter((s) => getSubmoduleState(progress, s.moduleId, s.letterId) === "completed").length
-    : 0;
-  const totalCount = moduleLetters.length;
-  const pct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
     <div
@@ -319,11 +309,6 @@ export function LectureClient() {
     setProgress(loadLectureProgress());
     setHydrated(true);
   }, []);
-
-  const pct = hydrated ? computeLecturePercent(progress) : 0;
-  const completedCount = hydrated
-    ? Object.values(progress.submodules).filter((s) => s === "completed").length
-    : 0;
 
   const activeModuleId = hydrated
     ? (LECTURE_MODULES.find((m) => getModuleState(progress, m.id) === "in_progress")?.id ??
