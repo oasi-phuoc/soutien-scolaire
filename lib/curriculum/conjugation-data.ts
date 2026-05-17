@@ -1068,7 +1068,7 @@ const a1ConjL07: ConjLesson = {
 
 const a1ConjL08: ConjLesson = {
   slug: "a1-conj-l08",
-  code: "G.7",
+  code: "G.8",
   level: "A1",
   title: "Les verbes aller et venir",
   theory: [
@@ -1114,7 +1114,7 @@ const a1ConjL08: ConjLesson = {
 
 const a1ConjL09: ConjLesson = {
   slug: "a1-conj-l09",
-  code: "G.8",
+  code: "G.9",
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
@@ -1160,7 +1160,7 @@ const a1ConjL09: ConjLesson = {
 
 const a1ConjL12: ConjLesson = {
   slug: "a1-conj-l12",
-  code: "G.9",
+  code: "G.10",
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [
@@ -1207,7 +1207,7 @@ const a1ConjL12: ConjLesson = {
 
 const a1ConjL15: ConjLesson = {
   slug: "a1-conj-l15",
-  code: "G.10",
+  code: "G.11",
   level: "A1",
   title: "Vouloir, pouvoir, devoir",
   theory: [
@@ -1265,7 +1265,7 @@ const a1ConjL15: ConjLesson = {
 
 const a1ConjL20: ConjLesson = {
   slug: "a1-conj-l20",
-  code: "G.20",
+  code: "G.21",
   level: "A1",
   title: "Le futur proche",
   theory: [
@@ -1298,7 +1298,7 @@ const a1ConjL20: ConjLesson = {
 
 const a1ConjL27: ConjLesson = {
   slug: "a1-conj-l27",
-  code: "G.21",
+  code: "G.22",
   level: "A1",
   title: "Pronominaux réfléchis et réciproques",
   theory: [
@@ -1340,7 +1340,7 @@ const a1ConjL27: ConjLesson = {
 
 const a1ConjL28: ConjLesson = {
   slug: "a1-conj-l28",
-  code: "G.22",
+  code: "G.23",
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [
@@ -1378,7 +1378,7 @@ const a1ConjL28: ConjLesson = {
 
 const a1ConjL29: ConjLesson = {
   slug: "a1-conj-l29",
-  code: "G.23",
+  code: "G.24",
   level: "A1",
   title: "Passé composé avec avoir",
   theory: [
@@ -1432,7 +1432,7 @@ const a1ConjL29: ConjLesson = {
 
 const a1ConjL30: ConjLesson = {
   slug: "a1-conj-l30",
-  code: "G.24",
+  code: "G.25",
   level: "A1",
   title: "Passé composé avec être",
   theory: [
@@ -1467,7 +1467,7 @@ const a1ConjL30: ConjLesson = {
 
 const a2ConjL01: ConjLesson = {
   slug: "a2-conj-l01",
-  code: "G.27",
+  code: "G.28",
   level: "A2",
   title: "Les verbes en -er — révision et particularités",
   theory: [
@@ -1530,7 +1530,7 @@ const a2ConjL01: ConjLesson = {
 
 const a2ConjL02: ConjLesson = {
   slug: "a2-conj-l02",
-  code: "G.28",
+  code: "G.29",
   level: "A2",
   title: "Les verbes en -ir (2e et 3e groupes)",
   theory: [
@@ -1586,7 +1586,7 @@ const a2ConjL02: ConjLesson = {
 
 const a2ConjL03: ConjLesson = {
   slug: "a2-conj-l03",
-  code: "G.29",
+  code: "G.30",
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [
@@ -1639,7 +1639,7 @@ const a2ConjL03: ConjLesson = {
 
 const a2ConjL04: ConjLesson = {
   slug: "a2-conj-l04",
-  code: "G.32",
+  code: "G.33",
   level: "A2",
   title: "Le conditionnel de politesse",
   theory: [
@@ -1672,7 +1672,7 @@ const a2ConjL04: ConjLesson = {
 
 const a2ConjL05: ConjLesson = {
   slug: "a2-conj-l05",
-  code: "G.33",
+  code: "G.34",
   level: "A2",
   title: "L'impératif",
   theory: [
@@ -1714,7 +1714,7 @@ const a2ConjL05: ConjLesson = {
 
 const a2ConjL06: ConjLesson = {
   slug: "a2-conj-l06",
-  code: "G.42",
+  code: "G.43",
   level: "A2",
   title: "Le passé composé — avoir et être",
   theory: [
@@ -1757,7 +1757,7 @@ const a2ConjL06: ConjLesson = {
 
 const a2ConjL07: ConjLesson = {
   slug: "a2-conj-l07",
-  code: "G.43",
+  code: "G.44",
   level: "A2",
   title: "L'imparfait",
   theory: [
@@ -1791,7 +1791,7 @@ const a2ConjL07: ConjLesson = {
 
 const a2ConjL08: ConjLesson = {
   slug: "a2-conj-l08",
-  code: "G.44",
+  code: "G.45",
   level: "A2",
   title: "Le futur simple",
   theory: [

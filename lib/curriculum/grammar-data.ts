@@ -92,7 +92,7 @@ const a1GrL02: GrammarLesson = {
   slug: "a1-gr-l02",
   code: "G.6",
   level: "A1",
-  title: "La négation et l'interrogation de base",
+  title: "La négation",
   theory: [
     {
       type: "heading",
@@ -283,7 +283,7 @@ const a1GrL04: GrammarLesson = {
 
 const a1GrL05: GrammarLesson = {
   slug: "a1-gr-l05",
-  code: "G.14",
+  code: "G.15",
   level: "A1",
   title: "Le verbe avoir et les adjectifs possessifs",
   theory: [
@@ -391,7 +391,7 @@ const a1GrL06: GrammarLesson = {
 
 const a1GrL10: GrammarLesson = {
   slug: "a1-gr-l10",
-  code: "G.11",
+  code: "G.12",
   level: "A1",
   title: "L'interrogation avec les mots interrogatifs",
   theory: [
@@ -434,7 +434,7 @@ const a1GrL10: GrammarLesson = {
 
 const a1GrL11: GrammarLesson = {
   slug: "a1-gr-l11",
-  code: "G.12",
+  code: "G.13",
   level: "A1",
   title: "Les prépositions de lieu",
   theory: [
@@ -478,7 +478,7 @@ const a1GrL11: GrammarLesson = {
 
 const a1GrL14: GrammarLesson = {
   slug: "a1-gr-l14",
-  code: "G.13",
+  code: "G.14",
   level: "A1",
   title: "Les articles partitifs et la quantité",
   theory: [
@@ -529,7 +529,7 @@ const a1GrL14: GrammarLesson = {
 
 const a1GrL17: GrammarLesson = {
   slug: "a1-gr-l17",
-  code: "G.15",
+  code: "G.16",
   level: "A1",
   title: "Il y a et les prépositions dans la maison",
   theory: [
@@ -578,7 +578,7 @@ const a1GrL17: GrammarLesson = {
 
 const a1GrL18: GrammarLesson = {
   slug: "a1-gr-l18",
-  code: "G.16",
+  code: "G.17",
   level: "A1",
   title: "Les adjectifs démonstratifs",
   theory: [
@@ -619,7 +619,7 @@ const a1GrL18: GrammarLesson = {
 
 const a1GrL19: GrammarLesson = {
   slug: "a1-gr-l19",
-  code: "G.17",
+  code: "G.18",
   level: "A1",
   title: "Les adjectifs possessifs",
   theory: [
@@ -662,7 +662,7 @@ const a1GrL19: GrammarLesson = {
 
 const a1GrL22: GrammarLesson = {
   slug: "a1-gr-l22",
-  code: "G.18",
+  code: "G.19",
   level: "A1",
   title: "La fréquence",
   theory: [
@@ -702,7 +702,7 @@ const a1GrL22: GrammarLesson = {
 
 const a1GrL23: GrammarLesson = {
   slug: "a1-gr-l23",
-  code: "G.19",
+  code: "G.20",
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [
@@ -758,7 +758,7 @@ const a1GrL23: GrammarLesson = {
 
 const a1GrL24: GrammarLesson = {
   slug: "a1-gr-l24",
-  code: "G.25",
+  code: "G.26",
   level: "A1",
   title: "Le comparatif et le superlatif",
   theory: [
@@ -805,7 +805,7 @@ const a1GrL24: GrammarLesson = {
 
 const a1GrL25: GrammarLesson = {
   slug: "a1-gr-l25",
-  code: "G.26",
+  code: "G.27",
   level: "A1",
   title: "Savoir ou connaître ?",
   theory: [
@@ -1067,7 +1067,7 @@ const a1GrLImperatif: GrammarLesson = {
 
 const a2GrL07: GrammarLesson = {
   slug: "a2-gr-l07",
-  code: "G.30",
+  code: "G.31",
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [
@@ -1107,7 +1107,7 @@ const a2GrL07: GrammarLesson = {
 
 const a2GrL09: GrammarLesson = {
   slug: "a2-gr-l09",
-  code: "G.31",
+  code: "G.32",
   level: "A2",
   title: "Répondre aux questions fermées",
   theory: [
@@ -1154,7 +1154,7 @@ const a2GrL09: GrammarLesson = {
 
 const a2GrL11: GrammarLesson = {
   slug: "a2-gr-l11",
-  code: "G.35",
+  code: "G.36",
   level: "A2",
   title: "Les adjectifs — généralités",
   theory: [
@@ -1200,7 +1200,7 @@ const a2GrL11: GrammarLesson = {
 
 const a2GrL12: GrammarLesson = {
   slug: "a2-gr-l12",
-  code: "G.36",
+  code: "G.37",
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [
@@ -1244,7 +1244,7 @@ const a2GrL12: GrammarLesson = {
 
 const a2GrL18: GrammarLesson = {
   slug: "a2-gr-l18",
-  code: "G.34",
+  code: "G.35",
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [
@@ -1283,7 +1283,7 @@ const a2GrL18: GrammarLesson = {
 
 const a2GrL19: GrammarLesson = {
   slug: "a2-gr-l19",
-  code: "G.37",
+  code: "G.38",
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [
@@ -1322,7 +1322,7 @@ const a2GrL19: GrammarLesson = {
 
 const a2GrL25: GrammarLesson = {
   slug: "a2-gr-l25",
-  code: "G.38",
+  code: "G.39",
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [
@@ -1359,7 +1359,7 @@ const a2GrL25: GrammarLesson = {
 
 const a2GrL35: GrammarLesson = {
   slug: "a2-gr-l35",
-  code: "G.40",
+  code: "G.41",
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
@@ -1419,7 +1419,7 @@ const a2GrL35: GrammarLesson = {
 
 const a2GrL36: GrammarLesson = {
   slug: "a2-gr-l36",
-  code: "G.41",
+  code: "G.42",
   level: "A2",
   title: "Les pronoms Y et EN",
   theory: [
@@ -1459,7 +1459,7 @@ const a2GrL36: GrammarLesson = {
 
 const a2GrL39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "G.45",
+  code: "G.46",
   level: "A2",
   title: "Le comparatif",
   theory: [
@@ -1509,7 +1509,7 @@ const a2GrL39: GrammarLesson = {
 
 const a2GrL42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "G.39",
+  code: "G.40",
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [
@@ -1556,7 +1556,7 @@ const a2GrL42: GrammarLesson = {
 
 const a2GrL52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "G.46",
+  code: "G.47",
   level: "A2",
   title: "La cause et la conséquence",
   theory: [
@@ -1598,11 +1598,60 @@ const a2GrL52: GrammarLesson = {
   exercises: [],
 };
 
+
+const a1GrInterro: GrammarLesson = {
+  slug: "a1-gr-interro",
+  code: "G.7",
+  level: "A1",
+  title: "L'interrogation de base",
+  theory: [
+    { type: "heading", text: "Poser une question" },
+    {
+      type: "plain_list",
+      items: [
+        "Il y a plusieurs façons de poser une question en français.",
+        "La plus simple : monter la voix à la fin.",
+        "La plus courante : utiliser {a}est-ce que{/a}.",
+      ],
+    },
+    { type: "heading", text: "Est-ce que", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}Est-ce que{/a} + sujet + verbe ?",
+        "Devant une voyelle : {a}est-ce qu'{/a}",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Question"],
+      rows: [
+        ["Tu parles français.", "Est-ce que tu parles français ?"],
+        ["Il est libre.", "Est-ce qu'il est libre ?"],
+        ["Elle a cours.", "Est-ce qu'elle a cours ?"],
+        ["Vous êtes prêts.", "Est-ce que vous êtes prêts ?"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Intonation montante",
+      items: [
+        "Pour une question très simple, on monte la voix à la fin.",
+        "Tu parles français ?",
+        "Il est libre ?",
+      ],
+      noBulletItems: [0],
+    },
+  ],
+  exercises: [],
+};
+
 // ── Registry ──────────────────────────────────────────────────────────────────
 
 const ALL_GRAMMAR_LESSONS: GrammarLesson[] = [
   a1GrL01,
   a1GrL02,
+  a1GrInterro,
   a1GrL03,
   a1GrL04,
   a1GrL05,
