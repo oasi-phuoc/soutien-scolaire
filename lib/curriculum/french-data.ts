@@ -35,6 +35,7 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   t("A0", "a0-4", "A.4",  "La famille",                             "Possessifs, négation, arbre généalogique.", [...Q]),
   t("A0", "a0-5", "A.5",  "Le corps et la santé de base",           "Parties du corps, urgences, avoir mal.", [...Q]),
   t("A0", "a0-6", "A.6",  "Objets du quotidien et la classe",       "Impératif, démonstratifs, consignes.", [...Q]),
+  lesson("A0", "a0-voc-nationalites", "V.0", "Les nationalités", "Pays, nationalités masculin/féminin + verbe venir au présent.", "vocabulaire"),
 
   // ── A1 — Communication essentielle A1 (20 leçons) ─────────────── Apprendre
   // SE PRÉSENTER ET PRÉSENTER QUELQU'UN
