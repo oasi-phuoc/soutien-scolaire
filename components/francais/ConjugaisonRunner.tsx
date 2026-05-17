@@ -91,6 +91,35 @@ function renderPronounCell(text: string) {
   );
 }
 
+// ── Analog clock SVG ─────────────────────────────────────────────────────────
+
+function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
+  const cx = size / 2;
+  const cy = size / 2;
+  const r = size * 0.44;
+  const hourDeg = ((h % 12) + m / 60) * 30;
+  const minuteDeg = m * 6;
+  function toXY(deg: number, len: number) {
+    const rad = (deg - 90) * (Math.PI / 180);
+    return { x: cx + len * Math.cos(rad), y: cy + len * Math.sin(rad) };
+  }
+  const hourEnd = toXY(hourDeg, r * 0.55);
+  const minuteEnd = toXY(minuteDeg, r * 0.82);
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={cx} cy={cy} r={r} fill="var(--color-bg-primary)" stroke="var(--color-border-emphasis)" strokeWidth="1.5" />
+      {Array.from({ length: 12 }, (_, i) => {
+        const outer = toXY(i * 30, r);
+        const inner = toXY(i * 30, r * (i % 3 === 0 ? 0.8 : 0.88));
+        return <line key={i} x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y} stroke="var(--color-text-secondary)" strokeWidth={i % 3 === 0 ? 2 : 1} />;
+      })}
+      <line x1={cx} y1={cy} x2={hourEnd.x} y2={hourEnd.y} stroke="var(--color-text-primary)" strokeWidth="3" strokeLinecap="round" />
+      <line x1={cx} y1={cy} x2={minuteEnd.x} y2={minuteEnd.y} stroke="var(--color-accent-fr)" strokeWidth="2" strokeLinecap="round" />
+      <circle cx={cx} cy={cy} r="2.5" fill="var(--color-text-primary)" />
+    </svg>
+  );
+}
+
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
 function VerbToggleView({ verbs, negation, buttonCols, noArrow }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }) {
@@ -427,6 +456,22 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                 <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} noArrow={block.noArrow} />
               </div>
             );
+
+          case "clock_display": {
+            const cols = block.cols ?? 4;
+            return (
+              <div key={i} className="grid gap-4" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+                {block.clocks.map((clk, ci) => (
+                  <div key={ci} className="flex flex-col items-center gap-1">
+                    <AnalogClock h={clk.h} m={clk.m} size={80} />
+                    {clk.label && (
+                      <p className="text-center text-xs text-[var(--color-text-secondary)]">{clk.label}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            );
+          }
 
           default:
             return null;
@@ -786,6 +831,88 @@ function FillExercise({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ── Clock read exercise ───────────────────────────────────────────────────────
+
+function ClockReadExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "clock_read" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [inputs, setInputs] = useState<string[]>(
+    () => new Array(exercise.clocks.length).fill(""),
+  );
+  const [validated, setValidated] = useState(false);
+
+  function setInput(i: number, val: string) {
+    if (validated) return;
+    setInputs((prev) => {
+      const next = [...prev];
+      next[i] = val;
+      return next;
+    });
+  }
+
+  function validate() {
+    if (validated) return;
+    setValidated(true);
+    const allCorrect = exercise.clocks.every(
+      (clk, i) => normalizeAnswer(inputs[i] ?? "") === normalizeAnswer(clk.answer),
+    );
+    onValidated(allCorrect);
+  }
+
+  useEffect(() => {
+    if (validateCommand > 0) validate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {exercise.clocks.map((clk, i) => {
+          const userAnswer = inputs[i] ?? "";
+          const correct = normalizeAnswer(userAnswer) === normalizeAnswer(clk.answer);
+          return (
+            <div key={i} className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] p-2">
+              <AnalogClock h={clk.h} m={clk.m} size={76} />
+              <p className="text-xs font-bold text-[var(--color-text-secondary)]">{clk.label}</p>
+              {validated ? (
+                correct ? (
+                  <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
+                ) : (
+                  <div className="w-full text-center">
+                    <p className="text-xs line-through text-red-400">{userAnswer || "—"}</p>
+                    <p className="text-xs font-semibold text-red-600 dark:text-red-400">{clk.answer}</p>
+                  </div>
+                )
+              ) : (
+                <input
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+                  placeholder="..."
+                  className="w-full rounded border border-[var(--color-border-default)] bg-transparent px-2 py-1 text-center text-xs outline-none focus:border-[var(--color-accent-fr)]"
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -1383,6 +1510,9 @@ function ExerciseView({
       )}
       {exercise.type === "classify" && (
         <ClassifyExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "clock_read" && (
+        <ClockReadExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
     </div>
   );

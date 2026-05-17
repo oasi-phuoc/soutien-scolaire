@@ -274,7 +274,7 @@ const a1VocNationalites: VocabLesson = {
 
 const a1VocL13: VocabLesson = {
   slug: "a1-voc-l13",
-  code: "V.4",
+  code: "V.5",
   level: "A1",
   title: "Les moyens de transport",
   theory: [
@@ -369,7 +369,7 @@ const a1VocL13: VocabLesson = {
 
 const a1VocL16: VocabLesson = {
   slug: "a1-voc-l16",
-  code: "V.5",
+  code: "V.6",
   level: "A1",
   title: "La nourriture et le restaurant",
   theory: [
@@ -476,7 +476,7 @@ const a1VocL16: VocabLesson = {
 
 const a1VocL21: VocabLesson = {
   slug: "a1-voc-l21",
-  code: "V.6",
+  code: "V.7",
   level: "A1",
   title: "Les expressions de temps",
   theory: [
@@ -582,7 +582,7 @@ const a1VocL21: VocabLesson = {
 
 const a1VocL26: VocabLesson = {
   slug: "a1-voc-l26",
-  code: "V.7",
+  code: "V.8",
   level: "A1",
   title: "Le corps humain",
   theory: [
@@ -691,7 +691,7 @@ const a1VocL26: VocabLesson = {
 
 const a1VocL12: VocabLesson = {
   slug: "a1-voc-l12",
-  code: "V.8",
+  code: "V.9",
   level: "A1",
   title: "La ville et les lieux",
   theory: [
@@ -811,7 +811,7 @@ const a1VocL12: VocabLesson = {
 
 const a1VocL17: VocabLesson = {
   slug: "a1-voc-l17",
-  code: "V.9",
+  code: "V.10",
   level: "A1",
   title: "Le logement",
   theory: [
@@ -932,7 +932,7 @@ const a1VocL17: VocabLesson = {
 
 const a1VocL27: VocabLesson = {
   slug: "a1-voc-l27",
-  code: "V.10",
+  code: "V.11",
   level: "A1",
   title: "Les vêtements et les achats",
   theory: [
@@ -1054,7 +1054,7 @@ const a1VocL27: VocabLesson = {
 
 const a1VocL18: VocabLesson = {
   slug: "a1-voc-l18",
-  code: "V.11",
+  code: "V.12",
   level: "A1",
   title: "Les loisirs et le sport",
   theory: [
@@ -1175,7 +1175,7 @@ const a1VocL18: VocabLesson = {
 
 const a2VocL01: VocabLesson = {
   slug: "a2-voc-l01",
-  code: "V.12",
+  code: "V.13",
   level: "A2",
   title: "Les voyages et les transports",
   theory: [
@@ -1299,7 +1299,7 @@ const a2VocL01: VocabLesson = {
 
 const a2VocL02: VocabLesson = {
   slug: "a2-voc-l02",
-  code: "V.13",
+  code: "V.14",
   level: "A2",
   title: "La santé et le médecin",
   theory: [
@@ -1409,7 +1409,7 @@ const a2VocL02: VocabLesson = {
 
 const a2VocL03: VocabLesson = {
   slug: "a2-voc-l03",
-  code: "V.14",
+  code: "V.15",
   level: "A2",
   title: "Le monde du travail",
   theory: [
@@ -1532,7 +1532,7 @@ const a2VocL03: VocabLesson = {
 
 const a2VocL04: VocabLesson = {
   slug: "a2-voc-l04",
-  code: "V.15",
+  code: "V.16",
   level: "A2",
   title: "Les sorties et les invitations",
   theory: [
@@ -1645,7 +1645,7 @@ const a2VocL04: VocabLesson = {
 
 const a2VocL05: VocabLesson = {
   slug: "a2-voc-l05",
-  code: "V.16",
+  code: "V.17",
   level: "A2",
   title: "La cuisine et les recettes",
   theory: [
@@ -1765,7 +1765,7 @@ const a2VocL05: VocabLesson = {
 
 const a2VocL06: VocabLesson = {
   slug: "a2-voc-l06",
-  code: "V.17",
+  code: "V.18",
   level: "A2",
   title: "La famille et les relations",
   theory: [
@@ -1897,7 +1897,7 @@ const a2VocL06: VocabLesson = {
 
 const a2VocL07: VocabLesson = {
   slug: "a2-voc-l07",
-  code: "V.18",
+  code: "V.19",
   level: "A2",
   title: "Les médias et Internet",
   theory: [
@@ -2027,7 +2027,7 @@ const a2VocL07: VocabLesson = {
 
 const a2VocL08: VocabLesson = {
   slug: "a2-voc-l08",
-  code: "V.19",
+  code: "V.20",
   level: "A2",
   title: "La ville et les services",
   theory: [
@@ -2929,6 +2929,97 @@ const a1VocDescription: VocabLesson = {
   ],
 };
 
+// ── V.4 — L'heure ────────────────────────────────────────────────────────────
+
+const a1VocHeure: VocabLesson = {
+  slug: "a1-voc-heure",
+  code: "V.4",
+  level: "A1",
+  title: "L'heure",
+  theory: [
+    { type: "heading", text: "L'heure" },
+    {
+      type: "grid",
+      headers: ["Heure officielle", "Heure informelle", "Expression clé"],
+      boldFirstCol: true,
+      rows: [
+        ["8h00",  "huit heures (du matin)", "pile"],
+        ["8h15",  "huit heures et quart",   "et quart"],
+        ["8h30",  "huit heures et demie",   "et demie"],
+        ["8h45",  "neuf heures moins le quart", "moins le quart"],
+        ["12h00", "midi",   "–"],
+        ["0h00",  "minuit", "–"],
+      ],
+    },
+    {
+      type: "clock_display",
+      clocks: [
+        { h: 8, m: 0,  label: "8h00 — pile" },
+        { h: 8, m: 15, label: "8h15 — et quart" },
+        { h: 8, m: 30, label: "8h30 — et demie" },
+        { h: 8, m: 45, label: "8h45 — moins le quart" },
+      ],
+      cols: 4,
+    },
+    {
+      type: "highlight",
+      label: "Poser et répondre à la question",
+      items: [
+        "Quelle heure est-il ? / Il est quelle heure ?",
+        "Il est {a}huit heures{/a} pile.",
+        "Il est {a}midi{/a} / {a}minuit{/a}.",
+        "Il est {a}huit heures et quart{/a}.",
+        "Il est {a}huit heures et demie{/a}.",
+        "Il est {a}neuf heures moins le quart{/a}.",
+      ],
+    },
+    {
+      type: "note",
+      text: "Heure officielle (formelle) : 14h30 = quatorze heures trente. Heure informelle : 14h30 = deux heures et demie (de l'après-midi).",
+    },
+  ],
+  exercises: [
+    {
+      type: "fill",
+      title: "Exercice 1",
+      instruction: "Conjuguez les verbes commencer et terminer au présent.",
+      items: [
+        { sentence: "Le cours ___ (commencer) à neuf heures.", hint: "commencer", answer: "commence" },
+        { sentence: "Nous ___ (terminer) à midi.", hint: "terminer", answer: "terminons" },
+        { sentence: "Elle ___ (commencer) le travail à huit heures et demie.", hint: "commencer", answer: "commence" },
+        { sentence: "Vous ___ (terminer) à quelle heure ?", hint: "terminer", answer: "terminez" },
+        { sentence: "Les élèves ___ (commencer) à travailler.", hint: "commencer", answer: "commencent" },
+        { sentence: "Je ___ (terminer) le repas à treize heures.", hint: "terminer", answer: "termine" },
+        { sentence: "Tu ___ (commencer) à dix heures pile.", hint: "commencer", answer: "commences" },
+        { sentence: "Ils ___ (terminer) la réunion à dix-sept heures.", hint: "terminer", answer: "terminent" },
+      ],
+    },
+    {
+      type: "clock_read",
+      title: "Exercice 2",
+      instruction: "Lisez les heures et écrivez-les en toutes lettres.",
+      clocks: [
+        { h: 14, m: 30, label: "14h30", answer: "quatorze heures trente" },
+        { h: 18, m: 20, label: "18h20", answer: "dix-huit heures vingt" },
+        { h: 2,  m: 40, label: "2h40",  answer: "trois heures moins vingt" },
+        { h: 9,  m: 25, label: "9h25",  answer: "neuf heures vingt-cinq" },
+        { h: 0,  m: 30, label: "0h30",  answer: "minuit et demi" },
+        { h: 15, m: 10, label: "15h10", answer: "quinze heures dix" },
+        { h: 8,  m: 37, label: "8h37",  answer: "huit heures trente-sept" },
+        { h: 11, m: 0,  label: "11h00", answer: "onze heures pile" },
+        { h: 20, m: 15, label: "20h15", answer: "vingt heures et quart" },
+        { h: 12, m: 55, label: "12h55", answer: "treize heures moins cinq" },
+        { h: 22, m: 20, label: "22h20", answer: "vingt-deux heures vingt" },
+        { h: 7,  m: 15, label: "7h15",  answer: "sept heures et quart" },
+        { h: 16, m: 15, label: "16h15", answer: "seize heures quinze" },
+        { h: 19, m: 30, label: "19h30", answer: "dix-neuf heures trente" },
+        { h: 0,  m: 50, label: "0h50",  answer: "une heure moins dix" },
+        { h: 12, m: 0,  label: "12h00", answer: "midi" },
+      ],
+    },
+  ],
+};
+
 // ── Registry ──────────────────────────────────────────────────────────────────
 
 const ALL_VOCAB_LESSONS: VocabLesson[] = [
@@ -2936,6 +3027,7 @@ const ALL_VOCAB_LESSONS: VocabLesson[] = [
   a1VocSePresenter,
   a1VocFamille,
   a1VocDescription,
+  a1VocHeure,
   a1VocNationalites,
   a1VocL13,
   a1VocL16,
