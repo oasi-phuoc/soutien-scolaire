@@ -1,7 +1,7 @@
 // Grammar lesson content: types + data for all 28 A1/A2 grammar lessons.
 // Types are imported from conjugation-data to avoid duplication.
 
-import type { TheoryBlock, Exercise } from "./conjugation-data";
+import type { TheoryBlock, Exercise, VerbToggleVerb } from "./conjugation-data";
 
 export type { TheoryBlock, Exercise };
 
@@ -195,6 +195,28 @@ const a1GrL02: GrammarLesson = {
         ti: ["{a}ne{/a} ቅድሚ ሞዓዝ (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
         uk: ["{a}ne{/a} перед голосною (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
       },
+    },
+    { type: "heading", text: "La négation des verbes en -er", sub: true, trans: { en: "Negation of -er verbs", ar: "نفي أفعال -er", fa: "نفی افعال -er", ti: "ምኽሓድ ግሲያት -er", uk: "Заперечення дієслів на -er" } },
+    {
+      type: "plain_list",
+      items: ["Pour nier, on encadre le verbe avec {a}ne{/a} … {a}pas{/a} (ou {a}n'{/a} … {a}pas{/a} devant une voyelle ou h)."],
+      transItems: {
+        en: ["To negate, wrap the verb with {a}ne{/a} … {a}pas{/a} (or {a}n'{/a} … {a}pas{/a} before a vowel or h)."],
+        ar: ["للنفي، ضع الفعل بين {a}ne{/a} … {a}pas{/a} (أو {a}n'{/a} … {a}pas{/a} قبل حرف علة أو h)."],
+        fa: ["برای نفی، فعل را بین {a}ne{/a} … {a}pas{/a} قرار دهید (یا {a}n'{/a} … {a}pas{/a} قبل از حرف صدادار یا h)."],
+        ti: ["ንምኽሓድ ግሲ ብ{a}ne{/a} … {a}pas{/a} ወሰን (ወይ {a}n'{/a} … {a}pas{/a} ቅድሚ ሞዓዝ ወይ h)."],
+        uk: ["Для заперечення дієслово обрамляється {a}ne{/a} … {a}pas{/a} (або {a}n'{/a} … {a}pas{/a} перед голосною або h)."],
+      },
+    },
+    {
+      type: "verb_toggle",
+      negation: true,
+      verbs: [
+        { infinitive: "parler", radical: "parl", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "aimer", radical: "aim", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "écouter", radical: "écout", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "habiter", radical: "habit", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+      ] as VerbToggleVerb[],
     },
   ],
   exercises: [],
@@ -437,16 +459,16 @@ const a1GrL04: GrammarLesson = {
       label: "Attention",
       transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
       items: [
-        "Devant une voyelle ou un {a}h{/a}, {a}le{/a} et {a}la{/a} deviennent {a}l'{/a}.",
+        "Devant une {b}voyelle{/b} ou un {b}h{/b}, {a}le{/a} et {a}la{/a} deviennent {a}l'{/a}.",
         "{a}le{/a} → l'arbre",
         "{a}la{/a} → l'école",
       ],
       transItems: {
-        en: ["Before a vowel or {a}h{/a}, {a}le{/a} and {a}la{/a} become {a}l'{/a}.", "{a}le{/a} → l'arbre (tree)", "{a}la{/a} → l'école (school)"],
-        ar: ["قبل حرف علة أو {a}h{/a}، يصبح {a}le{/a} و{a}la{/a} {a}l'{/a}.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
-        fa: ["قبل از حرف صدادار یا {a}h{/a}، {a}le{/a} و {a}la{/a} به {a}l'{/a} تبدیل می‌شوند.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
-        ti: ["ቅድሚ ሞዓዝ ወይ {a}h{/a}፣ {a}le{/a} ን {a}la{/a} {a}l'{/a} ይኾናን.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
-        uk: ["Перед голосним або {a}h{/a}, {a}le{/a} і {a}la{/a} стають {a}l'{/a}.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
+        en: ["Before a {b}vowel{/b} or {b}h{/b}, {a}le{/a} and {a}la{/a} become {a}l'{/a}.", "{a}le{/a} → l'arbre (tree)", "{a}la{/a} → l'école (school)"],
+        ar: ["قبل {b}حرف علة{/b} أو {b}h{/b}، يصبح {a}le{/a} و{a}la{/a} {a}l'{/a}.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
+        fa: ["قبل از {b}حرف صدادار{/b} یا {b}h{/b}، {a}le{/a} و {a}la{/a} به {a}l'{/a} تبدیل می‌شوند.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
+        ti: ["ቅድሚ {b}ሞዓዝ{/b} ወይ {b}h{/b}፣ {a}le{/a} ን {a}la{/a} {a}l'{/a} ይኾናን.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
+        uk: ["Перед {b}голосним{/b} або {b}h{/b}, {a}le{/a} і {a}la{/a} стають {a}l'{/a}.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
       },
       noBulletItems: [0],
       inlineArrows: true,
