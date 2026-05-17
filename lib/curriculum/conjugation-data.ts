@@ -6,6 +6,12 @@ export type ConjugTable = { verb: string; rows: ConjugRow[]; accentForms?: boole
 export type Trans = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
 type TransList = Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[]>>;
 
+export type VerbToggleVerb = {
+  infinitive: string;
+  radical: string;
+  rows: Array<{ pronoun: string; ending: string }>;
+};
+
 export type TheoryBlock =
   | { type: "heading"; text: string; trans?: Trans; sub?: boolean; accent?: boolean }
   | { type: "table"; tables: ConjugTable[] }
@@ -14,7 +20,8 @@ export type TheoryBlock =
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
-  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] };
+  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
+  | { type: "verb_toggle"; verbs: VerbToggleVerb[] };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -1018,35 +1025,62 @@ const a1ConjL07: ConjLesson = {
         "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Ils font partie du 1er groupe.",
       ],
     },
-    {
-      type: "highlight",
-      label: "Exemples :",
-      items: ["parler", "aimer", "travailler", "regarder"],
-    },
     { type: "heading", text: "Comment former le verbe ?" },
     {
       type: "plain_list",
       items: [
         "On prend le verbe et on enlève {a}-er{/a}.",
-        "parler → parl",
-        "aimer → aim",
-        "travailler → travaill",
       ],
     },
     {
-      type: "table",
-      tables: [
+      type: "verb_toggle",
+      verbs: [
         {
-          verb: "parler",
-          verbBold: false,
-          accentForms: true,
+          infinitive: "parler",
+          radical: "parl",
           rows: [
-            { pronoun: "je", form: "parle" },
-            { pronoun: "tu", form: "parles" },
-            { pronoun: "il / elle / on", form: "parle" },
-            { pronoun: "nous", form: "parlons" },
-            { pronoun: "vous", form: "parlez" },
-            { pronoun: "ils / elles", form: "parlent" },
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "aimer",
+          radical: "aim",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "écouter",
+          radical: "écout",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "habiter",
+          radical: "habit",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
           ],
         },
       ],
@@ -1056,9 +1090,9 @@ const a1ConjL07: ConjLesson = {
       label: "Attention à « je »",
       items: [
         "Quand le verbe commence par une voyelle ou un {a}h{/a}, {a}je{/a} devient {a}j'{/a}.",
-        "j'aime",
-        "j'écoute",
-        "j'habite",
+        "j{s}e{/s} aime → j'aime",
+        "j{s}e{/s} écoute → j'écoute",
+        "j{s}e{/s} habite → j'habite",
       ],
       noBulletItems: [0],
     },

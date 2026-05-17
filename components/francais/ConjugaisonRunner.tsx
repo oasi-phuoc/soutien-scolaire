@@ -4,6 +4,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type {
   TheoryBlock,
+  VerbToggleVerb,
   Exercise,
   QcmItem,
   FillItem,
@@ -64,7 +65,7 @@ function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
           return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
         }
         if (strikeMatch) {
-          return <span key={i} className="line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
+          return <span key={i} className="font-semibold line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
         }
         return <React.Fragment key={i}>{useArrow ? renderArrow(part) : part}</React.Fragment>;
       })}
@@ -83,6 +84,79 @@ function renderPronounCell(text: string) {
       <br />
       <span className="text-[var(--color-text-secondary)]">{rest}</span>
     </>
+  );
+}
+
+// ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
+
+function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
+  const [selectedIdx, setSelectedIdx] = useState(0);
+  const verb = verbs[selectedIdx]!;
+  const vowelRe = /[aeiouàâæéèêëîïôœùûüÿ]/i;
+
+  function renderRadical(radical: string) {
+    const last = radical.slice(-1);
+    if (last && vowelRe.test(last)) {
+      return (
+        <>
+          {radical.slice(0, -1)}
+          <span className="font-semibold text-[var(--color-accent-fr)]">{last}</span>
+        </>
+      );
+    }
+    return <>{radical}</>;
+  }
+
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2">
+        {verbs.map((v, i) => (
+          <button
+            key={i}
+            onClick={() => setSelectedIdx(i)}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              i === selectedIdx
+                ? "bg-[var(--color-accent-fr)] text-white"
+                : "border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]"
+            }`}
+          >
+            {v.infinitive}
+          </button>
+        ))}
+      </div>
+      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="bg-[var(--color-accent-fr)]/15">
+              <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
+                Pronom
+              </th>
+              <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
+                → {renderRadical(verb.radical)}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {verb.rows.map((row, ri) => (
+              <tr
+                key={ri}
+                className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]"}
+              >
+                <td className="w-36 px-3 py-2">
+                  <span className="text-[var(--color-text-secondary)]">{row.pronoun}</span>
+                  <br />
+                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{verb.infinitive}</span>
+                </td>
+                <td className="px-3 py-2">
+                  <span className="text-[var(--color-text-primary)]">{verb.radical}</span>
+                  <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -318,6 +392,13 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
               </div>
             );
           }
+
+          case "verb_toggle":
+            return (
+              <div key={i}>
+                <VerbToggleView verbs={block.verbs} />
+              </div>
+            );
 
           default:
             return null;
