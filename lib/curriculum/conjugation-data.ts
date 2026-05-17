@@ -116,6 +116,7 @@ const a1ConjL00: ConjLesson = {
       type: "highlight",
       label: "ON",
       noFirstBullet: true,
+      inlineArrows: true,
       items: [
         "On utilise « on » pour représenter une ou plusieurs personnes (= nous).",
         "Il est très utilisé à l'oral familier.",
@@ -155,17 +156,16 @@ const a1ConjL00: ConjLesson = {
       noFirstBullet: true,
       inlineArrows: true,
       items: [
-        "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes.",
-        "Même s'il y a beaucoup de femmes et un seul homme.",
+        "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes. Même s'il y a beaucoup de femmes et un seul homme.",
         "Ali ♂ et Alona ♀ → ils",
       ],
       transLabel: { en: "ILS", ar: "ILS", fa: "ILS", ti: "ILS", uk: "ILS" },
       transItems: {
-        en: ["«Ils» is used for a mixed group of women and men.", "Even if there are many women and only one man.", "Ali ♂ and Alona ♀ → ils"],
-        ar: ["«ils» يُستخدم للمجموعة المختلطة من الرجال والنساء.", "حتى لو كان هناك نساء كثيرات ورجل واحد.", "علي ♂ وألونا ♀ → ils"],
-        fa: ["از «ils» برای گروه مختلط زنان و مردان استفاده می‌شود.", "حتی اگر زنان زیاد و یک مرد باشد.", "علی ♂ و آلونا ♀ → ils"],
-        ti: ["«ils» ንዝሓወሰ ጉጅለ ደቂ ኣንስትዮን ደቂ ተባዕትዮን ትጥቀሙሉ.", "ብዙሕ ኣዋልድ ሓደ ወዲ እኳ ተዀኑ.", "ዓሊ ♂ ን ኣሎና ♀ → ils"],
-        uk: ["«Ils» використовується для змішаної групи жінок і чоловіків.", "Навіть якщо багато жінок і лише один чоловік.", "Алі ♂ і Алона ♀ → ils"],
+        en: ["«Ils» is used for a mixed group of women and men. Even if there are many women and only one man.", "Ali ♂ and Alona ♀ → ils"],
+        ar: ["«ils» يُستخدم للمجموعة المختلطة من الرجال والنساء. حتى لو كان هناك نساء كثيرات ورجل واحد.", "علي ♂ وألونا ♀ → ils"],
+        fa: ["از «ils» برای گروه مختلط زنان و مردان استفاده می‌شود. حتی اگر زنان زیاد و یک مرد باشد.", "علی ♂ و آلونا ♀ → ils"],
+        ti: ["«ils» ንዝሓወሰ ጉጅለ ደቂ ኣንስትዮን ደቂ ተባዕትዮን ትጥቀሙሉ. ብዙሕ ኣዋልድ ሓደ ወዲ እኳ ተዀኑ.", "ዓሊ ♂ ን ኣሎና ♀ → ils"],
+        uk: ["«Ils» використовується для змішаної групи жінок і чоловіків. Навіть якщо багато жінок і лише один чоловік.", "Алі ♂ і Алона ♀ → ils"],
       },
     },
     {
