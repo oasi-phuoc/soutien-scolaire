@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
+import { getAprendreLesson } from "@/lib/curriculum/apprendre-data";
+import { ConjugaisonRunner } from "@/components/francais/ConjugaisonRunner";
 import { PedagogicMarkerRow } from "@/components/PedagogicMarkerBadge";
 import type { CompetenceCode } from "@/lib/curriculum/types";
 
@@ -18,6 +20,17 @@ export default async function FrenchThemePage({ params }: Props) {
   const th = getFrenchThemeBySlug(slug);
   if (!th) notFound();
 
+  // If a detailed lesson exists, render it with the interactive runner
+  const aprendreLesson = getAprendreLesson(slug);
+  if (aprendreLesson) {
+    return (
+      <main className="flex min-h-screen flex-col">
+        <ConjugaisonRunner lesson={aprendreLesson} subject="Apprendre" />
+      </main>
+    );
+  }
+
+  // Fallback: competence overview page for lessons without detailed content yet
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <div className="flex items-center gap-3">

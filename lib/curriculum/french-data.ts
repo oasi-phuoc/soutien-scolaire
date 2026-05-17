@@ -28,6 +28,7 @@ function lesson(
 /** Parcours complet français. */
 export const FRENCH_THEMES: FrenchTheme[] = [
   // ── A0 — Débutant absolu ─────────────────────────────────────── Apprendre
+  t("A0", "a0-se-presenter", "A.0", "Se présenter",                 "Mon identité, mon âge, ma nationalité, mon domicile, ma profession et ma famille.", [...Q]),
   t("A0", "a0-1", "A.1",  "Salutations et politesse",              "Présentations, tutoiement / vouvoiement.", [...Q]),
   t("A0", "a0-2", "A.2",  "Chiffres, nombres et âge (0–100)",      "Avoir, nombres, identité orale.", [...Q]),
   t("A0", "a0-3", "A.3",  "Couleurs, formes et descriptions simples", "Être, adjectifs, accord des couleurs.", [...Q]),
