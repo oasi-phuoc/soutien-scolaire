@@ -385,77 +385,118 @@ function QcmExercise({
           </p>
         )}
       </div>
-      {items.map((item: QcmItem, i) => (
-        <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
-          <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
-            <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
-          </p>
-          {exercise.toggleChoices ? (
-            <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
-              {item.choices.map((choice, ci) => {
-                const isSelected = selected[i] === ci;
-                const isCorrect = ci === item.correctIdx;
-                let cls = `${exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
-                if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
-                if (!validated) {
-                  cls += isSelected
-                    ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-                    : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                } else {
-                  if (isSelected) {
-                    cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
-                  } else if (isCorrect) {
-                    cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
-                  } else {
-                    cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
-                  }
-                }
-                return (
-                  <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
-                    {choice}
-                  </button>
-                );
-              })}
+      {items.map((item: QcmItem, i) => {
+        const hasInlineToggle = exercise.toggleChoices && item.sentence.includes(" → ");
+        const arrowPos = hasInlineToggle ? item.sentence.indexOf(" → ") : -1;
+        const sentLine1 = hasInlineToggle ? item.sentence.slice(0, arrowPos) : item.sentence;
+        const sentLine2 = hasInlineToggle ? item.sentence.slice(arrowPos + 3) : "";
+
+        const mkToggleBtn = (choice: string, ci: number, fixed: boolean) => {
+          const isSelected = selected[i] === ci;
+          const isCorrect = ci === item.correctIdx;
+          let cls = `${fixed ? "w-14 py-1.5" : exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
+          if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
+          if (!validated) {
+            cls += isSelected
+              ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+              : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+          } else {
+            if (isSelected) {
+              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+            } else if (isCorrect) {
+              cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+            } else {
+              cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+            }
+          }
+          return (
+            <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
+              {choice}
+            </button>
+          );
+        };
+
+        if (hasInlineToggle) {
+          const inlineGroup = (
+            <span className="inline-flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] align-middle">
+              {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
+            </span>
+          );
+          const line2Parts = sentLine2.split("___");
+          const renderLine2 =
+            line2Parts.length > 1 ? (
+              <>
+                {line2Parts.map((part, pi, arr) => (
+                  <React.Fragment key={pi}>
+                    {part}
+                    {pi < arr.length - 1 && inlineGroup}
+                  </React.Fragment>
+                ))}
+              </>
+            ) : (
+              <>{sentLine2} {inlineGroup}</>
+            );
+          return (
+            <div key={i} className="space-y-1">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {sentLine1}
+              </p>
+              <p className="ml-4 text-sm font-medium leading-loose text-[var(--color-text-primary)]">
+                → {renderLine2}
+              </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-3 gap-2">
-              {item.choices.map((choice, ci) => {
-                const isSelected = selected[i] === ci;
-                const isCorrect = ci === item.correctIdx;
-                let cls =
-                  "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
-                if (!validated) {
-                  cls += isSelected
-                    ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                } else {
-                  if (isSelected) {
-                    cls +=
-                      "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-                  } else if (isCorrect) {
-                    cls +=
-                      "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+          );
+        }
+
+        return (
+          <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
+            <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
+            </p>
+            {exercise.toggleChoices ? (
+              <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+                {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                {item.choices.map((choice, ci) => {
+                  const isSelected = selected[i] === ci;
+                  const isCorrect = ci === item.correctIdx;
+                  let cls =
+                    "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
+                  if (!validated) {
+                    cls += isSelected
+                      ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                   } else {
-                    cls +=
-                      "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                    if (isSelected) {
+                      cls +=
+                        "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                    } else if (isCorrect) {
+                      cls +=
+                        "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                    } else {
+                      cls +=
+                        "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                    }
                   }
-                }
-                return (
-                  <button
-                    key={ci}
-                    type="button"
-                    className={cls}
-                    onClick={() => select(i, ci)}
-                    disabled={validated}
-                  >
-                    {choice}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      ))}
+                  return (
+                    <button
+                      key={ci}
+                      type="button"
+                      className={cls}
+                      onClick={() => select(i, ci)}
+                      disabled={validated}
+                    >
+                      {choice}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -557,36 +598,61 @@ function FillExercise({
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
         const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
-        const parts = item.sentence.split("___");
+
+        // Detect trailing parenthetical hint: "sentence text (hint)"
+        const parenMatch = item.sentence.match(/^(.*?)\s+(\([^)]+\))\s*$/);
+        const rawSentence = parenMatch ? parenMatch[1]! : item.sentence;
+        const parenHint = parenMatch ? parenMatch[2]! : null;
+
+        // Detect arrow split (only when no parenthetical): "before → after"
+        const arrowIdx = rawSentence.indexOf(" → ");
+        const sentLine1 = arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
+        const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
+
+        const inputEl = validated && !correct ? (
+          <span className="inline-flex flex-col items-center justify-center border-b-2 border-red-400 mx-1 min-w-[4rem] leading-tight align-bottom">
+            <span className="text-[10px] line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
+            <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
+          </span>
+        ) : (
+          <input
+            type="text"
+            value={userAnswer}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+            disabled={validated}
+            className={`inline-block w-28 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+              validated
+                ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
+                : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
+            }`}
+          />
+        );
+
+        const renderParts = (s: string) =>
+          s.split("___").map((part, pi, arr) => (
+            <React.Fragment key={pi}>
+              {part}
+              {pi < arr.length - 1 && inputEl}
+            </React.Fragment>
+          ));
+
         return (
-          <div key={i}>
+          <div key={i} className="space-y-0.5">
             <p className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
-              {parts.map((part, pi) => (
-                <React.Fragment key={pi}>
-                  {part}
-                  {pi < parts.length - 1 && (
-                    validated && !correct ? (
-                      <span className="inline-flex flex-col items-center justify-center border-b-2 border-red-400 mx-1 min-w-[4rem] leading-tight align-bottom">
-                        <span className="text-[10px] line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
-                        <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
-                      </span>
-                    ) : (
-                      <input
-                        type="text"
-                        value={userAnswer}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
-                        disabled={validated}
-                        className={`inline-block w-20 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
-                          validated
-                            ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
-                            : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
-                        }`}
-                      />
-                    )
-                  )}
-                </React.Fragment>
-              ))}
+              {renderParts(sentLine1)}
+              {parenHint && (
+                <>
+                  <br />
+                  <span className="ml-4 text-xs text-[var(--color-text-secondary)]">{parenHint}</span>
+                </>
+              )}
+              {sentLine2 !== null && (
+                <>
+                  <br />
+                  <span className="ml-4">{renderParts(sentLine2)}</span>
+                </>
+              )}
             </p>
           </div>
         );
