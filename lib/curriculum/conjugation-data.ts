@@ -132,10 +132,9 @@ const a1ConjL00: ConjLesson = {
     {
       type: "highlight",
       label: "VOUS",
-      noFirstBullet: true,
+      noBulletItems: [0],
       items: [
-        "On utilise « vous » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur).",
-        "On appelle cela la forme de politesse.",
+        "On utilise « vous » quand on ne connaît pas la personne ou que le statut est différent (élève–professeur). On appelle cela la forme de politesse.",
         "Madame, vous allez bien ?",
       ],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", ti: "VOUS", uk: "VOUS" },
@@ -151,6 +150,7 @@ const a1ConjL00: ConjLesson = {
       type: "highlight",
       label: "ILS",
       noFirstBullet: true,
+      inlineArrows: true,
       items: [
         "On utilise « ils » quand il y a un groupe mixte de femmes et d'hommes.",
         "Même s'il y a beaucoup de femmes et un seul homme.",
