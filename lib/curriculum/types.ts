@@ -83,4 +83,6 @@ export type StoredProgressV1 = {
   submoduleStates?: Record<string, ModuleProgressState>;
   /** Score brut des évaluations par sous-module. */
   submoduleScores?: Record<string, { score: number; max: number; grade: number }>;
+  /** Leçons français complétées (slug → "completed"). */
+  frenchLessons?: Record<string, "completed">;
 };

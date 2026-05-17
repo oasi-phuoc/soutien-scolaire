@@ -52,6 +52,26 @@ function renderArrow(text: string) {
   );
 }
 
+function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
+  const parts = text.split(/(\{[as]\}.*?\{\/[as]\})/);
+  if (parts.length === 1) return useArrow ? renderArrow(text) : <>{text}</>;
+  return (
+    <>
+      {parts.map((part, i) => {
+        const accentMatch = part.match(/^\{a\}([\s\S]*?)\{\/a\}$/);
+        const strikeMatch = part.match(/^\{s\}([\s\S]*?)\{\/s\}$/);
+        if (accentMatch) {
+          return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
+        }
+        if (strikeMatch) {
+          return <span key={i} className="line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
+        }
+        return <React.Fragment key={i}>{useArrow ? renderArrow(part) : part}</React.Fragment>;
+      })}
+    </>
+  );
+}
+
 function renderPronounCell(text: string) {
   const idx = text.indexOf(" → ");
   if (idx === -1) return <span className="font-bold text-[var(--color-accent-fr)]">{text}</span>;
@@ -76,7 +96,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "heading":
             return (
               <div key={i} className={block.trans?.[pivot as keyof typeof block.trans] ? "space-y-0.5" : ""}>
-                <h2 className={`font-bold text-[var(--color-text-primary)] ${block.sub ? "text-base" : "text-lg"}`}>
+                <h2 className={`font-bold ${block.sub ? "text-base" : "text-lg"} ${block.accent ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
                   {block.text}
                 </h2>
                 {showTrans && block.trans?.[pivot as keyof typeof block.trans] && (
@@ -136,7 +156,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
               <div key={i} className="space-y-2">
                 <p className="flex gap-2 text-sm text-[var(--color-text-primary)]">
                   <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
-                  <span>{block.text}</span>
+                  <span>{renderInlineMarkup(block.text)}</span>
                 </p>
                 {block.examples && block.examples.length > 0 && (
                   <div className="ml-5 space-y-1">
@@ -199,7 +219,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {block.headers.map((h, hi) => (
                           <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
                             {h}
-                            {block.pronounGrid && showTrans && transH?.[hi] && (
+                            {showTrans && transH?.[hi] && (
                               <span className="block text-[10px] font-normal normal-case tracking-normal text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                                 {transH[hi]}
                               </span>
@@ -212,13 +232,13 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                       {block.rows.map((row, ri) => (
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                           {row.map((cell, ci) => {
-                            const transCell = block.pronounGrid && showTrans && transR ? transR[ri]?.[ci] : undefined;
+                            const transCell = showTrans && transR ? transR[ri]?.[ci] : undefined;
                             const transText = transCell
-                              ? (transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
+                              ? (block.pronounGrid && transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
                               : undefined;
                             return (
-                              <td key={ci} className="px-3 py-2 text-sm text-[var(--color-text-primary)]">
-                                {block.pronounGrid ? renderPronounCell(cell) : renderArrow(cell)}
+                              <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)]${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`}>
+                                {block.pronounGrid ? renderPronounCell(cell) : renderInlineMarkup(cell)}
                                 {transText && (
                                   <span className="block text-xs text-[var(--color-text-secondary)] mt-0.5" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                                     {transText}
@@ -232,36 +252,6 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     </tbody>
                   </table>
                 </div>
-                {showTrans && (transH || transR) && !block.pronounGrid && (
-                  <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]/60" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                    <table className="w-full text-sm">
-                      {transH && (
-                        <thead>
-                          <tr className="bg-[var(--color-accent-fr)]/8">
-                            {transH.map((h, hi) => (
-                              <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-text-secondary)]">
-                                {h}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                      )}
-                      {transR && (
-                        <tbody>
-                          {transR.map((row, ri) => (
-                            <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
-                              {row.map((cell, ci) => (
-                                <td key={ci} className="px-3 py-2 text-xs text-[var(--color-text-secondary)]">
-                                  {renderArrow(cell)}
-                                </td>
-                              ))}
-                            </tr>
-                          ))}
-                        </tbody>
-                      )}
-                    </table>
-                  </div>
-                )}
               </div>
             );
           }
@@ -279,7 +269,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     <li key={ii} className="space-y-0.5">
                       <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                         {ii > 0 && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
-                        <span>{renderArrow(item)}</span>
+                        <span>{renderInlineMarkup(item)}</span>
                       </div>
                       {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
                         <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${ii > 0 ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
@@ -308,12 +298,12 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                 </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {block.items.map((item, ii) => {
-                    const skipBullet = block.noFirstBullet && !item.includes(" → ");
+                    const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-text-secondary)]">•</span>}
-                          <span>{renderArrow(item)}</span>
+                          {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
+                          <span>{renderInlineMarkup(item, !block.inlineArrows)}</span>
                         </div>
                         {showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
@@ -360,11 +350,14 @@ function QcmExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const [items] = useState<typeof exercise.items>(() => {
-    if (exercise.pool && exercise.pool.length > 0) {
-      const size = exercise.poolSize ?? 5;
-      return shuffle(exercise.pool).slice(0, size);
-    }
-    return exercise.items;
+    const raw = exercise.pool && exercise.pool.length > 0
+      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5)
+      : exercise.items;
+    return raw.map(item => {
+      const indexed = item.choices.map((c, i) => ({ c, isCorrect: i === item.correctIdx }));
+      const sh = shuffle(indexed);
+      return { ...item, choices: sh.map(x => x.c), correctIdx: sh.findIndex(x => x.isCorrect) };
+    });
   });
   const [selected, setSelected] = useState<(number | null)[]>(
     () => new Array(items.length).fill(null),
@@ -389,93 +382,141 @@ function QcmExercise({
     onValidated(allCorrect);
   }
 
-  const allAnswered = selected.every((s: number | null) => s !== null);
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allAnswered && !validated);
-  }, [allAnswered, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
+
+  const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
+  const isRtl = pivot === "ar" || pivot === "fa";
 
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        {exercise.instruction}
-      </p>
-      {items.map((item: QcmItem, i) => (
-        <div key={i} className="space-y-2">
-          <p className="text-sm font-medium text-[var(--color-text-primary)]">
-            {i + 1}. {item.sentence}
+      <div>
+        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
+          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
           </p>
-          {exercise.toggleChoices ? (
-            <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
-              {item.choices.map((choice, ci) => {
-                const isSelected = selected[i] === ci;
-                const isCorrect = ci === item.correctIdx;
-                let cls = "flex-1 py-2.5 text-sm font-medium text-center transition-colors ";
-                if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
-                if (!validated) {
-                  cls += isSelected
-                    ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
-                    : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                } else {
-                  if (isCorrect) {
-                    cls += "bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400";
-                  } else if (isSelected && !isCorrect) {
-                    cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
-                  } else {
-                    cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
-                  }
-                }
-                return (
-                  <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
-                    {choice}
-                  </button>
-                );
-              })}
+        )}
+      </div>
+      {items.map((item: QcmItem, i) => {
+        const hasInlineToggle = exercise.toggleChoices && item.sentence.includes(" → ");
+        const arrowPos = hasInlineToggle ? item.sentence.indexOf(" → ") : -1;
+        const sentLine1 = hasInlineToggle ? item.sentence.slice(0, arrowPos) : item.sentence;
+        const sentLine2 = hasInlineToggle ? item.sentence.slice(arrowPos + 3) : "";
+
+        const mkToggleBtn = (choice: string, ci: number, fixed: boolean) => {
+          const isSelected = selected[i] === ci;
+          const isCorrect = ci === item.correctIdx;
+          let cls = `${fixed ? "w-14 py-1.5" : exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
+          if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
+          if (!validated) {
+            cls += isSelected
+              ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+              : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+          } else {
+            if (isSelected) {
+              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+            } else if (isCorrect) {
+              cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+            } else {
+              cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+            }
+          }
+          return (
+            <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
+              {choice}
+            </button>
+          );
+        };
+
+        if (hasInlineToggle) {
+          const inlineGroup = (
+            <span className="inline-flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] align-middle">
+              {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
+            </span>
+          );
+          const line2Parts = sentLine2.split("___");
+          const renderLine2 =
+            line2Parts.length > 1 ? (
+              <>
+                {line2Parts.map((part, pi, arr) => (
+                  <React.Fragment key={pi}>
+                    {part}
+                    {pi < arr.length - 1 && inlineGroup}
+                  </React.Fragment>
+                ))}
+              </>
+            ) : (
+              <>{sentLine2} {inlineGroup}</>
+            );
+          return (
+            <div key={i} className="space-y-1">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {sentLine1}
+              </p>
+              <p className="ml-4 text-sm font-medium leading-loose text-[var(--color-text-primary)]">
+                → {renderLine2}
+              </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-3 gap-2">
-              {item.choices.map((choice, ci) => {
-                const isSelected = selected[i] === ci;
-                const isCorrect = ci === item.correctIdx;
-                let cls =
-                  "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
-                if (!validated) {
-                  cls += isSelected
-                    ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-                } else {
-                  if (isCorrect) {
-                    cls +=
-                      "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700";
-                  } else if (isSelected && !isCorrect) {
-                    cls +=
-                      "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+          );
+        }
+
+        return (
+          <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
+            <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
+            </p>
+            {exercise.toggleChoices ? (
+              <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+                {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
+              </div>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                {item.choices.map((choice, ci) => {
+                  const isSelected = selected[i] === ci;
+                  const isCorrect = ci === item.correctIdx;
+                  let cls =
+                    "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
+                  if (!validated) {
+                    cls += isSelected
+                      ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                   } else {
-                    cls +=
-                      "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                    if (isSelected) {
+                      cls +=
+                        "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                    } else if (isCorrect) {
+                      cls +=
+                        "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                    } else {
+                      cls +=
+                        "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                    }
                   }
-                }
-                return (
-                  <button
-                    key={ci}
-                    type="button"
-                    className={cls}
-                    onClick={() => select(i, ci)}
-                    disabled={validated}
-                  >
-                    {choice}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-        </div>
-      ))}
+                  return (
+                    <button
+                      key={ci}
+                      type="button"
+                      className={cls}
+                      onClick={() => select(i, ci)}
+                      disabled={validated}
+                    >
+                      {choice}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -551,50 +592,88 @@ function FillExercise({
     onValidated(allCorrect);
   }
 
-  const allFilled = inputs.every((s: string) => s.trim() !== "");
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
-  }, [allFilled, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
+
+  const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
+  const isRtl = pivot === "ar" || pivot === "fa";
 
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        {exercise.instruction}
-      </p>
+      <div>
+        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
+          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
+          </p>
+        )}
+      </div>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";
-        const correct =
-          normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+        const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+
+        // Detect trailing parenthetical hint: "sentence text (hint)"
+        const parenMatch = item.sentence.match(/^(.*?)\s+(\([^)]+\))\s*$/);
+        const rawSentence = parenMatch ? parenMatch[1]! : item.sentence;
+        const parenHint = parenMatch ? parenMatch[2]! : null;
+
+        // Detect arrow split (only when no parenthetical): "before → after"
+        const arrowIdx = rawSentence.indexOf(" → ");
+        const sentLine1 = arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
+        const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
+
+        const inputEl = validated && !correct ? (
+          <span className="inline-flex items-center justify-center gap-1 border-b-2 border-red-400 mx-1 w-28 align-bottom">
+            <span className="text-xs line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
+            <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
+          </span>
+        ) : (
+          <input
+            type="text"
+            value={userAnswer}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+            disabled={validated}
+            className={`inline-block w-28 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
+              validated
+                ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
+                : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
+            }`}
+          />
+        );
+
+        const renderParts = (s: string) =>
+          s.split("___").map((part, pi, arr) => (
+            <React.Fragment key={pi}>
+              {part}
+              {pi < arr.length - 1 && inputEl}
+            </React.Fragment>
+          ));
+
         return (
-          <div key={i} className="space-y-2">
-            <p className="text-sm font-medium text-[var(--color-text-primary)]">
-              {i + 1}. {renderFillSentence(item.sentence)}
+          <div key={i} className="space-y-0.5">
+            <p className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+              {renderParts(sentLine1)}
+              {parenHint && (
+                <>
+                  <br />
+                  <span className="ml-4 text-xs text-[var(--color-text-secondary)]">{parenHint}</span>
+                </>
+              )}
+              {sentLine2 !== null && (
+                <>
+                  <br />
+                  <span className="ml-4">{renderParts(sentLine2)}</span>
+                </>
+              )}
             </p>
-            <input
-              type="text"
-              value={userAnswer}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
-              disabled={validated}
-              placeholder="Votre réponse…"
-              className={`w-full rounded-[var(--radius-md)] border px-3 py-2.5 text-sm outline-none transition-colors focus:ring-2 focus:ring-[var(--color-accent-fr)]/30 ${
-                validated
-                  ? correct
-                    ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
-                    : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
-              }`}
-            />
-            {validated && !correct && (
-              <p className="text-xs text-emerald-600 dark:text-emerald-400">
-                Réponse correcte : <strong>{item.answer}</strong>
-              </p>
-            )}
           </div>
         );
       })}
@@ -654,16 +733,14 @@ function MatchExercise({
     onValidated(allCorrect);
   }
 
-  const allConnected = exercise.pairs.every((_, li) => connections.has(li));
-
   useEffect(() => {
     if (validateCommand > 0) validate();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allConnected && !validated);
-  }, [allConnected, validated, onCanValidateChange]);
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
 
   return (
     <div className="space-y-5">
@@ -690,10 +767,10 @@ function MatchExercise({
               "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ";
             if (validated) {
               cls += isConnected
-                ? isCorrect
-                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
-                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : isCorrect
+                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
               cls += isSelected
                 ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -734,10 +811,10 @@ function MatchExercise({
               "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors ";
             if (validated) {
               cls += isTargetted
-                ? isCorrect
-                  ? "border-emerald-400 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400"
-                  : "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
+                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                : isCorrect
+                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
             } else {
               cls +=
                 selectedLeft !== null
@@ -784,6 +861,44 @@ function MatchExercise({
   );
 }
 
+// ── Sentence validation (free, client-side) ───────────────────────────────────
+
+type SentenceCheck = { label: string; ok: boolean };
+
+function checkSentence(text: string, verb?: "être" | "avoir"): SentenceCheck[] {
+  const s = text.trim();
+  if (!s) return [];
+
+  const checks: SentenceCheck[] = [];
+  checks.push({ label: "Majuscule", ok: /^[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜÇ«"']/.test(s) });
+  checks.push({ label: "Point final", ok: /[.!?]$/.test(s) });
+
+  if (verb === "être") {
+    const forms = [
+      /\bje\b.{0,10}\bsuis\b/i,
+      /\btu\b.{0,10}\bes\b/i,
+      /\b(?:il|elle|on)\b.{0,10}\best\b/i,
+      /\bnous\b.{0,10}\bsommes\b/i,
+      /\bvous\b.{0,10}\bêtes\b/i,
+      /\b(?:ils|elles)\b.{0,10}\bsont\b/i,
+    ];
+    checks.push({ label: "Verbe être", ok: forms.some(r => r.test(s)) });
+  } else if (verb === "avoir") {
+    const forms = [
+      /j'ai\b/i,
+      /\bje\b.{0,10}\bai\b/i,
+      /\btu\b.{0,10}\bas\b/i,
+      /\b(?:il|elle|on)\b.{0,10}\ba\b/i,
+      /\bnous\b.{0,10}\bavons\b/i,
+      /\bvous\b.{0,10}\bavez\b/i,
+      /\b(?:ils|elles)\b.{0,10}\bont\b/i,
+    ];
+    checks.push({ label: "Verbe avoir", ok: forms.some(r => r.test(s)) });
+  }
+
+  return checks;
+}
+
 // ── Write exercise ────────────────────────────────────────────────────────────
 
 function WriteExercise({
@@ -800,18 +915,18 @@ function WriteExercise({
   const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
   const [validated, setValidated] = useState(false);
 
-  const allFilled = inputs.every((s) => s.trim() !== "");
-
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allFilled) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
-  }, [allFilled, validated]);
+    onCanValidateChange(!validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated]);
 
   function setInput(i: number, val: string) {
     setInputs((prev) => prev.map((v, idx) => (idx === i ? val : v)));
@@ -820,22 +935,303 @@ function WriteExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      {exercise.prompts.map((prompt, i) => (
-        <div key={i} className="space-y-1.5">
-          <p className="text-sm font-medium text-[var(--color-text-primary)]">{prompt}</p>
-          <input
-            type="text"
-            value={inputs[i]}
-            onChange={(e) => setInput(i, e.target.value)}
-            disabled={validated}
-            placeholder="Écrivez votre phrase…"
-            className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2 text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-secondary)] focus:border-[var(--color-accent-fr)] focus:outline-none disabled:opacity-60"
-          />
-          {validated && inputs[i].trim() !== "" && (
-            <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ Réponse enregistrée</p>
-          )}
-        </div>
-      ))}
+      {exercise.prompts.map((_, i) => {
+        const checks = checkSentence(inputs[i], exercise.verb);
+        const allOk = checks.length > 0 && checks.every(c => c.ok);
+        return (
+          <div key={i} className="space-y-1.5">
+            <div className="flex items-end gap-2">
+              <span className={`shrink-0 pb-1 text-sm font-medium ${allOk ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+                {i + 1}.
+              </span>
+              <input
+                type="text"
+                value={inputs[i]}
+                onChange={(e) => setInput(i, e.target.value)}
+                disabled={validated}
+                className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
+                  allOk
+                    ? "border-emerald-400 dark:border-emerald-500"
+                    : "border-[var(--color-text-secondary)]"
+                }`}
+              />
+            </div>
+            {checks.length > 0 && (
+              <div className="flex flex-wrap gap-x-3 gap-y-1 pl-5">
+                {checks.map((c, ci) => (
+                  <span key={ci} className={`flex items-center gap-1 text-xs ${c.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400"}`}>
+                    {c.ok ? "✓" : "✗"} {c.label}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── TrueFalse exercise ────────────────────────────────────────────────────────
+
+function TrueFalseExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "trueFalse" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(exercise.items.length).fill(null));
+  const [validated, setValidated] = useState(false);
+
+  const allAnswered = answers.every((a) => a !== null);
+
+  useEffect(() => {
+    onCanValidateChange(allAnswered && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allAnswered, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allAnswered) {
+      setValidated(true);
+      onValidated(answers.every((a, i) => a === exercise.items[i]!.answer));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function pick(i: number, val: boolean) {
+    if (validated) return;
+    setAnswers((prev) => prev.map((v, idx) => (idx === i ? val : v)));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="space-y-3">
+        {exercise.items.map((item, i) => {
+          const chosen = answers[i];
+          const correct = item.answer;
+          const isRight = chosen === correct;
+          const btnBase = "px-3 py-1 rounded text-xs font-medium border transition-colors";
+          const mkCls = (val: boolean) => {
+            if (chosen !== val) return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
+            if (!validated) return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
+            return isRight
+              ? `${btnBase} border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400`
+              : `${btnBase} border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400`;
+          };
+          return (
+            <div key={i} className="flex items-start gap-3">
+              <span className="mt-0.5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
+              <div className="flex-1 space-y-2">
+                <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => pick(i, true)} className={mkCls(true)}>Vrai ✓</button>
+                  <button onClick={() => pick(i, false)} className={mkCls(false)}>Faux ✗</button>
+                  {validated && !isRight && (
+                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                      → {correct ? "Vrai" : "Faux"}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Order exercise ────────────────────────────────────────────────────────────
+
+function OrderExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "order" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [pools, setPools] = useState<string[][]>(() =>
+    exercise.items.map((item) => shuffle(item.sentence.split(" "))),
+  );
+  const [builts, setBuilts] = useState<string[][]>(() => exercise.items.map(() => []));
+  const [validated, setValidated] = useState(false);
+
+  const allDone = builts.every((b, i) => b.length === exercise.items[i]!.sentence.split(" ").length);
+
+  useEffect(() => {
+    onCanValidateChange(allDone && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allDone, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allDone) {
+      setValidated(true);
+      onValidated(builts.every((b, i) => b.join(" ") === exercise.items[i]!.sentence));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function addWord(itemIdx: number, poolIdx: number) {
+    if (validated) return;
+    const word = pools[itemIdx]![poolIdx]!;
+    setPools((prev) => prev.map((p, i) => i === itemIdx ? p.filter((_, j) => j !== poolIdx) : p));
+    setBuilts((prev) => prev.map((b, i) => i === itemIdx ? [...b, word] : b));
+  }
+
+  function removeWord(itemIdx: number, builtIdx: number) {
+    if (validated) return;
+    const word = builts[itemIdx]![builtIdx]!;
+    setBuilts((prev) => prev.map((b, i) => i === itemIdx ? b.filter((_, j) => j !== builtIdx) : b));
+    setPools((prev) => prev.map((p, i) => i === itemIdx ? [...p, word] : p));
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {exercise.items.map((item, i) => {
+        const built = builts[i]!;
+        const pool = pools[i]!;
+        const correct = built.join(" ") === item.sentence;
+        return (
+          <div key={i} className="space-y-2 rounded-lg border border-[var(--color-border)] p-3">
+            {item.hint && (
+              <p className="text-xs text-[var(--color-text-secondary)] italic">{item.hint}</p>
+            )}
+            {/* answer area */}
+            <div className={`min-h-9 flex flex-wrap gap-1.5 rounded border-2 p-2 transition-colors ${
+              validated
+                ? correct
+                  ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30"
+                  : "border-red-400 bg-red-50 dark:bg-red-950/30"
+                : "border-[var(--color-accent-fr)]/40 bg-[var(--color-surface)]"
+            }`}>
+              {built.length === 0 && (
+                <span className="text-xs text-[var(--color-text-secondary)] italic">Clique les mots ci-dessous…</span>
+              )}
+              {built.map((w, j) => (
+                <button
+                  key={j}
+                  onClick={() => removeWord(i, j)}
+                  disabled={validated}
+                  className="rounded bg-[var(--color-accent-fr)] px-2 py-0.5 text-xs font-medium text-white disabled:opacity-70"
+                >
+                  {w}
+                </button>
+              ))}
+            </div>
+            {validated && !correct && (
+              <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ {item.sentence}</p>
+            )}
+            {/* word pool */}
+            <div className="flex flex-wrap gap-1.5">
+              {pool.map((w, j) => (
+                <button
+                  key={j}
+                  onClick={() => addWord(i, j)}
+                  disabled={validated}
+                  className="rounded border border-[var(--color-border)] bg-[var(--color-surface)] px-2 py-0.5 text-xs text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)] disabled:opacity-70"
+                >
+                  {w}
+                </button>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Classify exercise ─────────────────────────────────────────────────────────
+
+function ClassifyExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "classify" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [items] = useState<typeof exercise.items>(() => {
+    const raw = exercise.pool && exercise.pool.length > 0
+      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 8)
+      : exercise.items;
+    return shuffle(raw);
+  });
+  const [chosen, setChosen] = useState<(number | null)[]>(() => new Array(items.length).fill(null));
+  const [validated, setValidated] = useState(false);
+
+  const allChosen = chosen.every((c) => c !== null);
+
+  useEffect(() => {
+    onCanValidateChange(allChosen && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allChosen, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allChosen) {
+      setValidated(true);
+      onValidated(chosen.every((c, i) => c === items[i]!.categoryIdx));
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="space-y-2">
+        {items.map((item, i) => {
+          const sel = chosen[i];
+          const isRight = sel === item.categoryIdx;
+          return (
+            <div key={i} className="flex items-center gap-3">
+              <span className="min-w-[8rem] text-sm font-medium text-[var(--color-text-primary)]">{item.word}</span>
+              <div className="flex flex-wrap gap-2">
+                {exercise.categories.map((cat, ci) => {
+                  const active = sel === ci;
+                  let cls = "rounded border px-2.5 py-1 text-xs font-medium transition-colors ";
+                  if (!active) {
+                    cls += "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-fr)]";
+                  } else if (!validated) {
+                    cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                  } else if (isRight) {
+                    cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
+                  } else {
+                    cls += "border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+                  }
+                  return (
+                    <button
+                      key={ci}
+                      onClick={() => !validated && setChosen((prev) => prev.map((v, idx) => idx === i ? ci : v))}
+                      className={cls}
+                    >
+                      {cat}
+                    </button>
+                  );
+                })}
+                {validated && !isRight && (
+                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                    → {exercise.categories[item.categoryIdx]}
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -870,14 +1266,31 @@ function ExerciseView({
       {exercise.type === "write" && (
         <WriteExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
+      {exercise.type === "trueFalse" && (
+        <TrueFalseExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "order" && (
+        <OrderExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "classify" && (
+        <ClassifyExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
     </div>
   );
 }
 
 // ── Main runner ───────────────────────────────────────────────────────────────
 
+function subjectToTab(subject: string): string {
+  const s = subject.toLowerCase();
+  if (s === "grammaire") return "grammaire";
+  if (s === "vocabulaire") return "vocabulaire";
+  return "conjugaison";
+}
+
 export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
+  const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
   const midExercises = lesson.midExercises ?? [];
@@ -887,7 +1300,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
-  const [canValidate, setCanValidate] = useState(false);
+  const [canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
 
   const isFirst = stepIdx === 0;
@@ -901,9 +1314,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const currentExercise = isExercise ? lesson.exercises[stepIdx - exStart] ?? null : null;
   const currentBlocks = isTheory1 ? lesson.theory : isTheory2 ? lesson.theory2! : null;
 
-  // Reset exercise state when moving to a new step
+  // Reset validate command when moving to a new step
   useEffect(() => {
-    setCanValidate(false);
     setValidateCommand(0);
   }, [stepIdx, exerciseKey]);
 
@@ -913,25 +1325,28 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   function goBack() {
     if (isFirst) {
-      router.push("/francais");
+      router.push(returnUrl);
     } else {
       setStepIdx((s: number) => s - 1);
       setExerciseKey((k: number) => k + 1);
+      setValidateCommand(0);
     }
   }
 
   function goNext() {
     if (isLast) {
       markFrenchLessonComplete(lesson.slug);
-      router.push("/francais");
+      router.push(returnUrl);
     } else {
       setStepIdx((s: number) => s + 1);
       setExerciseKey((k: number) => k + 1);
+      setValidateCommand(0);
     }
   }
 
   function resetExercise() {
     setExerciseKey((k: number) => k + 1);
+    setValidateCommand(0);
   }
 
   return (
@@ -961,19 +1376,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           />
         ))}
       </div>
-
-      {/* Step label */}
-      <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-        {isTheory
-          ? (lesson.theory2 || midExercises.length > 0
-              ? isTheory2 ? "Théorie 2" : "Théorie 1"
-              : "")
-          : (() => {
-              const exNum = isMidEx ? stepIdx : stepIdx - exStart + 1 + midExercises.length;
-              const exTotal = midExercises.length + lesson.exercises.length;
-              return `Exercice ${exNum} / ${exTotal}`;
-            })()}
-      </p>
 
       {/* Content */}
       <div className="min-h-[280px]">

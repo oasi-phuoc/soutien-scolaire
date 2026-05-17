@@ -222,15 +222,28 @@ export function MathematiquesClient() {
 
             const expanded = isModuleExpanded(m.id, displayState);
 
+            // Verrouillé / terminé : titre + badge seulement
+            if (displayState === "locked" || displayState === "completed") {
+              return (
+                <li key={m.id}>
+                  <div
+                    className={`flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 ${isLocked ? "opacity-60" : ""}`}
+                  >
+                    <p className="flex-1 text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                    {prog?.medal ? <span className="text-sm">{prog.medal}</span> : null}
+                    <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
+                  </div>
+                </li>
+              );
+            }
+
             return (
               <li key={m.id}>
                 <div
                   className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
-                    isLocked
-                      ? "border-[var(--color-border-default)] opacity-60"
-                      : recoHighlight
-                        ? "border-[var(--color-accent-alg)]/50"
-                        : "border-[var(--color-border-default)]"
+                    recoHighlight
+                      ? "border-[var(--color-accent-alg)]/50"
+                      : "border-[var(--color-border-default)]"
                   }`}
                 >
                   {/* Module header */}
@@ -256,13 +269,9 @@ export function MathematiquesClient() {
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
                       <p className="text-xs text-[var(--color-text-secondary)]">
-                        {displayState === "completed"
-                          ? `Terminé · note ${prog?.grade?.toFixed(1) ?? "—"}/6`
-                          : displayState === "in_progress"
-                            ? `${prog?.subProgress ?? 0} / ${prog?.subTotal ?? m.submodules.length} sous-modules`
-                            : isLocked
-                              ? `Terminer : ${pre.ok ? "" : pre.missing.join(", ")}`
-                              : `${m.submodules.length} sous-module${m.submodules.length > 1 ? "s" : ""}`}
+                        {displayState === "in_progress"
+                          ? `${prog?.subProgress ?? 0} / ${prog?.subTotal ?? m.submodules.length} sous-modules`
+                          : `${m.submodules.length} sous-module${m.submodules.length > 1 ? "s" : ""}`}
                       </p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
@@ -270,11 +279,6 @@ export function MathematiquesClient() {
                         <span className="text-sm">{prog.medal}</span>
                       ) : null}
                       <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
-                      {(displayState === "locked" || displayState === "completed") && (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
-                          <path d="M9 18l6-6-6-6" />
-                        </svg>
-                      )}
                     </div>
                   </button>
 

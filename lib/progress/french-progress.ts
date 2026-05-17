@@ -1,31 +1,14 @@
-const FRENCH_PROGRESS_KEY = "soutien-french-v1";
-
-function loadSlugs(): Set<string> {
-  if (typeof window === "undefined") return new Set();
-  try {
-    const raw = localStorage.getItem(FRENCH_PROGRESS_KEY);
-    if (!raw) return new Set();
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return new Set(parsed as string[]);
-    return new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveSlugs(slugs: Set<string>): void {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(FRENCH_PROGRESS_KEY, JSON.stringify([...slugs]));
-}
+import { loadProgress, saveProgress } from "./math-progress";
 
 export function getCompletedFrenchLessons(): Set<string> {
-  return loadSlugs();
+  if (typeof window === "undefined") return new Set();
+  const p = loadProgress();
+  return new Set(Object.keys(p.frenchLessons ?? {}));
 }
 
 export function markFrenchLessonComplete(slug: string): void {
-  const slugs = loadSlugs();
-  if (slugs.has(slug)) return;
-  slugs.add(slug);
-  saveSlugs(slugs);
-  window.dispatchEvent(new Event("soutien-french-lesson-complete"));
+  if (typeof window === "undefined") return;
+  const p = loadProgress();
+  saveProgress({ ...p, frenchLessons: { ...(p.frenchLessons ?? {}), [slug]: "completed" } });
+  window.dispatchEvent(new CustomEvent("soutien-french-lesson-complete", { detail: { slug } }));
 }
