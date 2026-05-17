@@ -24,7 +24,7 @@ export type TheoryBlock =
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[]; allBullets?: boolean }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
-  | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number };
+  | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -1521,7 +1521,7 @@ const a1ConjL12: ConjLesson = {
   theory: [
     { type: "heading", text: "Les verbes de mouvement" },
     { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0] },
-    { type: "verb_toggle", verbs: g10Verbs, buttonCols: 4 },
+    { type: "verb_toggle", verbs: g10Verbs, buttonCols: 4, noArrow: true },
   ],
   exercises: [],
 };
