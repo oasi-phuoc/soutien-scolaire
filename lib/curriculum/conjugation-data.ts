@@ -608,8 +608,14 @@ const a1ConjL01: ConjLesson = {
     },
     {
       type: "heading",
-      text: "AVOIR est utilisé pour",
-      trans: { en: "TO HAVE is used for", ar: "يُستخدم فعل «يملك» لـ", fa: "فعل «داشتن» برای … استفاده می‌شود", ti: "ምሓዝ ይጥቀሙሉ ንምግላጽ", uk: "AVOIR використовується для" },
+      text: "AVOIR",
+      trans: { en: "TO HAVE", ar: "يملك", fa: "داشتن", ti: "ምሓዝ", uk: "AVOIR" },
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Le verbe AVOIR sert à exprimer ce que l'on ressent ou possède.",
+      ],
     },
     {
       type: "grid",
