@@ -52,6 +52,26 @@ function renderArrow(text: string) {
   );
 }
 
+function renderInlineMarkup(text: string): React.ReactNode {
+  const parts = text.split(/(\{[as]\}.*?\{\/[as]\})/);
+  if (parts.length === 1) return renderArrow(text);
+  return (
+    <>
+      {parts.map((part, i) => {
+        const accentMatch = part.match(/^\{a\}([\s\S]*?)\{\/a\}$/);
+        const strikeMatch = part.match(/^\{s\}([\s\S]*?)\{\/s\}$/);
+        if (accentMatch) {
+          return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
+        }
+        if (strikeMatch) {
+          return <span key={i} className="line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
+        }
+        return <React.Fragment key={i}>{renderArrow(part)}</React.Fragment>;
+      })}
+    </>
+  );
+}
+
 function renderPronounCell(text: string) {
   const idx = text.indexOf(" → ");
   if (idx === -1) return <span className="font-bold text-[var(--color-accent-fr)]">{text}</span>;
@@ -136,7 +156,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
               <div key={i} className="space-y-2">
                 <p className="flex gap-2 text-sm text-[var(--color-text-primary)]">
                   <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>
-                  <span>{block.text}</span>
+                  <span>{renderInlineMarkup(block.text)}</span>
                 </p>
                 {block.examples && block.examples.length > 0 && (
                   <div className="ml-5 space-y-1">
@@ -218,7 +238,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                               : undefined;
                             return (
                               <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)]${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`}>
-                                {block.pronounGrid ? renderPronounCell(cell) : renderArrow(cell)}
+                                {block.pronounGrid ? renderPronounCell(cell) : renderInlineMarkup(cell)}
                                 {transText && (
                                   <span className="block text-xs text-[var(--color-text-secondary)] mt-0.5" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                                     {transText}
@@ -283,7 +303,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                           {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
-                          <span>{renderArrow(item)}</span>
+                          <span>{renderInlineMarkup(item)}</span>
                         </div>
                         {showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
