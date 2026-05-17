@@ -1397,7 +1397,7 @@ const a1ConjL09: ConjLesson = {
         "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
       ],
     },
-    { type: "verb_toggle", negation: true, verbs: g9Verbs },
+    { type: "verb_toggle", negation: true, verbs: g9Verbs, buttonCols: 3 },
     {
       type: "highlight",
       label: "Attention",
