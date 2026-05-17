@@ -610,8 +610,8 @@ function FillExercise({
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct ? (
-          <span className="inline-flex flex-col items-center justify-center border-b-2 border-red-400 mx-1 min-w-[4rem] leading-tight align-bottom">
-            <span className="text-[10px] line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
+          <span className="inline-flex items-center justify-center gap-1 border-b-2 border-red-400 mx-1 w-28 align-bottom">
+            <span className="text-xs line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
             <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
           </span>
         ) : (
