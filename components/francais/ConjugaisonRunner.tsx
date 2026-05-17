@@ -366,7 +366,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                       {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
                         <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${(block.allBullets || ii > 0) ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                           {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0">•</span>}
-                          <span>{renderArrow(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
+                          <span>{renderInlineMarkup(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
                         </div>
                       )}
                     </li>
@@ -400,7 +400,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                             {!skipBullet && <span className="mt-0.5 shrink-0">•</span>}
-                            <span>{renderArrow(transItems[ii]!)}</span>
+                            <span>{renderInlineMarkup(transItems[ii]!, !block.inlineArrows)}</span>
                           </div>
                         )}
                       </li>
