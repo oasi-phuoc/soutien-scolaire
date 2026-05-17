@@ -24,7 +24,7 @@ export type Exercise =
   | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts: string[] };
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts: string[]; verb?: "être" | "avoir" };
 
 export type ConjLesson = {
   slug: string;
@@ -983,12 +983,14 @@ const a1ConjL01: ConjLesson = {
       title: "Exercice 5 — Écrivez avec être",
       instruction: "Écrivez 2 phrases avec le verbe être.",
       prompts: ["Phrase 1 :", "Phrase 2 :"],
+      verb: "être",
     },
     {
       type: "write",
       title: "Exercice 6 — Écrivez avec avoir",
       instruction: "Écrivez 2 phrases avec le verbe avoir.",
       prompts: ["Phrase 1 :", "Phrase 2 :"],
+      verb: "avoir",
     },
   ],
   exercises: [

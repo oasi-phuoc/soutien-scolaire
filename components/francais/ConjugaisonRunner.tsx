@@ -861,6 +861,44 @@ function MatchExercise({
   );
 }
 
+// ── Sentence validation (free, client-side) ───────────────────────────────────
+
+type SentenceCheck = { label: string; ok: boolean };
+
+function checkSentence(text: string, verb?: "être" | "avoir"): SentenceCheck[] {
+  const s = text.trim();
+  if (!s) return [];
+
+  const checks: SentenceCheck[] = [];
+  checks.push({ label: "Majuscule", ok: /^[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜÇ«"']/.test(s) });
+  checks.push({ label: "Point final", ok: /[.!?]$/.test(s) });
+
+  if (verb === "être") {
+    const forms = [
+      /\bje\b.{0,10}\bsuis\b/i,
+      /\btu\b.{0,10}\bes\b/i,
+      /\b(?:il|elle|on)\b.{0,10}\best\b/i,
+      /\bnous\b.{0,10}\bsommes\b/i,
+      /\bvous\b.{0,10}\bêtes\b/i,
+      /\b(?:ils|elles)\b.{0,10}\bsont\b/i,
+    ];
+    checks.push({ label: "Verbe être", ok: forms.some(r => r.test(s)) });
+  } else if (verb === "avoir") {
+    const forms = [
+      /j'ai\b/i,
+      /\bje\b.{0,10}\bai\b/i,
+      /\btu\b.{0,10}\bas\b/i,
+      /\b(?:il|elle|on)\b.{0,10}\ba\b/i,
+      /\bnous\b.{0,10}\bavons\b/i,
+      /\bvous\b.{0,10}\bavez\b/i,
+      /\b(?:ils|elles)\b.{0,10}\bont\b/i,
+    ];
+    checks.push({ label: "Verbe avoir", ok: forms.some(r => r.test(s)) });
+  }
+
+  return checks;
+}
+
 // ── Write exercise ────────────────────────────────────────────────────────────
 
 function WriteExercise({
@@ -897,18 +935,39 @@ function WriteExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      {exercise.prompts.map((_, i) => (
-        <div key={i} className="flex items-end gap-2">
-          <span className="shrink-0 pb-1 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
-          <input
-            type="text"
-            value={inputs[i]}
-            onChange={(e) => setInput(i, e.target.value)}
-            disabled={validated}
-            className="flex-1 border-b-2 border-[var(--color-text-secondary)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70"
-          />
-        </div>
-      ))}
+      {exercise.prompts.map((_, i) => {
+        const checks = checkSentence(inputs[i], exercise.verb);
+        const allOk = checks.length > 0 && checks.every(c => c.ok);
+        return (
+          <div key={i} className="space-y-1.5">
+            <div className="flex items-end gap-2">
+              <span className={`shrink-0 pb-1 text-sm font-medium ${allOk ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+                {i + 1}.
+              </span>
+              <input
+                type="text"
+                value={inputs[i]}
+                onChange={(e) => setInput(i, e.target.value)}
+                disabled={validated}
+                className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
+                  allOk
+                    ? "border-emerald-400 dark:border-emerald-500"
+                    : "border-[var(--color-text-secondary)]"
+                }`}
+              />
+            </div>
+            {checks.length > 0 && (
+              <div className="flex flex-wrap gap-x-3 gap-y-1 pl-5">
+                {checks.map((c, ci) => (
+                  <span key={ci} className={`flex items-center gap-1 text-xs ${c.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400"}`}>
+                    {c.ok ? "✓" : "✗"} {c.label}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }
