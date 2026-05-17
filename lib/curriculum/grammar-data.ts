@@ -214,6 +214,31 @@ const a1GrL03: GrammarLesson = {
         ["Un homme français parle.", "Une femme français{a}e{/a} parle."],
       ],
     },
+    { type: "heading", text: "Les adjectifs au pluriel", sub: true },
+    { type: "plain_list", items: ["On ajoute souvent {a}-s{/a}."] },
+    {
+      type: "grid",
+      headers: ["Singulier", "Pluriel"],
+      rows: [
+        ["petit", "petit{a}s{/a}"],
+        ["petite", "petite{a}s{/a}"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention : adjectifs spéciaux",
+      items: ["Certains adjectifs changent beaucoup."],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin"],
+      rows: [
+        ["beau", "bell{a}e{/a}"],
+        ["nouveau", "nouvell{a}e{/a}"],
+        ["vieux", "vieil{a}le{/a}"],
+      ],
+    },
   ],
   exercises: [
     {
