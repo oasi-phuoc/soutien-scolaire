@@ -14,7 +14,7 @@ export type TheoryBlock =
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
-  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean };
+  | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -664,8 +664,11 @@ const a1ConjL01: ConjLesson = {
       trans: { en: "The negative form", ar: "صيغة النفي", fa: "فرم منفی", ti: "ናይ ኣሉታ ቅጺ", uk: "Заперечна форма" },
     },
     {
-      type: "rule",
-      text: "Structure : Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
+      type: "plain_list",
+      items: [
+        "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
+        "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
+      ],
     },
     {
       type: "heading",
@@ -733,12 +736,15 @@ const a1ConjL01: ConjLesson = {
     },
     {
       type: "highlight",
-      label: "«ne» devant une voyelle (à e i o u y) → «n'»",
+      label: "Astuce",
+      inlineArrows: true,
+      noBulletItems: [0],
       items: [
+        "«ne» devant une voyelle (à e i o u y) → «n'»",
         "il n{s}e{/s} est pas là → il n'est pas là",
         "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
       ],
-      transLabel: { en: "«ne» before a vowel (à e i o u y) → «n'»", ar: "«ne» قبل حرف علة (à e i o u y) → «n'»", fa: "«ne» قبل از حرف صدادار (à e i o u y) → «n'»", ti: "«ne» ቅድሚ ድምጻዊ ፊደል (à e i o u y) → «n'»", uk: "«ne» перед голосною (à e i o u y) → «n'»" },
+      transLabel: { en: "Tip", ar: "نصيحة", fa: "نکته", ti: "ሳጋዚ ሳብ", uk: "Порада" },
     },
   ],
   midExercises: [

@@ -52,9 +52,9 @@ function renderArrow(text: string) {
   );
 }
 
-function renderInlineMarkup(text: string): React.ReactNode {
+function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
   const parts = text.split(/(\{[as]\}.*?\{\/[as]\})/);
-  if (parts.length === 1) return renderArrow(text);
+  if (parts.length === 1) return useArrow ? renderArrow(text) : <>{text}</>;
   return (
     <>
       {parts.map((part, i) => {
@@ -66,7 +66,7 @@ function renderInlineMarkup(text: string): React.ReactNode {
         if (strikeMatch) {
           return <span key={i} className="line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
         }
-        return <React.Fragment key={i}>{renderArrow(part)}</React.Fragment>;
+        return <React.Fragment key={i}>{useArrow ? renderArrow(part) : part}</React.Fragment>;
       })}
     </>
   );
@@ -269,7 +269,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     <li key={ii} className="space-y-0.5">
                       <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                         {ii > 0 && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
-                        <span>{renderArrow(item)}</span>
+                        <span>{renderInlineMarkup(item)}</span>
                       </div>
                       {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
                         <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${ii > 0 ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
@@ -298,12 +298,12 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                 </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
                   {block.items.map((item, ii) => {
-                    const skipBullet = block.noFirstBullet && !item.includes(" → ");
+                    const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
                     return (
                       <li key={ii} className="space-y-0.5">
                         <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                           {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
-                          <span>{renderInlineMarkup(item)}</span>
+                          <span>{renderInlineMarkup(item, !block.inlineArrows)}</span>
                         </div>
                         {showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
