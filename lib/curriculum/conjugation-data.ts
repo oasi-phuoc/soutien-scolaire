@@ -664,23 +664,6 @@ const a1ConjL01: ConjLesson = {
       trans: { en: "The negative form", ar: "صيغة النفي", fa: "فرم منفی", ti: "ናይ ኣሉታ ቅጺ", uk: "Заперечна форма" },
     },
     {
-      type: "highlight",
-      label: "Construction : ne … pas",
-      items: [
-        "Sujet + ne + verbe + pas",
-        "Devant une voyelle : ne → n'",
-        "je ne suis pas… / je n'ai pas…",
-      ],
-      transLabel: { en: "Structure: ne … pas", ar: "البنية: ne … pas", fa: "ساختار: ne … pas", ti: "ህንጻ: ne … pas", uk: "Будова: ne … pas" },
-      transItems: {
-        en: ["Subject + ne + verb + pas", "Before a vowel: ne → n'", "je ne suis pas… / je n'ai pas…"],
-        ar: ["فاعل + ne + فعل + pas", "قبل حرف علة: ne → n'", "je ne suis pas… / je n'ai pas…"],
-        fa: ["فاعل + ne + فعل + pas", "قبل از حرف صدادار: ne → n'", "je ne suis pas… / je n'ai pas…"],
-        ti: ["ርእሲ + ne + ግሲ + pas", "ቅድሚ ድምጻዊ ፊደል: ne → n'", "je ne suis pas… / je n'ai pas…"],
-        uk: ["Підмет + ne + дієслово + pas", "Перед голосною: ne → n'", "je ne suis pas… / je n'ai pas…"],
-      },
-    },
-    {
       type: "grid",
       headers: ["Verbe", "Affirmatif", "Négatif"],
       rows: [
