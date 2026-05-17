@@ -1187,13 +1187,12 @@ const a1ConjL08: ConjLesson = {
     {
       type: "grid",
       headers: ["Structure", "Exemple"],
-      boldFirstCol: true,
       rows: [
-        ["{a}aller à{/a}", "Je vais {a}à{/a} Genève."],
-        ["{a}aller au{/a} (à + le)", "Elle va {a}au{/a} cinéma."],
-        ["{a}aller aux{/a} (à + les)", "Nous allons {a}aux{/a} États-Unis."],
-        ["{a}aller en{/a} + pays féminin", "Tu vas {a}en{/a} France."],
-        ["{a}aller chez{/a} + personne", "Il va {a}chez{/a} le médecin."],
+        ["aller {a}à{/a}", "Je vais {a}à{/a} Genève."],
+        ["aller {a}au{/a} (à + le)", "Elle va {a}au{/a} cinéma."],
+        ["aller {a}aux{/a} (à + les)", "Nous allons {a}aux{/a} États-Unis."],
+        ["aller {a}en{/a} + pays féminin", "Tu vas {a}en{/a} France."],
+        ["aller {a}chez{/a} + personne", "Il va {a}chez{/a} le médecin."],
       ],
       transHeaders: {
         en: ["Structure", "Example"],
@@ -1226,12 +1225,11 @@ const a1ConjL08: ConjLesson = {
     {
       type: "grid",
       headers: ["Structure", "Exemple"],
-      boldFirstCol: true,
       rows: [
-        ["{a}venir de{/a} + ville", "Je viens {a}de{/a} Genève."],
-        ["{a}venir du{/a} (de + le)", "Elle vient {a}du{/a} marché."],
-        ["{a}venir des{/a} (de + les)", "Ils viennent {a}des{/a} États-Unis."],
-        ["{a}venir de{/a} + pays féminin", "Tu viens {a}de{/a} France."],
+        ["venir {a}de{/a} + ville", "Je viens {a}de{/a} Genève."],
+        ["venir {a}du{/a} (de + le)", "Elle vient {a}du{/a} marché."],
+        ["venir {a}des{/a} (de + les)", "Ils viennent {a}des{/a} États-Unis."],
+        ["venir {a}de{/a} + pays féminin", "Tu viens {a}de{/a} France."],
       ],
       transHeaders: {
         en: ["Structure", "Example"],
