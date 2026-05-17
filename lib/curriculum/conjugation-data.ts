@@ -1192,6 +1192,8 @@ const a1ConjL08: ConjLesson = {
         ["ils / elles",  "{a}vont{/a}",    "{a}viennent{/a}"],
       ],
     },
+    { type: "heading", text: "Aller", sub: true },
+    { type: "plain_list", items: ["Le verbe aller sert à dire où une personne se déplace. La destination où on va."], noBulletItems: [0] },
     { type: "heading", text: "Aller → destination", sub: true, accent: true },
     {
       type: "grid",
