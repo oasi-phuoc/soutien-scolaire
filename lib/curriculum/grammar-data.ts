@@ -90,7 +90,7 @@ const a1GrL01: GrammarLesson = {
 
 const a1GrL02: GrammarLesson = {
   slug: "a1-gr-l02",
-  code: "G.5",
+  code: "G.6",
   level: "A1",
   title: "La négation et l'interrogation de base",
   theory: [

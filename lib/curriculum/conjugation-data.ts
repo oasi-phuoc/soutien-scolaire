@@ -1008,7 +1008,7 @@ const a1ConjL01: ConjLesson = {
 
 const a1ConjL07: ConjLesson = {
   slug: "a1-conj-l07",
-  code: "G.6",
+  code: "G.5",
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [
