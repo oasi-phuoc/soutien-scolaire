@@ -1122,8 +1122,8 @@ const a1ConjL07: ConjLesson = {
     },
     {
       type: "highlight",
-      label: "Attention à « je »",
-      transLabel: { en: "Note on «je»", ar: "ملاحظة حول «je»", fa: "توجه به «je»", ti: "ኣስተውዕል ብዛዕባ «je»", uk: "Увага до «je»" },
+      label: "Attention",
+      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
       items: [
         "Quand le verbe commence par une {a}voyelle{/a} ou un {a}h{/a}, {a}je{/a} devient {a}j'{/a}.",
         "j{s}e{/s} aime → j'aime",
