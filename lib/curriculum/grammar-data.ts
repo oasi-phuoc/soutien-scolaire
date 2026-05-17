@@ -320,30 +320,7 @@ const a1GrL04: GrammarLesson = {
       noBulletItems: [1],
     },
   ],
-  exercises: [
-    {
-      type: "qcm",
-      title: "Quel article ?",
-      instruction: "Choisissez l'article correct.",
-      items: [
-        { sentence: "Dans mon quartier, il y a ___ cinéma.", choices: ["un", "une", "le", "des"], correctIdx: 0 },
-        { sentence: "J'aime ___ musique.", choices: ["la", "une", "de", "des"], correctIdx: 0 },
-        { sentence: "Il n'y a pas ___ piscine ici.", choices: ["de", "une", "la", "des"], correctIdx: 0 },
-        { sentence: "C'est ___ ami de Marco.", choices: ["un", "le", "une", "des"], correctIdx: 0 },
-      ],
-    },
-    {
-      type: "fill",
-      title: "Complétez avec l'article",
-      instruction: "Choisissez : un/une/des/le/la/l'/les.",
-      items: [
-        { sentence: "___ école est grande.", hint: "article défini féminin", answer: "L'" },
-        { sentence: "Il y a ___ restaurants dans ma rue.", hint: "article indéfini pluriel", answer: "des" },
-        { sentence: "J'adore ___ films français.", hint: "article défini pluriel", answer: "les" },
-        { sentence: "C'est ___ professeur de français.", hint: "article indéfini masculin", answer: "un" },
-      ],
-    },
-  ],
+  exercises: [],
 };
 
 const a1GrL05: GrammarLesson = {
