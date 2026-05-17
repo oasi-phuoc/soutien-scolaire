@@ -94,29 +94,60 @@ const a1GrL02: GrammarLesson = {
   level: "A1",
   title: "La négation et l'interrogation de base",
   theory: [
-    { type: "heading", text: "La négation : ne … pas" },
     {
-      type: "rule",
-      text: "La négation est en 2 parties : NE … PAS autour du verbe.",
-      examples: [
-        { correct: "Il n'est pas français.", wrong: "Il est pas français." },
+      type: "heading",
+      text: "La forme négative",
+    },
+    {
+      type: "plain_list",
+      items: [
+        "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
+        "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
       ],
     },
     {
-      type: "rule",
-      text: "Devant une voyelle, NE → N' (élision).",
-      examples: [
-        { correct: "Elle n'est pas étudiante." },
-        { correct: "Je n'ai pas cours." },
+      type: "heading",
+      text: "Négation du verbe ÊTRE",
+      sub: true,
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je suis content(e).", "Je {a}ne{/a} suis {a}pas{/a} content(e)."],
+        ["Tu es à Genève.", "Tu {a}n'{/a}es {a}pas{/a} à Genève."],
+        ["Il/Elle est médecin.", "Il/Elle {a}n'{/a}est {a}pas{/a} médecin."],
+        ["Nous sommes prêts.", "Nous {a}ne{/a} sommes {a}pas{/a} prêts."],
+        ["Vous êtes fatigués.", "Vous {a}n'{/a}êtes {a}pas{/a} fatigués."],
+        ["Ils/Elles sont là.", "Ils/Elles {a}ne{/a} sont {a}pas{/a} là."],
       ],
     },
-    { type: "heading", text: "L'interrogation avec est-ce que" },
     {
-      type: "rule",
-      text: "Est-ce que + sujet + verbe ? → question formelle et neutre.",
-      examples: [
-        { correct: "Est-ce que tu parles français ?" },
-        { correct: "Est-ce qu'il est libre ?" },
+      type: "heading",
+      text: "Négation du verbe AVOIR",
+      sub: true,
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["J'ai faim.", "Je {a}n'{/a}ai {a}pas{/a} faim."],
+        ["Tu as un vélo.", "Tu {a}n'{/a}as {a}pas{/a} de vélo."],
+        ["Il/Elle a 25 ans.", "Il/Elle {a}n'{/a}a {a}pas{/a} d'enfant."],
+        ["Nous avons soif.", "Nous {a}n'{/a}avons {a}pas{/a} soif."],
+        ["Vous avez raison.", "Vous {a}n'{/a}avez {a}pas{/a} raison."],
+        ["Ils/Elles ont peur.", "Ils/Elles {a}n'{/a}ont {a}pas{/a} peur."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Astuce",
+      inlineArrows: true,
+      noBulletItems: [0],
+      items: [
+        "«ne» devant une voyelle (a e i o u y) → «n'»",
+        "il n{s}e{/s} est pas là → il n'est pas là",
+        "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
       ],
     },
   ],
