@@ -1180,30 +1180,16 @@ const a1ConjL08: ConjLesson = {
   theory: [
     { type: "heading", text: "Aller et venir au présent" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "aller", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "vais" },
-            { pronoun: "tu", form: "vas" },
-            { pronoun: "il / elle", form: "va" },
-            { pronoun: "nous", form: "allons" },
-            { pronoun: "vous", form: "allez" },
-            { pronoun: "ils / elles", form: "vont" },
-          ],
-        },
-        {
-          verb: "venir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "viens" },
-            { pronoun: "tu", form: "viens" },
-            { pronoun: "il / elle", form: "vient" },
-            { pronoun: "nous", form: "venons" },
-            { pronoun: "vous", form: "venez" },
-            { pronoun: "ils / elles", form: "viennent" },
-          ],
-        },
+      type: "grid",
+      headers: ["Pronom", "aller", "venir"],
+      equalCols: true,
+      rows: [
+        ["je",           "{a}vais{/a}",    "{a}viens{/a}"],
+        ["tu",           "{a}vas{/a}",     "{a}viens{/a}"],
+        ["il / elle",    "{a}va{/a}",      "{a}vient{/a}"],
+        ["nous",         "{a}allons{/a}",  "{a}venons{/a}"],
+        ["vous",         "{a}allez{/a}",   "{a}venez{/a}"],
+        ["ils / elles",  "{a}vont{/a}",    "{a}viennent{/a}"],
       ],
     },
     { type: "heading", text: "Aller → destination", sub: true, accent: true },
