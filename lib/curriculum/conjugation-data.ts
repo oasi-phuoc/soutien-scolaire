@@ -1324,18 +1324,6 @@ const g9Verbs: VerbToggleVerb[] = [
     ],
   },
   {
-    infinitive: "se maquiller", radical: "",
-    reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
-    rows: [
-      { pronoun: "je",           ending: "maquille" },
-      { pronoun: "tu",           ending: "maquilles" },
-      { pronoun: "il / elle / on", ending: "maquille" },
-      { pronoun: "nous",         ending: "maquillons" },
-      { pronoun: "vous",         ending: "maquillez" },
-      { pronoun: "ils / elles",  ending: "maquillent" },
-    ],
-  },
-  {
     infinitive: "se coiffer", radical: "",
     reflexivePronouns: ["me", "te", "se", "nous", "vous", "se"],
     rows: [
@@ -1400,7 +1388,7 @@ const a1ConjL09: ConjLesson = {
       ],
     },
     { type: "heading", text: "Verbes pronominaux courants" },
-    { type: "verb_toggle", verbs: g9Verbs, buttonCols: 4 },
+    { type: "verb_toggle", verbs: g9Verbs, buttonCols: 3 },
     { type: "heading", text: "La négation" },
     {
       type: "plain_list",
