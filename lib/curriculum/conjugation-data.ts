@@ -1134,7 +1134,7 @@ const a1ConjL07: ConjLesson = {
     {
       type: "plain_list",
       items: [
-        "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Les verbes du 1er groupe finissent en {a}-er{/a}.",
+        "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Ils font partie du 1er groupe.",
       ],
     },
     {
