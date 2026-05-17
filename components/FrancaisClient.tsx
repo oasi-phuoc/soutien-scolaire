@@ -105,12 +105,14 @@ function SectionCard({
   themes,
   completedSlugs,
   hydrated,
+  returnTab,
 }: {
   sec: SectionDef;
   state: SectionState;
   themes: FrenchTheme[];
   completedSlugs: Set<string>;
   hydrated: boolean;
+  returnTab?: FrenchTab;
 }) {
   const locked = state === "locked";
   const inProgress = state === "in_progress";
@@ -225,7 +227,7 @@ function SectionCard({
               return (
                 <li key={th.id}>
                   <Link
-                    href={lessonHref(th)}
+                    href={lessonHref(th) + (returnTab && th.tab !== returnTab ? `?returnTab=${returnTab}` : "")}
                     className="block transition-colors hover:bg-[var(--color-bg-secondary)]"
                   >
                     {inner}
@@ -339,6 +341,7 @@ export function FrancaisClient() {
                 themes={themes}
                 completedSlugs={hydrated ? completedSlugs : new Set()}
                 hydrated={hydrated}
+                returnTab={tab}
               />
             );
           })}
