@@ -28,14 +28,16 @@ function lesson(
 /** Parcours complet français. */
 export const FRENCH_THEMES: FrenchTheme[] = [
   // ── A0 — Débutant absolu ─────────────────────────────────────── Apprendre
-  t("A0", "a0-se-presenter", "A.0", "Se présenter",                 "Mon identité, mon âge, ma nationalité, mon domicile, ma profession et ma famille.", [...Q]),
   t("A0", "a0-1", "A.1",  "Salutations et politesse",              "Présentations, tutoiement / vouvoiement.", [...Q]),
   t("A0", "a0-2", "A.2",  "Chiffres, nombres et âge (0–100)",      "Avoir, nombres, identité orale.", [...Q]),
   t("A0", "a0-3", "A.3",  "Couleurs, formes et descriptions simples", "Être, adjectifs, accord des couleurs.", [...Q]),
   t("A0", "a0-4", "A.4",  "La famille",                             "Possessifs, négation, arbre généalogique.", [...Q]),
   t("A0", "a0-5", "A.5",  "Le corps et la santé de base",           "Parties du corps, urgences, avoir mal.", [...Q]),
   t("A0", "a0-6", "A.6",  "Objets du quotidien et la classe",       "Impératif, démonstratifs, consignes.", [...Q]),
-  lesson("A1", "a0-voc-nationalites", "V.0", "Les nationalités", "Pays, nationalités masculin/féminin + verbe venir au présent.", "vocabulaire"),
+  lesson("A1", "a0-voc-nationalites",   "V.0", "Les nationalités",      "Pays, nationalités masculin/féminin + verbe venir au présent.",                              "vocabulaire"),
+  lesson("A1", "a0-se-presenter",       "V.1", "Se présenter",          "Mon identité, mon âge, ma nationalité, mon domicile, ma profession et ma famille.",         "vocabulaire"),
+  lesson("A1", "a1-voc-famille",        "V.2", "La famille",            "Membres de la famille, adjectifs possessifs, situation familiale.",                          "vocabulaire"),
+  lesson("A1", "a1-voc-description",    "V.3", "La description",        "Décrire une personne : taille, couleur de cheveux, âge, adjectifs au masculin/féminin.",    "vocabulaire"),
 
   // ── A1 — Communication essentielle A1 (20 leçons) ─────────────── Apprendre
   // SE PRÉSENTER ET PRÉSENTER QUELQU'UN
@@ -164,24 +166,24 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-l52",   "G.47", "La cause et la conséquence",                      "Parce que/car/comme/à cause de/grâce à ; donc/c'est pourquoi/par conséquent.",            "grammaire"),
 
   // ── A1 — Vocabulaire ────────────────────────────────────────────────────────
-  lesson("A1", "a1-voc-l13", "V.1", "Les moyens de transport",    "En voiture, à vélo, en avion… + prépositions et verbes de transport.",         "vocabulaire"),
-  lesson("A1", "a1-voc-l16", "V.2", "La nourriture et le restaurant", "Aliments, repas de la journée, commander et payer au restaurant.",         "vocabulaire"),
-  lesson("A1", "a1-voc-l21", "V.3", "Les expressions de temps",   "Aujourd'hui, demain, après-demain, la semaine prochaine…",                    "vocabulaire"),
-  lesson("A1", "a1-voc-l26", "V.4", "Le corps humain",            "Parties du corps + avoir mal à + article contracté (au/à la/aux).",            "vocabulaire"),
-  lesson("A1", "a1-voc-l12", "V.5",  "La ville et les lieux",          "Cinéma, boulangerie, mairie, restaurant… + prépositions de localisation.",   "vocabulaire"),
-  lesson("A1", "a1-voc-l17", "V.6",  "Le logement",                    "Pièces de l'appartement, meubles et équipements du quotidien.",              "vocabulaire"),
-  lesson("A1", "a1-voc-l27", "V.7",  "Les vêtements et les achats",    "Robe, pantalon, taille, marque + verbes acheter/porter/essayer.",            "vocabulaire"),
-  lesson("A1", "a1-voc-l18", "V.8",  "Les loisirs et le sport",        "Sports, activités artistiques, expressions avec faire + du/de la/de l'.",   "vocabulaire"),
+  lesson("A1", "a1-voc-l13", "V.4",  "Les moyens de transport",         "En voiture, à vélo, en avion… + prépositions et verbes de transport.",         "vocabulaire"),
+  lesson("A1", "a1-voc-l16", "V.5",  "La nourriture et le restaurant",  "Aliments, repas de la journée, commander et payer au restaurant.",         "vocabulaire"),
+  lesson("A1", "a1-voc-l21", "V.6",  "Les expressions de temps",        "Aujourd'hui, demain, après-demain, la semaine prochaine…",                    "vocabulaire"),
+  lesson("A1", "a1-voc-l26", "V.7",  "Le corps humain",                 "Parties du corps + avoir mal à + article contracté (au/à la/aux).",            "vocabulaire"),
+  lesson("A1", "a1-voc-l12", "V.8",  "La ville et les lieux",           "Cinéma, boulangerie, mairie, restaurant… + prépositions de localisation.",   "vocabulaire"),
+  lesson("A1", "a1-voc-l17", "V.9",  "Le logement",                     "Pièces de l'appartement, meubles et équipements du quotidien.",              "vocabulaire"),
+  lesson("A1", "a1-voc-l27", "V.10", "Les vêtements et les achats",     "Robe, pantalon, taille, marque + verbes acheter/porter/essayer.",            "vocabulaire"),
+  lesson("A1", "a1-voc-l18", "V.11", "Les loisirs et le sport",         "Sports, activités artistiques, expressions avec faire + du/de la/de l'.",   "vocabulaire"),
 
   // ── A2 — Vocabulaire ────────────────────────────────────────────────────
-  lesson("A2", "a2-voc-l01", "V.9",  "Les voyages et les transports",  "Gare, aéroport, billet, itinéraire + verbes de déplacement A2.",           "vocabulaire"),
-  lesson("A2", "a2-voc-l02", "V.10", "La santé et le médecin",         "Rendez-vous médical, symptômes, conseils + verbes de santé.",               "vocabulaire"),
-  lesson("A2", "a2-voc-l03", "V.11", "Le monde du travail",            "Métiers, lieu de travail, chercher un emploi, expressions avec avoir.",     "vocabulaire"),
-  lesson("A2", "a2-voc-l04", "V.12", "Les sorties et les invitations", "Sortir, organiser, apéro, expo, pique-nique + formules informelles.",       "vocabulaire"),
-  lesson("A2", "a2-voc-l05", "V.13", "La cuisine et les recettes",     "Ingrédients, ustensiles, actions de cuisine + recette simple.",             "vocabulaire"),
-  lesson("A2", "a2-voc-l06", "V.14", "La famille et les relations",    "Description physique, personnalité, relations amoureuses et amicales.",     "vocabulaire"),
-  lesson("A2", "a2-voc-l07", "V.15", "Les médias et Internet",         "Site web, réseaux sociaux, presse, TV, radio + verbes numériques.",         "vocabulaire"),
-  lesson("A2", "a2-voc-l08", "V.16", "La ville et les services",       "Services publics, commerces, orientation dans la ville + y et en.",         "vocabulaire"),
+  lesson("A2", "a2-voc-l01", "V.12", "Les voyages et les transports",   "Gare, aéroport, billet, itinéraire + verbes de déplacement A2.",           "vocabulaire"),
+  lesson("A2", "a2-voc-l02", "V.13", "La santé et le médecin",          "Rendez-vous médical, symptômes, conseils + verbes de santé.",               "vocabulaire"),
+  lesson("A2", "a2-voc-l03", "V.14", "Le monde du travail",             "Métiers, lieu de travail, chercher un emploi, expressions avec avoir.",     "vocabulaire"),
+  lesson("A2", "a2-voc-l04", "V.15", "Les sorties et les invitations",  "Sortir, organiser, apéro, expo, pique-nique + formules informelles.",       "vocabulaire"),
+  lesson("A2", "a2-voc-l05", "V.16", "La cuisine et les recettes",      "Ingrédients, ustensiles, actions de cuisine + recette simple.",             "vocabulaire"),
+  lesson("A2", "a2-voc-l06", "V.17", "La famille et les relations",     "Description physique, personnalité, relations amoureuses et amicales.",     "vocabulaire"),
+  lesson("A2", "a2-voc-l07", "V.18", "Les médias et Internet",          "Site web, réseaux sociaux, presse, TV, radio + verbes numériques.",         "vocabulaire"),
+  lesson("A2", "a2-voc-l08", "V.19", "La ville et les services",        "Services publics, commerces, orientation dans la ville + y et en.",         "vocabulaire"),
 
 ];
 

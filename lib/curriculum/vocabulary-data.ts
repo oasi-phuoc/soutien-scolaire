@@ -274,7 +274,7 @@ const a1VocNationalites: VocabLesson = {
 
 const a1VocL13: VocabLesson = {
   slug: "a1-voc-l13",
-  code: "V.2",
+  code: "V.4",
   level: "A1",
   title: "Les moyens de transport",
   theory: [
@@ -369,7 +369,7 @@ const a1VocL13: VocabLesson = {
 
 const a1VocL16: VocabLesson = {
   slug: "a1-voc-l16",
-  code: "V.3",
+  code: "V.5",
   level: "A1",
   title: "La nourriture et le restaurant",
   theory: [
@@ -476,7 +476,7 @@ const a1VocL16: VocabLesson = {
 
 const a1VocL21: VocabLesson = {
   slug: "a1-voc-l21",
-  code: "V.4",
+  code: "V.6",
   level: "A1",
   title: "Les expressions de temps",
   theory: [
@@ -582,7 +582,7 @@ const a1VocL21: VocabLesson = {
 
 const a1VocL26: VocabLesson = {
   slug: "a1-voc-l26",
-  code: "V.5",
+  code: "V.7",
   level: "A1",
   title: "Le corps humain",
   theory: [
@@ -691,7 +691,7 @@ const a1VocL26: VocabLesson = {
 
 const a1VocL12: VocabLesson = {
   slug: "a1-voc-l12",
-  code: "V.6",
+  code: "V.8",
   level: "A1",
   title: "La ville et les lieux",
   theory: [
@@ -811,7 +811,7 @@ const a1VocL12: VocabLesson = {
 
 const a1VocL17: VocabLesson = {
   slug: "a1-voc-l17",
-  code: "V.7",
+  code: "V.9",
   level: "A1",
   title: "Le logement",
   theory: [
@@ -932,7 +932,7 @@ const a1VocL17: VocabLesson = {
 
 const a1VocL27: VocabLesson = {
   slug: "a1-voc-l27",
-  code: "V.8",
+  code: "V.10",
   level: "A1",
   title: "Les vêtements et les achats",
   theory: [
@@ -1054,7 +1054,7 @@ const a1VocL27: VocabLesson = {
 
 const a1VocL18: VocabLesson = {
   slug: "a1-voc-l18",
-  code: "V.9",
+  code: "V.11",
   level: "A1",
   title: "Les loisirs et le sport",
   theory: [
@@ -1175,7 +1175,7 @@ const a1VocL18: VocabLesson = {
 
 const a2VocL01: VocabLesson = {
   slug: "a2-voc-l01",
-  code: "V.10",
+  code: "V.12",
   level: "A2",
   title: "Les voyages et les transports",
   theory: [
@@ -1299,7 +1299,7 @@ const a2VocL01: VocabLesson = {
 
 const a2VocL02: VocabLesson = {
   slug: "a2-voc-l02",
-  code: "V.11",
+  code: "V.13",
   level: "A2",
   title: "La santé et le médecin",
   theory: [
@@ -1409,7 +1409,7 @@ const a2VocL02: VocabLesson = {
 
 const a2VocL03: VocabLesson = {
   slug: "a2-voc-l03",
-  code: "V.12",
+  code: "V.14",
   level: "A2",
   title: "Le monde du travail",
   theory: [
@@ -1532,7 +1532,7 @@ const a2VocL03: VocabLesson = {
 
 const a2VocL04: VocabLesson = {
   slug: "a2-voc-l04",
-  code: "V.13",
+  code: "V.15",
   level: "A2",
   title: "Les sorties et les invitations",
   theory: [
@@ -1645,7 +1645,7 @@ const a2VocL04: VocabLesson = {
 
 const a2VocL05: VocabLesson = {
   slug: "a2-voc-l05",
-  code: "V.14",
+  code: "V.16",
   level: "A2",
   title: "La cuisine et les recettes",
   theory: [
@@ -1765,7 +1765,7 @@ const a2VocL05: VocabLesson = {
 
 const a2VocL06: VocabLesson = {
   slug: "a2-voc-l06",
-  code: "V.15",
+  code: "V.17",
   level: "A2",
   title: "La famille et les relations",
   theory: [
@@ -1897,7 +1897,7 @@ const a2VocL06: VocabLesson = {
 
 const a2VocL07: VocabLesson = {
   slug: "a2-voc-l07",
-  code: "V.16",
+  code: "V.18",
   level: "A2",
   title: "Les médias et Internet",
   theory: [
@@ -2027,7 +2027,7 @@ const a2VocL07: VocabLesson = {
 
 const a2VocL08: VocabLesson = {
   slug: "a2-voc-l08",
-  code: "V.17",
+  code: "V.19",
   level: "A2",
   title: "La ville et les services",
   theory: [
@@ -2265,10 +2265,677 @@ const a0VocNationalites: VocabLesson = {
   ],
 };
 
+// ── V.1 — Se présenter ────────────────────────────────────────────────────────
+
+const a1VocSePresenter: VocabLesson = {
+  slug: "a0-se-presenter",
+  code: "V.1",
+  level: "A1",
+  title: "Se présenter",
+  theory: [
+    { type: "heading", text: "Mon identité" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [
+        ["Comment vous appelez-vous ?", "Je m'appelle Phuoc VAN"],
+        ["Quel est votre prénom ?", "Mon prénom est Phuoc"],
+        ["Quel est votre nom de famille ?", "Mon nom de famille est VAN"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "En français, le NOM DE FAMILLE s'écrit souvent en majuscules.",
+        "Prénom : Phuoc → NOM : VAN",
+      ],
+    },
+    { type: "heading", text: "Mon âge" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [
+        ["Quel âge avez-vous ?", "J'ai 37 ans"],
+        ["Quelle est votre date de naissance ?", "Je suis né le 8 octobre 1987"],
+      ],
+    },
+    { type: "note", text: "On dit J'AI … ANS (avec le verbe avoir). On ne dit pas « J'ai 37 années »." },
+    { type: "heading", text: "Ma nationalité" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [
+        ["Quelle est votre nationalité ?", "Je suis vietnamien / vietnamienne"],
+        ["Quelle langue parlez-vous ?", "Je parle le vietnamien"],
+        ["De quel pays venez-vous ?", "Je viens du Vietnam"],
+      ],
+    },
+    { type: "heading", text: "Mon domicile" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [
+        ["Où habitez-vous ?", "J'habite à Aproz"],
+        ["Quelle est votre adresse ?", "L'adresse est Chemin du Carolet 14"],
+        ["Quel est votre code postal ?", "Le code postal est 1994"],
+      ],
+    },
+    { type: "heading", text: "Ma profession" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [
+        ["Quel est votre métier ?", "Je suis enseignant / enseignante"],
+        ["Où travaillez-vous ?", "Je travaille à l'école"],
+      ],
+    },
+    { type: "heading", text: "Mes loisirs" },
+    {
+      type: "grid",
+      headers: ["Question", "Réponse"],
+      rows: [["Qu'est-ce que vous aimez faire ?", "J'aime dessiner"]],
+    },
+    { type: "heading", text: "Ma famille" },
+    {
+      type: "grid",
+      headers: ["Lien de parenté", "Phrase complète"],
+      rows: [
+        ["Ma femme", "Ma femme s'appelle Thuy"],
+        ["Ma fille", "Ma fille s'appelle Alicia"],
+        ["Mon fils", "Mon fils s'appelle Eliott"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Astuce",
+      items: [
+        "Utilisez VOUS avec un adulte inconnu, un professeur ou dans une situation formelle.",
+        "Utilisez TU avec un ami, un enfant ou un membre de la famille.",
+      ],
+    },
+  ],
+  exercises: [
+    {
+      type: "write",
+      title: "Exercice 1",
+      instruction: "Complétez les phrases avec vos informations personnelles.",
+      prompts: [
+        "Bonjour, je m'appelle …",
+        "Je suis … (nationalité).",
+        "J'ai … ans.",
+        "Je suis né(e) le … (date de naissance).",
+        "Je viens de … (pays).",
+        "Je parle le …",
+        "J'habite à … (ville).",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 2 — Formulaire administratif",
+      instruction: "Remplissez le formulaire avec vos informations.",
+      prompts: ["Nom :", "Prénom :", "Âge :", "Adresse :", "Fait à : …                     Le : …"],
+    },
+    {
+      type: "write",
+      title: "Exercice 3 — Ma fiche d'identité",
+      instruction: "Complétez votre fiche d'identité complète.",
+      prompts: ["Nom :", "Prénom :", "Nationalité :", "Pays d'origine :", "Date de naissance :", "État civil :", "Profession :", "Loisirs :"],
+    },
+    {
+      type: "match",
+      title: "Exercice 4",
+      instruction: "Reliez les débuts de phrases à leur fin correcte.",
+      pairs: [
+        { left: "Comment ça …", right: "… va ?" },
+        { left: "Enchanté de …", right: "… faire ta connaissance." },
+        { left: "Je viens …", right: "… de France." },
+        { left: "Salut, je suis …", right: "… français." },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 5 — Dialogue",
+      instruction: "Complétez le dialogue en répondant à la place de Karim.",
+      prompts: [
+        "Fatima : Salut, comment tu t'appelles ?\nKarim : …",
+        "Fatima : Et toi, tu es d'où ?\nKarim : …",
+        "Fatima : Tu as quel âge ?\nKarim : …",
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 6 — Dialogue formel",
+      instruction: "Complétez le dialogue entre un élève et un professeur.",
+      items: [
+        { sentence: "Élève : Bonjour, comment ___ -vous ?", hint: "allez", answer: "allez" },
+        { sentence: "Professeur : Très bien, merci. Et ___ ?", hint: "vous", answer: "vous" },
+        { sentence: "Élève : Je ___ bien, merci.", hint: "vais", answer: "vais" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 7",
+      instruction: "Choisissez le bon mot pour compléter chaque phrase.",
+      items: [
+        { sentence: "Salut ! ___ va ?", choices: ["Ça", "Il", "Comment"], correctIdx: 0 },
+        { sentence: "Comment ___ vous appelez-vous ?", choices: ["tu", "vous", "elle"], correctIdx: 1 },
+        { sentence: "Enchanté de ___ connaître.", choices: ["ton", "te", "ta"], correctIdx: 1 },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 8 — Questions personnelles",
+      instruction: "Répondez aux questions avec une phrase complète.",
+      prompts: ["Comment tu t'appelles ?", "D'où viens-tu ?", "Quel âge as-tu ?"],
+    },
+    {
+      type: "write",
+      title: "Exercice 9 — Grand formulaire",
+      instruction: "Remplissez ce formulaire complet avec vos informations personnelles.",
+      prompts: ["Nom de famille :", "Prénom :", "Âge :", "Nationalité :", "Adresse :", "Code postal :", "Téléphone :", "Courriel :"],
+    },
+    {
+      type: "write",
+      title: "Exercice 10 — Corrigez les erreurs",
+      instruction: "Ces phrases contiennent des erreurs. Récrivez-les correctement.",
+      prompts: [
+        "Salut, j'habite de Sion. → …",
+        "Je t'appelle VAN Phuoc. → …",
+        "Enchanté connaître de te. → …",
+        "Aujourd'hui, j'ai 19 âge. → …",
+        "Je parle la français en classe. → …",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 11 — Compréhension écrite",
+      instruction:
+        "Lisez le texte, puis répondez aux questions.\n\n" +
+        "« Bonjour, je m'appelle Amina. J'ai 24 ans et je viens d'Iran. " +
+        "Je parle persan et un peu de français. J'ai deux sœurs et un frère. " +
+        "J'aime lire des livres et cuisiner. Je suis professeur d'histoire. " +
+        "J'adore le chocolat et je n'aime pas le café. »",
+      prompts: [
+        "Elle vient de quel pays ?",
+        "Elle a combien de sœurs ?",
+        "Quel est son métier ?",
+        "Qu'est-ce qu'elle n'aime pas boire ?",
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 12 — Complétez avec les mots",
+      instruction: "Complétez les phrases avec les mots : 25 ans · léo · mon numéro · quel âge · nationalité · m'appelle",
+      items: [
+        { sentence: "Vous avez ___ ?", hint: "quel âge", answer: "quel âge" },
+        { sentence: "J'ai ___ .", hint: "25 ans", answer: "25 ans" },
+        { sentence: "Enchanté, moi c'est ___ .", hint: "léo", answer: "léo" },
+        { sentence: "Quelle est ta ___ ?", hint: "nationalité", answer: "nationalité" },
+        { sentence: "Je ___ Nicolas.", hint: "m'appelle", answer: "m'appelle" },
+        { sentence: "___ , c'est le 07 14 54 19 30.", hint: "Mon numéro", answer: "Mon numéro" },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 13 — Dictée",
+      instruction: "Écoutez votre professeur et écrivez les mots que vous entendez.",
+      prompts: ["Mot 1 :", "Mot 2 :", "Mot 3 :", "Mot 4 :", "Mot 5 :"],
+    },
+    {
+      type: "write",
+      title: "Exercice 14 — Compréhension écrite",
+      instruction:
+        "Lisez le texte, puis répondez aux questions.\n\n" +
+        "« Salut ! Je suis Farid. Je viens de Kaboul, une grande ville en Afghanistan. " +
+        "J'ai 30 ans. Dans ma famille, il y a ma mère, mon père, trois frères et moi. " +
+        "La musique traditionnelle afghane est ma préférée. »",
+      prompts: [
+        "Quel est le prénom du garçon ?",
+        "Il y a combien d'enfants dans sa famille ?",
+        "Il vient de quel pays ?",
+        "Quel genre de musique il aime écouter ?",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 15 — Fiche d'accueil",
+      instruction:
+        "Lisez la fiche et répondez aux questions.\n\n" +
+        "━━━━ FICHE D'ACCUEIL ET D'ORIENTATION ━━━━\n" +
+        "☐ Homme   ☑ Femme\n" +
+        "Nom : BENALI         Prénom : Nadia\n" +
+        "Adresse : 7, avenue des Platanes\n" +
+        "          34000 Montpellier\n" +
+        "Téléphone : 07 23 45 67 89\n" +
+        "Âge : 31 ans\n" +
+        "Nationalité : algérienne\n" +
+        "Année d'arrivée en France : 2019\n" +
+        "Profession : comptable\n" +
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      prompts: [
+        "La personne est un homme ou une femme ?",
+        "Quel est son prénom ?",
+        "La personne a quel âge ?",
+        "Quelle est sa nationalité ?",
+        "Quelle est sa profession ?",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 16 — Présentez une personne",
+      instruction:
+        "Exemple — Thomas Beaumont :\n" +
+        "• Il s'appelle Thomas Beaumont.\n" +
+        "• Il est suisse.\n" +
+        "• Il est pompier.\n" +
+        "• Il a 29 ans.\n\n" +
+        "Présentez maintenant ces personnes :\n\n" +
+        "1. Leila Nakbi — algérienne — dentiste — 34 ans\n" +
+        "2. Marco Fontana — italien — cuisinier — 41 ans\n" +
+        "3. Priya Singh — indienne — étudiante — 20 ans\n" +
+        "4. Une personne de votre choix\n" +
+        "5. Présentez-vous",
+      prompts: ["Leila Nakbi :", "Marco Fontana :", "Priya Singh :", "Personne de mon choix :", "Moi :"],
+    },
+  ],
+};
+
+// ── V.2 — La famille ──────────────────────────────────────────────────────────
+
+const a1VocFamille: VocabLesson = {
+  slug: "a1-voc-famille",
+  code: "V.2",
+  level: "A1",
+  title: "La famille",
+  theory: [
+    { type: "heading", text: "La famille" },
+    {
+      type: "grid",
+      headers: ["Féminin", "Masculin"],
+      equalCols: true,
+      rows: [
+        ["Une femme", "Un mari"],
+        ["Une sœur", "Un frère"],
+        ["Des parents", "Des enfants"],
+        ["Une mère", "Une fille"],
+        ["Un père", "Un fils"],
+        ["Des grands-parents", "Des petits-enfants"],
+      ],
+    },
+    { type: "heading", text: "La famille élargie", sub: true },
+    {
+      type: "grid",
+      headers: ["Féminin", "Masculin"],
+      equalCols: true,
+      rows: [
+        ["Ma tante", "Mon oncle"],
+        ["Ma cousine", "Mon cousin"],
+        ["Ma nièce", "Mon neveu"],
+      ],
+    },
+    {
+      type: "plain_list",
+      noBulletItems: [0, 1, 2],
+      items: [
+        "Mon père et ma mère sont mes parents.",
+        "Mon cousin, c'est le fils de mon oncle et de ma tante.",
+        "Ma cousine, c'est la fille de mon oncle et de ma tante.",
+      ],
+    },
+    { type: "heading", text: "La situation familiale", sub: true },
+    {
+      type: "grid",
+      headers: ["Situation", "Situation"],
+      equalCols: true,
+      rows: [
+        ["Célibataire", "En couple"],
+        ["Marié(e)", "Pacsé(e)"],
+        ["Divorcé(e)", "Séparé(e)"],
+        ["Veuf", "Veuve"],
+      ],
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Exercice 1",
+      instruction: "Associez les termes.",
+      pairs: [
+        { left: "Des parents", right: "Des enfants" },
+        { left: "Une mère", right: "Un père" },
+        { left: "Un frère", right: "Une sœur" },
+        { left: "Des grands-parents", right: "Des petits-enfants" },
+        { left: "Une fille", right: "Un fils" },
+        { left: "Une femme", right: "Un mari" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 2",
+      instruction: "Entourez la forme correcte.",
+      inlineChoices: true,
+      items: [
+        { sentence: "[ Ma / Mon ] sœur est mariée.", choices: ["Ma", "Mon"], correctIdx: 0 },
+        { sentence: "[ Ton / Tes ] parents sont divorcés.", choices: ["Ton", "Tes"], correctIdx: 1 },
+        { sentence: "[ Ses / Sa ] grands-parents sont âgés.", choices: ["Ses", "Sa"], correctIdx: 0 },
+        { sentence: "[ Mon / Mes ] père est veuf.", choices: ["Mon", "Mes"], correctIdx: 0 },
+        { sentence: "[ Son / Sa ] fille est brune.", choices: ["Son", "Sa"], correctIdx: 1 },
+        { sentence: "[ Notre / Leurs ] enfants sont mariés.", choices: ["Notre", "Leurs"], correctIdx: 1 },
+        { sentence: "[ Ma / Mon ] cousine habite à Genève.", choices: ["Ma", "Mon"], correctIdx: 0 },
+        { sentence: "[ Ton / Ta ] sœur est très gentille.", choices: ["Ton", "Ta"], correctIdx: 1 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 3",
+      instruction: "Remplacez les mots entre crochets par l'adjectif possessif.",
+      items: [
+        { sentence: "C'est [à vous] ___ mari ?", hint: "votre", answer: "votre" },
+        { sentence: "C'est [à elle] ___ fils ?", hint: "son", answer: "son" },
+        { sentence: "C'est [à eux] ___ père ?", hint: "leur", answer: "leur" },
+        { sentence: "C'est [à toi] ___ amie ?", hint: "ton", answer: "ton" },
+        { sentence: "Ce sont [à nous] ___ enfants ?", hint: "nos", answer: "nos" },
+        { sentence: "C'est [à lui] ___ fille ?", hint: "sa", answer: "sa" },
+        { sentence: "C'est [à elles] ___ mère ?", hint: "leur", answer: "leur" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 4",
+      instruction:
+        "Lisez et soulignez la bonne réponse.\n\n" +
+        "NOTRE PETITE FILLE JACKIE est née le 9 juillet à 8h20\n" +
+        "Son grand frère Sébastien, sa grande sœur Marion,\n" +
+        "ses parents Olivier et Natasha,\n" +
+        "ses grands-parents Marc et Catherine",
+      inlineChoices: true,
+      items: [
+        { sentence: "Jackie est [ la fille / le fils ] d'Olivier et Natasha.", choices: ["la fille", "le fils"], correctIdx: 0 },
+        { sentence: "Jackie est [ le frère / la sœur ] de Sébastien et Marion.", choices: ["le frère", "la sœur"], correctIdx: 1 },
+        { sentence: "Jackie a [ une sœur / deux sœurs ].", choices: ["une sœur", "deux sœurs"], correctIdx: 0 },
+        { sentence: "Marc et Catherine sont les [ parents / grands-parents ].", choices: ["parents", "grands-parents"], correctIdx: 1 },
+        { sentence: "Marion a [ un frère / un frère et une sœur ].", choices: ["un frère", "un frère et une sœur"], correctIdx: 1 },
+        { sentence: "Olivier et Natasha ont [ deux enfants / trois enfants ].", choices: ["deux enfants", "trois enfants"], correctIdx: 1 },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 5",
+      instruction: "Écrivez cinq phrases sur votre famille.",
+      prompts: ["1.", "2.", "3.", "4.", "5."],
+    },
+    {
+      type: "fill",
+      title: "Exercice 6",
+      instruction:
+        "Complétez les phrases.\n(Arbre généalogique : Paul + Françoise → Léa ; Léa + Daniel → Jules + Elise)",
+      items: [
+        { sentence: "Paul est le ___ de Léa.", hint: "père", answer: "père" },
+        { sentence: "Daniel est le ___ de Jules.", hint: "père", answer: "père" },
+        { sentence: "Jules est le ___ de Léa.", hint: "fils", answer: "fils" },
+        { sentence: "Elise est la ___ de Jules.", hint: "sœur", answer: "sœur" },
+        { sentence: "Paul et Françoise sont les ___ de Léa.", hint: "parents", answer: "parents" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 7",
+      instruction: "Indiquez si le mot est Singulier masculin (SM), Singulier féminin (SF), Pluriel masculin (PM) ou Pluriel féminin (PF).",
+      items: [
+        { sentence: "nationalité", choices: ["SM", "SF", "PM", "PF"], correctIdx: 1 },
+        { sentence: "parents", choices: ["SM", "SF", "PM", "PF"], correctIdx: 2 },
+        { sentence: "fils", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "oncle", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "langues", choices: ["SM", "SF", "PM", "PF"], correctIdx: 3 },
+        { sentence: "enfant", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "pays", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "filles", choices: ["SM", "SF", "PM", "PF"], correctIdx: 3 },
+        { sentence: "cousine", choices: ["SM", "SF", "PM", "PF"], correctIdx: 1 },
+        { sentence: "tante", choices: ["SM", "SF", "PM", "PF"], correctIdx: 1 },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 8 — Lisez le texte",
+      instruction:
+        "Lisez le texte, puis répondez aux questions.\n\n" +
+        "« Je vais vous parler de ma famille. Mes parents s'appellent Muzghan et Noorullah. " +
+        "J'ai un grand frère et une petite sœur. Mon frère s'appelle Ali, et ma sœur s'appelle Amina. " +
+        "J'ai deux cousins. Ils s'appellent Karim et Sara. Nous jouons souvent ensemble le week-end. " +
+        "La fille de Sara s'appelle Mary. " +
+        "Mon frère Ali a un fils et une fille. Mon neveu s'appelle Omar et ma nièce s'appelle Leila. " +
+        "La fille d'Amina s'appelle Jamila. »",
+      prompts: [
+        "Comment s'appellent les parents ?",
+        "Combien de frères et sœurs y a-t-il ?",
+        "Comment s'appellent les cousins ?",
+        "Qui est Omar ?",
+        "Qui est Jamila ?",
+      ],
+    },
+    {
+      type: "fill",
+      title: "Exercice 9",
+      instruction: "Remplacez les mots entre crochets par l'adjectif possessif.",
+      items: [
+        { sentence: "Ce n'est pas [à moi] ___ mère ?", hint: "ma", answer: "ma" },
+        { sentence: "C'est [à toi] ___ mari ?", hint: "ton", answer: "ton" },
+        { sentence: "C'est [à elle] ___ sœur ?", hint: "sa", answer: "sa" },
+        { sentence: "C'est [à lui] ___ cousin ?", hint: "son", answer: "son" },
+        { sentence: "Ce ne sont pas [à nous] ___ parents ?", hint: "nos", answer: "nos" },
+        { sentence: "Ce sont [à eux] ___ enfants ?", hint: "leurs", answer: "leurs" },
+        { sentence: "C'est [à vous] ___ fille ?", hint: "votre", answer: "votre" },
+        { sentence: "C'est [à elles] ___ grand-mère ?", hint: "leur", answer: "leur" },
+      ],
+    },
+    {
+      type: "match",
+      title: "Exercice 10",
+      instruction: "Reliez les termes ensemble.",
+      pairs: [
+        { left: "C'est", right: "Ernest" },
+        { left: "C'est", right: "mon père" },
+        { left: "Ce sont", right: "ses parents" },
+        { left: "Ce sont", right: "des écrivains français" },
+        { left: "Il est", right: "professeur" },
+        { left: "Il est", right: "un artiste" },
+        { left: "Elle est", right: "chanteur" },
+        { left: "Ils sont", right: "poètes" },
+        { left: "Ils sont", right: "Monsieur André" },
+        { left: "Elles sont", right: "françaises" },
+      ],
+    },
+    {
+      type: "classify",
+      title: "Exercice 11",
+      instruction: "Classez les mots dans le tableau. [ Femme – divorcé – mari – veuf – célibataire – enfant ]",
+      categories: ["Membre de la famille", "Situation familiale"],
+      items: [
+        { word: "femme", categoryIdx: 0 },
+        { word: "mari", categoryIdx: 0 },
+        { word: "enfant", categoryIdx: 0 },
+        { word: "divorcé", categoryIdx: 1 },
+        { word: "veuf", categoryIdx: 1 },
+        { word: "célibataire", categoryIdx: 1 },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 12",
+      instruction: "Écrivez 4 phrases sur la situation de votre famille.",
+      prompts: ["1.", "2.", "3.", "4."],
+    },
+  ],
+};
+
+// ── V.3 — La description physique ────────────────────────────────────────────
+
+const a1VocDescription: VocabLesson = {
+  slug: "a1-voc-description",
+  code: "V.3",
+  level: "A1",
+  title: "La description",
+  theory: [
+    { type: "heading", text: "La description physique" },
+    {
+      type: "grid",
+      headers: ["Vocabulaire", "Vocabulaire", "Vocabulaire"],
+      rows: [
+        ["Grand(e)", "Petit(e)", ""],
+        ["Blond(e)", "Brun(e)", "Roux / Rousse"],
+        ["Jeune", "Âgé(e)", ""],
+      ],
+    },
+    { type: "heading", text: "Les cheveux", sub: true },
+    {
+      type: "grid",
+      headers: ["Longueur", "Longueur", "Longueur"],
+      rows: [
+        ["Court(e)", "Mi-long(ue)", "Long(ue)"],
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Forme", "Forme", "Forme"],
+      rows: [
+        ["Ondulé(e)", "Frisé(e)", "Raide"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Grammaire",
+      items: [
+        "Pour décrire une personne, il faut utiliser :",
+        "le verbe « être » + adjectif au masculin ou au féminin",
+        "Il est grand. → Elle est grande.",
+        "Il est blond. → Elle est blonde.",
+      ],
+      noBulletItems: [0],
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Exercice 1",
+      instruction: "Indiquez si le mot est Singulier masculin (SM), Singulier féminin (SF), Pluriel masculin (PM) ou Pluriel féminin (PF).",
+      items: [
+        { sentence: "Rousses", choices: ["SM", "SF", "PM", "PF"], correctIdx: 3 },
+        { sentence: "Âgé", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "jeunes", choices: ["SM", "SF", "PM", "PF"], correctIdx: 2 },
+        { sentence: "Petite", choices: ["SM", "SF", "PM", "PF"], correctIdx: 1 },
+        { sentence: "Brunes", choices: ["SM", "SF", "PM", "PF"], correctIdx: 3 },
+        { sentence: "mari", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "marié", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "veufs", choices: ["SM", "SF", "PM", "PF"], correctIdx: 2 },
+        { sentence: "célibataire", choices: ["SM", "SF", "PM", "PF"], correctIdx: 0 },
+        { sentence: "Grands", choices: ["SM", "SF", "PM", "PF"], correctIdx: 2 },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 2",
+      instruction: "Complétez les phrases avec les adjectifs qui conviennent.",
+      prompts: [
+        "Il …",
+        "Elles …",
+        "Ils …",
+        "Elle …",
+        "Il …",
+        "Elle …",
+        "Ils …",
+        "Il … / Elle …",
+        "Il … / Elle …",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 3",
+      instruction:
+        "Écrivez les phrases selon l'exemple. Utilisez les adjectifs possessifs.\n\n" +
+        "Exemple : J'ai des cheveux longs. → Mes cheveux sont longs.",
+      prompts: [
+        "Elle a des cheveux bruns. →",
+        "Tu as une longue robe. →",
+        "Elles ont des yeux verts. →",
+        "Vous avez une paire de chaussures neuves. →",
+        "Nous avons un sac d'école très lourd. →",
+        "J'ai des mains douces et fines. →",
+        "Ils ont des vêtements élégants. →",
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 4",
+      instruction:
+        "Vous êtes en vacances avec la famille de Léa. Vous écrivez une carte postale à votre mère pour présenter sa famille. " +
+        "Écrivez entre 30 et 40 mots.",
+      prompts: ["Votre carte postale :"],
+    },
+    {
+      type: "fill",
+      title: "Exercice 5",
+      instruction: "Complétez avec l'adjectif masculin ou féminin.",
+      items: [
+        { sentence: "Il est ___ / Elle est grosse.", hint: "gros", answer: "gros" },
+        { sentence: "Il est beau / Elles sont ___.", hint: "belles", answer: "belles" },
+        { sentence: "Il est grand / Elle est ___.", hint: "grande", answer: "grande" },
+        { sentence: "Ils sont ___ / Elle est mince.", hint: "minces", answer: "minces" },
+        { sentence: "Il est petit / Elles sont ___.", hint: "petites", answer: "petites" },
+        { sentence: "Ils sont ___ / Elle est âgée.", hint: "âgés", answer: "âgés" },
+        { sentence: "Il est ___ / Elle est jeune.", hint: "jeune", answer: "jeune" },
+        { sentence: "Il est laid / Elles sont ___.", hint: "laides", answer: "laides" },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 6",
+      instruction:
+        "Observez les personnages (Julie, Joan, Sophie, Jérémy, Nathan, Jodie, Marion, Alfred) et répondez aux questions.",
+      prompts: [
+        "Combien y a-t-il d'hommes et de femmes ?",
+        "Qui a les cheveux longs ?",
+        "Qui porte un chapeau ou une casquette ?",
+        "Qui porte une barbe ?",
+        "Qui est chauve ?",
+      ],
+    },
+    {
+      type: "match",
+      title: "Exercice 7",
+      instruction:
+        "Associez les membres de la famille à leur numéro dans l'image.\n" +
+        "(Image : 1 = Ma sœur, 2 = Ma mère, 4 = Mon père, 5 = Ma grand-mère, 6 = Mon grand-père, Moi = le garçon au centre)",
+      pairs: [
+        { left: "Mon frère", right: "bébé dans le landau" },
+        { left: "Ma sœur", right: "1 — petite fille" },
+        { left: "Ma mère", right: "2 — femme avec bébé" },
+        { left: "Mon père", right: "4 — homme avec lunettes" },
+        { left: "Ma grand-mère", right: "5 — dame âgée" },
+        { left: "Mon grand-père", right: "6 — monsieur âgé" },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 8",
+      instruction: "Répondez aux questions avec une phrase complète.",
+      prompts: [
+        "Combien il y a de personnes dans ma famille ?",
+        "Qui portent des lunettes ?",
+        "Qui est le plus grand ?",
+        "Qui est le plus petit ?",
+      ],
+    },
+  ],
+};
+
 // ── Registry ──────────────────────────────────────────────────────────────────
 
 const ALL_VOCAB_LESSONS: VocabLesson[] = [
   a0VocNationalites,
+  a1VocSePresenter,
+  a1VocFamille,
+  a1VocDescription,
   a1VocNationalites,
   a1VocL13,
   a1VocL16,

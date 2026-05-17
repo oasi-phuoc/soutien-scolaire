@@ -23,7 +23,6 @@ const SECTIONS: SectionDef[] = [
 const SECTION_ORDER: FrenchSection[] = ["A0", "A1", "A2", "B1", "B2"];
 
 const TABS: { id: FrenchTab; label: string }[] = [
-  { id: "general",     label: "Apprendre" },
   { id: "vocabulaire", label: "Vocabulaire" },
   { id: "grammaire",   label: "Grammaire" },
 ];
@@ -32,7 +31,7 @@ const LEVEL_TO_SECTION: Record<string, FrenchSection> = {
   PA: "A0", ALPHA: "A0", A0: "A0", A1: "A1", A2: "A2", B1: "B1", B2: "B2",
 };
 
-const VALID_TABS: FrenchTab[] = ["general", "vocabulaire", "grammaire"];
+const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire"];
 
 function getSectionState(sectionId: FrenchSection, currentSection: FrenchSection | null): SectionState {
   if (!currentSection) return "locked";
@@ -253,7 +252,7 @@ export function FrancaisClient() {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") as FrenchTab | null;
   const [tab, setTab] = useState<FrenchTab>(
-    initialTab && VALID_TABS.includes(initialTab) ? initialTab : "general",
+    initialTab && VALID_TABS.includes(initialTab) ? initialTab : "vocabulaire",
   );
   const [currentSection, setCurrentSection] = useState<FrenchSection | null>(null);
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
@@ -282,7 +281,7 @@ export function FrancaisClient() {
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+        className="grid grid-cols-2 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
       >
         {TABS.map(({ id, label }) => (
           <button
@@ -302,53 +301,29 @@ export function FrancaisClient() {
         ))}
       </div>
 
-      {tab === "general" ? (
-        /* Apprendre tab — section cards with progress locking */
-        <section className="space-y-4" aria-label="Modules de français">
-          {SECTIONS.map((sec) => {
-            const state = hydrated ? getSectionState(sec.id, currentSection) : "locked";
-            const themes = FRENCH_THEMES.filter(
-              (th) => th.section === sec.id && !th.tab,
-            );
-            return (
-              <SectionCard
-                key={sec.id}
-                sec={sec}
-                state={state}
-                themes={themes}
-                completedSlugs={hydrated ? completedSlugs : new Set()}
-                hydrated={hydrated}
-              />
-            );
-          })}
-        </section>
-      ) : (
-        /* Grammaire / Vocabulaire / Conjugaison tabs — same SectionCard presentation */
-        /* All sections accessible; "Terminé" only when truly all lessons done */
-        <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
-          {SECTIONS.map((sec) => {
-            const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
-            const themes = FRENCH_THEMES.filter(
-              (th) => th.section === sec.id &&
-                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
-            );
-            if (themes.length === 0) return null;
-            const allDone = hydrated && themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
-            const state: SectionState = allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
-            return (
-              <SectionCard
-                key={sec.id}
-                sec={sec}
-                state={state}
-                themes={themes}
-                completedSlugs={hydrated ? completedSlugs : new Set()}
-                hydrated={hydrated}
-                returnTab={tab}
-              />
-            );
-          })}
-        </section>
-      )}
+      <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
+        {SECTIONS.map((sec) => {
+          const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
+          const themes = FRENCH_THEMES.filter(
+            (th) => th.section === sec.id &&
+              (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
+          );
+          if (themes.length === 0) return null;
+          const allDone = hydrated && themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
+          const state: SectionState = allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
+          return (
+            <SectionCard
+              key={sec.id}
+              sec={sec}
+              state={state}
+              themes={themes}
+              completedSlugs={hydrated ? completedSlugs : new Set()}
+              hydrated={hydrated}
+              returnTab={tab}
+            />
+          );
+        })}
+      </section>
 
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
         Test de positionnement :{" "}
