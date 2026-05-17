@@ -267,13 +267,16 @@ const a1GrL04: GrammarLesson = {
     { type: "heading", text: "Différence entre défini et indéfini", sub: true },
     {
       type: "highlight",
-      label: "Article défini — chose précise",
-      items: ["Je ferme {a}la{/a} porte.", "(la porte est connue)"],
-      noBulletItems: [1],
+      label: "Article défini",
+      items: [
+        "La porte est connue, par exemple la porte de la maison.",
+        "Je ferme {a}la{/a} porte.",
+      ],
+      noBulletItems: [0],
     },
     {
       type: "highlight",
-      label: "Article indéfini — chose non précise",
+      label: "Article indéfini",
       items: ["Je cherche {a}une{/a} porte.", "(n'importe quelle porte)"],
       noBulletItems: [1],
     },
