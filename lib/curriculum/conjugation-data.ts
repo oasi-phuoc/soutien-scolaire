@@ -1194,7 +1194,6 @@ const a1ConjL08: ConjLesson = {
     },
     { type: "heading", text: "Aller", sub: true },
     { type: "plain_list", items: ["Le verbe aller sert à dire où une personne se déplace. La destination où on va."], noBulletItems: [0] },
-    { type: "heading", text: "Aller → destination", sub: true, accent: true },
     {
       type: "grid",
       headers: ["Structure", "Exemple"],
@@ -1207,7 +1206,8 @@ const a1ConjL08: ConjLesson = {
         ["{a}aller chez{/a} + personne", "Il va {a}chez{/a} le médecin."],
       ],
     },
-    { type: "heading", text: "Venir → origine", sub: true, accent: true },
+    { type: "heading", text: "Venir", sub: true },
+    { type: "plain_list", items: ["Le verbe venir sert à dire d'où une personne arrive. L'origine d'où on vient."], noBulletItems: [0] },
     {
       type: "grid",
       headers: ["Structure", "Exemple"],
@@ -1217,15 +1217,6 @@ const a1ConjL08: ConjLesson = {
         ["{a}venir du{/a} (de + le)", "Elle vient {a}du{/a} marché."],
         ["{a}venir des{/a} (de + les)", "Ils viennent {a}des{/a} États-Unis."],
         ["{a}venir de{/a} + pays féminin", "Tu viens {a}de{/a} France."],
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Expressions avec aller",
-      items: [
-        "Comment tu vas ? / Comment allez-vous ?",
-        "Je vais bien, merci. / Ça va ?",
-        "Aller + infinitif → futur proche : Je vais partir.",
       ],
     },
   ],
