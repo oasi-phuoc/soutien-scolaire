@@ -135,7 +135,7 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                 {verb.infinitive}
               </th>
               <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
-                {negation ? <>→ <span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : "→"}
+                {negation ? <><span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : "→"}
               </th>
             </tr>
           </thead>
@@ -153,9 +153,9 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                     <span className="font-bold text-[var(--color-accent-fr)]">{nePrefix}</span>
                   )}
                   {verb.reflexivePronouns?.[ri] !== undefined && (
-                    <span className="font-bold text-[var(--color-accent-fr)]">
-                      {verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}
-                    </span>
+                    negation
+                      ? <span className="text-[var(--color-text-primary)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
+                      : <span className="font-bold text-[var(--color-accent-fr)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                   )}
                   {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
                   {negation
