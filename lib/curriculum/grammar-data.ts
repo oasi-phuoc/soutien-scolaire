@@ -2135,7 +2135,6 @@ const a1GrInterro: GrammarLesson = {
         "La plus courante : utiliser {a}est-ce que{/a}.",
       ],
     },
-    { type: "heading", text: "Est-ce que", sub: true, accent: true },
     {
       type: "plain_list",
       items: [
