@@ -115,11 +115,11 @@ function SectionCard({
   hydrated: boolean;
 }) {
   const locked = state === "locked";
+  const inProgress = state === "in_progress";
+  // in_progress: always visible, not toggleable
+  // locked / completed: collapsed by default, toggleable
   const [expanded, setExpanded] = useState(false);
-
-  useEffect(() => {
-    if (state === "in_progress") setExpanded(true);
-  }, [state]);
+  const showContent = inProgress || expanded;
 
   // First uncompleted lesson in this section (for sequential unlock within in_progress)
   const firstAvailableSlug =
@@ -140,44 +140,59 @@ function SectionCard({
   const completedCount = hydrated ? themes.filter((th) => completedSlugs.has(th.slug)).length : 0;
   const pct = themes.length > 0 ? Math.round((completedCount / themes.length) * 100) : 0;
 
+  // Shared icon box
+  const iconBox = (
+    <div
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+      style={{ background: "color-mix(in srgb, var(--color-accent-fr) 15%, transparent)" }}
+    >
+      <span className="text-sm font-bold text-[var(--color-accent-fr)]">{sec.code}</span>
+    </div>
+  );
+
   return (
     <div
       className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
         locked
           ? "border-[var(--color-border-default)] opacity-50"
-          : expanded
+          : inProgress || expanded
             ? "border-[var(--color-accent-fr)]/50"
             : "border-[var(--color-border-default)]"
       }`}
     >
-      {/* Header — always clickable */}
-      <button
-        type="button"
-        onClick={() => setExpanded((e) => !e)}
-        className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
-      >
-        <div
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
-          style={{ background: "color-mix(in srgb, var(--color-accent-fr) 15%, transparent)" }}
-        >
-          <span className="text-sm font-bold text-[var(--color-accent-fr)]">{sec.code}</span>
+      {/* Header — in_progress: static div; locked/completed: clickable button */}
+      {inProgress ? (
+        <div className="flex w-full items-center gap-3 px-4 pt-4 pb-3">
+          {iconBox}
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+          </div>
+          <SectionStateBadge state={state} />
         </div>
-        <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
-        </div>
-        <SectionStateBadge state={state} />
-        <svg
-          width="14" height="14" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" strokeWidth="2"
-          className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
-          aria-hidden
+      ) : (
+        <button
+          type="button"
+          onClick={() => setExpanded((e) => !e)}
+          className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
         >
-          <path d="M9 18l6-6-6-6" />
-        </svg>
-      </button>
+          {iconBox}
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
+          </div>
+          <SectionStateBadge state={state} />
+          <svg
+            width="14" height="14" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" strokeWidth="2"
+            className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
+            aria-hidden
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      )}
 
       {/* Progress bar — in_progress only */}
-      {expanded && state === "in_progress" && themes.length > 0 && (
+      {inProgress && themes.length > 0 && (
         <div className="px-4 pb-2">
           <AppProgressBar value={pct} color="var(--color-accent-fr)" height={4} />
           <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
@@ -187,7 +202,7 @@ function SectionCard({
       )}
 
       {/* Lesson list */}
-      {expanded && (
+      {showContent && (
         themes.length > 0 ? (
           <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
             {themes.map((th) => {
