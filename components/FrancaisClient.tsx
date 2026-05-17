@@ -342,7 +342,7 @@ export function FrancaisClient() {
           {SECTIONS.map((sec) => {
             const state = hydrated ? getSectionState(sec.id, currentSection) : "locked";
             const themes = FRENCH_THEMES.filter(
-              (th) => th.section === sec.id && th.tab === tab,
+              (th) => th.section === sec.id && !th.tab,
             );
             return (
               <SectionCard
