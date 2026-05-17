@@ -275,57 +275,59 @@ const a1GrL04: GrammarLesson = {
   level: "A1",
   title: "Les articles définis et indéfinis",
   theory: [
-    { type: "heading", text: "Les articles indéfinis" },
-    {
-      type: "table",
-      tables: [
-        {
-          verb: "Article indéfini",
-          rows: [
-            { pronoun: "Masculin sing.", form: "un cinéma" },
-            { pronoun: "Féminin sing.", form: "une piscine" },
-            { pronoun: "Pluriel", form: "des restaurants" },
-          ],
-        },
-      ],
-    },
-    {
-      type: "rule",
-      text: "Articles indéfinis → chose non spécifique / introduire pour la première fois.",
-      examples: [
-        { correct: "Il y a un cinéma dans mon quartier." },
-        { correct: "J'ai un ami français." },
-      ],
-    },
     { type: "heading", text: "Les articles définis" },
+    { type: "plain_list", items: ["Les articles définis parlent de quelque chose de connu, précis et identifiable."] },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Article défini",
-          rows: [
-            { pronoun: "Masculin sing.", form: "le cinéma" },
-            { pronoun: "Féminin sing.", form: "la piscine" },
-            { pronoun: "Devant voyelle", form: "l'école" },
-            { pronoun: "Pluriel", form: "les restaurants" },
-          ],
-        },
+      type: "grid",
+      headers: ["Masculin", "Féminin", "Pluriel"],
+      rows: [
+        ["{a}le{/a}", "{a}la{/a}", "{a}les{/a}"],
+        ["le téléphone", "la chaise", "les élèves"],
       ],
     },
     {
-      type: "rule",
-      text: "Articles définis → chose connue / spécifique.",
-      examples: [
-        { correct: "J'aime le cinéma. (en général)" },
-        { correct: "Le cinéma de mon quartier est sympa." },
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "Devant une voyelle ou un {a}h{/a}, {a}le{/a} et {a}la{/a} deviennent {a}l'{/a}.",
+        "{a}le{/a} → l'arbre",
+        "{a}la{/a} → l'école",
+      ],
+      noBulletItems: [0],
+      inlineArrows: true,
+    },
+    { type: "heading", text: "Les articles indéfinis" },
+    { type: "plain_list", items: ["Les articles indéfinis parlent d'une chose en général, non précise ou inconnue."] },
+    {
+      type: "grid",
+      headers: ["Masculin", "Féminin", "Pluriel"],
+      rows: [
+        ["{a}un{/a}", "{a}une{/a}", "{a}des{/a}"],
+        ["un livre", "une voiture", "des chaussures"],
       ],
     },
+    { type: "heading", text: "Différence entre défini et indéfini", sub: true },
     {
-      type: "rule",
-      text: "Avec la négation : un/une/des → de/d'.",
-      examples: [
-        { correct: "Il y a des musées. → Il n'y a pas de musées.", wrong: "Il n'y a pas des musées." },
+      type: "highlight",
+      label: "Article défini — chose précise",
+      items: ["Je ferme {a}la{/a} porte.", "(la porte est connue)"],
+      noBulletItems: [1],
+    },
+    {
+      type: "highlight",
+      label: "Article indéfini — chose non précise",
+      items: ["Je cherche {a}une{/a} porte.", "(n'importe quelle porte)"],
+      noBulletItems: [1],
+    },
+    { type: "heading", text: "Tableau complet", sub: true },
+    {
+      type: "grid",
+      headers: ["Type", "Masculin", "Féminin", "Pluriel"],
+      rows: [
+        ["Défini", "le", "la", "les"],
+        ["Indéfini", "un", "une", "des"],
       ],
+      boldFirstCol: true,
     },
   ],
   exercises: [
