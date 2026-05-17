@@ -100,7 +100,7 @@ const a1ConjL00: ConjLesson = {
         uk: ["Однина", "Множина"],
       },
       transRows: {
-        en: [["je → me / I", "nous → we (me + others)"], ["tu → a friend", "vous → several people"], ["il → a man", "ils → several men"], ["elle → a woman", "elles → several women"]],
+        en: [["je → me / I", "nous → me + others"], ["tu → a friend", "vous → several people"], ["il → a man", "ils → several men"], ["elle → a woman", "elles → several women"]],
         ar: [["je → أنا", "nous → نحن (أنا + الآخرون)"], ["tu → صديق", "vous → عدة أشخاص"], ["il → رجل", "ils → عدة رجال"], ["elle → امرأة", "elles → عدة نساء"]],
         fa: [["je → من", "nous → ما (من + دیگران)"], ["tu → دوست", "vous → چند نفر"], ["il → مرد", "ils → چند مرد"], ["elle → زن", "elles → چند زن"]],
         ti: [["je → ኣነ", "nous → ንሕና (ኣነ + ካልኦት)"], ["tu → ዓርኪ", "vous → ሓያሎ ሰባት"], ["il → ሓደ ወዲ", "ils → ሓያሎ ኣወዳት"], ["elle → ሓንቲ ጓል", "elles → ሓያሎ ኣዋልድ"]],
@@ -143,11 +143,11 @@ const a1ConjL00: ConjLesson = {
       ],
       transLabel: { en: "VOUS", ar: "VOUS", fa: "VOUS", ti: "VOUS", uk: "VOUS" },
       transItems: {
-        en: ["«Vous» is used when you don't know the person or the status is different (student–teacher).", "This is called the polite/formal form.", "Madame, vous allez bien ? → Madam, are you well?"],
-        ar: ["«vous» يُستخدم عندما لا تعرف الشخص أو عندما يختلف المستوى الاجتماعي (طالب–أستاذ).", "يُسمى هذا الصيغة المؤدّبة.", "Madame, vous allez bien ? → سيدتي، هل أنتِ بخير؟"],
-        fa: ["از «vous» استفاده می‌شود وقتی شخص را نمی‌شناسید یا جایگاه متفاوت است (دانش‌آموز–استاد).", "این را فرم رسمی/مودبانه می‌نامند.", "Madame, vous allez bien ? → خانم، حالتان خوب است؟"],
-        ti: ["«vous» ከምዘይትፈልጥዎ ሰብ ወይ ደረጃ ዝተፈለየ ምስ ዝኸውን ትጥቀሙሉ (ተምሃራይ–መምህር).", "እዚ ናይ ክብሪ ቅጺ ይብሃሃሉ.", "Madame, vous allez bien ? → ወይዘሮ፣ ጽቡቕ ዶ ሎኹም?"],
-        uk: ["«vous» використовується, коли ви не знаєте людину або є різниця в статусі (учень–вчитель).", "Це називається форма ввічливості.", "Madame, vous allez bien ? → Пані, ви добре?"],
+        en: ["«Vous» is used when you don't know the person or the status is different (student–teacher). This is called the polite/formal form.", "Madam, are you well?"],
+        ar: ["«vous» يُستخدم عندما لا تعرف الشخص أو عندما يختلف المستوى الاجتماعي (طالب–أستاذ). يُسمى هذا الصيغة المؤدّبة.", "سيدتي، هل أنتِ بخير؟"],
+        fa: ["از «vous» استفاده می‌شود وقتی شخص را نمی‌شناسید یا جایگاه متفاوت است (دانش‌آموز–استاد). این را فرم رسمی/مودبانه می‌نامند.", "خانم، حالتان خوب است؟"],
+        ti: ["«vous» ከምዘይትፈልጥዎ ሰብ ወይ ደረጃ ዝተፈለየ ምስ ዝኸውን ትጥቀሙሉ (ተምሃራይ–መምህር). እዚ ናይ ክብሪ ቅጺ ይብሃሃሉ.", "ወይዘሮ፣ ጽቡቕ ዶ ሎኹም?"],
+        uk: ["«vous» використовується, коли ви не знаєте людину або є різниця в статусі (учень–вчитель). Це називається форма ввічливості.", "Пані, ви добре?"],
       },
     },
     {
