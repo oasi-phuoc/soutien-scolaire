@@ -571,8 +571,14 @@ const a1ConjL01: ConjLesson = {
     },
     {
       type: "heading",
-      text: "ÊTRE est utilisé pour",
-      trans: { en: "TO BE is used for", ar: "يُستخدم فعل «يكون» لـ", fa: "فعل «بودن» برای … استفاده می‌شود", ti: "ምዃን ይጥቀሙሉ ንምግላጽ", uk: "ÊTRE використовується для" },
+      text: "ÊTRE",
+      trans: { en: "TO BE", ar: "يكون", fa: "بودن", ti: "ምዃን", uk: "ÊTRE" },
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Le verbe ÊTRE sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
+      ],
     },
     {
       type: "grid",
