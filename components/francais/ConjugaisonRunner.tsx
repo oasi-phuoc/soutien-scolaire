@@ -1029,13 +1029,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
         ))}
       </div>
 
-      {/* Step label */}
-      {isTheory && (lesson.theory2 || midExercises.length > 0) && (
-        <p className="mb-4 text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-          {isTheory2 ? "Théorie 2" : "Théorie 1"}
-        </p>
-      )}
-
       {/* Content */}
       <div className="min-h-[280px]">
         {isTheory ? (

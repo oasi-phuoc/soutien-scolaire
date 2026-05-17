@@ -960,8 +960,6 @@ const a1ConjL01: ConjLesson = {
         { sentence: "J'___ mal à la tête.", hint: "j' → ai", answer: "ai" },
       ],
     },
-  ],
-  exercises: [
     {
       type: "write",
       title: "Exercice 5 — Écrivez avec être",
@@ -974,6 +972,8 @@ const a1ConjL01: ConjLesson = {
       instruction: "Écrivez 2 phrases avec le verbe avoir.",
       prompts: ["Phrase 1 :", "Phrase 2 :"],
     },
+  ],
+  exercises: [
     {
       type: "qcm",
       title: "Exercice 7 — Forme négative",
