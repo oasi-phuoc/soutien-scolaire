@@ -287,16 +287,16 @@ const a1GrL05: GrammarLesson = {
   level: "A1",
   title: "Le verbe avoir et les adjectifs possessifs",
   theory: [
-    { type: "heading", text: "Le verbe AVOIR" },
+    { type: "heading", text: "Le verbe AVOIR au présent" },
     {
       type: "table",
       tables: [
         {
-          verb: "avoir",
+          verb: "avoir", accentForms: true,
           rows: [
             { pronoun: "j'", form: "ai" },
             { pronoun: "tu", form: "as" },
-            { pronoun: "il / elle", form: "a" },
+            { pronoun: "il / elle / on", form: "a" },
             { pronoun: "nous", form: "avons" },
             { pronoun: "vous", form: "avez" },
             { pronoun: "ils / elles", form: "ont" },
@@ -305,46 +305,56 @@ const a1GrL05: GrammarLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "Avoir pour l'âge : avoir + nombre + ans.",
-      examples: [
-        { correct: "J'ai 25 ans.", wrong: "Je suis 25 ans." },
-      ],
-    },
-    {
-      type: "rule",
-      text: "Élision : je + ai = j'ai devant voyelle.",
-      examples: [
-        { correct: "J'ai une question.", wrong: "Je ai une question." },
+      type: "highlight",
+      label: "Emplois de AVOIR",
+      items: [
+        "Possession : {a}J'ai{/a} un téléphone.",
+        "Âge : {a}J'ai{/a} 25 ans. (jamais ÊTRE pour l'âge)",
+        "Sensations : {a}Nous avons{/a} faim / soif / froid / chaud / peur / mal.",
+        "Expressions : {a}Il a{/a} de la chance. / {a}Tu as{/a} raison.",
       ],
     },
     { type: "heading", text: "Les adjectifs possessifs" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Adjectifs possessifs",
-          rows: [
-            { pronoun: "je", form: "mon / ma / mes" },
-            { pronoun: "tu", form: "ton / ta / tes" },
-            { pronoun: "il / elle", form: "son / sa / ses" },
-            { pronoun: "nous", form: "notre / nos" },
-            { pronoun: "vous", form: "votre / vos" },
-            { pronoun: "ils / elles", form: "leur / leurs" },
-          ],
-        },
+      type: "plain_list",
+      items: ["Ils s'accordent avec le {a}nom possédé{/a} (et non avec le possesseur)."],
+    },
+    {
+      type: "grid",
+      headers: ["Possesseur", "Masc. sing.", "Fém. sing.", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}je{/a}", "mon", "ma", "mes"],
+        ["{a}tu{/a}", "ton", "ta", "tes"],
+        ["{a}il / elle{/a}", "son", "sa", "ses"],
+        ["{a}nous{/a}", "notre", "notre", "nos"],
+        ["{a}vous{/a}", "votre", "votre", "vos"],
+        ["{a}ils / elles{/a}", "leur", "leur", "leurs"],
       ],
     },
     {
-      type: "rule",
-      text: "Devant voyelle au féminin singulier : ma/ta/sa → mon/ton/son.",
-      examples: [
-        { correct: "mon amie (féminin, voyelle)", wrong: "ma amie" },
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "{a}mon{/a} frère, {a}ma{/a} sœur, {a}mes{/a} parents",
+        "{a}son{/a} père, {a}sa{/a} mère, {a}ses{/a} enfants",
+        "{a}notre{/a} maison, {a}nos{/a} voisins",
       ],
+    },
+    {
+      type: "highlight",
+      label: "Attention : devant voyelle au féminin",
+      items: [
+        "ma / ta / sa + voyelle → {a}mon / ton / son{/a}",
+        "{s}ma{/s} amie → {a}mon{/a} amie",
+        "{s}ta{/s} école → {a}ton{/a} école",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL06: GrammarLesson = {
   slug: "a1-gr-l06",
@@ -397,40 +407,64 @@ const a1GrL10: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les mots interrogatifs" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Mots interrogatifs",
-          rows: [
-            { pronoun: "Où ?", form: "localisation → Tu habites où ?" },
-            { pronoun: "Quand ?", form: "temps → Vous partez quand ?" },
-            { pronoun: "Qui ?", form: "personne → Qui est-ce que tu appelles ?" },
-            { pronoun: "Comment ?", form: "manière → Comment tu t'appelles ?" },
-            { pronoun: "Pourquoi ?", form: "raison → Pourquoi tu étudies le français ?" },
-            { pronoun: "Combien ?", form: "quantité → Vous avez combien d'élèves ?" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Les mots interrogatifs permettent de poser des questions précises.",
+        "Ils se placent en début de question (ou à la fin à l'oral informel).",
       ],
     },
     {
-      type: "rule",
-      text: "Mot interrogatif + est-ce que + sujet + verbe ? (neutre)",
-      examples: [
-        { correct: "Où est-ce que tu habites ?" },
-        { correct: "Quand est-ce qu'il arrive ?" },
+      type: "grid",
+      headers: ["Mot", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Où ?{/a}", "lieu", "Où est-ce que tu habites ?"],
+        ["{a}Quand ?{/a}", "temps", "Quand est-ce qu'il arrive ?"],
+        ["{a}Qui ?{/a}", "personne", "Qui est-ce que tu appelles ?"],
+        ["{a}Qu'est-ce que ?{/a}", "chose", "Qu'est-ce que tu manges ?"],
+        ["{a}Comment ?{/a}", "manière / état", "Comment tu t'appelles ?"],
+        ["{a}Pourquoi ?{/a}", "raison", "Pourquoi tu étudies le français ?"],
+        ["{a}Combien ?{/a}", "quantité", "Combien d'enfants vous avez ?"],
+        ["{a}Quel / Quelle ?{/a}", "choix parmi plusieurs", "Quel bus prends-tu ?"],
       ],
     },
+    { type: "heading", text: "Deux façons de construire la question", sub: true },
     {
-      type: "rule",
-      text: "Mot interrogatif en fin de phrase (informel oral).",
-      examples: [
-        { correct: "Tu habites où ?" },
-        { correct: "Il arrive quand ?" },
+      type: "highlight",
+      label: "Registre neutre",
+      items: [
+        "Mot interrogatif + {a}est-ce que{/a} + sujet + verbe ?",
+        "Où est-ce que tu habites ?",
+        "Quand est-ce qu'il arrive ?",
+        "Comment est-ce que vous vous appelez ?",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "Registre informel (oral)",
+      items: [
+        "Sujet + verbe + mot interrogatif ?",
+        "Tu habites où ?",
+        "Il arrive quand ?",
+        "Tu t'appelles comment ?",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "Quel / Quelle — accord",
+      items: [
+        "{a}Quel{/a} + nom masculin singulier : Quel jour ?",
+        "{a}Quelle{/a} + nom féminin singulier : Quelle heure ?",
+        "{a}Quels{/a} + nom masculin pluriel : Quels films ?",
+        "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?",
       ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL11: GrammarLesson = {
   slug: "a1-gr-l11",
@@ -438,43 +472,56 @@ const a1GrL11: GrammarLesson = {
   level: "A1",
   title: "Les prépositions de lieu",
   theory: [
-    { type: "heading", text: "Les prépositions de lieu statiques" },
+    { type: "heading", text: "Les prépositions de lieu" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Prépositions de lieu",
-          rows: [
-            { pronoun: "dans", form: "à l'intérieur → dans le sac" },
-            { pronoun: "sur", form: "surface → sur la table" },
-            { pronoun: "sous", form: "en dessous → sous la chaise" },
-            { pronoun: "devant", form: "face avant → devant l'école" },
-            { pronoun: "derrière", form: "face arrière → derrière la voiture" },
-            { pronoun: "à côté de", form: "proximité → à côté du cinéma" },
-            { pronoun: "en face de", form: "vis-à-vis → en face de la gare" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Les prépositions de lieu indiquent où se trouve quelque chose ou quelqu'un.",
       ],
     },
     {
-      type: "rule",
-      text: "à + le = au / à + les = aux.",
-      examples: [
-        { correct: "Je vais au cinéma." },
-        { correct: "Je suis aux États-Unis." },
+      type: "grid",
+      headers: ["Préposition", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}dans{/a}", "à l'intérieur", "Le stylo est dans le sac."],
+        ["{a}sur{/a}", "à la surface", "Le livre est sur la table."],
+        ["{a}sous{/a}", "en dessous", "Le chat est sous la chaise."],
+        ["{a}devant{/a}", "face avant", "Je suis devant l'école."],
+        ["{a}derrière{/a}", "face arrière", "La voiture est derrière la maison."],
+        ["{a}entre{/a}", "au milieu de deux", "La banque est entre la poste et la pharmacie."],
+        ["{a}à côté de{/a}", "à proximité", "La boulangerie est à côté du cinéma."],
+        ["{a}en face de{/a}", "vis-à-vis", "L'arrêt est en face de la gare."],
+        ["{a}près de{/a}", "pas loin", "L'hôpital est près d'ici."],
+        ["{a}loin de{/a}", "à grande distance", "La gare est loin du centre."],
+      ],
+    },
+    { type: "heading", text: "Articles contractés", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Contraction", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}à + le → au{/a}", "Je vais {a}au{/a} cinéma."],
+        ["{a}à + les → aux{/a}", "Je parle {a}aux{/a} enfants."],
+        ["{a}de + le → du{/a}", "Je viens {a}du{/a} marché."],
+        ["{a}de + les → des{/a}", "Je parle {a}des{/a} enfants."],
       ],
     },
     {
-      type: "rule",
-      text: "de + le = du / de + les = des.",
-      examples: [
-        { correct: "Je viens du marché." },
-        { correct: "Je viens des États-Unis." },
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "{a}à + la{/a} et {a}de + la{/a} ne se contractent pas.",
+        "Je vais {a}à la{/a} pharmacie. (pas : {s}au{/s} pharmacie)",
+        "Je viens {a}de la{/a} boulangerie. (pas : {s}du{/s} boulangerie)",
       ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL14: GrammarLesson = {
   slug: "a1-gr-l14",
@@ -484,48 +531,63 @@ const a1GrL14: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les articles partitifs" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Partitifs",
-          rows: [
-            { pronoun: "Masculin sing.", form: "du pain, du lait" },
-            { pronoun: "Féminin sing.", form: "de la viande, de la musique" },
-            { pronoun: "Voyelle", form: "de l'eau, de l'argent" },
-            { pronoun: "Pluriel", form: "des légumes" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Les articles partitifs expriment une quantité indéterminée — une partie de quelque chose.",
       ],
     },
     {
-      type: "rule",
-      text: "Partitifs = quantité indéterminée (une partie de quelque chose).",
-      examples: [
-        { correct: "Je mange du pain. (une partie du pain)" },
-        { correct: "Je bois de l'eau." },
+      type: "grid",
+      headers: ["Genre", "Article", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Masculin singulier", "{a}du{/a} (de + le)", "Je mange {a}du{/a} pain."],
+        ["Féminin singulier", "{a}de la{/a}", "Je bois {a}de la{/a} limonade."],
+        ["Devant voyelle", "{a}de l'{/a}", "Je bois {a}de l'{/a}eau."],
+        ["Pluriel", "{a}des{/a}", "Je mange {a}des{/a} légumes."],
       ],
     },
+    { type: "heading", text: "Partitif vs défini", sub: true },
     {
-      type: "rule",
-      text: "Avec négation : du/de la/de l'/des → de/d'.",
-      examples: [
-        { correct: "Je ne mange pas de viande.", wrong: "Je ne mange pas de la viande." },
+      type: "grid",
+      headers: ["Partitif (quantité indéterminée)", "Défini (chose précise)"],
+      rows: [
+        ["Je mange {a}du{/a} pain.", "Je mange {a}le{/a} pain que tu as fait."],
+        ["Elle boit {a}de la{/a} soupe.", "Elle boit {a}la{/a} soupe de sa mère."],
       ],
     },
-    { type: "heading", text: "La quantité déterminée" },
+    { type: "heading", text: "Négation : partitif → de / d'", sub: true, accent: true },
     {
-      type: "rule",
-      text: "quantité + de + nom (sans article).",
-      examples: [
-        { correct: "un kilo de pommes" },
-        { correct: "beaucoup de lait" },
-        { correct: "un peu de sucre" },
-        { correct: "une bouteille d'eau" },
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je mange du pain.", "Je ne mange {a}pas de{/a} pain."],
+        ["Tu bois de la soupe.", "Tu ne bois {a}pas de{/a} soupe."],
+        ["Elle prend de l'huile.", "Elle ne prend {a}pas d'{/a}huile."],
+        ["Ils ont des enfants.", "Ils n'ont {a}pas d'{/a}enfants."],
+      ],
+    },
+    { type: "heading", text: "La quantité déterminée", sub: true },
+    {
+      type: "plain_list",
+      items: ["Avec une quantité précise : {a}quantité + de + nom{/a} (sans article)."],
+    },
+    {
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "un kilo {a}de{/a} pommes",
+        "une bouteille {a}d'{/a}eau",
+        "beaucoup {a}de{/a} lait",
+        "un peu {a}de{/a} sucre",
+        "assez {a}de{/a} pain",
+        "trop {a}de{/a} sel",
       ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL17: GrammarLesson = {
   slug: "a1-gr-l17",
@@ -535,46 +597,64 @@ const a1GrL17: GrammarLesson = {
   theory: [
     { type: "heading", text: "Il y a / Il n'y a pas de" },
     {
-      type: "rule",
-      text: "Il y a + un/une/des + nom → existence affirmative.",
-      examples: [
-        { correct: "Dans mon quartier, il y a un cinéma." },
-        { correct: "Il y a des restaurants." },
+      type: "plain_list",
+      items: [
+        "{a}Il y a{/a} + nom → signale l'existence de quelque chose.",
+        "{a}Il n'y a pas de{/a} + nom → indique l'absence.",
       ],
     },
     {
-      type: "rule",
-      text: "Il n'y a pas de + nom → existence négative.",
-      examples: [
-        { correct: "Il n'y a pas de métro.", wrong: "Il n'y a pas un métro." },
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Il y a {a}un{/a} cinéma.", "Il n'y a {a}pas de{/a} cinéma."],
+        ["Il y a {a}une{/a} école.", "Il n'y a {a}pas d'{/a}école."],
+        ["Il y a {a}des{/a} restaurants.", "Il n'y a {a}pas de{/a} restaurants."],
+      ],
+    },
+    { type: "heading", text: "Les pièces de la maison", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Pièce", "Article"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}le salon{/a}", "la pièce principale"],
+        ["{a}la cuisine{/a}", "pour cuisiner"],
+        ["{a}la chambre{/a}", "pour dormir"],
+        ["{a}la salle de bains{/a}", "pour se laver"],
+        ["{a}les toilettes{/a}", "WC"],
+        ["{a}le couloir{/a}", "passage entre les pièces"],
+        ["{a}le balcon{/a}", "espace extérieur"],
+      ],
+    },
+    { type: "heading", text: "Localiser dans la maison", sub: true },
+    {
+      type: "grid",
+      headers: ["Préposition", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}dans{/a}", "Le chat est {a}dans{/a} la chambre."],
+        ["{a}sur{/a}", "Le livre est {a}sur{/a} le bureau."],
+        ["{a}sous{/a}", "Les chaussures sont {a}sous{/a} le lit."],
+        ["{a}devant{/a}", "La table est {a}devant{/a} la fenêtre."],
+        ["{a}derrière{/a}", "Le canapé est {a}derrière{/a} la porte."],
+        ["{a}à côté de{/a}", "La lampe est {a}à côté du{/a} lit."],
+        ["{a}en face de{/a}", "La télé est {a}en face du{/a} canapé."],
       ],
     },
     {
-      type: "rule",
-      text: "Devant voyelle : pas de → pas d'.",
-      examples: [
-        { correct: "Il n'y a pas d'école ici." },
-      ],
-    },
-    { type: "heading", text: "Prépositions dans la maison" },
-    {
-      type: "table",
-      tables: [
-        {
-          verb: "Localiser dans la maison",
-          rows: [
-            { pronoun: "dans la chambre", form: "dans + pièce" },
-            { pronoun: "sur le lit", form: "sur + meuble" },
-            { pronoun: "sous le lit", form: "sous + meuble" },
-            { pronoun: "à côté du bureau", form: "à côté de + lieu" },
-            { pronoun: "en face de la fenêtre", form: "en face de + lieu" },
-          ],
-        },
+      type: "highlight",
+      label: "Exemples de description",
+      items: [
+        "Dans mon appartement, il y a trois pièces.",
+        "Il n'y a pas de balcon, mais il y a une grande cuisine.",
+        "Le canapé est devant la télévision.",
       ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL18: GrammarLesson = {
   slug: "a1-gr-l18",
@@ -584,38 +664,57 @@ const a1GrL18: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les adjectifs démonstratifs" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Démonstratifs",
-          rows: [
-            { pronoun: "Masculin sing.", form: "ce livre / cet homme (voyelle)" },
-            { pronoun: "Féminin sing.", form: "cette femme / cette école" },
-            { pronoun: "Pluriel", form: "ces livres / ces femmes" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Ils servent à désigner ou montrer quelque chose de précis.",
+        "Ils s'accordent avec le {a}nom{/a} qu'ils accompagnent.",
       ],
     },
     {
-      type: "rule",
-      text: "Masculin singulier devant voyelle ou H muet : ce → cet.",
-      examples: [
-        { correct: "cet appartement" },
-        { correct: "cet hôtel", wrong: "ce appartement" },
+      type: "grid",
+      headers: ["Genre / Nombre", "Démonstratif", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Masculin singulier", "{a}ce{/a}", "Je prends {a}ce{/a} livre."],
+        ["Masculin sing. + voyelle / h", "{a}cet{/a}", "J'aime {a}cet{/a} appartement."],
+        ["Féminin singulier", "{a}cette{/a}", "Regarde {a}cette{/a} voiture."],
+        ["Pluriel (m. et f.)", "{a}ces{/a}", "J'aime {a}ces{/a} chaussures."],
       ],
     },
     {
-      type: "rule",
-      text: "Démonstratif = désigner quelque chose de proche ou mentionné.",
-      examples: [
-        { correct: "Regarde ce film !" },
-        { correct: "J'aime cette ville." },
-        { correct: "Ces étudiants sont sympas." },
+      type: "highlight",
+      label: "Attention : cet",
+      items: [
+        "{a}cet{/a} s'utilise devant un nom masculin commençant par une voyelle ou un {a}h{/a} muet.",
+        "{s}ce{/s} étudiant → {a}cet{/a} étudiant",
+        "{s}ce{/s} hôtel → {a}cet{/a} hôtel",
       ],
+      noBulletItems: [0],
+    },
+    { type: "heading", text: "Exemples en contexte", sub: true },
+    {
+      type: "grid",
+      headers: ["Phrase", "Remarque"],
+      rows: [
+        ["Tu connais {a}cette{/a} ville ?", "féminin sing."],
+        ["J'aime {a}cet{/a} acteur.", "masculin + voyelle"],
+        ["{a}Ces{/a} films sont excellents.", "pluriel"],
+        ["Prends {a}ce{/a} bus !", "masculin sing. + consonne"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Astuce : -ci / -là",
+      items: [
+        "On peut ajouter {a}-ci{/a} (proche) ou {a}-là{/a} (loin) pour préciser.",
+        "ce livre-{a}ci{/a} (this book here) / ce livre-{a}là{/a} (that book there)",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL19: GrammarLesson = {
   slug: "a1-gr-l19",
@@ -625,40 +724,60 @@ const a1GrL19: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les adjectifs possessifs" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Possessifs",
-          rows: [
-            { pronoun: "je", form: "mon (m.) / ma (f.) / mes (pl.)" },
-            { pronoun: "tu", form: "ton (m.) / ta (f.) / tes (pl.)" },
-            { pronoun: "il / elle", form: "son (m.) / sa (f.) / ses (pl.)" },
-            { pronoun: "nous", form: "notre / notre / nos" },
-            { pronoun: "vous", form: "votre / votre / vos" },
-            { pronoun: "ils / elles", form: "leur / leur / leurs" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Ils expriment l'appartenance.",
+        "Ils s'accordent avec le {a}nom possédé{/a} (et non avec le possesseur).",
       ],
     },
     {
-      type: "rule",
-      text: "Devant voyelle féminin : ma/ta/sa → mon/ton/son.",
-      examples: [
-        { correct: "mon amie (féminin + voyelle)" },
-        { correct: "ton école", wrong: "ma amie" },
+      type: "grid",
+      headers: ["Possesseur", "Masc. sing.", "Fém. sing.", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}je{/a}", "mon", "ma", "mes"],
+        ["{a}tu{/a}", "ton", "ta", "tes"],
+        ["{a}il / elle / on{/a}", "son", "sa", "ses"],
+        ["{a}nous{/a}", "notre", "notre", "nos"],
+        ["{a}vous{/a}", "votre", "votre", "vos"],
+        ["{a}ils / elles{/a}", "leur", "leur", "leurs"],
       ],
     },
     {
-      type: "rule",
-      text: "Le possessif s'accorde avec le NOM possédé (pas avec le possesseur).",
-      examples: [
-        { correct: "Il a sa voiture. (sa = féminin car voiture est féminin)" },
-        { correct: "Elle a son livre. (son = masculin car livre est masculin)" },
+      type: "highlight",
+      label: "Exemples",
+      items: [
+        "{a}mon{/a} père, {a}ma{/a} mère, {a}mes{/a} parents",
+        "{a}son{/a} livre (à lui ou à elle), {a}sa{/a} voiture, {a}ses{/a} affaires",
+        "{a}notre{/a} appartement, {a}nos{/a} voisins",
+        "{a}leur{/a} maison, {a}leurs{/a} enfants",
       ],
+    },
+    {
+      type: "highlight",
+      label: "Attention : devant voyelle au féminin",
+      items: [
+        "ma / ta / sa + voyelle ou h muet → {a}mon / ton / son{/a}",
+        "{s}ma{/s} amie → {a}mon{/a} amie",
+        "{s}ta{/s} histoire → {a}ton{/a} histoire",
+        "{s}sa{/s} école → {a}son{/a} école",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "Son / Sa : attention à l'ambiguïté",
+      items: [
+        "{a}son{/a} = son (à lui) ou son (à elle) selon le contexte.",
+        "Marco parle à {a}son{/a} ami. (= l'ami de Marco)",
+        "Aiko parle à {a}son{/a} ami. (= l'ami d'Aiko)",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL22: GrammarLesson = {
   slug: "a1-gr-l22",
@@ -668,37 +787,58 @@ const a1GrL22: GrammarLesson = {
   theory: [
     { type: "heading", text: "Les adverbes de fréquence" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Fréquence (100% → 0%)",
-          rows: [
-            { pronoun: "toujours", form: "100% → Je travaille toujours le lundi." },
-            { pronoun: "souvent", form: "~75% → Il va souvent au cinéma." },
-            { pronoun: "parfois", form: "~50% → Elle mange parfois au restaurant." },
-            { pronoun: "rarement", form: "~25% → Nous voyageons rarement." },
-            { pronoun: "jamais", form: "0% → Je ne fais jamais de sport." },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Les adverbes de fréquence indiquent {a}combien de fois{/a} une action se produit.",
+        "Ils se placent généralement {a}après le verbe{/a}.",
       ],
     },
     {
-      type: "rule",
-      text: "L'adverbe se place APRÈS le verbe (présent).",
-      examples: [
-        { correct: "Je travaille souvent le week-end.", wrong: "Je souvent travaille le week-end." },
+      type: "grid",
+      headers: ["Adverbe", "Fréquence", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}toujours{/a}", "100%", "Il mange toujours à midi."],
+        ["{a}souvent{/a}", "~75%", "Elle va souvent au cinéma."],
+        ["{a}parfois / quelquefois{/a}", "~50%", "Nous mangeons parfois au restaurant."],
+        ["{a}rarement{/a}", "~25%", "Je prends rarement le bus."],
+        ["{a}ne … jamais{/a}", "0%", "Il ne fume jamais."],
+      ],
+    },
+    { type: "heading", text: "Place de l'adverbe", sub: true },
+    {
+      type: "grid",
+      headers: ["Temps", "Position", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Présent", "après le verbe", "Je travaille {a}souvent{/a} le soir."],
+        ["Passé composé", "entre auxiliaire et participe", "J'ai {a}souvent{/a} voyagé."],
       ],
     },
     {
-      type: "rule",
-      text: "Avec jamais : ne … jamais (structure de négation).",
-      examples: [
-        { correct: "Je ne mange jamais de viande.", wrong: "Je mange jamais de viande." },
+      type: "highlight",
+      label: "Ne … jamais",
+      items: [
+        "{a}jamais{/a} s'utilise avec {a}ne{/a} pour la négation totale.",
+        "Je {a}ne{/a} fais {a}jamais{/a} de sport.",
+        "Elle {a}n'{/a}est {a}jamais{/a} en retard.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "Expressions de fréquence",
+      items: [
+        "{a}tous les jours{/a} / {a}chaque jour{/a} → every day",
+        "{a}une fois par semaine{/a} → once a week",
+        "{a}deux fois par mois{/a} → twice a month",
+        "{a}de temps en temps{/a} → from time to time",
       ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL23: GrammarLesson = {
   slug: "a1-gr-l23",
@@ -706,55 +846,71 @@ const a1GrL23: GrammarLesson = {
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [
-    { type: "heading", text: "Le genre des adjectifs qualificatifs" },
+    { type: "heading", text: "Accord en genre" },
     {
-      type: "rule",
-      text: "Masculin → féminin : ajouter -e (si pas déjà en -e).",
-      examples: [
-        { correct: "grand → grande" },
-        { correct: "petit → petite" },
-        { correct: "joli → jolie" },
+      type: "plain_list",
+      items: [
+        "L'adjectif s'accorde en {a}genre{/a} et en {a}nombre{/a} avec le nom.",
       ],
     },
     {
-      type: "rule",
-      text: "Adjectifs déjà en -e : invariables.",
-      examples: [
-        { correct: "sympa / sympa" },
-        { correct: "moderne / moderne" },
+      type: "grid",
+      headers: ["Masculin", "Féminin", "Règle"],
+      rows: [
+        ["grand", "grand{a}e{/a}", "+ e"],
+        ["petit", "petit{a}e{/a}", "+ e"],
+        ["français", "français{a}e{/a}", "+ e"],
+        ["sympa", "sympa", "invariable (déjà en -a)"],
+        ["moderne", "moderne", "invariable (déjà en -e)"],
+        ["beau", "bell{a}e{/a}", "irrégulier"],
+        ["nouveau", "nouvell{a}e{/a}", "irrégulier"],
+        ["vieux", "vieil{a}le{/a}", "irrégulier"],
       ],
     },
-    { type: "heading", text: "La place des adjectifs" },
+    { type: "heading", text: "Accord en nombre", sub: true },
     {
-      type: "rule",
-      text: "En général, l'adjectif se place APRÈS le nom.",
-      examples: [
-        { correct: "un film intéressant" },
-        { correct: "une ville moderne" },
+      type: "grid",
+      headers: ["Singulier", "Pluriel", "Règle"],
+      rows: [
+        ["grand", "grand{a}s{/a}", "+ s"],
+        ["grande", "grande{a}s{/a}", "+ s"],
+        ["beau", "beau{a}x{/a}", "-eau → -eaux"],
+        ["nouveau", "nouveau{a}x{/a}", "-eau → -eaux"],
+        ["gros", "gros", "déjà en -s : invariable"],
+      ],
+    },
+    { type: "heading", text: "Place de l'adjectif", sub: true },
+    {
+      type: "plain_list",
+      items: [
+        "En général, l'adjectif se place {a}après{/a} le nom.",
+        "Certains adjectifs courts et courants se placent {a}avant{/a} le nom ({a}BAGS{/a}).",
       ],
     },
     {
-      type: "rule",
-      text: "BAGS (Beauty, Age, Goodness, Size) = devant le nom.",
-      examples: [
-        { correct: "un beau film" },
-        { correct: "une grande ville" },
-        { correct: "un bon restaurant" },
-        { correct: "un vieux quartier" },
+      type: "highlight",
+      label: "BAGS — adjectifs avant le nom",
+      items: [
+        "{a}B{/a}eauté : beau, joli",
+        "{a}A{/a}ge : vieux, jeune, nouveau",
+        "{a}G{/a}randeur : grand, petit, gros, long",
+        "{a}S{/a}entiment/bonté : bon, mauvais, gentil",
       ],
     },
-    { type: "heading", text: "Le pluriel" },
     {
-      type: "rule",
-      text: "Pluriel = + -s (sauf si déjà en -s ou -x).",
-      examples: [
-        { correct: "un film intéressant → des films intéressants" },
-        { correct: "un beau livre → de beaux livres" },
+      type: "grid",
+      headers: ["Avant le nom (BAGS)", "Après le nom (autres)"],
+      rows: [
+        ["un {a}beau{/a} film", "un film {a}intéressant{/a}"],
+        ["une {a}petite{/a} ville", "une ville {a}moderne{/a}"],
+        ["un {a}bon{/a} restaurant", "un restaurant {a}français{/a}"],
+        ["un {a}jeune{/a} homme", "un homme {a}sympa{/a}"],
       ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL24: GrammarLesson = {
   slug: "a1-gr-l24",
@@ -764,44 +920,64 @@ const a1GrL24: GrammarLesson = {
   theory: [
     { type: "heading", text: "Le comparatif" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Comparatif",
-          rows: [
-            { pronoun: "supériorité", form: "plus + adj/adv + que" },
-            { pronoun: "égalité", form: "aussi + adj/adv + que" },
-            { pronoun: "infériorité", form: "moins + adj/adv + que" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Le comparatif permet de comparer deux éléments.",
+        "Structure : {a}plus / aussi / moins + adjectif + que{/a}",
       ],
     },
     {
-      type: "rule",
-      text: "Exemples de comparatif d'adjectifs.",
-      examples: [
-        { correct: "Paris est plus grande que Lyon." },
-        { correct: "Ce film est aussi intéressant que l'autre." },
-        { correct: "Ce restaurant est moins cher que l'autre." },
+      type: "grid",
+      headers: ["Type", "Structure", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Supériorité{/a}", "plus + adj + que", "Paris est {a}plus grande que{/a} Lyon."],
+        ["{a}Égalité{/a}", "aussi + adj + que", "Ce film est {a}aussi intéressant que{/a} l'autre."],
+        ["{a}Infériorité{/a}", "moins + adj + que", "Ce resto est {a}moins cher que{/a} l'autre."],
+      ],
+    },
+    { type: "heading", text: "Comparatif de quantité (verbe ou nom)", sub: true },
+    {
+      type: "grid",
+      headers: ["Type", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["plus de + nom", "J'ai {a}plus de{/a} temps que toi."],
+        ["autant de + nom", "Elle a {a}autant de{/a} travail que moi."],
+        ["moins de + nom", "Il a {a}moins d'{/a}argent que nous."],
       ],
     },
     { type: "heading", text: "Le superlatif" },
     {
-      type: "rule",
-      text: "le/la/les + plus/moins + adjectif.",
-      examples: [
-        { correct: "C'est le plus beau quartier." },
-        { correct: "C'est la moins chère option." },
-        { correct: "Ce sont les meilleurs restaurants." },
+      type: "plain_list",
+      items: [
+        "Le superlatif exprime le degré le plus élevé ou le plus bas.",
+        "Structure : {a}le / la / les + plus / moins + adjectif{/a}",
       ],
     },
     {
-      type: "note",
-      text: "Comparatif irrégulier : bon → meilleur / bien → mieux.",
+      type: "grid",
+      headers: ["Type", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["le/la/les + plus + adj", "C'est {a}le plus beau{/a} quartier de la ville."],
+        ["le/la/les + moins + adj", "C'est {a}la moins chère{/a} des options."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Formes irrégulières",
+      items: [
+        "{a}bon{/a} → comparatif : {a}meilleur{/a} (pas : plus bon)",
+        "{a}bien{/a} → comparatif : {a}mieux{/a} (pas : plus bien)",
+        "{a}mauvais{/a} → comparatif : {a}pire{/a} ou {a}plus mauvais{/a}",
+        "C'est {a}meilleur{/a} que ça. / Il va {a}mieux{/a} aujourd'hui.",
+      ],
     },
   ],
   exercises: [],
 };
+
 
 const a1GrL25: GrammarLesson = {
   slug: "a1-gr-l25",
@@ -814,7 +990,7 @@ const a1GrL25: GrammarLesson = {
       type: "table",
       tables: [
         {
-          verb: "savoir",
+          verb: "savoir", accentForms: true,
           rows: [
             { pronoun: "je", form: "sais" },
             { pronoun: "tu", form: "sais" },
@@ -825,7 +1001,7 @@ const a1GrL25: GrammarLesson = {
           ],
         },
         {
-          verb: "connaître",
+          verb: "connaître", accentForms: true,
           rows: [
             { pronoun: "je", form: "connais" },
             { pronoun: "tu", form: "connais" },
@@ -838,24 +1014,38 @@ const a1GrL25: GrammarLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "SAVOIR = savoir faire quelque chose / savoir un fait. Savoir + infinitif ou que.",
-      examples: [
-        { correct: "Je sais nager." },
-        { correct: "Je sais qu'il est français." },
+      type: "grid",
+      headers: ["Verbe", "Utilisation", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}savoir{/a}", "+ infinitif (capacité)", "Je sais nager."],
+        ["{a}savoir{/a}", "+ que / si / où… (fait)", "Je sais qu'il est français."],
+        ["{a}savoir{/a}", "+ nom (information)", "Tu sais l'heure ?"],
+        ["{a}connaître{/a}", "+ personne", "Je connais Marco."],
+        ["{a}connaître{/a}", "+ lieu / chose", "Elle connaît bien Paris."],
+        ["{a}connaître{/a}", "+ œuvre / domaine", "Tu connais ce film ?"],
       ],
     },
     {
-      type: "rule",
-      text: "CONNAÎTRE = connaître une personne, un lieu, une chose. Connaître + nom.",
-      examples: [
-        { correct: "Je connais Paris." },
-        { correct: "Tu connais Marco ?", wrong: "Je sais Paris." },
+      type: "highlight",
+      label: "Règle simple",
+      items: [
+        "{a}Savoir{/a} = un fait, une information, une capacité.",
+        "{a}Connaître{/a} = être familier avec une personne, un lieu ou une chose.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
+        "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
       ],
     },
   ],
   exercises: [],
 };
+
 
 // ── New A1 Lessons (G.17–G.19) ────────────────────────────────────────────────
 
@@ -1071,35 +1261,66 @@ const a2GrL07: GrammarLesson = {
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [
-    { type: "heading", text: "Les questions fermées : 3 façons" },
+    { type: "heading", text: "Les 3 formes de questions fermées" },
     {
-      type: "rule",
-      text: "1. Intonation montante (informel oral) : sujet + verbe + ?",
-      examples: [
-        { correct: "Tu parles français ?" },
-        { correct: "Il comprend ?" },
+      type: "plain_list",
+      items: [
+        "Une question {a}fermée{/a} a pour réponse oui / non / si.",
+        "Il existe 3 structures, du plus familier au plus formel.",
       ],
     },
     {
-      type: "rule",
-      text: "2. Est-ce que + sujet + verbe ? (neutre)",
-      examples: [
-        { correct: "Est-ce que tu parles français ?" },
-        { correct: "Est-ce qu'il comprend ?" },
+      type: "grid",
+      headers: ["Structure", "Registre", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Intonation montante{/a}", "familier / oral", "Tu parles français {a}↗{/a} ?"],
+        ["{a}Est-ce que{/a} + sujet + verbe", "neutre / courant", "Est-ce que tu parles français ?"],
+        ["{a}Inversion{/a} verbe-sujet", "formel / écrit", "Parlez-vous français ?"],
+      ],
+    },
+    { type: "heading", text: "Est-ce que (forme la plus courante)", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Question avec est-ce que"],
+      rows: [
+        ["Tu aimes le café.", "{a}Est-ce que{/a} tu aimes le café ?"],
+        ["Il est libre.", "{a}Est-ce qu'{/a}il est libre ?"],
+        ["Vous avez le temps.", "{a}Est-ce que{/a} vous avez le temps ?"],
+        ["Elles sont arrivées.", "{a}Est-ce qu'{/a}elles sont arrivées ?"],
+      ],
+    },
+    { type: "heading", text: "L'inversion verbe-sujet (formel)", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Inversion"],
+      rows: [
+        ["Vous parlez français.", "Parlez-{a}vous{/a} français ?"],
+        ["Il comprend.", "Comprend-{a}il{/a} ?"],
+        ["Elle va venir.", "Va-{a}t-elle{/a} venir ? (t euphonique)"],
+        ["On peut entrer.", "Peut-{a}on{/a} entrer ?"],
       ],
     },
     {
-      type: "rule",
-      text: "3. Verbe + sujet (inversion) : formel.",
-      examples: [
-        { correct: "Parlez-vous français ?" },
-        { correct: "Comprend-il ?" },
-        { correct: "A-t-il le temps ? (t euphonique)" },
+      type: "highlight",
+      label: "Le -t- euphonique",
+      items: [
+        "Quand le verbe se termine par une {a}voyelle{/a} + il / elle / on, on insère {a}-t-{/a}.",
+        "va → va-{a}t{/a}-il / va-{a}t{/a}-elle / va-{a}t{/a}-on",
+        "a → a-{a}t{/a}-il (avoir) / aime-{a}t{/a}-il (aimer)",
+        "Cette règle s'applique uniquement à l'inversion.",
       ],
+      noBulletItems: [0],
     },
+    { type: "heading", text: "Questions avec un nom sujet (forme formelle)", sub: true, accent: true },
     {
-      type: "note",
-      text: "Inversion avec -t- quand le verbe finit par voyelle + il/elle/on. Ex: va-t-il, a-t-elle.",
+      type: "grid",
+      headers: ["Exemple", "Structure"],
+      rows: [
+        ["Marie vient-{a}elle{/a} demain ?", "Nom + verbe + pronom reprise-t-il/elle"],
+        ["Paul a-{a}t-il{/a} appelé ?", "Nom + verbe + -t- + pronom"],
+        ["Les enfants sont-{a}ils{/a} prêts ?", "Nom pluriel + verbe + pronom pluriel"],
+      ],
     },
   ],
   exercises: [],
@@ -1111,41 +1332,55 @@ const a2GrL09: GrammarLesson = {
   level: "A2",
   title: "Répondre aux questions fermées",
   theory: [
-    { type: "heading", text: "Répondre : oui, non, si" },
+    { type: "heading", text: "Oui, Non, Si" },
     {
-      type: "rule",
-      text: "OUI = réponse affirmative à question affirmative.",
-      examples: [
-        { correct: "Tu aimes le café ? — Oui, j'aime le café." },
+      type: "grid",
+      headers: ["Réponse", "Quand l'utiliser", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Oui{/a}", "Question affirmative → réponse affirmative", "Tu aimes le café ? — {a}Oui{/a}, j'aime le café."],
+        ["{a}Non{/a}", "Question (affirmative ou négative) → réponse négative", "Tu aimes le café ? — {a}Non{/a}, je n'aime pas le café."],
+        ["{a}Si{/a}", "Question {a}négative{/a} → réponse affirmative", "Tu ne parles pas français ? — {a}Si{/a}, je parle français !"],
       ],
     },
     {
-      type: "rule",
-      text: "NON = réponse négative.",
-      examples: [
-        { correct: "Tu aimes le café ? — Non, je n'aime pas le café." },
+      type: "highlight",
+      label: "SI : le mot clé",
+      items: [
+        "{a}Si{/a} s'utilise uniquement pour contredire une question négative.",
+        "Tu ne viens pas ? — {a}Si{/a}, je viens ! (pas Oui !)",
+        "Il ne travaille pas ? — {a}Si{/a}, il travaille !",
+      ],
+      noBulletItems: [0],
+    },
+    { type: "heading", text: "Moi aussi / Moi non plus / Moi si / Moi pas", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Situation", "Réaction accord", "Réaction désaccord"],
+      boldFirstCol: true,
+      rows: [
+        ["Affirmation {a}positive{/a}", "{a}Moi aussi !{/a}", "Moi pas. / Pas moi."],
+        ["Affirmation {a}négative{/a}", "{a}Moi non plus !{/a}", "Moi si !"],
       ],
     },
     {
-      type: "rule",
-      text: "SI = réponse AFFIRMATIVE à question NÉGATIVE.",
-      examples: [
-        { correct: "Tu ne parles pas français ? — Si, je parle français !", wrong: "Tu ne parles pas français ? — Oui, je parle français." },
+      type: "grid",
+      headers: ["Ce qu'il dit", "Tu es d'accord", "Tu n'es pas d'accord"],
+      rows: [
+        ["J'aime le café.", "{a}Moi aussi !{/a}", "Moi pas."],
+        ["Je ne fume pas.", "{a}Moi non plus !{/a}", "Moi si !"],
+        ["Je n'aime pas ça.", "{a}Moi non plus !{/a}", "Moi si."],
+        ["J'ai faim.", "{a}Moi aussi !{/a}", "Pas moi."],
       ],
     },
-    { type: "heading", text: "Moi aussi / Moi non plus / Moi si" },
+    { type: "heading", text: "Répondre avec des pronoms", sub: true, accent: true },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Accord/Désaccord",
-          rows: [
-            { pronoun: "+ → +", form: "J'aime le café. — Moi aussi !" },
-            { pronoun: "- → -", form: "Je ne fume pas. — Moi non plus !" },
-            { pronoun: "- → +", form: "Je n'aime pas le café. — Moi si !" },
-            { pronoun: "+ → -", form: "J'aime le café. — Moi pas !" },
-          ],
-        },
+      type: "grid",
+      headers: ["Question", "Réponse courte"],
+      rows: [
+        ["Tu viens ce soir ?", "Oui, j'y viens. / Non, je n'y viens pas."],
+        ["Elle a mangé ?", "Oui, elle a mangé. / Non, elle n'a pas mangé."],
+        ["Vous avez des questions ?", "Oui, j'en ai une. / Non, je n'en ai pas."],
       ],
     },
   ],
@@ -1160,39 +1395,60 @@ const a2GrL11: GrammarLesson = {
   theory: [
     { type: "heading", text: "L'accord des adjectifs qualificatifs" },
     {
-      type: "rule",
-      text: "L'adjectif s'accorde en GENRE et en NOMBRE avec le nom.",
-      examples: [
-        { correct: "un homme intelligent → une femme intelligente" },
-        { correct: "des hommes intelligents → des femmes intelligentes" },
+      type: "plain_list",
+      items: [
+        "L'adjectif s'accorde toujours en {a}genre{/a} (masculin / féminin) et en {a}nombre{/a} (singulier / pluriel) avec le nom qu'il qualifie.",
       ],
     },
     {
-      type: "rule",
-      text: "Féminin : + -e (si consonne finale) / invariable si déjà en -e.",
-      examples: [
-        { correct: "grand → grande" },
-        { correct: "petit → petite" },
-        { correct: "rapide → rapide" },
+      type: "grid",
+      headers: ["", "Singulier", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Masculin{/a}", "grand", "grand{a}s{/a}"],
+        ["{a}Féminin{/a}", "grand{a}e{/a}", "grand{a}es{/a}"],
+      ],
+    },
+    { type: "heading", text: "Formation du féminin", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Règle", "Masculin", "Féminin"],
+      boldFirstCol: true,
+      rows: [
+        ["Règle générale : + {a}-e{/a}", "petit", "petite"],
+        ["Déjà en -e : {a}invariable{/a}", "rapide", "rapide"],
+        ["{a}-eux → -euse{/a}", "heureux", "heureuse"],
+        ["{a}-eur → -euse{/a} (courant)", "travailleur", "travailleuse"],
+        ["{a}-eur → -eure{/a} (comparatif)", "meilleur", "meilleure"],
+        ["{a}-ien → -ienne{/a}", "ancien", "ancienne"],
+        ["{a}-el → -elle{/a}", "naturel", "naturelle"],
+        ["{a}-er → -ère{/a}", "premier", "première"],
+        ["{a}-et → -ète / -ette{/a}", "secret", "secrète"],
+        ["{a}-if → -ive{/a}", "actif", "active"],
+        ["{a}-al → -ale{/a}", "normal", "normale"],
+      ],
+    },
+    { type: "heading", text: "Formation du pluriel", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Règle", "Singulier", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["Règle générale : + {a}-s{/a}", "grand", "grands"],
+        ["Déjà en -s ou -x : {a}invariable{/a}", "heureux", "heureux"],
+        ["{a}-al → -aux{/a}", "normal", "normaux"],
+        ["{a}-eau → -eaux{/a}", "beau", "beaux"],
       ],
     },
     {
-      type: "rule",
-      text: "Masculin irréguliers fréquents :",
-      examples: [
-        { correct: "-eux → -euse : heureux/heureuse" },
-        { correct: "-eur → -eure : meilleur/meilleure" },
-        { correct: "-ien → -ienne : ancien/ancienne" },
-        { correct: "-al → -ale : normal/normale" },
+      type: "highlight",
+      label: "Adjectifs invariables",
+      items: [
+        "Les adjectifs de couleur dérivés d'un nom sont {a}invariables{/a}.",
+        "une robe {a}orange{/a} / des chaussures {a}marron{/a} / des yeux {a}noisette{/a}",
+        "Exception : rose, mauve, écarlate, pourpre → accordés.",
       ],
-    },
-    {
-      type: "rule",
-      text: "Pluriel : + -s (sauf déjà -s ou -x).",
-      examples: [
-        { correct: "heureux → heureux (pluriel = idem)" },
-        { correct: "normal → normaux" },
-      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
@@ -1204,38 +1460,60 @@ const a2GrL12: GrammarLesson = {
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [
-    { type: "heading", text: "Adjectifs irréguliers : beau/bel, nouveau/nouvel, vieux/vieil" },
+    { type: "heading", text: "Adjectifs à trois formes masculines" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Formes spéciales",
-          rows: [
-            { pronoun: "masc. sing.", form: "beau / nouveau / vieux" },
-            { pronoun: "masc. + voyelle", form: "bel / nouvel / vieil" },
-            { pronoun: "féminin", form: "belle / nouvelle / vieille" },
-            { pronoun: "pluriel masc.", form: "beaux / nouveaux / vieux" },
-            { pronoun: "pluriel fém.", form: "belles / nouvelles / vieilles" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Certains adjectifs ont une forme masculine spéciale devant une {a}voyelle ou h muet{/a}.",
       ],
     },
     {
-      type: "rule",
-      text: "Adjectifs qui se placent AVANT le nom (BAGS) : beau, nouveau, vieux, grand, petit, bon, mauvais, jeune.",
-      examples: [
-        { correct: "un beau film" },
-        { correct: "un nouvel appartement" },
-        { correct: "une vieille ville" },
+      type: "grid",
+      headers: ["Masculin devant cons.", "Masculin devant voyelle/h muet", "Féminin", "Pluriel masc."],
+      rows: [
+        ["{a}beau{/a}", "{a}bel{/a}", "belle", "beaux"],
+        ["{a}nouveau{/a}", "{a}nouvel{/a}", "nouvelle", "nouveaux"],
+        ["{a}vieux{/a}", "{a}vieil{/a}", "vieille", "vieux"],
+        ["{a}fou{/a}", "{a}fol{/a}", "folle", "fous"],
+        ["{a}mou{/a}", "{a}mol{/a}", "molle", "mous"],
       ],
     },
     {
-      type: "rule",
-      text: "Adjectifs qui se placent APRÈS le nom (la plupart).",
-      examples: [
-        { correct: "un film français" },
-        { correct: "une ville historique" },
-        { correct: "un appartement moderne" },
+      type: "grid",
+      headers: ["Devant consonne", "Devant voyelle / h muet"],
+      rows: [
+        ["un {a}beau{/a} film", "un {a}bel{/a} homme"],
+        ["un {a}nouveau{/a} livre", "un {a}nouvel{/a} appartement"],
+        ["un {a}vieux{/a} bâtiment", "un {a}vieil{/a} arbre"],
+      ],
+    },
+    { type: "heading", text: "La place des adjectifs", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "En français, la majorité des adjectifs se placent {a}après{/a} le nom.",
+        "Mais un groupe d'adjectifs courants se placent {a}avant{/a} le nom.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Place", "Catégorie", "Adjectifs"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Avant{/a} le nom", "beauté / âge / bien / mal / taille", "beau, joli, jeune, vieux, bon, mauvais, grand, petit, gros"],
+        ["{a}Après{/a} le nom", "nationalité, couleur, forme, religion", "français, bleu, rond, catholique"],
+        ["{a}Après{/a} le nom", "adjectifs longs (participiaux…)", "intéressant, fatigant, extraordinaire"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Adjectifs qui changent de sens selon la place",
+      items: [
+        "{a}ancien{/a} : un {a}ancien{/a} collègue (= ex-) / un bâtiment {a}ancien{/a} (= vieux)",
+        "{a}cher{/a} : un {a}cher{/a} ami (= bien-aimé) / un restaurant {a}cher{/a} (= coûteux)",
+        "{a}grand{/a} : un {a}grand{/a} homme (= illustre) / un homme {a}grand{/a} (= de haute taille)",
+        "{a}propre{/a} : ma {a}propre{/a} voiture (= à moi) / une voiture {a}propre{/a} (= clean)",
+        "{a}pauvre{/a} : ce {a}pauvre{/a} garçon (= à plaindre) / un garçon {a}pauvre{/a} (= sans argent)",
       ],
     },
   ],
@@ -1248,33 +1526,47 @@ const a2GrL18: GrammarLesson = {
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [
-    { type: "heading", text: "Prépositions de lieu" },
+    { type: "heading", text: "Les prépositions de lieu" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Prépositions",
-          rows: [
-            { pronoun: "dans", form: "à l'intérieur → dans le bureau" },
-            { pronoun: "sur", form: "surface → sur le bureau" },
-            { pronoun: "sous", form: "en dessous → sous la table" },
-            { pronoun: "à côté de", form: "proximité → à côté de la gare" },
-            { pronoun: "près de", form: "proche → près de l'école" },
-            { pronoun: "loin de", form: "éloigné → loin du centre" },
-            { pronoun: "en face de", form: "vis-à-vis → en face de la mairie" },
-            { pronoun: "entre", form: "au milieu → entre les deux" },
-            { pronoun: "derrière", form: "arrière → derrière le bâtiment" },
-            { pronoun: "devant", form: "avant → devant l'entrée" },
-          ],
-        },
+      type: "grid",
+      headers: ["Préposition", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}dans{/a}", "à l'intérieur", "Le chat est {a}dans{/a} la boîte."],
+        ["{a}sur{/a}", "en contact avec la surface", "Le livre est {a}sur{/a} la table."],
+        ["{a}sous{/a}", "en dessous", "Les clés sont {a}sous{/a} le canapé."],
+        ["{a}devant{/a}", "en avant de", "Il attend {a}devant{/a} l'entrée."],
+        ["{a}derrière{/a}", "en arrière de", "Le jardin est {a}derrière{/a} la maison."],
+        ["{a}entre{/a}", "au milieu de deux éléments", "La banque est {a}entre{/a} la boulangerie et la pharmacie."],
+        ["{a}en face de{/a}", "vis-à-vis", "La mairie est {a}en face de{/a} l'église."],
+        ["{a}à côté de{/a}", "à proximité immédiate", "L'arrêt est {a}à côté de{/a} la gare."],
+        ["{a}près de{/a}", "à courte distance", "L'hôtel est {a}près de{/a} la plage."],
+        ["{a}loin de{/a}", "à grande distance", "La gare est {a}loin du{/a} centre."],
+        ["{a}au-dessus de{/a}", "plus haut que", "L'appartement est {a}au-dessus de{/a} la boulangerie."],
+        ["{a}au-dessous de{/a}", "plus bas que", "La cave est {a}au-dessous de{/a} l'appartement."],
       ],
     },
     {
-      type: "rule",
-      text: "de + le = du / de + les = des (contraction obligatoire).",
-      examples: [
-        { correct: "loin du centre" },
-        { correct: "près des magasins", wrong: "loin de le centre" },
+      type: "highlight",
+      label: "Contractions obligatoires avec de",
+      items: [
+        "{a}de + le{/a} → {a}du{/a} : loin {a}du{/a} centre (pas de le)",
+        "{a}de + les{/a} → {a}des{/a} : près {a}des{/a} magasins (pas de les)",
+        "{a}de + la{/a} → de la : à côté {a}de la{/a} gare (pas de contraction)",
+        "{a}de + l'{/a} → de l' : en face {a}de l'{/a}école (pas de contraction)",
+      ],
+    },
+    { type: "heading", text: "Prépositions avec les villes et pays", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Type", "Préposition", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Ville", "{a}à{/a}", "Je suis {a}à{/a} Paris."],
+        ["Pays féminin", "{a}en{/a}", "Je suis {a}en{/a} France."],
+        ["Pays masculin", "{a}au{/a}", "Je suis {a}au{/a} Maroc."],
+        ["Pays pluriel", "{a}aux{/a}", "Je suis {a}aux{/a} États-Unis."],
+        ["Île / région", "{a}à / en{/a}", "à Madagascar / en Corse"],
       ],
     },
   ],
@@ -1287,33 +1579,61 @@ const a2GrL19: GrammarLesson = {
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [
-    { type: "heading", text: "Les pronoms relatifs QUI et QUE" },
+    { type: "heading", text: "Les pronoms relatifs : relier deux phrases" },
     {
-      type: "rule",
-      text: "QUI = sujet du verbe qui suit. QUI remplace une personne ou une chose.",
-      examples: [
-        { correct: "C'est un professeur qui parle bien." },
-        { correct: "C'est une école qui est connue." },
+      type: "plain_list",
+      items: [
+        "Un pronom relatif permet de {a}relier deux phrases{/a} en évitant une répétition.",
+        "Les deux principaux : {a}qui{/a} (sujet) et {a}que / qu'{/a} (objet direct).",
       ],
     },
     {
-      type: "rule",
-      text: "QUE = objet du verbe qui suit. QUE se place avant le sujet.",
-      examples: [
-        { correct: "C'est le film que j'aime." },
-        { correct: "C'est la règle que nous apprenons." },
+      type: "grid",
+      headers: ["Pronom", "Fonction", "Ce qu'il suit directement"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}qui{/a}", "sujet de la proposition relative", "qui + {a}verbe{/a} directement"],
+        ["{a}que / qu'{/a}", "objet direct de la proposition relative", "que + {a}sujet + verbe{/a}"],
+      ],
+    },
+    { type: "heading", text: "QUI — sujet", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Deux phrases", "→ Phrase avec QUI"],
+      rows: [
+        ["J'ai un ami. Cet ami parle japonais.", "J'ai un ami {a}qui{/a} parle japonais."],
+        ["C'est une école. Cette école est connue.", "C'est une école {a}qui{/a} est connue."],
+        ["Je cherche un appartement. Il est proche du centre.", "Je cherche un appartement {a}qui{/a} est proche du centre."],
+      ],
+    },
+    { type: "heading", text: "QUE / QU' — objet direct", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Deux phrases", "→ Phrase avec QUE"],
+      rows: [
+        ["C'est un film. J'aime ce film.", "C'est un film {a}que{/a} j'aime."],
+        ["Voici la règle. Nous apprenons cette règle.", "Voici la règle {a}que{/a} nous apprenons."],
+        ["C'est un livre. Il lit ce livre.", "C'est un livre {a}qu'{/a}il lit."],
       ],
     },
     {
-      type: "note",
-      text: "QUE + voyelle = QU'. Exemple : le livre qu'il lit.",
+      type: "highlight",
+      label: "Comment choisir : qui ou que ?",
+      items: [
+        "{a}QUI{/a} → le pronom est {a}sujet{/a} : le verbe suivant n'a pas de sujet explicite.",
+        "{a}QUE{/a} → le pronom est {a}objet{/a} : le verbe suivant a déjà son sujet.",
+        "Astuce : si après le pronom vient directement un verbe conjugué → {a}QUI{/a}.",
+        "Astuce : si après le pronom vient un sujet puis un verbe → {a}QUE{/a}.",
+      ],
     },
+    { type: "heading", text: "Accord du participe avec QUE au passé composé", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Aide-mémoire : QUI + verbe directement ; QUE + sujet + verbe.",
-      examples: [
-        { correct: "le professeur qui parle (qui + verbe)" },
-        { correct: "le professeur que j'aime (que + sujet + verbe)" },
+      type: "grid",
+      headers: ["Exemple", "Accord"],
+      rows: [
+        ["La lettre qu'il a écrit{a}e{/a}.", "que = la lettre (fém.) → écrite"],
+        ["Les films que j'ai regard{a}és{/a}.", "que = les films (masc. plur.) → regardés"],
+        ["Les filles qu'il a invit{a}ées{/a}.", "que = les filles (fém. plur.) → invitées"],
       ],
     },
   ],
@@ -1326,32 +1646,73 @@ const a2GrL25: GrammarLesson = {
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [
-    { type: "heading", text: "Les formes de négation" },
+    { type: "heading", text: "Les formes de négation courantes" },
     {
-      type: "rule",
-      text: "NE…PAS = action absente / inexistante.",
-      examples: [
-        { correct: "Je ne parle pas espagnol." },
+      type: "grid",
+      headers: ["Négation", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}ne … pas{/a}", "action inexistante / absente", "Je {a}ne{/a} parle {a}pas{/a} espagnol."],
+        ["{a}ne … plus{/a}", "action qui a cessé", "Il {a}ne{/a} travaille {a}plus{/a} ici."],
+        ["{a}ne … que{/a}", "restriction (= seulement)", "Je {a}ne{/a} mange {a}que{/a} des légumes."],
+      ],
+    },
+    { type: "heading", text: "Ne … pas", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Temps", "Structure", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Présent", "ne + verbe + pas", "Je {a}ne{/a} mange {a}pas{/a}."],
+        ["Passé composé", "ne + auxiliaire + pas + participe", "Je {a}n'{/a}ai {a}pas{/a} mangé."],
+        ["Futur proche", "ne + aller + pas + infinitif", "Je {a}ne{/a} vais {a}pas{/a} manger."],
+        ["Infinitif", "ne pas + infinitif (ensemble)", "{a}Ne pas{/a} manger avant 12h."],
+      ],
+    },
+    { type: "heading", text: "Ne … plus", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}ne … plus{/a} signifie que l'action s'est arrêtée.",
+        "Implique qu'avant c'était le cas, maintenant non.",
       ],
     },
     {
-      type: "rule",
-      text: "NE…PLUS = action qui a cessé.",
-      examples: [
-        { correct: "Il ne travaille plus ici. (Il travaillait avant, mais plus maintenant.)" },
+      type: "grid",
+      headers: ["Affirmatif (avant)", "Négatif (maintenant)"],
+      rows: [
+        ["Je fume.", "Je {a}ne{/a} fume {a}plus{/a}."],
+        ["Il habite ici.", "Il {a}n'{/a}habite {a}plus{/a} ici."],
+        ["Elle boit du café.", "Elle {a}ne{/a} boit {a}plus{/a} de café."],
+      ],
+    },
+    { type: "heading", text: "Ne … que (restriction)", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}ne … que{/a} = seulement. Ce n'est {a}pas une vraie négation{/a} — le sens est positif mais limité.",
+        "que se place juste avant l'élément restreint.",
       ],
     },
     {
-      type: "rule",
-      text: "NE…QUE = restriction (= seulement).",
-      examples: [
-        { correct: "Je ne mange que des légumes. (= Je mange seulement des légumes.)" },
-        { correct: "Il ne reste que 5 minutes." },
+      type: "grid",
+      headers: ["Avec seulement", "Avec ne … que"],
+      rows: [
+        ["Je mange seulement des légumes.", "Je {a}ne{/a} mange {a}que{/a} des légumes."],
+        ["Il reste seulement 5 minutes.", "Il {a}ne{/a} reste {a}que{/a} 5 minutes."],
+        ["Elle a seulement 20 ans.", "Elle {a}n'{/a}a {a}que{/a} 20 ans."],
       ],
     },
     {
-      type: "note",
-      text: "NE → N' devant voyelle : il n'y a plus de café. / Elle n'a que 20 ans.",
+      type: "highlight",
+      label: "Articles après la négation",
+      items: [
+        "Avec {a}ne…pas / ne…plus{/a} : un/une/des/du/de la → {a}de{/a} (ou d' devant voyelle).",
+        "Je mange du pain → Je {a}ne{/a} mange {a}pas de{/a} pain.",
+        "Avec {a}ne…que{/a} : l'article ne change pas.",
+        "Je mange {a}que du{/a} pain. (que garde l'article)",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
@@ -1363,54 +1724,71 @@ const a2GrL35: GrammarLesson = {
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
-    { type: "heading", text: "Les pronoms COD (Complément d'Objet Direct)" },
+    { type: "heading", text: "Les pronoms COD et COI" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "COD",
-          rows: [
-            { pronoun: "me / m'", form: "Je te vois. Tu me vois." },
-            { pronoun: "te / t'", form: "Je t'appelle." },
-            { pronoun: "le / l'", form: "Je le connais. (masc.)" },
-            { pronoun: "la / l'", form: "Je la connais. (fém.)" },
-            { pronoun: "nous", form: "Il nous aide." },
-            { pronoun: "vous", form: "Je vous comprends." },
-            { pronoun: "les", form: "Je les aime." },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Les pronoms personnels remplacent un {a}nom déjà mentionné{/a} pour éviter les répétitions.",
+        "{a}COD{/a} = Complément d'Objet Direct (sans préposition).",
+        "{a}COI{/a} = Complément d'Objet Indirect (avec la préposition {a}à{/a}).",
       ],
     },
     {
-      type: "rule",
-      text: "Le pronom COD se place AVANT le verbe.",
-      examples: [
-        { correct: "Je regarde le film → Je le regarde.", wrong: "Je regarde le." },
+      type: "grid",
+      headers: ["Personne", "COD", "COI"],
+      boldFirstCol: true,
+      rows: [
+        ["1re sing.", "{a}me / m'{/a}", "{a}me / m'{/a}"],
+        ["2e sing.", "{a}te / t'{/a}", "{a}te / t'{/a}"],
+        ["3e sing. masc.", "{a}le / l'{/a}", "{a}lui{/a}"],
+        ["3e sing. fém.", "{a}la / l'{/a}", "{a}lui{/a}"],
+        ["1re plur.", "{a}nous{/a}", "{a}nous{/a}"],
+        ["2e plur.", "{a}vous{/a}", "{a}vous{/a}"],
+        ["3e plur.", "{a}les{/a}", "{a}leur{/a}"],
       ],
     },
-    { type: "heading", text: "Les pronoms COI (Complément d'Objet Indirect)" },
+    { type: "heading", text: "Comment identifier COD vs COI ?", sub: true, accent: true },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "COI",
-          rows: [
-            { pronoun: "me / m'", form: "Il me parle." },
-            { pronoun: "te / t'", form: "Il te parle." },
-            { pronoun: "lui", form: "Je lui parle. (il/elle)" },
-            { pronoun: "nous", form: "Il nous écrit." },
-            { pronoun: "vous", form: "Je vous écris." },
-            { pronoun: "leur", form: "Je leur écris. (ils/elles)" },
-          ],
-        },
+      type: "grid",
+      headers: ["Question à poser", "Réponse = …", "Pronom"],
+      boldFirstCol: true,
+      rows: [
+        ["Je vois {a}qui / quoi ?{/a}", "COD (sans à)", "le, la, les, me, te…"],
+        ["Je parle {a}à qui ?{/a}", "COI (avec à)", "lui, leur, me, te…"],
       ],
     },
     {
-      type: "rule",
-      text: "COD : verbe + quelqu'un/quelque chose (direct). COI : verbe + à + quelqu'un.",
-      examples: [
-        { correct: "J'appelle Marco → Je l'appelle. (COD)" },
-        { correct: "Je parle à Marco → Je lui parle. (COI)" },
+      type: "grid",
+      headers: ["Phrase originale", "→ Avec pronom"],
+      rows: [
+        ["J'appelle Marco.", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (COD)"],
+        ["Je parle à Marco.", "Je {a}lui{/a} parle. (COI)"],
+        ["Je regarde le film.", "Je {a}le{/a} regarde. (COD)"],
+        ["J'écris à mes amis.", "Je {a}leur{/a} écris. (COI)"],
+        ["Il nous aide.", "Il {a}nous{/a} aide. (COD)"],
+        ["Elle te téléphone.", "Elle {a}te{/a} téléphone. (COI)"],
+      ],
+    },
+    { type: "heading", text: "Place du pronom", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Le pronom se place {a}avant{/a} le verbe conjugué.",
+        "Au passé composé : avant l'auxiliaire.",
+        "Avec infinitif : avant l'infinitif.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Temps", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Présent", "Je {a}le{/a} vois."],
+        ["Passé composé", "Je {a}l'{/a}ai vu."],
+        ["Futur proche", "Je vais {a}le{/a} voir."],
+        ["Négatif", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}."],
+        ["Impératif affirmatif", "Vois-{a}le{/a} ! (pronom après)"],
+        ["Impératif négatif", "Ne {a}le{/a} vois {a}pas{/a} !"],
       ],
     },
   ],
@@ -1425,33 +1803,79 @@ const a2GrL36: GrammarLesson = {
   theory: [
     { type: "heading", text: "Le pronom Y" },
     {
-      type: "rule",
-      text: "Y remplace : à + lieu / à + chose (verbes construits avec à).",
-      examples: [
-        { correct: "Je vais à Paris → J'y vais." },
-        { correct: "Je pense à ce projet → J'y pense." },
-      ],
-    },
-    { type: "heading", text: "Le pronom EN" },
-    {
-      type: "rule",
-      text: "EN remplace : de + nom (quantité) / partitif + nom.",
-      examples: [
-        { correct: "Je mange du pain → J'en mange." },
-        { correct: "J'ai des amis → J'en ai." },
+      type: "plain_list",
+      items: [
+        "{a}Y{/a} remplace un lieu ou un groupe {a}à + chose{/a} (verbes construits avec à).",
+        "Il répond à la question : {a}où ?{/a} ou {a}à quoi ?{/a}",
       ],
     },
     {
-      type: "rule",
-      text: "EN avec quantité : on garde le chiffre.",
-      examples: [
-        { correct: "J'ai deux chiens → J'en ai deux." },
-        { correct: "Je veux un café → J'en veux un." },
+      type: "grid",
+      headers: ["Ce que Y remplace", "Phrase originale", "→ Avec Y"],
+      boldFirstCol: true,
+      rows: [
+        ["Lieu ({a}à / en / dans…{/a})", "Je vais à Paris.", "J'{a}y{/a} vais."],
+        ["Lieu ({a}à / en / dans…{/a})", "Il est à la maison.", "Il {a}y{/a} est."],
+        ["Chose ({a}à + nom{/a})", "Je pense à ce projet.", "J'{a}y{/a} pense."],
+        ["Chose ({a}à + nom{/a})", "Tu réponds à cette question ?", "Tu {a}y{/a} réponds ?"],
       ],
     },
     {
-      type: "note",
-      text: "Y et EN se placent AVANT le verbe (comme tous les pronoms).",
+      type: "highlight",
+      label: "Attention : Y ne remplace pas une personne",
+      items: [
+        "Je pense à Paul → Je pense {a}à lui{/a}. (pas : J'y pense)",
+        "Pour les personnes, on utilise {a}à lui / à elle / à eux{/a}.",
+        "Pour les choses et les lieux : {a}y{/a}.",
+      ],
+      noBulletItems: [0],
+    },
+    { type: "heading", text: "Le pronom EN", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}EN{/a} remplace un groupe {a}de + nom{/a} ou un nom avec article partitif / indéfini.",
+        "Il répond à la question : {a}de quoi ? combien ?{/a}",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Ce que EN remplace", "Phrase originale", "→ Avec EN"],
+      boldFirstCol: true,
+      rows: [
+        ["Partitif (du / de la / de l')", "Je mange du pain.", "J'{a}en{/a} mange."],
+        ["Article indéfini (des / un / une)", "J'ai des amis.", "J'{a}en{/a} ai."],
+        ["De + nom (verbe + de)", "J'ai besoin de temps.", "J'{a}en{/a} ai besoin."],
+        ["De + lieu", "Je reviens de Paris.", "J'{a}en{/a} reviens."],
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Avec une quantité, on garde le {a}chiffre ou l'adverbe de quantité{/a} après le verbe.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Phrase originale", "→ Avec EN"],
+      rows: [
+        ["J'ai deux chiens.", "J'{a}en{/a} ai {a}deux{/a}."],
+        ["Je veux un café.", "J'{a}en{/a} veux {a}un{/a}."],
+        ["Elle a beaucoup de travail.", "Elle {a}en{/a} a {a}beaucoup{/a}."],
+      ],
+    },
+    { type: "heading", text: "Place de Y et EN", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Temps", "Exemple avec Y", "Exemple avec EN"],
+      boldFirstCol: true,
+      rows: [
+        ["Présent", "J'{a}y{/a} vais.", "J'{a}en{/a} mange."],
+        ["Passé composé", "J'{a}y{/a} suis allé.", "J'{a}en{/a} ai mangé."],
+        ["Futur proche", "Je vais {a}y{/a} aller.", "Je vais {a}en{/a} manger."],
+        ["Négatif", "Je n'{a}y{/a} vais pas.", "Je n'{a}en{/a} mange pas."],
+        ["Impératif affirmatif", "Vas-{a}y{/a} !", "Manges-{a}en{/a} !"],
+      ],
     },
   ],
   exercises: [],
@@ -1465,42 +1889,75 @@ const a2GrL39: GrammarLesson = {
   theory: [
     { type: "heading", text: "Le comparatif" },
     {
-      type: "table",
-      tables: [
-        {
-          verb: "Comparatif",
-          rows: [
-            { pronoun: "supériorité", form: "plus + adj/adv + que" },
-            { pronoun: "égalité", form: "aussi + adj/adv + que" },
-            { pronoun: "infériorité", form: "moins + adj/adv + que" },
-          ],
-        },
+      type: "plain_list",
+      items: [
+        "Le comparatif sert à {a}comparer{/a} deux éléments.",
+        "Il existe 3 degrés : {a}supériorité, égalité, infériorité{/a}.",
       ],
     },
     {
-      type: "rule",
-      text: "Comparatif d'adjectifs.",
-      examples: [
-        { correct: "Paris est plus grande que Lyon." },
-        { correct: "Cette ville est aussi belle que l'autre." },
-        { correct: "Ce restaurant est moins cher que celui-là." },
+      type: "grid",
+      headers: ["Degré", "Avec adjectif / adverbe", "Avec verbe", "Avec nom"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}Supériorité{/a}", "{a}plus … que{/a}", "verbe + {a}plus que{/a}", "{a}plus de … que{/a}"],
+        ["{a}Égalité{/a}", "{a}aussi … que{/a}", "verbe + {a}autant que{/a}", "{a}autant de … que{/a}"],
+        ["{a}Infériorité{/a}", "{a}moins … que{/a}", "verbe + {a}moins que{/a}", "{a}moins de … que{/a}"],
+      ],
+    },
+    { type: "heading", text: "Comparatif d'adjectifs", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Paris est {a}plus grande que{/a} Lyon."],
+        ["Égalité", "Cette ville est {a}aussi belle que{/a} l'autre."],
+        ["Infériorité", "Ce restaurant est {a}moins cher que{/a} celui-là."],
+      ],
+    },
+    { type: "heading", text: "Comparatif de verbes", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Je travaille {a}plus que{/a} toi."],
+        ["Égalité", "Il dort {a}autant que{/a} moi."],
+        ["Infériorité", "Elle mange {a}moins que{/a} lui."],
+      ],
+    },
+    { type: "heading", text: "Comparatif de noms (quantité)", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Degré", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Supériorité", "Il a {a}plus de{/a} patience {a}que{/a} moi."],
+        ["Égalité", "J'ai {a}autant de{/a} travail {a}que{/a} toi."],
+        ["Infériorité", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui."],
+      ],
+    },
+    { type: "heading", text: "Formes irrégulières (à mémoriser)", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Adjectif / adverbe", "Comparatif de supériorité", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}bon(ne){/a}", "{a}meilleur(e)(s){/a} que", "Ce vin est {a}meilleur que{/a} l'autre. ({s}plus bon{/s})"],
+        ["{a}mauvais(e){/a}", "{a}pire{/a} que (ou plus mauvais)", "C'est {a}pire que{/a} je pensais."],
+        ["{a}bien{/a}", "{a}mieux{/a} que", "Elle parle {a}mieux que{/a} lui. ({s}plus bien{/s})"],
+        ["{a}peu{/a}", "{a}moins{/a} que", "Je dors {a}moins que{/a} toi."],
       ],
     },
     {
-      type: "rule",
-      text: "Comparatif de verbes : verbe + plus/autant/moins + que.",
-      examples: [
-        { correct: "Je travaille plus que toi." },
-        { correct: "Il dort autant que moi." },
-      ],
-    },
-    { type: "heading", text: "Formes irrégulières" },
-    {
-      type: "rule",
-      text: "bon → meilleur(e)(s) ; bien → mieux.",
-      examples: [
-        { correct: "Ce restaurant est meilleur que l'autre." },
-        { correct: "Elle parle mieux que lui.", wrong: "Ce restaurant est plus bon." },
+      type: "highlight",
+      label: "Le superlatif (pour aller plus loin)",
+      items: [
+        "Superlatif relatif : le / la / les + {a}plus / moins{/a} + adj.",
+        "C'est {a}le plus beau{/a} film de l'année.",
+        "Elle est {a}la moins rapide{/a} du groupe.",
+        "Superlatif de bon : {a}le meilleur / la meilleure{/a}.",
       ],
     },
   ],
@@ -1513,42 +1970,70 @@ const a2GrL42: GrammarLesson = {
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [
-    { type: "heading", text: "Négation totale" },
+    { type: "heading", text: "Négation totale : jamais, rien, personne" },
     {
-      type: "rule",
-      text: "NE…JAMAIS = à aucun moment.",
-      examples: [
-        { correct: "Je ne mange jamais de viande." },
-        { correct: "Il ne vient jamais à l'heure." },
+      type: "grid",
+      headers: ["Négation", "Sens", "Contraire affirmatif"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}ne … jamais{/a}", "à aucun moment", "toujours / souvent / parfois"],
+        ["{a}ne … rien{/a}", "aucune chose", "quelque chose / tout"],
+        ["{a}ne … personne{/a}", "aucune personne", "quelqu'un / tout le monde"],
+      ],
+    },
+    { type: "heading", text: "Au présent", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je mange toujours de la viande.", "Je {a}ne{/a} mange {a}jamais{/a} de viande."],
+        ["Je fais quelque chose ce soir.", "Je {a}ne{/a} fais {a}rien{/a} ce soir."],
+        ["Je connais quelqu'un ici.", "Je {a}ne{/a} connais {a}personne{/a} ici."],
+      ],
+    },
+    { type: "heading", text: "Au passé composé", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}jamais et rien{/a} se placent entre l'auxiliaire et le participe.",
+        "{a}personne{/a} se place après le participe.",
       ],
     },
     {
-      type: "rule",
-      text: "NE…RIEN = aucune chose.",
-      examples: [
-        { correct: "Je ne fais rien ce soir." },
-        { correct: "Il n'a rien compris." },
+      type: "grid",
+      headers: ["Négation", "Exemple au passé composé"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}jamais{/a}", "Je {a}n'{/a}ai {a}jamais{/a} voyagé."],
+        ["{a}rien{/a}", "Il {a}n'{/a}a {a}rien{/a} dit."],
+        ["{a}personne{/a}", "Nous {a}n'{/a}avons vu {a}personne{/a}."],
+      ],
+    },
+    { type: "heading", text: "Rien et Personne comme sujets", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Quand {a}rien{/a} ou {a}personne{/a} est sujet, il se place en tête de phrase, et le verbe garde {a}ne{/a}.",
       ],
     },
     {
-      type: "rule",
-      text: "NE…PERSONNE = aucune personne.",
-      examples: [
-        { correct: "Je ne connais personne ici." },
-        { correct: "Il ne parle à personne." },
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      rows: [
+        ["{a}Rien{/a} + ne + verbe", "{a}Rien{/a} n'est impossible."],
+        ["{a}Personne{/a} + ne + verbe", "{a}Personne{/a} ne parle."],
+        ["{a}Rien{/a} + n'a + participe", "{a}Rien{/a} n'a changé."],
       ],
     },
     {
-      type: "rule",
-      text: "RIEN et PERSONNE peuvent être sujets (en tête de phrase) sans NE.",
-      examples: [
-        { correct: "Rien n'est impossible." },
-        { correct: "Personne ne parle." },
+      type: "highlight",
+      label: "Cumul de négations",
+      items: [
+        "On peut combiner {a}ne…jamais…rien{/a} ou {a}ne…jamais…personne{/a}.",
+        "Je {a}ne{/a} vois {a}jamais{/a} {a}personne{/a} ici.",
+        "Il {a}ne{/a} fait {a}jamais{/a} {a}rien{/a}.",
+        "En français, le double négatif {a}renforce{/a} la négation (contrairement à l'anglais).",
       ],
-    },
-    {
-      type: "note",
-      text: "Au passé composé : jamais/rien → AVANT le participe ; personne → APRÈS le participe. Ex: Je n'ai jamais voyagé. / Il n'a rien dit. / Nous n'avons vu personne.",
     },
   ],
   exercises: [],
@@ -1562,36 +2047,64 @@ const a2GrL52: GrammarLesson = {
   theory: [
     { type: "heading", text: "Exprimer la cause" },
     {
-      type: "rule",
-      text: "PARCE QUE / CAR + sujet + verbe (cause dans une phrase).",
-      examples: [
-        { correct: "Je prends des cours parce que je veux progresser." },
-        { correct: "Elle est fatiguée car elle a travaillé toute la nuit." },
+      type: "plain_list",
+      items: [
+        "La cause explique {a}pourquoi{/a} quelque chose se passe.",
+        "On peut exprimer la cause avec différents mots selon le registre et la position dans la phrase.",
       ],
     },
     {
-      type: "rule",
-      text: "COMME + sujet + verbe (cause en début de phrase).",
-      examples: [
-        { correct: "Comme il fait beau, on sort." },
-        { correct: "Comme j'ai faim, je mange." },
+      type: "grid",
+      headers: ["Connecteur", "Structure", "Registre", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}parce que{/a}", "+ sujet + verbe (milieu ou fin)", "courant", "Je reste parce qu'il pleut."],
+        ["{a}car{/a}", "+ sujet + verbe (après virgule)", "soutenu / écrit", "Je reste, car il pleut."],
+        ["{a}comme{/a}", "début de phrase uniquement", "courant", "Comme il pleut, je reste."],
+        ["{a}puisque{/a}", "+ sujet + verbe (cause évidente)", "courant", "Puisque tu es là, restons."],
+        ["{a}à cause de{/a}", "+ nom (connotation neutre/négative)", "courant", "Il est en retard à cause du trafic."],
+        ["{a}grâce à{/a}", "+ nom (connotation positive)", "courant", "Elle a réussi grâce à son travail."],
+        ["{a}en raison de{/a}", "+ nom (cause officielle)", "soutenu", "Fermeture en raison des travaux."],
+      ],
+    },
+    { type: "heading", text: "Exprimer la conséquence", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "La conséquence exprime {a}ce qui résulte{/a} d'une cause.",
       ],
     },
     {
-      type: "rule",
-      text: "À CAUSE DE + nom (cause négative) / GRÂCE À + nom (cause positive).",
-      examples: [
-        { correct: "Il est en retard à cause du trafic." },
-        { correct: "Elle a réussi grâce à son travail." },
+      type: "grid",
+      headers: ["Connecteur", "Structure", "Registre", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}donc{/a}", "virgule + donc + sujet + verbe", "courant", "Il pleut, {a}donc{/a} je prends un parapluie."],
+        ["{a}alors{/a}", "virgule + alors + sujet + verbe", "familier", "J'ai faim, {a}alors{/a} je mange."],
+        ["{a}c'est pourquoi{/a}", "phrase + c'est pourquoi + sujet + verbe", "courant/soutenu", "Il fait froid, {a}c'est pourquoi{/a} je mets un manteau."],
+        ["{a}par conséquent{/a}", "phrase + par conséquent + sujet + verbe", "soutenu / écrit", "Il est absent. {a}Par conséquent{/a}, la réunion est annulée."],
+        ["{a}du coup{/a}", "virgule + du coup + sujet + verbe", "familier / oral", "Il est parti tôt, {a}du coup{/a} j'ai fini seul."],
+        ["{a}si bien que{/a}", "+ sujet + verbe", "soutenu", "Il a beaucoup étudié, {a}si bien qu'{/a}il a réussi."],
       ],
     },
-    { type: "heading", text: "Exprimer la conséquence" },
     {
-      type: "rule",
-      text: "DONC / C'EST POURQUOI / PAR CONSÉQUENT.",
-      examples: [
-        { correct: "Il pleut, donc je prends un parapluie." },
-        { correct: "Il fait froid, c'est pourquoi je mets un manteau." },
+      type: "highlight",
+      label: "À cause de vs Grâce à",
+      items: [
+        "{a}À cause de{/a} → connotation {a}négative{/a} : Il a échoué {a}à cause de{/a} sa paresse.",
+        "{a}Grâce à{/a} → connotation {a}positive{/a} : Il a réussi {a}grâce à{/a} ses efforts.",
+        "Les deux sont suivis d'un nom ou d'un pronom tonique.",
+      ],
+      noBulletItems: [0],
+    },
+    { type: "heading", text: "Construire un raisonnement", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      rows: [
+        ["Cause → conséquence", "Il pleut {a}donc{/a} je reste."],
+        ["Conséquence ← cause", "Je reste {a}parce qu'{/a}il pleut."],
+        ["Cause + conséquence liées", "{a}Comme{/a} il pleut, {a}c'est pourquoi{/a} je reste."],
       ],
     },
   ],

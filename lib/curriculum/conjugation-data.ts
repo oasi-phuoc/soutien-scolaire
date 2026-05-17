@@ -1077,7 +1077,7 @@ const a1ConjL08: ConjLesson = {
       type: "table",
       tables: [
         {
-          verb: "aller",
+          verb: "aller", accentForms: true,
           rows: [
             { pronoun: "je", form: "vais" },
             { pronoun: "tu", form: "vas" },
@@ -1088,7 +1088,7 @@ const a1ConjL08: ConjLesson = {
           ],
         },
         {
-          verb: "venir",
+          verb: "venir", accentForms: true,
           rows: [
             { pronoun: "je", form: "viens" },
             { pronoun: "tu", form: "viens" },
@@ -1100,12 +1100,38 @@ const a1ConjL08: ConjLesson = {
         },
       ],
     },
+    { type: "heading", text: "Aller → destination", sub: true, accent: true },
     {
-      type: "rule",
-      text: "aller + à / au / aux / en (destination) ; venir + de (origine)",
-      examples: [
-        { correct: "Je vais au cinéma." },
-        { correct: "Je viens de France." },
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}aller à{/a}", "Je vais {a}à{/a} Genève."],
+        ["{a}aller au{/a} (à + le)", "Elle va {a}au{/a} cinéma."],
+        ["{a}aller aux{/a} (à + les)", "Nous allons {a}aux{/a} États-Unis."],
+        ["{a}aller en{/a} + pays féminin", "Tu vas {a}en{/a} France."],
+        ["{a}aller chez{/a} + personne", "Il va {a}chez{/a} le médecin."],
+      ],
+    },
+    { type: "heading", text: "Venir → origine", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}venir de{/a} + ville", "Je viens {a}de{/a} Genève."],
+        ["{a}venir du{/a} (de + le)", "Elle vient {a}du{/a} marché."],
+        ["{a}venir des{/a} (de + les)", "Ils viennent {a}des{/a} États-Unis."],
+        ["{a}venir de{/a} + pays féminin", "Tu viens {a}de{/a} France."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Expressions avec aller",
+      items: [
+        "Comment tu vas ? / Comment allez-vous ?",
+        "Je vais bien, merci. / Ça va ?",
+        "Aller + infinitif → futur proche : Je vais partir.",
       ],
     },
   ],
@@ -1118,23 +1144,31 @@ const a1ConjL09: ConjLesson = {
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
-    { type: "heading", text: "Les verbes pronominaux au présent" },
+    { type: "heading", text: "Les verbes pronominaux" },
+    {
+      type: "plain_list",
+      items: [
+        "Un verbe pronominal est toujours accompagné d'un pronom réfléchi.",
+        "Le pronom change selon le sujet.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Sujet", "Pronom réfléchi"],
+      rows: [
+        ["{a}je{/a}", "{a}me (m'){/a}"],
+        ["{a}tu{/a}", "{a}te (t'){/a}"],
+        ["{a}il / elle / on{/a}", "{a}se (s'){/a}"],
+        ["{a}nous{/a}", "{a}nous{/a}"],
+        ["{a}vous{/a}", "{a}vous{/a}"],
+        ["{a}ils / elles{/a}", "{a}se (s'){/a}"],
+      ],
+    },
     {
       type: "table",
       tables: [
         {
-          verb: "s'appeler",
-          rows: [
-            { pronoun: "je", form: "m'appelle" },
-            { pronoun: "tu", form: "t'appelles" },
-            { pronoun: "il / elle", form: "s'appelle" },
-            { pronoun: "nous", form: "nous appelons" },
-            { pronoun: "vous", form: "vous appelez" },
-            { pronoun: "ils / elles", form: "s'appellent" },
-          ],
-        },
-        {
-          verb: "se lever",
+          verb: "se lever", accentForms: true,
           rows: [
             { pronoun: "je", form: "me lève" },
             { pronoun: "tu", form: "te lèves" },
@@ -1144,19 +1178,56 @@ const a1ConjL09: ConjLesson = {
             { pronoun: "ils / elles", form: "se lèvent" },
           ],
         },
+        {
+          verb: "se coucher", accentForms: true,
+          rows: [
+            { pronoun: "je", form: "me couche" },
+            { pronoun: "tu", form: "te couches" },
+            { pronoun: "il / elle", form: "se couche" },
+            { pronoun: "nous", form: "nous couchons" },
+            { pronoun: "vous", form: "vous couchez" },
+            { pronoun: "ils / elles", form: "se couchent" },
+          ],
+        },
       ],
     },
     {
-      type: "rule",
-      text: "Les verbes pronominaux ont un pronom réfléchi (me / te / se / nous / vous / se) AVANT le verbe.",
+      type: "highlight",
+      label: "Verbes pronominaux courants",
+      items: [
+        "se réveiller, se lever, se laver, se doucher",
+        "s'habiller, se préparer, se dépêcher",
+        "se coucher, se reposer, s'ennuyer",
+      ],
+    },
+    { type: "heading", text: "La négation", sub: true },
+    {
+      type: "plain_list",
+      items: ["La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe."],
     },
     {
-      type: "note",
-      text: "me / te / se → m' / t' / s' devant une voyelle.",
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je me lève tôt.", "Je {a}ne{/a} me lève {a}pas{/a} tôt."],
+        ["Il se couche tard.", "Il {a}ne{/a} se couche {a}pas{/a} tard."],
+        ["Elle s'habille vite.", "Elle {a}ne{/a} s'habille {a}pas{/a} vite."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Attention : élision",
+      items: [
+        "me / te / se + voyelle → m' / t' / s'",
+        "je {s}me{/s} appelle → je {a}m'{/a}appelle",
+        "il {s}se{/s} habille → il {a}s'{/a}habille",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1ConjL12: ConjLesson = {
   slug: "a1-conj-l12",
@@ -1164,12 +1235,19 @@ const a1ConjL12: ConjLesson = {
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [
-    { type: "heading", text: "Verbes de mouvement au présent" },
+    { type: "heading", text: "Les verbes de mouvement" },
+    {
+      type: "plain_list",
+      items: [
+        "Ces verbes expriment un déplacement ou un changement de position.",
+        "Ils se conjuguent sur {a}2 radicaux{/a} : court (je/tu/il) et long (nous/vous/ils).",
+      ],
+    },
     {
       type: "table",
       tables: [
         {
-          verb: "partir",
+          verb: "partir", accentForms: true,
           rows: [
             { pronoun: "je", form: "pars" },
             { pronoun: "tu", form: "pars" },
@@ -1180,7 +1258,7 @@ const a1ConjL12: ConjLesson = {
           ],
         },
         {
-          verb: "sortir",
+          verb: "sortir", accentForms: true,
           rows: [
             { pronoun: "je", form: "sors" },
             { pronoun: "tu", form: "sors" },
@@ -1192,18 +1270,34 @@ const a1ConjL12: ConjLesson = {
         },
       ],
     },
+    { type: "heading", text: "Autres verbes courants", sub: true, accent: true },
     {
-      type: "vocab",
-      title: "Autres verbes de mouvement",
-      items: ["arriver", "entrer", "monter", "descendre"],
+      type: "grid",
+      headers: ["Verbe", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}arriver{/a}", "venir à destination", "Il arrive à 8 h."],
+        ["{a}entrer{/a}", "aller à l'intérieur", "Elle entre dans la salle."],
+        ["{a}monter{/a}", "aller vers le haut", "Tu montes à pied ?"],
+        ["{a}descendre{/a}", "aller vers le bas", "Je descends du bus."],
+        ["{a}retourner{/a}", "revenir à un endroit", "Elle retourne au travail."],
+        ["{a}rester{/a}", "ne pas bouger", "Nous restons à la maison."],
+      ],
     },
     {
-      type: "rule",
-      text: "Ces verbes se conjuguent en 2 bases : radical court (je / tu / il) + radical long (nous / vous / ils).",
+      type: "highlight",
+      label: "Au passé composé → avec ÊTRE",
+      items: [
+        "Ces verbes se conjuguent avec {a}ÊTRE{/a} au passé composé.",
+        "Il est parti. / Elle est arrivée. / Ils sont sortis.",
+        "Le participe s'accorde avec le sujet.",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1ConjL15: ConjLesson = {
   slug: "a1-conj-l15",
@@ -1211,12 +1305,19 @@ const a1ConjL15: ConjLesson = {
   level: "A1",
   title: "Vouloir, pouvoir, devoir",
   theory: [
-    { type: "heading", text: "Les trois verbes modaux" },
+    { type: "heading", text: "Les verbes modaux" },
+    {
+      type: "plain_list",
+      items: [
+        "Ces verbes expriment un état, une capacité ou une obligation.",
+        "Ils sont toujours suivis d'un {a}infinitif{/a}.",
+      ],
+    },
     {
       type: "table",
       tables: [
         {
-          verb: "vouloir",
+          verb: "vouloir", accentForms: true,
           rows: [
             { pronoun: "je", form: "veux" },
             { pronoun: "tu", form: "veux" },
@@ -1227,7 +1328,7 @@ const a1ConjL15: ConjLesson = {
           ],
         },
         {
-          verb: "pouvoir",
+          verb: "pouvoir", accentForms: true,
           rows: [
             { pronoun: "je", form: "peux" },
             { pronoun: "tu", form: "peux" },
@@ -1238,7 +1339,7 @@ const a1ConjL15: ConjLesson = {
           ],
         },
         {
-          verb: "devoir",
+          verb: "devoir", accentForms: true,
           rows: [
             { pronoun: "je", form: "dois" },
             { pronoun: "tu", form: "dois" },
@@ -1251,17 +1352,39 @@ const a1ConjL15: ConjLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "Ces verbes sont suivis d'un infinitif.",
-      examples: [
-        { correct: "Je veux manger." },
-        { correct: "Tu peux partir." },
-        { correct: "Elle doit étudier." },
+      type: "grid",
+      headers: ["Verbe", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}vouloir{/a}", "désir / intention", "Je veux partir."],
+        ["{a}pouvoir{/a}", "capacité / permission", "Tu peux entrer."],
+        ["{a}devoir{/a}", "obligation / nécessité", "Elle doit étudier."],
       ],
+    },
+    { type: "heading", text: "Négation", sub: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je veux partir.", "Je {a}ne{/a} veux {a}pas{/a} partir."],
+        ["Tu peux venir.", "Tu {a}ne{/a} peux {a}pas{/a} venir."],
+        ["Il doit travailler.", "Il {a}ne{/a} doit {a}pas{/a} travailler."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Astuce : politesse avec vouloir",
+      items: [
+        "{a}Je voudrais{/a} (conditionnel) est plus poli que «je veux».",
+        "Je voudrais un café, s'il vous plaît.",
+        "Vous voudriez de l'aide ?",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
 };
+
 
 const a1ConjL20: ConjLesson = {
   slug: "a1-conj-l20",
@@ -1269,28 +1392,69 @@ const a1ConjL20: ConjLesson = {
   level: "A1",
   title: "Le futur proche",
   theory: [
-    { type: "heading", text: "Le futur proche : aller + infinitif" },
+    { type: "heading", text: "Le futur proche" },
     {
-      type: "rule",
-      text: "Structure : aller (conjugué au présent) + infinitif",
-      examples: [
-        { correct: "Je vais manger." },
-        { correct: "Tu vas partir." },
-        { correct: "Il va pleuvoir." },
-        { correct: "Nous allons étudier." },
+      type: "plain_list",
+      items: [
+        "Le futur proche exprime une action {a}prévue ou imminente{/a}.",
+        "Structure : {a}aller{/a} (présent) + infinitif",
       ],
     },
     {
-      type: "rule",
-      text: "Forme négative : ne … pas encadre « aller ».",
-      examples: [
-        { correct: "Je ne vais pas manger.", wrong: "Je vais ne pas manger." },
-        { correct: "Elle ne va pas venir.", wrong: "Elle va ne pas venir." },
+      type: "table",
+      tables: [
+        {
+          verb: "aller (présent)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "vais" },
+            { pronoun: "tu", form: "vas" },
+            { pronoun: "il / elle / on", form: "va" },
+            { pronoun: "nous", form: "allons" },
+            { pronoun: "vous", form: "allez" },
+            { pronoun: "ils / elles", form: "vont" },
+          ],
+        },
       ],
     },
     {
-      type: "note",
-      text: "Le futur proche exprime un événement imminent ou prévu avec certitude.",
+      type: "grid",
+      headers: ["Sujet", "Futur proche", "Traduction"],
+      boldFirstCol: true,
+      rows: [
+        ["je", "Je {a}vais{/a} manger.", "I am going to eat."],
+        ["tu", "Tu {a}vas{/a} partir.", "You are going to leave."],
+        ["il", "Il {a}va{/a} pleuvoir.", "It is going to rain."],
+        ["nous", "Nous {a}allons{/a} étudier.", "We are going to study."],
+        ["vous", "Vous {a}allez{/a} voyager.", "You are going to travel."],
+        ["elles", "Elles {a}vont{/a} arriver.", "They are going to arrive."],
+      ],
+    },
+    { type: "heading", text: "Forme négative", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}ne … pas{/a} encadre le verbe {a}aller{/a}, pas l'infinitif.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je vais manger.", "Je {a}ne{/a} vais {a}pas{/a} manger."],
+        ["Elle va venir.", "Elle {a}ne{/a} va {a}pas{/a} venir."],
+        ["Ils vont sortir.", "Ils {a}ne{/a} vont {a}pas{/a} sortir."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Quand utiliser le futur proche ?",
+      items: [
+        "Action prévue dans un futur proche : Je vais appeler demain.",
+        "Intention certaine : Nous allons déménager.",
+        "Événement imminent : Attention, tu vas tomber !",
+        "Programme établi : Le train va partir dans 2 minutes.",
+      ],
     },
   ],
   exercises: [],
@@ -1302,37 +1466,74 @@ const a1ConjL27: ConjLesson = {
   level: "A1",
   title: "Pronominaux réfléchis et réciproques",
   theory: [
-    { type: "heading", text: "Réfléchis et réciproques" },
+    { type: "heading", text: "Les verbes pronominaux" },
     {
-      type: "rule",
-      text: "Réfléchis : le sujet est aussi l'objet de l'action.",
-      examples: [{ correct: "Je me lave. (I wash myself)" }],
+      type: "plain_list",
+      items: [
+        "Un verbe pronominal s'utilise avec un {a}pronom réfléchi{/a} (me, te, se, nous, vous, se).",
+        "Le pronom réfléchi change selon le sujet.",
+        "À l'infinitif : {a}se{/a} laver, {a}se{/a} lever, {a}s'{/a}appeler…",
+      ],
     },
+    { type: "heading", text: "Conjugaison : se laver", sub: true, accent: true },
     {
       type: "table",
       tables: [
         {
           verb: "se laver",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "me lave" },
             { pronoun: "tu", form: "te laves" },
-            { pronoun: "il / elle", form: "se lave" },
+            { pronoun: "il / elle / on", form: "se lave" },
             { pronoun: "nous", form: "nous lavons" },
             { pronoun: "vous", form: "vous lavez" },
             { pronoun: "ils / elles", form: "se lavent" },
           ],
         },
+        {
+          verb: "s'appeler",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "m'appelle" },
+            { pronoun: "tu", form: "t'appelles" },
+            { pronoun: "il / elle / on", form: "s'appelle" },
+            { pronoun: "nous", form: "nous appelons" },
+            { pronoun: "vous", form: "vous appelez" },
+            { pronoun: "ils / elles", form: "s'appellent" },
+          ],
+        },
+      ],
+    },
+    { type: "heading", text: "Réfléchis vs réciproques", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Type", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Réfléchi", "Le sujet agit sur lui-même.", "Je {a}me{/a} regarde dans le miroir."],
+        ["Réciproque", "Les sujets agissent l'un sur l'autre.", "Nous {a}nous{/a} regardons. (each other)"],
       ],
     },
     {
-      type: "rule",
-      text: "Réciproques : les sujets agissent l'un sur l'autre.",
-      examples: [{ correct: "Nous nous parlons. (we talk to each other)" }],
+      type: "highlight",
+      label: "Verbes pronominaux courants",
+      items: [
+        "se lever — se coucher — se réveiller (routine quotidienne)",
+        "se laver — se coiffer — s'habiller (hygiène)",
+        "se souvenir — s'ennuyer — se sentir (état)",
+        "se parler — se voir — s'écrire (réciproques)",
+      ],
     },
+    { type: "heading", text: "Forme négative", sub: true, accent: true },
     {
-      type: "vocab",
-      title: "Verbes réciproques courants",
-      items: ["se regarder", "se parler", "s'écrire", "se téléphoner"],
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je me lève.", "Je {a}ne{/a} me lève {a}pas{/a}."],
+        ["Il se rase.", "Il {a}ne{/a} se rase {a}pas{/a}."],
+        ["Nous nous voyons.", "Nous {a}ne{/a} nous voyons {a}pas{/a}."],
+      ],
     },
   ],
   exercises: [],
@@ -1344,16 +1545,24 @@ const a1ConjL28: ConjLesson = {
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [
-    { type: "heading", text: "Passé récent : venir de + infinitif" },
+    { type: "heading", text: "Le passé récent : venir de + infinitif" },
+    {
+      type: "plain_list",
+      items: [
+        "Le passé récent exprime une action {a}qui vient juste de se terminer{/a}.",
+        "Structure : {a}venir de{/a} (présent) + infinitif",
+      ],
+    },
     {
       type: "table",
       tables: [
         {
-          verb: "venir de (passé récent)",
+          verb: "venir de + infinitif",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "viens de" },
             { pronoun: "tu", form: "viens de" },
-            { pronoun: "il / elle", form: "vient de" },
+            { pronoun: "il / elle / on", form: "vient de" },
             { pronoun: "nous", form: "venons de" },
             { pronoun: "vous", form: "venez de" },
             { pronoun: "ils / elles", form: "viennent de" },
@@ -1362,15 +1571,41 @@ const a1ConjL28: ConjLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "Passé récent = action qui vient de se passer.",
-      examples: [{ correct: "Je viens de manger. (I just ate.)" }],
+      type: "grid",
+      headers: ["Exemple", "Traduction"],
+      rows: [
+        ["Je {a}viens de{/a} manger.", "I just ate."],
+        ["Elle {a}vient de{/a} partir.", "She just left."],
+        ["Nous {a}venons de{/a} finir.", "We just finished."],
+        ["Ils {a}viennent d'{/a}arriver.", "They just arrived."],
+      ],
     },
-    { type: "heading", text: "Présent continu : être en train de + infinitif" },
+    { type: "heading", text: "Le présent continu : être en train de + infinitif", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Présent continu = action en cours au moment où l'on parle.",
-      examples: [{ correct: "Je suis en train de travailler. (I'm working right now.)" }],
+      type: "plain_list",
+      items: [
+        "Le présent continu insiste sur une action {a}en cours{/a} au moment où l'on parle.",
+        "Structure : {a}être en train de{/a} + infinitif",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Exemple", "Traduction"],
+      rows: [
+        ["Je suis {a}en train de{/a} travailler.", "I'm working right now."],
+        ["Tu es {a}en train de{/a} lire.", "You are reading right now."],
+        ["Il est {a}en train de{/a} dormir.", "He is sleeping right now."],
+        ["Nous sommes {a}en train de{/a} cuisiner.", "We are cooking right now."],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Les 3 aspects du présent élargi",
+      items: [
+        "{a}Passé récent{/a} → venir de + inf. : Elle vient de téléphoner.",
+        "{a}Présent simple{/a} → présent : Elle téléphone.",
+        "{a}Futur proche{/a} → aller + inf. : Elle va téléphoner.",
+      ],
     },
   ],
   exercises: [],
@@ -1384,18 +1619,22 @@ const a1ConjL29: ConjLesson = {
   theory: [
     { type: "heading", text: "Le passé composé avec avoir" },
     {
-      type: "rule",
-      text: "Structure : avoir (présent) + participe passé",
+      type: "plain_list",
+      items: [
+        "Le passé composé exprime une action {a}terminée dans le passé{/a}.",
+        "Structure : {a}avoir{/a} (présent) + {a}participe passé{/a}",
+      ],
     },
     {
       type: "table",
       tables: [
         {
           verb: "avoir (auxiliaire)",
+          accentForms: true,
           rows: [
             { pronoun: "j'", form: "ai" },
             { pronoun: "tu", form: "as" },
-            { pronoun: "il / elle", form: "a" },
+            { pronoun: "il / elle / on", form: "a" },
             { pronoun: "nous", form: "avons" },
             { pronoun: "vous", form: "avez" },
             { pronoun: "ils / elles", form: "ont" },
@@ -1403,28 +1642,52 @@ const a1ConjL29: ConjLesson = {
         },
       ],
     },
+    { type: "heading", text: "Formation du participe passé", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Participes réguliers : -er → -é (parler → parlé) ; -ir → -i (finir → fini)",
+      type: "grid",
+      headers: ["Infinitif", "Terminaison", "Participe passé", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["verbes en -er", "-er → {a}-é{/a}", "parler → {a}parlé{/a}", "J'ai parlé."],
+        ["verbes en -ir (2e groupe)", "-ir → {a}-i{/a}", "finir → {a}fini{/a}", "Tu as fini."],
+        ["verbes en -re", "-re → {a}-u{/a}", "vendre → {a}vendu{/a}", "Il a vendu."],
+      ],
     },
     {
-      type: "vocab",
-      title: "Participes irréguliers",
+      type: "highlight",
+      label: "Participes passés irréguliers à mémoriser",
       items: [
-        "faire → fait",
-        "dire → dit",
-        "prendre → pris",
-        "voir → vu",
-        "avoir → eu",
-        "être → été",
+        "avoir → {a}eu{/a}    |    être → {a}été{/a}    |    faire → {a}fait{/a}",
+        "dire → {a}dit{/a}    |    écrire → {a}écrit{/a}    |    lire → {a}lu{/a}",
+        "prendre → {a}pris{/a}    |    voir → {a}vu{/a}    |    vouloir → {a}voulu{/a}",
+        "pouvoir → {a}pu{/a}    |    savoir → {a}su{/a}    |    mettre → {a}mis{/a}",
+      ],
+    },
+    { type: "heading", text: "Forme négative", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "{a}ne … pas{/a} encadre l'auxiliaire {a}avoir{/a}.",
       ],
     },
     {
-      type: "rule",
-      text: "Forme négative : ne … pas encadre l'auxiliaire.",
-      examples: [
-        { correct: "Je n'ai pas parlé.", wrong: "Je n'ai parlé pas." },
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["J'ai mangé.", "Je {a}n'{/a}ai {a}pas{/a} mangé."],
+        ["Tu as fini.", "Tu {a}n'{/a}as {a}pas{/a} fini."],
+        ["Il a vu.", "Il {a}n'{/a}a {a}pas{/a} vu."],
       ],
+    },
+    {
+      type: "highlight",
+      label: "Accord du participe passé avec avoir",
+      items: [
+        "Avec avoir, le participe passé {a}ne s'accorde PAS{/a} avec le sujet.",
+        "Exception : si le COD est placé AVANT le verbe → accord obligatoire.",
+        "Exemple : La lettre qu'il a écrite. (que = COD féminin → écrite)",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
@@ -1438,25 +1701,68 @@ const a1ConjL30: ConjLesson = {
   theory: [
     { type: "heading", text: "Le passé composé avec être" },
     {
-      type: "vocab",
-      title: "17 verbes qui se conjuguent avec être",
+      type: "plain_list",
       items: [
-        "aller", "venir", "arriver", "partir", "entrer", "sortir",
-        "monter", "descendre", "naître", "mourir", "rester", "tomber",
-        "retourner", "passer", "rentrer", "revenir", "devenir",
+        "Certains verbes utilisent {a}être{/a} (et non avoir) comme auxiliaire.",
+        "Structure : {a}être{/a} (présent) + {a}participe passé{/a} (accordé avec le sujet)",
       ],
     },
     {
-      type: "note",
-      text: "Moyen mnémotechnique : DR & MRS VANDERTRAMP",
+      type: "table",
+      tables: [
+        {
+          verb: "aller — exemple avec être",
+          accentForms: true,
+          rows: [
+            { pronoun: "je (masc.)", form: "suis allé" },
+            { pronoun: "je (fém.)", form: "suis allée" },
+            { pronoun: "tu (masc.)", form: "es allé" },
+            { pronoun: "il / on", form: "est allé" },
+            { pronoun: "elle", form: "est allée" },
+            { pronoun: "nous (masc.)", form: "sommes allés" },
+            { pronoun: "vous (mixte)", form: "êtes allés" },
+            { pronoun: "ils", form: "sont allés" },
+            { pronoun: "elles", form: "sont allées" },
+          ],
+        },
+      ],
+    },
+    { type: "heading", text: "Les 17 verbes avec être (DR MRS VANDERTRAMP)", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Infinitif", "Participe passé", "Infinitif", "Participe passé"],
+      rows: [
+        ["{a}D{/a}escendre", "descendu(e)", "{a}V{/a}enir", "venu(e)"],
+        ["{a}R{/a}ester", "resté(e)", "{a}A{/a}ller", "allé(e)"],
+        ["{a}M{/a}onter", "monté(e)", "{a}N{/a}aître", "né(e)"],
+        ["{a}R{/a}etourner", "retourné(e)", "{a}D{/a}evenir", "devenu(e)"],
+        ["{a}S{/a}ortir", "sorti(e)", "{a}E{/a}ntrer", "entré(e)"],
+        ["{a}V{/a}enir", "venu(e)", "{a}R{/a}evenir", "revenu(e)"],
+        ["{a}A{/a}rriver", "arrivé(e)", "{a}T{/a}omber", "tombé(e)"],
+        ["{a}N{/a}aître", "né(e)", "{a}R{/a}entrer", "rentré(e)"],
+        ["{a}P{/a}artir", "parti(e)", "{a}A{/a}ller", "allé(e)"],
+        ["{a}M{/a}ourir", "mort(e)", "{a}P{/a}asser", "passé(e)"],
+      ],
+    },
+    { type: "heading", text: "Accord du participe passé avec être", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Sujet", "Participe", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Masculin singulier", "→ (base)", "Il est parti."],
+        ["Féminin singulier", "→ + {a}e{/a}", "Elle est partie{a}e{/a}."],
+        ["Masculin pluriel", "→ + {a}s{/a}", "Ils sont partis{a}s{/a}."],
+        ["Féminin pluriel", "→ + {a}es{/a}", "Elles sont parties{a}es{/a}."],
+      ],
     },
     {
-      type: "rule",
-      text: "Le participe passé s'accorde avec le SUJET : -e pour féminin, -s pour pluriel.",
-      examples: [
-        { correct: "Elle est allée." },
-        { correct: "Ils sont partis." },
-        { correct: "Elles sont venues." },
+      type: "highlight",
+      label: "Tous les verbes pronominaux utilisent aussi être",
+      items: [
+        "Elle {a}s'est levée{/a}. (se lever → participe accordé avec elle)",
+        "Ils {a}se sont parlé{/a}. (se parler → COI, pas d'accord)",
+        "Nous {a}nous sommes rencontrés{/a}.",
       ],
     },
   ],
@@ -1471,57 +1777,79 @@ const a2ConjL01: ConjLesson = {
   level: "A2",
   title: "Les verbes en -er — révision et particularités",
   theory: [
-    { type: "heading", text: "Particularités des verbes en -er" },
+    { type: "heading", text: "Révision : terminaisons des verbes en -er" },
     {
-      type: "rule",
-      text: "Verbes en -ger : ajouter un -e devant -ons pour conserver le son [ʒ].",
-      examples: [
-        { correct: "nous mangeons", wrong: "nous mangons" },
+      type: "grid",
+      headers: ["Pronom", "Terminaison", "Exemple (parler)"],
+      boldFirstCol: true,
+      rows: [
+        ["je", "{a}-e{/a}", "parl{a}e{/a}"],
+        ["tu", "{a}-es{/a}", "parl{a}es{/a}"],
+        ["il / elle / on", "{a}-e{/a}", "parl{a}e{/a}"],
+        ["nous", "{a}-ons{/a}", "parl{a}ons{/a}"],
+        ["vous", "{a}-ez{/a}", "parl{a}ez{/a}"],
+        ["ils / elles", "{a}-ent{/a}", "parl{a}ent{/a}"],
       ],
     },
+    { type: "heading", text: "Cas particuliers : orthographe", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Verbes en -cer : remplacer le c par ç devant -ons.",
-      examples: [
-        { correct: "nous commençons", wrong: "nous commencons" },
+      type: "grid",
+      headers: ["Type de verbe", "Règle", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Verbes en {a}-ger{/a}", "Ajouter {a}e{/a} avant -ons (son [ʒ])", "nous mang{a}e{/a}ons"],
+        ["Verbes en {a}-cer{/a}", "Remplacer c par {a}ç{/a} avant -ons", "nous commen{a}ç{/a}ons"],
       ],
     },
+    { type: "heading", text: "Verbes à deux bases (radical qui change)", sub: true, accent: true },
     {
       type: "table",
       tables: [
         {
-          verb: "préférer (deux bases)",
+          verb: "préférer — è / é",
+          accentForms: true,
           rows: [
-            { pronoun: "je", form: "préfère" },
-            { pronoun: "tu", form: "préfères" },
-            { pronoun: "il / elle", form: "préfère" },
-            { pronoun: "nous", form: "préférons" },
-            { pronoun: "vous", form: "préférez" },
+            { pronoun: "je / tu / il", form: "préfère" },
+            { pronoun: "nous / vous", form: "préférons / préférez" },
             { pronoun: "ils / elles", form: "préfèrent" },
           ],
         },
         {
-          verb: "appeler (deux bases)",
+          verb: "appeler — ll / l",
+          accentForms: true,
           rows: [
-            { pronoun: "j'", form: "appelle" },
-            { pronoun: "tu", form: "appelles" },
-            { pronoun: "il / elle", form: "appelle" },
-            { pronoun: "nous", form: "appelons" },
-            { pronoun: "vous", form: "appelez" },
+            { pronoun: "j' / tu / il", form: "appelle" },
+            { pronoun: "nous / vous", form: "appelons / appelez" },
             { pronoun: "ils / elles", form: "appellent" },
           ],
         },
         {
-          verb: "acheter (deux bases)",
+          verb: "acheter — è / e",
+          accentForms: true,
           rows: [
-            { pronoun: "j'", form: "achète" },
-            { pronoun: "tu", form: "achètes" },
-            { pronoun: "il / elle", form: "achète" },
-            { pronoun: "nous", form: "achetons" },
-            { pronoun: "vous", form: "achetez" },
+            { pronoun: "j' / tu / il", form: "achète" },
+            { pronoun: "nous / vous", form: "achetons / achetez" },
             { pronoun: "ils / elles", form: "achètent" },
           ],
         },
+        {
+          verb: "payer — i / y (optionnel)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je / tu / il", form: "paie (ou paye)" },
+            { pronoun: "nous / vous", form: "payons / payez" },
+            { pronoun: "ils / elles", form: "paient (ou payent)" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Règle des deux bases",
+      items: [
+        "Le radical fort (avec accent ou consonne double) s'utilise avec {a}je, tu, il, ils{/a}.",
+        "Le radical faible (forme originale) s'utilise avec {a}nous, vous{/a}.",
+        "Cette alternance est régulière pour toute la famille de ces verbes.",
       ],
     },
   ],
@@ -1534,38 +1862,76 @@ const a2ConjL02: ConjLesson = {
   level: "A2",
   title: "Les verbes en -ir (2e et 3e groupes)",
   theory: [
-    { type: "heading", text: "Verbes en -ir : deux groupes distincts" },
+    { type: "heading", text: "Deux groupes de verbes en -ir" },
+    {
+      type: "grid",
+      headers: ["Groupe", "Caractéristique", "Exemples"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}2e groupe{/a}", "Radical + {a}-iss-{/a} aux formes plurielles", "finir, choisir, grandir, rougir"],
+        ["{a}3e groupe{/a}", "Radical court ou irrégulier", "partir, sortir, dormir, ouvrir, venir"],
+      ],
+    },
+    { type: "heading", text: "2e groupe : finir", sub: true, accent: true },
     {
       type: "table",
       tables: [
         {
           verb: "finir (2e groupe)",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "finis" },
             { pronoun: "tu", form: "finis" },
-            { pronoun: "il / elle", form: "finit" },
+            { pronoun: "il / elle / on", form: "finit" },
             { pronoun: "nous", form: "finissons" },
             { pronoun: "vous", form: "finissez" },
             { pronoun: "ils / elles", form: "finissent" },
           ],
         },
+      ],
+    },
+    {
+      type: "plain_list",
+      items: [
+        "2e groupe : ajouter {a}-iss-{/a} pour nous/vous/ils → finissons, finissez, finissent.",
+        "Autres verbes 2e groupe : choisir, obéir, réussir, grandir, rougir, maigrir, grossir.",
+      ],
+    },
+    { type: "heading", text: "3e groupe : verbes en -ir irréguliers", sub: true, accent: true },
+    {
+      type: "table",
+      tables: [
         {
-          verb: "partir (3e groupe)",
+          verb: "partir (pars / partons)",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "pars" },
             { pronoun: "tu", form: "pars" },
-            { pronoun: "il / elle", form: "part" },
+            { pronoun: "il / elle / on", form: "part" },
             { pronoun: "nous", form: "partons" },
             { pronoun: "vous", form: "partez" },
             { pronoun: "ils / elles", form: "partent" },
           ],
         },
         {
-          verb: "ouvrir (3e groupe)",
+          verb: "dormir (dors / dormons)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "dors" },
+            { pronoun: "tu", form: "dors" },
+            { pronoun: "il / elle / on", form: "dort" },
+            { pronoun: "nous", form: "dormons" },
+            { pronoun: "vous", form: "dormez" },
+            { pronoun: "ils / elles", form: "dorment" },
+          ],
+        },
+        {
+          verb: "ouvrir (comme les -er !)",
+          accentForms: true,
           rows: [
             { pronoun: "j'", form: "ouvre" },
             { pronoun: "tu", form: "ouvres" },
-            { pronoun: "il / elle", form: "ouvre" },
+            { pronoun: "il / elle / on", form: "ouvre" },
             { pronoun: "nous", form: "ouvrons" },
             { pronoun: "vous", form: "ouvrez" },
             { pronoun: "ils / elles", form: "ouvrent" },
@@ -1574,11 +1940,13 @@ const a2ConjL02: ConjLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "2e groupe : ajouter -iss- avant les terminaisons nous / vous / ils.",
-      examples: [
-        { correct: "nous finissons", wrong: "nous finons" },
+      type: "highlight",
+      label: "Attention : ouvrir, couvrir, offrir, souffrir",
+      items: [
+        "Ces verbes en -ir se conjuguent comme des verbes en {a}-er{/a} (terminaisons -e, -es, -e…).",
+        "j'ouvre, tu ouvres, il ouvre — comme je parle, tu parles, il parle.",
       ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
@@ -1596,10 +1964,11 @@ const a2ConjL03: ConjLesson = {
       tables: [
         {
           verb: "faire",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "fais" },
             { pronoun: "tu", form: "fais" },
-            { pronoun: "il / elle", form: "fait" },
+            { pronoun: "il / elle / on", form: "fait" },
             { pronoun: "nous", form: "faisons" },
             { pronoun: "vous", form: "faites" },
             { pronoun: "ils / elles", form: "font" },
@@ -1607,31 +1976,91 @@ const a2ConjL03: ConjLesson = {
         },
         {
           verb: "prendre",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "prends" },
             { pronoun: "tu", form: "prends" },
-            { pronoun: "il / elle", form: "prend" },
+            { pronoun: "il / elle / on", form: "prend" },
             { pronoun: "nous", form: "prenons" },
             { pronoun: "vous", form: "prenez" },
             { pronoun: "ils / elles", form: "prennent" },
           ],
         },
         {
+          verb: "savoir",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "sais" },
+            { pronoun: "tu", form: "sais" },
+            { pronoun: "il / elle / on", form: "sait" },
+            { pronoun: "nous", form: "savons" },
+            { pronoun: "vous", form: "savez" },
+            { pronoun: "ils / elles", form: "savent" },
+          ],
+        },
+        {
           verb: "connaître",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "connais" },
             { pronoun: "tu", form: "connais" },
-            { pronoun: "il / elle", form: "connaît" },
+            { pronoun: "il / elle / on", form: "connaît" },
             { pronoun: "nous", form: "connaissons" },
             { pronoun: "vous", form: "connaissez" },
             { pronoun: "ils / elles", form: "connaissent" },
           ],
         },
+        {
+          verb: "voir",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "vois" },
+            { pronoun: "tu", form: "vois" },
+            { pronoun: "il / elle / on", form: "voit" },
+            { pronoun: "nous", form: "voyons" },
+            { pronoun: "vous", form: "voyez" },
+            { pronoun: "ils / elles", form: "voient" },
+          ],
+        },
+        {
+          verb: "boire",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "bois" },
+            { pronoun: "tu", form: "bois" },
+            { pronoun: "il / elle / on", form: "boit" },
+            { pronoun: "nous", form: "buvons" },
+            { pronoun: "vous", form: "buvez" },
+            { pronoun: "ils / elles", form: "boivent" },
+          ],
+        },
       ],
     },
     {
-      type: "note",
-      text: "boire, croire, voir suivent des patterns similaires à prendre.",
+      type: "highlight",
+      label: "Familles de verbes",
+      items: [
+        "{a}Famille prendre{/a} : comprendre, apprendre, surprendre → même conjugaison.",
+        "{a}Famille connaître{/a} : paraître, apparaître, disparaître → même conjugaison.",
+        "{a}Famille voir{/a} : prévoir, revoir → même conjugaison.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Verbe", "1re pers. sing.", "Participe passé"],
+      boldFirstCol: true,
+      rows: [
+        ["faire", "je fais", "fait"],
+        ["prendre", "je prends", "pris"],
+        ["savoir", "je sais", "su"],
+        ["connaître", "je connais", "connu"],
+        ["voir", "je vois", "vu"],
+        ["boire", "je bois", "bu"],
+        ["lire", "je lis", "lu"],
+        ["écrire", "j'écris", "écrit"],
+        ["mettre", "je mets", "mis"],
+        ["croire", "je crois", "cru"],
+      ],
     },
   ],
   exercises: [],
@@ -1645,25 +2074,67 @@ const a2ConjL04: ConjLesson = {
   theory: [
     { type: "heading", text: "Le conditionnel présent" },
     {
-      type: "rule",
-      text: "Formation : infinitif + terminaisons de l'imparfait (-ais, -ais, -ait, -ions, -iez, -aient)",
-    },
-    {
-      type: "vocab",
-      title: "Formes conditionnelles clés",
+      type: "plain_list",
       items: [
-        "vouloir → voudrais / voudrais / voudrait / voudrions / voudriez / voudraient",
-        "pouvoir → pourrais / pourrais / pourrait / pourrions / pourriez / pourraient",
-        "aimer → aimerais / aimerais / aimerait / aimerions / aimeriez / aimeraient",
-        "devoir → devrais / devrais / devrait / devrions / devriez / devraient",
+        "Le conditionnel exprime une action {a}hypothétique, souhaitée ou polie{/a}.",
+        "Formation : {a}base du futur{/a} + terminaisons de l'imparfait",
+        "Terminaisons : {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}",
       ],
     },
     {
-      type: "rule",
-      text: "Usages du conditionnel de politesse",
-      examples: [
-        { correct: "Je voudrais un café. (demande polie)" },
-        { correct: "Tu devrais étudier plus. (conseil)" },
+      type: "table",
+      tables: [
+        {
+          verb: "aimer (conditionnel)",
+          accentForms: true,
+          rows: [
+            { pronoun: "j'", form: "aimerais" },
+            { pronoun: "tu", form: "aimerais" },
+            { pronoun: "il / elle / on", form: "aimerait" },
+            { pronoun: "nous", form: "aimerions" },
+            { pronoun: "vous", form: "aimeriez" },
+            { pronoun: "ils / elles", form: "aimeraient" },
+          ],
+        },
+      ],
+    },
+    { type: "heading", text: "Bases irrégulières au conditionnel", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Infinitif", "Base conditionnel", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["être", "{a}ser-{/a}", "je serais"],
+        ["avoir", "{a}aur-{/a}", "j'aurais"],
+        ["aller", "{a}ir-{/a}", "j'irais"],
+        ["faire", "{a}fer-{/a}", "je ferais"],
+        ["pouvoir", "{a}pourr-{/a}", "je pourrais"],
+        ["vouloir", "{a}voudr-{/a}", "je voudrais"],
+        ["venir", "{a}viendr-{/a}", "je viendrais"],
+        ["devoir", "{a}devr-{/a}", "je devrais"],
+        ["savoir", "{a}saur-{/a}", "je saurais"],
+      ],
+    },
+    { type: "heading", text: "Emplois du conditionnel", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Usage", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Demande polie", "Je {a}voudrais{/a} un café, s'il vous plaît."],
+        ["Conseil", "Tu {a}devrais{/a} consulter un médecin."],
+        ["Souhait", "J'{a}aimerais{/a} voyager en Italie."],
+        ["Hypothèse (si + imparfait)", "Si j'avais le temps, je {a}ferais{/a} du sport."],
+        ["Information non confirmée", "Il {a}serait{/a} malade. (selon la rumeur)"],
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Politesse : impératif vs conditionnel",
+      items: [
+        "{a}Impératif{/a} (direct) : Donnez-moi un café !",
+        "{a}Conditionnel{/a} (poli) : Je voudrais un café, s'il vous plaît.",
+        "En contexte formel ou professionnel, privilégiez toujours le conditionnel.",
       ],
     },
   ],
@@ -1678,34 +2149,64 @@ const a2ConjL05: ConjLesson = {
   theory: [
     { type: "heading", text: "L'impératif présent" },
     {
-      type: "rule",
-      text: "Formation : présent de l'indicatif sans pronom sujet (formes tu / nous / vous).",
-    },
-    {
-      type: "vocab",
-      title: "Terminaisons régulières",
+      type: "plain_list",
       items: [
-        "tu : parle (pas de -s pour les -er !), finis, pars",
-        "nous : parlons, finissons, partons",
-        "vous : parlez, finissez, partez",
+        "L'impératif exprime un {a}ordre, un conseil, une interdiction ou une invitation{/a}.",
+        "Il n'a que 3 personnes : {a}tu, nous, vous{/a} — sans pronom sujet.",
+        "Formation : présent de l'indicatif, sans le pronom.",
       ],
     },
     {
-      type: "vocab",
-      title: "Impératifs irréguliers",
-      items: [
-        "être → sois / soyons / soyez",
-        "avoir → aie / ayons / ayez",
-        "aller → va / allons / allez",
-        "savoir → sache / sachons / sachez",
+      type: "grid",
+      headers: ["Personne", "Verbes en -er (parler)", "Verbes en -ir 2e (finir)", "Verbes en -ir 3e (partir)"],
+      boldFirstCol: true,
+      rows: [
+        ["tu", "{a}Parle !{/a} (pas de -s)", "{a}Finis !{/a}", "{a}Pars !{/a}"],
+        ["nous", "{a}Parlons !{/a}", "{a}Finissons !{/a}", "{a}Partons !{/a}"],
+        ["vous", "{a}Parlez !{/a}", "{a}Finissez !{/a}", "{a}Partez !{/a}"],
       ],
     },
     {
-      type: "rule",
-      text: "Forme négative : Ne … pas encadre le verbe.",
-      examples: [
-        { correct: "Ne parle pas !", wrong: "Parle ne pas !" },
-        { correct: "Ne mangez pas !", wrong: "Mangez ne pas !" },
+      type: "highlight",
+      label: "Attention : verbes en -er → pas de -s à la 2e personne du singulier",
+      items: [
+        "Parle ! (pas Parles !)",
+        "Mange ! (pas Manges !)",
+        "Exception : va-s-y, manges-en (devant -y et -en, on garde le -s pour la liaison).",
+      ],
+      noBulletItems: [0],
+    },
+    { type: "heading", text: "Impératifs irréguliers", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Infinitif", "tu", "nous", "vous"],
+      boldFirstCol: true,
+      rows: [
+        ["être", "{a}sois{/a}", "{a}soyons{/a}", "{a}soyez{/a}"],
+        ["avoir", "{a}aie{/a}", "{a}ayons{/a}", "{a}ayez{/a}"],
+        ["aller", "{a}va{/a}", "{a}allons{/a}", "{a}allez{/a}"],
+        ["savoir", "{a}sache{/a}", "{a}sachons{/a}", "{a}sachez{/a}"],
+        ["vouloir", "{a}veuille{/a}", "—", "{a}veuillez{/a} (poli)"],
+      ],
+    },
+    { type: "heading", text: "Forme négative", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Parle !", "{a}Ne{/a} parle {a}pas{/a} !"],
+        ["Mangez !", "{a}Ne{/a} mangez {a}pas{/a} !"],
+        ["Soyons patients !", "{a}Ne{/a} soyons {a}pas{/a} impatients !"],
+      ],
+    },
+    { type: "heading", text: "Impératif + pronoms", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Affirmatif : verbe + pronom (après)", "Donne-{a}le{/a}-moi ! / Dis-{a}lui{/a} !"],
+        ["Négatif : pronom avant le verbe", "Ne {a}le{/a} mange pas ! / Ne {a}lui{/a} parle pas !"],
       ],
     },
   ],
@@ -1720,36 +2221,68 @@ const a2ConjL06: ConjLesson = {
   theory: [
     { type: "heading", text: "Révision complète du passé composé" },
     {
-      type: "rule",
-      text: "Auxiliaire AVOIR : la grande majorité des verbes.",
-      examples: [
-        { correct: "J'ai mangé." },
-        { correct: "Tu as fini." },
+      type: "plain_list",
+      items: [
+        "Le passé composé = {a}auxiliaire{/a} (avoir ou être au présent) + {a}participe passé{/a}.",
+        "Choix de l'auxiliaire : la règle principale s'apprend par catégorie.",
       ],
     },
     {
-      type: "rule",
-      text: "Auxiliaire ÊTRE : 17 verbes de mouvement/état + TOUS les pronominaux.",
+      type: "grid",
+      headers: ["Catégorie", "Auxiliaire", "Exemples"],
+      boldFirstCol: true,
+      rows: [
+        ["La grande majorité des verbes", "{a}AVOIR{/a}", "manger, finir, prendre, voir…"],
+        ["17 verbes de mouvement / état", "{a}ÊTRE{/a}", "aller, venir, partir, rester…"],
+        ["Tous les verbes pronominaux", "{a}ÊTRE{/a}", "se lever, se voir, se parler…"],
+      ],
     },
+    { type: "heading", text: "Accord du participe passé", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Double auxiliaire : sortir, rentrer, entrer, passer, monter, descendre, retourner → avoir si COD, être sinon.",
-      examples: [
-        { correct: "J'ai sorti la poubelle. (COD = la poubelle)" },
-        { correct: "Je suis sorti. (sans COD)" },
+      type: "grid",
+      headers: ["Auxiliaire", "Accord", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}avoir{/a}", "Pas d'accord avec le sujet", "Elle a mangé. / Ils ont fini."],
+        ["{a}avoir{/a} + COD avant", "Accord avec le COD", "La lettre qu'il a écrit{a}e{/a}."],
+        ["{a}être{/a}", "Accord avec le sujet", "Elle est arriv{a}ée{/a}. / Ils sont parti{a}s{/a}."],
+      ],
+    },
+    { type: "heading", text: "Verbes à double auxiliaire", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Ces verbes utilisent {a}avoir{/a} s'ils ont un COD, {a}être{/a} s'ils n'en ont pas :",
+        "monter, descendre, sortir, rentrer, entrer, passer, retourner",
       ],
     },
     {
-      type: "rule",
-      text: "Accord du participe passé avec être : accord avec le sujet.",
-      examples: [
-        { correct: "Elle est arrivée." },
-        { correct: "Ils sont partis." },
+      type: "grid",
+      headers: ["Avec COD → avoir", "Sans COD → être"],
+      rows: [
+        ["J'ai {a}sorti{/a} la poubelle.", "Je suis {a}sorti{/a}."],
+        ["Elle a {a}monté{/a} les valises.", "Elle est {a}montée{/a}."],
+        ["Il a {a}passé{/a} un examen.", "Il est {a}passé{/a} devant la fenêtre."],
+      ],
+    },
+    { type: "heading", text: "Pronominaux au passé composé", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Elle {a}s'est levée{/a}.", "Elle {a}ne s'est pas levée{/a}."],
+        ["Ils {a}se sont vus{/a}.", "Ils {a}ne se sont pas vus{/a}."],
+        ["Nous {a}nous sommes parlé{/a}.", "(COI → pas d'accord)"],
       ],
     },
     {
-      type: "note",
-      text: "Pronominaux : toujours conjugués avec être. Elle s'est levée.",
+      type: "highlight",
+      label: "Marqueurs temporels du passé composé",
+      items: [
+        "hier, avant-hier, la semaine dernière, l'année dernière",
+        "il y a + durée : Il y a deux ans, je suis allé en France.",
+        "soudain, tout à coup, enfin, puis (actions ponctuelles)",
+      ],
     },
   ],
   exercises: [],
@@ -1761,29 +2294,76 @@ const a2ConjL07: ConjLesson = {
   level: "A2",
   title: "L'imparfait",
   theory: [
-    { type: "heading", text: "L'imparfait : formation et emploi" },
+    { type: "heading", text: "L'imparfait : formation" },
     {
-      type: "rule",
-      text: "Formation : base « nous » au présent + terminaisons -ais / -ais / -ait / -ions / -iez / -aient",
-      examples: [
-        { correct: "nous parlons → je parlais, tu parlais, il parlait, nous parlions, vous parliez, ils parlaient" },
+      type: "plain_list",
+      items: [
+        "Formation : {a}base « nous »{/a} au présent + terminaisons de l'imparfait.",
+        "Terminaisons : {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}",
+        "Seul irrégulier : {a}être{/a} → base ét- (j'étais, tu étais…)",
       ],
     },
     {
-      type: "note",
-      text: "SEUL irrégulier : être → j'étais, tu étais, il était, nous étions, vous étiez, ils étaient.",
+      type: "table",
+      tables: [
+        {
+          verb: "parler (base : nous parlons → parl-)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "parlais" },
+            { pronoun: "tu", form: "parlais" },
+            { pronoun: "il / elle / on", form: "parlait" },
+            { pronoun: "nous", form: "parlions" },
+            { pronoun: "vous", form: "parliez" },
+            { pronoun: "ils / elles", form: "parlaient" },
+          ],
+        },
+        {
+          verb: "être (base : ét-)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "étais" },
+            { pronoun: "tu", form: "étais" },
+            { pronoun: "il / elle / on", form: "était" },
+            { pronoun: "nous", form: "étions" },
+            { pronoun: "vous", form: "étiez" },
+            { pronoun: "ils / elles", form: "étaient" },
+          ],
+        },
+      ],
     },
+    { type: "heading", text: "Emplois de l'imparfait", sub: true, accent: true },
     {
-      type: "rule",
-      text: "Emplois de l'imparfait",
-      examples: [
-        { correct: "Avant, je mangeais souvent au restaurant. (habitude)" },
-        { correct: "Il faisait beau quand je suis arrivé. (contexte d'une action)" },
+      type: "grid",
+      headers: ["Usage", "Marqueurs", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Habitude passée", "souvent, toujours, tous les jours, avant", "Avant, je {a}mangeais{/a} au restaurant."],
+        ["Description (contexte)", "il faisait, c'était, il y avait…", "Il {a}pleuvait{/a} quand je suis parti."],
+        ["État mental / physique", "je voulais, j'avais peur, il semblait", "J'{a}avais{/a} très faim."],
+        ["Action en cours interrompue", "quand + passé composé", "Je {a}dormais{/a} quand il a appelé."],
+      ],
+    },
+    { type: "heading", text: "Imparfait vs Passé composé", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Imparfait", "Passé composé"],
+      rows: [
+        ["Action {a}habituelle{/a}", "Action {a}ponctuelle{/a}"],
+        ["Arrière-plan / contexte", "Événement / action principale"],
+        ["Durée indéfinie", "Moment précis ou délimité"],
+        ["Avant, je {a}jouais{/a} au foot.", "Hier, j'ai {a}joué{/a} au foot."],
+        ["Il {a}faisait{/a} froid.", "Il a {a}fait{/a} froid pendant 3 jours."],
       ],
     },
     {
-      type: "rule",
-      text: "PC vs imparfait : passé composé = action ponctuelle ; imparfait = habitude ou description.",
+      type: "highlight",
+      label: "Marqueurs temporels de l'imparfait",
+      items: [
+        "avant, autrefois, à l'époque, quand j'étais petit",
+        "souvent, toujours, jamais, d'habitude, en général",
+        "tous les jours / semaines / ans, chaque matin",
+      ],
     },
   ],
   exercises: [],
@@ -1795,45 +2375,92 @@ const a2ConjL08: ConjLesson = {
   level: "A2",
   title: "Le futur simple",
   theory: [
-    { type: "heading", text: "Le futur simple : formation et emploi" },
+    { type: "heading", text: "Le futur simple : formation" },
     {
-      type: "rule",
-      text: "Formation régulière : infinitif + terminaisons -ai / -as / -a / -ons / -ez / -ont",
+      type: "plain_list",
+      items: [
+        "Formation régulière : {a}infinitif{/a} + terminaisons du futur.",
+        "Terminaisons : {a}-ai / -as / -a / -ons / -ez / -ont{/a}",
+        "Pour les verbes en -re : supprimer le -e final avant d'ajouter les terminaisons.",
+      ],
     },
     {
       type: "table",
       tables: [
         {
           verb: "parler (futur simple)",
+          accentForms: true,
           rows: [
             { pronoun: "je", form: "parlerai" },
             { pronoun: "tu", form: "parleras" },
-            { pronoun: "il / elle", form: "parlera" },
+            { pronoun: "il / elle / on", form: "parlera" },
             { pronoun: "nous", form: "parlerons" },
             { pronoun: "vous", form: "parlerez" },
             { pronoun: "ils / elles", form: "parleront" },
           ],
         },
+        {
+          verb: "finir (futur simple)",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "finirai" },
+            { pronoun: "tu", form: "finiras" },
+            { pronoun: "il / elle / on", form: "finira" },
+            { pronoun: "nous", form: "finirons" },
+            { pronoun: "vous", form: "finirez" },
+            { pronoun: "ils / elles", form: "finiront" },
+          ],
+        },
+      ],
+    },
+    { type: "heading", text: "Bases irrégulières au futur", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Infinitif", "Base futur", "je…", "Aussi pour le conditionnel"],
+      boldFirstCol: true,
+      rows: [
+        ["être", "{a}ser-{/a}", "je serai", "je serais"],
+        ["avoir", "{a}aur-{/a}", "j'aurai", "j'aurais"],
+        ["aller", "{a}ir-{/a}", "j'irai", "j'irais"],
+        ["faire", "{a}fer-{/a}", "je ferai", "je ferais"],
+        ["pouvoir", "{a}pourr-{/a}", "je pourrai", "je pourrais"],
+        ["vouloir", "{a}voudr-{/a}", "je voudrai", "je voudrais"],
+        ["venir", "{a}viendr-{/a}", "je viendrai", "je viendrais"],
+        ["savoir", "{a}saur-{/a}", "je saurai", "je saurais"],
+        ["devoir", "{a}devr-{/a}", "je devrai", "je devrais"],
+        ["voir", "{a}verr-{/a}", "je verrai", "je verrais"],
+        ["envoyer", "{a}enverr-{/a}", "j'enverrai", "j'enverrais"],
+      ],
+    },
+    { type: "heading", text: "Emplois du futur simple", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Usage", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Événement futur certain", "Demain, je {a}partirai{/a} à 8h."],
+        ["Promesse / engagement", "Je t'{a}appellerai{/a} dès que j'arrive."],
+        ["Hypothèse (si + présent → futur)", "Si tu étudies, tu {a}réussiras{/a}."],
+        ["Prévision", "Il {a}pleuvra{/a} demain."],
+      ],
+    },
+    { type: "heading", text: "Futur simple vs Futur proche", sub: true, accent: true },
+    {
+      type: "grid",
+      headers: ["Futur proche", "Futur simple"],
+      rows: [
+        ["Action {a}imminente{/a} / très prévue", "Action {a}plus lointaine{/a} ou certaine"],
+        ["Je vais appeler maintenant.", "Je l'appellerai ce soir."],
+        ["Intention planifiée", "Promesse ou prévision"],
       ],
     },
     {
-      type: "vocab",
-      title: "Bases irrégulières au futur",
+      type: "highlight",
+      label: "Marqueurs temporels du futur simple",
       items: [
-        "être → ser- : je serai",
-        "avoir → aur- : j'aurai",
-        "aller → ir- : j'irai",
-        "faire → fer- : je ferai",
-        "pouvoir → pourr- : je pourrai",
-        "vouloir → voudr- : je voudrai",
-        "venir → viendr- : je viendrai",
-      ],
-    },
-    {
-      type: "rule",
-      text: "Usage : événement futur certain ; hypothèse si + présent → futur simple.",
-      examples: [
-        { correct: "Si tu étudies, tu réussiras." },
+        "demain, après-demain, dans + durée",
+        "la semaine / le mois / l'année prochaine",
+        "bientôt, un jour, plus tard, quand + futur",
       ],
     },
   ],
