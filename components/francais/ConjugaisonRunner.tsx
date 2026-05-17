@@ -129,10 +129,10 @@ function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
           <thead>
             <tr className="bg-[var(--color-accent-fr)]/15">
               <th className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
-                Pronom
+                {verb.infinitive}
               </th>
               <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
-                → {renderRadical(verb.radical)}
+                →
               </th>
             </tr>
           </thead>
@@ -144,8 +144,6 @@ function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
               >
                 <td className="w-36 px-3 py-2">
                   <span className="text-[var(--color-text-secondary)]">{row.pronoun}</span>
-                  <br />
-                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{verb.infinitive}</span>
                 </td>
                 <td className="px-3 py-2">
                   <span className="text-[var(--color-text-primary)]">{verb.radical}</span>

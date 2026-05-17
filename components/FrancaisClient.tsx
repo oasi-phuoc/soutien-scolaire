@@ -9,7 +9,7 @@ import { loadProgress } from "@/lib/progress/math-progress";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 
 type SectionDef  = { id: FrenchSection; code: string; title: string };
-type SectionState = "locked" | "in_progress" | "completed";
+type SectionState = "locked" | "in_progress" | "completed" | "unlocked";
 type LessonState  = "locked" | "available" | "completed";
 
 const SECTIONS: SectionDef[] = [
@@ -65,6 +65,7 @@ function SectionStateBadge({ state }: { state: SectionState }) {
         En cours
       </span>
     );
+  if (state === "unlocked") return null;
   return (
     <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
       Verrouillé
@@ -130,8 +131,8 @@ function SectionCard({
   function lessonState(th: FrenchTheme): LessonState {
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Completed sections: all undone lessons are still accessible
-    if (state === "completed") return "available";
+    // Completed/unlocked sections: all undone lessons are still accessible
+    if (state === "completed" || state === "unlocked") return "available";
     // In-progress: only first uncompleted is available; rest locked
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
@@ -323,16 +324,17 @@ export function FrancaisClient() {
         </section>
       ) : (
         /* Grammaire / Vocabulaire / Conjugaison tabs — same SectionCard presentation */
-        /* Locked sections become "completed" so all lessons remain accessible */
+        /* All sections accessible; "Terminé" only when truly all lessons done */
         <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
           {SECTIONS.map((sec) => {
             const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
-            const state: SectionState = rawState === "locked" ? "completed" : rawState;
             const themes = FRENCH_THEMES.filter(
               (th) => th.section === sec.id &&
                 (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
             );
             if (themes.length === 0) return null;
+            const allDone = hydrated && themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
+            const state: SectionState = allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
             return (
               <SectionCard
                 key={sec.id}

@@ -168,9 +168,9 @@ const a1GrL03: GrammarLesson = {
       type: "highlight",
       label: "Souvent masculins",
       items: [
-        "{a}-age{/a} → le village",
-        "{a}-ment{/a} → le document",
-        "{a}-eau{/a} → le bateau",
+        "{a}-age{/a} → le vill{a}age{/a}",
+        "{a}-ment{/a} → le docu{a}ment{/a}",
+        "{a}-eau{/a} → le bat{a}eau{/a}",
       ],
       inlineArrows: true,
     },
@@ -191,7 +191,7 @@ const a1GrL03: GrammarLesson = {
       noBulletItems: [0],
     },
     { type: "heading", text: "Les adjectifs" },
-    { type: "plain_list", items: ["L'adjectif donne une information sur le nom.", "Les adjectifs changent aussi selon le genre."] },
+    { type: "plain_list", items: ["L'adjectif donne une information sur le nom. Les adjectifs changent aussi selon le genre."] },
     { type: "plain_list", items: ["On ajoute souvent {a}-e{/a} au féminin."] },
     {
       type: "grid",
@@ -212,7 +212,7 @@ const a1GrL03: GrammarLesson = {
     },
     {
       type: "highlight",
-      label: "Attention : adjectifs spéciaux",
+      label: "Adjectifs spéciaux",
       items: ["Certains adjectifs changent beaucoup."],
       noBulletItems: [0],
     },
