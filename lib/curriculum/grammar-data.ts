@@ -319,16 +319,6 @@ const a1GrL04: GrammarLesson = {
       items: ["Je cherche {a}une{/a} porte.", "(n'importe quelle porte)"],
       noBulletItems: [1],
     },
-    { type: "heading", text: "Tableau complet", sub: true },
-    {
-      type: "grid",
-      headers: ["Type", "Masculin", "Féminin", "Pluriel"],
-      rows: [
-        ["Défini", "le", "la", "les"],
-        ["Indéfini", "un", "une", "des"],
-      ],
-      boldFirstCol: true,
-    },
   ],
   exercises: [
     {
