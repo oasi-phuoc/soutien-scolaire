@@ -89,23 +89,12 @@ function renderPronounCell(text: string) {
 
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
-function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
+function VerbToggleView({ verbs, negation }: { verbs: VerbToggleVerb[]; negation?: boolean }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const verb = verbs[selectedIdx]!;
-  const vowelRe = /[aeiouàâæéèêëîïôœùûüÿ]/i;
+  const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
 
-  function renderRadical(radical: string) {
-    const last = radical.slice(-1);
-    if (last && vowelRe.test(last)) {
-      return (
-        <>
-          {radical.slice(0, -1)}
-          <span className="font-semibold text-[var(--color-accent-fr)]">{last}</span>
-        </>
-      );
-    }
-    return <>{radical}</>;
-  }
+  const nePrefix = vowelRe.test(verb.radical[0] ?? "") ? "n'" : "ne ";
 
   return (
     <div className="space-y-3">
@@ -132,7 +121,7 @@ function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
                 {verb.infinitive}
               </th>
               <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
-                →
+                {negation ? <>→ <span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : "→"}
               </th>
             </tr>
           </thead>
@@ -146,8 +135,14 @@ function VerbToggleView({ verbs }: { verbs: VerbToggleVerb[] }) {
                   <span className="text-[var(--color-text-secondary)]">{row.pronoun}</span>
                 </td>
                 <td className="px-3 py-2">
+                  {negation && (
+                    <span className="font-bold text-[var(--color-accent-fr)]">{nePrefix}</span>
+                  )}
                   <span className="text-[var(--color-text-primary)]">{verb.radical}</span>
                   <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
+                  {negation && (
+                    <span className="font-bold text-[var(--color-accent-fr)]"> pas</span>
+                  )}
                 </td>
               </tr>
             ))}
@@ -401,7 +396,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "verb_toggle":
             return (
               <div key={i}>
-                <VerbToggleView verbs={block.verbs} />
+                <VerbToggleView verbs={block.verbs} negation={block.negation} />
               </div>
             );
 

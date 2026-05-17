@@ -21,7 +21,7 @@ export type TheoryBlock =
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean }
   | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
-  | { type: "verb_toggle"; verbs: VerbToggleVerb[] };
+  | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -1108,6 +1108,65 @@ const a1ConjL07: ConjLesson = {
       ],
       noBulletItems: [0],
       inlineArrows: true,
+    },
+    { type: "heading", text: "La négation des verbes en -er", sub: true },
+    {
+      type: "plain_list",
+      items: ["Pour nier, on encadre le verbe avec {a}ne{/a} … {a}pas{/a} (ou {a}n'{/a} … {a}pas{/a} devant une voyelle ou h)."],
+    },
+    {
+      type: "verb_toggle",
+      negation: true,
+      verbs: [
+        {
+          infinitive: "parler",
+          radical: "parl",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "aimer",
+          radical: "aim",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "écouter",
+          radical: "écout",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "habiter",
+          radical: "habit",
+          rows: [
+            { pronoun: "je", ending: "e" },
+            { pronoun: "tu", ending: "es" },
+            { pronoun: "il / elle / on", ending: "e" },
+            { pronoun: "nous", ending: "ons" },
+            { pronoun: "vous", ending: "ez" },
+            { pronoun: "ils / elles", ending: "ent" },
+          ],
+        },
+      ],
     },
   ],
   exercises: [],
