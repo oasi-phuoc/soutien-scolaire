@@ -98,43 +98,7 @@ function LessonDot({ state }: { state: LessonState }) {
   );
 }
 
-// ── Reference lesson list (Grammaire / Vocabulaire / Conjugaison tabs) ────────
-// No locking — all lessons accessible regardless of user level.
-
-function RefLessonSection({ sec, themes }: { sec: SectionDef; themes: FrenchTheme[] }) {
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-2 px-1">
-        <span className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">{sec.code}</span>
-        <span className="text-xs text-[var(--color-text-secondary)]">{sec.title}</span>
-      </div>
-      <ul className="divide-y divide-[var(--color-border-default)] overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-        {themes.map((th) => (
-          <li key={th.id}>
-            <Link
-              href={lessonHref(th)}
-              className="flex items-center gap-3 px-4 py-3 transition-colors hover:bg-[var(--color-bg-secondary)]"
-            >
-              <span className="w-14 shrink-0 text-[10px] font-bold text-[var(--color-accent-fr)]">{th.code}</span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-[var(--color-text-primary)]">{th.title}</p>
-                {th.summary && (
-                  <p className="mt-0.5 text-xs leading-snug text-[var(--color-text-secondary)]">{th.summary}</p>
-                )}
-              </div>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
-                <path d="M9 18l6-6-6-6" />
-              </svg>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-// ── Section card (Apprendre tab only) ────────────────────────────────────────
+// ── Section card (all tabs) ───────────────────────────────────────────────────
 
 function SectionCard({
   sec,
@@ -357,14 +321,23 @@ export function FrancaisClient() {
           })}
         </section>
       ) : (
-        /* Grammaire / Vocabulaire / Conjugaison tabs — flat list, no locking */
-        <section className="space-y-6" aria-label={`Leçons — ${tab}`}>
+        /* Grammaire / Vocabulaire / Conjugaison tabs — same SectionCard presentation */
+        <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
           {SECTIONS.map((sec) => {
+            const state = hydrated ? getSectionState(sec.id, currentSection) : "locked";
             const themes = FRENCH_THEMES.filter(
               (th) => th.section === sec.id && th.tab === tab,
             );
-            if (themes.length === 0) return null;
-            return <RefLessonSection key={sec.id} sec={sec} themes={themes} />;
+            return (
+              <SectionCard
+                key={sec.id}
+                sec={sec}
+                state={state}
+                themes={themes}
+                completedSlugs={hydrated ? completedSlugs : new Set()}
+                hydrated={hydrated}
+              />
+            );
           })}
         </section>
       )}
