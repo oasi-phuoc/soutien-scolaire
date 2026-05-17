@@ -1146,11 +1146,303 @@ const a1GrL25: GrammarLesson = {
   ],
 };
 
+// ── New A1 Lessons (G.17–G.19) ────────────────────────────────────────────────
+
+const a1GrLCest: GrammarLesson = {
+  slug: "a1-gr-l07",
+  code: "G.17",
+  level: "A1",
+  title: "C'est / Il est",
+  theory: [
+    { type: "heading", text: "C'est ou Il/Elle est ?" },
+    {
+      type: "grid",
+      headers: ["Forme", "Usage", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["C'est", "article + nom → identifier", "C'est le professeur."],
+        ["Ce sont", "article + nom pluriel → identifier", "Ce sont mes amis."],
+        ["Il/Elle est", "adjectif ou profession → caractériser", "Il est très sympa."],
+        ["Ils/Elles sont", "adjectif ou profession pluriel → caractériser", "Elles sont françaises."],
+      ],
+      transHeaders: {
+        en: ["Form", "Usage", "Example"],
+        ar: ["الصيغة", "الاستخدام", "مثال"],
+        fa: ["فرم", "کاربرد", "مثال"],
+        ti: ["ቅርጺ", "ኣጠቃቅማ", "ኣብነት"],
+        uk: ["Форма", "Вживання", "Приклад"],
+      },
+      transRows: {
+        en: [
+          ["C'est", "article + noun → identify", "He is the teacher."],
+          ["Ce sont", "article + noun (plural) → identify", "They are my friends."],
+          ["Il/Elle est", "adjective or profession → characterise", "He is very nice."],
+          ["Ils/Elles sont", "adjective or profession (plural) → characterise", "They are French."],
+        ],
+      },
+    },
+    {
+      type: "rule",
+      text: "Après «il/elle est» + profession : PAS d'article ! → «Il est médecin» (et non «Il est un médecin»).",
+      examples: [
+        { correct: "C'est un médecin. (identification avec article)" },
+        { correct: "Il est médecin. (profession, sans article)" },
+        { correct: "C'est Julia. Elle est très sympa." },
+      ],
+    },
+    {
+      type: "note",
+      text: "C'est / Ce sont = on identifie. Il/Elle est = on caractérise.",
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Exercice 1 — C'est ou Il/Elle est ?",
+      instruction: "Choisissez la bonne forme.",
+      items: [
+        { sentence: "___ mon ami Paul.", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
+        { sentence: "___ très intelligent.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
+        { sentence: "___ les nouveaux étudiants.", choices: ["Ce sont", "C'est", "Ils sont", "Il est"], correctIdx: 0 },
+        { sentence: "___ médecin.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
+        { sentence: "___ une bonne idée !", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
+        { sentence: "___ ma professeure de français.", choices: ["C'est", "Elle est", "Ce sont", "Il est"], correctIdx: 0 },
+        { sentence: "___ contentes de te voir.", choices: ["Elles sont", "Ce sont", "C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ espagnole.", choices: ["Elle est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
+      ],
+      pool: [
+        { sentence: "___ mon ami Paul.", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
+        { sentence: "___ très intelligent.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
+        { sentence: "___ les nouveaux étudiants.", choices: ["Ce sont", "C'est", "Ils sont", "Il est"], correctIdx: 0 },
+        { sentence: "___ médecin.", choices: ["Il est", "C'est", "Ce sont", "Elle est"], correctIdx: 0 },
+        { sentence: "___ une bonne idée !", choices: ["C'est", "Il est", "Ce sont", "Ils sont"], correctIdx: 0 },
+        { sentence: "___ ma professeure de français.", choices: ["C'est", "Elle est", "Ce sont", "Il est"], correctIdx: 0 },
+        { sentence: "___ contentes de te voir.", choices: ["Elles sont", "Ce sont", "C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ espagnole.", choices: ["Elle est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
+        { sentence: "___ un beau film.", choices: ["C'est", "Il est", "Ce sont", "Elle est"], correctIdx: 0 },
+        { sentence: "___ fatigué après le travail.", choices: ["Il est", "C'est", "Ce sont", "Ils sont"], correctIdx: 0 },
+      ],
+      poolSize: 6,
+    },
+    {
+      type: "trueFalse",
+      title: "Exercice 2 — Vrai ou faux ?",
+      instruction: "Ces phrases sont-elles correctes ?",
+      items: [
+        { statement: "C'est un docteur très compétent.", answer: true },
+        { statement: "Il est un professeur.", answer: false },
+        { statement: "Ce sont mes amis.", answer: true },
+        { statement: "C'est française.", answer: false },
+        { statement: "Il est intelligent et sympa.", answer: true },
+        { statement: "Elle est professeure.", answer: true },
+        { statement: "C'est ma sœur. Elle est étudiante.", answer: true },
+        { statement: "Il est un médecin.", answer: false },
+      ],
+    },
+  ],
+};
+
+const a1GrLQuel: GrammarLesson = {
+  slug: "a1-gr-l08",
+  code: "G.18",
+  level: "A1",
+  title: "L'interrogation avec quel(le)(s)",
+  theory: [
+    { type: "heading", text: "Quel, Quelle, Quels, Quelles" },
+    {
+      type: "grid",
+      headers: ["", "Singulier", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["Masculin", "Quel", "Quels"],
+        ["Féminin", "Quelle", "Quelles"],
+      ],
+      transHeaders: {
+        en: ["", "Singular", "Plural"],
+        ar: ["", "المفرد", "الجمع"],
+        fa: ["", "مفرد", "جمع"],
+        ti: ["", "ነጠላ", "ብዙሓት"],
+        uk: ["", "Однина", "Множина"],
+      },
+      transRows: {
+        en: [["Masculine", "Which/What", "Which/What"], ["Feminine", "Which/What", "Which/What"]],
+      },
+    },
+    {
+      type: "note",
+      text: "Tous se prononcent [kɛl] — même prononciation !",
+    },
+    {
+      type: "rule",
+      text: "Quel(le)(s) + est/sont + nom ?",
+      examples: [
+        { correct: "Quel est ton prénom ?" },
+        { correct: "Quelle est ta nationalité ?" },
+        { correct: "Quels sont tes objectifs ?" },
+        { correct: "Quelles sont tes langues ?" },
+      ],
+    },
+    {
+      type: "rule",
+      text: "Quel(le)(s) + nom (sans verbe) ?",
+      examples: [
+        { correct: "Quelle heure est-il ?" },
+        { correct: "Quel cours tu préfères ?" },
+      ],
+    },
+  ],
+  exercises: [
+    {
+      type: "qcm",
+      title: "Exercice 1 — Quelle forme de «quel» ?",
+      instruction: "Choisissez la bonne forme.",
+      items: [
+        { sentence: "___ est ton nom ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ est ta nationalité ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes numéros de téléphone ?", choices: ["Quels", "Quel", "Quelle", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes langues ?", choices: ["Quelles", "Quelle", "Quel", "Quels"], correctIdx: 0 },
+        { sentence: "___ cours tu préfères ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ heure est-il ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes objectifs professionnels ?", choices: ["Quels", "Quelle", "Quel", "Quelles"], correctIdx: 0 },
+        { sentence: "___ est votre adresse ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+      ],
+      pool: [
+        { sentence: "___ est ton nom ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ est ta nationalité ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes numéros de téléphone ?", choices: ["Quels", "Quel", "Quelle", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes langues ?", choices: ["Quelles", "Quelle", "Quel", "Quels"], correctIdx: 0 },
+        { sentence: "___ cours tu préfères ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ heure est-il ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ sont tes objectifs professionnels ?", choices: ["Quels", "Quelle", "Quel", "Quelles"], correctIdx: 0 },
+        { sentence: "___ est votre adresse ?", choices: ["Quelle", "Quel", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ film tu regardes ?", choices: ["Quel", "Quelle", "Quels", "Quelles"], correctIdx: 0 },
+        { sentence: "___ matières tu étudies ?", choices: ["Quelles", "Quel", "Quelle", "Quels"], correctIdx: 0 },
+      ],
+      poolSize: 6,
+    },
+    {
+      type: "classify",
+      title: "Exercice 2 — Quel ou Quelle ?",
+      instruction: "Ces noms sont-ils masculins ou féminins ?",
+      categories: ["Quel (masculin)", "Quelle (féminin)"],
+      items: [
+        { word: "prénom", categoryIdx: 0 },
+        { word: "nationalité", categoryIdx: 1 },
+        { word: "adresse", categoryIdx: 1 },
+        { word: "numéro", categoryIdx: 0 },
+        { word: "date", categoryIdx: 1 },
+        { word: "objectif", categoryIdx: 0 },
+        { word: "ville", categoryIdx: 1 },
+        { word: "pays", categoryIdx: 0 },
+        { word: "langue", categoryIdx: 1 },
+        { word: "document", categoryIdx: 0 },
+        { word: "heure", categoryIdx: 1 },
+        { word: "âge", categoryIdx: 0 },
+      ],
+      pool: [
+        { word: "prénom", categoryIdx: 0 },
+        { word: "nationalité", categoryIdx: 1 },
+        { word: "adresse", categoryIdx: 1 },
+        { word: "numéro", categoryIdx: 0 },
+        { word: "date", categoryIdx: 1 },
+        { word: "objectif", categoryIdx: 0 },
+        { word: "ville", categoryIdx: 1 },
+        { word: "pays", categoryIdx: 0 },
+        { word: "langue", categoryIdx: 1 },
+        { word: "document", categoryIdx: 0 },
+        { word: "heure", categoryIdx: 1 },
+        { word: "âge", categoryIdx: 0 },
+      ],
+      poolSize: 8,
+    },
+  ],
+};
+
+const a1GrLFutur: GrammarLesson = {
+  slug: "a1-gr-l09",
+  code: "G.19",
+  level: "A1",
+  title: "Le futur proche",
+  theory: [
+    { type: "heading", text: "Le futur proche : aller + infinitif" },
+    {
+      type: "grid",
+      headers: ["Sujet", "ALLER", "Exemple"],
+      rows: [
+        ["je", "vais", "Je vais partir."],
+        ["tu", "vas", "Tu vas manger ?"],
+        ["il / elle / on", "va", "Elle va arriver."],
+        ["nous", "allons", "Nous allons travailler."],
+        ["vous", "allez", "Vous allez voyager."],
+        ["ils / elles", "vont", "Ils vont finir."],
+      ],
+      transHeaders: {
+        en: ["Subject", "TO GO", "Example"],
+        ar: ["الفاعل", "يذهب", "مثال"],
+        fa: ["فاعل", "رفتن", "مثال"],
+        ti: ["ተካኢ", "ምኻድ", "ኣብነት"],
+        uk: ["Підмет", "ЙТИ", "Приклад"],
+      },
+      transRows: {
+        en: [
+          ["I", "am going to", "I am going to leave."],
+          ["you", "are going to", "Are you going to eat?"],
+          ["he / she / one", "is going to", "She is going to arrive."],
+          ["we", "are going to", "We are going to work."],
+          ["you (pl.)", "are going to", "You are going to travel."],
+          ["they", "are going to", "They are going to finish."],
+        ],
+      },
+    },
+    {
+      type: "rule",
+      text: "Futur proche = aller (présent) + infinitif. Exprime une action proche ou planifiée.",
+      examples: [
+        { correct: "Ce soir, je vais regarder un film." },
+        { correct: "Demain, nous allons visiter Paris." },
+        { correct: "Je ne vais pas partir. (négatif)" },
+      ],
+    },
+    {
+      type: "note",
+      text: "Forme négative : ne + aller + pas + infinitif → «Il ne va pas venir.»",
+    },
+  ],
+  exercises: [
+    {
+      type: "fill",
+      title: "Exercice 1 — Conjuguez au futur proche",
+      instruction: "Complétez avec la bonne forme de «aller».",
+      items: [
+        { sentence: "Je ___ partir en vacances. (aller)", hint: "vais", answer: "vais" },
+        { sentence: "Tu ___ manger au restaurant ? (aller)", hint: "vas", answer: "vas" },
+        { sentence: "Elle ___ arriver à midi. (aller)", hint: "va", answer: "va" },
+        { sentence: "Nous ___ travailler demain. (aller)", hint: "allons", answer: "allons" },
+        { sentence: "Vous ___ voyager cet été ? (aller)", hint: "allez", answer: "allez" },
+        { sentence: "Ils ___ finir le projet. (aller)", hint: "vont", answer: "vont" },
+        { sentence: "On ___ visiter le musée. (aller)", hint: "va", answer: "va" },
+      ],
+    },
+    {
+      type: "order",
+      title: "Exercice 2 — Remettez dans l'ordre",
+      instruction: "Formez une phrase au futur proche.",
+      items: [
+        { sentence: "Je vais regarder un film.", hint: "je — vais — regarder — un — film" },
+        { sentence: "Nous allons partir demain.", hint: "nous — allons — partir — demain" },
+        { sentence: "Elle va visiter le musée.", hint: "elle — va — visiter — le — musée" },
+        { sentence: "Ils vont travailler ensemble.", hint: "ils — vont — travailler — ensemble" },
+        { sentence: "Tu vas manger avec tes amis.", hint: "tu — vas — manger — avec — tes — amis" },
+      ],
+    },
+  ],
+};
+
 // ── A2 Lessons ────────────────────────────────────────────────────────────────
 
 const a2GrL07: GrammarLesson = {
   slug: "a2-gr-l07",
-  code: "G.17",
+  code: "G.20",
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [
@@ -1211,7 +1503,7 @@ const a2GrL07: GrammarLesson = {
 
 const a2GrL09: GrammarLesson = {
   slug: "a2-gr-l09",
-  code: "G.18",
+  code: "G.21",
   level: "A2",
   title: "Répondre aux questions fermées",
   theory: [
@@ -1279,7 +1571,7 @@ const a2GrL09: GrammarLesson = {
 
 const a2GrL11: GrammarLesson = {
   slug: "a2-gr-l11",
-  code: "G.19",
+  code: "G.22",
   level: "A2",
   title: "Les adjectifs — généralités",
   theory: [
@@ -1346,7 +1638,7 @@ const a2GrL11: GrammarLesson = {
 
 const a2GrL12: GrammarLesson = {
   slug: "a2-gr-l12",
-  code: "G.20",
+  code: "G.23",
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [
@@ -1411,7 +1703,7 @@ const a2GrL12: GrammarLesson = {
 
 const a2GrL18: GrammarLesson = {
   slug: "a2-gr-l18",
-  code: "G.21",
+  code: "G.24",
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [
@@ -1471,7 +1763,7 @@ const a2GrL18: GrammarLesson = {
 
 const a2GrL19: GrammarLesson = {
   slug: "a2-gr-l19",
-  code: "G.22",
+  code: "G.25",
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [
@@ -1533,7 +1825,7 @@ const a2GrL19: GrammarLesson = {
 
 const a2GrL25: GrammarLesson = {
   slug: "a2-gr-l25",
-  code: "G.23",
+  code: "G.26",
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [
@@ -1591,7 +1883,7 @@ const a2GrL25: GrammarLesson = {
 
 const a2GrL35: GrammarLesson = {
   slug: "a2-gr-l35",
-  code: "G.24",
+  code: "G.27",
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
@@ -1673,7 +1965,7 @@ const a2GrL35: GrammarLesson = {
 
 const a2GrL36: GrammarLesson = {
   slug: "a2-gr-l36",
-  code: "G.25",
+  code: "G.28",
   level: "A2",
   title: "Les pronoms Y et EN",
   theory: [
@@ -1735,7 +2027,7 @@ const a2GrL36: GrammarLesson = {
 
 const a2GrL39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "G.26",
+  code: "G.29",
   level: "A2",
   title: "Le comparatif",
   theory: [
@@ -1806,7 +2098,7 @@ const a2GrL39: GrammarLesson = {
 
 const a2GrL42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "G.27",
+  code: "G.30",
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [
@@ -1874,7 +2166,7 @@ const a2GrL42: GrammarLesson = {
 
 const a2GrL52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "G.28",
+  code: "G.31",
   level: "A2",
   title: "La cause et la conséquence",
   theory: [
@@ -1956,6 +2248,9 @@ const ALL_GRAMMAR_LESSONS: GrammarLesson[] = [
   a1GrL23,
   a1GrL24,
   a1GrL25,
+  a1GrLCest,
+  a1GrLQuel,
+  a1GrLFutur,
   a2GrL07,
   a2GrL09,
   a2GrL11,
