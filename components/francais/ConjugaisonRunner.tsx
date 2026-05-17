@@ -89,7 +89,7 @@ function renderPronounCell(text: string) {
 
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
-function VerbToggleView({ verbs, negation }: { verbs: VerbToggleVerb[]; negation?: boolean }) {
+function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const verb = verbs[selectedIdx]!;
   const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
@@ -98,12 +98,15 @@ function VerbToggleView({ verbs, negation }: { verbs: VerbToggleVerb[]; negation
 
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
+      <div
+        className={buttonCols ? "grid gap-2" : "flex flex-wrap gap-2"}
+        style={buttonCols ? { gridTemplateColumns: `repeat(${buttonCols}, 1fr)` } : undefined}
+      >
         {verbs.map((v, i) => (
           <button
             key={i}
             onClick={() => setSelectedIdx(i)}
-            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+            className={`rounded-full px-3 py-1.5 font-medium transition-colors ${buttonCols ? "text-xs" : "text-sm"} ${
               i === selectedIdx
                 ? "bg-[var(--color-accent-fr)] text-white"
                 : "border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]"
@@ -113,6 +116,13 @@ function VerbToggleView({ verbs, negation }: { verbs: VerbToggleVerb[]; negation
           </button>
         ))}
       </div>
+      {(verb.meaning || verb.example) && (
+        <div className="flex items-baseline gap-2 rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-3 py-2 text-xs">
+          {verb.meaning && <span className="text-[var(--color-text-secondary)]">{verb.meaning}</span>}
+          {verb.meaning && verb.example && <span className="text-[var(--color-border-emphasis)]">·</span>}
+          {verb.example && <span className="italic text-[var(--color-text-primary)]">{verb.example}</span>}
+        </div>
+      )}
       <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
         <table className="w-full text-sm">
           <thead>
@@ -401,7 +411,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "verb_toggle":
             return (
               <div key={i}>
-                <VerbToggleView verbs={block.verbs} negation={block.negation} />
+                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} />
               </div>
             );
 

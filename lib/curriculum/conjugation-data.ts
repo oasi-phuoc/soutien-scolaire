@@ -10,6 +10,8 @@ export type VerbToggleVerb = {
   infinitive: string;
   radical: string;
   reflexivePronouns?: string[];
+  meaning?: string;
+  example?: string;
   rows: Array<{ pronoun: string; ending: string }>;
 };
 
@@ -20,9 +22,9 @@ export type TheoryBlock =
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean }
-  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList }
+  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[] }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
-  | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean };
+  | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -1409,6 +1411,105 @@ const a1ConjL09: ConjLesson = {
 };
 
 
+const g10Verbs: VerbToggleVerb[] = [
+  {
+    infinitive: "arriver", radical: "arriv",
+    meaning: "venir à destination", example: "Il arrive à 8 h.",
+    rows: [
+      { pronoun: "je",             ending: "e" },
+      { pronoun: "tu",             ending: "es" },
+      { pronoun: "il / elle / on", ending: "e" },
+      { pronoun: "nous",           ending: "ons" },
+      { pronoun: "vous",           ending: "ez" },
+      { pronoun: "ils / elles",    ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "partir", radical: "",
+    meaning: "quitter un endroit", example: "Je pars à midi.",
+    rows: [
+      { pronoun: "je",             ending: "pars" },
+      { pronoun: "tu",             ending: "pars" },
+      { pronoun: "il / elle / on", ending: "part" },
+      { pronoun: "nous",           ending: "partons" },
+      { pronoun: "vous",           ending: "partez" },
+      { pronoun: "ils / elles",    ending: "partent" },
+    ],
+  },
+  {
+    infinitive: "entrer", radical: "entr",
+    meaning: "aller à l'intérieur", example: "Elle entre dans la salle.",
+    rows: [
+      { pronoun: "je",             ending: "e" },
+      { pronoun: "tu",             ending: "es" },
+      { pronoun: "il / elle / on", ending: "e" },
+      { pronoun: "nous",           ending: "ons" },
+      { pronoun: "vous",           ending: "ez" },
+      { pronoun: "ils / elles",    ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "sortir", radical: "",
+    meaning: "aller à l'extérieur", example: "Il sort du bureau.",
+    rows: [
+      { pronoun: "je",             ending: "sors" },
+      { pronoun: "tu",             ending: "sors" },
+      { pronoun: "il / elle / on", ending: "sort" },
+      { pronoun: "nous",           ending: "sortons" },
+      { pronoun: "vous",           ending: "sortez" },
+      { pronoun: "ils / elles",    ending: "sortent" },
+    ],
+  },
+  {
+    infinitive: "monter", radical: "mont",
+    meaning: "aller vers le haut", example: "Tu montes à pied ?",
+    rows: [
+      { pronoun: "je",             ending: "e" },
+      { pronoun: "tu",             ending: "es" },
+      { pronoun: "il / elle / on", ending: "e" },
+      { pronoun: "nous",           ending: "ons" },
+      { pronoun: "vous",           ending: "ez" },
+      { pronoun: "ils / elles",    ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "descendre", radical: "",
+    meaning: "aller vers le bas", example: "Je descends du bus.",
+    rows: [
+      { pronoun: "je",             ending: "descends" },
+      { pronoun: "tu",             ending: "descends" },
+      { pronoun: "il / elle / on", ending: "descend" },
+      { pronoun: "nous",           ending: "descendons" },
+      { pronoun: "vous",           ending: "descendez" },
+      { pronoun: "ils / elles",    ending: "descendent" },
+    ],
+  },
+  {
+    infinitive: "retourner", radical: "retourn",
+    meaning: "revenir à un endroit", example: "Elle retourne au travail.",
+    rows: [
+      { pronoun: "je",             ending: "e" },
+      { pronoun: "tu",             ending: "es" },
+      { pronoun: "il / elle / on", ending: "e" },
+      { pronoun: "nous",           ending: "ons" },
+      { pronoun: "vous",           ending: "ez" },
+      { pronoun: "ils / elles",    ending: "ent" },
+    ],
+  },
+  {
+    infinitive: "rester", radical: "rest",
+    meaning: "ne pas bouger", example: "Nous restons à la maison.",
+    rows: [
+      { pronoun: "je",             ending: "e" },
+      { pronoun: "tu",             ending: "es" },
+      { pronoun: "il / elle / on", ending: "e" },
+      { pronoun: "nous",           ending: "ons" },
+      { pronoun: "vous",           ending: "ez" },
+      { pronoun: "ils / elles",    ending: "ent" },
+    ],
+  },
+];
+
 const a1ConjL12: ConjLesson = {
   slug: "a1-conj-l12",
   code: "G.10",
@@ -1416,64 +1517,9 @@ const a1ConjL12: ConjLesson = {
   title: "Les verbes de mouvement",
   theory: [
     { type: "heading", text: "Les verbes de mouvement" },
-    {
-      type: "plain_list",
-      items: [
-        "Ces verbes expriment un déplacement ou un changement de position.",
-        "Ils se conjuguent sur {a}2 radicaux{/a} : court (je/tu/il) et long (nous/vous/ils).",
-      ],
-    },
-    {
-      type: "table",
-      tables: [
-        {
-          verb: "partir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "pars" },
-            { pronoun: "tu", form: "pars" },
-            { pronoun: "il / elle", form: "part" },
-            { pronoun: "nous", form: "partons" },
-            { pronoun: "vous", form: "partez" },
-            { pronoun: "ils / elles", form: "partent" },
-          ],
-        },
-        {
-          verb: "sortir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "sors" },
-            { pronoun: "tu", form: "sors" },
-            { pronoun: "il / elle", form: "sort" },
-            { pronoun: "nous", form: "sortons" },
-            { pronoun: "vous", form: "sortez" },
-            { pronoun: "ils / elles", form: "sortent" },
-          ],
-        },
-      ],
-    },
-    { type: "heading", text: "Autres verbes courants", sub: true, accent: true },
-    {
-      type: "grid",
-      headers: ["Verbe", "Sens", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["{a}arriver{/a}", "venir à destination", "Il arrive à 8 h."],
-        ["{a}entrer{/a}", "aller à l'intérieur", "Elle entre dans la salle."],
-        ["{a}monter{/a}", "aller vers le haut", "Tu montes à pied ?"],
-        ["{a}descendre{/a}", "aller vers le bas", "Je descends du bus."],
-        ["{a}retourner{/a}", "revenir à un endroit", "Elle retourne au travail."],
-        ["{a}rester{/a}", "ne pas bouger", "Nous restons à la maison."],
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Au passé composé → avec ÊTRE",
-      items: [
-        "Ces verbes se conjuguent avec {a}ÊTRE{/a} au passé composé.",
-        "Il est parti. / Elle est arrivée. / Ils sont sortis.",
-        "Le participe s'accorde avec le sujet.",
-      ],
-      noBulletItems: [0],
-    },
+    { type: "heading", text: "Les verbes courants", sub: true, accent: true },
+    { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position."], noBulletItems: [0] },
+    { type: "verb_toggle", verbs: g10Verbs, buttonCols: 4 },
   ],
   exercises: [],
 };
