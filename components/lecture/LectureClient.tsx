@@ -129,16 +129,6 @@ function ModuleCard({
         )}
       </button>
 
-      {/* Progress bar (only when started and expanded) */}
-      {expanded && modState !== "locked" && modState !== "available" && (
-        <div className="px-4 pb-2">
-          <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={4} />
-          <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
-            {completedCount} / {totalCount}
-          </p>
-        </div>
-      )}
-
       {/* Submodule list */}
       {expanded && <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
         {mod.letters.flatMap((letter, i) => {
@@ -385,17 +375,6 @@ export function LectureClient() {
 
       {tab === "apprendre" ? (
         <>
-          {/* Global progress */}
-          {hydrated && (
-            <div className="space-y-2">
-              <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-                <span>Progression globale</span>
-                <span>{completedCount} / {TOTAL_LETTERS} lettres · {pct}%</span>
-              </div>
-              <AppProgressBar value={pct} color="var(--color-accent-lecture)" height={6} />
-            </div>
-          )}
-
           {/* Module cards */}
           <section className="space-y-4" aria-label="Modules de lecture">
             {LECTURE_MODULES.map((mod) => (

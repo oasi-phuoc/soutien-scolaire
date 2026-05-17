@@ -1,5 +1,10 @@
+import { Suspense } from "react";
 import { FrancaisClient } from "@/components/FrancaisClient";
 
 export default function FrancaisPage() {
-  return <FrancaisClient />;
+  return (
+    <Suspense>
+      <FrancaisClient />
+    </Suspense>
+  );
 }

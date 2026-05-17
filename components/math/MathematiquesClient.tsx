@@ -179,17 +179,6 @@ export function MathematiquesClient() {
         </button>
       </div>
 
-      {/* Branch progress */}
-      {hydrated && (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-            <span>Progression de la branche</span>
-            <span>{branchProgress}%</span>
-          </div>
-          <AppProgressBar value={branchProgress} color={accentColor} height={6} />
-        </div>
-      )}
-
       {/* Pending evaluation banner */}
       {hydrated && pendingModule && pendingEvalId ? (
         <div className="rounded-[var(--radius-lg)] border border-amber-400/50 bg-amber-50 px-4 py-3 dark:bg-amber-950/20">

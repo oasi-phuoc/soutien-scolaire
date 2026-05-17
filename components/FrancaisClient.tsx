@@ -7,7 +7,6 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { loadProgress } from "@/lib/progress/math-progress";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
-import { AppProgressBar } from "@/components/ui/AppProgressBar";
 
 type SectionDef  = { id: FrenchSection; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -137,9 +136,6 @@ function SectionCard({
     return "locked";
   }
 
-  const completedCount = hydrated ? themes.filter((th) => completedSlugs.has(th.slug)).length : 0;
-  const pct = themes.length > 0 ? Math.round((completedCount / themes.length) * 100) : 0;
-
   // Shared icon box
   const iconBox = (
     <div
@@ -189,16 +185,6 @@ function SectionCard({
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
-      )}
-
-      {/* Progress bar — in_progress only */}
-      {inProgress && themes.length > 0 && (
-        <div className="px-4 pb-2">
-          <AppProgressBar value={pct} color="var(--color-accent-fr)" height={4} />
-          <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
-            {completedCount} / {themes.length}
-          </p>
-        </div>
       )}
 
       {/* Lesson list */}
@@ -283,10 +269,6 @@ export function FrancaisClient() {
     return () => window.removeEventListener("soutien-french-lesson-complete", onComplete);
   }, []);
 
-  const currentIdx   = currentSection ? SECTION_ORDER.indexOf(currentSection) : -1;
-  const completedCount = currentIdx >= 0 ? currentIdx : 0;
-  const pct = Math.round((completedCount / SECTION_ORDER.length) * 100);
-
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
       <header className="space-y-1">
@@ -317,17 +299,6 @@ export function FrancaisClient() {
           </button>
         ))}
       </div>
-
-      {/* Global progress bar — Apprendre tab only */}
-      {hydrated && tab === "general" && (
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-            <span>Progression globale</span>
-            <span>{completedCount} / {SECTION_ORDER.length} niveaux · {pct}%</span>
-          </div>
-          <AppProgressBar value={pct} color="var(--color-accent-fr)" height={6} />
-        </div>
-      )}
 
       {/* Section cards — same component for all tabs */}
       <section className="space-y-4" aria-label="Modules de français">
