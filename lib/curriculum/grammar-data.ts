@@ -142,7 +142,22 @@ const a1GrL02: GrammarLesson = {
         { sentence: "Ils ___ (être) disponibles. (négatif)", hint: "ne…pas", answer: "ne sont pas" },
       ],
     },
-  ],
+      {
+      type: "trueFalse",
+      title: "Exercice 3 — Vrai ou faux ?",
+      instruction: "La forme négative est-elle correcte ?",
+      items: [
+        { statement: "Martin n'est pas anglais, il est allemand.", answer: true },
+        { statement: "Amy et Michael ne sont canadiens, ils sont américains.", answer: false },
+        { statement: "Je n'ai pas cours le vendredi.", answer: true },
+        { statement: "Je ne ai pas de temps.", answer: false },
+        { statement: "Il n'est pas libre samedi.", answer: true },
+        { statement: "Nous n'avons pas cours.", answer: true },
+        { statement: "Elle ne suis pas française.", answer: false },
+        { statement: "Tu n'as pas de rendez-vous.", answer: true },
+      ],
+    },
+],
 };
 
 const a1GrL03: GrammarLesson = {
@@ -212,7 +227,46 @@ const a1GrL03: GrammarLesson = {
         { left: "belge", right: "belge" },
       ],
     },
-  ],
+      {
+      type: "classify",
+      title: "Exercice 3 — Masculin ou féminin ?",
+      instruction: "Classez ces adjectifs de nationalité.",
+      categories: ["Masculin", "Féminin"],
+      items: [
+        { word: "japonais", categoryIdx: 0 },
+        { word: "japonaise", categoryIdx: 1 },
+        { word: "américain", categoryIdx: 0 },
+        { word: "américaine", categoryIdx: 1 },
+        { word: "espagnol", categoryIdx: 0 },
+        { word: "espagnole", categoryIdx: 1 },
+        { word: "chinois", categoryIdx: 0 },
+        { word: "chinoise", categoryIdx: 1 },
+        { word: "français", categoryIdx: 0 },
+        { word: "française", categoryIdx: 1 },
+        { word: "allemand", categoryIdx: 0 },
+        { word: "allemande", categoryIdx: 1 },
+      ],
+      pool: [
+        { word: "japonais", categoryIdx: 0 },
+        { word: "japonaise", categoryIdx: 1 },
+        { word: "américain", categoryIdx: 0 },
+        { word: "américaine", categoryIdx: 1 },
+        { word: "espagnol", categoryIdx: 0 },
+        { word: "espagnole", categoryIdx: 1 },
+        { word: "chinois", categoryIdx: 0 },
+        { word: "chinoise", categoryIdx: 1 },
+        { word: "français", categoryIdx: 0 },
+        { word: "française", categoryIdx: 1 },
+        { word: "allemand", categoryIdx: 0 },
+        { word: "allemande", categoryIdx: 1 },
+        { word: "mexicain", categoryIdx: 0 },
+        { word: "mexicaine", categoryIdx: 1 },
+        { word: "australien", categoryIdx: 0 },
+        { word: "australienne", categoryIdx: 1 },
+      ],
+      poolSize: 8,
+    },
+],
 };
 
 const a1GrL04: GrammarLesson = {
@@ -384,7 +438,20 @@ const a1GrL05: GrammarLesson = {
         { sentence: "Ils ont ___ disponibilités le mardi.", choices: ["leurs", "leur", "son", "mes"], correctIdx: 0 },
       ],
     },
-  ],
+      {
+      type: "match",
+      title: "Exercice 3 — Associez le sujet à la forme de «avoir»",
+      instruction: "Reliez chaque sujet à la bonne expression avec avoir.",
+      pairs: [
+        { left: "Zoe", right: "a 23 ans." },
+        { left: "Sarah et Edward", right: "ont un niveau A1." },
+        { left: "Nous", right: "avons cours tous les jours." },
+        { left: "Vous", right: "avez du temps le samedi ?" },
+        { left: "J'", right: "ai rendez-vous avec un tuteur." },
+        { left: "Tu", right: "as des amis français ?" },
+      ],
+    },
+],
 };
 
 const a1GrL06: GrammarLesson = {
@@ -451,7 +518,22 @@ const a1GrL06: GrammarLesson = {
         { sentence: "Sophie ___ (être/avoir) jeune et dynamique.", hint: "être ou avoir ?", answer: "est" },
       ],
     },
-  ],
+      {
+      type: "trueFalse",
+      title: "Exercice 3 — Être ou avoir : vrai ou faux ?",
+      instruction: "L'usage de «être» ou «avoir» est-il correct ?",
+      items: [
+        { statement: "Les étudiants sont 20 ans.", answer: false },
+        { statement: "Elle est étudiante.", answer: true },
+        { statement: "Il est 25 ans.", answer: false },
+        { statement: "Nous sommes libres le week-end.", answer: true },
+        { statement: "Ils ont professeurs.", answer: false },
+        { statement: "J'ai faim.", answer: true },
+        { statement: "Tu as française.", answer: false },
+        { statement: "Vous avez cours demain.", answer: true },
+      ],
+    },
+],
 };
 
 const a1GrL10: GrammarLesson = {
@@ -659,7 +741,46 @@ const a1GrL14: GrammarLesson = {
         { sentence: "Beaucoup ___ gens aiment le café.", hint: "quantité + de", answer: "de" },
       ],
     },
-  ],
+      {
+      type: "classify",
+      title: "Exercice 3 — Quel article partitif ?",
+      instruction: "Choisissez l'article partitif correct pour chaque aliment.",
+      categories: ["du (masc.)", "de la (fém.)", "de l' (voyelle)", "des (pluriel)"],
+      items: [
+        { word: "café", categoryIdx: 0 },
+        { word: "salade", categoryIdx: 1 },
+        { word: "eau", categoryIdx: 2 },
+        { word: "légumes", categoryIdx: 3 },
+        { word: "jambon", categoryIdx: 0 },
+        { word: "viande", categoryIdx: 1 },
+        { word: "alcool", categoryIdx: 2 },
+        { word: "pâtes", categoryIdx: 3 },
+        { word: "riz", categoryIdx: 0 },
+        { word: "moutarde", categoryIdx: 1 },
+        { word: "ail", categoryIdx: 2 },
+        { word: "haricots", categoryIdx: 3 },
+      ],
+      pool: [
+        { word: "café", categoryIdx: 0 },
+        { word: "salade", categoryIdx: 1 },
+        { word: "eau", categoryIdx: 2 },
+        { word: "légumes", categoryIdx: 3 },
+        { word: "jambon", categoryIdx: 0 },
+        { word: "viande", categoryIdx: 1 },
+        { word: "alcool", categoryIdx: 2 },
+        { word: "pâtes", categoryIdx: 3 },
+        { word: "riz", categoryIdx: 0 },
+        { word: "moutarde", categoryIdx: 1 },
+        { word: "ail", categoryIdx: 2 },
+        { word: "haricots", categoryIdx: 3 },
+        { word: "fromage", categoryIdx: 0 },
+        { word: "crème", categoryIdx: 1 },
+        { word: "huile", categoryIdx: 1 },
+        { word: "oeufs", categoryIdx: 3 },
+      ],
+      poolSize: 8,
+    },
+],
 };
 
 const a1GrL17: GrammarLesson = {
@@ -860,7 +981,22 @@ const a1GrL19: GrammarLesson = {
         { sentence: "C'est ___ école préférée. (à nous)", hint: "à nous, fém.", answer: "notre" },
       ],
     },
-  ],
+      {
+      type: "trueFalse",
+      title: "Exercice 3 — Vrai ou faux ?",
+      instruction: "L'adjectif possessif est-il correct ?",
+      items: [
+        { statement: "C'est le numéro de Pablo. → C'est son numéro.", answer: true },
+        { statement: "Ce sont les notes de Pablo. → Ce sont son notes.", answer: false },
+        { statement: "C'est le visa de Diego. → C'est sa visa.", answer: false },
+        { statement: "C'est le professeur des étudiants. → C'est leur professeur.", answer: true },
+        { statement: "Ce sont les coordonnées des tuteurs. → Ce sont leurs coordonnées.", answer: true },
+        { statement: "C'est le passeport de Michael. → C'est sa passeport.", answer: false },
+        { statement: "C'est la photo de Monsieur Minot. → C'est sa photo.", answer: true },
+        { statement: "C'est le vélo de Marie. → C'est son vélo.", answer: true },
+      ],
+    },
+],
 };
 
 const a1GrL22: GrammarLesson = {
@@ -998,7 +1134,22 @@ const a1GrL23: GrammarLesson = {
         { sentence: "Je lis un livre ___.", choices: ["passionnant", "bon livre", "vieux", "grand"], correctIdx: 0 },
       ],
     },
-  ],
+      {
+      type: "fill",
+      title: "Exercice 3 — Accordez l'adjectif",
+      instruction: "Mettez l'adjectif entre parenthèses à la bonne forme.",
+      items: [
+        { sentence: "Isabelle a une robe ___. (nouveau)", hint: "nouvelle", answer: "nouvelle" },
+        { sentence: "Thomas porte un pull ___. (nouveau)", hint: "nouveau", answer: "nouveau" },
+        { sentence: "Marie a de ___ chaussures. (vieux)", hint: "vieilles", answer: "vieilles" },
+        { sentence: "C'est un ___ appartement. (beau)", hint: "bel", answer: "bel" },
+        { sentence: "J'aime cette ___ écharpe. (vieux)", hint: "vieille", answer: "vieille" },
+        { sentence: "Manon porte une ___ jupe. (beau)", hint: "belle", answer: "belle" },
+        { sentence: "C'est une ___ idée ! (bon)", hint: "bonne", answer: "bonne" },
+        { sentence: "Ce magasin a de ___ prix. (bon)", hint: "bons", answer: "bons" },
+      ],
+    },
+],
 };
 
 const a1GrL24: GrammarLesson = {
@@ -1433,6 +1584,94 @@ const a1GrLFutur: GrammarLesson = {
         { sentence: "Elle va visiter le musée.", hint: "elle — va — visiter — le — musée" },
         { sentence: "Ils vont travailler ensemble.", hint: "ils — vont — travailler — ensemble" },
         { sentence: "Tu vas manger avec tes amis.", hint: "tu — vas — manger — avec — tes — amis" },
+      ],
+    },
+  ],
+};
+
+const a1GrLImperatif: GrammarLesson = {
+  slug: "a1-gr-l20",
+  code: "G.20",
+  level: "A1",
+  title: "L'impératif",
+  theory: [
+    { type: "heading", text: "L'impératif : donner un ordre ou un conseil" },
+    {
+      type: "grid",
+      headers: ["Personne", "Présent → Impératif", "Exemple"],
+      rows: [
+        ["tu", "-s supprimé pour -ER", "Tu parles → Parle !"],
+        ["nous", "= présent", "Nous parlons → Parlons !"],
+        ["vous", "= présent", "Vous parlez → Parlez !"],
+      ],
+      transHeaders: {
+        en: ["Person", "Present → Imperative", "Example"],
+        ar: ["الشخص", "المضارع → الأمر", "مثال"],
+        fa: ["شخص", "حال → امر", "مثال"],
+        ti: ["ሰብ", "ሕጂ → ኣዝዝ", "ኣብነት"],
+        uk: ["Особа", "Теперішній → Наказовий", "Приклад"],
+      },
+    },
+    {
+      type: "grid",
+      headers: ["", "parler", "finir", "prendre", "aller"],
+      rows: [
+        ["tu", "Parle !", "Finis !", "Prends !", "Va !"],
+        ["nous", "Parlons !", "Finissons !", "Prenons !", "Allons !"],
+        ["vous", "Parlez !", "Finissez !", "Prenez !", "Allez !"],
+      ],
+    },
+    {
+      type: "rule",
+      text: "Négatif : ne + verbe + pas → «Ne parle pas !» / «Ne mangez pas !»",
+      examples: [
+        { correct: "Viens à partir de 20 h !" },
+        { correct: "Ne venez pas à 19 h !" },
+        { correct: "Prenons un taxi !" },
+      ],
+    },
+    {
+      type: "note",
+      text: "Attention : ÊTRE → Sois / Soyons / Soyez — AVOIR → Aie / Ayons / Ayez",
+    },
+  ],
+  exercises: [
+    {
+      type: "fill",
+      title: "Exercice 1 — Conjuguez à l'impératif (vous)",
+      instruction: "Répondez aux questions en utilisant l'impératif.",
+      items: [
+        { sentence: "À quelle heure on vient ? → ___ à partir de 20 h ! (Venir)", hint: "Venez", answer: "Venez" },
+        { sentence: "Qu'est-ce que je prends à boire ? → ___ des boissons. (Prendre)", hint: "Prenez", answer: "Prenez" },
+        { sentence: "Qu'est-ce qu'on achète ? → ___ des chips. (Acheter)", hint: "Achetez", answer: "Achetez" },
+        { sentence: "Je vais où ? → ___ au supermarché. (Aller)", hint: "Allez", answer: "Allez" },
+        { sentence: "On commence maintenant ? → ___ tout de suite ! (Commencer)", hint: "Commencez", answer: "Commencez" },
+        { sentence: "Je peux partir ? → Non, ___ encore ! (Rester)", hint: "Restez", answer: "Restez" },
+      ],
+    },
+    {
+      type: "trueFalse",
+      title: "Exercice 2 — Impératif négatif : vrai ou faux ?",
+      instruction: "La forme négative de l'impératif est-elle correcte ?",
+      items: [
+        { statement: "N'apporte pas de gâteau !", answer: true },
+        { statement: "Ne viens pas à 19 h !", answer: true },
+        { statement: "Pas hésite à téléphoner !", answer: false },
+        { statement: "Ne mange pas vite !", answer: true },
+        { statement: "N'allez pas là !", answer: true },
+        { statement: "Ne parle pas français !", answer: true },
+        { statement: "Finissez ne pas maintenant !", answer: false },
+      ],
+    },
+    {
+      type: "order",
+      title: "Exercice 3 — Remettez dans l'ordre",
+      instruction: "Formez une phrase à l'impératif.",
+      items: [
+        { sentence: "Parlez plus lentement s'il vous plaît.", hint: "parlez — plus — lentement — s'il — vous — plaît" },
+        { sentence: "Ne mangez pas trop vite.", hint: "ne — mangez — pas — trop — vite" },
+        { sentence: "Prenons un taxi ensemble.", hint: "prenons — un — taxi — ensemble" },
+        { sentence: "Allez tout droit puis tournez à gauche.", hint: "allez — tout — droit — puis — tournez — à — gauche" },
       ],
     },
   ],
@@ -2251,6 +2490,7 @@ const ALL_GRAMMAR_LESSONS: GrammarLesson[] = [
   a1GrLCest,
   a1GrLQuel,
   a1GrLFutur,
+  a1GrLImperatif,
   a2GrL07,
   a2GrL09,
   a2GrL11,
