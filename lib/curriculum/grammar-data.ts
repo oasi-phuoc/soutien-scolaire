@@ -277,8 +277,11 @@ const a1GrL04: GrammarLesson = {
     {
       type: "highlight",
       label: "Article indéfini",
-      items: ["Je cherche {a}une{/a} porte.", "(n'importe quelle porte)"],
-      noBulletItems: [1],
+      items: [
+        "Une porte que je ne connais pas, une parmi d'autres.",
+        "Je cherche {a}une{/a} porte.",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [],
