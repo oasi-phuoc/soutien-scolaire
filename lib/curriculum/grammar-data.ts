@@ -97,6 +97,7 @@ const a1GrL02: GrammarLesson = {
     {
       type: "heading",
       text: "La forme négative",
+      trans: { en: "The negative form", ar: "الصيغة المنفية", fa: "شکل منفی", ti: "ቅጺ ምኽሓድ", uk: "Заперечна форма" },
     },
     {
       type: "plain_list",
@@ -104,11 +105,19 @@ const a1GrL02: GrammarLesson = {
         "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
         "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
       ],
+      transItems: {
+        en: ["The negation structure uses {a}ne{/a} + {a}pas{/a}.", "Subject + {a}ne{/a} + verb + {a}pas{/a}"],
+        ar: ["بنية النفي تستخدم {a}ne{/a} + {a}pas{/a}.", "الفاعل + {a}ne{/a} + الفعل + {a}pas{/a}"],
+        fa: ["ساختار نفی از {a}ne{/a} + {a}pas{/a} استفاده می‌کند.", "فاعل + {a}ne{/a} + فعل + {a}pas{/a}"],
+        ti: ["ዝምድና ምኽሓድ {a}ne{/a} + {a}pas{/a} ይጥቀም.", "ሓካይ + {a}ne{/a} + ግሲ + {a}pas{/a}"],
+        uk: ["Структура заперечення використовує {a}ne{/a} + {a}pas{/a}.", "Підмет + {a}ne{/a} + дієслово + {a}pas{/a}"],
+      },
     },
     {
       type: "heading",
       text: "Négation du verbe ÊTRE",
       sub: true,
+      trans: { en: "Negation of ÊTRE", ar: "نفي فعل ÊTRE", fa: "نفی فعل ÊTRE", ti: "ምኽሓድ ግሲ ÊTRE", uk: "Заперечення ÊTRE" },
     },
     {
       type: "grid",
@@ -121,11 +130,26 @@ const a1GrL02: GrammarLesson = {
         ["Vous êtes fatigués.", "Vous {a}n'{/a}êtes {a}pas{/a} fatigués."],
         ["Ils/Elles sont là.", "Ils/Elles {a}ne{/a} sont {a}pas{/a} là."],
       ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإيجاب", "النفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣወንታ", "ምኽሓድ"],
+        uk: ["Стверджувальна", "Заперечна"],
+      },
+      transRows: {
+        en: [["I am happy.", "I am not happy."], ["You are in Geneva.", "You are not in Geneva."], ["He/She is a doctor.", "He/She is not a doctor."], ["We are ready.", "We are not ready."], ["You are tired.", "You are not tired."], ["They are there.", "They are not there."]],
+        ar: [["أنا سعيد(ة).", "لست سعيداً/سعيدة."], ["أنت في جنيف.", "لست في جنيف."], ["هو/هي طبيب.", "هو/هي ليس طبيباً."], ["نحن مستعدون.", "لسنا مستعدين."], ["أنتم متعبون.", "لستم متعبين."], ["هم/هن هناك.", "هم/هن ليسوا هناك."]],
+        fa: [["من خوشحالم.", "من خوشحال نیستم."], ["تو در ژنو هستی.", "تو در ژنو نیستی."], ["او دکتر است.", "او دکتر نیست."], ["ما آماده‌ایم.", "ما آماده نیستیم."], ["شما خسته‌اید.", "شما خسته نیستید."], ["آن‌ها آنجا هستند.", "آن‌ها آنجا نیستند."]],
+        ti: [["ሕጉስ/ሕጉስቲ እየ.", "ሕጉስ/ሕጉስቲ ኣይኮንኩን."], ["ኣብ ጀኔቫ ኢኻ.", "ኣብ ጀኔቫ ኣይኮንካን."], ["ሓኪም እዩ/ኣያ.", "ሓኪም ኣይኮነን."], ["ቅሩባት ኢና.", "ቅሩባት ኣይኮናን."], ["ሕምሙቓት ኢኹም.", "ሕምሙቓት ኣይኮናን."], ["ኣለዉ.", "ኣየለዉን."]],
+        uk: [["Я щасливий/щаслива.", "Я не щасливий/щаслива."], ["Ти у Женеві.", "Ти не у Женеві."], ["Він/Вона лікар.", "Він/Вона не лікар."], ["Ми готові.", "Ми не готові."], ["Ви втомлені.", "Ви не втомлені."], ["Вони там.", "Вони не там."]],
+      },
     },
     {
       type: "heading",
       text: "Négation du verbe AVOIR",
       sub: true,
+      trans: { en: "Negation of AVOIR", ar: "نفي فعل AVOIR", fa: "نفی فعل AVOIR", ti: "ምኽሓድ ግሲ AVOIR", uk: "Заперечення AVOIR" },
     },
     {
       type: "grid",
@@ -138,10 +162,25 @@ const a1GrL02: GrammarLesson = {
         ["Vous avez raison.", "Vous {a}n'{/a}avez {a}pas{/a} raison."],
         ["Ils/Elles ont peur.", "Ils/Elles {a}n'{/a}ont {a}pas{/a} peur."],
       ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإيجاب", "النفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣወንታ", "ምኽሓድ"],
+        uk: ["Стверджувальна", "Заперечна"],
+      },
+      transRows: {
+        en: [["I am hungry.", "I am not hungry."], ["You have a bike.", "You don't have a bike."], ["He/She is 25.", "He/She doesn't have a child."], ["We are thirsty.", "We are not thirsty."], ["You are right.", "You are not right."], ["They are afraid.", "They are not afraid."]],
+        ar: [["أنا جائع(ة).", "لست جائعاً."], ["عندك دراجة.", "ليس عندك دراجة."], ["عمره/عمرها 25 سنة.", "ليس لديه/لديها طفل."], ["نحن عطشانون.", "لسنا عطشانين."], ["أنتم على حق.", "لستم على حق."], ["هم/هن خائفون.", "هم/هن ليسوا خائفين."]],
+        fa: [["من گرسنه‌ام.", "من گرسنه نیستم."], ["تو دوچرخه داری.", "تو دوچرخه نداری."], ["او ۲۵ سال دارد.", "او بچه ندارد."], ["ما تشنه‌ایم.", "ما تشنه نیستیم."], ["شما درست می‌گویید.", "شما درست نمی‌گویید."], ["آن‌ها ترسیده‌اند.", "آن‌ها نمی‌ترسند."]],
+        ti: [["ጠሚየ.", "ጠሚየ ኣይኮነን."], ["ብሽክለታ ኣሎካ.", "ብሽክለታ የብልካን."], ["25 ዓመት ኣሎዎ/ኣሎዋ.", "ቆልዓ የብሉን."], ["ጸሚና ኣሎ.", "ጸሚና ኣይኮነን."], ["ልክዕ ኢኹም.", "ልክዕ ኣይኮናን."], ["ፈሪሖም ኣለዉ.", "ፈሪሖም ኣይኮነን."]],
+        uk: [["Я голодний/голодна.", "Я не голодний/голодна."], ["У тебе є велосипед.", "У тебе немає велосипеда."], ["Йому/їй 25 років.", "У нього/неї немає дитини."], ["Ми хочемо пити.", "Ми не хочемо пити."], ["Ви праві.", "Ви не праві."], ["Вони бояться.", "Вони не бояться."]],
+      },
     },
     {
       type: "highlight",
       label: "Astuce",
+      transLabel: { en: "Tip", ar: "نصيحة", fa: "نکته", ti: "ምኽሪ", uk: "Порада" },
       inlineArrows: true,
       noBulletItems: [0],
       items: [
@@ -149,6 +188,13 @@ const a1GrL02: GrammarLesson = {
         "il n{s}e{/s} est pas là → il n'est pas là",
         "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
       ],
+      transItems: {
+        en: ["{a}ne{/a} before a vowel (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        ar: ["{a}ne{/a} قبل حرف علة (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        fa: ["{a}ne{/a} قبل از حرف صدادار (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        ti: ["{a}ne{/a} ቅድሚ ሞዓዝ (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        uk: ["{a}ne{/a} перед голосною (a e i o u y) → {a}n'{/a}", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+      },
     },
   ],
   exercises: [],
@@ -2308,7 +2354,7 @@ const a1GrInterro: GrammarLesson = {
   level: "A1",
   title: "L'interrogation de base",
   theory: [
-    { type: "heading", text: "Poser une question" },
+    { type: "heading", text: "Poser une question", trans: { en: "Asking a question", ar: "طرح سؤال", fa: "پرسیدن سوال", ti: "ሕቶ ምሓታት", uk: "Постановка питання" } },
     {
       type: "plain_list",
       items: [
@@ -2316,6 +2362,13 @@ const a1GrInterro: GrammarLesson = {
         "La plus simple : monter la voix à la fin.",
         "La plus courante : utiliser {a}est-ce que{/a}.",
       ],
+      transItems: {
+        en: ["There are several ways to ask a question in French.", "The simplest: raise your voice at the end.", "The most common: use {a}est-ce que{/a}."],
+        ar: ["هناك عدة طرق لطرح سؤال بالفرنسية.", "الأبسط: رفع الصوت في النهاية.", "الأكثر شيوعاً: استخدام {a}est-ce que{/a}."],
+        fa: ["روش‌های مختلفی برای پرسیدن سوال در فرانسه وجود دارد.", "ساده‌ترین: بالا بردن صدا در پایان.", "رایج‌ترین: استفاده از {a}est-ce que{/a}."],
+        ti: ["ኣብ ፈረንሳዊ ሕቶ ንምሓታት ብዙሕ መንገድታት ኣሎ.", "ዝቐለለ: ድምጺ ኣብ መወዳእታ ምድራዕ.", "ዝበዝሐ: {a}est-ce que{/a} ምጥቃም."],
+        uk: ["Є кілька способів поставити питання французькою.", "Найпростіший: підвищити голос наприкінці.", "Найпоширеніший: використовувати {a}est-ce que{/a}."],
+      },
     },
     {
       type: "plain_list",
@@ -2323,6 +2376,13 @@ const a1GrInterro: GrammarLesson = {
         "{a}Est-ce que{/a} + sujet + verbe ?",
         "Devant une voyelle : {a}est-ce qu'{/a}",
       ],
+      transItems: {
+        en: ["{a}Est-ce que{/a} + subject + verb ?", "Before a vowel: {a}est-ce qu'{/a}"],
+        ar: ["{a}Est-ce que{/a} + الفاعل + الفعل ?", "قبل حرف علة: {a}est-ce qu'{/a}"],
+        fa: ["{a}Est-ce que{/a} + فاعل + فعل ?", "قبل از حرف صدادار: {a}est-ce qu'{/a}"],
+        ti: ["{a}Est-ce que{/a} + ሓካይ + ግሲ ?", "ቅድሚ ሞዓዝ: {a}est-ce qu'{/a}"],
+        uk: ["{a}Est-ce que{/a} + підмет + дієслово ?", "Перед голосною: {a}est-ce qu'{/a}"],
+      },
     },
     {
       type: "grid",
@@ -2333,15 +2393,37 @@ const a1GrInterro: GrammarLesson = {
         ["Elle a cours.", "Est-ce qu'elle a cours ?"],
         ["Vous êtes prêts.", "Est-ce que vous êtes prêts ?"],
       ],
+      transHeaders: {
+        en: ["Affirmative", "Question"],
+        ar: ["الإيجاب", "السؤال"],
+        fa: ["مثبت", "سوال"],
+        ti: ["ኣወንታ", "ሕቶ"],
+        uk: ["Стверджувальна", "Питання"],
+      },
+      transRows: {
+        en: [["You speak French.", "Do you speak French?"], ["He is free.", "Is he free?"], ["She has class.", "Does she have class?"], ["You are ready.", "Are you ready?"]],
+        ar: [["تتكلم الفرنسية.", "هل تتكلم الفرنسية؟"], ["هو حر.", "هل هو حر؟"], ["هي لديها دروس.", "هل لديها دروس؟"], ["أنتم مستعدون.", "هل أنتم مستعدون؟"]],
+        fa: [["تو فرانسه صحبت می‌کنی.", "آیا فرانسه صحبت می‌کنی؟"], ["او آزاد است.", "آیا او آزاد است؟"], ["او کلاس دارد.", "آیا او کلاس دارد؟"], ["شما آماده‌اید.", "آیا آماده‌اید؟"]],
+        ti: [["ፈረንሳዊ ትዛረብ.", "ፈረንሳዊ ትዛረብ ዶ?"], ["ናጻ እዩ.", "ናጻ ዶ እዩ?"], ["ትምህርቲ ኣሎዋ.", "ትምህርቲ ኣሎዋ ዶ?"], ["ቅሩባት ኢኹም.", "ቅሩባት ዶ ኢኹም?"]],
+        uk: [["Ти говориш французькою.", "Ти говориш французькою?"], ["Він вільний.", "Він вільний?"], ["У неї заняття.", "У неї заняття?"], ["Ви готові.", "Ви готові?"]],
+      },
     },
     {
       type: "highlight",
       label: "Intonation montante",
+      transLabel: { en: "Rising intonation", ar: "التنغيم الصاعد", fa: "آهنگ صعودی", ti: "ዝልዓለ ቃና", uk: "Висхідна інтонація" },
       items: [
         "Pour une question très simple, on monte la voix à la fin.",
         "Tu parles français ?",
         "Il est libre ?",
       ],
+      transItems: {
+        en: ["For a very simple question, raise your voice at the end.", "You speak French?", "He is free?"],
+        ar: ["لسؤال بسيط جداً، ارفع صوتك في النهاية.", "تتكلم الفرنسية؟", "هو حر؟"],
+        fa: ["برای یک سوال بسیار ساده، صدای خود را در پایان بالا ببرید.", "فرانسه صحبت می‌کنی؟", "او آزاد است؟"],
+        ti: ["ንሓደ ቀሊል ሕቶ ድምጺ ኣብ መወዳእታ ኣልዕሎ.", "ፈረንሳዊ ትዛረብ?", "ናጻ እዩ?"],
+        uk: ["Для дуже простого питання підвищте голос наприкінці.", "Ти говориш французькою?", "Він вільний?"],
+      },
       noBulletItems: [0],
     },
   ],
