@@ -22,7 +22,7 @@ export type TheoryBlock =
   | { type: "note"; text: string }
   | { type: "vocab"; title: string; items: string[] }
   | { type: "grid"; headers: string[]; rows: string[][]; transHeaders?: TransList; transRows?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string[][]>>; pronounGrid?: boolean; boldFirstCol?: boolean; equalCols?: boolean }
-  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[] }
+  | { type: "plain_list"; label?: string; items: string[]; transItems?: TransList; noBulletItems?: number[]; allBullets?: boolean }
   | { type: "highlight"; label: string; items: string[]; transLabel?: Trans; transItems?: TransList; noFirstBullet?: boolean; inlineArrows?: boolean; noBulletItems?: number[] }
   | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number };
 
@@ -582,6 +582,13 @@ const a1ConjL01: ConjLesson = {
       items: [
         "Le verbe ÊTRE sert à donner des informations sur une personne, comme son identité ou décrire quelqu'un.",
       ],
+      transItems: {
+        en: ["The verb ÊTRE is used to give information about a person, such as their identity or to describe someone."],
+        ar: ["يُستخدم فعل ÊTRE لإعطاء معلومات عن شخص ما، مثل هويته أو وصفه."],
+        fa: ["فعل ÊTRE برای دادن اطلاعات درباره یک نفر، مانند هویت یا توصیف او استفاده می‌شود."],
+        ti: ["ግሲ ÊTRE ንሓደ ሰብ ሓበሬታ ንምሃብ ይጥቀሙሉ፣ ከም መንነቱ ወይ ምግላጹ."],
+        uk: ["Дієслово ÊTRE використовується для надання інформації про людину, наприклад її ідентичності або опису."],
+      },
     },
     {
       type: "grid",
@@ -619,6 +626,13 @@ const a1ConjL01: ConjLesson = {
       items: [
         "Le verbe AVOIR sert à exprimer ce que l'on ressent ou possède.",
       ],
+      transItems: {
+        en: ["The verb AVOIR is used to express what one feels or possesses."],
+        ar: ["يُستخدم فعل AVOIR للتعبير عما يشعر به الشخص أو يمتلكه."],
+        fa: ["فعل AVOIR برای بیان احساسات یا مالکیت استفاده می‌شود."],
+        ti: ["ግሲ AVOIR እንታይ ከምዝስምዓካ ወይ ዘሎካ ንምግላጽ ይጥቀሙሉ."],
+        uk: ["Дієслово AVOIR використовується для вираження того, що людина відчуває або має."],
+      },
     },
     {
       type: "grid",
@@ -654,6 +668,7 @@ const a1ConjL01: ConjLesson = {
     },
     {
       type: "plain_list",
+      allBullets: true,
       items: [
         "{a}Avoir faim{/a} — vouloir manger",
         "{a}Avoir soif{/a} — vouloir boire",
@@ -1030,13 +1045,27 @@ const a1ConjL07: ConjLesson = {
       items: [
         "Les verbes en {a}-er{/a} sont les verbes les plus fréquents en français. Ils font partie du 1er groupe.",
       ],
+      transItems: {
+        en: ["-er verbs are the most frequent verbs in French. They belong to the 1st group."],
+        ar: ["أفعال {a}-er{/a} هي الأكثر شيوعاً في الفرنسية. تنتمي إلى المجموعة الأولى."],
+        fa: ["افعال {a}-er{/a} رایج‌ترین افعال در زبان فرانسه هستند. آن‌ها به گروه اول تعلق دارند."],
+        ti: ["ግሲያት {a}-er{/a} ዝበዝሑ ጊዜ ዝጥቀሱ ፈረንሳዊ ግሲያት እዮም. ናይ ቀዳማይ ጉጅለ እዮም."],
+        uk: ["Дієслова на {a}-er{/a} є найпоширенішими у французькій мові. Вони належать до 1-ї групи."],
+      },
     },
-    { type: "heading", text: "Comment former le verbe ?" },
+    { type: "heading", text: "Comment former le verbe ?", trans: { en: "How to form the verb?", ar: "كيف تصرّف الفعل؟", fa: "چگونه فعل را صرف کنیم؟", ti: "ግሲ ብኸመይ ትሰርሕ?", uk: "Як утворити дієслово?" } },
     {
       type: "plain_list",
       items: [
         "On prend le verbe et on enlève {a}-er{/a}.",
       ],
+      transItems: {
+        en: ["Take the verb and remove {a}-er{/a}."],
+        ar: ["خذ الفعل وأزل {a}-er{/a}."],
+        fa: ["فعل را بگیرید و {a}-er{/a} را حذف کنید."],
+        ti: ["ንግሲ ውሰድ ንሱ {a}-er{/a} ኣርሕቕ."],
+        uk: ["Беремо дієслово і прибираємо {a}-er{/a}."],
+      },
     },
     {
       type: "verb_toggle",
@@ -1094,19 +1123,34 @@ const a1ConjL07: ConjLesson = {
     {
       type: "highlight",
       label: "Attention à « je »",
+      transLabel: { en: "Note on «je»", ar: "ملاحظة حول «je»", fa: "توجه به «je»", ti: "ኣስተውዕል ብዛዕባ «je»", uk: "Увага до «je»" },
       items: [
         "Quand le verbe commence par une {a}voyelle{/a} ou un {a}h{/a}, {a}je{/a} devient {a}j'{/a}.",
         "j{s}e{/s} aime → j'aime",
         "j{s}e{/s} écoute → j'écoute",
         "j{s}e{/s} habite → j'habite",
       ],
+      transItems: {
+        en: ["When the verb begins with a {a}vowel{/a} or {a}h{/a}, {a}je{/a} becomes {a}j'{/a}.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
+        ar: ["عندما يبدأ الفعل بـ{a}حرف علة{/a} أو {a}h{/a}، يصبح {a}je{/a} {a}j'{/a}.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
+        fa: ["وقتی فعل با {a}حرف صدادار{/a} یا {a}h{/a} شروع می‌شود، {a}je{/a} به {a}j'{/a} تبدیل می‌شود.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
+        ti: ["ግሲ ብ{a}ሞዓዝ{/a} ወይ {a}h{/a} ምስ ዝጅምር፣ {a}je{/a} {a}j'{/a} ይኸውን.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
+        uk: ["Коли дієслово починається з {a}голосної{/a} або {a}h{/a}, {a}je{/a} стає {a}j'{/a}.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
+      },
       noBulletItems: [0],
       inlineArrows: true,
     },
-    { type: "heading", text: "La négation des verbes en -er", sub: true },
+    { type: "heading", text: "La négation des verbes en -er", sub: true, trans: { en: "Negation of -er verbs", ar: "نفي أفعال -er", fa: "نفی افعال -er", ti: "ምኽሓድ ግሲያት -er", uk: "Заперечення дієслів на -er" } },
     {
       type: "plain_list",
       items: ["Pour nier, on encadre le verbe avec {a}ne{/a} … {a}pas{/a} (ou {a}n'{/a} … {a}pas{/a} devant une voyelle ou h)."],
+      transItems: {
+        en: ["To negate, wrap the verb with {a}ne{/a} … {a}pas{/a} (or {a}n'{/a} … {a}pas{/a} before a vowel or h)."],
+        ar: ["للنفي، ضع الفعل بين {a}ne{/a} … {a}pas{/a} (أو {a}n'{/a} … {a}pas{/a} قبل حرف علة أو h)."],
+        fa: ["برای نفی، فعل را بین {a}ne{/a} … {a}pas{/a} قرار دهید (یا {a}n'{/a} … {a}pas{/a} قبل از حرف صدادار یا h)."],
+        ti: ["ንምኽሓድ ግሲ ብ{a}ne{/a} … {a}pas{/a} ወሰን (ወይ {a}n'{/a} … {a}pas{/a} ቅድሚ ሞዓዝ ወይ h)."],
+        uk: ["Для заперечення дієслово обрамляється {a}ne{/a} … {a}pas{/a} (або {a}n'{/a} … {a}pas{/a} перед голосною або h)."],
+      },
     },
     {
       type: "verb_toggle",

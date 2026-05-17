@@ -154,7 +154,10 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                     </span>
                   )}
                   {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
-                  <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
+                  {negation
+                    ? <span className="text-[var(--color-text-primary)]">{row.ending}</span>
+                    : <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
+                  }
                   {negation && (
                     <span className="font-bold text-[var(--color-accent-fr)]"> pas</span>
                   )}
@@ -357,12 +360,12 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                   {block.items.map((item, ii) => (
                     <li key={ii} className="space-y-0.5">
                       <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                        {ii > 0 && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
+                        {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                         <span>{renderInlineMarkup(item)}</span>
                       </div>
                       {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
-                        <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${ii > 0 ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                          {ii > 0 && <span className="mt-0.5 shrink-0">•</span>}
+                        <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${(block.allBullets || ii > 0) ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0">•</span>}
                           <span>{renderArrow(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
                         </div>
                       )}
