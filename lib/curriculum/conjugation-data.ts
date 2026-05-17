@@ -1131,7 +1131,37 @@ const a1ConjL07: ConjLesson = {
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [
-    { type: "heading", text: "Conjugaison des verbes en -er" },
+    {
+      type: "plain_list",
+      items: [
+        "Les verbes en **-er** sont les verbes les plus fréquents en français. Les verbes du 1er groupe finissent en **-er**.",
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Exemples :",
+      items: ["parler", "aimer", "travailler", "regarder"],
+    },
+    { type: "heading", text: "Comment former le verbe ?" },
+    { type: "heading", text: "Étape 1 : enlever -er", sub: true, accent: true },
+    {
+      type: "rule",
+      text: "On prend le verbe et on enlève **-er**.",
+      examples: [
+        { correct: "parler → parl" },
+        { correct: "aimer → aim" },
+        { correct: "travailler → travaill" },
+      ],
+    },
+    {
+      type: "note",
+      text: "Cette partie s'appelle le radical.",
+    },
+    { type: "heading", text: "Étape 2 : ajouter la terminaison", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: ["Au présent, on ajoute :"],
+    },
     {
       type: "table",
       tables: [
@@ -1149,29 +1179,15 @@ const a1ConjL07: ConjLesson = {
       ],
     },
     {
-      type: "rule",
-      text: "Formation : infinitif sans -r + terminaisons : -e, -es, -e, -ons, -ez, -ent.",
-      examples: [
-        { correct: "parler → je parle, tu parles, il parle…" },
-        { correct: "aimer → j'aime, tu aimes, elle aime…" },
+      type: "highlight",
+      label: "Attention à « je »",
+      items: [
+        "Quand le verbe commence par une **voyelle** ou un **h**, **je** devient **j'**.",
+        "j'aime",
+        "j'écoute",
+        "j'habite",
       ],
-    },
-    {
-      type: "note",
-      text: "Élision : je + voyelle → j' (j'aime, j'étudie, j'habite).",
-    },
-    {
-      type: "vocab",
-      title: "Verbes en -er courants",
-      items: ["aimer", "habiter", "travailler", "étudier", "parler", "manger", "regarder", "écouter"],
-    },
-    {
-      type: "rule",
-      text: "Forme négative : ne … pas autour du verbe.",
-      examples: [
-        { correct: "je ne parle pas", wrong: "je parle pas" },
-        { correct: "je n'aime pas", wrong: "je aime pas" },
-      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [
