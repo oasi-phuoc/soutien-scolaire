@@ -322,12 +322,15 @@ export function FrancaisClient() {
         </section>
       ) : (
         /* Grammaire / Vocabulaire / Conjugaison tabs — same SectionCard presentation */
+        /* Locked sections become "completed" so all lessons remain accessible */
         <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
           {SECTIONS.map((sec) => {
-            const state = hydrated ? getSectionState(sec.id, currentSection) : "locked";
+            const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
+            const state: SectionState = rawState === "locked" ? "completed" : rawState;
             const themes = FRENCH_THEMES.filter(
               (th) => th.section === sec.id && th.tab === tab,
             );
+            if (themes.length === 0) return null;
             return (
               <SectionCard
                 key={sec.id}
