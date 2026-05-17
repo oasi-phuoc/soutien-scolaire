@@ -145,7 +145,7 @@ const a1GrL02: GrammarLesson = {
       inlineArrows: true,
       noBulletItems: [0],
       items: [
-        "«ne» devant une voyelle (a e i o u y) → «n'»",
+        "{a}ne{/a} devant une voyelle (a e i o u y) → {a}n'{/a}",
         "il n{s}e{/s} est pas là → il n'est pas là",
         "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
       ],
