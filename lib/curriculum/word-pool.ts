@@ -16,7 +16,7 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "abricot",    phonemes: ["/a/", "/b/", "/r/", "/i/", "/k/", "/o/"] },
   { label: "avion",      phonemes: ["/a/", "/v/", "/i/"] },
   { label: "animal",     phonemes: ["/a/", "/n/", "/i/", "/m/", "/l/"] },
-  { label: "araignée",   phonemes: ["/a/", "/r/", "/e/"] },
+  { label: "araignee",   phonemes: ["/a/", "/r/", "/e/"] },
   { label: "alphabet",   phonemes: ["/a/", "/l/", "/f/", "/b/", "/t/"] },
   { label: "autobus",    phonemes: ["/o/", "/t/", "/b/", "/y/", "/s/"] },
   { label: "île",        phonemes: ["/i/", "/l/"] },
@@ -220,11 +220,11 @@ export const WORD_ITEMS: WordItem[] = [
 
 export const LETTER_WORDS: string[] = [
   // ── A ──
-  "arbre","ami","ananas","abricot","avion","animal","araignée","alphabet","autobus",
+  "arbre","ami","ananas","abricot","avion","animal","araignee","alphabet","autobus",
   "asperge","aubergine","avocat",
   "ambulance","abeille","aigle","arc","armoire","assiette","artiste","agenda",
   "antilope","astronaute","accordéon","acrobate","alligator","anniversaire",
-  "aquarium","arrosoir","aspirateur","araignée","avocado","albatros","araignée",
+  "aquarium","arrosoir","aspirateur","araignee","avocado","albatros","araignee",
   "alouette","agrafeuse","aimant","ampoule","ancre","antenne","armure","atlas",
   "avalanche","azote","arlequin","abricot","anneau","atome","arène","arche",
   // ── B ──
