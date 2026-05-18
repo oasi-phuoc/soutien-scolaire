@@ -3,9 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AppCard } from "@/components/ui/AppCard";
-import { AppButton } from "@/components/ui/AppButton";
 import { AppInput } from "@/components/ui/AppInput";
-import { ActionIconButton } from "@/components/ui/ActionIconButton";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
@@ -1869,7 +1867,7 @@ export function A1ModuleContent() {
   const passingGrade = LEVEL_PASSING_GRADES[level];
 
   // Sous-module déjà validé → "Suivant" débloqué sans refaire l'éval
-  const [submoduleAlreadyPassed, setSubmoduleAlreadyPassed] = useState(() => {
+  const [_submoduleAlreadyPassed, setSubmoduleAlreadyPassed] = useState(() => {
     try {
       const p = loadProgress();
       const sub = MATH_A1_LESSONS[loadA1Position().lessonIdx]?.submoduleId;
