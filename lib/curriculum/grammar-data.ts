@@ -100,7 +100,7 @@ const a1GrPhrases: GrammarLesson = {
     {
       type: "plain_list",
       items: [
-        "En français, une phrase suit l'ordre : {a}Sujet + Verbe + Complément{/a}.",
+        "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
       ],
       noBulletItems: [0],
     },
@@ -109,10 +109,10 @@ const a1GrPhrases: GrammarLesson = {
       headers: ["Sujet (S)", "Verbe (V)", "Complément (C)"],
       equalCols: true,
       rows: [
-        ["{a}Paul{/a}", "{a}mange{/a}", "une pomme."],
-        ["{a}Elle{/a}", "{a}habite{/a}", "à Paris."],
-        ["{a}Les enfants{/a}", "{a}jouent{/a}", "dans le parc."],
-        ["{a}Je{/a}", "{a}parle{/a}", "à Marie."],
+        ["Paul", "mange", "une pomme."],
+        ["Elle", "habite", "à Paris."],
+        ["Les enfants", "jouent", "dans le parc."],
+        ["Je", "parle", "à Marie."],
       ],
     },
     { type: "heading", text: "Le sujet (S)", sub: true, accent: true },

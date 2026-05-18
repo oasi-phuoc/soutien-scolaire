@@ -54,23 +54,23 @@ function renderArrow(text: string) {
 }
 
 function renderInlineMarkup(text: string, useArrow = true): React.ReactNode {
-  const parts = text.split(/(\{[abs]\}.*?\{\/[abs]\})/);
+  const parts = text.split(/(\{(?:su|ve|co|a|b|s)\}[\s\S]*?\{\/(?:su|ve|co|a|b|s)\})/);
   if (parts.length === 1) return useArrow ? renderArrow(text) : <>{text}</>;
   return (
     <>
       {parts.map((part, i) => {
         const accentMatch = part.match(/^\{a\}([\s\S]*?)\{\/a\}$/);
         const strikeMatch = part.match(/^\{s\}([\s\S]*?)\{\/s\}$/);
-        const boldMatch  = part.match(/^\{b\}([\s\S]*?)\{\/b\}$/);
-        if (accentMatch) {
-          return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
-        }
-        if (strikeMatch) {
-          return <span key={i} className="font-semibold line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
-        }
-        if (boldMatch) {
-          return <span key={i} className="font-semibold">{boldMatch[1]}</span>;
-        }
+        const boldMatch   = part.match(/^\{b\}([\s\S]*?)\{\/b\}$/);
+        const sujetMatch  = part.match(/^\{su\}([\s\S]*?)\{\/su\}$/);
+        const verbeMatch  = part.match(/^\{ve\}([\s\S]*?)\{\/ve\}$/);
+        const compMatch   = part.match(/^\{co\}([\s\S]*?)\{\/co\}$/);
+        if (accentMatch) return <span key={i} className="font-semibold text-[var(--color-accent-fr)]">{accentMatch[1]}</span>;
+        if (strikeMatch) return <span key={i} className="font-semibold line-through text-[var(--color-accent-fr)]">{strikeMatch[1]}</span>;
+        if (boldMatch)   return <span key={i} className="font-semibold">{boldMatch[1]}</span>;
+        if (sujetMatch)  return <span key={i} className="font-bold underline decoration-yellow-400 decoration-[3px] underline-offset-2">{sujetMatch[1]}</span>;
+        if (verbeMatch)  return <span key={i} className="font-bold underline decoration-red-500 decoration-[3px] underline-offset-2">{verbeMatch[1]}</span>;
+        if (compMatch)   return <span key={i} className="font-bold underline decoration-green-500 decoration-[3px] underline-offset-2">{compMatch[1]}</span>;
         return <React.Fragment key={i}>{useArrow ? renderArrow(part) : part}</React.Fragment>;
       })}
     </>
