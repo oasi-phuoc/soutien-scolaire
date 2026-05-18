@@ -958,6 +958,25 @@ function ClockReadExercise({
 
 // ── Match exercise ────────────────────────────────────────────────────────────
 
+// Palette of accent colours for match connections (6 distinct hues)
+const MATCH_COLORS = [
+  "text-violet-600 dark:text-violet-400",
+  "text-sky-600 dark:text-sky-400",
+  "text-rose-600 dark:text-rose-400",
+  "text-amber-600 dark:text-amber-400",
+  "text-emerald-600 dark:text-emerald-400",
+  "text-fuchsia-600 dark:text-fuchsia-400",
+];
+const MATCH_BG = [
+  "bg-violet-100 dark:bg-violet-900/30",
+  "bg-sky-100 dark:bg-sky-900/30",
+  "bg-rose-100 dark:bg-rose-900/30",
+  "bg-amber-100 dark:bg-amber-900/30",
+  "bg-emerald-100 dark:bg-emerald-900/30",
+  "bg-fuchsia-100 dark:bg-fuchsia-900/30",
+];
+const LETTERS = "abcdefghijklmnopqrstuvwxyz";
+
 function MatchExercise({
   exercise,
   onValidated,
@@ -969,159 +988,185 @@ function MatchExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const [rightItems] = useState<MatchPair[]>(() => shuffle(exercise.pairs));
-  const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
-  const [connections, setConnections] = useState<Map<number, number>>(
-    new Map(),
+  const [pairs] = useState<MatchPair[]>(() => {
+    const raw = exercise.pool && exercise.pool.length > 0
+      ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 8)
+      : exercise.pairs;
+    return raw;
+  });
+  const [rightItems] = useState<{ pair: MatchPair; origIdx: number }[]>(() =>
+    shuffle(pairs.map((p, i) => ({ pair: p, origIdx: i }))),
   );
+  const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
+  // connections: Map<leftIdx → rightSlotIdx>
+  const [connections, setConnections] = useState<Map<number, number>>(new Map());
   const [validated, setValidated] = useState(false);
 
-  // connections: Map<leftIdx, rightIdx>
+  const allConnected = connections.size === pairs.length;
 
-  function clickLeft(idx: number) {
+  useEffect(() => {
+    onCanValidateChange(allConnected && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allConnected, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allConnected) {
+      setValidated(true);
+      const allCorrect = pairs.every((pair, li) => {
+        const ri = connections.get(li);
+        return ri !== undefined && rightItems[ri]?.pair.right === pair.right;
+      });
+      onValidated(allCorrect);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function clickLeft(li: number) {
     if (validated) return;
-    setSelectedLeft((prev: number | null) => (prev === idx ? null : idx));
+    setSelectedLeft((prev) => (prev === li ? null : li));
   }
 
-  function clickRight(rightIdx: number) {
-    if (validated || selectedLeft === null) return;
-    setConnections((prev: Map<number, number>) => {
+  function clickRight(ri: number) {
+    if (validated) return;
+    if (selectedLeft === null) return;
+    setConnections((prev) => {
       const next = new Map(prev);
-      // Remove any existing connection to this right item
-      for (const [k, v] of next.entries()) {
-        if (v === rightIdx) next.delete(k);
-      }
-      next.set(selectedLeft, rightIdx);
+      for (const [k, v] of next.entries()) if (v === ri) next.delete(k);
+      next.set(selectedLeft, ri);
       return next;
     });
     setSelectedLeft(null);
   }
 
-  function validate() {
-    if (validated) return;
-    setValidated(true);
-    const allCorrect = exercise.pairs.every((pair, li) => {
-      const connectedRightIdx = connections.get(li);
-      if (connectedRightIdx === undefined) return false;
-      return rightItems[connectedRightIdx]?.right === pair.right;
-    });
-    onValidated(allCorrect);
+  // Assign a stable color index to each left-item once connected
+  const colorMap = new Map<number, number>();
+  let colorCounter = 0;
+  for (const [li] of connections.entries()) {
+    colorMap.set(li, colorCounter % MATCH_COLORS.length);
+    colorCounter++;
   }
 
-  useEffect(() => {
-    if (validateCommand > 0) validate();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validateCommand]);
-
-  useEffect(() => {
-    onCanValidateChange(!validated);
-  }, [validated, onCanValidateChange]);
-
   return (
-    <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">
-        {exercise.instruction}
-      </p>
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
 
-      <div className="grid grid-cols-2 gap-3">
-        {/* Left column */}
-        <div className="space-y-2">
-          <p className="text-center text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-            Pronoms
-          </p>
-          {exercise.pairs.map((pair, li) => {
-            const isSelected = selectedLeft === li;
-            const connectedRightIdx = connections.get(li);
-            const isConnected = connectedRightIdx !== undefined;
-            let isCorrect = false;
-            if (validated && isConnected) {
-              isCorrect =
-                rightItems[connectedRightIdx]?.right === pair.right;
-            }
-            let cls =
-              "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors cursor-pointer ";
-            if (validated) {
-              cls += isConnected
-                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                : isCorrect
-                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
-            } else {
-              cls += isSelected
-                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                : isConnected
-                  ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
-            }
-            return (
-              <button
-                key={li}
-                type="button"
-                className={cls}
-                onClick={() => clickLeft(li)}
-                disabled={validated}
-              >
-                {pair.left}
-              </button>
-            );
-          })}
+      {(exercise.leftLabel || exercise.rightLabel) && (
+        <div className="grid grid-cols-[1fr_auto_1fr] gap-x-3">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">{exercise.leftLabel ?? ""}</p>
+          <span />
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">{exercise.rightLabel ?? ""}</p>
         </div>
+      )}
 
-        {/* Right column */}
-        <div className="space-y-2">
-          <p className="text-center text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-            Formes
-          </p>
-          {rightItems.map((pair: MatchPair, ri: number) => {
-            const isTargetted = [...connections.values()].includes(ri);
-            const connectingLeft = [...connections.entries()].find(
-              ([, v]) => v === ri,
-            )?.[0];
-            let isCorrect = false;
-            if (validated && isTargetted && connectingLeft !== undefined) {
-              isCorrect =
-                pair.right === exercise.pairs[connectingLeft]?.right;
-            }
-            let cls =
-              "rounded-[var(--radius-md)] border px-3 py-2.5 text-sm font-medium text-center transition-colors ";
-            if (validated) {
-              cls += isTargetted
-                ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
-                : isCorrect
-                  ? "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-60";
-            } else {
-              cls +=
-                selectedLeft !== null
-                  ? isTargetted
-                    ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] cursor-pointer"
-                    : "border-[var(--color-accent-fr)]/30 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)] cursor-pointer"
-                  : isTargetted
-                    ? "border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-            }
-            return (
-              <button
-                key={ri}
-                type="button"
-                className={cls}
-                onClick={() => clickRight(ri)}
-                disabled={validated}
-              >
-                {pair.right}
+      <div className="grid grid-cols-[1fr_auto_1fr] gap-x-3 gap-y-2 items-center">
+        {pairs.map((pair, li) => {
+          const ri = connections.get(li);
+          const isConnected = ri !== undefined;
+          const colorIdx = colorMap.get(li) ?? 0;
+          const isSelected = selectedLeft === li;
+
+          let isCorrect = false;
+          if (validated && isConnected) {
+            isCorrect = rightItems[ri!]?.pair.right === pair.right;
+          }
+
+          // Left cell
+          let leftCls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors cursor-pointer ";
+          if (validated) {
+            leftCls += isCorrect
+              ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300"
+              : isConnected
+                ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
+                : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
+          } else if (isSelected) {
+            leftCls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+          } else if (isConnected) {
+            leftCls += `border-current ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`;
+          } else {
+            leftCls += "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]/50";
+          }
+
+          // Connector dot
+          const dotCls = `w-2 h-2 rounded-full mx-auto transition-colors ${
+            isConnected
+              ? validated
+                ? isCorrect ? "bg-emerald-500" : "bg-red-500"
+                : `bg-current ${MATCH_COLORS[colorIdx]}`
+              : isSelected
+                ? "bg-[var(--color-accent-fr)]"
+                : "bg-[var(--color-border-default)]"
+          }`;
+
+          return (
+            <React.Fragment key={li}>
+              {/* Left item */}
+              <button type="button" className={leftCls} onClick={() => clickLeft(li)} disabled={validated}>
+                <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{li + 1}.</span>
+                <span className="flex-1">{pair.left}</span>
               </button>
-            );
-          })}
-        </div>
+
+              {/* Connector dot */}
+              <div className="flex flex-col items-center gap-0.5">
+                <div className={dotCls} />
+              </div>
+
+              {/* Spacer — right items rendered separately below */}
+              <div />
+            </React.Fragment>
+          );
+        })}
+      </div>
+
+      {/* Right column — independently positioned */}
+      <div className="space-y-2">
+        {rightItems.map(({ pair, origIdx }, ri) => {
+          const connectingLeft = [...connections.entries()].find(([, v]) => v === ri)?.[0];
+          const isConnected = connectingLeft !== undefined;
+          const colorIdx = isConnected ? (colorMap.get(connectingLeft!) ?? 0) : 0;
+          const isActive = selectedLeft !== null;
+
+          let isCorrect = false;
+          if (validated && isConnected) {
+            isCorrect = pair.right === pairs[connectingLeft!]?.right;
+          }
+
+          let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors ";
+          if (validated) {
+            cls += isCorrect
+              ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300"
+              : isConnected
+                ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
+                : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
+          } else if (isConnected) {
+            cls += `border-current cursor-pointer ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`;
+          } else {
+            cls += isActive
+              ? "border-[var(--color-accent-fr)]/40 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] cursor-pointer hover:border-[var(--color-accent-fr)] hover:bg-[var(--color-accent-fr)]/8"
+              : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
+          }
+
+          return (
+            <button key={ri} type="button" className={cls} onClick={() => clickRight(ri)} disabled={validated}>
+              <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{LETTERS[origIdx]}.</span>
+              <span className="flex-1 text-left">{pair.right}</span>
+              {validated && isConnected && (
+                <span className="shrink-0">
+                  {isCorrect
+                    ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-emerald-500" aria-hidden><path d="M20 6L9 17l-5-5"/></svg>
+                    : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-red-500" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+                  }
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
 
       {validated && (
-        <div className="space-y-1">
-          {exercise.pairs.map((pair, li) => {
-            const connectedRightIdx = connections.get(li);
-            const isCorrect =
-              connectedRightIdx !== undefined &&
-              rightItems[connectedRightIdx]?.right === pair.right;
+        <div className="space-y-1 pt-1">
+          {pairs.map((pair, li) => {
+            const ri = connections.get(li);
+            const isCorrect = ri !== undefined && rightItems[ri]?.pair.right === pair.right;
             if (isCorrect) return null;
             return (
               <p key={li} className="text-xs text-emerald-600 dark:text-emerald-400">
@@ -1131,7 +1176,6 @@ function MatchExercise({
           })}
         </div>
       )}
-
     </div>
   );
 }
