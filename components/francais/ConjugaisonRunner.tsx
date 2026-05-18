@@ -122,7 +122,7 @@ function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number 
 
 // ── Verb toggle (G.5 interactive conjugation table) ───────────────────────────
 
-function VerbToggleView({ verbs, negation, buttonCols, noArrow }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }) {
+function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const verb = verbs[selectedIdx]!;
   const vowelRe = /[aeiouàâæéèêëîïôœùûüÿh]/i;
@@ -170,7 +170,7 @@ function VerbToggleView({ verbs, negation, buttonCols, noArrow }: { verbs: VerbT
                 {verb.infinitive}
               </th>
               <th className="px-3 py-2 text-left text-xs font-bold text-[var(--color-accent-fr)]">
-                {negation ? <><span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : noArrow ? "" : "→"}
+                {negation ? <><span className="font-bold">{nePrefix}</span>… <span className="font-bold">pas</span></> : ""}
               </th>
             </tr>
           </thead>
@@ -453,7 +453,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           case "verb_toggle":
             return (
               <div key={i}>
-                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} noArrow={block.noArrow} />
+                <VerbToggleView verbs={block.verbs} negation={block.negation} buttonCols={block.buttonCols} />
               </div>
             );
 
