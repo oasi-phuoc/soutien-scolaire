@@ -1137,6 +1137,15 @@ function checkSentence(text: string, verb?: "être" | "avoir"): SentenceCheck[] 
 
 // ── Write exercise ────────────────────────────────────────────────────────────
 
+type LTMatch = {
+  message: string;
+  shortMessage: string;
+  replacements: { value: string }[];
+  offset: number;
+  length: number;
+  rule: { id: string; issueType: string };
+};
+
 function WriteExercise({
   exercise,
   onValidated,
@@ -1150,6 +1159,30 @@ function WriteExercise({
 }) {
   const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
   const [validated, setValidated] = useState(false);
+  const [grammarErrors, setGrammarErrors] = useState<Record<number, LTMatch[]>>({});
+
+  // Debounced grammar check via LanguageTool (1.5 s after last keystroke)
+  useEffect(() => {
+    if (validated) return;
+    const timer = setTimeout(() => {
+      inputs.forEach((text, i) => {
+        if (text.trim().length < 5) {
+          setGrammarErrors((prev) => ({ ...prev, [i]: [] }));
+          return;
+        }
+        fetch("/api/check-grammar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text }),
+        })
+          .then((r) => r.json())
+          .then((data) => setGrammarErrors((prev) => ({ ...prev, [i]: data.matches ?? [] })))
+          .catch(() => {});
+      });
+    }, 1500);
+    return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputs, validated]);
 
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
@@ -1174,10 +1207,13 @@ function WriteExercise({
       {exercise.prompts.map((_, i) => {
         const checks = checkSentence(inputs[i], exercise.verb);
         const allOk = checks.length > 0 && checks.every(c => c.ok);
+        const ltErrors = (grammarErrors[i] ?? []).filter(
+          (m) => !["WHITESPACE_RULE", "FRENCH_WHITESPACE"].includes(m.rule.id),
+        );
         return (
           <div key={i} className="space-y-1.5">
             <div className="flex items-end gap-2">
-              <span className={`shrink-0 pb-1 text-sm font-medium ${allOk ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+              <span className={`shrink-0 pb-1 text-sm font-medium ${allOk && ltErrors.length === 0 ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
                 {i + 1}.
               </span>
               <input
@@ -1186,12 +1222,13 @@ function WriteExercise({
                 onChange={(e) => setInput(i, e.target.value)}
                 disabled={validated}
                 className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
-                  allOk
+                  allOk && ltErrors.length === 0
                     ? "border-emerald-400 dark:border-emerald-500"
                     : "border-[var(--color-text-secondary)]"
                 }`}
               />
             </div>
+            {/* Regex checks (majuscule, point final, verbe) */}
             {checks.length > 0 && (
               <div className="flex flex-wrap gap-x-3 gap-y-1 pl-5">
                 {checks.map((c, ci) => (
@@ -1200,6 +1237,21 @@ function WriteExercise({
                   </span>
                 ))}
               </div>
+            )}
+            {/* LanguageTool grammar errors */}
+            {ltErrors.length > 0 && (
+              <ul className="ml-5 space-y-1">
+                {ltErrors.map((err, ei) => (
+                  <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs text-amber-600 dark:text-amber-400">
+                    <span>⚠ {err.shortMessage || err.message}</span>
+                    {err.replacements[0]?.value && (
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                        → {err.replacements[0].value}
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
         );
