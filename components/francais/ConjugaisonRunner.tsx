@@ -1270,16 +1270,10 @@ function WriteExercise({
               />
             </div>
             {/* Internal verb check — shown only after validation */}
-            {validated && !checking && exercise.verb && (inputs[i] ?? "").trim().length > 2 && (
-              hasVerb(inputs[i] ?? "", exercise.verb) ? (
-                <p className="ml-5 text-xs text-emerald-600 dark:text-emerald-400">
-                  ✓ Verbe <strong>{exercise.verb}</strong> utilisé
-                </p>
-              ) : (
-                <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
-                  ⚠ Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
-                </p>
-              )
+            {validated && !checking && exercise.verb && (inputs[i] ?? "").trim().length > 2 && !hasVerb(inputs[i] ?? "", exercise.verb) && (
+              <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
+                ⚠ Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
+              </p>
             )}
             {/* LanguageTool results — shown only after validation */}
             {validated && !checking && ltErrors.length === 1 && (() => {
