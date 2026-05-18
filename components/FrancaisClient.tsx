@@ -5,11 +5,10 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
-import { loadProgress } from "@/lib/progress/math-progress";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 
 type SectionDef  = { id: FrenchSection; code: string; title: string };
-type SectionState = "locked" | "in_progress" | "completed" | "unlocked";
+type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
 const SECTIONS: SectionDef[] = [
@@ -20,27 +19,12 @@ const SECTIONS: SectionDef[] = [
   { id: "B2", code: "B2", title: "Niveau B2" },
 ];
 
-const SECTION_ORDER: FrenchSection[] = ["A0", "A1", "A2", "B1", "B2"];
-
 const TABS: { id: FrenchTab; label: string }[] = [
   { id: "vocabulaire", label: "Vocabulaire" },
   { id: "grammaire",   label: "Grammaire" },
 ];
 
-const LEVEL_TO_SECTION: Record<string, FrenchSection> = {
-  PA: "A0", ALPHA: "A0", A0: "A0", A1: "A1", A2: "A2", B1: "B1", B2: "B2",
-};
-
 const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire"];
-
-function getSectionState(sectionId: FrenchSection, currentSection: FrenchSection | null): SectionState {
-  if (!currentSection) return "locked";
-  const currentIdx = SECTION_ORDER.indexOf(currentSection);
-  const sectionIdx = SECTION_ORDER.indexOf(sectionId);
-  if (sectionIdx < currentIdx) return "completed";
-  if (sectionIdx === currentIdx) return "in_progress";
-  return "locked";
-}
 
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
@@ -64,7 +48,6 @@ function SectionStateBadge({ state }: { state: SectionState }) {
         En cours
       </span>
     );
-  if (state === "unlocked") return null;
   return (
     <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
       Verrouillé
@@ -97,7 +80,7 @@ function LessonDot({ state }: { state: LessonState }) {
   );
 }
 
-// ── Section card (all tabs) ───────────────────────────────────────────────────
+// ── Section card ──────────────────────────────────────────────────────────────
 
 function SectionCard({
   sec,
@@ -114,14 +97,13 @@ function SectionCard({
   hydrated: boolean;
   returnTab?: FrenchTab;
 }) {
-  const locked = state === "locked";
+  const locked     = state === "locked";
   const inProgress = state === "in_progress";
-  // in_progress: always visible, not toggleable
-  // locked / completed: collapsed by default, toggleable
   const [expanded, setExpanded] = useState(false);
+  // in_progress section is always open; completed/locked can be toggled
   const showContent = inProgress || expanded;
 
-  // First uncompleted lesson in this section (for sequential unlock within in_progress)
+  // First uncompleted lesson — the only one accessible in in_progress
   const firstAvailableSlug =
     hydrated && !locked
       ? (themes.find((th) => !completedSlugs.has(th.slug))?.slug ?? null)
@@ -130,14 +112,13 @@ function SectionCard({
   function lessonState(th: FrenchTheme): LessonState {
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Only fully-completed sections (all lessons done) have every lesson accessible
+    // Completed section: all lessons remain accessible for review
     if (state === "completed") return "available";
-    // In-progress or unlocked: only first uncompleted is available; rest locked
+    // In-progress: only the first uncompleted lesson is accessible
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
   }
 
-  // Shared icon box
   const iconBox = (
     <div
       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
@@ -157,7 +138,7 @@ function SectionCard({
             : "border-[var(--color-border-default)]"
       }`}
     >
-      {/* Header — in_progress: static div; locked/completed: clickable button */}
+      {/* Header */}
       {inProgress ? (
         <div className="flex w-full items-center gap-3 px-4 pt-4 pb-3">
           {iconBox}
@@ -169,7 +150,8 @@ function SectionCard({
       ) : (
         <button
           type="button"
-          onClick={() => setExpanded((e) => !e)}
+          onClick={() => !locked && setExpanded((e) => !e)}
+          disabled={locked}
           className="flex w-full items-center gap-3 px-4 pt-4 pb-3 text-left"
         >
           {iconBox}
@@ -177,14 +159,16 @@ function SectionCard({
             <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
           </div>
           <SectionStateBadge state={state} />
-          <svg
-            width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" strokeWidth="2"
-            className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
-            aria-hidden
-          >
-            <path d="M9 18l6-6-6-6" />
-          </svg>
+          {!locked && (
+            <svg
+              width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2"
+              className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`}
+              aria-hidden
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          )}
         </button>
       )}
 
@@ -254,14 +238,10 @@ export function FrancaisClient() {
   const [tab, setTab] = useState<FrenchTab>(
     initialTab && VALID_TABS.includes(initialTab) ? initialTab : "vocabulaire",
   );
-  const [currentSection, setCurrentSection] = useState<FrenchSection | null>(null);
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const prog  = loadProgress();
-    const level = prog.frenchLevel ?? "PA";
-    setCurrentSection((LEVEL_TO_SECTION[level] ?? "A0") as FrenchSection);
     setCompletedSlugs(getCompletedFrenchLessons());
     setHydrated(true);
 
@@ -302,27 +282,55 @@ export function FrancaisClient() {
       </div>
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
-        {SECTIONS.map((sec) => {
-          const rawState = hydrated ? getSectionState(sec.id, currentSection) : "locked";
-          const themes = FRENCH_THEMES.filter(
-            (th) => th.section === sec.id &&
-              (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
+        {(() => {
+          // All themes for this tab, ordered by section
+          const allTabThemes = SECTIONS.flatMap((sec) =>
+            FRENCH_THEMES.filter(
+              (th) =>
+                th.section === sec.id &&
+                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
+            ),
           );
-          if (themes.length === 0) return null;
-          const allDone = hydrated && themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
-          const state: SectionState = rawState === "locked" ? "locked" : allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
-          return (
-            <SectionCard
-              key={sec.id}
-              sec={sec}
-              state={state}
-              themes={themes}
-              completedSlugs={hydrated ? completedSlugs : new Set()}
-              hydrated={hydrated}
-              returnTab={tab}
-            />
-          );
-        })}
+
+          let prevCount = 0; // cumulative count of themes in preceding sections
+
+          return SECTIONS.map((sec) => {
+            const themes = allTabThemes.filter((th) => th.section === sec.id);
+            if (themes.length === 0) return null;
+
+            let state: SectionState;
+            if (!hydrated) {
+              state = "locked";
+            } else {
+              const prevThemes = allTabThemes.slice(0, prevCount);
+              // First section (no previous themes) is always open
+              const sectionAccessible =
+                prevThemes.length === 0 ||
+                prevThemes.every((th) => completedSlugs.has(th.slug));
+
+              if (!sectionAccessible) {
+                state = "locked";
+              } else {
+                const allDone = themes.every((th) => completedSlugs.has(th.slug));
+                state = allDone ? "completed" : "in_progress";
+              }
+            }
+
+            prevCount += themes.length;
+
+            return (
+              <SectionCard
+                key={sec.id}
+                sec={sec}
+                state={state}
+                themes={themes}
+                completedSlugs={hydrated ? completedSlugs : new Set()}
+                hydrated={hydrated}
+                returnTab={tab}
+              />
+            );
+          });
+        })()}
       </section>
 
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
