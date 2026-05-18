@@ -7,11 +7,7 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: { fr: "Notion et représentation", en: "Concept and representation", ar: "المفهوم والتمثيل", fa: "مفهوم و نمایش", ti: "ፍርቂ ምፍላጥ", uk: "Поняття та зображення" },
       paragraphs: {
-        fr: [
-          "Une fraction représente une partie d'un tout. Elle est composée d'un numérateur (le nombre en haut — combien de parts on a) et d'un dénominateur (le nombre en bas — en combien de parts égales l'unité est divisée).",
-          "Exemples : 3/4 signifie « 3 parts sur 4 ». 1/2 = une moitié. 2/3 = deux tiers. 5/10 = cinq dixièmes.",
-          "Un entier peut s'écrire sous forme de fraction avec 1 au dénominateur : 3 = 3/1. De même, n/n = 1 pour tout n ≠ 0.",
-        ],
+        fr: ["Une fraction représente une partie d'un tout."],
         en: [
           "A fraction represents a part of a whole. It has a numerator (top number — how many parts we have) and a denominator (bottom number — how many equal parts the whole is divided into).",
           "Examples: 3/4 means '3 parts out of 4'. 1/2 = one half. 2/3 = two thirds. 5/10 = five tenths.",
