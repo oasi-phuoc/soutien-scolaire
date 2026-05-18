@@ -1228,18 +1228,21 @@ function WriteExercise({
             {/* LanguageTool results — shown only after validation */}
             {validated && !checking && ltErrors.length > 0 && (
               <ul className="ml-5 space-y-1">
-                {ltErrors.map((err, ei) => (
-                  <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs">
-                    <span className="text-amber-600 dark:text-amber-400">
-                      ⚠ {err.shortMessage || err.message}
-                    </span>
-                    {err.replacements[0]?.value && (
-                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                        → {err.replacements[0].value}
+                {ltErrors.map((err, ei) => {
+                  const suggestions = err.replacements.slice(0, 3).map((r) => r.value).filter(Boolean);
+                  return (
+                    <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs">
+                      <span className="text-amber-600 dark:text-amber-400">
+                        ⚠ {err.shortMessage || err.message}
                       </span>
-                    )}
-                  </li>
-                ))}
+                      {suggestions.length > 0 && (
+                        <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                          → {suggestions.join(" / ")}
+                        </span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             )}
             {isClean && (

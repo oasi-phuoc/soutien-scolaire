@@ -11,6 +11,7 @@ export async function POST(req: NextRequest) {
       text: text.trim(),
       language: "fr",
       enabledOnly: "false",
+      level: "picky",
     });
 
     const res = await fetch("https://api.languagetool.org/v2/check", {
