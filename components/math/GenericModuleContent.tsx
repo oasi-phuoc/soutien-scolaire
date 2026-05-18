@@ -215,7 +215,7 @@ export function GenericModuleContent({ moduleId }: { moduleId: string }) {
       setExStatus(ok ? "correct" : "wrong");
       setExAttempts((a) => a + 1);
     };
-    stepValidateDisabled = answer.trim() === "";
+    stepValidateDisabled = false;
     if (exStatus === "wrong") {
       stepReset = () => {
         setAnswer("");
@@ -224,8 +224,7 @@ export function GenericModuleContent({ moduleId }: { moduleId: string }) {
     }
   }
 
-  const nextDisabled =
-    currentStep?.kind === "exercise" && exStatus !== "correct" && exAttempts < 2;
+  const nextDisabled = false;
 
   if (!lessons || lessons.length === 0 || steps.length === 0) {
     return (
