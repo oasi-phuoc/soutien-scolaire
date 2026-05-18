@@ -150,22 +150,28 @@ const a1GrPhrases: GrammarLesson = {
     {
       type: "highlight",
       label: "COD — Complément d'Objet Direct",
-      inlineArrows: true,
-      items: ["Répond à {a}quoi ? / qui ?{/a} → Je mange {a}une pomme{/a}."],
+      items: [
+        "Le complément répond à la question {a}quoi ? / qui ?{/a}",
+        "Je mange {a}une pomme{/a}.",
+      ],
       noBulletItems: [0],
     },
     {
       type: "highlight",
       label: "COI — Complément d'Objet Indirect",
-      inlineArrows: true,
-      items: ["Répond à {a}à qui ? / à quoi ?{/a} → Je parle {a}à Marie{/a}."],
+      items: [
+        "Le complément répond à la question {a}à qui ? / à quoi ?{/a}",
+        "Je parle {a}à Marie{/a}.",
+      ],
       noBulletItems: [0],
     },
     {
       type: "highlight",
       label: "CC — Complément Circonstanciel",
-      inlineArrows: true,
-      items: ["Répond à {a}où ? / quand ? / comment ?{/a} → J'habite {a}à Paris{/a}."],
+      items: [
+        "Le complément répond à la question {a}où ? / quand ? / comment ?{/a}",
+        "J'habite {a}à Paris{/a}.",
+      ],
       noBulletItems: [0],
     },
     {
