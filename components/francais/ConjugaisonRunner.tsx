@@ -1104,7 +1104,21 @@ type LTMatch = {
   shortMessage: string;
   replacements: { value: string }[];
   rule: { id: string };
+  offset: number;
+  length: number;
 };
+
+function buildCorrectedSentence(text: string, matches: LTMatch[]): string {
+  const sorted = [...matches]
+    .filter((m) => m.replacements[0]?.value !== undefined)
+    .sort((a, b) => b.offset - a.offset);
+  let result = text;
+  for (const m of sorted) {
+    const repl = m.replacements[0]!.value;
+    result = result.slice(0, m.offset) + repl + result.slice(m.offset + m.length);
+  }
+  return result;
+}
 
 const LT_IGNORE = new Set([
   "WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE",
@@ -1245,25 +1259,36 @@ function WriteExercise({
               )
             )}
             {/* LanguageTool results — shown only after validation */}
-            {validated && !checking && ltErrors.length > 0 && (
-              <ul className="ml-5 space-y-1">
-                {ltErrors.map((err, ei) => {
-                  const suggestions = err.replacements.slice(0, 3).map((r) => r.value).filter(Boolean);
-                  return (
-                    <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs">
-                      <span className="text-amber-600 dark:text-amber-400">
-                        ⚠ {err.shortMessage || err.message}
+            {validated && !checking && ltErrors.length === 1 && (() => {
+              const err = ltErrors[0]!;
+              const suggestions = err.replacements.slice(0, 3).map((r) => r.value).filter(Boolean);
+              return (
+                <ul className="ml-5 space-y-1">
+                  <li className="flex flex-wrap items-baseline gap-1 text-xs">
+                    <span className="text-amber-600 dark:text-amber-400">
+                      ⚠ {err.shortMessage || err.message}
+                    </span>
+                    {suggestions.length > 0 && (
+                      <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                        → {suggestions.join(" / ")}
                       </span>
-                      {suggestions.length > 0 && (
-                        <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                          → {suggestions.join(" / ")}
-                        </span>
-                      )}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+                    )}
+                  </li>
+                </ul>
+              );
+            })()}
+            {validated && !checking && ltErrors.length > 1 && (() => {
+              const corrected = buildCorrectedSentence(inputs[i] ?? "", ltErrors);
+              const changed = corrected !== (inputs[i] ?? "").trim();
+              return (
+                <div className="ml-5 space-y-0.5 text-xs">
+                  <p className="text-amber-600 dark:text-amber-400">⚠ Diverses corrections nécessaires</p>
+                  {changed && (
+                    <p className="font-semibold text-emerald-600 dark:text-emerald-400">→ {corrected}</p>
+                  )}
+                </div>
+              );
+            })()}
             {isClean && (
               <p className="ml-5 text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</p>
             )}
