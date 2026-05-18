@@ -163,6 +163,15 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
         </div>
       );
     }
+    case "svg":
+      return (
+        <div className="my-1 overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-3">
+          <div dangerouslySetInnerHTML={{ __html: block.markup }} />
+          {block.captionFr && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      );
     case "plain":
     default: {
       const pv = block.type === "plain" ? block.pivot?.[pivot] : undefined;
