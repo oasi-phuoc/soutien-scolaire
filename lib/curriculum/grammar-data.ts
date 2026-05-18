@@ -144,7 +144,7 @@ const a1GrPhrases: GrammarLesson = {
     { type: "heading", text: "Le complément (C)", sub: true },
     {
       type: "plain_list",
-      items: ["Le complément complète le verbe. Il y a trois types :"],
+      items: ["Le complément complète le verbe. Le complément n'est pas toujours obligatoire. Il y a trois types :"],
       noBulletItems: [0],
     },
     {
@@ -173,10 +173,6 @@ const a1GrPhrases: GrammarLesson = {
         "J'habite {a}à Paris{/a}.",
       ],
       noBulletItems: [0],
-    },
-    {
-      type: "note",
-      text: "Le complément n'est pas toujours obligatoire : « Je mange. » est une phrase correcte.",
     },
   ],
   exercises: [
