@@ -575,22 +575,22 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
   if (lesson.submoduleId === "A1-1") {
     return hasAudio
-      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"]
-      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
+      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8" /*, "eval" — suspendu temporairement */]
+      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8" /*, "eval" */];
   }
   if (lesson.submoduleId === "A1-2") {
-    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16", "eval"];
+    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16" /*, "eval" */];
   }
   if (lesson.submoduleId === "A1-3") {
-    return ["theory", "ex17", "ex18", "ex19", "ex20", "eval"];
+    return ["theory", "ex17", "ex18", "ex19", "ex20" /*, "eval" */];
   }
   if (lesson.submoduleId === "A1-4") {
-    return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27", "eval"];
+    return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27" /*, "eval" */];
   }
   if (lesson.submoduleId === "A1-5") {
-    return ["theory", "eval"];
+    return ["theory" /*, "eval" */];
   }
-  return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
+  return hasAudio ? ["theory", "audio" /*, "eval" */] : ["theory" /*, "eval" */];
 }
 
 // ─── Ex9 — choix multiple blocs (dizaines + unités) ──────────────────────────
