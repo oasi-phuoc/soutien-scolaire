@@ -195,10 +195,6 @@ export function MathematiquesClient() {
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
             const isLocked = displayState === "locked";
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
-            const subPct =
-              prog && prog.subTotal
-                ? Math.round((prog.subProgress / prog.subTotal) * 100)
-                : 0;
 
             // Compute which submodule is next (sequential unlocking)
             const completedSubIds = new Set(
