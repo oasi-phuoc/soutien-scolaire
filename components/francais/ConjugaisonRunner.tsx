@@ -1558,6 +1558,101 @@ function ClassifyExercise({
   );
 }
 
+// ── Tag2 exercise (genre + nombre) ────────────────────────────────────────────
+
+function Tag2Exercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "tag2" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [items] = useState(() =>
+    shuffle([...exercise.pool]).slice(0, exercise.poolSize ?? 10),
+  );
+  const [answers, setAnswers] = useState<{ n: "S" | "P" | null; g: "M" | "F" | null }[]>(() =>
+    items.map(() => ({ n: null, g: null })),
+  );
+  const [validated, setValidated] = useState(false);
+
+  const allFilled = answers.every((a) => a.n !== null && a.g !== null);
+
+  useEffect(() => {
+    onCanValidateChange(allFilled && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allFilled, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allFilled) {
+      setValidated(true);
+      onValidated(
+        items.every((item, i) => answers[i]!.n === item.number && answers[i]!.g === item.gender),
+      );
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function tagBtn(
+    label: string,
+    active: boolean,
+    correct: boolean | null,
+    onClick: () => void,
+  ) {
+    let cls = "rounded border px-2 py-0.5 text-xs font-semibold transition-colors ";
+    if (!active) {
+      cls += "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-fr)]";
+    } else if (!validated) {
+      cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+    } else if (correct) {
+      cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
+    } else {
+      cls += "border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+    }
+    return (
+      <button key={label} onClick={onClick} className={cls}>
+        {label}
+      </button>
+    );
+  }
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        {items.map((item, i) => {
+          const ans = answers[i]!;
+          const nOk = validated ? ans.n === item.number : null;
+          const gOk = validated ? ans.g === item.gender : null;
+          return (
+            <div key={i} className="flex items-center gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2">
+              <span className="w-32 text-sm font-medium text-[var(--color-text-primary)]">{item.word}</span>
+              <div className="flex flex-col gap-1">
+                <div className="flex gap-1">
+                  {tagBtn("S", ans.n === "S", nOk !== null ? (ans.n === "S" ? nOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: "S" } : a)))}
+                  {tagBtn("P", ans.n === "P", nOk !== null ? (ans.n === "P" ? nOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: "P" } : a)))}
+                </div>
+                <div className="flex gap-1">
+                  {tagBtn("M", ans.g === "M", gOk !== null ? (ans.g === "M" ? gOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: "M" } : a)))}
+                  {tagBtn("F", ans.g === "F", gOk !== null ? (ans.g === "F" ? gOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: "F" } : a)))}
+                </div>
+              </div>
+              {validated && (nOk === false || gOk === false) && (
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                  → {item.number} {item.gender}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Exercise wrapper ──────────────────────────────────────────────────────────
 
 function ExerciseView({
@@ -1599,6 +1694,9 @@ function ExerciseView({
       )}
       {exercise.type === "clock_read" && (
         <ClockReadExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "tag2" && (
+        <Tag2Exercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
     </div>
   );

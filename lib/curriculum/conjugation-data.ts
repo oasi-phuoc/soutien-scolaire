@@ -39,7 +39,8 @@ export type Exercise =
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[] }
   | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number }
-  | { type: "clock_read"; title: string; instruction: string; clocks: { h: number; m: number; label: string; answer: string }[] };
+  | { type: "clock_read"; title: string; instruction: string; clocks: { h: number; m: number; label: string; answer: string }[] }
+  | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; gender: "M" | "F"; number: "S" | "P" }[]; poolSize?: number };
 
 export type ConjLesson = {
   slug: string;
