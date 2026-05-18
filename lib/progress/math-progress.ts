@@ -184,11 +184,7 @@ export function recomputeLocks(p: StoredProgressV1): StoredProgressV1 {
     const cur = next.math[m.id];
     if (!cur) continue;
     if (cur.state === "completed") continue;
-    const pre = prerequisitesMet(m, done);
-    if (!pre.ok) {
-      next.math[m.id] = { ...cur, state: "locked" };
-      continue;
-    }
+    // TEMP: unlock all for testing
     if (cur.state === "locked") {
       next.math[m.id] = { ...cur, state: "available" };
     }

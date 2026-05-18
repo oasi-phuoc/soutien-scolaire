@@ -133,7 +133,7 @@ export function MathematiquesClient() {
           Mathématiques
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          Algèbre, géométrie et statistiques
+          Algèbre et géométrie
         </h1>
       </header>
 

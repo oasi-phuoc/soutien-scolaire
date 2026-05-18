@@ -1470,29 +1470,6 @@ function AudioPlayer({ src }: { src: string }) {
   );
 }
 
-function BubbleProgressBar({ value }: { value: number }) {
-  const pct = Math.min(100, Math.max(0, value));
-  const bubbleLeft = Math.min(98, Math.max(2, pct));
-  return (
-    <div className="relative pb-1 pt-12" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100}>
-      <div className="absolute top-0 -translate-x-1/2 transition-all duration-500" style={{ left: `${bubbleLeft}%` }}>
-        <div className="flex h-11 w-11 items-center justify-center rounded-full shadow-lg"
-          style={{ background: "radial-gradient(circle at 35% 35%, #86efac, #22c55e 60%, #16a34a)" }}>
-          <span className="text-[11px] font-bold text-white">{pct}%</span>
-        </div>
-        <div className="mx-auto h-0 w-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-green-500" />
-      </div>
-      <div className="h-4 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-        <div className="h-full rounded-full transition-all duration-500"
-          style={{
-            width: `${pct}%`,
-            background: "repeating-linear-gradient(-45deg, #4ade80 0px, #4ade80 10px, #22c55e 10px, #22c55e 20px)",
-          }}
-        />
-      </div>
-    </div>
-  );
-}
 
 function ExerciseRow({
   num, inputId, answer, result, validated, correctWord,
@@ -1999,11 +1976,6 @@ export function A1ModuleContent() {
   const steps = getLessonSteps(lesson);
   const stepIdx = steps.indexOf(step);
 
-  const allStepCounts = MATH_A1_LESSONS.map((l) => getLessonSteps(l).length);
-  const totalSteps = allStepCounts.reduce((a, b) => a + b, 0);
-  const completedSteps = allStepCounts.slice(0, activeIdx).reduce((a, b) => a + b, 0) + stepIdx;
-  const overallPct = Math.round((completedSteps / totalSteps) * 100);
-
   const goTo = (s: Step) => { setStep(s); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   const changeLesson = (idx: number, targetStep: Step = "theory") => {
@@ -2050,8 +2022,22 @@ export function A1ModuleContent() {
   const isLastStep = activeIdx === MATH_A1_LESSONS.length - 1 && stepIdx === steps.length - 1;
 
   return (
-    <div className="space-y-4">
-      <BubbleProgressBar value={overallPct} />
+    <div className="pb-40">
+      {/* Step progress bar — segments per step in current lesson */}
+      <div className="flex gap-1 mb-2">
+        {steps.map((s, i) => (
+          <div
+            key={s}
+            className={`h-1.5 flex-1 rounded-full transition-colors ${
+              i < stepIdx
+                ? "bg-[var(--color-accent-alg)]"
+                : i === stepIdx
+                  ? "bg-[var(--color-accent-alg)] opacity-60"
+                  : "bg-[var(--color-border-default)]"
+            }`}
+          />
+        ))}
+      </div>
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
       {step === "theory" && (
