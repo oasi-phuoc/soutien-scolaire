@@ -141,7 +141,8 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-conj-l27", "G.23", "Pronominaux réfléchis et réciproques",        "Se laver, se regarder, se parler, s'écrire : formes et sens.",                           "conjugaison"),
   lesson("A1", "a1-conj-l28", "G.24", "Passé récent et présent continu",             "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",       "conjugaison"),
   lesson("A1", "a1-conj-l29", "G.25", "Passé composé avec avoir",                   "Participes passés réguliers (-é/-i) et irréguliers (fait, dit, pris…).",                 "conjugaison"),
-  lesson("A1", "a1-conj-l30", "G.26", "Passé composé avec être",                    "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",           "conjugaison"),
+  lesson("A1", "a1-conj-l30", "G.26",  "Passé composé avec être",                    "17 verbes (aller, venir, partir…) + accord du participe passé avec le sujet.",           "conjugaison"),
+  lesson("A1", "a1ConjL31",   "G.26b", "Négation au passé composé",                 "Ne…pas, jamais, plus, rien : encadrer l'auxiliaire et placer les mots négatifs.",          "conjugaison"),
   lesson("A1", "a1-gr-l24",   "G.27", "Le comparatif et le superlatif",              "Plus…que, moins…que, aussi…que + le plus / le moins.",                                  "grammaire"),
   lesson("A1", "a1-gr-l25",   "G.28", "Savoir ou connaître ?",                       "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",                   "grammaire"),
 
@@ -175,7 +176,8 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-voc-l12", "V.9",  "La ville et les lieux",           "Cinéma, boulangerie, mairie, restaurant… + prépositions de localisation.",   "vocabulaire"),
   lesson("A1", "a1-voc-l17", "V.10", "Le logement",                     "Pièces de l'appartement, meubles et équipements du quotidien.",              "vocabulaire"),
   lesson("A1", "a1-voc-l27", "V.11", "Les vêtements et les achats",     "Robe, pantalon, taille, marque + verbes acheter/porter/essayer.",            "vocabulaire"),
-  lesson("A1", "a1-voc-l18", "V.12", "Les loisirs et le sport",         "Sports, activités artistiques, expressions avec faire + du/de la/de l'.",   "vocabulaire"),
+  lesson("A1", "a1-voc-l18",    "V.12",  "Les loisirs et le sport",         "Sports, activités artistiques, expressions avec faire + du/de la/de l'.",   "vocabulaire"),
+  lesson("A1", "vacances-plage", "V.12b", "Les vacances et la plage",       "Plage, mer, maillot, crème solaire, bronzer, baignade et vocabulaire balnéaire.", "vocabulaire"),
 
   // ── A2 — Vocabulaire ────────────────────────────────────────────────────
   lesson("A2", "a2-voc-l01", "V.13", "Les voyages et les transports",   "Gare, aéroport, billet, itinéraire + verbes de déplacement A2.",           "vocabulaire"),

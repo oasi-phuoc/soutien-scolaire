@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AppProgressBar } from "@/components/ui/AppProgressBar";
 import {
   MATH_ALGEBRA_ORDER,
   MATH_GEOMETRY_TAB_ORDER,
@@ -215,12 +214,12 @@ export function MathematiquesClient() {
 
             const expanded = isModuleExpanded(m.id, displayState);
 
-            // Verrouillé / terminé : titre + badge seulement
-            if (displayState === "locked" || displayState === "completed") {
+            // Terminé (sans sous-modules à afficher) : titre + badge seulement
+            if (displayState === "completed") {
               return (
                 <li key={m.id}>
                   <div
-                    className={`flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 ${isLocked ? "opacity-60" : ""}`}
+                    className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3"
                   >
                     <p className="flex-1 text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
                     {prog?.medal ? <span className="text-sm">{prog.medal}</span> : null}
@@ -234,9 +233,11 @@ export function MathematiquesClient() {
               <li key={m.id}>
                 <div
                   className={`rounded-[var(--radius-lg)] border bg-[var(--color-bg-primary)] transition-colors ${
-                    recoHighlight
-                      ? "border-[var(--color-accent-alg)]/50"
-                      : "border-[var(--color-border-default)]"
+                    isLocked
+                      ? "border-[var(--color-border-default)] opacity-60"
+                      : recoHighlight
+                        ? "border-[var(--color-accent-alg)]/50"
+                        : "border-[var(--color-border-default)]"
                   }`}
                 >
                   {/* Module header */}
@@ -278,10 +279,25 @@ export function MathematiquesClient() {
                   {/* Progress bar (in_progress only, when expanded) */}
                   {expanded && displayState === "in_progress" && hydrated && (
                     <div className="px-4 pb-2">
-                      <AppProgressBar value={subPct} color={accentColor} height={4} />
-                      <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">
-                        {subPct}%
-                      </p>
+                      <div className="flex gap-1">
+                        {m.submodules.map((sub, si) => (
+                          <div
+                            key={sub.id}
+                            className={`h-1.5 flex-1 rounded-full transition-colors ${
+                              completedSubIds.has(sub.id)
+                                ? ""
+                                : si === firstAvailableSubIdx
+                                  ? "opacity-60"
+                                  : "bg-[var(--color-border-default)]"
+                            }`}
+                            style={
+                              completedSubIds.has(sub.id) || si === firstAvailableSubIdx
+                                ? { background: accentColor }
+                                : undefined
+                            }
+                          />
+                        ))}
+                      </div>
                     </div>
                   )}
 

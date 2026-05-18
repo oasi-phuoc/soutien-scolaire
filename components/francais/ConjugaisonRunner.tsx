@@ -473,6 +473,44 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             );
           }
 
+          case "word_cards": {
+            const cols = block.cols ?? 3;
+            return (
+              <div key={i} className="grid gap-3" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+                {block.items.map((word, wi) => (
+                  <div key={wi} className="flex flex-col items-center gap-2">
+                    <div className="flex w-full items-center justify-center rounded-lg bg-[var(--color-bg-secondary)] aspect-square">
+                      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-[var(--color-text-secondary)] opacity-40" aria-hidden>
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                      </svg>
+                    </div>
+                    <p className="text-center text-xs font-medium text-[var(--color-text-primary)]">{word}</p>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+
+          case "grammar_link":
+            return (
+              <a
+                key={i}
+                href={block.href}
+                className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-accent-fr)]/30 bg-[var(--color-accent-fr)]/8 px-4 py-3 transition-colors hover:bg-[var(--color-accent-fr)]/12"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-accent-fr)]" aria-hidden>
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                </svg>
+                <span className="text-sm font-medium text-[var(--color-accent-fr)]">{block.text}</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-auto shrink-0 text-[var(--color-accent-fr)]" aria-hidden>
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+            );
+
           default:
             return null;
         }

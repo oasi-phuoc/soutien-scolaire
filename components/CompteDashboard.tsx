@@ -252,7 +252,7 @@ export function CompteDashboard({
                     >
                       {checked ? <span className="block h-2 w-2 rounded-full bg-white" /> : null}
                     </span>
-                    <span dir={dir} lang={l.code} className="min-w-0 flex-1 text-lg">
+                    <span dir={dir} lang={l.code} className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
                       {l.label}
                     </span>
                     <span className="shrink-0 text-sm text-zinc-500">{l.labelFr}</span>
