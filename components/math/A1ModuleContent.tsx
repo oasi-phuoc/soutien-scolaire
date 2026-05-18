@@ -76,17 +76,6 @@ function renderBold(text: string): React.ReactNode {
   return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getPivotStr(block: MathRichBlock, pivot: PivotCode): string | undefined {
-  const b = block as any;
-  return b.pivot?.[pivot] as string | undefined;
-}
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getPivotRule(block: MathRichBlock, pivot: PivotCode): { title: string; items: string[] } | undefined {
-  const b = block as any;
-  return b.pivot?.[pivot] as { title: string; items: string[] } | undefined;
-}
-
 function RichBlock({ block, pivot, showPivot, isRtl }: {
   block: MathRichBlock;
   pivot: PivotCode;
@@ -97,7 +86,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
     case "heading":
       return <p className="mt-3 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</p>;
     case "rule": {
-      const pv = getPivotRule(block, pivot);
+      const pv = block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-4 py-3">
           <p className="mb-1 text-sm font-semibold text-[var(--color-accent-alg)]">{block.titleFr}</p>
@@ -118,7 +107,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
     case "note": {
-      const pv = getPivotStr(block, pivot);
+      const pv = block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] border border-amber-300/50 bg-amber-50 px-4 py-2 dark:bg-amber-950/20">
           <p className="text-sm text-amber-900 dark:text-amber-200">{renderBold(block.fr)}</p>
@@ -129,7 +118,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
     case "example": {
-      const pv = getPivotStr(block, pivot);
+      const pv = block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-4 py-2.5">
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">Exemple</p>
@@ -166,7 +155,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
     case "highlight": {
-      const pv = getPivotStr(block, pivot);
+      const pv = block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5 px-4 py-2">
           <p className="text-sm font-medium text-[var(--color-text-primary)]">{renderBold(block.fr)}</p>
@@ -178,7 +167,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
     }
     case "plain":
     default: {
-      const pv = "pivot" in block ? block.pivot?.[pivot as keyof typeof block.pivot] as string | undefined : undefined;
+      const pv = block.type === "plain" ? block.pivot?.[pivot] : undefined;
       return (
         <div>
           <p className="text-sm text-[var(--color-text-secondary)]">{renderBold(block.fr)}</p>
