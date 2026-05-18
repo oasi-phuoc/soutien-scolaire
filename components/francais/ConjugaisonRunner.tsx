@@ -1151,31 +1151,52 @@ function WriteExercise({
   const inputsRef = React.useRef(inputs);
   inputsRef.current = inputs;
 
-  // On validate: call LanguageTool for every non-empty phrase
+  // On validate: send all phrases in one combined request for better LT context
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
       setChecking(true);
       const snapshot = inputsRef.current;
 
-      Promise.all(
-        snapshot.map(async (text, i) => {
-          if (!text.trim() || text.trim().length < 3) return { i, matches: [] as LTMatch[] };
-          const res = await fetch("/api/check-grammar", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text }),
-          });
+      const SEP = "\n\n";
+      const parts: Array<{ idx: number; text: string; startOffset: number }> = [];
+      let currentOffset = 0;
+      snapshot.forEach((rawText, i) => {
+        const text = rawText.trim();
+        if (text.length < 3) return;
+        parts.push({ idx: i, text, startOffset: currentOffset });
+        currentOffset += text.length + SEP.length;
+      });
+
+      if (parts.length === 0) {
+        setChecking(false);
+        onValidated(true);
+        return;
+      }
+
+      const combinedText = parts.map((p) => p.text).join(SEP);
+
+      fetch("/api/check-grammar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: combinedText }),
+      })
+        .then(async (res) => {
           if (!res.ok) throw new Error("api");
           const data = await res.json();
-          return { i, matches: (data.matches ?? []) as LTMatch[] };
-        }),
-      )
-        .then((results) => {
+          const allMatches: LTMatch[] = (data.matches ?? []).filter(
+            (m: LTMatch) => !LT_IGNORE.has(m.rule.id),
+          );
+          // Map each match back to its sentence by offset
           const errs: Record<number, LTMatch[]> = {};
-          results.forEach(({ i, matches }) => {
-            errs[i] = matches.filter((m) => !LT_IGNORE.has(m.rule.id));
-          });
+          for (const match of allMatches) {
+            const part = parts.find(
+              (p) => match.offset >= p.startOffset && match.offset < p.startOffset + p.text.length,
+            );
+            if (!part) continue;
+            if (!errs[part.idx]) errs[part.idx] = [];
+            errs[part.idx].push({ ...match, offset: match.offset - part.startOffset });
+          }
           setGrammarErrors(errs);
         })
         .catch(() => setApiError(true))
@@ -1226,7 +1247,9 @@ function WriteExercise({
 
       {exercise.prompts.map((_, i) => {
         const ltErrors = grammarErrors[i] ?? [];
-        const isClean = validated && !checking && ltErrors.length === 0 && (inputs[i] ?? "").trim().length > 2;
+        const inputText = (inputs[i] ?? "").trim();
+        const verbOk = !exercise.verb || inputText.length <= 2 || hasVerb(inputs[i] ?? "", exercise.verb);
+        const isClean = validated && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
           <div key={i} className="space-y-1.5">
