@@ -1964,14 +1964,18 @@ function Tag2Exercise({
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="space-y-2">
+      <div className="space-y-1">
         {items.map((item, i) => {
           const ans = answers[i]!;
           const nWrong = validated && ans.n !== item.number;
           const gWrong = validated && item.gender !== null && ans.g !== item.gender;
           return (
-            <div key={i} className="flex items-center gap-3 rounded-full border border-[var(--color-border)] px-4 py-2">
-              <div className="flex items-center gap-2">
+            <div key={i} className="flex items-center gap-3 py-1.5">
+              {/* Number */}
+              <span className="w-5 shrink-0 text-right text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+
+              {/* Toggles — always same total width */}
+              <div className="flex shrink-0 items-center gap-2">
                 <PillGroup
                   options={["S", "P"] as const}
                   value={ans.n}
@@ -1979,7 +1983,7 @@ function Tag2Exercise({
                   validated={validated}
                   onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: v } : a))}
                 />
-                {item.gender !== null && (
+                {item.gender !== null ? (
                   <PillGroup
                     options={["M", "F"] as const}
                     value={ans.g}
@@ -1987,11 +1991,26 @@ function Tag2Exercise({
                     validated={validated}
                     onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: v } : a))}
                   />
+                ) : (
+                  /* Invisible spacer — same size as M/F PillGroup so words align */
+                  <div className="inline-flex overflow-hidden rounded-full border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
+                    <span className="px-3 py-1">M</span>
+                    <span className="px-3 py-1 border-l border-transparent">F</span>
+                  </div>
                 )}
               </div>
-              <span className="flex-1 text-sm font-semibold text-[var(--color-text-primary)]">{item.word}</span>
+
+              {/* Word (+ optional companion noun) */}
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">
+                {item.word}
+                {item.companion && (
+                  <span className="ml-1.5 font-normal text-[var(--color-text-secondary)]">{item.companion}</span>
+                )}
+              </span>
+
+              {/* Correction */}
               {(nWrong || gWrong) && (
-                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                <span className="ml-auto text-xs font-medium text-emerald-600 dark:text-emerald-400">
                   → {item.number}{item.gender ? ` ${item.gender}` : ""}
                 </span>
               )}
