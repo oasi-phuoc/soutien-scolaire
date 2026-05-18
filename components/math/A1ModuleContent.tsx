@@ -11,6 +11,7 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
 import type {
   MathExerciseItem,
+  MathRichBlock,
   MathSubmoduleLesson,
   ReadAloudCell,
   ReadAloudLegendItem,
@@ -73,6 +74,121 @@ function renderBold(text: string): React.ReactNode {
   const parts = text.split(/\*\*(.+?)\*\*/g);
   if (parts.length === 1) return text;
   return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getPivotStr(block: MathRichBlock, pivot: PivotCode): string | undefined {
+  const b = block as any;
+  return b.pivot?.[pivot] as string | undefined;
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getPivotRule(block: MathRichBlock, pivot: PivotCode): { title: string; items: string[] } | undefined {
+  const b = block as any;
+  return b.pivot?.[pivot] as { title: string; items: string[] } | undefined;
+}
+
+function RichBlock({ block, pivot, showPivot, isRtl }: {
+  block: MathRichBlock;
+  pivot: PivotCode;
+  showPivot: boolean;
+  isRtl: boolean;
+}) {
+  switch (block.type) {
+    case "heading":
+      return <p className="mt-3 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</p>;
+    case "rule": {
+      const pv = getPivotRule(block, pivot);
+      return (
+        <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-4 py-3">
+          <p className="mb-1 text-sm font-semibold text-[var(--color-accent-alg)]">{block.titleFr}</p>
+          <ul className="space-y-1 text-sm text-[var(--color-text-secondary)]">
+            {block.itemsFr.map((item, i) => (
+              <li key={i} className="flex gap-2"><span className="shrink-0 text-[var(--color-accent-alg)]">•</span>{renderBold(item)}</li>
+            ))}
+          </ul>
+          {showPivot && pv ? (
+            <div className="mt-2 border-t border-[var(--color-accent-alg)]/20 pt-2" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+              <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{pv.title}</p>
+              <ul className="space-y-0.5 text-xs italic text-[var(--color-text-secondary)]">
+                {pv.items.map((item, i) => <li key={i}>• {item}</li>)}
+              </ul>
+            </div>
+          ) : null}
+        </div>
+      );
+    }
+    case "note": {
+      const pv = getPivotStr(block, pivot);
+      return (
+        <div className="rounded-[var(--radius-md)] border border-amber-300/50 bg-amber-50 px-4 py-2 dark:bg-amber-950/20">
+          <p className="text-sm text-amber-900 dark:text-amber-200">{renderBold(block.fr)}</p>
+          {showPivot && pv ? (
+            <p className="mt-1 border-l-2 border-amber-400/40 pl-2 text-xs italic text-amber-700 dark:text-amber-300" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
+          ) : null}
+        </div>
+      );
+    }
+    case "example": {
+      const pv = getPivotStr(block, pivot);
+      return (
+        <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-4 py-2.5">
+          <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">Exemple</p>
+          <p className="mt-1 font-mono text-sm text-[var(--color-text-primary)]">{block.fr}</p>
+          {showPivot && pv ? (
+            <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
+          ) : null}
+        </div>
+      );
+    }
+    case "table": {
+      return (
+        <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+          <table className="w-full min-w-[260px] border-collapse text-sm">
+            <thead>
+              <tr className="bg-[var(--color-bg-secondary)]">
+                {block.headersFr.map((h, i) => (
+                  <th key={i} className="border border-[var(--color-border-default)] px-3 py-1.5 text-left text-xs font-semibold text-[var(--color-text-secondary)]">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, ri) => (
+                <tr key={ri} className={ri % 2 === 0 ? "" : "bg-[var(--color-bg-secondary)]/50"}>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="border border-[var(--color-border-default)] px-3 py-1.5 text-[var(--color-text-primary)]">{renderBold(cell)}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {block.captionFr ? <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p> : null}
+        </div>
+      );
+    }
+    case "highlight": {
+      const pv = getPivotStr(block, pivot);
+      return (
+        <div className="rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5 px-4 py-2">
+          <p className="text-sm font-medium text-[var(--color-text-primary)]">{renderBold(block.fr)}</p>
+          {showPivot && pv ? (
+            <p className="mt-1 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
+          ) : null}
+        </div>
+      );
+    }
+    case "plain":
+    default: {
+      const pv = "pivot" in block ? block.pivot?.[pivot as keyof typeof block.pivot] as string | undefined : undefined;
+      return (
+        <div>
+          <p className="text-sm text-[var(--color-text-secondary)]">{renderBold(block.fr)}</p>
+          {showPivot && pv ? (
+            <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-xs italic text-[var(--color-text-primary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
+          ) : null}
+        </div>
+      );
+    }
+  }
 }
 
 function formatTime(secs: number): string {
@@ -1748,6 +1864,11 @@ export function A1ModuleContent() {
     const initIdx = loadA1Position().lessonIdx;
     return MATH_A1_LESSONS[initIdx]?.submoduleId === "A1-1" ? generateA11EvalItems() : [];
   });
+  const [pooledExercises, setPooledExercises] = useState<MathExerciseItem[]>(() => {
+    const initLesson = MATH_A1_LESSONS[loadA1Position().lessonIdx];
+    if (!initLesson?.exercisePool) return [];
+    return shuffle([...initLesson.exercisePool]).slice(0, initLesson.poolSize ?? 5);
+  });
   const [evalAnswers, setEvalAnswers] = useState<Record<string, string>>({});
   const [evalResults, setEvalResults] = useState<Record<string, boolean>>({});
   const [evalGrade, setEvalGrade] = useState<number | null>(null);
@@ -1806,7 +1927,11 @@ export function A1ModuleContent() {
   if (!lesson) return null;
 
   // Items et logique de soumission de l'évaluation (utilisés par le timer)
-  const evalItems_curr = lesson.submoduleId === "A1-1" ? evalItems : (lesson.exercises as EvalItem[]);
+  const evalItems_curr = lesson.submoduleId === "A1-1"
+    ? evalItems
+    : lesson.exercisePool
+      ? (pooledExercises as EvalItem[])
+      : (lesson.exercises as EvalItem[]);
   const evalTotalPts = lesson.submoduleId === "A1-2" ? 10 : evalItems_curr.length;
   evalAutoSubmitRef.current = () => {
     if (evalSubmitted) return;
@@ -1905,6 +2030,12 @@ export function A1ModuleContent() {
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetEx16(); resetA12Eval(); }
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-4") { resetEx21(); resetEx22(); resetEx23(); resetEx24(); resetEx25(); resetEx26(); resetEx27(); }
+    const nextLesson = MATH_A1_LESSONS[idx];
+    if (nextLesson?.exercisePool) {
+      setPooledExercises(shuffle([...nextLesson.exercisePool]).slice(0, nextLesson.poolSize ?? 5));
+    } else {
+      setPooledExercises([]);
+    }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -1945,7 +2076,13 @@ export function A1ModuleContent() {
           }
         >
           <div className="space-y-3 text-sm leading-relaxed">
-            {theoryFr.paragraphs.map((p, i) => {
+            {lesson.theory.blocks ? (
+              lesson.theory.blocks.map((block, i) => (
+                <React.Fragment key={i}>
+                  {RichBlock({ block, pivot, showPivot: !!showPivotTranslation, isRtl })}
+                </React.Fragment>
+              ))
+            ) : theoryFr.paragraphs.map((p, i) => {
               const isA12 = lesson.submoduleId === "A1-2";
               const illustrationA12: Record<number, React.ReactNode> = isA12 ? {
                 1: <div className="mt-2 flex justify-center gap-2"><SvgUnite s={20} /><SvgUnite s={20} /></div>,

@@ -43,11 +43,23 @@ export type TheoryReadAloud = {
   audioSrc?: string;
 };
 
+/** Bloc de théorie riche (style section française). */
+export type MathRichBlock =
+  | { type: "heading"; fr: string }
+  | { type: "rule"; titleFr: string; itemsFr: string[]; pivot?: Partial<Record<PivotCode, { title: string; items: string[] }>> }
+  | { type: "note"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
+  | { type: "example"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
+  | { type: "table"; headersFr: string[]; rows: string[][]; captionFr?: string }
+  | { type: "plain"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
+  | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> };
+
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */
   title: Record<LocaleKey, string>;
   /** Paragraphes : français + traductions pivot (sous « Traduire » uniquement). */
   paragraphs: Record<LocaleKey, string[]>;
+  /** Blocs riches optionnels — remplacent paragraphs si présents. */
+  blocks?: MathRichBlock[];
   readAloud?: TheoryReadAloud;
 };
 
@@ -66,7 +78,12 @@ export type MathSubmoduleLesson = {
   submoduleId: string;
   submoduleCode: string;
   theory: MathTheoryBlock;
+  /** Questions fixes utilisées pour l’évaluation. */
   exercises: MathExerciseItem[];
+  /** Grande banque d’exercices pour la pratique (chiffres randomisés). */
+  exercisePool?: MathExerciseItem[];
+  /** Nombre d’exercices à piocher dans exercisePool (défaut : 5). */
+  poolSize?: number;
 };
 
 export function normalizeMathAnswer(raw: string): string {

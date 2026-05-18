@@ -1,0 +1,790 @@
+Tables des matières
+[ I ] LA NUMÉRATION	9
+Théorie – Lire et comprendre les nombres	9
+[ II ] LA COMPARAISON	15
+Théorie – Symboles de comparaison	15
+[ III ] LES SUITES	19
+Théorie – Suites de nombres naturels	19
+[ IV ] LES ADDITIONS	27
+Théorie – Additionner en ligne	27
+Théorie – Additionner en colonnes	33
+[ V ] LES SOUSTRACTIONS	41
+Théorie – Soustraire en ligne	41
+Théorie – Soustraire en colonne	47
+[ VI ] LES PROBLÈMES	55
+Théorie – EXPRESSION à CONNAÎTRE	55
+[ VII ] LES FRACTIONS, partie 1	65
+Théorie – Parts d’un nombre	65
+[ VIII ] LES NOMBRES DÉCIMAUX	74
+Théorie – Nombres à virgule	74
+Théorie – Comparer des nombres à virgule	75
+Théorie – Additioner des nombres à virgule	78
+Théorie – Soustraire des nombres à virgule	83
+Théorie – Suite de nombres à virgule	88
+[ IX ] LES MULTIPLICATIONS	94
+Théorie – Multiplier en ligne	94
+Théorie – Livret de 1 à 12	95
+Théorie – Multiplier en colonnes, partie 1	104
+Théorie – Multiplier en colonnes, partie 2	108
+[ X ] LES MULTIPLICATIONS DÉCIMALES	113
+Théorie – Multiplier en colonne avec décimales	113
+Théorie – Multuplier avec des facteurs	118
+[ XI ] LES DIVISIONS	124
+Théorie – Diviser en ligne	124
+Théorie – Livret de 1 à 12	125
+Théorie – Diviser en colonnes	130
+[ XII ] LES DIVISIONS DÉCIMALES	139
+Théorie – Diviser en colonnes avec décimales	139
+Théorie – Diviser avec des facteurs	149
+[ XIII ] LES PROBLÈMES	154
+Théorie – Double, triple et quadruple	154
+Théorie – Moitié, tiers et quart	155
+[ XIV ] LES PUISSANCES ET RACINES	170
+[ XV ] LES NOMBRES RELATIFS	171
+Théorie – négatifs et positifs	171
+Théorie – Comparer des nombres relatifs	171
+Théorie – Additionner des nombres relatifs	174
+Théorie – Soustraire des nombres relatifs	174
+Théorie – Multiplier des nombres relatifs	179
+Théorie – Diviser des nombres relatifs	179
+[ XVI ] LA PRIORITÉ DES OPÉRATIONS	184
+Théorie – Ordre des caculs	184
+[ XVII ] LES FRACTIONS, partie 2	190
+Théorie – Simplifier une fraction	190
+Théorie – Trouver la valeur décimale	192
+Théorie – Additionner / soustraire des fractions	193
+Théorie – Multiplier une fraction	198
+Théorie – Diviser une fraction	203
+[ XVIII ] LES ÉQUATIONS	208
+Théorie – Trouver la valeur de l’inconnue	208
+[ XIX ] LES PROPORTIONNALITÉS	215
+Théorie – Règle de trois	215
+Relecture
+Avant-propos
+Ce livret a été conçu pour servir de guide et de référence tout au long de l’année scolaire. Il offre une base structurée, avec une ligne directrice claire, permettant aux formatrices et formateurs de planifier les activités du premier semestre jusqu’à la fin du deuxième semestre.
+Chaque chapitre a été organisé de manière progressive afin de faciliter l’apprentissage des élèves et de leur permettre de consolider leurs compétences étape par étape.
+Il est conseillé de travailler le livret chapitre par chapitre en classe, afin d’éviter que tous les exercices soient réalisés uniquement à domicile. Cette approche favorise l’accompagnement direct des élèves, permet de répondre à leurs questions en temps réel et de corriger les incompréhensions dès qu’elles apparaissent.
+Les formatrices et formateurs ne sont pas obligés de traiter tous les exercices avec les élèves. L’essentiel est de s’assurer que les concepts clés de chaque chapitre sont bien compris. Cependant, si certaines thématiques semblent difficiles pour les élèves, les formateurs sont encouragés à produire ou à proposer des exercices supplémentaires adaptés, afin de renforcer la compréhension et la pratique.
+Pour suivre la logique pédagogique, il est recommandé aux formateurs de :
+Respecter l’ordre des chapitres pour assurer une progression cohérente.
+Adapter le rythme des séances selon le niveau et la compréhension des élèves.
+Utiliser les exercices du livret comme point de départ, mais compléter avec des activités variées lorsque cela est nécessaire.
+Séquences pédagogiques
+Ce livret a été conçu selon une progression pédagogique précise, visant à accompagner les élèves de manière structurée et progressive tout au long de l’année scolaire, tout en laissant une marge de liberté aux formateurs.
+Organisation générale du livret
+Le livret est divisé en plusieurs chapitres répartis sur deux semestres :
+Premier semestre : chapitres I à VIII
+Deuxième semestre : chapitres IX à XV
+Les chapitres suivants sont considérés comme optionnels. Ils peuvent être abordés selon le niveau de la classe, le temps disponible ou les besoins spécifiques des élèves.
+Structure interne de chaque chapitre
+Chaque chapitre débute par une partie théorique. Cette phase a pour objectif de :
+Introduire les notions essentielles à la compréhension des exercices et du cours
+Donner un cadre commun avant le travail pratique
+La durée consacrée à cette partie théorique n’est pas fixe. Elle doit être adaptée à la progression de la classe, au niveau des élèves et à leurs difficultés éventuelles. Le formateur est invité à ajuster cette phase selon les besoins observés.
+Déroulement type d’une séance
+Sur les deux périodes d’enseignement, il est recommandé de consacrer environ 15 minutes à :
+Un rappel des notions et termes déjà vus
+Un échauffement mathématique, sous forme de calculs rapides
+Ces activités peuvent être proposées de manière ludique (jeux, défis chronométrés, travail oral collectif), dans le but de stimuler la concentration et de renforcer les automatismes.
+Le reste du temps est consacré aux exercices du chapitre, à l’accompagnement des élèves et à l’explication des stratégies de résolution.
+Évaluations et contrôles
+Il est conseillé de proposer deux évaluations par semestre.
+Au premier semestre
+Chapitres I à V : qui constituent la base des calculs et des compétences fondamentales en algèbre. Cette évaluation vise à vérifier la compréhension des notions essentielles ainsi que la maîtrise des techniques de calcul de base.
+Chapitre VI : qui centre sur le développement du raisonnement et la lecture/compréhension des problèmes en français.
+Deuxième semestre
+Chapitres VIII et IX : consacrés aux multiplications
+Chapitres X et XI : consacrés aux divisions
+Tout au long de l’année, il est possible de mettre en place des évaluations intermédiaires sous forme de petits contrôles rapides (« petites feuilles ») avec des calculs minutés. Ces évaluations courtes permettent de suivre les progrès, d’identifier les difficultés et de renforcer les automatismes.
+Logique pédagogique à respecter
+Pour garantir la cohérence de l’enseignement, il est recommandé aux formatrices et formateurs de :
+Respecter l’ordre des chapitres
+Privilégier la compréhension avant la quantité d’exercices
+Adapter les activités et proposer des exercices supplémentaires si nécessaire ;
+Valoriser la progression des élèves, même lente, par des évaluations régulières et variées.
+LA NUMÉRATION
+Lire et comprendre les nombres
+La numération est la manière d’écrire, lire et comprendre les nombres. Dans notre système décimal, chaque chiffre a une valeur selon sa position :
+Dans le nombre 452, le chiffre 2 vaut deux unités (2)
+Dans le nombre 524, le chiffre 2 vaut deux dizaines (20)
+Dans le nombre 245, le chiffre 2 vaut deux centaines (200)
+Dans le nombre 2453, le chiffre 2 vaut deux milliers (2000)
+ Répondez aux questions.
+Quel est le chiffre des dizaines de 657 ?	5
+Quel est le chiffre des centaines de 4832 ?	8
+Quel est le chiffre des unités de 9105 ?	5
+Quel est le chiffre des milliers de 7426 ?	7
+Quel est le chiffre des dizaines de 3089 ?	8
+ Décomposez les nombres en milliers, centaines, dizaines et unités.
+5682 = 5000 + 600 + 80 + 2	
+3409 = 3000  + 400 + 9	
+7150 = 7000 + 100 + 50	
+8024 = 8000 + 20 + 4	
+9731 = 9000 + 700 + 30 + 1	
+ Associez les termes.
+.
+ Complétez les phrases.
+ Complétez les phrases.
+ Complétez les cases.
+ Complétez les cases.
+LA COMPARAISON
+Symboles de comparaison
+Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s’ils sont égaux.
+Lorsque les nombres à comparer n’ont pas le même nombre de chiffres, le nombre qui a le plus de chiffres est le plus grand.
+Lorsque les nombres à comparer ont le même nombre de chiffres, on compare les chiffres en partant depuis la gauche jusqu’à trouver des chiffres différents.
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =.
+ Comparez les paires de nombres avec < , > ou =. 
+LES SUITES 
+Suites de nombres naturels
+Une suite de nombres est une liste de nombres qui suivent une règle. Avant de calculer, il faut regarder :
+S’il y a deux nombres consécutifs et les nombres augmentent (ordre croissant)
+Effectuez une soustraction
+Additionnez le résulat au nombre
+S’il y a deux nombres consécutifs et les nombres diminuent (ordre décroissant)
+Effectuez une soustraction
+Soustrayez le résultat au nombre
+S’il n’y a pas deux nombres consécutifs. Et deux écarts.
+Effectuez une soustraction
+Divisez le résultat par deux.
+Additionnez ou soustrayez le nombre
+S’il n’y a pas deux nombres consécutifs. Et trois écarts.
+Effectuez une soustraction
+Divisez le résultat par trois.
+Additionnez ou soustrayez le nombre
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+LES ADDITIONS
+Additionner en ligne
+L’addition permet de réunir plusieurs quantités.
+Le signe de l’addition est le signe « + » « plus »
+Les nombres à additionner sont les termes.
+Le résultat de l’addition est la somme.
+Propriétés
+Commutativité
+Si l’on change l’ordre des termes d’une addition, la somme ne change pas. 
+Associativité 
+On peut additionner plus de deux termes et dans l’ordre que l’on veut.
+ Effectuez les additions.
+ Effectuez les additions.
+ Effectuez les additions à l’aide de l’associativité.
+ Trouvez le terme manquant.
+ Trouvez le terme manquant.
+Additionner en colonnes
+Voici les étapes pour additionner des nombres en colonnes.
+Écrivez les nombres en alignant les unités, les dizaines, les centaines.
+Commencez par additionner les unités. 
+Continuez avec les dizaines.
+Terminez avec les centaines.
+ Effectuez les additions.
+ Effectuez les additions.
+ Effectuez les additions.
+ Effectuez les additions.
+ Trouvez les chiffres manquants.
+ Trouvez les chiffres manquants.
+LES SOUSTRACTIONS
+Soustraire en ligne
+La soustraction permet de retirer une quantité à une autre. 
+Le signe de la soustraction est le signe « − » « moins »
+Les nombres de la soustraction sont les termes.
+Le résultat de la soustraction est la différence.
+Propriétés
+N’est pas commutative
+Si l’on change l’ordre des termes, on n’obtient pas le même résultat.
+ Effectuez les soustractions.
+ Effectuez les soustractions.
+ Effectuez les soustractions.
+ Trouvez le terme manquant.
+ Trouvez le terme manquant.
+Soustraire en colonne
+Voici les étapes pour soustraires des nombres en colonnes.
+Écrivez les nombres en alignant les unités, les dizaines, les centaines.
+Commencez par soustraire les unités. 
+Continuez avec les dizaines.
+Terminez avec les centaines.
+ Effectuez les soustractions.
+ Effectuez les soustractions.
+ Effectuez les soustractions.
+ Effectuez les soustractions.
+ Trouvez les chiffres manquants.
+ Trouvez les chiffres manquants.
+LES PROBLÈMES
+EXPRESSION à CONNAÎTRE
+Je ne choisis pas l’opération avec un mot, je la choisis avec la question.
+Je lis la question.
+Je regarde ce que je dois trouver. Qui ? Quoi ? Qu’est-ce que je cherche ?
+Addition
+Ali a 10 francs. Alona a 5 francs de plus qu’Ali. Combien d’argent a Alona ?
+Ali a 10 francs. Il a 5 francs de moins qu’Alona. Combien d’argent a Alona ?
+Ali a 10 francs. C’est 5 francs de moins qu’Alona. Combien d’argent a Alona ?
+Réponse : 10 + 5 = 15, Alona a 15 francs
+Soustraction
+Ali a 10 francs. Alona a 5 francs de moins qu’Ali. Combien d’argent a Alona ?
+Ali a 10 francs. Il a 5 francs de plus qu’Alona. Combien d’argent a Alona ?
+Ali a 10 francs. C’est 5 francs de plus qu’Alona. Combien d’argent a Alona ?
+Réponse : 10 – 5 = 5, Alona a 15 francs
+Dans la cuisine, Yousef a trois bocaux de bonbons. Le premier bocal contient 190 bonbons rouges, le deuxième 41 bonbons verts et le troisième 25 bonbons jaunes.
+Calcul : 
+Combien y a-t-il de bonbons en tout ?
+Phrase : 190 + 41 +25 = 256	
+Combien il y a de bonbons rouges de plus que de jaunes ?
+Phrase : 195 – 25 = 165	
+Yousef donne tous les rouges à Daryna. Combien il lui reste de bonbons ?
+Phrase : 41 + 25 = 66	
+La bibliothèque de l’école a une collection de 611 livres de français. Actuellement, 157 livres sont empruntés par des élèves. 
+Calcul : 
+Combien il reste de livres à la bibliothèque ?
+Phrase : 611 – 157 = 454	
+Combien de livres reste-t-il, si 264 livres supplémentaires sont prêtés demain ?
+Phrase : 454 – 264 = 190	
+Pour améliorer son français. Daryna a empruner un livre à la médiathèque. Le livre à 2135 pages. Elle a déjà lu les 1523 premières pages de son livre.
+Calcul : 
+Combien de pages Daryna doit-elle encore lire pour finir son livre ?
+Phrase : 2135 – 1523 = 612	
+Si Daryna lit 100 pages par jour, dans combien de jours elle finira son livre ?
+Phrase : 100 + 100 + 100 + 100 + 100 + 100 + 12 = 7 jours 	
+A Synecom, il y 36 classes. Dans toute l’école, il y a 538 élèves et 42 professeurs. Parmi les élèves, il y a 243 filles. 
+Calcul : 
+Combien il y a d’élèves garçons dans cette école ?
+Phrase : 538 – 243 = 295	
+Quelle est la différence entre le nombre de filles et de garçons ?
+Phrase : 295 − 243 = 52	
+Aujourd’hui, il a 49 élèves malades et 10 en retard. Combien il y a d’élèves à l’école ?
+Phrase : 538 – 49 = 489	
+Après son apprentissage. Yaroslav gagne par mois un salaire de 4290,50 francs. Après avoir payé toutes les factures, il lui reste 2150,70 francs. 
+Calcul : 
+Combien il a dépensé d’argent ?
+Phrase : 4290,50 – 2150,70 = 2139,80	
+Sofiia gagne 450,75 francs de plus qu’Yaroslv. Combien gagne-t-elle ?
+Phrase : 4290,50 + 450,75 = 4741,25	
+Mariam et Sofia collectionnent les gommettes. Mariam a 1523 gommettes. Il en a 169 de moins que Sofia. Combien il y a de gommettes dans la collection de Sofia ?
+Calcul : 1523 + 169 = 1692
+Phrase : 	
+Ce matin, dans le parking de la gare de Sion, il y a 127 vélos. Hier, il y avait 92 vélos de plus. Combien y avait-il de vélos hier ?
+Calcul : 127 + 92 = 219
+Phrase : 	
+Youssef achète plusieurs cadeaux. Il achète un livre à 54 francs, un jeu qui coûte 13,65 francs de plus que le livre, un puzzle à 35,70 francs et une peluche à 39,60 francs. Il paie avec un billet de 200 francs. Combien reçoit-il de monnaie ?
+Calcul :54 + 67,65 + 35,70 + 39,60 = 196,95, 200 − 196,95 = 3,05
+Phrase : 	
+Ahmed fabrique un collier pour sa mère. Il a déjà enfilé 20 perles bleues. Il ajoute ensuite autant de perles bleues que de perles blanches. Le collier terminé contient 44 perles. Combien y a-t-il de perles bleues au total ?
+Calcul : 44 − 20 = 24, donc 12 bleues et 12 blanches, bleues : 20 + 12 = 32
+Phrase : 	
+La médiathèque de Sion achète différents articles : 1382 livres de fiction, 724 documentaires, 640 albums jeunesse, 919 bandes dessinées, 23 CD, 4 livres audio, 70 DVD. Combien d’articles ont été achetés au total ?
+Calcul : 1382 + 724 + 640 + 919 + 23 + 4 + 70 = 3762
+Phrase : 	
+Reagan a 1860 livres dans sa bibliothèque. Elle en a 613 de plus que son frère Miles. Combien de livres Miles a-t-il dans sa bibliothèque ?
+Calcul : 1860 − 613 = 1247
+Phrase : 	
+Chloé veut acheter une paire de baskets. Elle a 185,20 francs et sa mère lui donne 57 francs. Combien coûtent les baskets ??
+Calcul : 185,20 + 57 = 242,2
+Phrase : 	
+Dans un jeu, Mariam possède 5500 francs. Aïcha a 1600 francs de moins. Timur a 1900 francs de plus qu’Aïcha et Salma a 4500 francs de plus que Timur. Combien d’argent possède Timur ?
+Calcul : Aïcha : 5500 − 1600 = 3900, Timur : 3900 + 1900 = 5800
+Phrase : 	
+Les élèves fabriquent des bonnets de quatre couleurs. Il y a 97 bonnets bleus, 43 bonnets verts de plus que les bleus, 37 bonnets rouges de moins que les verts et autant de bonnets jaunes que de verts. Combien y a-t-il d’élèves dans l’école ?
+Calcul : v : 97 + 43 = 140, r : 140 − 37 = 103, j : 140, total : 97 + 140 + 103 + 140 = 480
+Phrase : 	
+Svitlana prend des photos. Elle possède 1887 photos de montagnes, 1809 de forêts, 313 de chevaux et 199 de souris. Combien a-t-elle de photos d’animaux au total ?
+Calcul : 313 + 199 = 512
+Phrase : 	
+Omar a réalisé une mosaïque avec 1400 tesselles. Il a utilisé 250 rouges, 320 bleues, 400 blanches et 150 vertes. Combien de tesselles jaunes a-t-il utilisées?
+Calcul : 250 + 320 + 400 + 150 = 1120, puis 1400 − 1120 = 280
+Phrase : 	
+Le père de Rachid dispose de 375 francs pour ses courses. Il dépense 89,65 francs à l’épicerie et 17,50 francs à la boulangerie. À la fin, il lui reste 195 francs. Combien a-t-il dépensé à la boucherie ?
+Calcul : 375 − 195 = 180, puis 180 − (89,65 + 17,50) = 72,85
+Phrase : 	
+Un maraîcher récolte 270 salades le lundi. Le mardi, il en récolte 70 de plus que le lundi. Il sait qu’il reste 860 salades dans son champ. Combien de salades a-t-il récoltées pendant les deux premiers jours ?
+Calcul : 270 + 70 = 340, total : 270 + 340 = 610
+Phrase : 	
+Sana s’est acheté un violon complet avec étui, accessoires et archet pour 2410 francs. Le prix du violon est de 1800,80 francs et l’étui avec les accessoires coûte 220,30 francs. Combien coûte l’archet?
+Calcul : 2410 − (1800,80 + 220,30) = 2410 − 2021,10
+Phrase : 	
+Leila est allée deux fois à la piscine cette semaine. La première fois, elle a fait 13 traversées. La deuxième fois, elle en a fait 5 de plus que la première fois. Combien a-t-elle fait de traversées cette semaine ?
+Calcul : 13 + (13 + 5) = 31
+Phrase : 	
+Sofia a 3245,25 francs sur son compte bancaire. Elle dépense 1780,90 francs pour acheter un ordinateur. Combien lui reste‑t‑il ?
+Calcul : 3245,25 – 1780,90 = 1375,25
+Phrase : 	
+LES FRACTIONS, partie 1
+Parts d’un nombre
+Une fraction représente une partie d’un tout. Une fraction est composée de :
+Exemples
+ Cochez les bonnes réponses.
+La surface bleue représente le tiers (  ) de la figure ?
+La surface verte représente la moitié (  ) de la figure ?
+La surface rouge représente les trois quarts (  ) de la figure ?
+ Coloriez la partie de bande correspondant à la fraction.
+Cette bande  est égale à une unité.
+ Si c’est possible, coloriez la part correspondant à la fraction.
+ Si c’est possible, coloriez la part correspondant à la fraction.
+Cette bande  est égale à une unité.
+ Notez avec deux écritures différentes chaque nombre.
+ Notez le nombre d’une autre manière et  coloriez sur le dessin
+Ce carré est égal à une unité.
+ Coloriez les parts du carré unité.
+ Notez la fraction représentée par les couleurs.
+ Écrivez les sommes sous la forme d’une seule fraction.
+ Coloriez les surfaces représentées par la fraction.
+LES NOMBRES DÉCIMAUX
+Nombres à virgule
+Les nombres qui contiennent une virgule s’appelle des nombres décimaux. Ils servent à représenter des valeurs non entières. 
+Un nombre décimal est composé de :
+une partie entière
+une partie décimale séparée par une virgule
+Exemple : 4 321,98
+Comparer des nombres à virgule
+Pour comparer des nombres décimaux, on utilise les mêmes symboles <, > et = .
+(cf. Chapitre II)
+Commencez par comparer la partie entière. Ce qui est avant la virgule.
+Si les parties entières sont égales, comparez la partie décimale.
+On peut ajouter des zéros à droite de la virgule. Cela ne change pas la valeur du nombre.
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+Additioner des nombres à virgule
+Voici les étapes pour additionner des nombres décimaux en colonnes.
+Écrivez les nombres en alignant les dixièmes, les unités et les dizaines.
+Commencez par additionner les dixièmes. 
+Continuez avec les unités et ajoutez la virgule dans la même colonne.
+Terminez avec les dizaines.
+ Écrivez les nombres dans les grilles et effectuez les additions.
+ Écrivez les nombres dans les grilles et effectuez les additions.
+ Écrivez les nombres dans les grilles et effectuez les additions.
+ Écrivez les nombres dans les grilles et effectuez les additions.
+Soustraire des nombres à virgule
+Voici les étapes pour soustraires des nombres décimaux en colonnes.
+Écrivez les nombres en alignant les dixièmes, les unités et les dizaines.
+Commencez par soustraire les dixièmes. 
+Continuez avec les unités et ajoutez la virgule dans la même colonne.
+Terminez avec les dizaines.
+ Écrivez les nombres dans les grilles et effectuez les soustractions.
+ Écrivez les nombres dans les grilles et effectuez les soustractions.
+ Écrivez les nombres dans les grilles et effectuez les soustractions.
+ Écrivez les nombres dans les grilles et effectuez les soustractions.
+Suite de nombres à virgule
+Une suite de nombres est une liste de nombres qui suivent une règle. Avant de calculer, il faut regarder :
+S’il y a deux nombres consécutifs. Et si les nombres augmentent (ordre croissant)
+Effectuez une soustraction
+Additionnez le résulat au nombre
+S’il y a deux nombres consécutifs. Et si les nombres diminuent (ordre décroissant)
+Effectuez une soustraction
+Soustrayez le résultat au nombre
+S’il n’y a pas deux nombres consécutifs. Et deux écarts.
+Effectuez une soustraction
+Divisez le résultat par deux.
+Additionnez ou soustrayez le nombre
+S’il n’y a pas deux nombres consécutifs. Et trois écarts.
+Effectuez une soustraction
+Divisez le résultat par deux.
+Additionnez ou soustrayez le nombre
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+ Complétez la suite de nombres.
+LES MULTIPLICATIONS
+Multiplier en ligne
+Multiplier, c’est additionner plusieurs fois le même nombre. 
+Le signe de la multiplication est le signe « × » « fois »
+Les nombres à multiplier sont les facteurs.
+Le résultat de la multiplication est le produit.
+Propriétés
+Commutativité
+Si l’on change l’ordre des facteurs, le produit ne change pas. 
+Associativité 
+On peut multiplier plus de deux facteurs et dans l’ordre que l’on veut.
+Livret de 1 à 12
+ Écrivez le calcul à effectuer et le résultat.
+ Complétez le tableau.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Reliez chaque produit au bon résultat.
+ Entourez en bleu les produits égaux à 240 et en rouge les produits égaux à 180.
+ Remplissez chaque carré avec un nombre pour obtenir les résultats indiqués.
+Multiplier en colonnes, partie 1
+Effectuez une multiplication avec un des facteurs plus petit que 10.
+Écrivez les nombres en alignant les unités, les dizaines, les centaines.
+Commencez par multiplier les unités. 
+Continuez avec les dizaines.
+Terminez avec les centaines.
+ Effectuez les multiplications en colonne.
+ Effectuez les multiplications en colonne.
+ Effectuez les multiplications en colonne.
+Multiplier en colonnes, partie 2
+Effectuez une multiplication avec les deux facteurs plus grand que 10.
+Écrivez les nombres en alignant les unités, les dizaines, les centaines.
+Commencez par multiplier les unités. 
+Continuez avec les dizaines.
+Terminez avec les centaines.
+ Effectuez les multiplications en colonne.
+ Effectuez les multiplications en colonne.
+ Effectuez les multiplications en colonne.
+ Effectuez les multiplications en colonne.
+LES MULTIPLICATIONS DÉCIMALES
+Multiplier en colonne avec décimales
+Effectuez une multiplication avec un des facteurs décimaux : « 3,14 × 2,5 » .
+Écrivez les nombres en en colonnes sans les virgules.
+Continuez avec les dizaines.
+Terminez avec les centaines.
+Comptez le nombre de chiffres après la virgule.
+ Écrivez les nombres dans les grilles et effectuez les multiplications.
+ Écrivez les nombres dans les grilles et effectuez les multiplications.
+ Écrivez les nombres dans les grilles et effectuez les multiplications.
+ Écrivez les nombres dans les grilles et effectuez les multiplications.
+Multuplier avec des facteurs
+Avec ces nombres, on divise pour calculer plus rapidement au lieu de multiplier.
+Avec ces nombres, on déplace le virgule vers la gauche au lieu de multiplier.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+LES DIVISIONS
+Diviser en ligne
+La division sert à partager ou répartir une quantité. C’est chercher combien de fois un nombre est contenu dans un autre.
+Le signe de la division est le signe « ÷ » « diviser »
+Le nombre que l’on divise est le dividende.
+Le nombre par lequel on divise est le diviseur.
+Le résultat de la division est le quotient.
+On ne peut pas échanger le dividende et le diviseur
+Livret de 1 à 12
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+ Effectuez les divisions le plus vite possible.
+Diviser en colonnes
+Voici les étapes pour diviser des nombres en colonnes.
+Écrivez le dividende à gauche et le diviseur à droite.
+Commencez par les centaines.
+Continuez avec les dizaines.
+Terminez avec les unités.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+LES DIVISIONS DÉCIMALES
+Diviser en colonnes avec décimales
+Voici les étapes pour diviser des nombres en colonnes.
+Écrivez le dividende à gauche et le diviseur à droite.
+Commencez par les dizaines.
+Continuez avec les unités.
+Placez la virgule et continuez avec les dixièmes.
+Quand il n’y a pas de chiffre, descendez un 0 et continuez avec les centièmes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+ Effectuez les divisions en colonnes.
+Diviser avec des facteurs
+Avec ces nombres, on divise pour calculer plus rapidement au lieu de multiplier.
+Avec ces nombres, on déplace le virgule vers la droite au lieu de multiplier.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+ Effectuez les multiplications le plus vite possible.
+LES PROBLÈMES
+Double, triple et quadruple
+Double
+Pour obtenir le double d’un nombre, on le multiplie par deux.
+Exemple : Le double de 4 est 8 (4 × 2).
+Triple
+Pour obtenir le triple d’un nombre, on le multiplie par trois.
+Exemple : Le triple de 4 est 12 (4 × 3).
+Quadruple
+Pour obtenir le quadruple d’un nombre, on le multiplie par quatre.
+Exemple : Le quadruple de 4 est 16 (4 × 4).
+Moitié, tiers et quart
+Moitié
+Pour obtenir la moitié d’un nombre, on divise par deux.
+Exemple : La moitié de 12 est 6 (12 ÷ 2).
+Tiers
+Pour obtenir le tiers d’un nombre, on le divise par trois.
+Exemple : Le tiers de 12 est 4 (12 ÷ 3).
+Quart
+Pour obtenir le quart d’un nombre, on le divise par quatre.
+Exemple : Le quart de 12 est 3 (12 ÷ 4).
+Ahmad marche sur un chemin. Il met un petit caillou tous les 8 pas. Il a mis 75 cailloux. Combien de pas a-t-il faits ?
+Calcul : 75 x 8 = 600
+Phrase : 	
+Dans le jardin de Anastasiia, il y a 6 lignes de 45 choux. Combien de choux la sorcière a-t-elle plantés ?
+Calcul : 6 x 45 = 270
+Phrase : 	
+Dans la chambre de Alona, 679 pierres précieuses sont cachées. Dans chaque boîte, il y a 7 pierres précieuses. Combien la sorcière a caché de boîtes ?
+Calcul : 679 ÷ 7 = 97
+Phrase : 	
+Dans la bibliothèque de Frozan, les livres sont rangées dans des bacs. Chaque bac contient 25 livres. Combien elle peut ranger de livres dans les 18 bacs ?
+Calcul : 25 x 18 = 450
+Phrase : 	
+Yulia a fait un parcours en voiture de 1270 km. Yeva a fait un trajet de 136 kilomètres de moins. Combien de kilomètres Yeva a-t-elle parcourus ?
+Calcul : 1270 – 136 = 1234
+Phrase : 	
+Omar a une collection de 23 bandes dessinées. Fatima a 5 fois plus de bandes dessinées qu’Omar. Combien Fatima a de bandes dessinées ?
+Calcul : 23 x 5 = 115
+Phrase : 	
+Dans une classe de 27 élèves, l’enseignante a distribué une boîte de 12 crayons de couleur à chaque élève. Combien l’enseignante a distribués de crayons de couleur ?
+Calcul : 27 x 12 = 324
+Phrase : 	
+Amina a acheté 13 cartes. Chaque carte contient 146 papillons. Combien Amina a de papillons ?
+Calcul : 146 x 13 = 1898
+Phrase : 	
+L'enseignante a reçu 16 francs et 80 centimes pour chacun de ses 61 étudiants. Quelle est la somme totale que l’enseignante a reçue ?
+Calcul : 16.80 x 61 = 1024.80
+Phrase : 	
+Au début de l’année, le professeur a 4972 feutres. Il donne 11 feutres à chaque élèves. Tous les élèves ont perdu 2 feutres. Combien il y a d’élève dans l’école ?
+Calcul : 4972 ÷ 11 = 452
+Phrase : 	
+Pour son cours d’ACM, une enseignante doit distribuer des feuilles de format A3. Sa classe compte 20 élèves. Elle achète 8 paquets de feuilles, et chaque paquet contient 100 feuilles. Combien de feuilles chaque élève recevra-t-il ?
+Calcul : 8 x 100 = 800	800 ÷ 20 = 40
+Phrase : 	
+Léonica a économisé 498 francs. Elle a économisé 123 francs de moins que Didier. Combien d’argent Didier a-t-il économisé ?
+Calcul : 498 + 123 = 621
+Phrase : 	
+Un tournoi de cricket est organisé à l’école. Les élèves sont répartis en 12 équipes de 10 joueurs chacune. Combien d’élèves participent au tournoi ?
+Calcul : 12 x 10 = 120
+Phrase : 	
+Pour décorer le terrain de sport, il faut 754 ballons. Les ballons sont vendus par sachets de 25. Combien de sachets le professeur doit-il acheter ?
+Calcul : 754 ÷ 25 = 30 (reste 4), donc il faut 31
+Phrase : 	
+Le professeur achète des pailles pour les invités. Chaque paquet contient 100 pailles et il achète 23 paquets. Combien de pailles a-t-il achetées au total ?
+Calcul : 23 x 100 = 2300
+Phrase : 	
+Pour les joueurs du tournoi, le professeur achète 35 paquets de glaces. Chaque paquet contient 12 glaces. Combien y a-t-il de glaces en tout ?
+Calcul : 35 x 12 = 420
+Phrase : 	
+Ezatullah range ses 1583 bâtonnets. Chaque fois qu’il a 10 bâtonnets, il forme un petit paquet et les attache avec un élastique. Combien d’élastiques utilise-t-il ?
+Calcul : 1583 ÷ 10 = 158 (reste 3)
+Phrase : 	
+Nadiia est bijoutière et possède 3069 perles de verre. Elle fabrique des colliers de 100 perles exactement. Combien de colliers peut-elle fabriquer ?
+Calcul : 3069 ÷ 100 = 30 (reste 69)
+Phrase : 	
+Au cinéma « Arlequin », une place coûte 17,90 francs. Lors d’une soirée, la caissière vend 32 billets. Quelle somme a-t-elle encaissée?
+Calcul : 17,90 x 32 = 572,80
+Phrase : 	
+Un confiseur remplit 52 sachets de gaufres. Chaque sachet contient 14 gaufres. Combien de gaufres a-t-il préparées au total ?
+Calcul : 52 x 14 = 728
+Phrase : 	
+Dans un poulailler, il y a 5 poules. Chaque poule pond 25 œufs par mois. Combien d’œufs sont pondus en une année complète ?
+Calcul : 25 x 12 = 300, puis 300 x 5 = 1500
+Phrase : 	
+A la gare de Sierre, il y a un grand parking à vélo. Dans ce parking il y a 18 rangées de 14 places. Combien il y a de places en tout ?
+Calcul : 18 x 14 = 252
+Phrase : 	
+Dimanche, il y avait 19 vélos sur le parking. Maintenant, il y en a 6 fois plus. Combien de vélos se trouvent maintenant sur le parking ?
+Calcul : 19 x 6 = 114
+Phrase : 	
+Paola et son papa ont planté 300 jonquilles et des tulipes. Paola a planté 26 tulipes et son papa a planté 5 tulipes de plus qu’elle. Combien de tulipes le papa de Paola a-t-il plantées ?
+Calcul : 26 + 5 = 31
+Phrase : 	
+Un tournoi de cricket est organisé et 32 équipes participent. Chaque équipe est composée de 7 élèves. Combien d’élèves participent à ce tournoi ?
+Calcul : 32 x 7 = 224
+Phrase : 	
+À la fin du tournoi, seuls les joueurs des trois meilleures équipes reçoivent une médaille. Chaque équipe compte 7 joueurs. Combien d’élèves reçoivent une médaille ?
+Calcul : 3 x 7 = 21
+Phrase : 	
+L’équipe classée sixième a marqué 19 buts pendant le tournoi. L’équipe gagnante a marqué trois fois plus de buts. Combien de buts l’équipe gagnante a-t-elle marqués ?
+Calcul : 19 x 3 = 57
+Phrase : 	
+Danylo joue aux fléchettes. Lors de la première partie, il place 6 fléchettes dans la zone à 30 points et 4 fléchettes dans la zone à 80 points. Combien de points a-t-il obtenus au total ?
+Calcul : 6 × 30 = 180 et 4 × 80 = 320, puis 180 + 320 = 500
+Phrase : 	
+Chaque soir de décembre, Samira fait du feu dans sa cheminée et brûle 5 bûches. Ce mois compte 31 jours, mais elle est absente pendant 11 jours. Combien de bûches a-t-elle brûlées en décembre ??
+Calcul : 31 − 11 = 20 jours, puis 20 × 5 = 100
+Phrase : 	
+Un cuisinier achète 5 plateaux de 30 œufs. Pour préparer une omelette, il utilise 2 œufs et il prépare 58 omelettes. Combien d’œufs lui reste-t-il après la préparation ?
+Calcul : 5 × 30 = 150 œufs, 58 × 2 = 116 œufs utilisés, 150 − 116 = 34
+Phrase : 	
+Ivan reçoit un album de 10 pages pour ranger ses timbres. Chaque page comporte 5 lignes et chaque ligne peut contenir 8 timbres. Il a déjà placé 232 timbres. Combien de timbres doit-il encore ajouter pour remplir entièrement l’album?
+Calcul : 10 × 5 × 8 = 400 timbres au total, 400 − 232 = 168
+Phrase : 	
+Monsieur Hassan souhaite aller au zoo avec ses 19 élèves. Le prix d’entrée est de 7,15 francs par élève et les enseignants ne paient pas. Il dispose de 150 francs. Cette somme est-elle suffisante ?
+Calcul : 19 × 7,15 = 135,85
+Phrase : 	
+Bilal a déjà placé 324 petites tomates sur les canapés. Il lui reste encore 89 tomates. Combien de tomates cerises avait-il en tout ?
+Calcul : 324 + 89 = 413
+Phrase : 	
+Les 70 élèves du CFR organisent une sortie à la piscine. Le transport coûte 5,20 francs par élève et l’entrée 4,40 francs par élève. Les enseignants donnent 575 francs pour la sortie. Ont-ils assez d’argent et, si oui, combien restera-t-il ?
+Calcul : 5,20 + 4,40 = 9,60 par élève, 70 × 9,60 = 672
+Phrase : 	
+Une entrée au cinéma coûte 12,30 francs pour un adulte. La classe EPL 1 se rend au cinéma avec 14 élèves et 2 enseignants, tous adultes. Combien ont-ils payé au total ?
+Calcul : 16 × 12,30 = 196,80
+Phrase : 	
+Daryna habite dans un petit village de 180 habitants. Son cousin Iryna habite dans un village 18 fois plus peuplé. Combien y a-t-il d’habitants dans le village d’Émile ?
+Calcul : 180 × 18 = 3240
+Phrase : 	
+La classe EPL 1 part en promenade. Les 24 élèves jouent au minigolf pour 12,70 francs et mangent une glace à 3,90 francs. L’enseignante mange seulement une glace. Combien l’enseignante doit-elle payer au total pour la classe ?
+Calcul : 24 × (12,70 + 3,90) = 24 × 16,60 = 398,40, puis 398,40 + 3,90 = 402,30
+Phrase : 	
+Lou est maçonne. Pour construire un nouveau mur, elle utilise des briques qui ont toutes le même poids. 15 briques pèsent 51 kilos. 40 briques pèsent 136 kilos. Combien pèsent 25 briques ?
+Calcul : 51 ÷ 15 = 3,4 kg par brique, 25 × 3,4 = 85
+Phrase : 	
+José et Amina emballent les 180 bouteilles d’huile d’olive dans des cartons de 18 bouteilles. Combien de cartons peuvent-ils remplir entièrement ?
+Calcul : 180 ÷ 18
+Phrase : 	
+Dans son sac, Réal a 45 billes en tout. Certaines sont jaunes, les autres sont vertes. Il y a deux fois plus de billes jaunes que de billes vertes. Combien il y a de billes de chaque couleur dans le sac de Réal ?
+Calcul : x (vert) + 2x = 45 → 3x = 45 → x = 15, 2x = 30
+Phrase : 	
+Dans un bol de farine, il y a 250 grammes de farine. Pour faire sa recette, Line a besoin de 325 grammes de farine. Combien de grammes de farine doit-elle ajouter dans le bol ?
+Calcul : 325 – 250 = 75
+Phrase : 	
+La professeure de dessin a commandé des feuilles de papier cartonné. Ces feuilles sont livrées dans 125 paquets de 75 feuilles. Combien de feuilles a-t-elle reçues ?
+Calcul : 125 × 75 = 9375
+Phrase : 	
+LES PUISSANCES ET RACINES
+Une puissance, c’est une façon rapide d’écrire une multiplication répétée. Elle est composée de deux éléments
+Exemple : 23 = 2 × 2 × 2 = 8
+La racine carrée, c’est l’opération inverse de la puissance 2. Quel nombre multiplié par lui-même donne ce nombre ?
+Quel nombre multiplier par lui-même donne 9 ? C’est : 3 × 3 = 9
+Exemple :  = 3
+LES NOMBRES RELATIFS
+négatifs et positifs
+Les nombres relatifs incluent les nombres positifs et négatifs. 
+L’opposé d’un nombre est celui qui a le signe contraire.
+« –3 » est l’opposé de « +3 »
+Comparer des nombres relatifs
+Un nombre négatif est toujours plus petit qu’un nombre positif.
+Pour deux nombres négatifs, le plus grand est celui qui est le plus près de 0.
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+ Comparez les paires de nombres avec < , > ou =. 
+Additionner des nombres relatifs
+Addition avec les mêmes signes.
+Addition avec des signes contraires.
+Soustraire des nombres relatifs
+Soustraire, c’est égal à additionner l’opposé.
+Soustraction avec les mêmes signes.
+Soustraction avec des signes contraires.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+Multiplier des nombres relatifs
+Multiplication avec les mêmes signes.
+Multiplication avec des signes contraires. 
+Diviser des nombres relatifs
+Division avec les mêmes signes.
+Division avec des signes contraires. 
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+LA PRIORITÉ DES OPÉRATIONS
+Ordre des caculs
+Quand il y a plusieurs opérations dans un calcul, on ne calcule pas n’importe comment. Il existe un ordre précis à respecter pour avoir le bon résultat.
+Les parenthèses « ( ) », puis les corchets « [ ] », puis les accolades « { } »
+Les puissances et racines
+Les multiplications et divisions
+Les additions et soustractions
+Exemple :
+ Trouvez le résultat correct.
+ Trouvez le résultat correct.
+ Trouvez le résultat correct.
+ Trouvez le résultat correct.
+ Trouvez le résultat correct.
+LES FRACTIONS, partie 2
+Simplifier une fraction
+Simplifier, c’est réduire une fraction au plus petit nombre possible. Les deux fractions sont égales car elles ont la même valeur.
+Un nombre entier s’écrit sous forme de fraction avec 1 au dénominateur.
+L’inverse d’une fraction.
+ Si c’est possible, simplifiez les fractions suivantes.
+Trouver la valeur décimale
+Pour trouver le nombre décimal correspondant à une fraction :
+ Transforme chaque fraction en nombre décimal.
+Additionner / soustraire des fractions
+Pour additionner ou soustraire des fractions, elles doivent avoir le même dénominateur.
+Si elles n’ont pas le même dénominateur, je ne peux pas les additionner.
+Il faut trouver un dénominateur commun.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+Multiplier une fraction
+Pour multiplier des fractions, on multiplie les numérateurs entre eux et les dénominateurs entre eux.
+Multipliez les numérateurs entre eux
+Multipliez les dénominateurs entre eux
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+Diviser une fraction
+Diviser par une fraction, c’est multiplier par son inverse.
+Inversez la deuxième fraction
+Effectuez la multiplication des fractions
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+ Effectuez les calculs.
+LES ÉQUATIONS
+Trouver la valeur de l’inconnue
+Résoudre une équation, c’est trouver la valeur de l’inconnue (souvent x) qui rend l’égalité vraie.
+Pour mettre x tout seul d’un côté de l’égalité « l’isoler », On doit :
+Déplacer les termes autour de x.
+Effectuer les mêmes opérations (+ − × ÷) des deux côtés de l’égalité.
+Supprimez les éléments autour de x
+Continuez à supprimer les éléments autour de x
+Vérifiez le résultat.
+ Développpez les équations.
+ Développpez les équations.
+ Trouvez la valeur de l’équations.
+ Trouvez la valeur de l’équations.
+ Trouvez la valeur de l’équations.
+ Trouvez la valeur de l’équations.
+Résolvez les équations et trouvez la valeur de x.
+Résolvez les équations et trouvez la valeur de x.
+LES PROPORTIONNALITÉS
+Règle de trois
+Une proportion est une équation à 1 inconnue. Une situation de proportionnalité s’écrit sous la forme d’une égalité de fractions.
+Exemple : Si 2 pommes coûtent CHF 4, combien coûtent 6 pommes ?
+La règle de trois permet de trouver la valeur inconnue « x ».
+On multiplie les nombres en diagonale
+On divise le résultat par l’autre nombre qui se trouve dans la fraction
+ Trouvez la valeur de l’inconnue.
+ Trouvez la valeur de l’inconnue.
