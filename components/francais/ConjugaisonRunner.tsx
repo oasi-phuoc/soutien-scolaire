@@ -1141,10 +1141,13 @@ type LTMatch = {
   message: string;
   shortMessage: string;
   replacements: { value: string }[];
-  offset: number;
-  length: number;
-  rule: { id: string; issueType: string };
+  rule: { id: string };
 };
+
+const LT_IGNORE = new Set([
+  "WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE",
+  "UNPAIRED_BRACKETS",
+]);
 
 function WriteExercise({
   exercise,
@@ -1159,35 +1162,44 @@ function WriteExercise({
 }) {
   const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
   const [validated, setValidated] = useState(false);
+  const [checking, setChecking] = useState(false);
   const [grammarErrors, setGrammarErrors] = useState<Record<number, LTMatch[]>>({});
+  const [apiError, setApiError] = useState(false);
+  const inputsRef = React.useRef(inputs);
+  inputsRef.current = inputs;
 
-  // Debounced grammar check via LanguageTool (1.5 s after last keystroke)
-  useEffect(() => {
-    if (validated) return;
-    const timer = setTimeout(() => {
-      inputs.forEach((text, i) => {
-        if (text.trim().length < 5) {
-          setGrammarErrors((prev) => ({ ...prev, [i]: [] }));
-          return;
-        }
-        fetch("/api/check-grammar", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text }),
-        })
-          .then((r) => r.json())
-          .then((data) => setGrammarErrors((prev) => ({ ...prev, [i]: data.matches ?? [] })))
-          .catch(() => {});
-      });
-    }, 1500);
-    return () => clearTimeout(timer);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputs, validated]);
-
+  // On validate: call LanguageTool for every non-empty phrase
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(true);
+      setChecking(true);
+      const snapshot = inputsRef.current;
+
+      Promise.all(
+        snapshot.map(async (text, i) => {
+          if (!text.trim() || text.trim().length < 3) return { i, matches: [] as LTMatch[] };
+          const res = await fetch("/api/check-grammar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ text }),
+          });
+          if (!res.ok) throw new Error("api");
+          const data = await res.json();
+          return { i, matches: (data.matches ?? []) as LTMatch[] };
+        }),
+      )
+        .then((results) => {
+          const errs: Record<number, LTMatch[]> = {};
+          results.forEach(({ i, matches }) => {
+            errs[i] = matches.filter((m) => !LT_IGNORE.has(m.rule.id));
+          });
+          setGrammarErrors(errs);
+        })
+        .catch(() => setApiError(true))
+        .finally(() => {
+          setChecking(false);
+          onValidated(true);
+        });
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -1197,53 +1209,68 @@ function WriteExercise({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated]);
 
+  // Auto-dismiss toast after 4 s
+  useEffect(() => {
+    if (!apiError) return;
+    const t = setTimeout(() => setApiError(false), 4000);
+    return () => clearTimeout(t);
+  }, [apiError]);
+
   function setInput(i: number, val: string) {
+    if (validated) return;
     setInputs((prev) => prev.map((v, idx) => (idx === i ? val : v)));
   }
 
   return (
     <div className="space-y-4">
+      {/* API error toast */}
+      {apiError && (
+        <div className="fixed bottom-24 left-1/2 z-50 flex -translate-x-1/2 items-center gap-2 rounded-xl bg-zinc-800 px-4 py-3 text-sm text-white shadow-xl dark:bg-zinc-700">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-amber-400" aria-hidden>
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+            <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+          Correction indisponible pour le moment
+          <button onClick={() => setApiError(false)} className="ml-1 opacity-60 hover:opacity-100" aria-label="Fermer">✕</button>
+        </div>
+      )}
+
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+
+      {checking && (
+        <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
+      )}
+
       {exercise.prompts.map((_, i) => {
-        const checks = checkSentence(inputs[i], exercise.verb);
-        const allOk = checks.length > 0 && checks.every(c => c.ok);
-        const ltErrors = (grammarErrors[i] ?? []).filter(
-          (m) => !["WHITESPACE_RULE", "FRENCH_WHITESPACE"].includes(m.rule.id),
-        );
+        const ltErrors = grammarErrors[i] ?? [];
+        const isClean = validated && !checking && ltErrors.length === 0 && (inputs[i] ?? "").trim().length > 2;
+
         return (
           <div key={i} className="space-y-1.5">
             <div className="flex items-end gap-2">
-              <span className={`shrink-0 pb-1 text-sm font-medium ${allOk && ltErrors.length === 0 ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+              <span className={`shrink-0 pb-1 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
                 {i + 1}.
               </span>
               <input
                 type="text"
-                value={inputs[i]}
+                value={inputs[i] ?? ""}
                 onChange={(e) => setInput(i, e.target.value)}
                 disabled={validated}
                 className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
-                  allOk && ltErrors.length === 0
+                  isClean
                     ? "border-emerald-400 dark:border-emerald-500"
                     : "border-[var(--color-text-secondary)]"
                 }`}
               />
             </div>
-            {/* Regex checks (majuscule, point final, verbe) */}
-            {checks.length > 0 && (
-              <div className="flex flex-wrap gap-x-3 gap-y-1 pl-5">
-                {checks.map((c, ci) => (
-                  <span key={ci} className={`flex items-center gap-1 text-xs ${c.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-500 dark:text-red-400"}`}>
-                    {c.ok ? "✓" : "✗"} {c.label}
-                  </span>
-                ))}
-              </div>
-            )}
-            {/* LanguageTool grammar errors */}
-            {ltErrors.length > 0 && (
+            {/* LanguageTool results — shown only after validation */}
+            {validated && !checking && ltErrors.length > 0 && (
               <ul className="ml-5 space-y-1">
                 {ltErrors.map((err, ei) => (
-                  <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs text-amber-600 dark:text-amber-400">
-                    <span>⚠ {err.shortMessage || err.message}</span>
+                  <li key={ei} className="flex flex-wrap items-baseline gap-1 text-xs">
+                    <span className="text-amber-600 dark:text-amber-400">
+                      ⚠ {err.shortMessage || err.message}
+                    </span>
                     {err.replacements[0]?.value && (
                       <span className="font-semibold text-emerald-600 dark:text-emerald-400">
                         → {err.replacements[0].value}
@@ -1252,6 +1279,9 @@ function WriteExercise({
                   </li>
                 ))}
               </ul>
+            )}
+            {isClean && (
+              <p className="ml-5 text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</p>
             )}
           </div>
         );
