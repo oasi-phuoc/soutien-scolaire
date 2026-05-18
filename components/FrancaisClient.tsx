@@ -310,7 +310,7 @@ export function FrancaisClient() {
           );
           if (themes.length === 0) return null;
           const allDone = hydrated && themes.length > 0 && themes.every((th) => completedSlugs.has(th.slug));
-          const state: SectionState = allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
+          const state: SectionState = rawState === "locked" ? "locked" : allDone ? "completed" : rawState === "in_progress" ? "in_progress" : "unlocked";
           return (
             <SectionCard
               key={sec.id}
