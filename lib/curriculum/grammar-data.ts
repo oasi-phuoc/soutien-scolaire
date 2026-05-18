@@ -88,9 +88,140 @@ const a1GrL01: GrammarLesson = {
   ],
 };
 
+// ── G.6 — Les phrases ─────────────────────────────────────────────────────────
+
+const a1GrPhrases: GrammarLesson = {
+  slug: "a1-gr-phrases",
+  code: "G.6",
+  level: "A1",
+  title: "Les phrases",
+  theory: [
+    { type: "heading", text: "La structure de la phrase" },
+    {
+      type: "plain_list",
+      items: [
+        "En français, une phrase suit l'ordre : {a}Sujet + Verbe + Complément{/a}.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "grid",
+      headers: ["Sujet (S)", "Verbe (V)", "Complément (C)"],
+      equalCols: true,
+      rows: [
+        ["{a}Paul{/a}", "{a}mange{/a}", "une pomme."],
+        ["{a}Elle{/a}", "{a}habite{/a}", "à Paris."],
+        ["{a}Les enfants{/a}", "{a}jouent{/a}", "dans le parc."],
+        ["{a}Je{/a}", "{a}parle{/a}", "à Marie."],
+      ],
+    },
+    { type: "heading", text: "Le sujet (S)", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Le sujet répond à la question : {a}Qui fait l'action ?{/a}",
+        "C'est souvent un pronom ({a}je, tu, il, elle…{/a}) ou un nom ({a}Marie, le chat…{/a}).",
+        "Le verbe s'accorde toujours avec le sujet.",
+      ],
+    },
+    { type: "heading", text: "Le verbe (V)", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet.",
+        "Exemples d'actions : {a}manger, partir, travailler{/a}.",
+        "Exemples d'états : {a}être, avoir, sembler{/a}.",
+      ],
+    },
+    { type: "heading", text: "Le complément (C)", sub: true, accent: true },
+    {
+      type: "plain_list",
+      items: [
+        "Le complément complète le verbe. Il y a trois types :",
+        "{a}COD{/a} (Complément d'Objet Direct) — répond à {a}quoi ? / qui ?{/a} → Je mange {a}une pomme{/a}.",
+        "{a}COI{/a} (Complément d'Objet Indirect) — répond à {a}à qui ? / à quoi ?{/a} → Je parle {a}à Marie{/a}.",
+        "{a}CC{/a} (Complément Circonstanciel) — répond à {a}où ? / quand ? / comment ?{/a} → J'habite {a}à Paris{/a}.",
+      ],
+      noBulletItems: [0],
+    },
+    {
+      type: "note",
+      text: "Le complément n'est pas toujours obligatoire : « Je mange. » est une phrase correcte.",
+    },
+  ],
+  exercises: [
+    {
+      type: "classify",
+      title: "Exercice 1",
+      instruction: "Classez chaque mot souligné dans la bonne colonne.",
+      categories: ["Sujet", "Verbe", "Complément"],
+      items: [
+        { word: "Marie [mange] une salade.", categoryIdx: 1 },
+        { word: "[Marie] mange une salade.", categoryIdx: 0 },
+        { word: "Marie mange [une salade].", categoryIdx: 2 },
+        { word: "[Ils] parlent français.", categoryIdx: 0 },
+        { word: "Ils [parlent] français.", categoryIdx: 1 },
+        { word: "Ils parlent [français].", categoryIdx: 2 },
+        { word: "[Le professeur] explique la leçon.", categoryIdx: 0 },
+        { word: "Le professeur [explique] la leçon.", categoryIdx: 1 },
+        { word: "Le professeur explique [la leçon].", categoryIdx: 2 },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Exercice 2",
+      instruction: "Quel est le type du complément en gras ?",
+      items: [
+        {
+          sentence: "Je mange **une pomme**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Elle parle **à son ami**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 1,
+        },
+        {
+          sentence: "Nous habitons **à Lyon**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 2,
+        },
+        {
+          sentence: "Il regarde **un film**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Tu téléphones **à ta mère**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 1,
+        },
+        {
+          sentence: "Ils arrivent **demain**.",
+          choices: ["COD", "COI", "CC"],
+          correctIdx: 2,
+        },
+      ],
+    },
+    {
+      type: "write",
+      title: "Exercice 3",
+      instruction: "Construisez une phrase correcte avec les éléments proposés.",
+      prompts: [
+        "les enfants / jouer / dans le jardin",
+        "elle / manger / une pizza",
+        "nous / parler / à nos amis",
+        "le chat / dormir / sur le canapé",
+        "je / lire / un livre",
+      ],
+    },
+  ],
+};
+
 const a1GrL02: GrammarLesson = {
   slug: "a1-gr-l02",
-  code: "G.6",
+  code: "G.7",
   level: "A1",
   title: "La négation",
   theory: [
@@ -541,7 +672,7 @@ const a1GrL04: GrammarLesson = {
 
 const a1GrL05: GrammarLesson = {
   slug: "a1-gr-l05",
-  code: "G.15",
+  code: "G.16",
   level: "A1",
   title: "Le verbe avoir et les adjectifs possessifs",
   theory: [
@@ -616,7 +747,7 @@ const a1GrL05: GrammarLesson = {
 
 const a1GrL06: GrammarLesson = {
   slug: "a1-gr-l06",
-  code: "G.6",
+  code: "G.7",
   level: "A1",
   title: "Être et avoir — révision",
   theory: [
@@ -659,7 +790,7 @@ const a1GrL06: GrammarLesson = {
 
 const a1GrL10: GrammarLesson = {
   slug: "a1-gr-l10",
-  code: "G.12",
+  code: "G.13",
   level: "A1",
   title: "L'interrogation avec les mots interrogatifs",
   theory: [
@@ -726,7 +857,7 @@ const a1GrL10: GrammarLesson = {
 
 const a1GrL11: GrammarLesson = {
   slug: "a1-gr-l11",
-  code: "G.13",
+  code: "G.14",
   level: "A1",
   title: "Les prépositions de lieu",
   theory: [
@@ -783,7 +914,7 @@ const a1GrL11: GrammarLesson = {
 
 const a1GrL14: GrammarLesson = {
   slug: "a1-gr-l14",
-  code: "G.14",
+  code: "G.15",
   level: "A1",
   title: "Les articles partitifs et la quantité",
   theory: [
@@ -849,7 +980,7 @@ const a1GrL14: GrammarLesson = {
 
 const a1GrL17: GrammarLesson = {
   slug: "a1-gr-l17",
-  code: "G.16",
+  code: "G.17",
   level: "A1",
   title: "Il y a et les prépositions dans la maison",
   theory: [
@@ -916,7 +1047,7 @@ const a1GrL17: GrammarLesson = {
 
 const a1GrL18: GrammarLesson = {
   slug: "a1-gr-l18",
-  code: "G.17",
+  code: "G.18",
   level: "A1",
   title: "Les adjectifs démonstratifs",
   theory: [
@@ -976,7 +1107,7 @@ const a1GrL18: GrammarLesson = {
 
 const a1GrL19: GrammarLesson = {
   slug: "a1-gr-l19",
-  code: "G.18",
+  code: "G.19",
   level: "A1",
   title: "Les adjectifs possessifs",
   theory: [
@@ -1039,7 +1170,7 @@ const a1GrL19: GrammarLesson = {
 
 const a1GrL22: GrammarLesson = {
   slug: "a1-gr-l22",
-  code: "G.19",
+  code: "G.20",
   level: "A1",
   title: "La fréquence",
   theory: [
@@ -1100,7 +1231,7 @@ const a1GrL22: GrammarLesson = {
 
 const a1GrL23: GrammarLesson = {
   slug: "a1-gr-l23",
-  code: "G.20",
+  code: "G.21",
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [
@@ -1172,7 +1303,7 @@ const a1GrL23: GrammarLesson = {
 
 const a1GrL24: GrammarLesson = {
   slug: "a1-gr-l24",
-  code: "G.26",
+  code: "G.27",
   level: "A1",
   title: "Le comparatif et le superlatif",
   theory: [
@@ -1239,7 +1370,7 @@ const a1GrL24: GrammarLesson = {
 
 const a1GrL25: GrammarLesson = {
   slug: "a1-gr-l25",
-  code: "G.27",
+  code: "G.28",
   level: "A1",
   title: "Savoir ou connaître ?",
   theory: [
@@ -1309,7 +1440,7 @@ const a1GrL25: GrammarLesson = {
 
 const a1GrLCest: GrammarLesson = {
   slug: "a1-gr-l07",
-  code: "G.17",
+  code: "G.18",
   level: "A1",
   title: "C'est / Il est",
   theory: [
@@ -1359,7 +1490,7 @@ const a1GrLCest: GrammarLesson = {
 
 const a1GrLQuel: GrammarLesson = {
   slug: "a1-gr-l08",
-  code: "G.18",
+  code: "G.19",
   level: "A1",
   title: "L'interrogation avec quel(le)(s)",
   theory: [
@@ -1411,7 +1542,7 @@ const a1GrLQuel: GrammarLesson = {
 
 const a1GrLFutur: GrammarLesson = {
   slug: "a1-gr-l09",
-  code: "G.19",
+  code: "G.20",
   level: "A1",
   title: "Le futur proche",
   theory: [
@@ -1464,7 +1595,7 @@ const a1GrLFutur: GrammarLesson = {
 
 const a1GrLImperatif: GrammarLesson = {
   slug: "a1-gr-l20",
-  code: "G.20",
+  code: "G.21",
   level: "A1",
   title: "L'impératif",
   theory: [
@@ -1515,7 +1646,7 @@ const a1GrLImperatif: GrammarLesson = {
 
 const a2GrL07: GrammarLesson = {
   slug: "a2-gr-l07",
-  code: "G.31",
+  code: "G.32",
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [
@@ -1586,7 +1717,7 @@ const a2GrL07: GrammarLesson = {
 
 const a2GrL09: GrammarLesson = {
   slug: "a2-gr-l09",
-  code: "G.32",
+  code: "G.33",
   level: "A2",
   title: "Répondre aux questions fermées",
   theory: [
@@ -1647,7 +1778,7 @@ const a2GrL09: GrammarLesson = {
 
 const a2GrL11: GrammarLesson = {
   slug: "a2-gr-l11",
-  code: "G.36",
+  code: "G.37",
   level: "A2",
   title: "Les adjectifs — généralités",
   theory: [
@@ -1714,7 +1845,7 @@ const a2GrL11: GrammarLesson = {
 
 const a2GrL12: GrammarLesson = {
   slug: "a2-gr-l12",
-  code: "G.37",
+  code: "G.38",
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [
@@ -1780,7 +1911,7 @@ const a2GrL12: GrammarLesson = {
 
 const a2GrL18: GrammarLesson = {
   slug: "a2-gr-l18",
-  code: "G.35",
+  code: "G.36",
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [
@@ -1833,7 +1964,7 @@ const a2GrL18: GrammarLesson = {
 
 const a2GrL19: GrammarLesson = {
   slug: "a2-gr-l19",
-  code: "G.38",
+  code: "G.39",
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [
@@ -1900,7 +2031,7 @@ const a2GrL19: GrammarLesson = {
 
 const a2GrL25: GrammarLesson = {
   slug: "a2-gr-l25",
-  code: "G.39",
+  code: "G.40",
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [
@@ -1978,7 +2109,7 @@ const a2GrL25: GrammarLesson = {
 
 const a2GrL35: GrammarLesson = {
   slug: "a2-gr-l35",
-  code: "G.41",
+  code: "G.42",
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
@@ -2055,7 +2186,7 @@ const a2GrL35: GrammarLesson = {
 
 const a2GrL36: GrammarLesson = {
   slug: "a2-gr-l36",
-  code: "G.42",
+  code: "G.43",
   level: "A2",
   title: "Les pronoms Y et EN",
   theory: [
@@ -2141,7 +2272,7 @@ const a2GrL36: GrammarLesson = {
 
 const a2GrL39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "G.46",
+  code: "G.47",
   level: "A2",
   title: "Le comparatif",
   theory: [
@@ -2224,7 +2355,7 @@ const a2GrL39: GrammarLesson = {
 
 const a2GrL42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "G.40",
+  code: "G.41",
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [
@@ -2299,7 +2430,7 @@ const a2GrL42: GrammarLesson = {
 
 const a2GrL52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "G.47",
+  code: "G.48",
   level: "A2",
   title: "La cause et la conséquence",
   theory: [
@@ -2372,7 +2503,7 @@ const a2GrL52: GrammarLesson = {
 
 const a1GrInterro: GrammarLesson = {
   slug: "a1-gr-interro",
-  code: "G.7",
+  code: "G.8",
   level: "A1",
   title: "L'interrogation de base",
   theory: [
@@ -2456,6 +2587,7 @@ const a1GrInterro: GrammarLesson = {
 
 const ALL_GRAMMAR_LESSONS: GrammarLesson[] = [
   a1GrL01,
+  a1GrPhrases,
   a1GrL02,
   a1GrInterro,
   a1GrL03,
