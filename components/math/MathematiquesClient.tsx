@@ -6,7 +6,6 @@ import {
   MATH_ALGEBRA_ORDER,
   MATH_GEOMETRY_TAB_ORDER,
   getMathModule,
-  prerequisitesMet,
 } from "@/lib/curriculum/math-data";
 import {
   computeRecommendation,
@@ -14,7 +13,6 @@ import {
   type MathTabId,
 } from "@/lib/curriculum/recommendation";
 import {
-  completedPassingIds,
   createInitialProgress,
   loadProgress,
   saveProgress,
@@ -190,23 +188,21 @@ export function MathematiquesClient() {
           {modules.map((m) => {
             if (!m) return null;
             const prog = hydrated ? progress.math[m.id] : undefined;
-            const done = hydrated ? completedPassingIds(progress) : new Set<string>();
-            const pre = prerequisitesMet(m, done);
+            // TEMP: unlock all modules for testing
+            const pre = { ok: true, missing: [] as string[] };
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
             const isLocked = displayState === "locked";
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
 
-            // Compute which submodule is next (sequential unlocking)
+            // TEMP: all submodules available for testing
             const completedSubIds = new Set(
-              !isLocked && hydrated
+              hydrated
                 ? m.submodules
                     .filter((sub) => progress.submoduleStates?.[sub.id] === "completed")
                     .map((sub) => sub.id)
                 : [],
             );
-            const firstAvailableSubIdx = !isLocked
-              ? m.submodules.findIndex((sub) => !completedSubIds.has(sub.id))
-              : -1;
+            const firstAvailableSubIdx = m.submodules.findIndex((sub) => !completedSubIds.has(sub.id));
 
             const expanded = isModuleExpanded(m.id, displayState);
 
@@ -300,10 +296,10 @@ export function MathematiquesClient() {
                   {/* Submodule list */}
                   {expanded && m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-                      {m.submodules.map((sub, idx) => {
+                      {m.submodules.map((sub, _idx) => {
                         const subDone = completedSubIds.has(sub.id);
-                        const subAvailable = idx === firstAvailableSubIdx;
-                        const subLocked = !subDone && !subAvailable;
+                        const subAvailable = !subDone; // TEMP: all non-done submodules available
+                        const subLocked = false; // TEMP: unlock all for testing
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
                           <li key={sub.id} className="flex items-center gap-3 px-4 py-2.5">
