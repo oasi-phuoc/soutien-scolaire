@@ -1668,7 +1668,7 @@ function WordOrderExercise({
             <div className="min-h-10 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
               {arr.length === 0 ? (
                 <span className="text-xs text-[var(--color-text-secondary)] self-center">
-                  Touchez un mot ci-dessous pour l'ajouter…
+                  Touchez un mot ci-dessous pour l&apos;ajouter…
                 </span>
               ) : arr.map((word, wi) => {
                 let cls = "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer ";
