@@ -1272,7 +1272,7 @@ function WriteExercise({
             {/* Internal verb check — shown only after validation */}
             {validated && !checking && exercise.verb && (inputs[i] ?? "").trim().length > 2 && !hasVerb(inputs[i] ?? "", exercise.verb) && (
               <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
-                ⚠ Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
+                Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
               </p>
             )}
             {/* LanguageTool results — shown only after validation */}
@@ -1283,7 +1283,7 @@ function WriteExercise({
                 <ul className="ml-5 space-y-1">
                   <li className="flex flex-wrap items-baseline gap-1 text-xs">
                     <span className="text-amber-600 dark:text-amber-400">
-                      ⚠ {err.shortMessage || err.message}
+                      {err.shortMessage || err.message}
                     </span>
                     {suggestions.length > 0 && (
                       <span className="font-semibold text-emerald-600 dark:text-emerald-400">
@@ -1299,7 +1299,7 @@ function WriteExercise({
               const changed = corrected !== (inputs[i] ?? "").trim();
               return (
                 <div className="ml-5 space-y-0.5 text-xs">
-                  <p className="text-amber-600 dark:text-amber-400">⚠ Diverses corrections nécessaires</p>
+                  <p className="text-amber-600 dark:text-amber-400">Diverses corrections nécessaires</p>
                   {changed && (
                     <p className="font-semibold text-emerald-600 dark:text-emerald-400">→ {corrected}</p>
                   )}
