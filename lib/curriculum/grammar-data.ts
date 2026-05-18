@@ -115,7 +115,7 @@ const a1GrPhrases: GrammarLesson = {
         ["Je", "parle", "à Marie."],
       ],
     },
-    { type: "heading", text: "Le sujet (S)", sub: true, accent: true },
+    { type: "heading", text: "Le sujet (S)", sub: true },
     {
       type: "plain_list",
       items: [
@@ -124,24 +124,48 @@ const a1GrPhrases: GrammarLesson = {
         "Le verbe s'accorde toujours avec le sujet.",
       ],
     },
-    { type: "heading", text: "Le verbe (V)", sub: true, accent: true },
+    { type: "heading", text: "Le verbe (V)", sub: true },
     {
       type: "plain_list",
       items: [
         "Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet.",
-        "Exemples d'actions : {a}manger, partir, travailler{/a}.",
-        "Exemples d'états : {a}être, avoir, sembler{/a}.",
       ],
     },
-    { type: "heading", text: "Le complément (C)", sub: true, accent: true },
+    {
+      type: "highlight",
+      label: "Exemples d'actions",
+      items: ["manger", "partir", "travailler"],
+    },
+    {
+      type: "highlight",
+      label: "Exemples d'états",
+      items: ["être", "avoir", "sembler"],
+    },
+    { type: "heading", text: "Le complément (C)", sub: true },
     {
       type: "plain_list",
-      items: [
-        "Le complément complète le verbe. Il y a trois types :",
-        "{a}COD{/a} (Complément d'Objet Direct) — répond à {a}quoi ? / qui ?{/a} → Je mange {a}une pomme{/a}.",
-        "{a}COI{/a} (Complément d'Objet Indirect) — répond à {a}à qui ? / à quoi ?{/a} → Je parle {a}à Marie{/a}.",
-        "{a}CC{/a} (Complément Circonstanciel) — répond à {a}où ? / quand ? / comment ?{/a} → J'habite {a}à Paris{/a}.",
-      ],
+      items: ["Le complément complète le verbe. Il y a trois types :"],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "COD — Complément d'Objet Direct",
+      inlineArrows: true,
+      items: ["Répond à {a}quoi ? / qui ?{/a} → Je mange {a}une pomme{/a}."],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "COI — Complément d'Objet Indirect",
+      inlineArrows: true,
+      items: ["Répond à {a}à qui ? / à quoi ?{/a} → Je parle {a}à Marie{/a}."],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "CC — Complément Circonstanciel",
+      inlineArrows: true,
+      items: ["Répond à {a}où ? / quand ? / comment ?{/a} → J'habite {a}à Paris{/a}."],
       noBulletItems: [0],
     },
     {
