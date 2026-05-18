@@ -1059,8 +1059,9 @@ const a1VocL18: VocabLesson = {
   title: "Les loisirs et le sport",
   theory: [
     {
-      type: "text",
-      content: "Les sports et loisirs en français :",
+      type: "plain_list",
+      items: ["Les sports et loisirs en français :"],
+      noBulletItems: [0],
     },
     {
       type: "word_cards",
@@ -1075,8 +1076,9 @@ const a1VocL18: VocabLesson = {
       ],
     },
     {
-      type: "text",
-      content: "Pour parler d'un sport, on utilise souvent le verbe FAIRE + sport :",
+      type: "plain_list",
+      items: ["Pour parler d'un sport, on utilise souvent le verbe FAIRE + sport :"],
+      noBulletItems: [0],
     },
     {
       type: "grammar_link",
@@ -1084,8 +1086,9 @@ const a1VocL18: VocabLesson = {
       href: "/francais/conjugaison/faire-sports",
     },
     {
-      type: "text",
-      content: "Vocabulaire de la compétition :",
+      type: "plain_list",
+      items: ["Vocabulaire de la compétition :"],
+      noBulletItems: [0],
     },
     {
       type: "word_cards",
@@ -1201,8 +1204,9 @@ const a1VocL19: VocabLesson = {
   title: "Les vacances et la plage",
   theory: [
     {
-      type: "text",
-      content: "Vocabulaire des vacances et de la plage :",
+      type: "plain_list",
+      items: ["Vocabulaire des vacances et de la plage :"],
+      noBulletItems: [0],
     },
     {
       type: "word_cards",
@@ -1217,8 +1221,13 @@ const a1VocL19: VocabLesson = {
       ],
     },
     {
-      type: "text",
-      content: "Activités et expressions utiles :\n• faire de la plongée — aller à la plage — prendre un bain de soleil\n• avoir trop chaud — chercher l'ombre — construire un château de sable",
+      type: "plain_list",
+      items: [
+        "Activités et expressions utiles :",
+        "faire de la plongée — aller à la plage — prendre un bain de soleil",
+        "avoir trop chaud — chercher l'ombre — construire un château de sable",
+      ],
+      noBulletItems: [0],
     },
   ],
   exercises: [
