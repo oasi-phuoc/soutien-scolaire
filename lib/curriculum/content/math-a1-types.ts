@@ -51,7 +51,8 @@ export type MathRichBlock =
   | { type: "example"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "table"; headersFr: string[]; rows: string[][]; captionFr?: string }
   | { type: "plain"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
-  | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> };
+  | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
+  | { type: "svg"; markup: string; captionFr?: string };
 
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */

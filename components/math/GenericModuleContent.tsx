@@ -115,6 +115,15 @@ function BlockView({ block }: { block: MathRichBlock }) {
           )}
         </div>
       );
+    case "svg":
+      return (
+        <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
+          <div dangerouslySetInnerHTML={{ __html: block.markup }} />
+          {block.captionFr && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      );
     default:
       return null;
   }

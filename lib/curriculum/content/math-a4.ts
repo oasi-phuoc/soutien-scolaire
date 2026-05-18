@@ -7,33 +7,139 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
     theory: {
       title: { fr: "Notion et représentation", en: "Concept and representation", ar: "المفهوم والتمثيل", fa: "مفهوم و نمایش", ti: "ፍርቂ ምፍላጥ", uk: "Поняття та зображення" },
       paragraphs: {
-        fr: ["Une fraction représente une partie d'un tout."],
+        fr: [
+          "Une fraction représente une ou plusieurs parties d'un tout divisé en parts égales.",
+          "Elle est composée d'un numérateur (nombre en haut = parts utilisées) et d'un dénominateur (nombre en bas = nombre total de parts égales).",
+          "Les fractions décimales ont pour dénominateur 10 ou 100. Exemples : 3/10, 62/10, 19/100, 184/100.",
+          "Un nombre entier s'écrit aussi sous forme de fraction : 3 = 3/1. Et n/n = 1 pour tout n ≠ 0.",
+        ],
         en: [
-          "A fraction represents a part of a whole. It has a numerator (top number — how many parts we have) and a denominator (bottom number — how many equal parts the whole is divided into).",
-          "Examples: 3/4 means '3 parts out of 4'. 1/2 = one half. 2/3 = two thirds. 5/10 = five tenths.",
-          "A whole number can be written as a fraction with denominator 1: 3 = 3/1. Also, n/n = 1 for any n ≠ 0.",
+          "A fraction represents one or more parts of a whole divided into equal parts.",
+          "It has a numerator (top number — how many parts we have) and a denominator (bottom number — how many equal parts the whole is divided into).",
+          "Decimal fractions have 10 or 100 as the denominator. Examples: 3/10, 62/10, 19/100, 184/100.",
+          "A whole number can be written as a fraction: 3 = 3/1. Also n/n = 1 for any n ≠ 0.",
         ],
         ar: [
-          "الكسر يمثل جزءًا من كل. يتكون من بسط (العدد فوق — كم جزء لدينا) ومقام (العدد أسفل — كم جزءًا متساويًا يُقسم إليه الكل).",
-          "أمثلة: 3/4 تعني '3 أجزاء من 4'. 1/2 = النصف. 2/3 = ثلثان. 5/10 = خمسة أعشار.",
-          "يمكن كتابة عدد صحيح على شكل كسر بمقام 1: 3 = 3/1. كذلك n/n = 1 لأي n ≠ 0.",
+          "الكسر يمثل جزءًا أو أكثر من كل مقسّم إلى أجزاء متساوية.",
+          "يتكون من بسط (العدد فوق = كم جزء لدينا) ومقام (العدد أسفل = عدد الأجزاء المتساوية).",
+          "الكسور العشرية مقامها 10 أو 100. أمثلة: 3/10، 62/10، 19/100، 184/100.",
+          "يمكن كتابة عدد صحيح كسرًا: 3 = 3/1. وأيضًا n/n = 1 لأي n ≠ 0.",
         ],
         fa: [
-          "کسر نشان‌دهنده بخشی از یک کل است. از صورت (عدد بالا — چند بخش داریم) و مخرج (عدد پایین — کل به چند بخش مساوی تقسیم شده) تشکیل شده است.",
-          "مثال‌ها: ۳/۴ یعنی '۳ بخش از ۴'. ۱/۲ = نصف. ۲/۳ = دو سوم. ۵/۱۰ = پنج دهم.",
-          "عدد صحیح را می‌توان با مخرج ۱ به صورت کسر نوشت: ۳ = ۳/۱. همچنین n/n = ۱ برای هر n ≠ ۰.",
+          "کسر نشان‌دهنده یک یا چند بخش از یک کل است که به بخش‌های مساوی تقسیم شده.",
+          "از صورت (عدد بالا = چند بخش داریم) و مخرج (عدد پایین = تعداد بخش‌های مساوی) تشکیل شده است.",
+          "کسرهای اعشاری مخرج ۱۰ یا ۱۰۰ دارند. مثال‌ها: ۳/۱۰، ۶۲/۱۰، ۱۹/۱۰۰، ۱۸۴/۱۰۰.",
+          "عدد صحیح را می‌توان کسر نوشت: ۳ = ۳/۱. و n/n = ۱ برای هر n ≠ ۰.",
         ],
         ti: [
-          "ፍርቂ ናይ ምሉእ ክፋል ዘርዕ ኣሎ። ካብ ሚዛን ቁጽሪ (ናይ ዝለዓለ ቁጽሪ — ክንደይ ክፋላት) ምስ ሚዛን ቁጽሪ (ናይ ዝሕደር ቁጽሪ — ናብ ክንደይ ማዕረ ክፋላት ምሉእ ዝተኸፋፍለ) ኣሎ።",
-          "ኣብነት: 3/4 '3 ክፋላት ካብ 4' ማለት እዩ። 1/2 = ፍርቂ። 2/3 = ክልተ ሲሶ። 5/10 = ሓሙሽተ ዓሰርተኛ።",
-          "ምሉእ ቁጽሪ ብ 1 ሚዛን ቁጽሪ ፍርቂ ክጸሓፍ ይከኣል: 3 = 3/1. ደሓን n/n = 1 ንዝኾነ n ≠ 0.",
+          "ፍርቂ ናይ ምሉእ ሓደ ወይ ልዕሊ ሓደ ክፋል ዘርዕ ኣሎ።",
+          "ካብ ሚዛን ቁጽሪ (ናይ ዝለዓለ — ክንደይ ክፋላት) ምስ ናይ ዝሕደር (ናብ ክንደይ ማዕረ ክፋላት) ዝቖመ ኢዩ።",
+          "ፍርቂ ዓሰርተ/ሚእቲ: 3/10, 62/10, 19/100, 184/100.",
+          "ምሉእ ቁጽሪ ብ 1 ሚዛን ቁጽሪ: 3 = 3/1. n/n = 1 ንዝኾነ n ≠ 0.",
         ],
         uk: [
-          "Дріб показує частину цілого. Складається з чисельника (верхнє число — скільки частин) і знаменника (нижнє число — на скільки рівних частин поділено ціле).",
-          "Приклади: 3/4 означає '3 частини з 4'. 1/2 = половина. 2/3 = дві третини. 5/10 = п'ять десятих.",
-          "Ціле число можна записати дробом зі знаменником 1: 3 = 3/1. Також n/n = 1 для будь-якого n ≠ 0.",
+          "Дріб показує одну або кілька частин цілого, поділеного на рівні частини.",
+          "Складається з чисельника (верхнє число — скільки частин) і знаменника (нижнє число — на скільки рівних частин поділено ціле).",
+          "Десяткові дроби мають знаменник 10 або 100. Приклади: 3/10, 62/10, 19/100, 184/100.",
+          "Ціле число записується дробом: 3 = 3/1. І n/n = 1 для будь-якого n ≠ 0.",
         ],
       },
+      blocks: [
+        { type: "heading", fr: "Qu'est-ce qu'une fraction ?" },
+        {
+          type: "plain",
+          fr: "Une fraction représente une ou plusieurs parties d'un tout divisé en parts égales. Elle s'écrit avec deux nombres séparés par une barre de fraction.",
+        },
+        {
+          type: "svg",
+          captionFr: "Anatomie d'une fraction : l'exemple de 3/4",
+          markup: `<svg viewBox='0 0 360 190' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
+  <defs><marker id='a41m' markerWidth='7' markerHeight='6' refX='6' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#64748b'/></marker></defs>
+  <text x='180' y='84' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>3</text>
+  <rect x='146' y='92' width='68' height='5' fill='#0f172a' rx='2'/>
+  <text x='180' y='158' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>4</text>
+  <text x='8' y='62' font-size='13' font-weight='700' fill='#1e40af' font-family='system-ui,sans-serif'>numérateur</text>
+  <text x='8' y='77' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>→ nombre en haut</text>
+  <text x='8' y='90' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>= parts utilisées</text>
+  <line x1='118' y1='76' x2='150' y2='76' stroke='#64748b' stroke-width='1.5' marker-end='url(#a41m)'/>
+  <line x1='212' y1='142' x2='242' y2='142' stroke='#64748b' stroke-width='1.5' marker-end='url(#a41m)'/>
+  <text x='250' y='130' font-size='13' font-weight='700' fill='#1e40af' font-family='system-ui,sans-serif'>dénominateur</text>
+  <text x='250' y='145' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>→ nombre en bas</text>
+  <text x='250' y='158' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>= parts totales égales</text>
+</svg>`,
+        },
+        {
+          type: "rule",
+          titleFr: "Les deux parties d'une fraction",
+          itemsFr: [
+            "Le numérateur (en haut) : indique combien de parts sont prises ou utilisées.",
+            "Le dénominateur (en bas) : indique en combien de parts égales l'unité entière est divisée.",
+            "La barre de fraction signifie « divisé par » : 3/4 = 3 ÷ 4.",
+          ],
+        },
+        { type: "heading", fr: "Fractions décimales : dixièmes et centièmes" },
+        {
+          type: "plain",
+          fr: "Quand le dénominateur est 10 ou 100, on parle de fractions décimales. L'unité est découpée en 10 ou 100 parts égales.",
+        },
+        {
+          type: "svg",
+          captionFr: "1 unité entière — divisée en 10 parts (dixièmes) — divisée en 100 parts (centièmes)",
+          markup: `<svg viewBox='0 0 320 125' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
+  <rect x='10' y='10' width='80' height='80' fill='#dbeafe' stroke='#2563eb' stroke-width='2'/>
+  <text x='50' y='57' text-anchor='middle' font-size='22' font-weight='700' fill='#1d4ed8' font-family='system-ui'>1</text>
+  <text x='50' y='102' text-anchor='middle' font-size='11' font-weight='600' fill='#1e40af' font-family='system-ui'>1 unité</text>
+  <text x='50' y='115' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>(entier)</text>
+  <rect x='120' y='10' width='80' height='80' fill='#f0f9ff' stroke='#2563eb' stroke-width='2'/>
+  <line x1='128' y1='10' x2='128' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='136' y1='10' x2='136' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='144' y1='10' x2='144' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='152' y1='10' x2='152' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='160' y1='10' x2='160' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='168' y1='10' x2='168' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='176' y1='10' x2='176' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='184' y1='10' x2='184' y2='90' stroke='#93c5fd' stroke-width='1'/><line x1='192' y1='10' x2='192' y2='90' stroke='#93c5fd' stroke-width='1'/>
+  <text x='160' y='102' text-anchor='middle' font-size='11' font-weight='600' fill='#1e40af' font-family='system-ui'>÷ 10 parts</text>
+  <text x='160' y='115' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>dixièmes</text>
+  <rect x='230' y='10' width='80' height='80' fill='#f0f9ff' stroke='#2563eb' stroke-width='2'/>
+  <line x1='238' y1='10' x2='238' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='246' y1='10' x2='246' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='254' y1='10' x2='254' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='262' y1='10' x2='262' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='270' y1='10' x2='270' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='278' y1='10' x2='278' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='286' y1='10' x2='286' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='294' y1='10' x2='294' y2='90' stroke='#93c5fd' stroke-width='0.5'/><line x1='302' y1='10' x2='302' y2='90' stroke='#93c5fd' stroke-width='0.5'/>
+  <line x1='230' y1='18' x2='310' y2='18' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='26' x2='310' y2='26' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='34' x2='310' y2='34' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='42' x2='310' y2='42' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='50' x2='310' y2='50' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='58' x2='310' y2='58' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='66' x2='310' y2='66' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='74' x2='310' y2='74' stroke='#93c5fd' stroke-width='0.5'/><line x1='230' y1='82' x2='310' y2='82' stroke='#93c5fd' stroke-width='0.5'/>
+  <text x='270' y='102' text-anchor='middle' font-size='11' font-weight='600' fill='#1e40af' font-family='system-ui'>÷ 100 parts</text>
+  <text x='270' y='115' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>centièmes</text>
+</svg>`,
+        },
+        { type: "heading", fr: "Exemples avec dixièmes et centièmes" },
+        {
+          type: "svg",
+          captionFr: "3/10 = 3 parts sur 10   •   19/100 = 19 parts sur 100",
+          markup: `<svg viewBox='0 0 300 140' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
+  <text x='75' y='22' text-anchor='middle' font-size='17' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>3/10</text>
+  <rect x='25' y='30' width='100' height='36' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
+  <rect x='25' y='30' width='30' height='36' fill='#3b82f6'/>
+  <line x1='35' y1='30' x2='35' y2='66' stroke='white' stroke-width='1'/><line x1='45' y1='30' x2='45' y2='66' stroke='white' stroke-width='1'/><line x1='55' y1='30' x2='55' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='65' y1='30' x2='65' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='75' y1='30' x2='75' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='85' y1='30' x2='85' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='95' y1='30' x2='95' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='105' y1='30' x2='105' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='115' y1='30' x2='115' y2='66' stroke='#93c5fd' stroke-width='1'/>
+  <rect x='25' y='30' width='100' height='36' fill='none' stroke='#2563eb' stroke-width='1.5'/>
+  <text x='40' y='82' text-anchor='middle' font-size='10' fill='#1d4ed8' font-family='system-ui' font-weight='600'>3</text>
+  <text x='75' y='82' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>7</text>
+  <text x='75' y='92' text-anchor='middle' font-size='10' fill='#475569' font-family='system-ui'>3 parts sur 10</text>
+  <text x='220' y='22' text-anchor='middle' font-size='17' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>19/100</text>
+  <rect x='183' y='30' width='70' height='70' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
+  <rect x='183' y='30' width='70' height='7' fill='#3b82f6'/>
+  <rect x='183' y='37' width='63' height='7' fill='#3b82f6'/>
+  <line x1='190' y1='30' x2='190' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='197' y1='30' x2='197' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='204' y1='30' x2='204' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='211' y1='30' x2='211' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='218' y1='30' x2='218' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='225' y1='30' x2='225' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='232' y1='30' x2='232' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='239' y1='30' x2='239' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='246' y1='30' x2='246' y2='100' stroke='#93c5fd' stroke-width='0.5'/>
+  <line x1='183' y1='37' x2='253' y2='37' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='44' x2='253' y2='44' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='51' x2='253' y2='51' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='58' x2='253' y2='58' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='65' x2='253' y2='65' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='72' x2='253' y2='72' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='79' x2='253' y2='79' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='86' x2='253' y2='86' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='93' x2='253' y2='93' stroke='#93c5fd' stroke-width='0.5'/>
+  <rect x='183' y='30' width='70' height='70' fill='none' stroke='#2563eb' stroke-width='1.5'/>
+  <text x='220' y='112' text-anchor='middle' font-size='10' fill='#475569' font-family='system-ui'>19 parts sur 100</text>
+</svg>`,
+        },
+        {
+          type: "table",
+          headersFr: ["Fraction", "Lecture", "Valeur décimale"],
+          rows: [
+            ["3/10", "trois dixièmes", "0,3"],
+            ["62/10", "soixante-deux dixièmes", "6,2"],
+            ["19/100", "dix-neuf centièmes", "0,19"],
+            ["184/100", "cent quatre-vingt-quatre centièmes", "1,84"],
+          ],
+          captionFr: "Les fractions > 1 ont un numérateur plus grand que le dénominateur (ex : 62/10 = 6,2).",
+        },
+        {
+          type: "note",
+          fr: "Cas particuliers : tout nombre entier s'écrit sous forme de fraction avec dénominateur 1 (ex : 3 = 3/1). Et toute fraction n/n est égale à 1 (ex : 7/7 = 1, 100/100 = 1).",
+        },
+      ],
     },
     exercises: [
       { id: "a4-1-e1", promptFr: "Dans la fraction 3/4, quel est le numérateur ?", type: "number", acceptable: ["3"] },
