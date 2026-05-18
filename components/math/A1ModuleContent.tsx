@@ -2021,6 +2021,177 @@ export function A1ModuleContent() {
   const isFirstStep = stepIdx === 0 && activeIdx === 0;
   const isLastStep = activeIdx === MATH_A1_LESSONS.length - 1 && stepIdx === steps.length - 1;
 
+  // ── Nav fixe : actions de l'étape courante ─────────────────────────────────
+  let stepReset: (() => void) | undefined;
+  let stepValidate: (() => void) | undefined;
+  let stepValidateDisabled = false;
+
+  if (step === "ex1") {
+    stepReset = resetExercise1;
+  } else if (step === "ex2") {
+    stepReset = resetExercise2;
+    stepValidate = () => { setEx2Validated(true); setEx2Results(ex2Numbers.map((n, i) => checkWord(ex2Answers[i] ?? "", n))); };
+    stepValidateDisabled = ex2Validated;
+  } else if (step === "ex3") {
+    stepReset = resetExercise3;
+    stepValidate = () => { setEx3Validated(true); setEx3Results(ex3Numbers.map((n, i) => checkTensWord(ex3Answers[i] ?? "", n))); };
+    stepValidateDisabled = ex3Validated;
+  } else if (step === "ex4") {
+    stepReset = resetExercise4;
+    stepValidate = () => { setEx4Validated(true); setEx4Results(ex4Numbers.map((n, i) => parseInt(ex4Answers[i] ?? "", 10) === n)); };
+    stepValidateDisabled = ex4Validated;
+  } else if (step === "ex5") {
+    stepReset = resetExercise5;
+    stepValidate = () => { setEx5Validated(true); setEx5Results(ex5Numbers.map((n, i) => parseInt(ex5Answers[i] ?? "", 10) === n)); };
+    stepValidateDisabled = ex5Validated;
+  } else if (step === "ex6") {
+    stepReset = resetExercise6;
+    stepValidate = () => {
+      setEx6Validated(true);
+      setEx6Results(ex6Compositions.map((comp, i) => parseInt(ex6Answers[i] ?? "", 10) === comp.value));
+    };
+    stepValidateDisabled = ex6Validated;
+  } else if (step === "ex7") {
+    stepReset = resetExercise7;
+    stepValidate = () => {
+      const results: Record<string, boolean | null> = {};
+      for (const [key, state] of Object.entries(ex7Grid)) {
+        if (state === "fill") {
+          const parts = key.split("-").map(Number);
+          results[key] = parseInt(ex7Answers[key] ?? "", 10) === (parts[0]! + parts[1]!);
+        }
+      }
+      setEx7Results(results);
+      setEx7Validated(true);
+    };
+    stepValidateDisabled = ex7Validated;
+  } else if (step === "ex8") {
+    stepReset = resetExercise8;
+    stepValidate = () => {
+      const results: Record<string, boolean | null> = {};
+      for (const [si, series] of ex8Series.entries()) {
+        for (const i of series.blanks) {
+          const ansKey = `${si}-${i}`;
+          results[ansKey] = parseInt(ex8Answers[ansKey] ?? "", 10) === series.start + i;
+        }
+      }
+      setEx8Results(results);
+      setEx8Validated(true);
+    };
+    stepValidateDisabled = ex8Validated;
+  } else if (step === "ex9") {
+    stepReset = resetEx9;
+    stepValidate = () => { if (!ex9Validated) setEx9Validated(true); };
+    stepValidateDisabled = ex9Validated;
+  } else if (step === "ex10") {
+    stepReset = resetEx10;
+    stepValidate = () => {
+      const res = ex10Questions.map((q, qi) => parseInt(ex10Answers[qi] ?? "", 10) === q.h * 100 + q.d * 10 + q.u);
+      setEx10Results(res);
+      setEx10Validated(true);
+    };
+    stepValidateDisabled = ex10Validated;
+  } else if (step === "ex11") {
+    stepReset = resetEx11;
+    stepValidate = () => {
+      const res = ex11Questions.map((q, qi) => { const a = ex11Answers[qi] ?? {m:"",c:"",d:"",u:""}; return parseInt(a.m) === q.m*1000 && parseInt(a.c) === q.c*100 && parseInt(a.d) === q.d*10 && parseInt(a.u) === q.u; });
+      setEx11Results(res);
+      setEx11Validated(true);
+    };
+    stepValidateDisabled = ex11Validated;
+  } else if (step === "ex12") {
+    stepReset = resetEx12;
+    stepValidate = () => {
+      const res = ex12Questions.map((q, qi) => parseInt(ex12Answers[qi] ?? "", 10) === q.answer);
+      setEx12Results(res);
+      setEx12Validated(true);
+    };
+    stepValidateDisabled = ex12Validated;
+  } else if (step === "ex13") {
+    stepReset = resetEx13;
+    stepValidate = () => {
+      const res = ex13Questions.map((q, qi) => parseInt(ex13Answers[qi] ?? "", 10) === q.answer);
+      setEx13Results(res);
+      setEx13Validated(true);
+    };
+    stepValidateDisabled = ex13Validated;
+  } else if (step === "ex14") {
+    stepReset = resetEx14;
+    stepValidate = () => { setEx14Validated(true); };
+    stepValidateDisabled = ex14Validated;
+  } else if (step === "ex15") {
+    stepReset = resetEx15;
+    stepValidate = () => { setEx15Validated(true); };
+    stepValidateDisabled = ex15Validated;
+  } else if (step === "ex16") {
+    stepReset = resetEx16;
+    stepValidate = () => {
+      const res = ex16Questions.map((q, qi) => {
+        const corners = [q.tl, q.tr, q.bl, q.br];
+        return corners.every((val, idx) =>
+          idx === q.givenIdx || parseInt(ex16Answers[qi]?.[idx] ?? "") === val
+        );
+      });
+      setEx16Results(res);
+      setEx16Validated(true);
+    };
+    stepValidateDisabled = ex16Validated;
+  } else if (step === "ex17") {
+    stepReset = resetEx17;
+    stepValidate = () => {
+      const res = ex17Lines.map((line, li) =>
+        line.arrows.map((v, ai) => parseInt(ex17Answers[li]?.[ai] ?? "") === v)
+      );
+      setEx17Results(res);
+      setEx17Validated(true);
+    };
+    stepValidateDisabled = ex17Validated;
+  } else if (step === "ex18") {
+    stepReset = resetEx18;
+    stepValidate = () => {
+      const res = ex18Lines.map((line, li) => line.arrows.map((v, ai) => parseInt(ex18Answers[li]?.[ai] ?? "") === v));
+      setEx18Results(res);
+      setEx18Validated(true);
+    };
+    stepValidateDisabled = ex18Validated;
+  } else if (step === "ex19") {
+    stepReset = resetEx19;
+    stepValidate = () => { setEx19Validated(true); };
+    stepValidateDisabled = ex19Validated;
+  } else if (step === "ex20") {
+    stepReset = resetEx20;
+    stepValidate = () => { setEx20Validated(true); };
+    stepValidateDisabled = ex20Validated;
+  } else if (step === "ex21") {
+    stepReset = resetEx21;
+    stepValidate = () => { setEx21Validated(true); };
+    stepValidateDisabled = ex21Validated;
+  } else if (step === "ex22") {
+    stepReset = resetEx22;
+    stepValidate = () => { setEx22Validated(true); };
+    stepValidateDisabled = ex22Validated;
+  } else if (step === "ex23") {
+    stepReset = resetEx23;
+    stepValidate = () => { setEx23Validated(true); };
+    stepValidateDisabled = ex23Validated;
+  } else if (step === "ex24") {
+    stepReset = resetEx24;
+    stepValidate = () => { setEx24Validated(true); };
+    stepValidateDisabled = ex24Validated;
+  } else if (step === "ex25") {
+    stepReset = resetEx25;
+    stepValidate = () => { setEx25Validated(true); };
+    stepValidateDisabled = ex25Validated;
+  } else if (step === "ex26") {
+    stepReset = resetEx26;
+    stepValidate = () => { setEx26Validated(true); };
+    stepValidateDisabled = ex26Validated;
+  } else if (step === "ex27") {
+    stepReset = resetEx27;
+    stepValidate = () => { setEx27Validated(true); };
+    stepValidateDisabled = ex27Validated;
+  }
+
   return (
     <div className="pb-40">
       {/* Step progress bar — segments per step in current lesson */}
@@ -2150,12 +2321,6 @@ export function A1ModuleContent() {
             })}
           </div>
           {lesson.submoduleId === "A1-2" && <PlaceValueIllustration />}
-          <div className="mt-6 flex items-center justify-between">
-            {!isFirstStep ? (
-              <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            ) : <span />}
-            <AppButton accent="alg" onClick={goNext}>Suivant →</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2238,11 +2403,6 @@ export function A1ModuleContent() {
           {read.audioSrc ? (
             <div className="mt-4"><AudioPlayer src={read.audioSrc} /></div>
           ) : null}
-
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <AppButton accent="alg" onClick={goNext}>Suivant →</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2274,11 +2434,6 @@ export function A1ModuleContent() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <ActionIconButton action="recommencer" onClick={resetExercise1} />
-            <AppButton accent="alg" onClick={goNext}>Suivant →</AppButton>
           </div>
         </AppCard>
       )}
@@ -2315,21 +2470,6 @@ export function A1ModuleContent() {
                 onChange={(val) => { const n = [...ex2Answers]; n[i] = val; setEx2Answers(n); }}
               />
             ))}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  setEx2Validated(true);
-                  setEx2Results(ex2Numbers.map((n, i) => checkWord(ex2Answers[i] ?? "", n)));
-                }}
-                disabled={ex2Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise2} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>Suivant →</AppButton>
           </div>
         </AppCard>
       )}
@@ -2380,23 +2520,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  setEx4Validated(true);
-                  setEx4Results(ex4Numbers.map((n, i) => parseInt(ex4Answers[i] ?? "", 10) === n));
-                }}
-                disabled={ex4Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise4} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2446,23 +2569,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  setEx5Validated(true);
-                  setEx5Results(ex5Numbers.map((n, i) => parseInt(ex5Answers[i] ?? "", 10) === n));
-                }}
-                disabled={ex5Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise5} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2511,25 +2617,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  setEx6Validated(true);
-                  setEx6Results(ex6Compositions.map((comp, i) =>
-                    parseInt(ex6Answers[i] ?? "", 10) === comp.value
-                  ));
-                }}
-                disabled={ex6Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise6} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
           </div>
         </AppCard>
       )}
@@ -2617,30 +2704,6 @@ export function A1ModuleContent() {
               </tbody>
             </table>
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  const results: Record<string, boolean | null> = {};
-                  for (const [key, state] of Object.entries(ex7Grid)) {
-                    if (state === "fill") {
-                      const parts = key.split("-").map(Number);
-                      results[key] = parseInt(ex7Answers[key] ?? "", 10) === (parts[0]! + parts[1]!);
-                    }
-                  }
-                  setEx7Results(results);
-                  setEx7Validated(true);
-                }}
-                disabled={ex7Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise7} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2705,30 +2768,6 @@ export function A1ModuleContent() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  const results: Record<string, boolean | null> = {};
-                  for (const [si, series] of ex8Series.entries()) {
-                    for (const i of series.blanks) {
-                      const ansKey = `${si}-${i}`;
-                      results[ansKey] = parseInt(ex8Answers[ansKey] ?? "", 10) === series.start + i;
-                    }
-                  }
-                  setEx8Results(results);
-                  setEx8Validated(true);
-                }}
-                disabled={ex8Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise8} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2785,16 +2824,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider"
-                disabled={ex9Validated}
-                onClick={() => { if (!ex9Validated) setEx9Validated(true); }} />
-              <ActionIconButton action="recommencer" onClick={resetEx9} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2839,19 +2868,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex10Validated}
-                onClick={() => {
-                  const res = ex10Questions.map((q, qi) => parseInt(ex10Answers[qi] ?? "", 10) === q.h*100 + q.d*10 + q.u);
-                  setEx10Results(res);
-                  setEx10Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx10} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -2925,19 +2941,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex11Validated}
-                onClick={() => {
-                  const res = ex11Questions.map((q, qi) => { const a = ex11Answers[qi] ?? {m:"",c:"",d:"",u:""}; return parseInt(a.m) === q.m*1000 && parseInt(a.c) === q.c*100 && parseInt(a.d) === q.d*10 && parseInt(a.u) === q.u; });
-                  setEx11Results(res);
-                  setEx11Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx11} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -2979,19 +2982,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex12Validated}
-                onClick={() => {
-                  const res = ex12Questions.map((q, qi) => parseInt(ex12Answers[qi] ?? "", 10) === q.answer);
-                  setEx12Results(res);
-                  setEx12Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx12} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -3031,19 +3021,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex13Validated}
-                onClick={() => {
-                  const res = ex13Questions.map((q, qi) => parseInt(ex13Answers[qi] ?? "", 10) === q.answer);
-                  setEx13Results(res);
-                  setEx13Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx13} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -3143,15 +3120,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex14Validated}
-                onClick={() => setEx14Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx14} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -3206,15 +3174,6 @@ export function A1ModuleContent() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex15Validated}
-                onClick={() => setEx15Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx15} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -3297,24 +3256,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex16Validated}
-                onClick={() => {
-                  const res = ex16Questions.map((q, qi) => {
-                    const corners = [q.tl, q.tr, q.bl, q.br];
-                    return corners.every((val, idx) =>
-                      idx === q.givenIdx || parseInt(ex16Answers[qi]?.[idx] ?? "") === val
-                    );
-                  });
-                  setEx16Results(res);
-                  setEx16Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx16} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -3792,38 +3733,6 @@ export function A1ModuleContent() {
               </div>
             ) : null}
 
-            <div className="mt-6 flex items-center justify-between">
-              <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-              <div className="flex gap-2">
-                {!evalStarted && !evalSubmitted ? (
-                  <ActionIconButton action="commencer"
-                    onClick={() => { setEvalStarted(true); setEvalTimeLeft(300); }} />
-                ) : !evalSubmitted ? (
-                  <ActionIconButton action="valider"
-                    onClick={() => evalAutoSubmitRef.current?.()} />
-                ) : evalGrade !== null && evalGrade < passingGrade ? (
-                  <ActionIconButton action="recommencer"
-                    onClick={() => {
-                      setEvalAnswers({});
-                      setEvalResults({});
-                      setEvalGrade(null);
-                      setEvalSubmitted(false);
-                      setEvalStarted(false);
-                      setEvalTimeLeft(null);
-                      if (lesson.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
-                      if (lesson.submoduleId === "A1-2") resetA12Eval();
-                    }}
-                  />
-                ) : null}
-              </div>
-              <AppButton
-                accent="alg"
-                onClick={goNext}
-                disabled={!submoduleAlreadyPassed && (!evalSubmitted || (evalGrade !== null && evalGrade < passingGrade))}
-              >
-                {isLastStep ? "Terminer ✓" : "Suivant →"}
-              </AppButton>
-            </div>
           </AppCard>
       )}
 
@@ -3916,21 +3825,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex17Validated}
-                onClick={() => {
-                  const res = ex17Lines.map((line, li) =>
-                    line.arrows.map((v, ai) => parseInt(ex17Answers[li]?.[ai] ?? "") === v)
-                  );
-                  setEx17Results(res);
-                  setEx17Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx17} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4006,18 +3900,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex18Validated}
-                onClick={() => {
-                  const res = ex18Lines.map((line,li) => line.arrows.map((v,ai) => parseInt(ex18Answers[li]?.[ai] ?? "") === v));
-                  setEx18Results(res); setEx18Validated(true);
-                }} />
-              <ActionIconButton action="recommencer" onClick={resetEx18} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4073,14 +3955,6 @@ export function A1ModuleContent() {
                 </div>
               </div>
             ))}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex19Validated} onClick={() => setEx19Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx19} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -4138,14 +4012,6 @@ export function A1ModuleContent() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex20Validated} onClick={() => setEx20Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx20} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4200,14 +4066,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex21Validated} onClick={() => setEx21Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx21} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -4266,14 +4124,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex22Validated} onClick={() => setEx22Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx22} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4315,14 +4165,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex23Validated} onClick={() => setEx23Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx23} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -4379,14 +4221,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex24Validated} onClick={() => setEx24Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx24} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4438,14 +4272,6 @@ export function A1ModuleContent() {
               );
             })}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex25Validated} onClick={() => setEx25Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx25} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4496,14 +4322,6 @@ export function A1ModuleContent() {
                 </div>
               );
             })}
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex26Validated} onClick={() => setEx26Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx26} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
           </div>
         </AppCard>
       )}
@@ -4568,14 +4386,6 @@ export function A1ModuleContent() {
               </div>
             ))}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton action="valider" disabled={ex27Validated} onClick={() => setEx27Validated(true)} />
-              <ActionIconButton action="recommencer" onClick={resetEx27} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>{isLastStep ? "Terminer ✓" : "Suivant →"}</AppButton>
-          </div>
         </AppCard>
       )}
 
@@ -4612,25 +4422,68 @@ export function A1ModuleContent() {
               />
             ))}
           </div>
-          <div className="mt-6 flex items-center justify-between">
-            <AppButton variant="secondary" onClick={goBack}>← Retour</AppButton>
-            <div className="flex gap-2">
-              <ActionIconButton
-                action="valider"
-                onClick={() => {
-                  setEx3Validated(true);
-                  setEx3Results(ex3Numbers.map((n, i) => checkTensWord(ex3Answers[i] ?? "", n)));
-                }}
-                disabled={ex3Validated}
-              />
-              <ActionIconButton action="recommencer" onClick={resetExercise3} />
-            </div>
-            <AppButton accent="alg" onClick={goNext}>
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </AppButton>
-          </div>
         </AppCard>
       )}
+
+      {/* ── Fixed bottom nav ──────────────────────────────────────────────────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            <button
+              type="button"
+              onClick={goBack}
+              disabled={isFirstStep}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-40"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+              Retour
+            </button>
+
+            {(stepReset || stepValidate) ? (
+              <div className="flex items-center gap-2">
+                {stepReset ? (
+                  <button
+                    type="button"
+                    aria-label="Recommencer"
+                    onClick={stepReset}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    </svg>
+                  </button>
+                ) : null}
+                {stepValidate ? (
+                  <button
+                    type="button"
+                    aria-label="Valider"
+                    onClick={stepValidate}
+                    disabled={stepValidateDisabled}
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  </button>
+                ) : null}
+              </div>
+            ) : <span />}
+
+            <button
+              type="button"
+              onClick={goNext}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              {isLastStep ? (
+                <>Terminer <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+              ) : (
+                <>Suivant <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+              )}
+            </button>
+          </div>
+        </div>
+        <div className="h-[68px]" />
+      </div>
     </div>
   );
 }
