@@ -79,7 +79,7 @@ export const MATH_MODULES: MathModule[] = [
     description: "Prérequis : A1 et fin de A4 (A4.8).",
     submodules: [
       sm("A5.1", "Lire et écrire"),
-      sm("A5.2", "Comparer et ordonner"),
+      sm("A5.2", "Suite de nombres à virgule"),
       sm("A5.3", "Arrondir"),
       sm("A5.4", "Addition et soustraction"),
       sm("A5.5", "Multiplication"),

@@ -1,13 +1,16 @@
 "use client";
 
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
-import { AppCard } from "@/components/ui/AppCard";
+import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import { getMathModule } from "@/lib/curriculum/math-data";
+import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 
 export function MathModuleWorkspace({ moduleId }: { moduleId: string }) {
   const mod = getMathModule(moduleId);
 
   if (!mod) return null;
+
+  const hasLessons = !!getLessonsForModule(moduleId);
 
   return (
     <div className="space-y-6">
@@ -17,17 +20,12 @@ export function MathModuleWorkspace({ moduleId }: { moduleId: string }) {
 
       {moduleId === "A1" ? (
         <A1ModuleContent />
+      ) : hasLessons ? (
+        <GenericModuleContent moduleId={moduleId} />
       ) : (
-        <AppCard header="Sous-modules (référence)">
-          <ol className="list-decimal space-y-2 pl-4 text-sm text-[var(--color-text-secondary)]">
-            {mod.submodules.map((s) => (
-              <li key={s.id}>
-                <span className="font-medium text-[var(--color-text-primary)]">{s.code}</span> —{" "}
-                {s.title}
-              </li>
-            ))}
-          </ol>
-        </AppCard>
+        <p className="text-sm text-[var(--color-text-secondary)]">
+          Contenu non disponible pour ce module.
+        </p>
       )}
     </div>
   );
