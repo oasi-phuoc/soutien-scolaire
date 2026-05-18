@@ -1097,44 +1097,6 @@ function MatchExercise({
   );
 }
 
-// ── Sentence validation (free, client-side) ───────────────────────────────────
-
-type SentenceCheck = { label: string; ok: boolean };
-
-function checkSentence(text: string, verb?: "être" | "avoir"): SentenceCheck[] {
-  const s = text.trim();
-  if (!s) return [];
-
-  const checks: SentenceCheck[] = [];
-  checks.push({ label: "Majuscule", ok: /^[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜÇ«"']/.test(s) });
-  checks.push({ label: "Point final", ok: /[.!?]$/.test(s) });
-
-  if (verb === "être") {
-    const forms = [
-      /\bje\b.{0,10}\bsuis\b/i,
-      /\btu\b.{0,10}\bes\b/i,
-      /\b(?:il|elle|on)\b.{0,10}\best\b/i,
-      /\bnous\b.{0,10}\bsommes\b/i,
-      /\bvous\b.{0,10}\bêtes\b/i,
-      /\b(?:ils|elles)\b.{0,10}\bsont\b/i,
-    ];
-    checks.push({ label: "Verbe être", ok: forms.some(r => r.test(s)) });
-  } else if (verb === "avoir") {
-    const forms = [
-      /j'ai\b/i,
-      /\bje\b.{0,10}\bai\b/i,
-      /\btu\b.{0,10}\bas\b/i,
-      /\b(?:il|elle|on)\b.{0,10}\ba\b/i,
-      /\bnous\b.{0,10}\bavons\b/i,
-      /\bvous\b.{0,10}\bavez\b/i,
-      /\b(?:ils|elles)\b.{0,10}\bont\b/i,
-    ];
-    checks.push({ label: "Verbe avoir", ok: forms.some(r => r.test(s)) });
-  }
-
-  return checks;
-}
-
 // ── Write exercise ────────────────────────────────────────────────────────────
 
 type LTMatch = {
