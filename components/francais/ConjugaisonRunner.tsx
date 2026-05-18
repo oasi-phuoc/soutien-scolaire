@@ -1560,6 +1560,46 @@ function ClassifyExercise({
 
 // ── Tag2 exercise (genre + nombre) ────────────────────────────────────────────
 
+function PillGroup<T extends string>({
+  options,
+  value,
+  correct,
+  validated,
+  onChange,
+}: {
+  options: readonly T[];
+  value: T | null;
+  correct: T;
+  validated: boolean;
+  onChange: (v: T) => void;
+}) {
+  return (
+    <div className="inline-flex overflow-hidden rounded-full border border-[var(--color-border)] text-xs font-semibold">
+      {options.map((opt, oi) => {
+        const active = value === opt;
+        let cls = "px-3 py-1 transition-colors ";
+        if (oi > 0) cls += "border-l border-[var(--color-border)] ";
+        if (active) {
+          if (!validated) {
+            cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+          } else if (opt === correct) {
+            cls += "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
+          } else {
+            cls += "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+          }
+        } else {
+          cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/10";
+        }
+        return (
+          <button key={opt} onClick={() => !validated && onChange(opt)} className={cls}>
+            {opt}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function Tag2Exercise({
   exercise,
   onValidated,
@@ -1579,7 +1619,9 @@ function Tag2Exercise({
   );
   const [validated, setValidated] = useState(false);
 
-  const allFilled = answers.every((a) => a.n !== null && a.g !== null);
+  const allFilled = answers.every((a, i) =>
+    a.n !== null && (items[i]!.gender === null || a.g !== null),
+  );
 
   useEffect(() => {
     onCanValidateChange(allFilled && !validated);
@@ -1590,59 +1632,47 @@ function Tag2Exercise({
     if (validateCommand > 0 && !validated && allFilled) {
       setValidated(true);
       onValidated(
-        items.every((item, i) => answers[i]!.n === item.number && answers[i]!.g === item.gender),
+        items.every((item, i) => {
+          const ans = answers[i]!;
+          return ans.n === item.number && (item.gender === null || ans.g === item.gender);
+        }),
       );
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  function tagBtn(
-    label: string,
-    active: boolean,
-    correct: boolean | null,
-    onClick: () => void,
-  ) {
-    let cls = "rounded border px-2 py-0.5 text-xs font-semibold transition-colors ";
-    if (!active) {
-      cls += "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-fr)]";
-    } else if (!validated) {
-      cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-    } else if (correct) {
-      cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
-    } else {
-      cls += "border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
-    }
-    return (
-      <button key={label} onClick={onClick} className={cls}>
-        {label}
-      </button>
-    );
-  }
-
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="space-y-2">
         {items.map((item, i) => {
           const ans = answers[i]!;
-          const nOk = validated ? ans.n === item.number : null;
-          const gOk = validated ? ans.g === item.gender : null;
+          const nWrong = validated && ans.n !== item.number;
+          const gWrong = validated && item.gender !== null && ans.g !== item.gender;
           return (
-            <div key={i} className="flex items-center gap-3 rounded-lg border border-[var(--color-border)] px-3 py-2">
-              <span className="w-32 text-sm font-medium text-[var(--color-text-primary)]">{item.word}</span>
-              <div className="flex flex-col gap-1">
-                <div className="flex gap-1">
-                  {tagBtn("S", ans.n === "S", nOk !== null ? (ans.n === "S" ? nOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: "S" } : a)))}
-                  {tagBtn("P", ans.n === "P", nOk !== null ? (ans.n === "P" ? nOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: "P" } : a)))}
-                </div>
-                <div className="flex gap-1">
-                  {tagBtn("M", ans.g === "M", gOk !== null ? (ans.g === "M" ? gOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: "M" } : a)))}
-                  {tagBtn("F", ans.g === "F", gOk !== null ? (ans.g === "F" ? gOk : null) : null, () => !validated && setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: "F" } : a)))}
-                </div>
+            <div key={i} className="flex items-center gap-3 rounded-full border border-[var(--color-border)] px-4 py-2">
+              <div className="flex items-center gap-2">
+                <PillGroup
+                  options={["S", "P"] as const}
+                  value={ans.n}
+                  correct={item.number}
+                  validated={validated}
+                  onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, n: v } : a))}
+                />
+                {item.gender !== null && (
+                  <PillGroup
+                    options={["M", "F"] as const}
+                    value={ans.g}
+                    correct={item.gender}
+                    validated={validated}
+                    onChange={(v) => setAnswers((prev) => prev.map((a, idx) => idx === i ? { ...a, g: v } : a))}
+                  />
+                )}
               </div>
-              {validated && (nOk === false || gOk === false) && (
+              <span className="flex-1 text-sm font-semibold text-[var(--color-text-primary)]">{item.word}</span>
+              {(nWrong || gWrong) && (
                 <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                  → {item.number} {item.gender}
+                  → {item.number}{item.gender ? ` ${item.gender}` : ""}
                 </span>
               )}
             </div>
