@@ -545,6 +545,7 @@ function QcmExercise({
     const raw = exercise.pool && exercise.pool.length > 0
       ? shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5)
       : exercise.items;
+    if (exercise.toggleChoices) return raw;
     return raw.map(item => {
       const indexed = item.choices.map((c, i) => ({ c, isCorrect: i === item.correctIdx }));
       const sh = shuffle(indexed);
@@ -1550,31 +1551,36 @@ function ClassifyExercise({
   }, [validateCommand]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-      <div className="space-y-2">
+      <div className="space-y-4">
         {items.map((item, i) => {
           const sel = chosen[i];
           const isRight = sel === item.categoryIdx;
           return (
-            <div key={i} className="flex items-center gap-3">
-              <span className="min-w-[8rem] text-sm font-medium text-[var(--color-text-primary)]">{item.word}</span>
-              <div className="flex flex-wrap gap-2">
+            <div key={i} className="space-y-2">
+              <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+                {renderInlineMarkup(item.word, false)}
+              </p>
+              <div className="flex overflow-hidden rounded-full border border-[var(--color-border-default)]">
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
-                  let cls = "rounded border px-2.5 py-1 text-xs font-medium transition-colors ";
+                  let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
+                  if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
                   if (!active) {
-                    cls += "border-[var(--color-border)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-fr)]";
+                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                   } else if (!validated) {
-                    cls += "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                    cls += "bg-[var(--color-accent-fr)] text-white";
                   } else if (isRight) {
-                    cls += "border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
+                    cls += "bg-emerald-500 text-white";
                   } else {
-                    cls += "border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+                    cls += "bg-red-500 text-white";
                   }
                   return (
                     <button
                       key={ci}
+                      type="button"
                       onClick={() => !validated && setChosen((prev) => prev.map((v, idx) => idx === i ? ci : v))}
                       className={cls}
                     >
@@ -1582,15 +1588,247 @@ function ClassifyExercise({
                     </button>
                   );
                 })}
-                {validated && !isRight && (
-                  <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                    → {exercise.categories[item.categoryIdx]}
-                  </span>
-                )}
               </div>
+              {validated && !isRight && (
+                <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
+                  → {exercise.categories[item.categoryIdx]}
+                </p>
+              )}
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+// ── Word-order exercise (drag-to-arrange) ────────────────────────────────────
+
+function WordOrderExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "word_order" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [states] = useState(() =>
+    exercise.items.map((item) => ({ ...item, shuffled: shuffle([...item.words]) })),
+  );
+  const [arranged, setArranged] = useState<string[][]>(() => states.map(() => []));
+  const [pools, setPools] = useState<string[][]>(() => states.map((s) => [...s.shuffled]));
+  const [validated, setValidated] = useState(false);
+
+  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.words.length);
+
+  useEffect(() => {
+    onCanValidateChange(allFilled && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allFilled, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allFilled) {
+      setValidated(true);
+      const allCorrect = arranged.every((arr, i) =>
+        arr.join(" ") === states[i]!.sentence,
+      );
+      onValidated(allCorrect);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function addWord(qi: number, word: string, wordIdx: number) {
+    if (validated) return;
+    setArranged((prev) => prev.map((arr, i) => i === qi ? [...arr, word] : arr));
+    setPools((prev) => prev.map((pool, i) => i === qi ? pool.filter((_, j) => j !== wordIdx) : pool));
+  }
+
+  function removeWord(qi: number, arrIdx: number) {
+    if (validated) return;
+    const word = arranged[qi]![arrIdx]!;
+    setArranged((prev) => prev.map((arr, i) => i === qi ? arr.filter((_, j) => j !== arrIdx) : arr));
+    setPools((prev) => prev.map((pool, i) => i === qi ? [...pool, word] : pool));
+  }
+
+  return (
+    <div className="space-y-6">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {states.map((item, qi) => {
+        const arr = arranged[qi]!;
+        const pool = pools[qi]!;
+        const correct = arr.join(" ") === item.sentence;
+        return (
+          <div key={qi} className="space-y-3">
+            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
+
+            {/* Arranged sentence */}
+            <div className="min-h-10 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
+              {arr.length === 0 ? (
+                <span className="text-xs text-[var(--color-text-secondary)] self-center">
+                  Touchez un mot ci-dessous pour l'ajouter…
+                </span>
+              ) : arr.map((word, wi) => {
+                let cls = "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer ";
+                if (!validated) {
+                  cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
+                } else if (correct) {
+                  cls += "bg-emerald-500 text-white";
+                } else {
+                  const expected = item.sentence.split(" ")[wi];
+                  cls += word === expected
+                    ? "bg-emerald-500 text-white"
+                    : "bg-red-500 text-white";
+                }
+                return (
+                  <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
+                    {word}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Word pool */}
+            <div className="flex flex-wrap gap-2">
+              {pool.map((word, wi) => (
+                <button
+                  key={wi}
+                  type="button"
+                  onClick={() => addWord(qi, word, wi)}
+                  disabled={validated}
+                  className="rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-1 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-fr)] hover:text-[var(--color-accent-fr)] disabled:opacity-50"
+                >
+                  {word}
+                </button>
+              ))}
+            </div>
+
+            {validated && (
+              <p className={`text-xs font-medium ${correct ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+                {correct ? "✓ Correct !" : `→ ${item.sentence}`}
+              </p>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── Color-highlight exercise ──────────────────────────────────────────────────
+
+const HIGHLIGHT_STYLES = [
+  { bg: "bg-yellow-300 dark:bg-yellow-400", text: "text-yellow-900 dark:text-yellow-900", btn: "bg-yellow-300 dark:bg-yellow-400 text-yellow-900" },
+  { bg: "bg-red-400 dark:bg-red-500", text: "text-white", btn: "bg-red-400 dark:bg-red-500 text-white" },
+  { bg: "bg-emerald-400 dark:bg-emerald-500", text: "text-white", btn: "bg-emerald-400 dark:bg-emerald-500 text-white" },
+];
+
+function ColorHighlightExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "color_highlight" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [activeColor, setActiveColor] = useState<number>(0);
+  const [colored, setColored] = useState<(number | null)[][]>(() =>
+    exercise.items.map((item) => new Array(item.words.length).fill(null)),
+  );
+  const [validated, setValidated] = useState(false);
+
+  const allFilled = colored.every((row, qi) =>
+    exercise.items[qi]!.answers.every((ans, wi) => ans === null || row[wi] !== null),
+  );
+
+  useEffect(() => {
+    onCanValidateChange(allFilled && !validated);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allFilled, validated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && !validated && allFilled) {
+      setValidated(true);
+      const allCorrect = colored.every((row, qi) =>
+        exercise.items[qi]!.answers.every((ans, wi) => ans === null || row[wi] === ans),
+      );
+      onValidated(allCorrect);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  function toggleWord(qi: number, wi: number) {
+    if (validated) return;
+    setColored((prev) =>
+      prev.map((row, ri) =>
+        ri !== qi
+          ? row
+          : row.map((c, ci) => {
+              if (ci !== wi) return c;
+              return c === activeColor ? null : activeColor;
+            }),
+      ),
+    );
+  }
+
+  return (
+    <div className="space-y-5">
+      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+
+      {/* Color selector */}
+      <div className="flex overflow-hidden rounded-full border border-[var(--color-border-default)]">
+        {exercise.colors.map((label, ci) => {
+          const style = HIGHLIGHT_STYLES[ci]!;
+          const active = activeColor === ci;
+          return (
+            <button
+              key={ci}
+              type="button"
+              onClick={() => setActiveColor(ci)}
+              className={`flex-1 py-1.5 text-center text-xs font-semibold transition-all ${ci > 0 ? "border-l border-[var(--color-border-default)]" : ""} ${active ? `${style.btn} ring-2 ring-inset ring-white/40` : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"}`}
+            >
+              {label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Sentences */}
+      <div className="space-y-4">
+        {exercise.items.map((item, qi) => (
+          <div key={qi} className="space-y-2">
+            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
+            <div className="flex flex-wrap gap-1.5">
+              {item.words.map((word, wi) => {
+                const colorIdx = colored[qi]![wi];
+                const expectedIdx = item.answers[wi];
+                const style = colorIdx !== null ? HIGHLIGHT_STYLES[colorIdx] : null;
+                let cls = "cursor-pointer rounded px-2 py-0.5 text-sm font-medium transition-all select-none ";
+                if (validated && colorIdx !== null && expectedIdx !== null) {
+                  cls += colorIdx === expectedIdx
+                    ? `${style!.bg} ${style!.text}`
+                    : "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
+                } else if (validated && colorIdx !== null && expectedIdx === null) {
+                  cls += "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
+                } else if (colorIdx !== null) {
+                  cls += `${style!.bg} ${style!.text}`;
+                } else {
+                  cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-default)]";
+                }
+                return (
+                  <button key={wi} type="button" onClick={() => toggleWord(qi, wi)} className={cls}>
+                    {word}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -1759,6 +1997,12 @@ function ExerciseView({
       )}
       {exercise.type === "classify" && (
         <ClassifyExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "word_order" && (
+        <WordOrderExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "color_highlight" && (
+        <ColorHighlightExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "clock_read" && (
         <ClockReadExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
