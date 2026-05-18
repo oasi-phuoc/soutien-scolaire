@@ -96,13 +96,20 @@ const a1GrPhrases: GrammarLesson = {
   level: "A1",
   title: "Les phrases",
   theory: [
-    { type: "heading", text: "La structure de la phrase" },
+    { type: "heading", text: "La structure de la phrase", trans: { en: "The structure of the sentence", ar: "بنية الجملة", fa: "ساختار جمله", ti: "ቅርጺ ሓሳብ", uk: "Структура речення" } },
     {
       type: "plain_list",
       items: [
         "En français, une phrase suit l'ordre : {su}Sujet{/su} + {ve}Verbe{/ve} + {co}Complément{/co}.",
       ],
       noBulletItems: [0],
+      transItems: {
+        en: ["In French, a sentence follows the order: {su}Subject{/su} + {ve}Verb{/ve} + {co}Complement{/co}."],
+        ar: ["في الفرنسية، تتبع الجملة الترتيب: {su}الفاعل{/su} + {ve}الفعل{/ve} + {co}المتمم{/co}."],
+        fa: ["در فرانسه، جمله از ترتیب زیر پیروی می‌کند: {su}فاعل{/su} + {ve}فعل{/ve} + {co}متمم{/co}."],
+        ti: ["ብፈረንሳይ፣ ሓሳብ ነዚ ስርዓት ይኸተል: {su}ሓካይ{/su} + {ve}ግሲ{/ve} + {co}መወከስ{/co}."],
+        uk: ["У французькій, речення слідує порядку: {su}Підмет{/su} + {ve}Присудок{/ve} + {co}Додаток{/co}."],
+      },
     },
     {
       type: "grid",
@@ -114,8 +121,22 @@ const a1GrPhrases: GrammarLesson = {
         ["Les enfants", "jouent", "dans le parc."],
         ["Je", "parle", "à Marie."],
       ],
+      transHeaders: {
+        en: ["Subject (S)", "Verb (V)", "Complement (C)"],
+        ar: ["الفاعل (S)", "الفعل (V)", "المتمم (C)"],
+        fa: ["فاعل (S)", "فعل (V)", "متمم (C)"],
+        ti: ["ሓካይ (S)", "ግሲ (V)", "መወከስ (C)"],
+        uk: ["Підмет (S)", "Присудок (V)", "Додаток (C)"],
+      },
+      transRows: {
+        en: [["Paul", "eats", "an apple."], ["She", "lives", "in Paris."], ["The children", "play", "in the park."], ["I", "speak", "to Marie."]],
+        ar: [["بول", "يأكل", "تفاحة."], ["هي", "تسكن", "في باريس."], ["الأطفال", "يلعبون", "في الحديقة."], ["أنا", "أتحدث", "مع ماري."]],
+        fa: [["پول", "می‌خورد", "یک سیب."], ["او", "زندگی می‌کند", "در پاریس."], ["بچه‌ها", "بازی می‌کنند", "در پارک."], ["من", "صحبت می‌کنم", "با ماری."]],
+        ti: [["ጳውሎስ", "ይበልዕ", "ሓደ ጣፍ."], ["ንሳ", "ትቕመጥ", "ኣብ ፓሪስ."], ["ቆልዑ", "ይጻወቱ", "ኣብ ጃርዲን."], ["ኣነ", "ይዛረብ", "ምስ ማሪ."]],
+        uk: [["Пол", "їсть", "яблуко."], ["Вона", "живе", "в Парижі."], ["Діти", "грають", "у парку."], ["Я", "розмовляю", "з Марі."]],
+      },
     },
-    { type: "heading", text: "Le sujet (S)", sub: true },
+    { type: "heading", text: "Le sujet (S)", sub: true, trans: { en: "The subject (S)", ar: "الفاعل (S)", fa: "فاعل (S)", ti: "ሓካይ (S)", uk: "Підмет (S)" } },
     {
       type: "plain_list",
       items: [
@@ -123,29 +144,64 @@ const a1GrPhrases: GrammarLesson = {
         "C'est souvent un pronom ({a}je, tu, il, elle…{/a}) ou un nom ({a}Marie, le chat…{/a}).",
         "Le verbe s'accorde toujours avec le sujet.",
       ],
+      transItems: {
+        en: ["The subject answers the question: {a}Who performs the action?{/a}", "It is often a pronoun ({a}I, you, he, she…{/a}) or a noun ({a}Marie, the cat…{/a}).", "The verb always agrees with the subject."],
+        ar: ["الفاعل يجيب على السؤال: {a}من يقوم بالفعل؟{/a}", "غالبًا ضمير ({a}أنا، أنت، هو، هي…{/a}) أو اسم ({a}ماري، القط…{/a}).", "يتوافق الفعل دائمًا مع الفاعل."],
+        fa: ["فاعل به سؤال پاسخ می‌دهد: {a}چه کسی عمل را انجام می‌دهد؟{/a}", "اغلب یک ضمیر ({a}من، تو، او…{/a}) یا یک اسم ({a}ماری، گربه…{/a}) است.", "فعل همیشه با فاعل مطابقت دارد."],
+        ti: ["ሓካይ ነዚ ሕቶ ይምልስ: {a}መን ስራሕ ይሰርሕ?{/a}", "ብብዝሒ ተዛረብቲ ({a}ኣነ፣ ንስኻ፣ ንሱ/ንሳ…{/a}) ወይ ሽም ({a}ማሪ፣ ድሙ…{/a}) እዩ.", "ግሲ ምስ ሓካይ ኩሉ ጊዜ ይሰማማዕ."],
+        uk: ["Підмет відповідає на запитання: {a}Хто виконує дію?{/a}", "Це часто займенник ({a}я, ти, він, вона…{/a}) або іменник ({a}Марі, кіт…{/a}).", "Дієслово завжди узгоджується з підметом."],
+      },
     },
-    { type: "heading", text: "Le verbe (V)", sub: true },
+    { type: "heading", text: "Le verbe (V)", sub: true, trans: { en: "The verb (V)", ar: "الفعل (V)", fa: "فعل (V)", ti: "ግሲ (V)", uk: "Присудок (V)" } },
     {
       type: "plain_list",
-      items: [
-        "Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet.",
-      ],
+      items: ["Le verbe exprime {a}l'action{/a} ou {a}l'état{/a} du sujet."],
+      transItems: {
+        en: ["The verb expresses {a}the action{/a} or {a}the state{/a} of the subject."],
+        ar: ["الفعل يعبر عن {a}الحدث{/a} أو {a}الحالة{/a} للفاعل."],
+        fa: ["فعل {a}عمل{/a} یا {a}حالت{/a} فاعل را بیان می‌کند."],
+        ti: ["ግሲ {a}ስራሕ{/a} ወይ {a}ሃለዋት{/a} ናይ ሓካይ ይገልጽ."],
+        uk: ["Дієслово виражає {a}дію{/a} або {a}стан{/a} підмета."],
+      },
     },
     {
       type: "highlight",
       label: "Exemples d'actions",
       items: ["manger", "partir", "travailler"],
+      transLabel: { en: "Examples of actions", ar: "أمثلة على الأفعال", fa: "نمونه‌های عمل", ti: "ኣብነታት ስራሕ", uk: "Приклади дій" },
+      transItems: {
+        en: ["to eat", "to leave", "to work"],
+        ar: ["يأكل", "يغادر", "يعمل"],
+        fa: ["خوردن", "رفتن", "کار کردن"],
+        ti: ["ምብላዕ", "ምኻድ", "ምስራሕ"],
+        uk: ["їсти", "іти", "працювати"],
+      },
     },
     {
       type: "highlight",
       label: "Exemples d'états",
       items: ["être", "avoir", "sembler"],
+      transLabel: { en: "Examples of states", ar: "أمثلة على الحالات", fa: "نمونه‌های حالت", ti: "ኣብነታት ሃለዋት", uk: "Приклади станів" },
+      transItems: {
+        en: ["to be", "to have", "to seem"],
+        ar: ["يكون", "يملك", "يبدو"],
+        fa: ["بودن", "داشتن", "به نظر رسیدن"],
+        ti: ["ምዃን", "ምሓዝ", "ምምሳል"],
+        uk: ["бути", "мати", "здаватися"],
+      },
     },
-    { type: "heading", text: "Le complément (C)", sub: true },
+    { type: "heading", text: "Le complément (C)", sub: true, trans: { en: "The complement (C)", ar: "المتمم (C)", fa: "متمم (C)", ti: "መወከስ (C)", uk: "Додаток (C)" } },
     {
       type: "plain_list",
       items: ["Le complément complète le verbe. Le complément n'est pas toujours obligatoire. Il y a trois types :"],
       noBulletItems: [0],
+      transItems: {
+        en: ["The complement completes the verb. The complement is not always required. There are three types:"],
+        ar: ["المتمم يكمل الفعل. المتمم ليس دائمًا إلزاميًا. هناك ثلاثة أنواع:"],
+        fa: ["متمم فعل را تکمیل می‌کند. متمم همیشه اجباری نیست. سه نوع وجود دارد:"],
+        ti: ["መወከስ ግሲ ይምልእ. ኩሉ ጊዜ ግዴታ ኣይኮነን. ሰለስተ ዓይነታት ኣለዉ:"],
+        uk: ["Додаток доповнює дієслово. Він не завжди обов'язковий. Є три типи:"],
+      },
     },
     {
       type: "highlight",
@@ -155,6 +211,14 @@ const a1GrPhrases: GrammarLesson = {
         "Je mange {a}une pomme{/a}.",
       ],
       noBulletItems: [0],
+      transLabel: { en: "COD — Direct Object", ar: "COD — المفعول به المباشر", fa: "COD — مفعول مستقیم", ti: "COD — ቀጥታዊ ተወሳኺ", uk: "COD — Прямий додаток" },
+      transItems: {
+        en: ["The complement answers the question {a}what? / who?{/a}", "I eat {a}an apple{/a}."],
+        ar: ["المتمم يجيب على السؤال {a}ماذا؟ / من؟{/a}", "أنا آكل {a}تفاحة{/a}."],
+        fa: ["متمم به سؤال {a}چه؟ / چه کسی؟{/a} پاسخ می‌دهد", "من {a}یک سیب{/a} می‌خورم."],
+        ti: ["መወከስ ነዚ ሕቶ ይምልስ {a}ምንታይ? / መን?{/a}", "ኣነ {a}ሓደ ጣፍ{/a} ይበልዕ."],
+        uk: ["Додаток відповідає на запитання {a}що? / кого?{/a}", "Я їм {a}яблуко{/a}."],
+      },
     },
     {
       type: "highlight",
@@ -164,6 +228,14 @@ const a1GrPhrases: GrammarLesson = {
         "Je parle {a}à Marie{/a}.",
       ],
       noBulletItems: [0],
+      transLabel: { en: "COI — Indirect Object", ar: "COI — المفعول به غير المباشر", fa: "COI — مفعول غیرمستقیم", ti: "COI — ዘይቀጥታዊ ተወሳኺ", uk: "COI — Непрямий додаток" },
+      transItems: {
+        en: ["The complement answers the question {a}to whom? / to what?{/a}", "I speak {a}to Marie{/a}."],
+        ar: ["المتمم يجيب على السؤال {a}لمن؟ / لماذا؟{/a}", "أنا أتحدث {a}مع ماري{/a}."],
+        fa: ["متمم به سؤال {a}به چه کسی؟ / به چه؟{/a} پاسخ می‌دهد", "من با {a}ماری{/a} صحبت می‌کنم."],
+        ti: ["መወከስ ነዚ ሕቶ ይምልስ {a}ንመን? / ንምንታይ?{/a}", "ምስ {a}ማሪ{/a} ይዛረብ."],
+        uk: ["Додаток відповідає на запитання {a}кому? / чому?{/a}", "Я розмовляю {a}з Марі{/a}."],
+      },
     },
     {
       type: "highlight",
@@ -173,6 +245,14 @@ const a1GrPhrases: GrammarLesson = {
         "J'habite {a}à Paris{/a}.",
       ],
       noBulletItems: [0],
+      transLabel: { en: "CC — Adverbial Complement", ar: "CC — المتمم الظرفي", fa: "CC — متمم قیدی", ti: "CC — ናይ ሁኔታ ተወሳኺ", uk: "CC — Обставинний додаток" },
+      transItems: {
+        en: ["The complement answers the question {a}where? / when? / how?{/a}", "I live {a}in Paris{/a}."],
+        ar: ["المتمم يجيب على السؤال {a}أين؟ / متى؟ / كيف؟{/a}", "أنا أسكن {a}في باريس{/a}."],
+        fa: ["متمم به سؤال {a}کجا؟ / کِی؟ / چطور؟{/a} پاسخ می‌دهد", "من در {a}پاریس{/a} زندگی می‌کنم."],
+        ti: ["መወከስ ነዚ ሕቶ ይምልስ {a}ኣበይ? / መዓዝ? / ብኸመይ?{/a}", "ኣብ {a}ፓሪስ{/a} ይቕመጥ."],
+        uk: ["Додаток відповідає на запитання {a}де? / коли? / як?{/a}", "Я живу {a}у Парижі{/a}."],
+      },
     },
   ],
   exercises: [
