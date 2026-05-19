@@ -49,7 +49,7 @@ export type MathRichBlock =
   | { type: "rule"; titleFr: string; itemsFr: string[]; pivot?: Partial<Record<PivotCode, { title: string; items: string[] }>> }
   | { type: "note"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "example"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
-  | { type: "table"; headersFr: string[]; rows: string[][]; captionFr?: string }
+  | { type: "table"; headersFr: string[]; rows: string[][]; captionFr?: string; accentHeader?: boolean }
   | { type: "plain"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "svg"; markup: string; captionFr?: string; noFrame?: boolean }

@@ -143,6 +143,19 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
             },
           ],
         },
+        { type: "heading", fr: "Comment lire une fraction", black: true },
+        {
+          type: "table",
+          accentHeader: true,
+          headersFr: ["Fraction", "Lecture", "Valeur décimale"],
+          rows: [
+            ["3/10", "trois dixièmes", "0,3"],
+            ["62/10", "soixante-deux dixièmes", "6,2"],
+            ["19/100", "dix-neuf centièmes", "0,19"],
+            ["184/100", "cent quatre-vingt-quatre centièmes", "1,84"],
+          ],
+          captionFr: "Les fractions > 1 ont un numérateur plus grand que le dénominateur (ex : 62/10 = 6,2).",
+        },
         {
           type: "section",
           labelFr: "Cas particuliers",

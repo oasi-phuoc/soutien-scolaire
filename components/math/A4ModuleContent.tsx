@@ -97,7 +97,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
             <thead>
               <tr className="bg-[var(--color-bg-secondary)]">
                 {block.headersFr.map((h, i) => (
-                  <th key={i} className="px-3 py-2 text-left font-semibold text-[var(--color-text-primary)]">{h}</th>
+                  <th key={i} className={`px-3 py-2 text-left font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
                 ))}
               </tr>
             </thead>

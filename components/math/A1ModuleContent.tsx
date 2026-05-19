@@ -134,7 +134,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
             <thead>
               <tr className="bg-[var(--color-bg-secondary)]">
                 {block.headersFr.map((h, i) => (
-                  <th key={i} className="border border-[var(--color-border-default)] px-3 py-1.5 text-left text-xs font-semibold text-[var(--color-text-secondary)]">{h}</th>
+                  <th key={i} className={`border border-[var(--color-border-default)] px-3 py-1.5 text-left text-xs font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
               </tr>
             </thead>
