@@ -159,7 +159,7 @@ export function MathematiquesClient() {
           }`}
           onClick={() => setTab("algebra")}
         >
-          Algèbre et calcul
+          Calculs
         </button>
         <button
           type="button"
@@ -172,7 +172,7 @@ export function MathematiquesClient() {
           }`}
           onClick={() => setTab("geometry")}
         >
-          Géométrie et données
+          Formes
         </button>
       </div>
 
