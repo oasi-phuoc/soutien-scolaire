@@ -103,6 +103,7 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
   <text x='270' y='115' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>centièmes</text>
 </svg>`,
         },
+        { type: "plain", fr: "" },
         {
           type: "section",
           labelFr: "Exemples avec dixièmes et centièmes",
@@ -120,9 +121,6 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
   <rect x='10' y='52' width='36' height='40' fill='#3b82f6'/>
   <line x1='22' y1='52' x2='22' y2='92' stroke='white' stroke-width='1'/><line x1='34' y1='52' x2='34' y2='92' stroke='white' stroke-width='1'/><line x1='46' y1='52' x2='46' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='58' y1='52' x2='58' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='70' y1='52' x2='70' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='82' y1='52' x2='82' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='94' y1='52' x2='94' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='106' y1='52' x2='106' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='118' y1='52' x2='118' y2='92' stroke='#93c5fd' stroke-width='1'/>
   <rect x='10' y='52' width='120' height='40' fill='none' stroke='#2563eb' stroke-width='1.5'/>
-  <text x='22' y='103' text-anchor='middle' font-size='9' fill='#64748b' font-family='system-ui'>3</text>
-  <text x='79' y='103' text-anchor='middle' font-size='9' fill='#64748b' font-family='system-ui'>7</text>
-  <text x='10' y='113' font-size='9' fill='#64748b' font-family='system-ui'>3 parts sur 10</text>
 </svg>`,
               captionFr: "3 parts sur 10",
             },
@@ -137,31 +135,18 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
   <line x1='22' y1='52' x2='22' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='34' y1='52' x2='34' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='46' y1='52' x2='46' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='58' y1='52' x2='58' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='70' y1='52' x2='70' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='82' y1='52' x2='82' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='94' y1='52' x2='94' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='106' y1='52' x2='106' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='118' y1='52' x2='118' y2='112' stroke='#93c5fd' stroke-width='0.5'/>
   <line x1='10' y1='58' x2='130' y2='58' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='64' x2='130' y2='64' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='70' x2='130' y2='70' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='76' x2='130' y2='76' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='82' x2='130' y2='82' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='88' x2='130' y2='88' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='94' x2='130' y2='94' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='100' x2='130' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='106' x2='130' y2='106' stroke='#93c5fd' stroke-width='0.5'/>
   <rect x='10' y='52' width='120' height='60' fill='none' stroke='#2563eb' stroke-width='1.5'/>
-  <text x='70' y='113' text-anchor='middle' font-size='9' fill='#64748b' font-family='system-ui'>19 parts sur 100</text>
 </svg>`,
               captionFr: "19 parts sur 100",
             },
           ],
         },
-        { type: "heading", fr: "Comment lire une fraction", black: true },
-        {
-          type: "table",
-          accentHeader: true,
-          headersFr: ["Fraction", "Lecture", "Valeur décimale"],
-          rows: [
-            ["3/10", "trois dixièmes", "0,3"],
-            ["62/10", "soixante-deux dixièmes", "6,2"],
-            ["19/100", "dix-neuf centièmes", "0,19"],
-            ["184/100", "cent quatre-vingt-quatre centièmes", "1,84"],
-          ],
-          captionFr: "Les fractions > 1 ont un numérateur plus grand que le dénominateur (ex : 62/10 = 6,2).",
-        },
+        { type: "plain", fr: "" },
         {
           type: "section",
           labelFr: "Cas particuliers",
           itemsFr: [
-            "Tout nombre entier s'écrit sous forme de fraction avec dénominateur 1 (ex : 3 = 3/1).",
-            "Toute fraction n/n est égale à 1 (ex : 7/7 = 1, 100/100 = 1).",
+            "Tout nombre entier s'écrit sous forme de fraction avec dénominateur 1 (ex : 3 = [[frac:3/1]]).",
+            "Toute fraction n/n est égale à 1 (ex : [[frac:7/7]] = 1, [[frac:100/100]] = 1).",
           ],
         },
       ],

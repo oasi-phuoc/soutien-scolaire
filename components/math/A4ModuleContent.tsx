@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math-a1-types";
@@ -50,6 +50,29 @@ function buildSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
   return steps;
 }
 
+// ── Inline fraction text renderer ─────────────────────────────────────────────
+// Parses [[frac:N/D]] markers in strings and renders them as vertical fractions
+function renderFracText(text: string): React.ReactNode {
+  const parts = text.split(/\[\[frac:(\d+)\/(\d+)\]\]/);
+  if (parts.length === 1) return text;
+  const nodes: React.ReactNode[] = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    if (parts[i]) nodes.push(parts[i]);
+    if (i + 1 < parts.length) {
+      const num = parts[i + 1]!;
+      const den = parts[i + 2]!;
+      nodes.push(
+        <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}</span>
+          <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{den}</span>
+        </span>
+      );
+    }
+  }
+  return <>{nodes}</>;
+}
+
 // ── Block renderer ─────────────────────────────────────────────────────────────
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
@@ -60,6 +83,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</h3>
       );
     case "plain":
+      if (!block.fr) return <div className="h-3" />;
       return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{block.fr}</p>;
     case "note":
       return (
@@ -141,7 +165,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
-                  <span>{item}</span>
+                  <span>{renderFracText(item)}</span>
                 </li>
               ))}
             </ul>
@@ -281,10 +305,10 @@ function generateFractionItems(): FractionItem[] {
     const d = Math.floor(Math.random() * 9) + 1;
     if (n !== d && !used.has(`${n}-${d}`)) { pairs.push({ n, d }); used.add(`${n}-${d}`); }
   }
-  return pairs.map(({ n, d }, i) => ({ numerator: n, denominator: d, highlight: (i % 2 === 0 ? "num" : "den") as "num" | "den" }));
+  return pairs.map(({ n, d }) => ({ numerator: n, denominator: d, highlight: (Math.random() < 0.5 ? "num" : "den") as "num" | "den" }));
 }
 
-function FractionToggleExercise({ validateCommand, onValidated }: {
+export function FractionToggleExercise({ validateCommand, onValidated }: {
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
