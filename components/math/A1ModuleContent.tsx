@@ -3226,7 +3226,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex16" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 16</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 8</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Complétez les cases</h2>
           </div>
         }>
@@ -3784,7 +3784,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex17" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 17</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 1</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
           </div>
         }>
@@ -3875,7 +3875,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 18 — Droite numérique 0–9000 (A1.3) ──────────────────── */}
       {step === "ex18" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 18</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 2</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez les nombres indiqués par les flèches</h2>
         </div>}>
           <div className="mb-4">
@@ -3950,7 +3950,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 19 — Voisins des dizaines (A1.3) ──────────────────────── */}
       {step === "ex19" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 19</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 3</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Trouvez les voisins des dizaines</h2>
         </div>}>
           <div className="mb-3">
@@ -4006,7 +4006,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 20 — Voisins des centaines (A1.3) ─────────────────────── */}
       {step === "ex20" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 20</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 4</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Trouvez les voisins des centaines</h2>
         </div>}>
           <div className="mb-3">
@@ -4062,7 +4062,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 21 — Sélection comparative (A1.4) ──────────────────────── */}
       {step === "ex21" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 21</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 1</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Sélectionnez les nombres</h2>
         </div>}>
           <div className="mb-3">
@@ -4117,7 +4117,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 22 — Comparaison avec blocs (A1.4) ─────────────────────── */}
       {step === "ex22" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 22</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 2</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comparez les nombres</h2>
         </div>}>
           <div className="mb-3">
@@ -4174,7 +4174,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 23 — Grille de comparaison (A1.4) ──────────────────────── */}
       {step === "ex23" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 23</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 3</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Complétez avec les symboles de comparaison</h2>
         </div>}>
           <div className="mb-3">
@@ -4216,7 +4216,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 24 — Mur de briques (A1.4) ─────────────────────────────── */}
       {step === "ex24" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 24</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 4</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Sélectionnez les nombres</h2>
         </div>}>
           <div className="space-y-5">
@@ -4271,7 +4271,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 25 — Colorier par plage (A1.4) ──────────────────────────── */}
       {step === "ex25" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 25</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 5</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Coloriez les insectes</h2>
         </div>}>
           <div className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
@@ -4322,7 +4322,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 26 — Nombres dans les bulles (A1.4) ─────────────────────── */}
       {step === "ex26" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 26</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 6</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez les nombres dans les bulles</h2>
         </div>}>
           <div className="mb-3">
@@ -4373,7 +4373,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {/* ── Exercice 27 — Écrire entre deux bornes (A1.4) ────────────────────── */}
       {step === "ex27" && (
         <AppCard variant="elevated" header={<div>
-          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 27</p>
+          <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 7</p>
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez un nombre entre les deux nombres</h2>
         </div>}>
           <div className="mb-3">
