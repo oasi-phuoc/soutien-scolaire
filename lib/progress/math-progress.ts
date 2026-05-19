@@ -284,8 +284,31 @@ export function completeSubmodule(
     score !== undefined && scoreMax !== undefined && grade !== undefined
       ? { ...(p.submoduleScores ?? {}), [submoduleId]: { score, max: scoreMax, grade } }
       : p.submoduleScores;
-  if (alreadyCompleted) return { ...p, submoduleStates, submoduleScores };
-  return advanceSubmodule({ ...p, submoduleStates, submoduleScores }, moduleId);
+
+  let next: StoredProgressV1 = alreadyCompleted
+    ? { ...p, submoduleStates, submoduleScores }
+    : advanceSubmodule({ ...p, submoduleStates, submoduleScores }, moduleId);
+
+  // Mark the parent module as completed when all submodules have passed
+  const mod = getMathModule(moduleId);
+  if (mod && next.math[moduleId]?.state !== "completed") {
+    const allPassed = mod.submodules.every((sub) => {
+      const sc = next.submoduleScores?.[sub.id];
+      return sc !== undefined && sc.grade >= PASSING_GRADE;
+    });
+    if (allPassed) {
+      const grades = mod.submodules.map((sub) => next.submoduleScores?.[sub.id]?.grade ?? 0);
+      const avgGrade = grades.reduce((a, b) => a + b, 0) / grades.length;
+      next = {
+        ...next,
+        math: { ...next.math, [moduleId]: { ...next.math[moduleId]!, state: "completed", grade: avgGrade } },
+        lastCompletedMathModuleId: moduleId,
+      };
+      next = recomputeLocks(touchActivity(next));
+    }
+  }
+
+  return next;
 }
 
 export function setLevel(
