@@ -198,9 +198,12 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 }
 
 // ── Main component ───────────────────────────────────────────────────────────
-export function GenericModuleContent({ moduleId }: { moduleId: string }) {
+export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId: string; startSubmoduleId?: string }) {
   const router = useRouter();
-  const lessons = getLessonsForModule(moduleId);
+  const allLessons = getLessonsForModule(moduleId);
+  const lessons = startSubmoduleId && allLessons
+    ? allLessons.filter((l) => l.submoduleId === startSubmoduleId)
+    : allLessons;
 
   // Build steps once on mount (randomized pool)
   const [steps] = useState<FlatStep[]>(() =>
@@ -232,6 +235,11 @@ export function GenericModuleContent({ moduleId }: { moduleId: string }) {
 
   const goNext = useCallback(() => {
     if (isLastStep) {
+      // Mark complete if on the last exercise of a lesson
+      if (currentStep?.kind === "exercise" && exStatus === "correct") {
+        const p = loadProgress();
+        saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
+      }
       router.push("/mathematiques");
     } else {
       // Mark submodule complete when leaving the last exercise of a lesson
@@ -241,8 +249,7 @@ export function GenericModuleContent({ moduleId }: { moduleId: string }) {
           !nextStep || nextStep.kind !== "exercise" || nextStep.lesson.submoduleId !== currentStep.lesson.submoduleId;
         if (isLastExOfLesson && exStatus === "correct") {
           const p = loadProgress();
-          const next = completeSubmodule(p, moduleId, currentStep.lesson.submoduleId);
-          saveProgress(next);
+          saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
         }
       }
       goTo(stepIdx + 1);

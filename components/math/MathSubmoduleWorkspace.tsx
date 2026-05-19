@@ -7,12 +7,23 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { FractionToggleExercise, CombinedDecimalExercise } from "@/components/math/A4ModuleContent";
+import { A1ModuleContent } from "@/components/math/A1ModuleContent";
+import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 
 type WorkspaceStep =
   | { kind: "theory" }
   | { kind: "fraction_toggle" }
   | { kind: "decimal_exercises" }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number };
+
+function shufflePick<T>(arr: T[], n: number): T[] {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j]!, copy[i]!];
+  }
+  return copy.slice(0, Math.min(n, copy.length));
+}
 
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
@@ -21,7 +32,12 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   } else if (lesson.submoduleId === "A4-2") {
     steps.push({ kind: "decimal_exercises" });
   } else {
-    lesson.exercises.slice(0, 5).forEach((item, i) =>
+    const pool = lesson.exercisePool;
+    const size = lesson.poolSize ?? 5;
+    const exercises = pool && pool.length > 0
+      ? shufflePick(pool, size)
+      : lesson.exercises.slice(0, size);
+    exercises.forEach((item, i) =>
       steps.push({ kind: "exercise", item, exNum: i + 1 }),
     );
   }
@@ -187,6 +203,17 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 
 export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId: string; moduleId: string }) {
   const router = useRouter();
+
+  // A1 submodules use the rich A1ModuleContent component
+  if (moduleId === "A1") {
+    return <A1ModuleContent startSubmoduleId={submoduleId} />;
+  }
+
+  // Non-A4 modules with lessons use GenericModuleContent per submodule
+  if (moduleId !== "A4") {
+    return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} />;
+  }
+
   const lesson = getLessonBySubmoduleId(submoduleId);
 
   const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
