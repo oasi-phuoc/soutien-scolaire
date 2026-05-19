@@ -305,7 +305,11 @@ export function MathematiquesClient() {
                         const subLocked = false; // TEMP: unlock all for testing
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
-                          <li key={sub.id} className="flex items-center gap-3 px-4 py-2.5">
+                          <li
+                            key={sub.id}
+                            className={`flex items-center gap-3 px-4 py-2.5 ${subDone ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : ""}`}
+                            onClick={subDone ? (e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}`); } : undefined}
+                          >
                             <SubDot done={subDone} accent={accentColor} moduleLocked={subLocked} />
                             <div className="flex-1 min-w-0">
                               <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
@@ -315,10 +319,17 @@ export function MathematiquesClient() {
                                 {sub.title}
                               </span>
                             </div>
-                            {subDone && score ? (
-                              <span className="shrink-0 text-[10px] text-[var(--color-text-secondary)]">
-                                {score.grade.toFixed(1)}/6
-                              </span>
+                            {subDone ? (
+                              <div className="flex shrink-0 items-center gap-1.5">
+                                {score && (
+                                  <span className="text-[10px] text-[var(--color-text-secondary)]">
+                                    {score.grade.toFixed(1)}/6
+                                  </span>
+                                )}
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-text-secondary)]" aria-hidden>
+                                  <path d="M9 18l6-6-6-6" />
+                                </svg>
+                              </div>
                             ) : subAvailable ? (
                               <button
                                 type="button"
