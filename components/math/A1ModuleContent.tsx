@@ -1872,6 +1872,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const [evalResults, setEvalResults] = useState<Record<string, boolean>>({});
   const [evalGrade, setEvalGrade] = useState<number | null>(null);
   const [evalSubmitted, setEvalSubmitted] = useState(false);
+  const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
 
   // Timer évaluation
   const [evalStarted, setEvalStarted] = useState(false);
@@ -2064,14 +2065,24 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   };
 
   const goBack = () => {
-    if (step === "eval" && evalStarted && !evalSubmitted && evalPageIdx > 0) {
-      setEvalPageIdx(p => p - 1);
-      setEvalPageValidated(false);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (step === "eval" && evalStarted && !evalSubmitted) {
+      setShowEvalCancelConfirm(true);
       return;
     }
     const prevStep = steps[stepIdx - 1];
     if (prevStep) { goTo(prevStep); }
+  };
+
+  const cancelEval = () => {
+    setEvalStarted(false);
+    setEvalPageIdx(0);
+    setEvalPageValidated(false);
+    setEvalAnswers({});
+    setEvalResults({});
+    setEvalGrade(null);
+    setEvalSubmitted(false);
+    setEvalTimeLeft(null);
+    setShowEvalCancelConfirm(false);
   };
 
   const isFirstStep = stepIdx === 0;
@@ -2254,6 +2265,32 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
   return (
     <div className="pb-40">
+      {/* Confirmation dialog — cancel active eval */}
+      {showEvalCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Votre progression sera perdue. Vous pourrez recommencer depuis le début.</p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                Continuer l&apos;évaluation
+              </button>
+              <button
+                type="button"
+                onClick={cancelEval}
+                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Step progress bar — segments per step in current lesson */}
       <div className={`flex gap-1 ${step === "eval" ? "mb-2" : "mb-6"}`}>
         {steps.map((s, i) => (

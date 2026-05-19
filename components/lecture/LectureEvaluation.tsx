@@ -594,17 +594,40 @@ function ResultsScreen({ scores }: { scores: (number | null)[] }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
+function formatTime(s: number): string {
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+}
+
 export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const [stepIdx, setStepIdx] = useState(0);
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
   const [stepScored, setStepScored] = useState(false);
   const [shouldValidate, setShouldValidate] = useState(false);
+  const [evalStarted, setEvalStarted] = useState(false);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
   const step = EVAL_STEPS[stepIdx]!;
   const isResults = step === "results";
   const isPronounceStep = step === "pronounce";
   const showValidateBtn = !isResults && !isPronounceStep && !stepScored;
+
+  // Timer
+  useEffect(() => {
+    if (!evalStarted || isResults || evalTimeLeft === null || evalTimeLeft <= 0) return;
+    const id = setTimeout(() => setEvalTimeLeft((t) => Math.max(0, (t ?? 1) - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [evalStarted, isResults, evalTimeLeft]);
+
+  // Auto-submit when timer reaches 0
+  useEffect(() => {
+    if (evalTimeLeft !== 0 || isResults) return;
+    const total = scores.reduce<number>((s, v) => s + (v ?? 0), 0);
+    const grade = linearSwissGrade(total, 15);
+    onDone(grade, grade >= getPassGrade(), total);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalTimeLeft]);
 
   const goNextRef = useRef<() => void>(() => {});
 
@@ -637,28 +660,103 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
   const progressIdx = isResults ? exerciseSteps.length : stepIdx;
 
   useEffect(() => {
-    onEvalStepChange?.(progressIdx, exerciseSteps.length);
-  }, [progressIdx, exerciseSteps.length, onEvalStepChange]);
+    if (!evalStarted) {
+      onEvalStepChange?.(0, exerciseSteps.length);
+    } else {
+      onEvalStepChange?.(progressIdx, exerciseSteps.length);
+    }
+  }, [progressIdx, exerciseSteps.length, onEvalStepChange, evalStarted]);
 
   return (
     <div className="w-full flex-1 pb-56">
+      {/* Cancel confirmation dialog */}
+      {showCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Votre progression sera perdue. Vous pourrez recommencer depuis le début.</p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setShowCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                Continuer l&apos;évaluation
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setEvalStarted(false);
+                  setEvalTimeLeft(null);
+                  setStepIdx(0);
+                  setScores([null, null, null, null, null]);
+                  setStepScored(false);
+                  setShouldValidate(false);
+                  setShowCancelConfirm(false);
+                }}
+                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="min-h-[280px]">
-        {step === "grid" && (
-          <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
+        {/* Timer chip */}
+        {evalStarted && !isResults && evalTimeLeft !== null && (
+          <div className="mb-4 flex justify-end">
+            <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
+              evalTimeLeft < 60
+                ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
+                : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+            }`}>
+              <span aria-hidden>⏱</span>
+              <span>{formatTime(evalTimeLeft)}</span>
+            </div>
+          </div>
         )}
-        {step === "words" && (
-          <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
+
+        {/* Start screen */}
+        {!evalStarted && !isResults && (
+          <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
+            <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-lecture)]">5:00</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+            <button
+              type="button"
+              onClick={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
+              className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              Commencer
+            </button>
+          </div>
         )}
-        {step === "sound-image" && (
-          <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
+
+        {/* Exercises (shown only when started) */}
+        {evalStarted && (
+          <>
+            {step === "grid" && (
+              <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
+            )}
+            {step === "words" && (
+              <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
+            )}
+            {step === "sound-image" && (
+              <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
+            )}
+            {step === "sound-audio" && (
+              <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
+            )}
+            {step === "pronounce" && (
+              <PronounceExercise key={stepIdx} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
+            )}
+          </>
         )}
-        {step === "sound-audio" && (
-          <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
-        )}
-        {step === "pronounce" && (
-          <PronounceExercise key={stepIdx} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
-        )}
-        {step === "results" && (
+
+        {/* Results (always visible when reached) */}
+        {isResults && (
           <ResultsScreen scores={scores} />
         )}
       </div>
@@ -666,13 +764,21 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
       <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-[60]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            <button type="button" onClick={onBack}
+            <button
+              type="button"
+              onClick={() => {
+                if (evalStarted && !isResults) {
+                  setShowCancelConfirm(true);
+                } else {
+                  onBack();
+                }
+              }}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
               <IconLeft /> Retour
             </button>
 
             <div className="flex items-center gap-2">
-              {showValidateBtn && (
+              {evalStarted && showValidateBtn && (
                 <button type="button" onClick={() => setShouldValidate(true)}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
                   aria-label="Valider">
@@ -682,9 +788,9 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
             </div>
 
             <button type="button" onClick={goNext}
-              disabled={!isResults && !stepScored && !isPronounceStep}
+              disabled={!isResults && (!evalStarted || (!stepScored && !isPronounceStep))}
               className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
-                isResults || stepScored || isPronounceStep ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
+                isResults || (evalStarted && (stepScored || isPronounceStep)) ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
               }`}>
               {isResults ? (<>Terminer <IconCheck /></>) : (<>Suivant <IconRight /></>)}
             </button>
