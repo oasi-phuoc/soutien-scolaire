@@ -31,6 +31,7 @@ import {
   saveProgress,
   completeSubmodule,
 } from "@/lib/progress/math-progress";
+import { DigitTracer } from "@/components/math/DigitTracer";
 
 // ─── Vocabulaire ──────────────────────────────────────────────────────────────
 
@@ -2276,7 +2277,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   return (
     <div className="pb-40">
       {/* Step progress bar — segments per step in current lesson */}
-      <div className="mb-6 flex gap-1">
+      <div className={`flex gap-1 ${step === "eval" ? "mb-2" : "mb-6"}`}>
         {steps.map((s, i) => (
           <div
             key={s}
@@ -2290,6 +2291,22 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
           />
         ))}
       </div>
+      {step === "eval" && evalStarted && !evalSubmitted && (
+        <div className="mb-6 flex gap-1">
+          {Array.from({ length: evalTotalPages }).map((_, i) => (
+            <div
+              key={i}
+              className={`h-1 flex-1 rounded-full transition-colors ${
+                i < evalPageIdx
+                  ? "bg-[var(--color-accent-alg)]"
+                  : i === evalPageIdx
+                    ? "bg-[var(--color-accent-alg)] opacity-60"
+                    : "bg-[var(--color-border-default)]"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
       {step === "theory" && (
@@ -2471,15 +2488,11 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
       {/* ── Écoute (other submodules) ────────────────────────────────────────── */}
       {step === "audio" && lesson.submoduleId !== "A1-1" && read && (
-        <AppCard
-          variant="default"
-          header={
-            <div>
-              <p className="text-sm font-medium uppercase text-[var(--color-accent-alg)]">Écoute</p>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">{read.headingFr}</h2>
-            </div>
-          }
-        >
+        <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+          <div className="mb-3 border-b border-[var(--color-border-default)] pb-3">
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-alg)]">Écoute</p>
+            <h2 className="text-base font-bold text-[var(--color-text-primary)]">{read.headingFr}</h2>
+          </div>
           {read.introFr?.length ? (
             <div className="mb-4 space-y-2 text-sm leading-relaxed">
               {read.introFr.map((t, i) => (
@@ -2548,21 +2561,15 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
           {read.audioSrc ? (
             <div className="mt-4"><AudioPlayer src={read.audioSrc} /></div>
           ) : null}
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 1 — Tracer les chiffres ────────────────────────────────── */}
       {step === "ex1" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Tracer les chiffres</h2>
-            </div>
-          }
-        >
-          <div className="mb-6">
-            <p className="text-sm text-[var(--color-text-secondary)]">Suivez le trait pour écrire les chiffres.</p>
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Tracer les chiffres</h2>
+          <div>
+            <p className="text-sm text-[var(--color-text-secondary)]">Posez le doigt sur le point vert et tracez le chiffre en suivant le trait.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex1[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
                 lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
@@ -2570,28 +2577,19 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </p>
             ) : null}
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="flex justify-center gap-6">
             {ex1Digits.map((digit) => (
-              <div key={digit} className="flex justify-center">
-                <div className="h-56 w-44 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white p-2 dark:bg-zinc-900">
-                  <DigitGuide digit={digit} />
-                </div>
-              </div>
+              <DigitTracer key={digit} digit={digit} />
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 2 — Écrire les nombres ─────────────────────────────────── */}
       {step === "ex2" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écrire les nombres</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écrire les nombres</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les nombres en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex2[pivot] ? (
@@ -2614,19 +2612,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               />
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 4 — Dictée audio ───────────────────────────────────────── */}
       {step === "ex4" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Dictée</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Dictée</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex4[pivot] ? (
@@ -2662,19 +2655,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 5 — Dictée audio dizaines ─────────────────────────────── */}
       {step === "ex5" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Dictée — dizaines</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Dictée — dizaines</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les dizaines.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex5[pivot] ? (
@@ -2710,19 +2698,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 6 — Dictée audio centaines composées ──────────────────── */}
       {step === "ex6" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Dictée — nombres spéciaux</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Dictée — nombres spéciaux</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex6[pivot] ? (
@@ -2758,20 +2741,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 7 — Grille 10–99 ───────────────────────────────────────── */}
       {step === "ex7" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Grille des nombres</h2>
-            </div>
-          }
-        >
-          <div className="mb-4">
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Grille des nombres</h2>
+          <div>
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les cases bleues du tableau.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex7[pivot] ? (
               <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
@@ -2780,82 +2757,69 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </p>
             ) : null}
           </div>
-          <div className="overflow-x-auto">
-            <table className="mx-auto border-collapse">
-              <thead>
-                <tr>
-                  <th className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-semibold text-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-400" />
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
-                    <th key={u} className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
-                      {u}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
-                  <tr key={d}>
-                    <th className="h-[41px] w-[41px] border border-zinc-300 bg-zinc-100 text-center text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
-                      {d}
-                    </th>
-                    {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
-                      const key = `${d}-${u}`;
-                      const value = d + u;
-                      const state = ex7Grid[key] ?? "empty";
-                      const result = ex7Results[key] ?? null;
+          {/* Responsive 10-column grid — cells are always square */}
+          <div className="grid border-l border-t border-zinc-300 dark:border-zinc-600" style={{ gridTemplateColumns: "repeat(10, 1fr)" }}>
+            {/* Header row */}
+            <div className="aspect-square border-b border-r border-zinc-300 bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800" />
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
+              <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-[10px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                {u}
+              </div>
+            ))}
+            {/* Data rows */}
+            {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
+              <React.Fragment key={d}>
+                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-[10px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                  {d}
+                </div>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
+                  const key = `${d}-${u}`;
+                  const value = d + u;
+                  const state = ex7Grid[key] ?? "empty";
+                  const result = ex7Results[key] ?? null;
 
-                      if (state === "revealed") {
-                        return (
-                          <td key={u} className="h-[41px] w-[41px] border border-zinc-300 text-center dark:border-zinc-600">
-                            <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
-                          </td>
-                        );
-                      }
-                      if (state === "fill") {
-                        if (ex7Validated && result !== null) {
-                          return (
-                            <td key={u} className={`h-[41px] w-[41px] p-0 text-center ${result ? "ring-1 ring-inset ring-green-400 bg-[var(--color-bg-primary)]" : "ring-1 ring-inset ring-red-400 bg-[var(--color-bg-primary)]"}`}>
-                              <div className="flex h-[41px] w-[41px] items-center justify-center">
-                                {result
-                                  ? <span className="text-sm font-medium tabular-nums text-[var(--color-text-primary)]">{ex7Answers[key] ?? ""}</span>
-                                  : <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
-                                }
-                              </div>
-                            </td>
-                          );
-                        }
-                        return (
-                          <td key={u} className="h-[41px] w-[41px] border border-zinc-300 bg-blue-100 p-0 dark:border-zinc-600 dark:bg-blue-900/30">
-                            <input
-                              type="text" inputMode="numeric"
-                              value={ex7Answers[key] ?? ""}
-                              onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value.replace(/[^0-9]/g, "") }))}
-                              className="h-[41px] w-[41px] bg-transparent text-center text-sm font-medium tabular-nums outline-none"
-                              aria-label={`Cellule ${value}`}
-                            />
-                          </td>
-                        );
-                      }
-                      return <td key={u} className="h-[41px] w-[41px] border border-zinc-300 dark:border-zinc-600" />;
-                    })}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  if (state === "revealed") {
+                    return (
+                      <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 dark:border-zinc-600">
+                        <span className="text-[10px] font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
+                      </div>
+                    );
+                  }
+                  if (state === "fill") {
+                    if (ex7Validated && result !== null) {
+                      return (
+                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "ring-1 ring-inset ring-green-400" : "ring-1 ring-inset ring-red-400"} border-zinc-300 dark:border-zinc-600`}>
+                          <span className="text-[10px] font-medium tabular-nums text-[var(--color-text-primary)]">
+                            {result ? (ex7Answers[key] ?? "") : value}
+                          </span>
+                        </div>
+                      );
+                    }
+                    return (
+                      <div key={u} className="aspect-square border-b border-r border-zinc-300 bg-blue-100 dark:border-zinc-600 dark:bg-blue-900/30">
+                        <input
+                          type="text" inputMode="numeric"
+                          value={ex7Answers[key] ?? ""}
+                          onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value.replace(/[^0-9]/g, "") }))}
+                          className="h-full w-full bg-transparent text-center text-[10px] font-medium tabular-nums outline-none"
+                          aria-label={`Cellule ${value}`}
+                        />
+                      </div>
+                    );
+                  }
+                  return <div key={u} className="aspect-square border-b border-r border-zinc-300 dark:border-zinc-600" />;
+                })}
+              </React.Fragment>
+            ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 8 — Séries de nombres ──────────────────────────────────── */}
       {step === "ex8" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Séries de nombres</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Séries de nombres</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les séries de nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
@@ -2906,16 +2870,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 9 — Choix multiple dizaines+unités ─────────────────────── */}
       {step === "ex9" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Choisissez combien il y a d&apos;unités</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Choisissez combien il y a d&apos;unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le nombre représenté par les blocs.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex9[pivot] ? (
@@ -2961,16 +2923,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 10 — Comptage blocs éparpillés ─────────────────────────── */}
       {step === "ex10" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Comptez combien il y a d&apos;unités</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Comptez combien il y a d&apos;unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez tous les blocs et écrivez le nombre total.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex10[pivot] ? (
@@ -3005,16 +2965,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 11 — Décomposition M+C+D+U ────────────────────────────── */}
       {step === "ex11" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex11[pivot] ? (
@@ -3076,16 +3034,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 12 — Tours de cubes isométriques ─────────────────────── */}
       {step === "ex12" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Comptez combien il y a de cubes</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Comptez combien il y a de cubes</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex12[pivot] ? (
@@ -3116,15 +3072,13 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {step === "ex13" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Comptez combien il y a de cubes</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Comptez combien il y a de cubes</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex13[pivot] ? (
@@ -3155,16 +3109,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 14 — Décomposer un nombre ─────────────────────────────── */}
       {step === "ex14" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Décomposez le nombre</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Décomposez le nombre</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Décomposez le nombre en milliers, centaines, dizaines et unités.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
@@ -3252,16 +3204,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 15 — Appariement d'étiquettes ──────────────────────────── */}
       {step === "ex15" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Choisissez le(s) étiquette(s) avec le même nombre</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Choisissez le(s) étiquette(s) avec le même nombre</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex15[pivot] ? (
@@ -3306,16 +3256,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 16 — Chaîne de flèches ─────────────────────────────────── */}
       {step === "ex16" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Complétez les cases</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Complétez les cases</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Suivez les flèches pour trouver les nombres manquants.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex16[pivot] ? (
@@ -3387,45 +3335,25 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Évaluation sous-module ──────────────────────────────────────────── */}
       {step === "eval" && (
-          <AppCard
-            variant="elevated"
-            header={
-              <div className="flex items-center justify-between gap-2">
-                <div>
-                  <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">
-                    {evalStarted && !evalSubmitted ? `Question ${evalPageIdx + 1} / ${evalTotalPages} — ${lesson.submoduleCode}` : `Évaluation — ${lesson.submoduleCode}`}
-                  </p>
-                  <h2 className="text-base font-bold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
+          <div className="space-y-4">
+            {/* Timer */}
+            {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
+              <div className="flex justify-end">
+                <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
+                  evalTimeLeft < 60
+                    ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
+                    : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+                }`}>
+                  <span aria-hidden>⏱</span>
+                  <span>{formatTime(evalTimeLeft)}</span>
                 </div>
-                {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
-                  <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
-                    evalTimeLeft < 60
-                      ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
-                      : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
-                  }`}>
-                    <span aria-hidden>⏱</span>
-                    <span>{formatTime(evalTimeLeft)}</span>
-                  </div>
-                )}
               </div>
-            }
-          >
-            <div className="mb-4">
-              <p className="text-sm text-[var(--color-text-secondary)]">
-                Répondez aux questions pour valider ce sous-module.
-              </p>
-              {showPivotTranslation && EVAL_INTRO_PIVOT[pivot] ? (
-                <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]"
-                  lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                  {EVAL_INTRO_PIVOT[pivot]}
-                </p>
-              ) : null}
-            </div>
+            )}
 
             {/* ── Écran de démarrage (avant Commencer) ── */}
             {!evalStarted && !evalSubmitted && (
@@ -3746,30 +3674,67 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })()}
 
-            {evalSubmitted && evalGrade !== null && (
-              <div className="space-y-5">
-                <h2 className="text-xl font-bold text-[var(--color-text-primary)]">Résultats</h2>
-                <div className={`rounded-[var(--radius-lg)] border-2 p-8 text-center ${evalGrade >= passingGrade ? "border-blue-400 bg-blue-50 dark:bg-blue-950/10" : "border-amber-400 bg-amber-50 dark:bg-amber-950/10"}`}>
-                  <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note finale</p>
-                  <p className="mt-1 text-5xl font-bold tabular-nums text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-xl font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{Object.values(evalResults).filter(Boolean).length} / {evalTotalPts} points</p>
-                  <p className={`mt-4 text-base font-bold ${evalGrade >= passingGrade ? "text-blue-600 dark:text-blue-400" : "text-amber-600"}`}>
-                    {evalGrade >= passingGrade ? "✓ Sous-module validé !" : `✗ Requis : ${passingGrade}/6 — Réessaie !`}
-                  </p>
+            {evalSubmitted && evalGrade !== null && (() => {
+              const earnedPts = Object.values(evalResults).filter(Boolean).length;
+              let rows: Array<{ label: string; score: number; max: number }> = [];
+              if (lesson.submoduleId === "A1-2") {
+                rows = [
+                  { label: "Lire les blocs",        score: evalResults.q9  ? 1 : 0,                                             max: 1 },
+                  { label: "Écrire le nombre",       score: evalResults.q10 ? 1 : 0,                                             max: 1 },
+                  { label: "Décomposer en blocs",    score: evalResults.q11 ? 1 : 0,                                             max: 1 },
+                  { label: "Compter les cubes",      score: evalResults.q12 ? 1 : 0,                                             max: 1 },
+                  { label: "Décomposer (×2)",        score: ["q14_0","q14_1"].filter(k => evalResults[k]).length,                max: 2 },
+                  { label: "Étiquettes (×2)",        score: ["q15_0","q15_1"].filter(k => evalResults[k]).length,                max: 2 },
+                  { label: "Grille flèches (×2)",    score: ["q16_0","q16_1"].filter(k => evalResults[k]).length,                max: 2 },
+                ];
+              } else if (lesson.submoduleId === "A1-1") {
+                rows = [
+                  { label: "Écrire en lettres",  score: evalItems_curr.slice(0, 4).filter(e => evalResults[e.id]).length,  max: 4 },
+                  { label: "Écouter & écrire",   score: evalItems_curr.slice(4, 8).filter(e => evalResults[e.id]).length,  max: 4 },
+                  { label: "Séries de nombres",  score: evalItems_curr.slice(8).filter(e => evalResults[e.id]).length,     max: evalItems_curr.slice(8).length },
+                ];
+              } else {
+                rows = evalItems_curr.map(e => ({
+                  label: e.promptFr.length > 42 ? e.promptFr.slice(0, 42) + "…" : e.promptFr,
+                  score: evalResults[e.id] ? 1 : 0,
+                  max: 1,
+                }));
+              }
+              return (
+                <div className="space-y-4">
+                  <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats</h2>
+                  <ul className="space-y-2">
+                    {rows.map((row, i) => {
+                      const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
+                      return (
+                        <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
+                          <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                          <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalGrade >= passingGrade ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+                    <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
+                    <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}</p>
+                    <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {earnedPts}/{evalTotalPts} pts</p>
+                    <p className={`mt-3 text-base font-bold ${evalGrade >= passingGrade ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+                      {evalGrade >= passingGrade ? "✓ Réussi" : "✗ À améliorer"}
+                    </p>
+                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {passingGrade}/6</p>
+                  </div>
                 </div>
-              </div>
-            )}
+              );
+            })()}
 
-          </AppCard>
+          </div>
       )}
 
       {/* ── Exercice 17 — Droite numérique (A1.3) ───────────────────────────── */}
       {step === "ex17" && (
-        <AppCard variant="elevated" header={
-          <div>
-            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
-          </div>
-        }>
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Lisez l&apos;échelle et trouvez le nombre pointé par chaque flèche.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex17[pivot] ? (
@@ -3851,14 +3816,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 18 — Droite numérique 0–9000 (A1.3) ──────────────────── */}
       {step === "ex18" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écrivez les nombres indiqués par les flèches</h2>
-        </div>}>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Lisez l&apos;échelle et trouvez le nombre pointé par chaque flèche.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex18[pivot] ? (
@@ -3925,14 +3890,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 19 — Voisins des dizaines (A1.3) ──────────────────────── */}
       {step === "ex19" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Trouvez les voisins des dizaines</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les dizaines encadrantes.</p>
             <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
@@ -3980,14 +3945,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 20 — Voisins des centaines (A1.3) ─────────────────────── */}
       {step === "ex20" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Trouvez les voisins des centaines</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les centaines encadrantes.</p>
             <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
@@ -4035,14 +4000,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 21 — Sélection comparative (A1.4) ──────────────────────── */}
       {step === "ex21" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Sélectionnez les nombres</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les nombres qui correspondent à la consigne.</p>
           </div>
@@ -4089,14 +4054,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 22 — Comparaison avec blocs (A1.4) ─────────────────────── */}
       {step === "ex22" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Comparez les nombres</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez avec le symbole de comparaison.</p>
           </div>
@@ -4145,14 +4110,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 23 — Grille de comparaison (A1.4) ──────────────────────── */}
       {step === "ex23" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Complétez avec les symboles de comparaison</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur □ pour faire défiler &lt; &gt; =</p>
           </div>
@@ -4186,14 +4151,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 24 — Mur de briques (A1.4) ─────────────────────────────── */}
       {step === "ex24" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Sélectionnez les nombres</h2>
-        </div>}>
           <div className="space-y-5">
             {ex24Data.map((cfg, si) => {
               const consigne = cfg.mode === "moins_que"
@@ -4240,14 +4205,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 25 — Colorier par plage (A1.4) ──────────────────────────── */}
       {step === "ex25" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Coloriez les insectes</h2>
-        </div>}>
           <div className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
             <p>Cliquez sur chaque nombre pour lui attribuer la bonne couleur.</p>
             <div className="flex flex-wrap gap-3 pt-1">
@@ -4290,14 +4255,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 26 — Nombres dans les bulles (A1.4) ─────────────────────── */}
       {step === "ex26" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Écrivez les nombres dans les bulles</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cochez chaque nombre dans la bonne bulle (un nombre peut être dans plusieurs bulles).</p>
           </div>
@@ -4340,14 +4305,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               );
             })}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 27 — Écrire entre deux bornes (A1.4) ────────────────────── */}
       {step === "ex27" && (
-        <AppCard variant="elevated" header={<div>
+        <div className="space-y-4">
+
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Écrivez un nombre entre les deux nombres</h2>
-        </div>}>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez n&apos;importe quel nombre entier entre les deux bornes.</p>
           </div>
@@ -4402,19 +4367,14 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Exercice 3 — Écrire les dizaines ────────────────────────────────── */}
       {step === "ex3" && (
-        <AppCard
-          variant="elevated"
-          header={
-            <div>
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrire les dizaines</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrire les dizaines</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les dizaines en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex3[pivot] ? (
@@ -4437,7 +4397,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               />
             ))}
           </div>
-        </AppCard>
+        </div>
       )}
 
       {/* ── Fixed bottom nav ──────────────────────────────────────────────────── */}
