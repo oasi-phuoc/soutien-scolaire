@@ -10,7 +10,6 @@ import {
 } from "@/lib/curriculum/math-data";
 import {
   computeRecommendation,
-  findPendingEvaluationModule,
   type MathTabId,
 } from "@/lib/curriculum/recommendation";
 import {
@@ -118,11 +117,6 @@ export function MathematiquesClient() {
   );
 
   const reco = useMemo(() => computeRecommendation(tab, progress), [tab, progress]);
-  const pendingEvalId = useMemo(
-    () => findPendingEvaluationModule(tab, progress),
-    [tab, progress],
-  );
-  const pendingModule = pendingEvalId ? getMathModule(pendingEvalId) : undefined;
 
   const done = useMemo(
     () => (hydrated ? completedPassingIds(progress) : new Set<string>()),
@@ -176,19 +170,7 @@ export function MathematiquesClient() {
         </button>
       </div>
 
-      {/* Pending evaluation banner */}
-      {hydrated && pendingModule && pendingEvalId ? (
-        <div className="rounded-[var(--radius-lg)] border border-amber-400/50 bg-amber-50 px-4 py-3 dark:bg-amber-950/20">
-          <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">
-            Module {pendingModule.code} terminé — bravo !
-          </p>
-          <p className="mt-0.5 text-xs text-amber-700 dark:text-amber-400">
-            Évalue tes connaissances avant de continuer (seuil {PASSING_GRADE}/6).
-          </p>
-        </div>
-      ) : null}
-
-      {/* Module cards */}
+{/* Module cards */}
       <section aria-label="Liste des modules" className="space-y-4">
         <ul className="space-y-4">
           {modules.map((m) => {
