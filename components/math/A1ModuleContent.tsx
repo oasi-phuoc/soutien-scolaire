@@ -3489,7 +3489,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                 <div className="space-y-4">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
-                    const m = Math.floor(n / 1000), c = Math.floor((n % 1000) / 100), d = Math.floor((n % 100) / 10), u = n % 10;
+                    const m = Math.floor(n / 1000), _c = Math.floor((n % 1000) / 100), _d = Math.floor((n % 100) / 10), _u = n % 10;
                     const hasM = m > 0;
                     const a = a12EvalEx14Ans[qi] ?? {m:"",c:"",d:"",u:""};
                     const setAns14 = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
