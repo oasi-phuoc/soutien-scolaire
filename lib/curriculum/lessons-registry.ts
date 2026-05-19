@@ -56,3 +56,18 @@ const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
 export function getLessonsForModule(moduleId: string): MathSubmoduleLesson[] | undefined {
   return REGISTRY[moduleId];
 }
+
+export function getLessonBySubmoduleId(submoduleId: string): MathSubmoduleLesson | undefined {
+  for (const lessons of Object.values(REGISTRY)) {
+    const found = lessons.find((l) => l.submoduleId === submoduleId);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+export function getModuleIdForSubmodule(submoduleId: string): string | undefined {
+  for (const [moduleId, lessons] of Object.entries(REGISTRY)) {
+    if (lessons.some((l) => l.submoduleId === submoduleId)) return moduleId;
+  }
+  return undefined;
+}
