@@ -1898,6 +1898,8 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
   // Timer évaluation
   const [evalStarted, setEvalStarted] = useState(false);
+  const [evalPageIdx, setEvalPageIdx] = useState(0);
+  const [evalPageValidated, setEvalPageValidated] = useState(false);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const evalAutoSubmitRef = useRef<(() => void) | null>(null);
 
@@ -1913,7 +1915,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   }, [evalTimeLeft, evalSubmitted]);
 
   useEffect(() => {
-    if (step !== "eval") { setEvalStarted(false); setEvalTimeLeft(null); }
+    if (step !== "eval") { setEvalStarted(false); setEvalTimeLeft(null); setEvalPageIdx(0); setEvalPageValidated(false); }
   }, [step]);
 
   // Niveau de validation (chargé depuis localStorage)
@@ -1958,6 +1960,10 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       ? (pooledExercises as EvalItem[])
       : (lesson.exercises as EvalItem[]);
   const evalTotalPts = lesson.submoduleId === "A1-2" ? 10 : evalItems_curr.length;
+  const evalTotalPages = lesson.submoduleId === "A1-2" ? 7
+    : lesson.submoduleId === "A1-1" ? evalItems.length
+    : evalItems_curr.length;
+  const evalIsLastPage = evalPageIdx >= Math.max(0, evalTotalPages - 1);
   evalAutoSubmitRef.current = () => {
     if (evalSubmitted) return;
     if (lesson.submoduleId === "A1-2") {
@@ -2060,12 +2066,31 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   };
 
   const goNext = () => {
+    if (step === "eval") {
+      if (evalSubmitted) { router.push("/mathematiques"); return; }
+      if (evalStarted && evalPageValidated) {
+        if (evalIsLastPage) {
+          evalAutoSubmitRef.current?.();
+        } else {
+          setEvalPageIdx(p => p + 1);
+          setEvalPageValidated(false);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
+      }
+      return;
+    }
     const nextStep = steps[stepIdx + 1];
     if (nextStep) { goTo(nextStep); }
     else { router.push("/mathematiques"); }
   };
 
   const goBack = () => {
+    if (step === "eval" && evalStarted && !evalSubmitted && evalPageIdx > 0) {
+      setEvalPageIdx(p => p - 1);
+      setEvalPageValidated(false);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     const prevStep = steps[stepIdx - 1];
     if (prevStep) { goTo(prevStep); }
   };
@@ -2243,9 +2268,8 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
     stepValidate = () => { setEx27Validated(true); };
     stepValidateDisabled = ex27Validated;
   } else if (step === "eval") {
-    if (evalStarted && !evalSubmitted) {
-      stepValidate = () => { evalAutoSubmitRef.current?.(); };
-      stepValidateDisabled = false;
+    if (evalStarted && !evalSubmitted && !evalPageValidated) {
+      stepValidate = () => { setEvalPageValidated(true); };
     }
   }
 
