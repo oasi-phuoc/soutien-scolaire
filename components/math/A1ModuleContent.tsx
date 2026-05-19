@@ -555,8 +555,8 @@ function generateA11EvalItems(): EvalItem[] {
   while (Math.abs(s2Start - s1Start) < 5) s2Start = Math.floor(Math.random() * 83) + 10;
   const nums1 = Array.from({ length: 8 }, (_, i) => s1Start + i);
   const nums2 = Array.from({ length: 8 }, (_, i) => s2Start + i);
-  const bi1 = shuffle([0, 1, 2, 3, 4, 5, 6, 7])[0]!;
-  const bi2 = shuffle([0, 1, 2, 3, 4, 5, 6, 7])[0]!;
+  const bi1 = shuffle([0, 1, 2, 3, 4])[0]!;
+  const bi2 = shuffle([0, 1, 2, 3, 4])[0]!;
   const seriesItems: EvalItem[] = [
     { id: "eval-series-0", promptFr: "", type: "number" as const, acceptable: [String(nums1[bi1]!)], seriesNums: nums1, blankIdx: bi1 },
     { id: "eval-series-1", promptFr: "", type: "number" as const, acceptable: [String(nums2[bi2]!)], seriesNums: nums2, blankIdx: bi2 },
