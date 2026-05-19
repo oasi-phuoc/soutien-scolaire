@@ -25,8 +25,6 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "usine",      phonemes: ["/y/", "/z/", "/i/", "/n/"] },
   { label: "uniforme",   phonemes: ["/y/", "/n/", "/i/", "/f/", "/r/", "/m/"] },
   { label: "école",      phonemes: ["/e/", "/k/", "/l/"] },
-  { label: "étoile",     phonemes: ["/e/", "/t/", "/wa/", "/l/"] },
-  { label: "épée",       phonemes: ["/e/", "/p/"] },
   { label: "elephant",   phonemes: ["/e/", "/l/", "/f/"] },
   { label: "escalier",   phonemes: ["/e/", "/s/", "/k/", "/a/", "/l/"] },
   // ── A (more) ───────────────────────────────────────────────────────────────
@@ -149,7 +147,6 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "soleil",     phonemes: ["/s/", "/l/"] },
   { label: "souris",     phonemes: ["/s/", "/r/", "/i/"] },
   { label: "stylo",      phonemes: ["/s/", "/t/", "/i/", "/l/", "/o/"] },
-  { label: "solo",       phonemes: ["/s/", "/o/", "/l/"] },
   { label: "cire",       phonemes: ["/s/", "/i/", "/r/"] },           // c + i → /s/
   // ── T ──────────────────────────────────────────────────────────────────────
   { label: "tapis",      phonemes: ["/t/", "/a/", "/p/", "/i/"] },
@@ -175,7 +172,6 @@ export const WORD_ITEMS: WordItem[] = [
   { label: "xylophone",  phonemes: ["/ks/", "/i/", "/l/", "/f/"] },
   // ── Z ──────────────────────────────────────────────────────────────────────
   { label: "zebre",          phonemes: ["/z/", "/b/", "/r/"] },
-  { label: "zéro",           phonemes: ["/z/", "/e/", "/r/", "/o/"] },
   { label: "zigzag",         phonemes: ["/z/", "/i/", "/g/", "/a/"] },
   { label: "zoo",            phonemes: ["/z/"] },
   // ── Légumes & Fruits ───────────────────────────────────────────────────────
@@ -249,7 +245,7 @@ export const LETTER_WORDS: string[] = [
   "déluge","dentiste","désert","diable","dictionnaire","dinde","diplôme","divan",
   "dolmen","donjon","dossier","douve","dromadaire","dunette","durion",
   // ── E ──
-  "école","étoile","épée","éléphant","escalier","écharpe","écureuil","enfant",
+  "école","éléphant","escalier","écharpe","écureuil","enfant",
   "enveloppe","éponge","épingle","église","étable","escargot","éventail","érable",
   "étagère","échelle","épaule","éclair","écran","édredon","effrayant","égout",
   "éléphant","émeu","encre","endroit","entonnoir","épice","équipe","erreur",
@@ -327,7 +323,7 @@ export const LETTER_WORDS: string[] = [
   "rouleau","roussette","ruche","ruisseau","rutabaga",
   "romarin","raisin",
   // ── S ──
-  "sapin","serpent","singe","soleil","souris","surligneur","stylo","solo","cire","sac",
+  "sapin","serpent","singe","soleil","souris","surligneur","stylo","cire","sac",
   "sandwich","sanglier","salade","sauterelle","saucisse","saumon","scarabée",
   "sorcière","sirop","seau","sabot","safran","saule","sauterelle","scorpion",
   "seiche","sentier","séquoia","serre","silex","siphon","sittelle","socle",
@@ -359,7 +355,7 @@ export const LETTER_WORDS: string[] = [
   "pyramide","mystère","système","cycle","gymnase","type","encyclopédie","pyjama",
   "crayons","tuyau","joyau","mayonnaise","voyou","ayant","crayon","yucca",
   // ── Z ──
-  "zèbre","zéro","zigzag","zoo","zombie","zone","zapper","zénith","zinc","zircon",
+  "zèbre","zigzag","zoo","zombie","zone","zapper","zénith","zinc","zircon",
   "zombie","zonard","zoologie","zouave","zut","pizza","trapèze","bronze","gazette",
 ];
 
