@@ -2052,6 +2052,8 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
     setEvalSubmitted(false);
     setEvalStarted(false);
     setEvalTimeLeft(null);
+    setEvalPageIdx(0);
+    setEvalPageValidated(false);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetEx16(); resetA12Eval(); }
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
@@ -3348,7 +3350,9 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
             header={
               <div className="flex items-center justify-between gap-2">
                 <div>
-                  <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Évaluation — {lesson.submoduleCode}</p>
+                  <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">
+                    {evalStarted && !evalSubmitted ? `Question ${evalPageIdx + 1} / ${evalTotalPages} — ${lesson.submoduleCode}` : `Évaluation — ${lesson.submoduleCode}`}
+                  </p>
                   <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
                 </div>
                 {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
@@ -3384,7 +3388,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                 <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
                 <button
                   type="button"
-                  onClick={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
+                  onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPageValidated(false); setEvalTimeLeft(5 * 60); }}
                   className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
                 >
                   Commencer
@@ -3392,43 +3396,35 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
               </div>
             )}
 
-            {/* ── Exercices A1.2 (visibles après Commencer ou si déjà validé) ── */}
-            {(evalStarted || evalSubmitted) && lesson.submoduleId === "A1-2" && (() => {
+            {/* ── Question page A1.2 ── */}
+            {evalStarted && !evalSubmitted && lesson.submoduleId === "A1-2" && (() => {
               const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
-              const q9val  = a12EvalQ9.tens * 10 + a12EvalQ9.units;
-              const q10val = a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u;
-              const _r9  = evalSubmitted ? (evalResults["q9"] ?? null) : null;
-              const r10 = evalSubmitted ? (evalResults["q10"] ?? null) : null;
-              const r11 = evalSubmitted ? (evalResults["q11"] ?? null) : null;
-              const r12 = evalSubmitted ? (evalResults["q12"] ?? null) : null;
-              return (
-                <div className="space-y-4">
-                  {/* Q1 — Ex9 style MCQ */}
-                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">1. Choisissez le nombre représenté par les blocs. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+
+              if (evalPageIdx === 0) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Choisissez le nombre représenté par les blocs.</p>
+                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
                       {a12EvalQ9.tens > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={8} />)}</div>}
                       {a12EvalQ9.units > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.units},(_,ui)=><SvgUnite key={ui} s={11} />)}</div>}
                     </div>
                     <div className="flex justify-center gap-2 px-3 py-2">
-                      {a12EvalQ9.choices.map(c => {
-                        const isSelected = a12EvalQ9Sel === c;
-                        const isCorrect  = evalSubmitted && c === q9val;
-                        const isWrong    = evalSubmitted && isSelected && c !== q9val;
-                        return (
-                          <button key={c} type="button"
-                            onClick={() => { if (!evalSubmitted) setA12EvalQ9Sel(c); }}
-                            className={`w-16 rounded border py-1.5 text-sm font-normal text-[var(--color-text-primary)] transition-colors ${isCorrect ? "border-blue-400 bg-[var(--color-bg-primary)]" : isWrong ? "border-amber-400 bg-[var(--color-bg-primary)] line-through decoration-amber-500" : isSelected ? "border-teal-500 bg-teal-50 dark:bg-teal-950/30" : "border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
-                            {c}
-                          </button>
-                        );
-                      })}
+                      {a12EvalQ9.choices.map(c => (
+                        <button key={c} type="button"
+                          onClick={() => setA12EvalQ9Sel(c)}
+                          className={`w-16 rounded border py-1.5 text-sm font-normal text-[var(--color-text-primary)] transition-colors ${a12EvalQ9Sel === c ? "border-teal-500 bg-teal-50 dark:bg-teal-950/30" : "border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                          {c}
+                        </button>
+                      ))}
                     </div>
                   </div>
+                </div>
+              );
 
-                  {/* Q2 — Ex10 style SVG + input */}
-                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">2. Comptez tous les blocs et écrivez le nombre total. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+              if (evalPageIdx === 1) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
+                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ10.canvasH}}>
                       {a12EvalQ10.positions.map((pos,pi)=>(
                         <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3437,17 +3433,19 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                       ))}
                     </div>
                     <div className="mt-2">
-                      <AppInput label="" id="a12eval-q10"
-                        value={evalSubmitted && r10 === false ? String(q10val) : a12EvalQ10Ans}
-                        onChange={e => { if (!evalSubmitted) setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, "")); }}
-                        placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={evalSubmitted}
-                        className={r10 === true ? "!border-blue-400" : r10 === false ? "!border-amber-400" : "!bg-blue-50 dark:!bg-blue-950/30"} />
+                      <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
+                        onChange={e => setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, ""))}
+                        placeholder="Total…" inputMode="numeric" autoComplete="off"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
                     </div>
                   </div>
+                </div>
+              );
 
-                  {/* Q3 — Ex11 style SVG + 4 fields */}
-                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">3. Écrivez combien il y a de milliers, centaines, dizaines, unités. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+              if (evalPageIdx === 2) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
+                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ11.canvasH}}>
                       {a12EvalQ11.positions.map((pos,pi)=>(
                         <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3457,369 +3455,251 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                     </div>
                     <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium">
                       <span className="shrink-0">=</span>
-                      {evalSubmitted && r11 !== null ? (() => {
-                        const mOk = parseInt(a12EvalQ11Ans.m) === a12EvalQ11.m * 1000;
-                        const cOk = parseInt(a12EvalQ11Ans.c) === a12EvalQ11.c * 100;
-                        const dOk = parseInt(a12EvalQ11Ans.d) === a12EvalQ11.d * 10;
-                        const uOk = parseInt(a12EvalQ11Ans.u) === a12EvalQ11.u;
-                        return (<>
-                          <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-[var(--color-text-primary)] ${mOk?"border-blue-400":"border-amber-400"}`}>{mOk?a12EvalQ11Ans.m:String(a12EvalQ11.m*1000)}</span>
-                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                          <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-[var(--color-text-primary)] ${cOk?"border-blue-400":"border-amber-400"}`}>{cOk?a12EvalQ11Ans.c:String(a12EvalQ11.c*100)}</span>
-                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                          <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-[var(--color-text-primary)] ${dOk?"border-blue-400":"border-amber-400"}`}>{dOk?a12EvalQ11Ans.d:String(a12EvalQ11.d*10)}</span>
-                          <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                          <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-[var(--color-text-primary)] ${uOk?"border-blue-400":"border-amber-400"}`}>{uOk?a12EvalQ11Ans.u:String(a12EvalQ11.u)}</span>
-                        </>);
-                      })() : (<>
-                        <input className={inputCls} placeholder="M×1000" inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.m} onChange={e=>setA12EvalQ11Ans(p=>({...p,m:e.target.value.replace(/[^0-9]/g,"")}))} />
-                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                        <input className={inputCls} placeholder="C×100"  inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.c} onChange={e=>setA12EvalQ11Ans(p=>({...p,c:e.target.value.replace(/[^0-9]/g,"")}))} />
-                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                        <input className={inputCls} placeholder="D×10"   inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.d} onChange={e=>setA12EvalQ11Ans(p=>({...p,d:e.target.value.replace(/[^0-9]/g,"")}))} />
-                        <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                        <input className={inputCls} placeholder="U×1"    inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.u} onChange={e=>setA12EvalQ11Ans(p=>({...p,u:e.target.value.replace(/[^0-9]/g,"")}))} />
-                      </>)}
+                      <input className={inputCls} placeholder="M×1000" inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.m} onChange={e=>setA12EvalQ11Ans(p=>({...p,m:e.target.value.replace(/[^0-9]/g,"")}))} />
+                      <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                      <input className={inputCls} placeholder="C×100"  inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.c} onChange={e=>setA12EvalQ11Ans(p=>({...p,c:e.target.value.replace(/[^0-9]/g,"")}))} />
+                      <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                      <input className={inputCls} placeholder="D×10"   inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.d} onChange={e=>setA12EvalQ11Ans(p=>({...p,d:e.target.value.replace(/[^0-9]/g,"")}))} />
+                      <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
+                      <input className={inputCls} placeholder="U×1"    inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.u} onChange={e=>setA12EvalQ11Ans(p=>({...p,u:e.target.value.replace(/[^0-9]/g,"")}))} />
                     </div>
                   </div>
+                </div>
+              );
 
-                  {/* Q4 — Cubes image (decompose or assemble, random) */}
-                  <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">4. Comptez combien il y a de cubes. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+              if (evalPageIdx === 3) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes.</p>
+                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex items-center justify-center py-3">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={a12EvalQ12.src} alt="cubes" className="max-h-72 w-auto object-contain" />
                     </div>
                     <div className="mt-2">
-                      <AppInput label="" id="a12eval-q12"
-                        value={evalSubmitted && r12 === false ? String(a12EvalQ12.answer) : a12EvalQ12Ans}
-                        onChange={e => { if (!evalSubmitted) setA12EvalQ12Ans(e.target.value.replace(/[^0-9]/g, "")); }}
-                        placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={evalSubmitted}
-                        className={r12 === true ? "!border-blue-400" : r12 === false ? "!border-amber-400" : "!bg-blue-50 dark:!bg-blue-950/30"} />
+                      <AppInput label="" id="a12eval-q12" value={a12EvalQ12Ans}
+                        onChange={e => setA12EvalQ12Ans(e.target.value.replace(/[^0-9]/g, ""))}
+                        placeholder="Cubes…" inputMode="numeric" autoComplete="off"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
                     </div>
                   </div>
+                </div>
+              );
 
-                  {/* Q5a+Q5b — Ex14 decompose (2 numbers, 1 pt each) */}
+              if (evalPageIdx === 4) return (
+                <div className="space-y-4">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
                     const m = Math.floor(n / 1000), c = Math.floor((n % 1000) / 100), d = Math.floor((n % 100) / 10), u = n % 10;
                     const hasM = m > 0;
                     const a = a12EvalEx14Ans[qi] ?? {m:"",c:"",d:"",u:""};
-                    const r14q = evalSubmitted ? (evalResults[`q14_${qi}`] ?? null) : null;
-                    const mOk = evalSubmitted ? (a.m === "" ? 0 : parseInt(a.m)) === m * 1000 : null;
-                    const cOk = evalSubmitted ? (a.c === "" ? 0 : parseInt(a.c)) === c * 100 : null;
-                    const dOk = evalSubmitted ? (a.d === "" ? 0 : parseInt(a.d)) === d * 10 : null;
-                    const uOk = evalSubmitted ? (a.u === "" ? 0 : parseInt(a.u)) === u : null;
-                    const valCls14 = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : "border-amber-400 bg-[var(--color-bg-primary)]";
                     const setAns14 = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                       setA12EvalEx14Ans(prev => prev.map((row, i) => i === qi ? {...row, ...patch} : row));
                     return (
-                      <div key={qi}>
-                        <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">{5 + qi}. Décomposez le nombre. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt)</span></p></div>
-                        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4 transition-colors">
-                          <div className="mb-3 flex justify-center">
-                            <span className={`text-2xl font-bold tabular-nums ${r14q === true ? "text-green-600" : r14q === false ? "text-amber-600" : "text-[var(--color-text-primary)]"}`}>{n.toLocaleString("fr-CH")}</span>
+                      <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+                        <div className="mb-3 flex justify-center">
+                          <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                        </div>
+                        <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+                          <span className="mt-[7px] shrink-0">=</span>
+                          {hasM && (<>
+                            <div className="flex flex-1 flex-col items-center gap-0.5">
+                              <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.m} onChange={e=>setAns14({m:e.target.value.replace(/[^0-9]/g,"")})} />
+                              <span className="text-xs text-[var(--color-text-secondary)]">millier</span>
+                            </div>
+                            <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          </>)}
+                          <div className="flex flex-1 flex-col items-center gap-0.5">
+                            <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.c} onChange={e=>setAns14({c:e.target.value.replace(/[^0-9]/g,"")})} />
+                            <span className="text-xs text-[var(--color-text-secondary)]">centaine</span>
                           </div>
-                          <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
-                            <span className="mt-[7px] shrink-0">=</span>
-                            {hasM && (<>
-                              <div className="flex flex-1 flex-col items-center gap-0.5">
-                                {evalSubmitted ? (
-                                  <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls14(mOk)}`}>{(mOk && a.m) ? a.m : String(m * 1000)}</span>
-                                ) : (
-                                  <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.m} onChange={e=>setAns14({m:e.target.value.replace(/[^0-9]/g,"")})} />
-                                )}
-                                <span className="text-xs text-[var(--color-text-secondary)]">millier</span>
-                              </div>
-                              <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            </>)}
-                            <div className="flex flex-1 flex-col items-center gap-0.5">
-                              {evalSubmitted ? (
-                                <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls14(cOk)}`}>{(cOk && a.c) ? a.c : String(c * 100)}</span>
-                              ) : (
-                                <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.c} onChange={e=>setAns14({c:e.target.value.replace(/[^0-9]/g,"")})} />
-                              )}
-                              <span className="text-xs text-[var(--color-text-secondary)]">centaine</span>
-                            </div>
-                            <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <div className="flex flex-1 flex-col items-center gap-0.5">
-                              {evalSubmitted ? (
-                                <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls14(dOk)}`}>{(dOk && a.d) ? a.d : String(d * 10)}</span>
-                              ) : (
-                                <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.d} onChange={e=>setAns14({d:e.target.value.replace(/[^0-9]/g,"")})} />
-                              )}
-                              <span className="text-xs text-[var(--color-text-secondary)]">dizaine</span>
-                            </div>
-                            <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <div className="flex flex-1 flex-col items-center gap-0.5">
-                              {evalSubmitted ? (
-                                <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls14(uOk)}`}>{(uOk && a.u) ? a.u : String(u)}</span>
-                              ) : (
-                                <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.u} onChange={e=>setAns14({u:e.target.value.replace(/[^0-9]/g,"")})} />
-                              )}
-                              <span className="text-xs text-[var(--color-text-secondary)]">unité</span>
-                            </div>
+                          <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <div className="flex flex-1 flex-col items-center gap-0.5">
+                            <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.d} onChange={e=>setAns14({d:e.target.value.replace(/[^0-9]/g,"")})} />
+                            <span className="text-xs text-[var(--color-text-secondary)]">dizaine</span>
+                          </div>
+                          <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
+                          <div className="flex flex-1 flex-col items-center gap-0.5">
+                            <input className="w-full rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]" inputMode="numeric" autoComplete="off" value={a.u} onChange={e=>setAns14({u:e.target.value.replace(/[^0-9]/g,"")})} />
+                            <span className="text-xs text-[var(--color-text-secondary)]">unité</span>
                           </div>
                         </div>
                       </div>
                     );
                   })}
+                </div>
+              );
 
-                  {/* Q7+Q8 — Ex15 tag-matching (grouped, 1 pt each) */}
-                  <div>
-                    <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">7-8. Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p></div>
-                    <div className="space-y-4">
-                      {a12EvalEx15Qs.map((q, qi) => (
-                        <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                          <div className="mb-3 flex justify-center">
-                            <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">{q.refDisplay}</span>
-                          </div>
-                          <div className="flex flex-col gap-2">
-                            {q.tags.map((tag, ti) => {
-                              const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
-                              let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
-                              if (evalSubmitted) {
-                                if (tag.correct) cls = "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                                else if (sel) cls = "border-amber-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                              } else if (sel) {
-                                cls = "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400";
-                              }
-                              return (
-                                <button key={ti} type="button"
-                                  onClick={() => { if (!evalSubmitted) setA12EvalEx15Sel(prev => prev.map((row, ri) => ri === qi ? row.map((v, vi) => vi === ti ? !v : v) : row)); }}
-                                  className={`flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ${cls}`}>
-                                  <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${sel ? "border-current bg-current" : "border-current/40"}`}>
-                                    {sel && <span className="h-2 w-2 rounded-full bg-white" />}
-                                  </span>
-                                  <span className="font-normal">{tag.label}</span>
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </div>
-                      ))}
+              if (evalPageIdx === 5) return (
+                <div className="space-y-4">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  {a12EvalEx15Qs.map((q, qi) => (
+                    <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                      <div className="mb-3 flex justify-center">
+                        <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">{q.refDisplay}</span>
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        {q.tags.map((tag, ti) => {
+                          const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
+                          return (
+                            <button key={ti} type="button"
+                              onClick={() => setA12EvalEx15Sel(prev => prev.map((row, ri) => ri === qi ? row.map((v, vi) => vi === ti ? !v : v) : row))}
+                              className={`flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ${sel ? "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600"}`}>
+                              <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${sel ? "border-current bg-current" : "border-current/40"}`}>
+                                {sel && <span className="h-2 w-2 rounded-full bg-white" />}
+                              </span>
+                              <span className="font-normal">{tag.label}</span>
+                            </button>
+                          );
+                        })}
+                      </div>
                     </div>
+                  ))}
+                </div>
+              );
+
+              if (evalPageIdx === 6) return (
+                <div className="space-y-4">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <div className="flex flex-wrap gap-4 text-xs font-medium">
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
+                    <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
                   </div>
-
-                  {/* Q9+Q10 — Ex16 arrow-grid (grouped, 1 pt each) */}
-                  <div>
-                    <div className="pb-1 pt-2"><p className="text-sm font-semibold text-[var(--color-text-primary)]">9-10. Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p></div>
-                    <div className="mb-3 flex flex-wrap gap-4 text-xs font-medium">
-                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
-                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
-                      <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-emerald-500"/><span className="text-emerald-700 dark:text-emerald-300">+1 dizaine</span></span>
-                    </div>
-                    <div className="space-y-4">
-                      {a12EvalEx16Qs.map((q, qi) => {
-                        const vals = [q.tl, q.tr, q.bl, q.br];
-                        const CORNER_POS16 = [{r:0,c:0},{r:0,c:2},{r:2,c:0},{r:2,c:2}];
-                        const cells16: React.ReactNode[] = [];
-                        for (let r = 0; r < 3; r++) {
-                          for (let c = 0; c < 3; c++) {
-                            const ci = CORNER_POS16.findIndex(p => p.r === r && p.c === c);
-                            if (ci !== -1) {
-                              const isGiven = ci === q.givenIdx;
-                              const val = vals[ci]!;
-                              const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
-                              const isOk = evalSubmitted ? parseInt(ans) === val : null;
-                              if (isGiven) {
-                                cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
-                              } else {
-                                cells16.push(evalSubmitted ? (
-                                  <div key={`${r}${c}`} className={`flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isOk ? "border-blue-400" : "border-amber-400"}`}>{isOk ? ans : val.toLocaleString("fr-CH")}</div>
-                                ) : (
-                                  <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans}
-                                    onChange={e => { const v = e.target.value.replace(/[^0-9]/g,""); setA12EvalEx16Ans(prev => prev.map((row2, ri) => ri === qi ? row2.map((cv, ci2) => ci2 === ci ? v : cv) : row2)); }}
-                                    className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
-                                  />
-                                ));
-                              }
+                  <div className="space-y-4">
+                    {a12EvalEx16Qs.map((q, qi) => {
+                      const vals = [q.tl, q.tr, q.bl, q.br];
+                      const CORNER_POS16 = [{r:0,c:0},{r:0,c:2},{r:2,c:0},{r:2,c:2}];
+                      const cells16: React.ReactNode[] = [];
+                      for (let r = 0; r < 3; r++) {
+                        for (let c = 0; c < 3; c++) {
+                          const ci = CORNER_POS16.findIndex(p => p.r === r && p.c === c);
+                          if (ci !== -1) {
+                            const isGiven = ci === q.givenIdx;
+                            const val = vals[ci]!;
+                            const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
+                            if (isGiven) {
+                              cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
                             } else {
-                              const arrow = q.arrows.find(a => a.row === r && a.col === c);
                               cells16.push(
-                                <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl ${arrow.colorCls}` : undefined}>
-                                  {arrow && (
-                                    <span style={c === 1 ? { display: "inline-block", transform: "scaleX(2)" } : undefined}>
-                                      {arrow.symbol}
-                                    </span>
-                                  )}
-                                </div>
+                                <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans}
+                                  onChange={e => { const v = e.target.value.replace(/[^0-9]/g,""); setA12EvalEx16Ans(prev => prev.map((row2, ri) => ri === qi ? row2.map((cv, ci2) => ci2 === ci ? v : cv) : row2)); }}
+                                  className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                                />
                               );
                             }
+                          } else {
+                            const arrow = q.arrows.find(a => a.row === r && a.col === c);
+                            cells16.push(
+                              <div key={`${r}${c}`} className={arrow ? `flex items-center justify-center text-2xl ${arrow.colorCls}` : undefined}>
+                                {arrow && (
+                                  <span style={c === 1 ? { display: "inline-block", transform: "scaleX(2)" } : undefined}>
+                                    {arrow.symbol}
+                                  </span>
+                                )}
+                              </div>
+                            );
                           }
                         }
-                        return (
-                          <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                            <div className="grid grid-cols-3 items-center gap-2">
-                              {cells16}
-                            </div>
+                      }
+                      return (
+                        <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                          <div className="grid grid-cols-3 items-center gap-2">
+                            {cells16}
                           </div>
-                        );
-                      })}
-                    </div>
+                        </div>
+                      );
+                    })}
                   </div>
+                </div>
+              );
+
+              return null;
+            })()}
+
+            {/* ── Question page A1.1 ── */}
+            {evalStarted && !evalSubmitted && lesson.submoduleId === "A1-1" && (() => {
+              const ex = evalItems_curr[evalPageIdx];
+              if (!ex) return null;
+              const sectionLabel = evalPageIdx < 4
+                ? "Écrivez le nombre en lettres correctement."
+                : evalPageIdx < 8
+                  ? "Écoutez et écrivez le nombre."
+                  : "Complétez la série de nombres.";
+              return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">{sectionLabel}</p>
+                  {ex.seriesNums ? (
+                    <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                      <div className="flex min-w-0 gap-1">
+                        {ex.seriesNums.map((num, ni) => {
+                          if (ni === ex.blankIdx) {
+                            return (
+                              <input key={ni} type="text" inputMode="numeric"
+                                value={evalAnswers[ex.id] ?? ""}
+                                onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
+                                className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                              />
+                            );
+                          }
+                          return (
+                            <div key={ni} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
+                              {num}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : ex.clips ? (
+                    <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                      <SequentialAudioButton clips={ex.clips} />
+                      <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
+                        onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
+                        placeholder="chiffre…" autoComplete="off" inputMode="numeric"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
+                    </div>
+                  ) : (
+                    <ExerciseRow
+                      num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
+                      answer={evalAnswers[ex.id] ?? ""} result={null}
+                      validated={false} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
+                      pivotWord={undefined} pivot={pivot} showPivot={false}
+                      onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
+                    />
+                  )}
                 </div>
               );
             })()}
 
-            {/* ── Exercices A1.1 (visibles après Commencer ou si déjà validé) ── */}
-            {(evalStarted || evalSubmitted) && lesson.submoduleId === "A1-1" && <div className="space-y-3">
-              {evalItems_curr.map((ex, i) => {
-                const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
+            {/* ── Question page générique (A1.3, A1.4…) ── */}
+            {evalStarted && !evalSubmitted && lesson.submoduleId !== "A1-1" && lesson.submoduleId !== "A1-2" && (() => {
+              const ex = evalItems_curr[evalPageIdx];
+              if (!ex) return null;
+              return (
+                <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
+                  <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
+                    onChange={e => setEvalAnswers(prev => ({ ...prev, [ex.id]: ex.type === "number" ? e.target.value.replace(/[^0-9]/g, "") : e.target.value }))}
+                    placeholder={ex.type === "number" ? "Nombre…" : "Réponse…"}
+                    inputMode={ex.type === "number" ? "numeric" : "text"}
+                    autoComplete="off"
+                    className="!bg-blue-50 dark:!bg-blue-950/30" />
+                </div>
+              );
+            })()}
 
-                const header = i === 0 ? (
-                  <div key="hdr-ex2" className="pb-1 pt-2">
-                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">1. Écrivez les nombres en lettres correctement.</p>
-                    {showPivotTranslation && CONSIGNE_PIVOT.ex2[pivot] ? (
-                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex2[pivot]}</p>
-                    ) : null}
-                  </div>
-                ) : i === 4 ? (
-                  <div key="hdr-ex6" className="pb-1 pt-4">
-                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">2. Écoutez et écrivez les nombres.</p>
-                    {showPivotTranslation && CONSIGNE_PIVOT.ex6[pivot] ? (
-                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex6[pivot]}</p>
-                    ) : null}
-                  </div>
-                ) : i === 8 ? (
-                  <div key="hdr-ex8" className="pb-1 pt-4">
-                    <p className="text-sm font-semibold text-[var(--color-text-primary)]">3. Complétez les séries de nombres.</p>
-                    {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
-                      <p className="mt-0.5 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{CONSIGNE_PIVOT.ex8[pivot]}</p>
-                    ) : null}
-                  </div>
-                ) : null;
-
-                /* ── Ex8 style : série de nombres (sans numéro) ── */
-                if (ex.seriesNums) {
-                  return (
-                    <div key={ex.id}>
-                      {header}
-                      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                        <div className="flex min-w-0 gap-1">
-                          {ex.seriesNums.map((num, ni) => {
-                            if (ni === ex.blankIdx) {
-                              if (evalSubmitted && result !== null) {
-                                return (
-                                  <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-medium tabular-nums text-[var(--color-text-primary)] ${result ? "border-blue-400" : "border-amber-400"}`}>
-                                    {result ? evalAnswers[ex.id] : num}
-                                  </div>
-                                );
-                              }
-                              return (
-                                <input
-                                  key={ni} type="text" inputMode="numeric"
-                                  value={evalAnswers[ex.id] ?? ""}
-                                  onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                                  className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
-                                  aria-label={`Question ${i + 1}`}
-                                />
-                              );
-                            }
-                            return (
-                              <div key={ni} className="flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-medium tabular-nums text-zinc-700 dark:border-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-                                {num}
-                              </div>
-                            );
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                /* ── Ex6 style : audio centaines → chiffre ── */
-                if (ex.clips) {
-                  return (
-                    <div key={ex.id}>
-                      {header}
-                      <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                        <SequentialAudioButton clips={ex.clips} />
-                        {evalSubmitted && result !== null ? (
-                          <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
-                            {result ? (
-                              <span className="text-sm font-medium text-[var(--color-text-primary)]">{evalAnswers[ex.id]}</span>
-                            ) : (
-                              <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
-                            )}
-                          </div>
-                        ) : (
-                          <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
-                            onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                            placeholder="chiffre…" autoComplete="off" inputMode="numeric"
-                            className="!bg-blue-50 dark:!bg-blue-950/30" />
-                        )}
-                      </div>
-                    </div>
-                  );
-                }
-
-                /* ── Ex2 style : chiffre → lettres ── */
-                return (
-                  <div key={ex.id}>
-                    {header}
-                    <ExerciseRow
-                      num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
-                      answer={evalAnswers[ex.id] ?? ""} result={evalResults[ex.id] ?? null}
-                      validated={evalSubmitted} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
-                      pivotWord={undefined} pivot={pivot} showPivot={false}
-                      onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
-                    />
-                  </div>
-                );
-              })}
-            </div>}
-
-            {/* ── Exercices génériques A1.3, A1.4… ── */}
-            {(evalStarted || evalSubmitted) && lesson.submoduleId !== "A1-1" && lesson.submoduleId !== "A1-2" && (
-              <div className="space-y-3">
-                {evalItems_curr.map((ex, i) => {
-                  const result = evalSubmitted ? (evalResults[ex.id] ?? null) : null;
-                  return (
-                    <div key={ex.id} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                      <p className="mb-2 text-sm font-medium text-[var(--color-text-primary)]">{i + 1}. {ex.promptFr}</p>
-                      {evalSubmitted && result !== null ? (
-                        <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
-                          {result
-                            ? <span className="text-sm font-medium text-[var(--color-text-primary)]">{evalAnswers[ex.id]}</span>
-                            : <>
-                                <span className="text-sm text-amber-600 line-through">{evalAnswers[ex.id]}</span>
-                                <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
-                              </>
-                          }
-                        </div>
-                      ) : (
-                        <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
-                          onChange={e => setEvalAnswers(prev => ({ ...prev, [ex.id]: ex.type === "number" ? e.target.value.replace(/[^0-9]/g, "") : e.target.value }))}
-                          placeholder={ex.type === "number" ? "Nombre…" : "Réponse…"}
-                          inputMode={ex.type === "number" ? "numeric" : "text"}
-                          autoComplete="off"
-                          className="!bg-blue-50 dark:!bg-blue-950/30" />
-                      )}
-                    </div>
-                  );
-                })}
+            {evalSubmitted && evalGrade !== null && (
+              <div className="space-y-5">
+                <h2 className="text-xl font-bold text-[var(--color-text-primary)]">Résultats</h2>
+                <div className={`rounded-[var(--radius-lg)] border-2 p-8 text-center ${evalGrade >= passingGrade ? "border-blue-400 bg-blue-50 dark:bg-blue-950/10" : "border-amber-400 bg-amber-50 dark:bg-amber-950/10"}`}>
+                  <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note finale</p>
+                  <p className="mt-1 text-5xl font-bold tabular-nums text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-xl font-normal text-[var(--color-text-secondary)]">/6</span></p>
+                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{Object.values(evalResults).filter(Boolean).length} / {evalTotalPts} points</p>
+                  <p className={`mt-4 text-base font-bold ${evalGrade >= passingGrade ? "text-blue-600 dark:text-blue-400" : "text-amber-600"}`}>
+                    {evalGrade >= passingGrade ? "✓ Sous-module validé !" : `✗ Requis : ${passingGrade}/6 — Réessaie !`}
+                  </p>
+                </div>
               </div>
             )}
-
-            {evalSubmitted && evalGrade !== null ? (
-              <div className={`mt-4 rounded-[var(--radius-md)] border p-4 text-center ${
-                evalGrade >= passingGrade
-                  ? "border-blue-400 bg-blue-50 dark:bg-blue-950/20"
-                  : "border-amber-400 bg-amber-50 dark:bg-amber-950/20"
-              }`}>
-                <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-                  {evalGrade.toFixed(1)}<span className="text-base font-normal text-[var(--color-text-secondary)]">/6</span>
-                  <span className="ml-3 text-lg font-semibold text-[var(--color-text-secondary)]">
-                    ({Object.values(evalResults).filter(Boolean).length}/{evalTotalPts} pts)
-                  </span>
-                </p>
-                <p className="mt-1 text-sm font-medium">
-                  {evalGrade >= passingGrade
-                    ? "✓ Sous-module validé !"
-                    : `Requis : ${passingGrade}/6 — Réessaie !`}
-                </p>
-              </div>
-            ) : null}
 
           </AppCard>
       )}
@@ -4520,7 +4400,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
             <button
               type="button"
               onClick={goBack}
-              disabled={isFirstStep}
+              disabled={step === "eval" ? evalSubmitted : isFirstStep}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-40"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
@@ -4560,10 +4440,13 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
             <button
               type="button"
               onClick={goNext}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              disabled={step === "eval" && evalStarted && !evalSubmitted && !evalPageValidated}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-40"
             >
-              {isLastStep ? (
+              {(step === "eval" && evalSubmitted) || isLastStep ? (
                 <>Terminer <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+              ) : step === "eval" && evalStarted && evalIsLastPage ? (
+                <>Soumettre <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
               )}
