@@ -549,10 +549,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
 
   return (
     <div className="space-y-8">
-      {/* Exercise 2 — Coloring */}
+      {/* Exercise 1 — Coloring */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Colorie la fraction demandée</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Colorie la fraction demandée</h2>
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touche les cases pour les colorier.</p>
         </div>
         <div className="space-y-5">
@@ -573,10 +573,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 3 — Fraction read */}
+      {/* Exercise 2 — Fraction read */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Observe et écris la fraction</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Observe et écris la fraction</h2>
           <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Observe le dessin et écris la fraction correspondante.</p>
         </div>
         <div className="space-y-5">
@@ -603,10 +603,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 4 — Matching */}
+      {/* Exercise 3 — Matching */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Relie chaque fraction à son écriture décimale</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Relie chaque fraction à son écriture décimale</h2>
           {selectedFrac !== null && !validated && (
             <p className="mt-1 text-xs text-[var(--color-accent-alg)]">Sélectionne maintenant l&apos;écriture décimale correspondante →</p>
           )}
@@ -632,10 +632,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 5 — Decimal conv */}
+      {/* Exercise 4 — Decimal conv */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Écris sous forme décimale</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Écris sous forme décimale</h2>
         </div>
         <div className="space-y-3">
           {decItems.map((item, i) => (
@@ -657,10 +657,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 6 — Fraction conv */}
+      {/* Exercise 5 — Fraction conv */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Écris sous forme de fraction</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Écris sous forme de fraction</h2>
         </div>
         <div className="space-y-3">
           {fracItems.map((item, i) => (
