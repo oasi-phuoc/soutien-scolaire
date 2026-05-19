@@ -1961,7 +1961,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       : (lesson.exercises as EvalItem[]);
   const evalTotalPts = lesson.submoduleId === "A1-2" ? 10 : evalItems_curr.length;
   const evalTotalPages = lesson.submoduleId === "A1-2" ? 7
-    : lesson.submoduleId === "A1-1" ? evalItems.length
+    : lesson.submoduleId === "A1-1" ? 3
     : evalItems_curr.length;
   const evalIsLastPage = evalPageIdx >= Math.max(0, evalTotalPages - 1);
   evalAutoSubmitRef.current = () => {
@@ -3618,20 +3618,46 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
             {/* ── Question page A1.1 ── */}
             {evalStarted && !evalSubmitted && lesson.submoduleId === "A1-1" && (() => {
-              const ex = evalItems_curr[evalPageIdx];
-              if (!ex) return null;
-              const sectionLabel = evalPageIdx < 4
-                ? "Écrivez le nombre en lettres correctement."
-                : evalPageIdx < 8
-                  ? "Écoutez et écrivez le nombre."
-                  : "Complétez la série de nombres.";
-              return (
+              // Page 0: items 0-3 — écrire en lettres
+              if (evalPageIdx === 0) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">{sectionLabel}</p>
-                  {ex.seriesNums ? (
-                    <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez les nombres en lettres correctement.</p>
+                  {evalItems_curr.slice(0, 4).map(ex => (
+                    <ExerciseRow key={ex.id}
+                      num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
+                      answer={evalAnswers[ex.id] ?? ""} result={null}
+                      validated={false} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
+                      pivotWord={undefined} pivot={pivot} showPivot={false}
+                      onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
+                    />
+                  ))}
+                </div>
+              );
+              // Page 1: items 4-7 — audio → chiffre
+              if (evalPageIdx === 1) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
+                  {evalItems_curr.slice(4, 8).map(ex => (
+                    <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                      <SequentialAudioButton clips={ex.clips!} />
+                      <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
+                        onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
+                        placeholder="chiffre…" autoComplete="off" inputMode="numeric"
+                        className="!bg-blue-50 dark:!bg-blue-950/30" />
+                    </div>
+                  ))}
+                </div>
+              );
+              // Page 2: items 8+ — séries de nombres (3 chiffres de moins)
+              if (evalPageIdx === 2) return (
+                <div className="space-y-3">
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Complétez les séries de nombres.</p>
+                  {evalItems_curr.slice(8).map(ex => {
+                    const displayNums = ex.seriesNums!.slice(0, ex.seriesNums!.length - 3);
+                    return (
+                    <div key={ex.id} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                       <div className="flex min-w-0 gap-1">
-                        {ex.seriesNums.map((num, ni) => {
+                        {displayNums.map((num, ni) => {
                           if (ni === ex.blankIdx) {
                             return (
                               <input key={ni} type="text" inputMode="numeric"
@@ -3649,25 +3675,11 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                         })}
                       </div>
                     </div>
-                  ) : ex.clips ? (
-                    <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                      <SequentialAudioButton clips={ex.clips} />
-                      <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
-                        onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                        placeholder="chiffre…" autoComplete="off" inputMode="numeric"
-                        className="!bg-blue-50 dark:!bg-blue-950/30" />
-                    </div>
-                  ) : (
-                    <ExerciseRow
-                      num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
-                      answer={evalAnswers[ex.id] ?? ""} result={null}
-                      validated={false} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
-                      pivotWord={undefined} pivot={pivot} showPivot={false}
-                      onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
-                    />
-                  )}
+                    );
+                  })}
                 </div>
               );
+              return null;
             })()}
 
             {/* ── Question page générique (A1.3, A1.4…) ── */}
