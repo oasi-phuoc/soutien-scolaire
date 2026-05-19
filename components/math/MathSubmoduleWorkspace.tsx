@@ -199,8 +199,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
 
-  const currentIdx = allLessons.findIndex(l => l.submoduleId === submoduleId);
-  const nextLesson = allLessons[currentIdx + 1];
 
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
@@ -222,8 +220,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
 
   function goNext() {
     if (isLastStep) {
-      if (nextLesson) router.push(`/mathematiques/${nextLesson.submoduleId}`);
-      else router.push("/mathematiques");
+      router.push("/mathematiques");
     } else {
       goTo(stepIdx + 1);
     }
@@ -259,13 +256,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
   }
 
   const validateDisabled = currentStep?.kind === "exercise" ? exStatus === "correct" : !canValidate;
-
-  // True once the last exercise step is successfully completed
-  const isDone =
-    isLastStep &&
-    isExercise &&
-    ((currentStep?.kind === "exercise" && exStatus === "correct") ||
-      (isCustom && !canValidate));
 
   if (!lesson || steps.length === 0) {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
@@ -344,9 +334,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
             )}
 
             <button type="button" onClick={goNext}
-              disabled={isLastStep && isExercise && !isDone}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed">
-              {isDone || (isLastStep && !isExercise) ? (
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80">
+              {isLastStep ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
