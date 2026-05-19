@@ -30,7 +30,6 @@ import {
   saveProgress,
   completeSubmodule,
 } from "@/lib/progress/math-progress";
-import { DigitTracer } from "@/components/math/DigitTracer";
 
 // ─── Vocabulaire ──────────────────────────────────────────────────────────────
 
@@ -238,10 +237,6 @@ function shuffle<T>(arr: T[]): T[] {
   return a;
 }
 
-function generateDigits(): number[] {
-  return shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]).slice(0, 2);
-}
-
 function generateNumbers(): number[] {
   return shuffle(Array.from({ length: 10 }, (_, i) => i + 1)).slice(0, 5);
 }
@@ -385,14 +380,7 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
-const CONSIGNE_PIVOT: Record<"ex1"|"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16"|"ex17"|"ex18"|"ex19"|"ex20"|"ex21"|"ex22"|"ex23"|"ex24"|"ex25"|"ex26"|"ex27", Partial<Record<PivotCode, string>>> = {
-  ex1: {
-    en: "Follow the stroke to write the digits.",
-    ar: "اتبع الخط لكتابة الأرقام.",
-    fa: "خط را دنبال کنید تا ارقام را بنویسید.",
-    uk: "Слідуйте по лінії, щоб написати цифри.",
-    ti: "ነቲ መስመር ሰዒብካ ቁጽርታት ጸሓፍ።",
-  },
+const CONSIGNE_PIVOT: Record<"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16"|"ex17"|"ex18"|"ex19"|"ex20"|"ex21"|"ex22"|"ex23"|"ex24"|"ex25"|"ex26"|"ex27", Partial<Record<PivotCode, string>>> = {
   ex2: {
     en: "Write the numbers in letters correctly.",
     ar: "اكتب الأرقام بالحروف بشكل صحيح.",
@@ -579,12 +567,12 @@ function generateA11EvalItems(): EvalItem[] {
 
 // ─── Composants partagés ──────────────────────────────────────────────────────
 
-type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "ex14" | "ex15" | "ex16" | "ex17" | "ex18" | "ex19" | "ex20" | "ex21" | "ex22" | "ex23" | "ex24" | "ex25" | "ex26" | "ex27" | "eval";
+type Step = "theory" | "audio" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7" | "ex8" | "ex9" | "ex10" | "ex11" | "ex12" | "ex13" | "ex14" | "ex15" | "ex16" | "ex17" | "ex18" | "ex19" | "ex20" | "ex21" | "ex22" | "ex23" | "ex24" | "ex25" | "ex26" | "ex27" | "eval";
 
 function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
   if (lesson.submoduleId === "A1-1") {
-    return ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
+    return ["theory", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
   }
   if (lesson.submoduleId === "A1-2") {
     return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16", "eval"];
@@ -1548,9 +1536,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     return startSubmoduleId ? "theory" : loadA1Position().step;
   });
 
-  // Exercice 1 — tracer les chiffres (0–9)
-  const [ex1Digits, setEx1Digits] = useState<number[]>(generateDigits);
-  const resetExercise1 = () => setEx1Digits(generateDigits());
 
   // Exercice 2 — écrire les nombres (1–10)
   const [ex2Numbers, setEx2Numbers] = useState<number[]>(generateNumbers);
@@ -2093,9 +2078,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   let stepValidate: (() => void) | undefined;
   let stepValidateDisabled = false;
 
-  if (step === "ex1") {
-    stepReset = resetExercise1;
-  } else if (step === "ex2") {
+  if (step === "ex2") {
     stepReset = resetExercise2;
     stepValidate = () => { setEx2Validated(true); setEx2Results(ex2Numbers.map((n, i) => checkWord(ex2Answers[i] ?? "", n))); };
     stepValidateDisabled = ex2Validated;
@@ -2580,26 +2563,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
 
       {/* ── Exercice 1 — Tracer les chiffres ────────────────────────────────── */}
-      {step === "ex1" && (
-        <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Tracer les chiffres</h2>
-          <div>
-            <p className="text-sm text-[var(--color-text-secondary)]">Posez le doigt sur le point vert et tracez le chiffre en suivant le trait.</p>
-            {showPivotTranslation && CONSIGNE_PIVOT.ex1[pivot] ? (
-              <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
-                lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                {CONSIGNE_PIVOT.ex1[pivot]}
-              </p>
-            ) : null}
-          </div>
-          <div className="flex justify-center gap-6">
-            {ex1Digits.map((digit) => (
-              <DigitTracer key={digit} digit={digit} />
-            ))}
-          </div>
-        </div>
-      )}
-
       {/* ── Exercice 2 — Écrire les nombres ─────────────────────────────────── */}
       {step === "ex2" && (
         <div className="space-y-4">
