@@ -115,6 +115,7 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
         uk: ["Коли знаменник 10 або 100, говоримо про десяткові дроби.", "3/10 = три десятих = 0,3. 19/100 = дев'ятнадцять сотих = 0,19."],
       },
       blocks: [
+        { type: "heading", fr: "Comment lire une fraction", black: true },
         {
           type: "plain",
           fr: "Quand le dénominateur est 10 ou 100, on parle de fractions décimales. L'unité est découpée en 10 ou 100 parts égales.",
@@ -149,8 +150,8 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
             {
               markup: `<svg viewBox='0 0 140 105' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
   <text x='70' y='20' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>3</text>
-  <line x1='52' y1='25' x2='88' y2='25' stroke='#1d4ed8' stroke-width='2.5' stroke-linecap='round'/>
-  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>10</text>
+  <line x1='52' y1='25' x2='88' y2='25' stroke='#0f172a' stroke-width='2.5' stroke-linecap='round'/>
+  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#0f172a' font-family='Century Schoolbook,Georgia,serif'>10</text>
   <rect x='10' y='52' width='120' height='40' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
   <rect x='10' y='52' width='36' height='40' fill='#3b82f6'/>
   <line x1='22' y1='52' x2='22' y2='92' stroke='white' stroke-width='1'/><line x1='34' y1='52' x2='34' y2='92' stroke='white' stroke-width='1'/><line x1='46' y1='52' x2='46' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='58' y1='52' x2='58' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='70' y1='52' x2='70' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='82' y1='52' x2='82' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='94' y1='52' x2='94' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='106' y1='52' x2='106' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='118' y1='52' x2='118' y2='92' stroke='#93c5fd' stroke-width='1'/>
@@ -161,8 +162,8 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
             {
               markup: `<svg viewBox='0 0 140 115' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
   <text x='70' y='20' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>19</text>
-  <line x1='46' y1='25' x2='94' y2='25' stroke='#1d4ed8' stroke-width='2.5' stroke-linecap='round'/>
-  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>100</text>
+  <line x1='46' y1='25' x2='94' y2='25' stroke='#0f172a' stroke-width='2.5' stroke-linecap='round'/>
+  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#0f172a' font-family='Century Schoolbook,Georgia,serif'>100</text>
   <rect x='10' y='52' width='120' height='60' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
   <rect x='10' y='52' width='120' height='6' fill='#3b82f6'/>
   <rect x='10' y='58' width='108' height='6' fill='#3b82f6'/>
@@ -172,19 +173,19 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
 </svg>`,
               captionFr: "19 parts sur 100",
             },
+            {
+              markup: `<svg viewBox='0 0 140 105' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <text x='70' y='20' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>62</text>
+  <line x1='46' y1='25' x2='94' y2='25' stroke='#0f172a' stroke-width='2.5' stroke-linecap='round'/>
+  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#0f172a' font-family='Century Schoolbook,Georgia,serif'>10</text>
+  <rect x='10' y='52' width='120' height='40' fill='#3b82f6' stroke='#2563eb' stroke-width='1.5'/>
+  <line x1='22' y1='52' x2='22' y2='92' stroke='white' stroke-width='1'/><line x1='34' y1='52' x2='34' y2='92' stroke='white' stroke-width='1'/><line x1='46' y1='52' x2='46' y2='92' stroke='white' stroke-width='1'/><line x1='58' y1='52' x2='58' y2='92' stroke='white' stroke-width='1'/><line x1='70' y1='52' x2='70' y2='92' stroke='white' stroke-width='1'/><line x1='82' y1='52' x2='82' y2='92' stroke='white' stroke-width='1'/><line x1='94' y1='52' x2='94' y2='92' stroke='white' stroke-width='1'/><line x1='106' y1='52' x2='106' y2='92' stroke='white' stroke-width='1'/><line x1='118' y1='52' x2='118' y2='92' stroke='white' stroke-width='1'/>
+  <rect x='10' y='52' width='120' height='40' fill='none' stroke='#2563eb' stroke-width='1.5'/>
+  <text x='70' y='100' text-anchor='middle' font-size='9' fill='#1d4ed8' font-family='system-ui'>= 6,2 (plus d'1 unité)</text>
+</svg>`,
+              captionFr: "62 parts sur 10",
+            },
           ],
-        },
-        { type: "heading", fr: "Comment lire une fraction", black: true },
-        {
-          type: "table",
-          headersFr: ["Fraction", "Lecture", "Valeur décimale"],
-          rows: [
-            ["3/10", "trois dixièmes", "0,3"],
-            ["62/10", "soixante-deux dixièmes", "6,2"],
-            ["19/100", "dix-neuf centièmes", "0,19"],
-            ["184/100", "cent quatre-vingt-quatre centièmes", "1,84"],
-          ],
-          captionFr: "Les fractions > 1 ont un numérateur plus grand que le dénominateur (ex : 62/10 = 6,2).",
         },
       ],
     },

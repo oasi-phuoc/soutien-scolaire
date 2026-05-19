@@ -4,7 +4,7 @@ import React, { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math-a1-types";
-import { getLessonsForModule, getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
+import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { FractionToggleExercise, CombinedDecimalExercise } from "@/components/math/A4ModuleContent";
 
@@ -188,7 +188,6 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId: string; moduleId: string }) {
   const router = useRouter();
   const lesson = getLessonBySubmoduleId(submoduleId);
-  const allLessons = getLessonsForModule(moduleId) ?? [];
 
   const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
   const [stepIdx, setStepIdx] = useState(0);
