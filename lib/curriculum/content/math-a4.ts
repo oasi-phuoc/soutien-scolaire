@@ -45,39 +45,72 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
         ],
       },
       blocks: [
-        { type: "heading", fr: "Qu'est-ce qu'une fraction ?" },
         {
           type: "plain",
           fr: "Une fraction représente une ou plusieurs parties d'un tout divisé en parts égales. Elle s'écrit avec deux nombres séparés par une barre de fraction.",
         },
         {
           type: "svg",
-          captionFr: "Anatomie d'une fraction : l'exemple de 3/4",
+          noFrame: true,
           markup: `<svg viewBox='0 0 360 190' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
   <defs><marker id='a41m' markerWidth='7' markerHeight='6' refX='6' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#64748b'/></marker></defs>
-  <text x='180' y='84' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>3</text>
-  <rect x='146' y='92' width='68' height='5' fill='#0f172a' rx='2'/>
-  <text x='180' y='158' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>4</text>
-  <text x='8' y='62' font-size='13' font-weight='700' fill='#1e40af' font-family='system-ui,sans-serif'>numérateur</text>
-  <text x='8' y='77' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>→ nombre en haut</text>
-  <text x='8' y='90' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>= parts utilisées</text>
+  <text x='180' y='84' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>3</text>
+  <line x1='148' y1='93' x2='212' y2='93' stroke='#0f172a' stroke-width='4' stroke-linecap='round'/>
+  <text x='180' y='158' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>4</text>
+  <text x='8' y='62' font-size='12' font-weight='700' fill='#1e40af' font-family='Century Schoolbook,Georgia,serif'>numérateur</text>
+  <text x='8' y='77' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en haut</text>
+  <text x='8' y='90' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts utilisées</text>
   <line x1='118' y1='76' x2='150' y2='76' stroke='#64748b' stroke-width='1.5' marker-end='url(#a41m)'/>
   <line x1='212' y1='142' x2='242' y2='142' stroke='#64748b' stroke-width='1.5' marker-end='url(#a41m)'/>
-  <text x='250' y='130' font-size='13' font-weight='700' fill='#1e40af' font-family='system-ui,sans-serif'>dénominateur</text>
-  <text x='250' y='145' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>→ nombre en bas</text>
-  <text x='250' y='158' font-size='11' fill='#475569' font-family='system-ui,sans-serif'>= parts totales égales</text>
+  <text x='250' y='130' font-size='12' font-weight='700' fill='#1e40af' font-family='Century Schoolbook,Georgia,serif'>dénominateur</text>
+  <text x='250' y='145' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en bas</text>
+  <text x='250' y='158' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts totales égales</text>
 </svg>`,
         },
         {
-          type: "rule",
-          titleFr: "Les deux parties d'une fraction",
+          type: "section",
+          labelFr: "Les deux parties d'une fraction",
           itemsFr: [
             "Le numérateur (en haut) : indique combien de parts sont prises ou utilisées.",
             "Le dénominateur (en bas) : indique en combien de parts égales l'unité entière est divisée.",
             "La barre de fraction signifie « divisé par » : 3/4 = 3 ÷ 4.",
           ],
         },
-        { type: "heading", fr: "Fractions décimales : dixièmes et centièmes" },
+        {
+          type: "section",
+          labelFr: "Cas particuliers",
+          itemsFr: [
+            "Tout nombre entier s'écrit sous forme de fraction avec dénominateur 1 (ex : 3 = 3/1).",
+            "Toute fraction n/n est égale à 1 (ex : 7/7 = 1, 100/100 = 1).",
+          ],
+        },
+      ],
+    },
+    exercises: [
+      { id: "a4-1-e1", promptFr: "Dans la fraction 3/4, quel est le numérateur ?", type: "number", acceptable: ["3"] },
+      { id: "a4-1-e2", promptFr: "Dans la fraction 5/8, quel est le dénominateur ?", type: "number", acceptable: ["8"] },
+      { id: "a4-1-e3", promptFr: "Écrivez 5 sous forme de fraction (avec dénominateur 1).", type: "short_text", acceptable: ["5/1"] },
+      { id: "a4-1-e4", promptFr: "Quelle fraction représente la moitié ?", type: "short_text", acceptable: ["1/2"] },
+      { id: "a4-1-e5", promptFr: "7/7 est égal à quel nombre entier ?", type: "number", acceptable: ["1"] },
+    ],
+  },
+  {
+    submoduleId: "A4-2",
+    submoduleCode: "A4.2",
+    theory: {
+      title: { fr: "Fractions décimales : dixièmes et centièmes", en: "Decimal fractions: tenths and hundredths", ar: "الكسور العشرية: العشرات والمئات", fa: "کسرهای اعشاری: دهم و صدم", ti: "ፍርቂ ዓሰርቲ/ሚእቲ", uk: "Десяткові дроби: десяті та соті" },
+      paragraphs: {
+        fr: [
+          "Quand le dénominateur est 10 ou 100, on parle de fractions décimales.",
+          "3/10 = trois dixièmes = 0,3. 19/100 = dix-neuf centièmes = 0,19.",
+        ],
+        en: ["When the denominator is 10 or 100, we call them decimal fractions.", "3/10 = three tenths = 0.3. 19/100 = nineteen hundredths = 0.19."],
+        ar: ["عندما يكون المقام 10 أو 100، نسمّيها كسوراً عشرية.", "3/10 = ثلاثة أعشار = 0,3. 19/100 = تسعة عشر جزءاً من مئة = 0,19."],
+        fa: ["وقتی مخرج ۱۰ یا ۱۰۰ باشد، کسرهای اعشاری نامیده می‌شوند.", "۳/۱۰ = سه دهم = ۰٫۳. ۱۹/۱۰۰ = نوزده صدم = ۰٫۱۹."],
+        ti: ["ሚዛን ቁጽሪ 10 ወይ 100 ምስ ዝኸውን ፍርቂ ቪርጉላ ይበሃል።", "3/10 = ሰለስተ ዓሰርቲ = 0,3. 19/100 = ዓሰርተ ትሽዓተ ሚእቲ = 0,19."],
+        uk: ["Коли знаменник 10 або 100, говоримо про десяткові дроби.", "3/10 = три десятих = 0,3. 19/100 = дев'ятнадцять сотих = 0,19."],
+      },
+      blocks: [
         {
           type: "plain",
           fr: "Quand le dénominateur est 10 ou 100, on parle de fractions décimales. L'unité est découpée en 10 ou 100 parts égales.",
@@ -101,29 +134,43 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
   <text x='270' y='115' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>centièmes</text>
 </svg>`,
         },
-        { type: "heading", fr: "Exemples avec dixièmes et centièmes" },
         {
-          type: "svg",
-          captionFr: "3/10 = 3 parts sur 10   •   19/100 = 19 parts sur 100",
-          markup: `<svg viewBox='0 0 300 140' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
-  <text x='75' y='22' text-anchor='middle' font-size='17' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>3/10</text>
-  <rect x='25' y='30' width='100' height='36' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
-  <rect x='25' y='30' width='30' height='36' fill='#3b82f6'/>
-  <line x1='35' y1='30' x2='35' y2='66' stroke='white' stroke-width='1'/><line x1='45' y1='30' x2='45' y2='66' stroke='white' stroke-width='1'/><line x1='55' y1='30' x2='55' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='65' y1='30' x2='65' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='75' y1='30' x2='75' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='85' y1='30' x2='85' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='95' y1='30' x2='95' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='105' y1='30' x2='105' y2='66' stroke='#93c5fd' stroke-width='1'/><line x1='115' y1='30' x2='115' y2='66' stroke='#93c5fd' stroke-width='1'/>
-  <rect x='25' y='30' width='100' height='36' fill='none' stroke='#2563eb' stroke-width='1.5'/>
-  <text x='40' y='82' text-anchor='middle' font-size='10' fill='#1d4ed8' font-family='system-ui' font-weight='600'>3</text>
-  <text x='75' y='82' text-anchor='middle' font-size='10' fill='#64748b' font-family='system-ui'>7</text>
-  <text x='75' y='92' text-anchor='middle' font-size='10' fill='#475569' font-family='system-ui'>3 parts sur 10</text>
-  <text x='220' y='22' text-anchor='middle' font-size='17' font-weight='700' fill='#1d4ed8' font-family='Georgia,serif'>19/100</text>
-  <rect x='183' y='30' width='70' height='70' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
-  <rect x='183' y='30' width='70' height='7' fill='#3b82f6'/>
-  <rect x='183' y='37' width='63' height='7' fill='#3b82f6'/>
-  <line x1='190' y1='30' x2='190' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='197' y1='30' x2='197' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='204' y1='30' x2='204' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='211' y1='30' x2='211' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='218' y1='30' x2='218' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='225' y1='30' x2='225' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='232' y1='30' x2='232' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='239' y1='30' x2='239' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='246' y1='30' x2='246' y2='100' stroke='#93c5fd' stroke-width='0.5'/>
-  <line x1='183' y1='37' x2='253' y2='37' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='44' x2='253' y2='44' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='51' x2='253' y2='51' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='58' x2='253' y2='58' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='65' x2='253' y2='65' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='72' x2='253' y2='72' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='79' x2='253' y2='79' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='86' x2='253' y2='86' stroke='#93c5fd' stroke-width='0.5'/><line x1='183' y1='93' x2='253' y2='93' stroke='#93c5fd' stroke-width='0.5'/>
-  <rect x='183' y='30' width='70' height='70' fill='none' stroke='#2563eb' stroke-width='1.5'/>
-  <text x='220' y='112' text-anchor='middle' font-size='10' fill='#475569' font-family='system-ui'>19 parts sur 100</text>
-</svg>`,
+          type: "section",
+          labelFr: "Exemples avec dixièmes et centièmes",
+          itemsFr: [],
         },
+        {
+          type: "svg_row",
+          items: [
+            {
+              markup: `<svg viewBox='0 0 140 105' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <text x='70' y='20' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>3</text>
+  <line x1='52' y1='25' x2='88' y2='25' stroke='#1d4ed8' stroke-width='2.5' stroke-linecap='round'/>
+  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>10</text>
+  <rect x='10' y='52' width='120' height='40' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
+  <rect x='10' y='52' width='36' height='40' fill='#3b82f6'/>
+  <line x1='22' y1='52' x2='22' y2='92' stroke='white' stroke-width='1'/><line x1='34' y1='52' x2='34' y2='92' stroke='white' stroke-width='1'/><line x1='46' y1='52' x2='46' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='58' y1='52' x2='58' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='70' y1='52' x2='70' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='82' y1='52' x2='82' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='94' y1='52' x2='94' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='106' y1='52' x2='106' y2='92' stroke='#93c5fd' stroke-width='1'/><line x1='118' y1='52' x2='118' y2='92' stroke='#93c5fd' stroke-width='1'/>
+  <rect x='10' y='52' width='120' height='40' fill='none' stroke='#2563eb' stroke-width='1.5'/>
+</svg>`,
+              captionFr: "3 parts sur 10",
+            },
+            {
+              markup: `<svg viewBox='0 0 140 115' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <text x='70' y='20' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>19</text>
+  <line x1='46' y1='25' x2='94' y2='25' stroke='#1d4ed8' stroke-width='2.5' stroke-linecap='round'/>
+  <text x='70' y='42' text-anchor='middle' font-size='18' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>100</text>
+  <rect x='10' y='52' width='120' height='60' fill='#eff6ff' stroke='#2563eb' stroke-width='1.5'/>
+  <rect x='10' y='52' width='120' height='6' fill='#3b82f6'/>
+  <rect x='10' y='58' width='108' height='6' fill='#3b82f6'/>
+  <line x1='22' y1='52' x2='22' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='34' y1='52' x2='34' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='46' y1='52' x2='46' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='58' y1='52' x2='58' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='70' y1='52' x2='70' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='82' y1='52' x2='82' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='94' y1='52' x2='94' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='106' y1='52' x2='106' y2='112' stroke='#93c5fd' stroke-width='0.5'/><line x1='118' y1='52' x2='118' y2='112' stroke='#93c5fd' stroke-width='0.5'/>
+  <line x1='10' y1='58' x2='130' y2='58' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='64' x2='130' y2='64' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='70' x2='130' y2='70' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='76' x2='130' y2='76' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='82' x2='130' y2='82' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='88' x2='130' y2='88' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='94' x2='130' y2='94' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='100' x2='130' y2='100' stroke='#93c5fd' stroke-width='0.5'/><line x1='10' y1='106' x2='130' y2='106' stroke='#93c5fd' stroke-width='0.5'/>
+  <rect x='10' y='52' width='120' height='60' fill='none' stroke='#2563eb' stroke-width='1.5'/>
+</svg>`,
+              captionFr: "19 parts sur 100",
+            },
+          ],
+        },
+        { type: "heading", fr: "Comment lire une fraction", black: true },
         {
           type: "table",
           headersFr: ["Fraction", "Lecture", "Valeur décimale"],
@@ -135,23 +182,13 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
           ],
           captionFr: "Les fractions > 1 ont un numérateur plus grand que le dénominateur (ex : 62/10 = 6,2).",
         },
-        {
-          type: "note",
-          fr: "Cas particuliers : tout nombre entier s'écrit sous forme de fraction avec dénominateur 1 (ex : 3 = 3/1). Et toute fraction n/n est égale à 1 (ex : 7/7 = 1, 100/100 = 1).",
-        },
       ],
     },
-    exercises: [
-      { id: "a4-1-e1", promptFr: "Dans la fraction 3/4, quel est le numérateur ?", type: "number", acceptable: ["3"] },
-      { id: "a4-1-e2", promptFr: "Dans la fraction 5/8, quel est le dénominateur ?", type: "number", acceptable: ["8"] },
-      { id: "a4-1-e3", promptFr: "Écrivez 5 sous forme de fraction (avec dénominateur 1).", type: "short_text", acceptable: ["5/1"] },
-      { id: "a4-1-e4", promptFr: "Quelle fraction représente la moitié ?", type: "short_text", acceptable: ["1/2"] },
-      { id: "a4-1-e5", promptFr: "7/7 est égal à quel nombre entier ?", type: "number", acceptable: ["1"] },
-    ],
+    exercises: [],
   },
   {
-    submoduleId: "A4-2",
-    submoduleCode: "A4.2",
+    submoduleId: "A4-3",
+    submoduleCode: "A4.3",
     theory: {
       title: { fr: "Fractions équivalentes", en: "Equivalent fractions", ar: "الكسور المتكافئة", fa: "کسرهای معادل", ti: "ማዕረ ፍርቂ", uk: "Рівні дроби" },
       paragraphs: {
@@ -194,16 +231,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-2-e1", promptFr: "Simplifiez 6/8.", type: "short_text", acceptable: ["3/4"] },
-      { id: "a4-2-e2", promptFr: "Simplifiez 12/16.", type: "short_text", acceptable: ["3/4"] },
-      { id: "a4-2-e3", promptFr: "Trouvez une fraction équivalente à 1/3 avec dénominateur 9.", type: "short_text", acceptable: ["3/9"] },
-      { id: "a4-2-e4", promptFr: "Simplifiez 10/15.", type: "short_text", acceptable: ["2/3"] },
-      { id: "a4-2-e5", promptFr: "Simplifiez 18/24.", type: "short_text", acceptable: ["3/4"] },
+      { id: "a4-3-e1", promptFr: "Simplifiez 6/8.", type: "short_text", acceptable: ["3/4"] },
+      { id: "a4-3-e2", promptFr: "Simplifiez 12/16.", type: "short_text", acceptable: ["3/4"] },
+      { id: "a4-3-e3", promptFr: "Trouvez une fraction équivalente à 1/3 avec dénominateur 9.", type: "short_text", acceptable: ["3/9"] },
+      { id: "a4-3-e4", promptFr: "Simplifiez 10/15.", type: "short_text", acceptable: ["2/3"] },
+      { id: "a4-3-e5", promptFr: "Simplifiez 18/24.", type: "short_text", acceptable: ["3/4"] },
     ],
   },
   {
-    submoduleId: "A4-3",
-    submoduleCode: "A4.3",
+    submoduleId: "A4-4",
+    submoduleCode: "A4.4",
     theory: {
       title: { fr: "Comparaison de fractions", en: "Comparing fractions", ar: "مقارنة الكسور", fa: "مقایسه کسرها", ti: "ምውድዳር ፍርቂ", uk: "Порівняння дробів" },
       paragraphs: {
@@ -240,16 +277,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-3-e1", promptFr: "Comparez 3/7 et 5/7 avec < ou >.", type: "short_text", acceptable: ["3/7 < 5/7", "<"] },
-      { id: "a4-3-e2", promptFr: "Comparez 2/3 et 3/4 avec < ou >.", type: "short_text", acceptable: ["2/3 < 3/4", "<"] },
-      { id: "a4-3-e3", promptFr: "5/4 est-il plus grand que 1 ? (oui/non)", type: "short_text", acceptable: ["oui", "yes"] },
-      { id: "a4-3-e4", promptFr: "Comparez 5/6 et 7/8 (quel est le plus grand ?)", type: "short_text", acceptable: ["7/8"] },
-      { id: "a4-3-e5", promptFr: "Comparez 1/2 et 2/5 avec < ou >.", type: "short_text", acceptable: ["1/2 > 2/5", ">"] },
+      { id: "a4-4-e1", promptFr: "Comparez 3/7 et 5/7 avec < ou >.", type: "short_text", acceptable: ["3/7 < 5/7", "<"] },
+      { id: "a4-4-e2", promptFr: "Comparez 2/3 et 3/4 avec < ou >.", type: "short_text", acceptable: ["2/3 < 3/4", "<"] },
+      { id: "a4-4-e3", promptFr: "5/4 est-il plus grand que 1 ? (oui/non)", type: "short_text", acceptable: ["oui", "yes"] },
+      { id: "a4-4-e4", promptFr: "Comparez 5/6 et 7/8 (quel est le plus grand ?)", type: "short_text", acceptable: ["7/8"] },
+      { id: "a4-4-e5", promptFr: "Comparez 1/2 et 2/5 avec < ou >.", type: "short_text", acceptable: ["1/2 > 2/5", ">"] },
     ],
   },
   {
-    submoduleId: "A4-4",
-    submoduleCode: "A4.4",
+    submoduleId: "A4-5",
+    submoduleCode: "A4.5",
     theory: {
       title: { fr: "Addition/soustraction même dénominateur", en: "Add/subtract same denominator", ar: "الجمع والطرح بنفس المقام", fa: "جمع/تفریق با مخرج یکسان", ti: "ምደማር/ምቅናስ ሓደ ሚዛን", uk: "Додавання/віднімання однаковий знаменник" },
       paragraphs: {
@@ -286,16 +323,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-4-e1", promptFr: "Calculez 3/7 + 2/7.", type: "short_text", acceptable: ["5/7"] },
-      { id: "a4-4-e2", promptFr: "Calculez 5/8 − 3/8 (simplifiez).", type: "short_text", acceptable: ["1/4", "2/8"] },
-      { id: "a4-4-e3", promptFr: "Calculez 7/9 − 4/9.", type: "short_text", acceptable: ["3/9", "1/3"] },
-      { id: "a4-4-e4", promptFr: "Calculez 2/5 + 4/5 (simplifiez).", type: "short_text", acceptable: ["6/5", "1 1/5"] },
-      { id: "a4-4-e5", promptFr: "Calculez 11/12 − 5/12.", type: "short_text", acceptable: ["6/12", "1/2"] },
+      { id: "a4-5-e1", promptFr: "Calculez 3/7 + 2/7.", type: "short_text", acceptable: ["5/7"] },
+      { id: "a4-5-e2", promptFr: "Calculez 5/8 − 3/8 (simplifiez).", type: "short_text", acceptable: ["1/4", "2/8"] },
+      { id: "a4-5-e3", promptFr: "Calculez 7/9 − 4/9.", type: "short_text", acceptable: ["3/9", "1/3"] },
+      { id: "a4-5-e4", promptFr: "Calculez 2/5 + 4/5 (simplifiez).", type: "short_text", acceptable: ["6/5", "1 1/5"] },
+      { id: "a4-5-e5", promptFr: "Calculez 11/12 − 5/12.", type: "short_text", acceptable: ["6/12", "1/2"] },
     ],
   },
   {
-    submoduleId: "A4-5",
-    submoduleCode: "A4.5",
+    submoduleId: "A4-6",
+    submoduleCode: "A4.6",
     theory: {
       title: { fr: "Addition/soustraction dénominateurs différents (PPCM)", en: "Add/subtract different denominators (LCM)", ar: "الجمع والطرح بمقامين مختلفين", fa: "جمع/تفریق با مخرج‌های مختلف", ti: "ምደማር/ምቅናስ ዝተፈላለየ ሚዛን", uk: "Різні знаменники (НСК)" },
       paragraphs: {
@@ -332,16 +369,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-5-e1", promptFr: "Calculez 1/3 + 1/4.", type: "short_text", acceptable: ["7/12"] },
-      { id: "a4-5-e2", promptFr: "Calculez 1/2 + 1/3.", type: "short_text", acceptable: ["5/6"] },
-      { id: "a4-5-e3", promptFr: "Calculez 3/4 − 1/3.", type: "short_text", acceptable: ["5/12"] },
-      { id: "a4-5-e4", promptFr: "Calculez 2/5 + 3/10.", type: "short_text", acceptable: ["7/10"] },
-      { id: "a4-5-e5", promptFr: "Calculez 5/6 − 1/4.", type: "short_text", acceptable: ["7/12"] },
+      { id: "a4-6-e1", promptFr: "Calculez 1/3 + 1/4.", type: "short_text", acceptable: ["7/12"] },
+      { id: "a4-6-e2", promptFr: "Calculez 1/2 + 1/3.", type: "short_text", acceptable: ["5/6"] },
+      { id: "a4-6-e3", promptFr: "Calculez 3/4 − 1/3.", type: "short_text", acceptable: ["5/12"] },
+      { id: "a4-6-e4", promptFr: "Calculez 2/5 + 3/10.", type: "short_text", acceptable: ["7/10"] },
+      { id: "a4-6-e5", promptFr: "Calculez 5/6 − 1/4.", type: "short_text", acceptable: ["7/12"] },
     ],
   },
   {
-    submoduleId: "A4-6",
-    submoduleCode: "A4.6",
+    submoduleId: "A4-7",
+    submoduleCode: "A4.7",
     theory: {
       title: { fr: "Multiplication de fractions", en: "Multiplication of fractions", ar: "ضرب الكسور", fa: "ضرب کسرها", ti: "ዘርፊ ፍርቂ", uk: "Множення дробів" },
       paragraphs: {
@@ -378,16 +415,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-6-e1", promptFr: "Calculez (2/3) × (3/4) (simplifiez).", type: "short_text", acceptable: ["1/2", "6/12"] },
-      { id: "a4-6-e2", promptFr: "Calculez (3/5) × (5/9) (simplifiez).", type: "short_text", acceptable: ["1/3", "15/45"] },
-      { id: "a4-6-e3", promptFr: "Calculez (4/7) × (7/8) (simplifiez).", type: "short_text", acceptable: ["1/2", "4/8"] },
-      { id: "a4-6-e4", promptFr: "Calculez (2/5) × (10/3).", type: "short_text", acceptable: ["4/3", "20/15"] },
-      { id: "a4-6-e5", promptFr: "Calculez (3/4) × (8/9) (simplifiez).", type: "short_text", acceptable: ["2/3", "24/36"] },
+      { id: "a4-7-e1", promptFr: "Calculez (2/3) × (3/4) (simplifiez).", type: "short_text", acceptable: ["1/2", "6/12"] },
+      { id: "a4-7-e2", promptFr: "Calculez (3/5) × (5/9) (simplifiez).", type: "short_text", acceptable: ["1/3", "15/45"] },
+      { id: "a4-7-e3", promptFr: "Calculez (4/7) × (7/8) (simplifiez).", type: "short_text", acceptable: ["1/2", "4/8"] },
+      { id: "a4-7-e4", promptFr: "Calculez (2/5) × (10/3).", type: "short_text", acceptable: ["4/3", "20/15"] },
+      { id: "a4-7-e5", promptFr: "Calculez (3/4) × (8/9) (simplifiez).", type: "short_text", acceptable: ["2/3", "24/36"] },
     ],
   },
   {
-    submoduleId: "A4-7",
-    submoduleCode: "A4.7",
+    submoduleId: "A4-8",
+    submoduleCode: "A4.8",
     theory: {
       title: { fr: "Division de fractions (inverse)", en: "Division of fractions (inverse)", ar: "قسمة الكسور (المعكوس)", fa: "تقسیم کسرها (معکوس)", ti: "ክፍፍል ፍርቂ (ተቃራኒ)", uk: "Ділення дробів (обернений дріб)" },
       paragraphs: {
@@ -424,16 +461,16 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-7-e1", promptFr: "Quel est l'inverse de 3/4 ?", type: "short_text", acceptable: ["4/3"] },
-      { id: "a4-7-e2", promptFr: "Calculez (3/4) ÷ (2/5).", type: "short_text", acceptable: ["15/8"] },
-      { id: "a4-7-e3", promptFr: "Calculez (2/3) ÷ (4/9).", type: "short_text", acceptable: ["3/2", "18/12"] },
-      { id: "a4-7-e4", promptFr: "Calculez (5/6) ÷ (5/3).", type: "short_text", acceptable: ["1/2", "15/30"] },
-      { id: "a4-7-e5", promptFr: "Calculez (7/8) ÷ (7/4).", type: "short_text", acceptable: ["1/2", "28/56"] },
+      { id: "a4-8-e1", promptFr: "Quel est l'inverse de 3/4 ?", type: "short_text", acceptable: ["4/3"] },
+      { id: "a4-8-e2", promptFr: "Calculez (3/4) ÷ (2/5).", type: "short_text", acceptable: ["15/8"] },
+      { id: "a4-8-e3", promptFr: "Calculez (2/3) ÷ (4/9).", type: "short_text", acceptable: ["3/2", "18/12"] },
+      { id: "a4-8-e4", promptFr: "Calculez (5/6) ÷ (5/3).", type: "short_text", acceptable: ["1/2", "15/30"] },
+      { id: "a4-8-e5", promptFr: "Calculez (7/8) ÷ (7/4).", type: "short_text", acceptable: ["1/2", "28/56"] },
     ],
   },
   {
-    submoduleId: "A4-8",
-    submoduleCode: "A4.8",
+    submoduleId: "A4-9",
+    submoduleCode: "A4.9",
     theory: {
       title: { fr: "Fractions et décimaux", en: "Fractions and decimals", ar: "الكسور والأعداد العشرية", fa: "کسرها و اعشار", ti: "ፍርቂ ምስ ቁጽሪ ቪርጉላ", uk: "Дроби і десяткові числа" },
       paragraphs: {
@@ -470,11 +507,11 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
       },
     },
     exercises: [
-      { id: "a4-8-e1", promptFr: "Transformez 3/4 en nombre décimal.", type: "number", acceptable: ["0.75", "0,75"] },
-      { id: "a4-8-e2", promptFr: "Transformez 1/2 en nombre décimal.", type: "number", acceptable: ["0.5", "0,5"] },
-      { id: "a4-8-e3", promptFr: "Transformez 0,25 en fraction simplifiée.", type: "short_text", acceptable: ["1/4"] },
-      { id: "a4-8-e4", promptFr: "Transformez 0,6 en fraction (puis simplifiez).", type: "short_text", acceptable: ["3/5", "6/10"] },
-      { id: "a4-8-e5", promptFr: "Transformez 1/5 en nombre décimal.", type: "number", acceptable: ["0.2", "0,2"] },
+      { id: "a4-9-e1", promptFr: "Transformez 3/4 en nombre décimal.", type: "number", acceptable: ["0.75", "0,75"] },
+      { id: "a4-9-e2", promptFr: "Transformez 1/2 en nombre décimal.", type: "number", acceptable: ["0.5", "0,5"] },
+      { id: "a4-9-e3", promptFr: "Transformez 0,25 en fraction simplifiée.", type: "short_text", acceptable: ["1/4"] },
+      { id: "a4-9-e4", promptFr: "Transformez 0,6 en fraction (puis simplifiez).", type: "short_text", acceptable: ["3/5", "6/10"] },
+      { id: "a4-9-e5", promptFr: "Transformez 1/5 en nombre décimal.", type: "number", acceptable: ["0.2", "0,2"] },
     ],
   },
 ];

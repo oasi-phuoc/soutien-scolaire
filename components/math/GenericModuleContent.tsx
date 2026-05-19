@@ -40,10 +40,10 @@ function buildSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
-      return (
-        <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">
-          {block.fr}
-        </h3>
+      return block.black ? (
+        <h3 className="mt-3 mb-1 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+      ) : (
+        <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</h3>
       );
     case "plain":
       return (
@@ -116,12 +116,48 @@ function BlockView({ block }: { block: MathRichBlock }) {
         </div>
       );
     case "svg":
-      return (
+      return block.noFrame ? (
+        <div className="my-2">
+          <div dangerouslySetInnerHTML={{ __html: block.markup }} />
+          {block.captionFr && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      ) : (
         <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
           {block.captionFr && (
             <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
           )}
+        </div>
+      );
+    case "section":
+      return (
+        <div className="space-y-1.5">
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>
+          {block.itemsFr.length > 0 && (
+            <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
+              {block.itemsFr.map((item, ii) => (
+                <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    case "svg_row":
+      return (
+        <div className="flex gap-3">
+          {block.items.map((item, ii) => (
+            <div key={ii} className="flex-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
+              <div dangerouslySetInnerHTML={{ __html: item.markup }} />
+              {item.captionFr && (
+                <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{item.captionFr}</p>
+              )}
+            </div>
+          ))}
         </div>
       );
     default:

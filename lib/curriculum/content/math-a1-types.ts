@@ -45,14 +45,16 @@ export type TheoryReadAloud = {
 
 /** Bloc de théorie riche (style section française). */
 export type MathRichBlock =
-  | { type: "heading"; fr: string }
+  | { type: "heading"; fr: string; black?: boolean }
   | { type: "rule"; titleFr: string; itemsFr: string[]; pivot?: Partial<Record<PivotCode, { title: string; items: string[] }>> }
   | { type: "note"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "example"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "table"; headersFr: string[]; rows: string[][]; captionFr?: string }
   | { type: "plain"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
-  | { type: "svg"; markup: string; captionFr?: string };
+  | { type: "svg"; markup: string; captionFr?: string; noFrame?: boolean }
+  | { type: "section"; labelFr: string; itemsFr: string[] }
+  | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> };
 
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */
