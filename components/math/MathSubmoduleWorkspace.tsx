@@ -214,6 +214,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
 
+  const goTo = useCallback((idx: number) => {
+    setStepIdx(idx);
+    setAnswer("");
+    setExStatus("idle");
+    setExAttempts(0);
+    setValidateCommand(0);
+    setCanValidate(true);
+    setExerciseKey(k => k + 1);
+  }, []);
+
   // A1 submodules use the rich A1ModuleContent component
   if (moduleId === "A1") {
     return <A1ModuleContent startSubmoduleId={submoduleId} />;
@@ -224,22 +234,11 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} />;
   }
 
-
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
   const isExercise = currentStep !== undefined && currentStep.kind !== "theory";
   const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "decimal_exercises";
-
-  const goTo = useCallback((idx: number) => {
-    setStepIdx(idx);
-    setAnswer("");
-    setExStatus("idle");
-    setExAttempts(0);
-    setValidateCommand(0);
-    setCanValidate(true);
-    setExerciseKey(k => k + 1);
-  }, []);
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
 
