@@ -237,7 +237,10 @@ export function MathematiquesClient() {
                     type="button"
                     onClick={() => {
                       if (displayState === "in_progress" || displayState === "available") {
-                        router.push(`/mathematiques/${m.id}`);
+                        const target = firstAvailableSubIdx >= 0
+                          ? m.submodules[firstAvailableSubIdx]
+                          : m.submodules[0];
+                        if (target) router.push(`/mathematiques/${target.id}`);
                       } else {
                         toggleModule(m.id, displayState);
                       }
@@ -319,7 +322,7 @@ export function MathematiquesClient() {
                             ) : subAvailable ? (
                               <button
                                 type="button"
-                                onClick={(e) => { e.stopPropagation(); router.push(`/mathematiques/${m.id}`); }}
+                                onClick={(e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}`); }}
                                 className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-80 active:opacity-70"
                                 style={{ background: accentColor }}
                                 aria-label={`Commencer ${sub.code}`}
