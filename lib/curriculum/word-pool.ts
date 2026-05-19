@@ -233,7 +233,7 @@ export const LETTER_WORDS: string[] = [
   "bouteille","boîte","baleine","bonbon","botte","bosquet","brocoli","baguette",
   "bleuet","biscuit","bobine","bœuf","bombardier","bouclier","bourdon","bouvreuil",
   "brebis","brindille","brochet","bulle","bûcheron","buisson","bulldozer",
-  "basilic","betterave",
+  "basilic","betterave","basketball","billard","bouquet",
   // ── C ──
   "café","canard","carotte","casque","cube","crayon","crocodile","citron","cerise",
   "chat","chien","chapeau","château","cheval","cochon","crabe","champignon","camion",
@@ -242,7 +242,7 @@ export const LETTER_WORDS: string[] = [
   "castor","cerf","cerf-volant","chameau","château","chimie","chouette","chute",
   "cigare","ciment","ciseaux","cloche","cloison","clôture","cobra","colimaçon",
   "colombe","comète","compas","coquille","corail","corde","corbeau","cornichon",
-  "céleri","chou","citrouille","concombre","coriandre","courgette",
+  "céleri","chou","citrouille","concombre","coriandre","courgette","cahier","classeur","colle",
   // ── D ──
   "dauphin","domino","dragon","drapeau","dodo","danse","dindon","diplôme","dent",
   "doigt","dalmatien","dessert","dinosaure","detective","daim","décoration",
@@ -254,11 +254,11 @@ export const LETTER_WORDS: string[] = [
   "étagère","échelle","épaule","éclair","écran","édredon","effrayant","égout",
   "éléphant","émeu","encre","endroit","entonnoir","épice","équipe","erreur",
   "espace","étang","étiquette","étoffe","étudiant","éveil","évier",
-  "épinard","échalote",
+  "épinard","échalote","echecs","equerre",
   // ── F ──
   "farine","flamme","fleur","forêt","fraise","fromage","fusée","flûte","fée",
   "fenêtre","fourmi","fanfare","famille","foulard","fantôme","framboise","flaçon",
-  "fontaine","falaise","feuille","fauteuil","faucon","fée","fer","ferme","feston",
+  "fontaine","falaise","feuille","feutre","football","fauteuil","faucon","fée","fer","ferme","feston",
   "ficelle","filet","flamant","flan","flèche","flore","flotte","foin","fondue",
   "fourche","fourchette","fracture","fragment","frein","frise","frontière","fruit",
   // ── G ──
@@ -268,13 +268,13 @@ export const LETTER_WORDS: string[] = [
   "gousse","gouttière","goyave","grain","grappe","gravier","grenade","grillon",
   "grippe","grizzly","grotte","groupe","guépard","guirlande","guitoune",
   // ── H ──
-  "herbe","hibou","hôpital","hélicoptère","horloge","hamster","harpe","héron",
+  "herbe","hibou","hôpital","hockey","hélicoptère","horloge","hamster","harpe","héron",
   "hérisson","haricot","hippopotame","hamac","hangar","harnais","harfang",
   "harmonica","hélice","hermine","hibou","hippocampe","hirondelle","hiver",
   "homard","horizon","houe","houx","huître","hyène",
   // ── I ──
   "île","ibis","image","igloo","iris","insecte","infirmière","imprimante",
-  "iguane","index","indien","industrie","infini","instrument","interrupteur",
+  "iguane","index","indien","industrie","infini","instrument","interrupteur","intercalaire",
   "invitation","iode","isotope","ivoire","if",
   // ── J ──
   "jardin","jouet","jus","bijou","jonquille","jungle","journal","jambe","jupe",
@@ -320,14 +320,14 @@ export const LETTER_WORDS: string[] = [
   "queue","quille","quiche","quartier","quinze","quille","quetzal","quinquet",
   "quinconce","quiproquo","quota",
   // ── R ──
-  "radis","renard","requin","rivière","robot","rose","rue","raisin","robe",
+  "radis","renard","requin","rivière","robot","rose","rue","raisin","regle","robe",
   "rhinocéros","rouleau","raquette","rame","ruban","roseau","ragondin","rainette",
   "rameau","ramier","rasoir","rateau","rayon","récif","réglisse","rémora","rennet",
   "reptile","réseau","rhododendron","rigole","ronce","rosier","rouget","rouille",
   "rouleau","roussette","ruche","ruisseau","rutabaga",
   "romarin","raisin",
   // ── S ──
-  "sapin","serpent","singe","soleil","souris","stylo","solo","cire","sac",
+  "sapin","serpent","singe","soleil","souris","surligneur","stylo","solo","cire","sac",
   "sandwich","sanglier","salade","sauterelle","saucisse","saumon","scarabée",
   "sorcière","sirop","seau","sabot","safran","saule","sauterelle","scorpion",
   "seiche","sentier","séquoia","serre","silex","siphon","sittelle","socle",
@@ -339,13 +339,13 @@ export const LETTER_WORDS: string[] = [
   "tournesol","taupe","théière","tonnerre","télescope","toile","trompette",
   "trottoir","tacot","tamanoir","tamarin","taon","tartan","teckel","termite",
   "terrier","tige","timon","tisserin","toboggan","toucan","trèfle","trident",
-  "triton","tronc","troupeau","truffe","truite","tube","tunnel","turbine","tuyau",
+  "triton","tronc","troupeau","truffe","trousse","truite","tube","tunnel","turbine","tuyau",
   "thym",
   // ── U ──
   "usine","uniforme","ukulélé","ultrason","urne","urus","utopie",
   // ── V ──
   "vache","valise","vampire","vélo","violon","verre","vêtement","voiture",
-  "ville","vitre","violette","vacances","vipère","volcan","voisin","vaisseau",
+  "ville","vitre","violette","vacances","vipère","volleyball","volcan","voisin","vaisseau",
   "vallée","vanille","varech","vautour","végétal","ventouse","verdure","verrou",
   "veste","vinaigre","vinaigrette","vison","vitrail","volaille","volet","volute",
   "vortex","voûte","voyage","vulture",
