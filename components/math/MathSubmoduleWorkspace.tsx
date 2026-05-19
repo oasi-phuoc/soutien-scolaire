@@ -201,7 +201,7 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
   );
 }
 
-export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId: string; moduleId: string }) {
+export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: { submoduleId: string; moduleId: string; startAtEval?: boolean }) {
   const router = useRouter();
   const lesson = getLessonBySubmoduleId(submoduleId);
 
@@ -226,7 +226,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
 
   // A1 submodules use the rich A1ModuleContent component
   if (moduleId === "A1") {
-    return <A1ModuleContent startSubmoduleId={submoduleId} />;
+    return <A1ModuleContent startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule

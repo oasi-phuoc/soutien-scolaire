@@ -7,10 +7,11 @@ import {
   getModuleIdForSubmodule,
 } from "@/lib/curriculum/lessons-registry";
 
-type Props = { params: Promise<{ moduleId: string }> };
+type Props = { params: Promise<{ moduleId: string }>; searchParams: Promise<{ eval?: string }> };
 
-export default async function MathModulePage({ params }: Props) {
+export default async function MathModulePage({ params, searchParams }: Props) {
   const { moduleId } = await params;
+  const { eval: evalParam } = await searchParams;
   const upper = moduleId.toUpperCase();
 
   // If it's a module ID (A4, G1…), redirect to its first submodule
@@ -44,7 +45,7 @@ export default async function MathModulePage({ params }: Props) {
           {lesson!.submoduleCode} — {lesson!.theory.title.fr}
         </h1>
       </header>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} />
+      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} startAtEval={evalParam === "1"} />
     </main>
   );
 }

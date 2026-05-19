@@ -311,6 +311,7 @@ export function MathematiquesClient() {
                         const subAvailable = !isLocked && idx === firstAvailableSubIdx;
                         const subLocked = !subDone && !subAvailable;
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
+                        const hasFailedEval = subDone && score !== undefined && score.grade < PASSING_GRADE;
                         return (
                           <li
                             key={sub.id}
@@ -333,9 +334,23 @@ export function MathematiquesClient() {
                                     {score.grade.toFixed(1)}/6
                                   </span>
                                 )}
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-text-secondary)]" aria-hidden>
-                                  <path d="M9 18l6-6-6-6" />
-                                </svg>
+                                {hasFailedEval ? (
+                                  <button
+                                    type="button"
+                                    aria-label="Aller à l'évaluation"
+                                    onClick={(e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}?eval=1`); }}
+                                    className="flex h-8 w-8 items-center justify-center rounded-full border transition-colors hover:opacity-80"
+                                    style={{ borderColor: accentColor, color: accentColor }}
+                                  >
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                                      <path d="M20 6L9 17l-5-5" />
+                                    </svg>
+                                  </button>
+                                ) : (
+                                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[var(--color-text-secondary)]" aria-hidden>
+                                    <path d="M9 18l6-6-6-6" />
+                                  </svg>
+                                )}
                               </div>
                             ) : subAvailable ? (
                               <button

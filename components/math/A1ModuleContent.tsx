@@ -1532,7 +1532,7 @@ function ExerciseRow({
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
-export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: string } = {}) {
+export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmoduleId?: string; startAtEval?: boolean } = {}) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
@@ -1543,9 +1543,10 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
     }
     return loadA1Position().lessonIdx;
   });
-  const [step, setStep] = useState<Step>(() =>
-    startSubmoduleId ? "theory" : loadA1Position().step,
-  );
+  const [step, setStep] = useState<Step>(() => {
+    if (startSubmoduleId && startAtEval) return "eval";
+    return startSubmoduleId ? "theory" : loadA1Position().step;
+  });
 
   // Exercice 1 — tracer les chiffres (0–9)
   const [ex1Digits, setEx1Digits] = useState<number[]>(generateDigits);
