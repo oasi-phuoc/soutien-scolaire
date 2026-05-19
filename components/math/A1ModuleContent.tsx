@@ -2295,15 +2295,10 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
       {step === "theory" && (
-        <AppCard
-          variant="default"
-          header={
-            <div>
-              <p className="text-sm font-medium uppercase text-[var(--color-accent-alg)]">Théorie</p>
-              <h2 className="text-base font-semibold text-[var(--color-text-primary)]">{theoryFr.title}</h2>
-            </div>
-          }
-        >
+        <div className="space-y-4">
+          <h2 className="text-base font-semibold text-[var(--color-text-primary)]">
+            {lesson.submoduleId === "A1-1" ? "Apprendre à compter" : theoryFr.title}
+          </h2>
           <div className="space-y-3 text-sm leading-relaxed">
             {lesson.theory.blocks ? (
               lesson.theory.blocks.map((block, i) => (
@@ -2404,7 +2399,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
             })}
           </div>
           {lesson.submoduleId === "A1-2" && <PlaceValueIllustration />}
-        </AppCard>
+        </div>
       )}
 
       {/* ── Écoute ──────────────────────────────────────────────────────────── */}
