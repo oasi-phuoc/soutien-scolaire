@@ -109,7 +109,6 @@ function ModuleCard({
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-bold text-[var(--color-text-primary)]">{mod.title}</p>
-          <p className="text-xs text-[var(--color-text-secondary)]">{mod.description}</p>
         </div>
         <ModuleStateBadge state={modState} />
         {isCollapsible && (

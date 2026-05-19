@@ -205,21 +205,6 @@ export function MathematiquesClient() {
 
             const expanded = isModuleExpanded(m.id, displayState);
 
-            // Terminé (sans sous-modules à afficher) : titre + badge seulement
-            if (displayState === "completed") {
-              return (
-                <li key={m.id}>
-                  <div
-                    className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3"
-                  >
-                    <p className="flex-1 text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                    {prog?.medal ? <span className="text-sm">{prog.medal}</span> : null}
-                    <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
-                  </div>
-                </li>
-              );
-            }
-
             return (
               <li key={m.id}>
                 <div
@@ -256,17 +241,17 @@ export function MathematiquesClient() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
-                      <p className="text-xs text-[var(--color-text-secondary)]">
-                        {displayState === "in_progress"
-                          ? `${prog?.subProgress ?? 0} / ${prog?.subTotal ?? m.submodules.length} sous-modules`
-                          : `${m.submodules.length} sous-module${m.submodules.length > 1 ? "s" : ""}`}
-                      </p>
                     </div>
                     <div className="flex shrink-0 items-center gap-2">
                       {prog?.medal ? (
                         <span className="text-sm">{prog.medal}</span>
                       ) : null}
                       <StateBadge state={displayState} missing={pre.ok ? undefined : pre.missing} />
+                      {displayState === "completed" && (
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${expanded ? "rotate-90" : ""}`} aria-hidden>
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
+                      )}
                     </div>
                   </button>
 

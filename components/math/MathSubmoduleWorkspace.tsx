@@ -231,7 +231,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule
   if (moduleId !== "A4") {
-    return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} />;
+    return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
 
   const currentStep = steps[stepIdx];

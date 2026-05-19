@@ -6,11 +6,14 @@ import { answerMatches } from "@/lib/curriculum/content/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
+import { percentToSwissGrade, medalFromPercent } from "@/lib/scoring";
 
 // ── Step types ──────────────────────────────────────────────────────────────
-type TheoryStep = { kind: "theory"; lesson: MathSubmoduleLesson };
-type ExerciseStep = { kind: "exercise"; lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type FlatStep = TheoryStep | ExerciseStep;
+type TheoryStep    = { kind: "theory";        lesson: MathSubmoduleLesson };
+type ExerciseStep  = { kind: "exercise";      lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type EvalStartStep = { kind: "eval_start";    lesson: MathSubmoduleLesson };
+type EvalQStep     = { kind: "eval_question"; lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type FlatStep = TheoryStep | ExerciseStep | EvalStartStep | EvalQStep;
 
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
@@ -21,7 +24,7 @@ function shufflePick<T>(arr: T[], n: number): T[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
-function buildSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
+function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
@@ -32,6 +35,13 @@ function buildSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
     for (const item of exercises) {
       steps.push({ kind: "exercise", lesson, item });
     }
+  }
+  if (withEval && lessons.length > 0) {
+    const lastLesson = lessons[lessons.length - 1]!;
+    const pool = lastLesson.exercisePool ?? lastLesson.exercises;
+    const evalItem = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)]! : undefined;
+    steps.push({ kind: "eval_start", lesson: lastLesson });
+    if (evalItem) steps.push({ kind: "eval_question", lesson: lastLesson, item: evalItem });
   }
   return steps;
 }
@@ -193,19 +203,31 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 }
 
 // ── Main component ───────────────────────────────────────────────────────────
-export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId: string; startSubmoduleId?: string }) {
+export function GenericModuleContent({
+  moduleId,
+  startSubmoduleId,
+  startAtEval,
+}: {
+  moduleId: string;
+  startSubmoduleId?: string;
+  startAtEval?: boolean;
+}) {
   const router = useRouter();
   const allLessons = getLessonsForModule(moduleId);
   const lessons = startSubmoduleId && allLessons
     ? allLessons.filter((l) => l.submoduleId === startSubmoduleId)
     : allLessons;
 
-  // Build steps once on mount (randomized pool)
+  const withEval = !!startSubmoduleId;
+
   const [steps] = useState<FlatStep[]>(() =>
-    lessons && lessons.length > 0 ? buildSteps(lessons) : [],
+    lessons && lessons.length > 0 ? buildSteps(lessons, withEval) : [],
   );
 
-  const [stepIdx, setStepIdx] = useState(0);
+  const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
+  const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
+
+  const [stepIdx, setStepIdx] = useState(initialIdx);
   const [answer, setAnswer] = useState("");
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
@@ -213,35 +235,49 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
+  const inEvalPhase =
+    currentStep?.kind === "eval_start" || currentStep?.kind === "eval_question";
 
-  const goTo = useCallback(
-    (idx: number) => {
-      setStepIdx(idx);
-      setAnswer("");
-      setExStatus("idle");
-      setExAttempts(0);
-    },
-    [],
-  );
+  const goTo = useCallback((idx: number) => {
+    setStepIdx(idx);
+    setAnswer("");
+    setExStatus("idle");
+    setExAttempts(0);
+  }, []);
 
   const goBack = useCallback(() => {
     if (!isFirstStep) goTo(stepIdx - 1);
   }, [isFirstStep, stepIdx, goTo]);
 
+  function finishEval(correct: boolean) {
+    if (!startSubmoduleId) { router.push("/mathematiques"); return; }
+    const pct = correct ? 100 : 0;
+    const grade = percentToSwissGrade(pct);
+    const medal = correct ? medalFromPercent(pct) : undefined;
+    const p = loadProgress();
+    saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
+    void medal;
+    router.push("/mathematiques");
+  }
+
   const goNext = useCallback(() => {
+    if (currentStep?.kind === "eval_question") {
+      finishEval(exStatus === "correct");
+      return;
+    }
     if (isLastStep) {
-      // Mark complete if on the last exercise of a lesson
       if (currentStep?.kind === "exercise" && exStatus === "correct") {
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
       router.push("/mathematiques");
     } else {
-      // Mark submodule complete when leaving the last exercise of a lesson
       if (currentStep?.kind === "exercise") {
         const nextStep = steps[stepIdx + 1];
         const isLastExOfLesson =
-          !nextStep || nextStep.kind !== "exercise" || nextStep.lesson.submoduleId !== currentStep.lesson.submoduleId;
+          !nextStep ||
+          nextStep.kind !== "exercise" ||
+          nextStep.lesson.submoduleId !== currentStep.lesson.submoduleId;
         if (isLastExOfLesson && exStatus === "correct") {
           const p = loadProgress();
           saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
@@ -249,29 +285,26 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
       }
       goTo(stepIdx + 1);
     }
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId]);
 
-  // Nav action computation
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
-  let stepValidateDisabled = false;
 
-  if (currentStep?.kind === "exercise" && exStatus !== "correct") {
+  if (
+    (currentStep?.kind === "exercise" || currentStep?.kind === "eval_question") &&
+    exStatus !== "correct"
+  ) {
     stepValidate = () => {
+      if (!currentStep || (currentStep.kind !== "exercise" && currentStep.kind !== "eval_question")) return;
       const ok = answerMatches(answer, currentStep.item.acceptable);
       setExStatus(ok ? "correct" : "wrong");
       setExAttempts((a) => a + 1);
     };
-    stepValidateDisabled = false;
     if (exStatus === "wrong") {
-      stepReset = () => {
-        setAnswer("");
-        setExStatus("idle");
-      };
+      stepReset = () => { setAnswer(""); setExStatus("idle"); };
     }
   }
-
-  const nextDisabled = false;
 
   if (!lessons || lessons.length === 0 || steps.length === 0) {
     return (
@@ -281,47 +314,46 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
     );
   }
 
+  // Eval-phase steps don't count in the progress bar
+  const visibleSteps = steps.filter(
+    (s) => s.kind !== "eval_start" && s.kind !== "eval_question",
+  );
+  const visibleIdx = Math.min(stepIdx, visibleSteps.length);
+
   return (
     <div className="pb-40">
-      {/* Step-segment progress bar */}
-      <div className="mb-6 flex gap-1">
-        {steps.map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < stepIdx
-                ? "bg-[var(--color-accent-alg)]"
-                : i === stepIdx
-                  ? "bg-[var(--color-accent-alg)] opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
-      </div>
+      {/* Progress bar — lesson steps only */}
+      {!inEvalPhase && (
+        <div className="mb-6 flex gap-1">
+          {visibleSteps.map((_, i) => (
+            <div
+              key={i}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${
+                i < visibleIdx
+                  ? "bg-[var(--color-accent-alg)]"
+                  : i === visibleIdx
+                    ? "bg-[var(--color-accent-alg)] opacity-60"
+                    : "bg-[var(--color-border-default)]"
+              }`}
+            />
+          ))}
+        </div>
+      )}
 
-      {/* Step content */}
+      {/* Theory */}
       {currentStep?.kind === "theory" && <TheoryView lesson={currentStep.lesson} />}
 
+      {/* Exercise */}
       {currentStep?.kind === "exercise" && (
         <div className="space-y-4">
-          <div>
-            <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
-              {currentStep.item.promptFr}
-            </p>
-          </div>
-
+          <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+            {currentStep.item.promptFr}
+          </p>
           <input
             type={currentStep.item.type === "number" ? "number" : "text"}
             value={answer}
-            onChange={(e) => {
-              setAnswer(e.target.value);
-              if (exStatus !== "idle") setExStatus("idle");
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && answer.trim() && exStatus !== "correct") {
-                stepValidate?.();
-              }
-            }}
+            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
               exStatus === "correct"
@@ -331,16 +363,88 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
             }`}
           />
-
           {exStatus === "correct" && (
             <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>
           )}
           {exStatus === "wrong" && (
             <p className="text-xs font-medium text-red-500">
+              {exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Eval start screen */}
+      {currentStep?.kind === "eval_start" && (
+        <div className="flex flex-col items-center gap-8 py-8 text-center">
+          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
+              <path d="M9 11l3 3L22 4" />
+              <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+          </div>
+          <div className="space-y-2">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
+              Évaluation
+            </p>
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
+              {currentStep.lesson.theory.title.fr}
+            </h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              1 question pour valider tes connaissances.
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => goTo(stepIdx + 1)}
+            className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+          >
+            Commencer
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Eval question */}
+      {currentStep?.kind === "eval_question" && (
+        <div className="space-y-6">
+          <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-4 py-3">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
+              Question d'évaluation
+            </p>
+          </div>
+          <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+            {currentStep.item.promptFr}
+          </p>
+          {exStatus === "idle" || exStatus === "wrong" ? (
+            <input
+              type={currentStep.item.type === "number" ? "number" : "text"}
+              value={answer}
+              onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+              onKeyDown={(e) => { if (e.key === "Enter" && answer.trim()) stepValidate?.(); }}
+              placeholder="Votre réponse…"
+              className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
+                exStatus === "wrong"
+                  ? "border-red-400 bg-red-50 dark:bg-red-950/20"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+              }`}
+            />
+          ) : (
+            <div className="rounded-xl border border-green-400 bg-green-50 px-4 py-3 dark:bg-green-950/20">
+              <p className="text-sm font-medium text-green-700 dark:text-green-400">{answer}</p>
+            </div>
+          )}
+          {exStatus === "wrong" && (
+            <p className="text-xs font-medium text-red-500">
               {exAttempts >= 2
                 ? `Réponse : ${currentStep.item.acceptable[0]}`
-                : "Essayez encore…"}
+                : "Pas tout à fait…"}
             </p>
+          )}
+          {exStatus === "correct" && (
+            <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>
           )}
         </div>
       )}
@@ -349,16 +453,22 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            <button
-              type="button"
-              onClick={goBack}
-              disabled={isFirstStep}
-              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
-            >
-              ← Retour
-            </button>
+            {/* Back button — hidden on eval start */}
+            {currentStep?.kind !== "eval_start" ? (
+              <button
+                type="button"
+                onClick={goBack}
+                disabled={isFirstStep || currentStep?.kind === "eval_question"}
+                className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
+              >
+                ← Retour
+              </button>
+            ) : (
+              <span />
+            )}
 
-            {stepReset || stepValidate ? (
+            {/* Validate (exercises + eval question) */}
+            {(stepReset || stepValidate) && currentStep?.kind !== "eval_start" ? (
               <div className="flex items-center gap-2">
                 {stepReset && (
                   <button
@@ -374,7 +484,7 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
                   <button
                     type="button"
                     onClick={stepValidate}
-                    disabled={stepValidateDisabled}
+                    disabled={!answer.trim()}
                     className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-accent-alg)] text-white transition-opacity disabled:opacity-30"
                     aria-label="Valider"
                   >
@@ -386,14 +496,20 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
               <span />
             )}
 
-            <button
-              type="button"
-              onClick={goNext}
-              disabled={nextDisabled}
-              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
-            >
-              {isLastStep ? "Terminer ✓" : "Suivant →"}
-            </button>
+            {/* Next / Finish */}
+            {currentStep?.kind !== "eval_start" && (
+              <button
+                type="button"
+                onClick={goNext}
+                className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
+              >
+                {currentStep?.kind === "eval_question"
+                  ? "Terminer ✓"
+                  : isLastStep
+                    ? "Terminer ✓"
+                    : "Suivant →"}
+              </button>
+            )}
           </div>
         </div>
         <div style={{ height: 68 }} />
