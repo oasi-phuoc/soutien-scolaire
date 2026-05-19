@@ -267,7 +267,7 @@ export function FrancaisClient() {
             role="tab"
             aria-selected={tab === id}
             onClick={() => setTab(id)}
-            className={`min-h-10 rounded-[var(--radius-md)] px-2 text-xs font-medium transition-colors ${
+            className={`min-h-11 rounded-[var(--radius-md)] px-2 text-sm font-medium transition-colors ${
               tab === id
                 ? "bg-white text-[var(--color-accent-fr)] shadow-sm dark:bg-zinc-900"
                 : "text-[var(--color-text-secondary)]"
