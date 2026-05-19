@@ -203,17 +203,6 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 
 export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId: string; moduleId: string }) {
   const router = useRouter();
-
-  // A1 submodules use the rich A1ModuleContent component
-  if (moduleId === "A1") {
-    return <A1ModuleContent startSubmoduleId={submoduleId} />;
-  }
-
-  // Non-A4 modules with lessons use GenericModuleContent per submodule
-  if (moduleId !== "A4") {
-    return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} />;
-  }
-
   const lesson = getLessonBySubmoduleId(submoduleId);
 
   const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
@@ -224,6 +213,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
   const [answer, setAnswer] = useState("");
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
+
+  // A1 submodules use the rich A1ModuleContent component
+  if (moduleId === "A1") {
+    return <A1ModuleContent startSubmoduleId={submoduleId} />;
+  }
+
+  // Non-A4 modules with lessons use GenericModuleContent per submodule
+  if (moduleId !== "A4") {
+    return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} />;
+  }
 
 
   const currentStep = steps[stepIdx];
