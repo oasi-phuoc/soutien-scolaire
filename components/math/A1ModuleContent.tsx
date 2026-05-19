@@ -606,9 +606,7 @@ type Step = "theory" | "audio" | "ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" |
 function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
   if (lesson.submoduleId === "A1-1") {
-    return hasAudio
-      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"]
-      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
+    return ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
   }
   if (lesson.submoduleId === "A1-2") {
     return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16", "eval"];
@@ -2399,11 +2397,80 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
             })}
           </div>
           {lesson.submoduleId === "A1-2" && <PlaceValueIllustration />}
+          {lesson.submoduleId === "A1-1" && read && (
+            <div className="space-y-3">
+              <h3 className="text-base font-semibold text-[var(--color-text-primary)]">Comment les chiffres</h3>
+              {read.introFr?.length ? (
+                <div className="space-y-2 text-sm leading-relaxed">
+                  {read.introFr.map((t, i) => (
+                    <div key={`ra-intro-${i}`}>
+                      <p className="text-[var(--color-text-secondary)]">{t}</p>
+                      {showPivotTranslation && introPivotBlock?.[i] ? (
+                        <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
+                          lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          {introPivotBlock[i]}
+                        </p>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+              <div>
+                <p className="text-[14px] text-[var(--color-text-secondary)]">
+                  Écoutez l&apos;enregistrement puis répètez à voix haute.
+                </p>
+                {showPivotTranslation && LISTEN_REPEAT_PIVOT[pivot] ? (
+                  <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-sm italic text-[var(--color-text-primary)]"
+                    lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                    {LISTEN_REPEAT_PIVOT[pivot]}
+                  </p>
+                ) : null}
+              </div>
+              <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+                <table className="w-full min-w-[280px] border-collapse text-left text-sm">
+                  <tbody>
+                    {read.rows.map((row, ri) => (
+                      <tr key={ri}>
+                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                          <ReadAloudNumberCell cell={row.col1} />
+                        </td>
+                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                          <ReadAloudNumberCell cell={row.col2} />
+                        </td>
+                        <td className="border border-dashed border-zinc-300 px-3 py-2 dark:border-zinc-600">
+                          <ReadAloudNumberCell cell={row.col3} />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <ul className="flex flex-wrap gap-3 text-[length:var(--font-size-xs)]">
+                {read.legendFr.map((leg) => (
+                  <li key={leg.labelFr} className="flex items-start gap-1.5">
+                    <span className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${legendSwatchClass(leg.swatch)}`} aria-hidden />
+                    <span>
+                      <span className="text-[var(--color-text-secondary)]">{leg.labelFr}</span>
+                      {showPivotTranslation && leg.labelPivot?.[pivot] ? (
+                        <span className="block italic text-[var(--color-text-primary)]"
+                          lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
+                          {leg.labelPivot[pivot]}
+                        </span>
+                      ) : null}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              {read.audioSrc ? (
+                <div><AudioPlayer src={read.audioSrc} /></div>
+              ) : null}
+            </div>
+          )}
         </div>
       )}
 
-      {/* ── Écoute ──────────────────────────────────────────────────────────── */}
-      {step === "audio" && read && (
+      {/* ── Écoute (other submodules) ────────────────────────────────────────── */}
+      {step === "audio" && lesson.submoduleId !== "A1-1" && read && (
         <AppCard
           variant="default"
           header={
