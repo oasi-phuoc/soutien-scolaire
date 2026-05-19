@@ -260,6 +260,13 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
 
   const validateDisabled = currentStep?.kind === "exercise" ? exStatus === "correct" : !canValidate;
 
+  // True once the last exercise step is successfully completed
+  const isDone =
+    isLastStep &&
+    isExercise &&
+    ((currentStep?.kind === "exercise" && exStatus === "correct") ||
+      (isCustom && !canValidate));
+
   if (!lesson || steps.length === 0) {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
   }
@@ -338,12 +345,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
 
             <button type="button" onClick={goNext}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80">
-              {isLastStep ? (
-                nextLesson ? (
-                  <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
-                ) : (
-                  <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
-                )
+              {isDone || (isLastStep && !isExercise) ? (
+                <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
               )}
