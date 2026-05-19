@@ -614,12 +614,15 @@ function QcmExercise({
               ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
               : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
           } else {
-            if (isSelected) {
-              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
-            } else if (isCorrect) {
+            const userWrong = selected[i] !== item.correctIdx;
+            if (isSelected && !isCorrect) {
               cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+            } else if (!isSelected && isCorrect && userWrong) {
+              cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
             } else {
-              cls += "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+              cls += isSelected
+                ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+                : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
             }
           }
           return (
@@ -682,15 +685,17 @@ function QcmExercise({
                       ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                       : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
                   } else {
-                    if (isSelected) {
-                      cls +=
-                        "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-                    } else if (isCorrect) {
+                    const userWrong = selected[i] !== item.correctIdx;
+                    if (isSelected && !isCorrect) {
                       cls +=
                         "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
-                    } else {
+                    } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
-                        "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
+                        "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
+                    } else {
+                      cls += isSelected
+                        ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60";
                     }
                   }
                   return (
@@ -835,7 +840,7 @@ function FillExercise({
             disabled={validated}
             className={`inline-block w-28 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
               validated
-                ? "border-[var(--color-accent-fr)] text-[var(--color-accent-fr)]"
+                ? "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
                 : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
             }`}
           />
@@ -1074,7 +1079,7 @@ function MatchExercise({
           let leftCls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors cursor-pointer ";
           if (validated) {
             leftCls += isCorrect
-              ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300"
+              ? `border-current ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
                 ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
                 : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
@@ -1090,7 +1095,7 @@ function MatchExercise({
           const dotCls = `w-2 h-2 rounded-full mx-auto transition-colors ${
             isConnected
               ? validated
-                ? isCorrect ? "bg-emerald-500" : "bg-red-500"
+                ? isCorrect ? `bg-current ${MATCH_COLORS[colorIdx]}` : "bg-red-500"
                 : `bg-current ${MATCH_COLORS[colorIdx]}`
               : isSelected
                 ? "bg-[var(--color-accent-fr)]"
@@ -1133,7 +1138,7 @@ function MatchExercise({
           let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors ";
           if (validated) {
             cls += isCorrect
-              ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300"
+              ? `border-current cursor-pointer ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
                 ? "border-red-400 bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400"
                 : "border-[var(--color-border-default)] opacity-50 text-[var(--color-text-secondary)]";
@@ -1149,12 +1154,9 @@ function MatchExercise({
             <button key={ri} type="button" className={cls} onClick={() => clickRight(ri)} disabled={validated}>
               <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{LETTERS[origIdx]}.</span>
               <span className="flex-1 text-left">{pair.right}</span>
-              {validated && isConnected && (
+              {validated && isConnected && !isCorrect && (
                 <span className="shrink-0">
-                  {isCorrect
-                    ? <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-emerald-500" aria-hidden><path d="M20 6L9 17l-5-5"/></svg>
-                    : <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-red-500" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
-                  }
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-red-500" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </span>
               )}
             </button>

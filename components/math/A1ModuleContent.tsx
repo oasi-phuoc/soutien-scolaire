@@ -1510,12 +1510,12 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
+        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
           {result ? (
             <span className="text-sm font-medium text-[var(--color-text-primary)]">{answer}</span>
           ) : (
             <>
-              <span className="text-sm text-amber-600 line-through">{answer}</span>
+              <span className="text-sm text-red-400 line-through">{answer}</span>
               <span className="text-sm font-medium text-[var(--color-text-primary)]">{correctWord}</span>
             </>
           )}
@@ -3615,8 +3615,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   {evalItems_curr.slice(0, 4).map(ex => (
                     <ExerciseRow key={ex.id}
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
-                      answer={evalAnswers[ex.id] ?? ""} result={null}
-                      validated={false} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
+                      answer={evalAnswers[ex.id] ?? ""} result={evalPageValidated ? answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable) : null}
+                      validated={evalPageValidated} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
                       pivotWord={undefined} pivot={pivot} showPivot={false}
                       onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
                     />
@@ -3627,15 +3627,32 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
-                  {evalItems_curr.slice(4, 8).map(ex => (
-                    <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                      <SequentialAudioButton clips={ex.clips!} />
-                      <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
-                        onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                        placeholder="chiffre…" autoComplete="off" inputMode="numeric"
-                        className="!bg-blue-50 dark:!bg-blue-950/30" />
-                    </div>
-                  ))}
+                  {evalItems_curr.slice(4, 8).map(ex => {
+                    const audioAns = evalAnswers[ex.id] ?? "";
+                    const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
+                    return (
+                      <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                        <SequentialAudioButton clips={ex.clips!} />
+                        {evalPageValidated ? (
+                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? "border-red-400 bg-red-50 dark:bg-red-900/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                            {audioWrong ? (
+                              <>
+                                <span className="text-sm text-red-400 line-through">{audioAns || "—"}</span>
+                                <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                              </>
+                            ) : (
+                              <span className="text-sm font-medium text-[var(--color-text-primary)]">{audioAns}</span>
+                            )}
+                          </div>
+                        ) : (
+                          <AppInput label="" id={`eval-${ex.id}`} value={audioAns}
+                            onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
+                            placeholder="chiffre…" autoComplete="off" inputMode="numeric"
+                            className="!bg-blue-50 dark:!bg-blue-950/30" />
+                        )}
+                      </div>
+                    );
+                  })}
                 </div>
               );
               // Page 2: items 8+ — séries de nombres (3 chiffres de moins)
@@ -3649,9 +3666,22 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <div className="flex min-w-0 gap-1">
                         {displayNums.map((num, ni) => {
                           if (ni === ex.blankIdx) {
-                            return (
+                            const seriesAns = evalAnswers[ex.id] ?? "";
+                            const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
+                            return evalPageValidated ? (
+                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"}`}>
+                                {seriesWrong ? (
+                                  <>
+                                    <span className="text-red-400 line-through">{seriesAns || "—"}</span>
+                                    <span className="font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                                  </>
+                                ) : (
+                                  <span>{seriesAns}</span>
+                                )}
+                              </div>
+                            ) : (
                               <input key={ni} type="text" inputMode="numeric"
-                                value={evalAnswers[ex.id] ?? ""}
+                                value={seriesAns}
                                 onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
                                 className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
                               />
@@ -3676,15 +3706,30 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {evalStarted && !evalSubmitted && lesson.submoduleId !== "A1-1" && lesson.submoduleId !== "A1-2" && (() => {
               const ex = evalItems_curr[evalPageIdx];
               if (!ex) return null;
+              const genAns = evalAnswers[ex.id] ?? "";
+              const genWrong = evalPageValidated && !answerMatches(genAns, ex.acceptable);
               return (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
-                  <AppInput label="" id={`eval-${ex.id}`} value={evalAnswers[ex.id] ?? ""}
-                    onChange={e => setEvalAnswers(prev => ({ ...prev, [ex.id]: ex.type === "number" ? e.target.value.replace(/[^0-9]/g, "") : e.target.value }))}
-                    placeholder={ex.type === "number" ? "Nombre…" : "Réponse…"}
-                    inputMode={ex.type === "number" ? "numeric" : "text"}
-                    autoComplete="off"
-                    className="!bg-blue-50 dark:!bg-blue-950/30" />
+                  {evalPageValidated ? (
+                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? "border-red-400 bg-red-50 dark:bg-red-900/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                      {genWrong ? (
+                        <>
+                          <span className="text-sm text-red-400 line-through">{genAns || "—"}</span>
+                          <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                        </>
+                      ) : (
+                        <span className="text-sm font-medium text-[var(--color-text-primary)]">{genAns}</span>
+                      )}
+                    </div>
+                  ) : (
+                    <AppInput label="" id={`eval-${ex.id}`} value={genAns}
+                      onChange={e => setEvalAnswers(prev => ({ ...prev, [ex.id]: ex.type === "number" ? e.target.value.replace(/[^0-9]/g, "") : e.target.value }))}
+                      placeholder={ex.type === "number" ? "Nombre…" : "Réponse…"}
+                      inputMode={ex.type === "number" ? "numeric" : "text"}
+                      autoComplete="off"
+                      className="!bg-blue-50 dark:!bg-blue-950/30" />
+                  )}
                 </div>
               );
             })()}
