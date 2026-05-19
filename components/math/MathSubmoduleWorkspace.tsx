@@ -344,7 +344,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId:
             )}
 
             <button type="button" onClick={goNext}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80">
+              disabled={isLastStep && isExercise && !isDone}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30 disabled:cursor-not-allowed">
               {isDone || (isLastStep && !isExercise) ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
