@@ -2100,6 +2100,9 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [exerciseKey, setExerciseKey] = useState(0);
   const [canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
+  const [exercisesStarted, setExercisesStarted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
+  const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2117,11 +2120,34 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     setValidateCommand(0);
   }, [stepIdx, exerciseKey]);
 
+  // Timer countdown for exercises
+  useEffect(() => {
+    if (!exercisesStarted || timeLeft === null || timeLeft <= 0) return;
+    const id = setTimeout(() => setTimeLeft((t) => Math.max(0, (t ?? 1) - 1)), 1000);
+    return () => clearTimeout(id);
+  }, [exercisesStarted, timeLeft]);
+
+  // Auto-complete when timer reaches 0
+  useEffect(() => {
+    if (timeLeft !== 0 || !exercisesStarted) return;
+    markFrenchLessonComplete(lesson.slug);
+    router.push(returnUrl);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timeLeft]);
+
+  function formatTime(s: number): string {
+    return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  }
+
   const handleValidated = useCallback<(allCorrect: boolean) => void>((_allCorrect: boolean) => {
     setCanValidate(false);
   }, []);
 
   function goBack() {
+    if (isExercise && exercisesStarted) {
+      setShowCancelConfirm(true);
+      return;
+    }
     if (isFirst) {
       router.push(returnUrl);
     } else {
@@ -2149,6 +2175,38 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+      {/* Cancel confirmation dialog */}
+      {showCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Votre progression sera perdue. Vous pourrez recommencer depuis le début.</p>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => setShowCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                Continuer l&apos;évaluation
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setExercisesStarted(false);
+                  setTimeLeft(null);
+                  setStepIdx(exStart);
+                  setExerciseKey((k) => k + 1);
+                  setShowCancelConfirm(false);
+                }}
+                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">
@@ -2177,16 +2235,53 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
       {/* Content */}
       <div className="min-h-[280px]">
+        {/* Timer chip — shown when exercises are started */}
+        {isExercise && exercisesStarted && timeLeft !== null && (
+          <div className="mb-4 flex justify-end">
+            <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
+              timeLeft < 60
+                ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
+                : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
+            }`}>
+              <span aria-hidden>⏱</span>
+              <span>{formatTime(timeLeft)}</span>
+            </div>
+          </div>
+        )}
+
         {isTheory ? (
           <TheoryView blocks={currentBlocks!} pivot={pivot} showTrans={showTrans} />
-        ) : (currentMidEx ?? currentExercise) ? (
+        ) : isMidEx && currentMidEx ? (
           <ExerciseView
             key={exerciseKey}
-            exercise={(currentMidEx ?? currentExercise)!}
+            exercise={currentMidEx}
             onValidated={handleValidated}
             validateCommand={validateCommand}
             onCanValidateChange={setCanValidate}
           />
+        ) : isExercise ? (
+          !exercisesStarted ? (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
+              <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-fr)]">5:00</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter les exercices</p>
+              <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+              <button
+                type="button"
+                onClick={() => { setExercisesStarted(true); setTimeLeft(5 * 60); }}
+                className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              >
+                Commencer
+              </button>
+            </div>
+          ) : currentExercise ? (
+            <ExerciseView
+              key={exerciseKey}
+              exercise={currentExercise}
+              onValidated={handleValidated}
+              validateCommand={validateCommand}
+              onCanValidateChange={setCanValidate}
+            />
+          ) : null
         ) : null}
       </div>
 
@@ -2214,8 +2309,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               Retour
             </button>
 
-            {/* Reset + Validate (exercises only) */}
-            {(isMidEx || isExercise) && (
+            {/* Reset + Validate (exercises only, or mid-exercises) */}
+            {(isMidEx || (isExercise && exercisesStarted)) && (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
