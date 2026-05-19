@@ -57,17 +57,17 @@ export const MATH_A4_LESSONS: MathSubmoduleLesson[] = [
     <marker id='a41mn' markerWidth='7' markerHeight='6' refX='6' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#1d4ed8'/></marker>
     <marker id='a41md' markerWidth='7' markerHeight='6' refX='6' refY='3' orient='auto'><path d='M0,0 L7,3 L0,6 Z' fill='#dc2626'/></marker>
   </defs>
-  <text x='180' y='84' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>3</text>
-  <line x1='148' y1='93' x2='212' y2='93' stroke='#0f172a' stroke-width='4' stroke-linecap='round'/>
-  <text x='180' y='158' text-anchor='middle' font-size='60' font-weight='700' fill='#dc2626' font-family='Century Schoolbook,Georgia,serif'>4</text>
-  <text x='8' y='62' font-size='12' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>numérateur</text>
-  <text x='8' y='77' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en haut</text>
-  <text x='8' y='90' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts utilisées</text>
-  <line x1='118' y1='76' x2='150' y2='76' stroke='#1d4ed8' stroke-width='1.5' marker-end='url(#a41mn)'/>
-  <line x1='212' y1='142' x2='242' y2='142' stroke='#dc2626' stroke-width='1.5' marker-end='url(#a41md)'/>
-  <text x='250' y='130' font-size='12' font-weight='700' fill='#dc2626' font-family='Century Schoolbook,Georgia,serif'>dénominateur</text>
-  <text x='250' y='145' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en bas</text>
-  <text x='250' y='158' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts totales égales</text>
+  <text x='180' y='75' text-anchor='middle' font-size='60' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>3</text>
+  <line x1='148' y1='95' x2='212' y2='95' stroke='#0f172a' stroke-width='4' stroke-linecap='round'/>
+  <text x='180' y='157' text-anchor='middle' font-size='60' font-weight='700' fill='#dc2626' font-family='Century Schoolbook,Georgia,serif'>4</text>
+  <text x='8' y='41' font-size='12' font-weight='700' fill='#1d4ed8' font-family='Century Schoolbook,Georgia,serif'>numérateur</text>
+  <text x='8' y='54' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en haut</text>
+  <text x='8' y='67' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts utilisées</text>
+  <line x1='118' y1='54' x2='150' y2='54' stroke='#1d4ed8' stroke-width='1.5' marker-end='url(#a41mn)'/>
+  <line x1='212' y1='136' x2='242' y2='136' stroke='#dc2626' stroke-width='1.5' marker-end='url(#a41md)'/>
+  <text x='250' y='123' font-size='12' font-weight='700' fill='#dc2626' font-family='Century Schoolbook,Georgia,serif'>dénominateur</text>
+  <text x='250' y='136' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>→ nombre en bas</text>
+  <text x='250' y='149' font-size='11' fill='#475569' font-family='Century Schoolbook,Georgia,serif'>= parts totales égales</text>
 </svg>`,
         },
         {
