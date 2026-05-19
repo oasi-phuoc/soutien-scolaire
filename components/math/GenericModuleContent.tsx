@@ -412,7 +412,7 @@ export function GenericModuleContent({
         <div className="space-y-6">
           <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-4 py-3">
             <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
-              Question d'évaluation
+              Question d&apos;évaluation
             </p>
           </div>
           <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
