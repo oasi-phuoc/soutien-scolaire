@@ -1,6 +1,7 @@
 "use client";
 
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
+import { A4ModuleContent } from "@/components/math/A4ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
@@ -20,6 +21,8 @@ export function MathModuleWorkspace({ moduleId }: { moduleId: string }) {
 
       {moduleId === "A1" ? (
         <A1ModuleContent />
+      ) : moduleId === "A4" ? (
+        <A4ModuleContent />
       ) : hasLessons ? (
         <GenericModuleContent moduleId={moduleId} />
       ) : (
