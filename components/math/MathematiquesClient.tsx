@@ -306,7 +306,7 @@ export function MathematiquesClient() {
 
                   {/* Submodule list */}
                   {expanded && m.submodules.length > 0 && (
-                    <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
+                    <ul className="flex flex-col gap-2 border-t border-[var(--color-border-default)] p-3">
                       {m.submodules.map((sub, idx) => {
                         const subDone = completedSubIds.has(sub.id);
                         const subAvailable = !isLocked && idx === firstAvailableSubIdx;
@@ -315,17 +315,23 @@ export function MathematiquesClient() {
                         return (
                           <li
                             key={sub.id}
-                            className={`flex items-center gap-3 px-4 py-2.5 ${subDone ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : ""}`}
+                            className={`flex items-center gap-3 rounded-xl border px-3 py-3 transition-colors ${
+                              subDone
+                                ? "cursor-pointer border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] hover:bg-[var(--color-bg-secondary)]/80"
+                                : subAvailable
+                                  ? "border-[var(--color-border-emphasis)] bg-[var(--color-bg-primary)]"
+                                  : "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] opacity-50"
+                            }`}
                             onClick={subDone ? (e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}`); } : undefined}
                           >
                             <SubDot done={subDone} accent={accentColor} moduleLocked={subLocked} />
                             <div className="flex-1 min-w-0">
-                              <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
+                              <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
                                 {sub.code}
-                              </span>
-                              <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">
+                              </p>
+                              <p className="text-sm font-medium text-[var(--color-text-primary)]">
                                 {sub.title}
-                              </span>
+                              </p>
                             </div>
                             {subDone ? (
                               <div className="flex shrink-0 items-center gap-1.5">
