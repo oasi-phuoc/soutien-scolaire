@@ -2029,7 +2029,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
   const goTo = (s: Step) => { setStep(s); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
-  const changeLesson = (idx: number, targetStep: Step = "theory") => {
+  const _changeLesson = (idx: number, targetStep: Step = "theory") => {
     setActiveIdx(idx);
     setStep(targetStep);
     setEvalAnswers({});
@@ -2819,7 +2819,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex9" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 9</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 1</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez combien il y a d&apos;unités</h2>
           </div>
         }>
@@ -2875,7 +2875,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex10" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 10</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 2</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a d&apos;unités</h2>
           </div>
         }>
@@ -2920,7 +2920,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex11" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 11</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 3</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
           </div>
         }>
@@ -2992,7 +2992,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex12" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 12</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 4</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes</h2>
           </div>
         }>
@@ -3032,7 +3032,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex13" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 13</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 5</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes</h2>
           </div>
         }>
@@ -3073,7 +3073,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex14" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 14</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 6</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Décomposez le nombre</h2>
           </div>
         }>
@@ -3171,7 +3171,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
       {step === "ex15" && (
         <AppCard variant="elevated" header={
           <div>
-            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 15</p>
+            <p className="text-sm font-medium uppercase text-[var(--color-accent-quiz)]">Exercice 7</p>
             <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Choisissez le(s) étiquette(s) avec le même nombre</h2>
           </div>
         }>
