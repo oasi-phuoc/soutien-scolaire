@@ -178,15 +178,17 @@ export function completedPassingIds(p: StoredProgressV1): Set<string> {
 }
 
 export function recomputeLocks(p: StoredProgressV1): StoredProgressV1 {
-  const _done = completedPassingIds(p); // TEMP: unused while all modules unlocked for testing
+  const done = completedPassingIds(p);
   const next = { ...p, math: { ...p.math } };
   for (const m of MATH_MODULES) {
     const cur = next.math[m.id];
     if (!cur) continue;
     if (cur.state === "completed") continue;
-    // TEMP: unlock all for testing
-    if (cur.state === "locked") {
+    const pre = _prerequisitesMet(m, done);
+    if (pre.ok && cur.state === "locked") {
       next.math[m.id] = { ...cur, state: "available" };
+    } else if (!pre.ok && cur.state !== "locked") {
+      next.math[m.id] = { ...cur, state: "locked" };
     }
   }
   return next;

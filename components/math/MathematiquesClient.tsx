@@ -6,6 +6,7 @@ import {
   MATH_ALGEBRA_ORDER,
   MATH_GEOMETRY_TAB_ORDER,
   getMathModule,
+  prerequisitesMet,
 } from "@/lib/curriculum/math-data";
 import {
   computeRecommendation,
@@ -13,6 +14,7 @@ import {
   type MathTabId,
 } from "@/lib/curriculum/recommendation";
 import {
+  completedPassingIds,
   createInitialProgress,
   loadProgress,
   saveProgress,
@@ -122,6 +124,11 @@ export function MathematiquesClient() {
   );
   const pendingModule = pendingEvalId ? getMathModule(pendingEvalId) : undefined;
 
+  const done = useMemo(
+    () => (hydrated ? completedPassingIds(progress) : new Set<string>()),
+    [hydrated, progress],
+  );
+
   const accentColor = tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)";
 
   return (
@@ -188,8 +195,9 @@ export function MathematiquesClient() {
           {modules.map((m) => {
             if (!m) return null;
             const prog = hydrated ? progress.math[m.id] : undefined;
-            // TEMP: unlock all modules for testing
-            const pre = { ok: true, missing: [] as string[] };
+            const pre = hydrated
+              ? prerequisitesMet(m, done)
+              : { ok: false as const, missing: [] as string[] };
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
             const isLocked = displayState === "locked";
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
@@ -299,10 +307,10 @@ export function MathematiquesClient() {
                   {/* Submodule list */}
                   {expanded && m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-                      {m.submodules.map((sub, _idx) => {
+                      {m.submodules.map((sub, idx) => {
                         const subDone = completedSubIds.has(sub.id);
-                        const subAvailable = !subDone; // TEMP: all non-done submodules available
-                        const subLocked = false; // TEMP: unlock all for testing
+                        const subAvailable = !isLocked && idx === firstAvailableSubIdx;
+                        const subLocked = !subDone && !subAvailable;
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         return (
                           <li
