@@ -30,7 +30,7 @@ export default async function MathModulePage({ params }: Props) {
 
   const parentModuleId = getModuleIdForSubmodule(upper);
   if (!parentModuleId) notFound();
-  const parentMod = getMathModule(parentModuleId);
+  const parentMod = getMathModule(parentModuleId!);
   if (!parentMod) notFound();
 
   return (
@@ -47,14 +47,14 @@ export default async function MathModulePage({ params }: Props) {
         </Link>
         <div>
           <p className="text-xs font-medium uppercase text-[var(--color-accent-alg)]">
-            {parentMod.code} — {lesson.submoduleCode}
+            {parentMod!.code} — {lesson!.submoduleCode}
           </p>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {lesson.theory.title.fr}
+            {lesson!.theory.title.fr}
           </h1>
         </div>
       </div>
-      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId} />
+      <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} />
     </main>
   );
 }

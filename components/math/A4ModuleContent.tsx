@@ -438,7 +438,7 @@ function generateFracConvItems(): FracConvItem[] {
 }
 
 // ── Combined Decimal Exercises (A4.2 — single step) ───────────────────────────
-function CombinedDecimalExercise({ validateCommand, onValidated }: {
+export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
   // Ex 2 — Coloring

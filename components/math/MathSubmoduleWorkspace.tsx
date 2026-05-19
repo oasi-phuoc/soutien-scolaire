@@ -1,0 +1,357 @@
+"use client";
+
+import React, { useCallback, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { answerMatches } from "@/lib/curriculum/content/math-a1-types";
+import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math-a1-types";
+import { getLessonsForModule, getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
+import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
+import { FractionToggleExercise, CombinedDecimalExercise } from "@/components/math/A4ModuleContent";
+
+type WorkspaceStep =
+  | { kind: "theory" }
+  | { kind: "fraction_toggle" }
+  | { kind: "decimal_exercises" }
+  | { kind: "exercise"; item: MathExerciseItem; exNum: number };
+
+function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
+  const steps: WorkspaceStep[] = [{ kind: "theory" }];
+  if (lesson.submoduleId === "A4-1") {
+    steps.push({ kind: "fraction_toggle" });
+  } else if (lesson.submoduleId === "A4-2") {
+    steps.push({ kind: "decimal_exercises" });
+  } else {
+    lesson.exercises.slice(0, 5).forEach((item, i) =>
+      steps.push({ kind: "exercise", item, exNum: i + 1 }),
+    );
+  }
+  return steps;
+}
+
+// Parses [[frac:N/D]] markers and renders vertical inline fractions
+function renderFracText(text: string): React.ReactNode {
+  const parts = text.split(/\[\[frac:(\d+)\/(\d+)\]\]/);
+  if (parts.length === 1) return text;
+  const nodes: React.ReactNode[] = [];
+  for (let i = 0; i < parts.length; i += 3) {
+    if (parts[i]) nodes.push(parts[i]);
+    if (i + 1 < parts.length) {
+      const num = parts[i + 1]!;
+      const den = parts[i + 2]!;
+      nodes.push(
+        <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}</span>
+          <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{den}</span>
+        </span>
+      );
+    }
+  }
+  return <>{nodes}</>;
+}
+
+function BlockView({ block }: { block: MathRichBlock }) {
+  switch (block.type) {
+    case "heading":
+      return block.black ? (
+        <h3 className="mt-3 mb-1 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+      ) : (
+        <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</h3>
+      );
+    case "plain":
+      if (!block.fr) return <div className="h-3" />;
+      return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{block.fr}</p>;
+    case "note":
+      return (
+        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
+          {block.fr}
+        </div>
+      );
+    case "example":
+      return (
+        <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]">
+          {block.fr}
+        </div>
+      );
+    case "highlight":
+      return (
+        <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/8 px-4 py-3 text-sm font-semibold text-[var(--color-text-primary)]">
+          {block.fr}
+        </div>
+      );
+    case "rule":
+      return (
+        <div className="space-y-2 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3">
+          <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
+          <ul className="list-disc space-y-1 pl-4">
+            {block.itemsFr.map((it, i) => (
+              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{it}</li>
+            ))}
+          </ul>
+        </div>
+      );
+    case "table":
+      return (
+        <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
+          <table className="min-w-full text-xs">
+            <thead>
+              <tr className="bg-[var(--color-bg-secondary)]">
+                {block.headersFr.map((h, i) => (
+                  <th key={i} className={`px-3 py-2 text-left font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {block.rows.map((row, ri) => (
+                <tr key={ri} className="border-t border-[var(--color-border-default)]">
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="px-3 py-2 text-[var(--color-text-secondary)]">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {block.captionFr && (
+            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      );
+    case "svg":
+      return block.noFrame ? (
+        <div className="my-2">
+          <div dangerouslySetInnerHTML={{ __html: block.markup }} />
+          {block.captionFr && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      ) : (
+        <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
+          <div dangerouslySetInnerHTML={{ __html: block.markup }} />
+          {block.captionFr && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          )}
+        </div>
+      );
+    case "section":
+      return (
+        <div className="space-y-1.5">
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>
+          {block.itemsFr.length > 0 && (
+            <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
+              {block.itemsFr.map((item, ii) => (
+                <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
+                  <span>{renderFracText(item)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
+    case "svg_row":
+      return (
+        <div className="flex gap-3">
+          {block.items.map((item, ii) => (
+            <div key={ii} className="flex-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
+              <div dangerouslySetInnerHTML={{ __html: item.markup }} />
+              {item.captionFr && (
+                <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{item.captionFr}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    default:
+      return null;
+  }
+}
+
+function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
+  const { theory } = lesson;
+  return (
+    <div className="space-y-4">
+      {theory.blocks && theory.blocks.length > 0 ? (
+        <div className="space-y-3">
+          {theory.blocks.map((block, i) => <BlockView key={i} block={block} />)}
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {theory.paragraphs.fr.map((p, i) => (
+            <p key={i} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{p}</p>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export function MathSubmoduleWorkspace({ submoduleId, moduleId }: { submoduleId: string; moduleId: string }) {
+  const router = useRouter();
+  const lesson = getLessonBySubmoduleId(submoduleId);
+  const allLessons = getLessonsForModule(moduleId) ?? [];
+
+  const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
+  const [stepIdx, setStepIdx] = useState(0);
+  const [exerciseKey, setExerciseKey] = useState(0);
+  const [validateCommand, setValidateCommand] = useState(0);
+  const [canValidate, setCanValidate] = useState(true);
+  const [answer, setAnswer] = useState("");
+  const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
+  const [exAttempts, setExAttempts] = useState(0);
+
+  const currentIdx = allLessons.findIndex(l => l.submoduleId === submoduleId);
+  const nextLesson = allLessons[currentIdx + 1];
+
+  const currentStep = steps[stepIdx];
+  const isFirstStep = stepIdx === 0;
+  const isLastStep = stepIdx === steps.length - 1;
+  const isExercise = currentStep !== undefined && currentStep.kind !== "theory";
+  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "decimal_exercises";
+
+  const goTo = useCallback((idx: number) => {
+    setStepIdx(idx);
+    setAnswer("");
+    setExStatus("idle");
+    setExAttempts(0);
+    setValidateCommand(0);
+    setCanValidate(true);
+    setExerciseKey(k => k + 1);
+  }, []);
+
+  function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
+
+  function goNext() {
+    if (isLastStep) {
+      if (nextLesson) router.push(`/mathematiques/${nextLesson.submoduleId}`);
+      else router.push("/mathematiques");
+    } else {
+      goTo(stepIdx + 1);
+    }
+  }
+
+  function refresh() {
+    setAnswer(""); setExStatus("idle"); setExAttempts(0);
+    setValidateCommand(0); setCanValidate(true);
+    setExerciseKey(k => k + 1);
+  }
+
+  function handleCustomValidated(ok: boolean) {
+    setCanValidate(false);
+    if (lesson) {
+      const p = loadProgress();
+      saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId));
+    }
+    void ok;
+  }
+
+  function validateText() {
+    if (currentStep?.kind !== "exercise" || !lesson) return;
+    const ok = answerMatches(answer, currentStep.item.acceptable);
+    setExStatus(ok ? "correct" : "wrong");
+    setExAttempts(a => a + 1);
+    if (ok) {
+      setCanValidate(false);
+      if (isLastStep) {
+        const p = loadProgress();
+        saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId));
+      }
+    }
+  }
+
+  const validateDisabled = currentStep?.kind === "exercise" ? exStatus === "correct" : !canValidate;
+
+  if (!lesson || steps.length === 0) {
+    return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
+  }
+
+  return (
+    <div className="pb-40">
+      {/* Progress bar */}
+      <div className="mb-6 flex gap-1">
+        {steps.map((_, i) => (
+          <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${i < stepIdx ? "bg-[var(--color-accent-alg)]" : i === stepIdx ? "bg-[var(--color-accent-alg)] opacity-60" : "bg-[var(--color-border-default)]"}`} />
+        ))}
+      </div>
+
+      {/* Theory */}
+      {currentStep?.kind === "theory" && <TheoryView lesson={lesson} />}
+
+      {/* A4-1 custom exercise */}
+      {currentStep?.kind === "fraction_toggle" && (
+        <FractionToggleExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A4-2 custom exercise */}
+      {currentStep?.kind === "decimal_exercises" && (
+        <CombinedDecimalExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* Generic text exercise */}
+      {currentStep?.kind === "exercise" && (
+        <div className="space-y-4">
+          <div>
+            <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+              Exercice {currentStep.exNum}
+            </h2>
+            <p className="mt-2 text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+              {currentStep.item.promptFr}
+            </p>
+          </div>
+          <input
+            key={exerciseKey}
+            type={currentStep.item.type === "number" ? "number" : "text"}
+            value={answer}
+            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
+            placeholder="Votre réponse…"
+            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : exStatus === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+          />
+          {exStatus === "correct" && <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>}
+          {exStatus === "wrong" && <p className="text-xs font-medium text-red-500">{exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}</p>}
+        </div>
+      )}
+
+      {/* Fixed bottom nav */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            <button type="button" onClick={goBack} disabled={isFirstStep}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+              Retour
+            </button>
+
+            {isExercise && (
+              <div className="flex items-center gap-2">
+                <button type="button" aria-label="Recommencer" onClick={refresh}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" /></svg>
+                </button>
+                <button type="button" aria-label="Valider"
+                  onClick={() => { if (isCustom) setValidateCommand(c => c + 1); else validateText(); }}
+                  disabled={validateDisabled}
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
+                </button>
+              </div>
+            )}
+
+            <button type="button" onClick={goNext}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80">
+              {isLastStep ? (
+                nextLesson ? (
+                  <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+                ) : (
+                  <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+                )
+              ) : (
+                <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+              )}
+            </button>
+          </div>
+        </div>
+        <div style={{ height: 68 }} />
+      </div>
+    </div>
+  );
+}
