@@ -1969,10 +1969,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       setEvalGrade(grade);
       setEvalSubmitted(true);
       setEvalStarted(false);
-      if (grade >= passingGrade) {
+      {
         const prog = loadProgress();
         saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, pts, 10, grade));
-        setSubmoduleAlreadyPassed(true);
+        if (grade >= passingGrade) setSubmoduleAlreadyPassed(true);
       }
       return;
     }
@@ -1988,10 +1988,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     setEvalGrade(grade);
     setEvalSubmitted(true);
     setEvalStarted(false);
-    if (grade >= passingGrade) {
+    {
       const prog = loadProgress();
       saveProgress(completeSubmodule(prog, "A1", lesson.submoduleId, correct, evalTotalPts, grade));
-      setSubmoduleAlreadyPassed(true);
+      if (grade >= passingGrade) setSubmoduleAlreadyPassed(true);
     }
   };
 
