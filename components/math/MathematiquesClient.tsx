@@ -201,7 +201,6 @@ export function MathematiquesClient() {
             const isLocked = displayState === "locked";
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
 
-            // TEMP: all submodules available for testing
             const completedSubIds = new Set(
               hydrated
                 ? m.submodules
@@ -209,7 +208,18 @@ export function MathematiquesClient() {
                     .map((sub) => sub.id)
                 : [],
             );
-            const firstAvailableSubIdx = m.submodules.findIndex((sub) => !completedSubIds.has(sub.id));
+            // Only passed evals (grade ≥ PASSING_GRADE) unlock the next submodule
+            const passedSubIds = new Set(
+              hydrated
+                ? m.submodules
+                    .filter((sub) => {
+                      const sc = progress.submoduleScores?.[sub.id];
+                      return completedSubIds.has(sub.id) && sc !== undefined && sc.grade >= PASSING_GRADE;
+                    })
+                    .map((sub) => sub.id)
+                : [],
+            );
+            const firstAvailableSubIdx = m.submodules.findIndex((sub) => !passedSubIds.has(sub.id));
 
             const expanded = isModuleExpanded(m.id, displayState);
 
