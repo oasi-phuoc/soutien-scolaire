@@ -607,22 +607,22 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   const hasAudio = !!lesson.theory.readAloud;
   if (lesson.submoduleId === "A1-1") {
     return hasAudio
-      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8" /*, "eval" — suspendu temporairement */]
-      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8" /*, "eval" */];
+      ? ["theory", "audio", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"]
+      : ["theory", "ex1", "ex2", "ex3", "ex4", "ex5", "ex6", "ex7", "ex8", "eval"];
   }
   if (lesson.submoduleId === "A1-2") {
-    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16" /*, "eval" */];
+    return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16", "eval"];
   }
   if (lesson.submoduleId === "A1-3") {
-    return ["theory", "ex17", "ex18", "ex19", "ex20" /*, "eval" */];
+    return ["theory", "ex17", "ex18", "ex19", "ex20", "eval"];
   }
   if (lesson.submoduleId === "A1-4") {
-    return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27" /*, "eval" */];
+    return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27", "eval"];
   }
   if (lesson.submoduleId === "A1-5") {
-    return ["theory" /*, "eval" */];
+    return ["theory", "eval"];
   }
-  return hasAudio ? ["theory", "audio" /*, "eval" */] : ["theory" /*, "eval" */];
+  return hasAudio ? ["theory", "audio", "eval"] : ["theory", "eval"];
 }
 
 // ─── Ex9 — choix multiple blocs (dizaines + unités) ──────────────────────────
@@ -2054,23 +2054,16 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   const goNext = () => {
     const nextStep = steps[stepIdx + 1];
     if (nextStep) { goTo(nextStep); }
-    else if (activeIdx < MATH_A1_LESSONS.length - 1) {
-      changeLesson(activeIdx + 1);
-    } else { router.push("/mathematiques"); }
+    else { router.push("/mathematiques"); }
   };
 
   const goBack = () => {
     const prevStep = steps[stepIdx - 1];
     if (prevStep) { goTo(prevStep); }
-    else if (activeIdx > 0) {
-      const prevIdx = activeIdx - 1;
-      const prevSteps = getLessonSteps(MATH_A1_LESSONS[prevIdx]!);
-      changeLesson(prevIdx, prevSteps[prevSteps.length - 1]);
-    }
   };
 
-  const isFirstStep = stepIdx === 0 && activeIdx === 0;
-  const isLastStep = activeIdx === MATH_A1_LESSONS.length - 1 && stepIdx === steps.length - 1;
+  const isFirstStep = stepIdx === 0;
+  const isLastStep = stepIdx === steps.length - 1;
 
   // ── Nav fixe : actions de l'étape courante ─────────────────────────────────
   let stepReset: (() => void) | undefined;
