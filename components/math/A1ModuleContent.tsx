@@ -2276,7 +2276,7 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   return (
     <div className="pb-40">
       {/* Step progress bar — segments per step in current lesson */}
-      <div className="flex gap-1 mb-2">
+      <div className="mb-6 flex gap-1">
         {steps.map((s, i) => (
           <div
             key={s}

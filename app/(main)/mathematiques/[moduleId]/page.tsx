@@ -1,5 +1,4 @@
 import { notFound, redirect } from "next/navigation";
-import Link from "next/link";
 import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import {
@@ -33,27 +32,18 @@ export default async function MathModulePage({ params }: Props) {
   const parentMod = getMathModule(parentModuleId!);
   if (!parentMod) notFound();
 
+  const tabLabel = parentMod!.branch === "geometry" ? "Formes" : "Calculs";
+
   return (
     <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
-      <div className="mb-6 flex items-center gap-3">
-        <Link
-          href="/mathematiques"
-          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-          aria-label="Retour mathématiques"
-        >
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </Link>
-        <div>
-          <p className="text-xs font-medium uppercase text-[var(--color-accent-alg)]">
-            {parentMod!.code} — {lesson!.submoduleCode}
-          </p>
-          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-            {lesson!.theory.title.fr}
-          </h1>
-        </div>
-      </div>
+      <header className="mb-5 space-y-1">
+        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
+          Mathématiques · {tabLabel} · {parentMod!.code}
+        </p>
+        <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+          {lesson!.submoduleCode} — {lesson!.theory.title.fr}
+        </h1>
+      </header>
       <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} />
     </main>
   );

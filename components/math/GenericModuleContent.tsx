@@ -167,17 +167,12 @@ function BlockView({ block }: { block: MathRichBlock }) {
 
 // ── Theory view ──────────────────────────────────────────────────────────────
 function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
-  const { theory, submoduleCode } = lesson;
+  const { theory } = lesson;
   return (
     <div className="space-y-4">
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-          {submoduleCode}
-        </p>
-        <h2 className="mt-0.5 text-lg font-bold text-[var(--color-text-primary)]">
-          {theory.title.fr}
-        </h2>
-      </div>
+      <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+        {theory.title.fr}
+      </h2>
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
           {theory.blocks.map((block, i) => (
@@ -310,10 +305,7 @@ export function GenericModuleContent({ moduleId, startSubmoduleId }: { moduleId:
       {currentStep?.kind === "exercise" && (
         <div className="space-y-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-text-secondary)]">
-              {currentStep.lesson.submoduleCode}
-            </p>
-            <p className="mt-2 text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
+            <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
               {currentStep.item.promptFr}
             </p>
           </div>
