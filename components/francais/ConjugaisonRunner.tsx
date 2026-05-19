@@ -2339,11 +2339,11 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               </div>
             )}
 
-            {/* Next */}
+            {/* Next — hidden during exercise start screen */}
             <button
               type="button"
               onClick={goNext}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${isExercise && !exercisesStarted ? "invisible" : ""}`}
             >
               {isLast ? (
                 <>

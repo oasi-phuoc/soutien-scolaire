@@ -329,11 +329,6 @@ export function MathematiquesClient() {
                             </div>
                             {subDone ? (
                               <div className="flex shrink-0 items-center gap-1.5">
-                                {score && (
-                                  <span className="text-[10px] text-[var(--color-text-secondary)]">
-                                    {score.grade.toFixed(1)}/6
-                                  </span>
-                                )}
                                 {hasFailedEval ? (
                                   <button
                                     type="button"
