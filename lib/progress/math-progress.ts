@@ -178,8 +178,24 @@ export function completedPassingIds(p: StoredProgressV1): Set<string> {
 }
 
 export function recomputeLocks(p: StoredProgressV1): StoredProgressV1 {
-  const done = completedPassingIds(p);
-  const next = { ...p, math: { ...p.math } };
+  // Auto-complete any module whose submodules have all passed (handles existing data)
+  let current = p;
+  for (const m of MATH_MODULES) {
+    const cur = current.math[m.id];
+    if (!cur || cur.state === "completed" || !m.submodules.length) continue;
+    const allPassed = m.submodules.every((sub) => {
+      const sc = current.submoduleScores?.[sub.id];
+      return sc !== undefined && sc.grade >= PASSING_GRADE;
+    });
+    if (allPassed) {
+      const grades = m.submodules.map((sub) => current.submoduleScores?.[sub.id]?.grade ?? 0);
+      const avgGrade = grades.reduce((a, b) => a + b, 0) / grades.length;
+      current = { ...current, math: { ...current.math, [m.id]: { ...cur, state: "completed", grade: avgGrade } } };
+    }
+  }
+
+  const done = completedPassingIds(current);
+  const next = { ...current, math: { ...current.math } };
   for (const m of MATH_MODULES) {
     const cur = next.math[m.id];
     if (!cur) continue;
