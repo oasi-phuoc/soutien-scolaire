@@ -190,7 +190,6 @@ export function MathematiquesClient() {
 
       {/* Module cards */}
       <section aria-label="Liste des modules" className="space-y-4">
-        <h2 className="text-sm font-semibold text-[var(--color-text-primary)]">Modules</h2>
         <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;

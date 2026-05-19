@@ -330,13 +330,6 @@ export function FrancaisClient() {
         })()}
       </section>
 
-      <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-        Test de positionnement :{" "}
-        <Link href="/placement" className="underline text-[var(--color-accent-fr)]">
-          voir la page dédiée
-        </Link>
-        .
-      </p>
     </main>
   );
 }

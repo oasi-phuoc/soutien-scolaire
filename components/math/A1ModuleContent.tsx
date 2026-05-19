@@ -1878,11 +1878,16 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
 
   // Évaluation sous-module
   const [evalItems, setEvalItems] = useState<EvalItem[]>(() => {
-    const initIdx = loadA1Position().lessonIdx;
-    return MATH_A1_LESSONS[initIdx]?.submoduleId === "A1-1" ? generateA11EvalItems() : [];
+    const initIdx = startSubmoduleId
+      ? MATH_A1_LESSONS.findIndex((l) => l.submoduleId === startSubmoduleId)
+      : loadA1Position().lessonIdx;
+    return MATH_A1_LESSONS[Math.max(0, initIdx)]?.submoduleId === "A1-1" ? generateA11EvalItems() : [];
   });
   const [pooledExercises, setPooledExercises] = useState<MathExerciseItem[]>(() => {
-    const initLesson = MATH_A1_LESSONS[loadA1Position().lessonIdx];
+    const initIdx = startSubmoduleId
+      ? MATH_A1_LESSONS.findIndex((l) => l.submoduleId === startSubmoduleId)
+      : loadA1Position().lessonIdx;
+    const initLesson = MATH_A1_LESSONS[Math.max(0, initIdx)];
     if (!initLesson?.exercisePool) return [];
     return shuffle([...initLesson.exercisePool]).slice(0, initLesson.poolSize ?? 5);
   });
@@ -1923,7 +1928,10 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
   const [_submoduleAlreadyPassed, setSubmoduleAlreadyPassed] = useState(() => {
     try {
       const p = loadProgress();
-      const sub = MATH_A1_LESSONS[loadA1Position().lessonIdx]?.submoduleId;
+      const initIdx = startSubmoduleId
+        ? MATH_A1_LESSONS.findIndex((l) => l.submoduleId === startSubmoduleId)
+        : loadA1Position().lessonIdx;
+      const sub = MATH_A1_LESSONS[Math.max(0, initIdx)]?.submoduleId;
       return sub ? p.submoduleStates?.[sub] === "completed" : false;
     } catch { return false; }
   });
@@ -2234,6 +2242,11 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
     stepReset = resetEx27;
     stepValidate = () => { setEx27Validated(true); };
     stepValidateDisabled = ex27Validated;
+  } else if (step === "eval") {
+    if (evalStarted && !evalSubmitted) {
+      stepValidate = () => { evalAutoSubmitRef.current?.(); };
+      stepValidateDisabled = false;
+    }
   }
 
   return (
@@ -3345,6 +3358,13 @@ export function A1ModuleContent({ startSubmoduleId }: { startSubmoduleId?: strin
                 <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-alg)]">5:00</p>
                 <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
                 <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+                <button
+                  type="button"
+                  onClick={() => { setEvalStarted(true); setEvalTimeLeft(5 * 60); }}
+                  className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+                >
+                  Commencer
+                </button>
               </div>
             )}
 
