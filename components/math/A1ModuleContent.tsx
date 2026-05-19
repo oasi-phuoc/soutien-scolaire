@@ -2,7 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AppCard } from "@/components/ui/AppCard";
 import { AppInput } from "@/components/ui/AppInput";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
@@ -376,20 +375,6 @@ function checkTensWord(input: string, num: number): boolean {
   return accepted.includes(n);
 }
 
-// ─── Guide de tracé des chiffres ─────────────────────────────────────────────
-
-function DigitGuide({ digit }: { digit: number }) {
-  return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src={`/images/digits/${digit}.png`}
-      alt={`Guide de tracé pour le chiffre ${digit}`}
-      className="h-full w-full object-contain"
-      draggable={false}
-    />
-  );
-}
-
 // ─── Traductions UI fixes ─────────────────────────────────────────────────────
 
 const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
@@ -550,14 +535,6 @@ interface EvalItem extends MathExerciseItem {
   seriesNums?: number[];
   blankIdx?: number;
 }
-
-const EVAL_INTRO_PIVOT: Partial<Record<PivotCode, string>> = {
-  en: "Answer the questions to validate this sub-module.",
-  ar: "أجب على الأسئلة للتحقق من إتقانك لهذا الجزء.",
-  fa: "برای تأیید این بخش به سؤالات پاسخ دهید.",
-  uk: "Дайте відповіді на запитання, щоб підтвердити цей підмодуль.",
-  ti: "ነቲ ሕቶታት መልሲ ሃቡ ነዚ ምዑዝ ምፍጣር ንምርግጋጽ።",
-};
 
 function generateA11EvalItems(): EvalItem[] {
   const all = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
