@@ -13,16 +13,16 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         uk: "Числова пряма",
       },
       blocks: [
-        { type: "plain", fr: "Sur une droite numérique, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 1, 2, 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 1, 2, 5, 10, 100… depending on the scale." } },
+        { type: "plain", fr: "Sur une droite numérique, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 1, 2, 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 1, 2, 5, 10, 100… depending on the scale.", ar: "على المستقيم العددي، توضع الأعداد في ترتيب تصاعدي من اليسار إلى اليمين. الفجوة بين عددين متتاليين يمكن أن تكون 1، 2، 5، 10، 100… حسب المقياس.", fa: "روی خط اعداد، اعداد به ترتیب صعودی از چپ به راست قرار می‌گیرند. فاصله بین دو عدد متوالی می‌تواند ۱، ۲، ۵، ۱۰، ۱۰۰… باشد.", ti: "ኣብ ቁጽሪ ቀጽሪ፡ ቁጽርታት ካብ ጸጋም ናብ የማን ብቅርርቦ ይስደርዑ። ርሕቀት 1፡ 2፡ 5፡ 10፡ 100... ክኸውን ይኽእል።", uk: "На числовій прямій числа розташовані у зростаючому порядку зліва направо. Проміжок між двома числами може бути 1, 2, 5, 10, 100… залежно від масштабу." } },
         { type: "heading", fr: "Nombres pairs et impairs", black: true },
-        { type: "plain", fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.", pivot: { en: "To know if a number is even or odd, look only at the last digit." } },
-        { type: "highlight", fr: "Pair", pivot: { en: "Even" } },
+        { type: "plain", fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.", pivot: { en: "To know if a number is even or odd, look only at the last digit.", ar: "لمعرفة ما إذا كان عدد زوجياً أم فردياً، ننظر إلى الرقم الأخير فقط.", fa: "برای دانستن اینکه عددی زوج است یا فرد، فقط به آخرین رقم نگاه می‌کنیم.", ti: "ቁጽሪ ዝተፈጥዎ ወይ ዘይተፈጥዎ ምዃኑ ንምፍላጥ፡ ናይ መወዳእታ ኣሃዝ ጥራይ ንርኢ።", uk: "Щоб дізнатись, чи є число парним або непарним, дивимось лише на останню цифру." } },
+        { type: "highlight", fr: "Pair", pivot: { en: "Even", ar: "زوجي", fa: "زوج", ti: "ዝተፈጥዎ", uk: "Парне" } },
         { type: "section", labelFr: "", itemsFr: [
           "Un nombre pair peut être partagé en 2 parts égales.",
           "Il se termine par 0, 2, 4, 6 ou 8.",
           "4, 12, 38, 100…",
         ] },
-        { type: "highlight", fr: "Impair", pivot: { en: "Odd" } },
+        { type: "highlight", fr: "Impair", pivot: { en: "Odd", ar: "فردي", fa: "فرد", ti: "ዘይተፈጥዎ", uk: "Непарне" } },
         { type: "section", labelFr: "", itemsFr: [
           "Un nombre impair ne peut pas être partagé en 2 parts exactement égales.",
           "Il se termine par 1, 3, 5, 7 ou 9.",

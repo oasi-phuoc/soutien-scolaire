@@ -13,15 +13,15 @@ export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
         uk: "Яке число більше?",
       },
       blocks: [
-        { type: "plain", fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.", pivot: { en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.", ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.", fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.", uk: "Порівняти числа — визначити, яке більше, менше або вони рівні." } },
+        { type: "plain", fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.", pivot: { en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.", ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.", fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.", ti: "ምወዳዳር ቁጽርታት ማለት ኣየናይ ዓቢ ፡ ንእሽቶ ወይ ማዕሪ ምዃኑ ምፍላጥ ማለት እዩ።", uk: "Порівняти числа — визначити, яке більше, менше або вони рівні." } },
         { type: "heading", fr: "Les symboles de comparaison", black: true },
-        { type: "plain", fr: "La partie de la flèche > qui est ouverte est toujours dirigée vers le plus grand nombre.", pivot: { en: "The open side of > always points to the greater number." } },
+        { type: "plain", fr: "La partie de la flèche > qui est ouverte est toujours dirigée vers le plus grand nombre.", pivot: { en: "The open side of > always points to the greater number.", ar: "الجانب المفتوح من > يتجه دائمًا نحو العدد الأكبر.", fa: "قسمت باز > همیشه به سمت عدد بزرگ‌تر است.", ti: "ክፉት ሸነኽ ናይ > ኩሉ ጊዜ ናብ ዓቢ ቁጽሪ ይምልከት።", uk: "Відкритий бік > завжди спрямований до більшого числа." } },
         { type: "table", headersFr: ["Comparaison", "Symbole", "Exemple"], accentHeader: true, rows: [
           ["plus petit que", "<", "456 < 462"],
           ["plus grand que", ">", "902 > 890"],
           ["égal à",         "=", "789 = 789"],
         ] },
-        { type: "highlight", fr: "Règle de comparaison", pivot: { en: "Comparison rule" } },
+        { type: "highlight", fr: "Règle de comparaison", pivot: { en: "Comparison rule", ar: "قاعدة المقارنة", fa: "قانون مقایسه", ti: "ሕጊ ምወዳዳር", uk: "Правило порівняння" } },
         { type: "section", labelFr: "", itemsFr: [
           "Nombres avec un nombre différent de chiffres",
           "• Le plus long est le plus grand.",
@@ -29,7 +29,7 @@ export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
           "• Compare chiffre par chiffre depuis la **gauche**.",
           "• Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
         ] },
-        { type: "highlight", fr: "Exemple" },
+        { type: "highlight", fr: "Exemple", pivot: { en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад" } },
         { type: "section", labelFr: "", itemsFr: [
           "On a deux chiffres 3 456 et 3 421",
           "• même nombre de chiffres",

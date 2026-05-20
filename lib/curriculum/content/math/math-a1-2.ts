@@ -55,7 +55,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
-        { type: "plain", fr: "Chaque chiffre occupe une position précise dans un nombre.", pivot: { en: "Each digit occupies a precise position in a number.", ar: "كل رقم يحتل موضعاً محدداً في العدد.", fa: "هر رقم جایگاه مشخصی در عدد دارد.", uk: "Кожна цифра займає точне місце в числі." } },
+        { type: "plain", fr: "Chaque chiffre occupe une position précise dans un nombre.", pivot: { en: "Each digit occupies a precise position in a number.", ar: "كل رقم يحتل موضعاً محدداً في العدد.", fa: "هر رقم جایگاه مشخصی در عدد دارد.", ti: "ነፍሲ ወከፍ ኣሃዝ ርኡይ ቦታ ኣብ ቁጽሪ ይሕዝ።", uk: "Кожна цифра займає точне місце в числі." } },
         { type: "table", headersFr: ["Nombre", "M", "C", "D", "U"], accentHeader: true, rows: [
           ["452",   "—", "4", "5", "2"],
           ["524",   "—", "5", "2", "4"],
@@ -66,9 +66,9 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         { type: "plain", fr: "" },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Comment lire la valeur d’un chiffre", black: true },
-        { type: "highlight", fr: "Repérer sa position", pivot: { en: "Find its position" } },
+        { type: "highlight", fr: "Repérer sa position", pivot: { en: "Find its position", ar: "حدد موضعه", fa: "موقعیت آن را پیدا کن", ti: "ቦትኡ ፈልጥ", uk: "Визнач позицію" } },
         { type: "section", labelFr: "", itemsFr: ["Il faut observer la position du chiffre dans le nombre.", "U = ×1", "D = ×10", "C = ×100", "M = ×1000"] },
-        { type: "highlight", fr: "Valeur du chiffre = chiffre × valeur de sa position.", pivot: { en: "Digit value = digit × place value." } },
+        { type: "highlight", fr: "Valeur du chiffre = chiffre × valeur de sa position.", pivot: { en: "Digit value = digit × place value.", ar: "قيمة الرقم = الرقم × قيمة موضعه.", fa: "ارزش رقم = رقم × ارزش جایگاه.", ti: "ዋጋ ኣሃዝ = ኣሃዝ × ዋጋ ቦቱኡ.", uk: "Значення цифри = цифра × значення її позиції." } },
         { type: "section", labelFr: "", itemsFr: [
           "Dans le nombre 3 864 :",
           "Le chiffre 8 est en position C → 8 × 100 = 800.",

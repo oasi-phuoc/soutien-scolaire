@@ -13,19 +13,19 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
         uk: "Числові послідовності",
       },
       blocks: [
-        { type: "plain", fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre." },
-        { type: "plain", fr: "Pour comprendre une suite, on regarde ce qui change entre les nombres." },
+        { type: "plain", fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre.", pivot: { en: "A number sequence is an ordered list where each term is found by applying the same rule. We always add or subtract the same number.", ar: "متتالية الأعداد هي قائمة مرتبة حيث يُحسب كل حد بتطبيق نفس القاعدة. نضيف أو نطرح دائمًا نفس العدد.", fa: "دنباله عددی فهرستی مرتب است که در آن هر جمله با اعمال همان قانون به دست می‌آید. همیشه همان عدد را اضافه یا کم می‌کنیم.", ti: "ተኸታታሊ ቁጽሪ ስርዓታዊ ዝርዝር እዩ፤ ነፍሲ ወከፍ ቁጽሪ ብሓደ ሕጊ ይርከብ። ኩሉ ጊዜ ሓደ ቁጽሪ ንውስኸሉ ወይ ነቀሉ።", uk: "Числова послідовність — це впорядкований список, де кожен член знаходиться за однаковим правилом. Ми завжди додаємо або віднімаємо те саме число." } },
+        { type: "plain", fr: "Pour comprendre une suite, on regarde ce qui change entre les nombres.", pivot: { en: "To understand a sequence, we look at what changes between the numbers.", ar: "لفهم متتالية، ننظر إلى ما يتغير بين الأعداد.", fa: "برای درک یک دنباله، به آنچه بین اعداد تغییر می‌کند نگاه می‌کنیم.", ti: "ተኸታታሊ ንምርዳእ፡ ኣብ መንካይ ቁጽርታት ዝቕየር ነዕዘብ።", uk: "Щоб зрозуміти послідовність, дивимось, що змінюється між числами." } },
         { type: "section", labelFr: "", itemsFr: [
           "5 ; 8 ; 11 ; 14",
           "On ajoute toujours 3.",
           "• La règle pour trouver le nombre suivant est : nombre + 3",
         ] },
-        { type: "highlight", fr: "Suite croissante" },
+        { type: "highlight", fr: "Suite croissante", pivot: { en: "Increasing sequence", ar: "متتالية تصاعدية", fa: "دنباله صعودی", ti: "ዝዓቢ ተኸታታሊ", uk: "Зростаюча послідовність" } },
         { type: "section", labelFr: "", itemsFr: [
           "Les nombres augmentent.",
           "Exemple : 1 ; 3 ; 5 ; 7",
         ] },
-        { type: "highlight", fr: "Suite décroissante" },
+        { type: "highlight", fr: "Suite décroissante", pivot: { en: "Decreasing sequence", ar: "متتالية تنازلية", fa: "دنباله نزولی", ti: "ዝነኪ ተኸታታሊ", uk: "Спадна послідовність" } },
         { type: "section", labelFr: "", itemsFr: [
           "Les nombres diminuent.",
           "Exemple : 20 ; 15 ; 10 ; 5",
