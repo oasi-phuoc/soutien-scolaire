@@ -58,7 +58,7 @@ function StateBadge({ state, missing }: { state: ModuleDisplayState; missing?: s
   );
 }
 
-function SubDot({ done, accent, moduleLocked }: { done: boolean; accent: string; moduleLocked: boolean }) {
+function SubDot({ done, current, accent, moduleLocked }: { done: boolean; current: boolean; accent: string; moduleLocked: boolean }) {
   if (done)
     return (
       <span
@@ -68,6 +68,15 @@ function SubDot({ done, accent, moduleLocked }: { done: boolean; accent: string;
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" aria-hidden>
           <path d="M20 6L9 17l-5-5" />
         </svg>
+      </span>
+    );
+  if (current)
+    return (
+      <span
+        className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2"
+        style={{ borderColor: accent }}
+      >
+        <span className="h-2 w-2 rounded-full" style={{ background: accent }} />
       </span>
     );
   if (moduleLocked)
@@ -295,7 +304,7 @@ export function MathematiquesClient() {
                             className={`flex items-center gap-3 px-4 py-2.5 ${subDone ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : ""}`}
                             onClick={subDone ? (e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}`); } : undefined}
                           >
-                            <SubDot done={subDone} accent={accentColor} moduleLocked={subLocked} />
+                            <SubDot done={subDone} current={subAvailable} accent={accentColor} moduleLocked={subLocked} />
                             <div className="flex-1 min-w-0">
                               <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
                                 {sub.code}

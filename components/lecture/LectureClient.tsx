@@ -56,7 +56,12 @@ function ModuleStateBadge({ state }: { state: ModuleState }) {
         En cours
       </span>
     );
-  if (state === "available") return null;
+  if (state === "available")
+    return (
+      <span className="rounded-full bg-[var(--color-accent-lecture)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-lecture)]">
+        En cours
+      </span>
+    );
   return (
     <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
       Verrouillé
