@@ -13,15 +13,22 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
         uk: "Числові послідовності",
       },
       blocks: [
-        { type: "plain", fr: "Une **suite de nombres** est une liste ordonnée où chaque terme est obtenu en appliquant la même règle.", pivot: { en: "A number sequence is an ordered list where each term follows the same rule.", ar: "المتتالية العددية قائمة مرتبة تُحسب فيها كل حلقة بتطبيق نفس القاعدة.", fa: "دنباله عددی فهرستی مرتب است که هر جمله با همان قانون به دست می‌آید.", uk: "Числова послідовність — впорядкований список, де кожен член отримується за однаковим правилом." } },
-        { type: "rule", titleFr: "Comment trouver le pas et compléter une suite", itemsFr: [
-          "S'il y a deux termes consécutifs (suite croissante) → soustraction → additionne le résultat.",
-          "S'il y a deux termes consécutifs (suite décroissante) → soustraction → soustrais le résultat.",
-          "S'il n'y a pas deux termes consécutifs et il y a deux écarts → divise la différence par 2.",
-          "S'il n'y a pas deux termes consécutifs et il y a trois écarts → divise la différence par 3.",
-        ], pivot: { en: { title: "How to find the step and complete a sequence", items: ["Two consecutive terms (increasing) → subtract → add the result.", "Two consecutive terms (decreasing) → subtract → subtract the result.", "No two consecutive terms, two gaps → divide difference by 2.", "No two consecutive terms, three gaps → divide difference by 3."] } } },
-        { type: "example", fr: "Croissante : 2, 5, 8, 11, ? → pas = 5−2 = +3 → terme suivant = 11+3 = 14", pivot: { en: "Increasing: 2, 5, 8, 11, ? → step = 5−2 = +3 → next = 11+3 = 14" } },
-        { type: "example", fr: "Décroissante : 100, 90, 80, ? → pas = 100−90 = −10 → terme suivant = 80−10 = 70", pivot: { en: "Decreasing: 100, 90, 80, ? → step = −10 → next = 80−10 = 70" } },
+        { type: "plain", fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre. Pour comprendre une suite, on regarde ce qui change entre les nombres." },
+        { type: "section", labelFr: "", itemsFr: [
+          "5 ; 8 ; 11 ; 14",
+          "On ajoute toujours 3.",
+          "La règle pour trouver le nombre suivant est : nombre + 3",
+        ] },
+        { type: "highlight", fr: "Suite croissante" },
+        { type: "section", labelFr: "", itemsFr: [
+          "Les nombres augmentent.",
+          "Exemple : 1 ; 3 ; 5 ; 7",
+        ] },
+        { type: "highlight", fr: "Suite décroissante" },
+        { type: "section", labelFr: "", itemsFr: [
+          "Les nombres diminuent.",
+          "Exemple : 20 ; 15 ; 10 ; 5",
+        ] },
       ],
       paragraphs: {
         fr: [
