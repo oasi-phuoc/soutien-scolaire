@@ -20,8 +20,8 @@ export const MATH_MODULES: MathModule[] = [
     submodules: [
       sm("A1.1", "Compter en français"),
       sm("A1.2", "Valeur positionnelle"),
-      sm("A1.3", "Droite numérique"),
-      sm("A1.4", "Comparer les nombres"),
+      sm("A1.3", "Comparer les nombres"),
+      sm("A1.4", "Droite numérique"),
       sm("A1.5", "Suites numériques"),
     ],
   },

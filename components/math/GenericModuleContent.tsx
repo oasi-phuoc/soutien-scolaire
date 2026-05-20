@@ -186,10 +186,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
-    if (lesson.submoduleId === "A1-3") {
+    if (lesson.submoduleId === "A1-4") {
       steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
     }
-    if (lesson.submoduleId === "A1-4") {
+    if (lesson.submoduleId === "A1-3") {
       steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
       steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
     }

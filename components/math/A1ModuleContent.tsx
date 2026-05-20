@@ -602,10 +602,10 @@ function getLessonSteps(lesson: MathSubmoduleLesson): Step[] {
   if (lesson.submoduleId === "A1-2") {
     return ["theory", "ex9", "ex10", "ex11", "ex12", "ex13", "ex14", "ex15", "ex16", "eval"];
   }
-  if (lesson.submoduleId === "A1-3") {
+  if (lesson.submoduleId === "A1-4") {
     return ["theory", "ex17", "ex18", "ex19", "ex20", "eval"];
   }
-  if (lesson.submoduleId === "A1-4") {
+  if (lesson.submoduleId === "A1-3") {
     return ["theory", "ex21", "ex22", "ex23", "ex24", "ex25", "ex26", "ex27", "eval"];
   }
   if (lesson.submoduleId === "A1-5") {
@@ -2044,8 +2044,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     setEvalPageValidated(false);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetEx16(); resetA12Eval(); }
-    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
-    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-4") { resetEx21(); resetEx22(); resetEx23(); resetEx24(); resetEx25(); resetEx26(); resetEx27(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-4") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
+    if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-3") { resetEx21(); resetEx22(); resetEx23(); resetEx24(); resetEx25(); resetEx26(); resetEx27(); }
     const nextLesson = MATH_A1_LESSONS[idx];
     if (nextLesson?.exercisePool) {
       setPooledExercises(shuffle([...nextLesson.exercisePool]).slice(0, nextLesson.poolSize ?? 5));
@@ -2398,7 +2398,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   </div>
                 ),
               } : {};
-              const isA13 = lesson.submoduleId === "A1-3";
+              const isA13 = lesson.submoduleId === "A1-4";
               const illustrationA13: Record<number, React.ReactNode> = isA13 ? {
                 0: (
                   <div className="mt-3 overflow-x-auto">
