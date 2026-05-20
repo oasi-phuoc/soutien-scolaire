@@ -78,9 +78,9 @@ function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
       return block.black ? (
-        <h3 className="mt-3 mb-1 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+        <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
       ) : (
-        <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</h3>
+        <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
       );
     case "plain":
       if (!block.fr) return <div className="h-3" />;

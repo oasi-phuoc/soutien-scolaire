@@ -82,9 +82,9 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
   switch (block.type) {
     case "heading":
       return block.black ? (
-        <p className="mt-3 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</p>
+        <p className="mt-3 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</p>
       ) : (
-        <p className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</p>
+        <p className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</p>
       );
     case "rule": {
       const pv = block.pivot?.[pivot];
@@ -137,7 +137,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
-                  <th key={i} className={`border border-[var(--color-border-default)] px-3 py-1.5 text-left text-xs font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
+                  <th key={i} className={`border border-[var(--color-border-default)] px-3 py-1.5 text-center text-xs font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -145,7 +145,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
               {block.rows.map((row, ri) => (
                 <tr key={ri} className={ri % 2 === 0 ? "" : "bg-[var(--color-bg-secondary)]/50"}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className="border border-[var(--color-border-default)] px-3 py-1.5 text-[var(--color-text-primary)]">{renderBold(cell)}</td>
+                    <td key={ci} className="border border-[var(--color-border-default)] px-3 py-1.5 text-center text-[var(--color-text-primary)]">{renderBold(cell)}</td>
                   ))}
                 </tr>
               ))}

@@ -56,17 +56,20 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
       },
       blocks: [
         { type: "plain", fr: "Chaque chiffre occupe une position précise dans un nombre.", pivot: { en: "Each digit occupies a precise position in a number.", ar: "كل رقم يحتل موضعاً محدداً في العدد.", fa: "هر رقم جایگاه مشخصی در عدد دارد.", uk: "Кожна цифра займає точне місце в числі." } },
-        { type: "table", headersFr: ["Nombre", "M (Milliers)", "C (Centaines)", "D (Dizaines)", "U (Unités)"], accentHeader: true, rows: [
+        { type: "table", headersFr: ["Nombre", "M Milliers", "C Centaines", "D Dizaines", "U Unités"], accentHeader: true, rows: [
           ["452",   "—", "4", "5", "2"],
           ["524",   "—", "5", "2", "4"],
           ["2 453", "2", "4", "5", "3"],
           ["9 102", "9", "1", "0", "2"],
         ] },
+        { type: "plain", fr: "" },
         { type: "heading", fr: "Comment lire la valeur d’un chiffre" },
-        { type: "plain", fr: "Repère sa position : U = ×1, D = ×10, C = ×100, M = ×1000.", pivot: { en: "Find its position: U=×1, D=×10, C=×100, M=×1000." } },
+        { type: "plain", fr: "Repère sa position :", pivot: { en: "Find its position:" } },
+        { type: "section", labelFr: "", itemsFr: ["U = ×1", "D = ×10", "C = ×100", "M = ×1000"] },
         { type: "plain", fr: "Multiplie le chiffre par la valeur de sa position.", pivot: { en: "Multiply the digit by its place value." } },
         { type: "section", labelFr: "", itemsFr: [
-          "dans 3 864, le chiffre 8 est en position C → 8 × 100 = 800.",
+          "dans 3 864, le chiffre 8 est en position C",
+          "→ 8 × 100 = 800.",
           "3 864 = 3 000 + 800 + 60 + 4",
         ] },
       ],

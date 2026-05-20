@@ -79,9 +79,9 @@ function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
       return block.black ? (
-        <h3 className="mt-3 mb-1 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+        <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
       ) : (
-        <h3 className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</h3>
+        <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
       );
     case "plain":
       if (!block.fr) return <div className="h-3" />;
@@ -122,7 +122,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
-                  <th key={i} className={`px-3 py-2 text-left font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
+                  <th key={i} className={`px-3 py-2 text-center font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
                 ))}
               </tr>
             </thead>
@@ -130,7 +130,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.rows.map((row, ri) => (
                 <tr key={ri} className="border-t border-[var(--color-border-default)]">
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-[var(--color-text-secondary)]">{cell}</td>
+                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{cell}</td>
                   ))}
                 </tr>
               ))}
