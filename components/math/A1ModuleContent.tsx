@@ -2740,14 +2740,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {/* Header row */}
             <div className="aspect-square border-b border-r border-zinc-300 bg-zinc-100 dark:border-zinc-600 dark:bg-zinc-800" />
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => (
-              <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-[10px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+              <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                 {u}
               </div>
             ))}
             {/* Data rows */}
             {[10, 20, 30, 40, 50, 60, 70, 80, 90].map((d) => (
               <React.Fragment key={d}>
-                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-[10px] font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
+                <div className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 bg-zinc-100 text-sm font-bold text-zinc-700 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-200">
                   {d}
                 </div>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((u) => {
@@ -2759,7 +2759,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   if (state === "revealed") {
                     return (
                       <div key={u} className="aspect-square flex items-center justify-center border-b border-r border-zinc-300 dark:border-zinc-600">
-                        <span className="text-[10px] font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
+                        <span className="text-sm font-medium tabular-nums text-zinc-800 dark:text-zinc-200">{value}</span>
                       </div>
                     );
                   }
@@ -2767,7 +2767,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     if (ex7Validated && result !== null) {
                       return (
                         <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "ring-1 ring-inset ring-green-400" : "ring-1 ring-inset ring-red-400"} border-zinc-300 dark:border-zinc-600`}>
-                          <span className="text-[10px] font-medium tabular-nums text-[var(--color-text-primary)]">
+                          <span className="text-sm font-medium tabular-nums text-[var(--color-text-primary)]">
                             {result ? (ex7Answers[key] ?? "") : value}
                           </span>
                         </div>
@@ -2779,7 +2779,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           type="text" inputMode="numeric"
                           value={ex7Answers[key] ?? ""}
                           onChange={(e) => setEx7Answers((prev) => ({ ...prev, [key]: e.target.value.replace(/[^0-9]/g, "") }))}
-                          className="h-full w-full bg-transparent text-center text-[10px] font-medium tabular-nums outline-none"
+                          className="h-full w-full bg-transparent text-center text-sm font-medium tabular-nums outline-none"
                           aria-label={`Cellule ${value}`}
                         />
                       </div>
