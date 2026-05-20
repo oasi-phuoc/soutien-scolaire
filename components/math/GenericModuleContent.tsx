@@ -9,11 +9,72 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { percentToSwissGrade, medalFromPercent } from "@/lib/scoring";
 
 // ── Step types ──────────────────────────────────────────────────────────────
-type TheoryStep    = { kind: "theory";       lesson: MathSubmoduleLesson };
-type ExerciseStep  = { kind: "exercise";     lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type EvalStartStep = { kind: "eval_start";   lesson: MathSubmoduleLesson };
-type PassToggleStep = { kind: "pass_toggle"; lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | EvalStartStep | PassToggleStep;
+type TheoryStep      = { kind: "theory";       lesson: MathSubmoduleLesson };
+type ExerciseStep    = { kind: "exercise";     lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type NumberLineStep  = { kind: "number_line";  lesson: MathSubmoduleLesson; nlConfig: NLConfig };
+type EvalStartStep   = { kind: "eval_start";   lesson: MathSubmoduleLesson };
+type PassToggleStep  = { kind: "pass_toggle";  lesson: MathSubmoduleLesson };
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | EvalStartStep | PassToggleStep;
+
+// ── Number line ──────────────────────────────────────────────────────────────
+type NLConfig = { start: number; end: number; step: number; divCount: number; labelEvery: number; target: number };
+
+function genNLConfig(): NLConfig {
+  const presets: Array<{ start: number; end: number; step: number }> = [
+    { start: 0, end: 20, step: 1 },
+    { start: 0, end: 50, step: 5 },
+    { start: 0, end: 100, step: 10 },
+    { start: 50, end: 150, step: 5 },
+    { start: 100, end: 200, step: 10 },
+    { start: 200, end: 400, step: 20 },
+    { start: 0, end: 200, step: 10 },
+    { start: 0, end: 1000, step: 100 },
+    { start: 500, end: 1000, step: 50 },
+  ];
+  const p = presets[Math.floor(Math.random() * presets.length)]!;
+  const divCount = (p.end - p.start) / p.step;
+  const labelEvery = divCount <= 5 ? 1 : divCount <= 10 ? 2 : 4;
+  const allTicks = Array.from({ length: divCount + 1 }, (_, i) => p.start + i * p.step);
+  const unlabeled = allTicks.filter((_, i) => i % labelEvery !== 0 && i > 0 && i < divCount);
+  const candidates = unlabeled.length > 0 ? unlabeled : allTicks.slice(1, divCount);
+  const target = candidates[Math.floor(Math.random() * candidates.length)]!;
+  return { start: p.start, end: p.end, step: p.step, divCount, labelEvery, target };
+}
+
+function NumberLineSVG({ config }: { config: NLConfig }) {
+  const W = 320, H = 68;
+  const PL = 26, PR = 26;
+  const lineW = W - PL - PR;
+  const lineY = 38;
+  const labelY = 60;
+  const fs = config.end >= 1000 ? 7 : config.end >= 100 ? 8 : 10;
+  const ticks = Array.from({ length: config.divCount + 1 }, (_, i) => {
+    const val = config.start + i * config.step;
+    const x = PL + (i / config.divCount) * lineW;
+    const labeled = i % config.labelEvery === 0;
+    return { val, x, labeled, isTarget: val === config.target };
+  });
+  const tx = PL + ((config.target - config.start) / (config.end - config.start)) * lineW;
+  return (
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }} aria-label="Droite numérique">
+      <line x1={PL} y1={lineY} x2={W - PR} y2={lineY} stroke="currentColor" strokeWidth="1.5" />
+      <polygon points={`${PL - 2},${lineY - 4} ${PL - 2},${lineY + 4} ${PL - 9},${lineY}`} fill="currentColor" />
+      <polygon points={`${W - PR + 2},${lineY - 4} ${W - PR + 2},${lineY + 4} ${W - PR + 9},${lineY}`} fill="currentColor" />
+      {ticks.map((t) => (
+        <g key={t.val}>
+          <line x1={t.x} y1={t.labeled ? lineY - 6 : lineY - 3} x2={t.x} y2={t.labeled ? lineY + 6 : lineY + 3}
+            stroke="currentColor" strokeWidth={t.labeled ? 1.5 : 1} />
+          {t.labeled && !t.isTarget && (
+            <text x={t.x} y={labelY} textAnchor="middle" fontSize={fs} fill="currentColor">{t.val}</text>
+          )}
+        </g>
+      ))}
+      <line x1={tx} y1={6} x2={tx} y2={lineY - 12} stroke="var(--color-accent-alg)" strokeWidth="2" />
+      <polygon points={`${tx - 5},${lineY - 13} ${tx + 5},${lineY - 13} ${tx},${lineY - 6}`} fill="var(--color-accent-alg)" />
+      <text x={tx} y={12} textAnchor="middle" fontSize="10" fill="var(--color-accent-alg)" fontWeight="bold">?</text>
+    </svg>
+  );
+}
 
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
@@ -28,6 +89,9 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
+    if (lesson.submoduleId === "A1-3") {
+      steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
+    }
     const pool = lesson.exercisePool;
     const size = lesson.poolSize ?? 5;
     const exercises =
@@ -291,10 +355,15 @@ export function GenericModuleContent({
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
 
-  if (currentStep?.kind === "exercise" && exStatus !== "correct") {
+  if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
     stepValidate = () => {
-      if (!currentStep || currentStep.kind !== "exercise") return;
-      const ok = answerMatches(answer, currentStep.item.acceptable);
+      if (!currentStep) return;
+      let ok: boolean;
+      if (currentStep.kind === "exercise") {
+        ok = answerMatches(answer, currentStep.item.acceptable);
+      } else {
+        ok = parseInt(answer.trim(), 10) === currentStep.nlConfig.target;
+      }
       setExStatus(ok ? "correct" : "wrong");
       setExAttempts((a) => a + 1);
     };
@@ -354,18 +423,53 @@ export function GenericModuleContent({
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
               exStatus === "correct"
-                ? "border-green-400 bg-green-50 dark:bg-green-950/20"
+                ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
                 : exStatus === "wrong"
                   ? "border-red-400 bg-red-50 dark:bg-red-950/20"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
             }`}
           />
           {exStatus === "correct" && (
-            <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>
+            <p className="text-xs font-medium text-[var(--color-accent-alg)]">✓ Correct !</p>
           )}
           {exStatus === "wrong" && (
             <p className="text-xs font-medium text-red-500">
               {exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Number line exercise */}
+      {currentStep?.kind === "number_line" && (
+        <div className="space-y-4">
+          <p className="text-sm font-medium text-[var(--color-text-primary)]">
+            Quel est le nombre indiqué par la flèche ?
+          </p>
+          <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+            <NumberLineSVG config={currentStep.nlConfig} />
+          </div>
+          <input
+            type="number"
+            inputMode="numeric"
+            value={answer}
+            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
+            placeholder="Votre réponse…"
+            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
+              exStatus === "correct"
+                ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
+                : exStatus === "wrong"
+                  ? "border-red-400 bg-red-50 dark:bg-red-950/20"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+            }`}
+          />
+          {exStatus === "correct" && (
+            <p className="text-xs font-medium text-[var(--color-accent-alg)]">✓ Correct !</p>
+          )}
+          {exStatus === "wrong" && (
+            <p className="text-xs font-medium text-red-500">
+              {exAttempts >= 2 ? `Réponse : ${currentStep.nlConfig.target}` : "Essayez encore…"}
             </p>
           )}
         </div>
@@ -424,8 +528,8 @@ export function GenericModuleContent({
               onClick={() => setToggleAnswer("oui")}
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
-                  ? "bg-green-500 text-white shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-950/20"
+                  ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
               }`}
             >
               Oui

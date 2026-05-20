@@ -361,9 +361,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
-            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : exStatus === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
           />
-          {exStatus === "correct" && <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>}
+          {exStatus === "correct" && <p className="text-xs font-medium text-[var(--color-accent-alg)]">✓ Correct !</p>}
           {exStatus === "wrong" && <p className="text-xs font-medium text-red-500">{exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}</p>}
         </div>
       )}
@@ -421,8 +421,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               onClick={() => setToggleAnswer("oui")}
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
-                  ? "bg-green-500 text-white shadow-sm"
-                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-950/20"
+                  ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
               }`}
             >
               Oui

@@ -93,7 +93,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
           <p className="mb-1 text-sm font-semibold text-[var(--color-accent-alg)]">{block.titleFr}</p>
           <ul className="space-y-1 text-sm text-[var(--color-text-secondary)]">
             {block.itemsFr.map((item, i) => (
-              <li key={i} className="flex gap-2"><span className="shrink-0 text-[var(--color-accent-alg)]">•</span>{renderBold(item)}</li>
+              <li key={i} className="flex gap-2"><span className="shrink-0 text-[var(--color-accent-alg)]">•</span><span style={{whiteSpace:"pre-line"}}>{renderBold(item)}</span></li>
             ))}
           </ul>
           {showPivot && pv ? (
@@ -224,6 +224,28 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
   }
+}
+
+function ScaledCanvas({ width, height, children }: { width: number; height: number; children: React.ReactNode }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  useEffect(() => {
+    const el = wrapRef.current;
+    if (!el) return;
+    const availW = el.getBoundingClientRect().width;
+    if (availW > 0 && availW < width) setScale(availW / width);
+  }, [width]);
+  const scaledW = Math.round(width * scale);
+  const scaledH = Math.round(height * scale);
+  return (
+    <div ref={wrapRef} className="w-full flex justify-center" style={{ height: scaledH }}>
+      <div style={{ width: scaledW, height: scaledH, overflow: "hidden" }}>
+        <div className="relative overflow-hidden rounded" style={{ width, height, transform: `scale(${scale})`, transformOrigin: "top left" }}>
+          {children}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function formatTime(secs: number): string {
@@ -2314,7 +2336,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "theory" && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-text-primary)]">
-            {lesson.submoduleId === "A1-1" ? "Apprendre à compter" : theoryFr.title}
+            {lesson.submoduleId === "A1-1" ? "Apprendre à compter" : lesson.submoduleId === "A1-2" ? "Millier, centaine, dizaine et unité" : theoryFr.title}
           </h2>
           <div className="space-y-3 text-sm leading-relaxed">
             {lesson.theory.blocks ? (
@@ -2925,15 +2947,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const result = ex10Results[qi] ?? null;
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                  <div className="overflow-x-auto">
-                    <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:q.canvasH}}>
-                      {q.positions.map((pos, pi) => (
-                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                          {pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <ScaledCanvas width={420} height={q.canvasH}>
+                    {q.positions.map((pos, pi) => (
+                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                        {pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
+                      </div>
+                    ))}
+                  </ScaledCanvas>
                   <div className="mt-2">
                     <AppInput label="" id={`ex10-${qi}`}
                       value={ex10Validated && result === false ? String(total) : (ex10Answers[qi] ?? "")}
@@ -2968,15 +2988,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const result = ex11Results[qi] ?? null;
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                  <div className="overflow-x-auto">
-                    <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420, height:q.canvasH}}>
-                      {q.positions.map((pos, pi) => (
-                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                          {pos.kind === "m" ? <SvgMillier s={4} d={9} /> : pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  <ScaledCanvas width={420} height={q.canvasH}>
+                    {q.positions.map((pos, pi) => (
+                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                        {pos.kind === "m" ? <SvgMillier s={4} d={9} /> : pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
+                      </div>
+                    ))}
+                  </ScaledCanvas>
                   <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
                     <span className="shrink-0">=</span>
                     {(() => {
@@ -3386,15 +3404,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                    <div className="overflow-x-auto">
-                      <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:a12EvalQ10.canvasH}}>
-                        {a12EvalQ10.positions.map((pos,pi)=>(
-                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                            {pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={8}/>:<SvgUnite s={14}/>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <ScaledCanvas width={420} height={a12EvalQ10.canvasH}>
+                      {a12EvalQ10.positions.map((pos,pi)=>(
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={8}/>:<SvgUnite s={14}/>}
+                        </div>
+                      ))}
+                    </ScaledCanvas>
                     <div className="mt-2">
                       <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
                         onChange={e => setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, ""))}
@@ -3409,15 +3425,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                    <div className="overflow-x-auto">
-                      <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:a12EvalQ11.canvasH}}>
-                        {a12EvalQ11.positions.map((pos,pi)=>(
-                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                            {pos.kind==="m"?<SvgMillier s={4} d={9}/>:pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={9}/>:<SvgUnite s={16}/>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                    <ScaledCanvas width={420} height={a12EvalQ11.canvasH}>
+                      {a12EvalQ11.positions.map((pos,pi)=>(
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind==="m"?<SvgMillier s={4} d={9}/>:pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={9}/>:<SvgUnite s={16}/>}
+                        </div>
+                      ))}
+                    </ScaledCanvas>
                     <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium">
                       <span className="shrink-0">=</span>
                       <input className={inputCls} placeholder="M×1000" inputMode="numeric" autoComplete="off" value={a12EvalQ11Ans.m} onChange={e=>setA12EvalQ11Ans(p=>({...p,m:e.target.value.replace(/[^0-9]/g,"")}))} />

@@ -13,13 +13,17 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         uk: "Числова пряма",
       },
       blocks: [
-        { type: "plain", fr: "Sur une **droite numérique**, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 5, 10, 100… depending on the scale." } },
-        { type: "plain", fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.", pivot: { en: "To know if a number is even or odd, look only at the last digit." } },
+        { type: "plain", fr: "Sur une droite numérique, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 1, 2, 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 1, 2, 5, 10, 100… depending on the scale." } },
         { type: "heading", fr: "Nombres pairs et impairs", black: true },
-        { type: "highlight", fr: "**Pair** : se termine par 0, 2, 4, 6 ou 8 — ex. : 4, 12, 38, 100.", pivot: { en: "**Even**: ends in 0, 2, 4, 6 or 8 — e.g.: 4, 12, 38, 100." } },
+        { type: "plain", fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.", pivot: { en: "To know if a number is even or odd, look only at the last digit." } },
+        { type: "highlight", fr: "Pair", pivot: { en: "Even" } },
         { type: "plain", fr: "Un nombre pair peut être partagé en 2 parts égales.", pivot: { en: "An even number can be split into 2 equal parts." } },
-        { type: "highlight", fr: "**Impair** : se termine par 1, 3, 5, 7 ou 9 — ex. : 3, 17, 45, 99.", pivot: { en: "**Odd**: ends in 1, 3, 5, 7 or 9 — e.g.: 3, 17, 45, 99." } },
+        { type: "plain", fr: "Il se termine par 0, 2, 4, 6 ou 8.", pivot: { en: "It ends in 0, 2, 4, 6 or 8." } },
+        { type: "plain", fr: "• 4, 12, 38, 100…" },
+        { type: "highlight", fr: "Impair", pivot: { en: "Odd" } },
         { type: "plain", fr: "Un nombre impair ne peut pas être partagé en 2 parts exactement égales.", pivot: { en: "An odd number cannot be split into exactly 2 equal parts." } },
+        { type: "plain", fr: "Il se termine par 1, 3, 5, 7 ou 9.", pivot: { en: "It ends in 1, 3, 5, 7 or 9." } },
+        { type: "plain", fr: "• 3, 17, 45, 99…" },
       ],
       paragraphs: {
         fr: [
