@@ -13,19 +13,22 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
         uk: "Оцінювання та округлення",
       },
       blocks: [
-        { type: "plain", fr: "L'**arrondi** consiste à remplacer un nombre par un nombre « proche » mais plus simple. On arrondit à la dizaine, centaine ou millier le plus proche.", pivot: { en: "Rounding replaces a number with a nearby simpler number. We round to the nearest ten, hundred or thousand.", ar: "التقريب يستبدل عددًا بعدد قريب وأبسط منه. نقرّب إلى أقرب عشرة أو مئة أو ألف.", fa: "گرد کردن یعنی جایگزینی عدد با یک عدد نزدیک ساده‌تر.", uk: "Округлення замінює число близьким простим числом." } },
-        { type: "rule", titleFr: "Règle d'arrondi", itemsFr: [
+        { type: "plain", fr: "L'arrondi consiste à remplacer un nombre par un nombre « proche » mais plus simple. On arrondit à la dizaine, centaine ou millier le plus proche." },
+        { type: "highlight", fr: "Règle d'arrondi" },
+        { type: "section", labelFr: "", itemsFr: [
           "Regarde le chiffre qui suit la position d'arrondi.",
-          "Si ce chiffre est **≥ 5** → arrondi vers le **haut** (augmente d'1).",
-          "Si ce chiffre est **< 5** → arrondi vers le **bas** (reste tel quel).",
-        ], pivot: { en: { title: "Rounding rule", items: ["Look at the digit after the rounding position.", "If ≥ 5 → round UP (increase by 1).", "If < 5 → round DOWN (stays the same)."] } } },
-        { type: "table", headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"], rows: [
+          "Si ce chiffre est **≥ 5**",
+          "• arrondi vers le **haut** (augmente d'1).",
+          "Si ce chiffre est **< 5**",
+          "• arrondi vers le **bas** (reste tel quel).",
+        ] },
+        { type: "table", headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"], accentHeader: true, rows: [
           ["347", "300", "chiffre des dizaines = 4 < 5 → vers le bas"],
           ["850", "900", "chiffre des dizaines = 5 ≥ 5 → vers le haut"],
           ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5 → vers le haut"],
           ["1 230", "1 200", "chiffre des dizaines = 3 < 5 → vers le bas"],
         ] },
-        { type: "example", fr: "Estimation de 348 + 276 : arrondir à la centaine → 300 + 300 = 600 (résultat exact : 624)", pivot: { en: "Estimate 348 + 276: round to hundred → 300 + 300 = 600 (exact: 624)" } },
+        { type: "example", fr: "Estimation de 348 + 276 : arrondir à la centaine → 300 + 300 = 600 (résultat exact : 624)" },
       ],
       paragraphs: {
         fr: [

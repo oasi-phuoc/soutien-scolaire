@@ -219,8 +219,9 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
       );
     case "plain":
+      if (!block.fr) return <div className="h-3" />;
       return (
-        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{block.fr}</p>
+        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderBold(block.fr)}</p>
       );
     case "note":
       return (

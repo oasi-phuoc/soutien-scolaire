@@ -5,24 +5,32 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A2.2",
     theory: {
       title: {
-        fr: "Soustraction (avec et sans emprunt)",
-        en: "Subtraction (with and without borrowing)",
-        ar: "الطرح (مع وبدون استلاف)",
-        fa: "تفریق (با و بدون قرض)",
-        ti: "ምቅናስ (ምስ ዘይምስ ምልቃሕ)",
-        uk: "Віднімання (з позикою і без)",
+        fr: "Soustraction",
+        en: "Subtraction",
+        ar: "الطرح",
+        fa: "تفریق",
+        ti: "ምቅናስ",
+        uk: "Віднімання",
       },
       blocks: [
-        { type: "plain", fr: "La soustraction permet de **retirer** une quantité à une autre. Le signe est « **−** » (moins). Les nombres sont les **termes**. Le résultat est la **différence**.", pivot: { en: "Subtraction removes a quantity from another. Sign: −. Numbers: terms. Result: difference.", ar: "الطرح يزيل كمية من أخرى. الرمز « − ». الأعداد تسمى الحدود. الناتج هو الفرق.", fa: "تفریق مقداری را کم می‌کند. علامت « − ». اعداد: جملات. نتیجه: تفاوت.", uk: "Віднімання вилучає одну величину з іншої. Знак « − ». Числа: доданки. Результат: різниця." } },
-        { type: "note", fr: "La soustraction n'est PAS commutative : 57 − 49 ≠ 49 − 57.", pivot: { en: "Subtraction is NOT commutative: 57 − 49 ≠ 49 − 57.", ar: "الطرح ليس تبديليًا: 57 − 49 ≠ 49 − 57.", fa: "تفریق جابجایی‌پذیر نیست: ۵۷ − ۴۹ ≠ ۴۹ − ۵۷.", uk: "Віднімання НЕ є комутативним: 57 − 49 ≠ 49 − 57." } },
-        { type: "heading", fr: "Soustraction en colonnes — étapes" },
-        { type: "rule", titleFr: "Comment soustraire en colonnes", itemsFr: [
-          "Écrivez les nombres en alignant **U**, **D**, **C**.",
+        { type: "plain", fr: "La soustraction permet de retirer une quantité d'une autre. Le signe est « **−** » (**moins**)." },
+        { type: "table", headersFr: ["8", "−", "3", "=", "5"], accentHeader: true, rows: [
+          ["terme", "moins", "terme", "égale", "différence"],
+        ] },
+        { type: "heading", fr: "Propriétés de la soustraction", black: true },
+        { type: "highlight", fr: "Non-commutativité" },
+        { type: "section", labelFr: "", itemsFr: [
+          "La soustraction n'est PAS commutative.",
+          "• 57 − 49 ≠ 49 − 57",
+        ] },
+        { type: "heading", fr: "Soustraction en colonnes", black: true },
+        { type: "section", labelFr: "", itemsFr: [
+          "Écrivez les nombres en alignant **U** (unités), **D** (dizaines), **C** (centaines).",
           "Commencez par soustraire les **unités**.",
-          "Si c'est impossible (ex. 3 − 7), faites un **emprunt** : prenez 1 dizaine au voisin (= 10 unités).",
+          "Si c'est impossible (ex. 3 − 7), faites un **emprunt** : prenez 1 dizaine (= 10 unités).",
           "Continuez avec les **dizaines** (diminuées de 1), puis les **centaines**.",
-        ], pivot: { en: { title: "How to subtract in columns", items: ["Align U, D, C.", "Start with the units.", "If impossible (e.g. 3 − 7), borrow 1 ten from the tens column (= 10 units).", "Continue with tens (reduced by 1), then hundreds."] } } },
-        { type: "example", fr: "863 − 427 → U: 3−7 impossible → emprunt : 13−7=6 → D: 5−2=3 → C: 8−4=4 → Résultat : 436", pivot: { en: "863 − 427 → U: 3−7 impossible → borrow: 13−7=6 → D: 5−2=3 → C: 8−4=4 → Result: 436" } },
+        ] },
+        { type: "svg", noFrame: false, markup: `<svg viewBox="0 0 170 155" width="170" height="155" xmlns="http://www.w3.org/2000/svg"><text x="60" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">C</text><text x="100" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">D</text><text x="140" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">U</text><text x="100" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">5</text><text x="140" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">13</text><line x1="40" y1="34" x2="40" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="80" y1="34" x2="80" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="120" y1="34" x2="120" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="160" y1="34" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="34" x2="160" y2="34" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="74" x2="160" y2="74" stroke="#d1d5db" stroke-width="0.8"/><line x1="20" y1="110" x2="160" y2="110" stroke="#111827" stroke-width="2.5"/><line x1="40" y1="150" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><text x="60" y="60" text-anchor="middle" font-size="22" fill="#111827">8</text><text x="100" y="60" text-anchor="middle" font-size="22" fill="#111827">6</text><text x="140" y="60" text-anchor="middle" font-size="22" fill="#111827">3</text><text x="22" y="98" text-anchor="middle" font-size="22" fill="#111827">−</text><text x="60" y="98" text-anchor="middle" font-size="22" fill="#111827">4</text><text x="100" y="98" text-anchor="middle" font-size="22" fill="#111827">2</text><text x="140" y="98" text-anchor="middle" font-size="22" fill="#111827">7</text><text x="60" y="136" text-anchor="middle" font-size="22" fill="#111827">4</text><text x="100" y="136" text-anchor="middle" font-size="22" fill="#111827">3</text><text x="140" y="136" text-anchor="middle" font-size="22" fill="#111827">6</text></svg>`, captionFr: "863 − 427 = 436  (5 = emprunt D→U, 13 = 3+10)" },
       ],
       paragraphs: {
         fr: [

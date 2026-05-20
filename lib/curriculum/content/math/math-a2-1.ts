@@ -13,19 +13,31 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
         uk: "Додавання",
       },
       blocks: [
-        { type: "plain", fr: "L'addition permet de réunir plusieurs quantités ensemble. Le signe est « + » (plus). Les nombres à additionner sont les termes. Le résultat est la somme.", pivot: { en: "Addition combines quantities. Sign: +. Numbers: terms. Result: sum.", ar: "الجمع يجمع عدة كميات. الرمز « + ». الأعداد تسمى الحدود. الناتج هو المجموع.", fa: "جمع چند مقدار را با هم ترکیب می‌کند. علامت « + ». اعداد: جملات. نتیجه: مجموع.", uk: "Додавання об'єднує кілька величин. Знак « + ». Числа: доданки. Результат: сума." } },
-        { type: "rule", titleFr: "Propriétés de l'addition", itemsFr: [
-          "**Commutativité** : l'ordre des termes ne change pas la somme. Ex. : 57 + 49 = 49 + 57 = 106.",
-          "**Associativité** : on peut additionner plus de deux termes dans l'ordre voulu. Ex. : 15 + 37 + 22 = 74.",
-        ], pivot: { en: { title: "Properties of addition", items: ["Commutativity: changing order doesn't change the sum. E.g. 57 + 49 = 49 + 57.", "Associativity: can add more than two terms in any order. E.g. 15 + 37 + 22 = 74."] } } },
-        { type: "heading", fr: "Addition en colonnes — étapes" },
-        { type: "rule", titleFr: "Comment additionner en colonnes", itemsFr: [
+        { type: "plain", fr: "L'addition permet de réunir plusieurs quantités ensemble. Le signe est « **+** » (**plus**)." },
+        { type: "table", headersFr: ["5", "+", "8", "=", "13"], accentHeader: true, rows: [
+          ["terme", "plus", "terme", "égale", "somme"],
+        ] },
+        { type: "heading", fr: "Propriétés de l'addition", black: true },
+        { type: "highlight", fr: "Commutativité" },
+        { type: "section", labelFr: "", itemsFr: [
+          "L'ordre des termes ne change pas la somme.",
+          "• 57 + 49 = 106",
+          "• 49 + 57 = 106",
+        ] },
+        { type: "highlight", fr: "Associativité" },
+        { type: "section", labelFr: "", itemsFr: [
+          "On peut additionner plus de deux termes dans l'ordre voulu.",
+          "• 15 + 37 + 23 = 75",
+          "• 37 + 23 = 60, puis 60 + 15 = 75",
+        ] },
+        { type: "heading", fr: "Addition en colonnes", black: true },
+        { type: "section", labelFr: "", itemsFr: [
           "Écrivez les nombres en alignant **U** (unités), **D** (dizaines), **C** (centaines).",
           "Commencez par additionner les **unités**.",
           "Si la somme dépasse 9, posez le chiffre des unités et **retenez** le chiffre des dizaines.",
           "Continuez avec les **dizaines**, puis les **centaines**, en ajoutant la retenue.",
-        ], pivot: { en: { title: "How to add in columns", items: ["Align U (units), D (tens), C (hundreds).", "Start by adding the units.", "If the sum exceeds 9, write the units digit and carry the tens digit.", "Continue with tens, then hundreds, adding the carry each time."] } } },
-        { type: "example", fr: "579 + 24 → U: 9+4=13 (pose 3, retient 1) → D: 1+7+2=10 (pose 0, retient 1) → C: 1+5=6 → Résultat : 603", pivot: { en: "579 + 24 → U: 9+4=13 (write 3, carry 1) → D: 1+7+2=10 (write 0, carry 1) → C: 1+5=6 → Result: 603" } },
+        ] },
+        { type: "svg", noFrame: false, markup: `<svg viewBox="0 0 170 155" width="170" height="155" xmlns="http://www.w3.org/2000/svg"><text x="60" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">C</text><text x="100" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">D</text><text x="140" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">U</text><text x="100" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">1</text><text x="140" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">1</text><line x1="40" y1="34" x2="40" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="80" y1="34" x2="80" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="120" y1="34" x2="120" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="160" y1="34" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="34" x2="160" y2="34" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="74" x2="160" y2="74" stroke="#d1d5db" stroke-width="0.8"/><line x1="20" y1="110" x2="160" y2="110" stroke="#111827" stroke-width="2.5"/><line x1="40" y1="150" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><text x="60" y="60" text-anchor="middle" font-size="22" fill="#111827">5</text><text x="100" y="60" text-anchor="middle" font-size="22" fill="#111827">7</text><text x="140" y="60" text-anchor="middle" font-size="22" fill="#111827">9</text><text x="22" y="98" text-anchor="middle" font-size="22" fill="#111827">+</text><text x="100" y="98" text-anchor="middle" font-size="22" fill="#111827">2</text><text x="140" y="98" text-anchor="middle" font-size="22" fill="#111827">4</text><text x="60" y="136" text-anchor="middle" font-size="22" fill="#111827">6</text><text x="100" y="136" text-anchor="middle" font-size="22" fill="#111827">0</text><text x="140" y="136" text-anchor="middle" font-size="22" fill="#111827">3</text></svg>`, captionFr: "579 + 24 = 603" },
       ],
       paragraphs: {
         fr: [

@@ -33,8 +33,8 @@ export const MATH_MODULES: MathModule[] = [
     prerequisiteIds: ["A1"],
     description: "Calcul posé et mental : retenue, emprunt, estimation (PER / CSC).",
     submodules: [
-      sm("A2.1", "Addition (avec et sans retenue)"),
-      sm("A2.2", "Soustraction (avec et sans emprunt)"),
+      sm("A2.1", "Addition"),
+      sm("A2.2", "Soustraction"),
       sm("A2.3", "Estimation et arrondi"),
     ],
   },
