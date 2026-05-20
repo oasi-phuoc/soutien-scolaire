@@ -453,7 +453,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               </button>
             ) : <span />}
 
-            {isExercise && currentStep?.kind !== "eval_start" && (
+            {isExercise && (
               <div className="flex items-center gap-2">
                 <button type="button" aria-label="Recommencer" onClick={refresh}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90">
