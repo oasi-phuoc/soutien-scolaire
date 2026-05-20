@@ -158,8 +158,8 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
     case "highlight": {
       const pv = block.pivot?.[pivot];
       return (
-        <div className="rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5 px-4 py-2">
-          <p className="text-sm font-semibold text-[var(--color-accent-alg)]">{renderBold(block.fr)}</p>
+        <div>
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{renderBold(block.fr)}</p>
           {showPivot && pv ? (
             <p className="mt-1 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
