@@ -467,7 +467,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
                 </button>
               </div>
             )}
-            {(!isExercise || currentStep?.kind === "eval_start") && <span />}
+            {!isExercise && <span />}
 
             {currentStep?.kind !== "eval_start" && (
               <button type="button" onClick={goNext}
