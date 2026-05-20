@@ -93,7 +93,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
           <p className="mb-1 text-sm font-semibold text-[var(--color-accent-alg)]">{block.titleFr}</p>
           <ul className="space-y-1 text-sm text-[var(--color-text-secondary)]">
             {block.itemsFr.map((item, i) => (
-              <li key={i} className="flex gap-2"><span className="shrink-0 text-[var(--color-accent-alg)]">•</span><span style={{whiteSpace:"pre-line"}}>{renderBold(item)}</span></li>
+              <li key={i} style={{whiteSpace:"pre-line"}}>{renderBold(item)}</li>
             ))}
           </ul>
           {showPivot && pv ? (
@@ -159,7 +159,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       const pv = block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] border-l-4 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5 px-4 py-2">
-          <p className="text-sm font-medium text-[var(--color-text-primary)]">{renderBold(block.fr)}</p>
+          <p className="text-sm font-semibold text-[var(--color-accent-alg)]">{renderBold(block.fr)}</p>
           {showPivot && pv ? (
             <p className="mt-1 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
@@ -189,9 +189,8 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
-                <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
-                  <span>{item}</span>
+                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {item}
                 </li>
               ))}
             </ul>

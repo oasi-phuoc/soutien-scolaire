@@ -56,7 +56,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
       },
       blocks: [
         { type: "plain", fr: "Chaque chiffre occupe une position précise dans un nombre.", pivot: { en: "Each digit occupies a precise position in a number.", ar: "كل رقم يحتل موضعاً محدداً في العدد.", fa: "هر رقم جایگاه مشخصی در عدد دارد.", uk: "Кожна цифра займає точне місце в числі." } },
-        { type: "table", headersFr: ["Nombre", "M Milliers", "C Centaines", "D Dizaines", "U Unités"], accentHeader: true, rows: [
+        { type: "table", headersFr: ["Nombre", "M", "C", "D", "U"], accentHeader: true, rows: [
           ["452",   "—", "4", "5", "2"],
           ["524",   "—", "5", "2", "4"],
           ["2 453", "2", "4", "5", "3"],
@@ -76,7 +76,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         { type: "highlight", fr: "Valeur du chiffre = chiffre × valeur de sa position.", pivot: { en: "Digit value = digit × place value." } },
         { type: "section", labelFr: "", itemsFr: [
           "Dans le nombre 3 864 :",
-          "le chiffre 8 est en position C → 8 × 100 = 800.",
+          "Le chiffre 8 est en position C → 8 × 100 = 800.",
           "3 864 = 3 000 + 800 + 60 + 4",
         ] },
       ],
