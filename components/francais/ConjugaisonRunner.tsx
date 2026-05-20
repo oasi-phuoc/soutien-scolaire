@@ -2099,11 +2099,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const exStart = theory2Idx + (lesson.theory2 ? 1 : 0);
   const totalSteps = 1 + midExercises.length + (lesson.theory2 ? 1 : 0) + lesson.exercises.length;
 
+  // Grammar and vocabulary lessons skip the timed start screen
+  const hasTimer = subject === "Conjugaison";
+
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
   const [canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
-  const [exercisesStarted, setExercisesStarted] = useState(false);
+  const [exercisesStarted, setExercisesStarted] = useState(!hasTimer);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
@@ -2147,7 +2150,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   }, []);
 
   function goBack() {
-    if (isExercise && exercisesStarted) {
+    if (hasTimer && isExercise && exercisesStarted) {
       setShowCancelConfirm(true);
       return;
     }
@@ -2249,8 +2252,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
       {/* Content */}
       <div className="min-h-[280px]">
-        {/* Timer chip — shown when exercises are started */}
-        {isExercise && exercisesStarted && timeLeft !== null && (
+        {/* Timer chip — shown when exercises are started (conjugation only) */}
+        {isExercise && hasTimer && exercisesStarted && timeLeft !== null && (
           <div className="mb-4 flex justify-end">
             <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
               timeLeft < 60
@@ -2274,7 +2277,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             onCanValidateChange={setCanValidate}
           />
         ) : isExercise ? (
-          !exercisesStarted ? (
+          hasTimer && !exercisesStarted ? (
             <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
               <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-fr)]">5:00</p>
               <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter les exercices</p>
@@ -2324,7 +2327,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             </button>
 
             {/* Reset + Validate (exercises only, or mid-exercises) */}
-            {(isMidEx || (isExercise && exercisesStarted)) && (
+            {(isMidEx || (isExercise && (!hasTimer || exercisesStarted))) && (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -2355,7 +2358,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             <button
               type="button"
               onClick={goNext}
-              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${isExercise && !exercisesStarted ? "invisible" : ""}`}
+              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${isExercise && hasTimer && !exercisesStarted ? "invisible" : ""}`}
             >
               {isLast ? (
                 <>

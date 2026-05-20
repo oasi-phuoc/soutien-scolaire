@@ -81,7 +81,11 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
 }) {
   switch (block.type) {
     case "heading":
-      return <p className="mt-3 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</p>;
+      return block.black ? (
+        <p className="mt-3 text-sm font-bold text-[var(--color-text-primary)]">{block.fr}</p>
+      ) : (
+        <p className="mt-4 mb-1 text-sm font-bold uppercase tracking-wide text-[var(--color-accent-alg)]">{block.fr}</p>
+      );
     case "rule": {
       const pv = block.pivot?.[pivot];
       return (
@@ -131,7 +135,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
         <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
           <table className="w-full min-w-[260px] border-collapse text-sm">
             <thead>
-              <tr className="bg-[var(--color-bg-secondary)]">
+              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
                   <th key={i} className={`border border-[var(--color-border-default)] px-3 py-1.5 text-left text-xs font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
@@ -181,7 +185,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
     case "section":
       return (
         <div className="space-y-1.5">
-          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>
+          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
@@ -2921,12 +2925,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const result = ex10Results[qi] ?? null;
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                  <div className="relative overflow-hidden rounded" style={{width:"100%",height:q.canvasH}}>
-                    {q.positions.map((pos, pi) => (
-                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                        {pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:q.canvasH}}>
+                      {q.positions.map((pos, pi) => (
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={8} /> : <SvgUnite s={14} />}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="mt-2">
                     <AppInput label="" id={`ex10-${qi}`}
@@ -2962,12 +2968,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const result = ex11Results[qi] ?? null;
               return (
                 <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                  <div className="relative overflow-hidden rounded" style={{width:"100%", height:q.canvasH}}>
-                    {q.positions.map((pos, pi) => (
-                      <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                        {pos.kind === "m" ? <SvgMillier s={4} d={9} /> : pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
-                      </div>
-                    ))}
+                  <div className="overflow-x-auto">
+                    <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420, height:q.canvasH}}>
+                      {q.positions.map((pos, pi) => (
+                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                          {pos.kind === "m" ? <SvgMillier s={4} d={9} /> : pos.kind === "h" ? <SvgCentaine s={5} /> : pos.kind === "d" ? <SvgDizaine s={9} /> : <SvgUnite s={16} />}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                   <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
                     <span className="shrink-0">=</span>
@@ -3378,12 +3386,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                    <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ10.canvasH}}>
-                      {a12EvalQ10.positions.map((pos,pi)=>(
-                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                          {pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={8}/>:<SvgUnite s={14}/>}
-                        </div>
-                      ))}
+                    <div className="overflow-x-auto">
+                      <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:a12EvalQ10.canvasH}}>
+                        {a12EvalQ10.positions.map((pos,pi)=>(
+                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                            {pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={8}/>:<SvgUnite s={14}/>}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="mt-2">
                       <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
@@ -3399,12 +3409,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                    <div className="relative overflow-hidden rounded" style={{width:"100%",height:a12EvalQ11.canvasH}}>
-                      {a12EvalQ11.positions.map((pos,pi)=>(
-                        <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
-                          {pos.kind==="m"?<SvgMillier s={4} d={9}/>:pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={9}/>:<SvgUnite s={16}/>}
-                        </div>
-                      ))}
+                    <div className="overflow-x-auto">
+                      <div className="relative overflow-hidden rounded" style={{width:420,minWidth:420,height:a12EvalQ11.canvasH}}>
+                        {a12EvalQ11.positions.map((pos,pi)=>(
+                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                            {pos.kind==="m"?<SvgMillier s={4} d={9}/>:pos.kind==="h"?<SvgCentaine s={5}/>:pos.kind==="d"?<SvgDizaine s={9}/>:<SvgUnite s={16}/>}
+                          </div>
+                        ))}
+                      </div>
                     </div>
                     <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium">
                       <span className="shrink-0">=</span>

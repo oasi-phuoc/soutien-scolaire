@@ -5,7 +5,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A1.2",
     theory: {
       title: {
-        fr: "Lire et comprendre les nombres",
+        fr: "Valeur positionnelle (M · C · D · U)",
         en: "Reading and understanding numbers",
         ar: "قراءة الأعداد وفهمها",
         fa: "خواندن و فهمیدن اعداد",
@@ -55,21 +55,20 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
-        { type: "plain", fr: "La numération est la manière d’écrire, lire et comprendre les nombres. Dans notre système **décimal**, chaque chiffre a une valeur selon sa position.", pivot: { en: "Numeration is how we write, read and understand numbers. In the decimal system, each digit has a value based on its position.", ar: "الترقيم طريقة كتابة الأعداد وقراءتها. في النظام العشري لكل رقم قيمة حسب موضعه.", fa: "عددگذاری روش نوشتن و خواندن اعداد است. در دهدهی هر رقم بسته به جایگاهش ارزش دارد.", uk: "Нумерація — спосіб записувати й розуміти числа. В десятковій кожна цифра залежить від розряду." } },
-        { type: "heading", fr: "Valeur positionnelle (M · C · D · U)" },
-        { type: "table", headersFr: ["Nombre", "M (Milliers)", "C (Centaines)", "D (Dizaines)", "U (Unités)"], rows: [
-          ["452",  "—",  "4",  "5",  "2"],
-          ["524",  "—",  "5",  "2",  "4"],
-          ["2 453", "2", "4",  "5",  "3"],
-          ["9 102", "9", "1",  "0",  "2"],
-        ], captionFr: "Chaque chiffre occupe une position précise." },
-        { type: "rule", titleFr: "Comment lire la valeur d’un chiffre", itemsFr: [
-          "Repère sa position : U = ×1, D = ×10, C = ×100, M = ×1000.",
-          "Multiplie le chiffre par la valeur de sa position.",
-          "Exemple : dans 3 864, le chiffre 8 est en position C → 8 × 100 = **800**.",
-        ], pivot: { en: { title: "How to read a digit’s value", items: ["Find its position: U=×1, D=×10, C=×100, M=×1000.", "Multiply the digit by its place value.", "Example: in 3 864, digit 8 is in the C position → 8 × 100 = 800."] } } },
-        { type: "example", fr: "5 682 = 5 000 + 600 + 80 + 2", pivot: { en: "5 682 = 5 000 + 600 + 80 + 2", ar: "5 682 = 5000 + 600 + 80 + 2", fa: "۵ ۶۸۲ = ۵۰۰۰ + ۶۰۰ + ۸۰ + ۲", uk: "5 682 = 5 000 + 600 + 80 + 2" } },
-        { type: "note", fr: "Astuce : pour comparer deux nombres, compare d’abord le nombre de chiffres. Plus un nombre a de chiffres, plus il est grand.", pivot: { en: "Tip: to compare two numbers, first count their digits. More digits = larger number.", ar: "نصيحة: لمقارنة عددين، قارن عدد الأرقام أولاً. كلما زادت الأرقام، كان العدد أكبر.", fa: "نکته: برای مقایسه دو عدد ابتدا تعداد رقم‌ها را بشمار. بیشتر رقم = عدد بزرگ‌تر.", uk: "Підказка: щоб порівняти числа, порівняй кількість цифр. Більше цифр = більше число." } },
+        { type: "plain", fr: "Chaque chiffre occupe une position précise dans un nombre.", pivot: { en: "Each digit occupies a precise position in a number.", ar: "كل رقم يحتل موضعاً محدداً في العدد.", fa: "هر رقم جایگاه مشخصی در عدد دارد.", uk: "Кожна цифра займає точне місце в числі." } },
+        { type: "table", headersFr: ["Nombre", "M (Milliers)", "C (Centaines)", "D (Dizaines)", "U (Unités)"], accentHeader: true, rows: [
+          ["452",   "—", "4", "5", "2"],
+          ["524",   "—", "5", "2", "4"],
+          ["2 453", "2", "4", "5", "3"],
+          ["9 102", "9", "1", "0", "2"],
+        ] },
+        { type: "heading", fr: "Comment lire la valeur d’un chiffre" },
+        { type: "plain", fr: "Repère sa position : U = ×1, D = ×10, C = ×100, M = ×1000.", pivot: { en: "Find its position: U=×1, D=×10, C=×100, M=×1000." } },
+        { type: "plain", fr: "Multiplie le chiffre par la valeur de sa position.", pivot: { en: "Multiply the digit by its place value." } },
+        { type: "section", labelFr: "", itemsFr: [
+          "dans 3 864, le chiffre 8 est en position C → 8 × 100 = 800.",
+          "3 864 = 3 000 + 800 + 60 + 4",
+        ] },
       ],
     },
     exercises: [

@@ -9,11 +9,11 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { percentToSwissGrade, medalFromPercent } from "@/lib/scoring";
 
 // ── Step types ──────────────────────────────────────────────────────────────
-type TheoryStep    = { kind: "theory";        lesson: MathSubmoduleLesson };
-type ExerciseStep  = { kind: "exercise";      lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type EvalStartStep = { kind: "eval_start";    lesson: MathSubmoduleLesson };
-type EvalQStep     = { kind: "eval_question"; lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type FlatStep = TheoryStep | ExerciseStep | EvalStartStep | EvalQStep;
+type TheoryStep    = { kind: "theory";       lesson: MathSubmoduleLesson };
+type ExerciseStep  = { kind: "exercise";     lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type EvalStartStep = { kind: "eval_start";   lesson: MathSubmoduleLesson };
+type PassToggleStep = { kind: "pass_toggle"; lesson: MathSubmoduleLesson };
+type FlatStep = TheoryStep | ExerciseStep | EvalStartStep | PassToggleStep;
 
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
@@ -38,10 +38,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   }
   if (withEval && lessons.length > 0) {
     const lastLesson = lessons[lessons.length - 1]!;
-    const pool = lastLesson.exercisePool ?? lastLesson.exercises;
-    const evalItem = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)]! : undefined;
     steps.push({ kind: "eval_start", lesson: lastLesson });
-    if (evalItem) steps.push({ kind: "eval_question", lesson: lastLesson, item: evalItem });
+    steps.push({ kind: "pass_toggle", lesson: lastLesson });
   }
   return steps;
 }
@@ -95,7 +93,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
           <table className="min-w-full text-xs">
             <thead>
-              <tr className="bg-[var(--color-bg-secondary)]">
+              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
                   <th
                     key={i}
@@ -144,7 +142,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
     case "section":
       return (
         <div className="space-y-1.5">
-          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>
+          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
@@ -231,18 +229,20 @@ export function GenericModuleContent({
   const [answer, setAnswer] = useState("");
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
+  const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
 
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
   const inEvalPhase =
-    currentStep?.kind === "eval_start" || currentStep?.kind === "eval_question";
+    currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
     setAnswer("");
     setExStatus("idle");
     setExAttempts(0);
+    setToggleAnswer(null);
   }, []);
 
   const goBack = useCallback(() => {
@@ -261,8 +261,8 @@ export function GenericModuleContent({
   }
 
   const goNext = useCallback(() => {
-    if (currentStep?.kind === "eval_question") {
-      finishEval(exStatus === "correct");
+    if (currentStep?.kind === "pass_toggle") {
+      finishEval(toggleAnswer === "oui");
       return;
     }
     if (isLastStep) {
@@ -286,17 +286,14 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
 
-  if (
-    (currentStep?.kind === "exercise" || currentStep?.kind === "eval_question") &&
-    exStatus !== "correct"
-  ) {
+  if (currentStep?.kind === "exercise" && exStatus !== "correct") {
     stepValidate = () => {
-      if (!currentStep || (currentStep.kind !== "exercise" && currentStep.kind !== "eval_question")) return;
+      if (!currentStep || currentStep.kind !== "exercise") return;
       const ok = answerMatches(answer, currentStep.item.acceptable);
       setExStatus(ok ? "correct" : "wrong");
       setExAttempts((a) => a + 1);
@@ -316,7 +313,7 @@ export function GenericModuleContent({
 
   // Eval-phase steps don't count in the progress bar
   const visibleSteps = steps.filter(
-    (s) => s.kind !== "eval_start" && s.kind !== "eval_question",
+    (s) => s.kind !== "eval_start" && s.kind !== "pass_toggle",
   );
   const visibleIdx = Math.min(stepIdx, visibleSteps.length);
 
@@ -391,7 +388,7 @@ export function GenericModuleContent({
               {currentStep.lesson.theory.title.fr}
             </h2>
             <p className="text-sm text-[var(--color-text-secondary)]">
-              1 question pour valider tes connaissances.
+              Évalue ta maîtrise de ce module.
             </p>
           </div>
           <button
@@ -407,45 +404,44 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Eval question */}
-      {currentStep?.kind === "eval_question" && (
-        <div className="space-y-6">
-          <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-4 py-3">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
-              Question d&apos;évaluation
+      {/* Pass toggle */}
+      {currentStep?.kind === "pass_toggle" && (
+        <div className="flex flex-col items-center gap-8 py-4 text-center">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
+              Évaluation
+            </p>
+            <h2 className="mt-2 text-xl font-bold text-[var(--color-text-primary)]">
+              Passer le module ?
+            </h2>
+            <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+              As-tu compris et maîtrisé ce module ?
             </p>
           </div>
-          <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
-            {currentStep.item.promptFr}
-          </p>
-          {exStatus === "idle" || exStatus === "wrong" ? (
-            <input
-              type={currentStep.item.type === "number" ? "number" : "text"}
-              value={answer}
-              onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
-              onKeyDown={(e) => { if (e.key === "Enter" && answer.trim()) stepValidate?.(); }}
-              placeholder="Votre réponse…"
-              className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
-                exStatus === "wrong"
-                  ? "border-red-400 bg-red-50 dark:bg-red-950/20"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+          <div className="flex w-full gap-3">
+            <button
+              type="button"
+              onClick={() => setToggleAnswer("oui")}
+              className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
+                toggleAnswer === "oui"
+                  ? "bg-green-500 text-white shadow-sm"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-green-400 hover:bg-green-50 dark:hover:bg-green-950/20"
               }`}
-            />
-          ) : (
-            <div className="rounded-xl border border-green-400 bg-green-50 px-4 py-3 dark:bg-green-950/20">
-              <p className="text-sm font-medium text-green-700 dark:text-green-400">{answer}</p>
-            </div>
-          )}
-          {exStatus === "wrong" && (
-            <p className="text-xs font-medium text-red-500">
-              {exAttempts >= 2
-                ? `Réponse : ${currentStep.item.acceptable[0]}`
-                : "Pas tout à fait…"}
-            </p>
-          )}
-          {exStatus === "correct" && (
-            <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>
-          )}
+            >
+              Oui
+            </button>
+            <button
+              type="button"
+              onClick={() => setToggleAnswer("non")}
+              className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
+                toggleAnswer === "non"
+                  ? "bg-red-400 text-white shadow-sm"
+                  : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-red-400 hover:bg-red-50 dark:hover:bg-red-950/20"
+              }`}
+            >
+              Non
+            </button>
+          </div>
         </div>
       )}
 
@@ -458,7 +454,7 @@ export function GenericModuleContent({
               <button
                 type="button"
                 onClick={goBack}
-                disabled={isFirstStep || currentStep?.kind === "eval_question"}
+                disabled={isFirstStep || currentStep?.kind === "pass_toggle"}
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
               >
                 ← Retour
@@ -467,8 +463,8 @@ export function GenericModuleContent({
               <span />
             )}
 
-            {/* Validate (exercises + eval question) */}
-            {(stepReset || stepValidate) && currentStep?.kind !== "eval_start" ? (
+            {/* Validate (exercises only) */}
+            {(stepReset || stepValidate) ? (
               <div className="flex items-center gap-2">
                 {stepReset && (
                   <button
@@ -501,13 +497,12 @@ export function GenericModuleContent({
               <button
                 type="button"
                 onClick={goNext}
+                disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {currentStep?.kind === "eval_question"
+                {currentStep?.kind === "pass_toggle" || isLastStep
                   ? "Terminer ✓"
-                  : isLastStep
-                    ? "Terminer ✓"
-                    : "Suivant →"}
+                  : "Suivant →"}
               </button>
             )}
           </div>
