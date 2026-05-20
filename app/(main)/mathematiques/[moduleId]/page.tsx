@@ -1,4 +1,5 @@
 import { notFound, redirect } from "next/navigation";
+import Link from "next/link";
 import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import {
@@ -41,9 +42,20 @@ export default async function MathModulePage({ params, searchParams }: Props) {
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
           Mathématiques · {tabLabel} · {parentMod!.code}
         </p>
-        <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
-          {lesson!.submoduleCode} — {lesson!.theory.title.fr}
-        </h1>
+        <div className="flex items-center gap-2">
+          <Link
+            href="/mathematiques"
+            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+            aria-label="Retour aux mathématiques"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </Link>
+          <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
+            {lesson!.submoduleCode} — {lesson!.theory.title.fr}
+          </h1>
+        </div>
       </header>
       <MathSubmoduleWorkspace submoduleId={upper} moduleId={parentModuleId!} startAtEval={evalParam === "1"} />
     </main>
