@@ -118,6 +118,26 @@ function ModuleCard({
         )}
       </button>
 
+      {/* Progress bar (in_progress only) */}
+      {expanded && modState === "in_progress" && hydrated && (
+        <div className="px-4 pb-2">
+          <div className="flex gap-1">
+            {mod.letters.map((letter) => {
+              const subState = getSubmoduleState(progress, mod.id, letter.letterLower);
+              const isDone = subState === "completed";
+              const isCurrent = subState === "available";
+              return (
+                <div
+                  key={letter.letterLower}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
+                  style={isDone || isCurrent ? { background: "var(--color-accent-lecture)" } : undefined}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Submodule list */}
       {expanded && <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
         {mod.letters.flatMap((letter, i) => {

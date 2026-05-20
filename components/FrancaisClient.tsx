@@ -169,6 +169,25 @@ function SectionCard({
         </button>
       )}
 
+      {/* Progress bar (in_progress only) */}
+      {inProgress && hydrated && themes.length > 0 && (
+        <div className="px-4 pb-2">
+          <div className="flex gap-1">
+            {themes.map((th) => {
+              const isDone = completedSlugs.has(th.slug);
+              const isCurrent = th.slug === firstAvailableSlug;
+              return (
+                <div
+                  key={th.id}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${isDone || isCurrent ? "" : "bg-[var(--color-border-default)]"} ${isCurrent ? "opacity-60" : ""}`}
+                  style={isDone || isCurrent ? { background: "var(--color-accent-fr)" } : undefined}
+                />
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Lesson list */}
       {showContent && (
         themes.length > 0 ? (
