@@ -5,26 +5,39 @@ export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A1.4",
     theory: {
       title: {
-        fr: "Comparer les nombres",
-        en: "Comparing numbers",
-        ar: "مقارنة الأعداد",
-        fa: "مقایسه اعداد",
-        ti: "ምውድዳር ቁጽርታት",
-        uk: "Порівняння чисел",
+        fr: "Qui est le plus grand ?",
+        en: "Which is greater?",
+        ar: "أيهما أكبر؟",
+        fa: "کدام بزرگ‌تر است؟",
+        ti: "ኣየናይ እዩ ዓቢ?",
+        uk: "Яке число більше?",
       },
       blocks: [
         { type: "plain", fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.", pivot: { en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.", ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.", fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.", uk: "Порівняти числа — визначити, яке більше, менше або вони рівні." } },
-        { type: "rule", titleFr: "Règle de comparaison", itemsFr: [
-          "Nombres avec un nombre différent de chiffres → le plus long est le plus grand.",
-          "Même nombre de chiffres → compare chiffre par chiffre depuis la **gauche**.",
+        { type: "highlight", fr: "Règle de comparaison", pivot: { en: "Comparison rule" } },
+        { type: "plain", fr: "Nombres avec un nombre différent de chiffres", pivot: { en: "Numbers with a different digit count" } },
+        { type: "section", labelFr: "", itemsFr: ["Le plus long est le plus grand."] },
+        { type: "plain", fr: "Même nombre de chiffres", pivot: { en: "Same number of digits" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Compare chiffre par chiffre depuis la **gauche**.",
           "Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
-        ], pivot: { en: { title: "Comparison rule", items: ["Different digit counts → more digits = greater.", "Same digit count → compare left to right.", "First different digit: the larger digit wins."] } } },
-        { type: "table", headersFr: ["Comparaison", "Symbole", "Exemple"], rows: [
+        ] },
+        { type: "heading", fr: "Les symboles de comparaison", black: true },
+        { type: "plain", fr: "La partie de la flèche > qui est ouverte est toujours dirigée vers le plus grand nombre.", pivot: { en: "The open side of > always points to the greater number." } },
+        { type: "table", headersFr: ["Comparaison", "Symbole", "Exemple"], accentHeader: true, rows: [
           ["plus petit que", "<", "456 < 462"],
           ["plus grand que", ">", "902 > 890"],
           ["égal à",         "=", "789 = 789"],
         ] },
-        { type: "example", fr: "3 456 □ 3 421 → même nbre de chiffres → chiffres des milliers (3=3) → centaines (4=4) → dizaines : 5 > 2 → 3 456 > 3 421", pivot: { en: "3 456 □ 3 421 → same digits → thousands equal → hundreds equal → tens: 5 > 2 → 3 456 > 3 421" } },
+        { type: "highlight", fr: "Exemple" },
+        { type: "plain", fr: "3 456 > 3 421", pivot: { en: "3 456 > 3 421" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "même nombre de chiffres",
+          "chiffres des milliers (3=3)",
+          "centaines (4=4)",
+          "dizaines : 5 > 2",
+          "3 456 > 3 421",
+        ] },
       ],
       paragraphs: {
         fr: [

@@ -1,20 +1,117 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useState, Fragment } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade, medalFromPercent } from "@/lib/scoring";
 
+function renderBold(text: string) {
+  const parts = text.split(/\*\*(.+?)\*\*/g);
+  if (parts.length === 1) return <>{text}</>;
+  return <>{parts.map((p, i) => i % 2 === 1 ? <strong key={i} className="font-bold text-[var(--color-accent-alg)]">{p}</strong> : p)}</>;
+}
+
+function formatCompNum(n: number): string {
+  const s = n.toString();
+  if (s.length <= 3) return s;
+  if (s.length <= 6) return s.slice(0, s.length - 3) + " " + s.slice(s.length - 3);
+  return s;
+}
+
 // ── Step types ──────────────────────────────────────────────────────────────
-type TheoryStep      = { kind: "theory";       lesson: MathSubmoduleLesson };
-type ExerciseStep    = { kind: "exercise";     lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type NumberLineStep  = { kind: "number_line";  lesson: MathSubmoduleLesson; nlConfig: NLConfig };
-type EvalStartStep   = { kind: "eval_start";   lesson: MathSubmoduleLesson };
-type PassToggleStep  = { kind: "pass_toggle";  lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | EvalStartStep | PassToggleStep;
+type TheoryStep      = { kind: "theory";        lesson: MathSubmoduleLesson };
+type ExerciseStep    = { kind: "exercise";      lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type NumberLineStep  = { kind: "number_line";   lesson: MathSubmoduleLesson; nlConfig: NLConfig };
+type ComparisonStep  = { kind: "comparison_ex"; lesson: MathSubmoduleLesson; config: ComparisonConfig };
+type EvalStartStep   = { kind: "eval_start";    lesson: MathSubmoduleLesson };
+type PassToggleStep  = { kind: "pass_toggle";   lesson: MathSubmoduleLesson };
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | EvalStartStep | PassToggleStep;
+
+// ── Comparison exercise ───────────────────────────────────────────────────────
+type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
+type ComparisonConfig = { questions: ComparisonQ[]; level: 1 | 2 };
+
+function genComparisonConfig(level: 1 | 2): ComparisonConfig {
+  const [min, max] = level === 1 ? [1, 99] : [100000, 999999];
+  const signs: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+  for (let i = signs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [signs[i], signs[j]] = [signs[j]!, signs[i]!];
+  }
+  const questions: ComparisonQ[] = signs.map(answer => {
+    let a = 0, b = 0;
+    if (answer === "=") {
+      a = Math.floor(Math.random() * (max - min + 1)) + min;
+      b = a;
+    } else if (answer === ">") {
+      do { a = Math.floor(Math.random() * (max - min + 1)) + min; b = Math.floor(Math.random() * (max - min + 1)) + min; } while (a <= b);
+    } else {
+      do { a = Math.floor(Math.random() * (max - min + 1)) + min; b = Math.floor(Math.random() * (max - min + 1)) + min; } while (a >= b);
+    }
+    return { a, b, answer };
+  });
+  return { questions, level };
+}
+
+function ComparisonExercise({ config }: { config: ComparisonConfig }) {
+  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>(() => Array(5).fill(false));
+  const allAnswered = answers.every(a => a !== null);
+  const score = results.filter(Boolean).length;
+
+  function validate() {
+    if (!allAnswered || validated) return;
+    setResults(config.questions.map((q, i) => answers[i] === q.answer));
+    setValidated(true);
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+        Exercice {config.level} — Les symboles de comparaison
+      </p>
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+        <div className="grid grid-cols-[auto_1fr_auto_1fr] items-center gap-x-3 gap-y-3">
+          {config.questions.map((q, i) => (
+            <Fragment key={i}>
+              <span className="text-xs font-medium text-[var(--color-text-secondary)]">{i + 1}.</span>
+              <span className="text-right font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
+              <div className="flex gap-1">
+                {(["<", "=", ">"] as const).map(sym => {
+                  const sel = answers[i] === sym;
+                  const isCorrect = sym === q.answer;
+                  let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                  if (!validated) {
+                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                  } else {
+                    cls += isCorrect ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : sel ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                  }
+                  return <button key={sym} type="button" disabled={validated} onClick={() => setAnswers(prev => prev.map((a, j) => j === i ? sym : a))} className={cls}>{sym}</button>;
+                })}
+              </div>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
+            </Fragment>
+          ))}
+        </div>
+      </div>
+      {!validated && (
+        <button type="button" onClick={validate} disabled={!allAnswered}
+          className="w-full rounded-xl bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white disabled:opacity-30">
+          Valider
+        </button>
+      )}
+      {validated && (
+        <p className={`text-center text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
+          {score}/5 bonnes réponses
+        </p>
+      )}
+    </div>
+  );
+}
 
 // ── Number line ──────────────────────────────────────────────────────────────
 type NLConfig = { start: number; end: number; step: number; divCount: number; labelEvery: number; target: number };
@@ -92,6 +189,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     if (lesson.submoduleId === "A1-3") {
       steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
     }
+    if (lesson.submoduleId === "A1-4") {
+      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
+      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
+    }
     const pool = lesson.exercisePool;
     const size = lesson.poolSize ?? 5;
     const exercises =
@@ -154,15 +255,12 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "table":
       return (
-        <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-          <table className="min-w-full text-xs">
+        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+          <table className="w-full text-sm">
             <thead>
-              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
+              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
-                  <th
-                    key={i}
-                    className={`px-3 py-2 text-center font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}
-                  >
+                  <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
                     {h}
                   </th>
                 ))}
@@ -170,9 +268,9 @@ function BlockView({ block }: { block: MathRichBlock }) {
             </thead>
             <tbody>
               {block.rows.map((row, ri) => (
-                <tr key={ri} className="border-t border-[var(--color-border-default)]">
+                <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">
+                    <td key={ci} className="px-3 py-2 text-center text-sm text-[var(--color-text-primary)]">
                       {cell}
                     </td>
                   ))}
@@ -181,9 +279,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
             </tbody>
           </table>
           {block.captionFr && (
-            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">
-              {block.captionFr}
-            </p>
+            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
           )}
         </div>
       );
@@ -212,7 +308,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
-                  <span>{item}</span>
+                  <span>{renderBold(item)}</span>
                 </li>
               ))}
             </ul>
@@ -473,6 +569,11 @@ export function GenericModuleContent({
             </p>
           )}
         </div>
+      )}
+
+      {/* Comparison exercise */}
+      {currentStep?.kind === "comparison_ex" && (
+        <ComparisonExercise config={currentStep.config} />
       )}
 
       {/* Eval start screen */}

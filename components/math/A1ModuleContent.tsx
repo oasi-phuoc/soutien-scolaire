@@ -132,20 +132,20 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
     }
     case "table": {
       return (
-        <div className="overflow-x-auto rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
-          <table className="w-full min-w-[260px] border-collapse text-sm">
+        <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+          <table className="w-full text-sm">
             <thead>
-              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
+              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
                 {block.headersFr.map((h, i) => (
-                  <th key={i} className={`border border-[var(--color-border-default)] px-3 py-1.5 text-center text-xs font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
+                  <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {block.rows.map((row, ri) => (
-                <tr key={ri} className={ri % 2 === 0 ? "" : "bg-[var(--color-bg-secondary)]/50"}>
+                <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className="border border-[var(--color-border-default)] px-3 py-1.5 text-center text-[var(--color-text-primary)]">{renderBold(cell)}</td>
+                    <td key={ci} className="px-3 py-2 text-center text-sm text-[var(--color-text-primary)]">{renderBold(cell)}</td>
                   ))}
                 </tr>
               ))}
