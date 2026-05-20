@@ -14,12 +14,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       },
       blocks: [
         { type: "plain", fr: "Sur une **droite numérique**, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 5, 10, 100… depending on the scale." } },
-        { type: "rule", titleFr: "Comparer deux nombres", itemsFr: [
-          "Si les deux nombres n’ont pas le même nombre de chiffres → le plus long est le plus grand.",
-          "S’ils ont le même nombre de chiffres → compare chiffre par chiffre de gauche à droite.",
-          "On utilise les symboles : < (plus petit), > (plus grand), = (égal).",
-        ], pivot: { en: { title: "Comparing two numbers", items: ["Different number of digits → more digits = greater.", "Same number of digits → compare left to right.", "Use: < (less than), > (greater than), = (equal)."] } } },
-        { type: "example", fr: "657 □ 4 832 → 657 a 3 chiffres, 4 832 en a 4 → 657 < 4 832", pivot: { en: "657 □ 4 832 → 657 has 3 digits, 4 832 has 4 → 657 < 4 832" } },
         { type: "heading", fr: "Nombres pairs et impairs" },
         { type: "rule", titleFr: "Pair ou impair ?", itemsFr: [
           "Un nombre est **pair** s’il se termine par 0, 2, 4, 6 ou 8.",
