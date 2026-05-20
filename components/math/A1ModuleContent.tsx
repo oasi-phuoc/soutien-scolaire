@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AppInput } from "@/components/ui/AppInput";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
-import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math-a1";
+import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math/math-a1";
 import type {
   MathExerciseItem,
   MathRichBlock,
@@ -13,12 +13,12 @@ import type {
   ReadAloudCell,
   ReadAloudLegendItem,
   WordPhonemeKind,
-} from "@/lib/curriculum/content/math-a1-types";
+} from "@/lib/curriculum/content/math/math-a1-types";
 import {
   answerMatches,
   pickTheoryFrench,
   pickTheoryPivotTranslation,
-} from "@/lib/curriculum/content/math-a1-types";
+} from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
 import {
   LEVEL_PASSING_GRADES,

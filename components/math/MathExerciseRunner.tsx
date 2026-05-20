@@ -8,7 +8,7 @@ import { PIVOT_LANGS } from "@/lib/pivot-langs";
 import {
   answerMatches,
   type MathExerciseItem,
-} from "@/lib/curriculum/content/math-a1-types";
+} from "@/lib/curriculum/content/math/math-a1-types";
 import { mathExerciseFrenchUi } from "@/lib/i18n/math-ui";
 
 type Props = {

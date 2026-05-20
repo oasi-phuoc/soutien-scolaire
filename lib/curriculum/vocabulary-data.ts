@@ -16,29 +16,29 @@ export type VocabLesson = {
 
 // ── Imports ───────────────────────────────────────────────────────────────────
 
-import { A0_VOC_NATIONALITES } from "./content/francais/a0-voc-nationalites";
-import { A0_SE_PRESENTER } from "./content/francais/a0-se-presenter";
-import { A1_VOC_FAMILLE } from "./content/francais/a1-voc-famille";
-import { A1_VOC_DESCRIPTION } from "./content/francais/a1-voc-description";
-import { A1_VOC_HEURE } from "./content/francais/a1-voc-heure";
-import { A1_VOC_L02 } from "./content/francais/a1-voc-l02";
-import { A1_VOC_L13 } from "./content/francais/a1-voc-l13";
-import { A1_VOC_L16 } from "./content/francais/a1-voc-l16";
-import { A1_VOC_L21 } from "./content/francais/a1-voc-l21";
-import { A1_VOC_L26 } from "./content/francais/a1-voc-l26";
-import { A1_VOC_L12 } from "./content/francais/a1-voc-l12";
-import { A1_VOC_L17 } from "./content/francais/a1-voc-l17";
-import { A1_VOC_L27 } from "./content/francais/a1-voc-l27";
-import { A1_VOC_L18 } from "./content/francais/a1-voc-l18";
-import { VACANCES_PLAGE } from "./content/francais/vacances-plage";
-import { A2_VOC_L01 } from "./content/francais/a2-voc-l01";
-import { A2_VOC_L02 } from "./content/francais/a2-voc-l02";
-import { A2_VOC_L03 } from "./content/francais/a2-voc-l03";
-import { A2_VOC_L04 } from "./content/francais/a2-voc-l04";
-import { A2_VOC_L05 } from "./content/francais/a2-voc-l05";
-import { A2_VOC_L06 } from "./content/francais/a2-voc-l06";
-import { A2_VOC_L07 } from "./content/francais/a2-voc-l07";
-import { A2_VOC_L08 } from "./content/francais/a2-voc-l08";
+import { A0_VOC_NATIONALITES } from "./content/francais/vocabulaire-a0-nationalites";
+import { A0_SE_PRESENTER } from "./content/francais/vocabulaire-a0-presenter";
+import { A1_VOC_FAMILLE } from "./content/francais/vocabulaire-a1-famille";
+import { A1_VOC_DESCRIPTION } from "./content/francais/vocabulaire-a1-description";
+import { A1_VOC_HEURE } from "./content/francais/vocabulaire-a1-heure";
+import { A1_VOC_L02 } from "./content/francais/vocabulaire-a1-l02";
+import { A1_VOC_L13 } from "./content/francais/vocabulaire-a1-l13";
+import { A1_VOC_L16 } from "./content/francais/vocabulaire-a1-l16";
+import { A1_VOC_L21 } from "./content/francais/vocabulaire-a1-l21";
+import { A1_VOC_L26 } from "./content/francais/vocabulaire-a1-l26";
+import { A1_VOC_L12 } from "./content/francais/vocabulaire-a1-l12";
+import { A1_VOC_L17 } from "./content/francais/vocabulaire-a1-l17";
+import { A1_VOC_L27 } from "./content/francais/vocabulaire-a1-l27";
+import { A1_VOC_L18 } from "./content/francais/vocabulaire-a1-l18";
+import { VACANCES_PLAGE } from "./content/francais/vocabulaire-a1-vacances-plage";
+import { A2_VOC_L01 } from "./content/francais/vocabulaire-a2-l01";
+import { A2_VOC_L02 } from "./content/francais/vocabulaire-a2-l02";
+import { A2_VOC_L03 } from "./content/francais/vocabulaire-a2-l03";
+import { A2_VOC_L04 } from "./content/francais/vocabulaire-a2-l04";
+import { A2_VOC_L05 } from "./content/francais/vocabulaire-a2-l05";
+import { A2_VOC_L06 } from "./content/francais/vocabulaire-a2-l06";
+import { A2_VOC_L07 } from "./content/francais/vocabulaire-a2-l07";
+import { A2_VOC_L08 } from "./content/francais/vocabulaire-a2-l08";
 
 // ── Registry ──────────────────────────────────────────────────────────────────
 

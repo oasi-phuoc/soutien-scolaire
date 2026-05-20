@@ -59,27 +59,27 @@ export type ConjLesson = {
 
 // ── Imports ───────────────────────────────────────────────────────────────────
 
-import { A1_CONJ_L00 } from "./content/francais/a1-conj-l00";
-import { A1_CONJ_L01 } from "./content/francais/a1-conj-l01";
-import { A1_CONJ_L07 } from "./content/francais/a1-conj-l07";
-import { A1_CONJ_L08 } from "./content/francais/a1-conj-l08";
-import { A1_CONJ_L09 } from "./content/francais/a1-conj-l09";
-import { A1_CONJ_L12 } from "./content/francais/a1-conj-l12";
-import { A1_CONJ_L15 } from "./content/francais/a1-conj-l15";
-import { A1_CONJ_L20 } from "./content/francais/a1-conj-l20";
-import { A1_CONJ_L27 } from "./content/francais/a1-conj-l27";
-import { A1_CONJ_L28 } from "./content/francais/a1-conj-l28";
-import { A1_CONJ_L29 } from "./content/francais/a1-conj-l29";
-import { A1_CONJ_L30 } from "./content/francais/a1-conj-l30";
-import { NEGATION_PASSE_COMPOSE } from "./content/francais/negation-passe-compose";
-import { A2_CONJ_L01 } from "./content/francais/a2-conj-l01";
-import { A2_CONJ_L02 } from "./content/francais/a2-conj-l02";
-import { A2_CONJ_L03 } from "./content/francais/a2-conj-l03";
-import { A2_CONJ_L04 } from "./content/francais/a2-conj-l04";
-import { A2_CONJ_L05 } from "./content/francais/a2-conj-l05";
-import { A2_CONJ_L06 } from "./content/francais/a2-conj-l06";
-import { A2_CONJ_L07 } from "./content/francais/a2-conj-l07";
-import { A2_CONJ_L08 } from "./content/francais/a2-conj-l08";
+import { A1_CONJ_L00 } from "./content/francais/conjugaison-a1-l00";
+import { A1_CONJ_L01 } from "./content/francais/conjugaison-a1-l01";
+import { A1_CONJ_L07 } from "./content/francais/conjugaison-a1-l07";
+import { A1_CONJ_L08 } from "./content/francais/conjugaison-a1-l08";
+import { A1_CONJ_L09 } from "./content/francais/conjugaison-a1-l09";
+import { A1_CONJ_L12 } from "./content/francais/conjugaison-a1-l12";
+import { A1_CONJ_L15 } from "./content/francais/conjugaison-a1-l15";
+import { A1_CONJ_L20 } from "./content/francais/conjugaison-a1-l20";
+import { A1_CONJ_L27 } from "./content/francais/conjugaison-a1-l27";
+import { A1_CONJ_L28 } from "./content/francais/conjugaison-a1-l28";
+import { A1_CONJ_L29 } from "./content/francais/conjugaison-a1-l29";
+import { A1_CONJ_L30 } from "./content/francais/conjugaison-a1-l30";
+import { NEGATION_PASSE_COMPOSE } from "./content/francais/conjugaison-a1-negation-passe-compose";
+import { A2_CONJ_L01 } from "./content/francais/conjugaison-a2-l01";
+import { A2_CONJ_L02 } from "./content/francais/conjugaison-a2-l02";
+import { A2_CONJ_L03 } from "./content/francais/conjugaison-a2-l03";
+import { A2_CONJ_L04 } from "./content/francais/conjugaison-a2-l04";
+import { A2_CONJ_L05 } from "./content/francais/conjugaison-a2-l05";
+import { A2_CONJ_L06 } from "./content/francais/conjugaison-a2-l06";
+import { A2_CONJ_L07 } from "./content/francais/conjugaison-a2-l07";
+import { A2_CONJ_L08 } from "./content/francais/conjugaison-a2-l08";
 
 // ── Registry ──────────────────────────────────────────────────────────────────
 
