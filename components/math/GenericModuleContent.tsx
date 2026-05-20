@@ -236,9 +236,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "highlight":
       return (
-        <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/8 px-4 py-3 text-sm font-semibold text-[var(--color-text-primary)]">
-          {block.fr}
-        </div>
+        <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</p>
       );
     case "rule":
       return (
@@ -306,9 +304,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
-                <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
-                  <span>{renderBold(item)}</span>
+                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {renderBold(item)}
                 </li>
               ))}
             </ul>

@@ -64,6 +64,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         ] },
         { type: "plain", fr: "" },
         { type: "plain", fr: "" },
+        { type: "plain", fr: "" },
         { type: "heading", fr: "Comment lire la valeur d’un chiffre", black: true },
         { type: "highlight", fr: "Repérer sa position", pivot: { en: "Find its position" } },
         { type: "section", labelFr: "", itemsFr: ["Il faut observer la position du chiffre dans le nombre.", "U = ×1", "D = ×10", "C = ×100", "M = ×1000"] },
