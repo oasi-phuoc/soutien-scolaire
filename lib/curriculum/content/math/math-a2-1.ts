@@ -5,15 +5,15 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A2.1",
     theory: {
       title: {
-        fr: "Addition (avec et sans retenue)",
-        en: "Addition (with and without carrying)",
-        ar: "الجمع (مع وبدون احتياط)",
-        fa: "جمع (با و بدون نقلی)",
-        ti: "ድምር (ምስ ዘይምስ ምስጓዝ)",
-        uk: "Додавання (з переносом і без)",
+        fr: "Addition",
+        en: "Addition",
+        ar: "الجمع",
+        fa: "جمع",
+        ti: "ድምር",
+        uk: "Додавання",
       },
       blocks: [
-        { type: "plain", fr: "L'addition permet de **réunir** plusieurs quantités. Le signe est « **+** » (plus). Les nombres à additionner sont les **termes**. Le résultat est la **somme**.", pivot: { en: "Addition combines quantities. Sign: +. Numbers: terms. Result: sum.", ar: "الجمع يجمع عدة كميات. الرمز « + ». الأعداد تسمى الحدود. الناتج هو المجموع.", fa: "جمع چند مقدار را با هم ترکیب می‌کند. علامت « + ». اعداد: جملات. نتیجه: مجموع.", uk: "Додавання об'єднує кілька величин. Знак « + ». Числа: доданки. Результат: сума." } },
+        { type: "plain", fr: "L'addition permet de réunir plusieurs quantités ensemble. Le signe est « + » (plus). Les nombres à additionner sont les termes. Le résultat est la somme.", pivot: { en: "Addition combines quantities. Sign: +. Numbers: terms. Result: sum.", ar: "الجمع يجمع عدة كميات. الرمز « + ». الأعداد تسمى الحدود. الناتج هو المجموع.", fa: "جمع چند مقدار را با هم ترکیب می‌کند. علامت « + ». اعداد: جملات. نتیجه: مجموع.", uk: "Додавання об'єднує кілька величин. Знак « + ». Числа: доданки. Результат: сума." } },
         { type: "rule", titleFr: "Propriétés de l'addition", itemsFr: [
           "**Commutativité** : l'ordre des termes ne change pas la somme. Ex. : 57 + 49 = 49 + 57 = 106.",
           "**Associativité** : on peut additionner plus de deux termes dans l'ordre voulu. Ex. : 15 + 37 + 22 = 74.",
