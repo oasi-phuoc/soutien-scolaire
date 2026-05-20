@@ -13,11 +13,12 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
         uk: "Числові послідовності",
       },
       blocks: [
-        { type: "plain", fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre. Pour comprendre une suite, on regarde ce qui change entre les nombres." },
+        { type: "plain", fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre." },
+        { type: "plain", fr: "Pour comprendre une suite, on regarde ce qui change entre les nombres." },
         { type: "section", labelFr: "", itemsFr: [
           "5 ; 8 ; 11 ; 14",
           "On ajoute toujours 3.",
-          "La règle pour trouver le nombre suivant est : nombre + 3",
+          "• La règle pour trouver le nombre suivant est : nombre + 3",
         ] },
         { type: "highlight", fr: "Suite croissante" },
         { type: "section", labelFr: "", itemsFr: [

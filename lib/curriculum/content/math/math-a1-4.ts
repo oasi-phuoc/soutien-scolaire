@@ -14,14 +14,6 @@ export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
       },
       blocks: [
         { type: "plain", fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.", pivot: { en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.", ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.", fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.", uk: "Порівняти числа — визначити, яке більше, менше або вони рівні." } },
-        { type: "highlight", fr: "Règle de comparaison", pivot: { en: "Comparison rule" } },
-        { type: "section", labelFr: "", itemsFr: [
-          "Nombres avec un nombre différent de chiffres",
-          "Le plus long est le plus grand.",
-          "Même nombre de chiffres",
-          "Compare chiffre par chiffre depuis la **gauche**.",
-          "Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
-        ] },
         { type: "heading", fr: "Les symboles de comparaison", black: true },
         { type: "plain", fr: "La partie de la flèche > qui est ouverte est toujours dirigée vers le plus grand nombre.", pivot: { en: "The open side of > always points to the greater number." } },
         { type: "table", headersFr: ["Comparaison", "Symbole", "Exemple"], accentHeader: true, rows: [
@@ -29,14 +21,22 @@ export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
           ["plus grand que", ">", "902 > 890"],
           ["égal à",         "=", "789 = 789"],
         ] },
+        { type: "highlight", fr: "Règle de comparaison", pivot: { en: "Comparison rule" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Nombres avec un nombre différent de chiffres",
+          "• Le plus long est le plus grand.",
+          "Même nombre de chiffres",
+          "• Compare chiffre par chiffre depuis la **gauche**.",
+          "• Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
+        ] },
         { type: "highlight", fr: "Exemple" },
         { type: "section", labelFr: "", itemsFr: [
-          "3 456 > 3 421",
-          "même nombre de chiffres",
-          "chiffres des milliers (3=3)",
-          "centaines (4=4)",
-          "dizaines : 5 > 2",
-          "3 456 > 3 421",
+          "On a deux chiffres 3 456 et 3 421",
+          "• même nombre de chiffres",
+          "• chiffres des milliers (3=3)",
+          "• centaines (4=4)",
+          "• dizaines : 5 > 2",
+          "• 3 456 > 3 421",
         ] },
       ],
       paragraphs: {
