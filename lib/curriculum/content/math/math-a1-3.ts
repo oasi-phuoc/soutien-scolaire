@@ -14,12 +14,12 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       },
       blocks: [
         { type: "plain", fr: "Sur une **droite numérique**, les nombres sont placés dans l’ordre croissant de gauche à droite. L’espacement entre deux nombres consécutifs peut être 5, 10, 100… selon l’échelle.", pivot: { en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 5, 10, 100… depending on the scale." } },
-        { type: "heading", fr: "Nombres pairs et impairs" },
-        { type: "rule", titleFr: "Pair ou impair ?", itemsFr: [
-          "Un nombre est **pair** s’il se termine par 0, 2, 4, 6 ou 8.",
-          "Un nombre est **impair** s’il se termine par 1, 3, 5, 7 ou 9.",
-          "Exemples pairs : 4, 12, 38, 100 — Exemples impairs : 3, 17, 45, 99.",
-        ], pivot: { en: { title: "Even or odd?", items: ["A number is even if it ends in 0, 2, 4, 6 or 8.", "A number is odd if it ends in 1, 3, 5, 7 or 9.", "Even: 4, 12, 38 — Odd: 3, 17, 45."] } } },
+        { type: "plain", fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.", pivot: { en: "To know if a number is even or odd, look only at the last digit." } },
+        { type: "heading", fr: "Nombres pairs et impairs", black: true },
+        { type: "highlight", fr: "**Pair** : se termine par 0, 2, 4, 6 ou 8 — ex. : 4, 12, 38, 100.", pivot: { en: "**Even**: ends in 0, 2, 4, 6 or 8 — e.g.: 4, 12, 38, 100." } },
+        { type: "plain", fr: "Un nombre pair peut être partagé en 2 parts égales.", pivot: { en: "An even number can be split into 2 equal parts." } },
+        { type: "highlight", fr: "**Impair** : se termine par 1, 3, 5, 7 ou 9 — ex. : 3, 17, 45, 99.", pivot: { en: "**Odd**: ends in 1, 3, 5, 7 or 9 — e.g.: 3, 17, 45, 99." } },
+        { type: "plain", fr: "Un nombre impair ne peut pas être partagé en 2 parts exactement égales.", pivot: { en: "An odd number cannot be split into exactly 2 equal parts." } },
       ],
       paragraphs: {
         fr: [
