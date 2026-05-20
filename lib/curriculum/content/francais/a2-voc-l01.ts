@@ -1,0 +1,125 @@
+import type { VocabLesson } from "../../vocabulary-data";
+
+export const A2_VOC_L01: VocabLesson = {
+  slug: "a2-voc-l01",
+  code: "V.13",
+  level: "A2",
+  title: "Les voyages et les transports",
+  theory: [
+    { type: "heading", text: "Vocabulaire des voyages" },
+    {
+      type: "vocab",
+      title: "À la gare et à l'aéroport",
+      items: [
+        "une gare (train station)",
+        "un aéroport (airport)",
+        "un billet (ticket)",
+        "un vol (flight)",
+        "un trajet (journey)",
+        "une durée (duration)",
+        "un itinéraire (itinerary)",
+        "une escale (stopover)",
+        "un quai (platform)",
+        "une salle d'attente (waiting room)",
+        "un contrôle de sécurité (security check)",
+        "l'embarquement (boarding)",
+      ],
+    },
+    {
+      type: "heading", text: "Verbes de déplacement",
+    },
+    {
+      type: "rule",
+      text: "Verbes pour exprimer le voyage et le déplacement.",
+      examples: [
+        { correct: "Je pars pour Rome vendredi." },
+        { correct: "Elle arrive à Paris à 18h." },
+        { correct: "Nous retournons en France la semaine prochaine." },
+        { correct: "Il revient de vacances demain." },
+        { correct: "Le trajet met 2 heures." },
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Verbes essentiels",
+      items: [
+        "partir pour / de (to leave for/from)",
+        "arriver à / de (to arrive at/from)",
+        "retourner (to go back)",
+        "revenir (to come back)",
+        "voyager (to travel)",
+        "prendre (le train, l'avion)",
+        "mettre (2 heures) (to take 2 hours)",
+        "réserver (to book)",
+        "annuler (to cancel)",
+        "valider (son billet) (to validate)",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Types de trajet",
+      items: [
+        "un vol direct (direct flight)",
+        "un vol avec escale (connecting flight)",
+        "un aller simple (one-way ticket)",
+        "un aller-retour (return ticket)",
+        "un trajet rapide / long",
+      ],
+    },
+    {
+      type: "vocab",
+      title: "Lieux de vacances",
+      items: [
+        "la plage (beach)",
+        "la mer (sea)",
+        "le port (port / harbour)",
+        "la montagne (mountain)",
+        "la campagne (countryside)",
+        "une île (island)",
+        "une station de ski (ski resort)",
+      ],
+    },
+    {
+      type: "note",
+      text: "En France, le TGV (Train à Grande Vitesse) relie les grandes villes à grande vitesse. Paris–Lyon = environ 2h.",
+    },
+  ],
+  exercises: [
+    {
+      type: "match",
+      title: "Associer le mot et sa définition",
+      instruction: "Reliez chaque mot de voyage à sa définition.",
+      pairs: [
+        { left: "un billet", right: "titre de transport" },
+        { left: "une escale", right: "arrêt intermédiaire dans un vol" },
+        { left: "un aller-retour", right: "billet pour partir et revenir" },
+        { left: "embarquement", right: "monter dans l'avion" },
+        { left: "un quai", right: "là où on attend le train" },
+        { left: "un itinéraire", right: "le plan du trajet" },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Compléter les phrases",
+      instruction: "Complétez chaque phrase avec le bon mot ou verbe.",
+      items: [
+        { sentence: "Le vol ___ (to take) 3 heures de Paris à Barcelone.", hint: "met", answer: "met" },
+        { sentence: "Je voudrais ___ (to book) deux billets pour Marseille.", hint: "réserver", answer: "réserver" },
+        { sentence: "Nous ___ (to leave for) Paris vendredi matin.", hint: "partons pour", answer: "partons pour" },
+        { sentence: "L'avion ___ (to arrive) à 15h30 à l'aéroport.", hint: "arrive", answer: "arrive" },
+        { sentence: "Je préfère un vol ___ sans escale.", hint: "direct", answer: "direct" },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Choisir le bon mot",
+      instruction: "Choisissez le mot correct pour compléter la phrase.",
+      items: [
+        { sentence: "Pour aller de Paris à Lyon, je prends le ___.", choices: ["train", "billet", "quai", "vol"], correctIdx: 0 },
+        { sentence: "Nous passons nos vacances à la ___, on aime nager.", choices: ["mer", "montagne", "campagne", "ville"], correctIdx: 0 },
+        { sentence: "Je veux un ___ Paris–Rome, je reviens dans une semaine.", choices: ["aller-retour", "aller simple", "vol direct", "billet d'escale"], correctIdx: 0 },
+        { sentence: "L'avion ___ de Genève à 8h du matin.", choices: ["part", "arrive", "revient", "réserve"], correctIdx: 0 },
+      ],
+    },
+  ],
+};

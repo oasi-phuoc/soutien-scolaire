@@ -1,0 +1,115 @@
+import type { ConjLesson } from "../../conjugation-data";
+
+export const A2_CONJ_L03: ConjLesson = {
+  slug: "a2-conj-l03",
+  code: "G.31",
+  level: "A2",
+  title: "Les verbes irréguliers courants",
+  theory: [
+    { type: "heading", text: "Verbes irréguliers courants au présent" },
+    {
+      type: "table",
+      tables: [
+        {
+          verb: "faire",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "fais" },
+            { pronoun: "tu", form: "fais" },
+            { pronoun: "il / elle / on", form: "fait" },
+            { pronoun: "nous", form: "faisons" },
+            { pronoun: "vous", form: "faites" },
+            { pronoun: "ils / elles", form: "font" },
+          ],
+        },
+        {
+          verb: "prendre",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "prends" },
+            { pronoun: "tu", form: "prends" },
+            { pronoun: "il / elle / on", form: "prend" },
+            { pronoun: "nous", form: "prenons" },
+            { pronoun: "vous", form: "prenez" },
+            { pronoun: "ils / elles", form: "prennent" },
+          ],
+        },
+        {
+          verb: "savoir",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "sais" },
+            { pronoun: "tu", form: "sais" },
+            { pronoun: "il / elle / on", form: "sait" },
+            { pronoun: "nous", form: "savons" },
+            { pronoun: "vous", form: "savez" },
+            { pronoun: "ils / elles", form: "savent" },
+          ],
+        },
+        {
+          verb: "connaître",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "connais" },
+            { pronoun: "tu", form: "connais" },
+            { pronoun: "il / elle / on", form: "connaît" },
+            { pronoun: "nous", form: "connaissons" },
+            { pronoun: "vous", form: "connaissez" },
+            { pronoun: "ils / elles", form: "connaissent" },
+          ],
+        },
+        {
+          verb: "voir",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "vois" },
+            { pronoun: "tu", form: "vois" },
+            { pronoun: "il / elle / on", form: "voit" },
+            { pronoun: "nous", form: "voyons" },
+            { pronoun: "vous", form: "voyez" },
+            { pronoun: "ils / elles", form: "voient" },
+          ],
+        },
+        {
+          verb: "boire",
+          accentForms: true,
+          rows: [
+            { pronoun: "je", form: "bois" },
+            { pronoun: "tu", form: "bois" },
+            { pronoun: "il / elle / on", form: "boit" },
+            { pronoun: "nous", form: "buvons" },
+            { pronoun: "vous", form: "buvez" },
+            { pronoun: "ils / elles", form: "boivent" },
+          ],
+        },
+      ],
+    },
+    {
+      type: "highlight",
+      label: "Familles de verbes",
+      items: [
+        "{a}Famille prendre{/a} : comprendre, apprendre, surprendre → même conjugaison.",
+        "{a}Famille connaître{/a} : paraître, apparaître, disparaître → même conjugaison.",
+        "{a}Famille voir{/a} : prévoir, revoir → même conjugaison.",
+      ],
+    },
+    {
+      type: "grid",
+      headers: ["Verbe", "1re pers. sing.", "Participe passé"],
+      boldFirstCol: true,
+      rows: [
+        ["faire", "je fais", "fait"],
+        ["prendre", "je prends", "pris"],
+        ["savoir", "je sais", "su"],
+        ["connaître", "je connais", "connu"],
+        ["voir", "je vois", "vu"],
+        ["boire", "je bois", "bu"],
+        ["lire", "je lis", "lu"],
+        ["écrire", "j'écris", "écrit"],
+        ["mettre", "je mets", "mis"],
+        ["croire", "je crois", "cru"],
+      ],
+    },
+  ],
+  exercises: [],
+};

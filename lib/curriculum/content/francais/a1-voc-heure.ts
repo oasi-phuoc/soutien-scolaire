@@ -1,0 +1,90 @@
+import type { VocabLesson } from "../../vocabulary-data";
+
+export const A1_VOC_HEURE: VocabLesson = {
+  slug: "a1-voc-heure",
+  code: "V.4",
+  level: "A1",
+  title: "L'heure",
+  theory: [
+    { type: "heading", text: "L'heure" },
+    {
+      type: "grid",
+      headers: ["Heure officielle", "Heure informelle", "Expression clé"],
+      boldFirstCol: true,
+      rows: [
+        ["8h00",  "huit heures (du matin)", "pile"],
+        ["8h15",  "huit heures et quart",   "et quart"],
+        ["8h30",  "huit heures et demie",   "et demie"],
+        ["8h45",  "neuf heures moins le quart", "moins le quart"],
+        ["12h00", "midi",   "–"],
+        ["0h00",  "minuit", "–"],
+      ],
+    },
+    {
+      type: "clock_display",
+      clocks: [
+        { h: 8, m: 0,  label: "8h00 — pile" },
+        { h: 8, m: 15, label: "8h15 — et quart" },
+        { h: 8, m: 30, label: "8h30 — et demie" },
+        { h: 8, m: 45, label: "8h45 — moins le quart" },
+      ],
+      cols: 4,
+    },
+    {
+      type: "highlight",
+      label: "Poser et répondre à la question",
+      items: [
+        "Quelle heure est-il ? / Il est quelle heure ?",
+        "Il est {a}huit heures{/a} pile.",
+        "Il est {a}midi{/a} / {a}minuit{/a}.",
+        "Il est {a}huit heures et quart{/a}.",
+        "Il est {a}huit heures et demie{/a}.",
+        "Il est {a}neuf heures moins le quart{/a}.",
+      ],
+    },
+    {
+      type: "note",
+      text: "Heure officielle (formelle) : 14h30 = quatorze heures trente. Heure informelle : 14h30 = deux heures et demie (de l'après-midi).",
+    },
+  ],
+  exercises: [
+    {
+      type: "fill",
+      title: "Exercice 1",
+      instruction: "Conjuguez les verbes commencer et terminer au présent.",
+      items: [
+        { sentence: "Le cours ___ (commencer) à neuf heures.", hint: "commencer", answer: "commence" },
+        { sentence: "Nous ___ (terminer) à midi.", hint: "terminer", answer: "terminons" },
+        { sentence: "Elle ___ (commencer) le travail à huit heures et demie.", hint: "commencer", answer: "commence" },
+        { sentence: "Vous ___ (terminer) à quelle heure ?", hint: "terminer", answer: "terminez" },
+        { sentence: "Les élèves ___ (commencer) à travailler.", hint: "commencer", answer: "commencent" },
+        { sentence: "Je ___ (terminer) le repas à treize heures.", hint: "terminer", answer: "termine" },
+        { sentence: "Tu ___ (commencer) à dix heures pile.", hint: "commencer", answer: "commences" },
+        { sentence: "Ils ___ (terminer) la réunion à dix-sept heures.", hint: "terminer", answer: "terminent" },
+      ],
+    },
+    {
+      type: "clock_read",
+      title: "Exercice 2",
+      instruction: "Lisez les heures et écrivez-les en toutes lettres.",
+      clocks: [
+        { h: 14, m: 30, label: "14h30", answer: "quatorze heures trente" },
+        { h: 18, m: 20, label: "18h20", answer: "dix-huit heures vingt" },
+        { h: 2,  m: 40, label: "2h40",  answer: "trois heures moins vingt" },
+        { h: 9,  m: 25, label: "9h25",  answer: "neuf heures vingt-cinq" },
+        { h: 0,  m: 30, label: "0h30",  answer: "minuit et demi" },
+        { h: 15, m: 10, label: "15h10", answer: "quinze heures dix" },
+        { h: 8,  m: 37, label: "8h37",  answer: "huit heures trente-sept" },
+        { h: 11, m: 0,  label: "11h00", answer: "onze heures pile" },
+        { h: 20, m: 15, label: "20h15", answer: "vingt heures et quart" },
+        { h: 12, m: 55, label: "12h55", answer: "treize heures moins cinq" },
+        { h: 22, m: 20, label: "22h20", answer: "vingt-deux heures vingt" },
+        { h: 7,  m: 15, label: "7h15",  answer: "sept heures et quart" },
+        { h: 16, m: 15, label: "16h15", answer: "seize heures quinze" },
+        { h: 19, m: 30, label: "19h30", answer: "dix-neuf heures trente" },
+        { h: 0,  m: 50, label: "0h50",  answer: "une heure moins dix" },
+        { h: 12, m: 0,  label: "12h00", answer: "midi" },
+      ],
+    },
+  ],
+};

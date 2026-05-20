@@ -1,0 +1,135 @@
+import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
+
+export const A1_GR_L02: GrammarLesson = {
+  slug: "a1-gr-l02",
+  code: "G.7",
+  level: "A1",
+  title: "La négation",
+  theory: [
+    {
+      type: "heading",
+      text: "La forme négative",
+      trans: { en: "The negative form", ar: "الصيغة المنفية", fa: "شکل منفی", ti: "ቅጺ ምኽሓድ", uk: "Заперечна форма" },
+    },
+    {
+      type: "plain_list",
+      items: [
+        "La structure de la négation utilise {a}ne{/a} + {a}pas{/a}.",
+        "Sujet + {a}ne{/a} + verbe + {a}pas{/a}",
+      ],
+      transItems: {
+        en: ["The negation structure uses {a}ne{/a} + {a}pas{/a}.", "Subject + {a}ne{/a} + verb + {a}pas{/a}"],
+        ar: ["بنية النفي تستخدم {a}ne{/a} + {a}pas{/a}.", "الفاعل + {a}ne{/a} + الفعل + {a}pas{/a}"],
+        fa: ["ساختار نفی از {a}ne{/a} + {a}pas{/a} استفاده می‌کند.", "فاعل + {a}ne{/a} + فعل + {a}pas{/a}"],
+        ti: ["ዝምድና ምኽሓድ {a}ne{/a} + {a}pas{/a} ይጥቀም.", "ሓካይ + {a}ne{/a} + ግሲ + {a}pas{/a}"],
+        uk: ["Структура заперечення використовує {a}ne{/a} + {a}pas{/a}.", "Підмет + {a}ne{/a} + дієслово + {a}pas{/a}"],
+      },
+    },
+    {
+      type: "heading",
+      text: "Négation du verbe ÊTRE",
+      sub: true,
+      trans: { en: "Negation of ÊTRE", ar: "نفي فعل ÊTRE", fa: "نفی فعل ÊTRE", ti: "ምኽሓድ ግሲ ÊTRE", uk: "Заперечення ÊTRE" },
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["Je suis content(e).", "Je {a}ne{/a} suis {a}pas{/a} content(e)."],
+        ["Tu es à Genève.", "Tu {a}n'{/a}es {a}pas{/a} à Genève."],
+        ["Il/Elle est médecin.", "Il/Elle {a}n'{/a}est {a}pas{/a} médecin."],
+        ["Nous sommes prêts.", "Nous {a}ne{/a} sommes {a}pas{/a} prêts."],
+        ["Vous êtes fatigués.", "Vous {a}n'{/a}êtes {a}pas{/a} fatigués."],
+        ["Ils/Elles sont là.", "Ils/Elles {a}ne{/a} sont {a}pas{/a} là."],
+      ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإيجاب", "النفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣወንታ", "ምኽሓድ"],
+        uk: ["Стверджувальна", "Заперечна"],
+      },
+      transRows: {
+        en: [["I am happy.", "I am not happy."], ["You are in Geneva.", "You are not in Geneva."], ["He/She is a doctor.", "He/She is not a doctor."], ["We are ready.", "We are not ready."], ["You are tired.", "You are not tired."], ["They are there.", "They are not there."]],
+        ar: [["أنا سعيد(ة).", "لست سعيداً/سعيدة."], ["أنت في جنيف.", "لست في جنيف."], ["هو/هي طبيب.", "هو/هي ليس طبيباً."], ["نحن مستعدون.", "لسنا مستعدين."], ["أنتم متعبون.", "لستم متعبين."], ["هم/هن هناك.", "هم/هن ليسوا هناك."]],
+        fa: [["من خوشحالم.", "من خوشحال نیستم."], ["تو در ژنو هستی.", "تو در ژنو نیستی."], ["او دکتر است.", "او دکتر نیست."], ["ما آماده‌ایم.", "ما آماده نیستیم."], ["شما خسته‌اید.", "شما خسته نیستید."], ["آن‌ها آنجا هستند.", "آن‌ها آنجا نیستند."]],
+        ti: [["ሕጉስ/ሕጉስቲ እየ.", "ሕጉስ/ሕጉስቲ ኣይኮንኩን."], ["ኣብ ጀኔቫ ኢኻ.", "ኣብ ጀኔቫ ኣይኮንካን."], ["ሓኪም እዩ/ኣያ.", "ሓኪም ኣይኮነን."], ["ቅሩባት ኢና.", "ቅሩባት ኣይኮናን."], ["ሕምሙቓት ኢኹም.", "ሕምሙቓት ኣይኮናን."], ["ኣለዉ.", "ኣየለዉን."]],
+        uk: [["Я щасливий/щаслива.", "Я не щасливий/щаслива."], ["Ти у Женеві.", "Ти не у Женеві."], ["Він/Вона лікар.", "Він/Вона не лікар."], ["Ми готові.", "Ми не готові."], ["Ви втомлені.", "Ви не втомлені."], ["Вони там.", "Вони не там."]],
+      },
+    },
+    {
+      type: "heading",
+      text: "Négation du verbe AVOIR",
+      sub: true,
+      trans: { en: "Negation of AVOIR", ar: "نفي فعل AVOIR", fa: "نفی فعل AVOIR", ti: "ምኽሓድ ግሲ AVOIR", uk: "Заперечення AVOIR" },
+    },
+    {
+      type: "grid",
+      headers: ["Affirmatif", "Négatif"],
+      rows: [
+        ["J'ai faim.", "Je {a}n'{/a}ai {a}pas{/a} faim."],
+        ["Tu as un vélo.", "Tu {a}n'{/a}as {a}pas{/a} de vélo."],
+        ["Il/Elle a 25 ans.", "Il/Elle {a}n'{/a}a {a}pas{/a} d'enfant."],
+        ["Nous avons soif.", "Nous {a}n'{/a}avons {a}pas{/a} soif."],
+        ["Vous avez raison.", "Vous {a}n'{/a}avez {a}pas{/a} raison."],
+        ["Ils/Elles ont peur.", "Ils/Elles {a}n'{/a}ont {a}pas{/a} peur."],
+      ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["الإيجاب", "النفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣወንታ", "ምኽሓድ"],
+        uk: ["Стверджувальна", "Заперечна"],
+      },
+      transRows: {
+        en: [["I am hungry.", "I am not hungry."], ["You have a bike.", "You don't have a bike."], ["He/She is 25.", "He/She doesn't have a child."], ["We are thirsty.", "We are not thirsty."], ["You are right.", "You are not right."], ["They are afraid.", "They are not afraid."]],
+        ar: [["أنا جائع(ة).", "لست جائعاً."], ["عندك دراجة.", "ليس عندك دراجة."], ["عمره/عمرها 25 سنة.", "ليس لديه/لديها طفل."], ["نحن عطشانون.", "لسنا عطشانين."], ["أنتم على حق.", "لستم على حق."], ["هم/هن خائفون.", "هم/هن ليسوا خائفين."]],
+        fa: [["من گرسنه‌ام.", "من گرسنه نیستم."], ["تو دوچرخه داری.", "تو دوچرخه نداری."], ["او ۲۵ سال دارد.", "او بچه ندارد."], ["ما تشنه‌ایم.", "ما تشنه نیستیم."], ["شما درست می‌گویید.", "شما درست نمی‌گویید."], ["آن‌ها ترسیده‌اند.", "آن‌ها نمی‌ترسند."]],
+        ti: [["ጠሚየ.", "ጠሚየ ኣይኮነን."], ["ብሽክለታ ኣሎካ.", "ብሽክለታ የብልካን."], ["25 ዓመት ኣሎዎ/ኣሎዋ.", "ቆልዓ የብሉን."], ["ጸሚና ኣሎ.", "ጸሚና ኣይኮነን."], ["ልክዕ ኢኹም.", "ልክዕ ኣይኮናን."], ["ፈሪሖም ኣለዉ.", "ፈሪሖም ኣይኮነን."]],
+        uk: [["Я голодний/голодна.", "Я не голодний/голодна."], ["У тебе є велосипед.", "У тебе немає велосипеда."], ["Йому/їй 25 років.", "У нього/неї немає дитини."], ["Ми хочемо пити.", "Ми не хочемо пити."], ["Ви праві.", "Ви не праві."], ["Вони бояться.", "Вони не бояться."]],
+      },
+    },
+    { type: "heading", text: "La négation des verbes en -er", sub: true, trans: { en: "Negation of -er verbs", ar: "نفي أفعال -er", fa: "نفی افعال -er", ti: "ምኽሓድ ግሲያት -er", uk: "Заперечення дієслів на -er" } },
+    {
+      type: "plain_list",
+      items: ["Pour nier, on encadre le verbe avec {a}ne{/a} … {a}pas{/a}."],
+      transItems: {
+        en: ["To negate, wrap the verb with {a}ne{/a} … {a}pas{/a}."],
+        ar: ["للنفي، ضع الفعل بين {a}ne{/a} … {a}pas{/a}."],
+        fa: ["برای نفی، فعل را بین {a}ne{/a} … {a}pas{/a} قرار دهید."],
+        ti: ["ንምኽሓድ ግሲ ብ{a}ne{/a} … {a}pas{/a} ወሰን."],
+        uk: ["Для заперечення дієслово обрамляється {a}ne{/a} … {a}pas{/a}."],
+      },
+    },
+    {
+      type: "verb_toggle",
+      negation: true,
+      verbs: [
+        { infinitive: "parler", radical: "parl", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "aimer", radical: "aim", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "écouter", radical: "écout", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+        { infinitive: "habiter", radical: "habit", rows: [{ pronoun: "je", ending: "e" }, { pronoun: "tu", ending: "es" }, { pronoun: "il / elle / on", ending: "e" }, { pronoun: "nous", ending: "ons" }, { pronoun: "vous", ending: "ez" }, { pronoun: "ils / elles", ending: "ent" }] },
+      ] as VerbToggleVerb[],
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      transLabel: { en: "Note", ar: "ملاحظة", fa: "توجه", ti: "ኣስተውዕል", uk: "Увага" },
+      inlineArrows: true,
+      noBulletItems: [0],
+      items: [
+        "Quand le verbe commence par une voyelle ou un h, {a}ne{/a} devient {a}n'{/a}.",
+        "il n{s}e{/s} est pas là → il n'est pas là",
+        "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans",
+      ],
+      transItems: {
+        en: ["When the verb begins with a vowel or h, {a}ne{/a} becomes {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        ar: ["عندما يبدأ الفعل بحرف علة أو h، يصبح {a}ne{/a} {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        fa: ["وقتی فعل با یک حرف صدادار یا h شروع می‌شود، {a}ne{/a} به {a}n'{/a} تبدیل می‌شود.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        ti: ["ግሲ ብሞዓዝ ወይ h ምስ ዝጅምር፣ {a}ne{/a} {a}n'{/a} ይኸውን.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+        uk: ["Коли дієслово починається з голосної або h, {a}ne{/a} стає {a}n'{/a}.", "il n{s}e{/s} est pas là → il n'est pas là", "je n{s}e{/s} ai pas 5 ans → je n'ai pas 5 ans"],
+      },
+    },
+  ],
+  exercises: [],
+};

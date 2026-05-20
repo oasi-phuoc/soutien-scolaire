@@ -1,0 +1,64 @@
+import type { MathSubmoduleLesson } from "./math-a1-types";
+
+export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
+    submoduleId: "A1-4",
+    submoduleCode: "A1.4",
+    theory: {
+      title: {
+        fr: "Comparer les nombres",
+        en: "Comparing numbers",
+        ar: "مقارنة الأعداد",
+        fa: "مقایسه اعداد",
+        ti: "ምውድዳር ቁጽርታት",
+        uk: "Порівняння чисел",
+      },
+      blocks: [
+        { type: "plain", fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.", pivot: { en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.", ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.", fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.", uk: "Порівняти числа — визначити, яке більше, менше або вони рівні." } },
+        { type: "rule", titleFr: "Règle de comparaison", itemsFr: [
+          "Nombres avec un nombre différent de chiffres → le plus long est le plus grand.",
+          "Même nombre de chiffres → compare chiffre par chiffre depuis la **gauche**.",
+          "Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
+        ], pivot: { en: { title: "Comparison rule", items: ["Different digit counts → more digits = greater.", "Same digit count → compare left to right.", "First different digit: the larger digit wins."] } } },
+        { type: "table", headersFr: ["Comparaison", "Symbole", "Exemple"], rows: [
+          ["plus petit que", "<", "456 < 462"],
+          ["plus grand que", ">", "902 > 890"],
+          ["égal à",         "=", "789 = 789"],
+        ] },
+        { type: "example", fr: "3 456 □ 3 421 → même nbre de chiffres → chiffres des milliers (3=3) → centaines (4=4) → dizaines : 5 > 2 → 3 456 > 3 421", pivot: { en: "3 456 □ 3 421 → same digits → thousands equal → hundreds equal → tens: 5 > 2 → 3 456 > 3 421" } },
+      ],
+      paragraphs: {
+        fr: [
+          "Pour comparer deux nombres, on compare chiffre par chiffre en commençant par les milliers.",
+          "Si les chiffres des milliers sont égaux, on compare les centaines, puis les dizaines, puis les unités.",
+          "On utilise < (plus petit que), > (plus grand que) ou = (égal à).",
+        ],
+        en: ["To compare two numbers, compare digit by digit starting with thousands.", "If thousands digits are equal, compare hundreds, then tens, then units.", "Use < (less than), > (greater than) or = (equal to)."],
+        ar: ["لمقارنة عددين، نقارن رقماً برقم بدءاً من الآلاف.", "إذا تساوت أرقام الآلاف، نقارن المئات ثم العشرات ثم الوحدات.", "نستخدم < أو > أو =."],
+        fa: ["برای مقایسه دو عدد، رقم به رقم از هزارگان شروع می‌کنیم.", "اگر هزارگان برابر باشد، صدگان، سپس ده‌تاها، سپس یکان را مقایسه می‌کنیم.", "از < یا > یا = استفاده می‌کنیم."],
+        ti: ["ክልተ ቁጽርታት ንምውድዳር፡ ካብ ሽሕ ጀሚርና ኣሃዝ ብኣሃዝ ንወዳደር።", "ናይ ሽሕ ኣሃዝ እንተ ማዕሪዮም፡ ሚእቲ ድሕሪኡ ዓሰርተ ድሕሪኡ ውልቂ ንወዳደር።", "< ወይ > ወይ = ንጥቀም።"],
+        uk: ["Щоб порівняти два числа, порівнюємо цифру за цифрою, починаючи з тисяч.", "Якщо тисячі рівні, порівнюємо сотні, потім десятки, потім одиниці.", "Використовуємо < або > або =."],
+      },
+    },
+    exercises: [
+      { id: "a14-1", promptFr: "Quel signe mettre ? 456 □ 462", promptPivot: { en: "Which sign? 456 □ 462" }, type: "short_text", acceptable: ["<"] },
+      { id: "a14-2", promptFr: "Quel signe mettre ? 789 □ 789", promptPivot: { en: "Which sign? 789 □ 789" }, type: "short_text", acceptable: ["="] },
+      { id: "a14-3", promptFr: "Quel signe mettre ? 902 □ 890", promptPivot: { en: "Which sign? 902 □ 890" }, type: "short_text", acceptable: [">"] },
+    ],
+    exercisePool: [
+      { id: "a14-p1",  promptFr: "Quel signe ? 456 □ 462",    type: "short_text", acceptable: ["<"] },
+      { id: "a14-p2",  promptFr: "Quel signe ? 789 □ 789",    type: "short_text", acceptable: ["="] },
+      { id: "a14-p3",  promptFr: "Quel signe ? 902 □ 890",    type: "short_text", acceptable: [">"] },
+      { id: "a14-p4",  promptFr: "Quel signe ? 1 245 □ 995",  type: "short_text", acceptable: [">"] },
+      { id: "a14-p5",  promptFr: "Quel signe ? 3 456 □ 3 421", type: "short_text", acceptable: [">"] },
+      { id: "a14-p6",  promptFr: "Quel signe ? 7 000 □ 6 999", type: "short_text", acceptable: [">"] },
+      { id: "a14-p7",  promptFr: "Quel signe ? 512 □ 521",    type: "short_text", acceptable: ["<"] },
+      { id: "a14-p8",  promptFr: "Quel signe ? 4 300 □ 4 300", type: "short_text", acceptable: ["="] },
+      { id: "a14-p9",  promptFr: "Quel signe ? 88 □ 880",     type: "short_text", acceptable: ["<"] },
+      { id: "a14-p10", promptFr: "Quel signe ? 2 074 □ 2 740", type: "short_text", acceptable: ["<"] },
+      { id: "a14-p11", promptFr: "Quel signe ? 999 □ 1 000",  type: "short_text", acceptable: ["<"] },
+      { id: "a14-p12", promptFr: "Quel signe ? 5 800 □ 5 080", type: "short_text", acceptable: [">"] },
+      { id: "a14-p13", promptFr: "Quel est le plus grand : 637 ou 673 ? (écris le nombre)", type: "number", acceptable: ["673"] },
+      { id: "a14-p14", promptFr: "Quel est le plus petit : 4 832 ou 4 382 ? (écris le nombre)", type: "number", acceptable: ["4382"] },
+    ],
+    poolSize: 5,
+  };

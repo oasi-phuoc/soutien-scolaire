@@ -1,0 +1,107 @@
+import type { ConjLesson } from "../../conjugation-data";
+
+export const A1_CONJ_L08: ConjLesson = {
+  slug: "a1-conj-l08",
+  code: "G.9",
+  level: "A1",
+  title: "Les verbes aller et venir",
+  theory: [
+    { type: "heading", text: "Aller et venir au présent", trans: { en: "Aller and venir in the present", ar: "فعلا aller وvenir في المضارع", fa: "افعال aller و venir در زمان حال", ti: "aller ን venir ኣብ ሕጂ ጊዜ", uk: "Дієслова aller і venir у теперішньому часі" } },
+    {
+      type: "grid",
+      headers: ["Pronom", "aller", "venir"],
+      equalCols: true,
+      rows: [
+        ["je",           "{a}vais{/a}",    "{a}viens{/a}"],
+        ["tu",           "{a}vas{/a}",     "{a}viens{/a}"],
+        ["il / elle",    "{a}va{/a}",      "{a}vient{/a}"],
+        ["nous",         "{a}allons{/a}",  "{a}venons{/a}"],
+        ["vous",         "{a}allez{/a}",   "{a}venez{/a}"],
+        ["ils / elles",  "{a}vont{/a}",    "{a}viennent{/a}"],
+      ],
+      transHeaders: {
+        en: ["Pronoun", "aller (to go)", "venir (to come)"],
+        ar: ["الضمير", "aller (يذهب)", "venir (يأتي)"],
+        fa: ["ضمیر", "aller (رفتن)", "venir (آمدن)"],
+        ti: ["ተካኢ ቃል", "aller (ምኻድ)", "venir (ምምጻእ)"],
+        uk: ["Займенник", "aller (іти)", "venir (приходити)"],
+      },
+    },
+    { type: "heading", text: "Aller", sub: true, trans: { en: "Aller (to go)", ar: "aller (يذهب)", fa: "aller (رفتن)", ti: "aller (ምኻድ)", uk: "Aller (іти)" } },
+    {
+      type: "plain_list",
+      items: ["Le verbe aller sert à dire où une personne se déplace. La destination où on va."],
+      noBulletItems: [0],
+      transItems: {
+        en: ["The verb aller is used to say where a person is going. The destination we go to."],
+        ar: ["يُستخدم فعل aller للدلالة على المكان الذي يتجه إليه الشخص. الوجهة التي يذهب إليها."],
+        fa: ["فعل aller برای گفتن اینکه یک نفر کجا می‌رود استفاده می‌شود. مقصدی که می‌رویم."],
+        ti: ["ግሲ aller ሓደ ሰብ ናበይ ከምዝኸይድ ንምሕባር ይጥቀሙሉ. ምርኻቢ ቦታ."],
+        uk: ["Дієслово aller вказує куди людина іде. Пункт призначення."],
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      rows: [
+        ["aller {a}à{/a}", "Je vais {a}à{/a} Genève."],
+        ["aller {a}au{/a} (à + le)", "Elle va {a}au{/a} cinéma."],
+        ["aller {a}aux{/a} (à + les)", "Nous allons {a}aux{/a} États-Unis."],
+        ["aller {a}en{/a} + pays féminin", "Tu vas {a}en{/a} France."],
+        ["aller {a}chez{/a} + personne", "Il va {a}chez{/a} le médecin."],
+      ],
+      transHeaders: {
+        en: ["Structure", "Example"],
+        ar: ["البنية", "المثال"],
+        fa: ["ساختار", "مثال"],
+        ti: ["ዝምድና", "ኣብነት"],
+        uk: ["Структура", "Приклад"],
+      },
+      transRows: {
+        en: [["to (city)", "I go to Geneva."], ["to the (m. sg.)", "She goes to the cinema."], ["to the (pl.)", "We go to the United States."], ["to (f. country)", "You go to France."], ["to (person's place)", "He goes to the doctor's."]],
+        ar: [["إلى (مدينة)", "أذهب إلى جنيف."], ["إلى (à + le)", "تذهب إلى السينما."], ["إلى (à + les)", "نذهب إلى الولايات المتحدة."], ["إلى + بلد مؤنث", "تذهب إلى فرنسا."], ["عند + شخص", "يذهب إلى الطبيب."]],
+        fa: [["به (شهر)", "من به ژنو می‌روم."], ["به (à + le)", "او به سینما می‌رود."], ["به (à + les)", "ما به ایالات متحده می‌رویم."], ["به + کشور مؤنث", "تو به فرانسه می‌روی."], ["پیش + شخص", "او پیش دکتر می‌رود."]],
+        ti: [["ናብ (ከተማ)", "ናብ ጀኔቫ ይኸይድ."], ["ናብ (à + le)", "ናብ ሲነማ ትኸይድ."], ["ናብ (à + les)", "ናብ ኣሜሪካ ንኸይድ."], ["ናብ + ኣንስታይ ሃገር", "ናብ ፈረንሳ ትኸይድ."], ["ናብ + ሰብ", "ናብ ሓኪም ይኸይድ."]],
+        uk: [["до (місто)", "Я їду до Женеви."], ["до (à + le)", "Вона йде в кіно."], ["до (à + les)", "Ми їдемо до США."], ["до (ж. р. країна)", "Ти їдеш до Франції."], ["до (людини)", "Він іде до лікаря."]],
+      },
+    },
+    { type: "heading", text: "Venir", sub: true, trans: { en: "Venir (to come)", ar: "venir (يأتي)", fa: "venir (آمدن)", ti: "venir (ምምጻእ)", uk: "Venir (приходити)" } },
+    {
+      type: "plain_list",
+      items: ["Le verbe venir sert à dire d'où une personne arrive. L'origine d'où on vient."],
+      noBulletItems: [0],
+      transItems: {
+        en: ["The verb venir is used to say where a person comes from. The origin they come from."],
+        ar: ["يُستخدم فعل venir للدلالة على المكان الذي يأتي منه الشخص. الأصل الذي يأتي منه."],
+        fa: ["فعل venir برای گفتن اینکه یک نفر از کجا می‌آید استفاده می‌شود. منشأی که از آن می‌آیند."],
+        ti: ["ግሲ venir ሓደ ሰብ ካበይ ከምዝመጸ ንምሕባር ይጥቀሙሉ. መበቆሉ."],
+        uk: ["Дієслово venir вказує звідки людина приходить. Походження, звідки вони приходять."],
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Structure", "Exemple"],
+      rows: [
+        ["venir {a}de{/a} + ville", "Je viens {a}de{/a} Genève."],
+        ["venir {a}du{/a} (de + le)", "Elle vient {a}du{/a} marché."],
+        ["venir {a}des{/a} (de + les)", "Ils viennent {a}des{/a} États-Unis."],
+        ["venir {a}de{/a} + pays féminin", "Tu viens {a}de{/a} France."],
+      ],
+      transHeaders: {
+        en: ["Structure", "Example"],
+        ar: ["البنية", "المثال"],
+        fa: ["ساختار", "مثال"],
+        ti: ["ዝምድና", "ኣብነት"],
+        uk: ["Структура", "Приклад"],
+      },
+      transRows: {
+        en: [["from (city)", "I come from Geneva."], ["from the (m. sg.)", "She comes from the market."], ["from the (pl.)", "They come from the United States."], ["from (f. country)", "You come from France."]],
+        ar: [["من (مدينة)", "أنا من جنيف."], ["من (de + le)", "هي من السوق."], ["من (de + les)", "هم من الولايات المتحدة."], ["من + بلد مؤنث", "أنت من فرنسا."]],
+        fa: [["از (شهر)", "من از ژنو می‌آیم."], ["از (de + le)", "او از بازار می‌آید."], ["از (de + les)", "آن‌ها از ایالات متحده می‌آیند."], ["از + کشور مؤنث", "تو از فرانسه می‌آیی."]],
+        ti: [["ካብ (ከተማ)", "ካብ ጀኔቫ ይመጽእ."], ["ካብ (de + le)", "ካብ ዕዳጋ ትመጽእ."], ["ካብ (de + les)", "ካብ ኣሜሪካ ይመጹ."], ["ካብ + ኣንስታይ ሃገር", "ካብ ፈረንሳ ትመጽእ."]],
+        uk: [["з (місто)", "Я з Женеви."], ["з (de + le)", "Вона з ринку."], ["з (de + les)", "Вони зі США."], ["з (ж. р. країна)", "Ти з Франції."]],
+      },
+    },
+  ],
+  exercises: [],
+};
