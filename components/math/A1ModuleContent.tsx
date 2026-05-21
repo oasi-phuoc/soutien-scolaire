@@ -2848,8 +2848,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       if (isBlank) {
                         if (ex8Validated && result !== null) {
                           return (
-                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : `${CLS_WRONG} !text-[var(--color-text-primary)]`}`}>
-                              {result ? ex8Answers[ansKey] : num}
+                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>
+                              {result ? ex8Answers[ansKey] : (
+                                <>
+                                  <span className="text-amber-400 line-through">{ex8Answers[ansKey] || "—"}</span>
+                                  <span className="text-[var(--color-text-primary)]">{num}</span>
+                                </>
+                              )}
                             </div>
                           );
                         }
@@ -3665,11 +3670,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             const seriesAns = evalAnswers[ex.id] ?? "";
                             const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
                             return evalPageValidated ? (
-                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"}`}>
+                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? CLS_WRONG : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"}`}>
                                 {seriesWrong ? (
                                   <>
-                                    <span className="text-red-400 line-through">{seriesAns || "—"}</span>
-                                    <span className="font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                                    <span className="text-amber-400 line-through">{seriesAns || "—"}</span>
+                                    <span className="text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                                   </>
                                 ) : (
                                   <span>{seriesAns}</span>
@@ -3708,11 +3713,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
                   {evalPageValidated ? (
-                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? "border-red-400 bg-red-50 dark:bg-red-900/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
                       {genWrong ? (
                         <>
-                          <span className="text-sm text-red-400 line-through">{genAns || "—"}</span>
-                          <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                          <span className="text-sm text-amber-400 line-through">{genAns || "—"}</span>
+                          <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                         </>
                       ) : (
                         <span className="text-sm font-medium text-[var(--color-text-primary)]">{genAns}</span>
