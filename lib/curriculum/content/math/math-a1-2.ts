@@ -99,6 +99,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         ],
       },
     ],
+    paragraphs: { fr: [] },
   },
 
   exercises: [

@@ -192,10 +192,11 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         ],
       },
     ],
+    paragraphs: { fr: [] },
   },
 
   exercises: [
-    
+
   ],
 
   exercisePool: [
