@@ -292,7 +292,7 @@ function ArithmeticGroupExercise({
     `w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
       ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
       : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-      : "border-red-400 bg-red-50 dark:bg-red-950/20"
+      : "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
     }`;
   return (
     <div className="space-y-4">
@@ -316,7 +316,7 @@ function ArithmeticGroupExercise({
                 ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
                 : <span className={numCls}>{q.result}</span>}
               {validated && (
-                <span className={`ml-1 text-xs ${results[i] ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+                <span className={`ml-1 text-xs ${results[i] ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
                   {results[i] ? "✓" : `→ ${q.answer}`}
                 </span>
               )}
@@ -371,7 +371,7 @@ function ColumnGridCard({
         className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
           ok === null ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
           : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-          : "border-red-400 bg-red-50 dark:bg-red-950/20"
+          : "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
         }`}
       />
     );
@@ -441,7 +441,7 @@ function ColumnGridCard({
         </tbody>
       </table>
       {validated && (
-        <p className={`mt-1 text-[10px] font-medium ${cardCorrect ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+        <p className={`mt-1 text-[10px] font-medium ${cardCorrect ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
           {cardCorrect ? "✓ Correct" : `→ ${formatCompNum(q.result)}`}
         </p>
       )}
@@ -949,7 +949,7 @@ export function GenericModuleContent({
               exStatus === "correct"
                 ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
                 : exStatus === "wrong"
-                  ? "border-red-400 bg-red-50 dark:bg-red-950/20"
+                  ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
                   : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
             }`}
           />
@@ -984,7 +984,7 @@ export function GenericModuleContent({
               exStatus === "correct"
                 ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
                 : exStatus === "wrong"
-                  ? "border-red-400 bg-red-50 dark:bg-red-950/20"
+                  ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
             }`}
           />

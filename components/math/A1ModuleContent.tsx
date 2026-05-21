@@ -1523,12 +1523,12 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-red-400"}`}>
+        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-amber-500"}`}>
           {result ? (
             <span className="text-sm font-medium text-[var(--color-text-primary)]">{answer}</span>
           ) : (
             <>
-              <span className="text-sm text-red-400 line-through">{answer}</span>
+              <span className="text-sm text-amber-600 line-through">{answer}</span>
               <span className="text-sm font-medium text-[var(--color-text-primary)]">{correctWord}</span>
             </>
           )}
