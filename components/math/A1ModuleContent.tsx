@@ -2914,7 +2914,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : ex9Validated && c === value ? "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
+                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : ex9Validated && c === value ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
                           {c}
                         </button>
                       );
@@ -3234,7 +3234,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     if (isSelected) {
                       cls = "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
                     } else if (ex15Validated && tag.correct) {
-                      cls = "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20";
+                      cls = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                     }
                     return (
                       <button key={ti} type="button"

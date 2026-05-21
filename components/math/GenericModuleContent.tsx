@@ -141,7 +141,7 @@ function ComparisonExercise({
                   } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
                   } else if (isCorrect) {
-                    cls += "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20";
+                    cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                   } else {
                     cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
