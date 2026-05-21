@@ -1,6 +1,218 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
+  submoduleId: "A1-4",
+  submoduleCode: "A1.4",
+  theory: {
+    title: {
+      fr: "Droite numérique",
+      en: "Number line",
+      ar: "المستقيم العددي",
+      fa: "خط اعداد",
+      ti: "ቁፅሪ ቁጽሪ ቀጽሪ",
+      uk: "Числова пряма",
+      pt: "Reta numérica",
+    },
+    blocks: [
+      {
+        type: "plain",
+        fr: "Sur une droite numérique, les nombres sont placés dans l'ordre croissant de gauche à droite. L'espacement entre deux nombres consécutifs peut être 1, 2, 5, 10, 100… selon l'échelle.",
+        pivot: {
+          en: "On a number line, numbers go in increasing order left to right. The gap between consecutive numbers can be 1, 2, 5, 10, 100… depending on the scale.",
+          ar: "على المستقيم العددي، توضع الأعداد في ترتيب تصاعدي من اليسار إلى اليمين. الفجوة بين عددين متتاليين يمكن أن تكون 1، 2، 5، 10، 100… حسب المقياس.",
+          fa: "روی خط اعداد، اعداد به ترتیب صعودی از چپ به راست قرار می‌گیرند. فاصله بین دو عدد متوالی می‌تواند ۱، ۲، ۵، ۱۰، ۱۰۰… باشد.",
+          ti: "ኣብ ቁጽሪ ቀጽሪ፡ ቁጽርታት ካብ ጸጋም ናብ የማን ብቅርርቦ ይስደርዑ። ርሕቀት 1፡ 2፡ 5፡ 10፡ 100... ክኸውን ይኽእል።",
+          uk: "На числовій прямій числа розташовані у зростаючому порядку зліва направо. Проміжок між двома числами може бути 1, 2, 5, 10, 100… залежно від масштабу.",
+          pt: "Na reta numérica, os números são colocados em ordem crescente da esquerda para a direita. O intervalo entre dois números pode ser 1, 2, 5, 10, 100… dependendo da escala.",
+        },
+      },
+      { type: "heading", fr: "Nombres pairs et impairs", black: true },
+      {
+        type: "plain",
+        fr: "Pour savoir si un nombre est pair ou impair, on regarde seulement le dernier chiffre.",
+        pivot: {
+          en: "To know if a number is even or odd, look only at the last digit.",
+          ar: "لمعرفة ما إذا كان عدد زوجياً أم فردياً، ننظر إلى الرقم الأخير فقط.",
+          fa: "برای دانستن اینکه عددی زوج است یا فرد، فقط به آخرین رقم نگاه می‌کنیم.",
+          ti: "ቁጽሪ ዝተፈጥዎ ወይ ዘይተፈጥዎ ምዃኑ ንምፍላጥ፡ ናይ መወዳእታ ኣሃዝ ጥራይ ንርኢ።",
+          uk: "Щоб дізнатись, чи є число парним або непарним, дивимось лише на останню цифру.",
+          pt: "Para saber se um número é par ou ímpar, observe apenas o último algarismo.",
+        },
+      },
+      {
+        type: "highlight",
+        fr: "Pair",
+        pivot: {
+          en: "Even",
+          ar: "زوجي",
+          fa: "زوج",
+          ti: "ዝተፈጥዎ",
+          uk: "Парне",
+          pt: "Par",
+        },
+      },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Un nombre pair peut être partagé en 2 parts égales.",
+          "Il se termine par 0, 2, 4, 6 ou 8.",
+          "4, 12, 38, 100…",
+        ],
+      },
+      {
+        type: "highlight",
+        fr: "Impair",
+        pivot: {
+          en: "Odd",
+          ar: "فردي",
+          fa: "فرد",
+          ti: "ዘይተፈጥዎ",
+          uk: "Непарне",
+          pt: "Ímpar",
+        },
+      },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Un nombre impair ne peut pas être partagé en 2 parts exactement égales.",
+          "Il se termine par 1, 3, 5, 7 ou 9.",
+          "3, 17, 45, 99…",
+        ],
+      },
+    ],
+    paragraphs: {
+      fr: [
+        "Sur une droite numérique, les nombres sont placés dans l'ordre croissant de gauche à droite. L'espacement entre deux nombres consécutifs peut être 5, 10, 100… selon l'échelle.",
+        "Pour trouver un nombre « entre » deux autres, on lit l'échelle : par exemple entre 450 et 460 avec un pas de 5 unités, on peut placer 455.",
+        "Un nombre est pair s'il se termine par 0, 2, 4, 6 ou 8. Il peut être partagé en deux groupes égaux.",
+        "Un nombre est impair s'il se termine par 1, 3, 5, 7 ou 9. Il ne peut pas être partagé en deux groupes égaux.",
+      ],
+      en: [
+        "On a number line, numbers are placed in increasing order from left to right. The spacing can be 5, 10, 100… depending on the scale.",
+        "To find a number between two others, read the scale: for example between 450 and 460 with step 5, you can place 455.",
+        "A number is even if it ends in 0, 2, 4, 6 or 8.",
+        "A number is odd if it ends in 1, 3, 5, 7 or 9.",
+      ],
+      ar: [
+        "على المستقيم العددي توضع الأعداد تصاعديًا من اليسار إلى اليمين.",
+        "لإيجاد عدد بين عددين نستخدم المقياس.",
+        "العدد الزوجي ينتهي بـ 0 أو 2 أو 4 أو 6 أو 8.",
+        "العدد الفردي ينتهي بـ 1 أو 3 أو 5 أو 7 أو 9.",
+      ],
+      fa: [
+        "روی خط اعداد، اعداد به ترتیب صعودی از چپ به راست قرار می‌گیرند.",
+        "برای یافتن عدد بین دو عدد، از مقیاس استفاده می‌کنیم.",
+        "عدد زوج به ۰، ۲، ۴، ۶ یا ۸ ختم می‌شود.",
+        "عدد فرد به ۱، ۳، ۵، ۷ یا ۹ ختم می‌شود.",
+      ],
+      ti: [
+        "ኣብ ቁጽሪ ቀጽሪ ቁጽርታት ብቅርርቦ ይስደርዑ።",
+        "ኣብ መንጎ ክልተ ቁጽርታት ቁጽሪ ንምርካብ ስኬል ንጥቀም።",
+        "ዝተፈጥዎ ቁጽሪ ብ0፣2፣4፣6፣8 ይዛዘም።",
+        "ዘይተፈጥዎ ቁጽሪ ብ1፣3፣5፣7፣9 ይዛዘም።",
+      ],
+      uk: [
+        "На числовій прямій числа розташовуються у зростаючому порядку.",
+        "Щоб знайти число між двома іншими, використовують масштаб.",
+        "Парні числа закінчуються на 0, 2, 4, 6 або 8.",
+        "Непарні числа закінчуються на 1, 3, 5, 7 або 9.",
+      ],
+      pt: [
+        "Na reta numérica, os números são colocados em ordem crescente da esquerda para a direita.",
+        "Para encontrar um número entre dois outros, usamos a escala.",
+        "Um número par termina em 0, 2, 4, 6 ou 8.",
+        "Um número ímpar termina em 1, 3, 5, 7 ou 9.",
+      ],
+    },
+  },
+
+  exercises: [
+    {
+      id: "a14-1",
+      promptFr: "Quel nombre entier est juste après 899 ?",
+      promptPivot: {
+        en: "Which whole number comes right after 899?",
+        ar: "ما هو العدد الذي يأتي بعد 899؟",
+        fa: "عدد بعد از ۸۹۹ چیست؟",
+        ti: "ድሕሪ 899 ዝመጽእ ቁጽሪ እንታይ እዩ?",
+        uk: "Яке число йде після 899?",
+        pt: "Qual número vem depois de 899?",
+      },
+      type: "number",
+      acceptable: ["900"],
+    },
+    {
+      id: "a14-2",
+      promptFr: "Quel nombre est entre 12 et 14 ?",
+      promptPivot: {
+        en: "Which number is between 12 and 14?",
+        ar: "ما العدد بين 12 و14؟",
+        fa: "عدد بین ۱۲ و ۱۴ چیست؟",
+        ti: "ኣብ 12ን 14ን ዘሎ ቁጽሪ እንታይ እዩ?",
+        uk: "Яке число між 12 і 14?",
+        pt: "Qual número está entre 12 e 14?",
+      },
+      type: "number",
+      acceptable: ["13"],
+    },
+    {
+      id: "a14-3",
+      promptFr: "On saute de 100 en 100 : 300, 400, ?",
+      promptPivot: {
+        en: "Count by hundreds: 300, 400, ?",
+        ar: "نعدّ بالـ100: 300، 400، ؟",
+        fa: "شمارش صدتایی: ۳۰۰، ۴۰۰، ؟",
+        ti: "ብ100 ንዘልል፡ 300፣ 400፣ ?",
+        uk: "Лічимо сотнями: 300, 400, ?",
+        pt: "Conte de 100 em 100: 300, 400, ?",
+      },
+      type: "number",
+      acceptable: ["500"],
+    },
+    {
+      id: "a14-4",
+      promptFr: "Le nombre 46 est-il pair ou impair ? (écris pair ou impair)",
+      promptPivot: {
+        en: "Is 46 even or odd? (write even or odd)",
+        ar: "هل 46 زوجي أم فردي؟",
+        fa: "۴۶ زوج است یا فرد؟",
+        ti: "46 ዝተፈጥዎ ወይ ዘይተፈጥዎ?",
+        uk: "46 парне чи непарне?",
+        pt: "46 é par ou ímpar?",
+      },
+      type: "short_text",
+      acceptable: ["pair", "even"],
+    },
+    {
+      id: "a14-5",
+      promptFr: "Le nombre 35 est-il pair ou impair ? (écris pair ou impair)",
+      promptPivot: {
+        en: "Is 35 even or odd? (write even or odd)",
+        ar: "هل 35 زوجي أم فردي؟",
+        fa: "۳۵ زوج است یا فرد؟",
+        ti: "35 ዝተፈጥዎ ወይ ዘይተፈጥዎ?",
+        uk: "35 парне чи непарне?",
+        pt: "35 é par ou ímpar?",
+      },
+      type: "short_text",
+      acceptable: ["impair", "odd"],
+    },
+  ],
+
+  exercisePool: [
+    { id: "a14-p1", promptFr: "Quel nombre entier est juste après 899 ?", type: "number", acceptable: ["900"] },
+    { id: "a14-p2", promptFr: "Quel nombre est entre 12 et 14 ?", type: "number", acceptable: ["13"] },
+    { id: "a14-p3", promptFr: "On saute de 100 en 100 : 300, 400, ?", type: "number", acceptable: ["500"] },
+    { id: "a14-p4", promptFr: "Le nombre 46 est-il pair ou impair ?", type: "short_text", acceptable: ["pair", "even"] },
+    { id: "a14-p5", promptFr: "Le nombre 35 est-il pair ou impair ?", type: "short_text", acceptable: ["impair", "odd"] },
+  ],
+
+  poolSize: 5,
+};import type { MathSubmoduleLesson } from "./math-a1-types";
+
+export const MATH_A1_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A1-4",
     submoduleCode: "A1.4",
     theory: {
