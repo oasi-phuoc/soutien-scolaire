@@ -2793,8 +2793,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   if (state === "fill") {
                     if (ex7Validated && result !== null) {
                       return (
-                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "ring-1 ring-inset ring-green-400" : "ring-1 ring-inset ring-red-400"} border-zinc-300 dark:border-zinc-600`}>
-                          <span className="text-sm font-medium tabular-nums text-[var(--color-text-primary)]">
+                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "ring-1 ring-inset ring-green-400 border-zinc-300 dark:border-zinc-600" : `${CLS_WRONG} ring-1 ring-inset ring-amber-400`}`}>
+                          <span className="text-sm font-medium tabular-nums">
                             {result ? (ex7Answers[key] ?? "") : value}
                           </span>
                         </div>
