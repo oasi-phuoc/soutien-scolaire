@@ -515,10 +515,12 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
         steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
       }
-      const pool = lesson.exercisePool;
-      const size = lesson.poolSize ?? 5;
-      const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
-      for (const item of exercises) steps.push({ kind: "exercise", lesson, item });
+      if (sid !== "A1-3") {
+        const pool = lesson.exercisePool;
+        const size = lesson.poolSize ?? 5;
+        const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
+        for (const item of exercises) steps.push({ kind: "exercise", lesson, item });
+      }
     }
   }
   if (withEval && lessons.length > 0) {

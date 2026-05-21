@@ -6,7 +6,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
 
   theory: {
     title: {
-      fr: "Qui est le plus grand ?",
+      fr: "Comparer les nombres",
       en: "Which is greater?",
       ar: "أيهما أكبر؟",
       fa: "کدام بزرگ‌تر است؟",
