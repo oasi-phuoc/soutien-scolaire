@@ -353,7 +353,6 @@ function ColumnGridCard({
   const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
   // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
-  const getCell = (base: number, col: number) => cellAnswers[base + col] ?? "";
   const resBase = preFilledOperands ? 0 : 8;
 
   const cellOk = (expected: number, val: string) => {
@@ -753,7 +752,6 @@ export function GenericModuleContent({
     setGridAnswers(emptyGrid());
     setGridValidated(false);
     setGridResults(Array(4).fill(false));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const goBack = useCallback(() => {
@@ -864,7 +862,6 @@ export function GenericModuleContent({
 
   if (currentStep?.kind === "column_grid" && !gridValidated) {
     const cfg = currentStep.config;
-    const cellCount = cfg.preFilledOperands ? 4 : 12;
     const resBase = cfg.preFilledOperands ? 0 : 8;
     stepCanValidate = cfg.questions.every((_, qi) => {
       const cells = gridAnswers[qi] ?? [];
