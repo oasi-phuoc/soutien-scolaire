@@ -167,38 +167,6 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [
-    {
-      id: "a12-1",
-      promptFr: "Dans 3 864, combien vaut le chiffre 8 ?",
 
-      promptPivot: {
-        en: "In 3 864, what is the digit 8 worth?",
-        ar: "في 3 864، ما قيمة الرقم 8؟",
-        fa: "در ۳ ۸۶۴، ارزش رقم ۸ چند است؟",
-        uk: "У 3 864 яке значення цифри 8?",
-        ti: "ኣብ 3 864 እቲ 8 ክንደይ ዋጋ ኣለዎ?",
-        pt: "No número 3 864, quanto vale o algarismo 8?",
-      },
-
-      type: "number",
-      acceptable: ["800"],
-    },
-
-    {
-      id: "a12-2",
-      promptFr: "Dans 5 240, la valeur du chiffre 4 est :",
-
-      promptPivot: {
-        en: "In 5 240, the value of the digit 4 is:",
-        ar: "في 5 240، قيمة الرقم 4 هي:",
-        fa: "در ۵ ۲۴۰، ارزش رقم ۴:",
-        uk: "У 5 240 значення цифри 4:",
-        ti: "ኣብ 5 240 እቲ 4 እንታይ ዋጋ ኣለዎ?",
-        pt: "No número 5 240, o valor do algarismo 4 é:",
-      },
-
-      type: "number",
-      acceptable: ["40"],
-    },
   ],
 };
