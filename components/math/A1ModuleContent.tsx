@@ -1523,7 +1523,7 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-[var(--color-border-default)]" : "border-amber-500"}`}>
+        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
           {result ? (
             <span className="text-sm font-medium text-[var(--color-text-primary)]">{answer}</span>
           ) : (
@@ -1542,6 +1542,8 @@ function ExerciseRow({
     </div>
   );
 }
+
+const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
@@ -2639,7 +2641,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex4Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
                         <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex4Answers[i]}</span>
                       ) : (
@@ -2682,7 +2684,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex5Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
                         <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex5Answers[i]}</span>
                       ) : (
@@ -2725,7 +2727,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                   <AudioPlayButton src={comp.clips[0]!} />
                   {ex6Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] px-3 ${result ? "border-blue-400" : "border-amber-400"}`}>
+                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
                         <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex6Answers[i]}</span>
                       ) : (
@@ -2836,7 +2838,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {ex8Series.map((series, si) => (
               <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
                 <div className="flex items-center gap-2 overflow-hidden">
-                  <span className="w-8 shrink-0 text-left text-2xl font-bold tabular-nums text-[var(--color-accent-alg)]">{si + 1}.</span>
                   <div className="flex min-w-0 flex-1 gap-1">
                     {Array.from({ length: series.count }, (_, i) => {
                       const num = series.start + i;
@@ -2847,7 +2848,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       if (isBlank) {
                         if (ex8Validated && result !== null) {
                           return (
-                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-medium tabular-nums text-[var(--color-text-primary)] ${result ? "border-blue-400" : "border-amber-400"}`}>
+                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>
                               {result ? ex8Answers[ansKey] : num}
                             </div>
                           );
@@ -2958,7 +2959,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
                       className={
                         ex10Validated && result === true ? "!border-blue-400" :
-                        ex10Validated && result === false ? "!border-amber-400" :
+                        ex10Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -3004,13 +3005,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const uOk = parseInt(ans.u) === q.u;
                         return (
                           <>
-                            <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm text-[var(--color-text-primary)] ${mOk ? "border-blue-400" : "border-amber-400"}`}>{mOk ? ans.m : String(q.m * 1000)}</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${mOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{mOk ? ans.m : String(q.m * 1000)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm text-[var(--color-text-primary)] ${cOk ? "border-blue-400" : "border-amber-400"}`}>{cOk ? ans.c : String(q.c * 100)}</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${cOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{cOk ? ans.c : String(q.c * 100)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm text-[var(--color-text-primary)] ${dOk ? "border-blue-400" : "border-amber-400"}`}>{dOk ? ans.d : String(q.d * 10)}</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${dOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{dOk ? ans.d : String(q.d * 10)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border bg-[var(--color-bg-primary)] px-1 py-1 text-center text-sm text-[var(--color-text-primary)] ${uOk ? "border-blue-400" : "border-amber-400"}`}>{uOk ? ans.u : String(q.u)}</span>
+                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${uOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{uOk ? ans.u : String(q.u)}</span>
                           </>
                         );
                       }
@@ -3065,7 +3066,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
                       className={
                         ex12Validated && result === true ? "!border-blue-400" :
-                        ex12Validated && result === false ? "!border-amber-400" :
+                        ex12Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -3102,7 +3103,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
                       className={
                         ex13Validated && result === true ? "!border-blue-400" :
-                        ex13Validated && result === false ? "!border-amber-400" :
+                        ex13Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
@@ -3137,7 +3138,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
               const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
               const _fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
-              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : "border-amber-400 bg-[var(--color-bg-primary)]";
+              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
               const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                 setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
               return (
@@ -3293,7 +3294,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 const ans = ex16Answers[qi]?.[idx] ?? "";
                 const isCorrect = ex16Validated ? parseInt(ans) === val : null;
                 return ex16Validated ? (
-                  <div className={`flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border bg-[var(--color-bg-primary)] text-sm font-bold tabular-nums text-[var(--color-text-primary)] ${isCorrect ? "border-blue-400" : "border-amber-400"}`}>
+                  <div className={`flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border text-sm font-bold tabular-nums ${isCorrect ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>
                     {isCorrect ? ans : val.toLocaleString("fr-CH")}
                   </div>
                 ) : (
@@ -3971,7 +3972,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex19Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex19Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : "border-amber-400 bg-[var(--color-bg-primary)]";
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex19Validated ? (
@@ -4026,7 +4027,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex20Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex20Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : "border-amber-400 bg-[var(--color-bg-primary)]";
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex20Validated ? (
@@ -4090,7 +4091,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       if (ex21Validated) {
                         if (correct && sel) cls += " border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300";
                         else if (correct && !sel) cls += " border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                        else if (!correct && sel) cls += " border-amber-400 bg-[var(--color-bg-primary)] text-amber-600 line-through";
+                        else if (!correct && sel) cls += " ${CLS_WRONG} text-amber-600 line-through";
                         else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                       } else {
                         cls += sel
@@ -4137,7 +4138,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 );
               };
               return (
-                <div key={pi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${validated ? (sel === correct ? "border-blue-400" : "border-amber-400") : "border-[var(--color-border-default)]"}`}>
+                <div key={pi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${validated ? (sel === correct ? "border-blue-400" : CLS_WRONG) : "border-[var(--color-border-default)]"}`}>
                   <div className="flex items-center gap-2">
                     {renderBlocks(pair.a)}
                     <div className="flex flex-col gap-1 shrink-0">
@@ -4145,7 +4146,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         let cls = "w-10 rounded border py-1 text-center text-sm font-bold transition-colors";
                         if (validated) {
                           cls += sym === correct ? " border-blue-400 bg-[var(--color-bg-primary)] text-blue-700 dark:text-blue-300"
-                            : sym === sel && sym !== correct ? " border-amber-400 bg-[var(--color-bg-primary)] text-amber-600 line-through"
+                            : sym === sel && sym !== correct ? " ${CLS_WRONG} text-amber-600 line-through"
                             : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                         } else {
                           cls += sel === sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
@@ -4185,7 +4186,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               let symCls = "w-8 h-8 rounded border text-center text-sm font-bold leading-8 transition-colors shrink-0";
               if (ex23Validated) {
                 symCls += sym === correct ? " border-blue-400 bg-[var(--color-bg-primary)] text-blue-700 dark:text-blue-300"
-                  : sym !== correct ? " border-amber-400 bg-[var(--color-bg-primary)] text-amber-600"
+                  : sym !== correct ? " ${CLS_WRONG} text-amber-600"
                   : " border-[var(--color-border-default)]";
               } else {
                 symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
@@ -4240,7 +4241,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           if (ex24Validated) {
                             cls += correct && sel ? " border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300"
                               : correct && !sel ? " border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
-                              : !correct && sel ? " border-amber-400 bg-[var(--color-bg-primary)] text-amber-600 line-through"
+                              : !correct && sel ? " ${CLS_WRONG} text-amber-600 line-through"
                               : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                           } else {
                             cls += sel ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
@@ -4381,9 +4382,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const parsed = parseInt(ans);
                     const ok = ex27Validated ? (!isNaN(parsed) && parsed > item.lo && parsed < item.hi) : null;
                     const fieldCls = "w-20 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = ok === true ? "border-blue-400 bg-[var(--color-bg-primary)]" : ok === false ? "border-amber-400 bg-[var(--color-bg-primary)]" : "";
+                    const valCls = ok === true ? "border-blue-400 bg-[var(--color-bg-primary)]" : ok === false ? CLS_WRONG : "";
                     return (
-                      <div key={ii} className={`flex items-center justify-center gap-1 rounded-[var(--radius-md)] border px-2 py-2 text-sm font-bold tabular-nums transition-colors ${ok === true ? "border-blue-400" : ok === false ? "border-amber-400" : "border-[var(--color-border-default)]"}`}>
+                      <div key={ii} className={`flex items-center justify-center gap-1 rounded-[var(--radius-md)] border px-2 py-2 text-sm font-bold tabular-nums transition-colors ${ok === true ? "border-blue-400" : ok === false ? CLS_WRONG : "border-[var(--color-border-default)]"}`}>
                         {item.reversed ? (
                           <>
                             <span className="text-blue-600 dark:text-blue-400">{item.hi}</span>

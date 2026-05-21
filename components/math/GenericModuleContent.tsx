@@ -8,6 +8,8 @@ import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 
+const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+
 function renderBold(text: string) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
   if (parts.length === 1) return <>{text}</>;
@@ -141,7 +143,7 @@ function ComparisonExercise({
                   } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
                   } else if (isCorrect) {
-                    cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                    cls += CLS_WRONG;
                   } else {
                     cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
@@ -292,7 +294,7 @@ function ArithmeticGroupExercise({
     `w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
       ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
       : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-      : "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+      : CLS_WRONG
     }`;
   return (
     <div className="space-y-4">
@@ -371,7 +373,7 @@ function ColumnGridCard({
         className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
           ok === null ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
           : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-          : "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+          : CLS_WRONG
         }`}
       />
     );
@@ -945,7 +947,7 @@ export function GenericModuleContent({
               exStatus === "correct"
                 ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
                 : exStatus === "wrong"
-                  ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+                  ? CLS_WRONG
                   : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
             }`}
           />
@@ -980,7 +982,7 @@ export function GenericModuleContent({
               exStatus === "correct"
                 ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
                 : exStatus === "wrong"
-                  ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+                  ? CLS_WRONG
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
             }`}
           />
