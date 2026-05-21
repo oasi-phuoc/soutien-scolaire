@@ -70,12 +70,11 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
           uk: "Правило порівняння",
           pt: "Regra de comparação",
         },
+      },
 
       {
         type: "plain",
-        fr: "Nombres avec un nombre différent de chiffres"
-        },
-        
+        fr: "Nombres avec un nombre différent de chiffres",
       },
 
       {
