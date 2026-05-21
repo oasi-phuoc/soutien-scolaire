@@ -1,106 +1,149 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A2-2",
-    submoduleCode: "A2.2",
-    theory: {
-      title: {
-        fr: "Soustraction",
-        en: "Subtraction",
-        ar: "الطرح",
-        fa: "تفریق",
-        ti: "ምቅናስ",
-        uk: "Віднімання",
+  submoduleId: "A2-2",
+  submoduleCode: "A2.2",
+  theory: {
+    title: {
+      fr: "Soustraction",
+      en: "Subtraction",
+      ar: "الطرح",
+      fa: "تفریق",
+      ti: "ምቅናስ",
+      uk: "Віднімання",
+      pt: "Subtração",
+    },
+
+    blocks: [
+      {
+        type: "plain",
+        fr: "La soustraction permet de retirer une quantité d'une autre.",
+        pivot: {
+          en: "Subtraction removes a quantity from another.",
+          ar: "الطرح يزيل كمية من أخرى.",
+          fa: "تفریق مقداری را از مقدار دیگری کم می‌کند.",
+          ti: "ምቅናስ ሓደ መጠን ካብ ካሊእ ይቀንስ።",
+          uk: "Віднімання вилучає одну величину з іншої.",
+          pt: "A subtração permite retirar uma quantidade de outra.",
+        },
       },
-      blocks: [
-        { type: "plain", fr: "La soustraction permet de retirer une quantité d'une autre. Le signe est « **−** » (**moins**)." },
-        { type: "table", headersFr: ["8", "−", "3", "=", "5"], accentHeader: true, rows: [
-          ["terme", "moins", "terme", "égale", "différence"],
-        ] },
-        { type: "heading", fr: "Propriétés de la soustraction", black: true },
-        { type: "highlight", fr: "Non-commutativité" },
-        { type: "section", labelFr: "", itemsFr: [
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Le signe de la soustraction est le signe « − » « moins »",
+          "Les nombres de la soustraction sont les termes.",
+          "Le résultat de la soustraction est la différence.",
+        ],
+      },
+
+      {
+        type: "table",
+        headersFr: ["8", "−", "3", "=", "5"],
+        accentHeader: true,
+        rows: [["terme", "moins", "terme", "égale", "différence"]],
+      },
+
+      { type: "heading", fr: "Propriétés de la soustraction", black: true },
+
+      {
+        type: "highlight",
+        fr: "Non-commutativité",
+        pivot: {
+          en: "Non-commutativity",
+          ar: "عدم التبادلية",
+          fa: "جابجایی‌ناپذیری",
+          ti: "ዘይ ቅደምሰዓባዊ",
+          uk: "Некомутативність",
+          pt: "Não comutatividade",
+        },
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
           "La soustraction n'est PAS commutative.",
           "• 57 − 49 ≠ 49 − 57",
-        ] },
-        { type: "heading", fr: "Soustraction en colonnes", black: true },
-        { type: "section", labelFr: "", itemsFr: [
-          "Écrivez les nombres en alignant **U** (unités), **D** (dizaines), **C** (centaines).",
-          "Commencez par soustraire les **unités**.",
-          "Si c'est impossible (ex. 3 − 7), faites un **emprunt** : prenez 1 dizaine (= 10 unités).",
-          "Continuez avec les **dizaines** (diminuées de 1), puis les **centaines**.",
-        ] },
-        { type: "svg", noFrame: false, markup: `<svg viewBox="0 0 170 155" width="170" height="155" xmlns="http://www.w3.org/2000/svg"><text x="60" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">C</text><text x="100" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">D</text><text x="140" y="15" text-anchor="middle" font-size="11" font-weight="bold" fill="#6366f1">U</text><text x="100" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">5</text><text x="140" y="31" text-anchor="middle" font-size="10" fill="#9ca3af">13</text><line x1="40" y1="34" x2="40" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="80" y1="34" x2="80" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="120" y1="34" x2="120" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="160" y1="34" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="34" x2="160" y2="34" stroke="#d1d5db" stroke-width="0.8"/><line x1="40" y1="74" x2="160" y2="74" stroke="#d1d5db" stroke-width="0.8"/><line x1="20" y1="110" x2="160" y2="110" stroke="#111827" stroke-width="2.5"/><line x1="40" y1="150" x2="160" y2="150" stroke="#d1d5db" stroke-width="0.8"/><text x="60" y="60" text-anchor="middle" font-size="22" fill="#111827">8</text><text x="100" y="60" text-anchor="middle" font-size="22" fill="#111827">6</text><text x="140" y="60" text-anchor="middle" font-size="22" fill="#111827">3</text><text x="22" y="98" text-anchor="middle" font-size="22" fill="#111827">−</text><text x="60" y="98" text-anchor="middle" font-size="22" fill="#111827">4</text><text x="100" y="98" text-anchor="middle" font-size="22" fill="#111827">2</text><text x="140" y="98" text-anchor="middle" font-size="22" fill="#111827">7</text><text x="60" y="136" text-anchor="middle" font-size="22" fill="#111827">4</text><text x="100" y="136" text-anchor="middle" font-size="22" fill="#111827">3</text><text x="140" y="136" text-anchor="middle" font-size="22" fill="#111827">6</text></svg>`, captionFr: "863 − 427 = 436  (5 = emprunt D→U, 13 = 3+10)" },
-      ],
-      paragraphs: {
-        fr: [
-          "La soustraction permet de retirer une quantité à une autre. Le signe de la soustraction est « − » (moins). Les nombres de la soustraction sont les termes. Le résultat de la soustraction est la différence.",
-          "La soustraction n'est pas commutative : si l'on change l'ordre des termes, on n'obtient pas le même résultat.",
-          "Soustraction en colonnes : écrivez les nombres en alignant les unités, les dizaines, les centaines. Commencez par soustraire les unités.",
-          "Si la soustraction des unités est impossible (ex. 3 − 7), on effectue un emprunt : on prend 1 dizaine au voisin pour l'ajouter aux unités. Exemple : 863 − 427 → 3 − 7 impossible → 13 − 7 = 6.",
-          "Continuez ensuite avec les dizaines (en tenant compte de l'emprunt), puis avec les centaines. Résultat : 436.",
-        ],
-        en: [
-          "Subtraction removes a quantity from another. The sign is « − » (minus). The numbers are called terms, the result is the difference.",
-          "Subtraction is NOT commutative: reversing the order gives a different result.",
-          "Column subtraction: align units, tens, hundreds. Start by subtracting the units.",
-          "If subtracting the units is impossible (e.g. 3 − 7), borrow 1 ten from the tens column (1 ten = 10 units). Example: 863 − 427 → 3 − 7 impossible → 13 − 7 = 6.",
-          "Continue with tens (adjusted for the borrow), then hundreds. Result: 436.",
-        ],
-        ar: [
-          "الطرح يزيل كمية من أخرى. علامة الطرح « − » (ناقص). الأعداد تسمى الحدود، والناتج الفرق.",
-          "الطرح ليس تبديليًا: تغيير الترتيب يعطي نتيجة مختلفة.",
-          "الطرح في أعمدة: اكتب الأعداد محاذيًا الآحاد والعشرات والمئات. ابدأ بطرح الآحاد.",
-          "إذا كان طرح الآحاد مستحيلًا (مثلًا 3 − 7)، استعر 1 عشرة (= 10 آحاد). مثال: 863 − 427 → 13 − 7 = 6.",
-          "ثم العشرات ثم المئات. الناتج: 436.",
-        ],
-        fa: [
-          "تفریق مقداری را از مقدار دیگری کم می‌کند. علامت « − ». اعداد: جملات. نتیجه: تفاوت.",
-          "تفریق جابجایی‌پذیر نیست.",
-          "تفریق ستونی: یکان، دهگان، صدگان را تراز کنید. از یکان‌ها شروع کنید.",
-          "اگر ممکن نبود (مثلاً ۳ − ۷)، ۱ دهگان قرض بگیرید (= ۱۰ یکان). مثال: ۸۶۳ − ۴۲۷ → ۱۳ − ۷ = ۶.",
-          "سپس دهگان‌ها و صدگان‌ها. نتیجه: ۴۳۶.",
-        ],
-        ti: [
-          "ምቅናስ ሓደ መጠን ካብ ካሊእ ነቀላ። ምልክት « − »። ቁጽሪታት ሓደስሓደ ፍልልዮምን ይብሃሉ።",
-          "ምቅናስ ቅደምሰዓባዊ ኣይኮነን።",
-          "ኣብ ዓምዲ ምቅናስ: ኣሃዱ፡ ዓሰርተ፡ ሚእቲ ምስልሳልና። ካብ ኣሃዱ ጀምር።",
-          "ምቅናስ ዘይከኣል እንተኾነ (3 − 7)፡ 1 ዓሰርተ ካብ ዓሰርተ ዓምዲ ልቃሕ። ኣብነት: 863 − 427 → 13 − 7 = 6.",
-          "ድሕሪ ዓሰርተ ሚእቲ ቀጽል። ውጽኢት: 436.",
-        ],
-        uk: [
-          "Віднімання вилучає одну величину з іншої. Знак « − ». Числа — доданки. Результат — різниця.",
-          "Віднімання не є комутативним.",
-          "Віднімання в стовпчик: вирівнюйте одиниці, десятки, сотні. Починайте з одиниць.",
-          "Якщо неможливо (напр. 3 − 7), позичте 1 десяток (= 10 одиниць). Приклад: 863 − 427 → 13 − 7 = 6.",
-          "Продовжте з десятками, потім сотнями. Результат: 436.",
         ],
       },
+
+      { type: "heading", fr: "Soustraction en colonnes", black: true },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Écrivez les nombres en alignant **U** (unités), **D** (dizaines), **C** (centaines).",
+          "Commencez par soustraire les **unités**.",
+          "Si c'est impossible, faites un **emprunt**.",
+          "Continuez avec les dizaines puis les centaines.",
+        ],
+      },
+    ],
+
+    paragraphs: {
+      fr: [
+        "La soustraction permet de retirer une quantité à une autre.",
+        "La soustraction n'est pas commutative.",
+        "Soustraction en colonnes avec emprunt.",
+      ],
+      en: [
+        "Subtraction removes one quantity from another.",
+        "It is not commutative.",
+        "Column subtraction uses borrowing.",
+      ],
+      ar: [
+        "الطرح يزيل كمية من أخرى.",
+        "الطرح ليس تبديليًا.",
+        "الطرح في الأعمدة مع الاستعارة.",
+      ],
+      fa: [
+        "تفریق مقداری را از مقدار دیگر کم می‌کند.",
+        "تفریق جابجایی‌پذیر نیست.",
+        "تفریق ستونی با قرض گرفتن.",
+      ],
+      ti: [
+        "ምቅናስ ካብ ሓደ መጠን ይቀንስ።",
+      ],
+      uk: [
+        "Віднімання вилучає значення.",
+        "Воно не комутативне.",
+        "Використовується позичання.",
+      ],
+      pt: [
+        "A subtração retira uma quantidade de outra.",
+        "Não é comutativa.",
+        "Usa empréstimo na subtração em colunas.",
+      ],
     },
-    exercises: [
-      { id: "a2-2-e1", promptFr: "Quel est le résultat de 57 − 49 ?",              type: "number",     acceptable: ["8"] },
-      { id: "a2-2-e2", promptFr: "Calculez 863 − 427.",                             type: "number",     acceptable: ["436"] },
-      { id: "a2-2-e3", promptFr: "Comment appelle-t-on le résultat d'une soustraction ?", type: "short_text", acceptable: ["différence", "la différence"] },
-      { id: "a2-2-e4", promptFr: "Calculez 1005 − 348.",                            type: "number",     acceptable: ["657"] },
-      { id: "a2-2-e5", promptFr: "Calculez 700 − 256.",                             type: "number",     acceptable: ["444"] },
-    ],
-    exercisePool: [
-      { id: "a22-p1",  promptFr: "Calculez 57 − 49.",          type: "number", acceptable: ["8"] },
-      { id: "a22-p2",  promptFr: "Calculez 863 − 427.",        type: "number", acceptable: ["436"] },
-      { id: "a22-p3",  promptFr: "Calculez 700 − 256.",        type: "number", acceptable: ["444"] },
-      { id: "a22-p4",  promptFr: "Calculez 1 005 − 348.",      type: "number", acceptable: ["657"] },
-      { id: "a22-p5",  promptFr: "Calculez 500 − 173.",        type: "number", acceptable: ["327"] },
-      { id: "a22-p6",  promptFr: "Calculez 824 − 367.",        type: "number", acceptable: ["457"] },
-      { id: "a22-p7",  promptFr: "Calculez 1 000 − 456.",      type: "number", acceptable: ["544"] },
-      { id: "a22-p8",  promptFr: "Calculez 403 − 158.",        type: "number", acceptable: ["245"] },
-      { id: "a22-p9",  promptFr: "Calculez 2 135 − 1 523.",    type: "number", acceptable: ["612"] },
-      { id: "a22-p10", promptFr: "Calculez 611 − 157.",        type: "number", acceptable: ["454"] },
-      { id: "a22-p11", promptFr: "Quel terme manque ? ? − 48 = 52", type: "number", acceptable: ["100"] },
-      { id: "a22-p12", promptFr: "Quel terme manque ? 300 − ? = 127", type: "number", acceptable: ["173"] },
-      { id: "a22-p13", promptFr: "Calculez 900 − 350.",        type: "number", acceptable: ["550"] },
-      { id: "a22-p14", promptFr: "Calculez 3 000 − 1 245.",    type: "number", acceptable: ["1755"] },
-      { id: "a22-p15", promptFr: "Calculez 741 − 286.",        type: "number", acceptable: ["455"] },
-      { id: "a22-p16", promptFr: "Calculez 5 000 − 2 738.",    type: "number", acceptable: ["2262"] },
-    ],
-    poolSize: 5,
-  };
+  },
+
+  exercises: [
+    { id: "a2-2-e1", promptFr: "Quel est le résultat de 57 − 49 ?",               type: "number",     acceptable: ["8"] },
+    { id: "a2-2-e2", promptFr: "Calculez 863 − 427.",                              type: "number",     acceptable: ["436"] },
+    { id: "a2-2-e3", promptFr: "Comment appelle-t-on le résultat d'une soustraction ?", type: "short_text", acceptable: ["différence", "la différence"] },
+    { id: "a2-2-e4", promptFr: "Calculez 1005 − 348.",                             type: "number",     acceptable: ["657"] },
+    { id: "a2-2-e5", promptFr: "Calculez 700 − 256.",                              type: "number",     acceptable: ["444"] },
+  ],
+  exercisePool: [
+    { id: "a22-p1",  promptFr: "Calculez 57 − 49.",          type: "number", acceptable: ["8"] },
+    { id: "a22-p2",  promptFr: "Calculez 863 − 427.",        type: "number", acceptable: ["436"] },
+    { id: "a22-p3",  promptFr: "Calculez 700 − 256.",        type: "number", acceptable: ["444"] },
+    { id: "a22-p4",  promptFr: "Calculez 1 005 − 348.",      type: "number", acceptable: ["657"] },
+    { id: "a22-p5",  promptFr: "Calculez 500 − 173.",        type: "number", acceptable: ["327"] },
+    { id: "a22-p6",  promptFr: "Calculez 824 − 367.",        type: "number", acceptable: ["457"] },
+    { id: "a22-p7",  promptFr: "Calculez 1 000 − 456.",      type: "number", acceptable: ["544"] },
+    { id: "a22-p8",  promptFr: "Calculez 403 − 158.",        type: "number", acceptable: ["245"] },
+    { id: "a22-p9",  promptFr: "Calculez 2 135 − 1 523.",    type: "number", acceptable: ["612"] },
+    { id: "a22-p10", promptFr: "Calculez 611 − 157.",        type: "number", acceptable: ["454"] },
+    { id: "a22-p11", promptFr: "Quel terme manque ? ? − 48 = 52", type: "number", acceptable: ["100"] },
+    { id: "a22-p12", promptFr: "Quel terme manque ? 300 − ? = 127", type: "number", acceptable: ["173"] },
+    { id: "a22-p13", promptFr: "Calculez 900 − 350.",        type: "number", acceptable: ["550"] },
+    { id: "a22-p14", promptFr: "Calculez 3 000 − 1 245.",    type: "number", acceptable: ["1755"] },
+    { id: "a22-p15", promptFr: "Calculez 741 − 286.",        type: "number", acceptable: ["455"] },
+    { id: "a22-p16", promptFr: "Calculez 5 000 − 2 738.",    type: "number", acceptable: ["2262"] },
+  ],
+  poolSize: 5,
+};

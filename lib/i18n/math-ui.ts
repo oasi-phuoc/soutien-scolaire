@@ -17,6 +17,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Submit",
     ar: "تأكيد",
     fa: "تأیید",
+    pt: "Validar",
     ti: "ኣረጋግጽ",
     uk: "Підтвердити",
   },
@@ -25,6 +26,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Check answers",
     ar: "التحقق من الإجابات",
     fa: "بررسی پاسخ‌ها",
+    pt: "Verificar as respostas",
     ti: "ምርግጋጽ መልስታት",
     uk: "Перевірити відповіді",
   },
@@ -33,6 +35,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Expected",
     ar: "المتوقع",
     fa: "پاسخ درست",
+    pt: "Esperado",
     ti: "እተጸበየ",
     uk: "Очікувано",
   },
@@ -41,6 +44,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Your answer",
     ar: "إجابتك",
     fa: "پاسخ تو",
+    pt: "A tua resposta",
     ti: "መልስካ",
     uk: "Твоя відповідь",
   },
@@ -49,6 +53,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Correct",
     ar: "صحيح",
     fa: "درست",
+    pt: "Correto",
     ti: "ትኽክር",
     uk: "Вірно",
   },
@@ -57,6 +62,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Needs review",
     ar: "يحتاج مراجعة",
     fa: "نیاز به مرور",
+    pt: "A rever",
     ti: "እንደገና ርአ",
     uk: "Потрібно попрактикуватися",
   },
@@ -65,6 +71,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Answers saved. You can check them.",
     ar: "تم حفظ الإجابات. يمكنك التحقق.",
     fa: "پاسخ‌ها ثبت شد. می‌توانی بررسی کنی.",
+    pt: "Respostas registadas. Podes verificar.",
     ti: "መልስታት ተሓቚሞም። ምርግጋጽ ክትገብር ትኽእል።",
     uk: "Відповіді збережено. Можеш перевірити.",
   },
@@ -73,6 +80,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Translate",
     ar: "ترجمة",
     fa: "ترجمه",
+    pt: "Traduzir",
     ti: "ምትርጓም",
     uk: "Переклад",
   },
@@ -81,6 +89,7 @@ const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
     en: "Hide translation",
     ar: "إخفاء الترجمة",
     fa: "پنهان کردن ترجمه",
+    pt: "Esconder a tradução",
     ti: "ምትርጓም ምእላይ",
     uk: "Сховати переклад",
   },
@@ -91,7 +100,7 @@ export function mathExerciseUi(lang: PivotCode, key: MathExerciseUiKey): string 
   return row[lang] ?? row.fr;
 }
 
-/** Libellés interface exercices en français (langue d’étude), comme les énoncés. */
+/** Libellés interface exercices en français (langue d'étude), comme les énoncés. */
 export function mathExerciseFrenchUi(key: MathExerciseUiKey): string {
   return STRINGS[key].fr;
 }

@@ -1,94 +1,205 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A2-3",
-    submoduleCode: "A2.3",
-    theory: {
-      title: {
-        fr: "Estimation et arrondi",
-        en: "Estimation and rounding",
-        ar: "التقدير والتقريب",
-        fa: "تخمین و گرد کردن",
-        ti: "ቅምሻ ምግምጋም",
-        uk: "Оцінювання та округлення",
-      },
-      blocks: [
-        { type: "plain", fr: "L'arrondi consiste à remplacer un nombre par un nombre « proche » mais plus simple. On arrondit à la dizaine, centaine ou millier le plus proche." },
-        { type: "highlight", fr: "Règle d'arrondi" },
-        { type: "section", labelFr: "", itemsFr: [
-          "Regarde le chiffre qui suit la position d'arrondi.",
-          "Si ce chiffre est **≥ 5**",
-          "• arrondi vers le **haut** (augmente d'1).",
-          "Si ce chiffre est **< 5**",
-          "• arrondi vers le **bas** (reste tel quel).",
-        ] },
-        { type: "table", headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"], accentHeader: true, rows: [
-          ["347", "300", "chiffre des dizaines = 4 < 5 → vers le bas"],
-          ["850", "900", "chiffre des dizaines = 5 ≥ 5 → vers le haut"],
-          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5 → vers le haut"],
-          ["1 230", "1 200", "chiffre des dizaines = 3 < 5 → vers le bas"],
-        ] },
-        { type: "example", fr: "Estimation de 348 + 276 : arrondir à la centaine → 300 + 300 = 600 (résultat exact : 624)" },
-      ],
-      paragraphs: {
-        fr: [
-          "L'arrondi permet de simplifier un calcul en remplaçant un nombre par un nombre « proche » mais plus simple. On arrondit souvent à la dizaine, à la centaine ou au millier le plus proche.",
-          "Règle : si le chiffre suivant (celui qu'on supprime) est ≥ 5, on arrondit vers le haut. S'il est < 5, on arrondit vers le bas. Exemples : 347 arrondi à la centaine → 300 (car 4 < 5). 850 arrondi à la centaine → 900 (car 5 ≥ 5).",
-          "L'estimation consiste à trouver un résultat approximatif avant de calculer exactement. On commence par arrondir chaque nombre, puis on calcule. Exemple : 348 + 276 ≈ 350 + 280 = 630 (résultat exact : 624).",
-          "L'estimation est utile pour vérifier rapidement si une réponse est plausible.",
-        ],
-        en: [
-          "Rounding simplifies a calculation by replacing a number with a nearby round number. We often round to the nearest ten, hundred, or thousand.",
-          "Rule: if the next digit is ≥ 5, round up; if < 5, round down. Examples: 347 to hundred → 300. 850 to hundred → 900.",
-          "Estimation means finding an approximate result before calculating exactly. Round each number first, then calculate.",
-          "Estimation is useful for quickly checking if an answer is reasonable.",
-        ],
-        ar: [
-          "التقريب يبسّط الحساب باستبدال عدد بعدد قريب منه وأسهل. نقرّب عادةً إلى أقرب عشرة أو مئة أو ألف.",
-          "القاعدة: إذا كان الرقم التالي ≥ 5 نقرّب للأعلى، وإذا كان < 5 نقرّب للأسفل.",
-          "التقدير يعني إيجاد نتيجة تقريبية قبل الحساب الدقيق.",
-          "التقدير مفيد للتحقق السريع من معقولية الإجابة.",
-        ],
-        fa: [
-          "گرد کردن محاسبه را با جایگزین کردن یک عدد با یک عدد نزدیک ساده‌تر می‌کند.",
-          "قانون: اگر رقم بعدی ≥ ۵ باشد، به بالا گرد کنید. اگر < ۵ باشد، به پایین.",
-          "تخمین یعنی یافتن نتیجه‌ای تقریبی پیش از محاسبه دقیق.",
-          "تخمین برای بررسی سریع معقول بودن پاسخ مفید است.",
-        ],
-        ti: [
-          "ምልካዕ ናይ ቁጽሪ ምቅርራብ ናብ ቀረቡ ቀሊል ቁጽሪ ናይ ሕሳብ ቅምሻ ይሰርሕ።",
-          "ሕጊ: ዝቕጽል ቁጽሪ ≥ 5 → ዓቢ ምልካዕ። < 5 → ንታሕቲ ምልካዕ።",
-          "ቅምሻ ቅድሚ ትኽክለኛ ሕሳብ ምሕሳብ ናይ ቅምሻ ናይ ሕሳብ ምኩናን ምርካብ ማለት እዩ።",
-          "ቅምሻ ናይ ምምርምር ቅዱስ ምዃን ናይ ምላሽ ቅልጡፍ ምርጋጸ ጠቃሚ እዩ።",
-        ],
-        uk: [
-          "Округлення спрощує обчислення, замінюючи число близьким круглим числом.",
-          "Правило: якщо наступна цифра ≥ 5 — округляємо вгору; якщо < 5 — вниз.",
-          "Оцінювання — це знаходження наближеного результату перед точним обчисленням.",
-          "Оцінювання корисне для швидкої перевірки правдоподібності відповіді.",
-        ],
-      },
+  submoduleId: "A2-3",
+  submoduleCode: "A2.3",
+  theory: {
+    title: {
+      fr: "Estimation et arrondi",
+      en: "Estimation and rounding",
+      ar: "التقدير والتقريب",
+      fa: "تخمین و گرد کردن",
+      ti: "ቅምሻ ምግምጋም",
+      uk: "Оцінювання та округлення",
+      pt: "Estimativa e arredondamento",
     },
-    exercises: [
-      { id: "a2-3-e1", promptFr: "Arrondissez 347 à la centaine la plus proche.",  type: "number", acceptable: ["300"] },
-      { id: "a2-3-e2", promptFr: "Arrondissez 850 à la centaine la plus proche.",  type: "number", acceptable: ["900"] },
-      { id: "a2-3-e3", promptFr: "Arrondissez 4 682 au millier le plus proche.",   type: "number", acceptable: ["5000"] },
-      { id: "a2-3-e4", promptFr: "Estimez 348 + 276 en arrondissant à la centaine.", type: "number", acceptable: ["600", "630"] },
-      { id: "a2-3-e5", promptFr: "Arrondissez 73 à la dizaine la plus proche.",    type: "number", acceptable: ["70"] },
+
+    blocks: [
+      { type: "heading", fr: "Arrondi", black: true },
+
+      {
+        type: "plain",
+        fr: "L'arrondi consiste à remplacer un nombre par un nombre « proche » mais plus simple.",
+        pivot: {
+          en: "Rounding replaces a number with a nearby simpler number.",
+          ar: "التقريب يعني استبدال عدد بعدد قريب وأسهل.",
+          fa: "گرد کردن یعنی جایگزینی عدد با عددی نزدیک و ساده‌تر.",
+          ti: "ምልካዕ ቁጽሪ ብቀረቡ ቀሊል ቁጽሪ ምቅያር እዩ።",
+          uk: "Округлення замінює число на близьке простіше.",
+          pt: "Arredondar é substituir um número por outro mais simples e próximo.",
+        },
+      },
+
+      {
+        type: "highlight",
+        fr: "Règle d'arrondi",
+        pivot: {
+          en: "Rounding rule",
+          ar: "قاعدة التقريب",
+          fa: "قانون گرد کردن",
+          ti: "ሕጊ ምልካዕ",
+          uk: "Правило округлення",
+          pt: "Regra de arredondamento",
+        },
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Regarde le chiffre qui suit la position d'arrondi.",
+          "Si ce chiffre est **≥ 5** → arrondi vers le **haut**.",
+          "Si ce chiffre est **< 5** → arrondi vers le **bas**.",
+        ],
+      },
+
+      {
+        type: "table",
+        headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"],
+        accentHeader: true,
+        rows: [
+          ["347", "300", "chiffre des dizaines = 4 < 5\n→ vers le bas"],
+          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5\n→ vers le haut"],
+        ],
+      },
+
+      { type: "heading", fr: "Estimation", black: true },
+
+      {
+        type: "plain",
+        fr: "Une estimation consiste à trouver une valeur approximative d'un nombre ou d'un calcul. On ne cherche pas la réponse exacte, mais une réponse proche et rapide.",
+        pivot: {
+          en: "Estimation gives a quick approximate value without an exact calculation.",
+          ar: "التقدير يعطي قيمة تقريبية سريعة دون حساب دقيق.",
+          fa: "تخمین مقدار تقریبی سریع بدون محاسبه دقیق می‌دهد.",
+          ti: "ቅምሻ ብዘይ ትኽክለኛ ሕሳብ ፈጣን ቅርብ ውጽኢት ይህብ።",
+          uk: "Оцінювання дає швидке наближене значення без точного обчислення.",
+          pt: "A estimativa dá um valor aproximado rápido sem cálculo exato.",
+        },
+      },
+
+      {
+        type: "highlight",
+        fr: "Exemple",
+        pivot: { en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад", pt: "Exemplo" },
+      },
+
+      {
+        type: "plain",
+        fr: "198 + 305",
+      },
+
+      {
+        type: "plain",
+        fr: "On arrondit :",
+        pivot: {
+          en: "We round:",
+          ar: "نقرّب:",
+          fa: "گرد می‌کنیم:",
+          ti: "ንምልክት:",
+          uk: "Округлюємо:",
+          pt: "Arredondamos:",
+        },
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: ["198 → 200", "305 → 300"],
+      },
+
+      {
+        type: "plain",
+        fr: "Calcul estimé :",
+        pivot: {
+          en: "Estimated calculation:",
+          ar: "الحساب التقديري:",
+          fa: "محاسبه تقریبی:",
+          ti: "ናይ ቅምሻ ሕሳብ:",
+          uk: "Орієнтовний розрахунок:",
+          pt: "Cálculo estimado:",
+        },
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: ["200 + 300 = 500"],
+      },
+
+      {
+        type: "plain",
+        fr: "La réponse exacte est 503. L'estimation 500 est donc proche.",
+        pivot: {
+          en: "The exact answer is 503. The estimate 500 is close.",
+          ar: "الجواب الدقيق هو 503. التقدير 500 قريب جداً.",
+          fa: "پاسخ دقیق 503 است. تخمین 500 نزدیک است.",
+          ti: "ትኽክለኛ ውጽኢት 503 እዩ። ቅምሻ 500 ቀሪቡ ኣሎ።",
+          uk: "Точна відповідь — 503. Оцінка 500 дуже близька.",
+          pt: "A resposta exata é 503. A estimativa 500 está muito próxima.",
+        },
+      },
     ],
-    exercisePool: [
-      { id: "a23-p1",  promptFr: "Arrondissez 347 à la centaine.",   type: "number", acceptable: ["300"] },
-      { id: "a23-p2",  promptFr: "Arrondissez 850 à la centaine.",   type: "number", acceptable: ["900"] },
-      { id: "a23-p3",  promptFr: "Arrondissez 4 682 au millier.",    type: "number", acceptable: ["5000"] },
-      { id: "a23-p4",  promptFr: "Arrondissez 73 à la dizaine.",     type: "number", acceptable: ["70"] },
-      { id: "a23-p5",  promptFr: "Arrondissez 456 à la centaine.",   type: "number", acceptable: ["500"] },
-      { id: "a23-p6",  promptFr: "Arrondissez 1 230 à la centaine.", type: "number", acceptable: ["1200"] },
-      { id: "a23-p7",  promptFr: "Arrondissez 2 750 au millier.",    type: "number", acceptable: ["3000"] },
-      { id: "a23-p8",  promptFr: "Arrondissez 99 à la dizaine.",     type: "number", acceptable: ["100"] },
-      { id: "a23-p9",  promptFr: "Arrondissez 7 499 au millier.",    type: "number", acceptable: ["7000"] },
-      { id: "a23-p10", promptFr: "Arrondissez 8 500 au millier.",    type: "number", acceptable: ["9000"] },
-      { id: "a23-p11", promptFr: "Arrondissez 635 à la dizaine.",    type: "number", acceptable: ["640"] },
-      { id: "a23-p12", promptFr: "Arrondissez 3 452 au millier.",    type: "number", acceptable: ["3000"] },
-    ],
-    poolSize: 5,
-  };
+
+    paragraphs: {
+      fr: [
+        "L'arrondi simplifie les calculs en remplaçant un nombre par un nombre proche.",
+        "Règle : si le chiffre suivant ≥ 5 on arrondit vers le haut, sinon vers le bas.",
+        "L'estimation donne un résultat approximatif avant le calcul exact.",
+      ],
+      en: [
+        "Rounding simplifies calculations by replacing a number with a nearby one.",
+        "Rule: if the next digit ≥ 5, round up; otherwise round down.",
+        "Estimation gives an approximate result before the exact calculation.",
+      ],
+      ar: [
+        "التقريب يسهل الحساب باستبدال عدد بعدد قريب.",
+        "إذا ≥ 5 نقرب للأعلى وإلا للأسفل.",
+        "التقدير يعطي نتيجة تقريبية قبل الحساب الدقيق.",
+      ],
+      fa: [
+        "گرد کردن محاسبه را با جایگزینی عدد با عددی نزدیک ساده می‌کند.",
+        "اگر رقم بعدی ≥ ۵ باشد به بالا، در غیر این صورت به پایین.",
+        "تخمین نتیجه تقریبی پیش از محاسبه دقیق می‌دهد.",
+      ],
+      ti: [
+        "ምلካዕ ሕሳብ ይቐልል።",
+        "≥ 5 ዓቢ እنተኾነ ዓቢ ምልካዕ።",
+        "ቅምሻ ቅርብ ውጽኢት ቅድሚ ትኽክለኛ ሕሳብ ይህብ።",
+      ],
+      uk: [
+        "Округлення спрощує обчислення.",
+        "≥ 5 → округлюємо вгору, інакше вниз.",
+        "Оцінювання дає наближений результат перед точним.",
+      ],
+      pt: [
+        "O arredondamento simplifica cálculos substituindo um número por outro próximo.",
+        "Se o próximo dígito ≥ 5, arredonda para cima; caso contrário, para baixo.",
+        "A estimativa dá um resultado aproximado antes do cálculo exato.",
+      ],
+    },
+  },
+
+  exercises: [
+    { id: "a2-3-e1", promptFr: "Arrondissez 347 à la centaine la plus proche.",    type: "number", acceptable: ["300"] },
+    { id: "a2-3-e2", promptFr: "Arrondissez 850 à la centaine la plus proche.",    type: "number", acceptable: ["900"] },
+    { id: "a2-3-e3", promptFr: "Arrondissez 4 682 au millier le plus proche.",     type: "number", acceptable: ["5000"] },
+    { id: "a2-3-e4", promptFr: "Estimez 348 + 276 en arrondissant à la centaine.", type: "number", acceptable: ["600", "630"] },
+    { id: "a2-3-e5", promptFr: "Arrondissez 73 à la dizaine la plus proche.",      type: "number", acceptable: ["70"] },
+  ],
+  exercisePool: [
+    { id: "a23-p1",  promptFr: "Arrondissez 347 à la centaine.",   type: "number", acceptable: ["300"] },
+    { id: "a23-p2",  promptFr: "Arrondissez 850 à la centaine.",   type: "number", acceptable: ["900"] },
+    { id: "a23-p3",  promptFr: "Arrondissez 4 682 au millier.",    type: "number", acceptable: ["5000"] },
+    { id: "a23-p4",  promptFr: "Arrondissez 73 à la dizaine.",     type: "number", acceptable: ["70"] },
+    { id: "a23-p5",  promptFr: "Arrondissez 456 à la centaine.",   type: "number", acceptable: ["500"] },
+    { id: "a23-p6",  promptFr: "Arrondissez 1 230 à la centaine.", type: "number", acceptable: ["1200"] },
+    { id: "a23-p7",  promptFr: "Arrondissez 2 750 au millier.",    type: "number", acceptable: ["3000"] },
+    { id: "a23-p8",  promptFr: "Arrondissez 99 à la dizaine.",     type: "number", acceptable: ["100"] },
+    { id: "a23-p9",  promptFr: "Arrondissez 7 499 au millier.",    type: "number", acceptable: ["7000"] },
+    { id: "a23-p10", promptFr: "Arrondissez 8 500 au millier.",    type: "number", acceptable: ["9000"] },
+    { id: "a23-p11", promptFr: "Arrondissez 635 à la dizaine.",    type: "number", acceptable: ["640"] },
+    { id: "a23-p12", promptFr: "Arrondissez 3 452 au millier.",    type: "number", acceptable: ["3000"] },
+  ],
+  poolSize: 5,
+};

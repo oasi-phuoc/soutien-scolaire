@@ -6,7 +6,7 @@ import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade, medalFromPercent } from "@/lib/scoring";
+import { percentToSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
 
 function renderBold(text: string) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
@@ -22,13 +22,21 @@ function formatCompNum(n: number): string {
 }
 
 // ── Step types ──────────────────────────────────────────────────────────────
-type TheoryStep      = { kind: "theory";        lesson: MathSubmoduleLesson };
-type ExerciseStep    = { kind: "exercise";      lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type NumberLineStep  = { kind: "number_line";   lesson: MathSubmoduleLesson; nlConfig: NLConfig };
-type ComparisonStep  = { kind: "comparison_ex"; lesson: MathSubmoduleLesson; config: ComparisonConfig };
-type EvalStartStep   = { kind: "eval_start";    lesson: MathSubmoduleLesson };
-type PassToggleStep  = { kind: "pass_toggle";   lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | EvalStartStep | PassToggleStep;
+type ArithOp = "+" | "-";
+type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
+type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp };
+type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
+type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
+
+type TheoryStep      = { kind: "theory";          lesson: MathSubmoduleLesson };
+type ExerciseStep    = { kind: "exercise";         lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type NumberLineStep  = { kind: "number_line";      lesson: MathSubmoduleLesson; nlConfig: NLConfig };
+type ComparisonStep  = { kind: "comparison_ex";    lesson: MathSubmoduleLesson; config: ComparisonConfig };
+type ArithGroupStep  = { kind: "arithmetic_group"; lesson: MathSubmoduleLesson; config: ArithGroupConfig };
+type ColumnGridStep  = { kind: "column_grid";      lesson: MathSubmoduleLesson; config: ColGridConfig };
+type EvalStartStep   = { kind: "eval_start";       lesson: MathSubmoduleLesson };
+type PassToggleStep  = { kind: "pass_toggle";      lesson: MathSubmoduleLesson };
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | EvalStartStep | PassToggleStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -216,6 +224,274 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
   );
 }
 
+// ── Arithmetic group generators ──────────────────────────────────────────────
+function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false): ArithGroupConfig {
+  const [lo, hi] = range;
+  const qs: ArithQuestion[] = [];
+  for (let i = 0; i < 5; i++) {
+    let a: number, b: number, result: number;
+    if (op === "+") {
+      a = rnd(lo, hi); b = rnd(lo, hi); result = a + b;
+    } else {
+      do { a = rnd(lo, hi); b = rnd(lo, hi); } while (a < b);
+      result = a - b;
+    }
+    const missingPos = !missingOperand ? ("result" as const) : Math.random() < 0.5 ? ("a" as const) : ("b" as const);
+    const answer = missingPos === "result" ? String(result) : missingPos === "a" ? String(a) : String(b);
+    qs.push({ a, b, result, op, missingPos, answer });
+  }
+  return { questions: qs, exNum, op };
+}
+
+// ── Column grid generators ────────────────────────────────────────────────────
+function getD4(n: number): [number, number, number, number] {
+  return [Math.floor(n / 1000) % 10, Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
+}
+
+function computeCarries(a: number, b: number, op: ArithOp): (number | null)[] {
+  const row: (number | null)[] = [null, null, null, null];
+  const ad = getD4(a), bd = getD4(b);
+  if (op === "+") {
+    let c = 0;
+    for (let i = 3; i >= 0; i--) {
+      const s = ad[i]! + bd[i]! + c;
+      c = Math.floor(s / 10);
+      if (i > 0 && c > 0) row[i - 1] = c;
+    }
+  } else {
+    let borrow = 0;
+    for (let i = 3; i >= 0; i--) {
+      const d = ad[i]! - bd[i]! - borrow;
+      if (d < 0) { borrow = 1; if (i > 0) row[i - 1] = 1; }
+      else { borrow = 0; }
+    }
+  }
+  return row;
+}
+
+function genColGridQ(op: ArithOp): ColGridQ {
+  for (;;) {
+    let a: number, b: number;
+    if (op === "+") { a = rnd(100, 4999); b = rnd(100, 9999 - a); }
+    else { a = rnd(1000, 9999); b = rnd(100, a - 1); }
+    const result = op === "+" ? a + b : a - b;
+    if (result >= 0 && result <= 9999) return { a, b, result, op, carryRow: computeCarries(a, b, op) };
+  }
+}
+
+function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number): ColGridConfig {
+  return { questions: Array.from({ length: 4 }, () => genColGridQ(op)), exNum, op, preFilledOperands };
+}
+
+// ── ArithmeticGroupExercise ───────────────────────────────────────────────────
+function ArithmeticGroupExercise({
+  config, answers, validated, results, onChange,
+}: {
+  config: ArithGroupConfig;
+  answers: string[];
+  validated: boolean;
+  results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  const score = results.filter(Boolean).length;
+  const numCls = "w-14 text-center font-mono text-sm text-[var(--color-text-primary)]";
+  const inputCls = (ok: boolean | null) =>
+    `w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors ${
+      ok === null ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+      : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
+      : "border-red-400 bg-red-50 dark:bg-red-950/20"
+    }`;
+  return (
+    <div className="space-y-4">
+      <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Exercice {config.exNum}</p>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? results[i] ?? false : null;
+          return (
+            <div key={i} className="flex items-center gap-1.5">
+              <span className="w-5 shrink-0 text-xs font-medium text-[var(--color-accent-alg)]">{i + 1}.</span>
+              {q.missingPos === "a"
+                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                : <span className={numCls}>{q.a}</span>}
+              <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
+              {q.missingPos === "b"
+                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                : <span className={numCls}>{q.b}</span>}
+              <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
+              {q.missingPos === "result"
+                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                : <span className={numCls}>{q.result}</span>}
+              {validated && (
+                <span className={`ml-1 text-xs ${results[i] ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+                  {results[i] ? "✓" : `→ ${q.answer}`}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      {validated && (
+        <p className={`text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
+          {score}/5 bonnes réponses
+        </p>
+      )}
+    </div>
+  );
+}
+
+// ── ColumnGridExercise ────────────────────────────────────────────────────────
+const COL_LABELS = ["T", "C", "D", "U"] as const;
+
+function ColumnGridCard({
+  q, cardIdx, cellAnswers, validated, cardCorrect, preFilledOperands, onChange,
+}: {
+  q: ColGridQ; cardIdx: number; cellAnswers: string[];
+  validated: boolean; cardCorrect: boolean; preFilledOperands: boolean;
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+}) {
+  const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
+  // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
+  // cellIdx layout: [0-3]=result only (when preFilledOperands)
+  const resBase = preFilledOperands ? 0 : 8;
+
+  const cellOk = (expected: number, val: string) => {
+    const trimmed = val.trim();
+    return trimmed === String(expected) || (expected === 0 && trimmed === "");
+  };
+
+  const CellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
+    const idx = base + col;
+    const val = cellAnswers[idx] ?? "";
+    const ok = validated ? cellOk(expected, val) : null;
+    return (
+      <input
+        type="text"
+        inputMode="numeric"
+        maxLength={1}
+        value={val}
+        disabled={validated}
+        onChange={e => {
+          const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
+          onChange(cardIdx, idx, v);
+        }}
+        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
+          ok === null ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+          : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
+          : "border-red-400 bg-red-50 dark:bg-red-950/20"
+        }`}
+      />
+    );
+  };
+
+  const Prefilled = ({ digit }: { digit: number }) => (
+    <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${digit === 0 ? "text-[var(--color-text-secondary)] opacity-40" : "text-[var(--color-text-primary)]"}`}>
+      {digit > 0 ? digit : ""}
+    </div>
+  );
+
+  return (
+    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <p className="mb-2 text-xs text-[var(--color-text-secondary)]">
+        {formatCompNum(q.a)} {q.op} {formatCompNum(q.b)} = ?
+      </p>
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {COL_LABELS.map(h => (
+              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {/* Carry / borrow row */}
+          <tr>
+            <td />
+            {q.carryRow.map((c, ci) => (
+              <td key={ci} className="text-center">
+                <div className="flex h-5 w-8 items-center justify-center text-[10px] font-bold text-orange-500">
+                  {c !== null ? c : ""}
+                </div>
+              </td>
+            ))}
+          </tr>
+          {/* Operand 1 */}
+          <tr>
+            <td />
+            {[0, 1, 2, 3].map(col => (
+              <td key={col} className="text-center">
+                {preFilledOperands ? <Prefilled digit={ad[col]!} /> : <CellInput base={0} col={col} expected={ad[col]!} />}
+              </td>
+            ))}
+          </tr>
+          {/* Operand 2 */}
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
+            {[0, 1, 2, 3].map(col => (
+              <td key={col} className="text-center">
+                {preFilledOperands ? <Prefilled digit={bd[col]!} /> : <CellInput base={4} col={col} expected={bd[col]!} />}
+              </td>
+            ))}
+          </tr>
+          {/* Separator */}
+          <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          {/* Result */}
+          <tr>
+            <td />
+            {[0, 1, 2, 3].map(col => (
+              <td key={col} className="text-center">
+                <CellInput base={resBase} col={col} expected={rd[col]!} />
+              </td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      {validated && (
+        <p className={`mt-1 text-[10px] font-medium ${cardCorrect ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+          {cardCorrect ? "✓ Correct" : `→ ${formatCompNum(q.result)}`}
+        </p>
+      )}
+    </div>
+  );
+}
+
+function ColumnGridExercise({
+  config, answers, validated, results, onChange,
+}: {
+  config: ColGridConfig;
+  answers: string[][];
+  validated: boolean;
+  results: boolean[];
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+}) {
+  const score = results.filter(Boolean).length;
+  return (
+    <div className="space-y-4">
+      <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Exercice {config.exNum}</p>
+      <div className="grid grid-cols-2 gap-3">
+        {config.questions.map((q, qi) => (
+          <ColumnGridCard
+            key={qi}
+            q={q}
+            cardIdx={qi}
+            cellAnswers={answers[qi] ?? []}
+            validated={validated}
+            cardCorrect={results[qi] ?? false}
+            preFilledOperands={config.preFilledOperands}
+            onChange={onChange}
+          />
+        ))}
+      </div>
+      {validated && (
+        <p className={`text-sm font-medium ${score === 4 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
+          {score}/4 bonnes réponses
+        </p>
+      )}
+    </div>
+  );
+}
+
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -229,19 +505,25 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
-    if (lesson.submoduleId === "A1-4") {
-      steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
-    }
-    if (lesson.submoduleId === "A1-3") {
-      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
-      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
-    }
-    const pool = lesson.exercisePool;
-    const size = lesson.poolSize ?? 5;
-    const exercises =
-      pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
-    for (const item of exercises) {
-      steps.push({ kind: "exercise", lesson, item });
+    const sid = lesson.submoduleId;
+    if (sid === "A2-1" || sid === "A2-2") {
+      const op: ArithOp = sid === "A2-1" ? "+" : "-";
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 3) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4, true) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 5) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 6) });
+    } else {
+      if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
+      if (sid === "A1-3") {
+        steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
+        steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
+      }
+      const pool = lesson.exercisePool;
+      const size = lesson.poolSize ?? 5;
+      const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
+      for (const item of exercises) steps.push({ kind: "exercise", lesson, item });
     }
   }
   if (withEval && lessons.length > 0) {
@@ -438,6 +720,17 @@ export function GenericModuleContent({
   const [compResults, setCompResults] = useState<boolean[]>(() => Array(5).fill(false));
   const [compOverrideConfigs, setCompOverrideConfigs] = useState<Record<number, ComparisonConfig>>({});
 
+  // Arithmetic group exercise state
+  const [arithAnswers, setArithAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [arithValidated, setArithValidated] = useState(false);
+  const [arithResults, setArithResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  // Column grid exercise state (4 cards × 12 cells max)
+  const emptyGrid = () => Array.from({ length: 4 }, () => Array(12).fill("") as string[]);
+  const [gridAnswers, setGridAnswers] = useState<string[][]>(emptyGrid);
+  const [gridValidated, setGridValidated] = useState(false);
+  const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
+
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
@@ -453,6 +746,12 @@ export function GenericModuleContent({
     setCompAnswers(Array(5).fill(null));
     setCompValidated(false);
     setCompResults(Array(5).fill(false));
+    setArithAnswers(Array(5).fill(""));
+    setArithValidated(false);
+    setArithResults(Array(5).fill(false));
+    setGridAnswers(emptyGrid());
+    setGridValidated(false);
+    setGridResults(Array(4).fill(false));
   }, []);
 
   const goBack = useCallback(() => {
@@ -461,10 +760,18 @@ export function GenericModuleContent({
 
   function finishEval(correct: boolean) {
     if (!startSubmoduleId) { router.push("/mathematiques"); return; }
+    const p = loadProgress();
+    // Don't downgrade a submodule that was already passed
+    if (!correct) {
+      const existing = p.submoduleScores?.[startSubmoduleId];
+      if (existing && existing.grade >= PASSING_GRADE) {
+        router.push("/mathematiques");
+        return;
+      }
+    }
     const pct = correct ? 100 : 0;
     const grade = percentToSwissGrade(pct);
     const medal = correct ? medalFromPercent(pct) : undefined;
-    const p = loadProgress();
     saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
     void medal;
     router.push("/mathematiques");
@@ -536,6 +843,52 @@ export function GenericModuleContent({
       setCompAnswers(Array(5).fill(null));
       setCompValidated(false);
       setCompResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "arithmetic_group" && !arithValidated) {
+    stepCanValidate = arithAnswers.every(a => a.trim().length > 0);
+    stepValidate = () => {
+      const qs = currentStep.config.questions;
+      setArithResults(qs.map((q, i) => (arithAnswers[i] ?? "").trim() === q.answer));
+      setArithValidated(true);
+    };
+    stepReset = () => {
+      setArithAnswers(Array(5).fill(""));
+      setArithValidated(false);
+      setArithResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "column_grid" && !gridValidated) {
+    const cfg = currentStep.config;
+    const resBase = cfg.preFilledOperands ? 0 : 8;
+    stepCanValidate = cfg.questions.every((_, qi) => {
+      const cells = gridAnswers[qi] ?? [];
+      // At minimum, result cells must be touched (non-empty for non-zero expected digits)
+      return getD4(cfg.questions[qi]!.result).some((d, col) => d > 0 && (cells[resBase + col] ?? "").trim().length > 0);
+    });
+    stepValidate = () => {
+      const res = cfg.questions.map((q, qi) => {
+        const cells = gridAnswers[qi] ?? [];
+        const rd = getD4(q.result);
+        const resultOk = rd.every((d, col) => {
+          const v = (cells[resBase + col] ?? "").trim();
+          return v === String(d) || (d === 0 && v === "");
+        });
+        if (cfg.preFilledOperands) return resultOk;
+        const ad = getD4(q.a), bd = getD4(q.b);
+        const op1Ok = ad.every((d, col) => { const v = (cells[col] ?? "").trim(); return v === String(d) || (d === 0 && v === ""); });
+        const op2Ok = bd.every((d, col) => { const v = (cells[4 + col] ?? "").trim(); return v === String(d) || (d === 0 && v === ""); });
+        return resultOk && op1Ok && op2Ok;
+      });
+      setGridResults(res);
+      setGridValidated(true);
+    };
+    stepReset = () => {
+      setGridAnswers(Array.from({ length: 4 }, () => Array(12).fill("")));
+      setGridValidated(false);
+      setGridResults(Array(4).fill(false));
     };
   }
 
@@ -650,6 +1003,32 @@ export function GenericModuleContent({
           validated={compValidated}
           results={compResults}
           onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+        />
+      )}
+
+      {/* Arithmetic group exercise */}
+      {currentStep?.kind === "arithmetic_group" && (
+        <ArithmeticGroupExercise
+          config={currentStep.config}
+          answers={arithAnswers}
+          validated={arithValidated}
+          results={arithResults}
+          onChange={(i, val) => setArithAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+        />
+      )}
+
+      {/* Column grid exercise */}
+      {currentStep?.kind === "column_grid" && (
+        <ColumnGridExercise
+          config={currentStep.config}
+          answers={gridAnswers}
+          validated={gridValidated}
+          results={gridResults}
+          onChange={(cardIdx, cellIdx, val) =>
+            setGridAnswers(prev => prev.map((card, ci) =>
+              ci === cardIdx ? card.map((v, vi) => vi === cellIdx ? val : v) : card
+            ))
+          }
         />
       )}
 

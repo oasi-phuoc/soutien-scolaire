@@ -103,8 +103,8 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         itemsFr: [
           "On a deux chiffres 3 456 et 3 421",
           "• même nombre de chiffres",
-          "• chiffres des milliers (3=3)",
-          "• centaines (4=4)",
+          "• milliers égaux",
+          "• centaines égales",
           "• dizaines : 5 > 2",
           "• 3 456 > 3 421",
         ],
