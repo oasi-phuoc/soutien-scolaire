@@ -710,7 +710,6 @@ export function GenericModuleContent({
   // Comparison exercise lifted state
   const [compAnswers, setCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
   const [compValidated, setCompValidated] = useState(false);
-  const [compResults, setCompResults] = useState<boolean[]>(() => Array(5).fill(false));
   const [compOverrideConfigs, setCompOverrideConfigs] = useState<Record<number, ComparisonConfig>>({});
   const [arithOverrideConfigs, setArithOverrideConfigs] = useState<Record<number, ArithGroupConfig>>({});
   const [gridOverrideConfigs, setGridOverrideConfigs] = useState<Record<number, ColGridConfig>>({});
@@ -836,13 +835,11 @@ export function GenericModuleContent({
       setCompOverrideConfigs(prev => ({ ...prev, [stepIdx]: genComparisonConfig(step.config.level) }));
       setCompAnswers(Array(5).fill(null));
       setCompValidated(false);
-      setCompResults(Array(5).fill(false));
     };
     if (!compValidated) {
       stepCanValidate = true;
       stepValidate = () => {
         if (!activeCompConfig) return;
-        setCompResults(activeCompConfig.questions.map((q, i) => compAnswers[i] === q.answer));
         setCompValidated(true);
       };
     } else {
