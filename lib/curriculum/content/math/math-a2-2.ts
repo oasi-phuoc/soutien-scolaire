@@ -95,8 +95,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
       },
     ],
 
-    paragraphs: { fr: [],
-    },
+    paragraphs: { fr: [] },
   },
 
   exercises: [
