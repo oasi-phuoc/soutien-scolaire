@@ -75,57 +75,7 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
         captionFr: "579 + 24 : disposition en colonnes",
       },
     ],
-    paragraphs: {
-      fr: [
-        "L'addition permet de réunir plusieurs quantités. Le signe de l'addition est « + » (plus). Les nombres à additionner sont les termes. Le résultat de l'addition est la somme.",
-        "Propriété 1 — Commutativité : si l'on change l'ordre des termes d'une addition, la somme ne change pas. Exemple : 57 + 49 = 49 + 57 = 106.",
-        "Propriété 2 — Associativité : on peut additionner plus de deux termes dans l'ordre que l'on veut. Exemple : 15 + 37 + 22 = 74.",
-        "Addition en colonnes : écrivez les nombres en alignant les unités, les dizaines, les centaines. Commencez par additionner les unités. Si la somme dépasse 9, retenez le chiffre des dizaines (retenue). Continuez avec les dizaines, puis les centaines.",
-        "Exemple : 579 + 24 → unités : 9 + 4 = 13 (on pose 3, on retient 1) → dizaines : 1 + 7 + 2 = 10 (on pose 0, on retient 1) → centaines : 1 + 5 = 6 → résultat : 603.",
-      ],
-      en: [
-        "Addition combines several quantities. The addition sign is « + » (plus). The numbers being added are called terms. The result is the sum.",
-        "Property 1 — Commutativity: changing the order of the terms does not change the sum. Example: 57 + 49 = 49 + 57 = 106.",
-        "Property 2 — Associativity: you can add more than two terms in any order. Example: 15 + 37 + 22 = 74.",
-        "Column addition: write the numbers aligned by units, tens, hundreds. Start with the units. If the sum exceeds 9, carry the tens digit. Then do the tens, then the hundreds.",
-        "Example: 579 + 24 → units: 9 + 4 = 13 (write 3, carry 1) → tens: 1 + 7 + 2 = 10 (write 0, carry 1) → hundreds: 1 + 5 = 6 → result: 603.",
-      ],
-      ar: [
-        "الجمع يجمع عدة كميات معًا. علامة الجمع « + » (زائد). الأعداد المجموعة تسمى الحدود. الناتج يسمى المجموع.",
-        "الخاصية 1 — الإبدال: تغيير ترتيب الحدود لا يغير المجموع. مثال: 57 + 49 = 49 + 57 = 106.",
-        "الخاصية 2 — التجميع: يمكن جمع أكثر من حدين بأي ترتيب. مثال: 15 + 37 + 22 = 74.",
-        "الجمع في أعمدة: اكتب الأعداد محاذيًا الآحاد والعشرات والمئات. ابدأ بجمع الآحاد. إذا تجاوز المجموع 9، احمل رقم العشرات. ثم العشرات، ثم المئات.",
-        "مثال: 579 + 24 → آحاد: 9 + 4 = 13 (اكتب 3 واحمل 1) → عشرات: 1 + 7 + 2 = 10 (اكتب 0 واحمل 1) → مئات: 1 + 5 = 6 → الناتج: 603.",
-      ],
-      fa: [
-        "جمع چند مقدار را با هم ترکیب می‌کند. علامت جمع « + » است. اعداد جمع‌شونده را جملات و نتیجه را مجموع می‌نامند.",
-        "ویژگی ۱ — جابجایی: تغییر ترتیب مجموع را تغییر نمی‌دهد. مثال: ۵۷ + ۴۹ = ۴۹ + ۵۷ = ۱۰۶.",
-        "ویژگی ۲ — انجمنی: می‌توان بیش از دو جمله را به هر ترتیبی جمع کرد. مثال: ۱۵ + ۳۷ + ۲۲ = ۷۴.",
-        "جمع ستونی: اعداد را با تراز کردن یکان، دهگان، صدگان بنویسید. از یکان‌ها شروع کنید. اگر مجموع از ۹ بیشتر شد، نقل دهید. سپس دهگان‌ها و صدگان‌ها.",
-        "مثال: ۵۷۹ + ۲۴ → یکان: ۹ + ۴ = ۱۳ (بنویس ۳، نقل ۱) → دهگان: ۱ + ۷ + ۲ = ۱۰ (بنویس ۰، نقل ۱) → صدگان: ۱ + ۵ = ۶ → نتیجه: ۶۰۳.",
-      ],
-      ti: [
-        "ምደማር ብዙ መጠናት ሓቢሩ ይሰርዕ። ምልክት ምደማር « + » (ደሚርካ) እዩ። ዝጽምሙ ቁጽሪታት ድምር ይፍጠር።",
-        "ኣቃውማ ፩ — ቅደም-ሰዓበ: ቅደም ምቕያር ድምር ኣይቅይርን። ኣብነት: 57 + 49 = 49 + 57 = 106.",
-        "ኣቃውማ ፪ — ምጽምባር: ዝበዝሑ ቁጽርታት ብዝደለዮ ቅደም ክድምር ይከኣል። ኣብነት: 15 + 37 + 22 = 74.",
-        "ኣብ ዓምዲ ምደማር: ቁጽርታት ኣሃዱ፡ ዓሰርተ፡ ሚእቲ ብምስልሳልና። ካብ ኣሃዱ ጀምር። ውጽኢቱ ካብ 9 ዝበዝሕ እንተኾነ ሃሊዝ።",
-        "ኣብነት: 579 + 24 → ኣሃዱ: 9 + 4 = 13 (3 ጽሓፍ፡ 1 ሃሊዝ) → ዓሰርተ: 1+7+2=10 (0 ጽሓፍ፡ 1 ሃሊዝ) → ሚእቲ: 1+5=6 → ውጽኢት: 603.",
-      ],
-      uk: [
-        "Додавання об'єднує кілька величин. Знак « + » (плюс). Числа — доданки. Результат — сума.",
-        "Властивість 1 — Комутативність: зміна порядку не змінює суму. Приклад: 57 + 49 = 49 + 57 = 106.",
-        "Властивість 2 — Асоціативність: можна додавати більше двох доданків у будь-якому порядку. Приклад: 15 + 37 + 22 = 74.",
-        "Додавання в стовпчик: вирівнюйте одиниці, десятки, сотні. Починайте з одиниць. Якщо сума > 9, перенесіть. Потім десятки та сотні.",
-        "Приклад: 579 + 24 → одиниці: 9+4=13 (пишемо 3, переносимо 1) → десятки: 1+7+2=10 (пишемо 0, переносимо 1) → сотні: 1+5=6 → результат: 603.",
-      ],
-      pt: [
-        "A adição permite reunir várias quantidades. O sinal da adição é « + » (mais). Os números a serem somados chamam-se termos. O resultado da adição é a soma.",
-        "Propriedade 1 — Comutatividade: a ordem dos termos não altera a soma. Exemplo: 57 + 49 = 49 + 57 = 106.",
-        "Propriedade 2 — Associatividade: é possível somar mais de dois termos em qualquer ordem. Exemplo: 15 + 37 + 22 = 74.",
-        "Adição em coluna: escreva os números alinhando unidades, dezenas e centenas. Comece pelas unidades. Se a soma for maior que 9, transporte a dezena (vai-um). Depois continue com dezenas e centenas.",
-        "Exemplo: 579 + 24 → unidades: 9 + 4 = 13 (escreve 3, vai 1) → dezenas: 1 + 7 + 2 = 10 (escreve 0, vai 1) → centenas: 1 + 5 = 6 → resultado: 603.",
-      ],
-    },
+    paragraphs: { fr: [ ] },
   },
   exercises: [
 
