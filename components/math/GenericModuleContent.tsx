@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useState, Fragment } from "react";
+import { useCallback, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
@@ -56,31 +56,33 @@ function genComparisonConfig(level: 1 | 2): ComparisonConfig {
   return { questions, level };
 }
 
-function ComparisonExercise({ config }: { config: ComparisonConfig }) {
-  const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
-  const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>(() => Array(5).fill(false));
-  const allAnswered = answers.every(a => a !== null);
+function ComparisonExercise({
+  config,
+  answers,
+  validated,
+  results,
+  onAnswer,
+}: {
+  config: ComparisonConfig;
+  answers: Array<"<" | "=" | ">" | null>;
+  validated: boolean;
+  results: boolean[];
+  onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+}) {
   const score = results.filter(Boolean).length;
-
-  function validate() {
-    if (!allAnswered || validated) return;
-    setResults(config.questions.map((q, i) => answers[i] === q.answer));
-    setValidated(true);
-  }
 
   return (
     <div className="space-y-4">
-      <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+      <p className="text-sm font-semibold text-[var(--color-accent-alg)]">
         Exercice {config.level} — Les symboles de comparaison
       </p>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="grid grid-cols-[auto_1fr_auto_1fr] items-center gap-x-3 gap-y-3">
+        <div className="space-y-3">
           {config.questions.map((q, i) => (
-            <Fragment key={i}>
-              <span className="text-xs font-medium text-[var(--color-text-secondary)]">{i + 1}.</span>
-              <span className="text-right font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
-              <div className="flex gap-1">
+            <div key={i} className="flex items-center gap-3">
+              <span className="w-5 shrink-0 text-xs font-medium text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="min-w-[4rem] font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
+              <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
                   const isCorrect = sym === q.answer;
@@ -90,22 +92,16 @@ function ComparisonExercise({ config }: { config: ComparisonConfig }) {
                   } else {
                     cls += isCorrect ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : sel ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
-                  return <button key={sym} type="button" disabled={validated} onClick={() => setAnswers(prev => prev.map((a, j) => j === i ? sym : a))} className={cls}>{sym}</button>;
+                  return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
               </div>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
-            </Fragment>
+            </div>
           ))}
         </div>
       </div>
-      {!validated && (
-        <button type="button" onClick={validate} disabled={!allAnswered}
-          className="w-full rounded-xl bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white disabled:opacity-30">
-          Valider
-        </button>
-      )}
       {validated && (
-        <p className={`text-center text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
+        <p className={`text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
           {score}/5 bonnes réponses
         </p>
       )}
@@ -389,6 +385,12 @@ export function GenericModuleContent({
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
 
+  // Comparison exercise lifted state
+  const [compAnswers, setCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
+  const [compValidated, setCompValidated] = useState(false);
+  const [compResults, setCompResults] = useState<boolean[]>(() => Array(5).fill(false));
+  const [compOverrideConfigs, setCompOverrideConfigs] = useState<Record<number, ComparisonConfig>>({});
+
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
@@ -401,6 +403,9 @@ export function GenericModuleContent({
     setExStatus("idle");
     setExAttempts(0);
     setToggleAnswer(null);
+    setCompAnswers(Array(5).fill(null));
+    setCompValidated(false);
+    setCompResults(Array(5).fill(false));
   }, []);
 
   const goBack = useCallback(() => {
@@ -448,8 +453,14 @@ export function GenericModuleContent({
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
+  let stepCanValidate = true;
+
+  const activeCompConfig = currentStep?.kind === "comparison_ex"
+    ? (compOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
+    stepCanValidate = answer.trim().length > 0;
     stepValidate = () => {
       if (!currentStep) return;
       let ok: boolean;
@@ -461,9 +472,24 @@ export function GenericModuleContent({
       setExStatus(ok ? "correct" : "wrong");
       setExAttempts((a) => a + 1);
     };
-    if (exStatus === "wrong") {
-      stepReset = () => { setAnswer(""); setExStatus("idle"); };
-    }
+    stepReset = () => { setAnswer(""); setExStatus("idle"); setExAttempts(0); };
+  }
+
+  if (currentStep?.kind === "comparison_ex" && !compValidated) {
+    const compAllAnswered = compAnswers.every(a => a !== null);
+    stepCanValidate = compAllAnswered;
+    stepValidate = () => {
+      if (!activeCompConfig) return;
+      setCompResults(activeCompConfig.questions.map((q, i) => compAnswers[i] === q.answer));
+      setCompValidated(true);
+    };
+    stepReset = () => {
+      const step = currentStep as ComparisonStep;
+      setCompOverrideConfigs(prev => ({ ...prev, [stepIdx]: genComparisonConfig(step.config.level) }));
+      setCompAnswers(Array(5).fill(null));
+      setCompValidated(false);
+      setCompResults(Array(5).fill(false));
+    };
   }
 
   if (!lessons || lessons.length === 0 || steps.length === 0) {
@@ -570,8 +596,14 @@ export function GenericModuleContent({
       )}
 
       {/* Comparison exercise */}
-      {currentStep?.kind === "comparison_ex" && (
-        <ComparisonExercise config={currentStep.config} />
+      {currentStep?.kind === "comparison_ex" && activeCompConfig && (
+        <ComparisonExercise
+          config={activeCompConfig}
+          answers={compAnswers}
+          validated={compValidated}
+          results={compResults}
+          onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+        />
       )}
 
       {/* Eval start screen */}
@@ -683,7 +715,7 @@ export function GenericModuleContent({
                   <button
                     type="button"
                     onClick={stepValidate}
-                    disabled={!answer.trim()}
+                    disabled={!stepCanValidate}
                     className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-accent-alg)] text-white transition-opacity disabled:opacity-30"
                     aria-label="Valider"
                   >

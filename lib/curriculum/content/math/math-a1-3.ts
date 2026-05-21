@@ -38,6 +38,20 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
           "• dizaines : 5 > 2",
           "• 3 456 > 3 421",
         ] },
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Valeur entre deux bornes", black: true },
+        { type: "highlight", fr: "Principe", pivot: { en: "Principle", ar: "المبدأ", fa: "اصل", ti: "መትከል", uk: "Принцип" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Si **A < X < B**, alors X est compris entre A et B.",
+          "• X est plus grand que A",
+          "• X est plus petit que B",
+        ] },
+        { type: "highlight", fr: "Exemple", pivot: { en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Quels nombres entiers sont entre 3 et 8 ?",
+          "• 3 < ? < 8",
+          "• Les valeurs possibles : 4, 5, 6, 7",
+        ] },
       ],
       paragraphs: {
         fr: [
