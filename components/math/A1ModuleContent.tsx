@@ -3629,11 +3629,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
-                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? "border-red-400 bg-red-50 dark:bg-red-900/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
                             {audioWrong ? (
                               <>
-                                <span className="text-sm text-red-400 line-through">{audioAns || "—"}</span>
-                                <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                                <span className="text-sm text-amber-400 line-through">{audioAns || "—"}</span>
+                                <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                               </>
                             ) : (
                               <span className="text-sm font-medium text-[var(--color-text-primary)]">{audioAns}</span>
