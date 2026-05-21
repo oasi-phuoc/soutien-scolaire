@@ -29,9 +29,9 @@ export const MATH_A3_3_LESSON: MathSubmoduleLesson = {
       },
       {
         type: "table",
-        headersFr: ["7", "×", "9", "=", "63"],
+        headersFr: ["121", "÷", "11", "=", "12"],
         accentHeader: true,
-        rows: [["facteur", "fois", "facteur", "égale", "produit"]],
+        rows: [["dividende", "diviser", "diviseur", "égale", "quotient"]],
       },
       { type: "heading", fr: "Propriétés de la multiplication", black: true },
       { type: "highlight", fr: "Commutativité" },
