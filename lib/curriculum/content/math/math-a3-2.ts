@@ -65,8 +65,8 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
           },
         ],
       },
-      { type: "heading", fr: "Addition en colonnes", black: true },
-      { type: "plain", fr: "Voici les étapes pour additionner des nombres en colonnes." },
+      { type: "heading", fr: "Multiplication en colonnes", black: true },
+      { type: "plain", fr: "Voici les étapes pour multiplier des nombres en colonnes." },
       { type: "plain", fr: "Écrivez les nombres en alignant les unités, les dizaines, les centaines." },
       {
         type: "svg",
