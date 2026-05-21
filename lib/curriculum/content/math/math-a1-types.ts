@@ -58,9 +58,9 @@ export type MathRichBlock =
 
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */
-  title: Record<LocaleKey, string>;
+  title: { fr: string } & Partial<Record<PivotCode, string>>;
   /** Paragraphes : français + traductions pivot (sous « Traduire » uniquement). */
-  paragraphs: Record<LocaleKey, string[]>;
+  paragraphs: { fr: string[] } & Partial<Record<PivotCode, string[]>>;
   /** Blocs riches optionnels — remplacent paragraphs si présents. */
   blocks?: MathRichBlock[];
   readAloud?: TheoryReadAloud;

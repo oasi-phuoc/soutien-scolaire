@@ -150,4 +150,3 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
     },
   ],
 };
-```
