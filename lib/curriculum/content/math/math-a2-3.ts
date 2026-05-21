@@ -141,43 +141,7 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
       },
     ],
 
-    paragraphs: {
-      fr: [
-        "L'arrondi simplifie les calculs en remplaçant un nombre par un nombre proche.",
-        "Règle : si le chiffre suivant ≥ 5 on arrondit vers le haut, sinon vers le bas.",
-        "L'estimation donne un résultat approximatif avant le calcul exact.",
-      ],
-      en: [
-        "Rounding simplifies calculations by replacing a number with a nearby one.",
-        "Rule: if the next digit ≥ 5, round up; otherwise round down.",
-        "Estimation gives an approximate result before the exact calculation.",
-      ],
-      ar: [
-        "التقريب يسهل الحساب باستبدال عدد بعدد قريب.",
-        "إذا ≥ 5 نقرب للأعلى وإلا للأسفل.",
-        "التقدير يعطي نتيجة تقريبية قبل الحساب الدقيق.",
-      ],
-      fa: [
-        "گرد کردن محاسبه را با جایگزینی عدد با عددی نزدیک ساده می‌کند.",
-        "اگر رقم بعدی ≥ ۵ باشد به بالا، در غیر این صورت به پایین.",
-        "تخمین نتیجه تقریبی پیش از محاسبه دقیق می‌دهد.",
-      ],
-      ti: [
-        "ምلካዕ ሕሳብ ይቐልል።",
-        "≥ 5 ዓቢ እنተኾነ ዓቢ ምልካዕ።",
-        "ቅምሻ ቅርብ ውጽኢት ቅድሚ ትኽክለኛ ሕሳብ ይህብ።",
-      ],
-      uk: [
-        "Округлення спрощує обчислення.",
-        "≥ 5 → округлюємо вгору, інакше вниз.",
-        "Оцінювання дає наближений результат перед точним.",
-      ],
-      pt: [
-        "O arredondamento simplifica cálculos substituindo um número por outro próximo.",
-        "Se o próximo dígito ≥ 5, arredonda para cima; caso contrário, para baixo.",
-        "A estimativa dá um resultado aproximado antes do cálculo exato.",
-      ],
-    },
+    paragraphs: { fr: [ ] },
   },
 
   exercises: [
