@@ -1,4 +1,3 @@
-```ts
 import type { MathSubmoduleLesson } from "./math-a1-types";
 import { A1_COMPTER_EN_FRANCAIS_ROWS } from "./math-a1-readaloud-rows";
 
