@@ -24,7 +24,7 @@ function formatCompNum(n: number): string {
 // ── Step types ──────────────────────────────────────────────────────────────
 type ArithOp = "+" | "-";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
-type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp };
+type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean };
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
@@ -238,7 +238,7 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
     const answer = missingPos === "result" ? String(result) : missingPos === "a" ? String(a) : String(b);
     qs.push({ a, b, result, op, missingPos, answer });
   }
-  return { questions: qs, exNum, op };
+  return { questions: qs, exNum, op, range, missingOperand };
 }
 
 // ── Column grid generators ────────────────────────────────────────────────────
@@ -717,6 +717,8 @@ export function GenericModuleContent({
   const [compValidated, setCompValidated] = useState(false);
   const [compResults, setCompResults] = useState<boolean[]>(() => Array(5).fill(false));
   const [compOverrideConfigs, setCompOverrideConfigs] = useState<Record<number, ComparisonConfig>>({});
+  const [arithOverrideConfigs, setArithOverrideConfigs] = useState<Record<number, ArithGroupConfig>>({});
+  const [gridOverrideConfigs, setGridOverrideConfigs] = useState<Record<number, ColGridConfig>>({});
 
   // Arithmetic group exercise state
   const [arithAnswers, setArithAnswers] = useState<string[]>(() => Array(5).fill(""));
@@ -810,6 +812,12 @@ export function GenericModuleContent({
   const activeCompConfig = currentStep?.kind === "comparison_ex"
     ? (compOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeArithConfig = currentStep?.kind === "arithmetic_group"
+    ? (arithOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeGridConfig = currentStep?.kind === "column_grid"
+    ? (gridOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
     stepCanValidate = answer.trim().length > 0;
@@ -845,13 +853,14 @@ export function GenericModuleContent({
   }
 
   if (currentStep?.kind === "arithmetic_group" && !arithValidated) {
-    stepCanValidate = arithAnswers.every(a => a.trim().length > 0);
+    const cfg = activeArithConfig!;
+    stepCanValidate = true;
     stepValidate = () => {
-      const qs = currentStep.config.questions;
-      setArithResults(qs.map((q, i) => (arithAnswers[i] ?? "").trim() === q.answer));
+      setArithResults(cfg.questions.map((q, i) => (arithAnswers[i] ?? "").trim() === q.answer));
       setArithValidated(true);
     };
     stepReset = () => {
+      setArithOverrideConfigs(prev => ({ ...prev, [stepIdx]: genArithGroup(cfg.op, cfg.range, cfg.exNum, cfg.missingOperand) }));
       setArithAnswers(Array(5).fill(""));
       setArithValidated(false);
       setArithResults(Array(5).fill(false));
@@ -859,13 +868,9 @@ export function GenericModuleContent({
   }
 
   if (currentStep?.kind === "column_grid" && !gridValidated) {
-    const cfg = currentStep.config;
+    const cfg = activeGridConfig!;
     const resBase = cfg.preFilledOperands ? 0 : 8;
-    stepCanValidate = cfg.questions.every((_, qi) => {
-      const cells = gridAnswers[qi] ?? [];
-      // At minimum, result cells must be touched (non-empty for non-zero expected digits)
-      return getD4(cfg.questions[qi]!.result).some((d, col) => d > 0 && (cells[resBase + col] ?? "").trim().length > 0);
-    });
+    stepCanValidate = true;
     stepValidate = () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = gridAnswers[qi] ?? [];
@@ -884,6 +889,7 @@ export function GenericModuleContent({
       setGridValidated(true);
     };
     stepReset = () => {
+      setGridOverrideConfigs(prev => ({ ...prev, [stepIdx]: genColumnGrid(cfg.op, cfg.preFilledOperands, cfg.exNum) }));
       setGridAnswers(Array.from({ length: 4 }, () => Array(12).fill("")));
       setGridValidated(false);
       setGridResults(Array(4).fill(false));
@@ -1006,9 +1012,9 @@ export function GenericModuleContent({
       )}
 
       {/* Arithmetic group exercise */}
-      {currentStep?.kind === "arithmetic_group" && (
+      {currentStep?.kind === "arithmetic_group" && activeArithConfig && (
         <ArithmeticGroupExercise
-          config={currentStep.config}
+          config={activeArithConfig}
           answers={arithAnswers}
           validated={arithValidated}
           results={arithResults}
@@ -1017,9 +1023,9 @@ export function GenericModuleContent({
       )}
 
       {/* Column grid exercise */}
-      {currentStep?.kind === "column_grid" && (
+      {currentStep?.kind === "column_grid" && activeGridConfig && (
         <ColumnGridExercise
-          config={currentStep.config}
+          config={activeGridConfig}
           answers={gridAnswers}
           validated={gridValidated}
           results={gridResults}
