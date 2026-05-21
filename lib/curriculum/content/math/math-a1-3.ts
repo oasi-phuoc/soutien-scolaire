@@ -42,15 +42,24 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         { type: "heading", fr: "Valeur entre deux bornes", black: true },
         { type: "highlight", fr: "Principe", pivot: { en: "Principle", ar: "المبدأ", fa: "اصل", ti: "መትከል", uk: "Принцип" } },
         { type: "section", labelFr: "", itemsFr: [
-          "Si **A < X < B**, alors X est compris entre A et B.",
-          "• X est plus grand que A",
-          "• X est plus petit que B",
+          "Quand un nombre est entre deux bornes, cela veut dire :",
+          "• La valeur est plus grande que le premier nombre",
+          "• La valeur est plus petite que le deuxième nombre.",
+        ] },
+        { type: "highlight", fr: "Croissant", pivot: { en: "Ascending", ar: "تصاعدي", fa: "صعودی", ti: "ወሳኢ", uk: "За зростанням" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Petit nombre < Valeur < Grand nombre",
+        ] },
+        { type: "highlight", fr: "Décroissant", pivot: { en: "Descending", ar: "تنازلي", fa: "نزولی", ti: "ወራዲ", uk: "За спаданням" } },
+        { type: "section", labelFr: "", itemsFr: [
+          "Grand nombre > Valeur > Petit nombre",
         ] },
         { type: "highlight", fr: "Exemple", pivot: { en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад" } },
         { type: "section", labelFr: "", itemsFr: [
-          "Quels nombres entiers sont entre 3 et 8 ?",
-          "• 3 < ? < 8",
-          "• Les valeurs possibles : 4, 5, 6, 7",
+          "Quels nombres sont entre 3 et 8 ?",
+          "On cherche les nombres plus grands que 3 et plus petits que 8.",
+          "3 < ? < 8",
+          "Les nombres possibles sont : 4, 5, 6, 7",
         ] },
       ],
       paragraphs: {
