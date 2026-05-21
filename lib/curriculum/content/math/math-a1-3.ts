@@ -58,7 +58,9 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
           ["égal à", "=", "789 = 789"],
         ],
       },
-
+      
+      { type: "plain", fr: "" },
+      
       {
         type: "highlight",
         fr: "Règle de comparaison",
@@ -147,11 +149,12 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         },
       },
 
+      { type: "plain", fr: "Quand un nombre est entre deux bornes, cela veut dire :" },
+      
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Quand un nombre est entre deux bornes, cela veut dire :",
           "• La valeur est plus grande que le premier nombre",
           "• La valeur est plus petite que le deuxième nombre.",
         ],
@@ -189,51 +192,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         ],
       },
     ],
-
-    paragraphs: {
-      fr: [
-        "Pour comparer deux nombres, on compare chiffre par chiffre en commençant par les milliers.",
-        "Si les chiffres des milliers sont égaux, on compare les centaines, puis les dizaines, puis les unités.",
-        "On utilise < (plus petit que), > (plus grand que) ou = (égal à).",
-      ],
-
-      en: [
-        "To compare two numbers, compare digit by digit starting with thousands.",
-        "If thousands digits are equal, compare hundreds, then tens, then units.",
-        "Use < (less than), > (greater than) or = (equal to).",
-      ],
-
-      ar: [
-        "لمقارنة عددين، نقارن رقماً برقم بدءاً من الآلاف.",
-        "إذا تساوت أرقام الآلاف، نقارن المئات ثم العشرات ثم الوحدات.",
-        "نستخدم < أو > أو =.",
-      ],
-
-      fa: [
-        "برای مقایسه دو عدد، رقم به رقم از هزارگان شروع می‌کنیم.",
-        "اگر هزارگان برابر باشد، صدگان، سپس ده‌تاها، سپس یکان را مقایسه می‌کنیم.",
-        "از < یا > یا = استفاده می‌کنیم.",
-      ],
-
-      ti: [
-        "ክልተ ቁጽርታት ንምወዳዳር፡ ካብ ሽሕ ጀሚርና ኣሃዝ ብኣሃዝ ንወዳደር።",
-        "ናይ ሽሕ ኣሃዝ እንተ ማዕሪዮም፡ ሚእቲ ድሕሪኡ ዓሰርተ ድሕሪኡ ውልቂ ንወዳደር።",
-        "< ወይ > ወይ = ንጥቀም።",
-      ],
-
-      uk: [
-        "Щоб порівняти два числа, порівнюємо цифру за цифрою, починаючи з тисяч.",
-        "Якщо тисячі рівні, порівнюємо сотні, потім десятки, потім одиниці.",
-        "Використовуємо < або > або =.",
-      ],
-
-      pt: [
-        "Para comparar dois números, comparamos algarismo por algarismo começando pelos milhares.",
-        "Se os milhares forem iguais, comparamos as centenas, depois as dezenas e depois as unidades.",
-        "Usamos < (menor que), > (maior que) ou = (igual a).",
-      ],
-    },
-  },
 
   exercises: [
     
