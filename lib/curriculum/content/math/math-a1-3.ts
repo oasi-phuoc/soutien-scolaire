@@ -220,73 +220,11 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [
-    {
-      id: "a13-1",
-      promptFr: "Quel signe mettre ? 456 □ 462",
-
-      promptPivot: {
-        en: "Which sign? 456 □ 462",
-        ar: "ما الرمز المناسب؟ 456 □ 462",
-        fa: "کدام علامت؟ 456 □ 462",
-        ti: "ኣየናይ ምልክት? 456 □ 462",
-        uk: "Який знак? 456 □ 462",
-        pt: "Qual sinal? 456 □ 462",
-      },
-
-      type: "short_text",
-      acceptable: ["<"],
-    },
-
-    {
-      id: "a13-2",
-      promptFr: "Quel signe mettre ? 789 □ 789",
-
-      promptPivot: {
-        en: "Which sign? 789 □ 789",
-        ar: "ما الرمز المناسب؟ 789 □ 789",
-        fa: "کدام علامت؟ 789 □ 789",
-        ti: "ኣየናይ ምልክት? 789 □ 789",
-        uk: "Який знак? 789 □ 789",
-        pt: "Qual sinal? 789 □ 789",
-      },
-
-      type: "short_text",
-      acceptable: ["="],
-    },
-
-    {
-      id: "a13-3",
-      promptFr: "Quel signe mettre ? 902 □ 890",
-
-      promptPivot: {
-        en: "Which sign? 902 □ 890",
-        ar: "ما الرمز المناسب؟ 902 □ 890",
-        fa: "کدام علامت؟ 902 □ 890",
-        ti: "ኣየናይ ምልክት? 902 □ 890",
-        uk: "Який знак? 902 □ 890",
-        pt: "Qual sinal? 902 □ 890",
-      },
-
-      type: "short_text",
-      acceptable: [">"],
-    },
+    
   ],
 
   exercisePool: [
-    { id: "a13-p1", promptFr: "Quel signe ? 456 □ 462", type: "short_text", acceptable: ["<"] },
-    { id: "a13-p2", promptFr: "Quel signe ? 789 □ 789", type: "short_text", acceptable: ["="] },
-    { id: "a13-p3", promptFr: "Quel signe ? 902 □ 890", type: "short_text", acceptable: [">"] },
-    { id: "a13-p4", promptFr: "Quel signe ? 1 245 □ 995", type: "short_text", acceptable: [">"] },
-    { id: "a13-p5", promptFr: "Quel signe ? 3 456 □ 3 421", type: "short_text", acceptable: [">"] },
-    { id: "a13-p6", promptFr: "Quel signe ? 7 000 □ 6 999", type: "short_text", acceptable: [">"] },
-    { id: "a13-p7", promptFr: "Quel signe ? 512 □ 521", type: "short_text", acceptable: ["<"] },
-    { id: "a13-p8", promptFr: "Quel signe ? 4 300 □ 4 300", type: "short_text", acceptable: ["="] },
-    { id: "a13-p9", promptFr: "Quel signe ? 88 □ 880", type: "short_text", acceptable: ["<"] },
-    { id: "a13-p10", promptFr: "Quel signe ? 2 074 □ 2 740", type: "short_text", acceptable: ["<"] },
-    { id: "a13-p11", promptFr: "Quel signe ? 999 □ 1 000", type: "short_text", acceptable: ["<"] },
-    { id: "a13-p12", promptFr: "Quel signe ? 5 800 □ 5 080", type: "short_text", acceptable: [">"] },
-    { id: "a13-p13", promptFr: "Quel est le plus grand : 637 ou 673 ? (écris le nombre)", type: "number", acceptable: ["673"] },
-    { id: "a13-p14", promptFr: "Quel est le plus petit : 4 832 ou 4 382 ? (écris le nombre)", type: "number", acceptable: ["4382"] },
+    
   ],
 
   poolSize: 5,
