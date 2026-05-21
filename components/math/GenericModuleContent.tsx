@@ -126,7 +126,7 @@ function ComparisonExercise({
 }) {
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level} — Les symboles de comparaison</h2>
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
         <div className="space-y-3">
           {config.questions.map((q, i) => (
