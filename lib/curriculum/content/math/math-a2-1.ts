@@ -132,31 +132,10 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
     },
   },
   exercises: [
-    { id: "a2-1-e1", promptFr: "Quel est le résultat de 57 + 49 ?", type: "number", acceptable: ["106"] },
-    { id: "a2-1-e2", promptFr: "Quel est le résultat de 348 + 276 ?", type: "number", acceptable: ["624"] },
-    { id: "a2-1-e3", promptFr: "Comment appelle-t-on le résultat d'une addition ?", type: "short_text", acceptable: ["somme", "la somme"] },
-    { id: "a2-1-e4", promptFr: "Vrai ou faux : 84 + 37 = 37 + 84 ?", type: "short_text", acceptable: ["vrai", "true"] },
-    { id: "a2-1-e5", promptFr: "Calculez 579 + 24.", type: "number", acceptable: ["603"] },
+
   ],
   exercisePool: [
-    { id: "a21-p1", promptFr: "Calculez 57 + 49.", type: "number", acceptable: ["106"] },
-    { id: "a21-p2", promptFr: "Calculez 348 + 276.", type: "number", acceptable: ["624"] },
-    { id: "a21-p3", promptFr: "Calculez 579 + 24.", type: "number", acceptable: ["603"] },
-    { id: "a21-p4", promptFr: "Calculez 435 + 187.", type: "number", acceptable: ["622"] },
-    { id: "a21-p5", promptFr: "Calculez 264 + 358.", type: "number", acceptable: ["622"] },
-    { id: "a21-p6", promptFr: "Calculez 709 + 145.", type: "number", acceptable: ["854"] },
-    { id: "a21-p7", promptFr: "Calculez 192 + 308.", type: "number", acceptable: ["500"] },
-    { id: "a21-p8", promptFr: "Calculez 1 245 + 378.", type: "number", acceptable: ["1623"] },
-    { id: "a21-p9", promptFr: "Calculez 863 + 457.", type: "number", acceptable: ["1320"] },
-    { id: "a21-p10", promptFr: "Calculez 75 + 26.", type: "number", acceptable: ["101"] },
-    { id: "a21-p11", promptFr: "Calculez 500 + 298.", type: "number", acceptable: ["798"] },
-    { id: "a21-p12", promptFr: "Calculez 1 382 + 724.", type: "number", acceptable: ["2106"] },
-    { id: "a21-p13", promptFr: "Calculez 15 + 37 + 22.", type: "number", acceptable: ["74"] },
-    { id: "a21-p14", promptFr: "Calculez 120 + 45 + 38.", type: "number", acceptable: ["203"] },
-    { id: "a21-p15", promptFr: "Quel terme manque ? 56 + ? = 100", type: "number", acceptable: ["44"] },
-    { id: "a21-p16", promptFr: "Quel terme manque ? 237 + ? = 500", type: "number", acceptable: ["263"] },
-    { id: "a21-p17", promptFr: "Calculez 999 + 1.", type: "number", acceptable: ["1000"] },
-    { id: "a21-p18", promptFr: "Calculez 3 456 + 1 544.", type: "number", acceptable: ["5000"] },
+
   ],
   poolSize: 5,
 };
