@@ -5,57 +5,86 @@ export const MATH_A3_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A3.3",
     theory: {
       title: {
-        fr: "Division euclidienne",
-        en: "Euclidean division",
-        ar: "القسمة الإقليدية",
-        fa: "تقسیم اقلیدسی",
-        ti: "ክፍፍል ኤውክሊዳዊ",
-        uk: "Ділення з остачею",
+        fr: "Division",
+        en: "",
+        ar: "",
+        fa: "",
+        ti: "",
+        uk: "",
+        pt: "",
       },
-      paragraphs: {
-        fr: [
-          "La division sert à partager ou répartir une quantité. C'est chercher combien de fois un nombre est contenu dans un autre. Le signe de la division est « ÷ » (diviser). Le nombre que l'on divise est le dividende. Le nombre par lequel on divise est le diviseur. Le résultat est le quotient.",
-          "On ne peut pas échanger le dividende et le diviseur : 45 ÷ 9 = 5, mais 9 ÷ 45 ≠ 5.",
-          "Division euclidienne : parfois la division n'est pas exacte et il reste un nombre appelé reste. Exemple : 361 ÷ 13 = 27 reste 10 (car 27 × 13 = 351, et 361 − 351 = 10). Le reste est toujours inférieur au diviseur.",
-          "Division en colonnes : écrivez le dividende à gauche et le diviseur à droite. Prenez les chiffres du dividende de gauche à droite et divisez par le diviseur. Exemple : 327 ÷ 6 → 3 ÷ 6 impossible → 32 ÷ 6 = 5 (reste 2) → 27 ÷ 6 = 4 (reste 3) → quotient : 54 reste 3.",
-        ],
-        en: [
-          "Division distributes a quantity equally. It asks how many times one number is contained in another. The sign is « ÷ ». The number being divided is the dividend. The number we divide by is the divisor. The result is the quotient.",
-          "You cannot swap dividend and divisor: 45 ÷ 9 = 5, but 9 ÷ 45 ≠ 5.",
-          "Euclidean division: sometimes the division is not exact and there is a remainder. Example: 361 ÷ 13 = 27 remainder 10. The remainder is always less than the divisor.",
-          "Long division: write the dividend on the left and divisor on the right. Take digits of the dividend left to right, dividing by the divisor. Example: 327 ÷ 6 → quotient 54, remainder 3.",
-        ],
-        ar: [
-          "القسمة تُوزّع كمية بالتساوي. تحدد كم مرة يُحتوى عدد في آخر. علامة القسمة « ÷ ». العدد المقسوم هو المقسوم. العدد المقسوم عليه هو المقسوم عليه. الناتج هو الخارج.",
-          "لا يمكن تبديل المقسوم والمقسوم عليه: 45 ÷ 9 = 5، لكن 9 ÷ 45 ≠ 5.",
-          "القسمة الإقليدية: أحيانًا لا تكون القسمة دقيقة وتبقى باقٍ. مثال: 361 ÷ 13 = 27 باقٍ 10. الباقي دائمًا أصغر من المقسوم عليه.",
-          "القسمة في أعمدة: اكتب المقسوم يسارًا والمقسوم عليه يمينًا. خذ أرقام المقسوم من اليسار إلى اليمين واقسم على المقسوم عليه. مثال: 327 ÷ 6 → خارج 54 باقٍ 3.",
-        ],
-        fa: [
-          "تقسیم یک مقدار را به طور مساوی توزیع می‌کند. می‌پرسد چند بار یک عدد در عدد دیگری گنجانده می‌شود. علامت « ÷ ». عدد تقسیم‌شونده مقسوم علیه نام دارد. نتیجه خارج‌قسمت نام دارد.",
-          "نمی‌توان مقسوم و مقسوم‌علیه را جابجا کرد: ۴۵ ÷ ۹ = ۵، اما ۹ ÷ ۴۵ ≠ ۵.",
-          "تقسیم اقلیدسی: گاهی تقسیم دقیق نیست و باقیمانده‌ای وجود دارد. مثال: ۳۶۱ ÷ ۱۳ = ۲۷ باقیمانده ۱۰. باقیمانده همیشه کمتر از مقسوم‌علیه است.",
-          "تقسیم ستونی: مقسوم را در چپ و مقسوم‌علیه را در راست بنویسید. ارقام مقسوم را از چپ به راست بگیرید و تقسیم کنید. مثال: ۳۲۷ ÷ ۶ → خارج‌قسمت ۵۴ باقیمانده ۳.",
-        ],
-        ti: [
-          "ክፍፍል ሓደ መጠን ብማዕረ ይካፍል። ሓደ ቁጽሪ ካብ ካሊእ ቁጽሪ ክንደይ ጊዜ ዝሓዘ ምርካብ ማለት እዩ። ምልክት ክፍፍል « ÷ »። ዝተካፈለ ቁጽሪ ካፋሊ ይብሃል። ዝካፍለሉ ቁጽሪ ካፋሊ ይብሃል። ውጽኢቱ ሓቅ ዘርፊ ይብሃል።",
-          "ካፋሊ ምስ ካፋሊ ኣይቅየርን: 45 ÷ 9 = 5, ኮነ 9 ÷ 45 ≠ 5.",
-          "ኤውክሊዳዊ ክፍፍል: ሓደ ሓደ ጊዜ ክፍፍል ቅኑዕ ኣይኮነን ዝተረፈ ቁጽሪ ይህሉ። ኣብነት: 361 ÷ 13 = 27 ተረፈ 10. ተረፈ ካብ ካፋሊ ዝሓንሰ ኩሉ ጊዜ እዩ።",
-          "ኣብ ዓምዲ ክፍፍል: ካፋሊ ካብ ጸጋም ጽሓፍ ካፋሊ ካብ ቀኝ ጽሓፍ። ካብ ጸጋም ናብ ቀኝ ቁጽርታት ሒዝካ ብካፋሊ ካፍሎ። ኣብነት: 327 ÷ 6 → ሓቅ ዘርፊ 54 ተረፈ 3.",
-        ],
-        uk: [
-          "Ділення розподіляє кількість рівно. Воно відповідає на питання: скільки разів один number міститься в іншому. Знак « ÷ ». Число, що ділиться — ділене. Число, на яке ділять — дільник. Результат — частка.",
-          "Ділене і дільник не можна міняти місцями: 45 ÷ 9 = 5, але 9 ÷ 45 ≠ 5.",
-          "Ділення з остачею: іноді ділення не ціле й залишається остача. Приклад: 361 ÷ 13 = 27 остача 10. Остача завжди менша за дільник.",
-          "Ділення в стовпчик: пишемо ділене ліворуч, дільник праворуч. Беремо цифри діленого зліва направо і ділимо. Приклад: 327 ÷ 6 → частка 54, остача 3.",
+
+        blocks: [
+      { type: "plain", fr: "La division sert à partager ou répartir une quantité. C'est chercher combien de fois un nombre est contenu dans un autre." },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Le signe de la division est « ÷ » « diviser ». ",
+          "Le nombre que l'on divise est le dividende.",
+          "Le nombre par lequel on divise est le diviseur.",
+          "Le résultat est le quotient.",
+          "Parfois la division n'est pas exacte et il reste un nombre appelé reste.",
         ],
       },
-    },
-    exercises: [
-      { id: "a3-3-e1", promptFr: "Calculez 45 ÷ 9.", type: "number", acceptable: ["5"] },
-      { id: "a3-3-e2", promptFr: "Calculez 327 ÷ 6 (donnez le quotient).", type: "number", acceptable: ["54"] },
-      { id: "a3-3-e3", promptFr: "Quel est le reste de 361 ÷ 13 ?", type: "number", acceptable: ["10"] },
-      { id: "a3-3-e4", promptFr: "Comment appelle-t-on le résultat d'une division ?", type: "short_text", acceptable: ["quotient", "le quotient"] },
-      { id: "a3-3-e5", promptFr: "Calculez 84 ÷ 7.", type: "number", acceptable: ["12"] },
+      {
+        type: "table",
+        headersFr: ["7", "×", "9", "=", "63"],
+        accentHeader: true,
+        rows: [["facteur", "fois", "facteur", "égale", "produit"]],
+      },
+      { type: "heading", fr: "Propriétés de la multiplication", black: true },
+      { type: "highlight", fr: "Commutativité" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: ["L'ordre des facteurs ne change pas le produit."],
+      },
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
+          },
+          {
+            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
+          },
+        ],
+      },
+      { type: "highlight", fr: "Associativité" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: ["On peut multiplier plus de deux facteurs dans l'ordre voulu."],
+      },
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="25" y1="28" x2="51" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="77" y1="28" x2="63" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="56" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">20</text><text x="92" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="128" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">22</text><line x1="64" y1="78" x2="87" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="120" y1="78" x2="97" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
+          },
+          {
+            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="88" y1="28" x2="114" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="151" y1="28" x2="128" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="22" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="62" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="120" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">80</text><line x1="30" y1="78" x2="83" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="112" y1="78" x2="99" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
+          },
+        ],
+      },
+      { type: "heading", fr: "Multiplication en colonnes", black: true },
+      { type: "plain", fr: "Voici les étapes pour multiplier des nombres en colonnes." },
+      { type: "plain", fr: "Écrivez les nombres en alignant les unités, les dizaines, les centaines." },
+      {
+        type: "svg",
+        noFrame: false,
+        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
+      },
     ],
-  };
+    paragraphs: { fr: [] },
+  },
+
+  exercises: [
+
+  ],
+  exercisePool: [
+
+  ],
+  poolSize: 5,
+};
