@@ -46,13 +46,8 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
           "• La valeur est plus grande que le premier nombre",
           "• La valeur est plus petite que le deuxième nombre.",
         ] },
-        { type: "highlight", fr: "Croissant", pivot: { en: "Ascending", ar: "تصاعدي", fa: "صعودی", ti: "ወሳኢ", uk: "За зростанням" } },
         { type: "section", labelFr: "", itemsFr: [
           "Petit nombre < Valeur < Grand nombre",
-        ] },
-        { type: "highlight", fr: "Décroissant", pivot: { en: "Descending", ar: "تنازلي", fa: "نزولی", ti: "ወራዲ", uk: "За спаданням" } },
-        { type: "section", labelFr: "", itemsFr: [
-          "Grand nombre > Valeur > Petit nombre",
         ] },
         { type: "highlight", fr: "Exemple", pivot: { en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад" } },
         { type: "section", labelFr: "", itemsFr: [
