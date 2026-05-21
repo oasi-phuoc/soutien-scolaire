@@ -2592,7 +2592,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex2" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écrire les nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Écrire les nombres</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les nombres en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex2[pivot] ? (
@@ -2622,7 +2622,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex4" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Dictée</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Dictée</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex4[pivot] ? (
@@ -2665,7 +2665,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex5" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Dictée — dizaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Dictée — dizaines</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les dizaines.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex5[pivot] ? (
@@ -2708,7 +2708,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex6" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Dictée — nombres spéciaux</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5 — Dictée — nombres spéciaux</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex6[pivot] ? (
@@ -2750,7 +2750,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {/* ── Exercice 7 — Grille 10–99 ───────────────────────────────────────── */}
       {step === "ex7" && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Grille des nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6 — Grille des nombres</h2>
           <div>
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les cases bleues du tableau.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex7[pivot] ? (
@@ -2822,7 +2822,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex8" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Séries de nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7 — Séries de nombres</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les séries de nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
@@ -2880,7 +2880,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex9" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Choisissez combien il y a d&apos;unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Choisissez combien il y a d&apos;unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le nombre représenté par les blocs.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex9[pivot] ? (
@@ -2933,7 +2933,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex10" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Comptez combien il y a d&apos;unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Comptez combien il y a d&apos;unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez tous les blocs et écrivez le nombre total.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex10[pivot] ? (
@@ -2975,7 +2975,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex11" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex11[pivot] ? (
@@ -3044,7 +3044,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex12" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Comptez combien il y a de cubes</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Comptez combien il y a de cubes</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex12[pivot] ? (
@@ -3081,7 +3081,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex13" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Comptez combien il y a de cubes</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5 — Comptez combien il y a de cubes</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex13[pivot] ? (
@@ -3119,7 +3119,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex14" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Décomposez le nombre</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6 — Décomposez le nombre</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Décomposez le nombre en milliers, centaines, dizaines et unités.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
@@ -3214,7 +3214,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex15" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Choisissez le(s) étiquette(s) avec le même nombre</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7 — Choisissez le(s) étiquette(s) avec le même nombre</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex15[pivot] ? (
@@ -3266,7 +3266,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex16" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 8 — Complétez les cases</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 8 — Complétez les cases</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Suivez les flèches pour trouver les nombres manquants.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex16[pivot] ? (
@@ -3380,7 +3380,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 0) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Choisissez le nombre représenté par les blocs.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Choisissez le nombre représenté par les blocs.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
                       {a12EvalQ9.tens > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={8} />)}</div>}
@@ -3401,7 +3401,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Comptez tous les blocs et écrivez le nombre total.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ScaledCanvas width={420} height={a12EvalQ10.canvasH}>
                       {a12EvalQ10.positions.map((pos,pi)=>(
@@ -3422,7 +3422,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ScaledCanvas width={420} height={a12EvalQ11.canvasH}>
                       {a12EvalQ11.positions.map((pos,pi)=>(
@@ -3447,7 +3447,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 3) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Comptez combien il y a de cubes.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Comptez combien il y a de cubes.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex items-center justify-center py-3">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -3465,7 +3465,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 4) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
                     const m = Math.floor(n / 1000), _c = Math.floor((n % 1000) / 100), _d = Math.floor((n % 100) / 10), _u = n % 10;
                     const hasM = m > 0;
@@ -3509,7 +3509,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 5) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   {a12EvalEx15Qs.map((q, qi) => (
                     <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                       <div className="mb-3 flex justify-center">
@@ -3537,7 +3537,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 6) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   <div className="flex flex-wrap gap-4 text-xs font-medium">
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
@@ -3599,7 +3599,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 0: items 0-3 — écrire en lettres
               if (evalPageIdx === 0) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écrivez les nombres en lettres correctement.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écrivez les nombres en lettres correctement.</p>
                   {evalItems_curr.slice(0, 4).map(ex => (
                     <ExerciseRow key={ex.id}
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
@@ -3614,7 +3614,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 1: items 4-7 — audio → chiffre
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écoutez et écrivez les nombres.</p>
                   {evalItems_curr.slice(4, 8).map(ex => {
                     const audioAns = evalAnswers[ex.id] ?? "";
                     const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
@@ -3646,7 +3646,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 2: items 8+ — séries de nombres (3 chiffres de moins)
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-text-primary)]">Complétez les séries de nombres.</p>
+                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Complétez les séries de nombres.</p>
                   {evalItems_curr.slice(8).map(ex => {
                     const displayNums = ex.seriesNums!.slice(0, ex.seriesNums!.length - 3);
                     return (
@@ -3782,7 +3782,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex17" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Écrivez les nombres indiqués par les flèches sur la droite graduée</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Lisez l&apos;échelle et trouvez le nombre pointé par chaque flèche.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex17[pivot] ? (
@@ -3871,7 +3871,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex18" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écrivez les nombres indiqués par les flèches</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Écrivez les nombres indiqués par les flèches</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Lisez l&apos;échelle et trouvez le nombre pointé par chaque flèche.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex18[pivot] ? (
@@ -3945,7 +3945,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex19" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Trouvez les voisins des dizaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Trouvez les voisins des dizaines</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les dizaines encadrantes.</p>
             <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
@@ -4000,7 +4000,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex20" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Trouvez les voisins des centaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Trouvez les voisins des centaines</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les centaines encadrantes.</p>
             <div className="mt-2 rounded-[var(--radius-md)] bg-orange-50 px-4 py-2 text-sm dark:bg-orange-950/20">
@@ -4055,7 +4055,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex21" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Sélectionnez les nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Sélectionnez les nombres</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les nombres qui correspondent à la consigne.</p>
           </div>
@@ -4109,7 +4109,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex22" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Comparez les nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Comparez les nombres</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez avec le symbole de comparaison.</p>
           </div>
@@ -4165,7 +4165,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex23" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Complétez avec les symboles de comparaison</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Complétez avec les symboles de comparaison</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur □ pour faire défiler &lt; &gt; =</p>
           </div>
@@ -4206,7 +4206,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex24" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Sélectionnez les nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Sélectionnez les nombres</h2>
           <div className="space-y-5">
             {ex24Data.map((cfg, si) => {
               const consigne = cfg.mode === "moins_que"
@@ -4260,7 +4260,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex25" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Coloriez les insectes</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5 — Coloriez les insectes</h2>
           <div className="mb-3 space-y-1 text-sm text-[var(--color-text-secondary)]">
             <p>Cliquez sur chaque nombre pour lui attribuer la bonne couleur.</p>
             <div className="flex flex-wrap gap-3 pt-1">
@@ -4310,7 +4310,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex26" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 6 — Écrivez les nombres dans les bulles</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6 — Écrivez les nombres dans les bulles</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Cochez chaque nombre dans la bonne bulle (un nombre peut être dans plusieurs bulles).</p>
           </div>
@@ -4360,7 +4360,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex27" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 7 — Écrivez un nombre entre les deux nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7 — Écrivez un nombre entre les deux nombres</h2>
           <div className="mb-3">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez n&apos;importe quel nombre entier entre les deux bornes.</p>
           </div>
@@ -4422,7 +4422,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex3" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écrire les dizaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Écrire les dizaines</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les dizaines en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex3[pivot] ? (
