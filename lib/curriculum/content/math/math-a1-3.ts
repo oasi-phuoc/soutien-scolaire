@@ -121,11 +121,11 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "• même nombre de chiffres",
-          "• milliers égaux",
-          "• centaines égales",
-          "• dizaines : 5 > 2",
-          "• 3 456 > 3 421",
+          "Même nombre de chiffres",
+          "Les milliers sont égaux",
+          "Les entaines sont égales",
+          "Les dizaines : 5 > 2",
+          "Donc 3 456 > 3 421",
         ],
       },
 
