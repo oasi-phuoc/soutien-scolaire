@@ -739,7 +739,6 @@ export function GenericModuleContent({
     setToggleAnswer(null);
     setCompAnswers(Array(5).fill(null));
     setCompValidated(false);
-    setCompResults(Array(5).fill(false));
     setArithAnswers(Array(5).fill(""));
     setArithValidated(false);
     setArithResults(Array(5).fill(false));
