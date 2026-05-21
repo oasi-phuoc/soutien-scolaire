@@ -128,7 +128,7 @@ function ComparisonExercise({
           {config.questions.map((q, i) => (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-xs font-medium text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
+              <span className={`${config.level === 1 ? "w-8" : "w-[5rem]"} shrink-0 text-right font-mono text-sm text-[var(--color-text-primary)]`}>{formatCompNum(q.a)}</span>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
