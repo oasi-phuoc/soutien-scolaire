@@ -2916,7 +2916,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded border py-1.5 text-sm font-normal text-[var(--color-text-primary)] transition-colors ${isCorrect ? "border-blue-400 bg-[var(--color-bg-primary)]" : isWrong ? "border-amber-400 bg-[var(--color-bg-primary)] line-through decoration-amber-500" : isSelected ? "border-teal-500 bg-teal-50 dark:bg-teal-950/30" : "border-zinc-300 hover:border-teal-400 dark:border-zinc-600"}`}>
+                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : ex9Validated && c === value ? "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
                           {c}
                         </button>
                       );
@@ -3233,11 +3233,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   {q.tags.map((tag, ti) => {
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
                     let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
-                    if (ex15Validated) {
-                      if (tag.correct) cls = "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                      else if (isSelected) cls = "border-amber-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                    } else if (isSelected) {
-                      cls = "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400";
+                    if (isSelected) {
+                      cls = "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                    } else if (ex15Validated && tag.correct) {
+                      cls = "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20";
                     }
                     return (
                       <button key={ti} type="button"
