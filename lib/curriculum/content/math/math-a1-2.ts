@@ -1,4 +1,3 @@
-```ts
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
