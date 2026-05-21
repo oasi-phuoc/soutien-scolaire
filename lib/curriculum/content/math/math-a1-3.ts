@@ -70,20 +70,37 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
           uk: "Правило порівняння",
           pt: "Regra de comparação",
         },
+
+      {
+        type: "plain",
+        fr: "Nombres avec un nombre différent de chiffres"
+        },
+        
       },
 
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Nombres avec un nombre différent de chiffres",
-          "• Le plus long est le plus grand.",
-          "Même nombre de chiffres",
-          "• Compare chiffre par chiffre depuis la gauche.",
-          "• Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
+          "Le plus long est le plus grand.",
         ],
       },
 
+      {
+        type: "plain",
+        fr: "Même nombre de chiffres"
+      },
+  
+          
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Compare chiffre par chiffre depuis la gauche.",
+          "Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
+        ],
+      },
+      
       {
         type: "highlight",
         fr: "Exemple",
