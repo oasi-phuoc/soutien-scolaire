@@ -2592,7 +2592,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex2" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Écrire les nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les nombres en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex2[pivot] ? (
@@ -2622,7 +2622,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex4" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Dictée</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex4[pivot] ? (
@@ -2665,7 +2665,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex5" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Dictée — dizaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les dizaines.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex5[pivot] ? (
@@ -2708,7 +2708,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex6" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5 — Dictée — nombres spéciaux</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex6[pivot] ? (
@@ -2750,7 +2750,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {/* ── Exercice 7 — Grille 10–99 ───────────────────────────────────────── */}
       {step === "ex7" && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6 — Grille des nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6</h2>
           <div>
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les cases bleues du tableau.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex7[pivot] ? (
@@ -2822,7 +2822,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex8" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7 — Séries de nombres</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Complétez les séries de nombres.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex8[pivot] ? (
@@ -2880,7 +2880,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex9" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1 — Choisissez combien il y a d&apos;unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Choisissez le nombre représenté par les blocs.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex9[pivot] ? (
@@ -2933,7 +2933,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex10" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Comptez combien il y a d&apos;unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez tous les blocs et écrivez le nombre total.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex10[pivot] ? (
@@ -2975,7 +2975,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex11" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3 — Écrivez combien il y a de milliers, centaines, dizaines, unités</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex11[pivot] ? (
@@ -3044,7 +3044,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex12" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4 — Comptez combien il y a de cubes</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex12[pivot] ? (
@@ -3081,7 +3081,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex13" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5 — Comptez combien il y a de cubes</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Comptez le nombre total de cubes dans la figure.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex13[pivot] ? (
@@ -3119,7 +3119,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex14" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6 — Décomposez le nombre</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Décomposez le nombre en milliers, centaines, dizaines et unités.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex14[pivot] ? (
@@ -3214,7 +3214,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex15" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7 — Choisissez le(s) étiquette(s) avec le même nombre</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex15[pivot] ? (
@@ -3266,7 +3266,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex16" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 8 — Complétez les cases</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 8</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Suivez les flèches pour trouver les nombres manquants.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex16[pivot] ? (
@@ -4133,7 +4133,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 return (
                   <div className="flex flex-col items-center gap-1 min-w-0 flex-1">
                     <span className="text-xl font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-                    {c > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:c},(_,i)=><SvgCentaine key={i} s={4} />)}</div>}
+                    {c > 0 && <div className="flex flex-wrap justify-centÉcrire les dizaineser gap-0.5">{Array.from({length:c},(_,i)=><SvgCentaine key={i} s={4} />)}</div>}
                     {d > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:d},(_,i)=><SvgDizaine key={i} s={6} />)}</div>}
                     {u > 0 && <div className="flex flex-wrap justify-center gap-0.5">{Array.from({length:u},(_,i)=><SvgUnite key={i} s={10} />)}</div>}
                   </div>
@@ -4432,7 +4432,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "ex3" && (
         <div className="space-y-4">
 
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2 — Écrire les dizaines</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
           <div className="mb-4">
             <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les dizaines en lettres correctement.</p>
             {showPivotTranslation && CONSIGNE_PIVOT.ex3[pivot] ? (
