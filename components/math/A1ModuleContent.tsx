@@ -2848,7 +2848,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       if (isBlank) {
                         if (ex8Validated && result !== null) {
                           return (
-                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>
+                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : `${CLS_WRONG} !text-[var(--color-text-primary)]`}`}>
                               {result ? ex8Answers[ansKey] : num}
                             </div>
                           );
