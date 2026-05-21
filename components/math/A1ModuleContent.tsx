@@ -3380,7 +3380,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 0) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Choisissez le nombre représenté par les blocs.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Choisissez le nombre représenté par les blocs.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
                       {a12EvalQ9.tens > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={8} />)}</div>}
@@ -3401,7 +3402,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Comptez tous les blocs et écrivez le nombre total.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ScaledCanvas width={420} height={a12EvalQ10.canvasH}>
                       {a12EvalQ10.positions.map((pos,pi)=>(
@@ -3422,7 +3424,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ScaledCanvas width={420} height={a12EvalQ11.canvasH}>
                       {a12EvalQ11.positions.map((pos,pi)=>(
@@ -3447,7 +3450,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 3) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Comptez combien il y a de cubes.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez combien il y a de cubes.</p>
                   <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <div className="flex items-center justify-center py-3">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -3465,7 +3469,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 4) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
                     const m = Math.floor(n / 1000), _c = Math.floor((n % 1000) / 100), _d = Math.floor((n % 100) / 10), _u = n % 10;
                     const hasM = m > 0;
@@ -3509,7 +3514,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 5) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   {a12EvalEx15Qs.map((q, qi) => (
                     <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                       <div className="mb-3 flex justify-center">
@@ -3537,7 +3543,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
               if (evalPageIdx === 6) return (
                 <div className="space-y-4">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   <div className="flex flex-wrap gap-4 text-xs font-medium">
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
@@ -3599,7 +3606,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 0: items 0-3 — écrire en lettres
               if (evalPageIdx === 0) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écrivez les nombres en lettres correctement.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez les nombres en lettres correctement.</p>
                   {evalItems_curr.slice(0, 4).map(ex => (
                     <ExerciseRow key={ex.id}
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
@@ -3614,7 +3622,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 1: items 4-7 — audio → chiffre
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Écoutez et écrivez les nombres.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
                   {evalItems_curr.slice(4, 8).map(ex => {
                     const audioAns = evalAnswers[ex.id] ?? "";
                     const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
@@ -3646,7 +3655,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               // Page 2: items 8+ — séries de nombres (3 chiffres de moins)
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
-                  <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Complétez les séries de nombres.</p>
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Complétez les séries de nombres.</p>
                   {evalItems_curr.slice(8).map(ex => {
                     const displayNums = ex.seriesNums!.slice(0, ex.seriesNums!.length - 3);
                     return (
