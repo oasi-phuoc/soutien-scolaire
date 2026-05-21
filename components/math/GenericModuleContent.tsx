@@ -124,8 +124,6 @@ function ComparisonExercise({
   results: boolean[];
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
 }) {
-  const score = results.filter(Boolean).length;
-
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level} — Les symboles de comparaison</h2>
@@ -142,8 +140,12 @@ function ComparisonExercise({
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                   if (!validated) {
                     cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                  } else if (sel) {
+                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                  } else if (isCorrect) {
+                    cls += "border-red-500 bg-red-50 text-red-600 dark:bg-red-950/20";
                   } else {
-                    cls += isCorrect ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : sel ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                    cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
                   return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
@@ -153,11 +155,6 @@ function ComparisonExercise({
           ))}
         </div>
       </div>
-      {validated && (
-        <p className={`text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
-          {score}/5 bonnes réponses
-        </p>
-      )}
     </div>
   );
 }
@@ -835,21 +832,25 @@ export function GenericModuleContent({
     stepReset = () => { setAnswer(""); setExStatus("idle"); setExAttempts(0); };
   }
 
-  if (currentStep?.kind === "comparison_ex" && !compValidated) {
-    const compAllAnswered = compAnswers.every(a => a !== null);
-    stepCanValidate = compAllAnswered;
-    stepValidate = () => {
-      if (!activeCompConfig) return;
-      setCompResults(activeCompConfig.questions.map((q, i) => compAnswers[i] === q.answer));
-      setCompValidated(true);
-    };
+  if (currentStep?.kind === "comparison_ex") {
+    const step = currentStep as ComparisonStep;
     stepReset = () => {
-      const step = currentStep as ComparisonStep;
       setCompOverrideConfigs(prev => ({ ...prev, [stepIdx]: genComparisonConfig(step.config.level) }));
       setCompAnswers(Array(5).fill(null));
       setCompValidated(false);
       setCompResults(Array(5).fill(false));
     };
+    if (!compValidated) {
+      stepCanValidate = true;
+      stepValidate = () => {
+        if (!activeCompConfig) return;
+        setCompResults(activeCompConfig.questions.map((q, i) => compAnswers[i] === q.answer));
+        setCompValidated(true);
+      };
+    } else {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
   }
 
   if (currentStep?.kind === "arithmetic_group" && !arithValidated) {
