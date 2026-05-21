@@ -24,6 +24,7 @@ import { MATH_G9_LESSONS } from "./content/math/math-g9";
 import { MATH_G10_LESSONS } from "./content/math/math-g10";
 import { MATH_S1_LESSONS } from "./content/math/math-s1";
 import { MATH_S2_LESSONS } from "./content/math/math-s2";
+import { MATH_RA_LESSONS, MATH_RG_LESSONS } from "./content/math/math-revisions";
 
 const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
   A1: MATH_A1_LESSONS,
@@ -51,6 +52,8 @@ const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
   G10: MATH_G10_LESSONS,
   S1: MATH_S1_LESSONS,
   S2: MATH_S2_LESSONS,
+  RA: MATH_RA_LESSONS,
+  RG: MATH_RG_LESSONS,
 };
 
 export function getLessonsForModule(moduleId: string): MathSubmoduleLesson[] | undefined {
