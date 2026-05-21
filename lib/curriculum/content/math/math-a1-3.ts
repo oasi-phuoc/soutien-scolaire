@@ -98,7 +98,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "Compare chiffre par chiffre depuis la gauche.",
-          "Dès qu'un chiffre est différent, le plus grand chiffre donne le plus grand nombre.",
+          "Dès qu'un chiffre est différent, on regarde le plus grand chiffre.",
         ],
       },
       
@@ -115,11 +115,12 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         },
       },
 
+      { type: "plain", fr: "On a deux chiffres 3 456 et 3 421" },
+      
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "On a deux chiffres 3 456 et 3 421",
           "• même nombre de chiffres",
           "• milliers égaux",
           "• centaines égales",
@@ -155,16 +156,8 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "• La valeur est plus grande que le premier nombre",
-          "• La valeur est plus petite que le deuxième nombre.",
-        ],
-      },
-
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Petit nombre < Valeur < Grand nombre",
+          "La valeur est plus grande que le premier nombre",
+          "La valeur est plus petite que le deuxième nombre.",
         ],
       },
 
@@ -181,13 +174,13 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         },
       },
 
+      { type: "plain", fr: "Quels nombres sont entre 3 et 8 ?" },
+      
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Quels nombres sont entre 3 et 8 ?",
-          "On cherche les nombres plus grands que 3 et plus petits que 8.",
-          "3 < ? < 8",
+          "On cherche les nombres plus grands que 3 et plus petits que 8. (3 < ? < 8)",
           "Les nombres possibles sont : 4, 5, 6, 7",
         ],
       },
