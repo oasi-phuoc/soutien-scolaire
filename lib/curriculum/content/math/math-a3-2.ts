@@ -74,7 +74,8 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
         markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
       },
     ],
-    
+  },
+
   exercises: [
 
   ],

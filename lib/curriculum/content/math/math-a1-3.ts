@@ -192,6 +192,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         ],
       },
     ],
+  },
 
   exercises: [
     
