@@ -181,25 +181,10 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [
-    { id: "a2-3-e1", promptFr: "Arrondissez 347 à la centaine la plus proche.",    type: "number", acceptable: ["300"] },
-    { id: "a2-3-e2", promptFr: "Arrondissez 850 à la centaine la plus proche.",    type: "number", acceptable: ["900"] },
-    { id: "a2-3-e3", promptFr: "Arrondissez 4 682 au millier le plus proche.",     type: "number", acceptable: ["5000"] },
-    { id: "a2-3-e4", promptFr: "Estimez 348 + 276 en arrondissant à la centaine.", type: "number", acceptable: ["600", "630"] },
-    { id: "a2-3-e5", promptFr: "Arrondissez 73 à la dizaine la plus proche.",      type: "number", acceptable: ["70"] },
+
   ],
   exercisePool: [
-    { id: "a23-p1",  promptFr: "Arrondissez 347 à la centaine.",   type: "number", acceptable: ["300"] },
-    { id: "a23-p2",  promptFr: "Arrondissez 850 à la centaine.",   type: "number", acceptable: ["900"] },
-    { id: "a23-p3",  promptFr: "Arrondissez 4 682 au millier.",    type: "number", acceptable: ["5000"] },
-    { id: "a23-p4",  promptFr: "Arrondissez 73 à la dizaine.",     type: "number", acceptable: ["70"] },
-    { id: "a23-p5",  promptFr: "Arrondissez 456 à la centaine.",   type: "number", acceptable: ["500"] },
-    { id: "a23-p6",  promptFr: "Arrondissez 1 230 à la centaine.", type: "number", acceptable: ["1200"] },
-    { id: "a23-p7",  promptFr: "Arrondissez 2 750 au millier.",    type: "number", acceptable: ["3000"] },
-    { id: "a23-p8",  promptFr: "Arrondissez 99 à la dizaine.",     type: "number", acceptable: ["100"] },
-    { id: "a23-p9",  promptFr: "Arrondissez 7 499 au millier.",    type: "number", acceptable: ["7000"] },
-    { id: "a23-p10", promptFr: "Arrondissez 8 500 au millier.",    type: "number", acceptable: ["9000"] },
-    { id: "a23-p11", promptFr: "Arrondissez 635 à la dizaine.",    type: "number", acceptable: ["640"] },
-    { id: "a23-p12", promptFr: "Arrondissez 3 452 au millier.",    type: "number", acceptable: ["3000"] },
+
   ],
   poolSize: 5,
 };
