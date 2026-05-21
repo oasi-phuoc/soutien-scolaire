@@ -115,13 +115,11 @@ function ComparisonExercise({
   config,
   answers,
   validated,
-  results,
   onAnswer,
 }: {
   config: ComparisonConfig;
   answers: Array<"<" | "=" | ">" | null>;
   validated: boolean;
-  results: boolean[];
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
 }) {
   return (
@@ -1007,7 +1005,6 @@ export function GenericModuleContent({
           config={activeCompConfig}
           answers={compAnswers}
           validated={compValidated}
-          results={compResults}
           onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
         />
       )}

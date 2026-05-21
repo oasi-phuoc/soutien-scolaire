@@ -2911,8 +2911,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <div className="flex justify-center gap-2 px-3 py-2">
                     {q.choices.map(c => {
                       const isSelected = sel === c;
-                      const isCorrect = ex9Validated && c === value;
-                      const isWrong = ex9Validated && isSelected && c !== value;
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
