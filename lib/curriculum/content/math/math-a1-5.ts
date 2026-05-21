@@ -96,8 +96,9 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
         itemsFr: ["Les nombres diminuent : 20 ; 15 ; 10 ; 5 ."],
       },
     ],
+    paragraphs: { fr: [] },
   },
-  
+
   exercises: [
 
   ],
