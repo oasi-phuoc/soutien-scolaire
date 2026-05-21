@@ -301,7 +301,7 @@ function ArithmeticGroupExercise({
     }`;
   return (
     <div className="space-y-4">
-      <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Exercice {config.exNum}</p>
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
@@ -466,7 +466,7 @@ function ColumnGridExercise({
   const score = results.filter(Boolean).length;
   return (
     <div className="space-y-4">
-      <p className="text-sm font-semibold text-[var(--color-accent-alg)]">Exercice {config.exNum}</p>
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="grid grid-cols-2 gap-3">
         {config.questions.map((q, qi) => (
           <ColumnGridCard
