@@ -752,10 +752,12 @@ export function GenericModuleContent({
                   <button
                     type="button"
                     onClick={stepReset}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
                     aria-label="Réinitialiser"
                   >
-                    ↺
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    </svg>
                   </button>
                 )}
                 {stepValidate && (
@@ -763,10 +765,12 @@ export function GenericModuleContent({
                     type="button"
                     onClick={stepValidate}
                     disabled={!stepCanValidate}
-                    className="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-accent-alg)] text-white transition-opacity disabled:opacity-30"
+                    className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                     aria-label="Valider"
                   >
-                    ✓
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
                   </button>
                 )}
               </div>
