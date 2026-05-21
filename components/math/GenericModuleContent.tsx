@@ -34,25 +34,72 @@ type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | Ev
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
 type ComparisonConfig = { questions: ComparisonQ[]; level: 1 | 2 };
 
+function rnd(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function genComparisonConfig(level: 1 | 2): ComparisonConfig {
-  const [min, max] = level === 1 ? [1, 99] : [100000, 999999];
-  const signs: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
-  for (let i = signs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [signs[i], signs[j]] = [signs[j]!, signs[i]!];
-  }
-  const questions: ComparisonQ[] = signs.map(answer => {
-    let a = 0, b = 0;
-    if (answer === "=") {
-      a = Math.floor(Math.random() * (max - min + 1)) + min;
-      b = a;
-    } else if (answer === ">") {
-      do { a = Math.floor(Math.random() * (max - min + 1)) + min; b = Math.floor(Math.random() * (max - min + 1)) + min; } while (a <= b);
-    } else {
-      do { a = Math.floor(Math.random() * (max - min + 1)) + min; b = Math.floor(Math.random() * (max - min + 1)) + min; } while (a >= b);
+  if (level === 1) {
+    const signs: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+    for (let i = signs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [signs[i], signs[j]] = [signs[j]!, signs[i]!];
     }
-    return { a, b, answer };
-  });
+    const questions: ComparisonQ[] = signs.map(answer => {
+      let a = 0, b = 0;
+      if (answer === "=") { a = rnd(1, 99); b = a; }
+      else if (answer === ">") { do { a = rnd(1, 99); b = rnd(1, 99); } while (a <= b); }
+      else { do { a = rnd(1, 99); b = rnd(1, 99); } while (a >= b); }
+      return { a, b, answer };
+    });
+    return { questions, level };
+  }
+
+  // Level 2: 6-digit numbers with guaranteed structure
+  // Q1: equal (a === b)
+  const eq = rnd(100000, 999999);
+  const qEqual: ComparisonQ = { a: eq, b: eq, answer: "=" };
+
+  // Q2: 2 shared leading digits (d1 d2 differ at position 3)
+  const d1 = rnd(1, 9), d2 = rnd(0, 9);
+  const prefix2 = d1 * 100000 + d2 * 10000;
+  let d3a: number, d3b: number;
+  do { d3a = rnd(0, 9); d3b = rnd(0, 9); } while (d3a === d3b);
+  const tail2a = rnd(0, 999), tail2b = rnd(0, 999);
+  const n2a = prefix2 + d3a * 1000 + tail2a;
+  const n2b = prefix2 + d3b * 1000 + tail2b;
+  const qTwo: ComparisonQ = { a: n2a, b: n2b, answer: n2a < n2b ? "<" : ">" };
+
+  // Q3: 3 or 4 shared leading digits
+  const sharedDigits = Math.random() < 0.5 ? 3 : 4;
+  const d1b = rnd(1, 9), d2b = rnd(0, 9), d3c = rnd(0, 9), d4 = rnd(0, 9);
+  const prefix34 =
+    sharedDigits === 3
+      ? d1b * 100000 + d2b * 10000 + d3c * 1000
+      : d1b * 100000 + d2b * 10000 + d3c * 1000 + d4 * 100;
+  const diffMul = sharedDigits === 3 ? 100 : 10;
+  let diffA: number, diffB: number;
+  do { diffA = rnd(0, 9); diffB = rnd(0, 9); } while (diffA === diffB);
+  const rem34a = rnd(0, diffMul - 1), rem34b = rnd(0, diffMul - 1);
+  const n34a = prefix34 + diffA * diffMul + rem34a;
+  const n34b = prefix34 + diffB * diffMul + rem34b;
+  const q34: ComparisonQ = { a: n34a, b: n34b, answer: n34a < n34b ? "<" : ">" };
+
+  // Q4 & Q5: normal random pairs (one < one >)
+  let r4a = 0, r4b = 0;
+  do { r4a = rnd(100000, 999999); r4b = rnd(100000, 999999); } while (r4a >= r4b);
+  const q4: ComparisonQ = { a: r4a, b: r4b, answer: "<" };
+
+  let r5a = 0, r5b = 0;
+  do { r5a = rnd(100000, 999999); r5b = rnd(100000, 999999); } while (r5a <= r5b);
+  const q5: ComparisonQ = { a: r5a, b: r5b, answer: ">" };
+
+  // Shuffle all 5
+  const questions = [qEqual, qTwo, q34, q4, q5];
+  for (let i = questions.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [questions[i], questions[j]] = [questions[j]!, questions[i]!];
+  }
   return { questions, level };
 }
 
@@ -81,7 +128,7 @@ function ComparisonExercise({
           {config.questions.map((q, i) => (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-xs font-medium text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="min-w-[4rem] font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
+              <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
@@ -95,7 +142,7 @@ function ComparisonExercise({
                   return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
               </div>
-              <span className="font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
+              <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
             </div>
           ))}
         </div>
