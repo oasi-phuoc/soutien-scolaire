@@ -69,6 +69,18 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
         ],
       },
 
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">67</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">+</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">19</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">48</text></svg>`
+          },
+          {
+            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">19</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">+</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">29</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">??</text></svg>`
+          },
+        ],
+      },
+      
       { type: "heading", fr: "Soustraction en colonnes", black: true },
 
       {
@@ -83,40 +95,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
       },
     ],
 
-    paragraphs: {
-      fr: [
-        "La soustraction permet de retirer une quantité à une autre.",
-        "La soustraction n'est pas commutative.",
-        "Soustraction en colonnes avec emprunt.",
-      ],
-      en: [
-        "Subtraction removes one quantity from another.",
-        "It is not commutative.",
-        "Column subtraction uses borrowing.",
-      ],
-      ar: [
-        "الطرح يزيل كمية من أخرى.",
-        "الطرح ليس تبديليًا.",
-        "الطرح في الأعمدة مع الاستعارة.",
-      ],
-      fa: [
-        "تفریق مقداری را از مقدار دیگر کم می‌کند.",
-        "تفریق جابجایی‌پذیر نیست.",
-        "تفریق ستونی با قرض گرفتن.",
-      ],
-      ti: [
-        "ምቅናስ ካብ ሓደ መጠን ይቀንስ።",
-      ],
-      uk: [
-        "Віднімання вилучає значення.",
-        "Воно не комутативне.",
-        "Використовується позичання.",
-      ],
-      pt: [
-        "A subtração retira uma quantidade de outra.",
-        "Não é comutativa.",
-        "Usa empréstimo na subtração em colunas.",
-      ],
+    paragraphs: { fr: [],
     },
   },
 
