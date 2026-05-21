@@ -1,6 +1,3 @@
-Voici ta version avec **le portugais (pt)** ajouté partout de manière cohérente :
-
-```ts
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
