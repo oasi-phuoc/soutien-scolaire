@@ -67,10 +67,10 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "Il faut observer la position du chiffre dans le nombre.",
-          "**U** = × 1",
-          "**D** = × 10",
-          "**C** = × 100",
-          "**M** = × 1000",
+          "U = × 1",
+          "D = × 10",
+          "C = × 100",
+          "M = × 1000",
         ],
       },
 
