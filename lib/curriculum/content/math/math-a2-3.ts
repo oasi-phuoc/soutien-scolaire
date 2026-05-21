@@ -13,6 +13,7 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
         uk: "Оцінювання та округлення",
       },
       blocks: [
+        { type: "heading", fr: "Arrondi", black: true },
         { type: "plain", fr: "L'arrondi consiste à remplacer un nombre par un nombre « proche » mais plus simple. On arrondit à la dizaine, centaine ou millier le plus proche." },
         { type: "highlight", fr: "Règle d'arrondi" },
         { type: "section", labelFr: "", itemsFr: [
@@ -23,12 +24,23 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
           "• arrondi vers le **bas** (reste tel quel).",
         ] },
         { type: "table", headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"], accentHeader: true, rows: [
-          ["347", "300", "chiffre des dizaines = 4 < 5 → vers le bas"],
-          ["850", "900", "chiffre des dizaines = 5 ≥ 5 → vers le haut"],
-          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5 → vers le haut"],
-          ["1 230", "1 200", "chiffre des dizaines = 3 < 5 → vers le bas"],
+          ["347", "300", "chiffre des dizaines = 4 < 5\n→ vers le bas"],
+          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5\n→ vers le haut"],
         ] },
-        { type: "example", fr: "Estimation de 348 + 276 : arrondir à la centaine → 300 + 300 = 600 (résultat exact : 624)" },
+        { type: "heading", fr: "Estimation", black: true },
+        { type: "plain", fr: "Une estimation consiste à trouver une valeur approximative d'un nombre ou d'un calcul. On ne cherche pas la réponse exacte, mais une réponse proche et rapide." },
+        { type: "highlight", fr: "Exemple" },
+        { type: "plain", fr: "198 + 305" },
+        { type: "plain", fr: "On arrondit :" },
+        { type: "section", labelFr: "", itemsFr: [
+          "198 → 200",
+          "305 → 300",
+        ] },
+        { type: "plain", fr: "Calcul estimé :" },
+        { type: "section", labelFr: "", itemsFr: [
+          "200 + 300 = 500",
+        ] },
+        { type: "plain", fr: "La réponse exacte est 503. L'estimation 500 est donc proche." },
       ],
       paragraphs: {
         fr: [

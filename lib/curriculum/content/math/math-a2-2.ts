@@ -13,7 +13,12 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
         uk: "Віднімання",
       },
       blocks: [
-        { type: "plain", fr: "La soustraction permet de retirer une quantité d'une autre. Le signe est « **−** » (**moins**)." },
+        { type: "plain", fr: "La soustraction permet de retirer une quantité d'une autre." },
+        { type: "section", labelFr: "", itemsFr: [
+          "Le signe de la soustraction est le signe « − » « moins »",
+          "Les nombres de la soustraction sont les termes.",
+          "Le résultat de la soustraction est la différence.",
+        ] },
         { type: "table", headersFr: ["8", "−", "3", "=", "5"], accentHeader: true, rows: [
           ["terme", "moins", "terme", "égale", "différence"],
         ] },
