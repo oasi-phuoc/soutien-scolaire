@@ -5,86 +5,58 @@ export const MATH_A3_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A3.3",
     theory: {
       title: {
-        fr: "Division",
-        en: "",
-        ar: "",
-        fa: "",
-        ti: "",
-        uk: "",
-        pt: "",
+        fr: "Tables de divisions",
       },
-
-        blocks: [
-      { type: "plain", fr: "La division sert à partager ou répartir une quantité. C'est chercher combien de fois un nombre est contenu dans un autre." },
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Le signe de la division est « ÷ » « diviser ». ",
-          "Le nombre que l'on divise est le dividende.",
-          "Le nombre par lequel on divise est le diviseur.",
-          "Le résultat est le quotient.",
-          "Parfois la division n'est pas exacte et il reste un nombre appelé reste.",
+      paragraphs: {
+        fr: [
+          "Multiplier, c'est additionner plusieurs fois le même nombre. Le signe de la multiplication est « × » (fois). Les nombres à multiplier sont les facteurs. Le résultat de la multiplication est le produit.",
+          "Propriété 1 — Commutativité : si l'on change l'ordre des facteurs, le produit ne change pas. Exemple : 7 × 18 = 18 × 7 = 126.",
+          "Propriété 2 — Associativité : on peut multiplier plus de deux facteurs dans l'ordre que l'on veut. Exemple : 4 × 5 × 10 = 20 × 10 = 200.",
+          "Le livret de multiplication (tables de 1 à 12) est la base de tous les calculs de multiplication et de division. Il faut le mémoriser.",
+          "Exemples de la table de 7 : 1 × 7 = 7, 2 × 7 = 14, 3 × 7 = 21, 4 × 7 = 28, 5 × 7 = 35, 6 × 7 = 42, 7 × 7 = 49, 8 × 7 = 56, 9 × 7 = 63, 10 × 7 = 70.",
+        ],
+        en: [
+          "Multiplying means adding the same number several times. The sign is « × » (times). The numbers are called factors. The result is the product.",
+          "Property 1 — Commutativity: changing the order of the factors does not change the product. Example: 7 × 18 = 18 × 7 = 126.",
+          "Property 2 — Associativity: you can multiply more than two factors in any order. Example: 4 × 5 × 10 = 200.",
+          "The multiplication table (1 to 12) is the foundation of all multiplication and division. It must be memorized.",
+          "Table of 7 examples: 1×7=7, 2×7=14, 3×7=21, 4×7=28, 5×7=35, 6×7=42, 7×7=49, 8×7=56, 9×7=63, 10×7=70.",
+        ],
+        ar: [
+          "الضرب هو جمع نفس العدد عدة مرات. علامة الضرب « × » (في). الأعداد تسمى العوامل. الناتج يسمى الحاصل.",
+          "الخاصية 1 — الإبدال: تغيير ترتيب العوامل لا يغير الحاصل. مثال: 7 × 18 = 18 × 7 = 126.",
+          "الخاصية 2 — التجميع: يمكن ضرب أكثر من عاملين بأي ترتيب. مثال: 4 × 5 × 10 = 200.",
+          "جدول الضرب (من 1 إلى 12) هو أساس جميع عمليات الضرب والقسمة. يجب حفظه.",
+          "أمثلة من جدول 7: 1×7=7، 2×7=14، 3×7=21، 4×7=28، 5×7=35، 6×7=42، 7×7=49، 8×7=56، 9×7=63، 10×7=70.",
+        ],
+        fa: [
+          "ضرب به معنای جمع کردن یک عدد چندین بار است. علامت ضرب « × » است. اعداد را عامل‌ها و نتیجه را حاصل‌ضرب می‌نامند.",
+          "ویژگی ۱ — جابجایی: تغییر ترتیب عامل‌ها حاصل‌ضرب را تغییر نمی‌دهد. مثال: ۷ × ۱۸ = ۱۸ × ۷ = ۱۲۶.",
+          "ویژگی ۲ — انجمنی: می‌توان بیش از دو عامل را به هر ترتیبی ضرب کرد. مثال: ۴ × ۵ × ۱۰ = ۲۰۰.",
+          "جدول ضرب (از ۱ تا ۱۲) پایه همه محاسبات ضرب و تقسیم است. باید حفظ شود.",
+          "نمونه‌های جدول ۷: ۱×۷=۷، ۲×۷=۱۴، ۳×۷=۲۱، ۴×۷=۲۸، ۵×۷=۳۵، ۶×۷=۴۲، ۷×۷=۴۹، ۸×۷=۵۶، ۹×۷=۶۳، ۱۰×۷=۷۰.",
+        ],
+        ti: [
+          "ዘርፊ ሓደ ቁጽሪ ብዙሕ ጊዜ ምድማር ማለት እዩ። ምልክት ዘርፊ « × » (ጊዜ) እዩ። ቁጽሪታት ምቅናስ ይብሃሉ። ናይ ዘርፊ ውጽኢት ዉጽኢት ዘርፊ ይብሃል።",
+          "ኣቃውማ ፩ — ቅደምሰዓባዊ: ቅደም ምቕያር ውጽኢት ዘርፊ ኣይቅይርን። ኣብነት: 7 × 18 = 18 × 7 = 126.",
+          "ኣቃውማ ፪ — ምጽምባር: ዝበዝሑ ቁጽርታት ብዝደለዮ ቅደም ምዝርፋፍ ይከኣል። ኣብነት: 4 × 5 × 10 = 200.",
+          "ሰንጠረዥ ዘርፊ (1 ክሳብ 12) ናይ ዘርፊ ኩሉ ሕሳብ ስረ እዩ። ምዝኽኻር ናይ ግዴታ እዩ።",
+          "ሰንጠረዥ 7 ኣብነት: 1×7=7, 2×7=14, 3×7=21, 4×7=28, 5×7=35, 6×7=42, 7×7=49, 8×7=56, 9×7=63, 10×7=70.",
+        ],
+        uk: [
+          "Множення — це повторне додавання одного числа. Знак « × » (на). Числа — множники, результат — добуток.",
+          "Властивість 1 — Комутативність: зміна порядку множників не змінює добуток. Приклад: 7 × 18 = 18 × 7 = 126.",
+          "Властивість 2 — Асоціативність: можна множити більше двох множників у будь-якому порядку. Приклад: 4 × 5 × 10 = 200.",
+          "Таблиця множення (від 1 до 12) — основа всіх множень і ділень. Її потрібно вивчити напам'ять.",
+          "Таблиця 7: 1×7=7, 2×7=14, 3×7=21, 4×7=28, 5×7=35, 6×7=42, 7×7=49, 8×7=56, 9×7=63, 10×7=70.",
         ],
       },
-      {
-        type: "table",
-        headersFr: ["121", "÷", "11", "=", "12"],
-        accentHeader: true,
-        rows: [["dividende", "diviser", "diviseur", "égale", "quotient"]],
-      },
-      { type: "heading", fr: "Propriétés de la multiplication", black: true },
-      { type: "highlight", fr: "Commutativité" },
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: ["L'ordre des facteurs ne change pas le produit."],
-      },
-      {
-        type: "svg_row",
-        items: [
-          {
-            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
-          },
-          {
-            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
-          },
-        ],
-      },
-      { type: "highlight", fr: "Associativité" },
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: ["On peut multiplier plus de deux facteurs dans l'ordre voulu."],
-      },
-      {
-        type: "svg_row",
-        items: [
-          {
-            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="25" y1="28" x2="51" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="77" y1="28" x2="63" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="56" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">20</text><text x="92" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="128" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">22</text><line x1="64" y1="78" x2="87" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="120" y1="78" x2="97" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
-          },
-          {
-            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="88" y1="28" x2="114" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="151" y1="28" x2="128" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="22" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="62" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="120" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">80</text><line x1="30" y1="78" x2="83" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="112" y1="78" x2="99" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
-          },
-        ],
-      },
-      { type: "heading", fr: "Multiplication en colonnes", black: true },
-      { type: "plain", fr: "Voici les étapes pour multiplier des nombres en colonnes." },
-      { type: "plain", fr: "Écrivez les nombres en alignant les unités, les dizaines, les centaines." },
-      {
-        type: "svg",
-        noFrame: false,
-        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
-      },
+    },
+    exercises: [
+      { id: "a3-1-e1", promptFr: "Calculez 7 × 8.", type: "number", acceptable: ["56"] },
+      { id: "a3-1-e2", promptFr: "Calculez 9 × 6.", type: "number", acceptable: ["54"] },
+      { id: "a3-1-e3", promptFr: "Calculez 12 × 11.", type: "number", acceptable: ["132"] },
+      { id: "a3-1-e4", promptFr: "Comment appelle-t-on le résultat d'une multiplication ?", type: "short_text", acceptable: ["produit", "le produit"] },
+      { id: "a3-1-e5", promptFr: "Calculez 6 × 9.", type: "number", acceptable: ["54"] },
     ],
-    paragraphs: { fr: [] },
-  },
-
-  exercises: [
-
-  ],
-  exercisePool: [
-
-  ],
-  poolSize: 5,
-};
+  };

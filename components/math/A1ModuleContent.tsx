@@ -2494,7 +2494,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span>
                       <span className="text-[var(--color-text-secondary)]">{leg.labelFr}</span>
                       {showPivotTranslation && leg.labelPivot?.[pivot] ? (
-                        <span className="block italic text-[var(--color-text-primary)]"
+                        <span className="block italic texft-[var(--color-text-primary)]"
                           lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                           {leg.labelPivot[pivot]}
                         </span>

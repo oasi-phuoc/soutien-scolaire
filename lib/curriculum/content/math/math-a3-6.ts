@@ -52,10 +52,5 @@ export const MATH_A3_6_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "a3-6-e1", promptFr: "Quel est le PGCD de 12 et 18 ?", type: "number", acceptable: ["6"] },
-      { id: "a3-6-e2", promptFr: "Quel est le PPCM de 4 et 6 ?", type: "number", acceptable: ["12"] },
-      { id: "a3-6-e3", promptFr: "Quel est le PGCD de 24 et 36 ?", type: "number", acceptable: ["12"] },
-      { id: "a3-6-e4", promptFr: "Quel est le PPCM de 5 et 8 ?", type: "number", acceptable: ["40"] },
-      { id: "a3-6-e5", promptFr: "Vérifiez : PGCD(4,6) × PPCM(4,6) = 4 × 6. Quel est le résultat des deux côtés ?", type: "number", acceptable: ["24"] },
     ],
   };

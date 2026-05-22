@@ -14,12 +14,12 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
       pt: "",
     },
     blocks: [
-      { type: "plain", fr: "L'addition permet de réunir plusieurs quantités ensemble." },
+      { type: "plain", fr: "Multiplier, c'est additionner plusieurs fois le même nombre." },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Le signe de l'addition est le signe « × » « fois »",
+          "Le signe de la multiplication est le signe « × » **fois**",
           "Les nombres à multiplier sont les facteurs.",
           "Le résultat de la multiplication est le produit.",
         ],

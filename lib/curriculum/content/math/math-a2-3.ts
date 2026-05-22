@@ -19,7 +19,7 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
 
       {
         type: "plain",
-        fr: "L'arrondi consiste à remplacer un nombre par un nombre « proche » mais plus simple.",
+        fr: "L'arrondi consiste à remplacer un nombre par un nombre **proche** mais plus simple.",
         pivot: {
           en: "Rounding replaces a number with a nearby simpler number.",
           ar: "التقريب يعني استبدال عدد بعدد قريب وأسهل.",

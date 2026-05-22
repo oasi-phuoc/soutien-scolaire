@@ -5,12 +5,7 @@ export const MATH_A3_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A3.1",
     theory: {
       title: {
-        fr: "Tables de multiplication (1 à 10)",
-        en: "Multiplication tables (1 to 10)",
-        ar: "جداول الضرب (1 إلى 10)",
-        fa: "جدول ضرب (۱ تا ۱۰)",
-        ti: "ሰንጠረዥ ዘርፍ (1 ክሳብ 10)",
-        uk: "Таблиці множення (від 1 до 10)",
+        fr: "Tables de multiplications",
       },
       paragraphs: {
         fr: [
@@ -58,10 +53,5 @@ export const MATH_A3_1_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "a3-1-e1", promptFr: "Calculez 7 × 8.", type: "number", acceptable: ["56"] },
-      { id: "a3-1-e2", promptFr: "Calculez 9 × 6.", type: "number", acceptable: ["54"] },
-      { id: "a3-1-e3", promptFr: "Calculez 12 × 11.", type: "number", acceptable: ["132"] },
-      { id: "a3-1-e4", promptFr: "Comment appelle-t-on le résultat d'une multiplication ?", type: "short_text", acceptable: ["produit", "le produit"] },
-      { id: "a3-1-e5", promptFr: "Calculez 6 × 9.", type: "number", acceptable: ["54"] },
     ],
   };

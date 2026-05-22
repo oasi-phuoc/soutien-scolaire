@@ -19,9 +19,9 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Le signe de l'addition est le signe « + » « plus »",
-          "Les nombres à additionner sont les termes.",
-          "Le résultat de l'addition est la somme.",
+          "Le signe de l'addition est le signe « + » **plus**",
+          "Les nombres à additionner sont les **termes**.",
+          "Le résultat de l'addition est la **somme**.",
         ],
       },
       {
@@ -71,17 +71,12 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
       {
         type: "svg",
         noFrame: false,
-        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`,
-        captionFr: "579 + 24 : disposition en colonnes",
+        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
       },
     ],
     paragraphs: { fr: [ ] },
   },
-  exercises: [
-
-  ],
-  exercisePool: [
-
-  ],
+  exercises: [  ],
+  exercisePool: [  ],
   poolSize: 5,
 };

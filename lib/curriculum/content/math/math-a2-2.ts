@@ -32,9 +32,9 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Le signe de la soustraction est le signe « − » « moins »",
-          "Les nombres de la soustraction sont les termes.",
-          "Le résultat de la soustraction est la différence.",
+          "Le signe de la soustraction est le signe « − » **moins**",
+          "Les nombres de la soustraction sont les **termes**.",
+          "Le résultat de la soustraction est la **différence**.",
         ],
       },
 
