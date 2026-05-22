@@ -531,6 +531,55 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   return steps;
 }
 
+// ── Multiplication table block ───────────────────────────────────────────────
+const MULT_PAIRS: [number, number][] = [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]];
+
+function MultiplicationTableBlock() {
+  const [pair, setPair] = useState<[number, number]>(MULT_PAIRS[0]!);
+  const [a, b] = pair;
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2">
+        {MULT_PAIRS.map(([x, y]) => (
+          <button
+            key={`${x}-${y}`}
+            type="button"
+            onClick={() => setPair([x, y])}
+            className={`rounded-lg px-3 py-1.5 text-sm font-bold transition-colors ${
+              pair[0] === x
+                ? "bg-[var(--color-accent-alg)] text-white"
+                : "border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]"
+            }`}
+          >
+            {x}–{y}
+          </button>
+        ))}
+      </div>
+      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+        <table className="w-full text-sm">
+          <tbody>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+              <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a * n}</td>
+                <td className="w-6" />
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b * n}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ── Rich block renderer ──────────────────────────────────────────────────────
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
@@ -648,6 +697,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
           ))}
         </div>
       );
+    case "mult_table":
+      return <MultiplicationTableBlock />;
     default:
       return null;
   }

@@ -20,8 +20,8 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "Le signe de la multiplication est le signe « × » **fois**",
-          "Les nombres à multiplier sont les facteurs.",
-          "Le résultat de la multiplication est le produit.",
+          "Les nombres à multiplier sont les **facteurs**.",
+          "Le résultat de la multiplication est le **produit**.",
         ],
       },
       {
@@ -54,6 +54,14 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: ["On peut multiplier plus de deux facteurs dans l'ordre voulu."],
       },
+
+      { type: "highlight", fr: "Fois 0" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: ["Un nombre multiplié par 0 donne 0. \n**Exemple :** 123 × 0 = 0."],
+      },
+
       {
         type: "svg_row",
         items: [

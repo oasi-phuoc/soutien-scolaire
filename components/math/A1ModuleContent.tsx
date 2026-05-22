@@ -210,6 +210,8 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
           ))}
         </div>
       );
+    case "mult_table":
+      return null;
     case "plain":
     default: {
       const pv = block.type === "plain" ? block.pivot?.[pivot] : undefined;

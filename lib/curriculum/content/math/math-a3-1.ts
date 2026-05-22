@@ -51,6 +51,14 @@ export const MATH_A3_1_LESSON: MathSubmoduleLesson = {
           "Таблиця 7: 1×7=7, 2×7=14, 3×7=21, 4×7=28, 5×7=35, 6×7=42, 7×7=49, 8×7=56, 9×7=63, 10×7=70.",
         ],
       },
+      blocks: [
+        { type: "plain", fr: "Multiplier, c'est additionner plusieurs fois le même nombre. Le signe de la multiplication est « × » (fois). Les nombres à multiplier sont les **facteurs**. Le résultat de la multiplication est le **produit**." },
+        { type: "plain", fr: "**Propriété 1 — Commutativité** : si l'on change l'ordre des facteurs, le produit ne change pas. Exemple : 7 × 18 = 18 × 7 = 126." },
+        { type: "plain", fr: "**Propriété 2 — Associativité** : on peut multiplier plus de deux facteurs dans l'ordre que l'on veut. Exemple : 4 × 5 × 10 = 20 × 10 = 200." },
+        { type: "note", fr: "Le livret de multiplication (tables de 1 à 12) est la base de tous les calculs de multiplication et de division. Il faut le mémoriser." },
+        { type: "heading", fr: "Tables de 1 à 12" },
+        { type: "mult_table" },
+      ],
     },
     exercises: [
     ],
