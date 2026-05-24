@@ -4,7 +4,7 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A4-4",
     submoduleCode: "A4.4",
     theory: {
-      title: { fr: "Comparaison de fractions", en: "Comparing fractions", ar: "مقارنة الكسور", fa: "مقایسه کسرها", ti: "ምውድዳር ፍርቂ", uk: "Порівняння дробів" },
+      title: { fr: "Addition et soustraction", en: "Addition and subtraction", ar: "الجمع والطرح", fa: "جمع و تفریق", ti: "መደመር እና መቀነስ", uk: "Додавання та віднімання" },
       paragraphs: {
         fr: [
           "Pour comparer deux fractions avec le même dénominateur, il suffit de comparer les numérateurs : la plus grande fraction a le plus grand numérateur. Exemple : 3/7 < 5/7 (car 3 < 5).",
@@ -39,10 +39,5 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
-      { id: "a4-4-e1", promptFr: "Comparez 3/7 et 5/7 avec < ou >.", type: "short_text", acceptable: ["3/7 < 5/7", "<"] },
-      { id: "a4-4-e2", promptFr: "Comparez 2/3 et 3/4 avec < ou >.", type: "short_text", acceptable: ["2/3 < 3/4", "<"] },
-      { id: "a4-4-e3", promptFr: "5/4 est-il plus grand que 1 ? (oui/non)", type: "short_text", acceptable: ["oui", "yes"] },
-      { id: "a4-4-e4", promptFr: "Comparez 5/6 et 7/8 (quel est le plus grand ?)", type: "short_text", acceptable: ["7/8"] },
-      { id: "a4-4-e5", promptFr: "Comparez 1/2 et 2/5 avec < ou >.", type: "short_text", acceptable: ["1/2 > 2/5", ">"] },
     ],
   };

@@ -14,7 +14,7 @@ export const MATH_MODULES: MathModule[] = [
   {
     id: "A1",
     code: "A1",
-    title: "Nombres entiers naturels",
+    title: "Nombres naturels",
     branch: "algebra",
     prerequisiteIds: [],
     submodules: [
@@ -105,7 +105,7 @@ export const MATH_MODULES: MathModule[] = [
   {
     id: "A7",
     code: "A7",
-    title: "Nombres entiers relatifs",
+    title: "Nombres relatifs",
     branch: "algebra",
     prerequisiteIds: ["A1", "A3"],
     submodules: [
