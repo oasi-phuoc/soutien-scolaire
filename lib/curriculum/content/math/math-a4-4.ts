@@ -4,7 +4,7 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A4-4",
     submoduleCode: "A4.4",
     theory: {
-      title: { fr: "Addition et soustraction", en: "Addition and subtraction", ar: "الجمع والطرح", fa: "جمع و تفریق", ti: "መደመር እና መቀነስ", uk: "Додавання та віднімання" },
+      title: { fr: "Addition et soustraction de fractions", en: "Addition and subtraction", ar: "الجمع والطرح", fa: "جمع و تفریق", ti: "መደመር እና መቀነስ", uk: "Додавання та віднімання" },
       paragraphs: {
         fr: [
           "Additionner ou soustraire des fractions consiste à calculer leur somme ou leur différence.",
@@ -30,8 +30,8 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
           fr: "Exemple",
         },
 
-      { type: "plain", fr: "[[frac:2/7]] + [[frac:3/7]] = [[frac:5/7]]." },
-      { type: "plain", fr: "[[frac:6/11]] - [[frac:4/11]] = [[frac:2/11]]." },
+      { type: "plain", fr:"[[frac:2/7]] + [[frac:3/7]] = [[frac:5/7]]." },
+      { type: "plain", fr:"[[frac:6/11]] - [[frac:4/11]] = [[frac:2/11]]." },
 
       { type: "heading", fr: "Dénominateur différent", black: true },
       { type: "plain", fr: "Pour additionner ou soustraire des fractions qui ont des dénominateurs différents"},

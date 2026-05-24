@@ -104,7 +104,7 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
       ],
 
       rows: A1_COMPTER_EN_FRANCAIS_ROWS,
-      audioSrc: "/audio/a1-1-compter-fr.m4a",
+      audioSrc: "/audio/a1-1-compter-fr.mp4",
     },
   },
 

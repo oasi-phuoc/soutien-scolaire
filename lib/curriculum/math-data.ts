@@ -63,11 +63,10 @@ export const MATH_MODULES: MathModule[] = [
       sm("A4.1", "Notion et représentation"),
       sm("A4.2", "Fractions équivalentes"),
       sm("A4.3", "Comparaison"),
-      sm("A4.4", "± même dénominateur"),
-      sm("A4.5", "± dénominateurs différents"),
-      sm("A4.6", "Multiplication"),
-      sm("A4.7", "Division"),
-      sm("A4.8", "Fractions et décimaux"),
+      sm("A4.4", "Addition et soustraction"),
+      sm("A4.5", "Multiplication"),
+      sm("A4.6", "Division "),
+      sm("A4.7", "Fractions et décimaux")
     ],
   },
   {
