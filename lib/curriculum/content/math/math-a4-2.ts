@@ -7,17 +7,14 @@ export const MATH_A4_2_LESSON: MathSubmoduleLesson = {
       title: { fr: "Fractions équivalentes", en: "Equivalent fractions", ar: "الكسور المكافئة", fa: "کسرهای معادل", ti: "ፍርቂ ምፍላጥ", uk: "Еквівалентні дроби" },
       paragraphs: {
         fr: [
-          "Deux fractions sont équivalentes lorsqu’elles représentent la même quantité, même si les nombres sont différents..",
+          "Deux fractions sont équivalentes lorsqu’elles représentent la même quantité, même si les nombres sont différents.",
         ],
         
       },
       
       blocks: [      
-      { type: "plain", fr: "" },
-      {
-          type: "highlight",
-          fr: "Exemple",
-        },
+      { type: "plain", fr: "Deux fractions sont équivalentes lorsqu’elles représentent la même quantité, même si les nombres sont différents." },
+      { type: "highlight", fr: "Exemple"},
 
       { type: "plain", fr: "Ces fractions sont différentes, mais elles ont la même valeur." },
 

@@ -11,6 +11,8 @@ export const MATH_A4_3_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
+      { type: "plain", fr: "Comparer des fractions signifie déterminer si une fraction est plus grande, plus petite ou égale à une autre fraction." },
+
       { type: "heading", fr: "Même dénominateur", black: true },
       { type: "plain", fr: "Quand les dénominateurs sont identiques, on compare seulement les numérateurs. La fraction avec le plus grand numérateur est la plus grande." },
 
