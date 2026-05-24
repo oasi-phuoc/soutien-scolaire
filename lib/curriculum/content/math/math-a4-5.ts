@@ -1,48 +1,108 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A4_5_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A4-5",
-    submoduleCode: "A4.5",
-    theory: {
-      title: { fr: "Addition/soustraction même dénominateur", en: "Add/subtract same denominator", ar: "الجمع والطرح بنفس المقام", fa: "جمع/تفریق با مخرج یکسان", ti: "ምደማር/ምቅናስ ሓደ ሚዛን", uk: "Додавання/віднімання однаковий знаменник" },
-      paragraphs: {
-        fr: [
-          "Pour additionner ou soustraire deux fractions qui ont le même dénominateur, on additionne ou soustrait les numérateurs et on garde le même dénominateur.",
-          "Exemples : 3/7 + 2/7 = 5/7. 5/8 − 3/8 = 2/8 = 1/4 (simplifié).",
-          "On simplifie le résultat si possible en divisant par le PGCD du numérateur et du dénominateur.",
-        ],
-        en: [
-          "To add or subtract fractions with the same denominator, add or subtract the numerators and keep the same denominator.",
-          "Examples: 3/7 + 2/7 = 5/7. 5/8 − 3/8 = 2/8 = 1/4 (simplified).",
-          "Simplify the result if possible by dividing by the GCD of numerator and denominator.",
-        ],
-        ar: [
-          "لجمع أو طرح كسرين بنفس المقام، نجمع أو نطرح البسطين ونحتفظ بنفس المقام.",
-          "أمثلة: 3/7 + 2/7 = 5/7. 5/8 − 3/8 = 2/8 = 1/4 (مبسّط).",
-          "نبسّط الناتج إذا أمكن بالقسمة على ق.م.أ للبسط والمقام.",
-        ],
-        fa: [
-          "برای جمع یا تفریق دو کسر با مخرج یکسان، صورت‌ها را جمع یا تفریق کنید و مخرج را نگه دارید.",
-          "مثال‌ها: ۳/۷ + ۲/۷ = ۵/۷. ۵/۸ − ۳/۸ = ۲/۸ = ۱/۴ (ساده شده).",
-          "در صورت امکان با تقسیم بر ب.م.م صورت و مخرج را ساده کنید.",
-        ],
-        ti: [
-          "ሓደ ሚዛን ናይ ዘለዎም ክልተ ፍርቂ ምደማር ወይ ምቅናስ ናይ ዝለዓለ ቁጽርታት ምደማር ወይ ምቅናስ ብሓደ ሚዛን ቁጽሪ ምሓዝ ማለት እዩ።",
-          "ኣብነት: 3/7 + 2/7 = 5/7. 5/8 − 3/8 = 2/8 = 1/4 (ቅጸ ዝሓሸ).",
-          "ናይ PGCD ናይ ዝለዓለ ምስ ሚዛን ቁጽሪ ምቅጻር እንተተኻኢሉ ቅጸ ዝሓሸ.",
-        ],
-        uk: [
-          "Щоб додати або відняти дроби з однаковим знаменником, додайте або відніміть чисельники та збережіть знаменник.",
-          "Приклади: 3/7 + 2/7 = 5/7. 5/8 − 3/8 = 2/8 = 1/4 (спрощено).",
-          "Спростіть результат, якщо можливо, поділивши на НСД чисельника і знаменника.",
+  submoduleId: "A4-5",
+  submoduleCode: "A4.5",
+
+  theory: {
+    title: {
+      fr: "Multiplication de fractions",
+      en: "Multiplication of fractions",
+      ar: "ضرب الكسور",
+      fa: "ضرب کسرها",
+      ti: "ምብዛሕ ክፍሊታት",
+      uk: "Множення дробів",
+    },
+
+    paragraphs: {
+      fr: [
+        "Multiplier des fractions consiste à multiplier les numérateurs entre eux et les dénominateurs entre eux.",
+      ],
+    },
+
+    blocks: [
+      {
+        type: "plain",
+        fr: "Multiplier des fractions consiste à multiplier les numérateurs entre eux et les dénominateurs entre eux.",
+      },
+
+      {
+        type: "heading",
+        fr: "Règle de multiplication",
+        black: true,
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "On multiplie les numérateurs entre eux.",
+          "On multiplie les dénominateurs entre eux.",
+          "On simplifie le résultat si possible.",
         ],
       },
-    },
-    exercises: [
-      { id: "a4-5-e1", promptFr: "Calculez 3/7 + 2/7.", type: "short_text", acceptable: ["5/7"] },
-      { id: "a4-5-e2", promptFr: "Calculez 5/8 − 3/8 (simplifiez).", type: "short_text", acceptable: ["1/4", "2/8"] },
-      { id: "a4-5-e3", promptFr: "Calculez 7/9 − 4/9.", type: "short_text", acceptable: ["3/9", "1/3"] },
-      { id: "a4-5-e4", promptFr: "Calculez 2/5 + 4/5 (simplifiez).", type: "short_text", acceptable: ["6/5", "1 1/5"] },
-      { id: "a4-5-e5", promptFr: "Calculez 11/12 − 5/12.", type: "short_text", acceptable: ["6/12", "1/2"] },
+
+      {
+        type: "highlight",
+        fr: "Exemple",
+      },
+
+      {
+        type: "plain",
+        fr: "[[frac:2/3]] × [[frac:4/5]]",
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "On multiplie les numérateurs : 2 × 4 = 8",
+          "On multiplie les dénominateurs : 3 × 5 = 15",
+          "Résultat : [[frac:8/15]]",
+        ],
+      },
+
+      {
+        type: "highlight",
+        fr: "Exemple avec simplification",
+      },
+
+      {
+        type: "plain",
+        fr: "[[frac:3/4]] × [[frac:8/9]]",
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "On multiplie : 3 × 8 = 24 et 4 × 9 = 36",
+          "On obtient : [[frac:24/36]]",
+          "On simplifie : [[frac:24/36]] = [[frac:2/3]]",
+        ],
+      },
+
+      {
+        type: "highlight",
+        fr: "Exemple avec simplification avant calcul",
+      },
+
+      {
+        type: "plain",
+        fr: "[[frac:6/10]] × [[frac:5/3]]",
+      },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "On simplifie avant de multiplier : 6 et 3 → 2 et 1, 5 et 10 → 1 et 2",
+          "On calcule : [[frac:2/2]] × [[frac:1/1]] = [[frac:2/2]]",
+          "Résultat : [[frac:1/1]] = 1",
+        ],
+      },
     ],
-  };
+  },
+
+  exercises: [],
+};

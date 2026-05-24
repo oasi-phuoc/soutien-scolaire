@@ -49,7 +49,7 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
 
       {
           type: "highlight",
-          fr: "Exemple",
+          fr: "Exemple d'addition",
         },
 
       { type: "plain", fr: "[[frac:9/3]] + [[frac:6/4]]" },
@@ -62,6 +62,24 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
           "On simplifie la fraction : [[frac:54/12]] = [[frac:9/2]].",
         ],
       },
+      
+      {
+        type: "highlight",
+        fr: "Exemple de soustraction",
+        },
+
+        { type: "plain", fr: "[[frac:7/3]] - [[frac:5/6]]" },
+
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "On met au même dénominateur : [[frac:7/3]] = [[frac:14/6]] et [[frac:5/6]] = [[frac:5/6]]",
+            "On soustrait les numérateurs : [[frac:14/6]] - [[frac:5/6]] = [[frac:9/6]]",
+            "On simplifie la fraction : [[frac:9/6]] = [[frac:3/2]].",
+          ],
+        },
+
       ],
     },
     exercises: [
