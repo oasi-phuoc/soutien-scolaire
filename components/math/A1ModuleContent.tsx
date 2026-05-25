@@ -1563,7 +1563,7 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
+        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
           {result ? (
             <span className="text-sm font-medium text-[var(--color-text-primary)]">{answer}</span>
           ) : (
@@ -2833,7 +2833,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   if (state === "fill") {
                     if (ex7Validated && result !== null) {
                       return (
-                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "ring-1 ring-inset ring-green-400 border-zinc-300 dark:border-zinc-600" : `${CLS_WRONG} ring-1 ring-inset ring-amber-400`}`}>
+                        <div key={u} className={`aspect-square flex items-center justify-center border-b border-r ${result ? "border-zinc-300 dark:border-zinc-600" : `${CLS_WRONG} ring-1 ring-inset ring-amber-400`}`}>
                           <span className="text-sm font-medium tabular-nums">
                             {result ? (ex7Answers[key] ?? "") : value}
                           </span>
@@ -3183,7 +3183,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
               const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
               const _fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
-              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
+              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
               const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                 setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
               return (
@@ -3199,8 +3199,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <>
                         <div className="flex flex-1 flex-col items-center gap-0.5">
                           {ex14Validated ? (
-                            <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(mOk)}`}>
-                              {(mOk && ans.m) ? ans.m : String(m * 1000)}
+                            <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(mOk)}`}>
+                              {mOk ? <span className="text-[var(--color-text-primary)]">{ans.m || String(m * 1000)}</span> : <><span className="line-through">{ans.m || "—"}</span><span className="text-[var(--color-text-primary)]">{String(m * 1000)}</span></>}
                             </span>
                           ) : (
                             <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.m}
@@ -3213,8 +3213,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     )}
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(cOk)}`}>
-                          {(cOk && ans.c) ? ans.c : String(c * 100)}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(cOk)}`}>
+                          {cOk ? <span className="text-[var(--color-text-primary)]">{ans.c || String(c * 100)}</span> : <><span className="line-through">{ans.c || "—"}</span><span className="text-[var(--color-text-primary)]">{String(c * 100)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.c}
@@ -3225,8 +3225,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(dOk)}`}>
-                          {(dOk && ans.d) ? ans.d : String(d * 10)}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(dOk)}`}>
+                          {dOk ? <span className="text-[var(--color-text-primary)]">{ans.d || String(d * 10)}</span> : <><span className="line-through">{ans.d || "—"}</span><span className="text-[var(--color-text-primary)]">{String(d * 10)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.d}
@@ -3237,8 +3237,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-center text-sm text-[var(--color-text-primary)] ${valCls(uOk)}`}>
-                          {(uOk && ans.u) ? ans.u : String(u)}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(uOk)}`}>
+                          {uOk ? <span className="text-[var(--color-text-primary)]">{ans.u || String(u)}</span> : <><span className="line-through">{ans.u || "—"}</span><span className="text-[var(--color-text-primary)]">{String(u)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.u}
@@ -3687,10 +3687,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
-                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
                             {audioWrong ? (
                               <>
-                                <span className="text-sm text-amber-400 line-through">{audioAns || "—"}</span>
+                                <span className="text-sm text-amber-600 line-through">{audioAns || "—"}</span>
                                 <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                               </>
                             ) : (
@@ -3723,14 +3723,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             const seriesAns = evalAnswers[ex.id] ?? "";
                             const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
                             return evalPageValidated ? (
-                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? CLS_WRONG : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300"}`}>
+                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? CLS_WRONG : "border-zinc-300 dark:border-zinc-600 bg-blue-50 dark:bg-blue-950/20"}`}>
                                 {seriesWrong ? (
                                   <>
-                                    <span className="text-amber-400 line-through">{seriesAns || "—"}</span>
+                                    <span className="text-amber-600 line-through">{seriesAns || "—"}</span>
                                     <span className="text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                                   </>
                                 ) : (
-                                  <span>{seriesAns}</span>
+                                  <span className="text-[var(--color-text-primary)]">{seriesAns}</span>
                                 )}
                               </div>
                             ) : (
@@ -3766,10 +3766,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
                   {evalPageValidated ? (
-                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
                       {genWrong ? (
                         <>
-                          <span className="text-sm text-amber-400 line-through">{genAns || "—"}</span>
+                          <span className="text-sm text-amber-600 line-through">{genAns || "—"}</span>
                           <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
                         </>
                       ) : (
@@ -3891,8 +3891,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const boxX = Math.min(Math.max(x - boxW / 2, ML), ML + lineW - boxW);
                         const result = ex17Results[li]?.[ai] ?? null;
                         const ans = ex17Answers[li]?.[ai] ?? "";
-                        const stroke = result === true ? "#4ade80" : result === false ? "#f87171" : "#9CA3AF";
-                        const fill = result !== null ? "white" : "#DBEAFE";
+                        const stroke = result === false ? "#F59E0B" : "#9CA3AF";
+                        const fill = result === false ? "#FEF3C7" : "#DBEAFE";
                         return (
                           <g key={ai}>
                             {/* Shaft */}
@@ -3973,8 +3973,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const boxX = Math.min(Math.max(x - boxW/2, ML), ML + lineW - boxW);
                         const ans = ex18Answers[li]?.[ai] ?? "";
                         const result = ex18Results[li]?.[ai] ?? null;
-                        const stroke = result === true ? "#4ade80" : result === false ? "#f87171" : "#9CA3AF";
-                        const fill = result !== null ? "white" : "#DBEAFE";
+                        const stroke = result === false ? "#F59E0B" : "#9CA3AF";
+                        const fill = result === false ? "#FEF3C7" : "#DBEAFE";
                         return (
                           <g key={ai}>
                             <line x1={x} y1={bY+boxH} x2={x} y2={arrowTipY-4} stroke="#374151" strokeWidth="1.5"/>
@@ -4030,12 +4030,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex19Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex19Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-center text-sm tabular-nums text-[var(--color-text-primary)] ${valCls(loOk)}`}>
-                            {(loOk && a.lo) ? a.lo : String(lo)}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(loOk)}`}>
+                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="line-through">{a.lo || "—"}</span><span className="text-[var(--color-text-primary)]">{String(lo)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.lo}
@@ -4045,8 +4045,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-14 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-center text-sm tabular-nums text-[var(--color-text-primary)] ${valCls(hiOk)}`}>
-                            {(hiOk && a.hi) ? a.hi : String(hi)}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(hiOk)}`}>
+                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="line-through">{a.hi || "—"}</span><span className="text-[var(--color-text-primary)]">{String(hi)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.hi}
@@ -4085,12 +4085,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex20Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex20Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG;
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-center text-sm tabular-nums text-[var(--color-text-primary)] ${valCls(loOk)}`}>
-                            {(loOk && a.lo) ? a.lo : String(lo)}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(loOk)}`}>
+                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="line-through">{a.lo || "—"}</span><span className="text-[var(--color-text-primary)]">{String(lo)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.lo}
@@ -4100,8 +4100,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-20 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-center text-sm tabular-nums text-[var(--color-text-primary)] ${valCls(hiOk)}`}>
-                            {(hiOk && a.hi) ? a.hi : String(hi)}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(hiOk)}`}>
+                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="line-through">{a.hi || "—"}</span><span className="text-[var(--color-text-primary)]">{String(hi)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.hi}
@@ -4147,9 +4147,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       const correct = isCorrect(n);
                       let cls = "rounded-[var(--radius-md)] border px-4 py-2 text-sm font-bold tabular-nums transition-colors";
                       if (ex21Validated) {
-                        if (correct && sel) cls += " border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300";
-                        else if (correct && !sel) cls += " border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
-                        else if (!correct && sel) cls += " ${CLS_WRONG} text-amber-600 line-through";
+                        if (correct && !sel) cls += ` ${CLS_WRONG}`;
+                        else if (sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
                         else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                       } else {
                         cls += sel
@@ -4196,16 +4195,16 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 );
               };
               return (
-                <div key={pi} className={`rounded-[var(--radius-md)] border p-3 transition-colors ${validated ? (sel === correct ? "border-blue-400" : CLS_WRONG) : "border-[var(--color-border-default)]"}`}>
+                <div key={pi} className={`rounded-[var(--radius-md)] border p-3 transition-colors border-[var(--color-border-default)]`}>
                   <div className="flex items-center gap-2">
                     {renderBlocks(pair.a)}
                     <div className="flex flex-col gap-1 shrink-0">
                       {(["<", ">", "="] as const).map(sym => {
                         let cls = "w-10 rounded border py-1 text-center text-sm font-bold transition-colors";
                         if (validated) {
-                          cls += sym === correct ? " border-blue-400 bg-[var(--color-bg-primary)] text-blue-700 dark:text-blue-300"
-                            : sym === sel && sym !== correct ? " ${CLS_WRONG} text-amber-600 line-through"
-                            : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+                          if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
+                          else if (sym === sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                          else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                         } else {
                           cls += sel === sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
                             : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
@@ -4243,9 +4242,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const nextSym = CYCLE[(CYCLE.indexOf(sym) + 1) % CYCLE.length]!;
               let symCls = "w-8 h-8 rounded border text-center text-sm font-bold leading-8 transition-colors shrink-0";
               if (ex23Validated) {
-                symCls += sym === correct ? " border-blue-400 bg-[var(--color-bg-primary)] text-blue-700 dark:text-blue-300"
-                  : sym !== correct ? " ${CLS_WRONG} text-amber-600"
-                  : " border-[var(--color-border-default)]";
+                symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
+                  : " border-zinc-300 dark:border-zinc-600 text-zinc-400";
               } else {
                 symCls += sym ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
                   : " border-zinc-300 dark:border-zinc-600 text-zinc-400 cursor-pointer hover:border-teal-400";
@@ -4259,7 +4257,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   </button>
                   <span className="flex-1 text-left text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{pair.b}</span>
                   {ex23Validated && sym !== correct && (
-                    <span className="text-xs text-blue-600 dark:text-blue-400 shrink-0">→{correct}</span>
+                    <span className="text-xs text-amber-600 shrink-0">→{correct}</span>
                   )}
                 </div>
               );
@@ -4297,10 +4295,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           const correct = isCorrect(n);
                           let cls = "flex-1 rounded border px-1 py-2 text-center text-xs font-bold tabular-nums transition-colors";
                           if (ex24Validated) {
-                            cls += correct && sel ? " border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300"
-                              : correct && !sel ? " border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]"
-                              : !correct && sel ? " ${CLS_WRONG} text-amber-600 line-through"
-                              : " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+                            if (correct && !sel) cls += ` ${CLS_WRONG}`;
+                            else if (sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                            else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                           } else {
                             cls += sel ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)] cursor-pointer"
                               : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
@@ -4349,7 +4346,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               let cls = "flex flex-col items-center justify-center rounded-[var(--radius-md)] border p-2 transition-colors";
               if (ex25Validated) {
                 const ok = col === correctCol;
-                cls += ok ? " border-blue-400 bg-blue-50 dark:bg-blue-950/20"
+                cls += ok
+                  ? (col ? ` ${COLOR_BG[col] ?? "border-[var(--color-border-default)]"}` : " border-[var(--color-border-default)]")
                   : " border-amber-400 bg-amber-50 dark:bg-amber-950/20";
               } else {
                 cls += col ? ` ${COLOR_BG[col] ?? "border-[var(--color-border-default)]"} cursor-pointer`
@@ -4360,9 +4358,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   onClick={() => { if (!ex25Validated) setEx25Colors(prev => prev.map((c, ci) => ci === ni ? nextCol : c)); }}>
                   <span className="text-2xl" aria-hidden>🪰</span>
                   <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-                  {ex25Validated && (
-                    <span className={`text-xs font-medium ${col === correctCol ? "text-blue-600 dark:text-blue-400" : "text-amber-600"}`}>
-                      {col === correctCol ? "✓" : `→ ${correctCol ?? "sans"}`}
+                  {ex25Validated && col !== correctCol && (
+                    <span className="text-xs font-medium text-amber-600">
+                      → {correctCol ?? "sans"}
                     </span>
                   )}
                 </button>
@@ -4399,9 +4397,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       const isCorrect = correctSet.has(n);
                       let cls = "rounded border px-2 py-0.5 text-xs font-bold tabular-nums transition-colors";
                       if (ex26Validated) {
-                        cls += checked && isCorrect ? " border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-700 dark:text-blue-300"
-                          : checked && !isCorrect ? " border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-600 line-through"
-                          : !checked && isCorrect ? " border-blue-400 bg-[var(--color-bg-primary)] text-blue-600 dark:text-blue-400"
+                        cls += checked ? ` ${bubble.btnSel} text-[var(--color-text-primary)]`
+                          : isCorrect ? ` ${CLS_WRONG}`
                           : " border-transparent text-[var(--color-text-secondary)]";
                       } else {
                         cls += checked ? ` ${bubble.btnSel} text-[var(--color-text-primary)] cursor-pointer`
