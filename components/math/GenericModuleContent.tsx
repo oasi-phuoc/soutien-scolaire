@@ -16,6 +16,27 @@ function renderBold(text: string) {
   return <>{parts.map((p, i) => i % 2 === 1 ? <strong key={i} className="font-bold text-[var(--color-accent-alg)]">{p}</strong> : p)}</>;
 }
 
+function renderText(text: string): React.ReactNode {
+  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
+  if (parts.length === 1) return renderBold(text);
+  const nodes: React.ReactNode[] = [];
+  parts.forEach((part, i) => {
+    const m = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
+    if (m) {
+      nodes.push(
+        <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
+          <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
+        </span>
+      );
+    } else if (part) {
+      nodes.push(<span key={i}>{renderBold(part)}</span>);
+    }
+  });
+  return <>{nodes}</>;
+}
+
 function formatCompNum(n: number): string {
   const s = n.toString();
   if (s.length <= 3) return s;
@@ -666,7 +687,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
     case "plain":
       if (!block.fr) return <div className="h-3" />;
       return (
-        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderBold(block.fr)}</p>
+        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderText(block.fr)}</p>
       );
     case "note":
       return (
@@ -751,7 +772,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  {renderBold(item)}
+                  {renderText(item)}
                 </li>
               ))}
             </ul>

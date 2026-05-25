@@ -55,23 +55,23 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
 
 // Parses [[frac:N/D]] markers and renders vertical inline fractions
 function renderFracText(text: string): React.ReactNode {
-  const parts = text.split(/\[\[frac:(\d+)\/(\d+)\]\]/);
+  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
   if (parts.length === 1) return text;
   const nodes: React.ReactNode[] = [];
-  for (let i = 0; i < parts.length; i += 3) {
-    if (parts[i]) nodes.push(parts[i]);
-    if (i + 1 < parts.length) {
-      const num = parts[i + 1]!;
-      const den = parts[i + 2]!;
+  parts.forEach((part, i) => {
+    const m = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
+    if (m) {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}</span>
-          <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
-          <span className="text-xs font-bold text-[var(--color-text-primary)]">{den}</span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
+          <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
         </span>
       );
+    } else if (part) {
+      nodes.push(part);
     }
-  }
+  });
   return <>{nodes}</>;
 }
 
@@ -85,7 +85,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "plain":
       if (!block.fr) return <div className="h-3" />;
-      return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{block.fr}</p>;
+      return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderFracText(block.fr)}</p>;
     case "note":
       return (
         <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
@@ -164,9 +164,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
-                <li key={ii} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  <span className="mt-0.5 shrink-0 text-[var(--color-accent-alg)]">•</span>
-                  <span>{renderFracText(item)}</span>
+                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {renderFracText(item)}
                 </li>
               ))}
             </ul>

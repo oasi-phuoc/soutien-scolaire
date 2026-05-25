@@ -73,6 +73,27 @@ function renderBold(text: string): React.ReactNode {
   return parts.map((part, i) => i % 2 === 1 ? <strong key={i}>{part}</strong> : part);
 }
 
+function renderText(text: string): React.ReactNode {
+  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
+  if (parts.length === 1) return renderBold(text);
+  const nodes: React.ReactNode[] = [];
+  parts.forEach((part, i) => {
+    const m = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
+    if (m) {
+      nodes.push(
+        <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
+          <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
+        </span>
+      );
+    } else if (part) {
+      nodes.push(<span key={i}>{renderBold(part)}</span>);
+    }
+  });
+  return <>{nodes}</>;
+}
+
 function RichBlock({ block, pivot, showPivot, isRtl }: {
   block: MathRichBlock;
   pivot: PivotCode;
@@ -190,7 +211,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-                  {item}
+                  {renderText(item)}
                 </li>
               ))}
             </ul>
@@ -217,7 +238,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       const pv = block.type === "plain" ? block.pivot?.[pivot] : undefined;
       return (
         <div>
-          <p className="text-sm text-[var(--color-text-secondary)]">{renderBold(block.fr)}</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">{renderText(block.fr)}</p>
           {showPivot && pv ? (
             <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-xs italic text-[var(--color-text-primary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
