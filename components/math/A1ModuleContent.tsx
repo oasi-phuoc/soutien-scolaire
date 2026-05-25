@@ -248,6 +248,7 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
         </div>
       );
     case "mult_table":
+    case "div_table":
       return null;
     case "plain":
     default: {

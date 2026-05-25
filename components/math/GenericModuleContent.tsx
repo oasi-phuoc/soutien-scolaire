@@ -51,15 +51,19 @@ type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
-type TheoryStep      = { kind: "theory";          lesson: MathSubmoduleLesson };
-type ExerciseStep    = { kind: "exercise";         lesson: MathSubmoduleLesson; item: MathExerciseItem };
-type NumberLineStep  = { kind: "number_line";      lesson: MathSubmoduleLesson; nlConfig: NLConfig };
-type ComparisonStep  = { kind: "comparison_ex";    lesson: MathSubmoduleLesson; config: ComparisonConfig };
-type ArithGroupStep  = { kind: "arithmetic_group"; lesson: MathSubmoduleLesson; config: ArithGroupConfig; timer?: number };
-type ColumnGridStep  = { kind: "column_grid";      lesson: MathSubmoduleLesson; config: ColGridConfig };
-type EvalStartStep   = { kind: "eval_start";       lesson: MathSubmoduleLesson };
-type PassToggleStep  = { kind: "pass_toggle";      lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | EvalStartStep | PassToggleStep;
+type ExprCompQ = { la: number; lop: ArithOp; lb: number; ra: number; rop: ArithOp; rb: number; answer: "<" | "=" | ">" };
+type ExprCompConfig = { questions: ExprCompQ[]; exNum: number; op: ArithOp };
+
+type TheoryStep      = { kind: "theory";           lesson: MathSubmoduleLesson };
+type ExerciseStep    = { kind: "exercise";          lesson: MathSubmoduleLesson; item: MathExerciseItem };
+type NumberLineStep  = { kind: "number_line";       lesson: MathSubmoduleLesson; nlConfig: NLConfig };
+type ComparisonStep  = { kind: "comparison_ex";     lesson: MathSubmoduleLesson; config: ComparisonConfig };
+type ArithGroupStep  = { kind: "arithmetic_group";  lesson: MathSubmoduleLesson; config: ArithGroupConfig; timer?: number };
+type ColumnGridStep  = { kind: "column_grid";       lesson: MathSubmoduleLesson; config: ColGridConfig };
+type ExprCompStep    = { kind: "expr_comparison";   lesson: MathSubmoduleLesson; config: ExprCompConfig };
+type EvalStartStep   = { kind: "eval_start";        lesson: MathSubmoduleLesson };
+type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson };
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -172,6 +176,89 @@ function ComparisonExercise({
                 })}
               </div>
               <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Expression comparison exercise ───────────────────────────────────────────
+function genExprComp(op: ArithOp, range: [number, number], exNum: number): ExprCompConfig {
+  const [min, max] = range;
+  const evalOp = (a: number, b: number) => op === "+" ? a + b : a - b;
+  const rndPair = (): [number, number] => {
+    if (op === "+") return [rnd(min, max), rnd(min, max)];
+    const a = rnd(min, max); const b = rnd(min, a); return [a, b];
+  };
+  const targets: Array<"<" | "=" | ">"> = ["<", "<", ">", ">", "="];
+  for (let i = targets.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [targets[i], targets[j]] = [targets[j]!, targets[i]!];
+  }
+  const questions: ExprCompQ[] = targets.map(answer => {
+    let la: number, lb: number, ra: number, rb: number;
+    let tries = 0;
+    do {
+      [la, lb] = rndPair();
+      if (answer === "=") {
+        const target = evalOp(la, lb);
+        ra = rnd(min, max);
+        rb = op === "+" ? target - ra : ra - target;
+        if (rb >= min && rb <= max && (op === "+" || rb <= ra)) break;
+      } else {
+        [ra, rb] = rndPair();
+        const lv = evalOp(la, lb), rv = evalOp(ra, rb);
+        if (answer === "<" && lv < rv) break;
+        if (answer === ">" && lv > rv) break;
+      }
+    } while (++tries < 500);
+    return { la, lop: op, lb, ra, rop: op, rb, answer };
+  });
+  return { questions, exNum, op };
+}
+
+function ExprCompExercise({
+  config, answers, validated, onAnswer,
+}: {
+  config: ExprCompConfig;
+  answers: Array<"<" | "=" | ">" | null>;
+  validated: boolean;
+  onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+}) {
+  const num = (n: number) => (
+    <span className="font-mono font-bold text-[var(--color-accent-alg)]">{n}</span>
+  );
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+        <div className="space-y-3">
+          {config.questions.map((q, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="shrink-0 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+              <div className="flex shrink-0 gap-1">
+                {(["<", "=", ">"] as const).map(sym => {
+                  const sel = answers[i] === sym;
+                  const isCorrect = sym === q.answer;
+                  let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                  if (!validated) {
+                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                  } else if (sel && isCorrect) {
+                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                  } else if (sel && !isCorrect) {
+                    cls += CLS_WRONG;
+                  } else if (!sel && isCorrect) {
+                    cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                  } else {
+                    cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                  }
+                  return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
+                })}
+              </div>
+              <span className="shrink-0 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
             </div>
           ))}
         </div>
@@ -617,10 +704,11 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
+      // Comparaison (avant évaluation)
+      steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [1, 99], 9) });
+      steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 9) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 10) });
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
@@ -948,6 +1036,9 @@ export function GenericModuleContent({
   const [compAnswers, setCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
   const [compValidated, setCompValidated] = useState(false);
   const [compOverrideConfigs, setCompOverrideConfigs] = useState<Record<number, ComparisonConfig>>({});
+  const [exprCompAnswers, setExprCompAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(5).fill(null));
+  const [exprCompValidated, setExprCompValidated] = useState(false);
+  const [exprCompOverrideConfigs, setExprCompOverrideConfigs] = useState<Record<number, ExprCompConfig>>({});
   const [arithOverrideConfigs, setArithOverrideConfigs] = useState<Record<number, ArithGroupConfig>>({});
   const [gridOverrideConfigs, setGridOverrideConfigs] = useState<Record<number, ColGridConfig>>({});
 
@@ -979,6 +1070,8 @@ export function GenericModuleContent({
     setToggleAnswer(null);
     setCompAnswers(Array(5).fill(null));
     setCompValidated(false);
+    setExprCompAnswers(Array(5).fill(null));
+    setExprCompValidated(false);
     setArithAnswers(Array(5).fill(""));
     setArithValidated(false);
     setArithResults(Array(5).fill(false));
@@ -1021,7 +1114,7 @@ export function GenericModuleContent({
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
-      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group") {
+      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group" || currentStep?.kind === "expr_comparison") {
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
@@ -1049,6 +1142,9 @@ export function GenericModuleContent({
 
   const activeCompConfig = currentStep?.kind === "comparison_ex"
     ? (compOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeExprCompConfig = currentStep?.kind === "expr_comparison"
+    ? (exprCompOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
   const activeArithConfig = currentStep?.kind === "arithmetic_group"
     ? (arithOverrideConfigs[stepIdx] ?? currentStep.config)
@@ -1086,6 +1182,22 @@ export function GenericModuleContent({
         if (!activeCompConfig) return;
         setCompValidated(true);
       };
+    } else {
+      stepCanValidate = false;
+      stepValidate = () => {};
+    }
+  }
+
+  if (currentStep?.kind === "expr_comparison") {
+    const cfg = activeExprCompConfig!;
+    stepReset = () => {
+      setExprCompOverrideConfigs(prev => ({ ...prev, [stepIdx]: genExprComp(cfg.op, cfg.questions[0]!.la > 99 ? [100, 999] : [1, 99], cfg.exNum) }));
+      setExprCompAnswers(Array(5).fill(null));
+      setExprCompValidated(false);
+    };
+    if (!exprCompValidated) {
+      stepCanValidate = true;
+      stepValidate = () => setExprCompValidated(true);
     } else {
       stepCanValidate = false;
       stepValidate = () => {};
@@ -1239,6 +1351,15 @@ export function GenericModuleContent({
           answers={compAnswers}
           validated={compValidated}
           onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+        />
+      )}
+
+      {currentStep?.kind === "expr_comparison" && activeExprCompConfig && (
+        <ExprCompExercise
+          config={activeExprCompConfig}
+          answers={exprCompAnswers}
+          validated={exprCompValidated}
+          onAnswer={(i, sym) => setExprCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
         />
       )}
 
