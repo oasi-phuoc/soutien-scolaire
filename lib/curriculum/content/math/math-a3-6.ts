@@ -52,5 +52,23 @@ export const MATH_A3_6_LESSON: MathSubmoduleLesson = {
       },
     },
     exercises: [
+      { id: "a3-6-e1", promptFr: "Calculez le PGCD de 12 et 18.", type: "number", acceptable: ["6"] },
+      { id: "a3-6-e2", promptFr: "Calculez le PPCM de 4 et 6.", type: "number", acceptable: ["12"] },
+      { id: "a3-6-e3", promptFr: "Calculez le PGCD de 24 et 36.", type: "number", acceptable: ["12"] },
+      { id: "a3-6-e4", promptFr: "Calculez le PPCM de 3 et 5.", type: "number", acceptable: ["15"] },
+      { id: "a3-6-e5", promptFr: "PGCD(8, 20) = 4. En utilisant la relation PGCD × PPCM = a × b, calculez PPCM(8, 20).", type: "number", acceptable: ["40"] },
     ],
+    exercisePool: [
+      { id: "a3-6-ep01", promptFr: "PGCD(12, 18) = ?", type: "number", acceptable: ["6"] },
+      { id: "a3-6-ep02", promptFr: "PPCM(4, 6) = ?", type: "number", acceptable: ["12"] },
+      { id: "a3-6-ep03", promptFr: "PGCD(24, 36) = ?", type: "number", acceptable: ["12"] },
+      { id: "a3-6-ep04", promptFr: "PPCM(3, 5) = ?", type: "number", acceptable: ["15"] },
+      { id: "a3-6-ep05", promptFr: "PGCD(8, 20) = 4. Calculez PPCM(8, 20).", type: "number", acceptable: ["40"] },
+      { id: "a3-6-ep06", promptFr: "PGCD(15, 25) = ?", type: "number", acceptable: ["5"] },
+      { id: "a3-6-ep07", promptFr: "PPCM(6, 9) = ?", type: "number", acceptable: ["18"] },
+      { id: "a3-6-ep08", promptFr: "PGCD(16, 24) = ?", type: "number", acceptable: ["8"] },
+      { id: "a3-6-ep09", promptFr: "PPCM(8, 12) = ?", type: "number", acceptable: ["24"] },
+      { id: "a3-6-ep10", promptFr: "PGCD(30, 45) = ?", type: "number", acceptable: ["15"] },
+    ],
+    poolSize: 5,
   };

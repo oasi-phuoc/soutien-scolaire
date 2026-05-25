@@ -67,11 +67,20 @@ export const MATH_A3_5_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-
-  ],
+  exercises: [],
   exercisePool: [
-
+    { id: "a3-5-ep01", promptFr: "Quel est le 5ème multiple de 4 ?", type: "number", acceptable: ["20"] },
+    { id: "a3-5-ep02", promptFr: "Quel est le 8ème multiple de 7 ?", type: "number", acceptable: ["56"] },
+    { id: "a3-5-ep03", promptFr: "Combien de diviseurs a le nombre 12 ? (1, 2, 3, 4, 6, 12)", type: "number", acceptable: ["6"] },
+    { id: "a3-5-ep04", promptFr: "Quel est le plus grand diviseur de 18 différent de 18 ?", type: "number", acceptable: ["9"] },
+    { id: "a3-5-ep05", promptFr: "Le dernier chiffre de 346 est 6 (pair). 346 est-il divisible par 2 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+    { id: "a3-5-ep06", promptFr: "La somme des chiffres de 123 est 1+2+3=6. 123 est-il divisible par 3 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+    { id: "a3-5-ep07", promptFr: "Le dernier chiffre de 475 est 5. 475 est-il divisible par 5 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+    { id: "a3-5-ep08", promptFr: "Quel est le 6ème multiple de 9 ?", type: "number", acceptable: ["54"] },
+    { id: "a3-5-ep09", promptFr: "Quel est le plus grand diviseur de 36 différent de 36 ?", type: "number", acceptable: ["18"] },
+    { id: "a3-5-ep10", promptFr: "Le nombre 720 se termine par 0. Est-il divisible par 10 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+    { id: "a3-5-ep11", promptFr: "12 est-il un multiple de 4 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+    { id: "a3-5-ep12", promptFr: "7 est-il un diviseur de 49 ? (oui/non)", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
   ],
   poolSize: 5,
 };

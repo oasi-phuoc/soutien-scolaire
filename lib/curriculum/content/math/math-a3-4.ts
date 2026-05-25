@@ -33,58 +33,52 @@ export const MATH_A3_4_LESSON: MathSubmoduleLesson = {
         accentHeader: true,
         rows: [["dividende", "diviser", "diviseur", "égale", "quotient"]],
       },
-      { type: "heading", fr: "Propriétés de la multiplication", black: true },
-      { type: "highlight", fr: "Commutativité" },
+      { type: "heading", fr: "Propriétés de la division", black: true },
+      { type: "highlight", fr: "Non-commutativité" },
       {
         type: "section",
         labelFr: "",
-        itemsFr: ["L'ordre des facteurs ne change pas le produit."],
+        itemsFr: ["L'ordre est important : 8 ÷ 2 = 4, mais 2 ÷ 8 ≠ 4."],
       },
-      {
-        type: "svg_row",
-        items: [
-          {
-            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm1)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
-          },
-          {
-            markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">6</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">5</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">30</text></svg>`
-          },
-        ],
-      },
-      { type: "highlight", fr: "Associativité" },
+      { type: "highlight", fr: "Division par 0" },
       {
         type: "section",
         labelFr: "",
-        itemsFr: ["On peut multiplier plus de deux facteurs dans l'ordre voulu."],
+        itemsFr: ["On ne peut pas diviser par 0. La division par zéro est impossible."],
       },
+      { type: "heading", fr: "Division euclidienne", black: true },
       {
-        type: "svg_row",
-        items: [
-          {
-            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc1" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="25" y1="28" x2="51" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="77" y1="28" x2="63" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="56" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">20</text><text x="92" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="128" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">22</text><line x1="64" y1="78" x2="87" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><line x1="120" y1="78" x2="97" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc1)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
-          },
-          {
-            markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">10</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">8</text><line x1="88" y1="28" x2="114" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="151" y1="28" x2="128" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="22" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">2</text><text x="62" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">×</text><text x="120" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">80</text><line x1="30" y1="78" x2="83" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="112" y1="78" x2="99" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">160</text></svg>`
-          },
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Quand la division n'est pas exacte :",
+          "**dividende** = **diviseur** × **quotient** + **reste**",
+          "Le reste est toujours inférieur au diviseur.",
+          "Exemple : 17 ÷ 5 = 3, reste 2 → 17 = 5 × 3 + 2",
         ],
       },
-      { type: "heading", fr: "Multiplication en colonnes", black: true },
-      { type: "plain", fr: "Voici les étapes pour multiplier des nombres en colonnes." },
-      { type: "plain", fr: "Écrivez les nombres en alignant les unités, les dizaines, les centaines." },
+      { type: "heading", fr: "Division posée (156 ÷ 12)", black: true },
       {
         type: "svg",
-        noFrame: false,
-        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
+        noFrame: true,
+        markup: `<svg viewBox="0 0 280 185" width="100%" xmlns="http://www.w3.org/2000/svg"><rect x="26" y="24" width="46" height="28" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/><text x="38" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">1</text><text x="60" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">5</text><text x="82" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">6</text><line x1="96" y1="26" x2="96" y2="74" stroke="#374151" stroke-width="2"/><line x1="96" y1="50" x2="148" y2="50" stroke="#374151" stroke-width="2"/><text x="108" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">1</text><text x="130" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">2</text><text x="108" y="70" text-anchor="middle" font-size="24" font-weight="bold" fill="#60a5fa">1</text><text x="130" y="70" text-anchor="middle" font-size="24" font-weight="bold" fill="#60a5fa">3</text><text x="119" y="82" text-anchor="middle" font-size="9" fill="#60a5fa">quotient</text><text x="18" y="66" font-size="18" fill="#64748b" font-family="monospace">-</text><text x="48" y="66" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">1</text><text x="70" y="66" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">2</text><line x1="20" y1="73" x2="86" y2="73" stroke="#374151" stroke-width="1.5"/><text x="60" y="94" text-anchor="middle" font-size="20" fill="#374151" font-family="monospace">3</text><text x="82" y="94" text-anchor="middle" font-size="20" fill="#374151" font-family="monospace">6</text><text x="18" y="118" font-size="18" fill="#64748b" font-family="monospace">-</text><text x="60" y="118" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">3</text><text x="82" y="118" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">6</text><line x1="20" y1="124" x2="86" y2="124" stroke="#374151" stroke-width="1.5"/><text x="82" y="144" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151" font-family="monospace">0</text><text x="72" y="156" font-size="9" fill="#6b7280">reste = 0</text><text x="165" y="42" font-size="11" font-weight="bold" fill="#374151">Étape 1 :</text><text x="165" y="57" font-size="10" font-family="monospace" fill="#374151">15 ÷ 12 = 1</text><text x="165" y="70" font-size="10" fill="#6b7280">1 × 12 = 12</text><text x="165" y="83" font-size="10" fill="#6b7280">15 − 12 = 3</text><text x="165" y="103" font-size="11" font-weight="bold" fill="#374151">Étape 2 :</text><text x="165" y="118" font-size="10" font-family="monospace" fill="#374151">36 ÷ 12 = 3</text><text x="165" y="131" font-size="10" fill="#6b7280">3 × 12 = 36</text><text x="165" y="144" font-size="10" fill="#6b7280">36 − 36 = 0</text><text x="165" y="168" font-size="12" font-weight="bold" fill="#60a5fa">156 ÷ 12 = 13</text></svg>`
       },
     ],
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-
-  ],
+  exercises: [],
   exercisePool: [
-
+    { id: "a3-4-ep01", promptFr: "84 ÷ 7 = ?", type: "number", acceptable: ["12"] },
+    { id: "a3-4-ep02", promptFr: "96 ÷ 8 = ?", type: "number", acceptable: ["12"] },
+    { id: "a3-4-ep03", promptFr: "156 ÷ 12 = ?", type: "number", acceptable: ["13"] },
+    { id: "a3-4-ep04", promptFr: "256 ÷ 16 = ?", type: "number", acceptable: ["16"] },
+    { id: "a3-4-ep05", promptFr: "144 ÷ 9 = ?", type: "number", acceptable: ["16"] },
+    { id: "a3-4-ep06", promptFr: "17 ÷ 5 = … reste … Quel est le quotient ?", type: "number", acceptable: ["3"] },
+    { id: "a3-4-ep07", promptFr: "17 ÷ 5 = 3 reste 2. Vérifiez : 5 × 3 + 2 = ?", type: "number", acceptable: ["17"] },
+    { id: "a3-4-ep08", promptFr: "225 ÷ 15 = ?", type: "number", acceptable: ["15"] },
+    { id: "a3-4-ep09", promptFr: "180 ÷ 12 = ?", type: "number", acceptable: ["15"] },
+    { id: "a3-4-ep10", promptFr: "78 ÷ 6 = ?", type: "number", acceptable: ["13"] },
   ],
   poolSize: 5,
 };
