@@ -31,9 +31,12 @@ export function mergeProgress(
   // Merge submodule states: "completed" wins
   const localStates = local.submoduleStates ?? {};
   const cloudStates = cloud.submoduleStates ?? {};
-  const mergedStates: Record<string, "completed"> = { ...cloudStates };
-  for (const [k, v] of Object.entries(localStates)) {
+  const mergedStates: Record<string, "completed"> = {} as Record<string, "completed">;
+  for (const [k, v] of Object.entries(cloudStates)) {
     if (v === "completed") mergedStates[k] = "completed";
+  }
+  for (const [k, v] of Object.entries(localStates)) {
+    if (v === "completed") mergedStates[k] = v;
   }
 
   // Merge submodule scores: take the higher grade
