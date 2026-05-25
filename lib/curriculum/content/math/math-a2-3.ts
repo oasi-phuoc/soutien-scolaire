@@ -144,11 +144,20 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [ ] },
   },
 
-  exercises: [
-
-  ],
+  exercises: [],
   exercisePool: [
-
+    { id: "a2-3-ep01", promptFr: "Arrondissez 347 à la centaine la plus proche.", type: "number", acceptable: ["300"] },
+    { id: "a2-3-ep02", promptFr: "Arrondissez 4 682 à la centaine la plus proche.", type: "number", acceptable: ["4700"] },
+    { id: "a2-3-ep03", promptFr: "Arrondissez 256 à la dizaine la plus proche.", type: "number", acceptable: ["260"] },
+    { id: "a2-3-ep04", promptFr: "Arrondissez 8 945 à la dizaine la plus proche.", type: "number", acceptable: ["8950"] },
+    { id: "a2-3-ep05", promptFr: "Arrondissez 3 149 au millier le plus proche.", type: "number", acceptable: ["3000"] },
+    { id: "a2-3-ep06", promptFr: "Arrondissez 7 500 au millier le plus proche.", type: "number", acceptable: ["8000"] },
+    { id: "a2-3-ep07", promptFr: "Estimez 198 + 305 en arrondissant à la centaine. Quel est le résultat estimé ?", type: "number", acceptable: ["500"] },
+    { id: "a2-3-ep08", promptFr: "Estimez 48 × 51 en arrondissant à la dizaine (50 × 50). Quel est le résultat estimé ?", type: "number", acceptable: ["2500"] },
+    { id: "a2-3-ep09", promptFr: "Arrondissez 6 754 à la centaine la plus proche.", type: "number", acceptable: ["6800"] },
+    { id: "a2-3-ep10", promptFr: "Arrondissez 1 450 au millier le plus proche.", type: "number", acceptable: ["1000"] },
+    { id: "a2-3-ep11", promptFr: "Arrondissez 9 960 à la centaine la plus proche.", type: "number", acceptable: ["10000"] },
+    { id: "a2-3-ep12", promptFr: "Estimez 397 + 612 en arrondissant (400 + 600). Quel est le résultat estimé ?", type: "number", acceptable: ["1000"] },
   ],
   poolSize: 5,
 };
