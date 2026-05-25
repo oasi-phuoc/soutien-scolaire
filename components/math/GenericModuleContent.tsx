@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
@@ -26,7 +26,7 @@ function formatCompNum(n: number): string {
 // ── Step types ──────────────────────────────────────────────────────────────
 type ArithOp = "+" | "-";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
-type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean };
+type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean; timer?: number };
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
@@ -34,7 +34,7 @@ type TheoryStep      = { kind: "theory";          lesson: MathSubmoduleLesson };
 type ExerciseStep    = { kind: "exercise";         lesson: MathSubmoduleLesson; item: MathExerciseItem };
 type NumberLineStep  = { kind: "number_line";      lesson: MathSubmoduleLesson; nlConfig: NLConfig };
 type ComparisonStep  = { kind: "comparison_ex";    lesson: MathSubmoduleLesson; config: ComparisonConfig };
-type ArithGroupStep  = { kind: "arithmetic_group"; lesson: MathSubmoduleLesson; config: ArithGroupConfig };
+type ArithGroupStep  = { kind: "arithmetic_group"; lesson: MathSubmoduleLesson; config: ArithGroupConfig; timer?: number };
 type ColumnGridStep  = { kind: "column_grid";      lesson: MathSubmoduleLesson; config: ColGridConfig };
 type EvalStartStep   = { kind: "eval_start";       lesson: MathSubmoduleLesson };
 type PassToggleStep  = { kind: "pass_toggle";      lesson: MathSubmoduleLesson };
@@ -220,7 +220,7 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
 }
 
 // ── Arithmetic group generators ──────────────────────────────────────────────
-function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false): ArithGroupConfig {
+function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false, timer?: number): ArithGroupConfig {
   const [lo, hi] = range;
   const qs: ArithQuestion[] = [];
   for (let i = 0; i < 5; i++) {
@@ -235,7 +235,7 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
     const answer = missingPos === "result" ? String(result) : missingPos === "a" ? String(a) : String(b);
     qs.push({ a, b, result, op, missingPos, answer });
   }
-  return { questions: qs, exNum, op, range, missingOperand };
+  return { questions: qs, exNum, op, range, missingOperand, ...(timer !== undefined ? { timer } : {}) };
 }
 
 // ── Column grid generators ────────────────────────────────────────────────────
@@ -280,19 +280,61 @@ function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number): 
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
 function ArithmeticGroupExercise({
-  config, answers, validated, results, onChange,
+  config, answers, validated, results, onChange, onTimerExpired, consigne,
 }: {
   config: ArithGroupConfig;
   answers: string[];
   validated: boolean;
   results: boolean[];
   onChange: (i: number, val: string) => void;
+  onTimerExpired?: () => void;
+  consigne?: string;
 }) {
+  const [timeLeft, setTimeLeft] = useState<number | null>(() =>
+    config.timer !== undefined ? config.timer : null
+  );
+  const onTimerExpiredRef = useRef(onTimerExpired);
+  onTimerExpiredRef.current = onTimerExpired;
+
+  useEffect(() => {
+    if (config.timer === undefined || validated) return;
+    setTimeLeft(config.timer);
+    const id = setInterval(() => {
+      setTimeLeft(prev => {
+        if (prev === null || prev <= 1) {
+          clearInterval(id);
+          onTimerExpiredRef.current?.();
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(id);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [config.timer]);
+
   const numCls = "w-14 text-center font-mono text-sm text-[var(--color-text-primary)]";
   const inputBase = "w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+
+  const formatTime = (secs: number) => {
+    const m = Math.floor(secs / 60);
+    const s = secs % 60;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  };
+
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        {timeLeft !== null && !validated && (
+          <span className={`rounded-full px-3 py-1 text-sm font-bold tabular-nums ${timeLeft <= 15 ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400" : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"}`}>
+            {formatTime(timeLeft)}
+          </span>
+        )}
+      </div>
+      {consigne && (
+        <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
+      )}
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
@@ -327,22 +369,25 @@ function ArithmeticGroupExercise({
 }
 
 // ── ColumnGridExercise ────────────────────────────────────────────────────────
-const COL_LABELS = ["T", "C", "D", "U"] as const;
+const COL_LABELS = ["M", "C", "D", "U"] as const;
 
 function ColumnGridCard({
-  q, cardIdx, cellAnswers, validated, cardCorrect, preFilledOperands, onChange,
+  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect, preFilledOperands, exNum, onChange, onCarryChange,
 }: {
-  q: ColGridQ; cardIdx: number; cellAnswers: string[];
-  validated: boolean; cardCorrect: boolean; preFilledOperands: boolean;
+  q: ColGridQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
+  validated: boolean; cardCorrect: boolean; preFilledOperands: boolean; exNum: number;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+  onCarryChange: (cardIdx: number, col: number, val: string) => void;
 }) {
   const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
   // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
   const resBase = preFilledOperands ? 0 : 8;
+  const strictZero = exNum >= 7;
 
   const cellOk = (expected: number, val: string) => {
     const trimmed = val.trim();
+    if (strictZero) return trimmed === String(expected);
     return trimmed === String(expected) || (expected === 0 && trimmed === "");
   };
 
@@ -369,9 +414,9 @@ function ColumnGridCard({
           const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
           onChange(cardIdx, idx, v);
         }}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
-          ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
-          : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+          : "border-[var(--color-border-default)]"
         }`}
       />
     );
@@ -385,9 +430,11 @@ function ColumnGridCard({
 
   return (
     <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-      <p className="mb-2 text-xs text-[var(--color-text-secondary)]">
-        {formatCompNum(q.a)} {q.op} {formatCompNum(q.b)} = ?
-      </p>
+      {!preFilledOperands && (
+        <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
+          {formatCompNum(q.a)} {q.op} {formatCompNum(q.b)}
+        </p>
+      )}
       <table className="mx-auto border-collapse">
         <thead>
           <tr>
@@ -398,16 +445,34 @@ function ColumnGridCard({
           </tr>
         </thead>
         <tbody>
-          {/* Carry / borrow row */}
+          {/* Carry / borrow row — input fields */}
           <tr>
             <td />
-            {q.carryRow.map((c, ci) => (
-              <td key={ci} className="text-center">
-                <div className="flex h-5 w-8 items-center justify-center text-[10px] font-bold text-orange-500">
-                  {c !== null ? c : ""}
-                </div>
-              </td>
-            ))}
+            {q.carryRow.map((c, ci) => {
+              const carryVal = carryInputs[ci] ?? "";
+              const expectedCarry = c !== null ? String(c) : null;
+              const carryWrong = validated && expectedCarry !== null && carryVal.trim() !== "" && carryVal.trim() !== expectedCarry;
+              return (
+                <td key={ci} className="text-center">
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={carryVal}
+                    disabled={validated}
+                    onChange={e => {
+                      const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
+                      onCarryChange(cardIdx, ci, v);
+                    }}
+                    className={`h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+                      carryWrong
+                        ? "border-amber-500 text-amber-600"
+                        : "border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+                    }`}
+                  />
+                </td>
+              );
+            })}
           </tr>
           {/* Operand 1 */}
           <tr>
@@ -445,17 +510,23 @@ function ColumnGridCard({
 }
 
 function ColumnGridExercise({
-  config, answers, validated, results, onChange,
+  config, answers, carryInputs, validated, results, onChange, onCarryChange, consigne,
 }: {
   config: ColGridConfig;
   answers: string[][];
+  carryInputs: string[][];
   validated: boolean;
   results: boolean[];
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+  onCarryChange: (cardIdx: number, col: number, val: string) => void;
+  consigne?: string;
 }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      {consigne && (
+        <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
+      )}
       <div className="grid grid-cols-2 gap-3">
         {config.questions.map((q, qi) => (
           <ColumnGridCard
@@ -463,10 +534,13 @@ function ColumnGridExercise({
             q={q}
             cardIdx={qi}
             cellAnswers={answers[qi] ?? []}
+            carryInputs={carryInputs[qi] ?? []}
             validated={validated}
             cardCorrect={results[qi] ?? false}
             preFilledOperands={config.preFilledOperands}
+            exNum={config.exNum}
             onChange={onChange}
+            onCarryChange={onCarryChange}
           />
         ))}
       </div>
@@ -490,12 +564,23 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     const sid = lesson.submoduleId;
     if (sid === "A2-1" || sid === "A2-2") {
       const op: ArithOp = sid === "A2-1" ? "+" : "-";
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 3) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4, true) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 5) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 6) });
+      if (sid === "A2-1") {
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 5, false, 60) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
+      } else {
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, true) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 3) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4, true) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 5) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 6) });
+      }
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
