@@ -401,6 +401,8 @@ function ColumnGridCard({
   onCarryChange: (cardIdx: number, col: number, val: string) => void;
 }) {
   const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
+  const firstNzA = ad.findIndex(d => d !== 0);
+  const firstNzB = bd.findIndex(d => d !== 0);
   // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
   const resBase = preFilledOperands ? 0 : 8;
@@ -459,9 +461,9 @@ function ColumnGridCard({
     );
   };
 
-  const Prefilled = ({ digit }: { digit: number }) => (
-    <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${digit === 0 ? "text-[var(--color-text-secondary)] opacity-50" : "text-[var(--color-text-primary)]"}`}>
-      {digit}
+  const Prefilled = ({ digit, isLeading }: { digit: number; isLeading: boolean }) => (
+    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+      {isLeading ? "" : digit}
     </div>
   );
 
@@ -518,7 +520,7 @@ function ColumnGridCard({
             <td />
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={ad[col]!} /> : <CellInput base={0} col={col} expected={ad[col]!} />}
+                {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : <CellInput base={0} col={col} expected={ad[col]!} />}
               </td>
             ))}
           </tr>
@@ -527,7 +529,7 @@ function ColumnGridCard({
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={bd[col]!} /> : <CellInput base={4} col={col} expected={bd[col]!} />}
+                {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : <CellInput base={4} col={col} expected={bd[col]!} />}
               </td>
             ))}
           </tr>
@@ -899,6 +901,7 @@ export function GenericModuleContent({
   const [gridOverrideConfigs, setGridOverrideConfigs] = useState<Record<number, ColGridConfig>>({});
 
   // Arithmetic group exercise state
+  const [arithResetKey, setArithResetKey] = useState(0);
   const [arithAnswers, setArithAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [arithValidated, setArithValidated] = useState(false);
   const [arithResults, setArithResults] = useState<boolean[]>(() => Array(5).fill(false));
@@ -1042,10 +1045,11 @@ export function GenericModuleContent({
       setArithValidated(true);
     };
     stepReset = () => {
-      setArithOverrideConfigs(prev => ({ ...prev, [stepIdx]: genArithGroup(cfg.op, cfg.range, cfg.exNum, cfg.missingOperand) }));
+      setArithOverrideConfigs(prev => ({ ...prev, [stepIdx]: genArithGroup(cfg.op, cfg.range, cfg.exNum, cfg.missingOperand, cfg.timer) }));
       setArithAnswers(Array(5).fill(""));
       setArithValidated(false);
       setArithResults(Array(5).fill(false));
+      setArithResetKey(k => k + 1);
     };
   }
 
@@ -1186,6 +1190,7 @@ export function GenericModuleContent({
       {/* Arithmetic group exercise */}
       {currentStep?.kind === "arithmetic_group" && activeArithConfig && (
         <ArithmeticGroupExercise
+          key={`arith-${stepIdx}-${arithResetKey}`}
           config={activeArithConfig}
           answers={arithAnswers}
           validated={arithValidated}
