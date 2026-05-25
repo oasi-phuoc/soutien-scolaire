@@ -1250,6 +1250,27 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 2) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 3, true) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 4, true) });
+    } else if (sid === "A4-1") {
+      steps.push({ kind: "frac_id", lesson, config: genFracId(1) });
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 2) });
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 999], 3) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 4) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 5) });
+    } else if (sid === "A4-2") {
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 1) });
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 999], 2) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 3) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 4) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 1, 2) });
+      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 999], 2, 2) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 3, 3) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 4, 3) });
+    } else if (sid === "A4-3") {
+      steps.push({ kind: "frac_compare", lesson, config: genFracCompare("same_den", [1, 100], 1) });
+      steps.push({ kind: "frac_compare", lesson, config: genFracCompare("same_num", [1, 100], 2) });
+      steps.push({ kind: "frac_compare", lesson, config: genFracCompare("random", [1, 10], 3) });
+      steps.push({ kind: "frac_compare", lesson, config: genFracCompare("random", [1, 100], 4) });
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
@@ -1267,14 +1288,14 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   const hasDrillsNoPassToggle = lessons.some(l =>
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
-    l.submoduleId === "A3-3" || l.submoduleId === "A3-4"
+    l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
     steps.push({ kind: "eval_start", lesson: lastLesson });
     steps.push({ kind: "pass_toggle", lesson: lastLesson });
   }
-  // A2-1/A2-2/A2-3/A3-1/A3-2/A3-3/A3-4: eval_start + eval exercises already pushed above; no pass_toggle
+  // A2-1/A2-2/A2-3/A3-1/A3-2/A3-3/A3-4/A4-2: eval_start + eval exercises already pushed above; no pass_toggle
   return steps;
 }
 
@@ -1600,6 +1621,23 @@ export function GenericModuleContent({
   const [roundingOverrideConfigs, setRoundingOverrideConfigs] = useState<Record<number, RoundingConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
+  // Fraction exercise state
+  const [fracIdAnswers, setFracIdAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [fracIdValidated, setFracIdValidated] = useState(false);
+  const [fracIdResults, setFracIdResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [fracEquivAnswers, setFracEquivAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [fracEquivValidated, setFracEquivValidated] = useState(false);
+  const [fracEquivResults, setFracEquivResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [fracSimplifyAnswers, setFracSimplifyAnswers] = useState<Array<{num:string;den:string}>>(() => Array.from({length:5}, () => ({num:"",den:""})));
+  const [fracSimplifyValidated, setFracSimplifyValidated] = useState(false);
+  const [fracSimplifyResults, setFracSimplifyResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [fracCompareAnswers, setFracCompareAnswers] = useState<Array<"<"|"="|">"|null>>(() => Array(5).fill(null));
+  const [fracCompareValidated, setFracCompareValidated] = useState(false);
+  const [fracCompareResults, setFracCompareResults] = useState<boolean[]>(() => Array(5).fill(false));
+
   // Column grid exercise state (4 cards × 12 cells max)
   const emptyGrid = () => Array.from({ length: 4 }, () => Array(12).fill("") as string[]);
   const emptyCarryGrid = () => Array.from({ length: 4 }, () => Array(4).fill("") as string[]);
@@ -1644,6 +1682,18 @@ export function GenericModuleContent({
     setRoundingAnswers(Array(5).fill(""));
     setRoundingValidated(false);
     setRoundingResults(Array(5).fill(false));
+    setFracIdAnswers(Array(5).fill(""));
+    setFracIdValidated(false);
+    setFracIdResults(Array(5).fill(false));
+    setFracEquivAnswers(Array(5).fill(""));
+    setFracEquivValidated(false);
+    setFracEquivResults(Array(5).fill(false));
+    setFracSimplifyAnswers(Array.from({length:5}, () => ({num:"",den:""})));
+    setFracSimplifyValidated(false);
+    setFracSimplifyResults(Array(5).fill(false));
+    setFracCompareAnswers(Array(5).fill(null));
+    setFracCompareValidated(false);
+    setFracCompareResults(Array(5).fill(false));
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -1704,6 +1754,14 @@ export function GenericModuleContent({
         currentResults = gridResults.slice(0, (gridOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "rounding_group") {
         currentResults = roundingResults.slice(0, (roundingOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+      } else if (currentStep.kind === "frac_id") {
+        currentResults = fracIdResults.slice(0, currentStep.config.questions.length);
+      } else if (currentStep.kind === "frac_equiv") {
+        currentResults = fracEquivResults.slice(0, currentStep.config.questions.length);
+      } else if (currentStep.kind === "frac_simplify") {
+        currentResults = fracSimplifyResults.slice(0, currentStep.config.questions.length);
+      } else if (currentStep.kind === "frac_compare") {
+        currentResults = fracCompareResults.slice(0, currentStep.config.questions.length);
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -1719,6 +1777,10 @@ export function GenericModuleContent({
               ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
               : es?.kind === "rounding_group"
                 ? "Arrondis et estimations"
+                : es?.kind === "frac_id" ? "Numérateur et dénominateur"
+                : es?.kind === "frac_equiv" ? "Fractions équivalentes"
+                : es?.kind === "frac_simplify" ? "Simplification"
+                : es?.kind === "frac_compare" ? "Comparaison de fractions"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -1763,7 +1825,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -1899,6 +1961,51 @@ export function GenericModuleContent({
       setRoundingValidated(false);
       setRoundingResults(Array(cfg.count).fill(false));
       setRoundingResetKey(k => k + 1);
+    };
+  }
+
+  if (currentStep?.kind === "frac_id") {
+    const cfg = currentStep.config;
+    stepCanValidate = !fracIdValidated;
+    stepValidate = fracIdValidated ? () => {} : () => {
+      setFracIdResults(cfg.questions.map((q, i) =>
+        parseInt((fracIdAnswers[i] ?? "").trim(), 10) === (q.ask === "num" ? q.num : q.den)
+      ));
+      setFracIdValidated(true);
+    };
+  }
+
+  if (currentStep?.kind === "frac_equiv") {
+    const cfg = currentStep.config;
+    stepCanValidate = !fracEquivValidated;
+    stepValidate = fracEquivValidated ? () => {} : () => {
+      setFracEquivResults(cfg.questions.map((q, i) =>
+        parseInt((fracEquivAnswers[i] ?? "").trim(), 10) === q.answer
+      ));
+      setFracEquivValidated(true);
+    };
+  }
+
+  if (currentStep?.kind === "frac_simplify") {
+    const cfg = currentStep.config;
+    stepCanValidate = !fracSimplifyValidated;
+    stepValidate = fracSimplifyValidated ? () => {} : () => {
+      setFracSimplifyResults(cfg.questions.map((q, i) => {
+        const ans = fracSimplifyAnswers[i] ?? { num: "", den: "" };
+        const n = parseInt(ans.num.trim(), 10);
+        const d = parseInt(ans.den.trim(), 10);
+        return n === q.simNum && d === q.simDen;
+      }));
+      setFracSimplifyValidated(true);
+    };
+  }
+
+  if (currentStep?.kind === "frac_compare") {
+    const allAnswered = fracCompareAnswers.slice(0, currentStep.config.questions.length).every(a => a !== null);
+    stepCanValidate = !fracCompareValidated && allAnswered;
+    stepValidate = fracCompareValidated ? () => {} : () => {
+      setFracCompareResults(currentStep.config.questions.map((q, i) => fracCompareAnswers[i] === q.answer));
+      setFracCompareValidated(true);
     };
   }
 
@@ -2083,6 +2190,56 @@ export function GenericModuleContent({
           validated={roundingValidated}
           results={roundingResults}
           onChange={(i, val) => setRoundingAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+        />
+      )}
+
+      {/* Fraction identification exercise */}
+      {!showEvalScore && currentStep?.kind === "frac_id" && (
+        <FracIdExercise
+          config={currentStep.config}
+          answers={fracIdAnswers}
+          validated={fracIdValidated}
+          results={fracIdResults}
+          onChange={(i, v) => setFracIdAnswers(prev => { const a = [...prev]; a[i] = v; return a; })}
+        />
+      )}
+
+      {/* Fraction equivalence exercise */}
+      {!showEvalScore && currentStep?.kind === "frac_equiv" && (
+        <FracEquivExercise
+          config={currentStep.config}
+          answers={fracEquivAnswers}
+          validated={fracEquivValidated}
+          results={fracEquivResults}
+          onChange={(i, v) => setFracEquivAnswers(prev => { const a = [...prev]; a[i] = v; return a; })}
+        />
+      )}
+
+      {/* Fraction simplification exercise */}
+      {!showEvalScore && currentStep?.kind === "frac_simplify" && (
+        <FracSimplifyExercise
+          config={currentStep.config}
+          answers={fracSimplifyAnswers}
+          validated={fracSimplifyValidated}
+          results={fracSimplifyResults}
+          onChange={(i, part, v) => setFracSimplifyAnswers(prev => {
+            const a = prev.map(x => ({...x}));
+            a[i] = { ...(a[i] ?? {num:"",den:""}), [part]: v };
+            return a;
+          })}
+        />
+      )}
+
+      {/* Fraction comparison exercise */}
+      {!showEvalScore && currentStep?.kind === "frac_compare" && (
+        <FracCompareExercise
+          config={currentStep.config}
+          answers={fracCompareAnswers}
+          validated={fracCompareValidated}
+          onAnswer={(i, sym) => {
+            if (fracCompareValidated) return;
+            setFracCompareAnswers(prev => { const a = [...prev]; a[i] = sym; return a; });
+          }}
         />
       )}
 
@@ -2274,7 +2431,11 @@ export function GenericModuleContent({
                   (isInEvalPhase && (
                     (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
                     (currentStep?.kind === "column_grid" && !gridValidated) ||
-                    (currentStep?.kind === "rounding_group" && !roundingValidated)
+                    (currentStep?.kind === "rounding_group" && !roundingValidated) ||
+                    (currentStep?.kind === "frac_id" && !fracIdValidated) ||
+                    (currentStep?.kind === "frac_equiv" && !fracEquivValidated) ||
+                    (currentStep?.kind === "frac_simplify" && !fracSimplifyValidated) ||
+                    (currentStep?.kind === "frac_compare" && !fracCompareValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
