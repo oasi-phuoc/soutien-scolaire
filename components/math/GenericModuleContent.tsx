@@ -444,8 +444,8 @@ function ColumnGridCard({
   };
 
   const Prefilled = ({ digit }: { digit: number }) => (
-    <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${digit === 0 ? "text-[var(--color-text-secondary)] opacity-40" : "text-[var(--color-text-primary)]"}`}>
-      {digit > 0 ? digit : ""}
+    <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${digit === 0 ? "text-[var(--color-text-secondary)] opacity-50" : "text-[var(--color-text-primary)]"}`}>
+      {digit}
     </div>
   );
 
