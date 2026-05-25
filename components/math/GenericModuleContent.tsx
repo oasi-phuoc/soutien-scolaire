@@ -1075,19 +1075,14 @@ export function GenericModuleContent({
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
-              exStatus === "correct"
-                ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-                : exStatus === "wrong"
-                  ? CLS_WRONG
-                  : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+              exStatus === "wrong"
+                ? CLS_WRONG
+                : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
             }`}
           />
-          {exStatus === "correct" && (
-            <p className="text-xs font-medium text-[var(--color-accent-alg)]">✓ Correct !</p>
-          )}
           {exStatus === "wrong" && (
-            <p className="text-xs font-medium text-red-500">
-              {exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
+            <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+              {exAttempts >= 2 ? `Réponse attendue : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
             </p>
           )}
         </div>
@@ -1110,19 +1105,14 @@ export function GenericModuleContent({
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
-              exStatus === "correct"
-                ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-                : exStatus === "wrong"
-                  ? CLS_WRONG
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+              exStatus === "wrong"
+                ? CLS_WRONG
+                : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
             }`}
           />
-          {exStatus === "correct" && (
-            <p className="text-xs font-medium text-[var(--color-accent-alg)]">✓ Correct !</p>
-          )}
           {exStatus === "wrong" && (
-            <p className="text-xs font-medium text-red-500">
-              {exAttempts >= 2 ? `Réponse : ${currentStep.nlConfig.target}` : "Essayez encore…"}
+            <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
+              {exAttempts >= 2 ? `Réponse attendue : ${currentStep.nlConfig.target}` : "Essayez encore…"}
             </p>
           )}
         </div>
