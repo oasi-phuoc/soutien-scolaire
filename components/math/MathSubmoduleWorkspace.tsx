@@ -100,9 +100,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "highlight":
       return (
-        <div className="rounded-xl border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/8 px-4 py-3 text-sm font-semibold text-[var(--color-text-primary)]">
-          {block.fr}
-        </div>
+        <p className="text-sm font-bold text-[var(--color-accent-alg)]">{renderFracText(block.fr)}</p>
       );
     case "rule":
       return (
