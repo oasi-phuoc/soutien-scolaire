@@ -6,7 +6,7 @@ import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
+import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
@@ -459,8 +459,8 @@ function genColGridQ(op: ArithOp): ColGridQ {
   }
 }
 
-function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number): ColGridConfig {
-  return { questions: Array.from({ length: 4 }, () => genColGridQ(op)), exNum, op, preFilledOperands };
+function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number, count = 4): ColGridConfig {
+  return { questions: Array.from({ length: count }, () => genColGridQ(op)), exNum, op, preFilledOperands };
 }
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
@@ -831,10 +831,12 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       // Comparaison (avant évaluation)
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [1, 99], 9) });
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
-      // Évaluation
+      // Évaluation — 4 exercices sur pages séparées
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 11) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 12) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 2, true) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 3, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 4, 2) });
     } else if (sid === "A2-3") {
       // Entraînement arrondi/estimation
       steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 5) });
@@ -1233,11 +1235,21 @@ export function GenericModuleContent({
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
+  // Eval phase state
+  const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
+  const [showEvalScore, setShowEvalScore] = useState(false);
+  const [evalFinalGrade, setEvalFinalGrade] = useState<number | null>(null);
+  const [evalEarnedPts, setEvalEarnedPts] = useState(0);
+  const [evalTotalPts_state, setEvalTotalPts_state] = useState(0);
+  const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
+  const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
+
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
   const isLastStep = stepIdx === steps.length - 1;
-  const inEvalPhase =
-    currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
+  const evalSteps = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1) : [];
+  const isInEvalPhase = evalStartIdx >= 0 && stepIdx > evalStartIdx && !showEvalScore;
+  const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || isInEvalPhase || showEvalScore;
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -1259,11 +1271,32 @@ export function GenericModuleContent({
     setRoundingAnswers(Array(5).fill(""));
     setRoundingValidated(false);
     setRoundingResults(Array(5).fill(false));
-  }, []);
+    if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
+      setEvalPageSavedResults([]);
+      setShowEvalScore(false);
+      setEvalFinalGrade(null);
+      setEvalEarnedPts(0);
+      setEvalTotalPts_state(0);
+      setEvalRowData([]);
+    }
+  }, [evalStartIdx]);
 
   const goBack = useCallback(() => {
+    if (isInEvalPhase) { setShowEvalCancelConfirm(true); return; }
+    if (showEvalScore) return;
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore]);
+
+  function cancelEval() {
+    setShowEvalCancelConfirm(false);
+    setEvalPageSavedResults([]);
+    setShowEvalScore(false);
+    setEvalFinalGrade(null);
+    setEvalEarnedPts(0);
+    setEvalTotalPts_state(0);
+    setEvalRowData([]);
+    goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
+  }
 
   function finishEval(correct: boolean) {
     if (!startSubmoduleId) { router.push("/mathematiques"); return; }
@@ -1285,8 +1318,47 @@ export function GenericModuleContent({
   }
 
   const goNext = useCallback(() => {
+    if (showEvalScore) { router.push("/mathematiques"); return; }
     if (currentStep?.kind === "pass_toggle") {
       finishEval(toggleAnswer === "oui");
+      return;
+    }
+    if (isInEvalPhase && currentStep) {
+      let currentResults: boolean[] = [];
+      if (currentStep.kind === "arithmetic_group") {
+        currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+      } else if (currentStep.kind === "column_grid") {
+        currentResults = gridResults.slice(0, (gridOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+      }
+      const newSaved = [...evalPageSavedResults, currentResults];
+      if (isLastStep) {
+        const allRes = newSaved.flat();
+        const correct = allRes.filter(Boolean).length;
+        const total = allRes.length;
+        const grade = linearSwissGrade(correct, total);
+        const rows = newSaved.map((res, i) => {
+          const es = steps[evalStartIdx + 1 + i];
+          const label = es?.kind === "column_grid"
+            ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
+            : es?.kind === "arithmetic_group"
+              ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
+              : `Exercice ${i + 1}`;
+          return { label, score: res.filter(Boolean).length, max: res.length };
+        });
+        setEvalPageSavedResults(newSaved);
+        setEvalFinalGrade(grade);
+        setEvalEarnedPts(correct);
+        setEvalTotalPts_state(total);
+        setEvalRowData(rows);
+        setShowEvalScore(true);
+        if (startSubmoduleId) {
+          const p = loadProgress();
+          saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct, total, grade));
+        }
+      } else {
+        setEvalPageSavedResults(newSaved);
+        goTo(stepIdx + 1);
+      }
       return;
     }
     if (isLastStep) {
@@ -1314,7 +1386,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, evalPageSavedResults, evalStartIdx]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -1461,29 +1533,64 @@ export function GenericModuleContent({
     );
   }
 
-  // Eval-phase steps don't count in the progress bar
-  const visibleSteps = steps.filter(
-    (s) => s.kind !== "eval_start" && s.kind !== "pass_toggle",
-  );
-  const visibleIdx = Math.min(stepIdx, visibleSteps.length);
+  // Training steps (before eval_start) for main progress bar
+  const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
+  const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
+  const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
 
   return (
     <div className="pb-40">
-      {/* Progress bar — lesson steps only */}
+      {/* Cancel eval confirmation dialog */}
+      {showEvalCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="mx-4 w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
+            <div className="flex gap-3">
+              <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
+                Continuer
+              </button>
+              <button type="button" onClick={cancelEval}
+                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                Annuler
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main progress bar — training steps only */}
       {!inEvalPhase && (
         <div className="mb-6 flex gap-1">
-          {visibleSteps.map((_, i) => (
+          {trainingSteps.map((_, i) => (
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i < visibleIdx
+                i < trainingStepIdx
                   ? "bg-[var(--color-accent-alg)]"
-                  : i === visibleIdx
+                  : i === trainingStepIdx
                     ? "bg-[var(--color-accent-alg)] opacity-60"
                     : "bg-[var(--color-border-default)]"
               }`}
             />
           ))}
+        </div>
+      )}
+      {/* Secondary eval progress bar */}
+      {isInEvalPhase && !showEvalScore && (
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
+          </div>
+          <div className="flex gap-1">
+            {evalSteps.map((_, i) => (
+              <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
+                i < evalStepOffset ? "bg-[var(--color-accent-alg)]" : i === evalStepOffset ? "bg-[var(--color-accent-alg)] opacity-60" : "bg-[var(--color-border-default)]"
+              }`} />
+            ))}
+          </div>
         </div>
       )}
 
@@ -1628,6 +1735,33 @@ export function GenericModuleContent({
         />
       )}
 
+      {/* Eval score screen */}
+      {showEvalScore && evalFinalGrade !== null && (
+        <div className="space-y-4">
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
+          <ul className="space-y-2">
+            {evalRowData.map((row, i) => {
+              const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
+              return (
+                <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
+                  <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                  <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                </li>
+              );
+            })}
+          </ul>
+          <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalFinalGrade >= PASSING_GRADE ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+            <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
+            <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {evalEarnedPts}/{evalTotalPts_state} pts</p>
+            <p className={`mt-3 text-base font-bold ${evalFinalGrade >= PASSING_GRADE ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+              {evalFinalGrade >= PASSING_GRADE ? "✓ Réussi" : "✗ À améliorer"}
+            </p>
+            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
+          </div>
+        </div>
+      )}
+
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
         <div className="flex flex-col items-center gap-8 py-8 text-center">
@@ -1706,8 +1840,8 @@ export function GenericModuleContent({
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            {/* Back button — hidden on eval start */}
-            {currentStep?.kind !== "eval_start" ? (
+            {/* Back button — hidden on eval start and score screen */}
+            {(currentStep?.kind !== "eval_start" && !showEvalScore) ? (
               <button
                 type="button"
                 onClick={goBack}
@@ -1721,9 +1855,9 @@ export function GenericModuleContent({
             )}
 
             {/* Validate (exercises only) */}
-            {(stepReset || stepValidate) ? (
+            {(stepValidate || (!isInEvalPhase && stepReset)) ? (
               <div className="flex items-center gap-2">
-                {stepReset && (
+                {!isInEvalPhase && stepReset && (
                   <button
                     type="button"
                     onClick={stepReset}
@@ -1758,10 +1892,16 @@ export function GenericModuleContent({
               <button
                 type="button"
                 onClick={goNext}
-                disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
+                disabled={
+                  (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
+                  (isInEvalPhase && (
+                    (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
+                    (currentStep?.kind === "column_grid" && !gridValidated)
+                  ))
+                }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {currentStep?.kind === "pass_toggle" || isLastStep
+                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
                   ? "Terminer ✓"
                   : "Suivant →"}
               </button>
