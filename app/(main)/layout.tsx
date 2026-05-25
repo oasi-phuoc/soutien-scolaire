@@ -1,4 +1,5 @@
 import { MainNav } from "@/components/MainNav";
+import { ProgressSyncProvider } from "@/components/ProgressSyncProvider";
 import { TranslationProvider } from "@/components/TranslationProvider";
 
 export default function MainLayout({
@@ -9,6 +10,7 @@ export default function MainLayout({
   return (
     <TranslationProvider>
       <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-950">
+        <ProgressSyncProvider />
         {children}
         <MainNav />
       </div>

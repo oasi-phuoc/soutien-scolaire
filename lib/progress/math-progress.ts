@@ -156,6 +156,7 @@ export function loadProgress(): StoredProgressV1 {
 export function saveProgress(p: StoredProgressV1) {
   if (typeof window === "undefined") return;
   localStorage.setItem(MATH_PROGRESS_KEY, JSON.stringify(p));
+  window.dispatchEvent(new CustomEvent("progress-saved", { detail: p }));
 }
 
 /** Modules considérés validés pour débloquer la suite (≥ 4.0/6 ou déblocage forcé 3 tentatives). */
