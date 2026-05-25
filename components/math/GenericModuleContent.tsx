@@ -490,27 +490,30 @@ function ColumnGridCard({
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
-              const carryWrong = validated && expectedCarry !== null && carryVal.trim() !== "" && carryVal.trim() !== expectedCarry;
+              const carryWrong = validated && expectedCarry !== null && carryVal.trim() !== expectedCarry;
               return (
                 <td key={ci} className="text-center">
-                  <input
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={carryVal}
-                    disabled={validated}
-                    onChange={e => {
-                      const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
-                      onCarryChange(cardIdx, ci, v);
-                    }}
-                    onKeyDown={tabNav}
-                    onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                    className={`h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-                      carryWrong
-                        ? "border-amber-500 text-amber-600"
-                        : "border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
-                    }`}
-                  />
+                  {carryWrong ? (
+                    <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500 text-[8px] leading-none">{carryVal || "—"}</span>
+                      <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expectedCarry}</span>
+                    </div>
+                  ) : (
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={carryVal}
+                      disabled={validated}
+                      onChange={e => {
+                        const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
+                        onCarryChange(cardIdx, ci, v);
+                      }}
+                      onKeyDown={tabNav}
+                      onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                      className={`h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]`}
+                    />
+                  )}
                 </td>
               );
             })}
