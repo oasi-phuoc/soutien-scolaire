@@ -641,7 +641,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       }
     }
   }
-  if (withEval && lessons.length > 0) {
+  const hasA2Drills = lessons.some(l => l.submoduleId === "A2-1" || l.submoduleId === "A2-2");
+  if (withEval && lessons.length > 0 && !hasA2Drills) {
     const lastLesson = lessons[lessons.length - 1]!;
     steps.push({ kind: "eval_start", lesson: lastLesson });
     steps.push({ kind: "pass_toggle", lesson: lastLesson });
@@ -970,6 +971,10 @@ export function GenericModuleContent({
     }
     if (isLastStep) {
       if (currentStep?.kind === "exercise" && exStatus === "correct") {
+        const p = loadProgress();
+        saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
+      }
+      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group") {
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
