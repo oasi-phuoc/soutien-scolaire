@@ -412,6 +412,20 @@ function ColumnGridCard({
     return trimmed === String(expected) || (expected === 0 && trimmed === "");
   };
 
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = e.currentTarget.closest("[data-grid-card]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) {
+      next.focus();
+      next.setSelectionRange(next.value.length, next.value.length);
+    }
+  }
+
   const CellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
@@ -435,6 +449,8 @@ function ColumnGridCard({
           const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
           onChange(cardIdx, idx, v);
         }}
+        onKeyDown={tabNav}
+        onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
         className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
           ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
           : "border-[var(--color-border-default)]"
@@ -450,7 +466,7 @@ function ColumnGridCard({
   );
 
   return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+    <div data-grid-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {!preFilledOperands && (
         <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
           {formatCompNum(q.a)} {q.op} {formatCompNum(q.b)}
@@ -485,6 +501,8 @@ function ColumnGridCard({
                       const v = e.target.value.replace(/[^0-9]/g, "").slice(-1);
                       onCarryChange(cardIdx, ci, v);
                     }}
+                    onKeyDown={tabNav}
+                    onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
                     className={`h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
                       carryWrong
                         ? "border-amber-500 text-amber-600"
