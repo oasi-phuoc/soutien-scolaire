@@ -525,10 +525,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
     const matched = matches[fi] !== undefined;
     if (validated && matched) {
       return matchResults[fi]
-        ? "border-green-400 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300"
-        : "border-red-400 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400";
+        ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
+        : "border-amber-500 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400";
     }
-    if (validated) return "border-red-400 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400";
+    if (validated) return "border-amber-500 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400";
     if (sel) return "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
     if (matched) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
     return "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
@@ -539,8 +539,8 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
     if (validated && matchedEntry) {
       const fi = parseInt(matchedEntry[0]);
       return matchResults[fi]
-        ? "border-green-400 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300"
-        : "border-red-400 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400";
+        ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
+        : "border-amber-500 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400";
     }
     if (matchedEntry) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
     if (selectedFrac !== null && !validated) return "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-alg)]/5 cursor-pointer";
@@ -557,16 +557,14 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
         <div className="space-y-5">
           {colorItems.map((item, i) => (
-            <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-green-400 bg-green-50/30 dark:bg-green-900/10" : "border-red-400 bg-red-50/30 dark:bg-red-900/10") : "border-[var(--color-border-default)]"}`}>
+            <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10") : "border-[var(--color-border-default)]"}`}>
               <div className="mb-3 flex items-start gap-2">
                 <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
                 <p className="text-sm text-[var(--color-text-primary)]">{item.desc}</p>
               </div>
               <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
-              {validated && (
-                <p className={`mt-2 text-xs font-medium ${colorResults[i] ? "text-green-600 dark:text-green-400" : "text-red-500"}`}>
-                  {colorResults[i] ? `✓ Correct ! (${item.n} case${item.n > 1 ? "s" : ""})` : `Il fallait colorier ${item.n} case${item.n > 1 ? "s" : ""} sur ${item.d}.`}
-                </p>
+              {validated && !colorResults[i] && (
+                <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">Il fallait colorier {item.n} case{item.n > 1 ? "s" : ""} sur {item.d}.</p>
               )}
             </div>
           ))}
@@ -593,10 +591,11 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                   value={readAnswers[i]}
                   onChange={(e) => { if (!validated) setReadAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
                   placeholder="ex. 3/4"
-                  className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors ${readStatuses[i] === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : readStatuses[i] === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+                  className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors ${readStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : readStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
                 />
-                {readStatuses[i] === "correct" && <p className="mt-1 text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>}
-                {readStatuses[i] === "wrong" && <p className="mt-1 text-xs font-medium text-red-500">Réponse : {item.answer}</p>}
+                {readStatuses[i] === "wrong" && (
+                  <p className="mt-1 text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{readAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></p>
+                )}
               </div>
             );
           })}
@@ -648,10 +647,9 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                 value={decAnswers[i]}
                 onChange={(e) => { if (!validated) setDecAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
                 placeholder="…"
-                className={`w-24 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : decStatuses[i] === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+                className={`w-24 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : decStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
               />
-              {decStatuses[i] === "correct" && <span className="text-xs font-medium text-green-600 dark:text-green-400">✓</span>}
-              {decStatuses[i] === "wrong" && <span className="text-xs font-medium text-red-500">{item.answer}</span>}
+              {decStatuses[i] === "wrong" && <span className="text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{decAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></span>}
             </div>
           ))}
         </div>
@@ -673,12 +671,11 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                   value={fracAnswers[i]}
                   onChange={(e) => { if (!validated) setFracAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
                   placeholder="…"
-                  className={`w-20 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : fracStatuses[i] === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+                  className={`w-20 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : fracStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
                 />
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">/{item.denominator}</span>
               </div>
-              {fracStatuses[i] === "correct" && <span className="text-xs font-medium text-green-600 dark:text-green-400">✓</span>}
-              {fracStatuses[i] === "wrong" && <span className="text-xs font-medium text-red-500">{item.answer}</span>}
+              {fracStatuses[i] === "wrong" && <span className="text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{fracAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></span>}
             </div>
           ))}
         </div>
@@ -798,10 +795,9 @@ export function A4ModuleContent() {
             onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
-            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20" : exStatus === "wrong" ? "border-red-400 bg-red-50 dark:bg-red-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
           />
-          {exStatus === "correct" && <p className="text-xs font-medium text-green-600 dark:text-green-400">✓ Correct !</p>}
-          {exStatus === "wrong" && <p className="text-xs font-medium text-red-500">{exAttempts >= 2 ? `Réponse : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}</p>}
+          {exStatus === "wrong" && <p className="text-xs font-medium text-amber-600 dark:text-amber-400">{exAttempts >= 2 ? <><span className="line-through">{answer}</span> <span className="font-bold text-[var(--color-text-primary)]">{currentStep.item.acceptable[0]}</span></> : "Essayez encore…"}</p>}
         </div>
       )}
 
