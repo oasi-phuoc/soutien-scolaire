@@ -447,7 +447,7 @@ function ColumnGridCard({
         <tbody>
           {/* Carry / borrow row — input fields */}
           <tr>
-            <td />
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" ? "R" : "E"}</td>
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
@@ -575,11 +575,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
         steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
       } else {
         steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, true) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 3) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4, true) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 5) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 6) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 5, false, 60) });
+        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
+        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
       }
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
@@ -1148,7 +1150,9 @@ export function GenericModuleContent({
           consigne={
             activeArithConfig.missingOperand
               ? "Trouvez la valeur manquante."
-              : "Effectuez les additions."
+              : activeArithConfig.op === "+"
+                ? "Effectuez les additions."
+                : "Effectuez les soustractions."
           }
         />
       )}
@@ -1171,7 +1175,11 @@ export function GenericModuleContent({
               ci === cardIdx ? card.map((v, vi) => vi === col ? val : v) : card
             ))
           }
-          consigne="Effectuez les additions en colonnes. Écrivez le résultat et les retenues."
+          consigne={
+            activeGridConfig.op === "+"
+              ? "Effectuez les additions en colonnes. Écrivez le résultat et les retenues."
+              : "Effectuez les soustractions en colonnes. Écrivez le résultat et les emprunts."
+          }
         />
       )}
 
