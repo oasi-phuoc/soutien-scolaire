@@ -56,7 +56,8 @@ export type MathRichBlock =
   | { type: "section"; labelFr: string; itemsFr: string[] }
   | { type: "bullets"; labelFr?: string; itemsFr: string[] }
   | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> }
-  | { type: "mult_table" };
+  | { type: "mult_table" }
+  | { type: "div_table" };
 
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */

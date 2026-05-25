@@ -701,6 +701,54 @@ function MultiplicationTableBlock() {
   );
 }
 
+function DivisionTableBlock() {
+  const [pair, setPair] = useState<[number, number]>(MULT_PAIRS[0]!);
+  const [a, b] = pair;
+  return (
+    <div className="space-y-3">
+      <div className="flex overflow-hidden rounded-xl border border-[var(--color-border-default)]">
+        {MULT_PAIRS.map(([x, y], idx) => (
+          <button
+            key={`${x}-${y}`}
+            type="button"
+            onClick={() => setPair([x, y])}
+            className={`flex-1 px-2 py-1.5 text-sm font-bold transition-colors ${
+              idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
+            } ${
+              pair[0] === x
+                ? "bg-[var(--color-accent-alg)] text-white"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+            }`}
+          >
+            {x}–{y}
+          </button>
+        ))}
+      </div>
+      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+        <table className="w-full text-sm">
+          <tbody>
+            {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
+              <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a * n}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+                <td className="w-6" />
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b * n}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ── Rich block renderer ──────────────────────────────────────────────────────
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
@@ -836,6 +884,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "mult_table":
       return <MultiplicationTableBlock />;
+    case "div_table":
+      return <DivisionTableBlock />;
     default:
       return null;
   }
