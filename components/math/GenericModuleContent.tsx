@@ -608,25 +608,19 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     const sid = lesson.submoduleId;
     if (sid === "A2-1" || sid === "A2-2") {
       const op: ArithOp = sid === "A2-1" ? "+" : "-";
-      if (sid === "A2-1") {
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 5, false, 60) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
-      } else {
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 5, false, 60) });
-        steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
-        steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
-      }
+      // Entraînement 1–8
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 4) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 5, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 9) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 10) });
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
@@ -647,6 +641,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     steps.push({ kind: "eval_start", lesson: lastLesson });
     steps.push({ kind: "pass_toggle", lesson: lastLesson });
   }
+  // A2-1/A2-2 : eval_start + 2 eval exercises already pushed above; no pass_toggle
   return steps;
 }
 
