@@ -15,6 +15,7 @@
   --color-accent-alg: #2563EB;
   --color-accent-geo: #7C3AED;
   --color-accent-quiz: #B45309;
+  --color-accent-comm: #059669;
   /* Feedback — blue (correct) / amber (wrong) — safe for all colorblindness types */
   --color-success: #2563EB;
   --color-warning: #B45309;
@@ -74,6 +75,7 @@
     --color-theme: #7cbf9a;
     --color-theme-light: #1a3326;
     --color-theme-muted: #5a9e78;
+    --color-accent-comm: #10b981;
   }
 }
 

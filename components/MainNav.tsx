@@ -9,7 +9,7 @@ const links = [
   { href: "/lecture", label: "Lecture", icon: LectureIcon },
   { href: "/francais", label: "Français", icon: FrIcon },
   { href: "/mathematiques", label: "Maths", icon: MathIcon },
-  { href: "/compte", label: "Réglages", icon: GearIcon },
+  { href: "/communication", label: "Comm.", icon: CommIcon },
 ] as const;
 
 export function MainNav() {
@@ -145,6 +145,23 @@ function GearIcon({ active }: { active: boolean }) {
     >
       <circle cx="12" cy="12" r="3" />
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+    </svg>
+  );
+}
+
+function CommIcon({ active }: { active: boolean }) {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className={active ? "text-[var(--color-accent-comm)]" : undefined}
+      aria-hidden
+    >
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   );
 }
