@@ -362,7 +362,7 @@ function ArithmeticGroupExercise({
           const ok = validated ? results[i] ?? false : null;
           const wrongField = ok === false;
           return (
-            <div key={i} className="flex items-center gap-1.5">
+            <div key={i} className="flex min-h-[2.25rem] items-center gap-1.5">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
