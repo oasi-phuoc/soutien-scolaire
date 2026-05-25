@@ -57,6 +57,23 @@ type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFil
 type ExprCompQ = { la: number; lop: ArithOp; lb: number; ra: number; rop: ArithOp; rb: number; answer: "<" | "=" | ">" };
 type ExprCompConfig = { questions: ExprCompQ[]; exNum: number; op: ArithOp };
 
+// Fraction types
+type FracIdQ = { num: number; den: number; ask: "num" | "den" };
+type FracIdConfig = { questions: FracIdQ[]; exNum: number };
+type FracIdStep = { kind: "frac_id"; lesson: MathSubmoduleLesson; config: FracIdConfig };
+
+type FracEquivQ = { srcNum: number; srcDen: number; tgtNum: number; tgtDen: number; missingPos: "num" | "den"; answer: number };
+type FracEquivConfig = { questions: FracEquivQ[]; exNum: number; range: [number, number] };
+type FracEquivStep = { kind: "frac_equiv"; lesson: MathSubmoduleLesson; config: FracEquivConfig };
+
+type FracSimplifyQ = { num: number; den: number; simNum: number; simDen: number };
+type FracSimplifyConfig = { questions: FracSimplifyQ[]; exNum: number; range: [number, number] };
+type FracSimplifyStep = { kind: "frac_simplify"; lesson: MathSubmoduleLesson; config: FracSimplifyConfig };
+
+type FracCompQ = { num1: number; den1: number; num2: number; den2: number; answer: "<" | "=" | ">" };
+type FracCompConfig = { questions: FracCompQ[]; exNum: number; mode: "same_den" | "same_num" | "random" };
+type FracCompStep = { kind: "frac_compare"; lesson: MathSubmoduleLesson; config: FracCompConfig };
+
 type TheoryStep      = { kind: "theory";           lesson: MathSubmoduleLesson };
 type ExerciseStep    = { kind: "exercise";          lesson: MathSubmoduleLesson; item: MathExerciseItem };
 type NumberLineStep  = { kind: "number_line";       lesson: MathSubmoduleLesson; nlConfig: NLConfig };
@@ -66,7 +83,7 @@ type ColumnGridStep  = { kind: "column_grid";       lesson: MathSubmoduleLesson;
 type ExprCompStep    = { kind: "expr_comparison";   lesson: MathSubmoduleLesson; config: ExprCompConfig };
 type EvalStartStep   = { kind: "eval_start";        lesson: MathSubmoduleLesson };
 type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -421,6 +438,116 @@ function genRoundingMixed(exNum: number, count: number): RoundingConfig {
     }
   }
   return { questions: qs, exNum, count };
+}
+
+// ── Fraction generators ───────────────────────────────────────────────────────
+function gcd(a: number, b: number): number {
+  return b === 0 ? a : gcd(b, a % b);
+}
+
+function genFracId(exNum: number): FracIdConfig {
+  const questions: FracIdQ[] = [];
+  const asks: Array<"num" | "den"> = ["num","den","num","den","num"];
+  for (let i = 0; i < 5; i++) {
+    const num = rnd(1, 11);
+    const den = rnd(num + 1, 12);
+    questions.push({ num, den, ask: asks[i]! });
+  }
+  return { questions, exNum };
+}
+
+function genFracEquiv(range: [number, number], exNum: number, count = 5): FracEquivConfig {
+  const questions: FracEquivQ[] = [];
+  const missingPattern: Array<"num" | "den"> = ["num","den","num","den","num"];
+  for (let i = 0; i < count; i++) {
+    let srcNum: number, srcDen: number, tgtNum: number, tgtDen: number, k: number;
+    const isSmall = range[1] <= 144;
+    for (;;) {
+      if (isSmall) {
+        const a = rnd(1, 11); const b = rnd(a + 1, 12);
+        if (gcd(a, b) !== 1) continue;
+        k = rnd(2, 12);
+        srcNum = a * k; srcDen = b * k;
+        tgtNum = a; tgtDen = b;
+      } else {
+        const a = rnd(1, 9); const b = rnd(a + 1, 12);
+        if (gcd(a, b) !== 1) continue;
+        k = rnd(2, Math.floor(range[1] / Math.max(a, b)));
+        if (k < 2) continue;
+        srcNum = a * k; srcDen = b * k;
+        tgtNum = a; tgtDen = b;
+      }
+      if (srcNum <= range[1] && srcDen <= range[1]) break;
+    }
+    const missingPos = missingPattern[i % missingPattern.length]!;
+    const answer = missingPos === "num" ? tgtNum : tgtDen;
+    questions.push({ srcNum, srcDen, tgtNum, tgtDen, missingPos, answer });
+  }
+  return { questions, exNum, range };
+}
+
+function genFracSimplify(range: [number, number], exNum: number, count = 5): FracSimplifyConfig {
+  const questions: FracSimplifyQ[] = [];
+  for (let i = 0; i < count; i++) {
+    let num: number, den: number, simNum: number, simDen: number;
+    const isSmall = range[1] <= 144;
+    for (;;) {
+      if (isSmall) {
+        simNum = rnd(1, 11); simDen = rnd(simNum + 1, 12);
+        if (gcd(simNum, simDen) !== 1) continue;
+        const k = rnd(2, 12);
+        num = simNum * k; den = simDen * k;
+      } else {
+        simNum = rnd(1, 9); simDen = rnd(simNum + 1, 12);
+        if (gcd(simNum, simDen) !== 1) continue;
+        const k = rnd(2, Math.floor(range[1] / Math.max(simNum, simDen)));
+        if (k < 2) continue;
+        num = simNum * k; den = simDen * k;
+      }
+      if (num <= range[1] && den <= range[1]) break;
+    }
+    questions.push({ num, den, simNum, simDen });
+  }
+  return { questions, exNum, range };
+}
+
+function genFracCompare(mode: "same_den" | "same_num" | "random", range: [number, number], exNum: number, count = 5): FracCompConfig {
+  const [lo, hi] = range;
+  const questions: FracCompQ[] = [];
+  const targets: Array<"<" | "=" | ">"> = ["<","<",">",">","="];
+  for (let i = targets.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [targets[i], targets[j]] = [targets[j]!, targets[i]!];
+  }
+  for (let i = 0; i < count; i++) {
+    const target = targets[i]!;
+    let num1: number, den1: number, num2: number, den2: number;
+    let tries = 0;
+    do {
+      if (mode === "same_den") {
+        const d = rnd(2, hi);
+        den1 = d; den2 = d;
+        if (target === "=") { num1 = rnd(1, d); num2 = num1; }
+        else if (target === "<") { do { num1 = rnd(1, d); num2 = rnd(1, d); } while (num1 >= num2); }
+        else { do { num1 = rnd(1, d); num2 = rnd(1, d); } while (num1 <= num2); }
+      } else if (mode === "same_num") {
+        const n = rnd(1, Math.min(hi, 20));
+        num1 = n; num2 = n;
+        if (target === "=") { den1 = rnd(n + 1, hi); den2 = den1; }
+        else if (target === "<") { do { den1 = rnd(n + 1, hi); den2 = rnd(n + 1, hi); } while (den1 <= den2); }
+        else { do { den1 = rnd(n + 1, hi); den2 = rnd(n + 1, hi); } while (den1 >= den2); }
+      } else {
+        num1 = rnd(lo, hi); den1 = rnd(lo + 1, hi + 1);
+        num2 = rnd(lo, hi); den2 = rnd(lo + 1, hi + 1);
+        const cmp = num1 * den2 - num2 * den1;
+        const actual: "<"|"="|">" = cmp < 0 ? "<" : cmp > 0 ? ">" : "=";
+        if (actual !== target) { tries++; continue; }
+      }
+      break;
+    } while (tries < 500);
+    questions.push({ num1, den1, num2, den2, answer: target });
+  }
+  return { questions, exNum, mode };
 }
 
 // ── Column grid generators ────────────────────────────────────────────────────
@@ -818,6 +945,214 @@ function shufflePick<T>(arr: T[], n: number): T[] {
     [copy[i], copy[j]] = [copy[j]!, copy[i]!];
   }
   return copy.slice(0, Math.min(n, copy.length));
+}
+
+// ── FracDisplay helper ────────────────────────────────────────────────────────
+function FracDisplay({ num, den }: { num: number | string; den: number | string }) {
+  return (
+    <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
+      <span className="text-sm font-bold text-[var(--color-accent-alg)]">{num}</span>
+      <span className="h-[1.5px] self-stretch min-w-[1.2em] rounded bg-[var(--color-text-primary)]" />
+      <span className="text-sm font-bold text-[var(--color-text-primary)]">{den}</span>
+    </span>
+  );
+}
+
+// ── FracIdExercise ────────────────────────────────────────────────────────────
+function FracIdExercise({ config, answers, validated, results, onChange }: {
+  config: FracIdConfig; answers: string[]; validated: boolean; results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? results[i] : null;
+          const wrong = ok === false;
+          const label = q.ask === "num" ? "Quel est le numérateur ?" : "Quel est le dénominateur ?";
+          return (
+            <div key={i} className="flex items-center gap-3">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <FracDisplay num={q.num} den={q.den} />
+              <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
+              {wrong ? (
+                <div className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm flex items-center justify-center gap-0.5 ${CLS_WRONG}`}>
+                  <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                  <span className="text-xs font-bold">{q.ask === "num" ? q.num : q.den}</span>
+                </div>
+              ) : (
+                <input
+                  type="number"
+                  value={v}
+                  disabled={validated}
+                  onChange={e => onChange(i, e.target.value)}
+                  className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                    ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
+                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+                  }`}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── FracEquivExercise ─────────────────────────────────────────────────────────
+function FracEquivExercise({ config, answers, validated, results, onChange }: {
+  config: FracEquivConfig; answers: string[]; validated: boolean; results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les fractions équivalentes.</p>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? results[i] : null;
+          const wrong = ok === false;
+          const correctAns = q.answer;
+          const inputW = "w-12 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+          return (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <FracDisplay num={q.srcNum} den={q.srcDen} />
+              <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
+              {q.missingPos === "num" ? (
+                <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
+                  {wrong ? (
+                    <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500 text-[9px]">{v||"—"}</span>
+                      <span className="text-[9px] font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
+                      className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                  )}
+                  <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                  <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.tgtDen}</span>
+                </span>
+              ) : (
+                <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
+                  <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                  {wrong ? (
+                    <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500 text-[9px]">{v||"—"}</span>
+                      <span className="text-[9px] font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
+                      className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                  )}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── FracSimplifyExercise ──────────────────────────────────────────────────────
+function FracSimplifyExercise({ config, answers, validated, results, onChange }: {
+  config: FracSimplifyConfig;
+  answers: Array<{ num: string; den: string }>;
+  validated: boolean;
+  results: boolean[];
+  onChange: (i: number, part: "num" | "den", val: string) => void;
+}) {
+  const inputW = "w-12 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Simplifiez les fractions.</p>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
+        {config.questions.map((q, i) => {
+          const ans = answers[i] ?? { num: "", den: "" };
+          const ok = validated ? results[i] : null;
+          const wrong = ok === false;
+          return (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <FracDisplay num={q.num} den={q.den} />
+              <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
+              <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
+                {wrong ? (
+                  <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px]">{ans.num||"—"}</span>
+                    <span className="text-[9px] font-bold">{q.simNum}</span>
+                  </div>
+                ) : (
+                  <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
+                    className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                )}
+                <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                {wrong ? (
+                  <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px]">{ans.den||"—"}</span>
+                    <span className="text-[9px] font-bold">{q.simDen}</span>
+                  </div>
+                ) : (
+                  <input type="number" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value)}
+                    className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                )}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── FracCompareExercise ───────────────────────────────────────────────────────
+function FracCompareExercise({ config, answers, validated, onAnswer }: {
+  config: FracCompConfig;
+  answers: Array<"<" | "=" | ">" | null>;
+  validated: boolean;
+  onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Comparez les fractions suivantes.</p>
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4 space-y-4">
+        {config.questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <FracDisplay num={q.num1} den={q.den1} />
+            <div className="flex shrink-0 gap-1">
+              {(["<", "=", ">"] as const).map(sym => {
+                const sel = answers[i] === sym;
+                const isCorrect = sym === q.answer;
+                let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
+                if (!validated) {
+                  cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                } else if (sel && isCorrect) {
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                } else if (sel && !isCorrect) {
+                  cls += CLS_WRONG;
+                } else if (!sel && isCorrect) {
+                  cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                } else {
+                  cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                }
+                return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
+              })}
+            </div>
+            <FracDisplay num={q.num2} den={q.den2} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
