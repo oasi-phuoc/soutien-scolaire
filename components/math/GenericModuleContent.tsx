@@ -658,16 +658,18 @@ function MultiplicationTableBlock() {
   const [a, b] = pair;
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
-        {MULT_PAIRS.map(([x, y]) => (
+      <div className="flex overflow-hidden rounded-xl border border-[var(--color-border-default)]">
+        {MULT_PAIRS.map(([x, y], idx) => (
           <button
             key={`${x}-${y}`}
             type="button"
             onClick={() => setPair([x, y])}
-            className={`rounded-lg px-3 py-1.5 text-sm font-bold transition-colors ${
+            className={`flex-1 px-2 py-1.5 text-sm font-bold transition-colors ${
+              idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
+            } ${
               pair[0] === x
                 ? "bg-[var(--color-accent-alg)] text-white"
-                : "border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
             {x}–{y}
