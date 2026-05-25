@@ -301,7 +301,7 @@ export function MathematiquesClient() {
                         return (
                           <li
                             key={sub.id}
-                            className={`flex items-center gap-3 px-4 py-2.5 ${subDone ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : ""}`}
+                            className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${subDone ? "cursor-pointer hover:bg-[var(--color-bg-secondary)] transition-colors" : ""}`}
                             onClick={subDone ? (e) => { e.stopPropagation(); router.push(`/mathematiques/${sub.id}`); } : undefined}
                           >
                             <SubDot done={subDone} current={subAvailable} accent={accentColor} moduleLocked={subLocked} />

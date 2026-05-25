@@ -20,11 +20,12 @@ const SECTIONS: SectionDef[] = [
 ];
 
 const TABS: { id: FrenchTab; label: string }[] = [
-  { id: "vocabulaire", label: "Vocabulaire" },
-  { id: "grammaire",   label: "Grammaire" },
+  { id: "vocabulaire",    label: "Vocabulaire" },
+  { id: "grammaire",      label: "Grammaire" },
+  { id: "communication",  label: "Communication" },
 ];
 
-const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire"];
+const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire", "communication"];
 
 function lessonHref(th: FrenchTheme): string {
   if (th.tab === "conjugaison") return `/francais/conjugaison/${th.slug}`;
@@ -198,7 +199,7 @@ function SectionCard({
               const isAvailable = ls === "available";
 
               const inner = (
-                <div className={`flex items-center gap-3 px-4 py-2.5 ${isLocked ? "opacity-40" : ""}`}>
+                <div className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${isLocked ? "opacity-40" : ""}`}>
                   <LessonDot state={ls} />
                   <div className="min-w-0 flex-1">
                     <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
@@ -277,7 +278,7 @@ export function FrancaisClient() {
       <div
         role="tablist"
         aria-label="Catégories français"
-        className="grid grid-cols-2 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+        className="grid grid-cols-3 gap-1 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
       >
         {TABS.map(({ id, label }) => (
           <button
@@ -304,7 +305,7 @@ export function FrancaisClient() {
             FRENCH_THEMES.filter(
               (th) =>
                 th.section === sec.id &&
-                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
+                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison") || (tab === "communication" && th.tab === "communication")),
             ),
           );
 

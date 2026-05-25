@@ -6,7 +6,7 @@ export type CompetenceCode = "CO" | "CE" | "PO" | "PE";
 
 export type FrenchSection = "ALPHA" | "A0" | "A1" | "A2" | "B1" | "B2";
 
-export type FrenchTab = "general" | "vocabulaire" | "grammaire" | "conjugaison";
+export type FrenchTab = "general" | "vocabulaire" | "grammaire" | "conjugaison" | "communication";
 
 export type FrenchTheme = {
   id: string;

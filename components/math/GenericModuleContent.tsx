@@ -288,14 +288,8 @@ function ArithmeticGroupExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
 }) {
-  const score = results.filter(Boolean).length;
   const numCls = "w-14 text-center font-mono text-sm text-[var(--color-text-primary)]";
-  const inputCls = (ok: boolean | null) =>
-    `w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
-      ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
-      : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-      : CLS_WRONG
-    }`;
+  const inputBase = "w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
@@ -303,34 +297,31 @@ function ArithmeticGroupExercise({
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] ?? false : null;
+          const wrongField = ok === false;
           return (
             <div key={i} className="flex items-center gap-1.5">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
-                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                ? wrongField
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
-                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                ? wrongField
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
-                ? <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputCls(ok)} />
+                ? wrongField
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.result}</span>}
-              {validated && (
-                <span className={`ml-1 text-xs ${results[i] ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
-                  {results[i] ? "✓" : `→ ${q.answer}`}
-                </span>
-              )}
             </div>
           );
         })}
       </div>
-      {validated && (
-        <p className={`text-sm font-medium ${score === 5 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
-          {score}/5 bonnes réponses
-        </p>
-      )}
     </div>
   );
 }
@@ -359,6 +350,14 @@ function ColumnGridCard({
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
     const ok = validated ? cellOk(expected, val) : null;
+    if (ok === false) {
+      return (
+        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
     return (
       <input
         type="text"
@@ -371,9 +370,8 @@ function ColumnGridCard({
           onChange(cardIdx, idx, v);
         }}
         className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
-          ok === null ? "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
-          : ok ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-          : CLS_WRONG
+          ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+          : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
         }`}
       />
     );
@@ -442,11 +440,6 @@ function ColumnGridCard({
           </tr>
         </tbody>
       </table>
-      {validated && (
-        <p className={`mt-1 text-[10px] font-medium ${cardCorrect ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
-          {cardCorrect ? "✓ Correct" : `→ ${formatCompNum(q.result)}`}
-        </p>
-      )}
     </div>
   );
 }
@@ -460,7 +453,6 @@ function ColumnGridExercise({
   results: boolean[];
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
 }) {
-  const score = results.filter(Boolean).length;
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
@@ -478,11 +470,6 @@ function ColumnGridExercise({
           />
         ))}
       </div>
-      {validated && (
-        <p className={`text-sm font-medium ${score === 4 ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>
-          {score}/4 bonnes réponses
-        </p>
-      )}
     </div>
   );
 }
@@ -1102,9 +1089,9 @@ export function GenericModuleContent({
             <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
               {currentStep.lesson.theory.title.fr}
             </h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Évalue ta maîtrise de ce module.
-            </p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L'évaluation est chronométrée. Tu as 5 minutes pour compléter l'évaluation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
           </div>
           <button
             type="button"

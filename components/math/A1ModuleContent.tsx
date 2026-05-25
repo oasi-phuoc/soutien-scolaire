@@ -3365,16 +3365,29 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
             {/* ── Écran de démarrage (avant Commencer) ── */}
             {!evalStarted && !evalSubmitted && (
-              <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
-                <p className="text-4xl font-bold tabular-nums text-[var(--color-accent-alg)]">5:00</p>
-                <p className="text-sm text-[var(--color-text-secondary)]">Temps disponible pour compléter l&apos;évaluation</p>
-                <p className="text-xs text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+              <div className="flex flex-col items-center gap-8 py-8 text-center">
+                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
+                  <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
+                    <path d="M9 11l3 3L22 4" />
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                  </svg>
+                </div>
+                <div className="space-y-2">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
+                  <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
+                  <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">L'évaluation est chronométrée. Tu as 5 minutes pour compléter l'évaluation.</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+                </div>
                 <button
                   type="button"
                   onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPageValidated(false); setEvalTimeLeft(5 * 60); }}
-                  className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+                  className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
                 >
                   Commencer
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
                 </button>
               </div>
             )}

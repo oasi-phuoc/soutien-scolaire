@@ -157,7 +157,7 @@ function ModuleCard({
           const hasFailedEval = isAvailable && evalResult !== undefined && !evalResult.passed;
 
           const rowContent = (
-            <div className="flex items-center gap-3 px-4 py-2.5">
+            <div className="flex min-h-[52px] items-center gap-3 px-4 py-2.5">
               <SubStateDot state={subState} />
               <div className="flex-1 min-w-0">
                 <span className="text-xs font-semibold text-[var(--color-text-secondary)]">
@@ -225,7 +225,7 @@ function ModuleCard({
           const revLocked = revState === "locked";
 
           const revRowContent = (
-            <div className="flex items-center gap-3 px-4 py-2">
+            <div className="flex min-h-[52px] items-center gap-3 px-4 py-2">
               <SubStateDot state={revState} />
               <div className="flex-1 min-w-0 flex items-center gap-1.5">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="shrink-0 text-[var(--color-accent-lecture)]" aria-hidden>
