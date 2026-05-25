@@ -45,9 +45,12 @@ function formatCompNum(n: number): string {
 }
 
 // ── Step types ──────────────────────────────────────────────────────────────
-type ArithOp = "+" | "-";
+type ArithOp = "+" | "-" | "×" | "÷";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
 type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean; timer?: number };
+type RoundingQ = { prompt: string; answer: string };
+type RoundingConfig = { questions: RoundingQ[]; exNum: number; count: number };
+type RoundingStep = { kind: "rounding_group"; lesson: MathSubmoduleLesson; config: RoundingConfig };
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
@@ -63,7 +66,7 @@ type ColumnGridStep  = { kind: "column_grid";       lesson: MathSubmoduleLesson;
 type ExprCompStep    = { kind: "expr_comparison";   lesson: MathSubmoduleLesson; config: ExprCompConfig };
 type EvalStartStep   = { kind: "eval_start";        lesson: MathSubmoduleLesson };
 type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -331,19 +334,93 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
 function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false, timer?: number): ArithGroupConfig {
   const [lo, hi] = range;
   const qs: ArithQuestion[] = [];
-  for (let i = 0; i < 5; i++) {
+  const count = timer ? 8 : 5;
+  for (let i = 0; i < count; i++) {
     let a: number, b: number, result: number;
     if (op === "+") {
       a = rnd(lo, hi); b = rnd(lo, hi); result = a + b;
-    } else {
+    } else if (op === "-") {
       do { a = rnd(lo, hi); b = rnd(lo, hi); } while (a < b);
       result = a - b;
+    } else if (op === "×") {
+      // a ∈ [range[0], range[1]], b ∈ [1, 12]
+      a = rnd(lo, hi); b = rnd(1, 12); result = a * b;
+    } else {
+      // ÷: pick divisor b ∈ [range[0], range[1]], quotient a ∈ [1, 12]
+      // Dividend = a * b, question: (a*b) ÷ b = a
+      b = rnd(lo, hi === 0 ? 1 : hi); if (b === 0) b = 1;
+      a = rnd(1, 12);
+      result = a; // the quotient
+      // Rewrite: dividend = a*b, divisor = b, result (quotient) = a
+      // We store: a=dividend, b=divisor, result=quotient
+      const dividend = a * b;
+      a = dividend;
+      result = a / b; // = original a = quotient
     }
     const missingPos = !missingOperand ? ("result" as const) : Math.random() < 0.5 ? ("a" as const) : ("b" as const);
     const answer = missingPos === "result" ? String(result) : missingPos === "a" ? String(a) : String(b);
     qs.push({ a, b, result, op, missingPos, answer });
   }
   return { questions: qs, exNum, op, range, missingOperand, ...(timer !== undefined ? { timer } : {}) };
+}
+
+// ── Rounding generators ──────────────────────────────────────────────────────
+function roundTo100(n: number) { return Math.round(n / 100) * 100; }
+function roundTo1000(n: number) { return Math.round(n / 1000) * 1000; }
+
+function genRounding(kind: "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed", exNum: number, count: number): RoundingConfig {
+  const qs: RoundingQ[] = [];
+  for (let i = 0; i < count; i++) {
+    if (kind === "cent_near") {
+      const x = rnd(101, 999);
+      qs.push({ prompt: `Arrondissez ${x} à la centaine la plus proche.`, answer: String(roundTo100(x)) });
+    } else if (kind === "thou_near") {
+      const x = rnd(1001, 9999);
+      qs.push({ prompt: `Arrondissez ${x} au millier le plus proche.`, answer: String(roundTo1000(x)) });
+    } else if (kind === "est_add") {
+      const x = rnd(1, 999), y = rnd(1, 999);
+      const ans = roundTo100(x) + roundTo100(y);
+      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(ans) });
+    } else if (kind === "est_sub") {
+      let x = rnd(1, 999), y = rnd(1, 999);
+      if (x < y) [x, y] = [y, x];
+      const ans = roundTo100(x) - roundTo100(y);
+      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(ans) });
+    } else {
+      // est_mixed: 3 numbers with 2 mixed operators
+      const x = rnd(1, 999), y = rnd(1, 999), z = rnd(1, 999);
+      const useAddFirst = Math.random() < 0.5;
+      let prompt: string;
+      let ans: number;
+      if (useAddFirst) {
+        prompt = `${x} + ${y} − ${z} ≈ ?`;
+        ans = roundTo100(x) + roundTo100(y) - roundTo100(z);
+      } else {
+        prompt = `${x} − ${y} + ${z} ≈ ?`;
+        ans = roundTo100(x) - roundTo100(y) + roundTo100(z);
+      }
+      qs.push({ prompt, answer: String(ans) });
+    }
+  }
+  return { questions: qs, exNum, count };
+}
+
+function genRoundingMixed(exNum: number, count: number): RoundingConfig {
+  const qs: RoundingQ[] = [];
+  const halfAdd = Math.floor(count / 2);
+  for (let i = 0; i < count; i++) {
+    if (i < halfAdd) {
+      const x = rnd(1, 999), y = rnd(1, 999);
+      const ans = roundTo100(x) + roundTo100(y);
+      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(ans) });
+    } else {
+      let x = rnd(1, 999), y = rnd(1, 999);
+      if (x < y) [x, y] = [y, x];
+      const ans = roundTo100(x) - roundTo100(y);
+      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(ans) });
+    }
+  }
+  return { questions: qs, exNum, count };
 }
 
 // ── Column grid generators ────────────────────────────────────────────────────
@@ -679,6 +756,53 @@ function ColumnGridExercise({
   );
 }
 
+// ── RoundingExercise ──────────────────────────────────────────────────────────
+function RoundingExercise({
+  config, answers, validated, results, onChange,
+}: {
+  config: RoundingConfig;
+  answers: string[];
+  validated: boolean;
+  results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  const inputBase = "rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? results[i] ?? false : null;
+          const wrongField = ok === false;
+          return (
+            <div key={i} className="flex min-h-[2.25rem] items-center gap-2 flex-wrap">
+              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.prompt}</span>
+              {wrongField
+                ? <div className={`${inputBase} ${CLS_WRONG_INL} min-w-[5rem] flex items-center justify-center gap-0.5`}>
+                    <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
+                    <span className="text-[var(--color-text-primary)] text-xs font-bold ml-1">{q.answer}</span>
+                  </div>
+                : <input
+                    type="number"
+                    inputMode="numeric"
+                    value={v}
+                    disabled={validated}
+                    onChange={e => onChange(i, e.target.value)}
+                    className={`${inputBase} min-w-[5rem] ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
+                  />
+              }
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -709,6 +833,47 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
+    } else if (sid === "A2-3") {
+      // Entraînement arrondi/estimation
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("thou_near", 2, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_add", 3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_sub", 4, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_mixed", 5, 5) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("thou_near", 2, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRoundingMixed(3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_mixed", 4, 4) });
+    } else if (sid === "A3-1") {
+      // Tables de multiplications — entraînement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 6], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [7, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 5, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 6, true, 60) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, true) });
+    } else if (sid === "A3-3") {
+      // Tables de divisions — entraînement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 6], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [7, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 5, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 6, true, 60) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true) });
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
@@ -723,13 +888,16 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       }
     }
   }
-  const hasA2Drills = lessons.some(l => l.submoduleId === "A2-1" || l.submoduleId === "A2-2");
-  if (withEval && lessons.length > 0 && !hasA2Drills) {
+  const hasDrillsNoPassToggle = lessons.some(l =>
+    l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
+    l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-3"
+  );
+  if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
     steps.push({ kind: "eval_start", lesson: lastLesson });
     steps.push({ kind: "pass_toggle", lesson: lastLesson });
   }
-  // A2-1/A2-2 : eval_start + 2 eval exercises already pushed above; no pass_toggle
+  // A2-1/A2-2/A2-3/A3-1/A3-3: eval_start + eval exercises already pushed above; no pass_toggle
   return steps;
 }
 
@@ -1048,6 +1216,13 @@ export function GenericModuleContent({
   const [arithValidated, setArithValidated] = useState(false);
   const [arithResults, setArithResults] = useState<boolean[]>(() => Array(5).fill(false));
 
+  // Rounding group exercise state
+  const [roundingAnswers, setRoundingAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [roundingValidated, setRoundingValidated] = useState(false);
+  const [roundingResults, setRoundingResults] = useState<boolean[]>(() => Array(5).fill(false));
+  const [roundingOverrideConfigs, setRoundingOverrideConfigs] = useState<Record<number, RoundingConfig>>({});
+  const [roundingResetKey, setRoundingResetKey] = useState(0);
+
   // Column grid exercise state (4 cards × 12 cells max)
   const emptyGrid = () => Array.from({ length: 4 }, () => Array(12).fill("") as string[]);
   const emptyCarryGrid = () => Array.from({ length: 4 }, () => Array(4).fill("") as string[]);
@@ -1079,6 +1254,9 @@ export function GenericModuleContent({
     setGridCarryInputs(emptyCarryGrid());
     setGridValidated(false);
     setGridResults(Array(4).fill(false));
+    setRoundingAnswers(Array(5).fill(""));
+    setRoundingValidated(false);
+    setRoundingResults(Array(5).fill(false));
   }, []);
 
   const goBack = useCallback(() => {
@@ -1114,7 +1292,7 @@ export function GenericModuleContent({
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
-      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group" || currentStep?.kind === "expr_comparison") {
+      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group" || currentStep?.kind === "expr_comparison" || currentStep?.kind === "rounding_group") {
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
@@ -1151,6 +1329,9 @@ export function GenericModuleContent({
     : null;
   const activeGridConfig = currentStep?.kind === "column_grid"
     ? (gridOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeRoundingConfig = currentStep?.kind === "rounding_group"
+    ? (roundingOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
@@ -1247,6 +1428,26 @@ export function GenericModuleContent({
       setGridCarryInputs(Array.from({ length: 4 }, () => Array(4).fill("")));
       setGridValidated(false);
       setGridResults(Array(4).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "rounding_group") {
+    const cfg = activeRoundingConfig!;
+    stepCanValidate = !roundingValidated;
+    stepValidate = roundingValidated ? () => {} : () => {
+      setRoundingResults(cfg.questions.map((q, i) => (roundingAnswers[i] ?? "").trim() === q.answer));
+      setRoundingValidated(true);
+    };
+    stepReset = () => {
+      const kind = cfg.questions[0]?.prompt.includes("centaine") ? "cent_near"
+        : cfg.questions[0]?.prompt.includes("millier") ? "thou_near"
+        : cfg.questions[0]?.prompt.includes("≈") && cfg.count <= 3 ? "est_add"
+        : "est_mixed";
+      setRoundingOverrideConfigs(prev => ({ ...prev, [stepIdx]: genRounding(kind as Parameters<typeof genRounding>[0], cfg.exNum, cfg.count) }));
+      setRoundingAnswers(Array(cfg.count).fill(""));
+      setRoundingValidated(false);
+      setRoundingResults(Array(cfg.count).fill(false));
+      setRoundingResetKey(k => k + 1);
     };
   }
 
@@ -1378,8 +1579,24 @@ export function GenericModuleContent({
               ? "Trouvez la valeur manquante."
               : activeArithConfig.op === "+"
                 ? "Effectuez les additions."
-                : "Effectuez les soustractions."
+                : activeArithConfig.op === "-"
+                  ? "Effectuez les soustractions."
+                  : activeArithConfig.op === "×"
+                    ? "Effectuez les multiplications."
+                    : "Effectuez les divisions."
           }
+        />
+      )}
+
+      {/* Rounding group exercise */}
+      {currentStep?.kind === "rounding_group" && activeRoundingConfig && (
+        <RoundingExercise
+          key={`rounding-${stepIdx}-${roundingResetKey}`}
+          config={activeRoundingConfig}
+          answers={roundingAnswers}
+          validated={roundingValidated}
+          results={roundingResults}
+          onChange={(i, val) => setRoundingAnswers(prev => prev.map((a, j) => j === i ? val : a))}
         />
       )}
 
