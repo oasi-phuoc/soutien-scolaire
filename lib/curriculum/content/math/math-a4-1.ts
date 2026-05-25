@@ -163,7 +163,18 @@ export const MATH_A4_1_LESSON: MathSubmoduleLesson = {
     },
 
 
-    exercises: [
-
+    exercises: [],
+    exercisePool: [
+      { id: "a4-1-ep01", promptFr: "Quel est le numérateur de la fraction 3/7 ?", type: "number", acceptable: ["3"] },
+      { id: "a4-1-ep02", promptFr: "Quel est le dénominateur de la fraction 5/8 ?", type: "number", acceptable: ["8"] },
+      { id: "a4-1-ep03", promptFr: "Quel est le numérateur de la fraction 2/5 ?", type: "number", acceptable: ["2"] },
+      { id: "a4-1-ep04", promptFr: "Quel est le dénominateur de la fraction 9/11 ?", type: "number", acceptable: ["11"] },
+      { id: "a4-1-ep05", promptFr: "Si une pizza est coupée en 8 parts et que vous en mangez 3, quelle fraction avez-vous mangée ? Écrivez la fraction (ex: 3/8).", type: "short_text", acceptable: ["3/8"] },
+      { id: "a4-1-ep06", promptFr: "On partage un gâteau en 4 parts égales. Chaque part représente quelle fraction ? (ex: 1/4)", type: "short_text", acceptable: ["1/4"] },
+      { id: "a4-1-ep07", promptFr: "3/3 est-il égal à 1 ? Répondez oui ou non.", type: "short_text", acceptable: ["oui", "Oui", "OUI"] },
+      { id: "a4-1-ep08", promptFr: "Quel entier est égal à 6/1 ?", type: "number", acceptable: ["6"] },
+      { id: "a4-1-ep09", promptFr: "Écrivez 5 sous forme de fraction avec le dénominateur 1. (ex: 5/1)", type: "short_text", acceptable: ["5/1"] },
+      { id: "a4-1-ep10", promptFr: "Quel est le numérateur de la fraction 7/10 ?", type: "number", acceptable: ["7"] },
     ],
+    poolSize: 5,
   };

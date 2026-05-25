@@ -159,4 +159,17 @@ export const MATH_A4_7_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [],
+  exercisePool: [
+    { id: "a4-7-ep01", promptFr: "Convertissez 1/2 en nombre décimal. (ex: 0.5)", type: "short_text", acceptable: ["0.5", "0,5"] },
+    { id: "a4-7-ep02", promptFr: "Convertissez 1/4 en nombre décimal. (ex: 0.25)", type: "short_text", acceptable: ["0.25", "0,25"] },
+    { id: "a4-7-ep03", promptFr: "Convertissez 3/4 en nombre décimal. (ex: 0.75)", type: "short_text", acceptable: ["0.75", "0,75"] },
+    { id: "a4-7-ep04", promptFr: "Convertissez 3/10 en nombre décimal. (ex: 0.3)", type: "short_text", acceptable: ["0.3", "0,3"] },
+    { id: "a4-7-ep05", promptFr: "Convertissez 7/100 en nombre décimal. (ex: 0.07)", type: "short_text", acceptable: ["0.07", "0,07"] },
+    { id: "a4-7-ep06", promptFr: "Convertissez 0.6 en fraction décimale (sur 10). (ex: 6/10)", type: "short_text", acceptable: ["6/10", "3/5"] },
+    { id: "a4-7-ep07", promptFr: "Convertissez 0.25 en fraction (sur 100, puis simplifiez). (ex: 1/4)", type: "short_text", acceptable: ["25/100", "1/4"] },
+    { id: "a4-7-ep08", promptFr: "1/5 = ? décimal. (ex: 0.2)", type: "short_text", acceptable: ["0.2", "0,2"] },
+    { id: "a4-7-ep09", promptFr: "Convertissez 0.8 en fraction simplifiée. (ex: 4/5)", type: "short_text", acceptable: ["8/10", "4/5"] },
+    { id: "a4-7-ep10", promptFr: "Convertissez 2/5 en nombre décimal. (ex: 0.4)", type: "short_text", acceptable: ["0.4", "0,4"] },
+  ],
+  poolSize: 5,
 };
