@@ -848,7 +848,9 @@ export function GenericModuleContent({
 
   // Column grid exercise state (4 cards × 12 cells max)
   const emptyGrid = () => Array.from({ length: 4 }, () => Array(12).fill("") as string[]);
+  const emptyCarryGrid = () => Array.from({ length: 4 }, () => Array(4).fill("") as string[]);
   const [gridAnswers, setGridAnswers] = useState<string[][]>(emptyGrid);
+  const [gridCarryInputs, setGridCarryInputs] = useState<string[][]>(emptyCarryGrid);
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
@@ -870,6 +872,7 @@ export function GenericModuleContent({
     setArithValidated(false);
     setArithResults(Array(5).fill(false));
     setGridAnswers(emptyGrid());
+    setGridCarryInputs(emptyCarryGrid());
     setGridValidated(false);
     setGridResults(Array(4).fill(false));
   }, []);
@@ -992,19 +995,19 @@ export function GenericModuleContent({
   if (currentStep?.kind === "column_grid" && !gridValidated) {
     const cfg = activeGridConfig!;
     const resBase = cfg.preFilledOperands ? 0 : 8;
+    const strictZero = cfg.exNum >= 7;
+    const cellOkVal = (d: number, v: string) =>
+      v === String(d) || (!strictZero && d === 0 && v === "");
     stepCanValidate = true;
     stepValidate = () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = gridAnswers[qi] ?? [];
         const rd = getD4(q.result);
-        const resultOk = rd.every((d, col) => {
-          const v = (cells[resBase + col] ?? "").trim();
-          return v === String(d) || (d === 0 && v === "");
-        });
+        const resultOk = rd.every((d, col) => cellOkVal(d, (cells[resBase + col] ?? "").trim()));
         if (cfg.preFilledOperands) return resultOk;
         const ad = getD4(q.a), bd = getD4(q.b);
-        const op1Ok = ad.every((d, col) => { const v = (cells[col] ?? "").trim(); return v === String(d) || (d === 0 && v === ""); });
-        const op2Ok = bd.every((d, col) => { const v = (cells[4 + col] ?? "").trim(); return v === String(d) || (d === 0 && v === ""); });
+        const op1Ok = ad.every((d, col) => cellOkVal(d, (cells[col] ?? "").trim()));
+        const op2Ok = bd.every((d, col) => cellOkVal(d, (cells[4 + col] ?? "").trim()));
         return resultOk && op1Ok && op2Ok;
       });
       setGridResults(res);
@@ -1013,6 +1016,7 @@ export function GenericModuleContent({
     stepReset = () => {
       setGridOverrideConfigs(prev => ({ ...prev, [stepIdx]: genColumnGrid(cfg.op, cfg.preFilledOperands, cfg.exNum) }));
       setGridAnswers(Array.from({ length: 4 }, () => Array(12).fill("")));
+      setGridCarryInputs(Array.from({ length: 4 }, () => Array(4).fill("")));
       setGridValidated(false);
       setGridResults(Array(4).fill(false));
     };
@@ -1140,6 +1144,12 @@ export function GenericModuleContent({
           validated={arithValidated}
           results={arithResults}
           onChange={(i, val) => setArithAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+          onTimerExpired={stepValidate}
+          consigne={
+            activeArithConfig.missingOperand
+              ? "Trouvez la valeur manquante."
+              : "Effectuez les additions."
+          }
         />
       )}
 
@@ -1148,6 +1158,7 @@ export function GenericModuleContent({
         <ColumnGridExercise
           config={activeGridConfig}
           answers={gridAnswers}
+          carryInputs={gridCarryInputs}
           validated={gridValidated}
           results={gridResults}
           onChange={(cardIdx, cellIdx, val) =>
@@ -1155,6 +1166,12 @@ export function GenericModuleContent({
               ci === cardIdx ? card.map((v, vi) => vi === cellIdx ? val : v) : card
             ))
           }
+          onCarryChange={(cardIdx, col, val) =>
+            setGridCarryInputs(prev => prev.map((card, ci) =>
+              ci === cardIdx ? card.map((v, vi) => vi === col ? val : v) : card
+            ))
+          }
+          consigne="Effectuez les additions en colonnes. Écrivez le résultat et les retenues."
         />
       )}
 
