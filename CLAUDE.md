@@ -54,6 +54,21 @@ Rendu : texte bold en couleur accent, sans cadre ni fond.
 
 ---
 
+### `bullets` — Liste avec puces de couleur accent
+
+```ts
+{ type: "bullets", labelFr: "Label optionnel", itemsFr: [
+  "Item 1",
+  "Item 2 avec **mot en gras coloré**",
+] }
+```
+
+- `labelFr` → label bold coloré au-dessus (optionnel, peut être omis)
+- `itemsFr` → lignes avec puce ronde colorée (accent) à gauche
+- Supporte `**texte**` et `[[frac:N/D]]` dans les items
+
+---
+
 ### `plain` — Paragraphe simple
 
 ```ts

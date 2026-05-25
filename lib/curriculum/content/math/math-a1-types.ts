@@ -54,6 +54,7 @@ export type MathRichBlock =
   | { type: "highlight"; fr: string; pivot?: Partial<Record<PivotCode, string>> }
   | { type: "svg"; markup: string; captionFr?: string; noFrame?: boolean }
   | { type: "section"; labelFr: string; itemsFr: string[] }
+  | { type: "bullets"; labelFr?: string; itemsFr: string[] }
   | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> }
   | { type: "mult_table" };
 

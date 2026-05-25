@@ -779,6 +779,22 @@ function BlockView({ block }: { block: MathRichBlock }) {
           )}
         </div>
       );
+    case "bullets":
+      return (
+        <div className="space-y-1.5">
+          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
+          {block.itemsFr.length > 0 && (
+            <ul className="space-y-1 pl-1">
+              {block.itemsFr.map((item, ii) => (
+                <li key={ii} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  <span className="mt-1 shrink-0 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-alg)]" />
+                  <span>{renderText(item)}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      );
     case "svg_row":
       return (
         <div className="flex gap-3">
