@@ -372,7 +372,7 @@ function ArithmeticGroupExercise({
 const COL_LABELS = ["M", "C", "D", "U"] as const;
 
 function ColumnGridCard({
-  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect, preFilledOperands, exNum, onChange, onCarryChange,
+  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect: _cardCorrect, preFilledOperands, exNum, onChange, onCarryChange,
 }: {
   q: ColGridQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
   validated: boolean; cardCorrect: boolean; preFilledOperands: boolean; exNum: number;
@@ -1190,7 +1190,7 @@ export function GenericModuleContent({
               {currentStep.lesson.theory.title.fr}
             </h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">L'évaluation est chronométrée. Tu as 5 minutes pour compléter l'évaluation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
           </div>
           <button

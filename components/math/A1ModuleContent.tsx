@@ -3376,7 +3376,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
                   <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
                   <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]">L'évaluation est chronométrée. Tu as 5 minutes pour compléter l'évaluation.</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
                   <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
                 </div>
                 <button
