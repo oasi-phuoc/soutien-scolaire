@@ -1674,7 +1674,7 @@ export function GenericModuleContent({
       )}
 
       {/* Arithmetic group exercise */}
-      {currentStep?.kind === "arithmetic_group" && activeArithConfig && (
+      {!showEvalScore && currentStep?.kind === "arithmetic_group" && activeArithConfig && (
         <ArithmeticGroupExercise
           key={`arith-${stepIdx}-${arithResetKey}`}
           config={activeArithConfig}
@@ -1698,7 +1698,7 @@ export function GenericModuleContent({
       )}
 
       {/* Rounding group exercise */}
-      {currentStep?.kind === "rounding_group" && activeRoundingConfig && (
+      {!showEvalScore && currentStep?.kind === "rounding_group" && activeRoundingConfig && (
         <RoundingExercise
           key={`rounding-${stepIdx}-${roundingResetKey}`}
           config={activeRoundingConfig}
@@ -1710,7 +1710,7 @@ export function GenericModuleContent({
       )}
 
       {/* Column grid exercise */}
-      {currentStep?.kind === "column_grid" && activeGridConfig && (
+      {!showEvalScore && currentStep?.kind === "column_grid" && activeGridConfig && (
         <ColumnGridExercise
           config={activeGridConfig}
           answers={gridAnswers}
