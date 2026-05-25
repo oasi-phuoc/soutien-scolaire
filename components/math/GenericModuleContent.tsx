@@ -1034,10 +1034,10 @@ export function GenericModuleContent({
     }
   }
 
-  if (currentStep?.kind === "arithmetic_group" && !arithValidated) {
+  if (currentStep?.kind === "arithmetic_group") {
     const cfg = activeArithConfig!;
-    stepCanValidate = true;
-    stepValidate = () => {
+    stepCanValidate = !arithValidated;
+    stepValidate = arithValidated ? () => {} : () => {
       setArithResults(cfg.questions.map((q, i) => (arithAnswers[i] ?? "").trim() === q.answer));
       setArithValidated(true);
     };
@@ -1049,14 +1049,14 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "column_grid" && !gridValidated) {
+  if (currentStep?.kind === "column_grid") {
     const cfg = activeGridConfig!;
     const resBase = cfg.preFilledOperands ? 0 : 8;
     const strictZero = cfg.exNum >= 7;
     const cellOkVal = (d: number, v: string) =>
       v === String(d) || (!strictZero && d === 0 && v === "");
-    stepCanValidate = true;
-    stepValidate = () => {
+    stepCanValidate = !gridValidated;
+    stepValidate = gridValidated ? () => {} : () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = gridAnswers[qi] ?? [];
         const rd = getD4(q.result);
