@@ -438,6 +438,13 @@ function computeCarries(a: number, b: number, op: ArithOp): (number | null)[] {
       c = Math.floor(s / 10);
       if (i > 0 && c > 0) row[i - 1] = c;
     }
+  } else if (op === "×") {
+    let c = 0;
+    for (let i = 3; i >= 0; i--) {
+      const prod = ad[i]! * b + c;
+      c = Math.floor(prod / 10);
+      if (i > 0 && c > 0) row[i - 1] = c;
+    }
   } else {
     let borrow = 0;
     for (let i = 3; i >= 0; i--) {
@@ -453,8 +460,9 @@ function genColGridQ(op: ArithOp): ColGridQ {
   for (;;) {
     let a: number, b: number;
     if (op === "+") { a = rnd(100, 4999); b = rnd(100, 9999 - a); }
-    else { a = rnd(1000, 9999); b = rnd(100, a - 1); }
-    const result = op === "+" ? a + b : a - b;
+    else if (op === "-") { a = rnd(1000, 9999); b = rnd(100, a - 1); }
+    else { a = rnd(12, 999); b = rnd(2, 9); }
+    const result = op === "+" ? a + b : op === "-" ? a - b : a * b;
     if (result >= 0 && result <= 9999) return { a, b, result, op, carryRow: computeCarries(a, b, op) };
   }
 }
@@ -650,7 +658,7 @@ function ColumnGridCard({
         <tbody>
           {/* Carry / borrow row — input fields */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" ? "R" : "E"}</td>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" || q.op === "×" ? "R" : "E"}</td>
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
@@ -864,6 +872,19 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, true) });
+    } else if (sid === "A3-2") {
+      // Multiplication en colonnes — entraînement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 10], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 4) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 5) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2, true) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 3, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 4, 2) });
     } else if (sid === "A3-3") {
       // Tables de divisions — entraînement
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 6], 1) });
@@ -878,6 +899,22 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 2) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true) });
+    } else if (sid === "A3-4") {
+      // Division — entraînement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 6], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [7, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 3) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 4, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 5, true) });
+      for (const item of shufflePick(lesson.exercisePool ?? [], lesson.poolSize ?? 5)) {
+        steps.push({ kind: "exercise", lesson, item });
+      }
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 4, true) });
     } else {
       if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
       if (sid === "A1-3") {
@@ -894,14 +931,15 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   }
   const hasDrillsNoPassToggle = lessons.some(l =>
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
-    l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-3"
+    l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
+    l.submoduleId === "A3-3" || l.submoduleId === "A3-4"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
     steps.push({ kind: "eval_start", lesson: lastLesson });
     steps.push({ kind: "pass_toggle", lesson: lastLesson });
   }
-  // A2-1/A2-2/A2-3/A3-1/A3-3: eval_start + eval exercises already pushed above; no pass_toggle
+  // A2-1/A2-2/A2-3/A3-1/A3-2/A3-3/A3-4: eval_start + eval exercises already pushed above; no pass_toggle
   return steps;
 }
 
@@ -1329,6 +1367,8 @@ export function GenericModuleContent({
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "column_grid") {
         currentResults = gridResults.slice(0, (gridOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+      } else if (currentStep.kind === "rounding_group") {
+        currentResults = roundingResults.slice(0, (roundingOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -1342,7 +1382,9 @@ export function GenericModuleContent({
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
             : es?.kind === "arithmetic_group"
               ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
-              : `Exercice ${i + 1}`;
+              : es?.kind === "rounding_group"
+                ? "Arrondis et estimations"
+                : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
         setEvalPageSavedResults(newSaved);
@@ -1386,7 +1428,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, evalPageSavedResults, evalStartIdx]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -1896,7 +1938,8 @@ export function GenericModuleContent({
                   (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
                   (isInEvalPhase && (
                     (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
-                    (currentStep?.kind === "column_grid" && !gridValidated)
+                    (currentStep?.kind === "column_grid" && !gridValidated) ||
+                    (currentStep?.kind === "rounding_group" && !roundingValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
