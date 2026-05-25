@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
@@ -237,11 +237,11 @@ function ExprCompExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="space-y-3">
+        <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
           {config.questions.map((q, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="shrink-0 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+            <Fragment key={i}>
+              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="justify-self-end font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
@@ -261,8 +261,8 @@ function ExprCompExercise({
                   return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
               </div>
-              <span className="shrink-0 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
-            </div>
+              <span className="font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
+            </Fragment>
           ))}
         </div>
       </div>
@@ -833,6 +833,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 11) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 12) });
     } else if (sid === "A2-3") {
       // Entraînement arrondi/estimation
       steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 5) });
