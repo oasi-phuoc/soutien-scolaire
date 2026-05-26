@@ -55,7 +55,7 @@ type ArithOp = "+" | "-" | "×" | "÷";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
 type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean; timer?: number };
 type RoundingQ = { prompt: string; answer: string };
-type RoundingConfig = { questions: RoundingQ[]; exNum: number; count: number };
+type RoundingConfig = { questions: RoundingQ[]; exNum: number; count: number; consigne: string; kind: string };
 type RoundingStep = { kind: "rounding_group"; lesson: MathSubmoduleLesson; config: RoundingConfig };
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
@@ -422,13 +422,59 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
 }
 
 // ── Rounding generators ──────────────────────────────────────────────────────
+function roundTo10(n: number) { return Math.round(n / 10) * 10; }
 function roundTo100(n: number) { return Math.round(n / 100) * 100; }
 function roundTo1000(n: number) { return Math.round(n / 1000) * 1000; }
 
-function genRounding(kind: "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed", exNum: number, count: number): RoundingConfig {
+type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed";
+
+function genRounding(kind: RoundingKind, exNum: number, count: number): RoundingConfig {
+  const consigneMap: Record<RoundingKind, string> = {
+    "diz_near":         "Arrondissez à la dizaine la plus proche les nombres suivants.",
+    "cent_near_new":    "Arrondissez à la centaine la plus proche les nombres suivants.",
+    "est_diz_2":        "Estimez le résultat du calcul à la dizaine la plus proche.",
+    "est_diz_large_2":  "Estimez le résultat du calcul à la dizaine la plus proche.",
+    "est_diz_three":    "Estimez le résultat du calcul à la dizaine la plus proche.",
+    "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "",
+  };
+  const consigne = consigneMap[kind];
   const qs: RoundingQ[] = [];
   for (let i = 0; i < count; i++) {
-    if (kind === "cent_near") {
+    if (kind === "diz_near") {
+      let x: number;
+      do { x = rnd(11, 99); } while (x % 10 === 0);
+      qs.push({ prompt: String(x), answer: String(roundTo10(x)) });
+    } else if (kind === "cent_near_new") {
+      let x: number;
+      do { x = rnd(101, 999); } while (x % 100 === 0);
+      qs.push({ prompt: String(x), answer: String(roundTo100(x)) });
+    } else if (kind === "est_diz_2") {
+      let x = rnd(11, 99), y = rnd(11, 99);
+      const useAdd = Math.random() < 0.5;
+      if (!useAdd && x < y) [x, y] = [y, x];
+      const op = useAdd ? "+" : "−";
+      const ans = useAdd ? roundTo10(x) + roundTo10(y) : roundTo10(x) - roundTo10(y);
+      qs.push({ prompt: `${x} ${op} ${y} ≈`, answer: String(ans) });
+    } else if (kind === "est_diz_large_2") {
+      let x = rnd(101, 999), y = rnd(101, 999);
+      const useAdd = Math.random() < 0.5;
+      if (!useAdd && x < y) [x, y] = [y, x];
+      const op = useAdd ? "+" : "−";
+      const ans = useAdd ? roundTo10(x) + roundTo10(y) : roundTo10(x) - roundTo10(y);
+      qs.push({ prompt: `${x} ${op} ${y} ≈`, answer: String(ans) });
+    } else if (kind === "est_diz_three") {
+      let a: number, b: number, c: number, op1: "+" | "−", op2: "+" | "−", ans: number;
+      let tries = 0;
+      do {
+        a = rnd(11, 999); b = rnd(11, 999); c = rnd(11, 999);
+        op1 = Math.random() < 0.5 ? "+" : "−";
+        op2 = Math.random() < 0.5 ? "+" : "−";
+        ans = roundTo10(a) + (op1 === "+" ? roundTo10(b) : -roundTo10(b)) + (op2 === "+" ? roundTo10(c) : -roundTo10(c));
+        tries++;
+      } while (ans < 0 && tries < 30);
+      if (ans! < 0) { op1 = "+"; op2 = "+"; ans = roundTo10(a!) + roundTo10(b!) + roundTo10(c!); }
+      qs.push({ prompt: `${a!} ${op1!} ${b!} ${op2!} ${c!} ≈`, answer: String(ans!) });
+    } else if (kind === "cent_near") {
       const x = rnd(101, 999);
       qs.push({ prompt: `Arrondissez ${x} à la centaine la plus proche.`, answer: String(roundTo100(x)) });
     } else if (kind === "thou_near") {
@@ -436,30 +482,20 @@ function genRounding(kind: "cent_near" | "thou_near" | "est_add" | "est_sub" | "
       qs.push({ prompt: `Arrondissez ${x} au millier le plus proche.`, answer: String(roundTo1000(x)) });
     } else if (kind === "est_add") {
       const x = rnd(1, 999), y = rnd(1, 999);
-      const ans = roundTo100(x) + roundTo100(y);
-      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(ans) });
+      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
     } else if (kind === "est_sub") {
       let x = rnd(1, 999), y = rnd(1, 999);
       if (x < y) [x, y] = [y, x];
-      const ans = roundTo100(x) - roundTo100(y);
-      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(ans) });
+      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
     } else {
-      // est_mixed: 3 numbers with 2 mixed operators
       const x = rnd(1, 999), y = rnd(1, 999), z = rnd(1, 999);
-      const useAddFirst = Math.random() < 0.5;
-      let prompt: string;
-      let ans: number;
-      if (useAddFirst) {
-        prompt = `${x} + ${y} − ${z} ≈ ?`;
-        ans = roundTo100(x) + roundTo100(y) - roundTo100(z);
-      } else {
-        prompt = `${x} − ${y} + ${z} ≈ ?`;
-        ans = roundTo100(x) - roundTo100(y) + roundTo100(z);
-      }
+      const addFirst = Math.random() < 0.5;
+      const prompt = addFirst ? `${x} + ${y} − ${z} ≈ ?` : `${x} − ${y} + ${z} ≈ ?`;
+      const ans = addFirst ? roundTo100(x) + roundTo100(y) - roundTo100(z) : roundTo100(x) - roundTo100(y) + roundTo100(z);
       qs.push({ prompt, answer: String(ans) });
     }
   }
-  return { questions: qs, exNum, count };
+  return { questions: qs, exNum, count, consigne, kind };
 }
 
 function genRoundingMixed(exNum: number, count: number): RoundingConfig {
@@ -468,16 +504,14 @@ function genRoundingMixed(exNum: number, count: number): RoundingConfig {
   for (let i = 0; i < count; i++) {
     if (i < halfAdd) {
       const x = rnd(1, 999), y = rnd(1, 999);
-      const ans = roundTo100(x) + roundTo100(y);
-      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(ans) });
+      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
     } else {
       let x = rnd(1, 999), y = rnd(1, 999);
       if (x < y) [x, y] = [y, x];
-      const ans = roundTo100(x) - roundTo100(y);
-      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(ans) });
+      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
     }
   }
-  return { questions: qs, exNum, count };
+  return { questions: qs, exNum, count, consigne: "", kind: "mixed" };
 }
 
 // ── Fraction generators ───────────────────────────────────────────────────────
@@ -1091,23 +1125,27 @@ function RoundingExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
 }) {
-  const inputBase = "rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  const maxAnsLen = config.questions.reduce((m, q) => Math.max(m, Math.abs(parseInt(q.answer) || 0).toString().length), 0);
+  const tbW = maxAnsLen <= 2 ? "w-12" : maxAnsLen <= 3 ? "w-14" : "w-[4.5rem]";
+  const inputBase = `${tbW} shrink-0 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+  const isNew = config.consigne !== "";
 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] ?? false : null;
           const wrongField = ok === false;
           return (
-            <div key={i} className="flex min-h-[2.25rem] items-center gap-2 flex-wrap">
+            <div key={i} className={`flex items-center gap-2${isNew ? "" : " flex-wrap min-h-[2.25rem]"}`}>
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.prompt}</span>
+              <span className={`${isNew ? "shrink-0 font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)]`}>{q.prompt}</span>
               {wrongField
-                ? <div className={`${inputBase} ${CLS_WRONG_INL} min-w-[5rem] flex items-center justify-center gap-0.5`}>
+                ? <div className={`${inputBase} ${CLS_WRONG_INL} flex items-center justify-center gap-0.5`}>
                     <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
                     <span className="text-[var(--color-text-primary)] text-xs font-bold ml-1">{q.answer}</span>
                   </div>
@@ -1117,7 +1155,7 @@ function RoundingExercise({
                     value={v}
                     disabled={validated}
                     onChange={e => onChange(i, e.target.value)}
-                    className={`${inputBase} min-w-[5rem] ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
+                    className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
                   />
               }
             </div>
@@ -1373,17 +1411,18 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "expr_comparison", lesson, config: { questions: [...genExprComp(op, [1, 99], 5, 2).questions, ...genExprComp(op, [100, 999], 5, 2).questions], exNum: 5, op } });
     } else if (sid === "A2-3") {
       // Entraînement arrondi/estimation
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 5) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("thou_near", 2, 5) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_add", 3, 5) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_sub", 4, 5) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_mixed", 5, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("diz_near", 1, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near_new", 2, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_2", 3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_large_2", 4, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_three", 5, 5) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 3) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("thou_near", 2, 3) });
-      steps.push({ kind: "rounding_group", lesson, config: genRoundingMixed(3, 5) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_mixed", 4, 4) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("diz_near", 1, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near_new", 2, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_2", 3, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_large_2", 4, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_three", 5, 3) });
     } else if (sid === "A3-1") {
       // Tables de multiplications — entraînement
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 6], 1) });
@@ -2404,15 +2443,13 @@ export function GenericModuleContent({
       setRoundingValidated(true);
     };
     stepReset = () => {
-      const kind = cfg.questions[0]?.prompt.includes("centaine") ? "cent_near"
-        : cfg.questions[0]?.prompt.includes("millier") ? "thou_near"
-        : cfg.questions[0]?.prompt.includes("≈") && cfg.count <= 3 ? "est_add"
-        : "est_mixed";
-      setRoundingOverrideConfigs(prev => ({ ...prev, [stepIdx]: genRounding(kind as Parameters<typeof genRounding>[0], cfg.exNum, cfg.count) }));
+      const rk = cfg.kind as RoundingKind;
+      const newCfg = (rk === "mixed") ? genRoundingMixed(cfg.exNum, cfg.count) : genRounding(rk, cfg.exNum, cfg.count);
+      setRoundingOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
       setRoundingAnswers(Array(cfg.count).fill(""));
       setRoundingValidated(false);
       setRoundingResults(Array(cfg.count).fill(false));
-      setRoundingResetKey(k => k + 1);
+      setRoundingResetKey(n => n + 1);
     };
   }
 
