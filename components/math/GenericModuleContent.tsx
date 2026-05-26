@@ -2996,7 +2996,7 @@ export function GenericModuleContent({
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
-                <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3 space-y-2">
+                <div key={qi} className="space-y-2">
                   <div className="flex items-center gap-1.5">
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
                     {q.allNums.map((n, ni) => {
@@ -3023,7 +3023,7 @@ export function GenericModuleContent({
                         );
                       }
                       return (
-                        <span key={ni} className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded bg-[var(--color-bg-secondary)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                        <span key={ni} className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
                       );
                     })}
                   </div>
