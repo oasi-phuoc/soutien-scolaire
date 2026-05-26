@@ -53,6 +53,53 @@ export function mergeProgress(
   const cloudTime = cloud.lastActivityAt ? Date.parse(cloud.lastActivityAt) : 0;
   const lastActivityAt = localTime >= cloudTime ? local.lastActivityAt : cloud.lastActivityAt;
 
+  // Merge commProgress: union of all true entries
+  const mergedComm: Record<string, boolean> = {
+    ...(cloud.commProgress ?? {}),
+    ...(local.commProgress ?? {}),
+  };
+
+  // Merge lectureProgress: take higher state rank for each key
+  const stateRank = { locked: 0, available: 1, in_progress: 2, completed: 3 } as const;
+  type LectureState = keyof typeof stateRank;
+  const localLecture = local.lectureProgress;
+  const cloudLecture = cloud.lectureProgress;
+  let mergedLecture = cloudLecture ?? localLecture;
+  if (localLecture && cloudLecture) {
+    const mergedModules: Record<string, string> = { ...cloudLecture.modules };
+    for (const [k, v] of Object.entries(localLecture.modules)) {
+      const cr = stateRank[(cloudLecture.modules[k] as LectureState) ?? "locked"] ?? 0;
+      const lr = stateRank[(v as LectureState) ?? "locked"] ?? 0;
+      mergedModules[k] = lr > cr ? v : (cloudLecture.modules[k] ?? v);
+    }
+    const mergedSubs: Record<string, string> = { ...cloudLecture.submodules };
+    for (const [k, v] of Object.entries(localLecture.submodules)) {
+      const cr = stateRank[(cloudLecture.submodules[k] as LectureState) ?? "locked"] ?? 0;
+      const lr = stateRank[(v as LectureState) ?? "locked"] ?? 0;
+      mergedSubs[k] = lr > cr ? v : (cloudLecture.submodules[k] ?? v);
+    }
+    const mergedEvals: Record<string, { grade: number; passed: boolean; total: number; date: string }> = {
+      ...(cloudLecture.evaluations ?? {}),
+    };
+    for (const [k, v] of Object.entries(localLecture.evaluations ?? {})) {
+      const existing = mergedEvals[k];
+      if (!existing || v.grade > existing.grade) mergedEvals[k] = v;
+    }
+    const mergedRevisions: Record<string, string> = { ...cloudLecture.revisions };
+    for (const [k, v] of Object.entries(localLecture.revisions ?? {})) {
+      const cr = stateRank[(cloudLecture.revisions?.[k] as LectureState) ?? "locked"] ?? 0;
+      const lr = stateRank[(v as LectureState) ?? "locked"] ?? 0;
+      mergedRevisions[k] = lr > cr ? v : (cloudLecture.revisions?.[k] ?? v);
+    }
+    mergedLecture = {
+      version: 2,
+      modules: mergedModules,
+      submodules: mergedSubs,
+      evaluations: mergedEvals,
+      revisions: mergedRevisions,
+    };
+  }
+
   return {
     ...cloud,
     ...local,
@@ -61,6 +108,8 @@ export function mergeProgress(
     submoduleScores: mergedScores,
     lastActivityAt,
     version: 2,
+    commProgress: Object.keys(mergedComm).length > 0 ? mergedComm : undefined,
+    lectureProgress: mergedLecture,
   };
 }
 

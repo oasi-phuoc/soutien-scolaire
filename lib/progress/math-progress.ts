@@ -147,6 +147,22 @@ export function loadProgress(): StoredProgressV1 {
         p.math[m.id]!.subTotal = m.submodules.length;
       }
     }
+    // Backfill comm/lecture from their own keys if not yet embedded
+    if (!p.commProgress) {
+      try {
+        const cr = localStorage.getItem("soutien-comm-progress-v1");
+        if (cr) p = { ...p, commProgress: JSON.parse(cr) as Record<string, boolean> };
+      } catch { /* ignore */ }
+    }
+    if (!p.lectureProgress) {
+      try {
+        const lr = localStorage.getItem("soutien-lecture-v2");
+        if (lr) {
+          const parsed = JSON.parse(lr) as { version?: number };
+          if (parsed.version === 2) p = { ...p, lectureProgress: parsed as StoredProgressV1["lectureProgress"] };
+        }
+      } catch { /* ignore */ }
+    }
     return recomputeLocks(p);
   } catch {
     return createInitialProgress();

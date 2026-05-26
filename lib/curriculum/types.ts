@@ -85,4 +85,14 @@ export type StoredProgressV1 = {
   submoduleScores?: Record<string, { score: number; max: number; grade: number }>;
   /** Leçons français complétées (slug → "completed"). */
   frenchLessons?: Record<string, "completed">;
+  /** Progression communication (id leçon → complété). */
+  commProgress?: Record<string, boolean>;
+  /** Progression lecture (modules, sous-modules, évaluations). */
+  lectureProgress?: {
+    version: 2;
+    modules: Record<string, string>;
+    submodules: Record<string, string>;
+    evaluations?: Record<string, { grade: number; passed: boolean; total: number; date: string }>;
+    revisions?: Record<string, string>;
+  };
 };

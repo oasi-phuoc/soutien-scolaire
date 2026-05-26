@@ -321,10 +321,19 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
       const prev: Record<string, boolean> = raw ? JSON.parse(raw) : {};
       prev[lesson.id] = true;
       localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
+      // Also embed in main progress blob so ProgressSyncProvider can sync to cloud
+      const MAIN_KEY = "soutien-learning-progress-v1";
+      const mainRaw = localStorage.getItem(MAIN_KEY);
+      if (mainRaw) {
+        const main = JSON.parse(mainRaw) as Record<string, unknown>;
+        main.commProgress = prev;
+        localStorage.setItem(MAIN_KEY, JSON.stringify(main));
+        window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
+      }
     } catch {
       /* ignore */
     }
-    router.push("/communication");
+    router.push("/francais?tab=communication");
   }
 
   const score = results.filter(Boolean).length;

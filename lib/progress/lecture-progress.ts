@@ -216,6 +216,17 @@ export function loadLectureProgress(): LectureProgressV2 {
 export function saveLectureProgress(p: LectureProgressV2): void {
   if (typeof window === "undefined") return;
   localStorage.setItem(LECTURE_PROGRESS_KEY, JSON.stringify(p));
+  // Also embed in main progress blob so ProgressSyncProvider can sync to cloud
+  try {
+    const MAIN_KEY = "soutien-learning-progress-v1";
+    const raw = localStorage.getItem(MAIN_KEY);
+    if (raw) {
+      const main = JSON.parse(raw) as Record<string, unknown>;
+      main.lectureProgress = p;
+      localStorage.setItem(MAIN_KEY, JSON.stringify(main));
+      window.dispatchEvent(new CustomEvent("progress-saved", { detail: main }));
+    }
+  } catch { /* ignore */ }
 }
 
 export function saveEvaluationResult(

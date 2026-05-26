@@ -5,6 +5,16 @@ import { loadProgress, saveProgress, MATH_PROGRESS_KEY } from "@/lib/progress/ma
 import { mergeProgress } from "@/lib/progress/mergeProgress";
 import { loadProgressFromCloud, syncProgressToCloud } from "@/app/actions/progress";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import type { StoredProgressV1 } from "@/lib/curriculum/types";
+
+function restoreSubKeys(p: StoredProgressV1) {
+  if (p.commProgress) {
+    localStorage.setItem("soutien-comm-progress-v1", JSON.stringify(p.commProgress));
+  }
+  if (p.lectureProgress) {
+    localStorage.setItem("soutien-lecture-v2", JSON.stringify(p.lectureProgress));
+  }
+}
 
 function debounce<T extends unknown[]>(fn: (...args: T) => void, ms: number) {
   let timer: ReturnType<typeof setTimeout> | null = null;
@@ -32,6 +42,7 @@ export function ProgressSyncProvider() {
       if (cloudProgress) {
         const merged = mergeProgress(localProgress, cloudProgress);
         saveProgress(merged);
+        restoreSubKeys(merged);
         // Push merged back to cloud (silent)
         syncProgressToCloud(merged).catch(() => {});
       } else {
@@ -49,6 +60,7 @@ export function ProgressSyncProvider() {
         if (cloudProgress) {
           const merged = mergeProgress(localProgress, cloudProgress);
           saveProgress(merged);
+          restoreSubKeys(merged);
           syncProgressToCloud(merged).catch(() => {});
         } else {
           syncProgressToCloud(localProgress).catch(() => {});
