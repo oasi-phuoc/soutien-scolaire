@@ -285,8 +285,10 @@ function ExprCompExercise({
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
 }) {
+  const maxVal = Math.max(...config.questions.flatMap(q => [Math.abs(q.la), Math.abs(q.lb), Math.abs(q.ra), Math.abs(q.rb)]));
+  const numW = maxVal >= 1000 ? "4ch" : maxVal >= 100 ? "3ch" : "2ch";
   const num = (n: number) => (
-    <span className="font-mono text-[var(--color-text-primary)]">{n}</span>
+    <span className="shrink-0 text-right text-[var(--color-text-primary)]" style={{ width: numW }}>{n}</span>
   );
   return (
     <div className="space-y-4">
@@ -296,7 +298,7 @@ function ExprCompExercise({
           {config.questions.map((q, i) => (
             <Fragment key={i}>
               <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="justify-self-end font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+              <span className="justify-self-end inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
@@ -316,7 +318,7 @@ function ExprCompExercise({
                   return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
               </div>
-              <span className="font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
+              <span className="inline-flex items-center gap-1 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
             </Fragment>
           ))}
         </div>
@@ -2634,13 +2636,13 @@ export function GenericModuleContent({
             <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
             <div className="flex gap-3">
-              <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
-                Continuer
-              </button>
               <button type="button" onClick={cancelEval}
-                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
                 Annuler
+              </button>
+              <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                Continuer
               </button>
             </div>
           </div>
