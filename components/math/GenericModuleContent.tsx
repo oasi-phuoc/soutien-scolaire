@@ -2996,8 +2996,8 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`;
-              const inputRowCls = "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
+              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-3 py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
+              const inputRowCls = "w-24 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
                 <div key={i} className="flex items-center gap-2">
                   <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -3030,7 +3030,7 @@ export function GenericModuleContent({
           <div className="space-y-5">
             {activeSeqCompleteConfig.questions.map((q, qi) => {
               const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
-              const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+              const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : activeSeqCompleteConfig.exNum === 5 ? "w-12" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
