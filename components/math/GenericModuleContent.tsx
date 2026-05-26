@@ -2959,8 +2959,12 @@ export function GenericModuleContent({
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
               const isEx3 = currentStep.config.exNum === 3;
-              const chipW = isEx3 ? "w-10" : "w-20";
-              const inputRowCls = "w-24 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
+              const chipCls = isEx3
+                ? "shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]"
+                : "w-20 shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
+              const inputRowCls = isEx3
+                ? "min-w-[4.5rem] rounded-lg border px-3 py-2 text-sm font-mono outline-none transition-colors"
+                : "w-24 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
               const ruleInput = wrong ? (
                 <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
                   <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
@@ -2977,7 +2981,7 @@ export function GenericModuleContent({
                   <div key={i} className="flex items-center gap-2">
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {q.nums.map((n, ni) => (
-                      <span key={ni} className={`${chipW} shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                      <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
                     ))}
                     {ruleInput}
                   </div>
@@ -2988,7 +2992,7 @@ export function GenericModuleContent({
                   <div className="flex items-center gap-2">
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {q.nums.map((n, ni) => (
-                      <span key={ni} className={`${chipW} shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                      <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
                     ))}
                   </div>
                   <div className="flex items-center gap-2">
