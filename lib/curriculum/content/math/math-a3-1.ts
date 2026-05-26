@@ -68,7 +68,7 @@ export const MATH_A3_1_LESSON: MathSubmoduleLesson = {
             },
           ],
         },
-        { type: "plain", fr: "" },
+        { type: "heading", fr: "Table de multiplications", black: true },
         { type: "mult_table" },
       ],
     },

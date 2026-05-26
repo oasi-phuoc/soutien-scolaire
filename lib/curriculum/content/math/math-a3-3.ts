@@ -40,7 +40,7 @@ export const MATH_A3_3_LESSON: MathSubmoduleLesson = {
           labelFr: "",
           itemsFr: ["On ne peut pas diviser par 0. La division par zéro est impossible."],
         },
-        { type: "plain", fr: "" },
+        { type: "heading", fr: "Table de divisions", black: true },
         { type: "div_table" },
       ],
     },
