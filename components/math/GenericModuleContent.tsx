@@ -2960,10 +2960,10 @@ export function GenericModuleContent({
               const correctAns = `${q.op}${q.step}`;
               const isEx3 = currentStep.config.exNum === 3;
               const chipCls = isEx3
-                ? "shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]"
+                ? "shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]"
                 : "w-20 shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
               const inputRowCls = isEx3
-                ? "min-w-[4.5rem] rounded-lg border px-3 py-2 text-sm font-mono outline-none transition-colors"
+                ? "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors"
                 : "w-24 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
               const ruleInput = wrong ? (
                 <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
