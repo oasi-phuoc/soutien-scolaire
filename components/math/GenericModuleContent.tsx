@@ -2644,19 +2644,20 @@ export function GenericModuleContent({
           <p className="text-sm text-[var(--color-text-secondary)]">
             Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
           </p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
-            {activeEncadrementConfig.questions.map((q, i) => {
-              const a = encadrementAnswers[i] ?? {lo:"",hi:""};
-              const ok = encadrementValidated ? encadrementResults[i] : null;
-              const wrong = ok === false;
-              const inputCls = "w-24 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
-              const symCls = "text-sm font-bold text-[var(--color-text-secondary)]";
-              return (
-                <div key={i} className="flex items-start gap-3">
-                  <span className="mt-1.5 w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <div className="flex flex-col items-center gap-0.5">
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+            <div className="grid items-center gap-x-2 gap-y-3"
+              style={{ gridTemplateColumns: "1.5rem 5rem 1.25rem minmax(3rem,auto) 1.25rem 5rem" }}>
+              {activeEncadrementConfig.questions.map((q, i) => {
+                const a = encadrementAnswers[i] ?? {lo:"",hi:""};
+                const ok = encadrementValidated ? encadrementResults[i] : null;
+                const wrong = ok === false;
+                const inputCls = "w-full rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+                const symCls = "text-sm font-bold text-[var(--color-text-secondary)] text-center";
+                return (
+                  <Fragment key={i}>
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {wrong ? (
-                      <div className={`${inputCls} ${CLS_WRONG} flex h-8 items-center justify-center gap-1`}>
+                      <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
                         <span className="line-through text-amber-500 text-xs">{a.lo||"—"}</span>
                         <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.lo}</span>
                       </div>
@@ -2666,10 +2667,10 @@ export function GenericModuleContent({
                         className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                     )}
                     <span className={symCls}>&lt;</span>
-                    <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                    <span className="font-mono text-sm font-bold text-[var(--color-text-primary)] text-center">{q.n.toLocaleString("fr-CH")}</span>
                     <span className={symCls}>&lt;</span>
                     {wrong ? (
-                      <div className={`${inputCls} ${CLS_WRONG} flex h-8 items-center justify-center gap-1`}>
+                      <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
                         <span className="line-through text-amber-500 text-xs">{a.hi||"—"}</span>
                         <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.hi}</span>
                       </div>
@@ -2678,10 +2679,10 @@ export function GenericModuleContent({
                         onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, hi: e.target.value} : v))}
                         className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                     )}
-                  </div>
-                </div>
-              );
-            })}
+                  </Fragment>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
@@ -2703,7 +2704,7 @@ export function GenericModuleContent({
                     {(["pair","impair"] as const).map((opt, oi) => {
                       const isSelected = sel === opt;
                       const isCorrect = opt === q.answer;
-                      let cls = "px-4 py-1.5 text-sm font-bold transition-colors focus:outline-none ";
+                      let cls = "w-[4.5rem] py-1.5 text-sm font-bold text-center transition-colors focus:outline-none ";
                       if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
                       if (!oddEvenValidated) {
                         cls += isSelected
