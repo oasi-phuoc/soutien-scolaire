@@ -2952,7 +2952,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
+          <div className="space-y-4">
             {currentStep.config.questions.map((q, i) => {
               const v = seqRuleAnswers[i] ?? "";
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
