@@ -93,7 +93,7 @@ type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson 
 type NumberSelectConfig = { mode: "gt"|"lt"|"between"; threshold: number; threshold2?: number; numbers: number[]; exNum: number; consigne: string };
 type NumberSelectStep = { kind: "number_select"; lesson: MathSubmoduleLesson; config: NumberSelectConfig };
 
-type EncadrementQ = { n: number; lo: number; hi: number };
+type EncadrementQ = { n: number; lo: number; hi: number; dir: "<" | ">" };
 type EncadrementConfig = { questions: EncadrementQ[]; exNum: number; unit: 10|100 };
 type EncadrementStep = { kind: "encadrement"; lesson: MathSubmoduleLesson; config: EncadrementConfig };
 
@@ -619,10 +619,12 @@ function genNumberSelect(mode: "gt"|"lt"|"between", exNum: number): NumberSelect
 function genEncadrement(unit: 10|100, exNum: number, count = 5): EncadrementConfig {
   const questions: EncadrementQ[] = [];
   for (let i = 0; i < count; i++) {
-    const n = unit === 10 ? rnd(11, 999) : rnd(101, 99999);
+    let n: number;
+    do { n = unit === 10 ? rnd(11, 999) : rnd(101, 99999); } while (n % unit === 0);
     const lo = Math.floor(n / unit) * unit;
     const hi = lo + unit;
-    questions.push({ n, lo, hi });
+    const dir: "<" | ">" = Math.random() < 0.5 ? "<" : ">";
+    questions.push({ n, lo, hi, dir });
   }
   return { questions, exNum, unit };
 }
@@ -686,9 +688,8 @@ function regenNLMultiConfig(config: NLMultiConfig): NLMultiConfig {
 
 function genOrdering(direction: "asc"|"desc", exNum: number): OrderingConfig {
   const questions: OrderingQ[] = Array.from({ length: 2 }, () => {
-    const count = rnd(5, 7);
     const nums = new Set<number>();
-    while (nums.size < count) nums.add(rnd(1, 9999));
+    while (nums.size < 4) nums.add(rnd(1, 9999));
     return { numbers: [...nums] };
   });
   return { questions, direction, exNum };
@@ -710,9 +711,14 @@ function genSeqComplete(range: [number, number], exNum: number, count: number, b
   const questions: SeqCompleteQ[] = Array.from({ length: count }, () => {
     const step = rnd(1, Math.max(1, Math.floor((range[1] - range[0]) / 10)));
     const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
-    const start = rnd(range[0], Math.max(range[0], range[1] - 6 * step));
-    const allNums = [0,1,2,3,4,5,6].map(i => op === "+" ? start + i * step : start - i * step);
-    const available = [1,2,3,4,5];
+    let start: number;
+    if (op === "+") {
+      start = rnd(range[0], Math.max(range[0], range[1] - 4 * step));
+    } else {
+      start = rnd(Math.max(range[0], 4 * step + 1), Math.max(range[0], 4 * step + 1, range[1]));
+    }
+    const allNums = [0,1,2,3,4].map(i => op === "+" ? start + i * step : start - i * step);
+    const available = [1,2,3,4];
     const blankIdxs: number[] = [];
     while (blankIdxs.length < blanks && available.length > 0) {
       const idx = rnd(0, available.length - 1);
@@ -2731,45 +2737,52 @@ export function GenericModuleContent({
           <p className="text-sm text-[var(--color-text-secondary)]">
             Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
           </p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-            <div className="grid items-center gap-x-2 gap-y-3"
-              style={{ gridTemplateColumns: "1.5rem 5rem 1.25rem minmax(3rem,auto) 1.25rem 5rem" }}>
-              {activeEncadrementConfig.questions.map((q, i) => {
-                const a = encadrementAnswers[i] ?? {lo:"",hi:""};
-                const ok = encadrementValidated ? encadrementResults[i] : null;
-                const wrong = ok === false;
-                const inputCls = "w-full rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
-                const symCls = "text-sm font-bold text-[var(--color-text-secondary)] text-center";
-                return (
-                  <Fragment key={i}>
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                    {wrong ? (
-                      <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                        <span className="line-through text-amber-500 text-xs">{a.lo||"—"}</span>
-                        <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.lo}</span>
-                      </div>
-                    ) : (
-                      <input type="number" inputMode="numeric" value={a.lo} disabled={encadrementValidated}
-                        onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, lo: e.target.value} : v))}
-                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                    )}
-                    <span className={symCls}>&lt;</span>
-                    <span className="font-mono text-sm font-bold text-[var(--color-text-primary)] text-center">{q.n.toLocaleString("fr-CH")}</span>
-                    <span className={symCls}>&lt;</span>
-                    {wrong ? (
-                      <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                        <span className="line-through text-amber-500 text-xs">{a.hi||"—"}</span>
-                        <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.hi}</span>
-                      </div>
-                    ) : (
-                      <input type="number" inputMode="numeric" value={a.hi} disabled={encadrementValidated}
-                        onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, hi: e.target.value} : v))}
-                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                    )}
-                  </Fragment>
-                );
-              })}
-            </div>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeEncadrementConfig.questions.map((q, i) => {
+              const a = encadrementAnswers[i] ?? {lo:"",hi:""};
+              const ok = encadrementValidated ? encadrementResults[i] : null;
+              const wrong = ok === false;
+              const dir = q.dir ?? "<";
+              const firstKey = dir === "<" ? "lo" : "hi";
+              const secondKey = dir === "<" ? "hi" : "lo";
+              const firstExpected = dir === "<" ? q.lo : q.hi;
+              const secondExpected = dir === "<" ? q.hi : q.lo;
+              const firstVal = a[firstKey] ?? "";
+              const secondVal = a[secondKey] ?? "";
+              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const symCls = "shrink-0 text-sm font-bold text-[var(--color-text-secondary)]";
+              const numCls = "w-20 shrink-0 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
+              const firstBlock = wrong ? (
+                <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                  <span className="line-through text-amber-500 text-xs">{firstVal||"—"}</span>
+                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{firstExpected}</span>
+                </div>
+              ) : (
+                <input type="number" inputMode="numeric" value={firstVal} disabled={encadrementValidated}
+                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [firstKey]: e.target.value} : v))}
+                  className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+              );
+              const secondBlock = wrong ? (
+                <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                  <span className="line-through text-amber-500 text-xs">{secondVal||"—"}</span>
+                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{secondExpected}</span>
+                </div>
+              ) : (
+                <input type="number" inputMode="numeric" value={secondVal} disabled={encadrementValidated}
+                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [secondKey]: e.target.value} : v))}
+                  className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+              );
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {firstBlock}
+                  <span className={symCls}>{dir}</span>
+                  <span className={numCls}>{q.n.toLocaleString("fr-CH")}</span>
+                  <span className={symCls}>{dir}</span>
+                  {secondBlock}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -2875,9 +2888,9 @@ export function GenericModuleContent({
               const sel = orderingSelected[qi] ?? [];
               const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
               const ok = orderingValidated ? orderingResults[qi] : null;
+              const sep = currentStep.config.direction === "asc" ? "<" : ">";
               return (
-                <div key={qi} className="space-y-3">
-                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                <div key={qi} className="space-y-2">
                   <div className="flex flex-wrap gap-2">
                     {q.numbers.map((n, ni) => {
                       const isSelected = sel.includes(n);
@@ -2909,30 +2922,24 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {sel.length > 0 && (
-                    <div className="rounded-xl border border-dashed border-[var(--color-border-default)] p-3">
-                      <p className="text-xs text-[var(--color-text-secondary)] mb-1">Votre ordre :</p>
-                      <div className="flex flex-wrap items-center gap-1">
-                        {sel.map((n, si) => (
-                          <Fragment key={si}>
-                            <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
-                            {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)]">{currentStep.config.direction === "asc" ? "<" : ">"}</span>}
-                          </Fragment>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <div className="flex flex-wrap items-center gap-1">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)] mr-1">{qi + 1}. Votre ordre :</span>
+                    {sel.length > 0 ? sel.map((n, si) => (
+                      <Fragment key={si}>
+                        <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                        {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                      </Fragment>
+                    )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                  </div>
                   {orderingValidated && ok === false && (
-                    <div className="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 p-3">
-                      <p className="text-xs text-amber-600 mb-1">Ordre correct :</p>
-                      <div className="flex flex-wrap items-center gap-1">
-                        {sorted.map((n, si) => (
-                          <Fragment key={si}>
-                            <span className="font-mono text-sm font-bold text-amber-700">{n.toLocaleString("fr-CH")}</span>
-                            {si < sorted.length - 1 && <span className="text-amber-500">{currentStep.config.direction === "asc" ? "<" : ">"}</span>}
-                          </Fragment>
-                        ))}
-                      </div>
+                    <div className="flex flex-wrap items-center gap-1">
+                      <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
+                      {sorted.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-amber-700">{n.toLocaleString("fr-CH")}</span>
+                          {si < sorted.length - 1 && <span className="text-amber-500 text-xs">{sep}</span>}
+                        </Fragment>
+                      ))}
                     </div>
                   )}
                 </div>
@@ -2953,30 +2960,32 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors";
+              const chipW = currentStep.config.exNum <= 3 ? "w-14" : "w-20";
+              const inputRowCls = "flex-1 min-w-0 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
               return (
-                <div key={i} className="flex items-center gap-3 flex-wrap">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <div key={i} className="space-y-1.5">
                   <div className="flex items-center gap-2">
                     {q.nums.map((n, ni) => (
                       <Fragment key={ni}>
-                        <span className="rounded bg-[var(--color-bg-secondary)] px-2 py-1 font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
-                        {ni < q.nums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                        <span className={`${chipW} shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                        {ni < q.nums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
                       </Fragment>
                     ))}
                   </div>
-                  <span className="text-sm text-[var(--color-text-secondary)]">Règle :</span>
-                  {wrong ? (
-                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                      <span className="text-xs font-bold">{correctAns}</span>
-                    </div>
-                  ) : (
-                    <input type="text" value={v} disabled={seqRuleValidated}
-                      onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
-                      placeholder="+N ou -N"
-                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                  )}
+                  <div className="flex items-center gap-2">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}. Règle :</span>
+                    {wrong ? (
+                      <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                        <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                        <span className="text-xs font-bold">{correctAns}</span>
+                      </div>
+                    ) : (
+                      <input type="text" value={v} disabled={seqRuleValidated}
+                        onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                        placeholder="± nombre"
+                        className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                    )}
+                  </div>
                 </div>
               );
             })}
@@ -2991,11 +3000,13 @@ export function GenericModuleContent({
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
           <div className="space-y-5">
             {currentStep.config.questions.map((q, qi) => {
+              const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
+              const cellW = maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+              const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
-                <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3">
-                  <div className="flex items-center gap-1 flex-wrap">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)] mr-1">{qi + 1}.</span>
+                <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3 space-y-2">
+                  <div className="flex items-center gap-1.5">
                     {q.allNums.map((n, ni) => {
                       const blankIdx = q.blankIdxs.indexOf(ni);
                       if (blankIdx !== -1) {
@@ -3003,13 +3014,12 @@ export function GenericModuleContent({
                         const v = seqCompleteAnswers[qi]?.[bIdx] ?? "";
                         const expected = q.allNums[ni]!;
                         const wrong = seqCompleteValidated && parseInt(v) !== expected;
-                        const inputCls = "w-16 rounded border px-1 py-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
                         return (
                           <Fragment key={ni}>
                             {wrong ? (
                               <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                                <span className="line-through text-amber-500 text-[10px]">{v||"—"}</span>
-                                <span className="text-[10px] font-bold">{expected.toLocaleString("fr-CH")}</span>
+                                <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                                <span className="text-xs font-bold">{expected.toLocaleString("fr-CH")}</span>
                               </div>
                             ) : (
                               <input type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
@@ -3021,23 +3031,26 @@ export function GenericModuleContent({
                                 })}
                                 className={`${inputCls} ${seqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                             )}
-                            {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                            {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
                           </Fragment>
                         );
                       }
                       return (
                         <Fragment key={ni}>
-                          <span className="rounded bg-[var(--color-bg-secondary)] px-2 py-1 font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
-                          {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                          <span className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded bg-[var(--color-bg-secondary)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                          {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
                         </Fragment>
                       );
                     })}
                   </div>
-                  {seqCompleteValidated && (
-                    <p className="mt-2 text-xs font-bold text-[var(--color-text-secondary)]">
-                      Règle : {q.step > 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
-                    </p>
-                  )}
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {seqCompleteValidated && (
+                      <span className="text-xs font-bold text-[var(--color-text-secondary)]">
+                        Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
+                      </span>
+                    )}
+                  </div>
                 </div>
               );
             })}
