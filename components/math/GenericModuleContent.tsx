@@ -365,8 +365,8 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
       <polygon points={`${W - PR + 2},${lineY - 4} ${W - PR + 2},${lineY + 4} ${W - PR + 9},${lineY}`} fill="currentColor" />
       {ticks.map((t) => (
         <g key={t.val}>
-          <line x1={t.x} y1={t.labeled ? lineY - 6 : lineY - 3} x2={t.x} y2={t.labeled ? lineY + 6 : lineY + 3}
-            stroke="currentColor" strokeWidth={t.labeled ? 1.5 : 1} />
+          <line x1={t.x} y1={t.labeled ? lineY - 6 : lineY - 2} x2={t.x} y2={t.labeled ? lineY + 6 : lineY + 2}
+            stroke="currentColor" strokeWidth={t.labeled ? 1.5 : 0.5} />
           {t.labeled && !t.isTarget && (
             <text x={t.x} y={labelY} textAnchor="middle" fontSize={fs} fill="currentColor">{t.val}</text>
           )}
@@ -669,6 +669,14 @@ function genNLCoarse(count: number): NLConfig[] {
     const target = candidates[rnd(0, candidates.length - 1)]!;
     return { start: p.start, end: p.end, step: p.step, divCount, labelEvery, target };
   });
+}
+
+function regenNLMultiConfig(config: NLMultiConfig): NLMultiConfig {
+  const questions = config.questions.map(q => {
+    const newNL = q.nlConfig.end <= 400 ? genNLFine(1)[0]! : genNLCoarse(1)[0]!;
+    return { ...q, nlConfig: newNL };
+  });
+  return { ...config, questions };
 }
 
 function genOrdering(direction: "asc"|"desc", exNum: number): OrderingConfig {
@@ -1812,6 +1820,8 @@ export function GenericModuleContent({
   const [roundingOverrideConfigs, setRoundingOverrideConfigs] = useState<Record<number, RoundingConfig>>({});
   const [numberSelectOverrideConfigs, setNumberSelectOverrideConfigs] = useState<Record<number, NumberSelectConfig>>({});
   const [encadrementOverrideConfigs, setEncadrementOverrideConfigs] = useState<Record<number, EncadrementConfig>>({});
+  const [oddEvenOverrideConfigs, setOddEvenOverrideConfigs] = useState<Record<number, OddEvenConfig>>({});
+  const [nlMultiOverrideConfigs, setNlMultiOverrideConfigs] = useState<Record<number, NLMultiConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
   // Fraction exercise state
@@ -1842,7 +1852,7 @@ export function GenericModuleContent({
   // A1.3 state
   const [numberSelectAnswers, setNumberSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
   const [numberSelectValidated, setNumberSelectValidated] = useState(false);
-  const [numberSelectResults, setNumberSelectResults] = useState<boolean[]>(() => Array(15).fill(false));
+  const [_numberSelectResults, setNumberSelectResults] = useState<boolean[]>(() => Array(15).fill(false));
 
   const [encadrementAnswers, setEncadrementAnswers] = useState<Array<{lo:string;hi:string}>>(() => Array(5).fill(null).map(()=>({lo:"",hi:""})));
   const [encadrementValidated, setEncadrementValidated] = useState(false);
@@ -2040,9 +2050,11 @@ export function GenericModuleContent({
           return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
         });
       } else if (currentStep.kind === "odd_even") {
-        currentResults = currentStep.config.questions.slice(0, 4).map((q, i) => oddEvenAnswers[i] === q.answer);
+        const oeActive = oddEvenOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = oeActive.questions.slice(0, 4).map((q, i) => oddEvenAnswers[i] === q.answer);
       } else if (currentStep.kind === "nl_multi") {
-        currentResults = currentStep.config.questions.map((q, i) => {
+        const nlActive = nlMultiOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = nlActive.questions.map((q, i) => {
           const ans = parseInt(nlMultiAnswers[i] ?? "");
           if (q.mode === "read") return ans === q.nlConfig.target;
           if (q.mode === "less") return !isNaN(ans) && ans < q.nlConfig.target;
@@ -2133,7 +2145,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, activeNumberSelectConfig, activeEncadrementConfig]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, activeNumberSelectConfig, activeEncadrementConfig, oddEvenOverrideConfigs, nlMultiOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2159,6 +2171,12 @@ export function GenericModuleContent({
     : null;
   const activeEncadrementConfig = currentStep?.kind === "encadrement"
     ? (encadrementOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeOddEvenConfig = currentStep?.kind === "odd_even"
+    ? (oddEvenOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeNlMultiConfig = currentStep?.kind === "nl_multi"
+    ? (nlMultiOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
@@ -2371,16 +2389,24 @@ export function GenericModuleContent({
   if (currentStep?.kind === "odd_even") {
     stepCanValidate = !oddEvenValidated;
     stepValidate = oddEvenValidated ? () => {} : () => {
-      setOddEvenResults(currentStep.config.questions.map((q, i) => oddEvenAnswers[i] === q.answer));
+      const cfg = oddEvenOverrideConfigs[stepIdx] ?? currentStep.config;
+      setOddEvenResults(cfg.questions.map((q, i) => oddEvenAnswers[i] === q.answer));
       setOddEvenValidated(true);
     };
-    stepReset = () => { setOddEvenAnswers(Array(5).fill(null)); setOddEvenValidated(false); setOddEvenResults(Array(5).fill(false)); };
+    stepReset = () => {
+      const newCfg = genOddEven(currentStep.config.exNum);
+      setOddEvenOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setOddEvenAnswers(Array(5).fill(null));
+      setOddEvenValidated(false);
+      setOddEvenResults(Array(5).fill(false));
+    };
   }
 
   if (currentStep?.kind === "nl_multi") {
     stepCanValidate = !nlMultiValidated;
     stepValidate = nlMultiValidated ? () => {} : () => {
-      const results = currentStep.config.questions.map((q, i) => {
+      const cfg = nlMultiOverrideConfigs[stepIdx] ?? currentStep.config;
+      const results = cfg.questions.map((q, i) => {
         const ans = parseInt(nlMultiAnswers[i] ?? "");
         if (q.mode === "read") return ans === q.nlConfig.target;
         if (q.mode === "less") return !isNaN(ans) && ans < q.nlConfig.target;
@@ -2389,7 +2415,14 @@ export function GenericModuleContent({
       setNlMultiResults(results);
       setNlMultiValidated(true);
     };
-    stepReset = () => { setNlMultiAnswers(Array(4).fill("")); setNlMultiValidated(false); setNlMultiResults(Array(4).fill(false)); };
+    stepReset = () => {
+      const cfg = nlMultiOverrideConfigs[stepIdx] ?? currentStep.config;
+      const newCfg = regenNLMultiConfig(cfg);
+      setNlMultiOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setNlMultiAnswers(Array(cfg.questions.length).fill(""));
+      setNlMultiValidated(false);
+      setNlMultiResults(Array(cfg.questions.length).fill(false));
+    };
   }
 
   if (currentStep?.kind === "ordering") {
@@ -2654,35 +2687,36 @@ export function GenericModuleContent({
       )}
 
       {/* Odd/Even exercise (A1.4) */}
-      {currentStep?.kind === "odd_even" && (
+      {!showEvalScore && currentStep?.kind === "odd_even" && activeOddEvenConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOddEvenConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Indiquez si chaque nombre est pair ou impair.</p>
           <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
-            {currentStep.config.questions.map((q, i) => {
+            {activeOddEvenConfig.questions.map((q, i) => {
               const sel = oddEvenAnswers[i];
               const ok = oddEvenValidated ? oddEvenResults[i] : null;
               return (
                 <div key={i} className="flex items-center gap-3">
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <span className="w-16 font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
-                  <div className="flex gap-2">
-                    {(["pair","impair"] as const).map(opt => {
+                  <div className="flex rounded-full border overflow-hidden border-[var(--color-border-default)]">
+                    {(["pair","impair"] as const).map((opt, oi) => {
                       const isSelected = sel === opt;
                       const isCorrect = opt === q.answer;
-                      let cls = "rounded-lg border px-3 py-1.5 text-sm font-bold transition-colors ";
+                      let cls = "px-4 py-1.5 text-sm font-bold transition-colors focus:outline-none ";
+                      if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
                       if (!oddEvenValidated) {
                         cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
-                          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                          ? "bg-[var(--color-accent-alg)] text-white"
+                          : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                       } else if (isSelected && isCorrect) {
-                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        cls += "bg-[var(--color-accent-alg)] text-white";
                       } else if (isSelected && !isCorrect) {
-                        cls += CLS_WRONG;
-                      } else if (!isSelected && isCorrect) {
-                        cls += CLS_WRONG;
+                        cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
+                      } else if (!isSelected && isCorrect && ok === false) {
+                        cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
                       } else {
-                        cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                        cls += "text-[var(--color-text-secondary)] opacity-40";
                       }
                       return (
                         <button key={opt} type="button" disabled={oddEvenValidated}
@@ -2693,9 +2727,6 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {oddEvenValidated && ok === true && (
-                    <span className="text-xs text-[var(--color-accent-alg)] font-bold">✓</span>
-                  )}
                 </div>
               );
             })}
@@ -2704,37 +2735,39 @@ export function GenericModuleContent({
       )}
 
       {/* Number line multi exercise (A1.4) */}
-      {currentStep?.kind === "nl_multi" && (
+      {!showEvalScore && currentStep?.kind === "nl_multi" && activeNlMultiConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">{currentStep.config.consigne}</p>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNlMultiConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">{activeNlMultiConfig.consigne}</p>
           <div className="space-y-5">
-            {currentStep.config.questions.map((q, i) => {
+            {activeNlMultiConfig.questions.map((q, i) => {
               const v = nlMultiAnswers[i] ?? "";
               const ok = nlMultiValidated ? nlMultiResults[i] : null;
               const wrong = ok === false;
-              const inputCls = "w-full rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const inputCls = "flex-1 rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
               let afterText = "";
               if (nlMultiValidated && q.mode === "read" && wrong) afterText = `Réponse attendue : ${q.nlConfig.target}`;
               else if (nlMultiValidated && q.mode === "less" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
               else if (nlMultiValidated && q.mode === "more" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
               return (
                 <div key={i} className="space-y-2">
-                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
                     <NumberLineSVG config={q.nlConfig} />
                   </div>
-                  {wrong ? (
-                    <div className={`${inputCls} ${CLS_WRONG} flex items-center gap-2`}>
-                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                      {q.mode === "read" && <span className="text-xs font-bold">{q.nlConfig.target}</span>}
-                    </div>
-                  ) : (
-                    <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
-                      onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
-                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                  )}
-                  {afterText && <p className="text-xs text-amber-600">{afterText}</p>}
+                  <div className="flex items-center gap-2">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)] w-5">{i + 1}.</span>
+                    {wrong ? (
+                      <div className={`${inputCls} ${CLS_WRONG} flex items-center gap-2`}>
+                        <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                        {q.mode === "read" && <span className="text-xs font-bold">{q.nlConfig.target}</span>}
+                      </div>
+                    ) : (
+                      <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
+                        onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                    )}
+                  </div>
+                  {afterText && <p className="text-xs text-amber-600 pl-7">{afterText}</p>}
                 </div>
               );
             })}
