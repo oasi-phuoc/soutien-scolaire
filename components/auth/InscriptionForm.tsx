@@ -6,6 +6,17 @@ import { signUpAction, resendConfirmationAction } from "@/app/actions/auth";
 import { isPhoneFormat } from "@/lib/auth/identifier";
 
 export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string; msg?: string; confirmedEmail?: string }) {
+  const [phone, setPhone] = useState("");
+  const phoneClean = phone.replace(/[\s\-\.\(\)]/g, "");
+  const phoneValid = phone === "" || isPhoneFormat(phone);
+  const phoneInvalid = phone !== "" && !isPhoneFormat(phone);
+
+  const phoneBorderCls = phoneInvalid
+    ? "border-red-400 bg-red-50 dark:bg-red-950/10 focus:border-red-400"
+    : phoneClean && phoneValid
+      ? "border-teal-400 bg-white dark:bg-zinc-950 focus:border-teal-500"
+      : "border-zinc-300 bg-white dark:border-zinc-600 dark:bg-zinc-950 focus:border-teal-500";
+
   if (confirmedEmail !== undefined) {
     return (
       <>
@@ -40,17 +51,6 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
       </>
     );
   }
-
-  const [phone, setPhone] = useState("");
-  const phoneClean = phone.replace(/[\s\-\.\(\)]/g, "");
-  const phoneValid = phone === "" || isPhoneFormat(phone);
-  const phoneInvalid = phone !== "" && !isPhoneFormat(phone);
-
-  const phoneBorderCls = phoneInvalid
-    ? "border-red-400 bg-red-50 dark:bg-red-950/10 focus:border-red-400"
-    : phoneClean && phoneValid
-      ? "border-teal-400 bg-white dark:bg-zinc-950 focus:border-teal-500"
-      : "border-zinc-300 bg-white dark:border-zinc-600 dark:bg-zinc-950 focus:border-teal-500";
 
   return (
     <>

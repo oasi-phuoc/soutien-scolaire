@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
+import { CommModuleList } from "@/components/communication/CommunicationClient";
 
 type SectionDef  = { id: FrenchSection; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -298,14 +299,20 @@ export function FrancaisClient() {
         ))}
       </div>
 
-      <section className="space-y-4" aria-label={`Leçons — ${tab}`}>
+      {tab === "communication" ? (
+        <section aria-label="Modules de communication">
+          <CommModuleList />
+        </section>
+      ) : null}
+
+      <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
         {(() => {
           // All themes for this tab, ordered by section
           const allTabThemes = SECTIONS.flatMap((sec) =>
             FRENCH_THEMES.filter(
               (th) =>
                 th.section === sec.id &&
-                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison") || (tab === "communication" && th.tab === "communication")),
+                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
             ),
           );
 
