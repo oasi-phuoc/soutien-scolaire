@@ -104,7 +104,7 @@ type OddEvenConfig = { questions: OddEvenQ[]; exNum: number };
 type OddEvenStep = { kind: "odd_even"; lesson: MathSubmoduleLesson; config: OddEvenConfig };
 
 type NLMultiQ = { nlConfig: NLConfig; mode: "read"|"less"|"more" };
-type NLMultiConfig = { questions: NLMultiQ[]; exNum: number; consigne: string };
+type NLMultiConfig = { questions: NLMultiQ[]; exNum: number; consigne: string; noFeedback?: boolean };
 type NLMultiStep = { kind: "nl_multi"; lesson: MathSubmoduleLesson; config: NLMultiConfig };
 
 // A1.5 new types
@@ -1472,14 +1472,14 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "A1-4") {
       steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
       steps.push({ kind: "nl_multi", lesson, config: { questions: genNLFine(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche." } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLCoarse(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 3, consigne: "Écrivez le nombre indiqué par la flèche." } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 4, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche." } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 5, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLCoarse(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 3, consigne: "Écrivez le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 4, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 5, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche.", noFeedback: true } });
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "read" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "read" as const }))], exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche." } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 3, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche." } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 4, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "read" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "read" as const }))], exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 3, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 4, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche.", noFeedback: true } });
     } else if (sid === "A1-5") {
       steps.push({ kind: "ordering", lesson, config: genOrdering("asc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
@@ -2837,12 +2837,15 @@ export function GenericModuleContent({
             {activeNlMultiConfig.questions.map((q, i) => {
               const v = nlMultiAnswers[i] ?? "";
               const ok = nlMultiValidated ? nlMultiResults[i] : null;
-              const wrong = ok === false;
+              const noFeedback = activeNlMultiConfig.noFeedback;
+              const wrong = !noFeedback && ok === false;
               const inputCls = "flex-1 rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
               let afterText = "";
-              if (nlMultiValidated && q.mode === "read" && wrong) afterText = `Réponse attendue : ${q.nlConfig.target}`;
-              else if (nlMultiValidated && q.mode === "less" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
-              else if (nlMultiValidated && q.mode === "more" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
+              if (!noFeedback) {
+                if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
+                else if (nlMultiValidated && q.mode === "less" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
+                else if (nlMultiValidated && q.mode === "more" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
+              }
               return (
                 <div key={i} className="space-y-2">
                   <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
