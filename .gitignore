@@ -47,3 +47,4 @@ tmp_algo_outline.txt
 
 # PDFs de référence (non versionnés)
 ref/*.pdf
+.claude/
