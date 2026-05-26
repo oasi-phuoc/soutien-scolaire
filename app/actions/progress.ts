@@ -28,12 +28,12 @@ export async function syncProgressToCloud(progressData: StoredProgressV1): Promi
     if (!user) return;
     await supabase
       .from("profiles")
-      .update({
+      .upsert({
+        id: user.id,
         progress_data: progressData,
         progress_updated_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
-      })
-      .eq("id", user.id);
+      }, { onConflict: "id" });
   } catch {
     /* silent — sync is best-effort */
   }

@@ -100,6 +100,21 @@ export function mergeProgress(
     };
   }
 
+  // Merge frenchLessons: union (completed on either device wins)
+  const mergedFrench: Record<string, "completed"> = {
+    ...(cloud.frenchLessons ?? {}),
+    ...(local.frenchLessons ?? {}),
+  };
+
+  // Merge evaluationSnoozeUntil: take the later date per module
+  const localSnooze = local.evaluationSnoozeUntil ?? {};
+  const cloudSnooze = cloud.evaluationSnoozeUntil ?? {};
+  const mergedSnooze: Record<string, string> = { ...cloudSnooze };
+  for (const [k, v] of Object.entries(localSnooze)) {
+    const existing = mergedSnooze[k];
+    if (!existing || v > existing) mergedSnooze[k] = v;
+  }
+
   return {
     ...cloud,
     ...local,
@@ -108,6 +123,8 @@ export function mergeProgress(
     submoduleScores: mergedScores,
     lastActivityAt,
     version: 2,
+    frenchLessons: Object.keys(mergedFrench).length > 0 ? mergedFrench : undefined,
+    evaluationSnoozeUntil: Object.keys(mergedSnooze).length > 0 ? mergedSnooze : undefined,
     commProgress: Object.keys(mergedComm).length > 0 ? mergedComm : undefined,
     lectureProgress: mergedLecture,
   };
