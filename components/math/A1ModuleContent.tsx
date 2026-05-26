@@ -22,6 +22,7 @@ import {
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 import {
   LEVEL_PASSING_GRADES,
   linearSwissGrade,
@@ -2387,39 +2388,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           ))}
         </div>
       )}
-      {/* Eval progress bar — A1.3 style with timer */}
+      {/* Eval progress bar */}
       {step === "eval" && evalStarted && !evalSubmitted && (
-        <div className="mb-6">
-          <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-            <div className="flex items-center gap-3">
-              {evalTimeLeft !== null && (
-                <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-                  evalTimeLeft <= 60
-                    ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
-                    : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
-                }`}>
-                  {formatTime(evalTimeLeft)}
-                </span>
-              )}
-              <p className="text-xs text-[var(--color-text-secondary)]">{evalPageIdx + 1} / {evalTotalPages}</p>
-            </div>
-          </div>
-          <div className="flex gap-1">
-            {Array.from({ length: evalTotalPages }).map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i < evalPageIdx
-                    ? "bg-amber-500"
-                    : i === evalPageIdx
-                      ? "bg-amber-500 opacity-60"
-                      : "bg-[var(--color-border-default)]"
-                }`}
-              />
-            ))}
-          </div>
-        </div>
+        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={evalTimeLeft} />
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}

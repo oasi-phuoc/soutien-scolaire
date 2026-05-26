@@ -12,6 +12,7 @@ import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade 
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
@@ -2612,28 +2613,9 @@ export function GenericModuleContent({
           ))}
         </div>
       )}
-      {/* Secondary eval progress bar */}
+      {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <div className="mb-6">
-          <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
-            <div className="flex items-center gap-3">
-              {evalTimeLeft !== null && (
-                <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${evalTimeLeft <= 60 ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400" : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"}`}>
-                  {String(Math.floor(evalTimeLeft / 60)).padStart(2, "0")}:{String(evalTimeLeft % 60).padStart(2, "0")}
-                </span>
-              )}
-              <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
-            </div>
-          </div>
-          <div className="flex gap-1">
-            {evalSteps.map((_, i) => (
-              <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i < evalStepOffset ? "bg-[var(--color-accent-alg)]" : i === evalStepOffset ? "bg-[var(--color-accent-alg)] opacity-60" : "bg-[var(--color-border-default)]"
-              }`} />
-            ))}
-          </div>
-        </div>
+        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={evalTimeLeft} />
       )}
 
       {/* Theory */}
