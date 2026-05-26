@@ -2360,35 +2360,55 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         </div>
       )}
 
-      {/* Step progress bar — segments per step in current lesson */}
-      <div className={`flex gap-1 ${step === "eval" ? "mb-2" : "mb-6"}`}>
-        {steps.map((s, i) => (
-          <div
-            key={s}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < stepIdx
-                ? "bg-[var(--color-accent-alg)]"
-                : i === stepIdx
-                  ? "bg-[var(--color-accent-alg)] opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
-      </div>
-      {step === "eval" && evalStarted && !evalSubmitted && (
+      {/* Step progress bar — hidden during eval */}
+      {step !== "eval" && (
         <div className="mb-6 flex gap-1">
-          {Array.from({ length: evalTotalPages }).map((_, i) => (
+          {steps.map((s, i) => (
             <div
-              key={i}
-              className={`h-1 flex-1 rounded-full transition-colors ${
-                i < evalPageIdx
+              key={s}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${
+                i < stepIdx
                   ? "bg-[var(--color-accent-alg)]"
-                  : i === evalPageIdx
+                  : i === stepIdx
                     ? "bg-[var(--color-accent-alg)] opacity-60"
                     : "bg-[var(--color-border-default)]"
               }`}
             />
           ))}
+        </div>
+      )}
+      {/* Eval progress bar — A1.3 style with timer */}
+      {step === "eval" && evalStarted && !evalSubmitted && (
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <div className="flex items-center gap-3">
+              {evalTimeLeft !== null && (
+                <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
+                  evalTimeLeft <= 60
+                    ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
+                    : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+                }`}>
+                  {formatTime(evalTimeLeft)}
+                </span>
+              )}
+              <p className="text-xs text-[var(--color-text-secondary)]">{evalPageIdx + 1} / {evalTotalPages}</p>
+            </div>
+          </div>
+          <div className="flex gap-1">
+            {Array.from({ length: evalTotalPages }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i < evalPageIdx
+                    ? "bg-amber-500"
+                    : i === evalPageIdx
+                      ? "bg-amber-500 opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
         </div>
       )}
 
@@ -3471,11 +3491,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const isCorrect = c === q9val;
                         let cls = "w-16 rounded border py-1.5 text-sm font-normal transition-colors ";
                         if (evalPageValidated) {
-                          if (isSelected) cls += "border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                          if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
                           else if (!p0Right && isCorrect) cls += "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/20 font-semibold";
                           else cls += "border-zinc-300 text-[var(--color-text-secondary)] opacity-50 dark:border-zinc-600";
                         } else {
-                          cls += isSelected ? "border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]" : "border-zinc-300 hover:border-teal-400 text-[var(--color-text-primary)] dark:border-zinc-600";
+                          cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
                         }
                         return (
                           <button key={c} type="button"

@@ -313,8 +313,14 @@ export function completeSubmodule(
     ...(p.submoduleStates ?? {}),
     [submoduleId]: "completed" as const,
   };
+  const existingScore = p.submoduleScores?.[submoduleId];
+  const preventDowngrade =
+    existingScore !== undefined &&
+    existingScore.grade >= PASSING_GRADE &&
+    grade !== undefined &&
+    grade < PASSING_GRADE;
   const submoduleScores =
-    score !== undefined && scoreMax !== undefined && grade !== undefined
+    score !== undefined && scoreMax !== undefined && grade !== undefined && !preventDowngrade
       ? { ...(p.submoduleScores ?? {}), [submoduleId]: { score, max: scoreMax, grade } }
       : p.submoduleScores;
 
