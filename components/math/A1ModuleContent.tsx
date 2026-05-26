@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { AppInput } from "@/components/ui/AppInput";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
+import { getTrad } from "@/lib/curriculum/content/math/trad";
+import type { SubmoduleTrad } from "@/lib/curriculum/content/math/trad";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math/math-a1";
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { SubmoduleTrad } from "@/lib/curriculum/content/math/trad";
@@ -168,13 +170,13 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
       );
     }
     case "table": {
-      const pvHeaders = bt?.headers?.[pivot];
+      const pvHeaders = showPivot ? bt?.headers?.[pivot] : undefined;
       return (
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
           <table className="w-full text-sm">
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
-                {(showPivot && pvHeaders ? pvHeaders : block.headersFr).map((h, i) => (
+                {(pvHeaders ?? block.headersFr).map((h, i) => (
                   <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
               </tr>

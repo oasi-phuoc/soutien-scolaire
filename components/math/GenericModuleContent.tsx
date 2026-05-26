@@ -9,6 +9,8 @@ import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
+import { getTrad } from "@/lib/curriculum/content/math/trad";
+import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -1610,12 +1612,12 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   pivot: PivotCode;
   showPivot: boolean;
 }) {
-  const isRtl = pivot === "ar" || pivot === "fa";
   const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
   const pivotText = bt?.text?.[pivot];
+  const isRtl = pivot === "ar" || pivot === "fa";
   switch (block.type) {
     case "heading": {
-      const pvHead = bt?.text?.[pivot];
+      const pvHead = pivotText;
       return block.black ? (
         <div>
           <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
@@ -1673,10 +1675,14 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           )}
         </div>
       );
-    case "rule":
+    case "rule": {
+      const pvLabel = bt?.label?.[pivot];
       return (
         <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3 space-y-2">
           <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
+          {showPivot && pvLabel && pvLabel !== block.titleFr && (
+            <p className="text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvLabel}</p>
+          )}
           <ul className="list-disc space-y-1 pl-4">
             {block.itemsFr.map((it, i) => (
               <li key={i} className="text-xs text-[var(--color-text-secondary)]">
@@ -1686,13 +1692,15 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           </ul>
         </div>
       );
-    case "table":
+    }
+    case "table": {
+      const pvHeaders = showPivot ? bt?.headers?.[pivot] : undefined;
       return (
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
           <table className="w-full text-sm">
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
-                {block.headersFr.map((h, i) => (
+                {(pvHeaders ?? block.headersFr).map((h, i) => (
                   <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
                     {h}
                   </th>
@@ -1716,6 +1724,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           )}
         </div>
       );
+    }
     case "svg":
       return block.noFrame ? (
         <div className="my-2">
@@ -1733,12 +1742,12 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
         </div>
       );
     case "section": {
+      const pvLabel = bt?.label?.[pivot];
       const pvItems = showPivot ? bt?.items?.[pivot] : undefined;
-      const pvLabel = showPivot ? bt?.label?.[pivot] : undefined;
       return (
         <div className="space-y-1.5">
           {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
-          {pvLabel && pvLabel !== block.labelFr && (
+          {showPivot && pvLabel && pvLabel !== block.labelFr && (
             <p className="text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvLabel}</p>
           )}
           {block.itemsFr.length > 0 && (
@@ -1810,15 +1819,15 @@ function TheoryView({ lesson, pivot, showPivot }: {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
   const isRtl = pivot === "ar" || pivot === "fa";
-  const pivotTitle = trad?.title?.[pivot];
-  const pivotParas = trad?.paragraphs?.[pivot] ?? (theory.paragraphs as Record<string, string[]>)[pivot];
+  const pivotTitle = showPivot ? trad?.title?.[pivot] : undefined;
+  const pivotParas = showPivot ? trad?.paragraphs?.[pivot] : undefined;
   return (
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">
           {theory.title.fr}
         </h2>
-        {showPivot && pivotTitle && pivotTitle !== theory.title.fr && (
+        {pivotTitle && pivotTitle !== theory.title.fr && (
           <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotTitle}</p>
         )}
       </div>
@@ -1833,7 +1842,7 @@ function TheoryView({ lesson, pivot, showPivot }: {
           {theory.paragraphs.fr.map((p, i) => (
             <div key={i}>
               <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{p}</p>
-              {showPivot && pivotParas?.[i] && pivotParas[i] !== p && (
+              {pivotParas?.[i] && pivotParas[i] !== p && (
                 <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotParas[i]}</p>
               )}
             </div>
@@ -2253,7 +2262,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, activeNumberSelectConfig, activeEncadrementConfig, oddEvenOverrideConfigs, nlMultiOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;

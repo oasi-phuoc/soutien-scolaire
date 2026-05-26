@@ -199,8 +199,8 @@ export function MathematiquesClient() {
                     .map((sub) => sub.id)
                 : [],
             );
-            // Passed = completed + (no score recorded OR grade ≥ PASSING_GRADE)
-            // "no score" covers submodules completed before scoring was introduced
+            // A submodule is "passed" if completed with grade ≥ PASSING_GRADE,
+            // OR completed without any saved score (no eval required / old-style completion)
             const passedSubIds = new Set(
               hydrated
                 ? m.submodules
