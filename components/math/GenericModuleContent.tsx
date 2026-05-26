@@ -60,6 +60,10 @@ type RoundingStep = { kind: "rounding_group"; lesson: MathSubmoduleLesson; confi
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
+type DivStep = { partialDiv: number; quotientDigit: number; product: number; partRemainder: number; colEnd: number };
+type DivColGridQ = { dividend: number; divisor: number; quotient: number; remainder: number; steps: DivStep[]; dividendCols: number; divisorCols: number; quotientCols: number };
+type DivColGridConfig = { questions: DivColGridQ[]; exNum: number; preFilledOperands: boolean; dividendCols: number; divisorCols: number; quotientCols: number };
+
 type ExprCompQ = { la: number; lop: ArithOp; lb: number; ra: number; rop: ArithOp; rb: number; answer: "<" | "=" | ">" };
 type ExprCompConfig = { questions: ExprCompQ[]; exNum: number; op: ArithOp };
 
@@ -86,6 +90,7 @@ type NumberLineStep  = { kind: "number_line";       lesson: MathSubmoduleLesson;
 type ComparisonStep  = { kind: "comparison_ex";     lesson: MathSubmoduleLesson; config: ComparisonConfig };
 type ArithGroupStep  = { kind: "arithmetic_group";  lesson: MathSubmoduleLesson; config: ArithGroupConfig; timer?: number };
 type ColumnGridStep  = { kind: "column_grid";       lesson: MathSubmoduleLesson; config: ColGridConfig };
+type DivColGridStep  = { kind: "div_column_grid";   lesson: MathSubmoduleLesson; config: DivColGridConfig };
 type ExprCompStep    = { kind: "expr_comparison";   lesson: MathSubmoduleLesson; config: ExprCompConfig };
 type EvalStartStep   = { kind: "eval_start";        lesson: MathSubmoduleLesson };
 type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson };
@@ -120,7 +125,7 @@ type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
 type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
 type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -816,6 +821,49 @@ function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number, c
   return { questions: Array.from({ length: count }, () => genColGridQ(op)), exNum, op, preFilledOperands };
 }
 
+function computeDivSteps(dividend: number, divisor: number): DivStep[] {
+  const digits = dividend.toString().split("").map(Number);
+  const steps: DivStep[] = [];
+  let current = 0;
+  for (let i = 0; i < digits.length; i++) {
+    current = current * 10 + digits[i]!;
+    if (current < divisor && i < digits.length - 1) continue;
+    const quotientDigit = Math.floor(current / divisor);
+    const product = quotientDigit * divisor;
+    const partRemainder = current - product;
+    steps.push({ partialDiv: current, quotientDigit, product, partRemainder, colEnd: i });
+    current = partRemainder;
+  }
+  return steps;
+}
+
+function genDivColGridQ(dividendCols: number, divisorCols: number, quotientCols: number): DivColGridQ {
+  for (;;) {
+    let dividend: number, divisor: number;
+    if (dividendCols === 4) {
+      dividend = rnd(1000, 9999);
+      divisor = rnd(2, 9);
+    } else {
+      dividend = rnd(100000, 999999);
+      divisor = rnd(11, 99);
+    }
+    const quotient = Math.floor(dividend / divisor);
+    const remainder = dividend % divisor;
+    if (quotient.toString().length > quotientCols) continue;
+    if (quotient === 0) continue;
+    const steps = computeDivSteps(dividend, divisor);
+    return { dividend, divisor, quotient, remainder, steps, dividendCols, divisorCols, quotientCols };
+  }
+}
+
+function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOperands: boolean, exNum: number, count = 2): DivColGridConfig {
+  const quotientCols = dividendCols === 4 ? 4 : 5;
+  return {
+    questions: Array.from({ length: count }, () => genDivColGridQ(dividendCols, divisorCols, quotientCols)),
+    exNum, preFilledOperands, dividendCols, divisorCols, quotientCols,
+  };
+}
+
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
 function ArithmeticGroupExercise({
   config, answers, validated, results, onChange, onTimerExpired, consigne,
@@ -1108,6 +1156,231 @@ function ColumnGridExercise({
             exNum={config.exNum}
             onChange={onChange}
             onCarryChange={onCarryChange}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── DivColumnGridExercise ─────────────────────────────────────────────────────
+const DIV_COL_LABELS_4 = ["M", "C", "D", "U"];
+const DIV_COL_LABELS_6 = ["CM", "DM", "M", "C", "D", "U"];
+const CELL_W = 32;
+
+function DivColumnCard({
+  q, cardIdx, quotientInputs, remainderInput, operandInputs, validated, preFilledOperands,
+  onQuotientChange, onRemainderChange, onOperandChange,
+}: {
+  q: DivColGridQ; cardIdx: number;
+  quotientInputs: string[]; remainderInput: string;
+  operandInputs: string[][];
+  validated: boolean; preFilledOperands: boolean;
+  onQuotientChange: (ci: number, idx: number, val: string) => void;
+  onRemainderChange: (ci: number, val: string) => void;
+  onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
+}) {
+  const { dividend, divisor, quotient, remainder, steps, dividendCols, divisorCols, quotientCols } = q;
+  const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : DIV_COL_LABELS_6;
+  const dividendStr = dividend.toString().padStart(dividendCols, "0");
+  const divisorStr = divisor.toString().padStart(divisorCols, "0");
+  const quotientStr = quotient.toString().padStart(quotientCols, "0");
+  const quotientLen = quotient.toString().length;
+  const rightW = Math.max(divisorCols, quotientCols) * CELL_W;
+
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = e.currentTarget.closest("[data-divcol-card]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  function DigitCell({ value, expected, isLeadingOk, onChange }: {
+    value: string; expected: string; isLeadingOk?: boolean; onChange: (v: string) => void;
+  }) {
+    const ok = validated
+      ? (isLeadingOk ? (value.trim() === "" || value.trim() === "0") : value.trim() === expected)
+      : null;
+    if (ok === false) {
+      return (
+        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+          <span className="line-through text-amber-500 text-[9px] leading-none">{value || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={value} disabled={validated}
+        onChange={e => onChange(e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+        onKeyDown={tabNav}
+        onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)]"
+        }`}
+      />
+    );
+  }
+
+  function PrefilledCell({ digit, hide }: { digit: string; hide?: boolean }) {
+    return (
+      <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+        {hide ? "" : digit}
+      </div>
+    );
+  }
+
+  const remOk = validated ? remainderInput.trim() === remainder.toString() : null;
+
+  return (
+    <div data-divcol-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 overflow-x-auto">
+      <div className="flex items-start w-fit mx-auto">
+        {/* LEFT: column headers + dividend + working rows */}
+        <div className="flex flex-col">
+          {/* Column header row */}
+          <div className="flex">
+            <div className="w-5" />
+            {colLabels.map((lbl, i) => (
+              <div key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{lbl}</div>
+            ))}
+          </div>
+          {/* Dividend row */}
+          <div className="flex items-center">
+            <div className="w-5" />
+            {Array.from({ length: dividendCols }, (_, i) => {
+              const isLeading = i < dividendCols - dividend.toString().length;
+              return preFilledOperands
+                ? <PrefilledCell key={i} digit={dividendStr[i]!} hide={isLeading} />
+                : <DigitCell key={i} value={operandInputs[0]?.[i] ?? ""} expected={dividendStr[i]!}
+                    onChange={v => onOperandChange(cardIdx, false, i, v)} />;
+            })}
+          </div>
+          {/* Separator under dividend */}
+          <div className="ml-5 h-[1.5px] bg-[var(--color-text-primary)]" style={{ width: `${dividendCols * CELL_W}px` }} />
+          {/* Working rows per step */}
+          {steps.map((step, si) => {
+            const pdStr = step.partialDiv.toString();
+            const prStr = step.product.toString();
+            const pdStart = step.colEnd - pdStr.length + 1;
+            const prStart = step.colEnd - prStr.length + 1;
+            const lineStart = Math.min(pdStart, prStart);
+            const lineLen = step.colEnd - lineStart + 1;
+            return (
+              <Fragment key={si}>
+                {/* Partial dividend placeholder row */}
+                <div className="flex items-center" style={{ height: 32 }}>
+                  <div className="w-5" />
+                  <div style={{ width: `${pdStart * CELL_W}px` }} />
+                  {pdStr.split("").map((_, di) => (
+                    <div key={di} className="h-7 w-8 rounded border border-dashed border-[var(--color-border-default)] opacity-30" />
+                  ))}
+                </div>
+                {/* Product placeholder row with minus */}
+                <div className="flex items-center" style={{ height: 32 }}>
+                  <div className="w-5 flex items-center justify-center text-sm text-[var(--color-text-secondary)]">−</div>
+                  <div style={{ width: `${prStart * CELL_W}px` }} />
+                  {prStr.split("").map((_, di) => (
+                    <div key={di} className="h-7 w-8 rounded border border-dashed border-[var(--color-border-default)] opacity-30" />
+                  ))}
+                </div>
+                {/* Step separator line */}
+                <div className="h-px bg-[var(--color-text-primary)] opacity-40"
+                  style={{ marginLeft: `${20 + lineStart * CELL_W}px`, width: `${lineLen * CELL_W}px` }} />
+              </Fragment>
+            );
+          })}
+          {/* Reste field */}
+          <div className="flex items-center gap-1.5 mt-1 ml-5">
+            <span className="text-xs text-[var(--color-text-secondary)]">Reste :</span>
+            {remOk === false ? (
+              <div className={`h-8 w-12 rounded border ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                <span className="line-through text-amber-500 text-xs">{remainderInput || "—"}</span>
+                <span className="text-[var(--color-text-primary)] text-xs font-bold">{remainder}</span>
+              </div>
+            ) : (
+              <input type="number" inputMode="numeric" value={remainderInput} disabled={validated}
+                onChange={e => onRemainderChange(cardIdx, e.target.value)}
+                className={`h-8 w-12 rounded border text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                  remOk === null
+                    ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+                }`}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* Vertical separator */}
+        <div className="w-[2px] self-stretch bg-[var(--color-text-primary)] mx-1" />
+
+        {/* RIGHT: divisor + quotient */}
+        <div className="flex flex-col" style={{ width: rightW }}>
+          {/* Spacer aligning with column headers */}
+          <div className="h-5" />
+          {/* Divisor row (right-aligned) */}
+          <div className="flex items-center justify-end">
+            {Array.from({ length: divisorCols }, (_, i) => {
+              const isLeading = i < divisorCols - divisor.toString().length;
+              return preFilledOperands
+                ? <PrefilledCell key={i} digit={divisorStr[i]!} hide={isLeading} />
+                : <DigitCell key={i} value={operandInputs[1]?.[i] ?? ""} expected={divisorStr[i]!}
+                    onChange={v => onOperandChange(cardIdx, true, i, v)} />;
+            })}
+          </div>
+          {/* Horizontal separator */}
+          <div className="h-[1.5px] bg-[var(--color-text-primary)]" />
+          {/* Quotient row */}
+          <div className="flex items-center justify-end">
+            {Array.from({ length: quotientCols }, (_, i) => {
+              const isLeading = i < quotientCols - quotientLen;
+              return (
+                <DigitCell key={i}
+                  value={quotientInputs[i] ?? ""}
+                  expected={quotientStr[i]!}
+                  isLeadingOk={isLeading}
+                  onChange={v => onQuotientChange(cardIdx, i, v)}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DivColumnGridExercise({
+  config, quotientInputs, remainderInputs, operandInputs, validated,
+  onQuotientChange, onRemainderChange, onOperandChange,
+}: {
+  config: DivColGridConfig;
+  quotientInputs: string[][];
+  remainderInputs: string[];
+  operandInputs: string[][][];
+  validated: boolean;
+  onQuotientChange: (ci: number, idx: number, val: string) => void;
+  onRemainderChange: (ci: number, val: string) => void;
+  onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
+}) {
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
+      <div className="flex flex-col gap-3">
+        {config.questions.map((q, qi) => (
+          <DivColumnCard
+            key={qi} q={q} cardIdx={qi}
+            quotientInputs={quotientInputs[qi] ?? []}
+            remainderInput={remainderInputs[qi] ?? ""}
+            operandInputs={operandInputs[qi] ?? [[], []]}
+            validated={validated}
+            preFilledOperands={config.preFilledOperands}
+            onQuotientChange={onQuotientChange}
+            onRemainderChange={onRemainderChange}
+            onOperandChange={onOperandChange}
           />
         ))}
       </div>
@@ -1458,21 +1731,15 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true) });
     } else if (sid === "A3-4") {
-      // Division — entraînement
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 6], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [7, 12], 2) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 3) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 4, false, 60) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 5, true) });
-      for (const item of shufflePick(lesson.exercisePool ?? [], lesson.poolSize ?? 5)) {
-        steps.push({ kind: "exercise", lesson, item });
-      }
+      // Division en colonnes — entraînement
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, true, 1) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, true, 2) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 3) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, false, 4) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 2) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 3, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [2, 12], 4, true) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 1, 3) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, false, 2, 3) });
     } else if (sid === "A4-1") {
       steps.push({ kind: "frac_id", lesson, config: genFracId(1) });
       steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 2) });
@@ -1988,6 +2255,17 @@ export function GenericModuleContent({
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
+  // Division column grid state (3 cards max)
+  const emptyDivQuotient = () => Array.from({ length: 3 }, () => Array(5).fill("") as string[]);
+  const emptyDivRemainder = () => Array(3).fill("") as string[];
+  const emptyDivOperands = () => Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")] as string[][]);
+  const [divGridQuotientInputs, setDivGridQuotientInputs] = useState<string[][]>(emptyDivQuotient);
+  const [divGridRemainderInputs, setDivGridRemainderInputs] = useState<string[]>(emptyDivRemainder);
+  const [divGridOperandInputs, setDivGridOperandInputs] = useState<string[][][]>(emptyDivOperands);
+  const [divGridValidated, setDivGridValidated] = useState(false);
+  const [divGridResults, setDivGridResults] = useState<boolean[]>(() => Array(3).fill(false));
+  const [divGridOverrideConfigs, setDivGridOverrideConfigs] = useState<Record<number, DivColGridConfig>>({});
+
   // A1.3 state
   const [numberSelectAnswers, setNumberSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
   const [numberSelectValidated, setNumberSelectValidated] = useState(false);
@@ -2091,6 +2369,11 @@ export function GenericModuleContent({
     setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
     setSeqCompleteValidated(false);
     setSeqCompleteResults(Array(5).fill(false));
+    setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
+    setDivGridRemainderInputs(Array(3).fill(""));
+    setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
+    setDivGridValidated(false);
+    setDivGridResults(Array(3).fill(false));
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -2185,6 +2468,9 @@ export function GenericModuleContent({
   const activeSeqCompleteConfig = currentStep?.kind === "seq_complete"
     ? (seqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeDivGridConfig = currentStep?.kind === "div_column_grid"
+    ? (divGridOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   const goNext = useCallback(() => {
     if (showEvalScore) { router.push("/mathematiques"); return; }
@@ -2251,6 +2537,9 @@ export function GenericModuleContent({
         currentResults = currentStep.config.questions.map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
         });
+      } else if (currentStep.kind === "div_column_grid") {
+        const cfg = divGridOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = divGridResults.slice(0, cfg.questions.length);
       } else if (currentStep.kind === "expr_comparison") {
         const cfg = exprCompOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => exprCompAnswers[i] === q.answer);
@@ -2281,6 +2570,7 @@ export function GenericModuleContent({
                 : es?.kind === "seq_rule" ? "Règle de la suite"
                 : es?.kind === "seq_complete" ? "Compléter la suite"
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
+                : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -2305,7 +2595,7 @@ export function GenericModuleContent({
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
-      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group" || currentStep?.kind === "expr_comparison" || currentStep?.kind === "rounding_group") {
+      if (currentStep?.kind === "column_grid" || currentStep?.kind === "arithmetic_group" || currentStep?.kind === "expr_comparison" || currentStep?.kind === "rounding_group" || currentStep?.kind === "div_column_grid") {
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
@@ -2325,7 +2615,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2425,6 +2715,41 @@ export function GenericModuleContent({
       setGridCarryInputs(Array.from({ length: 4 }, () => Array(4).fill("")));
       setGridValidated(false);
       setGridResults(Array(4).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "div_column_grid") {
+    const cfg = activeDivGridConfig!;
+    stepCanValidate = !divGridValidated;
+    stepValidate = divGridValidated ? () => {} : () => {
+      const res = cfg.questions.map((q, qi) => {
+        const quotStr = q.quotient.toString().padStart(q.quotientCols, "0");
+        const quotientLen = q.quotient.toString().length;
+        const qInputs = divGridQuotientInputs[qi] ?? [];
+        const quotOk = Array.from({ length: q.quotientCols }, (_, i) => {
+          const isLeading = i < q.quotientCols - quotientLen;
+          const v = (qInputs[i] ?? "").trim();
+          return isLeading ? (v === "" || v === "0") : v === quotStr[i];
+        }).every(Boolean);
+        const remOk = (divGridRemainderInputs[qi] ?? "").trim() === q.remainder.toString();
+        if (cfg.preFilledOperands) return quotOk && remOk;
+        const divStr = q.dividend.toString().padStart(q.dividendCols, "0");
+        const divisorStr = q.divisor.toString().padStart(q.divisorCols, "0");
+        const opInputs = divGridOperandInputs[qi] ?? [[], []];
+        const divOk = Array.from({ length: q.dividendCols }, (_, i) => (opInputs[0]?.[i] ?? "").trim() === divStr[i]).every(Boolean);
+        const divisorOk = Array.from({ length: q.divisorCols }, (_, i) => (opInputs[1]?.[i] ?? "").trim() === divisorStr[i]).every(Boolean);
+        return quotOk && remOk && divOk && divisorOk;
+      });
+      setDivGridResults(res);
+      setDivGridValidated(true);
+    };
+    stepReset = () => {
+      setDivGridOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDivColumnGrid(cfg.dividendCols, cfg.divisorCols, cfg.preFilledOperands, cfg.exNum, cfg.questions.length) }));
+      setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
+      setDivGridRemainderInputs(Array(3).fill(""));
+      setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
+      setDivGridValidated(false);
+      setDivGridResults(Array(3).fill(false));
     };
   }
 
@@ -3251,6 +3576,34 @@ export function GenericModuleContent({
         />
       )}
 
+      {/* Division column grid exercise */}
+      {!showEvalScore && currentStep?.kind === "div_column_grid" && activeDivGridConfig && (
+        <DivColumnGridExercise
+          config={activeDivGridConfig}
+          quotientInputs={divGridQuotientInputs}
+          remainderInputs={divGridRemainderInputs}
+          operandInputs={divGridOperandInputs}
+          validated={divGridValidated}
+          onQuotientChange={(ci, idx, val) =>
+            setDivGridQuotientInputs(prev => prev.map((card, ci2) =>
+              ci2 === ci ? card.map((v, vi) => vi === idx ? val : v) : card
+            ))
+          }
+          onRemainderChange={(ci, val) =>
+            setDivGridRemainderInputs(prev => prev.map((v, i) => i === ci ? val : v))
+          }
+          onOperandChange={(ci, isDivisor, idx, val) =>
+            setDivGridOperandInputs(prev => prev.map((card, ci2) => {
+              if (ci2 !== ci) return card;
+              const side = isDivisor ? 1 : 0;
+              return card.map((row, ri) =>
+                ri === side ? row.map((v, vi) => vi === idx ? val : v) : row
+              );
+            }))
+          }
+        />
+      )}
+
       {/* Eval score screen */}
       {showEvalScore && evalFinalGrade !== null && (
         <div className="space-y-4">
@@ -3424,7 +3777,8 @@ export function GenericModuleContent({
                     (currentStep?.kind === "nl_multi" && !nlMultiValidated) ||
                     (currentStep?.kind === "ordering" && !orderingValidated) ||
                     (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
-                    (currentStep?.kind === "seq_complete" && !seqCompleteValidated)
+                    (currentStep?.kind === "seq_complete" && !seqCompleteValidated) ||
+                    (currentStep?.kind === "div_column_grid" && !divGridValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"

@@ -37,17 +37,6 @@ export const MATH_A3_4_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [],
-  exercisePool: [
-    { id: "a3-4-ep01", promptFr: "84 ÷ 7 = ?", type: "number", acceptable: ["12"] },
-    { id: "a3-4-ep02", promptFr: "96 ÷ 8 = ?", type: "number", acceptable: ["12"] },
-    { id: "a3-4-ep03", promptFr: "156 ÷ 12 = ?", type: "number", acceptable: ["13"] },
-    { id: "a3-4-ep04", promptFr: "256 ÷ 16 = ?", type: "number", acceptable: ["16"] },
-    { id: "a3-4-ep05", promptFr: "144 ÷ 9 = ?", type: "number", acceptable: ["16"] },
-    { id: "a3-4-ep06", promptFr: "17 ÷ 5 = … reste … Quel est le quotient ?", type: "number", acceptable: ["3"] },
-    { id: "a3-4-ep07", promptFr: "17 ÷ 5 = 3 reste 2. Vérifiez : 5 × 3 + 2 = ?", type: "number", acceptable: ["17"] },
-    { id: "a3-4-ep08", promptFr: "225 ÷ 15 = ?", type: "number", acceptable: ["15"] },
-    { id: "a3-4-ep09", promptFr: "180 ÷ 12 = ?", type: "number", acceptable: ["15"] },
-    { id: "a3-4-ep10", promptFr: "78 ÷ 6 = ?", type: "number", acceptable: ["13"] },
-  ],
-  poolSize: 5,
+  exercisePool: [],
+  poolSize: 0,
 };
