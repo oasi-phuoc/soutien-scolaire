@@ -1257,15 +1257,11 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 4) });
       steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 5) });
     } else if (sid === "A4-2") {
-      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 1) });
-      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 999], 2) });
-      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 3) });
-      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 4) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 1) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 2) });
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 1, 2) });
-      steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 999], 2, 2) });
-      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 3, 3) });
-      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 4, 3) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 144], 1, 3) });
+      steps.push({ kind: "frac_simplify", lesson, config: genFracSimplify([2, 999], 2, 3) });
     } else if (sid === "A4-3") {
       steps.push({ kind: "frac_compare", lesson, config: genFracCompare("same_den", [1, 100], 1) });
       steps.push({ kind: "frac_compare", lesson, config: genFracCompare("same_num", [1, 100], 2) });
