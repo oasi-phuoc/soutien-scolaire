@@ -1486,7 +1486,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1, 99], 3).questions, exNum: 3 } });
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1000, 9999], 4, 5, 3).questions, exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 100], 5, 3, 2).questions, ...genSeqComplete([1, 100], 5, 2, 4).questions], exNum: 5 } });
-      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([100, 9999], 6, 3, 2).questions, ...genSeqComplete([100, 9999], 6, 2, 4).questions], exNum: 6 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 999], 6, 3, 2).questions, ...genSeqComplete([1, 999], 6, 2, 4).questions], exNum: 6 } });
       steps.push({ kind: "eval_start", lesson });
       const ascFirst = Math.random() < 0.5;
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "asc" : "desc", 1) });
@@ -2992,7 +2992,7 @@ export function GenericModuleContent({
           <div className="space-y-5">
             {currentStep.config.questions.map((q, qi) => {
               const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
-              const cellW = maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+              const cellW = currentStep.config.exNum === 6 ? "w-14" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
@@ -3027,7 +3027,7 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {seqCompleteValidated && currentStep.config.exNum !== 5 && (
+                  {seqCompleteValidated && currentStep.config.exNum !== 5 && currentStep.config.exNum !== 6 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                         Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
