@@ -60,12 +60,17 @@ export async function signUpAction(formData: FormData) {
   if (data.session) {
     redirect("/");
   }
-  redirect(
-    "/inscription?msg=" +
-      encodeURIComponent(
-        "Compte créé ! Si la confirmation par e-mail est activée, vérifie ta boîte de réception avant de te connecter.",
-      ),
-  );
+  redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email));
+}
+
+export async function resendConfirmationAction(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim();
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) {
+    redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email) + "&erreur=" + encodeURIComponent("Supabase non configuré"));
+  }
+  await supabase.auth.resend({ type: "signup", email });
+  redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email) + "&msg=" + encodeURIComponent("E-mail renvoyé."));
 }
 
 export async function signOutAction() {

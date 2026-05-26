@@ -2,10 +2,45 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { signUpAction } from "@/app/actions/auth";
+import { signUpAction, resendConfirmationAction } from "@/app/actions/auth";
 import { isPhoneFormat } from "@/lib/auth/identifier";
 
-export function InscriptionForm({ error, msg }: { error?: string; msg?: string }) {
+export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string; msg?: string; confirmedEmail?: string }) {
+  if (confirmedEmail !== undefined) {
+    return (
+      <>
+        <div className="mt-6 rounded-xl border border-teal-200 bg-teal-50 p-5 dark:border-teal-800 dark:bg-teal-950/30">
+          <p className="text-sm font-semibold text-teal-900 dark:text-teal-100">
+            Veuillez valider le lien envoyé par e-mail.
+          </p>
+          <p className="mt-2 text-sm text-teal-800 dark:text-teal-200">
+            Si vous n&apos;avez pas reçu d&apos;e-mail de confirmation, vérifiez les courriers indésirables.
+          </p>
+          {msg && (
+            <p className="mt-3 text-xs font-medium text-teal-700 dark:text-teal-300">{msg}</p>
+          )}
+          {error && (
+            <p className="mt-3 text-xs font-medium text-red-600 dark:text-red-400">{error}</p>
+          )}
+        </div>
+        <form action={resendConfirmationAction} className="mt-4">
+          <input type="hidden" name="email" value={confirmedEmail} />
+          <button
+            type="submit"
+            className="w-full rounded-xl border border-zinc-300 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            Renvoyer l&apos;e-mail de confirmation
+          </button>
+        </form>
+        <p className="mt-5 text-center text-sm text-zinc-600 dark:text-zinc-400">
+          <Link href="/connexion" className="font-semibold text-teal-800 underline dark:text-teal-400">
+            Retour à la connexion
+          </Link>
+        </p>
+      </>
+    );
+  }
+
   const [phone, setPhone] = useState("");
   const phoneClean = phone.replace(/[\s\-\.\(\)]/g, "");
   const phoneValid = phone === "" || isPhoneFormat(phone);
