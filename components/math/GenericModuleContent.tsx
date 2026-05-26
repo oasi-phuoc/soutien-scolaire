@@ -2010,6 +2010,34 @@ export function GenericModuleContent({
     router.push("/mathematiques");
   }
 
+  const activeCompConfig = currentStep?.kind === "comparison_ex"
+    ? (compOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeExprCompConfig = currentStep?.kind === "expr_comparison"
+    ? (exprCompOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeArithConfig = currentStep?.kind === "arithmetic_group"
+    ? (arithOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeGridConfig = currentStep?.kind === "column_grid"
+    ? (gridOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeRoundingConfig = currentStep?.kind === "rounding_group"
+    ? (roundingOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeNumberSelectConfig = currentStep?.kind === "number_select"
+    ? (numberSelectOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeEncadrementConfig = currentStep?.kind === "encadrement"
+    ? (encadrementOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeOddEvenConfig = currentStep?.kind === "odd_even"
+    ? (oddEvenOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeNlMultiConfig = currentStep?.kind === "nl_multi"
+    ? (nlMultiOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+
   const goNext = useCallback(() => {
     if (showEvalScore) { router.push("/mathematiques"); return; }
     if (currentStep?.kind === "pass_toggle") {
@@ -2150,34 +2178,6 @@ export function GenericModuleContent({
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
   let stepCanValidate = true;
-
-  const activeCompConfig = currentStep?.kind === "comparison_ex"
-    ? (compOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeExprCompConfig = currentStep?.kind === "expr_comparison"
-    ? (exprCompOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeArithConfig = currentStep?.kind === "arithmetic_group"
-    ? (arithOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeGridConfig = currentStep?.kind === "column_grid"
-    ? (gridOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeRoundingConfig = currentStep?.kind === "rounding_group"
-    ? (roundingOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeNumberSelectConfig = currentStep?.kind === "number_select"
-    ? (numberSelectOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeEncadrementConfig = currentStep?.kind === "encadrement"
-    ? (encadrementOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeOddEvenConfig = currentStep?.kind === "odd_even"
-    ? (oddEvenOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
-  const activeNlMultiConfig = currentStep?.kind === "nl_multi"
-    ? (nlMultiOverrideConfigs[stepIdx] ?? currentStep.config)
-    : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
     stepCanValidate = answer.trim().length > 0;
