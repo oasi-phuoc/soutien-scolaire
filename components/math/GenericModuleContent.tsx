@@ -322,7 +322,7 @@ function ExprCompExercise({
 // ── Number line ──────────────────────────────────────────────────────────────
 type NLConfig = { start: number; end: number; step: number; divCount: number; labelEvery: number; target: number };
 
-function genNLConfig(): NLConfig {
+function _genNLConfig(): NLConfig {
   const presets: Array<{ start: number; end: number; step: number }> = [
     { start: 0, end: 20, step: 1 },
     { start: 0, end: 50, step: 5 },
@@ -2850,7 +2850,6 @@ export function GenericModuleContent({
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
           <div className="space-y-5">
             {currentStep.config.questions.map((q, qi) => {
-              const ok = seqCompleteValidated ? seqCompleteResults[qi] : null;
               let blankCounter = 0;
               return (
                 <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3">
