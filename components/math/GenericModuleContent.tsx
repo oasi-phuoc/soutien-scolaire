@@ -696,12 +696,12 @@ function genOrdering(direction: "asc"|"desc", exNum: number): OrderingConfig {
   return { questions, direction, exNum };
 }
 
-function genSeqRule(range: [number, number], exNum: number, count = 5): SeqRuleConfig {
+function genSeqRule(range: [number, number], exNum: number, count = 5, termCount = 4): SeqRuleConfig {
   const questions: SeqRuleQ[] = Array.from({ length: count }, () => {
     const step = rnd(1, Math.max(1, Math.floor((range[1] - range[0]) / 20)));
     const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
-    const start = rnd(range[0], Math.max(range[0], range[1] - 4 * step));
-    const nums = [start, start + step, start + 2 * step, start + 3 * step];
+    const start = rnd(range[0], Math.max(range[0], range[1] - (termCount - 1) * step));
+    const nums = Array.from({ length: termCount }, (_, k) => start + k * step);
     if (op === "-") nums.reverse();
     return { nums, step, op };
   });
@@ -1484,7 +1484,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering("asc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1, 99], 3).questions, exNum: 3 } });
-      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1000, 9999], 3).questions.slice(0,3), ...genSeqRule([10000, 99999], 3).questions.slice(0,2)], exNum: 4 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1000, 9999], 4, 5, 3).questions, exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 100], 5, 3, 2).questions, ...genSeqComplete([1, 100], 5, 2, 4).questions], exNum: 5 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([100, 9999], 6, 3, 2).questions, ...genSeqComplete([100, 9999], 6, 2, 4).questions], exNum: 6 } });
       steps.push({ kind: "eval_start", lesson });
@@ -2958,47 +2958,25 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const isEx3 = currentStep.config.exNum === 3;
-              const chipCls = isEx3
-                ? "shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]"
-                : "w-20 shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
-              const inputRowCls = isEx3
-                ? "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors"
-                : "w-24 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
-              const ruleInput = wrong ? (
-                <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                  <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                  <span className="text-xs font-bold">{correctAns}</span>
-                </div>
-              ) : (
-                <input type="text" value={v} disabled={seqRuleValidated}
-                  onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
-                  placeholder="± nombre"
-                  className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-              );
-              if (isEx3) {
-                return (
-                  <div key={i} className="flex items-center gap-2">
-                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                    {q.nums.map((n, ni) => (
-                      <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
-                    ))}
-                    {ruleInput}
-                  </div>
-                );
-              }
+              const chipCls = "shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
+              const inputRowCls = "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
-                <div key={i} className="space-y-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                    {q.nums.map((n, ni) => (
-                      <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">Règle :</span>
-                    {ruleInput}
-                  </div>
+                <div key={i} className="flex items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {q.nums.map((n, ni) => (
+                    <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
+                  ))}
+                  {wrong ? (
+                    <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                      <span className="text-xs font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={v} disabled={seqRuleValidated}
+                      onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      placeholder="± nombre"
+                      className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
                 </div>
               );
             })}
