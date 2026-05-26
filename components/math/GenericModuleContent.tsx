@@ -1437,11 +1437,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, true) });
     } else if (sid === "A3-2") {
       // Multiplication en colonnes — entraînement
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 10], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2, false, 60) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 4) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 5) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
