@@ -3027,7 +3027,7 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {seqCompleteValidated && (
+                  {seqCompleteValidated && currentStep.config.exNum !== 5 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                         Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
