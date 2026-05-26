@@ -243,7 +243,7 @@ function ComparisonExercise({
 }
 
 // ── Expression comparison exercise ───────────────────────────────────────────
-function genExprComp(op: ArithOp, range: [number, number], exNum: number): ExprCompConfig {
+function genExprComp(op: ArithOp, range: [number, number], exNum: number, count = 5): ExprCompConfig {
   const [min, max] = range;
   const evalOp = (a: number, b: number) => op === "+" ? a + b : a - b;
   const rndPair = (): [number, number] => {
@@ -255,7 +255,7 @@ function genExprComp(op: ArithOp, range: [number, number], exNum: number): ExprC
     const j = Math.floor(Math.random() * (i + 1));
     [targets[i], targets[j]] = [targets[j]!, targets[i]!];
   }
-  const questions: ExprCompQ[] = targets.map(answer => {
+  const questions: ExprCompQ[] = targets.slice(0, count).map(answer => {
     let la: number, lb: number, ra: number, rb: number;
     let tries = 0;
     do {
@@ -286,7 +286,7 @@ function ExprCompExercise({
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
 }) {
   const num = (n: number) => (
-    <span className="font-mono font-bold text-[var(--color-accent-alg)]">{n}</span>
+    <span className="font-mono text-[var(--color-text-primary)]">{n}</span>
   );
   return (
     <div className="space-y-4">
@@ -827,9 +827,15 @@ function ArithmeticGroupExercise({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-        {timeLeft !== null && !validated && (
-          <span className={`rounded-full px-3 py-1 text-sm font-bold tabular-nums ${timeLeft <= 15 ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400" : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"}`}>
-            {formatTime(timeLeft)}
+        {config.timer !== undefined && (
+          <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
+            timeLeft !== null && !validated
+              ? timeLeft <= 15
+                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
+                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"
+              : "invisible"
+          }`}>
+            {timeLeft !== null ? formatTime(timeLeft) : "00:00"}
           </span>
         )}
       </div>
@@ -1355,12 +1361,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       // Comparaison (avant évaluation)
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [1, 99], 9) });
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
-      // Évaluation — 4 exercices sur pages séparées
+      // Évaluation — 5 exercices sur pages séparées
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 1) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 2, true) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 3, 2) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 4, 2) });
+      steps.push({ kind: "expr_comparison", lesson, config: { questions: [...genExprComp(op, [1, 99], 5, 2).questions, ...genExprComp(op, [100, 999], 5, 2).questions], exNum: 5, op } });
     } else if (sid === "A2-3") {
       // Entraînement arrondi/estimation
       steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near", 1, 5) });
@@ -2197,6 +2204,9 @@ export function GenericModuleContent({
         currentResults = currentStep.config.questions.map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
         });
+      } else if (currentStep.kind === "expr_comparison") {
+        const cfg = exprCompOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => exprCompAnswers[i] === q.answer);
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -2223,6 +2233,7 @@ export function GenericModuleContent({
                 : es?.kind === "ordering" ? "Classement"
                 : es?.kind === "seq_rule" ? "Règle de la suite"
                 : es?.kind === "seq_complete" ? "Compléter la suite"
+                : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
