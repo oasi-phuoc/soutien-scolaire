@@ -1492,8 +1492,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const ascFirst = Math.random() < 0.5;
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "asc" : "desc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
-      steps.push({ kind: "seq_rule", lesson, config: { questions: [genSeqRule([1,100],3).questions[0]!, genSeqRule([100,999],3).questions[0]!, genSeqRule([1000,9999],4).questions[0]!, genSeqRule([10000,99999],4).questions[0]!], exNum: 3 } });
-      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1,100],5,1,2).questions, ...genSeqComplete([1,100],5,1,4).questions, ...genSeqComplete([100,9999],6,1,2).questions, ...genSeqComplete([100,9999],6,1,4).questions], exNum: 4 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
     } else {
       if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5") {
         const pool = lesson.exercisePool;
@@ -2576,8 +2576,9 @@ export function GenericModuleContent({
       const exNum = currentStep.config.exNum;
       let newCfg: SeqRuleConfig;
       if (!isInEvalPhase && exNum === 3) newCfg = { questions: genSeqRule([1, 99], 3).questions, exNum: 3 };
-      else if (exNum === 4) newCfg = genSeqRule([1000, 9999], 4, 5, 3);
-      else newCfg = { questions: [genSeqRule([1,100],3).questions[0]!, genSeqRule([100,999],3).questions[0]!, genSeqRule([1000,9999],4).questions[0]!, genSeqRule([10000,99999],4).questions[0]!], exNum };
+      else if (!isInEvalPhase && exNum === 4) newCfg = genSeqRule([1000, 9999], 4, 5, 3);
+      else if (isInEvalPhase && exNum === 4) newCfg = { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 };
+      else newCfg = { questions: genSeqRule([1, 99], 3).questions, exNum };
       setSeqRuleOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
       setSeqRuleAnswers(Array(5).fill(""));
       setSeqRuleValidated(false);
@@ -2600,9 +2601,10 @@ export function GenericModuleContent({
     stepReset = () => {
       const exNum = currentStep.config.exNum;
       let newCfg: SeqCompleteConfig;
-      if (exNum === 5) newCfg = genSeqComplete([1, 100], 5, 5, -1, 6);
-      else if (exNum === 6) newCfg = genSeqComplete([1, 999], 6, 5, -1);
-      else newCfg = { questions: [...genSeqComplete([1,100],5,1,2).questions, ...genSeqComplete([1,100],5,1,4).questions, ...genSeqComplete([100,9999],6,1,2).questions, ...genSeqComplete([100,9999],6,1,4).questions], exNum };
+      if (!isInEvalPhase && exNum === 5) newCfg = genSeqComplete([1, 100], 5, 5, -1, 6);
+      else if (!isInEvalPhase && exNum === 6) newCfg = genSeqComplete([1, 999], 6, 5, -1);
+      else if (isInEvalPhase && exNum === 5) newCfg = { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 };
+      else newCfg = genSeqComplete([1, 100], 5, 5, -1, 6);
       setSeqCompleteOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
       setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
       setSeqCompleteValidated(false);
@@ -2996,7 +2998,7 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-3 py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
+              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
               const inputRowCls = "w-24 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
                 <div key={i} className="flex items-center gap-2">
@@ -3028,10 +3030,11 @@ export function GenericModuleContent({
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
           <div className="space-y-5">
-            {activeSeqCompleteConfig.questions.map((q, qi) => {
-              const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
-              const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : activeSeqCompleteConfig.exNum === 5 ? "w-12" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+            {(() => {
+              const globalMaxN = Math.max(...activeSeqCompleteConfig.questions.flatMap(q => q.allNums.map(n => Math.abs(n))));
+              const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : globalMaxN >= 10000 ? "w-20" : globalMaxN >= 1000 ? "w-16" : globalMaxN > 100 ? "w-14" : "w-12";
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
+              return activeSeqCompleteConfig.questions.map((q, qi) => {
               let blankCounter = 0;
               return (
                 <div key={qi} className="space-y-2">
@@ -3074,7 +3077,8 @@ export function GenericModuleContent({
                   )}
                 </div>
               );
-            })}
+            });
+            })()}
           </div>
         </div>
       )}
