@@ -1447,12 +1447,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 4, 2) });
     } else if (sid === "A3-3") {
       // Tables de divisions — entraînement
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 6], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [7, 12], 2) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, false, 60) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 5, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 6, true, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 2, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true, 60) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
