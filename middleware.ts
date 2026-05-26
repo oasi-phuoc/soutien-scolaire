@@ -44,8 +44,8 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  // Accueil sans session ni mode invité → page de connexion
-  if (path === "/" && !user && !request.cookies.get("guest_mode")) {
+  // Accueil sans session → page de connexion
+  if (path === "/" && !user) {
     return NextResponse.redirect(new URL("/connexion", request.url));
   }
 
