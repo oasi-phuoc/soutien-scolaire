@@ -585,22 +585,22 @@ function genFracCompare(mode: "same_den" | "same_num" | "random", range: [number
 // ── A1.3 / A1.4 / A1.5 generators ───────────────────────────────────────────
 
 function genNumberSelect(mode: "gt"|"lt"|"between", exNum: number): NumberSelectConfig {
-  const threshold = rnd(20, 80);
-  const threshold2 = mode === "between" ? threshold + rnd(20, 200) : undefined;
+  const threshold = mode === "between" ? rnd(100, 700) : rnd(100, 900);
+  const threshold2 = mode === "between" ? Math.min(threshold + rnd(50, 250), 999) : undefined;
   const correctCount = rnd(5, 10);
   const numbers: number[] = [];
   while (numbers.length < correctCount) {
     let n: number;
     if (mode === "gt") n = rnd(threshold + 1, 999);
-    else if (mode === "lt") n = rnd(0, threshold - 1);
+    else if (mode === "lt") n = rnd(1, threshold - 1);
     else n = rnd(threshold + 1, threshold2! - 1);
     if (!numbers.includes(n)) numbers.push(n);
   }
   while (numbers.length < 15) {
     let n: number;
-    if (mode === "gt") n = rnd(0, threshold);
+    if (mode === "gt") n = rnd(1, threshold);
     else if (mode === "lt") n = rnd(threshold, 999);
-    else n = Math.random() < 0.5 ? rnd(0, threshold) : rnd(threshold2!, threshold2! + 200);
+    else n = Math.random() < 0.5 ? rnd(1, threshold) : rnd(threshold2!, Math.min(threshold2! + 300, 9999));
     if (!numbers.includes(n)) numbers.push(n);
   }
   for (let i = 14; i > 0; i--) { const j = rnd(0, i); [numbers[i], numbers[j]] = [numbers[j]!, numbers[i]!]; }
@@ -1810,6 +1810,8 @@ export function GenericModuleContent({
   const [roundingValidated, setRoundingValidated] = useState(false);
   const [roundingResults, setRoundingResults] = useState<boolean[]>(() => Array(5).fill(false));
   const [roundingOverrideConfigs, setRoundingOverrideConfigs] = useState<Record<number, RoundingConfig>>({});
+  const [numberSelectOverrideConfigs, setNumberSelectOverrideConfigs] = useState<Record<number, NumberSelectConfig>>({});
+  const [encadrementOverrideConfigs, setEncadrementOverrideConfigs] = useState<Record<number, EncadrementConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
   // Fraction exercise state
@@ -2021,13 +2023,19 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "frac_compare") {
         currentResults = fracCompareResults.slice(0, currentStep.config.questions.length);
       } else if (currentStep.kind === "number_select") {
-        const cfg = currentStep.config;
-        currentResults = cfg.numbers.map((n, i) => {
+        const cfg = numberSelectOverrideConfigs[stepIdx] ?? currentStep.config;
+        const total = cfg.numbers.length;
+        const correct = cfg.numbers.filter((n, i) => {
           const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold : cfg.mode === "lt" ? n < cfg.threshold : n > cfg.threshold && n < cfg.threshold2!;
           return (numberSelectAnswers[i] ?? false) === shouldSelect;
-        });
+        }).length;
+        // 4 pts all correct · 2 pts more than half · 0 pts otherwise
+        if (correct === total) currentResults = [true, true, true, true];
+        else if (correct > total / 2) currentResults = [true, true, false, false];
+        else currentResults = [false, false, false, false];
       } else if (currentStep.kind === "encadrement") {
-        currentResults = currentStep.config.questions.map((q, i) => {
+        const cfg = encadrementOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => {
           const a = encadrementAnswers[i] ?? {lo:"",hi:""};
           return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
         });
@@ -2125,7 +2133,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, activeNumberSelectConfig, activeEncadrementConfig]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2145,6 +2153,12 @@ export function GenericModuleContent({
     : null;
   const activeRoundingConfig = currentStep?.kind === "rounding_group"
     ? (roundingOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeNumberSelectConfig = currentStep?.kind === "number_select"
+    ? (numberSelectOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeEncadrementConfig = currentStep?.kind === "encadrement"
+    ? (encadrementOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
 
   if ((currentStep?.kind === "exercise" || currentStep?.kind === "number_line") && exStatus !== "correct") {
@@ -2311,8 +2325,9 @@ export function GenericModuleContent({
 
   if (currentStep?.kind === "number_select") {
     stepCanValidate = !numberSelectValidated;
+    const _nsStep = currentStep;
     stepValidate = numberSelectValidated ? () => {} : () => {
-      const cfg = currentStep.config;
+      const cfg = activeNumberSelectConfig ?? _nsStep.config;
       const results = cfg.numbers.map((n, i) => {
         const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold
           : cfg.mode === "lt" ? n < cfg.threshold
@@ -2323,6 +2338,8 @@ export function GenericModuleContent({
       setNumberSelectValidated(true);
     };
     stepReset = () => {
+      const newCfg = genNumberSelect(_nsStep.config.mode, _nsStep.config.exNum);
+      setNumberSelectOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
       setNumberSelectAnswers(Array(15).fill(false));
       setNumberSelectValidated(false);
       setNumberSelectResults(Array(15).fill(false));
@@ -2331,8 +2348,10 @@ export function GenericModuleContent({
 
   if (currentStep?.kind === "encadrement") {
     stepCanValidate = !encadrementValidated;
+    const _encStep = currentStep;
     stepValidate = encadrementValidated ? () => {} : () => {
-      const results = currentStep.config.questions.map((q, i) => {
+      const cfg = activeEncadrementConfig ?? _encStep.config;
+      const results = cfg.questions.map((q, i) => {
         const a = encadrementAnswers[i] ?? {lo:"",hi:""};
         return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
       });
@@ -2340,9 +2359,12 @@ export function GenericModuleContent({
       setEncadrementValidated(true);
     };
     stepReset = () => {
-      setEncadrementAnswers(Array(5).fill(null).map(()=>({lo:"",hi:""})));
+      const cfg = _encStep.config;
+      const newCfg = genEncadrement(cfg.unit, cfg.exNum, cfg.questions.length);
+      setEncadrementOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setEncadrementAnswers(Array(cfg.questions.length).fill(null).map(()=>({lo:"",hi:""})));
       setEncadrementValidated(false);
-      setEncadrementResults(Array(5).fill(false));
+      setEncadrementResults(Array(cfg.questions.length).fill(false));
     };
   }
 
@@ -2549,16 +2571,16 @@ export function GenericModuleContent({
       )}
 
       {/* Number select exercise (A1.3) */}
-      {currentStep?.kind === "number_select" && (
+      {!showEvalScore && currentStep?.kind === "number_select" && activeNumberSelectConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">{currentStep.config.consigne}</p>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeNumberSelectConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">{activeNumberSelectConfig.consigne}</p>
           <div className="grid grid-cols-5 gap-2">
-            {currentStep.config.numbers.map((n, i) => {
+            {activeNumberSelectConfig.numbers.map((n, i) => {
               const sel = numberSelectAnswers[i] ?? false;
-              const shouldSelect = currentStep.config.mode === "gt" ? n > currentStep.config.threshold
-                : currentStep.config.mode === "lt" ? n < currentStep.config.threshold
-                : n > currentStep.config.threshold && n < currentStep.config.threshold2!;
+              const shouldSelect = activeNumberSelectConfig.mode === "gt" ? n > activeNumberSelectConfig.threshold
+                : activeNumberSelectConfig.mode === "lt" ? n < activeNumberSelectConfig.threshold
+                : n > activeNumberSelectConfig.threshold && n < activeNumberSelectConfig.threshold2!;
               let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
               if (!numberSelectValidated) {
                 cls += sel
@@ -2579,53 +2601,51 @@ export function GenericModuleContent({
               );
             })}
           </div>
-          {numberSelectValidated && (
-            <p className="text-xs text-[var(--color-text-secondary)]">
-              {numberSelectResults.filter(Boolean).length}/{numberSelectResults.length} corrects
-            </p>
-          )}
         </div>
       )}
 
       {/* Encadrement exercise (A1.3) */}
-      {currentStep?.kind === "encadrement" && (
+      {!showEvalScore && currentStep?.kind === "encadrement" && activeEncadrementConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeEncadrementConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Encadrez chaque nombre à la {currentStep.config.unit === 10 ? "dizaine" : "centaine"} près.
+            Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
           </p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
-            {currentStep.config.questions.map((q, i) => {
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
+            {activeEncadrementConfig.questions.map((q, i) => {
               const a = encadrementAnswers[i] ?? {lo:"",hi:""};
               const ok = encadrementValidated ? encadrementResults[i] : null;
               const wrong = ok === false;
-              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const inputCls = "w-24 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const symCls = "text-sm font-bold text-[var(--color-text-secondary)]";
               return (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  {wrong ? (
-                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                      <span className="line-through text-amber-500 text-xs">{a.lo||"—"}</span>
-                      <span className="text-xs font-bold">{q.lo}</span>
-                    </div>
-                  ) : (
-                    <input type="number" inputMode="numeric" value={a.lo} disabled={encadrementValidated}
-                      onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, lo: e.target.value} : v))}
-                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                  )}
-                  <span className="text-sm font-bold text-[var(--color-text-secondary)]">&lt;</span>
-                  <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
-                  <span className="text-sm font-bold text-[var(--color-text-secondary)]">&lt;</span>
-                  {wrong ? (
-                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                      <span className="line-through text-amber-500 text-xs">{a.hi||"—"}</span>
-                      <span className="text-xs font-bold">{q.hi}</span>
-                    </div>
-                  ) : (
-                    <input type="number" inputMode="numeric" value={a.hi} disabled={encadrementValidated}
-                      onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, hi: e.target.value} : v))}
-                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
-                  )}
+                <div key={i} className="flex items-start gap-3">
+                  <span className="mt-1.5 w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <div className="flex flex-col items-center gap-0.5">
+                    {wrong ? (
+                      <div className={`${inputCls} ${CLS_WRONG} flex h-8 items-center justify-center gap-1`}>
+                        <span className="line-through text-amber-500 text-xs">{a.lo||"—"}</span>
+                        <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.lo}</span>
+                      </div>
+                    ) : (
+                      <input type="number" inputMode="numeric" value={a.lo} disabled={encadrementValidated}
+                        onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, lo: e.target.value} : v))}
+                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                    )}
+                    <span className={symCls}>&lt;</span>
+                    <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                    <span className={symCls}>&lt;</span>
+                    {wrong ? (
+                      <div className={`${inputCls} ${CLS_WRONG} flex h-8 items-center justify-center gap-1`}>
+                        <span className="line-through text-amber-500 text-xs">{a.hi||"—"}</span>
+                        <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.hi}</span>
+                      </div>
+                    ) : (
+                      <input type="number" inputMode="numeric" value={a.hi} disabled={encadrementValidated}
+                        onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, hi: e.target.value} : v))}
+                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                    )}
+                  </div>
                 </div>
               );
             })}
