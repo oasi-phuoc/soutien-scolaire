@@ -435,7 +435,7 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
     "est_diz_2":        "Estimez le résultat du calcul à la dizaine la plus proche.",
     "est_diz_large_2":  "Estimez le résultat du calcul à la dizaine la plus proche.",
     "est_diz_three":    "Estimez le résultat du calcul à la dizaine la plus proche.",
-    "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "",
+    "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "", "mixed": "",
   };
   const consigne = consigneMap[kind];
   const qs: RoundingQ[] = [];
