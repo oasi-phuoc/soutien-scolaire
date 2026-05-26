@@ -8,8 +8,6 @@ import { useTranslation } from "@/components/TranslationProvider";
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { SubmoduleTrad } from "@/lib/curriculum/content/math/trad";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math/math-a1";
-import { getTrad } from "@/lib/curriculum/content/math/trad";
-import type { SubmoduleTrad } from "@/lib/curriculum/content/math/trad";
 import type {
   MathExerciseItem,
   MathRichBlock,

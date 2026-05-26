@@ -9,8 +9,6 @@ import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
-import { getTrad } from "@/lib/curriculum/content/math/trad";
-import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
