@@ -1487,7 +1487,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1, 99], 3).questions, exNum: 3 } });
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1000, 9999], 4, 5, 3).questions, exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: genSeqComplete([1, 100], 5, 5, -1, 6).questions, exNum: 5 } });
-      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 999], 6, 3, 2).questions, ...genSeqComplete([1, 999], 6, 2, 4).questions], exNum: 6 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: genSeqComplete([1, 999], 6, 5, -1).questions, exNum: 6 } });
       steps.push({ kind: "eval_start", lesson });
       const ascFirst = Math.random() < 0.5;
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "asc" : "desc", 1) });
@@ -2993,7 +2993,7 @@ export function GenericModuleContent({
           <div className="space-y-5">
             {currentStep.config.questions.map((q, qi) => {
               const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
-              const cellW = currentStep.config.exNum === 6 ? "w-14" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+              const cellW = currentStep.config.exNum === 6 ? "w-[54px]" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
