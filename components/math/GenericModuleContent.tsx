@@ -1590,15 +1590,15 @@ function MultiplicationTableBlock() {
           <tbody>
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
               <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a * n}</td>
                 <td className="w-6" />
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b * n}</td>
               </tr>
@@ -1638,15 +1638,15 @@ function DivisionTableBlock() {
           <tbody>
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
               <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a * n}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a * n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
                 <td className="w-6" />
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b * n}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b * n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
-                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b}</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
               </tr>
