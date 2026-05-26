@@ -1866,7 +1866,7 @@ export function GenericModuleContent({
 
   const [seqCompleteAnswers, setSeqCompleteAnswers] = useState<Array<string[]>>(() => Array(5).fill(null).map(()=>Array(4).fill("")));
   const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
-  const [seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
+  const [_seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
 
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
