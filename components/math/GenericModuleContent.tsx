@@ -1924,6 +1924,9 @@ export function GenericModuleContent({
   const [encadrementOverrideConfigs, setEncadrementOverrideConfigs] = useState<Record<number, EncadrementConfig>>({});
   const [oddEvenOverrideConfigs, setOddEvenOverrideConfigs] = useState<Record<number, OddEvenConfig>>({});
   const [nlMultiOverrideConfigs, setNlMultiOverrideConfigs] = useState<Record<number, NLMultiConfig>>({});
+  const [orderingOverrideConfigs, setOrderingOverrideConfigs] = useState<Record<number, OrderingConfig>>({});
+  const [seqRuleOverrideConfigs, setSeqRuleOverrideConfigs] = useState<Record<number, SeqRuleConfig>>({});
+  const [seqCompleteOverrideConfigs, setSeqCompleteOverrideConfigs] = useState<Record<number, SeqCompleteConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
   // Fraction exercise state
@@ -2139,6 +2142,15 @@ export function GenericModuleContent({
   const activeNlMultiConfig = currentStep?.kind === "nl_multi"
     ? (nlMultiOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeOrderingConfig = currentStep?.kind === "ordering"
+    ? (orderingOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeSeqRuleConfig = currentStep?.kind === "seq_rule"
+    ? (seqRuleOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeSeqCompleteConfig = currentStep?.kind === "seq_complete"
+    ? (seqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   const goNext = useCallback(() => {
     if (showEvalScore) { router.push("/mathematiques"); return; }
@@ -2279,7 +2291,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2531,37 +2543,52 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "ordering") {
+  if (currentStep?.kind === "ordering" && activeOrderingConfig) {
     stepCanValidate = !orderingValidated;
     stepValidate = orderingValidated ? () => {} : () => {
-      const results = currentStep.config.questions.map((q, qi) => {
+      const results = activeOrderingConfig.questions.map((q, qi) => {
         const sel = orderingSelected[qi] ?? [];
-        const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
+        const sorted = [...q.numbers].sort((a,b) => activeOrderingConfig.direction === "asc" ? a-b : b-a);
         return sel.length === q.numbers.length && sel.every((n,i) => n === sorted[i]);
       });
       setOrderingResults(results);
       setOrderingValidated(true);
     };
-    stepReset = () => { setOrderingSelected([[], []]); setOrderingValidated(false); setOrderingResults(Array(2).fill(false)); };
+    stepReset = () => {
+      setOrderingOverrideConfigs(prev => ({ ...prev, [stepIdx]: genOrdering(currentStep.config.direction, currentStep.config.exNum) }));
+      setOrderingSelected([[], []]);
+      setOrderingValidated(false);
+      setOrderingResults(Array(2).fill(false));
+    };
   }
 
-  if (currentStep?.kind === "seq_rule") {
+  if (currentStep?.kind === "seq_rule" && activeSeqRuleConfig) {
     stepCanValidate = !seqRuleValidated;
     stepValidate = seqRuleValidated ? () => {} : () => {
-      const results = currentStep.config.questions.map((q, i) => {
+      const results = activeSeqRuleConfig.questions.map((q, i) => {
         const ans = seqRuleAnswers[i]?.trim() ?? "";
         return ans === `${q.op}${q.step}`;
       });
       setSeqRuleResults(results);
       setSeqRuleValidated(true);
     };
-    stepReset = () => { setSeqRuleAnswers(Array(5).fill("")); setSeqRuleValidated(false); setSeqRuleResults(Array(5).fill(false)); };
+    stepReset = () => {
+      const exNum = currentStep.config.exNum;
+      let newCfg: SeqRuleConfig;
+      if (!isInEvalPhase && exNum === 3) newCfg = { questions: genSeqRule([1, 99], 3).questions, exNum: 3 };
+      else if (exNum === 4) newCfg = genSeqRule([1000, 9999], 4, 5, 3);
+      else newCfg = { questions: [genSeqRule([1,100],3).questions[0]!, genSeqRule([100,999],3).questions[0]!, genSeqRule([1000,9999],4).questions[0]!, genSeqRule([10000,99999],4).questions[0]!], exNum };
+      setSeqRuleOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setSeqRuleAnswers(Array(5).fill(""));
+      setSeqRuleValidated(false);
+      setSeqRuleResults(Array(5).fill(false));
+    };
   }
 
-  if (currentStep?.kind === "seq_complete") {
+  if (currentStep?.kind === "seq_complete" && activeSeqCompleteConfig) {
     stepCanValidate = !seqCompleteValidated;
     stepValidate = seqCompleteValidated ? () => {} : () => {
-      const results = currentStep.config.questions.map((q, qi) => {
+      const results = activeSeqCompleteConfig.questions.map((q, qi) => {
         return q.blankIdxs.every((bi, ii) => {
           const ans = parseInt(seqCompleteAnswers[qi]?.[ii] ?? "");
           return ans === q.allNums[bi];
@@ -2570,7 +2597,17 @@ export function GenericModuleContent({
       setSeqCompleteResults(results);
       setSeqCompleteValidated(true);
     };
-    stepReset = () => { setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill(""))); setSeqCompleteValidated(false); setSeqCompleteResults(Array(5).fill(false)); };
+    stepReset = () => {
+      const exNum = currentStep.config.exNum;
+      let newCfg: SeqCompleteConfig;
+      if (exNum === 5) newCfg = genSeqComplete([1, 100], 5, 5, -1, 6);
+      else if (exNum === 6) newCfg = genSeqComplete([1, 999], 6, 5, -1);
+      else newCfg = { questions: [...genSeqComplete([1,100],5,1,2).questions, ...genSeqComplete([1,100],5,1,4).questions, ...genSeqComplete([100,9999],6,1,2).questions, ...genSeqComplete([100,9999],6,1,4).questions], exNum };
+      setSeqCompleteOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+      setSeqCompleteValidated(false);
+      setSeqCompleteResults(Array(5).fill(false));
+    };
   }
 
   if (!lessons || lessons.length === 0 || steps.length === 0) {
@@ -2874,18 +2911,18 @@ export function GenericModuleContent({
       )}
 
       {/* Ordering exercise (A1.5) */}
-      {currentStep?.kind === "ordering" && (
+      {currentStep?.kind === "ordering" && activeOrderingConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOrderingConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Classez les nombres dans l&apos;ordre {currentStep.config.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
+            Classez les nombres dans l&apos;ordre {activeOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
           </p>
           <div className="space-y-6">
-            {currentStep.config.questions.map((q, qi) => {
+            {activeOrderingConfig.questions.map((q, qi) => {
               const sel = orderingSelected[qi] ?? [];
               const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
               const ok = orderingValidated ? orderingResults[qi] : null;
-              const sep = currentStep.config.direction === "asc" ? "<" : ">";
+              const sep = activeOrderingConfig.direction === "asc" ? "<" : ">";
               return (
                 <div key={qi} className="space-y-2">
                   <div className="flex flex-wrap gap-2">
@@ -2949,17 +2986,17 @@ export function GenericModuleContent({
       )}
 
       {/* Sequence rule exercise (A1.5) */}
-      {currentStep?.kind === "seq_rule" && (
+      {currentStep?.kind === "seq_rule" && activeSeqRuleConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
           <div className="space-y-4">
-            {currentStep.config.questions.map((q, i) => {
+            {activeSeqRuleConfig.questions.map((q, i) => {
               const v = seqRuleAnswers[i] ?? "";
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const chipCls = `${currentStep.config.exNum === 3 ? "w-12 " : currentStep.config.exNum === 4 ? "w-16 " : ""}shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`;
+              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`;
               const inputRowCls = "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
                 <div key={i} className="flex items-center gap-2">
@@ -2986,14 +3023,14 @@ export function GenericModuleContent({
       )}
 
       {/* Sequence complete exercise (A1.5) */}
-      {currentStep?.kind === "seq_complete" && (
+      {currentStep?.kind === "seq_complete" && activeSeqCompleteConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
           <div className="space-y-5">
-            {currentStep.config.questions.map((q, qi) => {
+            {activeSeqCompleteConfig.questions.map((q, qi) => {
               const maxN = Math.max(...q.allNums.map(n => Math.abs(n)));
-              const cellW = currentStep.config.exNum === 6 ? "w-[54px]" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
+              const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : maxN >= 10000 ? "w-20" : maxN >= 1000 ? "w-16" : maxN >= 100 ? "w-14" : "w-12";
               const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
               let blankCounter = 0;
               return (
@@ -3028,7 +3065,7 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {seqCompleteValidated && currentStep.config.exNum !== 5 && currentStep.config.exNum !== 6 && (
+                  {seqCompleteValidated && activeSeqCompleteConfig.exNum !== 5 && activeSeqCompleteConfig.exNum !== 6 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                         Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
