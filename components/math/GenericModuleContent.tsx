@@ -426,7 +426,7 @@ function roundTo10(n: number) { return Math.round(n / 10) * 10; }
 function roundTo100(n: number) { return Math.round(n / 100) * 100; }
 function roundTo1000(n: number) { return Math.round(n / 1000) * 1000; }
 
-type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed";
+type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed" | "mixed";
 
 function genRounding(kind: RoundingKind, exNum: number, count: number): RoundingConfig {
   const consigneMap: Record<RoundingKind, string> = {
