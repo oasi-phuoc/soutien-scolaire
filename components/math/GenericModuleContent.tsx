@@ -4,9 +4,14 @@ import { useRouter } from "next/navigation";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import { getTrad } from "@/lib/curriculum/content/math/trad";
+import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import type { PivotCode } from "@/lib/pivot-langs";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
@@ -1598,34 +1603,75 @@ function DivisionTableBlock() {
 }
 
 // ── Rich block renderer ──────────────────────────────────────────────────────
-function BlockView({ block }: { block: MathRichBlock }) {
+function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
+  block: MathRichBlock;
+  blockIdx?: number;
+  tradBlocks?: BlockTrad[];
+  pivot: PivotCode;
+  showPivot: boolean;
+}) {
+  const isRtl = pivot === "ar" || pivot === "fa";
+  const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
+  const pivotText = bt?.text?.[pivot];
   switch (block.type) {
-    case "heading":
+    case "heading": {
+      const pvHead = bt?.text?.[pivot];
       return block.black ? (
-        <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+        <div>
+          <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+          {showPivot && pvHead && pvHead !== block.fr && (
+            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvHead}</p>
+          )}
+        </div>
       ) : (
-        <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
+        <div>
+          <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
+          {showPivot && pvHead && pvHead !== block.fr && (
+            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvHead}</p>
+          )}
+        </div>
       );
+    }
     case "plain":
       if (!block.fr) return <div className="h-3" />;
       return (
-        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderText(block.fr)}</p>
+        <div>
+          <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderText(block.fr)}</p>
+          {showPivot && pivotText && pivotText !== block.fr && (
+            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
+          )}
+        </div>
       );
     case "note":
       return (
-        <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
-          {block.fr}
+        <div>
+          <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
+            {block.fr}
+          </div>
+          {showPivot && pivotText && pivotText !== block.fr && (
+            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
+          )}
         </div>
       );
     case "example":
       return (
-        <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]">
-          {block.fr}
+        <div>
+          <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]">
+            {block.fr}
+          </div>
+          {showPivot && pivotText && pivotText !== block.fr && (
+            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
+          )}
         </div>
       );
     case "highlight":
       return (
-        <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</p>
+        <div>
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</p>
+          {showPivot && pivotText && pivotText !== block.fr && (
+            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
+          )}
+        </div>
       );
     case "rule":
       return (
@@ -1686,22 +1732,32 @@ function BlockView({ block }: { block: MathRichBlock }) {
           )}
         </div>
       );
-    case "section":
+    case "section": {
+      const pvItems = showPivot ? bt?.items?.[pivot] : undefined;
+      const pvLabel = showPivot ? bt?.label?.[pivot] : undefined;
       return (
         <div className="space-y-1.5">
           {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
+          {pvLabel && pvLabel !== block.labelFr && (
+            <p className="text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvLabel}</p>
+          )}
           {block.itemsFr.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
                   {renderText(item)}
+                  {pvItems?.[ii] && pvItems[ii] !== item && (
+                    <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvItems[ii]}</span>
+                  )}
                 </li>
               ))}
             </ul>
           )}
         </div>
       );
-    case "bullets":
+    }
+    case "bullets": {
+      const pvBulletItems = showPivot ? bt?.items?.[pivot] : undefined;
       return (
         <div className="space-y-1.5">
           {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
@@ -1710,13 +1766,19 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-1 shrink-0 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{renderText(item)}</span>
+                  <span>
+                    {renderText(item)}
+                    {pvBulletItems?.[ii] && pvBulletItems[ii] !== item && (
+                      <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvBulletItems[ii]}</span>
+                    )}
+                  </span>
                 </li>
               ))}
             </ul>
           )}
         </div>
       );
+    }
     case "svg_row":
       return (
         <div className="flex gap-3">
@@ -1740,25 +1802,41 @@ function BlockView({ block }: { block: MathRichBlock }) {
 }
 
 // ── Theory view ──────────────────────────────────────────────────────────────
-function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
+function TheoryView({ lesson, pivot, showPivot }: {
+  lesson: MathSubmoduleLesson;
+  pivot: PivotCode;
+  showPivot: boolean;
+}) {
   const { theory } = lesson;
+  const trad = getTrad(lesson.submoduleId);
+  const isRtl = pivot === "ar" || pivot === "fa";
+  const pivotTitle = trad?.title?.[pivot];
+  const pivotParas = trad?.paragraphs?.[pivot] ?? (theory.paragraphs as Record<string, string[]>)[pivot];
   return (
     <div className="space-y-4">
-      <h2 className="text-base font-bold text-[var(--color-text-primary)]">
-        {theory.title.fr}
-      </h2>
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+          {theory.title.fr}
+        </h2>
+        {showPivot && pivotTitle && pivotTitle !== theory.title.fr && (
+          <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotTitle}</p>
+        )}
+      </div>
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
           {theory.blocks.map((block, i) => (
-            <BlockView key={i} block={block} />
+            <BlockView key={i} block={block} blockIdx={i} tradBlocks={trad?.blocks} pivot={pivot} showPivot={showPivot} />
           ))}
         </div>
       ) : (
         <div className="space-y-3">
           {theory.paragraphs.fr.map((p, i) => (
-            <p key={i} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
-              {p}
-            </p>
+            <div key={i}>
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{p}</p>
+              {showPivot && pivotParas?.[i] && pivotParas[i] !== p && (
+                <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotParas[i]}</p>
+              )}
+            </div>
           ))}
         </div>
       )}
@@ -1777,6 +1855,8 @@ export function GenericModuleContent({
   startAtEval?: boolean;
 }) {
   const router = useRouter();
+  const pivot = usePivotLang();
+  const { showPivot: showPivotTranslation } = useTranslation();
   const allLessons = getLessonsForModule(moduleId);
   const lessons = startSubmoduleId && allLessons
     ? allLessons.filter((l) => l.submoduleId === startSubmoduleId)
@@ -2544,7 +2624,7 @@ export function GenericModuleContent({
       )}
 
       {/* Theory */}
-      {currentStep?.kind === "theory" && <TheoryView lesson={currentStep.lesson} />}
+      {currentStep?.kind === "theory" && <TheoryView lesson={currentStep.lesson} pivot={pivot} showPivot={!!showPivotTranslation} />}
 
       {/* Exercise */}
       {currentStep?.kind === "exercise" && (
