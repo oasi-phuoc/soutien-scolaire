@@ -2839,7 +2839,7 @@ export function GenericModuleContent({
               const ok = nlMultiValidated ? nlMultiResults[i] : null;
               const noFeedback = activeNlMultiConfig.noFeedback;
               const wrong = ok === false;
-              const inputCls = "flex-1 rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
               let afterText = "";
               if (!noFeedback) {
                 if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
