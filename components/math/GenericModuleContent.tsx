@@ -708,20 +708,21 @@ function genSeqRule(range: [number, number], exNum: number, count = 5, termCount
   return { questions, exNum };
 }
 
-function genSeqComplete(range: [number, number], exNum: number, count: number, blanks: 2|4): SeqCompleteConfig {
+function genSeqComplete(range: [number, number], exNum: number, count: number, blanks: number, termCount = 5): SeqCompleteConfig {
   const questions: SeqCompleteQ[] = Array.from({ length: count }, () => {
+    const b = blanks < 0 ? rnd(2, 3) : blanks;
     const step = rnd(1, Math.max(1, Math.floor((range[1] - range[0]) / 10)));
     const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
     let start: number;
     if (op === "+") {
-      start = rnd(range[0], Math.max(range[0], range[1] - 4 * step));
+      start = rnd(range[0], Math.max(range[0], range[1] - (termCount - 1) * step));
     } else {
-      start = rnd(Math.max(range[0], 4 * step + 1), Math.max(range[0], 4 * step + 1, range[1]));
+      start = rnd(Math.max(range[0], (termCount - 1) * step + 1), Math.max(range[0], (termCount - 1) * step + 1, range[1]));
     }
-    const allNums = [0,1,2,3,4].map(i => op === "+" ? start + i * step : start - i * step);
-    const available = [1,2,3,4];
+    const allNums = Array.from({ length: termCount }, (_, i) => op === "+" ? start + i * step : start - i * step);
+    const available = Array.from({ length: termCount - 1 }, (_, i) => i + 1);
     const blankIdxs: number[] = [];
-    while (blankIdxs.length < blanks && available.length > 0) {
+    while (blankIdxs.length < b && available.length > 0) {
       const idx = rnd(0, available.length - 1);
       blankIdxs.push(available[idx]!);
       available.splice(idx, 1);
@@ -1485,7 +1486,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1, 99], 3).questions, exNum: 3 } });
       steps.push({ kind: "seq_rule", lesson, config: { questions: genSeqRule([1000, 9999], 4, 5, 3).questions, exNum: 4 } });
-      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 100], 5, 3, 2).questions, ...genSeqComplete([1, 100], 5, 2, 4).questions], exNum: 5 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: genSeqComplete([1, 100], 5, 5, -1, 6).questions, exNum: 5 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 999], 6, 3, 2).questions, ...genSeqComplete([1, 999], 6, 2, 4).questions], exNum: 6 } });
       steps.push({ kind: "eval_start", lesson });
       const ascFirst = Math.random() < 0.5;
