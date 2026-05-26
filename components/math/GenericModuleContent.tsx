@@ -2929,7 +2929,7 @@ export function GenericModuleContent({
                     {q.numbers.map((n, ni) => {
                       const isSelected = sel.includes(n);
                       const selIdx = sel.indexOf(n);
-                      let cls = "rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
+                      let cls = "w-16 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
                       if (!orderingValidated) {
                         cls += isSelected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
