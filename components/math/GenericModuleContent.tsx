@@ -2958,7 +2958,7 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
-              const chipCls = "shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
+              const chipCls = `${currentStep.config.exNum === 3 ? "w-12 " : ""}shrink-0 rounded-lg border border-[var(--color-border-default)] px-3 py-2 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`;
               const inputRowCls = "min-w-[4.5rem] rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
                 <div key={i} className="flex items-center gap-2">
