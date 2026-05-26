@@ -1484,7 +1484,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering("asc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 100], 3).questions.slice(0,3), ...genSeqRule([100, 999], 3).questions.slice(0,2)], exNum: 3 } });
-      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1000, 9999], 4).questions.slice(0,3), ...genSeqRule([10000, 99999], 4).questions.slice(0,2)], exNum: 4 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1000, 9999], 3).questions.slice(0,3), ...genSeqRule([10000, 99999], 3).questions.slice(0,2)], exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 100], 5, 3, 2).questions, ...genSeqComplete([1, 100], 5, 2, 4).questions], exNum: 5 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([100, 9999], 6, 3, 2).questions, ...genSeqComplete([100, 9999], 6, 2, 4).questions], exNum: 6 } });
       steps.push({ kind: "eval_start", lesson });
@@ -2918,14 +2918,16 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  <div className="flex flex-wrap items-center gap-1">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)] mr-1">{qi + 1}. Votre ordre :</span>
-                    {sel.length > 0 ? sel.map((n, si) => (
-                      <Fragment key={si}>
-                        <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
-                        {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
-                      </Fragment>
-                    )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
+                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
+                      {sel.length > 0 ? sel.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                        </Fragment>
+                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                    </div>
                   </div>
                   {orderingValidated && ok === false && (
                     <div className="flex flex-wrap items-center gap-1">
@@ -2957,19 +2959,17 @@ export function GenericModuleContent({
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step}`;
               const chipW = currentStep.config.exNum <= 3 ? "w-14" : "w-20";
-              const inputRowCls = "flex-1 min-w-0 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
+              const inputRowCls = "w-24 h-9 rounded border px-2 text-sm font-mono outline-none transition-colors";
               return (
                 <div key={i} className="space-y-1.5">
                   <div className="flex items-center gap-2">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {q.nums.map((n, ni) => (
-                      <Fragment key={ni}>
-                        <span className={`${chipW} shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
-                        {ni < q.nums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
-                      </Fragment>
+                      <span key={ni} className={`${chipW} shrink-0 rounded bg-[var(--color-bg-secondary)] px-2 py-1 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
                     ))}
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}. Règle :</span>
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">Règle :</span>
                     {wrong ? (
                       <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
                         <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
@@ -3003,6 +3003,7 @@ export function GenericModuleContent({
               return (
                 <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3 space-y-2">
                   <div className="flex items-center gap-1.5">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
                     {q.allNums.map((n, ni) => {
                       const blankIdx = q.blankIdxs.indexOf(ni);
                       if (blankIdx !== -1) {
@@ -3010,43 +3011,34 @@ export function GenericModuleContent({
                         const v = seqCompleteAnswers[qi]?.[bIdx] ?? "";
                         const expected = q.allNums[ni]!;
                         const wrong = seqCompleteValidated && parseInt(v) !== expected;
-                        return (
-                          <Fragment key={ni}>
-                            {wrong ? (
-                              <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                                <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                                <span className="text-xs font-bold">{expected.toLocaleString("fr-CH")}</span>
-                              </div>
-                            ) : (
-                              <input type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
-                                onChange={e => setSeqCompleteAnswers(prev => {
-                                  const next = prev.map(r => [...r]);
-                                  if (!next[qi]) next[qi] = [];
-                                  next[qi]![bIdx] = e.target.value;
-                                  return next;
-                                })}
-                                className={`${inputCls} ${seqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
-                            )}
-                            {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
-                          </Fragment>
+                        return wrong ? (
+                          <div key={ni} className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                            <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                            <span className="text-xs font-bold">{expected.toLocaleString("fr-CH")}</span>
+                          </div>
+                        ) : (
+                          <input key={ni} type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
+                            onChange={e => setSeqCompleteAnswers(prev => {
+                              const next = prev.map(r => [...r]);
+                              if (!next[qi]) next[qi] = [];
+                              next[qi]![bIdx] = e.target.value;
+                              return next;
+                            })}
+                            className={`${inputCls} ${seqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                         );
                       }
                       return (
-                        <Fragment key={ni}>
-                          <span className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded bg-[var(--color-bg-secondary)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
-                          {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs shrink-0">→</span>}
-                        </Fragment>
+                        <span key={ni} className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded bg-[var(--color-bg-secondary)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
                       );
                     })}
                   </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
-                    {seqCompleteValidated && (
+                  {seqCompleteValidated && (
+                    <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                         Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
