@@ -5,8 +5,9 @@ export function isEmailFormat(s: string): boolean {
 }
 
 export function isPhoneFormat(s: string): boolean {
-  const clean = s.replace(/[\s\-\.\(\)]/g, "");
-  return /^\+[1-9]\d{6,14}$/.test(clean);
+  // Strip everything except digits and leading +, then validate +XXXXXXX (7-15 digits)
+  const clean = s.replace(/[^\d+]/g, "");
+  return /^\+\d{7,15}$/.test(clean);
 }
 
 export function getIdentifierStatus(s: string): IdentifierStatus {
@@ -17,5 +18,5 @@ export function getIdentifierStatus(s: string): IdentifierStatus {
 }
 
 export function normalizePhone(raw: string): string {
-  return raw.replace(/[\s\-\.\(\)]/g, "");
+  return raw.replace(/[^\d+]/g, "");
 }
