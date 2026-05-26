@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { AppInput } from "@/components/ui/AppInput";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
+import { getTrad } from "@/lib/curriculum/content/math/trad";
+import type { SubmoduleTrad } from "@/lib/curriculum/content/math/trad";
 import { MATH_A1_LESSONS } from "@/lib/curriculum/content/math/math-a1";
 import type {
   MathExerciseItem,
@@ -94,12 +96,16 @@ function renderText(text: string): React.ReactNode {
   return <>{nodes}</>;
 }
 
-function RichBlock({ block, pivot, showPivot, isRtl }: {
+function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
   block: MathRichBlock;
+  blockIdx?: number;
+  trad?: SubmoduleTrad;
   pivot: PivotCode;
   showPivot: boolean;
   isRtl: boolean;
 }) {
+  const bt = blockIdx !== undefined ? trad?.blocks?.[blockIdx] : undefined;
+  const pivotMainText = bt?.text?.[pivot];
   switch (block.type) {
     case "heading":
       return block.black ? (
@@ -129,35 +135,36 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
     case "note": {
-      const pv = block.pivot?.[pivot];
+      const pv = pivotMainText ?? block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] border border-amber-300/50 bg-amber-50 px-4 py-2 dark:bg-amber-950/20">
           <p className="text-sm text-amber-900 dark:text-amber-200">{renderBold(block.fr)}</p>
-          {showPivot && pv ? (
+          {showPivot && pv && pv !== block.fr ? (
             <p className="mt-1 border-l-2 border-amber-400/40 pl-2 text-xs italic text-amber-700 dark:text-amber-300" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
         </div>
       );
     }
     case "example": {
-      const pv = block.pivot?.[pivot];
+      const pv = pivotMainText ?? block.pivot?.[pivot];
       return (
         <div className="rounded-[var(--radius-md)] bg-[var(--color-bg-secondary)] px-4 py-2.5">
           <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">Exemple</p>
           <p className="mt-1 font-mono text-sm text-[var(--color-text-primary)]">{block.fr}</p>
-          {showPivot && pv ? (
+          {showPivot && pv && pv !== block.fr ? (
             <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
         </div>
       );
     }
     case "table": {
+      const pvHeaders = showPivot ? bt?.headers?.[pivot] : undefined;
       return (
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
           <table className="w-full text-sm">
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
-                {block.headersFr.map((h, i) => (
+                {(pvHeaders ?? block.headersFr).map((h, i) => (
                   <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-secondary)]"}`}>{h}</th>
                 ))}
               </tr>
@@ -177,11 +184,11 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       );
     }
     case "highlight": {
-      const pv = block.pivot?.[pivot];
+      const pv = pivotMainText ?? block.pivot?.[pivot];
       return (
         <div>
           <p className="text-sm font-bold text-[var(--color-accent-alg)]">{renderBold(block.fr)}</p>
-          {showPivot && pv ? (
+          {showPivot && pv && pv !== block.fr ? (
             <p className="mt-1 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
         </div>
@@ -203,7 +210,8 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
           )}
         </div>
       );
-    case "section":
+    case "section": {
+      const pvSectionItems = showPivot ? bt?.items?.[pivot] : undefined;
       return (
         <div className="space-y-1.5">
           {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
@@ -212,13 +220,18 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
                   {renderText(item)}
+                  {pvSectionItems?.[ii] && pvSectionItems[ii] !== item && (
+                    <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvSectionItems[ii]}</span>
+                  )}
                 </li>
               ))}
             </ul>
           )}
         </div>
       );
-    case "bullets":
+    }
+    case "bullets": {
+      const pvBulletItems = showPivot ? bt?.items?.[pivot] : undefined;
       return (
         <div className="space-y-1.5">
           {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
@@ -227,13 +240,19 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
               {block.itemsFr.map((item, ii) => (
                 <li key={ii} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-1 shrink-0 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{renderText(item)}</span>
+                  <span>
+                    {renderText(item)}
+                    {pvBulletItems?.[ii] && pvBulletItems[ii] !== item && (
+                      <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvBulletItems[ii]}</span>
+                    )}
+                  </span>
                 </li>
               ))}
             </ul>
           )}
         </div>
       );
+    }
     case "svg_row":
       return (
         <div className="flex gap-3">
@@ -252,11 +271,11 @@ function RichBlock({ block, pivot, showPivot, isRtl }: {
       return null;
     case "plain":
     default: {
-      const pv = block.type === "plain" ? block.pivot?.[pivot] : undefined;
+      const pv = pivotMainText ?? (block.type === "plain" ? block.pivot?.[pivot] : undefined);
       return (
         <div>
           <p className="text-sm text-[var(--color-text-secondary)]">{renderText(block.fr)}</p>
-          {showPivot && pv ? (
+          {showPivot && pv && pv !== block.fr ? (
             <p className="mt-1 border-l-2 border-[var(--color-accent-fr)]/50 pl-3 text-xs italic text-[var(--color-text-primary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pv}</p>
           ) : null}
         </div>
@@ -2383,7 +2402,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {lesson.theory.blocks ? (
               lesson.theory.blocks.map((block, i) => (
                 <React.Fragment key={i}>
-                  {RichBlock({ block, pivot, showPivot: !!showPivotTranslation, isRtl })}
+                  {RichBlock({ block, blockIdx: i, trad: getTrad(lesson.submoduleId), pivot, showPivot: !!showPivotTranslation, isRtl })}
                 </React.Fragment>
               ))
             ) : theoryFr.paragraphs.map((p, i) => {
