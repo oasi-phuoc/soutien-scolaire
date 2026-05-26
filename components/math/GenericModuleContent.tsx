@@ -83,7 +83,38 @@ type ColumnGridStep  = { kind: "column_grid";       lesson: MathSubmoduleLesson;
 type ExprCompStep    = { kind: "expr_comparison";   lesson: MathSubmoduleLesson; config: ExprCompConfig };
 type EvalStartStep   = { kind: "eval_start";        lesson: MathSubmoduleLesson };
 type PassToggleStep  = { kind: "pass_toggle";       lesson: MathSubmoduleLesson };
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep;
+
+// A1.3 new types
+type NumberSelectConfig = { mode: "gt"|"lt"|"between"; threshold: number; threshold2?: number; numbers: number[]; exNum: number; consigne: string };
+type NumberSelectStep = { kind: "number_select"; lesson: MathSubmoduleLesson; config: NumberSelectConfig };
+
+type EncadrementQ = { n: number; lo: number; hi: number };
+type EncadrementConfig = { questions: EncadrementQ[]; exNum: number; unit: 10|100 };
+type EncadrementStep = { kind: "encadrement"; lesson: MathSubmoduleLesson; config: EncadrementConfig };
+
+// A1.4 new types
+type OddEvenQ = { n: number; answer: "pair"|"impair" };
+type OddEvenConfig = { questions: OddEvenQ[]; exNum: number };
+type OddEvenStep = { kind: "odd_even"; lesson: MathSubmoduleLesson; config: OddEvenConfig };
+
+type NLMultiQ = { nlConfig: NLConfig; mode: "read"|"less"|"more" };
+type NLMultiConfig = { questions: NLMultiQ[]; exNum: number; consigne: string };
+type NLMultiStep = { kind: "nl_multi"; lesson: MathSubmoduleLesson; config: NLMultiConfig };
+
+// A1.5 new types
+type OrderingQ = { numbers: number[] };
+type OrderingConfig = { questions: OrderingQ[]; direction: "asc"|"desc"; exNum: number };
+type OrderingStep = { kind: "ordering"; lesson: MathSubmoduleLesson; config: OrderingConfig };
+
+type SeqRuleQ = { nums: number[]; step: number; op: "+"|"-" };
+type SeqRuleConfig = { questions: SeqRuleQ[]; exNum: number };
+type SeqRuleStep = { kind: "seq_rule"; lesson: MathSubmoduleLesson; config: SeqRuleConfig };
+
+type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
+type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
+type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
+
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -172,6 +203,7 @@ function ComparisonExercise({
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
         <div className="space-y-3">
           {config.questions.map((q, i) => (
@@ -548,6 +580,135 @@ function genFracCompare(mode: "same_den" | "same_num" | "random", range: [number
     questions.push({ num1, den1, num2, den2, answer: target });
   }
   return { questions, exNum, mode };
+}
+
+// ── A1.3 / A1.4 / A1.5 generators ───────────────────────────────────────────
+
+function genNumberSelect(mode: "gt"|"lt"|"between", exNum: number): NumberSelectConfig {
+  const threshold = rnd(20, 80);
+  const threshold2 = mode === "between" ? threshold + rnd(20, 200) : undefined;
+  const correctCount = rnd(5, 10);
+  const numbers: number[] = [];
+  while (numbers.length < correctCount) {
+    let n: number;
+    if (mode === "gt") n = rnd(threshold + 1, 999);
+    else if (mode === "lt") n = rnd(0, threshold - 1);
+    else n = rnd(threshold + 1, threshold2! - 1);
+    if (!numbers.includes(n)) numbers.push(n);
+  }
+  while (numbers.length < 15) {
+    let n: number;
+    if (mode === "gt") n = rnd(0, threshold);
+    else if (mode === "lt") n = rnd(threshold, 999);
+    else n = Math.random() < 0.5 ? rnd(0, threshold) : rnd(threshold2!, threshold2! + 200);
+    if (!numbers.includes(n)) numbers.push(n);
+  }
+  for (let i = 14; i > 0; i--) { const j = rnd(0, i); [numbers[i], numbers[j]] = [numbers[j]!, numbers[i]!]; }
+  let consigne: string;
+  if (mode === "gt") consigne = `Sélectionnez les nombres plus grands que ${threshold.toLocaleString("fr-CH")}.`;
+  else if (mode === "lt") consigne = `Sélectionnez les nombres plus petits que ${threshold.toLocaleString("fr-CH")}.`;
+  else consigne = `Sélectionnez les nombres entre ${threshold.toLocaleString("fr-CH")} et ${threshold2!.toLocaleString("fr-CH")}.`;
+  return { mode, threshold, threshold2, numbers, exNum, consigne };
+}
+
+function genEncadrement(unit: 10|100, exNum: number, count = 5): EncadrementConfig {
+  const questions: EncadrementQ[] = [];
+  for (let i = 0; i < count; i++) {
+    const n = unit === 10 ? rnd(11, 999) : rnd(101, 99999);
+    const lo = Math.floor(n / unit) * unit;
+    const hi = lo + unit;
+    questions.push({ n, lo, hi });
+  }
+  return { questions, exNum, unit };
+}
+
+function genOddEven(exNum: number): OddEvenConfig {
+  const questions: OddEvenQ[] = Array.from({ length: 5 }, () => {
+    const n = rnd(1, 9999);
+    return { n, answer: n % 2 === 0 ? "pair" : "impair" };
+  });
+  return { questions, exNum };
+}
+
+function genNLFine(count: number): NLConfig[] {
+  const PRESETS = [
+    { start: 0, end: 100, step: 10 },
+    { start: 0, end: 200, step: 20 },
+    { start: 100, end: 200, step: 10 },
+    { start: 0, end: 150, step: 10 },
+    { start: 50, end: 150, step: 10 },
+    { start: 200, end: 400, step: 20 },
+  ];
+  return Array.from({ length: count }, () => {
+    const p = PRESETS[rnd(0, PRESETS.length - 1)]!;
+    const divCount = (p.end - p.start) / p.step;
+    const labelEvery = divCount <= 5 ? 1 : divCount <= 10 ? 2 : 5;
+    const allTicks = Array.from({ length: divCount + 1 }, (_, i) => p.start + i * p.step);
+    const unlabeled = allTicks.filter((_, i) => i % labelEvery !== 0 && i > 0 && i < divCount);
+    const candidates = unlabeled.length > 0 ? unlabeled : allTicks.slice(1, divCount);
+    const target = candidates[rnd(0, candidates.length - 1)]!;
+    return { start: p.start, end: p.end, step: p.step, divCount, labelEvery, target };
+  });
+}
+
+function genNLCoarse(count: number): NLConfig[] {
+  const PRESETS = [
+    { start: 0, end: 500, step: 10 },
+    { start: 0, end: 1000, step: 10 },
+    { start: 500, end: 1000, step: 10 },
+    { start: 0, end: 1000, step: 20 },
+    { start: 0, end: 2000, step: 20 },
+  ];
+  return Array.from({ length: count }, () => {
+    const p = PRESETS[rnd(0, PRESETS.length - 1)]!;
+    const divCount = (p.end - p.start) / p.step;
+    const labelEvery = 10;
+    const allTicks = Array.from({ length: divCount + 1 }, (_, i) => p.start + i * p.step);
+    const unlabeled = allTicks.filter((_, i) => i % labelEvery !== 0 && i > 0 && i < divCount);
+    const candidates = unlabeled.length > 0 ? unlabeled : allTicks.slice(1, divCount);
+    const target = candidates[rnd(0, candidates.length - 1)]!;
+    return { start: p.start, end: p.end, step: p.step, divCount, labelEvery, target };
+  });
+}
+
+function genOrdering(direction: "asc"|"desc", exNum: number): OrderingConfig {
+  const questions: OrderingQ[] = Array.from({ length: 2 }, () => {
+    const count = rnd(5, 7);
+    const nums = new Set<number>();
+    while (nums.size < count) nums.add(rnd(1, 9999));
+    return { numbers: [...nums] };
+  });
+  return { questions, direction, exNum };
+}
+
+function genSeqRule(range: [number, number], exNum: number, count = 5): SeqRuleConfig {
+  const questions: SeqRuleQ[] = Array.from({ length: count }, () => {
+    const step = rnd(1, Math.max(1, Math.floor((range[1] - range[0]) / 20)));
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const start = rnd(range[0], Math.max(range[0], range[1] - 4 * step));
+    const nums = [start, start + step, start + 2 * step, start + 3 * step];
+    if (op === "-") nums.reverse();
+    return { nums, step, op };
+  });
+  return { questions, exNum };
+}
+
+function genSeqComplete(range: [number, number], exNum: number, count: number, blanks: 2|4): SeqCompleteConfig {
+  const questions: SeqCompleteQ[] = Array.from({ length: count }, () => {
+    const step = rnd(1, Math.max(1, Math.floor((range[1] - range[0]) / 10)));
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const start = rnd(range[0], Math.max(range[0], range[1] - 6 * step));
+    const allNums = [0,1,2,3,4,5,6].map(i => op === "+" ? start + i * step : start - i * step);
+    const available = [1,2,3,4,5];
+    const blankIdxs: number[] = [];
+    while (blankIdxs.length < blanks && available.length > 0) {
+      const idx = rnd(0, available.length - 1);
+      blankIdxs.push(available[idx]!);
+      available.splice(idx, 1);
+    }
+    return { allNums, blankIdxs: blankIdxs.sort((a,b) => a-b), step };
+  });
+  return { questions, exNum };
 }
 
 // ── Column grid generators ────────────────────────────────────────────────────
@@ -1267,13 +1428,46 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "frac_compare", lesson, config: genFracCompare("same_num", [1, 100], 2) });
       steps.push({ kind: "frac_compare", lesson, config: genFracCompare("random", [1, 10], 3) });
       steps.push({ kind: "frac_compare", lesson, config: genFracCompare("random", [1, 100], 4) });
+    } else if (sid === "A1-3") {
+      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
+      steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect("gt", 3) });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect("lt", 4) });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect("between", 5) });
+      steps.push({ kind: "encadrement", lesson, config: genEncadrement(10, 6) });
+      steps.push({ kind: "encadrement", lesson, config: genEncadrement(100, 7) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect(Math.random() < 0.5 ? "gt" : "lt", 1) });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect(Math.random() < 0.5 ? "gt" : "lt", 2) });
+      steps.push({ kind: "number_select", lesson, config: genNumberSelect("between", 3) });
+      steps.push({ kind: "encadrement", lesson, config: genEncadrement(10, 4, 3) });
+      steps.push({ kind: "encadrement", lesson, config: genEncadrement(100, 5, 3) });
+    } else if (sid === "A1-4") {
+      steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLFine(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLCoarse(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 3, consigne: "Écrivez le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 4, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 5, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche." } });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "read" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "read" as const }))], exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 3, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche." } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 4, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche." } });
+    } else if (sid === "A1-5") {
+      steps.push({ kind: "ordering", lesson, config: genOrdering("asc", 1) });
+      steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 100], 3).questions.slice(0,3), ...genSeqRule([100, 999], 3).questions.slice(0,2)], exNum: 3 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1000, 9999], 4).questions.slice(0,3), ...genSeqRule([10000, 99999], 4).questions.slice(0,2)], exNum: 4 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 100], 5, 3, 2).questions, ...genSeqComplete([1, 100], 5, 2, 4).questions], exNum: 5 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([100, 9999], 6, 3, 2).questions, ...genSeqComplete([100, 9999], 6, 2, 4).questions], exNum: 6 } });
+      steps.push({ kind: "eval_start", lesson });
+      const ascFirst = Math.random() < 0.5;
+      steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "asc" : "desc", 1) });
+      steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [genSeqRule([1,100],3).questions[0]!, genSeqRule([100,999],3).questions[0]!, genSeqRule([1000,9999],4).questions[0]!, genSeqRule([10000,99999],4).questions[0]!], exNum: 3 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1,100],5,1,2).questions, ...genSeqComplete([1,100],5,1,4).questions, ...genSeqComplete([100,9999],6,1,2).questions, ...genSeqComplete([100,9999],6,1,4).questions], exNum: 4 } });
     } else {
-      if (sid === "A1-4") steps.push({ kind: "number_line", lesson, nlConfig: genNLConfig() });
-      if (sid === "A1-3") {
-        steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(1) });
-        steps.push({ kind: "comparison_ex", lesson, config: genComparisonConfig(2) });
-      }
-      if (sid !== "A1-3") {
+      if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5") {
         const pool = lesson.exercisePool;
         const size = lesson.poolSize ?? 5;
         const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
@@ -1284,7 +1478,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   const hasDrillsNoPassToggle = lessons.some(l =>
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
-    l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2"
+    l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
+    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -1642,6 +1837,40 @@ export function GenericModuleContent({
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
+  // A1.3 state
+  const [numberSelectAnswers, setNumberSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
+  const [numberSelectValidated, setNumberSelectValidated] = useState(false);
+  const [numberSelectResults, setNumberSelectResults] = useState<boolean[]>(() => Array(15).fill(false));
+
+  const [encadrementAnswers, setEncadrementAnswers] = useState<Array<{lo:string;hi:string}>>(() => Array(5).fill(null).map(()=>({lo:"",hi:""})));
+  const [encadrementValidated, setEncadrementValidated] = useState(false);
+  const [encadrementResults, setEncadrementResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  // A1.4 state
+  const [oddEvenAnswers, setOddEvenAnswers] = useState<Array<"pair"|"impair"|null>>(() => Array(5).fill(null));
+  const [oddEvenValidated, setOddEvenValidated] = useState(false);
+  const [oddEvenResults, setOddEvenResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [nlMultiAnswers, setNlMultiAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [nlMultiValidated, setNlMultiValidated] = useState(false);
+  const [nlMultiResults, setNlMultiResults] = useState<boolean[]>(() => Array(4).fill(false));
+
+  // A1.5 state
+  const [orderingSelected, setOrderingSelected] = useState<Array<number[]>>(() => [[], []]);
+  const [orderingValidated, setOrderingValidated] = useState(false);
+  const [orderingResults, setOrderingResults] = useState<boolean[]>(() => Array(2).fill(false));
+
+  const [seqRuleAnswers, setSeqRuleAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [seqRuleValidated, setSeqRuleValidated] = useState(false);
+  const [seqRuleResults, setSeqRuleResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [seqCompleteAnswers, setSeqCompleteAnswers] = useState<Array<string[]>>(() => Array(5).fill(null).map(()=>Array(4).fill("")));
+  const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
+  const [seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  // Eval timer
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+
   // Eval phase state
   const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
   const [showEvalScore, setShowEvalScore] = useState(false);
@@ -1690,6 +1919,27 @@ export function GenericModuleContent({
     setFracCompareAnswers(Array(5).fill(null));
     setFracCompareValidated(false);
     setFracCompareResults(Array(5).fill(false));
+    setNumberSelectAnswers(Array(15).fill(false));
+    setNumberSelectValidated(false);
+    setNumberSelectResults(Array(15).fill(false));
+    setEncadrementAnswers(Array(5).fill(null).map(()=>({lo:"",hi:""})));
+    setEncadrementValidated(false);
+    setEncadrementResults(Array(5).fill(false));
+    setOddEvenAnswers(Array(5).fill(null));
+    setOddEvenValidated(false);
+    setOddEvenResults(Array(5).fill(false));
+    setNlMultiAnswers(Array(4).fill(""));
+    setNlMultiValidated(false);
+    setNlMultiResults(Array(4).fill(false));
+    setOrderingSelected([[], []]);
+    setOrderingValidated(false);
+    setOrderingResults(Array(2).fill(false));
+    setSeqRuleAnswers(Array(5).fill(""));
+    setSeqRuleValidated(false);
+    setSeqRuleResults(Array(5).fill(false));
+    setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+    setSeqCompleteValidated(false);
+    setSeqCompleteResults(Array(5).fill(false));
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -1705,6 +1955,18 @@ export function GenericModuleContent({
     if (showEvalScore) return;
     if (!isFirstStep) goTo(stepIdx - 1);
   }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore]);
+
+  // Eval timer countdown
+  useEffect(() => {
+    if (!isInEvalPhase || evalTimeLeft === null || evalTimeLeft <= 0) return;
+    const id = setInterval(() => setEvalTimeLeft((t: number | null) => (t ?? 1) - 1), 1000);
+    return () => clearInterval(id);
+  }, [isInEvalPhase, evalTimeLeft]);
+
+  function startEval() {
+    setEvalTimeLeft(5 * 60);
+    goTo(stepIdx + 1);
+  }
 
   function cancelEval() {
     setShowEvalCancelConfirm(false);
@@ -1758,6 +2020,41 @@ export function GenericModuleContent({
         currentResults = fracSimplifyResults.slice(0, currentStep.config.questions.length);
       } else if (currentStep.kind === "frac_compare") {
         currentResults = fracCompareResults.slice(0, currentStep.config.questions.length);
+      } else if (currentStep.kind === "number_select") {
+        const cfg = currentStep.config;
+        currentResults = cfg.numbers.map((n, i) => {
+          const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold : cfg.mode === "lt" ? n < cfg.threshold : n > cfg.threshold && n < cfg.threshold2!;
+          return (numberSelectAnswers[i] ?? false) === shouldSelect;
+        });
+      } else if (currentStep.kind === "encadrement") {
+        currentResults = currentStep.config.questions.map((q, i) => {
+          const a = encadrementAnswers[i] ?? {lo:"",hi:""};
+          return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
+        });
+      } else if (currentStep.kind === "odd_even") {
+        currentResults = currentStep.config.questions.slice(0, 4).map((q, i) => oddEvenAnswers[i] === q.answer);
+      } else if (currentStep.kind === "nl_multi") {
+        currentResults = currentStep.config.questions.map((q, i) => {
+          const ans = parseInt(nlMultiAnswers[i] ?? "");
+          if (q.mode === "read") return ans === q.nlConfig.target;
+          if (q.mode === "less") return !isNaN(ans) && ans < q.nlConfig.target;
+          return !isNaN(ans) && ans > q.nlConfig.target;
+        });
+      } else if (currentStep.kind === "ordering") {
+        currentResults = currentStep.config.questions.map((q, qi) => {
+          const sel = orderingSelected[qi] ?? [];
+          const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
+          return sel.length === q.numbers.length && sel.every((n,i) => n === sorted[i]);
+        });
+      } else if (currentStep.kind === "seq_rule") {
+        currentResults = currentStep.config.questions.map((q, i) => {
+          const ans = seqRuleAnswers[i]?.trim() ?? "";
+          return ans === `${q.op}${q.step}`;
+        });
+      } else if (currentStep.kind === "seq_complete") {
+        currentResults = currentStep.config.questions.map((q, qi) => {
+          return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
+        });
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -1777,6 +2074,13 @@ export function GenericModuleContent({
                 : es?.kind === "frac_equiv" ? "Fractions équivalentes"
                 : es?.kind === "frac_simplify" ? "Simplification"
                 : es?.kind === "frac_compare" ? "Comparaison de fractions"
+                : es?.kind === "number_select" ? "Sélection de nombres"
+                : es?.kind === "encadrement" ? "Encadrement"
+                : es?.kind === "odd_even" ? "Pairs et impairs"
+                : es?.kind === "nl_multi" ? "Droite numérique"
+                : es?.kind === "ordering" ? "Classement"
+                : es?.kind === "seq_rule" ? "Règle de la suite"
+                : es?.kind === "seq_complete" ? "Compléter la suite"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -1821,7 +2125,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2005,6 +2309,109 @@ export function GenericModuleContent({
     };
   }
 
+  if (currentStep?.kind === "number_select") {
+    stepCanValidate = !numberSelectValidated;
+    stepValidate = numberSelectValidated ? () => {} : () => {
+      const cfg = currentStep.config;
+      const results = cfg.numbers.map((n, i) => {
+        const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold
+          : cfg.mode === "lt" ? n < cfg.threshold
+          : n > cfg.threshold && n < cfg.threshold2!;
+        return (numberSelectAnswers[i] ?? false) === shouldSelect;
+      });
+      setNumberSelectResults(results);
+      setNumberSelectValidated(true);
+    };
+    stepReset = () => {
+      setNumberSelectAnswers(Array(15).fill(false));
+      setNumberSelectValidated(false);
+      setNumberSelectResults(Array(15).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "encadrement") {
+    stepCanValidate = !encadrementValidated;
+    stepValidate = encadrementValidated ? () => {} : () => {
+      const results = currentStep.config.questions.map((q, i) => {
+        const a = encadrementAnswers[i] ?? {lo:"",hi:""};
+        return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
+      });
+      setEncadrementResults(results);
+      setEncadrementValidated(true);
+    };
+    stepReset = () => {
+      setEncadrementAnswers(Array(5).fill(null).map(()=>({lo:"",hi:""})));
+      setEncadrementValidated(false);
+      setEncadrementResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "odd_even") {
+    stepCanValidate = !oddEvenValidated;
+    stepValidate = oddEvenValidated ? () => {} : () => {
+      setOddEvenResults(currentStep.config.questions.map((q, i) => oddEvenAnswers[i] === q.answer));
+      setOddEvenValidated(true);
+    };
+    stepReset = () => { setOddEvenAnswers(Array(5).fill(null)); setOddEvenValidated(false); setOddEvenResults(Array(5).fill(false)); };
+  }
+
+  if (currentStep?.kind === "nl_multi") {
+    stepCanValidate = !nlMultiValidated;
+    stepValidate = nlMultiValidated ? () => {} : () => {
+      const results = currentStep.config.questions.map((q, i) => {
+        const ans = parseInt(nlMultiAnswers[i] ?? "");
+        if (q.mode === "read") return ans === q.nlConfig.target;
+        if (q.mode === "less") return !isNaN(ans) && ans < q.nlConfig.target;
+        return !isNaN(ans) && ans > q.nlConfig.target;
+      });
+      setNlMultiResults(results);
+      setNlMultiValidated(true);
+    };
+    stepReset = () => { setNlMultiAnswers(Array(4).fill("")); setNlMultiValidated(false); setNlMultiResults(Array(4).fill(false)); };
+  }
+
+  if (currentStep?.kind === "ordering") {
+    stepCanValidate = !orderingValidated;
+    stepValidate = orderingValidated ? () => {} : () => {
+      const results = currentStep.config.questions.map((q, qi) => {
+        const sel = orderingSelected[qi] ?? [];
+        const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
+        return sel.length === q.numbers.length && sel.every((n,i) => n === sorted[i]);
+      });
+      setOrderingResults(results);
+      setOrderingValidated(true);
+    };
+    stepReset = () => { setOrderingSelected([[], []]); setOrderingValidated(false); setOrderingResults(Array(2).fill(false)); };
+  }
+
+  if (currentStep?.kind === "seq_rule") {
+    stepCanValidate = !seqRuleValidated;
+    stepValidate = seqRuleValidated ? () => {} : () => {
+      const results = currentStep.config.questions.map((q, i) => {
+        const ans = seqRuleAnswers[i]?.trim() ?? "";
+        return ans === `${q.op}${q.step}`;
+      });
+      setSeqRuleResults(results);
+      setSeqRuleValidated(true);
+    };
+    stepReset = () => { setSeqRuleAnswers(Array(5).fill("")); setSeqRuleValidated(false); setSeqRuleResults(Array(5).fill(false)); };
+  }
+
+  if (currentStep?.kind === "seq_complete") {
+    stepCanValidate = !seqCompleteValidated;
+    stepValidate = seqCompleteValidated ? () => {} : () => {
+      const results = currentStep.config.questions.map((q, qi) => {
+        return q.blankIdxs.every((bi, ii) => {
+          const ans = parseInt(seqCompleteAnswers[qi]?.[ii] ?? "");
+          return ans === q.allNums[bi];
+        });
+      });
+      setSeqCompleteResults(results);
+      setSeqCompleteValidated(true);
+    };
+    stepReset = () => { setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill(""))); setSeqCompleteValidated(false); setSeqCompleteResults(Array(5).fill(false)); };
+  }
+
   if (!lessons || lessons.length === 0 || steps.length === 0) {
     return (
       <p className="text-sm text-[var(--color-text-secondary)]">
@@ -2062,7 +2469,14 @@ export function GenericModuleContent({
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
+            <div className="flex items-center gap-3">
+              {evalTimeLeft !== null && (
+                <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${evalTimeLeft <= 60 ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400" : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)]"}`}>
+                  {String(Math.floor(evalTimeLeft / 60)).padStart(2, "0")}:{String(evalTimeLeft % 60).padStart(2, "0")}
+                </span>
+              )}
+              <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
+            </div>
           </div>
           <div className="flex gap-1">
             {evalSteps.map((_, i) => (
@@ -2134,14 +2548,376 @@ export function GenericModuleContent({
         </div>
       )}
 
+      {/* Number select exercise (A1.3) */}
+      {currentStep?.kind === "number_select" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">{currentStep.config.consigne}</p>
+          <div className="grid grid-cols-5 gap-2">
+            {currentStep.config.numbers.map((n, i) => {
+              const sel = numberSelectAnswers[i] ?? false;
+              const shouldSelect = currentStep.config.mode === "gt" ? n > currentStep.config.threshold
+                : currentStep.config.mode === "lt" ? n < currentStep.config.threshold
+                : n > currentStep.config.threshold && n < currentStep.config.threshold2!;
+              let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
+              if (!numberSelectValidated) {
+                cls += sel
+                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                  : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+              } else {
+                if (sel && shouldSelect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                else if (sel && !shouldSelect) cls += CLS_WRONG;
+                else if (!sel && shouldSelect) cls += CLS_WRONG;
+                else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              }
+              return (
+                <button key={i} type="button" disabled={numberSelectValidated}
+                  onClick={() => setNumberSelectAnswers(prev => prev.map((v, j) => j === i ? !v : v))}
+                  className={cls}>
+                  {n.toLocaleString("fr-CH")}
+                </button>
+              );
+            })}
+          </div>
+          {numberSelectValidated && (
+            <p className="text-xs text-[var(--color-text-secondary)]">
+              {numberSelectResults.filter(Boolean).length}/{numberSelectResults.length} corrects
+            </p>
+          )}
+        </div>
+      )}
+
+      {/* Encadrement exercise (A1.3) */}
+      {currentStep?.kind === "encadrement" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Encadrez chaque nombre à la {currentStep.config.unit === 10 ? "dizaine" : "centaine"} près.
+          </p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {currentStep.config.questions.map((q, i) => {
+              const a = encadrementAnswers[i] ?? {lo:"",hi:""};
+              const ok = encadrementValidated ? encadrementResults[i] : null;
+              const wrong = ok === false;
+              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {wrong ? (
+                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                      <span className="line-through text-amber-500 text-xs">{a.lo||"—"}</span>
+                      <span className="text-xs font-bold">{q.lo}</span>
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={a.lo} disabled={encadrementValidated}
+                      onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, lo: e.target.value} : v))}
+                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                  <span className="text-sm font-bold text-[var(--color-text-secondary)]">&lt;</span>
+                  <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                  <span className="text-sm font-bold text-[var(--color-text-secondary)]">&lt;</span>
+                  {wrong ? (
+                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                      <span className="line-through text-amber-500 text-xs">{a.hi||"—"}</span>
+                      <span className="text-xs font-bold">{q.hi}</span>
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={a.hi} disabled={encadrementValidated}
+                      onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, hi: e.target.value} : v))}
+                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Odd/Even exercise (A1.4) */}
+      {currentStep?.kind === "odd_even" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Indiquez si chaque nombre est pair ou impair.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {currentStep.config.questions.map((q, i) => {
+              const sel = oddEvenAnswers[i];
+              const ok = oddEvenValidated ? oddEvenResults[i] : null;
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="w-16 font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                  <div className="flex gap-2">
+                    {(["pair","impair"] as const).map(opt => {
+                      const isSelected = sel === opt;
+                      const isCorrect = opt === q.answer;
+                      let cls = "rounded-lg border px-3 py-1.5 text-sm font-bold transition-colors ";
+                      if (!oddEvenValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                      } else if (isSelected && isCorrect) {
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                      } else if (isSelected && !isCorrect) {
+                        cls += CLS_WRONG;
+                      } else if (!isSelected && isCorrect) {
+                        cls += CLS_WRONG;
+                      } else {
+                        cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                      }
+                      return (
+                        <button key={opt} type="button" disabled={oddEvenValidated}
+                          onClick={() => setOddEvenAnswers(prev => prev.map((v,j) => j===i ? opt : v))}
+                          className={cls}>
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {oddEvenValidated && ok === true && (
+                    <span className="text-xs text-[var(--color-accent-alg)] font-bold">✓</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Number line multi exercise (A1.4) */}
+      {currentStep?.kind === "nl_multi" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">{currentStep.config.consigne}</p>
+          <div className="space-y-5">
+            {currentStep.config.questions.map((q, i) => {
+              const v = nlMultiAnswers[i] ?? "";
+              const ok = nlMultiValidated ? nlMultiResults[i] : null;
+              const wrong = ok === false;
+              const inputCls = "w-full rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              let afterText = "";
+              if (nlMultiValidated && q.mode === "read" && wrong) afterText = `Réponse attendue : ${q.nlConfig.target}`;
+              else if (nlMultiValidated && q.mode === "less" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
+              else if (nlMultiValidated && q.mode === "more" && wrong) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
+              return (
+                <div key={i} className="space-y-2">
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+                    <NumberLineSVG config={q.nlConfig} />
+                  </div>
+                  {wrong ? (
+                    <div className={`${inputCls} ${CLS_WRONG} flex items-center gap-2`}>
+                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                      {q.mode === "read" && <span className="text-xs font-bold">{q.nlConfig.target}</span>}
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
+                      onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                  {afterText && <p className="text-xs text-amber-600">{afterText}</p>}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Ordering exercise (A1.5) */}
+      {currentStep?.kind === "ordering" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Classez les nombres dans l&apos;ordre {currentStep.config.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
+          </p>
+          <div className="space-y-6">
+            {currentStep.config.questions.map((q, qi) => {
+              const sel = orderingSelected[qi] ?? [];
+              const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
+              const ok = orderingValidated ? orderingResults[qi] : null;
+              return (
+                <div key={qi} className="space-y-3">
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                  <div className="flex flex-wrap gap-2">
+                    {q.numbers.map((n, ni) => {
+                      const isSelected = sel.includes(n);
+                      const selIdx = sel.indexOf(n);
+                      let cls = "rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
+                      if (!orderingValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+                      } else {
+                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        else if (isSelected) cls += CLS_WRONG;
+                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                      }
+                      return (
+                        <button key={ni} type="button" disabled={orderingValidated}
+                          onClick={() => {
+                            setOrderingSelected(prev => {
+                              const next = prev.map(a => [...a]);
+                              const cur = next[qi] ?? [];
+                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
+                              else { next[qi] = [...cur, n]; }
+                              return next;
+                            });
+                          }}
+                          className={cls}>
+                          {n.toLocaleString("fr-CH")}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {sel.length > 0 && (
+                    <div className="rounded-xl border border-dashed border-[var(--color-border-default)] p-3">
+                      <p className="text-xs text-[var(--color-text-secondary)] mb-1">Votre ordre :</p>
+                      <div className="flex flex-wrap items-center gap-1">
+                        {sel.map((n, si) => (
+                          <Fragment key={si}>
+                            <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                            {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)]">{currentStep.config.direction === "asc" ? "<" : ">"}</span>}
+                          </Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {orderingValidated && ok === false && (
+                    <div className="rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 p-3">
+                      <p className="text-xs text-amber-600 mb-1">Ordre correct :</p>
+                      <div className="flex flex-wrap items-center gap-1">
+                        {sorted.map((n, si) => (
+                          <Fragment key={si}>
+                            <span className="font-mono text-sm font-bold text-amber-700">{n.toLocaleString("fr-CH")}</span>
+                            {si < sorted.length - 1 && <span className="text-amber-500">{currentStep.config.direction === "asc" ? "<" : ">"}</span>}
+                          </Fragment>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Sequence rule exercise (A1.5) */}
+      {currentStep?.kind === "seq_rule" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
+            {currentStep.config.questions.map((q, i) => {
+              const v = seqRuleAnswers[i] ?? "";
+              const ok = seqRuleValidated ? seqRuleResults[i] : null;
+              const wrong = ok === false;
+              const correctAns = `${q.op}${q.step}`;
+              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors";
+              return (
+                <div key={i} className="flex items-center gap-3 flex-wrap">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <div className="flex items-center gap-2">
+                    {q.nums.map((n, ni) => (
+                      <Fragment key={ni}>
+                        <span className="rounded bg-[var(--color-bg-secondary)] px-2 py-1 font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                        {ni < q.nums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                      </Fragment>
+                    ))}
+                  </div>
+                  <span className="text-sm text-[var(--color-text-secondary)]">Règle :</span>
+                  {wrong ? (
+                    <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                      <span className="text-xs font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={v} disabled={seqRuleValidated}
+                      onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      placeholder="+N ou -N"
+                      className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Sequence complete exercise (A1.5) */}
+      {currentStep?.kind === "seq_complete" && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {currentStep.config.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
+          <div className="space-y-5">
+            {currentStep.config.questions.map((q, qi) => {
+              const ok = seqCompleteValidated ? seqCompleteResults[qi] : null;
+              let blankCounter = 0;
+              return (
+                <div key={qi} className="rounded-xl border border-[var(--color-border-default)] p-3">
+                  <div className="flex items-center gap-1 flex-wrap">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)] mr-1">{qi + 1}.</span>
+                    {q.allNums.map((n, ni) => {
+                      const blankIdx = q.blankIdxs.indexOf(ni);
+                      if (blankIdx !== -1) {
+                        const bIdx = blankCounter++;
+                        const v = seqCompleteAnswers[qi]?.[bIdx] ?? "";
+                        const expected = q.allNums[ni]!;
+                        const wrong = seqCompleteValidated && parseInt(v) !== expected;
+                        const inputCls = "w-16 rounded border px-1 py-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+                        return (
+                          <Fragment key={ni}>
+                            {wrong ? (
+                              <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                                <span className="line-through text-amber-500 text-[10px]">{v||"—"}</span>
+                                <span className="text-[10px] font-bold">{expected.toLocaleString("fr-CH")}</span>
+                              </div>
+                            ) : (
+                              <input type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
+                                onChange={e => setSeqCompleteAnswers(prev => {
+                                  const next = prev.map(r => [...r]);
+                                  if (!next[qi]) next[qi] = [];
+                                  next[qi]![bIdx] = e.target.value;
+                                  return next;
+                                })}
+                                className={`${inputCls} ${seqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                            )}
+                            {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                          </Fragment>
+                        );
+                      }
+                      return (
+                        <Fragment key={ni}>
+                          <span className="rounded bg-[var(--color-bg-secondary)] px-2 py-1 font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                          {ni < q.allNums.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">→</span>}
+                        </Fragment>
+                      );
+                    })}
+                  </div>
+                  {seqCompleteValidated && (
+                    <p className="mt-2 text-xs font-bold text-[var(--color-text-secondary)]">
+                      Règle : {q.step > 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Comparison exercise */}
       {currentStep?.kind === "comparison_ex" && activeCompConfig && (
-        <ComparisonExercise
-          config={activeCompConfig}
-          answers={compAnswers}
-          validated={compValidated}
-          onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
-        />
+        <div className="space-y-4">
+          {currentStep.lesson.submoduleId === "A1-3" && (
+            <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
+          )}
+          <ComparisonExercise
+            config={activeCompConfig}
+            answers={compAnswers}
+            validated={compValidated}
+            onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+          />
+        </div>
       )}
 
       {currentStep?.kind === "expr_comparison" && activeExprCompConfig && (
@@ -2314,7 +3090,7 @@ export function GenericModuleContent({
           </div>
           <button
             type="button"
-            onClick={() => goTo(stepIdx + 1)}
+            onClick={startEval}
             className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             Commencer
@@ -2431,7 +3207,14 @@ export function GenericModuleContent({
                     (currentStep?.kind === "frac_id" && !fracIdValidated) ||
                     (currentStep?.kind === "frac_equiv" && !fracEquivValidated) ||
                     (currentStep?.kind === "frac_simplify" && !fracSimplifyValidated) ||
-                    (currentStep?.kind === "frac_compare" && !fracCompareValidated)
+                    (currentStep?.kind === "frac_compare" && !fracCompareValidated) ||
+                    (currentStep?.kind === "number_select" && !numberSelectValidated) ||
+                    (currentStep?.kind === "encadrement" && !encadrementValidated) ||
+                    (currentStep?.kind === "odd_even" && !oddEvenValidated) ||
+                    (currentStep?.kind === "nl_multi" && !nlMultiValidated) ||
+                    (currentStep?.kind === "ordering" && !orderingValidated) ||
+                    (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
+                    (currentStep?.kind === "seq_complete" && !seqCompleteValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"

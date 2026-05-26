@@ -150,7 +150,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         },
       },
 
-      { type: "plain", fr: "Quand un nombre est entre deux bornes, cela veut dire :" },
+      { type: "plain", fr: "Quand une valeur est entre deux nombres, cela veut dire :" },
       
       {
         type: "section",
