@@ -199,13 +199,15 @@ export function MathematiquesClient() {
                     .map((sub) => sub.id)
                 : [],
             );
-            // Only passed evals (grade ≥ PASSING_GRADE) unlock the next submodule
+            // A submodule is "passed" if completed with grade ≥ PASSING_GRADE,
+            // OR completed without any saved score (no eval required / old-style completion)
             const passedSubIds = new Set(
               hydrated
                 ? m.submodules
                     .filter((sub) => {
+                      if (!completedSubIds.has(sub.id)) return false;
                       const sc = progress.submoduleScores?.[sub.id];
-                      return completedSubIds.has(sub.id) && sc !== undefined && sc.grade >= PASSING_GRADE;
+                      return sc === undefined || sc.grade >= PASSING_GRADE;
                     })
                     .map((sub) => sub.id)
                 : [],

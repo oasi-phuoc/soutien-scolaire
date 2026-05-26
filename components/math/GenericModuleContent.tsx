@@ -1929,7 +1929,7 @@ export function GenericModuleContent({
   // A1.3 state
   const [numberSelectAnswers, setNumberSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
   const [numberSelectValidated, setNumberSelectValidated] = useState(false);
-  const [numberSelectResults, setNumberSelectResults] = useState<boolean[]>(() => Array(15).fill(false));
+  const [_numberSelectResults, setNumberSelectResults] = useState<boolean[]>(() => Array(15).fill(false));
 
   const [encadrementAnswers, setEncadrementAnswers] = useState<Array<{lo:string;hi:string}>>(() => Array(5).fill(null).map(()=>({lo:"",hi:""})));
   const [encadrementValidated, setEncadrementValidated] = useState(false);
