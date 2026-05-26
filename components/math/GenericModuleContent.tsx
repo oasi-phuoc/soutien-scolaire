@@ -3066,7 +3066,7 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {currentStep?.kind === "expr_comparison" && activeExprCompConfig && (
+      {!showEvalScore && currentStep?.kind === "expr_comparison" && activeExprCompConfig && (
         <ExprCompExercise
           config={activeExprCompConfig}
           answers={exprCompAnswers}
