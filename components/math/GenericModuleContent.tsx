@@ -221,7 +221,7 @@ function ComparisonExercise({
             <div key={i} className="flex items-center gap-3">
               <div className="flex items-center shrink-0">
                 <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className={`${config.level === 1 ? "w-8" : "w-[5rem]"} text-right font-mono text-sm text-[var(--color-text-primary)]`}>{formatCompNum(q.a)}</span>
+                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
               </div>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
@@ -440,8 +440,8 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
     "diz_near":         "Arrondissez à la dizaine la plus proche les nombres suivants.",
     "cent_near_new":    "Arrondissez à la centaine la plus proche les nombres suivants.",
     "est_diz_2":        "Estimez le résultat du calcul à la dizaine la plus proche.",
-    "est_diz_large_2":  "Estimez le résultat du calcul à la dizaine la plus proche.",
-    "est_diz_three":    "Estimez le résultat du calcul à la dizaine la plus proche.",
+    "est_diz_large_2":  "Estimez le résultat du calcul à la centaine la plus proche.",
+    "est_diz_three":    "Estimez le résultat du calcul à la centaine la plus proche.",
     "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "", "mixed": "",
   };
   const consigne = consigneMap[kind];
@@ -467,19 +467,19 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
       const useAdd = Math.random() < 0.5;
       if (!useAdd && x < y) [x, y] = [y, x];
       const op = useAdd ? "+" : "−";
-      const ans = useAdd ? roundTo10(x) + roundTo10(y) : roundTo10(x) - roundTo10(y);
+      const ans = useAdd ? roundTo100(x) + roundTo100(y) : roundTo100(x) - roundTo100(y);
       qs.push({ prompt: `${x} ${op} ${y} ≈`, answer: String(ans) });
     } else if (kind === "est_diz_three") {
       let a: number, b: number, c: number, op1: "+" | "−", op2: "+" | "−", ans: number;
       let tries = 0;
       do {
-        a = rnd(11, 999); b = rnd(11, 999); c = rnd(11, 999);
+        a = rnd(101, 999); b = rnd(101, 999); c = rnd(101, 999);
         op1 = Math.random() < 0.5 ? "+" : "−";
         op2 = Math.random() < 0.5 ? "+" : "−";
-        ans = roundTo10(a) + (op1 === "+" ? roundTo10(b) : -roundTo10(b)) + (op2 === "+" ? roundTo10(c) : -roundTo10(c));
+        ans = roundTo100(a) + (op1 === "+" ? roundTo100(b) : -roundTo100(b)) + (op2 === "+" ? roundTo100(c) : -roundTo100(c));
         tries++;
       } while (ans < 0 && tries < 30);
-      if (ans! < 0) { op1 = "+"; op2 = "+"; ans = roundTo10(a!) + roundTo10(b!) + roundTo10(c!); }
+      if (ans! < 0) { op1 = "+"; op2 = "+"; ans = roundTo100(a!) + roundTo100(b!) + roundTo100(c!); }
       qs.push({ prompt: `${a!} ${op1!} ${b!} ${op2!} ${c!} ≈`, answer: String(ans!) });
     } else if (kind === "cent_near") {
       const x = rnd(101, 999);
@@ -801,7 +801,7 @@ function computeCarries(a: number, b: number, op: ArithOp): (number | null)[] {
     let borrow = 0;
     for (let i = 3; i >= 0; i--) {
       const d = ad[i]! - bd[i]! - borrow;
-      if (d < 0) { borrow = 1; if (i > 0) row[i - 1] = 1; }
+      if (d < 0) { borrow = 1; if (i > 0) row[i - 1] = ad[i - 1]! > 0 ? ad[i - 1]! - 1 : 9; }
       else { borrow = 0; }
     }
   }
@@ -1444,9 +1444,7 @@ function RoundingExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
 }) {
-  const maxAnsLen = config.questions.reduce((m, q) => Math.max(m, Math.abs(parseInt(q.answer) || 0).toString().length), 0);
-  const tbW = maxAnsLen <= 2 ? "w-12" : maxAnsLen <= 3 ? "w-14" : "w-[4.5rem]";
-  const inputBase = `${tbW} shrink-0 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
+  const inputBase = "w-[4.5rem] h-8 shrink-0 rounded border px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
 
@@ -1454,32 +1452,32 @@ function RoundingExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
-        {config.questions.map((q, i) => {
-          const v = answers[i] ?? "";
-          const ok = validated ? results[i] ?? false : null;
-          const wrongField = ok === false;
-          return (
-            <div key={i} className={`flex items-center gap-2${isNew ? "" : " flex-wrap min-h-[2.25rem]"}`}>
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className={`${isNew ? "shrink-0 font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)]`}>{q.prompt}</span>
-              {wrongField
-                ? <div className={`${inputBase} ${CLS_WRONG_INL} flex items-center justify-center gap-0.5`}>
-                    <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                    <span className="text-[var(--color-text-primary)] text-xs font-bold ml-1">{q.answer}</span>
-                  </div>
-                : <input
-                    type="number"
-                    inputMode="numeric"
-                    value={v}
-                    disabled={validated}
-                    onChange={e => onChange(i, e.target.value)}
-                    className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
-                  />
-              }
-            </div>
-          );
-        })}
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div className={isNew ? "grid gap-y-3" : "space-y-3"} style={isNew ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}>
+          {config.questions.map((q, i) => {
+            const v = answers[i] ?? "";
+            const ok = validated ? results[i] ?? false : null;
+            const wrongField = ok === false;
+            const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
+            const prompt = <span className={`${isNew ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
+            const field = wrongField
+              ? <div className={`${inputBase} ${CLS_WRONG_INL} flex items-center justify-center gap-0.5 overflow-hidden`}>
+                  <span className="line-through text-amber-500 text-[9px]">{v || "—"}</span>
+                  <span className="text-[var(--color-text-primary)] text-[9px] font-bold ml-0.5">{q.answer}</span>
+                </div>
+              : <input
+                  type="number"
+                  inputMode="numeric"
+                  value={v}
+                  disabled={validated}
+                  onChange={e => onChange(i, e.target.value)}
+                  className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
+                />;
+            return isNew
+              ? <Fragment key={i}>{numLabel}{prompt}{field}</Fragment>
+              : <div key={i} className="flex items-center gap-2 flex-wrap min-h-[2.25rem]">{numLabel}{prompt}{field}</div>;
+          })}
+        </div>
       </div>
     </div>
   );
