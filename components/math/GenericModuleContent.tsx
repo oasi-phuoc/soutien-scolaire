@@ -1442,6 +1442,233 @@ function DivColumnCard({
   );
 }
 
+const COL5_LABELS = ["DM","M","C","D","U"];
+
+function Mul2DigitCard({
+  q, cardIdx, cellAnswers, carryInputs, validated, preFilledOperands,
+  onChange, onCarryChange,
+}: {
+  q: Mul2DigitQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
+  validated: boolean; preFilledOperands: boolean;
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+  onCarryChange: (cardIdx: number, col: number, val: string) => void;
+}) {
+  const ad = getD5(q.a), bd = getD5(q.b);
+  const p1d = getD5(q.partial1), p2d = getD5(q.partial2);
+  const rd = getD5(q.result);
+  const firstNzA = ad.findIndex(d => d !== 0);
+  const firstNzB = bd.findIndex(d => d !== 0);
+  const aBase = 0, bBase = 5;
+  const p1Base = preFilledOperands ? 0 : 10;
+  const p2Base = preFilledOperands ? 5 : 15;
+  const rBase  = preFilledOperands ? 10 : 20;
+
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = e.currentTarget.closest("[data-grid-card]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  const cellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
+    const idx = base + col;
+    const val = cellAnswers[idx] ?? "";
+    const ok = validated ? (val.trim() === String(expected) || (expected === 0 && val.trim() === "")) : null;
+    if (ok === false) {
+      return (
+        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+        onChange={e => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onChange(cardIdx, idx, v); }}
+        onKeyDown={tabNav}
+        onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
+          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+          : "border-[var(--color-border-default)]"
+        }`}
+      />
+    );
+  };
+
+  const Prefilled = ({ digit, isLeading }: { digit: number; isLeading: boolean }) => (
+    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+      {isLeading ? "" : digit}
+    </div>
+  );
+
+  const carryCell = (rowBase: number, col: number) => {
+    const idx = rowBase + col;
+    const val = carryInputs[idx] ?? "";
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+        onChange={e => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
+        onKeyDown={tabNav}
+        onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+      />
+    );
+  };
+
+  // partial2 shifted: multiply by 10, so in 5-column layout:
+  // col 0 (DM): p2d[1] (M digit of unshifted)
+  // col 1 (M):  p2d[2] (C digit of unshifted)
+  // col 2 (C):  p2d[3] (D digit of unshifted)
+  // col 3 (D):  p2d[4] (U digit of unshifted)
+  // col 4 (U):  0 (always, pre-filled)
+  const p2ShiftedDigit = (col: number): number => {
+    if (col === 4) return 0;
+    return p2d[col + 1]!;
+  };
+
+  const p2ShiftedArr = [0,1,2,3,4].map(c => p2ShiftedDigit(c));
+  const firstNzP2Shifted = p2ShiftedArr.findIndex(d => d !== 0);
+
+  return (
+    <div data-grid-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      {!preFilledOperands && (
+        <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
+          {formatCompNum(q.a)} × {formatCompNum(q.b)}
+        </p>
+      )}
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {COL5_LABELS.map(h => (
+              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {/* Carry row 1 */}
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">{carryCell(0, col)}</td>
+            ))}
+          </tr>
+          {/* Operand a */}
+          <tr>
+            <td />
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">
+                {preFilledOperands
+                  ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
+                  : cellInput({base: aBase, col, expected: ad[col]!})}
+              </td>
+            ))}
+          </tr>
+          {/* Operand b */}
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">
+                {preFilledOperands
+                  ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} />
+                  : cellInput({base: bBase, col, expected: bd[col]!})}
+              </td>
+            ))}
+          </tr>
+          {/* Separator 1 */}
+          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          {/* Partial product 1 */}
+          <tr>
+            <td />
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">{cellInput({base: p1Base, col, expected: p1d[col]!})}</td>
+            ))}
+          </tr>
+          {/* Carry row 2 */}
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">{carryCell(5, col)}</td>
+            ))}
+          </tr>
+          {/* Partial product 2 shifted */}
+          <tr>
+            <td />
+            {[0,1,2,3,4].map(col => {
+              const expected = p2ShiftedDigit(col);
+              if (col === 4) {
+                return (
+                  <td key={col} className="text-center">
+                    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">0</div>
+                  </td>
+                );
+              }
+              const isLeading = firstNzP2Shifted >= 0 && col < firstNzP2Shifted;
+              if (isLeading && expected === 0) {
+                return (
+                  <td key={col} className="text-center">
+                    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-transparent">0</div>
+                  </td>
+                );
+              }
+              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected})}</td>;
+            })}
+          </tr>
+          {/* Separator 2 */}
+          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          {/* Result */}
+          <tr>
+            <td />
+            {[0,1,2,3,4].map(col => (
+              <td key={col} className="text-center">{cellInput({base: rBase, col, expected: rd[col]!})}</td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function Mul2DigitExercise({
+  config, answers, carryInputs, validated, results, onChange, onCarryChange,
+}: {
+  config: Mul2DigitConfig;
+  answers: string[][];
+  carryInputs: string[][];
+  validated: boolean;
+  results: boolean[];
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+  onCarryChange: (cardIdx: number, col: number, val: string) => void;
+}) {
+  void results;
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Effectuez les multiplications en colonnes. Écrivez les produits partiels, les retenues et le résultat.
+      </p>
+      <div className="grid grid-cols-2 gap-3">
+        {config.questions.map((q, qi) => (
+          <Mul2DigitCard
+            key={qi}
+            q={q}
+            cardIdx={qi}
+            cellAnswers={answers[qi] ?? []}
+            carryInputs={carryInputs[qi] ?? []}
+            validated={validated}
+            preFilledOperands={config.preFilledOperands}
+            onChange={onChange}
+            onCarryChange={onCarryChange}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function DivColumnGridExercise({
   config, quotientInputs, remainderInputs, operandInputs, workInputs, validated,
   onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
@@ -1815,6 +2042,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       // Multiplication en colonnes — entraînement
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
@@ -2445,6 +2674,15 @@ export function GenericModuleContent({
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
+  // Two-digit multiplication exercise state (4 cards × 25 cells max, 10 carries)
+  const emptyMul2Grid = () => Array.from({length: 4}, () => Array(25).fill("") as string[]);
+  const emptyMul2Carry = () => Array.from({length: 4}, () => Array(10).fill("") as string[]);
+  const [mul2dAnswers, setMul2dAnswers] = useState<string[][]>(emptyMul2Grid);
+  const [mul2dCarryInputs, setMul2dCarryInputs] = useState<string[][]>(emptyMul2Carry);
+  const [mul2dValidated, setMul2dValidated] = useState(false);
+  const [mul2dResults, setMul2dResults] = useState<boolean[]>(() => Array(4).fill(false));
+  const [mul2dOverrideConfigs, setMul2dOverrideConfigs] = useState<Record<number, Mul2DigitConfig>>({});
+
   // Division column grid state (3 cards max)
   const emptyDivQuotient = () => Array.from({ length: 3 }, () => Array(5).fill("") as string[]);
   const emptyDivRemainder = () => Array(3).fill("") as string[];
@@ -2527,6 +2765,10 @@ export function GenericModuleContent({
     setGridCarryInputs(emptyCarryGrid());
     setGridValidated(false);
     setGridResults(Array(4).fill(false));
+    setMul2dAnswers(emptyMul2Grid());
+    setMul2dCarryInputs(emptyMul2Carry());
+    setMul2dValidated(false);
+    setMul2dResults(Array(4).fill(false));
     setRoundingAnswers(Array(5).fill(""));
     setRoundingValidated(false);
     setRoundingResults(Array(5).fill(false));
@@ -2666,6 +2908,9 @@ export function GenericModuleContent({
   const activeDivGridConfig = currentStep?.kind === "div_column_grid"
     ? (divGridOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeMul2Config = currentStep?.kind === "mul_two_digit"
+    ? (mul2dOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   const goNext = useCallback(() => {
     if (showEvalScore) { router.push("/mathematiques"); return; }
@@ -2738,6 +2983,8 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "expr_comparison") {
         const cfg = exprCompOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => exprCompAnswers[i] === q.answer);
+      } else if (currentStep.kind === "mul_two_digit") {
+        currentResults = mul2dResults.slice(0, (mul2dOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -2766,6 +3013,7 @@ export function GenericModuleContent({
                 : es?.kind === "seq_complete" ? "Compléter la suite"
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
                 : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
+                : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication à 2 chiffres (guidée)" : "Multiplication à 2 chiffres")
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -2810,7 +3058,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -2946,6 +3194,40 @@ export function GenericModuleContent({
       setDivGridWorkInputs(emptyDivWork());
       setDivGridValidated(false);
       setDivGridResults(Array(3).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "mul_two_digit") {
+    const cfg = activeMul2Config!;
+    const cellOkVal = (d: number, v: string) => v === String(d) || (d === 0 && v === "");
+    stepCanValidate = !mul2dValidated;
+    stepValidate = mul2dValidated ? () => {} : () => {
+      const res = cfg.questions.map((q, qi) => {
+        const cells = mul2dAnswers[qi] ?? [];
+        const p1d = getD5(q.partial1), p2d = getD5(q.partial2), rd = getD5(q.result);
+        const p2Shifted = [p2d[1]!, p2d[2]!, p2d[3]!, p2d[4]!, 0];
+        const p1Base = cfg.preFilledOperands ? 0 : 10;
+        const p2Base = cfg.preFilledOperands ? 5 : 15;
+        const rBase  = cfg.preFilledOperands ? 10 : 20;
+        const p1Ok = p1d.every((d, col) => cellOkVal(d, (cells[p1Base+col] ?? "").trim()));
+        // col 4 (U=0) of partial2 is pre-filled, skip validation for that column
+        const p2Ok = [0,1,2,3].every(col => cellOkVal(p2Shifted[col]!, (cells[p2Base+col] ?? "").trim()));
+        const rOk = rd.every((d, col) => cellOkVal(d, (cells[rBase+col] ?? "").trim()));
+        if (cfg.preFilledOperands) return p1Ok && p2Ok && rOk;
+        const ad = getD5(q.a), bd = getD5(q.b);
+        const aOk = ad.every((d, col) => cellOkVal(d, (cells[col] ?? "").trim()));
+        const bOk = bd.every((d, col) => cellOkVal(d, (cells[5+col] ?? "").trim()));
+        return p1Ok && p2Ok && rOk && aOk && bOk;
+      });
+      setMul2dResults(res);
+      setMul2dValidated(true);
+    };
+    stepReset = () => {
+      setMul2dOverrideConfigs(prev => ({ ...prev, [stepIdx]: genMul2Digit(cfg.preFilledOperands, cfg.exNum) }));
+      setMul2dAnswers(emptyMul2Grid());
+      setMul2dCarryInputs(emptyMul2Carry());
+      setMul2dValidated(false);
+      setMul2dResults(Array(4).fill(false));
     };
   }
 
@@ -3772,6 +4054,27 @@ export function GenericModuleContent({
         />
       )}
 
+      {/* Two-digit multiplication exercise */}
+      {!showEvalScore && currentStep?.kind === "mul_two_digit" && activeMul2Config && (
+        <Mul2DigitExercise
+          config={activeMul2Config}
+          answers={mul2dAnswers}
+          carryInputs={mul2dCarryInputs}
+          validated={mul2dValidated}
+          results={mul2dResults}
+          onChange={(cardIdx, cellIdx, val) =>
+            setMul2dAnswers(prev => prev.map((card, ci) =>
+              ci === cardIdx ? card.map((v, vi) => vi === cellIdx ? val : v) : card
+            ))
+          }
+          onCarryChange={(cardIdx, col, val) =>
+            setMul2dCarryInputs(prev => prev.map((card, ci) =>
+              ci === cardIdx ? card.map((v, vi) => vi === col ? val : v) : card
+            ))
+          }
+        />
+      )}
+
       {/* Division column grid exercise */}
       {!showEvalScore && currentStep?.kind === "div_column_grid" && activeDivGridConfig && (
         <DivColumnGridExercise
@@ -3986,7 +4289,8 @@ export function GenericModuleContent({
                     (currentStep?.kind === "ordering" && !orderingValidated) ||
                     (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
                     (currentStep?.kind === "seq_complete" && !seqCompleteValidated) ||
-                    (currentStep?.kind === "div_column_grid" && !divGridValidated)
+                    (currentStep?.kind === "div_column_grid" && !divGridValidated) ||
+                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
