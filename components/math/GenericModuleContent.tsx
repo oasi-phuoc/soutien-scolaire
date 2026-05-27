@@ -1361,29 +1361,29 @@ function DivColumnCard({
             );
           })}
 
-          {/* Reste row — in the dividend area, right-aligned against the separator */}
+          {/* Reste row — label spans all but last dividend col; input in last col */}
           <tr>
             <td style={{ padding: 0 }} />
-            <td colSpan={dividendCols} style={{ padding: "4px 2px" }}>
-              <div className="flex items-center justify-end gap-1.5 pr-1">
-                <span className="text-xs font-medium text-[var(--color-text-secondary)]">Reste :</span>
-                {remOk === false
-                  ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
-                      <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
-                    </div>
-                  : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
-                      onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
-                      onKeyDown={tabNav}
-                      onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                      className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-                        remOk === null
-                          ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-                          : "border-[var(--color-border-default)]"
-                      }`}
-                    />
-                }
-              </div>
+            <td colSpan={dividendCols - 1} style={{ padding: "4px 2px", textAlign: "right", verticalAlign: "middle" }}>
+              <span className="text-xs font-medium text-[var(--color-text-secondary)]">Reste :</span>
+            </td>
+            <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+              {remOk === false
+                ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
+                    <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
+                  </div>
+                : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
+                    onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
+                    onKeyDown={tabNav}
+                    onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                    className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+                      remOk === null
+                        ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+                        : "border-[var(--color-border-default)]"
+                    }`}
+                  />
+              }
             </td>
             <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
           </tr>
