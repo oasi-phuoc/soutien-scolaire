@@ -301,11 +301,13 @@ function ExprCompExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
+        <div className="grid items-center gap-x-3 gap-y-3" style={{ gridTemplateColumns: "auto auto auto" }}>
           {config.questions.map((q, i) => (
             <Fragment key={i}>
-              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="justify-self-end inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+              <div className="flex items-center shrink-0">
+                <span className="w-6 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+              </div>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
