@@ -85,6 +85,11 @@ body {
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans), system-ui, sans-serif;
 }
 
+/* Hide number input spinners in Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 @media print {
   body {
     background: #fff !important;

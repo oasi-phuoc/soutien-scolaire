@@ -219,8 +219,10 @@ function ComparisonExercise({
         <div className="space-y-3">
           {config.questions.map((q, i) => (
             <div key={i} className="flex items-center gap-3">
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className={`${config.level === 1 ? "w-8" : "w-[5rem]"} shrink-0 text-right font-mono text-sm text-[var(--color-text-primary)]`}>{formatCompNum(q.a)}</span>
+              <div className="flex items-center shrink-0">
+                <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className={`${config.level === 1 ? "w-8" : "w-[5rem]"} text-right font-mono text-sm text-[var(--color-text-primary)]`}>{formatCompNum(q.a)}</span>
+              </div>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
                   const sel = answers[i] === sym;
