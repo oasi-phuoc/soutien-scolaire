@@ -1592,7 +1592,7 @@ function Mul2DigitCard({
           </tr>
           {/* Partial product 2 shifted (a × bTens × 10) */}
           <tr>
-            <td />
+            <td className="pr-1 text-right text-sm font-bold text-[var(--color-accent-alg)] leading-none align-middle">+</td>
             {visibleCols.map(col => {
               if (col === 4) {
                 // Fixed "0" in units position — shown in accent colour
@@ -2034,10 +2034,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2, true) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 3, 2) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 4, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2, 2) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3, 2) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4, 2) });
     } else if (sid === "A3-3") {
       // Tables de divisions — entraînement
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
@@ -2911,7 +2911,30 @@ export function GenericModuleContent({
       if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "column_grid") {
-        currentResults = gridResults.slice(0, (gridOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+        const cfg = gridOverrideConfigs[stepIdx] ?? currentStep.config;
+        if (currentStep.lesson.submoduleId === "A3-2") {
+          // Partial scoring: carries ignored
+          currentResults = [];
+          for (let qi = 0; qi < cfg.questions.length; qi++) {
+            const q = cfg.questions[qi]!;
+            const cells = gridAnswers[qi] ?? [];
+            const rd = getD4(q.result);
+            const resBase = cfg.preFilledOperands ? 0 : 8;
+            const rOk = rd.every((d, col) => (cells[resBase + col] ?? "").trim() === String(d));
+            if (cfg.preFilledOperands) {
+              // Ex 1: 2 pts for correct result
+              currentResults.push(rOk, rOk);
+            } else {
+              // Ex 2: 1 pt operands + 2 pts result
+              const ad = getD4(q.a), bd = getD4(q.b);
+              const opOk = ad.every((d, col) => (cells[col] ?? "").trim() === String(d)) &&
+                           bd.every((d, col) => (cells[4 + col] ?? "").trim() === String(d));
+              currentResults.push(opOk, rOk, rOk);
+            }
+          }
+        } else {
+          currentResults = gridResults.slice(0, cfg.questions.length);
+        }
       } else if (currentStep.kind === "rounding_group") {
         currentResults = roundingResults.slice(0, (roundingOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "frac_id") {
@@ -2972,7 +2995,33 @@ export function GenericModuleContent({
         const cfg = exprCompOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => exprCompAnswers[i] === q.answer);
       } else if (currentStep.kind === "mul_two_digit") {
-        currentResults = mul2dResults.slice(0, (mul2dOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+        const cfg = mul2dOverrideConfigs[stepIdx] ?? currentStep.config;
+        // Partial scoring for A3.2; carries always ignored
+        currentResults = [];
+        for (let qi = 0; qi < cfg.questions.length; qi++) {
+          const q = cfg.questions[qi]!;
+          const cells = mul2dAnswers[qi] ?? [];
+          const p1d = getD5(q.partial1), p2d = getD5(q.partial2), rd = getD5(q.result);
+          const p2SD = (col: number) => col === 4 ? 0 : p2d[col + 1]!;
+          const p1Base = cfg.preFilledOperands ? 0 : 10;
+          const p2Base = cfg.preFilledOperands ? 5 : 15;
+          const rBase  = cfg.preFilledOperands ? 10 : 20;
+          const cs = q.result > 9999 ? 0 : 1;
+          const vc = Array.from({length: 5 - cs}, (_, i) => cs + i);
+          const p1Ok = vc.every(c => (cells[p1Base+c] ?? "").trim() === String(p1d[c]!));
+          const p2Ok = vc.filter(c => c !== 4).every(c => (cells[p2Base+c] ?? "").trim() === String(p2SD(c)));
+          const rOk  = vc.every(c => (cells[rBase+c]  ?? "").trim() === String(rd[c]!));
+          if (cfg.preFilledOperands) {
+            // Ex 3: 1 pt p1 + 1 pt p2 + 1 pt result
+            currentResults.push(p1Ok, p2Ok, rOk);
+          } else {
+            // Ex 4: 1 pt operands + 1 pt p1 + 1 pt p2 + 1 pt result
+            const ad = getD5(q.a), bd = getD5(q.b);
+            const opOk = vc.every(c => (cells[c] ?? "").trim() === String(ad[c]!)) &&
+                         vc.every(c => (cells[5+c] ?? "").trim() === String(bd[c]!));
+            currentResults.push(opOk, p1Ok, p2Ok, rOk);
+          }
+        }
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
