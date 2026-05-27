@@ -843,6 +843,9 @@ function genDivColGridQ(dividendCols: number, divisorCols: number, quotientCols:
     if (dividendCols === 4) {
       dividend = rnd(1000, 9999);
       divisor = rnd(2, 9);
+    } else if (dividendCols === 5) {
+      dividend = rnd(10000, 99999);
+      divisor = rnd(11, 99);
     } else {
       dividend = rnd(100000, 999999);
       divisor = rnd(11, 99);
@@ -857,7 +860,7 @@ function genDivColGridQ(dividendCols: number, divisorCols: number, quotientCols:
 }
 
 function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOperands: boolean, exNum: number, count = 2): DivColGridConfig {
-  const quotientCols = dividendCols === 4 ? 4 : 5;
+  const quotientCols = dividendCols === 6 ? 5 : 4;
   return {
     questions: Array.from({ length: count }, () => genDivColGridQ(dividendCols, divisorCols, quotientCols)),
     exNum, preFilledOperands, dividendCols, divisorCols, quotientCols,
@@ -1165,28 +1168,32 @@ function ColumnGridExercise({
 
 // ── DivColumnGridExercise ─────────────────────────────────────────────────────
 const DIV_COL_LABELS_4 = ["M", "C", "D", "U"];
+const DIV_COL_LABELS_5 = ["DM", "M", "C", "D", "U"];
 const DIV_COL_LABELS_6 = ["CM", "DM", "M", "C", "D", "U"];
 const CELL_W = 32;
+const SEP_STYLE: React.CSSProperties = { width: 2, backgroundColor: "var(--color-text-primary)", padding: 0 };
+const EMPTY_TD: React.CSSProperties = { padding: 0 };
 
 function DivColumnCard({
-  q, cardIdx, quotientInputs, remainderInput, operandInputs, validated, preFilledOperands,
-  onQuotientChange, onRemainderChange, onOperandChange,
+  q, cardIdx, quotientInputs, remainderInput, operandInputs, workInputs, validated, preFilledOperands,
+  onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
 }: {
   q: DivColGridQ; cardIdx: number;
   quotientInputs: string[]; remainderInput: string;
   operandInputs: string[][];
+  workInputs: string[][][];
   validated: boolean; preFilledOperands: boolean;
   onQuotientChange: (ci: number, idx: number, val: string) => void;
   onRemainderChange: (ci: number, val: string) => void;
   onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
+  onWorkChange: (ci: number, si: number, type: 0|1, di: number, val: string) => void;
 }) {
   const { dividend, divisor, quotient, remainder, steps, dividendCols, divisorCols, quotientCols } = q;
-  const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : DIV_COL_LABELS_6;
+  const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : dividendCols === 5 ? DIV_COL_LABELS_5 : DIV_COL_LABELS_6;
   const dividendStr = dividend.toString().padStart(dividendCols, "0");
   const divisorStr = divisor.toString().padStart(divisorCols, "0");
   const quotientStr = quotient.toString().padStart(quotientCols, "0");
   const quotientLen = quotient.toString().length;
-  const rightW = Math.max(divisorCols, quotientCols) * CELL_W;
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key !== "Tab") return;
@@ -1199,22 +1206,18 @@ function DivColumnCard({
     if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
   }
 
-  function DigitCell({ value, expected, isLeadingOk, onChange }: {
-    value: string; expected: string; isLeadingOk?: boolean; onChange: (v: string) => void;
+  function InputCell({ val, expected, isLeadingOk, onChange }: {
+    val: string; expected: string; isLeadingOk?: boolean; onChange: (v: string) => void;
   }) {
-    const ok = validated
-      ? (isLeadingOk ? (value.trim() === "" || value.trim() === "0") : value.trim() === expected)
-      : null;
-    if (ok === false) {
-      return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
-          <span className="line-through text-amber-500 text-[9px] leading-none">{value || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
-        </div>
-      );
-    }
+    const ok = validated ? (isLeadingOk ? (val.trim() === "" || val.trim() === "0") : val.trim() === expected) : null;
+    if (ok === false) return (
+      <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+        <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+        <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+      </div>
+    );
     return (
-      <input type="text" inputMode="numeric" maxLength={1} value={value} disabled={validated}
+      <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
         onChange={e => onChange(e.target.value.replace(/[^0-9]/g, "").slice(-1))}
         onKeyDown={tabNav}
         onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
@@ -1225,42 +1228,78 @@ function DivColumnCard({
     );
   }
 
-  function PrefilledCell({ digit, hide }: { digit: string; hide?: boolean }) {
-    return (
-      <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
-        {hide ? "" : digit}
-      </div>
-    );
+  function PreCell({ digit, hide }: { digit: string; hide?: boolean }) {
+    return <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : digit}</div>;
   }
 
   const remOk = validated ? remainderInput.trim() === remainder.toString() : null;
 
+  // Helper: render cells for a row in the dividend area (offset + data + fill)
+  function DivAreaCells({ offset, len, cellsFn }: { offset: number; len: number; cellsFn: (di: number) => React.ReactNode }) {
+    const fill = dividendCols - offset - len;
+    return (
+      <>
+        {offset > 0 && <td colSpan={offset} style={EMPTY_TD} />}
+        {Array.from({ length: len }, (_, di) => (
+          <td key={di} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+            {cellsFn(di)}
+          </td>
+        ))}
+        {fill > 0 && <td colSpan={fill} style={EMPTY_TD} />}
+      </>
+    );
+  }
+
   return (
     <div data-divcol-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 overflow-x-auto">
-      <div className="flex items-start w-fit mx-auto">
-        {/* LEFT: column headers + dividend + working rows */}
-        <div className="flex flex-col">
-          {/* Column header row */}
-          <div className="flex">
-            <div className="w-5" />
+      <table className="mx-auto border-collapse table-fixed">
+        <tbody>
+          {/* Row 0: Column headers */}
+          <tr>
+            <td style={{ width: 20, padding: 0 }} />
             {colLabels.map((lbl, i) => (
-              <div key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{lbl}</div>
+              <td key={i} style={{ width: CELL_W, padding: 0 }}
+                className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{dividendCols === 5 ? "" : lbl}</td>
             ))}
-          </div>
-          {/* Dividend row */}
-          <div className="flex items-center">
-            <div className="w-5" />
+            <td style={SEP_STYLE} />
+            {Array.from({ length: quotientCols }, (_, i) => (
+              <td key={i} style={{ width: CELL_W, padding: 0 }} />
+            ))}
+          </tr>
+
+          {/* Row 1: Dividend | Divisor — border-bottom only under divisor side */}
+          <tr>
+            <td style={{ padding: 0 }} />
             {Array.from({ length: dividendCols }, (_, i) => {
               const isLeading = i < dividendCols - dividend.toString().length;
-              return preFilledOperands
-                ? <PrefilledCell key={i} digit={dividendStr[i]!} hide={isLeading} />
-                : <DigitCell key={i} value={operandInputs[0]?.[i] ?? ""} expected={dividendStr[i]!}
-                    onChange={v => onOperandChange(cardIdx, false, i, v)} />;
+              return (
+                <td key={i} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+                  {preFilledOperands
+                    ? <PreCell digit={dividendStr[i]!} hide={isLeading} />
+                    : <InputCell val={operandInputs[0]?.[i] ?? ""} expected={dividendStr[i]!}
+                        onChange={v => onOperandChange(cardIdx, false, i, v)} />
+                  }
+                </td>
+              );
             })}
-          </div>
-          {/* Separator under dividend */}
-          <div className="ml-5 h-[1.5px] bg-[var(--color-text-primary)]" style={{ width: `${dividendCols * CELL_W}px` }} />
-          {/* Working rows per step */}
+            <td style={{ ...SEP_STYLE, borderBottom: "2px solid var(--color-text-primary)" }} />
+            {Array.from({ length: quotientCols }, (_, i) => {
+              const isDivCol = i < divisorCols;
+              const isLeading = isDivCol && i < divisorCols - divisor.toString().length;
+              return (
+                <td key={i} style={{ width: CELL_W, padding: 2, ...(isDivCol ? { borderBottom: "2px solid var(--color-text-primary)" } : {}) }} className="align-middle text-center">
+                  {isDivCol
+                    ? preFilledOperands
+                      ? <PreCell digit={divisorStr[i]!} hide={isLeading} />
+                      : <InputCell val={operandInputs[1]?.[i] ?? ""} expected={divisorStr[i]!}
+                          onChange={v => onOperandChange(cardIdx, true, i, v)} />
+                    : null}
+                </td>
+              );
+            })}
+          </tr>
+
+          {/* Rows 2+: Working steps */}
           {steps.map((step, si) => {
             const pdStr = step.partialDiv.toString();
             const prStr = step.product.toString();
@@ -1268,102 +1307,98 @@ function DivColumnCard({
             const prStart = step.colEnd - prStr.length + 1;
             const lineStart = Math.min(pdStart, prStart);
             const lineLen = step.colEnd - lineStart + 1;
+            const lineFill = dividendCols - lineStart - lineLen;
+
             return (
               <Fragment key={si}>
-                {/* Partial dividend placeholder row */}
-                <div className="flex items-center" style={{ height: 32 }}>
-                  <div className="w-5" />
-                  <div style={{ width: `${pdStart * CELL_W}px` }} />
-                  {pdStr.split("").map((_, di) => (
-                    <div key={di} className="h-7 w-8 rounded border border-dashed border-[var(--color-border-default)] opacity-30" />
-                  ))}
-                </div>
-                {/* Product placeholder row with minus */}
-                <div className="flex items-center" style={{ height: 32 }}>
-                  <div className="w-5 flex items-center justify-center text-sm text-[var(--color-text-secondary)]">−</div>
-                  <div style={{ width: `${prStart * CELL_W}px` }} />
-                  {prStr.split("").map((_, di) => (
-                    <div key={di} className="h-7 w-8 rounded border border-dashed border-[var(--color-border-default)] opacity-30" />
-                  ))}
-                </div>
+                {/* Partial dividend row | quotient (si===0) */}
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  <DivAreaCells offset={pdStart} len={pdStr.length} cellsFn={di => (
+                    <InputCell val={(workInputs?.[si]?.[0]?.[di]) ?? ""} expected={pdStr[di]!}
+                      onChange={v => onWorkChange(cardIdx, si, 0, di, v)} />
+                  )} />
+                  <td style={SEP_STYLE} />
+                  {si === 0
+                    ? Array.from({ length: quotientCols }, (_, qi) => {
+                        const isLeading = qi < quotientCols - quotientLen;
+                        return (
+                          <td key={qi} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+                            <InputCell val={quotientInputs[qi] ?? ""} expected={quotientStr[qi]!}
+                              isLeadingOk={isLeading}
+                              onChange={v => onQuotientChange(cardIdx, qi, v)} />
+                          </td>
+                        );
+                      })
+                    : <td colSpan={quotientCols} style={EMPTY_TD} />
+                  }
+                </tr>
+
+                {/* Product row | Reste (si===0) */}
+                <tr>
+                  <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
+                  <DivAreaCells offset={prStart} len={prStr.length} cellsFn={di => (
+                    <InputCell val={(workInputs?.[si]?.[1]?.[di]) ?? ""} expected={prStr[di]!}
+                      onChange={v => onWorkChange(cardIdx, si, 1, di, v)} />
+                  )} />
+                  <td style={SEP_STYLE} />
+                  {si === 0
+                    ? <td colSpan={quotientCols} style={{ padding: "4px 4px" }}>
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-xs text-[var(--color-text-secondary)]">Reste :</span>
+                          {remOk === false
+                            ? <div className={`h-8 w-12 rounded border ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                                <span className="line-through text-amber-500 text-xs">{remainderInput || "—"}</span>
+                                <span className="text-[var(--color-text-primary)] text-xs font-bold ml-0.5">{remainder}</span>
+                              </div>
+                            : <input type="number" inputMode="numeric" value={remainderInput} disabled={validated}
+                                onChange={e => onRemainderChange(cardIdx, e.target.value)}
+                                className={`h-8 w-12 rounded border text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
+                                  remOk === null
+                                    ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+                                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+                                }`}
+                              />
+                          }
+                        </div>
+                      </td>
+                    : <td colSpan={quotientCols} style={EMPTY_TD} />
+                  }
+                </tr>
+
                 {/* Step separator line */}
-                <div className="h-px bg-[var(--color-text-primary)] opacity-40"
-                  style={{ marginLeft: `${20 + lineStart * CELL_W}px`, width: `${lineLen * CELL_W}px` }} />
+                <tr>
+                  <td colSpan={lineStart + 1} style={EMPTY_TD} />
+                  <td colSpan={lineLen} style={EMPTY_TD}>
+                    <div className="h-px bg-[var(--color-text-primary)] opacity-50" />
+                  </td>
+                  {lineFill > 0 && <td colSpan={lineFill} style={EMPTY_TD} />}
+                  <td style={SEP_STYLE} />
+                  <td colSpan={quotientCols} style={EMPTY_TD} />
+                </tr>
               </Fragment>
             );
           })}
-          {/* Reste field */}
-          <div className="flex items-center gap-1.5 mt-1 ml-5">
-            <span className="text-xs text-[var(--color-text-secondary)]">Reste :</span>
-            {remOk === false ? (
-              <div className={`h-8 w-12 rounded border ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                <span className="line-through text-amber-500 text-xs">{remainderInput || "—"}</span>
-                <span className="text-[var(--color-text-primary)] text-xs font-bold">{remainder}</span>
-              </div>
-            ) : (
-              <input type="number" inputMode="numeric" value={remainderInput} disabled={validated}
-                onChange={e => onRemainderChange(cardIdx, e.target.value)}
-                className={`h-8 w-12 rounded border text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
-                  remOk === null
-                    ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
-                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
-                }`}
-              />
-            )}
-          </div>
-        </div>
-
-        {/* Vertical separator */}
-        <div className="w-[2px] self-stretch bg-[var(--color-text-primary)] mx-1" />
-
-        {/* RIGHT: divisor + quotient */}
-        <div className="flex flex-col" style={{ width: rightW }}>
-          {/* Spacer aligning with column headers */}
-          <div className="h-5" />
-          {/* Divisor row (right-aligned) */}
-          <div className="flex items-center justify-end">
-            {Array.from({ length: divisorCols }, (_, i) => {
-              const isLeading = i < divisorCols - divisor.toString().length;
-              return preFilledOperands
-                ? <PrefilledCell key={i} digit={divisorStr[i]!} hide={isLeading} />
-                : <DigitCell key={i} value={operandInputs[1]?.[i] ?? ""} expected={divisorStr[i]!}
-                    onChange={v => onOperandChange(cardIdx, true, i, v)} />;
-            })}
-          </div>
-          {/* Horizontal separator */}
-          <div className="h-[1.5px] bg-[var(--color-text-primary)]" />
-          {/* Quotient row */}
-          <div className="flex items-center justify-end">
-            {Array.from({ length: quotientCols }, (_, i) => {
-              const isLeading = i < quotientCols - quotientLen;
-              return (
-                <DigitCell key={i}
-                  value={quotientInputs[i] ?? ""}
-                  expected={quotientStr[i]!}
-                  isLeadingOk={isLeading}
-                  onChange={v => onQuotientChange(cardIdx, i, v)}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
+        </tbody>
+      </table>
     </div>
   );
 }
 
 function DivColumnGridExercise({
-  config, quotientInputs, remainderInputs, operandInputs, validated,
-  onQuotientChange, onRemainderChange, onOperandChange,
+  config, quotientInputs, remainderInputs, operandInputs, workInputs, validated,
+  onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
 }: {
   config: DivColGridConfig;
   quotientInputs: string[][];
   remainderInputs: string[];
   operandInputs: string[][][];
+  workInputs: string[][][][];
   validated: boolean;
   onQuotientChange: (ci: number, idx: number, val: string) => void;
   onRemainderChange: (ci: number, val: string) => void;
   onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
+  onWorkChange: (ci: number, si: number, type: 0|1, di: number, val: string) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -1376,11 +1411,13 @@ function DivColumnGridExercise({
             quotientInputs={quotientInputs[qi] ?? []}
             remainderInput={remainderInputs[qi] ?? ""}
             operandInputs={operandInputs[qi] ?? [[], []]}
+            workInputs={workInputs[qi] ?? []}
             validated={validated}
             preFilledOperands={config.preFilledOperands}
             onQuotientChange={onQuotientChange}
             onRemainderChange={onRemainderChange}
             onOperandChange={onOperandChange}
+            onWorkChange={onWorkChange}
           />
         ))}
       </div>
@@ -1733,13 +1770,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "A3-4") {
       // Division en colonnes — entraînement
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, true, 1) });
-      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, true, 2) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, true, 2) });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 3) });
-      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, false, 4) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, false, 4) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 1, 3) });
-      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(6, 2, false, 2, 3) });
+      steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, false, 2, 3) });
     } else if (sid === "A4-1") {
       steps.push({ kind: "frac_id", lesson, config: genFracId(1) });
       steps.push({ kind: "frac_equiv", lesson, config: genFracEquiv([2, 144], 2) });
@@ -2265,6 +2302,10 @@ export function GenericModuleContent({
   const [divGridValidated, setDivGridValidated] = useState(false);
   const [divGridResults, setDivGridResults] = useState<boolean[]>(() => Array(3).fill(false));
   const [divGridOverrideConfigs, setDivGridOverrideConfigs] = useState<Record<number, DivColGridConfig>>({});
+  const emptyDivWork = () => Array.from({ length: 3 }, () =>
+    Array.from({ length: 5 }, () => [Array(6).fill("") as string[], Array(6).fill("") as string[]])
+  );
+  const [divGridWorkInputs, setDivGridWorkInputs] = useState<string[][][][]>(emptyDivWork);
 
   // A1.3 state
   const [numberSelectAnswers, setNumberSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
@@ -2372,6 +2413,7 @@ export function GenericModuleContent({
     setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
     setDivGridRemainderInputs(Array(3).fill(""));
     setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
+    setDivGridWorkInputs(emptyDivWork());
     setDivGridValidated(false);
     setDivGridResults(Array(3).fill(false));
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
@@ -2748,6 +2790,7 @@ export function GenericModuleContent({
       setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
       setDivGridRemainderInputs(Array(3).fill(""));
       setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
+      setDivGridWorkInputs(emptyDivWork());
       setDivGridValidated(false);
       setDivGridResults(Array(3).fill(false));
     };
@@ -3583,6 +3626,7 @@ export function GenericModuleContent({
           quotientInputs={divGridQuotientInputs}
           remainderInputs={divGridRemainderInputs}
           operandInputs={divGridOperandInputs}
+          workInputs={divGridWorkInputs}
           validated={divGridValidated}
           onQuotientChange={(ci, idx, val) =>
             setDivGridQuotientInputs(prev => prev.map((card, ci2) =>
@@ -3599,6 +3643,17 @@ export function GenericModuleContent({
               return card.map((row, ri) =>
                 ri === side ? row.map((v, vi) => vi === idx ? val : v) : row
               );
+            }))
+          }
+          onWorkChange={(ci, si, type, di, val) =>
+            setDivGridWorkInputs(prev => prev.map((card, ci2) => {
+              if (ci2 !== ci) return card;
+              return card.map((step, si2) => {
+                if (si2 !== si) return step;
+                return step.map((row, ri) =>
+                  ri === type ? row.map((v, vi) => vi === di ? val : v) : row
+                );
+              });
             }))
           }
         />
