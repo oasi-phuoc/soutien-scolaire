@@ -1030,7 +1030,7 @@ function ColumnGridCard({
   // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
   const resBase = preFilledOperands ? 0 : 8;
-  const strictZero = exNum >= 7;
+  const strictZero = exNum >= 7 || q.op === "×";
 
   const cellOk = (expected: number, val: string) => {
     const trimmed = val.trim();
@@ -1463,6 +1463,16 @@ function Mul2DigitCard({
   const p2Base = preFilledOperands ? 5 : 15;
   const rBase  = preFilledOperands ? 10 : 20;
 
+  // Dynamic column count: use 5 cols (DM,M,C,D,U) only if result > 9999
+  const numCols = q.result > 9999 ? 5 : 4;
+  const colStart = 5 - numCols; // 0 for 5-cols, 1 for 4-cols
+  const visibleCols = Array.from({length: numCols}, (_, i) => colStart + i);
+  const colLabels = COL5_LABELS.slice(colStart);
+  const totalSpan = numCols + 1; // label col + data cols
+
+  // partial2 shifted: col i → p2d[i+1], except col 4 (U) = 0 (fixed)
+  const p2ShiftedDigit = (col: number): number => col === 4 ? 0 : p2d[col + 1]!;
+
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key !== "Tab") return;
     e.preventDefault();
@@ -1477,7 +1487,7 @@ function Mul2DigitCard({
   const cellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
-    const ok = validated ? (val.trim() === String(expected) || (expected === 0 && val.trim() === "")) : null;
+    const ok = validated ? val.trim() === String(expected) : null;
     if (ok === false) {
       return (
         <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
@@ -1518,20 +1528,6 @@ function Mul2DigitCard({
     );
   };
 
-  // partial2 shifted: multiply by 10, so in 5-column layout:
-  // col 0 (DM): p2d[1] (M digit of unshifted)
-  // col 1 (M):  p2d[2] (C digit of unshifted)
-  // col 2 (C):  p2d[3] (D digit of unshifted)
-  // col 3 (D):  p2d[4] (U digit of unshifted)
-  // col 4 (U):  0 (always, pre-filled)
-  const p2ShiftedDigit = (col: number): number => {
-    if (col === 4) return 0;
-    return p2d[col + 1]!;
-  };
-
-  const p2ShiftedArr = [0,1,2,3,4].map(c => p2ShiftedDigit(c));
-  const firstNzP2Shifted = p2ShiftedArr.findIndex(d => d !== 0);
-
   return (
     <div data-grid-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {!preFilledOperands && (
@@ -1543,23 +1539,30 @@ function Mul2DigitCard({
         <thead>
           <tr>
             <td className="w-6" />
-            {COL5_LABELS.map(h => (
+            {colLabels.map(h => (
               <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {/* Carry row 1 */}
+          {/* R2 — carries for tens-digit multiplication (shown first/top) */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
-            {[0,1,2,3,4].map(col => (
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            {visibleCols.map(col => (
+              <td key={col} className="text-center">{carryCell(5, col)}</td>
+            ))}
+          </tr>
+          {/* R1 — carries for units-digit multiplication */}
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            {visibleCols.map(col => (
               <td key={col} className="text-center">{carryCell(0, col)}</td>
             ))}
           </tr>
           {/* Operand a */}
           <tr>
             <td />
-            {[0,1,2,3,4].map(col => (
+            {visibleCols.map(col => (
               <td key={col} className="text-center">
                 {preFilledOperands
                   ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
@@ -1570,7 +1573,7 @@ function Mul2DigitCard({
           {/* Operand b */}
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
-            {[0,1,2,3,4].map(col => (
+            {visibleCols.map(col => (
               <td key={col} className="text-center">
                 {preFilledOperands
                   ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} />
@@ -1579,50 +1582,35 @@ function Mul2DigitCard({
             ))}
           </tr>
           {/* Separator 1 */}
-          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
-          {/* Partial product 1 */}
+          <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          {/* Partial product 1 (a × bUnits) */}
           <tr>
             <td />
-            {[0,1,2,3,4].map(col => (
+            {visibleCols.map(col => (
               <td key={col} className="text-center">{cellInput({base: p1Base, col, expected: p1d[col]!})}</td>
             ))}
           </tr>
-          {/* Carry row 2 */}
-          <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
-            {[0,1,2,3,4].map(col => (
-              <td key={col} className="text-center">{carryCell(5, col)}</td>
-            ))}
-          </tr>
-          {/* Partial product 2 shifted */}
+          {/* Partial product 2 shifted (a × bTens × 10) */}
           <tr>
             <td />
-            {[0,1,2,3,4].map(col => {
-              const expected = p2ShiftedDigit(col);
+            {visibleCols.map(col => {
               if (col === 4) {
+                // Fixed "0" in units position — shown in accent colour
                 return (
                   <td key={col} className="text-center">
-                    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">0</div>
+                    <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
                   </td>
                 );
               }
-              const isLeading = firstNzP2Shifted >= 0 && col < firstNzP2Shifted;
-              if (isLeading && expected === 0) {
-                return (
-                  <td key={col} className="text-center">
-                    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-transparent">0</div>
-                  </td>
-                );
-              }
-              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected})}</td>;
+              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected: p2ShiftedDigit(col)})}</td>;
             })}
           </tr>
           {/* Separator 2 */}
-          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Result */}
           <tr>
             <td />
-            {[0,1,2,3,4].map(col => (
+            {visibleCols.map(col => (
               <td key={col} className="text-center">{cellInput({base: rBase, col, expected: rd[col]!})}</td>
             ))}
           </tr>
@@ -3134,7 +3122,7 @@ export function GenericModuleContent({
   if (currentStep?.kind === "column_grid") {
     const cfg = activeGridConfig!;
     const resBase = cfg.preFilledOperands ? 0 : 8;
-    const strictZero = cfg.exNum >= 7;
+    const strictZero = cfg.exNum >= 7 || cfg.op === "×";
     const cellOkVal = (d: number, v: string) =>
       v === String(d) || (!strictZero && d === 0 && v === "");
     stepCanValidate = !gridValidated;
@@ -3199,24 +3187,27 @@ export function GenericModuleContent({
 
   if (currentStep?.kind === "mul_two_digit") {
     const cfg = activeMul2Config!;
-    const cellOkVal = (d: number, v: string) => v === String(d) || (d === 0 && v === "");
+    const cellOkVal = (d: number, v: string) => v.trim() === String(d);
     stepCanValidate = !mul2dValidated;
     stepValidate = mul2dValidated ? () => {} : () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = mul2dAnswers[qi] ?? [];
         const p1d = getD5(q.partial1), p2d = getD5(q.partial2), rd = getD5(q.result);
-        const p2Shifted = [p2d[1]!, p2d[2]!, p2d[3]!, p2d[4]!, 0];
+        // col i of p2Shifted = p2d[i+1], except col4=0 (pre-filled, skip)
+        const p2ShiftedD = (col: number) => col === 4 ? 0 : p2d[col + 1]!;
         const p1Base = cfg.preFilledOperands ? 0 : 10;
         const p2Base = cfg.preFilledOperands ? 5 : 15;
         const rBase  = cfg.preFilledOperands ? 10 : 20;
-        const p1Ok = p1d.every((d, col) => cellOkVal(d, (cells[p1Base+col] ?? "").trim()));
-        // col 4 (U=0) of partial2 is pre-filled, skip validation for that column
-        const p2Ok = [0,1,2,3].every(col => cellOkVal(p2Shifted[col]!, (cells[p2Base+col] ?? "").trim()));
-        const rOk = rd.every((d, col) => cellOkVal(d, (cells[rBase+col] ?? "").trim()));
+        const colStart = q.result > 9999 ? 0 : 1;
+        const visCols = Array.from({length: 5 - colStart}, (_, i) => colStart + i);
+        const p1Ok = visCols.every(col => cellOkVal(p1d[col]!, (cells[p1Base+col] ?? "").trim()));
+        // skip col 4 (fixed 0) in p2 validation
+        const p2Ok = visCols.filter(c => c !== 4).every(col => cellOkVal(p2ShiftedD(col), (cells[p2Base+col] ?? "").trim()));
+        const rOk  = visCols.every(col => cellOkVal(rd[col]!, (cells[rBase+col] ?? "").trim()));
         if (cfg.preFilledOperands) return p1Ok && p2Ok && rOk;
         const ad = getD5(q.a), bd = getD5(q.b);
-        const aOk = ad.every((d, col) => cellOkVal(d, (cells[col] ?? "").trim()));
-        const bOk = bd.every((d, col) => cellOkVal(d, (cells[5+col] ?? "").trim()));
+        const aOk = visCols.every(col => cellOkVal(ad[col]!, (cells[col] ?? "").trim()));
+        const bOk = visCols.every(col => cellOkVal(bd[col]!, (cells[5+col] ?? "").trim()));
         return p1Ok && p2Ok && rOk && aOk && bOk;
       });
       setMul2dResults(res);
