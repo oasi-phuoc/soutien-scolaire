@@ -60,6 +60,17 @@ type RoundingStep = { kind: "rounding_group"; lesson: MathSubmoduleLesson; confi
 type ColGridQ = { a: number; b: number; result: number; op: ArithOp; carryRow: (number | null)[] };
 type ColGridConfig = { questions: ColGridQ[]; exNum: number; op: ArithOp; preFilledOperands: boolean };
 
+type Mul2DigitQ = {
+  a: number; b: number;
+  partial1: number;
+  partial2: number;
+  result: number;
+  carries1: (number|null)[];
+  carries2: (number|null)[];
+};
+type Mul2DigitConfig = { questions: Mul2DigitQ[]; exNum: number; preFilledOperands: boolean };
+type Mul2DigitStep = { kind: "mul_two_digit"; lesson: MathSubmoduleLesson; config: Mul2DigitConfig };
+
 type DivStep = { partialDiv: number; quotientDigit: number; product: number; partRemainder: number; colEnd: number };
 type DivColGridQ = { dividend: number; divisor: number; quotient: number; remainder: number; steps: DivStep[]; dividendCols: number; divisorCols: number; quotientCols: number };
 type DivColGridConfig = { questions: DivColGridQ[]; exNum: number; preFilledOperands: boolean; dividendCols: number; divisorCols: number; quotientCols: number };
@@ -125,7 +136,7 @@ type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
 type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
 type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -780,6 +791,10 @@ function getD4(n: number): [number, number, number, number] {
   return [Math.floor(n / 1000) % 10, Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
 }
 
+function getD5(n: number): [number,number,number,number,number] {
+  return [Math.floor(n/10000)%10, Math.floor(n/1000)%10, Math.floor(n/100)%10, Math.floor(n/10)%10, n%10];
+}
+
 function computeCarries(a: number, b: number, op: ArithOp): (number | null)[] {
   const row: (number | null)[] = [null, null, null, null];
   const ad = getD4(a), bd = getD4(b);
@@ -821,6 +836,39 @@ function genColGridQ(op: ArithOp): ColGridQ {
 
 function genColumnGrid(op: ArithOp, preFilledOperands: boolean, exNum: number, count = 4): ColGridConfig {
   return { questions: Array.from({ length: count }, () => genColGridQ(op)), exNum, op, preFilledOperands };
+}
+
+function computeCarries5(a: number, bDigit: number): (number|null)[] {
+  const ad = getD5(a);
+  const row: (number|null)[] = [null,null,null,null,null];
+  let c = 0;
+  for (let i = 4; i >= 0; i--) {
+    const prod = ad[i]! * bDigit + c;
+    c = Math.floor(prod / 10);
+    if (i > 0 && c > 0) row[i-1] = c;
+  }
+  return row;
+}
+
+function genMul2DigitQ(): Mul2DigitQ {
+  for (;;) {
+    const a = rnd(12, 999);
+    let b: number;
+    do { b = rnd(11, 99); } while (b % 10 === 0);
+    const result = a * b;
+    if (result > 99999) continue;
+    const bUnits = b % 10;
+    const bTens = Math.floor(b / 10);
+    const partial1 = a * bUnits;
+    const partial2 = a * bTens;
+    return { a, b, partial1, partial2, result,
+      carries1: computeCarries5(a, bUnits),
+      carries2: computeCarries5(a, bTens) };
+  }
+}
+
+function genMul2Digit(preFilledOperands: boolean, exNum: number, count = 4): Mul2DigitConfig {
+  return { questions: Array.from({length: count}, genMul2DigitQ), exNum, preFilledOperands };
 }
 
 function computeDivSteps(dividend: number, divisor: number): DivStep[] {
