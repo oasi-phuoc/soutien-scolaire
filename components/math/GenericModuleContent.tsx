@@ -1447,19 +1447,20 @@ function RoundingExercise({
   const inputBase = "w-[4.5rem] h-8 shrink-0 rounded border px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
+  const isInline = config.kind === "diz_near" || config.kind === "cent_near_new";
 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className={isNew ? "grid gap-y-3" : "space-y-3"} style={isNew ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}>
+        <div className={isNew && !isInline ? "grid gap-y-3" : "space-y-3"} style={isNew && !isInline ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}>
           {config.questions.map((q, i) => {
             const v = answers[i] ?? "";
             const ok = validated ? results[i] ?? false : null;
             const wrongField = ok === false;
             const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
-            const prompt = <span className={`${isNew ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
+            const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
             const field = wrongField
               ? <div className={`${inputBase} ${CLS_WRONG_INL} flex items-center justify-center gap-0.5 overflow-hidden`}>
                   <span className="line-through text-amber-500 text-[9px]">{v || "—"}</span>
@@ -1473,6 +1474,16 @@ function RoundingExercise({
                   onChange={e => onChange(i, e.target.value)}
                   className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
                 />;
+            if (isInline) {
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.prompt}</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] mx-1">≈</span>
+                  {field}
+                </div>
+              );
+            }
             return isNew
               ? <Fragment key={i}>{numLabel}{prompt}{field}</Fragment>
               : <div key={i} className="flex items-center gap-2 flex-wrap min-h-[2.25rem]">{numLabel}{prompt}{field}</div>;

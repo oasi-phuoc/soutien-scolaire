@@ -1575,14 +1575,18 @@ function AudioPlayer({ src }: { src: string }) {
 
 function ExerciseRow({
   num, inputId, answer, result, validated, correctWord,
-  pivotWord, pivot, showPivot, onChange,
+  pivotWord, pivot, showPivot, onChange, rowIdx, noBorder,
 }: {
   num: number; inputId: string; answer: string; result: boolean | null;
   validated: boolean; correctWord: string; pivotWord?: string;
   pivot: PivotCode; showPivot: boolean; onChange: (val: string) => void;
+  rowIdx?: number; noBorder?: boolean;
 }) {
   return (
-    <div className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+    <div className={`flex items-center gap-3 transition-colors ${noBorder ? "" : "rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3"}`}>
+      {rowIdx !== undefined && (
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{rowIdx + 1}.</span>
+      )}
       <span className="w-10 shrink-0 text-center text-2xl font-bold tabular-nums text-[var(--color-accent-alg)]">
         {num}
       </span>
@@ -2667,7 +2671,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           <div className="space-y-3">
             {ex2Numbers.map((num, i) => (
               <ExerciseRow
-                key={i}
+                key={i} rowIdx={i} noBorder
                 num={num} inputId={`ex2-${i}`}
                 answer={ex2Answers[i] ?? ""} result={ex2Results[i] ?? null}
                 validated={ex2Validated} correctWord={FR_WORDS[num] ?? ""}
@@ -2698,7 +2702,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {ex4Numbers.map((num, i) => {
               const result = ex4Results[i] ?? null;
               return (
-                <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex4Validated && result !== null ? (
                     <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
@@ -2741,7 +2746,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {ex5Numbers.map((num, i) => {
               const result = ex5Results[i] ?? null;
               return (
-                <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex5Validated && result !== null ? (
                     <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
@@ -2784,7 +2790,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {ex6Compositions.map((comp, i) => {
               const result = ex6Results[i] ?? null;
               return (
-                <div key={i} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={comp.clips[0]!} />
                   {ex6Validated && result !== null ? (
                     <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
@@ -2896,8 +2903,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           </div>
           <div className="space-y-3">
             {ex8Series.map((series, si) => (
-              <div key={si} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
-                <div className="flex items-center gap-2 overflow-hidden">
+              <div key={si} className="flex items-center gap-2">
+                <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{si + 1}.</span>
+                <div className="flex flex-1 items-center gap-2 overflow-hidden">
                   <div className="flex min-w-0 flex-1 gap-1">
                     {Array.from({ length: series.count }, (_, i) => {
                       const num = series.start + i;
@@ -3758,8 +3766,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez les nombres en lettres correctement.</p>
-                  {evalItems_curr.slice(0, 4).map(ex => (
-                    <ExerciseRow key={ex.id}
+                  {evalItems_curr.slice(0, 4).map((ex, i) => (
+                    <ExerciseRow key={ex.id} rowIdx={i} noBorder
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
                       answer={evalAnswers[ex.id] ?? ""} result={evalPageValidated ? answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable) : null}
                       validated={evalPageValidated} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
@@ -3774,11 +3782,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
-                  {evalItems_curr.slice(4, 8).map(ex => {
+                  {evalItems_curr.slice(4, 8).map((ex, i) => {
                     const audioAns = evalAnswers[ex.id] ?? "";
                     const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
                     return (
-                      <div key={ex.id} className="flex items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                      <div key={ex.id} className="flex items-center gap-3">
+                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
                           <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
@@ -3807,11 +3816,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Complétez les séries de nombres.</p>
-                  {evalItems_curr.slice(8).map(ex => {
+                  {evalItems_curr.slice(8).map((ex, i) => {
                     const displayNums = ex.seriesNums!.slice(0, ex.seriesNums!.length - 3);
                     return (
-                    <div key={ex.id} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-                      <div className="flex min-w-0 gap-1">
+                    <div key={ex.id} className="flex items-center gap-2">
+                      <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                      <div className="flex flex-1 min-w-0 gap-1">
                         {displayNums.map((num, ni) => {
                           if (ni === ex.blankIdx) {
                             const seriesAns = evalAnswers[ex.id] ?? "";
@@ -4592,7 +4602,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           <div className="space-y-3">
             {ex3Numbers.map((num, i) => (
               <ExerciseRow
-                key={i}
+                key={i} rowIdx={i} noBorder
                 num={num} inputId={`ex3-${i}`}
                 answer={ex3Answers[i] ?? ""} result={ex3Results[i] ?? null}
                 validated={ex3Validated} correctWord={FR_TENS[num] ?? ""}
