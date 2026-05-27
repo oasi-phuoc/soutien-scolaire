@@ -1974,6 +1974,74 @@ function DivisionTableBlock() {
 }
 
 // ── Rich block renderer ──────────────────────────────────────────────────────
+function MulDemoGrid({ a, b, op, carries, result }: {
+  a: number[]; b: number[]; op: string;
+  carries: (number | null)[]; result: (number | null)[];
+}) {
+  const COL_LABELS = ["M", "C", "D", "U"];
+  const firstNzA = a.findIndex(d => d !== 0);
+  const firstNzB = b.findIndex(d => d !== 0);
+  return (
+    <table className="border-collapse shrink-0">
+      <thead>
+        <tr>
+          <td className="w-6" />
+          {COL_LABELS.map(h => (
+            <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+          {carries.map((c, ci) => (
+            <td key={ci} className="text-center">
+              <div className="h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold text-orange-500">
+                {c !== null ? c : ""}
+              </div>
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td />
+          {a.map((d, di) => (
+            <td key={di} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {di < firstNzA ? "" : d}
+              </div>
+            </td>
+          ))}
+        </tr>
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
+          {b.map((d, di) => (
+            <td key={di} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {di < firstNzB ? "" : d}
+              </div>
+            </td>
+          ))}
+        </tr>
+        <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+        <tr>
+          <td />
+          {result.map((d, di) => (
+            <td key={di} className="text-center">
+              <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
+                d !== null
+                  ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+                  : "border-dashed border-[var(--color-border-default)] text-transparent"
+              }`}>
+                {d !== null ? d : "0"}
+              </div>
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
 function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   block: MathRichBlock;
   blockIdx?: number;
@@ -2174,6 +2242,25 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       return <MultiplicationTableBlock />;
     case "div_table":
       return <DivisionTableBlock />;
+    case "mul_step_cards":
+      return (
+        <div className="space-y-3">
+          {block.steps.map((step, si) => (
+            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
+              <div className="flex-1 space-y-1 min-w-0">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                {step.textsFr.map((t, ti) => (
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                ))}
+              </div>
+              <MulDemoGrid
+                a={block.a} b={block.b} op={block.op}
+                carries={step.carries} result={step.result}
+              />
+            </div>
+          ))}
+        </div>
+      );
     default:
       return null;
   }
