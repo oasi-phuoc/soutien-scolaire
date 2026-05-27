@@ -279,6 +279,7 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
       );
     case "mult_table":
     case "div_table":
+    case "mul_step_cards":
       return null;
     case "plain":
     default: {
