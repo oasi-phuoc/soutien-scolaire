@@ -409,14 +409,12 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
           {/* Remainder row (when all steps done) */}
           {stepsComplete >= divSteps.length && divSteps.length > 0 && (
             <tr>
-              <td style={{ padding:"4px 2px", textAlign:"right", verticalAlign:"middle", fontSize:12, color:"var(--color-text-secondary)", whiteSpace:"nowrap" }}>
+              <td colSpan={dividendCols} style={{ padding:"4px 6px 4px 0", textAlign:"right", verticalAlign:"middle", fontSize:12, color:"var(--color-text-secondary)", whiteSpace:"nowrap" }}>
                 Reste :
               </td>
-              {Array.from({ length: dividendCols }, (_, col) => (
-                <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
-                  {col === dividendCols - 1 ? showCell(remainder, true) : emptyCell()}
-                </td>
-              ))}
+              <td style={{ width: CW, padding: 2 }} className="align-middle text-center">
+                {showCell(remainder, true)}
+              </td>
               <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
             </tr>
           )}

@@ -1419,30 +1419,26 @@ function DivColumnCard({
 
           {/* Reste row */}
           <tr>
-            <td style={{ padding: "4px 2px", textAlign: "right", verticalAlign: "middle", fontSize: 12, color: "var(--color-text-secondary)", whiteSpace: "nowrap" }}>
+            <td colSpan={dividendCols} style={{ padding: "4px 6px 4px 0", textAlign: "right", verticalAlign: "middle", fontSize: 12, color: "var(--color-text-secondary)", whiteSpace: "nowrap" }}>
               Reste :
             </td>
-            {Array.from({ length: dividendCols }, (_, col) => (
-              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
-                {col === dividendCols - 1
-                  ? (remOk === false
-                      ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                          <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
-                          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
-                        </div>
-                      : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
-                          onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
-                          onKeyDown={tabNav}
-                          onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                          className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-                            remOk === null
-                              ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-                              : "border-[var(--color-border-default)]"
-                          }`}
-                        />)
-                  : emptyCell()}
-              </td>
-            ))}
+            <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+              {remOk === false
+                ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
+                    <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
+                  </div>
+                : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
+                    onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
+                    onKeyDown={tabNav}
+                    onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                    className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+                      remOk === null
+                        ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+                        : "border-[var(--color-border-default)]"
+                    }`}
+                  />}
+            </td>
             <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
           </tr>
         </tbody>
@@ -2557,14 +2553,12 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
 
           {stepsComplete >= divSteps.length && divSteps.length > 0 && (
             <tr>
-              <td style={{ padding:"4px 2px", textAlign:"right", verticalAlign:"middle", fontSize:12, color:"var(--color-text-secondary)", whiteSpace:"nowrap" }}>
+              <td colSpan={dividendCols} style={{ padding:"4px 6px 4px 0", textAlign:"right", verticalAlign:"middle", fontSize:12, color:"var(--color-text-secondary)", whiteSpace:"nowrap" }}>
                 Reste :
               </td>
-              {Array.from({ length: dividendCols }, (_, col) => (
-                <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
-                  {col === dividendCols - 1 ? showCell(remainder, true) : emptyCell()}
-                </td>
-              ))}
+              <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+                {showCell(remainder, true)}
+              </td>
               <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
             </tr>
           )}
