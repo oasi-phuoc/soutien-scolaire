@@ -1017,7 +1017,7 @@ function ArithmeticGroupExercise({
 const COL_LABELS = ["M", "C", "D", "U"] as const;
 
 function ColumnGridCard({
-  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect: _cardCorrect, preFilledOperands, exNum, onChange, onCarryChange,
+  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect: _cardCorrect, preFilledOperands, exNum: _exNum, onChange, onCarryChange,
 }: {
   q: ColGridQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
   validated: boolean; cardCorrect: boolean; preFilledOperands: boolean; exNum: number;
@@ -1223,7 +1223,7 @@ const DIV_COL_LABELS_4 = ["M", "C", "D", "U"];
 const DIV_COL_LABELS_5 = ["DM", "M", "C", "D", "U"];
 const DIV_COL_LABELS_6 = ["CM", "DM", "M", "C", "D", "U"];
 const CELL_W = 32;
-const EMPTY_TD: React.CSSProperties = { padding: 0 };
+// EMPTY_TD removed (no longer used after DivColumnCard grid rewrite)
 
 function DivColumnCard({
   q, cardIdx, quotientInputs, remainderInput, operandInputs, workInputs, validated, preFilledOperands,
