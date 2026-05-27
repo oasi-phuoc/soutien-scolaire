@@ -58,8 +58,8 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
         headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"],
         accentHeader: true,
         rows: [
-          ["347", "300", "chiffre des dizaines = 4 < 5\n→ vers le bas"],
-          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5\n→ vers le haut"],
+          ["347", "300", "chiffre des dizaines = 4 < 5 → **vers le bas**"],
+          ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5 → **vers le haut**"],
         ],
       },
 
@@ -67,7 +67,7 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
 
       {
         type: "plain",
-        fr: "Une estimation consiste à trouver une valeur approximative d'un nombre ou d'un calcul. On ne cherche pas la réponse exacte, mais une réponse proche et rapide.",
+        fr: "Une estimation consiste à trouver une **valeur approximative** d'un nombre ou d'un calcul. On ne cherche pas la réponse exacte, mais une réponse rapide et proche du nombre.",
         pivot: {
           en: "Estimation gives a quick approximate value without an exact calculation.",
           ar: "التقدير يعطي قيمة تقريبية سريعة دون حساب دقيق.",

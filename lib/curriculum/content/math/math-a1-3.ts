@@ -18,7 +18,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
     blocks: [
       {
         type: "plain",
-        fr: "Comparer des nombres consiste à déterminer lequel est le plus grand, le plus petit ou s'ils sont égaux.",
+        fr: "Comparer des nombres consiste à déterminer lequel est le plus **grand**, le plus **petit** ou s'ils sont **égaux**.",
         pivot: {
           en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.",
           ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.",
@@ -37,7 +37,7 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
 
       {
         type: "plain",
-        fr: "La partie de la flèche > qui est ouverte est toujours dirigée vers le plus grand nombre.",
+        fr: "La partie de la flèche **>** qui est ouverte est toujours dirigée **vers le plus grand** nombre.",
         pivot: {
           en: "The open side of > always points to the greater number.",
           ar: "الجانب المفتوح من > يتجه دائمًا نحو العدد الأكبر.",
@@ -53,9 +53,9 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
         headersFr: ["Comparaison", "Symbole", "Exemple"],
         accentHeader: true,
         rows: [
-          ["plus petit que", "<", "456 < 462"],
-          ["plus grand que", ">", "902 > 890"],
-          ["égal à", "=", "789 = 789"],
+          ["plus petit que", "**<**", "456 **<** 462"],
+          ["plus grand que", "**>**", "902 **>** 890"],
+          ["égal à", "**=**", "789 **=** 789"],
         ],
       },
       

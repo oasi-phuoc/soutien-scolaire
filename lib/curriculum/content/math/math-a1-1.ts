@@ -17,13 +17,13 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
 
     paragraphs: {
       fr: [
-        "Un nombre entier s’écrit avec des chiffres (0 à 9).",
+        "Un **nombre** entier s’écrit avec des chiffres (de **0** à **9**).",
         "En français, on sépare souvent les milliers par une espace fine : 125 000.",
-        "En Suisse romande, on utilise souvent septante, huitante et nonante pour 70, 80 et 90.",
+        "En Suisse romande, on utilise souvent septante, huitante et nonante pour **70**, **80** et **90**.",
       ],
 
       en: [
-        "A whole number is written with digits (0 to 9).",
+        "A **whole number** is written with digits (0 to 9).",
         "In French, thousands are often separated by a thin space: 125 000.",
         "In French-speaking Switzerland, people often say septante, huitante and nonante for 70, 80 and 90.",
       ],
@@ -103,6 +103,7 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
         },
       ],
 
+      
       rows: A1_COMPTER_EN_FRANCAIS_ROWS,
       audioSrc: "/audio/a1-1-compter-fr.mp4",
     },

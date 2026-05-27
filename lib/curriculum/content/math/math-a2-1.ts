@@ -14,7 +14,7 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
       pt: "Adição",
     },
     blocks: [
-      { type: "plain", fr: "L'addition permet de réunir plusieurs quantités ensemble." },
+      { type: "plain", fr: "L'addition permet de **réunir** plusieurs quantités **ensemble**." },
       {
         type: "section",
         labelFr: "",
@@ -64,14 +64,6 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
             markup: `<svg viewBox="0 0 190 128" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-assoc2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="18" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">15</text><text x="50" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">+</text><text x="80" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">37</text><text x="112" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">+</text><text x="158" y="22" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">22</text><line x1="88" y1="28" x2="114" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="151" y1="28" x2="128" y2="55" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="22" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">15</text><text x="62" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">+</text><text x="120" y="72" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">59</text><line x1="30" y1="78" x2="83" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><line x1="112" y1="78" x2="99" y2="105" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-assoc2)"/><text x="92" y="122" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">74</text></svg>`
           },
         ],
-      },
-      { type: "heading", fr: "Addition en colonnes", black: true },
-      { type: "plain", fr: "Voici les étapes pour additionner des nombres en colonnes." },
-      { type: "plain", fr: "Écrivez les nombres en alignant les unités, les dizaines, les centaines." },
-      {
-        type: "svg",
-        noFrame: false,
-        markup: `<svg viewBox="0 0 248 148" width="100%" xmlns="http://www.w3.org/2000/svg">...</svg>`
       },
     ],
     paragraphs: { fr: [ ] },

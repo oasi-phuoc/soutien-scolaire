@@ -16,7 +16,7 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
     blocks: [
       {
         type: "plain",
-        fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On ajoute ou enlève toujours le même nombre.",
+        fr: "Une suite de nombres est une liste ordonnée où chaque terme est obtenu en appliquant la même règle. On **ajoute** ou **enlève** toujours le **même nombre**.",
         pivot: {
           en: "A number sequence is an ordered list where each term is found by applying the same rule. We always add or subtract the same number.",
           ar: "متتالية الأعداد هي قائمة مرتبة حيث يُحسب كل حد بتطبيق نفس القاعدة. نضيف أو نطرح دائمًا نفس العدد.",
@@ -58,7 +58,7 @@ export const MATH_A1_5_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "On ajoute toujours 3.",
-          "La règle pour trouver le nombre suivant est : nombre + 3",
+          "La règle pour trouver le nombre suivant est : nombre actuel + **3**",
         ],
       },
       {

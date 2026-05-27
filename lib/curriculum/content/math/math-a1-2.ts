@@ -18,7 +18,7 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
     blocks: [
       {
         type: "plain",
-        fr: "Chaque chiffre occupe une position précise dans un nombre.",
+        fr: "Chaque chiffre occupe une **position** précise dans un nombre.",
         pivot: {
           en: "Each digit occupies a precise position in a number.",
           ar: "كل رقم يحتل موضعاً محدداً في العدد.",
@@ -67,10 +67,10 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "Il faut observer la position du chiffre dans le nombre.",
-          "U = × 1",
-          "D = × 10",
-          "C = × 100",
-          "M = × 1000",
+          " **U** = × 1",
+          " **D** = × 10",
+          " **C** = × 100",
+          " **M** = × 1000",
         ],
       },
 
@@ -78,12 +78,12 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         type: "highlight",
         fr: "Valeur du chiffre",
         pivot: {
-          en: "Digit value = digit × place value.",
-          ar: "قيمة الرقم = الرقم × قيمة موضعه.",
-          fa: "ارزش رقم = رقم × ارزش جایگاه.",
-          ti: "ዋጋ ኣሃዝ = ኣሃዝ × ዋጋ ቦቱኡ።",
-          uk: "Значення цифри = цифра × значення її позиції.",
-          pt: "Valor do algarismo = algarismo × valor da posição.",
+          en: "Value of the digit",
+          ar: "قيمة الرقم",
+          fa: "ارزش رقم",
+          ti: "ዋጋ ኣሃዝ",
+          uk: "Значення цифри",
+          pt: "Valor do algarismo",
         },
       },
 
@@ -93,9 +93,14 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Le chiffre 8 est en position C",
-          "Donc on fait 8 × 100 = 800.",
-          "3 864 = 3 000 + 800 + 60 + 4",
+          "Le chiffre **3** est en position **M** (milliers).",
+          "Le chiffre **8** est en position **C** (centaines).",
+          "Le chiffre **6** est en position **D** (dizaine).",
+          "Le chiffre **4** est en position **U** (unité).",
+          "Donc on fait 3 × 1000 = 3000.",
+
+          "3 864 = **3** × 1000 + **8** × 100 + **6** × 10 + **4** × 1",
+          "3 864 = **3000** + **800** + **60** + **4**",
         ],
       },
     ],

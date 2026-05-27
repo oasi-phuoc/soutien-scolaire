@@ -17,7 +17,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
     blocks: [
       {
         type: "plain",
-        fr: "La soustraction permet de retirer une quantité d'une autre.",
+        fr: "La soustraction permet de **retirer** une quantité d'une autre.",
         pivot: {
           en: "Subtraction removes a quantity from another.",
           ar: "الطرح يزيل كمية من أخرى.",
@@ -65,7 +65,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "La soustraction n'est PAS commutative.",
-          "• 57 − 49 ≠ 49 − 57",
+          "• 57 − 49 **≠** 49 − 57",
         ],
       },
 
@@ -78,19 +78,6 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
           {
             markup: `<svg viewBox="0 0 170 88" width="100%" xmlns="http://www.w3.org/2000/svg"><defs><marker id="arr-comm2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><polygon points="0 0,6 3,0 6" fill="#60a5fa"/></marker></defs><text x="30" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">19</text><text x="85" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">-</text><text x="140" y="27" text-anchor="middle" font-size="20" font-weight="bold" fill="#60a5fa">29</text><line x1="42" y1="35" x2="79" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><line x1="128" y1="35" x2="91" y2="63" stroke="#60a5fa" stroke-width="1" marker-end="url(#arr-comm2)"/><text x="85" y="83" text-anchor="middle" font-size="20" font-weight="bold" fill="#111827">??</text></svg>`
           },
-        ],
-      },
-      
-      { type: "heading", fr: "Soustraction en colonnes", black: true },
-
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Écrivez les nombres en alignant **U** (unités), **D** (dizaines), **C** (centaines).",
-          "Commencez par soustraire les **unités**.",
-          "Si c'est impossible, faites un **emprunt**.",
-          "Continuez avec les dizaines puis les centaines.",
         ],
       },
     ],
