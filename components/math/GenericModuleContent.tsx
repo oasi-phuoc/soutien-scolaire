@@ -301,12 +301,12 @@ function ExprCompExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="grid items-center gap-x-3 gap-y-3" style={{ gridTemplateColumns: "auto auto auto" }}>
+        <div className="space-y-3">
           {config.questions.map((q, i) => (
-            <Fragment key={i}>
+            <div key={i} className="flex items-center gap-3">
               <div className="flex items-center shrink-0">
                 <span className="w-6 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
+                <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.la)} <span className="text-[var(--color-text-secondary)]">{q.lop}</span> {num(q.lb)}</span>
               </div>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
@@ -327,8 +327,8 @@ function ExprCompExercise({
                   return <button key={sym} type="button" disabled={validated} onClick={() => onAnswer(i, sym)} className={cls}>{sym}</button>;
                 })}
               </div>
-              <span className="inline-flex items-center gap-1 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
-            </Fragment>
+              <span className="shrink-0 inline-flex items-center gap-1 font-mono text-sm">{num(q.ra)} <span className="text-[var(--color-text-secondary)]">{q.rop}</span> {num(q.rb)}</span>
+            </div>
           ))}
         </div>
       </div>
