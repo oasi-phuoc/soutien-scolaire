@@ -1006,7 +1006,7 @@ function ColumnGridCard({
     }
   }
 
-  const CellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
+  const cellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
     const ok = validated ? cellOk(expected, val) : null;
@@ -1101,7 +1101,7 @@ function ColumnGridCard({
             <td />
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : <CellInput base={0} col={col} expected={ad[col]!} />}
+                {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : cellInput({ base: 0, col, expected: ad[col]! })}
               </td>
             ))}
           </tr>
@@ -1110,7 +1110,7 @@ function ColumnGridCard({
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : <CellInput base={4} col={col} expected={bd[col]!} />}
+                {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : cellInput({ base: 4, col, expected: bd[col]! })}
               </td>
             ))}
           </tr>
@@ -1121,7 +1121,7 @@ function ColumnGridCard({
             <td />
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                <CellInput base={resBase} col={col} expected={rd[col]!} />
+                {cellInput({ base: resBase, col, expected: rd[col]! })}
               </td>
             ))}
           </tr>
@@ -1211,9 +1211,9 @@ function DivColumnCard({
     if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
   }
 
-  function InputCell({ val, expected, onChange }: {
+  const inputCell = ({ val, expected, onChange }: {
     val: string; expected: string; onChange: (v: string) => void;
-  }) {
+  }) => {
     const ok = validated ? val.trim() === expected : null;
     if (ok === false) return (
       <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
@@ -1233,9 +1233,8 @@ function DivColumnCard({
     );
   }
 
-  function PreCell({ digit, hide }: { digit: string; hide?: boolean }) {
-    return <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : digit}</div>;
-  }
+  const preCell = ({ digit, hide }: { digit: string; hide?: boolean }) =>
+    <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : digit}</div>;
 
   const remOk = validated ? remainderInput.trim() === remainder.toString() : null;
 
@@ -1279,9 +1278,9 @@ function DivColumnCard({
               return (
                 <td key={i} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                   {preFilledOperands
-                    ? <PreCell digit={dividendStr[i]!} hide={isLeading} />
-                    : <InputCell val={operandInputs[0]?.[i] ?? ""} expected={dividendStr[i]!}
-                        onChange={v => onOperandChange(cardIdx, false, i, v)} />
+                    ? preCell({ digit: dividendStr[i]!, hide: isLeading })
+                    : inputCell({ val: operandInputs[0]?.[i] ?? "", expected: dividendStr[i]!,
+                        onChange: v => onOperandChange(cardIdx, false, i, v) })
                   }
                 </td>
               );
@@ -1297,9 +1296,9 @@ function DivColumnCard({
                 }} className="align-middle text-center">
                   {isDivCol
                     ? preFilledOperands
-                      ? <PreCell digit={divisorStr[i]!} hide={isLeading} />
-                      : <InputCell val={operandInputs[1]?.[i] ?? ""} expected={divisorStr[i]!}
-                          onChange={v => onOperandChange(cardIdx, true, i, v)} />
+                      ? preCell({ digit: divisorStr[i]!, hide: isLeading })
+                      : inputCell({ val: operandInputs[1]?.[i] ?? "", expected: divisorStr[i]!,
+                          onChange: v => onOperandChange(cardIdx, true, i, v) })
                     : null}
                 </td>
               );
@@ -1321,10 +1320,10 @@ function DivColumnCard({
                 {/* Partial dividend row | quotient cells (si===0 only) */}
                 <tr>
                   <td style={{ padding: 0 }} />
-                  <DivAreaCells offset={pdStart} len={pdStr.length} cellsFn={di => (
-                    <InputCell val={(workInputs?.[si]?.[0]?.[di]) ?? ""} expected={pdStr[di]!}
-                      onChange={v => onWorkChange(cardIdx, si, 0, di, v)} />
-                  )} />
+                  <DivAreaCells offset={pdStart} len={pdStr.length} cellsFn={di =>
+                    inputCell({ val: (workInputs?.[si]?.[0]?.[di]) ?? "", expected: pdStr[di]!,
+                      onChange: v => onWorkChange(cardIdx, si, 0, di, v) })
+                  } />
                   {si === 0
                     ? Array.from({ length: quotientCols }, (_, qi) => {
                         const isLeadingQ = qi < quotientCols - quotientLen;
@@ -1332,8 +1331,8 @@ function DivColumnCard({
                           <td key={qi} style={{ width: CELL_W, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
                             {isLeadingQ
                               ? <div className="h-8 w-8" />
-                              : <InputCell val={quotientInputs[qi] ?? ""} expected={quotientStr[qi]!}
-                                  onChange={v => onQuotientChange(cardIdx, qi, v)} />
+                              : inputCell({ val: quotientInputs[qi] ?? "", expected: quotientStr[qi]!,
+                                  onChange: v => onQuotientChange(cardIdx, qi, v) })
                             }
                           </td>
                         );
@@ -1345,10 +1344,10 @@ function DivColumnCard({
                 {/* Product row */}
                 <tr>
                   <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
-                  <DivAreaCells offset={prStart} len={prStr.length} cellsFn={di => (
-                    <InputCell val={(workInputs?.[si]?.[1]?.[di]) ?? ""} expected={prStr[di]!}
-                      onChange={v => onWorkChange(cardIdx, si, 1, di, v)} />
-                  )} />
+                  <DivAreaCells offset={prStart} len={prStr.length} cellsFn={di =>
+                    inputCell({ val: (workInputs?.[si]?.[1]?.[di]) ?? "", expected: prStr[di]!,
+                      onChange: v => onWorkChange(cardIdx, si, 1, di, v) })
+                  } />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
 
