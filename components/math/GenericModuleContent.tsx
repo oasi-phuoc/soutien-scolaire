@@ -315,10 +315,8 @@ function ExprCompExercise({
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                   if (!validated) {
                     cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
-                  } else if (sel && isCorrect) {
+                  } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
-                  } else if (sel && !isCorrect) {
-                    cls += CLS_WRONG;
                   } else if (!sel && isCorrect) {
                     cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                   } else {
