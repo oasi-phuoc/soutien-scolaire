@@ -1653,7 +1653,7 @@ function Mul2DigitExercise({
       <p className="text-sm text-[var(--color-text-secondary)]">
         Effectuez les multiplications en colonnes. Écrivez les produits partiels, les retenues et le résultat.
       </p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="flex flex-col gap-4">
         {config.questions.map((q, qi) => (
           <Mul2DigitCard
             key={qi}
@@ -2045,8 +2045,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       // Multiplication en colonnes — entraînement
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2) });
-      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3) });
-      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3, 2) });
+      steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4, 2) });
       // Évaluation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1, 2) });
@@ -3427,7 +3427,7 @@ export function GenericModuleContent({
       setMul2dValidated(true);
     };
     stepReset = () => {
-      setMul2dOverrideConfigs(prev => ({ ...prev, [stepIdx]: genMul2Digit(cfg.preFilledOperands, cfg.exNum) }));
+      setMul2dOverrideConfigs(prev => ({ ...prev, [stepIdx]: genMul2Digit(cfg.preFilledOperands, cfg.exNum, cfg.questions.length) }));
       setMul2dAnswers(emptyMul2Grid());
       setMul2dCarryInputs(emptyMul2Carry());
       setMul2dValidated(false);
