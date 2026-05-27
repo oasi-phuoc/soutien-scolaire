@@ -1,36 +1,87 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A3_4_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A3-4",
-    submoduleCode: "A3.4",
-    theory: {
-      title: {
-        fr: "Division en colonnes",
-        en: "",
-        ar: "",
-        fa: "",
-        ti: "",
-        uk: "",
-        pt: "",
+  submoduleId: "A3-4",
+  submoduleCode: "A3.4",
+  theory: {
+    title: {
+      fr: "Division en colonnes",
+      en: "",
+      ar: "",
+      fa: "",
+      ti: "",
+      uk: "",
+      pt: "",
+    },
+    blocks: [
+      {
+        type: "plain",
+        fr: "La division en colonne permet de diviser de grands nombres en organisant les calculs étape par étape.",
       },
-
-        blocks: [
-      { type: "heading", fr: "Division euclidienne", black: true },
+      { type: "highlight", fr: "Principe" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Quand la division n'est pas exacte :",
-          "**dividende** = **diviseur** × **quotient** + **reste**",
-          "Le reste est toujours inférieur au diviseur.",
-          "Exemple : 17 ÷ 5 = 3, reste 2 → 17 = 5 × 3 + 2",
+          "On divise les chiffres du dividende de gauche à droite.",
+          "À chaque étape : on cherche combien de fois le diviseur entre dans la valeur courante.",
+          "On soustrait le produit et on abaisse le chiffre suivant.",
+          "**Rappel :** dividende = diviseur × quotient + reste  (reste < diviseur)",
         ],
       },
-      { type: "heading", fr: "Division posée (156 ÷ 12)", black: true },
+      { type: "heading", fr: "Division à 1 chiffre", black: true },
+      { type: "highlight", fr: "6 385 ÷ 4" },
       {
-        type: "svg",
-        noFrame: true,
-        markup: `<svg viewBox="0 0 280 185" width="100%" xmlns="http://www.w3.org/2000/svg"><rect x="26" y="24" width="46" height="28" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1"/><text x="38" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">1</text><text x="60" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">5</text><text x="82" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">6</text><line x1="96" y1="26" x2="96" y2="74" stroke="#374151" stroke-width="2"/><line x1="96" y1="50" x2="148" y2="50" stroke="#374151" stroke-width="2"/><text x="108" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">1</text><text x="130" y="42" text-anchor="middle" font-size="24" font-weight="bold" fill="#1e293b">2</text><text x="108" y="70" text-anchor="middle" font-size="24" font-weight="bold" fill="#60a5fa">1</text><text x="130" y="70" text-anchor="middle" font-size="24" font-weight="bold" fill="#60a5fa">3</text><text x="119" y="82" text-anchor="middle" font-size="9" fill="#60a5fa">quotient</text><text x="18" y="66" font-size="18" fill="#64748b" font-family="monospace">-</text><text x="48" y="66" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">1</text><text x="70" y="66" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">2</text><line x1="20" y1="73" x2="86" y2="73" stroke="#374151" stroke-width="1.5"/><text x="60" y="94" text-anchor="middle" font-size="20" fill="#374151" font-family="monospace">3</text><text x="82" y="94" text-anchor="middle" font-size="20" fill="#374151" font-family="monospace">6</text><text x="18" y="118" font-size="18" fill="#64748b" font-family="monospace">-</text><text x="60" y="118" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">3</text><text x="82" y="118" text-anchor="middle" font-size="18" fill="#374151" font-family="monospace">6</text><line x1="20" y1="124" x2="86" y2="124" stroke="#374151" stroke-width="1.5"/><text x="82" y="144" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151" font-family="monospace">0</text><text x="72" y="156" font-size="9" fill="#6b7280">reste = 0</text><text x="165" y="42" font-size="11" font-weight="bold" fill="#374151">Étape 1 :</text><text x="165" y="57" font-size="10" font-family="monospace" fill="#374151">15 ÷ 12 = 1</text><text x="165" y="70" font-size="10" fill="#6b7280">1 × 12 = 12</text><text x="165" y="83" font-size="10" fill="#6b7280">15 − 12 = 3</text><text x="165" y="103" font-size="11" font-weight="bold" fill="#374151">Étape 2 :</text><text x="165" y="118" font-size="10" font-family="monospace" fill="#374151">36 ÷ 12 = 3</text><text x="165" y="131" font-size="10" fill="#6b7280">3 × 12 = 36</text><text x="165" y="144" font-size="10" fill="#6b7280">36 − 36 = 0</text><text x="165" y="168" font-size="12" font-weight="bold" fill="#60a5fa">156 ÷ 12 = 13</text></svg>`
+        type: "div_step_cards",
+        dividend: 6385,
+        divisor: 4,
+        steps: [
+          {
+            numFr: "1. On pose les nombres",
+            textsFr: [
+              "On écrit le dividende 6 385 et le diviseur 4.",
+              "On réserve la zone à droite pour le quotient.",
+            ],
+            stepsComplete: 0,
+          },
+          {
+            numFr: "2. Milliers : 6 ÷ 4 = 1, reste 2",
+            textsFr: [
+              "6 ÷ 4 = 1 → on écrit 1 dans le quotient.",
+              "1 × 4 = 4 → on soustrait : 6 − 4 = 2.",
+            ],
+            stepsComplete: 1,
+          },
+          {
+            numFr: "3. Centaines : 23 ÷ 4 = 5, reste 3",
+            textsFr: [
+              "On abaisse le 3 : reste 2 → 23.",
+              "23 ÷ 4 = 5 → on écrit 5 dans le quotient.",
+              "5 × 4 = 20 → on soustrait : 23 − 20 = 3.",
+            ],
+            stepsComplete: 2,
+          },
+          {
+            numFr: "4. Dizaines : 38 ÷ 4 = 9, reste 2",
+            textsFr: [
+              "On abaisse le 8 : reste 3 → 38.",
+              "38 ÷ 4 = 9 → on écrit 9 dans le quotient.",
+              "9 × 4 = 36 → on soustrait : 38 − 36 = 2.",
+            ],
+            stepsComplete: 3,
+          },
+          {
+            numFr: "5. Unités : 25 ÷ 4 = 6, reste 1",
+            textsFr: [
+              "On abaisse le 5 : reste 2 → 25.",
+              "25 ÷ 4 = 6 → on écrit 6 dans le quotient.",
+              "6 × 4 = 24 → on soustrait : 25 − 24 = 1.",
+              "Le reste 1 < 4 (diviseur) → on a terminé.",
+              "6 385 ÷ 4 = 1 596, reste 1",
+            ],
+            stepsComplete: 4,
+          },
+        ],
       },
     ],
     paragraphs: { fr: [] },

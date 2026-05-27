@@ -259,6 +259,173 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
   );
 }
 
+function DivDemoGrid({ dividend, divisor, stepsComplete }: {
+  dividend: number; divisor: number; stepsComplete: number;
+}) {
+  const COL4 = ["M","C","D","U"];
+  const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
+  const CW = 32;
+  const dividendCols = 4;
+  const quotientCols = 4;
+
+  const dividendStr = dividend.toString().padStart(dividendCols, "0");
+  const divisorStr  = divisor.toString();
+
+  // Inline computeDivSteps
+  type DS = { partialDiv:number; product:number; partRemainder:number; colEnd:number };
+  const divSteps: DS[] = [];
+  {
+    const digits = dividend.toString().split("").map(Number);
+    let cur = 0;
+    for (let i = 0; i < digits.length; i++) {
+      cur = cur * 10 + digits[i]!;
+      if (cur < divisor && i < digits.length - 1) continue;
+      const qd = Math.floor(cur / divisor);
+      const prod = qd * divisor;
+      const rem  = cur - prod;
+      divSteps.push({ partialDiv: cur, product: prod, partRemainder: rem, colEnd: i });
+      cur = rem;
+    }
+  }
+
+  const quotient      = Math.floor(dividend / divisor);
+  const remainder     = dividend % divisor;
+  const quotientStr   = quotient.toString();
+  const quotientLen   = quotientStr.length;
+
+  const showCell = (val: string | number, accent?: boolean) => (
+    <div className={`h-8 w-8 flex items-center justify-center font-mono text-base ${
+      accent ? "font-bold text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"
+    }`}>{String(val)}</div>
+  );
+  const emptyCell = () => <div className="h-8 w-8" />;
+
+  function StaticWorkRow({ numStr, colEnd }: { numStr: string; colEnd: number }) {
+    const startCol = colEnd - numStr.length + 1;
+    return (
+      <>
+        {Array.from({ length: dividendCols }, (_, col) => {
+          const ri = col - startCol;
+          const has = ri >= 0 && ri < numStr.length;
+          return (
+            <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+              {has ? showCell(numStr[ri]!) : emptyCell()}
+            </td>
+          );
+        })}
+      </>
+    );
+  }
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="border-collapse table-fixed mx-auto">
+        <tbody>
+          {/* Row 0: column headers */}
+          <tr>
+            <td style={{ width: 20, padding: 0 }} />
+            {COL4.map((lbl, i) => (
+              <td key={i} style={{ width: CW, padding: 0 }}
+                className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{lbl}</td>
+            ))}
+            {Array.from({ length: quotientCols }, (_, i) => (
+              <td key={i} style={{ width: CW, padding: 0, ...(i === 0 ? BSEP : {}) }} />
+            ))}
+          </tr>
+
+          {/* Row 1: dividend | divisor (with underline below divisor) */}
+          <tr>
+            <td style={{ padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, i) => {
+              const isLeading = i < dividendCols - dividend.toString().length;
+              return (
+                <td key={i} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+                  {isLeading ? emptyCell() : showCell(dividendStr[i]!)}
+                </td>
+              );
+            })}
+            {Array.from({ length: quotientCols }, (_, i) => {
+              const isDivCol = i < divisorStr.length;
+              return (
+                <td key={i} style={{
+                  width: CW, padding: 2,
+                  ...(i === 0 ? BSEP : {}),
+                  ...(isDivCol ? { borderBottom: "2px solid var(--color-text-primary)" } : {}),
+                }} className="align-middle text-center">
+                  {isDivCol ? showCell(divisorStr[i]!) : null}
+                </td>
+              );
+            })}
+          </tr>
+
+          {/* Work rows, revealed up to stepsComplete */}
+          {divSteps.slice(0, stepsComplete).map((step, si) => {
+            const pdStr  = step.partialDiv.toString();
+            const prStr  = step.product.toString();
+            const lineStart = Math.min(step.colEnd - pdStr.length + 1, step.colEnd - prStr.length + 1);
+            const lineEnd   = step.colEnd;
+            return (
+              <React.Fragment key={si}>
+                {/* Partial-dividend row | quotient cells (si===0 only) */}
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  <StaticWorkRow numStr={pdStr} colEnd={step.colEnd} />
+                  {si === 0
+                    ? Array.from({ length: quotientCols }, (_, qi) => {
+                        const revealed = qi < stepsComplete && qi < quotientLen;
+                        const isEmpty  = qi >= quotientLen;
+                        return (
+                          <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }}
+                            className="align-middle text-center">
+                            {isEmpty ? emptyCell() : revealed ? showCell(quotientStr[qi]!, true) : emptyCell()}
+                          </td>
+                        );
+                      })
+                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                  }
+                </tr>
+                {/* Product row */}
+                <tr>
+                  <td style={{ padding: 0, textAlign:"center", verticalAlign:"middle", fontSize:14, color:"var(--color-text-secondary)" }}>−</td>
+                  <StaticWorkRow numStr={prStr} colEnd={step.colEnd} />
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+                {/* Separator line */}
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  {Array.from({ length: dividendCols }, (_, col) => (
+                    <td key={col} style={{ padding: 0, width: CW }}>
+                      {col >= lineStart && col <= lineEnd
+                        ? <div className="h-px bg-[var(--color-text-primary)] opacity-50 my-1" />
+                        : null}
+                    </td>
+                  ))}
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+              </React.Fragment>
+            );
+          })}
+
+          {/* Remainder row (when all steps done) */}
+          {stepsComplete >= divSteps.length && divSteps.length > 0 && (
+            <tr>
+              <td style={{ padding:"4px 2px", textAlign:"right", verticalAlign:"middle", fontSize:12, color:"var(--color-text-secondary)", whiteSpace:"nowrap" }}>
+                Reste :
+              </td>
+              {Array.from({ length: dividendCols }, (_, col) => (
+                <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+                  {col === dividendCols - 1 ? showCell(remainder, true) : emptyCell()}
+                </td>
+              ))}
+              <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
@@ -417,6 +584,25 @@ function BlockView({ block }: { block: MathRichBlock }) {
                 a={block.a} b={block.b} result={block.result}
                 carries1={step.carries1} carries2={step.carries2}
                 p1={step.p1} p2shifted={step.p2shifted} res={step.res}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    case "div_step_cards":
+      return (
+        <div className="space-y-3">
+          {block.steps.map((step, si) => (
+            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
+              <div className="flex-1 space-y-1 min-w-0">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                {step.textsFr.map((t, ti) => (
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                ))}
+              </div>
+              <DivDemoGrid
+                dividend={block.dividend} divisor={block.divisor}
+                stepsComplete={step.stepsComplete}
               />
             </div>
           ))}

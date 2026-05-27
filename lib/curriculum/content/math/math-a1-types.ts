@@ -89,6 +89,19 @@ export type MathRichBlock =
         p2shifted: (number | null)[];
         res: (number | null)[];
       }>;
+    }
+  | {
+      type: "div_step_cards";
+      /** 4-digit dividend */
+      dividend: number;
+      /** 1-digit divisor */
+      divisor: number;
+      steps: Array<{
+        numFr: string;
+        textsFr: string[];
+        /** How many division sub-steps are complete (0 = just pose, 4 = all done) */
+        stepsComplete: number;
+      }>;
     };
 
 export type MathTheoryBlock = {
