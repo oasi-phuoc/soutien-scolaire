@@ -1171,7 +1171,6 @@ const DIV_COL_LABELS_4 = ["M", "C", "D", "U"];
 const DIV_COL_LABELS_5 = ["DM", "M", "C", "D", "U"];
 const DIV_COL_LABELS_6 = ["CM", "DM", "M", "C", "D", "U"];
 const CELL_W = 32;
-const SEP_STYLE: React.CSSProperties = { width: 2, backgroundColor: "var(--color-text-primary)", padding: 0 };
 const EMPTY_TD: React.CSSProperties = { padding: 0 };
 
 function DivColumnCard({
