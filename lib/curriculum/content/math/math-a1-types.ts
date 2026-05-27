@@ -71,6 +71,24 @@ export type MathRichBlock =
         carries: (number | null)[];
         result: (number | null)[];
       }>;
+    }
+  | {
+      type: "mul2_step_cards";
+      /** Digits [DM,M,C,D,U] for the first operand */
+      a: number[];
+      /** Digits [DM,M,C,D,U] for the second operand */
+      b: number[];
+      /** Numeric result value (used to determine 4 vs 5 col display) */
+      result: number;
+      steps: Array<{
+        numFr: string;
+        textsFr: string[];
+        carries1: (number | null)[];
+        carries2: (number | null)[];
+        p1: (number | null)[];
+        p2shifted: (number | null)[];
+        res: (number | null)[];
+      }>;
     };
 
 export type MathTheoryBlock = {

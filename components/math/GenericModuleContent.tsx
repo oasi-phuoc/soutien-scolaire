@@ -1027,15 +1027,17 @@ function ColumnGridCard({
   const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
   const firstNzA = ad.findIndex(d => d !== 0);
   const firstNzB = bd.findIndex(d => d !== 0);
+  const firstNzR = rd.findIndex(d => d !== 0);
   // cellIdx layout: [0-3]=op1, [4-7]=op2, [8-11]=result (when not preFilledOperands)
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
   const resBase = preFilledOperands ? 0 : 8;
-  const strictZero = exNum >= 7 || q.op === "×";
 
-  const cellOk = (expected: number, val: string) => {
+  // Leading zero = zero before first significant digit → not required
+  const cellOk = (expected: number, val: string, col: number, firstNz: number) => {
     const trimmed = val.trim();
-    if (strictZero) return trimmed === String(expected);
-    return trimmed === String(expected) || (expected === 0 && trimmed === "");
+    if (trimmed === String(expected)) return true;
+    if (expected === 0 && col < firstNz) return trimmed === "" || trimmed === "0";
+    return false;
   };
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -1052,10 +1054,10 @@ function ColumnGridCard({
     }
   }
 
-  const cellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
+  const cellInput = ({ base, col, expected, firstNz }: { base: number; col: number; expected: number; firstNz?: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
-    const ok = validated ? cellOk(expected, val) : null;
+    const ok = validated ? cellOk(expected, val, col, firstNz ?? 0) : null;
     if (ok === false) {
       return (
         <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
@@ -1147,7 +1149,7 @@ function ColumnGridCard({
             <td />
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : cellInput({ base: 0, col, expected: ad[col]! })}
+                {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : cellInput({ base: 0, col, expected: ad[col]!, firstNz: firstNzA })}
               </td>
             ))}
           </tr>
@@ -1156,7 +1158,7 @@ function ColumnGridCard({
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : cellInput({ base: 4, col, expected: bd[col]! })}
+                {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : cellInput({ base: 4, col, expected: bd[col]!, firstNz: firstNzB })}
               </td>
             ))}
           </tr>
@@ -1167,7 +1169,7 @@ function ColumnGridCard({
             <td />
             {[0, 1, 2, 3].map(col => (
               <td key={col} className="text-center">
-                {cellInput({ base: resBase, col, expected: rd[col]! })}
+                {cellInput({ base: resBase, col, expected: rd[col]!, firstNz: firstNzR })}
               </td>
             ))}
           </tr>
@@ -1241,9 +1243,9 @@ function DivColumnCard({
   const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : dividendCols === 5 ? DIV_COL_LABELS_5 : DIV_COL_LABELS_6;
   const dividendStr = dividend.toString().padStart(dividendCols, "0");
   const divisorStr = divisor.toString().padStart(divisorCols, "0");
-  const quotientStr = quotient.toString().padStart(quotientCols, "0");
-  const quotientLen = quotient.toString().length;
-  // borderLeft on first right-panel cell = the vertical separator line
+  // Left-align quotient: digit i → cell i; cells >= quotientLen are empty
+  const quotientDigitStr = quotient.toString();
+  const quotientLen = quotientDigitStr.length;
   const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -1277,25 +1279,33 @@ function DivColumnCard({
         }`}
       />
     );
-  }
+  };
 
   const preCell = ({ digit, hide }: { digit: string; hide?: boolean }) =>
     <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : digit}</div>;
 
+  const emptyCell = () =>
+    <div className="h-8 w-8" />;
+
   const remOk = validated ? remainderInput.trim() === remainder.toString() : null;
 
-  // Helper: render cells for a row in the dividend area (offset + data + fill)
-  function DivAreaCells({ offset, len, cellsFn }: { offset: number; len: number; cellsFn: (di: number) => React.ReactNode }) {
-    const fill = dividendCols - offset - len;
+  // Render full dividend-column-width row with inputs at specified positions
+  function FullWorkRow({ numStr, colEnd, si, type }: { numStr: string; colEnd: number; si: number; type: 0|1 }) {
+    const startCol = colEnd - numStr.length + 1;
     return (
       <>
-        {offset > 0 && <td colSpan={offset} style={EMPTY_TD} />}
-        {Array.from({ length: len }, (_, di) => (
-          <td key={di} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
-            {cellsFn(di)}
-          </td>
-        ))}
-        {fill > 0 && <td colSpan={fill} style={EMPTY_TD} />}
+        {Array.from({ length: dividendCols }, (_, col) => {
+          const relIdx = col - startCol;
+          const hasDigit = relIdx >= 0 && relIdx < numStr.length;
+          return (
+            <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+              {hasDigit
+                ? inputCell({ val: (workInputs?.[si]?.[type]?.[relIdx]) ?? "", expected: numStr[relIdx]!,
+                    onChange: v => onWorkChange(cardIdx, si, type, relIdx, v) })
+                : emptyCell()}
+            </td>
+          );
+        })}
       </>
     );
   }
@@ -1309,14 +1319,14 @@ function DivColumnCard({
             <td style={{ width: 20, padding: 0 }} />
             {colLabels.map((lbl, i) => (
               <td key={i} style={{ width: CELL_W, padding: 0 }}
-                className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{dividendCols === 5 ? "" : lbl}</td>
+                className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{lbl}</td>
             ))}
             {Array.from({ length: quotientCols }, (_, i) => (
               <td key={i} style={{ width: CELL_W, padding: 0, ...(i === 0 ? BSEP : {}) }} />
             ))}
           </tr>
 
-          {/* Row 1: Dividend | Divisor — border-bottom only under divisor cells */}
+          {/* Row 1: Dividend | Divisor */}
           <tr>
             <td style={{ padding: 0 }} />
             {Array.from({ length: dividendCols }, (_, i) => {
@@ -1351,33 +1361,30 @@ function DivColumnCard({
             })}
           </tr>
 
-          {/* Rows 2+: Working steps */}
+          {/* Work steps */}
           {steps.map((step, si) => {
             const pdStr = step.partialDiv.toString();
             const prStr = step.product.toString();
             const pdStart = step.colEnd - pdStr.length + 1;
             const prStart = step.colEnd - prStr.length + 1;
             const lineStart = Math.min(pdStart, prStart);
-            const lineLen = step.colEnd - lineStart + 1;
-            const lineFill = dividendCols - lineStart - lineLen;
+            const lineEnd = step.colEnd;
 
             return (
               <Fragment key={si}>
-                {/* Partial dividend row | quotient cells (si===0 only) */}
+                {/* Partial dividend row | quotient cells (si===0 only, left-aligned) */}
                 <tr>
                   <td style={{ padding: 0 }} />
-                  <DivAreaCells offset={pdStart} len={pdStr.length} cellsFn={di =>
-                    inputCell({ val: (workInputs?.[si]?.[0]?.[di]) ?? "", expected: pdStr[di]!,
-                      onChange: v => onWorkChange(cardIdx, si, 0, di, v) })
-                  } />
+                  <FullWorkRow numStr={pdStr} colEnd={step.colEnd} si={si} type={0} />
                   {si === 0
                     ? Array.from({ length: quotientCols }, (_, qi) => {
-                        const isLeadingQ = qi < quotientCols - quotientLen;
+                        // Left-align: cell qi has digit if qi < quotientLen, else empty
+                        const isEmpty = qi >= quotientLen;
                         return (
                           <td key={qi} style={{ width: CELL_W, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
-                            {isLeadingQ
+                            {isEmpty
                               ? <div className="h-8 w-8" />
-                              : inputCell({ val: quotientInputs[qi] ?? "", expected: quotientStr[qi]!,
+                              : inputCell({ val: quotientInputs[qi] ?? "", expected: quotientDigitStr[qi]!,
                                   onChange: v => onQuotientChange(cardIdx, qi, v) })
                             }
                           </td>
@@ -1390,50 +1397,52 @@ function DivColumnCard({
                 {/* Product row */}
                 <tr>
                   <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
-                  <DivAreaCells offset={prStart} len={prStr.length} cellsFn={di =>
-                    inputCell({ val: (workInputs?.[si]?.[1]?.[di]) ?? "", expected: prStr[di]!,
-                      onChange: v => onWorkChange(cardIdx, si, 1, di, v) })
-                  } />
+                  <FullWorkRow numStr={prStr} colEnd={step.colEnd} si={si} type={1} />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
 
                 {/* Step separator line */}
                 <tr>
-                  <td colSpan={lineStart + 1} style={EMPTY_TD} />
-                  <td colSpan={lineLen} style={EMPTY_TD}>
-                    <div className="h-px bg-[var(--color-text-primary)] opacity-50" />
-                  </td>
-                  {lineFill > 0 && <td colSpan={lineFill} style={EMPTY_TD} />}
+                  <td style={{ padding: 0 }} />
+                  {Array.from({ length: dividendCols }, (_, col) => (
+                    <td key={col} style={{ padding: 0, width: CELL_W }}>
+                      {col >= lineStart && col <= lineEnd
+                        ? <div className="h-px bg-[var(--color-text-primary)] opacity-50 my-1" />
+                        : null}
+                    </td>
+                  ))}
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
               </Fragment>
             );
           })}
 
-          {/* Reste row — label spans all but last dividend col; input in last col */}
+          {/* Reste row */}
           <tr>
-            <td style={{ padding: 0 }} />
-            <td colSpan={dividendCols - 1} style={{ padding: "4px 2px", textAlign: "right", verticalAlign: "middle" }}>
-              <span className="text-xs font-medium text-[var(--color-text-secondary)]">Reste :</span>
+            <td style={{ padding: "4px 2px", textAlign: "right", verticalAlign: "middle", fontSize: 12, color: "var(--color-text-secondary)", whiteSpace: "nowrap" }}>
+              Reste :
             </td>
-            <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
-              {remOk === false
-                ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
-                    <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
-                  </div>
-                : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
-                    onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
-                    onKeyDown={tabNav}
-                    onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                    className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-                      remOk === null
-                        ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-                        : "border-[var(--color-border-default)]"
-                    }`}
-                  />
-              }
-            </td>
+            {Array.from({ length: dividendCols }, (_, col) => (
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+                {col === dividendCols - 1
+                  ? (remOk === false
+                      ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                          <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
+                          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
+                        </div>
+                      : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
+                          onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
+                          onKeyDown={tabNav}
+                          onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+                          className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
+                            remOk === null
+                              ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+                              : "border-[var(--color-border-default)]"
+                          }`}
+                        />)
+                  : emptyCell()}
+              </td>
+            ))}
             <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
           </tr>
         </tbody>
@@ -1458,6 +1467,10 @@ function Mul2DigitCard({
   const rd = getD5(q.result);
   const firstNzA = ad.findIndex(d => d !== 0);
   const firstNzB = bd.findIndex(d => d !== 0);
+  const firstNzP1 = p1d.findIndex(d => d !== 0);
+  const firstNzR = rd.findIndex(d => d !== 0);
+  // For p2shifted (cols 0-3): col i → p2d[i+1]; col 4 is fixed
+  const firstNzP2s = [0,1,2,3].findIndex(c => (p2d[c + 1]!) !== 0);
   const aBase = 0, bBase = 5;
   const p1Base = preFilledOperands ? 0 : 10;
   const p2Base = preFilledOperands ? 5 : 15;
@@ -1484,10 +1497,12 @@ function Mul2DigitCard({
     if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
   }
 
-  const cellInput = ({ base, col, expected }: { base: number; col: number; expected: number }) => {
+  const cellInput = ({ base, col, expected, firstNz }: { base: number; col: number; expected: number; firstNz?: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
-    const ok = validated ? val.trim() === String(expected) : null;
+    const fNz = firstNz ?? 0;
+    const isLeading = expected === 0 && col < fNz;
+    const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
         <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
@@ -1566,7 +1581,7 @@ function Mul2DigitCard({
               <td key={col} className="text-center">
                 {preFilledOperands
                   ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
-                  : cellInput({base: aBase, col, expected: ad[col]!})}
+                  : cellInput({base: aBase, col, expected: ad[col]!, firstNz: firstNzA})}
               </td>
             ))}
           </tr>
@@ -1577,7 +1592,7 @@ function Mul2DigitCard({
               <td key={col} className="text-center">
                 {preFilledOperands
                   ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} />
-                  : cellInput({base: bBase, col, expected: bd[col]!})}
+                  : cellInput({base: bBase, col, expected: bd[col]!, firstNz: firstNzB})}
               </td>
             ))}
           </tr>
@@ -1587,12 +1602,12 @@ function Mul2DigitCard({
           <tr>
             <td />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput({base: p1Base, col, expected: p1d[col]!})}</td>
+              <td key={col} className="text-center">{cellInput({base: p1Base, col, expected: p1d[col]!, firstNz: firstNzP1})}</td>
             ))}
           </tr>
           {/* Partial product 2 shifted (a × bTens × 10) */}
           <tr>
-            <td className="pr-1 text-right text-sm font-bold text-[var(--color-accent-alg)] leading-none align-middle">+</td>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
             {visibleCols.map(col => {
               if (col === 4) {
                 // Fixed "0" in units position — shown in accent colour
@@ -1602,7 +1617,7 @@ function Mul2DigitCard({
                   </td>
                 );
               }
-              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected: p2ShiftedDigit(col)})}</td>;
+              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected: p2ShiftedDigit(col), firstNz: firstNzP2s < 0 ? 5 : firstNzP2s})}</td>;
             })}
           </tr>
           {/* Separator 2 */}
@@ -1611,7 +1626,7 @@ function Mul2DigitCard({
           <tr>
             <td />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput({base: rBase, col, expected: rd[col]!})}</td>
+              <td key={col} className="text-center">{cellInput({base: rBase, col, expected: rd[col]!, firstNz: firstNzR})}</td>
             ))}
           </tr>
         </tbody>
@@ -2307,6 +2322,117 @@ function MulDemoGrid({ a, b, op, carries, result }: {
   );
 }
 
+function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shifted, res }: {
+  a: number[]; b: number[]; result: number;
+  carries1: (number | null)[];
+  carries2: (number | null)[];
+  p1: (number | null)[];
+  p2shifted: (number | null)[];
+  res: (number | null)[];
+}) {
+  const numCols = totalResult > 9999 ? 5 : 4;
+  const colStart = 5 - numCols;
+  const visibleCols = Array.from({length: numCols}, (_, i) => colStart + i);
+  const COL5 = ["DM","M","C","D","U"];
+  const colLabels = COL5.slice(colStart);
+  const totalSpan = numCols + 1;
+  const firstNzA = a.findIndex(d => d !== 0);
+  const firstNzB = b.findIndex(d => d !== 0);
+
+  const staticCell = (val: number | null, accent?: boolean) => (
+    <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
+      val !== null
+        ? accent
+          ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+          : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
+        : "border-transparent text-transparent"
+    }`}>
+      {val !== null ? val : ""}
+    </div>
+  );
+
+  const carryCell = (val: number | null) => (
+    <div className="h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold text-orange-500">
+      {val !== null ? val : ""}
+    </div>
+  );
+
+  return (
+    <table className="border-collapse shrink-0">
+      <thead>
+        <tr>
+          <td className="w-6" />
+          {colLabels.map(h => (
+            <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {/* R2 */}
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries2[col] ?? null)}</td>)}
+        </tr>
+        {/* R1 */}
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries1[col] ?? null)}</td>)}
+        </tr>
+        {/* Operand a */}
+        <tr>
+          <td />
+          {visibleCols.map(col => (
+            <td key={col} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {col < firstNzA ? "" : a[col]}
+              </div>
+            </td>
+          ))}
+        </tr>
+        {/* Operand b */}
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+          {visibleCols.map(col => (
+            <td key={col} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {col < firstNzB ? "" : b[col]}
+              </div>
+            </td>
+          ))}
+        </tr>
+        {/* Separator 1 */}
+        <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+        {/* p1 */}
+        <tr>
+          <td />
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(p1[col] ?? null)}</td>)}
+        </tr>
+        {/* p2shifted */}
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+          {visibleCols.map(col => {
+            if (col === 4) {
+              return (
+                <td key={col} className="text-center">
+                  <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
+                </td>
+              );
+            }
+            return <td key={col} className="text-center">{staticCell(p2shifted[col] ?? null)}</td>;
+          })}
+        </tr>
+        {/* Separator 2 */}
+        <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+        {/* Result */}
+        <tr>
+          <td />
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(res[col] ?? null, true)}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
 function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   block: MathRichBlock;
   blockIdx?: number;
@@ -2521,6 +2647,26 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
               <MulDemoGrid
                 a={block.a} b={block.b} op={block.op}
                 carries={step.carries} result={step.result}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    case "mul2_step_cards":
+      return (
+        <div className="space-y-3">
+          {block.steps.map((step, si) => (
+            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
+              <div className="flex-1 space-y-1 min-w-0">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                {step.textsFr.map((t, ti) => (
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                ))}
+              </div>
+              <Mul2DemoGrid
+                a={block.a} b={block.b} result={block.result}
+                carries1={step.carries1} carries2={step.carries2}
+                p1={step.p1} p2shifted={step.p2shifted} res={step.res}
               />
             </div>
           ))}
@@ -2915,20 +3061,25 @@ export function GenericModuleContent({
         if (currentStep.lesson.submoduleId === "A3-2") {
           // Partial scoring: carries ignored
           currentResults = [];
+          const zOkEval = (d: number, c: number, fNz: number, v: string) =>
+            v === String(d) || (d === 0 && c < fNz && (v === "" || v === "0"));
           for (let qi = 0; qi < cfg.questions.length; qi++) {
             const q = cfg.questions[qi]!;
             const cells = gridAnswers[qi] ?? [];
             const rd = getD4(q.result);
+            const firstNzREval = rd.findIndex(v => v !== 0);
             const resBase = cfg.preFilledOperands ? 0 : 8;
-            const rOk = rd.every((d, col) => (cells[resBase + col] ?? "").trim() === String(d));
+            const rOk = rd.every((d, col) => zOkEval(d, col, firstNzREval, (cells[resBase + col] ?? "").trim()));
             if (cfg.preFilledOperands) {
               // Ex 1: 2 pts for correct result
               currentResults.push(rOk, rOk);
             } else {
               // Ex 2: 1 pt operands + 2 pts result
               const ad = getD4(q.a), bd = getD4(q.b);
-              const opOk = ad.every((d, col) => (cells[col] ?? "").trim() === String(d)) &&
-                           bd.every((d, col) => (cells[4 + col] ?? "").trim() === String(d));
+              const firstNzAEval = ad.findIndex(v => v !== 0);
+              const firstNzBEval = bd.findIndex(v => v !== 0);
+              const opOk = ad.every((d, col) => zOkEval(d, col, firstNzAEval, (cells[col] ?? "").trim())) &&
+                           bd.every((d, col) => zOkEval(d, col, firstNzBEval, (cells[4 + col] ?? "").trim()));
               currentResults.push(opOk, rOk, rOk);
             }
           }
@@ -2998,6 +3149,8 @@ export function GenericModuleContent({
         const cfg = mul2dOverrideConfigs[stepIdx] ?? currentStep.config;
         // Partial scoring for A3.2; carries always ignored
         currentResults = [];
+        const zOkMul2 = (d: number, c: number, fNz: number, v: string) =>
+          v === String(d) || (d === 0 && c < fNz && (v === "" || v === "0"));
         for (let qi = 0; qi < cfg.questions.length; qi++) {
           const q = cfg.questions[qi]!;
           const cells = mul2dAnswers[qi] ?? [];
@@ -3008,17 +3161,22 @@ export function GenericModuleContent({
           const rBase  = cfg.preFilledOperands ? 10 : 20;
           const cs = q.result > 9999 ? 0 : 1;
           const vc = Array.from({length: 5 - cs}, (_, i) => cs + i);
-          const p1Ok = vc.every(c => (cells[p1Base+c] ?? "").trim() === String(p1d[c]!));
-          const p2Ok = vc.filter(c => c !== 4).every(c => (cells[p2Base+c] ?? "").trim() === String(p2SD(c)));
-          const rOk  = vc.every(c => (cells[rBase+c]  ?? "").trim() === String(rd[c]!));
+          const firstNzP1m = p1d.findIndex(v => v !== 0);
+          const firstNzRm = rd.findIndex(v => v !== 0);
+          const p2sFirstNzM = [0,1,2,3].findIndex(c => p2SD(c) !== 0);
+          const p1Ok = vc.every(c => zOkMul2(p1d[c]!, c, firstNzP1m, (cells[p1Base+c] ?? "").trim()));
+          const p2Ok = vc.filter(c => c !== 4).every(c => zOkMul2(p2SD(c), c, p2sFirstNzM < 0 ? 5 : p2sFirstNzM, (cells[p2Base+c] ?? "").trim()));
+          const rOk  = vc.every(c => zOkMul2(rd[c]!, c, firstNzRm, (cells[rBase+c] ?? "").trim()));
           if (cfg.preFilledOperands) {
             // Ex 3: 1 pt p1 + 1 pt p2 + 1 pt result
             currentResults.push(p1Ok, p2Ok, rOk);
           } else {
             // Ex 4: 1 pt operands + 1 pt p1 + 1 pt p2 + 1 pt result
             const ad = getD5(q.a), bd = getD5(q.b);
-            const opOk = vc.every(c => (cells[c] ?? "").trim() === String(ad[c]!)) &&
-                         vc.every(c => (cells[5+c] ?? "").trim() === String(bd[c]!));
+            const firstNzAM = ad.findIndex(v => v !== 0);
+            const firstNzBM = bd.findIndex(v => v !== 0);
+            const opOk = vc.every(c => zOkMul2(ad[c]!, c, firstNzAM, (cells[c] ?? "").trim())) &&
+                         vc.every(c => zOkMul2(bd[c]!, c, firstNzBM, (cells[5+c] ?? "").trim()));
             currentResults.push(opOk, p1Ok, p2Ok, rOk);
           }
         }
@@ -3171,19 +3329,21 @@ export function GenericModuleContent({
   if (currentStep?.kind === "column_grid") {
     const cfg = activeGridConfig!;
     const resBase = cfg.preFilledOperands ? 0 : 8;
-    const strictZero = cfg.exNum >= 7 || cfg.op === "×";
-    const cellOkVal = (d: number, v: string) =>
-      v === String(d) || (!strictZero && d === 0 && v === "");
     stepCanValidate = !gridValidated;
     stepValidate = gridValidated ? () => {} : () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = gridAnswers[qi] ?? [];
         const rd = getD4(q.result);
-        const resultOk = rd.every((d, col) => cellOkVal(d, (cells[resBase + col] ?? "").trim()));
+        const firstNzR4 = rd.findIndex(v => v !== 0);
+        const zOk4 = (d: number, c: number, fNz: number, v: string) =>
+          v === String(d) || (d === 0 && c < fNz && (v === "" || v === "0"));
+        const resultOk = rd.every((d, col) => zOk4(d, col, firstNzR4, (cells[resBase + col] ?? "").trim()));
         if (cfg.preFilledOperands) return resultOk;
         const ad = getD4(q.a), bd = getD4(q.b);
-        const op1Ok = ad.every((d, col) => cellOkVal(d, (cells[col] ?? "").trim()));
-        const op2Ok = bd.every((d, col) => cellOkVal(d, (cells[4 + col] ?? "").trim()));
+        const firstNzA4 = ad.findIndex(v => v !== 0);
+        const firstNzB4 = bd.findIndex(v => v !== 0);
+        const op1Ok = ad.every((d, col) => zOk4(d, col, firstNzA4, (cells[col] ?? "").trim()));
+        const op2Ok = bd.every((d, col) => zOk4(d, col, firstNzB4, (cells[4 + col] ?? "").trim()));
         return resultOk && op1Ok && op2Ok;
       });
       setGridResults(res);
@@ -3203,13 +3363,13 @@ export function GenericModuleContent({
     stepCanValidate = !divGridValidated;
     stepValidate = divGridValidated ? () => {} : () => {
       const res = cfg.questions.map((q, qi) => {
-        const quotStr = q.quotient.toString().padStart(q.quotientCols, "0");
-        const quotientLen = q.quotient.toString().length;
+        const quotientDigitStr = q.quotient.toString();
+        const quotientLen = quotientDigitStr.length;
         const qInputs = divGridQuotientInputs[qi] ?? [];
-        const quotOk = Array.from({ length: q.quotientCols }, (_, i) => {
-          const isLeading = i < q.quotientCols - quotientLen;
+        // Left-aligned: cells 0..quotientLen-1 have digits; rest are empty (no validation needed)
+        const quotOk = Array.from({ length: quotientLen }, (_, i) => {
           const v = (qInputs[i] ?? "").trim();
-          return isLeading ? (v === "" || v === "0") : v === quotStr[i];
+          return v === quotientDigitStr[i];
         }).every(Boolean);
         const remOk = (divGridRemainderInputs[qi] ?? "").trim() === q.remainder.toString();
         if (cfg.preFilledOperands) return quotOk && remOk;
@@ -3236,27 +3396,31 @@ export function GenericModuleContent({
 
   if (currentStep?.kind === "mul_two_digit") {
     const cfg = activeMul2Config!;
-    const cellOkVal = (d: number, v: string) => v.trim() === String(d);
     stepCanValidate = !mul2dValidated;
     stepValidate = mul2dValidated ? () => {} : () => {
       const res = cfg.questions.map((q, qi) => {
         const cells = mul2dAnswers[qi] ?? [];
         const p1d = getD5(q.partial1), p2d = getD5(q.partial2), rd = getD5(q.result);
-        // col i of p2Shifted = p2d[i+1], except col4=0 (pre-filled, skip)
         const p2ShiftedD = (col: number) => col === 4 ? 0 : p2d[col + 1]!;
         const p1Base = cfg.preFilledOperands ? 0 : 10;
         const p2Base = cfg.preFilledOperands ? 5 : 15;
         const rBase  = cfg.preFilledOperands ? 10 : 20;
         const colStart = q.result > 9999 ? 0 : 1;
         const visCols = Array.from({length: 5 - colStart}, (_, i) => colStart + i);
-        const p1Ok = visCols.every(col => cellOkVal(p1d[col]!, (cells[p1Base+col] ?? "").trim()));
-        // skip col 4 (fixed 0) in p2 validation
-        const p2Ok = visCols.filter(c => c !== 4).every(col => cellOkVal(p2ShiftedD(col), (cells[p2Base+col] ?? "").trim()));
-        const rOk  = visCols.every(col => cellOkVal(rd[col]!, (cells[rBase+col] ?? "").trim()));
+        const zOk5 = (d: number, c: number, fNz: number, v: string) =>
+          v === String(d) || (d === 0 && c < fNz && (v === "" || v === "0"));
+        const firstNzP1 = p1d.findIndex(v => v !== 0);
+        const firstNzR5 = rd.findIndex(v => v !== 0);
+        const p2sFirstNz = [0,1,2,3].findIndex(c => p2ShiftedD(c) !== 0);
+        const p1Ok = visCols.every(col => zOk5(p1d[col]!, col, firstNzP1, (cells[p1Base+col] ?? "").trim()));
+        const p2Ok = visCols.filter(c => c !== 4).every(col => zOk5(p2ShiftedD(col), col, p2sFirstNz < 0 ? 5 : p2sFirstNz, (cells[p2Base+col] ?? "").trim()));
+        const rOk  = visCols.every(col => zOk5(rd[col]!, col, firstNzR5, (cells[rBase+col] ?? "").trim()));
         if (cfg.preFilledOperands) return p1Ok && p2Ok && rOk;
         const ad = getD5(q.a), bd = getD5(q.b);
-        const aOk = visCols.every(col => cellOkVal(ad[col]!, (cells[col] ?? "").trim()));
-        const bOk = visCols.every(col => cellOkVal(bd[col]!, (cells[5+col] ?? "").trim()));
+        const firstNzA5 = ad.findIndex(v => v !== 0);
+        const firstNzB5 = bd.findIndex(v => v !== 0);
+        const aOk = visCols.every(col => zOk5(ad[col]!, col, firstNzA5, (cells[col] ?? "").trim()));
+        const bOk = visCols.every(col => zOk5(bd[col]!, col, firstNzB5, (cells[5+col] ?? "").trim()));
         return p1Ok && p2Ok && rOk && aOk && bOk;
       });
       setMul2dResults(res);

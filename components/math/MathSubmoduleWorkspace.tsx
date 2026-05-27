@@ -148,6 +148,117 @@ function MulDemoGrid({ a, b, op, carries, result }: {
   );
 }
 
+function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shifted, res }: {
+  a: number[]; b: number[]; result: number;
+  carries1: (number | null)[];
+  carries2: (number | null)[];
+  p1: (number | null)[];
+  p2shifted: (number | null)[];
+  res: (number | null)[];
+}) {
+  const numCols = totalResult > 9999 ? 5 : 4;
+  const colStart = 5 - numCols;
+  const visibleCols = Array.from({length: numCols}, (_, i) => colStart + i);
+  const COL5 = ["DM","M","C","D","U"];
+  const colLabels = COL5.slice(colStart);
+  const totalSpan = numCols + 1;
+  const firstNzA = a.findIndex(d => d !== 0);
+  const firstNzB = b.findIndex(d => d !== 0);
+
+  const staticCell = (val: number | null, accent?: boolean) => (
+    <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
+      val !== null
+        ? accent
+          ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+          : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
+        : "border-transparent text-transparent"
+    }`}>
+      {val !== null ? val : ""}
+    </div>
+  );
+
+  const carryCell = (val: number | null) => (
+    <div className="h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold text-orange-500">
+      {val !== null ? val : ""}
+    </div>
+  );
+
+  return (
+    <table className="border-collapse shrink-0">
+      <thead>
+        <tr>
+          <td className="w-6" />
+          {colLabels.map(h => (
+            <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {/* R2 */}
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries2[col] ?? null)}</td>)}
+        </tr>
+        {/* R1 */}
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries1[col] ?? null)}</td>)}
+        </tr>
+        {/* Operand a */}
+        <tr>
+          <td />
+          {visibleCols.map(col => (
+            <td key={col} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {col < firstNzA ? "" : a[col]}
+              </div>
+            </td>
+          ))}
+        </tr>
+        {/* Operand b */}
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+          {visibleCols.map(col => (
+            <td key={col} className="text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+                {col < firstNzB ? "" : b[col]}
+              </div>
+            </td>
+          ))}
+        </tr>
+        {/* Separator 1 */}
+        <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+        {/* p1 */}
+        <tr>
+          <td />
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(p1[col] ?? null)}</td>)}
+        </tr>
+        {/* p2shifted */}
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+          {visibleCols.map(col => {
+            if (col === 4) {
+              return (
+                <td key={col} className="text-center">
+                  <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
+                </td>
+              );
+            }
+            return <td key={col} className="text-center">{staticCell(p2shifted[col] ?? null)}</td>;
+          })}
+        </tr>
+        {/* Separator 2 */}
+        <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+        {/* Result */}
+        <tr>
+          <td />
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(res[col] ?? null, true)}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
@@ -286,6 +397,26 @@ function BlockView({ block }: { block: MathRichBlock }) {
               <MulDemoGrid
                 a={block.a} b={block.b} op={block.op}
                 carries={step.carries} result={step.result}
+              />
+            </div>
+          ))}
+        </div>
+      );
+    case "mul2_step_cards":
+      return (
+        <div className="space-y-3">
+          {block.steps.map((step, si) => (
+            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
+              <div className="flex-1 space-y-1 min-w-0">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                {step.textsFr.map((t, ti) => (
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                ))}
+              </div>
+              <Mul2DemoGrid
+                a={block.a} b={block.b} result={block.result}
+                carries1={step.carries1} carries2={step.carries2}
+                p1={step.p1} p2shifted={step.p2shifted} res={step.res}
               />
             </div>
           ))}
