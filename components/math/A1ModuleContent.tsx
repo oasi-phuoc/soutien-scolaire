@@ -2350,21 +2350,21 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
             <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Votre progression sera perdue. Vous pourrez recommencer depuis le début.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
             <div className="flex gap-3">
               <button
                 type="button"
-                onClick={() => setShowEvalCancelConfirm(false)}
+                onClick={cancelEval}
                 className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
               >
-                Continuer l&apos;évaluation
+                Annuler
               </button>
               <button
                 type="button"
-                onClick={cancelEval}
-                className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
+                onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
               >
-                Annuler
+                Continuer
               </button>
             </div>
           </div>
@@ -4609,17 +4609,19 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            <button
-              type="button"
-              onClick={goBack}
-              disabled={step === "eval" ? evalSubmitted : isFirstStep}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-40"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
-              Retour
-            </button>
+            {!(step === "eval" && evalSubmitted) ? (
+              <button
+                type="button"
+                onClick={goBack}
+                disabled={isFirstStep}
+                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-40"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+                Retour
+              </button>
+            ) : <span />}
 
-            {(stepReset || stepValidate) ? (
+            {!(step === "eval" && evalSubmitted) && (stepReset || stepValidate) ? (
               <div className="flex items-center gap-2">
                 {stepReset ? (
                   <button

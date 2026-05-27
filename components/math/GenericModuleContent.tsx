@@ -3788,8 +3788,8 @@ export function GenericModuleContent({
               <span />
             )}
 
-            {/* Validate (exercises only) */}
-            {(stepValidate || (!isInEvalPhase && stepReset)) ? (
+            {/* Validate (exercises only) — hidden on score screen */}
+            {!showEvalScore && (stepValidate || (!isInEvalPhase && stepReset)) ? (
               <div className="flex items-center gap-2">
                 {!isInEvalPhase && stepReset && (
                   <button
