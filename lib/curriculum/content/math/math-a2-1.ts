@@ -65,6 +65,58 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
           },
         ],
       },
+      { type: "heading", fr: "Addition en colonnes", black: true },
+      {
+        type: "add_step_cards",
+        colLabels: ["M", "C", "D", "U"],
+        op: "+",
+        carryLabel: "R",
+        a: [2, 5, 4, 7],
+        b: [1, 3, 8, 6],
+        steps: [
+          {
+            numFr: "1. On pose les nombres",
+            textsFr: [
+              "Aligner les unités sous les unités, dizaines sous dizaines, centaines sous centaines.",
+            ],
+            carries: [null, null, null, null],
+            result:  [null, null, null, null],
+          },
+          {
+            numFr: "2. Unités : 7 + 6 = 13",
+            textsFr: [
+              "7 + 6 = 13 → pose 3, retient 1",
+            ],
+            carries: [null, null, 1, null],
+            result:  [null, null, null, 3],
+          },
+          {
+            numFr: "3. Dizaines : 1 + 4 + 8 = 13",
+            textsFr: [
+              "1 (retenue) + 4 + 8 = 13 → pose 3, retient 1",
+            ],
+            carries: [null, 1, null, null],
+            result:  [null, null, 3, 3],
+          },
+          {
+            numFr: "4. Centaines : 1 + 5 + 3 = 9",
+            textsFr: [
+              "1 (retenue) + 5 + 3 = 9 → pose 9",
+            ],
+            carries: [null, null, null, null],
+            result:  [null, 9, 3, 3],
+          },
+          {
+            numFr: "5. Milliers : 2 + 1 = 3",
+            textsFr: [
+              "2 + 1 = 3 → pose 3",
+              "Résultat : 2 547 + 1 386 = 3 933",
+            ],
+            carries: [null, null, null, null],
+            result:  [3, 9, 3, 3],
+          },
+        ],
+      },
     ],
     paragraphs: { fr: [ ] },
   },

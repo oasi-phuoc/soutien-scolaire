@@ -449,6 +449,100 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
   );
 }
 
+function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, prevCarries, prevResult }: {
+  colLabels: string[];
+  op: string;
+  carryLabel?: string;
+  a: (number | null)[];
+  b: (number | null)[];
+  carries: (number | null)[];
+  result: (number | null)[];
+  prevCarries?: (number | null)[] | null;
+  prevResult?: (number | null)[] | null;
+}) {
+  const isComma = (i: number) => colLabels[i] === ",";
+  const isNewC = (i: number) => !isComma(i) && carries[i] !== null && (prevCarries == null || prevCarries[i] === null);
+  const isNewR = (i: number) => !isComma(i) && result[i] !== null && (prevResult == null || prevResult[i] === null);
+  return (
+    <table className="border-collapse shrink-0">
+      <thead>
+        <tr>
+          <td className="w-6" />
+          {colLabels.map((lbl, i) => (
+            <th key={i} style={{ width: lbl === "," ? 14 : 32 }}
+              className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">
+              {lbl === "," ? "" : lbl}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {/* Carry/borrow row */}
+        <tr>
+          <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{carryLabel}</td>
+          {carries.map((c, ci) => (
+            <td key={ci} className="text-center">
+              {isComma(ci) ? <div style={{ width: 14 }} /> : (
+                <div className={`h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold ${isNewC(ci) ? "text-orange-500" : "text-orange-300"}`}>
+                  {c !== null ? c : ""}
+                </div>
+              )}
+            </td>
+          ))}
+        </tr>
+        {/* Operand a */}
+        <tr>
+          <td />
+          {a.map((d, di) => (
+            <td key={di} className="text-center">
+              {isComma(di)
+                ? <div style={{ width: 14 }} className="h-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">,</div>
+                : <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{d !== null ? d : ""}</div>
+              }
+            </td>
+          ))}
+        </tr>
+        {/* Operand b with operator */}
+        <tr>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
+          {b.map((d, di) => (
+            <td key={di} className="text-center">
+              {isComma(di)
+                ? <div style={{ width: 14 }} className="h-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">,</div>
+                : <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{d !== null ? d : ""}</div>
+              }
+            </td>
+          ))}
+        </tr>
+        {/* Separator */}
+        <tr>
+          <td colSpan={colLabels.length + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td>
+        </tr>
+        {/* Result */}
+        <tr>
+          <td />
+          {result.map((d, di) => (
+            <td key={di} className="text-center">
+              {isComma(di)
+                ? <div style={{ width: 14 }} className="h-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">,</div>
+                : <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
+                    d !== null
+                      ? isNewR(di)
+                        ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+                        : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+                      : "border-dashed border-[var(--color-border-default)] text-transparent"
+                  }`}>
+                    {d !== null ? d : "0"}
+                  </div>
+              }
+            </td>
+          ))}
+        </tr>
+      </tbody>
+    </table>
+  );
+}
+
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
@@ -642,6 +736,35 @@ function BlockView({ block }: { block: MathRichBlock }) {
               />
             </div>
           ))}
+        </div>
+      );
+    case "add_step_cards":
+      return (
+        <div className="space-y-6">
+          {block.steps.map((step, si) => {
+            const prev = si > 0 ? block.steps[si - 1] : null;
+            return (
+              <div key={si} className="space-y-2">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                  {step.textsFr.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  ))}
+                </div>
+                <AddDemoGrid
+                  colLabels={block.colLabels}
+                  op={block.op}
+                  carryLabel={block.carryLabel}
+                  a={block.a}
+                  b={block.b}
+                  carries={step.carries}
+                  result={step.result}
+                  prevCarries={prev?.carries ?? null}
+                  prevResult={prev?.result ?? null}
+                />
+              </div>
+            );
+          })}
         </div>
       );
     default:

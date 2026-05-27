@@ -102,6 +102,23 @@ export type MathRichBlock =
         /** How many division sub-steps are complete (0 = just pose, 4 = all done) */
         stepsComplete: number;
       }>;
+    }
+  | {
+      type: "add_step_cards";
+      /** Column labels — use "," for the decimal comma separator */
+      colLabels: string[];
+      /** Operator shown on left of second operand row */
+      op: string;
+      /** Label for carry/borrow row — default "R" (addition) or "E" (subtraction) */
+      carryLabel?: string;
+      a: (number | null)[];
+      b: (number | null)[];
+      steps: Array<{
+        numFr: string;
+        textsFr: string[];
+        carries: (number | null)[];
+        result: (number | null)[];
+      }>;
     };
 
 export type MathTheoryBlock = {

@@ -5,44 +5,44 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A5.1",
     theory: {
       title: { fr: "Lire et écrire les décimaux", en: "Reading and writing decimals", ar: "قراءة وكتابة الأعداد العشرية", fa: "خواندن و نوشتن اعشار", ti: "ቁጽሪ ቪርጉላ ምንባብ ምጽሓፍ", uk: "Читання і запис десяткових чисел" },
-      paragraphs: {
-        fr: [
-          "Les nombres décimaux contiennent une virgule. Ils servent à représenter des valeurs non entières. Un nombre décimal est composé d'une partie entière (avant la virgule) et d'une partie décimale (après la virgule).",
-          "Exemple : 4 321,98 — partie entière : 4 321 (milliers, centaines, dizaines, unités) — partie décimale : 98 (dixièmes, centièmes).",
-          "Valeur de position : dans 4 321,98 → le 9 vaut 9 dixièmes (0,9) et le 8 vaut 8 centièmes (0,08).",
-          "On peut ajouter des zéros à droite de la virgule sans changer la valeur : 4,2 = 4,20 = 4,200.",
-        ],
-        en: [
-          "Decimal numbers contain a decimal point. They represent non-integer values. A decimal number has an integer part (before the decimal point) and a decimal part (after).",
-          "Example: 4 321.98 — integer part: 4 321 (thousands, hundreds, tens, units) — decimal part: 98 (tenths, hundredths).",
-          "Place value: in 4 321.98 → the 9 is worth 9 tenths (0.9) and the 8 is worth 8 hundredths (0.08).",
-          "Adding zeros to the right of the decimal point does not change the value: 4.2 = 4.20 = 4.200.",
-        ],
-        ar: [
-          "الأعداد العشرية تحتوي على فاصلة. تمثّل قيمًا غير صحيحة. يتكون العدد العشري من جزء صحيح (قبل الفاصلة) وجزء عشري (بعدها).",
-          "مثال: 4 321,98 — الجزء الصحيح: 4 321 (آلاف، مئات، عشرات، آحاد) — الجزء العشري: 98 (أعشار، أجزاء من المئة).",
-          "قيمة المنزلة: في 4 321,98 → 9 تساوي 9 أعشار (0,9) و 8 تساوي 8 أجزاء من مئة (0,08).",
-          "إضافة أصفار يمين الفاصلة لا تغير القيمة: 4,2 = 4,20 = 4,200.",
-        ],
-        fa: [
-          "اعداد اعشاری حاوی ممیز هستند. مقادیر غیرصحیح را نمایش می‌دهند. عدد اعشاری از بخش صحیح (قبل از ممیز) و بخش اعشاری (بعد از آن) تشکیل شده است.",
-          "مثال: ۴ ۳۲۱,۹۸ — بخش صحیح: ۴ ۳۲۱ (هزارها، صدها، دهگان‌ها، یکان‌ها) — بخش اعشاری: ۹۸ (دهم، صدم).",
-          "ارزش مکانی: در ۴ ۳۲۱,۹۸ → عدد ۹ برابر ۹ دهم (۰,۹) و عدد ۸ برابر ۸ صدم (۰,۰۸) است.",
-          "اضافه کردن صفر به راست ممیز مقدار را تغییر نمی‌دهد: ۴,۲ = ۴,۲۰ = ۴,۲۰۰.",
-        ],
-        ti: [
-          "ቁጽሪ ቪርጉላ ቪርጉላ ዘለዎ ቁጽሪ እዩ። ዘይምሉእ ዋጋ ዝገልጽ እዩ። ቁጽሪ ቪርጉላ ምሉእ ክፋል (ቀዲሙ ቪርጉላ) ምስ ቁጽሪ ቪርጉላ ክፋል (ድሕሪ ቪርጉላ) ኣሎ።",
-          "ኣብነት: 4 321,98 — ምሉእ ክፋል: 4 321 (ሽሕ, ሚእቲ, ዓሰርተ, ኣሃዱ) — ቁጽሪ ቪርጉላ ክፋል: 98 (ዓሰርተኛ, ሚእቲኛ).",
-          "ቦታ ዋጋ: 4 321,98 → 9 9 ዓሰርተኛ (0,9) 8 8 ሚእቲኛ (0,08) ዋጋ ኣለዎ.",
-          "ናብ ቀኝ ናይ ቪርጉላ ዜሮ ምወሳኽ ዋጋ ኣይቅይርን: 4,2 = 4,20 = 4,200.",
-        ],
-        uk: [
-          "Десяткові числа містять кому. Вони представляють нецілі значення. Десяткове число складається з цілої частини (перед комою) і десяткової частини (після коми).",
-          "Приклад: 4 321,98 — ціла частина: 4 321 (тисячі, сотні, десятки, одиниці) — десяткова: 98 (десяті, соті).",
-          "Позиційне значення: у 4 321,98 → 9 коштує 9 десятих (0,9), а 8 — 8 сотих (0,08).",
-          "Додавання нулів праворуч від коми не змінює значення: 4,2 = 4,20 = 4,200.",
-        ],
-      },
+      blocks: [
+        { type: "heading", fr: "Structure d'un nombre décimal", black: true },
+        { type: "highlight", fr: "Définition" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "Un nombre décimal contient une **virgule**.",
+            "Avant la virgule → **partie entière** (milliers, centaines, dizaines, unités)",
+            "Après la virgule → **partie décimale** (dixièmes, centièmes, millièmes)",
+          ],
+        },
+        { type: "heading", fr: "Exemple : 4 321,98", black: false },
+        {
+          type: "table",
+          headersFr: ["M", "C", "D", "U", "", "dx", "cx"],
+          accentHeader: true,
+          rows: [["4", "3", "2", "1", ",", "9", "8"]],
+        },
+        {
+          type: "section", labelFr: "Valeur de chaque chiffre :", itemsFr: [
+            "4 → 4 milliers = 4 000",
+            "3 → 3 centaines = 300",
+            "2 → 2 dizaines = 20",
+            "1 → 1 unité = 1",
+            "9 → 9 **dixièmes** = 0,9",
+            "8 → 8 **centièmes** = 0,08",
+          ],
+        },
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Zéros après la virgule", black: true },
+        { type: "highlight", fr: "Zéros inutiles" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "On peut ajouter des zéros à droite de la partie décimale sans changer la valeur.",
+          ],
+        },
+        { type: "note", fr: "4,2 = 4,20 = 4,200" },
+      ],
+      paragraphs: { fr: [] },
     },
     exercises: [
       { id: "a5-1-e1", promptFr: "Dans 3,47, quel est le chiffre des dixièmes ?", type: "number", acceptable: ["4"] },

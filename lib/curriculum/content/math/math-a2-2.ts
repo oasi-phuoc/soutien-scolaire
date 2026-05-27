@@ -80,6 +80,72 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
           },
         ],
       },
+
+      { type: "heading", fr: "Soustraction en colonnes", black: true },
+
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Aligner les unités sous les unités, dizaines sous dizaines.",
+          "Si soustraction impossible → faire un **emprunt** à la colonne de gauche.",
+          "La colonne empruntée diminue de 1, la colonne courante gagne 10.",
+        ],
+      },
+      {
+        type: "add_step_cards",
+        colLabels: ["M", "C", "D", "U"],
+        op: "−",
+        carryLabel: "E",
+        a: [5, 3, 4, 2],
+        b: [1, 5, 6, 8],
+        steps: [
+          {
+            numFr: "1. On pose les nombres",
+            textsFr: [
+              "Aligner les unités sous les unités, dizaines sous dizaines.",
+            ],
+            carries: [null, null, null, null],
+            result:  [null, null, null, null],
+          },
+          {
+            numFr: "2. Unités : 2 − 8 impossible → emprunt",
+            textsFr: [
+              "2 < 8, on emprunte 1 aux dizaines → dizaines passe de 4 à 3.",
+              "12 − 8 = 4",
+            ],
+            carries: [null, null, 1, null],
+            result:  [null, null, null, 4],
+          },
+          {
+            numFr: "3. Dizaines : 3 − 6 impossible → emprunt",
+            textsFr: [
+              "3 (après emprunt) < 6, on emprunte 1 aux centaines → centaines passe de 3 à 2.",
+              "13 − 6 = 7",
+            ],
+            carries: [null, 1, null, null],
+            result:  [null, null, 7, 4],
+          },
+          {
+            numFr: "4. Centaines : 2 − 5 impossible → emprunt",
+            textsFr: [
+              "2 (après emprunt) < 5, on emprunte 1 aux milliers → milliers passe de 5 à 4.",
+              "12 − 5 = 7",
+            ],
+            carries: [1, null, null, null],
+            result:  [null, 7, 7, 4],
+          },
+          {
+            numFr: "5. Milliers : 4 − 1 = 3",
+            textsFr: [
+              "4 (après emprunt) − 1 = 3",
+              "Résultat : 5 342 − 1 568 = 3 774",
+            ],
+            carries: [null, null, null, null],
+            result:  [3, 7, 7, 4],
+          },
+        ],
+      },
     ],
 
     paragraphs: { fr: [] },

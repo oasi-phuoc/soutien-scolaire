@@ -5,50 +5,46 @@ export const MATH_A5_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A5.2",
     theory: {
       title: { fr: "Suite de nombres à virgule", en: "Sequences of decimal numbers", ar: "متتالية أعداد عشرية", fa: "دنباله اعداد اعشاری", ti: "ተኸታተልቲ ቁጽሪ ቪርጉላ", uk: "Послідовності десяткових чисел" },
-      paragraphs: {
-        fr: [
-          "Une suite de nombres est une liste de nombres qui suivent une règle. Avant de calculer, il faut regarder si les nombres augmentent (ordre croissant) ou diminuent (ordre décroissant) et trouver le pas (l'écart entre deux termes consécutifs).",
-          "S'il y a deux nombres consécutifs — croissant : effectuez une soustraction pour trouver le pas, puis additionnez. Exemple : 2,5 ; ___ ; 3,5 ; 4 → 4 − 3,5 = 0,5 → terme manquant = 2,5 + 0,5 = 3.",
-          "Décroissant : même principe, on soustrait. Exemple : 7,25 ; 7 ; ___ ; 6,5 → 7,25 − 7 = 0,25 → terme manquant = 7 − 0,25 = 6,75.",
-          "S'il n'y a pas deux nombres consécutifs et deux écarts entre eux : effectuez une soustraction, puis divisez par 2. Exemple : ___ ; 7,2 ; ___ ; 9,6 → 9,6 − 7,2 = 2,4 → 2,4 ÷ 2 = 1,2 → termes : 6,0 ; 7,2 ; 8,4 ; 9,6.",
-          "S'il n'y a pas deux nombres consécutifs et trois écarts entre eux : effectuez une soustraction, puis divisez par 3. Exemple : 10 ; ___ ; ___ ; 6,7 → 10 − 6,7 = 3,3 → 3,3 ÷ 3 = 1,1 → termes : 10 ; 8,9 ; 7,8 ; 6,7.",
-        ],
-        en: [
-          "A sequence is a list of numbers following a rule. First check whether numbers increase (ascending) or decrease (descending), then find the step (gap between consecutive terms).",
-          "With 2 consecutive numbers — ascending: subtract to find the step, then add. Example: 2.5; ___; 3.5; 4 → step = 0.5 → missing = 3.",
-          "Descending: same idea, subtract. Example: 7.25; 7; ___; 6.5 → step = 0.25 → missing = 6.75.",
-          "With 2 gaps between known numbers: subtract, then divide by 2. Example: ___; 7.2; ___; 9.6 → 2.4 ÷ 2 = 1.2 → 6.0; 7.2; 8.4; 9.6.",
-          "With 3 gaps: subtract, divide by 3. Example: 10; ___; ___; 6.7 → 3.3 ÷ 3 = 1.1 → 10; 8.9; 7.8; 6.7.",
-        ],
-        ar: [
-          "المتتالية قائمة من الأعداد تتبع قاعدة. قرر أولًا إن كانت تتزايد (تصاعدي) أو تتناقص (تنازلي) وجد الخطوة (الفرق بين حدين متتاليين).",
-          "مع حدين متتاليين — تصاعدي: اطرح لتجد الخطوة ثم أجمع. مثال: 2,5; ___; 3,5; 4 → خطوة = 0,5 → الناقص = 3.",
-          "تنازلي: نفس الفكرة مع الطرح. مثال: 7,25; 7; ___; 6,5 → الناقص = 6,75.",
-          "مع فجوتين بين المعلومَين: اطرح ثم اقسم على 2. مثال: ___; 7,2; ___; 9,6 → 2,4 ÷ 2 = 1,2.",
-          "مع ثلاث فجوات: اطرح ثم اقسم على 3. مثال: 10; ___; ___; 6,7 → 3,3 ÷ 3 = 1,1.",
-        ],
-        fa: [
-          "دنباله فهرستی از اعداد است که قانونی را دنبال می‌کنند. ابتدا بررسی کنید آیا اعداد افزایش (صعودی) یا کاهش (نزولی) دارند و گام را بیابید.",
-          "با ۲ عدد متوالی — صعودی: تفریق کنید تا گام را بیابید، سپس جمع کنید. مثال: ۲,۵; ___; ۳,۵; ۴ → گام = ۰,۵ → جمله گمشده = ۳.",
-          "نزولی: همان ایده با تفریق. مثال: ۷,۲۵; ۷; ___; ۶,۵ → گمشده = ۶,۷۵.",
-          "با ۲ فاصله بین اعداد معلوم: تفریق کنید، بر ۲ تقسیم کنید. مثال: ___; ۷,۲; ___; ۹,۶ → ۲,۴ ÷ ۲ = ۱,۲.",
-          "با ۳ فاصله: تفریق کنید، بر ۳ تقسیم کنید. مثال: ۱۰; ___; ___; ۶,۷ → ۳,۳ ÷ ۳ = ۱,۱.",
-        ],
-        ti: [
-          "ናይ ቁጽሪ ቪርጉላ ተኸታተልቲ ሕጊ ዝስዕቡ ቁጽሪታት ዝርዝር እዩ። ቅድሚ ምስረቲ ቁጽሪታት ይዕብዩ (ብዕብየት) ወይ ይነኣሱ (ብንኡስ) ምፍላጥ ደሊ።",
-          "ክልተ ዝደምበ ቁጽሪ ምስ ዝህሉ — ብዕብየት: ምቅናስ ናይ ስጉምቲ ምርካብ። ኣብነት: 2,5; ___; 3,5; 4 → ስጉምቲ = 0,5 → ዝጎደለ = 3.",
-          "ዝነኣስ: ናይ ዝነኣሰ ምቅናስ። ኣብነት: 7,25; 7; ___; 6,5 → ዝጎደለ = 6,75.",
-          "ክልተ ፍርቂ ናይ ዝቐረ ምስ ዝህሉ: ቀንስ ብ2 ፈሊ። ኣብነት: ___; 7,2; ___; 9,6 → 2,4 ÷ 2 = 1,2.",
-          "ሰለስተ ፍርቂ: ቀንስ ብ3 ፈሊ። ኣብነት: 10; ___; ___; 6,7 → 3,3 ÷ 3 = 1,1.",
-        ],
-        uk: [
-          "Послідовність — список чисел, що слідують певному правилу. Спочатку визначте, чи числа зростають чи спадають, і знайдіть крок (різниця між сусідніми членами).",
-          "З 2 сусідніми числами — зростаюча: відніміть для знаходження кроку, потім додайте. Приклад: 2,5; ___; 3,5; 4 → крок = 0,5 → відсутній = 3.",
-          "Спадна: те саме, але віднімаємо. Приклад: 7,25; 7; ___; 6,5 → відсутній = 6,75.",
-          "З 2 пропусками між відомими: відніміть, поділіть на 2. Приклад: ___; 7,2; ___; 9,6 → 2,4 ÷ 2 = 1,2.",
-          "З 3 пропусками: відніміть, поділіть на 3. Приклад: 10; ___; ___; 6,7 → 3,3 ÷ 3 = 1,1.",
-        ],
-      },
+      blocks: [
+        { type: "heading", fr: "Trouver le pas d'une suite", black: true },
+        { type: "highlight", fr: "Principe" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "1. Repérer si la suite est **croissante** (augmente) ou **décroissante** (diminue).",
+            "2. Calculer le **pas** (écart entre deux termes consécutifs).",
+            "3. Appliquer le pas pour trouver les termes manquants.",
+          ],
+        },
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Cas 1 — Deux termes consécutifs connus", black: false },
+        { type: "highlight", fr: "Suite croissante" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "Pas = terme suivant − terme précédent",
+            "Terme manquant = terme connu + pas",
+          ],
+        },
+        { type: "example", fr: "2,5 ; ___ ; 3,5 ; 4  →  pas = 4 − 3,5 = 0,5  →  terme manquant = 2,5 + 0,5 = 3,0" },
+        { type: "highlight", fr: "Suite décroissante" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "Pas = terme précédent − terme suivant",
+            "Terme manquant = terme connu − pas",
+          ],
+        },
+        { type: "example", fr: "7,25 ; 7 ; ___ ; 6,5  →  pas = 7,25 − 7 = 0,25  →  terme manquant = 7 − 0,25 = 6,75" },
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Cas 2 — Pas de termes consécutifs", black: false },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "Soustraire les deux termes connus : grand − petit = écart total",
+            "Diviser par le nombre d'espaces entre eux = pas",
+          ],
+        },
+        { type: "example", fr: "___ ; 7,2 ; ___ ; 9,6  →  (9,6 − 7,2) ÷ 2 = 1,2  →  termes : 6,0 et 8,4" },
+        { type: "note", fr: "Le nombre d'espaces = nombre de termes manquants + 1" },
+      ],
+      paragraphs: { fr: [] },
     },
     exercises: [
       { id: "a5-2-e1", promptFr: "Suite : __ ; __ ; 3,50 ; __ ; 6,00 ; 7,25 ; __. Quel est le 7ème terme ?", type: "short_text", acceptable: ["8,50", "8.50", "8,5", "8.5"] },
