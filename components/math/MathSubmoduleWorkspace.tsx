@@ -75,13 +75,17 @@ function renderFracText(text: string): React.ReactNode {
   return <>{nodes}</>;
 }
 
-function MulDemoGrid({ a, b, op, carries, result }: {
+function MulDemoGrid({ a, b, op, carries, result, prevCarries, prevResult }: {
   a: number[]; b: number[]; op: string;
   carries: (number | null)[]; result: (number | null)[];
+  prevCarries?: (number | null)[] | null;
+  prevResult?: (number | null)[] | null;
 }) {
   const COL_LABELS = ["M", "C", "D", "U"];
   const firstNzA = a.findIndex(d => d !== 0);
   const firstNzB = b.findIndex(d => d !== 0);
+  const isNewC = (i: number) => carries[i] !== null && (prevCarries == null || prevCarries[i] === null);
+  const isNewR = (i: number) => result[i] !== null && (prevResult == null || prevResult[i] === null);
   return (
     <table className="border-collapse shrink-0">
       <thead>
@@ -98,7 +102,7 @@ function MulDemoGrid({ a, b, op, carries, result }: {
           <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
           {carries.map((c, ci) => (
             <td key={ci} className="text-center">
-              <div className="h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold text-orange-500">
+              <div className={`h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold ${isNewC(ci) ? "text-orange-500" : "text-orange-300"}`}>
                 {c !== null ? c : ""}
               </div>
             </td>
@@ -135,7 +139,9 @@ function MulDemoGrid({ a, b, op, carries, result }: {
             <td key={di} className="text-center">
               <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
                 d !== null
-                  ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+                  ? isNewR(di)
+                    ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+                    : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : "border-dashed border-[var(--color-border-default)] text-transparent"
               }`}>
                 {d !== null ? d : "0"}
@@ -148,13 +154,19 @@ function MulDemoGrid({ a, b, op, carries, result }: {
   );
 }
 
-function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shifted, res }: {
+function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shifted, res,
+  prevCarries1, prevCarries2, prevP1, prevP2shifted, prevRes }: {
   a: number[]; b: number[]; result: number;
   carries1: (number | null)[];
   carries2: (number | null)[];
   p1: (number | null)[];
   p2shifted: (number | null)[];
   res: (number | null)[];
+  prevCarries1?: (number | null)[] | null;
+  prevCarries2?: (number | null)[] | null;
+  prevP1?: (number | null)[] | null;
+  prevP2shifted?: (number | null)[] | null;
+  prevRes?: (number | null)[] | null;
 }) {
   const numCols = totalResult > 9999 ? 5 : 4;
   const colStart = 5 - numCols;
@@ -165,20 +177,23 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
   const firstNzA = a.findIndex(d => d !== 0);
   const firstNzB = b.findIndex(d => d !== 0);
 
-  const staticCell = (val: number | null, accent?: boolean) => (
+  const isNew = (arr: (number|null)[], prev: (number|null)[]|null|undefined, col: number) =>
+    arr[col] !== null && (prev == null || prev[col] === null);
+
+  const staticCell = (val: number | null, isNewFlag?: boolean) => (
     <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
       val !== null
-        ? accent
+        ? isNewFlag
           ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
-          : "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
+          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
         : "border-transparent text-transparent"
     }`}>
       {val !== null ? val : ""}
     </div>
   );
 
-  const carryCell = (val: number | null) => (
-    <div className="h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold text-orange-500">
+  const carryCell = (val: number | null, isNewFlag?: boolean) => (
+    <div className={`h-5 w-8 flex items-center justify-center font-mono text-[10px] font-bold ${isNewFlag ? "text-orange-500" : "text-orange-300"}`}>
       {val !== null ? val : ""}
     </div>
   );
@@ -197,12 +212,12 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
         {/* R2 */}
         <tr>
           <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
-          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries2[col] ?? null)}</td>)}
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries2[col] ?? null, isNew(carries2, prevCarries2, col))}</td>)}
         </tr>
         {/* R1 */}
         <tr>
           <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
-          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries1[col] ?? null)}</td>)}
+          {visibleCols.map(col => <td key={col} className="text-center">{carryCell(carries1[col] ?? null, isNew(carries1, prevCarries1, col))}</td>)}
         </tr>
         {/* Operand a */}
         <tr>
@@ -231,7 +246,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
         {/* p1 */}
         <tr>
           <td />
-          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(p1[col] ?? null)}</td>)}
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(p1[col] ?? null, isNew(p1, prevP1, col))}</td>)}
         </tr>
         {/* p2shifted */}
         <tr>
@@ -244,7 +259,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
                 </td>
               );
             }
-            return <td key={col} className="text-center">{staticCell(p2shifted[col] ?? null)}</td>;
+            return <td key={col} className="text-center">{staticCell(p2shifted[col] ?? null, isNew(p2shifted, prevP2shifted, col))}</td>;
           })}
         </tr>
         {/* Separator 2 */}
@@ -252,7 +267,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
         {/* Result */}
         <tr>
           <td />
-          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(res[col] ?? null, true)}</td>)}
+          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(res[col] ?? null, isNew(res, prevRes, col))}</td>)}
         </tr>
       </tbody>
     </table>
@@ -299,8 +314,14 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
     }`}>{String(val)}</div>
   );
   const emptyCell = () => <div className="h-8 w-8" />;
+  const showCellNew = (val: string | number) => (
+    <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)]">{String(val)}</div>
+  );
+  const showCellOld = (val: string | number) => (
+    <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-secondary)]">{String(val)}</div>
+  );
 
-  function StaticWorkRow({ numStr, colEnd }: { numStr: string; colEnd: number }) {
+  function StaticWorkRow({ numStr, colEnd, fresh }: { numStr: string; colEnd: number; fresh?: boolean }) {
     const startCol = colEnd - numStr.length + 1;
     return (
       <>
@@ -309,7 +330,7 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
           const has = ri >= 0 && ri < numStr.length;
           return (
             <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
-              {has ? showCell(numStr[ri]!) : emptyCell()}
+              {has ? (fresh ? showCellNew(numStr[ri]!) : showCellOld(numStr[ri]!)) : emptyCell()}
             </td>
           );
         })}
@@ -364,20 +385,24 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
             const prStr  = step.product.toString();
             const lineStart = Math.min(step.colEnd - pdStr.length + 1, step.colEnd - prStr.length + 1);
             const lineEnd   = step.colEnd;
+            const fresh = si === stepsComplete - 1;
             return (
               <React.Fragment key={si}>
                 {/* Partial-dividend row | quotient cells (si===0 only) */}
                 <tr>
                   <td style={{ padding: 0 }} />
-                  <StaticWorkRow numStr={pdStr} colEnd={step.colEnd} />
+                  <StaticWorkRow numStr={pdStr} colEnd={step.colEnd} fresh={fresh} />
                   {si === 0
                     ? Array.from({ length: quotientCols }, (_, qi) => {
                         const revealed = qi < stepsComplete && qi < quotientLen;
                         const isEmpty  = qi >= quotientLen;
+                        const isNewQ   = qi === stepsComplete - 1 && qi < quotientLen;
                         return (
                           <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }}
                             className="align-middle text-center">
-                            {isEmpty ? emptyCell() : revealed ? showCell(quotientStr[qi]!, true) : emptyCell()}
+                            {isEmpty ? emptyCell() : revealed
+                              ? (isNewQ ? showCellNew(quotientStr[qi]!) : showCellOld(quotientStr[qi]!))
+                              : emptyCell()}
                           </td>
                         );
                       })
@@ -387,7 +412,7 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
                 {/* Product row */}
                 <tr>
                   <td style={{ padding: 0, textAlign:"center", verticalAlign:"middle", fontSize:14, color:"var(--color-text-secondary)" }}>−</td>
-                  <StaticWorkRow numStr={prStr} colEnd={step.colEnd} />
+                  <StaticWorkRow numStr={prStr} colEnd={step.colEnd} fresh={fresh} />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
                 {/* Separator line */}
@@ -550,50 +575,63 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "mul_step_cards":
       return (
-        <div className="space-y-3">
-          {block.steps.map((step, si) => (
-            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
-              <div className="flex-1 space-y-1 min-w-0">
+        <div className="space-y-6">
+          {block.steps.map((step, si) => {
+            const prev = si > 0 ? block.steps[si - 1] : null;
+            return (
+              <div key={si} className="space-y-2">
                 <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
-                {step.textsFr.map((t, ti) => (
-                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
-                ))}
+                <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                  {step.textsFr.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  ))}
+                </div>
+                <MulDemoGrid
+                  a={block.a} b={block.b} op={block.op}
+                  carries={step.carries} result={step.result}
+                  prevCarries={prev?.carries ?? null}
+                  prevResult={prev?.result ?? null}
+                />
               </div>
-              <MulDemoGrid
-                a={block.a} b={block.b} op={block.op}
-                carries={step.carries} result={step.result}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       );
     case "mul2_step_cards":
       return (
-        <div className="space-y-3">
-          {block.steps.map((step, si) => (
-            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
-              <div className="flex-1 space-y-1 min-w-0">
+        <div className="space-y-6">
+          {block.steps.map((step, si) => {
+            const prev = si > 0 ? block.steps[si - 1] : null;
+            return (
+              <div key={si} className="space-y-2">
                 <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
-                {step.textsFr.map((t, ti) => (
-                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
-                ))}
+                <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                  {step.textsFr.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  ))}
+                </div>
+                <Mul2DemoGrid
+                  a={block.a} b={block.b} result={block.result}
+                  carries1={step.carries1} carries2={step.carries2}
+                  p1={step.p1} p2shifted={step.p2shifted} res={step.res}
+                  prevCarries1={prev?.carries1 ?? null}
+                  prevCarries2={prev?.carries2 ?? null}
+                  prevP1={prev?.p1 ?? null}
+                  prevP2shifted={prev?.p2shifted ?? null}
+                  prevRes={prev?.res ?? null}
+                />
               </div>
-              <Mul2DemoGrid
-                a={block.a} b={block.b} result={block.result}
-                carries1={step.carries1} carries2={step.carries2}
-                p1={step.p1} p2shifted={step.p2shifted} res={step.res}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       );
     case "div_step_cards":
       return (
-        <div className="space-y-3">
+        <div className="space-y-6">
           {block.steps.map((step, si) => (
-            <div key={si} className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 flex items-start gap-4">
-              <div className="flex-1 space-y-1 min-w-0">
-                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+            <div key={si} className="space-y-2">
+              <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+              <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
                 {step.textsFr.map((t, ti) => (
                   <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
                 ))}
