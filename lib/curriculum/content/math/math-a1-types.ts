@@ -57,7 +57,21 @@ export type MathRichBlock =
   | { type: "bullets"; labelFr?: string; itemsFr: string[] }
   | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> }
   | { type: "mult_table" }
-  | { type: "div_table" };
+  | { type: "div_table" }
+  | {
+      type: "mul_step_cards";
+      /** Digits [M,C,D,U] for the first operand (e.g. [0,3,7,4] for 374) */
+      a: number[];
+      /** Digits [M,C,D,U] for the second operand (e.g. [0,0,0,2] for 2) */
+      b: number[];
+      op: string;
+      steps: Array<{
+        numFr: string;
+        textsFr: string[];
+        carries: (number | null)[];
+        result: (number | null)[];
+      }>;
+    };
 
 export type MathTheoryBlock = {
   /** Titre principal toujours affiché en français (langue d’étude). */
