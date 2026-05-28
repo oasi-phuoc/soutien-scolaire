@@ -95,7 +95,7 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
             textsFr: [
               "1 (retenue) + 4 + 8 = 13 → pose 3, retient 1",
             ],
-            carries: [null, 1, null, null],
+            carries: [null, 1, 1, null],
             result:  [null, null, 3, 3],
           },
           {
@@ -103,7 +103,7 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
             textsFr: [
               "1 (retenue) + 5 + 3 = 9 → pose 9",
             ],
-            carries: [null, null, null, null],
+            carries: [null, 1, 1, null],
             result:  [null, 9, 3, 3],
           },
           {
@@ -112,7 +112,7 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
               "2 + 1 = 3 → pose 3",
               "Résultat : 2 547 + 1 386 = 3 933",
             ],
-            carries: [null, null, null, null],
+            carries: [null, 1, 1, null],
             result:  [3, 9, 3, 3],
           },
         ],

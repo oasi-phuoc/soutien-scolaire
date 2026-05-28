@@ -114,7 +114,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
               "2 < 8, on emprunte 1 aux dizaines → dizaines passe de 4 à 3.",
               "12 − 8 = 4",
             ],
-            carries: [null, null, 1, null],
+            carries: [null, null, 3, null],
             result:  [null, null, null, 4],
           },
           {
@@ -123,7 +123,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
               "3 (après emprunt) < 6, on emprunte 1 aux centaines → centaines passe de 3 à 2.",
               "13 − 6 = 7",
             ],
-            carries: [null, 1, null, null],
+            carries: [null, 2, 3, null],
             result:  [null, null, 7, 4],
           },
           {
@@ -132,7 +132,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
               "2 (après emprunt) < 5, on emprunte 1 aux milliers → milliers passe de 5 à 4.",
               "12 − 5 = 7",
             ],
-            carries: [1, null, null, null],
+            carries: [4, 2, 3, null],
             result:  [null, 7, 7, 4],
           },
           {
@@ -141,7 +141,7 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
               "4 (après emprunt) − 1 = 3",
               "Résultat : 5 342 − 1 568 = 3 774",
             ],
-            carries: [null, null, null, null],
+            carries: [4, 2, 3, null],
             result:  [3, 7, 7, 4],
           },
         ],
