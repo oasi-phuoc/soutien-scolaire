@@ -50,9 +50,11 @@ function frenchPct(data: StoredProgressV1 | null) {
 }
 
 function lecturePct(data: StoredProgressV1 | null) {
-  const modules = data?.lectureProgress?.modules ?? {};
-  const done = Object.values(modules).filter(v => v === "completed").length;
-  return { done, total: TOTAL_LECTURE, pct: Math.round((done / TOTAL_LECTURE) * 100) };
+  const subs = data?.lectureProgress?.submodules ?? {};
+  const total = LECTURE_MODULES.reduce((sum, m) => sum + m.letters.length, 0);
+  const done = LECTURE_MODULES.reduce((sum, m) =>
+    sum + m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length, 0);
+  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
 }
 
 const BRANCH_LABELS: Record<string, string> = { algebra: "Algèbre", geometry: "Géométrie", stats: "Stats" };
@@ -73,20 +75,19 @@ function frenchDetail(data: StoredProgressV1 | null) {
   const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
   const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
   return [
-    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length },
-    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length },
-    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length },
+    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length, inProgress: FRENCH_VOC.find(t => !completedSlugs.has(t.slug)) ?? null },
+    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length, inProgress: FRENCH_GRAM.find(t => !completedSlugs.has(t.slug)) ?? null },
+    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length, inProgress: null },
   ];
 }
 
 function lectureDetail(data: StoredProgressV1 | null) {
-  return LECTURE_MODULES.map(m => ({
-    ...m,
-    state: data?.lectureProgress?.modules?.[m.id] ?? null,
-    subDone: data?.lectureProgress?.submodules
-      ? Object.entries(data.lectureProgress.submodules).filter(([k, v]) => k.startsWith(m.id) && v === "completed").length
-      : 0,
-  }));
+  const subs = data?.lectureProgress?.submodules ?? {};
+  return LECTURE_MODULES.map(m => {
+    const subDone = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length;
+    const inProgress = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "in_progress");
+    return { ...m, state: data?.lectureProgress?.modules?.[m.id] ?? null, subDone, subTotal: m.letters.length, inProgress };
+  });
 }
 
 function lastSeen(iso: string | null): string {
@@ -277,11 +278,18 @@ function DetailModal({
               <span>Français</span><span>{french.done}/{french.total}</span>
             </div>
             <Bar pct={french.pct} color="bg-emerald-500" />
-            <div className="mt-2 space-y-0.5">
+            <div className="mt-2 space-y-1">
               {frenchTabs.map(t => (
-                <div key={t.tab} className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                  <span className="font-medium">{t.label}</span>
-                  <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                <div key={t.tab}>
+                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                    <span className="font-medium">{t.label}</span>
+                    <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                  </div>
+                  {t.inProgress && (
+                    <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
+                      ↳ {t.inProgress.code} – {t.inProgress.title}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
@@ -295,11 +303,16 @@ function DetailModal({
             <Bar pct={lecture.pct} color="bg-amber-500" />
             <div className="mt-2 space-y-1">
               {lectureItems.map(m => (
-                <div key={m.id} className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                  <span className={m.state === "in_progress" ? "font-medium text-amber-600 dark:text-amber-400" : "font-medium"}>
-                    {m.state === "in_progress" ? "↳ " : ""}{m.code} – {m.title}
-                  </span>
-                  <span>{m.state === "completed" ? "✓" : m.state === "in_progress" ? "en cours" : "—"}</span>
+                <div key={m.id}>
+                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                    <span className="font-medium">{m.code} – {m.title}</span>
+                    <span>{m.subDone}/{m.subTotal}</span>
+                  </div>
+                  {m.inProgress.map(l => (
+                    <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                      ↳ Lettre {l.letter}
+                    </p>
+                  ))}
                 </div>
               ))}
             </div>
