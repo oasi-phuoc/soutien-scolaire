@@ -17,12 +17,14 @@ export type CompteDashboardProps = {
   user: { id: string; email: string } | null;
   profilePivot: PivotCode | null;
   supabaseConfigured: boolean;
+  isAdmin?: boolean;
 };
 
 export function CompteDashboard({
   user,
   profilePivot,
   supabaseConfigured,
+  isAdmin,
 }: CompteDashboardProps) {
   const [code, setCode] = useState<PivotCode>(
     profilePivot && PIVOT_LANGS.some((l) => l.code === profilePivot)
@@ -98,7 +100,15 @@ export function CompteDashboard({
               Compte connecté
             </h2>
             <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{user.email}</p>
-            <div className="mt-4">
+            <div className="mt-4 flex flex-wrap gap-3">
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-4 font-semibold text-white hover:bg-blue-700"
+                >
+                  Tableau de bord admin
+                </Link>
+              )}
               <form action={signOutAction}>
                 <button
                   type="submit"
