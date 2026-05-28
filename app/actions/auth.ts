@@ -3,7 +3,6 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
-import { isPhoneFormat, normalizePhone } from "@/lib/auth/identifier";
 
 export async function signInAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
