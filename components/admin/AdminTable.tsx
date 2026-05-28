@@ -35,14 +35,25 @@ export type UserRow = {
   role: "eleve" | "prof" | "admin";
 };
 
-const TOTAL_MATH = MATH_MODULES.length;
 const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
 const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
 const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
+const MATH_SUB_IDS_BY_BRANCH = {
+  algebra: new Set(MATH_MODULES.filter(m => m.branch === "algebra").flatMap(m => m.submodules.map(s => s.id))),
+  geometry: new Set(MATH_MODULES.filter(m => m.branch === "geometry").flatMap(m => m.submodules.map(s => s.id))),
+  stats: new Set(MATH_MODULES.filter(m => m.branch === "stats").flatMap(m => m.submodules.map(s => s.id))),
+};
+const TOTAL_MATH_SUBS = MATH_MODULES.reduce((n, m) => n + m.submodules.length, 0);
+
 
 function mathPct(data: StoredProgressV1 | null) {
-  const done = data?.math ? Object.values(data.math).filter(m => m.state === "completed").length : 0;
-  return { done, total: TOTAL_MATH, pct: Math.round((done / TOTAL_MATH) * 100) };
+  const allIds = new Set([...MATH_SUB_IDS_BY_BRANCH.algebra, ...MATH_SUB_IDS_BY_BRANCH.geometry, ...MATH_SUB_IDS_BY_BRANCH.stats]);
+  const done = data?.submoduleStates
+    ? Object.entries(data.submoduleStates).filter(([id, s]) => allIds.has(id) && s === "completed").length
+    : data?.math
+      ? Object.values(data.math).reduce((n, m) => n + Math.round((m.subProgress ?? 0) * (m.subTotal ?? 1)), 0)
+      : 0;
+  return { done, total: TOTAL_MATH_SUBS, pct: Math.round((done / TOTAL_MATH_SUBS) * 100) };
 }
 
 function frenchPct(data: StoredProgressV1 | null) {
@@ -69,9 +80,13 @@ function mathDetail(data: StoredProgressV1 | null) {
   const branches = ["algebra", "geometry", "stats"] as const;
   return branches.map(branch => {
     const mods = MATH_MODULES.filter(m => m.branch === branch);
-    const done = mods.filter(m => data?.math?.[m.id]?.state === "completed").length;
+    const ids = MATH_SUB_IDS_BY_BRANCH[branch];
+    const total = mods.reduce((n, m) => n + m.submodules.length, 0);
+    const done = data?.submoduleStates
+      ? Object.entries(data.submoduleStates).filter(([id, s]) => ids.has(id) && s === "completed").length
+      : mods.reduce((n, m) => n + Math.round((data?.math?.[m.id]?.subProgress ?? 0) * (data?.math?.[m.id]?.subTotal ?? 1)), 0);
     const inProgress = mods.filter(m => data?.math?.[m.id]?.state === "in_progress");
-    return { branch, label: BRANCH_LABELS[branch], done, total: mods.length, inProgress };
+    return { branch, label: BRANCH_LABELS[branch], done, total, inProgress };
   });
 }
 
