@@ -2795,8 +2795,10 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
               {block.rows.map((row, ri) => (
                 <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-center text-sm text-[var(--color-text-primary)]">
-                      {renderBold(cell)}
+                    <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)] ${block.textAlignRows === "left" ? "text-left" : "text-center"}`}>
+                      {cell.trim().split(/\n/).map((line, li) => (
+                        <span key={li}>{li > 0 && <br />}{renderBold(line.trim())}</span>
+                      ))}
                     </td>
                   ))}
                 </tr>
