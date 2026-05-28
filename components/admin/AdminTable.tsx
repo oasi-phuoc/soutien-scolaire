@@ -509,9 +509,10 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
   return (
     <>
       {/* Filters */}
-      <div className="mb-4 space-y-3">
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Élèves / Classes pill toggle */}
+      <div className="mb-4 space-y-0">
+        <div className="flex flex-wrap items-center gap-2">
+
+          {/* Élèves / Classes toggle */}
           <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
             <button
               onClick={() => setTab("eleves")}
@@ -527,43 +528,43 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
             </button>
           </div>
 
-          {/* Sort expandable pill */}
-          <div className={`flex items-center overflow-hidden rounded-full transition-all duration-200 ${sortOpen ? "border border-violet-200 bg-violet-50 dark:border-violet-800 dark:bg-violet-950/30" : "border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900"}`}>
+          {/* Class dropdown — inline right of toggle */}
+          {tab === "classes" && (
+            <select
+              value={filterClasse}
+              onChange={e => setFilterClasse(e.target.value)}
+              className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+            >
+              <option value="">Toutes les classes</option>
+              {classes.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          )}
+
+          {/* Trier expandable pill */}
+          <div className={`flex overflow-hidden rounded-full p-0.5 transition-all ${sortOpen ? "border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800" : "border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800"}`}>
             <button
               onClick={() => setSortOpen(o => !o)}
-              className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white" : "text-zinc-600 dark:text-zinc-300"}`}
+              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
             >
               Trier
             </button>
             {sortOpen && (
-              <div className="flex items-center gap-1 pr-2">
+              <>
                 {([["name", "Nom A→Z"], ["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
                   <button
                     key={val}
                     onClick={() => { setSortBy(val); setSortOpen(false); }}
-                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${sortBy === val ? "text-violet-700 dark:text-violet-400" : "text-violet-500/70 hover:text-violet-700 dark:text-violet-500 dark:hover:text-violet-300"}`}
+                    className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
                   >
                     {label}
                   </button>
                 ))}
-              </div>
+              </>
             )}
           </div>
 
           <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
         </div>
-
-        {/* Class dropdown — visible only when Classes tab active */}
-        {tab === "classes" && (
-          <select
-            value={filterClasse}
-            onChange={e => setFilterClasse(e.target.value)}
-            className="w-56 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-          >
-            <option value="">Choisir une classe</option>
-            {classes.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-        )}
       </div>
 
       {/* Table */}
