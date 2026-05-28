@@ -465,6 +465,7 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
   const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
+  const [sortOpen, setSortOpen] = useState(false);
   const [selected, setSelected] = useState<UserRow | null>(null);
   const [editing, setEditing] = useState<UserRow | null>(null);
   const [confirming, setConfirming] = useState<UserRow | null>(null);
@@ -526,17 +527,28 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
             </button>
           </div>
 
-          {/* Sort */}
-          <select
-            value={sortBy}
-            onChange={e => setSortBy(e.target.value as typeof sortBy)}
-            className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-          >
-            <option value="name">Nom A→Z</option>
-            <option value="math">Maths (avancé)</option>
-            <option value="francais">Français (avancé)</option>
-            <option value="lecture">Lecture (avancé)</option>
-          </select>
+          {/* Sort expandable pill */}
+          <div className={`flex items-center overflow-hidden rounded-full transition-all duration-200 ${sortOpen ? "border border-violet-200 bg-violet-50 dark:border-violet-800 dark:bg-violet-950/30" : "border border-zinc-200 bg-white dark:border-zinc-700 dark:bg-zinc-900"}`}>
+            <button
+              onClick={() => setSortOpen(o => !o)}
+              className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white" : "text-zinc-600 dark:text-zinc-300"}`}
+            >
+              Trier
+            </button>
+            {sortOpen && (
+              <div className="flex items-center gap-1 pr-2">
+                {([["name", "Nom A→Z"], ["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
+                  <button
+                    key={val}
+                    onClick={() => { setSortBy(val); setSortOpen(false); }}
+                    className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${sortBy === val ? "text-violet-700 dark:text-violet-400" : "text-violet-500/70 hover:text-violet-700 dark:text-violet-500 dark:hover:text-violet-300"}`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
         </div>
