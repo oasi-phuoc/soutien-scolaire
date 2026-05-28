@@ -52,7 +52,7 @@ export async function deleteUserAction(userId: string) {
 
 export async function updateUserProfileAction(
   userId: string,
-  data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string },
+  data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },
 ) {
   const caller = await getCallerRole();
   if (!caller) return { ok: false, reason: "Non autorisé" };

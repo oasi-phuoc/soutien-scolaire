@@ -34,10 +34,12 @@ export async function signUpAction(formData: FormData) {
   const npa = String(formData.get("npa") ?? "").trim();
   const localite = String(formData.get("localite") ?? "").trim();
   const telephone = String(formData.get("telephone") ?? "").trim();
+  const langue = String(formData.get("langue") ?? "en").trim() || "en";
 
   if (!nom) redirect("/inscription?erreur=" + encodeURIComponent("Le nom est obligatoire."));
   if (!prenom) redirect("/inscription?erreur=" + encodeURIComponent("Le prénom est obligatoire."));
   if (!classe) redirect("/inscription?erreur=" + encodeURIComponent("La classe est obligatoire."));
+  if (langue === "") redirect("/inscription?erreur=" + encodeURIComponent("La langue est obligatoire."));
 
   const supabase = await createSupabaseActionClient();
   if (!supabase) {
@@ -56,6 +58,7 @@ export async function signUpAction(formData: FormData) {
         nom,
         prenom,
         classe,
+        langue,
         ...(adresse ? { adresse } : {}),
         ...(npa ? { npa } : {}),
         ...(localite ? { localite } : {}),

@@ -5,6 +5,12 @@ import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { PIVOT_LANGS } from "@/lib/pivot-langs";
+
+const LANGUE_LABELS: Record<string, string> = {
+  ...Object.fromEntries(PIVOT_LANGS.map(l => [l.code, l.labelFr])),
+  other: "Autre",
+};
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import {
   changeRoleAction,
@@ -22,6 +28,7 @@ export type UserRow = {
   npa: string | null;
   localite: string | null;
   telephone: string | null;
+  langue: string | null;
   progress_data: StoredProgressV1 | null;
   progress_updated_at: string | null;
   is_admin: boolean;
@@ -239,6 +246,11 @@ function DetailModal({
         {/* Info */}
         <div className="mb-4 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
           <p>{user.email}</p>
+          {user.langue && (
+            <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+              🌐 {LANGUE_LABELS[user.langue] ?? user.langue}
+            </p>
+          )}
           {user.adresse && <p>{user.adresse}</p>}
           {location && <p>{location}</p>}
           {user.telephone && <p>{user.telephone}</p>}
@@ -374,7 +386,9 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
     prenom: user.prenom ?? "", nom: user.nom ?? "",
     classeType: parsedClasse[0] ?? "", classeNum: parsedClasse[1] ?? "",
     adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "", telephone: user.telephone ?? "",
+    langue: user.langue ?? "en",
   });
+  const LANGUES_OPTIONS = [...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })), { code: "other", label: "Autre" }];
 
   const field = (key: keyof typeof form, label: string, opts?: { placeholder?: string }) => (
     <div>
@@ -395,9 +409,10 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
         prenom: form.prenom || undefined, nom: form.nom || undefined, classe,
         adresse: form.adresse || undefined, npa: form.npa || undefined,
         localite: form.localite || undefined, telephone: form.telephone || undefined,
+        langue: form.langue || undefined,
       });
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
-      onSaved({ ...form, classe: classe ?? null });
+      onSaved({ ...form, classe: classe ?? null, langue: form.langue || null });
     });
   }
 
@@ -435,6 +450,16 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
           {field("adresse", "Adresse")}
           <div className="grid grid-cols-2 gap-3">{field("npa", "NPA", { placeholder: "1234" })}{field("localite", "Localité")}</div>
           {field("telephone", "Téléphone", { placeholder: "+41 79 …" })}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Langue parlée</label>
+            <select
+              value={form.langue}
+              onChange={e => setForm(f => ({ ...f, langue: e.target.value }))}
+              className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+            >
+              {LANGUES_OPTIONS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
+            </select>
+          </div>
         </div>
         {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
         <div className="mt-5 flex justify-end gap-2">

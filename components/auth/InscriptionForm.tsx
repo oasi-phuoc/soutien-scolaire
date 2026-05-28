@@ -2,6 +2,12 @@
 
 import Link from "next/link";
 import { signUpAction, resendConfirmationAction } from "@/app/actions/auth";
+import { PIVOT_LANGS } from "@/lib/pivot-langs";
+
+const LANGUES = [
+  ...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })),
+  { code: "other", label: "Autre" },
+];
 
 const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950";
 const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";
@@ -92,6 +98,17 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
               className={inputCls}
             />
           </div>
+        </div>
+
+        {/* Langue */}
+        <div>
+          <label htmlFor="langue" className={labelCls}>Langue parlée{reqTag}</label>
+          <select id="langue" name="langue" required defaultValue="" className={inputCls}>
+            <option value="" disabled>Sélectionner une langue</option>
+            {LANGUES.map(l => (
+              <option key={l.code} value={l.code}>{l.label}</option>
+            ))}
+          </select>
         </div>
 
         {/* E-mail */}
