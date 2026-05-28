@@ -10,8 +10,8 @@ export default async function AdminPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/connexion");
 
-  const { data: isAdmin } = await supabase.rpc("get_my_is_admin");
-  if (!isAdmin) redirect("/");
+  const { data: myRole } = await supabase.rpc("get_my_role");
+  if (myRole !== "admin" && myRole !== "prof") redirect("/");
 
   const { data: users } = await supabase.rpc("get_users_for_admin") as {
     data: (Omit<UserRow, "progress_data"> & { progress_data: StoredProgressV1 | null })[] | null;
@@ -36,11 +36,15 @@ export default async function AdminPage() {
           </p>
         </div>
         <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
-          Admin
+          {myRole === "admin" ? "Admin" : "Prof"}
         </span>
       </div>
 
-      <AdminTable initialRows={rows} currentUserId={user.id} />
+      <AdminTable
+        initialRows={rows}
+        currentUserId={user.id}
+        currentUserRole={myRole as "admin" | "prof"}
+      />
     </main>
   );
 }

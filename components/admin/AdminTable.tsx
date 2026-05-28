@@ -6,7 +6,7 @@ import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import {
-  toggleAdminAction,
+  changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
 } from "@/app/actions/admin";
@@ -24,6 +24,7 @@ export type UserRow = {
   progress_data: StoredProgressV1 | null;
   progress_updated_at: string | null;
   is_admin: boolean;
+  role: "eleve" | "prof" | "admin";
 };
 
 const TOTAL_MATH = MATH_MODULES.length;
@@ -49,7 +50,6 @@ function lecturePct(data: StoredProgressV1 | null) {
 function currentActiveLessons(data: StoredProgressV1 | null): { label: string; name: string }[] {
   if (!data) return [];
   const results: { label: string; name: string }[] = [];
-
   if (data.math) {
     const entry = Object.entries(data.math).find(([, v]) => v.state === "in_progress");
     if (entry) {
@@ -57,13 +57,11 @@ function currentActiveLessons(data: StoredProgressV1 | null): { label: string; n
       if (mod) results.push({ label: "Maths", name: `${mod.code} – ${mod.title}` });
     }
   }
-
   if (data.frenchLevel && data.frenchLevel !== "PA") {
     const lastSlug = data.frenchLessons ? Object.keys(data.frenchLessons).at(-1) : null;
     const theme = lastSlug ? FRENCH_THEMES.find(t => t.slug === lastSlug) : null;
     if (theme) results.push({ label: "Français", name: `${theme.code} – ${theme.title}` });
   }
-
   if (data.lectureProgress?.modules) {
     const entry = Object.entries(data.lectureProgress.modules).find(([, v]) => v !== "completed");
     if (entry) {
@@ -71,7 +69,6 @@ function currentActiveLessons(data: StoredProgressV1 | null): { label: string; n
       if (mod) results.push({ label: "Lecture", name: `${mod.code} – ${mod.title}` });
     }
   }
-
   return results;
 }
 
@@ -145,22 +142,35 @@ function IconSave() {
   );
 }
 
+function Spinner() {
+  return (
+    <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+    </svg>
+  );
+}
+
+const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
+const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
+
 // ── Detail Modal ────────────────────────────────────────────────────────────
 
 function DetailModal({
   user,
   currentUserId,
+  currentUserRole,
   onClose,
   onEdit,
   onDelete,
-  onToggleAdmin,
+  onChangeRole,
 }: {
   user: UserRow;
   currentUserId: string;
+  currentUserRole: "admin" | "prof";
   onClose: () => void;
   onEdit: () => void;
   onDelete: () => void;
-  onToggleAdmin: () => void;
+  onChangeRole: (role: "eleve" | "prof" | "admin") => void;
 }) {
   const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || "—";
   const location = [user.npa, user.localite].filter(Boolean).join(" ") || null;
@@ -169,6 +179,10 @@ function DetailModal({
   const lecture = lecturePct(user.progress_data);
   const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
   const activeLessons = currentActiveLessons(user.progress_data);
+
+  const isSelf = user.id === currentUserId;
+  const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
+  const canChangeRole = currentUserRole === "admin" && !isSelf;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -182,6 +196,13 @@ function DetailModal({
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h2>
+              <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                user.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                : user.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+              }`}>
+                {ROLE_LABELS[user.role]}
+              </span>
             </div>
             {user.classe && (
               <span className="mt-1 inline-block rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
@@ -189,11 +210,7 @@ function DetailModal({
               </span>
             )}
           </div>
-          <button
-            onClick={onClose}
-            className="shrink-0 rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
-            aria-label="Fermer"
-          >
+          <button onClick={onClose} className="shrink-0 rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800" aria-label="Fermer">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6 6 18M6 6l12 12" />
             </svg>
@@ -206,31 +223,23 @@ function DetailModal({
           {user.adresse && <p>{user.adresse}</p>}
           {location && <p>{location}</p>}
           {user.telephone && <p>{user.telephone}</p>}
-          <p className="pt-1 text-xs text-zinc-400 dark:text-zinc-500">
-            Dernier accès : {lastSeen(activity)}
-          </p>
+          <p className="pt-1 text-xs text-zinc-400 dark:text-zinc-500">Dernier accès : {lastSeen(activity)}</p>
         </div>
 
         {/* Progress */}
         <div className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-          <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Maths</span><span>{math.done}/{math.total}</span>
+          {[
+            { label: "Maths", ...math, color: "bg-blue-500" },
+            { label: "Français", ...french, color: "bg-emerald-500" },
+            { label: "Lecture", ...lecture, color: "bg-amber-500" },
+          ].map(({ label, done, total, pct, color }) => (
+            <div key={label}>
+              <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                <span>{label}</span><span>{done}/{total}</span>
+              </div>
+              <Bar pct={pct} color={color} />
             </div>
-            <Bar pct={math.pct} color="bg-blue-500" />
-          </div>
-          <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Français</span><span>{french.done}/{french.total}</span>
-            </div>
-            <Bar pct={french.pct} color="bg-emerald-500" />
-          </div>
-          <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Lecture</span><span>{lecture.done}/{lecture.total}</span>
-            </div>
-            <Bar pct={lecture.pct} color="bg-amber-500" />
-          </div>
+          ))}
         </div>
 
         {/* Current lessons */}
@@ -239,8 +248,7 @@ function DetailModal({
             <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">En cours</p>
             {activeLessons.map((l, i) => (
               <p key={i} className="text-xs text-zinc-600 dark:text-zinc-300">
-                <span className="font-semibold text-zinc-500 dark:text-zinc-400">{l.label} : </span>
-                {l.name}
+                <span className="font-semibold text-zinc-500 dark:text-zinc-400">{l.label} : </span>{l.name}
               </p>
             ))}
           </div>
@@ -248,7 +256,6 @@ function DetailModal({
 
         {/* Actions */}
         <div className="flex items-center gap-2">
-          {/* Edit icon button */}
           <button
             onClick={onEdit}
             className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60"
@@ -257,30 +264,33 @@ function DetailModal({
             <IconEdit />
           </button>
 
-          {/* Delete icon button */}
-          <button
-            onClick={onDelete}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-400 dark:hover:bg-red-900/60"
-            aria-label="Supprimer"
-          >
-            <IconTrash />
-          </button>
+          {canDelete && (
+            <button
+              onClick={onDelete}
+              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-400 dark:hover:bg-red-900/60"
+              aria-label="Supprimer"
+            >
+              <IconTrash />
+            </button>
+          )}
 
-          {/* Admin / Utilisateur toggle — hidden for own account */}
-          {user.id !== currentUserId && (
+          {canChangeRole && (
             <div className="ml-auto flex overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
-              <button
-                onClick={!user.is_admin ? onToggleAdmin : undefined}
-                className={`px-3 py-2 text-xs font-semibold transition-colors ${user.is_admin ? "bg-blue-600 text-white" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
-              >
-                Admin
-              </button>
-              <button
-                onClick={user.is_admin ? onToggleAdmin : undefined}
-                className={`px-3 py-2 text-xs font-semibold transition-colors ${!user.is_admin ? "bg-zinc-700 text-white dark:bg-zinc-600" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
-              >
-                Utilisateur
-              </button>
+              {ROLE_ORDER.map(r => (
+                <button
+                  key={r}
+                  onClick={() => user.role !== r && onChangeRole(r)}
+                  className={`px-3 py-2 text-xs font-semibold transition-colors ${
+                    user.role === r
+                      ? r === "admin" ? "bg-blue-600 text-white"
+                        : r === "prof" ? "bg-emerald-600 text-white"
+                        : "bg-zinc-700 text-white dark:bg-zinc-600"
+                      : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  }`}
+                >
+                  {ROLE_LABELS[r]}
+                </button>
+              ))}
             </div>
           )}
         </div>
@@ -291,34 +301,19 @@ function DetailModal({
 
 // ── Edit Modal ──────────────────────────────────────────────────────────────
 
-function EditModal({
-  user,
-  onClose,
-  onSaved,
-}: {
-  user: UserRow;
-  onClose: () => void;
-  onSaved: (updated: Partial<UserRow>) => void;
-}) {
+function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => void; onSaved: (updated: Partial<UserRow>) => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const [form, setForm] = useState({
-    prenom: user.prenom ?? "",
-    nom: user.nom ?? "",
-    classe: user.classe ?? "",
-    adresse: user.adresse ?? "",
-    npa: user.npa ?? "",
-    localite: user.localite ?? "",
-    telephone: user.telephone ?? "",
+    prenom: user.prenom ?? "", nom: user.nom ?? "", classe: user.classe ?? "",
+    adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "", telephone: user.telephone ?? "",
   });
 
   const field = (key: keyof typeof form, label: string, opts?: { placeholder?: string }) => (
     <div>
       <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">{label}</label>
       <input
-        type="text"
-        placeholder={opts?.placeholder}
-        value={form[key]}
+        type="text" placeholder={opts?.placeholder} value={form[key]}
         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
         className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
       />
@@ -329,13 +324,9 @@ function EditModal({
     setErr(null);
     startTransition(async () => {
       const r = await updateUserProfileAction(user.id, {
-        prenom: form.prenom || undefined,
-        nom: form.nom || undefined,
-        classe: form.classe || undefined,
-        adresse: form.adresse || undefined,
-        npa: form.npa || undefined,
-        localite: form.localite || undefined,
-        telephone: form.telephone || undefined,
+        prenom: form.prenom || undefined, nom: form.nom || undefined, classe: form.classe || undefined,
+        adresse: form.adresse || undefined, npa: form.npa || undefined,
+        localite: form.localite || undefined, telephone: form.telephone || undefined,
       });
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
       onSaved(form);
@@ -345,55 +336,25 @@ function EditModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
-      <div
-        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900"
-        onClick={e => e.stopPropagation()}
-      >
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier le profil</h2>
           <button onClick={onClose} className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12" /></svg>
           </button>
         </div>
-
         <div className="space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            {field("prenom", "Prénom")}
-            {field("nom", "Nom")}
-          </div>
+          <div className="grid grid-cols-2 gap-3">{field("prenom", "Prénom")}{field("nom", "Nom")}</div>
           {field("classe", "Classe", { placeholder: "ex : 7H" })}
           {field("adresse", "Adresse")}
-          <div className="grid grid-cols-2 gap-3">
-            {field("npa", "NPA", { placeholder: "1234" })}
-            {field("localite", "Localité")}
-          </div>
+          <div className="grid grid-cols-2 gap-3">{field("npa", "NPA", { placeholder: "1234" })}{field("localite", "Localité")}</div>
           {field("telephone", "Téléphone", { placeholder: "+41 79 …" })}
         </div>
-
         {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
-
-        {/* Save / Cancel icon buttons */}
         <div className="mt-5 flex justify-end gap-2">
-          <button
-            onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
-            aria-label="Annuler"
-          >
-            <IconCancel />
-          </button>
-          <button
-            onClick={submit}
-            disabled={pending}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60"
-            aria-label="Enregistrer"
-          >
-            {pending ? (
-              <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-              </svg>
-            ) : <IconSave />}
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
+          <button onClick={submit} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60" aria-label="Enregistrer">
+            {pending ? <Spinner /> : <IconSave />}
           </button>
         </div>
       </div>
@@ -403,15 +364,7 @@ function EditModal({
 
 // ── Delete Confirm ──────────────────────────────────────────────────────────
 
-function DeleteConfirm({
-  user,
-  onClose,
-  onDeleted,
-}: {
-  user: UserRow;
-  onClose: () => void;
-  onDeleted: () => void;
-}) {
+function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: () => void; onDeleted: () => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
   const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || user.email;
@@ -427,34 +380,14 @@ function DeleteConfirm({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
-      <div
-        className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900"
-        onClick={e => e.stopPropagation()}
-      >
+      <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
         <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer le compte</h2>
-        <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">
-          Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.
-        </p>
+        <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.</p>
         {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
         <div className="flex justify-end gap-2">
-          <button
-            onClick={onClose}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
-            aria-label="Annuler"
-          >
-            <IconCancel />
-          </button>
-          <button
-            onClick={confirm}
-            disabled={pending}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
-            aria-label="Supprimer"
-          >
-            {pending ? (
-              <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-              </svg>
-            ) : <IconTrash />}
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
+          <button onClick={confirm} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60" aria-label="Supprimer">
+            {pending ? <Spinner /> : <IconTrash />}
           </button>
         </div>
       </div>
@@ -464,7 +397,15 @@ function DeleteConfirm({
 
 // ── Main Component ──────────────────────────────────────────────────────────
 
-export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRow[]; currentUserId: string }) {
+export function AdminTable({
+  initialRows,
+  currentUserId,
+  currentUserRole,
+}: {
+  initialRows: UserRow[];
+  currentUserId: string;
+  currentUserRole: "admin" | "prof";
+}) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
   const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
@@ -476,9 +417,7 @@ export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRo
   const [, startTransition] = useTransition();
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
-
   const filtered = rows.filter(r => tab === "eleves" || !filterClasse || r.classe === filterClasse);
-
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
     if (sortBy === "francais") return frenchPct(b.progress_data).pct - frenchPct(a.progress_data).pct;
@@ -488,12 +427,12 @@ export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRo
     return na.localeCompare(nb, "fr");
   });
 
-  function handleToggleAdmin(user: UserRow) {
+  function handleChangeRole(user: UserRow, newRole: "eleve" | "prof" | "admin") {
     startTransition(async () => {
-      const r = await toggleAdminAction(user.id, user.is_admin);
+      const r = await changeRoleAction(user.id, newRole);
       if (r.ok) {
-        setRows(rs => rs.map(r2 => r2.id === user.id ? { ...r2, is_admin: !user.is_admin } : r2));
-        setSelected(s => s?.id === user.id ? { ...s, is_admin: !user.is_admin } : s);
+        setRows(rs => rs.map(r2 => r2.id === user.id ? { ...r2, role: newRole, is_admin: newRole === "admin" } : r2));
+        setSelected(s => s?.id === user.id ? { ...s, role: newRole, is_admin: newRole === "admin" } : s);
       }
     });
   }
@@ -513,55 +452,26 @@ export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRo
   return (
     <>
       {/* Filters */}
-      <div className="mb-4 space-y-0">
+      <div className="mb-4">
         <div className="flex flex-wrap items-center gap-2">
-
-          {/* Élèves / Classes toggle */}
           <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
-            <button
-              onClick={() => setTab("eleves")}
-              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
-            >
-              Élèves
-            </button>
-            <button
-              onClick={() => { setTab("classes"); if (!filterClasse && classes[0]) setFilterClasse(classes[0]); }}
-              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "classes" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
-            >
-              Classes
-            </button>
+            <button onClick={() => setTab("eleves")} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Élèves</button>
+            <button onClick={() => { setTab("classes"); if (!filterClasse && classes[0]) setFilterClasse(classes[0]); }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "classes" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Classes</button>
           </div>
 
-          {/* Class dropdown — inline right of toggle */}
           {tab === "classes" && (
-            <select
-              value={filterClasse}
-              onChange={e => setFilterClasse(e.target.value)}
-              className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-            >
+            <select value={filterClasse} onChange={e => setFilterClasse(e.target.value)} className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900">
               <option value="">Toutes les classes</option>
               {classes.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           )}
 
-          {/* Trier expandable pill */}
-          <div className={`flex overflow-hidden rounded-full p-0.5 transition-all ${sortOpen ? "border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800" : "border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800"}`}>
-            <button
-              onClick={() => setSortOpen(o => !o)}
-              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
-            >
-              Trier
-            </button>
+          <div className={`flex overflow-hidden rounded-full p-0.5 border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800`}>
+            <button onClick={() => setSortOpen(o => !o)} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
                 {([["name", "Nom A→Z"], ["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
-                  <button
-                    key={val}
-                    onClick={() => { setSortBy(val); setSortOpen(false); }}
-                    className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
-                  >
-                    {label}
-                  </button>
+                  <button key={val} onClick={() => { setSortBy(val); setSortOpen(false); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
                 ))}
               </>
             )}
@@ -577,58 +487,38 @@ export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRo
           <thead>
             <tr className="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
               {["Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                  {h}
-                </th>
+                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {sorted.length === 0 ? (
-              <tr>
-                <td colSpan={7} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td>
-              </tr>
+              <tr><td colSpan={7} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
             ) : sorted.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
               const french = frenchPct(row.progress_data);
               const lecture = lecturePct(row.progress_data);
               const activity = row.progress_updated_at ?? row.progress_data?.lastActivityAt ?? null;
-
               return (
                 <tr key={row.id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <td className="px-4 py-3">
-                    <span className="font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
+                      {row.role === "prof" && <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">prof</span>}
+                      {row.role === "admin" && <span className="rounded-full bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">admin</span>}
+                    </div>
                   </td>
                   <td className="px-4 py-3">
-                    {row.classe ? (
-                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                        {row.classe}
-                      </span>
-                    ) : <span className="text-zinc-400">—</span>}
+                    {row.classe ? <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{row.classe}</span> : <span className="text-zinc-400">—</span>}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-3 text-zinc-500 dark:text-zinc-400">
-                    {lastSeen(activity)}
-                  </td>
-                  <td className="w-28 px-4 py-3">
-                    <ProgressCell {...math} color="bg-blue-500" />
-                  </td>
-                  <td className="w-28 px-4 py-3">
-                    <ProgressCell {...french} color="bg-emerald-500" />
-                  </td>
-                  <td className="w-28 px-4 py-3">
-                    <ProgressCell {...lecture} color="bg-amber-500" />
-                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 text-zinc-500 dark:text-zinc-400">{lastSeen(activity)}</td>
+                  <td className="w-28 px-4 py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
+                  <td className="w-28 px-4 py-3"><ProgressCell {...french} color="bg-emerald-500" /></td>
+                  <td className="w-28 px-4 py-3"><ProgressCell {...lecture} color="bg-amber-500" /></td>
                   <td className="px-4 py-3">
-                    <button
-                      onClick={() => setSelected(row)}
-                      className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
-                      aria-label="Voir détails"
-                    >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" />
-                      </svg>
+                    <button onClick={() => setSelected(row)} className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
                     </button>
                   </td>
                 </tr>
@@ -638,31 +528,19 @@ export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRo
         </table>
       </div>
 
-      {/* Modals */}
       {selected && !editing && !confirming && (
         <DetailModal
           user={selected}
           currentUserId={currentUserId}
+          currentUserRole={currentUserRole}
           onClose={() => setSelected(null)}
           onEdit={() => setEditing(selected)}
           onDelete={() => setConfirming(selected)}
-          onToggleAdmin={() => handleToggleAdmin(selected)}
+          onChangeRole={role => handleChangeRole(selected, role)}
         />
       )}
-      {editing && (
-        <EditModal
-          user={editing}
-          onClose={() => setEditing(null)}
-          onSaved={data => handleSaved(editing.id, data)}
-        />
-      )}
-      {confirming && (
-        <DeleteConfirm
-          user={confirming}
-          onClose={() => setConfirming(null)}
-          onDeleted={() => handleDeleted(confirming.id)}
-        />
-      )}
+      {editing && <EditModal user={editing} onClose={() => setEditing(null)} onSaved={data => handleSaved(editing.id, data)} />}
+      {confirming && <DeleteConfirm user={confirming} onClose={() => setConfirming(null)} onDeleted={() => handleDeleted(confirming.id)} />}
     </>
   );
 }
