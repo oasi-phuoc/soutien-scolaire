@@ -95,10 +95,12 @@ function frenchDetail(data: StoredProgressV1 | null) {
   const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
   const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
   const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
+  const firstCommSub = COMM_SUBMODULES.find(s => !(data?.commProgress?.[s.id]));
+  const commInProgress = firstCommSub ? { code: firstCommSub.code, title: firstCommSub.title } : null;
   return [
-    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length, inProgress: FRENCH_VOC.find(t => !completedSlugs.has(t.slug)) ?? null },
-    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length, inProgress: FRENCH_GRAM.find(t => !completedSlugs.has(t.slug)) ?? null },
-    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length, inProgress: null },
+    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length, inProgress: FRENCH_VOC.find(t => !completedSlugs.has(t.slug)) ?? null as { code: string; title: string } | null },
+    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length, inProgress: FRENCH_GRAM.find(t => !completedSlugs.has(t.slug)) ?? null as { code: string; title: string } | null },
+    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length, inProgress: commInProgress },
   ];
 }
 
