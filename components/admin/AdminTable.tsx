@@ -46,6 +46,35 @@ function lecturePct(data: StoredProgressV1 | null) {
   return { done, total: TOTAL_LECTURE, pct: Math.round((done / TOTAL_LECTURE) * 100) };
 }
 
+function currentActiveLessons(data: StoredProgressV1 | null): { label: string; name: string }[] {
+  if (!data) return [];
+  const results: { label: string; name: string }[] = [];
+
+  if (data.math) {
+    const entry = Object.entries(data.math).find(([, v]) => v.state === "in_progress");
+    if (entry) {
+      const mod = MATH_MODULES.find(m => m.id === entry[0]);
+      if (mod) results.push({ label: "Maths", name: `${mod.code} – ${mod.title}` });
+    }
+  }
+
+  if (data.frenchLevel && data.frenchLevel !== "PA") {
+    const lastSlug = data.frenchLessons ? Object.keys(data.frenchLessons).at(-1) : null;
+    const theme = lastSlug ? FRENCH_THEMES.find(t => t.slug === lastSlug) : null;
+    if (theme) results.push({ label: "Français", name: `${theme.code} – ${theme.title}` });
+  }
+
+  if (data.lectureProgress?.modules) {
+    const entry = Object.entries(data.lectureProgress.modules).find(([, v]) => v !== "completed");
+    if (entry) {
+      const mod = LECTURE_MODULES.find(m => m.id === entry[0]);
+      if (mod) results.push({ label: "Lecture", name: `${mod.code} – ${mod.title}` });
+    }
+  }
+
+  return results;
+}
+
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -76,6 +105,46 @@ function ProgressCell({ done, total, pct, color }: { done: number; total: number
   );
 }
 
+// ── Icons ───────────────────────────────────────────────────────────────────
+
+function IconEdit() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+  );
+}
+
+function IconTrash() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <polyline points="3 6 5 6 21 6" />
+      <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+      <path d="M10 11v6M14 11v6" />
+      <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
+    </svg>
+  );
+}
+
+function IconCancel() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M18 6 6 18M6 6l12 12" />
+    </svg>
+  );
+}
+
+function IconSave() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+      <polyline points="17 21 17 13 7 13 7 21" />
+      <polyline points="7 3 7 8 15 8" />
+    </svg>
+  );
+}
+
 // ── Detail Modal ────────────────────────────────────────────────────────────
 
 function DetailModal({
@@ -97,6 +166,7 @@ function DetailModal({
   const french = frenchPct(user.progress_data);
   const lecture = lecturePct(user.progress_data);
   const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
+  const activeLessons = currentActiveLessons(user.progress_data);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
@@ -110,11 +180,6 @@ function DetailModal({
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h2>
-              {user.is_admin && (
-                <span className="rounded-full bg-blue-100 px-2 py-0.5 text-[10px] font-bold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
-                  admin
-                </span>
-              )}
             </div>
             {user.classe && (
               <span className="mt-1 inline-block rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
@@ -145,60 +210,75 @@ function DetailModal({
         </div>
 
         {/* Progress */}
-        <div className="mb-5 space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
+        <div className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
           <div>
             <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Maths</span>
-              <span>{math.done}/{math.total}</span>
+              <span>Maths</span><span>{math.done}/{math.total}</span>
             </div>
             <Bar pct={math.pct} color="bg-blue-500" />
           </div>
           <div>
             <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Français</span>
-              <span>{french.done}/{french.total}</span>
+              <span>Français</span><span>{french.done}/{french.total}</span>
             </div>
             <Bar pct={french.pct} color="bg-emerald-500" />
           </div>
           <div>
             <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Lecture</span>
-              <span>{lecture.done}/{lecture.total}</span>
+              <span>Lecture</span><span>{lecture.done}/{lecture.total}</span>
             </div>
             <Bar pct={lecture.pct} color="bg-amber-500" />
           </div>
         </div>
 
+        {/* Current lessons */}
+        {activeLessons.length > 0 && (
+          <div className="mb-4 space-y-1.5 rounded-xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/50">
+            <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">En cours</p>
+            {activeLessons.map((l, i) => (
+              <p key={i} className="text-xs text-zinc-600 dark:text-zinc-300">
+                <span className="font-semibold text-zinc-500 dark:text-zinc-400">{l.label} : </span>
+                {l.name}
+              </p>
+            ))}
+          </div>
+        )}
+
         {/* Actions */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex items-center gap-2">
+          {/* Edit icon button */}
           <button
             onClick={onEdit}
-            className="flex items-center gap-1.5 rounded-xl border border-zinc-300 px-3 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-600 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60"
+            aria-label="Modifier"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-              <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-            </svg>
-            Modifier
+            <IconEdit />
           </button>
-          <button
-            onClick={onToggleAdmin}
-            className="flex items-center gap-1.5 rounded-xl border border-blue-300 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-50 dark:border-blue-700 dark:text-blue-400 dark:hover:bg-blue-950/30"
-          >
-            {user.is_admin ? "Retirer admin" : "Passer admin"}
-          </button>
+
+          {/* Delete icon button */}
           <button
             onClick={onDelete}
-            className="ml-auto flex items-center gap-1.5 rounded-xl border border-red-300 px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-950/30"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-400 dark:hover:bg-red-900/60"
+            aria-label="Supprimer"
           >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="3 6 5 6 21 6" />
-              <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
-              <path d="M10 11v6M14 11v6" />
-              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" />
-            </svg>
-            Supprimer
+            <IconTrash />
           </button>
+
+          {/* Admin / Utilisateur toggle */}
+          <div className="ml-auto flex overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+            <button
+              onClick={!user.is_admin ? onToggleAdmin : undefined}
+              className={`px-3 py-2 text-xs font-semibold transition-colors ${user.is_admin ? "bg-blue-600 text-white" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
+            >
+              Admin
+            </button>
+            <button
+              onClick={user.is_admin ? onToggleAdmin : undefined}
+              className={`px-3 py-2 text-xs font-semibold transition-colors ${!user.is_admin ? "bg-zinc-700 text-white dark:bg-zinc-600" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
+            >
+              Utilisateur
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -228,11 +308,11 @@ function EditModal({
     telephone: user.telephone ?? "",
   });
 
-  const field = (key: keyof typeof form, label: string, opts?: { type?: string; placeholder?: string }) => (
+  const field = (key: keyof typeof form, label: string, opts?: { placeholder?: string }) => (
     <div>
       <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">{label}</label>
       <input
-        type={opts?.type ?? "text"}
+        type="text"
         placeholder={opts?.placeholder}
         value={form[key]}
         onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
@@ -273,6 +353,7 @@ function EditModal({
             </svg>
           </button>
         </div>
+
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
             {field("prenom", "Prénom")}
@@ -286,20 +367,29 @@ function EditModal({
           </div>
           {field("telephone", "Téléphone", { placeholder: "+41 79 …" })}
         </div>
+
         {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
-        <div className="mt-5 flex gap-2">
+
+        {/* Save / Cancel icon buttons */}
+        <div className="mt-5 flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="flex-1 rounded-xl border border-zinc-300 py-2.5 text-sm font-medium dark:border-zinc-600"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+            aria-label="Annuler"
           >
-            Annuler
+            <IconCancel />
           </button>
           <button
             onClick={submit}
             disabled={pending}
-            className="flex-1 rounded-xl bg-blue-600 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60"
+            aria-label="Enregistrer"
           >
-            {pending ? "Enregistrement…" : "Enregistrer"}
+            {pending ? (
+              <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+              </svg>
+            ) : <IconSave />}
           </button>
         </div>
       </div>
@@ -342,19 +432,25 @@ function DeleteConfirm({
           Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.
         </p>
         {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
-        <div className="flex gap-2">
+        <div className="flex justify-end gap-2">
           <button
             onClick={onClose}
-            className="flex-1 rounded-xl border border-zinc-300 py-2.5 text-sm font-medium dark:border-zinc-600"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"
+            aria-label="Annuler"
           >
-            Annuler
+            <IconCancel />
           </button>
           <button
             onClick={confirm}
             disabled={pending}
-            className="flex-1 rounded-xl bg-red-600 py-2.5 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
+            aria-label="Supprimer"
           >
-            {pending ? "Suppression…" : "Supprimer"}
+            {pending ? (
+              <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+              </svg>
+            ) : <IconTrash />}
           </button>
         </div>
       </div>
@@ -507,8 +603,8 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
         <DetailModal
           user={selected}
           onClose={() => setSelected(null)}
-          onEdit={() => { setEditing(selected); }}
-          onDelete={() => { setConfirming(selected); }}
+          onEdit={() => setEditing(selected)}
+          onDelete={() => setConfirming(selected)}
           onToggleAdmin={() => handleToggleAdmin(selected)}
         />
       )}
