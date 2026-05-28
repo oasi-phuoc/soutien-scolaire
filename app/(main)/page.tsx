@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { HomeProgressCards } from "@/components/home/HomeProgressCards";
 
@@ -8,9 +9,14 @@ export default async function HomePage({ searchParams }: Props) {
 
   const supabase = await createSupabaseServerClient();
   let email: string | null = null;
+  let isAdmin = false;
   if (supabase) {
     const { data: { user } } = await supabase.auth.getUser();
     email = user?.email ?? null;
+    if (user) {
+      const { data } = await supabase.rpc("get_my_is_admin");
+      isAdmin = data === true;
+    }
   }
 
   return (
@@ -31,6 +37,21 @@ export default async function HomePage({ searchParams }: Props) {
           </p>
         ) : null}
       </div>
+
+      {isAdmin && (
+        <Link
+          href="/admin"
+          className="flex items-center gap-2 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm font-semibold text-blue-700 hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300 dark:hover:bg-blue-950/50"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+            <rect x="3" y="3" width="7" height="7" rx="1" />
+            <rect x="14" y="3" width="7" height="7" rx="1" />
+            <rect x="3" y="14" width="7" height="7" rx="1" />
+            <rect x="14" y="14" width="7" height="7" rx="1" />
+          </svg>
+          Tableau de bord admin
+        </Link>
+      )}
 
       <HomeProgressCards />
 
