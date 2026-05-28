@@ -31,8 +31,7 @@ const TOTAL_FRENCH = FRENCH_THEMES.length;
 const TOTAL_LECTURE = LECTURE_MODULES.length;
 
 function mathPct(data: StoredProgressV1 | null) {
-  if (!data?.math) return 0;
-  const done = Object.values(data.math).filter(m => m.state === "completed").length;
+  const done = data?.math ? Object.values(data.math).filter(m => m.state === "completed").length : 0;
   return { done, total: TOTAL_MATH, pct: Math.round((done / TOTAL_MATH) * 100) };
 }
 
