@@ -2412,6 +2412,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               lesson.theory.blocks.map((block, i) => (
                 <React.Fragment key={i}>
                   {RichBlock({ block, blockIdx: i, trad: getTrad(lesson.submoduleId), pivot, showPivot: !!showPivotTranslation, isRtl })}
+                  {lesson.submoduleId === "A1-2" && i === 5 && <PlaceValueIllustration />}
                 </React.Fragment>
               ))
             ) : theoryFr.paragraphs.map((p, i) => {
@@ -2506,7 +2507,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               );
             })}
           </div>
-          {lesson.submoduleId === "A1-2" && <PlaceValueIllustration />}
           {lesson.submoduleId === "A1-1" && read && (
             <div className="space-y-3">
               <h3 className="text-base font-bold text-[var(--color-text-primary)]">Comment lire les nombres</h3>
