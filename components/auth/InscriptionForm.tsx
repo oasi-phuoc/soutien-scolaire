@@ -3,20 +3,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { signUpAction, resendConfirmationAction } from "@/app/actions/auth";
-import { isPhoneFormat } from "@/lib/auth/identifier";
+
+const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950";
+const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";
+const optTag = <span className="font-normal text-zinc-400 dark:text-zinc-500"> (optionnel)</span>;
+const reqTag = <span className="text-red-500"> *</span>;
 
 export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string; msg?: string; confirmedEmail?: string }) {
-  const [phone, setPhone] = useState("");
-  const phoneClean = phone.replace(/[\s\-\.\(\)]/g, "");
-  const phoneValid = phone === "" || isPhoneFormat(phone);
-  const phoneInvalid = phone !== "" && !isPhoneFormat(phone);
-
-  const phoneBorderCls = phoneInvalid
-    ? "border-red-400 bg-red-50 dark:bg-red-950/10 focus:border-red-400"
-    : phoneClean && phoneValid
-      ? "border-teal-400 bg-white dark:bg-zinc-950 focus:border-teal-500"
-      : "border-zinc-300 bg-white dark:border-zinc-600 dark:bg-zinc-950 focus:border-teal-500";
-
   if (confirmedEmail !== undefined) {
     return (
       <>
@@ -27,12 +20,8 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
           <p className="mt-2 text-sm text-teal-800 dark:text-teal-200">
             Si vous n&apos;avez pas reçu d&apos;e-mail de confirmation, vérifiez les courriers indésirables.
           </p>
-          {msg && (
-            <p className="mt-3 text-xs font-medium text-teal-700 dark:text-teal-300">{msg}</p>
-          )}
-          {error && (
-            <p className="mt-3 text-xs font-medium text-red-600 dark:text-red-400">{error}</p>
-          )}
+          {msg && <p className="mt-3 text-xs font-medium text-teal-700 dark:text-teal-300">{msg}</p>}
+          {error && <p className="mt-3 text-xs font-medium text-red-600 dark:text-red-400">{error}</p>}
         </div>
         <form action={resendConfirmationAction} className="mt-4">
           <input type="hidden" name="email" value={confirmedEmail} />
@@ -66,49 +55,34 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
       )}
 
       <form action={signUpAction} className="mt-6 flex flex-col gap-4">
-        <div>
-          <label htmlFor="email" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-            E-mail <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            autoComplete="email"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
-          />
+
+        {/* Prénom + Nom */}
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label htmlFor="prenom" className={labelCls}>Prénom{reqTag}</label>
+            <input id="prenom" name="prenom" type="text" required autoComplete="given-name" className={inputCls} />
+          </div>
+          <div>
+            <label htmlFor="nom" className={labelCls}>Nom{reqTag}</label>
+            <input id="nom" name="nom" type="text" required autoComplete="family-name" className={inputCls} />
+          </div>
         </div>
 
+        {/* Classe */}
         <div>
-          <label htmlFor="phone" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-            Numéro de téléphone{" "}
-            <span className="font-normal text-zinc-400 dark:text-zinc-500">(optionnel)</span>
-          </label>
-          <input
-            id="phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            value={phone}
-            onChange={e => setPhone(e.target.value)}
-            placeholder="+41 79 123 45 67"
-            className={`mt-1 min-h-12 w-full rounded-xl border px-3 text-base outline-none transition-colors ${phoneBorderCls}`}
-          />
-          {phoneInvalid && (
-            <p className="mt-1 text-xs text-red-600 dark:text-red-400">
-              Format invalide. Utilisez le format international, ex : +41 79 123 45 67
-            </p>
-          )}
-          {phoneValid && phone !== "" && (
-            <p className="mt-1 text-xs text-teal-700 dark:text-teal-400">Numéro valide ✓</p>
-          )}
+          <label htmlFor="classe" className={labelCls}>Classe{reqTag}</label>
+          <input id="classe" name="classe" type="text" required placeholder="ex : 7H, 8H, 9H…" className={inputCls} />
         </div>
 
+        {/* E-mail */}
         <div>
-          <label htmlFor="password" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-            Mot de passe <span className="text-red-500">*</span>
-          </label>
+          <label htmlFor="email" className={labelCls}>E-mail{reqTag}</label>
+          <input id="email" name="email" type="email" required autoComplete="email" className={inputCls} />
+        </div>
+
+        {/* Mot de passe */}
+        <div>
+          <label htmlFor="password" className={labelCls}>Mot de passe{reqTag}</label>
           <input
             id="password"
             name="password"
@@ -116,14 +90,43 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
             required
             minLength={8}
             autoComplete="new-password"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
+            className={inputCls}
           />
           <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
         </div>
 
+        {/* Séparateur coordonnées */}
+        <div className="pt-1">
+          <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+            Coordonnées{optTag}
+          </p>
+          <div className="mt-3 flex flex-col gap-4">
+            <div>
+              <label htmlFor="adresse" className={labelCls}>Adresse</label>
+              <input id="adresse" name="adresse" type="text" autoComplete="street-address" className={inputCls} />
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label htmlFor="npa" className={labelCls}>NPA</label>
+                <input id="npa" name="npa" type="text" inputMode="numeric" autoComplete="postal-code" placeholder="1234" className={inputCls} />
+              </div>
+              <div>
+                <label htmlFor="localite" className={labelCls}>Localité</label>
+                <input id="localite" name="localite" type="text" autoComplete="address-level2" className={inputCls} />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="telephone" className={labelCls}>Téléphone</label>
+              <input id="telephone" name="telephone" type="tel" autoComplete="tel" placeholder="+41 79 123 45 67" className={inputCls} />
+            </div>
+          </div>
+        </div>
+
         <button
           type="submit"
-          className="min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white dark:bg-teal-600"
+          className="mt-2 min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white dark:bg-teal-600"
         >
           M&apos;inscrire
         </button>

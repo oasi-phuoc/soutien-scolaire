@@ -26,29 +26,40 @@ export async function signInAction(formData: FormData) {
 export async function signUpAction(formData: FormData) {
   const email = String(formData.get("email") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  const rawPhone = String(formData.get("phone") ?? "").trim();
+  const nom = String(formData.get("nom") ?? "").trim();
+  const prenom = String(formData.get("prenom") ?? "").trim();
+  const classe = String(formData.get("classe") ?? "").trim();
+  const adresse = String(formData.get("adresse") ?? "").trim();
+  const npa = String(formData.get("npa") ?? "").trim();
+  const localite = String(formData.get("localite") ?? "").trim();
+  const telephone = String(formData.get("telephone") ?? "").trim();
+
+  if (!nom) redirect("/inscription?erreur=" + encodeURIComponent("Le nom est obligatoire."));
+  if (!prenom) redirect("/inscription?erreur=" + encodeURIComponent("Le prénom est obligatoire."));
+  if (!classe) redirect("/inscription?erreur=" + encodeURIComponent("La classe est obligatoire."));
 
   const supabase = await createSupabaseActionClient();
   if (!supabase) {
     redirect("/inscription?erreur=" + encodeURIComponent("Supabase non configuré"));
   }
 
-  // Validate phone format if provided
-  if (rawPhone && !isPhoneFormat(rawPhone)) {
-    redirect("/inscription?erreur=" + encodeURIComponent("Format de téléphone invalide. Utilisez le format international, ex : +41791234567"));
-  }
-
   const site = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "";
   const emailRedirect = site.length > 0 ? `${site}/auth/callback?next=/compte` : undefined;
-
-  const userData = rawPhone ? { phone: normalizePhone(rawPhone) } : undefined;
 
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
       ...(emailRedirect != null ? { emailRedirectTo: emailRedirect } : {}),
-      ...(userData ? { data: userData } : {}),
+      data: {
+        nom,
+        prenom,
+        classe,
+        ...(adresse ? { adresse } : {}),
+        ...(npa ? { npa } : {}),
+        ...(localite ? { localite } : {}),
+        ...(telephone ? { telephone } : {}),
+      },
     },
   });
 
