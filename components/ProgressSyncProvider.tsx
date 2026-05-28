@@ -80,10 +80,11 @@ export function ProgressSyncProvider() {
 
     window.addEventListener("progress-saved", debouncedSync);
 
-    // Sync when tab regains focus (handles multi-tab edits)
-    const handleFocus = debounce(async () => {
+    // Sync when tab regains focus or visibility (handles multi-tab + mobile background tabs)
+    const handleVisible = debounce(async () => {
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
+      touchActivityAction().catch(() => {});
       const localRaw = localStorage.getItem(MATH_PROGRESS_KEY);
       if (localRaw) {
         try {
@@ -92,12 +93,18 @@ export function ProgressSyncProvider() {
       }
     }, 5000);
 
-    window.addEventListener("focus", handleFocus);
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") handleVisible();
+    };
+
+    window.addEventListener("focus", handleVisible);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       subscription.unsubscribe();
       window.removeEventListener("progress-saved", debouncedSync);
-      window.removeEventListener("focus", handleFocus);
+      window.removeEventListener("focus", handleVisible);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 

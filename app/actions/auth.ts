@@ -18,6 +18,14 @@ export async function signInAction(formData: FormData) {
     redirect("/connexion?erreur=" + encodeURIComponent(error.message));
   }
 
+  // Mise à jour immédiate du dernier accès (avant le redirect, côté serveur)
+  const { data: { user } } = await supabase.auth.getUser();
+  if (user) {
+    await supabase.from("profiles")
+      .update({ progress_updated_at: new Date().toISOString() })
+      .eq("id", user.id);
+  }
+
   revalidatePath("/", "layout");
   redirect("/");
 }
