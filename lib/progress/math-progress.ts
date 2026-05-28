@@ -117,7 +117,7 @@ export function createInitialProgress(): StoredProgressV1 {
   const next: StoredProgressV1 = {
     version: 2,
     math: defaultMathRecord(),
-    lastActivityAt: new Date().toISOString(),
+    // No lastActivityAt: cloud data must always win when merging on a fresh device
     lastQuizGrades: {},
     frenchLevel: "PA",
   };

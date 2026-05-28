@@ -117,7 +117,9 @@ export function mergeProgress(
 
   return {
     ...cloud,
-    ...local,
+    // Only spread local fields that are actually set — never overwrite cloud with undefined/empty
+    ...(local.frenchLevel ? { frenchLevel: local.frenchLevel } : {}),
+    ...(local.lastQuizGrades && Object.keys(local.lastQuizGrades).length > 0 ? { lastQuizGrades: local.lastQuizGrades } : {}),
     math: mergedMath,
     submoduleStates: mergedStates,
     submoduleScores: mergedScores,
