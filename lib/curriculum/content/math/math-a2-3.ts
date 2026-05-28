@@ -57,7 +57,7 @@ export const MATH_A2_3_LESSON: MathSubmoduleLesson = {
         type: "table",
         headersFr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"],
         accentHeader: true,
-        textAlignRows: "left",
+        colAligns: ["center", "center", "left"],
         rows: [
           ["347", "300", "chiffre des dizaines = 4 < 5\n→ nombre arrondi **vers le bas**"],
           ["4 682", "4 700", "chiffre des dizaines = 8 ≥ 5\n→ nombre arrondi **vers le haut**"],
