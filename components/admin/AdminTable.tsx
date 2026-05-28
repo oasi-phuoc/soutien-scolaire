@@ -507,14 +507,14 @@ export function AdminTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
-              {["Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", ""].map((h, i) => (
+              {["Statut", "Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", ""].map((h, i) => (
                 <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {sorted.length === 0 ? (
-              <tr><td colSpan={7} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
+              <tr><td colSpan={8} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
             ) : sorted.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
@@ -524,11 +524,16 @@ export function AdminTable({
               return (
                 <tr key={row.id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
-                      {row.role === "prof" && <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">prof</span>}
-                      {row.role === "admin" && <span className="rounded-full bg-blue-100 px-1.5 py-0.5 text-[10px] font-bold text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">admin</span>}
-                    </div>
+                    <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                      row.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                      : row.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                      : "bg-zinc-100 text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
+                    }`}>
+                      {ROLE_LABELS[row.role]}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3">
+                    <span className="font-medium text-zinc-800 dark:text-zinc-200">{fullName}</span>
                   </td>
                   <td className="px-4 py-3">
                     {row.classe ? <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">{row.classe}</span> : <span className="text-zinc-400">—</span>}
