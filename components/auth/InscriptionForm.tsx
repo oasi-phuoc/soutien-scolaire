@@ -69,8 +69,29 @@ export function InscriptionForm({ error, msg, confirmedEmail }: { error?: string
 
         {/* Classe */}
         <div>
-          <label htmlFor="classe" className={labelCls}>Classe{reqTag}</label>
-          <input id="classe" name="classe" type="text" required placeholder="ex : 7H, 8H, 9H…" className={inputCls} />
+          <label className={labelCls}>Classe{reqTag}</label>
+          <div className="mt-1 grid grid-cols-2 gap-2">
+            <select
+              name="classe_type"
+              required
+              className={inputCls}
+              defaultValue=""
+            >
+              <option value="" disabled>Filière</option>
+              {["CSC", "CFR", "EPL", "CPR"].map(c => (
+                <option key={c} value={c}>{c}</option>
+              ))}
+            </select>
+            <input
+              name="classe_num"
+              type="number"
+              required
+              min={1}
+              max={20}
+              placeholder="Numéro (1–20)"
+              className={inputCls}
+            />
+          </div>
         </div>
 
         {/* E-mail */}

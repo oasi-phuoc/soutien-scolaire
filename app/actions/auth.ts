@@ -27,7 +27,9 @@ export async function signUpAction(formData: FormData) {
   const password = String(formData.get("password") ?? "");
   const nom = String(formData.get("nom") ?? "").trim();
   const prenom = String(formData.get("prenom") ?? "").trim();
-  const classe = String(formData.get("classe") ?? "").trim();
+  const classeType = String(formData.get("classe_type") ?? "").trim();
+  const classeNum = String(formData.get("classe_num") ?? "").trim();
+  const classe = classeType && classeNum ? `${classeType} ${classeNum}` : "";
   const adresse = String(formData.get("adresse") ?? "").trim();
   const npa = String(formData.get("npa") ?? "").trim();
   const localite = String(formData.get("localite") ?? "").trim();

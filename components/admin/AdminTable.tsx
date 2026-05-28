@@ -304,8 +304,10 @@ function DetailModal({
 function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => void; onSaved: (updated: Partial<UserRow>) => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
+  const parsedClasse = user.classe?.split(" ") ?? [];
   const [form, setForm] = useState({
-    prenom: user.prenom ?? "", nom: user.nom ?? "", classe: user.classe ?? "",
+    prenom: user.prenom ?? "", nom: user.nom ?? "",
+    classeType: parsedClasse[0] ?? "", classeNum: parsedClasse[1] ?? "",
     adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "", telephone: user.telephone ?? "",
   });
 
@@ -323,13 +325,14 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
   function submit() {
     setErr(null);
     startTransition(async () => {
+      const classe = form.classeType && form.classeNum ? `${form.classeType} ${form.classeNum}` : undefined;
       const r = await updateUserProfileAction(user.id, {
-        prenom: form.prenom || undefined, nom: form.nom || undefined, classe: form.classe || undefined,
+        prenom: form.prenom || undefined, nom: form.nom || undefined, classe,
         adresse: form.adresse || undefined, npa: form.npa || undefined,
         localite: form.localite || undefined, telephone: form.telephone || undefined,
       });
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
-      onSaved(form);
+      onSaved({ ...form, classe: classe ?? null });
     });
   }
 
@@ -345,7 +348,25 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
         </div>
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">{field("prenom", "Prénom")}{field("nom", "Nom")}</div>
-          {field("classe", "Classe", { placeholder: "ex : 7H" })}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Classe</label>
+            <div className="grid grid-cols-2 gap-2">
+              <select
+                value={form.classeType}
+                onChange={e => setForm(f => ({ ...f, classeType: e.target.value }))}
+                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+              >
+                <option value="">Filière</option>
+                {["CSC", "CFR", "EPL", "CPR"].map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <input
+                type="number" min={1} max={20} placeholder="1–20"
+                value={form.classeNum}
+                onChange={e => setForm(f => ({ ...f, classeNum: e.target.value }))}
+                className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+              />
+            </div>
+          </div>
           {field("adresse", "Adresse")}
           <div className="grid grid-cols-2 gap-3">{field("npa", "NPA", { placeholder: "1234" })}{field("localite", "Localité")}</div>
           {field("telephone", "Téléphone", { placeholder: "+41 79 …" })}
