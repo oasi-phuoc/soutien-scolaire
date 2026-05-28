@@ -143,9 +143,7 @@ function TheoryBlock({ block }: { block: CommTheoryBlock }) {
   }
 }
 
-// ——— MCQ Exercise ———
-
-type MCQState = "idle" | "selected" | "validated";
+// ——— MCQ Exercise (no internal nav — parent handles it) ———
 
 function MCQExercise({
   question,
@@ -154,7 +152,9 @@ function MCQExercise({
   answer,
   exNum,
   total,
-  onResult,
+  selected,
+  setSelected,
+  validated,
 }: {
   question: string;
   instruction: string;
@@ -162,17 +162,10 @@ function MCQExercise({
   answer: string;
   exNum: number;
   total: number;
-  onResult: (correct: boolean) => void;
+  selected: string | null;
+  setSelected: (v: string | null) => void;
+  validated: boolean;
 }) {
-  const [selected, setSelected] = useState<string | null>(null);
-  const [state, setState] = useState<MCQState>("idle");
-
-  function handleValidate() {
-    if (!selected) return;
-    setState("validated");
-    onResult(selected === answer);
-  }
-
   const isCorrect = selected === answer;
 
   return (
@@ -187,7 +180,7 @@ function MCQExercise({
         {choices.map((c) => {
           let cls =
             "w-full rounded-[var(--radius-md)] border-2 px-4 py-3 text-left text-sm font-medium transition-colors";
-          if (state === "idle" || state === "selected") {
+          if (!validated) {
             if (selected === c) {
               cls += " text-white border-transparent";
             } else {
@@ -195,7 +188,6 @@ function MCQExercise({
                 " border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:border-[var(--color-border-emphasis)]";
             }
           } else {
-            // validated
             if (c === answer) {
               cls +=
                 " border-[var(--color-correct)] bg-[var(--color-correct-bg)] text-[var(--color-correct-text)]";
@@ -212,13 +204,12 @@ function MCQExercise({
               key={c}
               type="button"
               onClick={() => {
-                if (state === "validated") return;
+                if (validated) return;
                 setSelected(c);
-                setState("selected");
               }}
               className={cls}
               style={
-                (state === "idle" || state === "selected") && selected === c
+                !validated && selected === c
                   ? { background: ACCENT, borderColor: ACCENT }
                   : undefined
               }
@@ -229,7 +220,7 @@ function MCQExercise({
         })}
       </div>
 
-      {state === "validated" && (
+      {validated && (
         <div
           className={`mt-4 rounded-[var(--radius-md)] px-3 py-2 text-sm font-medium ${
             isCorrect
@@ -240,33 +231,6 @@ function MCQExercise({
           {isCorrect ? "✓ Bonne réponse !" : `✗ La bonne réponse est : ${answer}`}
         </div>
       )}
-
-      <div className="flex-1" />
-
-      <div className="fixed bottom-0 left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3">
-        <div className="mx-auto flex max-w-xl gap-3">
-          {state !== "validated" ? (
-            <button
-              type="button"
-              onClick={handleValidate}
-              disabled={!selected}
-              className="flex-1 rounded-[var(--radius-md)] py-3 text-sm font-bold text-white transition-opacity disabled:opacity-40"
-              style={{ background: ACCENT }}
-            >
-              Valider
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => onResult(selected === answer)}
-              className="flex-1 rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-              style={{ background: ACCENT }}
-            >
-              Suivant →
-            </button>
-          )}
-        </div>
-      </div>
     </div>
   );
 }
@@ -280,6 +244,8 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
   const [phase, setPhase] = useState<Phase>("theory");
   const [exIndex, setExIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
+  const [selected, setSelected] = useState<string | null>(null);
+  const [exerciseValidated, setExerciseValidated] = useState(false);
 
   if (!lesson) {
     return (
@@ -305,23 +271,12 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
         ? 10 + Math.round((exIndex / totalEx) * 80)
         : 100;
 
-  function handleExerciseResult(correct: boolean) {
-    const newResults = [...results, correct];
-    setResults(newResults);
-    if (exIndex + 1 >= totalEx) {
-      setPhase("score");
-    } else {
-      setExIndex(exIndex + 1);
-    }
-  }
-
   function handleFinish() {
     try {
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
       const prev: Record<string, boolean> = raw ? JSON.parse(raw) : {};
       prev[lesson.id] = true;
       localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
-      // Also embed in main progress blob so ProgressSyncProvider can sync to cloud
       const MAIN_KEY = "soutien-learning-progress-v1";
       const mainRaw = localStorage.getItem(MAIN_KEY);
       if (mainRaw) {
@@ -336,26 +291,60 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
     router.push("/francais?tab=communication");
   }
 
+  function goBack() {
+    if (phase === "theory") {
+      router.push("/communication");
+    } else if (phase === "exercises") {
+      setPhase("theory");
+      setSelected(null);
+      setExerciseValidated(false);
+    } else {
+      setPhase("exercises");
+    }
+  }
+
+  function handleReset() {
+    setSelected(null);
+    setExerciseValidated(false);
+  }
+
+  function handleValidate() {
+    if (!selected || exerciseValidated) return;
+    setExerciseValidated(true);
+  }
+
+  function goNext() {
+    if (phase === "theory") {
+      setPhase("exercises");
+      setSelected(null);
+      setExerciseValidated(false);
+    } else if (phase === "exercises") {
+      if (!exerciseValidated) return;
+      const correct = selected === lesson.exercises[exIndex]!.answer;
+      const newResults = [...results, correct];
+      setResults(newResults);
+      if (exIndex + 1 >= totalEx) {
+        setPhase("score");
+      } else {
+        setExIndex(exIndex + 1);
+        setSelected(null);
+        setExerciseValidated(false);
+      }
+    } else {
+      handleFinish();
+    }
+  }
+
+  const isLastStep = phase === "score";
+  const showExerciseControls = phase === "exercises";
+  const nextDisabled = phase === "exercises" && !exerciseValidated;
+
   const score = results.filter(Boolean).length;
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
       {/* Progress bar */}
       <div className="mb-4 flex items-center gap-3">
-        <button
-          type="button"
-          onClick={() => {
-            if (phase === "theory") router.push("/communication");
-            else if (phase === "exercises") setPhase("theory");
-            else setPhase("exercises");
-          }}
-          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
-          aria-label="Retour"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-            <path d="M15 18l-6-6 6-6" />
-          </svg>
-        </button>
         <div className="flex-1 overflow-hidden rounded-full bg-[var(--color-bg-secondary)] h-2">
           <div
             className="h-2 rounded-full transition-all duration-500"
@@ -375,18 +364,6 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
               <TheoryBlock key={i} block={block} />
             ))}
           </div>
-          <div className="fixed bottom-0 left-0 right-0 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3">
-            <div className="mx-auto max-w-xl">
-              <button
-                type="button"
-                onClick={() => setPhase("exercises")}
-                className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
-                style={{ background: ACCENT }}
-              >
-                Commencer les exercices →
-              </button>
-            </div>
-          </div>
         </div>
       )}
 
@@ -400,7 +377,9 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
           answer={lesson.exercises[exIndex]!.answer}
           exNum={exIndex + 1}
           total={totalEx}
-          onResult={handleExerciseResult}
+          selected={selected}
+          setSelected={setSelected}
+          validated={exerciseValidated}
         />
       )}
 
@@ -427,30 +406,81 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
               Vous avez {score} bonne{score > 1 ? "s" : ""} réponse{score > 1 ? "s" : ""} sur {totalEx}.
             </p>
           </div>
-          <div className="w-full space-y-3">
+          <button
+            type="button"
+            onClick={() => {
+              setPhase("exercises");
+              setExIndex(0);
+              setResults([]);
+              setSelected(null);
+              setExerciseValidated(false);
+            }}
+            className="w-full rounded-[var(--radius-md)] border-2 py-3 text-sm font-bold transition-colors hover:bg-[var(--color-bg-secondary)]"
+            style={{ borderColor: ACCENT, color: ACCENT }}
+          >
+            Recommencer les exercices
+          </button>
+        </div>
+      )}
+
+      {/* Fixed bottom nav — same pattern as math modules */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
+            {/* Back button */}
             <button
               type="button"
-              onClick={handleFinish}
-              className="w-full rounded-[var(--radius-md)] py-3 text-sm font-bold text-white"
+              onClick={goBack}
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity"
+            >
+              ← Retour
+            </button>
+
+            {/* Reset + Validate (exercises only) */}
+            {showExerciseControls ? (
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  disabled={exerciseValidated}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
+                  aria-label="Réinitialiser"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                    <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={handleValidate}
+                  disabled={!selected || exerciseValidated}
+                  className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
+                  style={{ background: ACCENT }}
+                  aria-label="Valider"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                    <path d="M20 6L9 17l-5-5" />
+                  </svg>
+                </button>
+              </div>
+            ) : (
+              <span />
+            )}
+
+            {/* Next / Finish button */}
+            <button
+              type="button"
+              onClick={goNext}
+              disabled={nextDisabled}
+              className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               style={{ background: ACCENT }}
             >
-              Terminer
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                setPhase("exercises");
-                setExIndex(0);
-                setResults([]);
-              }}
-              className="w-full rounded-[var(--radius-md)] border-2 py-3 text-sm font-bold transition-colors hover:bg-[var(--color-bg-secondary)]"
-              style={{ borderColor: ACCENT, color: ACCENT }}
-            >
-              Recommencer les exercices
+              {isLastStep ? "Terminer ✓" : "Suivant →"}
             </button>
           </div>
         </div>
-      )}
+        <div style={{ height: 68 }} />
+      </div>
     </div>
   );
 }
