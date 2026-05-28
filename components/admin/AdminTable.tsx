@@ -47,29 +47,39 @@ function lecturePct(data: StoredProgressV1 | null) {
   return { done, total: TOTAL_LECTURE, pct: Math.round((done / TOTAL_LECTURE) * 100) };
 }
 
-function currentActiveLessons(data: StoredProgressV1 | null): { label: string; name: string }[] {
-  if (!data) return [];
-  const results: { label: string; name: string }[] = [];
-  if (data.math) {
-    const entry = Object.entries(data.math).find(([, v]) => v.state === "in_progress");
-    if (entry) {
-      const mod = MATH_MODULES.find(m => m.id === entry[0]);
-      if (mod) results.push({ label: "Maths", name: `${mod.code} – ${mod.title}` });
-    }
-  }
-  if (data.frenchLevel && data.frenchLevel !== "PA") {
-    const lastSlug = data.frenchLessons ? Object.keys(data.frenchLessons).at(-1) : null;
-    const theme = lastSlug ? FRENCH_THEMES.find(t => t.slug === lastSlug) : null;
-    if (theme) results.push({ label: "Français", name: `${theme.code} – ${theme.title}` });
-  }
-  if (data.lectureProgress?.modules) {
-    const entry = Object.entries(data.lectureProgress.modules).find(([, v]) => v !== "completed");
-    if (entry) {
-      const mod = LECTURE_MODULES.find(m => m.id === entry[0]);
-      if (mod) results.push({ label: "Lecture", name: `${mod.code} – ${mod.title}` });
-    }
-  }
-  return results;
+const BRANCH_LABELS: Record<string, string> = { algebra: "Algèbre", geometry: "Géométrie", stats: "Stats" };
+const FRENCH_TAB_LABELS: Record<string, string> = {
+  general: "Général", vocabulaire: "Vocabulaire", grammaire: "Grammaire",
+  conjugaison: "Conjugaison", communication: "Communication",
+};
+
+function mathDetail(data: StoredProgressV1 | null) {
+  const branches = ["algebra", "geometry", "stats"] as const;
+  return branches.map(branch => {
+    const mods = MATH_MODULES.filter(m => m.branch === branch);
+    const done = mods.filter(m => data?.math?.[m.id]?.state === "completed").length;
+    const inProgress = mods.filter(m => data?.math?.[m.id]?.state === "in_progress");
+    return { branch, label: BRANCH_LABELS[branch], done, total: mods.length, inProgress };
+  });
+}
+
+function frenchDetail(data: StoredProgressV1 | null) {
+  const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
+  return ["general", "vocabulaire", "grammaire", "conjugaison", "communication"].map(tab => {
+    const themes = FRENCH_THEMES.filter(t => (t.tab ?? "general") === tab);
+    const done = themes.filter(t => completedSlugs.has(t.slug)).length;
+    return { tab, label: FRENCH_TAB_LABELS[tab], done, total: themes.length };
+  }).filter(t => t.total > 0);
+}
+
+function lectureDetail(data: StoredProgressV1 | null) {
+  return LECTURE_MODULES.map(m => ({
+    ...m,
+    state: data?.lectureProgress?.modules?.[m.id] ?? null,
+    subDone: data?.lectureProgress?.submodules
+      ? Object.entries(data.lectureProgress.submodules).filter(([k, v]) => k.startsWith(m.id) && v === "completed").length
+      : 0,
+  }));
 }
 
 function lastSeen(iso: string | null): string {
@@ -178,7 +188,9 @@ function DetailModal({
   const french = frenchPct(user.progress_data);
   const lecture = lecturePct(user.progress_data);
   const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
-  const activeLessons = currentActiveLessons(user.progress_data);
+  const mathBranches = mathDetail(user.progress_data);
+  const frenchTabs = frenchDetail(user.progress_data);
+  const lectureItems = lectureDetail(user.progress_data);
 
   const isSelf = user.id === currentUserId;
   const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
@@ -227,32 +239,66 @@ function DetailModal({
         </div>
 
         {/* Progress */}
-        <div className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-          {[
-            { label: "Maths", ...math, color: "bg-blue-500" },
-            { label: "Français", ...french, color: "bg-emerald-500" },
-            { label: "Lecture", ...lecture, color: "bg-amber-500" },
-          ].map(({ label, done, total, pct, color }) => (
-            <div key={label}>
-              <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                <span>{label}</span><span>{done}/{total}</span>
-              </div>
-              <Bar pct={pct} color={color} />
-            </div>
-          ))}
-        </div>
+        <div className="mb-4 space-y-4 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
 
-        {/* Current lessons */}
-        {activeLessons.length > 0 && (
-          <div className="mb-4 space-y-1.5 rounded-xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/50">
-            <p className="mb-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-400">En cours</p>
-            {activeLessons.map((l, i) => (
-              <p key={i} className="text-xs text-zinc-600 dark:text-zinc-300">
-                <span className="font-semibold text-zinc-500 dark:text-zinc-400">{l.label} : </span>{l.name}
-              </p>
-            ))}
+          {/* Maths */}
+          <div>
+            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+              <span>Maths</span><span>{math.done}/{math.total}</span>
+            </div>
+            <Bar pct={math.pct} color="bg-blue-500" />
+            <div className="mt-2 space-y-1">
+              {mathBranches.map(b => (
+                <div key={b.branch}>
+                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                    <span className="font-medium">{b.label}</span>
+                    <span>{b.done}/{b.total}</span>
+                  </div>
+                  {b.inProgress.map(m => (
+                    <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
+                      ↳ {m.code} – {m.title}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
           </div>
-        )}
+
+          {/* Français */}
+          <div>
+            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+              <span>Français</span><span>{french.done}/{french.total}</span>
+            </div>
+            <Bar pct={french.pct} color="bg-emerald-500" />
+            <div className="mt-2 space-y-0.5">
+              {frenchTabs.map(t => (
+                <div key={t.tab} className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="font-medium">{t.label}</span>
+                  <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Lecture */}
+          <div>
+            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+              <span>Lecture</span><span>{lecture.done}/{lecture.total}</span>
+            </div>
+            <Bar pct={lecture.pct} color="bg-amber-500" />
+            <div className="mt-2 space-y-1">
+              {lectureItems.map(m => (
+                <div key={m.id} className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className={m.state === "in_progress" ? "font-medium text-amber-600 dark:text-amber-400" : "font-medium"}>
+                    {m.state === "in_progress" ? "↳ " : ""}{m.code} – {m.title}
+                  </span>
+                  <span>{m.state === "completed" ? "✓" : m.state === "in_progress" ? "en cours" : "—"}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
 
         {/* Actions */}
         <div className="flex items-center gap-2">
