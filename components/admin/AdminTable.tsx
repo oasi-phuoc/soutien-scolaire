@@ -462,6 +462,7 @@ function DeleteConfirm({
 
 export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
+  const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
   const [selected, setSelected] = useState<UserRow | null>(null);
@@ -471,7 +472,7 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
 
-  const filtered = rows.filter(r => !filterClasse || r.classe === filterClasse);
+  const filtered = rows.filter(r => tab === "eleves" || !filterClasse || r.classe === filterClasse);
 
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
@@ -507,28 +508,50 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
   return (
     <>
       {/* Filters */}
-      <div className="mb-4 flex flex-wrap items-center gap-3">
-        <select
-          value={filterClasse}
-          onChange={e => setFilterClasse(e.target.value)}
-          className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-        >
-          <option value="">Toutes les classes</option>
-          {classes.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
+      <div className="mb-4 space-y-3">
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Élèves / Classes pill toggle */}
+          <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
+            <button
+              onClick={() => setTab("eleves")}
+              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+            >
+              Élèves
+            </button>
+            <button
+              onClick={() => { setTab("classes"); if (!filterClasse && classes[0]) setFilterClasse(classes[0]); }}
+              className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "classes" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}
+            >
+              Classes
+            </button>
+          </div>
 
-        <select
-          value={sortBy}
-          onChange={e => setSortBy(e.target.value as typeof sortBy)}
-          className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
-        >
-          <option value="name">Trier : Nom A→Z</option>
-          <option value="math">Trier : Maths (avancé)</option>
-          <option value="francais">Trier : Français (avancé)</option>
-          <option value="lecture">Trier : Lecture (avancé)</option>
-        </select>
+          {/* Sort */}
+          <select
+            value={sortBy}
+            onChange={e => setSortBy(e.target.value as typeof sortBy)}
+            className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+          >
+            <option value="name">Nom A→Z</option>
+            <option value="math">Maths (avancé)</option>
+            <option value="francais">Français (avancé)</option>
+            <option value="lecture">Lecture (avancé)</option>
+          </select>
 
-        <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+          <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+        </div>
+
+        {/* Class dropdown — visible only when Classes tab active */}
+        {tab === "classes" && (
+          <select
+            value={filterClasse}
+            onChange={e => setFilterClasse(e.target.value)}
+            className="w-56 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+          >
+            <option value="">Choisir une classe</option>
+            {classes.map(c => <option key={c} value={c}>{c}</option>)}
+          </select>
+        )}
       </div>
 
       {/* Table */}
