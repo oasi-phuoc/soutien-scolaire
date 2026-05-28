@@ -12,6 +12,20 @@ type SectionDef  = { id: FrenchSection; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
+function getCurrentLesson(tabThemes: FrenchTheme[], completedSlugs: Set<string>): FrenchTheme | null {
+  const sectionIds: FrenchSection[] = ["ALPHA", "A0", "A1", "A2", "B1", "B2"];
+  let prevAllDone = true;
+  for (const secId of sectionIds) {
+    const themes = tabThemes.filter(t => t.section === secId);
+    if (themes.length === 0) continue;
+    if (!prevAllDone) break;
+    const allDone = themes.every(t => completedSlugs.has(t.slug));
+    if (!allDone) return themes.find(t => !completedSlugs.has(t.slug)) ?? null;
+    prevAllDone = allDone;
+  }
+  return null;
+}
+
 const SECTIONS: SectionDef[] = [
   { id: "A0", code: "A0", title: "Niveau A0" },
   { id: "A1", code: "A1", title: "Niveau A1" },
@@ -316,44 +330,69 @@ export function FrancaisClient() {
             ),
           );
 
+          const currentLesson = hydrated ? getCurrentLesson(allTabThemes, completedSlugs) : null;
+
           let prevCount = 0; // cumulative count of themes in preceding sections
 
-          return SECTIONS.map((sec) => {
-            const themes = allTabThemes.filter((th) => th.section === sec.id);
-            if (themes.length === 0) return null;
+          return (
+            <>
+              {currentLesson && (
+                <Link
+                  href={lessonHref(currentLesson) + `?returnTab=${tab}`}
+                  className="flex items-center gap-3 rounded-[var(--radius-lg)] border border-[var(--color-accent-fr)]/40 bg-[color-mix(in_srgb,var(--color-accent-fr)_8%,transparent)] px-4 py-3 transition-colors hover:bg-[color-mix(in_srgb,var(--color-accent-fr)_12%,transparent)]"
+                >
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "var(--color-accent-fr)" }}>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden><polygon points="8,5 19,12 8,19" /></svg>
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">Leçon en cours</p>
+                    <p className="truncate text-sm font-medium text-[var(--color-text-primary)]">
+                      <span className="mr-1 text-xs font-semibold text-[var(--color-text-secondary)]">{currentLesson.code}</span>
+                      {currentLesson.title}
+                    </p>
+                  </div>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-accent-fr)]" aria-hidden>
+                    <path d="M9 18l6-6-6-6" />
+                  </svg>
+                </Link>
+              )}
+              {SECTIONS.map((sec) => {
+                const themes = allTabThemes.filter((th) => th.section === sec.id);
+                if (themes.length === 0) return null;
 
-            let state: SectionState;
-            if (!hydrated) {
-              state = "locked";
-            } else {
-              const prevThemes = allTabThemes.slice(0, prevCount);
-              // First section (no previous themes) is always open
-              const sectionAccessible =
-                prevThemes.length === 0 ||
-                prevThemes.every((th) => completedSlugs.has(th.slug));
+                let state: SectionState;
+                if (!hydrated) {
+                  state = "locked";
+                } else {
+                  const prevThemes = allTabThemes.slice(0, prevCount);
+                  const sectionAccessible =
+                    prevThemes.length === 0 ||
+                    prevThemes.every((th) => completedSlugs.has(th.slug));
 
-              if (!sectionAccessible) {
-                state = "locked";
-              } else {
-                const allDone = themes.every((th) => completedSlugs.has(th.slug));
-                state = allDone ? "completed" : "in_progress";
-              }
-            }
+                  if (!sectionAccessible) {
+                    state = "locked";
+                  } else {
+                    const allDone = themes.every((th) => completedSlugs.has(th.slug));
+                    state = allDone ? "completed" : "in_progress";
+                  }
+                }
 
-            prevCount += themes.length;
+                prevCount += themes.length;
 
-            return (
-              <SectionCard
-                key={sec.id}
-                sec={sec}
-                state={state}
-                themes={themes}
-                completedSlugs={hydrated ? completedSlugs : new Set()}
-                hydrated={hydrated}
-                returnTab={tab}
-              />
-            );
-          });
+                return (
+                  <SectionCard
+                    key={sec.id}
+                    sec={sec}
+                    state={state}
+                    themes={themes}
+                    completedSlugs={hydrated ? completedSlugs : new Set()}
+                    hydrated={hydrated}
+                    returnTab={tab}
+                  />
+                );
+              })}
+            </>
+          );
         })()}
       </section>
 

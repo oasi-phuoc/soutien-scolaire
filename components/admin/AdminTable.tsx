@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
+import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import {
   changeRoleAction,
@@ -28,8 +29,10 @@ export type UserRow = {
 };
 
 const TOTAL_MATH = MATH_MODULES.length;
-const TOTAL_FRENCH = FRENCH_THEMES.length;
 const TOTAL_LECTURE = LECTURE_MODULES.length;
+const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
+const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
+const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
 
 function mathPct(data: StoredProgressV1 | null) {
   const done = data?.math ? Object.values(data.math).filter(m => m.state === "completed").length : 0;
@@ -37,8 +40,13 @@ function mathPct(data: StoredProgressV1 | null) {
 }
 
 function frenchPct(data: StoredProgressV1 | null) {
-  const done = data?.frenchLessons ? Object.keys(data.frenchLessons).length : 0;
-  return { done, total: TOTAL_FRENCH, pct: Math.round((done / TOTAL_FRENCH) * 100) };
+  const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
+  const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
+  const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
+  const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
+  const done = vocDone + gramDone + commDone;
+  const total = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_SUBMODULES.length;
+  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
 }
 
 function lecturePct(data: StoredProgressV1 | null) {
@@ -48,10 +56,6 @@ function lecturePct(data: StoredProgressV1 | null) {
 }
 
 const BRANCH_LABELS: Record<string, string> = { algebra: "Algèbre", geometry: "Géométrie", stats: "Stats" };
-const FRENCH_TAB_LABELS: Record<string, string> = {
-  general: "Général", vocabulaire: "Vocabulaire", grammaire: "Grammaire",
-  conjugaison: "Conjugaison", communication: "Communication",
-};
 
 function mathDetail(data: StoredProgressV1 | null) {
   const branches = ["algebra", "geometry", "stats"] as const;
@@ -65,11 +69,14 @@ function mathDetail(data: StoredProgressV1 | null) {
 
 function frenchDetail(data: StoredProgressV1 | null) {
   const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
-  return ["general", "vocabulaire", "grammaire", "conjugaison", "communication"].map(tab => {
-    const themes = FRENCH_THEMES.filter(t => (t.tab ?? "general") === tab);
-    const done = themes.filter(t => completedSlugs.has(t.slug)).length;
-    return { tab, label: FRENCH_TAB_LABELS[tab], done, total: themes.length };
-  }).filter(t => t.total > 0);
+  const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
+  const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
+  const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
+  return [
+    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length },
+    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length },
+    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length },
+  ];
 }
 
 function lectureDetail(data: StoredProgressV1 | null) {
