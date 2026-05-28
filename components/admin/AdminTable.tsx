@@ -149,12 +149,14 @@ function IconSave() {
 
 function DetailModal({
   user,
+  currentUserId,
   onClose,
   onEdit,
   onDelete,
   onToggleAdmin,
 }: {
   user: UserRow;
+  currentUserId: string;
   onClose: () => void;
   onEdit: () => void;
   onDelete: () => void;
@@ -264,21 +266,23 @@ function DetailModal({
             <IconTrash />
           </button>
 
-          {/* Admin / Utilisateur toggle */}
-          <div className="ml-auto flex overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
-            <button
-              onClick={!user.is_admin ? onToggleAdmin : undefined}
-              className={`px-3 py-2 text-xs font-semibold transition-colors ${user.is_admin ? "bg-blue-600 text-white" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
-            >
-              Admin
-            </button>
-            <button
-              onClick={user.is_admin ? onToggleAdmin : undefined}
-              className={`px-3 py-2 text-xs font-semibold transition-colors ${!user.is_admin ? "bg-zinc-700 text-white dark:bg-zinc-600" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
-            >
-              Utilisateur
-            </button>
-          </div>
+          {/* Admin / Utilisateur toggle — hidden for own account */}
+          {user.id !== currentUserId && (
+            <div className="ml-auto flex overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+              <button
+                onClick={!user.is_admin ? onToggleAdmin : undefined}
+                className={`px-3 py-2 text-xs font-semibold transition-colors ${user.is_admin ? "bg-blue-600 text-white" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
+              >
+                Admin
+              </button>
+              <button
+                onClick={user.is_admin ? onToggleAdmin : undefined}
+                className={`px-3 py-2 text-xs font-semibold transition-colors ${!user.is_admin ? "bg-zinc-700 text-white dark:bg-zinc-600" : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"}`}
+              >
+                Utilisateur
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -460,7 +464,7 @@ function DeleteConfirm({
 
 // ── Main Component ──────────────────────────────────────────────────────────
 
-export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
+export function AdminTable({ initialRows, currentUserId }: { initialRows: UserRow[]; currentUserId: string }) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
   const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
@@ -638,6 +642,7 @@ export function AdminTable({ initialRows }: { initialRows: UserRow[] }) {
       {selected && !editing && !confirming && (
         <DetailModal
           user={selected}
+          currentUserId={currentUserId}
           onClose={() => setSelected(null)}
           onEdit={() => setEditing(selected)}
           onDelete={() => setConfirming(selected)}

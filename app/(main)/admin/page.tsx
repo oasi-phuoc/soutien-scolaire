@@ -40,7 +40,7 @@ export default async function AdminPage() {
         </span>
       </div>
 
-      <AdminTable initialRows={rows} />
+      <AdminTable initialRows={rows} currentUserId={user.id} />
     </main>
   );
 }
