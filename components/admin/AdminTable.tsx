@@ -107,7 +107,10 @@ function lectureDetail(data: StoredProgressV1 | null) {
   return LECTURE_MODULES.map(m => {
     const subDone = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length;
     const inProgress = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "in_progress");
-    return { ...m, state: data?.lectureProgress?.modules?.[m.id] ?? null, subDone, subTotal: m.letters.length, inProgress };
+    const currentLetter = subDone < m.letters.length
+      ? (m.letters.find(l => subs[`${m.id}-${l.letterLower}`] !== "completed") ?? null)
+      : null;
+    return { ...m, state: data?.lectureProgress?.modules?.[m.id] ?? null, subDone, subTotal: m.letters.length, inProgress, currentLetter };
   });
 }
 
@@ -334,11 +337,18 @@ function DetailModal({
                     <span className="font-medium">{m.code} – {m.title}</span>
                     <span>{m.subDone}/{m.subTotal}</span>
                   </div>
-                  {m.inProgress.map(l => (
-                    <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                      ↳ Lettre {l.letter}
-                    </p>
-                  ))}
+                  {m.inProgress.length > 0
+                    ? m.inProgress.map(l => (
+                        <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                          ↳ Lettre {l.letter}
+                        </p>
+                      ))
+                    : m.currentLetter && (
+                        <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                          ↳ Lettre {m.currentLetter.letter}
+                        </p>
+                      )
+                  }
                 </div>
               ))}
             </div>
