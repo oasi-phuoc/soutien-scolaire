@@ -3559,16 +3559,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           <span className="shrink-0">=</span>
                           {fields11.map((f, fi) => {
                             const wrong11 = evalPageValidated && parseInt(f.val) !== f.correct;
+                            const fieldCls = wrong11
+                              ? "w-0 flex-1 rounded border border-amber-500 bg-amber-50 px-1 py-1 text-center text-sm text-amber-600 outline-none dark:bg-amber-950/20"
+                              : inputCls;
                             return (
                               <React.Fragment key={f.key}>
-                                {wrong11 ? (
-                                  <div className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                                    <span className="line-through text-amber-500 text-xs">{f.val||"—"}</span>
-                                    <span className="text-xs font-bold text-[var(--color-text-primary)]">{f.correct}</span>
-                                  </div>
-                                ) : (
-                                  <input className={inputCls} placeholder={f.label} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={f.val} onChange={e=>f.set(e.target.value.replace(/[^0-9]/g,""))} />
-                                )}
+                                <input className={fieldCls} placeholder={f.label} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={f.val} onChange={e=>f.set(e.target.value.replace(/[^0-9]/g,""))} />
                                 {fi < 3 && <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>}
                               </React.Fragment>
                             );
@@ -3619,16 +3615,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const inpCls14 = "w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
                     const mkField14 = (val: string, correct: number, lbl: string, onChange: (v:string)=>void) => {
                       const wrong14 = evalPageValidated && parseInt(val) !== correct;
+                      const fieldCls14 = wrong14
+                        ? "w-full rounded border border-amber-500 bg-amber-50 px-1 py-1.5 text-center text-sm text-amber-600 outline-none dark:bg-amber-950/20"
+                        : `${inpCls14} border-[var(--color-border-default)]`;
                       return (
                         <div className="flex flex-1 flex-col items-center gap-0.5">
-                          {wrong14 ? (
-                            <div className={`w-full rounded border flex items-center justify-center gap-0.5 py-1.5 ${CLS_WRONG}`}>
-                              <span className="line-through text-amber-500 text-xs">{val||"—"}</span>
-                              <span className="text-xs font-bold text-[var(--color-text-primary)]">{correct}</span>
-                            </div>
-                          ) : (
-                            <input className={`${inpCls14} border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={val} onChange={e=>onChange(e.target.value.replace(/[^0-9]/g,""))} />
-                          )}
+                          <input className={fieldCls14} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={val} onChange={e=>onChange(e.target.value.replace(/[^0-9]/g,""))} />
                           <span className="text-xs text-[var(--color-text-secondary)]">{lbl}</span>
                         </div>
                       );
@@ -3672,10 +3664,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ";
                           if (evalPageValidated) {
                             if (shouldHighlight) cls += "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/20";
-                            else if (sel) cls += "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400";
+                            else if (sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                             else cls += "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60 dark:border-zinc-600";
                           } else {
-                            cls += sel ? "border-zinc-500 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-400" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                            cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                           }
                           return (
                             <button key={ti} type="button"

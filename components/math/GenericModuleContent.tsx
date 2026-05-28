@@ -222,6 +222,8 @@ function ComparisonExercise({
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
 }) {
+  const maxA = Math.max(...config.questions.map(q => q.a));
+  const numW = maxA >= 10000 ? "6ch" : maxA >= 1000 ? "5ch" : maxA >= 100 ? "3ch" : "2ch";
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
@@ -232,7 +234,7 @@ function ComparisonExercise({
             <div key={i} className="flex items-center gap-3">
               <div className="flex items-center shrink-0">
                 <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.a)}</span>
+                <span className="shrink-0 text-right font-mono text-sm text-[var(--color-text-primary)]" style={{ width: numW }}>{formatCompNum(q.a)}</span>
               </div>
               <div className="flex shrink-0 gap-1">
                 {(["<", "=", ">"] as const).map(sym => {
@@ -2794,7 +2796,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
                 <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                   {row.map((cell, ci) => (
                     <td key={ci} className="px-3 py-2 text-center text-sm text-[var(--color-text-primary)]">
-                      {cell}
+                      {renderBold(cell)}
                     </td>
                   ))}
                 </tr>
