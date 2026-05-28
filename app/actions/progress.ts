@@ -20,6 +20,21 @@ export async function loadProgressFromCloud(): Promise<StoredProgressV1 | null> 
   }
 }
 
+export async function touchActivityAction(): Promise<void> {
+  try {
+    const supabase = await createSupabaseActionClient();
+    if (!supabase) return;
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase
+      .from("profiles")
+      .update({ progress_updated_at: new Date().toISOString() })
+      .eq("id", user.id);
+  } catch {
+    /* silent */
+  }
+}
+
 export async function syncProgressToCloud(progressData: StoredProgressV1): Promise<void> {
   try {
     const supabase = await createSupabaseActionClient();

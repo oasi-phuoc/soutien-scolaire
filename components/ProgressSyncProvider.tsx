@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { loadProgress, saveProgress, MATH_PROGRESS_KEY } from "@/lib/progress/math-progress";
 import { mergeProgress } from "@/lib/progress/mergeProgress";
-import { loadProgressFromCloud, syncProgressToCloud } from "@/app/actions/progress";
+import { loadProgressFromCloud, syncProgressToCloud, touchActivityAction } from "@/app/actions/progress";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 
@@ -33,7 +33,9 @@ export function ProgressSyncProvider() {
 
     // On mount: check if user is logged in, then sync cloud ↔ local
     supabase.auth.getUser().then(async ({ data: { user } }) => {
-      if (!user || syncedRef.current) return;
+      if (!user) return;
+      touchActivityAction().catch(() => {}); // update last seen immediately
+      if (syncedRef.current) return;
       syncedRef.current = true;
 
       const cloudProgress = await loadProgressFromCloud();
