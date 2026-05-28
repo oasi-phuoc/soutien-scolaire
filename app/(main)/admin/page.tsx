@@ -45,13 +45,8 @@ export default async function AdminPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/connexion");
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("is_admin")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  if (!profile?.is_admin) redirect("/");
+  const { data: isAdmin } = await supabase.rpc("get_my_is_admin");
+  if (!isAdmin) redirect("/");
 
   const { data: users } = await supabase.rpc("get_users_for_admin") as {
     data: UserRow[] | null;
