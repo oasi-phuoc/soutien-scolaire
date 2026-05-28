@@ -107,7 +107,7 @@ function lectureDetail(data: StoredProgressV1 | null) {
   return LECTURE_MODULES.map(m => {
     const subDone = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length;
     const inProgress = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "in_progress");
-    const currentLetter = subDone < m.letters.length
+    const currentLetter = subDone > 0 && subDone < m.letters.length
       ? (m.letters.find(l => subs[`${m.id}-${l.letterLower}`] !== "completed") ?? null)
       : null;
     return { ...m, state: data?.lectureProgress?.modules?.[m.id] ?? null, subDone, subTotal: m.letters.length, inProgress, currentLetter };
