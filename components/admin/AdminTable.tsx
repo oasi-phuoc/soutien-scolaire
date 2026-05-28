@@ -29,7 +29,6 @@ export type UserRow = {
 };
 
 const TOTAL_MATH = MATH_MODULES.length;
-const TOTAL_LECTURE = LECTURE_MODULES.length;
 const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
 const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
 const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
