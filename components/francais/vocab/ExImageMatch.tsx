@@ -90,7 +90,7 @@ export function ExImageMatch({
               )}
               <div className="flex items-center justify-center">
                 {s.checked && !s.correct ? (
-                  <div className={`h-8 ${WRONG_BOX_CLS}`}>
+                  <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
                     <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                     <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
                   </div>
@@ -99,7 +99,7 @@ export function ExImageMatch({
                     value={s.answer}
                     disabled={s.checked && s.correct}
                     onChange={(e) => handleSelect(w.word, e.target.value)}
-                    className="h-8 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-2 text-sm text-[var(--color-accent-fr)] outline-none"
+                    className="h-8 w-20 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-2 text-sm text-[var(--color-accent-fr)] outline-none"
                   >
                     <option value="">—</option>
                     {words.map((_, n) => (
