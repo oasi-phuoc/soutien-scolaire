@@ -117,7 +117,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
       <p className="mb-4 text-xl font-bold text-[var(--color-text-primary)]">
         Vocabulaire
       </p>
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {theme.words.map((w) => (
           <div
             key={w.word}
