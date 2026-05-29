@@ -85,7 +85,7 @@ export function ExArticle({
           const s = states[w.word]!;
           return (
             <div key={w.word} className="flex items-center gap-2">
-              <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+              <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <div className={`h-8 w-16 ${WRONG_BOX_CLS}`}>
