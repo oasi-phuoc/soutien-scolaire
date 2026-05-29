@@ -379,7 +379,7 @@ export function VocabRunner({ theme }: Props) {
             <button
               type="button"
               onClick={goNext}
-              disabled={!validated}
+              disabled={inEvalPhase && !validated}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-40"
             >
               {isLast ? (
