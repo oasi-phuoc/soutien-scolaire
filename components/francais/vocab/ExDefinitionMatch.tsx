@@ -91,7 +91,9 @@ export function ExDefinitionMatch({
           return (
             <div key={w.word} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-              <p className="flex-1 text-sm text-[var(--color-text-primary)]">{w.definition ?? w.word}</p>
+              <p className="flex-1 text-sm text-[var(--color-text-primary)]">
+                {Array.isArray(w.definition) ? w.definition.join(" / ") : (w.definition ?? w.word)}
+              </p>
               <div className="shrink-0">
                 {s.checked && !s.correct ? (
                   <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>

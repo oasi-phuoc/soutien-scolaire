@@ -5,7 +5,7 @@ export type VocabWord = {
   relatedWords?: string[];
   image?: string;
   audio?: string;
-  definition?: string;
+  definition?: string | string[];
   gender?: "m" | "f";
   group?: string;
 };
