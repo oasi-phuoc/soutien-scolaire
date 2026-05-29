@@ -92,6 +92,7 @@ function SectionCard({
   completedSlugs,
   hydrated,
   returnTab,
+  vocabGrades,
 }: {
   sec: SectionDef;
   state: SectionState;
@@ -99,6 +100,7 @@ function SectionCard({
   completedSlugs: Set<string>;
   hydrated: boolean;
   returnTab?: FrenchTab;
+  vocabGrades?: Record<string, { score: number; passed: boolean }>;
 }) {
   const locked     = state === "locked";
   const inProgress = state === "in_progress";
@@ -113,6 +115,11 @@ function SectionCard({
       : null;
 
   function lessonState(th: FrenchTheme): LessonState {
+    // Vocabulary lessons are always accessible — no sequential locking
+    if (th.tab === "vocabulaire") {
+      if (!hydrated) return "locked";
+      return completedSlugs.has(th.slug) ? "completed" : "available";
+    }
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
     // Completed section: all lessons remain accessible for review
@@ -200,6 +207,7 @@ function SectionCard({
               const isLocked    = ls === "locked";
               const isAvailable = ls === "available";
 
+              const vocabGrade = th.tab === "vocabulaire" ? vocabGrades?.[th.slug] : undefined;
               const inner = (
                 <div className={`flex min-h-[52px] items-center gap-3 px-4 py-2.5 ${isLocked ? "opacity-40" : ""}`}>
                   <LessonDot state={ls} />
@@ -207,6 +215,15 @@ function SectionCard({
                     <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
                     <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
                   </div>
+                  {vocabGrade && (
+                    <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold tabular-nums ${
+                      vocabGrade.passed
+                        ? "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                        : "bg-amber-100 text-amber-600 dark:bg-amber-900/20"
+                    }`}>
+                      {vocabGrade.score.toFixed(1)}/6
+                    </span>
+                  )}
                   {isAvailable ? (
                     <span
                       className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white"
@@ -259,14 +276,23 @@ export function FrancaisClient() {
   );
   const [completedSlugs, setCompletedSlugs] = useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = useState(false);
+  const [vocabGrades, setVocabGrades] = useState<Record<string, { score: number; passed: boolean }>>({});
+
+  function refreshProgress() {
+    setCompletedSlugs(getCompletedFrenchLessons());
+    try {
+      const stored = JSON.parse(localStorage.getItem("soutien-vocab-eval-v1") ?? "{}");
+      setVocabGrades(stored);
+    } catch {}
+  }
 
   useEffect(() => {
-    setCompletedSlugs(getCompletedFrenchLessons());
+    refreshProgress();
     setHydrated(true);
 
-    function onComplete() { setCompletedSlugs(getCompletedFrenchLessons()); }
-    window.addEventListener("soutien-french-lesson-complete", onComplete);
-    return () => window.removeEventListener("soutien-french-lesson-complete", onComplete);
+    window.addEventListener("soutien-french-lesson-complete", refreshProgress);
+    return () => window.removeEventListener("soutien-french-lesson-complete", refreshProgress);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -328,6 +354,10 @@ export function FrancaisClient() {
                 let state: SectionState;
                 if (!hydrated) {
                   state = "locked";
+                } else if (tab === "vocabulaire") {
+                  // Vocabulary: no section locking — all sections always accessible
+                  const allDone = themes.every((th) => completedSlugs.has(th.slug));
+                  state = allDone ? "completed" : "in_progress";
                 } else {
                   const prevThemes = allTabThemes.slice(0, prevCount);
                   const sectionAccessible =
@@ -353,6 +383,7 @@ export function FrancaisClient() {
                     completedSlugs={hydrated ? completedSlugs : new Set()}
                     hydrated={hydrated}
                     returnTab={tab}
+                    vocabGrades={tab === "vocabulaire" ? vocabGrades : undefined}
                   />
                 );
               })}

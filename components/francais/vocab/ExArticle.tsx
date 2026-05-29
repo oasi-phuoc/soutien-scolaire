@@ -6,7 +6,7 @@ import {
   WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
 } from "./vocabUtils";
 
-type WordState = { answer: string; checked: boolean; correct: boolean };
+type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
 export function ExArticle({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
@@ -26,9 +26,23 @@ export function ExArticle({
     words.forEach((w) => {
       const userAns = states[w.word]?.answer ?? "";
       const expected = w.article ?? "";
-      const ok = expected !== "" && normalizeText(userAns) === normalizeText(expected);
+      const userNorm = normalizeText(userAns);
+      const expectedNorm = normalizeText(expected);
+      // Words starting with a vowel or h always take l' regardless of gender
+      const needsElision = /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
+      const ok =
+        expectedNorm !== "" &&
+        (userNorm === expectedNorm ||
+          (needsElision && userNorm === normalizeText("l'")));
+      // Show correct answer as l' when elision applies
+      const displayAnswer = needsElision && expected !== "l'" ? "l'" : expected;
       if (ok) correct++;
-      updated[w.word] = { answer: userAns, checked: true, correct: ok };
+      updated[w.word] = {
+        answer: userAns,
+        checked: true,
+        correct: ok,
+        displayAnswer,
+      };
     });
     setStates(updated);
     onValidated(correct, words.length);
@@ -52,7 +66,7 @@ export function ExArticle({
                 {s.checked && !s.correct ? (
                   <>
                     <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{w.article}</span>
+                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{s.displayAnswer ?? w.article}</span>
                   </>
                 ) : (
                   <input

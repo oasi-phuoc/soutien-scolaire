@@ -14,7 +14,7 @@ export const FAMILLE_THEME: VocabTheme = {
     { word: "grand-mère", article: "la",  gender: "f", definition: "la mère du père ou de la mère" },
     { word: "fils",       article: "le",  gender: "m", definition: "l'enfant masculin" },
     { word: "fille",      article: "la",  gender: "f", definition: "l'enfant féminin" },
-    { word: "oncle",      article: "le",  gender: "m", definition: "le frère du père ou de la mère" },
+    { word: "oncle",      article: "l'",  gender: "m", definition: "le frère du père ou de la mère" },
     { word: "tante",      article: "la",  gender: "f", definition: "la sœur du père ou de la mère" },
     { word: "cousin",     article: "le",  gender: "m", definition: "le fils de l'oncle ou de la tante" },
     { word: "cousine",    article: "la",  gender: "f", definition: "la fille de l'oncle ou de la tante" },
