@@ -7,6 +7,63 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
+/** Returns all accepted article forms for a word (definite + indefinite). */
+function getValidArticles(w: VocabWord): string[] {
+  if (!w.article) return [];
+  const a = normalizeText(w.article);
+  const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
+
+  if (a === "le" || a === "un") {
+    const valid = ["le", "un"];
+    if (vowelStart) valid.push("l'");
+    return valid;
+  }
+  if (a === "la" || a === "une") {
+    const valid = ["la", "une"];
+    if (vowelStart) valid.push("l'");
+    return valid;
+  }
+  if (a === "l'") {
+    return ["l'", "un", "une"];
+  }
+  if (a === "les" || a === "des") {
+    return ["les", "des"];
+  }
+  return [a];
+}
+
+/** Splits user input into article + word, handling elision (l'arbre). */
+function parseUserInput(input: string): { article: string; word: string } | null {
+  const trimmed = input.trim();
+  const elisionMatch = trimmed.match(/^(l['']\s*)(.+)$/i);
+  if (elisionMatch) {
+    return { article: "l'", word: elisionMatch[2]!.trim() };
+  }
+  const spaceIdx = trimmed.indexOf(" ");
+  if (spaceIdx === -1) return null;
+  return { article: trimmed.slice(0, spaceIdx).trim(), word: trimmed.slice(spaceIdx + 1).trim() };
+}
+
+function checkAnswer(userAns: string, w: VocabWord): boolean {
+  if (!userAns.trim()) return false;
+  if (!w.article) {
+    return normalizeText(userAns) === normalizeText(w.word);
+  }
+  const parsed = parseUserInput(userAns);
+  if (!parsed) return false;
+  if (normalizeText(parsed.word) !== normalizeText(w.word)) return false;
+  return getValidArticles(w).includes(normalizeText(parsed.article));
+}
+
+/** Returns the definite article form with proper elision for display. */
+function getCorrectDisplay(w: VocabWord): string {
+  if (!w.article) return w.word;
+  const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
+  const isSingularDef = w.article === "le" || w.article === "la";
+  const art = isSingularDef && vowelStart ? "l'" : w.article;
+  return art.endsWith("'") ? `${art}${w.word}` : `${art} ${w.word}`;
+}
+
 export function ExImageWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
@@ -23,8 +80,8 @@ export function ExImageWrite({
     let correct = 0;
     const updated: Record<string, WordState> = {};
     words.forEach((w) => {
-      const userAns = states[w.word]?.answer ?? "";
-      const ok = normalizeText(userAns) === normalizeText(w.word);
+      const userAns = (states[w.word]?.answer ?? "").trim();
+      const ok = checkAnswer(userAns, w);
       if (ok) correct++;
       updated[w.word] = { answer: userAns, checked: true, correct: ok };
     });
@@ -39,7 +96,7 @@ export function ExImageWrite({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Regardez l&apos;image et écrivez le mot correspondant.
+        Regardez l&apos;image et écrivez le mot correspondant avec l&apos;article.
       </p>
       <div className="space-y-3">
         {words.map((w, i) => {
@@ -59,7 +116,7 @@ export function ExImageWrite({
                   <p className="flex-1 text-sm">
                     <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                     {" "}
-                    <span className="font-medium text-[var(--color-text-primary)]">{w.word}</span>
+                    <span className="font-medium text-[var(--color-text-primary)]">{getCorrectDisplay(w)}</span>
                   </p>
                 ) : (
                   <input
