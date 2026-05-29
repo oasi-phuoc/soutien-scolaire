@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, Fragment } from "react";
+import { useEffect, useState, Fragment } from "react";
 import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { playWord, SoundIcon } from "./vocabUtils";
 
