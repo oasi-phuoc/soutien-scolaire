@@ -365,7 +365,7 @@ export function VocabRunner({ theme }: Props) {
                   type="button"
                   aria-label="Valider"
                   onClick={handleValidate}
-                  disabled={validated}
+                  disabled={inEvalPhase && validated}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
