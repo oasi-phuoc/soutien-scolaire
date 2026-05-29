@@ -55,7 +55,7 @@ export function ExArticle({
         expectedNorm !== "" &&
         (userNorm === expectedNorm ||
           (needsElision && userNorm === normalizeText("l'")));
-      const displayAnswer = needsElision && expected !== "l'" ? "l'" : expected;
+      const displayAnswer = needsElision ? "l'" : expected;
       if (ok) correct++;
       updated[w.word] = { answer: userAns, checked: true, correct: ok, displayAnswer };
     });
