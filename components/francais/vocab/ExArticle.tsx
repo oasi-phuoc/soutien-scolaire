@@ -103,8 +103,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    placeholder="article"
-                    className={`w-16 border-b bg-transparent text-sm outline-none placeholder:text-[var(--color-text-tertiary)] ${
+                    className={`w-16 border-b bg-transparent text-sm outline-none ${
                       s.checked && !s.correct
                         ? WRONG_INPUT_CLS
                         : "border-[var(--color-border-emphasis)]"
