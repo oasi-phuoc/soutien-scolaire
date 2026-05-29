@@ -279,11 +279,12 @@ export function VocabRunner({ theme }: Props) {
 
       {/* Training progress bar — hidden during eval */}
       {!inEvalPhase && (
-        <div className="mb-6 flex items-center gap-2">
-          <span className="w-24 shrink-0 text-right text-[9px] font-medium uppercase tracking-wide text-[var(--color-text-tertiary)]">
-            Entraînement
-          </span>
-          <div className="flex flex-1 gap-0.5">
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Entraînement</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {TRAINING_STEPS}</p>
+          </div>
+          <div className="flex gap-1">
             {STEPS.slice(0, TRAINING_STEPS).map((s, i) => (
               <div
                 key={s.key}
