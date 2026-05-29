@@ -11,7 +11,7 @@ type MatchState = { answer: string; checked: boolean; correct: boolean };
 export function ExDefinitionMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [{ words, shownDefs }] = useState(() => {
+  const [{ words, shownDefs, pickedDefs }] = useState(() => {
     const withDef = theme.words.filter((w) => !!w.definition);
     const shown = pickN(withDef, Math.min(4, withDef.length));
     const shownSet = new Set(shown.map((w) => w.word));
@@ -19,9 +19,17 @@ export function ExDefinitionMatch({
       theme.words.filter((w) => !shownSet.has(w.word)),
       Math.max(0, 6 - shown.length)
     );
+    const pickedDefs: Record<string, string> = {};
+    for (const w of shown) {
+      const def = w.definition;
+      pickedDefs[w.word] = Array.isArray(def)
+        ? def[Math.floor(Math.random() * def.length)]!
+        : (def ?? w.word);
+    }
     return {
       words: shuffle([...shown, ...distractors]),
       shownDefs: shuffle([...shown]),
+      pickedDefs,
     };
   });
 
@@ -91,9 +99,7 @@ export function ExDefinitionMatch({
           return (
             <div key={w.word} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-              <p className="flex-1 text-sm text-[var(--color-text-primary)]">
-                {Array.isArray(w.definition) ? w.definition.join(" / ") : (w.definition ?? w.word)}
-              </p>
+              <p className="flex-1 text-sm text-[var(--color-text-primary)]">{pickedDefs[w.word]}</p>
               <div className="shrink-0">
                 {s.checked && !s.correct ? (
                   <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
