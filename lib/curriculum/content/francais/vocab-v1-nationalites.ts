@@ -6,9 +6,9 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
   title: "Les nationalités",
   section: "V1",
   words: [
+    { word: "suisse",                              relatedWords: ["la Suisse"],        definition: "originaire de Suisse" },
     { word: "français",   feminine: "française",   relatedWords: ["la France"],       definition: "originaire de France" },
     { word: "belge",                               relatedWords: ["la Belgique"],      definition: "originaire de Belgique" },
-    { word: "suisse",                              relatedWords: ["la Suisse"],        definition: "originaire de Suisse" },
     { word: "canadien",   feminine: "canadienne",  relatedWords: ["le Canada"],        definition: "originaire du Canada" },
     { word: "marocain",   feminine: "marocaine",   relatedWords: ["le Maroc"],         definition: "originaire du Maroc" },
     { word: "algérien",   feminine: "algérienne",  relatedWords: ["l'Algérie"],        definition: "originaire d'Algérie" },

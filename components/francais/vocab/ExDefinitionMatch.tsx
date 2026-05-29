@@ -100,7 +100,7 @@ export function ExDefinitionMatch({
                 </p>
                 <div className="flex items-center">
                   {s.checked && !s.correct ? (
-                    <div className={WRONG_BOX_CLS}>
+                    <div className={`h-8 ${WRONG_BOX_CLS}`}>
                       <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                       <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
                     </div>
@@ -109,7 +109,7 @@ export function ExDefinitionMatch({
                       value={s.answer}
                       disabled={s.checked && s.correct}
                       onChange={(e) => handleSelect(w.word, e.target.value)}
-                      className="rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 py-1 text-sm outline-none"
+                      className="h-8 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
                     >
                       <option value="">—</option>
                       {words.map((_, n) => (
