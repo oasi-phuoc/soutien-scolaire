@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, pickN, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, pickN, normalizeText,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
@@ -56,10 +56,11 @@ export function ExImageWrite({
               )}
               <div className="flex flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <div className={`flex-1 ${WRONG_BOX_CLS}`}>
-                    <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{w.word}</span>
-                  </div>
+                  <p className="flex-1 text-sm">
+                    <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    {" "}
+                    <span className="font-medium text-[var(--color-text-primary)]">{w.word}</span>
+                  </p>
                 ) : (
                   <input
                     type="text"
