@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, Fragment } from "react";
-import type { VocabTheme, VocabTheoryBlock } from "@/lib/curriculum/vocabulary-data";
+import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { playWord, SoundIcon } from "./vocabUtils";
 
 function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
@@ -102,6 +102,82 @@ function parseCountryWord(relatedWord: string): { articlePart: string; namePart:
   return { articlePart: match[1].trimEnd(), namePart: match[2] };
 }
 
+function WordCard({ w }: { w: VocabWord }) {
+  const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
+
+  return (
+    <div className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      {w.image ? (
+        <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
+      ) : (
+        <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
+      )}
+      <div className="w-full">
+        {country ? (
+          <>
+            <p className="text-center text-sm leading-tight text-[var(--color-text-primary)]">
+              <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
+              <strong>{country.namePart}</strong>
+            </p>
+            <div className="mt-1.5 space-y-0.5 text-xs">
+              <div className="flex items-baseline">
+                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
+                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">un</span>
+                <span className="text-[var(--color-text-primary)]">{w.word}</span>
+              </div>
+              <div className="flex items-baseline">
+                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
+                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">une</span>
+                <span className="text-[var(--color-text-primary)]">{w.feminine ?? w.word}</span>
+              </div>
+            </div>
+          </>
+        ) : w.feminine ? (
+          <>
+            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+              {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
+              {w.word}
+            </p>
+            <div className="mt-1.5 space-y-0.5 text-xs">
+              <div className="flex items-baseline">
+                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
+                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{w.article ?? ""}</span>
+                <span className="text-[var(--color-text-primary)]">{w.word}</span>
+              </div>
+              <div className="flex items-baseline">
+                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
+                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">
+                  {w.article === "le" ? "la" : w.article === "un" ? "une" : w.article ?? ""}
+                </span>
+                <span className="text-[var(--color-text-primary)]">{w.feminine}</span>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+              {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
+              {w.word}
+            </p>
+            {w.relatedWords && w.relatedWords.length > 0 && (
+              <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                {w.relatedWords.map((rw) => <p key={rw}>{rw}</p>)}
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={() => playWord(w)}
+        className="flex h-6 w-6 items-center justify-center rounded-full text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10 active:scale-90"
+        aria-label={`Écouter ${w.word}`}
+      >
+        <SoundIcon />
+      </button>
+    </div>
+  );
+}
 
 interface Props {
   theme: VocabTheme;
@@ -112,110 +188,31 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(false); }, []);
 
+  // Group words by their `group` field
+  const sections: { group?: string; words: VocabWord[] }[] = [];
+  for (const w of theme.words) {
+    const last = sections[sections.length - 1];
+    if (!last || w.group !== last.group) {
+      sections.push({ group: w.group, words: [w] });
+    } else {
+      last.words.push(w);
+    }
+  }
+
   return (
     <div>
       <p className="mb-4 text-xl font-bold text-[var(--color-text-primary)]">
         Vocabulaire
       </p>
-      <div className="grid grid-cols-2 gap-3">
-        {theme.words.map((w) => (
-          <div
-            key={w.word}
-            className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3"
-          >
-            {w.image ? (
-              <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
-            ) : (
-              <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
+      <div className="space-y-4">
+        {sections.map((sec, si) => (
+          <div key={si}>
+            {sec.group && (
+              <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">{sec.group}</p>
             )}
-            <div className="w-full">
-              {(() => {
-                const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
-                if (country) {
-                  const femForm = w.feminine ?? w.word;
-                  return (
-                    <>
-                      {/* Line 1 — centered: article + country name bold */}
-                      <p className="text-center text-sm leading-tight text-[var(--color-text-primary)]">
-                        <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
-                        <strong>{country.namePart}</strong>
-                      </p>
-                      {/* Line 2 — left-aligned: masculine and feminine clearly labelled */}
-                      <div className="mt-1.5 space-y-0.5 text-xs">
-                        <div className="flex items-baseline">
-                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
-                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">un</span>
-                          <span className="text-[var(--color-text-primary)]">{w.word}</span>
-                        </div>
-                        <div className="flex items-baseline">
-                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
-                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">une</span>
-                          <span className="text-[var(--color-text-primary)]">{femForm}</span>
-                        </div>
-                      </div>
-                    </>
-                  );
-                }
-                // m./f. layout for words with a feminine form
-                if (w.feminine) {
-                  const femArticle = w.article === "le" ? "la" : w.article === "un" ? "une" : w.article ?? "";
-                  return (
-                    <>
-                      <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-                        {w.article && (
-                          <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>
-                        )}
-                        {w.word}
-                      </p>
-                      <div className="mt-1.5 space-y-0.5 text-xs">
-                        <div className="flex items-baseline">
-                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
-                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{w.article}</span>
-                          <span className="text-[var(--color-text-primary)]">{w.word}</span>
-                        </div>
-                        <div className="flex items-baseline">
-                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
-                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{femArticle}</span>
-                          <span className="text-[var(--color-text-primary)]">{w.feminine}</span>
-                        </div>
-                      </div>
-                    </>
-                  );
-                }
-
-                // Default card
-                const hasSecondary = (w.relatedWords && w.relatedWords.length > 0);
-                return (
-                  <>
-                    {/* Line 1 — centered: article + main word bold */}
-                    <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-                      {w.article && (
-                        <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
-                          {w.article}
-                        </span>
-                      )}
-                      {w.word}
-                    </p>
-                    {/* Line 2 — left-aligned: related words */}
-                    {hasSecondary && (
-                      <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        {w.relatedWords && w.relatedWords.map((rw) => (
-                          <p key={rw}>{rw}</p>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                );
-              })()}
+            <div className="grid grid-cols-2 gap-3">
+              {sec.words.map((w) => <WordCard key={w.word} w={w} />)}
             </div>
-            <button
-              type="button"
-              onClick={() => playWord(w)}
-              className="flex h-6 w-6 items-center justify-center rounded-full text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10 active:scale-90"
-              aria-label={`Écouter ${w.word}`}
-            >
-              <SoundIcon />
-            </button>
           </div>
         ))}
       </div>

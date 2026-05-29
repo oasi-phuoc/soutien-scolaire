@@ -25,6 +25,7 @@ export type VocabWord = {
   audio?: string;          // path under /public/vocab/audio/
   definition?: string;     // short definition in French
   gender?: "m" | "f";
+  group?: string;            // optional section subtitle rendered above the first card of each group
 };
 
 export type VocabSentence = {
