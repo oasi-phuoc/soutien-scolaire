@@ -22,10 +22,14 @@ export function EvalAnnounce({ theme, onCanValidateChange }: Props) {
       <h2 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">
         Prêt(e) pour l&apos;évaluation&nbsp;?
       </h2>
-      <p className="mb-6 max-w-xs text-sm text-[var(--color-text-secondary)]">
+      <p className="mb-3 max-w-xs text-sm text-[var(--color-text-secondary)]">
         Vous avez terminé la partie entraînement pour{" "}
-        <strong className="text-[var(--color-text-primary)]">{theme.title}</strong>
-        . L&apos;évaluation comporte 6 exercices notés.
+        <strong className="text-[var(--color-text-primary)]">{theme.title}</strong>.
+      </p>
+      <p className="mb-6 max-w-xs text-sm text-[var(--color-text-secondary)]">
+        L&apos;évaluation comporte 6 exercices notés et est chronométrée.{" "}
+        <strong className="text-[var(--color-text-primary)]">Vous avez 10 minutes</strong>{" "}
+        pour compléter l&apos;évaluation.
       </p>
       <div className="w-full max-w-xs space-y-2 text-left">
         {[

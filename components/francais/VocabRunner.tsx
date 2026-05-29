@@ -1,9 +1,11 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
+import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 import { VocabCards } from "./vocab/VocabCards";
 import { ExImageMatch } from "./vocab/ExImageMatch";
 import { ExArticle } from "./vocab/ExArticle";
@@ -44,7 +46,18 @@ const STEPS: StepDef[] = [
   { key: "results",              label: "Résultats",    isTheory: true },
 ];
 
-const EVAL_STEP_KEYS = ["eval-ex2","eval-ex4","eval-ex6","eval-ex7","eval-ex8","eval-ex9"];
+const EVAL_EXERCISE_KEYS = ["eval-ex2","eval-ex4","eval-ex6","eval-ex7","eval-ex8","eval-ex9"];
+const EVAL_DURATION = 10 * 60; // 10 minutes
+
+function getPassingGrade(): number {
+  if (typeof window === "undefined") return 4;
+  try {
+    const level = (localStorage.getItem("soutien-level") ?? "base") as LevelKey;
+    return LEVEL_PASSING_GRADES[level] ?? 4;
+  } catch {
+    return 4;
+  }
+}
 
 export function VocabRunner({ theme }: Props) {
   const router = useRouter();
@@ -54,27 +67,52 @@ export function VocabRunner({ theme }: Props) {
   const [validateCommand, setValidateCommand] = useState(0);
   const [canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number }>>([]);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
+  const [passingGrade] = useState(() => getPassingGrade());
 
   const step = STEPS[stepIdx]!;
-  const isFirst = stepIdx === 0;
   const isLast = stepIdx === STEPS.length - 1;
   const showExButtons = !step.isTheory;
 
+  // inEvalPhase: on or past eval-announce (step 10)
+  const inEvalPhase = stepIdx >= 10;
+  // isInEvalPhase: on one of the 6 timed eval exercises
+  const isInEvalPhase = stepIdx >= 11 && stepIdx <= 16;
 
   const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
   const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
-  const percentage = totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0;
-  const passed = percentage >= 60;
+  const grade = linearSwissGrade(totalCorrect, totalItems);
+  const passed = grade >= passingGrade;
+
+  // Timer countdown
+  useEffect(() => {
+    if (!isInEvalPhase || evalTimeLeft === null || evalTimeLeft <= 0) return;
+    const id = setInterval(() => setEvalTimeLeft((t) => (t ?? 1) - 1), 1000);
+    return () => clearInterval(id);
+  }, [isInEvalPhase, evalTimeLeft]);
+
+  // Auto-advance to results when timer expires
+  useEffect(() => {
+    if (evalTimeLeft !== 0 || !isInEvalPhase) return;
+    setStepIdx(STEPS.length - 1);
+    setValidated(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalTimeLeft]);
 
   function handleValidated(correct: number, total: number) {
-    if (EVAL_STEP_KEYS.includes(step.key)) {
+    if (EVAL_EXERCISE_KEYS.includes(step.key)) {
       setEvalScores((prev) => [...prev, { correct, total }]);
     }
     setValidated(true);
   }
 
   function goBack() {
-    if (isFirst) {
+    if (isInEvalPhase) {
+      setShowEvalCancelConfirm(true);
+      return;
+    }
+    if (stepIdx === 0) {
       router.push("/francais");
     } else {
       const prev = STEPS[stepIdx - 1]!;
@@ -87,12 +125,19 @@ export function VocabRunner({ theme }: Props) {
 
   function goNext() {
     if (isLast) {
+      try {
+        const stored = JSON.parse(localStorage.getItem("soutien-vocab-eval-v1") ?? "{}");
+        stored[theme.slug] = { score: grade, passed, date: new Date().toISOString() };
+        localStorage.setItem("soutien-vocab-eval-v1", JSON.stringify(stored));
+      } catch {}
       if (passed) {
         markFrenchLessonComplete(theme.slug);
+        window.dispatchEvent(new CustomEvent("soutien-french-lesson-complete"));
       }
       router.push("/francais");
     } else {
       const next = STEPS[stepIdx + 1]!;
+      if (stepIdx === 10) setEvalTimeLeft(EVAL_DURATION); // start timer on leaving eval-announce
       setStepIdx((s) => s + 1);
       setResetKey((k) => k + 1);
       setValidated(next.isTheory);
@@ -111,197 +156,56 @@ export function VocabRunner({ theme }: Props) {
     setValidateCommand(0);
   }
 
+  function cancelEval() {
+    setShowEvalCancelConfirm(false);
+    setEvalScores([]);
+    setEvalTimeLeft(null);
+    setResetKey((k) => k + 1);
+    setStepIdx(10);
+    setValidated(true);
+    setCanValidate(false);
+  }
+
   const componentKey = `${step.key}-${resetKey}`;
 
   function renderStep() {
     switch (step.key) {
       case "vocab-cards":
-        return (
-          <VocabCards
-            key={componentKey}
-            theme={theme}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <VocabCards key={componentKey} theme={theme} onCanValidateChange={setCanValidate} />;
       case "ex1-image-match":
-        return (
-          <ExImageMatch
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExImageMatch key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex2-article":
-        return (
-          <ExArticle
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExArticle key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex3-anagram":
-        return (
-          <ExAnagram
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExAnagram key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex4-missing-letters":
-        return (
-          <ExMissingLetters
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExMissingLetters key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex5-definition-match":
-        return (
-          <ExDefinitionMatch
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExDefinitionMatch key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex6-fill-sentences":
-        return (
-          <ExFillSentences
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExFillSentences key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex7-image-write":
-        return (
-          <ExImageWrite
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExImageWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex8-dictation":
-        return (
-          <ExDictation
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExDictation key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex9-sentence-write":
-        return (
-          <ExSentenceWrite
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <ExSentenceWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "eval-announce":
-        return (
-          <EvalAnnounce
-            key={componentKey}
-            theme={theme}
-            onCanValidateChange={setCanValidate}
-          />
-        );
+        return <EvalAnnounce key={componentKey} theme={theme} onCanValidateChange={setCanValidate} />;
       case "eval-ex2":
-        return (
-          <ExArticle
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExArticle key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex4":
-        return (
-          <ExMissingLetters
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExMissingLetters key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex6":
-        return (
-          <ExFillSentences
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExFillSentences key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex7":
-        return (
-          <ExImageWrite
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExImageWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex8":
-        return (
-          <ExDictation
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExDictation key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex9":
-        return (
-          <ExSentenceWrite
-            key={componentKey}
-            theme={theme}
-            validateCommand={validateCommand}
-            onValidated={handleValidated}
-            onCanValidateChange={setCanValidate}
-            isEval
-            evalNumber={step.evalNumber}
-          />
-        );
+        return <ExSentenceWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "results":
-        return (
-          <VocabResults
-            key={componentKey}
-            evalScores={evalScores}
-            passed={passed}
-            percentage={percentage}
-          />
-        );
+        return <VocabResults key={componentKey} evalScores={evalScores} grade={grade} passingGrade={passingGrade} />;
       default:
         return null;
     }
@@ -309,6 +213,27 @@ export function VocabRunner({ theme }: Props) {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-56">
+
+      {/* Cancel eval confirmation dialog */}
+      {showEvalCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="mx-4 w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
+            <div className="flex gap-3">
+              <button type="button" onClick={cancelEval}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
+                Annuler
+              </button>
+              <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Header */}
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">
@@ -330,10 +255,9 @@ export function VocabRunner({ theme }: Props) {
         </div>
       </header>
 
-      {/* Two-phase progress bars */}
-      <div className="mb-6 space-y-1.5">
-        {/* Training phase — steps 0-9 */}
-        <div className="flex items-center gap-2">
+      {/* Training progress bar — hidden during eval */}
+      {!inEvalPhase && (
+        <div className="mb-6 flex items-center gap-2">
           <span className="w-24 shrink-0 text-right text-[9px] font-medium uppercase tracking-wide text-[var(--color-text-tertiary)]">
             Entraînement
           </span>
@@ -352,30 +276,16 @@ export function VocabRunner({ theme }: Props) {
             ))}
           </div>
         </div>
-        {/* Evaluation phase — steps 10-17 */}
-        <div className="flex items-center gap-2">
-          <span className="w-24 shrink-0 text-right text-[9px] font-medium uppercase tracking-wide text-[var(--color-text-tertiary)]">
-            Évaluation
-          </span>
-          <div className="flex flex-1 gap-0.5">
-            {STEPS.slice(10).map((s, i) => {
-              const relIdx = stepIdx - 10;
-              return (
-                <div
-                  key={s.key}
-                  className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    stepIdx >= 10 && relIdx > i
-                      ? "bg-[var(--color-accent-fr)]"
-                      : stepIdx >= 10 && relIdx === i
-                        ? "bg-[var(--color-accent-fr)] opacity-60"
-                        : "bg-[var(--color-border-default)]"
-                  }`}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
+      )}
+
+      {/* Eval progress bar with timer — shown only during the 6 timed exercises */}
+      {isInEvalPhase && (
+        <EvalProgressBar
+          current={stepIdx - 11}
+          total={6}
+          timeLeft={evalTimeLeft}
+        />
+      )}
 
       {/* Step content */}
       <div className="min-h-[280px]">{renderStep()}</div>
@@ -384,37 +294,44 @@ export function VocabRunner({ theme }: Props) {
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            {/* Back */}
-            <button
-              type="button"
-              onClick={goBack}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-            >
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                <path d="M15 18l-6-6 6-6" />
-              </svg>
-              Retour
-            </button>
 
-            {/* Reset + Validate (exercise steps only) */}
+            {/* Back — hidden on results */}
+            {!isLast ? (
+              <button
+                type="button"
+                onClick={goBack}
+                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
+                Retour
+              </button>
+            ) : (
+              <span />
+            )}
+
+            {/* Reset + Validate (exercise steps only; no reset during eval) */}
             {showExButtons && (
               <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  aria-label="Recommencer"
-                  onClick={handleReset}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M1 4v6h6" />
-                    <path d="M3.51 15a9 9 0 1 0 .49-4" />
-                  </svg>
-                </button>
+                {!step.isEval && (
+                  <button
+                    type="button"
+                    aria-label="Recommencer"
+                    onClick={handleReset}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                      <path d="M1 4v6h6" />
+                      <path d="M3.51 15a9 9 0 1 0 .49-4" />
+                    </svg>
+                  </button>
+                )}
                 <button
                   type="button"
                   aria-label="Valider"
                   onClick={handleValidate}
-                  disabled={!canValidate || validated}
+                  disabled={validated}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>

@@ -2,8 +2,8 @@
 
 interface Props {
   evalScores: Array<{ correct: number; total: number }>;
-  passed: boolean;
-  percentage: number;
+  grade: number;
+  passingGrade: number;
 }
 
 const EVAL_LABELS = [
@@ -15,56 +15,55 @@ const EVAL_LABELS = [
   "Phrase libre",
 ];
 
-export function VocabResults({ evalScores, passed, percentage }: Props) {
+export function VocabResults({ evalScores, grade, passingGrade }: Props) {
+  const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
+  const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
+  const passed = grade >= passingGrade;
+
   return (
-    <div className="flex flex-col items-center py-4">
-      <div
-        className={`mb-3 flex h-20 w-20 items-center justify-center rounded-full text-4xl ${
-          passed
-            ? "bg-[var(--color-accent-fr)]/15"
-            : "bg-amber-100 dark:bg-amber-900/20"
-        }`}
-      >
-        {passed ? "🎉" : "📚"}
-      </div>
-      <p
-        className={`mb-1 text-3xl font-bold ${
-          passed ? "text-[var(--color-accent-fr)]" : "text-amber-600 dark:text-amber-400"
-        }`}
-      >
-        {percentage}%
-      </p>
-      <p className="mb-1 text-base font-bold text-[var(--color-text-primary)]">
-        {passed ? "Félicitations !" : "Continuez vos efforts !"}
-      </p>
-      <p className="mb-6 text-sm text-[var(--color-text-secondary)]">
-        {passed
-          ? "Vous avez réussi l'évaluation. Leçon complétée !"
-          : `Score insuffisant. Il faut au moins 60% pour valider. (${percentage}% obtenu)`}
-      </p>
-      {/* Score breakdown */}
-      <div className="w-full space-y-2">
-        {evalScores.map((s, i) => {
-          const pct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    <div className="space-y-4">
+      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
+
+      {/* Per-exercise breakdown */}
+      <ul className="space-y-2">
+        {evalScores.map((row, i) => {
+          const color =
+            row.correct === row.total
+              ? "text-green-600"
+              : row.correct > 0
+                ? "text-amber-600"
+                : "text-red-500";
           return (
-            <div key={i} className="flex items-center gap-3 text-sm">
-              <span className="w-40 text-[var(--color-text-secondary)]">
+            <li
+              key={i}
+              className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3"
+            >
+              <span className="text-sm text-[var(--color-text-primary)]">
                 {EVAL_LABELS[i] ?? `Exercice ${i + 1}`}
               </span>
-              <div className="flex-1 overflow-hidden rounded-full bg-[var(--color-bg-secondary)] h-2">
-                <div
-                  className={`h-full rounded-full ${
-                    pct >= 60 ? "bg-[var(--color-accent-fr)]" : "bg-amber-400"
-                  }`}
-                  style={{ width: `${pct}%` }}
-                />
-              </div>
-              <span className="w-20 text-right text-[var(--color-text-secondary)]">
-                {s.correct}/{s.total}
+              <span className={`text-sm font-bold ${color}`}>
+                {row.correct}/{row.total}
               </span>
-            </div>
+            </li>
           );
         })}
+      </ul>
+
+      {/* Final grade */}
+      <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${
+        passed
+          ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5"
+          : "border-red-400 bg-red-50 dark:bg-red-900/10"
+      }`}>
+        <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
+        <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>
+        <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {totalCorrect}/{totalItems} pts</p>
+        <p className={`mt-3 text-base font-bold ${passed ? "text-[var(--color-accent-fr)]" : "text-red-500"}`}>
+          {passed ? "✓ Réussi" : "✗ À améliorer"}
+        </p>
+        <p className="mt-1 text-xs text-[var(--color-text-secondary)]">
+          Seuil de réussite : {passingGrade.toFixed(1)}/6
+        </p>
       </div>
     </div>
   );
