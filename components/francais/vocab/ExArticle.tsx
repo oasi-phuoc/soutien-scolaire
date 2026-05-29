@@ -8,19 +8,39 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
+function buildWordList(theme: import("@/lib/curriculum/vocabulary-data").VocabTheme): VocabWord[] {
+  // Primary: words that already have an article
+  const withArticle = theme.words.filter((w) => w.article);
+  if (withArticle.length >= 4) return withArticle.slice(0, 10);
+
+  // Fallback: extract country names from relatedWords (e.g. "la France" → article "la", word "France")
+  const fromCountries: VocabWord[] = theme.words
+    .map((w) => {
+      const rw = w.relatedWords?.[0];
+      if (!rw) return null;
+      const m = rw.match(/^(le |la |l'|les )(.+)$/i);
+      if (!m) return null;
+      return { word: m[2]!, article: m[1]!.trimEnd() } as VocabWord;
+    })
+    .filter((w): w is VocabWord => w !== null);
+
+  return fromCountries.slice(0, 10);
+}
+
 export function ExArticle({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => theme.words.filter((w) => w.article).slice(0, 10));
+  const [words] = useState<VocabWord[]>(() => buildWordList(theme));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { onCanValidateChange(true); }, []);
+  useEffect(() => { onCanValidateChange(words.length > 0); }, []);
 
   useEffect(() => {
     if (validateCommand === 0) return;
+    if (words.length === 0) { onValidated(0, 0); return; }
     let correct = 0;
     const updated: Record<string, WordState> = {};
     words.forEach((w) => {
@@ -28,21 +48,16 @@ export function ExArticle({
       const expected = w.article ?? "";
       const userNorm = normalizeText(userAns);
       const expectedNorm = normalizeText(expected);
-      // Words starting with a vowel or h always take l' regardless of gender
-      const needsElision = /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
+      // Elision applies only to singular articles (le/la → l'), not to "les"
+      const isSingular = expected === "le" || expected === "la";
+      const needsElision = isSingular && /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
       const ok =
         expectedNorm !== "" &&
         (userNorm === expectedNorm ||
           (needsElision && userNorm === normalizeText("l'")));
-      // Show correct answer as l' when elision applies
       const displayAnswer = needsElision && expected !== "l'" ? "l'" : expected;
       if (ok) correct++;
-      updated[w.word] = {
-        answer: userAns,
-        checked: true,
-        correct: ok,
-        displayAnswer,
-      };
+      updated[w.word] = { answer: userAns, checked: true, correct: ok, displayAnswer };
     });
     setStates(updated);
     onValidated(correct, words.length);
@@ -50,6 +65,15 @@ export function ExArticle({
   }, [validateCommand]);
 
   const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 1}` : "Exercice 2";
+
+  if (words.length === 0) {
+    return (
+      <div>
+        <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
+        <p className="text-sm text-[var(--color-text-secondary)]">Aucun mot avec article pour ce thème.</p>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -62,7 +86,7 @@ export function ExArticle({
           const s = states[w.word]!;
           return (
             <div key={w.word} className="flex items-center gap-2">
-              <span className="shrink-0 font-bold text-[var(--color-accent-fr)] text-sm">{i + 1}.</span>
+              <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <>

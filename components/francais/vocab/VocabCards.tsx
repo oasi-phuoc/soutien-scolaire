@@ -103,6 +103,7 @@ function parseCountryWord(relatedWord: string): { articlePart: string; namePart:
 }
 
 
+interface Props {
   theme: VocabTheme;
   onCanValidateChange: (can: boolean) => void;
 }
