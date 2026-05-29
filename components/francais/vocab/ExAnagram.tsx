@@ -84,27 +84,12 @@ export function ExAnagram({
       </p>
       <div className="space-y-5">
         {items.map((item, idx) => {
-          const _builtWord = item.answer.map((t) => t.char).join("");
+          const builtWord = item.answer.map((t) => t.char).join("");
           return (
-            <div key={item.word.word} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-              {item.word.article && (
-                <p className="mb-1 text-xs text-[var(--color-text-secondary)]">{item.word.article} ___</p>
-              )}
-              {/* Answer area */}
-              <div className="mb-2 flex min-h-[2.5rem] flex-wrap gap-1 rounded border border-dashed border-[var(--color-border-default)] p-1.5">
-                {item.answer.map((tile) => (
-                  <button
-                    key={tile.id}
-                    type="button"
-                    onClick={() => !item.checked && removeTile(idx, tile)}
-                    className="flex h-8 min-w-[2rem] items-center justify-center rounded bg-[var(--color-accent-fr)]/15 px-1.5 text-sm font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/25 active:scale-95"
-                  >
-                    {tile.char}
-                  </button>
-                ))}
-              </div>
-              {/* Remaining tiles */}
-              <div className="flex flex-wrap gap-1">
+            <div key={item.word.word}>
+              {/* Number + scrambled tiles */}
+              <div className="flex flex-wrap items-center gap-1">
+                <span className="mr-1 w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
                 {item.remaining.map((tile) => (
                   <button
                     key={tile.id}
@@ -116,9 +101,26 @@ export function ExAnagram({
                   </button>
                 ))}
               </div>
+              {/* Built word line — click a letter to remove it */}
+              <div className="ml-6 mt-1 flex min-h-[2rem] flex-wrap items-center gap-px border-b border-[var(--color-border-emphasis)] pb-0.5">
+                {item.answer.length === 0 ? (
+                  <span className="text-xs text-[var(--color-text-tertiary)]">…</span>
+                ) : (
+                  item.answer.map((tile) => (
+                    <button
+                      key={tile.id}
+                      type="button"
+                      onClick={() => !item.checked && removeTile(idx, tile)}
+                      className="text-sm font-bold text-[var(--color-accent-fr)] transition-opacity hover:opacity-50"
+                    >
+                      {tile.char}
+                    </button>
+                  ))
+                )}
+              </div>
               {/* Correction */}
-              {item.checked && !item.correct && (
-                <p className="mt-1 text-sm font-medium text-amber-500 dark:text-amber-400">{item.word.word}</p>
+              {item.checked && !item.correct && builtWord.length > 0 && (
+                <p className="ml-6 mt-0.5 text-sm font-medium text-amber-500 dark:text-amber-400">{item.word.word}</p>
               )}
             </div>
           );

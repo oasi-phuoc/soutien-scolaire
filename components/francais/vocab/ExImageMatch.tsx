@@ -61,13 +61,16 @@ export function ExImageMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque image au mot en choisissant le numéro correspondant.
       </p>
-      {/* Word list — two columns, 6 words */}
+      {/* Word list — two columns, 6 words, both genders shown */}
       <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
           <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
             <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
             {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
-            {w.word}
+            <span>{w.word}</span>
+            {w.feminine && (
+              <span className="text-[var(--color-text-secondary)]"> / {w.feminine}</span>
+            )}
           </p>
         ))}
       </div>
@@ -99,7 +102,7 @@ export function ExImageMatch({
                     value={s.answer}
                     disabled={s.checked && s.correct}
                     onChange={(e) => handleSelect(w.word, e.target.value)}
-                    className="h-8 w-20 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-2 text-sm text-[var(--color-accent-fr)] outline-none"
+                    className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
                   >
                     <option value="">—</option>
                     {words.map((_, n) => (

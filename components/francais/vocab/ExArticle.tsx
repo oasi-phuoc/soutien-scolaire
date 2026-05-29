@@ -1,29 +1,41 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
+import type { VocabWord, VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
-function buildWordList(theme: import("@/lib/curriculum/vocabulary-data").VocabTheme): VocabWord[] {
-  // Primary: words that already have an article
-  const withArticle = theme.words.filter((w) => w.article);
-  if (withArticle.length >= 4) return withArticle.slice(0, 10);
+function buildWordList(theme: VocabTheme): VocabWord[] {
+  const result: VocabWord[] = [];
 
-  // Fallback: extract country names from relatedWords (e.g. "la France" → article "la", word "France")
-  const fromCountries: VocabWord[] = theme.words
-    .map((w) => {
-      const rw = w.relatedWords?.[0];
-      if (!rw) return null;
+  for (const w of theme.words) {
+    const rw = w.relatedWords?.[0];
+
+    // Country name from relatedWords (e.g. "la France" → article "la", word "France")
+    if (rw) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
-      if (!m) return null;
-      return { word: m[2]!, article: m[1]!.trimEnd() } as VocabWord;
-    })
-    .filter((w): w is VocabWord => w !== null);
+      if (m) result.push({ word: m[2]!, article: m[1]!.trimEnd() });
+    }
 
-  return fromCountries.slice(0, 10);
+    // Masculine form
+    if (w.article) {
+      result.push({ word: w.word, article: w.article });
+    } else if (rw) {
+      // Nationality theme: use indefinite article "un"
+      result.push({ word: w.word, article: "un" });
+    }
+
+    // Feminine form
+    if (w.feminine) {
+      result.push({ word: w.feminine, article: "une" });
+    }
+  }
+
+  // Deduplicate by word, shuffle, limit
+  const deduped = [...new Map(result.map((w) => [w.word, w])).values()];
+  return shuffle(deduped).slice(0, 10);
 }
 
 export function ExArticle({
@@ -47,7 +59,7 @@ export function ExArticle({
       const expected = w.article ?? "";
       const userNorm = normalizeText(userAns);
       const expectedNorm = normalizeText(expected);
-      // Elision applies only to singular articles (le/la → l'), not to "les"
+      // Elision applies only to singular definite articles (le/la → l')
       const isSingular = expected === "le" || expected === "la";
       const needsElision = isSingular && /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
       const ok =
@@ -78,7 +90,7 @@ export function ExArticle({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez l&apos;article correct (le, la, les ou l&apos;).
+        Écrivez l&apos;article correct (le, la, l&apos;, les, un, une).
       </p>
       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
         {words.map((w, i) => {
@@ -102,7 +114,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className="h-8 w-16 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
+                    className="h-8 w-16 border-b-2 border-[var(--color-accent-fr)]/60 bg-[var(--color-accent-fr)]/10 px-2 text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}

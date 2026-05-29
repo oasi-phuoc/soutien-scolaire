@@ -94,7 +94,7 @@ export function ExMissingLetters({
                   char === "_" ? (
                     // Blank position: select or correction box
                     s.checked && s.blankOk[pos] === false ? (
-                      <div key={pos} className={`h-8 w-9 justify-center ${WRONG_BOX_CLS}`}>
+                      <div key={pos} className={`h-8 w-7 justify-center ${WRONG_BOX_CLS}`}>
                         <span className="text-xs text-amber-600 line-through dark:text-amber-400">{s.blanks[pos] || "—"}</span>
                         <span className="text-xs font-bold text-[var(--color-text-primary)]">{w.word[pos]}</span>
                       </div>
@@ -104,7 +104,7 @@ export function ExMissingLetters({
                         value={s.blanks[pos] ?? ""}
                         disabled={s.checked}
                         onChange={(e) => setBlank(w.word, pos, e.target.value)}
-                        className="h-8 w-9 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm font-bold text-[var(--color-accent-fr)] outline-none"
+                        className="h-8 w-7 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm font-bold text-[var(--color-accent-fr)] outline-none"
                       >
                         <option value="">_</option>
                         {ALPHABET.map((l) => (
@@ -116,7 +116,7 @@ export function ExMissingLetters({
                     // Known letter tile
                     <span
                       key={pos}
-                      className="flex h-8 w-9 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
+                      className="flex h-8 w-7 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
                     >
                       {char}
                     </span>
