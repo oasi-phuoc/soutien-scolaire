@@ -126,15 +126,21 @@ function MfRows({ word, feminine, article }: { word: string; feminine?: string; 
   );
 }
 
-function WordCard({ w, cardLayout }: { w: VocabWord; cardLayout?: "mf" }) {
+function resolveImage(image: string | undefined, section: string): string | undefined {
+  if (!image) return undefined;
+  if (image.startsWith("/")) return image;
+  return `/vocab/images/${section}/${image}`;
+}
+
+function WordCard({ w, cardLayout, section }: { w: VocabWord; cardLayout?: "mf"; section: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
       <div className="relative">
-        {w.image ? (
-          <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
+        {resolveImage(w.image, section) ? (
+          <img src={resolveImage(w.image, section)} alt={w.word} className="h-28 w-full rounded object-cover" />
         ) : (
           <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
         )}
@@ -221,7 +227,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
               <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">{sec.group}</p>
             )}
             <div className="grid grid-cols-2 gap-3">
-              {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} />)}
+              {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} section={theme.section} />)}
             </div>
           </div>
         ))}
