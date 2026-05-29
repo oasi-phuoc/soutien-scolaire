@@ -261,7 +261,7 @@ export function VocabRunner({ theme }: Props) {
       {/* Header */}
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">
-          Français · Vocabulaire · {theme.section}
+          Français · Vocabulaire · {theme.code}
         </p>
         <div className="flex items-center gap-2">
           <Link

@@ -5,6 +5,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
   code: "V1.5",
   title: "La description physique",
   section: "V1",
+  cardLayout: "mf",
   words: [
     { word: "grand",    feminine: "grande",    group: "Physique", definition: "de grande taille" },
     { word: "petit",    feminine: "petite",    group: "Physique", definition: "de petite taille" },

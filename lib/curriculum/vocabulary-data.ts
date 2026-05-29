@@ -47,6 +47,8 @@ export type VocabTheme = {
   words: VocabWord[];
   sentences?: VocabSentence[];
   theory?: VocabTheoryBlock[];
+  /** "mf" = show word without article + always display m./f. rows even when feminine === word */
+  cardLayout?: "mf";
 };
 
 // ── Imports ───────────────────────────────────────────────────────────────────

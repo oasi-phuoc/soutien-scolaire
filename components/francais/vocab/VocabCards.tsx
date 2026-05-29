@@ -102,35 +102,66 @@ function parseCountryWord(relatedWord: string): { articlePart: string; namePart:
   return { articlePart: match[1].trimEnd(), namePart: match[2] };
 }
 
-function WordCard({ w }: { w: VocabWord }) {
+function femArticle(art?: string): string {
+  return art === "le" ? "la" : art === "un" ? "une" : art ?? "";
+}
+
+function MfRows({ word, feminine, article }: { word: string; feminine?: string; article?: string }) {
+  const art = article ?? "";
+  const artF = femArticle(article);
+  const hasArt = !!art;
+  return (
+    <div className="mt-1.5 space-y-0.5 text-xs">
+      <div className="flex items-baseline">
+        <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
+        {hasArt && <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{art}</span>}
+        <span className="text-[var(--color-text-primary)]">{word}</span>
+      </div>
+      <div className="flex items-baseline">
+        <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
+        {hasArt && <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{artF}</span>}
+        <span className="text-[var(--color-text-primary)]">{feminine ?? word}</span>
+      </div>
+    </div>
+  );
+}
+
+function WordCard({ w, cardLayout }: { w: VocabWord; cardLayout?: "mf" }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
 
   return (
-    <div className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-      {w.image ? (
-        <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
-      ) : (
-        <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
-      )}
+    <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      {/* Image with audio overlay */}
+      <div className="relative">
+        {w.image ? (
+          <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
+        ) : (
+          <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
+        )}
+        <button
+          type="button"
+          onClick={() => playWord(w)}
+          className="absolute top-1.5 right-1.5 flex h-7 w-7 items-center justify-center rounded-full bg-white/80 text-[var(--color-accent-fr)] shadow-sm backdrop-blur-sm transition-colors hover:bg-white active:scale-90"
+          aria-label={`Écouter ${w.word}`}
+        >
+          <SoundIcon />
+        </button>
+      </div>
+
+      {/* Word info */}
       <div className="w-full">
-        {country ? (
+        {cardLayout === "mf" ? (
+          <>
+            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">{w.word}</p>
+            <MfRows word={w.word} feminine={w.feminine} article={w.article} />
+          </>
+        ) : country ? (
           <>
             <p className="text-center text-sm leading-tight text-[var(--color-text-primary)]">
               <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
               <strong>{country.namePart}</strong>
             </p>
-            <div className="mt-1.5 space-y-0.5 text-xs">
-              <div className="flex items-baseline">
-                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
-                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">un</span>
-                <span className="text-[var(--color-text-primary)]">{w.word}</span>
-              </div>
-              <div className="flex items-baseline">
-                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
-                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">une</span>
-                <span className="text-[var(--color-text-primary)]">{w.feminine ?? w.word}</span>
-              </div>
-            </div>
+            <MfRows word={w.word} feminine={w.feminine ?? w.word} article="un" />
           </>
         ) : w.feminine ? (
           <>
@@ -138,20 +169,7 @@ function WordCard({ w }: { w: VocabWord }) {
               {w.article && <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>}
               {w.word}
             </p>
-            <div className="mt-1.5 space-y-0.5 text-xs">
-              <div className="flex items-baseline">
-                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
-                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{w.article ?? ""}</span>
-                <span className="text-[var(--color-text-primary)]">{w.word}</span>
-              </div>
-              <div className="flex items-baseline">
-                <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
-                <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">
-                  {w.article === "le" ? "la" : w.article === "un" ? "une" : w.article ?? ""}
-                </span>
-                <span className="text-[var(--color-text-primary)]">{w.feminine}</span>
-              </div>
-            </div>
+            <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : (
           <>
@@ -167,14 +185,6 @@ function WordCard({ w }: { w: VocabWord }) {
           </>
         )}
       </div>
-      <button
-        type="button"
-        onClick={() => playWord(w)}
-        className="flex h-6 w-6 items-center justify-center rounded-full text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10 active:scale-90"
-        aria-label={`Écouter ${w.word}`}
-      >
-        <SoundIcon />
-      </button>
     </div>
   );
 }
@@ -211,7 +221,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
               <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">{sec.group}</p>
             )}
             <div className="grid grid-cols-2 gap-3">
-              {sec.words.map((w) => <WordCard key={w.word} w={w} />)}
+              {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} />)}
             </div>
           </div>
         ))}

@@ -5,6 +5,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   code: "V1.2",
   title: "Les professions",
   section: "V1",
+  cardLayout: "mf",
   words: [
     { word: "étudiant",     article: "un",  gender: "m", feminine: "étudiante",      definition: "personne qui fait des études" },
     { word: "professeur",   article: "le",  gender: "m", feminine: "professeure",   definition: "personne qui enseigne" },
