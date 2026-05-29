@@ -30,6 +30,11 @@ export type VocabSentence = {
   answer: string;   // exact word that fills the blank
 };
 
+export type VocabTheoryBlock =
+  | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "section"; title?: string; items: string[] }
+  | { type: "note"; text: string };
+
 export type VocabTheme = {
   slug: string;
   code: string;
@@ -37,6 +42,7 @@ export type VocabTheme = {
   section: "A0" | "A1" | "A2" | "B1" | "B2";
   words: VocabWord[];
   sentences?: VocabSentence[];
+  theory?: VocabTheoryBlock[];
 };
 
 // ── Imports ───────────────────────────────────────────────────────────────────

@@ -83,6 +83,67 @@ function LessonDot({ state }: { state: LessonState }) {
   );
 }
 
+// ── Vocab flat list (no section grouping) ────────────────────────────────────
+
+function VocabFlatList({
+  themes,
+  completedSlugs,
+  hydrated,
+  vocabGrades,
+}: {
+  themes: FrenchTheme[];
+  completedSlugs: Set<string>;
+  hydrated: boolean;
+  vocabGrades: Record<string, { score: number; passed: boolean }>;
+}) {
+  return (
+    <div className="rounded-[var(--radius-lg)] border border-[var(--color-accent-fr)]/50 bg-[var(--color-bg-primary)]">
+      <ul className="divide-y divide-[var(--color-border-default)]">
+        {themes.map((th) => {
+          const ls: LessonState = !hydrated ? "locked" : completedSlugs.has(th.slug) ? "completed" : "available";
+          const vocabGrade = vocabGrades?.[th.slug];
+          const inner = (
+            <div className="flex min-h-[52px] items-center gap-3 px-4 py-2.5">
+              <LessonDot state={ls} />
+              <div className="min-w-0 flex-1">
+                <span className="text-xs font-semibold text-[var(--color-text-secondary)]">{th.code}</span>
+                <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">{th.title}</span>
+              </div>
+              {vocabGrade && (
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold tabular-nums ${
+                  vocabGrade.passed
+                    ? "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
+                    : "bg-amber-100 text-amber-600 dark:bg-amber-900/20"
+                }`}>
+                  {vocabGrade.score.toFixed(1)}/6
+                </span>
+              )}
+              {ls === "available" && (
+                <span
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white"
+                  style={{ background: "var(--color-accent-fr)" }}
+                  aria-hidden
+                >
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="8,5 19,12 8,19" />
+                  </svg>
+                </span>
+              )}
+            </div>
+          );
+          return (
+            <li key={th.id}>
+              <Link href={lessonHref(th)} className="block transition-colors hover:bg-[var(--color-bg-secondary)]">
+                {inner}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
 // ── Section card ──────────────────────────────────────────────────────────────
 
 function SectionCard({
@@ -332,63 +393,68 @@ export function FrancaisClient() {
       ) : null}
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
-        {(() => {
-          // All themes for this tab, ordered by section
-          const allTabThemes = SECTIONS.flatMap((sec) =>
-            FRENCH_THEMES.filter(
-              (th) =>
-                th.section === sec.id &&
-                (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
-            ),
-          );
+        {tab === "vocabulaire" ? (
+          <VocabFlatList
+            themes={SECTIONS.flatMap((sec) =>
+              FRENCH_THEMES.filter((th) => th.section === sec.id && th.tab === "vocabulaire")
+            )}
+            completedSlugs={hydrated ? completedSlugs : new Set()}
+            hydrated={hydrated}
+            vocabGrades={vocabGrades}
+          />
+        ) : (
+          (() => {
+            const allTabThemes = SECTIONS.flatMap((sec) =>
+              FRENCH_THEMES.filter(
+                (th) =>
+                  th.section === sec.id &&
+                  (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
+              ),
+            );
 
-          let prevCount = 0; // cumulative count of themes in preceding sections
+            let prevCount = 0;
 
-          return (
-            <>
-              {SECTIONS.map((sec) => {
-                const themes = allTabThemes.filter((th) => th.section === sec.id);
-                if (themes.length === 0) return null;
+            return (
+              <>
+                {SECTIONS.map((sec) => {
+                  const themes = allTabThemes.filter((th) => th.section === sec.id);
+                  if (themes.length === 0) return null;
 
-                let state: SectionState;
-                if (!hydrated) {
-                  state = "locked";
-                } else if (tab === "vocabulaire") {
-                  // Vocabulary: no section locking — all sections always accessible
-                  const allDone = themes.every((th) => completedSlugs.has(th.slug));
-                  state = allDone ? "completed" : "in_progress";
-                } else {
-                  const prevThemes = allTabThemes.slice(0, prevCount);
-                  const sectionAccessible =
-                    prevThemes.length === 0 ||
-                    prevThemes.every((th) => completedSlugs.has(th.slug));
-
-                  if (!sectionAccessible) {
+                  let state: SectionState;
+                  if (!hydrated) {
                     state = "locked";
                   } else {
-                    const allDone = themes.every((th) => completedSlugs.has(th.slug));
-                    state = allDone ? "completed" : "in_progress";
+                    const prevThemes = allTabThemes.slice(0, prevCount);
+                    const sectionAccessible =
+                      prevThemes.length === 0 ||
+                      prevThemes.every((th) => completedSlugs.has(th.slug));
+
+                    if (!sectionAccessible) {
+                      state = "locked";
+                    } else {
+                      const allDone = themes.every((th) => completedSlugs.has(th.slug));
+                      state = allDone ? "completed" : "in_progress";
+                    }
                   }
-                }
 
-                prevCount += themes.length;
+                  prevCount += themes.length;
 
-                return (
-                  <SectionCard
-                    key={sec.id}
-                    sec={sec}
-                    state={state}
-                    themes={themes}
-                    completedSlugs={hydrated ? completedSlugs : new Set()}
-                    hydrated={hydrated}
-                    returnTab={tab}
-                    vocabGrades={tab === "vocabulaire" ? vocabGrades : undefined}
-                  />
-                );
-              })}
-            </>
-          );
-        })()}
+                  return (
+                    <SectionCard
+                      key={sec.id}
+                      sec={sec}
+                      state={state}
+                      themes={themes}
+                      completedSlugs={hydrated ? completedSlugs : new Set()}
+                      hydrated={hydrated}
+                      returnTab={tab}
+                    />
+                  );
+                })}
+              </>
+            );
+          })()
+        )}
       </section>
 
     </main>
