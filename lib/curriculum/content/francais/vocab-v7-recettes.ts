@@ -23,7 +23,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
     { word: "mélange",     article: "le",  gender: "m", definition: "résultat de la combinaison de plusieurs ingrédients" },
   ],
   sentences: [
-    { sentence: "Il faut ajouter deux ___ dans la pâte à gâteau.",       answer: "œufs" },
+    { sentence: "Il faut ajouter un ___ dans la pâte à gâteau.",         answer: "œuf" },
     { sentence: "La ___ du gâteau dure 30 minutes à 180°C.",             answer: "cuisson" },
     { sentence: "Verse le ___ dans le bol pour faire la béchamel.",      answer: "lait" },
     { sentence: "L'___ principal de cette tarte est le citron.",         answer: "ingrédient" },

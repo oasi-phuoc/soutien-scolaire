@@ -24,7 +24,7 @@ export const V2_METEO_THEME: VocabTheme = {
   ],
   sentences: [
     { sentence: "Il fait beau, le ___ brille dans le ciel.",              answer: "soleil" },
-    { sentence: "Le ciel est couvert de ___ noirs, il va pleuvoir.",      answer: "nuages" },
+    { sentence: "Le ciel est couvert de ___ noir, il va pleuvoir.",       answer: "nuage" },
     { sentence: "En hiver, le ___ rend les routes très dangereuses.",     answer: "verglas" },
     { sentence: "Après la ___, on peut voir un arc-en-ciel.",             answer: "pluie" },
     { sentence: "L'___ éclaire le ciel pendant la tempête.",              answer: "éclair" },

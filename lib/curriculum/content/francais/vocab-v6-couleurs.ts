@@ -25,8 +25,8 @@ export const V6_COULEURS_THEME: VocabTheme = {
   sentences: [
     { sentence: "Le ciel est ___ et le soleil brille.",                  answer: "bleu" },
     { sentence: "Elle porte une robe ___ pour la Saint-Valentin.",       answer: "rouge" },
-    { sentence: "Les feuilles sont ___ au printemps.",                   answer: "vertes" },
-    { sentence: "Sa veste est ___, comme la nuit.",                      answer: "noire" },
-    { sentence: "Il a une montre ___ qui brille comme de l'or.",         answer: "dorée" },
+    { sentence: "Les feuilles de cet arbre sont de couleur ___.",        answer: "vert" },
+    { sentence: "Sa veste préférée est ___, comme la nuit.",             answer: "noir" },
+    { sentence: "Il a une montre ___ qui brille comme de l'or.",         answer: "doré" },
   ],
 };

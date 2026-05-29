@@ -26,7 +26,7 @@ export const V8_CORPS_THEME: VocabTheme = {
     { sentence: "J'ai mal au ___, je dois voir un médecin.",             answer: "dos" },
     { sentence: "Elle s'est blessée au ___ pendant la course.",          answer: "genou" },
     { sentence: "Le dentiste examine la ___ du patient.",                answer: "bouche" },
-    { sentence: "Il a cinq ___ à chaque main.",                          answer: "doigts" },
+    { sentence: "Chaque ___ de la main permet de saisir des objets.",     answer: "doigt" },
     { sentence: "L'___ permet d'entendre les sons.",                     answer: "oreille" },
   ],
 };

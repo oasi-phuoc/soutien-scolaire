@@ -23,7 +23,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
     { word: "portion",     article: "la",  gender: "f", definition: "quantité d'aliment pour une personne" },
   ],
   sentences: [
-    { sentence: "Il faut 200 ___ de farine pour cette recette.",         answer: "grammes" },
+    { sentence: "Il faut 200 ___ de farine pour cette recette.",         answer: "gramme" },
     { sentence: "Ajoute une ___ de sel à la pâte.",                      answer: "pincée" },
     { sentence: "Il boit un ___ de café au lait chaque matin.",          answer: "bol" },
     { sentence: "Achète une ___ d'eau minérale au supermarché.",         answer: "bouteille" },

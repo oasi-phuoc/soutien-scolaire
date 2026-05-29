@@ -27,6 +27,6 @@ export const V8_PHARMACIE_THEME: VocabTheme = {
     { sentence: "Il faut mettre un ___ sur la coupure.",                 answer: "pansement" },
     { sentence: "Elle prend sa ___ à la pharmacie avec l'ordonnance.",  answer: "boîte" },
     { sentence: "Le ___ indique que tu as 38°C de fièvre.",              answer: "thermomètre" },
-    { sentence: "Le ___ prépare les médicaments sur ordonnance.",        answer: "pharmacien" },
+    { sentence: "Elle va à la ___ pour acheter ses médicaments.",         answer: "pharmacie" },
   ],
 };

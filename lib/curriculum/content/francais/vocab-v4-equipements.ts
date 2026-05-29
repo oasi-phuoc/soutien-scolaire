@@ -27,6 +27,6 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
     { sentence: "Le ___ est sur le tapis devant le canapé.",             answer: "ordinateur" },
     { sentence: "Il passe l'___ pour nettoyer le salon.",                answer: "aspirateur" },
     { sentence: "Le ___ garde les aliments frais.",                      answer: "frigo" },
-    { sentence: "Elle ferme les ___ pour ne pas voir la lumière.",       answer: "rideaux" },
+    { sentence: "Elle ferme le ___ pour ne pas voir la lumière.",        answer: "rideau" },
   ],
 };

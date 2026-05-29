@@ -26,7 +26,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
     { sentence: "Je mange une ___ par jour pour rester en bonne santé.", answer: "pomme" },
     { sentence: "La ___ est un fruit tropical que j'adore en smoothie.", answer: "mangue" },
     { sentence: "En été, nous mangeons de la ___ pour nous rafraîchir.", answer: "pastèque" },
-    { sentence: "Les enfants adorent les ___ rouges avec de la crème.", answer: "fraises" },
+    { sentence: "Les enfants adorent la ___ rouge avec de la crème.",   answer: "fraise" },
     { sentence: "Il presse un ___ pour faire du jus frais.",             answer: "citron" },
   ],
 };

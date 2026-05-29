@@ -23,8 +23,8 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
     { word: "festival",   article: "le",  gender: "m", definition: "événement culturel regroupant plusieurs spectacles" },
   ],
   sentences: [
-    { sentence: "Ils ont acheté des ___ pour le concert de samedi.",     answer: "billets" },
-    { sentence: "La ___ est montée sur la scène pour chanter.",          answer: "chanteuse" },
+    { sentence: "Il a acheté un ___ pour le concert de samedi.",         answer: "billet" },
+    { sentence: "Le ___ est monté sur la scène pour chanter.",           answer: "chanteur" },
     { sentence: "Le ___ du Louvre attire des millions de visiteurs.",    answer: "musée" },
     { sentence: "L'___ joue le rôle principal dans ce film.",            answer: "acteur" },
     { sentence: "Le ___ de musique dure tout le week-end.",              answer: "festival" },

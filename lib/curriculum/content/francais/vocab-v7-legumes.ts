@@ -26,7 +26,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
     { sentence: "Je coupe une ___ rouge pour mettre dans ma salade.",    answer: "tomate" },
     { sentence: "La ___ de terre est un légume de base en cuisine.",     answer: "pomme de terre" },
     { sentence: "L'___ donne beaucoup de goût aux sauces.",              answer: "ail" },
-    { sentence: "Il fait sauter des ___ avec du beurre.",                answer: "champignons" },
+    { sentence: "Il fait sauter du ___ avec du beurre.",                 answer: "champignon" },
     { sentence: "Elle mange du ___ cuit à la vapeur.",                   answer: "brocoli" },
   ],
 };
