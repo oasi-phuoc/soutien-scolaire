@@ -74,7 +74,7 @@ export function ExAnagram({
     );
   }
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 3}` : "Exercice 3";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 4}` : "Exercice 4";
 
   return (
     <div>
@@ -84,7 +84,7 @@ export function ExAnagram({
       </p>
       <div className="space-y-5">
         {items.map((item, idx) => {
-          const builtWord = item.answer.map((t) => t.char).join("");
+          const _builtWord = item.answer.map((t) => t.char).join("");
           return (
             <div key={item.word.word} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
               {item.word.article && (

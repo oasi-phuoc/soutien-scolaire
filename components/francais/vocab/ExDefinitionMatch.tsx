@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";

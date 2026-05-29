@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
@@ -100,7 +99,7 @@ export function ExImageMatch({
                     value={s.answer}
                     disabled={s.checked && s.correct}
                     onChange={(e) => handleSelect(w.word, e.target.value)}
-                    className="h-8 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
+                    className="h-8 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-2 text-sm text-[var(--color-accent-fr)] outline-none"
                   >
                     <option value="">—</option>
                     {words.map((_, n) => (
