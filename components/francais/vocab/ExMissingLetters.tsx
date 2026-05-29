@@ -94,7 +94,7 @@ export function ExMissingLetters({
                         value={s.blanks[pos] ?? ""}
                         disabled={s.checked && s.correct}
                         onChange={(e) => setBlank(w.word, pos, e.target.value)}
-                        className="h-8 w-12 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm font-bold text-[var(--color-accent-fr)] outline-none"
+                        className="h-8 w-9 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm font-bold text-[var(--color-accent-fr)] outline-none"
                       >
                         <option value="">_</option>
                         {ALPHABET.map((l) => (
@@ -104,7 +104,7 @@ export function ExMissingLetters({
                     ) : (
                       <span
                         key={pos}
-                        className="flex h-8 min-w-[1.75rem] items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-1 text-sm font-medium text-[var(--color-text-primary)]"
+                        className="flex h-8 w-9 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
                       >
                         {char}
                       </span>
