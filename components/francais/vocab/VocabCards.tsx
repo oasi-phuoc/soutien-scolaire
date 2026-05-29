@@ -96,7 +96,13 @@ function TheoryBlock({ block }: { block: VocabTheoryBlock }) {
   return null;
 }
 
-interface Props {
+function parseCountryWord(relatedWord: string): { articlePart: string; namePart: string } | null {
+  const match = relatedWord.match(/^(le |la |l'|les )(.+)$/i);
+  if (!match) return null;
+  return { articlePart: match[1].trimEnd(), namePart: match[2] };
+}
+
+
   theme: VocabTheme;
   onCanValidateChange: (can: boolean) => void;
 }
@@ -124,21 +130,48 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
             ) : (
               <div className="h-14 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
             )}
-            <div className="w-full text-center">
-              <p className="text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-                {w.article && (
-                  <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
-                    {w.article}
-                  </span>
-                )}
-                {w.word}
-                {w.feminine && (
-                  <span className="font-normal text-[var(--color-text-secondary)]"> / {w.feminine}</span>
-                )}
-              </p>
-              {w.relatedWords && w.relatedWords.map((rw) => (
-                <p key={rw} className="mt-0.5 text-[10px] text-[var(--color-text-secondary)]">{rw}</p>
-              ))}
+            <div className="w-full">
+              {(() => {
+                const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
+                if (country) {
+                  // Nationality-style card: country bold at top, masc/fem below right-aligned
+                  const femForm = w.feminine ?? w.word;
+                  const sameForms = femForm === w.word;
+                  return (
+                    <>
+                      <p className="text-sm leading-tight text-[var(--color-text-primary)]">
+                        <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
+                        <strong>{country.namePart}</strong>
+                      </p>
+                      <p className="mt-0.5 text-right text-xs text-[var(--color-text-secondary)]">
+                        un {w.word}
+                      </p>
+                      <p className="text-right text-xs text-[var(--color-text-secondary)]">
+                        {sameForms ? `une ${w.word}` : `une ${femForm}`}
+                      </p>
+                    </>
+                  );
+                }
+                // Default card
+                return (
+                  <>
+                    <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+                      {w.article && (
+                        <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
+                          {w.article}
+                        </span>
+                      )}
+                      {w.word}
+                      {w.feminine && (
+                        <span className="font-normal text-[var(--color-text-secondary)]"> / {w.feminine}</span>
+                      )}
+                    </p>
+                    {w.relatedWords && w.relatedWords.map((rw) => (
+                      <p key={rw} className="mt-0.5 text-center text-[10px] text-[var(--color-text-secondary)]">{rw}</p>
+                    ))}
+                  </>
+                );
+              })()}
             </div>
             <button
               type="button"
