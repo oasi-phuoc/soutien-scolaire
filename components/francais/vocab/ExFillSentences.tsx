@@ -4,6 +4,8 @@ import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
+const WORD_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+
 type SentState = { answer: string; checked: boolean; correct: boolean };
 
 export function ExFillSentences({
@@ -64,17 +66,18 @@ export function ExFillSentences({
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Complétez chaque phrase avec le mot correct.
       </p>
-      {/* Word bank — uniform-width pills, no outer frame */}
-      <div className="mb-4 flex flex-wrap gap-2">
-        {bankWords.map((word) => (
-          <span
-            key={word}
-            className="inline-flex w-24 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-1 text-sm text-[var(--color-text-primary)] shadow-sm"
-          >
+      {/* Word bank — plain lettered list, no pill borders */}
+      <div className="grid grid-cols-3 gap-x-4 gap-y-1">
+        {bankWords.map((word, i) => (
+          <p key={word} className="text-sm text-[var(--color-text-primary)]">
+            <span className="mr-1.5 font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
             {word}
-          </span>
+          </p>
         ))}
       </div>
+      {/* Separator + spacing */}
+      <hr className="mt-3 border-[var(--color-border-default)]" />
+      <div className="mb-4" />
       {/* Sentences */}
       <div className="space-y-4">
         {sentences.map((sent, i) => {
@@ -100,7 +103,7 @@ export function ExFillSentences({
                       )
                     )
                   }
-                  className="mx-1 inline-block h-8 w-28 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-sm text-[var(--color-accent-fr)] outline-none"
+                  className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
                 >
                   <option value="">—</option>
                   {bankWords.map((word) => (

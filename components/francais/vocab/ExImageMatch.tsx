@@ -4,14 +4,16 @@ import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
+const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
+
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
 export function ExImageMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
   const [{ words, shownCards }] = useState(() => {
-    const picked = pickN(theme.words, 6);           // 6 words → word list numbered 1-6
-    const subset = shuffle([...picked]).slice(0, 4); // 4 of those 6 → image cards
+    const picked = pickN(theme.words, 6);
+    const subset = shuffle([...picked]).slice(0, 4);
     return { words: picked, shownCards: subset };
   });
 
@@ -28,7 +30,7 @@ export function ExImageMatch({
     const updated: Record<string, MatchState> = {};
     shownCards.forEach((w) => {
       const expectedIdx = words.findIndex((p) => p.word === w.word);
-      const expected = String(expectedIdx + 1);
+      const expected = WORD_LETTERS[expectedIdx] ?? "";
       const userAns = states[w.word]?.answer.trim() ?? "";
       const ok = normalizeText(userAns) === expected;
       if (ok) correct++;
@@ -43,7 +45,6 @@ export function ExImageMatch({
     setStates((prev) => {
       const oldValue = prev[cardWord]?.answer ?? "";
       const next = { ...prev };
-      // If another card already has this number, swap them
       const clash = Object.entries(prev).find(([w, s]) => w !== cardWord && s.answer === newValue && newValue !== "");
       if (clash) {
         next[clash[0]] = { ...prev[clash[0]]!, answer: oldValue, checked: false, correct: false };
@@ -59,13 +60,13 @@ export function ExImageMatch({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Associez chaque image au mot en choisissant le numéro correspondant.
+        Associez chaque image au mot en choisissant la lettre correspondante.
       </p>
-      {/* Word list — two columns, 6 words, both genders shown */}
+      {/* Word list — two columns, 6 words, lettered a–f */}
       <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
           <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
-            <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+            <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
             {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
             <span>{w.word}</span>
             {w.feminine && (
@@ -74,9 +75,9 @@ export function ExImageMatch({
           </p>
         ))}
       </div>
-      {/* Image cards — 4 cards in two columns */}
+      {/* Image cards — 4 cards, numbered 1-4 with letter select */}
       <div className="grid grid-cols-2 gap-3">
-        {shownCards.map((w) => {
+        {shownCards.map((w, cardIdx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
@@ -91,11 +92,12 @@ export function ExImageMatch({
                   {w.article} {w.word}
                 </div>
               )}
-              <div className="flex items-center justify-center">
+              <div className="flex items-center justify-center gap-2">
+                <span className="text-sm font-bold text-[var(--color-accent-fr)]">{cardIdx + 1}.</span>
                 {s.checked && !s.correct ? (
                   <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
                     <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
+                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{WORD_LETTERS[correctIdx]}</span>
                   </div>
                 ) : (
                   <select
@@ -105,8 +107,8 @@ export function ExImageMatch({
                     className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
                   >
                     <option value="">—</option>
-                    {words.map((_, n) => (
-                      <option key={n + 1} value={String(n + 1)}>{n + 1}</option>
+                    {WORD_LETTERS.map((letter) => (
+                      <option key={letter} value={letter}>{letter}</option>
                     ))}
                   </select>
                 )}
