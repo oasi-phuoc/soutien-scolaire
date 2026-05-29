@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_TEXT_CLS,
 } from "./vocabUtils";
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
@@ -11,7 +11,7 @@ type MatchState = { answer: string; checked: boolean; correct: boolean };
 export function ExImageMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, 4));
+  const [words] = useState<VocabWord[]>(() => pickN(theme.words, 6));
   const [shuffledImages] = useState<VocabWord[]>(() => shuffle([...words]));
   const [states, setStates] = useState<Record<string, MatchState>>(() =>
     Object.fromEntries(
@@ -47,8 +47,8 @@ export function ExImageMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque image au mot en écrivant le numéro correspondant.
       </p>
-      {/* Word list */}
-      <div className="mb-4 space-y-1">
+      {/* Word list — two columns */}
+      <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
           <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
             <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
@@ -57,7 +57,7 @@ export function ExImageMatch({
           </p>
         ))}
       </div>
-      {/* Image cards */}
+      {/* Image cards — two columns */}
       <div className="grid grid-cols-2 gap-3">
         {shuffledImages.map((w) => {
           const s = states[w.word]!;
@@ -75,30 +75,29 @@ export function ExImageMatch({
                 </div>
               )}
               <div className="flex items-center gap-2">
-                {s.checked && !s.correct && (
+                {s.checked && !s.correct ? (
                   <>
                     <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{correctIdx + 1}</span>
+                    <span className="w-16 border-b border-[var(--color-border-emphasis)] text-center text-sm font-semibold text-[var(--color-text-primary)]">
+                      {correctIdx + 1}
+                    </span>
                   </>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={s.answer}
+                    onChange={(e) =>
+                      setStates((prev) => ({
+                        ...prev,
+                        [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
+                      }))
+                    }
+                    className="w-16 border-b border-[var(--color-border-emphasis)] bg-transparent text-center text-sm outline-none"
+                    readOnly={s.checked && s.correct}
+                  />
                 )}
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={s.answer}
-                  onChange={(e) =>
-                    setStates((prev) => ({
-                      ...prev,
-                      [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
-                    }))
-                  }
-                  className={`w-10 border-b bg-transparent text-center text-sm outline-none ${
-                    s.checked && !s.correct
-                      ? WRONG_INPUT_CLS
-                      : "border-[var(--color-border-emphasis)]"
-                  }`}
-                  readOnly={s.checked && s.correct}
-                />
               </div>
             </div>
           );

@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_TEXT_CLS,
 } from "./vocabUtils";
+
+const LETTERS = ["a", "b", "c", "d", "e", "f"];
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
@@ -13,7 +15,7 @@ export function ExDefinitionMatch({
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => {
     const withDef = theme.words.filter((w) => !!w.definition);
-    return pickN(withDef.length >= 4 ? withDef : theme.words, 4);
+    return pickN(withDef.length >= 6 ? withDef : theme.words, 6);
   });
   const [shuffledDefs] = useState<VocabWord[]>(() => shuffle([...words]));
   const [states, setStates] = useState<Record<string, MatchState>>(() =>
@@ -50,8 +52,8 @@ export function ExDefinitionMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque définition au mot correspondant en écrivant le numéro.
       </p>
-      {/* Word list */}
-      <div className="mb-4 space-y-1">
+      {/* Word list — two columns */}
+      <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
           <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
             <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
@@ -62,41 +64,43 @@ export function ExDefinitionMatch({
           </p>
         ))}
       </div>
-      {/* Definition rows */}
-      <div className="space-y-2">
-        {shuffledDefs.map((w) => {
+      {/* Definition rows — two columns */}
+      <div className="grid grid-cols-2 gap-3">
+        {shuffledDefs.map((w, idx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
-            <div key={w.word} className="flex items-start gap-3">
-              <p className="flex-1 text-sm text-[var(--color-text-secondary)]">
-                {w.definition ?? w.word}
-              </p>
-              <div className="flex shrink-0 items-center gap-2">
-                {s.checked && !s.correct && (
-                  <>
-                    <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{correctIdx + 1}</span>
-                  </>
-                )}
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={s.answer}
-                  onChange={(e) =>
-                    setStates((prev) => ({
-                      ...prev,
-                      [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
-                    }))
-                  }
-                  className={`w-10 border-b bg-transparent text-center text-sm outline-none ${
-                    s.checked && !s.correct
-                      ? WRONG_INPUT_CLS
-                      : "border-[var(--color-border-emphasis)]"
-                  }`}
-                  readOnly={s.checked && s.correct}
-                />
+            <div key={w.word} className="flex items-start gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2">
+              <span className="shrink-0 font-bold text-[var(--color-accent-fr)] text-sm">{LETTERS[idx]}.</span>
+              <div className="flex min-w-0 flex-1 flex-col gap-1">
+                <p className="text-sm font-semibold text-[var(--color-text-primary)]">
+                  {w.definition ?? w.word}
+                </p>
+                <div className="flex items-center gap-2">
+                  {s.checked && !s.correct ? (
+                    <>
+                      <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
+                      <span className="w-16 border-b border-[var(--color-border-emphasis)] text-center text-sm font-semibold text-[var(--color-text-primary)]">
+                        {correctIdx + 1}
+                      </span>
+                    </>
+                  ) : (
+                    <input
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={s.answer}
+                      onChange={(e) =>
+                        setStates((prev) => ({
+                          ...prev,
+                          [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
+                        }))
+                      }
+                      className="w-16 border-b border-[var(--color-border-emphasis)] bg-transparent text-center text-sm outline-none"
+                      readOnly={s.checked && s.correct}
+                    />
+                  )}
+                </div>
               </div>
             </div>
           );

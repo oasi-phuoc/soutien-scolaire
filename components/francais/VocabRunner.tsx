@@ -16,6 +16,7 @@ import { ExFillSentences } from "./vocab/ExFillSentences";
 import { ExImageWrite } from "./vocab/ExImageWrite";
 import { ExDictation } from "./vocab/ExDictation";
 import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
+import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { VocabResults } from "./vocab/VocabResults";
 
@@ -26,27 +27,35 @@ interface Props {
 type StepDef = { key: string; label: string; isTheory: boolean; isEval?: boolean; evalNumber?: number };
 
 const STEPS: StepDef[] = [
-  { key: "vocab-cards",          label: "Vocabulaire",  isTheory: true },
-  { key: "ex1-image-match",      label: "Ex. 1",        isTheory: false },
-  { key: "ex2-article",          label: "Ex. 2",        isTheory: false },
-  { key: "ex3-anagram",          label: "Ex. 3",        isTheory: false },
-  { key: "ex4-missing-letters",  label: "Ex. 4",        isTheory: false },
-  { key: "ex5-definition-match", label: "Ex. 5",        isTheory: false },
-  { key: "ex6-fill-sentences",   label: "Ex. 6",        isTheory: false },
-  { key: "ex7-image-write",      label: "Ex. 7",        isTheory: false },
-  { key: "ex8-dictation",        label: "Ex. 8",        isTheory: false },
-  { key: "ex9-sentence-write",   label: "Ex. 9",        isTheory: false },
-  { key: "eval-announce",        label: "Évaluation",   isTheory: true },
-  { key: "eval-ex2",             label: "Éval. 1",      isTheory: false, isEval: true, evalNumber: 1 },
-  { key: "eval-ex4",             label: "Éval. 2",      isTheory: false, isEval: true, evalNumber: 2 },
-  { key: "eval-ex6",             label: "Éval. 3",      isTheory: false, isEval: true, evalNumber: 3 },
-  { key: "eval-ex7",             label: "Éval. 4",      isTheory: false, isEval: true, evalNumber: 4 },
-  { key: "eval-ex8",             label: "Éval. 5",      isTheory: false, isEval: true, evalNumber: 5 },
-  { key: "eval-ex9",             label: "Éval. 6",      isTheory: false, isEval: true, evalNumber: 6 },
-  { key: "results",              label: "Résultats",    isTheory: true },
+  { key: "vocab-cards",           label: "Vocabulaire",  isTheory: true },
+  { key: "ex1-image-match",       label: "Ex. 1",        isTheory: false },
+  { key: "ex2-article",           label: "Ex. 2",        isTheory: false },
+  { key: "ex3-anagram",           label: "Ex. 3",        isTheory: false },
+  { key: "ex4-missing-letters",   label: "Ex. 4",        isTheory: false },
+  { key: "ex5-definition-match",  label: "Ex. 5",        isTheory: false },
+  { key: "ex6-fill-sentences",    label: "Ex. 6",        isTheory: false },
+  { key: "ex7-image-write",       label: "Ex. 7",        isTheory: false },
+  { key: "ex8-dictation",         label: "Ex. 8",        isTheory: false },
+  { key: "ex9-sentence-write",    label: "Ex. 9",        isTheory: false },
+  { key: "ex10-question-write",   label: "Ex. 10",       isTheory: false },
+  { key: "eval-announce",         label: "Évaluation",   isTheory: true },
+  { key: "eval-ex2",              label: "Éval. 1",      isTheory: false, isEval: true, evalNumber: 1 },
+  { key: "eval-ex4",              label: "Éval. 2",      isTheory: false, isEval: true, evalNumber: 2 },
+  { key: "eval-ex6",              label: "Éval. 3",      isTheory: false, isEval: true, evalNumber: 3 },
+  { key: "eval-ex7",              label: "Éval. 4",      isTheory: false, isEval: true, evalNumber: 4 },
+  { key: "eval-ex8",              label: "Éval. 5",      isTheory: false, isEval: true, evalNumber: 5 },
+  { key: "eval-ex9",              label: "Éval. 6",      isTheory: false, isEval: true, evalNumber: 6 },
+  { key: "eval-ex10",             label: "Éval. 7",      isTheory: false, isEval: true, evalNumber: 7 },
+  { key: "results",               label: "Résultats",    isTheory: true },
 ];
 
-const EVAL_EXERCISE_KEYS = ["eval-ex2","eval-ex4","eval-ex6","eval-ex7","eval-ex8","eval-ex9"];
+const TRAINING_STEPS = 11; // steps 0–10
+const EVAL_START_IDX = 11; // eval-announce
+const EVAL_EX_FIRST = 12;  // first eval exercise
+const EVAL_EX_LAST = 18;   // last eval exercise (eval-ex10)
+const EVAL_TOTAL = 7;
+
+const EVAL_EXERCISE_KEYS = ["eval-ex2","eval-ex4","eval-ex6","eval-ex7","eval-ex8","eval-ex9","eval-ex10"];
 const EVAL_DURATION = 10 * 60; // 10 minutes
 
 function getPassingGrade(): number {
@@ -75,10 +84,10 @@ export function VocabRunner({ theme }: Props) {
   const isLast = stepIdx === STEPS.length - 1;
   const showExButtons = !step.isTheory;
 
-  // inEvalPhase: on or past eval-announce (step 10)
-  const inEvalPhase = stepIdx >= 10;
-  // isInEvalPhase: on one of the 6 timed eval exercises
-  const isInEvalPhase = stepIdx >= 11 && stepIdx <= 16;
+  // inEvalPhase: on or past eval-announce (step 11)
+  const inEvalPhase = stepIdx >= EVAL_START_IDX;
+  // isInEvalPhase: on one of the 7 timed eval exercises
+  const isInEvalPhase = stepIdx >= EVAL_EX_FIRST && stepIdx <= EVAL_EX_LAST;
 
   const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
   const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
@@ -137,7 +146,7 @@ export function VocabRunner({ theme }: Props) {
       router.push("/francais");
     } else {
       const next = STEPS[stepIdx + 1]!;
-      if (stepIdx === 10) setEvalTimeLeft(EVAL_DURATION); // start timer on leaving eval-announce
+      if (stepIdx === EVAL_START_IDX) setEvalTimeLeft(EVAL_DURATION); // start timer on leaving eval-announce
       setStepIdx((s) => s + 1);
       setResetKey((k) => k + 1);
       setValidated(next.isTheory);
@@ -160,7 +169,7 @@ export function VocabRunner({ theme }: Props) {
     setEvalScores([]);
     setEvalTimeLeft(null);
     setResetKey((k) => k + 1);
-    setStepIdx(10); // back to eval-announce
+    setStepIdx(EVAL_START_IDX);
     setValidated(true);
     setCanValidate(false);
   }
@@ -170,7 +179,7 @@ export function VocabRunner({ theme }: Props) {
     setEvalScores([]);
     setEvalTimeLeft(null);
     setResetKey((k) => k + 1);
-    setStepIdx(10);
+    setStepIdx(EVAL_START_IDX);
     setValidated(true);
     setCanValidate(false);
   }
@@ -199,6 +208,8 @@ export function VocabRunner({ theme }: Props) {
         return <ExDictation key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex9-sentence-write":
         return <ExSentenceWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
+      case "ex10-question-write":
+        return <ExQuestionWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "eval-announce":
         return <EvalAnnounce key={componentKey} theme={theme} onCanValidateChange={setCanValidate} />;
       case "eval-ex2":
@@ -213,6 +224,8 @@ export function VocabRunner({ theme }: Props) {
         return <ExDictation key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex9":
         return <ExSentenceWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
+      case "eval-ex10":
+        return <ExQuestionWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "results":
         return <VocabResults key={componentKey} evalScores={evalScores} grade={grade} passingGrade={passingGrade} />;
       default:
@@ -235,7 +248,7 @@ export function VocabRunner({ theme }: Props) {
                 Annuler
               </button>
               <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
-                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                className="flex-1 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
                 Continuer
               </button>
             </div>
@@ -271,7 +284,7 @@ export function VocabRunner({ theme }: Props) {
             Entraînement
           </span>
           <div className="flex flex-1 gap-0.5">
-            {STEPS.slice(0, 10).map((s, i) => (
+            {STEPS.slice(0, TRAINING_STEPS).map((s, i) => (
               <div
                 key={s.key}
                 className={`h-1.5 flex-1 rounded-full transition-colors ${
@@ -287,11 +300,11 @@ export function VocabRunner({ theme }: Props) {
         </div>
       )}
 
-      {/* Eval progress bar with timer — shown only during the 6 timed exercises */}
+      {/* Eval progress bar with timer — shown only during the 7 timed exercises */}
       {isInEvalPhase && (
         <EvalProgressBar
-          current={stepIdx - 11}
-          total={6}
+          current={stepIdx - EVAL_EX_FIRST}
+          total={EVAL_TOTAL}
           timeLeft={evalTimeLeft}
         />
       )}

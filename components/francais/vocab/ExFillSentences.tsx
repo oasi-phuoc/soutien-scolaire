@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  ExerciseProps, normalizeText,
+  ExerciseProps, pickN, shuffle, normalizeText,
   WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
 } from "./vocabUtils";
 
@@ -10,7 +10,20 @@ type SentState = { answer: string; checked: boolean; correct: boolean };
 export function ExFillSentences({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const sentences = theme.sentences ?? [];
+  const allSentences = theme.sentences ?? [];
+  const sentences = isEval ? allSentences.slice(0, 2) : allSentences;
+
+  const [bankWords] = useState<string[]>(() => {
+    const answers = new Set(allSentences.map((s) => s.answer));
+    const answerWords = theme.words.filter((w) => answers.has(w.word));
+    const others = theme.words.filter((w) => !answers.has(w.word));
+    const picked = shuffle([
+      ...answerWords,
+      ...pickN(others, Math.max(0, 10 - answerWords.length)),
+    ]);
+    return picked.map((w) => w.word);
+  });
+
   const [states, setStates] = useState<SentState[]>(() =>
     sentences.map(() => ({ answer: "", checked: false, correct: false }))
   );
@@ -52,14 +65,14 @@ export function ExFillSentences({
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Complétez chaque phrase avec le mot correct.
       </p>
-      {/* Word bank */}
-      <div className="mb-4 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-2">
-        {theme.words.map((w) => (
+      {/* Word bank — round pills */}
+      <div className="mb-4 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-3">
+        {bankWords.map((word) => (
           <span
-            key={w.word}
-            className="rounded bg-[var(--color-bg-primary)] px-2 py-0.5 text-sm text-[var(--color-text-primary)] shadow-sm"
+            key={word}
+            className="inline-flex items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-1 text-sm text-[var(--color-text-primary)] shadow-sm"
           >
-            {w.word}
+            {word}
           </span>
         ))}
       </div>

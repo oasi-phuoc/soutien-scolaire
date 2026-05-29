@@ -55,13 +55,14 @@ export function ExArticle({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez l&apos;article correct (le, la, les, un, une…).
+        Écrivez l&apos;article correct (le, la, les ou l&apos;).
       </p>
       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-        {words.map((w) => {
+        {words.map((w, i) => {
           const s = states[w.word]!;
           return (
             <div key={w.word} className="flex items-center gap-2">
+              <span className="shrink-0 font-bold text-[var(--color-accent-fr)] text-sm">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <>

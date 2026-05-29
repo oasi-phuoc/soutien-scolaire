@@ -13,6 +13,7 @@ const EVAL_LABELS = [
   "Mot (image)",
   "Dictée",
   "Phrase libre",
+  "Question libre",
 ];
 
 export function VocabResults({ evalScores, grade, passingGrade }: Props) {

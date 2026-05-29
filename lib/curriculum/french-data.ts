@@ -34,11 +34,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   t("A0", "a0-4", "A.4",  "La famille",                             "Possessifs, négation, arbre généalogique.", [...Q]),
   t("A0", "a0-5", "A.5",  "Le corps et la santé de base",           "Parties du corps, urgences, avoir mal.", [...Q]),
   t("A0", "a0-6", "A.6",  "Objets du quotidien et la classe",       "Impératif, démonstratifs, consignes.", [...Q]),
-  lesson("A0", "a0-voc-nationalites",   "V.0", "Les nationalités",      "Pays, nationalités masculin/féminin + verbe venir au présent.",                              "vocabulaire"),
-  lesson("A0", "a0-se-presenter",       "V.1", "Se présenter",          "Mon identité, mon âge, ma nationalité, mon domicile, ma profession et ma famille.",         "vocabulaire"),
-  lesson("A1", "a1-voc-famille",        "V.2", "La famille",            "Membres de la famille, adjectifs possessifs, situation familiale.",                          "vocabulaire"),
-  lesson("A1", "a1-voc-description",    "V.3", "La description",        "Décrire une personne : taille, couleur de cheveux, âge, adjectifs au masculin/féminin.",    "vocabulaire"),
-  lesson("A1", "a1-voc-heure",          "V.4", "L'heure",               "Dire et demander l'heure, heure officielle et informelle, et quart / et demie / moins le quart.", "vocabulaire"),
 
   // ── A1 — Communication essentielle A1 (20 leçons) ─────────────── Apprendre
   // SE PRÉSENTER ET PRÉSENTER QUELQU'UN
@@ -188,6 +183,68 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-voc-l06", "V.18", "La famille et les relations",     "Description physique, personnalité, relations amoureuses et amicales.",     "vocabulaire"),
   lesson("A2", "a2-voc-l07", "V.19", "Les médias et Internet",          "Site web, réseaux sociaux, presse, TV, radio + verbes numériques.",         "vocabulaire"),
   lesson("A2", "a2-voc-l08", "V.20", "La ville et les services",        "Services publics, commerces, orientation dans la ville + y et en.",         "vocabulaire"),
+
+  // ── V1 — L'identité ──────────────────────────────────────────────────────
+  lesson("V1", "v1-nationalites",        "V1.1", "Les nationalités",           "Pays, nationalités masculin/féminin.", "vocabulaire"),
+  lesson("V1", "v1-professions",         "V1.2", "Les professions",            "Métiers courants, masculin/féminin.", "vocabulaire"),
+  lesson("V1", "v1-famille",             "V1.3", "La famille",                 "Membres de la famille, adjectifs possessifs.", "vocabulaire"),
+  lesson("V1", "v1-etat-civil",          "V1.4", "L'état civil",               "Situation de famille, documents d'identité.", "vocabulaire"),
+  lesson("V1", "v1-description-physique","V1.5", "La description physique",    "Taille, cheveux, yeux, adjectifs.", "vocabulaire"),
+  lesson("V1", "v1-description-morale",  "V1.6", "La description morale",      "Caractère, qualités, défauts.", "vocabulaire"),
+
+  // ── V2 — Le temps ────────────────────────────────────────────────────────
+  lesson("V2", "v2-jours-mois-dates",    "V2.1", "Jours, mois et dates",       "Calendrier, jours de la semaine, mois.", "vocabulaire"),
+  lesson("V2", "v2-heure",               "V2.2", "L'heure",                    "Dire et demander l'heure, heure officielle.", "vocabulaire"),
+  lesson("V2", "v2-saisons",             "V2.3", "Les saisons",                "Les quatre saisons, vocabulaire associé.", "vocabulaire"),
+  lesson("V2", "v2-meteo",               "V2.4", "La météo",                   "Temps qu'il fait, températures, phénomènes météo.", "vocabulaire"),
+
+  // ── V3 — Les loisirs ─────────────────────────────────────────────────────
+  lesson("V3", "v3-sport",               "V3.1", "Le sport",                   "Sports pratiqués, vocabulaire sportif.", "vocabulaire"),
+  lesson("V3", "v3-activites-sportives", "V3.2", "Les activités sportives",    "Verbes d'action, équipement sportif.", "vocabulaire"),
+
+  // ── V4 — Le logement ─────────────────────────────────────────────────────
+  lesson("V4", "v4-type-logement",       "V4.1", "Le type de logement",        "Appartement, maison, studio, villa.", "vocabulaire"),
+  lesson("V4", "v4-adresse",             "V4.2", "L'adresse",                  "Rue, code postal, localisation.", "vocabulaire"),
+  lesson("V4", "v4-pieces-maison",       "V4.3", "Les pièces de la maison",    "Salon, cuisine, chambre, salle de bain.", "vocabulaire"),
+  lesson("V4", "v4-immeuble",            "V4.4", "L'immeuble",                 "Ascenseur, couloir, locataire, propriétaire.", "vocabulaire"),
+  lesson("V4", "v4-pannes",              "V4.5", "Les pannes",                 "Problèmes courants, réparations.", "vocabulaire"),
+  lesson("V4", "v4-equipements",         "V4.6", "Les équipements",            "Meubles, appareils électroménagers.", "vocabulaire"),
+
+  // ── V5 — L'école ─────────────────────────────────────────────────────────
+  lesson("V5", "v5-matieres",            "V5.1", "Les matières scolaires",     "Français, maths, histoire, sciences…", "vocabulaire"),
+  lesson("V5", "v5-materiel-scolaire",   "V5.2", "Le matériel scolaire",       "Stylo, cahier, règle, cartable…", "vocabulaire"),
+  lesson("V5", "v5-structure-ecole",     "V5.3", "La structure de l'école",    "Classes, niveaux, personnel, bâtiments.", "vocabulaire"),
+
+  // ── V6 — Les vêtements ───────────────────────────────────────────────────
+  lesson("V6", "v6-vetements",           "V6.1", "Les vêtements",              "Pantalon, robe, veste, tee-shirt…", "vocabulaire"),
+  lesson("V6", "v6-accessoires",         "V6.2", "Les accessoires",            "Sac, ceinture, bijoux, chapeau…", "vocabulaire"),
+  lesson("V6", "v6-couleurs",            "V6.3", "Les couleurs",               "Couleurs primaires, secondaires, nuances.", "vocabulaire"),
+  lesson("V6", "v6-matieres",            "V6.4", "Les matières",               "Coton, laine, cuir, soie…", "vocabulaire"),
+
+  // ── V7 — La nourriture ───────────────────────────────────────────────────
+  lesson("V7", "v7-fruits",              "V7.1", "Les fruits",                 "Pomme, banane, fraise, raisin…", "vocabulaire"),
+  lesson("V7", "v7-legumes",             "V7.2", "Les légumes",                "Carotte, tomate, haricot, poireau…", "vocabulaire"),
+  lesson("V7", "v7-restaurant",          "V7.3", "Le restaurant",              "Menu, plats, commander, payer.", "vocabulaire"),
+  lesson("V7", "v7-boulangerie",         "V7.4", "La boulangerie",             "Pain, croissant, gâteau, pâtisserie.", "vocabulaire"),
+  lesson("V7", "v7-cuisine",             "V7.5", "La cuisine",                 "Ustensiles, actions, ingrédients.", "vocabulaire"),
+  lesson("V7", "v7-recettes",            "V7.6", "Les recettes",               "Verbes culinaires, étapes de préparation.", "vocabulaire"),
+  lesson("V7", "v7-quantites",           "V7.7", "Les quantités",              "Unités de mesure, expressions de quantité.", "vocabulaire"),
+
+  // ── V8 — La santé ────────────────────────────────────────────────────────
+  lesson("V8", "v8-corps",               "V8.1", "Le corps",                   "Organes, parties du corps, sensations.", "vocabulaire"),
+  lesson("V8", "v8-maladies",            "V8.2", "Les maladies",               "Symptômes, maladies courantes.", "vocabulaire"),
+  lesson("V8", "v8-medecins",            "V8.3", "Les médecins",               "Spécialistes, consultations, ordonnance.", "vocabulaire"),
+  lesson("V8", "v8-pharmacie",           "V8.4", "La pharmacie",               "Médicaments, conseils, dosage.", "vocabulaire"),
+
+  // ── V9 — Les lieux ───────────────────────────────────────────────────────
+  lesson("V9", "v9-ville",               "V9.1", "La ville",                   "Rues, quartiers, bâtiments publics.", "vocabulaire"),
+  lesson("V9", "v9-transport",           "V9.2", "Les transports",             "Bus, métro, train, voiture.", "vocabulaire"),
+  lesson("V9", "v9-direction",           "V9.3", "La direction",               "Tout droit, tourner, s'orienter.", "vocabulaire"),
+  lesson("V9", "v9-espace-culturel",     "V9.4", "L'espace culturel",          "Musée, théâtre, cinéma, bibliothèque.", "vocabulaire"),
+  lesson("V9", "v9-train",               "V9.5", "Le train",                   "Gare, billet, quai, horaires.", "vocabulaire"),
+  lesson("V9", "v9-aeroport",            "V9.6", "L'aéroport",                 "Enregistrement, décollage, bagages.", "vocabulaire"),
+  lesson("V9", "v9-hotel",               "V9.7", "L'hôtel",                    "Réservation, chambre, services.", "vocabulaire"),
+  lesson("V9", "v9-paysage",             "V9.8", "Le paysage",                 "Montagne, mer, forêt, campagne.", "vocabulaire"),
 
 ];
 

@@ -1,0 +1,32 @@
+import type { VocabTheme } from "../../vocabulary-data";
+
+export const V2_METEO_THEME: VocabTheme = {
+  slug: "v2-meteo",
+  code: "V2.4",
+  title: "La météo",
+  section: "V2",
+  words: [
+    { word: "soleil",       article: "le",  gender: "m", definition: "astre qui donne lumière et chaleur" },
+    { word: "nuage",        article: "le",  gender: "m", definition: "masse de vapeur d'eau dans le ciel" },
+    { word: "pluie",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" },
+    { word: "vent",         article: "le",  gender: "m", definition: "mouvement de l'air" },
+    { word: "neige",        article: "la",  gender: "f", definition: "eau gelée qui tombe en flocons blancs" },
+    { word: "orage",        article: "l'",  gender: "m", definition: "tempête avec tonnerre et éclairs" },
+    { word: "brouillard",   article: "le",  gender: "m", definition: "nuage bas qui réduit la visibilité" },
+    { word: "gel",          article: "le",  gender: "m", definition: "température au-dessous de zéro degré" },
+    { word: "éclair",       article: "l'",  gender: "m", definition: "lumière électrique lors d'un orage" },
+    { word: "température",  article: "la",  gender: "f", definition: "mesure du chaud ou du froid" },
+    { word: "grêle",        article: "la",  gender: "f", definition: "précipitation de grains de glace" },
+    { word: "arc-en-ciel",  article: "l'",  gender: "m", definition: "arc coloré visible après la pluie" },
+    { word: "averse",       article: "l'",  gender: "f", definition: "pluie soudaine et abondante" },
+    { word: "chaleur",      article: "la",  gender: "f", definition: "sensation de température élevée" },
+    { word: "verglas",      article: "le",  gender: "m", definition: "fine couche de glace sur le sol" },
+  ],
+  sentences: [
+    { sentence: "Il fait beau, le ___ brille dans le ciel.",              answer: "soleil" },
+    { sentence: "Le ciel est couvert de ___ noirs, il va pleuvoir.",      answer: "nuages" },
+    { sentence: "En hiver, le ___ rend les routes très dangereuses.",     answer: "verglas" },
+    { sentence: "Après la ___, on peut voir un arc-en-ciel.",             answer: "pluie" },
+    { sentence: "L'___ éclaire le ciel pendant la tempête.",              answer: "éclair" },
+  ],
+};

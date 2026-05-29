@@ -8,7 +8,7 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
-export function ExSentenceWrite({
+export function ExQuestionWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => pickN(theme.words, isEval ? 2 : 4));
@@ -34,13 +34,13 @@ export function ExSentenceWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 6}` : "Exercice 9";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 7}` : "Exercice 10";
 
   return (
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez une phrase en utilisant le mot proposé.
+        Écrivez une question en utilisant le mot proposé. Utilisez les mots interrogatifs (qui, quand, où, comment, combien, lequel, pourquoi).
       </p>
       <div className="space-y-4">
         {words.map((w, i) => {
@@ -66,7 +66,7 @@ export function ExSentenceWrite({
                       [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                     }))
                   }
-                  placeholder={`Phrase avec « ${w.word} »…`}
+                  placeholder={`Question avec « ${w.word} »…`}
                   className={`w-full border-b bg-transparent text-sm outline-none placeholder:text-[var(--color-text-tertiary)] ${
                     s.checked && !s.correct
                       ? WRONG_INPUT_CLS
