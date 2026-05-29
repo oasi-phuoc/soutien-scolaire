@@ -104,9 +104,53 @@ export function getAllVocabLessons(): VocabLesson[] {
 // ── VocabTheme registry ───────────────────────────────────────────────────────
 
 import { FAMILLE_THEME } from "./content/francais/vocab-theme-famille";
+import { NATIONALITES_THEME } from "./content/francais/vocab-theme-nationalites";
+import { PRESENTER_THEME } from "./content/francais/vocab-theme-presenter";
+import { NATIONALITES_A1_THEME } from "./content/francais/vocab-theme-nationalites-a1";
+import { DESCRIPTION_THEME } from "./content/francais/vocab-theme-description";
+import { HEURE_THEME } from "./content/francais/vocab-theme-heure";
+import { TRANSPORT_THEME } from "./content/francais/vocab-theme-transport";
+import { NOURRITURE_THEME } from "./content/francais/vocab-theme-nourriture";
+import { TEMPS_THEME } from "./content/francais/vocab-theme-temps";
+import { CORPS_THEME } from "./content/francais/vocab-theme-corps";
+import { VILLE_THEME } from "./content/francais/vocab-theme-ville";
+import { LOGEMENT_THEME } from "./content/francais/vocab-theme-logement";
+import { VETEMENTS_THEME } from "./content/francais/vocab-theme-vetements";
+import { LOISIRS_THEME } from "./content/francais/vocab-theme-loisirs";
+import { VACANCES_THEME } from "./content/francais/vocab-theme-vacances";
+import { VOYAGES_THEME } from "./content/francais/vocab-theme-voyages";
+import { SANTE_THEME } from "./content/francais/vocab-theme-sante";
+import { TRAVAIL_THEME } from "./content/francais/vocab-theme-travail";
+import { SORTIES_THEME } from "./content/francais/vocab-theme-sorties";
+import { CUISINE_THEME } from "./content/francais/vocab-theme-cuisine";
+import { RELATIONS_THEME } from "./content/francais/vocab-theme-relations";
+import { MEDIAS_THEME } from "./content/francais/vocab-theme-medias";
+import { VILLE_SERVICES_THEME } from "./content/francais/vocab-theme-ville-services";
 
 export const VOCAB_THEMES: VocabTheme[] = [
+  NATIONALITES_THEME,
+  PRESENTER_THEME,
   FAMILLE_THEME,
+  NATIONALITES_A1_THEME,
+  DESCRIPTION_THEME,
+  HEURE_THEME,
+  TRANSPORT_THEME,
+  NOURRITURE_THEME,
+  TEMPS_THEME,
+  CORPS_THEME,
+  VILLE_THEME,
+  LOGEMENT_THEME,
+  VETEMENTS_THEME,
+  LOISIRS_THEME,
+  VACANCES_THEME,
+  VOYAGES_THEME,
+  SANTE_THEME,
+  TRAVAIL_THEME,
+  SORTIES_THEME,
+  CUISINE_THEME,
+  RELATIONS_THEME,
+  MEDIAS_THEME,
+  VILLE_SERVICES_THEME,
 ];
 
 export function getVocabTheme(slug: string): VocabTheme | undefined {
