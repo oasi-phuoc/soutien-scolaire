@@ -142,14 +142,16 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                       </p>
                       {/* Line 2 — left-aligned: masculine and feminine clearly labelled */}
                       <div className="mt-1.5 space-y-0.5 text-xs">
-                        <p className="text-[var(--color-text-primary)]">
-                          <span className="mr-1 font-bold text-[var(--color-accent-fr)]">m.</span>
-                          un {w.word}
-                        </p>
-                        <p className="text-[var(--color-text-primary)]">
-                          <span className="mr-1 font-bold text-[var(--color-accent-fr)]">f.</span>
-                          une {femForm}
-                        </p>
+                        <div className="flex items-baseline">
+                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
+                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">un</span>
+                          <span className="text-[var(--color-text-primary)]">{w.word}</span>
+                        </div>
+                        <div className="flex items-baseline">
+                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
+                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">une</span>
+                          <span className="text-[var(--color-text-primary)]">{femForm}</span>
+                        </div>
                       </div>
                     </>
                   );
