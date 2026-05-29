@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
+import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN } from "./vocabUtils";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
@@ -16,8 +16,63 @@ type WordState = {
   grammarChecking: boolean;
 };
 
+type PromptWord = { word: string; displayArticle: string };
+
 function initState(): WordState {
   return { answer: "", checked: false, correct: false, basicErrors: [], grammarErrors: [], grammarChecking: false };
+}
+
+/** Randomly choose definite or indefinite article for a word. */
+function randomArticle(definite: string, word: string): string {
+  const norm = definite.toLowerCase().replace(/['']/g, "'").trim();
+  const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(word);
+  const useDefinite = Math.random() < 0.5;
+
+  if (norm === "le" || norm === "un") {
+    return useDefinite ? (vowelStart ? "l'" : "le") : "un";
+  }
+  if (norm === "la" || norm === "une") {
+    return useDefinite ? (vowelStart ? "l'" : "la") : "une";
+  }
+  if (norm === "l'") {
+    return useDefinite ? "l'" : (Math.random() < 0.5 ? "un" : "une");
+  }
+  if (norm === "les" || norm === "des") {
+    return useDefinite ? "les" : "des";
+  }
+  return definite;
+}
+
+/** Build the word pool: country + masculine + feminine forms. */
+function buildPool(theme: VocabTheme, count: number): PromptWord[] {
+  const pool: Array<{ word: string; defArt: string }> = [];
+
+  for (const w of theme.words) {
+    const rw = w.relatedWords?.[0];
+
+    // Country name from relatedWords
+    if (rw) {
+      const m = rw.match(/^(le |la |l'|les )(.+)$/i);
+      if (m) pool.push({ word: m[2]!.trim(), defArt: m[1]!.trim() });
+    }
+
+    // Masculine form
+    const defArtM = w.article ?? (rw ? "le" : "");
+    if (defArtM) pool.push({ word: w.word, defArt: defArtM });
+
+    // Feminine form
+    if (w.feminine) {
+      const defArtF = w.article === "le" || w.article === "un" ? "la" : (w.article ?? "la");
+      pool.push({ word: w.feminine, defArt: defArtF });
+    }
+  }
+
+  // Deduplicate by word, pick N, assign random display article
+  const deduped = [...new Map(pool.map((p) => [p.word, p])).values()];
+  return pickN(deduped, count).map((p) => ({
+    word: p.word,
+    displayArticle: randomArticle(p.defArt, p.word),
+  }));
 }
 
 function checkBasic(answer: string, word: string): string[] {
@@ -39,9 +94,9 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExSentenceWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, isEval ? 2 : 4));
+  const [prompts] = useState<PromptWord[]>(() => buildPool(theme, isEval ? 2 : 4));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
-    Object.fromEntries(words.map((w) => [w.word, initState()]))
+    Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,12 +107,12 @@ export function ExSentenceWrite({
     let correct = 0;
     const updated: Record<string, WordState> = {};
 
-    words.forEach((w) => {
-      const answer = (states[w.word]?.answer ?? "").trim();
-      const basicErrors = checkBasic(answer, w.word);
+    prompts.forEach((p) => {
+      const answer = (states[p.word]?.answer ?? "").trim();
+      const basicErrors = checkBasic(answer, p.word);
       const ok = answer.length > 0 && basicErrors.length === 0;
       if (ok) correct++;
-      updated[w.word] = {
+      updated[p.word] = {
         answer,
         checked: true,
         correct: ok,
@@ -68,11 +123,11 @@ export function ExSentenceWrite({
     });
 
     setStates(updated);
-    onValidated(correct, words.length);
+    onValidated(correct, prompts.length);
 
-    // Async grammar check for each non-empty answer
-    words.forEach((w) => {
-      const answer = updated[w.word]?.answer ?? "";
+    // Async grammar check
+    prompts.forEach((p) => {
+      const answer = updated[p.word]?.answer ?? "";
       if (answer.length <= 3) return;
       fetch("/api/check-grammar", {
         method: "POST",
@@ -91,13 +146,13 @@ export function ExSentenceWrite({
             }));
           setStates((prev) => ({
             ...prev,
-            [w.word]: { ...prev[w.word]!, grammarErrors: errors, grammarChecking: false },
+            [p.word]: { ...prev[p.word]!, grammarErrors: errors, grammarChecking: false },
           }));
         })
         .catch(() => {
           setStates((prev) => ({
             ...prev,
-            [w.word]: { ...prev[w.word]!, grammarChecking: false },
+            [p.word]: { ...prev[p.word]!, grammarChecking: false },
           }));
         });
     });
@@ -113,15 +168,18 @@ export function ExSentenceWrite({
         Écrivez une phrase complète avec le mot proposé. Commencez par une majuscule et terminez par un point.
       </p>
       <div className="space-y-4">
-        {words.map((w, i) => {
-          const s = states[w.word]!;
+        {prompts.map((p, i) => {
+          const s = states[p.word]!;
           const isClean = s.checked && !s.grammarChecking && s.basicErrors.length === 0 && s.grammarErrors.length === 0 && s.answer.length > 0;
+          const articleDisplay = p.displayArticle.endsWith("'")
+            ? p.displayArticle
+            : `${p.displayArticle} `;
           return (
-            <div key={w.word} className="space-y-1.5">
+            <div key={p.word} className="space-y-1.5">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
-                {w.article && <span className="font-normal text-[var(--color-text-secondary)]">{w.article} </span>}
-                {w.word}
+                <span className="font-normal text-[var(--color-text-secondary)]">{articleDisplay}</span>
+                {p.word}
               </p>
               <input
                 type="text"
@@ -129,7 +187,7 @@ export function ExSentenceWrite({
                 onChange={(e) =>
                   setStates((prev) => ({
                     ...prev,
-                    [w.word]: { ...initState(), answer: e.target.value },
+                    [p.word]: { ...initState(), answer: e.target.value },
                   }))
                 }
                 disabled={s.checked}
