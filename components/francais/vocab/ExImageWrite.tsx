@@ -40,7 +40,7 @@ export function ExImageWrite({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Regardez l'image et écrivez le mot correspondant.
+        Regardez l&apos;image et écrivez le mot correspondant.
       </p>
       <div className="space-y-3">
         {words.map((w, i) => {

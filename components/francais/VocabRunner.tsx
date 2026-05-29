@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
@@ -59,7 +59,7 @@ export function VocabRunner({ theme }: Props) {
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === STEPS.length - 1;
   const showExButtons = !step.isTheory;
-  const isResultsStep = step.key === "results";
+
 
   const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
   const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
