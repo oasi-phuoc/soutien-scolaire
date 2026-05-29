@@ -126,16 +126,16 @@ function MfRows({ word, feminine, article }: { word: string; feminine?: string; 
   );
 }
 
-function resolveImage(image: string | undefined, section: string): string | undefined {
+function resolveImage(image: string | undefined, folder: string): string | undefined {
   if (!image) return undefined;
   if (image.startsWith("/")) return image;
-  return `/vocab/images/${section}/${image}`;
+  return `/vocab/images/${folder}/${image}`;
 }
 
-function WordCard({ w, cardLayout, section }: { w: VocabWord; cardLayout?: "mf"; section: string }) {
+function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "mf"; imageFolder: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
   const [imgFailed, setImgFailed] = useState(false);
-  const src = resolveImage(w.image, section);
+  const src = resolveImage(w.image, imageFolder);
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
@@ -229,7 +229,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
               <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">{sec.group}</p>
             )}
             <div className="grid grid-cols-2 gap-3">
-              {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} section={theme.section} />)}
+              {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} imageFolder={theme.imageFolder ?? theme.section} />)}
             </div>
           </div>
         ))}

@@ -49,6 +49,8 @@ export type VocabTheme = {
   theory?: VocabTheoryBlock[];
   /** "mf" = show word without article + always display m./f. rows even when feminine === word */
   cardLayout?: "mf";
+  /** Subfolder under /public/vocab/images/ for this theme's images (default: section) */
+  imageFolder?: string;
 };
 
 // ── Imports ───────────────────────────────────────────────────────────────────
