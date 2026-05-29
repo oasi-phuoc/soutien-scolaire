@@ -133,7 +133,6 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                 const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
                 if (country) {
                   const femForm = w.feminine ?? w.word;
-                  const sameForms = femForm === w.word;
                   return (
                     <>
                       {/* Line 1 — centered: article + country name bold */}
@@ -141,10 +140,16 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                         <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
                         <strong>{country.namePart}</strong>
                       </p>
-                      {/* Line 2 — left-aligned: masc / fem forms */}
-                      <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        <p>un {w.word}</p>
-                        <p>{sameForms ? `une ${w.word}` : `une ${femForm}`}</p>
+                      {/* Line 2 — left-aligned: masculine and feminine clearly labelled */}
+                      <div className="mt-1.5 space-y-0.5 text-xs">
+                        <p className="text-[var(--color-text-primary)]">
+                          <span className="mr-1 font-bold text-[var(--color-accent-fr)]">m.</span>
+                          un {w.word}
+                        </p>
+                        <p className="text-[var(--color-text-primary)]">
+                          <span className="mr-1 font-bold text-[var(--color-accent-fr)]">f.</span>
+                          une {femForm}
+                        </p>
                       </div>
                     </>
                   );
