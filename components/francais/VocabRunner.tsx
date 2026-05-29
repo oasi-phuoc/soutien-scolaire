@@ -330,20 +330,51 @@ export function VocabRunner({ theme }: Props) {
         </div>
       </header>
 
-      {/* Progress bar */}
-      <div className="mb-6 flex gap-1">
-        {STEPS.map((s, i) => (
-          <div
-            key={s.key}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < stepIdx
-                ? "bg-[var(--color-accent-fr)]"
-                : i === stepIdx
-                  ? "bg-[var(--color-accent-fr)] opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
+      {/* Two-phase progress bars */}
+      <div className="mb-6 space-y-1.5">
+        {/* Training phase — steps 0-9 */}
+        <div className="flex items-center gap-2">
+          <span className="w-24 shrink-0 text-right text-[9px] font-medium uppercase tracking-wide text-[var(--color-text-tertiary)]">
+            Entraînement
+          </span>
+          <div className="flex flex-1 gap-0.5">
+            {STEPS.slice(0, 10).map((s, i) => (
+              <div
+                key={s.key}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  stepIdx > i
+                    ? "bg-[var(--color-accent-fr)]"
+                    : stepIdx === i
+                      ? "bg-[var(--color-accent-fr)] opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        {/* Evaluation phase — steps 10-17 */}
+        <div className="flex items-center gap-2">
+          <span className="w-24 shrink-0 text-right text-[9px] font-medium uppercase tracking-wide text-[var(--color-text-tertiary)]">
+            Évaluation
+          </span>
+          <div className="flex flex-1 gap-0.5">
+            {STEPS.slice(10).map((s, i) => {
+              const relIdx = stepIdx - 10;
+              return (
+                <div
+                  key={s.key}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${
+                    stepIdx >= 10 && relIdx > i
+                      ? "bg-[var(--color-accent-fr)]"
+                      : stepIdx >= 10 && relIdx === i
+                        ? "bg-[var(--color-accent-fr)] opacity-60"
+                        : "bg-[var(--color-border-default)]"
+                  }`}
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* Step content */}
