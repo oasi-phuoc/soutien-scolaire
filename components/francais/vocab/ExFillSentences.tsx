@@ -18,7 +18,7 @@ export function ExFillSentences({
     const others = theme.words.filter((w) => !answers.has(w.word));
     const picked = shuffle([
       ...answerWords,
-      ...pickN(others, Math.max(0, 10 - answerWords.length)),
+      ...pickN(others, Math.max(0, 9 - answerWords.length)),
     ]);
     return picked.map((w) => w.word);
   });
@@ -64,12 +64,12 @@ export function ExFillSentences({
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Complétez chaque phrase avec le mot correct.
       </p>
-      {/* Word bank — round pills */}
-      <div className="mb-4 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-3">
+      {/* Word bank — uniform-width pills, no outer frame */}
+      <div className="mb-4 flex flex-wrap gap-2">
         {bankWords.map((word) => (
           <span
             key={word}
-            className="inline-flex items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-1 text-sm text-[var(--color-text-primary)] shadow-sm"
+            className="inline-flex w-24 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-1 text-sm text-[var(--color-text-primary)] shadow-sm"
           >
             {word}
           </span>
