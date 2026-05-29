@@ -114,11 +114,8 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
 
   return (
     <div>
-      <p className="mb-1 text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
-        {theme.code} — {theme.title}
-      </p>
-      <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
-        {theme.words.length} mots à apprendre
+      <p className="mb-4 text-xl font-bold text-[var(--color-text-primary)]">
+        Vocabulaire
       </p>
       <div className="grid grid-cols-3 gap-3">
         {theme.words.map((w) => (
