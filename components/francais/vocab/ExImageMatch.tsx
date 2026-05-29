@@ -10,12 +10,14 @@ type MatchState = { answer: string; checked: boolean; correct: boolean };
 export function ExImageMatch({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, 6));
-  const [shuffledImages] = useState<VocabWord[]>(() => shuffle([...words]));
+  const [{ words, shownCards }] = useState(() => {
+    const picked = pickN(theme.words, 6);           // 6 words → word list numbered 1-6
+    const subset = shuffle([...picked]).slice(0, 4); // 4 of those 6 → image cards
+    return { words: picked, shownCards: subset };
+  });
+
   const [states, setStates] = useState<Record<string, MatchState>>(() =>
-    Object.fromEntries(
-      shuffledImages.map((w) => [w.word, { answer: "", checked: false, correct: false }])
-    )
+    Object.fromEntries(shownCards.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -25,7 +27,7 @@ export function ExImageMatch({
     if (validateCommand === 0) return;
     let correct = 0;
     const updated: Record<string, MatchState> = {};
-    shuffledImages.forEach((w) => {
+    shownCards.forEach((w) => {
       const expectedIdx = words.findIndex((p) => p.word === w.word);
       const expected = String(expectedIdx + 1);
       const userAns = states[w.word]?.answer.trim() ?? "";
@@ -34,9 +36,23 @@ export function ExImageMatch({
       updated[w.word] = { answer: userAns, checked: true, correct: ok };
     });
     setStates(updated);
-    onValidated(correct, shuffledImages.length);
+    onValidated(correct, shownCards.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
+
+  function handleSelect(cardWord: string, newValue: string) {
+    setStates((prev) => {
+      const oldValue = prev[cardWord]?.answer ?? "";
+      const next = { ...prev };
+      // If another card already has this number, swap them
+      const clash = Object.entries(prev).find(([w, s]) => w !== cardWord && s.answer === newValue && newValue !== "");
+      if (clash) {
+        next[clash[0]] = { ...prev[clash[0]]!, answer: oldValue, checked: false, correct: false };
+      }
+      next[cardWord] = { ...prev[cardWord]!, answer: newValue, checked: false, correct: false };
+      return next;
+    });
+  }
 
   const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 1}` : "Exercice 1";
 
@@ -46,7 +62,7 @@ export function ExImageMatch({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Associez chaque image au mot en choisissant le numéro correspondant.
       </p>
-      {/* Word list — two columns */}
+      {/* Word list — two columns, 6 words */}
       <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
           <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
@@ -56,9 +72,9 @@ export function ExImageMatch({
           </p>
         ))}
       </div>
-      {/* Image cards — two columns */}
+      {/* Image cards — 4 cards in two columns */}
       <div className="grid grid-cols-2 gap-3">
-        {shuffledImages.map((w) => {
+        {shownCards.map((w) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
@@ -83,12 +99,7 @@ export function ExImageMatch({
                   <select
                     value={s.answer}
                     disabled={s.checked && s.correct}
-                    onChange={(e) =>
-                      setStates((prev) => ({
-                        ...prev,
-                        [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
-                      }))
-                    }
+                    onChange={(e) => handleSelect(w.word, e.target.value)}
                     className="rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 py-1 text-sm outline-none"
                   >
                     <option value="">—</option>
