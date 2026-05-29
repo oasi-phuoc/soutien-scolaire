@@ -124,9 +124,9 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
             className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3"
           >
             {w.image ? (
-              <img src={w.image} alt={w.word} className="h-14 w-full rounded object-cover" />
+              <img src={w.image} alt={w.word} className="h-28 w-full rounded object-cover" />
             ) : (
-              <div className="h-14 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
+              <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
             )}
             <div className="w-full">
               {(() => {
