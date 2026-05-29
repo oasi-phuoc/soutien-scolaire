@@ -156,8 +156,35 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                     </>
                   );
                 }
+                // m./f. layout for words with a feminine form
+                if (w.feminine) {
+                  const femArticle = w.article === "le" ? "la" : w.article === "un" ? "une" : w.article ?? "";
+                  return (
+                    <>
+                      <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+                        {w.article && (
+                          <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">{w.article}</span>
+                        )}
+                        {w.word}
+                      </p>
+                      <div className="mt-1.5 space-y-0.5 text-xs">
+                        <div className="flex items-baseline">
+                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">m.</span>
+                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{w.article}</span>
+                          <span className="text-[var(--color-text-primary)]">{w.word}</span>
+                        </div>
+                        <div className="flex items-baseline">
+                          <span className="w-5 shrink-0 font-bold text-[var(--color-accent-fr)]">f.</span>
+                          <span className="w-7 shrink-0 text-[var(--color-text-secondary)]">{femArticle}</span>
+                          <span className="text-[var(--color-text-primary)]">{w.feminine}</span>
+                        </div>
+                      </div>
+                    </>
+                  );
+                }
+
                 // Default card
-                const hasSecondary = (w.relatedWords && w.relatedWords.length > 0) || !!w.feminine;
+                const hasSecondary = (w.relatedWords && w.relatedWords.length > 0);
                 return (
                   <>
                     {/* Line 1 — centered: article + main word bold */}
@@ -169,10 +196,9 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                       )}
                       {w.word}
                     </p>
-                    {/* Line 2 — left-aligned: feminine form + related words */}
+                    {/* Line 2 — left-aligned: related words */}
                     {hasSecondary && (
                       <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
-                        {w.feminine && <p>/ {w.feminine}</p>}
                         {w.relatedWords && w.relatedWords.map((rw) => (
                           <p key={rw}>{rw}</p>
                         ))}

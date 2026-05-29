@@ -6,6 +6,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   title: "Les professions",
   section: "V1",
   words: [
+    { word: "étudiant",     article: "un",  gender: "m", feminine: "étudiante",      definition: "personne qui fait des études" },
     { word: "professeur",   article: "le",  gender: "m", feminine: "professeure",   definition: "personne qui enseigne" },
     { word: "médecin",      article: "le",  gender: "m",                             definition: "spécialiste de la santé" },
     { word: "infirmier",    article: "un",  gender: "m", feminine: "infirmière",     definition: "soignant en milieu médical" },
@@ -19,7 +20,6 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
     { word: "pharmacien",   article: "un",  gender: "m", feminine: "pharmacienne",   definition: "professionnel de la pharmacie" },
     { word: "policier",     article: "un",  gender: "m", feminine: "policière",      definition: "agent des forces de l'ordre" },
     { word: "secrétaire",   article: "un",  gender: "m",                             definition: "assistant administratif" },
-    { word: "étudiant",     article: "un",  gender: "m", feminine: "étudiante",      definition: "personne qui fait des études" },
     { word: "artiste",      article: "un",  gender: "m",                             definition: "personne qui pratique un art" },
   ],
   sentences: [
