@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
+import { ExerciseProps, pickN, shuffle, normalizeText } from "./vocabUtils";
 
 type LetterTile = { id: string; char: string };
 type WordAnagram = {
@@ -118,10 +118,7 @@ export function ExAnagram({
               </div>
               {/* Correction */}
               {item.checked && !item.correct && (
-                <div className={`mt-1.5 ${WRONG_BOX_CLS}`}>
-                  <span className="text-sm text-amber-600 line-through dark:text-amber-400">{builtWord || "—"}</span>
-                  <span className="text-sm font-medium text-[var(--color-text-primary)]">{item.word.word}</span>
-                </div>
+                <p className="mt-1 text-sm font-medium text-amber-500 dark:text-amber-400">{item.word.word}</p>
               )}
             </div>
           );

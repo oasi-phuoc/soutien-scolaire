@@ -86,31 +86,28 @@ export function ExDefinitionMatch({
           </p>
         ))}
       </div>
-      {/* Definition cards — 4 cards in two columns */}
-      <div className="grid grid-cols-2 gap-3">
+      {/* Definition rows — plain lines, no card border */}
+      <div className="space-y-2">
         {shownDefs.map((w, idx) => {
           const s = states[w.word]!;
           const correctIdx = words.findIndex((p) => p.word === w.word);
           return (
-            <div key={w.word} className="flex items-start gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2">
-              <span className="shrink-0 font-bold text-[var(--color-accent-fr)] text-sm">{LETTERS[idx]}.</span>
-              <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-                  {w.definition ?? w.word}
-                </p>
-                <div className="flex items-center">
-                  {s.checked && !s.correct ? (
-                    <div className={`h-8 ${WRONG_BOX_CLS}`}>
-                      <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                      <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
-                    </div>
-                  ) : (
-                    <select
-                      value={s.answer}
-                      disabled={s.checked && s.correct}
-                      onChange={(e) => handleSelect(w.word, e.target.value)}
-                      className="h-8 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
-                    >
+            <div key={w.word} className="flex items-center gap-2">
+              <span className="shrink-0 w-5 font-bold text-[var(--color-accent-fr)] text-sm">{LETTERS[idx]}.</span>
+              <p className="flex-1 text-sm text-[var(--color-text-primary)]">{w.definition ?? w.word}</p>
+              <div className="shrink-0">
+                {s.checked && !s.correct ? (
+                  <div className={`h-8 ${WRONG_BOX_CLS}`}>
+                    <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
+                  </div>
+                ) : (
+                  <select
+                    value={s.answer}
+                    disabled={s.checked && s.correct}
+                    onChange={(e) => handleSelect(w.word, e.target.value)}
+                    className="h-8 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
+                  >
                       <option value="">—</option>
                       {words.map((_, n) => (
                         <option key={n + 1} value={String(n + 1)}>{n + 1}</option>
@@ -118,7 +115,6 @@ export function ExDefinitionMatch({
                     </select>
                   )}
                 </div>
-              </div>
             </div>
           );
         })}
