@@ -33,6 +33,16 @@ export const HEURE_THEME: VocabTheme = {
       ],
     },
     {
+      type: "clocks" as const,
+      cols: 4,
+      items: [
+        { h: 8, m: 0,  label: "8h00 — pile" },
+        { h: 8, m: 15, label: "8h15 — et quart" },
+        { h: 8, m: 30, label: "8h30 — et demie" },
+        { h: 8, m: 45, label: "8h45 — moins le quart" },
+      ],
+    },
+    {
       type: "section" as const,
       title: "Poser et répondre à la question",
       items: [

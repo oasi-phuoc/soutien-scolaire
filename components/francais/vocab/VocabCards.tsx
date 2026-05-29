@@ -3,6 +3,31 @@ import { useEffect, Fragment } from "react";
 import type { VocabTheme, VocabTheoryBlock } from "@/lib/curriculum/vocabulary-data";
 import { playWord, SoundIcon } from "./vocabUtils";
 
+function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
+  const cx = size / 2, cy = size / 2, r = size * 0.44;
+  const hourDeg = ((h % 12) + m / 60) * 30;
+  const minuteDeg = m * 6;
+  function toXY(deg: number, len: number) {
+    const rad = (deg - 90) * (Math.PI / 180);
+    return { x: cx + len * Math.cos(rad), y: cy + len * Math.sin(rad) };
+  }
+  const hourEnd = toXY(hourDeg, r * 0.55);
+  const minuteEnd = toXY(minuteDeg, r * 0.82);
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={cx} cy={cy} r={r} fill="var(--color-bg-primary)" stroke="var(--color-border-emphasis)" strokeWidth="1.5" />
+      {Array.from({ length: 12 }, (_, i) => {
+        const outer = toXY(i * 30, r);
+        const inner = toXY(i * 30, r * (i % 3 === 0 ? 0.8 : 0.88));
+        return <line key={i} x1={inner.x} y1={inner.y} x2={outer.x} y2={outer.y} stroke="var(--color-text-secondary)" strokeWidth={i % 3 === 0 ? 2 : 1} />;
+      })}
+      <line x1={cx} y1={cy} x2={hourEnd.x} y2={hourEnd.y} stroke="var(--color-text-primary)" strokeWidth="3" strokeLinecap="round" />
+      <line x1={cx} y1={cy} x2={minuteEnd.x} y2={minuteEnd.y} stroke="var(--color-accent-fr)" strokeWidth="2" strokeLinecap="round" />
+      <circle cx={cx} cy={cy} r="2.5" fill="var(--color-text-primary)" />
+    </svg>
+  );
+}
+
 function TheoryBlock({ block }: { block: VocabTheoryBlock }) {
   if (block.type === "table") {
     return (
@@ -29,6 +54,21 @@ function TheoryBlock({ block }: { block: VocabTheoryBlock }) {
             ))}
           </tbody>
         </table>
+      </div>
+    );
+  }
+  if (block.type === "clocks") {
+    const cols = block.cols ?? 4;
+    return (
+      <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+        {block.items.map((clk, i) => (
+          <div key={i} className="flex flex-col items-center gap-1">
+            <AnalogClock h={clk.h} m={clk.m} size={72} />
+            {clk.label && (
+              <p className="text-center text-xs text-[var(--color-text-secondary)]">{clk.label}</p>
+            )}
+          </div>
+        ))}
       </div>
     );
   }

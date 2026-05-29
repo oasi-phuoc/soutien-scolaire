@@ -32,6 +32,7 @@ export type VocabSentence = {
 
 export type VocabTheoryBlock =
   | { type: "table"; headers: string[]; rows: string[][] }
+  | { type: "clocks"; items: Array<{ h: number; m: number; label?: string }>; cols?: number }
   | { type: "section"; title?: string; items: string[] }
   | { type: "note"; text: string };
 
