@@ -134,13 +134,15 @@ function resolveImage(image: string | undefined, section: string): string | unde
 
 function WordCard({ w, cardLayout, section }: { w: VocabWord; cardLayout?: "mf"; section: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
+  const [imgFailed, setImgFailed] = useState(false);
+  const src = resolveImage(w.image, section);
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
       <div className="relative">
-        {resolveImage(w.image, section) ? (
-          <img src={resolveImage(w.image, section)} alt={w.word} className="h-28 w-full rounded object-cover" />
+        {src && !imgFailed ? (
+          <img src={src} alt={w.word} className="h-28 w-full rounded object-cover" onError={() => setImgFailed(true)} />
         ) : (
           <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
         )}
