@@ -4,7 +4,7 @@ import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
-const WORD_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
+const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 type SentState = { answer: string; checked: boolean; correct: boolean };
 
@@ -16,13 +16,21 @@ export function ExFillSentences({
 
   const [bankWords] = useState<string[]>(() => {
     const answers = new Set(allSentences.map((s) => s.answer));
-    const answerWords = theme.words.filter((w) => answers.has(w.word));
-    const others = theme.words.filter((w) => !answers.has(w.word));
+    const answerWords = theme.words.filter((w) =>
+      answers.has(w.word) || (w.feminine && answers.has(w.feminine))
+    );
+    const answerSet = new Set(answerWords.map((w) => w.word));
+    const others = theme.words.filter((w) => !answerSet.has(w.word));
     const picked = shuffle([
       ...answerWords,
-      ...pickN(others, Math.max(0, 9 - answerWords.length)),
+      ...pickN(others, Math.max(0, 6 - answerWords.length)),
     ]);
-    return picked.map((w) => w.word);
+    const forms: string[] = [];
+    for (const w of picked) {
+      forms.push(w.word);
+      if (w.feminine) forms.push(w.feminine);
+    }
+    return [...new Set(forms)];
   });
 
   const [states, setStates] = useState<SentState[]>(() =>
