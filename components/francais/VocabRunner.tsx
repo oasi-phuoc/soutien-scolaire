@@ -156,6 +156,15 @@ export function VocabRunner({ theme }: Props) {
     setValidateCommand(0);
   }
 
+  function retryEval() {
+    setEvalScores([]);
+    setEvalTimeLeft(null);
+    setResetKey((k) => k + 1);
+    setStepIdx(10); // back to eval-announce
+    setValidated(true);
+    setCanValidate(false);
+  }
+
   function cancelEval() {
     setShowEvalCancelConfirm(false);
     setEvalScores([]);
@@ -295,8 +304,19 @@ export function VocabRunner({ theme }: Props) {
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
 
-            {/* Back — hidden on results */}
-            {!isLast ? (
+            {/* Back — or Retry on results */}
+            {isLast ? (
+              <button
+                type="button"
+                onClick={retryEval}
+                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                  <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
+                </svg>
+                Refaire
+              </button>
+            ) : (
               <button
                 type="button"
                 onClick={goBack}
@@ -307,8 +327,6 @@ export function VocabRunner({ theme }: Props) {
                 </svg>
                 Retour
               </button>
-            ) : (
-              <span />
             )}
 
             {/* Reset + Validate (exercise steps only; no reset during eval) */}
