@@ -11,7 +11,7 @@ type WordState = { answer: string; checked: boolean; correct: boolean; displayAn
 export function ExArticle({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => theme.words.slice(0, 10));
+  const [words] = useState<VocabWord[]>(() => theme.words.filter((w) => w.article).slice(0, 10));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );

@@ -124,14 +124,22 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
             ) : (
               <div className="h-14 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
             )}
-            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
-              {w.article && (
-                <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
-                  {w.article}
-                </span>
-              )}
-              {w.word}
-            </p>
+            <div className="w-full text-center">
+              <p className="text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+                {w.article && (
+                  <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
+                    {w.article}
+                  </span>
+                )}
+                {w.word}
+                {w.feminine && (
+                  <span className="font-normal text-[var(--color-text-secondary)]"> / {w.feminine}</span>
+                )}
+              </p>
+              {w.relatedWords && w.relatedWords.map((rw) => (
+                <p key={rw} className="mt-0.5 text-[10px] text-[var(--color-text-secondary)]">{rw}</p>
+              ))}
+            </div>
             <button
               type="button"
               onClick={() => playWord(w)}

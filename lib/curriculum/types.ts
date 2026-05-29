@@ -4,7 +4,7 @@ export type PedagogicMarker = "prerequisite" | "cross_ref" | "quiz";
 /** Compétences CECRL / PER (français). */
 export type CompetenceCode = "CO" | "CE" | "PO" | "PE";
 
-export type FrenchSection = "ALPHA" | "A0" | "A1" | "A2" | "B1" | "B2";
+export type FrenchSection = "ALPHA" | "A0" | "A1" | "A2" | "B1" | "B2" | "V1" | "V2" | "V3" | "V4" | "V5" | "V6" | "V7" | "V8" | "V9";
 
 export type FrenchTab = "general" | "vocabulaire" | "grammaire" | "conjugaison" | "communication";
 

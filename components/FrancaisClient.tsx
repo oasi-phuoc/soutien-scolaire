@@ -21,6 +21,18 @@ const SECTIONS: SectionDef[] = [
   { id: "B2", code: "B2", title: "Niveau B2" },
 ];
 
+const VOCAB_MODULES: SectionDef[] = [
+  { id: "V1", code: "V1", title: "L'identité" },
+  { id: "V2", code: "V2", title: "Le temps" },
+  { id: "V3", code: "V3", title: "Les loisirs" },
+  { id: "V4", code: "V4", title: "Le logement" },
+  { id: "V5", code: "V5", title: "L'école" },
+  { id: "V6", code: "V6", title: "Les vêtements" },
+  { id: "V7", code: "V7", title: "La nourriture" },
+  { id: "V8", code: "V8", title: "La santé" },
+  { id: "V9", code: "V9", title: "Les lieux" },
+];
+
 const TABS: { id: FrenchTab; label: string }[] = [
   { id: "vocabulaire",    label: "Vocabulaire" },
   { id: "grammaire",      label: "Grammaire" },
@@ -394,14 +406,26 @@ export function FrancaisClient() {
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
         {tab === "vocabulaire" ? (
-          <VocabFlatList
-            themes={SECTIONS.flatMap((sec) =>
-              FRENCH_THEMES.filter((th) => th.section === sec.id && th.tab === "vocabulaire")
-            )}
-            completedSlugs={hydrated ? completedSlugs : new Set()}
-            hydrated={hydrated}
-            vocabGrades={vocabGrades}
-          />
+          <>
+            {VOCAB_MODULES.map((mod) => {
+              const themes = FRENCH_THEMES.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
+              if (themes.length === 0) return null;
+              const allDone = hydrated && themes.every((th) => completedSlugs.has(th.slug));
+              const state: SectionState = !hydrated ? "locked" : allDone ? "completed" : "in_progress";
+              return (
+                <SectionCard
+                  key={mod.id}
+                  sec={mod}
+                  state={state}
+                  themes={themes}
+                  completedSlugs={hydrated ? completedSlugs : new Set()}
+                  hydrated={hydrated}
+                  returnTab={tab}
+                  vocabGrades={vocabGrades}
+                />
+              );
+            })}
+          </>
         ) : (
           (() => {
             const allTabThemes = SECTIONS.flatMap((sec) =>

@@ -18,10 +18,12 @@ export type VocabLesson = {
 
 export type VocabWord = {
   word: string;
-  article?: string;      // "le" / "la" / "les" / "un" / "une"
-  image?: string;        // path under /public/vocab/images/
-  audio?: string;        // path under /public/vocab/audio/
-  definition?: string;   // short definition in French
+  article?: string;        // "le" / "la" / "l'" / "un" / "une"
+  feminine?: string;       // feminine form, e.g. "française" for "français"
+  relatedWords?: string[]; // extra forms shown on card, e.g. ["la France"]
+  image?: string;          // path under /public/vocab/images/
+  audio?: string;          // path under /public/vocab/audio/
+  definition?: string;     // short definition in French
   gender?: "m" | "f";
 };
 
@@ -40,7 +42,7 @@ export type VocabTheme = {
   slug: string;
   code: string;
   title: string;
-  section: "A0" | "A1" | "A2" | "B1" | "B2";
+  section: "A0" | "A1" | "A2" | "B1" | "B2" | "V1" | "V2" | "V3" | "V4" | "V5" | "V6" | "V7" | "V8" | "V9";
   words: VocabWord[];
   sentences?: VocabSentence[];
   theory?: VocabTheoryBlock[];
