@@ -88,7 +88,7 @@ export function ExArticle({
               <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <div className={`w-16 ${WRONG_BOX_CLS}`}>
+                  <div className={`h-8 w-16 ${WRONG_BOX_CLS}`}>
                     <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                     <span className="text-sm font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
                   </div>
@@ -102,7 +102,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className="w-16 border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
+                    className="h-8 w-16 rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}
