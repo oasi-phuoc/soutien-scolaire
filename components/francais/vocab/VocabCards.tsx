@@ -132,27 +132,28 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
               {(() => {
                 const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
                 if (country) {
-                  // Nationality-style card: country bold at top, masc/fem below right-aligned
                   const femForm = w.feminine ?? w.word;
                   const sameForms = femForm === w.word;
                   return (
                     <>
-                      <p className="text-sm leading-tight text-[var(--color-text-primary)]">
+                      {/* Line 1 — centered: article + country name bold */}
+                      <p className="text-center text-sm leading-tight text-[var(--color-text-primary)]">
                         <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
                         <strong>{country.namePart}</strong>
                       </p>
-                      <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
-                        un {w.word}
-                      </p>
-                      <p className="text-xs text-[var(--color-text-secondary)]">
-                        {sameForms ? `une ${w.word}` : `une ${femForm}`}
-                      </p>
+                      {/* Line 2 — left-aligned: masc / fem forms */}
+                      <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                        <p>un {w.word}</p>
+                        <p>{sameForms ? `une ${w.word}` : `une ${femForm}`}</p>
+                      </div>
                     </>
                   );
                 }
                 // Default card
+                const hasSecondary = (w.relatedWords && w.relatedWords.length > 0) || !!w.feminine;
                 return (
                   <>
+                    {/* Line 1 — centered: article + main word bold */}
                     <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
                       {w.article && (
                         <span className="mr-0.5 font-normal text-[var(--color-text-secondary)]">
@@ -160,13 +161,16 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                         </span>
                       )}
                       {w.word}
-                      {w.feminine && (
-                        <span className="font-normal text-[var(--color-text-secondary)]"> / {w.feminine}</span>
-                      )}
                     </p>
-                    {w.relatedWords && w.relatedWords.map((rw) => (
-                      <p key={rw} className="mt-0.5 text-center text-[10px] text-[var(--color-text-secondary)]">{rw}</p>
-                    ))}
+                    {/* Line 2 — left-aligned: feminine form + related words */}
+                    {hasSecondary && (
+                      <div className="mt-1 text-xs text-[var(--color-text-secondary)]">
+                        {w.feminine && <p>/ {w.feminine}</p>}
+                        {w.relatedWords && w.relatedWords.map((rw) => (
+                          <p key={rw}>{rw}</p>
+                        ))}
+                      </div>
+                    )}
                   </>
                 );
               })()}
