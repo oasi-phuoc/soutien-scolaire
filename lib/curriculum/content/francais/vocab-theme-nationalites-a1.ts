@@ -4,8 +4,7 @@ export const NATIONALITES_A1_THEME: VocabTheme = {
   slug: "a1-voc-l02",
   code: "V.1b",
   title: "Les nationalités A1",
-  section: "A1",
-  imageFolder: "V1",
+  section: "V1",
   words: [
     { word: "France",       article: "la",  gender: "f", image: "france.jpg",    definition: "pays d'Europe occidentale" },
     { word: "Angleterre",   article: "l'",  gender: "f",                                       definition: "pays du Royaume-Uni" },

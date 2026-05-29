@@ -4,8 +4,7 @@ export const NATIONALITES_THEME: VocabTheme = {
   slug: "a0-voc-nationalites",
   code: "V.0",
   title: "Les nationalités",
-  section: "A0",
-  imageFolder: "V1",
+  section: "V1",
   words: [
     { word: "France",       article: "la",  gender: "f", image: "france.jpg",       definition: "pays d'Europe occidentale" },
     { word: "Allemagne",    article: "l'",  gender: "f", image: "allemagne.jpg",    definition: "pays d'Europe centrale" },
