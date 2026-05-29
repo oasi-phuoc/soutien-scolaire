@@ -127,6 +127,7 @@ export function VocabRunner({ theme }: Props) {
       const prev = STEPS[stepIdx - 1]!;
       setStepIdx((s) => s - 1);
       setResetKey((k) => k + 1);
+      setValidateCommand(0);
       setValidated(prev.isTheory);
       setCanValidate(!prev.isTheory);
     }
@@ -149,6 +150,7 @@ export function VocabRunner({ theme }: Props) {
       if (stepIdx === EVAL_START_IDX) setEvalTimeLeft(EVAL_DURATION); // start timer on leaving eval-announce
       setStepIdx((s) => s + 1);
       setResetKey((k) => k + 1);
+      setValidateCommand(0);
       setValidated(next.isTheory);
       setCanValidate(!next.isTheory);
     }
