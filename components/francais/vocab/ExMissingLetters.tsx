@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { ExerciseProps, normalizeText } from "./vocabUtils";
+import { ExerciseProps, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
 
 const VOWELS = "aeiouàâäèéêëîïôùûüœæ";
 const ALPHABET = "abcdefghijklmnopqrstuvwxyzàâäéèêëîïôùûüçœ".split("");
@@ -20,7 +20,8 @@ function makePatternChars(word: string): string[] {
 }
 
 type WordState = {
-  blanks: Record<number, string>; // position in word → chosen letter
+  blanks: Record<number, string>;       // position → chosen letter
+  blankOk: Record<number, boolean>;     // position → correct after check
   checked: boolean;
   correct: boolean;
 };
@@ -36,7 +37,7 @@ export function ExMissingLetters({
     Object.fromEntries(words.map((w) => {
       const blanks: Record<number, string> = {};
       makePatternChars(w.word).forEach((c, i) => { if (c === "_") blanks[i] = ""; });
-      return [w.word, { blanks, checked: false, correct: false }];
+      return [w.word, { blanks, blankOk: {}, checked: false, correct: false }];
     }))
   );
 
@@ -50,10 +51,16 @@ export function ExMissingLetters({
     words.forEach((w) => {
       const s = states[w.word]!;
       const pattern = patterns[w.word]!;
+      const blankOk: Record<number, boolean> = {};
+      pattern.forEach((c, pos) => {
+        if (c === "_") {
+          blankOk[pos] = normalizeText(s.blanks[pos] ?? "") === normalizeText(w.word[pos] ?? "");
+        }
+      });
       const built = pattern.map((c, i) => (c === "_" ? (s.blanks[i] ?? "") : c)).join("");
       const ok = normalizeText(built) === normalizeText(w.word);
       if (ok) correct++;
-      updated[w.word] = { ...s, checked: true, correct: ok };
+      updated[w.word] = { ...s, blankOk, checked: true, correct: ok };
     });
     setStates(updated);
     onValidated(correct, words.length);
@@ -83,16 +90,19 @@ export function ExMissingLetters({
             <div key={w.word} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex flex-wrap items-center gap-1">
-                {s.checked && !s.correct ? (
-                  /* Correction: show the correct word in amber, plain */
-                  <p className="text-sm font-medium text-amber-500 dark:text-amber-400">{w.word}</p>
-                ) : (
-                  pattern.map((char, pos) =>
-                    char === "_" ? (
+                {pattern.map((char, pos) =>
+                  char === "_" ? (
+                    // Blank position: select or correction box
+                    s.checked && s.blankOk[pos] === false ? (
+                      <div key={pos} className={`h-8 w-9 justify-center ${WRONG_BOX_CLS}`}>
+                        <span className="text-xs text-amber-600 line-through dark:text-amber-400">{s.blanks[pos] || "—"}</span>
+                        <span className="text-xs font-bold text-[var(--color-text-primary)]">{w.word[pos]}</span>
+                      </div>
+                    ) : (
                       <select
                         key={pos}
                         value={s.blanks[pos] ?? ""}
-                        disabled={s.checked && s.correct}
+                        disabled={s.checked}
                         onChange={(e) => setBlank(w.word, pos, e.target.value)}
                         className="h-8 w-9 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm font-bold text-[var(--color-accent-fr)] outline-none"
                       >
@@ -101,14 +111,15 @@ export function ExMissingLetters({
                           <option key={l} value={l}>{l}</option>
                         ))}
                       </select>
-                    ) : (
-                      <span
-                        key={pos}
-                        className="flex h-8 w-9 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
-                      >
-                        {char}
-                      </span>
                     )
+                  ) : (
+                    // Known letter tile
+                    <span
+                      key={pos}
+                      className="flex h-8 w-9 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-medium text-[var(--color-text-primary)]"
+                    >
+                      {char}
+                    </span>
                   )
                 )}
               </div>
