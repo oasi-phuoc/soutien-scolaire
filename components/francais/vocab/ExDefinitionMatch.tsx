@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_TEXT_CLS,
+  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 const LETTERS = ["a", "b", "c", "d", "e", "f"];
@@ -76,13 +76,11 @@ export function ExDefinitionMatch({
                 <p className="text-sm font-semibold text-[var(--color-text-primary)]">
                   {w.definition ?? w.word}
                 </p>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   {s.checked && !s.correct ? (
                     <>
-                      <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                      <span className="w-16 border-b border-[var(--color-border-emphasis)] text-center text-sm font-semibold text-[var(--color-text-primary)]">
-                        {correctIdx + 1}
-                      </span>
+                      <input readOnly value={s.answer || "—"} className={`w-10 text-center text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                      <input readOnly value={String(correctIdx + 1)} className={`w-10 text-center text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
                     </>
                   ) : (
                     <input

@@ -59,6 +59,13 @@ export const WRONG_ANSWER_CLS = "text-[var(--color-text-primary)] font-semibold"
 export const WRONG_BTN_CLS =
   "border-amber-400 bg-amber-50 text-amber-700 dark:border-amber-500 dark:bg-amber-900/20 dark:text-amber-400";
 
+// Correction display: wrong answer stays in a readonly input (strikethrough amber)
+// correct answer appears next to it in a normal readonly input
+export const WRONG_DISPLAY_INPUT_CLS =
+  "border-b border-amber-400 bg-transparent text-amber-600 line-through outline-none dark:border-amber-500 dark:text-amber-400";
+export const CORRECT_DISPLAY_INPUT_CLS =
+  "border-b border-[var(--color-border-emphasis)] bg-transparent text-[var(--color-text-primary)] outline-none";
+
 export function SoundIcon({ className = "" }: { className?: string }) {
   return (
     <svg

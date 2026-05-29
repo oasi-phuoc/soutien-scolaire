@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
@@ -90,8 +90,8 @@ export function ExArticle({
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <>
-                    <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{s.displayAnswer ?? w.article}</span>
+                    <input readOnly value={s.answer || "—"} className={`w-16 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                    <input readOnly value={s.displayAnswer ?? w.article ?? ""} className={`w-16 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
                   </>
                 ) : (
                   <input
@@ -103,11 +103,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className={`w-16 border-b bg-transparent text-sm outline-none ${
-                      s.checked && !s.correct
-                        ? WRONG_INPUT_CLS
-                        : "border-[var(--color-border-emphasis)]"
-                    }`}
+                    className="w-16 border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}

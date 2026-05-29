@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 function makeMissingPattern(word: string): string {
@@ -67,11 +67,10 @@ export function ExMissingLetters({
             <div key={w.word} className="space-y-0.5">
               <p className="font-mono text-sm text-[var(--color-text-secondary)]">{pattern}</p>
               {s.checked && !s.correct ? (
-                <p className="text-sm">
-                  <span className={WRONG_TEXT_CLS}>{s.answer || "—"}</span>
-                  {" "}
-                  <span className={WRONG_ANSWER_CLS}>{w.word}</span>
-                </p>
+                <div className="flex items-center gap-1.5">
+                  <input readOnly value={s.answer || "—"} className={`w-28 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                  <input readOnly value={w.word} className={`w-28 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
+                </div>
               ) : (
                 <input
                   type="text"
@@ -82,12 +81,7 @@ export function ExMissingLetters({
                       [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                     }))
                   }
-                  placeholder="mot complet"
-                  className={`w-full border-b bg-transparent text-sm outline-none placeholder:text-[var(--color-text-tertiary)] ${
-                    s.checked && !s.correct
-                      ? WRONG_INPUT_CLS
-                      : "border-[var(--color-border-emphasis)]"
-                  }`}
+                  className="w-full border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                   readOnly={s.checked && s.correct}
                 />
               )}

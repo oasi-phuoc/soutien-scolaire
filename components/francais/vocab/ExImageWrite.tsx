@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
@@ -55,11 +55,11 @@ export function ExImageWrite({
                   {w.article} {w.word}
                 </div>
               )}
-              <div className="flex flex-1 items-center gap-2">
+              <div className="flex flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <>
-                    <span className={`text-sm ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                    <span className={`text-sm ${WRONG_ANSWER_CLS}`}>{w.word}</span>
+                    <input readOnly value={s.answer || "—"} className={`w-24 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                    <input readOnly value={w.word} className={`w-24 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
                   </>
                 ) : (
                   <input
@@ -71,12 +71,7 @@ export function ExImageWrite({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    placeholder="mot…"
-                    className={`w-full border-b bg-transparent text-sm outline-none placeholder:text-[var(--color-text-tertiary)] ${
-                      s.checked && !s.correct
-                        ? WRONG_INPUT_CLS
-                        : "border-[var(--color-border-emphasis)]"
-                    }`}
+                    className="w-full border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}

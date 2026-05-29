@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS,
+  WRONG_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
@@ -55,7 +55,7 @@ export function ExSentenceWrite({
                 {w.word}
               </p>
               {s.checked && !s.correct ? (
-                <p className={`text-sm ${WRONG_TEXT_CLS}`}>Réponse manquante</p>
+                <input readOnly value={s.answer || "—"} className={`w-full text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
               ) : (
                 <input
                   type="text"
@@ -66,12 +66,7 @@ export function ExSentenceWrite({
                       [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                     }))
                   }
-                  placeholder={`Phrase avec « ${w.word} »…`}
-                  className={`w-full border-b bg-transparent text-sm outline-none placeholder:text-[var(--color-text-tertiary)] ${
-                    s.checked && !s.correct
-                      ? WRONG_INPUT_CLS
-                      : "border-[var(--color-border-emphasis)]"
-                  }`}
+                  className="w-full border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                 />
               )}
             </div>

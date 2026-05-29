@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import {
   ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_INPUT_CLS, WRONG_TEXT_CLS, WRONG_ANSWER_CLS,
+  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
 } from "./vocabUtils";
 
 type SentState = { answer: string; checked: boolean; correct: boolean };
@@ -87,8 +87,8 @@ export function ExFillSentences({
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct ? (
                 <>
-                  <span className={`mx-1 ${WRONG_TEXT_CLS}`}>{s.answer || "—"}</span>
-                  <span className={`mr-1 ${WRONG_ANSWER_CLS}`}>{sent.answer}</span>
+                  <input readOnly value={s.answer || "—"} className={`mx-1 inline-block w-24 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                  <input readOnly value={sent.answer} className={`mr-1 inline-block w-24 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
                 </>
               ) : (
                 <input
@@ -101,11 +101,7 @@ export function ExFillSentences({
                       )
                     )
                   }
-                  className={`mx-1 inline-block w-24 border-b bg-transparent text-sm outline-none ${
-                    s.checked && !s.correct
-                      ? WRONG_INPUT_CLS
-                      : "border-[var(--color-border-emphasis)]"
-                  }`}
+                  className="mx-1 inline-block w-24 border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                   readOnly={s.checked && s.correct}
                 />
               )}
