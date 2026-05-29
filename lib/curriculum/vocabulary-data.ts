@@ -14,6 +14,31 @@ export type VocabLesson = {
   exercises: Exercise[];
 };
 
+// ── New VocabTheme system (step-based runner) ─────────────────────────────────
+
+export type VocabWord = {
+  word: string;
+  article?: string;      // "le" / "la" / "les" / "un" / "une"
+  image?: string;        // path under /public/vocab/images/
+  audio?: string;        // path under /public/vocab/audio/
+  definition?: string;   // short definition in French
+  gender?: "m" | "f";
+};
+
+export type VocabSentence = {
+  sentence: string; // uses ___ for the blank
+  answer: string;   // exact word that fills the blank
+};
+
+export type VocabTheme = {
+  slug: string;
+  code: string;
+  title: string;
+  section: "A0" | "A1" | "A2" | "B1" | "B2";
+  words: VocabWord[];
+  sentences?: VocabSentence[];
+};
+
 // ── Imports ───────────────────────────────────────────────────────────────────
 
 import { A0_VOC_NATIONALITES } from "./content/francais/vocabulaire-a0-nationalites";
@@ -74,4 +99,16 @@ export function getVocabLesson(slug: string): VocabLesson | undefined {
 
 export function getAllVocabLessons(): VocabLesson[] {
   return VOCAB_LESSONS;
+}
+
+// ── VocabTheme registry ───────────────────────────────────────────────────────
+
+import { FAMILLE_THEME } from "./content/francais/vocab-theme-famille";
+
+export const VOCAB_THEMES: VocabTheme[] = [
+  FAMILLE_THEME,
+];
+
+export function getVocabTheme(slug: string): VocabTheme | undefined {
+  return VOCAB_THEMES.find((t) => t.slug === slug);
 }
