@@ -141,10 +141,10 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
                         <span className="font-normal text-[var(--color-text-secondary)]">{country.articlePart} </span>
                         <strong>{country.namePart}</strong>
                       </p>
-                      <p className="mt-0.5 text-right text-xs text-[var(--color-text-secondary)]">
+                      <p className="mt-0.5 text-xs text-[var(--color-text-secondary)]">
                         un {w.word}
                       </p>
-                      <p className="text-right text-xs text-[var(--color-text-secondary)]">
+                      <p className="text-xs text-[var(--color-text-secondary)]">
                         {sameForms ? `une ${w.word}` : `une ${femForm}`}
                       </p>
                     </>
