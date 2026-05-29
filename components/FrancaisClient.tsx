@@ -97,7 +97,7 @@ function LessonDot({ state }: { state: LessonState }) {
 
 // ── Vocab flat list (no section grouping) ────────────────────────────────────
 
-function VocabFlatList({
+function _VocabFlatList({
   themes,
   completedSlugs,
   hydrated,
