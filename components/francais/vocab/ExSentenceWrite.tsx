@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, pickN,
-  WRONG_DISPLAY_INPUT_CLS,
+  ExerciseProps, pickN, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
@@ -55,7 +54,9 @@ export function ExSentenceWrite({
                 {w.word}
               </p>
               {s.checked && !s.correct ? (
-                <input readOnly value={s.answer || "—"} className={`w-full text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
+                <div className={`w-full ${WRONG_BOX_CLS}`}>
+                  <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                </div>
               ) : (
                 <input
                   type="text"

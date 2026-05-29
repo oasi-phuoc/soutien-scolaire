@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
+  ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 type SentState = { answer: string; checked: boolean; correct: boolean };
@@ -86,10 +85,10 @@ export function ExFillSentences({
               <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct ? (
-                <>
-                  <input readOnly value={s.answer || "—"} className={`mx-1 inline-block w-24 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
-                  <input readOnly value={sent.answer} className={`mr-1 inline-block w-24 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
-                </>
+                <span className={`mx-1 ${WRONG_BOX_CLS}`}>
+                  <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                  <span className="text-sm font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
+                </span>
               ) : (
                 <input
                   type="text"

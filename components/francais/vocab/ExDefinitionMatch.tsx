@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, pickN, shuffle, normalizeText,
-  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
+  ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 const LETTERS = ["a", "b", "c", "d", "e", "f"];
@@ -50,7 +49,7 @@ export function ExDefinitionMatch({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Associez chaque définition au mot correspondant en écrivant le numéro.
+        Associez chaque définition au mot correspondant en choisissant le numéro.
       </p>
       {/* Word list — two columns */}
       <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
@@ -76,27 +75,29 @@ export function ExDefinitionMatch({
                 <p className="text-sm font-semibold text-[var(--color-text-primary)]">
                   {w.definition ?? w.word}
                 </p>
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center">
                   {s.checked && !s.correct ? (
-                    <>
-                      <input readOnly value={s.answer || "—"} className={`w-10 text-center text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
-                      <input readOnly value={String(correctIdx + 1)} className={`w-10 text-center text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
-                    </>
+                    <div className={WRONG_BOX_CLS}>
+                      <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                      <span className="text-sm font-medium text-[var(--color-text-primary)]">{String(correctIdx + 1)}</span>
+                    </div>
                   ) : (
-                    <input
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={1}
+                    <select
                       value={s.answer}
+                      disabled={s.checked && s.correct}
                       onChange={(e) =>
                         setStates((prev) => ({
                           ...prev,
                           [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                         }))
                       }
-                      className="w-16 border-b border-[var(--color-border-emphasis)] bg-transparent text-center text-sm outline-none"
-                      readOnly={s.checked && s.correct}
-                    />
+                      className="rounded border border-[var(--color-border-emphasis)] bg-transparent px-2 py-1 text-sm outline-none"
+                    >
+                      <option value="">—</option>
+                      {words.map((_, n) => (
+                        <option key={n + 1} value={String(n + 1)}>{n + 1}</option>
+                      ))}
+                    </select>
                   )}
                 </div>
               </div>

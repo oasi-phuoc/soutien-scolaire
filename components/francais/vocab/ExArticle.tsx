@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, normalizeText,
-  WRONG_DISPLAY_INPUT_CLS, CORRECT_DISPLAY_INPUT_CLS,
+  ExerciseProps, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
@@ -89,10 +88,10 @@ export function ExArticle({
               <span className="shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <>
-                    <input readOnly value={s.answer || "—"} className={`w-16 text-sm ${WRONG_DISPLAY_INPUT_CLS}`} />
-                    <input readOnly value={s.displayAnswer ?? w.article ?? ""} className={`w-16 text-sm ${CORRECT_DISPLAY_INPUT_CLS}`} />
-                  </>
+                  <div className={`w-16 ${WRONG_BOX_CLS}`}>
+                    <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
+                  </div>
                 ) : (
                   <input
                     type="text"
