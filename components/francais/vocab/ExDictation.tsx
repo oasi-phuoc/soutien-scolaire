@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, pickN, playWord, normalizeText, SoundIcon, WRONG_BOX_CLS,
+  ExerciseProps, pickN, playWord, normalizeText, SoundIcon,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
@@ -60,10 +60,11 @@ export function ExDictation({
                 </button>
               </div>
               {s.checked && !s.correct ? (
-                <div className={`w-full ${WRONG_BOX_CLS}`}>
-                  <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="text-sm font-medium text-[var(--color-text-primary)]">{w.word}</span>
-                </div>
+                <p className="h-8 w-full text-sm leading-8">
+                  <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                  {" "}
+                  <span className="font-medium text-[var(--color-text-primary)]">{w.word}</span>
+                </p>
               ) : (
                 <input
                   type="text"
@@ -74,7 +75,7 @@ export function ExDictation({
                       [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                     }))
                   }
-                  className="border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
+                  className="h-8 w-full border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
                   readOnly={s.checked && s.correct}
                 />
               )}
