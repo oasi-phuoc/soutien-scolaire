@@ -65,7 +65,7 @@ export function VocabRunner({ theme }: Props) {
   const [resetKey, setResetKey] = useState(0);
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
-  const [canValidate, setCanValidate] = useState(false);
+  const [_canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number }>>([]);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);

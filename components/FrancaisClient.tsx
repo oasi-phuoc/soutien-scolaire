@@ -292,7 +292,6 @@ export function FrancaisClient() {
 
     window.addEventListener("soutien-french-lesson-complete", refreshProgress);
     return () => window.removeEventListener("soutien-french-lesson-complete", refreshProgress);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
