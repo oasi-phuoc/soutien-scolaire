@@ -85,14 +85,14 @@ export function ExFillSentences({
               <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <span className="text-[var(--color-text-primary)]">{before}</span>
               {s.checked && !s.correct ? (
-                <span className={`mx-1 ${WRONG_BOX_CLS}`}>
+                <span className={`mx-1 inline-flex h-8 w-28 ${WRONG_BOX_CLS}`}>
                   <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                   <span className="text-sm font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
                 </span>
               ) : (
-                <input
-                  type="text"
+                <select
                   value={s.answer}
+                  disabled={s.checked && s.correct}
                   onChange={(e) =>
                     setStates((prev) =>
                       prev.map((st, j) =>
@@ -100,9 +100,13 @@ export function ExFillSentences({
                       )
                     )
                   }
-                  className="mx-1 inline-block w-24 border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
-                  readOnly={s.checked && s.correct}
-                />
+                  className="mx-1 inline-block h-8 w-28 rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-sm text-[var(--color-accent-fr)] outline-none"
+                >
+                  <option value="">—</option>
+                  {bankWords.map((word) => (
+                    <option key={word} value={word}>{word}</option>
+                  ))}
+                </select>
               )}
               <span className="text-[var(--color-text-primary)]">{after}</span>
             </div>
