@@ -110,13 +110,20 @@ export function ExQuestionWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 7}` : "Exercice 10";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 7}` : "Exercice 11";
 
   return (
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez une question avec le mot proposé. Utilisez un mot interrogatif (qui, quand, où, comment, combien, pourquoi…). Commencez par une majuscule et terminez par un point d&apos;interrogation.
+        Écrivez une question avec le mot proposé. Utilisez un mot interrogatif (
+        <strong className="font-bold text-[var(--color-accent-fr)]">qui</strong>,{" "}
+        <strong className="font-bold text-[var(--color-accent-fr)]">quand</strong>,{" "}
+        <strong className="font-bold text-[var(--color-accent-fr)]">où</strong>,{" "}
+        <strong className="font-bold text-[var(--color-accent-fr)]">comment</strong>,{" "}
+        <strong className="font-bold text-[var(--color-accent-fr)]">combien</strong>,{" "}
+        <strong className="font-bold text-[var(--color-accent-fr)]">pourquoi</strong>…).
+        Commencez par une majuscule et terminez par un point d&apos;interrogation.
       </p>
       <div className="space-y-4">
         {words.map((w, i) => {

@@ -15,6 +15,7 @@ import { ExDefinitionMatch } from "./vocab/ExDefinitionMatch";
 import { ExFillSentences } from "./vocab/ExFillSentences";
 import { ExImageWrite } from "./vocab/ExImageWrite";
 import { ExDictation } from "./vocab/ExDictation";
+import { ExWordOrder } from "./vocab/ExWordOrder";
 import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
@@ -36,8 +37,9 @@ const STEPS: StepDef[] = [
   { key: "ex6-fill-sentences",    label: "Ex. 6",        isTheory: false },
   { key: "ex7-image-write",       label: "Ex. 7",        isTheory: false },
   { key: "ex8-dictation",         label: "Ex. 8",        isTheory: false },
-  { key: "ex9-sentence-write",    label: "Ex. 9",        isTheory: false },
-  { key: "ex10-question-write",   label: "Ex. 10",       isTheory: false },
+  { key: "ex-word-order",         label: "Ex. 9",        isTheory: false },
+  { key: "ex9-sentence-write",    label: "Ex. 10",       isTheory: false },
+  { key: "ex10-question-write",   label: "Ex. 11",       isTheory: false },
   { key: "eval-announce",         label: "Évaluation",   isTheory: true },
   { key: "eval-ex2",              label: "Éval. 1",      isTheory: false, isEval: true, evalNumber: 1 },
   { key: "eval-ex4",              label: "Éval. 2",      isTheory: false, isEval: true, evalNumber: 2 },
@@ -49,10 +51,10 @@ const STEPS: StepDef[] = [
   { key: "results",               label: "Résultats",    isTheory: true },
 ];
 
-const TRAINING_STEPS = 11; // steps 0–10
-const EVAL_START_IDX = 11; // eval-announce
-const EVAL_EX_FIRST = 12;  // first eval exercise
-const EVAL_EX_LAST = 18;   // last eval exercise (eval-ex10)
+const TRAINING_STEPS = 12; // steps 0–11
+const EVAL_START_IDX = 12; // eval-announce
+const EVAL_EX_FIRST = 13;  // first eval exercise
+const EVAL_EX_LAST = 19;   // last eval exercise (eval-ex10)
 const EVAL_TOTAL = 7;
 
 const EVAL_EXERCISE_KEYS = ["eval-ex2","eval-ex4","eval-ex6","eval-ex7","eval-ex8","eval-ex9","eval-ex10"];
@@ -208,6 +210,8 @@ export function VocabRunner({ theme }: Props) {
         return <ExImageWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex8-dictation":
         return <ExDictation key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
+      case "ex-word-order":
+        return <ExWordOrder key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex9-sentence-write":
         return <ExSentenceWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} />;
       case "ex10-question-write":

@@ -159,13 +159,13 @@ export function ExSentenceWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 6}` : "Exercice 9";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 6}` : "Exercice 10";
 
   return (
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez une phrase complète avec le mot proposé. Commencez par une majuscule et terminez par un point.
+        Écrivez une phrase complète avec le mot proposé.<br />Commencez par une majuscule et terminez par un point.
       </p>
       <div className="space-y-4">
         {prompts.map((p, i) => {
