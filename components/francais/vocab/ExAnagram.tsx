@@ -87,40 +87,49 @@ export function ExAnagram({
           const builtWord = item.answer.map((t) => t.char).join("");
           return (
             <div key={item.word.word}>
-              {/* Number + scrambled tiles */}
-              <div className="flex flex-wrap items-center gap-1">
-                <span className="mr-1 w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-                {item.remaining.map((tile) => (
-                  <button
-                    key={tile.id}
-                    type="button"
-                    onClick={() => !item.checked && addTile(idx, tile)}
-                    className="flex h-8 min-w-[2rem] items-center justify-center rounded border border-[var(--color-border-default)] px-1.5 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-95"
-                  >
-                    {tile.char}
-                  </button>
-                ))}
-              </div>
-              {/* Built word line — click a letter to remove it */}
-              <div className="ml-6 mt-1 flex min-h-[2rem] flex-wrap items-center gap-px border-b border-[var(--color-border-emphasis)] pb-0.5">
-                {item.answer.length === 0 ? (
-                  <span className="text-xs text-[var(--color-text-tertiary)]">…</span>
+              {/* Row 1: number + answer line */}
+              <div className="flex items-center gap-2">
+                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
+                {item.checked && !item.correct ? (
+                  /* Correction in-place: strikethrough wrong + correct */
+                  <div className="flex min-h-[2rem] flex-1 flex-col items-start justify-center border-b-2 border-amber-400 pb-0.5">
+                    <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtWord || "—"}</span>
+                    <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.word.word}</span>
+                  </div>
                 ) : (
-                  item.answer.map((tile) => (
+                  /* Answer zone with underline */
+                  <div className="flex min-h-[2rem] flex-1 flex-wrap items-center gap-px border-b-2 border-[var(--color-accent-fr)]/50 pb-0.5">
+                    {item.answer.length === 0 ? (
+                      <span className="text-xs text-[var(--color-text-tertiary)]">…</span>
+                    ) : (
+                      item.answer.map((tile) => (
+                        <button
+                          key={tile.id}
+                          type="button"
+                          onClick={() => !item.checked && removeTile(idx, tile)}
+                          className="text-sm font-bold text-[var(--color-accent-fr)] transition-opacity hover:opacity-50"
+                        >
+                          {tile.char}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
+              {/* Row 2: available letter tiles */}
+              {!item.checked && (
+                <div className="ml-7 mt-1.5 flex flex-wrap gap-1">
+                  {item.remaining.map((tile) => (
                     <button
                       key={tile.id}
                       type="button"
-                      onClick={() => !item.checked && removeTile(idx, tile)}
-                      className="text-sm font-bold text-[var(--color-accent-fr)] transition-opacity hover:opacity-50"
+                      onClick={() => addTile(idx, tile)}
+                      className="flex h-8 min-w-[2rem] items-center justify-center rounded border border-[var(--color-border-default)] px-1.5 text-sm font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-95"
                     >
                       {tile.char}
                     </button>
-                  ))
-                )}
-              </div>
-              {/* Correction */}
-              {item.checked && !item.correct && builtWord.length > 0 && (
-                <p className="ml-6 mt-0.5 text-sm font-medium text-amber-500 dark:text-amber-400">{item.word.word}</p>
+                  ))}
+                </div>
               )}
             </div>
           );
