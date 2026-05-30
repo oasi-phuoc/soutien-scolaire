@@ -8,6 +8,7 @@ export type VocabWord = {
   definition?: string | string[];
   gender?: "m" | "f";
   group?: string;
+  exampleSentences?: { a1?: string[]; a2?: string[]; b1?: string[] };
 };
 
 export type VocabSentence = {

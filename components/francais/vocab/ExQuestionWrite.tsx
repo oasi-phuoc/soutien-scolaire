@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
+import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle } from "./vocabUtils";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
@@ -18,42 +18,81 @@ type WordState = {
   grammarChecking: boolean;
 };
 
+type Prompt = { word: string; context?: string };
+
 function initState(): WordState {
   return { answer: "", checked: false, correct: false, basicErrors: [], grammarErrors: [], grammarChecking: false };
 }
 
-/** Build pool: masculine + feminine forms + country names (without article). */
-function buildPool(theme: VocabTheme, count: number): string[] {
-  const pool: string[] = [];
+function pickRand<T>(arr: T[]): T | undefined {
+  if (!arr.length) return undefined;
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+/**
+ * Build 5 prompts: 2 A1, 2 A2, 1 B1 — using exampleSentences when available.
+ * Falls back to plain word prompts if sentences are not present.
+ */
+function buildPrompts(theme: VocabTheme, count: number): Prompt[] {
+  // Collect all candidate words (masculine + feminine forms)
+  const candidates: Array<{ word: string; source: VocabWord }> = [];
   for (const w of theme.words) {
-    pool.push(w.word);
-    if (w.feminine) pool.push(w.feminine);
-    const rw = w.relatedWords?.[0];
-    if (rw) {
-      const m = rw.match(/^(?:le |la |l'|les )(.+)$/i);
-      pool.push(m ? m[1]!.trim() : rw.trim());
-    }
+    candidates.push({ word: w.word, source: w });
+    if (w.feminine) candidates.push({ word: w.feminine, source: w });
   }
-  const deduped = [...new Set(pool)];
-  return shuffle(deduped).slice(0, count);
+  const shuffled = shuffle([...candidates]);
+
+  if (count < 5) {
+    // Eval mode: just pick words without level selection
+    return shuffled.slice(0, count).map(({ word, source }) => {
+      const anyLevel = source.exampleSentences;
+      const allSentences = [...(anyLevel?.a1 ?? []), ...(anyLevel?.a2 ?? []), ...(anyLevel?.b1 ?? [])];
+      const ctx = pickRand(allSentences);
+      return { word, context: ctx };
+    });
+  }
+
+  // Training: pick 2 A1, 2 A2, 1 B1
+  const withA1 = shuffled.filter((c) => (c.source.exampleSentences?.a1?.length ?? 0) > 0);
+  const withA2 = shuffled.filter((c) => (c.source.exampleSentences?.a2?.length ?? 0) > 0);
+  const withB1 = shuffled.filter((c) => (c.source.exampleSentences?.b1?.length ?? 0) > 0);
+
+  const result: Prompt[] = [];
+  const used = new Set<string>();
+
+  function pick(pool: typeof shuffled, level: "a1" | "a2" | "b1"): Prompt | null {
+    for (const c of pool) {
+      if (used.has(c.word)) continue;
+      const sentences = c.source.exampleSentences?.[level] ?? [];
+      const ctx = pickRand(sentences);
+      used.add(c.word);
+      return { word: c.word, context: ctx };
+    }
+    // fallback: any unused word without context
+    for (const c of shuffled) {
+      if (used.has(c.word)) continue;
+      used.add(c.word);
+      return { word: c.word };
+    }
+    return null;
+  }
+
+  for (let i = 0; i < 2; i++) result.push(pick(withA1, "a1") ?? { word: shuffled[result.length]?.word ?? "" });
+  for (let i = 0; i < 2; i++) result.push(pick(withA2, "a2") ?? { word: shuffled[result.length]?.word ?? "" });
+  result.push(pick(withB1, "b1") ?? { word: shuffled[result.length]?.word ?? "" });
+
+  return result.filter((p) => p.word);
 }
 
 function checkBasic(answer: string, word: string): string[] {
   const errors: string[] = [];
   if (answer.length === 0) return errors;
   const first = answer[0]!;
-  if (first !== first.toUpperCase() || first === first.toLowerCase()) {
-    errors.push("La question doit commencer par une majuscule.");
-  }
-  if (!answer.endsWith("?")) {
-    errors.push("La question doit se terminer par un point d'interrogation.");
-  }
-  if (!answer.toLowerCase().includes(word.toLowerCase())) {
-    errors.push(`Le mot « ${word} » doit être dans la question.`);
-  }
+  if (first !== first.toUpperCase() || first === first.toLowerCase()) errors.push("La question doit commencer par une majuscule.");
+  if (!answer.endsWith("?")) errors.push("La question doit se terminer par un point d'interrogation.");
+  if (!answer.toLowerCase().includes(word.toLowerCase())) errors.push(`Le mot « ${word} » doit être dans la question.`);
   const lower = answer.toLowerCase();
-  const hasInterrogative = INTERROGATIVE_WORDS.some((iw) => lower.includes(iw));
-  if (!hasInterrogative) {
+  if (!INTERROGATIVE_WORDS.some((iw) => lower.includes(iw))) {
     errors.push("La question doit contenir un mot interrogatif (qui, quand, où, comment, combien, pourquoi…).");
   }
   return errors;
@@ -62,9 +101,9 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExQuestionWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const [words] = useState<string[]>(() => buildPool(theme, isEval ? 2 : 4));
+  const [prompts] = useState<Prompt[]>(() => buildPrompts(theme, isEval ? 2 : 5));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
-    Object.fromEntries(words.map((w) => [w, initState()]))
+    Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -74,27 +113,18 @@ export function ExQuestionWrite({
     if (validateCommand === 0) return;
     let correct = 0;
     const updated: Record<string, WordState> = {};
-
-    words.forEach((w) => {
-      const answer = (states[w]?.answer ?? "").trim();
-      const basicErrors = checkBasic(answer, w);
+    prompts.forEach((p) => {
+      const answer = (states[p.word]?.answer ?? "").trim();
+      const basicErrors = checkBasic(answer, p.word);
       const ok = answer.length > 0 && basicErrors.length === 0;
       if (ok) correct++;
-      updated[w] = {
-        answer,
-        checked: true,
-        correct: ok,
-        basicErrors,
-        grammarErrors: [],
-        grammarChecking: answer.length > 3,
-      };
+      updated[p.word] = { answer, checked: true, correct: ok, basicErrors, grammarErrors: [], grammarChecking: answer.length > 3 };
     });
-
     setStates(updated);
-    onValidated(correct, words.length);
+    onValidated(correct, prompts.length);
 
-    words.forEach((w) => {
-      const answer = updated[w]?.answer ?? "";
+    prompts.forEach((p) => {
+      const answer = updated[p.word]?.answer ?? "";
       if (answer.length <= 3) return;
       fetch("/api/check-grammar", {
         method: "POST",
@@ -111,16 +141,10 @@ export function ExQuestionWrite({
               message: m.message,
               suggestions: (m.replacements ?? []).slice(0, 3).map((r) => r.value).filter(Boolean),
             }));
-          setStates((prev) => ({
-            ...prev,
-            [w]: { ...prev[w]!, grammarErrors: errors, grammarChecking: false },
-          }));
+          setStates((prev) => ({ ...prev, [p.word]: { ...prev[p.word]!, grammarErrors: errors, grammarChecking: false } }));
         })
         .catch(() => {
-          setStates((prev) => ({
-            ...prev,
-            [w]: { ...prev[w]!, grammarChecking: false },
-          }));
+          setStates((prev) => ({ ...prev, [p.word]: { ...prev[p.word]!, grammarChecking: false } }));
         });
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -142,52 +166,51 @@ export function ExQuestionWrite({
         Commencez par une majuscule et terminez par un point d&apos;interrogation.
       </p>
       <div className="space-y-4">
-        {words.map((w, i) => {
-          const s = states[w]!;
-          const isClean = s.checked && !s.grammarChecking && s.basicErrors.length === 0 && s.grammarErrors.length === 0 && s.answer.length > 0;
+        {prompts.map((p, i) => {
+          const s = states[p.word]!;
+          const hasErrors = s.basicErrors.length > 0 || s.grammarErrors.length > 0;
+          const isCheckedDone = s.checked && !s.grammarChecking;
           return (
-            <div key={w} className="space-y-1.5">
+            <div key={p.word} className="space-y-0.5">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
-                {w}
+                {p.word}
               </p>
-              <input
-                type="text"
-                value={s.answer}
-                onChange={(e) =>
-                  setStates((prev) => ({
-                    ...prev,
-                    [w]: { ...initState(), answer: e.target.value },
-                  }))
-                }
-                readOnly={s.checked}
-                className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none"
-              />
-              <div className="min-h-[1.25rem]">
-                {s.checked && s.grammarChecking && (
-                  <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
-                )}
-                {s.checked && !s.grammarChecking && (
-                  <ul className="space-y-0.5">
+              {p.context && (
+                <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{p.context}</p>
+              )}
+              {isCheckedDone && hasErrors ? (
+                <div className="border-b border-amber-400 py-1 text-center">
+                  <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>
+                  <ul className="mt-0.5 space-y-0.5">
                     {s.basicErrors.map((err, ei) => (
-                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">⚠ {err}</li>
+                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">{err}</li>
                     ))}
                     {s.grammarErrors.map((err, ei) => (
-                      <li key={`g${ei}`} className="flex flex-wrap items-baseline gap-1 text-xs">
-                        <span className="text-amber-600 dark:text-amber-400">• {err.shortMessage}</span>
+                      <li key={`g${ei}`} className="text-xs text-amber-600 dark:text-amber-400">
+                        {err.shortMessage}
                         {err.suggestions.length > 0 && (
-                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                            → {err.suggestions.join(" / ")}
-                          </span>
+                          <span className="ml-1 font-semibold text-[var(--color-text-primary)]">→ {err.suggestions.join(" / ")}</span>
                         )}
                       </li>
                     ))}
-                    {isClean && (
-                      <li className="text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</li>
-                    )}
                   </ul>
-                )}
-              </div>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={s.answer}
+                  onChange={(e) => setStates((prev) => ({ ...prev, [p.word]: { ...initState(), answer: e.target.value } }))}
+                  readOnly={s.checked}
+                  className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-center text-sm text-[var(--color-text-primary)] outline-none"
+                />
+              )}
+              {s.checked && s.grammarChecking && (
+                <p className="animate-pulse text-center text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
+              )}
+              {isCheckedDone && !hasErrors && s.answer.length > 0 && (
+                <p className="text-center text-xs text-[var(--color-text-secondary)]">✓</p>
+              )}
             </div>
           );
         })}

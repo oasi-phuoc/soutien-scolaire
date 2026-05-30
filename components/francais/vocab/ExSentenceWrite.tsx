@@ -22,72 +22,43 @@ function initState(): WordState {
   return { answer: "", checked: false, correct: false, basicErrors: [], grammarErrors: [], grammarChecking: false };
 }
 
-/** Randomly choose definite or indefinite article for a word. */
 function randomArticle(definite: string, word: string): string {
   const norm = definite.toLowerCase().replace(/['']/g, "'").trim();
   const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(word);
   const useDefinite = Math.random() < 0.5;
-
-  if (norm === "le" || norm === "un") {
-    return useDefinite ? (vowelStart ? "l'" : "le") : "un";
-  }
-  if (norm === "la" || norm === "une") {
-    return useDefinite ? (vowelStart ? "l'" : "la") : "une";
-  }
-  if (norm === "l'") {
-    return useDefinite ? "l'" : (Math.random() < 0.5 ? "un" : "une");
-  }
-  if (norm === "les" || norm === "des") {
-    return useDefinite ? "les" : "des";
-  }
+  if (norm === "le" || norm === "un") return useDefinite ? (vowelStart ? "l'" : "le") : "un";
+  if (norm === "la" || norm === "une") return useDefinite ? (vowelStart ? "l'" : "la") : "une";
+  if (norm === "l'") return useDefinite ? "l'" : (Math.random() < 0.5 ? "un" : "une");
+  if (norm === "les" || norm === "des") return useDefinite ? "les" : "des";
   return definite;
 }
 
-/** Build the word pool: country + masculine + feminine forms. */
 function buildPool(theme: VocabTheme, count: number): PromptWord[] {
   const pool: Array<{ word: string; defArt: string }> = [];
-
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
-
-    // Country name from relatedWords — only for themes where words have articles
     if (rw && w.article) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
       if (m) pool.push({ word: m[2]!.trim(), defArt: m[1]!.trim() });
     }
-
-    // Masculine form
     const defArtM = w.article ?? (rw ? "le" : "");
     if (defArtM) pool.push({ word: w.word, defArt: defArtM });
-
-    // Feminine form
     if (w.feminine) {
       const defArtF = w.article === "le" || w.article === "un" ? "la" : (w.article ?? "la");
       pool.push({ word: w.feminine, defArt: defArtF });
     }
   }
-
-  // Deduplicate by word, pick N, assign random display article
   const deduped = [...new Map(pool.map((p) => [p.word, p])).values()];
-  return pickN(deduped, count).map((p) => ({
-    word: p.word,
-    displayArticle: randomArticle(p.defArt, p.word),
-  }));
+  return pickN(deduped, count).map((p) => ({ word: p.word, displayArticle: randomArticle(p.defArt, p.word) }));
 }
 
 function checkBasic(answer: string, word: string): string[] {
   const errors: string[] = [];
   if (answer.length === 0) return errors;
   const first = answer[0]!;
-  if (first !== first.toUpperCase() || first === first.toLowerCase()) {
-    errors.push("La phrase doit commencer par une majuscule.");
-  }
-  if (!answer.endsWith(".")) {
-    errors.push("La phrase doit se terminer par un point.");
-  }
-  if (!answer.toLowerCase().includes(word.toLowerCase())) {
-    errors.push(`Le mot « ${word} » doit être dans la phrase.`);
-  }
+  if (first !== first.toUpperCase() || first === first.toLowerCase()) errors.push("La phrase doit commencer par une majuscule.");
+  if (!answer.endsWith(".")) errors.push("La phrase doit se terminer par un point.");
+  if (!answer.toLowerCase().includes(word.toLowerCase())) errors.push(`Le mot « ${word} » doit être dans la phrase.`);
   return errors;
 }
 
@@ -106,26 +77,16 @@ export function ExSentenceWrite({
     if (validateCommand === 0) return;
     let correct = 0;
     const updated: Record<string, WordState> = {};
-
     prompts.forEach((p) => {
       const answer = (states[p.word]?.answer ?? "").trim();
       const basicErrors = checkBasic(answer, p.word);
       const ok = answer.length > 0 && basicErrors.length === 0;
       if (ok) correct++;
-      updated[p.word] = {
-        answer,
-        checked: true,
-        correct: ok,
-        basicErrors,
-        grammarErrors: [],
-        grammarChecking: answer.length > 3,
-      };
+      updated[p.word] = { answer, checked: true, correct: ok, basicErrors, grammarErrors: [], grammarChecking: answer.length > 3 };
     });
-
     setStates(updated);
     onValidated(correct, prompts.length);
 
-    // Async grammar check
     prompts.forEach((p) => {
       const answer = updated[p.word]?.answer ?? "";
       if (answer.length <= 3) return;
@@ -144,16 +105,10 @@ export function ExSentenceWrite({
               message: m.message,
               suggestions: (m.replacements ?? []).slice(0, 3).map((r) => r.value).filter(Boolean),
             }));
-          setStates((prev) => ({
-            ...prev,
-            [p.word]: { ...prev[p.word]!, grammarErrors: errors, grammarChecking: false },
-          }));
+          setStates((prev) => ({ ...prev, [p.word]: { ...prev[p.word]!, grammarErrors: errors, grammarChecking: false } }));
         })
         .catch(() => {
-          setStates((prev) => ({
-            ...prev,
-            [p.word]: { ...prev[p.word]!, grammarChecking: false },
-          }));
+          setStates((prev) => ({ ...prev, [p.word]: { ...prev[p.word]!, grammarChecking: false } }));
         });
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -170,54 +125,48 @@ export function ExSentenceWrite({
       <div className="space-y-4">
         {prompts.map((p, i) => {
           const s = states[p.word]!;
-          const isClean = s.checked && !s.grammarChecking && s.basicErrors.length === 0 && s.grammarErrors.length === 0 && s.answer.length > 0;
-          const articleDisplay = p.displayArticle.endsWith("'")
-            ? p.displayArticle
-            : `${p.displayArticle} `;
+          const hasErrors = s.basicErrors.length > 0 || s.grammarErrors.length > 0;
+          const isCheckedDone = s.checked && !s.grammarChecking;
+          const articleDisplay = p.displayArticle.endsWith("'") ? p.displayArticle : `${p.displayArticle} `;
           return (
-            <div key={p.word} className="space-y-1.5">
+            <div key={p.word} className="space-y-0.5">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
                 <span className="font-normal text-[var(--color-text-secondary)]">{articleDisplay}</span>
                 {p.word}
               </p>
-              <input
-                type="text"
-                value={s.answer}
-                onChange={(e) =>
-                  setStates((prev) => ({
-                    ...prev,
-                    [p.word]: { ...initState(), answer: e.target.value },
-                  }))
-                }
-                readOnly={s.checked}
-                className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none"
-              />
-              <div className="min-h-[1.25rem]">
-                {s.checked && s.grammarChecking && (
-                  <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
-                )}
-                {s.checked && !s.grammarChecking && (
-                  <ul className="space-y-0.5">
+              {isCheckedDone && hasErrors ? (
+                <div className="border-b border-amber-400 py-1 text-center">
+                  <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>
+                  <ul className="mt-0.5 space-y-0.5">
                     {s.basicErrors.map((err, ei) => (
-                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">⚠ {err}</li>
+                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">{err}</li>
                     ))}
                     {s.grammarErrors.map((err, ei) => (
-                      <li key={`g${ei}`} className="flex flex-wrap items-baseline gap-1 text-xs">
-                        <span className="text-amber-600 dark:text-amber-400">• {err.shortMessage}</span>
+                      <li key={`g${ei}`} className="text-xs text-amber-600 dark:text-amber-400">
+                        {err.shortMessage}
                         {err.suggestions.length > 0 && (
-                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                            → {err.suggestions.join(" / ")}
-                          </span>
+                          <span className="ml-1 font-semibold text-[var(--color-text-primary)]">→ {err.suggestions.join(" / ")}</span>
                         )}
                       </li>
                     ))}
-                    {isClean && (
-                      <li className="text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</li>
-                    )}
                   </ul>
-                )}
-              </div>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={s.answer}
+                  onChange={(e) => setStates((prev) => ({ ...prev, [p.word]: { ...initState(), answer: e.target.value } }))}
+                  readOnly={s.checked}
+                  className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-center text-sm text-[var(--color-text-primary)] outline-none"
+                />
+              )}
+              {s.checked && s.grammarChecking && (
+                <p className="animate-pulse text-center text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
+              )}
+              {isCheckedDone && !hasErrors && s.answer.length > 0 && (
+                <p className="text-center text-xs text-[var(--color-text-secondary)]">✓</p>
+              )}
             </div>
           );
         })}
