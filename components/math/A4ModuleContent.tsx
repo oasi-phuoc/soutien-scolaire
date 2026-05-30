@@ -588,11 +588,15 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
       <div className="space-y-5">
         {colorItems.map((item, i) => (
           <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10") : "border-[var(--color-border-default)]"}`}>
-            <div className="mb-3 flex items-center gap-3">
-              <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
-              <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
+            <div className="flex items-center gap-3">
+              <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
+              <div className="shrink-0">
+                <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
+              </div>
+              <div className="flex flex-1 justify-center">
+                <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
+              </div>
             </div>
-            <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
             {validated && !colorResults[i] && (
               <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">Il fallait colorier {item.n} partie{item.n > 1 ? "s" : ""} sur {item.d}.</p>
             )}
