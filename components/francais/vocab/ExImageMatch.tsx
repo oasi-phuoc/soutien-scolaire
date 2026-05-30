@@ -111,7 +111,7 @@ export function ExImageMatch({
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-bold text-[var(--color-accent-fr)]">{cardIdx + 1}.</span>
                 {s.checked && !s.correct ? (
-                  <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
+                  <div className={`h-8 w-20 justify-center ${WRONG_BOX_CLS}`}>
                     <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                     <span className="text-sm font-medium text-[var(--color-text-primary)]">{WORD_LETTERS[correctIdx]}</span>
                   </div>
