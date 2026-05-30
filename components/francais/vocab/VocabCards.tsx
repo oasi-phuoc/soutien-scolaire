@@ -161,7 +161,9 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       <div className="w-full">
         {cardLayout === "mf" ? (
           <>
-            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">{w.word}</p>
+            <p className="text-center text-sm font-bold leading-tight text-[var(--color-text-primary)]">
+              {w.relatedWords?.[0] ?? w.word}
+            </p>
             <MfRows word={w.word} feminine={w.feminine} article={w.article} />
           </>
         ) : country ? (
@@ -227,7 +229,7 @@ export function VocabCards({ theme, onCanValidateChange }: Props) {
         {sections.map((sec, si) => (
           <div key={si}>
             {sec.group && (
-              <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">{sec.group}</p>
+              <p className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{sec.group}</p>
             )}
             <div className="grid grid-cols-2 gap-3">
               {sec.words.map((w) => <WordCard key={w.word} w={w} cardLayout={theme.cardLayout} imageFolder={theme.imageFolder ?? theme.section} />)}

@@ -6,6 +6,10 @@ export const V2_JOURS_MOIS_DATES_THEME: VocabTheme = {
   title: "Jours, Mois et Dates",
   section: "V2",
   words: [
+    { word: "jour",      article: "le",  gender: "m", group: "Calendrier", definition: "période de 24 heures" },
+    { word: "mois",      article: "le",  gender: "m", group: "Calendrier", definition: "division de l'année en 12 parties" },
+    { word: "semaine",   article: "la",  gender: "f", group: "Calendrier", definition: "période de 7 jours" },
+    { word: "année",     article: "l'",  gender: "f", group: "Calendrier", definition: "durée de 12 mois" },
     { word: "lundi",      group: "Jours",  definition: "premier jour de la semaine" },
     { word: "mardi",      group: "Jours",  definition: "deuxième jour de la semaine" },
     { word: "mercredi",   group: "Jours",  definition: "troisième jour de la semaine" },
