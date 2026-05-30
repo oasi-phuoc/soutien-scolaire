@@ -7,13 +7,15 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade } from "@/lib/scoring";
-import { FractionToggleExercise, CombinedDecimalExercise } from "@/components/math/A4ModuleContent";
+import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, CombinedDecimalExercise } from "@/components/math/A4ModuleContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 
 type WorkspaceStep =
   | { kind: "theory" }
   | { kind: "fraction_toggle" }
+  | { kind: "fraction_coloring" }
+  | { kind: "fraction_read" }
   | { kind: "decimal_exercises" }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
@@ -32,6 +34,8 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
     steps.push({ kind: "fraction_toggle" });
+    steps.push({ kind: "fraction_coloring" });
+    steps.push({ kind: "fraction_read" });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-2") {
@@ -844,7 +848,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "theory" &&
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "decimal_exercises";
+  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "decimal_exercises";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -914,9 +918,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       {/* Theory */}
       {currentStep?.kind === "theory" && <TheoryView lesson={lesson} />}
 
-      {/* A4-1 custom exercise */}
+      {/* A4-1 custom exercises */}
       {currentStep?.kind === "fraction_toggle" && (
         <FractionToggleExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "fraction_coloring" && (
+        <FractionColoringExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "fraction_read" && (
+        <FractionReadExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-2 custom exercise */}

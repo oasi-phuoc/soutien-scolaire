@@ -222,12 +222,12 @@ function FractionDisplay({ numerator, denominator, highlightPart }: {
   numerator: number; denominator: number; highlightPart: "num" | "den";
 }) {
   return (
-    <span className="inline-flex flex-col items-center gap-1 py-1">
-      <span className={`text-3xl font-bold leading-none tabular-nums ${highlightPart === "num" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
+    <span className="inline-flex flex-col items-center gap-0.5 py-0.5">
+      <span className={`text-base font-bold leading-none tabular-nums ${highlightPart === "num" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
         {numerator}
       </span>
-      <span className="h-[3px] w-10 rounded bg-[var(--color-text-primary)]" />
-      <span className={`text-3xl font-bold leading-none tabular-nums ${highlightPart === "den" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
+      <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
+      <span className={`text-base font-bold leading-none tabular-nums ${highlightPart === "den" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
         {denominator}
       </span>
     </span>
