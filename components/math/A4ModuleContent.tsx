@@ -248,8 +248,8 @@ function FracInline({ frac }: { frac: string }) {
   );
 }
 
-// ── Shape renderer (rect, grid, or triangle) ──────────────────────────────────
-type ShapeKind = "rect" | "grid" | "triangle";
+// ── Shape renderer ─────────────────────────────────────────────────────────────
+type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle";
 
 function FractionShape({ kind, d, colored, onToggle }: {
   kind: ShapeKind;
@@ -277,9 +277,28 @@ function FractionShape({ kind, d, colored, onToggle }: {
       </svg>
     );
   }
+  if (kind === "square") {
+    // Equal horizontal strips inside a square
+    const S = 100;
+    const stripH = S / d;
+    return (
+      <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
+        {Array.from({ length: d }, (_, k) => (
+          <rect key={k} x={0} y={k * stripH} width={S} height={stripH}
+            fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+            stroke="#2563eb" strokeWidth={1}
+            style={onToggle ? { cursor: "pointer" } : {}}
+            onClick={onToggle ? () => onToggle(k) : undefined}
+          />
+        ))}
+        <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+      </svg>
+    );
+  }
   if (kind === "triangle") {
-    const W = 120, H = 106;
-    const apexX = 60, apexY = 4, baseY = 102, halfBase = 52;
+    // Equal-height horizontal strips (standard in French primary school materials)
+    const W = 130, H = 110;
+    const apexX = 65, apexY = 4, baseY = 106, halfBase = 58;
     const totalH = baseY - apexY;
     return (
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
@@ -302,8 +321,34 @@ function FractionShape({ kind, d, colored, onToggle }: {
       </svg>
     );
   }
-  // rect: d horizontal cells
-  const W = 200, H = 48;
+  if (kind === "circle") {
+    // Equal pie slices (equal angle = equal area)
+    const W = 120, H = 120, cx = 60, cy = 60, r = 52;
+    const sliceAngle = (2 * Math.PI) / d;
+    return (
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+        {Array.from({ length: d }, (_, k) => {
+          const a0 = -Math.PI / 2 + k * sliceAngle;
+          const a1 = -Math.PI / 2 + (k + 1) * sliceAngle;
+          const x1 = cx + r * Math.cos(a0), y1 = cy + r * Math.sin(a0);
+          const x2 = cx + r * Math.cos(a1), y2 = cy + r * Math.sin(a1);
+          const largeArc = sliceAngle > Math.PI ? 1 : 0;
+          const pathD = `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
+          return (
+            <path key={k} d={pathD}
+              fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+              stroke="#2563eb" strokeWidth={1}
+              style={onToggle ? { cursor: "pointer" } : {}}
+              onClick={onToggle ? () => onToggle(k) : undefined}
+            />
+          );
+        })}
+        <circle cx={cx} cy={cy} r={r} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+      </svg>
+    );
+  }
+  // rect: d equal vertical strips (landscape band)
+  const W = 220, H = 52;
   const cellW = W / d;
   return (
     <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
@@ -319,6 +364,7 @@ function FractionShape({ kind, d, colored, onToggle }: {
           />
         );
       })}
+      <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
     </svg>
   );
 }
@@ -375,7 +421,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Identifie numérateur et dénominateur</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Le nombre en bleu est-il le numérateur ou le dénominateur ?</p>
       </div>
       <div className="space-y-4">
@@ -432,14 +478,14 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Colorie la fraction demandée</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touche les cases pour les colorier.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Colorie la fraction demandée</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touche les parties pour les colorier.</p>
       </div>
       <div className="space-y-5">
         {colorItems.map((item, i) => (
           <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10") : "border-[var(--color-border-default)]"}`}>
             <div className="mb-3 flex items-start gap-2">
-              <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
+              <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
               <p className="text-sm text-[var(--color-text-primary)]">{item.desc}</p>
             </div>
             <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
@@ -459,8 +505,8 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
   onValidated: (ok: boolean) => void;
 }) {
   const [readItems] = useState(generateFractionReadItems);
-  const [readAnswers, setReadAnswers] = useState<string[]>(() => Array(3).fill(""));
-  const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(3).fill("idle"));
+  const [readAnswers, setReadAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   const doValidate = useCallback(() => {
@@ -477,7 +523,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Observe et écris la fraction</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Observe et écris la fraction</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Observe le dessin et écris la fraction correspondante.</p>
       </div>
       <div className="space-y-5">
@@ -486,7 +532,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
           return (
             <div key={i}>
               <div className="mb-2 flex items-center gap-2">
-                <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
+                <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
               </div>
               <FractionShape kind={item.kind} d={item.d} colored={preColored} />
               <input
@@ -514,36 +560,27 @@ interface MatchPair { frac: string; dec: string; }
 interface DecConvItem { label: string; frac: string; answer: string; }
 interface FracConvItem { label: string; decStr: string; answer: string; denominator: number; }
 
+function rnd(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+
 function generateColoringItems(): ColoringSpec[] {
-  const useTriangle = Math.random() < 0.5;
-  const d1 = useTriangle
-    ? ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!
-    : ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
-  const kind1: ShapeKind = useTriangle ? "triangle" : "rect";
-  const shapeName = useTriangle ? "triangle" : "rectangle";
-  const n1 = Math.floor(Math.random() * (d1 - 1)) + 1;
-  const n2 = Math.floor(Math.random() * 9) + 1;
-  const n3 = Math.floor(Math.random() * 15) + 1;
+  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = rnd(2, 9), d4 = rnd(2, 15);
+  const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
   return [
-    { label: "a", kind: kind1, d: d1, n: n1, desc: `${n1}/${d1} d'un ${shapeName} partagé en ${d1} parties égales` },
-    { label: "b", kind: "rect", d: 10, n: n2, desc: `${n2}/10 d'une bande partagée en 10 parties égales` },
-    { label: "c", kind: "grid", d: 100, n: n3, desc: `${n3}/100 d'une grille de 100 cases` },
+    { label: "1", kind: "rect",     d: d1, n: n1, desc: `${n1}/${d1} d'un rectangle partagé en ${d1} parties égales` },
+    { label: "2", kind: "square",   d: d2, n: n2, desc: `${n2}/${d2} d'un carré partagé en ${d2} parties égales` },
+    { label: "3", kind: "triangle", d: d3, n: n3, desc: `${n3}/${d3} d'un triangle partagé en ${d3} parties égales` },
+    { label: "4", kind: "circle",   d: d4, n: n4, desc: `${n4}/${d4} d'un cercle partagé en ${d4} parties égales` },
   ];
 }
 
 function generateFractionReadItems(): FracReadSpec[] {
-  const useTriangle = Math.random() < 0.5;
-  const d1 = useTriangle
-    ? ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!
-    : ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
-  const kind1: ShapeKind = useTriangle ? "triangle" : "rect";
-  const n1 = Math.floor(Math.random() * (d1 - 1)) + 1;
-  const n2 = Math.floor(Math.random() * 9) + 1;
-  const n3 = Math.floor(Math.random() * 15) + 1;
+  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = rnd(2, 9), d4 = rnd(2, 15);
+  const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
   return [
-    { label: "a", kind: kind1, d: d1, n: n1, answer: `${n1}/${d1}` },
-    { label: "b", kind: "rect", d: 10, n: n2, answer: `${n2}/10` },
-    { label: "c", kind: "grid", d: 100, n: n3, answer: `${n3}/100` },
+    { label: "1", kind: "rect",     d: d1, n: n1, answer: `${n1}/${d1}` },
+    { label: "2", kind: "square",   d: d2, n: n2, answer: `${n2}/${d2}` },
+    { label: "3", kind: "triangle", d: d3, n: n3, answer: `${n3}/${d3}` },
+    { label: "4", kind: "circle",   d: d4, n: n4, answer: `${n4}/${d4}` },
   ];
 }
 
