@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 import type { LetterData } from "@/lib/curriculum/lecture-data";
 import { DiscoverSound } from "./DiscoverSound";
 import { VowelRecall } from "./VowelRecall";
@@ -70,6 +70,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   }, []);
   const [resetKey, setResetKey] = useState(0);
   const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number } | null>(null);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
@@ -186,6 +187,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             onBack={goBack}
             onDone={handleEvalDone}
             onEvalStepChange={(idx, total) => setEvalSubStep({ idx, total })}
+            onEvalTimeChange={(t) => setEvalTimeLeft(t)}
           />
         );
       default:
@@ -200,53 +202,53 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           Lecture · {isEvalStep ? "Évaluation" : data.type === "vowel" ? "Voyelle" : "Consonne"}
         </p>
         <div className="flex items-center gap-2">
-          <Link
-            href="/lecture"
+          <button
+            type="button"
+            onClick={goBack}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-lecture)] text-white transition-opacity hover:opacity-80"
             aria-label="Retour à la lecture"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
               <path d="M15 18l-6-6 6-6" />
             </svg>
-          </Link>
+          </button>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">
             {data.letter} - {data.letterLower} — {data.phoneme}
           </h1>
         </div>
       </header>
 
-      {/* Step progress bar */}
-      <div className={`flex gap-1 ${isEvalStep ? "mb-2" : "mb-6"}`}>
-        {steps.map((s, i) => (
-          <div
-            key={s.key}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < stepIdx
-                ? "bg-[var(--color-accent-lecture)]"
-                : i === stepIdx
-                  ? "bg-[var(--color-accent-lecture)] opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Eval sub-progress bar */}
-      {isEvalStep && evalSubStep && (
-        <div className="mb-6 flex gap-1">
-          {Array.from({ length: evalSubStep.total }).map((_, i) => (
-            <div
-              key={i}
-              className={`h-1 flex-1 rounded-full transition-colors ${
-                i < evalSubStep.idx
-                  ? "bg-[var(--color-accent-lecture)]"
-                  : i === evalSubStep.idx
-                    ? "bg-[var(--color-accent-lecture)] opacity-60"
-                    : "bg-[var(--color-border-default)]"
-              }`}
-            />
-          ))}
+      {/* Training progress bar — hidden during eval */}
+      {!isEvalStep && (
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-lecture)]">Entraînement</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {steps.length - 1}</p>
+          </div>
+          <div className="flex gap-1">
+            {steps.slice(0, -1).map((s, i) => (
+              <div
+                key={s.key}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i < stepIdx
+                    ? "bg-[var(--color-accent-lecture)]"
+                    : i === stepIdx
+                      ? "bg-[var(--color-accent-lecture)] opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
         </div>
+      )}
+
+      {/* Eval progress bar with timer — shown only during eval step */}
+      {isEvalStep && (
+        <EvalProgressBar
+          current={evalSubStep?.idx ?? 0}
+          total={evalSubStep?.total ?? 5}
+          timeLeft={evalTimeLeft}
+        />
       )}
 
       <div className="min-h-[280px]">{renderStep()}</div>

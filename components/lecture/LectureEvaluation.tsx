@@ -13,6 +13,7 @@ interface Props {
   onBack: () => void;
   onDone: (grade: number, passed: boolean, total: number) => void;
   onEvalStepChange?: (idx: number, total: number) => void;
+  onEvalTimeChange?: (timeLeft: number | null) => void;
 }
 
 type EvalStep = "grid" | "words" | "sound-image" | "sound-audio" | "pronounce" | "results";
@@ -598,7 +599,7 @@ function formatTime(s: number): string {
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 }
 
-export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Props) {
+export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const [stepIdx, setStepIdx] = useState(0);
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
@@ -628,6 +629,12 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
     onDone(grade, grade >= getPassGrade(), total);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evalTimeLeft]);
+
+  // Propagate timer to parent for display in progress bar
+  useEffect(() => {
+    onEvalTimeChange?.(evalStarted ? evalTimeLeft : null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalTimeLeft, evalStarted]);
 
   const goNextRef = useRef<() => void>(() => {});
 
@@ -671,7 +678,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
     <div className="w-full flex-1 pb-56">
       {/* Cancel confirmation dialog */}
       {showCancelConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
           <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
             <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Votre progression sera perdue. Vous pourrez recommencer depuis le début.</p>
@@ -704,20 +711,6 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
       )}
 
       <div className="min-h-[280px]">
-        {/* Timer chip */}
-        {evalStarted && !isResults && evalTimeLeft !== null && (
-          <div className="mb-4 flex justify-end">
-            <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
-              evalTimeLeft < 60
-                ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
-                : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
-            }`}>
-              <span aria-hidden>⏱</span>
-              <span>{formatTime(evalTimeLeft)}</span>
-            </div>
-          </div>
-        )}
-
         {/* Start screen */}
         {!evalStarted && !isResults && (
           <div className="flex flex-col items-center justify-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] py-10">
@@ -761,7 +754,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange }: Pr
         )}
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-[60]">
+      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button
