@@ -10,9 +10,11 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 // ── Step types ─────────────────────────────────────────────────────────────────
 type TheoryStep              = { kind: "theory"; lesson: MathSubmoduleLesson };
 type FractionToggleStep      = { kind: "fraction_toggle"; lesson: MathSubmoduleLesson };
+type FractionColoringStep    = { kind: "fraction_coloring"; lesson: MathSubmoduleLesson };
+type FractionReadStep        = { kind: "fraction_read"; lesson: MathSubmoduleLesson };
 type DecimalExercisesStep    = { kind: "a4_decimal_exercises" };
 type ExerciseStep            = { kind: "exercise"; lesson: MathSubmoduleLesson; item: MathExerciseItem; exNum: number };
-type FlatStep = TheoryStep | FractionToggleStep | DecimalExercisesStep | ExerciseStep;
+type FlatStep = TheoryStep | FractionToggleStep | FractionColoringStep | FractionReadStep | DecimalExercisesStep | ExerciseStep;
 
 // ── Helpers ────────────────────────────────────────────────────────────────────
 function shuffle<T>(arr: T[]): T[] {
@@ -38,6 +40,8 @@ function buildSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
     steps.push({ kind: "theory", lesson });
     if (lesson.submoduleId === "A4-1") {
       steps.push({ kind: "fraction_toggle", lesson });
+      steps.push({ kind: "fraction_coloring", lesson });
+      steps.push({ kind: "fraction_read", lesson });
     } else if (lesson.submoduleId === "A4-2") {
       steps.push({ kind: "a4_decimal_exercises" });
     } else {
@@ -244,8 +248,8 @@ function FracInline({ frac }: { frac: string }) {
   );
 }
 
-// ── Shape renderer (rect or grid) ─────────────────────────────────────────────
-type ShapeKind = "rect" | "grid";
+// ── Shape renderer (rect, grid, or triangle) ──────────────────────────────────
+type ShapeKind = "rect" | "grid" | "triangle";
 
 function FractionShape({ kind, d, colored, onToggle }: {
   kind: ShapeKind;
@@ -270,6 +274,31 @@ function FractionShape({ kind, d, colored, onToggle }: {
           );
         })}
         <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+      </svg>
+    );
+  }
+  if (kind === "triangle") {
+    const W = 120, H = 106;
+    const apexX = 60, apexY = 4, baseY = 102, halfBase = 52;
+    const totalH = baseY - apexY;
+    return (
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+        {Array.from({ length: d }, (_, k) => {
+          const t0 = k / d, t1 = (k + 1) / d;
+          const y0 = apexY + t0 * totalH, y1 = apexY + t1 * totalH;
+          const hw0 = t0 * halfBase, hw1 = t1 * halfBase;
+          const pts = k === 0
+            ? `${apexX},${apexY} ${apexX + hw1},${y1} ${apexX - hw1},${y1}`
+            : `${apexX - hw0},${y0} ${apexX + hw0},${y0} ${apexX + hw1},${y1} ${apexX - hw1},${y1}`;
+          return (
+            <polygon key={k} points={pts}
+              fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+              stroke="#2563eb" strokeWidth={1}
+              style={onToggle ? { cursor: "pointer" } : {}}
+              onClick={onToggle ? () => onToggle(k) : undefined}
+            />
+          );
+        })}
       </svg>
     );
   }
@@ -369,6 +398,115 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
   );
 }
 
+// ── Exercise: Fraction coloring (A4-1 step) ───────────────────────────────────
+export function FractionColoringExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [colorItems] = useState(generateColoringItems);
+  const [colored, setColored] = useState<Set<number>[]>(() => colorItems.map(() => new Set<number>()));
+  const [colorResults, setColorResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const res = colorItems.map((item, i) => colored[i]!.size === item.n);
+    setColorResults(res);
+    onValidated(res.every(Boolean));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, colorItems, colored]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  function toggleColor(itemIdx: number, cellIdx: number) {
+    if (validated) return;
+    setColored(prev => {
+      const next = prev.map(s => new Set(s));
+      if (next[itemIdx]!.has(cellIdx)) next[itemIdx]!.delete(cellIdx);
+      else next[itemIdx]!.add(cellIdx);
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Colorie la fraction demandée</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touche les cases pour les colorier.</p>
+      </div>
+      <div className="space-y-5">
+        {colorItems.map((item, i) => (
+          <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10") : "border-[var(--color-border-default)]"}`}>
+            <div className="mb-3 flex items-start gap-2">
+              <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
+              <p className="text-sm text-[var(--color-text-primary)]">{item.desc}</p>
+            </div>
+            <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
+            {validated && !colorResults[i] && (
+              <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">Il fallait colorier {item.n} partie{item.n > 1 ? "s" : ""} sur {item.d}.</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Exercise: Fraction read from shape (A4-1 step) ────────────────────────────
+export function FractionReadExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [readItems] = useState(generateFractionReadItems);
+  const [readAnswers, setReadAnswers] = useState<string[]>(() => Array(3).fill(""));
+  const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(3).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = readItems.map((item, i) => (answerMatches(readAnswers[i]!, [item.answer]) ? "correct" : "wrong")) as ("correct" | "wrong")[];
+    setReadStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, readItems, readAnswers]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Observe et écris la fraction</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Observe le dessin et écris la fraction correspondante.</p>
+      </div>
+      <div className="space-y-5">
+        {readItems.map((item, i) => {
+          const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
+          return (
+            <div key={i}>
+              <div className="mb-2 flex items-center gap-2">
+                <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
+              </div>
+              <FractionShape kind={item.kind} d={item.d} colored={preColored} />
+              <input
+                type="text"
+                value={readAnswers[i]}
+                onChange={(e) => { if (!validated) setReadAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                placeholder="ex. 3/4"
+                className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors ${readStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : readStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+              />
+              {readStatuses[i] === "wrong" && (
+                <p className="mt-1 text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{readAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Generators for combined exercise ──────────────────────────────────────────
 interface ColoringSpec { label: string; kind: ShapeKind; d: number; n: number; desc: string; }
 interface FracReadSpec { label: string; kind: ShapeKind; d: number; n: number; answer: string; }
@@ -377,24 +515,33 @@ interface DecConvItem { label: string; frac: string; answer: string; }
 interface FracConvItem { label: string; decStr: string; answer: string; denominator: number; }
 
 function generateColoringItems(): ColoringSpec[] {
-  const d1 = ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
+  const useTriangle = Math.random() < 0.5;
+  const d1 = useTriangle
+    ? ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!
+    : ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
+  const kind1: ShapeKind = useTriangle ? "triangle" : "rect";
+  const shapeName = useTriangle ? "triangle" : "rectangle";
   const n1 = Math.floor(Math.random() * (d1 - 1)) + 1;
   const n2 = Math.floor(Math.random() * 9) + 1;
   const n3 = Math.floor(Math.random() * 15) + 1;
   return [
-    { label: "a", kind: "rect", d: d1, n: n1, desc: `${n1}/${d1} d'un rectangle partagé en ${d1} parties égales` },
+    { label: "a", kind: kind1, d: d1, n: n1, desc: `${n1}/${d1} d'un ${shapeName} partagé en ${d1} parties égales` },
     { label: "b", kind: "rect", d: 10, n: n2, desc: `${n2}/10 d'une bande partagée en 10 parties égales` },
     { label: "c", kind: "grid", d: 100, n: n3, desc: `${n3}/100 d'une grille de 100 cases` },
   ];
 }
 
 function generateFractionReadItems(): FracReadSpec[] {
-  const d1 = ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
+  const useTriangle = Math.random() < 0.5;
+  const d1 = useTriangle
+    ? ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!
+    : ([2, 4, 8] as const)[Math.floor(Math.random() * 3)]!;
+  const kind1: ShapeKind = useTriangle ? "triangle" : "rect";
   const n1 = Math.floor(Math.random() * (d1 - 1)) + 1;
   const n2 = Math.floor(Math.random() * 9) + 1;
   const n3 = Math.floor(Math.random() * 15) + 1;
   return [
-    { label: "a", kind: "rect", d: d1, n: n1, answer: `${n1}/${d1}` },
+    { label: "a", kind: kind1, d: d1, n: n1, answer: `${n1}/${d1}` },
     { label: "b", kind: "rect", d: 10, n: n2, answer: `${n2}/10` },
     { label: "c", kind: "grid", d: 100, n: n3, answer: `${n3}/100` },
   ];
@@ -441,29 +588,19 @@ function generateFracConvItems(): FracConvItem[] {
 export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  // Ex 2 — Coloring
-  const [colorItems] = useState(generateColoringItems);
-  const [colored, setColored] = useState<Set<number>[]>(() => colorItems.map(() => new Set<number>()));
-  const [colorResults, setColorResults] = useState<boolean[]>([]);
-
-  // Ex 3 — Fraction read
-  const [readItems] = useState(generateFractionReadItems);
-  const [readAnswers, setReadAnswers] = useState<string[]>(() => Array(3).fill(""));
-  const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(3).fill("idle"));
-
-  // Ex 4 — Matching
+  // Ex 1 — Matching
   const [pairs] = useState(generateMatchPairs);
   const [shuffledDecs] = useState(() => shuffle(pairs.map(p => p.dec)));
   const [selectedFrac, setSelectedFrac] = useState<number | null>(null);
   const [matches, setMatches] = useState<Record<number, number>>({});
   const [matchResults, setMatchResults] = useState<boolean[]>([]);
 
-  // Ex 5 — Decimal conv
+  // Ex 2 — Decimal conv
   const [decItems] = useState(generateDecConvItems);
   const [decAnswers, setDecAnswers] = useState<string[]>(() => Array(4).fill(""));
   const [decStatuses, setDecStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
 
-  // Ex 6 — Fraction conv
+  // Ex 3 — Fraction conv
   const [fracItems] = useState(generateFracConvItems);
   const [fracAnswers, setFracAnswers] = useState<string[]>(() => Array(4).fill(""));
   const [fracStatuses, setFracStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
@@ -473,10 +610,6 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    const colorRes = colorItems.map((item, i) => colored[i]!.size === item.n);
-    setColorResults(colorRes);
-    const readSts = readItems.map((item, i) => (answerMatches(readAnswers[i]!, [item.answer]) ? "correct" : "wrong")) as ("correct" | "wrong")[];
-    setReadStatuses(readSts);
     const matchRes = pairs.map((pair, fi) => matches[fi] !== undefined && shuffledDecs[matches[fi]!] === pair.dec);
     setMatchResults(matchRes);
     const decSts = decItems.map((item, i) => (answerMatches(decAnswers[i]!, [item.answer]) ? "correct" : "wrong")) as ("correct" | "wrong")[];
@@ -484,26 +617,14 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
     const fracSts = fracItems.map((item, i) => (answerMatches(fracAnswers[i]!, [item.answer]) ? "correct" : "wrong")) as ("correct" | "wrong")[];
     setFracStatuses(fracSts);
     onValidated(
-      colorRes.every(Boolean) &&
-      readSts.every(s => s === "correct") &&
       matchRes.every(Boolean) &&
       decSts.every(s => s === "correct") &&
       fracSts.every(s => s === "correct"),
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validated, colorItems, colored, readItems, readAnswers, pairs, shuffledDecs, matches, decItems, decAnswers, fracItems, fracAnswers]);
+  }, [validated, pairs, shuffledDecs, matches, decItems, decAnswers, fracItems, fracAnswers]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
-
-  function toggleColor(itemIdx: number, cellIdx: number) {
-    if (validated) return;
-    setColored(prev => {
-      const next = prev.map(s => new Set(s));
-      if (next[itemIdx]!.has(cellIdx)) next[itemIdx]!.delete(cellIdx);
-      else next[itemIdx]!.add(cellIdx);
-      return next;
-    });
-  }
 
   function handleFracClick(fi: number) {
     if (validated) return;
@@ -549,63 +670,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
 
   return (
     <div className="space-y-8">
-      {/* Exercise 1 — Coloring */}
-      <div className="space-y-5">
-        <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Colorie la fraction demandée</h2>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Touche les cases pour les colorier.</p>
-        </div>
-        <div className="space-y-5">
-          {colorItems.map((item, i) => (
-            <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10") : "border-[var(--color-border-default)]"}`}>
-              <div className="mb-3 flex items-start gap-2">
-                <span className="mt-0.5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
-                <p className="text-sm text-[var(--color-text-primary)]">{item.desc}</p>
-              </div>
-              <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
-              {validated && !colorResults[i] && (
-                <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">Il fallait colorier {item.n} case{item.n > 1 ? "s" : ""} sur {item.d}.</p>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Exercise 2 — Fraction read */}
-      <div className="space-y-5">
-        <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Observe et écris la fraction</h2>
-          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Observe le dessin et écris la fraction correspondante.</p>
-        </div>
-        <div className="space-y-5">
-          {readItems.map((item, i) => {
-            const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
-            return (
-              <div key={i}>
-                <div className="mb-2 flex items-center gap-2">
-                  <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label})</span>
-                </div>
-                <FractionShape kind={item.kind} d={item.d} colored={preColored} />
-                <input
-                  type="text"
-                  value={readAnswers[i]}
-                  onChange={(e) => { if (!validated) setReadAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                  placeholder="ex. 3/4"
-                  className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors ${readStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : readStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
-                />
-                {readStatuses[i] === "wrong" && (
-                  <p className="mt-1 text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{readAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></p>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Exercise 3 — Matching */}
+      {/* Exercise 1 — Matching */}
       <div className="space-y-4">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Relie chaque fraction à son écriture décimale</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1 — Relie chaque fraction à son écriture décimale</h2>
           {selectedFrac !== null && !validated && (
             <p className="mt-1 text-xs text-[var(--color-accent-alg)]">Sélectionne maintenant l&apos;écriture décimale correspondante →</p>
           )}
@@ -631,10 +699,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 4 — Decimal conv */}
+      {/* Exercise 2 — Decimal conv */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Écris sous forme décimale</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2 — Écris sous forme décimale</h2>
         </div>
         <div className="space-y-3">
           {decItems.map((item, i) => (
@@ -655,10 +723,10 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
         </div>
       </div>
 
-      {/* Exercise 5 — Fraction conv */}
+      {/* Exercise 3 — Fraction conv */}
       <div className="space-y-5">
         <div>
-          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Écris sous forme de fraction</h2>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 3 — Écris sous forme de fraction</h2>
         </div>
         <div className="space-y-3">
           {fracItems.map((item, i) => (
@@ -729,7 +797,7 @@ export function A4ModuleContent() {
 
   function handleCustomValidated(ok: boolean) {
     setCanValidate(false);
-    if (currentStep?.kind === "fraction_toggle") {
+    if (currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read") {
       const p = loadProgress();
       saveProgress(completeSubmodule(p, "A4", currentStep.lesson.submoduleId));
     } else if (currentStep?.kind === "a4_decimal_exercises") {
@@ -773,6 +841,12 @@ export function A4ModuleContent() {
 
       {currentStep?.kind === "fraction_toggle" && (
         <FractionToggleExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "fraction_coloring" && (
+        <FractionColoringExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "fraction_read" && (
+        <FractionReadExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a4_decimal_exercises" && (
         <CombinedDecimalExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
