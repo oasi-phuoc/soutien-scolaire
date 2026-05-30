@@ -613,18 +613,22 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
   onValidated: (ok: boolean) => void;
 }) {
   const [readItems] = useState(generateFractionReadItems);
-  const [readAnswers, setReadAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [readNums, setReadNums] = useState<string[]>(() => Array(4).fill(""));
+  const [readDens, setReadDens] = useState<string[]>(() => Array(4).fill(""));
   const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    const sts = readItems.map((item, i) => (answerMatches(readAnswers[i]!, [item.answer]) ? "correct" : "wrong")) as ("correct" | "wrong")[];
+    const sts = readItems.map((item, i) => {
+      const combined = `${readNums[i]}/${readDens[i]}`;
+      return answerMatches(combined, [item.answer]) ? "correct" : "wrong";
+    }) as ("correct" | "wrong")[];
     setReadStatuses(sts);
     onValidated(sts.every(s => s === "correct"));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [validated, readItems, readAnswers]);
+  }, [validated, readItems, readNums, readDens]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
@@ -636,22 +640,41 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
       <div className="space-y-5">
         {readItems.map((item, i) => {
           const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
+          const isWrong = readStatuses[i] === "wrong";
+          const [correctNum, correctDen] = item.answer.split("/");
+          const inputCls = `w-12 bg-transparent text-center text-sm outline-none pb-0.5 border-b-2 ${isWrong ? "border-amber-500 text-amber-600 line-through" : "border-[var(--color-text-primary)] focus:border-[var(--color-accent-alg)]"}`;
           return (
-            <div key={i}>
-              <div className="mb-2 flex items-center gap-2">
-                <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
+            <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
+              <div className="flex items-center gap-3">
+                <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
+                <div className="flex flex-1 justify-center">
+                  <FractionShape kind={item.kind} d={item.d} colored={preColored} />
+                </div>
+                <div className="shrink-0 flex flex-col items-center gap-1">
+                  <input
+                    type="text"
+                    value={readNums[i]}
+                    onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                    placeholder="…"
+                    className={inputCls}
+                  />
+                  <span className="h-[2px] w-12 rounded bg-[var(--color-text-primary)]" />
+                  <input
+                    type="text"
+                    value={readDens[i]}
+                    onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                    placeholder="…"
+                    className={inputCls}
+                  />
+                  {isWrong && (
+                    <span className="mt-2 flex flex-col items-center gap-0.5">
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctNum}</span>
+                      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctDen}</span>
+                    </span>
+                  )}
+                </div>
               </div>
-              <FractionShape kind={item.kind} d={item.d} colored={preColored} />
-              <input
-                type="text"
-                value={readAnswers[i]}
-                onChange={(e) => { if (!validated) setReadAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                placeholder="ex. 3/4"
-                className={`mt-2 w-full rounded-xl border px-4 py-2.5 text-sm outline-none transition-colors ${readStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : readStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
-              />
-              {readStatuses[i] === "wrong" && (
-                <p className="mt-1 text-xs font-medium text-amber-600 dark:text-amber-400"><span className="line-through">{readAnswers[i]}</span> <span className="font-bold text-[var(--color-text-primary)]">{item.answer}</span></p>
-              )}
             </div>
           );
         })}
