@@ -9,6 +9,7 @@ type WordState = { answer: string; checked: boolean; correct: boolean };
 
 export function ExDictation({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
+  exerciseNumber,
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => pickN(theme.words, 6));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
@@ -33,7 +34,7 @@ export function ExDictation({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 5}` : "Exercice 8";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 5}` : `Exercice ${exerciseNumber ?? 8}`;
 
   return (
     <div>

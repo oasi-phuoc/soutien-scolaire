@@ -44,7 +44,7 @@ function checkBasic(answer: string, word: string): string[] {
 }
 
 export function ExQuestionWrite({
-  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
+  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => pickN(theme.words, isEval ? 2 : 4));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
@@ -110,7 +110,7 @@ export function ExQuestionWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 7}` : "Exercice 11";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 7}` : `Exercice ${exerciseNumber ?? 11}`;
 
   return (
     <div>

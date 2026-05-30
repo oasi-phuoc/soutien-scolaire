@@ -20,7 +20,7 @@ function normalize(s: string) {
 }
 
 export function ExWordOrder({
-  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
+  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
   const [phrases] = useState<string[]>(() =>
     (theme.sentences ?? []).slice(0, 5).map((s) => s.sentence.replace("___", s.answer))
@@ -59,7 +59,7 @@ export function ExWordOrder({
     }));
   }
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 9}` : "Exercice 9";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 9}` : `Exercice ${exerciseNumber ?? 9}`;
 
   if (phrases.length === 0) {
     return (

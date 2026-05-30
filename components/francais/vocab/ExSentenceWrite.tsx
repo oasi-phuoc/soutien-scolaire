@@ -92,7 +92,7 @@ function checkBasic(answer: string, word: string): string[] {
 }
 
 export function ExSentenceWrite({
-  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
+  theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
   const [prompts] = useState<PromptWord[]>(() => buildPool(theme, isEval ? 2 : 4));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
@@ -159,7 +159,7 @@ export function ExSentenceWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 6}` : "Exercice 10";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 6}` : `Exercice ${exerciseNumber ?? 10}`;
 
   return (
     <div>

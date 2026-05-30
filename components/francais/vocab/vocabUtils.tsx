@@ -50,6 +50,7 @@ export interface ExerciseProps {
   onCanValidateChange: (can: boolean) => void;
   isEval?: boolean;
   evalNumber?: number;
+  exerciseNumber?: number;
 }
 
 export const WRONG_INPUT_CLS =

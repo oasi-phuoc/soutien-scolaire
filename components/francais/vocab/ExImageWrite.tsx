@@ -66,6 +66,7 @@ function getCorrectDisplay(w: VocabWord): string {
 
 export function ExImageWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
+  exerciseNumber,
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => pickN(theme.words, 5));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
@@ -90,7 +91,7 @@ export function ExImageWrite({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
 
-  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 4}` : "Exercice 7";
+  const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 4}` : `Exercice ${exerciseNumber ?? 7}`;
 
   return (
     <div>

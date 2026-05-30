@@ -120,7 +120,7 @@ export function ExImageMatch({
                     value={s.answer}
                     disabled={s.checked && s.correct}
                     onChange={(e) => handleSelect(w.word, e.target.value)}
-                    className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
+                    className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-fr)] outline-none"
                   >
                     <option value="">—</option>
                     {WORD_LETTERS.map((letter) => (

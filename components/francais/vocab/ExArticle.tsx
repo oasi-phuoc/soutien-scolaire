@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord, VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import {
-  ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, shuffle, normalizeText,
 } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
@@ -100,10 +100,10 @@ export function ExArticle({
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <div className={`h-8 w-16 ${WRONG_BOX_CLS}`}>
-                    <span className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    <span className="text-sm font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
-                  </div>
+                  <p className="flex h-8 w-16 items-center gap-1 border-b border-amber-400 text-sm">
+                    <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
+                  </p>
                 ) : (
                   <input
                     type="text"
