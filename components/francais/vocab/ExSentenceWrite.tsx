@@ -37,19 +37,25 @@ function buildPool(theme: VocabTheme, count: number): PromptWord[] {
   const pool: Array<{ word: string; defArt: string }> = [];
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
-    if (rw && w.article) {
-      const m = rw.match(/^(le |la |l'|les )(.+)$/i);
-      if (m) pool.push({ word: m[2]!.trim(), defArt: m[1]!.trim() });
+    // Country name (strip article)
+    if (rw) {
+      const m = rw.match(/^(?:le |la |l'|les )(.+)$/i);
+      pool.push({ word: m ? m[1]!.trim() : rw.trim(), defArt: "" });
     }
-    const defArtM = w.article ?? (rw ? "le" : "");
-    if (defArtM) pool.push({ word: w.word, defArt: defArtM });
+    // Masculine form (no article = display without article)
+    pool.push({ word: w.word, defArt: w.article ?? "" });
+    // Feminine form
     if (w.feminine) {
-      const defArtF = w.article === "le" || w.article === "un" ? "la" : (w.article ?? "la");
-      pool.push({ word: w.feminine, defArt: defArtF });
+      const fArt = w.article === "le" || w.article === "l'" ? "la" :
+                   w.article === "un" ? "une" : (w.article ?? "");
+      pool.push({ word: w.feminine, defArt: fArt });
     }
   }
   const deduped = [...new Map(pool.map((p) => [p.word, p])).values()];
-  return pickN(deduped, count).map((p) => ({ word: p.word, displayArticle: randomArticle(p.defArt, p.word) }));
+  return pickN(deduped, count).map((p) => ({
+    word: p.word,
+    displayArticle: p.defArt ? randomArticle(p.defArt, p.word) : "",
+  }));
 }
 
 function checkBasic(answer: string, word: string): string[] {
@@ -127,12 +133,14 @@ export function ExSentenceWrite({
           const s = states[p.word]!;
           const hasErrors = s.basicErrors.length > 0 || s.grammarErrors.length > 0;
           const isCheckedDone = s.checked && !s.grammarChecking;
-          const articleDisplay = p.displayArticle.endsWith("'") ? p.displayArticle : `${p.displayArticle} `;
+          const articleDisplay = p.displayArticle
+            ? (p.displayArticle.endsWith("'") ? p.displayArticle : `${p.displayArticle} `)
+            : "";
           return (
             <div key={p.word} className="space-y-0.5">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
-                <span className="font-normal text-[var(--color-text-secondary)]">{articleDisplay}</span>
+                {articleDisplay && <span className="font-normal text-[var(--color-text-secondary)]">{articleDisplay}</span>}
                 {p.word}
               </p>
               {isCheckedDone && hasErrors ? (

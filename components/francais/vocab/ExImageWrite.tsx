@@ -8,52 +8,55 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
-/** Returns all accepted article forms for a word (definite + indefinite). */
-function getValidArticles(w: VocabWord): string[] {
-  if (!w.article) return [];
-  const a = normalizeText(w.article);
-  const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(w.word);
-
+/** Returns all accepted article forms for a given base article + word form. */
+function validArticles(article: string, word: string): string[] {
+  const a = normalizeText(article);
+  const vowelStart = /^[aeiouhéèêëàâïîôùûœæ]/i.test(word);
   if (a === "le" || a === "un") {
-    const valid = ["le", "un"];
-    if (vowelStart) valid.push("l'");
-    return valid;
+    const v = ["le", "un"]; if (vowelStart) v.push("l'"); return v;
   }
   if (a === "la" || a === "une") {
-    const valid = ["la", "une"];
-    if (vowelStart) valid.push("l'");
-    return valid;
+    const v = ["la", "une"]; if (vowelStart) v.push("l'"); return v;
   }
-  if (a === "l'") {
-    return ["l'", "un", "une"];
-  }
-  if (a === "les" || a === "des") {
-    return ["les", "des"];
-  }
+  if (a === "l'") return ["l'", "un", "une"];
+  if (a === "les" || a === "des") return ["les", "des"];
   return [a];
+}
+
+function femArticle(mascArt: string): string {
+  const a = normalizeText(mascArt);
+  if (a === "le" || a === "l'") return "la";
+  if (a === "un") return "une";
+  if (a === "les") return "les";
+  if (a === "des") return "des";
+  return mascArt;
 }
 
 /** Splits user input into article + word, handling elision (l'arbre). */
 function parseUserInput(input: string): { article: string; word: string } | null {
   const trimmed = input.trim();
   const elisionMatch = trimmed.match(/^(l['']\s*)(.+)$/i);
-  if (elisionMatch) {
-    return { article: "l'", word: elisionMatch[2]!.trim() };
-  }
+  if (elisionMatch) return { article: "l'", word: elisionMatch[2]!.trim() };
   const spaceIdx = trimmed.indexOf(" ");
   if (spaceIdx === -1) return null;
   return { article: trimmed.slice(0, spaceIdx).trim(), word: trimmed.slice(spaceIdx + 1).trim() };
 }
 
-function checkAnswer(userAns: string, w: VocabWord): boolean {
-  if (!userAns.trim()) return false;
-  if (!w.article) {
-    return normalizeText(userAns) === normalizeText(w.word);
-  }
+function checkForm(userAns: string, word: string, article?: string): boolean {
+  if (!article) return normalizeText(userAns) === normalizeText(word);
   const parsed = parseUserInput(userAns);
   if (!parsed) return false;
-  if (normalizeText(parsed.word) !== normalizeText(w.word)) return false;
-  return getValidArticles(w).includes(normalizeText(parsed.article));
+  if (normalizeText(parsed.word) !== normalizeText(word)) return false;
+  return validArticles(article, word).includes(normalizeText(parsed.article));
+}
+
+function checkAnswer(userAns: string, w: VocabWord): boolean {
+  if (!userAns.trim()) return false;
+  if (checkForm(userAns, w.word, w.article)) return true;
+  if (w.feminine && w.article) {
+    if (checkForm(userAns, w.feminine, femArticle(w.article))) return true;
+  }
+  return false;
 }
 
 /** Returns the definite article form with proper elision for display. */
@@ -115,7 +118,7 @@ export function ExImageWrite({
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded bg-[var(--color-bg-secondary)]">
                 {resolveImg(w.image) && (
-                  <Image src={resolveImg(w.image)!} alt="" fill className="object-cover" sizes="56px" />
+                  <Image src={resolveImg(w.image)!} alt="" fill className="object-contain" sizes="56px" />
                 )}
               </div>
               <div className="flex flex-1 items-center gap-1.5">

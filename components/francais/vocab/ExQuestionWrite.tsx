@@ -30,15 +30,21 @@ function pickRand<T>(arr: T[]): T | undefined {
 }
 
 /**
- * Build 5 prompts: 2 A1, 2 A2, 1 B1 — using exampleSentences when available.
+ * Build prompts using exampleSentences levels when available.
+ * For themes with no article (e.g. nationalités), also includes country names and feminine forms.
  * Falls back to plain word prompts if sentences are not present.
  */
 function buildPrompts(theme: VocabTheme, count: number): Prompt[] {
-  // Collect all candidate words (masculine + feminine forms)
+  // Collect all candidate words: masculine, feminine, country names (no article)
   const candidates: Array<{ word: string; source: VocabWord }> = [];
   for (const w of theme.words) {
     candidates.push({ word: w.word, source: w });
     if (w.feminine) candidates.push({ word: w.feminine, source: w });
+    const rw = w.relatedWords?.[0];
+    if (rw) {
+      const m = rw.match(/^(?:le |la |l'|les )(.+)$/i);
+      candidates.push({ word: m ? m[1]!.trim() : rw.trim(), source: w });
+    }
   }
   const shuffled = shuffle([...candidates]);
 
@@ -84,6 +90,18 @@ function buildPrompts(theme: VocabTheme, count: number): Prompt[] {
   return result.filter((p) => p.word);
 }
 
+const VERB_ROOTS = ["est", "sont", "a", "ont", "avons", "avez", "suis", "es", "êtes", "sommes",
+  "était", "étaient", "avait", "avaient", "sera", "seront", "aura", "auront",
+  "va", "vont", "fait", "font", "dit", "dit", "vient", "viennent", "peut", "peuvent",
+  "doit", "doivent", "veut", "veulent", "sait", "savent", "prend", "prennent"];
+const VERB_SUFFIX_RE = /(?:er|ir|re|ons|ez|ent|ait|aient|ais|asse|isse|usse)$/i;
+
+function hasVerb(text: string): boolean {
+  const words = text.toLowerCase().replace(/[?.,!;:]/g, "").split(/[\s''-]+/);
+  return words.some((w) => VERB_ROOTS.includes(w) ||
+    (w.length > 4 && VERB_SUFFIX_RE.test(w)));
+}
+
 function checkBasic(answer: string, word: string): string[] {
   const errors: string[] = [];
   if (answer.length === 0) return errors;
@@ -94,6 +112,9 @@ function checkBasic(answer: string, word: string): string[] {
   const lower = answer.toLowerCase();
   if (!INTERROGATIVE_WORDS.some((iw) => lower.includes(iw))) {
     errors.push("La question doit contenir un mot interrogatif (qui, quand, où, comment, combien, pourquoi…).");
+  }
+  if (!hasVerb(answer)) {
+    errors.push("La question doit contenir un verbe.");
   }
   return errors;
 }

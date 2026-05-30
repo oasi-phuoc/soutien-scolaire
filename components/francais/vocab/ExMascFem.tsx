@@ -14,15 +14,18 @@ function randomMascArt(w: VocabWord): string {
   return "un";
 }
 
-/** Valid feminine articles for a given feminine word form. */
-function validFemArts(feminine: string): string[] {
+/** Valid feminine articles — matches the article type shown for the masculine. */
+function validFemArts(feminine: string, mascArt: string): string[] {
   const vowelStart = VOWEL_RE.test(feminine);
-  return vowelStart ? ["l'", "la", "une"] : ["la", "une"];
+  if (mascArt === "un") return vowelStart ? ["une", "l'"] : ["une"];
+  return vowelStart ? ["l'", "la"] : ["la"];
 }
 
-/** Correct feminine display: elided definite article + word. */
-function correctFemDisplay(feminine: string): string {
-  return VOWEL_RE.test(feminine) ? `l'${feminine}` : `la ${feminine}`;
+/** Correct feminine display using the same article type as the masculine hint. */
+function correctFemDisplay(feminine: string, mascArt: string): string {
+  const vowelStart = VOWEL_RE.test(feminine);
+  const art = mascArt === "un" ? "une" : (vowelStart ? "l'" : "la");
+  return art.endsWith("'") ? `${art}${feminine}` : `${art} ${feminine}`;
 }
 
 /** Parse user input into article + word (handles elision). */
@@ -35,12 +38,12 @@ function parseInput(input: string): { article: string; word: string } | null {
   return { article: t.slice(0, sp).trim(), word: t.slice(sp + 1).trim() };
 }
 
-function checkAnswer(userAns: string, feminine: string): boolean {
+function checkAnswer(userAns: string, feminine: string, mascArt: string): boolean {
   if (!userAns.trim()) return false;
   const parsed = parseInput(userAns);
   if (!parsed) return false;
   if (normalizeText(parsed.word) !== normalizeText(feminine)) return false;
-  return validFemArts(feminine).includes(normalizeText(parsed.article));
+  return validFemArts(feminine, mascArt).includes(normalizeText(parsed.article));
 }
 
 export function ExMascFem({
@@ -64,9 +67,9 @@ export function ExMascFem({
     if (validateCommand === 0) return;
     let correct = 0;
     const updated: Record<string, WordState> = {};
-    entries.forEach(({ word: w }) => {
+    entries.forEach(({ word: w, mascArt }) => {
       const userAns = (states[w.word]?.answer ?? "").trim();
-      const ok = checkAnswer(userAns, w.feminine!);
+      const ok = checkAnswer(userAns, w.feminine!, mascArt);
       if (ok) correct++;
       updated[w.word] = { answer: userAns, checked: true, correct: ok };
     });
@@ -99,7 +102,7 @@ export function ExMascFem({
               {s.checked && !s.correct ? (
                 <p className="flex h-8 flex-1 items-center gap-1.5 border-b border-amber-400 text-sm">
                   <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="font-medium text-[var(--color-text-primary)]">{correctFemDisplay(w.feminine!)}</span>
+                  <span className="font-medium text-[var(--color-text-primary)]">{correctFemDisplay(w.feminine!, mascArt)}</span>
                 </p>
               ) : (
                 <input

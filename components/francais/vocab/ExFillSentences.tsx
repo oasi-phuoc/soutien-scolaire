@@ -27,8 +27,8 @@ export function ExFillSentences({
       if (!answerSet.has(w.word)) distractorPool.push(w.word);
       if (w.feminine && !answerSet.has(w.feminine)) distractorPool.push(w.feminine);
     }
-    const distractors = shuffle(distractorPool).slice(0, Math.max(0, 9 - answerForms.length));
-    return shuffle([...answerForms, ...distractors]).slice(0, 9);
+    const distractors = shuffle(distractorPool).slice(0, Math.max(0, 8 - answerForms.length));
+    return shuffle([...answerForms, ...distractors]).slice(0, 8);
   });
 
   const [states, setStates] = useState<SentState[]>(() =>
@@ -73,7 +73,7 @@ export function ExFillSentences({
         Complétez chaque phrase avec le mot correct.
       </p>
       {/* Word bank — plain lettered list, no pill borders */}
-      <div className="grid grid-cols-3 gap-x-4 gap-y-1">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {bankWords.map((word, i) => (
           <div key={word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
