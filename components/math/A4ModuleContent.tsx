@@ -251,25 +251,28 @@ function FracInline({ frac }: { frac: string }) {
 // ── Shape renderer ─────────────────────────────────────────────────────────────
 type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle";
 
-function FractionShape({ kind, d, colored, onToggle }: {
+function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
   kind: ShapeKind;
   d: number;
   colored: Set<number>;
   onToggle?: (i: number) => void;
+  scale?: number;
 }) {
+  const toggle = onToggle;
+  const s = scale;
   if (kind === "grid") {
     const cols = 10, cellW = 13, cellH = 10;
     const W = cols * cellW, H = 10 * cellH;
     return (
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+      <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
         {Array.from({ length: 100 }, (_, i) => {
           const r = Math.floor(i / cols), c = i % cols;
           return (
             <rect key={i} x={c * cellW} y={r * cellH} width={cellW} height={cellH}
               fill={colored.has(i) ? "#3b82f6" : "#eff6ff"}
               stroke="#93c5fd" strokeWidth={0.5}
-              style={onToggle ? { cursor: "pointer" } : {}}
-              onClick={onToggle ? () => onToggle(i) : undefined}
+              style={toggle ? { cursor: "pointer" } : {}}
+              onClick={toggle ? () => toggle(i) : undefined}
             />
           );
         })}
@@ -282,15 +285,14 @@ function FractionShape({ kind, d, colored, onToggle }: {
     const sqrtD = Math.round(Math.sqrt(d));
     const isGrid = sqrtD * sqrtD === d && d >= 4;
     if (d === 2) {
-      // Two vertical halves
       return (
-        <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
+        <svg width={Math.round(S * s)} height={Math.round(S * s)} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
           {[0, 1].map(k => (
             <rect key={k} x={k * 50} y={0} width={50} height={S}
               fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
               stroke="#2563eb" strokeWidth={1}
-              style={onToggle ? { cursor: "pointer" } : {}}
-              onClick={onToggle ? () => onToggle(k) : undefined}
+              style={toggle ? { cursor: "pointer" } : {}}
+              onClick={toggle ? () => toggle(k) : undefined}
             />
           ))}
           <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
@@ -298,18 +300,17 @@ function FractionShape({ kind, d, colored, onToggle }: {
       );
     }
     if (isGrid) {
-      // N×N grid (N=2→4, N=3→9, N=4→16)
       const cellSize = S / sqrtD;
       return (
-        <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
+        <svg width={Math.round(S * s)} height={Math.round(S * s)} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
           {Array.from({ length: d }, (_, k) => {
             const r = Math.floor(k / sqrtD), c = k % sqrtD;
             return (
               <rect key={k} x={c * cellSize} y={r * cellSize} width={cellSize} height={cellSize}
                 fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
                 stroke="#2563eb" strokeWidth={1}
-                style={onToggle ? { cursor: "pointer" } : {}}
-                onClick={onToggle ? () => onToggle(k) : undefined}
+                style={toggle ? { cursor: "pointer" } : {}}
+                onClick={toggle ? () => toggle(k) : undefined}
               />
             );
           })}
@@ -317,16 +318,15 @@ function FractionShape({ kind, d, colored, onToggle }: {
         </svg>
       );
     }
-    // Fallback: horizontal strips
     const stripH = S / d;
     return (
-      <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
+      <svg width={Math.round(S * s)} height={Math.round(S * s)} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
         {Array.from({ length: d }, (_, k) => (
           <rect key={k} x={0} y={k * stripH} width={S} height={stripH}
             fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
             stroke="#2563eb" strokeWidth={1}
-            style={onToggle ? { cursor: "pointer" } : {}}
-            onClick={onToggle ? () => onToggle(k) : undefined}
+            style={toggle ? { cursor: "pointer" } : {}}
+            onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
         <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
@@ -334,104 +334,55 @@ function FractionShape({ kind, d, colored, onToggle }: {
     );
   }
   if (kind === "triangle") {
-    // Fixed isosceles triangle: apex A, base-left BL, base-right BR
     const W = 150, H = 130;
     const Ax = 75,  Ay = 5;
     const BLx = 5,  BLy = 125;
     const BRx = 145, BRy = 125;
-    // Derived key points
-    const Gx = 75,  Gy = 85;    // centroid
-    const MBx = 75, MBy = 125;  // base midpoint
-    const MLx = 40, MLy = 65;   // left-side midpoint
-    const MRx = 110, MRy = 65;  // right-side midpoint
-    // Trisection points for N=9 grid (P{a}{b} = barycentric a/3 from A, b/3 from BL)
+    const Gx = 75,  Gy = 85;
+    const MBx = 75, MBy = 125;
+    const MLx = 40, MLy = 65;
+    const MRx = 110, MRy = 65;
     const P10x = 51.7,  P10y = 45;
     const P01x = 98.3,  P01y = 45;
     const P20x = 28.3,  P20y = 85;
     const P02x = 121.7, P02y = 85;
     const P21x = 51.7,  P21y = 125;
     const P12x = 98.3,  P12y = 125;
-
     type Poly = number[][];
     let polygons: Poly[];
-
     switch (d) {
-      case 2:
-        polygons = [
-          [[Ax,Ay],[MBx,MBy],[BLx,BLy]],   // left half
-          [[Ax,Ay],[BRx,BRy],[MBx,MBy]],   // right half
-        ];
-        break;
-      case 3:
-        polygons = [
-          [[Ax,Ay],[BRx,BRy],[Gx,Gy]],     // right sector
-          [[BRx,BRy],[BLx,BLy],[Gx,Gy]],   // bottom sector
-          [[BLx,BLy],[Ax,Ay],[Gx,Gy]],     // left sector
-        ];
-        break;
-      case 4:
-        polygons = [
-          [[Ax,Ay],[MRx,MRy],[MLx,MLy]],       // top
-          [[MLx,MLy],[MBx,MBy],[BLx,BLy]],     // bottom-left
-          [[MLx,MLy],[MRx,MRy],[MBx,MBy]],     // center (inverted)
-          [[MRx,MRy],[BRx,BRy],[MBx,MBy]],     // bottom-right
-        ];
-        break;
-      case 6:
-        polygons = [
-          [[Ax,Ay],[MRx,MRy],[Gx,Gy]],          // apex-right
-          [[MRx,MRy],[BRx,BRy],[Gx,Gy]],        // base-right outer
-          [[Gx,Gy],[BRx,BRy],[MBx,MBy]],        // base-right inner
-          [[Gx,Gy],[MBx,MBy],[BLx,BLy]],        // base-left inner
-          [[BLx,BLy],[MLx,MLy],[Gx,Gy]],        // base-left outer
-          [[MLx,MLy],[Ax,Ay],[Gx,Gy]],          // apex-left
-        ];
-        break;
-      case 9:
-        polygons = [
-          [[Ax,Ay],[P01x,P01y],[P10x,P10y]],            // row0: top
-          [[P10x,P10y],[Gx,Gy],[P20x,P20y]],            // row1: left-up
-          [[P10x,P10y],[P01x,P01y],[Gx,Gy]],            // row1: center-down
-          [[P01x,P01y],[P02x,P02y],[Gx,Gy]],            // row1: right-up
-          [[P20x,P20y],[P21x,P21y],[BLx,BLy]],          // row2: far-left-up
-          [[P20x,P20y],[Gx,Gy],[P21x,P21y]],            // row2: left-center-down
-          [[Gx,Gy],[P12x,P12y],[P21x,P21y]],            // row2: center-up
-          [[Gx,Gy],[P02x,P02y],[P12x,P12y]],            // row2: right-center-down
-          [[P02x,P02y],[BRx,BRy],[P12x,P12y]],          // row2: far-right-up
-        ];
-        break;
+      case 2: polygons = [[[Ax,Ay],[MBx,MBy],[BLx,BLy]],[[Ax,Ay],[BRx,BRy],[MBx,MBy]]]; break;
+      case 3: polygons = [[[Ax,Ay],[BRx,BRy],[Gx,Gy]],[[BRx,BRy],[BLx,BLy],[Gx,Gy]],[[BLx,BLy],[Ax,Ay],[Gx,Gy]]]; break;
+      case 4: polygons = [[[Ax,Ay],[MRx,MRy],[MLx,MLy]],[[MLx,MLy],[MBx,MBy],[BLx,BLy]],[[MLx,MLy],[MRx,MRy],[MBx,MBy]],[[MRx,MRy],[BRx,BRy],[MBx,MBy]]]; break;
+      case 6: polygons = [[[Ax,Ay],[MRx,MRy],[Gx,Gy]],[[MRx,MRy],[BRx,BRy],[Gx,Gy]],[[Gx,Gy],[BRx,BRy],[MBx,MBy]],[[Gx,Gy],[MBx,MBy],[BLx,BLy]],[[BLx,BLy],[MLx,MLy],[Gx,Gy]],[[MLx,MLy],[Ax,Ay],[Gx,Gy]]]; break;
+      case 9: polygons = [[[Ax,Ay],[P01x,P01y],[P10x,P10y]],[[P10x,P10y],[Gx,Gy],[P20x,P20y]],[[P10x,P10y],[P01x,P01y],[Gx,Gy]],[[P01x,P01y],[P02x,P02y],[Gx,Gy]],[[P20x,P20y],[P21x,P21y],[BLx,BLy]],[[P20x,P20y],[Gx,Gy],[P21x,P21y]],[[Gx,Gy],[P12x,P12y],[P21x,P21y]],[[Gx,Gy],[P02x,P02y],[P12x,P12y]],[[P02x,P02y],[BRx,BRy],[P12x,P12y]]]; break;
       default:
-        // Fallback: equal-height horizontal strips
         polygons = Array.from({ length: d }, (_, k) => {
           const t0 = k / d, t1 = (k + 1) / d;
           const y0 = Ay + t0 * (BLy - Ay), y1 = Ay + t1 * (BLy - Ay);
           const hw0 = t0 * (BRx - Ax), hw1 = t1 * (BRx - Ax);
-          return k === 0
-            ? [[Ax, Ay], [Ax + hw1, y1], [Ax - hw1, y1]]
-            : [[Ax - hw0, y0], [Ax + hw0, y0], [Ax + hw1, y1], [Ax - hw1, y1]];
+          return k === 0 ? [[Ax,Ay],[Ax+hw1,y1],[Ax-hw1,y1]] : [[Ax-hw0,y0],[Ax+hw0,y0],[Ax+hw1,y1],[Ax-hw1,y1]];
         });
     }
-
     return (
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+      <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
         {polygons.map((poly, k) => (
           <polygon key={k}
             points={poly.map(([x, y]) => `${x},${y}`).join(' ')}
             fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
             stroke="#2563eb" strokeWidth={1}
-            style={onToggle ? { cursor: "pointer" } : {}}
-            onClick={onToggle ? () => onToggle(k) : undefined}
+            style={toggle ? { cursor: "pointer" } : {}}
+            onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
       </svg>
     );
   }
   if (kind === "circle") {
-    // Equal pie slices (equal angle = equal area)
     const W = 120, H = 120, cx = 60, cy = 60, r = 52;
     const sliceAngle = (2 * Math.PI) / d;
     return (
-      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+      <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
         {Array.from({ length: d }, (_, k) => {
           const a0 = -Math.PI / 2 + k * sliceAngle;
           const a1 = -Math.PI / 2 + (k + 1) * sliceAngle;
@@ -443,8 +394,8 @@ function FractionShape({ kind, d, colored, onToggle }: {
             <path key={k} d={pathD}
               fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
               stroke="#2563eb" strokeWidth={1}
-              style={onToggle ? { cursor: "pointer" } : {}}
-              onClick={onToggle ? () => onToggle(k) : undefined}
+              style={toggle ? { cursor: "pointer" } : {}}
+              onClick={toggle ? () => toggle(k) : undefined}
             />
           );
         })}
@@ -452,11 +403,11 @@ function FractionShape({ kind, d, colored, onToggle }: {
       </svg>
     );
   }
-  // rect: d equal vertical strips (landscape band)
+  // rect: d equal vertical strips
   const W = 220, H = 52;
   const cellW = W / d;
   return (
-    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+    <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
       {Array.from({ length: d }, (_, i) => {
         const x = Math.round(i * cellW);
         const w = Math.round((i + 1) * cellW) - x;
@@ -464,13 +415,47 @@ function FractionShape({ kind, d, colored, onToggle }: {
           <rect key={i} x={x} y={0} width={w} height={H}
             fill={colored.has(i) ? "#3b82f6" : "#eff6ff"}
             stroke="#2563eb" strokeWidth={1}
-            style={onToggle ? { cursor: "pointer" } : {}}
-            onClick={onToggle ? () => onToggle(i) : undefined}
+            style={toggle ? { cursor: "pointer" } : {}}
+            onClick={toggle ? () => toggle(i) : undefined}
           />
         );
       })}
       <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
     </svg>
+  );
+}
+
+// ── Multi-shape helpers ────────────────────────────────────────────────────────
+function naturalW(kind: ShapeKind): number {
+  return { rect: 220, square: 100, triangle: 150, circle: 120, grid: 130 }[kind] ?? 120;
+}
+function computeScale(kind: ShapeKind, copies: number): number {
+  if (copies <= 1) return 1;
+  const perShape = copies === 2 ? 146 : 95; // available px per shape at 300px area
+  return Math.min(1, perShape / naturalW(kind));
+}
+function preColorFlat(n: number, d: number): Set<number> {
+  const s = new Set<number>();
+  let rem = n;
+  let copy = 0;
+  while (rem > 0) { for (let k = 0; k < Math.min(d, rem); k++) s.add(copy * d + k); rem -= Math.min(d, rem); copy++; }
+  return s;
+}
+
+function ShapesRow({ kind, d, copies, colored, onToggle, scale }: {
+  kind: ShapeKind; d: number; copies: number;
+  colored: Set<number>;
+  onToggle?: (flatIdx: number) => void;
+  scale?: number;
+}) {
+  return (
+    <div className="flex items-center gap-2 justify-center">
+      {Array.from({ length: copies }, (_, copy) => {
+        const copySet = new Set(Array.from({ length: d }, (_, k) => k).filter(k => colored.has(copy * d + k)));
+        const handleToggle = onToggle ? (ci: number) => onToggle(copy * d + ci) : undefined;
+        return <FractionShape key={copy} kind={kind} d={d} colored={copySet} onToggle={handleToggle} scale={scale} />;
+      })}
+    </div>
   );
 }
 
@@ -642,14 +627,11 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
           const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
           const isWrong = readStatuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
-          const inputCls = `w-12 bg-transparent text-center text-sm outline-none pb-0.5 border-b-2 ${isWrong ? "border-amber-500 text-amber-600 line-through" : "border-[var(--color-text-primary)] focus:border-[var(--color-accent-alg)]"}`;
+          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`;
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
-                <div className="flex flex-1 justify-center">
-                  <FractionShape kind={item.kind} d={item.d} colored={preColored} />
-                </div>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   <input
                     type="text"
@@ -658,7 +640,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                     placeholder="…"
                     className={inputCls}
                   />
-                  <span className="h-[2px] w-12 rounded bg-[var(--color-text-primary)]" />
+                  <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   <input
                     type="text"
                     value={readDens[i]}
@@ -673,6 +655,9 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                       <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctDen}</span>
                     </span>
                   )}
+                </div>
+                <div className="flex flex-1 justify-center">
+                  <FractionShape kind={item.kind} d={item.d} colored={preColored} />
                 </div>
               </div>
             </div>
@@ -755,6 +740,177 @@ function generateFracConvItems(): FracConvItem[] {
     { label: "c", decStr: fracToDecStr(n3, 10), answer: n3.toString(), denominator: 10 },
     { label: "d", decStr: fracToDecStr(n4, 100), answer: n4.toString(), denominator: 100 },
   ];
+}
+
+// ── Multi-shape generators ────────────────────────────────────────────────────
+interface MultiColoringSpec { label: string; kind: ShapeKind; d: number; copies: number; n: number; }
+interface MultiReadSpec { label: string; kind: ShapeKind; d: number; copies: number; n: number; answer: string; }
+
+function generateMultiColoringItems(): MultiColoringSpec[] {
+  const configs: [ShapeKind, number][] = [
+    ["rect",     rnd(2, 5)],
+    ["square",   ([2, 4] as const)[Math.floor(Math.random() * 2)]!],
+    ["triangle", ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!],
+    ["circle",   rnd(2, 5)],
+  ];
+  return configs.map(([kind, d], i) => {
+    const copies = rnd(2, 3);
+    const n = rnd(d + 1, copies * d - 1);
+    return { label: String(i + 1), kind, d, copies, n };
+  });
+}
+
+function generateMultiReadItems(): MultiReadSpec[] {
+  const configs: [ShapeKind, number][] = [
+    ["rect",     rnd(2, 5)],
+    ["square",   ([2, 4] as const)[Math.floor(Math.random() * 2)]!],
+    ["triangle", ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!],
+    ["circle",   rnd(2, 5)],
+  ];
+  return configs.map(([kind, d], i) => {
+    const copies = rnd(2, 3);
+    const n = rnd(d + 1, copies * d - 1);
+    return { label: String(i + 1), kind, d, copies, n, answer: `${n}/${d}` };
+  });
+}
+
+// ── Exercise 4 — Multi-shape coloring (improper fractions) ────────────────────
+export function FractionMultiColoringExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [items] = useState(generateMultiColoringItems);
+  const [colored, setColored] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
+  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const res = items.map((item, i) => colored[i]!.size === item.n);
+    setResults(res);
+    onValidated(res.every(Boolean));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, items, colored]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  function toggleCell(itemIdx: number, flatIdx: number) {
+    if (validated) return;
+    setColored(prev => {
+      const next = prev.map(s => new Set(s));
+      if (next[itemIdx]!.has(flatIdx)) next[itemIdx]!.delete(flatIdx);
+      else next[itemIdx]!.add(flatIdx);
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 4 — Colorie la fraction demandée</h2>
+      </div>
+      <div className="space-y-5">
+        {items.map((item, i) => {
+          const sc = computeScale(item.kind, item.copies);
+          const isWrong = validated && !results[i];
+          return (
+            <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
+              <div className="flex items-center gap-3">
+                <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
+                <div className="shrink-0">
+                  <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
+                </div>
+                <div className="flex flex-1 justify-center">
+                  <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
+                    colored={colored[i]!}
+                    onToggle={validated ? undefined : (fi) => toggleCell(i, fi)}
+                    scale={sc}
+                  />
+                </div>
+              </div>
+              {isWrong && (
+                <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">
+                  Il fallait colorier {item.n} partie{item.n > 1 ? "s" : ""} en tout ({item.copies} figures de {item.d} parties).
+                </p>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Exercise 5 — Multi-shape read (improper fractions) ────────────────────────
+export function FractionMultiReadExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [items] = useState(generateMultiReadItems);
+  const [readNums, setReadNums] = useState<string[]>(() => Array(4).fill(""));
+  const [readDens, setReadDens] = useState<string[]>(() => Array(4).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = items.map((item, i) => {
+      const combined = `${readNums[i]}/${readDens[i]}`;
+      return answerMatches(combined, [item.answer]) ? "correct" : "wrong";
+    }) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, items, readNums, readDens]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 5 — Observe et écris la fraction</h2>
+      </div>
+      <div className="space-y-5">
+        {items.map((item, i) => {
+          const preColored = preColorFlat(item.n, item.d);
+          const sc = computeScale(item.kind, item.copies);
+          const isWrong = statuses[i] === "wrong";
+          const [correctNum, correctDen] = item.answer.split("/");
+          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`;
+          return (
+            <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
+              <div className="flex items-center gap-3">
+                <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
+                <div className="shrink-0 flex flex-col items-center gap-1">
+                  <input type="text" value={readNums[i]}
+                    onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                    placeholder="…" className={inputCls}
+                  />
+                  <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
+                  <input type="text" value={readDens[i]}
+                    onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                    placeholder="…" className={inputCls}
+                  />
+                  {isWrong && (
+                    <span className="mt-2 flex flex-col items-center gap-0.5">
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctNum}</span>
+                      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctDen}</span>
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-1 justify-center">
+                  <ShapesRow kind={item.kind} d={item.d} copies={item.copies} colored={preColored} scale={sc} />
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 // ── Combined Decimal Exercises (A4.2 — single step) ───────────────────────────
