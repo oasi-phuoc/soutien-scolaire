@@ -109,7 +109,7 @@ export function ExAnagram({
                           key={tile.id}
                           type="button"
                           onClick={() => !item.checked && removeTile(idx, tile)}
-                          className="text-sm font-bold text-[var(--color-accent-fr)] transition-opacity hover:opacity-50"
+                          className="flex h-8 min-w-[1.75rem] items-center justify-center rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-sm font-bold text-[var(--color-accent-fr)] transition-opacity hover:opacity-50"
                         >
                           {tile.char}
                         </button>
