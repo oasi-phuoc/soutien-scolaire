@@ -50,8 +50,8 @@ function buildPool(theme: VocabTheme, count: number): PromptWord[] {
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
 
-    // Country name from relatedWords
-    if (rw) {
+    // Country name from relatedWords — only for themes where words have articles
+    if (rw && w.article) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
       if (m) pool.push({ word: m[2]!.trim(), defArt: m[1]!.trim() });
     }
@@ -190,12 +190,8 @@ export function ExSentenceWrite({
                     [p.word]: { ...initState(), answer: e.target.value },
                   }))
                 }
-                disabled={s.checked}
-                className={`w-full border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors ${
-                  isClean
-                    ? "border-emerald-400 dark:border-emerald-500"
-                    : "border-[var(--color-border-emphasis)]"
-                }`}
+                readOnly={s.checked}
+                className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none"
               />
               {s.checked && s.grammarChecking && (
                 <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>

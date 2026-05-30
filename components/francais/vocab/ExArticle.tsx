@@ -13,8 +13,8 @@ function buildWordList(theme: VocabTheme): VocabWord[] {
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
 
-    // Country name from relatedWords (e.g. "la France" → article "la", word "France")
-    if (rw) {
+    // Country name from relatedWords — only for themes where words have articles
+    if (rw && w.article) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
       if (m) result.push({ word: m[2]!, article: m[1]!.trimEnd() });
     }

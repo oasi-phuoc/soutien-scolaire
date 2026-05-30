@@ -145,12 +145,8 @@ export function ExQuestionWrite({
                     [w.word]: { ...initState(), answer: e.target.value },
                   }))
                 }
-                disabled={s.checked}
-                className={`w-full border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors ${
-                  isClean
-                    ? "border-emerald-400 dark:border-emerald-500"
-                    : "border-[var(--color-border-emphasis)]"
-                }`}
+                readOnly={s.checked}
+                className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none"
               />
               {s.checked && s.grammarChecking && (
                 <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
