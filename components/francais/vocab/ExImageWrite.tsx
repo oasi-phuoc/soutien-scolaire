@@ -128,7 +128,7 @@ export function ExImageWrite({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className="w-full border-b border-[var(--color-border-emphasis)] bg-transparent text-sm outline-none"
+                    className="w-full border-b border-[var(--color-accent-fr)] bg-transparent text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}
