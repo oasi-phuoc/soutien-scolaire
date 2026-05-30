@@ -113,15 +113,11 @@ export function ExImageWrite({
           return (
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              {resolveImg(w.image) ? (
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded bg-[var(--color-bg-secondary)]">
+                {resolveImg(w.image) && (
                   <Image src={resolveImg(w.image)!} alt="" fill className="object-cover" sizes="56px" />
-                </div>
-              ) : (
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-tertiary)]">
-                  {w.article} {w.word}
-                </div>
-              )}
+                )}
+              </div>
               <div className="flex flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <p className="flex-1 text-sm">

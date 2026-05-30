@@ -4,7 +4,7 @@ import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
-const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
+const WORD_LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h", "i"];
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
@@ -13,11 +13,11 @@ export function ExDefinitionMatch({
 }: ExerciseProps) {
   const [{ words, shownDefs, pickedDefs }] = useState(() => {
     const withDef = theme.words.filter((w) => !!w.definition);
-    const shown = pickN(withDef, Math.min(4, withDef.length));
+    const shown = pickN(withDef, Math.min(5, withDef.length));
     const shownSet = new Set(shown.map((w) => w.word));
     const distractors = pickN(
       theme.words.filter((w) => !shownSet.has(w.word)),
-      Math.max(0, 6 - shown.length)
+      Math.max(0, 9 - shown.length)
     );
     const pickedDefs: Record<string, string> = {};
     for (const w of shown) {
@@ -78,8 +78,8 @@ export function ExDefinitionMatch({
       <p className="mb-3 text-xs text-[var(--color-text-secondary)]">
         Associez chaque définition au mot correspondant en choisissant la lettre.
       </p>
-      {/* Word list — two columns, 6 words, lettered a–f */}
-      <div className="grid grid-cols-2 gap-x-6 gap-y-1">
+      {/* Word list — three columns, 9 words, lettered a–i */}
+      <div className="grid grid-cols-3 gap-x-4 gap-y-1">
         {words.map((w, i) => (
           <div key={w.word} className="flex items-baseline">
             <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>

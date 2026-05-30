@@ -4,19 +4,43 @@ import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN, normalizeText } from "./vocabUtils";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
-type WordEntry = { word: VocabWord; mascArt: string; femArt: string };
+type WordEntry = { word: VocabWord; mascArt: string };
 
 const VOWEL_RE = /^[aeiouhéèêëàâïîôùûœæ]/i;
 
-function randomArticles(w: VocabWord): { mascArt: string; femArt: string } {
+function randomMascArt(w: VocabWord): string {
   const useDefinite = Math.random() < 0.5;
-  if (useDefinite) {
-    return {
-      mascArt: VOWEL_RE.test(w.word) ? "l'" : "le",
-      femArt: VOWEL_RE.test(w.feminine ?? "") ? "l'" : "la",
-    };
-  }
-  return { mascArt: "un", femArt: "une" };
+  if (useDefinite) return VOWEL_RE.test(w.word) ? "l'" : "le";
+  return "un";
+}
+
+/** Valid feminine articles for a given feminine word form. */
+function validFemArts(feminine: string): string[] {
+  const vowelStart = VOWEL_RE.test(feminine);
+  return vowelStart ? ["l'", "la", "une"] : ["la", "une"];
+}
+
+/** Correct feminine display: elided definite article + word. */
+function correctFemDisplay(feminine: string): string {
+  return VOWEL_RE.test(feminine) ? `l'${feminine}` : `la ${feminine}`;
+}
+
+/** Parse user input into article + word (handles elision). */
+function parseInput(input: string): { article: string; word: string } | null {
+  const t = input.trim();
+  const elision = t.match(/^(l['']\s*)(.+)$/i);
+  if (elision) return { article: "l'", word: elision[2]!.trim() };
+  const sp = t.indexOf(" ");
+  if (sp === -1) return null;
+  return { article: t.slice(0, sp).trim(), word: t.slice(sp + 1).trim() };
+}
+
+function checkAnswer(userAns: string, feminine: string): boolean {
+  if (!userAns.trim()) return false;
+  const parsed = parseInput(userAns);
+  if (!parsed) return false;
+  if (normalizeText(parsed.word) !== normalizeText(feminine)) return false;
+  return validFemArts(feminine).includes(normalizeText(parsed.article));
 }
 
 export function ExMascFem({
@@ -25,7 +49,7 @@ export function ExMascFem({
   const [entries] = useState<WordEntry[]>(() =>
     pickN(theme.words.filter((w) => !!w.feminine), 6).map((w) => ({
       word: w,
-      ...randomArticles(w),
+      mascArt: randomMascArt(w),
     }))
   );
 
@@ -42,7 +66,7 @@ export function ExMascFem({
     const updated: Record<string, WordState> = {};
     entries.forEach(({ word: w }) => {
       const userAns = (states[w.word]?.answer ?? "").trim();
-      const ok = normalizeText(userAns) === normalizeText(w.feminine!);
+      const ok = checkAnswer(userAns, w.feminine!);
       if (ok) correct++;
       updated[w.word] = { answer: userAns, checked: true, correct: ok };
     });
@@ -59,10 +83,10 @@ export function ExMascFem({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Mettez les mots au féminin.
+        Mettez les mots au féminin avec l&apos;article.
       </p>
       <div className="space-y-3">
-        {entries.map(({ word: w, mascArt, femArt }, i) => {
+        {entries.map(({ word: w, mascArt }, i) => {
           const s = states[w.word]!;
           const mascDisplay = mascArt.endsWith("'") ? `${mascArt}${w.word}` : `${mascArt} ${w.word}`;
           return (
@@ -72,11 +96,10 @@ export function ExMascFem({
                 {mascDisplay}
               </span>
               <span className="shrink-0 text-xs text-[var(--color-text-tertiary)]">→</span>
-              <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">{femArt}</span>
               {s.checked && !s.correct ? (
-                <p className="flex h-8 w-32 items-center gap-1.5 border-b border-amber-400 text-sm">
+                <p className="flex h-8 flex-1 items-center gap-1.5 border-b border-amber-400 text-sm">
                   <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="font-medium text-[var(--color-text-primary)]">{w.feminine}</span>
+                  <span className="font-medium text-[var(--color-text-primary)]">{correctFemDisplay(w.feminine!)}</span>
                 </p>
               ) : (
                 <input
@@ -89,7 +112,7 @@ export function ExMascFem({
                     }))
                   }
                   readOnly={s.checked}
-                  className="h-8 w-32 border-b border-[var(--color-accent-fr)] bg-transparent text-sm outline-none"
+                  className="h-8 flex-1 border-b border-[var(--color-accent-fr)] bg-transparent text-sm outline-none"
                 />
               )}
             </div>
