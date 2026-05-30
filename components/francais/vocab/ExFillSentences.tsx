@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import {
-  ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
+  ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
