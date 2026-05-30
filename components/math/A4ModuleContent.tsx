@@ -296,28 +296,95 @@ function FractionShape({ kind, d, colored, onToggle }: {
     );
   }
   if (kind === "triangle") {
-    // Equal-height horizontal strips (standard in French primary school materials)
-    const W = 130, H = 110;
-    const apexX = 65, apexY = 4, baseY = 106, halfBase = 58;
-    const totalH = baseY - apexY;
+    // Fixed isosceles triangle: apex A, base-left BL, base-right BR
+    const W = 150, H = 130;
+    const Ax = 75,  Ay = 5;
+    const BLx = 5,  BLy = 125;
+    const BRx = 145, BRy = 125;
+    // Derived key points
+    const Gx = 75,  Gy = 85;    // centroid
+    const MBx = 75, MBy = 125;  // base midpoint
+    const MLx = 40, MLy = 65;   // left-side midpoint
+    const MRx = 110, MRy = 65;  // right-side midpoint
+    // Trisection points for N=9 grid (P{a}{b} = barycentric a/3 from A, b/3 from BL)
+    const P10x = 51.7,  P10y = 45;
+    const P01x = 98.3,  P01y = 45;
+    const P20x = 28.3,  P20y = 85;
+    const P02x = 121.7, P02y = 85;
+    const P21x = 51.7,  P21y = 125;
+    const P12x = 98.3,  P12y = 125;
+
+    type Poly = number[][];
+    let polygons: Poly[];
+
+    switch (d) {
+      case 2:
+        polygons = [
+          [[Ax,Ay],[MBx,MBy],[BLx,BLy]],   // left half
+          [[Ax,Ay],[BRx,BRy],[MBx,MBy]],   // right half
+        ];
+        break;
+      case 3:
+        polygons = [
+          [[Ax,Ay],[BRx,BRy],[Gx,Gy]],     // right sector
+          [[BRx,BRy],[BLx,BLy],[Gx,Gy]],   // bottom sector
+          [[BLx,BLy],[Ax,Ay],[Gx,Gy]],     // left sector
+        ];
+        break;
+      case 4:
+        polygons = [
+          [[Ax,Ay],[MRx,MRy],[MLx,MLy]],       // top
+          [[MLx,MLy],[MBx,MBy],[BLx,BLy]],     // bottom-left
+          [[MLx,MLy],[MRx,MRy],[MBx,MBy]],     // center (inverted)
+          [[MRx,MRy],[BRx,BRy],[MBx,MBy]],     // bottom-right
+        ];
+        break;
+      case 6:
+        polygons = [
+          [[Ax,Ay],[MRx,MRy],[Gx,Gy]],          // apex-right
+          [[MRx,MRy],[BRx,BRy],[Gx,Gy]],        // base-right outer
+          [[Gx,Gy],[BRx,BRy],[MBx,MBy]],        // base-right inner
+          [[Gx,Gy],[MBx,MBy],[BLx,BLy]],        // base-left inner
+          [[BLx,BLy],[MLx,MLy],[Gx,Gy]],        // base-left outer
+          [[MLx,MLy],[Ax,Ay],[Gx,Gy]],          // apex-left
+        ];
+        break;
+      case 9:
+        polygons = [
+          [[Ax,Ay],[P01x,P01y],[P10x,P10y]],            // row0: top
+          [[P10x,P10y],[Gx,Gy],[P20x,P20y]],            // row1: left-up
+          [[P10x,P10y],[P01x,P01y],[Gx,Gy]],            // row1: center-down
+          [[P01x,P01y],[P02x,P02y],[Gx,Gy]],            // row1: right-up
+          [[P20x,P20y],[P21x,P21y],[BLx,BLy]],          // row2: far-left-up
+          [[P20x,P20y],[Gx,Gy],[P21x,P21y]],            // row2: left-center-down
+          [[Gx,Gy],[P12x,P12y],[P21x,P21y]],            // row2: center-up
+          [[Gx,Gy],[P02x,P02y],[P12x,P12y]],            // row2: right-center-down
+          [[P02x,P02y],[BRx,BRy],[P12x,P12y]],          // row2: far-right-up
+        ];
+        break;
+      default:
+        // Fallback: equal-height horizontal strips
+        polygons = Array.from({ length: d }, (_, k) => {
+          const t0 = k / d, t1 = (k + 1) / d;
+          const y0 = Ay + t0 * (BLy - Ay), y1 = Ay + t1 * (BLy - Ay);
+          const hw0 = t0 * (BRx - Ax), hw1 = t1 * (BRx - Ax);
+          return k === 0
+            ? [[Ax, Ay], [Ax + hw1, y1], [Ax - hw1, y1]]
+            : [[Ax - hw0, y0], [Ax + hw0, y0], [Ax + hw1, y1], [Ax - hw1, y1]];
+        });
+    }
+
     return (
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
-        {Array.from({ length: d }, (_, k) => {
-          const t0 = k / d, t1 = (k + 1) / d;
-          const y0 = apexY + t0 * totalH, y1 = apexY + t1 * totalH;
-          const hw0 = t0 * halfBase, hw1 = t1 * halfBase;
-          const pts = k === 0
-            ? `${apexX},${apexY} ${apexX + hw1},${y1} ${apexX - hw1},${y1}`
-            : `${apexX - hw0},${y0} ${apexX + hw0},${y0} ${apexX + hw1},${y1} ${apexX - hw1},${y1}`;
-          return (
-            <polygon key={k} points={pts}
-              fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
-              stroke="#2563eb" strokeWidth={1}
-              style={onToggle ? { cursor: "pointer" } : {}}
-              onClick={onToggle ? () => onToggle(k) : undefined}
-            />
-          );
-        })}
+        {polygons.map((poly, k) => (
+          <polygon key={k}
+            points={poly.map(([x, y]) => `${x},${y}`).join(' ')}
+            fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+            stroke="#2563eb" strokeWidth={1}
+            style={onToggle ? { cursor: "pointer" } : {}}
+            onClick={onToggle ? () => onToggle(k) : undefined}
+          />
+        ))}
       </svg>
     );
   }
@@ -562,8 +629,11 @@ interface FracConvItem { label: string; decStr: string; answer: string; denomina
 
 function rnd(min: number, max: number) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 
+const TRIANGLE_DENOMS = [2, 3, 4, 6, 9] as const;
+function pickTriangleDenom() { return TRIANGLE_DENOMS[Math.floor(Math.random() * TRIANGLE_DENOMS.length)]!; }
+
 function generateColoringItems(): ColoringSpec[] {
-  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = rnd(2, 9), d4 = rnd(2, 15);
+  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = pickTriangleDenom(), d4 = rnd(2, 15);
   const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
   return [
     { label: "1", kind: "rect",     d: d1, n: n1, desc: `${n1}/${d1} d'un rectangle partagé en ${d1} parties égales` },
@@ -574,7 +644,7 @@ function generateColoringItems(): ColoringSpec[] {
 }
 
 function generateFractionReadItems(): FracReadSpec[] {
-  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = rnd(2, 9), d4 = rnd(2, 15);
+  const d1 = rnd(2, 20), d2 = rnd(2, 25), d3 = pickTriangleDenom(), d4 = rnd(2, 15);
   const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
   return [
     { label: "1", kind: "rect",     d: d1, n: n1, answer: `${n1}/${d1}` },
