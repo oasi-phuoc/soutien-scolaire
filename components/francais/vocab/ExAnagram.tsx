@@ -90,11 +90,13 @@ export function ExAnagram({
               {/* Row 1: number + answer line */}
               <div className="flex items-center gap-2">
                 <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-                {item.checked && !item.correct ? (
-                  /* Correction in-place: strikethrough wrong + correct */
-                  <div className="flex min-h-[2rem] flex-1 flex-col items-start justify-center border-b-2 border-amber-400 pb-0.5">
+                {item.checked ? (
+                  /* Correction in-place: strikethrough wrong + correct on same line */
+                  <div className="flex min-h-[2rem] flex-1 items-center gap-2 border-b-2 border-amber-400/40 pb-0.5">
                     <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtWord || "—"}</span>
-                    <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.word.word}</span>
+                    {!item.correct && (
+                      <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.word.word}</span>
+                    )}
                   </div>
                 ) : (
                   /* Answer zone with underline */

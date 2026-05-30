@@ -92,11 +92,11 @@ export function ExArticle({
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez l&apos;article correct (le, la, l&apos;, les, un, une).
       </p>
-      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         {words.map((w, i) => {
           const s = states[w.word]!;
           return (
-            <div key={w.word} className="flex items-center gap-2">
+            <div key={w.word} className="flex min-w-0 items-center gap-2 overflow-hidden">
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (

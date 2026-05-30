@@ -88,8 +88,8 @@ export function ExImageMatch({
               {w.image ? (
                 <img src={w.image} alt="" className="h-20 w-full rounded object-cover" />
               ) : (
-                <div className="flex h-20 w-full items-center justify-center rounded bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-tertiary)]">
-                  {w.article} {w.word}
+                <div className="flex h-20 w-full items-center justify-center rounded bg-[var(--color-bg-secondary)] text-center text-xs text-[var(--color-text-tertiary)]">
+                  {w.relatedWords?.[0] ?? `${w.article ?? ""} ${w.word}`.trim()}
                 </div>
               )}
               <div className="flex items-center justify-center gap-2">

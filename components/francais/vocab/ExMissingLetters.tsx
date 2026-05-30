@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { ExerciseProps, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
+import { ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS } from "./vocabUtils";
 
 const VOWELS = "aeiouàâäèéêëîïôùûüœæ";
 const ALPHABET = "abcdefghijklmnopqrstuvwxyzàâäéèêëîïôùûüçœ".split("");
@@ -29,7 +29,7 @@ type WordState = {
 export function ExMissingLetters({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => theme.words.slice(0, 10));
+  const [words] = useState<VocabWord[]>(() => shuffle(theme.words).slice(0, 10));
   const [patterns] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(words.map((w) => [w.word, makePatternChars(w.word)]))
   );
