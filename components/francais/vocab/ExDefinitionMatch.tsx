@@ -81,11 +81,13 @@ export function ExDefinitionMatch({
       {/* Word list — two columns, 6 words, lettered a–f */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
-          <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
-            <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
-            {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
-            {w.word}
-          </p>
+          <div key={w.word} className="flex items-baseline">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">
+              {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
+              {w.word}
+            </span>
+          </div>
         ))}
       </div>
       {/* Separator */}

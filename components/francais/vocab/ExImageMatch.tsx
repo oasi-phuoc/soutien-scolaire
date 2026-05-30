@@ -6,6 +6,18 @@ import {
 
 const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
 
+function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
+  const [failed, setFailed] = useState(false);
+  if (src && !failed) {
+    return <img src={src} alt={alt} onError={() => setFailed(true)} className="h-20 w-full rounded object-contain" />;
+  }
+  return (
+    <div className="flex h-20 w-full items-center justify-center rounded bg-[var(--color-bg-secondary)] text-center text-xs text-[var(--color-text-tertiary)]">
+      {placeholder}
+    </div>
+  );
+}
+
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
 export function ExImageMatch({
@@ -54,6 +66,13 @@ export function ExImageMatch({
     });
   }
 
+  const imageFolder = theme.imageFolder ?? theme.section;
+  function resolveImg(img?: string) {
+    if (!img) return undefined;
+    if (img.startsWith("/")) return img;
+    return `/vocab/images/${imageFolder}/${img}`;
+  }
+
   const title = isEval ? `Évaluation — Exercice ${evalNumber ?? 1}` : "Exercice 1";
 
   return (
@@ -65,14 +84,13 @@ export function ExImageMatch({
       {/* Word list — two columns, 6 words, lettered a–f */}
       <div className="mb-4 grid grid-cols-2 gap-x-6 gap-y-1">
         {words.map((w, i) => (
-          <p key={w.word} className="text-sm text-[var(--color-text-primary)]">
-            <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
-            {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
-            <span>{w.word}</span>
-            {w.feminine && (
-              <span className="text-[var(--color-text-secondary)]"> / {w.feminine}</span>
-            )}
-          </p>
+          <div key={w.word} className="flex items-baseline">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">
+              {w.article && <span className="text-[var(--color-text-secondary)]">{w.article} </span>}
+              {w.word}
+            </span>
+          </div>
         ))}
       </div>
       {/* Image cards — 4 cards, numbered 1-4 with letter select */}
@@ -85,13 +103,11 @@ export function ExImageMatch({
               key={w.word}
               className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-2"
             >
-              {w.image ? (
-                <img src={w.image} alt="" className="h-20 w-full rounded object-cover" />
-              ) : (
-                <div className="flex h-20 w-full items-center justify-center rounded bg-[var(--color-bg-secondary)] text-center text-xs text-[var(--color-text-tertiary)]">
-                  {w.relatedWords?.[0] ?? `${w.article ?? ""} ${w.word}`.trim()}
-                </div>
-              )}
+              <ImgOrPlaceholder
+                src={resolveImg(w.image)}
+                alt={w.word}
+                placeholder={w.relatedWords?.[0] ?? `${w.article ?? ""} ${w.word}`.trim()}
+              />
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-bold text-[var(--color-accent-fr)]">{cardIdx + 1}.</span>
                 {s.checked && !s.correct ? (

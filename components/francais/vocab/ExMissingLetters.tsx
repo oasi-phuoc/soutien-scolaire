@@ -29,7 +29,7 @@ type WordState = {
 export function ExMissingLetters({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => shuffle(theme.words).slice(0, 10));
+  const [words] = useState<VocabWord[]>(() => shuffle(theme.words).slice(0, 7));
   const [patterns] = useState<Record<string, string[]>>(() =>
     Object.fromEntries(words.map((w) => [w.word, makePatternChars(w.word)]))
   );

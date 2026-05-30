@@ -12,25 +12,23 @@ export function ExFillSentences({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
   const allSentences = theme.sentences ?? [];
-  const sentences = isEval ? allSentences.slice(0, 2) : allSentences;
+  const sentences = isEval ? allSentences.slice(0, 2) : allSentences.slice(0, 5);
 
   const [bankWords] = useState<string[]>(() => {
-    const answers = new Set(allSentences.map((s) => s.answer));
-    const answerWords = theme.words.filter((w) =>
-      answers.has(w.word) || (w.feminine && answers.has(w.feminine))
-    );
-    const answerSet = new Set(answerWords.map((w) => w.word));
-    const others = theme.words.filter((w) => !answerSet.has(w.word));
-    const picked = shuffle([
-      ...answerWords,
-      ...pickN(others, Math.max(0, 6 - answerWords.length)),
-    ]);
-    const forms: string[] = [];
-    for (const w of picked) {
-      forms.push(w.word);
-      if (w.feminine) forms.push(w.feminine);
+    const sentAnswers = new Set(sentences.map((s) => s.answer));
+    const answerForms: string[] = [];
+    for (const w of theme.words) {
+      if (sentAnswers.has(w.word)) answerForms.push(w.word);
+      if (w.feminine && sentAnswers.has(w.feminine)) answerForms.push(w.feminine);
     }
-    return [...new Set(forms)];
+    const answerSet = new Set(answerForms);
+    const distractorPool: string[] = [];
+    for (const w of theme.words) {
+      if (!answerSet.has(w.word)) distractorPool.push(w.word);
+      if (w.feminine && !answerSet.has(w.feminine)) distractorPool.push(w.feminine);
+    }
+    const distractors = shuffle(distractorPool).slice(0, Math.max(0, 9 - answerForms.length));
+    return shuffle([...answerForms, ...distractors]).slice(0, 9);
   });
 
   const [states, setStates] = useState<SentState[]>(() =>
@@ -77,10 +75,10 @@ export function ExFillSentences({
       {/* Word bank — plain lettered list, no pill borders */}
       <div className="grid grid-cols-3 gap-x-4 gap-y-1">
         {bankWords.map((word, i) => (
-          <p key={word} className="text-sm text-[var(--color-text-primary)]">
-            <span className="mr-1.5 font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
-            {word}
-          </p>
+          <div key={word} className="flex items-baseline">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{WORD_LETTERS[i]}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
+          </div>
         ))}
       </div>
       {/* Separator + spacing */}

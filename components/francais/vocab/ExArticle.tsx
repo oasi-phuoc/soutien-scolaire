@@ -114,7 +114,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className="h-8 w-16 border-b-2 border-[var(--color-accent-fr)]/60 bg-[var(--color-accent-fr)]/10 px-2 text-sm outline-none"
+                    className="h-8 w-16 border-b border-[var(--color-accent-fr)] bg-transparent px-2 text-sm outline-none"
                     readOnly={s.checked && s.correct}
                   />
                 )}

@@ -595,10 +595,6 @@ function ResultsScreen({ scores }: { scores: (number | null)[] }) {
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-function formatTime(s: number): string {
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-}
-
 export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const [stepIdx, setStepIdx] = useState(0);
