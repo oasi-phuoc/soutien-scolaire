@@ -12,7 +12,7 @@ export function ExFillSentences({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
   const allSentences = theme.sentences ?? [];
-  const sentences = isEval ? allSentences.slice(0, 2) : allSentences.slice(0, 5);
+  const sentences = allSentences.slice(0, 5);
 
   const [bankWords] = useState<string[]>(() => {
     const sentAnswers = new Set(sentences.map((s) => s.answer));

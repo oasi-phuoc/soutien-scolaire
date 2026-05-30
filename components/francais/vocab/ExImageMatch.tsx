@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
@@ -9,7 +10,11 @@ const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
 function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
   const [failed, setFailed] = useState(false);
   if (src && !failed) {
-    return <img src={src} alt={alt} onError={() => setFailed(true)} className="h-20 w-full rounded object-contain" />;
+    return (
+      <div className="relative h-20 w-full overflow-hidden rounded">
+        <Image src={src} alt={alt} fill className="object-contain" onError={() => setFailed(true)} sizes="(max-width: 640px) 45vw, 200px" />
+      </div>
+    );
   }
   return (
     <div className="flex h-20 w-full items-center justify-center rounded bg-[var(--color-bg-secondary)] text-center text-xs text-[var(--color-text-tertiary)]">

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, Fragment } from "react";
 import type { VocabTheme, VocabTheoryBlock, VocabWord } from "@/lib/curriculum/vocabulary-data";
+import Image from "next/image";
 import { playWord, SoundIcon } from "./vocabUtils";
 
 function AnalogClock({ h, m, size = 90 }: { h: number; m: number; size?: number }) {
@@ -140,9 +141,9 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
-      <div className="relative">
+      <div className="relative h-28 w-full">
         {src && !imgFailed ? (
-          <img src={src} alt={w.word} className="h-28 w-full rounded object-contain" onError={() => setImgFailed(true)} />
+          <Image src={src} alt={w.word} fill className="rounded object-contain" onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
         ) : (
           <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
         )}

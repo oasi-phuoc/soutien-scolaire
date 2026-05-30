@@ -22,12 +22,17 @@ function initState(): WordState {
   return { answer: "", checked: false, correct: false, basicErrors: [], grammarErrors: [], grammarChecking: false };
 }
 
-/** Build pool: masculine + feminine nationality forms only (no country names, no articles). */
+/** Build pool: masculine + feminine forms + country names (without article). */
 function buildPool(theme: VocabTheme, count: number): string[] {
   const pool: string[] = [];
   for (const w of theme.words) {
     pool.push(w.word);
     if (w.feminine) pool.push(w.feminine);
+    const rw = w.relatedWords?.[0];
+    if (rw) {
+      const m = rw.match(/^(?:le |la |l'|les )(.+)$/i);
+      pool.push(m ? m[1]!.trim() : rw.trim());
+    }
   }
   const deduped = [...new Set(pool)];
   return shuffle(deduped).slice(0, count);
@@ -158,29 +163,31 @@ export function ExQuestionWrite({
                 readOnly={s.checked}
                 className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none"
               />
-              {s.checked && s.grammarChecking && (
-                <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
-              )}
-              {s.checked && !s.grammarChecking && (
-                <ul className="space-y-0.5">
-                  {s.basicErrors.map((err, ei) => (
-                    <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">⚠ {err}</li>
-                  ))}
-                  {s.grammarErrors.map((err, ei) => (
-                    <li key={`g${ei}`} className="flex flex-wrap items-baseline gap-1 text-xs">
-                      <span className="text-amber-600 dark:text-amber-400">• {err.shortMessage}</span>
-                      {err.suggestions.length > 0 && (
-                        <span className="font-semibold text-emerald-600 dark:text-emerald-400">
-                          → {err.suggestions.join(" / ")}
-                        </span>
-                      )}
-                    </li>
-                  ))}
-                  {isClean && (
-                    <li className="text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</li>
-                  )}
-                </ul>
-              )}
+              <div className="min-h-[1.25rem]">
+                {s.checked && s.grammarChecking && (
+                  <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
+                )}
+                {s.checked && !s.grammarChecking && (
+                  <ul className="space-y-0.5">
+                    {s.basicErrors.map((err, ei) => (
+                      <li key={`b${ei}`} className="text-xs text-amber-600 dark:text-amber-400">⚠ {err}</li>
+                    ))}
+                    {s.grammarErrors.map((err, ei) => (
+                      <li key={`g${ei}`} className="flex flex-wrap items-baseline gap-1 text-xs">
+                        <span className="text-amber-600 dark:text-amber-400">• {err.shortMessage}</span>
+                        {err.suggestions.length > 0 && (
+                          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+                            → {err.suggestions.join(" / ")}
+                          </span>
+                        )}
+                      </li>
+                    ))}
+                    {isClean && (
+                      <li className="text-xs text-emerald-600 dark:text-emerald-400">✓ Aucune erreur détectée</li>
+                    )}
+                  </ul>
+                )}
+              </div>
             </div>
           );
         })}

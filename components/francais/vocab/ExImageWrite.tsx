@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, normalizeText,
@@ -113,12 +114,9 @@ export function ExImageWrite({
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               {resolveImg(w.image) ? (
-                <img
-                  src={resolveImg(w.image)}
-                  alt=""
-                  className="h-14 w-14 shrink-0 rounded object-cover"
-                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                />
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded">
+                  <Image src={resolveImg(w.image)!} alt="" fill className="object-cover" sizes="56px" />
+                </div>
               ) : (
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-tertiary)]">
                   {w.article} {w.word}
