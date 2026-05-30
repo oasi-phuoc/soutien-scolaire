@@ -69,6 +69,13 @@ export function ExImageWrite({
   exerciseNumber,
 }: ExerciseProps) {
   const [words] = useState<VocabWord[]>(() => pickN(theme.words, 5));
+
+  const imageFolder = theme.imageFolder ?? theme.section;
+  function resolveImg(img?: string) {
+    if (!img) return undefined;
+    if (img.startsWith("/")) return img;
+    return `/vocab/images/${imageFolder}/${img}`;
+  }
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
@@ -105,8 +112,13 @@ export function ExImageWrite({
           return (
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              {w.image ? (
-                <img src={w.image} alt="" className="h-14 w-14 shrink-0 rounded object-cover" />
+              {resolveImg(w.image) ? (
+                <img
+                  src={resolveImg(w.image)}
+                  alt=""
+                  className="h-14 w-14 shrink-0 rounded object-cover"
+                  onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
+                />
               ) : (
                 <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-[var(--color-bg-secondary)] text-xs text-[var(--color-text-tertiary)]">
                   {w.article} {w.word}

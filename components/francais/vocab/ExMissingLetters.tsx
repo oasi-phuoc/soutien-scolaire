@@ -106,7 +106,7 @@ export function ExMissingLetters({
                         onChange={(e) => setBlank(w.word, pos, e.target.value)}
                         className="h-8 w-7 appearance-none border-b border-[var(--color-accent-fr)] bg-transparent text-center [text-align-last:center] text-sm font-bold text-[var(--color-accent-fr)] outline-none"
                       >
-                        <option value="">_</option>
+                        <option value=""></option>
                         {ALPHABET.map((l) => (
                           <option key={l} value={l}>{l}</option>
                         ))}

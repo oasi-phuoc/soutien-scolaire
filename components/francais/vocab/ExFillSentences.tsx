@@ -111,7 +111,7 @@ export function ExFillSentences({
                   }
                   className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
                 >
-                  <option value="">—</option>
+                  <option value=""></option>
                   {bankWords.map((word) => (
                     <option key={word} value={word}>{word}</option>
                   ))}
