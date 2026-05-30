@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
-import { ExerciseProps, pickN } from "./vocabUtils";
+import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
+import { ExerciseProps, shuffle } from "./vocabUtils";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
 
@@ -20,6 +20,17 @@ type WordState = {
 
 function initState(): WordState {
   return { answer: "", checked: false, correct: false, basicErrors: [], grammarErrors: [], grammarChecking: false };
+}
+
+/** Build pool: masculine + feminine nationality forms only (no country names, no articles). */
+function buildPool(theme: VocabTheme, count: number): string[] {
+  const pool: string[] = [];
+  for (const w of theme.words) {
+    pool.push(w.word);
+    if (w.feminine) pool.push(w.feminine);
+  }
+  const deduped = [...new Set(pool)];
+  return shuffle(deduped).slice(0, count);
 }
 
 function checkBasic(answer: string, word: string): string[] {
@@ -46,9 +57,9 @@ function checkBasic(answer: string, word: string): string[] {
 export function ExQuestionWrite({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber, exerciseNumber,
 }: ExerciseProps) {
-  const [words] = useState<VocabWord[]>(() => pickN(theme.words, isEval ? 2 : 4));
+  const [words] = useState<string[]>(() => buildPool(theme, isEval ? 2 : 4));
   const [states, setStates] = useState<Record<string, WordState>>(() =>
-    Object.fromEntries(words.map((w) => [w.word, initState()]))
+    Object.fromEntries(words.map((w) => [w, initState()]))
   );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -60,11 +71,11 @@ export function ExQuestionWrite({
     const updated: Record<string, WordState> = {};
 
     words.forEach((w) => {
-      const answer = (states[w.word]?.answer ?? "").trim();
-      const basicErrors = checkBasic(answer, w.word);
+      const answer = (states[w]?.answer ?? "").trim();
+      const basicErrors = checkBasic(answer, w);
       const ok = answer.length > 0 && basicErrors.length === 0;
       if (ok) correct++;
-      updated[w.word] = {
+      updated[w] = {
         answer,
         checked: true,
         correct: ok,
@@ -78,7 +89,7 @@ export function ExQuestionWrite({
     onValidated(correct, words.length);
 
     words.forEach((w) => {
-      const answer = updated[w.word]?.answer ?? "";
+      const answer = updated[w]?.answer ?? "";
       if (answer.length <= 3) return;
       fetch("/api/check-grammar", {
         method: "POST",
@@ -97,13 +108,13 @@ export function ExQuestionWrite({
             }));
           setStates((prev) => ({
             ...prev,
-            [w.word]: { ...prev[w.word]!, grammarErrors: errors, grammarChecking: false },
+            [w]: { ...prev[w]!, grammarErrors: errors, grammarChecking: false },
           }));
         })
         .catch(() => {
           setStates((prev) => ({
             ...prev,
-            [w.word]: { ...prev[w.word]!, grammarChecking: false },
+            [w]: { ...prev[w]!, grammarChecking: false },
           }));
         });
     });
@@ -127,14 +138,13 @@ export function ExQuestionWrite({
       </p>
       <div className="space-y-4">
         {words.map((w, i) => {
-          const s = states[w.word]!;
+          const s = states[w]!;
           const isClean = s.checked && !s.grammarChecking && s.basicErrors.length === 0 && s.grammarErrors.length === 0 && s.answer.length > 0;
           return (
-            <div key={w.word} className="space-y-1.5">
+            <div key={w} className="space-y-1.5">
               <p className="text-sm font-bold text-[var(--color-text-primary)]">
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
-                {w.article && <span className="font-normal text-[var(--color-text-secondary)]">{w.article} </span>}
-                {w.word}
+                {w}
               </p>
               <input
                 type="text"
@@ -142,7 +152,7 @@ export function ExQuestionWrite({
                 onChange={(e) =>
                   setStates((prev) => ({
                     ...prev,
-                    [w.word]: { ...initState(), answer: e.target.value },
+                    [w]: { ...initState(), answer: e.target.value },
                   }))
                 }
                 readOnly={s.checked}
