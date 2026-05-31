@@ -131,7 +131,7 @@ function DecExercise({
   );
 }
 
-// ── A5.4 — Decimal Addition ───────────────────────────────────────────────────
+// ── A5.4 — Decimal Addition (tenths) ─────────────────────────────────────────
 function genAddItems(): DecQuestion[] {
   return Array.from({ length: 5 }, (_, i) => {
     const a1 = rnd(1, 99), a2 = rnd(0, 9);
@@ -160,6 +160,86 @@ export function DecAddExercise({
       exNum={exNum}
       title="Addition de décimaux"
       consigne="Calculez et écris le résultat (utilise la virgule)."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
+// ── A5.4 — Decimal Addition (hundredths) ─────────────────────────────────────
+function genAddHundredthsItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    const aH = rnd(101, 999);
+    const bH = rnd(101, 999);
+    const sumH = aH + bH;
+    return {
+      label: String(i + 1),
+      question: `${hundredthsToStr(aH)} + ${hundredthsToStr(bH)}`,
+      answer: hundredthsToStr(sumH),
+    };
+  });
+}
+
+export function DecAddHundredthsExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genAddHundredthsItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Addition : deux décimales"
+      consigne="Calculez et écris le résultat (utilise la virgule, le résultat peut avoir 2 décimales)."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
+// ── A5.4 — Decimal Addition (missing operand) ─────────────────────────────────
+function genAddMissingItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    const a1 = rnd(1, 19), a2 = rnd(0, 9);
+    const b1 = rnd(1, 19), b2 = rnd(0, 9);
+    const sumT = a1 * 10 + a2 + (b1 * 10 + b2);
+    if (Math.random() < 0.5) {
+      return {
+        label: String(i + 1),
+        question: `? + ${b1},${b2} = ${tenthsToStr(sumT)}`,
+        answer: tenthsToStr(a1 * 10 + a2),
+      };
+    } else {
+      return {
+        label: String(i + 1),
+        question: `${a1},${a2} + ? = ${tenthsToStr(sumT)}`,
+        answer: tenthsToStr(b1 * 10 + b2),
+      };
+    }
+  });
+}
+
+export function DecAddMissingExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genAddMissingItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Addition : opérande manquant"
+      consigne="Trouvez le nombre manquant (remplace le ?)."
       questions={questions}
       validateCommand={validateCommand}
       onValidated={onValidated}
@@ -207,6 +287,93 @@ export function DecSubExercise({
   );
 }
 
+// ── A5.4 — Decimal Subtraction (hundredths) ───────────────────────────────────
+function genSubHundredthsItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    let aH: number, bH: number;
+    do {
+      aH = rnd(201, 999);
+      bH = rnd(101, aH - 1);
+    } while (aH <= bH);
+    const diffH = aH - bH;
+    return {
+      label: String(i + 1),
+      question: `${hundredthsToStr(aH)} − ${hundredthsToStr(bH)}`,
+      answer: hundredthsToStr(diffH),
+    };
+  });
+}
+
+export function DecSubHundredthsExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genSubHundredthsItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Soustraction : deux décimales"
+      consigne="Calculez et écris le résultat (le résultat peut avoir 2 décimales)."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
+// ── A5.4 — Decimal Subtraction (missing operand) ──────────────────────────────
+function genSubMissingItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    const a1 = rnd(10, 19), a2 = rnd(0, 9);
+    let b1 = rnd(1, a1 - 1), b2 = rnd(0, 9);
+    while (a1 * 10 + a2 <= b1 * 10 + b2) {
+      b1 = rnd(1, a1 - 1);
+      b2 = rnd(0, 9);
+    }
+    const diffT = a1 * 10 + a2 - (b1 * 10 + b2);
+    if (Math.random() < 0.5) {
+      return {
+        label: String(i + 1),
+        question: `${a1},${a2} − ? = ${tenthsToStr(diffT)}`,
+        answer: tenthsToStr(b1 * 10 + b2),
+      };
+    } else {
+      return {
+        label: String(i + 1),
+        question: `? − ${b1},${b2} = ${tenthsToStr(diffT)}`,
+        answer: tenthsToStr(a1 * 10 + a2),
+      };
+    }
+  });
+}
+
+export function DecSubMissingExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genSubMissingItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Soustraction : opérande manquant"
+      consigne="Trouvez le nombre manquant (remplace le ?)."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
 // ── A5.5 — Decimal Multiplication (simple: int × decimal) ────────────────────
 function genMulSimpleItems(): DecQuestion[] {
   return Array.from({ length: 5 }, (_, i) => {
@@ -237,6 +404,51 @@ export function DecMulSimpleExercise({
       exNum={exNum}
       title="Multiplication : entier × décimal"
       consigne="Calculez mentalement ou en colonnes."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
+// ── A5.5 — Decimal Multiplication (missing factor) ────────────────────────────
+function genMulMissingItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    const int = rnd(2, 12);
+    const decT = rnd(11, 99);
+    const d1 = Math.floor(decT / 10), d2 = decT % 10;
+    const prodT = int * decT;
+    if (Math.random() < 0.5) {
+      return {
+        label: String(i + 1),
+        question: `? × ${d1},${d2} = ${tenthsToStr(prodT)}`,
+        answer: String(int),
+      };
+    } else {
+      return {
+        label: String(i + 1),
+        question: `${int} × ? = ${tenthsToStr(prodT)}`,
+        answer: `${d1},${d2}`,
+      };
+    }
+  });
+}
+
+export function DecMulMissingExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genMulMissingItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Multiplication : facteur manquant"
+      consigne="Trouvez le facteur manquant (remplace le ?)."
       questions={questions}
       validateCommand={validateCommand}
       onValidated={onValidated}
@@ -312,6 +524,51 @@ export function DecDivSimpleExercise({
       exNum={exNum}
       title="Division : décimal ÷ entier"
       consigne="Calculez (le quotient a 1 décimale)."
+      questions={questions}
+      validateCommand={validateCommand}
+      onValidated={onValidated}
+    />
+  );
+}
+
+// ── A5.6 — Decimal Division (missing operand) ─────────────────────────────────
+function genDivMissingItems(): DecQuestion[] {
+  return Array.from({ length: 5 }, (_, i) => {
+    const quotT = rnd(11, 99);
+    const divisor = rnd(2, 9);
+    const dividT = quotT * divisor;
+    const q1 = Math.floor(quotT / 10), q2 = quotT % 10;
+    if (Math.random() < 0.5) {
+      return {
+        label: String(i + 1),
+        question: `? ÷ ${divisor} = ${q1},${q2}`,
+        answer: tenthsToStr(dividT),
+      };
+    } else {
+      return {
+        label: String(i + 1),
+        question: `${tenthsToStr(dividT)} ÷ ? = ${q1},${q2}`,
+        answer: String(divisor),
+      };
+    }
+  });
+}
+
+export function DecDivMissingExercise({
+  exNum,
+  validateCommand,
+  onValidated,
+}: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<DecQuestion[]>(genDivMissingItems);
+  return (
+    <DecExercise
+      exNum={exNum}
+      title="Division : opérande manquant"
+      consigne="Trouvez le nombre manquant (remplace le ?)."
       questions={questions}
       validateCommand={validateCommand}
       onValidated={onValidated}
