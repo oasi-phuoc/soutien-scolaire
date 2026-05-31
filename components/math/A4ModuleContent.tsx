@@ -251,15 +251,34 @@ function FracInline({ frac }: { frac: string }) {
 // ── Shape renderer ─────────────────────────────────────────────────────────────
 type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle";
 
-function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
+function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSet }: {
   kind: ShapeKind;
   d: number;
   colored: Set<number>;
   onToggle?: (i: number) => void;
   scale?: number;
+  missSet?: Set<number>;
+  extraSet?: Set<number>;
 }) {
   const toggle = onToggle;
   const s = scale;
+
+  function cellFill(i: number): string {
+    if (colored.has(i)) return "#3b82f6";
+    if (missSet?.has(i)) return "#fbbf24";
+    return "#eff6ff";
+  }
+
+  function xMark(cx: number, cy: number, r: number, i: number) {
+    if (!extraSet?.has(i)) return null;
+    return (
+      <g key={`x-${i}`} pointerEvents="none">
+        <line x1={cx - r} y1={cy - r} x2={cx + r} y2={cy + r} stroke="#dc2626" strokeWidth={1.5} strokeLinecap="round" />
+        <line x1={cx + r} y1={cy - r} x2={cx - r} y2={cy + r} stroke="#dc2626" strokeWidth={1.5} strokeLinecap="round" />
+      </g>
+    );
+  }
+
   if (kind === "grid") {
     const cols = 10, cellW = 13, cellH = 10;
     const W = cols * cellW, H = 10 * cellH;
@@ -289,13 +308,14 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
         <svg width={Math.round(S * s)} height={Math.round(S * s)} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
           {[0, 1].map(k => (
             <rect key={k} x={k * 50} y={0} width={50} height={S}
-              fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+              fill={cellFill(k)}
               stroke="#2563eb" strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
             />
           ))}
           <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+          {[0, 1].map(k => xMark(k * 50 + 25, S / 2, 12, k))}
         </svg>
       );
     }
@@ -307,7 +327,7 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
             const r = Math.floor(k / sqrtD), c = k % sqrtD;
             return (
               <rect key={k} x={c * cellSize} y={r * cellSize} width={cellSize} height={cellSize}
-                fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+                fill={cellFill(k)}
                 stroke="#2563eb" strokeWidth={1}
                 style={toggle ? { cursor: "pointer" } : {}}
                 onClick={toggle ? () => toggle(k) : undefined}
@@ -315,6 +335,10 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
             );
           })}
           <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+          {Array.from({ length: d }, (_, k) => {
+            const r = Math.floor(k / sqrtD), c = k % sqrtD;
+            return xMark((c + 0.5) * cellSize, (r + 0.5) * cellSize, cellSize * 0.28, k);
+          })}
         </svg>
       );
     }
@@ -323,13 +347,14 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
       <svg width={Math.round(S * s)} height={Math.round(S * s)} viewBox={`0 0 ${S} ${S}`} className="mx-auto block">
         {Array.from({ length: d }, (_, k) => (
           <rect key={k} x={0} y={k * stripH} width={S} height={stripH}
-            fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+            fill={cellFill(k)}
             stroke="#2563eb" strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
         <rect x={0} y={0} width={S} height={S} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        {Array.from({ length: d }, (_, k) => xMark(S / 2, (k + 0.5) * stripH, Math.min(stripH * 0.28, 10), k))}
       </svg>
     );
   }
@@ -369,12 +394,17 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
         {polygons.map((poly, k) => (
           <polygon key={k}
             points={poly.map(([x, y]) => `${x},${y}`).join(' ')}
-            fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+            fill={cellFill(k)}
             stroke="#2563eb" strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(k) : undefined}
           />
         ))}
+        {polygons.map((poly, k) => {
+          const cx = poly.reduce((sum, [x]) => sum + x!, 0) / poly.length;
+          const cy = poly.reduce((sum, [, y]) => sum + y!, 0) / poly.length;
+          return xMark(cx, cy, 8, k);
+        })}
       </svg>
     );
   }
@@ -392,7 +422,7 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
           const pathD = `M ${cx} ${cy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${r} ${r} 0 ${largeArc} 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
           return (
             <path key={k} d={pathD}
-              fill={colored.has(k) ? "#3b82f6" : "#eff6ff"}
+              fill={cellFill(k)}
               stroke="#2563eb" strokeWidth={1}
               style={toggle ? { cursor: "pointer" } : {}}
               onClick={toggle ? () => toggle(k) : undefined}
@@ -400,6 +430,10 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
           );
         })}
         <circle cx={cx} cy={cy} r={r} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        {Array.from({ length: d }, (_, k) => {
+          const midAngle = -Math.PI / 2 + (k + 0.5) * sliceAngle;
+          return xMark(cx + r * 0.5 * Math.cos(midAngle), cy + r * 0.5 * Math.sin(midAngle), r * 0.2, k);
+        })}
       </svg>
     );
   }
@@ -413,7 +447,7 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
         const w = Math.round((i + 1) * cellW) - x;
         return (
           <rect key={i} x={x} y={0} width={w} height={H}
-            fill={colored.has(i) ? "#3b82f6" : "#eff6ff"}
+            fill={cellFill(i)}
             stroke="#2563eb" strokeWidth={1}
             style={toggle ? { cursor: "pointer" } : {}}
             onClick={toggle ? () => toggle(i) : undefined}
@@ -421,6 +455,11 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1 }: {
         );
       })}
       <rect x={0} y={0} width={W} height={H} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+      {Array.from({ length: d }, (_, i) => {
+        const x = Math.round(i * cellW);
+        const w = Math.round((i + 1) * cellW) - x;
+        return xMark(x + w / 2, H / 2, Math.min(w * 0.28, 10), i);
+      })}
     </svg>
   );
 }
@@ -431,7 +470,9 @@ function naturalW(kind: ShapeKind): number {
 }
 function computeScale(kind: ShapeKind, copies: number): number {
   if (copies <= 1) return 1;
-  const perShape = copies === 2 ? 146 : 95; // available px per shape at 300px area
+  const available = 200;
+  const gap = 8 * (copies - 1);
+  const perShape = Math.floor((available - gap) / copies);
   return Math.min(1, perShape / naturalW(kind));
 }
 function preColorFlat(n: number, d: number): Set<number> {
@@ -442,21 +483,50 @@ function preColorFlat(n: number, d: number): Set<number> {
   return s;
 }
 
-function ShapesRow({ kind, d, copies, colored, onToggle, scale }: {
+function ShapesRow({ kind, d, copies, colored, onToggle, scale, missSet, extraSet }: {
   kind: ShapeKind; d: number; copies: number;
   colored: Set<number>;
   onToggle?: (flatIdx: number) => void;
   scale?: number;
+  missSet?: Set<number>;
+  extraSet?: Set<number>;
 }) {
   return (
-    <div className="flex items-center gap-2 justify-center">
+    <div className="flex items-center gap-2 justify-center overflow-hidden max-w-full">
       {Array.from({ length: copies }, (_, copy) => {
         const copySet = new Set(Array.from({ length: d }, (_, k) => k).filter(k => colored.has(copy * d + k)));
+        const copyMissSet = missSet ? new Set(Array.from({ length: d }, (_, k) => k).filter(k => missSet.has(copy * d + k))) : undefined;
+        const copyExtraSet = extraSet ? new Set(Array.from({ length: d }, (_, k) => k).filter(k => extraSet.has(copy * d + k))) : undefined;
         const handleToggle = onToggle ? (ci: number) => onToggle(copy * d + ci) : undefined;
-        return <FractionShape key={copy} kind={kind} d={d} colored={copySet} onToggle={handleToggle} scale={scale} />;
+        return <FractionShape key={copy} kind={kind} d={d} colored={copySet} onToggle={handleToggle} scale={scale} missSet={copyMissSet} extraSet={copyExtraSet} />;
       })}
     </div>
   );
+}
+
+// ── Correction helpers ─────────────────────────────────────────────────────────
+function getCorrectionSets(n: number, d: number, coloredSet: Set<number>): { missSet: Set<number>; extraSet: Set<number> } {
+  const sorted = [...coloredSet].sort((a, b) => a - b);
+  const extra = new Set<number>();
+  if (sorted.length > n) sorted.slice(n).forEach(k => extra.add(k));
+  const miss = new Set<number>();
+  if (sorted.length < n) {
+    Array.from({ length: d }, (_, k) => k).filter(k => !coloredSet.has(k)).slice(0, n - sorted.length).forEach(k => miss.add(k));
+  }
+  return { missSet: miss, extraSet: extra };
+}
+
+function getFlatCorrectionSets(n: number, d: number, copies: number, coloredSet: Set<number>): { missSet: Set<number>; extraSet: Set<number> } {
+  const totalCells = copies * d;
+  const allFlat = Array.from({ length: totalCells }, (_, k) => k);
+  const sorted = allFlat.filter(k => coloredSet.has(k)).sort((a, b) => a - b);
+  const extra = new Set<number>();
+  if (sorted.length > n) sorted.slice(n).forEach(k => extra.add(k));
+  const miss = new Set<number>();
+  if (sorted.length < n) {
+    allFlat.filter(k => !coloredSet.has(k)).slice(0, n - sorted.length).forEach(k => miss.add(k));
+  }
+  return { missSet: miss, extraSet: extra };
 }
 
 // ── Exercise 1 — Fraction toggle ───────────────────────────────────────────────
@@ -579,12 +649,15 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
                 <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
               </div>
               <div className="flex flex-1 justify-center">
-                <FractionShape kind={item.kind} d={item.d} colored={colored[i]!} onToggle={validated ? undefined : (ci) => toggleColor(i, ci)} />
+                {(() => { const corr = validated && !colorResults[i] ? getCorrectionSets(item.n, item.d, colored[i]!) : null; return (
+                <FractionShape kind={item.kind} d={item.d} colored={colored[i]!}
+                  onToggle={validated ? undefined : (ci) => toggleColor(i, ci)}
+                  missSet={corr?.missSet}
+                  extraSet={corr?.extraSet}
+                />
+                ); })()}
               </div>
             </div>
-            {validated && !colorResults[i] && (
-              <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">Il fallait colorier {item.n} partie{item.n > 1 ? "s" : ""} sur {item.d}.</p>
-            )}
           </div>
         ))}
       </div>
@@ -627,7 +700,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
           const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
           const isWrong = readStatuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
-          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`;
+          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
@@ -637,7 +710,6 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                     type="text"
                     value={readNums[i]}
                     onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    placeholder="…"
                     className={inputCls}
                   />
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
@@ -645,7 +717,6 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                     type="text"
                     value={readDens[i]}
                     onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    placeholder="…"
                     className={inputCls}
                   />
                   {isWrong && (
@@ -821,19 +892,18 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
                 <div className="shrink-0">
                   <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
                 </div>
-                <div className="flex flex-1 justify-center">
+                <div className="flex flex-1 justify-center overflow-hidden">
+                  {(() => { const corr = validated && !results[i] ? getFlatCorrectionSets(item.n, item.d, item.copies, colored[i]!) : null; return (
                   <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
                     colored={colored[i]!}
                     onToggle={validated ? undefined : (fi) => toggleCell(i, fi)}
                     scale={sc}
+                    missSet={corr?.missSet}
+                    extraSet={corr?.extraSet}
                   />
+                  ); })()}
                 </div>
               </div>
-              {isWrong && (
-                <p className="mt-2 text-xs font-medium text-amber-600 dark:text-amber-400">
-                  Il fallait colorier {item.n} partie{item.n > 1 ? "s" : ""} en tout ({item.copies} figures de {item.d} parties).
-                </p>
-              )}
             </div>
           );
         })}
@@ -878,7 +948,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
           const sc = computeScale(item.kind, item.copies);
           const isWrong = statuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
-          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`;
+          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
@@ -886,12 +956,12 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   <input type="text" value={readNums[i]}
                     onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    placeholder="…" className={inputCls}
+                    className={inputCls}
                   />
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   <input type="text" value={readDens[i]}
                     onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    placeholder="…" className={inputCls}
+                    className={inputCls}
                   />
                   {isWrong && (
                     <span className="mt-2 flex flex-col items-center gap-0.5">
@@ -901,7 +971,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                     </span>
                   )}
                 </div>
-                <div className="flex flex-1 justify-center">
+                <div className="flex flex-1 justify-center overflow-hidden">
                   <ShapesRow kind={item.kind} d={item.d} copies={item.copies} colored={preColored} scale={sc} />
                 </div>
               </div>
