@@ -10,6 +10,7 @@ import { percentToSwissGrade } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecAddExercise, DecAddMissingExercise, DecAddHundredthsExercise, DecSubExercise, DecSubMissingExercise, DecSubHundredthsExercise, DecMulSimpleExercise, DecMulMissingExercise, DecMulExtExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
+import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadTableExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
@@ -40,6 +41,20 @@ type WorkspaceStep =
   | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
   | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
+  | { kind: "dec_read_decompose"; exNum: number }
+  | { kind: "dec_read_recompose"; exNum: number }
+  | { kind: "dec_read_place_value"; exNum: number }
+  | { kind: "dec_read_digit_at"; exNum: number }
+  | { kind: "dec_read_dictation"; exNum: number }
+  | { kind: "dec_read_table"; exNum: number }
+  | { kind: "dec_read_compare"; exNum: number }
+  | { kind: "dec_read_order"; exNum: number }
+  | { kind: "dec_read_filter_gt"; exNum: number }
+  | { kind: "dec_read_filter_lt"; exNum: number }
+  | { kind: "dec_read_filter_between"; exNum: number }
+  | { kind: "dec_read_encadrement"; exNum: number }
+  | { kind: "dec_read_nl_read"; exNum: number }
+  | { kind: "dec_read_nl_place"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
@@ -107,6 +122,31 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
     steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
     steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A5-1") {
+    // Training: 14 exercises
+    steps.push({ kind: "dec_read_decompose", exNum: 1 });
+    steps.push({ kind: "dec_read_recompose", exNum: 2 });
+    steps.push({ kind: "dec_read_place_value", exNum: 3 });
+    steps.push({ kind: "dec_read_digit_at", exNum: 4 });
+    steps.push({ kind: "dec_read_dictation", exNum: 5 });
+    steps.push({ kind: "dec_read_table", exNum: 6 });
+    steps.push({ kind: "dec_read_compare", exNum: 7 });
+    steps.push({ kind: "dec_read_order", exNum: 8 });
+    steps.push({ kind: "dec_read_filter_gt", exNum: 9 });
+    steps.push({ kind: "dec_read_filter_lt", exNum: 10 });
+    steps.push({ kind: "dec_read_filter_between", exNum: 11 });
+    steps.push({ kind: "dec_read_encadrement", exNum: 12 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 13 });
+    steps.push({ kind: "dec_read_nl_place", exNum: 14 });
+    // Evaluation: 6 exercises
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "dec_read_decompose", exNum: 1 });
+    steps.push({ kind: "dec_read_place_value", exNum: 2 });
+    steps.push({ kind: "dec_read_dictation", exNum: 3 });
+    steps.push({ kind: "dec_read_compare", exNum: 4 });
+    steps.push({ kind: "dec_read_encadrement", exNum: 5 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 6 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-4") {
     // Training: 8 exercises matching A2.1 (add) + A2.2 (sub) variety
@@ -965,7 +1005,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
-  const isCustomA5 = submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6";
+  const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6";
   if (moduleId !== "A4" && !isCustomA5) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
@@ -978,7 +1018,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle" &&
     currentStep.kind !== "results";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_add" || currentStep?.kind === "dec_add_missing" || currentStep?.kind === "dec_add_hundredths" || currentStep?.kind === "dec_sub" || currentStep?.kind === "dec_sub_missing" || currentStep?.kind === "dec_sub_hundredths" || currentStep?.kind === "dec_mul_simple" || currentStep?.kind === "dec_mul_missing" || currentStep?.kind === "dec_mul_ext" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
+  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_table","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_nl_read","dec_read_nl_place"]);
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_add" || currentStep?.kind === "dec_add_missing" || currentStep?.kind === "dec_add_hundredths" || currentStep?.kind === "dec_sub" || currentStep?.kind === "dec_sub_missing" || currentStep?.kind === "dec_sub_hundredths" || currentStep?.kind === "dec_mul_simple" || currentStep?.kind === "dec_mul_missing" || currentStep?.kind === "dec_mul_ext" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -1135,6 +1176,50 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_div_ext" && (
         <DecDivExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A5-1 reading/rounding exercises */}
+      {currentStep?.kind === "dec_read_decompose" && (
+        <DecReadDecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_recompose" && (
+        <DecReadRecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_place_value" && (
+        <DecReadPlaceValueExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_digit_at" && (
+        <DecReadDigitAtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_dictation" && (
+        <DecReadDictationExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_table" && (
+        <DecReadTableExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_compare" && (
+        <DecReadCompareExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_order" && (
+        <DecReadOrderExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_gt" && (
+        <DecReadFilterGtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_lt" && (
+        <DecReadFilterLtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_between" && (
+        <DecReadFilterBetweenExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_encadrement" && (
+        <DecReadEncadrementExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_nl_read" && (
+        <DecReadNLReadExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_nl_place" && (
+        <DecReadNLPlaceExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}
