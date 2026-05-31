@@ -179,37 +179,34 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled }: {
   const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
     status === "wrong"
       ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
-      : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"
+      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)}
-        placeholder="…" disabled={disabled} className={iCls} />
+        disabled={disabled} className={iCls} />
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)}
-        placeholder="…" disabled={disabled} className={iCls} />
+        disabled={disabled} className={iCls} />
     </span>
   );
 }
 
-// ── Exercise titles ────────────────────────────────────────────────────────────
-const STRUCT_TITLES: Record<1|2|3|4|5, string> = {
-  1: "Fractions de même dénominateur",
-  2: "Fraction et nombre entier",
-  3: "Nombre entier et fraction",
-  4: "Fractions de dénominateurs différents",
-  5: "Trois fractions",
-};
-
 // ── FractionOpsExercise ────────────────────────────────────────────────────────
+// exType 1-4: structType 1-4, numbers 1-12
+// exType 5-8: structType 1-4, numbers 10-99
+// exType 9:   structType 5 (3 fractions), numbers 1-12
 export function FractionOpsExercise({ exType, opMode, validateCommand, onValidated }: {
-  exType: 1|2|3|4|5|6|7|8|9|10;
+  exType: 1|2|3|4|5|6|7|8|9;
   opMode: FracOpMode;
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
-  const structType = (exType > 5 ? exType - 5 : exType) as 1|2|3|4|5;
-  const [lo, hi]: [number, number] = exType > 5 ? [10, 99] : [1, 12];
+  let structType: 1|2|3|4|5;
+  let lo: number, hi: number;
+  if (exType === 9) { structType = 5; lo = 1; hi = 12; }
+  else if (exType <= 4) { structType = exType as 1|2|3|4; lo = 1; hi = 12; }
+  else { structType = (exType - 4) as 1|2|3|4; lo = 10; hi = 99; }
 
   const [questions] = useState<OpQ[]>(() =>
     Array.from({ length: 5 }, () => genQ(structType, opMode, lo, hi))
@@ -236,42 +233,39 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
-          Exercice {exType} — {STRUCT_TITLES[structType]}
-        </h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exType}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
-      <div className="space-y-5">
+      <div className="space-y-4">
         {(questions as OpQ[]).map((q: OpQ, i: number) => {
           const isWrong = statuses[i] === "wrong";
           return (
-            <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                {(q.parts as Part[]).map((part: Part, pi: number) => (
-                  <React.Fragment key={pi}>
-                    {pi > 0 && (
-                      <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.ops[pi - 1]}</span>
-                    )}
-                    {part.kind === "frac"
-                      ? <VFrac n={part.n} d={part.d} />
-                      : <span className="text-sm font-bold text-[var(--color-text-primary)]">{part.v}</span>
-                    }
-                  </React.Fragment>
-                ))}
-                <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-                <FracAnswerInput
-                  numVal={nums[i]!} denVal={dens[i]!}
-                  onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
-                  onDen={(v: string) => { if (!validated) setDens((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
-                  status={statuses[i]!}
-                  disabled={validated}
-                />
-                {isWrong && (
-                  q.ansDen === 1
-                    ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.ansNum}</span>
-                    : <VFrac n={q.ansNum} d={q.ansDen} />
-                )}
-              </div>
+            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              {(q.parts as Part[]).map((part: Part, pi: number) => (
+                <React.Fragment key={pi}>
+                  {pi > 0 && (
+                    <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.ops[pi - 1]}</span>
+                  )}
+                  {part.kind === "frac"
+                    ? <VFrac n={part.n} d={part.d} />
+                    : <span className="text-sm font-bold text-[var(--color-text-primary)]">{part.v}</span>
+                  }
+                </React.Fragment>
+              ))}
+              <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+              <FracAnswerInput
+                numVal={nums[i]!} denVal={dens[i]!}
+                onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
+                onDen={(v: string) => { if (!validated) setDens((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
+                status={statuses[i]!}
+                disabled={validated}
+              />
+              {isWrong && (
+                q.ansDen === 1
+                  ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.ansNum}</span>
+                  : <VFrac n={q.ansNum} d={q.ansDen} />
+              )}
             </div>
           );
         })}

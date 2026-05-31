@@ -20,7 +20,7 @@ type WorkspaceStep =
   | { kind: "fraction_multi_coloring" }
   | { kind: "fraction_multi_read" }
   | { kind: "decimal_exercises" }
-  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9|10; opMode: FracOpMode }
+  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" };
@@ -50,8 +50,8 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
     const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
-    for (let ex = 1; ex <= 10; ex++) {
-      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9|10, opMode });
+    for (let ex = 1; ex <= 9; ex++) {
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
     }
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
