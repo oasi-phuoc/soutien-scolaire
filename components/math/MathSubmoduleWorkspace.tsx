@@ -9,6 +9,7 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { percentToSwissGrade } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
+import { DecAddExercise, DecSubExercise, DecMulSimpleExercise, DecMulExtExercise, DecDivSimpleExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 
@@ -18,6 +19,12 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
+  | { kind: "dec_add"; exNum: number }
+  | { kind: "dec_sub"; exNum: number }
+  | { kind: "dec_mul_simple"; exNum: number }
+  | { kind: "dec_mul_ext"; exNum: number }
+  | { kind: "dec_div_simple"; exNum: number }
+  | { kind: "dec_div_ext"; exNum: number }
   | { kind: "fraction_multi_read" }
   | { kind: "fraction_equiv" }
   | { kind: "fraction_simplify" }
@@ -64,6 +71,21 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
     steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
     steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
+  } else if (lesson.submoduleId === "A5-4") {
+    steps.push({ kind: "dec_add", exNum: 1 });
+    steps.push({ kind: "dec_sub", exNum: 2 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
+  } else if (lesson.submoduleId === "A5-5") {
+    steps.push({ kind: "dec_mul_simple", exNum: 1 });
+    steps.push({ kind: "dec_mul_ext", exNum: 2 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
+  } else if (lesson.submoduleId === "A5-6") {
+    steps.push({ kind: "dec_div_simple", exNum: 1 });
+    steps.push({ kind: "dec_div_ext", exNum: 2 });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
@@ -879,7 +901,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "theory" &&
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac";
+  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_add" || currentStep?.kind === "dec_sub" || currentStep?.kind === "dec_mul_simple" || currentStep?.kind === "dec_mul_ext" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -981,6 +1003,26 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_to_frac" && (
         <DecToFracExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A5 decimal exercises */}
+      {currentStep?.kind === "dec_add" && (
+        <DecAddExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_sub" && (
+        <DecSubExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_mul_simple" && (
+        <DecMulSimpleExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_mul_ext" && (
+        <DecMulExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_div_simple" && (
+        <DecDivSimpleExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_div_ext" && (
+        <DecDivExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}

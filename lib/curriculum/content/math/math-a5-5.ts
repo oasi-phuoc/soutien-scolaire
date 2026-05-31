@@ -97,13 +97,7 @@ export const MATH_A5_5_LESSON: MathSubmoduleLesson = {
       ],
       paragraphs: { fr: [] },
     },
-    exercises: [
-      { id: "a5-5-e1", promptFr: "Calculez 3,14 × 2,5.", type: "short_text", acceptable: ["7,85", "7.85"] },
-      { id: "a5-5-e2", promptFr: "Calculez 43,2 × 9,1.", type: "short_text", acceptable: ["393,12", "393.12"] },
-      { id: "a5-5-e3", promptFr: "Calculez 40 × 0,25 (utilisez l'astuce).", type: "number", acceptable: ["10"] },
-      { id: "a5-5-e4", promptFr: "Calculez 12 × 0,5.", type: "number", acceptable: ["6"] },
-      { id: "a5-5-e5", promptFr: "Calculez 810 × 0,01.", type: "short_text", acceptable: ["8,1", "8.1", "8,10", "8.10"] },
-    ],
+    exercises: [],
     exercisePool: [
       { id: "a5-5-p1", promptFr: "Calculez 4,149 × 8,4.", type: "short_text", acceptable: ["34,8516", "34.8516"] },
       { id: "a5-5-p2", promptFr: "Calculez 38,99 × 0,15.", type: "short_text", acceptable: ["5,8485", "5.8485"] },

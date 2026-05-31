@@ -92,13 +92,7 @@ export const MATH_A5_6_LESSON: MathSubmoduleLesson = {
       ],
       paragraphs: { fr: [] },
     },
-    exercises: [
-      { id: "a5-6-e1", promptFr: "Calculez 82,5 ÷ 6.", type: "short_text", acceptable: ["13,75", "13.75"] },
-      { id: "a5-6-e2", promptFr: "Calculez 7,85 ÷ 2,5.", type: "short_text", acceptable: ["3,14", "3.14"] },
-      { id: "a5-6-e3", promptFr: "Calculez 37,9 ÷ 5.", type: "short_text", acceptable: ["7,58", "7.58"] },
-      { id: "a5-6-e4", promptFr: "Calculez 99,2 ÷ 5.", type: "short_text", acceptable: ["19,84", "19.84"] },
-      { id: "a5-6-e5", promptFr: "Dans la division 361 ÷ 13, comment s'appelle le 13 ?", type: "short_text", acceptable: ["diviseur", "le diviseur"] },
-    ],
+    exercises: [],
     exercisePool: [
       { id: "a5-6-p1", promptFr: "Calculez 37,9 ÷ 5.", type: "short_text", acceptable: ["7,58", "7.58"] },
       { id: "a5-6-p2", promptFr: "Calculez 5,73 ÷ 3.", type: "short_text", acceptable: ["1,91", "1.91"] },

@@ -71,13 +71,7 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
       ],
       paragraphs: { fr: [] },
     },
-    exercises: [
-      { id: "a5-4-e1", promptFr: "Calculez 57,9 + 2,4.", type: "short_text", acceptable: ["60,3", "60.3"] },
-      { id: "a5-4-e2", promptFr: "Calculez 83,7 + 24,29.", type: "short_text", acceptable: ["107,99", "107.99"] },
-      { id: "a5-4-e3", promptFr: "Calculez 86,3 − 42,7.", type: "short_text", acceptable: ["43,6", "43.6"] },
-      { id: "a5-4-e4", promptFr: "Calculez 100 − 34,7.", type: "short_text", acceptable: ["65,3", "65.3"] },
-      { id: "a5-4-e5", promptFr: "Calculez 5,09 + 3,8.", type: "short_text", acceptable: ["8,89", "8.89"] },
-    ],
+    exercises: [],
     exercisePool: [
       { id: "a5-4-p1", promptFr: "Calculez 83,7 + 24,29.", type: "short_text", acceptable: ["107,99", "107.99"] },
       { id: "a5-4-p2", promptFr: "Calculez 82,52 + 37,2.", type: "short_text", acceptable: ["119,72", "119.72"] },
