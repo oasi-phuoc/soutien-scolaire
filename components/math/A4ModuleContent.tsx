@@ -1414,21 +1414,24 @@ export function DecToFracExercise({ validateCommand, onValidated }: {
       <div className="space-y-4">
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
-          const iCls = `w-16 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+          const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
               <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-              {isWrong ? (
-                <div className="w-16 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-1">
-                  <span className="text-amber-600 line-through tabular-nums">{answers[i] || "—"}</span>
-                  <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{q.answer}</span>
-                </div>
-              ) : (
-                <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
-              )}
-              <span className="text-sm text-[var(--color-text-secondary)]">/{q.den}</span>
+              <span className="inline-flex flex-col items-center gap-[2px]">
+                {isWrong ? (
+                  <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
+                    <span className="text-xs text-amber-600 line-through tabular-nums">{answers[i] || "—"}</span>
+                    <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{q.answer}</span>
+                  </span>
+                ) : (
+                  <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
+                )}
+                <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+                <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
+              </span>
             </div>
           );
         })}
