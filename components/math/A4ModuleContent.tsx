@@ -249,7 +249,7 @@ function FracInline({ frac }: { frac: string }) {
 }
 
 // ── Shape renderer ─────────────────────────────────────────────────────────────
-type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle";
+type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle" | "semicircle" | "quartercircle" | "hexagon";
 
 function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSet }: {
   kind: ShapeKind;
@@ -437,6 +437,149 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSe
       </svg>
     );
   }
+  if (kind === "semicircle") {
+    // viewBox 0 0 100 56, R=48, center=(50,50) — flat edge at bottom
+    const W = 100, H = 56, scx = 50, scy = 50, sr = 48;
+    const sliceAngle = Math.PI / d;
+    return (
+      <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+        {Array.from({ length: d }, (_, k) => {
+          // sectors go from right (angle=0) counter-clockwise through top to left (angle=π)
+          const a0 = k * sliceAngle;
+          const a1 = (k + 1) * sliceAngle;
+          const x1 = scx + sr * Math.cos(a0), y1 = scy - sr * Math.sin(a0);
+          const x2 = scx + sr * Math.cos(a1), y2 = scy - sr * Math.sin(a1);
+          const pathD = `M ${scx} ${scy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${sr} ${sr} 0 0 0 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
+          return (
+            <path key={k} d={pathD}
+              fill={cellFill(k)}
+              stroke="#2563eb" strokeWidth={1}
+              style={toggle ? { cursor: "pointer" } : {}}
+              onClick={toggle ? () => toggle(k) : undefined}
+            />
+          );
+        })}
+        {/* outline: semicircle arc + flat base */}
+        <path d={`M ${scx - sr} ${scy} A ${sr} ${sr} 0 0 1 ${scx + sr} ${scy} Z`} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        {Array.from({ length: d }, (_, k) => {
+          const midA = (k + 0.5) * sliceAngle;
+          return xMark(scx + sr * 0.55 * Math.cos(midA), scy - sr * 0.55 * Math.sin(midA), 6, k);
+        })}
+      </svg>
+    );
+  }
+  if (kind === "quartercircle") {
+    // viewBox 0 0 100 100, R=96, corner at bottom-left (2,98)
+    const W = 100, H = 100, qcx = 2, qcy = 98, qr = 96;
+    const sliceAngle = (Math.PI / 2) / d;
+    return (
+      <svg width={Math.round(W * s)} height={Math.round(H * s)} viewBox={`0 0 ${W} ${H}`} className="mx-auto block">
+        {Array.from({ length: d }, (_, k) => {
+          const a0 = k * sliceAngle;
+          const a1 = (k + 1) * sliceAngle;
+          const x1 = qcx + qr * Math.cos(a0), y1 = qcy - qr * Math.sin(a0);
+          const x2 = qcx + qr * Math.cos(a1), y2 = qcy - qr * Math.sin(a1);
+          const pathD = `M ${qcx} ${qcy} L ${x1.toFixed(2)} ${y1.toFixed(2)} A ${qr} ${qr} 0 0 0 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`;
+          return (
+            <path key={k} d={pathD}
+              fill={cellFill(k)}
+              stroke="#2563eb" strokeWidth={1}
+              style={toggle ? { cursor: "pointer" } : {}}
+              onClick={toggle ? () => toggle(k) : undefined}
+            />
+          );
+        })}
+        <path d={`M ${qcx} ${qcy} L ${qcx + qr} ${qcy} A ${qr} ${qr} 0 0 0 ${qcx} ${qcy - qr} Z`} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        {Array.from({ length: d }, (_, k) => {
+          const midA = (k + 0.5) * sliceAngle;
+          return xMark(qcx + qr * 0.55 * Math.cos(midA), qcy - qr * 0.55 * Math.sin(midA), 6, k);
+        })}
+      </svg>
+    );
+  }
+  if (kind === "hexagon") {
+    // Regular hexagon, flat-top orientation, center (50,50), circumradius=46
+    // Vertices: v0=(96,50), v1=(73,10), v2=(27,10), v3=(4,50), v4=(27,90), v5=(73,90)
+    const hcx = 50, hcy = 50, hR = 46;
+    const vx = (i: number) => hcx + hR * Math.cos((i * Math.PI) / 3);
+    const vy = (i: number) => hcy - hR * Math.sin((i * Math.PI) / 3);
+    // 6 vertices
+    const V: [number, number][] = Array.from({ length: 6 }, (_, i) => [vx(i), vy(i)]);
+    // edge midpoints
+    const M: [number, number][] = Array.from({ length: 6 }, (_, i) => [(V[i]![0] + V[(i + 1) % 6]![0]) / 2, (V[i]![1] + V[(i + 1) % 6]![1]) / 2]);
+    const C: [number, number] = [hcx, hcy];
+
+    // Build polygon list per d
+    let polygons: [number, number][][];
+    if (d === 2) {
+      polygons = [
+        [V[0]!, V[1]!, V[2]!, V[3]!],
+        [V[3]!, V[4]!, V[5]!, V[0]!],
+      ];
+    } else if (d === 3) {
+      polygons = [
+        [C, V[0]!, V[1]!, V[2]!],
+        [C, V[2]!, V[3]!, V[4]!],
+        [C, V[4]!, V[5]!, V[0]!],
+      ];
+    } else if (d === 4) {
+      polygons = [
+        [C, V[0]!, V[1]!, M[1]!],
+        [C, M[1]!, V[2]!, V[3]!],
+        [C, V[3]!, V[4]!, M[4]!],
+        [C, M[4]!, V[5]!, V[0]!],
+      ];
+    } else if (d === 6) {
+      polygons = Array.from({ length: 6 }, (_, i) => [C, V[i]!, V[(i + 1) % 6]!]);
+    } else if (d === 9) {
+      // 3 rhombuses (like d=3), each split into 3 equal parallelograms
+      // by lines parallel to the rhombus's short diagonal
+      polygons = [];
+      const lerp = (p: [number,number], q: [number,number], f: number): [number,number] => [p[0]+(q[0]-p[0])*f, p[1]+(q[1]-p[1])*f];
+      for (let r = 0; r < 3; r++) {
+        const vi0 = V[(r * 2) % 6]!;
+        const vi1 = V[(r * 2 + 1) % 6]!;
+        const vi2 = V[(r * 2 + 2) % 6]!;
+        // Rhombus vertices: C, vi0, vi1, vi2
+        // Lines parallel to vi0–vi2 at 1/3 and 2/3 from C toward vi1
+        const p0a = lerp(C, vi0, 1/3), p0b = lerp(C, vi0, 2/3);
+        const p1a = lerp(C, vi1, 1/3), p1b = lerp(C, vi1, 2/3);
+        const p2a = lerp(C, vi2, 1/3), p2b = lerp(C, vi2, 2/3);
+        polygons.push([C,   p0a, p1a, p2a]);
+        polygons.push([p0a, p0b, p1b, p2b, p2a, p1a]);
+        polygons.push([p0b, vi0, vi1, vi2, p2b, p1b]);
+      }
+    } else if (d === 12) {
+      // 12 triangles: center → each vertex and adjacent edge midpoint
+      polygons = Array.from({ length: 6 }, (_, i) => [
+        [C, V[i]!, M[i]!] as [number,number][],
+        [C, M[i]!, V[(i + 1) % 6]!] as [number,number][],
+      ]).flat();
+    } else {
+      // fallback: all 6 triangles (d=6)
+      polygons = Array.from({ length: 6 }, (_, i) => [C, V[i]!, V[(i + 1) % 6]!]);
+    }
+
+    const polyPoints = (pts: [number,number][]) => pts.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
+    const polyCx = (pts: [number,number][]) => pts.reduce((s,[x]) => s+x, 0) / pts.length;
+    const polyCy = (pts: [number,number][]) => pts.reduce((s,[,y]) => s+y, 0) / pts.length;
+
+    return (
+      <svg width={Math.round(100 * s)} height={Math.round(100 * s)} viewBox="0 0 100 100" className="mx-auto block">
+        {polygons.map((poly, k) => (
+          <polygon key={k}
+            points={polyPoints(poly)}
+            fill={cellFill(k)}
+            stroke="#2563eb" strokeWidth={1}
+            style={toggle ? { cursor: "pointer" } : {}}
+            onClick={toggle ? () => toggle(k) : undefined}
+          />
+        ))}
+        <polygon points={V.map(([x,y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ')} fill="none" stroke="#2563eb" strokeWidth={1.5} />
+        {polygons.map((poly, k) => xMark(polyCx(poly), polyCy(poly), 5, k))}
+      </svg>
+    );
+  }
   // rect: d equal vertical strips
   const W = 220, H = 52;
   const cellW = W / d;
@@ -466,7 +609,7 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSe
 
 // ── Multi-shape helpers ────────────────────────────────────────────────────────
 function naturalW(kind: ShapeKind): number {
-  return { rect: 220, square: 100, triangle: 150, circle: 120, grid: 130 }[kind] ?? 120;
+  return { rect: 220, square: 100, triangle: 150, circle: 120, grid: 130, semicircle: 100, quartercircle: 100, hexagon: 100 }[kind] ?? 120;
 }
 function computeScale(kind: ShapeKind, copies: number): number {
   if (copies <= 1) return 1;
@@ -751,26 +894,39 @@ function pickTriangleDenom() { return TRIANGLE_DENOMS[Math.floor(Math.random() *
 const SQUARE_DENOMS = [2, 4, 9, 16] as const;
 function pickSquareDenom() { return SQUARE_DENOMS[Math.floor(Math.random() * SQUARE_DENOMS.length)]!; }
 
-function generateColoringItems(): ColoringSpec[] {
-  const d1 = rnd(2, 20), d2 = pickSquareDenom(), d3 = pickTriangleDenom(), d4 = rnd(2, 15);
-  const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
-  return [
-    { label: "1", kind: "rect",     d: d1, n: n1, desc: `${n1}/${d1} d'un rectangle partagé en ${d1} parties égales` },
-    { label: "2", kind: "square",   d: d2, n: n2, desc: `${n2}/${d2} d'un carré partagé en ${d2} parties égales` },
-    { label: "3", kind: "triangle", d: d3, n: n3, desc: `${n3}/${d3} d'un triangle partagé en ${d3} parties égales` },
-    { label: "4", kind: "circle",   d: d4, n: n4, desc: `${n4}/${d4} d'un cercle partagé en ${d4} parties égales` },
+const HEXAGON_DENOMS = [2, 3, 4, 6, 9, 12] as const;
+function pickHexDenom() { return HEXAGON_DENOMS[Math.floor(Math.random() * HEXAGON_DENOMS.length)]!; }
+
+// All 7 basic shape configs (kind, denominator picker)
+type ShapeConfig = { kind: ShapeKind; d: number };
+function pickShapeConfigs(count: number): ShapeConfig[] {
+  const pickers: (() => ShapeConfig)[] = [
+    () => ({ kind: "rect",         d: rnd(2, 20) }),
+    () => ({ kind: "square",       d: pickSquareDenom() }),
+    () => ({ kind: "triangle",     d: pickTriangleDenom() }),
+    () => ({ kind: "circle",       d: rnd(2, 15) }),
+    () => ({ kind: "semicircle",   d: rnd(2, 10) }),
+    () => ({ kind: "quartercircle",d: rnd(2, 10) }),
+    () => ({ kind: "hexagon",      d: pickHexDenom() }),
   ];
+  return shuffle(pickers).slice(0, count).map(fn => fn());
+}
+
+function generateColoringItems(): ColoringSpec[] {
+  const configs = pickShapeConfigs(4);
+  return configs.map((cfg, i) => {
+    const n = rnd(1, cfg.d - 1);
+    const names: Record<ShapeKind, string> = { rect: "rectangle", square: "carré", triangle: "triangle", circle: "cercle", grid: "grille", semicircle: "demi-cercle", quartercircle: "quart de cercle", hexagon: "hexagone" };
+    return { label: String(i + 1), kind: cfg.kind, d: cfg.d, n, desc: `${n}/${cfg.d} d'un ${names[cfg.kind]} partagé en ${cfg.d} parties égales` };
+  });
 }
 
 function generateFractionReadItems(): FracReadSpec[] {
-  const d1 = rnd(2, 20), d2 = pickSquareDenom(), d3 = pickTriangleDenom(), d4 = rnd(2, 15);
-  const n1 = rnd(1, d1 - 1), n2 = rnd(1, d2 - 1), n3 = rnd(1, d3 - 1), n4 = rnd(1, d4 - 1);
-  return [
-    { label: "1", kind: "rect",     d: d1, n: n1, answer: `${n1}/${d1}` },
-    { label: "2", kind: "square",   d: d2, n: n2, answer: `${n2}/${d2}` },
-    { label: "3", kind: "triangle", d: d3, n: n3, answer: `${n3}/${d3}` },
-    { label: "4", kind: "circle",   d: d4, n: n4, answer: `${n4}/${d4}` },
-  ];
+  const configs = pickShapeConfigs(4);
+  return configs.map((cfg, i) => {
+    const n = rnd(1, cfg.d - 1);
+    return { label: String(i + 1), kind: cfg.kind, d: cfg.d, n, answer: `${n}/${cfg.d}` };
+  });
 }
 
 function generateMatchPairs(): MatchPair[] {
@@ -814,31 +970,33 @@ function generateFracConvItems(): FracConvItem[] {
 interface MultiColoringSpec { label: string; kind: ShapeKind; d: number; copies: number; n: number; }
 interface MultiReadSpec { label: string; kind: ShapeKind; d: number; copies: number; n: number; answer: string; }
 
-function generateMultiColoringItems(): MultiColoringSpec[] {
-  const configs: [ShapeKind, number][] = [
-    ["rect",     rnd(2, 5)],
-    ["square",   ([2, 4] as const)[Math.floor(Math.random() * 2)]!],
-    ["triangle", ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!],
-    ["circle",   rnd(2, 5)],
+function pickMultiShapeConfigs(): ShapeConfig[] {
+  // For multi-shape, keep denominators small so copies scale properly
+  const pickers: (() => ShapeConfig)[] = [
+    () => ({ kind: "rect",          d: rnd(2, 5) }),
+    () => ({ kind: "square",        d: ([2, 4] as const)[Math.floor(Math.random() * 2)]! }),
+    () => ({ kind: "triangle",      d: ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]! }),
+    () => ({ kind: "circle",        d: rnd(2, 5) }),
+    () => ({ kind: "semicircle",    d: rnd(2, 5) }),
+    () => ({ kind: "quartercircle", d: rnd(2, 5) }),
+    () => ({ kind: "hexagon",       d: ([2, 3, 4, 6] as const)[Math.floor(Math.random() * 4)]! }),
   ];
-  return configs.map(([kind, d], i) => {
+  return shuffle(pickers).slice(0, 4).map(fn => fn());
+}
+
+function generateMultiColoringItems(): MultiColoringSpec[] {
+  return pickMultiShapeConfigs().map((cfg, i) => {
     const copies = rnd(2, 3);
-    const n = rnd(d + 1, copies * d - 1);
-    return { label: String(i + 1), kind, d, copies, n };
+    const n = rnd(cfg.d + 1, copies * cfg.d - 1);
+    return { label: String(i + 1), kind: cfg.kind, d: cfg.d, copies, n };
   });
 }
 
 function generateMultiReadItems(): MultiReadSpec[] {
-  const configs: [ShapeKind, number][] = [
-    ["rect",     rnd(2, 5)],
-    ["square",   ([2, 4] as const)[Math.floor(Math.random() * 2)]!],
-    ["triangle", ([2, 3, 4] as const)[Math.floor(Math.random() * 3)]!],
-    ["circle",   rnd(2, 5)],
-  ];
-  return configs.map(([kind, d], i) => {
+  return pickMultiShapeConfigs().map((cfg, i) => {
     const copies = rnd(2, 3);
-    const n = rnd(d + 1, copies * d - 1);
-    return { label: String(i + 1), kind, d, copies, n, answer: `${n}/${d}` };
+    const n = rnd(cfg.d + 1, copies * cfg.d - 1);
+    return { label: String(i + 1), kind: cfg.kind, d: cfg.d, copies, n, answer: `${n}/${cfg.d}` };
   });
 }
 
