@@ -12,6 +12,8 @@ import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4Fracti
 import { DecAddExercise, DecAddMissingExercise, DecAddHundredthsExercise, DecSubExercise, DecSubMissingExercise, DecSubHundredthsExercise, DecMulSimpleExercise, DecMulMissingExercise, DecMulExtExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
+import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
 type WorkspaceStep =
   | { kind: "theory" }
@@ -1039,18 +1041,25 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
   }
 
-  const visibleSteps = steps.filter((s: WorkspaceStep) => !notInBar(s));
-  const visibleIdx = steps.slice(0, stepIdx).filter((s: WorkspaceStep) => !notInBar(s)).length;
+  const resultsIdx = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
+  const isInEvalExercises = evalStartIdx >= 0 && stepIdx > evalStartIdx &&
+    currentStep?.kind !== "results" && currentStep?.kind !== "eval_start" && currentStep?.kind !== "pass_toggle";
+  const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
+  const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
+
+  const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter((s: WorkspaceStep) => !notInBar(s));
+  const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
+  const showTrainingBar = !inEvalPhase && !isInEvalExercises;
 
   return (
     <div className="pb-40">
-      {/* Progress bar — lesson steps only */}
-      {!inEvalPhase && (
-        <div className="mb-6 flex gap-1">
-          {visibleSteps.map((_, i) => (
-            <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${i < visibleIdx ? "bg-[var(--color-accent-alg)]" : i === visibleIdx ? "bg-[var(--color-accent-alg)] opacity-60" : "bg-[var(--color-border-default)]"}`} />
-          ))}
-        </div>
+      {/* Training progress bar */}
+      {showTrainingBar && (
+        <TrainingProgressBar current={trainingStepIdx} total={trainingSteps.length} />
+      )}
+      {/* Eval progress bar */}
+      {isInEvalExercises && (
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} />
       )}
 
       {/* Theory */}

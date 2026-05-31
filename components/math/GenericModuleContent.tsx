@@ -13,6 +13,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
+import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
@@ -919,7 +920,7 @@ function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOp
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
 function ArithmeticGroupExercise({
-  config, answers, validated, results, onChange, onTimerExpired, consigne,
+  config, answers, validated, results, onChange, onTimerExpired, onTimeUpdate, hideTimerDisplay, consigne,
 }: {
   config: ArithGroupConfig;
   answers: string[];
@@ -927,6 +928,8 @@ function ArithmeticGroupExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
   onTimerExpired?: () => void;
+  onTimeUpdate?: (t: number) => void;
+  hideTimerDisplay?: boolean;
   consigne?: string;
 }) {
   const [timeLeft, setTimeLeft] = useState<number | null>(() =>
@@ -934,18 +937,22 @@ function ArithmeticGroupExercise({
   );
   const onTimerExpiredRef = useRef(onTimerExpired);
   onTimerExpiredRef.current = onTimerExpired;
+  const onTimeUpdateRef = useRef(onTimeUpdate);
+  onTimeUpdateRef.current = onTimeUpdate;
 
   useEffect(() => {
     if (config.timer === undefined || validated) return;
     setTimeLeft(config.timer);
+    onTimeUpdateRef.current?.(config.timer);
     const id = setInterval(() => {
       setTimeLeft(prev => {
-        if (prev === null || prev <= 1) {
+        const next = prev === null || prev <= 1 ? 0 : prev - 1;
+        if (next === 0) {
           clearInterval(id);
           onTimerExpiredRef.current?.();
-          return 0;
         }
-        return prev - 1;
+        onTimeUpdateRef.current?.(next);
+        return next;
       });
     }, 1000);
     return () => clearInterval(id);
@@ -965,7 +972,7 @@ function ArithmeticGroupExercise({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-        {config.timer !== undefined && (
+        {config.timer !== undefined && !hideTimerDisplay && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
               ? timeLeft <= 15
@@ -3183,6 +3190,9 @@ export function GenericModuleContent({
   const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
   const [_seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
 
+  // Training timer (bubbled up from ArithmeticGroupExercise)
+  const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
+
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
@@ -3265,6 +3275,7 @@ export function GenericModuleContent({
     setDivGridWorkInputs(emptyDivWork());
     setDivGridValidated(false);
     setDivGridResults(Array(3).fill(false));
+    setTrainingTimerLeft(null);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -4008,20 +4019,11 @@ export function GenericModuleContent({
 
       {/* Main progress bar — training steps only */}
       {!inEvalPhase && (
-        <div className="mb-6 flex gap-1">
-          {trainingSteps.map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i < trainingStepIdx
-                  ? "bg-[var(--color-accent-alg)]"
-                  : i === trainingStepIdx
-                    ? "bg-[var(--color-accent-alg)] opacity-60"
-                    : "bg-[var(--color-border-default)]"
-              }`}
-            />
-          ))}
-        </div>
+        <TrainingProgressBar
+          current={trainingStepIdx}
+          total={trainingSteps.length}
+          timeLeft={trainingTimerLeft}
+        />
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
@@ -4471,6 +4473,8 @@ export function GenericModuleContent({
           results={arithResults}
           onChange={(i, val) => setArithAnswers(prev => prev.map((a, j) => j === i ? val : a))}
           onTimerExpired={stepValidate}
+          hideTimerDisplay={!isInEvalPhase}
+          onTimeUpdate={!isInEvalPhase ? (t) => setTrainingTimerLeft(t) : undefined}
           consigne={
             activeArithConfig.missingOperand
               ? "Trouvez la valeur manquante."
