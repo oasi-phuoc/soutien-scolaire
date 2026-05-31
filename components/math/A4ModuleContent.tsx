@@ -1196,6 +1196,90 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
   );
 }
 
+// ── Exercise — Compare fractions (A4.3) ───────────────────────────────────────
+interface ComparePair { n1: number; d1: number; n2: number; d2: number; answer: "<" | "=" | ">"; }
+
+function genComparePair(): ComparePair {
+  const n1 = riA4(1, 11);
+  const d1 = riA4(2, 12);
+  const n2 = riA4(1, 11);
+  const d2 = riA4(2, 12);
+  const diff = n1 * d2 - n2 * d1;
+  return { n1, d1, n2, d2, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
+}
+
+export function FractionCompareExercise({ exNum, validateCommand, onValidated }: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, genComparePair));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = pairs.map((p, i) =>
+      selected[i] === p.answer ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, pairs, selected]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les fractions. Choisissez &lt;, = ou &gt;.</p>
+      </div>
+      <div className="space-y-4">
+        {pairs.map((p, i) => {
+          const st = statuses[i]!;
+          const sel = selected[i];
+          const btnCls = (sym: "<" | "=" | ">") => {
+            const isSelected = sel === sym;
+            const isCorrect = sym === p.answer;
+            if (!validated) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+                isSelected
+                  ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`;
+            }
+            if (st === "wrong" && (isSelected || isCorrect)) {
+              return "w-10 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
+            }
+            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              isSelected
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+            }`;
+          };
+          return (
+            <div key={i} className={`rounded-xl border p-3 flex items-center gap-3 flex-wrap ${st === "wrong" ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <VFracNum n={p.n1} d={p.d1} />
+              <div className="flex gap-1.5">
+                {(["<", "=", ">"] as const).map(sym => (
+                  <button key={sym} type="button" onClick={() => { if (!validated) setSelected(prev => { const n = [...prev]; n[i] = sym; return n; }); }} className={btnCls(sym)}>
+                    {sym}
+                  </button>
+                ))}
+              </div>
+              <VFracNum n={p.n2} d={p.d2} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── Combined Decimal Exercises (A4.2 — single step) ───────────────────────────
 export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   validateCommand: number; onValidated: (ok: boolean) => void;

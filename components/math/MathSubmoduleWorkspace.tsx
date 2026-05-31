@@ -7,7 +7,7 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade } from "@/lib/scoring";
-import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise } from "@/components/math/A4ModuleContent";
+import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
@@ -21,6 +21,7 @@ type WorkspaceStep =
   | { kind: "fraction_multi_read" }
   | { kind: "fraction_equiv" }
   | { kind: "fraction_simplify" }
+  | { kind: "fraction_compare"; exNum: number }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
@@ -48,6 +49,11 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   } else if (lesson.submoduleId === "A4-2") {
     steps.push({ kind: "fraction_equiv" });
     steps.push({ kind: "fraction_simplify" });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
+  } else if (lesson.submoduleId === "A4-3") {
+    steps.push({ kind: "fraction_compare", exNum: 1 });
+    steps.push({ kind: "fraction_compare", exNum: 2 });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
@@ -863,7 +869,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "theory" &&
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "frac_ops";
+  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -956,6 +962,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "fraction_simplify" && (
         <FractionSimplifyExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "fraction_compare" && (
+        <FractionCompareExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}
