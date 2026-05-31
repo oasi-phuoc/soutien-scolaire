@@ -231,28 +231,28 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
+  const is3Part = exType === 9;
+  const cols = is3Part ? 'auto auto auto auto auto auto auto auto' : 'auto auto auto auto auto auto';
+  const part = (p: Part) => p.kind === "frac"
+    ? <VFrac n={p.n} d={p.d} />
+    : <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{p.v}</span>;
+
   return (
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exType}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
-      <div className="space-y-4">
+      <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: cols }}>
         {(questions as OpQ[]).map((q: OpQ, i: number) => (
-          <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
-            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {(q.parts as Part[]).map((part: Part, pi: number) => (
-              <React.Fragment key={pi}>
-                {pi > 0 && (
-                  <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.ops[pi - 1]}</span>
-                )}
-                {part.kind === "frac"
-                  ? <VFrac n={part.n} d={part.d} />
-                  : <span className="text-sm font-bold text-[var(--color-text-primary)]">{part.v}</span>
-                }
-              </React.Fragment>
-            ))}
-            <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+          <React.Fragment key={i}>
+            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <div className="flex justify-center">{part(q.parts[0]!)}</div>
+            <span className="text-base font-semibold text-center text-[var(--color-text-primary)]">{q.ops[0]}</span>
+            <div className="flex justify-center">{part(q.parts[1]!)}</div>
+            {is3Part && <span className="text-base font-semibold text-center text-[var(--color-text-primary)]">{q.ops[1]}</span>}
+            {is3Part && <div className="flex justify-center">{part(q.parts[2]!)}</div>}
+            <span className="text-base font-semibold text-center text-[var(--color-text-primary)]">=</span>
             <FracAnswerInput
               numVal={nums[i]!} denVal={dens[i]!}
               onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
@@ -262,7 +262,7 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
               correctNum={String(q.ansNum)}
               correctDen={String(q.ansDen)}
             />
-          </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
