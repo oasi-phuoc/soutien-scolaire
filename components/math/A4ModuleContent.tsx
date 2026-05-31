@@ -273,8 +273,8 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSe
     if (!extraSet?.has(i)) return null;
     return (
       <g key={`x-${i}`} pointerEvents="none">
-        <line x1={cx - r} y1={cy - r} x2={cx + r} y2={cy + r} stroke="#dc2626" strokeWidth={1.5} strokeLinecap="round" />
-        <line x1={cx + r} y1={cy - r} x2={cx - r} y2={cy + r} stroke="#dc2626" strokeWidth={1.5} strokeLinecap="round" />
+        <line x1={cx - r} y1={cy - r} x2={cx + r} y2={cy + r} stroke="#d97706" strokeWidth={1.5} strokeLinecap="round" />
+        <line x1={cx + r} y1={cy - r} x2={cx - r} y2={cy + r} stroke="#d97706" strokeWidth={1.5} strokeLinecap="round" />
       </g>
     );
   }
@@ -707,18 +707,18 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
-                      <span className="text-xs text-amber-600 line-through leading-none">{readNums[i] || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctNum}</span>
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-0.5">
+                      <span className="text-amber-600 line-through">{readNums[i] || "—"}</span>
+                      <span className="font-bold text-[var(--color-text-primary)]">{correctNum}</span>
                     </div>
                   ) : (
                     <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
-                      <span className="text-xs text-amber-600 line-through leading-none">{readDens[i] || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctDen}</span>
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-0.5">
+                      <span className="text-amber-600 line-through">{readDens[i] || "—"}</span>
+                      <span className="font-bold text-[var(--color-text-primary)]">{correctDen}</span>
                     </div>
                   ) : (
                     <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
@@ -952,18 +952,18 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
-                      <span className="text-xs text-amber-600 line-through leading-none">{readNums[i] || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctNum}</span>
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-0.5">
+                      <span className="text-amber-600 line-through">{readNums[i] || "—"}</span>
+                      <span className="font-bold text-[var(--color-text-primary)]">{correctNum}</span>
                     </div>
                   ) : (
                     <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
-                      <span className="text-xs text-amber-600 line-through leading-none">{readDens[i] || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctDen}</span>
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-0.5">
+                      <span className="text-amber-600 line-through">{readDens[i] || "—"}</span>
+                      <span className="font-bold text-[var(--color-text-primary)]">{correctDen}</span>
                     </div>
                   ) : (
                     <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
