@@ -7,7 +7,7 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { percentToSwissGrade } from "@/lib/scoring";
-import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise } from "@/components/math/A4ModuleContent";
+import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
@@ -22,6 +22,8 @@ type WorkspaceStep =
   | { kind: "fraction_equiv" }
   | { kind: "fraction_simplify" }
   | { kind: "fraction_compare"; exNum: number; mode: "same-den" | "same-num" | "diff-both" }
+  | { kind: "frac_to_dec" }
+  | { kind: "dec_to_frac" }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
@@ -55,6 +57,11 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
     steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
     steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pass_toggle" });
+  } else if (lesson.submoduleId === "A4-7") {
+    steps.push({ kind: "frac_to_dec" });
+    steps.push({ kind: "dec_to_frac" });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
@@ -870,7 +877,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "theory" &&
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops";
+  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -966,6 +973,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "fraction_compare" && (
         <FractionCompareExercise key={exerciseKey} exNum={currentStep.exNum} mode={currentStep.mode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "frac_to_dec" && (
+        <FracToDecExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_to_frac" && (
+        <DecToFracExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}
