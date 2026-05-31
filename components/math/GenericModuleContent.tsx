@@ -137,7 +137,20 @@ type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
 type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
 type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep;
+// A5.2 decimal sequence types (numbers stored as hundredths: integer * 100)
+type DecOrderingQ = { hundredths: number[] };
+type DecOrderingConfig = { questions: DecOrderingQ[]; direction: "asc"|"desc"; exNum: number };
+type DecOrderingStep = { kind: "dec_ordering"; lesson: MathSubmoduleLesson; config: DecOrderingConfig };
+
+type DecSeqRuleQ = { nums: number[]; step: number; op: "+"|"-" };
+type DecSeqRuleConfig = { questions: DecSeqRuleQ[]; exNum: number };
+type DecSeqRuleStep = { kind: "dec_seq_rule"; lesson: MathSubmoduleLesson; config: DecSeqRuleConfig };
+
+type DecSeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
+type DecSeqCompleteConfig = { questions: DecSeqCompleteQ[]; exNum: number };
+type DecSeqCompleteStep = { kind: "dec_seq_complete"; lesson: MathSubmoduleLesson; config: DecSeqCompleteConfig };
+
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -145,6 +158,19 @@ type ComparisonConfig = { questions: ComparisonQ[]; level: 1 | 2 };
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function fmtDec(h: number): string {
+  const whole = Math.floor(h / 100);
+  const frac = h % 100;
+  if (frac === 0) return `${whole}`;
+  if (frac % 10 === 0) return `${whole},${frac / 10}`;
+  return `${whole},${String(frac).padStart(2, "0")}`;
+}
+
+function parseDec(s: string): number {
+  const n = parseFloat(s.replace(",", "."));
+  return isNaN(n) ? NaN : Math.round(n * 100);
 }
 
 function genComparisonConfig(level: 1 | 2): ComparisonConfig {
@@ -783,6 +809,53 @@ function genSeqComplete(range: [number, number], exNum: number, count: number, b
       available.splice(idx, 1);
     }
     return { allNums, blankIdxs: blankIdxs.sort((a,b) => a-b), step };
+  });
+  return { questions, exNum };
+}
+
+function genDecOrdering(direction: "asc"|"desc", exNum: number): DecOrderingConfig {
+  const questions: DecOrderingQ[] = Array.from({ length: 2 }, () => {
+    const nums = new Set<number>();
+    while (nums.size < 4) nums.add(rnd(100, 2500));
+    return { hundredths: [...nums] };
+  });
+  return { questions, direction, exNum };
+}
+
+const DEC_STEPS = [10, 25, 50, 75, 100, 125, 150, 200, 250];
+
+function genDecSeqRule(exNum: number, count = 5, termCount = 4): DecSeqRuleConfig {
+  const questions: DecSeqRuleQ[] = Array.from({ length: count }, () => {
+    const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
+    const start = rnd(startMin, startMin + 1500);
+    const nums = Array.from({ length: termCount }, (_, k) =>
+      op === "+" ? start + k * step : start - k * step
+    );
+    return { nums, step, op };
+  });
+  return { questions, exNum };
+}
+
+function genDecSeqComplete(exNum: number, count: number, blanks: number, termCount = 5): DecSeqCompleteConfig {
+  const questions: DecSeqCompleteQ[] = Array.from({ length: count }, () => {
+    const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const b = blanks < 0 ? rnd(2, 3) : blanks;
+    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
+    const start = rnd(startMin, startMin + 1500);
+    const allNums = Array.from({ length: termCount }, (_, i) =>
+      op === "+" ? start + i * step : start - i * step
+    );
+    const available = Array.from({ length: termCount - 1 }, (_, i) => i + 1);
+    const blankIdxs: number[] = [];
+    while (blankIdxs.length < b && available.length > 0) {
+      const idx = rnd(0, available.length - 1);
+      blankIdxs.push(available[idx]!);
+      available.splice(idx, 1);
+    }
+    return { allNums, blankIdxs: blankIdxs.sort((a, b) => a - b), step };
   });
   return { questions, exNum };
 }
@@ -2133,8 +2206,21 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
+    } else if (sid === "A5-2") {
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
+      steps.push({ kind: "eval_start", lesson });
+      const ascFirst52 = Math.random() < 0.5;
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
     } else {
-      if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5") {
+      if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5" && sid !== "A5-2") {
         const pool = lesson.exercisePool;
         const size = lesson.poolSize ?? 5;
         const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
@@ -2146,7 +2232,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
-    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5"
+    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
+    l.submoduleId === "A5-2"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -3108,6 +3195,9 @@ export function GenericModuleContent({
   const [orderingOverrideConfigs, setOrderingOverrideConfigs] = useState<Record<number, OrderingConfig>>({});
   const [seqRuleOverrideConfigs, setSeqRuleOverrideConfigs] = useState<Record<number, SeqRuleConfig>>({});
   const [seqCompleteOverrideConfigs, setSeqCompleteOverrideConfigs] = useState<Record<number, SeqCompleteConfig>>({});
+  const [decOrderingOverrideConfigs, setDecOrderingOverrideConfigs] = useState<Record<number, DecOrderingConfig>>({});
+  const [decSeqRuleOverrideConfigs, setDecSeqRuleOverrideConfigs] = useState<Record<number, DecSeqRuleConfig>>({});
+  const [decSeqCompleteOverrideConfigs, setDecSeqCompleteOverrideConfigs] = useState<Record<number, DecSeqCompleteConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
   // Fraction exercise state
@@ -3189,6 +3279,18 @@ export function GenericModuleContent({
   const [seqCompleteAnswers, setSeqCompleteAnswers] = useState<Array<string[]>>(() => Array(5).fill(null).map(()=>Array(4).fill("")));
   const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
   const [_seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  // A5.2 decimal sequence state
+  const [decOrderingSelected, setDecOrderingSelected] = useState<Array<number[]>>(() => [[], []]);
+  const [decOrderingValidated, setDecOrderingValidated] = useState(false);
+  const [decOrderingResults, setDecOrderingResults] = useState<boolean[]>(() => Array(2).fill(false));
+
+  const [decSeqRuleAnswers, setDecSeqRuleAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [decSeqRuleValidated, setDecSeqRuleValidated] = useState(false);
+  const [decSeqRuleResults, setDecSeqRuleResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [decSeqCompleteAnswers, setDecSeqCompleteAnswers] = useState<Array<string[]>>(() => Array(5).fill(null).map(()=>Array(4).fill("")));
+  const [decSeqCompleteValidated, setDecSeqCompleteValidated] = useState(false);
 
   // Training timer (bubbled up from ArithmeticGroupExercise)
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
