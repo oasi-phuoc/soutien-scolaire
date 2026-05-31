@@ -1285,7 +1285,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
             }`;
           };
           return (
-            <div key={i} className={`rounded-xl border p-3 flex items-center gap-3 flex-wrap ${st === "wrong" ? "border-amber-500 bg-amber-50/30 dark:bg-amber-950/10" : "border-[var(--color-border-default)]"}`}>
+            <div key={i} className="flex items-center gap-3 flex-wrap">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <VFracNum n={p.n1} d={p.d1} />
               <div className="flex gap-1.5">
