@@ -913,6 +913,215 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
   );
 }
 
+// ── A4.2 Helpers ──────────────────────────────────────────────────────────────
+function gcdA4(a: number, b: number): number {
+  a = Math.abs(a); b = Math.abs(b);
+  while (b) { [a, b] = [b, a % b]; }
+  return a || 1;
+}
+function riA4(lo: number, hi: number): number {
+  return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+}
+
+// Vertical fraction (number-based)
+function VFracNum({ n, d }: { n: number; d: number }) {
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
+      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{n}</span>
+      <span className="h-[1.5px] w-7 rounded bg-[var(--color-text-primary)]" />
+      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{d}</span>
+    </span>
+  );
+}
+
+// Fraction with one input box (either numerator or denominator is a textbox)
+function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled }: {
+  n: number; d: number;
+  missingPos: "num" | "den";
+  inputVal: string;
+  onInput: (v: string) => void;
+  status: "idle" | "correct" | "wrong";
+  disabled: boolean;
+}) {
+  const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
+    status === "wrong"
+      ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
+      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
+  }`;
+  const numCls = "text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)] w-12 text-center";
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
+      {missingPos === "num"
+        ? <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />
+        : <span className={numCls}>{n}</span>
+      }
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      {missingPos === "den"
+        ? <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />
+        : <span className={numCls}>{d}</span>
+      }
+    </span>
+  );
+}
+
+// Fraction with both inputs (for simplify exercise)
+function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled }: {
+  numVal: string; denVal: string;
+  onNum: (v: string) => void; onDen: (v: string) => void;
+  status: "idle" | "correct" | "wrong";
+  disabled: boolean;
+}) {
+  const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
+    status === "wrong"
+      ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
+      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
+  }`;
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
+      <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />
+    </span>
+  );
+}
+
+interface EquivQ { bigN: number; bigD: number; smallN: number; smallD: number; missingPos: "num" | "den"; answer: number; }
+interface SimplifyQ { bigN: number; bigD: number; smallN: number; smallD: number; }
+
+function genEquivQ(): EquivQ {
+  for (let t = 0; t < 200; t++) {
+    const sN = riA4(1, 12);
+    const sD = riA4(2, 12);
+    if (gcdA4(sN, sD) !== 1) continue;
+    const k = riA4(2, 12);
+    const bigN = sN * k;
+    const bigD = sD * k;
+    if (bigN > 144 || bigD > 144) continue;
+    const missingPos: "num" | "den" = Math.random() < 0.5 ? "num" : "den";
+    return { bigN, bigD, smallN: sN, smallD: sD, missingPos, answer: missingPos === "num" ? sN : sD };
+  }
+  return { bigN: 4, bigD: 20, smallN: 1, smallD: 5, missingPos: "num", answer: 1 };
+}
+
+function genSimplifyQ(): SimplifyQ {
+  for (let t = 0; t < 200; t++) {
+    const sN = riA4(1, 12);
+    const sD = riA4(2, 12);
+    if (gcdA4(sN, sD) !== 1) continue;
+    const k = riA4(2, 12);
+    const bigN = sN * k;
+    const bigD = sD * k;
+    if (bigN > 144 || bigD > 144) continue;
+    return { bigN, bigD, smallN: sN, smallD: sD };
+  }
+  return { bigN: 4, bigD: 20, smallN: 1, smallD: 5 };
+}
+
+// ── Exercise 1 — Find the missing value (A4.2) ────────────────────────────────
+export function FractionEquivExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<EquivQ[]>(() => Array.from({ length: 5 }, genEquivQ));
+  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = questions.map((q, i) =>
+      (answers[i]?.trim() ?? "") === String(q.answer) ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, questions, answers]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez la valeur manquante.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => (
+          <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <VFracNum n={q.bigN} d={q.bigD} />
+            <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+            <VFracBoxOne
+              n={q.smallN} d={q.smallD}
+              missingPos={q.missingPos}
+              inputVal={answers[i]!}
+              onInput={(v) => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = v; return n; }); }}
+              status={statuses[i]!}
+              disabled={validated}
+            />
+            {statuses[i] === "wrong" && (
+              <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.answer}</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Exercise 2 — Simplify fractions (A4.2) ───────────────────────────────────
+export function FractionSimplifyExercise({ validateCommand, onValidated }: {
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const [questions] = useState<SimplifyQ[]>(() => Array.from({ length: 5 }, genSimplifyQ));
+  const [nums, setNums] = useState<string[]>(() => Array(5).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(5).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = questions.map((q, i) =>
+      (nums[i]?.trim() ?? "") === String(q.smallN) && (dens[i]?.trim() ?? "") === String(q.smallD)
+        ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, questions, nums, dens]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Simplifiez les fractions.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => (
+          <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <VFracNum n={q.bigN} d={q.bigD} />
+            <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+            <VFracBoxBoth
+              numVal={nums[i]!} denVal={dens[i]!}
+              onNum={(v) => { if (!validated) setNums(prev => { const n = [...prev]; n[i] = v; return n; }); }}
+              onDen={(v) => { if (!validated) setDens(prev => { const n = [...prev]; n[i] = v; return n; }); }}
+              status={statuses[i]!}
+              disabled={validated}
+            />
+            {statuses[i] === "wrong" && <VFracNum n={q.smallN} d={q.smallD} />}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Combined Decimal Exercises (A4.2 — single step) ───────────────────────────
 export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   validateCommand: number; onValidated: (ok: boolean) => void;
