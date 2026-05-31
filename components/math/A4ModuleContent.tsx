@@ -1003,29 +1003,32 @@ function VFracNum({ n, d }: { n: number; d: number }) {
 }
 
 // Fraction with one input box (either numerator or denominator is a textbox)
-function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled }: {
+function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled, correctVal }: {
   n: number; d: number;
   missingPos: "num" | "den";
   inputVal: string;
   onInput: (v: string) => void;
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
+  correctVal?: string;
 }) {
-  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
-    status === "wrong"
-      ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
-      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
-  }`;
+  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
   const numCls = "h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
+  const corrBox = (val: string) => (
+    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
+      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
+      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correctVal}</span>
+    </span>
+  );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       {missingPos === "num"
-        ? <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />
+        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{n}</span>
       }
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {missingPos === "den"
-        ? <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />
+        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{d}</span>
       }
     </span>
@@ -1033,22 +1036,26 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled }: 
 }
 
 // Fraction with both inputs (for simplify exercise)
-function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled }: {
+function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled, correctNum, correctDen }: {
   numVal: string; denVal: string;
   onNum: (v: string) => void; onDen: (v: string) => void;
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
+  correctNum?: string;
+  correctDen?: string;
 }) {
-  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
-    status === "wrong"
-      ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
-      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
-  }`;
+  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+  const corrBox = (val: string, correct: string | undefined) => (
+    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
+      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
+      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    </span>
+  );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />
+      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />
+      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
     </span>
   );
 }
@@ -1127,10 +1134,8 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
               onInput={(v) => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = v; return n; }); }}
               status={statuses[i]!}
               disabled={validated}
+              correctVal={String(q.answer)}
             />
-            {statuses[i] === "wrong" && (
-              <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.answer}</span>
-            )}
           </div>
         ))}
       </div>
@@ -1181,8 +1186,9 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
               onDen={(v) => { if (!validated) setDens(prev => { const n = [...prev]; n[i] = v; return n; }); }}
               status={statuses[i]!}
               disabled={validated}
+              correctNum={String(q.smallN)}
+              correctDen={String(q.smallD)}
             />
-            {statuses[i] === "wrong" && <VFracNum n={q.smallN} d={q.smallD} />}
           </div>
         ))}
       </div>
