@@ -22,8 +22,8 @@ type WorkspaceStep =
   | { kind: "fraction_equiv" }
   | { kind: "fraction_simplify" }
   | { kind: "fraction_compare"; exNum: number; mode: "same-den" | "same-num" | "diff-both" }
-  | { kind: "frac_to_dec" }
-  | { kind: "dec_to_frac" }
+  | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
+  | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
@@ -60,8 +60,10 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-7") {
-    steps.push({ kind: "frac_to_dec" });
-    steps.push({ kind: "dec_to_frac" });
+    steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
+    steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
+    steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
+    steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "pass_toggle" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
@@ -975,10 +977,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         <FractionCompareExercise key={exerciseKey} exNum={currentStep.exNum} mode={currentStep.mode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "frac_to_dec" && (
-        <FracToDecExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FracToDecExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_to_frac" && (
-        <DecToFracExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecToFracExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}

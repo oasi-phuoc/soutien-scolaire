@@ -1304,23 +1304,32 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
   );
 }
 
-// ── A4.7 Exercise 1 — Fraction → Decimal ─────────────────────────────────────
-interface FracToDecQ { num: number; den: 10 | 100; answer: string; acceptable: string[]; }
+// ── A4.7 Exercise 1 & 3 — Fraction → Decimal ─────────────────────────────────
+interface FracToDecQ { num: number; den: number; answer: string; acceptable: string[]; }
 
 function genFracToDecQ(): FracToDecQ {
-  const den = (Math.random() < 0.5 ? 10 : 100) as 10 | 100;
+  const den = Math.random() < 0.5 ? 10 : 100;
   const num = riA4(1, den === 100 ? 999 : 99);
-  const decimal = num / den;
   const places = den === 100 ? 2 : 1;
-  const commaStr = decimal.toFixed(places).replace('.', ',');
-  const dotStr = decimal.toFixed(places);
-  return { num, den, answer: commaStr, acceptable: [commaStr, dotStr] };
+  const commaStr = (num / den).toFixed(places).replace('.', ',');
+  return { num, den, answer: commaStr, acceptable: [commaStr, (num / den).toFixed(places)] };
 }
 
-export function FracToDecExercise({ validateCommand, onValidated }: {
+const EXT_DENS = [{d: 2, p: 1}, {d: 4, p: 2}, {d: 5, p: 1}, {d: 8, p: 3}, {d: 10, p: 1}];
+
+function genFracToDecExtQ(): FracToDecQ {
+  const info = EXT_DENS[Math.floor(Math.random() * EXT_DENS.length)]!;
+  const num = riA4(1, 144);
+  const commaStr = (num / info.d).toFixed(info.p).replace('.', ',');
+  return { num, den: info.d, answer: commaStr, acceptable: [commaStr, (num / info.d).toFixed(info.p)] };
+}
+
+export function FracToDecExercise({ exNum = 1, variant = "basic", validateCommand, onValidated }: {
+  exNum?: number; variant?: "basic" | "extended";
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: 5 }, genFracToDecQ));
+  const gen = variant === "extended" ? genFracToDecExtQ : genFracToDecQ;
+  const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: 5 }, gen));
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -1341,7 +1350,7 @@ export function FracToDecExercise({ validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 1</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme décimale.</p>
       </div>
       <div className="space-y-4">
@@ -1373,21 +1382,28 @@ export function FracToDecExercise({ validateCommand, onValidated }: {
   );
 }
 
-// ── A4.7 Exercise 2 — Decimal → Fraction ─────────────────────────────────────
-interface DecToFracQ { decStr: string; den: 10 | 100; answer: number; }
+// ── A4.7 Exercise 2 & 4 — Decimal → Fraction ─────────────────────────────────
+interface DecToFracQ { decStr: string; den: number; answer: number; }
 
 function genDecToFracQ(): DecToFracQ {
-  const den = (Math.random() < 0.5 ? 10 : 100) as 10 | 100;
+  const den = Math.random() < 0.5 ? 10 : 100;
   const num = riA4(1, den === 100 ? 999 : 99);
-  const decimal = num / den;
   const places = den === 100 ? 2 : 1;
-  return { decStr: decimal.toFixed(places).replace('.', ','), den, answer: num };
+  return { decStr: (num / den).toFixed(places).replace('.', ','), den, answer: num };
 }
 
-export function DecToFracExercise({ validateCommand, onValidated }: {
+function genDecToFracExtQ(): DecToFracQ {
+  const info = EXT_DENS[Math.floor(Math.random() * EXT_DENS.length)]!;
+  const num = riA4(1, 144);
+  return { decStr: (num / info.d).toFixed(info.p).replace('.', ','), den: info.d, answer: num };
+}
+
+export function DecToFracExercise({ exNum = 2, variant = "basic", validateCommand, onValidated }: {
+  exNum?: number; variant?: "basic" | "extended";
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: 5 }, genDecToFracQ));
+  const gen = variant === "extended" ? genDecToFracExtQ : genDecToFracQ;
+  const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: 5 }, gen));
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -1408,7 +1424,7 @@ export function DecToFracExercise({ validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice 2</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
       <div className="space-y-4">
