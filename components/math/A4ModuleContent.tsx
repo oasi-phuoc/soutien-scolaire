@@ -706,25 +706,22 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
               <div className="flex items-center gap-3">
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
-                  <input
-                    type="text"
-                    value={readNums[i]}
-                    onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls}
-                  />
+                  {isWrong ? (
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
+                      <span className="text-xs text-amber-600 line-through leading-none">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctNum}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                  )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
-                  <input
-                    type="text"
-                    value={readDens[i]}
-                    onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls}
-                  />
-                  {isWrong && (
-                    <span className="mt-2 flex flex-col items-center gap-0.5">
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctNum}</span>
-                      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctDen}</span>
-                    </span>
+                  {isWrong ? (
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
+                      <span className="text-xs text-amber-600 line-through leading-none">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctDen}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
                   )}
                 </div>
                 <div className="flex flex-1 justify-center">
@@ -954,21 +951,22 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
               <div className="flex items-center gap-3">
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
-                  <input type="text" value={readNums[i]}
-                    onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls}
-                  />
+                  {isWrong ? (
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
+                      <span className="text-xs text-amber-600 line-through leading-none">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctNum}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                  )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
-                  <input type="text" value={readDens[i]}
-                    onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls}
-                  />
-                  {isWrong && (
-                    <span className="mt-2 flex flex-col items-center gap-0.5">
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctNum}</span>
-                      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{correctDen}</span>
-                    </span>
+                  {isWrong ? (
+                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 py-1.5 flex items-center justify-center gap-1">
+                      <span className="text-xs text-amber-600 line-through leading-none">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{correctDen}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
                   )}
                 </div>
                 <div className="flex flex-1 justify-center overflow-hidden">
@@ -1013,7 +1011,7 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled }: 
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
 }) {
-  const iCls = `w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
+  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
     status === "wrong"
       ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
@@ -1041,7 +1039,7 @@ function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled }: {
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
 }) {
-  const iCls = `w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
+  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
     status === "wrong"
       ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
