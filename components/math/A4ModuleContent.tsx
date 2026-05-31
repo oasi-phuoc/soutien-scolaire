@@ -997,9 +997,9 @@ function riA4(lo: number, hi: number): number {
 function VFracNum({ n, d }: { n: number; d: number }) {
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{n}</span>
-      <span className="h-[1.5px] w-7 rounded bg-[var(--color-text-primary)]" />
-      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{d}</span>
+      <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
 }
@@ -1013,12 +1013,12 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled }: 
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
 }) {
-  const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
+  const iCls = `w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
     status === "wrong"
       ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
-  const numCls = "text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)] w-12 text-center";
+  const numCls = "h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       {missingPos === "num"
@@ -1041,7 +1041,7 @@ function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled }: {
   status: "idle" | "correct" | "wrong";
   disabled: boolean;
 }) {
-  const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
+  const iCls = `w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
     status === "wrong"
       ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"

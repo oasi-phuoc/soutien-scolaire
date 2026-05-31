@@ -228,8 +228,7 @@ function ComparisonExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.level}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
-        <div className="space-y-3">
+      <div className="space-y-3">
           {config.questions.map((q, i) => (
             <div key={i} className="flex items-center gap-3">
               <div className="flex items-center shrink-0">
@@ -256,7 +255,6 @@ function ComparisonExercise({
               <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">{formatCompNum(q.b)}</span>
             </div>
           ))}
-        </div>
       </div>
     </div>
   );
@@ -4131,7 +4129,7 @@ export function GenericModuleContent({
           <p className="text-sm text-[var(--color-text-secondary)]">
             Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
           </p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="space-y-3">
             {activeEncadrementConfig.questions.map((q, i) => {
               const a = encadrementAnswers[i] ?? {lo:"",hi:""};
               const ok = encadrementValidated ? encadrementResults[i] : null;
@@ -4446,17 +4444,12 @@ export function GenericModuleContent({
 
       {/* Comparison exercise */}
       {currentStep?.kind === "comparison_ex" && activeCompConfig && (
-        <div className="space-y-4">
-          {currentStep.lesson.submoduleId === "A1-3" && (
-            <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
-          )}
-          <ComparisonExercise
-            config={activeCompConfig}
-            answers={compAnswers}
-            validated={compValidated}
-            onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
-          />
-        </div>
+        <ComparisonExercise
+          config={activeCompConfig}
+          answers={compAnswers}
+          validated={compValidated}
+          onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+        />
       )}
 
       {!showEvalScore && currentStep?.kind === "expr_comparison" && activeExprCompConfig && (

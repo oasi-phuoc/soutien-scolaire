@@ -229,7 +229,7 @@ export function VocabRunner({ theme }: Props) {
       case "ex10-question-write":
         return <ExQuestionWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} exerciseNumber={exNum} />;
       case "eval-announce":
-        return <EvalAnnounce key={componentKey} theme={theme} onCanValidateChange={setCanValidate} />;
+        return <EvalAnnounce key={componentKey} theme={theme} onCanValidateChange={setCanValidate} onStart={goNext} />;
       case "eval-ex2":
         return <ExArticle key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "eval-ex4":
@@ -332,7 +332,7 @@ export function VocabRunner({ theme }: Props) {
       <div className="min-h-[280px]">{renderStep()}</div>
 
       {/* Fixed bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      {step.key !== "eval-announce" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
 
@@ -417,7 +417,7 @@ export function VocabRunner({ theme }: Props) {
           </div>
         </div>
         <div className="h-[68px]" />
-      </div>
+      </div>}
     </div>
   );
 }

@@ -5,9 +5,10 @@ import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 interface Props {
   theme: VocabTheme;
   onCanValidateChange: (can: boolean) => void;
+  onStart: () => void;
 }
 
-export function EvalAnnounce({ theme, onCanValidateChange }: Props) {
+export function EvalAnnounce({ theme, onCanValidateChange, onStart }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(false); }, []);
 
@@ -26,28 +27,18 @@ export function EvalAnnounce({ theme, onCanValidateChange }: Props) {
         Vous avez terminé la partie entraînement pour{" "}
         <strong className="text-[var(--color-text-primary)]">{theme.title}</strong>.
       </p>
-      <p className="mb-6 max-w-xs text-sm text-[var(--color-text-secondary)]">
+      <p className="mb-8 max-w-xs text-sm text-[var(--color-text-secondary)]">
         L&apos;évaluation comporte 6 exercices notés et est chronométrée.{" "}
         <strong className="text-[var(--color-text-primary)]">Vous avez 10 minutes</strong>{" "}
         pour compléter l&apos;évaluation.
       </p>
-      <div className="w-full max-w-xs space-y-2 text-left">
-        {[
-          "Écrire l'article",
-          "Compléter les lettres manquantes",
-          "Compléter des phrases",
-          "Écrire le mot (image)",
-          "Dictée",
-          "Écrire une phrase",
-        ].map((ex, i) => (
-          <div key={ex} className="flex items-center gap-3 text-sm text-[var(--color-text-secondary)]">
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-fr)]/15 text-xs font-bold text-[var(--color-accent-fr)]">
-              {i + 1}
-            </span>
-            {ex}
-          </div>
-        ))}
-      </div>
+      <button
+        type="button"
+        onClick={onStart}
+        className="w-full max-w-xs rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-6 py-3 text-sm font-bold text-white shadow-sm transition-opacity hover:opacity-90 active:opacity-80"
+      >
+        Commencer
+      </button>
     </div>
   );
 }
