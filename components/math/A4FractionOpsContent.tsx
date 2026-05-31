@@ -111,7 +111,7 @@ function gen4(mode: FracOpMode, lo: number, hi: number): OpQ {
   for (let t = 0; t < 200; t++) {
     const op = pickOp(mode);
     const d1 = ri(Math.max(2, lo), hi);
-    let d2 = ri(Math.max(2, lo), hi);
+    const d2 = ri(Math.max(2, lo), hi);
     if (d2 === d1) continue; // ensure different denominators
     const a = ri(lo, Math.max(lo, d1));
     const b = ri(lo, Math.max(lo, d2));
@@ -130,7 +130,7 @@ function gen5(mode: FracOpMode, lo: number, hi: number): OpQ {
     const d1 = ri(Math.max(2, lo), hi);
     const samePair = Math.random() < 0.5;
     const d2 = samePair ? d1 : ri(Math.max(2, lo), hi);
-    let d3 = ri(Math.max(2, lo), hi);
+    const d3 = ri(Math.max(2, lo), hi);
     if (samePair && d3 === d1) continue;
     if (!samePair && d3 === d1 && d3 === d2) continue; // avoid all three equal
     const a = ri(lo, Math.max(lo, d1));
