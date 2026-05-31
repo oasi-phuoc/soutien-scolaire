@@ -3371,6 +3371,14 @@ export function GenericModuleContent({
     setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
     setSeqCompleteValidated(false);
     setSeqCompleteResults(Array(5).fill(false));
+    setDecOrderingSelected([[], []]);
+    setDecOrderingValidated(false);
+    setDecOrderingResults(Array(2).fill(false));
+    setDecSeqRuleAnswers(Array(5).fill(""));
+    setDecSeqRuleValidated(false);
+    setDecSeqRuleResults(Array(5).fill(false));
+    setDecSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+    setDecSeqCompleteValidated(false);
     setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
     setDivGridRemainderInputs(Array(3).fill(""));
     setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
@@ -3472,6 +3480,15 @@ export function GenericModuleContent({
   const activeSeqCompleteConfig = currentStep?.kind === "seq_complete"
     ? (seqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeDecOrderingConfig = currentStep?.kind === "dec_ordering"
+    ? (decOrderingOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDecSeqRuleConfig = currentStep?.kind === "dec_seq_rule"
+    ? (decSeqRuleOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDecSeqCompleteConfig = currentStep?.kind === "dec_seq_complete"
+    ? (decSeqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
   const activeDivGridConfig = currentStep?.kind === "div_column_grid"
     ? (divGridOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
@@ -3572,6 +3589,26 @@ export function GenericModuleContent({
         currentResults = currentStep.config.questions.map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
         });
+      } else if (currentStep.kind === "dec_ordering") {
+        currentResults = (activeDecOrderingConfig?.questions ?? []).map((q, qi) => {
+          const sel = decOrderingSelected[qi] ?? [];
+          const sorted = [...q.hundredths].sort((a,b) => (activeDecOrderingConfig?.direction === "asc" ? a-b : b-a));
+          return sel.length === q.hundredths.length && sel.every((n,i) => n === sorted[i]);
+        });
+      } else if (currentStep.kind === "dec_seq_rule") {
+        currentResults = (activeDecSeqRuleConfig?.questions ?? []).map((q, i) => {
+          const ans = decSeqRuleAnswers[i]?.trim() ?? "";
+          const correct = `${q.op}${fmtDec(q.step)}`;
+          const correctAlt = `${q.op}${fmtDec(q.step).replace(",",".")}`;
+          return ans === correct || ans === correctAlt;
+        });
+      } else if (currentStep.kind === "dec_seq_complete") {
+        currentResults = (activeDecSeqCompleteConfig?.questions ?? []).map((q, qi) => {
+          return q.blankIdxs.every((bi, ii) => {
+            const v = decSeqCompleteAnswers[qi]?.[ii] ?? "";
+            return parseDec(v) === q.allNums[bi];
+          });
+        });
       } else if (currentStep.kind === "div_column_grid") {
         const cfg = divGridOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = divGridResults.slice(0, cfg.questions.length);
@@ -3639,6 +3676,9 @@ export function GenericModuleContent({
                 : es?.kind === "ordering" ? "Classement"
                 : es?.kind === "seq_rule" ? "Règle de la suite"
                 : es?.kind === "seq_complete" ? "Compléter la suite"
+                : es?.kind === "dec_ordering" ? "Classement décimaux"
+                : es?.kind === "dec_seq_rule" ? "Règle de la suite décimale"
+                : es?.kind === "dec_seq_complete" ? "Compléter la suite décimale"
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
                 : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
                 : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication à 2 chiffres (guidée)" : "Multiplication à 2 chiffres")
@@ -3686,7 +3726,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -4081,6 +4121,57 @@ export function GenericModuleContent({
       setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
       setSeqCompleteValidated(false);
       setSeqCompleteResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "dec_ordering" && activeDecOrderingConfig) {
+    stepCanValidate = !decOrderingValidated;
+    stepValidate = decOrderingValidated ? () => {} : () => {
+      const results = activeDecOrderingConfig.questions.map((q, qi) => {
+        const sel = decOrderingSelected[qi] ?? [];
+        const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
+        return sel.length === q.hundredths.length && sel.every((n,i) => n === sorted[i]);
+      });
+      setDecOrderingResults(results);
+      setDecOrderingValidated(true);
+    };
+    stepReset = () => {
+      setDecOrderingOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecOrdering(currentStep.config.direction, currentStep.config.exNum) }));
+      setDecOrderingSelected([[], []]);
+      setDecOrderingValidated(false);
+      setDecOrderingResults(Array(2).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig) {
+    stepCanValidate = !decSeqRuleValidated;
+    stepValidate = decSeqRuleValidated ? () => {} : () => {
+      const results = activeDecSeqRuleConfig.questions.map((q, i) => {
+        const ans = decSeqRuleAnswers[i]?.trim() ?? "";
+        const correct = `${q.op}${fmtDec(q.step)}`;
+        const correctAlt = `${q.op}${fmtDec(q.step).replace(",",".")}`;
+        return ans === correct || ans === correctAlt;
+      });
+      setDecSeqRuleResults(results);
+      setDecSeqRuleValidated(true);
+    };
+    stepReset = () => {
+      setDecSeqRuleOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecSeqRule(currentStep.config.exNum, activeDecSeqRuleConfig.questions.length) }));
+      setDecSeqRuleAnswers(Array(5).fill(""));
+      setDecSeqRuleValidated(false);
+      setDecSeqRuleResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig) {
+    stepCanValidate = !decSeqCompleteValidated;
+    stepValidate = decSeqCompleteValidated ? () => {} : () => {
+      setDecSeqCompleteValidated(true);
+    };
+    stepReset = () => {
+      setDecSeqCompleteOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecSeqComplete(currentStep.config.exNum, activeDecSeqCompleteConfig.questions.length, -1) }));
+      setDecSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+      setDecSeqCompleteValidated(false);
     };
   }
 
@@ -4542,6 +4633,165 @@ export function GenericModuleContent({
               );
             });
             })()}
+          </div>
+        </div>
+      )}
+
+      {/* Decimal ordering exercise (A5.2) */}
+      {currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Classez les nombres dans l&apos;ordre {activeDecOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
+          </p>
+          <div className="space-y-6">
+            {activeDecOrderingConfig.questions.map((q, qi) => {
+              const sel = decOrderingSelected[qi] ?? [];
+              const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
+              const ok = decOrderingValidated ? decOrderingResults[qi] : null;
+              const sep = activeDecOrderingConfig.direction === "asc" ? "<" : ">";
+              return (
+                <div key={qi} className="space-y-2">
+                  <div className="flex flex-wrap gap-2">
+                    {q.hundredths.map((n, ni) => {
+                      const isSelected = sel.includes(n);
+                      const selIdx = sel.indexOf(n);
+                      let cls = "flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
+                      if (!decOrderingValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+                      } else {
+                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        else if (isSelected) cls += CLS_WRONG;
+                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                      }
+                      return (
+                        <button key={ni} type="button" disabled={decOrderingValidated}
+                          onClick={() => {
+                            setDecOrderingSelected(prev => {
+                              const next = prev.map(a => [...a]);
+                              const cur = next[qi] ?? [];
+                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
+                              else { next[qi] = [...cur, n]; }
+                              return next;
+                            });
+                          }}
+                          className={cls}>
+                          {fmtDec(n)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
+                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
+                      {sel.length > 0 ? sel.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                        </Fragment>
+                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                    </div>
+                  </div>
+                  {decOrderingValidated && ok === false && (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
+                      {sorted.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-amber-700">{fmtDec(n)}</span>
+                          {si < sorted.length - 1 && <span className="text-amber-500 text-xs">{sep}</span>}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Decimal sequence rule exercise (A5.2) */}
+      {currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
+          <div className="space-y-4">
+            {activeDecSeqRuleConfig.questions.map((q, i) => {
+              const v = decSeqRuleAnswers[i] ?? "";
+              const ok = decSeqRuleValidated ? decSeqRuleResults[i] : null;
+              const wrong = ok === false;
+              const correctAns = `${q.op}${fmtDec(q.step)}`;
+              const inputRowCls = "w-28 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
+              return (
+                <div key={i} className="flex flex-wrap items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {q.nums.map((n, ni) => (
+                    <span key={ni} className="shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-3 py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                  ))}
+                  {wrong ? (
+                    <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                      <span className="text-xs font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={v} disabled={decSeqRuleValidated}
+                      onChange={e => setDecSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      placeholder="±0,00"
+                      className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Decimal sequence complete exercise (A5.2) */}
+      {currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
+          <div className="space-y-5">
+            {activeDecSeqCompleteConfig.questions.map((q, qi) => {
+              let blankCounter = 0;
+              return (
+                <div key={qi} className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {q.allNums.map((n, ni) => {
+                      const blankIdx = q.blankIdxs.indexOf(ni);
+                      if (blankIdx !== -1) {
+                        const bIdx = blankCounter++;
+                        const v = decSeqCompleteAnswers[qi]?.[bIdx] ?? "";
+                        const expected = q.allNums[ni]!;
+                        const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
+                        const inputCls = "w-[72px] shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors";
+                        return wrong ? (
+                          <div key={ni} className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                            <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                            <span className="text-xs font-bold">{fmtDec(expected)}</span>
+                          </div>
+                        ) : (
+                          <input key={ni} type="text" inputMode="decimal" value={v} disabled={decSeqCompleteValidated}
+                            onChange={e => setDecSeqCompleteAnswers(prev => {
+                              const next = prev.map(r => [...r]);
+                              if (!next[qi]) next[qi] = [];
+                              next[qi]![bIdx] = e.target.value;
+                              return next;
+                            })}
+                            className={`${inputCls} ${decSeqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                        );
+                      }
+                      return (
+                        <span key={ni} className="w-[72px] shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
