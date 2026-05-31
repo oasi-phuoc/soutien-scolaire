@@ -34,7 +34,13 @@ type WorkspaceStep =
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
-  | { kind: "pass_toggle" };
+  | { kind: "pass_toggle" }
+  | { kind: "results" };
+
+const EVAL_PHASE_KINDS = new Set(["eval_start", "pass_toggle", "results"] as const);
+type EvalPhaseKind = "eval_start" | "pass_toggle" | "results";
+function isEvalPhaseKind(k: string): k is EvalPhaseKind { return EVAL_PHASE_KINDS.has(k as EvalPhaseKind); }
+function notInBar(s: WorkspaceStep) { return isEvalPhaseKind(s.kind); }
 
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
@@ -48,53 +54,53 @@ function shufflePick<T>(arr: T[], n: number): T[] {
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_toggle" });
     steps.push({ kind: "fraction_coloring" });
     steps.push({ kind: "fraction_read" });
     steps.push({ kind: "fraction_multi_coloring" });
     steps.push({ kind: "fraction_multi_read" });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-2") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_equiv" });
     steps.push({ kind: "fraction_simplify" });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-3") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
     steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
     steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-7") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
     steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
     steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
     steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-4") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_add", exNum: 1 });
     steps.push({ kind: "dec_sub", exNum: 2 });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-5") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_mul_simple", exNum: 1 });
     steps.push({ kind: "dec_mul_ext", exNum: 2 });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-6") {
+    steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_div_simple", exNum: 1 });
     steps.push({ kind: "dec_div_ext", exNum: 2 });
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
     const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
+    steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 9; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
     }
-    steps.push({ kind: "eval_start" });
-    steps.push({ kind: "pass_toggle" });
+    steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
     const size = lesson.poolSize ?? 5;
@@ -869,6 +875,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
+  const [evalScores, setEvalScores] = useState<Record<number, boolean>>({});
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -900,23 +907,35 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const isExercise = currentStep !== undefined &&
     currentStep.kind !== "theory" &&
     currentStep.kind !== "eval_start" &&
-    currentStep.kind !== "pass_toggle";
+    currentStep.kind !== "pass_toggle" &&
+    currentStep.kind !== "results";
   const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_add" || currentStep?.kind === "dec_sub" || currentStep?.kind === "dec_mul_simple" || currentStep?.kind === "dec_mul_ext" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_ext";
-  const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle";
+  const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
 
-  function finishEval(correct: boolean) {
+  function finishEval(passed: boolean, correct?: number, total?: number) {
     if (!lesson) { router.push("/mathematiques"); return; }
-    const grade = percentToSwissGrade(correct ? 100 : 0);
+    const c = correct ?? (passed ? 1 : 0);
+    const t = total ?? 1;
+    const grade = percentToSwissGrade((c / t) * 100);
     const p = loadProgress();
-    saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, correct ? 1 : 0, 1, grade));
+    saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
     router.push("/mathematiques");
   }
 
   function goNext() {
     if (currentStep?.kind === "pass_toggle") {
       finishEval(toggleAnswer === "oui");
+      return;
+    }
+    if (currentStep?.kind === "results") {
+      const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
+      const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
+      const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
+      const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
+      const total = exIndices.length;
+      finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
     if (isLastStep) {
@@ -933,9 +952,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   }
 
   function handleCustomValidated(ok: boolean) {
-    void ok;
+    setEvalScores((prev: Record<number, boolean>) => ({ ...prev, [stepIdx]: ok }));
     setCanValidate(false);
-    // Completion is deferred to finishEval after the pass_toggle
   }
 
   function validateText() {
@@ -954,8 +972,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
   }
 
-  const visibleSteps = steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
-  const visibleIdx = Math.min(stepIdx, visibleSteps.length);
+  const visibleSteps = steps.filter((s: WorkspaceStep) => !notInBar(s));
+  const visibleIdx = steps.slice(0, stepIdx).filter((s: WorkspaceStep) => !notInBar(s)).length;
 
   return (
     <div className="pb-40">
@@ -1087,7 +1105,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         </div>
       )}
 
-      {/* Pass toggle */}
+      {/* Pass toggle (A2/A3/other modules) */}
       {currentStep?.kind === "pass_toggle" && (
         <div className="flex flex-col items-center gap-8 py-4 text-center">
           <div>
@@ -1128,13 +1146,53 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         </div>
       )}
 
+      {/* Results page (A4/A5 scored modules) */}
+      {currentStep?.kind === "results" && (() => {
+        const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
+        const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
+        const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
+        const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
+        const total = exIndices.length;
+        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
+        const passed = pct >= 60;
+        return (
+          <div className="flex flex-col items-center gap-8 py-8 text-center">
+            <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ${passed ? "bg-[var(--color-accent-alg)]/10" : "bg-amber-100 dark:bg-amber-900/20"}`}>
+              {passed ? (
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
+                  <path d="M9 11l3 3L22 4" />
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                </svg>
+              ) : (
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.5" aria-hidden>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4M12 16h.01" />
+                </svg>
+              )}
+            </div>
+            <div className="space-y-3">
+              <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
+              <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
+              <p className="text-4xl font-bold text-[var(--color-text-primary)]">
+                {correct}
+                <span className="text-xl font-normal text-[var(--color-text-secondary)]">/{total}</span>
+              </p>
+              <p className="text-lg font-semibold text-[var(--color-text-secondary)]">{pct} %</p>
+              <div className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold ${passed ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "bg-amber-100 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"}`}>
+                {passed ? "Module réussi ✓" : "À retravailler"}
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Fixed bottom nav */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {currentStep?.kind !== "eval_start" ? (
               <button type="button" onClick={goBack}
-                disabled={isFirstStep || currentStep?.kind === "pass_toggle"}
+                disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
                 className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
                 Retour
@@ -1160,7 +1218,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               <button type="button" onClick={goNext}
                 disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
                 className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-                {currentStep?.kind === "pass_toggle" || isLastStep ? (
+                {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
                   <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
                 ) : (
                   <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
