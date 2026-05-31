@@ -1199,21 +1199,45 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
 // ── Exercise — Compare fractions (A4.3) ───────────────────────────────────────
 interface ComparePair { n1: number; d1: number; n2: number; d2: number; answer: "<" | "=" | ">"; }
 
-function genComparePair(): ComparePair {
-  const n1 = riA4(1, 11);
-  const d1 = riA4(2, 12);
-  const n2 = riA4(1, 11);
-  const d2 = riA4(2, 12);
-  const diff = n1 * d2 - n2 * d1;
-  return { n1, d1, n2, d2, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
+function genCompareSameDen(): ComparePair {
+  const d = riA4(2, 12);
+  const n1 = riA4(1, d + 4);
+  let n2 = riA4(1, d + 4);
+  while (n2 === n1) n2 = riA4(1, d + 4);
+  const diff = n1 - n2;
+  return { n1, d1: d, n2, d2: d, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
 }
 
-export function FractionCompareExercise({ exNum, validateCommand, onValidated }: {
+function genCompareSameNum(): ComparePair {
+  const n = riA4(1, 11);
+  const d1 = riA4(2, 12);
+  let d2 = riA4(2, 12);
+  while (d2 === d1) d2 = riA4(2, 12);
+  // larger denominator → smaller fraction
+  return { n1: n, d1, n2: n, d2, answer: d1 < d2 ? ">" : "<" };
+}
+
+function genCompareDiffBoth(): ComparePair {
+  for (let t = 0; t < 200; t++) {
+    const n1 = riA4(1, 11);
+    const d1 = riA4(2, 12);
+    const n2 = riA4(1, 11);
+    const d2 = riA4(2, 12);
+    if (n1 === n2 || d1 === d2) continue;
+    const diff = n1 * d2 - n2 * d1;
+    return { n1, d1, n2, d2, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
+  }
+  return { n1: 2, d1: 3, n2: 3, d2: 5, answer: ">" };
+}
+
+export function FractionCompareExercise({ exNum, mode, validateCommand, onValidated }: {
   exNum: number;
+  mode: "same-den" | "same-num" | "diff-both";
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
-  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, genComparePair));
+  const gen = mode === "same-den" ? genCompareSameDen : mode === "same-num" ? genCompareSameNum : genCompareDiffBoth;
+  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, gen));
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
