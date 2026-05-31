@@ -163,31 +163,32 @@ function genQ(structType: 1|2|3|4|5, mode: FracOpMode, lo: number, hi: number): 
 function VFrac({ n, d }: { n: number; d: number }) {
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{n}</span>
-      <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
-      <span className="text-sm font-bold leading-none tabular-nums text-[var(--color-text-primary)]">{d}</span>
+      <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
 }
 
 // ── Answer input (vertical numerator + bar + denominator) ──────────────────────
-function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled }: {
+function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum, correctDen }: {
   numVal: string; denVal: string;
   onNum: (v: string) => void; onDen: (v: string) => void;
   status: "idle" | "correct" | "wrong"; disabled: boolean;
+  correctNum?: string; correctDen?: string;
 }) {
-  const iCls = `w-12 rounded-xl border px-1 py-1 text-sm text-center outline-none transition-colors ${
-    status === "wrong"
-      ? "border-amber-500 bg-amber-50 text-amber-600 line-through dark:bg-amber-950/20"
-      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
-  }`;
+  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+  const corrBox = (val: string, correct: string | undefined) => (
+    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
+      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
+      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    </span>
+  );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)}
-        disabled={disabled} className={iCls} />
+      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)}
-        disabled={disabled} className={iCls} />
+      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
     </span>
   );
 }
@@ -237,38 +238,32 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
       <div className="space-y-4">
-        {(questions as OpQ[]).map((q: OpQ, i: number) => {
-          const isWrong = statuses[i] === "wrong";
-          return (
-            <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
-              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              {(q.parts as Part[]).map((part: Part, pi: number) => (
-                <React.Fragment key={pi}>
-                  {pi > 0 && (
-                    <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.ops[pi - 1]}</span>
-                  )}
-                  {part.kind === "frac"
-                    ? <VFrac n={part.n} d={part.d} />
-                    : <span className="text-sm font-bold text-[var(--color-text-primary)]">{part.v}</span>
-                  }
-                </React.Fragment>
-              ))}
-              <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-              <FracAnswerInput
-                numVal={nums[i]!} denVal={dens[i]!}
-                onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
-                onDen={(v: string) => { if (!validated) setDens((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
-                status={statuses[i]!}
-                disabled={validated}
-              />
-              {isWrong && (
-                q.ansDen === 1
-                  ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.ansNum}</span>
-                  : <VFrac n={q.ansNum} d={q.ansDen} />
-              )}
-            </div>
-          );
-        })}
+        {(questions as OpQ[]).map((q: OpQ, i: number) => (
+          <div key={i} className="flex flex-wrap items-center gap-x-2 gap-y-2">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {(q.parts as Part[]).map((part: Part, pi: number) => (
+              <React.Fragment key={pi}>
+                {pi > 0 && (
+                  <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.ops[pi - 1]}</span>
+                )}
+                {part.kind === "frac"
+                  ? <VFrac n={part.n} d={part.d} />
+                  : <span className="text-sm font-bold text-[var(--color-text-primary)]">{part.v}</span>
+                }
+              </React.Fragment>
+            ))}
+            <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+            <FracAnswerInput
+              numVal={nums[i]!} denVal={dens[i]!}
+              onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
+              onDen={(v: string) => { if (!validated) setDens((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
+              status={statuses[i]!}
+              disabled={validated}
+              correctNum={String(q.ansNum)}
+              correctDen={String(q.ansDen)}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
