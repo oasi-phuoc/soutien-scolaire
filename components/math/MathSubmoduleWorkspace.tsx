@@ -60,6 +60,12 @@ function shufflePick<T>(arr: T[], n: number): T[] {
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
+    // Training
+    steps.push({ kind: "fraction_toggle" });
+    steps.push({ kind: "fraction_coloring" });
+    steps.push({ kind: "fraction_read" });
+    steps.push({ kind: "fraction_multi_coloring" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_toggle" });
     steps.push({ kind: "fraction_coloring" });
@@ -68,17 +74,32 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "fraction_multi_read" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-2") {
+    // Training
+    steps.push({ kind: "fraction_equiv" });
+    steps.push({ kind: "fraction_simplify" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_equiv" });
     steps.push({ kind: "fraction_simplify" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-3") {
+    // Training
+    steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
+    steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
+    steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
     steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
     steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-7") {
+    // Training
+    steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
+    steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
+    steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
+    steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
     steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
@@ -139,6 +160,11 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
     const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
+    // Training: exercise types 1-5
+    for (let ex = 1; ex <= 5; ex++) {
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
+    }
+    // Evaluation: all 9 types (new random questions)
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 9; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
@@ -904,11 +930,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
-  // For A4-1/A4-2 startAtEval means start at their custom exercise (index 1)
-  const customEvalIdx = (submoduleId === "A4-1" || submoduleId === "A4-2") ? 1 : -1;
-  const initialIdx = startAtEval
-    ? (evalStartIdx >= 0 ? evalStartIdx : customEvalIdx >= 0 ? customEvalIdx : 0)
-    : 0;
+  const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [exerciseKey, setExerciseKey] = useState(0);
