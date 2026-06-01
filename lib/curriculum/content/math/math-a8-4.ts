@@ -12,6 +12,7 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
         ti: "ስርወ-ካሬ (ፍጹም ካሬታት)",
         uk: "Квадратний корінь (точні квадрати)",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

@@ -12,6 +12,7 @@ export const MATH_A12_3_LESSON: MathSubmoduleLesson = {
         ti: "ጸገማት ምስ ክልተ ዘይፍለጥ",
         uk: "Задачі з двома невідомими",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

@@ -12,6 +12,7 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
         ti: "ምትካእ (ምምዛን)",
         uk: "Підстановка (обчислення значення)",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

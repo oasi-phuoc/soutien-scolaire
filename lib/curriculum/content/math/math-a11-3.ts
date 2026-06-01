@@ -12,6 +12,7 @@ export const MATH_A11_3_LESSON: MathSubmoduleLesson = {
         ti: "ስዕላዊ ምርኣይ ናይ ፍትሒ",
         uk: "Графічне зображення розв'язків",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

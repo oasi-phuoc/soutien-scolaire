@@ -12,6 +12,7 @@ export const MATH_A9_6_LESSON: MathSubmoduleLesson = {
         ti: "ቀሊል ምፍራድ",
         uk: "Просте винесення за дужки",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

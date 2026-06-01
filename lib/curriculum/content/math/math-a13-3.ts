@@ -12,6 +12,7 @@ export const MATH_A13_3_LESSON: MathSubmoduleLesson = {
         ti: "ስዕሊ ኣብ ናይ ቦታ ስርዓት",
         uk: "Графік у системі координат",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

@@ -12,6 +12,7 @@ export const MATH_A10_5_LESSON: MathSubmoduleLesson = {
         ti: "ምዕርርያ ምስ ምምቅቅዮ",
         uk: "Рівняння з дробами",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

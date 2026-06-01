@@ -12,6 +12,7 @@ export const MATH_A11_1_LESSON: MathSubmoduleLesson = {
         ti: "ምልክታትን ቁጽሪ ሕርምን",
         uk: "Символи та числова пряма",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

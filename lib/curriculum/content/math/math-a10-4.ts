@@ -12,6 +12,7 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
         ti: "ምዕርርያ ምስ ቅርሕ",
         uk: "Рівняння з дужками",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

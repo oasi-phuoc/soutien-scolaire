@@ -12,6 +12,7 @@ export const MATH_A12_2_LESSON: MathSubmoduleLesson = {
         ti: "ኣፈጻጽማ ምኽፋሎ / ምቕናስ",
         uk: "Метод додавання / віднімання (виключення)",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

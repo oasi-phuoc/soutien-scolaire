@@ -12,6 +12,7 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ስርወ ቀረባ ዋጋ",
         uk: "Наближене значення кореня",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

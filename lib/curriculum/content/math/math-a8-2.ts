@@ -12,6 +12,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
         ti: "ኣሰላልፋ ሓይሊ",
         uk: "Обчислення степенів",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

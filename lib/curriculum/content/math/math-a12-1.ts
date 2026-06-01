@@ -12,6 +12,7 @@ export const MATH_A12_1_LESSON: MathSubmoduleLesson = {
         ti: "ኣፈጻጽማ ምትካእ",
         uk: "Метод підстановки",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

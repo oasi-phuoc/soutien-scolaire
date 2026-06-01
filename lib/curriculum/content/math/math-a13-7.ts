@@ -12,6 +12,7 @@ export const MATH_A13_7_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ስዕሊ ምንባብ",
         uk: "Читання графіків",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

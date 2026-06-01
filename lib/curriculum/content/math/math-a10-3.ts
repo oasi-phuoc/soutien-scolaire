@@ -12,6 +12,7 @@ export const MATH_A10_3_LESSON: MathSubmoduleLesson = {
         ti: "ምፍታሕ: ax + b = c",
         uk: "Розв'язання: ax + b = c",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

@@ -12,6 +12,7 @@ export const MATH_A10_6_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ሓቂ ዓለም ጸገማት (ምዕርርያ ምትእትታው)",
         uk: "Прикладні задачі (складання рівняння)",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

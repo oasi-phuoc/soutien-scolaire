@@ -12,6 +12,7 @@ export const MATH_A11_2_LESSON: MathSubmoduleLesson = {
         ti: "ምፍታሕ ቀሊል ዘይምዕርርያ",
         uk: "Розв'язання простих нерівностей",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

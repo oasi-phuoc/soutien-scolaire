@@ -12,6 +12,7 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
         ti: "ተለዋዋጢ ቁጽርን ዘይፍለጥ ቁጽርን",
         uk: "Змінна і невідома",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

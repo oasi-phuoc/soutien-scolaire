@@ -12,6 +12,7 @@ export const MATH_A10_1_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ምዕርርያ መምርሒ",
         uk: "Принцип рівняння",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

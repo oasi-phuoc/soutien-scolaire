@@ -12,6 +12,7 @@ export const MATH_A13_2_LESSON: MathSubmoduleLesson = {
         ti: "ሰሌዳ ዋጋ",
         uk: "Таблиця значень",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

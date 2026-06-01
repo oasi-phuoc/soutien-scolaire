@@ -12,6 +12,7 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
         ti: "ምቅናስ (ተመሳሳሊ ወጽዓ)",
         uk: "Зведення подібних доданків",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

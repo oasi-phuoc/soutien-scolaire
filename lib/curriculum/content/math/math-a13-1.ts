@@ -12,6 +12,7 @@ export const MATH_A13_1_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ስራሕ ሓሳብ",
         uk: "Поняття функції",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

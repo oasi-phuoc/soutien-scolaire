@@ -12,6 +12,7 @@ export const MATH_A13_6_LESSON: MathSubmoduleLesson = {
         ti: "ሃፍን ናይ y ሕርሚ ምቁራጽን",
         uk: "Кутовий коефіцієнт і початкова ордината",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

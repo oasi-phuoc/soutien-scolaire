@@ -12,6 +12,7 @@ export const MATH_A13_5_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ኣፊን ስራሕ f(x) = ax + b",
         uk: "Лінійна функція f(x) = ax + b",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

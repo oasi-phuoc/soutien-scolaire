@@ -12,6 +12,7 @@ export const MATH_A13_4_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ቐጥታ ስራሕ f(x) = ax",
         uk: "Лінійна функція f(x) = ax",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",

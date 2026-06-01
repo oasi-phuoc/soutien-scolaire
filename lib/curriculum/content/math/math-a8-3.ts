@@ -12,6 +12,7 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
         ti: "ሓይሊ 10",
         uk: "Степені числа 10",
       },
+      paragraphs: { fr: [] },
       blocks: [
         {
           type: "heading",
