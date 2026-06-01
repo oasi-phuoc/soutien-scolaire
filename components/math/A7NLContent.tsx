@@ -92,7 +92,7 @@ function genNegOnly(): NLReadCfg {
   return { min, max, arrows };
 }
 
-const svgH = 100, boxW = 40, boxH = 24, byBase = 6;
+const svgHRead = 85;
 
 function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void; cfg: NLReadCfg;
@@ -104,59 +104,54 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    const w = cfg.arrows.map((v, i) => {
-      const typed = normalize(vals[i] ?? "");
-      return !acceptable(v).includes(typed);
-    });
+    const w = cfg.arrows.map((v, i) => !acceptable(v).includes(normalize(vals[i] ?? "")));
     setWrongs(w);
     onValidated(w.every(x => !x));
   }, [validated, cfg, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
+  const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors";
+  const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Écrivez la valeur indiquée par chaque flèche.</p>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-3">
-        <div className="w-full overflow-x-auto">
-          <svg viewBox={`0 0 480 ${svgH}`} width="100%" style={{ display: "block" }}>
-            <NLAxis min={cfg.min} max={cfg.max} />
-            {cfg.arrows.map((v, ai) => {
-              const x = nlPos(v, cfg.min, cfg.max);
-              const isWrong = wrongs[ai];
-              const expected = fmtInt(v);
-              // Alternate box offsets to avoid overlap
-              const bx = Math.max(ML, Math.min(ML + lineW - boxW, x - boxW / 2 + (ai % 2 === 0 ? -8 : 8)));
-              const by = byBase;
-              return (
-                <g key={ai}>
-                  <line x1={x} y1={by + boxH} x2={x} y2={lineY - 6}
-                    stroke="var(--color-accent-alg)" strokeWidth="1.5" strokeDasharray="4,2" />
-                  <polygon points={`${x},${lineY - 4} ${x - 4},${lineY - 11} ${x + 4},${lineY - 11}`}
-                    fill="var(--color-accent-alg)" />
-                  <rect x={bx} y={by} width={boxW} height={boxH} rx="5"
-                    fill={isWrong ? "#FEF3C7" : "#DBEAFE"}
-                    stroke={isWrong ? "#F59E0B" : "var(--color-accent-alg)"} strokeWidth="1.5" />
-                  {validated
-                    ? <text x={bx + boxW / 2} y={by + boxH / 2 + 4} textAnchor="middle"
-                        fontSize="11" fontWeight="bold" fill={isWrong ? "#D97706" : "currentColor"}>
-                        {isWrong ? expected : (vals[ai] ?? "")}
-                      </text>
-                    : <foreignObject x={bx + 2} y={by + 2} width={boxW - 4} height={boxH - 4}>
-                        <input
-                          type="text"
-                          value={vals[ai] ?? ""}
-                          onChange={e => setVals(p => p.map((c, ci) => ci === ai ? e.target.value : c))}
-                          style={{ width: "100%", height: "100%", textAlign: "center",
-                            fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
-                        />
-                      </foreignObject>}
-                </g>
-              );
-            })}
-          </svg>
-        </div>
+      <div className="space-y-5">
+        {cfg.arrows.map((v, ai) => {
+          const x = nlPos(v, cfg.min, cfg.max);
+          const isWrong = wrongs[ai];
+          const expected = fmtInt(v);
+          return (
+            <div key={ai} className="space-y-2">
+              <div className="rounded-xl border border-[var(--color-border-default)] p-3">
+                <div className="w-full overflow-x-auto">
+                  <svg viewBox={`0 0 480 ${svgHRead}`} width="100%" style={{ display: "block" }}>
+                    <NLAxis min={cfg.min} max={cfg.max} />
+                    <line x1={x} y1={12} x2={x} y2={lineY - 6}
+                      stroke="var(--color-accent-alg)" strokeWidth="1.5" strokeDasharray="4,2" />
+                    <polygon points={`${x},${lineY - 4} ${x - 4},${lineY - 11} ${x + 4},${lineY - 11}`}
+                      fill="var(--color-accent-alg)" />
+                  </svg>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="shrink-0 w-5 text-xs font-bold text-[var(--color-accent-alg)]">{ai + 1}.</span>
+                {isWrong ? (
+                  <div className={`${inputCls} ${CLS_WRONG} flex items-center gap-2`}>
+                    <span className="line-through text-amber-500 text-xs">{vals[ai] || "—"}</span>
+                    <span className="text-xs font-bold text-[var(--color-text-primary)]">{expected}</span>
+                  </div>
+                ) : (
+                  <input type="text" inputMode="numeric" value={vals[ai] ?? ""} disabled={validated}
+                    onChange={e => setVals(p => p.map((c, ci) => ci === ai ? e.target.value : c))}
+                    className={`${inputCls} ${validated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
