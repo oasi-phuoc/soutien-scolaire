@@ -48,6 +48,7 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
       ] },
     ],
   },
+  exercises: [],
   exercisePool: [
     { id: "a7-3-ep01", promptFr: "Calculez (+6) + (+3).", type: "number", acceptable: ["9", "+9"] },
     { id: "a7-3-ep02", promptFr: "Calculez (−6) + (−3).", type: "number", acceptable: ["-9"] },

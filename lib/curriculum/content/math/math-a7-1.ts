@@ -97,6 +97,7 @@ export const MATH_A7_1_LESSON: MathSubmoduleLesson = {
       { type: "note", fr: "Applications : température sous zéro (−5°C), altitude sous le niveau de la mer (−200 m), dette (−50 CHF)." },
     ],
   },
+  exercises: [],
   exercisePool: [
     { id: "a7-1-ep01", promptFr: "Quel est l'opposé de −5 ?", type: "number", acceptable: ["5", "+5"] },
     { id: "a7-1-ep02", promptFr: "Quel est l'opposé de +12 ?", type: "number", acceptable: ["-12"] },

@@ -32,6 +32,7 @@ export const MATH_A7_2_LESSON: MathSubmoduleLesson = {
       ] },
     ],
   },
+  exercises: [],
   exercisePool: [
     { id: "a7-2-ep01", promptFr: "Comparez −2 et +3 avec < ou >.", type: "short_text", acceptable: ["<"] },
     { id: "a7-2-ep02", promptFr: "Comparez −5 et −2 avec < ou >.", type: "short_text", acceptable: ["<"] },

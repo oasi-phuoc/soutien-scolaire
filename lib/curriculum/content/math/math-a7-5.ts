@@ -30,6 +30,7 @@ export const MATH_A7_5_LESSON: MathSubmoduleLesson = {
       { type: "note", fr: "−8 et +8 ont la même valeur absolue (8) : ils sont à égale distance de 0. Ce sont des opposés." },
     ],
   },
+  exercises: [],
   exercisePool: [
     { id: "a7-5-ep01", promptFr: "Calculez |−5|.", type: "number", acceptable: ["5"] },
     { id: "a7-5-ep02", promptFr: "Calculez |+8|.", type: "number", acceptable: ["8"] },
