@@ -120,8 +120,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Décomposer un nombre décimal</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en parties décimales.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {items.map((item, i) => (
@@ -140,7 +139,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
                         const v = e.target.value;
                         setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? v : c) : row));
                       }}
-                      className={`${IC(false)} w-16`}
+                      className={`${IC(false)} w-12`}
                     />}
                 {j < item.parts.length - 1 && <span className="text-sm text-[var(--color-text-secondary)]">+</span>}
               </React.Fragment>
@@ -174,8 +173,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Recomposer un nombre décimal</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Calculez le nombre décimal correspondant.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {items.map((item, i) => (
@@ -234,8 +232,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Valeur d&apos;un chiffre</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Identifiez la position du chiffre coloré.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-5">
         {items.map((item, i) => {
@@ -255,15 +252,14 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
                       (ci > (intPart?.length ?? 0) && (ci - (intPart?.length ?? 0) - 1) === charInDec)
                     );
                     return <span key={ci} className={isTarget ? "font-bold text-[var(--color-accent-alg)]" : ""}>{ch}</span>;
-                  })}</span>, le chiffre <span className="font-bold text-[var(--color-accent-alg)]">{item.digitChar}</span> est dans la position des :
+                  })}</span> le chiffre <span className="font-bold text-[var(--color-accent-alg)]">{item.digitChar}</span> est dans la position des :
                 </span>
               </div>
               <div className="flex flex-wrap gap-2 pl-7">
                 {POS_LABELS.map((lbl, pi) => {
                   let cls = "rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ";
                   if (validated) {
-                    if (pi === correct && sel !== correct) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
-                    else if (pi === sel && sel !== correct) cls += "border-amber-500 bg-amber-50 text-amber-600";
+                    if (pi === correct && sel !== correct) cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                     else if (pi === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                     else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                   } else {
@@ -334,8 +330,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Chiffre à un rang donné</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez le chiffre à chaque rang indiqué.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-5">
         {items.map((item, i) => (
@@ -400,8 +395,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Dictée de nombres</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez le nombre entendu.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-3">
         {nums.map((n, i) => (
@@ -415,7 +409,6 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
                   value={vals[i] ?? ""}
                   disabled={validated}
                   onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
-                  placeholder="ex: 7,82"
                   className={`${IC(false)} w-24`}
                 />}
           </div>
@@ -425,80 +418,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
   );
 }
 
-// ── Ex 6 — Tableau de numération ─────────────────────────────────────────────
-type TableRow = { d: number; u: number; dx: number; cx: number; answer: string };
-function genTable(): TableRow[] {
-  const rows: TableRow[] = [];
-  while (rows.length < 5) {
-    const d = rnd(1, 9), u = rnd(0, 9), dx = rnd(1, 9), cx = rnd(1, 9);
-    rows.push({ d, u, dx, cx, answer: `${d * 10 + u},${dx}${cx}` });
-  }
-  return rows;
-}
-
-export function DecReadTableExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
-}) {
-  const [rows] = useState<TableRow[]>(genTable);
-  const [vals, setVals] = useState<string[]>(() => rows.map(() => ""));
-  const [wrongs, setWrongs] = useState<boolean[]>(() => rows.map(() => false));
-  const [validated, setValidated] = useState(false);
-
-  const doValidate = useCallback(() => {
-    if (validated) return;
-    setValidated(true);
-    const w = rows.map((r, i) => !acc(r.answer).includes((vals[i] ?? "").trim()));
-    setWrongs(w);
-    onValidated(w.every(x => !x));
-  }, [validated, rows, vals, onValidated]);
-
-  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
-
-  return (
-    <div className="space-y-5">
-      <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Tableau de numération</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écrivez le nombre décimal correspondant à chaque ligne.</p>
-      </div>
-      <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-        <table className="min-w-full text-sm">
-          <thead>
-            <tr className="bg-[var(--color-accent-alg)]/10">
-              {["#", "Dizaines", "Unités", ",", "Dixièmes", "Centièmes", "Nombre"].map((h, i) => (
-                <th key={i} className="px-3 py-2 text-center text-xs font-semibold text-[var(--color-accent-alg)]">{h}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={i} className="border-t border-[var(--color-border-default)]">
-                <td className="px-3 py-2 text-center text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</td>
-                <td className="px-3 py-2 text-center font-mono">{r.d}</td>
-                <td className="px-3 py-2 text-center font-mono">{r.u}</td>
-                <td className="px-3 py-2 text-center font-mono text-[var(--color-text-secondary)]">,</td>
-                <td className="px-3 py-2 text-center font-mono">{r.dx}</td>
-                <td className="px-3 py-2 text-center font-mono">{r.cx}</td>
-                <td className="px-2 py-1.5">
-                  {wrongs[i]
-                    ? <Err wrong={vals[i] ?? ""} correct={r.answer} />
-                    : <input
-                        type="text"
-                        value={vals[i] ?? ""}
-                        disabled={validated}
-                        onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
-                        className={`${IC(false)} w-20`}
-                      />}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
-  );
-}
-
-// ── Ex 7 — Comparer ───────────────────────────────────────────────────────────
+// ── Ex 6 — Comparer ───────────────────────────────────────────────────────────
 type ComparePair = { a: string; b: string; op: "<" | "=" | ">" };
 function genCompare(): ComparePair[] {
   const pairs: ComparePair[] = [];
@@ -543,8 +463,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Comparer des décimaux</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Complétez avec &lt;, = ou &gt;.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-4">
         {pairs.map((pair, i) => {
@@ -557,8 +476,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
               {(["<", "=", ">"] as const).map(sym => {
                 let cls = "w-10 h-8 rounded border text-sm font-bold transition-colors ";
                 if (validated) {
-                  if (sym === correct && sym !== sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
-                  else if (sym === sel && sel !== correct) cls += "border-amber-500 bg-amber-50 text-amber-600";
+                  if (sym === correct && sym !== sel) cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                   else if (sym === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                 } else {
@@ -628,8 +546,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Ordre croissant</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cliquez les nombres dans l&apos;ordre croissant.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       {/* Slots */}
       <div className="flex gap-2 flex-wrap">
@@ -639,17 +556,22 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
             <button
               type="button"
               onClick={() => removeSlot(i)}
-              className={`h-10 w-16 rounded-xl border text-sm font-mono font-bold transition-colors ${
+              className={`min-h-10 min-w-16 px-2 rounded-xl border text-sm font-mono font-bold transition-colors ${
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : validated && slotWrong[i]
-                    ? "border-amber-500 bg-amber-50 text-amber-600"
+                    ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
               }`}
             >
-              {s ?? "—"}
+              {validated && slotWrong[i]
+                ? <span className="flex items-center gap-1">
+                    <span className="text-amber-600 line-through">{s}</span>
+                    <span className="text-[var(--color-text-primary)]">{sorted[i]}</span>
+                  </span>
+                : (s ?? "—")
+              }
             </button>
-            {validated && slotWrong[i] && <span className="text-xs font-bold text-[var(--color-accent-alg)]">{sorted[i]}</span>}
           </div>
         ))}
       </div>
@@ -678,7 +600,7 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
     const lo = rnd(2, 7);
     const hi = lo + rnd(2, 3);
     const nums: string[] = [];
-    while (nums.length < 8) {
+    while (nums.length < 15) {
       const intPart = rnd(lo - 1, hi + 1);
       const dec = rnd(0, 9);
       const val = intPart + dec / 10;
@@ -690,7 +612,7 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
   const t = rnd(20, 70) / 10;
   const tStr = t.toFixed(1).replace(".", ",");
   const nums: string[] = [tStr]; // include threshold itself
-  while (nums.length < 8) {
+  while (nums.length < 15) {
     const intPart = Math.floor(t) + rnd(-1, 1);
     if (intPart < 0) continue;
     const dec = rnd(0, 9);
@@ -752,7 +674,7 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — {title}</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -836,26 +758,25 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Encadrement entre entiers</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre entre deux entiers consécutifs.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-3">
         {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
+          <div key={i} className="grid items-center gap-x-2" style={{ gridTemplateColumns: "1.5rem 4rem 1.5rem 5rem 1.5rem 4rem" }}>
+            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {wrongs[i]?.lo
               ? <Err wrong={vals[i]?.lo ?? ""} correct={String(item.lo)} />
               : <input type="text" value={vals[i]?.lo ?? ""} disabled={validated}
                   onChange={e => setVals(p => p.map((v, vi) => vi === i ? { ...v, lo: e.target.value } : v))}
-                  className={`${IC(false)} w-14`} />}
-            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-            <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{item.numStr}</span>
-            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
+                  className={`${IC(false)} w-full`} />}
+            <span className="text-sm text-center text-[var(--color-text-secondary)]">&lt;</span>
+            <span className="font-mono text-sm font-bold text-center text-[var(--color-text-primary)]">{item.numStr}</span>
+            <span className="text-sm text-center text-[var(--color-text-secondary)]">&lt;</span>
             {wrongs[i]?.hi
               ? <Err wrong={vals[i]?.hi ?? ""} correct={String(item.hi)} />
               : <input type="text" value={vals[i]?.hi ?? ""} disabled={validated}
                   onChange={e => setVals(p => p.map((v, vi) => vi === i ? { ...v, hi: e.target.value } : v))}
-                  className={`${IC(false)} w-14`} />}
+                  className={`${IC(false)} w-full`} />}
           </div>
         ))}
       </div>
@@ -904,8 +825,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Lire une droite numérique</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écrivez la valeur indiquée par chaque flèche.</p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       <div className="space-y-6">
         {lines.map((line, li) => {
@@ -1028,10 +948,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum} — Placer sur la droite</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-          Cliquez un nombre ci-dessous, puis cliquez sa position P sur la droite.
-        </p>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
       {/* Number line SVG */}
       <div className="rounded-xl border border-[var(--color-border-default)] p-3">

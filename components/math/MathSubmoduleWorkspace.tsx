@@ -10,7 +10,7 @@ import { percentToSwissGrade } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
-import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadTableExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
+import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
@@ -39,7 +39,6 @@ type WorkspaceStep =
   | { kind: "dec_read_place_value"; exNum: number }
   | { kind: "dec_read_digit_at"; exNum: number }
   | { kind: "dec_read_dictation"; exNum: number }
-  | { kind: "dec_read_table"; exNum: number }
   | { kind: "dec_read_compare"; exNum: number }
   | { kind: "dec_read_order"; exNum: number }
   | { kind: "dec_read_filter_gt"; exNum: number }
@@ -117,21 +116,20 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-1") {
-    // Training: 14 exercises
+    // Training: 13 exercises
     steps.push({ kind: "dec_read_decompose", exNum: 1 });
     steps.push({ kind: "dec_read_recompose", exNum: 2 });
     steps.push({ kind: "dec_read_place_value", exNum: 3 });
     steps.push({ kind: "dec_read_digit_at", exNum: 4 });
     steps.push({ kind: "dec_read_dictation", exNum: 5 });
-    steps.push({ kind: "dec_read_table", exNum: 6 });
-    steps.push({ kind: "dec_read_compare", exNum: 7 });
-    steps.push({ kind: "dec_read_order", exNum: 8 });
-    steps.push({ kind: "dec_read_filter_gt", exNum: 9 });
-    steps.push({ kind: "dec_read_filter_lt", exNum: 10 });
-    steps.push({ kind: "dec_read_filter_between", exNum: 11 });
-    steps.push({ kind: "dec_read_encadrement", exNum: 12 });
-    steps.push({ kind: "dec_read_nl_read", exNum: 13 });
-    steps.push({ kind: "dec_read_nl_place", exNum: 14 });
+    steps.push({ kind: "dec_read_compare", exNum: 6 });
+    steps.push({ kind: "dec_read_order", exNum: 7 });
+    steps.push({ kind: "dec_read_filter_gt", exNum: 8 });
+    steps.push({ kind: "dec_read_filter_lt", exNum: 9 });
+    steps.push({ kind: "dec_read_filter_between", exNum: 10 });
+    steps.push({ kind: "dec_read_encadrement", exNum: 11 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 12 });
+    steps.push({ kind: "dec_read_nl_place", exNum: 13 });
     // Evaluation: 6 exercises
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_read_decompose", exNum: 1 });
@@ -220,24 +218,29 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   return steps;
 }
 
-// Parses [[frac:N/D]] markers and renders vertical inline fractions
+// Parses [[frac:N/D]] and **bold** markers and renders them inline
 function renderFracText(text: string): React.ReactNode {
-  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
+  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\]|\*\*[^*]+\*\*)/);
   if (parts.length === 1) return text;
   const nodes: React.ReactNode[] = [];
   parts.forEach((part, i) => {
-    const m = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
-    if (m) {
+    const fracM = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
+    if (fracM) {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{fracM[1]}</span>
           <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
-          <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{fracM[2]}</span>
         </span>
       );
-    } else if (part) {
-      nodes.push(part);
+      return;
     }
+    const boldM = part.match(/^\*\*([^*]+)\*\*$/);
+    if (boldM) {
+      nodes.push(<strong key={i} className="font-bold text-[var(--color-accent-alg)]">{boldM[1]}</strong>);
+      return;
+    }
+    if (part) nodes.push(part);
   });
   return <>{nodes}</>;
 }
@@ -743,7 +746,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
           <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
           <ul className="list-disc space-y-1 pl-4">
             {block.itemsFr.map((it, i) => (
-              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{it}</li>
+              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{renderFracText(it)}</li>
             ))}
           </ul>
         </div>
@@ -763,7 +766,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.rows.map((row, ri) => (
                 <tr key={ri} className="border-t border-[var(--color-border-default)]">
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{cell}</td>
+                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{renderFracText(cell)}</td>
                   ))}
                 </tr>
               ))}
@@ -1014,7 +1017,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle" &&
     currentStep.kind !== "results";
-  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_table","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_nl_read","dec_read_nl_place"]);
+  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_nl_read","dec_read_nl_place"]);
   const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
@@ -1185,10 +1188,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       {currentStep?.kind === "dec_read_dictation" && (
         <DecReadDictationExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
-      {currentStep?.kind === "dec_read_table" && (
-        <DecReadTableExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_read_compare" && (
+{currentStep?.kind === "dec_read_compare" && (
         <DecReadCompareExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_order" && (

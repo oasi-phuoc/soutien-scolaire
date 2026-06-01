@@ -61,36 +61,6 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
             ["2,04 vs 2,40", "2,04 < 2,40", "dixième : 0 < 4"],
           ],
         },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Arrondir les décimaux", black: true },
-        { type: "highlight", fr: "Comment arrondir" },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "1. Repérer la **position d'arrondi** (unité, dixième, centième…).",
-            "2. Regarder le chiffre **juste après** cette position.",
-          ],
-        },
-        {
-          type: "rule", titleFr: "", itemsFr: [
-            "Chiffre ≥ 5  →  arrondir vers le HAUT (augmenter d'un)",
-            "Chiffre < 5  →  arrondir vers le BAS (laisser tel quel)",
-          ],
-        },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Exemples d'arrondi", black: false },
-        {
-          type: "table",
-          headersFr: ["Nombre", "Arrondi à", "Chiffre suivant", "Résultat"],
-          accentHeader: true,
-          rows: [
-            ["3,47",  "dixième",  "7 ≥ 5", "→ 3,5"],
-            ["3,42",  "dixième",  "2 < 5", "→ 3,4"],
-            ["3,479", "centième", "9 ≥ 5", "→ 3,48"],
-            ["12,5",  "unité",    "5 ≥ 5", "→ 13"],
-            ["12,45", "unité",    "4 < 5", "→ 12"],
-          ],
-        },
-        { type: "note", fr: "Après l'arrondi, on supprime les chiffres après la position arrondie." },
       ],
       paragraphs: { fr: [] },
     },
