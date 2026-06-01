@@ -579,6 +579,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
 function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: () => void; onDeleted: () => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
   const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || user.email;
 
   function confirm() {
@@ -595,10 +596,23 @@ function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: (
       <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
         <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer le compte</h2>
         <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.</p>
+        <button
+          onClick={() => setConfirmed(c => !c)}
+          className={`mb-4 flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-colors ${
+            confirmed
+              ? "border-red-300 bg-red-50 text-red-700 dark:border-red-700 dark:bg-red-950/30 dark:text-red-400"
+              : "border-zinc-200 bg-zinc-50 text-zinc-500 hover:border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400"
+          }`}
+        >
+          <span className={`flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${confirmed ? "bg-red-500" : "bg-zinc-300 dark:bg-zinc-600"}`}>
+            <span className={`ml-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${confirmed ? "translate-x-4" : "translate-x-0"}`} />
+          </span>
+          Je confirme la suppression définitive
+        </button>
         {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
-          <button onClick={confirm} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60" aria-label="Supprimer">
+          <button onClick={confirm} disabled={!confirmed || pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Supprimer">
             {pending ? <Spinner /> : <IconTrash />}
           </button>
         </div>
