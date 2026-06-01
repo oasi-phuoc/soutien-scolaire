@@ -1022,7 +1022,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const ML = 40, lineW = 400, lineY = 60, svgH = 90;
+  const ML = 40, lineW = 400, lineY = 56, svgH = 106;
   const pos = (v: number) => ML + ((v - cfg.min) / (cfg.max - cfg.min)) * lineW;
 
   return (
