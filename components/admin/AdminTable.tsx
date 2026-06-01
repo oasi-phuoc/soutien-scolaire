@@ -17,6 +17,7 @@ import {
   deleteUserAction,
   updateUserProfileAction,
   resetAllElevesAction,
+  changePasswordAction,
 } from "@/app/actions/admin";
 
 export type UserRow = {
@@ -201,6 +202,50 @@ const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
 
 // ── Detail Modal ────────────────────────────────────────────────────────────
 
+function PasswordSection({ userId }: { userId: string }) {
+  const [pwd, setPwd] = useState("");
+  const [pending, startTransition] = useTransition();
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  function submit() {
+    if (!pwd) return;
+    setMsg(null);
+    startTransition(async () => {
+      const r = await changePasswordAction(userId, pwd);
+      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
+      else setMsg({ ok: false, text: r.reason ?? "Erreur" });
+    });
+  }
+
+  return (
+    <div className="mb-4 space-y-2 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+      <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Modifier le mot de passe</p>
+      <div className="flex gap-2">
+        <input
+          type="password"
+          value={pwd}
+          onChange={e => setPwd(e.target.value)}
+          placeholder="Nouveau mot de passe (8+ car.)"
+          className="min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+        />
+        <button
+          type="button"
+          onClick={submit}
+          disabled={pending || pwd.length < 8}
+          className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+        >
+          {pending ? "…" : "OK"}
+        </button>
+      </div>
+      {msg && (
+        <p className={`text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+          {msg.text}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function DetailModal({
   user,
   currentUserId,
@@ -361,6 +406,9 @@ function DetailModal({
           </div>
 
         </div>
+
+        {/* Password change */}
+        {user.role !== "admin" && <PasswordSection userId={user.id} />}
 
         {/* Actions */}
         <div className="flex items-center gap-2">

@@ -70,6 +70,17 @@ export async function resetAllElevesAction() {
   return { ok: true, count: (eleves ?? []).length };
 }
 
+export async function changePasswordAction(userId: string, newPassword: string) {
+  const caller = await getCallerRole();
+  if (!caller) return { ok: false, reason: "Non autorisé" };
+  if (newPassword.length < 8) return { ok: false, reason: "Au moins 8 caractères requis." };
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré" };
+  const { error } = await svc.auth.admin.updateUserById(userId, { password: newPassword });
+  if (error) return { ok: false, reason: error.message };
+  return { ok: true };
+}
+
 export async function updateUserProfileAction(
   userId: string,
   data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },

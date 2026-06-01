@@ -66,6 +66,18 @@ export async function signUpAction(
   const svc = createServiceClient();
   if (!svc) return { ok: false, reason: "Service role non configuré" };
 
+  // Reject duplicate prénom + nom + classe
+  const { data: existing } = await svc
+    .from("profiles")
+    .select("id")
+    .ilike("nom", nom)
+    .ilike("prenom", prenom)
+    .eq("classe", classe)
+    .limit(1);
+  if (existing && existing.length > 0) {
+    return { ok: false, reason: `Un compte avec le prénom « ${prenom} », le nom « ${nom} » et la classe « ${classe} » existe déjà. Contactez votre enseignant si c'est une erreur.` };
+  }
+
   const baseId = buildLoginId(prenom, nom);
   if (!baseId) return { ok: false, reason: "Impossible de générer un identifiant à partir de ce prénom/nom." };
 
