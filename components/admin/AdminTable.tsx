@@ -273,6 +273,10 @@ function DetailModal({
   const frenchTabs = frenchDetail(user.progress_data);
   const lectureItems = lectureDetail(user.progress_data);
 
+  const [mathOpen, setMathOpen] = useState(true);
+  const [frenchOpen, setFrenchOpen] = useState(true);
+  const [lectureOpen, setLectureOpen] = useState(true);
+
   const isSelf = user.id === currentUserId;
   const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
   const canChangeRole = currentUserRole === "admin" && !isSelf;
@@ -331,78 +335,96 @@ function DetailModal({
 
           {/* Maths */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Maths</span><span>{math.done}/{math.total}</span>
-            </div>
+            <button onClick={() => setMathOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${mathOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Maths
+              </span>
+              <span>{math.done}/{math.total}</span>
+            </button>
             <Bar pct={math.pct} color="bg-blue-500" />
-            <div className="mt-2 space-y-1">
-              {mathBranches.map(b => (
-                <div key={b.branch}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{b.label}</span>
-                    <span>{b.done}/{b.total}</span>
+            {mathOpen && (
+              <div className="mt-2 space-y-1">
+                {mathBranches.map(b => (
+                  <div key={b.branch}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{b.label}</span>
+                      <span>{b.done}/{b.total}</span>
+                    </div>
+                    {b.inProgress.map(m => (
+                      <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
+                        ↳ {m.code} – {m.title}
+                      </p>
+                    ))}
                   </div>
-                  {b.inProgress.map(m => (
-                    <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
-                      ↳ {m.code} – {m.title}
-                    </p>
-                  ))}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Français */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Français</span><span>{french.done}/{french.total}</span>
-            </div>
+            <button onClick={() => setFrenchOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${frenchOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Français
+              </span>
+              <span>{french.done}/{french.total}</span>
+            </button>
             <Bar pct={french.pct} color="bg-emerald-500" />
-            <div className="mt-2 space-y-1">
-              {frenchTabs.map(t => (
-                <div key={t.tab}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{t.label}</span>
-                    <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+            {frenchOpen && (
+              <div className="mt-2 space-y-1">
+                {frenchTabs.map(t => (
+                  <div key={t.tab}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{t.label}</span>
+                      <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                    </div>
+                    {t.inProgress && (
+                      <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
+                        ↳ {t.inProgress.code} – {t.inProgress.title}
+                      </p>
+                    )}
                   </div>
-                  {t.inProgress && (
-                    <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
-                      ↳ {t.inProgress.code} – {t.inProgress.title}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Lecture */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Lecture</span><span>{lecture.done}/{lecture.total}</span>
-            </div>
+            <button onClick={() => setLectureOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${lectureOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Lecture
+              </span>
+              <span>{lecture.done}/{lecture.total}</span>
+            </button>
             <Bar pct={lecture.pct} color="bg-amber-500" />
-            <div className="mt-2 space-y-1">
-              {lectureItems.map(m => (
-                <div key={m.id}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{m.code} – {m.title}</span>
-                    <span>{m.subDone}/{m.subTotal}</span>
+            {lectureOpen && (
+              <div className="mt-2 space-y-1">
+                {lectureItems.map(m => (
+                  <div key={m.id}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{m.code} – {m.title}</span>
+                      <span>{m.subDone}/{m.subTotal}</span>
+                    </div>
+                    {m.inProgress.length > 0
+                      ? m.inProgress.map(l => (
+                          <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                            ↳ Lettre {l.letter}
+                          </p>
+                        ))
+                      : m.currentLetter && (
+                          <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                            ↳ Lettre {m.currentLetter.letter}
+                          </p>
+                        )
+                    }
                   </div>
-                  {m.inProgress.length > 0
-                    ? m.inProgress.map(l => (
-                        <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                          ↳ Lettre {l.letter}
-                        </p>
-                      ))
-                    : m.currentLetter && (
-                        <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                          ↳ Lettre {m.currentLetter.letter}
-                        </p>
-                      )
-                  }
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
         </div>
@@ -635,6 +657,7 @@ export function AdminTable({
   const [rows, setRows] = useState<UserRow[]>(initialRows);
   const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
+  const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
   const [sortOpen, setSortOpen] = useState(false);
   const [selected, setSelected] = useState<UserRow | null>(null);
@@ -644,7 +667,13 @@ export function AdminTable({
   const [, startTransition] = useTransition();
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
-  const filtered = rows.filter(r => tab === "eleves" || !filterClasse || r.classe === filterClasse);
+  const searchLc = search.trim().toLowerCase();
+  const filtered = rows.filter(r => {
+    if (tab === "classes" && filterClasse && r.classe !== filterClasse) return false;
+    if (!searchLc) return true;
+    const name = [r.prenom, r.nom].filter(Boolean).join(" ").toLowerCase();
+    return name.includes(searchLc) || (r.email ?? "").toLowerCase().includes(searchLc) || (r.classe ?? "").toLowerCase().includes(searchLc);
+  });
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
     if (sortBy === "francais") return frenchPct(b.progress_data).pct - frenchPct(a.progress_data).pct;
@@ -680,6 +709,15 @@ export function AdminTable({
     <>
       {/* Filters */}
       <div className="mb-4">
+        <div className="mb-2">
+          <input
+            type="search"
+            placeholder="Rechercher un élève…"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+          />
+        </div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
             <button onClick={() => setTab("eleves")} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Élèves</button>

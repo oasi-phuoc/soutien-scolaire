@@ -1945,3 +1945,261 @@ export function A4ModuleContent() {
     </div>
   );
 }
+
+// ── Fraction comparison (A4-3) ──────────────────────────────────────────────
+interface ComparePair { n1: number; d1: number; n2: number; d2: number; answer: "<" | "=" | ">"; }
+
+function genCompareSameDen(): ComparePair {
+  const d = riA4(2, 12);
+  const n1 = riA4(1, d + 4);
+  let n2 = riA4(1, d + 4);
+  while (n2 === n1) n2 = riA4(1, d + 4);
+  const diff = n1 - n2;
+  return { n1, d1: d, n2, d2: d, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
+}
+
+function genCompareSameNum(): ComparePair {
+  const n = riA4(1, 11);
+  const d1 = riA4(2, 12);
+  let d2 = riA4(2, 12);
+  while (d2 === d1) d2 = riA4(2, 12);
+  return { n1: n, d1, n2: n, d2, answer: d1 < d2 ? ">" : "<" };
+}
+
+function genCompareDiffBoth(): ComparePair {
+  for (let t = 0; t < 200; t++) {
+    const n1 = riA4(1, 11);
+    const d1 = riA4(2, 12);
+    const n2 = riA4(1, 11);
+    const d2 = riA4(2, 12);
+    if (n1 === n2 || d1 === d2) continue;
+    const diff = n1 * d2 - n2 * d1;
+    return { n1, d1, n2, d2, answer: diff < 0 ? "<" : diff > 0 ? ">" : "=" };
+  }
+  return { n1: 2, d1: 3, n2: 3, d2: 5, answer: ">" };
+}
+
+export function FractionCompareExercise({ exNum, mode, validateCommand, onValidated }: {
+  exNum: number;
+  mode: "same-den" | "same-num" | "diff-both";
+  validateCommand: number;
+  onValidated: (ok: boolean) => void;
+}) {
+  const gen = mode === "same-den" ? genCompareSameDen : mode === "same-num" ? genCompareSameNum : genCompareDiffBoth;
+  const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, gen));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = pairs.map((p, i) =>
+      selected[i] === p.answer ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, pairs, selected]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les fractions. Choisissez &lt;, = ou &gt;.</p>
+      </div>
+      <div className="space-y-4">
+        {pairs.map((p, i) => {
+          const st = statuses[i]!;
+          const sel = selected[i];
+          const btnCls = (sym: "<" | "=" | ">") => {
+            const isSelected = sel === sym;
+            const isCorrect = sym === p.answer;
+            if (!validated) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+                isSelected
+                  ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`;
+            }
+            if (st === "wrong" && (isSelected || isCorrect)) {
+              return "w-10 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
+            }
+            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              isSelected
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+            }`;
+          };
+          return (
+            <div key={i} className="flex items-center gap-3 flex-wrap">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <VFracNum n={p.n1} d={p.d1} />
+              <div className="flex gap-1.5">
+                {(["<", "=", ">"] as const).map(sym => (
+                  <button key={sym} type="button" onClick={() => { if (!validated) setSelected(prev => { const n = [...prev]; n[i] = sym; return n; }); }} className={btnCls(sym)}>
+                    {sym}
+                  </button>
+                ))}
+              </div>
+              <VFracNum n={p.n2} d={p.d2} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Fraction ↔ Decimal (A4-7) ───────────────────────────────────────────────
+interface FracToDecQ { num: number; den: number; answer: string; acceptable: string[]; }
+
+function genFracToDecQ(): FracToDecQ {
+  const den = Math.random() < 0.5 ? 10 : 100;
+  const num = riA4(1, den === 100 ? 999 : 99);
+  const places = den === 100 ? 2 : 1;
+  const commaStr = (num / den).toFixed(places).replace('.', ',');
+  return { num, den, answer: commaStr, acceptable: [commaStr, (num / den).toFixed(places)] };
+}
+
+const EXT_DENS = [{d: 2, p: 1}, {d: 4, p: 2}, {d: 5, p: 1}, {d: 8, p: 3}, {d: 10, p: 1}];
+
+function genFracToDecExtQ(): FracToDecQ {
+  const info = EXT_DENS[Math.floor(Math.random() * EXT_DENS.length)]!;
+  const num = riA4(1, 144);
+  const commaStr = (num / info.d).toFixed(info.p).replace('.', ',');
+  return { num, den: info.d, answer: commaStr, acceptable: [commaStr, (num / info.d).toFixed(info.p)] };
+}
+
+export function FracToDecExercise({ exNum = 1, variant = "basic", validateCommand, onValidated }: {
+  exNum?: number; variant?: "basic" | "extended";
+  validateCommand: number; onValidated: (ok: boolean) => void;
+}) {
+  const gen = variant === "extended" ? genFracToDecExtQ : genFracToDecQ;
+  const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: 5 }, gen));
+  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = questions.map((q, i) =>
+      q.acceptable.includes((answers[i] ?? "").trim()) ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, questions, answers]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme décimale.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => {
+          const isWrong = statuses[i] === "wrong";
+          const iCls = `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+          return (
+            <div key={i} className="flex items-center gap-3">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
+              <span className="inline-flex flex-col items-center gap-[2px]">
+                <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-accent-alg)]">{q.num}</span>
+                <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
+                <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
+              </span>
+              <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+              {isWrong ? (
+                <div className="w-24 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex items-center justify-center gap-1">
+                  <span className="text-amber-600 line-through tabular-nums">{answers[i] || "—"}</span>
+                  <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{q.answer}</span>
+                </div>
+              ) : (
+                <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+interface DecToFracQ { decStr: string; den: number; answer: number; }
+
+function genDecToFracQ(): DecToFracQ {
+  const den = Math.random() < 0.5 ? 10 : 100;
+  const num = riA4(1, den === 100 ? 999 : 99);
+  const places = den === 100 ? 2 : 1;
+  return { decStr: (num / den).toFixed(places).replace('.', ','), den, answer: num };
+}
+
+function genDecToFracExtQ(): DecToFracQ {
+  const info = EXT_DENS[Math.floor(Math.random() * EXT_DENS.length)]!;
+  const num = riA4(1, 144);
+  return { decStr: (num / info.d).toFixed(info.p).replace('.', ','), den: info.d, answer: num };
+}
+
+export function DecToFracExercise({ exNum = 2, variant = "basic", validateCommand, onValidated }: {
+  exNum?: number; variant?: "basic" | "extended";
+  validateCommand: number; onValidated: (ok: boolean) => void;
+}) {
+  const gen = variant === "extended" ? genDecToFracExtQ : genDecToFracQ;
+  const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: 5 }, gen));
+  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = questions.map((q, i) =>
+      (answers[i] ?? "").trim() === String(q.answer) ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validated, questions, answers]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => {
+          const isWrong = statuses[i] === "wrong";
+          const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+          return (
+            <div key={i} className="flex items-center gap-3">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
+              <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
+              <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+              <span className="inline-flex flex-col items-center gap-[2px]">
+                {isWrong ? (
+                  <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
+                    <span className="text-xs text-amber-600 line-through tabular-nums">{answers[i] || "—"}</span>
+                    <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{q.answer}</span>
+                  </span>
+                ) : (
+                  <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
+                )}
+                <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+                <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
