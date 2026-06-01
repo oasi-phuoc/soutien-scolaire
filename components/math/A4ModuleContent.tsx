@@ -1592,7 +1592,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
-              <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
+              <span className="w-16 shrink-0 text-right text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
               <span className="inline-flex flex-col items-center gap-[2px]">
                 {isWrong ? (
