@@ -24,10 +24,19 @@ export async function signInAction(formData: FormData) {
     redirect("/connexion?erreur=" + encodeURIComponent("Supabase non configuré"));
   }
 
-  const email = loginIdToEmail(identifier);
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    redirect("/connexion?erreur=" + encodeURIComponent("Identifiant ou mot de passe incorrect."));
+  // Try synthetic email first (new accounts), then raw identifier (existing accounts with real email)
+  const synthEmail = loginIdToEmail(identifier);
+  const { error: err1 } = await supabase.auth.signInWithPassword({ email: synthEmail, password });
+  if (err1) {
+    const isRealEmail = identifier.includes("@");
+    if (isRealEmail) {
+      const { error: err2 } = await supabase.auth.signInWithPassword({ email: identifier, password });
+      if (err2) {
+        redirect("/connexion?erreur=" + encodeURIComponent("Identifiant ou mot de passe incorrect."));
+      }
+    } else {
+      redirect("/connexion?erreur=" + encodeURIComponent("Identifiant ou mot de passe incorrect."));
+    }
   }
 
   revalidatePath("/", "layout");
