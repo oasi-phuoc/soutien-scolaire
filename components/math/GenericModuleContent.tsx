@@ -822,14 +822,16 @@ function genDecOrdering(direction: "asc"|"desc", exNum: number): DecOrderingConf
   return { questions, direction, exNum };
 }
 
-const DEC_STEPS = [10, 25, 50, 75, 100, 125, 150, 200, 250];
+const DEC_STEPS = [3, 5, 10, 15, 20, 25, 50, 75, 100, 125, 150, 200, 250];
 
 function genDecSeqRule(exNum: number, count = 5, termCount = 4): DecSeqRuleConfig {
   const questions: DecSeqRuleQ[] = Array.from({ length: count }, () => {
     const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
     const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
-    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
-    const start = rnd(startMin, startMin + 1500);
+    // Start must be a multiple of step so fmtDec produces clean decimal places
+    const minStart = op === "-" ? (termCount - 1) * step + step : 50;
+    const minMult = Math.ceil(Math.max(50, minStart) / step);
+    const start = rnd(minMult, minMult + Math.floor(1500 / step)) * step;
     const nums = Array.from({ length: termCount }, (_, k) =>
       op === "+" ? start + k * step : start - k * step
     );
@@ -843,8 +845,10 @@ function genDecSeqComplete(exNum: number, count: number, blanks: number, termCou
     const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
     const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
     const b = blanks < 0 ? rnd(2, 3) : blanks;
-    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
-    const start = rnd(startMin, startMin + 1500);
+    // Start must be a multiple of step so fmtDec produces clean decimal places
+    const minStart = op === "-" ? (termCount - 1) * step + step : 50;
+    const minMult = Math.ceil(Math.max(50, minStart) / step);
+    const start = rnd(minMult, minMult + Math.floor(1500 / step)) * step;
     const allNums = Array.from({ length: termCount }, (_, i) =>
       op === "+" ? start + i * step : start - i * step
     );
