@@ -1464,17 +1464,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               </div>
             ) : <span />}
 
-            {currentStep?.kind !== "eval_start" && (
-              <button type="button" onClick={goNext}
-                disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
-                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-                {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
-                  <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
-                ) : (
-                  <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
-                )}
-              </button>
-            )}
+            <button type="button" onClick={goNext}
+              disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
+              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
+                <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+              ) : (
+                <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+              )}
+            </button>
           </div>
         </div>
         <div style={{ height: 68 }} />
