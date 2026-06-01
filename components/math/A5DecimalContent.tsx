@@ -679,7 +679,7 @@ export function DecMulColGridExercise({
     Array.from({ length: 4 }, () => ["", "", ""])
   );
   const [validated, setValidated] = useState<boolean>(false);
-  const [results, setResults] = useState<boolean[]>([false, false, false, false]);
+  const [_results, setResults] = useState<boolean[]>([false, false, false, false]);
 
   const onValidatedRef = useRef(onValidated);
   onValidatedRef.current = onValidated;

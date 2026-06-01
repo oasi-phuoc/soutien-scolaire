@@ -1,7 +1,6 @@
 export type IdentifierStatus = "empty" | "email" | "phone" | "invalid";
 
 export function normalizeForId(s: string): string {
-  /* eslint-disable no-misleading-character-class */
   return s.trim().toLowerCase()
     .normalize("NFD").replace(/\p{M}/gu, "")
     .replace(/[^a-z0-9]+/g, "-")
