@@ -10,7 +10,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
     { word: "table",           article: "la",  gender: "f", definition: "meuble plat pour poser des objets" },
     { word: "chaise",          article: "la",  gender: "f", definition: "siège avec dossier pour une personne" },
     { word: "canapé",          article: "le",  gender: "m", definition: "grand siège confortable pour plusieurs personnes" },
-    { word: "armoire",         article: "l'",  gender: "f", definition: "grand meuble pour ranger les vêtements" },
+    { word: "armoire", image: "armoire.jpg",         article: "l'",  gender: "f", definition: "grand meuble pour ranger les vêtements" },
     { word: "frigo",           article: "le",  gender: "m", definition: "appareil pour conserver les aliments au frais" },
     { word: "four",            article: "le",  gender: "m", definition: "appareil pour cuire les aliments" },
     { word: "lavabo",          article: "le",  gender: "m", definition: "vasque pour se laver les mains et le visage" },

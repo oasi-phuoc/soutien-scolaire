@@ -16,7 +16,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
     { word: "sandwich",        article: "le",  gender: "m", definition: "pain fourré avec des ingrédients" },
     { word: "biscuit",         article: "le",  gender: "m", definition: "petite pâtisserie sèche et sucrée" },
     { word: "viennoiserie",    article: "la",  gender: "f", definition: "pâtisserie feuilletée à base de beurre" },
-    { word: "farine",          article: "la",  gender: "f", definition: "poudre obtenue en moulant les céréales" },
+    { word: "farine", image: "farine.jpg",          article: "la",  gender: "f", definition: "poudre obtenue en moulant les céréales" },
     { word: "levure",          article: "la",  gender: "f", definition: "ingrédient qui fait lever la pâte" },
     { word: "pâtisserie",      article: "la",  gender: "f", definition: "art de faire des gâteaux et friandises" },
     { word: "éclair",          article: "l'",  gender: "m", definition: "gâteau allongé fourré de crème" },

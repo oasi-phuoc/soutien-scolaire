@@ -7,7 +7,7 @@ export const V4_IMMEUBLE_THEME: VocabTheme = {
   section: "V4",
   words: [
     { word: "hall",             article: "le",  gender: "m", definition: "espace d'entrée commun de l'immeuble" },
-    { word: "escalier",         article: "l'",  gender: "m", definition: "suite de marches pour monter ou descendre" },
+    { word: "escalier", image: "escalier.jpg",         article: "l'",  gender: "m", definition: "suite de marches pour monter ou descendre" },
     { word: "ascenseur",        article: "l'",  gender: "m", definition: "cabine pour monter et descendre dans un immeuble" },
     { word: "couloir",          article: "le",  gender: "m", definition: "passage entre les appartements" },
     { word: "porte",            article: "la",  gender: "f", definition: "ouverture fermée par un panneau" },

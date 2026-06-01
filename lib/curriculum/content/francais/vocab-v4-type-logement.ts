@@ -6,7 +6,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
   title: "Les types de logement",
   section: "V4",
   words: [
-    { word: "maison",      article: "la",  gender: "f", definition: "habitation individuelle avec jardin" },
+    { word: "maison", image: "maison.jpg",      article: "la",  gender: "f", definition: "habitation individuelle avec jardin" },
     { word: "appartement", article: "l'",  gender: "m", definition: "logement dans un immeuble" },
     { word: "studio",      article: "le",  gender: "m", definition: "petit appartement d'une seule pièce" },
     { word: "villa",       article: "la",  gender: "f", definition: "grande maison luxueuse avec jardin" },

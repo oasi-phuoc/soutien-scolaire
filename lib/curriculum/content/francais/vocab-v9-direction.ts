@@ -14,7 +14,7 @@ export const V9_DIRECTION_THEME: VocabTheme = {
     { word: "ouest",           article: "l'",  gender: "m", definition: "direction du coucher du soleil" },
     { word: "carrefour",       article: "le",  gender: "m", definition: "intersection de plusieurs routes" },
     { word: "rond-point",      article: "le",  gender: "m", definition: "carrefour circulaire" },
-    { word: "rue",             article: "la",  gender: "f", definition: "voie publique en ville" },
+    { word: "rue", image: "rue.jpg",             article: "la",  gender: "f", definition: "voie publique en ville" },
     { word: "panneau",         article: "le",  gender: "m", definition: "signe routier avec indications" },
     { word: "feu rouge",       article: "le",  gender: "m", definition: "signal lumineux pour la circulation" },
     { word: "passage piéton",  article: "le",  gender: "m", definition: "zone réservée pour traverser la rue" },

@@ -6,7 +6,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
   title: "Les recettes",
   section: "V7",
   words: [
-    { word: "farine",      article: "la",  gender: "f", definition: "poudre de céréale pour faire la pâte" },
+    { word: "farine", image: "farine.jpg",      article: "la",  gender: "f", definition: "poudre de céréale pour faire la pâte" },
     { word: "sucre",       article: "le",  gender: "m", definition: "ingrédient sucrant blanc ou roux" },
     { word: "lait",        article: "le",  gender: "m", definition: "liquide blanc produit par les vaches" },
     { word: "sel",         article: "le",  gender: "m", definition: "minéral blanc pour assaisonner" },

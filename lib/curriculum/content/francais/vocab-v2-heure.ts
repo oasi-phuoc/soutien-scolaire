@@ -13,7 +13,7 @@ export const V2_HEURE_THEME: VocabTheme = {
     { word: "midi",       article: "le",  gender: "m", definition: "12 heures, milieu de la journée" },
     { word: "après-midi", article: "l'",  gender: "m", definition: "partie de la journée après midi" },
     { word: "soir",       article: "le",  gender: "m", definition: "fin de la journée avant la nuit" },
-    { word: "nuit",       article: "la",  gender: "f", definition: "période d'obscurité" },
+    { word: "nuit", image: "nuit.jpg",       article: "la",  gender: "f", definition: "période d'obscurité" },
     { word: "minuit",     article: "le",  gender: "m", definition: "24 heures, milieu de la nuit" },
     { word: "horloge",    article: "l'",  gender: "f", definition: "grande pendule fixée au mur" },
     { word: "montre",     article: "la",  gender: "f", definition: "instrument porté au poignet pour lire l'heure" },

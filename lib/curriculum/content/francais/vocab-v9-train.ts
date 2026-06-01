@@ -6,7 +6,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
   title: "Le train",
   section: "V9",
   words: [
-    { word: "gare",           article: "la",  gender: "f", definition: "bâtiment principal pour les trains" },
+    { word: "gare", image: "gare.jpg",           article: "la",  gender: "f", definition: "bâtiment principal pour les trains" },
     { word: "quai",           article: "le",  gender: "m", definition: "plateforme où monte et descend le train" },
     { word: "guichet",        article: "le",  gender: "m", definition: "comptoir pour acheter les billets" },
     { word: "billet",         article: "le",  gender: "m", definition: "titre de transport pour le train" },

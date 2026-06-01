@@ -10,7 +10,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
     { word: "visa",                article: "le",  gender: "m", definition: "autorisation officielle pour entrer dans un pays" },
     { word: "vol",                 article: "le",  gender: "m", definition: "trajet en avion" },
     { word: "destination",         article: "la",  gender: "f", definition: "lieu où l'on se rend" },
-    { word: "avion",               article: "l'",  gender: "m", definition: "véhicule aérien" },
+    { word: "avion", image: "avion.jpg",               article: "l'",  gender: "m", definition: "véhicule aérien" },
     { word: "escale",              article: "l'",  gender: "f", definition: "arrêt intermédiaire lors d'un vol" },
     { word: "valise",              article: "la",  gender: "f", definition: "grand bagage pour les voyages" },
     { word: "terminal",            article: "le",  gender: "m", definition: "bâtiment principal d'un aéroport" },

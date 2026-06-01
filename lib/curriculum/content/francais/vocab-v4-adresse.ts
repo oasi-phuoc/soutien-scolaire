@@ -18,7 +18,7 @@ export const V4_ADRESSE_THEME: VocabTheme = {
     { word: "ville",        article: "la",  gender: "f", definition: "agglomération urbaine importante" },
     { word: "pays",         article: "le",  gender: "m", definition: "territoire avec un gouvernement" },
     { word: "étage",        article: "l'",  gender: "m", definition: "niveau d'un bâtiment au-dessus du sol" },
-    { word: "escalier",     article: "l'",  gender: "m", definition: "suite de marches pour monter ou descendre" },
+    { word: "escalier", image: "escalier.jpg",     article: "l'",  gender: "m", definition: "suite de marches pour monter ou descendre" },
     { word: "coin",         article: "le",  gender: "m", definition: "angle ou intersection de rues" },
     { word: "entrée",       article: "l'",  gender: "f", definition: "porte principale donnant accès à un lieu" },
   ],
