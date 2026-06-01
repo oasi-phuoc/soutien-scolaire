@@ -1442,14 +1442,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       {currentStep?.kind !== "eval_start" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            {currentStep?.kind !== "eval_start" ? (
-              <button type="button" onClick={goBack}
-                disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
-                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
-                Retour
-              </button>
-            ) : <span />}
+            <button type="button" onClick={goBack}
+              disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+              Retour
+            </button>
 
             {isExercise ? (
               <div className="flex items-center gap-2">
