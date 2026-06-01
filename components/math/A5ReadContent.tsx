@@ -44,13 +44,17 @@ function speakFr(text: string) {
   window.speechSynthesis.speak(u);
 }
 function acc(s: string): string[] { return [s, s.replace(",", ".")]; }
+function fmtNum(v: number): string {
+  const s = v.toFixed(2);
+  return s.endsWith("0") ? v.toFixed(1).replace(".", ",") : s.replace(".", ",");
+}
 
-// Correction box (amber, wrong then correct)
-function Err({ wrong, correct }: { wrong: string; correct: string }) {
+// Correction box (amber, stacked wrong/correct)
+function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[4rem] justify-center">
-      <span className="text-amber-600 line-through tabular-nums">{wrong || "—"}</span>
-      <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-0.5 ${className}`}>
+      <span className="text-xs text-amber-600 line-through tabular-nums leading-none">{wrong || "—"}</span>
+      <span className="text-sm font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
     </span>
   );
 }
@@ -130,7 +134,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
             {item.parts.map((p, j) => (
               <React.Fragment key={j}>
                 {wrongs[i]?.[j]
-                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} />
+                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-12" />
                   : <input
                       type="text"
                       value={vals[i]?.[j] ?? ""}
@@ -181,7 +185,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             <span className="text-sm font-mono text-[var(--color-text-primary)]">{item.parts.join(" + ")} =</span>
             {wrongs[i]
-              ? <Err wrong={vals[i] ?? ""} correct={item.numStr} />
+              ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
               : <input
                   type="text"
                   value={vals[i] ?? ""}
@@ -343,7 +347,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
               <div key={j} className="flex items-center gap-2 pl-7">
                 <span className="text-sm text-[var(--color-text-secondary)] min-w-[10rem]">chiffre des {ask.label} :</span>
                 {wrongs[i]?.[j]
-                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={ask.answer} />
+                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={ask.answer} className="w-14" />
                   : <input
                       type="text"
                       value={vals[i]?.[j] ?? ""}
@@ -403,7 +407,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             <PlayBtn text={decToFr(n)} />
             {wrongs[i]
-              ? <Err wrong={vals[i] ?? ""} correct={n} />
+              ? <Err wrong={vals[i] ?? ""} correct={n} className="w-24" />
               : <input
                   type="text"
                   value={vals[i] ?? ""}
@@ -501,8 +505,9 @@ function genOrder(): string[] {
   const nums: string[] = [];
   while (nums.length < 5) {
     const intPart = rnd(1, 9);
-    const dec = rnd(1, 9);
-    const s = `${intPart},${dec}`;
+    const s = Math.random() < 0.5
+      ? `${intPart},${rnd(1, 9)}`
+      : `${intPart},${rnd(1, 9)}${rnd(1, 9)}`;
     if (!nums.includes(s)) nums.push(s);
   }
   return shuffle(nums);
@@ -556,7 +561,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
             <button
               type="button"
               onClick={() => removeSlot(i)}
-              className={`min-h-10 min-w-16 px-2 rounded-xl border text-sm font-mono font-bold transition-colors ${
+              className={`h-10 w-20 rounded-xl border text-sm font-mono font-bold transition-colors flex flex-col items-center justify-center ${
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : validated && slotWrong[i]
@@ -565,11 +570,11 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
               }`}
             >
               {validated && slotWrong[i]
-                ? <span className="flex items-center gap-1">
-                    <span className="text-amber-600 line-through">{s}</span>
-                    <span className="text-[var(--color-text-primary)]">{sorted[i]}</span>
-                  </span>
-                : (s ?? "—")
+                ? <>
+                    <span className="text-xs text-amber-600 line-through leading-none">{s}</span>
+                    <span className="text-sm font-bold text-[var(--color-text-primary)] leading-none">{sorted[i]}</span>
+                  </>
+                : <span>{s ?? "—"}</span>
               }
             </button>
           </div>
@@ -583,7 +588,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
             type="button"
             onClick={() => placeChip(chip)}
             disabled={validated}
-            className="h-10 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 text-sm font-mono font-bold text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-alg)] disabled:opacity-50"
+            className="h-10 w-20 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-sm font-mono font-bold text-[var(--color-text-primary)] transition-colors hover:border-[var(--color-accent-alg)] disabled:opacity-50"
           >
             {chip}
           </button>
@@ -602,21 +607,23 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
     const nums: string[] = [];
     while (nums.length < 15) {
       const intPart = rnd(lo - 1, hi + 1);
-      const dec = rnd(0, 9);
-      const val = intPart + dec / 10;
-      const s = `${intPart},${dec}`;
+      const s = Math.random() < 0.5
+        ? `${intPart},${rnd(0, 9)}`
+        : `${intPart},${rnd(0, 9)}${rnd(1, 9)}`;
+      const val = parseFloat(s.replace(",", "."));
       if (!nums.includes(s) && val !== lo && val !== hi) nums.push(s);
     }
     return { threshold: `${lo} et ${hi}`, thresholdVal: lo, nums: shuffle(nums), mode, lo, hi };
   }
   const t = rnd(20, 70) / 10;
   const tStr = t.toFixed(1).replace(".", ",");
-  const nums: string[] = [tStr]; // include threshold itself
+  const nums: string[] = [tStr];
   while (nums.length < 15) {
     const intPart = Math.floor(t) + rnd(-1, 1);
     if (intPart < 0) continue;
-    const dec = rnd(0, 9);
-    const s = `${intPart},${dec}`;
+    const s = Math.random() < 0.5
+      ? `${intPart},${rnd(0, 9)}`
+      : `${intPart},${rnd(0, 9)}${rnd(1, 9)}`;
     if (!nums.includes(s)) nums.push(s);
   }
   return { threshold: tStr, thresholdVal: t, nums: shuffle(nums), mode };
@@ -717,13 +724,28 @@ export function DecReadFilterBetweenExercise({ exNum, validateCommand, onValidat
   return <FilterExercise exNum={exNum} mode="between" validateCommand={validateCommand} onValidated={onValidated} />;
 }
 
-// ── Ex 12 — Encadrement ───────────────────────────────────────────────────────
-function genEncadrement(): { numStr: string; lo: number; hi: number }[] {
-  const items = [];
+// ── Ex 11 — Encadrement ───────────────────────────────────────────────────────
+function genEncadrement(): { numStr: string; lo: string; hi: string }[] {
+  const items: { numStr: string; lo: string; hi: string }[] = [];
   while (items.length < 5) {
+    const caseType = rnd(0, 2);
     const intPart = rnd(1, 19);
-    const dec = rnd(1, 9);
-    items.push({ numStr: `${intPart},${dec}`, lo: intPart, hi: intPart + 1 });
+    let numStr: string, lo: string, hi: string;
+    if (caseType === 0) {
+      // Integer bounds, 1-decimal target
+      numStr = `${intPart},${rnd(1, 9)}`;
+      lo = String(intPart); hi = String(intPart + 1);
+    } else if (caseType === 1) {
+      // Integer bounds, 2-decimal target
+      numStr = `${intPart},${rnd(1, 9)}${rnd(1, 9)}`;
+      lo = String(intPart); hi = String(intPart + 1);
+    } else {
+      // 1-decimal bounds, 2-decimal target
+      const loT = rnd(1, 8), d2 = rnd(1, 9);
+      numStr = `${intPart},${loT}${d2}`;
+      lo = `${intPart},${loT}`; hi = `${intPart},${loT + 1}`;
+    }
+    items.push({ numStr, lo, hi });
   }
   return items;
 }
@@ -732,19 +754,16 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
   const [items] = useState(genEncadrement);
-  const [vals, setVals] = useState<{ lo: string; hi: string }[]>(() => items.map(() => ({ lo: "", hi: "" })));
-  const [wrongs, setWrongs] = useState<{ lo: boolean; hi: boolean }[]>(() => items.map(() => ({ lo: false, hi: false })));
+  const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
+  const [wrongs, setWrongs] = useState<boolean[]>(() => items.map(() => false));
   const [validated, setValidated] = useState(false);
 
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    const w = items.map((item, i) => ({
-      lo: (vals[i]?.lo ?? "").trim() !== String(item.lo),
-      hi: (vals[i]?.hi ?? "").trim() !== String(item.hi),
-    }));
+    const w = items.map((item, i) => !acc(item.numStr).includes((vals[i] ?? "").trim()));
     setWrongs(w);
-    onValidated(w.every(x => !x.lo && !x.hi));
+    onValidated(w.every(x => !x));
   }, [validated, items, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -756,21 +775,17 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
       </div>
       <div className="space-y-3">
         {items.map((item, i) => (
-          <div key={i} className="grid items-center gap-x-2" style={{ gridTemplateColumns: "1.5rem 4rem 1.5rem 5rem 1.5rem 4rem" }}>
-            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {wrongs[i]?.lo
-              ? <Err wrong={vals[i]?.lo ?? ""} correct={String(item.lo)} />
-              : <input type="text" value={vals[i]?.lo ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? { ...v, lo: e.target.value } : v))}
-                  className={`${IC(false)} w-full`} />}
-            <span className="text-sm text-center text-[var(--color-text-secondary)]">&lt;</span>
-            <span className="font-mono text-sm font-bold text-center text-[var(--color-text-primary)]">{item.numStr}</span>
-            <span className="text-sm text-center text-[var(--color-text-secondary)]">&lt;</span>
-            {wrongs[i]?.hi
-              ? <Err wrong={vals[i]?.hi ?? ""} correct={String(item.hi)} />
-              : <input type="text" value={vals[i]?.hi ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? { ...v, hi: e.target.value } : v))}
-                  className={`${IC(false)} w-full`} />}
+          <div key={i} className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
+            <span className="font-mono text-sm text-[var(--color-text-primary)]">{item.lo}</span>
+            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
+            {wrongs[i]
+              ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
+              : <input type="text" value={vals[i] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value : v))}
+                  className={`${IC(false)} w-20`} />}
+            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
+            <span className="font-mono text-sm text-[var(--color-text-primary)]">{item.hi}</span>
           </div>
         ))}
       </div>
@@ -778,17 +793,21 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
   );
 }
 
-// ── Ex 13 — Lire une droite numérique ─────────────────────────────────────────
-type NLLine = { min: number; max: number; arrows: number[] };
+// ── Ex 12 — Lire une droite numérique ─────────────────────────────────────────
+type NLLine = { min: number; max: number; step: number; numDivs: number; arrows: number[] };
 function genNLRead(): NLLine[] {
-  const lines: NLLine[] = [];
-  while (lines.length < 2) {
-    const a = rnd(0, 8);
-    const candidates = [1,2,3,4,5,6,7,8,9].map(d => a + d / 10).filter(v => v < a + 1);
-    const picked = shuffle(candidates).slice(0, 2).sort((x, y) => x - y);
-    lines.push({ min: a, max: a + 1, arrows: picked });
-  }
-  return lines;
+  const divChoices1 = [10, 15];
+  const divChoices2 = [20, 25, 30, 35, 40, 45, 50];
+  return [divChoices1, divChoices2].map(opts => {
+    const numDivs = opts[rnd(0, opts.length - 1)]!;
+    const step = 0.1;
+    const min = rnd(0, 9);
+    const max = +(min + numDivs * step).toFixed(1);
+    const candidates: number[] = [];
+    for (let k = 1; k < numDivs; k++) candidates.push(+(min + k * step).toFixed(1));
+    const arrows = shuffle(candidates).slice(0, 2).sort((a, b) => a - b);
+    return { min, max, step, numDivs, arrows };
+  });
 }
 
 export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
@@ -814,7 +833,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const ML = 40, lineW = 400, lineY = 80, svgH = 110;
+  const ML = 40, lineW = 400, lineY = 80, svgH = 115;
 
   return (
     <div className="space-y-5">
@@ -823,29 +842,28 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
       </div>
       <div className="space-y-6">
         {lines.map((line, li) => {
-          const range = line.max - line.min;
-          const pos = (v: number) => ML + ((v - line.min) / range) * lineW;
+          const pos = (v: number) => ML + ((v - line.min) / (line.numDivs * line.step)) * lineW;
           const boxW = 52, boxH = 26;
           return (
             <div key={li} className="rounded-xl border border-[var(--color-border-default)] p-3">
               <div className="w-full overflow-x-auto">
-                <svg viewBox={`0 0 480 ${svgH}`} width="100%" style={{ display: "block" }}>
-                  {/* Main line */}
-                  <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke="currentColor" strokeWidth="2" />
-                  <polygon points={`${ML + lineW + 8},${lineY} ${ML + lineW},${lineY - 4} ${ML + lineW},${lineY + 4}`} fill="currentColor" />
-                  {/* Ticks */}
-                  {Array.from({ length: 11 }, (_, k) => {
-                    const v = line.min + k / 10;
-                    const x = pos(v);
-                    const major = k === 0 || k === 10;
+                <svg viewBox={`0 0 490 ${svgH}`} width="100%" style={{ display: "block" }}>
+                  {/* Main line — extends 30px past last tick */}
+                  <line x1={ML} y1={lineY} x2={ML + lineW + 28} y2={lineY} stroke="currentColor" strokeWidth="2" />
+                  <polygon points={`${ML + lineW + 36},${lineY} ${ML + lineW + 28},${lineY - 4} ${ML + lineW + 28},${lineY + 4}`} fill="currentColor" />
+                  {/* Ticks — bigger every 5 */}
+                  {Array.from({ length: line.numDivs + 1 }, (_, k) => {
+                    const v = +(line.min + k * line.step).toFixed(1);
+                    const x = ML + (k / line.numDivs) * lineW;
+                    const major = k % 5 === 0;
                     return (
                       <g key={k}>
-                        <line x1={x} y1={lineY} x2={x} y2={lineY + (major ? 10 : 5)} stroke="currentColor" strokeWidth={major ? 2 : 1} />
+                        <line x1={x} y1={lineY} x2={x} y2={lineY + (major ? 10 : 5)} stroke="currentColor" strokeWidth={major ? 1.5 : 1} />
                         {major && <text x={x} y={lineY + 22} textAnchor="middle" fontSize="11" fill="currentColor">{v.toFixed(1).replace(".", ",")}</text>}
                       </g>
                     );
                   })}
-                  {/* Arrows with inputs */}
+                  {/* Arrows with input boxes */}
                   {line.arrows.map((v, ai) => {
                     const x = pos(v);
                     const expected = v.toFixed(1).replace(".", ",");
@@ -861,10 +879,14 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                           fill={isWrong ? "#FEF3C7" : "#DBEAFE"}
                           stroke={isWrong ? "#F59E0B" : "var(--color-accent-alg)"} strokeWidth="1.5" />
                         {validated
-                          ? <text x={bx + boxW / 2} y={by + boxH / 2 + 4} textAnchor="middle" fontSize="11" fontWeight="bold"
-                              fill={isWrong ? "#D97706" : "currentColor"}>
-                              {isWrong ? expected : (vals[li]?.[ai] ?? "")}
-                            </text>
+                          ? isWrong
+                            ? <text x={bx + boxW / 2} textAnchor="middle" fontSize="9">
+                                <tspan y={by + 10} fill="#D97706" textDecoration="line-through">{vals[li]?.[ai] || "—"}</tspan>
+                                <tspan x={bx + boxW / 2} y={by + 21} fontSize="11" fontWeight="bold" fill="currentColor">{expected}</tspan>
+                              </text>
+                            : <text x={bx + boxW / 2} y={by + boxH / 2 + 4} textAnchor="middle" fontSize="11" fontWeight="bold" fill="currentColor">
+                                {vals[li]?.[ai] ?? ""}
+                              </text>
                           : <foreignObject x={bx + 2} y={by + 2} width={boxW - 4} height={boxH - 4}>
                               <input
                                 type="text"
@@ -886,24 +908,32 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
   );
 }
 
-// ── Ex 14 — Placer sur la droite ──────────────────────────────────────────────
-type NLPlaceConfig = { min: number; max: number; positions: number[] };
+// ── Ex 13 — Placer sur la droite ──────────────────────────────────────────────
+type NLPlaceConfig = { min: number; max: number; step: number; numDivs: number; positions: number[] };
 function genNLPlace(): NLPlaceConfig {
-  const a = rnd(0, 7);
-  const candidates = [1,2,3,4,5,6,7,8,9].map(d => a + d / 10);
-  const positions = shuffle(candidates).slice(0, 5).sort((x, y) => x - y);
-  return { min: a, max: a + 1, positions };
+  const options = [
+    { numDivs: 10, step: 0.1 },
+    { numDivs: 15, step: 0.1 },
+    { numDivs: 20, step: 0.05 },
+    { numDivs: 25, step: 0.04 },
+    { numDivs: 50, step: 0.02 },
+  ];
+  const { numDivs, step } = options[rnd(0, options.length - 1)]!;
+  const min = rnd(0, 9);
+  const max = +(min + numDivs * step).toFixed(2);
+  const candidates: number[] = [];
+  for (let k = 1; k < numDivs; k++) candidates.push(+(min + k * step).toFixed(2));
+  const positions = shuffle(candidates).slice(0, 5).sort((a, b) => a - b);
+  return { min, max, step, numDivs, positions };
 }
 
 export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
   const [cfg] = useState<NLPlaceConfig>(genNLPlace);
-  // chips = position values (shuffled for display)
   const chips = useState(() => shuffle([...cfg.positions]))[0];
-  // assignments: positionIndex → chipValue (or null)
   const [assignments, setAssignments] = useState<(number | null)[]>(() => cfg.positions.map(() => null));
-  const [activeChip, setActiveChip] = useState<number | null>(null); // chip value
+  const [activeChip, setActiveChip] = useState<number | null>(null);
   const [validated, setValidated] = useState(false);
   const [posWrong, setPosWrong] = useState<boolean[]>(() => cfg.positions.map(() => false));
 
@@ -915,14 +945,11 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
   }
   function handlePosClick(pi: number) {
     if (validated || activeChip === null) return;
-    // Unassign if already assigned somewhere
-    const newAssignments = assignments.map((a, i) => {
-      if (a === activeChip) return null; // remove previous assignment of this chip
-      if (i === pi) return activeChip;   // assign to this position
+    setAssignments(prev => prev.map((a, i) => {
+      if (a === activeChip) return null;
+      if (i === pi) return activeChip;
       return a;
-    });
-    // Also assign to this position (handle both removals and new assignment)
-    setAssignments(newAssignments.map((a, i) => i === pi ? activeChip : a));
+    }).map((a, i) => i === pi ? activeChip : a));
     setActiveChip(null);
   }
 
@@ -936,28 +963,29 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const ML = 40, lineW = 400, lineY = 56, svgH = 106;
-  const pos = (v: number) => ML + ((v - cfg.min) / (cfg.max - cfg.min)) * lineW;
+  const ML = 40, lineW = 400, lineY = 56, svgH = 115;
+  const pos = (v: number) => ML + ((v - cfg.min) / (cfg.numDivs * cfg.step)) * lineW;
 
   return (
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
       </div>
-      {/* Number line SVG */}
       <div className="rounded-xl border border-[var(--color-border-default)] p-3">
         <div className="w-full overflow-x-auto">
-          <svg viewBox={`0 0 480 ${svgH}`} width="100%" style={{ display: "block" }}>
-            <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke="currentColor" strokeWidth="2" />
-            <polygon points={`${ML + lineW + 8},${lineY} ${ML + lineW},${lineY - 4} ${ML + lineW},${lineY + 4}`} fill="currentColor" />
-            {Array.from({ length: 11 }, (_, k) => {
-              const v = cfg.min + k / 10;
-              const x = pos(v);
-              const major = k === 0 || k === 10;
+          <svg viewBox={`0 0 490 ${svgH}`} width="100%" style={{ display: "block" }}>
+            {/* Main line — extends past last tick */}
+            <line x1={ML} y1={lineY} x2={ML + lineW + 28} y2={lineY} stroke="currentColor" strokeWidth="2" />
+            <polygon points={`${ML + lineW + 36},${lineY} ${ML + lineW + 28},${lineY - 4} ${ML + lineW + 28},${lineY + 4}`} fill="currentColor" />
+            {/* Ticks — bigger every 5 */}
+            {Array.from({ length: cfg.numDivs + 1 }, (_, k) => {
+              const v = +(cfg.min + k * cfg.step).toFixed(2);
+              const x = ML + (k / cfg.numDivs) * lineW;
+              const major = k % 5 === 0;
               return (
                 <g key={k}>
-                  <line x1={x} y1={lineY} x2={x} y2={lineY + (major ? 10 : 5)} stroke="currentColor" strokeWidth={major ? 2 : 1} />
-                  {major && <text x={x} y={lineY + 22} textAnchor="middle" fontSize="11" fill="currentColor">{v.toFixed(1).replace(".", ",")}</text>}
+                  <line x1={x} y1={lineY} x2={x} y2={lineY + (major ? 10 : 5)} stroke="currentColor" strokeWidth={major ? 1.5 : 1} />
+                  {major && <text x={x} y={lineY + 22} textAnchor="middle" fontSize="11" fill="currentColor">{fmtNum(v)}</text>}
                 </g>
               );
             })}
@@ -973,10 +1001,16 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
                   <circle cx={x} cy={lineY} r="6" fill={fillColor} stroke={strokeColor} strokeWidth="2" />
                   <text x={x} y={lineY - 12} textAnchor="middle" fontSize="9" fontWeight="bold" fill="var(--color-accent-alg)">P{pi + 1}</text>
                   {assigned !== null && (
-                    <text x={x} y={lineY + 35} textAnchor="middle" fontSize="10" fontWeight="bold"
-                      fill={w ? "#D97706" : "var(--color-accent-alg)"}>
-                      {w ? `${assigned.toFixed(1).replace(".", ",")}≠${v.toFixed(1).replace(".", ",")}` : assigned.toFixed(1).replace(".", ",")}
-                    </text>
+                    w ? (
+                      <text x={x} textAnchor="middle" fontSize="9">
+                        <tspan y={lineY + 30} fill="#D97706" textDecoration="line-through">{fmtNum(assigned)}</tspan>
+                        <tspan x={x} y={lineY + 42} fontSize="10" fontWeight="bold" fill="currentColor">{fmtNum(v)}</tspan>
+                      </text>
+                    ) : (
+                      <text x={x} y={lineY + 34} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--color-accent-alg)">
+                        {fmtNum(assigned)}
+                      </text>
+                    )
                   )}
                 </g>
               );
@@ -987,10 +1021,10 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
       {/* Chips */}
       <div className="flex flex-wrap gap-2">
         {chips.map(v => {
-          const vStr = v.toFixed(1).replace(".", ",");
+          const vStr = fmtNum(v);
           const isAssigned = assignedChips.has(v);
           const isActive = activeChip === v;
-          let cls = "rounded-xl border px-4 py-2 text-sm font-mono font-bold transition-colors ";
+          let cls = "h-10 w-20 rounded-xl border text-sm font-mono font-bold transition-colors ";
           if (isActive) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
           else if (isAssigned) cls += "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-50";
           else cls += "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] cursor-pointer";
