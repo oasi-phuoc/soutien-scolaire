@@ -50,11 +50,7 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
         ],
       },
     },
-    exercises: [
-      { id: "a7-4-e1", promptFr: "Calculez (−3) × (−4).", type: "number", acceptable: ["12", "+12"] },
-      { id: "a7-4-e2", promptFr: "Calculez (+3) × (−4).", type: "number", acceptable: ["-12"] },
-      { id: "a7-4-e3", promptFr: "Calculez (−12) ÷ (−3).", type: "number", acceptable: ["4", "+4"] },
-      { id: "a7-4-e4", promptFr: "Calculez (−5) × (+6).", type: "number", acceptable: ["-30"] },
-      { id: "a7-4-e5", promptFr: "(−) × (−) donne un résultat :", type: "short_text", acceptable: ["positif", "positive", "+"] },
-    ],
-  };
+  exercises: [],
+  exercisePool: [],
+  poolSize: 0,
+};

@@ -7,29 +7,39 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
+function pluralForm(word: string): string {
+  if (/[sxz]$/i.test(word)) return word;
+  if (/eau$|au$/i.test(word)) return word + "x";
+  if (/al$/i.test(word)) return word.slice(0, -2) + "aux";
+  return word + "s";
+}
+
 function buildWordList(theme: VocabTheme): VocabWord[] {
   const result: VocabWord[] = [];
 
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
 
-    // Country name from relatedWords — only for themes where words have articles
+    // Country name from relatedWords (e.g. "la Suisse") — definite article only
     if (rw && w.article) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
       if (m) result.push({ word: m[2]!, article: m[1]!.trimEnd() });
     }
 
-    // Masculine form
+    // Singular masculine form — definite article only
     if (w.article) {
       result.push({ word: w.word, article: w.article });
-    } else if (rw) {
-      // Nationality theme: use indefinite article "un"
-      result.push({ word: w.word, article: "un" });
+      // Plural masculine (skip if invariant, e.g. "fils")
+      const plMasc = pluralForm(w.word);
+      if (plMasc !== w.word) result.push({ word: plMasc, article: "les" });
     }
 
-    // Feminine form
+    // Feminine form — use "la"
     if (w.feminine) {
-      result.push({ word: w.feminine, article: "une" });
+      result.push({ word: w.feminine, article: "la" });
+      // Plural feminine
+      const plFem = pluralForm(w.feminine);
+      if (plFem !== w.feminine) result.push({ word: plFem, article: "les" });
     }
   }
 
@@ -90,7 +100,7 @@ export function ExArticle({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez l&apos;article correct (le, la, l&apos;, les, un, une).
+        Écrivez l&apos;article correct (le, la, l&apos;, les).
       </p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         {words.map((w, i) => {

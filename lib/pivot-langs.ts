@@ -3,6 +3,7 @@ export const PIVOT_LANGS = [
   { code: "ar", label: "العربية", labelFr: "Arabe" },
   { code: "fa", label: "فارسی", labelFr: "Farsi" },
   { code: "pt", label: "Português", labelFr: "Portugais" },
+  { code: "so", label: "Soomaali", labelFr: "Somali" },
   { code: "ti", label: "ትግርኛ", labelFr: "Tigrinya" },
   { code: "uk", label: "Українська", labelFr: "Ukrainien" },
 ] as const;

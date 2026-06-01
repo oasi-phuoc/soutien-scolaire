@@ -4,7 +4,7 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-1",
     submoduleCode: "A5.1",
     theory: {
-      title: { fr: "Lire et écrire les décimaux", en: "Reading and writing decimals", ar: "قراءة وكتابة الأعداد العشرية", fa: "خواندن و نوشتن اعشار", ti: "ቁጽሪ ቪርጉላ ምንባብ ምጽሓፍ", uk: "Читання і запис десяткових чисел" },
+      title: { fr: "Lire et arrondir les décimaux", en: "Reading and rounding decimals", ar: "قراءة وتقريب الأعداد العشرية", fa: "خواندن و گرد کردن اعشار", ti: "ምንባብ ምልካዕ ቁጽሪ ቪርጉላ", uk: "Читання і округлення десяткових" },
       blocks: [
         { type: "heading", fr: "Structure d'un nombre décimal", black: true },
         { type: "highlight", fr: "Définition" },
@@ -41,14 +41,30 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
           ],
         },
         { type: "note", fr: "4,2 = 4,20 = 4,200" },
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Comparer et ordonner", black: true },
+        { type: "highlight", fr: "Méthode" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "1. Comparer les parties entières en premier.",
+            "2. Si égales → comparer les dixièmes, puis les centièmes…",
+            "3. Ajouter des zéros si nécessaire : 3,5 = 3,50",
+          ],
+        },
+        {
+          type: "table",
+          headersFr: ["Comparaison", "Résultat", "Raison"],
+          accentHeader: true,
+          rows: [
+            ["3,5 vs 3,50", "3,5 = 3,50", "mêmes valeurs"],
+            ["4,7 vs 4,69", "4,7 > 4,69", "dixième : 7 > 6"],
+            ["2,04 vs 2,40", "2,04 < 2,40", "dixième : 0 < 4"],
+          ],
+        },
       ],
       paragraphs: { fr: [] },
     },
-    exercises: [
-      { id: "a5-1-e1", promptFr: "Dans 3,47, quel est le chiffre des dixièmes ?", type: "number", acceptable: ["4"] },
-      { id: "a5-1-e2", promptFr: "Dans 5,82, quel est le chiffre des centièmes ?", type: "number", acceptable: ["2"] },
-      { id: "a5-1-e3", promptFr: "4,20 est-il égal à 4,2 ? (oui/non)", type: "short_text", acceptable: ["oui", "yes"] },
-      { id: "a5-1-e4", promptFr: "Écrivez 3 unités, 5 dixièmes et 7 centièmes sous forme décimale.", type: "short_text", acceptable: ["3,57", "3.57"] },
-      { id: "a5-1-e5", promptFr: "Dans 12,345, quel est le chiffre des millièmes ?", type: "number", acceptable: ["5"] },
-    ],
+    exercises: [],
+    exercisePool: [],
+    poolSize: 5,
   };

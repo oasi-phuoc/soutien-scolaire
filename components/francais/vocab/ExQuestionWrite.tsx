@@ -197,9 +197,6 @@ export function ExQuestionWrite({
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
                 {p.word}
               </p>
-              {p.context && (
-                <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{p.context}</p>
-              )}
               {isCheckedDone && hasErrors ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>

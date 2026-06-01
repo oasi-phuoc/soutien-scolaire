@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
@@ -9,9 +9,15 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { percentToSwissGrade } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
-import { DecAddExercise, DecAddMissingExercise, DecAddHundredthsExercise, DecSubExercise, DecSubMissingExercise, DecSubHundredthsExercise, DecMulSimpleExercise, DecMulMissingExercise, DecMulExtExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
+import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
+import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
+import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
+import { A7CompareExercise } from "@/components/math/A7CompareContent";
+import { A7RelArithExercise, A7RelMulDivExercise } from "@/components/math/A7ArithContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
+import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
 type WorkspaceStep =
   | { kind: "theory" }
@@ -19,15 +25,8 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
-  | { kind: "dec_add"; exNum: number }
-  | { kind: "dec_add_missing"; exNum: number }
-  | { kind: "dec_add_hundredths"; exNum: number }
-  | { kind: "dec_sub"; exNum: number }
-  | { kind: "dec_sub_missing"; exNum: number }
-  | { kind: "dec_sub_hundredths"; exNum: number }
-  | { kind: "dec_mul_simple"; exNum: number }
-  | { kind: "dec_mul_missing"; exNum: number }
-  | { kind: "dec_mul_ext"; exNum: number }
+  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" }
+  | { kind: "dec_mul_col"; exNum: number; preFilledOperands: boolean }
   | { kind: "dec_div_simple"; exNum: number }
   | { kind: "dec_div_missing"; exNum: number }
   | { kind: "dec_div_ext"; exNum: number }
@@ -38,6 +37,26 @@ type WorkspaceStep =
   | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
   | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
+  | { kind: "dec_read_decompose"; exNum: number }
+  | { kind: "dec_read_recompose"; exNum: number }
+  | { kind: "dec_read_place_value"; exNum: number }
+  | { kind: "dec_read_digit_at"; exNum: number }
+  | { kind: "dec_read_dictation"; exNum: number }
+  | { kind: "dec_read_compare"; exNum: number }
+  | { kind: "dec_read_order"; exNum: number }
+  | { kind: "dec_read_filter_gt"; exNum: number }
+  | { kind: "dec_read_filter_lt"; exNum: number }
+  | { kind: "dec_read_filter_between"; exNum: number }
+  | { kind: "dec_read_encadrement"; exNum: number }
+  | { kind: "dec_read_nl_read"; exNum: number }
+  | { kind: "dec_read_nl_place"; exNum: number }
+  | { kind: "a7_nl_read_mixed"; exNum: number }
+  | { kind: "a7_nl_place_mixed"; exNum: number }
+  | { kind: "a7_nl_read_neg"; exNum: number }
+  | { kind: "a7_nl_place_neg"; exNum: number }
+  | { kind: "a7_compare_ex"; exNum: number; level: 1 | 2 }
+  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
+  | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
@@ -60,6 +79,12 @@ function shufflePick<T>(arr: T[], n: number): T[] {
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
+    // Training
+    steps.push({ kind: "fraction_toggle" });
+    steps.push({ kind: "fraction_coloring" });
+    steps.push({ kind: "fraction_read" });
+    steps.push({ kind: "fraction_multi_coloring" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_toggle" });
     steps.push({ kind: "fraction_coloring" });
@@ -68,57 +93,138 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "fraction_multi_read" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-2") {
+    // Training
+    steps.push({ kind: "fraction_equiv" });
+    steps.push({ kind: "fraction_simplify" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_equiv" });
     steps.push({ kind: "fraction_simplify" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-3") {
+    // Training
+    steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
+    steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
+    steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_compare", exNum: 1, mode: "same-den" });
     steps.push({ kind: "fraction_compare", exNum: 2, mode: "same-num" });
     steps.push({ kind: "fraction_compare", exNum: 3, mode: "diff-both" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-7") {
+    // Training
+    steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
+    steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
+    steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
+    steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
+    // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "frac_to_dec", exNum: 1, variant: "basic" });
     steps.push({ kind: "dec_to_frac", exNum: 2, variant: "basic" });
     steps.push({ kind: "frac_to_dec", exNum: 3, variant: "extended" });
     steps.push({ kind: "dec_to_frac", exNum: 4, variant: "extended" });
     steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A5-1") {
+    // Training: 13 exercises
+    steps.push({ kind: "dec_read_decompose", exNum: 1 });
+    steps.push({ kind: "dec_read_recompose", exNum: 2 });
+    steps.push({ kind: "dec_read_place_value", exNum: 3 });
+    steps.push({ kind: "dec_read_digit_at", exNum: 4 });
+    steps.push({ kind: "dec_read_dictation", exNum: 5 });
+    steps.push({ kind: "dec_read_compare", exNum: 6 });
+    steps.push({ kind: "dec_read_order", exNum: 7 });
+    steps.push({ kind: "dec_read_filter_gt", exNum: 8 });
+    steps.push({ kind: "dec_read_filter_lt", exNum: 9 });
+    steps.push({ kind: "dec_read_filter_between", exNum: 10 });
+    steps.push({ kind: "dec_read_encadrement", exNum: 11 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 12 });
+    steps.push({ kind: "dec_read_nl_place", exNum: 13 });
+    // Evaluation: 6 exercises
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "dec_read_decompose", exNum: 1 });
+    steps.push({ kind: "dec_read_place_value", exNum: 2 });
+    steps.push({ kind: "dec_read_dictation", exNum: 3 });
+    steps.push({ kind: "dec_read_compare", exNum: 4 });
+    steps.push({ kind: "dec_read_encadrement", exNum: 5 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 6 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A7-1") {
+    steps.push({ kind: "a7_nl_read_mixed", exNum: 1 });
+    steps.push({ kind: "a7_nl_place_mixed", exNum: 2 });
+    steps.push({ kind: "a7_nl_read_neg", exNum: 3 });
+    steps.push({ kind: "a7_nl_place_neg", exNum: 4 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a7_nl_read_mixed", exNum: 1 });
+    steps.push({ kind: "a7_nl_place_mixed", exNum: 2 });
+    steps.push({ kind: "a7_nl_read_neg", exNum: 3 });
+    steps.push({ kind: "a7_nl_place_neg", exNum: 4 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A7-2") {
+    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 1 });
+    steps.push({ kind: "a7_compare_ex", exNum: 2, level: 2 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 1 });
+    steps.push({ kind: "a7_compare_ex", exNum: 2, level: 2 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A7-3") {
+    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 8, missingOperand: false, timer: 60 });
+    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 5, missingOperand: true });
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_arith", exNum: 5, range: 15, count: 8, missingOperand: false, timer: 60 });
+    steps.push({ kind: "a7_rel_arith", exNum: 6, range: 15, count: 5, missingOperand: true });
+    steps.push({ kind: "a7_rel_arith", exNum: 7, range: 20, count: 5, missingOperand: false });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 15, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 15, count: 5, missingOperand: true });
+    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 20, count: 5, missingOperand: false });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A7-4") {
+    steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 2, range: 6, count: 8, missingOperand: false, timer: 60 });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 3, range: 6, count: 5, missingOperand: true });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 4, range: 6, count: 8, missingOperand: true, timer: 60 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 2, range: 6, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 3, range: 6, count: 5, missingOperand: true });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 4, range: 6, count: 5, missingOperand: true });
+    steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-4") {
-    // Training: 8 exercises matching A2.1 (add) + A2.2 (sub) variety
-    steps.push({ kind: "dec_add", exNum: 1 });
-    steps.push({ kind: "dec_add_missing", exNum: 2 });
-    steps.push({ kind: "dec_add_hundredths", exNum: 3 });
-    steps.push({ kind: "dec_add_missing", exNum: 4 });
-    steps.push({ kind: "dec_sub", exNum: 5 });
-    steps.push({ kind: "dec_sub_missing", exNum: 6 });
-    steps.push({ kind: "dec_sub_hundredths", exNum: 7 });
-    steps.push({ kind: "dec_sub_missing", exNum: 8 });
+    // Training: 8 exercises
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "+", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "+", missingOperand: false, timer: 60, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 3, op: "+", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 4, op: "+", missingOperand: false, precision: "hundredths" });
+    steps.push({ kind: "dec_arith_group", exNum: 5, op: "-", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 6, op: "-", missingOperand: false, timer: 60, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 7, op: "-", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 8, op: "-", missingOperand: false, precision: "hundredths" });
     // Evaluation: 5 exercises
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "dec_add", exNum: 1 });
-    steps.push({ kind: "dec_add_missing", exNum: 2 });
-    steps.push({ kind: "dec_sub", exNum: 3 });
-    steps.push({ kind: "dec_sub_missing", exNum: 4 });
-    steps.push({ kind: "dec_add_hundredths", exNum: 5 });
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "+", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "+", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 3, op: "-", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 4, op: "-", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 5, op: "+", missingOperand: false, precision: "hundredths" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-5") {
-    // Training: 8 exercises matching A3.1 (mul tables) + A3.2 (col mul) variety
-    steps.push({ kind: "dec_mul_simple", exNum: 1 });
-    steps.push({ kind: "dec_mul_simple", exNum: 2 });
-    steps.push({ kind: "dec_mul_missing", exNum: 3 });
-    steps.push({ kind: "dec_mul_missing", exNum: 4 });
-    steps.push({ kind: "dec_mul_ext", exNum: 5 });
-    steps.push({ kind: "dec_mul_ext", exNum: 6 });
-    steps.push({ kind: "dec_mul_simple", exNum: 7 });
-    steps.push({ kind: "dec_mul_missing", exNum: 8 });
+    // Training: 8 exercises
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: false, timer: 60, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 3, op: "×", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 4, op: "×", missingOperand: true, timer: 60, precision: "tenths" });
+    steps.push({ kind: "dec_mul_col", exNum: 5, preFilledOperands: true });
+    steps.push({ kind: "dec_mul_col", exNum: 6, preFilledOperands: false });
+    steps.push({ kind: "dec_arith_group", exNum: 7, op: "×", missingOperand: false, precision: "extended" });
+    steps.push({ kind: "dec_arith_group", exNum: 8, op: "×", missingOperand: true, precision: "tenths" });
     // Evaluation: 4 exercises
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "dec_mul_simple", exNum: 1 });
-    steps.push({ kind: "dec_mul_missing", exNum: 2 });
-    steps.push({ kind: "dec_mul_ext", exNum: 3 });
-    steps.push({ kind: "dec_mul_missing", exNum: 4 });
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_mul_col", exNum: 3, preFilledOperands: true });
+    steps.push({ kind: "dec_arith_group", exNum: 4, op: "×", missingOperand: false, precision: "extended" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-6") {
     // Training: 8 exercises matching A3.3 (div tables) + A3.4 (col div) variety
@@ -139,6 +245,11 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
     const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
+    // Training: exercise types 1-5
+    for (let ex = 1; ex <= 5; ex++) {
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
+    }
+    // Evaluation: all 9 types (new random questions)
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 9; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
@@ -159,24 +270,29 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   return steps;
 }
 
-// Parses [[frac:N/D]] markers and renders vertical inline fractions
+// Parses [[frac:N/D]] and **bold** markers and renders them inline
 function renderFracText(text: string): React.ReactNode {
-  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
+  const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\]|\*\*[^*]+\*\*)/);
   if (parts.length === 1) return text;
   const nodes: React.ReactNode[] = [];
   parts.forEach((part, i) => {
-    const m = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
-    if (m) {
+    const fracM = part.match(/^\[\[frac:([^/\]]+)\/([^\]]+)\]\]$/);
+    if (fracM) {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)]">{fracM[1]}</span>
           <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
-          <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
+          <span className="text-xs font-bold text-[var(--color-text-primary)]">{fracM[2]}</span>
         </span>
       );
-    } else if (part) {
-      nodes.push(part);
+      return;
     }
+    const boldM = part.match(/^\*\*([^*]+)\*\*$/);
+    if (boldM) {
+      nodes.push(<strong key={i} className="font-bold text-[var(--color-accent-alg)]">{boldM[1]}</strong>);
+      return;
+    }
+    if (part) nodes.push(part);
   });
   return <>{nodes}</>;
 }
@@ -682,7 +798,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
           <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
           <ul className="list-disc space-y-1 pl-4">
             {block.itemsFr.map((it, i) => (
-              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{it}</li>
+              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{renderFracText(it)}</li>
             ))}
           </ul>
         </div>
@@ -702,7 +818,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
               {block.rows.map((row, ri) => (
                 <tr key={ri} className="border-t border-[var(--color-border-default)]">
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{cell}</td>
+                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{renderFracText(cell)}</td>
                   ))}
                 </tr>
               ))}
@@ -904,11 +1020,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
-  // For A4-1/A4-2 startAtEval means start at their custom exercise (index 1)
-  const customEvalIdx = (submoduleId === "A4-1" || submoduleId === "A4-2") ? 1 : -1;
-  const initialIdx = startAtEval
-    ? (evalStartIdx >= 0 ? evalStartIdx : customEvalIdx >= 0 ? customEvalIdx : 0)
-    : 0;
+  const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [exerciseKey, setExerciseKey] = useState(0);
@@ -919,6 +1031,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
   const [evalScores, setEvalScores] = useState<Record<number, boolean>>({});
+  const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -931,6 +1044,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setToggleAnswer(null);
   }, []);
 
+  useEffect(() => { setTrainingTimerLeft(null); }, [stepIdx]);
+
   // A1-1 and A1-2 use the rich A1ModuleContent; A1-3+ use GenericModuleContent with toggle
   if (moduleId === "A1") {
     if (submoduleId === "A1-1" || submoduleId === "A1-2") {
@@ -941,7 +1056,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
-  const isCustomA5 = submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6";
+  const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4";
   if (moduleId !== "A4" && !isCustomA5) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
@@ -954,7 +1069,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle" &&
     currentStep.kind !== "results";
-  const isCustom = currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_add" || currentStep?.kind === "dec_add_missing" || currentStep?.kind === "dec_add_hundredths" || currentStep?.kind === "dec_sub" || currentStep?.kind === "dec_sub_missing" || currentStep?.kind === "dec_sub_hundredths" || currentStep?.kind === "dec_mul_simple" || currentStep?.kind === "dec_mul_missing" || currentStep?.kind === "dec_mul_ext" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
+  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_nl_read","dec_read_nl_place"]);
+  const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
   function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
@@ -1017,18 +1134,25 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
   }
 
-  const visibleSteps = steps.filter((s: WorkspaceStep) => !notInBar(s));
-  const visibleIdx = steps.slice(0, stepIdx).filter((s: WorkspaceStep) => !notInBar(s)).length;
+  const resultsIdx = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
+  const isInEvalExercises = evalStartIdx >= 0 && stepIdx > evalStartIdx &&
+    currentStep?.kind !== "results" && currentStep?.kind !== "eval_start" && currentStep?.kind !== "pass_toggle";
+  const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
+  const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
+
+  const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter((s: WorkspaceStep) => !notInBar(s));
+  const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
+  const showTrainingBar = !inEvalPhase && !isInEvalExercises;
 
   return (
     <div className="pb-40">
-      {/* Progress bar — lesson steps only */}
-      {!inEvalPhase && (
-        <div className="mb-6 flex gap-1">
-          {visibleSteps.map((_, i) => (
-            <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${i < visibleIdx ? "bg-[var(--color-accent-alg)]" : i === visibleIdx ? "bg-[var(--color-accent-alg)] opacity-60" : "bg-[var(--color-border-default)]"}`} />
-          ))}
-        </div>
+      {/* Training progress bar */}
+      {showTrainingBar && (
+        <TrainingProgressBar current={trainingStepIdx} total={trainingSteps.length} timeLeft={trainingTimerLeft} />
+      )}
+      {/* Eval progress bar */}
+      {isInEvalExercises && (
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} />
       )}
 
       {/* Theory */}
@@ -1068,33 +1192,28 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         <DecToFracExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
-      {/* A5 decimal exercises */}
-      {currentStep?.kind === "dec_add" && (
-        <DecAddExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      {/* A5.4 / A5.5 decimal arithmetic exercises */}
+      {currentStep?.kind === "dec_arith_group" && (
+        <DecArithGroupExercise
+          key={exerciseKey}
+          exNum={currentStep.exNum}
+          op={currentStep.op}
+          missingOperand={currentStep.missingOperand}
+          timer={currentStep.timer}
+          precision={currentStep.precision}
+          validateCommand={validateCommand}
+          onValidated={handleCustomValidated}
+          onTimeUpdate={!isInEvalExercises ? setTrainingTimerLeft : undefined}
+        />
       )}
-      {currentStep?.kind === "dec_add_missing" && (
-        <DecAddMissingExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_add_hundredths" && (
-        <DecAddHundredthsExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_sub" && (
-        <DecSubExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_sub_missing" && (
-        <DecSubMissingExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_sub_hundredths" && (
-        <DecSubHundredthsExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_mul_simple" && (
-        <DecMulSimpleExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_mul_missing" && (
-        <DecMulMissingExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_mul_ext" && (
-        <DecMulExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      {currentStep?.kind === "dec_mul_col" && (
+        <DecMulColGridExercise
+          key={exerciseKey}
+          exNum={currentStep.exNum}
+          preFilledOperands={currentStep.preFilledOperands}
+          validateCommand={validateCommand}
+          onValidated={handleCustomValidated}
+        />
       )}
       {currentStep?.kind === "dec_div_simple" && (
         <DecDivSimpleExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
@@ -1104,6 +1223,76 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_div_ext" && (
         <DecDivExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A5-1 reading/rounding exercises */}
+      {currentStep?.kind === "dec_read_decompose" && (
+        <DecReadDecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_recompose" && (
+        <DecReadRecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_place_value" && (
+        <DecReadPlaceValueExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_digit_at" && (
+        <DecReadDigitAtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_dictation" && (
+        <DecReadDictationExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+{currentStep?.kind === "dec_read_compare" && (
+        <DecReadCompareExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_order" && (
+        <DecReadOrderExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_gt" && (
+        <DecReadFilterGtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_lt" && (
+        <DecReadFilterLtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_filter_between" && (
+        <DecReadFilterBetweenExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_encadrement" && (
+        <DecReadEncadrementExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_nl_read" && (
+        <DecReadNLReadExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_nl_place" && (
+        <DecReadNLPlaceExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A7-1 number line exercises */}
+      {currentStep?.kind === "a7_nl_read_mixed" && (
+        <A7NLReadMixedExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a7_nl_place_mixed" && (
+        <A7NLPlaceMixedExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a7_nl_read_neg" && (
+        <A7NLReadNegExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a7_nl_place_neg" && (
+        <A7NLPlaceNegExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A7-2 comparison exercises */}
+      {currentStep?.kind === "a7_compare_ex" && (
+        <A7CompareExercise key={exerciseKey} exNum={currentStep.exNum} level={currentStep.level} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A7-3 relative addition/subtraction exercises */}
+      {currentStep?.kind === "a7_rel_arith" && (
+        <A7RelArithExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A7-4 relative multiplication/division exercises */}
+      {currentStep?.kind === "a7_rel_mul_div" && (
+        <A7RelMulDivExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}
@@ -1249,18 +1438,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         );
       })()}
 
-      {/* Fixed bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      {/* Fixed bottom nav — hidden on eval_start announcement */}
+      {currentStep?.kind !== "eval_start" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            {currentStep?.kind !== "eval_start" ? (
-              <button type="button" onClick={goBack}
-                disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
-                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
-                Retour
-              </button>
-            ) : <span />}
+            <button type="button" onClick={goBack}
+              disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+              Retour
+            </button>
 
             {isExercise ? (
               <div className="flex items-center gap-2">
@@ -1277,21 +1464,19 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               </div>
             ) : <span />}
 
-            {currentStep?.kind !== "eval_start" && (
-              <button type="button" onClick={goNext}
-                disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
-                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-                {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
-                  <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
-                ) : (
-                  <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
-                )}
-              </button>
-            )}
+            <button type="button" onClick={goNext}
+              disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
+              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
+                <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+              ) : (
+                <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+              )}
+            </button>
           </div>
         </div>
         <div style={{ height: 68 }} />
-      </div>
+      </div>}
     </div>
   );
 }

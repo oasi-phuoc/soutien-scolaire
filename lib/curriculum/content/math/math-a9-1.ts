@@ -12,50 +12,76 @@ export const MATH_A9_1_LESSON: MathSubmoduleLesson = {
         ti: "ተለዋዋጢ ቁጽርን ዘይፍለጥ ቁጽርን",
         uk: "Змінна і невідома",
       },
-      paragraphs: {
-        fr: [
-          "En algèbre, une lettre peut représenter un nombre. On l'appelle une variable ou une inconnue selon le contexte.",
-          "Une variable représente un nombre qui peut changer (ex. : x désigne la longueur d'un rectangle). Une inconnue est un nombre fixe mais inconnu à trouver.",
-          "Exemple : dans l'expression 3x + 5, x est la variable. Si on cherche x tel que 3x + 5 = 20, x est une inconnue.",
-          "Convention : on utilise souvent les lettres x, y, z pour les variables et a, b, c pour les constantes.",
-        ],
-        en: [
-          "In algebra, a letter can represent a number. It is called a variable or an unknown depending on context.",
-          "A variable is a number that can change (e.g., x is the length of a rectangle). An unknown is a fixed but unknown number to find.",
-          "Example: in 3x + 5, x is the variable. If we look for x such that 3x + 5 = 20, x is an unknown.",
-          "Convention: x, y, z are used for variables; a, b, c for constants.",
-        ],
-        ar: [
-          "في الجبر، تُمثل الحرف عدداً. يُسمى متغيراً أو مجهولاً حسب السياق.",
-          "المتغير عدد يمكن أن يتغير. المجهول عدد ثابت لكن غير معروف.",
-          "مثال: في 3x + 5، x متغير. إذا بحثنا عن x بحيث 3x + 5 = 20، فـ x مجهول.",
-          "اصطلاح: x, y, z للمتغيرات؛ a, b, c للثوابت.",
-        ],
-        fa: [
-          "در جبر، یک حرف می‌تواند نشان‌دهنده یک عدد باشد. بسته به موقعیت متغیر یا مجهول نامیده می‌شود.",
-          "متغیر عددی است که می‌تواند تغییر کند. مجهول عددی ثابت اما ناشناخته است.",
-          "مثال: در 3x + 5، x متغیر است. اگر دنبال x بگردیم که 3x + 5 = 20، x مجهول است.",
-          "قرارداد: x, y, z برای متغیرها؛ a, b, c برای ثابت‌ها.",
-        ],
-        ti: [
-          "ኣልጀብራ ሓደ ፊደል ቁጽሪ ዘርኢ ክኸውን ይኽእል ዩ. ሰምዩ ተለዋዋጢ ወይ ዘይፍለጥ ይብሃሉ.",
-          "ተለዋዋጢ ዝለዋወጥ ቁጽሪ ዩ. ዘይፍለጥ ቁጽሪ ወሰን ዘለዎ ግን ዘይፍለጥ ቁጽሪ ዩ.",
-          "ምሳሌ: 3x + 5 ዘሎ x ተለዋዋጢ ዩ. 3x + 5 = 20 ምስ ዝኸውን x ዘይፍለጥ ዩ.",
-          "ስምምዕ: x, y, z ንተለዋዋጢ; a, b, c ንቋሚ.",
-        ],
-        uk: [
-          "В алгебрі буква може позначати число. Залежно від контексту її називають змінною або невідомою.",
-          "Змінна — число, що може змінюватися. Невідома — фіксоване, але невідоме число.",
-          "Приклад: у виразі 3x + 5, x — змінна. Якщо шукаємо x таке, що 3x + 5 = 20, x — невідома.",
-          "Угода: x, y, z для змінних; a, b, c для сталих.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Les lettres en algèbre",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "En algèbre, une lettre peut représenter un nombre. On l'appelle une **variable** ou une **inconnue** selon le contexte.",
+        },
+        {
+          type: "table",
+          headersFr: ["Terme", "Définition", "Exemple"],
+          accentHeader: true,
+          rows: [
+            ["Variable", "Nombre qui peut changer de valeur", "x = longueur d'un rectangle"],
+            ["Inconnue", "Nombre fixe mais inconnu, à trouver", "x dans 3x **+** 5 = 20"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Différence entre variable et inconnue",
+          black: true,
+        },
+        {
+          type: "highlight",
+          fr: "Variable",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "Dans l'expression 3x **+** 5, x est une **variable** : elle peut prendre n'importe quelle valeur.",
+            "On peut calculer la valeur de l'expression pour différentes valeurs de x.",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Inconnue",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "Dans l'équation 3x **+** 5 = 20, x est une **inconnue** : il y a une valeur précise à trouver.",
+            "Ici, x = 5 est la seule valeur qui vérifie l'équation.",
+          ],
+        },
+        {
+          type: "rule",
+          titleFr: "Convention d'écriture",
+          itemsFr: [
+            "x, y, z → utilisés pour les variables et inconnues",
+            "a, b, c → utilisés pour les constantes (valeurs fixes connues)",
+          ],
+        },
+      ],
     },
-    exercises: [
-      { id: "a9-1-e1", promptFr: "Dans 2y + 7, quelle est la variable ?", type: "short_text", acceptable: ["y"] },
-      { id: "a9-1-e2", promptFr: "Si a = 4, calcule 3a.", type: "number", acceptable: ["12"] },
-      { id: "a9-1-e3", promptFr: "Si x = 5, calcule 2x + 1.", type: "number", acceptable: ["11"] },
-      { id: "a9-1-e4", promptFr: "Dans l'équation 4x = 20, x est-il une variable ou une inconnue ? (réponse : 'variable' ou 'inconnue')", type: "short_text", acceptable: ["inconnue"] },
-      { id: "a9-1-e5", promptFr: "Si n = 3, calcule n² − 1.", type: "number", acceptable: ["8"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a9-1-ep01", promptFr: "Calcule 3x pour x = 4.", type: "number", acceptable: ["12"] },
+      { id: "a9-1-ep02", promptFr: "Calcule 2a + 1 pour a = 5.", type: "number", acceptable: ["11"] },
+      { id: "a9-1-ep03", promptFr: "Calcule 5n − 3 pour n = 2.", type: "number", acceptable: ["7"] },
+      { id: "a9-1-ep04", promptFr: "Calcule x² pour x = 3.", type: "number", acceptable: ["9"] },
+      { id: "a9-1-ep05", promptFr: "Calcule 4y pour y = 7.", type: "number", acceptable: ["28"] },
+      { id: "a9-1-ep06", promptFr: "Calcule 3m + 2 pour m = 0.", type: "number", acceptable: ["2"] },
+      { id: "a9-1-ep07", promptFr: "Calcule 6t pour t = 5.", type: "number", acceptable: ["30"] },
+      { id: "a9-1-ep08", promptFr: "Calcule n² + 1 pour n = 4.", type: "number", acceptable: ["17"] },
+      { id: "a9-1-ep09", promptFr: "Calcule 2x − 3 pour x = 5.", type: "number", acceptable: ["7"] },
+      { id: "a9-1-ep10", promptFr: "Calcule 8 − 2k pour k = 3.", type: "number", acceptable: ["2"] },
     ],
+    poolSize: 5,
   };

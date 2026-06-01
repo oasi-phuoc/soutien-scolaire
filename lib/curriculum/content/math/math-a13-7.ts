@@ -12,50 +12,93 @@ export const MATH_A13_7_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ስዕሊ ምንባብ",
         uk: "Читання графіків",
       },
-      paragraphs: {
-        fr: [
-          "La lecture graphique permet d'extraire des informations à partir d'une courbe sans calcul : trouver f(x) pour un x donné, trouver x tel que f(x) = k, identifier croissance/décroissance.",
-          "Trouver f(a) : partir de a sur l'axe x, monter jusqu'à la courbe, lire la valeur sur l'axe y.",
-          "Trouver x tel que f(x) = k : partir de k sur l'axe y, aller horizontalement jusqu'à la courbe, lire la valeur sur l'axe x.",
-          "Identifier les intersections : la courbe coupe l'axe x (f(x) = 0 : racines) ; la courbe coupe l'axe y (ordonnée à l'origine).",
-        ],
-        en: [
-          "Reading a graph lets you extract information without calculation: find f(x) for a given x, find x such that f(x) = k, identify increase/decrease.",
-          "Find f(a): from a on x-axis, go up to the curve, read y.",
-          "Find x when f(x) = k: from k on y-axis, go horizontally to curve, read x.",
-          "Intersections: curve crosses x-axis → roots (f(x) = 0); crosses y-axis → y-intercept.",
-        ],
-        ar: [
-          "قراءة الرسم البياني تستخرج معلومات دون حساب: إيجاد f(x)، x بحيث f(x) = k، تحديد التزايد/التناقص.",
-          "إيجاد f(a): من a على محور x اصعد حتى المنحنى اقرأ y.",
-          "إيجاد x عند f(x) = k: من k على محور y انتقل أفقياً حتى المنحنى اقرأ x.",
-          "تقاطع مع المحور x → جذور؛ مع المحور y → نقطة القطع.",
-        ],
-        fa: [
-          "خواندن نمودار بدون محاسبه اطلاعات استخراج می‌کند: یافتن f(x)، x چنان که f(x) = k، تشخیص صعود/نزول.",
-          "یافتن f(a): از a روی محور x بالا برو تا منحنی، y را بخوان.",
-          "یافتن x وقتی f(x) = k: از k روی محور y افقی برو تا منحنی، x را بخوان.",
-          "تقاطع با محور x → ریشه‌ها؛ با محور y → عرض از مبدأ.",
-        ],
-        ti: [
-          "ናይ ስዕሊ ምንባብ ብዘይ ስሌት ሓበሬታ ምምጻእ ዩ: f(x) ምርካብ, x ብ f(x) = k, ምዕባይ/ምቕናስ ምፍላጥ.",
-          "f(a) ምርካብ: ካብ a ናብ x ሕርሚ ናብ ስዕሊ ምሓዝ y ምንባብ.",
-          "f(x) = k ናይ x ምርካብ: ካብ k ናብ y ሕርሚ ናብ ስዕሊ ምሓዝ x ምንባብ.",
-          "ስዕሊ ምስ x ሕርሚ ዝቆርጽ → ሓቂ; ምስ y ሕርሚ → ምቁራጽ.",
-        ],
-        uk: [
-          "Читання графіка дозволяє отримувати інформацію без обчислень: знайти f(x), x таке, що f(x) = k, визначити зростання/спадання.",
-          "Знайти f(a): з a на осі x піднятися до кривої, прочитати y.",
-          "Знайти x при f(x) = k: з k на осі y провести горизонталь до кривої, прочитати x.",
-          "Перетин з віссю x → нулі (корені); з віссю y → початкова ордината.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Lire un graphique sans calculer",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "La lecture graphique permet d'extraire des informations directement depuis une courbe, sans effectuer de calcul algébrique.",
+        },
+        {
+          type: "heading",
+          fr: "Deux opérations fondamentales",
+          black: true,
+        },
+        {
+          type: "highlight",
+          fr: "Trouver f(a) : image d'un x donné",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "1. Repérer la valeur a sur l'axe x",
+            "2. Monter verticalement jusqu'à la courbe",
+            "3. Lire la valeur y correspondante sur l'axe y",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Trouver x tel que f(x) = k",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "1. Repérer la valeur k sur l'axe y",
+            "2. Aller horizontalement jusqu'à la courbe",
+            "3. Lire la valeur x correspondante sur l'axe x",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Identifier les points clés d'un graphique",
+          black: true,
+        },
+        {
+          type: "table",
+          headersFr: ["Point / Intersection", "Signification", "Méthode de lecture"],
+          accentHeader: true,
+          rows: [
+            ["Intersection avec axe x", "f(x) = 0 (racines/zéros)", "Lire x quand la courbe croise l'axe x"],
+            ["Intersection avec axe y", "Ordonnée à l'origine (x = 0)", "Lire y quand la courbe croise l'axe y"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Croissance et décroissance",
+          black: true,
+        },
+        {
+          type: "bullets",
+          labelFr: "Sur un graphique :",
+          itemsFr: [
+            "**Croissante** : la courbe monte de gauche à droite (y augmente quand x augmente)",
+            "**Décroissante** : la courbe descend de gauche à droite (y diminue quand x augmente)",
+            "**Constante** : la courbe est horizontale (y ne change pas)",
+          ],
+        },
+        {
+          type: "example",
+          fr: "f(x) = 2x + 1\n• f(3) = ? → monter depuis x=3 jusqu'à la droite → lire y = 7\n• f(x) = 5 pour x = ? → partir de y=5 → aller jusqu'à la droite → lire x = 2\n• Intersection avec axe x : f(x) = 0 → x = −0,5",
+        },
+      ],
     },
-    exercises: [
-      { id: "a13-7-e1", promptFr: "Sur le graphique de f(x) = 2x + 1, quelle est la valeur de y quand x = 3 ?", type: "number", acceptable: ["7"] },
-      { id: "a13-7-e2", promptFr: "Sur le graphique de f(x) = 2x + 1, pour quelle valeur de x obtient-on y = 5 ?", type: "number", acceptable: ["2"] },
-      { id: "a13-7-e3", promptFr: "La droite f(x) = 3x − 6 coupe l'axe x en quel point ? (donne x)", type: "number", acceptable: ["2"] },
-      { id: "a13-7-e4", promptFr: "La droite f(x) = x + 4 coupe l'axe y en quel point ? (donne y)", type: "number", acceptable: ["4"] },
-      { id: "a13-7-e5", promptFr: "La fonction f(x) = −x + 5 est-elle croissante ou décroissante ? (croissante/décroissante)", type: "short_text", acceptable: ["décroissante", "decroissante"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a13-7-ep01", promptFr: "f(x) = 2x + 1. Calcule f(3).", type: "number", acceptable: ["7"] },
+      { id: "a13-7-ep02", promptFr: "f(x) = 2x + 1. Pour quelle valeur de x est-ce que f(x) = 5 ?", type: "number", acceptable: ["2"] },
+      { id: "a13-7-ep03", promptFr: "f(x) = 3x − 6. Quelle est l'abscisse à l'origine (f(x) = 0) ?", type: "number", acceptable: ["2"] },
+      { id: "a13-7-ep04", promptFr: "f(x) = x + 4. Pour quelle valeur de x est-ce que f(x) = 9 ?", type: "number", acceptable: ["5"] },
+      { id: "a13-7-ep05", promptFr: "f(x) = 2x − 4. Quelle est l'abscisse à l'origine ?", type: "number", acceptable: ["2"] },
+      { id: "a13-7-ep06", promptFr: "f(x) = −x + 6. Pour quelle valeur de x est-ce que f(x) = 0 ?", type: "number", acceptable: ["6"] },
+      { id: "a13-7-ep07", promptFr: "f(x) = 4x + 4. Quelle est l'ordonnée à l'origine ?", type: "number", acceptable: ["4"] },
+      { id: "a13-7-ep08", promptFr: "f(x) = 3x + 3. Pour quelle valeur de x est-ce que f(x) = 12 ?", type: "number", acceptable: ["3"] },
+      { id: "a13-7-ep09", promptFr: "f(x) = −2x + 8. Pour quelle valeur de x est-ce que f(x) = 0 ?", type: "number", acceptable: ["4"] },
+      { id: "a13-7-ep10", promptFr: "f(x) = 5x − 10. Quelle est l'abscisse à l'origine ?", type: "number", acceptable: ["2"] },
     ],
+    poolSize: 5,
   };

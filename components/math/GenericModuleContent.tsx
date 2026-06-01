@@ -13,6 +13,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
+import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
@@ -136,7 +137,20 @@ type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
 type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
 type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep;
+// A5.2 decimal sequence types (numbers stored as hundredths: integer * 100)
+type DecOrderingQ = { hundredths: number[] };
+type DecOrderingConfig = { questions: DecOrderingQ[]; direction: "asc"|"desc"; exNum: number };
+type DecOrderingStep = { kind: "dec_ordering"; lesson: MathSubmoduleLesson; config: DecOrderingConfig };
+
+type DecSeqRuleQ = { nums: number[]; step: number; op: "+"|"-" };
+type DecSeqRuleConfig = { questions: DecSeqRuleQ[]; exNum: number };
+type DecSeqRuleStep = { kind: "dec_seq_rule"; lesson: MathSubmoduleLesson; config: DecSeqRuleConfig };
+
+type DecSeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
+type DecSeqCompleteConfig = { questions: DecSeqCompleteQ[]; exNum: number };
+type DecSeqCompleteStep = { kind: "dec_seq_complete"; lesson: MathSubmoduleLesson; config: DecSeqCompleteConfig };
+
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -144,6 +158,19 @@ type ComparisonConfig = { questions: ComparisonQ[]; level: 1 | 2 };
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function fmtDec(h: number): string {
+  const whole = Math.floor(h / 100);
+  const frac = h % 100;
+  if (frac === 0) return `${whole}`;
+  if (frac % 10 === 0) return `${whole},${frac / 10}`;
+  return `${whole},${String(frac).padStart(2, "0")}`;
+}
+
+function parseDec(s: string): number {
+  const n = parseFloat(s.replace(",", "."));
+  return isNaN(n) ? NaN : Math.round(n * 100);
 }
 
 function genComparisonConfig(level: 1 | 2): ComparisonConfig {
@@ -786,6 +813,53 @@ function genSeqComplete(range: [number, number], exNum: number, count: number, b
   return { questions, exNum };
 }
 
+function genDecOrdering(direction: "asc"|"desc", exNum: number): DecOrderingConfig {
+  const questions: DecOrderingQ[] = Array.from({ length: 2 }, () => {
+    const nums = new Set<number>();
+    while (nums.size < 4) nums.add(rnd(100, 2500));
+    return { hundredths: [...nums] };
+  });
+  return { questions, direction, exNum };
+}
+
+const DEC_STEPS = [10, 25, 50, 75, 100, 125, 150, 200, 250];
+
+function genDecSeqRule(exNum: number, count = 5, termCount = 4): DecSeqRuleConfig {
+  const questions: DecSeqRuleQ[] = Array.from({ length: count }, () => {
+    const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
+    const start = rnd(startMin, startMin + 1500);
+    const nums = Array.from({ length: termCount }, (_, k) =>
+      op === "+" ? start + k * step : start - k * step
+    );
+    return { nums, step, op };
+  });
+  return { questions, exNum };
+}
+
+function genDecSeqComplete(exNum: number, count: number, blanks: number, termCount = 5): DecSeqCompleteConfig {
+  const questions: DecSeqCompleteQ[] = Array.from({ length: count }, () => {
+    const step = DEC_STEPS[rnd(0, DEC_STEPS.length - 1)]!;
+    const op: "+"|"-" = Math.random() < 0.5 ? "+" : "-";
+    const b = blanks < 0 ? rnd(2, 3) : blanks;
+    const startMin = op === "-" ? (termCount - 1) * step + 50 : 50;
+    const start = rnd(startMin, startMin + 1500);
+    const allNums = Array.from({ length: termCount }, (_, i) =>
+      op === "+" ? start + i * step : start - i * step
+    );
+    const available = Array.from({ length: termCount - 1 }, (_, i) => i + 1);
+    const blankIdxs: number[] = [];
+    while (blankIdxs.length < b && available.length > 0) {
+      const idx = rnd(0, available.length - 1);
+      blankIdxs.push(available[idx]!);
+      available.splice(idx, 1);
+    }
+    return { allNums, blankIdxs: blankIdxs.sort((a, b) => a - b), step };
+  });
+  return { questions, exNum };
+}
+
 // ── Column grid generators ────────────────────────────────────────────────────
 function getD4(n: number): [number, number, number, number] {
   return [Math.floor(n / 1000) % 10, Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
@@ -919,7 +993,7 @@ function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOp
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
 function ArithmeticGroupExercise({
-  config, answers, validated, results, onChange, onTimerExpired, consigne,
+  config, answers, validated, results, onChange, onTimerExpired, onTimeUpdate, hideTimerDisplay, consigne,
 }: {
   config: ArithGroupConfig;
   answers: string[];
@@ -927,6 +1001,8 @@ function ArithmeticGroupExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
   onTimerExpired?: () => void;
+  onTimeUpdate?: (t: number) => void;
+  hideTimerDisplay?: boolean;
   consigne?: string;
 }) {
   const [timeLeft, setTimeLeft] = useState<number | null>(() =>
@@ -934,18 +1010,22 @@ function ArithmeticGroupExercise({
   );
   const onTimerExpiredRef = useRef(onTimerExpired);
   onTimerExpiredRef.current = onTimerExpired;
+  const onTimeUpdateRef = useRef(onTimeUpdate);
+  onTimeUpdateRef.current = onTimeUpdate;
 
   useEffect(() => {
     if (config.timer === undefined || validated) return;
     setTimeLeft(config.timer);
+    onTimeUpdateRef.current?.(config.timer);
     const id = setInterval(() => {
       setTimeLeft(prev => {
-        if (prev === null || prev <= 1) {
+        const next = prev === null || prev <= 1 ? 0 : prev - 1;
+        if (next === 0) {
           clearInterval(id);
           onTimerExpiredRef.current?.();
-          return 0;
         }
-        return prev - 1;
+        onTimeUpdateRef.current?.(next);
+        return next;
       });
     }, 1000);
     return () => clearInterval(id);
@@ -965,7 +1045,7 @@ function ArithmeticGroupExercise({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-        {config.timer !== undefined && (
+        {config.timer !== undefined && !hideTimerDisplay && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
               ? timeLeft <= 15
@@ -2126,8 +2206,21 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
+    } else if (sid === "A5-2") {
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
+      steps.push({ kind: "eval_start", lesson });
+      const ascFirst52 = Math.random() < 0.5;
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
     } else {
-      if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5") {
+      if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5" && sid !== "A5-2") {
         const pool = lesson.exercisePool;
         const size = lesson.poolSize ?? 5;
         const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
@@ -2139,7 +2232,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
-    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5"
+    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
+    l.submoduleId === "A5-2"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -3101,6 +3195,9 @@ export function GenericModuleContent({
   const [orderingOverrideConfigs, setOrderingOverrideConfigs] = useState<Record<number, OrderingConfig>>({});
   const [seqRuleOverrideConfigs, setSeqRuleOverrideConfigs] = useState<Record<number, SeqRuleConfig>>({});
   const [seqCompleteOverrideConfigs, setSeqCompleteOverrideConfigs] = useState<Record<number, SeqCompleteConfig>>({});
+  const [decOrderingOverrideConfigs, setDecOrderingOverrideConfigs] = useState<Record<number, DecOrderingConfig>>({});
+  const [decSeqRuleOverrideConfigs, setDecSeqRuleOverrideConfigs] = useState<Record<number, DecSeqRuleConfig>>({});
+  const [decSeqCompleteOverrideConfigs, setDecSeqCompleteOverrideConfigs] = useState<Record<number, DecSeqCompleteConfig>>({});
   const [roundingResetKey, setRoundingResetKey] = useState(0);
 
   // Fraction exercise state
@@ -3183,6 +3280,21 @@ export function GenericModuleContent({
   const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
   const [_seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
 
+  // A5.2 decimal sequence state
+  const [decOrderingSelected, setDecOrderingSelected] = useState<Array<number[]>>(() => [[], []]);
+  const [decOrderingValidated, setDecOrderingValidated] = useState(false);
+  const [decOrderingResults, setDecOrderingResults] = useState<boolean[]>(() => Array(2).fill(false));
+
+  const [decSeqRuleAnswers, setDecSeqRuleAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [decSeqRuleValidated, setDecSeqRuleValidated] = useState(false);
+  const [decSeqRuleResults, setDecSeqRuleResults] = useState<boolean[]>(() => Array(5).fill(false));
+
+  const [decSeqCompleteAnswers, setDecSeqCompleteAnswers] = useState<Array<string[]>>(() => Array(5).fill(null).map(()=>Array(4).fill("")));
+  const [decSeqCompleteValidated, setDecSeqCompleteValidated] = useState(false);
+
+  // Training timer (bubbled up from ArithmeticGroupExercise)
+  const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
+
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
@@ -3259,12 +3371,21 @@ export function GenericModuleContent({
     setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
     setSeqCompleteValidated(false);
     setSeqCompleteResults(Array(5).fill(false));
+    setDecOrderingSelected([[], []]);
+    setDecOrderingValidated(false);
+    setDecOrderingResults(Array(2).fill(false));
+    setDecSeqRuleAnswers(Array(5).fill(""));
+    setDecSeqRuleValidated(false);
+    setDecSeqRuleResults(Array(5).fill(false));
+    setDecSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+    setDecSeqCompleteValidated(false);
     setDivGridQuotientInputs(Array.from({ length: 3 }, () => Array(5).fill("")));
     setDivGridRemainderInputs(Array(3).fill(""));
     setDivGridOperandInputs(Array.from({ length: 3 }, () => [Array(6).fill(""), Array(2).fill("")]));
     setDivGridWorkInputs(emptyDivWork());
     setDivGridValidated(false);
     setDivGridResults(Array(3).fill(false));
+    setTrainingTimerLeft(null);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -3358,6 +3479,15 @@ export function GenericModuleContent({
     : null;
   const activeSeqCompleteConfig = currentStep?.kind === "seq_complete"
     ? (seqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDecOrderingConfig = currentStep?.kind === "dec_ordering"
+    ? (decOrderingOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDecSeqRuleConfig = currentStep?.kind === "dec_seq_rule"
+    ? (decSeqRuleOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDecSeqCompleteConfig = currentStep?.kind === "dec_seq_complete"
+    ? (decSeqCompleteOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
   const activeDivGridConfig = currentStep?.kind === "div_column_grid"
     ? (divGridOverrideConfigs[stepIdx] ?? currentStep.config)
@@ -3459,6 +3589,26 @@ export function GenericModuleContent({
         currentResults = currentStep.config.questions.map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
         });
+      } else if (currentStep.kind === "dec_ordering") {
+        currentResults = (activeDecOrderingConfig?.questions ?? []).map((q, qi) => {
+          const sel = decOrderingSelected[qi] ?? [];
+          const sorted = [...q.hundredths].sort((a,b) => (activeDecOrderingConfig?.direction === "asc" ? a-b : b-a));
+          return sel.length === q.hundredths.length && sel.every((n,i) => n === sorted[i]);
+        });
+      } else if (currentStep.kind === "dec_seq_rule") {
+        currentResults = (activeDecSeqRuleConfig?.questions ?? []).map((q, i) => {
+          const ans = decSeqRuleAnswers[i]?.trim() ?? "";
+          const correct = `${q.op}${fmtDec(q.step)}`;
+          const correctAlt = `${q.op}${fmtDec(q.step).replace(",",".")}`;
+          return ans === correct || ans === correctAlt;
+        });
+      } else if (currentStep.kind === "dec_seq_complete") {
+        currentResults = (activeDecSeqCompleteConfig?.questions ?? []).map((q, qi) => {
+          return q.blankIdxs.every((bi, ii) => {
+            const v = decSeqCompleteAnswers[qi]?.[ii] ?? "";
+            return parseDec(v) === q.allNums[bi];
+          });
+        });
       } else if (currentStep.kind === "div_column_grid") {
         const cfg = divGridOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = divGridResults.slice(0, cfg.questions.length);
@@ -3526,6 +3676,9 @@ export function GenericModuleContent({
                 : es?.kind === "ordering" ? "Classement"
                 : es?.kind === "seq_rule" ? "Règle de la suite"
                 : es?.kind === "seq_complete" ? "Compléter la suite"
+                : es?.kind === "dec_ordering" ? "Classement décimaux"
+                : es?.kind === "dec_seq_rule" ? "Règle de la suite décimale"
+                : es?.kind === "dec_seq_complete" ? "Compléter la suite décimale"
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
                 : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
                 : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication à 2 chiffres (guidée)" : "Multiplication à 2 chiffres")
@@ -3573,7 +3726,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -3971,6 +4124,57 @@ export function GenericModuleContent({
     };
   }
 
+  if (currentStep?.kind === "dec_ordering" && activeDecOrderingConfig) {
+    stepCanValidate = !decOrderingValidated;
+    stepValidate = decOrderingValidated ? () => {} : () => {
+      const results = activeDecOrderingConfig.questions.map((q, qi) => {
+        const sel = decOrderingSelected[qi] ?? [];
+        const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
+        return sel.length === q.hundredths.length && sel.every((n,i) => n === sorted[i]);
+      });
+      setDecOrderingResults(results);
+      setDecOrderingValidated(true);
+    };
+    stepReset = () => {
+      setDecOrderingOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecOrdering(currentStep.config.direction, currentStep.config.exNum) }));
+      setDecOrderingSelected([[], []]);
+      setDecOrderingValidated(false);
+      setDecOrderingResults(Array(2).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig) {
+    stepCanValidate = !decSeqRuleValidated;
+    stepValidate = decSeqRuleValidated ? () => {} : () => {
+      const results = activeDecSeqRuleConfig.questions.map((q, i) => {
+        const ans = decSeqRuleAnswers[i]?.trim() ?? "";
+        const correct = `${q.op}${fmtDec(q.step)}`;
+        const correctAlt = `${q.op}${fmtDec(q.step).replace(",",".")}`;
+        return ans === correct || ans === correctAlt;
+      });
+      setDecSeqRuleResults(results);
+      setDecSeqRuleValidated(true);
+    };
+    stepReset = () => {
+      setDecSeqRuleOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecSeqRule(currentStep.config.exNum, activeDecSeqRuleConfig.questions.length) }));
+      setDecSeqRuleAnswers(Array(5).fill(""));
+      setDecSeqRuleValidated(false);
+      setDecSeqRuleResults(Array(5).fill(false));
+    };
+  }
+
+  if (currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig) {
+    stepCanValidate = !decSeqCompleteValidated;
+    stepValidate = decSeqCompleteValidated ? () => {} : () => {
+      setDecSeqCompleteValidated(true);
+    };
+    stepReset = () => {
+      setDecSeqCompleteOverrideConfigs(prev => ({ ...prev, [stepIdx]: genDecSeqComplete(currentStep.config.exNum, activeDecSeqCompleteConfig.questions.length, -1) }));
+      setDecSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
+      setDecSeqCompleteValidated(false);
+    };
+  }
+
   if (!lessons || lessons.length === 0 || steps.length === 0) {
     return (
       <p className="text-sm text-[var(--color-text-secondary)]">
@@ -4008,20 +4212,11 @@ export function GenericModuleContent({
 
       {/* Main progress bar — training steps only */}
       {!inEvalPhase && (
-        <div className="mb-6 flex gap-1">
-          {trainingSteps.map((_, i) => (
-            <div
-              key={i}
-              className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i < trainingStepIdx
-                  ? "bg-[var(--color-accent-alg)]"
-                  : i === trainingStepIdx
-                    ? "bg-[var(--color-accent-alg)] opacity-60"
-                    : "bg-[var(--color-border-default)]"
-              }`}
-            />
-          ))}
-        </div>
+        <TrainingProgressBar
+          current={trainingStepIdx}
+          total={trainingSteps.length}
+          timeLeft={trainingTimerLeft}
+        />
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
@@ -4442,6 +4637,165 @@ export function GenericModuleContent({
         </div>
       )}
 
+      {/* Decimal ordering exercise (A5.2) */}
+      {currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Classez les nombres dans l&apos;ordre {activeDecOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
+          </p>
+          <div className="space-y-6">
+            {activeDecOrderingConfig.questions.map((q, qi) => {
+              const sel = decOrderingSelected[qi] ?? [];
+              const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
+              const ok = decOrderingValidated ? decOrderingResults[qi] : null;
+              const sep = activeDecOrderingConfig.direction === "asc" ? "<" : ">";
+              return (
+                <div key={qi} className="space-y-2">
+                  <div className="flex flex-wrap gap-2">
+                    {q.hundredths.map((n, ni) => {
+                      const isSelected = sel.includes(n);
+                      const selIdx = sel.indexOf(n);
+                      let cls = "flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
+                      if (!decOrderingValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+                      } else {
+                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        else if (isSelected) cls += CLS_WRONG;
+                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                      }
+                      return (
+                        <button key={ni} type="button" disabled={decOrderingValidated}
+                          onClick={() => {
+                            setDecOrderingSelected(prev => {
+                              const next = prev.map(a => [...a]);
+                              const cur = next[qi] ?? [];
+                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
+                              else { next[qi] = [...cur, n]; }
+                              return next;
+                            });
+                          }}
+                          className={cls}>
+                          {fmtDec(n)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="space-y-0.5">
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
+                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
+                      {sel.length > 0 ? sel.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                        </Fragment>
+                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                    </div>
+                  </div>
+                  {decOrderingValidated && ok === false && (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
+                      {sorted.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-amber-700">{fmtDec(n)}</span>
+                          {si < sorted.length - 1 && <span className="text-amber-500 text-xs">{sep}</span>}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Decimal sequence rule exercise (A5.2) */}
+      {currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
+          <div className="space-y-4">
+            {activeDecSeqRuleConfig.questions.map((q, i) => {
+              const v = decSeqRuleAnswers[i] ?? "";
+              const ok = decSeqRuleValidated ? decSeqRuleResults[i] : null;
+              const wrong = ok === false;
+              const correctAns = `${q.op}${fmtDec(q.step)}`;
+              const inputRowCls = "w-28 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
+              return (
+                <div key={i} className="flex flex-wrap items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {q.nums.map((n, ni) => (
+                    <span key={ni} className="shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-3 py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                  ))}
+                  {wrong ? (
+                    <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
+                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                      <span className="text-xs font-bold">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={v} disabled={decSeqRuleValidated}
+                      onChange={e => setDecSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      placeholder="±0,00"
+                      className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* Decimal sequence complete exercise (A5.2) */}
+      {currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
+          <div className="space-y-5">
+            {activeDecSeqCompleteConfig.questions.map((q, qi) => {
+              let blankCounter = 0;
+              return (
+                <div key={qi} className="space-y-2">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {q.allNums.map((n, ni) => {
+                      const blankIdx = q.blankIdxs.indexOf(ni);
+                      if (blankIdx !== -1) {
+                        const bIdx = blankCounter++;
+                        const v = decSeqCompleteAnswers[qi]?.[bIdx] ?? "";
+                        const expected = q.allNums[ni]!;
+                        const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
+                        const inputCls = "w-[72px] shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors";
+                        return wrong ? (
+                          <div key={ni} className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
+                            <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
+                            <span className="text-xs font-bold">{fmtDec(expected)}</span>
+                          </div>
+                        ) : (
+                          <input key={ni} type="text" inputMode="decimal" value={v} disabled={decSeqCompleteValidated}
+                            onChange={e => setDecSeqCompleteAnswers(prev => {
+                              const next = prev.map(r => [...r]);
+                              if (!next[qi]) next[qi] = [];
+                              next[qi]![bIdx] = e.target.value;
+                              return next;
+                            })}
+                            className={`${inputCls} ${decSeqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                        );
+                      }
+                      return (
+                        <span key={ni} className="w-[72px] shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Comparison exercise */}
       {currentStep?.kind === "comparison_ex" && activeCompConfig && (
         <ComparisonExercise
@@ -4471,6 +4825,8 @@ export function GenericModuleContent({
           results={arithResults}
           onChange={(i, val) => setArithAnswers(prev => prev.map((a, j) => j === i ? val : a))}
           onTimerExpired={stepValidate}
+          hideTimerDisplay={!isInEvalPhase}
+          onTimeUpdate={!isInEvalPhase ? (t) => setTrainingTimerLeft(t) : undefined}
           consigne={
             activeArithConfig.missingOperand
               ? "Trouvez la valeur manquante."

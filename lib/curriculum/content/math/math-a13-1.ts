@@ -12,50 +12,79 @@ export const MATH_A13_1_LESSON: MathSubmoduleLesson = {
         ti: "ናይ ስራሕ ሓሳብ",
         uk: "Поняття функції",
       },
-      paragraphs: {
-        fr: [
-          "Une fonction est une règle qui associe à chaque valeur d'entrée x une et une seule valeur de sortie y. On note f(x) = expression en x.",
-          "Exemple : f(x) = 2x + 3. Pour x = 4 : f(4) = 2 × 4 + 3 = 11. L'image de 4 par f est 11.",
-          "Vocabulaire : l'ensemble des valeurs d'entrée est le domaine (ou ensemble de départ). La valeur f(x) s'appelle l'image de x.",
-          "Représentation : une fonction peut être représentée par un tableau de valeurs, une formule, ou un graphique.",
-        ],
-        en: [
-          "A function is a rule that assigns exactly one output y to each input x. Written f(x) = expression in x.",
-          "Example: f(x) = 2x + 3. For x = 4: f(4) = 11. The image of 4 under f is 11.",
-          "Vocabulary: the set of inputs is the domain. f(x) is called the image of x.",
-          "A function can be represented by a table of values, a formula, or a graph.",
-        ],
-        ar: [
-          "الدالة قاعدة تربط كل قيمة إدخال x بقيمة إخراج واحدة. تُكتب f(x).",
-          "مثال: f(x) = 2x + 3. لـ x = 4: f(4) = 11. صورة 4 بالدالة f هي 11.",
-          "المفردات: مجموعة الإدخالات تُسمى المجال. f(x) تُسمى صورة x.",
-          "يمكن تمثيل الدالة بجدول قيم أو صيغة أو رسم بياني.",
-        ],
-        fa: [
-          "تابع قانونی است که به هر مقدار ورودی x دقیقاً یک خروجی y نسبت می‌دهد. نوشته می‌شود f(x).",
-          "مثال: f(x) = 2x + 3. برای x = 4: f(4) = 11. تصویر 4 تحت f برابر 11 است.",
-          "واژگان: مجموعه ورودی‌ها دامنه نامیده می‌شود. f(x) تصویر x نامیده می‌شود.",
-          "تابع را می‌توان با جدول مقادیر، فرمول، یا نمودار نشان داد.",
-        ],
-        ti: [
-          "ናይ ስራሕ ሕጊ ሓደ x ናብ ሓደ y ናይ ምምዳብ ሕጊ ዩ. ይጸሓፍ f(x).",
-          "ምሳሌ: f(x) = 2x + 3. ምስ x = 4: f(4) = 11. ናይ 4 ናይ f ምስሊ 11 ዩ.",
-          "ቃለ-ቃለ: ናይ ኣጸያፊ ቁጽርታት ዝርዝር ዶሜን ዩ ይብሃሉ. f(x) ናይ x ምስሊ ዩ.",
-          "ናይ ስራሕ ምስ ናይ ዋጋ ሰሌዳ ወይ ቅጥዒ ወይ ስዕሊ ምርኣይ ዝከኣሉ ዩ.",
-        ],
-        uk: [
-          "Функція — це правило, що кожному значенню входу x відповідає рівно одне значення виходу y. Записується f(x).",
-          "Приклад: f(x) = 2x + 3. При x = 4: f(4) = 11. Образ числа 4 при f дорівнює 11.",
-          "Словник: множина входів — область визначення. f(x) — образ x.",
-          "Функцію можна задати таблицею значень, формулою або графіком.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Qu'est-ce qu'une fonction ?",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "Une fonction est une règle qui associe à chaque valeur d'entrée x **une et une seule** valeur de sortie y. On note f(x) = expression en x.",
+        },
+        {
+          type: "rule",
+          titleFr: "Vocabulaire essentiel",
+          itemsFr: [
+            "**x** = valeur d'entrée (antécédent)",
+            "**f(x)** = valeur de sortie (image de x)",
+            "**Domaine** = ensemble des valeurs d'entrée autorisées",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Comment utiliser une fonction",
+          black: true,
+        },
+        {
+          type: "highlight",
+          fr: "Calculer f(x) pour une valeur donnée",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "f(x) = 2x **+** 3",
+            "Pour x = 4 : f(4) = 2 × 4 **+** 3 = 8 **+** 3 = **11**",
+            "On dit : « l'image de 4 par f est 11 »",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Formes de représentation",
+          black: true,
+        },
+        {
+          type: "bullets",
+          labelFr: "Une fonction peut être représentée par :",
+          itemsFr: [
+            "Une **formule** : f(x) = 2x **+** 3",
+            "Un **tableau de valeurs** : liste de couples (x, f(x))",
+            "Un **graphique** : courbe dans un repère cartésien",
+          ],
+        },
+        {
+          type: "table",
+          headersFr: ["x", "0", "1", "2", "3", "4"],
+          accentHeader: true,
+          rows: [
+            ["f(x) = 2x **+** 3", "3", "5", "7", "9", "11"],
+          ],
+        },
+      ],
     },
-    exercises: [
-      { id: "a13-1-e1", promptFr: "Pour f(x) = 3x − 1, calcule f(2).", type: "number", acceptable: ["5"] },
-      { id: "a13-1-e2", promptFr: "Pour f(x) = x² + 1, calcule f(3).", type: "number", acceptable: ["10"] },
-      { id: "a13-1-e3", promptFr: "Pour g(x) = 4x, calcule g(5).", type: "number", acceptable: ["20"] },
-      { id: "a13-1-e4", promptFr: "Si f(x) = 2x + 1 et f(a) = 9, quelle est la valeur de a ?", type: "number", acceptable: ["4"] },
-      { id: "a13-1-e5", promptFr: "Pour h(x) = −x + 7, calcule h(3).", type: "number", acceptable: ["4"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a13-1-ep01", promptFr: "f(x) = 2x + 1. Calcule f(3).", type: "number", acceptable: ["7"] },
+      { id: "a13-1-ep02", promptFr: "f(x) = 3x − 2. Calcule f(4).", type: "number", acceptable: ["10"] },
+      { id: "a13-1-ep03", promptFr: "f(x) = x². Calcule f(5).", type: "number", acceptable: ["25"] },
+      { id: "a13-1-ep04", promptFr: "f(x) = 2x + 3. Calcule f(0).", type: "number", acceptable: ["3"] },
+      { id: "a13-1-ep05", promptFr: "f(x) = x + 4. Calcule f(7).", type: "number", acceptable: ["11"] },
+      { id: "a13-1-ep06", promptFr: "f(x) = 4x − 5. Calcule f(3).", type: "number", acceptable: ["7"] },
+      { id: "a13-1-ep07", promptFr: "f(x) = x² + 1. Calcule f(4).", type: "number", acceptable: ["17"] },
+      { id: "a13-1-ep08", promptFr: "f(x) = 5x. Calcule f(6).", type: "number", acceptable: ["30"] },
+      { id: "a13-1-ep09", promptFr: "f(x) = 2x + 3. Calcule f(−1).", type: "number", acceptable: ["1"] },
+      { id: "a13-1-ep10", promptFr: "f(x) = x² − 4. Calcule f(3).", type: "number", acceptable: ["5"] },
     ],
+    poolSize: 5,
   };

@@ -1,5 +1,25 @@
 export type IdentifierStatus = "empty" | "email" | "phone" | "invalid";
 
+export function normalizeForId(s: string): string {
+  return s.trim().toLowerCase()
+    .normalize("NFD").replace(/\p{M}/gu, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export function buildLoginId(prenom: string, nom: string): string {
+  const p = normalizeForId(prenom);
+  const n = normalizeForId(nom);
+  if (!p && !n) return "";
+  if (!n) return p;
+  if (!p) return n;
+  return `${p}.${n}`;
+}
+
+export function loginIdToEmail(loginId: string): string {
+  return `${loginId}@soutien.local`;
+}
+
 export function isEmailFormat(s: string): boolean {
   return /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(s.trim());
 }

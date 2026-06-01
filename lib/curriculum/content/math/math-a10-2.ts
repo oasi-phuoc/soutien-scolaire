@@ -12,50 +12,69 @@ export const MATH_A10_2_LESSON: MathSubmoduleLesson = {
         ti: "ምፍታሕ: ax = b",
         uk: "Розв'язання: ax = b",
       },
-      paragraphs: {
-        fr: [
-          "La forme ax = b se résout en divisant les deux membres par a (a ≠ 0) : x = b/a.",
-          "Exemple : 3x = 15 → x = 15/3 = 5. Vérification : 3 × 5 = 15 ✓.",
-          "Si a est négatif, on divise par a négatif : −4x = 20 → x = 20/(−4) = −5.",
-          "Cas particulier : si a = 0 et b = 0, tout nombre est solution. Si a = 0 et b ≠ 0, il n'y a pas de solution.",
-        ],
-        en: [
-          "The form ax = b is solved by dividing both sides by a (a ≠ 0): x = b/a.",
-          "Example: 3x = 15 → x = 15/3 = 5. Check: 3 × 5 = 15 ✓.",
-          "If a is negative: −4x = 20 → x = 20/(−4) = −5.",
-          "Special case: if a = 0 and b = 0, every number is a solution; if a = 0 and b ≠ 0, no solution exists.",
-        ],
-        ar: [
-          "الشكل ax = b يُحل بقسمة الطرفين على a (a ≠ 0): x = b/a.",
-          "مثال: 3x = 15 → x = 5. التحقق: 3 × 5 = 15 ✓.",
-          "إذا كان a سالباً: −4x = 20 → x = −5.",
-          "حالة خاصة: إذا a = 0 وb = 0، كل عدد حل؛ إذا a = 0 وb ≠ 0، لا يوجد حل.",
-        ],
-        fa: [
-          "فرم ax = b با تقسیم هر دو طرف بر a (a ≠ 0) حل می‌شود: x = b/a.",
-          "مثال: 3x = 15 → x = 5. تأیید: 3 × 5 = 15 ✓.",
-          "اگر a منفی باشد: −4x = 20 → x = −5.",
-          "حالت خاص: اگر a = 0 و b = 0، هر عددی جواب است؛ اگر a = 0 و b ≠ 0، جوابی ندارد.",
-        ],
-        ti: [
-          "ax = b ክልቲ ሸነኽ ብ a (a ≠ 0) ምምቃሉ: x = b/a.",
-          "ምሳሌ: 3x = 15 → x = 5. ፍተሻ: 3 × 5 = 15 ✓.",
-          "a ኣሉታዊ ምስ ዝኸውን: −4x = 20 → x = −5.",
-          "ፍሉይ ኩነት: a = 0 ን b = 0 ምስ ዝኸውን ዝኾነ ቁጽሪ ፍትሒ ዩ.",
-        ],
-        uk: [
-          "Форма ax = b розв'язується діленням обох частин на a (a ≠ 0): x = b/a.",
-          "Приклад: 3x = 15 → x = 5. Перевірка: 3 × 5 = 15 ✓.",
-          "Якщо a від'ємне: −4x = 20 → x = −5.",
-          "Особливий випадок: якщо a = 0 і b = 0 — будь-яке число є розв'язком; якщо a = 0 і b ≠ 0 — розв'язків немає.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Forme ax = b",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "La forme ax = b se résout en divisant les deux membres par a (avec a ≠ 0) : on isole x.",
+        },
+        {
+          type: "rule",
+          titleFr: "Règle de résolution",
+          itemsFr: [
+            "ax = b  →  x = b ÷ a  (on divise par **a** des deux côtés)",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Exemples",
+          black: true,
+        },
+        {
+          type: "table",
+          headersFr: ["Équation", "Résolution", "Solution", "Vérification"],
+          accentHeader: true,
+          rows: [
+            ["3x = 15", "x = 15 ÷ 3", "x = 5", "3 × 5 = 15 ✓"],
+            ["**−**4x = 20", "x = 20 ÷ (**−**4)", "x = **−**5", "**−**4 × (**−**5) = 20 ✓"],
+            ["7x = 0", "x = 0 ÷ 7", "x = 0", "7 × 0 = 0 ✓"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Cas particuliers",
+          black: true,
+        },
+        {
+          type: "bullets",
+          labelFr: "",
+          itemsFr: [
+            "Si a = 0 et b = 0 : tout nombre est solution (infinité de solutions)",
+            "Si a = 0 et b ≠ 0 : aucune solution (l'équation est impossible)",
+          ],
+        },
+        {
+          type: "note",
+          fr: "On ne divise jamais par 0. Si a = 0, l'équation ne peut pas être résolue par cette méthode.",
+        },
+      ],
     },
-    exercises: [
-      { id: "a10-2-e1", promptFr: "Résous 5x = 35.", type: "number", acceptable: ["7"] },
-      { id: "a10-2-e2", promptFr: "Résous −3x = 12.", type: "number", acceptable: ["-4", "−4"] },
-      { id: "a10-2-e3", promptFr: "Résous 7x = 0.", type: "number", acceptable: ["0"] },
-      { id: "a10-2-e4", promptFr: "Résous x/3 = 6.", type: "number", acceptable: ["18"] },
-      { id: "a10-2-e5", promptFr: "Résous 4x = 10 (donne x sous forme décimale).", type: "short_text", acceptable: ["2,5", "2.5"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a10-2-ep01", promptFr: "Résous 3x = 15. x = ?", type: "number", acceptable: ["5"] },
+      { id: "a10-2-ep02", promptFr: "Résous 4x = 20. x = ?", type: "number", acceptable: ["5"] },
+      { id: "a10-2-ep03", promptFr: "Résous 7x = 35. x = ?", type: "number", acceptable: ["5"] },
+      { id: "a10-2-ep04", promptFr: "Résous 2x = 18. x = ?", type: "number", acceptable: ["9"] },
+      { id: "a10-2-ep05", promptFr: "Résous −3x = 12. x = ?", type: "number", acceptable: ["-4"] },
+      { id: "a10-2-ep06", promptFr: "Résous 5x = 40. x = ?", type: "number", acceptable: ["8"] },
+      { id: "a10-2-ep07", promptFr: "Résous 6x = 54. x = ?", type: "number", acceptable: ["9"] },
+      { id: "a10-2-ep08", promptFr: "Résous −2x = 10. x = ?", type: "number", acceptable: ["-5"] },
+      { id: "a10-2-ep09", promptFr: "Résous 9x = 63. x = ?", type: "number", acceptable: ["7"] },
+      { id: "a10-2-ep10", promptFr: "Résous 8x = 56. x = ?", type: "number", acceptable: ["7"] },
     ],
+    poolSize: 5,
   };

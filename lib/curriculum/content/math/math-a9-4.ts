@@ -12,50 +12,80 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
         ti: "ምቅናስ (ተመሳሳሊ ወጽዓ)",
         uk: "Зведення подібних доданків",
       },
-      paragraphs: {
-        fr: [
-          "Des termes semblables sont des termes qui ont la même variable portée au même exposant. On peut les additionner ou soustraire.",
-          "Règle : pour additionner des termes semblables, on additionne leurs coefficients. Les termes constants se regroupent entre eux.",
-          "Exemples : 3x + 5x = 8x ; 7a − 2a = 5a ; 4x + 3 + 2x − 1 = 6x + 2.",
-          "Important : 3x et 3x² ne sont PAS des termes semblables (exposants différents). 3x et 3y non plus (variables différentes).",
-        ],
-        en: [
-          "Like terms have the same variable raised to the same exponent. They can be added or subtracted.",
-          "Rule: add like terms by adding their coefficients. Constant terms group together.",
-          "Examples: 3x + 5x = 8x; 7a − 2a = 5a; 4x + 3 + 2x − 1 = 6x + 2.",
-          "Important: 3x and 3x² are NOT like terms (different exponents); 3x and 3y are not either.",
-        ],
-        ar: [
-          "الحدود المتشابهة هي حدود لها نفس المتغير ونفس الأس. يمكن جمعها أو طرحها.",
-          "القاعدة: اجمع معاملات الحدود المتشابهة. الحدود الثابتة تُجمع مع بعضها.",
-          "أمثلة: 3x + 5x = 8x؛ 4x + 3 + 2x − 1 = 6x + 2.",
-          "مهم: 3x و 3x² ليسا حدين متشابهين (أسس مختلفة).",
-        ],
-        fa: [
-          "جملات مشابه جملاتی هستند که متغیر یکسان با توان یکسان دارند. می‌توان آن‌ها را جمع یا تفریق کرد.",
-          "قانون: برای جمع جملات مشابه، ضرایبشان را جمع کن.",
-          "مثال‌ها: 3x + 5x = 8x؛ 4x + 3 + 2x − 1 = 6x + 2.",
-          "مهم: 3x و 3x² جملات مشابه نیستند (توان متفاوت).",
-        ],
-        ti: [
-          "ተመሳሳሊ ወጽዓ ብሓደ ተለዋዋጢ ብሓደ ኣስፋፊሐ ዘቕርቦ ወጽዓ ዩ. ምኽፋሎምን ምጭናቕን ይከኣሉ.",
-          "ሕጊ: ናይ ተመሳሳሊ ወጽዓ ኮፊሺየንት ምኽፋሎም. ቋሚ ወጽዓ ምስ ናቶም ይጥርነፉ.",
-          "ምሳሌ: 3x + 5x = 8x; 4x + 3 + 2x − 1 = 6x + 2.",
-          "ኣገዳሲ: 3x ን 3x² ተመሳሳሊ ወጽዓ ኣይኮኑን.",
-        ],
-        uk: [
-          "Подібні доданки мають однакову змінну з однаковим показником. Їх можна додавати або віднімати.",
-          "Правило: зводимо подібні доданки, додаючи їхні коефіцієнти.",
-          "Приклади: 3x + 5x = 8x; 7a − 2a = 5a; 4x + 3 + 2x − 1 = 6x + 2.",
-          "Важливо: 3x і 3x² НЕ є подібними (різні показники); 3x і 3y — теж ні.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Termes semblables",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "Des termes semblables (ou termes similaires) sont des termes qui ont la même variable portée au même exposant. On peut les additionner ou soustraire en regroupant leurs coefficients.",
+        },
+        {
+          type: "rule",
+          titleFr: "Règle de réduction",
+          itemsFr: [
+            "Pour additionner des termes semblables : on additionne leurs **coefficients**",
+            "Les termes constants (sans variable) se regroupent entre eux",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Exemples de réduction",
+          black: true,
+        },
+        {
+          type: "table",
+          headersFr: ["Expression", "Réduction", "Résultat"],
+          accentHeader: true,
+          rows: [
+            ["3x **+** 5x", "(**+**3 **+** 5)x", "8x"],
+            ["7a **−** 2a", "(7 **−** 2)a", "5a"],
+            ["4x **+** 3 **+** 2x **−** 1", "(4 **+** 2)x **+** (3 **−** 1)", "6x **+** 2"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Ce qui n'est PAS semblable",
+          black: true,
+        },
+        {
+          type: "note",
+          fr: "3x et 3x² ne sont PAS des termes semblables (exposants différents). 3x et 3y ne le sont pas non plus (variables différentes). On ne peut pas les regrouper.",
+        },
+        {
+          type: "bullets",
+          labelFr: "Termes semblables → peuvent se regrouper",
+          itemsFr: [
+            "5x et 3x (même variable x, même exposant 1)",
+            "4a² et **−**2a² (même variable a, même exposant 2)",
+            "7 et **−**3 (deux termes constants)",
+          ],
+        },
+        {
+          type: "bullets",
+          labelFr: "Termes NON semblables → ne peuvent pas se regrouper",
+          itemsFr: [
+            "3x et 3x² (exposants différents)",
+            "4x et 4y (variables différentes)",
+            "5a et 5 (l'un a une variable, l'autre non)",
+          ],
+        },
+      ],
     },
-    exercises: [
-      { id: "a9-4-e1", promptFr: "Réduis 5x + 3x.", type: "short_text", acceptable: ["8x"] },
-      { id: "a9-4-e2", promptFr: "Réduis 7a − 2a + 4.", type: "short_text", acceptable: ["5a+4", "5a + 4"] },
-      { id: "a9-4-e3", promptFr: "Réduis 3x + 2 + 4x − 5.", type: "short_text", acceptable: ["7x-3", "7x − 3"] },
-      { id: "a9-4-e4", promptFr: "Réduis 6y − y.", type: "short_text", acceptable: ["5y"] },
-      { id: "a9-4-e5", promptFr: "Est-ce que 4x et 4x² sont des termes semblables ? (oui/non)", type: "short_text", acceptable: ["non"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a9-4-ep01", promptFr: "Réduis 3x + 5x.", type: "short_text", acceptable: ["8x"] },
+      { id: "a9-4-ep02", promptFr: "Réduis 7a − 2a.", type: "short_text", acceptable: ["5a"] },
+      { id: "a9-4-ep03", promptFr: "Réduis 4x + x.", type: "short_text", acceptable: ["5x"] },
+      { id: "a9-4-ep04", promptFr: "Réduis 6n − n.", type: "short_text", acceptable: ["5n"] },
+      { id: "a9-4-ep05", promptFr: "Réduis 2x + 3x + x.", type: "short_text", acceptable: ["6x"] },
+      { id: "a9-4-ep06", promptFr: "Réduis 9y − 4y.", type: "short_text", acceptable: ["5y"] },
+      { id: "a9-4-ep07", promptFr: "Réduis 3a + 2a − a.", type: "short_text", acceptable: ["4a"] },
+      { id: "a9-4-ep08", promptFr: "Réduis 8m − 3m + m.", type: "short_text", acceptable: ["6m"] },
+      { id: "a9-4-ep09", promptFr: "Réduis 4b − 4b.", type: "short_text", acceptable: ["0"] },
+      { id: "a9-4-ep10", promptFr: "Réduis 10t − 6t − t.", type: "short_text", acceptable: ["3t"] },
     ],
+    poolSize: 5,
   };

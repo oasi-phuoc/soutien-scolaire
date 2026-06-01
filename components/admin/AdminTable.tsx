@@ -16,11 +16,14 @@ import {
   changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
+  resetAllElevesAction,
+  changePasswordAction,
 } from "@/app/actions/admin";
 
 export type UserRow = {
   id: string;
   email: string;
+  login_id: string | null;
   nom: string | null;
   prenom: string | null;
   classe: string | null;
@@ -199,6 +202,50 @@ const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
 
 // ── Detail Modal ────────────────────────────────────────────────────────────
 
+function PasswordSection({ userId }: { userId: string }) {
+  const [pwd, setPwd] = useState("");
+  const [pending, startTransition] = useTransition();
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  function submit() {
+    if (!pwd) return;
+    setMsg(null);
+    startTransition(async () => {
+      const r = await changePasswordAction(userId, pwd);
+      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
+      else setMsg({ ok: false, text: r.reason ?? "Erreur" });
+    });
+  }
+
+  return (
+    <div className="mb-4 space-y-2 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+      <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Modifier le mot de passe</p>
+      <div className="flex gap-2">
+        <input
+          type="password"
+          value={pwd}
+          onChange={e => setPwd(e.target.value)}
+          placeholder="Nouveau mot de passe (8+ car.)"
+          className="min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+        />
+        <button
+          type="button"
+          onClick={submit}
+          disabled={pending || pwd.length < 8}
+          className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+        >
+          {pending ? "…" : "OK"}
+        </button>
+      </div>
+      {msg && (
+        <p className={`text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+          {msg.text}
+        </p>
+      )}
+    </div>
+  );
+}
+
 function DetailModal({
   user,
   currentUserId,
@@ -225,6 +272,10 @@ function DetailModal({
   const mathBranches = mathDetail(user.progress_data);
   const frenchTabs = frenchDetail(user.progress_data);
   const lectureItems = lectureDetail(user.progress_data);
+
+  const [mathOpen, setMathOpen] = useState(true);
+  const [frenchOpen, setFrenchOpen] = useState(true);
+  const [lectureOpen, setLectureOpen] = useState(true);
 
   const isSelf = user.id === currentUserId;
   const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
@@ -265,7 +316,9 @@ function DetailModal({
 
         {/* Info */}
         <div className="mb-4 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-          <p>{user.email}</p>
+          <p className="font-mono text-sm font-semibold text-teal-700 dark:text-teal-400">
+            {user.login_id ?? user.email.replace(/@soutien\.local$/, "")}
+          </p>
           {user.langue && (
             <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
               🌐 {LANGUE_LABELS[user.langue] ?? user.langue}
@@ -282,81 +335,102 @@ function DetailModal({
 
           {/* Maths */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Maths</span><span>{math.done}/{math.total}</span>
-            </div>
+            <button onClick={() => setMathOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${mathOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Maths
+              </span>
+              <span>{math.done}/{math.total}</span>
+            </button>
             <Bar pct={math.pct} color="bg-blue-500" />
-            <div className="mt-2 space-y-1">
-              {mathBranches.map(b => (
-                <div key={b.branch}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{b.label}</span>
-                    <span>{b.done}/{b.total}</span>
+            {mathOpen && (
+              <div className="mt-2 space-y-1">
+                {mathBranches.map(b => (
+                  <div key={b.branch}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{b.label}</span>
+                      <span>{b.done}/{b.total}</span>
+                    </div>
+                    {b.inProgress.map(m => (
+                      <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
+                        ↳ {m.code} – {m.title}
+                      </p>
+                    ))}
                   </div>
-                  {b.inProgress.map(m => (
-                    <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
-                      ↳ {m.code} – {m.title}
-                    </p>
-                  ))}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Français */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Français</span><span>{french.done}/{french.total}</span>
-            </div>
+            <button onClick={() => setFrenchOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${frenchOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Français
+              </span>
+              <span>{french.done}/{french.total}</span>
+            </button>
             <Bar pct={french.pct} color="bg-emerald-500" />
-            <div className="mt-2 space-y-1">
-              {frenchTabs.map(t => (
-                <div key={t.tab}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{t.label}</span>
-                    <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+            {frenchOpen && (
+              <div className="mt-2 space-y-1">
+                {frenchTabs.map(t => (
+                  <div key={t.tab}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{t.label}</span>
+                      <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                    </div>
+                    {t.inProgress && (
+                      <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
+                        ↳ {t.inProgress.code} – {t.inProgress.title}
+                      </p>
+                    )}
                   </div>
-                  {t.inProgress && (
-                    <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
-                      ↳ {t.inProgress.code} – {t.inProgress.title}
-                    </p>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Lecture */}
           <div>
-            <div className="mb-1 flex items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              <span>Lecture</span><span>{lecture.done}/{lecture.total}</span>
-            </div>
+            <button onClick={() => setLectureOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+              <span className="flex items-center gap-1">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${lectureOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                Lecture
+              </span>
+              <span>{lecture.done}/{lecture.total}</span>
+            </button>
             <Bar pct={lecture.pct} color="bg-amber-500" />
-            <div className="mt-2 space-y-1">
-              {lectureItems.map(m => (
-                <div key={m.id}>
-                  <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                    <span className="font-medium">{m.code} – {m.title}</span>
-                    <span>{m.subDone}/{m.subTotal}</span>
+            {lectureOpen && (
+              <div className="mt-2 space-y-1">
+                {lectureItems.map(m => (
+                  <div key={m.id}>
+                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <span className="font-medium">{m.code} – {m.title}</span>
+                      <span>{m.subDone}/{m.subTotal}</span>
+                    </div>
+                    {m.inProgress.length > 0
+                      ? m.inProgress.map(l => (
+                          <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                            ↳ Lettre {l.letter}
+                          </p>
+                        ))
+                      : m.currentLetter && (
+                          <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                            ↳ Lettre {m.currentLetter.letter}
+                          </p>
+                        )
+                    }
                   </div>
-                  {m.inProgress.length > 0
-                    ? m.inProgress.map(l => (
-                        <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                          ↳ Lettre {l.letter}
-                        </p>
-                      ))
-                    : m.currentLetter && (
-                        <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                          ↳ Lettre {m.currentLetter.letter}
-                        </p>
-                      )
-                  }
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
 
         </div>
+
+        {/* Password change */}
+        {user.role !== "admin" && <PasswordSection userId={user.id} />}
 
         {/* Actions */}
         <div className="flex items-center gap-2">
@@ -505,6 +579,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
 function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: () => void; onDeleted: () => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
   const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || user.email;
 
   function confirm() {
@@ -521,11 +596,60 @@ function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: (
       <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
         <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer le compte</h2>
         <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.</p>
+        <button
+          onClick={() => setConfirmed(c => !c)}
+          className={`mb-4 flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-colors ${
+            confirmed
+              ? "border-red-300 bg-red-50 text-red-700 dark:border-red-700 dark:bg-red-950/30 dark:text-red-400"
+              : "border-zinc-200 bg-zinc-50 text-zinc-500 hover:border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400"
+          }`}
+        >
+          <span className={`flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${confirmed ? "bg-red-500" : "bg-zinc-300 dark:bg-zinc-600"}`}>
+            <span className={`ml-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${confirmed ? "translate-x-4" : "translate-x-0"}`} />
+          </span>
+          Je confirme la suppression définitive
+        </button>
         {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
-          <button onClick={confirm} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:opacity-60" aria-label="Supprimer">
+          <button onClick={confirm} disabled={!confirmed || pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-40" aria-label="Supprimer">
             {pending ? <Spinner /> : <IconTrash />}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Reset All Eleves Confirm ────────────────────────────────────────────────
+
+function ResetElevesConfirm({ eleveCount, onClose, onReset }: { eleveCount: number; onClose: () => void; onReset: () => void }) {
+  const [pending, startTransition] = useTransition();
+  const [err, setErr] = useState<string | null>(null);
+
+  function confirm() {
+    startTransition(async () => {
+      const r = await resetAllElevesAction();
+      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
+      onReset();
+    });
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+      <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
+        <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer tous les comptes élèves</h2>
+        <p className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
+          Cette action supprimera définitivement <strong>{eleveCount} compte{eleveCount !== 1 ? "s" : ""} élève{eleveCount !== 1 ? "s" : ""}</strong> ainsi que toutes leurs données de progression.
+        </p>
+        <p className="mb-4 text-sm font-semibold text-red-600 dark:text-red-400">Cette action est irréversible.</p>
+        {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
+        <div className="flex justify-end gap-2">
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
+          <button onClick={confirm} disabled={pending} className="flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
+            {pending ? <Spinner /> : <IconTrash />}
+            {pending ? "Suppression…" : "Tout supprimer"}
           </button>
         </div>
       </div>
@@ -547,15 +671,23 @@ export function AdminTable({
   const [rows, setRows] = useState<UserRow[]>(initialRows);
   const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
+  const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
   const [sortOpen, setSortOpen] = useState(false);
   const [selected, setSelected] = useState<UserRow | null>(null);
   const [editing, setEditing] = useState<UserRow | null>(null);
   const [confirming, setConfirming] = useState<UserRow | null>(null);
+  const [resetConfirming, setResetConfirming] = useState(false);
   const [, startTransition] = useTransition();
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
-  const filtered = rows.filter(r => tab === "eleves" || !filterClasse || r.classe === filterClasse);
+  const searchLc = search.trim().toLowerCase();
+  const filtered = rows.filter(r => {
+    if (tab === "classes" && filterClasse && r.classe !== filterClasse) return false;
+    if (!searchLc) return true;
+    const name = [r.prenom, r.nom].filter(Boolean).join(" ").toLowerCase();
+    return name.includes(searchLc) || (r.email ?? "").toLowerCase().includes(searchLc) || (r.classe ?? "").toLowerCase().includes(searchLc);
+  });
   const sorted = [...filtered].sort((a, b) => {
     if (sortBy === "math") return mathPct(b.progress_data).pct - mathPct(a.progress_data).pct;
     if (sortBy === "francais") return frenchPct(b.progress_data).pct - frenchPct(a.progress_data).pct;
@@ -591,6 +723,15 @@ export function AdminTable({
     <>
       {/* Filters */}
       <div className="mb-4">
+        <div className="mb-2">
+          <input
+            type="search"
+            placeholder="Rechercher un élève…"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+          />
+        </div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
             <button onClick={() => setTab("eleves")} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Élèves</button>
@@ -615,7 +756,17 @@ export function AdminTable({
             )}
           </div>
 
-          <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+          <span className="text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+
+          {currentUserRole === "admin" && (
+            <button
+              onClick={() => setResetConfirming(true)}
+              className="ml-auto flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100 dark:border-red-800/50 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/40"
+            >
+              <IconTrash />
+              Réinitialiser les élèves
+            </button>
+          )}
         </div>
       </div>
 
@@ -684,6 +835,17 @@ export function AdminTable({
       )}
       {editing && <EditModal user={editing} onClose={() => setEditing(null)} onSaved={data => handleSaved(editing.id, data)} />}
       {confirming && <DeleteConfirm user={confirming} onClose={() => setConfirming(null)} onDeleted={() => handleDeleted(confirming.id)} />}
+      {resetConfirming && (
+        <ResetElevesConfirm
+          eleveCount={rows.filter(r => r.role === "eleve").length}
+          onClose={() => setResetConfirming(false)}
+          onReset={() => {
+            setRows(rs => rs.filter(r => r.role !== "eleve"));
+            setResetConfirming(false);
+            setSelected(null);
+          }}
+        />
+      )}
     </>
   );
 }

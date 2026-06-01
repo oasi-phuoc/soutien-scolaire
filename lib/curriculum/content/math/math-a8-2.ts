@@ -12,50 +12,71 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
         ti: "ኣሰላልፋ ሓይሊ",
         uk: "Обчислення степенів",
       },
-      paragraphs: {
-        fr: [
-          "Pour calculer une puissance, on multiplie la base par elle-même autant de fois que l'indique l'exposant.",
-          "Exemples : 2⁴ = 2 × 2 × 2 × 2 = 16 ; 3³ = 27 ; 5² = 25.",
-          "Propriétés des puissances (même base) : aⁿ × aᵐ = aⁿ⁺ᵐ et aⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "Exemple : 2³ × 2² = 2⁵ = 32 ; 3⁵ ÷ 3² = 3³ = 27.",
-        ],
-        en: [
-          "To compute a power, multiply the base by itself as many times as the exponent indicates.",
-          "Examples: 2⁴ = 2 × 2 × 2 × 2 = 16; 3³ = 27; 5² = 25.",
-          "Properties (same base): aⁿ × aᵐ = aⁿ⁺ᵐ and aⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "Example: 2³ × 2² = 2⁵ = 32; 3⁵ ÷ 3² = 3³ = 27.",
-        ],
-        ar: [
-          "لحساب أس، نضرب القاعدة في نفسها بعدد مرات يشير إليه الأس.",
-          "أمثلة: 2⁴ = 16؛ 3³ = 27؛ 5² = 25.",
-          "خصائص (نفس القاعدة): aⁿ × aᵐ = aⁿ⁺ᵐ وaⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "مثال: 2³ × 2² = 2⁵ = 32.",
-        ],
-        fa: [
-          "برای محاسبه توان، پایه را به اندازه نما در خودش ضرب می‌کنیم.",
-          "مثال‌ها: 2⁴ = 16؛ 3³ = 27؛ 5² = 25.",
-          "خاصیت‌ها (پایه یکسان): aⁿ × aᵐ = aⁿ⁺ᵐ و aⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "مثال: 2³ × 2² = 2⁵ = 32.",
-        ],
-        ti: [
-          "ሓይሊ ቁጽሪ ክትሰልፍ ሰረቱ ብናይ ኣስፋፊሐ ቁጽሪ ናብ ናዕቤ ምርባሕ ዩ.",
-          "ምሳሌ: 2⁴ = 16; 3³ = 27; 5² = 25.",
-          "ንብረታት (ሓደ ሰረት): aⁿ × aᵐ = aⁿ⁺ᵐ ከምኡ aⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "ምሳሌ: 2³ × 2² = 2⁵ = 32.",
-        ],
-        uk: [
-          "Для обчислення степеня основу множать на себе стільки разів, скільки вказує показник.",
-          "Приклади: 2⁴ = 16; 3³ = 27; 5² = 25.",
-          "Властивості (однакова основа): aⁿ × aᵐ = aⁿ⁺ᵐ та aⁿ ÷ aᵐ = aⁿ⁻ᵐ.",
-          "Приклад: 2³ × 2² = 2⁵ = 32.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Comment calculer une puissance",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "Pour calculer une puissance, on multiplie la base par elle-même autant de fois que l'indique l'exposant.",
+        },
+        {
+          type: "table",
+          headersFr: ["Puissance", "Développement", "Résultat"],
+          accentHeader: true,
+          rows: [
+            ["2⁴", "2 × 2 × 2 × 2", "16"],
+            ["3³", "3 × 3 × 3", "27"],
+            ["5²", "5 × 5", "25"],
+            ["10³", "10 × 10 × 10", "1 000"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Propriétés des puissances (même base)",
+          black: true,
+        },
+        {
+          type: "rule",
+          titleFr: "Règles de calcul",
+          itemsFr: [
+            "aⁿ × aᵐ = aⁿ⁺ᵐ  (on **additionne** les exposants)",
+            "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (on **soustrait** les exposants)",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Exemples d'application",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "2³ × 2² = 2³⁺² = 2⁵ = 32",
+            "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27",
+            "5⁴ × 5¹ = 5⁵ = 3 125",
+          ],
+        },
+        {
+          type: "note",
+          fr: "Ces règles ne s'appliquent que lorsque les bases sont identiques. On ne peut pas simplifier 2³ × 3² directement avec ces règles.",
+        },
+      ],
     },
-    exercises: [
-      { id: "a8-2-e1", promptFr: "Calcule 2⁵.", type: "number", acceptable: ["32"] },
-      { id: "a8-2-e2", promptFr: "Calcule 4³.", type: "number", acceptable: ["64"] },
-      { id: "a8-2-e3", promptFr: "Calcule 6².", type: "number", acceptable: ["36"] },
-      { id: "a8-2-e4", promptFr: "2³ × 2⁴ = 2^?", type: "number", acceptable: ["7"] },
-      { id: "a8-2-e5", promptFr: "3⁶ ÷ 3² = 3^?", type: "number", acceptable: ["4"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a8-2-ep01", promptFr: "2² × 2³ = ?", type: "number", acceptable: ["32"] },
+      { id: "a8-2-ep02", promptFr: "3² × 3² = ?", type: "number", acceptable: ["81"] },
+      { id: "a8-2-ep03", promptFr: "2⁵ ÷ 2³ = ?", type: "number", acceptable: ["4"] },
+      { id: "a8-2-ep04", promptFr: "4⁴ ÷ 4² = ?", type: "number", acceptable: ["16"] },
+      { id: "a8-2-ep05", promptFr: "(2³)² = ?", type: "number", acceptable: ["64"] },
+      { id: "a8-2-ep06", promptFr: "(3²)² = ?", type: "number", acceptable: ["81"] },
+      { id: "a8-2-ep07", promptFr: "2³ × 2⁴ = ?", type: "number", acceptable: ["128"] },
+      { id: "a8-2-ep08", promptFr: "5³ ÷ 5² = ?", type: "number", acceptable: ["5"] },
+      { id: "a8-2-ep09", promptFr: "4² × 4 = ?", type: "number", acceptable: ["64"] },
+      { id: "a8-2-ep10", promptFr: "3³ × 3² = ?", type: "number", acceptable: ["243"] },
     ],
+    poolSize: 5,
   };

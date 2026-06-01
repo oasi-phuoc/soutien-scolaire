@@ -153,40 +153,30 @@ export function CompteDashboard({
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Note minimale requise pour valider un sous-module ou module.
           </p>
-          <ul className="mt-4 space-y-2">
-            {(["base", "moyen", "avance"] as LevelKey[]).map((lvl) => {
+          <div className="mt-4 flex overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700">
+            {(["base", "moyen", "avance"] as LevelKey[]).map((lvl, i) => {
               const checked = level === lvl;
+              const isLast = i === 2;
               return (
-                <li key={lvl}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLevelState(lvl);
-                      const prog = loadProgress();
-                      saveProgress(setLevel(prog, lvl));
-                    }}
-                    className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 text-left transition-colors ${
-                      checked
-                        ? "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40"
-                        : "border-zinc-200 hover:border-teal-300 dark:border-zinc-700 dark:hover:border-teal-800"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                        checked ? "border-teal-600 bg-teal-600" : "border-zinc-400"
-                      }`}
-                      aria-hidden
-                    >
-                      {checked ? <span className="block h-2 w-2 rounded-full bg-white" /> : null}
-                    </span>
-                    <span className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                      {LEVEL_LABELS[lvl]}
-                    </span>
-                  </button>
-                </li>
+                <button
+                  key={lvl}
+                  type="button"
+                  onClick={() => {
+                    setLevelState(lvl);
+                    const prog = loadProgress();
+                    saveProgress(setLevel(prog, lvl));
+                  }}
+                  className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200 dark:border-zinc-700"} ${
+                    checked
+                      ? "bg-[var(--color-accent-alg)] text-white"
+                      : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900 dark:hover:text-zinc-300"
+                  }`}
+                >
+                  {LEVEL_LABELS[lvl]}
+                </button>
               );
             })}
-          </ul>
+          </div>
         </section>
 
         <section aria-labelledby="genre-heading">
@@ -196,39 +186,29 @@ export function CompteDashboard({
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Voix utilisée pour les sons des mots en lecture.
           </p>
-          <ul className="mt-4 space-y-2">
-            {([["f", "Féminine"], ["m", "Masculine"]] as [GenreKey, string][]).map(([key, label]) => {
+          <div className="mt-4 flex overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-700">
+            {([["f", "Féminine"], ["m", "Masculine"]] as [GenreKey, string][]).map(([key, label], i) => {
               const checked = genre === key;
+              const isLast = i === 1;
               return (
-                <li key={key}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setGenreState(key);
-                      localStorage.setItem(GENRE_KEY, key);
-                    }}
-                    className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 text-left transition-colors ${
-                      checked
-                        ? "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40"
-                        : "border-zinc-200 hover:border-teal-300 dark:border-zinc-700 dark:hover:border-teal-800"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                        checked ? "border-teal-600 bg-teal-600" : "border-zinc-400"
-                      }`}
-                      aria-hidden
-                    >
-                      {checked ? <span className="block h-2 w-2 rounded-full bg-white" /> : null}
-                    </span>
-                    <span className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                      {label}
-                    </span>
-                  </button>
-                </li>
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => {
+                    setGenreState(key);
+                    localStorage.setItem(GENRE_KEY, key);
+                  }}
+                  className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200 dark:border-zinc-700"} ${
+                    checked
+                      ? "bg-[var(--color-accent-alg)] text-white"
+                      : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900 dark:hover:text-zinc-300"
+                  }`}
+                >
+                  {label}
+                </button>
               );
             })}
-          </ul>
+          </div>
         </section>
 
         <section aria-labelledby="pivot-heading">

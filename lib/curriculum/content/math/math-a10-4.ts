@@ -12,50 +12,87 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
         ti: "ምዕርርያ ምስ ቅርሕ",
         uk: "Рівняння з дужками",
       },
-      paragraphs: {
-        fr: [
-          "Quand une équation contient des parenthèses, on commence par les développer, puis on réduit, puis on résout.",
-          "Exemple : 3(2x + 1) = 21 → 6x + 3 = 21 → 6x = 18 → x = 3.",
-          "Exemple plus complexe : 2(x + 3) − (x − 1) = 8 → 2x + 6 − x + 1 = 8 → x + 7 = 8 → x = 1.",
-          "Attention au signe − devant une parenthèse : −(x − 5) = −x + 5.",
-        ],
-        en: [
-          "When an equation contains parentheses, first expand them, then simplify, then solve.",
-          "Example: 3(2x + 1) = 21 → 6x + 3 = 21 → 6x = 18 → x = 3.",
-          "More complex: 2(x + 3) − (x − 1) = 8 → 2x + 6 − x + 1 = 8 → x = 1.",
-          "Caution: −(x − 5) = −x + 5.",
-        ],
-        ar: [
-          "عندما تحتوي المعادلة على أقواس، نوسعها أولاً ثم نبسط ثم نحل.",
-          "مثال: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
-          "أكثر تعقيداً: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
-          "تنبه: −(x − 5) = −x + 5.",
-        ],
-        fa: [
-          "وقتی معادله‌ای حاوی پرانتز است، ابتدا توسعه دهید، سپس ساده کنید، سپس حل کنید.",
-          "مثال: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
-          "پیچیده‌تر: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
-          "توجه: −(x − 5) = −x + 5.",
-        ],
-        ti: [
-          "ምዕርርያ ቅርሕ ምስ ዘሎ ቅድም ምስፋሕ ድሕሪ ምቅናስ ድሕሪ ምፍታሕ.",
-          "ምሳሌ: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
-          "ዝኸበደ: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
-          "ጥንቃቐ: −(x − 5) = −x + 5.",
-        ],
-        uk: [
-          "Якщо рівняння містить дужки, спочатку розкрити їх, потім звести подібні, потім розв'язати.",
-          "Приклад: 3(2x + 1) = 21 → 6x + 3 = 21 → x = 3.",
-          "Складніший: 2(x + 3) − (x − 1) = 8 → x + 7 = 8 → x = 1.",
-          "Увага: −(x − 5) = −x + 5.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Démarche générale",
+          black: true,
+        },
+        {
+          type: "rule",
+          titleFr: "Étapes avec parenthèses",
+          itemsFr: [
+            "1. Développer toutes les parenthèses",
+            "2. Réduire les termes semblables",
+            "3. Résoudre l'équation obtenue",
+            "4. Vérifier la solution",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Exemples",
+          black: true,
+        },
+        {
+          type: "highlight",
+          fr: "Exemple simple",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "3(2x **+** 1) = 21",
+            "→ 6x **+** 3 = 21",
+            "→ 6x = 18",
+            "→ x = 3",
+          ],
+        },
+        {
+          type: "highlight",
+          fr: "Exemple avec plusieurs parenthèses",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "2(x **+** 3) **−** (x **−** 1) = 8",
+            "→ 2x **+** 6 **−** x **+** 1 = 8",
+            "→ x **+** 7 = 8",
+            "→ x = 1",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Piège : le signe − devant une parenthèse",
+          black: true,
+        },
+        {
+          type: "note",
+          fr: "Le signe − devant une parenthèse inverse tous les signes à l'intérieur.",
+        },
+        {
+          type: "section",
+          labelFr: "Exemples de développement",
+          itemsFr: [
+            "**−**(x **−** 5) = **−**x **+** 5",
+            "**−**(2x **+** 3) = **−**2x **−** 3",
+            "**−**(a **−** b) = **−**a **+** b",
+          ],
+        },
+      ],
     },
-    exercises: [
-      { id: "a10-4-e1", promptFr: "Résous 2(x + 3) = 14.", type: "number", acceptable: ["4"] },
-      { id: "a10-4-e2", promptFr: "Résous 3(2x − 1) = 15.", type: "number", acceptable: ["3"] },
-      { id: "a10-4-e3", promptFr: "Résous 4(x + 2) − 3 = 21.", type: "number", acceptable: ["4"] },
-      { id: "a10-4-e4", promptFr: "Résous 2(x + 5) − (x + 3) = 9.", type: "number", acceptable: ["2"] },
-      { id: "a10-4-e5", promptFr: "Développe −(2x − 4) puis résous −(2x − 4) = 6.", type: "number", acceptable: ["-1", "−1"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a10-4-ep01", promptFr: "Résous 2(x + 3) = 14. x = ?", type: "number", acceptable: ["4"] },
+      { id: "a10-4-ep02", promptFr: "Résous 3(x − 2) = 9. x = ?", type: "number", acceptable: ["5"] },
+      { id: "a10-4-ep03", promptFr: "Résous 4(2x + 1) = 20. x = ?", type: "number", acceptable: ["2"] },
+      { id: "a10-4-ep04", promptFr: "Résous 3(2x − 1) = 21. x = ?", type: "number", acceptable: ["4"] },
+      { id: "a10-4-ep05", promptFr: "Résous 2(x + 5) = 18. x = ?", type: "number", acceptable: ["4"] },
+      { id: "a10-4-ep06", promptFr: "Résous 5(x − 3) = 10. x = ?", type: "number", acceptable: ["5"] },
+      { id: "a10-4-ep07", promptFr: "Résous 2(3x + 2) = 16. x = ?", type: "number", acceptable: ["2"] },
+      { id: "a10-4-ep08", promptFr: "Résous 4(x + 1) = 28. x = ?", type: "number", acceptable: ["6"] },
+      { id: "a10-4-ep09", promptFr: "Résous 3(x + 4) = 3. x = ?", type: "number", acceptable: ["-3"] },
+      { id: "a10-4-ep10", promptFr: "Résous 6(2x − 3) = 30. x = ?", type: "number", acceptable: ["4"] },
     ],
+    poolSize: 5,
   };

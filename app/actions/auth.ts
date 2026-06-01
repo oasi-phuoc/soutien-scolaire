@@ -2,10 +2,21 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { createClient } from "@supabase/supabase-js";
 import { createSupabaseActionClient } from "@/lib/supabase/server";
+import { buildLoginId, loginIdToEmail } from "@/lib/auth/identifier";
+
+function createServiceClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) return null;
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
 
 export async function signInAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "").trim();
+  const identifier = String(formData.get("identifier") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
 
   const supabase = await createSupabaseActionClient();
@@ -13,17 +24,28 @@ export async function signInAction(formData: FormData) {
     redirect("/connexion?erreur=" + encodeURIComponent("Supabase non configuré"));
   }
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
-  if (error) {
-    redirect("/connexion?erreur=" + encodeURIComponent(error.message));
+  // Try synthetic email first (new accounts), then raw identifier (existing accounts with real email)
+  const synthEmail = loginIdToEmail(identifier);
+  const { error: err1 } = await supabase.auth.signInWithPassword({ email: synthEmail, password });
+  if (err1) {
+    const isRealEmail = identifier.includes("@");
+    if (isRealEmail) {
+      const { error: err2 } = await supabase.auth.signInWithPassword({ email: identifier, password });
+      if (err2) {
+        redirect("/connexion?erreur=" + encodeURIComponent("Identifiant ou mot de passe incorrect."));
+      }
+    } else {
+      redirect("/connexion?erreur=" + encodeURIComponent("Identifiant ou mot de passe incorrect."));
+    }
   }
 
   revalidatePath("/", "layout");
   redirect("/");
 }
 
-export async function signUpAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "").trim();
+export async function signUpAction(
+  formData: FormData,
+): Promise<{ ok: true; loginId: string } | { ok: false; reason: string }> {
   const password = String(formData.get("password") ?? "");
   const nom = String(formData.get("nom") ?? "").trim();
   const prenom = String(formData.get("prenom") ?? "").trim();
@@ -36,56 +58,70 @@ export async function signUpAction(formData: FormData) {
   const telephone = String(formData.get("telephone") ?? "").trim();
   const langue = String(formData.get("langue") ?? "en").trim() || "en";
 
-  if (!nom) redirect("/inscription?erreur=" + encodeURIComponent("Le nom est obligatoire."));
-  if (!prenom) redirect("/inscription?erreur=" + encodeURIComponent("Le prénom est obligatoire."));
-  if (!classe) redirect("/inscription?erreur=" + encodeURIComponent("La classe est obligatoire."));
-  if (langue === "") redirect("/inscription?erreur=" + encodeURIComponent("La langue est obligatoire."));
+  if (!nom) return { ok: false, reason: "Le nom est obligatoire." };
+  if (!prenom) return { ok: false, reason: "Le prénom est obligatoire." };
+  if (!classe) return { ok: false, reason: "La classe est obligatoire." };
+  if (!password || password.length < 8) return { ok: false, reason: "Le mot de passe doit contenir au moins 8 caractères." };
 
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) {
-    redirect("/inscription?erreur=" + encodeURIComponent("Supabase non configuré"));
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré" };
+
+  // Reject duplicate prénom + nom + classe
+  const { data: existing } = await svc
+    .from("profiles")
+    .select("id")
+    .ilike("nom", nom)
+    .ilike("prenom", prenom)
+    .eq("classe", classe)
+    .limit(1);
+  if (existing && existing.length > 0) {
+    return { ok: false, reason: `Un compte avec le prénom « ${prenom} », le nom « ${nom} » et la classe « ${classe} » existe déjà. Contactez votre enseignant si c'est une erreur.` };
   }
 
-  const site = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ?? "";
-  const emailRedirect = site.length > 0 ? `${site}/auth/callback?next=/compte` : undefined;
+  const baseId = buildLoginId(prenom, nom);
+  if (!baseId) return { ok: false, reason: "Impossible de générer un identifiant à partir de ce prénom/nom." };
 
-  const { data, error } = await supabase.auth.signUp({
-    email,
-    password,
-    options: {
-      ...(emailRedirect != null ? { emailRedirectTo: emailRedirect } : {}),
-      data: {
+  // Find a unique loginId by trying baseId, baseId2, baseId3, ...
+  let loginId = baseId;
+  let email = loginIdToEmail(loginId);
+  let created = false;
+
+  for (let attempt = 0; attempt < 20; attempt++) {
+    const { error } = await svc.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      user_metadata: {
         nom,
         prenom,
         classe,
         langue,
+        login_id: loginId,
         ...(adresse ? { adresse } : {}),
         ...(npa ? { npa } : {}),
         ...(localite ? { localite } : {}),
         ...(telephone ? { telephone } : {}),
       },
-    },
-  });
+    });
 
-  if (error) {
-    redirect("/inscription?erreur=" + encodeURIComponent(error.message));
+    if (!error) {
+      created = true;
+      break;
+    }
+
+    const msg = error.message?.toLowerCase() ?? "";
+    if (msg.includes("already") || msg.includes("duplicate") || error.status === 422) {
+      const suffix = attempt + 2;
+      loginId = `${baseId}${suffix}`;
+      email = loginIdToEmail(loginId);
+    } else {
+      return { ok: false, reason: error.message };
+    }
   }
 
-  revalidatePath("/", "layout");
-  if (data.session) {
-    redirect("/");
-  }
-  redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email));
-}
+  if (!created) return { ok: false, reason: "Cet identifiant est déjà utilisé, veuillez contacter l'administrateur." };
 
-export async function resendConfirmationAction(formData: FormData) {
-  const email = String(formData.get("email") ?? "").trim();
-  const supabase = await createSupabaseActionClient();
-  if (!supabase) {
-    redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email) + "&erreur=" + encodeURIComponent("Supabase non configuré"));
-  }
-  await supabase.auth.resend({ type: "signup", email });
-  redirect("/inscription?confirmed=1&email=" + encodeURIComponent(email) + "&msg=" + encodeURIComponent("E-mail renvoyé."));
+  return { ok: true, loginId };
 }
 
 export async function signOutAction() {

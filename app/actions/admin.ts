@@ -50,6 +50,37 @@ export async function deleteUserAction(userId: string) {
   return { ok: true };
 }
 
+export async function resetAllElevesAction() {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré" };
+
+  const { data: eleves, error } = await svc
+    .from("profiles")
+    .select("id")
+    .eq("role", "eleve");
+  if (error) return { ok: false, reason: error.message };
+
+  for (const e of eleves ?? []) {
+    await svc.auth.admin.deleteUser(e.id);
+  }
+
+  revalidatePath("/admin");
+  return { ok: true, count: (eleves ?? []).length };
+}
+
+export async function changePasswordAction(userId: string, newPassword: string) {
+  const caller = await getCallerRole();
+  if (!caller) return { ok: false, reason: "Non autorisé" };
+  if (newPassword.length < 8) return { ok: false, reason: "Au moins 8 caractères requis." };
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré" };
+  const { error } = await svc.auth.admin.updateUserById(userId, { password: newPassword });
+  if (error) return { ok: false, reason: error.message };
+  return { ok: true };
+}
+
 export async function updateUserProfileAction(
   userId: string,
   data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },

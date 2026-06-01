@@ -12,50 +12,87 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
         ti: "ቀሊል ምስፋሕ",
         uk: "Просте розкриття дужок",
       },
-      paragraphs: {
-        fr: [
-          "Développer signifie supprimer les parenthèses en distribuant la multiplication. Propriété distributive : a(b + c) = ab + ac.",
-          "Exemples : 3(x + 4) = 3x + 12 ; 2(a − 5) = 2a − 10 ; −3(2x + 1) = −6x − 3.",
-          "Quand le facteur est négatif, tous les signes changent : −2(x − 3) = −2x + 6.",
-          "Développement de (a + b)(c + d) = ac + ad + bc + bd (double distribution).",
-        ],
-        en: [
-          "Expanding means removing parentheses by distributing multiplication. Distributive property: a(b + c) = ab + ac.",
-          "Examples: 3(x + 4) = 3x + 12; 2(a − 5) = 2a − 10; −3(2x + 1) = −6x − 3.",
-          "When the factor is negative, all signs change: −2(x − 3) = −2x + 6.",
-          "Expansion of (a + b)(c + d) = ac + ad + bc + bd.",
-        ],
-        ar: [
-          "التوسيع يعني إزالة الأقواس بتوزيع الضرب. الخاصية التوزيعية: a(b + c) = ab + ac.",
-          "أمثلة: 3(x + 4) = 3x + 12؛ −3(2x + 1) = −6x − 3.",
-          "عندما يكون العامل سالباً تتغير جميع الإشارات: −2(x − 3) = −2x + 6.",
-          "(a + b)(c + d) = ac + ad + bc + bd.",
-        ],
-        fa: [
-          "توسعه یعنی حذف پرانتز با توزیع ضرب. ویژگی توزیعی: a(b + c) = ab + ac.",
-          "مثال‌ها: 3(x + 4) = 3x + 12؛ −3(2x + 1) = −6x − 3.",
-          "وقتی ضریب منفی است همه علائم عوض می‌شوند: −2(x − 3) = −2x + 6.",
-          "(a + b)(c + d) = ac + ad + bc + bd.",
-        ],
-        ti: [
-          "ምስፋሕ ዘምልክት ምርባሕ ብምስፋሕ ቅርሕ ምኹናን ዩ. ናይ ምክፋል ንብረት: a(b + c) = ab + ac.",
-          "ምሳሌ: 3(x + 4) = 3x + 12; −3(2x + 1) = −6x − 3.",
-          "ምስ ኣሉታዊ ኮፊሺየንት ኩሉ ምልክት ይቐይር: −2(x − 3) = −2x + 6.",
-          "(a + b)(c + d) = ac + ad + bc + bd.",
-        ],
-        uk: [
-          "Розкрити дужки — означає прибрати їх, розподіляючи множення. Розподільна властивість: a(b + c) = ab + ac.",
-          "Приклади: 3(x + 4) = 3x + 12; −3(2x + 1) = −6x − 3.",
-          "Якщо множник від'ємний, усі знаки змінюються: −2(x − 3) = −2x + 6.",
-          "(a + b)(c + d) = ac + ad + bc + bd.",
-        ],
-      },
+      blocks: [
+        {
+          type: "heading",
+          fr: "Développer une expression",
+          black: true,
+        },
+        {
+          type: "plain",
+          fr: "Développer signifie supprimer les parenthèses en distribuant la multiplication sur chaque terme à l'intérieur.",
+        },
+        {
+          type: "rule",
+          titleFr: "Propriété distributive",
+          itemsFr: [
+            "a(b **+** c) = ab **+** ac",
+            "a(b **−** c) = ab **−** ac",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Exemples fondamentaux",
+          black: true,
+        },
+        {
+          type: "table",
+          headersFr: ["Expression", "Développement", "Résultat"],
+          accentHeader: true,
+          rows: [
+            ["3(x **+** 4)", "3 × x **+** 3 × 4", "3x **+** 12"],
+            ["2(a **−** 5)", "2 × a **−** 2 × 5", "2a **−** 10"],
+            ["**−**3(2x **+** 1)", "**−**3 × 2x **+** (**−**3) × 1", "**−**6x **−** 3"],
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Facteur négatif devant une parenthèse",
+          black: true,
+        },
+        {
+          type: "note",
+          fr: "Quand le facteur est négatif, tous les signes à l'intérieur de la parenthèse s'inversent.",
+        },
+        {
+          type: "section",
+          labelFr: "Exemples avec facteur négatif",
+          itemsFr: [
+            "**−**2(x **−** 3) = **−**2x **+** 6  (le **−** × **−** donne **+**)",
+            "**−**(x **−** 5) = **−**x **+** 5",
+            "**−**(2x **+** 7) = **−**2x **−** 7",
+          ],
+        },
+        {
+          type: "heading",
+          fr: "Double distribution",
+          black: true,
+        },
+        {
+          type: "rule",
+          titleFr: "(a + b)(c + d)",
+          itemsFr: [
+            "(a **+** b)(c **+** d) = ac **+** ad **+** bc **+** bd",
+          ],
+        },
+        {
+          type: "example",
+          fr: "(x + 2)(x + 3) = x² + 3x + 2x + 6 = x² + 5x + 6",
+        },
+      ],
     },
-    exercises: [
-      { id: "a9-5-e1", promptFr: "Développe 4(x + 3).", type: "short_text", acceptable: ["4x+12", "4x + 12"] },
-      { id: "a9-5-e2", promptFr: "Développe 2(3a − 5).", type: "short_text", acceptable: ["6a-10", "6a − 10"] },
-      { id: "a9-5-e3", promptFr: "Développe −3(x + 2).", type: "short_text", acceptable: ["-3x-6", "−3x − 6"] },
-      { id: "a9-5-e4", promptFr: "Développe et réduis 2(x + 1) + 3x.", type: "short_text", acceptable: ["5x+2", "5x + 2"] },
-      { id: "a9-5-e5", promptFr: "Développe −2(x − 4).", type: "short_text", acceptable: ["-2x+8", "−2x + 8"] },
+    exercises: [],
+    exercisePool: [
+      { id: "a9-5-ep01", promptFr: "Développe 2(x + 3).", type: "short_text", acceptable: ["2x+6"] },
+      { id: "a9-5-ep02", promptFr: "Développe 3(a − 2).", type: "short_text", acceptable: ["3a-6"] },
+      { id: "a9-5-ep03", promptFr: "Développe 4(2x + 1).", type: "short_text", acceptable: ["8x+4"] },
+      { id: "a9-5-ep04", promptFr: "Développe 5(n − 3).", type: "short_text", acceptable: ["5n-15"] },
+      { id: "a9-5-ep05", promptFr: "Développe 2(4x + 3).", type: "short_text", acceptable: ["8x+6"] },
+      { id: "a9-5-ep06", promptFr: "Développe 3(2a − 5).", type: "short_text", acceptable: ["6a-15"] },
+      { id: "a9-5-ep07", promptFr: "Développe 6(x − 1).", type: "short_text", acceptable: ["6x-6"] },
+      { id: "a9-5-ep08", promptFr: "Développe 4(3n + 2).", type: "short_text", acceptable: ["12n+8"] },
+      { id: "a9-5-ep09", promptFr: "Développe 5(2x − 3).", type: "short_text", acceptable: ["10x-15"] },
+      { id: "a9-5-ep10", promptFr: "Développe 7(a + 4).", type: "short_text", acceptable: ["7a+28"] },
     ],
+    poolSize: 5,
   };
