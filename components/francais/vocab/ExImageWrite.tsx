@@ -108,7 +108,7 @@ export function ExImageWrite({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Regardez l&apos;image et écrivez le mot correspondant avec l&apos;article.
+        Regardez et écrivez le mot correspondant.
       </p>
       <div className="space-y-3">
         {words.map((w, i) => {
@@ -116,11 +116,15 @@ export function ExImageWrite({
           return (
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded bg-[var(--color-bg-secondary)]">
-                {resolveImg(w.image) && (
+              {resolveImg(w.image) ? (
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded bg-[var(--color-bg-secondary)]">
                   <Image src={resolveImg(w.image)!} alt="" fill className="object-contain" sizes="56px" />
-                )}
-              </div>
+                </div>
+              ) : w.relatedWords?.[0] ? (
+                <span className="w-28 shrink-0 text-sm font-bold text-[var(--color-text-primary)]">{w.relatedWords[0]}</span>
+              ) : (
+                <div className="h-14 w-14 shrink-0 rounded bg-[var(--color-bg-secondary)]" />
+              )}
               <div className="flex flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
                   <p className="flex-1 text-sm">

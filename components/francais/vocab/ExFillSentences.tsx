@@ -12,15 +12,27 @@ export function ExFillSentences({
   theme, validateCommand, onValidated, onCanValidateChange, isEval, evalNumber,
 }: ExerciseProps) {
   const allSentences = theme.sentences ?? [];
-  const sentences = allSentences.slice(0, 5);
+
+  // Pick 5 sentences each with a DIFFERENT answer
+  const [sentences] = useState(() => {
+    const byAnswer = new Map<string, typeof allSentences[number][]>();
+    for (const s of allSentences) {
+      if (!byAnswer.has(s.answer)) byAnswer.set(s.answer, []);
+      byAnswer.get(s.answer)!.push(s);
+    }
+    const uniqueAnswers = shuffle([...byAnswer.keys()]);
+    const picked: typeof allSentences[number][] = [];
+    for (const ans of uniqueAnswers) {
+      if (picked.length >= 5) break;
+      const group = byAnswer.get(ans)!;
+      picked.push(group[Math.floor(Math.random() * group.length)]!);
+    }
+    return picked;
+  });
 
   const [bankWords] = useState<string[]>(() => {
     const sentAnswers = new Set(sentences.map((s) => s.answer));
-    const answerForms: string[] = [];
-    for (const w of theme.words) {
-      if (sentAnswers.has(w.word)) answerForms.push(w.word);
-      if (w.feminine && sentAnswers.has(w.feminine)) answerForms.push(w.feminine);
-    }
+    const answerForms: string[] = [...sentAnswers];
     const answerSet = new Set(answerForms);
     const distractorPool: string[] = [];
     for (const w of theme.words) {
