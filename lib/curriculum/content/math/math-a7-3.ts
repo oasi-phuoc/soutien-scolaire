@@ -50,11 +50,7 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
         ],
       },
     },
-    exercises: [
-      { id: "a7-3-e1", promptFr: "Calculez (+6) + (+3).", type: "number", acceptable: ["9", "+9"] },
-      { id: "a7-3-e2", promptFr: "Calculez (−6) + (−3).", type: "number", acceptable: ["-9"] },
-      { id: "a7-3-e3", promptFr: "Calculez (+6) + (−3).", type: "number", acceptable: ["3", "+3"] },
-      { id: "a7-3-e4", promptFr: "Calculez (−6) − (−3).", type: "number", acceptable: ["-3"] },
-      { id: "a7-3-e5", promptFr: "Calculez −8 + 5.", type: "number", acceptable: ["-3"] },
-    ],
-  };
+  exercises: [],
+  exercisePool: [],
+  poolSize: 0,
+};
