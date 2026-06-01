@@ -471,7 +471,21 @@ function roundTo10(n: number) { return Math.round(n / 10) * 10; }
 function roundTo100(n: number) { return Math.round(n / 100) * 100; }
 function roundTo1000(n: number) { return Math.round(n / 1000) * 1000; }
 
-type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed" | "mixed";
+function roundDecToTenth(x: number, d1: number, d2: number): string {
+  const tenths = x * 10 + d1 + (d2 >= 5 ? 1 : 0);
+  const rW = Math.floor(tenths / 10), rD = tenths % 10;
+  return rD === 0 ? String(rW) : `${rW},${rD}`;
+}
+function roundDecToCent(x: number, d1: number, d2: number, d3: number): string {
+  const h = x * 100 + d1 * 10 + d2 + (d3 >= 5 ? 1 : 0);
+  const rW = Math.floor(h / 100), rF = h % 100;
+  if (rF === 0) return String(rW);
+  if (rF % 10 === 0) return `${rW},${rF / 10}`;
+  return `${rW},${String(rF).padStart(2, "0")}`;
+}
+function roundDecToUnit(x: number, d1: number): string { return String(d1 >= 5 ? x + 1 : x); }
+
+type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_2" | "est_diz_three" | "cent_near" | "thou_near" | "est_add" | "est_sub" | "est_mixed" | "mixed" | "dec_dix" | "dec_cent" | "dec_unit" | "dec_mixed";
 
 function genRounding(kind: RoundingKind, exNum: number, count: number): RoundingConfig {
   const consigneMap: Record<RoundingKind, string> = {
@@ -481,6 +495,10 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
     "est_diz_large_2":  "Estimez le résultat du calcul à la centaine la plus proche.",
     "est_diz_three":    "Estimez le résultat du calcul à la centaine la plus proche.",
     "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "", "mixed": "",
+    "dec_dix":   "Arrondissez au dixième le plus proche.",
+    "dec_cent":  "Arrondissez au centième le plus proche.",
+    "dec_unit":  "Arrondissez à l'unité la plus proche.",
+    "dec_mixed": "Arrondissez chaque nombre à la précision indiquée.",
   };
   const consigne = consigneMap[kind];
   const qs: RoundingQ[] = [];
@@ -532,6 +550,29 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
       let x = rnd(1, 999), y = rnd(1, 999);
       if (x < y) [x, y] = [y, x];
       qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
+    } else if (kind === "dec_dix") {
+      const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9);
+      qs.push({ prompt: `${x},${d1}${d2}`, answer: roundDecToTenth(x, d1, d2) });
+    } else if (kind === "dec_cent") {
+      const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9), d3 = rnd(0, 9);
+      qs.push({ prompt: `${x},${d1}${d2}${d3}`, answer: roundDecToCent(x, d1, d2, d3) });
+    } else if (kind === "dec_unit") {
+      const x = rnd(1, 20), d1 = rnd(1, 9);
+      const d2 = Math.random() < 0.5 ? rnd(0, 9) : undefined;
+      qs.push({ prompt: d2 !== undefined ? `${x},${d1}${d2}` : `${x},${d1}`, answer: roundDecToUnit(x, d1) });
+    } else if (kind === "dec_mixed") {
+      const mixTypes = ["dix", "cent", "unit"] as const;
+      const t = mixTypes[i % 3]!;
+      if (t === "dix") {
+        const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9);
+        qs.push({ prompt: `${x},${d1}${d2} → dixième`, answer: roundDecToTenth(x, d1, d2) });
+      } else if (t === "cent") {
+        const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9), d3 = rnd(0, 9);
+        qs.push({ prompt: `${x},${d1}${d2}${d3} → centième`, answer: roundDecToCent(x, d1, d2, d3) });
+      } else {
+        const x = rnd(1, 20), d1 = rnd(1, 9);
+        qs.push({ prompt: `${x},${d1}${rnd(0, 9)} → unité`, answer: roundDecToUnit(x, d1) });
+      }
     } else {
       const x = rnd(1, 999), y = rnd(1, 999), z = rnd(1, 999);
       const addFirst = Math.random() < 0.5;
@@ -1805,7 +1846,8 @@ function RoundingExercise({
   const inputBase = "w-[4.5rem] h-8 shrink-0 rounded border px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
-  const isInline = config.kind === "diz_near" || config.kind === "cent_near_new";
+  const isDecKind = config.kind.startsWith("dec_");
+  const isInline = config.kind === "diz_near" || config.kind === "cent_near_new" || isDecKind;
 
   return (
     <div className="space-y-4">
@@ -1825,8 +1867,8 @@ function RoundingExercise({
                   <span className="text-[var(--color-text-primary)] text-[9px] font-bold ml-0.5">{q.answer}</span>
                 </div>
               : <input
-                  type="number"
-                  inputMode="numeric"
+                  type={isDecKind ? "text" : "number"}
+                  inputMode={isDecKind ? "decimal" : "numeric"}
                   value={v}
                   disabled={validated}
                   onChange={e => onChange(i, e.target.value)}
@@ -2210,6 +2252,16 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
+    } else if (sid === "A5-3") {
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_unit", 3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 4, 5) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 3, 3) });
+      steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A5-2") {
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
@@ -2237,7 +2289,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
-    l.submoduleId === "A5-2"
+    l.submoduleId === "A5-2" || l.submoduleId === "A5-3"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -3916,7 +3968,7 @@ export function GenericModuleContent({
     const cfg = activeRoundingConfig!;
     stepCanValidate = !roundingValidated;
     stepValidate = roundingValidated ? () => {} : () => {
-      setRoundingResults(cfg.questions.map((q, i) => (roundingAnswers[i] ?? "").trim() === q.answer));
+      setRoundingResults(cfg.questions.map((q, i) => (roundingAnswers[i] ?? "").trim().replace(".", ",") === q.answer));
       setRoundingValidated(true);
     };
     stepReset = () => {
