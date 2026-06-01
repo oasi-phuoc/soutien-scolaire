@@ -136,6 +136,7 @@ function resolveImage(image: string | undefined, folder: string): string | undef
 function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "mf"; imageFolder: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
   const [imgFailed, setImgFailed] = useState(false);
+  const [imgFit, setImgFit] = useState<"contain" | "cover">("contain");
   const src = resolveImage(w.image, imageFolder);
 
   return (
@@ -143,7 +144,10 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       {/* Image with audio overlay */}
       <div className="relative h-28 w-full">
         {src && !imgFailed ? (
-          <Image src={src} alt={w.word} fill className="rounded object-cover" onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
+          <Image src={src} alt={w.word} fill
+            className={`rounded object-${imgFit}`}
+            onLoad={e => { const i = e.currentTarget; setImgFit(i.naturalWidth / i.naturalHeight > 1.65 ? "cover" : "contain"); }}
+            onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
         ) : (
           <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
         )}
