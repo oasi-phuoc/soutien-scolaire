@@ -1,54 +1,103 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_A7_1_LESSON: MathSubmoduleLesson = {
-    submoduleId: "A7-1",
-    submoduleCode: "A7.1",
-    theory: {
-      title: { fr: "Notion de négatif", en: "Concept of negative numbers", ar: "مفهوم الأعداد السالبة", fa: "مفهوم اعداد منفی", ti: "ናይ ጎዳ ቁጽሪ ፍላጠ", uk: "Поняття від'ємних чисел" },
-      paragraphs: {
-        fr: [
-          "Les nombres relatifs incluent les nombres positifs et négatifs ainsi que zéro. Un nombre négatif est plus petit que 0 (ex. −3, −15). Un nombre positif est plus grand que 0 (ex. +3, +15). On écrit souvent les positifs sans le signe +.",
-          "L'opposé d'un nombre est celui qui a le signe contraire. L'opposé de +3 est −3. L'opposé de −7 est +7. Un nombre et son opposé sont à égale distance de 0 sur la droite numérique.",
-          "Représentation sur la droite numérique : les négatifs sont à gauche de 0, les positifs à droite. Exemple : −6 −5 −4 −3 −2 −1 0 +1 +2 +3 +4 +5 +6.",
-          "Applications concrètes : température sous zéro (−5°C), altitude sous le niveau de la mer (−200 m), dette (−50 CHF).",
-        ],
-        en: [
-          "Relative numbers include positive and negative numbers and zero. A negative number is less than 0. A positive number is greater than 0. Positives are often written without the + sign.",
-          "The opposite of a number has the opposite sign. Opposite of +3 is −3. Opposite of −7 is +7. A number and its opposite are equidistant from 0.",
-          "On the number line: negatives are left of 0, positives right. Example: −6 −5 … 0 … +5 +6.",
-          "Real-world examples: temperature below zero (−5°C), altitude below sea level (−200 m), debt (−50 CHF).",
-        ],
-        ar: [
-          "الأعداد النسبية تشمل الأعداد الموجبة والسالبة والصفر. العدد السالب أقل من 0. العدد الموجب أكبر من 0. تُكتب الأعداد الموجبة عادةً بدون علامة +.",
-          "معكوس عدد له علامة معاكسة. معكوس +3 هو −3. معكوس −7 هو +7. العدد ومعكوسه على مسافة متساوية من 0.",
-          "على محور الأعداد: السالبة يسار 0، الموجبة يمينه. مثال: −6 −5 … 0 … +5 +6.",
-          "تطبيقات: درجة حرارة تحت الصفر (−5°م)، ارتفاع تحت مستوى البحر (−200م)، دَين (−50 فرنك).",
-        ],
-        fa: [
-          "اعداد نسبی شامل اعداد مثبت، منفی و صفر می‌شوند. عدد منفی کمتر از ۰ است. عدد مثبت بیشتر از ۰. اعداد مثبت معمولاً بدون علامت + نوشته می‌شوند.",
-          "مخالف یک عدد علامت معکوس دارد. مخالف +۳ عبارت است از −۳. مخالف −۷ عبارت است از +۷. یک عدد و مخالفش از ۰ فاصله یکسانی دارند.",
-          "روی محور عددی: منفی‌ها سمت چپ ۰، مثبت‌ها سمت راست. مثال: −۶ −۵ … ۰ … +۵ +۶.",
-          "کاربردهای واقعی: دمای زیر صفر (−۵°C)، ارتفاع زیر سطح دریا (−۲۰۰ م)، بدهی (−۵۰ فرانک).",
-        ],
-        ti: [
-          "ናይ ኣካባቢ ቁጽርታት ንጉስ ምስ ዉሒዱ ምስ ዜሮ ዝሓቁፉ ቁጽርታት እዮም። ዉሒዱ ቁጽሪ ካብ 0 ዝሕደር እዩ። ንጉስ ቁጽሪ ካብ 0 ዝዓቢ እዩ። ንጉስ ቁጽርታት ብዘይ + ምልክት ይጸሓፉ።",
-          "ናይ ሓደ ቁጽሪ ተቃርኒ ተቃርኒ ምልክት ዘለዎ ቁጽሪ እዩ። ተቃርኒ ናይ +3 −3 እዩ። ተቃርኒ ናይ −7 +7 እዩ। ቁጽሪ ምስ ተቃርኒኡ ካብ 0 ማዕረ ምርቀት ኣለዎ።",
-          "ናይ ቁጽሪ ሰሌዳ: ዉሒዱ ካብ 0 ጸጋም፡ ንጉስ ካብ 0 ቀኝ ኣሎ። ኣብነት: −6 −5 … 0 … +5 +6.",
-          "ዕዮ: ዝሑል ሙቐት (−5°C)፡ ምርቀት ካብ ባሕሪ ዝታሕቲ (−200 ሜ)፡ ዕዳ (−50 CHF).",
-        ],
-        uk: [
-          "Відносні числа включають позитивні, від'ємні числа та нуль. Від'ємне число менше за 0. Позитивне — більше за 0. Позитивні зазвичай пишуть без знаку +.",
-          "Протилежне числу — число з протилежним знаком. Протилежне +3 — це −3. Протилежне −7 — це +7. Число та протилежне однаково віддалені від 0.",
-          "На числовій прямій: від'ємні зліва від 0, позитивні — справа. Приклад: −6 −5 … 0 … +5 +6.",
-          "Застосування: температура нижче нуля (−5°C), висота нижче рівня моря (−200 м), борг (−50 CHF).",
+  submoduleId: "A7-1",
+  submoduleCode: "A7.1",
+  theory: {
+    title: { fr: "Notion de négatif", en: "Concept of negative numbers", ar: "مفهوم الأعداد السالبة", fa: "مفهوم اعداد منفی", ti: "ናይ ጎዳ ቁጽሪ ፍላጠ", uk: "Поняття від'ємних чисел" },
+    paragraphs: { fr: [] },
+    blocks: [
+      { type: "heading", fr: "Les nombres relatifs", black: true },
+      { type: "highlight", fr: "Définition" },
+      { type: "section", labelFr: "", itemsFr: [
+        "Un nombre relatif a un signe **+** ou **−**.",
+        "Positif : plus grand que 0 → **+**3, **+**15 (le + est souvent omis).",
+        "Négatif : plus petit que 0 → **−**3, **−**15.",
+        "Le zéro (0) n'est ni positif ni négatif.",
+      ] },
+      { type: "plain", fr: "" },
+      { type: "heading", fr: "La droite numérique", black: true },
+      {
+        type: "svg",
+        captionFr: "Droite numérique de −6 à +6",
+        noFrame: true,
+        markup: `<svg viewBox="0 0 340 60" xmlns="http://www.w3.org/2000/svg" width="340" height="60">
+  <!-- Main axis line -->
+  <line x1="10" y1="30" x2="330" y2="30" stroke="#0f172a" stroke-width="2"/>
+  <!-- Left arrow -->
+  <polygon points="10,30 20,25 20,35" fill="#0f172a"/>
+  <!-- Right arrow -->
+  <polygon points="330,30 320,25 320,35" fill="#0f172a"/>
+  <!-- -6 -->
+  <line x1="30" y1="25" x2="30" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="30" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−6</text>
+  <!-- -5 -->
+  <line x1="54" y1="25" x2="54" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="54" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−5</text>
+  <!-- -4 -->
+  <line x1="78" y1="25" x2="78" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="78" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−4</text>
+  <!-- -3 -->
+  <line x1="102" y1="25" x2="102" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="102" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−3</text>
+  <!-- -2 -->
+  <line x1="126" y1="25" x2="126" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="126" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−2</text>
+  <!-- -1 -->
+  <line x1="150" y1="25" x2="150" y2="35" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="150" y="50" text-anchor="middle" font-size="10" fill="#ef4444">−1</text>
+  <!-- 0 -->
+  <line x1="174" y1="22" x2="174" y2="38" stroke="#0f172a" stroke-width="2"/>
+  <text x="174" y="50" text-anchor="middle" font-size="10" fill="#0f172a" font-weight="bold">0</text>
+  <!-- +1 -->
+  <line x1="198" y1="25" x2="198" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="198" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+1</text>
+  <!-- +2 -->
+  <line x1="222" y1="25" x2="222" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="222" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+2</text>
+  <!-- +3 -->
+  <line x1="246" y1="25" x2="246" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="246" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+3</text>
+  <!-- +4 -->
+  <line x1="270" y1="25" x2="270" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="270" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+4</text>
+  <!-- +5 -->
+  <line x1="294" y1="25" x2="294" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="294" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+5</text>
+  <!-- +6 -->
+  <line x1="318" y1="25" x2="318" y2="35" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="318" y="50" text-anchor="middle" font-size="10" fill="#3b82f6">+6</text>
+</svg>`,
+      },
+      { type: "section", labelFr: "", itemsFr: [
+        "Les négatifs sont à **gauche** de 0.",
+        "Les positifs sont à **droite** de 0.",
+        "Plus on va à gauche, plus le nombre est **petit**.",
+      ] },
+      { type: "plain", fr: "" },
+      { type: "heading", fr: "L'opposé d'un nombre", black: true },
+      { type: "highlight", fr: "Définition" },
+      { type: "section", labelFr: "", itemsFr: [
+        "L'opposé est le nombre qui a le **signe contraire**.",
+        "L'opposé de **+**3 est **−**3.",
+        "L'opposé de **−**7 est **+**7.",
+        "Un nombre et son opposé sont à **égale distance** de 0.",
+      ] },
+      { type: "table",
+        headersFr: ["Nombre", "Opposé"],
+        accentHeader: true,
+        rows: [
+          ["+5", "−5"],
+          ["−5", "+5"],
+          ["−12", "+12"],
+          ["0", "0"],
         ],
       },
-    },
-    exercises: [
-      { id: "a7-1-e1", promptFr: "Quel est l'opposé de −5 ?", type: "number", acceptable: ["5", "+5"] },
-      { id: "a7-1-e2", promptFr: "Quel est l'opposé de +12 ?", type: "number", acceptable: ["-12"] },
-      { id: "a7-1-e3", promptFr: "Une température de −3°C est-elle positive ou négative ?", type: "short_text", acceptable: ["négative", "negative"] },
-      { id: "a7-1-e4", promptFr: "Quel nombre est à la même distance de 0 que +8, mais de l'autre côté ?", type: "number", acceptable: ["-8"] },
-      { id: "a7-1-e5", promptFr: "Une dette de 50 CHF s'écrit comment en relatif ?", type: "short_text", acceptable: ["-50", "−50"] },
+      { type: "plain", fr: "" },
+      { type: "note", fr: "Applications : température sous zéro (−5°C), altitude sous le niveau de la mer (−200 m), dette (−50 CHF)." },
     ],
-  };
+  },
+  exercises: [],
+  exercisePool: [],
+  poolSize: 4,
+};
