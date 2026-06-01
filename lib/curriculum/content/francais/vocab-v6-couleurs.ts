@@ -19,6 +19,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
     { word: "marron",    image: "marron.svg",    definition: "couleur brun foncé comme le chocolat" },
     { word: "beige",     image: "beige.svg",     definition: "couleur crème, brun très clair" },
     { word: "turquoise", image: "turquoise.svg", definition: "couleur bleu-vert vif" },
+    { word: "cyan",      image: "cyan.svg",      definition: "couleur bleu-vert clair, entre le bleu et le vert" },
     { word: "doré",      image: "dore.svg",      feminine: "dorée",     definition: "couleur brillante semblable à l'or" },
     { word: "argenté",   image: "argente.svg",   feminine: "argentée",  definition: "couleur brillante semblable à l'argent" },
   ],
