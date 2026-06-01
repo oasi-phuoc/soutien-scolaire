@@ -58,6 +58,7 @@ export type MathRichBlock =
   | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> }
   | { type: "mult_table" }
   | { type: "div_table" }
+  | { type: "power_table" }
   | {
       type: "mul_step_cards";
       /** Digits [M,C,D,U] for the first operand (e.g. [0,3,7,4] for 374) */

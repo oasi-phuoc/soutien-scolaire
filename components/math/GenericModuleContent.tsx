@@ -2300,6 +2300,55 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   return steps;
 }
 
+// ── Power table block ────────────────────────────────────────────────────────
+const POWER_PAIRS: Array<[number, number | null]> = [[2,3],[4,5],[6,7],[8,9],[10,null]];
+const SUPS: Record<number, string> = {1:"¹",2:"²",3:"³",4:"⁴",5:"⁵"};
+
+function PowerTableBlock() {
+  const [pair, setPair] = useState<[number, number | null]>(POWER_PAIRS[0]!);
+  const [a, b] = pair;
+  return (
+    <div className="space-y-3">
+      <div className="flex overflow-hidden rounded-xl border border-[var(--color-border-default)]">
+        {POWER_PAIRS.map(([x, y], idx) => (
+          <button key={x} type="button" onClick={() => setPair([x, y])}
+            className={`flex-1 px-2 py-1.5 text-sm font-bold transition-colors ${
+              idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
+            } ${
+              pair[0] === x
+                ? "bg-[var(--color-accent-alg)] text-white"
+                : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+            }`}
+          >
+            {y !== null ? `${x}–${y}` : String(x)}
+          </button>
+        ))}
+      </div>
+      <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
+        <table className="w-full text-sm">
+          <tbody>
+            {[1,2,3,4,5].map(n => (
+              <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a}{SUPS[n]}</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{Math.pow(a, n)}</td>
+                {b !== null ? (
+                  <>
+                    <td className="w-6" />
+                    <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b}{SUPS[n]}</td>
+                    <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
+                    <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{Math.pow(b, n)}</td>
+                  </>
+                ) : null}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ── Multiplication table block ───────────────────────────────────────────────
 const MULT_PAIRS: [number, number][] = [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]];
 
@@ -3038,6 +3087,8 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           ))}
         </div>
       );
+    case "power_table":
+      return <PowerTableBlock />;
     case "mult_table":
       return <MultiplicationTableBlock />;
     case "div_table":

@@ -65,6 +65,12 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
             ["6¹", "6 (cas particulier)", "6"],
           ],
         },
+        {
+          type: "heading",
+          fr: "Table des puissances (exposants 1 à 5)",
+          black: true,
+        },
+        { type: "power_table" },
       ],
     },
     exercises: [],
