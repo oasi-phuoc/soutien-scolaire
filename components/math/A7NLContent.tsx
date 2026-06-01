@@ -41,10 +41,9 @@ function nlPos(v: number, min: number, max: number): number {
 
 function NLAxis({ min, max }: { min: number; max: number }) {
   const range = max - min;
+  const labelEvery = range <= 10 ? 1 : range <= 20 ? 2 : range <= 30 ? 5 : 10;
   const ticks: number[] = [];
   for (let v = min; v <= max; v++) ticks.push(v);
-  // Show label at every integer if range ≤ 10, else every 2nd
-  const labelEvery = range <= 10 ? 1 : 2;
   return (
     <>
       <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke="currentColor" strokeWidth="2" />
@@ -52,12 +51,15 @@ function NLAxis({ min, max }: { min: number; max: number }) {
       <polygon points={`${ML + lineW + 8},${lineY} ${ML + lineW},${lineY - 4} ${ML + lineW},${lineY + 4}`} fill="currentColor" />
       {ticks.map(v => {
         const x = nlPos(v, min, max);
-        const isMajor = v % labelEvery === 0;
+        const isLabel = v % labelEvery === 0 || v === min || v === max;
+        const isMid = labelEvery >= 10 && v % 5 === 0;
+        const tickLen = isLabel ? 7 : isMid ? 4 : 2;
         const color = v < 0 ? "#ef4444" : v > 0 ? "#3b82f6" : "#0f172a";
         return (
           <g key={v}>
-            <line x1={x} y1={lineY - 5} x2={x} y2={lineY + 8} stroke={color} strokeWidth={v === 0 ? 2.5 : 1.5} />
-            {isMajor && (
+            <line x1={x} y1={lineY - tickLen} x2={x} y2={lineY + tickLen}
+              stroke={color} strokeWidth={v === 0 ? 2.5 : isLabel ? 1.5 : 1} />
+            {isLabel && (
               <text x={x} y={lineY + 22} textAnchor="middle" fontSize="10" fill={color}
                 fontWeight={v === 0 ? "bold" : "normal"}>
                 {fmtInt(v)}
@@ -75,8 +77,8 @@ function NLAxis({ min, max }: { min: number; max: number }) {
 type NLReadCfg = { min: number; max: number; arrows: number[] };
 
 function genMixed(): NLReadCfg {
-  const min = rnd(-6, -3);
-  const max = min + rnd(8, 11);
+  const min = rnd(-8, -3);
+  const max = min + 10;
   const cands: number[] = [];
   for (let v = min + 1; v < max; v++) cands.push(v);
   const arrows = shuffle(cands).slice(0, 3).sort((a, b) => a - b);
@@ -84,11 +86,16 @@ function genMixed(): NLReadCfg {
 }
 
 function genNegOnly(): NLReadCfg {
+  const ranges = [10, 20, 30, 40, 50] as const;
+  const range = ranges[rnd(0, ranges.length - 1)];
   const max = rnd(-2, -1);
-  const min = max - rnd(7, 9);
-  const cands: number[] = [];
-  for (let v = min + 1; v < max; v++) cands.push(v);
-  const arrows = shuffle(cands).slice(0, 3).sort((a, b) => a - b);
+  const min = max - range;
+  // spread 3 arrows across thirds of the range
+  const third = Math.floor(range / 3);
+  const a1 = rnd(min + 1, min + third);
+  const a2 = rnd(min + third + 1, min + 2 * third);
+  const a3 = rnd(min + 2 * third + 1, max - 1);
+  const arrows = [a1, a2, a3].sort((a, b) => a - b);
   return { min, max, arrows };
 }
 
