@@ -665,12 +665,6 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const title = mode === "gt"
-    ? "Nombres supérieurs à x"
-    : mode === "lt"
-      ? "Nombres inférieurs à x"
-      : "Nombres entre x et y";
-
   return (
     <div className="space-y-5">
       <div>
