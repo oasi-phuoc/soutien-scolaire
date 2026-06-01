@@ -48,9 +48,9 @@ export const LEVEL_PASSING_GRADES: Record<LevelKey, number> = {
 };
 
 export const LEVEL_LABELS: Record<LevelKey, string> = {
-  base: "Base (≥ 4/6)",
-  moyen: "Moyen (≥ 5/6)",
-  avance: "Avancé (≥ 5.5/6)",
+  base: "Base",
+  moyen: "Moyen",
+  avance: "Avancé",
 };
 
 /** Barème suisse linéaire : (obtenus / max) × 5 + 1, arrondi à 0.1. */
