@@ -6,7 +6,7 @@ export const V8_CORPS_THEME: VocabTheme = {
   title: "Le corps",
   section: "V8",
   words: [
-    { word: "tête",    article: "la",  gender: "f", definition: "partie supérieure du corps" },
+    { word: "tête",  image: "tete.jpg",  article: "la",  gender: "f", definition: "partie supérieure du corps" },
     { word: "bras", image: "bras.jpg",    article: "le",  gender: "m", definition: "membre supérieur du corps" },
     { word: "main", image: "main.jpg",    article: "la",  gender: "f", definition: "extrémité du bras avec cinq doigts" },
     { word: "doigt", image: "doigt.jpg",   article: "le",  gender: "m", definition: "chacun des cinq appendices de la main" },
@@ -19,7 +19,7 @@ export const V8_CORPS_THEME: VocabTheme = {
     { word: "cou", image: "cou.jpg",     article: "le",  gender: "m", definition: "partie entre la tête et les épaules" },
     { word: "nez", image: "nez.jpg",     article: "le",  gender: "m", definition: "organe de l'odorat au milieu du visage" },
     { word: "bouche", image: "bouche.jpg",  article: "la",  gender: "f", definition: "ouverture du visage pour manger et parler" },
-    { word: "œil",     article: "l'",  gender: "m", definition: "organe de la vue" },
+    { word: "œil",  image: "oeil.jpg",  article: "l'",  gender: "m", definition: "organe de la vue" },
     { word: "oreille", image: "oreille.jpg", article: "l'",  gender: "f", definition: "organe de l'ouïe de chaque côté de la tête" },
   ],
   sentences: [
