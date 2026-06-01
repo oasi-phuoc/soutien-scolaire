@@ -28,7 +28,7 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
             type="text"
             required
             autoComplete="username"
-            placeholder="prenom.nom ou email complet"
+            placeholder="prenom.nom"
             className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 font-mono text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
           />
         </div>
