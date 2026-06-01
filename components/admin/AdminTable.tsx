@@ -16,11 +16,13 @@ import {
   changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
+  resetAllElevesAction,
 } from "@/app/actions/admin";
 
 export type UserRow = {
   id: string;
   email: string;
+  login_id: string | null;
   nom: string | null;
   prenom: string | null;
   classe: string | null;
@@ -265,7 +267,9 @@ function DetailModal({
 
         {/* Info */}
         <div className="mb-4 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-          <p>{user.email}</p>
+          <p className="font-mono text-sm font-semibold text-teal-700 dark:text-teal-400">
+            {user.login_id ?? user.email.replace(/@soutien\.local$/, "")}
+          </p>
           {user.langue && (
             <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
               🌐 {LANGUE_LABELS[user.langue] ?? user.langue}
@@ -533,6 +537,42 @@ function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: (
   );
 }
 
+// ── Reset All Eleves Confirm ────────────────────────────────────────────────
+
+function ResetElevesConfirm({ eleveCount, onClose, onReset }: { eleveCount: number; onClose: () => void; onReset: () => void }) {
+  const [pending, startTransition] = useTransition();
+  const [err, setErr] = useState<string | null>(null);
+
+  function confirm() {
+    startTransition(async () => {
+      const r = await resetAllElevesAction();
+      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
+      onReset();
+    });
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+      <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
+        <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer tous les comptes élèves</h2>
+        <p className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
+          Cette action supprimera définitivement <strong>{eleveCount} compte{eleveCount !== 1 ? "s" : ""} élève{eleveCount !== 1 ? "s" : ""}</strong> ainsi que toutes leurs données de progression.
+        </p>
+        <p className="mb-4 text-sm font-semibold text-red-600 dark:text-red-400">Cette action est irréversible.</p>
+        {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
+        <div className="flex justify-end gap-2">
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
+          <button onClick={confirm} disabled={pending} className="flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
+            {pending ? <Spinner /> : <IconTrash />}
+            {pending ? "Suppression…" : "Tout supprimer"}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Main Component ──────────────────────────────────────────────────────────
 
 export function AdminTable({
@@ -552,6 +592,7 @@ export function AdminTable({
   const [selected, setSelected] = useState<UserRow | null>(null);
   const [editing, setEditing] = useState<UserRow | null>(null);
   const [confirming, setConfirming] = useState<UserRow | null>(null);
+  const [resetConfirming, setResetConfirming] = useState(false);
   const [, startTransition] = useTransition();
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
@@ -615,7 +656,17 @@ export function AdminTable({
             )}
           </div>
 
-          <span className="ml-auto text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+          <span className="text-sm text-zinc-500">{sorted.length} élève{sorted.length !== 1 ? "s" : ""}</span>
+
+          {currentUserRole === "admin" && (
+            <button
+              onClick={() => setResetConfirming(true)}
+              className="ml-auto flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-4 py-1.5 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100 dark:border-red-800/50 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/40"
+            >
+              <IconTrash />
+              Réinitialiser les élèves
+            </button>
+          )}
         </div>
       </div>
 
@@ -684,6 +735,17 @@ export function AdminTable({
       )}
       {editing && <EditModal user={editing} onClose={() => setEditing(null)} onSaved={data => handleSaved(editing.id, data)} />}
       {confirming && <DeleteConfirm user={confirming} onClose={() => setConfirming(null)} onDeleted={() => handleDeleted(confirming.id)} />}
+      {resetConfirming && (
+        <ResetElevesConfirm
+          eleveCount={rows.filter(r => r.role === "eleve").length}
+          onClose={() => setResetConfirming(false)}
+          onReset={() => {
+            setRows(rs => rs.filter(r => r.role !== "eleve"));
+            setResetConfirming(false);
+            setSelected(null);
+          }}
+        />
+      )}
     </>
   );
 }

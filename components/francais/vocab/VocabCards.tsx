@@ -143,7 +143,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
       {/* Image with audio overlay */}
       <div className="relative h-28 w-full">
         {src && !imgFailed ? (
-          <Image src={src} alt={w.word} fill className="rounded object-contain" onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
+          <Image src={src} alt={w.word} fill className="rounded object-cover" onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
         ) : (
           <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
         )}

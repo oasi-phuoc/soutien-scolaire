@@ -19,16 +19,17 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
 
       <form action={signInAction} className="mt-6 flex flex-col gap-4">
         <div>
-          <label htmlFor="email" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
-            E-mail
+          <label htmlFor="identifier" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+            Identifiant
           </label>
           <input
-            id="email"
-            name="email"
-            type="email"
+            id="identifier"
+            name="identifier"
+            type="text"
             required
-            autoComplete="email"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
+            autoComplete="username"
+            placeholder="prenom.nom"
+            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 font-mono text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
           />
         </div>
 
@@ -37,12 +38,6 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
             <label htmlFor="password" className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
               Mot de passe
             </label>
-            <Link
-              href="/mot-de-passe-oublie"
-              className="text-xs font-medium text-teal-700 underline underline-offset-2 dark:text-teal-400"
-            >
-              Mot de passe oublié ?
-            </Link>
           </div>
           <input
             id="password"

@@ -50,6 +50,26 @@ export async function deleteUserAction(userId: string) {
   return { ok: true };
 }
 
+export async function resetAllElevesAction() {
+  const caller = await getCallerRole();
+  if (caller !== "admin") return { ok: false, reason: "Non autorisé" };
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, reason: "Service role non configuré" };
+
+  const { data: eleves, error } = await svc
+    .from("profiles")
+    .select("id")
+    .eq("role", "eleve");
+  if (error) return { ok: false, reason: error.message };
+
+  for (const e of eleves ?? []) {
+    await svc.auth.admin.deleteUser(e.id);
+  }
+
+  revalidatePath("/admin");
+  return { ok: true, count: (eleves ?? []).length };
+}
+
 export async function updateUserProfileAction(
   userId: string,
   data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },
