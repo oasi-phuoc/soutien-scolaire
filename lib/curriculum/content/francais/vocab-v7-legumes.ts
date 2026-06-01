@@ -10,7 +10,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
     { word: "tomate",         article: "la",  gender: "f", definition: "légume-fruit rouge et juteux" },
     { word: "salade", image: "salade.jpg",         article: "la",  gender: "f", definition: "légume à feuilles vertes mangé cru" },
     { word: "concombre", image: "concombre.jpg",      article: "le",  gender: "m", definition: "légume long vert et frais" },
-    { word: "pomme de terre", article: "la",  gender: "f", definition: "légume en tubercule qui pousse en terre" },
+    { word: "pomme de terre", image: "pomme-de-terre.jpg", article: "la",  gender: "f", definition: "légume en tubercule qui pousse en terre" },
     { word: "oignon", image: "oignon.jpg",         article: "l'",  gender: "m", definition: "légume rond à pelure, au goût fort" },
     { word: "poivron", image: "poivron.jpg",        article: "le",  gender: "m", definition: "légume de couleur rouge, verte ou jaune" },
     { word: "courgette", image: "courgette.jpg",      article: "la",  gender: "f", definition: "légume vert allongé et doux" },

@@ -11,7 +11,7 @@ export const V7_BOULANGERIE_THEME: VocabTheme = {
     { word: "croissant",       article: "le",  gender: "m", definition: "viennoiserie feuilletée en forme de lune" },
     { word: "pain au chocolat",article: "le",  gender: "m", definition: "viennoiserie feuilletée avec du chocolat" },
     { word: "brioche",         article: "la",  gender: "f", definition: "pain sucré et moelleux au beurre" },
-    { word: "gâteau",          article: "le",  gender: "m", definition: "pâtisserie sucrée pour les fêtes" },
+    { word: "gâteau",  image: "gateau.jpg",  article: "le",  gender: "m", definition: "pâtisserie sucrée pour les fêtes" },
     { word: "tarte",           article: "la",  gender: "f", definition: "pâtisserie plate avec garniture" },
     { word: "sandwich",        article: "le",  gender: "m", definition: "pain fourré avec des ingrédients" },
     { word: "biscuit",         article: "le",  gender: "m", definition: "petite pâtisserie sèche et sucrée" },

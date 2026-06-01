@@ -19,7 +19,7 @@ export const V7_FRUITS_THEME: VocabTheme = {
     { word: "ananas", image: "ananas.jpg",   article: "l'",  gender: "m", definition: "grand fruit tropical avec une couronne de feuilles" },
     { word: "citron", image: "citron.jpg",   article: "le",  gender: "m", definition: "fruit jaune très acide" },
     { word: "melon", image: "melon.jpg",    article: "le",  gender: "m", definition: "gros fruit rond à chair orange et sucrée" },
-    { word: "pastèque", article: "la",  gender: "f", definition: "grand fruit vert à chair rouge et rafraîchissante" },
+    { word: "pastèque", image: "pasteque.jpg", article: "la",  gender: "f", definition: "grand fruit vert à chair rouge et rafraîchissante" },
     { word: "mangue", image: "mangue.jpg",   article: "la",  gender: "f", definition: "fruit tropical jaune-orange très sucré" },
   ],
   sentences: [
