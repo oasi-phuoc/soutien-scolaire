@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ComingSoon } from "@/components/ComingSoon";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
@@ -36,7 +37,7 @@ const VOCAB_MODULES: SectionDef[] = [
 const TABS: { id: FrenchTab; label: string }[] = [
   { id: "vocabulaire",    label: "Vocabulaire" },
   { id: "grammaire",      label: "Grammaire" },
-  { id: "communication",  label: "Communication" },
+  { id: "communication",  label: "Parler" },
 ];
 
 const VALID_TABS: FrenchTab[] = ["vocabulaire", "grammaire", "communication"];
@@ -402,12 +403,14 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
       {tab === "communication" ? (
         <section aria-label="Modules de communication">
-          <CommModuleList isAdmin={isAdmin} />
+          {isAdmin ? <CommModuleList isAdmin /> : <ComingSoon />}
         </section>
       ) : null}
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
-        {tab === "vocabulaire" ? (
+        {tab === "grammaire" && !isAdmin ? (
+          <ComingSoon />
+        ) : tab === "vocabulaire" ? (
           <>
             {VOCAB_MODULES.map((mod) => {
               const themes = FRENCH_THEMES.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
