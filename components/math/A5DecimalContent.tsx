@@ -134,7 +134,8 @@ function DecExercise({
 // ── A5.4 / A5.5 — DecArithGroupExercise ───────────────────────────────────────
 
 type ArithOp = "+" | "-" | "×";
-type ArithPrecision = "tenths" | "hundredths" | "extended";
+// "small" = 0.01–10 (hundredths 1–999); "large" = 10–100 (tenths 100–999 or hundredths 1000–9999, random)
+type ArithPrecision = "tenths" | "hundredths" | "extended" | "small" | "large";
 type MissingPos = "a" | "b" | "result";
 
 interface ArithQuestion {
@@ -162,7 +163,20 @@ function genArithQuestions(
     let missingPos: MissingPos;
 
     if (op === "+") {
-      if (precision === "hundredths") {
+      if (precision === "small") {
+        // 0.01–10: use hundredths 1–499 so sum ≤ 9.98
+        const aH = rnd(1, 499); const bH = rnd(1, 499);
+        aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH + bH);
+      } else if (precision === "large") {
+        // 10–100: randomly 1 or 2 decimal places
+        if (Math.random() < 0.5) {
+          const aT = rnd(100, 499); const bT = rnd(100, 499); // 10.0–49.9, sum ≤ 99.8
+          aStr = tenthsToStr(aT); bStr = tenthsToStr(bT); resultStr = tenthsToStr(aT + bT);
+        } else {
+          const aH = rnd(1000, 4999); const bH = rnd(1000, 4999); // 10.00–49.99, sum ≤ 99.98
+          aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH + bH);
+        }
+      } else if (precision === "hundredths") {
         const aH = rnd(101, 999);
         const bH = rnd(101, 999);
         const rH = aH + bH;
@@ -179,7 +193,19 @@ function genArithQuestions(
         resultStr = tenthsToStr(rT);
       }
     } else if (op === "-") {
-      if (precision === "hundredths") {
+      if (precision === "small") {
+        // 0.01–10: use hundredths
+        const aH = rnd(100, 999); const bH = rnd(1, aH - 1);
+        aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH - bH);
+      } else if (precision === "large") {
+        if (Math.random() < 0.5) {
+          const aT = rnd(200, 999); const bT = rnd(100, aT - 1); // 20.0–99.9
+          aStr = tenthsToStr(aT); bStr = tenthsToStr(bT); resultStr = tenthsToStr(aT - bT);
+        } else {
+          const aH = rnd(2000, 9999); const bH = rnd(1000, aH - 1); // 20.00–99.99
+          aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH - bH);
+        }
+      } else if (precision === "hundredths") {
         let aH: number, bH: number;
         do {
           aH = rnd(201, 999);
@@ -244,6 +270,7 @@ export function DecArithGroupExercise({
   validateCommand,
   onValidated,
   onTimeUpdate,
+  hideTimerDisplay,
 }: {
   exNum: number;
   op: ArithOp;
@@ -253,6 +280,7 @@ export function DecArithGroupExercise({
   validateCommand: number;
   onValidated: (ok: boolean) => void;
   onTimeUpdate?: (t: number) => void;
+  hideTimerDisplay?: boolean;
 }) {
   const count = timer !== undefined ? 8 : 5;
   const [questions] = useState<ArithQuestion[]>(() =>
@@ -322,7 +350,7 @@ export function DecArithGroupExercise({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-        {timer !== undefined && (
+        {timer !== undefined && !hideTimerDisplay && (
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft !== null && !validated
               ? timeLeft <= 15
@@ -891,5 +919,316 @@ export function DecDivExtExercise({
       validateCommand={validateCommand}
       onValidated={onValidated}
     />
+  );
+}
+
+// ── Decimal column addition/subtraction (A5.4 Ex7, Ex8) ──────────────────────
+// Numbers stored as hundredths (integer). Display columns: D, U, ",", dx, cx
+
+function hToDigits(h: number): [number, number, number, number] {
+  const cx = h % 10;
+  const dx = Math.floor(h / 10) % 10;
+  const u = Math.floor(h / 100) % 10;
+  const d = Math.floor(h / 1000) % 10;
+  return [d, u, dx, cx];
+}
+
+interface DecColQ {
+  aH: number; bH: number; rH: number; op: "+" | "-";
+}
+
+function genDecColQs(op: "+" | "-", count: number): DecColQ[] {
+  return Array.from({ length: count }, () => {
+    if (op === "+") {
+      const aH = rnd(100, 499); // 1.00–4.99
+      const bH = rnd(100, 499);
+      return { aH, bH, rH: aH + bH, op };
+    } else {
+      const aH = rnd(200, 999); // 2.00–9.99
+      const bH = rnd(100, aH - 1);
+      return { aH, bH, rH: aH - bH, op };
+    }
+  });
+}
+
+function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange }: {
+  q: DecColQ; cardIdx: number; cellAnswers: string[]; validated: boolean; cardCorrect: boolean;
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+}) {
+  const [ad, au, adx, acx] = hToDigits(q.aH);
+  const [bd, bu, bdx, bcx] = hToDigits(q.bH);
+  const [rd, ru, rdx, rcx] = hToDigits(q.rH);
+  const rExpected = [rd, ru, rdx, rcx];
+  const labels = ["D", "U", ",", "dx", "cx"];
+
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = (e.currentTarget as HTMLElement).closest("[data-dec-card]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  function cell(colIdx: number, digit: number | null, isInput: boolean, inputIdx: number) {
+    if (digit === null) return <td key={colIdx} className="w-8 text-center" />;
+    if (!isInput) {
+      return (
+        <td key={colIdx} className="w-8 text-center">
+          <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
+            {digit === 0 && colIdx === 0 ? "" : digit}
+          </div>
+        </td>
+      );
+    }
+    const val = cellAnswers[inputIdx] ?? "";
+    const expected = rExpected[inputIdx]!;
+    const ok = validated ? (val.trim() === String(expected)) : null;
+    if (ok === false) {
+      return (
+        <td key={colIdx} className="w-8 text-center">
+          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={colIdx} className="w-8 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          onKeyDown={tabNav}
+          onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+          className="h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+      </td>
+    );
+  }
+
+  void cardCorrect;
+  const opRows = [
+    [ad, au, null, adx, acx], // operand a — col 2 is null for comma display
+    [bd, bu, null, bdx, bcx], // operand b
+  ];
+
+  return (
+    <div data-dec-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {labels.map((l, i) => (
+              <th key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {opRows.map((row, ri) => (
+            <tr key={ri}>
+              <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">
+                {ri === 0 ? "" : q.op}
+              </td>
+              {row.map((digit, ci) => {
+                if (ci === 2) {
+                  return (
+                    <td key={ci} className="w-8 text-center">
+                      <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
+                    </td>
+                  );
+                }
+                // Adjust for the comma column offset: cols 0,1 map to d,u; cols 3,4 map to dx,cx
+                const actualDigit = digit as number;
+                const isLeading = ci === 0 && actualDigit === 0;
+                return (
+                  <td key={ci} className="w-8 text-center">
+                    <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
+                      {isLeading ? "" : actualDigit}
+                    </div>
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {/* D column */}
+            {cell(0, rd, true, 0)}
+            {/* U column */}
+            {cell(1, ru, true, 1)}
+            {/* comma */}
+            <td className="w-8 text-center">
+              <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
+            </td>
+            {/* dx column */}
+            {cell(3, rdx, true, 2)}
+            {/* cx column */}
+            {cell(4, rcx, true, 3)}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export function DecColArithExercise({ exNum, op, validateCommand, onValidated }: {
+  exNum: number; op: "+" | "-";
+  validateCommand: number;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<DecColQ[]>(() => genDecColQs(op, 4));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 4 }, () => Array(4).fill("")));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>(() => Array(4).fill(false));
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res: boolean[] = questions.map((q: DecColQ, qi: number) => {
+      const [rd, ru, rdx, rcx] = hToDigits(q.rH);
+      const expected = [rd, ru, rdx, rcx];
+      return expected.every((exp: number, ci: number) => (answers[qi]?.[ci] ?? "").trim() === String(exp));
+    });
+    setResults(res);
+    setValidated(true);
+    onValidated(res.every((r: boolean) => r), res.filter((r: boolean) => r).length, res.length);
+  }, [validated, questions, answers, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  const consigne = op === "+"
+    ? "Effectuez les additions en colonnes."
+    : "Effectuez les soustractions en colonnes.";
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
+      <div className="grid grid-cols-2 gap-3">
+        {questions.map((q: DecColQ, qi: number) => (
+          <DecColCard key={qi} q={q} cardIdx={qi}
+            cellAnswers={answers[qi]!}
+            validated={validated}
+            cardCorrect={results[qi] ?? false}
+            onChange={(ci: number, cellIdx: number, val: string) => setAnswers((prev: string[][]) => {
+              const next = prev.map((r: string[]) => [...r]);
+              next[ci]![cellIdx] = val;
+              return next;
+            })} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Decimal expression comparison (A5.4 Ex9 — A2.1 Ex9 style) ────────────────
+interface DecExprCompQ {
+  laH: number; lop: "+" | "-"; lcH: number;
+  raH: number; rop: "+" | "-"; rcH: number;
+  answer: "<" | "=" | ">";
+  lval: number; rval: number;
+}
+
+function genDecExprCompQs(count: number): DecExprCompQ[] {
+  return Array.from({ length: count }, () => {
+    for (let attempt = 0; attempt < 200; attempt++) {
+      const lop: "+" | "-" = Math.random() < 0.6 ? "+" : "-";
+      const rop: "+" | "-" = Math.random() < 0.6 ? "+" : "-";
+      const laH = rnd(10, 990); // 0.1–99.0 in tenths
+      const lcH = lop === "+" ? rnd(10, 990) : rnd(10, laH - 1);
+      const raH = rnd(10, 990);
+      const rcH = rop === "+" ? rnd(10, 990) : rnd(10, raH - 1);
+      const lval = lop === "+" ? laH + lcH : laH - lcH;
+      const rval = rop === "+" ? raH + rcH : raH - rcH;
+      if (lval < 0 || rval < 0) continue;
+      const answer: "<" | "=" | ">" = lval < rval ? "<" : lval > rval ? ">" : "=";
+      return { laH, lop, lcH, raH, rop, rcH, answer, lval, rval };
+    }
+    return { laH: 15, lop: "+", lcH: 25, raH: 50, rop: "-", rcH: 10, answer: "<", lval: 40, rval: 40 };
+  });
+}
+
+function tenthsToFrStr(t: number): string {
+  if (t % 10 === 0) return String(t / 10);
+  return `${Math.floor(t / 10)},${t % 10}`;
+}
+
+export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<DecExprCompQ[]>(() => genDecExprCompQs(5));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts: ("correct" | "wrong")[] = questions.map((q: DecExprCompQ, i: number) =>
+      selected[i] === q.answer ? "correct" : "wrong"
+    );
+    setStatuses(sts);
+    onValidated(sts.every((s: string) => s === "correct"), sts.filter((s: string) => s === "correct").length, sts.length);
+  }, [validated, questions, selected, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les expressions. Choisissez &lt;, = ou &gt;.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q: DecExprCompQ, i: number) => {
+          const st = statuses[i]!;
+          const sel = selected[i];
+          const btnCls = (sym: "<" | "=" | ">") => {
+            const isSelected = sel === sym;
+            const isCorrect = sym === q.answer;
+            if (!validated) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+                isSelected
+                  ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`;
+            }
+            if (st === "wrong" && (isSelected || isCorrect)) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${CLS_WRONG}`;
+            }
+            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              isSelected
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+            }`;
+          };
+          return (
+            <div key={i} className="flex items-center gap-2 flex-wrap">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">
+                {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
+              </span>
+              <div className="flex gap-1.5">
+                {(["<", "=", ">"] as const).map(sym => (
+                  <button key={sym} type="button"
+                    onClick={() => { if (!validated) setSelected((prev: (string | null)[]) => { const n = [...prev]; n[i] = sym; return n; }); }}
+                    className={btnCls(sym)}>
+                    {sym}
+                  </button>
+                ))}
+              </div>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">
+                {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
