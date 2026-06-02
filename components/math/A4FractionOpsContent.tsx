@@ -197,9 +197,10 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
 // exType 1-4: structType 1-4, numbers 1-12
 // exType 5-8: structType 1-4, numbers 10-99
 // exType 9:   structType 5 (3 fractions), numbers 1-12
-export function FractionOpsExercise({ exType, opMode, validateCommand, onValidated }: {
+export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand, onValidated }: {
   exType: 1|2|3|4|5|6|7|8|9;
   opMode: FracOpMode;
+  count?: number;
   validateCommand: number;
   onValidated: (ok: boolean) => void;
 }) {
@@ -210,11 +211,11 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
   else { structType = (exType - 4) as 1|2|3|4; lo = 10; hi = 99; }
 
   const [questions] = useState<OpQ[]>(() =>
-    Array.from({ length: 5 }, () => genQ(structType, opMode, lo, hi))
+    Array.from({ length: count }, () => genQ(structType, opMode, lo, hi))
   );
-  const [nums, setNums] = useState<string[]>(() => Array(5).fill(""));
-  const [dens, setDens] = useState<string[]>(() => Array(5).fill(""));
-  const [statuses, setStatuses] = useState<("idle"|"correct"|"wrong")[]>(() => Array(5).fill("idle"));
+  const [nums, setNums] = useState<string[]>(() => Array(count).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(count).fill(""));
+  const [statuses, setStatuses] = useState<("idle"|"correct"|"wrong")[]>(() => Array(count).fill("idle"));
   const [validated, setValidated] = useState(false);
 
   const doValidate = useCallback(() => {

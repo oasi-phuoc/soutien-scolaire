@@ -36,7 +36,7 @@ type WorkspaceStep =
   | { kind: "fraction_compare"; exNum: number; mode: "same-den" | "same-num" | "diff-both" }
   | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
   | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
-  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode }
+  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode; count?: number }
   | { kind: "dec_read_decompose"; exNum: number }
   | { kind: "dec_read_recompose"; exNum: number }
   | { kind: "dec_read_place_value"; exNum: number }
@@ -247,16 +247,28 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_div_ext", exNum: 3 });
     steps.push({ kind: "dec_div_ext", exNum: 4 });
     steps.push({ kind: "results" });
-  } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
-    const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
-    // Training: exercise types 1-5
+  } else if (lesson.submoduleId === "A4-4") {
+    // Training: Ex1-5
     for (let ex = 1; ex <= 5; ex++) {
-      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode: "add-sub" });
     }
-    // Evaluation: all 9 types (new random questions)
+    // Evaluation: Ex1-9
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 9; ex++) {
-      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode });
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode: "add-sub" });
+    }
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
+    const opMode: FracOpMode = lesson.submoduleId === "A4-5" ? "mul" : "div";
+    // Training: Ex1-5, then Ex9 (moved from eval)
+    for (let ex = 1; ex <= 5; ex++) {
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode });
+    }
+    steps.push({ kind: "frac_ops", exType: 9, opMode });
+    // Evaluation: Ex1-4, 4 questions each
+    steps.push({ kind: "eval_start" });
+    for (let ex = 1; ex <= 4; ex++) {
+      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4, opMode, count: 4 });
     }
     steps.push({ kind: "results" });
   } else {
@@ -1314,7 +1326,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
       {/* A4-4/5/6 fraction operations exercises */}
       {currentStep?.kind === "frac_ops" && (
-        <FractionOpsExercise key={exerciseKey} exType={currentStep.exType} opMode={currentStep.opMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionOpsExercise key={exerciseKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* Generic text exercise */}
@@ -1424,8 +1436,17 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         return (
           <div className="space-y-4">
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">{lesson.theory.title.fr}</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">{correct} / {total} réponses correctes</p>
+            <ul className="space-y-2">
+              {exIndices.map((idx, i) => {
+                const ok = evalScores[idx] === true;
+                return (
+                  <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
+                    <span className="text-sm text-[var(--color-text-primary)]">Exercice {i + 1}</span>
+                    <span className={`text-sm font-bold ${ok ? "text-green-600" : "text-red-500"}`}>{ok ? "1/1" : "0/1"}</span>
+                  </li>
+                );
+              })}
+            </ul>
             <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${passed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
               <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
               <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>
