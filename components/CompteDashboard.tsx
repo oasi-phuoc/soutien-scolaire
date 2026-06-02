@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { updateRemotePivotLang } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
+import { syncProgressToCloud } from "@/app/actions/progress";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
 import { PIVOT_LANGS, type PivotCode } from "@/lib/pivot-langs";
 import { loadProgress, saveProgress, setLevel } from "@/lib/progress/math-progress";
@@ -35,6 +36,8 @@ export function CompteDashboard({
   const [pivotMsg, setPivotMsg] = useState<string | null>(null);
   const [level, setLevelState] = useState<LevelKey>("base");
   const [genre, setGenreState] = useState<GenreKey>("f");
+  const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
+  const [syncError, setSyncError] = useState<string | null>(null);
 
   useEffect(() => {
     const prog = loadProgress();
@@ -61,6 +64,25 @@ export function CompteDashboard({
     localStorage.setItem(STORAGE_KEY, next);
     if (typeof window !== "undefined") {
       window.dispatchEvent(new Event("soutien-pivot-updated"));
+    }
+  }
+
+  async function forceSync() {
+    setSyncStatus("syncing");
+    setSyncError(null);
+    try {
+      const progress = loadProgress();
+      const result = await syncProgressToCloud(progress);
+      if (result.ok) {
+        setSyncStatus("ok");
+        window.setTimeout(() => setSyncStatus("idle"), 3000);
+      } else {
+        setSyncStatus("error");
+        setSyncError(result.error ?? "Erreur inconnue");
+      }
+    } catch (e) {
+      setSyncStatus("error");
+      setSyncError(e instanceof Error ? e.message : "Erreur inconnue");
     }
   }
 
@@ -109,6 +131,22 @@ export function CompteDashboard({
                   Tableau de bord admin
                 </Link>
               )}
+              <button
+                type="button"
+                onClick={() => void forceSync()}
+                disabled={syncStatus === "syncing"}
+                className={`inline-flex min-h-11 items-center gap-2 rounded-xl border px-4 font-semibold transition-colors disabled:opacity-60 ${
+                  syncStatus === "ok"
+                    ? "border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30 dark:text-teal-400"
+                    : syncStatus === "error"
+                      ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-400"
+                      : "border-zinc-300 dark:border-zinc-600"
+                }`}
+              >
+                {syncStatus === "syncing" && <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />}
+                {syncStatus === "ok" && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
+                {syncStatus === "syncing" ? "Synchronisation…" : syncStatus === "ok" ? "Synchronisé !" : "Sync progression"}
+              </button>
               <form action={signOutAction}>
                 <button
                   type="submit"
@@ -118,6 +156,11 @@ export function CompteDashboard({
                 </button>
               </form>
             </div>
+            {syncStatus === "error" && syncError && (
+              <p className="mt-2 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-950/30 dark:text-red-400">
+                Erreur sync : {syncError}
+              </p>
+            )}
           </section>
         ) : supabaseConfigured ? (
           <section>
