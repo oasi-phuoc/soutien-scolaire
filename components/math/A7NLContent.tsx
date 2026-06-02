@@ -15,7 +15,7 @@ function shuffle<T>(a: T[]): T[] {
 }
 
 // Unicode minus for display, accepts ASCII hyphen too
-function fmtInt(n: number): string {
+function _fmtInt(n: number): string {
   if (n === 0) return "0";
   if (n > 0) return `+${n}`;
   return `−${Math.abs(n)}`; // − U+2212

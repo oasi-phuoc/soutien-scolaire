@@ -670,7 +670,6 @@ export function AdminTable({
   currentUserRole: "admin" | "prof";
 }) {
   const [rows, setRows] = useState<UserRow[]>(initialRows);
-  const [tab, setTab] = useState<"eleves" | "classes">("eleves");
   const [filterClasse, setFilterClasse] = useState<string>("");
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
