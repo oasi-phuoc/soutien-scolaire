@@ -403,7 +403,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
       {tab === "communication" ? (
         <section aria-label="Modules de communication">
-          <CommModuleList isAdmin={isAdmin} />
+          {isAdmin ? <CommModuleList isAdmin /> : <ComingSoon />}
         </section>
       ) : null}
 
