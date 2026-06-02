@@ -838,7 +838,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à l'unité près.</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à l&apos;unité près.</p>
       </div>
       <div className="grid grid-cols-[1.5rem_5rem_1.25rem_minmax(3rem,max-content)_1.25rem_5rem] items-center gap-x-2 gap-y-3">
         {items.map((item, i) => (

@@ -1528,7 +1528,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
         const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
         const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
-        const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
         const grade = linearSwissGrade(correct, total);
         const passed = grade >= PASSING_GRADE;
         return (
