@@ -24,6 +24,13 @@ function debounce<T extends unknown[]>(fn: (...args: T) => void, ms: number) {
   };
 }
 
+async function doSync(progress: StoredProgressV1) {
+  const result = await syncProgressToCloud(progress);
+  if (!result.ok) {
+    console.error("[ProgressSync] sync failed:", result.error);
+  }
+}
+
 export function ProgressSyncProvider() {
   const syncedRef = useRef(false);
 
@@ -45,11 +52,10 @@ export function ProgressSyncProvider() {
         const merged = mergeProgress(localProgress, cloudProgress);
         saveProgress(merged);
         restoreSubKeys(merged);
-        // Push merged back to cloud (silent)
-        syncProgressToCloud(merged).catch(() => {});
+        doSync(merged);
       } else {
-        // First login — push local progress to cloud
-        syncProgressToCloud(localProgress).catch(() => {});
+        // First login or no cloud data yet — push local progress to cloud
+        doSync(localProgress);
       }
     });
 
@@ -63,9 +69,9 @@ export function ProgressSyncProvider() {
           const merged = mergeProgress(localProgress, cloudProgress);
           saveProgress(merged);
           restoreSubKeys(merged);
-          syncProgressToCloud(merged).catch(() => {});
+          doSync(merged);
         } else {
-          syncProgressToCloud(localProgress).catch(() => {});
+          doSync(localProgress);
         }
       }
     });
@@ -75,7 +81,7 @@ export function ProgressSyncProvider() {
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
       const progress = (e as CustomEvent).detail ?? loadProgress();
-      syncProgressToCloud(progress).catch(() => {});
+      doSync(progress);
     }, 3000);
 
     window.addEventListener("progress-saved", debouncedSync);
@@ -88,7 +94,7 @@ export function ProgressSyncProvider() {
       const localRaw = localStorage.getItem(MATH_PROGRESS_KEY);
       if (localRaw) {
         try {
-          syncProgressToCloud(JSON.parse(localRaw)).catch(() => {});
+          doSync(JSON.parse(localRaw) as StoredProgressV1);
         } catch { /* ignore */ }
       }
     }, 5000);

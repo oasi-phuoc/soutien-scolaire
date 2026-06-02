@@ -35,21 +35,23 @@ export async function touchActivityAction(): Promise<void> {
   }
 }
 
-export async function syncProgressToCloud(progressData: StoredProgressV1): Promise<void> {
+export async function syncProgressToCloud(progressData: StoredProgressV1): Promise<{ ok: boolean; error?: string }> {
   try {
     const supabase = await createSupabaseActionClient();
-    if (!supabase) return;
+    if (!supabase) return { ok: false, error: "supabase_not_configured" };
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) return;
-    await supabase
+    if (!user) return { ok: false, error: "not_authenticated" };
+    const { error } = await supabase
       .from("profiles")
-      .upsert({
-        id: user.id,
-        progress_data: progressData,
+      .update({
+        progress_data: progressData as unknown as Record<string, unknown>,
         progress_updated_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
-      }, { onConflict: "id" });
-  } catch {
-    /* silent — sync is best-effort */
+      })
+      .eq("id", user.id);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "unknown" };
   }
 }
