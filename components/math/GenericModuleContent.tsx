@@ -3464,10 +3464,15 @@ function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center p-4 sm:items-center" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl dark:shadow-black/50 border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
+        <button type="button" onClick={onClose}
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700 transition-colors"
+          aria-label="Fermer">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
         <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">💡 Astuce</p>
-        <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
+        <p className="text-sm leading-relaxed text-[var(--color-text-primary)] pr-4">{hint}</p>
         <button type="button" onClick={onClose}
           className="mt-4 w-full rounded-xl py-2 text-sm font-semibold text-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 hover:bg-[var(--color-accent-alg)]/20 transition-colors">
           OK
@@ -4964,9 +4969,9 @@ export function GenericModuleContent({
         <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
       )}
 
-      {/* Hint button — training phase only */}
+      {/* Hint button — floated right, aligns with exercise title */}
       {!inEvalPhase && currentStep && currentStep.kind !== "theory" && getStepHint(currentStep) && (
-        <div className="flex justify-end mb-1">
+        <div className="float-right ml-2">
           <HintButton onClick={() => setShowHint(true)} />
         </div>
       )}
