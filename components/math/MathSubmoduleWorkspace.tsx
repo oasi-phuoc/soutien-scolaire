@@ -4,9 +4,9 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
-import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
+import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade } from "@/lib/scoring";
+import { linearSwissGrade } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
@@ -67,6 +67,21 @@ type EvalPhaseKind = "eval_start" | "pass_toggle" | "results";
 function isEvalPhaseKind(k: string): k is EvalPhaseKind { return EVAL_PHASE_KINDS.has(k as EvalPhaseKind); }
 function notInBar(s: WorkspaceStep) { return isEvalPhaseKind(s.kind); }
 
+const STEP_DEFAULT_TOTALS: Record<string, number> = {
+  fraction_toggle: 5, fraction_coloring: 4, fraction_read: 4,
+  fraction_multi_coloring: 4, fraction_multi_read: 4,
+  fraction_equiv: 5, fraction_simplify: 5, fraction_compare: 5,
+  frac_to_dec: 5, dec_to_frac: 5,
+};
+
+function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
+  if (!step) return stored?.t ?? 1;
+  if ("count" in step && typeof (step as { count?: number }).count === "number") {
+    return (step as { count: number }).count;
+  }
+  return STEP_DEFAULT_TOTALS[step.kind] ?? stored?.t ?? 1;
+}
+
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -76,7 +91,54 @@ function shufflePick<T>(arr: T[], n: number): T[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
+function getParentModuleForRevision(submoduleId: string): string | null {
+  const ra = submoduleId.match(/^RA-(\d+)$/i);
+  if (ra) return `A${ra[1]}`;
+  const rg = submoduleId.match(/^RG-(\d+)$/i);
+  if (rg) return `G${rg[1]}`;
+  return null;
+}
+
+function buildRevisionEvalSteps(parentModuleId: string): WorkspaceStep[] {
+  const lessons = getLessonsForModule(parentModuleId);
+  if (!lessons) return [];
+  const nonRev = lessons.filter(l =>
+    !l.submoduleId.startsWith("RA-") && !l.submoduleId.startsWith("RG-")
+  );
+  const result: WorkspaceStep[] = [];
+  let exCounter = 1;
+  for (const sub of nonRev) {
+    const subSteps = buildSteps(sub);
+    const esi = subSteps.findIndex(s => s.kind === "eval_start");
+    if (esi < 0) continue;
+    const endi = subSteps.findIndex((s, i) => i > esi && (s.kind === "pass_toggle" || s.kind === "results"));
+    const evalSlice = endi >= 0 ? subSteps.slice(esi + 1, endi) : subSteps.slice(esi + 1);
+    if (evalSlice.length > 0) {
+      result.push(...evalSlice);
+    } else {
+      // pool-only lesson: include up to 3 exercises in scored mode
+      const pool = sub.exercisePool;
+      const src = pool && pool.length > 0
+        ? shufflePick(pool, Math.min(3, pool.length))
+        : sub.exercises.slice(0, 3);
+      src.forEach(item => result.push({ kind: "exercise", item, exNum: exCounter++ }));
+    }
+  }
+  return result;
+}
+
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
+  // Revision lessons (RA/RG): skip training, go directly to eval
+  const parentModuleId = getParentModuleForRevision(lesson.submoduleId);
+  if (parentModuleId !== null) {
+    const evalSteps = buildRevisionEvalSteps(parentModuleId);
+    return [
+      { kind: "eval_start" },
+      ...evalSteps,
+      evalSteps.length > 0 ? { kind: "results" } : { kind: "pass_toggle" },
+    ];
+  }
+
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
     // Training
@@ -1080,7 +1142,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     if (!lesson) { router.push("/mathematiques"); return; }
     const c = correct ?? (passed ? 1 : 0);
     const t = total ?? 1;
-    const grade = percentToSwissGrade((c / t) * 100);
+    const grade = linearSwissGrade(c, t);
     const p = loadProgress();
     saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
     router.push("/mathematiques");
@@ -1095,8 +1157,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
       const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
       const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
-      const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
-      const total = exIndices.length;
+      const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
+      const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
@@ -1124,6 +1186,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setExStatus(ok ? "correct" : "wrong");
     setExAttempts(a => a + 1);
     if (ok) setCanValidate(false);
+    const inEval = evalStartIdx >= 0 && stepIdx > evalStartIdx;
+    if (inEval) {
+      setEvalScores(prev => ({ ...prev, [stepIdx]: { c: ok ? 1 : 0, t: 1 } }));
+    }
   }
 
   const validateDisabled = currentStep?.kind === "exercise"
@@ -1403,8 +1469,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
         const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
         const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
-        const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
-        const total = exIndices.length;
+        const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
+        const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
         const passed = pct >= 60;
         return (
@@ -1466,17 +1532,18 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               </div>
             ) : <span />}
 
-            {currentStep?.kind !== "eval_start" && (
-              <button type="button" onClick={goNext}
-                disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
-                className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-                {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
-                  <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
-                ) : (
-                  <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
-                )}
-              </button>
-            )}
+            <button type="button" onClick={goNext}
+              disabled={
+                (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
+                (isInEvalExercises && evalScores[stepIdx] === undefined)
+              }
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
+              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
+                <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
+              ) : (
+                <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
+              )}
+            </button>
           </div>
         </div>
         <div style={{ height: 68 }} />
