@@ -7,6 +7,23 @@ import {
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
+function pluralForm(word: string): string {
+  if (/[sxz]$/i.test(word)) return word;
+  if (/eau$|au$/i.test(word)) return word + "x";
+  if (/al$/i.test(word)) return word.slice(0, -2) + "aux";
+  return word + "s";
+}
+
+function toDefiniteArticle(art: string, word: string): string {
+  const a = normalizeText(art);
+  const vowel = /^[aeiouhéèêëàâïîôùûœæ]/i.test(word);
+  if (a === "un" || a === "le") return vowel ? "l'" : "le";
+  if (a === "une" || a === "la") return vowel ? "l'" : "la";
+  if (a === "des") return "les";
+  return art; // already l' or les
+}
+
+
 function buildWordList(theme: VocabTheme): VocabWord[] {
   const result: VocabWord[] = [];
 
@@ -19,17 +36,21 @@ function buildWordList(theme: VocabTheme): VocabWord[] {
       if (m) result.push({ word: m[2]!, article: m[1]!.trimEnd() });
     }
 
-    // Masculine form
+    // Singular form — always use definite article
     if (w.article) {
-      result.push({ word: w.word, article: w.article });
-    } else if (rw) {
-      // Nationality theme: use indefinite article "un"
-      result.push({ word: w.word, article: "un" });
+      result.push({ word: w.word, article: toDefiniteArticle(w.article, w.word) });
+      // Plural masculine
+      const plMasc = pluralForm(w.word);
+      if (plMasc !== w.word) result.push({ word: plMasc, article: "les" });
     }
 
-    // Feminine form
+    // Feminine form — definite article
     if (w.feminine) {
-      result.push({ word: w.feminine, article: "une" });
+      const femArt = w.article ? toDefiniteArticle(["un","le","l'"].includes(normalizeText(w.article)) ? "une" : w.article, w.feminine) : "la";
+      result.push({ word: w.feminine, article: femArt });
+      // Plural feminine
+      const plFem = pluralForm(w.feminine);
+      if (plFem !== w.feminine) result.push({ word: plFem, article: "les" });
     }
   }
 
@@ -100,10 +121,10 @@ export function ExArticle({
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <p className="flex h-8 w-16 items-center gap-1 border-b border-amber-400 text-sm">
-                    <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    <span className="font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
-                  </p>
+                  <div className="flex h-8 w-16 flex-col justify-center border-b border-amber-400">
+                    <span className="text-[10px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="mt-0.5 text-[11px] leading-none font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
+                  </div>
                 ) : (
                   <input
                     type="text"

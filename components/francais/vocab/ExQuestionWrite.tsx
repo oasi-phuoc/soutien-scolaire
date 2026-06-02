@@ -127,8 +127,11 @@ export function ExQuestionWrite({
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
 
+  useEffect(() => {
+    const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
+    onCanValidateChange(hasAny);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { onCanValidateChange(true); }, []);
+  }, [states]);
 
   useEffect(() => {
     if (validateCommand === 0) return;

@@ -61,11 +61,10 @@ export function ExDictation({
                 </button>
               </div>
               {s.checked && !s.correct ? (
-                <p className="h-8 w-full text-sm leading-8">
-                  <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                  {" "}
-                  <span className="font-medium text-[var(--color-text-primary)]">{w.word}</span>
-                </p>
+                <div className="flex h-8 w-full flex-col justify-center border-b border-[var(--color-accent-fr)]">
+                  <span className="text-[10px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                  <span className="mt-0.5 text-[11px] leading-none font-medium text-[var(--color-text-primary)]">{w.word}</span>
+                </div>
               ) : (
                 <input
                   type="text"

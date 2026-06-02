@@ -108,7 +108,7 @@ export function ExImageWrite({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Regardez l&apos;image et écrivez le mot correspondant avec l&apos;article.
+        Regardez et écrivez le mot correspondant avec l&apos;article défini ou indéfini.
       </p>
       <div className="space-y-3">
         {words.map((w, i) => {
@@ -116,18 +116,17 @@ export function ExImageWrite({
           return (
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded bg-[var(--color-bg-secondary)]">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded">
                 {resolveImg(w.image) && (
                   <Image src={resolveImg(w.image)!} alt="" fill className="object-contain" sizes="56px" />
                 )}
               </div>
               <div className="flex flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <p className="flex-1 text-sm">
-                    <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    {" "}
-                    <span className="font-medium text-[var(--color-text-primary)]">{getCorrectDisplay(w)}</span>
-                  </p>
+                  <div className="flex flex-1 flex-col justify-center border-b border-amber-400 pb-0.5">
+                    <span className="text-[10px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="mt-0.5 text-[11px] leading-none font-medium text-[var(--color-text-primary)]">{getCorrectDisplay(w)}</span>
+                  </div>
                 ) : (
                   <input
                     type="text"

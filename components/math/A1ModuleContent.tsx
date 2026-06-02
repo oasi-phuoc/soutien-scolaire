@@ -1625,7 +1625,7 @@ const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
-export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmoduleId?: string; startAtEval?: boolean } = {}) {
+export function A1ModuleContent({ startSubmoduleId, startAtEval, autoStartEval, onRevisionComplete }: { startSubmoduleId?: string; startAtEval?: boolean; autoStartEval?: boolean; onRevisionComplete?: () => void } = {}) {
   const router = useRouter();
   const pivot = usePivotLang();
   const { showPivot: showPivotTranslation } = useTranslation();
@@ -1965,7 +1965,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
 
   // Timer évaluation
-  const [evalStarted, setEvalStarted] = useState(false);
+  const [evalStarted, setEvalStarted] = useState(autoStartEval ?? false);
   const [evalPageIdx, setEvalPageIdx] = useState(0);
   const [evalPageValidated, setEvalPageValidated] = useState(false);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
@@ -2137,7 +2137,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
   const goNext = () => {
     if (step === "eval") {
-      if (evalSubmitted) { router.push("/mathematiques"); return; }
+      if (evalSubmitted) {
+        if (onRevisionComplete) { onRevisionComplete(); return; }
+        router.push("/mathematiques");
+        return;
+      }
       if (evalStarted && evalPageValidated) {
         if (evalIsLastPage) {
           evalAutoSubmitRef.current?.();

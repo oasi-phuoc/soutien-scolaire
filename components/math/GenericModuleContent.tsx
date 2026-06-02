@@ -2349,8 +2349,33 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       const ascFirst = Math.random() < 0.5;
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "asc" : "desc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
-      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
-      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 3 } });
+      steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 4 } });
+      steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 999], 5, 2, 3).questions, ...genSeqRule([1, 9999], 5, 3, 3).questions], exNum: 5 } });
+      steps.push({ kind: "pass_toggle", lesson });
+    } else if (sid === "A5-3") {
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_unit", 3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 4, 5) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 3) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 3, 3) });
+      steps.push({ kind: "pass_toggle", lesson });
+    } else if (sid === "A5-2") {
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
+      steps.push({ kind: "eval_start", lesson });
+      const ascFirst52 = Math.random() < 0.5;
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
     } else if (sid === "A3-5") {
       // Training
       steps.push({ kind: "mult_select", lesson, config: genMultSelect(1) });
@@ -3255,6 +3280,86 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   }
 }
 
+// ── Hint popup + button ──────────────────────────────────────────────────────
+function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="relative w-full max-w-sm rounded-2xl bg-[var(--color-bg-primary)] p-5 shadow-xl dark:shadow-black/50 border border-[var(--color-border-default)]" onClick={e => e.stopPropagation()}>
+        <button type="button" onClick={onClose}
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700 transition-colors"
+          aria-label="Fermer">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">💡 Astuce</p>
+        <p className="text-sm leading-relaxed text-[var(--color-text-primary)] pr-4">{hint}</p>
+      </div>
+    </div>
+  );
+}
+
+function HintButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button type="button" onClick={onClick}
+      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-xs font-bold text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+      aria-label="Aide">
+      ?
+    </button>
+  );
+}
+
+function getStepHint(step: FlatStep | undefined): string | undefined {
+  if (!step) return undefined;
+  if (step.kind === "exercise") return step.item.hintFr;
+  if (step.kind === "arithmetic_group") {
+    const op = step.config.op;
+    if (op === "+") return "Additionne chiffre par chiffre de droite à gauche. Si la somme dépasse 9, note le chiffre des unités et retiens 1.";
+    if (op === "-") return "Soustrait de droite à gauche. Si le chiffre du bas est plus grand, emprunte 1 à la colonne suivante.";
+    if (op === "×") return "Multiplie chaque chiffre séparément, puis additionne les produits partiels.";
+    if (op === "÷") return "Cherche combien de fois le diviseur entre dans le dividende. Multiplie, soustrais, abaisse le chiffre suivant.";
+  }
+  if (step.kind === "column_grid") {
+    const op = step.config.op;
+    if (op === "+" || op === "-") return "Aligne les chiffres par colonne (unités sous unités, dizaines sous dizaines). Calcule de droite à gauche.";
+    if (op === "×") return "Multiplie chaque chiffre du bas par l'ensemble du nombre du haut. Décale d'une colonne vers la gauche à chaque ligne.";
+  }
+  if (step.kind === "div_column_grid") return "Procède par étapes : combien de fois le diviseur entre-t-il ? Multiplie, soustrais, abaisse le chiffre suivant.";
+  if (step.kind === "number_line") return "Compte les graduations entre les deux valeurs affichées. La flèche indique la position du nombre à trouver.";
+  if (step.kind === "comparison_ex") return "Compare les chiffres de gauche à droite, en commençant par la position de la plus grande valeur.";
+  if (step.kind === "rounding_group") return "Regarde le chiffre juste après la position d'arrondi : si ≥ 5, arrondis au-dessus ; si < 5, arrondis au-dessous.";
+  if (step.kind === "frac_id") return "Le numérateur (en haut) indique les parties colorées. Le dénominateur (en bas) indique le nombre total de parts égales.";
+  if (step.kind === "frac_equiv") return "Deux fractions sont équivalentes si on peut multiplier ou diviser numérateur ET dénominateur par le même nombre.";
+  if (step.kind === "frac_simplify") return "Trouve le PGCD du numérateur et du dénominateur, puis divise les deux par ce nombre.";
+  if (step.kind === "frac_compare") return "Pour comparer, réduis au même dénominateur (dénominateur commun), puis compare les numérateurs.";
+  if (step.kind === "number_select") return "Utilise la définition vue dans la théorie pour identifier les nombres qui correspondent au critère demandé.";
+  if (step.kind === "encadrement") return "Cherche les deux multiples de la puissance de 10 entre lesquels se trouve le nombre.";
+  if (step.kind === "odd_even") return "Un nombre pair se termine par 0, 2, 4, 6 ou 8. Un nombre impair se termine par 1, 3, 5, 7 ou 9.";
+  if (step.kind === "nl_multi") return "Lis la valeur de chaque graduation en comptant par intervalles réguliers.";
+  if (step.kind === "ordering") return "Compare d'abord les signes (positif/négatif), puis les valeurs absolues. Les négatifs sont plus petits que les positifs.";
+  if (step.kind === "seq_rule") return "Calcule la différence entre deux termes consécutifs — c'est la raison de la suite.";
+  if (step.kind === "seq_complete") return "Applique la raison trouvée : ajoute (ou soustrait) la même valeur à chaque terme pour trouver le suivant.";
+  if (step.kind === "mul_two_digit") return "Multiplie d'abord par les unités du deuxième facteur, puis par ses dizaines (en décalant d'une colonne). Additionne les deux résultats.";
+  if (step.kind === "expr_comparison") return "Calcule chacune des deux expressions séparément, puis compare les résultats obtenus.";
+  if (step.kind === "mult_select") return "Un multiple de n est le résultat de n × 1, n × 2, n × 3… Vérifie la divisibilité.";
+  if (step.kind === "mult_list") return "Multiplie n par 1, 2, 3, 4, 5… pour obtenir la liste de ses multiples.";
+  if (step.kind === "true_false_mult_div") return "Un diviseur divise le nombre exactement (reste = 0). Un multiple est dans la table du nombre.";
+  if (step.kind === "find_divisors") return "Teste chaque nombre de 1 jusqu'à la racine carrée. Si n ÷ d = entier, alors d et n÷d sont tous les deux diviseurs.";
+  if (step.kind === "div_select") return "Un diviseur de n divise n exactement. Teste si n ÷ d = nombre entier sans reste.";
+  if (step.kind === "div_by") return "Diviser par 10 : déplace la virgule d'un rang à gauche. Par 100 : deux rangs. Par 0,1 : c'est multiplier par 10.";
+  if (step.kind === "missing_digit_div") return "Retrouve le chiffre manquant en faisant le calcul à rebours : multiplie le quotient par le diviseur et vérifie.";
+  if (step.kind === "gcd_lcm") return "PGCD : décompose en facteurs premiers, prends les facteurs communs au plus petit exposant. PPCM = (a × b) ÷ PGCD(a,b).";
+  if (step.kind === "true_false_gcd_lcm") return "PGCD divise les deux nombres. PPCM est divisible par les deux. Vérifie avec la définition.";
+  if (step.kind === "dec_ordering") return "Compare les chiffres position par position : entiers d'abord, puis dixièmes, centièmes…";
+  if (step.kind === "dec_seq_rule") return "Calcule la différence entre deux termes décimaux consécutifs.";
+  if (step.kind === "dec_seq_complete") return "Applique la raison décimale trouvée pour compléter les termes manquants.";
+  return undefined;
+}
+
+
 // ── Theory view ──────────────────────────────────────────────────────────────
 function TheoryView({ lesson, pivot, showPivot }: {
   lesson: MathSubmoduleLesson;
@@ -3303,10 +3408,14 @@ export function GenericModuleContent({
   moduleId,
   startSubmoduleId,
   startAtEval,
+  revisionMode,
+  skipRevisionAnnouncement,
 }: {
   moduleId: string;
   startSubmoduleId?: string;
   startAtEval?: boolean;
+  revisionMode?: boolean;
+  skipRevisionAnnouncement?: boolean;
 }) {
   const router = useRouter();
   const pivot = usePivotLang();
@@ -3323,7 +3432,9 @@ export function GenericModuleContent({
   );
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
-  const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
+  const initialIdx = (startAtEval || revisionMode) && evalStartIdx >= 0
+    ? (revisionMode && skipRevisionAnnouncement ? evalStartIdx + 1 : evalStartIdx)
+    : 0;
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [answer, setAnswer] = useState("");
