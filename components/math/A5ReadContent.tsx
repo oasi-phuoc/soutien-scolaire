@@ -52,14 +52,14 @@ function fmtNum(v: number): string {
 // Correction box (amber, stacked wrong/correct)
 function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-0.5 ${className}`}>
+    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-0.5 h-9 ${className}`}>
       <span className="text-xs text-amber-600 line-through tabular-nums leading-none">{wrong || "—"}</span>
       <span className="text-sm font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
     </span>
   );
 }
 const IC = (w: boolean) =>
-  `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums ${
+  `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums h-9 ${
     w
       ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"

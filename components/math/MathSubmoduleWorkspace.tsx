@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
-import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
+import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
@@ -91,7 +91,54 @@ function shufflePick<T>(arr: T[], n: number): T[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
+function getParentModuleForRevision(submoduleId: string): string | null {
+  const ra = submoduleId.match(/^RA-(\d+)$/i);
+  if (ra) return `A${ra[1]}`;
+  const rg = submoduleId.match(/^RG-(\d+)$/i);
+  if (rg) return `G${rg[1]}`;
+  return null;
+}
+
+function buildRevisionEvalSteps(parentModuleId: string): WorkspaceStep[] {
+  const lessons = getLessonsForModule(parentModuleId);
+  if (!lessons) return [];
+  const nonRev = lessons.filter(l =>
+    !l.submoduleId.startsWith("RA-") && !l.submoduleId.startsWith("RG-")
+  );
+  const result: WorkspaceStep[] = [];
+  let exCounter = 1;
+  for (const sub of nonRev) {
+    const subSteps = buildSteps(sub);
+    const esi = subSteps.findIndex(s => s.kind === "eval_start");
+    if (esi < 0) continue;
+    const endi = subSteps.findIndex((s, i) => i > esi && (s.kind === "pass_toggle" || s.kind === "results"));
+    const evalSlice = endi >= 0 ? subSteps.slice(esi + 1, endi) : subSteps.slice(esi + 1);
+    if (evalSlice.length > 0) {
+      result.push(...evalSlice);
+    } else {
+      // pool-only lesson: include up to 3 exercises in scored mode
+      const pool = sub.exercisePool;
+      const src = pool && pool.length > 0
+        ? shufflePick(pool, Math.min(3, pool.length))
+        : sub.exercises.slice(0, 3);
+      src.forEach(item => result.push({ kind: "exercise", item, exNum: exCounter++ }));
+    }
+  }
+  return result;
+}
+
 function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
+  // Revision lessons (RA/RG): skip training, go directly to eval
+  const parentModuleId = getParentModuleForRevision(lesson.submoduleId);
+  if (parentModuleId !== null) {
+    const evalSteps = buildRevisionEvalSteps(parentModuleId);
+    return [
+      { kind: "eval_start" },
+      ...evalSteps,
+      evalSteps.length > 0 ? { kind: "results" } : { kind: "pass_toggle" },
+    ];
+  }
+
   const steps: WorkspaceStep[] = [{ kind: "theory" }];
   if (lesson.submoduleId === "A4-1") {
     // Training
@@ -1175,6 +1222,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setExStatus(ok ? "correct" : "wrong");
     setExAttempts(a => a + 1);
     if (ok) setCanValidate(false);
+    const inEval = evalStartIdx >= 0 && stepIdx > evalStartIdx;
+    if (inEval) {
+      setEvalScores(prev => ({ ...prev, [stepIdx]: { c: ok ? 1 : 0, t: 1 } }));
+    }
   }
 
   const validateDisabled = currentStep?.kind === "exercise"
