@@ -128,7 +128,7 @@ export function CompteDashboard({
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/connexion"
-                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-teal-700 px-6 font-semibold text-white dark:bg-teal-600"
+                className="inline-flex min-h-12 items-center justify-center rounded-xl bg-green-700 px-6 font-semibold text-white dark:bg-green-600"
               >
                 Connexion
               </Link>
@@ -213,7 +213,7 @@ export function CompteDashboard({
 
         <section aria-labelledby="pivot-heading">
           <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Langue d’aide (pivot)
+            Langue d’aide
           </h2>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Choix enregistré sur cet appareil
@@ -230,13 +230,13 @@ export function CompteDashboard({
                     onClick={() => void savePivot(l.code)}
                     className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 text-left transition-colors ${
                       checked
-                        ? "border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40"
-                        : "border-zinc-200 hover:border-teal-300 dark:border-zinc-700 dark:hover:border-teal-800"
+                        ? "border-green-600 bg-green-50 dark:border-green-500 dark:bg-green-950/40"
+                        : "border-zinc-200 hover:border-green-300 dark:border-zinc-700 dark:hover:border-green-800"
                     }`}
                   >
                     <span
                       className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                        checked ? "border-teal-600 bg-teal-600" : "border-zinc-400"
+                        checked ? "border-green-600 bg-green-600" : "border-zinc-400"
                       }`}
                       aria-hidden
                     >
@@ -252,7 +252,7 @@ export function CompteDashboard({
             })}
           </ul>
           {saved ? (
-            <p className="mt-2 text-sm text-teal-700 dark:text-teal-400" role="status">
+            <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
               Choix enregistré.
             </p>
           ) : null}

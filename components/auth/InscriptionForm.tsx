@@ -12,7 +12,7 @@ const LANGUES = [
   { code: "other", label: "Autre" },
 ];
 
-const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950";
+const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
 const labelCls = "text-sm font-medium text-zinc-800 dark:text-zinc-200";
 const reqTag = <span className="text-red-500"> *</span>;
 const optTag = <span className="font-normal text-zinc-400 dark:text-zinc-500"> (optionnel)</span>;
@@ -40,8 +40,8 @@ function SuccessPopup({ loginId, password, onClose }: { loginId: string; passwor
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
       <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl dark:bg-zinc-900">
-        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-teal-100 dark:bg-teal-900/40">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-teal-600 dark:text-teal-400">
+        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/40">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-green-600 dark:text-green-400">
             <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
             <polyline points="22 4 12 14.01 9 11.01" />
           </svg>
@@ -56,7 +56,7 @@ function SuccessPopup({ loginId, password, onClose }: { loginId: string; passwor
           <div className="rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800">
             <p className="mb-1 text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">Identifiant</p>
             <div className="flex items-center justify-between gap-2">
-              <p className="font-mono text-lg font-bold text-teal-700 dark:text-teal-400">{loginId}</p>
+              <p className="font-mono text-lg font-bold text-green-700 dark:text-green-400">{loginId}</p>
               <button
                 type="button"
                 onClick={copyId}
@@ -77,7 +77,7 @@ function SuccessPopup({ loginId, password, onClose }: { loginId: string; passwor
         <button
           type="button"
           onClick={onClose}
-          className="mt-6 w-full min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white dark:bg-teal-600"
+          className="mt-6 w-full min-h-12 rounded-xl bg-green-700 text-base font-semibold text-white dark:bg-green-600"
         >
           Se connecter
         </button>
@@ -174,7 +174,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
             readOnly
             value={loginId}
             placeholder="Saisissez le prénom et le nom"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3 text-base font-mono text-teal-700 outline-none cursor-default dark:border-zinc-700 dark:bg-zinc-800 dark:text-teal-400"
+            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-200 bg-zinc-50 px-3 text-base font-mono text-green-700 outline-none cursor-default dark:border-zinc-700 dark:bg-zinc-800 dark:text-green-400"
           />
           <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
             Cet identifiant sera utilisé pour se connecter. Il est généré automatiquement.
@@ -275,7 +275,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
         <button
           type="submit"
           disabled={pending || !loginId || passwordMismatch}
-          className="mt-2 min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white disabled:opacity-60 dark:bg-teal-600"
+          className="mt-2 min-h-12 rounded-xl bg-green-700 text-base font-semibold text-white disabled:opacity-60 dark:bg-green-600"
         >
           {pending ? "Inscription en cours…" : "M'inscrire"}
         </button>
@@ -283,7 +283,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
 
       <p className="mt-6 text-center text-sm text-zinc-600 dark:text-zinc-400">
         Déjà un compte ?{" "}
-        <Link href="/connexion" className="font-semibold text-teal-800 underline dark:text-teal-400">
+        <Link href="/connexion" className="font-semibold text-green-800 underline dark:text-green-400">
           Connexion
         </Link>
       </p>

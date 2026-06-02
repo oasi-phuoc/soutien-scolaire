@@ -12,7 +12,7 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
         </p>
       )}
       {msg && (
-        <p className="mt-4 rounded-lg bg-teal-50 px-3 py-2 text-sm text-teal-900 dark:bg-teal-950/40 dark:text-teal-100">
+        <p className="mt-4 rounded-lg bg-green-50 px-3 py-2 text-sm text-green-900 dark:bg-green-950/40 dark:text-green-100">
           {msg}
         </p>
       )}
@@ -29,7 +29,7 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
             required
             autoComplete="username"
             placeholder="prenom.nom"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 font-mono text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
+            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 font-mono text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950"
           />
         </div>
 
@@ -45,13 +45,13 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
             type="password"
             required
             autoComplete="current-password"
-            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-teal-500 dark:border-zinc-600 dark:bg-zinc-950"
+            className="mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950"
           />
         </div>
 
         <button
           type="submit"
-          className="min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white dark:bg-teal-600"
+          className="min-h-12 rounded-xl bg-green-700 text-base font-semibold text-white dark:bg-green-600"
         >
           Se connecter
         </button>
@@ -59,7 +59,7 @@ export function ConnexionForm({ error, msg }: { error?: string; msg?: string }) 
 
       <p className="mt-5 text-center text-sm text-zinc-600 dark:text-zinc-400">
         Pas encore de compte ?{" "}
-        <Link href="/inscription" className="font-semibold text-teal-800 underline dark:text-teal-400">
+        <Link href="/inscription" className="font-semibold text-green-800 underline dark:text-green-400">
           Créer un compte
         </Link>
       </p>

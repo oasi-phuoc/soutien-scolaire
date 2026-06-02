@@ -22,7 +22,7 @@ export default async function HomePage({ searchParams }: Props) {
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-10 pb-28">
       {q.msg ? (
-        <p className="rounded-xl border border-teal-300 bg-teal-50 px-4 py-3 text-sm text-teal-950 dark:border-teal-800 dark:bg-teal-950/40 dark:text-teal-50">
+        <p className="rounded-xl border border-indigo-300 bg-indigo-50 px-4 py-3 text-sm text-indigo-950 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-50">
           {q.msg}
         </p>
       ) : null}
