@@ -67,11 +67,19 @@ type EvalPhaseKind = "eval_start" | "pass_toggle" | "results";
 function isEvalPhaseKind(k: string): k is EvalPhaseKind { return EVAL_PHASE_KINDS.has(k as EvalPhaseKind); }
 function notInBar(s: WorkspaceStep) { return isEvalPhaseKind(s.kind); }
 
+const STEP_DEFAULT_TOTALS: Record<string, number> = {
+  fraction_toggle: 5, fraction_coloring: 4, fraction_read: 4,
+  fraction_multi_coloring: 4, fraction_multi_read: 4,
+  fraction_equiv: 5, fraction_simplify: 5, fraction_compare: 5,
+  frac_to_dec: 5, dec_to_frac: 5,
+};
+
 function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
-  if (step && "count" in step && typeof (step as { count?: number }).count === "number") {
+  if (!step) return stored?.t ?? 1;
+  if ("count" in step && typeof (step as { count?: number }).count === "number") {
     return (step as { count: number }).count;
   }
-  return stored?.t ?? 1;
+  return STEP_DEFAULT_TOTALS[step.kind] ?? stored?.t ?? 1;
 }
 
 function shufflePick<T>(arr: T[], n: number): T[] {
@@ -1044,6 +1052,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
   const [evalScores, setEvalScores] = useState<Record<number, { c: number; t: number }>>({});
+  const [evalKey, setEvalKey] = useState(0);
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
@@ -1069,6 +1078,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   function startEval() {
     setEvalTimeLeft(5 * 60);
+    setEvalScores({});
+    setEvalKey(k => k + 1);
     goTo(stepIdx + 1);
   }
 
@@ -1168,6 +1179,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
   const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
 
+  const exKey: string | number = isInEvalExercises ? `eval-${evalKey}-${stepIdx}` : exerciseKey;
+
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter((s: WorkspaceStep) => !notInBar(s));
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const showTrainingBar = !inEvalPhase && !isInEvalExercises;
@@ -1188,42 +1201,42 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
       {/* A4-1 custom exercises */}
       {currentStep?.kind === "fraction_toggle" && (
-        <FractionToggleExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionToggleExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_coloring" && (
-        <FractionColoringExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionColoringExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_read" && (
-        <FractionReadExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionReadExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_multi_coloring" && (
-        <FractionMultiColoringExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionMultiColoringExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_multi_read" && (
-        <FractionMultiReadExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionMultiReadExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-2 exercises */}
       {currentStep?.kind === "fraction_equiv" && (
-        <FractionEquivExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionEquivExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_simplify" && (
-        <FractionSimplifyExercise key={exerciseKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionSimplifyExercise key={exKey} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "fraction_compare" && (
-        <FractionCompareExercise key={exerciseKey} exNum={currentStep.exNum} mode={currentStep.mode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionCompareExercise key={exKey} exNum={currentStep.exNum} mode={currentStep.mode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "frac_to_dec" && (
-        <FracToDecExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FracToDecExercise key={exKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_to_frac" && (
-        <DecToFracExercise key={exerciseKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecToFracExercise key={exKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A5.4 / A5.5 decimal arithmetic exercises */}
       {currentStep?.kind === "dec_arith_group" && (
         <DecArithGroupExercise
-          key={exerciseKey}
+          key={exKey}
           exNum={currentStep.exNum}
           op={currentStep.op}
           missingOperand={currentStep.missingOperand}
@@ -1236,7 +1249,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_mul_col" && (
         <DecMulColGridExercise
-          key={exerciseKey}
+          key={exKey}
           exNum={currentStep.exNum}
           preFilledOperands={currentStep.preFilledOperands}
           validateCommand={validateCommand}
@@ -1244,88 +1257,88 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         />
       )}
       {currentStep?.kind === "dec_div_simple" && (
-        <DecDivSimpleExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecDivSimpleExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_div_missing" && (
-        <DecDivMissingExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecDivMissingExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_div_ext" && (
-        <DecDivExtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecDivExtExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A5-1 reading/rounding exercises */}
       {currentStep?.kind === "dec_read_decompose" && (
-        <DecReadDecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadDecomposeExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_recompose" && (
-        <DecReadRecomposeExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadRecomposeExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_place_value" && (
-        <DecReadPlaceValueExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadPlaceValueExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_digit_at" && (
-        <DecReadDigitAtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadDigitAtExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_dictation" && (
-        <DecReadDictationExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadDictationExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 {currentStep?.kind === "dec_read_compare" && (
-        <DecReadCompareExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadCompareExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_order" && (
-        <DecReadOrderExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadOrderExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_filter_gt" && (
-        <DecReadFilterGtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadFilterGtExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_filter_lt" && (
-        <DecReadFilterLtExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadFilterLtExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_filter_between" && (
-        <DecReadFilterBetweenExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadFilterBetweenExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_encadrement" && (
-        <DecReadEncadrementExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadEncadrementExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_nl_read" && (
-        <DecReadNLReadExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadNLReadExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_nl_place" && (
-        <DecReadNLPlaceExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <DecReadNLPlaceExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A7-1 number line exercises */}
       {currentStep?.kind === "a7_nl_read_mixed" && (
-        <A7NLReadMixedExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7NLReadMixedExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a7_nl_place_mixed" && (
-        <A7NLPlaceMixedExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7NLPlaceMixedExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a7_nl_read_neg" && (
-        <A7NLReadNegExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7NLReadNegExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a7_nl_place_neg" && (
-        <A7NLPlaceNegExercise key={exerciseKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7NLPlaceNegExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A7-2 comparison exercises */}
       {currentStep?.kind === "a7_compare_ex" && (
-        <A7CompareExercise key={exerciseKey} exNum={currentStep.exNum} level={currentStep.level} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7CompareExercise key={exKey} exNum={currentStep.exNum} level={currentStep.level} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A7-3 relative addition/subtraction exercises */}
       {currentStep?.kind === "a7_rel_arith" && (
-        <A7RelArithExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} questionMode={currentStep.questionMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7RelArithExercise key={exKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} questionMode={currentStep.questionMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A7-4 relative multiplication/division exercises */}
       {currentStep?.kind === "a7_rel_mul_div" && (
-        <A7RelMulDivExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7RelMulDivExercise key={exKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A4-4/5/6 fraction operations exercises */}
       {currentStep?.kind === "frac_ops" && (
-        <FractionOpsExercise key={exerciseKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* Generic text exercise */}
@@ -1340,7 +1353,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             </p>
           </div>
           <input
-            key={exerciseKey}
+            key={exKey}
             type={currentStep.item.type === "number" ? "number" : "text"}
             value={answer}
             onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
@@ -1475,10 +1488,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
             {isExercise ? (
               <div className="flex items-center gap-2">
-                <button type="button" aria-label="Recommencer" onClick={refresh}
-                  className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" /></svg>
-                </button>
+                {!isInEvalExercises && (
+                  <button type="button" aria-label="Recommencer" onClick={refresh}
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" /></svg>
+                  </button>
+                )}
                 <button type="button" aria-label="Valider"
                   onClick={() => { if (isCustom) setValidateCommand(c => c + 1); else validateText(); }}
                   disabled={validateDisabled}
@@ -1489,7 +1504,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             ) : <span />}
 
             <button type="button" onClick={goNext}
-              disabled={currentStep?.kind === "pass_toggle" && toggleAnswer === null}
+              disabled={
+                (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
+                (isInEvalExercises && isCustom && evalScores[stepIdx] === undefined)
+              }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
               {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
