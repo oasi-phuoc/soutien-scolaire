@@ -4,45 +4,41 @@ export const MATH_A5_2_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-2",
     submoduleCode: "A5.2",
     theory: {
-      title: { fr: "Suite de nombres à virgule", en: "Sequences of decimal numbers", ar: "متتالية أعداد عشرية", fa: "دنباله اعداد اعشاری", ti: "ተኸታተልቲ ቁጽሪ ቪርጉላ", uk: "Послідовності десяткових чисел" },
+      title: { fr: "Trouver l'écart entre deux termes d'une suite", en: "Finding the difference between terms in a sequence", ar: "إيجاد الفرق بين العناصر في المتتالية", fa: "یافتن تفاوت بین اعضای یک دنباله", ti: "መረጃ ቁጽሪ ቪርጉላ", uk: "Знаходження різниці між членами послідовності" },
       blocks: [
-        { type: "heading", fr: "Trouver le pas d'une suite", black: true },
         { type: "highlight", fr: "Principe" },
         {
           type: "section", labelFr: "", itemsFr: [
-            "1. Repérer si la suite est **croissante** (augmente) ou **décroissante** (diminue).",
-            "2. Calculer le **pas** (écart entre deux termes consécutifs).",
-            "3. Appliquer le pas pour trouver les termes manquants.",
+            "**1**. Repérer si la suite est **croissante** (augmente) ou **décroissante** (diminue).",
+            "**2**. Calculer l'écart entre deux valeurs consécutives.",
+            "**3**. Appliquer l'écart pour trouver les valeurs manquantes.",
           ],
         },
         { type: "plain", fr: "" },
-        { type: "heading", fr: "Cas 1 — Deux termes consécutifs connus", black: false },
-        { type: "highlight", fr: "Suite croissante" },
+        { type: "heading", fr: "Deux valeurs consécutives connues", black: true },
+        { type: "plain", fr: "2,5 ; **...** ; 3.5 ; 4" }
         {
           type: "section", labelFr: "", itemsFr: [
-            "Pas = terme suivant − terme précédent",
-            "Terme manquant = terme connu + pas",
+            "Soustraire les deux valeurs connues.",
+            "4 − 3,5 = 0,5 **écart**",
+            "Valeur manquante = valeur connue ± **écart**",
+            "Valeur manquante = 2.5 + 0,5 = **3,0**",
           ],
         },
-        { type: "example", fr: "2,5 ; ___ ; 3,5 ; 4  →  pas = 4 − 3,5 = 0,5  →  terme manquant = 2,5 + 0,5 = 3,0" },
-        { type: "highlight", fr: "Suite décroissante" },
+        
+        { type: "heading", fr: "Pas de valeurs consécutives", black: true },
+        { type: "plain", fr: "**...** ; 7,2 ; **...** ; 9,6" }
         {
           type: "section", labelFr: "", itemsFr: [
-            "Pas = terme précédent − terme suivant",
-            "Terme manquant = terme connu − pas",
+            "Soustraire les deux valeurs connues.",
+            "9,6 − 7,2 = 2,4",
+            "Diviser par le **nombre d'espaces** entre eux. Le nombre d'espaces = nombre de valeurs manquantes **+ 1**.",
+            "2,4 ÷ **2** = 1,2 **écart**",
+            "Valeur manquante = valeur connue ± **écart**",
+            "Valeurs manquantes : 7,2 + 1,2 = **8,4** et 9,6 − 1,2 = **6,0**",
           ],
         },
-        { type: "example", fr: "7,25 ; 7 ; ___ ; 6,5  →  pas = 7,25 − 7 = 0,25  →  terme manquant = 7 − 0,25 = 6,75" },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Cas 2 — Pas de termes consécutifs", black: false },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "Soustraire les deux termes connus : grand − petit = écart total",
-            "Diviser par le nombre d'espaces entre eux = pas",
-          ],
-        },
-        { type: "example", fr: "___ ; 7,2 ; ___ ; 9,6  →  (9,6 − 7,2) ÷ 2 = 1,2  →  termes : 6,0 et 8,4" },
-        { type: "note", fr: "Le nombre d'espaces = nombre de termes manquants + 1" },
+        { type: "example", fr: "___ ; 7,2 ; ___ ; 9,6  →  (9,6 − 7,2) ÷ 2 = 1,2  →  valeurs : 6,0 et 8,4" },
       ],
       paragraphs: { fr: [] },
     },

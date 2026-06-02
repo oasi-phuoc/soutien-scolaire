@@ -15,13 +15,13 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
             "Après la virgule → **partie décimale** (dixièmes, centièmes, millièmes)",
           ],
         },
-        { type: "heading", fr: "Exemple : 4 321,98", black: false },
         {
           type: "table",
           headersFr: ["M", "C", "D", "U", "", "dx", "cx"],
           accentHeader: true,
           rows: [["4", "3", "2", "1", ",", "9", "8"]],
         },
+        { type: "plain", fr: "" },
         {
           type: "section", labelFr: "Valeur de chaque chiffre :", itemsFr: [
             "4 → 4 milliers = 4 000",
@@ -35,20 +35,20 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
         { type: "plain", fr: "" },
         { type: "heading", fr: "Zéros après la virgule", black: true },
         { type: "highlight", fr: "Zéros inutiles" },
+        { type: "plain", fr: "On peut ajouter des zéros à droite de la partie décimale sans changer la valeur." },
         {
-          type: "section", labelFr: "", itemsFr: [
-            "On peut ajouter des zéros à droite de la partie décimale sans changer la valeur.",
+          type: "section", labelFr: "4,2 = 4,2**0** = 4,2**00**", itemsFr: [
+            "",
           ],
         },
-        { type: "note", fr: "4,2 = 4,20 = 4,200" },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Comparer et ordonner", black: true },
         { type: "highlight", fr: "Méthode" },
         {
           type: "section", labelFr: "", itemsFr: [
-            "1. Comparer les parties entières en premier.",
-            "2. Si égales → comparer les dixièmes, puis les centièmes…",
-            "3. Ajouter des zéros si nécessaire : 3,5 = 3,50",
+            "**1**. Comparer les parties entières en premier.",
+            "**2**. Si égales → comparer les dixièmes, puis les centièmes…",
+            "**3**. Ajouter des zéros si nécessaire : 3,5 = 3,50",
           ],
         },
         {
@@ -56,9 +56,9 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
           headersFr: ["Comparaison", "Résultat", "Raison"],
           accentHeader: true,
           rows: [
-            ["3,5 vs 3,50", "3,5 = 3,50", "mêmes valeurs"],
-            ["4,7 vs 4,69", "4,7 > 4,69", "dixième : 7 > 6"],
-            ["2,04 vs 2,40", "2,04 < 2,40", "dixième : 0 < 4"],
+            ["3,5 et 3,50", "3,5 = 3,50", "mêmes valeurs"],
+            ["4,7 et 4,69", "4,7 > 4,69", "dixième : 7 > 6"],
+            ["2,04 et 2,40", "2,04 < 2,40", "dixième : 0 < 4"],
           ],
         },
       ],
