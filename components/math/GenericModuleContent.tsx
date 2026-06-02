@@ -3718,6 +3718,9 @@ export function GenericModuleContent({
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
+  // Revision 30-minute timer
+  const [revTimerLeft, setRevTimerLeft] = useState<number | null>(null);
+
   // Eval phase state
   const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
   const [showEvalScore, setShowEvalScore] = useState(false);
@@ -3849,8 +3852,28 @@ export function GenericModuleContent({
     return () => clearInterval(id);
   }, [isInEvalPhase, evalTimeLeft]);
 
+  // Revision 30-minute timer countdown + auto-jump to pass_toggle when time runs out
+  useEffect(() => {
+    if (!revisionMode || !isInEvalPhase || revTimerLeft === null || revTimerLeft <= 0) return;
+    const id = setInterval(() => setRevTimerLeft((t: number | null) => (t ?? 1) - 1), 1000);
+    return () => clearInterval(id);
+  }, [revisionMode, isInEvalPhase, revTimerLeft]);
+
+  useEffect(() => {
+    if (!revisionMode || revTimerLeft !== 0) return;
+    const passIdx = steps.findLastIndex((s: FlatStep) => s.kind === "pass_toggle");
+    if (passIdx >= 0 && stepIdx !== passIdx) {
+      setRevTimerLeft(null);
+      goTo(passIdx);
+    }
+  }, [revisionMode, revTimerLeft, steps, stepIdx, goTo]);
+
   function startEval() {
-    setEvalTimeLeft(5 * 60);
+    if (revisionMode) {
+      setRevTimerLeft(30 * 60);
+    } else {
+      setEvalTimeLeft(5 * 60);
+    }
     setEvalPageSavedResults([]);
     setShowEvalScore(false);
     setEvalFinalGrade(null);
@@ -6060,8 +6083,8 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Fixed bottom nav */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      {/* Fixed bottom nav — hidden on eval_start announce screen */}
+      <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)] ${currentStep?.kind === "eval_start" ? "hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {/* Back button — hidden on eval start and score screen */}
