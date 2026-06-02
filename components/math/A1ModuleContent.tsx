@@ -322,6 +322,55 @@ function ScaledCanvas({ width, height, children }: { width: number; height: numb
   );
 }
 
+// ─── ZoomModal — plein écran pour visualiser les blocs ───────────────────────
+
+function ZoomModal({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-4"
+        onClick={e => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute -top-9 right-0 flex items-center gap-1.5 text-white text-sm font-medium"
+          aria-label="Fermer"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+          Fermer
+        </button>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+function ZoomButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="Agrandir"
+      className="absolute top-2 right-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[var(--color-bg-primary)] border border-[var(--color-border-default)] text-[var(--color-text-secondary)] shadow-sm transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
+    >
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+        <circle cx="11" cy="11" r="8" />
+        <path d="M21 21l-4.35-4.35" />
+        <path d="M11 8v6M8 11h6" />
+      </svg>
+    </button>
+  );
+}
+
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
   const s = secs % 60;
@@ -1779,6 +1828,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
   const resetEx13 = () => { setEx13Questions(generateEx13()); setEx13Answers(Array(1).fill("")); setEx13Results(Array(1).fill(null)); setEx13Validated(false); };
 
+  // Zoom modal — A1.2 exercises with SVG visuals
+  const [zoomedEx, setZoomedEx] = useState<string | null>(null);
+
   // Ex14 — décomposition nombre (2 séries)
   const genEx14Nums = () => Array.from({length: 2}, () => Math.floor(Math.random() * 9899) + 101);
   const [ex14Numbers, setEx14Numbers] = useState<number[]>(genEx14Nums);
@@ -2971,10 +3023,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const value = q.tens * 10 + q.units;
               const sel = ex9Selected[i] ?? null;
               const _correct = ex9Validated ? sel === value : null;
+              const zoomKey = `ex9-${i}`;
               return (
                 <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] transition-colors">
                   {/* Zone d'affichage, blocs centrés, largeur complète */}
-                  <div className="flex min-h-28 w-full flex-col items-center justify-center gap-1 rounded-t px-3 py-2">
+                  <div className="relative flex min-h-28 w-full flex-col items-center justify-center gap-1 rounded-t px-3 py-2">
+                    <ZoomButton onClick={() => setZoomedEx(zoomKey)} />
                     {q.tens > 0 && (
                       <div className="flex w-full flex-wrap justify-center gap-0.5">
                         {Array.from({ length: q.tens }, (_, ti) => <SvgDizaineH key={ti} s={8} />)}
@@ -2999,6 +3053,22 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       );
                     })}
                   </div>
+                  {zoomedEx === zoomKey && (
+                    <ZoomModal onClose={() => setZoomedEx(null)}>
+                      <div className="flex flex-col items-center justify-center gap-2 py-6 px-4">
+                        {q.tens > 0 && (
+                          <div className="flex w-full flex-wrap justify-center gap-1">
+                            {Array.from({ length: q.tens }, (_, ti) => <SvgDizaineH key={ti} s={14} />)}
+                          </div>
+                        )}
+                        {q.units > 0 && (
+                          <div className="flex w-full flex-wrap justify-center gap-1">
+                            {Array.from({ length: q.units }, (_, ui) => <SvgUnite key={ui} s={18} />)}
+                          </div>
+                        )}
+                      </div>
+                    </ZoomModal>
+                  )}
                 </div>
               );
             })}
@@ -4613,7 +4683,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
 
       {/* ── Fixed bottom nav ──────────────────────────────────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]${step === "eval" && !evalStarted && !evalSubmitted ? " hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {!(step === "eval" && evalSubmitted) ? (

@@ -4879,7 +4879,7 @@ export function GenericModuleContent({
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={evalTimeLeft} />
+        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
       )}
 
       {/* Theory */}
