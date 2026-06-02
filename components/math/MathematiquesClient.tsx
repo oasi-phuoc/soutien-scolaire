@@ -20,6 +20,7 @@ import {
 } from "@/lib/progress/math-progress";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { PASSING_GRADE } from "@/lib/scoring";
+import { ComingSoon } from "@/components/ComingSoon";
 
 type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
 
@@ -179,8 +180,11 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
         </button>
       </div>
 
+{/* Geometry tab: coming soon for non-admins */}
+      {tab === "geometry" && !isAdmin && <ComingSoon />}
+
 {/* Module cards */}
-      <section aria-label="Liste des modules" className="space-y-4">
+      <section aria-label="Liste des modules" className="space-y-4" hidden={tab === "geometry" && !isAdmin}>
         <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;
