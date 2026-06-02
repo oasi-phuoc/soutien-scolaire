@@ -8,7 +8,7 @@ import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade, medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
+import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -3315,9 +3315,8 @@ export function GenericModuleContent({
         return;
       }
     }
-    const pct = correct ? 100 : 0;
-    const grade = percentToSwissGrade(pct);
-    const medal = correct ? medalFromPercent(pct) : undefined;
+    const grade = linearSwissGrade(correct ? 1 : 0, 1);
+    const medal = correct ? medalFromPercent(100) : undefined;
     saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
     void medal;
     router.push("/mathematiques");

@@ -1092,7 +1092,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
-  const [evalScores, setEvalScores] = useState<Record<number, boolean>>({});
+  const [evalScores, setEvalScores] = useState<Record<number, { c: number; t: number }>>({});
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
 
   const goTo = useCallback((idx: number) => {
@@ -1175,8 +1175,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setExerciseKey(k => k + 1);
   }
 
-  function handleCustomValidated(ok: boolean) {
-    setEvalScores((prev: Record<number, boolean>) => ({ ...prev, [stepIdx]: ok }));
+  function handleCustomValidated(ok: boolean, correct?: number, total?: number) {
+    const c = correct ?? (ok ? 1 : 0);
+    const t = total ?? 1;
+    setEvalScores(prev => ({ ...prev, [stepIdx]: { c, t } }));
     setCanValidate(false);
   }
 
