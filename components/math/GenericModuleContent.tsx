@@ -2488,18 +2488,19 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 3, 3) });
       steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A5-2") {
-      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
-      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
-      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
-      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
-      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
-      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
+      steps.push({ kind: "ordering", lesson, config: genDecOrdering("asc", 1) });
+      steps.push({ kind: "ordering", lesson, config: genDecOrdering("desc", 2) });
+      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
+      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
+      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
       steps.push({ kind: "eval_start", lesson });
       const ascFirst52 = Math.random() < 0.5;
-      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
-      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
-      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
-      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
+      steps.push({ kind: "ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
+      steps.push({ kind: "ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
+      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
+      steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A3-5") {
       // Training
       steps.push({ kind: "mult_select", lesson, config: genMultSelect(1) });
@@ -5241,7 +5242,7 @@ export function GenericModuleContent({
                     {q.numbers.map((n, ni) => {
                       const isSelected = sel.includes(n);
                       const selIdx = sel.indexOf(n);
-                      let cls = "w-16 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
+                      let cls = "w-20 shrink-0 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
                       if (!orderingValidated) {
                         cls += isSelected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
@@ -5307,7 +5308,7 @@ export function GenericModuleContent({
               const v = seqRuleAnswers[i] ?? "";
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
-              const correctAns = `${q.op}${q.step}`;
+              const correctAns = `${q.op}${q.step.toLocaleString("fr-CH")}`;
               const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
               const inputRowCls = "w-24 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
               return (
@@ -5356,7 +5357,7 @@ export function GenericModuleContent({
                         const bIdx = blankCounter++;
                         const v = seqCompleteAnswers[qi]?.[bIdx] ?? "";
                         const expected = q.allNums[ni]!;
-                        const wrong = seqCompleteValidated && parseInt(v) !== expected;
+                        const wrong = seqCompleteValidated && parseFloat(v) !== expected;
                         return wrong ? (
                           <div key={ni} className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
                             <span className="line-through text-amber-500 text-xs">{v||"—"}</span>

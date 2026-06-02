@@ -63,7 +63,7 @@ function DecExercise({
   consigne: string;
   questions: DecQuestion[];
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [vals, setVals] = useState<string[]>(() => Array(questions.length).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() =>
@@ -78,7 +78,8 @@ function DecExercise({
       answerMatches(vals[i] ?? "", acceptable(q.answer)) ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every((s) => s === "correct"));
+    const correctCount = sts.filter(s => s === "correct").length;
+    onValidated(sts.every(s => s === "correct"), correctCount, sts.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, vals]);
 
@@ -87,9 +88,9 @@ function DecExercise({
   }, [validateCommand, doValidate]);
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">
           Exercice {exNum} — {title}
         </h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
@@ -102,7 +103,7 @@ function DecExercise({
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">
                 {q.label}.
               </span>
-              <span className="text-sm font-mono text-[var(--color-text-primary)]">
+              <span className="min-w-[9rem] shrink-0 text-sm font-mono text-[var(--color-text-primary)]">
                 {q.question} =
               </span>
               {isWrong ? (
@@ -267,6 +268,7 @@ export function DecArithGroupExercise({
   missingOperand,
   timer,
   precision,
+  mixed,
   validateCommand,
   onValidated,
   onTimeUpdate,
@@ -277,15 +279,20 @@ export function DecArithGroupExercise({
   missingOperand: boolean;
   timer?: number;
   precision: ArithPrecision;
+  mixed?: boolean;
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
   onTimeUpdate?: (t: number) => void;
   hideTimerDisplay?: boolean;
 }) {
-  const count = timer !== undefined ? 8 : 5;
-  const [questions] = useState<ArithQuestion[]>(() =>
-    genArithQuestions(op, missingOperand, precision, count)
-  );
+  const count = mixed ? 4 : timer !== undefined ? 8 : 5;
+  const [questions] = useState<ArithQuestion[]>(() => {
+    if (mixed) {
+      return [...genArithQuestions("+", false, precision, 2),
+               ...genArithQuestions("-", false, precision, 2)];
+    }
+    return genArithQuestions(op, missingOperand, precision, count);
+  });
   const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => Array(count).fill(false));
@@ -306,7 +313,8 @@ export function DecArithGroupExercise({
         return v.trim() === q.answer || v.trim() === q.answer.replace(",", ".");
       });
       setResults(res);
-      onValidatedRef.current(res.every((r: boolean) => r));
+      const correctCount = res.filter((r: boolean) => r).length;
+      onValidatedRef.current(res.every((r: boolean) => r), correctCount, res.length);
       return true;
     });
   }, [questions, answers]);
@@ -690,7 +698,7 @@ export function DecMulColGridExercise({
   exNum: number;
   preFilledOperands: boolean;
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<DecMulColQ[]>(genDecMulColQuestions);
 
@@ -742,7 +750,8 @@ export function DecMulColGridExercise({
       });
 
       setResults(res);
-      onValidatedRef.current(res.every((r: boolean) => r));
+      const correctCount = res.filter((r: boolean) => r).length;
+      onValidatedRef.current(res.every((r: boolean) => r), correctCount, res.length);
       return true;
     });
   }, [questions, carryInputs, operandInputs, resultInputs, preFilledOperands]);

@@ -25,7 +25,7 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
-  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "small" | "large" }
+  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "small" | "large"; mixed?: boolean }
   | { kind: "dec_mul_col"; exNum: number; preFilledOperands: boolean }
   | { kind: "dec_div_simple"; exNum: number }
   | { kind: "dec_div_missing"; exNum: number }
@@ -1477,6 +1477,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
           missingOperand={currentStep.missingOperand}
           timer={currentStep.timer}
           precision={currentStep.precision}
+          mixed={currentStep.mixed}
           validateCommand={validateCommand}
           onValidated={handleCustomValidated}
           onTimeUpdate={!isInEvalExercises ? setTrainingTimerLeft : undefined}
