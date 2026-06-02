@@ -214,6 +214,13 @@ export function MathematiquesClient() {
             );
             const firstAvailableSubIdx = m.submodules.findIndex((sub) => !passedSubIds.has(sub.id));
 
+            const isRevisionSub = (sub: { code: string }) =>
+              sub.code.startsWith("RA.") || sub.code.startsWith("RG.");
+            const nonRevisionSubs = m.submodules.filter((sub) => !isRevisionSub(sub));
+            const allNonRevisionCompleted =
+              nonRevisionSubs.length > 0 &&
+              nonRevisionSubs.every((sub) => completedSubIds.has(sub.id));
+
             const expanded = isModuleExpanded(m.id, displayState);
 
             return (
@@ -296,7 +303,12 @@ export function MathematiquesClient() {
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                       {m.submodules.map((sub, idx) => {
                         const subDone = completedSubIds.has(sub.id);
-                        const subAvailable = !isLocked && idx === firstAvailableSubIdx;
+                        const isRev = isRevisionSub(sub);
+                        const subAvailable = !isLocked && !subDone && (
+                          isRev
+                            ? allNonRevisionCompleted
+                            : idx === firstAvailableSubIdx
+                        );
                         const subLocked = !subDone && !subAvailable;
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         const hasFailedEval = subDone && score !== undefined && score.grade < PASSING_GRADE;
