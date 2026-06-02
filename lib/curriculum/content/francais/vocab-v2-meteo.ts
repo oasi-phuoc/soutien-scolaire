@@ -8,6 +8,8 @@ export const V2_METEO_THEME: VocabTheme = {
   words: [
     { word: "soleil",       article: "le",  gender: "m", definition: "astre qui donne lumière et chaleur" },
     { word: "nuage",        article: "le",  gender: "m", definition: "masse de vapeur d'eau dans le ciel" },
+    { word: "lune",         article: "la",  gender: "f", definition: "astre qui tourne autour de la Terre et brille la nuit" },
+    { word: "étoile",       article: "une", gender: "f", definition: "astre lumineux visible dans le ciel la nuit" },
     { word: "pluie",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" },
     { word: "vent",         article: "le",  gender: "m", definition: "mouvement de l'air" },
     { word: "neige",        article: "la",  gender: "f", definition: "eau gelée qui tombe en flocons blancs" },
@@ -20,12 +22,12 @@ export const V2_METEO_THEME: VocabTheme = {
     { word: "averse",       article: "l'",  gender: "f", definition: "pluie soudaine et abondante" },
     { word: "verglas",      article: "le",  gender: "m", definition: "fine couche de glace sur le sol" },
     { word: "ciel",         article: "le",  gender: "m", definition: "espace au-dessus de nos têtes" },
+    { word: "humide",                                      definition: "chargé d'eau, mouillé" },
+    { word: "sec",          feminine: "sèche",            definition: "sans humidité, contraire d'humide" },
     { word: "doux",         feminine: "douce",            definition: "agréable, sans excès de chaud ou de froid" },
     { word: "chaud",        feminine: "chaude",           definition: "à haute température, contraire de froid" },
     { word: "froid",        feminine: "froide",           definition: "à basse température, contraire de chaud" },
     { word: "frais",        feminine: "fraîche",          definition: "légèrement froid, agréablement frais" },
-    { word: "humide",                                      definition: "chargé d'eau, mouillé" },
-    { word: "sec",          feminine: "sèche",            definition: "sans humidité, contraire d'humide" },
   ],
   sentences: [
     { sentence: "Il fait beau, le ___ brille dans le ciel.",              answer: "soleil" },
