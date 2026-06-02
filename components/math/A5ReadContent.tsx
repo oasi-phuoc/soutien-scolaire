@@ -98,7 +98,7 @@ function genDecompose(): DecompItem[] {
 }
 
 export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState<DecompItem[]>(genDecompose);
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", "", "", ""]));
@@ -112,7 +112,8 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
       item.parts.map((p, j) => !acc(p).includes((vals[i]?.[j] ?? "").trim()))
     );
     setWrongs(newWrongs);
-    onValidated(newWrongs.every(row => row.every(w => !w)));
+    const correctCount = newWrongs.filter(row => row.every(w => !w)).length;
+    onValidated(newWrongs.every(row => row.every(w => !w)), correctCount, items.length);
   }, [validated, items, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -153,7 +154,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
 
 // ── Ex 2 — Recomposer ─────────────────────────────────────────────────────────
 export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState<DecompItem[]>(genDecompose);
   const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
@@ -165,7 +166,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
     setValidated(true);
     const newWrongs = items.map((item, i) => !acc(item.numStr).includes((vals[i] ?? "").trim()));
     setWrongs(newWrongs);
-    onValidated(newWrongs.every(w => !w));
+    onValidated(newWrongs.every(w => !w), newWrongs.filter(w => !w).length, newWrongs.length);
   }, [validated, items, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -215,7 +216,7 @@ function genPlaceValue(): PlaceItem[] {
 }
 
 export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState<PlaceItem[]>(genPlaceValue);
   const [selected, setSelected] = useState<(number | null)[]>(() => items.map(() => null));
@@ -224,7 +225,8 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    onValidated(items.every((item, i) => selected[i] === item.correctPos));
+    const correctCount = items.filter((item, i) => selected[i] === item.correctPos).length;
+    onValidated(correctCount === items.length, correctCount, items.length);
   }, [validated, items, selected, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -308,7 +310,7 @@ function genDigitAt(): DigitAtItem[] {
 }
 
 export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState<DigitAtItem[]>(genDigitAt);
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", ""]));
@@ -322,7 +324,8 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
       item.asks.map((a, j) => (vals[i]?.[j] ?? "").trim() !== a.answer)
     );
     setWrongs(w);
-    onValidated(w.every(row => row.every(x => !x)));
+    const correctCount = w.filter(row => row.every(x => !x)).length;
+    onValidated(w.every(row => row.every(x => !x)), correctCount, w.length);
   }, [validated, items, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -375,7 +378,7 @@ function genDictation(): string[] {
 }
 
 export function DecReadDictationExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [nums] = useState<string[]>(genDictation);
   const [vals, setVals] = useState<string[]>(() => nums.map(() => ""));
@@ -387,7 +390,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
     setValidated(true);
     const w = nums.map((n, i) => !acc(n).includes((vals[i] ?? "").trim()));
     setWrongs(w);
-    onValidated(w.every(x => !x));
+    onValidated(w.every(x => !x), w.filter(x => !x).length, w.length);
   }, [validated, nums, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -446,7 +449,7 @@ function genCompare(): ComparePair[] {
 }
 
 export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [pairs] = useState<ComparePair[]>(genCompare);
   const [selected, setSelected] = useState<(string | null)[]>(() => pairs.map(() => null));
@@ -455,7 +458,8 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    onValidated(pairs.every((p, i) => selected[i] === p.op));
+    const correctCount = pairs.filter((p, i) => selected[i] === p.op).length;
+    onValidated(correctCount === pairs.length, correctCount, pairs.length);
   }, [validated, pairs, selected, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -509,7 +513,7 @@ function genOrder(): string[] {
 }
 
 export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [chips] = useState<string[]>(genOrder);
   const [slots, setSlots] = useState<(string | null)[]>([null, null, null, null, null]);
@@ -536,7 +540,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
     const sorted = [...chips].sort((a, b) => parseFloat(a.replace(",", ".")) - parseFloat(b.replace(",", ".")));
     const w = slots.map((s, i) => s !== sorted[i]);
     setSlotWrong(w);
-    onValidated(w.every(x => !x));
+    onValidated(w.every(x => !x), w.filter(x => !x).length, w.length);
   }, [validated, chips, slots, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -623,7 +627,7 @@ function genFilter(mode: "gt" | "lt" | "between"): FilterConfig {
 }
 
 function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
-  exNum: number; mode: "gt" | "lt" | "between"; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; mode: "gt" | "lt" | "between"; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [cfg] = useState<FilterConfig>(() => genFilter(mode));
   const [selected, setSelected] = useState<Set<string>>(new Set());
@@ -656,10 +660,11 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
       else states[s] = "idle";
     }
     setChipState(states);
-    onValidated(cfg.nums.every(s => {
+    const correct = cfg.nums.filter(s => {
       const c = isCorrect(s), sel = selected.has(s);
       return (c && sel) || (!c && !sel);
-    }));
+    }).length;
+    onValidated(correct === cfg.nums.length, correct, cfg.nums.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, cfg, selected, onValidated]);
 
@@ -702,17 +707,17 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
 }
 
 export function DecReadFilterGtExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   return <FilterExercise exNum={exNum} mode="gt" validateCommand={validateCommand} onValidated={onValidated} />;
 }
 export function DecReadFilterLtExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   return <FilterExercise exNum={exNum} mode="lt" validateCommand={validateCommand} onValidated={onValidated} />;
 }
 export function DecReadFilterBetweenExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   return <FilterExercise exNum={exNum} mode="between" validateCommand={validateCommand} onValidated={onValidated} />;
 }
@@ -729,7 +734,7 @@ function genEncadrement(): { numStr: string; lo: number; hi: number }[] {
 }
 
 export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState(genEncadrement);
   const [vals, setVals] = useState<{ lo: string; hi: string }[]>(() => items.map(() => ({ lo: "", hi: "" })));
@@ -744,7 +749,8 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
       hi: (vals[i]?.hi ?? "").trim() !== String(item.hi),
     }));
     setWrongs(w);
-    onValidated(w.every(x => !x.lo && !x.hi));
+    const correctCount = w.filter(x => !x.lo && !x.hi).length;
+    onValidated(w.every(x => !x.lo && !x.hi), correctCount, w.length);
   }, [validated, items, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -792,7 +798,7 @@ function genNLRead(): NLLine[] {
 }
 
 export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [lines] = useState<NLLine[]>(genNLRead);
   const [vals, setVals] = useState<string[][]>(() => lines.map(l => l.arrows.map(() => "")));
@@ -809,7 +815,8 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
       })
     );
     setWrongs(w);
-    onValidated(w.every(row => row.every(x => !x)));
+    const flat = w.flat();
+    onValidated(w.every(row => row.every(x => !x)), flat.filter(x => !x).length, flat.length);
   }, [validated, lines, vals, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
@@ -896,7 +903,7 @@ function genNLPlace(): NLPlaceConfig {
 }
 
 export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: {
-  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+  exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [cfg] = useState<NLPlaceConfig>(genNLPlace);
   // chips = position values (shuffled for display)
@@ -931,7 +938,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
     setValidated(true);
     const w = cfg.positions.map((v, i) => assignments[i] !== v);
     setPosWrong(w);
-    onValidated(w.every(x => !x));
+    onValidated(w.every(x => !x), w.filter(x => !x).length, w.length);
   }, [validated, cfg, assignments, onValidated]);
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);

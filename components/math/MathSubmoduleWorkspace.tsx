@@ -25,7 +25,7 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
-  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" }
+  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended"; mixed?: boolean }
   | { kind: "dec_mul_col"; exNum: number; preFilledOperands: boolean }
   | { kind: "dec_div_simple"; exNum: number }
   | { kind: "dec_div_missing"; exNum: number }
@@ -263,13 +263,14 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_arith_group", exNum: 6, op: "-", missingOperand: false, timer: 60, precision: "tenths" });
     steps.push({ kind: "dec_arith_group", exNum: 7, op: "-", missingOperand: true, precision: "tenths" });
     steps.push({ kind: "dec_arith_group", exNum: 8, op: "-", missingOperand: false, precision: "hundredths" });
-    // Evaluation: 5 exercises
+    // Evaluation: 6 exercises
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_arith_group", exNum: 1, op: "+", missingOperand: false, precision: "tenths" });
     steps.push({ kind: "dec_arith_group", exNum: 2, op: "+", missingOperand: true, precision: "tenths" });
     steps.push({ kind: "dec_arith_group", exNum: 3, op: "-", missingOperand: false, precision: "tenths" });
     steps.push({ kind: "dec_arith_group", exNum: 4, op: "-", missingOperand: true, precision: "tenths" });
-    steps.push({ kind: "dec_arith_group", exNum: 5, op: "+", missingOperand: false, precision: "hundredths" });
+    steps.push({ kind: "dec_arith_group", exNum: 5, op: "+", missingOperand: false, mixed: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 6, op: "+", missingOperand: false, mixed: true, precision: "hundredths" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-5") {
     // Training: 8 exercises
@@ -1312,6 +1313,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
           missingOperand={currentStep.missingOperand}
           timer={currentStep.timer}
           precision={currentStep.precision}
+          mixed={currentStep.mixed}
           validateCommand={validateCommand}
           onValidated={handleCustomValidated}
           onTimeUpdate={!isInEvalExercises ? setTrainingTimerLeft : undefined}

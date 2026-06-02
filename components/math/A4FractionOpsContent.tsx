@@ -200,7 +200,7 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
   exType: 1|2|3|4|5|6|7|8|9;
   opMode: FracOpMode;
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   let structType: 1|2|3|4|5;
   let lo: number, hi: number;
@@ -224,7 +224,8 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
       return answerMatches(combined, q.acceptables) ? "correct" : "wrong";
     }) as ("correct"|"wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    const correctCount = sts.filter(s => s === "correct").length;
+    onValidated(sts.every(s => s === "correct"), correctCount, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, nums, dens]);
 
@@ -233,7 +234,7 @@ export function FractionOpsExercise({ exType, opMode, validateCommand, onValidat
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exType}</h2>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exType}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
       <div className="space-y-4">
