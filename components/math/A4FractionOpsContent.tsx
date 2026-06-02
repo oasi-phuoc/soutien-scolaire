@@ -164,7 +164,7 @@ function VFrac({ n, d }: { n: number; d: number }) {
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-      <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-0.5 w-8 rounded bg-[var(--color-text-primary)]" />
       <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
@@ -187,7 +187,7 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
-      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-0.5 w-12 rounded bg-[var(--color-text-primary)]" />
       {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
     </span>
   );

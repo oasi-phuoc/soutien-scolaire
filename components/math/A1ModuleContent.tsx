@@ -86,7 +86,7 @@ function renderText(text: string): React.ReactNode {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
-          <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
+          <span className="h-0.5 self-stretch rounded bg-[var(--color-text-primary)]" />
           <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
         </span>
       );

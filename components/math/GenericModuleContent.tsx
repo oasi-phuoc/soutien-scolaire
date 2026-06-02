@@ -33,7 +33,7 @@ function renderText(text: string): React.ReactNode {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">{m[1]}</span>
-          <span className="h-[1.5px] self-stretch rounded bg-[var(--color-text-primary)]" />
+          <span className="h-0.5 self-stretch rounded bg-[var(--color-text-primary)]" />
           <span className="text-xs font-bold text-[var(--color-text-primary)]">{m[2]}</span>
         </span>
       );
@@ -1908,7 +1908,7 @@ function FracDisplay({ num, den }: { num: number | string; den: number | string 
   return (
     <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
       <span className="text-sm font-bold text-[var(--color-accent-alg)]">{num}</span>
-      <span className="h-[1.5px] self-stretch min-w-[1.2em] rounded bg-[var(--color-text-primary)]" />
+      <span className="h-0.5 self-stretch min-w-[1.2em] rounded bg-[var(--color-text-primary)]" />
       <span className="text-sm font-bold text-[var(--color-text-primary)]">{den}</span>
     </span>
   );
@@ -1990,13 +1990,13 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
                       className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                   )}
-                  <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                  <span className="h-0.5 self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.tgtDen}</span>
                 </span>
               ) : (
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
-                  <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                  <span className="h-0.5 self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
                     <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-[9px]">{v||"—"}</span>
@@ -2049,7 +2049,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                   <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
                     className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                 )}
-                <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
+                <span className="h-0.5 self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
                   <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
                     <span className="line-through text-amber-500 text-[9px]">{ans.den||"—"}</span>
