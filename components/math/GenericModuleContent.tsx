@@ -3820,6 +3820,7 @@ export function GenericModuleContent({
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
+    setShowHint(false);
     setAnswer("");
     setExStatus("idle");
     setExAttempts(0);
@@ -4961,6 +4962,16 @@ export function GenericModuleContent({
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
         <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
+      )}
+
+      {/* Hint button — training phase only */}
+      {!inEvalPhase && currentStep && currentStep.kind !== "theory" && currentStep.kind !== "eval_start" && currentStep.kind !== "pass_toggle" && getStepHint(currentStep) && (
+        <div className="flex justify-end mb-1">
+          <HintButton onClick={() => setShowHint(true)} />
+        </div>
+      )}
+      {showHint && getStepHint(currentStep) && (
+        <HintPopup hint={getStepHint(currentStep)!} onClose={() => setShowHint(false)} />
       )}
 
       {/* Theory */}
