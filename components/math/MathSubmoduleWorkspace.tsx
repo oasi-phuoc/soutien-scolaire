@@ -6,7 +6,7 @@ import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade } from "@/lib/scoring";
+import { percentToSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
@@ -1032,6 +1032,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
   const [evalScores, setEvalScores] = useState<Record<number, boolean>>({});
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
+  const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -1045,6 +1046,18 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   }, []);
 
   useEffect(() => { setTrainingTimerLeft(null); }, [stepIdx]);
+
+  // Eval 5-minute countdown
+  useEffect(() => {
+    if (evalTimeLeft === null || evalTimeLeft <= 0) return;
+    const id = setInterval(() => setEvalTimeLeft((t) => (t ?? 1) - 1), 1000);
+    return () => clearInterval(id);
+  }, [evalTimeLeft]);
+
+  function startEval() {
+    setEvalTimeLeft(5 * 60);
+    goTo(stepIdx + 1);
+  }
 
   // A1-1 and A1-2 use the rich A1ModuleContent; A1-3+ use GenericModuleContent with toggle
   if (moduleId === "A1") {
@@ -1152,7 +1165,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {/* Eval progress bar */}
       {isInEvalExercises && (
-        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} />
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={evalTimeLeft} />
       )}
 
       {/* Theory */}
@@ -1334,19 +1347,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             </svg>
           </div>
           <div className="space-y-2">
-            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
-              Évaluation
-            </p>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
-              {lesson.theory.title.fr}
-            </h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">
-              Évalue ta maîtrise de ce module.
-            </p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
           </div>
           <button
             type="button"
-            onClick={() => goTo(stepIdx + 1)}
+            onClick={startEval}
             className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             Commencer
@@ -1406,33 +1415,21 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
         const total = exIndices.length;
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-        const passed = pct >= 60;
+        const grade = percentToSwissGrade(pct);
+        const passed = grade >= PASSING_GRADE;
         return (
-          <div className="flex flex-col items-center gap-8 py-8 text-center">
-            <div className={`flex h-20 w-20 items-center justify-center rounded-2xl ${passed ? "bg-[var(--color-accent-alg)]/10" : "bg-amber-100 dark:bg-amber-900/20"}`}>
-              {passed ? (
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
-                  <path d="M9 11l3 3L22 4" />
-                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-                </svg>
-              ) : (
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.5" aria-hidden>
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4M12 16h.01" />
-                </svg>
-              )}
-            </div>
-            <div className="space-y-3">
-              <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
-              <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
-              <p className="text-4xl font-bold text-[var(--color-text-primary)]">
-                {correct}
-                <span className="text-xl font-normal text-[var(--color-text-secondary)]">/{total}</span>
+          <div className="space-y-4">
+            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
+            <p className="text-sm text-[var(--color-text-secondary)]">{lesson.theory.title.fr}</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">{correct} / {total} réponses correctes</p>
+            <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${passed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+              <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
+              <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">sur 6</p>
+              <p className={`mt-3 text-base font-bold ${passed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+                {passed ? "✓ Réussi" : "✗ À améliorer"}
               </p>
-              <p className="text-lg font-semibold text-[var(--color-text-secondary)]">{pct} %</p>
-              <div className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-sm font-bold ${passed ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "bg-amber-100 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400"}`}>
-                {passed ? "Module réussi ✓" : "À retravailler"}
-              </div>
+              <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
             </div>
           </div>
         );
