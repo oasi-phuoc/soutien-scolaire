@@ -1055,6 +1055,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [evalKey, setEvalKey] = useState(0);
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -1111,7 +1112,18 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
-  function goBack() { if (!isFirstStep) goTo(stepIdx - 1); }
+  function goBack() {
+    if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
+    if (!isFirstStep) goTo(stepIdx - 1);
+  }
+
+  function cancelEval() {
+    setShowEvalCancelConfirm(false);
+    setEvalScores({});
+    setEvalKey(k => k + 1);
+    setEvalTimeLeft(null);
+    goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
+  }
 
   function finishEval(passed: boolean, correct?: number, total?: number) {
     if (!lesson) { router.push("/mathematiques"); return; }
@@ -1187,6 +1199,24 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   return (
     <div className="pb-40">
+      {showEvalCancelConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="mx-4 w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
+            <div className="flex gap-3">
+              <button type="button" onClick={cancelEval}
+                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
+                Annuler
+              </button>
+              <button type="button" onClick={() => setShowEvalCancelConfirm(false)}
+                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90">
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* Training progress bar */}
       {showTrainingBar && (
         <TrainingProgressBar current={trainingStepIdx} total={trainingSteps.length} timeLeft={trainingTimerLeft} />
