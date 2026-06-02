@@ -23,6 +23,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A1.3", "Comparer les nombres"),
       sm("A1.4", "Droite numérique"),
       sm("A1.5", "Suites numériques"),
+      sm("RA.1", "Révision A1"),
     ],
   },
   {
@@ -371,7 +372,6 @@ export const MATH_MODULES: MathModule[] = [
     branch: "algebra",
     prerequisiteIds: ["A1"],
     submodules: [
-      sm("RA.1",  "Révision A1"),
       sm("RA.2",  "Révision A2"),
       sm("RA.3",  "Révision A3"),
       sm("RA.4",  "Révision A4"),

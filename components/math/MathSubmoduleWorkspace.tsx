@@ -247,29 +247,19 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_div_ext", exNum: 3 });
     steps.push({ kind: "dec_div_ext", exNum: 4 });
     steps.push({ kind: "results" });
-  } else if (lesson.submoduleId === "A4-4") {
-    // Training: Ex1-5
-    for (let ex = 1; ex <= 5; ex++) {
-      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode: "add-sub" });
-    }
-    // Evaluation: Ex1-9
-    steps.push({ kind: "eval_start" });
-    for (let ex = 1; ex <= 9; ex++) {
-      steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5|6|7|8|9, opMode: "add-sub" });
-    }
-    steps.push({ kind: "results" });
-  } else if (lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
-    const opMode: FracOpMode = lesson.submoduleId === "A4-5" ? "mul" : "div";
-    // Training: Ex1-5, then Ex9 (moved from eval)
+  } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
+    const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
+    // Training: Ex1-5, then Ex9 (as Ex6)
     for (let ex = 1; ex <= 5; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode });
     }
     steps.push({ kind: "frac_ops", exType: 9, opMode });
-    // Evaluation: Ex1-4, 4 questions each
+    // Evaluation: Ex1-4 + Ex9, 4 questions each (1 pt per question)
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 4; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4, opMode, count: 4 });
     }
+    steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4 });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1046,7 +1036,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [exStatus, setExStatus] = useState<"idle" | "correct" | "wrong">("idle");
   const [exAttempts, setExAttempts] = useState(0);
   const [toggleAnswer, setToggleAnswer] = useState<"oui" | "non" | null>(null);
-  const [evalScores, setEvalScores] = useState<Record<number, boolean>>({});
+  const [evalScores, setEvalScores] = useState<Record<number, { c: number; t: number }>>({});
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
@@ -1124,8 +1114,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
       const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
       const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
-      const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
-      const total = exIndices.length;
+      const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
+      const total = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.t ?? 1), 0);
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
@@ -1142,8 +1132,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setExerciseKey(k => k + 1);
   }
 
-  function handleCustomValidated(ok: boolean) {
-    setEvalScores((prev: Record<number, boolean>) => ({ ...prev, [stepIdx]: ok }));
+  function handleCustomValidated(ok: boolean, correct?: number, total?: number) {
+    const c = correct ?? (ok ? 1 : 0);
+    const t = total ?? 1;
+    setEvalScores((prev) => ({ ...prev, [stepIdx]: { c, t } }));
     setCanValidate(false);
   }
 
@@ -1428,8 +1420,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
         const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
         const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
-        const correct = exIndices.filter((i: number) => evalScores[i] === true).length;
-        const total = exIndices.length;
+        const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
+        const total = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.t ?? 1), 0);
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
         const grade = percentToSwissGrade(pct);
         const passed = grade >= PASSING_GRADE;
@@ -1438,11 +1430,14 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
             <ul className="space-y-2">
               {exIndices.map((idx, i) => {
-                const ok = evalScores[idx] === true;
+                const sc = evalScores[idx];
+                const c = sc?.c ?? 0;
+                const t = sc?.t ?? 1;
+                const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
                 return (
                   <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
                     <span className="text-sm text-[var(--color-text-primary)]">Exercice {i + 1}</span>
-                    <span className={`text-sm font-bold ${ok ? "text-green-600" : "text-red-500"}`}>{ok ? "1/1" : "0/1"}</span>
+                    <span className={`text-sm font-bold ${color}`}>{c}/{t}</span>
                   </li>
                 );
               })}

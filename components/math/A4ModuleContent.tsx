@@ -688,7 +688,7 @@ function generateFractionItems(): FractionItem[] {
 
 export function FractionToggleExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState<FractionItem[]>(generateFractionItems);
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
@@ -702,7 +702,8 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
   const doValidate = useCallback(() => {
     if (validated) return;
     setValidated(true);
-    onValidated(items.every((item, i) => selected[i] === item.highlight));
+    const results = items.map((item, i) => selected[i] === item.highlight);
+    onValidated(results.every(Boolean), results.filter(Boolean).length, results.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, items, selected]);
 
@@ -750,7 +751,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
 // ── Exercise: Fraction coloring (A4-1 step) ───────────────────────────────────
 export function FractionColoringExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [colorItems] = useState(generateColoringItems);
   const [colored, setColored] = useState<Set<number>[]>(() => colorItems.map(() => new Set<number>()));
@@ -762,7 +763,7 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
     setValidated(true);
     const res = colorItems.map((item, i) => colored[i]!.size === item.n);
     setColorResults(res);
-    onValidated(res.every(Boolean));
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, colorItems, colored]);
 
@@ -811,7 +812,7 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
 // ── Exercise: Fraction read from shape (A4-1 step) ────────────────────────────
 export function FractionReadExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [readItems] = useState(generateFractionReadItems);
   const [readNums, setReadNums] = useState<string[]>(() => Array(4).fill(""));
@@ -827,7 +828,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
       return answerMatches(combined, [item.answer]) ? "correct" : "wrong";
     }) as ("correct" | "wrong")[];
     setReadStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, readItems, readNums, readDens]);
 
@@ -1003,7 +1004,7 @@ function generateMultiReadItems(): MultiReadSpec[] {
 // ── Exercise 4 — Multi-shape coloring (improper fractions) ────────────────────
 export function FractionMultiColoringExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState(generateMultiColoringItems);
   const [colored, setColored] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
@@ -1015,7 +1016,7 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
     setValidated(true);
     const res = items.map((item, i) => colored[i]!.size === item.n);
     setResults(res);
-    onValidated(res.every(Boolean));
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, items, colored]);
 
@@ -1070,7 +1071,7 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
 // ── Exercise 5 — Multi-shape read (improper fractions) ────────────────────────
 export function FractionMultiReadExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [items] = useState(generateMultiReadItems);
   const [readNums, setReadNums] = useState<string[]>(() => Array(4).fill(""));
@@ -1086,7 +1087,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
       return answerMatches(combined, [item.answer]) ? "correct" : "wrong";
     }) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, items, readNums, readDens]);
 
@@ -1253,7 +1254,7 @@ function genSimplifyQ(): SimplifyQ {
 // ── Exercise 1 — Find the missing value (A4.2) ────────────────────────────────
 export function FractionEquivExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<EquivQ[]>(() => Array.from({ length: 5 }, genEquivQ));
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
@@ -1267,7 +1268,7 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
       (answers[i]?.trim() ?? "") === String(q.answer) ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, answers]);
 
@@ -1304,7 +1305,7 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
 // ── Exercise 2 — Simplify fractions (A4.2) ───────────────────────────────────
 export function FractionSimplifyExercise({ validateCommand, onValidated }: {
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<SimplifyQ[]>(() => Array.from({ length: 5 }, genSimplifyQ));
   const [nums, setNums] = useState<string[]>(() => Array(5).fill(""));
@@ -1320,7 +1321,7 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
         ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, nums, dens]);
 
@@ -1392,7 +1393,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
   exNum: number;
   mode: "same-den" | "same-num" | "diff-both";
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = mode === "same-den" ? genCompareSameDen : mode === "same-num" ? genCompareSameNum : genCompareDiffBoth;
   const [pairs] = useState<ComparePair[]>(() => Array.from({ length: 5 }, gen));
@@ -1407,7 +1408,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
       selected[i] === p.answer ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, pairs, selected]);
 
@@ -1484,7 +1485,7 @@ function genFracToDecExtQ(): FracToDecQ {
 
 export function FracToDecExercise({ exNum = 1, variant = "basic", validateCommand, onValidated }: {
   exNum?: number; variant?: "basic" | "extended";
-  validateCommand: number; onValidated: (ok: boolean) => void;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = variant === "extended" ? genFracToDecExtQ : genFracToDecQ;
   const [questions] = useState<FracToDecQ[]>(() => Array.from({ length: 5 }, gen));
@@ -1499,7 +1500,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
       q.acceptable.includes((answers[i] ?? "").trim()) ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, answers]);
 
@@ -1558,7 +1559,7 @@ function genDecToFracExtQ(): DecToFracQ {
 
 export function DecToFracExercise({ exNum = 2, variant = "basic", validateCommand, onValidated }: {
   exNum?: number; variant?: "basic" | "extended";
-  validateCommand: number; onValidated: (ok: boolean) => void;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const gen = variant === "extended" ? genDecToFracExtQ : genDecToFracQ;
   const [questions] = useState<DecToFracQ[]>(() => Array.from({ length: 5 }, gen));
@@ -1573,7 +1574,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
       (answers[i] ?? "").trim() === String(q.answer) ? "correct" : "wrong"
     ) as ("correct" | "wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, answers]);
 
@@ -1585,14 +1586,14 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
-      <div className="space-y-4">
+      <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem auto auto auto" }}>
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
           const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
           return (
-            <div key={i} className="flex items-center gap-3">
-              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
-              <span className="shrink-0 text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
+            <React.Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
+              <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
               <span className="inline-flex flex-col items-center gap-[2px]">
                 {isWrong ? (
@@ -1606,7 +1607,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
                 <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
                 <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
               </span>
-            </div>
+            </React.Fragment>
           );
         })}
       </div>
@@ -1616,7 +1617,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
 
 // ── Combined Decimal Exercises (A4.2 — single step) ───────────────────────────
 export function CombinedDecimalExercise({ validateCommand, onValidated }: {
-  validateCommand: number; onValidated: (ok: boolean) => void;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   // Ex 1 — Matching
   const [pairs] = useState(generateMatchPairs);
@@ -1825,7 +1826,7 @@ export function A4ModuleContent() {
     setExerciseKey(k => k + 1);
   }
 
-  function handleCustomValidated(ok: boolean) {
+  function handleCustomValidated(ok: boolean, _correct?: number, _total?: number) {
     setCanValidate(false);
     if (currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read") {
       const p = loadProgress();
@@ -1834,7 +1835,7 @@ export function A4ModuleContent() {
       const p = loadProgress();
       saveProgress(completeSubmodule(p, "A4", "A4-2"));
     }
-    void ok;
+    void ok; void _correct; void _total;
   }
 
   function validateText() {

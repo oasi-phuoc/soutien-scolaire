@@ -202,7 +202,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand
   opMode: FracOpMode;
   count?: number;
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   let structType: 1|2|3|4|5;
   let lo: number, hi: number;
@@ -226,7 +226,8 @@ export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand
       return answerMatches(combined, q.acceptables) ? "correct" : "wrong";
     }) as ("correct"|"wrong")[];
     setStatuses(sts);
-    onValidated(sts.every(s => s === "correct"));
+    const correctCount = sts.filter(s => s === "correct").length;
+    onValidated(sts.every(s => s === "correct"), correctCount, sts.length);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validated, questions, nums, dens]);
 
