@@ -1586,7 +1586,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
-      <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 5rem 1.5rem 3.5rem", alignItems: "center" }}>
+      <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 3.5rem 1.5rem 3.5rem", alignItems: "center" }}>
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
           const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
