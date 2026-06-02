@@ -3550,8 +3550,7 @@ export function GenericModuleContent({
         return;
       }
     }
-    const pct = correct ? 100 : 0;
-    const grade = percentToSwissGrade(pct);
+    const grade = linearSwissGrade(correct ? 1 : 0, 1);
     const medal = correct ? medalFromPercent(pct) : undefined;
     saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
     void medal;

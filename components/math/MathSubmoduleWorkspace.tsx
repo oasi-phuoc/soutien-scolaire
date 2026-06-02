@@ -6,7 +6,7 @@ import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonBySubmoduleId } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
-import { percentToSwissGrade, PASSING_GRADE } from "@/lib/scoring";
+import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
@@ -1129,7 +1129,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     if (!lesson) { router.push("/mathematiques"); return; }
     const c = correct ?? (passed ? 1 : 0);
     const t = total ?? 1;
-    const grade = percentToSwissGrade((c / t) * 100);
+    const grade = linearSwissGrade(c, t);
     const p = loadProgress();
     saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
     router.push("/mathematiques");
@@ -1473,7 +1473,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
         const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
-        const grade = percentToSwissGrade(pct);
+        const grade = linearSwissGrade(correct, total);
         const passed = grade >= PASSING_GRADE;
         return (
           <div className="space-y-4">
