@@ -3,9 +3,17 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function MathematiquesPage() {
   const supabase = await createSupabaseServerClient();
-  const isLoggedIn = supabase
-    ? (await supabase.auth.getUser()).data.user !== null
-    : false;
+  if (!supabase) return <MathematiquesClient />;
 
-  return <MathematiquesClient isLoggedIn={isLoggedIn} />;
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return <MathematiquesClient />;
+
+  const { data: isAdminData } = await supabase.rpc("get_my_is_admin");
+
+  return (
+    <MathematiquesClient
+      isLoggedIn
+      isAdmin={isAdminData === true}
+    />
+  );
 }

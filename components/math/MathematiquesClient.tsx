@@ -93,7 +93,7 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
   );
 }
 
-export function MathematiquesClient({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
+export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { isLoggedIn?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
   const [tab, setTab] = useState<MathTabId>("algebra");
   const [progress, setProgress] = useState<StoredProgressV1>(createInitialProgress);
@@ -186,10 +186,10 @@ export function MathematiquesClient({ isLoggedIn = false }: { isLoggedIn?: boole
             if (!m) return null;
             const prog = hydrated ? progress.math[m.id] : undefined;
             const pre = hydrated
-              ? prerequisitesMet(m, done)
+              ? (isAdmin ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done))
               : { ok: false as const, missing: [] as string[] };
             const displayState = hydrated ? getModuleDisplayState(prog, pre.ok) : "locked";
-            const isLocked = displayState === "locked";
+            const isLocked = !isAdmin && displayState === "locked";
             const recoHighlight = hydrated && reco.moduleId === m.id && reco.kind !== "revision_grade";
 
             const completedSubIds = new Set(
@@ -304,12 +304,14 @@ export function MathematiquesClient({ isLoggedIn = false }: { isLoggedIn?: boole
                       {m.submodules.map((sub, idx) => {
                         const subDone = completedSubIds.has(sub.id);
                         const isRev = isRevisionSub(sub);
-                        const subAvailable = !isLocked && !subDone && (
-                          isRev
-                            ? allNonRevisionCompleted
-                            : idx === firstAvailableSubIdx
-                        );
-                        const subLocked = !subDone && !subAvailable;
+                        const subAvailable = isAdmin
+                          ? !subDone
+                          : !isLocked && !subDone && (
+                              isRev
+                                ? allNonRevisionCompleted
+                                : idx === firstAvailableSubIdx
+                            );
+                        const subLocked = !isAdmin && !subDone && !subAvailable;
                         const score = hydrated ? progress.submoduleScores?.[sub.id] : undefined;
                         const hasFailedEval = subDone && score !== undefined && score.grade < PASSING_GRADE;
                         return (
