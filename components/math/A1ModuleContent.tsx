@@ -3091,8 +3091,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {ex10Questions.map((q, qi) => {
               const total = q.h * 100 + q.d * 10 + q.u;
               const result = ex10Results[qi] ?? null;
+              const zoomKey10 = `ex10-${qi}`;
               return (
-                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={qi} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                  <ZoomButton onClick={() => setZoomedEx(zoomKey10)} />
                   <ScaledCanvas width={420} height={q.canvasH}>
                     {q.positions.map((pos, pi) => (
                       <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3111,6 +3113,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
+                  {zoomedEx === zoomKey10 && (
+                    <ZoomModal onClose={() => setZoomedEx(null)}>
+                      <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                        {q.positions.map((pos, pi) => (
+                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                            {pos.kind === "h" ? <SvgCentaine s={7} /> : pos.kind === "d" ? <SvgDizaine s={11} /> : <SvgUnite s={18} />}
+                          </div>
+                        ))}
+                        <div style={{height: q.canvasH, width: 420}} />
+                      </div>
+                    </ZoomModal>
+                  )}
                 </div>
               );
             })}
@@ -3132,8 +3146,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           <div className="space-y-4">
             {ex11Questions.map((q, qi) => {
               const result = ex11Results[qi] ?? null;
+              const zoomKey11 = `ex11-${qi}`;
               return (
-                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={qi} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                  <ZoomButton onClick={() => setZoomedEx(zoomKey11)} />
                   <ScaledCanvas width={420} height={q.canvasH}>
                     {q.positions.map((pos, pi) => (
                       <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3180,6 +3196,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       );
                     })()}
                   </div>
+                  {zoomedEx === zoomKey11 && (
+                    <ZoomModal onClose={() => setZoomedEx(null)}>
+                      <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                        {q.positions.map((pos, pi) => (
+                          <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                            {pos.kind === "m" ? <SvgMillier s={5} d={11} /> : pos.kind === "h" ? <SvgCentaine s={7} /> : pos.kind === "d" ? <SvgDizaine s={12} /> : <SvgUnite s={20} />}
+                          </div>
+                        ))}
+                        <div style={{height: q.canvasH, width: 420}} />
+                      </div>
+                    </ZoomModal>
+                  )}
                 </div>
               );
             })}
@@ -3201,8 +3229,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           <div className="flex flex-col gap-4">
             {ex12Questions.map((q, qi) => {
               const result = ex12Results[qi] ?? null;
+              const zoomKey12 = `ex12-${qi}`;
               return (
-                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={qi} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                  <ZoomButton onClick={() => setZoomedEx(zoomKey12)} />
                   <div className="flex items-center justify-center py-3">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
@@ -3218,6 +3248,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
+                  {zoomedEx === zoomKey12 && (
+                    <ZoomModal onClose={() => setZoomedEx(null)}>
+                      <div className="flex items-center justify-center rounded-[var(--radius-md)] bg-white p-4">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={q.src} alt="assemblage de cubes" className="w-full h-auto object-contain" />
+                      </div>
+                    </ZoomModal>
+                  )}
                 </div>
               );
             })}
@@ -3238,8 +3276,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           <div className="flex flex-col gap-4">
             {ex13Questions.map((q, qi) => {
               const result = ex13Results[qi] ?? null;
+              const zoomKey13 = `ex13-${qi}`;
               return (
-                <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                <div key={qi} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3 transition-colors">
+                  <ZoomButton onClick={() => setZoomedEx(zoomKey13)} />
                   <div className="flex items-center justify-center py-3">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={q.src} alt="assemblage de cubes" className="max-h-72 w-auto object-contain" />
@@ -3255,6 +3295,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         "!bg-blue-50 dark:!bg-blue-950/30"
                       } />
                   </div>
+                  {zoomedEx === zoomKey13 && (
+                    <ZoomModal onClose={() => setZoomedEx(null)}>
+                      <div className="flex items-center justify-center rounded-[var(--radius-md)] bg-white p-4">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={q.src} alt="assemblage de cubes" className="w-full h-auto object-contain" />
+                      </div>
+                    </ZoomModal>
+                  )}
                 </div>
               );
             })}
@@ -3580,7 +3628,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                    <ZoomButton onClick={() => setZoomedEx("eval-q10")} />
                     <ScaledCanvas width={420} height={a12EvalQ10.canvasH}>
                       {a12EvalQ10.positions.map((pos,pi)=>(
                         <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3601,6 +3650,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           className="!bg-blue-50 dark:!bg-blue-950/30" />
                       )}
                     </div>
+                    {zoomedEx === "eval-q10" && (
+                      <ZoomModal onClose={() => setZoomedEx(null)}>
+                        <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                          {a12EvalQ10.positions.map((pos,pi)=>(
+                            <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                              {pos.kind==="h"?<SvgCentaine s={7}/>:pos.kind==="d"?<SvgDizaine s={11}/>:<SvgUnite s={18}/>}
+                            </div>
+                          ))}
+                          <div style={{height: a12EvalQ10.canvasH, width: 420}} />
+                        </div>
+                      </ZoomModal>
+                    )}
                   </div>
                 </div>
               );
@@ -3609,7 +3670,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                    <ZoomButton onClick={() => setZoomedEx("eval-q11")} />
                     <ScaledCanvas width={420} height={a12EvalQ11.canvasH}>
                       {a12EvalQ11.positions.map((pos,pi)=>(
                         <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
@@ -3643,6 +3705,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         </div>
                       );
                     })()}
+                    {zoomedEx === "eval-q11" && (
+                      <ZoomModal onClose={() => setZoomedEx(null)}>
+                        <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                          {a12EvalQ11.positions.map((pos,pi)=>(
+                            <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
+                              {pos.kind==="m"?<SvgMillier s={5} d={11}/>:pos.kind==="h"?<SvgCentaine s={7}/>:pos.kind==="d"?<SvgDizaine s={12}/>:<SvgUnite s={20}/>}
+                            </div>
+                          ))}
+                          <div style={{height: a12EvalQ11.canvasH, width: 420}} />
+                        </div>
+                      </ZoomModal>
+                    )}
                   </div>
                 </div>
               );
@@ -3651,7 +3725,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez combien il y a de cubes.</p>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                    <ZoomButton onClick={() => setZoomedEx("eval-q12")} />
                     <div className="flex items-center justify-center py-3">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={a12EvalQ12.src} alt="cubes" className="max-h-72 w-auto object-contain" />
@@ -3669,6 +3744,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           className="!bg-blue-50 dark:!bg-blue-950/30" />
                       )}
                     </div>
+                    {zoomedEx === "eval-q12" && (
+                      <ZoomModal onClose={() => setZoomedEx(null)}>
+                        <div className="flex items-center justify-center rounded-[var(--radius-md)] bg-white p-4">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={a12EvalQ12.src} alt="cubes" className="w-full h-auto object-contain" />
+                        </div>
+                      </ZoomModal>
+                    )}
                   </div>
                 </div>
               );
