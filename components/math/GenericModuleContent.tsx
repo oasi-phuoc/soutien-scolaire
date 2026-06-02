@@ -136,7 +136,31 @@ type SeqCompleteQ = { allNums: number[]; blankIdxs: number[]; step: number };
 type SeqCompleteConfig = { questions: SeqCompleteQ[]; exNum: number };
 type SeqCompleteStep = { kind: "seq_complete"; lesson: MathSubmoduleLesson; config: SeqCompleteConfig };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep;
+// A3.5 types
+type MultSelectConfig = { base: number; numbers: number[]; exNum: number };
+type MultSelectStep = { kind: "mult_select"; lesson: MathSubmoduleLesson; config: MultSelectConfig };
+type MultListConfig = { base: number; exNum: number };
+type MultListStep = { kind: "mult_list"; lesson: MathSubmoduleLesson; config: MultListConfig };
+type TrueFalseMultDivQ = { statement: string; answer: boolean; type: "multiple"|"diviseur" };
+type TrueFalseMultDivConfig = { questions: TrueFalseMultDivQ[]; exNum: number };
+type TrueFalseMultDivStep = { kind: "true_false_mult_div"; lesson: MathSubmoduleLesson; config: TrueFalseMultDivConfig };
+type FindDivisorsConfig = { number: number; divisors: number[]; exNum: number };
+type FindDivisorsStep = { kind: "find_divisors"; lesson: MathSubmoduleLesson; config: FindDivisorsConfig };
+type DivSelectConfig = { base: number; numbers: number[]; exNum: number };
+type DivSelectStep = { kind: "div_select"; lesson: MathSubmoduleLesson; config: DivSelectConfig };
+type DivByConfig = { questions: Array<{n: number; validDivisors: number[]}>; exNum: number };
+type DivByStep = { kind: "div_by"; lesson: MathSubmoduleLesson; config: DivByConfig };
+type MissingDigitDivQ = { prefix: string; divisor: number; validDigits: string[] };
+type MissingDigitDivConfig = { questions: MissingDigitDivQ[]; exNum: number };
+type MissingDigitDivStep = { kind: "missing_digit_div"; lesson: MathSubmoduleLesson; config: MissingDigitDivConfig };
+// A3.6 types
+type GcdLcmConfig = { questions: Array<{nums: number[]; answer: number}>; exNum: number; op: "pgcd"|"ppmc"; count: 2|3 };
+type GcdLcmStep = { kind: "gcd_lcm"; lesson: MathSubmoduleLesson; config: GcdLcmConfig };
+type TrueFalseGcdLcmQ = { statement: string; answer: boolean; type: "pgcd"|"ppmc" };
+type TrueFalseGcdLcmConfig = { questions: TrueFalseGcdLcmQ[]; exNum: number };
+type TrueFalseGcdLcmStep = { kind: "true_false_gcd_lcm"; lesson: MathSubmoduleLesson; config: TrueFalseGcdLcmConfig };
+
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -915,6 +939,207 @@ function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOp
     questions: Array.from({ length: count }, () => genDivColGridQ(dividendCols, divisorCols, quotientCols)),
     exNum, preFilledOperands, dividendCols, divisorCols, quotientCols,
   };
+}
+
+// ── A3.5 / A3.6 math helpers & generators ────────────────────────────────────
+function gcd2(a: number, b: number): number { return b === 0 ? a : gcd2(b, a % b); }
+function gcdN(...nums: number[]): number { return nums.reduce(gcd2); }
+function lcm2(a: number, b: number): number { return a / gcd2(a, b) * b; }
+function lcmN(...nums: number[]): number { return nums.reduce(lcm2); }
+function getDivisors(n: number): number[] {
+  const d: number[] = [];
+  for (let i = 1; i <= n; i++) if (n % i === 0) d.push(i);
+  return d;
+}
+function shuffleArr<T>(arr: T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j]!, a[i]!];
+  }
+  return a;
+}
+
+function genMultSelect(exNum: number): MultSelectConfig {
+  const base = rnd(2, 9);
+  const multiples: number[] = [];
+  for (let k = 1; multiples.length < 5; k++) {
+    const m = base * k;
+    if (m <= 100) multiples.push(m);
+    else break;
+  }
+  // fill to 5 if needed
+  for (let k = 1; multiples.length < 5; k++) multiples.push(base * k);
+  const nonMultiples: Set<number> = new Set();
+  while (nonMultiples.size < 10) {
+    const n = rnd(2, 100);
+    if (n % base !== 0 && !nonMultiples.has(n)) nonMultiples.add(n);
+  }
+  const numbers = shuffleArr([...multiples.slice(0, 5), ...Array.from(nonMultiples)]);
+  return { base, numbers, exNum };
+}
+
+function genMultList(exNum: number): MultListConfig {
+  const base = rnd(2, 12);
+  return { base, exNum };
+}
+
+function genTrueFalseMultDiv(exNum: number): TrueFalseMultDivConfig {
+  const questions: TrueFalseMultDivQ[] = [];
+  const multCount = Math.random() < 0.5 ? 2 : 3;
+  for (let i = 0; i < 5; i++) {
+    const isMultType = i < multCount;
+    if (isMultType) {
+      const b = rnd(2, 9);
+      const k = rnd(2, 12);
+      const a = b * k;
+      const isTrue = Math.random() < 0.5;
+      if (isTrue) {
+        questions.push({ statement: `${a} est un multiple de ${b}`, answer: true, type: "multiple" });
+      } else {
+        // make false: use a+1 or a-1
+        const falseA = a + rnd(1, b - 1);
+        questions.push({ statement: `${falseA} est un multiple de ${b}`, answer: false, type: "multiple" });
+      }
+    } else {
+      const b = rnd(2, 9);
+      const k = rnd(2, 12);
+      const a = b * k;
+      const isTrue = Math.random() < 0.5;
+      if (isTrue) {
+        questions.push({ statement: `${b} est un diviseur de ${a}`, answer: true, type: "diviseur" });
+      } else {
+        const falseB = b + rnd(1, 3);
+        questions.push({ statement: `${falseB} est un diviseur de ${a}`, answer: false, type: "diviseur" });
+      }
+    }
+  }
+  return { questions: shuffleArr(questions), exNum };
+}
+
+function genFindDivisors(exNum: number): FindDivisorsConfig {
+  const candidates = [12,15,16,18,20,24,28,30,32,36,40,42,45,48,50,54,56,60];
+  const n = candidates[rnd(0, candidates.length - 1)]!;
+  return { number: n, divisors: getDivisors(n), exNum };
+}
+
+function genDivSelect(exNum: number): DivSelectConfig {
+  const bases = [2, 3, 4, 5, 6, 9, 10];
+  const base = bases[rnd(0, bases.length - 1)]!;
+  const divisibles: number[] = [];
+  for (let k = 1; divisibles.length < 5; k++) {
+    const m = base * k;
+    if (m <= 100) divisibles.push(m);
+    if (divisibles.length >= 5) break;
+    if (m > 100) { for (let kk = 1; divisibles.length < 5; kk++) divisibles.push(base * kk); break; }
+  }
+  const nonDiv: Set<number> = new Set();
+  while (nonDiv.size < 10) {
+    const n = rnd(2, 99);
+    if (n % base !== 0 && !nonDiv.has(n)) nonDiv.add(n);
+  }
+  const numbers = shuffleArr([...divisibles.slice(0, 5), ...Array.from(nonDiv)]);
+  return { base, numbers, exNum };
+}
+
+function genDivBy(exNum: number): DivByConfig {
+  const validBases = [2, 3, 4, 5, 6, 9, 10];
+  const questions: Array<{n: number; validDivisors: number[]}> = [];
+  for (let i = 0; i < 5; i++) {
+    const base = validBases[rnd(0, validBases.length - 1)]!;
+    const k = rnd(2, 15);
+    const n = base * k;
+    const vd = validBases.filter(b => n % b === 0);
+    questions.push({ n, validDivisors: vd });
+  }
+  return { questions, exNum };
+}
+
+function genMissingDigitDiv(exNum: number): MissingDigitDivConfig {
+  const validBases = [2, 3, 4, 5, 6, 9, 10];
+  const questions: MissingDigitDivQ[] = [];
+  for (let i = 0; i < 5; i++) {
+    const divisor = validBases[rnd(0, validBases.length - 1)]!;
+    // 2-digit: prefix 1 digit (1-9), missing units digit
+    const prefix = rnd(1, 9);
+    const validDigits: string[] = [];
+    for (let d = 0; d <= 9; d++) {
+      const full = prefix * 10 + d;
+      if (full % divisor === 0) validDigits.push(String(d));
+    }
+    if (validDigits.length > 0) {
+      questions.push({ prefix: String(prefix), divisor, validDigits });
+    } else {
+      // fallback: pick a number and find prefix
+      const k = rnd(1, 9);
+      const num = divisor * k;
+      const p = Math.floor(num / 10);
+      const dig = num % 10;
+      questions.push({ prefix: String(p), divisor, validDigits: [String(dig)] });
+    }
+  }
+  return { questions, exNum };
+}
+
+function genGcdLcm(op: "pgcd"|"ppmc", count: 2|3, exNum: number): GcdLcmConfig {
+  const questions: Array<{nums: number[]; answer: number}> = [];
+  for (let i = 0; i < 5; i++) {
+    let nums: number[];
+    let answer: number;
+    if (op === "pgcd") {
+      if (count === 2) {
+        const g = rnd(2, 12);
+        const a = g * rnd(2, 8);
+        const b = g * rnd(2, 8);
+        nums = [a, b];
+        answer = gcdN(a, b);
+      } else {
+        const g = rnd(2, 6);
+        const a = g * rnd(2, 6);
+        const b = g * rnd(2, 6);
+        const c = g * rnd(2, 6);
+        nums = [a, b, c];
+        answer = gcdN(a, b, c);
+      }
+    } else {
+      if (count === 2) {
+        const a = rnd(2, 12);
+        const b = rnd(2, 12);
+        nums = [a, b];
+        answer = lcmN(a, b);
+      } else {
+        const a = rnd(2, 8);
+        const b = rnd(2, 8);
+        const c = rnd(2, 8);
+        nums = [a, b, c];
+        answer = lcmN(a, b, c);
+      }
+    }
+    questions.push({ nums, answer });
+  }
+  return { questions, exNum, op, count };
+}
+
+function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
+  const questions: TrueFalseGcdLcmQ[] = [];
+  const pgcdCount = Math.random() < 0.5 ? 2 : 3;
+  for (let i = 0; i < 5; i++) {
+    const isPgcd = i < pgcdCount;
+    const a = rnd(2, 12);
+    const b = rnd(2, 12);
+    if (isPgcd) {
+      const correct = gcdN(a, b);
+      const isTrue = Math.random() < 0.5;
+      const stated = isTrue ? correct : (correct + rnd(1, 3));
+      questions.push({ statement: `Le PGCD de ${a} et ${b} est ${stated}`, answer: isTrue, type: "pgcd" });
+    } else {
+      const correct = lcmN(a, b);
+      const isTrue = Math.random() < 0.5;
+      const stated = isTrue ? correct : (correct + rnd(1, 3) * a);
+      questions.push({ statement: `Le PPCM de ${a} et ${b} est ${stated}`, answer: isTrue, type: "ppmc" });
+    }
+  }
+  return { questions: shuffleArr(questions), exNum };
 }
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
@@ -2126,6 +2351,38 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "ordering", lesson, config: genOrdering(ascFirst ? "desc" : "asc", 2) });
       steps.push({ kind: "seq_rule", lesson, config: { questions: [...genSeqRule([1, 99], 4, 1, 3).questions, ...genSeqRule([1, 999], 4, 2, 3).questions, ...genSeqRule([1, 9999], 4, 2, 3).questions], exNum: 4 } });
       steps.push({ kind: "seq_complete", lesson, config: { questions: [...genSeqComplete([1, 99], 5, 1, -1).questions, ...genSeqComplete([1, 999], 5, 2, -1).questions, ...genSeqComplete([1, 9999], 5, 2, -1).questions], exNum: 5 } });
+    } else if (sid === "A3-5") {
+      // Training
+      steps.push({ kind: "mult_select", lesson, config: genMultSelect(1) });
+      steps.push({ kind: "mult_list", lesson, config: genMultList(2) });
+      steps.push({ kind: "true_false_mult_div", lesson, config: genTrueFalseMultDiv(3) });
+      steps.push({ kind: "find_divisors", lesson, config: genFindDivisors(4) });
+      steps.push({ kind: "div_select", lesson, config: genDivSelect(5) });
+      steps.push({ kind: "div_by", lesson, config: genDivBy(6) });
+      steps.push({ kind: "missing_digit_div", lesson, config: genMissingDigitDiv(7) });
+      // Eval
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "mult_select", lesson, config: genMultSelect(1) });
+      steps.push({ kind: "mult_list", lesson, config: genMultList(2) });
+      steps.push({ kind: "true_false_mult_div", lesson, config: genTrueFalseMultDiv(3) });
+      steps.push({ kind: "find_divisors", lesson, config: genFindDivisors(4) });
+      steps.push({ kind: "div_select", lesson, config: genDivSelect(5) });
+      steps.push({ kind: "div_by", lesson, config: genDivBy(6) });
+      steps.push({ kind: "missing_digit_div", lesson, config: genMissingDigitDiv(7) });
+    } else if (sid === "A3-6") {
+      // Training
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 2, 1) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 2, 2) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 3, 3) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
+      steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
+      // Eval
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 2, 1) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 2, 2) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("pgcd", 3, 3) });
+      steps.push({ kind: "gcd_lcm", lesson, config: genGcdLcm("ppmc", 3, 4) });
+      steps.push({ kind: "true_false_gcd_lcm", lesson, config: genTrueFalseGcdLcm(5) });
     } else {
       if (sid !== "A1-3" && sid !== "A1-4" && sid !== "A1-5") {
         const pool = lesson.exercisePool;
@@ -2139,7 +2396,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
     l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
-    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5"
+    l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
+    l.submoduleId === "A3-5" || l.submoduleId === "A3-6"
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -3183,6 +3441,36 @@ export function GenericModuleContent({
   const [seqCompleteValidated, setSeqCompleteValidated] = useState(false);
   const [_seqCompleteResults, setSeqCompleteResults] = useState<boolean[]>(() => Array(5).fill(false));
 
+  // A3.5 state
+  const [multSelectAnswers, setMultSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
+  const [multSelectValidated, setMultSelectValidated] = useState(false);
+  const [multSelectOverride, setMultSelectOverride] = useState<Record<number, MultSelectConfig>>({});
+  const [multListAnswers, setMultListAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [multListValidated, setMultListValidated] = useState(false);
+  const [multListOverride, setMultListOverride] = useState<Record<number, MultListConfig>>({});
+  const [tfMultDivAnswers, setTfMultDivAnswers] = useState<Array<boolean|null>>(() => Array(5).fill(null));
+  const [tfMultDivValidated, setTfMultDivValidated] = useState(false);
+  const [tfMultDivOverride, setTfMultDivOverride] = useState<Record<number, TrueFalseMultDivConfig>>({});
+  const [findDivisorsAnswer, setFindDivisorsAnswer] = useState("");
+  const [findDivisorsValidated, setFindDivisorsValidated] = useState(false);
+  const [findDivisorsOverride, setFindDivisorsOverride] = useState<Record<number, FindDivisorsConfig>>({});
+  const [divSelectAnswers, setDivSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
+  const [divSelectValidated, setDivSelectValidated] = useState(false);
+  const [divSelectOverride, setDivSelectOverride] = useState<Record<number, DivSelectConfig>>({});
+  const [divByAnswers, setDivByAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [divByValidated, setDivByValidated] = useState(false);
+  const [divByOverride, setDivByOverride] = useState<Record<number, DivByConfig>>({});
+  const [missingDigitAnswers, setMissingDigitAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [missingDigitValidated, setMissingDigitValidated] = useState(false);
+  const [missingDigitOverride, setMissingDigitOverride] = useState<Record<number, MissingDigitDivConfig>>({});
+  // A3.6 state
+  const [gcdLcmAnswers, setGcdLcmAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [gcdLcmValidated, setGcdLcmValidated] = useState(false);
+  const [gcdLcmOverride, setGcdLcmOverride] = useState<Record<number, GcdLcmConfig>>({});
+  const [tfGcdLcmAnswers, setTfGcdLcmAnswers] = useState<Array<boolean|null>>(() => Array(5).fill(null));
+  const [tfGcdLcmValidated, setTfGcdLcmValidated] = useState(false);
+  const [tfGcdLcmOverride, setTfGcdLcmOverride] = useState<Record<number, TrueFalseGcdLcmConfig>>({});
+
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
 
@@ -3265,6 +3553,26 @@ export function GenericModuleContent({
     setDivGridWorkInputs(emptyDivWork());
     setDivGridValidated(false);
     setDivGridResults(Array(3).fill(false));
+    // A3.5 resets
+    setMultSelectAnswers(Array(15).fill(false));
+    setMultSelectValidated(false);
+    setMultListAnswers(Array(5).fill(""));
+    setMultListValidated(false);
+    setTfMultDivAnswers(Array(5).fill(null));
+    setTfMultDivValidated(false);
+    setFindDivisorsAnswer("");
+    setFindDivisorsValidated(false);
+    setDivSelectAnswers(Array(15).fill(false));
+    setDivSelectValidated(false);
+    setDivByAnswers(Array(5).fill(""));
+    setDivByValidated(false);
+    setMissingDigitAnswers(Array(5).fill(""));
+    setMissingDigitValidated(false);
+    // A3.6 resets
+    setGcdLcmAnswers(Array(5).fill(""));
+    setGcdLcmValidated(false);
+    setTfGcdLcmAnswers(Array(5).fill(null));
+    setTfGcdLcmValidated(false);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -3363,6 +3671,33 @@ export function GenericModuleContent({
     : null;
   const activeMul2Config = currentStep?.kind === "mul_two_digit"
     ? (mul2dOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
+  const activeMultSelectConfig = currentStep?.kind === "mult_select"
+    ? (multSelectOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeMultListConfig = currentStep?.kind === "mult_list"
+    ? (multListOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeTfMultDivConfig = currentStep?.kind === "true_false_mult_div"
+    ? (tfMultDivOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeFindDivisorsConfig = currentStep?.kind === "find_divisors"
+    ? (findDivisorsOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDivSelectConfig = currentStep?.kind === "div_select"
+    ? (divSelectOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeDivByConfig = currentStep?.kind === "div_by"
+    ? (divByOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeMissingDigitConfig = currentStep?.kind === "missing_digit_div"
+    ? (missingDigitOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeGcdLcmConfig = currentStep?.kind === "gcd_lcm"
+    ? (gcdLcmOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeTfGcdLcmConfig = currentStep?.kind === "true_false_gcd_lcm"
+    ? (tfGcdLcmOverride[stepIdx] ?? currentStep.config)
     : null;
 
   const goNext = useCallback(() => {
@@ -3499,6 +3834,66 @@ export function GenericModuleContent({
             currentResults.push(opOk, p1Ok, p2Ok, rOk);
           }
         }
+      } else if (currentStep.kind === "mult_select") {
+        const cfg = multSelectOverride[stepIdx] ?? currentStep.config;
+        const total = cfg.numbers.length;
+        const correct = cfg.numbers.filter((n, i) => {
+          const shouldSel = n % cfg.base === 0;
+          return (multSelectAnswers[i] ?? false) === shouldSel;
+        }).length;
+        if (correct === total) currentResults = [true, true, true, true];
+        else if (correct > total / 2) currentResults = [true, true, false, false];
+        else currentResults = [false, false, false, false];
+      } else if (currentStep.kind === "mult_list") {
+        const cfg = multListOverride[stepIdx] ?? currentStep.config;
+        currentResults = Array.from({ length: 5 }, (_, i) => {
+          const ans = parseInt(multListAnswers[i] ?? "");
+          return ans === cfg.base * (i + 1);
+        });
+      } else if (currentStep.kind === "true_false_mult_div") {
+        const cfg = tfMultDivOverride[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => tfMultDivAnswers[i] === q.answer);
+      } else if (currentStep.kind === "find_divisors") {
+        const cfg = findDivisorsOverride[stepIdx] ?? currentStep.config;
+        const parts = findDivisorsAnswer.split(/[,;\s]+/).map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+        const userSet = new Set(parts);
+        const correct = new Set(cfg.divisors);
+        const setsEqual = userSet.size === correct.size && [...correct].every(d => userSet.has(d));
+        const halfRight = [...correct].filter(d => userSet.has(d)).length >= Math.ceil(correct.size / 2);
+        if (setsEqual) currentResults = [true, true, true, true, true];
+        else if (halfRight) currentResults = [true, true, true, false, false];
+        else currentResults = [false, false, false, false, false];
+      } else if (currentStep.kind === "div_select") {
+        const cfg = divSelectOverride[stepIdx] ?? currentStep.config;
+        const total = cfg.numbers.length;
+        const correct = cfg.numbers.filter((n, i) => {
+          const shouldSel = n % cfg.base === 0;
+          return (divSelectAnswers[i] ?? false) === shouldSel;
+        }).length;
+        if (correct === total) currentResults = [true, true, true, true];
+        else if (correct > total / 2) currentResults = [true, true, false, false];
+        else currentResults = [false, false, false, false];
+      } else if (currentStep.kind === "div_by") {
+        const cfg = divByOverride[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => {
+          const ans = parseInt(divByAnswers[i] ?? "");
+          return q.validDivisors.includes(ans);
+        });
+      } else if (currentStep.kind === "missing_digit_div") {
+        const cfg = missingDigitOverride[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => {
+          const ans = (missingDigitAnswers[i] ?? "").trim();
+          return q.validDigits.includes(ans);
+        });
+      } else if (currentStep.kind === "gcd_lcm") {
+        const cfg = gcdLcmOverride[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => {
+          const ans = parseInt(gcdLcmAnswers[i] ?? "");
+          return ans === q.answer;
+        });
+      } else if (currentStep.kind === "true_false_gcd_lcm") {
+        const cfg = tfGcdLcmOverride[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => tfGcdLcmAnswers[i] === q.answer);
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -3528,6 +3923,15 @@ export function GenericModuleContent({
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
                 : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
                 : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication à 2 chiffres (guidée)" : "Multiplication à 2 chiffres")
+                : es?.kind === "mult_select" ? "Multiples — sélection"
+                : es?.kind === "mult_list" ? "Liste des multiples"
+                : es?.kind === "true_false_mult_div" ? "Vrai ou faux — multiples/diviseurs"
+                : es?.kind === "find_divisors" ? "Trouver les diviseurs"
+                : es?.kind === "div_select" ? "Divisibilité — sélection"
+                : es?.kind === "div_by" ? "Divisible par"
+                : es?.kind === "missing_digit_div" ? "Chiffre manquant"
+                : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGCD (${es.config.count} nombres)` : `PPCM (${es.config.count} nombres)`)
+                : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGCD/PPCM"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -3572,7 +3976,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswer, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -3967,6 +4371,100 @@ export function GenericModuleContent({
       setSeqCompleteAnswers(Array(5).fill(null).map(()=>Array(4).fill("")));
       setSeqCompleteValidated(false);
       setSeqCompleteResults(Array(5).fill(false));
+    };
+  }
+
+  // A3.5 stepValidate/stepReset/stepCanValidate
+  if (currentStep?.kind === "mult_select" && activeMultSelectConfig) {
+    stepCanValidate = !multSelectValidated;
+    stepValidate = multSelectValidated ? () => {} : () => setMultSelectValidated(true);
+    stepReset = () => {
+      setMultSelectOverride(prev => ({ ...prev, [stepIdx]: genMultSelect(activeMultSelectConfig.exNum) }));
+      setMultSelectAnswers(Array(15).fill(false));
+      setMultSelectValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "mult_list" && activeMultListConfig) {
+    stepCanValidate = !multListValidated;
+    stepValidate = multListValidated ? () => {} : () => setMultListValidated(true);
+    stepReset = () => {
+      setMultListOverride(prev => ({ ...prev, [stepIdx]: genMultList(activeMultListConfig.exNum) }));
+      setMultListAnswers(Array(5).fill(""));
+      setMultListValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "true_false_mult_div" && activeTfMultDivConfig) {
+    const allAnswered = activeTfMultDivConfig.questions.every((_, i) => tfMultDivAnswers[i] !== null);
+    stepCanValidate = !tfMultDivValidated && allAnswered;
+    stepValidate = tfMultDivValidated ? () => {} : () => setTfMultDivValidated(true);
+    stepReset = () => {
+      setTfMultDivOverride(prev => ({ ...prev, [stepIdx]: genTrueFalseMultDiv(activeTfMultDivConfig.exNum) }));
+      setTfMultDivAnswers(Array(5).fill(null));
+      setTfMultDivValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "find_divisors" && activeFindDivisorsConfig) {
+    stepCanValidate = !findDivisorsValidated && findDivisorsAnswer.trim().length > 0;
+    stepValidate = findDivisorsValidated ? () => {} : () => setFindDivisorsValidated(true);
+    stepReset = () => {
+      setFindDivisorsOverride(prev => ({ ...prev, [stepIdx]: genFindDivisors(activeFindDivisorsConfig.exNum) }));
+      setFindDivisorsAnswer("");
+      setFindDivisorsValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "div_select" && activeDivSelectConfig) {
+    stepCanValidate = !divSelectValidated;
+    stepValidate = divSelectValidated ? () => {} : () => setDivSelectValidated(true);
+    stepReset = () => {
+      setDivSelectOverride(prev => ({ ...prev, [stepIdx]: genDivSelect(activeDivSelectConfig.exNum) }));
+      setDivSelectAnswers(Array(15).fill(false));
+      setDivSelectValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "div_by" && activeDivByConfig) {
+    stepCanValidate = !divByValidated;
+    stepValidate = divByValidated ? () => {} : () => setDivByValidated(true);
+    stepReset = () => {
+      setDivByOverride(prev => ({ ...prev, [stepIdx]: genDivBy(activeDivByConfig.exNum) }));
+      setDivByAnswers(Array(5).fill(""));
+      setDivByValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "missing_digit_div" && activeMissingDigitConfig) {
+    stepCanValidate = !missingDigitValidated;
+    stepValidate = missingDigitValidated ? () => {} : () => setMissingDigitValidated(true);
+    stepReset = () => {
+      setMissingDigitOverride(prev => ({ ...prev, [stepIdx]: genMissingDigitDiv(activeMissingDigitConfig.exNum) }));
+      setMissingDigitAnswers(Array(5).fill(""));
+      setMissingDigitValidated(false);
+    };
+  }
+
+  // A3.6 stepValidate/stepReset/stepCanValidate
+  if (currentStep?.kind === "gcd_lcm" && activeGcdLcmConfig) {
+    stepCanValidate = !gcdLcmValidated;
+    stepValidate = gcdLcmValidated ? () => {} : () => setGcdLcmValidated(true);
+    stepReset = () => {
+      setGcdLcmOverride(prev => ({ ...prev, [stepIdx]: genGcdLcm(activeGcdLcmConfig.op, activeGcdLcmConfig.count, activeGcdLcmConfig.exNum) }));
+      setGcdLcmAnswers(Array(5).fill(""));
+      setGcdLcmValidated(false);
+    };
+  }
+
+  if (currentStep?.kind === "true_false_gcd_lcm" && activeTfGcdLcmConfig) {
+    const allAnswered = activeTfGcdLcmConfig.questions.every((_, i) => tfGcdLcmAnswers[i] !== null);
+    stepCanValidate = !tfGcdLcmValidated && allAnswered;
+    stepValidate = tfGcdLcmValidated ? () => {} : () => setTfGcdLcmValidated(true);
+    stepReset = () => {
+      setTfGcdLcmOverride(prev => ({ ...prev, [stepIdx]: genTrueFalseGcdLcm(activeTfGcdLcmConfig.exNum) }));
+      setTfGcdLcmAnswers(Array(5).fill(null));
+      setTfGcdLcmValidated(false);
     };
   }
 
@@ -4633,6 +5131,333 @@ export function GenericModuleContent({
         />
       )}
 
+      {/* A3.5 — Mult select exercise */}
+      {!showEvalScore && currentStep?.kind === "mult_select" && activeMultSelectConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultSelectConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les multiples de <strong className="font-bold">{activeMultSelectConfig.base}</strong>.</p>
+          <div className="grid grid-cols-5 gap-2">
+            {activeMultSelectConfig.numbers.map((n, i) => {
+              const sel = multSelectAnswers[i] ?? false;
+              const shouldSel = n % activeMultSelectConfig.base === 0;
+              let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold transition-colors ";
+              if (!multSelectValidated) {
+                cls += sel
+                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                  : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+              } else {
+                if (sel && shouldSel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                else if (sel && !shouldSel) cls += CLS_WRONG;
+                else if (!sel && shouldSel) cls += CLS_WRONG;
+                else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              }
+              return (
+                <button key={i} type="button" disabled={multSelectValidated}
+                  onClick={() => setMultSelectAnswers(prev => prev.map((v, j) => j === i ? !v : v))}
+                  className={cls}>
+                  {n}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — Mult list exercise */}
+      {!showEvalScore && currentStep?.kind === "mult_list" && activeMultListConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultListConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Complétez la liste — les 5 premiers multiples de <strong className="font-bold">{activeMultListConfig.base}</strong>.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {Array.from({ length: 5 }, (_, i) => {
+              const expected = activeMultListConfig.base * (i + 1);
+              const v = multListAnswers[i] ?? "";
+              const ok = multListValidated ? parseInt(v) === expected : null;
+              const wrong = ok === false;
+              const inputCls = "w-20 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors";
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">{activeMultListConfig.base} × {i + 1} =</span>
+                  {wrong ? (
+                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
+                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{expected}</span>
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={v} disabled={multListValidated}
+                      onChange={e => setMultListAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — True/false mult/div exercise */}
+      {!showEvalScore && currentStep?.kind === "true_false_mult_div" && activeTfMultDivConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfMultDivConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeTfMultDivConfig.questions.map((q, i) => {
+              const sel = tfMultDivAnswers[i];
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.statement}</span>
+                  <div className="flex gap-1 shrink-0">
+                    {([true, false] as const).map((val) => {
+                      const label = val ? "Vrai" : "Faux";
+                      const isSelected = sel === val;
+                      const isCorrect = val === q.answer;
+                      let cls = "px-3 py-1.5 rounded border text-xs font-bold transition-colors ";
+                      if (!tfMultDivValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                      } else if (isSelected && isCorrect) {
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                      } else if (isSelected && !isCorrect) {
+                        cls += CLS_WRONG;
+                      } else if (!isSelected && isCorrect) {
+                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                      } else {
+                        cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                      }
+                      return (
+                        <button key={String(val)} type="button" disabled={tfMultDivValidated}
+                          onClick={() => setTfMultDivAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+                          className={cls}>
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — Find divisors exercise */}
+      {!showEvalScore && currentStep?.kind === "find_divisors" && activeFindDivisorsConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeFindDivisorsConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Trouve tous les diviseurs de <strong className="font-bold">{activeFindDivisorsConfig.number}</strong>. Sépare les par des virgules.
+          </p>
+          <div className="space-y-2">
+            {findDivisorsValidated ? (() => {
+              const parts = findDivisorsAnswer.split(/[,;\s]+/).map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+              const userSet = new Set(parts);
+              const correct = new Set(activeFindDivisorsConfig.divisors);
+              const setsEqual = userSet.size === correct.size && [...correct].every(d => userSet.has(d));
+              return setsEqual ? (
+                <div className="w-full rounded-xl border border-[var(--color-border-default)] px-4 py-3 text-sm font-mono text-[var(--color-text-primary)]">
+                  {findDivisorsAnswer}
+                </div>
+              ) : (
+                <div className="space-y-1">
+                  <div className={`w-full rounded-xl border px-4 py-3 text-sm font-mono ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500">{findDivisorsAnswer || "—"}</span>
+                  </div>
+                  <p className="text-xs text-[var(--color-text-secondary)]">Réponse attendue : <span className="font-mono font-bold">{activeFindDivisorsConfig.divisors.join(", ")}</span></p>
+                </div>
+              );
+            })() : (
+              <input type="text" value={findDivisorsAnswer} disabled={findDivisorsValidated}
+                onChange={e => setFindDivisorsAnswer(e.target.value)}
+                placeholder="ex: 1, 2, 3, 6, …"
+                className="w-full rounded-xl border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-4 py-3 text-sm font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)]" />
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — Div select exercise */}
+      {!showEvalScore && currentStep?.kind === "div_select" && activeDivSelectConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivSelectConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les nombres divisibles par <strong className="font-bold">{activeDivSelectConfig.base}</strong>.</p>
+          <div className="grid grid-cols-5 gap-2">
+            {activeDivSelectConfig.numbers.map((n, i) => {
+              const sel = divSelectAnswers[i] ?? false;
+              const shouldSel = n % activeDivSelectConfig.base === 0;
+              let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold transition-colors ";
+              if (!divSelectValidated) {
+                cls += sel
+                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                  : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+              } else {
+                if (sel && shouldSel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                else if (sel && !shouldSel) cls += CLS_WRONG;
+                else if (!sel && shouldSel) cls += CLS_WRONG;
+                else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              }
+              return (
+                <button key={i} type="button" disabled={divSelectValidated}
+                  onClick={() => setDivSelectAnswers(prev => prev.map((v, j) => j === i ? !v : v))}
+                  className={cls}>
+                  {n}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — Div by exercise */}
+      {!showEvalScore && currentStep?.kind === "div_by" && activeDivByConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivByConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Complétez la phrase. Entrez un diviseur valide parmi {"{2, 3, 4, 5, 6, 9, 10}"}.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeDivByConfig.questions.map((q, i) => {
+              const v = divByAnswers[i] ?? "";
+              const ok = divByValidated ? q.validDivisors.includes(parseInt(v)) : null;
+              const wrong = ok === false;
+              const inputCls = "w-16 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors";
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="font-mono font-bold text-sm text-[var(--color-text-primary)]">{q.n}</span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">est divisible par</span>
+                  {wrong ? (
+                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
+                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.validDivisors[0]}</span>
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={v} disabled={divByValidated}
+                      onChange={e => setDivByAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.5 — Missing digit exercise */}
+      {!showEvalScore && currentStep?.kind === "missing_digit_div" && activeMissingDigitConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMissingDigitConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le chiffre manquant pour que le nombre soit divisible.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeMissingDigitConfig.questions.map((q, i) => {
+              const v = missingDigitAnswers[i] ?? "";
+              const ok = missingDigitValidated ? q.validDigits.includes(v.trim()) : null;
+              const wrong = ok === false;
+              const inputCls = "w-10 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-1 text-center font-mono text-sm outline-none transition-colors";
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="font-mono font-bold text-sm text-[var(--color-text-primary)]">{q.prefix}</span>
+                  {wrong ? (
+                    <div className={`${inputCls} flex items-center justify-center gap-0.5 ${CLS_WRONG} rounded`}>
+                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.validDigits[0]}</span>
+                    </div>
+                  ) : (
+                    <input type="text" inputMode="numeric" maxLength={1} value={v} disabled={missingDigitValidated}
+                      onChange={e => setMissingDigitAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
+                  )}
+                  <span className="text-sm text-[var(--color-text-secondary)]">est divisible par <span className="font-bold text-[var(--color-text-primary)]">{q.divisor}</span></span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.6 — GCD/LCM exercise */}
+      {!showEvalScore && currentStep?.kind === "gcd_lcm" && activeGcdLcmConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeGcdLcmConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">
+            Calculez le {activeGcdLcmConfig.op === "pgcd" ? "PGCD" : "PPCM"} des nombres.
+          </p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeGcdLcmConfig.questions.map((q, i) => {
+              const v = gcdLcmAnswers[i] ?? "";
+              const ok = gcdLcmValidated ? parseInt(v) === q.answer : null;
+              const wrong = ok === false;
+              const inputCls = "w-20 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const label = activeGcdLcmConfig.op === "pgcd" ? "PGCD" : "PPCM";
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">{label}({q.nums.join(", ")}) =</span>
+                  {wrong ? (
+                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
+                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
+                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.answer}</span>
+                    </div>
+                  ) : (
+                    <input type="number" inputMode="numeric" value={v} disabled={gcdLcmValidated}
+                      onChange={e => setGcdLcmAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* A3.6 — True/false GCD/LCM exercise */}
+      {!showEvalScore && currentStep?.kind === "true_false_gcd_lcm" && activeTfGcdLcmConfig && (
+        <div className="space-y-4">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfGcdLcmConfig.exNum}</h2>
+          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
+          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+            {activeTfGcdLcmConfig.questions.map((q, i) => {
+              const sel = tfGcdLcmAnswers[i];
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.statement}</span>
+                  <div className="flex gap-1 shrink-0">
+                    {([true, false] as const).map((val) => {
+                      const label = val ? "Vrai" : "Faux";
+                      const isSelected = sel === val;
+                      const isCorrect = val === q.answer;
+                      let cls = "px-3 py-1.5 rounded border text-xs font-bold transition-colors ";
+                      if (!tfGcdLcmValidated) {
+                        cls += isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                      } else if (isSelected && isCorrect) {
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                      } else if (isSelected && !isCorrect) {
+                        cls += CLS_WRONG;
+                      } else if (!isSelected && isCorrect) {
+                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                      } else {
+                        cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                      }
+                      return (
+                        <button key={String(val)} type="button" disabled={tfGcdLcmValidated}
+                          onClick={() => setTfGcdLcmAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+                          className={cls}>
+                          {label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       {/* Eval score screen */}
       {showEvalScore && evalFinalGrade !== null && (
         <div className="space-y-4">
@@ -4808,7 +5633,16 @@ export function GenericModuleContent({
                     (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
                     (currentStep?.kind === "seq_complete" && !seqCompleteValidated) ||
                     (currentStep?.kind === "div_column_grid" && !divGridValidated) ||
-                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated)
+                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated) ||
+                    (currentStep?.kind === "mult_select" && !multSelectValidated) ||
+                    (currentStep?.kind === "mult_list" && !multListValidated) ||
+                    (currentStep?.kind === "true_false_mult_div" && !tfMultDivValidated) ||
+                    (currentStep?.kind === "find_divisors" && !findDivisorsValidated) ||
+                    (currentStep?.kind === "div_select" && !divSelectValidated) ||
+                    (currentStep?.kind === "div_by" && !divByValidated) ||
+                    (currentStep?.kind === "missing_digit_div" && !missingDigitValidated) ||
+                    (currentStep?.kind === "gcd_lcm" && !gcdLcmValidated) ||
+                    (currentStep?.kind === "true_false_gcd_lcm" && !tfGcdLcmValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
