@@ -1414,7 +1414,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
 
       {/* Hint button — training phase only */}
-      {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && currentStep.kind !== "eval_start" && currentStep.kind !== "pass_toggle" && currentStep.kind !== "results" && getWorkspaceStepHint(currentStep) && (
+      {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && getWorkspaceStepHint(currentStep) && (
         <div className="flex justify-end mb-1">
           <HintButton onClick={() => setShowHint(true)} />
         </div>
