@@ -3261,7 +3261,7 @@ export function GenericModuleContent({
 
   const withEval = !!startSubmoduleId;
 
-  const [steps] = useState<FlatStep[]>(() =>
+  const [steps, setSteps] = useState<FlatStep[]>(() =>
     lessons && lessons.length > 0 ? buildSteps(lessons, withEval) : [],
   );
 
@@ -3518,6 +3518,13 @@ export function GenericModuleContent({
 
   function startEval() {
     setEvalTimeLeft(5 * 60);
+    setEvalPageSavedResults([]);
+    setShowEvalScore(false);
+    setEvalFinalGrade(null);
+    setEvalEarnedPts(0);
+    setEvalTotalPts_state(0);
+    setEvalRowData([]);
+    setSteps(buildSteps(lessons, withEval));
     goTo(stepIdx + 1);
   }
 
@@ -5276,7 +5283,8 @@ export function GenericModuleContent({
                     (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
                     (currentStep?.kind === "seq_complete" && !seqCompleteValidated) ||
                     (currentStep?.kind === "div_column_grid" && !divGridValidated) ||
-                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated)
+                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated) ||
+                    (currentStep?.kind === "expr_comparison" && !exprCompValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
