@@ -76,16 +76,18 @@ function ModuleCard({
   progress,
   hydrated,
   highlighted,
+  isAdmin,
 }: {
   mod: (typeof LECTURE_MODULES)[number];
   progress: LectureProgressV2;
   hydrated: boolean;
   highlighted?: boolean;
+  isAdmin?: boolean;
 }) {
   const router = useRouter();
   const modState = hydrated ? getModuleState(progress, mod.id) : "locked";
-  const locked = modState === "locked";
-  const isCollapsible = modState === "locked" || modState === "completed";
+  const locked = !isAdmin && modState === "locked";
+  const isCollapsible = locked || modState === "completed";
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -149,7 +151,7 @@ function ModuleCard({
           const subState = hydrated
             ? getSubmoduleState(progress, mod.id, letter.letterLower)
             : "locked";
-          const isLocked = subState === "locked";
+          const isLocked = !isAdmin && subState === "locked";
           const subCode = `${mod.code}.${i + 1}`;
 
           const isAvailable = subState === "available";
@@ -222,7 +224,7 @@ function ModuleCard({
           const revState = hydrated ? getRevisionState(progress, revCheckpoint.pair) : "locked";
           const revData = getRevision(revCheckpoint.pair);
           const revTitle = revData?.title ?? `Révision ${revCheckpoint.pair}`;
-          const revLocked = revState === "locked";
+          const revLocked = !isAdmin && revState === "locked";
 
           const revRowContent = (
             <div className="flex min-h-[52px] items-center gap-3 px-4 py-2">
@@ -320,7 +322,7 @@ function StoriesList() {
 
 // ── Main component ─────────────────────────────────────────────────────────────
 
-export function LectureClient() {
+export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const [tab, setTab] = useState<TabId>("apprendre");
   const [progress, setProgress] = useState<LectureProgressV2>(() => ({
     version: 2,
@@ -393,6 +395,7 @@ export function LectureClient() {
                 progress={progress}
                 hydrated={hydrated}
                 highlighted={hydrated && mod.id === activeModuleId}
+                isAdmin={isAdmin}
               />
             ))}
           </section>

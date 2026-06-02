@@ -8,12 +8,12 @@ export default async function MathematiquesPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return <MathematiquesClient />;
 
-  const { data: isAdminData } = await supabase.rpc("get_my_is_admin");
+  const { data: myRole } = await supabase.rpc("get_my_role");
 
   return (
     <MathematiquesClient
       isLoggedIn
-      isAdmin={isAdminData === true}
+      isAdmin={myRole === "admin" || myRole === "prof"}
     />
   );
 }

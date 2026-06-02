@@ -166,6 +166,7 @@ function SectionCard({
   hydrated,
   returnTab,
   vocabGrades,
+  isAdmin,
 }: {
   sec: SectionDef;
   state: SectionState;
@@ -174,6 +175,7 @@ function SectionCard({
   hydrated: boolean;
   returnTab?: FrenchTab;
   vocabGrades?: Record<string, { score: number; passed: boolean }>;
+  isAdmin?: boolean;
 }) {
   const locked     = state === "locked";
   const inProgress = state === "in_progress";
@@ -195,8 +197,8 @@ function SectionCard({
     }
     if (locked) return "locked";
     if (completedSlugs.has(th.slug)) return "completed";
-    // Completed section: all lessons remain accessible for review
-    if (state === "completed") return "available";
+    // Completed section or admin: all lessons accessible
+    if (state === "completed" || isAdmin) return "available";
     // In-progress: only the first uncompleted lesson is accessible
     if (th.slug === firstAvailableSlug) return "available";
     return "locked";
@@ -341,7 +343,7 @@ function SectionCard({
 
 // ── Main component ────────────────────────────────────────────────────────────
 
-export function FrancaisClient() {
+export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const searchParams = useSearchParams();
   const initialTab = searchParams.get("tab") as FrenchTab | null;
   const [tab, setTab] = useState<FrenchTab>(
@@ -400,7 +402,7 @@ export function FrancaisClient() {
 
       {tab === "communication" ? (
         <section aria-label="Modules de communication">
-          <CommModuleList />
+          <CommModuleList isAdmin={isAdmin} />
         </section>
       ) : null}
 
@@ -422,6 +424,7 @@ export function FrancaisClient() {
                   hydrated={hydrated}
                   returnTab={tab}
                   vocabGrades={vocabGrades}
+                  isAdmin={isAdmin}
                 />
               );
             })}
@@ -453,7 +456,7 @@ export function FrancaisClient() {
                       prevThemes.length === 0 ||
                       prevThemes.every((th) => completedSlugs.has(th.slug));
 
-                    if (!sectionAccessible) {
+                    if (!sectionAccessible && !isAdmin) {
                       state = "locked";
                     } else {
                       const allDone = themes.every((th) => completedSlugs.has(th.slug));
@@ -472,6 +475,7 @@ export function FrancaisClient() {
                       completedSlugs={hydrated ? completedSlugs : new Set()}
                       hydrated={hydrated}
                       returnTab={tab}
+                      isAdmin={isAdmin}
                     />
                   );
                 })}

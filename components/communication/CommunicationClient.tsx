@@ -7,7 +7,7 @@ import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
-export function CommModuleList() {
+export function CommModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({ A1: true });
@@ -27,7 +27,7 @@ export function CommModuleList() {
     <ul className="space-y-4">
       {COMM_MODULES.map((m) => {
         const isExpanded = !!expanded[m.id];
-        const allUnavailable = m.submodules.every((s) => !s.available);
+        const allUnavailable = !isAdmin && m.submodules.every((s) => !s.available);
         const completedCount = m.submodules.filter((s) => completed[s.id]).length;
         const hasAnyCompleted = completedCount > 0;
 
@@ -76,7 +76,7 @@ export function CommModuleList() {
                 <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                   {m.submodules.map((sub) => {
                     const isDone = !!completed[sub.id];
-                    const isAvailable = sub.available;
+                    const isAvailable = isAdmin || sub.available;
                     const isLocked = !isAvailable && !isDone;
                     return (
                       <li key={sub.id}
@@ -128,7 +128,7 @@ export function CommModuleList() {
   );
 }
 
-export function CommunicationClient() {
+export function CommunicationClient({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
   const [expanded, setExpanded] = useState<Record<string, boolean>>({ A1: true });
@@ -167,7 +167,7 @@ export function CommunicationClient() {
         <ul className="space-y-4">
           {COMM_MODULES.map((m) => {
             const isExpanded = !!expanded[m.id];
-            const allUnavailable = m.submodules.every((s) => !s.available);
+            const allUnavailable = !isAdmin && m.submodules.every((s) => !s.available);
             const completedCount = m.submodules.filter((s) => completed[s.id]).length;
             const hasAnyCompleted = completedCount > 0;
 
@@ -239,7 +239,7 @@ export function CommunicationClient() {
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
                       {m.submodules.map((sub) => {
                         const isDone = !!completed[sub.id];
-                        const isAvailable = sub.available;
+                        const isAvailable = isAdmin || sub.available;
                         const isLocked = !isAvailable && !isDone;
 
                         return (

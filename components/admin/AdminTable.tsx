@@ -684,7 +684,7 @@ export function AdminTable({
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
   const searchLc = search.trim().toLowerCase();
   const filtered = rows.filter(r => {
-    if (tab === "classes" && filterClasse && r.classe !== filterClasse) return false;
+    if (filterClasse && r.classe !== filterClasse) return false;
     if (!searchLc) return true;
     const name = [r.prenom, r.nom].filter(Boolean).join(" ").toLowerCase();
     return name.includes(searchLc) || (r.email ?? "").toLowerCase().includes(searchLc) || (r.classe ?? "").toLowerCase().includes(searchLc);
@@ -735,22 +735,11 @@ export function AdminTable({
               className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
           </div>
-          <button
-            onClick={() => setSearch("")}
-            className="flex h-9 items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
-            Effacer
-          </button>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
-            <button onClick={() => setTab("eleves")} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "eleves" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Élèves</button>
-            <button onClick={() => { setTab("classes"); if (!filterClasse && classes[0]) setFilterClasse(classes[0]); }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${tab === "classes" ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Classes</button>
-          </div>
-
-          {tab === "classes" && (
-            <select value={filterClasse} onChange={e => setFilterClasse(e.target.value)} className="rounded-full border border-zinc-200 bg-white px-4 py-1.5 text-sm dark:border-zinc-700 dark:bg-zinc-900">
+          {classes.length > 0 && (
+            <select value={filterClasse} onChange={e => setFilterClasse(e.target.value)}
+              className="h-9 rounded-full border border-zinc-200 bg-white px-4 text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
               <option value="">Toutes les classes</option>
               {classes.map(c => <option key={c} value={c}>{c}</option>)}
             </select>

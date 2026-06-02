@@ -198,14 +198,19 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
               ))}
               <option value="ancien">Ancien élève</option>
             </select>
-            <input
-              name="classe_num" type="number" required={!isAncien} min={1} max={20}
-              placeholder={isAncien ? "—" : "Numéro (1–20)"}
+            <select
+              name="classe_num" required={!isAncien}
               disabled={isAncien}
               value={isAncien ? "" : classeNum}
               onChange={e => setClasseNum(e.target.value)}
               className={`${inputCls} ${isAncien ? "opacity-40 cursor-not-allowed" : ""}`}
-            />
+            >
+              <option value="" disabled>{isAncien ? "—" : "Numéro de la classe"}</option>
+              {!isAncien && Array.from({ length: 20 }, (_, i) => {
+                const n = String(i + 1).padStart(2, "0");
+                return <option key={n} value={String(i + 1)}>{n}</option>;
+              })}
+            </select>
           </div>
         </div>
 
