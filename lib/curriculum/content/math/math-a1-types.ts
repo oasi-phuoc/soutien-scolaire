@@ -141,6 +141,8 @@ export type MathExerciseItem = {
   type: "short_text" | "number";
   /** Réponses acceptées après normalisation (voir normalizeMathAnswer). */
   acceptable: string[];
+  /** Astuce affichée quand l’élève clique sur le bouton « ? » (entraînement seulement). */
+  hintFr?: string;
 };
 
 export type MathSubmoduleLesson = {
