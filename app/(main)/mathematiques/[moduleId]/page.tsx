@@ -32,15 +32,16 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   const parentModuleId = getModuleIdForSubmodule(upper);
   if (!parentModuleId) notFound();
   const parentMod = getMathModule(parentModuleId!);
-  if (!parentMod) notFound();
+  // RA/RG revision modules are not in MATH_MODULES — allow them through
+  if (!parentMod && !parentModuleId!.startsWith("RA") && !parentModuleId!.startsWith("RG")) notFound();
 
-  const tabLabel = parentMod!.branch === "geometry" ? "Formes" : "Calculs";
+  const tabLabel = parentMod?.branch === "geometry" ? "Formes" : "Calculs";
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
-          Mathématiques · {tabLabel} · {parentMod!.code}
+          Mathématiques · {tabLabel} · {parentMod?.code ?? parentModuleId}
         </p>
         <div className="flex items-center gap-2">
           <Link

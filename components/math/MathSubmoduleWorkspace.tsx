@@ -7,7 +7,7 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
-import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
+import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
 import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadEncadrementUniteExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
@@ -34,6 +34,7 @@ type WorkspaceStep =
   | { kind: "fraction_equiv" }
   | { kind: "fraction_simplify" }
   | { kind: "fraction_compare"; exNum: number; mode: "same-den" | "same-num" | "diff-both" }
+  | { kind: "frac_op_compare"; exNum: number; opMode: "add-sub" | "mul" | "div" }
   | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
   | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
   | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode; count?: number; displayExNum?: number }
@@ -72,6 +73,7 @@ const STEP_DEFAULT_TOTALS: Record<string, number> = {
   fraction_toggle: 5, fraction_coloring: 4, fraction_read: 4,
   fraction_multi_coloring: 4, fraction_multi_read: 4,
   fraction_equiv: 5, fraction_simplify: 5, fraction_compare: 5,
+  frac_op_compare: 5,
   frac_to_dec: 5, dec_to_frac: 5,
 };
 
@@ -313,17 +315,20 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A4-4" || lesson.submoduleId === "A4-5" || lesson.submoduleId === "A4-6") {
     const opMode: FracOpMode = lesson.submoduleId === "A4-4" ? "add-sub" : lesson.submoduleId === "A4-5" ? "mul" : "div";
-    // Training: Ex1-5, then Ex9 (as Ex6)
+    const cmpMode = opMode;
+    // Training: Ex1-5, Ex6 (comparison), then Ex9 (as Ex7)
     for (let ex = 1; ex <= 5; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode });
     }
-    steps.push({ kind: "frac_ops", exType: 9, opMode, displayExNum: 6 });
-    // Evaluation: Ex1-4 + Ex9, 4 questions each (1 pt per question)
+    steps.push({ kind: "frac_op_compare", exNum: 6, opMode: cmpMode });
+    steps.push({ kind: "frac_ops", exType: 9, opMode, displayExNum: 7 });
+    // Evaluation: Ex1-4 + comparison (Ex5) + Ex9 (Ex6)
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 4; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4, opMode, count: 4 });
     }
-    steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4, displayExNum: 5 });
+    steps.push({ kind: "frac_op_compare", exNum: 5, opMode: cmpMode });
+    steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4, displayExNum: 6 });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1143,8 +1148,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
+  // Exception: RA/RG revision lessons use the workspace's own step builder (buildRevisionEvalSteps)
   const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4";
-  if (moduleId !== "A4" && !isCustomA5) {
+  const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId);
+  if (moduleId !== "A4" && !isCustomA5 && !isRevision) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
 
@@ -1158,7 +1165,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
   function goBack() {
@@ -1308,6 +1315,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "fraction_compare" && (
         <FractionCompareExercise key={exKey} exNum={currentStep.exNum} mode={currentStep.mode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "frac_op_compare" && (
+        <FracOpCompareExercise key={exKey} exNum={currentStep.exNum} opMode={currentStep.opMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "frac_to_dec" && (
         <FracToDecExercise key={exKey} exNum={currentStep.exNum} variant={currentStep.variant} validateCommand={validateCommand} onValidated={handleCustomValidated} />
@@ -1591,7 +1601,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             <button type="button" onClick={goNext}
               disabled={
                 (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                (isInEvalExercises && isCustom && evalScores[stepIdx] === undefined)
+                (isInEvalExercises && evalScores[stepIdx] === undefined)
               }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
               {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (

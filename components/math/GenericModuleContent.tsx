@@ -5328,85 +5328,87 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
-          <div className="space-y-4">
-            {activeDecSeqRuleConfig.questions.map((q, i) => {
-              const v = decSeqRuleAnswers[i] ?? "";
-              const ok = decSeqRuleValidated ? decSeqRuleResults[i] : null;
-              const wrong = ok === false;
-              const correctAns = `${q.op}${fmtDec(q.step)}`;
-              const inputRowCls = "w-16 h-9 shrink-0 rounded border px-1 text-sm font-mono text-center outline-none transition-colors";
-              return (
-                <div key={i} className="overflow-x-auto">
-                  <div className="flex items-center gap-2">
-                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div className="overflow-x-auto">
+            <div
+              className="inline-grid items-center gap-x-2 gap-y-3"
+              style={{ gridTemplateColumns: `1.5rem repeat(${activeDecSeqRuleConfig.questions[0]?.nums.length ?? 4}, 4rem) 5rem` }}
+            >
+              {activeDecSeqRuleConfig.questions.map((q, i) => {
+                const v = decSeqRuleAnswers[i] ?? "";
+                const ok = decSeqRuleValidated ? decSeqRuleResults[i] : null;
+                const wrong = ok === false;
+                const correctAns = `${q.op}${fmtDec(q.step)}`;
+                return (
+                  <Fragment key={i}>
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {q.nums.map((n, ni) => (
-                      <span key={ni} className="w-16 h-9 shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                      <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                     ))}
                     {wrong ? (
-                      <div className={`${inputRowCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                        <span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span>
+                      <div className={`h-9 rounded border px-1 text-sm font-mono ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                        <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
                     ) : (
                       <input type="text" value={v} disabled={decSeqRuleValidated}
-                        onChange={e => setDecSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                        onChange={e => setDecSeqRuleAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
                         placeholder="±0,00"
-                        className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                        className={`h-9 w-full rounded border px-1 text-sm font-mono text-center outline-none transition-colors ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                     )}
-                  </div>
-                </div>
-              );
-            })}
+                  </Fragment>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
 
-      {/* Decimal sequence complete exercise (A5.2) */}
+      {/* Decimal sequence complete exercise (A5.3) */}
       {currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
-          <div className="space-y-5">
-            {activeDecSeqCompleteConfig.questions.map((q, qi) => {
-              let blankCounter = 0;
-              return (
-                <div key={qi} className="space-y-2">
-                  <div className="overflow-x-auto">
-                    <div className="flex items-center gap-1.5">
-                      <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
-                      {q.allNums.map((n, ni) => {
-                        const blankIdx = q.blankIdxs.indexOf(ni);
-                        if (blankIdx !== -1) {
-                          const bIdx = blankCounter++;
-                          const v = decSeqCompleteAnswers[qi]?.[bIdx] ?? "";
-                          const expected = q.allNums[ni]!;
-                          const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
-                          const inputCls = "w-16 shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors";
-                          return wrong ? (
-                            <div key={ni} className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                              <span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span>
-                              <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
-                            </div>
-                          ) : (
-                            <input key={ni} type="text" inputMode="decimal" value={v} disabled={decSeqCompleteValidated}
-                              onChange={e => setDecSeqCompleteAnswers(prev => {
-                                const next = prev.map(r => [...r]);
-                                if (!next[qi]) next[qi] = [];
-                                next[qi]![bIdx] = e.target.value;
-                                return next;
-                              })}
-                              className={`${inputCls} ${decSeqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
-                          );
-                        }
-                        return (
-                          <span key={ni} className="w-16 shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+          <div className="overflow-x-auto">
+            <div
+              className="inline-grid items-center gap-x-1.5 gap-y-3"
+              style={{ gridTemplateColumns: `1.5rem repeat(${activeDecSeqCompleteConfig.questions[0]?.allNums.length ?? 5}, 4rem)` }}
+            >
+              {activeDecSeqCompleteConfig.questions.map((q, qi) => {
+                let blankCounter = 0;
+                return (
+                  <Fragment key={qi}>
+                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {q.allNums.map((n, ni) => {
+                      const blankIdx = q.blankIdxs.indexOf(ni);
+                      if (blankIdx !== -1) {
+                        const bIdx = blankCounter++;
+                        const v = decSeqCompleteAnswers[qi]?.[bIdx] ?? "";
+                        const expected = q.allNums[ni]!;
+                        const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
+                        return wrong ? (
+                          <div key={ni} className={`h-9 rounded border px-1 font-mono text-sm ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                            <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
+                            <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
+                          </div>
+                        ) : (
+                          <input key={ni} type="text" inputMode="decimal" value={v} disabled={decSeqCompleteValidated}
+                            onChange={e => setDecSeqCompleteAnswers(prev => {
+                              const next = prev.map(r => [...r]);
+                              if (!next[qi]) next[qi] = [];
+                              next[qi]![bIdx] = e.target.value;
+                              return next;
+                            })}
+                            className={`h-9 w-full rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${decSeqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                         );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                      }
+                      return (
+                        <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                      );
+                    })}
+                  </Fragment>
+                );
+              })}
+            </div>
           </div>
         </div>
       )}

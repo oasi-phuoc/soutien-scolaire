@@ -1389,6 +1389,140 @@ function genCompareDiffBoth(): ComparePair {
   return { n1: 2, d1: 3, n2: 3, d2: 5, answer: ">" };
 }
 
+// ── Fraction Operation Comparison (A4.4 Ex6, A4.5 Ex6, A4.6 Ex6) ─────────────
+const SMALL_DENS = [2, 3, 4, 6];
+
+function randSmallFrac(): [number, number] {
+  const d = SMALL_DENS[Math.floor(Math.random() * SMALL_DENS.length)]!;
+  return [riA4(1, d - 1), d];
+}
+
+interface FracOpCompareQ {
+  la: number; lb: number; lop: "+" | "-" | "×" | "÷"; lc: number; ld: number;
+  ra: number; rb: number; rop: "+" | "-" | "×" | "÷"; rc: number; rd: number;
+  answer: "<" | "=" | ">";
+}
+
+function genFracOpCompareQ(opMode: "add-sub" | "mul" | "div"): FracOpCompareQ {
+  for (let attempt = 0; attempt < 200; attempt++) {
+    const [la, lb] = randSmallFrac();
+    const [lc, ld] = randSmallFrac();
+    const [ra, rb] = randSmallFrac();
+    const [rc, rd] = randSmallFrac();
+    let lop: "+" | "-" | "×" | "÷" = "+";
+    let rop: "+" | "-" | "×" | "÷" = "+";
+    let lval: number, rval: number;
+    if (opMode === "add-sub") {
+      lop = Math.random() < 0.6 ? "+" : "-";
+      rop = Math.random() < 0.6 ? "+" : "-";
+      lval = lop === "+" ? la / lb + lc / ld : la / lb - lc / ld;
+      rval = rop === "+" ? ra / rb + rc / rd : ra / rb - rc / rd;
+      if (lval <= 0 || rval <= 0) continue;
+    } else if (opMode === "mul") {
+      lop = "×"; rop = "×";
+      lval = (la * lc) / (lb * ld);
+      rval = (ra * rc) / (rb * rd);
+    } else {
+      lop = "÷"; rop = "÷";
+      lval = (la * ld) / (lb * lc);
+      rval = (ra * rd) / (rb * rc);
+    }
+    const eps = 1e-9;
+    const answer: "<" | "=" | ">" =
+      Math.abs(lval - rval) < eps ? "=" : lval < rval ? "<" : ">";
+    return { la, lb, lop, lc, ld, ra, rb, rop, rc, rd, answer };
+  }
+  return { la: 1, lb: 2, lop: "+", lc: 1, ld: 4, ra: 1, rb: 4, rop: "+", rc: 1, rd: 4, answer: ">" };
+}
+
+export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValidated }: {
+  exNum: number;
+  opMode: "add-sub" | "mul" | "div";
+  validateCommand: number;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<FracOpCompareQ[]>(() => Array.from({ length: 5 }, () => genFracOpCompareQ(opMode)));
+  const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
+  const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const sts = questions.map((q, i) =>
+      selected[i] === q.answer ? "correct" : "wrong"
+    ) as ("correct" | "wrong")[];
+    setStatuses(sts);
+    onValidated(sts.every(s => s === "correct"), sts.filter(s => s === "correct").length, sts.length);
+  }, [validated, questions, selected, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  const title = opMode === "add-sub"
+    ? "Comparez les expressions. Choisissez <, = ou >."
+    : opMode === "mul"
+    ? "Comparez les produits. Choisissez <, = ou >."
+    : "Comparez les quotients. Choisissez <, = ou >.";
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{title}</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => {
+          const st = statuses[i]!;
+          const sel = selected[i];
+          const btnCls = (sym: "<" | "=" | ">") => {
+            const isSelected = sel === sym;
+            const isCorrect = sym === q.answer;
+            if (!validated) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+                isSelected
+                  ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+              }`;
+            }
+            if (st === "wrong" && (isSelected || isCorrect)) {
+              return "w-10 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
+            }
+            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              isSelected
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+            }`;
+          };
+          return (
+            <div key={i} className="flex items-center gap-2 flex-wrap">
+              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <div className="flex items-center gap-0.5">
+                <VFracNum n={q.la} d={q.lb} />
+                <span className="shrink-0 px-1 text-sm font-bold text-[var(--color-text-secondary)]">{q.lop}</span>
+                <VFracNum n={q.lc} d={q.ld} />
+              </div>
+              <div className="flex gap-1.5">
+                {(["<", "=", ">"] as const).map(sym => (
+                  <button key={sym} type="button"
+                    onClick={() => { if (!validated) setSelected(prev => { const n = [...prev]; n[i] = sym; return n; }); }}
+                    className={btnCls(sym)}>
+                    {sym}
+                  </button>
+                ))}
+              </div>
+              <div className="flex items-center gap-0.5">
+                <VFracNum n={q.ra} d={q.rb} />
+                <span className="shrink-0 px-1 text-sm font-bold text-[var(--color-text-secondary)]">{q.rop}</span>
+                <VFracNum n={q.rc} d={q.rd} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export function FractionCompareExercise({ exNum, mode, validateCommand, onValidated }: {
   exNum: number;
   mode: "same-den" | "same-num" | "diff-both";
