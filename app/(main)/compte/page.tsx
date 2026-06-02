@@ -27,7 +27,7 @@ export default async function ComptePage() {
     .eq("id", user.id)
     .maybeSingle();
 
-  const { data: isAdmin } = await supabase.rpc("get_my_is_admin");
+  const { data: myRole } = await supabase.rpc("get_my_role");
 
   const piv = profile?.preferred_pivot_lang;
 
@@ -39,7 +39,7 @@ export default async function ComptePage() {
       }}
       profilePivot={isPivotCode(piv) ? piv : null}
       supabaseConfigured
-      isAdmin={isAdmin === true}
+      isAdmin={myRole === "admin" || myRole === "prof"}
     />
   );
 }
