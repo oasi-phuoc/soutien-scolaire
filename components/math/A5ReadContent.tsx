@@ -682,7 +682,7 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
         {cfg.nums.map(s => {
           const sel = selected.has(s);
           const st = chipState[s];
-          let cls = "rounded-xl border px-4 py-2 text-sm font-mono font-bold transition-colors ";
+          let cls = "min-w-[4rem] text-center rounded-xl border px-3 py-2 text-sm font-mono font-bold transition-colors ";
           if (validated) {
             if (st === "wrong") cls += "border-amber-500 bg-amber-50 text-amber-600";
             else if (st === "missed") cls += "border-amber-500 bg-amber-50 text-amber-600";
@@ -725,27 +725,27 @@ export function DecReadFilterBetweenExercise({ exNum, validateCommand, onValidat
 }
 
 // ── Ex 11 — Encadrement ───────────────────────────────────────────────────────
-function genEncadrement(): { numStr: string; lo: string; hi: string }[] {
-  const items: { numStr: string; lo: string; hi: string }[] = [];
+type EncadrItem = { numStr: string; lo: string; hi: string; dir: "lt" | "gt" };
+function genEncadrement(): EncadrItem[] {
+  const numGt = rnd(2, 3);
+  const dirs = shuffle([...Array(5 - numGt).fill("lt") as "lt"[], ...Array(numGt).fill("gt") as "gt"[]]);
+  const items: EncadrItem[] = [];
   while (items.length < 5) {
     const caseType = rnd(0, 2);
     const intPart = rnd(1, 19);
     let numStr: string, lo: string, hi: string;
     if (caseType === 0) {
-      // Integer bounds, 1-decimal target
       numStr = `${intPart},${rnd(1, 9)}`;
       lo = String(intPart); hi = String(intPart + 1);
     } else if (caseType === 1) {
-      // Integer bounds, 2-decimal target
       numStr = `${intPart},${rnd(1, 9)}${rnd(1, 9)}`;
       lo = String(intPart); hi = String(intPart + 1);
     } else {
-      // 1-decimal bounds, 2-decimal target
       const loT = rnd(1, 8), d2 = rnd(1, 9);
       numStr = `${intPart},${loT}${d2}`;
       lo = `${intPart},${loT}`; hi = `${intPart},${loT + 1}`;
     }
-    items.push({ numStr, lo, hi });
+    items.push({ numStr, lo, hi, dir: dirs[items.length]! });
   }
   return items;
 }
@@ -772,21 +772,92 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Trouvez le nombre décimal encadré.</p>
       </div>
-      <div className="space-y-3">
+      <div className="grid grid-cols-[1.5rem_3.5rem_1.25rem_5rem_1.25rem_3.5rem] items-center gap-x-2 gap-y-3">
+        {items.map((item, i) => {
+          const isGt = item.dir === "gt";
+          const firstVal = isGt ? item.hi : item.lo;
+          const secondVal = isGt ? item.lo : item.hi;
+          const sym = isGt ? ">" : "<";
+          return (
+            <React.Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="font-mono text-sm text-right text-[var(--color-text-primary)]">{firstVal}</span>
+              <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
+              {wrongs[i]
+                ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
+                : <input type="text" value={vals[i] ?? ""} disabled={validated}
+                    onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value : v))}
+                    className={`${IC(false)} w-20`} />}
+              <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">{secondVal}</span>
+            </React.Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Ex 12 — Encadrement à l'unité près ───────────────────────────────────────
+function genEncadrementUnite(): { numStr: string; lo: number; hi: number }[] {
+  const items: { numStr: string; lo: number; hi: number }[] = [];
+  while (items.length < 5) {
+    const intPart = rnd(1, 19);
+    const tenths = rnd(1, 9);
+    const hundredths = rnd(0, 9);
+    const numStr = hundredths === 0 ? `${intPart},${tenths}` : `${intPart},${tenths}${hundredths}`;
+    items.push({ numStr, lo: intPart, hi: intPart + 1 });
+  }
+  return items;
+}
+
+export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onValidated }: {
+  exNum: number; validateCommand: number; onValidated: (ok: boolean) => void;
+}) {
+  const [items] = useState(genEncadrementUnite);
+  const [vals, setVals] = useState<[string, string][]>(() => items.map(() => ["", ""]));
+  const [wrongs, setWrongs] = useState<[boolean, boolean][]>(() => items.map(() => [false, false]));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    setValidated(true);
+    const w = items.map((item, i) => [
+      (vals[i]?.[0] ?? "").trim() !== String(item.lo),
+      (vals[i]?.[1] ?? "").trim() !== String(item.hi),
+    ] as [boolean, boolean]);
+    setWrongs(w);
+    onValidated(w.every(row => row.every(x => !x)));
+  }, [validated, items, vals, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à l'unité près.</p>
+      </div>
+      <div className="grid grid-cols-[1.5rem_5rem_1.25rem_minmax(3rem,max-content)_1.25rem_5rem] items-center gap-x-2 gap-y-3">
         {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
-            <span className="font-mono text-sm text-[var(--color-text-primary)]">{item.lo}</span>
-            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-            {wrongs[i]
-              ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
-              : <input type="text" value={vals[i] ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value : v))}
-                  className={`${IC(false)} w-20`} />}
-            <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-            <span className="font-mono text-sm text-[var(--color-text-primary)]">{item.hi}</span>
-          </div>
+          <React.Fragment key={i}>
+            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {wrongs[i]?.[0]
+              ? <Err wrong={vals[i]?.[0] ?? ""} correct={String(item.lo)} className="w-16" />
+              : <input type="text" value={vals[i]?.[0] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value, v[1]!] as [string, string] : v))}
+                  className={`${IC(false)} w-16`} />}
+            <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
+            <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{item.numStr}</span>
+            <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
+            {wrongs[i]?.[1]
+              ? <Err wrong={vals[i]?.[1] ?? ""} correct={String(item.hi)} className="w-16" />
+              : <input type="text" value={vals[i]?.[1] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value] as [string, string] : v))}
+                  className={`${IC(false)} w-16`} />}
+          </React.Fragment>
         ))}
       </div>
     </div>
@@ -804,7 +875,10 @@ function genNLRead(): NLLine[] {
     const min = rnd(0, 9);
     const max = +(min + numDivs * step).toFixed(1);
     const candidates: number[] = [];
-    for (let k = 1; k < numDivs; k++) candidates.push(+(min + k * step).toFixed(1));
+    for (let k = 1; k < numDivs; k++) {
+      if (k % 5 === 0) continue;
+      candidates.push(+(min + k * step).toFixed(1));
+    }
     const arrows = shuffle(candidates).slice(0, 2).sort((a, b) => a - b);
     return { min, max, step, numDivs, arrows };
   });
@@ -922,7 +996,10 @@ function genNLPlace(): NLPlaceConfig {
   const min = rnd(0, 9);
   const max = +(min + numDivs * step).toFixed(2);
   const candidates: number[] = [];
-  for (let k = 1; k < numDivs; k++) candidates.push(+(min + k * step).toFixed(2));
+  for (let k = 1; k < numDivs; k++) {
+    if (k % 5 === 0) continue;
+    candidates.push(+(min + k * step).toFixed(2));
+  }
   const positions = shuffle(candidates).slice(0, 5).sort((a, b) => a - b);
   return { min, max, step, numDivs, positions };
 }

@@ -10,7 +10,7 @@ import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise } from "@/components/math/A5DecimalContent";
-import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
+import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadEncadrementUniteExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
 import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
 import { A7CompareExercise } from "@/components/math/A7CompareContent";
 import { A7RelArithExercise, A7RelMulDivExercise } from "@/components/math/A7ArithContent";
@@ -48,6 +48,7 @@ type WorkspaceStep =
   | { kind: "dec_read_filter_lt"; exNum: number }
   | { kind: "dec_read_filter_between"; exNum: number }
   | { kind: "dec_read_encadrement"; exNum: number }
+  | { kind: "dec_read_encadrement_unite"; exNum: number }
   | { kind: "dec_read_nl_read"; exNum: number }
   | { kind: "dec_read_nl_place"; exNum: number }
   | { kind: "a7_nl_read_mixed"; exNum: number }
@@ -200,8 +201,9 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_read_filter_lt", exNum: 9 });
     steps.push({ kind: "dec_read_filter_between", exNum: 10 });
     steps.push({ kind: "dec_read_encadrement", exNum: 11 });
-    steps.push({ kind: "dec_read_nl_read", exNum: 12 });
-    steps.push({ kind: "dec_read_nl_place", exNum: 13 });
+    steps.push({ kind: "dec_read_encadrement_unite", exNum: 12 });
+    steps.push({ kind: "dec_read_nl_read", exNum: 13 });
+    steps.push({ kind: "dec_read_nl_place", exNum: 14 });
     // Evaluation: 6 exercises
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "dec_read_decompose", exNum: 1 });
@@ -1154,7 +1156,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "eval_start" &&
     currentStep.kind !== "pass_toggle" &&
     currentStep.kind !== "results";
-  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_nl_read","dec_read_nl_place"]);
+  const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
   const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
@@ -1380,6 +1382,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_read_encadrement" && (
         <DecReadEncadrementExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_read_encadrement_unite" && (
+        <DecReadEncadrementUniteExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_read_nl_read" && (
         <DecReadNLReadExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
