@@ -93,7 +93,7 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
   );
 }
 
-export function MathematiquesClient() {
+export function MathematiquesClient({ isLoggedIn = false }: { isLoggedIn?: boolean }) {
   const router = useRouter();
   const [tab, setTab] = useState<MathTabId>("algebra");
   const [progress, setProgress] = useState<StoredProgressV1>(createInitialProgress);
@@ -373,7 +373,7 @@ export function MathematiquesClient() {
       </section>
 
       <p className="text-center text-[length:var(--font-size-xs)] text-[var(--color-text-secondary)]">
-        Progression stockée localement.
+        {isLoggedIn ? "Progression synchronisée avec le cloud." : "Progression stockée localement."}
       </p>
     </div>
   );
