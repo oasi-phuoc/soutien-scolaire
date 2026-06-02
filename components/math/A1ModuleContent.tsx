@@ -3592,7 +3592,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]">Choisissez le nombre représenté par les blocs.</p>
-                  <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                  <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+                    <ZoomButton onClick={() => setZoomedEx("eval-q9")} />
                     <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
                       {a12EvalQ9.tens > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={8} />)}</div>}
                       {a12EvalQ9.units > 0 && <div className="flex w-full flex-wrap justify-center gap-0.5">{Array.from({length:a12EvalQ9.units},(_,ui)=><SvgUnite key={ui} s={11} />)}</div>}
@@ -3619,6 +3620,22 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         );
                       })}
                     </div>
+                    {zoomedEx === "eval-q9" && (
+                      <ZoomModal onClose={() => setZoomedEx(null)}>
+                        <div className="flex flex-col items-center justify-center gap-2 py-6 px-4 rounded-[var(--radius-md)] bg-white">
+                          {a12EvalQ9.tens > 0 && (
+                            <div className="flex w-full flex-wrap justify-center gap-1">
+                              {Array.from({length:a12EvalQ9.tens},(_,ti)=><SvgDizaineH key={ti} s={14} />)}
+                            </div>
+                          )}
+                          {a12EvalQ9.units > 0 && (
+                            <div className="flex w-full flex-wrap justify-center gap-1">
+                              {Array.from({length:a12EvalQ9.units},(_,ui)=><SvgUnite key={ui} s={18} />)}
+                            </div>
+                          )}
+                        </div>
+                      </ZoomModal>
+                    )}
                   </div>
                 </div>
                 );
