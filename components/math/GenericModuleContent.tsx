@@ -6026,7 +6026,7 @@ export function GenericModuleContent({
               {currentStep.lesson.theory.title.fr}
             </h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {revisionMode ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
           </div>
           <button

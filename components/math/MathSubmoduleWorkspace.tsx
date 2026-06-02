@@ -1114,7 +1114,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [evalKey, setEvalKey] = useState(0);
   const [trainingTimerLeft, setTrainingTimerLeft] = useState<number | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const [revTimerLeft, setRevTimerLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
+
+  const isRevisionLesson = /^(RA|RG)-\d+$/i.test(submoduleId);
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -1136,8 +1139,29 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     return () => clearInterval(id);
   }, [evalTimeLeft]);
 
+  // Revision 30-minute countdown
+  useEffect(() => {
+    if (!isRevisionLesson || revTimerLeft === null || revTimerLeft <= 0) return;
+    const id = setInterval(() => setRevTimerLeft((t) => (t ?? 1) - 1), 1000);
+    return () => clearInterval(id);
+  }, [isRevisionLesson, revTimerLeft]);
+
+  // Auto-jump to end when revision timer hits 0
+  useEffect(() => {
+    if (!isRevisionLesson || revTimerLeft !== 0) return;
+    const endIdx = steps.findLastIndex((s: WorkspaceStep) => s.kind === "results" || s.kind === "pass_toggle");
+    if (endIdx >= 0 && stepIdx !== endIdx) {
+      setRevTimerLeft(null);
+      goTo(endIdx);
+    }
+  }, [isRevisionLesson, revTimerLeft, steps, stepIdx, goTo]);
+
   function startEval() {
-    setEvalTimeLeft(5 * 60);
+    if (isRevisionLesson) {
+      setRevTimerLeft(30 * 60);
+    } else {
+      setEvalTimeLeft(5 * 60);
+    }
     setEvalScores({});
     setEvalKey(k => k + 1);
     goTo(stepIdx + 1);
@@ -1190,6 +1214,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     setEvalScores({});
     setEvalKey(k => k + 1);
     setEvalTimeLeft(null);
+    setRevTimerLeft(null);
     goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
   }
 
@@ -1295,7 +1320,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {/* Eval progress bar */}
       {isInEvalExercises && (
-        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={evalTimeLeft} />
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
       )}
 
       {/* Theory */}
@@ -1493,7 +1518,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
             <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {isRevisionLesson ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
           </div>
           <button
