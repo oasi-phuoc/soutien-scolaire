@@ -1153,9 +1153,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   // Non-A4 modules with lessons use GenericModuleContent per submodule
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
-  // Exception: RA/RG revision lessons use the workspace's own step builder (buildRevisionEvalSteps)
+  // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
+  //            keep workspace step builder only for A4 and A7 parents (custom step types).
   const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4";
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId);
+  if (isRevision) {
+    const revParent = getParentModuleForRevision(submoduleId);
+    if (revParent && revParent !== "A4" && revParent !== "A7") {
+      return <GenericModuleContent moduleId={revParent} revisionMode={true} />;
+    }
+  }
   if (moduleId !== "A4" && !isCustomA5 && !isRevision) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }

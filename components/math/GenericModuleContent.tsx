@@ -3500,14 +3500,29 @@ function TheoryView({ lesson, pivot, showPivot }: {
 }
 
 // ── Main component ───────────────────────────────────────────────────────────
+function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
+  const result: FlatStep[] = [];
+  for (const lesson of lessons) {
+    const allSteps = buildSteps([lesson], true);
+    const esi = allSteps.findIndex(s => s.kind === "eval_start");
+    if (esi < 0) continue;
+    const endi = allSteps.findIndex((s, i) => i > esi && s.kind === "pass_toggle");
+    const slice = endi >= 0 ? allSteps.slice(esi + 1, endi) : allSteps.slice(esi + 1);
+    result.push(...slice);
+  }
+  return result;
+}
+
 export function GenericModuleContent({
   moduleId,
   startSubmoduleId,
   startAtEval,
+  revisionMode,
 }: {
   moduleId: string;
   startSubmoduleId?: string;
   startAtEval?: boolean;
+  revisionMode?: boolean;
 }) {
   const router = useRouter();
   const pivot = usePivotLang();
@@ -3517,14 +3532,24 @@ export function GenericModuleContent({
     ? allLessons.filter((l) => l.submoduleId === startSubmoduleId)
     : allLessons;
 
-  const withEval = !!startSubmoduleId;
+  const withEval = !!startSubmoduleId || !!revisionMode;
 
-  const [steps, setSteps] = useState<FlatStep[]>(() =>
-    lessons && lessons.length > 0 ? buildSteps(lessons, withEval) : [],
-  );
+  const [steps, setSteps] = useState<FlatStep[]>(() => {
+    if (!lessons || lessons.length === 0) return [];
+    if (revisionMode) {
+      const evalSteps = buildRevisionFlatSteps(lessons);
+      const lastLesson = lessons[lessons.length - 1]!;
+      return [
+        { kind: "eval_start", lesson: lastLesson },
+        ...evalSteps,
+        ...(evalSteps.length > 0 ? [{ kind: "pass_toggle" as const, lesson: lastLesson }] : []),
+      ];
+    }
+    return buildSteps(lessons, withEval);
+  });
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
-  const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
+  const initialIdx = (startAtEval || revisionMode) && evalStartIdx >= 0 ? evalStartIdx : 0;
 
   const [stepIdx, setStepIdx] = useState(initialIdx);
   const [answer, setAnswer] = useState("");
