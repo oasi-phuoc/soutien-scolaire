@@ -37,6 +37,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A2.1", "Addition"),
       sm("A2.2", "Soustraction"),
       sm("A2.3", "Estimation et arrondi"),
+      sm("RA.2", "Révision A2"),
     ],
   },
   {
@@ -52,6 +53,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A3.4", "Division en colonnes"),
       sm("A3.5", "Multiples et diviseurs"),
       sm("A3.6", "PGCD et PPCM"),
+      sm("RA.3", "Révision A3"),
     ],
   },
   {
@@ -67,7 +69,8 @@ export const MATH_MODULES: MathModule[] = [
       sm("A4.4", "Addition et soustraction"),
       sm("A4.5", "Multiplication"),
       sm("A4.6", "Division "),
-      sm("A4.7", "Fractions et décimaux")
+      sm("A4.7", "Fractions et décimaux"),
+      sm("RA.4", "Révision A4"),
     ],
   },
   {
@@ -84,6 +87,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A5.4", "Addition et soustraction"),
       sm("A5.5", "Multiplication"),
       sm("A5.6", "Division"),
+      sm("RA.5", "Révision A5"),
     ],
   },
   {
@@ -100,6 +104,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A6.5", "Tableau de proportionnalité"),
       sm("A6.6", "Règle de trois"),
       sm("A6.7", "Échelles"),
+      sm("RA.6", "Révision A6"),
     ],
   },
   {
@@ -114,6 +119,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A7.3", "Addition et soustraction"),
       sm("A7.4", "Multiplication et division (signes)"),
       sm("A7.5", "Valeur absolue"),
+      sm("RA.7", "Révision A7"),
     ],
   },
   {
@@ -128,6 +134,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A8.3", "Puissances de 10"),
       sm("A8.4", "Racine carrée (carrés parfaits)"),
       sm("A8.5", "Valeur approchée"),
+      sm("RA.8", "Révision A8"),
     ],
   },
   {
@@ -143,6 +150,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A9.4", "Réduction"),
       sm("A9.5", "Développement simple"),
       sm("A9.6", "Factorisation simple"),
+      sm("RA.9", "Révision A9"),
     ],
   },
   {
@@ -158,6 +166,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A10.4", "Parenthèses"),
       sm("A10.5", "Équations avec fractions"),
       sm("A10.6", "Problèmes concrets"),
+      sm("RA.10", "Révision A10"),
     ],
   },
   {
@@ -170,6 +179,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A11.1", "Symboles et droite"),
       sm("A11.2", "Résolution simple"),
       sm("A11.3", "Représentation graphique"),
+      sm("RA.11", "Révision A11"),
     ],
   },
   {
@@ -182,6 +192,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A12.1", "Substitution"),
       sm("A12.2", "Addition / soustraction"),
       sm("A12.3", "Problèmes à 2 inconnues"),
+      sm("RA.12", "Révision A12"),
     ],
   },
   {
@@ -198,6 +209,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A13.5", "Affine f(x)=ax+b"),
       sm("A13.6", "Pente et ordonnée"),
       sm("A13.7", "Lecture graphique"),
+      sm("RA.13", "Révision A13"),
     ],
   },
   {
@@ -363,27 +375,6 @@ export const MATH_MODULES: MathModule[] = [
       sm("G10.4", "Angle à partir du rapport"),
       sm("G10.5", "Côté inconnu"),
       sm("G10.6", "Applications"),
-    ],
-  },
-  {
-    id: "RA",
-    code: "RA",
-    title: "Révision — Calculs",
-    branch: "algebra",
-    prerequisiteIds: ["A1"],
-    submodules: [
-      sm("RA.2",  "Révision A2"),
-      sm("RA.3",  "Révision A3"),
-      sm("RA.4",  "Révision A4"),
-      sm("RA.5",  "Révision A5"),
-      sm("RA.6",  "Révision A6"),
-      sm("RA.7",  "Révision A7"),
-      sm("RA.8",  "Révision A8"),
-      sm("RA.9",  "Révision A9"),
-      sm("RA.10", "Révision A10"),
-      sm("RA.11", "Révision A11"),
-      sm("RA.12", "Révision A12"),
-      sm("RA.13", "Révision A13"),
     ],
   },
   {

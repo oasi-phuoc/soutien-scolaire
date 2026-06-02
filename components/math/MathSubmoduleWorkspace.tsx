@@ -67,6 +67,13 @@ type EvalPhaseKind = "eval_start" | "pass_toggle" | "results";
 function isEvalPhaseKind(k: string): k is EvalPhaseKind { return EVAL_PHASE_KINDS.has(k as EvalPhaseKind); }
 function notInBar(s: WorkspaceStep) { return isEvalPhaseKind(s.kind); }
 
+function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
+  if (step && "count" in step && typeof (step as { count?: number }).count === "number") {
+    return (step as { count: number }).count;
+  }
+  return stored?.t ?? 1;
+}
+
 function shufflePick<T>(arr: T[], n: number): T[] {
   const copy = [...arr];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -1115,7 +1122,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
       const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
       const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
-      const total = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.t ?? 1), 0);
+      const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
@@ -1421,7 +1428,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
         const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
         const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
         const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
-        const total = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.t ?? 1), 0);
+        const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
         const pct = total > 0 ? Math.round((correct / total) * 100) : 0;
         const grade = percentToSwissGrade(pct);
         const passed = grade >= PASSING_GRADE;
@@ -1432,7 +1439,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               {exIndices.map((idx, i) => {
                 const sc = evalScores[idx];
                 const c = sc?.c ?? 0;
-                const t = sc?.t ?? 1;
+                const t = stepExpectedTotal(steps[idx], sc);
                 const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
                 return (
                   <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
