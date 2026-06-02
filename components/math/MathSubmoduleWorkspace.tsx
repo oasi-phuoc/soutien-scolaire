@@ -36,7 +36,7 @@ type WorkspaceStep =
   | { kind: "fraction_compare"; exNum: number; mode: "same-den" | "same-num" | "diff-both" }
   | { kind: "frac_to_dec"; exNum: number; variant: "basic" | "extended" }
   | { kind: "dec_to_frac"; exNum: number; variant: "basic" | "extended" }
-  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode; count?: number }
+  | { kind: "frac_ops"; exType: 1|2|3|4|5|6|7|8|9; opMode: FracOpMode; count?: number; displayExNum?: number }
   | { kind: "dec_read_decompose"; exNum: number }
   | { kind: "dec_read_recompose"; exNum: number }
   | { kind: "dec_read_place_value"; exNum: number }
@@ -268,13 +268,13 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     for (let ex = 1; ex <= 5; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4|5, opMode });
     }
-    steps.push({ kind: "frac_ops", exType: 9, opMode });
+    steps.push({ kind: "frac_ops", exType: 9, opMode, displayExNum: 6 });
     // Evaluation: Ex1-4 + Ex9, 4 questions each (1 pt per question)
     steps.push({ kind: "eval_start" });
     for (let ex = 1; ex <= 4; ex++) {
       steps.push({ kind: "frac_ops", exType: ex as 1|2|3|4, opMode, count: 4 });
     }
-    steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4 });
+    steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4, displayExNum: 5 });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1368,7 +1368,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
       {/* A4-4/5/6 fraction operations exercises */}
       {currentStep?.kind === "frac_ops" && (
-        <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} displayExNum={currentStep.displayExNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* Generic text exercise */}

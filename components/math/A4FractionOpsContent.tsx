@@ -197,10 +197,11 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
 // exType 1-4: structType 1-4, numbers 1-12
 // exType 5-8: structType 1-4, numbers 10-99
 // exType 9:   structType 5 (3 fractions), numbers 1-12
-export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand, onValidated }: {
+export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, validateCommand, onValidated }: {
   exType: 1|2|3|4|5|6|7|8|9;
   opMode: FracOpMode;
   count?: number;
+  displayExNum?: number;
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
@@ -234,7 +235,9 @@ export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
   const is3Part = exType === 9;
-  const cols = is3Part ? 'auto auto auto auto auto auto auto auto' : 'auto auto auto auto auto auto';
+  const cols = is3Part
+    ? '1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 3.5rem'
+    : '1.5rem 2.5rem 1.5rem 2.5rem 1.5rem 3.5rem';
   const part = (p: Part) => p.kind === "frac"
     ? <VFrac n={p.n} d={p.d} />
     : <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{p.v}</span>;
@@ -242,7 +245,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, validateCommand
   return (
     <div className="space-y-5">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exType}</h2>
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {displayExNum ?? exType}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Effectuez les calculs suivants.</p>
       </div>
       <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: cols }}>
