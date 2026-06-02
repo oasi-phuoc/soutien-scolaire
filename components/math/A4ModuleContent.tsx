@@ -1586,7 +1586,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écris sous forme de fraction.</p>
       </div>
-      <div className="grid items-center gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem auto auto auto" }}>
+      <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 5rem 1.5rem 3.5rem", alignItems: "center" }}>
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
           const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
@@ -1594,8 +1594,8 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
             <React.Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
               <span className="text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.decStr}</span>
-              <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-              <span className="inline-flex flex-col items-center gap-[2px]">
+              <span className="text-base font-semibold text-[var(--color-text-primary)] text-center">=</span>
+              <span className="flex flex-col items-center gap-[2px]">
                 {isWrong ? (
                   <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
                     <span className="text-xs text-amber-600 line-through tabular-nums">{answers[i] || "—"}</span>
