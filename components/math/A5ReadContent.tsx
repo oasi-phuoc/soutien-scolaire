@@ -46,16 +46,16 @@ function speakFr(text: string) {
 function acc(s: string): string[] { return [s, s.replace(",", ".")]; }
 
 // Correction box (amber, wrong then correct)
-function Err({ wrong, correct }: { wrong: string; correct: string }) {
+function Err({ wrong, correct, className }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[4rem] justify-center">
+    <span className={`inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm h-9 justify-center ${className ?? "min-w-[5rem]"}`}>
       <span className="text-amber-600 line-through tabular-nums">{wrong || "—"}</span>
       <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
     </span>
   );
 }
 const IC = (w: boolean) =>
-  `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums ${
+  `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums h-9 ${
     w
       ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"

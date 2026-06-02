@@ -226,9 +226,9 @@ function DetailModal({
   const frenchTabs = frenchDetail(user.progress_data);
   const lectureItems = lectureDetail(user.progress_data);
 
-  const [mathOpen, setMathOpen] = useState(true);
-  const [frenchOpen, setFrenchOpen] = useState(true);
-  const [lectureOpen, setLectureOpen] = useState(true);
+  const [mathOpen, setMathOpen] = useState(false);
+  const [frenchOpen, setFrenchOpen] = useState(false);
+  const [lectureOpen, setLectureOpen] = useState(false);
 
   const isSelf = user.id === currentUserId;
   const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
@@ -620,14 +620,24 @@ export function AdminTable({
     <>
       {/* Filters */}
       <div className="mb-4">
-        <div className="mb-2">
-          <input
-            type="search"
-            placeholder="Rechercher un élève…"
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
-          />
+        <div className="mb-2 flex items-center gap-2">
+          <div className="relative flex-1 max-w-sm">
+            <input
+              type="search"
+              autoComplete="off"
+              placeholder="Rechercher un élève…"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+            />
+          </div>
+          <button
+            onClick={() => setSearch("")}
+            className="flex h-9 items-center gap-1.5 rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-medium text-zinc-500 hover:bg-zinc-50 hover:text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          >
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6 6 18M6 6l12 12" /></svg>
+            Effacer
+          </button>
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex overflow-hidden rounded-full border border-zinc-200 bg-zinc-100 p-0.5 dark:border-zinc-700 dark:bg-zinc-800">
@@ -661,9 +671,9 @@ export function AdminTable({
       <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
+            <tr className="border-b border-violet-700 bg-violet-600 dark:border-violet-800 dark:bg-violet-700">
               {["Statut", "Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">{h}</th>
+                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-violet-100">{h}</th>
               ))}
             </tr>
           </thead>
