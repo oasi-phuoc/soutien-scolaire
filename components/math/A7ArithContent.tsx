@@ -43,14 +43,42 @@ type RelQ = {
   missingPos: "result" | "a" | "b";
 };
 
-function genAddSubQ(range: number, missingOperand: boolean): RelQ {
+function genAddSubQ(range: number, missingOperand: boolean, forceAdd?: boolean): RelQ {
   const a = rnd(-range, range);
   const b = rnd(-range, range);
-  const useAdd = Math.random() < 0.5;
+  const useAdd = forceAdd !== undefined ? forceAdd : Math.random() < 0.5;
   const result = useAdd ? a + b : a - b;
   const missingPos: RelQ["missingPos"] = !missingOperand ? "result"
     : Math.random() < 0.5 ? "a" : "b";
   return { a, b, op: useAdd ? "+" : "−", result, missingPos };
+}
+
+function genBalancedAddSubQuestions(range: number, count: number, missingOperand: boolean): RelQ[] {
+  const addCount = count <= 4 ? Math.floor(count / 2) : (Math.random() < 0.5 ? 2 : 3);
+  const subCount = count - addCount;
+  const qs: RelQ[] = [];
+  for (let i = 0; i < addCount; i++) qs.push(genAddSubQ(range, missingOperand, true));
+  for (let i = 0; i < subCount; i++) qs.push(genAddSubQ(range, missingOperand, false));
+  for (let i = qs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [qs[i], qs[j]] = [qs[j]!, qs[i]!];
+  }
+  return qs;
+}
+
+function genEx5Questions(range: number): RelQ[] {
+  function makeQ(aSign: 1 | -1, bSign: 1 | -1): RelQ {
+    const a = aSign * rnd(1, range);
+    const b = bSign * rnd(1, range);
+    const useAdd = Math.random() < 0.5;
+    return { a, b, op: useAdd ? "+" : "−", result: useAdd ? a + b : a - b, missingPos: "result" };
+  }
+  const qs: RelQ[] = [makeQ(1, 1), makeQ(-1, -1), makeQ(1, -1), makeQ(-1, 1), genAddSubQ(range, false)];
+  for (let i = qs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [qs[i], qs[j]] = [qs[j]!, qs[i]!];
+  }
+  return qs;
 }
 
 function genMulDivQ(range: number, missingOperand: boolean): RelQ {
@@ -188,14 +216,17 @@ function RelArithExercise({
 }
 
 export function A7RelArithExercise({
-  exNum, range, count, missingOperand, timer, validateCommand, onValidated,
+  exNum, range, count, missingOperand, timer, questionMode, validateCommand, onValidated,
 }: {
   exNum: number; range: number; count: number; missingOperand: boolean; timer?: number;
+  questionMode?: "balanced" | "ex5";
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
-  const [questions] = useState<RelQ[]>(() =>
-    Array.from({ length: count }, () => genAddSubQ(range, missingOperand))
-  );
+  const [questions] = useState<RelQ[]>(() => {
+    if (questionMode === "balanced") return genBalancedAddSubQuestions(range, count, missingOperand);
+    if (questionMode === "ex5") return genEx5Questions(range);
+    return Array.from({ length: count }, () => genAddSubQ(range, missingOperand));
+  });
   return (
     <RelArithExercise exNum={exNum} questions={questions} timer={timer}
       validateCommand={validateCommand} onValidated={onValidated} />

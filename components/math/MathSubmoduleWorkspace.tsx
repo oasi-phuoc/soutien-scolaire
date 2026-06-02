@@ -55,7 +55,7 @@ type WorkspaceStep =
   | { kind: "a7_nl_read_neg"; exNum: number }
   | { kind: "a7_nl_place_neg"; exNum: number }
   | { kind: "a7_compare_ex"; exNum: number; level: 1 | 2 }
-  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
+  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" }
   | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
@@ -168,17 +168,21 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a7_compare_ex", exNum: 2, level: 2 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-3") {
-    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 5, missingOperand: false });
-    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 8, missingOperand: false, timer: 60 });
-    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 5, missingOperand: true });
-    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 5, missingOperand: false });
-    steps.push({ kind: "a7_rel_arith", exNum: 5, range: 15, count: 8, missingOperand: false, timer: 60 });
-    steps.push({ kind: "a7_rel_arith", exNum: 6, range: 15, count: 5, missingOperand: true });
-    steps.push({ kind: "a7_rel_arith", exNum: 7, range: 20, count: 5, missingOperand: false });
+    // Training: Ex1-4 balanced, Ex5 sign patterns, Ex6-8 (extended range practice)
+    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 5, missingOperand: false, questionMode: "balanced", timer: 60 });
+    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 5, missingOperand: true, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 5, range: 15, count: 5, missingOperand: false, questionMode: "ex5" });
+    steps.push({ kind: "a7_rel_arith", exNum: 6, range: 15, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 7, range: 15, count: 5, missingOperand: true, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 8, range: 20, count: 5, missingOperand: false, questionMode: "balanced" });
+    // Evaluation: Ex1-4 with 4 questions each
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 15, count: 5, missingOperand: false });
-    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 15, count: 5, missingOperand: true });
-    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 20, count: 5, missingOperand: false });
+    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 4, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 4, missingOperand: false, questionMode: "balanced", timer: 60 });
+    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 4, missingOperand: true, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 4, missingOperand: false, questionMode: "balanced" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-4") {
     steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
@@ -1300,7 +1304,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
       {/* A7-3 relative addition/subtraction exercises */}
       {currentStep?.kind === "a7_rel_arith" && (
-        <A7RelArithExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7RelArithExercise key={exerciseKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} questionMode={currentStep.questionMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A7-4 relative multiplication/division exercises */}
