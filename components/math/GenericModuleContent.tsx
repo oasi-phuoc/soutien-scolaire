@@ -4965,7 +4965,7 @@ export function GenericModuleContent({
       )}
 
       {/* Hint button — training phase only */}
-      {!inEvalPhase && currentStep && currentStep.kind !== "theory" && currentStep.kind !== "eval_start" && currentStep.kind !== "pass_toggle" && getStepHint(currentStep) && (
+      {!inEvalPhase && currentStep && currentStep.kind !== "theory" && getStepHint(currentStep) && (
         <div className="flex justify-end mb-1">
           <HintButton onClick={() => setShowHint(true)} />
         </div>
