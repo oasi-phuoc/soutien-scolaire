@@ -3524,7 +3524,7 @@ export function GenericModuleContent({
     setEvalEarnedPts(0);
     setEvalTotalPts_state(0);
     setEvalRowData([]);
-    setSteps(buildSteps(lessons, withEval));
+    setSteps(buildSteps(lessons ?? [], withEval));
     goTo(stepIdx + 1);
   }
 
