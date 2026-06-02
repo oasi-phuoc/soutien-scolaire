@@ -91,6 +91,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
   const [prenom, setPrenom] = useState("");
   const [nom, setNom] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [classeType, setClasseType] = useState("");
   const [classeNum, setClasseNum] = useState("");
   const [langue, setLangue] = useState("");
@@ -100,8 +101,14 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
 
   const loginId = buildLoginId(prenom, nom);
 
+  const passwordMismatch = confirmPassword.length > 0 && password !== confirmPassword;
+
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      setFormError("Les mots de passe ne correspondent pas.");
+      return;
+    }
     setFormError(null);
     const formData = new FormData(e.currentTarget);
     startTransition(async () => {
@@ -224,6 +231,20 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
           <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
         </div>
 
+        {/* Confirmation mot de passe */}
+        <div>
+          <label htmlFor="confirm_password" className={labelCls}>Confirmer le mot de passe{reqTag}</label>
+          <input
+            id="confirm_password" name="confirm_password" type="password" required
+            autoComplete="new-password" value={confirmPassword}
+            onChange={e => setConfirmPassword(e.target.value)}
+            className={`${inputCls} ${passwordMismatch ? "border-red-400 focus:border-red-500" : ""}`}
+          />
+          {passwordMismatch && (
+            <p className="mt-1 text-xs text-red-600 dark:text-red-400">Les mots de passe ne correspondent pas.</p>
+          )}
+        </div>
+
         {/* Coordonnées */}
         <div className="pt-1">
           <p className="text-xs font-semibold uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
@@ -253,7 +274,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
 
         <button
           type="submit"
-          disabled={pending || !loginId}
+          disabled={pending || !loginId || passwordMismatch}
           className="mt-2 min-h-12 rounded-xl bg-teal-700 text-base font-semibold text-white disabled:opacity-60 dark:bg-teal-600"
         >
           {pending ? "Inscription en cours…" : "M'inscrire"}
