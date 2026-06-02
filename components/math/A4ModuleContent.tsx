@@ -68,7 +68,7 @@ function renderFracText(text: string): React.ReactNode {
       nodes.push(
         <span key={i} className="inline-flex flex-col items-center leading-none gap-0.5 mx-0.5 align-middle">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}</span>
-          <span className="h-0.5 w-6 rounded bg-[var(--color-text-primary)]" />
+          <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
           <span className="text-xs font-bold text-[var(--color-text-primary)]">{den}</span>
         </span>
       );
@@ -226,7 +226,7 @@ function FractionDisplay({ numerator, denominator, highlightPart }: {
       <span className={`text-base font-bold leading-none tabular-nums ${highlightPart === "num" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
         {numerator}
       </span>
-      <span className="h-0.5 w-6 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-[1.5px] w-6 rounded bg-[var(--color-text-primary)]" />
       <span className={`text-base font-bold leading-none tabular-nums ${highlightPart === "den" ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
         {denominator}
       </span>
@@ -242,7 +242,7 @@ function FracInline({ frac }: { frac: string }) {
   return (
     <span className="inline-flex flex-col items-center leading-none gap-0.5">
       <span className="text-sm font-bold text-[var(--color-accent-alg)]">{n}</span>
-      <span className="h-0.5 w-5 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-[1.5px] w-5 rounded bg-[var(--color-text-primary)]" />
       <span className="text-sm font-bold text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
@@ -1155,7 +1155,7 @@ function VFracNum({ n, d }: { n: number; d: number }) {
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-      <span className="h-0.5 w-12 rounded-full bg-[var(--color-text-primary)]" />
+      <span className="h-[1.5px] w-12 rounded-full bg-[var(--color-text-primary)]" />
       <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
@@ -1185,7 +1185,7 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled, co
         ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{n}</span>
       }
-      <span className="h-0.5 w-12 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {missingPos === "den"
         ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{d}</span>
@@ -1213,7 +1213,7 @@ function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled, correctN
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
-      <span className="h-0.5 w-12 rounded bg-[var(--color-text-primary)]" />
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
     </span>
   );
@@ -1521,7 +1521,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
               <span className="inline-flex flex-col items-center gap-[2px]">
                 <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-accent-alg)]">{q.num}</span>
-                <span className="h-0.5 w-8 rounded bg-[var(--color-text-primary)]" />
+                <span className="h-[1.5px] w-8 rounded bg-[var(--color-text-primary)]" />
                 <span className="h-8 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
               </span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
@@ -1604,7 +1604,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
                 ) : (
                   <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
                 )}
-                <span className="h-0.5 w-12 rounded bg-[var(--color-text-primary)]" />
+                <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
                 <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
               </span>
             </React.Fragment>
