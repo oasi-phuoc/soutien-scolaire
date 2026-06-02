@@ -8,6 +8,7 @@ import { buildLoginId } from "@/lib/auth/identifier";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUES = [
+  { code: "fr", label: "Français" },
   ...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })),
   { code: "other", label: "Autre" },
 ];
@@ -100,6 +101,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
   const [pending, startTransition] = useTransition();
 
   const loginId = buildLoginId(prenom, nom);
+  const isAncien = classeType === "ancien";
 
   const passwordMismatch = confirmPassword.length > 0 && password !== confirmPassword;
 
@@ -187,19 +189,22 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
           <div className="mt-1 grid grid-cols-2 gap-2">
             <select
               name="classe_type" required value={classeType}
-              onChange={e => setClasseType(e.target.value)}
+              onChange={e => { setClasseType(e.target.value); if (e.target.value === "ancien") setClasseNum(""); }}
               className={inputCls}
             >
               <option value="" disabled>Filière</option>
               {["CSC", "CFR", "EPL", "CPR"].map(c => (
                 <option key={c} value={c}>{c}</option>
               ))}
+              <option value="ancien">Ancien élève</option>
             </select>
             <input
-              name="classe_num" type="number" required min={1} max={20}
-              placeholder="Numéro (1–20)" value={classeNum}
+              name="classe_num" type="number" required={!isAncien} min={1} max={20}
+              placeholder={isAncien ? "—" : "Numéro (1–20)"}
+              disabled={isAncien}
+              value={isAncien ? "" : classeNum}
               onChange={e => setClasseNum(e.target.value)}
-              className={inputCls}
+              className={`${inputCls} ${isAncien ? "opacity-40 cursor-not-allowed" : ""}`}
             />
           </div>
         </div>

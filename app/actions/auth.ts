@@ -51,7 +51,9 @@ export async function signUpAction(
   const prenom = String(formData.get("prenom") ?? "").trim();
   const classeType = String(formData.get("classe_type") ?? "").trim();
   const classeNum = String(formData.get("classe_num") ?? "").trim();
-  const classe = classeType && classeNum ? `${classeType} ${classeNum}` : "";
+  const classe = classeType === "ancien"
+    ? "Ancien élève"
+    : classeType && classeNum ? `${classeType} ${classeNum}` : "";
   const adresse = String(formData.get("adresse") ?? "").trim();
   const npa = String(formData.get("npa") ?? "").trim();
   const localite = String(formData.get("localite") ?? "").trim();

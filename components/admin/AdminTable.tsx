@@ -8,6 +8,7 @@ import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import { PIVOT_LANGS } from "@/lib/pivot-langs";
 
 const LANGUE_LABELS: Record<string, string> = {
+  fr: "Français",
   ...Object.fromEntries(PIVOT_LANGS.map(l => [l.code, l.labelFr])),
   other: "Autre",
 };
