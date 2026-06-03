@@ -29,9 +29,9 @@ function acceptable(ans: string): string[] {
 // Inline correction box (same style as A4 exercises)
 function CorrectionBox({ wrong, correct }: { wrong: string; correct: string }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[3.5rem] justify-center">
-      <span className="text-amber-600 line-through tabular-nums">{wrong || "—"}</span>
-      <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    <span className="inline-flex flex-col items-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[3.5rem] justify-center">
+      <span className="text-amber-500 line-through tabular-nums leading-tight">{wrong || "—"}</span>
+      <span className="font-bold text-[var(--color-text-primary)] tabular-nums leading-tight">{correct}</span>
     </span>
   );
 }
@@ -416,9 +416,9 @@ export function DecArithGroupExercise({
           const inputEl = (_pos: MissingPos) => {
             if (wrongField) {
               return (
-                <div className={`${inputBaseArith} ${CLS_WRONG_ARITH} flex items-center justify-center gap-0.5`}>
-                  <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span>
+                <div className={`${inputBaseArith} ${CLS_WRONG_ARITH} flex flex-col items-center justify-center`}>
+                  <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
+                  <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span>
                 </div>
               );
             }
@@ -1714,9 +1714,9 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
       <div className="flex items-center gap-2 pt-1">
         <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
         {decWrong ? (
-          <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[5rem] justify-center">
-            <span className="text-amber-600 line-through tabular-nums">{decResult || "—"}</span>
-            <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{q.resultStr}</span>
+          <span className="inline-flex flex-col items-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[5rem] justify-center">
+            <span className="text-amber-500 line-through tabular-nums leading-tight">{decResult || "—"}</span>
+            <span className="font-bold text-[var(--color-text-primary)] tabular-nums leading-tight">{q.resultStr}</span>
           </span>
         ) : (
           <input type="text" value={decResult} disabled={validated}

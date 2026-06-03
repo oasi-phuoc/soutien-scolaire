@@ -179,9 +179,9 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
 }) {
   const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
   const corrBox = (val: string, correct: string | undefined) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
-      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
-      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
+      <span className="text-xs text-amber-500 line-through tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (

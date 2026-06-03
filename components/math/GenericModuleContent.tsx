@@ -1340,19 +1340,19 @@ function ArithmeticGroupExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex items-center justify-center gap-0.5`}><span className="line-through text-amber-500 text-xs">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold">{q.answer}</span></div>
+                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
@@ -2099,9 +2099,9 @@ function RoundingExercise({
             const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
             const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
             const field = wrongField
-              ? <div className={`${inputBase} ${CLS_WRONG_INL} flex items-center justify-center gap-0.5 overflow-hidden`}>
-                  <span className="line-through text-amber-500 text-[9px]">{v || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-[9px] font-bold ml-0.5">{q.answer}</span>
+              ? <div className={`${inputBase} ${CLS_WRONG_INL} flex flex-col items-center justify-center overflow-hidden`}>
+                  <span className="line-through text-amber-500 text-[9px] leading-none">{v || "—"}</span>
+                  <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{q.answer}</span>
                 </div>
               : <input
                   type={isDecKind ? "text" : "number"}
@@ -2171,9 +2171,9 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
               <FracDisplay num={q.num} den={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
               {wrong ? (
-                <div className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm flex items-center justify-center gap-0.5 ${CLS_WRONG}`}>
-                  <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                  <span className="text-xs font-bold">{q.ask === "num" ? q.num : q.den}</span>
+                <div className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                  <span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span>
+                  <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.ask === "num" ? q.num : q.den}</span>
                 </div>
               ) : (
                 <input
@@ -2219,9 +2219,9 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
               {q.missingPos === "num" ? (
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   {wrong ? (
-                    <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[9px]">{v||"—"}</span>
-                      <span className="text-[9px] font-bold">{correctAns}</span>
+                    <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
+                      <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
@@ -2235,9 +2235,9 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
-                    <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[9px]">{v||"—"}</span>
-                      <span className="text-[9px] font-bold">{correctAns}</span>
+                    <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
+                      <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
@@ -2278,9 +2278,9 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
               <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
               <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                 {wrong ? (
-                  <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px]">{ans.num||"—"}</span>
-                    <span className="text-[9px] font-bold">{q.simNum}</span>
+                  <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px] leading-none">{ans.num||"—"}</span>
+                    <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simNum}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
@@ -2288,9 +2288,9 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                 )}
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
-                  <div className={`w-12 rounded border flex items-center justify-center gap-0.5 py-1 ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px]">{ans.den||"—"}</span>
-                    <span className="text-[9px] font-bold">{q.simDen}</span>
+                  <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                    <span className="line-through text-amber-500 text-[9px] leading-none">{ans.den||"—"}</span>
+                    <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simDen}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value)}

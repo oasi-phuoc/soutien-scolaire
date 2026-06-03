@@ -1652,13 +1652,13 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
+        <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
           {result ? (
-            <span className="text-sm font-medium text-[var(--color-text-primary)]">{answer}</span>
+            <span className="text-sm font-bold text-[var(--color-text-primary)]">{answer}</span>
           ) : (
             <>
-              <span className="text-sm text-amber-600 line-through">{answer}</span>
-              <span className="text-sm font-medium text-[var(--color-text-primary)]">{correctWord}</span>
+              <span className="text-sm text-amber-500 line-through leading-tight">{answer}</span>
+              <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{correctWord}</span>
             </>
           )}
         </div>
@@ -2764,13 +2764,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex4Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
+                    <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
-                        <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex4Answers[i]}</span>
+                        <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex4Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-600 line-through">{ex4Answers[i]}</span>
-                          <span className="text-sm font-medium text-[var(--color-text-primary)]">{num}</span>
+                          <span className="text-sm text-amber-500 line-through leading-tight">{ex4Answers[i]}</span>
+                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{num}</span>
                         </>
                       )}
                     </div>
@@ -2808,13 +2808,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={nombreAudioSrc(num)} />
                   {ex5Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
+                    <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
-                        <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex5Answers[i]}</span>
+                        <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex5Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-600 line-through">{ex5Answers[i]}</span>
-                          <span className="text-sm font-medium text-[var(--color-text-primary)]">{num}</span>
+                          <span className="text-sm text-amber-500 line-through leading-tight">{ex5Answers[i]}</span>
+                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{num}</span>
                         </>
                       )}
                     </div>
@@ -2852,13 +2852,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <AudioPlayButton src={comp.clips[0]!} />
                   {ex6Validated && result !== null ? (
-                    <div className={`flex h-10 flex-1 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
+                    <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-blue-400 bg-[var(--color-bg-primary)]" : CLS_WRONG}`}>
                       {result ? (
-                        <span className="text-sm font-medium text-[var(--color-text-primary)]">{ex6Answers[i]}</span>
+                        <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex6Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-600 line-through">{ex6Answers[i]}</span>
-                          <span className="text-sm font-medium text-[var(--color-text-primary)]">{comp.value}</span>
+                          <span className="text-sm text-amber-500 line-through leading-tight">{ex6Answers[i]}</span>
+                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{comp.value}</span>
                         </>
                       )}
                     </div>
