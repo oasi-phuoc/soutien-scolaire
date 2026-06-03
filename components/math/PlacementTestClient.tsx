@@ -153,10 +153,10 @@ function PlacementProgressBar({
           const isCurrent = i === current;
           const hasTyped = hasInput[i] ?? false;
 
+          if (isValidated) return null;
+
           let cls = "h-2 flex-1 rounded-full transition-colors cursor-pointer ";
-          if (isValidated) {
-            cls += "opacity-0 pointer-events-none"; // gap: invisible
-          } else if (isCurrent) {
+          if (isCurrent) {
             cls += "bg-amber-500";
           } else if (hasTyped) {
             cls += "bg-blue-400";
@@ -509,12 +509,12 @@ export function PlacementTestClient() {
       {/* Navigation bar (fixed bottom) */}
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
-          <div className="mx-auto flex max-w-xl gap-3 px-4 py-3">
+          <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button
               type="button"
               onClick={goPrev}
               disabled={findNextNonValidated(currentIdx, -1) < 0}
-              className="flex h-11 min-w-[5rem] shrink-0 items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
               Retour
@@ -524,18 +524,17 @@ export function PlacementTestClient() {
               <button
                 type="button"
                 onClick={triggerValidate}
-                className="flex-1 rounded-[var(--radius-lg)] bg-amber-500 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+                aria-label="Valider"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-amber-500 text-white transition-opacity hover:opacity-90 active:scale-90"
               >
-                Valider
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5"/></svg>
               </button>
             )}
 
             <button
               type="button"
               onClick={goNext}
-              className={`flex h-11 items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${
-                isCurrentValidated ? "flex-1" : "min-w-[5rem]"
-              }`}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
             >
               Suivant
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>
