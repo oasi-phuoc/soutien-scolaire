@@ -19,6 +19,33 @@ import {
   Exercise15,
 } from "@/components/math/placement/PlacementExercises1to15";
 import type { PlacementExerciseProps } from "@/components/math/placement/PlacementExercises1to15";
+import {
+  Exercise16,
+  Exercise17,
+  Exercise18,
+  Exercise19,
+  Exercise20,
+  Exercise21,
+  Exercise22,
+  Exercise23,
+  Exercise24,
+  Exercise25,
+  Exercise26,
+  Exercise27,
+} from "@/components/math/placement/PlacementExercises16to27";
+import {
+  Exercise28,
+  Exercise29,
+  Exercise30,
+  Exercise31,
+  Exercise32,
+  Exercise33,
+  Exercise34,
+  Exercise35,
+  Exercise36,
+  Exercise37,
+  Exercise38,
+} from "@/components/math/placement/PlacementExercises28to38";
 
 // ── Exercise registry ─────────────────────────────────────────────────────────
 
@@ -44,10 +71,33 @@ const EXERCISES: ExerciseMeta[] = [
   { id: 13, label: "Colonnes (1000–9999)", maxPoints: 4, component: Exercise13 },
   { id: 14, label: "Multiplication en colonnes", maxPoints: 2, component: Exercise14 },
   { id: 15, label: "Division en colonnes", maxPoints: 2, component: Exercise15 },
+  { id: 16, label: "Rectangle", maxPoints: 2, component: Exercise16 },
+  { id: 17, label: "Suites (grands nombres)", maxPoints: 3, component: Exercise17 },
+  { id: 18, label: "Trier des nombres", maxPoints: 2, component: Exercise18 },
+  { id: 19, label: "Additions et soustrations décimales", maxPoints: 4, component: Exercise19 },
+  { id: 20, label: "Multiplication décimale", maxPoints: 2, component: Exercise20 },
+  { id: 21, label: "Division décimale", maxPoints: 2, component: Exercise21 },
+  { id: 22, label: "Colorier les fractions", maxPoints: 2, component: Exercise22 },
+  { id: 23, label: "Conversions de longueur", maxPoints: 4, component: Exercise23 },
+  { id: 24, label: "Calculs décimaux", maxPoints: 4, component: Exercise24 },
+  { id: 25, label: "Parallélogramme", maxPoints: 2, component: Exercise25 },
+  { id: 26, label: "Triangle rectangle", maxPoints: 2, component: Exercise26 },
+  { id: 27, label: "Losange", maxPoints: 2, component: Exercise27 },
+  { id: 28, label: "Puissances et racines", maxPoints: 4, component: Exercise28 },
+  { id: 29, label: "Priorité des opérations", maxPoints: 2, component: Exercise29 },
+  { id: 30, label: "Nombres relatifs", maxPoints: 4, component: Exercise30 },
+  { id: 31, label: "Fractions", maxPoints: 4, component: Exercise31 },
+  { id: 32, label: "Pourcentages et règle de trois", maxPoints: 2, component: Exercise32 },
+  { id: 33, label: "Simplification algébrique", maxPoints: 2, component: Exercise33 },
+  { id: 34, label: "Évaluer des expressions", maxPoints: 2, component: Exercise34 },
+  { id: 35, label: "Résoudre des équations", maxPoints: 2, component: Exercise35 },
+  { id: 36, label: "Conversions d'unités", maxPoints: 4, component: Exercise36 },
+  { id: 37, label: "Trapèze", maxPoints: 2, component: Exercise37 },
+  { id: 38, label: "Cercle", maxPoints: 2, component: Exercise38 },
 ];
 
-const TOTAL_EXERCISES = EXERCISES.length; // 14 exercises for now (exercises 16–37 to be added)
-const TOTAL_MAX_POINTS = EXERCISES.reduce((s, e) => s + e.maxPoints, 0); // 44 for now, 100 when complete
+const TOTAL_EXERCISES = EXERCISES.length;
+const TOTAL_MAX_POINTS = EXERCISES.reduce((s, e) => s + e.maxPoints, 0);
 const TIMER_SECONDS = 90 * 60; // 90 minutes
 
 // ── Timer formatter ───────────────────────────────────────────────────────────
