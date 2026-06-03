@@ -220,10 +220,10 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 18 — Sort numbers (click mechanism) ─────────────────────────────
 
-function OrderingChips({ numbers, selected, onToggle, validated, fmt }: {
+function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false }: {
   numbers: number[]; selected: number[];
   onToggle: (n: number) => void; validated: boolean;
-  fmt: (n: number) => string;
+  fmt: (n: number) => string; desc?: boolean;
 }) {
   return (
     <div className="space-y-3">
@@ -255,7 +255,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt }: {
           ? selected.map((n, si) => (
             <React.Fragment key={si}>
               <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmt(n)}</span>
-              {si < selected.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs mx-0.5">{"<"}</span>}
+              {si < selected.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs mx-0.5">{desc ? ">" : "<"}</span>}
             </React.Fragment>
           ))
           : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
@@ -331,7 +331,7 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
         <p className="text-sm font-bold text-[var(--color-accent-alg)]">Série 2</p>
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} />
+          validated={validated} fmt={fmtDec2} desc />
       </div>
     </div>
   );
