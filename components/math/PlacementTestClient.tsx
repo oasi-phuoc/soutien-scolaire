@@ -449,14 +449,14 @@ export function PlacementTestClient() {
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-6 pb-40">
       {/* Page header */}
-      <div className="mb-4">
+      <div className="mb-4 flex items-center gap-2">
         <button
           type="button"
           onClick={() => setPhase("idle")}
-          className="mb-2 flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+          aria-label="Retour"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
-          Retour
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
       </div>
