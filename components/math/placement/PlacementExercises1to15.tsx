@@ -1116,8 +1116,7 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
       <div className="grid grid-cols-2 gap-3">
         {questions.map((q, i) => (
-          <div key={i} className="flex flex-col items-start gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center justify-center">
             <PlacementColCard
               a={q.a} b={q.b} op={q.op} result={q.result}
               answers={answers[i] ?? ["","","",""]}
@@ -1272,9 +1271,8 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
-      <div className="flex flex-wrap gap-4">
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+      <div className="flex gap-4">
+        <div className="flex flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
           <PlacementColCard
             a={data.a1} b={data.b1} op="×" result={data.r1}
             answers={q1Ans} carries={q1Carries}
@@ -1283,8 +1281,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             validated={validated}
           />
         </div>
-        <div className="flex flex-col items-center gap-1">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+        <div className="flex flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
           <PlacementMulCard2
             a={data.a2} b={data.b2} result={data.r2}
             answers={q2Ans} carries={q2Carries}
@@ -1468,7 +1465,7 @@ function makeDiv15Q(dividendCols: number, divisorCols: number): {
   for (;;) {
     let dividend: number, divisor: number;
     if (dividendCols === 4 && divisorCols === 1) {
-      dividend = randInt(1000, 9999); divisor = randInt(2, 9);
+      dividend = randInt(1000, 9999); divisor = randInt(4, 9);
     } else {
       dividend = randInt(1000, 9999); let d = randInt(11, 99);
       while (d % 10 === 0) d = randInt(11, 99);
