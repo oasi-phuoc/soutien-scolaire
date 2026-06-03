@@ -66,7 +66,7 @@ function CorrectionInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-0.5 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent-alg)]`}
+      className={`${width} rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
     />
   );
 }
@@ -276,29 +276,29 @@ function SeqQuestion({
   onChange: (idx: 0 | 1, v: string) => void;
 }) {
   return (
-    <div className="space-y-1">
+    <div className="space-y-2">
       <span className="text-xs font-bold text-[var(--color-accent-alg)]">Séquence {qNum}</span>
-      <div className="flex items-center gap-1 flex-wrap">
+      <div className="flex items-center gap-1.5 flex-wrap">
         {values.map((v, i) => {
           const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
           if (blankIdx === 0 || blankIdx === 1) {
             return (
               <React.Fragment key={i}>
-                {i > 0 && <span className="text-[var(--color-text-secondary)]">—</span>}
+                {i > 0 && <span className="text-xs text-[var(--color-text-secondary)]">—</span>}
                 <CorrectionInput
                   value={answers[blankIdx]}
                   onChange={(val) => onChange(blankIdx, val)}
                   correct={String(v)}
                   validated={validated}
-                  width="w-14"
+                  width="h-9 w-14"
                 />
               </React.Fragment>
             );
           }
           return (
             <React.Fragment key={i}>
-              {i > 0 && <span className="text-[var(--color-text-secondary)]">—</span>}
-              <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{v}</span>
+              {i > 0 && <span className="text-xs text-[var(--color-text-secondary)]">—</span>}
+              <div className="flex h-9 w-14 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             </React.Fragment>
           );
         })}
@@ -507,19 +507,21 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
-      {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-          {renderMissingOp(
-            q,
-            answers[i] ?? "",
-            (v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; }),
-            validated
-          )}
-        </div>
-      ))}
+      <div className="grid grid-cols-2 gap-3">
+        {questions.map((q, i) => (
+          <div key={i} className="flex items-center gap-2 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+            <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {renderMissingOp(
+              q,
+              answers[i] ?? "",
+              (v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; }),
+              validated
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -558,6 +560,89 @@ function SimpleColumnGrid({ a, b, op, result, answer, onChange, validated }: {
   );
 }
 
+// ── Placement Column Card (M/C/D/U grid for Exercise 6) ──────────────────────
+
+const COL_HDRS_MCDU = ["M", "C", "D", "U"] as const;
+
+function d4(n: number): [number, number, number, number] {
+  return [Math.floor(n / 1000), Math.floor((n % 1000) / 100), Math.floor((n % 100) / 10), n % 10];
+}
+
+function PlacementColCard({ a, b, op, result, answers, onChange, validated }: {
+  a: number; b: number; op: "+" | "-";
+  result: number; answers: string[];
+  onChange: (col: number, val: string) => void; validated: boolean;
+}) {
+  const aD = d4(a), bD = d4(b), rD = d4(result);
+  const aFz = aD.findIndex(x => x !== 0);
+  const bFz = bD.findIndex(x => x !== 0);
+  const rFz = rD.findIndex(x => x !== 0);
+
+  return (
+    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {COL_HDRS_MCDU.map(h => (
+              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td />
+            {aD.map((d, col) => (
+              <td key={col} className="text-center">
+                <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{col < aFz ? "" : d}</div>
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
+            {bD.map((d, col) => (
+              <td key={col} className="text-center">
+                <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{col < bFz ? "" : d}</div>
+              </td>
+            ))}
+          </tr>
+          <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {rD.map((d, col) => {
+              const val = answers[col] ?? "";
+              const isLeading = col < rFz;
+              if (validated) {
+                const ok = val.trim() === String(d) || (d === 0 && isLeading && (val.trim() === "" || val.trim() === "0"));
+                return (
+                  <td key={col} className="text-center">
+                    {ok ? (
+                      <div className="flex h-8 w-8 items-center justify-center rounded border border-green-300 bg-green-50 font-mono text-base text-green-700 dark:bg-green-950/30 dark:text-green-400">{isLeading ? "" : d}</div>
+                    ) : (
+                      <div className="flex h-8 w-8 flex-col items-center justify-center rounded border border-amber-300 bg-amber-50 dark:bg-amber-950/30">
+                        <span className="text-[9px] leading-none line-through text-amber-500">{val || "—"}</span>
+                        <span className="text-[9px] font-bold leading-none text-[var(--color-text-primary)]">{d}</span>
+                      </div>
+                    )}
+                  </td>
+                );
+              }
+              return (
+                <td key={col} className="text-center">
+                  <input type="text" inputMode="numeric" maxLength={1} value={val}
+                    onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+                    className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
+                  />
+                </td>
+              );
+            })}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): ColArithQuestion[] => {
     const qs: ColArithQuestion[] = [];
@@ -577,31 +662,35 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [answers, setAnswers] = useState<string[][]>(() => Array(4).fill(null).map(() => ["", "", "", ""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      if (answers[i]?.trim() === String(q.result)) pts++;
+      const d = answers[i] ?? [];
+      const reconstructed =
+        (parseInt(d[0] || "0") || 0) * 1000 +
+        (parseInt(d[1] || "0") || 0) * 100 +
+        (parseInt(d[2] || "0") || 0) * 10 +
+        (parseInt(d[3] || "0") || 0);
+      if (reconstructed === q.result) pts++;
     });
     onValidated(pts, 4);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat.</p>
-      <div className="flex flex-wrap gap-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
+      <div className="grid grid-cols-2 gap-3">
         {questions.map((q, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <SimpleColumnGrid
-              a={q.a} b={q.b} op={q.op} result={q.result}
-              answer={answers[i] ?? ""}
-              onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
-              validated={validated}
-            />
-          </div>
+          <PlacementColCard
+            key={i}
+            a={q.a} b={q.b} op={q.op as "+" | "-"} result={q.result}
+            answers={answers[i] ?? ["", "", "", ""]}
+            onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+            validated={validated}
+          />
         ))}
       </div>
     </div>
@@ -640,28 +729,30 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en dizaines et unités.</p>
       {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-          <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{q.n} =</span>
-          <CorrectionInput
-            value={answers[i]?.[0] ?? ""}
-            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![0] = v; return next; })}
-            correct={String(q.tens)}
-            validated={validated}
-            width="w-14"
-          />
-          <span className="text-sm text-[var(--color-text-secondary)]">diz. +</span>
-          <CorrectionInput
-            value={answers[i]?.[1] ?? ""}
-            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![1] = v; return next; })}
-            correct={String(q.units)}
-            validated={validated}
-            width="w-14"
-          />
-          <span className="text-sm text-[var(--color-text-secondary)]">unit.</span>
+        <div key={i} className="flex items-center gap-3">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
+            <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{q.n} =</span>
+            <CorrectionInput
+              value={answers[i]?.[0] ?? ""}
+              onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![0] = v; return next; })}
+              correct={String(q.tens)}
+              validated={validated}
+              width="w-14"
+            />
+            <span className="text-sm text-[var(--color-text-secondary)]">diz. +</span>
+            <CorrectionInput
+              value={answers[i]?.[1] ?? ""}
+              onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![1] = v; return next; })}
+              correct={String(q.units)}
+              validated={validated}
+              width="w-14"
+            />
+            <span className="text-sm text-[var(--color-text-secondary)]">unit.</span>
+          </div>
         </div>
       ))}
     </div>
@@ -962,29 +1053,33 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre.</p>
       {/* Q1 */}
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">1.</span>
-        <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n3} =</span>
-        <CorrectionInput value={ans3[0]} onChange={(v) => setAns3(p => [v, p[1], p[2]])} correct={String(h3)} validated={validated} width="w-14" />
-        <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-        <CorrectionInput value={ans3[1]} onChange={(v) => setAns3(p => [p[0], v, p[2]])} correct={String(t3)} validated={validated} width="w-14" />
-        <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-        <CorrectionInput value={ans3[2]} onChange={(v) => setAns3(p => [p[0], p[1], v])} correct={String(u3)} validated={validated} width="w-14" />
+      <div className="flex items-center gap-3">
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+        <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
+          <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n3} =</span>
+          <CorrectionInput value={ans3[0]} onChange={(v) => setAns3(p => [v, p[1], p[2]])} correct={String(h3)} validated={validated} width="w-14" />
+          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
+          <CorrectionInput value={ans3[1]} onChange={(v) => setAns3(p => [p[0], v, p[2]])} correct={String(t3)} validated={validated} width="w-14" />
+          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
+          <CorrectionInput value={ans3[2]} onChange={(v) => setAns3(p => [p[0], p[1], v])} correct={String(u3)} validated={validated} width="w-14" />
+        </div>
       </div>
       {/* Q2 */}
-      <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">2.</span>
-        <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n4} =</span>
-        <CorrectionInput value={ans4[0]} onChange={(v) => setAns4(p => [v, p[1], p[2], p[3]])} correct={String(k4)} validated={validated} width="w-14" />
-        <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-        <CorrectionInput value={ans4[1]} onChange={(v) => setAns4(p => [p[0], v, p[2], p[3]])} correct={String(h4)} validated={validated} width="w-14" />
-        <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-        <CorrectionInput value={ans4[2]} onChange={(v) => setAns4(p => [p[0], p[1], v, p[3]])} correct={String(t4)} validated={validated} width="w-14" />
-        <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-        <CorrectionInput value={ans4[3]} onChange={(v) => setAns4(p => [p[0], p[1], p[2], v])} correct={String(u4)} validated={validated} width="w-14" />
+      <div className="flex items-center gap-3">
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+        <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
+          <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n4} =</span>
+          <CorrectionInput value={ans4[0]} onChange={(v) => setAns4(p => [v, p[1], p[2], p[3]])} correct={String(k4)} validated={validated} width="w-14" />
+          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
+          <CorrectionInput value={ans4[1]} onChange={(v) => setAns4(p => [p[0], v, p[2], p[3]])} correct={String(h4)} validated={validated} width="w-14" />
+          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
+          <CorrectionInput value={ans4[2]} onChange={(v) => setAns4(p => [p[0], p[1], v, p[3]])} correct={String(t4)} validated={validated} width="w-14" />
+          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
+          <CorrectionInput value={ans4[3]} onChange={(v) => setAns4(p => [p[0], p[1], p[2], v])} correct={String(u4)} validated={validated} width="w-14" />
+        </div>
       </div>
     </div>
   );
