@@ -79,7 +79,7 @@ function GeoRow({ label, unit, value, answer, onChange, validated }: {
 
 export function Exercise16({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    let w = randInt(3, 15), h = randInt(3, 12);
+    const w = randInt(3, 15); let h = randInt(3, 12);
     while (h === w) h = randInt(3, 12);
     return { w, h, perimeter: 2 * (w + h), area: w * h };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -362,7 +362,7 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
     let b3 = randInt(5, 40) + randInt(1, 99) / 100;
     if (b3 > a3) [a3, b3] = [b3, a3];
     let a4 = randInt(20, 90) + randInt(1, 9) / 10;
-    let b4 = randInt(1, 9) + randInt(1, 99) / 100;
+    const b4 = randInt(1, 9) + randInt(1, 99) / 100;
     if (b4 > a4) { a4 += 10; }
     return [
       dec2(Math.round(a1 * 100) / 100, Math.round(b1 * 100) / 100, "+"),
