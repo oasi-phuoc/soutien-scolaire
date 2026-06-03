@@ -164,21 +164,15 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
         if (isVisible) {
           return (
-            <React.Fragment key={i}>
-              {i > 0 && <span className="text-[var(--color-text-secondary)] text-sm">—</span>}
-              <span className="font-mono text-sm font-semibold text-[var(--color-text-primary)]">{display}</span>
-            </React.Fragment>
+            <div key={i} className="inline-flex h-9 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{display}</div>
           );
         }
         const bi = blankIdx++;
         const correct = display;
         const ans = answers[bi] ?? "";
         return (
-          <React.Fragment key={i}>
-            {i > 0 && <span className="text-[var(--color-text-secondary)] text-sm">—</span>}
-            <CorrectionInput value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-              validated={validated} width={isInt ? "w-24" : "w-16"} />
-          </React.Fragment>
+          <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
+            validated={validated} width={isInt ? "h-9 min-w-[6rem] px-3 rounded-full" : "h-9 min-w-[4.5rem] px-3 rounded-full"} />
         );
       })}
     </div>

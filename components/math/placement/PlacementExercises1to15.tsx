@@ -283,23 +283,18 @@ function SeqQuestion({
           const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
           if (blankIdx === 0 || blankIdx === 1) {
             return (
-              <React.Fragment key={i}>
-                {i > 0 && <span className="text-xs text-[var(--color-text-secondary)]">—</span>}
-                <CorrectionInput
-                  value={answers[blankIdx]}
-                  onChange={(val) => onChange(blankIdx, val)}
-                  correct={String(v)}
-                  validated={validated}
-                  width="h-9 w-14"
-                />
-              </React.Fragment>
+              <CorrectionInput
+                key={i}
+                value={answers[blankIdx]}
+                onChange={(val) => onChange(blankIdx, val)}
+                correct={String(v)}
+                validated={validated}
+                width="h-9 min-w-[3.5rem] px-3 rounded-full"
+              />
             );
           }
           return (
-            <React.Fragment key={i}>
-              {i > 0 && <span className="text-xs text-[var(--color-text-secondary)]">—</span>}
-              <div className="flex h-9 w-14 items-center justify-center rounded border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
-            </React.Fragment>
+            <div key={i} className="inline-flex h-9 min-w-[3.5rem] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
           );
         })}
       </div>
@@ -854,34 +849,29 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
 
   function renderSeq(values: number[], blanks: [number, number], ans: [string, string], setAns: (a: [string, string]) => void, label: string) {
     return (
-      <div className="space-y-1">
+      <div className="space-y-2">
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">{label}</span>
-        <div className="flex items-center gap-1 flex-wrap">
+        <div className="flex items-center gap-1.5 flex-wrap">
           {values.map((v, i) => {
             const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
             if (blankIdx === 0 || blankIdx === 1) {
               return (
-                <React.Fragment key={i}>
-                  {i > 0 && <span className="text-[var(--color-text-secondary)]">—</span>}
-                  <CorrectionInput
-                    value={ans[blankIdx]}
-                    onChange={(val) => {
-                      const next: [string, string] = [ans[0], ans[1]];
-                      next[blankIdx] = val;
-                      setAns(next);
-                    }}
-                    correct={String(v)}
-                    validated={validated}
-                    width="w-16"
-                  />
-                </React.Fragment>
+                <CorrectionInput
+                  key={i}
+                  value={ans[blankIdx]}
+                  onChange={(val) => {
+                    const next: [string, string] = [ans[0], ans[1]];
+                    next[blankIdx] = val;
+                    setAns(next);
+                  }}
+                  correct={String(v)}
+                  validated={validated}
+                  width="h-9 min-w-[5rem] px-3 rounded-full"
+                />
               );
             }
             return (
-              <React.Fragment key={i}>
-                {i > 0 && <span className="text-[var(--color-text-secondary)]">—</span>}
-                <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{v}</span>
-              </React.Fragment>
+              <div key={i} className="inline-flex h-9 min-w-[5rem] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             );
           })}
         </div>
