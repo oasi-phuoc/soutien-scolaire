@@ -220,10 +220,10 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 18 — Sort numbers (click mechanism) ─────────────────────────────
 
-function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false }: {
+function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28" }: {
   numbers: number[]; selected: number[];
   onToggle: (n: number) => void; validated: boolean;
-  fmt: (n: number) => string; desc?: boolean;
+  fmt: (n: number) => string; desc?: boolean; chipW?: string;
 }) {
   return (
     <div className="space-y-3">
@@ -231,7 +231,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
         {numbers.map((n, ni) => {
           const isSelected = selected.includes(n);
           const selIdx = selected.indexOf(n);
-          let cls = "flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors cursor-pointer ";
+          let cls = `${chipW} flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors cursor-pointer `;
           if (!validated) {
             cls += isSelected
               ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
@@ -325,13 +325,13 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
         <p className="text-sm font-bold text-[var(--color-accent-alg)]">Série 1</p>
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={fmtInt} />
+          validated={validated} fmt={fmtInt} chipW="w-32" />
       </div>
       <div className="space-y-3">
         <p className="text-sm font-bold text-[var(--color-accent-alg)]">Série 2</p>
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc />
+          validated={validated} fmt={fmtDec2} desc chipW="w-24" />
       </div>
     </div>
   );
@@ -501,10 +501,9 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les calculs en colonnes.</p>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="space-y-3">
         {data.map((q, i) => (
-          <div key={i} className="flex flex-col items-start gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <DecColGridFull
               aStr={q.aStr} bStr={q.bStr} op={q.op}
               resultAnswers={resultAnswers[i]!}
