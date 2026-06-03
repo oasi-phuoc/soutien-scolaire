@@ -353,25 +353,20 @@ function decStrToDigits(s: string): [number, number, number, number, number] {
   return [c, d, u, dx, cx];
 }
 
-function DecColGridFull({ aStr, bStr, op, resultAnswers, carries, onResultChange, onCarryChange, validated }: {
+function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, carries,
+  onAChange, onBChange, onResultChange, onCarryChange, validated }: {
   aStr: string; bStr: string; op: "+" | "-";
-  resultAnswers: string[]; // 5 cells: C, D, U, dx, cx
-  carries: string[];       // 5 cells for carry row
+  aAnswers: string[];      // 5 cells: C, D, U, dx, cx
+  bAnswers: string[];
+  resultAnswers: string[];
+  carries: string[];
+  onAChange: (col: number, val: string) => void;
+  onBChange: (col: number, val: string) => void;
   onResultChange: (col: number, val: string) => void;
   onCarryChange: (col: number, val: string) => void;
   validated: boolean;
 }) {
-  const aDigits = decStrToDigits(aStr);
-  const bDigits = decStrToDigits(bStr);
   const labels = ["C", "D", "U", "", "dx", "cx"];
-
-  const digitCell = (d: number, col: number) => (
-    <td key={col} className="w-8 text-center">
-      <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
-        {d === 0 && col === 0 ? "" : d}
-      </div>
-    </td>
-  );
 
   const commaCell = (key: string) => (
     <td key={key} className="w-8 text-center">
@@ -382,11 +377,11 @@ function DecColGridFull({ aStr, bStr, op, resultAnswers, carries, onResultChange
   const inputStyle = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   const carryStyle = "h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] disabled:opacity-60 text-[var(--color-text-secondary)]";
 
-  const resultInput = (col: number) => (
+  const rowInput = (answers: string[], onChange: (col: number, val: string) => void, col: number) => (
     <td key={col} className="w-8 text-center">
-      <input type="text" inputMode="numeric" maxLength={1} value={resultAnswers[col] ?? ""}
+      <input type="text" inputMode="numeric" maxLength={1} value={answers[col] ?? ""}
         disabled={validated}
-        onChange={e => onResultChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+        onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
         className={inputStyle} />
     </td>
   );
@@ -402,6 +397,9 @@ function DecColGridFull({ aStr, bStr, op, resultAnswers, carries, onResultChange
 
   return (
     <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <p className="mb-2 text-center text-sm font-mono font-bold text-[var(--color-text-primary)]">
+        {aStr} {op} {bStr}
+      </p>
       <table className="mx-auto border-collapse">
         <thead>
           <tr>
@@ -423,30 +421,27 @@ function DecColGridFull({ aStr, bStr, op, resultAnswers, carries, onResultChange
           {/* Row A */}
           <tr>
             <td />
-            {digitCell(aDigits[0]!, 0)}{digitCell(aDigits[1]!, 1)}{digitCell(aDigits[2]!, 2)}
+            {rowInput(aAnswers, onAChange, 0)}{rowInput(aAnswers, onAChange, 1)}{rowInput(aAnswers, onAChange, 2)}
             {commaCell("a-comma")}
-            {digitCell(aDigits[3]!, 3)}{digitCell(aDigits[4]!, 4)}
+            {rowInput(aAnswers, onAChange, 3)}{rowInput(aAnswers, onAChange, 4)}
           </tr>
           {/* Row B */}
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
-            {digitCell(bDigits[0]!, 0)}{digitCell(bDigits[1]!, 1)}{digitCell(bDigits[2]!, 2)}
+            {rowInput(bAnswers, onBChange, 0)}{rowInput(bAnswers, onBChange, 1)}{rowInput(bAnswers, onBChange, 2)}
             {commaCell("b-comma")}
-            {digitCell(bDigits[3]!, 3)}{digitCell(bDigits[4]!, 4)}
+            {rowInput(bAnswers, onBChange, 3)}{rowInput(bAnswers, onBChange, 4)}
           </tr>
           <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Result row */}
           <tr>
             <td />
-            {resultInput(0)}{resultInput(1)}{resultInput(2)}
+            {rowInput(resultAnswers, onResultChange, 0)}{rowInput(resultAnswers, onResultChange, 1)}{rowInput(resultAnswers, onResultChange, 2)}
             {commaCell("r-comma")}
-            {resultInput(3)}{resultInput(4)}
+            {rowInput(resultAnswers, onResultChange, 3)}{rowInput(resultAnswers, onResultChange, 4)}
           </tr>
         </tbody>
       </table>
-      <p className="mt-2 text-center text-xs text-[var(--color-text-secondary)]">
-        {aStr} {op} {bStr}
-      </p>
     </div>
   );
 }
@@ -478,7 +473,8 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  // resultAnswers[q][col], carries[q][col]
+  const [aAnswers, setAAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
+  const [bAnswers, setBAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
   const [resultAnswers, setResultAnswers] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
   const [carries, setCarries] = useState<string[][]>(() => Array.from({length: 4}, () => Array(5).fill("")));
 
@@ -506,8 +502,12 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <DecColGridFull
               aStr={q.aStr} bStr={q.bStr} op={q.op}
+              aAnswers={aAnswers[i]!}
+              bAnswers={bAnswers[i]!}
               resultAnswers={resultAnswers[i]!}
               carries={carries[i]!}
+              onAChange={(col, val) => setAAnswers(p => { const n = p.map(r => [...r]); n[i]![col] = val; return n; })}
+              onBChange={(col, val) => setBAnswers(p => { const n = p.map(r => [...r]); n[i]![col] = val; return n; })}
               onResultChange={(col, val) => setResultAnswers(p => { const n = p.map(r => [...r]); n[i]![col] = val; return n; })}
               onCarryChange={(col, val) => setCarries(p => { const n = p.map(r => [...r]); n[i]![col] = val; return n; })}
               validated={validated}
