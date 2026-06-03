@@ -14,29 +14,40 @@ function pluralForm(word: string): string {
   return word + "s";
 }
 
+function toDefiniteArticle(art: string, word: string): string {
+  const a = normalizeText(art);
+  const vowel = /^[aeiouhéèêëàâïîôùûœæ]/i.test(word);
+  if (a === "un" || a === "le") return vowel ? "l'" : "le";
+  if (a === "une" || a === "la") return vowel ? "l'" : "la";
+  if (a === "des") return "les";
+  return art; // already l' or les
+}
+
+
 function buildWordList(theme: VocabTheme): VocabWord[] {
   const result: VocabWord[] = [];
 
   for (const w of theme.words) {
     const rw = w.relatedWords?.[0];
 
-    // Country name from relatedWords (e.g. "la Suisse") — definite article only
+    // Country name from relatedWords — only for themes where words have articles
     if (rw && w.article) {
       const m = rw.match(/^(le |la |l'|les )(.+)$/i);
       if (m) result.push({ word: m[2]!, article: m[1]!.trimEnd() });
     }
 
-    // Singular masculine form — definite article only
+    // Singular form — always use definite article
     if (w.article) {
-      result.push({ word: w.word, article: w.article });
-      // Plural masculine (skip if invariant, e.g. "fils")
+      result.push({ word: w.word, article: toDefiniteArticle(w.article, w.word) });
+      // Plural masculine
       const plMasc = pluralForm(w.word);
       if (plMasc !== w.word) result.push({ word: plMasc, article: "les" });
     }
 
-    // Feminine form — use "la"
+    // Feminine form — definite article
     if (w.feminine) {
-      result.push({ word: w.feminine, article: "la" });
+      const femArt = w.article ? toDefiniteArticle(["un","le","l'"].includes(normalizeText(w.article)) ? "une" : w.article, w.feminine) : "la";
+      result.push({ word: w.feminine, article: femArt });
       // Plural feminine
       const plFem = pluralForm(w.feminine);
       if (plFem !== w.feminine) result.push({ word: plFem, article: "les" });
@@ -100,7 +111,7 @@ export function ExArticle({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez l&apos;article correct (le, la, l&apos;, les).
+        Écrivez l&apos;article correct (le, la, l&apos;, les, un, une).
       </p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         {words.map((w, i) => {
@@ -110,10 +121,10 @@ export function ExArticle({
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct ? (
-                  <p className="flex h-8 w-16 items-center gap-1 border-b border-amber-400 text-sm">
-                    <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                    <span className="font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
-                  </p>
+                  <div className="flex h-8 w-16 flex-col justify-center border-b border-amber-400">
+                    <span className="text-[10px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                    <span className="mt-0.5 text-[11px] leading-none font-medium text-[var(--color-text-primary)]">{s.displayAnswer ?? w.article ?? ""}</span>
+                  </div>
                 ) : (
                   <input
                     type="text"

@@ -127,8 +127,11 @@ export function ExQuestionWrite({
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
 
+  useEffect(() => {
+    const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
+    onCanValidateChange(hasAny);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { onCanValidateChange(true); }, []);
+  }, [states]);
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -197,6 +200,9 @@ export function ExQuestionWrite({
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
                 {p.word}
               </p>
+              {p.context && (
+                <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{p.context}</p>
+              )}
               {isCheckedDone && hasErrors ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>

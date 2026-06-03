@@ -100,10 +100,10 @@ export function ExMascFem({
               </span>
               <span className="shrink-0 text-xs text-[var(--color-text-tertiary)]">→</span>
               {s.checked && !s.correct ? (
-                <p className="flex h-8 flex-1 items-center gap-1.5 border-b border-amber-400 text-sm">
-                  <span className="text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="font-medium text-[var(--color-text-primary)]">{correctFemDisplay(w.feminine!, mascArt)}</span>
-                </p>
+                <div className="flex h-8 flex-1 flex-col justify-center border-b border-amber-400">
+                  <span className="text-[10px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
+                  <span className="mt-0.5 text-[11px] leading-none font-medium text-[var(--color-text-primary)]">{correctFemDisplay(w.feminine!, mascArt)}</span>
+                </div>
               ) : (
                 <input
                   type="text"

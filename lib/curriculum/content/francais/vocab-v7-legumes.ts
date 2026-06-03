@@ -7,7 +7,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
   section: "V7",
   words: [
     { word: "carotte", image: "carotte.jpg",        article: "la",  gender: "f", definition: "légume orange allongé qui pousse en terre" },
-    { word: "tomate",         article: "la",  gender: "f", definition: "légume-fruit rouge et juteux" },
+    { word: "tomate", image: "tomate.jpg",         article: "la",  gender: "f", definition: "légume-fruit rouge et juteux" },
     { word: "salade", image: "salade.jpg",         article: "la",  gender: "f", definition: "légume à feuilles vertes mangé cru" },
     { word: "concombre", image: "concombre.jpg",      article: "le",  gender: "m", definition: "légume long vert et frais" },
     { word: "pomme de terre", image: "pomme-de-terre.jpg", article: "la",  gender: "f", definition: "légume en tubercule qui pousse en terre" },
@@ -17,9 +17,9 @@ export const V7_LEGUMES_THEME: VocabTheme = {
     { word: "aubergine", image: "aubergine.jpg",      article: "l'",  gender: "f", definition: "légume violet brillant de forme ovale" },
     { word: "brocoli", image: "brocoli.jpg",        article: "le",  gender: "m", definition: "légume vert en fleur très nutritif" },
     { word: "chou", image: "chou.jpg",           article: "le",  gender: "m", definition: "légume à grosses feuilles vertes ou blanches" },
-    { word: "haricot",        article: "le",  gender: "m", definition: "légume en cosse, vert ou blanc" },
-    { word: "ail",            article: "l'",  gender: "m", definition: "bulbe aromatique utilisé en cuisine" },
-    { word: "maïs",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" },
+    { word: "haricot", image: "haricot.jpg",        article: "le",  gender: "m", definition: "légume en cosse, vert ou blanc" },
+    { word: "ail", image: "ail.jpg",            article: "l'",  gender: "m", definition: "bulbe aromatique utilisé en cuisine" },
+    { word: "maïs", image: "maïs.jpg",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" },
     { word: "champignon", image: "champignon.jpg",     article: "le",  gender: "m", definition: "végétal sans chlorophylle qui pousse en forêt" },
   ],
   sentences: [
