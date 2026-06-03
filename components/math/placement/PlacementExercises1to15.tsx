@@ -1260,8 +1260,8 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
-      <div className="space-y-4">
-        <div className="flex flex-col items-start gap-1">
+      <div className="flex flex-wrap gap-4">
+        <div className="flex flex-col items-center gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
           <PlacementColCard
             a={data.a1} b={data.b1} op="×" result={data.r1}
@@ -1271,7 +1271,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             validated={validated}
           />
         </div>
-        <div className="flex flex-col items-start gap-1">
+        <div className="flex flex-col items-center gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
           <PlacementMulCard2
             a={data.a2} b={data.b2} result={data.r2}
