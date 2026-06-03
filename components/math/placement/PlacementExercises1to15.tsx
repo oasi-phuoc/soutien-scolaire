@@ -197,12 +197,12 @@ function CompareQuestion({
 
 export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
-    return Array.from({ length: 4 }, () => {
-      const a = randInt(11, 99);
-      let b = randInt(11, 99);
-      while (b === a) b = randInt(11, 99);
-      return { a, b };
-    });
+    function mkLt() { const a = randInt(11, 98); const b = randInt(a + 1, 99); return { a, b, correct: "<" as CompOp }; }
+    function mkGt() { const b = randInt(11, 98); const a = randInt(b + 1, 99); return { a, b, correct: ">" as CompOp }; }
+    function mkEq() { const a = randInt(11, 99); return { a, b: a, correct: "=" as CompOp }; }
+    function mkRnd() { const r = Math.random(); return r < 1/3 ? mkLt() : r < 2/3 ? mkGt() : mkEq(); }
+    const fixed = shuffle([mkLt(), mkGt(), mkEq()]);
+    return shuffle([...fixed, mkRnd()]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -212,8 +212,7 @@ export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      const correct: CompOp = q.a < q.b ? "<" : ">";
-      if (answers[i] === correct) pts += 0.5;
+      if (answers[i] === q.correct) pts += 0.5;
     });
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -780,8 +779,8 @@ interface LargeSeqData {
 }
 
 function makeLargeSeq(gap: number, ascending: boolean, minVal: number, maxVal: number): LargeSeqData {
-  const count = 6;
-  const nonAdjacentPairs = [[0, 2], [0, 3], [0, 4], [1, 3], [1, 4], [1, 5], [2, 4], [2, 5], [3, 5]];
+  const count = 5;
+  const nonAdjacentPairs = [[0, 2], [0, 3], [0, 4], [1, 3], [1, 4], [2, 4]];
   const pair = nonAdjacentPairs[randInt(0, nonAdjacentPairs.length - 1)]! as [number, number];
   let start: number;
   const totalSpan = gap * (count - 1);
@@ -826,7 +825,7 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
     return (
       <div className="space-y-2">
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">{label}</span>
-        <div className="flex items-center gap-1.5 flex-wrap">
+        <div className="flex items-center gap-1">
           {values.map((v, i) => {
             const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
             if (blankIdx === 0 || blankIdx === 1) {
@@ -841,12 +840,12 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
                   }}
                   correct={String(v)}
                   validated={validated}
-                  width="h-9 w-20 px-3 rounded-full"
+                  width="h-9 w-16 px-1 rounded-full"
                 />
               );
             }
             return (
-              <div key={i} className="inline-flex h-9 w-20 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
+              <div key={i} className="inline-flex h-9 w-16 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             );
           })}
         </div>
