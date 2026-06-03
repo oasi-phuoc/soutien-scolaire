@@ -1506,29 +1506,22 @@ export function Exercise15({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
-      <div className="space-y-6">
-        <div className="flex flex-col items-start gap-1">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <PlacementDivCard
-            {...data.q1}
-            quotientInputs={q1Quot} remainderInput={q1Rem} workFlat={q1Work}
-            onQuotientChange={(qi, v) => setQ1Quot(p => { const n=[...p]; n[qi]=v; return n; })}
-            onRemainderChange={setQ1Rem}
-            onWorkChange={makeWorkChange(setQ1Work, data.q1.dividendCols)}
-            validated={validated}
-          />
-        </div>
-        <div className="flex flex-col items-start gap-1">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <PlacementDivCard
-            {...data.q2}
-            quotientInputs={q2Quot} remainderInput={q2Rem} workFlat={q2Work}
-            onQuotientChange={(qi, v) => setQ2Quot(p => { const n=[...p]; n[qi]=v; return n; })}
-            onRemainderChange={setQ2Rem}
-            onWorkChange={makeWorkChange(setQ2Work, data.q2.dividendCols)}
-            validated={validated}
-          />
-        </div>
+      <div className="flex flex-wrap gap-4">
+        {([
+          { q: data.q1, quot: q1Quot, rem: q1Rem, work: q1Work, setQuot: setQ1Quot, setRem: setQ1Rem, setWork: setQ1Work },
+          { q: data.q2, quot: q2Quot, rem: q2Rem, work: q2Work, setQuot: setQ2Quot, setRem: setQ2Rem, setWork: setQ2Work },
+        ] as const).map(({ q, quot, rem, work, setQuot, setRem, setWork }, i) => (
+          <div key={i} className="flex flex-col items-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <PlacementDivCard
+              {...q}
+              quotientInputs={quot} remainderInput={rem} workFlat={work}
+              onQuotientChange={(qi, v) => setQuot(p => { const n=[...p]; n[qi]=v; return n; })}
+              onRemainderChange={setRem}
+              onWorkChange={makeWorkChange(setWork, q.dividendCols)}
+              validated={validated}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
