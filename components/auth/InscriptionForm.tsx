@@ -205,7 +205,7 @@ export function InscriptionForm({ error: initialError }: { error?: string }) {
               onChange={e => setClasseNum(e.target.value)}
               className={`${inputCls} ${isAncien ? "opacity-40 cursor-not-allowed" : ""}`}
             >
-              <option value="" disabled>{isAncien ? "—" : "Numéro de la classe"}</option>
+              <option value="" disabled>{isAncien ? "—" : "N° de la classe"}</option>
               {!isAncien && Array.from({ length: 20 }, (_, i) => {
                 const n = String(i + 1).padStart(2, "0");
                 return <option key={n} value={String(i + 1)}>{n}</option>;

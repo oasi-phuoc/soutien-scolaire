@@ -541,12 +541,17 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
                 <option value="">Filière</option>
                 {["CSC", "CFR", "EPL", "CPR"].map(c => <option key={c} value={c}>{c}</option>)}
               </select>
-              <input
-                type="number" min={1} max={20} placeholder="1–20"
+              <select
                 value={form.classeNum}
                 onChange={e => setForm(f => ({ ...f, classeNum: e.target.value }))}
                 className="rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
-              />
+              >
+                <option value="">N°</option>
+                {Array.from({ length: 20 }, (_, i) => {
+                  const n = String(i + 1).padStart(2, "0");
+                  return <option key={n} value={String(i + 1)}>{n}</option>;
+                })}
+              </select>
             </div>
           </div>
           {field("adresse", "Adresse")}
@@ -734,8 +739,6 @@ export function AdminTable({
               className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
           </div>
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
           {classes.length > 0 && (
             <select value={filterClasse} onChange={e => setFilterClasse(e.target.value)}
               className="h-9 rounded-full border border-zinc-200 bg-white px-4 text-sm dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100">
@@ -743,7 +746,8 @@ export function AdminTable({
               {classes.map(c => <option key={c} value={c}>{c}</option>)}
             </select>
           )}
-
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
           <div className={`flex overflow-hidden rounded-full p-0.5 border border-zinc-200 bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800`}>
             <button onClick={() => setSortOpen(o => !o)} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (

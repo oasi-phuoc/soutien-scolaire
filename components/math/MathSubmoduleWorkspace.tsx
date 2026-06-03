@@ -1382,11 +1382,13 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
   function finishEval(passed: boolean, correct?: number, total?: number) {
     if (!lesson) { router.push("/mathematiques"); return; }
-    const c = correct ?? (passed ? 1 : 0);
-    const t = total ?? 1;
-    const grade = linearSwissGrade(c, t);
-    const p = loadProgress();
-    saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
+    if (!isRevisionLesson) {
+      const c = correct ?? (passed ? 1 : 0);
+      const t = total ?? 1;
+      const grade = linearSwissGrade(c, t);
+      const p = loadProgress();
+      saveProgress(completeSubmodule(p, moduleId, lesson.submoduleId, c, t, grade));
+    }
     router.push("/mathematiques");
   }
 
