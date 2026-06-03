@@ -1688,7 +1688,14 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
 
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
-        <div className="flex flex-col items-center gap-8 py-8 text-center">
+        <div className="flex flex-col gap-8 py-8">
+          <button type="button" onClick={goBack}
+            disabled={isFirstStep}
+            className="self-start flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
+            Retour
+          </button>
+          <div className="flex flex-col items-center gap-8 text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
               <path d="M9 11l3 3L22 4" />
@@ -1712,6 +1719,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               <path d="M9 18l6-6-6-6" />
             </svg>
           </button>
+          </div>
         </div>
       )}
 
