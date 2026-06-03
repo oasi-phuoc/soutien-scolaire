@@ -27,7 +27,7 @@ export const MATH_A5_2_LESSON: MathSubmoduleLesson = {
         },
         
         { type: "heading", fr: "Pas de valeurs consécutives", black: true },
-        { type: "plain", fr: "**...** ; 7,2 ; **...** ; 9,6" }
+        { type: "plain", fr: "**...** ; 7,2 ; **...** ; 9,6" },
         {
           type: "section", labelFr: "", itemsFr: [
             "Soustraire les deux valeurs connues.",
