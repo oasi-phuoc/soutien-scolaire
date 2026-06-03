@@ -31,7 +31,7 @@ function CorrectionInput({
   const isWrong = validated && !matchNum(value, parseNum(correct));
   if (validated) {
     return (
-      <span className={`inline-flex flex-col items-center justify-center ${width}`}>
+      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
         {isWrong && (
           <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">
             {value || "—"}
@@ -53,7 +53,7 @@ function CorrectionInput({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
     />
   );
 }
@@ -70,7 +70,7 @@ function CorrectionInputText({
   const isWrong = validated && norm(value) !== norm(correct);
   if (validated) {
     return (
-      <span className={`inline-flex flex-col items-center justify-center ${width}`}>
+      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
         {isWrong && (
           <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">
             {value || "—"}
@@ -92,7 +92,7 @@ function CorrectionInputText({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
     />
   );
 }

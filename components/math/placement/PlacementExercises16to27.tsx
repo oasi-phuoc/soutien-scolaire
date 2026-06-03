@@ -43,7 +43,7 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
   const isWrong = validated && value.trim() !== correct;
   if (validated) {
     return (
-      <span className={`inline-flex flex-col items-center justify-center ${width}`}>
+      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
         {isWrong && <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">{value || "—"}</span>}
         <span className={`inline-flex items-center justify-center rounded border px-1 font-mono text-sm font-bold min-w-[2.5rem] ${
           isCorrect ? "border-green-300 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400"
@@ -54,7 +54,7 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
   }
   return (
     <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-      className={`${width} rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
     />
   );
 }
