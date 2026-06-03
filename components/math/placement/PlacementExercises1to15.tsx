@@ -749,14 +749,49 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
 
 // ── Exercise 9 — Compare integers 101–999 ────────────────────────────────────
 
+function makeEx9Pair(op: CompOp, struct: "first2" | "last2" | "free"): { a: number; b: number } {
+  if (op === "=") {
+    const v = randInt(101, 999);
+    return { a: v, b: v };
+  }
+  if (struct === "first2") {
+    // same hundreds and tens, units differ
+    const h = randInt(1, 9);
+    const dt = randInt(0, 9);
+    let u1: number, u2: number;
+    if (op === "<") {
+      u1 = randInt(0, 8); u2 = randInt(u1 + 1, 9);
+    } else {
+      u2 = randInt(0, 8); u1 = randInt(u2 + 1, 9);
+    }
+    return { a: h * 100 + dt * 10 + u1, b: h * 100 + dt * 10 + u2 };
+  }
+  if (struct === "last2") {
+    // same tens and units, hundreds differ
+    const h1 = randInt(1, 8);
+    const h2 = randInt(h1 + 1, 9);
+    const dt = randInt(0, 9);
+    const u = randInt(0, 9);
+    if (op === "<") return { a: h1 * 100 + dt * 10 + u, b: h2 * 100 + dt * 10 + u };
+    return { a: h2 * 100 + dt * 10 + u, b: h1 * 100 + dt * 10 + u };
+  }
+  // free
+  let a = randInt(101, 999);
+  let b = randInt(101, 999);
+  while (b === a) b = randInt(101, 999);
+  if (op === "<" && a > b) [a, b] = [b, a];
+  if (op === ">" && a < b) [a, b] = [b, a];
+  return { a, b };
+}
+
 export function Exercise9({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
-    return Array.from({ length: 4 }, () => {
-      const a = randInt(101, 999);
-      let b = randInt(101, 999);
-      while (b === a) b = randInt(101, 999);
-      return { a, b };
-    });
+    // exactly 1 <, 1 >, 1 =, 1 random
+    const ops: CompOp[] = ["<", ">", "=", (["<", ">", "="] as CompOp[])[randInt(0, 2)]!];
+    const shuffledOps = shuffle(ops);
+    // 2 structural constraints + 2 free, shuffled
+    const structs = shuffle(["first2", "last2", "free", "free"] as const);
+    return shuffledOps.map((op, i) => ({ ...makeEx9Pair(op, structs[i]!), op }));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -766,7 +801,7 @@ export function Exercise9({ exerciseKey, validated, onValidated, validateTrigger
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      const correct: CompOp = q.a < q.b ? "<" : ">";
+      const correct: CompOp = q.a < q.b ? "<" : q.a > q.b ? ">" : "=";
       if (answers[i] === correct) pts += 0.5;
     });
     onValidated(pts, 2);
