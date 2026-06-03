@@ -203,7 +203,7 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites. Tous les blancs d&apos;une suite doivent être corrects pour obtenir les points.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
       <div className="space-y-2">
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">Suite 1</span>
         <SeqRow vals={data.s1.vals} visPos={data.s1.visPos} isInt answers={ans1}
@@ -266,15 +266,22 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt }: {
 
 export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Series 1: 1 six-digit + 3 seven-digit integers, 2 seven-digit share a digit
-    const n6 = randInt(100000, 999999);
-    const base7 = randInt(1000000, 9999999);
-    const n7a = base7;
-    const sharedDigit = Math.floor((base7 % 1000000) / 100000);
-    let n7b = randInt(1000000, 9999999);
-    n7b = Math.floor(n7b / 1000000) * 1000000 + sharedDigit * 100000 + (n7b % 100000);
-    const n7c = randInt(1000000, 9999999);
-    const ints = shuffle([n6, n7a, n7b, n7c]);
+    // Series 1: 4 seven-digit numbers ABCDEFG
+    //   n1 & n2 share first 3 digits (ABC)
+    //   n1 & n3 share last 3 digits (EFG)
+    //   n4 is free
+    const top3 = randInt(100, 999);       // shared first 3 digits for n1 & n2
+    let top3b = randInt(100, 999);        // first 3 digits for n3
+    while (top3b === top3) top3b = randInt(100, 999);
+    const bot3 = randInt(100, 999);       // shared last 3 digits for n1 & n3
+    let bot3b = randInt(100, 999);        // last 3 digits for n2
+    while (bot3b === bot3) bot3b = randInt(100, 999);
+    const n1 = top3 * 10000 + randInt(0, 9) * 1000 + bot3;
+    const n2 = top3 * 10000 + randInt(0, 9) * 1000 + bot3b;
+    const n3 = top3b * 10000 + randInt(0, 9) * 1000 + bot3;
+    let n4 = randInt(1000000, 9999999);
+    while ([n1, n2, n3].includes(n4)) n4 = randInt(1000000, 9999999);
+    const ints = shuffle([n1, n2, n3, n4]);
     const sortedInts = [...ints].sort((a, b) => a - b);
 
     // Series 2: 4 decimals, same integer part (10–49), varying decimals
