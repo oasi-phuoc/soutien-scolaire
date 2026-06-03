@@ -129,13 +129,13 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
       </div>
       <div className="space-y-4">
         {items.map((item, i) => (
-          <div key={i} className="flex items-center gap-2 flex-wrap">
+          <div key={i} className="flex items-center gap-1.5">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
-            <span className="text-sm font-mono text-[var(--color-text-primary)]">{item.numStr} =</span>
+            <span className="text-sm font-mono shrink-0 text-[var(--color-text-primary)]">{item.numStr} =</span>
             {item.parts.map((p, j) => (
               <React.Fragment key={j}>
                 {wrongs[i]?.[j]
-                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-12" />
+                  ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-10" />
                   : <input
                       type="text"
                       value={vals[i]?.[j] ?? ""}
@@ -144,7 +144,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
                         const v = e.target.value;
                         setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? v : c) : row));
                       }}
-                      className={`${IC(false)} w-12`}
+                      className={`${IC(false)} w-10`}
                     />}
                 {j < item.parts.length - 1 && <span className="text-sm text-[var(--color-text-secondary)]">+</span>}
               </React.Fragment>
