@@ -667,6 +667,41 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
   );
 }
 
+// ── PlaceValueCard — A1.2 Ex6 style decompose card ──────────────────────────
+
+function PlaceValueCard({ n, cols, answers, onChange, validated }: {
+  n: number;
+  cols: { label: string; accept: (v: string) => boolean }[];
+  answers: string[];
+  onChange: (col: number, val: string) => void;
+  validated: boolean;
+}) {
+  const inputCls = "w-full rounded border bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 px-1 py-1.5 text-center text-sm outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  return (
+    <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+      <div className="mb-3 flex justify-center">
+        <span className="text-2xl font-bold tabular-nums text-[var(--color-text-primary)]">
+          {n.toLocaleString("fr-CH")}
+        </span>
+      </div>
+      <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+        <span className="mt-[7px] shrink-0">=</span>
+        {cols.map((col, ci) => (
+          <React.Fragment key={ci}>
+            {ci > 0 && <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>}
+            <div className="flex flex-1 flex-col items-center gap-0.5">
+              <input type="text" inputMode="numeric" value={answers[ci] ?? ""} disabled={validated}
+                onChange={e => onChange(ci, e.target.value.replace(/[^0-9]/g, ""))}
+                className={inputCls} />
+              <span className="text-xs text-[var(--color-text-secondary)]">{col.label}</span>
+            </div>
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Exercise 8 — Decompose into tens + units ──────────────────────────────────
 
 export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
@@ -674,55 +709,39 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
     return Array.from({ length: 2 }, () => {
       let n = randInt(11, 99);
       while (n % 10 === 0) n = randInt(11, 99);
-      const tens = Math.floor(n / 10);
-      const units = n % 10;
-      return { n, tens, units };
+      const d = Math.floor(n / 10), u = n % 10;
+      return { n, d, u };
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<Array<[string, string]>>(() => [["", ""], ["", ""]]);
-
-  function isCorrectTens(q: { tens: number }, v: string): boolean {
-    const trimmed = v.trim();
-    return trimmed === String(q.tens) || trimmed === String(q.tens * 10);
-  }
+  const [answers, setAnswers] = useState<string[][]>(() => [["", ""], ["", ""]]);
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      const [t, u] = answers[i] ?? ["", ""];
-      if (isCorrectTens(q, t ?? "") && (u ?? "").trim() === String(q.units)) pts++;
+      const [dAns, uAns] = answers[i] ?? ["", ""];
+      const dOk = (dAns ?? "").trim() === String(q.d) || (dAns ?? "").trim() === String(q.d * 10);
+      const uOk = (uAns ?? "").trim() === String(q.u);
+      if (dOk && uOk) pts++;
     });
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en dizaines et unités.</p>
       {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-          <span className="w-10 font-mono text-base font-semibold text-[var(--color-text-primary)]">{q.n}</span>
-          <span className="text-base text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput
-            value={answers[i]?.[0] ?? ""}
-            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![0] = v; return next; })}
-            correct={String(q.tens)}
-            validated={validated}
-            width="w-14"
-          />
-          <span className="text-sm text-[var(--color-text-secondary)]">diz. +</span>
-          <CorrectionInput
-            value={answers[i]?.[1] ?? ""}
-            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![1] = v; return next; })}
-            correct={String(q.units)}
-            validated={validated}
-            width="w-14"
-          />
-          <span className="text-sm text-[var(--color-text-secondary)]">unit.</span>
-        </div>
+        <PlaceValueCard key={i} n={q.n}
+          cols={[
+            { label: "dizaine", accept: v => v === String(q.d) || v === String(q.d * 10) },
+            { label: "unité",   accept: v => v === String(q.u) },
+          ]}
+          answers={answers[i] ?? []}
+          onChange={(col, val) => setAnswers(prev => { const n = prev.map(r => [...r]); n[i]![col] = val; return n; })}
+          validated={validated}
+        />
       ))}
     </div>
   );
@@ -963,13 +982,12 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [ans3, setAns3] = useState<[string, string, string]>(["", "", ""]);
-  const [ans4, setAns4] = useState<[string, string, string, string]>(["", "", "", ""]);
+  const [ans3, setAns3] = useState<string[]>(["", "", ""]);
+  const [ans4, setAns4] = useState<string[]>(["", "", "", ""]);
 
   const h3 = Math.floor(data.n3 / 100);
   const t3 = Math.floor((data.n3 % 100) / 10);
   const u3 = data.n3 % 10;
-
   const k4 = Math.floor(data.n4 / 1000);
   const h4 = Math.floor((data.n4 % 1000) / 100);
   const t4 = Math.floor((data.n4 % 100) / 10);
@@ -978,51 +996,39 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    // Q1: 3-digit — accept leading digit OR full positional value
-    const [a3, b3, c3] = ans3;
-    const ok3a = (a3 ?? "").trim() === String(h3) || (a3 ?? "").trim() === String(h3 * 100);
-    const ok3b = (b3 ?? "").trim() === String(t3) || (b3 ?? "").trim() === String(t3 * 10);
-    const ok3c = (c3 ?? "").trim() === String(u3);
-    if (ok3a && ok3b && ok3c) pts++;
-    // Q2: 4-digit
-    const [a4, b4, c4, d4] = ans4;
-    const ok4a = (a4 ?? "").trim() === String(k4) || (a4 ?? "").trim() === String(k4 * 1000);
-    const ok4b = (b4 ?? "").trim() === String(h4) || (b4 ?? "").trim() === String(h4 * 100);
-    const ok4c = (c4 ?? "").trim() === String(t4) || (c4 ?? "").trim() === String(t4 * 10);
-    const ok4d = (d4 ?? "").trim() === String(u4);
-    if (ok4a && ok4b && ok4c && ok4d) pts++;
+    const chk = (v: string, digit: number, multi: number) => {
+      const s = v.trim();
+      return s === String(digit) || s === String(digit * multi);
+    };
+    if (chk(ans3[0] ?? "", h3, 100) && chk(ans3[1] ?? "", t3, 10) && (ans3[2] ?? "").trim() === String(u3)) pts++;
+    if (chk(ans4[0] ?? "", k4, 1000) && chk(ans4[1] ?? "", h4, 100) && chk(ans4[2] ?? "", t4, 10) && (ans4[3] ?? "").trim() === String(u4)) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre.</p>
-      {/* Q1 */}
-      <div className="flex items-center gap-3">
-        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
-          <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n3} =</span>
-          <CorrectionInput value={ans3[0]} onChange={(v) => setAns3(p => [v, p[1], p[2]])} correct={String(h3)} validated={validated} width="w-14" />
-          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-          <CorrectionInput value={ans3[1]} onChange={(v) => setAns3(p => [p[0], v, p[2]])} correct={String(t3)} validated={validated} width="w-14" />
-          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-          <CorrectionInput value={ans3[2]} onChange={(v) => setAns3(p => [p[0], p[1], v])} correct={String(u3)} validated={validated} width="w-14" />
-        </div>
-      </div>
-      {/* Q2 */}
-      <div className="flex items-center gap-3">
-        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
-          <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{data.n4} =</span>
-          <CorrectionInput value={ans4[0]} onChange={(v) => setAns4(p => [v, p[1], p[2], p[3]])} correct={String(k4)} validated={validated} width="w-14" />
-          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-          <CorrectionInput value={ans4[1]} onChange={(v) => setAns4(p => [p[0], v, p[2], p[3]])} correct={String(h4)} validated={validated} width="w-14" />
-          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-          <CorrectionInput value={ans4[2]} onChange={(v) => setAns4(p => [p[0], p[1], v, p[3]])} correct={String(t4)} validated={validated} width="w-14" />
-          <span className="text-sm text-[var(--color-text-secondary)]">+</span>
-          <CorrectionInput value={ans4[3]} onChange={(v) => setAns4(p => [p[0], p[1], p[2], v])} correct={String(u4)} validated={validated} width="w-14" />
-        </div>
-      </div>
+      <PlaceValueCard n={data.n3}
+        cols={[
+          { label: "centaine", accept: v => v === String(h3) || v === String(h3 * 100) },
+          { label: "dizaine",  accept: v => v === String(t3) || v === String(t3 * 10) },
+          { label: "unité",    accept: v => v === String(u3) },
+        ]}
+        answers={ans3}
+        onChange={(col, val) => setAns3(prev => { const n = [...prev]; n[col] = val; return n; })}
+        validated={validated}
+      />
+      <PlaceValueCard n={data.n4}
+        cols={[
+          { label: "millier",  accept: v => v === String(k4) || v === String(k4 * 1000) },
+          { label: "centaine", accept: v => v === String(h4) || v === String(h4 * 100) },
+          { label: "dizaine",  accept: v => v === String(t4) || v === String(t4 * 10) },
+          { label: "unité",    accept: v => v === String(u4) },
+        ]}
+        answers={ans4}
+        onChange={(col, val) => setAns4(prev => { const n = [...prev]; n[col] = val; return n; })}
+        validated={validated}
+      />
     </div>
   );
 }
