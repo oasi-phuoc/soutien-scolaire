@@ -75,50 +75,48 @@ function CorrectionInput({
 
 type ShapeType = "circle" | "square" | "triangle" | "star";
 
-function makeShapes(count: number, shape: ShapeType, seed: number): Array<{ x: number; y: number; id: number }> {
-  const positions: Array<{ x: number; y: number; id: number }> = [];
-  void shape; // shape is used by caller; seed is used for determinism
+function makeShapes(count: number, seed: number): Array<{ x: number; y: number; size: number; id: number }> {
+  const positions: Array<{ x: number; y: number; size: number; id: number }> = [];
   const used: Array<{ x: number; y: number }> = [];
   let attempts = 0;
-  while (positions.length < count && attempts < 500) {
+  while (positions.length < count && attempts < 1000) {
     attempts++;
-    const x = 10 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 80;
-    const y = 10 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 80;
-    const tooClose = used.some(u => Math.hypot(u.x - x, u.y - y) < 18);
+    const x = 12 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 276;
+    const y = 10 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 60;
+    const tooClose = used.some(u => Math.hypot(u.x - x, u.y - y) < 22);
     if (!tooClose) {
       used.push({ x, y });
-      positions.push({ x, y, id: positions.length });
+      const size = 6 + (seed + positions.length * 13 + attempts * 7) % 4;
+      positions.push({ x, y, size, id: positions.length });
     }
   }
   return positions;
 }
 
-function ShapeSvg({ shape, x, y }: { shape: ShapeType; x: number; y: number }) {
+function ShapeSvg({ shape, x, y, size = 7 }: { shape: ShapeType; x: number; y: number; size?: number }) {
   const accent = "var(--color-accent-alg)";
   if (shape === "circle")
-    return <circle cx={x} cy={y} r={7} fill={accent} fillOpacity={0.7} />;
+    return <circle cx={x} cy={y} r={size} fill={accent} fillOpacity={0.7} />;
   if (shape === "square")
-    return <rect x={x - 6} y={y - 6} width={12} height={12} fill={accent} fillOpacity={0.7} />;
+    return <rect x={x - size} y={y - size} width={size * 2} height={size * 2} fill={accent} fillOpacity={0.7} />;
   if (shape === "triangle")
-    return <polygon points={`${x},${y - 8} ${x - 7},${y + 5} ${x + 7},${y + 5}`} fill={accent} fillOpacity={0.7} />;
+    return <polygon points={`${x},${y - size * 1.2} ${x - size},${y + size * 0.7} ${x + size},${y + size * 0.7}`} fill={accent} fillOpacity={0.7} />;
   // star
   const pts = Array.from({ length: 5 }, (_, i) => {
-    const outer = { x: x + 8 * Math.sin((i * 72 - 90) * Math.PI / 180), y: y - 8 * Math.cos((i * 72 - 90) * Math.PI / 180) };
-    const inner = { x: x + 4 * Math.sin(((i * 72 + 36) - 90) * Math.PI / 180), y: y - 4 * Math.cos(((i * 72 + 36) - 90) * Math.PI / 180) };
+    const outer = { x: x + size * 1.1 * Math.sin((i * 72 - 90) * Math.PI / 180), y: y - size * 1.1 * Math.cos((i * 72 - 90) * Math.PI / 180) };
+    const inner = { x: x + size * 0.5 * Math.sin(((i * 72 + 36) - 90) * Math.PI / 180), y: y - size * 0.5 * Math.cos(((i * 72 + 36) - 90) * Math.PI / 180) };
     return `${outer.x},${outer.y} ${inner.x},${inner.y}`;
   }).join(" ");
   return <polygon points={pts} fill={accent} fillOpacity={0.7} />;
 }
 
 function ShapeFrame({ count, shape, seed }: { count: number; shape: ShapeType; seed: number }) {
-  const positions = useMemo(() => makeShapes(count, shape, seed), [count, shape, seed]);
+  const positions = useMemo(() => makeShapes(count, seed), [count, seed]);
   return (
-    <svg viewBox="0 0 100 100" className="w-28 h-28 border border-[var(--color-border-default)] rounded-lg bg-[var(--color-bg-secondary)]">
-      {positions.map(p => {
-        const sx: number = p.x;
-        const sy: number = p.y;
-        return <ShapeSvg key={p.id} shape={shape} x={sx} y={sy} />;
-      })}
+    <svg viewBox="0 0 300 80" className="h-20 w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
+      {positions.map(p => (
+        <ShapeSvg key={p.id} shape={shape} x={p.x} y={p.y} size={p.size} />
+      ))}
     </svg>
   );
 }
@@ -126,10 +124,12 @@ function ShapeFrame({ count, shape, seed }: { count: number; shape: ShapeType; s
 export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
     const shapes: ShapeType[] = ["circle", "square", "triangle", "star"];
-    const shape = shapes[randInt(0, 3)]!;
-    const count1 = randInt(10, 20);
-    const count2 = randInt(10, 20);
-    return { shape, count1, count2, seed1: randInt(1, 9999), seed2: randInt(10000, 19999) };
+    const shuffled = shuffle([...shapes]);
+    const shape1 = shuffled[0]!;
+    const shape2 = shuffled[1]!;
+    const count1 = randInt(10, 15);
+    const count2 = randInt(15, 25);
+    return { shape1, shape2, count1, count2, seed1: randInt(1, 9999), seed2: randInt(10000, 19999) };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -138,33 +138,31 @@ export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger
 
   useEffect(() => {
     if (validateTrigger === 0) return;
-    const correct1 = String(data.count1);
-    const correct2 = String(data.count2);
-    const pts = (ans1.trim() === correct1 ? 1 : 0) + (ans2.trim() === correct2 ? 1 : 0);
+    const pts = (ans1.trim() === String(data.count1) ? 1 : 0) + (ans2.trim() === String(data.count2) ? 1 : 0);
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Compte le nombre de formes dans chaque cadre.</p>
-      <div className="flex gap-6">
-        {[
-          { count: data.count1, seed: data.seed1, ans: ans1, setAns: setAns1 },
-          { count: data.count2, seed: data.seed2, ans: ans2, setAns: setAns2 },
-        ].map((item, idx) => (
-          <div key={idx} className="flex flex-col items-center gap-2">
-            <ShapeFrame count={item.count} shape={data.shape} seed={item.seed} />
-            <CorrectionInput
-              value={item.ans}
-              onChange={item.setAns}
-              correct={String(item.count)}
-              validated={validated}
-              width="w-16"
-              placeholder="?"
-            />
+      {[
+        { count: data.count1, shape: data.shape1, seed: data.seed1, ans: ans1, setAns: setAns1 },
+        { count: data.count2, shape: data.shape2, seed: data.seed2, ans: ans2, setAns: setAns2 },
+      ].map((item, idx) => (
+        <div key={idx} className="flex w-full items-center gap-3">
+          <div className="flex-1">
+            <ShapeFrame count={item.count} shape={item.shape} seed={item.seed} />
           </div>
-        ))}
-      </div>
+          <CorrectionInput
+            value={item.ans}
+            onChange={item.setAns}
+            correct={String(item.count)}
+            validated={validated}
+            width="w-14"
+            placeholder="?"
+          />
+        </div>
+      ))}
     </div>
   );
 }

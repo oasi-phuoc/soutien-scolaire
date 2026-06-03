@@ -111,12 +111,14 @@ function formatTime(secs: number): string {
 // ── Progress bar ──────────────────────────────────────────────────────────────
 
 interface PlacementProgressBarProps {
-  current: number; // current exercise index (0-based)
+  current: number;
   total: number;
   timeLeft: number;
-  validated: boolean[]; // per exercise
-  hasInput: boolean[]; // per exercise (user has typed something)
+  validated: boolean[];
+  hasInput: boolean[];
   onSegmentClick: (idx: number) => void;
+  totalPoints: number;
+  maxPoints: number;
 }
 
 function PlacementProgressBar({
@@ -126,12 +128,14 @@ function PlacementProgressBar({
   validated,
   hasInput,
   onSegmentClick,
+  totalPoints,
+  maxPoints,
 }: PlacementProgressBarProps) {
   const remaining = validated.filter(v => !v).length;
   return (
     <div className="mb-5">
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Test de placement</p>
+        <p className="text-xs font-bold tabular-nums text-amber-600">{totalPoints} / {maxPoints} pts</p>
         <div className="flex items-center gap-3">
           <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
             timeLeft <= 300
@@ -255,7 +259,8 @@ export function PlacementTestClient() {
   const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(() => Array(TOTAL_EXERCISES).fill(null));
   const [validateTriggers, setValidateTriggers] = useState<number[]>(() => Array(TOTAL_EXERCISES).fill(0));
   const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
-  const [exerciseKeys] = useState<number[]>(() => EXERCISES.map((_, i) => i + 100));
+  const [sessionKey, setSessionKey] = useState(1);
+  const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -350,6 +355,7 @@ export function PlacementTestClient() {
 
   // Check if all exercises validated → show results
   const allValidated = useMemo(() => validated.every(v => v), [validated]);
+  const totalPoints = useMemo(() => scores.reduce((s, sc) => s + (sc?.points ?? 0), 0), [scores]);
   useEffect(() => {
     if (phase === "running" && allValidated) {
       setPhase("results");
@@ -402,7 +408,15 @@ export function PlacementTestClient() {
 
           <button
             type="button"
-            onClick={() => { setPhase("running"); setTimeLeft(TIMER_SECONDS); }}
+            onClick={() => {
+              setSessionKey(k => k + 1);
+              setValidated(Array(TOTAL_EXERCISES).fill(false));
+              setScores(Array(TOTAL_EXERCISES).fill(null));
+              setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
+              setCurrentIdx(0);
+              setTimeLeft(TIMER_SECONDS);
+              setPhase("running");
+            }}
             className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             Commencer le test
@@ -430,11 +444,23 @@ export function PlacementTestClient() {
   // ── Running phase ──────────────────────────────────────────────────────────
 
   const ex = EXERCISES[currentIdx]!;
-  const ExComp = ex.component;
   const isCurrentValidated = validated[currentIdx] ?? false;
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-40">
+    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-6 pb-40">
+      {/* Page header */}
+      <div className="mb-4">
+        <button
+          type="button"
+          onClick={() => setPhase("idle")}
+          className="mb-2 flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+          Retour
+        </button>
+        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+      </div>
+
       {/* Progress bar */}
       <PlacementProgressBar
         current={currentIdx}
@@ -443,45 +469,49 @@ export function PlacementTestClient() {
         validated={validated}
         hasInput={hasInput}
         onSegmentClick={handleSegmentClick}
+        totalPoints={totalPoints}
+        maxPoints={TOTAL_MAX_POINTS}
       />
 
-      {/* Exercise card */}
-      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4">
-        {/* Exercise header */}
-        <div className="flex items-center gap-2">
-          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-alg)]/10 text-xs font-bold text-[var(--color-accent-alg)]">
-            {ex.id}
-          </span>
-          <h2 className="text-sm font-bold text-[var(--color-text-primary)]">{ex.label}</h2>
-          <span className="ml-auto text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
-        </div>
-
-        {/* Exercise component */}
-        <ExComp
-          key={exerciseKeys[currentIdx]}
-          exerciseKey={exerciseKeys[currentIdx] ?? currentIdx}
-          validated={isCurrentValidated}
-          onValidated={(points, maxPoints) => handleValidated(currentIdx, points, maxPoints)}
-          validateTrigger={validateTriggers[currentIdx] ?? 0}
-        />
-
-        {/* Validated badge */}
-        {isCurrentValidated && (
-          <div className="flex items-center gap-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 dark:bg-amber-950/20 dark:border-amber-800">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-amber-600" aria-hidden>
-              <path d="M20 6L9 17l-5-5"/>
-            </svg>
-            <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
-              Validé — {scores[currentIdx]?.points ?? 0} / {ex.maxPoints} point{ex.maxPoints > 1 ? "s" : ""}
-            </span>
-          </div>
-        )}
+      {/* Exercise header */}
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
+          <span className="text-[var(--color-accent-alg)]">Exercice {ex.id}</span>
+          <span className="ml-1.5 text-sm font-normal text-[var(--color-text-secondary)]">— {ex.label}</span>
+        </h2>
+        <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
+
+      {/* All exercises mounted simultaneously — only current is visible */}
+      {EXERCISES.map((exercise, i) => {
+        const Comp = exercise.component;
+        return (
+          <div key={i} className={i !== currentIdx ? "hidden" : ""}>
+            <Comp
+              exerciseKey={exerciseKeys[i]!}
+              validated={validated[i] ?? false}
+              onValidated={(pts, max) => handleValidated(i, pts, max)}
+              validateTrigger={validateTriggers[i] ?? 0}
+            />
+          </div>
+        );
+      })}
+
+      {/* Validated indicator */}
+      {isCurrentValidated && (
+        <div className="mt-4 flex items-center gap-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 dark:bg-amber-950/20 dark:border-amber-800">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-amber-600" aria-hidden>
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+          <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+            Validé — {scores[currentIdx]?.points ?? 0} / {ex.maxPoints} point{ex.maxPoints > 1 ? "s" : ""}
+          </span>
+        </div>
+      )}
 
       {/* Navigation bar (fixed bottom) */}
       <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 safe-area-pb">
         <div className="mx-auto flex max-w-xl gap-3">
-          {/* Back */}
           <button
             type="button"
             onClick={goPrev}
@@ -491,7 +521,6 @@ export function PlacementTestClient() {
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
           </button>
 
-          {/* Validate */}
           {!isCurrentValidated && (
             <button
               type="button"
@@ -502,7 +531,6 @@ export function PlacementTestClient() {
             </button>
           )}
 
-          {/* Next */}
           <button
             type="button"
             onClick={goNext}

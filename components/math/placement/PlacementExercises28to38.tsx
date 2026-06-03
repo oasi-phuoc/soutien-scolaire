@@ -151,9 +151,6 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 28 — Puissances et racines <span className="font-normal text-[var(--color-text-secondary)]">(4 pts)</span>
-      </p>
       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
         {/* q1: a³ */}
         <div className="flex items-center gap-2 text-sm">
@@ -216,9 +213,6 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 29 — Priorité des opérations <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <div className="space-y-3">
         <div className="flex items-center gap-2 text-sm">
           <span className="w-52 shrink-0 font-mono">
@@ -281,9 +275,6 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 30 — Nombres relatifs <span className="font-normal text-[var(--color-text-secondary)]">(4 pts)</span>
-      </p>
       <div className="grid grid-cols-2 gap-x-6 gap-y-2">
         {data.map((q, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
@@ -417,9 +408,6 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 31 — Fractions <span className="font-normal text-[var(--color-text-secondary)]">(4 pts)</span>
-      </p>
       <p className="text-xs text-[var(--color-text-secondary)]">Écrire les fractions sous la forme n/d (ex: 3/4)</p>
       <div className="grid grid-cols-2 gap-x-6 gap-y-3">
         {/* q1: simplify */}
@@ -523,9 +511,6 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 32 — Pourcentages et règle de trois <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
           <span className="w-56 shrink-0">{data.pct1}% de {data.base1} =</span>
@@ -581,9 +566,6 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 33 — Simplification algébrique <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions (ex: 5x + 3y)</p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
@@ -629,9 +611,6 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 34 — Évaluer des expressions <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
           <span className="w-52 shrink-0">
@@ -686,9 +665,6 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 35 — Résoudre des équations <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
@@ -781,9 +757,6 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 36 — Conversions d&apos;unités <span className="font-normal text-[var(--color-text-secondary)]">(4 pts)</span>
-      </p>
       <div className="space-y-2">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
@@ -845,9 +818,6 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 37 — Trapèze <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
         <svg width={svgW} height={svgH} className="shrink-0">
           <polygon
@@ -916,9 +886,6 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm font-semibold text-[var(--color-accent-math)]">
-        Exercice 38 — Cercle <span className="font-normal text-[var(--color-text-secondary)]">(2 pts)</span>
-      </p>
       <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
         <svg width={180} height={120} className="shrink-0">
           <circle cx={cx} cy={cy} r={r}
