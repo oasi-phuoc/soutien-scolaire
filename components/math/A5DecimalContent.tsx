@@ -1354,21 +1354,36 @@ interface DecExprCompQ {
 }
 
 function genDecExprCompQs(count: number): DecExprCompQ[] {
+  // rndDec: 0.1–9.9 in tenths, always with non-zero decimal digit (never multiple of 10)
+  const rndDec = (): number =>
+    Math.floor(Math.random() * 10) * 10 + Math.floor(Math.random() * 9) + 1;
   return Array.from({ length: count }, () => {
     for (let attempt = 0; attempt < 200; attempt++) {
       const lop: "+" | "-" = Math.random() < 0.6 ? "+" : "-";
       const rop: "+" | "-" = Math.random() < 0.6 ? "+" : "-";
-      const laH = rnd(10, 990); // 0.1–99.0 in tenths
-      const lcH = lop === "+" ? rnd(10, 990) : rnd(10, laH - 1);
-      const raH = rnd(10, 990);
-      const rcH = rop === "+" ? rnd(10, 990) : rnd(10, raH - 1);
+      const laH = rndDec();
+      const raH = rndDec();
+      let lcH = rndDec();
+      let rcH = rndDec();
+      if (lop === "-") {
+        if (laH <= 1) continue;
+        let tries = 0;
+        while (lcH >= laH && tries < 20) { lcH = rndDec(); tries++; }
+        if (lcH >= laH) continue;
+      }
+      if (rop === "-") {
+        if (raH <= 1) continue;
+        let tries = 0;
+        while (rcH >= raH && tries < 20) { rcH = rndDec(); tries++; }
+        if (rcH >= raH) continue;
+      }
       const lval = lop === "+" ? laH + lcH : laH - lcH;
       const rval = rop === "+" ? raH + rcH : raH - rcH;
       if (lval < 0 || rval < 0) continue;
       const answer: "<" | "=" | ">" = lval < rval ? "<" : lval > rval ? ">" : "=";
       return { laH, lop, lcH, raH, rop, rcH, answer, lval, rval };
     }
-    return { laH: 15, lop: "+", lcH: 25, raH: 50, rop: "-", rcH: 10, answer: "<", lval: 40, rval: 40 };
+    return { laH: 15, lop: "+", lcH: 23, raH: 47, rop: "-", rcH: 16, answer: "<", lval: 38, rval: 31 };
   });
 }
 
@@ -1407,52 +1422,50 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les expressions. Choisissez &lt;, = ou &gt;.</p>
       </div>
-      <div className="overflow-x-auto">
-        <div className="space-y-4">
-          {questions.map((q: DecExprCompQ, i: number) => {
-            const st = statuses[i]!;
-            const sel = selected[i];
-            const btnCls = (sym: "<" | "=" | ">") => {
-              const isSelected = sel === sym;
-              const isCorrect = sym === q.answer;
-              if (!validated) {
-                return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
-                  isSelected
-                    ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
-                }`;
-              }
-              if (st === "wrong" && (isSelected || isCorrect)) {
-                return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${CLS_WRONG}`;
-              }
+      <div className="grid items-center gap-y-4" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
+        {questions.map((q: DecExprCompQ, i: number) => {
+          const st = statuses[i]!;
+          const sel = selected[i];
+          const btnCls = (sym: "<" | "=" | ">") => {
+            const isSelected = sel === sym;
+            const isCorrect = sym === q.answer;
+            if (!validated) {
               return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
                 isSelected
                   ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
               }`;
-            };
-            return (
-              <div key={i} className="flex items-center gap-2">
-                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
-                  {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
-                </span>
-                <div className="shrink-0 flex gap-1.5">
-                  {(["<", "=", ">"] as const).map(sym => (
-                    <button key={sym} type="button"
-                      onClick={() => { if (!validated) setSelected((prev: (string | null)[]) => { const n = [...prev]; n[i] = sym; return n; }); }}
-                      className={btnCls(sym)}>
-                      {sym}
-                    </button>
-                  ))}
-                </div>
-                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
-                  {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
-                </span>
+            }
+            if (st === "wrong" && (isSelected || isCorrect)) {
+              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${CLS_WRONG}`;
+            }
+            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              isSelected
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
+            }`;
+          };
+          return (
+            <React.Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="text-right font-mono text-sm text-[var(--color-text-primary)] pr-2">
+                {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
+              </span>
+              <div className="flex gap-1.5">
+                {(["<", "=", ">"] as const).map(sym => (
+                  <button key={sym} type="button"
+                    onClick={() => { if (!validated) setSelected((prev: (string | null)[]) => { const n = [...prev]; n[i] = sym; return n; }); }}
+                    className={btnCls(sym)}>
+                    {sym}
+                  </button>
+                ))}
               </div>
-            );
-          })}
-        </div>
+              <span className="font-mono text-sm text-[var(--color-text-primary)] pl-2">
+                {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
+              </span>
+            </React.Fragment>
+          );
+        })}
       </div>
     </div>
   );
@@ -1634,7 +1647,6 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     <div data-decmul2-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 space-y-3">
       <p className="text-center text-xs text-[var(--color-text-secondary)]">
         {q.aStr} × {q.bStr}
-        <span className="ml-2 text-[var(--color-text-secondary)] opacity-60">→ {q.aInt} × {q.bInt} ({q.totalDecimals} déc.)</span>
       </p>
       <table className="mx-auto border-collapse">
         <thead>
@@ -1700,7 +1712,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         </tbody>
       </table>
       <div className="flex items-center gap-2 pt-1">
-        <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat décimal :</span>
+        <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
         {decWrong ? (
           <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[5rem] justify-center">
             <span className="text-amber-600 line-through tabular-nums">{decResult || "—"}</span>
