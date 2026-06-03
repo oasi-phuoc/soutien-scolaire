@@ -1075,25 +1075,17 @@ type Ex13Question = { a: number; b: number; op: "+" | "-" | "×" | "÷"; result:
 export function Exercise13({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): Ex13Question[] => {
     const a1 = randInt(1000, 4999), b1 = randInt(1000, 9999 - a1);
-    const a4 = randInt(1001, 9999); let b4 = randInt(1000, a4 - 1);
-    while (b4 >= a4) b4 = randInt(1000, a4 - 1);
-    const ma2 = randInt(100, 999), mb2 = randInt(2, 9);
-    const ma5 = randInt(100, 999), mb5 = randInt(2, 9);
-    const div3 = randInt(2, 9), quot3 = randInt(111, 999);
-    const div6 = randInt(2, 9), quot6 = randInt(111, 999);
+    const a2 = randInt(1001, 9999); let b2 = randInt(1000, a2 - 1);
+    while (b2 >= a2) b2 = randInt(1000, a2 - 1);
     return [
       { a: a1, b: b1, op: "+", result: a1 + b1 },
-      { a: ma2, b: mb2, op: "×", result: ma2 * mb2 },
-      { a: div3 * quot3, b: div3, op: "÷", result: quot3 },
-      { a: a4, b: b4, op: "-", result: a4 - b4 },
-      { a: ma5, b: mb5, op: "×", result: ma5 * mb5 },
-      { a: div6 * quot6, b: div6, op: "÷", result: quot6 },
+      { a: a2, b: b2, op: "-", result: a2 - b2 },
     ];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[][]>(() => Array(6).fill(null).map(() => ["","","",""]));
-  const [carries, setCarries] = useState<string[][]>(() => Array(6).fill(null).map(() => ["","","",""]));
+  const [answers, setAnswers] = useState<string[][]>(() => Array(2).fill(null).map(() => ["","","",""]));
+  const [carries, setCarries] = useState<string[][]>(() => Array(2).fill(null).map(() => ["","","",""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -1102,35 +1094,26 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
       const d = answers[i] ?? [];
       const rec = (parseInt(d[0]||"0")||0)*1000 + (parseInt(d[1]||"0")||0)*100 +
         (parseInt(d[2]||"0")||0)*10 + (parseInt(d[3]||"0")||0);
-      if (rec === q.result) pts += 0.5;
+      if (rec === q.result) pts++;
     });
-    onValidated(pts, 3);
+    onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const rows: [number, number][] = [[0, 3], [1, 4], [2, 5]];
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
-      <div className="space-y-3">
-        {rows.map(([li, ri]) => (
-          <div key={li} className="grid grid-cols-2 gap-3">
-            {[li, ri].map(i => {
-              const q = questions[i]!;
-              return (
-                <div key={i} className="flex flex-col items-start gap-1">
-                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <PlacementColCard
-                    a={q.a} b={q.b} op={q.op} result={q.result}
-                    answers={answers[i] ?? ["","","",""]}
-                    carries={carries[i] ?? ["","","",""]}
-                    onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
-                    onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
-                    validated={validated}
-                  />
-                </div>
-              );
-            })}
+      <div className="grid grid-cols-2 gap-3">
+        {questions.map((q, i) => (
+          <div key={i} className="flex flex-col items-start gap-1">
+            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <PlacementColCard
+              a={q.a} b={q.b} op={q.op} result={q.result}
+              answers={answers[i] ?? ["","","",""]}
+              carries={carries[i] ?? ["","","",""]}
+              onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+              onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+              validated={validated}
+            />
           </div>
         ))}
       </div>
