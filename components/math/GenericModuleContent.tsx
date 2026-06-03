@@ -2079,7 +2079,10 @@ function RoundingExercise({
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
-        <div className={isNew && !isInline ? "grid gap-y-3" : "space-y-3"} style={isNew && !isInline ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}>
+        <div
+          className={isInline ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
+          style={isInline ? { gridTemplateColumns: "1.25rem 1fr auto 4.5rem" } : isNew && !isInline ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}
+        >
           {config.questions.map((q, i) => {
             const v = answers[i] ?? "";
             const ok = validated ? results[i] ?? false : null;
@@ -2101,12 +2104,12 @@ function RoundingExercise({
                 />;
             if (isInline) {
               return (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.prompt}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] mx-1">≈</span>
+                <Fragment key={i}>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
+                  <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{q.prompt}</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
                   {field}
-                </div>
+                </Fragment>
               );
             }
             return isNew
