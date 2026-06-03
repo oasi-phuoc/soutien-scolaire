@@ -109,32 +109,36 @@ export function Exercise16({ exerciseKey, validated, onValidated, validateTrigge
 // ── Exercise 17 — Number sequences (6 terms, 4 blanks) ───────────────────────
 
 function genSeq17Int() {
-  const steps = [];
-  for (let s = 125; s <= 975; s += 25) steps.push(s);
+  // gaps: multiples of 5, 115–995, not ending in 00
+  const steps: number[] = [];
+  for (let s = 115; s <= 995; s += 5) {
+    if (s % 100 !== 0) steps.push(s);
+  }
   const step = steps[randInt(0, steps.length - 1)]!;
   const isAsc = Math.random() < 0.5;
-  const maxStart = isAsc ? 999999 - 5 * step : 999999;
-  const minStart = isAsc ? 100000 : 100000 + 5 * step;
-  if (minStart > maxStart) return genSeq17Int();
-  const start = randInt(Math.ceil(minStart / step), Math.floor(maxStart / step)) * step;
+  const totalSpan = 5 * step;
+  const startMin = isAsc ? 1000 : 1000 + totalSpan;
+  const startMax = isAsc ? 50000 - totalSpan : 50000;
+  const start = randInt(startMin, startMax);
   const vals = Array.from({ length: 6 }, (_, i) => isAsc ? start + i * step : start - i * step);
   const pairStart = randInt(0, 4);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
 }
 
 function genSeq17Dec() {
-  const steps = Array.from({ length: 95 }, (_, i) => Math.round((i + 1) * 0.01 * 100) / 100);
-  const step = steps[randInt(0, steps.length - 1)]!;
+  // gaps: odd multiples of 0.05 in [0.05, 0.95] (don't end in 0)
+  // work in units of 0.05 to avoid float precision issues
+  const oddK = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19];
+  const stepK = oddK[randInt(0, oddK.length - 1)]!;
   const isAsc = Math.random() < 0.5;
-  const minVal = 0.01, maxVal = 9.99;
-  const totalSpan = 5 * step;
-  if (totalSpan > maxVal - minVal) return genSeq17Dec();
-  const startCandidates = Math.floor((maxVal - minVal - totalSpan) / step);
-  const startSteps = isAsc ? randInt(0, startCandidates) : randInt(0, startCandidates);
-  const start = Math.round((minVal + startSteps * step) * 100) / 100;
+  // Range: 1 to 199 units of 0.05 (= 0.05 to 9.95)
+  const spanK = 5 * stepK;
+  const startMinK = isAsc ? 1 : 1 + spanK;
+  const startMaxK = isAsc ? 199 - spanK : 199;
+  const startK = randInt(startMinK, startMaxK);
   const vals = Array.from({ length: 6 }, (_, i) => {
-    const v = isAsc ? start + i * step : start - i * step;
-    return Math.round(v * 100) / 100;
+    const u = isAsc ? startK + i * stepK : startK - i * stepK;
+    return Math.round(u * 5) / 100; // u × 0.05
   });
   const pairStart = randInt(0, 4);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
