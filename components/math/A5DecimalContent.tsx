@@ -1133,7 +1133,178 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
   );
 }
 
-// ── Decimal expression comparison (A5.4 Ex9 — A2.1 Ex9 style) ────────────────
+// ── Decimal column — full input (A5.4 Ex9) ───────────────────────────────────
+
+function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
+  q: DecColQ; cardIdx: number; cellAnswers: string[]; validated: boolean;
+  onChange: (cardIdx: number, cellIdx: number, val: string) => void;
+}) {
+  const [ac, ad, au, adx, acx] = hToDigits(q.aH);
+  const [bc, bd, bu, bdx, bcx] = hToDigits(q.bH);
+  const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
+  const aDigits = [ac, ad, au, adx, acx];
+  const bDigits = [bc, bd, bu, bdx, bcx];
+  const rDigits = [rc, rd, ru, rdx, rcx];
+  const firstNzA = aDigits.findIndex(d => d !== 0);
+  const firstNzB = bDigits.findIndex(d => d !== 0);
+  const firstNzR = rDigits.findIndex(d => d !== 0);
+  const labels = ["C", "D", "U", ",", "dx", "cx"];
+
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = (e.currentTarget as HTMLElement).closest("[data-dec-card-full]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  function inputCell(inputIdx: number, expected: number, isLeading: boolean) {
+    const val = cellAnswers[inputIdx] ?? "";
+    const ok = validated
+      ? (val.trim() === String(expected) || (isLeading && expected === 0 && (val.trim() === "" || val.trim() === "0")))
+      : null;
+    if (ok === false) {
+      return (
+        <td key={inputIdx} className="w-8 text-center">
+          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={inputIdx} className="w-8 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          onKeyDown={tabNav}
+          onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+          className="h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+      </td>
+    );
+  }
+
+  const commaCell = (key: string) => (
+    <td key={key} className="w-8 text-center">
+      <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
+    </td>
+  );
+
+  return (
+    <div data-dec-card-full className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
+        {hundredthsToStr(q.aH)} {q.op} {hundredthsToStr(q.bH)}
+      </p>
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {labels.map((l, i) => (
+              <th key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td />
+            {inputCell(0, ac, 0 < firstNzA)}
+            {inputCell(1, ad, 1 < firstNzA)}
+            {inputCell(2, au, 2 < firstNzA)}
+            {commaCell("a-comma")}
+            {inputCell(3, adx, false)}
+            {inputCell(4, acx, false)}
+          </tr>
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
+            {inputCell(5, bc, 0 < firstNzB)}
+            {inputCell(6, bd, 1 < firstNzB)}
+            {inputCell(7, bu, 2 < firstNzB)}
+            {commaCell("b-comma")}
+            {inputCell(8, bdx, false)}
+            {inputCell(9, bcx, false)}
+          </tr>
+          <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {inputCell(10, rc, 0 < firstNzR)}
+            {inputCell(11, rd, 1 < firstNzR)}
+            {inputCell(12, ru, 2 < firstNzR)}
+            {commaCell("r-comma")}
+            {inputCell(13, rdx, false)}
+            {inputCell(14, rcx, false)}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export function DecColArithFullExercise({ exNum, validateCommand, onValidated }: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<DecColQ[]>(() => {
+    const [q1] = genDecColQs("+", 1);
+    const [q2] = genDecColQs("-", 1);
+    return [q1!, q2!];
+  });
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(15).fill("")));
+  const [validated, setValidated] = useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res: boolean[] = questions.map((q: DecColQ, qi: number) => {
+      const [ac, ad, au, adx, acx] = hToDigits(q.aH);
+      const [bc, bd, bu, bdx, bcx] = hToDigits(q.bH);
+      const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
+      const aDigits = [ac, ad, au, adx, acx];
+      const bDigits = [bc, bd, bu, bdx, bcx];
+      const rDigits = [rc, rd, ru, rdx, rcx];
+      const firstNzA = aDigits.findIndex(d => d !== 0);
+      const firstNzB = bDigits.findIndex(d => d !== 0);
+      const firstNzR = rDigits.findIndex(d => d !== 0);
+      const expected = [...aDigits, ...bDigits, ...rDigits];
+      const firstNzs = [firstNzA, firstNzB, firstNzR];
+      return expected.every((exp: number, ci: number) => {
+        const val = (answers[qi]?.[ci] ?? "").trim();
+        if (val === String(exp)) return true;
+        const row = Math.floor(ci / 5);
+        const posInRow = ci % 5;
+        const fn = firstNzs[row]!;
+        return exp === 0 && posInRow < fn && (val === "" || val === "0");
+      });
+    });
+    setValidated(true);
+    onValidated(res.every((r: boolean) => r), res.filter((r: boolean) => r).length, res.length);
+  }, [validated, questions, answers, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les calculs en colonnes (tous les chiffres sont à saisir).</p>
+      <div className="grid grid-cols-1 gap-4">
+        {questions.map((q: DecColQ, qi: number) => (
+          <DecColCardFull key={qi} q={q} cardIdx={qi}
+            cellAnswers={answers[qi]!}
+            validated={validated}
+            onChange={(ci: number, cellIdx: number, val: string) => setAnswers((prev: string[][]) => {
+              const next = prev.map((r: string[]) => [...r]);
+              next[ci]![cellIdx] = val;
+              return next;
+            })} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Decimal expression comparison (A5.4 Ex10 — A2.1 Ex9 style) ───────────────
 interface DecExprCompQ {
   laH: number; lop: "+" | "-"; lcH: number;
   raH: number; rop: "+" | "-"; rcH: number;
@@ -1195,50 +1366,52 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
         <h2 className="text-base font-bold text-[var(--color-text-primary)]">Exercice {exNum}</h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Comparez les expressions. Choisissez &lt;, = ou &gt;.</p>
       </div>
-      <div className="space-y-4">
-        {questions.map((q: DecExprCompQ, i: number) => {
-          const st = statuses[i]!;
-          const sel = selected[i];
-          const btnCls = (sym: "<" | "=" | ">") => {
-            const isSelected = sel === sym;
-            const isCorrect = sym === q.answer;
-            if (!validated) {
+      <div className="overflow-x-auto">
+        <div className="space-y-4">
+          {questions.map((q: DecExprCompQ, i: number) => {
+            const st = statuses[i]!;
+            const sel = selected[i];
+            const btnCls = (sym: "<" | "=" | ">") => {
+              const isSelected = sel === sym;
+              const isCorrect = sym === q.answer;
+              if (!validated) {
+                return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+                  isSelected
+                    ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+                }`;
+              }
+              if (st === "wrong" && (isSelected || isCorrect)) {
+                return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${CLS_WRONG}`;
+              }
               return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
                 isSelected
                   ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
-                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
+                  : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
               }`;
-            }
-            if (st === "wrong" && (isSelected || isCorrect)) {
-              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${CLS_WRONG}`;
-            }
-            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
-              isSelected
-                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
-                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
-            }`;
-          };
-          return (
-            <div key={i} className="flex items-center gap-2 flex-wrap">
-              <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-sm text-[var(--color-text-primary)]">
-                {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
-              </span>
-              <div className="flex gap-1.5">
-                {(["<", "=", ">"] as const).map(sym => (
-                  <button key={sym} type="button"
-                    onClick={() => { if (!validated) setSelected((prev: (string | null)[]) => { const n = [...prev]; n[i] = sym; return n; }); }}
-                    className={btnCls(sym)}>
-                    {sym}
-                  </button>
-                ))}
+            };
+            return (
+              <div key={i} className="flex items-center gap-2">
+                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
+                  {tenthsToFrStr(q.laH)} {q.lop} {tenthsToFrStr(q.lcH)}
+                </span>
+                <div className="shrink-0 flex gap-1.5">
+                  {(["<", "=", ">"] as const).map(sym => (
+                    <button key={sym} type="button"
+                      onClick={() => { if (!validated) setSelected((prev: (string | null)[]) => { const n = [...prev]; n[i] = sym; return n; }); }}
+                      className={btnCls(sym)}>
+                      {sym}
+                    </button>
+                  ))}
+                </div>
+                <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
+                  {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
+                </span>
               </div>
-              <span className="font-mono text-sm text-[var(--color-text-primary)]">
-                {tenthsToFrStr(q.raH)} {q.rop} {tenthsToFrStr(q.rcH)}
-              </span>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );
