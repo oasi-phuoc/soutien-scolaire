@@ -5514,10 +5514,10 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
-          <div className="overflow-x-auto">
+          <div>
             <div
-              className="inline-grid items-center gap-x-1.5 gap-y-3"
-              style={{ gridTemplateColumns: `1.5rem repeat(${activeDecSeqCompleteConfig.questions[0]?.allNums.length ?? 5}, 4rem)` }}
+              className="grid items-center gap-x-1 gap-y-3"
+              style={{ gridTemplateColumns: `1.25rem repeat(${activeDecSeqCompleteConfig.questions[0]?.allNums.length ?? 5}, minmax(0, 1fr))` }}
             >
               {activeDecSeqCompleteConfig.questions.map((q, qi) => {
                 let blankCounter = 0;
