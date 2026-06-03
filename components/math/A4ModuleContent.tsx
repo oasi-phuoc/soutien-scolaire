@@ -1151,12 +1151,14 @@ function riA4(lo: number, hi: number): number {
 }
 
 // Vertical fraction (number-based)
-function VFracNum({ n, d }: { n: number; d: number }) {
+function VFracNum({ n, d, small }: { n: number; d: number; small?: boolean }) {
+  const w = small ? "w-8" : "w-12";
+  const h = small ? "h-6" : "h-8";
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-      <span className="h-[1.5px] w-12 rounded-full bg-[var(--color-text-primary)]" />
-      <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
+      <span className={`${h} ${w} flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]`}>{n}</span>
+      <span className={`h-[1.5px] ${w} rounded-full bg-[var(--color-text-primary)]`} />
+      <span className={`${h} ${w} flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]`}>{d}</span>
     </span>
   );
 }
@@ -1478,30 +1480,30 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
             const isSelected = sel === sym;
             const isCorrect = sym === q.answer;
             if (!validated) {
-              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              return `w-9 py-2 text-sm font-bold rounded-xl border transition-colors ${
                 isSelected
                   ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
               }`;
             }
             if (st === "wrong" && (isSelected || isCorrect)) {
-              return "w-10 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
+              return "w-9 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
             }
-            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+            return `w-9 py-2 text-sm font-bold rounded-xl border transition-colors ${
               isSelected
                 ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
                 : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
             }`;
           };
           return (
-            <div key={i} className="flex items-center gap-2 flex-wrap">
+            <div key={i} className="flex items-center gap-1.5">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <div className="flex items-center gap-0.5">
-                <VFracNum n={q.la} d={q.lb} />
-                <span className="shrink-0 px-1 text-sm font-bold text-[var(--color-text-secondary)]">{q.lop}</span>
-                <VFracNum n={q.lc} d={q.ld} />
+                <VFracNum n={q.la} d={q.lb} small />
+                <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{q.lop}</span>
+                <VFracNum n={q.lc} d={q.ld} small />
               </div>
-              <div className="flex gap-1.5">
+              <div className="flex gap-1">
                 {(["<", "=", ">"] as const).map(sym => (
                   <button key={sym} type="button"
                     onClick={() => { if (!validated) setSelected(prev => { const n = [...prev]; n[i] = sym; return n; }); }}
@@ -1511,9 +1513,9 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
                 ))}
               </div>
               <div className="flex items-center gap-0.5">
-                <VFracNum n={q.ra} d={q.rb} />
-                <span className="shrink-0 px-1 text-sm font-bold text-[var(--color-text-secondary)]">{q.rop}</span>
-                <VFracNum n={q.rc} d={q.rd} />
+                <VFracNum n={q.ra} d={q.rb} small />
+                <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{q.rop}</span>
+                <VFracNum n={q.rc} d={q.rd} small />
               </div>
             </div>
           );
@@ -1562,16 +1564,16 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
             const isSelected = sel === sym;
             const isCorrect = sym === p.answer;
             if (!validated) {
-              return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+              return `w-9 py-2 text-sm font-bold rounded-xl border transition-colors ${
                 isSelected
                   ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
                   : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
               }`;
             }
             if (st === "wrong" && (isSelected || isCorrect)) {
-              return "w-10 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
+              return "w-9 py-2 text-sm font-bold rounded-xl border border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20 transition-colors";
             }
-            return `w-10 py-2 text-sm font-bold rounded-xl border transition-colors ${
+            return `w-9 py-2 text-sm font-bold rounded-xl border transition-colors ${
               isSelected
                 ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]/30"
                 : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-40"
