@@ -507,7 +507,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
 // ── Ex 8 — Ordre croissant ────────────────────────────────────────────────────
 function genOrder(): string[] {
   const nums: string[] = [];
-  while (nums.length < 5) {
+  while (nums.length < 4) {
     const intPart = rnd(1, 9);
     const s = Math.random() < 0.5
       ? `${intPart},${rnd(1, 9)}`
