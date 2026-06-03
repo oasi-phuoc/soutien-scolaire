@@ -15,14 +15,20 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
             "Si la somme ≥ 10 → poser les unités et **retenir 1**.",
           ],
         },
+        { type: "heading", fr: "Soustraction en colonnes", black: true },
+        { type: "highlight", fr: "Règle de l'emprunt" },
         {
-          type: "add_step_cards",
-          colLabels: ["D", "U", ",", "dx"],
-          op: "+",
-          carryLabel: "R",
-          a: [5, 7, null, 9],
-          b: [null, 2, null, 4],
-          steps: [
+          type: "section", labelFr: "", itemsFr: [
+            "Si soustraction impossible (ex. 3 − 8) → **emprunter 1** à la colonne de gauche.",
+            "La colonne empruntée est réduite de 1. La colonne courante gagne 10.",
+          ],
+        },
+        {
+          type: "add_sub_toggle_cards",
+          addColLabels: ["D", "U", ",", "dx"],
+          addA: [5, 7, null, 9],
+          addB: [null, 2, null, 4],
+          addSteps: [
             {
               numFr: "1. On pose les nombres",
               textsFr: ["Aligner les virgules. Dixièmes sous dixièmes, unités sous unités."],
@@ -48,26 +54,49 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
               result:  [6, 0, null, 3],
             },
           ],
-        },
-        { type: "note", fr: "57,9 + 2,4 = 60,3" },
-        { type: "plain", fr: "" },
-        { type: "heading", fr: "Soustraction en colonnes", black: true },
-        { type: "highlight", fr: "Règle de l'emprunt" },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "Si soustraction impossible (ex. 3 − 8) → **emprunter 1** à la colonne de gauche.",
-            "La colonne empruntée est réduite de 1. La colonne courante gagne 10.",
+          addNoteFr: "57,9 + 2,4 = 60,3",
+          subColLabels: ["D", "U", ",", "dx"],
+          subA: [1, 4, null, 3],
+          subB: [null, 5, null, 8],
+          subSteps: [
+            {
+              numFr: "1. On pose les nombres",
+              textsFr: ["Aligner les virgules. Dixièmes sous dixièmes, unités sous unités."],
+              carries: [null, null, null, null],
+              result:  [null, null, null, null],
+            },
+            {
+              numFr: "2. Dixièmes : 3 − 8 impossible → emprunter",
+              textsFr: [
+                "3 − 8 impossible → emprunter 1 à l'unité.",
+                "L'unité est réduite : 4 − 1 = 3. Les dixièmes deviennent 13.",
+                "13 − 8 = 5 → pose 5.",
+              ],
+              carries: [null, 1, null, null],
+              result:  [null, null, null, 5],
+            },
+            {
+              numFr: "3. Unités : 3 − 5 impossible → emprunter",
+              textsFr: [
+                "(4 − 1) = 3. 3 − 5 impossible → emprunter 1 à la dizaine.",
+                "La dizaine est réduite : 1 − 1 = 0. Les unités deviennent 13.",
+                "13 − 5 = 8 → pose 8.",
+              ],
+              carries: [1, 1, null, null],
+              result:  [null, 8, null, 5],
+            },
+            {
+              numFr: "4. Dizaines : (1 − 1) − 0 = 0",
+              textsFr: [
+                "1 − 1 (emprunt) = 0. 0 − 0 = 0 → pose 0.",
+                "Résultat : 14,3 − 5,8 = 8,5",
+              ],
+              carries: [1, 1, null, null],
+              result:  [0, 8, null, 5],
+            },
           ],
+          subNoteFr: "14,3 − 5,8 = 8,5",
         },
-        { type: "highlight", fr: "Exemple : 14,3 − 5,8" },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "dx : 3 − 8 impossible → emprunter → 13 − 8 = 5",
-            "U : (4 − 1) − 5 = 3 − 5 impossible → emprunter → 13 − 5 = 8",
-            "D : (1 − 1) − 0 = 0",
-          ],
-        },
-        { type: "note", fr: "14,3 − 5,8 = 8,5" },
       ],
       paragraphs: { fr: [] },
     },

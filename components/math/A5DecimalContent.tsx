@@ -136,7 +136,7 @@ function DecExercise({
 
 type ArithOp = "+" | "-" | "×";
 // "small" = 0.01–10 (hundredths 1–999); "large" = 10–100 (tenths 100–999 or hundredths 1000–9999, random)
-type ArithPrecision = "tenths" | "hundredths" | "extended" | "small" | "large";
+type ArithPrecision = "tenths" | "hundredths" | "extended" | "small" | "large" | "special_mul";
 type MissingPos = "a" | "b" | "result";
 
 interface ArithQuestion {
@@ -151,6 +151,12 @@ function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
   const s = secs % 60;
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+function thousandthsToStr(t: number): string {
+  if (t % 1000 === 0) return String(t / 1000);
+  const dec = String(t % 1000).padStart(3, "0").replace(/0+$/, "");
+  return `${Math.floor(t / 1000)},${dec}`;
 }
 
 function genArithQuestions(
@@ -227,7 +233,37 @@ function genArithQuestions(
       }
     } else {
       // ×
-      if (precision === "extended") {
+      if (precision === "special_mul") {
+        const FACTORS = [
+          { str: "0,5",   idx: 0 },
+          { str: "0,25",  idx: 1 },
+          { str: "0,2",   idx: 2 },
+          { str: "0,125", idx: 3 },
+          { str: "0,1",   idx: 4 },
+          { str: "0,01",  idx: 5 },
+          { str: "0,001", idx: 6 },
+        ];
+        const f = FACTORS[rnd(0, 6)]!;
+        let a: number;
+        let resultStr2: string;
+        switch (f.idx) {
+          case 0: a = rnd(1, 40) * 2;  resultStr2 = String(a / 2); break;          // × 0,5
+          case 1: a = rnd(1, 20) * 4;  resultStr2 = String(a / 4); break;          // × 0,25
+          case 2: a = rnd(1, 20) * 5;  resultStr2 = String(a / 5); break;          // × 0,2
+          case 3: a = rnd(1, 12) * 8;  resultStr2 = String(a / 8); break;          // × 0,125
+          case 4: a = rnd(1, 100);     resultStr2 = tenthsToStr(a); break;         // × 0,1
+          case 5: a = rnd(1, 100);     resultStr2 = hundredthsToStr(a); break;     // × 0,01
+          default: a = rnd(1, 100);   resultStr2 = thousandthsToStr(a); break;     // × 0,001
+        }
+        aStr = String(a); bStr = f.str; resultStr = resultStr2;
+        if (!missingOperand) {
+          missingPos = "result";
+        } else {
+          missingPos = Math.random() < 0.5 ? "a" : "b";
+        }
+        const answer2 = missingPos === "a" ? aStr : missingPos === "b" ? bStr : resultStr;
+        return { aStr, bStr, resultStr, missingPos, answer: answer2 };
+      } else if (precision === "extended") {
         // decimal × decimal: aT ∈ [11,99], bT ∈ [11,99]
         const aT = rnd(11, 99);
         const bT = rnd(11, 99);
@@ -592,6 +628,11 @@ function DecMulColCard({
 
   return (
     <div data-decmul-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      {!preFilledOperands && (
+        <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
+          {q.aU},{q.aDx} × {q.b}
+        </p>
+      )}
       <table className="mx-auto border-collapse">
         <thead>
           <tr>
@@ -1412,6 +1453,365 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
             );
           })}
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Decimal × 2-digit column multiplication (A5.5 Ex7) ────────────────────────
+interface DecMul2Q {
+  aStr: string;
+  bStr: string;
+  aInt: number;
+  bInt: number;
+  totalDecimals: number;
+  partial1: number;
+  partial2: number;
+  intResult: number;
+  resultStr: string;
+  carries1: (number | null)[];
+  carries2: (number | null)[];
+}
+
+function formatDecResult(intResult: number, decimals: number): string {
+  const s = String(intResult);
+  if (decimals <= 0) return s;
+  const padded = s.padStart(decimals + 1, "0");
+  const intPart = padded.slice(0, padded.length - decimals) || "0";
+  const decPart = padded.slice(padded.length - decimals).replace(/0+$/, "");
+  return decPart ? `${intPart},${decPart}` : intPart;
+}
+
+function computeCarries5Dec(a: number, bDigit: number): (number | null)[] {
+  const ad = [
+    Math.floor(a / 10000) % 10,
+    Math.floor(a / 1000) % 10,
+    Math.floor(a / 100) % 10,
+    Math.floor(a / 10) % 10,
+    a % 10,
+  ];
+  const row: (number | null)[] = [null, null, null, null, null];
+  let c = 0;
+  for (let i = 4; i >= 0; i--) {
+    const prod = ad[i]! * bDigit + c;
+    c = Math.floor(prod / 10);
+    if (i > 0 && c > 0) row[i - 1] = c;
+  }
+  return row;
+}
+
+function genDecMul2Questions(): DecMul2Q[] {
+  return Array.from({ length: 2 }, () => {
+    const aDecimals = Math.random() < 0.5 ? 1 : 2;
+    const bDecimals = 1;
+    const totalDecimals = aDecimals + bDecimals;
+    let bInt: number;
+    do { bInt = rnd(11, 39); } while (bInt % 10 === 0);
+    const aInt = rnd(100, 499);
+    const bUnits = bInt % 10;
+    const bTens = Math.floor(bInt / 10);
+    const partial1 = aInt * bUnits;
+    const partial2 = aInt * bTens;
+    const intResult = aInt * bInt;
+    const resultStr = formatDecResult(intResult, totalDecimals);
+    const aFormatted = formatDecResult(aInt, aDecimals);
+    const bFormatted = formatDecResult(bInt, bDecimals);
+    return {
+      aStr: aFormatted,
+      bStr: bFormatted,
+      aInt,
+      bInt,
+      totalDecimals,
+      partial1,
+      partial2,
+      intResult,
+      resultStr,
+      carries1: computeCarries5Dec(aInt, bUnits),
+      carries2: computeCarries5Dec(aInt, bTens),
+    };
+  });
+}
+
+function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, validated,
+  onCarryChange, onCellChange, onDecResultChange,
+}: {
+  q: DecMul2Q; cardIdx: number; carryInputs: string[]; cellAnswers: string[];
+  decResult: string; validated: boolean;
+  onCarryChange: (ci: number, idx: number, val: string) => void;
+  onCellChange: (ci: number, idx: number, val: string) => void;
+  onDecResultChange: (ci: number, val: string) => void;
+}) {
+  function getD5(n: number): number[] {
+    return [
+      Math.floor(n / 10000) % 10,
+      Math.floor(n / 1000) % 10,
+      Math.floor(n / 100) % 10,
+      Math.floor(n / 10) % 10,
+      n % 10,
+    ];
+  }
+  const ad = getD5(q.aInt), bd = getD5(q.bInt);
+  const p1d = getD5(q.partial1), p2d = getD5(q.partial2), rd = getD5(q.intResult);
+  const firstNzA = ad.findIndex(d => d !== 0);
+  const firstNzP1 = p1d.findIndex(d => d !== 0);
+  const firstNzR = rd.findIndex(d => d !== 0);
+  const firstNzP2s = [0,1,2,3].findIndex(c => p2d[c+1] !== 0);
+  const numCols = q.intResult > 9999 ? 5 : 4;
+  const colStart = 5 - numCols;
+  const visibleCols = Array.from({ length: numCols }, (_, i) => colStart + i);
+  const COL5_LABELS = ["DM", "M", "C", "D", "U"];
+  const colLabels = COL5_LABELS.slice(colStart);
+  const totalSpan = numCols + 1;
+
+  function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key !== "Tab") return;
+    e.preventDefault();
+    const card = (e.currentTarget as HTMLElement).closest("[data-decmul2-card]");
+    if (!card) return;
+    const inputs = Array.from(card.querySelectorAll("input:not(:disabled)")) as HTMLInputElement[];
+    const idx = inputs.indexOf(e.currentTarget);
+    const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
+    if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  const cellInput = (base: number, col: number, expected: number, firstNz: number) => {
+    const idx = base + col;
+    const val = cellAnswers[idx] ?? "";
+    const isLeading = expected === 0 && col < firstNz;
+    const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
+    if (ok === false) {
+      return (
+        <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCellChange(cardIdx, idx, v); }}
+        onKeyDown={tabNav}
+        onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
+          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/30"
+          : "border-[var(--color-border-default)]"
+        }`}
+      />
+    );
+  };
+
+  const carryCell = (rowBase: number, col: number, expectedCarries: (number|null)[]) => {
+    const idx = rowBase + col;
+    const val = carryInputs[idx] ?? "";
+    const expected = expectedCarries[col];
+    if (validated && expected !== null && val.trim() !== String(expected)) {
+      return (
+        <div className="h-5 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+          <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
+        onKeyDown={tabNav}
+        onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+      />
+    );
+  };
+
+  const Prefilled = ({ digit, isLeading }: { digit: number; isLeading: boolean }) => (
+    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+      {isLeading ? "" : digit}
+    </div>
+  );
+
+  const decWrong = validated && decResult.trim().replace(".", ",") !== q.resultStr;
+
+  return (
+    <div data-decmul2-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 space-y-3">
+      <p className="text-center text-xs text-[var(--color-text-secondary)]">
+        {q.aStr} × {q.bStr}
+        <span className="ml-2 text-[var(--color-text-secondary)] opacity-60">→ {q.aInt} × {q.bInt} ({q.totalDecimals} déc.)</span>
+      </p>
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {colLabels.map(h => (
+              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            {visibleCols.map(col => <td key={col} className="text-center">{carryCell(5, col, q.carries2)}</td>)}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            {visibleCols.map(col => <td key={col} className="text-center">{carryCell(0, col, q.carries1)}</td>)}
+          </tr>
+          <tr>
+            <td />
+            {visibleCols.map(col => (
+              <td key={col} className="text-center">
+                <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            {visibleCols.map(col => (
+              <td key={col} className="text-center">
+                <Prefilled digit={bd[col]!} isLeading={col < (bd.findIndex(d => d !== 0))} />
+              </td>
+            ))}
+          </tr>
+          <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {visibleCols.map(col => (
+              <td key={col} className="text-center">{cellInput(0, col, p1d[col]!, firstNzP1)}</td>
+            ))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+            {visibleCols.map(col => {
+              if (col === 4) return (
+                <td key={col} className="text-center">
+                  <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
+                </td>
+              );
+              const expected = p2d[col + 1]!;
+              const fNz2 = firstNzP2s < 0 ? 5 : firstNzP2s;
+              return <td key={col} className="text-center">{cellInput(5, col, expected, fNz2)}</td>;
+            })}
+          </tr>
+          <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {visibleCols.map(col => (
+              <td key={col} className="text-center">{cellInput(10, col, rd[col]!, firstNzR)}</td>
+            ))}
+          </tr>
+        </tbody>
+      </table>
+      <div className="flex items-center gap-2 pt-1">
+        <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat décimal :</span>
+        {decWrong ? (
+          <span className="inline-flex items-center gap-1 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[5rem] justify-center">
+            <span className="text-amber-600 line-through tabular-nums">{decResult || "—"}</span>
+            <span className="font-bold text-[var(--color-text-primary)] tabular-nums">{q.resultStr}</span>
+          </span>
+        ) : (
+          <input type="text" value={decResult} disabled={validated}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDecResultChange(cardIdx, e.target.value)}
+            placeholder={`ex. ${q.resultStr}`}
+            className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function DecMul2ColExercise({ exNum, validateCommand, onValidated }: {
+  exNum: number;
+  validateCommand: number;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = React.useState<DecMul2Q[]>(genDecMul2Questions);
+  const [carryInputs, setCarryInputs] = React.useState<string[][]>(() =>
+    Array.from({ length: 2 }, () => Array(10).fill(""))
+  );
+  const [cellAnswers, setCellAnswers] = React.useState<string[][]>(() =>
+    Array.from({ length: 2 }, () => Array(15).fill(""))
+  );
+  const [decResults, setDecResults] = React.useState<string[]>(() => Array(2).fill(""));
+  const [validated, setValidated] = React.useState(false);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+
+    function getD5(n: number): number[] {
+      return [
+        Math.floor(n / 10000) % 10,
+        Math.floor(n / 1000) % 10,
+        Math.floor(n / 100) % 10,
+        Math.floor(n / 10) % 10,
+        n % 10,
+      ];
+    }
+
+    const res = questions.map((q: DecMul2Q, qi: number) => {
+      const p1d = getD5(q.partial1);
+      const p2d = getD5(q.partial2);
+      const rd = getD5(q.intResult);
+      const cells = cellAnswers[qi] ?? [];
+      const firstNzP1 = p1d.findIndex(x => x !== 0);
+      const p1Ok = p1d.every((d, i) => {
+        const v = (cells[i] ?? "").trim();
+        return v === String(d) || (d === 0 && i < firstNzP1 && (v === "" || v === "0"));
+      });
+      const fNz2 = [0,1,2,3].findIndex(c => p2d[c+1] !== 0);
+      const p2Ok = [0,1,2,3,4].every(i => {
+        if (i === 4) return true; // fixed 0
+        const expected = p2d[i + 1]!;
+        const v = (cells[5 + i] ?? "").trim();
+        return v === String(expected) || (expected === 0 && i < fNz2 && (v === "" || v === "0"));
+      });
+      const firstNzR = rd.findIndex(x => x !== 0);
+      const rOk = rd.every((d, i) => {
+        const v = (cells[10 + i] ?? "").trim();
+        return v === String(d) || (d === 0 && i < firstNzR && (v === "" || v === "0"));
+      });
+      const decAnswerNorm = (decResults[qi] ?? "").trim().replace(".", ",");
+      const decOk = decAnswerNorm === q.resultStr;
+      return p1Ok && p2Ok && rOk && decOk;
+    });
+
+    setValidated(true);
+    onValidated(res.every((r: boolean) => r), res.filter((r: boolean) => r).length, res.length);
+  }, [validated, questions, cellAnswers, decResults, onValidated]);
+
+  useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Posez et effectuez les multiplications en colonnes (méthode des entiers + virgule).
+      </p>
+      <div className="flex flex-col gap-6">
+        {questions.map((q: DecMul2Q, qi: number) => (
+          <DecMul2ColCard
+            key={qi}
+            q={q}
+            cardIdx={qi}
+            carryInputs={carryInputs[qi]!}
+            cellAnswers={cellAnswers[qi]!}
+            decResult={decResults[qi]!}
+            validated={validated}
+            onCarryChange={(ci: number, idx: number, val: string) => setCarryInputs((prev: string[][]) => {
+              const next = prev.map((r: string[]) => [...r]);
+              next[ci]![idx] = val;
+              return next;
+            })}
+            onCellChange={(ci: number, idx: number, val: string) => setCellAnswers((prev: string[][]) => {
+              const next = prev.map((r: string[]) => [...r]);
+              next[ci]![idx] = val;
+              return next;
+            })}
+            onDecResultChange={(ci: number, val: string) => setDecResults((prev: string[]) => {
+              const next = [...prev];
+              next[ci] = val;
+              return next;
+            })}
+          />
+        ))}
       </div>
     </div>
   );

@@ -120,6 +120,29 @@ export type MathRichBlock =
         carries: (number | null)[];
         result: (number | null)[];
       }>;
+    }
+  | {
+      type: "add_sub_toggle_cards";
+      addColLabels: string[];
+      addA: (number | null)[];
+      addB: (number | null)[];
+      addSteps: Array<{
+        numFr: string;
+        textsFr: string[];
+        carries: (number | null)[];
+        result: (number | null)[];
+      }>;
+      addNoteFr?: string;
+      subColLabels: string[];
+      subA: (number | null)[];
+      subB: (number | null)[];
+      subSteps: Array<{
+        numFr: string;
+        textsFr: string[];
+        carries: (number | null)[];
+        result: (number | null)[];
+      }>;
+      subNoteFr?: string;
     };
 
 export type MathTheoryBlock = {

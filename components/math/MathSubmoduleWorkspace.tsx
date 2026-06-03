@@ -9,7 +9,7 @@ import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/ma
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
-import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise, DecColArithExercise, DecColArithFullExercise, DecExprCompExercise } from "@/components/math/A5DecimalContent";
+import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise, DecColArithExercise, DecColArithFullExercise, DecExprCompExercise, DecMul2ColExercise } from "@/components/math/A5DecimalContent";
 import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadEncadrementUniteExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
 import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
 import { A7CompareExercise } from "@/components/math/A7CompareContent";
@@ -25,7 +25,8 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
-  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "small" | "large"; mixed?: boolean }
+  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "small" | "large" | "special_mul"; mixed?: boolean }
+  | { kind: "dec_mul2_col"; exNum: number }
   | { kind: "dec_mul_col"; exNum: number; preFilledOperands: boolean }
   | { kind: "dec_div_simple"; exNum: number }
   | { kind: "dec_div_missing"; exNum: number }
@@ -79,6 +80,7 @@ const STEP_DEFAULT_TOTALS: Record<string, number> = {
   frac_op_compare: 5,
   frac_to_dec: 5, dec_to_frac: 5,
   dec_col_arith: 4, dec_col_arith_full: 2, dec_expr_comp: 5,
+  dec_mul2_col: 2,
 };
 
 function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
@@ -287,21 +289,19 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "dec_expr_comp", exNum: 6 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-5") {
-    // Training: 8 exercises
-    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "tenths" });
-    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: false, timer: 60, precision: "tenths" });
-    steps.push({ kind: "dec_arith_group", exNum: 3, op: "×", missingOperand: true, precision: "tenths" });
-    steps.push({ kind: "dec_arith_group", exNum: 4, op: "×", missingOperand: true, timer: 60, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "special_mul" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: false, timer: 60, precision: "special_mul" });
+    steps.push({ kind: "dec_arith_group", exNum: 3, op: "×", missingOperand: true, precision: "special_mul" });
+    steps.push({ kind: "dec_arith_group", exNum: 4, op: "×", missingOperand: true, timer: 60, precision: "special_mul" });
     steps.push({ kind: "dec_mul_col", exNum: 5, preFilledOperands: true });
     steps.push({ kind: "dec_mul_col", exNum: 6, preFilledOperands: false });
-    steps.push({ kind: "dec_arith_group", exNum: 7, op: "×", missingOperand: false, precision: "extended" });
-    steps.push({ kind: "dec_arith_group", exNum: 8, op: "×", missingOperand: true, precision: "tenths" });
-    // Evaluation: 4 exercises
+    steps.push({ kind: "dec_mul2_col", exNum: 7 });
+    // Evaluation
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "tenths" });
-    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: true, precision: "tenths" });
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "×", missingOperand: false, precision: "special_mul" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "×", missingOperand: true, precision: "special_mul" });
     steps.push({ kind: "dec_mul_col", exNum: 3, preFilledOperands: true });
-    steps.push({ kind: "dec_arith_group", exNum: 4, op: "×", missingOperand: false, precision: "extended" });
+    steps.push({ kind: "dec_mul2_col", exNum: 4 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-6") {
     // Training: 8 exercises matching A3.3 (div tables) + A3.4 (col div) variety
@@ -847,6 +847,69 @@ function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, p
   );
 }
 
+function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "add_sub_toggle_cards" }> }) {
+  const [mode, setMode] = React.useState<"add" | "sub">("add");
+  const isAdd = mode === "add";
+  const colLabels = isAdd ? block.addColLabels : block.subColLabels;
+  const a = isAdd ? block.addA : block.subA;
+  const b = isAdd ? block.addB : block.subB;
+  const steps = isAdd ? block.addSteps : block.subSteps;
+  const noteFr = isAdd ? block.addNoteFr : block.subNoteFr;
+  const op = isAdd ? "+" : "−";
+  const carryLabel = isAdd ? "R" : "E";
+
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {(["add", "sub"] as const).map(m => (
+          <button key={m} type="button" onClick={() => setMode(m)}
+            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
+              mode === m
+                ? "bg-[var(--color-accent-alg)] text-white"
+                : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
+            }`}>
+            {m === "add" ? "Addition" : "Soustraction"}
+          </button>
+        ))}
+      </div>
+      <p className="font-bold text-[var(--color-accent-alg)]">
+        Exemple
+      </p>
+      <div className="space-y-6">
+        {steps.map((step, si) => {
+          const prev = si > 0 ? steps[si - 1] : null;
+          return (
+            <div key={`${mode}-${si}`} className="space-y-2">
+              <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+              <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                {step.textsFr.map((t, ti) => (
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                ))}
+              </div>
+              <AddDemoGrid
+                colLabels={colLabels}
+                op={op}
+                carryLabel={carryLabel}
+                a={a}
+                b={b}
+                carries={step.carries}
+                result={step.result}
+                prevCarries={prev?.carries ?? null}
+                prevResult={prev?.result ?? null}
+              />
+            </div>
+          );
+        })}
+      </div>
+      {noteFr && (
+        <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/20 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
+          {noteFr}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
@@ -1071,6 +1134,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
           })}
         </div>
       );
+    case "add_sub_toggle_cards":
+      return <AddSubToggleCards block={block} />;
     default:
       return null;
   }
@@ -1298,7 +1363,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
 
   function goBack() {
@@ -1509,6 +1574,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
       {currentStep?.kind === "dec_col_arith_full" && (
         <DecColArithFullExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_mul2_col" && (
+        <DecMul2ColExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "dec_expr_comp" && (
         <DecExprCompExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />

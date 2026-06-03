@@ -1876,9 +1876,18 @@ function Mul2DigitCard({
     </div>
   );
 
-  const carryCell = (rowBase: number, col: number) => {
+  const carryCell = (rowBase: number, col: number, expectedCarries: (number | null)[]) => {
     const idx = rowBase + col;
     const val = carryInputs[idx] ?? "";
+    const expected = expectedCarries[col];
+    if (validated && expected !== null && val.trim() !== String(expected)) {
+      return (
+        <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+          <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
+          <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
+        </div>
+      );
+    }
     return (
       <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
         onChange={e => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
@@ -1910,14 +1919,14 @@ function Mul2DigitCard({
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{carryCell(5, col)}</td>
+              <td key={col} className="text-center">{carryCell(5, col, q.carries2)}</td>
             ))}
           </tr>
           {/* R1 — carries for units-digit multiplication */}
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{carryCell(0, col)}</td>
+              <td key={col} className="text-center">{carryCell(0, col, q.carries1)}</td>
             ))}
           </tr>
           {/* Operand a */}

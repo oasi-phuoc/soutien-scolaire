@@ -284,6 +284,7 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
     case "mul2_step_cards":
     case "div_step_cards":
     case "add_step_cards":
+    case "add_sub_toggle_cards":
       return null;
     case "plain":
     default: {
