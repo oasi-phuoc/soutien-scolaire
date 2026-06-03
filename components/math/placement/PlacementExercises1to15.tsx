@@ -289,12 +289,12 @@ function SeqQuestion({
                 onChange={(val) => onChange(blankIdx, val)}
                 correct={String(v)}
                 validated={validated}
-                width="h-9 min-w-[3.5rem] px-3 rounded-full"
+                width="h-9 w-14 px-1 rounded-full"
               />
             );
           }
           return (
-            <div key={i} className="inline-flex h-9 min-w-[3.5rem] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
+            <div key={i} className="inline-flex h-9 w-14 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
           );
         })}
       </div>
@@ -504,10 +504,10 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="space-y-3">
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-2 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-            <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-4 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {renderMissingOp(
               q,
               answers[i] ?? "",
