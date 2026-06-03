@@ -910,8 +910,8 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
-      {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, "Séquence 1")}
-      {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, "Séquence 2")}
+      {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, "Série 1")}
+      {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, "Série 2")}
     </div>
   );
 }
@@ -946,16 +946,28 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
       const b = randInt(75, 425); const result = randInt(75, 500 - b);
       return { kind: "missing", format, a: result + b, b, result };
     }
-    function mkMul(): MixedQuestion {
-      const a = randInt(3, 12); const b = randInt(3, 12);
+    function mkMul67(): MixedQuestion {
+      const b = ([6, 7] as const)[randInt(0, 1)]!;
+      const a = randInt(3, 12);
       return { kind: "mul", a, b, result: a * b };
     }
-    function mkDiv(): MixedQuestion {
-      const b = randInt(2, 12); const result = randInt(2, 12);
+    function mkMul89(): MixedQuestion {
+      const b = ([8, 9] as const)[randInt(0, 1)]!;
+      const a = randInt(3, 12);
+      return { kind: "mul", a, b, result: a * b };
+    }
+    function mkDiv345(): MixedQuestion {
+      const b = ([3, 4, 5] as const)[randInt(0, 2)]!;
+      const result = randInt(2, 12);
       return { kind: "div", a: b * result, b, result };
     }
-    // Fixed order: +, −, ×, ×, ÷, ÷
-    return [mkAdd(), mkSub(), mkMul(), mkMul(), mkDiv(), mkDiv()];
+    function mkDiv1112(): MixedQuestion {
+      const b = ([11, 12] as const)[randInt(0, 1)]!;
+      const result = randInt(2, 9);
+      return { kind: "div", a: b * result, b, result };
+    }
+    // Fixed order: +, −, ×(6|7), ×(8|9), ÷(3|4|5), ÷(11|12)
+    return [mkAdd(), mkSub(), mkMul67(), mkMul89(), mkDiv345(), mkDiv1112()];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 

@@ -519,62 +519,155 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Simple column card (for Ex20 etc.) ───────────────────────────────────────
+// ── DecMulGridFull — A5.5 Ex7 style, all rows are inputs ─────────────────────
 
-function DecColGrid({ aStr, bStr, op, answer, onChange, validated }: {
-  aStr: string; bStr: string; op: "+" | "-" | "×";
-  result?: number; answer: string; onChange: (v: string) => void; validated: boolean;
+function fmtDecResult(intResult: number, decimals: number): string {
+  const s = String(intResult);
+  const padded = s.padStart(decimals + 1, "0");
+  const intPart = padded.slice(0, padded.length - decimals) || "0";
+  const decPart = padded.slice(padded.length - decimals).replace(/0+$/, "");
+  return decPart ? `${intPart},${decPart}` : intPart;
+}
+
+// cells[28]: 0-3 Row A, 4-7 Row B, 8-11 R2 carries, 12-15 R1 carries,
+//            16-19 Partial1, 20-22 Partial2 (M/C/D), 23 unused, 24-27 Sum
+function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult, onDecResultChange, validated }: {
+  aStr: string; bStr: string; resultStr: string;
+  cells: string[];
+  onCellChange: (idx: number, val: string) => void;
+  decResult: string;
+  onDecResultChange: (val: string) => void;
+  validated: boolean;
 }) {
-  const maxLen = Math.max(aStr.length, bStr.length) + 1;
+  const colLabels = ["M", "C", "D", "U"];
+  const inputCls = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  const carryCls = "h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+
+  const cellIn = (base: number, col: number) => (
+    <td key={col} className="w-8 text-center p-0.5">
+      <input type="text" inputMode="numeric" maxLength={1}
+        value={cells[base + col] ?? ""}
+        disabled={validated}
+        onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+        className={inputCls} />
+    </td>
+  );
+  const carryIn = (base: number, col: number) => (
+    <td key={col} className="w-8 text-center p-0.5">
+      <input type="text" inputMode="numeric" maxLength={1}
+        value={cells[base + col] ?? ""}
+        disabled={validated}
+        onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+        className={carryCls} />
+    </td>
+  );
+
   return (
-    <div className="inline-flex flex-col items-end font-mono text-base border border-[var(--color-border-default)] rounded-lg px-3 py-2 bg-[var(--color-bg-secondary)]">
-      <span className="text-[var(--color-text-primary)] whitespace-pre">{aStr.padStart(maxLen)}</span>
-      <div className="flex items-center gap-0.5 w-full">
-        <span className="text-[var(--color-text-secondary)]">{op}</span>
-        <span className="text-[var(--color-text-primary)] flex-1 text-right whitespace-pre">{bStr.padStart(maxLen - 1)}</span>
+    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 space-y-3">
+      <p className="text-center text-sm font-mono font-bold text-[var(--color-text-primary)]">
+        {aStr} × {bStr}
+      </p>
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {colLabels.map(h => (
+              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            {[0,1,2,3].map(col => carryIn(8, col))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            {[0,1,2,3].map(col => carryIn(12, col))}
+          </tr>
+          <tr>
+            <td />
+            {[0,1,2,3].map(col => cellIn(0, col))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            {[0,1,2,3].map(col => cellIn(4, col))}
+          </tr>
+          <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {[0,1,2,3].map(col => cellIn(16, col))}
+          </tr>
+          <tr>
+            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+            {[0,1,2].map(col => cellIn(20, col))}
+            <td className="w-8 text-center">
+              <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
+            </td>
+          </tr>
+          <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {[0,1,2,3].map(col => cellIn(24, col))}
+          </tr>
+        </tbody>
+      </table>
+      <div className="flex items-center gap-2 pt-1">
+        <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
+        <input type="text" value={decResult} disabled={validated}
+          onChange={e => onDecResultChange(e.target.value)}
+          placeholder={`ex. ${resultStr}`}
+          className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+        />
       </div>
-      <div className="w-full h-px bg-[var(--color-text-primary)] my-1" />
-      <input type="text" value={answer} onChange={e => onChange(e.target.value)} disabled={validated}
-        className="w-24 rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-0.5 text-right font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent-alg)] disabled:opacity-60"
-      />
     </div>
   );
 }
 
-// ── Exercise 20 — Column multiplication with decimals ────────────────────────
+// ── Exercise 20 — Column multiplication with decimals (A5.5 Ex7 layout) ──────
 
 export function Exercise20({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const a1 = randInt(111, 999);
-    const b1d = randInt(2, 9); const b1 = b1d / 10;
-    const a2i = randInt(11, 99); const a2d = randInt(1, 99); const a2 = a2i + a2d / 100;
-    const b2d = randInt(2, 9); const b2 = b2d / 10;
-    return [
-      { aStr: String(a1), bStr: fmtDec(b1, 1), result: Math.round(a1 * b1d) / 10 },
-      { aStr: fmtDec(Math.round(a2 * 100) / 100, 2), bStr: fmtDec(b2, 1), result: Math.round(a2i * 100 + a2d) * b2d / 1000 },
-    ];
+    return Array.from({ length: 2 }, () => {
+      const aDecimals = Math.random() < 0.5 ? 1 : 2;
+      let bInt: number;
+      do { bInt = randInt(11, 29); } while (bInt % 10 === 0);
+      const aInt = randInt(100, 299);
+      const intResult = aInt * bInt;
+      const resultStr = fmtDecResult(intResult, aDecimals + 1);
+      return {
+        aStr: fmtDecResult(aInt, aDecimals),
+        bStr: fmtDecResult(bInt, 1),
+        resultStr,
+        result: intResult / Math.pow(10, aDecimals + 1),
+      };
+    });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(["", ""]);
+  const [cells, setCells] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(28).fill("")));
+  const [decResults, setDecResults] = useState<string[]>(["", ""]);
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.result, 0.01)) pts++; });
+    data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts++; });
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes. Donnez le résultat décimal.</p>
       <div className="flex flex-wrap gap-4">
         {data.map((q, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <DecColGrid aStr={q.aStr} bStr={q.bStr} op="+" result={q.result}
-              answer={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
-          </div>
+          <DecMulGridFull key={i}
+            aStr={q.aStr} bStr={q.bStr} resultStr={q.resultStr}
+            cells={cells[i]!}
+            onCellChange={(idx, val) => setCells(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
+            decResult={decResults[i] ?? ""}
+            onDecResultChange={val => setDecResults(p => { const n = [...p]; n[i] = val; return n; })}
+            validated={validated}
+          />
         ))}
       </div>
     </div>
