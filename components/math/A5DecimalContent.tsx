@@ -934,12 +934,13 @@ export function DecDivExtExercise({
 // ── Decimal column addition/subtraction (A5.4 Ex7, Ex8) ──────────────────────
 // Numbers stored as hundredths (integer). Display columns: D, U, ",", dx, cx
 
-function hToDigits(h: number): [number, number, number, number] {
+function hToDigits(h: number): [number, number, number, number, number] {
   const cx = h % 10;
   const dx = Math.floor(h / 10) % 10;
-  const u = Math.floor(h / 100) % 10;
-  const d = Math.floor(h / 1000) % 10;
-  return [d, u, dx, cx];
+  const u  = Math.floor(h / 100) % 10;
+  const d  = Math.floor(h / 1000) % 10;
+  const c  = Math.floor(h / 10000) % 10;
+  return [c, d, u, dx, cx];
 }
 
 interface DecColQ {
@@ -949,12 +950,12 @@ interface DecColQ {
 function genDecColQs(op: "+" | "-", count: number): DecColQ[] {
   return Array.from({ length: count }, () => {
     if (op === "+") {
-      const aH = rnd(100, 499); // 1.00–4.99
-      const bH = rnd(100, 499);
+      const aH = rnd(3000, 8999); // 30.00–89.99
+      const bH = rnd(3000, 8999);
       return { aH, bH, rH: aH + bH, op };
     } else {
-      const aH = rnd(200, 999); // 2.00–9.99
-      const bH = rnd(100, aH - 1);
+      const aH = rnd(10000, 19999); // 100.00–199.99
+      const bH = rnd(1000, aH - 1);
       return { aH, bH, rH: aH - bH, op };
     }
   });
@@ -964,11 +965,11 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
   q: DecColQ; cardIdx: number; cellAnswers: string[]; validated: boolean; cardCorrect: boolean;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
 }) {
-  const [ad, au, adx, acx] = hToDigits(q.aH);
-  const [bd, bu, bdx, bcx] = hToDigits(q.bH);
-  const [rd, ru, rdx, rcx] = hToDigits(q.rH);
-  const rExpected = [rd, ru, rdx, rcx];
-  const labels = ["D", "U", ",", "dx", "cx"];
+  const [ac, ad, au, adx, acx] = hToDigits(q.aH);
+  const [bc, bd, bu, bdx, bcx] = hToDigits(q.bH);
+  const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
+  const rExpected = [rc, rd, ru, rdx, rcx];
+  const labels = ["C", "D", "U", ",", "dx", "cx"];
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key !== "Tab") return;
@@ -1018,8 +1019,8 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
 
   void cardCorrect;
   const opRows = [
-    [ad, au, null, adx, acx], // operand a — col 2 is null for comma display
-    [bd, bu, null, bdx, bcx], // operand b
+    [ac, ad, au, null, adx, acx], // operand a — col 3 is null for comma display
+    [bc, bd, bu, null, bdx, bcx], // operand b
   ];
 
   return (
@@ -1040,16 +1041,15 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
                 {ri === 0 ? "" : q.op}
               </td>
               {row.map((digit, ci) => {
-                if (ci === 2) {
+                if (ci === 3) {
                   return (
                     <td key={ci} className="w-8 text-center">
                       <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
                     </td>
                   );
                 }
-                // Adjust for the comma column offset: cols 0,1 map to d,u; cols 3,4 map to dx,cx
                 const actualDigit = digit as number;
-                const isLeading = ci === 0 && actualDigit === 0;
+                const isLeading = (ci === 0 || ci === 1) && actualDigit === 0;
                 return (
                   <td key={ci} className="w-8 text-center">
                     <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
@@ -1060,21 +1060,23 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
               })}
             </tr>
           ))}
-          <tr><td colSpan={6}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
+            {/* C column */}
+            {cell(0, rc, true, 0)}
             {/* D column */}
-            {cell(0, rd, true, 0)}
+            {cell(1, rd, true, 1)}
             {/* U column */}
-            {cell(1, ru, true, 1)}
+            {cell(2, ru, true, 2)}
             {/* comma */}
             <td className="w-8 text-center">
               <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
             </td>
             {/* dx column */}
-            {cell(3, rdx, true, 2)}
+            {cell(4, rdx, true, 3)}
             {/* cx column */}
-            {cell(4, rcx, true, 3)}
+            {cell(5, rcx, true, 4)}
           </tr>
         </tbody>
       </table>
@@ -1087,16 +1089,16 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
   validateCommand: number;
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<DecColQ[]>(() => genDecColQs(op, 4));
-  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 4 }, () => Array(4).fill("")));
+  const [questions] = useState<DecColQ[]>(() => genDecColQs(op, 2));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(5).fill("")));
   const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>(() => Array(4).fill(false));
+  const [results, setResults] = useState<boolean[]>(() => Array(2).fill(false));
 
   const doValidate = useCallback(() => {
     if (validated) return;
     const res: boolean[] = questions.map((q: DecColQ, qi: number) => {
-      const [rd, ru, rdx, rcx] = hToDigits(q.rH);
-      const expected = [rd, ru, rdx, rcx];
+      const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
+      const expected = [rc, rd, ru, rdx, rcx];
       return expected.every((exp: number, ci: number) => (answers[qi]?.[ci] ?? "").trim() === String(exp));
     });
     setResults(res);
@@ -1114,7 +1116,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 gap-4">
         {questions.map((q: DecColQ, qi: number) => (
           <DecColCard key={qi} q={q} cardIdx={qi}
             cellAnswers={answers[qi]!}
