@@ -1234,6 +1234,19 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
     </td>
   );
 
+  function carryCell(carryIdx: number) {
+    const val = cellAnswers[15 + carryIdx] ?? "";
+    return (
+      <td key={carryIdx} className="w-8 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, 15 + carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          onKeyDown={tabNav}
+          onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+          className="h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] text-[var(--color-text-secondary)] focus:border-[var(--color-accent-alg)]" />
+      </td>
+    );
+  }
+
   return (
     <div data-dec-card-full className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
@@ -1249,6 +1262,13 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
           </tr>
         </thead>
         <tbody>
+          {/* Carry row */}
+          <tr>
+            <td className="pr-1 text-center text-[10px] font-bold text-[var(--color-text-secondary)]">R</td>
+            {carryCell(0)}{carryCell(1)}{carryCell(2)}
+            <td className="w-8" />
+            {carryCell(3)}{carryCell(4)}
+          </tr>
           <tr>
             <td />
             {inputCell(0, ac, 0 < firstNzA)}
@@ -1293,7 +1313,7 @@ export function DecColArithFullExercise({ exNum, validateCommand, onValidated }:
     const [q2] = genDecColQs("-", 1);
     return [q1!, q2!];
   });
-  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(15).fill("")));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(20).fill("")));
   const [validated, setValidated] = useState(false);
 
   const doValidate = useCallback(() => {
