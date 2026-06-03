@@ -536,12 +536,12 @@ function d4(n: number): [number, number, number, number] {
   return [Math.floor(n / 1000), Math.floor((n % 1000) / 100), Math.floor((n % 100) / 10), n % 10];
 }
 
-function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarryChange, validated }: {
+function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarryChange, validated, noCard = false }: {
   a: number; b: number; op: "+" | "-" | "×" | "÷";
   result: number; answers: string[]; carries: string[];
   onChange: (col: number, val: string) => void;
   onCarryChange: (col: number, val: string) => void;
-  validated: boolean;
+  validated: boolean; noCard?: boolean;
 }) {
   const aD = d4(a), bD = d4(b), rD = d4(result);
   const aFz = aD.findIndex(x => x !== 0);
@@ -557,9 +557,8 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
     />
   );
 
-  return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-      <table className="mx-auto border-collapse">
+  const inner = (
+    <table className="mx-auto border-collapse">
         <thead>
           <tr>
             <td className="w-6" />
@@ -573,7 +572,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
             <tr>
               <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{carryLabel}</td>
               {[0, 1, 2, 3].map(col => (
-                <td key={col} className="text-center">
+                <td key={col} className="p-0.5 text-center">
                   <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
                     disabled={validated}
                     onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
@@ -586,7 +585,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
           <tr>
             <td />
             {aD.map((d, col) => (
-              <td key={col} className="text-center">
+              <td key={col} className="p-0.5 text-center">
                 <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{col < aFz ? "" : d}</div>
               </td>
             ))}
@@ -594,7 +593,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
           <tr>
             <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-secondary)]">{op}</td>
             {bD.map((d, col) => (
-              <td key={col} className="text-center">
+              <td key={col} className="p-0.5 text-center">
                 <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{col < bFz ? "" : d}</div>
               </td>
             ))}
@@ -602,12 +601,12 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {rD.map((_, col) => <td key={col} className="text-center">{digitInput(col)}</td>)}
+            {rD.map((_, col) => <td key={col} className="p-0.5 text-center">{digitInput(col)}</td>)}
           </tr>
         </tbody>
       </table>
-    </div>
   );
+  return noCard ? inner : <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">{inner}</div>;
 }
 
 export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
@@ -1138,12 +1137,12 @@ function d5(n: number): [number,number,number,number,number] {
   return [Math.floor(n/10000)%10, Math.floor(n/1000)%10, Math.floor(n/100)%10, Math.floor(n/10)%10, n%10];
 }
 
-function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryChange, validated }: {
+function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryChange, validated, noCard = false }: {
   a: number; b: number; result: number;
   answers: string[]; carries: string[];
   onChange: (idx: number, val: string) => void;
   onCarryChange: (idx: number, val: string) => void;
-  validated: boolean;
+  validated: boolean; noCard?: boolean;
 }) {
   const bUnits = b % 10, bTens = Math.floor(b / 10);
   const partial1 = a * bUnits, partial2 = a * bTens;
@@ -1176,9 +1175,8 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
   // p2 shifted: col i → p2d[i+1], col 4 = fixed 0
   const p2Digit = (col: number) => col === 4 ? null : p2d[col + 1]!;
 
-  return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-      <table className="mx-auto border-collapse">
+  const inner = (
+    <table className="mx-auto border-collapse">
         <thead>
           <tr>
             <td className="w-6" />
@@ -1188,29 +1186,29 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
         <tbody>
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
-            {cols.map(col => <td key={col} className="text-center">{carryIn(5 + col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{carryIn(5 + col)}</td>)}
           </tr>
           <tr>
             <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
-            {cols.map(col => <td key={col} className="text-center">{carryIn(col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{carryIn(col)}</td>)}
           </tr>
           <tr>
             <td />
-            {cols.map(col => <td key={col} className="text-center">{pre(ad[col]!, col < aFz)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{pre(ad[col]!, col < aFz)}</td>)}
           </tr>
           <tr>
             <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-secondary)]">×</td>
-            {cols.map(col => <td key={col} className="text-center">{pre(bd[col]!, col < bFz)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{pre(bd[col]!, col < bFz)}</td>)}
           </tr>
           <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {cols.map(col => <td key={col} className="text-center">{digitIn(col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(col)}</td>)}
           </tr>
           <tr>
             <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-primary)]">+</td>
             {cols.map(col => (
-              <td key={col} className="text-center">
+              <td key={col} className="p-0.5 text-center">
                 {col === 4
                   ? <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
                   : digitIn(5 + col)
@@ -1221,13 +1219,13 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
           <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {cols.map(col => <td key={col} className="text-center">{digitIn(10 + col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(10 + col)}</td>)}
           </tr>
         </tbody>
       </table>
-      <div className="sr-only">{void [p1d, p2Digit, rd]}</div>
-    </div>
   );
+  const wrapper = <>{inner}<div className="sr-only">{void [p1d, p2Digit, rd]}</div></>;
+  return noCard ? wrapper : <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">{wrapper}</div>;
 }
 
 // ── Exercise 14 — Column multiplication (A3.2 ex1 + ex3 style) ───────────────
@@ -1278,7 +1276,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             answers={q1Ans} carries={q1Carries}
             onChange={(col, v) => setQ1Ans(p => { const n=[...p]; n[col]=v; return n; })}
             onCarryChange={(col, v) => setQ1Carries(p => { const n=[...p]; n[col]=v; return n; })}
-            validated={validated}
+            validated={validated} noCard
           />
         </div>
         <div className="flex flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -1287,7 +1285,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             answers={q2Ans} carries={q2Carries}
             onChange={(idx, v) => setQ2Ans(p => { const n=[...p]; n[idx]=v; return n; })}
             onCarryChange={(idx, v) => setQ2Carries(p => { const n=[...p]; n[idx]=v; return n; })}
-            validated={validated}
+            validated={validated} noCard
           />
         </div>
       </div>

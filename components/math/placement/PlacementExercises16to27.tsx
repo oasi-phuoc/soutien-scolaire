@@ -377,7 +377,7 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   const carryStyle = "h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] disabled:opacity-60 text-[var(--color-text-secondary)]";
 
   const rowInput = (answers: string[], onChange: (col: number, val: string) => void, col: number) => (
-    <td key={col} className="w-8 text-center">
+    <td key={col} className="w-8 p-0.5 text-center">
       <input type="text" inputMode="numeric" maxLength={1} value={answers[col] ?? ""}
         disabled={validated}
         onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
@@ -386,7 +386,7 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   );
 
   const carryInput = (col: number) => (
-    <td key={col} className="w-8 text-center">
+    <td key={col} className="w-8 p-0.5 text-center">
       <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
         disabled={validated}
         onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
@@ -395,7 +395,7 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   );
 
   return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+    <div className="p-1">
       <p className="mb-2 text-center text-sm font-mono font-bold text-[var(--color-text-primary)]">
         {aStr} {op} {bStr}
       </p>
