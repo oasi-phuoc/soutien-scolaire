@@ -1,0 +1,473 @@
+"use client";
+
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Exercise1,
+  Exercise2,
+  Exercise3,
+  Exercise4,
+  Exercise5,
+  Exercise6,
+  Exercise8,
+  Exercise9,
+  Exercise10,
+  Exercise11,
+  Exercise12,
+  Exercise13,
+  Exercise14,
+  Exercise15,
+} from "@/components/math/placement/PlacementExercises1to15";
+import type { PlacementExerciseProps } from "@/components/math/placement/PlacementExercises1to15";
+
+// ── Exercise registry ─────────────────────────────────────────────────────────
+
+interface ExerciseMeta {
+  id: number;
+  label: string;
+  maxPoints: number;
+  component: React.ComponentType<PlacementExerciseProps>;
+}
+
+const EXERCISES: ExerciseMeta[] = [
+  { id: 1, label: "Compter les formes", maxPoints: 2, component: Exercise1 },
+  { id: 2, label: "Comparer (11–99)", maxPoints: 2, component: Exercise2 },
+  { id: 3, label: "Suites numériques", maxPoints: 2, component: Exercise3 },
+  { id: 4, label: "Additions et soustractions", maxPoints: 8, component: Exercise4 },
+  { id: 5, label: "Opérande manquant", maxPoints: 4, component: Exercise5 },
+  { id: 6, label: "Calcul en colonnes (99–999)", maxPoints: 4, component: Exercise6 },
+  { id: 8, label: "Dizaines et unités", maxPoints: 2, component: Exercise8 },
+  { id: 9, label: "Comparer (101–999)", maxPoints: 2, component: Exercise9 },
+  { id: 10, label: "Grandes suites", maxPoints: 2, component: Exercise10 },
+  { id: 11, label: "Calcul mixte", maxPoints: 6, component: Exercise11 },
+  { id: 12, label: "Décomposition", maxPoints: 2, component: Exercise12 },
+  { id: 13, label: "Colonnes (1000–9999)", maxPoints: 4, component: Exercise13 },
+  { id: 14, label: "Multiplication en colonnes", maxPoints: 2, component: Exercise14 },
+  { id: 15, label: "Division en colonnes", maxPoints: 2, component: Exercise15 },
+];
+
+const TOTAL_EXERCISES = EXERCISES.length; // 14 exercises for now (exercises 16–37 to be added)
+const TOTAL_MAX_POINTS = EXERCISES.reduce((s, e) => s + e.maxPoints, 0); // 44 for now, 100 when complete
+const TIMER_SECONDS = 90 * 60; // 90 minutes
+
+// ── Timer formatter ───────────────────────────────────────────────────────────
+
+function formatTime(secs: number): string {
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+}
+
+// ── Progress bar ──────────────────────────────────────────────────────────────
+
+interface PlacementProgressBarProps {
+  current: number; // current exercise index (0-based)
+  total: number;
+  timeLeft: number;
+  validated: boolean[]; // per exercise
+  hasInput: boolean[]; // per exercise (user has typed something)
+  onSegmentClick: (idx: number) => void;
+}
+
+function PlacementProgressBar({
+  current,
+  total,
+  timeLeft,
+  validated,
+  hasInput,
+  onSegmentClick,
+}: PlacementProgressBarProps) {
+  const remaining = validated.filter(v => !v).length;
+  return (
+    <div className="mb-5">
+      <div className="mb-1.5 flex items-center justify-between">
+        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Test de placement</p>
+        <div className="flex items-center gap-3">
+          <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
+            timeLeft <= 300
+              ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
+              : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
+          }`}>
+            {formatTime(timeLeft)}
+          </span>
+          <p className="text-xs text-[var(--color-text-secondary)]">{remaining} exercice{remaining !== 1 ? "s" : ""} restant{remaining !== 1 ? "s" : ""}</p>
+        </div>
+      </div>
+      <div className="flex gap-0.5">
+        {Array.from({ length: total }).map((_, i) => {
+          const isValidated = validated[i] ?? false;
+          const isCurrent = i === current;
+          const hasTyped = hasInput[i] ?? false;
+
+          let cls = "h-2 flex-1 rounded-full transition-colors cursor-pointer ";
+          if (isValidated) {
+            cls += "opacity-0 pointer-events-none"; // gap: invisible
+          } else if (isCurrent) {
+            cls += "bg-amber-500";
+          } else if (hasTyped) {
+            cls += "bg-blue-400";
+          } else {
+            cls += "bg-[var(--color-border-default)]";
+          }
+
+          return (
+            <div
+              key={i}
+              className={cls}
+              onClick={() => onSegmentClick(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && onSegmentClick(i)}
+              aria-label={`Exercice ${i + 1}`}
+            />
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Results screen ────────────────────────────────────────────────────────────
+
+interface ResultsScreenProps {
+  scores: Array<{ points: number; maxPoints: number } | null>;
+  exercises: ExerciseMeta[];
+  onBack: () => void;
+}
+
+function ResultsScreen({ scores, exercises, onBack }: ResultsScreenProps) {
+  const totalPoints = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
+  const maxPoints = exercises.reduce((s, e) => s + e.maxPoints, 0);
+  const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
+
+  return (
+    <div className="space-y-6">
+      <div className="text-center space-y-1">
+        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Résultats</p>
+        <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+          {totalPoints} <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
+        </p>
+        <p className="text-sm text-[var(--color-text-secondary)]">{pct}%</p>
+      </div>
+
+      {/* Score bar */}
+      <div className="h-3 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
+        <div
+          className="h-full rounded-full bg-amber-500 transition-all duration-700"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
+      {/* Per-exercise list */}
+      <div className="space-y-2">
+        {exercises.map((ex, i) => {
+          const sc = scores[i];
+          const pts = sc?.points ?? 0;
+          const max = ex.maxPoints;
+          const exPct = max > 0 ? Math.round((pts / max) * 100) : 0;
+          return (
+            <div key={ex.id} className="flex items-center gap-3 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
+              <span className="text-xs font-bold text-[var(--color-accent-alg)] w-5">{ex.id}</span>
+              <span className="flex-1 text-xs text-[var(--color-text-secondary)] truncate">{ex.label}</span>
+              <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{pts} / {max}</span>
+              <div className="w-16 h-1.5 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
+                <div
+                  className={`h-full rounded-full ${exPct >= 60 ? "bg-amber-500" : "bg-red-400"}`}
+                  style={{ width: `${exPct}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <button
+        type="button"
+        onClick={onBack}
+        className="w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+      >
+        Retour aux modules
+      </button>
+    </div>
+  );
+}
+
+// ── Main component ────────────────────────────────────────────────────────────
+
+type TestPhase = "idle" | "running" | "results";
+
+export function PlacementTestClient() {
+  const router = useRouter();
+  const [phase, setPhase] = useState<TestPhase>("idle");
+  const [currentIdx, setCurrentIdx] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
+  const [validated, setValidated] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
+  const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(() => Array(TOTAL_EXERCISES).fill(null));
+  const [validateTriggers, setValidateTriggers] = useState<number[]>(() => Array(TOTAL_EXERCISES).fill(0));
+  const [hasInput, setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
+  const [exerciseKeys] = useState<number[]>(() => EXERCISES.map((_, i) => i + 100));
+
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // ── Timer ──────────────────────────────────────────────────────────────────
+
+  useEffect(() => {
+    if (phase !== "running") return;
+    timerRef.current = setInterval(() => {
+      setTimeLeft(t => {
+        if (t <= 1) return 0;
+        return t - 1;
+      });
+    }, 1000);
+    return () => { if (timerRef.current) clearInterval(timerRef.current); };
+  }, [phase]);
+
+  // Auto-validate all when timer hits 0
+  useEffect(() => {
+    if (phase !== "running" || timeLeft > 0) return;
+    // Trigger validation for all non-validated exercises
+    setValidateTriggers(prev => prev.map((t, i) => (!validated[i] ? t + 1 : t)));
+  }, [timeLeft, phase]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Navigation helpers ─────────────────────────────────────────────────────
+
+  function findNextNonValidated(from: number, direction: 1 | -1): number {
+    let idx = from + direction;
+    while (idx >= 0 && idx < TOTAL_EXERCISES) {
+      if (!validated[idx]) return idx;
+      idx += direction;
+    }
+    return -1; // all validated in that direction
+  }
+
+  const goTo = useCallback((idx: number) => {
+    setCurrentIdx(idx);
+  }, []);
+
+  function goNext() {
+    // Skip validated exercises
+    const next = findNextNonValidated(currentIdx, 1);
+    if (next >= 0) {
+      goTo(next);
+    } else {
+      // All remaining exercises validated → show results
+      setPhase("results");
+    }
+  }
+
+  function goPrev() {
+    const prev = findNextNonValidated(currentIdx, -1);
+    if (prev >= 0) goTo(prev);
+  }
+
+  function handleSegmentClick(idx: number) {
+    setCurrentIdx(idx);
+  }
+
+  // ── Validation ─────────────────────────────────────────────────────────────
+
+  function triggerValidate() {
+    setValidateTriggers(prev => {
+      const next = [...prev];
+      next[currentIdx] = (next[currentIdx] ?? 0) + 1;
+      return next;
+    });
+  }
+
+  function handleValidated(exIdx: number, points: number, maxPoints: number) {
+    setValidated(prev => { const n = [...prev]; n[exIdx] = true; return n; });
+    setScores(prev => { const n = [...prev]; n[exIdx] = { points, maxPoints }; return n; });
+    // Auto-advance to next non-validated after short delay
+    setTimeout(() => {
+      setCurrentIdx(cur => {
+        const next = findNextNonValidatedFrom(cur, 1, exIdx);
+        if (next >= 0) return next;
+        // Check if all validated
+        return cur;
+      });
+    }, 600);
+  }
+
+  function findNextNonValidatedFrom(from: number, direction: 1 | -1, justValidated: number): number {
+    // Use the latest validated state (including the just-validated one)
+    let idx = from + direction;
+    while (idx >= 0 && idx < TOTAL_EXERCISES) {
+      if (idx !== justValidated && !(validated[idx])) return idx;
+      idx += direction;
+    }
+    return -1;
+  }
+
+  // Check if all exercises validated → show results
+  const allValidated = useMemo(() => validated.every(v => v), [validated]);
+  useEffect(() => {
+    if (phase === "running" && allValidated) {
+      setPhase("results");
+    }
+  }, [allValidated, phase]);
+
+  // ── Start screen ───────────────────────────────────────────────────────────
+
+  if (phase === "idle") {
+    return (
+      <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className="mb-6 flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+          Retour
+        </button>
+
+        <div className="space-y-6">
+          <header className="space-y-1">
+            <p className="text-xs font-medium uppercase tracking-wide text-amber-600">Mathématiques</p>
+            <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+          </header>
+
+          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4">
+            <div className="space-y-2">
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Informations</p>
+              <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} exercices</strong> couvrant l&apos;algèbre du primaire au secondaire</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span><strong className="text-[var(--color-text-primary)]">90 minutes</strong> pour compléter le test</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span>Validez chaque exercice individuellement et naviguez librement</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span>Score maximum : <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} points</strong></span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={() => { setPhase("running"); setTimeLeft(TIMER_SECONDS); }}
+            className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+          >
+            Commencer le test
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Results screen ─────────────────────────────────────────────────────────
+
+  if (phase === "results") {
+    if (timerRef.current) clearInterval(timerRef.current);
+    return (
+      <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+        <ResultsScreen
+          scores={scores}
+          exercises={EXERCISES}
+          onBack={() => router.push("/mathematiques")}
+        />
+      </div>
+    );
+  }
+
+  // ── Running phase ──────────────────────────────────────────────────────────
+
+  const ex = EXERCISES[currentIdx]!;
+  const ExComp = ex.component;
+  const isCurrentValidated = validated[currentIdx] ?? false;
+
+  return (
+    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-40">
+      {/* Progress bar */}
+      <PlacementProgressBar
+        current={currentIdx}
+        total={TOTAL_EXERCISES}
+        timeLeft={timeLeft}
+        validated={validated}
+        hasInput={hasInput}
+        onSegmentClick={handleSegmentClick}
+      />
+
+      {/* Exercise card */}
+      <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4">
+        {/* Exercise header */}
+        <div className="flex items-center gap-2">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-alg)]/10 text-xs font-bold text-[var(--color-accent-alg)]">
+            {ex.id}
+          </span>
+          <h2 className="text-sm font-bold text-[var(--color-text-primary)]">{ex.label}</h2>
+          <span className="ml-auto text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
+        </div>
+
+        {/* Exercise component */}
+        <ExComp
+          key={exerciseKeys[currentIdx]}
+          exerciseKey={exerciseKeys[currentIdx] ?? currentIdx}
+          validated={isCurrentValidated}
+          onValidated={(points, maxPoints) => handleValidated(currentIdx, points, maxPoints)}
+          validateTrigger={validateTriggers[currentIdx] ?? 0}
+        />
+
+        {/* Validated badge */}
+        {isCurrentValidated && (
+          <div className="flex items-center gap-2 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2 dark:bg-amber-950/20 dark:border-amber-800">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-amber-600" aria-hidden>
+              <path d="M20 6L9 17l-5-5"/>
+            </svg>
+            <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+              Validé — {scores[currentIdx]?.points ?? 0} / {ex.maxPoints} point{ex.maxPoints > 1 ? "s" : ""}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Navigation bar (fixed bottom) */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 safe-area-pb">
+        <div className="mx-auto flex max-w-xl gap-3">
+          {/* Back */}
+          <button
+            type="button"
+            onClick={goPrev}
+            disabled={findNextNonValidated(currentIdx, -1) < 0}
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+
+          {/* Validate */}
+          {!isCurrentValidated && (
+            <button
+              type="button"
+              onClick={triggerValidate}
+              className="flex-1 rounded-[var(--radius-lg)] bg-amber-500 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              Valider
+            </button>
+          )}
+
+          {/* Next */}
+          <button
+            type="button"
+            onClick={goNext}
+            className={`flex h-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] px-5 text-white transition-opacity hover:opacity-90 active:opacity-80 ${
+              isCurrentValidated ? "flex-1" : "w-11"
+            }`}
+          >
+            {isCurrentValidated ? (
+              <span className="text-sm font-bold">Suivant</span>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
