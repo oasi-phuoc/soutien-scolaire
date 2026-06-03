@@ -35,26 +35,14 @@ function fmtDec(n: number, d: number): string {
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
-function CorrectionInput({ value, onChange, correct, validated, width = "w-16", placeholder = "" }: {
+function CorrectionInput({ value, onChange, correct: _correct, validated, width = "w-16", placeholder = "" }: {
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
-  const isCorrect = validated && value.trim() === correct;
-  const isWrong = validated && value.trim() !== correct;
-  if (validated) {
-    return (
-      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
-        {isWrong && <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">{value || "—"}</span>}
-        <span className={`inline-flex items-center justify-center rounded border px-1 font-mono text-sm font-bold min-w-[2.5rem] ${
-          isCorrect ? "border-green-300 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400"
-            : "border-amber-300 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/30"
-        }`}>{correct}</span>
-      </span>
-    );
-  }
   return (
     <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      disabled={validated}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
     />
   );
 }
@@ -308,13 +296,10 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 19 — Column arithmetic with decimals ────────────────────────────
 
-function DecColGrid({ aStr, bStr, op, result, answer, onChange, validated }: {
+function DecColGrid({ aStr, bStr, op, answer, onChange, validated }: {
   aStr: string; bStr: string; op: "+" | "-";
   result: number; answer: string; onChange: (v: string) => void; validated: boolean;
 }) {
-  const correctStr = fmtDec(result, 2);
-  const isCorrect = validated && matchNum(answer, result, 0.005);
-  const isWrong = validated && !isCorrect;
   const maxLen = Math.max(aStr.length, bStr.length) + 1;
   return (
     <div className="inline-flex flex-col items-end font-mono text-base border border-[var(--color-border-default)] rounded-lg px-3 py-2 bg-[var(--color-bg-secondary)]">
@@ -324,16 +309,9 @@ function DecColGrid({ aStr, bStr, op, result, answer, onChange, validated }: {
         <span className="text-[var(--color-text-primary)] flex-1 text-right whitespace-pre">{bStr.padStart(maxLen - 1)}</span>
       </div>
       <div className="w-full h-px bg-[var(--color-text-primary)] my-1" />
-      {validated ? (
-        <span className="inline-flex flex-col items-end">
-          {isWrong && <span className="text-[10px] line-through text-amber-500">{answer || "—"}</span>}
-          <span className={`text-sm font-bold ${isCorrect ? "text-green-700 dark:text-green-400" : "text-[var(--color-text-primary)]"}`}>{correctStr}</span>
-        </span>
-      ) : (
-        <input type="text" value={answer} onChange={e => onChange(e.target.value)}
-          className="w-24 rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-0.5 text-right font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent-alg)]"
-        />
-      )}
+      <input type="text" value={answer} onChange={e => onChange(e.target.value)} disabled={validated}
+        className="w-24 rounded border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-1 py-0.5 text-right font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:ring-[var(--color-accent-alg)] disabled:opacity-60"
+      />
     </div>
   );
 }
@@ -493,7 +471,6 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
 function FractionColorCard({ num, den, answer, onChange, validated }: {
   num: number; den: number; answer: number; onChange: (v: number) => void; validated: boolean;
 }) {
-  const isCorrect = validated && answer === num;
   const cellW = Math.min(36, Math.floor(200 / den));
   const totalW = cellW * den;
 
@@ -516,11 +493,6 @@ function FractionColorCard({ num, den, answer, onChange, validated }: {
           );
         })}
       </svg>
-      {validated && (
-        <p className={`text-xs font-semibold ${isCorrect ? "text-green-600 dark:text-green-400" : "text-amber-600 dark:text-amber-400"}`}>
-          {isCorrect ? "✓ Correct" : `✗ Il fallait colorier ${num} case${num > 1 ? "s" : ""}`}
-        </p>
-      )}
     </div>
   );
 }

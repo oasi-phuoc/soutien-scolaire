@@ -28,7 +28,7 @@ function shuffle<T>(arr: T[]): T[] {
 function CorrectionInput({
   value,
   onChange,
-  correct,
+  correct: _correct,
   validated,
   width = "w-16",
   placeholder = "",
@@ -40,33 +40,14 @@ function CorrectionInput({
   width?: string;
   placeholder?: string;
 }) {
-  const isCorrect = validated && value.trim() === correct;
-  const isWrong = validated && value.trim() !== correct;
-  if (validated) {
-    return (
-      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
-        {isWrong && (
-          <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">{value || "—"}</span>
-        )}
-        <span
-          className={`inline-flex items-center justify-center rounded border px-1 font-mono text-sm font-bold min-w-[2.5rem] ${
-            isCorrect
-              ? "border-green-300 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400"
-              : "border-amber-300 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/30"
-          }`}
-        >
-          {correct}
-        </span>
-      </span>
-    );
-  }
   return (
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      disabled={validated}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
     />
   );
 }
@@ -186,7 +167,6 @@ function CompareQuestion({
   selected: CompOp | null;
   onSelect: (op: CompOp) => void;
 }) {
-  const correct: CompOp = a < b ? "<" : a > b ? ">" : "=";
   const ops: CompOp[] = ["<", "=", ">"];
   return (
     <div className="flex items-center gap-2">
@@ -195,12 +175,10 @@ function CompareQuestion({
       <div className="flex gap-1">
         {ops.map((op) => {
           const isSelected = selected === op;
-          const isCorrectOp = op === correct;
           let cls = "flex h-8 w-8 items-center justify-center rounded border font-mono text-sm font-bold transition-colors ";
           if (validated) {
-            if (isCorrectOp) cls += "border-amber-400 bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400";
-            else if (isSelected) cls += "border-amber-300 bg-amber-50 text-amber-500 dark:bg-amber-950/20";
-            else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
+            if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)] opacity-60";
+            else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
           } else {
             if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]/50";
@@ -380,10 +358,10 @@ interface ArithQuestion {
 export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): ArithQuestion[] => {
     const qs: ArithQuestion[] = [];
-    // 2 additions
+    // 2 additions (20–50)
     for (let i = 0; i < 2; i++) {
-      const a = randInt(11, 99);
-      const b = randInt(11, 99);
+      const a = randInt(20, 50);
+      const b = randInt(20, 50);
       qs.push({ a, b, op: "+", result: a + b });
     }
     // 2 subtractions (result > 0)
@@ -398,15 +376,15 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(4).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      if (answers[i]?.trim() === String(q.result)) pts++;
+      if (answers[i]?.trim() === String(q.result)) pts += 0.5;
     });
-    onValidated(pts, 8);
+    onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -441,22 +419,18 @@ interface MissingOpQuestion {
   missing: number;
 }
 
-function renderMissingOp(q: MissingOpQuestion, ans: string, onChange: (v: string) => void, validated: boolean) {
+function renderMissingOpRow(q: MissingOpQuestion, ans: string, onChange: (v: string) => void, validated: boolean) {
   const inp = (
-    <CorrectionInput
-      value={ans}
-      onChange={onChange}
-      correct={String(q.missing)}
-      validated={validated}
-      width="w-14"
-    />
+    <CorrectionInput value={ans} onChange={onChange} correct={String(q.missing)} validated={validated} width="w-14" />
   );
-  let parts: React.ReactNode;
-  if (q.format === "x_plus_blank_eq_y") parts = <>{q.x} + {inp} = {q.y}</>;
-  else if (q.format === "x_minus_blank_eq_y") parts = <>{q.x} − {inp} = {q.y}</>;
-  else if (q.format === "blank_plus_x_eq_y") parts = <>{inp} + {q.x} = {q.y}</>;
-  else parts = <>{inp} − {q.x} = {q.y}</>;
-  return <span className="flex items-center gap-1 font-mono text-base text-[var(--color-text-primary)]">{parts}</span>;
+  const num = (n: number) => <span className="inline-flex h-9 w-14 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>;
+  const op = (s: string) => <span className="w-5 text-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>;
+  const eq = <span className="w-5 text-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
+
+  if (q.format === "x_plus_blank_eq_y") return <>{num(q.x)}{op("+")}{inp}{eq}{num(q.y)}</>;
+  if (q.format === "x_minus_blank_eq_y") return <>{num(q.x)}{op("−")}{inp}{eq}{num(q.y)}</>;
+  if (q.format === "blank_plus_x_eq_y") return <>{inp}{op("+")}{num(q.x)}{eq}{num(q.y)}</>;
+  return <>{inp}{op("−")}{num(q.x)}{eq}{num(q.y)}</>;
 }
 
 export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
@@ -504,11 +478,11 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
-      <div className="space-y-3">
+      <div className="space-y-1">
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span className="w-4 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {renderMissingOp(
+          <div key={i} className="flex items-center gap-1">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {renderMissingOpRow(
               q,
               answers[i] ?? "",
               (v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; }),
@@ -751,27 +725,26 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en dizaines et unités.</p>
       {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-3">
+        <div key={i} className="flex items-center gap-2">
           <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-          <div className="flex flex-1 flex-wrap items-center gap-2 rounded-lg border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 px-3 py-2">
-            <span className="font-mono text-base font-semibold text-[var(--color-text-primary)]">{q.n} =</span>
-            <CorrectionInput
-              value={answers[i]?.[0] ?? ""}
-              onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![0] = v; return next; })}
-              correct={String(q.tens)}
-              validated={validated}
-              width="w-14"
-            />
-            <span className="text-sm text-[var(--color-text-secondary)]">diz. +</span>
-            <CorrectionInput
-              value={answers[i]?.[1] ?? ""}
-              onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![1] = v; return next; })}
-              correct={String(q.units)}
-              validated={validated}
-              width="w-14"
-            />
-            <span className="text-sm text-[var(--color-text-secondary)]">unit.</span>
-          </div>
+          <span className="w-10 font-mono text-base font-semibold text-[var(--color-text-primary)]">{q.n}</span>
+          <span className="text-base text-[var(--color-text-secondary)]">=</span>
+          <CorrectionInput
+            value={answers[i]?.[0] ?? ""}
+            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![0] = v; return next; })}
+            correct={String(q.tens)}
+            validated={validated}
+            width="w-14"
+          />
+          <span className="text-sm text-[var(--color-text-secondary)]">diz. +</span>
+          <CorrectionInput
+            value={answers[i]?.[1] ?? ""}
+            onChange={(v) => setAnswers(prev => { const next = prev.map(a => [...a] as [string, string]); next[i]![1] = v; return next; })}
+            correct={String(q.units)}
+            validated={validated}
+            width="w-14"
+          />
+          <span className="text-sm text-[var(--color-text-secondary)]">unit.</span>
         </div>
       ))}
     </div>
@@ -890,12 +863,12 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
                   }}
                   correct={String(v)}
                   validated={validated}
-                  width="h-9 min-w-[5rem] px-3 rounded-full"
+                  width="h-9 w-20 px-3 rounded-full"
                 />
               );
             }
             return (
-              <div key={i} className="inline-flex h-9 min-w-[5rem] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
+              <div key={i} className="inline-flex h-9 w-20 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             );
           })}
         </div>
@@ -972,52 +945,40 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
     let pts = 0;
     questions.forEach((q, i) => {
       const expected = q.kind === "missing" ? q.b : q.result;
-      if (answers[i]?.trim() === String(expected)) pts++;
+      if (answers[i]?.trim() === String(expected)) pts += 0.5;
     });
-    onValidated(pts, 6);
+    onValidated(pts, 3);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const num = (n: number) => (
+    <span className="inline-flex h-9 w-16 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{n}</span>
+  );
+  const opSpan = (s: string) => (
+    <span className="w-6 text-center font-mono text-base text-[var(--color-text-secondary)]">{s}</span>
+  );
+  const eqSpan = <span className="w-6 text-center font-mono text-base text-[var(--color-text-secondary)]">=</span>;
 
   function renderQ(q: MixedQuestion, i: number) {
     const ans = answers[i] ?? "";
     const onChange = (v: string) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; });
-    if (q.kind === "mul") {
-      return (
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-          <span className="font-mono text-base text-[var(--color-text-primary)]">{q.a} × {q.b} =</span>
-          <CorrectionInput value={ans} onChange={onChange} correct={String(q.result)} validated={validated} width="w-14" />
-        </div>
-      );
-    }
-    if (q.kind === "div") {
-      return (
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-          <span className="font-mono text-base text-[var(--color-text-primary)]">{q.a} ÷ {q.b} =</span>
-          <CorrectionInput value={ans} onChange={onChange} correct={String(q.result)} validated={validated} width="w-14" />
-        </div>
-      );
-    }
-    // missing operand
-    const inp = <CorrectionInput value={ans} onChange={onChange} correct={String(q.b)} validated={validated} width="w-16" />;
+    const inp = <CorrectionInput value={ans} onChange={onChange} correct={String(q.kind === "missing" ? q.b : q.result)} validated={validated} width="w-16" />;
+
+    if (q.kind === "mul") return <>{num(q.a)}{opSpan("×")}{num(q.b)}{eqSpan}{inp}</>;
+    if (q.kind === "div") return <>{num(q.a)}{opSpan("÷")}{num(q.b)}{eqSpan}{inp}</>;
     const { format, a, result } = q;
-    let parts: React.ReactNode;
-    if (format === "x_plus_blank_eq_y") parts = <>{a} + {inp} = {result}</>;
-    else if (format === "x_minus_blank_eq_y") parts = <>{a} − {inp} = {result}</>;
-    else if (format === "blank_plus_x_eq_y") parts = <>{inp} + {a} = {result}</>;
-    else parts = <>{inp} − {a} = {result}</>;
-    return (
-      <div className="flex items-center gap-2">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-        <span className="flex items-center gap-1 font-mono text-base text-[var(--color-text-primary)]">{parts}</span>
-      </div>
-    );
+    if (format === "x_plus_blank_eq_y") return <>{num(a)}{opSpan("+")}{inp}{eqSpan}{num(result)}</>;
+    if (format === "x_minus_blank_eq_y") return <>{num(a)}{opSpan("−")}{inp}{eqSpan}{num(result)}</>;
+    if (format === "blank_plus_x_eq_y") return <>{inp}{opSpan("+")}{num(a)}{eqSpan}{num(result)}</>;
+    return <>{inp}{opSpan("−")}{num(a)}{eqSpan}{num(result)}</>;
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-1">
       {questions.map((q, i) => (
-        <div key={i}>{renderQ(q, i)}</div>
+        <div key={i} className="flex items-center gap-1">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          {renderQ(q, i)}
+        </div>
       ))}
     </div>
   );

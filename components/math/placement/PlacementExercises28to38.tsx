@@ -22,77 +22,37 @@ function fmtDec(n: number, d: number): string {
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
 function CorrectionInput({
-  value, onChange, correct, validated, width = "w-16", placeholder = "",
+  value, onChange, correct: _correct, validated, width = "w-16", placeholder = "",
 }: {
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
-  const isCorrect = validated && matchNum(value, parseNum(correct));
-  const isWrong = validated && !matchNum(value, parseNum(correct));
-  if (validated) {
-    return (
-      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
-        {isWrong && (
-          <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">
-            {value || "—"}
-          </span>
-        )}
-        <span className={`inline-flex items-center justify-center rounded border px-1 font-mono text-sm font-bold min-w-[2.5rem] ${
-          isCorrect
-            ? "border-green-300 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400"
-            : "border-amber-300 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/30"
-        }`}>
-          {correct}
-        </span>
-      </span>
-    );
-  }
   return (
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      disabled={validated}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
     />
   );
 }
 
-// Exact-text correction input (no numeric parsing)
 function CorrectionInputText({
-  value, onChange, correct, validated, width = "w-20", placeholder = "",
+  value, onChange, correct: _correct, validated, width = "w-20", placeholder = "",
 }: {
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
-  const norm = (s: string) => s.trim().replace(/\s+/g, " ").toLowerCase();
-  const isCorrect = validated && norm(value) === norm(correct);
-  const isWrong = validated && norm(value) !== norm(correct);
-  if (validated) {
-    return (
-      <span className={`inline-flex h-9 flex-col items-center justify-center ${width}`}>
-        {isWrong && (
-          <span className="text-[10px] font-medium line-through text-amber-500 leading-tight">
-            {value || "—"}
-          </span>
-        )}
-        <span className={`inline-flex items-center justify-center rounded border px-1 font-mono text-sm font-bold min-w-[2.5rem] ${
-          isCorrect
-            ? "border-green-300 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400"
-            : "border-amber-300 bg-amber-50 text-[var(--color-text-primary)] dark:bg-amber-950/30"
-        }`}>
-          {correct}
-        </span>
-      </span>
-    );
-  }
   return (
     <input
       type="text"
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder={placeholder}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20`}
+      disabled={validated}
+      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
     />
   );
 }
