@@ -504,7 +504,7 @@ interface ColArithQuestion {
   result: number;
 }
 
-function SimpleColumnGrid({ a, b, op, result, answer, onChange, validated }: {
+function _SimpleColumnGrid({ a, b, op, result, answer, onChange, validated }: {
   a: number; b: number; op: "+" | "-" | "×" | "÷"; result: number;
   answer: string; onChange: (v: string) => void; validated: boolean;
 }) {
@@ -538,7 +538,7 @@ function d4(n: number): [number, number, number, number] {
 }
 
 function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarryChange, validated }: {
-  a: number; b: number; op: "+" | "-";
+  a: number; b: number; op: "+" | "-" | "×" | "÷";
   result: number; answers: string[]; carries: string[];
   onChange: (col: number, val: string) => void;
   onCarryChange: (col: number, val: string) => void;
@@ -547,7 +547,16 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
   const aD = d4(a), bD = d4(b), rD = d4(result);
   const aFz = aD.findIndex(x => x !== 0);
   const bFz = bD.findIndex(x => x !== 0);
-  const rFz = rD.findIndex(x => x !== 0);
+  const showCarry = op !== "÷";
+  const carryLabel = op === "-" ? "E" : "R";
+
+  const digitInput = (col: number) => (
+    <input type="text" inputMode="numeric" maxLength={1} value={answers[col] ?? ""}
+      disabled={validated}
+      onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+    />
+  );
 
   return (
     <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
@@ -561,25 +570,20 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
           </tr>
         </thead>
         <tbody>
-          {/* Carry / borrow row */}
-          <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">
-              {op === "+" ? "R" : "E"}
-            </td>
-            {[0, 1, 2, 3].map(col => (
-              <td key={col} className="text-center">
-                <input
-                  type="text"
-                  inputMode="numeric"
-                  maxLength={1}
-                  value={carries[col] ?? ""}
-                  disabled={validated}
-                  onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-                  className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
-                />
-              </td>
-            ))}
-          </tr>
+          {showCarry && (
+            <tr>
+              <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{carryLabel}</td>
+              {[0, 1, 2, 3].map(col => (
+                <td key={col} className="text-center">
+                  <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
+                    disabled={validated}
+                    onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+                    className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+                  />
+                </td>
+              ))}
+            </tr>
+          )}
           <tr>
             <td />
             {aD.map((d, col) => (
@@ -599,33 +603,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {rD.map((d, col) => {
-              const val = answers[col] ?? "";
-              const isLeading = col < rFz;
-              if (validated) {
-                const ok = val.trim() === String(d) || (d === 0 && isLeading && (val.trim() === "" || val.trim() === "0"));
-                return (
-                  <td key={col} className="text-center">
-                    {ok ? (
-                      <div className="flex h-8 w-8 items-center justify-center rounded border border-green-300 bg-green-50 font-mono text-base text-green-700 dark:bg-green-950/30 dark:text-green-400">{isLeading ? "" : d}</div>
-                    ) : (
-                      <div className="flex h-8 w-8 flex-col items-center justify-center rounded border border-amber-300 bg-amber-50 dark:bg-amber-950/30">
-                        <span className="text-[9px] leading-none line-through text-amber-500">{val || "—"}</span>
-                        <span className="text-[9px] font-bold leading-none text-[var(--color-text-primary)]">{d}</span>
-                      </div>
-                    )}
-                  </td>
-                );
-              }
-              return (
-                <td key={col} className="text-center">
-                  <input type="text" inputMode="numeric" maxLength={1} value={val}
-                    onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-                    className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
-                  />
-                </td>
-              );
-            })}
+            {rD.map((_, col) => <td key={col} className="text-center">{digitInput(col)}</td>)}
           </tr>
         </tbody>
       </table>
@@ -1060,51 +1038,69 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Exercise 13 — Column arithmetic 1000–9999 ────────────────────────────────
+// ── Exercise 13 — Column arithmetic 1000–9999 (6 operations) ────────────────
+
+type Ex13Question = { a: number; b: number; op: "+" | "-" | "×" | "÷"; result: number };
 
 export function Exercise13({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const questions = useMemo((): ColArithQuestion[] => {
-    const qs: ColArithQuestion[] = [];
-    for (let i = 0; i < 2; i++) {
-      const a = randInt(1000, 9999);
-      const b = randInt(1000, 9999);
-      qs.push({ a, b, op: "+", result: a + b });
-    }
-    for (let i = 0; i < 2; i++) {
-      let a = randInt(1000, 9999);
-      let b = randInt(1000, 9999);
-      if (b > a) [a, b] = [b, a];
-      while (a === b) a = randInt(1000, 9999);
-      qs.push({ a, b, op: "-", result: a - b });
-    }
-    return qs;
+  const questions = useMemo((): Ex13Question[] => {
+    const a1 = randInt(1000, 4999), b1 = randInt(1000, 9999 - a1);
+    const a4 = randInt(1001, 9999); let b4 = randInt(1000, a4 - 1);
+    while (b4 >= a4) b4 = randInt(1000, a4 - 1);
+    const ma2 = randInt(100, 999), mb2 = randInt(2, 9);
+    const ma5 = randInt(100, 999), mb5 = randInt(2, 9);
+    const div3 = randInt(2, 9), quot3 = randInt(111, 999);
+    const div6 = randInt(2, 9), quot6 = randInt(111, 999);
+    return [
+      { a: a1, b: b1, op: "+", result: a1 + b1 },
+      { a: ma2, b: mb2, op: "×", result: ma2 * mb2 },
+      { a: div3 * quot3, b: div3, op: "÷", result: quot3 },
+      { a: a4, b: b4, op: "-", result: a4 - b4 },
+      { a: ma5, b: mb5, op: "×", result: ma5 * mb5 },
+      { a: div6 * quot6, b: div6, op: "÷", result: quot6 },
+    ];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(4).fill(""));
+  const [answers, setAnswers] = useState<string[][]>(() => Array(6).fill(null).map(() => ["","","",""]));
+  const [carries, setCarries] = useState<string[][]>(() => Array(6).fill(null).map(() => ["","","",""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     questions.forEach((q, i) => {
-      if (answers[i]?.trim() === String(q.result)) pts++;
+      const d = answers[i] ?? [];
+      const rec = (parseInt(d[0]||"0")||0)*1000 + (parseInt(d[1]||"0")||0)*100 +
+        (parseInt(d[2]||"0")||0)*10 + (parseInt(d[3]||"0")||0);
+      if (rec === q.result) pts += 0.5;
     });
-    onValidated(pts, 4);
+    onValidated(pts, 3);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const rows: [number, number][] = [[0, 3], [1, 4], [2, 5]];
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat.</p>
-      <div className="flex flex-wrap gap-4">
-        {questions.map((q, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <SimpleColumnGrid
-              a={q.a} b={q.b} op={q.op} result={q.result}
-              answer={answers[i] ?? ""}
-              onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
-              validated={validated}
-            />
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
+      <div className="space-y-3">
+        {rows.map(([li, ri]) => (
+          <div key={li} className="grid grid-cols-2 gap-3">
+            {[li, ri].map(i => {
+              const q = questions[i]!;
+              return (
+                <div key={i} className="flex flex-col items-start gap-1">
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <PlacementColCard
+                    a={q.a} b={q.b} op={q.op} result={q.result}
+                    answers={answers[i] ?? ["","","",""]}
+                    carries={carries[i] ?? ["","","",""]}
+                    onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+                    onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+                    validated={validated}
+                  />
+                </div>
+              );
+            })}
           </div>
         ))}
       </div>
@@ -1112,46 +1108,164 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Exercise 14 — Column multiplication ──────────────────────────────────────
+// ── PlacementMulCard2 — 2-digit multiplier (A3.2 ex3 / Mul2DigitCard style) ──
+
+function d5(n: number): [number,number,number,number,number] {
+  return [Math.floor(n/10000)%10, Math.floor(n/1000)%10, Math.floor(n/100)%10, Math.floor(n/10)%10, n%10];
+}
+
+function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryChange, validated }: {
+  a: number; b: number; result: number;
+  answers: string[]; carries: string[];
+  onChange: (idx: number, val: string) => void;
+  onCarryChange: (idx: number, val: string) => void;
+  validated: boolean;
+}) {
+  const bUnits = b % 10, bTens = Math.floor(b / 10);
+  const partial1 = a * bUnits, partial2 = a * bTens;
+  const ad = d5(a), bd = d5(b), rd = d5(result);
+  const p1d = d5(partial1), p2d = d5(partial2);
+  const aFz = ad.findIndex(x => x !== 0);
+  const bFz = bd.findIndex(x => x !== 0);
+  const numCols = result > 9999 ? 5 : 4;
+  const colStart = 5 - numCols;
+  const cols = Array.from({ length: numCols }, (_, i) => colStart + i);
+  const hdrs = (result > 9999 ? ["DM","M","C","D","U"] : ["M","C","D","U"]) as string[];
+
+  const carryIn = (idx: number) => (
+    <input type="text" inputMode="numeric" maxLength={1} value={carries[idx] ?? ""}
+      disabled={validated}
+      onChange={e => onCarryChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
+      className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+    />
+  );
+  const digitIn = (idx: number) => (
+    <input type="text" inputMode="numeric" maxLength={1} value={answers[idx] ?? ""}
+      disabled={validated}
+      onChange={e => onChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
+      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+    />
+  );
+  const pre = (d: number, isL: boolean) => (
+    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{isL ? "" : d}</div>
+  );
+  // p2 shifted: col i → p2d[i+1], col 4 = fixed 0
+  const p2Digit = (col: number) => col === 4 ? null : p2d[col + 1]!;
+
+  return (
+    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+      <table className="mx-auto border-collapse">
+        <thead>
+          <tr>
+            <td className="w-6" />
+            {hdrs.map(h => <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            {cols.map(col => <td key={col} className="text-center">{carryIn(5 + col)}</td>)}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            {cols.map(col => <td key={col} className="text-center">{carryIn(col)}</td>)}
+          </tr>
+          <tr>
+            <td />
+            {cols.map(col => <td key={col} className="text-center">{pre(ad[col]!, col < aFz)}</td>)}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            {cols.map(col => <td key={col} className="text-center">{pre(bd[col]!, col < bFz)}</td>)}
+          </tr>
+          <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {cols.map(col => <td key={col} className="text-center">{digitIn(col)}</td>)}
+          </tr>
+          <tr>
+            <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-primary)]">+</td>
+            {cols.map(col => (
+              <td key={col} className="text-center">
+                {col === 4
+                  ? <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
+                  : digitIn(5 + col)
+                }
+              </td>
+            ))}
+          </tr>
+          <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
+          <tr>
+            <td />
+            {cols.map(col => <td key={col} className="text-center">{digitIn(10 + col)}</td>)}
+          </tr>
+        </tbody>
+      </table>
+      <div className="sr-only">{void [p1d, p2Digit, rd]}</div>
+    </div>
+  );
+}
+
+// ── Exercise 14 — Column multiplication (A3.2 ex1 + ex3 style) ───────────────
 
 export function Exercise14({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const a1 = randInt(111, 999);
-    const b1 = randInt(2, 9);
-    const a2 = randInt(111, 999);
-    let b2 = randInt(11, 99);
+    const a1 = randInt(100, 999), b1 = randInt(2, 9);
+    const a2 = randInt(12, 999); let b2 = randInt(11, 99);
     while (b2 % 10 === 0) b2 = randInt(11, 99);
     return { a1, b1, r1: a1 * b1, a2, b2, r2: a2 * b2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [ans1, setAns1] = useState("");
-  const [ans2, setAns2] = useState("");
+  // Q1: PlacementColCard state (4 carries + 4 result)
+  const [q1Carries, setQ1Carries] = useState<string[]>(() => ["","","",""]);
+  const [q1Ans, setQ1Ans] = useState<string[]>(() => ["","","",""]);
+  // Q2: PlacementMulCard2 state (10 carries + 15 answers)
+  const [q2Carries, setQ2Carries] = useState<string[]>(() => Array(10).fill(""));
+  const [q2Ans, setQ2Ans] = useState<string[]>(() => Array(15).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (ans1.trim() === String(data.r1)) pts++;
-    if (ans2.trim() === String(data.r2)) pts++;
+    const r1rec = (parseInt(q1Ans[0]||"0")||0)*1000 + (parseInt(q1Ans[1]||"0")||0)*100 +
+      (parseInt(q1Ans[2]||"0")||0)*10 + (parseInt(q1Ans[3]||"0")||0);
+    if (r1rec === data.r1) pts++;
+    // Q2 result in indices 10-14 (5-wide), take relevant cols
+    const numCols = data.r2 > 9999 ? 5 : 4;
+    const colStart = 5 - numCols;
+    const rD = d5(data.r2);
+    let r2ok = true;
+    for (let c = colStart; c < 5; c++) {
+      const idx = 10 + c;
+      const val = parseInt(q2Ans[idx]||"0")||0;
+      if (val !== rD[c]) { r2ok = false; break; }
+    }
+    if (r2ok) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications. Inscrivez le résultat final.</p>
-      <div className="flex flex-wrap gap-6">
-        <div className="flex flex-col items-center gap-1">
+      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
+      <div className="space-y-4">
+        <div className="flex flex-col items-start gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <SimpleColumnGrid
+          <PlacementColCard
             a={data.a1} b={data.b1} op="×" result={data.r1}
-            answer={ans1} onChange={setAns1} validated={validated}
+            answers={q1Ans} carries={q1Carries}
+            onChange={(col, v) => setQ1Ans(p => { const n=[...p]; n[col]=v; return n; })}
+            onCarryChange={(col, v) => setQ1Carries(p => { const n=[...p]; n[col]=v; return n; })}
+            validated={validated}
           />
         </div>
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-start gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <SimpleColumnGrid
-            a={data.a2} b={data.b2} op="×" result={data.r2}
-            answer={ans2} onChange={setAns2} validated={validated}
+          <PlacementMulCard2
+            a={data.a2} b={data.b2} result={data.r2}
+            answers={q2Ans} carries={q2Carries}
+            onChange={(idx, v) => setQ2Ans(p => { const n=[...p]; n[idx]=v; return n; })}
+            onCarryChange={(idx, v) => setQ2Carries(p => { const n=[...p]; n[idx]=v; return n; })}
+            validated={validated}
           />
         </div>
       </div>
@@ -1159,74 +1273,248 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Exercise 15 — Column division ─────────────────────────────────────────────
+// ── PlacementDivCard — Column division (A3.4 style) ───────────────────────────
 
-function makeExactDiv(minDividend: number, maxDividend: number, minDivisor: number, maxDivisor: number): { dividend: number; divisor: number; quotient: number } {
-  let divisor = randInt(minDivisor, maxDivisor);
-  const minQ = Math.ceil(minDividend / divisor);
-  const maxQ = Math.floor(maxDividend / divisor);
-  if (maxQ < minQ) {
-    // retry
-    divisor = Math.max(minDivisor, Math.floor(maxDividend / 10));
-    const q = randInt(Math.ceil(minDividend / divisor), Math.floor(maxDividend / divisor));
-    return { dividend: divisor * q, divisor, quotient: q };
+function computePlaceDivSteps(dividend: number, divisor: number): Array<{ partialDiv: number; product: number; colEnd: number }> {
+  const digits = dividend.toString().split("").map(Number);
+  const steps: Array<{ partialDiv: number; product: number; colEnd: number }> = [];
+  let current = 0;
+  for (let i = 0; i < digits.length; i++) {
+    current = current * 10 + digits[i]!;
+    if (current < divisor && i < digits.length - 1) continue;
+    const qd = Math.floor(current / divisor);
+    const prod = qd * divisor;
+    steps.push({ partialDiv: current, product: prod, colEnd: i });
+    current = current - prod;
   }
-  const quotient = randInt(minQ, maxQ);
-  return { dividend: divisor * quotient, divisor, quotient };
+  return steps;
 }
 
-export function Exercise15({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const data = useMemo(() => {
-    const d1 = makeExactDiv(111, 999, 2, 9);
-    let d2 = makeExactDiv(1111, 9999, 11, 19);
-    // ensure divisor doesn't end in 0
-    let attempts = 0;
-    while (d2.divisor % 10 === 0 && attempts < 20) {
-      d2 = makeExactDiv(1111, 9999, 11, 19);
-      attempts++;
-    }
-    return { d1, d2 };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCols,
+  quotientInputs, remainderInput, workFlat,
+  onQuotientChange, onRemainderChange, onWorkChange, validated }: {
+  dividend: number; divisor: number; quotient: number;
+  dividendCols: number; divisorCols: number;
+  quotientInputs: string[]; remainderInput: string;
+  workFlat: string[]; // index = step*2*dividendCols + type*dividendCols + col
+  onQuotientChange: (qi: number, val: string) => void;
+  onRemainderChange: (val: string) => void;
+  onWorkChange: (step: number, type: 0|1, col: number, val: string) => void;
+  validated: boolean;
+}) {
+  const steps = computePlaceDivSteps(dividend, divisor);
+  const quotientStr = quotient.toString();
+  const dividendStr = dividend.toString().padStart(dividendCols, "0");
+  const divisorStr = divisor.toString();
+  const quotientCols = steps.length;
+  const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
+  const colLabels = dividendCols === 4 ? ["M","C","D","U"] : ["DM","M","C","D","U"];
+  const CW = 32;
 
-  const [ans1, setAns1] = useState("");
-  const [ans2, setAns2] = useState("");
+  const digIn = (val: string, onChange: (v: string) => void) => (
+    <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+      onChange={e => onChange(e.target.value.replace(/[^0-9]/g,"").slice(-1))}
+      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+    />
+  );
+  const preCell = (ch: string, hide?: boolean) => (
+    <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : ch}</div>
+  );
+  const emptyCell = () => <div className="h-8 w-8" />;
 
-  useEffect(() => {
-    if (validateTrigger === 0) return;
-    let pts = 0;
-    if (ans1.trim() === String(data.d1.quotient)) pts++;
-    if (ans2.trim() === String(data.d2.quotient)) pts++;
-    onValidated(pts, 2);
-  }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  function DivDisplay({ dividend, divisor, quotient, ans, onChange }: {
-    dividend: number; divisor: number; quotient: number; ans: string; onChange: (v: string) => void;
-  }) {
+  function WorkRow({ numStr, colEnd, si, type }: { numStr: string; colEnd: number; si: number; type: 0|1 }) {
+    const startCol = colEnd - numStr.length + 1;
     return (
-      <div className="inline-flex flex-col items-end font-mono text-base border border-[var(--color-border-default)] rounded-lg px-3 py-2 bg-[var(--color-bg-secondary)] gap-1">
-        <div className="flex items-center gap-2">
-          <span className="text-[var(--color-text-primary)]">{dividend}</span>
-          <span className="text-[var(--color-text-secondary)]">÷</span>
-          <span className="text-[var(--color-text-primary)]">{divisor}</span>
-          <span className="text-[var(--color-text-secondary)]">=</span>
-          <CorrectionInput value={ans} onChange={onChange} correct={String(quotient)} validated={validated} width="w-16" />
-        </div>
-      </div>
+      <>
+        {Array.from({ length: dividendCols }, (_, col) => {
+          const relIdx = col - startCol;
+          const hasDigit = relIdx >= 0 && relIdx < numStr.length;
+          const flatIdx = si * 2 * dividendCols + type * dividendCols + relIdx;
+          const val = hasDigit ? (workFlat[flatIdx] ?? "") : "";
+          return (
+            <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+              {hasDigit ? digIn(val, v => onWorkChange(si, type, relIdx, v)) : emptyCell()}
+            </td>
+          );
+        })}
+      </>
     );
   }
 
   return (
+    <div className="overflow-x-auto">
+      <table className="mx-auto border-collapse table-fixed">
+        <tbody>
+          <tr>
+            <td style={{ width: 20, padding: 0 }} />
+            {colLabels.map((lbl, i) => (
+              <td key={i} style={{ width: CW, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{lbl}</td>
+            ))}
+            {Array.from({ length: quotientCols }, (_, i) => (
+              <td key={i} style={{ width: CW, padding: 0, ...(i === 0 ? BSEP : {}) }} />
+            ))}
+          </tr>
+          <tr>
+            <td style={{ padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, i) => {
+              const isLeading = i < dividendCols - dividend.toString().length;
+              return (
+                <td key={i} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+                  {preCell(dividendStr[i]!, isLeading)}
+                </td>
+              );
+            })}
+            {Array.from({ length: quotientCols }, (_, i) => {
+              const isDivCol = i < divisorCols;
+              const isLeading = isDivCol && i < divisorCols - divisor.toString().length;
+              return (
+                <td key={i} style={{ width: CW, padding: 2, ...(i === 0 ? BSEP : {}), ...(isDivCol ? { borderBottom: "2px solid var(--color-text-primary)" } : {}) }} className="align-middle text-center">
+                  {isDivCol ? preCell(divisorStr[i]!, isLeading) : null}
+                </td>
+              );
+            })}
+          </tr>
+          {steps.map((step, si) => {
+            const pdStr = step.partialDiv.toString();
+            const prStr = step.product.toString();
+            const pdStart = step.colEnd - pdStr.length + 1;
+            const prStart = step.colEnd - prStr.length + 1;
+            const lineStart = Math.min(pdStart, prStart);
+            return (
+              <React.Fragment key={si}>
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  <WorkRow numStr={pdStr} colEnd={step.colEnd} si={si} type={0} />
+                  {si === 0
+                    ? Array.from({ length: quotientCols }, (_, qi) => (
+                        <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
+                          {qi < quotientStr.length
+                            ? digIn(quotientInputs[qi] ?? "", v => onQuotientChange(qi, v))
+                            : emptyCell()
+                          }
+                        </td>
+                      ))
+                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                  }
+                </tr>
+                <tr>
+                  <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
+                  <WorkRow numStr={prStr} colEnd={step.colEnd} si={si} type={1} />
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  {Array.from({ length: dividendCols }, (_, col) => (
+                    <td key={col} style={{ padding: 0, width: CW }}>
+                      {col >= lineStart && col <= step.colEnd
+                        ? <div className="h-px bg-[var(--color-text-primary)] opacity-50 my-1" />
+                        : null}
+                    </td>
+                  ))}
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+              </React.Fragment>
+            );
+          })}
+          <tr>
+            <td colSpan={dividendCols} style={{ padding: "4px 6px 4px 0", textAlign: "right", verticalAlign: "middle", fontSize: 12, color: "var(--color-text-secondary)", whiteSpace: "nowrap" }}>
+              Reste :
+            </td>
+            <td style={{ width: CW, padding: 2 }} className="align-middle text-center">
+              <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
+                onChange={e => onRemainderChange(e.target.value.replace(/[^0-9]/g,"").slice(0,2))}
+                className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+              />
+            </td>
+            <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+// ── Exercise 15 — Column division (A3.4 ex1 + ex2 style) ─────────────────────
+
+function makeDiv15Q(dividendCols: number, divisorCols: number): {
+  dividend: number; divisor: number; quotient: number; remainder: number;
+  dividendCols: number; divisorCols: number;
+} {
+  for (;;) {
+    let dividend: number, divisor: number;
+    if (dividendCols === 4 && divisorCols === 1) {
+      dividend = randInt(1000, 9999); divisor = randInt(2, 9);
+    } else {
+      dividend = randInt(1000, 9999); let d = randInt(11, 99);
+      while (d % 10 === 0) d = randInt(11, 99);
+      divisor = d;
+    }
+    const quotient = Math.floor(dividend / divisor);
+    const remainder = dividend % divisor;
+    if (quotient === 0) continue;
+    if (quotient.toString().length > 4) continue;
+    return { dividend, divisor, quotient, remainder, dividendCols, divisorCols };
+  }
+}
+
+export function Exercise15({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+  const data = useMemo(() => ({
+    q1: makeDiv15Q(4, 1),
+    q2: makeDiv15Q(4, 2),
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [exerciseKey]);
+
+  // Each question: quotient (4 cells), remainder (1), work flat (4 steps × 2 types × 4 cols = 32)
+  const [q1Quot, setQ1Quot] = useState<string[]>(() => Array(4).fill(""));
+  const [q1Rem, setQ1Rem] = useState("");
+  const [q1Work, setQ1Work] = useState<string[]>(() => Array(32).fill(""));
+  const [q2Quot, setQ2Quot] = useState<string[]>(() => Array(4).fill(""));
+  const [q2Rem, setQ2Rem] = useState("");
+  const [q2Work, setQ2Work] = useState<string[]>(() => Array(32).fill(""));
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    let pts = 0;
+    const checkQ = (q: { quotient: number }, quot: string[]) => {
+      const qStr = q.quotient.toString();
+      return qStr.split("").every((ch, i) => (quot[i] ?? "") === ch);
+    };
+    if (checkQ(data.q1, q1Quot)) pts++;
+    if (checkQ(data.q2, q2Quot)) pts++;
+    onValidated(pts, 2);
+  }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const makeWorkChange = (setter: React.Dispatch<React.SetStateAction<string[]>>, dCols: number) =>
+    (step: number, type: 0|1, col: number, val: string) => {
+      const idx = step * 2 * dCols + type * dCols + col;
+      setter(prev => { const n=[...prev]; n[idx]=val; return n; });
+    };
+
+  return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions. Inscrivez le quotient (résultat exact).</p>
-      <div className="flex flex-wrap gap-4">
-        <div className="flex flex-col items-center gap-1">
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
+      <div className="space-y-6">
+        <div className="flex flex-col items-start gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <DivDisplay {...data.d1} ans={ans1} onChange={setAns1} />
+          <PlacementDivCard
+            {...data.q1}
+            quotientInputs={q1Quot} remainderInput={q1Rem} workFlat={q1Work}
+            onQuotientChange={(qi, v) => setQ1Quot(p => { const n=[...p]; n[qi]=v; return n; })}
+            onRemainderChange={setQ1Rem}
+            onWorkChange={makeWorkChange(setQ1Work, data.q1.dividendCols)}
+            validated={validated}
+          />
         </div>
-        <div className="flex flex-col items-center gap-1">
+        <div className="flex flex-col items-start gap-1">
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <DivDisplay {...data.d2} ans={ans2} onChange={setAns2} />
+          <PlacementDivCard
+            {...data.q2}
+            quotientInputs={q2Quot} remainderInput={q2Rem} workFlat={q2Work}
+            onQuotientChange={(qi, v) => setQ2Quot(p => { const n=[...p]; n[qi]=v; return n; })}
+            onRemainderChange={setQ2Rem}
+            onWorkChange={makeWorkChange(setQ2Work, data.q2.dividendCols)}
+            validated={validated}
+          />
         </div>
       </div>
     </div>

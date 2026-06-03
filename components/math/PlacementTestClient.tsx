@@ -68,7 +68,7 @@ const EXERCISES: ExerciseMeta[] = [
   { id: 10, label: "Grandes suites", maxPoints: 2, component: Exercise10 },
   { id: 11, label: "Calcul mixte", maxPoints: 3, component: Exercise11 },
   { id: 12, label: "Décomposition", maxPoints: 2, component: Exercise12 },
-  { id: 13, label: "Colonnes (1000–9999)", maxPoints: 4, component: Exercise13 },
+  { id: 13, label: "Colonnes (1000–9999)", maxPoints: 3, component: Exercise13 },
   { id: 14, label: "Multiplication en colonnes", maxPoints: 2, component: Exercise14 },
   { id: 15, label: "Division en colonnes", maxPoints: 2, component: Exercise15 },
   { id: 16, label: "Rectangle", maxPoints: 2, component: Exercise16 },
