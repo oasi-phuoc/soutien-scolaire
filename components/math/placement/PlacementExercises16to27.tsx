@@ -266,10 +266,10 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
 
 export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Series 1: 4 seven-digit numbers ABCDEFG
-    //   n1 & n2 share first 3 digits (ABC)
-    //   n1 & n3 share last 3 digits (EFG)
-    //   n4 is free
+    // Series 1: 3 seven-digit + 1 six-digit number
+    //   n1 & n2 (7-digit) share first 3 digits (ABC)
+    //   n1 & n3 (7-digit) share last 3 digits (EFG)
+    //   n4 is the 6-digit number
     const top3 = randInt(100, 999);       // shared first 3 digits for n1 & n2
     let top3b = randInt(100, 999);        // first 3 digits for n3
     while (top3b === top3) top3b = randInt(100, 999);
@@ -279,8 +279,7 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
     const n1 = top3 * 10000 + randInt(0, 9) * 1000 + bot3;
     const n2 = top3 * 10000 + randInt(0, 9) * 1000 + bot3b;
     const n3 = top3b * 10000 + randInt(0, 9) * 1000 + bot3;
-    let n4 = randInt(1000000, 9999999);
-    while ([n1, n2, n3].includes(n4)) n4 = randInt(1000000, 9999999);
+    const n4 = randInt(100000, 999999); // 6-digit number
     const ints = shuffle([n1, n2, n3, n4]);
     const sortedInts = [...ints].sort((a, b) => a - b);
 
