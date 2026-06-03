@@ -874,44 +874,34 @@ interface MixedQuestion {
 
 export function Exercise11({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): MixedQuestion[] => {
-    const qs: MixedQuestion[] = [];
-    // 2 missing operand: one add, one sub
-    const formats: MissingFormat[] = shuffle(["x_plus_blank_eq_y", "x_minus_blank_eq_y", "blank_plus_x_eq_y", "blank_minus_x_eq_y"]).slice(0, 2) as MissingFormat[];
-    for (const format of formats) {
-      let a: number, b: number, result: number;
+    function mkAdd(): MixedQuestion {
+      const format = (Math.random() < 0.5 ? "x_plus_blank_eq_y" : "blank_plus_x_eq_y") as MissingFormat;
       if (format === "x_plus_blank_eq_y") {
-        a = randInt(75, 450);
-        b = randInt(75, 500 - a);
-        result = a + b;
-      } else if (format === "x_minus_blank_eq_y") {
-        b = randInt(75, 425);
-        result = randInt(75, 500 - b);
-        a = b + result;
-      } else if (format === "blank_plus_x_eq_y") {
-        b = randInt(75, 425);
-        a = randInt(75, 500 - b);
-        result = a + b;
-      } else {
-        b = randInt(75, 425);
-        result = randInt(75, 500 - b);
-        a = result + b;
+        const a = randInt(75, 450); const b = randInt(75, 500 - a);
+        return { kind: "missing", format, a, b, result: a + b };
       }
-      qs.push({ kind: "missing", format, a, b, result });
+      const b = randInt(75, 425); const a = randInt(75, 500 - b);
+      return { kind: "missing", format, a, b, result: a + b };
     }
-    // 2 multiplications
-    for (let i = 0; i < 2; i++) {
-      const a = randInt(3, 12);
-      const b = randInt(3, 12);
-      qs.push({ kind: "mul", a, b, result: a * b });
+    function mkSub(): MixedQuestion {
+      const format = (Math.random() < 0.5 ? "x_minus_blank_eq_y" : "blank_minus_x_eq_y") as MissingFormat;
+      if (format === "x_minus_blank_eq_y") {
+        const b = randInt(75, 425); const result = randInt(75, 500 - b);
+        return { kind: "missing", format, a: b + result, b, result };
+      }
+      const b = randInt(75, 425); const result = randInt(75, 500 - b);
+      return { kind: "missing", format, a: result + b, b, result };
     }
-    // 2 divisions from multiplication tables
-    for (let i = 0; i < 2; i++) {
-      const b = randInt(2, 12);
-      const result = randInt(2, 12);
-      const a = b * result;
-      qs.push({ kind: "div", a, b, result });
+    function mkMul(): MixedQuestion {
+      const a = randInt(3, 12); const b = randInt(3, 12);
+      return { kind: "mul", a, b, result: a * b };
     }
-    return shuffle(qs);
+    function mkDiv(): MixedQuestion {
+      const b = randInt(2, 12); const result = randInt(2, 12);
+      return { kind: "div", a: b * result, b, result };
+    }
+    // Fixed order: +, −, ×, ×, ÷, ÷
+    return [mkAdd(), mkSub(), mkMul(), mkMul(), mkDiv(), mkDiv()];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
