@@ -2488,18 +2488,18 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 3, 3) });
       steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A5-2") {
-      steps.push({ kind: "ordering", lesson, config: genDecOrdering("asc", 1) });
-      steps.push({ kind: "ordering", lesson, config: genDecOrdering("desc", 2) });
-      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
-      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
-      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
-      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
       steps.push({ kind: "eval_start", lesson });
       const ascFirst52 = Math.random() < 0.5;
-      steps.push({ kind: "ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
-      steps.push({ kind: "ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
-      steps.push({ kind: "seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
-      steps.push({ kind: "seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "asc" : "desc", 1) });
+      steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
       steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A3-5") {
       // Training
