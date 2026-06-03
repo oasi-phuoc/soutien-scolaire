@@ -204,7 +204,7 @@ export function PlacementTestClient() {
   const [validated, setValidated] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
   const [scores, setScores] = useState<Array<{ points: number; maxPoints: number } | null>>(() => Array(TOTAL_EXERCISES).fill(null));
   const [validateTriggers, setValidateTriggers] = useState<number[]>(() => Array(TOTAL_EXERCISES).fill(0));
-  const [hasInput, setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
+  const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
   const [exerciseKeys] = useState<number[]>(() => EXERCISES.map((_, i) => i + 100));
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);

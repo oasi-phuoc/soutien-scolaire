@@ -222,7 +222,7 @@ function CompareQuestion({
 export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
     return Array.from({ length: 4 }, () => {
-      let a = randInt(11, 99);
+      const a = randInt(11, 99);
       let b = randInt(11, 99);
       while (b === a) b = randInt(11, 99);
       return { a, b };
@@ -675,7 +675,7 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
 export function Exercise9({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
     return Array.from({ length: 4 }, () => {
-      let a = randInt(101, 999);
+      const a = randInt(101, 999);
       let b = randInt(101, 999);
       while (b === a) b = randInt(101, 999);
       return { a, b };

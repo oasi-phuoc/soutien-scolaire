@@ -111,7 +111,7 @@ export function ExArticle({
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
-        Écrivez l&apos;article correct (le, la, l&apos;, les, un, une).
+        Écrivez l&apos;article défini (le, la, l&apos;, les).
       </p>
       <div className="grid grid-cols-2 gap-x-4 gap-y-3">
         {words.map((w, i) => {
