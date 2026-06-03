@@ -563,10 +563,12 @@ function d4(n: number): [number, number, number, number] {
   return [Math.floor(n / 1000), Math.floor((n % 1000) / 100), Math.floor((n % 100) / 10), n % 10];
 }
 
-function PlacementColCard({ a, b, op, result, answers, onChange, validated }: {
+function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarryChange, validated }: {
   a: number; b: number; op: "+" | "-";
-  result: number; answers: string[];
-  onChange: (col: number, val: string) => void; validated: boolean;
+  result: number; answers: string[]; carries: string[];
+  onChange: (col: number, val: string) => void;
+  onCarryChange: (col: number, val: string) => void;
+  validated: boolean;
 }) {
   const aD = d4(a), bD = d4(b), rD = d4(result);
   const aFz = aD.findIndex(x => x !== 0);
@@ -585,6 +587,25 @@ function PlacementColCard({ a, b, op, result, answers, onChange, validated }: {
           </tr>
         </thead>
         <tbody>
+          {/* Carry / borrow row */}
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">
+              {op === "+" ? "R" : "E"}
+            </td>
+            {[0, 1, 2, 3].map(col => (
+              <td key={col} className="text-center">
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={carries[col] ?? ""}
+                  disabled={validated}
+                  onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+                  className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+                />
+              </td>
+            ))}
+          </tr>
           <tr>
             <td />
             {aD.map((d, col) => (
@@ -658,6 +679,7 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
   }, [exerciseKey]);
 
   const [answers, setAnswers] = useState<string[][]>(() => Array(4).fill(null).map(() => ["", "", "", ""]));
+  const [carries, setCarries] = useState<string[][]>(() => Array(4).fill(null).map(() => ["", "", "", ""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -683,7 +705,9 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
             key={i}
             a={q.a} b={q.b} op={q.op as "+" | "-"} result={q.result}
             answers={answers[i] ?? ["", "", "", ""]}
+            carries={carries[i] ?? ["", "", "", ""]}
             onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+            onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
             validated={validated}
           />
         ))}
