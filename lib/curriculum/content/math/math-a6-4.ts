@@ -4,7 +4,7 @@ export const MATH_A6_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A6-4",
     submoduleCode: "A6.4",
     theory: {
-      title: { fr: "Augmentation / réduction en %", en: "Increase / decrease in %", ar: "الزيادة / التخفيض بنسبة %", fa: "افزایش / کاهش درصدی", ti: "ምብዛሕ / ምጉዳል ናይ %", uk: "Збільшення / зменшення на %" },
+      title: { fr: "Augmentation", en: "Increase", ar: "الزيادة بنسبة %", fa: "افزایش درصدی", ti: "ምብዛሕ ናይ %", uk: "Збільшення на %" },
       paragraphs: {
         fr: [
           "Augmenter de p% : multiplier par (1 + p/100). Exemple : augmenter 200 de 15% → 200 × 1,15 = 230.",

@@ -4,7 +4,7 @@ export const MATH_A6_7_LESSON: MathSubmoduleLesson = {
   submoduleId: "A6-7",
   submoduleCode: "A6.7",
   theory: {
-    title: { fr: "Échelles", en: "Scales", ar: "المقاييس", fa: "مقیاس‌ها", ti: "ሜዛን", uk: "Масштаби" },
+    title: { fr: "Problèmes", en: "Problems", ar: "مسائل", fa: "مسائل", ti: "ጸገማት", uk: "Задачі" },
     paragraphs: {
       fr: [
         "Une échelle est un rapport entre la dimension sur le plan (ou la carte) et la dimension réelle. Échelle 1:1000 signifie que 1 cm sur le plan représente 1000 cm = 10 m en réalité.",

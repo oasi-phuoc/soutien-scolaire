@@ -4,7 +4,7 @@ export const MATH_A6_5_LESSON: MathSubmoduleLesson = {
     submoduleId: "A6-5",
     submoduleCode: "A6.5",
     theory: {
-      title: { fr: "Tableau de proportionnalité", en: "Proportionality table", ar: "جدول التناسب", fa: "جدول تناسب", ti: "ሰንጠረዥ ናይ ምቅዳድ", uk: "Таблиця пропорційності" },
+      title: { fr: "Réduction", en: "Decrease", ar: "التخفيض بنسبة %", fa: "کاهش درصدی", ti: "ምጉዳል ናይ %", uk: "Зменшення на %" },
       paragraphs: {
         fr: [
           "Deux grandeurs sont proportionnelles si leur rapport est constant. Dans un tableau de proportionnalité, on peut passer d'une ligne à l'autre en multipliant ou divisant par le même nombre (coefficient de proportionnalité).",
