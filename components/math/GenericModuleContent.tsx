@@ -2490,7 +2490,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     } else if (sid === "A5-2") {
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
-      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
+      steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 3) });
       steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(4, 5, 4) });
       steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(5, 5, -1, 6) });
       steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(6, 5, -1, 5) });
