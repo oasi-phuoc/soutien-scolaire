@@ -475,10 +475,7 @@ export function PlacementTestClient() {
 
       {/* Exercise header */}
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
-          <span className="text-[var(--color-accent-alg)]">Exercice {ex.id}</span>
-          <span className="ml-1.5 text-sm font-normal text-[var(--color-text-secondary)]">— {ex.label}</span>
-        </h2>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
         <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
 
@@ -510,41 +507,42 @@ export function PlacementTestClient() {
       )}
 
       {/* Navigation bar (fixed bottom) */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 border-t border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3 safe-area-pb">
-        <div className="mx-auto flex max-w-xl gap-3">
-          <button
-            type="button"
-            onClick={goPrev}
-            disabled={findNextNonValidated(currentIdx, -1) < 0}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
-          </button>
-
-          {!isCurrentValidated && (
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+        <div className="border-t border-[var(--color-border-default)]">
+          <div className="mx-auto flex max-w-xl gap-3 px-4 py-3">
             <button
               type="button"
-              onClick={triggerValidate}
-              className="flex-1 rounded-[var(--radius-lg)] bg-amber-500 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              onClick={goPrev}
+              disabled={findNextNonValidated(currentIdx, -1) < 0}
+              className="flex h-11 min-w-[5rem] shrink-0 items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
             >
-              Valider
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+              Retour
             </button>
-          )}
 
-          <button
-            type="button"
-            onClick={goNext}
-            className={`flex h-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] px-5 text-white transition-opacity hover:opacity-90 active:opacity-80 ${
-              isCurrentValidated ? "flex-1" : "w-11"
-            }`}
-          >
-            {isCurrentValidated ? (
-              <span className="text-sm font-bold">Suivant</span>
-            ) : (
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>
+            {!isCurrentValidated && (
+              <button
+                type="button"
+                onClick={triggerValidate}
+                className="flex-1 rounded-[var(--radius-lg)] bg-amber-500 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              >
+                Valider
+              </button>
             )}
-          </button>
+
+            <button
+              type="button"
+              onClick={goNext}
+              className={`flex h-11 items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${
+                isCurrentValidated ? "flex-1" : "min-w-[5rem]"
+              }`}
+            >
+              Suivant
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
         </div>
+        <div style={{ height: 68 }} />
       </div>
     </div>
   );
