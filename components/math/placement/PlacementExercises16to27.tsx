@@ -570,7 +570,7 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
   );
 
   return (
-    <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 space-y-3">
+    <div className="space-y-3">
       <p className="text-center text-sm font-mono font-bold text-[var(--color-text-primary)]">
         {aStr} × {bStr}
       </p>
