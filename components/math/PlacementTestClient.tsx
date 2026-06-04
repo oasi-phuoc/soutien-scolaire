@@ -364,6 +364,20 @@ export function PlacementTestClient() {
     }
   }, [allValidated, phase]);
 
+  // Save result to localStorage history when results screen appears
+  useEffect(() => {
+    if (phase !== "results") return;
+    const pts = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
+    const maxPts = EXERCISES.reduce((s, e) => s + e.maxPoints, 0);
+    try {
+      const raw = localStorage.getItem("tp-math-history");
+      const history: { date: string; points: number; maxPoints: number }[] = raw ? JSON.parse(raw) : [];
+      history.push({ date: new Date().toISOString().slice(0, 10), points: pts, maxPoints: maxPts });
+      localStorage.setItem("tp-math-history", JSON.stringify(history.slice(-5)));
+    } catch {}
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [phase]);
+
   // ── Start screen ───────────────────────────────────────────────────────────
 
   if (phase === "idle") {
