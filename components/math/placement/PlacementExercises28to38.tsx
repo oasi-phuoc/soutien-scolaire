@@ -111,33 +111,25 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-        {/* q1: a³ */}
+      <div className="space-y-2">
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-32 shrink-0">
-            {data.q1.base}<sup>3</sup> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
+          <span className="w-32 shrink-0">{data.q1.base}<sup>3</sup> =</span>
           <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} />
         </div>
-        {/* q2: √ */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-32 shrink-0">
-            √{data.q2.sq} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-32 shrink-0">√{data.q2.sq} =</span>
           <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} />
         </div>
-        {/* q3: × 10^n */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-32 shrink-0">
-            {fmtDec(data.q3.mult, 2)} × {data.q3.pwr10} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">3.</span>
+          <span className="w-32 shrink-0">{fmtDec(data.q3.mult, 2)} × {data.q3.pwr10} =</span>
           <CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" />
         </div>
-        {/* q4: ÷ 10^n */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-32 shrink-0">
-            {data.q4.divVal} ÷ {data.q4.pwr10} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">4.</span>
+          <span className="w-32 shrink-0">{data.q4.divVal} ÷ {data.q4.pwr10} =</span>
           <CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" />
         </div>
       </div>
@@ -175,15 +167,13 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-3">
       <div className="space-y-3">
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-52 shrink-0 font-mono">
-            {data.a} + {data.b} × {data.c} − {data.d} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
+          <span className="w-52 shrink-0 font-mono">{data.a} + {data.b} × {data.c} − {data.d} =</span>
           <CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} />
         </div>
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-52 shrink-0 font-mono">
-            ({data.a2} + {data.b2}) × {data.c2} − {data.d2} × {data.e2} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-52 shrink-0 font-mono">({data.a2} + {data.b2}) × {data.c2} − {data.d2} × {data.e2} =</span>
           <CorrectionInput value={a2} onChange={setA2} correct={String(data.ans2)} validated={validated} />
         </div>
       </div>
@@ -235,9 +225,10 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+      <div className="space-y-2">
         {data.map((q, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
+            <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
             <span className="w-32 shrink-0 font-mono">{q.expr} =</span>
             <CorrectionInput
               value={answers[i] ?? ""}
@@ -369,68 +360,52 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Écrire les fractions sous la forme n/d (ex: 3/4)</p>
-      <div className="grid grid-cols-2 gap-x-6 gap-y-3">
-        {/* q1: simplify */}
+      <div className="space-y-2">
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            Simplifier <Frac n={data.n1r * data.g1} d={data.d1r * data.g1} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
+          <span className="w-28 shrink-0">Simplifier <Frac n={data.n1r * data.g1} d={data.d1r * data.g1} /> =</span>
           <CorrectionInputText value={answers[0] ?? ""} onChange={setAns(0)}
             correct={corrFrac(data.n1s, data.d1s)} validated={validated} />
         </div>
-        {/* q2: mixed to improper */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            {data.whole2} <Frac n={data.num2} d={data.den2} className="text-xs" /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-28 shrink-0">{data.whole2} <Frac n={data.num2} d={data.den2} className="text-xs" /> =</span>
           <CorrectionInputText value={answers[1] ?? ""} onChange={setAns(1)}
             correct={`${data.impN2}/${data.den2}`} validated={validated} />
         </div>
-        {/* q3: add same denom */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.n3a} d={data.den3} /> + <Frac n={data.n3b} d={data.den3} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">3.</span>
+          <span className="w-28 shrink-0"><Frac n={data.n3a} d={data.den3} /> + <Frac n={data.n3b} d={data.den3} /> =</span>
           <CorrectionInputText value={answers[2] ?? ""} onChange={setAns(2)}
             correct={corrFrac(data.sn3, data.sd3)} validated={validated} />
         </div>
-        {/* q4: sub same denom */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.n4a} d={data.den4} /> − <Frac n={data.n4b} d={data.den4} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">4.</span>
+          <span className="w-28 shrink-0"><Frac n={data.n4a} d={data.den4} /> − <Frac n={data.n4b} d={data.den4} /> =</span>
           <CorrectionInputText value={answers[3] ?? ""} onChange={setAns(3)}
             correct={corrFrac(data.sn4, data.sd4)} validated={validated} />
         </div>
-        {/* q5: add diff denom */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.n5a} d={data.d5a} /> + <Frac n={data.n5b} d={data.d5b} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">5.</span>
+          <span className="w-28 shrink-0"><Frac n={data.n5a} d={data.d5a} /> + <Frac n={data.n5b} d={data.d5b} /> =</span>
           <CorrectionInputText value={answers[4] ?? ""} onChange={setAns(4)}
             correct={corrFrac(data.sn5, data.sd5)} validated={validated} />
         </div>
-        {/* q6: multiply */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.n6a} d={data.d6a} /> × <Frac n={data.n6b} d={data.d6b} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">6.</span>
+          <span className="w-28 shrink-0"><Frac n={data.n6a} d={data.d6a} /> × <Frac n={data.n6b} d={data.d6b} /> =</span>
           <CorrectionInputText value={answers[5] ?? ""} onChange={setAns(5)}
             correct={corrFrac(data.sn6, data.sd6)} validated={validated} />
         </div>
-        {/* q7: divide */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.n7a} d={data.d7a} /> ÷ <Frac n={data.n7b} d={data.d7b} /> =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">7.</span>
+          <span className="w-28 shrink-0"><Frac n={data.n7a} d={data.d7a} /> ÷ <Frac n={data.n7b} d={data.d7b} /> =</span>
           <CorrectionInputText value={answers[6] ?? ""} onChange={setAns(6)}
             correct={corrFrac(data.sn7, data.sd7)} validated={validated} />
         </div>
-        {/* q8: fraction of a number */}
         <div className="flex items-center gap-2 text-sm">
-          <span className="w-28 shrink-0">
-            <Frac n={data.num8} d={data.den8} /> de {data.base8} =
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">8.</span>
+          <span className="w-28 shrink-0"><Frac n={data.num8} d={data.den8} /> de {data.base8} =</span>
           <CorrectionInput value={answers[7] ?? ""} onChange={setAns(7)}
             correct={Number.isInteger(data.ans8) ? String(data.ans8) : fmtDec(data.ans8, 2)}
             validated={validated} />
@@ -473,15 +448,15 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-3">
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
           <span className="w-56 shrink-0">{data.pct1}% de {data.base1} =</span>
           <CorrectionInput value={a1} onChange={setA1}
             correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)}
             validated={validated} />
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-56 shrink-0">
-            Si {data.a} → {data.b}, alors {data.c} → ?
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-56 shrink-0">Si {data.a} → {data.b}, alors {data.c} → ?</span>
           <CorrectionInput value={a2} onChange={setA2}
             correct={Number.isInteger(data.ans2) ? String(data.ans2) : fmtDec(data.ans2, 2)}
             validated={validated} />
@@ -529,10 +504,12 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions (ex: 5x + 3y)</p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
           <span className="w-48 shrink-0 font-mono">{data.expr1} =</span>
           <CorrectionInputText value={a1} onChange={setA1} correct={data.corr1} validated={validated} width="w-24" />
         </div>
         <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
           <span className="w-48 shrink-0 font-mono">{data.expr2} =</span>
           <CorrectionInputText value={a2} onChange={setA2} correct={data.corr2} validated={validated} width="w-24" />
         </div>
@@ -573,15 +550,13 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-3">
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
-          <span className="w-52 shrink-0">
-            Si x = {data.x1}, calculer {data.a}x + {data.b} :
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
+          <span className="w-52 shrink-0">Si x = {data.x1}, calculer {data.a}x + {data.b} :</span>
           <CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} />
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-52 shrink-0">
-            Si x = {data.x2}, calculer {data.a2}x² − {data.b2}x + {data.c2} :
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-52 shrink-0">Si x = {data.x2}, calculer {data.a2}x² − {data.b2}x + {data.c2} :</span>
           <CorrectionInput value={a2} onChange={setA2} correct={String(data.ans2)} validated={validated} />
         </div>
       </div>
@@ -628,16 +603,14 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
       <div className="space-y-3 text-sm">
         <div className="flex items-center gap-2">
-          <span className="w-52 shrink-0 font-mono">
-            {data.a1}x + {data.b1} = {data.c1}
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">1.</span>
+          <span className="w-52 shrink-0 font-mono">{data.a1}x + {data.b1} = {data.c1}</span>
           <span className="text-[var(--color-text-secondary)]">x =</span>
           <CorrectionInput value={a1} onChange={setA1} correct={String(data.x1)} validated={validated} />
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-52 shrink-0 font-mono">
-            {data.a2}x − {data.b2} = {data.c2}x {data.d2neg ? "−" : "+"} {data.d2}
-          </span>
+          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">2.</span>
+          <span className="w-52 shrink-0 font-mono">{data.a2}x − {data.b2} = {data.c2}x {data.d2neg ? "−" : "+"} {data.d2}</span>
           <span className="text-[var(--color-text-secondary)]">x =</span>
           <CorrectionInput value={a2} onChange={setA2} correct={String(data.x2)} validated={validated} />
         </div>
@@ -720,9 +693,8 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
       <div className="space-y-2">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2 text-sm">
-            <span className="w-36 shrink-0">
-              {fmtV(q.value)} {q.from} =
-            </span>
+            <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
+            <span className="w-36 shrink-0">{fmtV(q.value)} {q.from} =</span>
             <CorrectionInput
               value={answers[i] ?? ""}
               onChange={(v) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a))}

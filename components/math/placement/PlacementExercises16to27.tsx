@@ -1029,10 +1029,10 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+      <div className="space-y-2">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center gap-1.5">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
+            <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
             <span className="font-mono text-sm text-[var(--color-text-primary)] min-w-[7rem]">{q.label} =</span>
             <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
               correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
