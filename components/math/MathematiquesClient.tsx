@@ -389,9 +389,6 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold text-[var(--color-text-primary)]">Test de placement</p>
               </div>
-              <span className="rounded-full bg-amber-100 dark:bg-amber-900/40 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-600 dark:text-amber-400">
-                Disponible
-              </span>
             </div>
             <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
               <li className="flex min-h-[52px] items-center gap-3 px-4 py-2.5">
@@ -416,14 +413,15 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                 className="flex min-h-[52px] cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-[var(--color-bg-secondary)] transition-colors"
                 onClick={() => router.push("/mathematiques/test-de-placement/statistiques")}
               >
-                <SubDot done={false} current={false} accent="#d97706" moduleLocked={false} />
+                <SubDot done={false} current={true} accent="#d97706" moduleLocked={false} />
                 <div className="flex-1 min-w-0">
                   <span className="text-xs font-semibold text-[var(--color-text-secondary)]">TP</span>
                   <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Statistiques</span>
                 </div>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                  className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
-                  <path d="M9 18l6-6-6-6" />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2"
+                  className="shrink-0" aria-hidden>
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
                 </svg>
               </li>
             </ul>
