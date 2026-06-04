@@ -391,24 +391,6 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
               </div>
             </div>
             <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
-              <li className="flex min-h-[52px] items-center gap-3 px-4 py-2.5">
-                <SubDot done={false} current={true} accent="#d97706" moduleLocked={false} />
-                <div className="flex-1 min-w-0">
-                  <span className="text-xs font-semibold text-[var(--color-text-secondary)]">TP</span>
-                  <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Lancement du test</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => router.push("/mathematiques/test-de-placement")}
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white transition-opacity hover:opacity-80 active:opacity-70"
-                  style={{ background: "#d97706" }}
-                  aria-label="Commencer le test de placement"
-                >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-                    <polygon points="8,5 19,12 8,19" />
-                  </svg>
-                </button>
-              </li>
               <li
                 className="flex min-h-[52px] cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-[var(--color-bg-secondary)] transition-colors"
                 onClick={() => router.push("/mathematiques/test-de-placement/statistiques")}
@@ -416,13 +398,15 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                 <SubDot done={false} current={true} accent="#d97706" moduleLocked={false} />
                 <div className="flex-1 min-w-0">
                   <span className="text-xs font-semibold text-[var(--color-text-secondary)]">TP</span>
-                  <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Statistiques</span>
+                  <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Test et statistiques</span>
                 </div>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="2"
-                  className="shrink-0" aria-hidden>
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="M21 21l-4.35-4.35" strokeLinecap="round" />
-                </svg>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "#d97706" }}>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
+                    strokeLinecap="round" aria-hidden>
+                    <circle cx="11" cy="11" r="6.5" />
+                    <path d="M19 19l-3.5-3.5" />
+                  </svg>
+                </div>
               </li>
             </ul>
           </div>
