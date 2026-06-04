@@ -649,17 +649,18 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="space-y-3">
         {questions.map((q, i) => (
-          <PlacementColCard
-            key={i}
-            a={q.a} b={q.b} op={q.op as "+" | "-"} result={q.result}
-            answers={answers[i] ?? ["", "", "", ""]}
-            carries={carries[i] ?? ["", "", "", ""]}
-            onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
-            onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
-            validated={validated}
-          />
+          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <PlacementColCard
+              a={q.a} b={q.b} op={q.op as "+" | "-"} result={q.result}
+              answers={answers[i] ?? ["", "", "", ""]}
+              carries={carries[i] ?? ["", "", "", ""]}
+              onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+              onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
+              validated={validated} noCard
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -1113,16 +1114,16 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="space-y-3">
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center justify-center">
+          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <PlacementColCard
               a={q.a} b={q.b} op={q.op} result={q.result}
               answers={answers[i] ?? ["","","",""]}
               carries={carries[i] ?? ["","","",""]}
               onChange={(col, v) => setAnswers(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
               onCarryChange={(col, v) => setCarries(prev => { const next = prev.map(a => [...a]); next[i]![col] = v; return next; })}
-              validated={validated}
+              validated={validated} noCard
             />
           </div>
         ))}
@@ -1269,8 +1270,8 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
-      <div className="flex gap-4">
-        <div className="flex flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+      <div className="space-y-3">
+        <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
           <PlacementColCard
             a={data.a1} b={data.b1} op="×" result={data.r1}
             answers={q1Ans} carries={q1Carries}
@@ -1279,7 +1280,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
             validated={validated} noCard
           />
         </div>
-        <div className="flex flex-1 items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+        <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
           <PlacementMulCard2
             a={data.a2} b={data.b2} result={data.r2}
             answers={q2Ans} carries={q2Carries}
@@ -1513,12 +1514,12 @@ export function Exercise15({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="space-y-3">
         {([
           { q: data.q1, quot: q1Quot, rem: q1Rem, work: q1Work, setQuot: setQ1Quot, setRem: setQ1Rem, setWork: setQ1Work },
           { q: data.q2, quot: q2Quot, rem: q2Rem, work: q2Work, setQuot: setQ2Quot, setRem: setQ2Rem, setWork: setQ2Work },
         ] as const).map(({ q, quot, rem, work, setQuot, setRem, setWork }, i) => (
-          <div key={i} className="flex flex-col items-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <PlacementDivCard
               {...q}
               quotientInputs={quot} remainderInput={rem} workFlat={work}

@@ -218,7 +218,7 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 }
 
 // ── Fraction display (vertical) ────────────────────────────────────────────────
-function FractionDisplay({ numerator, denominator, highlightPart }: {
+export function FractionDisplay({ numerator, denominator, highlightPart }: {
   numerator: number; denominator: number; highlightPart: "num" | "den";
 }) {
   return (
@@ -249,9 +249,9 @@ function FracInline({ frac }: { frac: string }) {
 }
 
 // ── Shape renderer ─────────────────────────────────────────────────────────────
-type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle" | "semicircle" | "quartercircle" | "hexagon";
+export type ShapeKind = "rect" | "grid" | "square" | "triangle" | "circle" | "semicircle" | "quartercircle" | "hexagon";
 
-function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSet }: {
+export function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSet }: {
   kind: ShapeKind;
   d: number;
   colored: Set<number>;
@@ -608,17 +608,17 @@ function FractionShape({ kind, d, colored, onToggle, scale = 1, missSet, extraSe
 }
 
 // ── Multi-shape helpers ────────────────────────────────────────────────────────
-function naturalW(kind: ShapeKind): number {
+export function naturalW(kind: ShapeKind): number {
   return { rect: 220, square: 100, triangle: 150, circle: 120, grid: 130, semicircle: 100, quartercircle: 100, hexagon: 100 }[kind] ?? 120;
 }
-function computeScale(kind: ShapeKind, copies: number): number {
+export function computeScale(kind: ShapeKind, copies: number): number {
   if (copies <= 1) return 1;
   const available = 200;
   const gap = 8 * (copies - 1);
   const perShape = Math.floor((available - gap) / copies);
   return Math.min(1, perShape / naturalW(kind));
 }
-function preColorFlat(n: number, d: number): Set<number> {
+export function preColorFlat(n: number, d: number): Set<number> {
   const s = new Set<number>();
   let rem = n;
   let copy = 0;
@@ -626,7 +626,7 @@ function preColorFlat(n: number, d: number): Set<number> {
   return s;
 }
 
-function ShapesRow({ kind, d, copies, colored, onToggle, scale, missSet, extraSet }: {
+export function ShapesRow({ kind, d, copies, colored, onToggle, scale, missSet, extraSet }: {
   kind: ShapeKind; d: number; copies: number;
   colored: Set<number>;
   onToggle?: (flatIdx: number) => void;

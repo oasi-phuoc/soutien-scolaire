@@ -1,6 +1,14 @@
 "use client";
 import React, { useState, useMemo, useEffect } from "react";
 import type { PlacementExerciseProps } from "./PlacementExercises1to15";
+import {
+  FractionDisplay,
+  FractionShape,
+  ShapesRow,
+  computeScale,
+  preColorFlat,
+} from "@/components/math/A4ModuleContent";
+import type { ShapeKind } from "@/components/math/A4ModuleContent";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -657,16 +665,18 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes. Donnez le résultat décimal.</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="space-y-3">
         {data.map((q, i) => (
-          <DecMulGridFull key={i}
-            aStr={q.aStr} bStr={q.bStr} resultStr={q.resultStr}
-            cells={cells[i]!}
-            onCellChange={(idx, val) => setCells(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
-            decResult={decResults[i] ?? ""}
-            onDecResultChange={val => setDecResults(p => { const n = [...p]; n[i] = val; return n; })}
-            validated={validated}
-          />
+          <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <DecMulGridFull
+              aStr={q.aStr} bStr={q.bStr} resultStr={q.resultStr}
+              cells={cells[i]!}
+              onCellChange={(idx, val) => setCells(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
+              decResult={decResults[i] ?? ""}
+              onDecResultChange={val => setDecResults(p => { const n = [...p]; n[i] = val; return n; })}
+              validated={validated}
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -729,69 +739,169 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Exercise 22 — Color fractions ────────────────────────────────────────────
+// ── Shape helpers for fraction placement exercises ────────────────────────────
 
-function FractionColorCard({ num, den, answer, onChange, validated }: {
-  num: number; den: number; answer: number; onChange: (v: number) => void; validated: boolean;
-}) {
-  const cellW = Math.min(36, Math.floor(200 / den));
-  const totalW = cellW * den;
+type FracShapeItem = { kind: ShapeKind; d: number; n: number; copies: number; multi: boolean };
 
-  return (
-    <div className="space-y-2">
-      <p className="text-sm text-[var(--color-text-primary)]">
-        Colorie <span className="font-bold text-[var(--color-accent-alg)]">{num}/{den}</span>
-      </p>
-      <svg viewBox={`0 0 ${totalW + 2} 42`} width={totalW + 2} height={42} className="block">
-        {Array.from({ length: den }, (_, i) => {
-          const colored = i < answer;
-          return (
-            <rect key={i} x={1 + i * cellW} y={1} width={cellW - 1} height={40}
-              fill={colored ? "var(--color-accent-alg)" : "var(--color-bg-secondary)"}
-              fillOpacity={colored ? 0.6 : 1}
-              stroke="var(--color-border-default)" strokeWidth="1"
-              style={{ cursor: validated ? "default" : "pointer" }}
-              onClick={() => { if (!validated) onChange(i + 1 === answer ? 0 : i + 1); }}
-            />
-          );
-        })}
-      </svg>
-    </div>
-  );
+function pickSingleShapeCfg(): { kind: ShapeKind; d: number } {
+  const pickers: (() => { kind: ShapeKind; d: number })[] = [
+    () => ({ kind: "rect",          d: randInt(2, 12) }),
+    () => ({ kind: "square",        d: ([2, 4, 9, 16] as const)[randInt(0, 3)]! }),
+    () => ({ kind: "triangle",      d: ([2, 3, 4, 6, 9] as const)[randInt(0, 4)]! }),
+    () => ({ kind: "circle",        d: randInt(2, 10) }),
+    () => ({ kind: "semicircle",    d: randInt(2, 8) }),
+    () => ({ kind: "quartercircle", d: randInt(2, 8) }),
+    () => ({ kind: "hexagon",       d: ([2, 3, 4, 6, 9, 12] as const)[randInt(0, 5)]! }),
+  ];
+  return shuffle(pickers)[0]!();
 }
 
-export function Exercise22({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const questions = useMemo(() => {
-    const qs = [];
-    for (let i = 0; i < 4; i++) {
-      const den = randInt(4, 10);
-      const num = randInt(1, den - 1);
-      qs.push({ num, den });
-    }
-    return qs;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [exerciseKey]);
+function pickMultiShapeCfg(): { kind: ShapeKind; d: number } {
+  const pickers: (() => { kind: ShapeKind; d: number })[] = [
+    () => ({ kind: "rect",          d: randInt(2, 5) }),
+    () => ({ kind: "square",        d: ([2, 4] as const)[randInt(0, 1)]! }),
+    () => ({ kind: "triangle",      d: ([2, 3, 4] as const)[randInt(0, 2)]! }),
+    () => ({ kind: "circle",        d: randInt(2, 5) }),
+    () => ({ kind: "semicircle",    d: randInt(2, 4) }),
+    () => ({ kind: "quartercircle", d: randInt(2, 4) }),
+    () => ({ kind: "hexagon",       d: ([2, 3, 4, 6] as const)[randInt(0, 3)]! }),
+  ];
+  return shuffle(pickers)[0]!();
+}
 
-  const [answers, setAnswers] = useState<number[]>([0, 0, 0, 0]);
+function genFracColorItems(): FracShapeItem[] {
+  return [
+    ...Array.from({ length: 2 }, () => {
+      const cfg = pickSingleShapeCfg();
+      return { ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false };
+    }),
+    ...Array.from({ length: 2 }, () => {
+      const cfg = pickMultiShapeCfg();
+      const copies = randInt(2, 3);
+      return { ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true };
+    }),
+  ];
+}
+
+function genFracReadItems(): FracShapeItem[] {
+  return [
+    ...Array.from({ length: 2 }, () => {
+      const cfg = pickSingleShapeCfg();
+      return { ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false };
+    }),
+    ...Array.from({ length: 2 }, () => {
+      const cfg = pickMultiShapeCfg();
+      const copies = randInt(2, 3);
+      return { ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true };
+    }),
+  ];
+}
+
+// ── Exercise 22 — Colorier les fractions (A4.1 Ex2+Ex4 style) ────────────────
+
+export function Exercise22({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+  const items = useMemo(genFracColorItems, [exerciseKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [coloredSets, setColoredSets] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    questions.forEach((q, i) => { if ((answers[i] ?? 0) === q.num) pts += 0.5; });
+    items.forEach((item, i) => { if ((coloredSets[i]?.size ?? 0) === item.n) pts += 0.5; });
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  function toggle(i: number, idx: number) {
+    if (validated) return;
+    setColoredSets(prev => {
+      const next = prev.map(s => new Set(s));
+      if (next[i]!.has(idx)) next[i]!.delete(idx); else next[i]!.add(idx);
+      return next;
+    });
+  }
+
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les cases pour colorier la fraction demandée.</p>
-      <div className="grid grid-cols-2 gap-5">
-        {questions.map((q, i) => (
-          <div key={i}>
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <FractionColorCard num={q.num} den={q.den} answer={answers[i] ?? 0}
-              onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
+      <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les parties pour colorier la fraction demandée.</p>
+      <div className="space-y-3">
+        {items.map((item, i) => (
+          <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
+            <div className="flex items-center gap-3">
+              <div className="shrink-0">
+                <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
+              </div>
+              <div className="flex flex-1 justify-center overflow-hidden">
+                {item.multi ? (
+                  <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
+                    colored={coloredSets[i]!}
+                    onToggle={validated ? undefined : fi => toggle(i, fi)}
+                    scale={computeScale(item.kind, item.copies)}
+                  />
+                ) : (
+                  <FractionShape kind={item.kind} d={item.d} colored={coloredSets[i]!}
+                    onToggle={validated ? undefined : ci => toggle(i, ci)}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+// ── ExerciseFracRead — Lire les fractions (A4.1 Ex3+Ex5 style) ───────────────
+
+export function ExerciseFracRead({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+  const items = useMemo(genFracReadItems, [exerciseKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const [nums, setNums] = useState<string[]>(() => Array(4).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(4).fill(""));
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    let pts = 0;
+    items.forEach((item, i) => {
+      const n = parseInt(nums[i] ?? "");
+      const d = parseInt(dens[i] ?? "");
+      if (!isNaN(n) && !isNaN(d) && n === item.n && d === item.d) pts += 0.5;
+    });
+    onValidated(pts, 2);
+  }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const inputCls = `w-12 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] disabled:opacity-60`;
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">Observe les formes coloriées et écris la fraction représentée.</p>
+      <div className="space-y-3">
+        {items.map((item, i) => {
+          const preColored = item.multi ? preColorFlat(item.n, item.d) : new Set(Array.from({ length: item.n }, (_, k) => k));
+          return (
+            <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
+              <div className="flex items-center gap-3">
+                <div className="shrink-0 flex flex-col items-center gap-1">
+                  <input type="text" value={nums[i]} disabled={validated}
+                    onChange={e => { if (!validated) setNums(p => { const n = [...p]; n[i] = e.target.value; return n; }); }}
+                    className={inputCls} />
+                  <span className="h-[2px] w-12 rounded bg-[var(--color-text-primary)]" />
+                  <input type="text" value={dens[i]} disabled={validated}
+                    onChange={e => { if (!validated) setDens(p => { const n = [...p]; n[i] = e.target.value; return n; }); }}
+                    className={inputCls} />
+                </div>
+                <div className="flex flex-1 justify-center overflow-hidden">
+                  {item.multi ? (
+                    <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
+                      colored={preColored}
+                      scale={computeScale(item.kind, item.copies)}
+                    />
+                  ) : (
+                    <FractionShape kind={item.kind} d={item.d} colored={preColored} />
+                  )}
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

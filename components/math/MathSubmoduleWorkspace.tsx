@@ -155,6 +155,7 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "fraction_coloring" });
     steps.push({ kind: "fraction_read" });
     steps.push({ kind: "fraction_multi_coloring" });
+    steps.push({ kind: "fraction_multi_read" });
     // Evaluation
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "fraction_toggle" });
