@@ -6,75 +6,102 @@ import { useRouter } from "next/navigation";
 const TP_HISTORY_KEY = "tp-math-history";
 type TPAttempt = { date: string; points: number; maxPoints: number };
 
+const THRESHOLDS = [
+  { pts: 10, label: "CSC", color: "#94a3b8" },
+  { pts: 40, label: "CFR", color: "#60a5fa" },
+  { pts: 70, label: "CAF", color: "#34d399" },
+  { pts: 90, label: "CAP", color: "#f59e0b" },
+] as const;
+
+const TOTAL_SLOTS = 5;
+
 function Chart({ history }: { history: TPAttempt[] }) {
   const chartH = 140;
-  const barW = 44;
-  const gap = 20;
-  const leftPad = 28;
-  const rightPad = 12;
+  const barW = 36;
+  const gap = 16;
+  const leftPad = 20;
+  const rightPad = 46;
   const topPad = 18;
-  const maxPts = history[0]?.maxPoints ?? 100;
-  const n = history.length;
-  const svgW = leftPad + n * (barW + gap) - gap + rightPad;
+  const barsAreaW = TOTAL_SLOTS * barW + (TOTAL_SLOTS - 1) * gap;
+  const svgW = leftPad + barsAreaW + rightPad;
   const svgH = chartH + topPad + 28;
+  const maxPts = 100;
 
   const toY = (pts: number) => topPad + chartH - Math.round((pts / maxPts) * chartH);
   const baseY = topPad + chartH;
+  const barsEndX = leftPad + barsAreaW;
 
-  const points = history.map((h, i) => ({
-    x: leftPad + i * (barW + gap) + barW / 2,
-    y: toY(h.points),
-    ...h,
-  }));
+  // Always 5 slots; fill with history entries, null for empties
+  const slots = Array.from({ length: TOTAL_SLOTS }, (_, i) => history[i] ?? null);
 
-  const linePath = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
+  // Points for the evolution line (only filled slots)
+  const filledPoints = slots
+    .map((h, i) => h ? { x: leftPad + i * (barW + gap) + barW / 2, y: toY(h.points), ...h } : null)
+    .filter((p): p is NonNullable<typeof p> => p !== null);
 
-  const gridVals = [25, 50, 75, 100].filter(v => v <= maxPts);
+  const linePath = filledPoints.map((p, i) => `${i === 0 ? "M" : "L"}${p.x},${p.y}`).join(" ");
 
   return (
     <svg viewBox={`0 0 ${svgW} ${svgH}`} className="w-full overflow-visible">
-      {/* Grid lines */}
-      {gridVals.map(v => {
-        const y = toY(v);
+      {/* Threshold lines + right-side legends */}
+      {THRESHOLDS.map(({ pts, label, color }) => {
+        const y = toY(pts);
         return (
-          <g key={v}>
-            <line x1={leftPad} y1={y} x2={svgW - rightPad} y2={y}
-              stroke="var(--color-border-default)" strokeWidth="1" strokeDasharray="3,3" />
-            <text x={leftPad - 4} y={y} textAnchor="end" fontSize="8" dominantBaseline="middle"
-              fill="var(--color-text-secondary)">{v}</text>
+          <g key={label}>
+            <line x1={leftPad} y1={y} x2={barsEndX} y2={y}
+              stroke={color} strokeWidth="1.2" strokeDasharray="4,3" />
+            <text x={barsEndX + 5} y={y - 1} fontSize="9" fontWeight="700" fill={color}>{label}</text>
+            <text x={barsEndX + 5} y={y + 9} fontSize="7.5" fill={color} opacity={0.85}>{pts} pts</text>
           </g>
         );
       })}
-      {/* Baseline */}
-      <line x1={leftPad} y1={baseY} x2={svgW - rightPad} y2={baseY}
+      {/* Baseline + Y labels */}
+      <line x1={leftPad} y1={baseY} x2={barsEndX} y2={baseY}
         stroke="var(--color-border-default)" strokeWidth="1.5" />
-      <text x={leftPad - 4} y={baseY} textAnchor="end" fontSize="8" dominantBaseline="middle"
+      <text x={leftPad - 3} y={baseY} textAnchor="end" fontSize="8" dominantBaseline="middle"
         fill="var(--color-text-secondary)">0</text>
-      {/* Bars (low opacity background) */}
-      {points.map((p, i) => (
-        <rect key={i} x={p.x - barW / 2} y={p.y} width={barW} height={baseY - p.y}
-          rx={4} fill="#d97706" opacity={0.15} />
-      ))}
-      {/* Evolution line */}
-      {points.length > 1 && (
-        <path d={linePath} fill="none" stroke="#d97706" strokeWidth="2.5"
-          strokeLinejoin="round" strokeLinecap="round" />
-      )}
-      {/* Dots + labels */}
-      {points.map((p, i) => {
-        const [, mm, dd] = p.date.split("-");
-        const dateLabel = mm && dd ? `${dd}/${mm}` : p.date;
+      <text x={leftPad - 3} y={topPad} textAnchor="end" fontSize="8" dominantBaseline="middle"
+        fill="var(--color-text-secondary)">100</text>
+      {/* Slots */}
+      {slots.map((h, i) => {
+        const x = leftPad + i * (barW + gap) + barW / 2;
+        if (!h) {
+          return (
+            <g key={i}>
+              <rect x={x - barW / 2} y={topPad} width={barW} height={chartH}
+                rx={4} fill="none" stroke="var(--color-border-default)" strokeWidth="1"
+                strokeDasharray="3,3" />
+              <text x={x} y={baseY + 14} textAnchor="middle" fontSize="9"
+                fill="var(--color-text-secondary)">—</text>
+            </g>
+          );
+        }
+        const y = toY(h.points);
+        const [, mm, dd] = h.date.split("-");
+        const dateLabel = mm && dd ? `${dd}/${mm}` : h.date;
         return (
           <g key={i}>
-            <circle cx={p.x} cy={p.y} r={5} fill="#d97706" />
-            <circle cx={p.x} cy={p.y} r={2.5} fill="var(--color-bg-primary)" />
-            <text x={p.x} y={p.y - 9} textAnchor="middle" fontSize="12" fontWeight="700"
-              fill="var(--color-text-primary)">{p.points}</text>
-            <text x={p.x} y={baseY + 14} textAnchor="middle" fontSize="9"
+            <rect x={x - barW / 2} y={y} width={barW} height={baseY - y}
+              rx={4} fill="#d97706" opacity={0.2} />
+            <text x={x} y={baseY + 14} textAnchor="middle" fontSize="9"
               fill="var(--color-text-secondary)">{dateLabel}</text>
           </g>
         );
       })}
+      {/* Evolution line */}
+      {filledPoints.length > 1 && (
+        <path d={linePath} fill="none" stroke="#d97706" strokeWidth="2.5"
+          strokeLinejoin="round" strokeLinecap="round" />
+      )}
+      {/* Dots + score labels */}
+      {filledPoints.map((p, i) => (
+        <g key={i}>
+          <circle cx={p.x} cy={p.y} r={5} fill="#d97706" />
+          <circle cx={p.x} cy={p.y} r={2.5} fill="var(--color-bg-primary)" />
+          <text x={p.x} y={p.y - 9} textAnchor="middle" fontSize="11" fontWeight="700"
+            fill="var(--color-text-primary)">{p.points}</text>
+        </g>
+      ))}
     </svg>
   );
 }
