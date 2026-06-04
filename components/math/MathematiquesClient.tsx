@@ -94,60 +94,6 @@ function SubDot({ done, current, accent, moduleLocked }: { done: boolean; curren
   );
 }
 
-const TP_HISTORY_KEY = "tp-math-history";
-type TPAttempt = { date: string; points: number; maxPoints: number };
-
-function TPHistoryChart() {
-  const [history, setHistory] = useState<TPAttempt[]>([]);
-  const [ready, setReady] = useState(false);
-
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(TP_HISTORY_KEY);
-      if (raw) setHistory(JSON.parse(raw) as TPAttempt[]);
-    } catch {}
-    setReady(true);
-  }, []);
-
-  if (!ready || history.length === 0) return null;
-
-  const chartH = 80;
-  const barW = 38;
-  const gap = 18;
-  const leftPad = 10;
-  const svgW = leftPad + history.length * (barW + gap) - gap + leftPad;
-  const maxPts = history[0]?.maxPoints ?? 100;
-
-  return (
-    <div className="mt-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pt-4 pb-3">
-      <p className="mb-3 text-xs font-bold text-[var(--color-text-secondary)]">Évolution des scores — 5 derniers essais</p>
-      <svg viewBox={`0 0 ${svgW} ${chartH + 32}`} className="w-full overflow-visible">
-        {history.map((h, i) => {
-          const pct = h.maxPoints > 0 ? h.points / h.maxPoints : 0;
-          const barH = Math.max(4, Math.round(pct * chartH));
-          const x = leftPad + i * (barW + gap);
-          const y = chartH - barH;
-          const [, mm, dd] = h.date.split("-");
-          const label = mm && dd ? `${dd}/${mm}` : h.date;
-          return (
-            <g key={i}>
-              <rect x={x} y={y} width={barW} height={barH} rx={4} fill="#d97706" opacity={0.85} />
-              <text x={x + barW / 2} y={Math.max(y - 4, 11)} textAnchor="middle" fontSize="11"
-                fontWeight="700" fill="var(--color-text-primary)">{h.points}</text>
-              <text x={x + barW / 2} y={chartH + 16} textAnchor="middle" fontSize="9"
-                fill="var(--color-text-secondary)">{label}</text>
-            </g>
-          );
-        })}
-        <line x1={0} y1={chartH} x2={svgW} y2={chartH}
-          stroke="var(--color-border-default)" strokeWidth="1" />
-        <text x={2} y={chartH - 2} fontSize="8" fill="var(--color-text-secondary)">0</text>
-        <text x={2} y={10} fontSize="8" fill="var(--color-text-secondary)">{maxPts}</text>
-      </svg>
-    </div>
-  );
-}
-
 export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { isLoggedIn?: boolean; isAdmin?: boolean }) {
   const router = useRouter();
   const [tab, setTab] = useState<MathTabId>("algebra");
@@ -434,8 +380,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
 
       {/* Test de placement — shown only on algebra tab */}
       {tab === "algebra" && (
-        <div className="mt-2 space-y-2">
-          {/* TP card — style matching A1 module */}
+        <div className="mt-2">
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
             <div className="flex items-center gap-3 px-4 pt-4 pb-3">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30">
@@ -448,7 +393,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                 Disponible
               </span>
             </div>
-            <ul className="border-t border-[var(--color-border-default)]">
+            <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">
               <li className="flex min-h-[52px] items-center gap-3 px-4 py-2.5">
                 <SubDot done={false} current={true} accent="#d97706" moduleLocked={false} />
                 <div className="flex-1 min-w-0">
@@ -467,9 +412,22 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                   </svg>
                 </button>
               </li>
+              <li
+                className="flex min-h-[52px] cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-[var(--color-bg-secondary)] transition-colors"
+                onClick={() => router.push("/mathematiques/test-de-placement/statistiques")}
+              >
+                <SubDot done={false} current={false} accent="#d97706" moduleLocked={false} />
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs font-semibold text-[var(--color-text-secondary)]">TP</span>
+                  <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Statistiques</span>
+                </div>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                  className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </li>
             </ul>
           </div>
-          <TPHistoryChart />
         </div>
       )}
 
