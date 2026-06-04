@@ -1065,21 +1065,36 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const { b, a, h } = data;
-  const offset = Math.round(h * 0.6);
-  const svgW = 220, svgH = 130;
-  const bPx = b * 10, hPx = h * 8;
-  const x0 = 20, y0 = svgH - 30;
-  const pts2 = `${x0},${y0} ${x0 + offset},${y0 - hPx} ${x0 + offset + bPx},${y0 - hPx} ${x0 + bPx},${y0}`;
+  // Fixed visual parallelogram — shape identical every refresh
+  const svgW = 275, svgH = 145;
+  const BLx = 30,  BLy = 118; // bottom-left
+  const BRx = 170, BRy = 118; // bottom-right  (base = 140px)
+  const TLx = 62,  TLy = 38;  // top-left      (skew=32px, height=80px)
+  const TRx = 202, TRy = 38;  // top-right
+  const paraPts = `${BLx},${BLy} ${BRx},${BRy} ${TRx},${TRy} ${TLx},${TLy}`;
+  // Height bracket — outside right
+  const bkX = 228, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
       <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
-        <polygon points={pts2} fill="var(--color-bg-secondary)" stroke="var(--color-text-primary)" strokeWidth="2" />
-        <text x={x0 + bPx / 2 + offset / 2} y={y0 - hPx - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{b} cm</text>
-        <text x={x0 + bPx + offset + 6} y={y0 - hPx / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{a} cm</text>
-        <line x1={x0 + bPx} y1={y0} x2={x0 + bPx} y2={y0 - hPx} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
-        <text x={x0 + bPx + 6} y={y0 - hPx / 2 + 14} textAnchor="start" fontSize="11" fill="var(--color-accent-alg)">{h}</text>
+        {/* Shape */}
+        <polygon points={paraPts} fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
+        {/* Base label above */}
+        <text x={(TLx + TRx) / 2} y={TLy - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{b} cm</text>
+        {/* Side label left */}
+        <text x={BLx - 6} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{a} cm</text>
+        {/* Dashed reference lines from shape to bracket */}
+        <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1={TRx} y1={TRy} x2={bkX - 2} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        {/* Bracket vertical line */}
+        <line x1={bkX} y1={TRy} x2={bkX} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        {/* Ticks */}
+        <line x1={bkX - tickLen} y1={TRy} x2={bkX + tickLen} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        {/* Height label */}
+        <text x={bkX + tickLen + 4} y={(TRy + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {h} cm</text>
       </svg>
       <div className="space-y-2">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
