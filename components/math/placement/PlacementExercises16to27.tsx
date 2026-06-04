@@ -1104,16 +1104,16 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
   );
 }
 
-// ── Exercise 26 — Triangle ────────────────────────────────────────────────────
-
-const PYTH_TRIPLES = [[3,4,5],[5,12,13],[6,8,10],[8,15,17]] as const;
+// ── Exercise 26 — Triangle quelconque ────────────────────────────────────────
 
 export function Exercise26({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const [pa, pb, pc] = PYTH_TRIPLES[randInt(0, PYTH_TRIPLES.length - 1)]!;
-    const k = randInt(1, 2);
-    const a = pa * k, b = pb * k, c = pc * k;
-    return { a, b, c, perimeter: a + b + c, area: (a * b) / 2 };
+    const a = randInt(8, 14);
+    let b = randInt(6, 12); while (b === a) b = randInt(6, 12);
+    let c = randInt(5, 11); while (c === a || c === b) c = randInt(5, 11);
+    // ensure h gives integer area: a*h must be even
+    let h = randInt(4, 8); if ((a * h) % 2 !== 0) h++;
+    return { a, b, c, h, perimeter: a + b + c, area: (a * h) / 2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -1124,24 +1124,34 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
     if (validateTrigger === 0) return;
     let pts = 0;
     if (matchInt(ansP, data.perimeter)) pts++;
-    if (matchInt(ansA, data.area)) pts++;
+    if (matchNum(ansA, data.area, 0.05)) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const { a, b, c } = data;
-  const aPx = Math.min(a * 8, 120), bPx = Math.min(b * 6, 90);
-  const svgW = 220, svgH = 140;
-  const x0 = 20, y0 = svgH - 20;
-  const triPts = `${x0},${y0} ${x0 + aPx},${y0} ${x0},${y0 - bPx}`;
+  // Fixed scalene triangle — apex offset left of center, no right angles
+  const svgW = 260, svgH = 145;
+  const Tx = 72, Ty = 28, BLx = 22, BLy = 122, BRx = 185, BRy = 122;
+  const bkX = 215, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
       <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
-        <polygon points={triPts} fill="var(--color-bg-secondary)" stroke="var(--color-text-primary)" strokeWidth="2" />
-        <text x={x0 + aPx / 2} y={y0 + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{a} cm</text>
-        <text x={x0 - 22} y={y0 - bPx / 2} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{b} cm</text>
-        <text x={x0 + aPx / 2 + 14} y={y0 - bPx / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{c} cm</text>
+        {/* Shape */}
+        <polygon points={`${Tx},${Ty} ${BLx},${BLy} ${BRx},${BRy}`}
+          fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
+        {/* Side labels */}
+        <text x={(BLx + BRx) / 2} y={BLy + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">a = {data.a} cm</text>
+        <text x={(Tx + BRx) / 2 + 8} y={(Ty + BRy) / 2 - 4} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)">b = {data.b} cm</text>
+        <text x={(Tx + BLx) / 2 - 8} y={(Ty + BLy) / 2 - 4} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)">c = {data.c} cm</text>
+        {/* Dashed reference lines to bracket */}
+        <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1={Tx} y1={Ty} x2={bkX - 2} y2={Ty} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        {/* Height bracket */}
+        <line x1={bkX} y1={Ty} x2={bkX} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={Ty} x2={bkX + tickLen} y2={Ty} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <text x={bkX + tickLen + 4} y={(Ty + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {data.h} cm</text>
       </svg>
       <div className="space-y-2">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
@@ -1155,7 +1165,6 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
 
 export function Exercise27({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Use (3,4,5) triple for half-diagonals: d1/2=3k, d2/2=4k, side=5k
     const triples = [[3,4,5],[5,12,13]] as const;
     const [pa, pb, pc] = triples[randInt(0, triples.length - 1)]!;
     const k = randInt(1, 2);
@@ -1175,22 +1184,34 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const { d1, d2 } = data;
-  const svgW = 220, svgH = 140;
-  const cx = svgW / 2, cy = svgH / 2;
-  const rx = Math.min(d1 * 5, 90), ry = Math.min(d2 * 4, 55);
-  const diaPts = `${cx},${cy - ry} ${cx + rx},${cy} ${cx},${cy + ry} ${cx - rx},${cy}`;
+  // Fixed visual losange — shape identical every refresh
+  const svgW = 265, svgH = 150;
+  const cx = 105, cy = 73;
+  const rx = 78, ry = 52; // fixed half-diagonals in pixels
+  const Ttop = [cx, cy - ry], Tright = [cx + rx, cy], Tbot = [cx, cy + ry], Tleft = [cx - rx, cy];
+  const diaPts = `${Ttop[0]},${Ttop[1]} ${Tright[0]},${Tright[1]} ${Tbot[0]},${Tbot[1]} ${Tleft[0]},${Tleft[1]}`;
+  const bkX = 205, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
       <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
-        <polygon points={diaPts} fill="var(--color-bg-secondary)" stroke="var(--color-text-primary)" strokeWidth="2" />
-        <line x1={cx - rx} y1={cy} x2={cx + rx} y2={cy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="3,3" />
-        <line x1={cx} y1={cy - ry} x2={cx} y2={cy + ry} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="3,3" />
-        <text x={cx} y={cy + ry + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">d₁ = {d1} cm</text>
-        <text x={cx + rx + 6} y={cy} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">d₂ = {d2} cm</text>
-        <text x={cx + rx / 2 + 6} y={cy - ry / 2 - 4} textAnchor="start" fontSize="11" fill="var(--color-accent-alg)">{data.side} cm</text>
+        {/* Shape */}
+        <polygon points={diaPts}
+          fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
+        {/* Horizontal diagonal dashed + label */}
+        <line x1={Tleft[0]} y1={cy} x2={Tright[0]} y2={cy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <text x={cx} y={cy + 13} textAnchor="middle" fontSize="11" fill="var(--color-text-secondary)">d₁ = {data.d1} cm</text>
+        {/* Side label (top-right side) */}
+        <text x={(Ttop[0]! + Tright[0]!) / 2 + 6} y={(Ttop[1]! + Tright[1]!) / 2} textAnchor="start" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
+        {/* Dashed reference lines to d2 bracket */}
+        <line x1={Tright[0]} y1={Ttop[1]} x2={bkX - 2} y2={Ttop[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1={Tright[0]} y1={Tbot[1]} x2={bkX - 2} y2={Tbot[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        {/* d2 bracket */}
+        <line x1={bkX} y1={Ttop[1]!} x2={bkX} y2={Tbot[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={Ttop[1]!} x2={bkX + tickLen} y2={Ttop[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={Tbot[1]!} x2={bkX + tickLen} y2={Tbot[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <text x={bkX + tickLen + 4} y={cy} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">d₂ = {data.d2} cm</text>
       </svg>
       <div className="space-y-2">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />

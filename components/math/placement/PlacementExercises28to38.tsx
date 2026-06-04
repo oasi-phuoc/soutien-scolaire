@@ -764,52 +764,46 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const svgW = 200, svgH = 120;
-  const margin = 20;
-  const bW = svgW - 2 * margin; // bottom base width
-  const aW = Math.round(bW * data.a / data.b);
-  const offset = (bW - aW) / 2;
-  const y1 = margin + 10;
-  const y2 = svgH - margin;
-  const x1 = margin + offset;
-  const x2 = margin + offset + aW;
-  const xb1 = margin;
-  const xb2 = margin + bW;
+  // Fixed visual isosceles trapezoid — shape identical every refresh
+  const svgW = 265, svgH = 145;
+  const TLx = 58, TLy = 32, TRx = 168, TRy = 32; // top base = 110px
+  const BLx = 20, BLy = 120, BRx = 210, BRy = 120; // bottom base = 190px
+  const bkX = 232, tickLen = 5;
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
-        <svg width={svgW} height={svgH} className="shrink-0">
-          <polygon
-            points={`${x1},${y1} ${x2},${y1} ${xb2},${y2} ${xb1},${y2}`}
-            fill="var(--color-accent-math-bg, #eff6ff)"
-            stroke="var(--color-accent-math)"
-            strokeWidth="2"
-          />
-          {/* Labels */}
-          <text x={(x1 + x2) / 2} y={y1 - 4} textAnchor="middle" fontSize="11" fill="var(--color-text-secondary)">{data.a} cm</text>
-          <text x={(xb1 + xb2) / 2} y={y2 + 14} textAnchor="middle" fontSize="11" fill="var(--color-text-secondary)">{data.b} cm</text>
-          <text x={xb1 - 12} y={(y1 + y2) / 2 + 4} textAnchor="middle" fontSize="11" fill="var(--color-text-secondary)">{data.leg}</text>
-          {/* Height dashed line */}
-          <line x1={(x1 + x2) / 2} y1={y1} x2={(x1 + x2) / 2} y2={y2}
-            stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
-          <text x={(x1 + x2) / 2 + 6} y={(y1 + y2) / 2 + 4} fontSize="11" fill="var(--color-accent-math)">h={data.h}</text>
-        </svg>
-        <div className="space-y-3 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="w-36 shrink-0 text-[var(--color-text-secondary)]">Périmètre (cm) =</span>
-            <CorrectionInput value={ansP} onChange={setAnsP} correct={String(data.perimeter)} validated={validated} />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-36 shrink-0 text-[var(--color-text-secondary)]">Aire (cm²) =</span>
-            <CorrectionInput value={ansA} onChange={setAnsA}
-              correct={Number.isInteger(data.area) ? String(data.area) : fmtDec(data.area, 1)}
-              validated={validated} />
-          </div>
-          <div className="rounded bg-[var(--color-bg-secondary)] p-2 text-xs text-[var(--color-text-secondary)]">
-            P = a + b + 2·côté<br />
-            A = (a + b) × h ÷ 2
-          </div>
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
+        {/* Shape */}
+        <polygon points={`${TLx},${TLy} ${TRx},${TRy} ${BRx},${BRy} ${BLx},${BLy}`}
+          fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
+        {/* Top base label */}
+        <text x={(TLx + TRx) / 2} y={TLy - 7} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">a = {data.a} cm</text>
+        {/* Bottom base label */}
+        <text x={(BLx + BRx) / 2} y={BLy + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">b = {data.b} cm</text>
+        {/* Left side label */}
+        <text x={(BLx + TLx) / 2 - 8} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.leg} cm</text>
+        {/* Dashed reference lines to bracket */}
+        <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1={TRx} y1={TRy} x2={bkX - 2} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        {/* Height bracket */}
+        <line x1={bkX} y1={TRy} x2={bkX} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={TRy} x2={bkX + tickLen} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={bkX - tickLen} y1={BRy} x2={bkX + tickLen} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <text x={bkX + tickLen + 4} y={(TRy + BRy) / 2} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">h = {data.h} cm</text>
+      </svg>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="w-28 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
+          <CorrectionInput value={ansP} onChange={setAnsP} correct={String(data.perimeter)} validated={validated} />
+          <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-28 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <CorrectionInput value={ansA} onChange={setAnsA}
+            correct={Number.isInteger(data.area) ? String(data.area) : fmtDec(data.area, 1)}
+            validated={validated} />
+          <span className="text-sm text-[var(--color-text-secondary)]">cm²</span>
         </div>
       </div>
     </div>
@@ -842,43 +836,39 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const cx = 90, cy = 60, r = 45;
+  // Fixed visual circle — diameter shown as a line inside
+  const svgCx = 90, svgCy = 68, svgR = 52;
 
   return (
-    <div className="space-y-3">
-      <div className="flex flex-col items-center gap-3 sm:flex-row sm:items-start">
-        <svg width={180} height={120} className="shrink-0">
-          <circle cx={cx} cy={cy} r={r}
-            fill="var(--color-accent-math-bg, #eff6ff)"
-            stroke="var(--color-accent-math)"
-            strokeWidth="2" />
-          {/* Radius line */}
-          <line x1={cx} y1={cy} x2={cx + r} y2={cy}
-            stroke="var(--color-accent-math)" strokeWidth="1.5" />
-          <text x={cx + r / 2} y={cy - 5} textAnchor="middle" fontSize="12" fill="var(--color-accent-math)">
-            r = {data.r} cm
-          </text>
-          {/* Center dot */}
-          <circle cx={cx} cy={cy} r={2} fill="var(--color-accent-math)" />
-        </svg>
-        <div className="space-y-3 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="w-40 shrink-0 text-[var(--color-text-secondary)]">Circonférence (cm) =</span>
-            <CorrectionInput value={ansC} onChange={setAnsC}
-              correct={fmtDec(data.circumference, 2)}
-              validated={validated} width="w-20" />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-40 shrink-0 text-[var(--color-text-secondary)]">Aire (cm²) =</span>
-            <CorrectionInput value={ansA} onChange={setAnsA}
-              correct={fmtDec(data.area, 2)}
-              validated={validated} width="w-20" />
-          </div>
-          <div className="rounded bg-[var(--color-bg-secondary)] p-2 text-xs text-[var(--color-text-secondary)]">
-            C = π × d = π × 2r<br />
-            A = π × r²<br />
-            π ≈ 3,14
-          </div>
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez la circonférence et l&apos;aire. (π = 3,14)</p>
+      <svg viewBox="0 0 180 140" width={180} height={140} className="block mx-auto">
+        <circle cx={svgCx} cy={svgCy} r={svgR}
+          fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
+        {/* Diameter line across full circle */}
+        <line x1={svgCx - svgR} y1={svgCy} x2={svgCx + svgR} y2={svgCy}
+          stroke="var(--color-accent-alg)" strokeWidth="1.5" />
+        {/* Center dot */}
+        <circle cx={svgCx} cy={svgCy} r={2.5} fill="var(--color-accent-alg)" />
+        {/* Diameter label below the line */}
+        <text x={svgCx} y={svgCy + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">
+          d = {data.d} cm
+        </text>
+      </svg>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="w-36 text-sm text-[var(--color-text-secondary)]">Circonférence =</span>
+          <CorrectionInput value={ansC} onChange={setAnsC}
+            correct={fmtDec(data.circumference, 2)}
+            validated={validated} width="w-20" />
+          <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-36 text-sm text-[var(--color-text-secondary)]">Aire =</span>
+          <CorrectionInput value={ansA} onChange={setAnsA}
+            correct={fmtDec(data.area, 2)}
+            validated={validated} width="w-20" />
+          <span className="text-sm text-[var(--color-text-secondary)]">cm²</span>
         </div>
       </div>
     </div>
