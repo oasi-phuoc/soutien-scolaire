@@ -765,7 +765,7 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]);
 
   // Fixed visual isosceles trapezoid — shape identical every refresh
-  const svgW = 265, svgH = 145;
+  const svgW = 305, svgH = 145;
   const TLx = 58, TLy = 32, TRx = 168, TRy = 32; // top base = 110px
   const BLx = 20, BLy = 120, BRx = 210, BRy = 120; // bottom base = 190px
   const bkX = 232, tickLen = 5;
