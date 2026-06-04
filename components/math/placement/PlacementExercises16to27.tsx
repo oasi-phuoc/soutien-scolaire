@@ -956,19 +956,21 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="space-y-2">
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
           return (
-            <div key={i} className="flex items-center gap-1.5 text-sm">
-              <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
+            <React.Fragment key={i}>
+              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono text-[var(--color-text-primary)]">{displayVal} {q.from}</span>
-              <span className="text-[var(--color-text-secondary)]">=</span>
-              <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-                correct={correct} validated={validated} width="w-20" />
-              <span className="font-mono text-[var(--color-text-secondary)]">{q.to}</span>
-            </div>
+              <div className="flex items-center gap-1.5">
+                <span className="text-[var(--color-text-secondary)]">=</span>
+                <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
+                  correct={correct} validated={validated} width="w-20" />
+                <span className="font-mono text-[var(--color-text-secondary)]">{q.to}</span>
+              </div>
+            </React.Fragment>
           );
         })}
       </div>
@@ -1029,14 +1031,17 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="space-y-2">
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-1.5">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
-            <span className="font-mono text-sm text-[var(--color-text-primary)] min-w-[7rem]">{q.label} =</span>
-            <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-              correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
-          </div>
+          <React.Fragment key={i}>
+            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono text-[var(--color-text-primary)]">{q.label}</span>
+            <div className="flex items-center gap-1.5">
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
+                correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
+            </div>
+          </React.Fragment>
         ))}
       </div>
     </div>
