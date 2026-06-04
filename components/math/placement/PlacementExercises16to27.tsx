@@ -1185,12 +1185,12 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fixed visual losange — shape identical every refresh
-  const svgW = 265, svgH = 150;
+  const svgW = 265, svgH = 178;
   const cx = 105, cy = 73;
   const rx = 78, ry = 52; // fixed half-diagonals in pixels
   const Ttop = [cx, cy - ry], Tright = [cx + rx, cy], Tbot = [cx, cy + ry], Tleft = [cx - rx, cy];
   const diaPts = `${Ttop[0]},${Ttop[1]} ${Tright[0]},${Tright[1]} ${Tbot[0]},${Tbot[1]} ${Tleft[0]},${Tleft[1]}`;
-  const bkX = 205, tickLen = 5;
+  const bkX = 205, bkY = 148, tickLen = 5;
 
   return (
     <div className="space-y-4">
@@ -1199,19 +1199,24 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
         {/* Shape */}
         <polygon points={diaPts}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
-        {/* Horizontal diagonal dashed + label */}
-        <line x1={Tleft[0]} y1={cy} x2={Tright[0]} y2={cy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
-        <text x={cx} y={cy + 13} textAnchor="middle" fontSize="11" fill="var(--color-text-secondary)">d₁ = {data.d1} cm</text>
-        {/* Side label (top-right side) */}
-        <text x={(Ttop[0]! + Tright[0]!) / 2 + 6} y={(Ttop[1]! + Tright[1]!) / 2} textAnchor="start" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
-        {/* Dashed reference lines to d2 bracket */}
+        {/* Side label — top-left side */}
+        <text x={(Ttop[0]! + Tleft[0]!) / 2 - 6} y={(Ttop[1]! + Tleft[1]!) / 2} textAnchor="end" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
+        {/* Dashed reference lines to d2 bracket (right) */}
         <line x1={Tright[0]} y1={Ttop[1]} x2={bkX - 2} y2={Ttop[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={Tright[0]} y1={Tbot[1]} x2={bkX - 2} y2={Tbot[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
-        {/* d2 bracket */}
+        {/* d2 bracket (right) */}
         <line x1={bkX} y1={Ttop[1]!} x2={bkX} y2={Tbot[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <line x1={bkX - tickLen} y1={Ttop[1]!} x2={bkX + tickLen} y2={Ttop[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <line x1={bkX - tickLen} y1={Tbot[1]!} x2={bkX + tickLen} y2={Tbot[1]!} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
         <text x={bkX + tickLen + 4} y={cy} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">d₂ = {data.d2} cm</text>
+        {/* Dashed reference lines to d1 bracket (bottom) */}
+        <line x1={Tleft[0]} y1={Tleft[1]! + 2} x2={Tleft[0]} y2={bkY - 2} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        <line x1={Tright[0]} y1={Tright[1]! + 2} x2={Tright[0]} y2={bkY - 2} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
+        {/* d1 bracket (bottom) */}
+        <line x1={Tleft[0]!} y1={bkY} x2={Tright[0]!} y2={bkY} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={Tleft[0]!} y1={bkY - tickLen} x2={Tleft[0]!} y2={bkY + tickLen} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <line x1={Tright[0]!} y1={bkY - tickLen} x2={Tright[0]!} y2={bkY + tickLen} stroke="var(--color-text-secondary)" strokeWidth="1.5" />
+        <text x={cx} y={bkY + tickLen + 12} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">d₁ = {data.d1} cm</text>
       </svg>
       <div className="space-y-2">
         <GeoRow label="Périmètre" unit="cm" value={data.perimeter} answer={ansP} onChange={setAnsP} validated={validated} />
