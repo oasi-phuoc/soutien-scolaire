@@ -1129,7 +1129,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fixed scalene triangle — apex offset left of center, no right angles
-  const svgW = 260, svgH = 145;
+  const svgW = 295, svgH = 145;
   const Tx = 72, Ty = 28, BLx = 22, BLy = 122, BRx = 185, BRy = 122;
   const bkX = 215, tickLen = 5;
 
