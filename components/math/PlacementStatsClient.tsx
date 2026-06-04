@@ -178,6 +178,16 @@ export function PlacementStatsClient() {
         </div>
       ) : (
         <div className="space-y-4">
+          {/* Launch button — top */}
+          <button
+            type="button"
+            onClick={() => router.push("/mathematiques/test-de-placement")}
+            className="w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-80"
+            style={{ background: "#d97706" }}
+          >
+            {history.length === 0 ? "Faire le test" : "Refaire le test"}
+          </button>
+
           {/* Summary cards */}
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
@@ -243,15 +253,6 @@ export function PlacementStatsClient() {
             )}
           </div>
 
-          {/* Retry button */}
-          <button
-            type="button"
-            onClick={() => router.push("/mathematiques/test-de-placement")}
-            className="w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-80"
-            style={{ background: "#d97706" }}
-          >
-            Refaire le test
-          </button>
         </div>
       )}
     </div>
