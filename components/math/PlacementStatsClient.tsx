@@ -106,10 +106,13 @@ function Chart({ history }: { history: TPAttempt[] }) {
   );
 }
 
+const HISTORY_VISIBLE = 5;
+
 export function PlacementStatsClient() {
   const router = useRouter();
   const [history, setHistory] = useState<TPAttempt[]>([]);
   const [ready, setReady] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     try {
@@ -119,18 +122,17 @@ export function PlacementStatsClient() {
     setReady(true);
   }, []);
 
-  const best = history.length > 0 ? Math.max(...history.map(h => h.points)) : null;
   const last = history.length > 0 ? history[history.length - 1] : null;
-  const maxPts = last?.maxPoints ?? 100;
+  const best = history.length > 0 ? Math.max(...history.map(h => h.points)) : null;
+  const last5 = history.slice(-5);
+  const avg = last5.length > 0
+    ? Math.round(last5.reduce((s, h) => s + h.points, 0) / last5.length)
+    : null;
 
-  const trend =
-    history.length >= 2
-      ? (history[history.length - 1]!.points > history[history.length - 2]!.points
-          ? "up"
-          : history[history.length - 1]!.points < history[history.length - 2]!.points
-            ? "down"
-            : "stable")
-      : null;
+  // History displayed: most recent first, 5 by default
+  const reversed = [...history].reverse();
+  const visibleHistory = showAll ? reversed : reversed.slice(0, HISTORY_VISIBLE);
+  const hasMore = history.length > HISTORY_VISIBLE;
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
@@ -155,7 +157,6 @@ export function PlacementStatsClient() {
       </div>
 
       {!ready ? null : history.length === 0 ? (
-        /* Empty state */
         <div className="flex flex-col items-center justify-center py-20 text-center">
           <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.8">
@@ -181,63 +182,65 @@ export function PlacementStatsClient() {
           <div className="grid grid-cols-3 gap-3">
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
               <p className="text-[10px] text-[var(--color-text-secondary)]">Dernier</p>
-              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">{last?.points}</p>
-              <p className="text-[10px] text-[var(--color-text-secondary)]">/ {maxPts} pts</p>
+              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">{last?.points ?? "—"}</p>
+              <p className="text-[10px] text-[var(--color-text-secondary)]">pts</p>
             </div>
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
               <p className="text-[10px] text-[var(--color-text-secondary)]">Meilleur</p>
-              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">{best}</p>
-              <p className="text-[10px] text-[var(--color-text-secondary)]">/ {maxPts} pts</p>
+              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">{best ?? "—"}</p>
+              <p className="text-[10px] text-[var(--color-text-secondary)]">pts</p>
             </div>
             <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
-              <p className="text-[10px] text-[var(--color-text-secondary)]">Tendance</p>
-              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">
-                {trend === "up" ? "↑" : trend === "down" ? "↓" : trend === "stable" ? "→" : "—"}
-              </p>
-              <p className="text-[10px] text-[var(--color-text-secondary)]">
-                {trend === "up" ? "Progrès" : trend === "down" ? "Recul" : trend === "stable" ? "Stable" : "1 essai"}
-              </p>
+              <p className="text-[10px] text-[var(--color-text-secondary)]">Moyenne</p>
+              <p className="mt-0.5 text-xl font-bold text-[var(--color-text-primary)]">{avg ?? "—"}</p>
+              <p className="text-[10px] text-[var(--color-text-secondary)]">5 derniers</p>
             </div>
           </div>
 
-          {/* Chart */}
+          {/* Chart — always shows last 5 slots */}
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 pt-4 pb-3">
             <p className="mb-4 text-sm font-bold text-[var(--color-text-primary)]">Évolution des scores</p>
-            <Chart history={history} />
+            <Chart history={last5} />
           </div>
 
           {/* History list */}
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
             <p className="border-b border-[var(--color-border-default)] px-4 py-3 text-sm font-bold text-[var(--color-text-primary)]">
-              Historique
+              5 derniers essais
             </p>
             <ul className="divide-y divide-[var(--color-border-default)]">
-              {[...history].reverse().map((h, i) => {
+              {visibleHistory.map((h, i) => {
                 const pct = Math.round((h.points / h.maxPoints) * 100);
                 const [yyyy, mm, dd] = h.date.split("-");
                 const dateStr = yyyy && mm && dd ? `${dd}/${mm}/${yyyy}` : h.date;
                 return (
                   <li key={i} className="flex items-center gap-3 px-4 py-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
-                      <span className="text-xs font-bold text-amber-600 dark:text-amber-400">
-                        {i === 0 ? "★" : `#${history.length - i}`}
-                      </span>
-                    </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-                        {h.points} <span className="font-normal text-[var(--color-text-secondary)]">/ {h.maxPoints} pts</span>
+                        {h.points} pts
                       </p>
                       <p className="text-xs text-[var(--color-text-secondary)]">{dateStr}</p>
                     </div>
-                    <div className="shrink-0 text-right">
-                      <p className="text-sm font-bold" style={{ color: pct >= 60 ? "#16a34a" : "#d97706" }}>
-                        {pct}%
-                      </p>
-                    </div>
+                    <p className="shrink-0 text-sm font-bold" style={{ color: pct >= 60 ? "#16a34a" : "#d97706" }}>
+                      {pct}%
+                    </p>
                   </li>
                 );
               })}
             </ul>
+            {hasMore && (
+              <button
+                type="button"
+                onClick={() => setShowAll(v => !v)}
+                className="flex w-full items-center justify-center gap-1.5 border-t border-[var(--color-border-default)] py-3 text-xs font-semibold text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)] transition-colors"
+              >
+                {showAll ? "Voir moins" : "Voir plus"}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                  className={`transition-transform ${showAll ? "rotate-180" : ""}`} aria-hidden>
+                  <path d="M6 9l6 6 6-6" />
+                </svg>
+              </button>
+            )}
           </div>
 
           {/* Retry button */}

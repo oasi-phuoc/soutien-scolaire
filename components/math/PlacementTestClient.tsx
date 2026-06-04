@@ -373,7 +373,7 @@ export function PlacementTestClient() {
       const raw = localStorage.getItem("tp-math-history");
       const history: { date: string; points: number; maxPoints: number }[] = raw ? JSON.parse(raw) : [];
       history.push({ date: new Date().toISOString().slice(0, 10), points: pts, maxPoints: maxPts });
-      localStorage.setItem("tp-math-history", JSON.stringify(history.slice(-5)));
+      localStorage.setItem("tp-math-history", JSON.stringify(history.slice(-10)));
     } catch {}
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
