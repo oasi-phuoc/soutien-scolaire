@@ -1233,7 +1233,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
         <polygon points={diaPts}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
         {/* Side label — top-left side */}
-        <text x={(Ttop[0]! + Tleft[0]!) / 2 - 6} y={(Ttop[1]! + Tleft[1]!) / 2} textAnchor="end" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
+        <text x={(Ttop[0]! + Tleft[0]!) / 2 - 12} y={(Ttop[1]! + Tleft[1]!) / 2} textAnchor="end" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
         {/* Dashed reference lines to d2 bracket (right) */}
         <line x1={Tright[0]} y1={Ttop[1]} x2={bkX - 2} y2={Ttop[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={Tright[0]} y1={Tbot[1]} x2={bkX - 2} y2={Tbot[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
