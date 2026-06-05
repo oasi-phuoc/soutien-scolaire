@@ -2,7 +2,7 @@ import type { PivotCode } from "@/lib/pivot-langs";
 
 type Lang = "fr" | PivotCode;
 
-const T: Record<string, Record<Lang, string>> = {
+const T: Record<string, Record<"fr", string> & Partial<Record<Lang, string>>> = {
   // LetterGrid
   recognizeLetter:     { fr: "Reconnaître la lettre", en: "Identify the letter", ar: "تعرّف على الحرف", fa: "شناسایی حرف", pt: "Identificar a letra", so: "Aqoonso xarfaha", ti: "ፊደል ምፍላጥ", uk: "Знайди літеру" },
   tapEachLetter:       { fr: "Touchez chaque {x}", en: "Tap each {x}", ar: "اضغط على كل {x}", fa: "هر {x} را لمس کن", pt: "Toque em cada {x}", so: "Taabo mid kasta oo {x}", ti: "ነፍሲ ወከፍ {x} ተዛወሮ", uk: "Натискай кожну {x}" },

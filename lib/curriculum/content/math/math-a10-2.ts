@@ -6,11 +6,6 @@ export const MATH_A10_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Résolution : ax = b",
-        en: "Solving: ax = b",
-        ar: "الحل: ax = b",
-        fa: "حل: ax = b",
-        ti: "ምፍታሕ: ax = b",
-        uk: "Розв'язання: ax = b",
       },
       paragraphs: { fr: [] },
       blocks: [

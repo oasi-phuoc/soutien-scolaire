@@ -4,7 +4,7 @@ export const MATH_A7_2_LESSON: MathSubmoduleLesson = {
   submoduleId: "A7-2",
   submoduleCode: "A7.2",
   theory: {
-    title: { fr: "Comparer les relatifs", en: "Comparing relative numbers", ar: "مقارنة الأعداد النسبية", fa: "مقایسه اعداد نسبی", ti: "ናይ ኣካባቢ ቁጽርታት ምውድዳር", uk: "Порівняння відносних чисел" },
+    title: { fr: "Comparer les relatifs",},
     paragraphs: { fr: [] },
     blocks: [
       { type: "heading", fr: "Comparer deux nombres relatifs", black: true },

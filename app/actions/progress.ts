@@ -55,3 +55,48 @@ export async function syncProgressToCloud(progressData: StoredProgressV1): Promi
     return { ok: false, error: e instanceof Error ? e.message : "unknown" };
   }
 }
+
+export type PlacementTestAttempt = {
+  date: string;
+  points: number;
+  maxPoints: number;
+  percent: number;
+  scores: Array<{ exerciseId: number; label: string; points: number; maxPoints: number }>;
+};
+
+export async function savePlacementTestResultAction(attempt: PlacementTestAttempt): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const supabase = await createSupabaseActionClient();
+    if (!supabase) return { ok: false, error: "supabase_not_configured" };
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { ok: false, error: "not_authenticated" };
+
+    const { data, error: readError } = await supabase
+      .from("profiles")
+      .select("placement_test_history")
+      .eq("id", user.id)
+      .single();
+    if (readError) return { ok: false, error: readError.message };
+
+    const history = Array.isArray(data?.placement_test_history)
+      ? data.placement_test_history as PlacementTestAttempt[]
+      : [];
+    const nextHistory = [...history, attempt].slice(-10);
+    const now = new Date().toISOString();
+
+    const { error } = await supabase
+      .from("profiles")
+      .update({
+        placement_test_last: attempt as unknown as Record<string, unknown>,
+        placement_test_history: nextHistory as unknown as Record<string, unknown>[],
+        placement_test_updated_at: now,
+        progress_updated_at: now,
+        updated_at: now,
+      })
+      .eq("id", user.id);
+    if (error) return { ok: false, error: error.message };
+    return { ok: true };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "unknown" };
+  }
+}

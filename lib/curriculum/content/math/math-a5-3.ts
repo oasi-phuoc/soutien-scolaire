@@ -4,7 +4,7 @@ export const MATH_A5_3_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-3",
     submoduleCode: "A5.3",
     theory: {
-      title: { fr: "Arrondir les décimaux", en: "Rounding decimals", ar: "تقريب الأعداد العشرية", fa: "گرد کردن اعشار", ti: "ቁጽሪ ቪርጉላ ምልካዕ", uk: "Округлення десяткових" },
+      title: { fr: "Arrondir les décimaux",},
       blocks: [
         { type: "heading", fr: "Règle d'arrondi", black: true },
         { type: "highlight", fr: "Comment arrondir" },

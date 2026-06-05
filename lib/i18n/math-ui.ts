@@ -11,7 +11,7 @@ export type MathExerciseUiKey =
   | "translateShow"
   | "translateHide";
 
-const STRINGS: Record<MathExerciseUiKey, Record<"fr" | PivotCode, string>> = {
+const STRINGS: Record<MathExerciseUiKey, Record<"fr", string> & Partial<Record<PivotCode, string>>> = {
   validate: {
     fr: "Valider",
     en: "Submit",

@@ -10,6 +10,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
     ti: "ኣየናይ እዩ ዓቢ?",
     uk: "Яке число більше?",
     pt: "Qual é o maior?",
+    so: "Kee baa weyn?",
+    tr: "Hangisi daha buyuk?",
+    ps: "کوم يو لوی دی؟",
   },
   blocks: [
     // 0: plain "Comparer des nombres..."
@@ -22,6 +25,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ምወዳዳር ቁጽርታት ማለት ኣየናይ ዓቢ፡ ንእሽቶ ወይ ማዕሪ ምዃኑ ምፍላጥ ማለት እዩ።",
         uk: "Порівняти числа — визначити, яке більше, менше або вони рівні.",
         pt: "Comparar números significa determinar qual é maior, menor ou se são iguais.",
+        so: "Tirooyin la isbarbardhigo waxay ka dhigan tahay in la ogaado kee ugu weyn, kee ugu yar, ama inay siman yihiin.",
+        tr: "Sayilari karsilastirmak, hangisinin buyuk, kucuk ya da esit oldugunu belirlemektir.",
+        ps: "د عددونو پرتله کول يعنې معلومول چې کوم لوی، کوم کوچنی، يا برابر دي.",
       },
     },
     // 1: heading "Les symboles de comparaison"
@@ -34,6 +40,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ምልክታት ምወዳዳር",
         uk: "Символи порівняння",
         pt: "Símbolos de comparação",
+        so: "Calaamadaha isbarbardhigga",
+        tr: "Karsilastirma isaretleri",
+        ps: "د پرتله کولو نښې",
       },
     },
     // 2: plain "La partie de la flèche > qui est ouverte..."
@@ -46,6 +55,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ክፉት ሸነኽ ናይ > ኩሉ ጊዜ ናብ ዓቢ ቁጽሪ ይምልከት።",
         uk: "Відкритий бік > завжди спрямований до більшого числа.",
         pt: "O lado aberto do símbolo > aponta sempre para o número maior.",
+        so: "Dhinaca furan ee > had iyo jeer wuxuu u jeedaa tirada weyn.",
+        tr: "> isaretinin acik tarafi her zaman buyuk sayiyi gosterir.",
+        ps: "د > پرانیستې خوا تل لوی عدد ته وي.",
       },
     },
     // 3: table headers ["Comparaison", "Symbole", "Exemple"]
@@ -58,6 +70,21 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: ["ምወዳዳር", "ምልክት", "ኣብነት"],
         uk: ["Порівняння", "Символ", "Приклад"],
         pt: ["Comparação", "Símbolo", "Exemplo"],
+        so: [
+          "Isbarbardhig",
+          "Calaamad",
+          "Tusaale",
+        ],
+        tr: [
+          "Karsilastirma",
+          "Isaret",
+          "Ornek",
+        ],
+        ps: [
+          "پرتله",
+          "نښه",
+          "بېلګه",
+        ],
       },
     },
     // 4: plain "" (spacer) — no translation
@@ -72,6 +99,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ሕጊ ምወዳዳር",
         uk: "Правило порівняння",
         pt: "Regra de comparação",
+        so: "Xeerka isbarbardhigga",
+        tr: "Karsilastirma kurali",
+        ps: "د پرتله کولو قاعده",
       },
     },
     // 6: plain "Nombres avec un nombre différent de chiffres"
@@ -84,6 +114,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ቁጽርታት ዝተፈላለየ ኣሃዝ ዘለወን",
         uk: "Числа з різною кількістю цифр",
         pt: "Números com diferentes quantidades de algarismos",
+        so: "Tirooyin leh lambarro kala tiro badan",
+        tr: "Basamak sayisi farkli olan sayilar",
+        ps: "هغه عددونه چې د رقمونو شمېر يې توپير لري",
       },
     },
     // 7: section items ["Le plus long est le plus grand."]
@@ -96,6 +129,15 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: ["እቲ ነዊሕ ዝኾነ ዓቢ እዩ።"],
         uk: ["Довше число є більшим."],
         pt: ["O número mais longo é o maior."],
+        so: [
+          "Tirada dheer ayaa weyn.",
+        ],
+        tr: [
+          "Daha uzun sayi daha buyuktur.",
+        ],
+        ps: [
+          "هغه عدد چې رقمونه يې ډېر وي، لوی دی.",
+        ],
       },
     },
     // 8: plain "Même nombre de chiffres"
@@ -108,6 +150,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ማዕረ ኣሃዝ ዘለወን",
         uk: "Однакова кількість цифр",
         pt: "Mesmo número de algarismos",
+        so: "Tirooyin leh lambarro isku tiro ah",
+        tr: "Basamak sayisi ayni olan sayilar",
+        ps: "هغه عددونه چې د رقمونو شمېر يې يو شان وي",
       },
     },
     // 9: section items ["Compare chiffre par chiffre...", "Dès qu'un chiffre est différent..."]
@@ -141,6 +186,18 @@ export const TRAD_A1_3: SubmoduleTrad = {
           "Compara algarismo a algarismo da esquerda para a direita.",
           "Assim que um algarismo é diferente, vê qual é o maior.",
         ],
+        so: [
+          "Bidix ka bilow oo lambar lambar u barbar dhig.",
+          "Marka lambar kala duwanaado, eeg kee weyn.",
+        ],
+        tr: [
+          "Soldan baslayarak rakam rakam karsilastir.",
+          "Bir rakam farkli oldugunda hangisinin buyuk olduguna bak.",
+        ],
+        ps: [
+          "له کيڼ اړخه رقم په رقم پرتله کړه.",
+          "کله چې يو رقم توپير ولري، وګوره کوم لوی دی.",
+        ],
       },
     },
     // 10: highlight "Exemple"
@@ -153,6 +210,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ኣብነት",
         uk: "Приклад",
         pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Ornek",
+        ps: "بېلګه",
       },
     },
     // 11: plain "On a deux chiffres 3 456 et 3 421"
@@ -165,6 +225,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ክልተ ቁጽርታት ኣሎና: 3 456 ን 3 421 ን",
         uk: "Маємо два числа: 3 456 та 3 421",
         pt: "Temos dois números: 3 456 e 3 421",
+        so: "Waxaan haynaa laba tiro: 3 456 iyo 3 421",
+        tr: "Iki sayimiz var: 3 456 ve 3 421",
+        ps: "موږ دوه عددونه لرو: 3 456 او 3 421",
       },
     },
     // 12: section items about comparing 3456 and 3421
@@ -219,6 +282,27 @@ export const TRAD_A1_3: SubmoduleTrad = {
           "As dezenas: 5 > 2",
           "Portanto 3 456 > 3 421",
         ],
+        so: [
+          "Lambarro isku tiro ah",
+          "Kumannaanku waa siman yihiin",
+          "Boqollaalku waa siman yihiin",
+          "Tobannaanka: 5 > 2",
+          "Sidaas darteed 3 456 > 3 421",
+        ],
+        tr: [
+          "Basamak sayisi ayni",
+          "Binler esit",
+          "Yuzler esit",
+          "Onlar: 5 > 2",
+          "Bu yuzden 3 456 > 3 421",
+        ],
+        ps: [
+          "د رقمونو شمېر يو شان دی",
+          "زرګان برابر دي",
+          "سلګان برابر دي",
+          "لسګان: 5 > 2",
+          "نو 3 456 > 3 421",
+        ],
       },
     },
     // 13: plain "" (spacer) — no translation
@@ -233,6 +317,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ዋጋ ኣብ መንካይ ክልተ ዶባት",
         uk: "Значення між двома межами",
         pt: "Valor entre dois limites",
+        so: "Qiime u dhexeeya laba xad",
+        tr: "Iki sinir arasindaki deger",
+        ps: "د دوو پولو ترمنځ ارزښت",
       },
     },
     // 15: highlight "Principe"
@@ -245,6 +332,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "መትከል",
         uk: "Принцип",
         pt: "Princípio",
+        so: "Mabda'a",
+        tr: "Ilke",
+        ps: "اصل",
       },
     },
     // 16: plain "Quand une valeur est entre deux nombres..."
@@ -257,6 +347,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ዋጋ ኣብ መንካይ ክልተ ቁጽርታት ምስ ዝህሉ፡ ትርጉሙ:",
         uk: "Коли значення знаходиться між двома числами, це означає:",
         pt: "Quando um valor está entre dois números, isso significa:",
+        so: "Marka qiime uu u dhexeeyo laba tiro, waxay ka dhigan tahay:",
+        tr: "Bir deger iki sayi arasindaysa su anlama gelir:",
+        ps: "کله چې يو ارزښت د دوو عددونو ترمنځ وي، معنا يې دا ده:",
       },
     },
     // 17: section items about bounds
@@ -290,6 +383,18 @@ export const TRAD_A1_3: SubmoduleTrad = {
           "O valor é maior do que o primeiro número",
           "O valor é menor do que o segundo número.",
         ],
+        so: [
+          "Qiimuhu wuu ka weyn yahay tirada koowaad.",
+          "Qiimuhu wuu ka yar yahay tirada labaad.",
+        ],
+        tr: [
+          "Deger ilk sayidan buyuktur.",
+          "Deger ikinci sayidan kucuktur.",
+        ],
+        ps: [
+          "ارزښت له لومړي عدد څخه لوی دی.",
+          "ارزښت له دوهم عدد څخه کوچنی دی.",
+        ],
       },
     },
     // 18: highlight "Exemple"
@@ -302,6 +407,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ኣብነት",
         uk: "Приклад",
         pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Ornek",
+        ps: "بېلګه",
       },
     },
     // 19: plain "Quels nombres sont entre 3 et 8 ?"
@@ -314,6 +422,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
         ti: "ኣየኖት ቁጽርታት ኣብ መንካይ 3 ን 8 ን ይርከቡ?",
         uk: "Які числа знаходяться між 3 і 8?",
         pt: "Quais números estão entre 3 e 8?",
+        so: "Tirooyinkee ayaa u dhexeeya 3 iyo 8?",
+        tr: "3 ile 8 arasinda hangi sayilar vardir?",
+        ps: "کوم عددونه د 3 او 8 ترمنځ دي؟",
       },
     },
     // 20: section items about finding numbers between 3 and 8
@@ -347,6 +458,18 @@ export const TRAD_A1_3: SubmoduleTrad = {
           "Procuramos números maiores do que 3 e menores do que 8. (3 < ? < 8)",
           "Os números possíveis são: 4, 5, 6, 7",
         ],
+        so: [
+          "Waxaan raadinaynaa tirooyin ka weyn 3 kana yar 8. (3 < ? < 8)",
+          "Tirooyinka suurtagalka ah waa: 4, 5, 6, 7",
+        ],
+        tr: [
+          "3'ten buyuk ve 8'den kucuk sayilari arariz. (3 < ? < 8)",
+          "Olası sayilar: 4, 5, 6, 7",
+        ],
+        ps: [
+          "موږ داسې عددونه لټو چې له 3 څخه لوی او له 8 څخه کوچني وي. (3 < ? < 8)",
+          "ممکن عددونه دا دي: 4، 5، 6، 7",
+        ],
       },
     },
   ],
@@ -359,6 +482,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
       ti: "ነፍሲ ወከፍ ቁጽሪ ናብ ቀረባ ዓሰርተ ኣቃርቦ።",
       uk: "Округліть кожне число до найближчого десятка.",
       pt: "Enquadre cada número à dezena mais próxima.",
+      so: "Tiro kasta u wareeji tobanka ugu dhow.",
+      tr: "Her sayiyi en yakin onluga yuvarla.",
+      ps: "هر عدد تر ټولو نږدې لسګان ته ګرد کړه.",
     },
     encadrement_centaine: {
       fr: "Encadrez chaque nombre à la centaine près.",
@@ -368,6 +494,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
       ti: "ነፍሲ ወከፍ ቁጽሪ ናብ ቀረባ ሚእቲ ኣቃርቦ።",
       uk: "Округліть кожне число до найближчої сотні.",
       pt: "Enquadre cada número à centena mais próxima.",
+      so: "Tiro kasta u wareeji boqolka ugu dhow.",
+      tr: "Her sayiyi en yakin yuzluge yuvarla.",
+      ps: "هر عدد تر ټولو نږدې سلګان ته ګرد کړه.",
     },
     number_select_gt: {
       fr: "Sélectionnez les nombres plus grands que {n}.",
@@ -377,6 +506,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
       ti: "ካ {n} ዓቢ ዝኾኑ ቁጽርታት ምረጽ።",
       uk: "Вибери числа, більші за {n}.",
       pt: "Seleciona os números maiores do que {n}.",
+      so: "Dooro tirooyinka ka weyn {n}.",
+      tr: "{n} sayisindan buyuk olanlari sec.",
+      ps: "له {n} څخه لوی عددونه وټاکه.",
     },
     number_select_lt: {
       fr: "Sélectionnez les nombres plus petits que {n}.",
@@ -386,6 +518,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
       ti: "ካ {n} ንእሽቶ ዝኾኑ ቁጽርታት ምረጽ።",
       uk: "Вибери числа, менші за {n}.",
       pt: "Seleciona os números menores do que {n}.",
+      so: "Dooro tirooyinka ka yar {n}.",
+      tr: "{n} sayisindan kucuk olanlari sec.",
+      ps: "له {n} څخه کوچني عددونه وټاکه.",
     },
     number_select_between: {
       fr: "Sélectionnez les nombres entre {n} et {n2}.",
@@ -395,6 +530,9 @@ export const TRAD_A1_3: SubmoduleTrad = {
       ti: "ካ {n} ክሳዕ {n2} ዝኾኑ ቁጽርታት ምረጽ።",
       uk: "Вибери числа між {n} і {n2}.",
       pt: "Seleciona os números entre {n} e {n2}.",
+      so: "Dooro tirooyinka u dhexeeya {n} iyo {n2}.",
+      tr: "{n} ile {n2} arasindaki sayilari sec.",
+      ps: "د {n} او {n2} ترمنځ عددونه وټاکه.",
     },
   },
 };

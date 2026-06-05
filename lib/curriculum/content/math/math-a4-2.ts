@@ -4,7 +4,7 @@ export const MATH_A4_2_LESSON: MathSubmoduleLesson = {
     submoduleId: "A4-2",
     submoduleCode: "A4.2",
     theory: {
-      title: { fr: "Fractions équivalentes", en: "Equivalent fractions", ar: "الكسور المكافئة", fa: "کسرهای معادل", ti: "ፍርቂ ምፍላጥ", uk: "Еквівалентні дроби" },
+      title: { fr: "Fractions équivalentes",},
       paragraphs: {
         fr: [
           "Deux fractions sont équivalentes lorsqu’elles représentent la même quantité, même si les nombres sont différents.",

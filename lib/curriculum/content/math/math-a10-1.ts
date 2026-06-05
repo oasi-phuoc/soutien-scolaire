@@ -6,11 +6,6 @@ export const MATH_A10_1_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Principe d'une équation",
-        en: "Principle of an equation",
-        ar: "مبدأ المعادلة",
-        fa: "اصل معادله",
-        ti: "ናይ ምዕርርያ መምርሒ",
-        uk: "Принцип рівняння",
       },
       paragraphs: { fr: [] },
       blocks: [

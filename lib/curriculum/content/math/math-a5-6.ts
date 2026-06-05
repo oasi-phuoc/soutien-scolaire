@@ -4,7 +4,7 @@ export const MATH_A5_6_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-6",
     submoduleCode: "A5.6",
     theory: {
-      title: { fr: "Division de décimaux", en: "Division of decimals", ar: "قسمة الأعداد العشرية", fa: "تقسیم اعشار", ti: "ክፍፍል ቁጽሪ ቪርጉላ", uk: "Ділення десяткових" },
+      title: { fr: "Division de décimaux",},
       blocks: [
         { type: "heading", fr: "Vocabulaire", black: true },
         {

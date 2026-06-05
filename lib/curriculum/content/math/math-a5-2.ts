@@ -4,7 +4,7 @@ export const MATH_A5_2_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-2",
     submoduleCode: "A5.2",
     theory: {
-      title: { fr: "Trouver l'écart entre deux termes d'une suite", en: "Finding the difference between terms in a sequence", ar: "إيجاد الفرق بين العناصر في المتتالية", fa: "یافتن تفاوت بین اعضای یک دنباله", ti: "መረጃ ቁጽሪ ቪርጉላ", uk: "Знаходження різниці між членами послідовності" },
+      title: { fr: "Trouver l'écart entre deux termes d'une suite",},
       blocks: [
         { type: "highlight", fr: "Principe" },
         {

@@ -10,6 +10,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
     ti: "ናይ ቁጽሪ ተኸታታሊ",
     uk: "Числові послідовності",
     pt: "Sequências numéricas",
+    so: "Taxanaha tirooyinka",
+    tr: "Sayi dizileri",
+    ps: "د عددونو لړۍ",
   },
   blocks: [
     // 0: plain "Une suite de nombres est une liste ordonnée..."
@@ -22,6 +25,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: "ተኸታታሊ ቁጽሪ ስርዓታዊ ዝርዝር እዩ፤ ነፍሲ ወከፍ ቁጽሪ ብሓደ ሕጊ ይርከብ። ኩሉ ጊዜ ሓደ ቁጽሪ ንውስኸሉ ወይ ነቀሉ።",
         uk: "Числова послідовність — це впорядкований список, де кожен член знаходиться за однаковим правилом. Ми завжди додаємо або віднімаємо те саме число.",
         pt: "Uma sequência numérica é uma lista ordenada em que cada termo é obtido aplicando a mesma regra. Sempre adicionamos ou subtraímos o mesmo número.",
+        so: "Taxane tiro waa liis nidaamsan; xubin kasta waxaa lagu helaa isla xeerka. Mar walba waxaan ku darnaa ama ka jarnnaa tiro isku mid ah.",
+        tr: "Sayi dizisi, her terimin ayni kuralla bulundugu sirali bir listedir. Her zaman ayni sayiyi ekler ya da cikaririz.",
+        ps: "د عددونو لړۍ منظم لېست دی چې هر غړی يې د يوې قاعدې له مخې پيدا کېږي. تل يو شان عدد جمع يا منفي کوو.",
       },
     },
     // 1: plain "Pour comprendre une suite..."
@@ -34,6 +40,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: "ተኸታታሊ ንምርዳእ፡ ኣብ መንካይ ቁጽርታት ዝቕየር ነዕዘብ።",
         uk: "Щоб зрозуміти послідовність, дивимось, що змінюється між числами.",
         pt: "Para entender uma sequência, observamos o que muda entre os números.",
+        so: "Si taxane loo fahmo, waxaan eegnaa waxa tirooyinka dhexdooda iska beddelaya.",
+        tr: "Bir diziyi anlamak icin sayilar arasinda neyin degistigine bakariz.",
+        ps: "د لړۍ د پوهېدو لپاره ګورو چې د عددونو ترمنځ څه بدلېږي.",
       },
     },
     // 2: highlight "Exemple"
@@ -46,6 +55,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: "ኣብነት",
         uk: "Приклад",
         pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Ornek",
+        ps: "بېلګه",
       },
     },
     // 3: plain "5 ; 8 ; 11 ; 14" — no translation (numbers)
@@ -81,6 +93,18 @@ export const TRAD_A1_5: SubmoduleTrad = {
           "Adicionamos sempre 3.",
           "A regra para encontrar o número seguinte é: número + 3",
         ],
+        so: [
+          "Mar walba 3 ayaan ku darnaa.",
+          "Xeerka tirada xigta waa: tiro + 3",
+        ],
+        tr: [
+          "Her zaman 3 ekleriz.",
+          "Sonraki sayiyi bulma kurali: sayi + 3",
+        ],
+        ps: [
+          "تل 3 ورزیاتوو.",
+          "د بل عدد د موندلو قاعده: عدد + 3",
+        ],
       },
     },
     // 5: highlight "Suite croissante"
@@ -93,6 +117,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: "ዝዓቢ ተኸታታሊ",
         uk: "Зростаюча послідовність",
         pt: "Sequência crescente",
+        so: "Taxane kordhaya",
+        tr: "Artan dizi",
+        ps: "زیاتېدونکې لړۍ",
       },
     },
     // 6: section items
@@ -105,6 +132,15 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: ["ቁጽርታት ይዓብዩ: 1 ؛ 3 ؛ 5 ؛ 7 ."],
         uk: ["Числа зростають: 1 ; 3 ; 5 ; 7 ."],
         pt: ["Os números aumentam: 1 ; 3 ; 5 ; 7 ."],
+        so: [
+          "Tirooyinku way kordhaan: 1 ; 3 ; 5 ; 7 .",
+        ],
+        tr: [
+          "Sayilar artar: 1 ; 3 ; 5 ; 7 .",
+        ],
+        ps: [
+          "عددونه زياتېږي: 1 ; 3 ; 5 ; 7 .",
+        ],
       },
     },
     // 7: highlight "Suite décroissante"
@@ -117,6 +153,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: "ዝነኪ ተኸታታሊ",
         uk: "Спадна послідовність",
         pt: "Sequência decrescente",
+        so: "Taxane yaraanaya",
+        tr: "Azalan dizi",
+        ps: "کمېدونکې لړۍ",
       },
     },
     // 8: section items
@@ -129,6 +168,15 @@ export const TRAD_A1_5: SubmoduleTrad = {
         ti: ["ቁጽርታት ይንኪ: 20 ؛ 15 ؛ 10 ؛ 5 ."],
         uk: ["Числа спадають: 20 ; 15 ; 10 ; 5 ."],
         pt: ["Os números diminuem: 20 ; 15 ; 10 ; 5 ."],
+        so: [
+          "Tirooyinku way yaraadaan: 20 ; 15 ; 10 ; 5 .",
+        ],
+        tr: [
+          "Sayilar azalir: 20 ; 15 ; 10 ; 5 .",
+        ],
+        ps: [
+          "عددونه کمېږي: 20 ; 15 ; 10 ; 5 .",
+        ],
       },
     },
   ],
@@ -141,6 +189,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
       ti: "ቁጽርታት ካብ ንእሽቶ ናብ ዓቢ ሰልፍ።",
       uk: "Упорядкуй числа у порядку зростання (від найменшого до найбільшого).",
       pt: "Ordena os números de forma crescente (do menor para o maior).",
+      so: "Tirooyinka u kala saar kor u kaca (ka yar ilaa ka weyn).",
+      tr: "Sayilari artan siraya koy (kucukten buyuge).",
+      ps: "عددونه په زياتېدونکي ترتيب کې کېږده (له کوچني تر لوی).",
     },
     ordering_desc: {
       fr: "Classez les nombres dans l'ordre décroissant (du plus grand au plus petit).",
@@ -150,6 +201,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
       ti: "ቁጽርታት ካብ ዓቢ ናብ ንእሽቶ ሰልፍ።",
       uk: "Упорядкуй числа у порядку спадання (від найбільшого до найменшого).",
       pt: "Ordena os números de forma decrescente (do maior para o menor).",
+      so: "Tirooyinka u kala saar hoos u dhaca (ka weyn ilaa ka yar).",
+      tr: "Sayilari azalan siraya koy (buyukten kucuge).",
+      ps: "عددونه په کمېدونکي ترتيب کې کېږده (له لوی تر کوچني).",
     },
     seq_rule: {
       fr: "Trouvez la règle de chaque suite (ex: +5 ou -3).",
@@ -159,6 +213,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
       ti: "ሕጊ ናይ ነፍሲ ወከፍ ተኸታታሊ ፈልጥ (ኣብነት: +5 ወይ -3).",
       uk: "Знайди правило кожної послідовності (напр.: +5 або -3).",
       pt: "Encontra a regra de cada sequência (ex.: +5 ou -3).",
+      so: "Xeerka taxane kasta hel (tusaale: +5 ama -3).",
+      tr: "Her dizinin kuralini bul (orn: +5 veya -3).",
+      ps: "د هرې لړۍ قاعده پيدا کړه (لکه: +5 يا -3).",
     },
     seq_complete: {
       fr: "Complétez les suites de nombres.",
@@ -168,6 +225,9 @@ export const TRAD_A1_5: SubmoduleTrad = {
       ti: "ተኸታታሊ ቁጽሪ ምሉእ ግበር።",
       uk: "Доповни числові послідовності.",
       pt: "Completa as sequências numéricas.",
+      so: "Taxanaha tirooyinka buuxi.",
+      tr: "Sayi dizilerini tamamla.",
+      ps: "د عددونو لړۍ بشپړه کړه.",
     },
   },
 };

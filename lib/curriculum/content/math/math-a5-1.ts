@@ -4,7 +4,7 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-1",
     submoduleCode: "A5.1",
     theory: {
-      title: { fr: "Lire et arrondir les décimaux", en: "Reading and rounding decimals", ar: "قراءة وتقريب الأعداد العشرية", fa: "خواندن و گرد کردن اعشار", ti: "ምንባብ ምልካዕ ቁጽሪ ቪርጉላ", uk: "Читання і округлення десяткових" },
+      title: { fr: "Lire et arrondir les décimaux",},
       blocks: [
         { type: "heading", fr: "Structure d'un nombre décimal", black: true },
         { type: "highlight", fr: "Définition" },

@@ -4,7 +4,7 @@ export const MATH_A5_5_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-5",
     submoduleCode: "A5.5",
     theory: {
-      title: { fr: "Multiplication de décimaux", en: "Multiplication of decimals", ar: "ضرب الأعداد العشرية", fa: "ضرب اعشار", ti: "ዘርፊ ቁጽሪ ቪርጉላ", uk: "Множення десяткових" },
+      title: { fr: "Multiplication de décimaux",},
       blocks: [
         { type: "heading", fr: "Méthode en 4 étapes", black: true },
         { type: "highlight", fr: "Principe" },

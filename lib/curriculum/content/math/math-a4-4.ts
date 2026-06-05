@@ -4,7 +4,7 @@ export const MATH_A4_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A4-4",
     submoduleCode: "A4.4",
     theory: {
-      title: { fr: "Addition et soustraction de fractions", en: "Addition and subtraction", ar: "الجمع والطرح", fa: "جمع و تفریق", ti: "መደመር እና መቀነስ", uk: "Додавання та віднімання" },
+      title: { fr: "Addition et soustraction de fractions",},
       paragraphs: {
         fr: [
           "Additionner ou soustraire des fractions consiste à calculer leur somme ou leur différence.",

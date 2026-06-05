@@ -6,11 +6,6 @@ export const MATH_A9_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Substitution (évaluation)",
-        en: "Substitution (evaluation)",
-        ar: "الإحلال (التقييم)",
-        fa: "جایگذاری (ارزیابی)",
-        ti: "ምትካእ (ምምዛን)",
-        uk: "Підстановка (обчислення значення)",
       },
       paragraphs: { fr: [] },
       blocks: [

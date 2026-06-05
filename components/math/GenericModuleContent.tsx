@@ -3167,77 +3167,71 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
   const pivotText = bt?.text?.[pivot];
   const isRtl = pivot === "ar" || pivot === "fa";
+  const usePivot = showPivot;
+  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? pv : (fr ?? "");
+  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
+  const headersFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
+  const captionFor = (fr?: string, pv?: string) => usePivot && pv ? pv : fr;
+  const textDir = usePivot && isRtl ? "rtl" : "ltr";
+  const textLang = usePivot ? pivot : undefined;
   switch (block.type) {
     case "heading": {
       const pvHead = pivotText;
+      const headingText = textFor(block.fr, pvHead);
       return block.black ? (
         <div>
-          <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
-          {showPivot && pvHead && pvHead !== block.fr && (
-            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvHead}</p>
-          )}
+          <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{headingText}</h3>
         </div>
       ) : (
         <div>
-          <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
-          {showPivot && pvHead && pvHead !== block.fr && (
-            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvHead}</p>
-          )}
+          <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{headingText}</h3>
         </div>
       );
     }
     case "plain":
       if (!block.fr) return <div className="h-3" />;
+      const plainText = textFor(block.fr, pivotText);
       return (
         <div>
-          <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderText(block.fr)}</p>
-          {showPivot && pivotText && pivotText !== block.fr && (
-            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
-          )}
+          <p className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderText(plainText)}</p>
         </div>
       );
     case "note":
+      const noteText = textFor(block.fr, pivotText ?? block.pivot?.[pivot]);
       return (
         <div>
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
-            {block.fr}
+            <span lang={textLang} dir={textDir}>{noteText}</span>
           </div>
-          {showPivot && pivotText && pivotText !== block.fr && (
-            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
-          )}
         </div>
       );
     case "example":
+      const exampleText = textFor(block.fr, pivotText ?? block.pivot?.[pivot]);
       return (
         <div>
-          <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]">
-            {block.fr}
+          <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
+            {exampleText}
           </div>
-          {showPivot && pivotText && pivotText !== block.fr && (
-            <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
-          )}
         </div>
       );
     case "highlight":
+      const highlightText = textFor(block.fr, pivotText ?? block.pivot?.[pivot]);
       return (
         <div>
-          <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</p>
-          {showPivot && pivotText && pivotText !== block.fr && (
-            <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotText}</p>
-          )}
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{highlightText}</p>
         </div>
       );
     case "rule": {
       const pvLabel = bt?.label?.[pivot];
+      const pvRule = block.pivot?.[pivot];
+      const title = textFor(block.titleFr, pvLabel ?? bt?.text?.[pivot] ?? pvRule?.title);
+      const items = itemsFor(block.itemsFr, bt?.items?.[pivot] ?? pvRule?.items);
       return (
         <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3 space-y-2">
-          <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
-          {showPivot && pvLabel && pvLabel !== block.titleFr && (
-            <p className="text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvLabel}</p>
-          )}
+          <p className="text-xs font-bold text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{title}</p>
           <ul className="list-disc space-y-1 pl-4">
-            {block.itemsFr.map((it, i) => (
-              <li key={i} className="text-xs text-[var(--color-text-secondary)]">
+            {items.map((it, i) => (
+              <li key={i} className="text-xs text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>
                 {it}
               </li>
             ))}
@@ -3246,13 +3240,14 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       );
     }
     case "table": {
-      const pvHeaders = showPivot ? bt?.headers?.[pivot] : undefined;
+      const tableHeaders = headersFor(block.headersFr, bt?.headers?.[pivot]);
+      const tableCaption = captionFor(block.captionFr, bt?.caption?.[pivot]);
       return (
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
           <table className="w-full text-sm">
             <thead>
               <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/15" : "bg-[var(--color-bg-secondary)]"}>
-                {(pvHeaders ?? block.headersFr).map((h, i) => (
+                {tableHeaders.map((h, i) => (
                   <th key={i} className={`px-3 py-2 text-center text-xs font-bold ${block.accentHeader ? "uppercase tracking-wide text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>
                     {h}
                   </th>
@@ -3276,45 +3271,40 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
               ))}
             </tbody>
           </table>
-          {block.captionFr && (
-            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {tableCaption && (
+            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{tableCaption}</p>
           )}
         </div>
       );
     }
     case "svg":
+      const svgCaption = captionFor(block.captionFr, bt?.caption?.[pivot]);
       return block.noFrame ? (
         <div className="my-2">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
-          {block.captionFr && (
-            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {svgCaption && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{svgCaption}</p>
           )}
         </div>
       ) : (
         <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
-          {block.captionFr && (
-            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {svgCaption && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{svgCaption}</p>
           )}
         </div>
       );
     case "section": {
-      const pvLabel = bt?.label?.[pivot];
-      const pvItems = showPivot ? bt?.items?.[pivot] : undefined;
+      const label = textFor(block.labelFr, bt?.label?.[pivot]);
+      const items = itemsFor(block.itemsFr, bt?.items?.[pivot]);
       return (
         <div className="space-y-1.5">
-          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
-          {showPivot && pvLabel && pvLabel !== block.labelFr && (
-            <p className="text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvLabel}</p>
-          )}
-          {block.itemsFr.length > 0 && (
+          {label && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{label}</p>}
+          {items.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
-              {block.itemsFr.map((item, ii) => (
-                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+              {items.map((item, ii) => (
+                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
                   {renderText(item)}
-                  {pvItems?.[ii] && pvItems[ii] !== item && (
-                    <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvItems[ii]}</span>
-                  )}
                 </li>
               ))}
             </ul>
@@ -3323,20 +3313,18 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       );
     }
     case "bullets": {
-      const pvBulletItems = showPivot ? bt?.items?.[pivot] : undefined;
+      const label = textFor(block.labelFr, bt?.label?.[pivot]);
+      const items = itemsFor(block.itemsFr, bt?.items?.[pivot]);
       return (
         <div className="space-y-1.5">
-          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
-          {block.itemsFr.length > 0 && (
+          {label && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{label}</p>}
+          {items.length > 0 && (
             <ul className="space-y-1 pl-1">
-              {block.itemsFr.map((item, ii) => (
+              {items.map((item, ii) => (
                 <li key={ii} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-1 shrink-0 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>
-                    {renderText(item)}
-                    {pvBulletItems?.[ii] && pvBulletItems[ii] !== item && (
-                      <span className="ml-2 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pvBulletItems[ii]}</span>
-                    )}
+                  <span lang={textLang} dir={textDir}>
+                    {renderText(item ?? "")}
                   </span>
                 </li>
               ))}
@@ -3561,17 +3549,16 @@ function TheoryView({ lesson, pivot, showPivot }: {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
   const isRtl = pivot === "ar" || pivot === "fa";
-  const pivotTitle = showPivot ? trad?.title?.[pivot] : undefined;
-  const pivotParas = showPivot ? trad?.paragraphs?.[pivot] : undefined;
+  const pivotTitle = showPivot ? trad?.title?.[pivot] ?? theory.title[pivot] : undefined;
+  const pivotParas = showPivot ? trad?.paragraphs?.[pivot] ?? theory.paragraphs[pivot] : undefined;
+  const title = pivotTitle ?? theory.title.fr;
+  const paragraphs = pivotParas?.length ? pivotParas : theory.paragraphs.fr;
   return (
     <div className="space-y-4">
       <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]">
-          {theory.title.fr}
+        <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
+          {title}
         </h2>
-        {pivotTitle && pivotTitle !== theory.title.fr && (
-          <p className="mt-0.5 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotTitle}</p>
-        )}
       </div>
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
@@ -3581,12 +3568,9 @@ function TheoryView({ lesson, pivot, showPivot }: {
         </div>
       ) : (
         <div className="space-y-3">
-          {theory.paragraphs.fr.map((p, i) => (
+          {paragraphs.map((p, i) => (
             <div key={i}>
-              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{p}</p>
-              {pivotParas?.[i] && pivotParas[i] !== p && (
-                <p className="mt-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3 text-xs italic text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>{pivotParas[i]}</p>
-              )}
+              <p className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={showPivot && pivotParas?.[i] ? pivot : undefined} dir={showPivot && pivotParas?.[i] && isRtl ? "rtl" : "ltr"}>{p}</p>
             </div>
           ))}
         </div>
@@ -4946,6 +4930,11 @@ export function GenericModuleContent({
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
+  const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
+  const currentStepHasPivotTitle = !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
+  const currentStepTitle = currentStepHasPivotTitle
+    ? currentStepTrad!.title[pivot]!
+    : currentStep?.lesson.theory.title.fr ?? "";
 
   return (
     <div className="pb-40">
@@ -4998,8 +4987,12 @@ export function GenericModuleContent({
       {/* Exercise */}
       {currentStep?.kind === "exercise" && (
         <div className="space-y-4">
-          <p className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]">
-            {currentStep.item.promptFr}
+          <p
+            className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]"
+            lang={showPivotTranslation && currentStep.item.promptPivot?.[pivot] ? pivot : undefined}
+            dir={showPivotTranslation && currentStep.item.promptPivot?.[pivot] && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}
+          >
+            {showPivotTranslation && currentStep.item.promptPivot?.[pivot] ? currentStep.item.promptPivot[pivot] : currentStep.item.promptFr}
           </p>
           <input
             type="text"
@@ -6139,8 +6132,8 @@ export function GenericModuleContent({
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
               Évaluation
             </p>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">
-              {currentStep.lesson.theory.title.fr}
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]" lang={currentStepHasPivotTitle ? pivot : undefined} dir={currentStepHasPivotTitle && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}>
+              {currentStepTitle}
             </h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {revisionMode ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>

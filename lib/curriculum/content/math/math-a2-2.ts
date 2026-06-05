@@ -6,26 +6,12 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Soustraction",
-      en: "Subtraction",
-      ar: "الطرح",
-      fa: "تفریق",
-      ti: "ምቅናስ",
-      uk: "Віднімання",
-      pt: "Subtração",
     },
 
     blocks: [
       {
         type: "plain",
         fr: "La soustraction permet de **retirer** une quantité d'une autre.",
-        pivot: {
-          en: "Subtraction removes a quantity from another.",
-          ar: "الطرح يزيل كمية من أخرى.",
-          fa: "تفریق مقداری را از مقدار دیگری کم می‌کند.",
-          ti: "ምቅናስ ሓደ መጠን ካብ ካሊእ ይቀንስ።",
-          uk: "Віднімання вилучає одну величину з іншої.",
-          pt: "A subtração permite retirar uma quantidade de outra.",
-        },
       },
 
       {
@@ -50,14 +36,6 @@ export const MATH_A2_2_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Non-commutativité",
-        pivot: {
-          en: "Non-commutativity",
-          ar: "عدم التبادلية",
-          fa: "جابجایی‌ناپذیری",
-          ti: "ዘይ ቅደምሰዓባዊ",
-          uk: "Некомутативність",
-          pt: "Não comutatividade",
-        },
       },
 
       {

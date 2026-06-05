@@ -6,11 +6,6 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Calcul de puissances",
-        en: "Computing powers",
-        ar: "حساب الأس",
-        fa: "محاسبه توان",
-        ti: "ኣሰላልፋ ሓይሊ",
-        uk: "Обчислення степенів",
       },
       paragraphs: { fr: [] },
       blocks: [

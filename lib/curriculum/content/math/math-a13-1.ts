@@ -6,11 +6,6 @@ export const MATH_A13_1_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Notion de fonction",
-        en: "Notion of function",
-        ar: "مفهوم الدالة",
-        fa: "مفهوم تابع",
-        ti: "ናይ ስራሕ ሓሳብ",
-        uk: "Поняття функції",
       },
       paragraphs: { fr: [] },
       blocks: [

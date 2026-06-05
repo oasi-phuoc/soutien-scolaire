@@ -6,11 +6,6 @@ export const MATH_A12_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Méthode d'addition / soustraction",
-        en: "Addition / subtraction method (elimination)",
-        ar: "طريقة الجمع والطرح (الحذف)",
-        fa: "روش جمع / تفریق (حذف)",
-        ti: "ኣፈጻጽማ ምኽፋሎ / ምቕናስ",
-        uk: "Метод додавання / віднімання (виключення)",
       },
       paragraphs: { fr: [] },
       blocks: [

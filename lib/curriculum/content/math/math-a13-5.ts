@@ -6,11 +6,6 @@ export const MATH_A13_5_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Fonction affine f(x) = ax + b",
-        en: "Affine function f(x) = ax + b",
-        ar: "الدالة الانتسابية f(x) = ax + b",
-        fa: "تابع آفین f(x) = ax + b",
-        ti: "ናይ ኣፊን ስራሕ f(x) = ax + b",
-        uk: "Лінійна функція f(x) = ax + b",
       },
       paragraphs: { fr: [] },
       blocks: [

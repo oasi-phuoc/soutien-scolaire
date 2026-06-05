@@ -7,11 +7,6 @@ export const MATH_A4_7_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Fractions et nombres décimaux",
-      en: "Fractions and decimals",
-      ar: "الكسور والأعداد العشرية",
-      fa: "کسرها و اعداد اعشاری",
-      ti: "ክፍሊታት እና ዓስራዊ ቁጽሪ",
-      uk: "Дроби та десяткові числа",
     },
 
     paragraphs: {

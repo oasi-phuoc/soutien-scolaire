@@ -6,11 +6,6 @@ export const MATH_A9_5_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Développement simple",
-        en: "Simple expansion",
-        ar: "التوسيع البسيط",
-        fa: "توسعه ساده",
-        ti: "ቀሊል ምስፋሕ",
-        uk: "Просте розкриття дужок",
       },
       paragraphs: { fr: [] },
       blocks: [

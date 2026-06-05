@@ -6,11 +6,6 @@ export const MATH_A11_1_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Symboles et droite numérique",
-        en: "Symbols and number line",
-        ar: "الرموز والمحور العددي",
-        fa: "نمادها و محور اعداد",
-        ti: "ምልክታትን ቁጽሪ ሕርምን",
-        uk: "Символи та числова пряма",
       },
       paragraphs: { fr: [] },
       blocks: [

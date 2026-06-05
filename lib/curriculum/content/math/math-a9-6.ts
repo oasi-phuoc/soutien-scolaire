@@ -6,11 +6,6 @@ export const MATH_A9_6_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Factorisation simple",
-        en: "Simple factoring",
-        ar: "التحليل البسيط",
-        fa: "فاکتورگیری ساده",
-        ti: "ቀሊል ምፍራድ",
-        uk: "Просте винесення за дужки",
       },
       paragraphs: { fr: [] },
       blocks: [

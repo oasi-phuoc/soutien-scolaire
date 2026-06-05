@@ -6,11 +6,6 @@ export const MATH_A10_4_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Équations avec parenthèses",
-        en: "Equations with parentheses",
-        ar: "معادلات بالأقواس",
-        fa: "معادلات با پرانتز",
-        ti: "ምዕርርያ ምስ ቅርሕ",
-        uk: "Рівняння з дужками",
       },
       paragraphs: { fr: [] },
       blocks: [

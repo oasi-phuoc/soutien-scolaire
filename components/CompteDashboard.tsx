@@ -262,38 +262,15 @@ export function CompteDashboard({
             Choix enregistré sur cet appareil
             {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
           </p>
-          <ul className="mt-4 space-y-2">
-            {PIVOT_LANGS.map((l) => {
-              const checked = code === l.code;
-              const dir = l.code === "ar" || l.code === "fa" ? "rtl" : "ltr";
-              return (
-                <li key={l.code}>
-                  <button
-                    type="button"
-                    onClick={() => void savePivot(l.code)}
-                    className={`flex min-h-14 w-full items-center gap-3 rounded-xl border px-4 text-left transition-colors ${
-                      checked
-                        ? "border-green-600 bg-green-50 dark:border-green-500 dark:bg-green-950/40"
-                        : "border-zinc-200 hover:border-green-300 dark:border-zinc-700 dark:hover:border-green-800"
-                    }`}
-                  >
-                    <span
-                      className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                        checked ? "border-green-600 bg-green-600" : "border-zinc-400"
-                      }`}
-                      aria-hidden
-                    >
-                      {checked ? <span className="block h-2 w-2 rounded-full bg-white" /> : null}
-                    </span>
-                    <span dir={dir} lang={l.code} className="min-w-0 flex-1 text-sm font-medium text-zinc-800 dark:text-zinc-200">
-                      {l.label}
-                    </span>
-                    <span className="shrink-0 text-sm text-zinc-500">{l.labelFr}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <select
+            value={code}
+            onChange={e => void savePivot(e.target.value as PivotCode)}
+            className="mt-4 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950"
+          >
+            {PIVOT_LANGS.map((l) => (
+              <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
+            ))}
+          </select>
           {saved ? (
             <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
               Choix enregistré.

@@ -6,11 +6,6 @@ export const MATH_A13_7_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Lecture graphique",
-        en: "Reading graphs",
-        ar: "قراءة الرسوم البيانية",
-        fa: "خواندن نمودار",
-        ti: "ናይ ስዕሊ ምንባብ",
-        uk: "Читання графіків",
       },
       paragraphs: { fr: [] },
       blocks: [

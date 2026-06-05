@@ -6,11 +6,6 @@ export const MATH_A10_6_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Problèmes concrets (mise en équation)",
-        en: "Concrete problems (setting up equations)",
-        ar: "مسائل ملموسة (إنشاء المعادلة)",
-        fa: "مسائل ملموس (تشکیل معادله)",
-        ti: "ናይ ሓቂ ዓለም ጸገማት (ምዕርርያ ምትእትታው)",
-        uk: "Прикладні задачі (складання рівняння)",
       },
       paragraphs: { fr: [] },
       blocks: [

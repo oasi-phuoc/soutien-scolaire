@@ -4,7 +4,7 @@ export const MATH_A7_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "A7-1",
   submoduleCode: "A7.1",
   theory: {
-    title: { fr: "Notion de négatif", en: "Concept of negative numbers", ar: "مفهوم الأعداد السالبة", fa: "مفهوم اعداد منفی", ti: "ናይ ጎዳ ቁጽሪ ፍላጠ", uk: "Поняття від'ємних чисел" },
+    title: { fr: "Notion de négatif",},
     paragraphs: { fr: [] },
     blocks: [
       { type: "heading", fr: "Les nombres relatifs", black: true },

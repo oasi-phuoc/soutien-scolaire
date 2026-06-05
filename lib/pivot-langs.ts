@@ -5,6 +5,8 @@ export const PIVOT_LANGS = [
   { code: "pt", label: "Português", labelFr: "Portugais" },
   { code: "so", label: "Soomaali", labelFr: "Somali" },
   { code: "ti", label: "ትግርኛ", labelFr: "Tigrinya" },
+  { code: "tr", label: "Türkçe", labelFr: "Turc" },
+  { code: "ps", label: "پښتو", labelFr: "Pachto" },
   { code: "uk", label: "Українська", labelFr: "Ukrainien" },
 ] as const;
 

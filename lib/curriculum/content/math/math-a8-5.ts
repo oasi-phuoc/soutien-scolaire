@@ -6,11 +6,6 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Valeur approchée d'une racine",
-        en: "Approximate value of a root",
-        ar: "القيمة التقريبية لجذر",
-        fa: "مقدار تقریبی جذر",
-        ti: "ናይ ስርወ ቀረባ ዋጋ",
-        uk: "Наближене значення кореня",
       },
       paragraphs: { fr: [] },
       blocks: [

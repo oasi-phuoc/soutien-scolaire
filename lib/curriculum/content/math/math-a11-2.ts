@@ -6,11 +6,6 @@ export const MATH_A11_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Résolution d'inéquations simples",
-        en: "Solving simple inequalities",
-        ar: "حل المتباينات البسيطة",
-        fa: "حل نامعادلات ساده",
-        ti: "ምፍታሕ ቀሊል ዘይምዕርርያ",
-        uk: "Розв'язання простих нерівностей",
       },
       paragraphs: { fr: [] },
       blocks: [

@@ -6,11 +6,6 @@ export const MATH_A13_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Tableau de valeurs",
-        en: "Table of values",
-        ar: "جدول القيم",
-        fa: "جدول مقادیر",
-        ti: "ሰሌዳ ዋጋ",
-        uk: "Таблиця значень",
       },
       paragraphs: { fr: [] },
       blocks: [

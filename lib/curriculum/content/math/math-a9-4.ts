@@ -6,11 +6,6 @@ export const MATH_A9_4_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Réduction (termes semblables)",
-        en: "Simplification (like terms)",
-        ar: "التبسيط (الحدود المتشابهة)",
-        fa: "ساده‌سازی (جملات مشابه)",
-        ti: "ምቅናስ (ተመሳሳሊ ወጽዓ)",
-        uk: "Зведення подібних доданків",
       },
       paragraphs: { fr: [] },
       blocks: [

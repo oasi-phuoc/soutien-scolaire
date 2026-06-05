@@ -4,7 +4,7 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
     submoduleId: "A5-4",
     submoduleCode: "A5.4",
     theory: {
-      title: { fr: "Addition et soustraction de décimaux", en: "Addition and subtraction of decimals", ar: "جمع وطرح الأعداد العشرية", fa: "جمع و تفریق اعشار", ti: "ምደማር ምቅናስ ቁጽሪ ቪርጉላ", uk: "Додавання і віднімання десяткових" },
+      title: { fr: "Addition et soustraction de décimaux",},
       blocks: [
         { type: "heading", fr: "Addition en colonnes", black: true },
         { type: "highlight", fr: "Règle fondamentale" },

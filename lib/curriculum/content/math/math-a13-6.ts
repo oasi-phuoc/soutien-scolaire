@@ -6,11 +6,6 @@ export const MATH_A13_6_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Pente et ordonnée à l'origine",
-        en: "Slope and y-intercept",
-        ar: "الميل ونقطة القطع مع المحور y",
-        fa: "شیب و عرض از مبدأ",
-        ti: "ሃፍን ናይ y ሕርሚ ምቁራጽን",
-        uk: "Кутовий коефіцієнт і початкова ордината",
       },
       paragraphs: { fr: [] },
       blocks: [

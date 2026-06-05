@@ -629,31 +629,72 @@ function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: (
 
 // ── Reset All Eleves Confirm ────────────────────────────────────────────────
 
-function ResetElevesConfirm({ eleveCount, onClose, onReset }: { eleveCount: number; onClose: () => void; onReset: () => void }) {
+function ResetElevesConfirm({ eleveCount, onClose, onReset, onArchive }: { eleveCount: number; onClose: () => void; onReset: () => void; onArchive: () => void }) {
   const [pending, startTransition] = useTransition();
   const [err, setErr] = useState<string | null>(null);
+  const [deleteChecked, setDeleteChecked] = useState(false);
+  const [archiveChecked, setArchiveChecked] = useState(false);
+  const [deletePhrase, setDeletePhrase] = useState("");
+  const [finalDeleteConfirm, setFinalDeleteConfirm] = useState(false);
+  const requiredPhrase = "Supprimé tous les élèves";
 
-  function confirm() {
+  function confirmDelete() {
     startTransition(async () => {
-      const r = await resetAllElevesAction();
+      const r = await resetAllElevesAction("delete");
       if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
       onReset();
     });
   }
 
+  function confirmArchive() {
+    startTransition(async () => {
+      const r = await resetAllElevesAction("archive");
+      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
+      onArchive();
+    });
+  }
+
+  const canDelete = deleteChecked && deletePhrase === requiredPhrase && finalDeleteConfirm;
+  const currentYear = new Date().getFullYear();
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
-      <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
-        <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer tous les comptes élèves</h2>
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
+        <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Réinitialiser les élèves</h2>
         <p className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Cette action supprimera définitivement <strong>{eleveCount} compte{eleveCount !== 1 ? "s" : ""} élève{eleveCount !== 1 ? "s" : ""}</strong> ainsi que toutes leurs données de progression.
+          Cette action concerne <strong>{eleveCount} compte{eleveCount !== 1 ? "s" : ""} élève{eleveCount !== 1 ? "s" : ""}</strong>.
         </p>
-        <p className="mb-4 text-sm font-semibold text-red-600 dark:text-red-400">Cette action est irréversible.</p>
+        <div className="my-4 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+          <label className="flex items-start gap-2 text-sm text-zinc-700 dark:text-zinc-300">
+            <input type="checkbox" checked={archiveChecked} onChange={e => { setArchiveChecked(e.target.checked); if (e.target.checked) setDeleteChecked(false); }} className="mt-1" />
+            <span>Changer tous les élèves en classe <strong>ancien {currentYear}</strong>.</span>
+          </label>
+          <label className="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
+            <input type="checkbox" checked={deleteChecked} onChange={e => { setDeleteChecked(e.target.checked); if (e.target.checked) setArchiveChecked(false); }} className="mt-1" />
+            <span>Supprimer définitivement tous les comptes élèves et leurs données.</span>
+          </label>
+          {deleteChecked && (
+            <div className="space-y-2 border-t border-red-100 pt-3 dark:border-red-900/50">
+              <label className="block text-xs font-semibold text-red-700 dark:text-red-300">
+                Écrivez exactement : <span className="font-mono">{requiredPhrase}</span>
+              </label>
+              <input value={deletePhrase} onChange={e => setDeletePhrase(e.target.value)}
+                className="w-full rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-sm outline-none dark:border-red-900 dark:bg-red-950/20" />
+              <label className="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
+                <input type="checkbox" checked={finalDeleteConfirm} onChange={e => setFinalDeleteConfirm(e.target.checked)} className="mt-1" />
+                <span>Je confirme une troisième fois que je veux supprimer les comptes élèves.</span>
+              </label>
+            </div>
+          )}
+        </div>
         {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
         <div className="flex justify-end gap-2">
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700" aria-label="Annuler"><IconCancel /></button>
-          <button onClick={confirm} disabled={pending} className="flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-60">
+          <button onClick={confirmArchive} disabled={pending || !archiveChecked} className="rounded-2xl bg-amber-500 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-600 disabled:opacity-40">
+            Valider archivage
+          </button>
+          <button onClick={confirmDelete} disabled={pending || !canDelete} className="flex items-center gap-2 rounded-2xl bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-40">
             {pending ? <Spinner /> : <IconTrash />}
             {pending ? "Suppression…" : "Tout supprimer"}
           </button>
@@ -752,8 +793,8 @@ export function AdminTable({
             <button onClick={() => setSortOpen(o => !o)} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
-                {([["name", "Nom A→Z"], ["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
-                  <button key={val} onClick={() => { setSortBy(val); setSortOpen(false); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
+                {([["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
+                  <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(false); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
                 ))}
               </>
             )}
@@ -844,6 +885,12 @@ export function AdminTable({
           onClose={() => setResetConfirming(false)}
           onReset={() => {
             setRows(rs => rs.filter(r => r.role !== "eleve"));
+            setResetConfirming(false);
+            setSelected(null);
+          }}
+          onArchive={() => {
+            const year = new Date().getFullYear();
+            setRows(rs => rs.map(r => r.role === "eleve" ? { ...r, classe: `ancien ${year}` } : r));
             setResetConfirming(false);
             setSelected(null);
           }}

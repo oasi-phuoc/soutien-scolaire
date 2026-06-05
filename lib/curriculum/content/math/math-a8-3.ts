@@ -6,11 +6,6 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Puissances de 10",
-        en: "Powers of 10",
-        ar: "قوى العشرة",
-        fa: "توان‌های 10",
-        ti: "ሓይሊ 10",
-        uk: "Степені числа 10",
       },
       paragraphs: { fr: [] },
       blocks: [

@@ -129,7 +129,7 @@ function genSeq17Int() {
   const startMax = isAsc ? 50000 - totalSpan : 50000;
   const start = randInt(startMin, startMax);
   const vals = Array.from({ length: 6 }, (_, i) => isAsc ? start + i * step : start - i * step);
-  const pairStart = randInt(1, 3);
+  const pairStart = randInt(1, vals.length - 3);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
 }
 
@@ -148,7 +148,7 @@ function genSeq17Dec() {
     const u = isAsc ? startK + i * stepK : startK - i * stepK;
     return Math.round(u * 5) / 100; // u × 0.05
   });
-  const pairStart = randInt(1, 3);
+  const pairStart = randInt(1, vals.length - 3);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
 }
 
@@ -685,53 +685,113 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 21 — Column division with decimals ──────────────────────────────
 
+function DecimalLongDivCard({ dividendStr, divisor, quotientStr, quotientInputs, onQuotientChange, validated }: {
+  dividendStr: string;
+  divisor: number;
+  quotientStr: string;
+  quotientInputs: string[];
+  onQuotientChange: (i: number, val: string) => void;
+  validated: boolean;
+}) {
+  const dividendChars = dividendStr.split("");
+  const quotientChars = quotientStr.split("");
+  const cellCls = "flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]";
+  const inputCls = "h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  let inputIdx = 0;
+
+  return (
+    <div className="overflow-x-auto">
+      <table className="mx-auto border-collapse">
+        <tbody>
+          <tr>
+            <td className="w-5" />
+            {dividendChars.map((ch, i) => (
+              <td key={i} className="p-0.5">
+                <span className={cellCls}>{ch}</span>
+              </td>
+            ))}
+            <td className="border-l-2 border-[var(--color-text-primary)] p-0.5">
+              <span className={`${cellCls} border-b-2 border-[var(--color-text-primary)]`}>{divisor}</span>
+            </td>
+          </tr>
+          <tr>
+            <td colSpan={dividendChars.length + 1} />
+            <td className="border-l-2 border-[var(--color-text-primary)] p-0.5">
+              <div className="flex">
+                {quotientChars.map((ch, i) => {
+                  if (ch === ",") return <span key={i} className={cellCls}>,</span>;
+                  const qi = inputIdx++;
+                  return (
+                    <input
+                      key={i}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={quotientInputs[qi] ?? ""}
+                      disabled={validated}
+                      onChange={e => onQuotientChange(qi, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+                      className={inputCls}
+                    />
+                  );
+                })}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function Exercise21({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Grid 1: dividend 5.0–9.9 (1 decimal), divisor 2–5
-    const d1 = randInt(2, 5);
-    const q1int = randInt(10, 19);
-    const dividend1 = Math.round(d1 * q1int) / 10;
-    const quotient1 = q1int / 10;
-
-    // Grid 2: dividend 11–99 (2 decimals), divisor 2–5
-    const d2 = randInt(2, 5);
-    const q2int = randInt(100, 199);
-    const dividend2 = Math.round(d2 * q2int) / 100;
-    const quotient2 = q2int / 100;
-
-    return [
-      { dividend: dividend1, divisor: d1, quotient: quotient1, decPlaces: 1 },
-      { dividend: dividend2, divisor: d2, quotient: quotient2, decPlaces: 2 },
-    ];
+    function makeQ(decPlaces: 1 | 2) {
+      const divisor = randInt(2, 9);
+      const quotientInt = decPlaces === 1 ? randInt(11, 99) : randInt(101, 999);
+      const quotient = quotientInt / Math.pow(10, decPlaces);
+      const dividend = divisor * quotient;
+      return {
+        dividendStr: fmtDec(dividend, decPlaces),
+        divisor,
+        quotientStr: fmtDec(quotient, decPlaces),
+        digitAnswer: fmtDec(quotient, decPlaces).replace(",", "").split(""),
+      };
+    }
+    return [makeQ(1), makeQ(2)];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(["", ""]);
+  const [answers, setAnswers] = useState<string[][]>(() => data.map(q => Array(q.digitAnswer.length).fill("")));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.quotient, 0.005)) pts++; });
+    data.forEach((q, i) => {
+      const ok = q.digitAnswer.every((ch, j) => (answers[i]?.[j] ?? "") === ch);
+      if (ok) pts++;
+    });
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez les divisions. Résultat exact (sans reste).</p>
-      <div className="flex flex-wrap gap-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les divisions décimales en colonnes.</p>
+      <div className="space-y-3">
         {data.map((q, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <div className="inline-flex flex-col items-end font-mono text-base border border-[var(--color-border-default)] rounded-lg px-3 py-2 bg-[var(--color-bg-secondary)]">
-              <div className="flex items-center gap-2">
-                <span className="text-[var(--color-text-primary)]">{fmtDec(q.dividend, q.decPlaces)}</span>
-                <span className="text-[var(--color-text-secondary)]">÷</span>
-                <span className="text-[var(--color-text-primary)]">{q.divisor}</span>
-                <span className="text-[var(--color-text-secondary)]">=</span>
-                <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-                  correct={fmtDec(q.quotient, q.decPlaces)} validated={validated} width="w-16" />
-              </div>
-            </div>
+          <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <div className="mb-2 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</div>
+            <DecimalLongDivCard
+              dividendStr={q.dividendStr}
+              divisor={q.divisor}
+              quotientStr={q.quotientStr}
+              quotientInputs={answers[i] ?? []}
+              onQuotientChange={(idx, val) => setAnswers(prev => {
+                const next = prev.map(row => [...row]);
+                next[i]![idx] = val;
+                return next;
+              })}
+              validated={validated}
+            />
           </div>
         ))}
       </div>
@@ -772,26 +832,34 @@ function pickMultiShapeCfg(): { kind: ShapeKind; d: number } {
 function genFracColorItems(): FracShapeItem[] {
   const items: FracShapeItem[] = [];
   const usedConfigs = new Set<string>();
+  const usedShapeFractions = new Set<string>();
 
   // Generate 2 single shapes
   for (let i = 0; i < 2; i++) {
     let cfg;
+    let n;
     do {
       cfg = pickSingleShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+      n = randInt(1, cfg.d - 1);
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`) || usedShapeFractions.has(`${cfg.kind}-${n}/${cfg.d}`));
     usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
+    usedShapeFractions.add(`${cfg.kind}-${n}/${cfg.d}`);
+    items.push({ ...cfg, n, copies: 1, multi: false });
   }
 
   // Generate 2 multi-shapes
   for (let i = 0; i < 2; i++) {
     let cfg;
+    let copies;
+    let n;
     do {
       cfg = pickMultiShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+      copies = randInt(2, 3);
+      n = randInt(cfg.d + 1, copies * cfg.d - 1);
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`) || usedShapeFractions.has(`${cfg.kind}-${n}/${cfg.d}`));
     usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    const copies = randInt(2, 3);
-    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+    usedShapeFractions.add(`${cfg.kind}-${n}/${cfg.d}`);
+    items.push({ ...cfg, n, copies, multi: true });
   }
 
   return items;
@@ -800,26 +868,34 @@ function genFracColorItems(): FracShapeItem[] {
 function genFracReadItems(): FracShapeItem[] {
   const items: FracShapeItem[] = [];
   const usedConfigs = new Set<string>();
+  const usedShapeFractions = new Set<string>();
 
   // Generate 2 single shapes
   for (let i = 0; i < 2; i++) {
     let cfg;
+    let n;
     do {
       cfg = pickSingleShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+      n = randInt(1, cfg.d - 1);
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`) || usedShapeFractions.has(`${cfg.kind}-${n}/${cfg.d}`));
     usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
+    usedShapeFractions.add(`${cfg.kind}-${n}/${cfg.d}`);
+    items.push({ ...cfg, n, copies: 1, multi: false });
   }
 
   // Generate 2 multi-shapes
   for (let i = 0; i < 2; i++) {
     let cfg;
+    let copies;
+    let n;
     do {
       cfg = pickMultiShapeCfg();
-    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+      copies = randInt(2, 3);
+      n = randInt(cfg.d + 1, copies * cfg.d - 1);
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`) || usedShapeFractions.has(`${cfg.kind}-${n}/${cfg.d}`));
     usedConfigs.add(`${cfg.kind}-${cfg.d}`);
-    const copies = randInt(2, 3);
-    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+    usedShapeFractions.add(`${cfg.kind}-${n}/${cfg.d}`);
+    items.push({ ...cfg, n, copies, multi: true });
   }
 
   return items;
@@ -984,7 +1060,7 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
@@ -1059,7 +1135,7 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>

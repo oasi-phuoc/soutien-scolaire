@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { savePlacementTestResultAction } from "@/app/actions/progress";
 import {
   Exercise1,
   Exercise2,
@@ -215,27 +216,35 @@ function ResultsScreen({ scores, exercises, onBack }: ResultsScreenProps) {
       </div>
 
       {/* Per-exercise list */}
-      <div className="space-y-2">
-        {exercises.map((ex, i) => {
-          const sc = scores[i];
-          const pts = sc?.points ?? 0;
-          const max = ex.maxPoints;
-          const exPct = max > 0 ? Math.round((pts / max) * 100) : 0;
-          return (
-            <div key={ex.id} className="flex items-center gap-3 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
-              <span className="text-xs font-bold text-[var(--color-accent-alg)] w-5">{ex.id}</span>
-              <span className="flex-1 text-xs text-[var(--color-text-secondary)] truncate">{ex.label}</span>
-              <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{pts} / {max}</span>
-              <div className="w-16 h-1.5 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
-                <div
-                  className={`h-full rounded-full ${exPct >= 60 ? "bg-amber-500" : "bg-red-400"}`}
-                  style={{ width: `${exPct}%` }}
-                />
+      <details className="rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+        <summary className="cursor-pointer px-3 py-2 text-sm font-bold text-[var(--color-text-primary)]">
+          Détail des points par exercice
+        </summary>
+        <div className="space-y-2 border-t border-[var(--color-border-default)] p-3">
+          {exercises.map((ex, i) => {
+            const sc = scores[i];
+            const pts = sc?.points ?? 0;
+            const max = ex.maxPoints;
+            const exPct = max > 0 ? Math.round((pts / max) * 100) : 0;
+            return (
+              <div key={ex.id} className="flex items-center gap-3 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
+                <span className="text-xs font-bold text-[var(--color-accent-alg)] w-5">{ex.id}</span>
+                <span className="flex-1 text-xs text-[var(--color-text-secondary)] truncate">{ex.label}</span>
+                <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{pts} / {max}</span>
+                <div className="w-16 h-1.5 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
+                  <div
+                    className={`h-full rounded-full ${exPct >= 60 ? "bg-amber-500" : "bg-red-400"}`}
+                    style={{ width: `${exPct}%` }}
+                  />
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+          <p className="text-xs text-[var(--color-text-secondary)]">
+            Les corrections détaillées par réponse seront disponibles quand les exercices exposeront leurs réponses individuelles.
+          </p>
+        </div>
+      </details>
 
       <button
         type="button"
@@ -262,6 +271,10 @@ export function PlacementTestClient() {
   const [validateTriggers, setValidateTriggers] = useState<number[]>(() => Array(TOTAL_EXERCISES).fill(0));
   const [hasInput, _setHasInput] = useState<boolean[]>(() => Array(TOTAL_EXERCISES).fill(false));
   const [sessionKey, setSessionKey] = useState(1);
+  const [skipConfirmOpen, setSkipConfirmOpen] = useState(false);
+  const [skipAccepted, setSkipAccepted] = useState(false);
+  const [skipRequested, setSkipRequested] = useState(false);
+  const [savedResult, setSavedResult] = useState(false);
   const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -364,38 +377,94 @@ export function PlacementTestClient() {
     }
   }, [allValidated, phase]);
 
+  useEffect(() => {
+    if (!skipRequested || phase !== "running") return;
+    setValidateTriggers(prev => prev.map((t, i) => (!validated[i] ? t + 1 : t)));
+    setSkipRequested(false);
+  }, [skipRequested, phase, validated]);
+
   // Save result to localStorage history when results screen appears
   useEffect(() => {
     if (phase !== "results") return;
     const pts = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
     const maxPts = EXERCISES.reduce((s, e) => s + e.maxPoints, 0);
+    const percent = maxPts > 0 ? Math.round((pts / maxPts) * 100) : 0;
+    const attempt = {
+      date: new Date().toISOString(),
+      points: pts,
+      maxPoints: maxPts,
+      percent,
+      scores: EXERCISES.map((ex, i) => ({
+        exerciseId: ex.id,
+        label: ex.label,
+        points: scores[i]?.points ?? 0,
+        maxPoints: ex.maxPoints,
+      })),
+    };
     try {
       const raw = localStorage.getItem("tp-math-history");
       const history: { date: string; points: number; maxPoints: number }[] = raw ? JSON.parse(raw) : [];
-      history.push({ date: new Date().toISOString().slice(0, 10), points: pts, maxPoints: maxPts });
+      history.push({ date: attempt.date.slice(0, 10), points: pts, maxPoints: maxPts });
       localStorage.setItem("tp-math-history", JSON.stringify(history.slice(-10)));
     } catch {}
+    if (!savedResult) {
+      setSavedResult(true);
+      savePlacementTestResultAction(attempt);
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
+
+  function startTest() {
+    setSessionKey(k => k + 1);
+    setValidated(Array(TOTAL_EXERCISES).fill(false));
+    setScores(Array(TOTAL_EXERCISES).fill(null));
+    setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
+    setCurrentIdx(0);
+    setTimeLeft(TIMER_SECONDS);
+    setSavedResult(false);
+    setPhase("running");
+  }
+
+  function confirmSkipAll() {
+    setSkipConfirmOpen(false);
+    setSkipAccepted(false);
+    setSessionKey(k => k + 1);
+    setValidated(Array(TOTAL_EXERCISES).fill(false));
+    setScores(Array(TOTAL_EXERCISES).fill(null));
+    setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
+    setCurrentIdx(0);
+    setTimeLeft(TIMER_SECONDS);
+    setSavedResult(false);
+    setPhase("running");
+    setSkipRequested(true);
+  }
 
   // ── Start screen ───────────────────────────────────────────────────────────
 
   if (phase === "idle") {
     return (
       <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
-        <button
-          type="button"
-          onClick={() => router.back()}
-          className="mb-6 flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors"
-        >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
-          Retour
-        </button>
-
         <div className="space-y-6">
-          <header className="space-y-1">
+          <header className="space-y-2">
             <p className="text-xs font-medium uppercase tracking-wide text-amber-600">Mathématiques</p>
-            <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                aria-label="Retour"
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+              <button
+                type="button"
+                onClick={() => setSkipConfirmOpen(true)}
+                className="ml-auto rounded-[var(--radius-lg)] bg-amber-500 px-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+              >
+                Skip
+              </button>
+            </div>
           </header>
 
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4">
@@ -424,20 +493,30 @@ export function PlacementTestClient() {
 
           <button
             type="button"
-            onClick={() => {
-              setSessionKey(k => k + 1);
-              setValidated(Array(TOTAL_EXERCISES).fill(false));
-              setScores(Array(TOTAL_EXERCISES).fill(null));
-              setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
-              setCurrentIdx(0);
-              setTimeLeft(TIMER_SECONDS);
-              setPhase("running");
-            }}
+            onClick={startTest}
             className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
             Commencer le test
           </button>
         </div>
+        {skipConfirmOpen && (
+          <div className="fixed inset-0 z-50 flex items-end bg-black/40 p-4 sm:items-center sm:justify-center">
+            <div className="w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-5 shadow-xl">
+              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Passer directement aux résultats</h2>
+              <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+                Ce bouton valide tous les exercices immédiatement, sans répondre aux questions, puis affiche la page de résultats.
+              </p>
+              <label className="mt-4 flex items-start gap-2 text-sm text-[var(--color-text-primary)]">
+                <input type="checkbox" checked={skipAccepted} onChange={e => setSkipAccepted(e.target.checked)} className="mt-1" />
+                <span>Je confirme que je veux valider l&apos;entièreté du test maintenant.</span>
+              </label>
+              <div className="mt-5 flex justify-end gap-2">
+                <button type="button" onClick={() => setSkipConfirmOpen(false)} className="rounded-lg border border-[var(--color-border-default)] px-4 py-2 text-sm font-semibold text-[var(--color-text-secondary)]">Annuler</button>
+                <button type="button" disabled={!skipAccepted} onClick={confirmSkipAll} className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-bold text-white disabled:opacity-40">Valider tout</button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

@@ -7,26 +7,12 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Comparer les nombres",
-      en: "Which is greater?",
-      ar: "أيهما أكبر؟",
-      fa: "کدام بزرگ‌تر است؟",
-      ti: "ኣየናይ እዩ ዓቢ?",
-      uk: "Яке число більше?",
-      pt: "Qual é o maior?",
     },
 
     blocks: [
       {
         type: "plain",
         fr: "Comparer des nombres consiste à déterminer lequel est le plus **grand**, le plus **petit** ou s'ils sont **égaux**.",
-        pivot: {
-          en: "Comparing numbers means determining which is greatest, smallest, or if they are equal.",
-          ar: "مقارنة الأعداد تعني تحديد أيها أكبر أو أصغر أو متساوية.",
-          fa: "مقایسه اعداد یعنی تعیین بزرگ‌ترین، کوچک‌ترین یا مساوی بودن آن‌ها.",
-          ti: "ምወዳዳር ቁጽርታት ማለት ኣየናይ ዓቢ፡ ንእሽቶ ወይ ማዕሪ ምዃኑ ምፍላጥ ማለት እዩ።",
-          uk: "Порівняти числа — визначити, яке більше, менше або вони рівні.",
-          pt: "Comparar números significa determinar qual é maior, menor ou se são iguais.",
-        },
       },
 
       {
@@ -38,14 +24,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       {
         type: "plain",
         fr: "La partie de la flèche **>** qui est ouverte est toujours dirigée **vers le plus grand** nombre.",
-        pivot: {
-          en: "The open side of > always points to the greater number.",
-          ar: "الجانب المفتوح من > يتجه دائمًا نحو العدد الأكبر.",
-          fa: "قسمت باز > همیشه به سمت عدد بزرگ‌تر است.",
-          ti: "ክፉት ሸነኽ ናይ > ኩሉ ጊዜ ናብ ዓቢ ቁጽሪ ይምልከት።",
-          uk: "Відкритий бік > завжди спрямований до більшого числа.",
-          pt: "O lado aberto do símbolo > aponta sempre para o número maior.",
-        },
       },
 
       {
@@ -64,14 +42,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Règle de comparaison",
-        pivot: {
-          en: "Comparison rule",
-          ar: "قاعدة المقارنة",
-          fa: "قانون مقایسه",
-          ti: "ሕጊ ምወዳዳር",
-          uk: "Правило порівняння",
-          pt: "Regra de comparação",
-        },
       },
 
       {
@@ -105,14 +75,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Exemple",
-        pivot: {
-          en: "Example",
-          ar: "مثال",
-          fa: "مثال",
-          ti: "ኣብነት",
-          uk: "Приклад",
-          pt: "Exemplo",
-        },
       },
 
       { type: "plain", fr: "On a deux chiffres 3 456 et 3 421" },
@@ -140,14 +102,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Principe",
-        pivot: {
-          en: "Principle",
-          ar: "المبدأ",
-          fa: "اصل",
-          ti: "መትከል",
-          uk: "Принцип",
-          pt: "Princípio",
-        },
       },
 
       { type: "plain", fr: "Quand une valeur est entre deux nombres, cela veut dire :" },
@@ -164,14 +118,6 @@ export const MATH_A1_3_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Exemple",
-        pivot: {
-          en: "Example",
-          ar: "مثال",
-          fa: "مثال",
-          ti: "ኣብነት",
-          uk: "Приклад",
-          pt: "Exemplo",
-        },
       },
 
       { type: "plain", fr: "Quels nombres sont entre 3 et 8 ?" },

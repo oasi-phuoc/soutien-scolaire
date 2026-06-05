@@ -6,12 +6,6 @@ export const MATH_A2_1_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Addition",
-      en: "Addition",
-      ar: "الجمع",
-      fa: "جمع",
-      ti: "ድምር",
-      uk: "Додавання",
-      pt: "Adição",
     },
     blocks: [
       { type: "plain", fr: "L'addition permet de **réunir** plusieurs quantités **ensemble**." },

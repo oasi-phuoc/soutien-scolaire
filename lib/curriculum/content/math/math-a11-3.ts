@@ -6,11 +6,6 @@ export const MATH_A11_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Représentation graphique des solutions",
-        en: "Graphical representation of solutions",
-        ar: "التمثيل البياني للحلول",
-        fa: "نمایش گرافیکی جواب‌ها",
-        ti: "ስዕላዊ ምርኣይ ናይ ፍትሒ",
-        uk: "Графічне зображення розв'язків",
       },
       paragraphs: { fr: [] },
       blocks: [

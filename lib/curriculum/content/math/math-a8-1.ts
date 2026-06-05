@@ -6,11 +6,6 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Notation puissance",
-        en: "Power notation",
-        ar: "رمز الأس",
-        fa: "نمادگذاری توان",
-        ti: "ምልክት ሓይሊ",
-        uk: "Позначення степеня",
       },
       paragraphs: { fr: [] },
       blocks: [

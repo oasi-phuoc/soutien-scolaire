@@ -6,11 +6,6 @@ export const MATH_A9_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Lire et écrire une expression algébrique",
-        en: "Reading and writing an algebraic expression",
-        ar: "قراءة وكتابة تعبير جبري",
-        fa: "خواندن و نوشتن عبارت جبری",
-        ti: "ናይ ኣልጀብራ ኣዝማሪ ምንባብን ምጽሓፍን",
-        uk: "Читання та запис алгебраїчного виразу",
       },
       paragraphs: { fr: [] },
       blocks: [

@@ -6,12 +6,6 @@ export const MATH_A3_2_LESSON: MathSubmoduleLesson = {
     theory: {
     title: {
       fr: "Multiplication en colonnes",
-      en: "",
-      ar: "",
-      fa: "",
-      ti: "",
-      uk: "",
-      pt: "",
     },
     blocks: [
       {

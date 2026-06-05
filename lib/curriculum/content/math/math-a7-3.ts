@@ -6,11 +6,6 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Addition et soustraction des entiers relatifs",
-      en: "Addition and subtraction of relative numbers",
-      ar: "جمع وطرح الأعداد النسبية",
-      fa: "جمع و تفریق اعداد نسبی",
-      ti: "ምደማር ምቅናስ ናይ ኣካባቢ ቁጽርታት",
-      uk: "Додавання та віднімання відносних чисел",
     },
     paragraphs: { fr: [] },
     blocks: [

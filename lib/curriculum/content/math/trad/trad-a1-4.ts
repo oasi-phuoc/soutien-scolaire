@@ -10,6 +10,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
     ti: "ቁፅሪ ቁጽሪ ቀጽሪ",
     uk: "Числова пряма",
     pt: "Reta numérica",
+    so: "Xariiqda tirooyinka",
+    tr: "Sayi dogrusu",
+    ps: "د عددونو کرښه",
   },
   paragraphs: {
     fr: [
@@ -54,6 +57,24 @@ export const TRAD_A1_4: SubmoduleTrad = {
       "Um número é **par** se termina em 0, 2, 4, 6 ou 8. Pode ser dividido em dois grupos iguais. Exemplos: 4, 12, 38.",
       "Um número é **ímpar** se termina em 1, 3, 5, 7 ou 9. Não pode ser dividido em dois grupos iguais. Exemplos: 3, 17, 45.",
     ],
+    so: [
+          "Xariiqda tirooyinka, tirooyinka waxaa loo dhigaa kor u kac bidix ilaa midig. Farqiga u dhexeeya laba daris wuxuu noqon karaa 5, 10, 100… iyadoo ku xiran cabbirka.",
+          "Si loo helo tiro u dhexeysa laba tiro, akhri cabbirka: tusaale ahaan 450 iyo 460 oo talaabadu tahay 5, waxaad dhigi kartaa 455.",
+          "Tiro waa **dhaban** haddii ay ku dhammaato 0, 2, 4, 6 ama 8. Waxaa loo qaybin karaa laba kooxood oo siman. Tusaale: 4, 12, 38.",
+          "Tiro waa **kinsi** haddii ay ku dhammaato 1, 3, 5, 7 ama 9. Looma qaybin karo laba kooxood oo siman. Tusaale: 3, 17, 45.",
+        ],
+    tr: [
+          "Sayi dogrusunda sayilar soldan saga artan sirayla yerlestirilir. Iki komsu sayi arasindaki aralik olcege gore 5, 10, 100… olabilir.",
+          "Iki sayi arasindaki bir sayiyi bulmak icin olcegi oku: ornegin 450 ile 460 arasinda adim 5 ise 455 yerlestirilebilir.",
+          "Bir sayi 0, 2, 4, 6 veya 8 ile bitiyorsa **cifttir**. Iki esit gruba ayrilabilir. Ornekler: 4, 12, 38.",
+          "Bir sayi 1, 3, 5, 7 veya 9 ile bitiyorsa **tektir**. Iki esit gruba tam ayrilamaz. Ornekler: 3, 17, 45.",
+        ],
+    ps: [
+          "د عددونو پر کرښه عددونه له کيڼ څخه ښي ته په زياتېدونکي ترتيب اېښودل کېږي. د دوو ګاونډيو عددونو ترمنځ واټن د کچې له مخې 5، 10، 100… کېدای شي.",
+          "د دوو عددونو ترمنځ د عدد موندلو لپاره کچه ولوله: د بېلګې په توګه د 450 او 460 ترمنځ، که ګام 5 وي، 455 اېښودل کېدای شي.",
+          "عدد **جفت** دی که په 0، 2، 4، 6 يا 8 پای ته ورسېږي. دا په دوو برابرو ډلو وېشل کېدای شي. بېلګې: 4، 12، 38.",
+          "عدد **طاق** دی که په 1، 3، 5، 7 يا 9 پای ته ورسېږي. دا په دوو برابرو ډلو نه شي وېشل کېدای. بېلګې: 3، 17، 45.",
+        ],
   },
   blocks: [
     // 0: plain "Sur une droite numérique..."
@@ -66,6 +87,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
         ti: "ኣብ ቁጽሪ ቀጽሪ፡ ቁጽርታት ካብ ጸጋም ናብ የማን ብቅርርቦ ይስደርዑ። ርሕቀት 1፡ 2፡ 5፡ 10፡ 100... ክኸውን ይኽእል።",
         uk: "На числовій прямій числа розташовані у зростаючому порядку зліва направо. Проміжок між двома числами може бути 1, 2, 5, 10, 100… залежно від масштабу.",
         pt: "Numa reta numérica, os números são colocados em ordem crescente da esquerda para a direita. O intervalo entre dois números consecutivos pode ser 1, 2, 5, 10, 100… dependendo da escala.",
+        so: "Xariiqda tirooyinka, tirooyinku bidix ilaa midig ayay u kordhaan. Farqigu wuxuu noqon karaa 1, 2, 5, 10, 100… iyadoo ku xiran cabbirka.",
+        tr: "Sayi dogrusunda sayilar soldan saga artan siradadir. Ardışık sayilar arasindaki aralik olcege gore 1, 2, 5, 10, 100… olabilir.",
+        ps: "د عددونو پر کرښه عددونه له کيڼ څخه ښي ته زياتېږي. د پرله پسې عددونو واټن د کچې له مخې 1، 2، 5، 10، 100… کېدای شي.",
       },
     },
     // 1: heading "Nombres pairs et impairs"
@@ -78,6 +102,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
         ti: "ዝተፈጥዎ ን ዘይተፈጥዎ ቁጽርታት",
         uk: "Парні та непарні числа",
         pt: "Números pares e ímpares",
+        so: "Tirooyinka dhaban iyo kinsi",
+        tr: "Cift ve tek sayilar",
+        ps: "جفت او طاق عددونه",
       },
     },
     // 2: plain "Pour savoir si un nombre est pair ou impair..."
@@ -90,6 +117,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
         ti: "ቁጽሪ ዝተፈጥዎ ወይ ዘይተፈጥዎ ምዃኑ ንምፍላጥ፡ ናይ መወዳእታ ኣሃዝ ጥራይ ንርኢ።",
         uk: "Щоб дізнатись, чи є число парним або непарним, дивимось лише на останню цифру.",
         pt: "Para saber se um número é par ou ímpar, olhamos apenas para o último algarismo.",
+        so: "Si aad u ogaato in tiro dhaban tahay ama kinsi, eeg lambarka ugu dambeeya oo keliya.",
+        tr: "Bir sayinin cift mi tek mi oldugunu anlamak icin sadece son rakama bak.",
+        ps: "د دې لپاره چې پوه شې عدد جفت دی که طاق، يوازې وروستی رقم وګوره.",
       },
     },
     // 3: highlight "Pair"
@@ -102,6 +132,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
         ti: "ዝተፈጥዎ",
         uk: "Парне",
         pt: "Par",
+        so: "Dhaban",
+        tr: "Cift",
+        ps: "جفت",
       },
     },
     // 4: section — items about even numbers
@@ -142,6 +175,21 @@ export const TRAD_A1_4: SubmoduleTrad = {
           "Termina em 0, 2, 4, 6 ou 8.",
           "4, 12, 38, 100…",
         ],
+        so: [
+          "Tiro dhaban waxaa loo qaybin karaa 2 qaybood oo siman.",
+          "Waxay ku dhammaataa 0, 2, 4, 6 ama 8.",
+          "4, 12, 38, 100…",
+        ],
+        tr: [
+          "Cift sayi 2 esit parcaya ayrilabilir.",
+          "0, 2, 4, 6 veya 8 ile biter.",
+          "4, 12, 38, 100…",
+        ],
+        ps: [
+          "جفت عدد په 2 برابرو برخو وېشل کېدای شي.",
+          "په 0، 2، 4، 6 يا 8 پای ته رسېږي.",
+          "4، 12، 38، 100…",
+        ],
       },
     },
     // 5: highlight "Impair"
@@ -154,6 +202,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
         ti: "ዘይተፈጥዎ",
         uk: "Непарне",
         pt: "Ímpar",
+        so: "Kinsi",
+        tr: "Tek",
+        ps: "طاق",
       },
     },
     // 6: section — items about odd numbers
@@ -194,6 +245,21 @@ export const TRAD_A1_4: SubmoduleTrad = {
           "Termina em 1, 3, 5, 7 ou 9.",
           "3, 17, 45, 99…",
         ],
+        so: [
+          "Tiro kinsi si sax ah looma qaybin karo 2 qaybood oo siman.",
+          "Waxay ku dhammaataa 1, 3, 5, 7 ama 9.",
+          "3, 17, 45, 99…",
+        ],
+        tr: [
+          "Tek sayi tam olarak 2 esit parcaya ayrilamaz.",
+          "1, 3, 5, 7 veya 9 ile biter.",
+          "3, 17, 45, 99…",
+        ],
+        ps: [
+          "طاق عدد په بشپړ ډول په 2 برابرو برخو نه وېشل کېږي.",
+          "په 1، 3، 5، 7 يا 9 پای ته رسېږي.",
+          "3، 17، 45، 99…",
+        ],
       },
     },
   ],
@@ -206,6 +272,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
       ti: "ነፍሲ ወከፍ ቁጽሪ ዝተፈጥዎ ዲዩ ዘይተፈጥዎ ዲዩ ንገር።",
       uk: "Вкажи, чи є кожне число парним або непарним.",
       pt: "Indica se cada número é par ou ímpar.",
+      so: "Sheeg in tiro kasta dhaban tahay ama kinsi.",
+      tr: "Her sayinin cift mi tek mi oldugunu belirt.",
+      ps: "وښيه چې هر عدد جفت دی که طاق.",
     },
     nl_read: {
       fr: "Écrivez le nombre indiqué par la flèche.",
@@ -215,6 +284,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
       ti: "ቁጽሪ ዘርኢ ዘሎ ቀስቲ ጽሓፍ።",
       uk: "Запиши число, яке вказує стрілка.",
       pt: "Escreve o número indicado pela seta.",
+      so: "Qor tirada ay fallaadhu tilmaamayso.",
+      tr: "Okun gosterdigi sayiyi yaz.",
+      ps: "هغه عدد وليکه چې غشی يې ښيي.",
     },
     nl_less: {
       fr: "Écrivez un nombre plus petit que le nombre indiqué par la flèche.",
@@ -224,6 +296,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
       ti: "ካ ቁጽሪ ቀስቲ ዝተሓሰ ቁጽሪ ጽሓፍ።",
       uk: "Запиши число, менше за те, на яке вказує стрілка.",
       pt: "Escreve um número menor do que o indicado pela seta.",
+      so: "Qor tiro ka yar tan fallaadhu tilmaamayso.",
+      tr: "Okun gosterdigi sayidan daha kucuk bir sayi yaz.",
+      ps: "له هغه عدد څخه کوچنی عدد وليکه چې غشی يې ښيي.",
     },
     nl_more: {
       fr: "Écrivez un nombre plus grand que le nombre indiqué par la flèche.",
@@ -233,6 +308,9 @@ export const TRAD_A1_4: SubmoduleTrad = {
       ti: "ካ ቁጽሪ ቀስቲ ዝዓበየ ቁጽሪ ጽሓፍ።",
       uk: "Запиши число, більше за те, на яке вказує стрілка.",
       pt: "Escreve um número maior do que o indicado pela seta.",
+      so: "Qor tiro ka weyn tan fallaadhu tilmaamayso.",
+      tr: "Okun gosterdigi sayidan daha buyuk bir sayi yaz.",
+      ps: "له هغه عدد څخه لوی عدد وليکه چې غشی يې ښيي.",
     },
   },
 };

@@ -6,11 +6,6 @@ export const MATH_A13_4_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Fonction linéaire f(x) = ax",
-        en: "Linear function f(x) = ax",
-        ar: "الدالة الخطية f(x) = ax",
-        fa: "تابع خطی f(x) = ax",
-        ti: "ናይ ቐጥታ ስራሕ f(x) = ax",
-        uk: "Лінійна функція f(x) = ax",
       },
       paragraphs: { fr: [] },
       blocks: [

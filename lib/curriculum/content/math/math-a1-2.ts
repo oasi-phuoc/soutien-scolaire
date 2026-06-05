@@ -7,26 +7,12 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Valeur positionnelle",
-      en: "Reading and understanding numbers",
-      ar: "قراءة الأعداد وفهمها",
-      fa: "خواندن و فهمیدن اعداد",
-      ti: "ኣኃዝቲ ምንባብን ምርዳእን",
-      uk: "Читати й розуміти числа",
-      pt: "Ler e compreender os números",
     },
 
     blocks: [
       {
         type: "plain",
         fr: "Chaque chiffre occupe une **position** précise dans un nombre.",
-        pivot: {
-          en: "Each digit occupies a precise position in a number.",
-          ar: "كل رقم يحتل موضعاً محدداً في العدد.",
-          fa: "هر رقم جایگاه مشخصی در عدد دارد.",
-          ti: "ነፍሲ ወከፍ ኣሃዝ ርኡይ ቦታ ኣብ ቁጽሪ ይሕዝ።",
-          uk: "Кожна цифра займає точне місце в числі.",
-          pt: "Cada algarismo ocupa uma posição específica num número.",
-        },
       },
 
       {
@@ -52,14 +38,6 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Repérer sa position",
-        pivot: {
-          en: "Find its position",
-          ar: "حدد موضعه",
-          fa: "موقعیت آن را پیدا کن",
-          ti: "ቦትኡ ፈልጥ",
-          uk: "Визнач позицію",
-          pt: "Encontrar a sua posição",
-        },
       },
 
       {
@@ -77,14 +55,6 @@ export const MATH_A1_2_LESSON: MathSubmoduleLesson = {
       {
         type: "highlight",
         fr: "Valeur du chiffre",
-        pivot: {
-          en: "Value of the digit",
-          ar: "قيمة الرقم",
-          fa: "ارزش رقم",
-          ti: "ዋጋ ኣሃዝ",
-          uk: "Значення цифри",
-          pt: "Valor do algarismo",
-        },
       },
 
       { type: "plain", fr: "Dans le nombre 3 864 :" },

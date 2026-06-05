@@ -7,11 +7,6 @@ export const MATH_A4_6_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Division de fractions",
-      en: "Division of fractions",
-      ar: "قسمة الكسور",
-      fa: "تقسیم کسرها",
-      ti: "ምክፍፋል ክፍሊታት",
-      uk: "Ділення дробів",
     },
 
     paragraphs: {

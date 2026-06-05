@@ -6,11 +6,6 @@ export const MATH_A13_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Graphique dans un repère",
-        en: "Graph in a coordinate system",
-        ar: "الرسم البياني في منظومة إحداثيات",
-        fa: "نمودار در دستگاه مختصات",
-        ti: "ስዕሊ ኣብ ናይ ቦታ ስርዓት",
-        uk: "Графік у системі координат",
       },
       paragraphs: { fr: [] },
       blocks: [

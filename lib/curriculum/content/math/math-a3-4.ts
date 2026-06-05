@@ -6,12 +6,6 @@ export const MATH_A3_4_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Division en colonnes",
-      en: "",
-      ar: "",
-      fa: "",
-      ti: "",
-      uk: "",
-      pt: "",
     },
     blocks: [
       {

@@ -4,7 +4,7 @@ export const MATH_A7_5_LESSON: MathSubmoduleLesson = {
   submoduleId: "A7-5",
   submoduleCode: "A7.5",
   theory: {
-    title: { fr: "Valeur absolue", en: "Absolute value", ar: "القيمة المطلقة", fa: "قدر مطلق", ti: "ናይ ቁጽሪ ዋጋ", uk: "Абсолютна величина" },
+    title: { fr: "Valeur absolue",},
     paragraphs: { fr: [] },
     blocks: [
       { type: "heading", fr: "La valeur absolue", black: true },

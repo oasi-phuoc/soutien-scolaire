@@ -6,11 +6,6 @@ export const MATH_A12_1_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Méthode de substitution",
-        en: "Substitution method",
-        ar: "طريقة الإحلال",
-        fa: "روش جایگذاری",
-        ti: "ኣፈጻጽማ ምትካእ",
-        uk: "Метод підстановки",
       },
       paragraphs: { fr: [] },
       blocks: [

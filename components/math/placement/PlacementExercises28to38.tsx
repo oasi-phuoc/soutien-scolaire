@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React, { useState, useMemo, useEffect } from "react";
 import type { PlacementExerciseProps } from "./PlacementExercises1to15";
 
@@ -17,6 +17,19 @@ function matchNum(input: string, expected: number, tol = 0.001): boolean {
 }
 function fmtDec(n: number, d: number): string {
   return n.toFixed(d).replace(".", ",");
+}
+
+function Pow10({ exp }: { exp: number }) {
+  return <span>10<sup>{exp}</sup></span>;
+}
+
+function Radical({ value }: { value: number }) {
+  return (
+    <span className="inline-flex items-start">
+      <span className="text-base leading-none">√</span>
+      <span className="border-t border-current px-0.5 leading-tight">{value}</span>
+    </span>
+  );
 }
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
@@ -57,16 +70,6 @@ function CorrectionInputText({
   );
 }
 
-// Fraction display helper
-function Frac({ n, d, className = "" }: { n: string | number; d: string | number; className?: string }) {
-  return (
-    <span className={`inline-flex flex-col items-center leading-none ${className}`}>
-      <span className="border-b border-current px-0.5 text-sm">{n}</span>
-      <span className="px-0.5 text-sm">{d}</span>
-    </span>
-  );
-}
-
 // ── Exercise 28: Powers, roots, ×÷ by powers of 10 ──────────────────────────
 
 export function Exercise28({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
@@ -75,15 +78,17 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
     const sq = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169][randInt(0, 11)]!;
     const sqRoot = Math.sqrt(sq);
     const mult = parseFloat((Math.random() < 0.5 ? randInt(1, 99) * 0.1 : randInt(1, 999) * 0.01).toFixed(2));
-    const pwr10mult = [10, 100, 1000][randInt(0, 2)]!;
-    const pwr10div = [10, 100, 1000][randInt(0, 2)]!;
-    const divVal = parseFloat((randInt(1, 999) * (pwr10div === 10 ? 10 : pwr10div === 100 ? 100 : 1000)).toFixed(0));
+    const expMult = [1, 2, 3][randInt(0, 2)]!;
+    const expDiv = [1, 2, 3][randInt(0, 2)]!;
+    const pwr10mult = 10 ** expMult;
+    const pwr10div = 10 ** expDiv;
+    const divVal = parseFloat((randInt(1, 999) * pwr10div).toFixed(0));
 
     return {
       q1: { base: b, ans: b ** 3 },                                                    // a³
       q2: { sq, sqRoot },                                                               // √sq
-      q3: { mult, pwr10: pwr10mult, ans: parseFloat((mult * pwr10mult).toFixed(4)) },  // ×10^n
-      q4: { divVal, pwr10: pwr10div, ans: parseFloat((divVal / pwr10div).toFixed(4)) },// ÷10^n
+      q3: { mult, exp: expMult, ans: parseFloat((mult * pwr10mult).toFixed(4)) },      // ×10^n
+      q4: { divVal, exp: expDiv, ans: parseFloat((divVal / pwr10div).toFixed(4)) },    // ÷10^n
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -111,22 +116,22 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les puissances, racines et opérations avec les puissances de 10</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <p className="text-xs text-[var(--color-text-secondary)]">Consigne : calculez chaque puissance, racine et opération avec une puissance de 10.</p>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.q1.base}<sup>3</sup></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>√{data.q2.sq}</span>
+        <span><Radical value={data.q2.sq} /></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="font-mono">{fmtDec(data.q3.mult, 2)} × {data.q3.pwr10}</span>
+        <span className="font-mono">{fmtDec(data.q3.mult, 2)} × <Pow10 exp={data.q3.exp} /></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="font-mono">{data.q4.divVal} ÷ {data.q4.pwr10}</span>
+        <span className="font-mono">{data.q4.divVal} ÷ <Pow10 exp={data.q4.exp} /></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" /></div>
       </div>
     </div>
@@ -137,22 +142,42 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
 export function Exercise29({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // expr1: a + b × c − d (basic order)
-    const a = randInt(2, 15), b = randInt(2, 9), c = randInt(2, 9), d = randInt(1, 10);
-    const ans1 = a + b * c - d;
-    // expr2: (a + b) × c − d × e (parentheses)
-    const a2 = randInt(2, 12), b2 = randInt(2, 12), c2 = randInt(2, 6), d2 = randInt(2, 8), e2 = randInt(2, 5);
-    const ans2 = (a2 + b2) * c2 - d2 * e2;
-    // expr3: [a + b × c] − [d − e] (brackets)
-    const a3 = randInt(1, 8), b3 = randInt(2, 6), c3 = randInt(2, 7), d3 = randInt(5, 15), e3 = randInt(2, 8);
-    const ans3 = (a3 + b3 * c3) - (d3 - e3);
-    // expr4: a × (b + c) − d ÷ e (mixed operations)
-    const a4 = randInt(2, 6), b4 = randInt(2, 10), c4 = randInt(2, 10);
-    let e4 = randInt(2, 4);
-    const d4 = randInt(4, 20);
-    while (d4 % e4 !== 0) { e4 = e4 === 2 ? 4 : 2; }
-    const ans4 = a4 * (b4 + c4) - d4 / e4;
-    return { a, b, c, d, ans1, a2, b2, c2, d2, e2, ans2, a3, b3, c3, d3, e3, ans3, a4, b4, c4, d4, e4, ans4 };
+    const makeDiv = () => {
+      const divisor = randInt(2, 6);
+      const quotient = randInt(2, 9);
+      return { dividend: divisor * quotient, divisor, quotient };
+    };
+    const d1 = makeDiv();
+    const a1 = randInt(2, 9), b1 = randInt(2, 9), c1 = randInt(2, 5), f1 = randInt(1, 12);
+    const q1 = {
+      expr: `[(${a1} + ${b1}) × ${c1} − ${d1.dividend} ÷ ${d1.divisor}] + ${f1}`,
+      ans: (a1 + b1) * c1 - d1.quotient + f1,
+    };
+
+    const d2 = makeDiv();
+    const a2 = randInt(2, 9), b2 = randInt(2, 9), c2 = randInt(2, 5), f2 = randInt(2, 9);
+    const q2 = {
+      expr: `[(${a2} + ${b2}) × ${c2} − ${d2.dividend} ÷ ${d2.divisor}] + ${f2}²`,
+      ans: (a2 + b2) * c2 - d2.quotient + f2 ** 2,
+    };
+
+    const d3 = makeDiv();
+    const a3 = randInt(2, 6), b3 = randInt(1, 5), e3 = randInt(2, 8), f3 = randInt(2, 5), g3 = randInt(1, 12);
+    const q3 = {
+      expr: `[(${a3} + ${b3})² − ${d3.dividend} ÷ ${d3.divisor}] + (${e3} × ${f3}) − ${g3}`,
+      ans: (a3 + b3) ** 2 - d3.quotient + (e3 * f3) - g3,
+    };
+
+    const d4 = makeDiv();
+    const squares = [9, 16, 25, 36, 49, 64, 81, 100, 121, 144];
+    const sq4 = squares[randInt(0, squares.length - 1)]!;
+    const a4 = randInt(2, 6), b4 = randInt(1, 5), c4 = randInt(2, 7), e4 = randInt(1, 10);
+    const q4 = {
+      expr: `[(${a4} + ${b4})² + ${c4} × ${e4}] − [${d4.dividend} ÷ ${d4.divisor} + √${sq4}]`,
+      ans: (a4 + b4) ** 2 + c4 * e4 - (d4.quotient + Math.sqrt(sq4)),
+    };
+
+    return [q1, q2, q3, q4];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -164,33 +189,33 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchNum(a1, data.ans1)) pts++;
-    if (matchNum(a2, data.ans2)) pts++;
-    if (matchNum(a3, data.ans3)) pts++;
-    if (matchNum(a4, data.ans4)) pts++;
+    if (matchNum(a1, data[0]!.ans)) pts++;
+    if (matchNum(a2, data[1]!.ans)) pts++;
+    if (matchNum(a3, data[2]!.ans)) pts++;
+    if (matchNum(a4, data[3]!.ans)) pts++;
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Respectez l&apos;ordre des opérations</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <p className="text-xs text-[var(--color-text-secondary)]">Consigne : calculez chaque expression en respectant les priorités opératoires.</p>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="font-mono">{data.a} + {data.b} × {data.c} − {data.d}</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} /></div>
+        <span className="font-mono">{data[0]!.expr}</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data[0]!.ans)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="font-mono">({data.a2} + {data.b2}) × {data.c2} − {data.d2} × {data.e2}</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={String(data.ans2)} validated={validated} /></div>
+        <span className="font-mono">{data[1]!.expr}</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={String(data[1]!.ans)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="font-mono">[{data.a3} + {data.b3} × {data.c3}] − [{data.d3} − {data.e3}]</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a3} onChange={setA3} correct={String(data.ans3)} validated={validated} /></div>
+        <span className="font-mono">{data[2]!.expr}</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a3} onChange={setA3} correct={String(data[2]!.ans)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="font-mono">{data.a4} × ({data.b4} + {data.c4}) − {data.d4} ÷ {data.e4}</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a4} onChange={setA4} correct={String(data.ans4)} validated={validated} /></div>
+        <span className="font-mono">{data[3]!.expr}</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a4} onChange={setA4} correct={String(data[3]!.ans)} validated={validated} /></div>
       </div>
     </div>
   );
@@ -240,8 +265,8 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les opérations avec les nombres relatifs</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <p className="text-xs text-[var(--color-text-secondary)]">Consigne : effectuez les opérations avec les nombres relatifs.</p>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -267,150 +292,168 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
 function gcd(a: number, b: number): number { return b === 0 ? a : gcd(b, a % b); }
 function simplify(n: number, d: number): [number, number] {
   const g = gcd(Math.abs(n), Math.abs(d));
-  return [n / g, d / g];
+  const sign = d < 0 ? -1 : 1;
+  return [(n / g) * sign, Math.abs(d / g)];
+}
+
+type FracQ = { n1: number; d1: number; n2: number; d2: number; op: "+" | "−" | "×" | "÷"; ansN: number; ansD: number };
+
+function VFracNum({ n, d }: { n: number; d: number }) {
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle">
+      <span className="flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      <span className="flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
+    </span>
+  );
+}
+
+function VFracInputOne({ n, d, missing, value, onChange, validated }: {
+  n: number; d: number; missing: "num" | "den"; value: string; onChange: (v: string) => void; validated: boolean;
+}) {
+  const inputCls = "h-8 w-12 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center text-sm font-mono outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  const fixedCls = "flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle">
+      {missing === "num" ? <input type="text" value={value} onChange={e => onChange(e.target.value)} disabled={validated} className={inputCls} /> : <span className={fixedCls}>{n}</span>}
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      {missing === "den" ? <input type="text" value={value} onChange={e => onChange(e.target.value)} disabled={validated} className={inputCls} /> : <span className={fixedCls}>{d}</span>}
+    </span>
+  );
+}
+
+function VFracInputBoth({ num, den, onNum, onDen, validated }: {
+  num: string; den: string; onNum: (v: string) => void; onDen: (v: string) => void; validated: boolean;
+}) {
+  const inputCls = "h-8 w-12 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center text-sm font-mono outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  return (
+    <span className="inline-flex flex-col items-center gap-[2px] align-middle">
+      <input type="text" value={num} onChange={e => onNum(e.target.value)} disabled={validated} className={inputCls} />
+      <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
+      <input type="text" value={den} onChange={e => onDen(e.target.value)} disabled={validated} className={inputCls} />
+    </span>
+  );
+}
+
+function makeSimpleFrac(allowNegative = false): [number, number] {
+  const d = randInt(2, 9);
+  let n = randInt(1, d - 1);
+  if (allowNegative && Math.random() < 0.5) n *= -1;
+  return simplify(n, d);
+}
+
+function makeFracOp(op: FracQ["op"], allowNegative = false): FracQ {
+  const [n1, d1] = makeSimpleFrac(allowNegative);
+  let [n2, d2] = makeSimpleFrac(allowNegative);
+  while (op === "÷" && n2 === 0) [n2, d2] = makeSimpleFrac(allowNegative);
+  const raw =
+    op === "+" ? [n1 * d2 + n2 * d1, d1 * d2] :
+    op === "−" ? [n1 * d2 - n2 * d1, d1 * d2] :
+    op === "×" ? [n1 * n2, d1 * d2] :
+    [n1 * d2, d1 * n2];
+  const [ansN, ansD] = simplify(raw[0]!, raw[1]!);
+  return { n1, d1, n2, d2, op, ansN, ansD };
+}
+
+function FracAnswerRow({ q, idx, num, den, onNum, onDen, validated }: {
+  q: FracQ; idx: number; num: string; den: string; onNum: (v: string) => void; onDen: (v: string) => void; validated: boolean;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+      <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{idx}.</span>
+      <VFracNum n={q.n1} d={q.d1} />
+      <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.op}</span>
+      <VFracNum n={q.n2} d={q.d2} />
+      <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+      <VFracInputBoth num={num} den={den} onNum={onNum} onDen={onDen} validated={validated} />
+    </div>
+  );
 }
 
 export function Exercise31({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // 8 fraction questions, 0.5 pt each = 4 pts total
-    // q1: simplify a fraction
-    const g1 = [2, 3, 4][randInt(0, 2)]!;
-    const n1r = randInt(2, 7), d1r = randInt(n1r + 1, 12);
-    const [n1s, d1s] = simplify(n1r * g1, d1r * g1);
+    const sN = randInt(1, 9);
+    let sD = randInt(2, 10);
+    while (gcd(sN, sD) !== 1) sD = randInt(2, 10);
+    const k1 = randInt(2, 9);
+    const missing: "num" | "den" = Math.random() < 0.5 ? "num" : "den";
 
-    // q2: convert mixed to improper fraction
-    const whole2 = randInt(2, 5), num2 = randInt(1, 4), den2 = randInt(num2 + 1, 7);
-    const impN2 = whole2 * den2 + num2;
+    const q2sN = randInt(1, 9);
+    let q2sD = randInt(2, 10);
+    while (gcd(q2sN, q2sD) !== 1) q2sD = randInt(2, 10);
+    const k2 = randInt(2, 9);
 
-    // q3: addition same denominator
-    const den3 = randInt(3, 8);
-    const n3a = randInt(1, den3 - 1), n3b = randInt(1, den3 - 1);
-    const sumN3 = n3a + n3b;
-    const [sn3, sd3] = simplify(sumN3, den3);
-
-    // q4: subtraction same denominator
-    const den4 = randInt(4, 10);
-    const n4a = randInt(3, den4 * 2), n4b = randInt(1, n4a - 1);
-    const diffN4 = n4a - n4b;
-    const [sn4, sd4] = simplify(diffN4, den4);
-
-    // q5: addition different denominators (LCD = d5a * d5b)
-    const d5a = [2, 3, 4, 5][randInt(0, 3)]!;
-    const d5b = [3, 4, 5, 6].filter((x) => x !== d5a)[randInt(0, 2)]!;
-    const n5a = randInt(1, d5a - 1), n5b = randInt(1, d5b - 1);
-    const lcd5 = d5a * d5b;
-    const sumN5 = n5a * d5b + n5b * d5a;
-    const [sn5, sd5] = simplify(sumN5, lcd5);
-
-    // q6: multiply fractions
-    const n6a = randInt(2, 5), d6a = randInt(3, 7);
-    const n6b = randInt(2, 5), d6b = randInt(3, 7);
-    const [sn6, sd6] = simplify(n6a * n6b, d6a * d6b);
-
-    // q7: divide fractions
-    const n7a = randInt(2, 5), d7a = randInt(3, 7);
-    const n7b = randInt(2, 5), d7b = randInt(3, 7);
-    const [sn7, sd7] = simplify(n7a * d7b, d7a * n7b);
-
-    // q8: fraction of a number
-    const den8 = [2, 4, 5, 10][randInt(0, 3)]!;
-    const num8 = randInt(1, den8 - 1);
-    const base8 = den8 * randInt(2, 8);
-    const ans8 = (num8 * base8) / den8;
-
-    return { n1r, d1r, g1, n1s, d1s, whole2, num2, den2, impN2,
-      n3a, n3b, den3, sn3, sd3, n4a, n4b, den4, sn4, sd4,
-      d5a, d5b, n5a, n5b, sn5, sd5, n6a, d6a, n6b, d6b, sn6, sd6,
-      n7a, d7a, n7b, d7b, sn7, sd7, num8, den8, base8, ans8 };
+    return {
+      q1: { bigN: sN * k1, bigD: sD * k1, smallN: sN, smallD: sD, missing, answer: missing === "num" ? sN : sD },
+      q2: { bigN: q2sN * k2, bigD: q2sD * k2, smallN: q2sN, smallD: q2sD },
+      q3: makeFracOp("+"),
+      q4: makeFracOp("−"),
+      q5: makeFracOp(Math.random() < 0.5 ? "+" : "−", true),
+      q6: makeFracOp("×"),
+      q7: makeFracOp("÷"),
+      q8: makeFracOp(Math.random() < 0.5 ? "×" : "÷", true),
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
-  const setAns = (i: number) => (v: string) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a));
+  const [q1Ans, setQ1Ans] = useState("");
+  const [nums, setNums] = useState<string[]>(() => Array(7).fill(""));
+  const [dens, setDens] = useState<string[]>(() => Array(7).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    const checks = [
-      () => {
-        // simplify: accept n1s/d1s or whole number if d1s=1
-        const inp = (answers[0] ?? "").trim().replace(/\s/g, "");
-        if (data.d1s === 1) return inp === String(data.n1s);
-        return inp === `${data.n1s}/${data.d1s}` || inp === `${data.n1s}`;
-      },
-      () => {
-        const inp = (answers[1] ?? "").trim().replace(/\s/g, "");
-        return inp === `${data.impN2}/${data.den2}`;
-      },
-      () => {
-        const inp = (answers[2] ?? "").trim().replace(/\s/g, "");
-        if (data.sd3 === 1) return inp === String(data.sn3);
-        return inp === `${data.sn3}/${data.sd3}`;
-      },
-      () => {
-        const inp = (answers[3] ?? "").trim().replace(/\s/g, "");
-        if (data.sd4 === 1) return inp === String(data.sn4);
-        return inp === `${data.sn4}/${data.sd4}`;
-      },
-      () => {
-        const inp = (answers[4] ?? "").trim().replace(/\s/g, "");
-        if (data.sd5 === 1) return inp === String(data.sn5);
-        return inp === `${data.sn5}/${data.sd5}`;
-      },
-      () => {
-        const inp = (answers[5] ?? "").trim().replace(/\s/g, "");
-        if (data.sd6 === 1) return inp === String(data.sn6);
-        return inp === `${data.sn6}/${data.sd6}`;
-      },
-      () => {
-        const inp = (answers[6] ?? "").trim().replace(/\s/g, "");
-        if (data.sd7 === 1) return inp === String(data.sn7);
-        return inp === `${data.sn7}/${data.sd7}`;
-      },
-      () => matchNum(answers[7] ?? "", data.ans8),
+    if ((q1Ans.trim() ?? "") === String(data.q1.answer)) pts += 0.5;
+    const expected = [
+      [data.q2.smallN, data.q2.smallD],
+      [data.q3.ansN, data.q3.ansD],
+      [data.q4.ansN, data.q4.ansD],
+      [data.q5.ansN, data.q5.ansD],
+      [data.q6.ansN, data.q6.ansD],
+      [data.q7.ansN, data.q7.ansD],
+      [data.q8.ansN, data.q8.ansD],
     ];
-    checks.forEach((check) => { if (check()) pts += 0.5; });
+    expected.forEach(([n, d], i) => {
+      if ((nums[i] ?? "").trim() === String(n) && (dens[i] ?? "").trim() === String(d)) pts += 0.5;
+    });
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const corrFrac = (n: number, d: number) => d === 1 ? String(n) : `${n}/${d}`;
+  const setNum = (i: number) => (v: string) => setNums(prev => { const n = [...prev]; n[i] = v; return n; });
+  const setDen = (i: number) => (v: string) => setDens(prev => { const n = [...prev]; n[i] = v; return n; });
+  const opQuestions = [data.q3, data.q4, data.q5, data.q6, data.q7, data.q8];
 
   return (
-    <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Écrire les fractions sous la forme n/d (ex: 3/4)</p>
-      <div className="grid gap-y-2 gap-x-2 items-center" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="text-sm">Simplifier <Frac n={data.n1r * data.g1} d={data.d1r * data.g1} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[0] ?? ""} onChange={setAns(0)} correct={corrFrac(data.n1s, data.d1s)} validated={validated} /></div>
+    <div className="space-y-4">
+      <p className="text-xs text-[var(--color-text-secondary)]">Consigne : complétez, simplifiez et calculez les fractions.</p>
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+          <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">1.</span>
+          <VFracNum n={data.q1.bigN} d={data.q1.bigD} />
+          <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+          <VFracInputOne n={data.q1.smallN} d={data.q1.smallD} missing={data.q1.missing} value={q1Ans} onChange={setQ1Ans} validated={validated} />
+        </div>
 
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="text-sm">{data.whole2} <Frac n={data.num2} d={data.den2} className="text-xs" /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[1] ?? ""} onChange={setAns(1)} correct={`${data.impN2}/${data.den2}`} validated={validated} /></div>
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+          <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">2.</span>
+          <VFracNum n={data.q2.bigN} d={data.q2.bigD} />
+          <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
+          <VFracInputBoth num={nums[0] ?? ""} den={dens[0] ?? ""} onNum={setNum(0)} onDen={setDen(0)} validated={validated} />
+        </div>
 
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="text-sm"><Frac n={data.n3a} d={data.den3} /> + <Frac n={data.n3b} d={data.den3} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[2] ?? ""} onChange={setAns(2)} correct={corrFrac(data.sn3, data.sd3)} validated={validated} /></div>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="text-sm"><Frac n={data.n4a} d={data.den4} /> − <Frac n={data.n4b} d={data.den4} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[3] ?? ""} onChange={setAns(3)} correct={corrFrac(data.sn4, data.sd4)} validated={validated} /></div>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">5.</span>
-        <span className="text-sm"><Frac n={data.n5a} d={data.d5a} /> + <Frac n={data.n5b} d={data.d5b} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[4] ?? ""} onChange={setAns(4)} correct={corrFrac(data.sn5, data.sd5)} validated={validated} /></div>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">6.</span>
-        <span className="text-sm"><Frac n={data.n6a} d={data.d6a} /> × <Frac n={data.n6b} d={data.d6b} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[5] ?? ""} onChange={setAns(5)} correct={corrFrac(data.sn6, data.sd6)} validated={validated} /></div>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">7.</span>
-        <span className="text-sm"><Frac n={data.n7a} d={data.d7a} /> ÷ <Frac n={data.n7b} d={data.d7b} /></span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[6] ?? ""} onChange={setAns(6)} correct={corrFrac(data.sn7, data.sd7)} validated={validated} /></div>
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">8.</span>
-        <span className="text-sm"><Frac n={data.num8} d={data.den8} /> de {data.base8}</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInput value={answers[7] ?? ""} onChange={setAns(7)} correct={Number.isInteger(data.ans8) ? String(data.ans8) : fmtDec(data.ans8, 2)} validated={validated} /></div>
+        {opQuestions.map((q, i) => (
+          <FracAnswerRow
+            key={i}
+            q={q}
+            idx={i + 3}
+            num={nums[i + 1] ?? ""}
+            den={dens[i + 1] ?? ""}
+            onNum={setNum(i + 1)}
+            onDen={setDen(i + 1)}
+            validated={validated}
+          />
+        ))}
       </div>
     </div>
   );
@@ -426,13 +469,15 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
     const base1 = randInt(2, 20) * 10;
     const ans1 = (pct1 * base1) / 100;
 
-    // q2: pricing - integer units of fruit → decimal CHF
+    // q2: pricing - integer units of fruit/vegetable -> decimal CHF
     const qty = randInt(1, 9);
+    let targetQty = randInt(1, 9);
+    while (targetQty === qty) targetQty = randInt(1, 9);
     const fruitName = fruits[randInt(0, fruits.length - 1)]!;
-    const pricePerUnit = (1 + randInt(0, 8) * 0.1);
-    const ans2 = parseFloat((qty * pricePerUnit).toFixed(2));
+    const price = randInt(11, 99) / 10;
+    const ans2 = parseFloat(((targetQty * price) / qty).toFixed(2));
 
-    return { pct1, base1, ans1, qty, fruitName, pricePerUnit, ans2 };
+    return { pct1, base1, ans1, qty, targetQty, fruitName, price, ans2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -450,14 +495,17 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les pourcentages et les prix proportionnels</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <p className="text-xs text-[var(--color-text-secondary)]">Consigne : calculez le pourcentage, puis le prix proportionnel demandé.</p>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.pct1}% de {data.base1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>{data.qty} {data.fruitName} → {fmtDec(data.pricePerUnit, 1)} CHF</span>
+        <span className="space-y-1">
+          <span className="block">{data.qty} {data.fruitName} → {fmtDec(data.price, 1)} CHF</span>
+          <span className="block">{data.targetQty} {data.fruitName}</span>
+        </span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
       </div>
     </div>
@@ -500,7 +548,7 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.expr1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInputText value={a1} onChange={setA1} correct={data.corr1} validated={validated} width="w-24" /></div>
@@ -543,7 +591,7 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>Si x = {data.x1}, calculer {data.a}x + {data.b}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} /></div>
@@ -593,7 +641,7 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.a1}x + {data.b1} = {data.c1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">x =</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.x1)} validated={validated} /></div>
@@ -677,7 +725,7 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -836,3 +884,4 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
     </div>
   );
 }
+

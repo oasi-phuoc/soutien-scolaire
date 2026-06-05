@@ -6,11 +6,6 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Racine carrée (carrés parfaits)",
-        en: "Square root (perfect squares)",
-        ar: "الجذر التربيعي (مربعات تامة)",
-        fa: "جذر مربع (مربعات کامل)",
-        ti: "ስርወ-ካሬ (ፍጹም ካሬታት)",
-        uk: "Квадратний корінь (точні квадрати)",
       },
       paragraphs: { fr: [] },
       blocks: [

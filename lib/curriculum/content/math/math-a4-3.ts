@@ -4,7 +4,7 @@ export const MATH_A4_3_LESSON: MathSubmoduleLesson = {
     submoduleId: "A4-3",
     submoduleCode: "A4.3",
     theory: {
-      title: { fr: "Comparaison de fractions", en: "Comparing fractions", ar: "مقارنة الكسور", fa: "مقایسه کسرها", ti: "መقارنة ፍርቂ", uk: "Порівняння дробів" },
+      title: { fr: "Comparaison de fractions",},
       paragraphs: {
         fr: [
           "Comparer des fractions signifie déterminer si une fraction est plus grande, plus petite ou égale à une autre fraction.",

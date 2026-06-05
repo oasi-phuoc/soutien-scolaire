@@ -6,11 +6,6 @@ export const MATH_A10_5_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Équations avec fractions",
-        en: "Equations with fractions",
-        ar: "معادلات بالكسور",
-        fa: "معادلات با کسر",
-        ti: "ምዕርርያ ምስ ምምቅቅዮ",
-        uk: "Рівняння з дробами",
       },
       paragraphs: { fr: [] },
       blocks: [

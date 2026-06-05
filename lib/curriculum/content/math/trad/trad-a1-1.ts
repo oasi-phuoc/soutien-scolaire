@@ -10,6 +10,9 @@ export const TRAD_A1_1: SubmoduleTrad = {
     ti: "ምቑጻር ብፈረንሳይ",
     uk: "Лічба французькою",
     pt: "Contar em francês",
+    so: "Tirinta Faransiiska",
+    tr: "Fransizca sayma",
+    ps: "په فرانسوي کې شمېرل",
   },
   paragraphs: {
     fr: [
@@ -47,6 +50,21 @@ export const TRAD_A1_1: SubmoduleTrad = {
       "Em francês, os milhares são frequentemente separados por um espaço fino: 125 000.",
       "Na Suíça francófona, usa-se frequentemente septante, huitante e nonante para 70, 80 e 90.",
     ],
+    so: [
+          "Tiro dhan waxaa lagu qoraa lambarro (0 ilaa 9).",
+          "Faransiiska, kumannada badanaa waxaa lagu kala saaraa meel bannaan oo dhuuban: 125 000.",
+          "Iswiiska Faransiiska lagaga hadlo, dadku badanaa waxay 70, 80 iyo 90 u yiraahdaan septante, huitante iyo nonante.",
+        ],
+    tr: [
+          "Tam sayi rakamlarla yazilir (0 ile 9 arasi).",
+          "Fransizcada binlikler cogu zaman ince bir boslukla ayrilir: 125 000.",
+          "Fransizca konusulan Isvicre'de 70, 80 ve 90 icin sikca septante, huitante ve nonante denir.",
+        ],
+    ps: [
+          "صحيح عدد د رقمونو په وسیله ليکل کېږي (له 0 تر 9).",
+          "په فرانسوي کې زرګونه ډېر وخت په نري تش ځای بېلېږي: 125 000.",
+          "د سويس په فرانسوي ژبو سيمه کې د 70، 80 او 90 لپاره ډېر وخت septante، huitante او nonante ويل کېږي.",
+        ],
   },
   readAloud: {
     heading: {
@@ -57,6 +75,9 @@ export const TRAD_A1_1: SubmoduleTrad = {
       ti: "ምዝገባ",
       uk: "Запис",
       pt: "Gravação",
+      so: "Duubis",
+      tr: "Kayit",
+      ps: "ثبت",
     },
     legend: [
       {
@@ -69,6 +90,9 @@ export const TRAD_A1_1: SubmoduleTrad = {
           uk: "Червоний: один звук",
           ti: "ቀይሕ: ሓደ ድምጺ",
           pt: "Vermelho: um som",
+          so: "Casaan: hal cod",
+          tr: "Kirmizi: tek ses",
+          ps: "سور: يو غږ",
         },
       },
       {
@@ -81,6 +105,9 @@ export const TRAD_A1_1: SubmoduleTrad = {
           uk: "Чорний: звук",
           ti: "ጸሊም: ድምጺ",
           pt: "Preto: som",
+          so: "Madow: cod",
+          tr: "Siyah: ses",
+          ps: "تور: غږ",
         },
       },
       {
@@ -93,6 +120,9 @@ export const TRAD_A1_1: SubmoduleTrad = {
           uk: "Сірий: без звуку",
           ti: "ሕምብርቲ: ድምጺ የብሉን",
           pt: "Cinza: sem som",
+          so: "Cawl: cod la'aan",
+          tr: "Gri: sessiz",
+          ps: "خړ: بې غږه",
         },
       },
     ],

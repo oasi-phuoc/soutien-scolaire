@@ -6,11 +6,6 @@ export const MATH_A12_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Problèmes à deux inconnues",
-        en: "Problems with two unknowns",
-        ar: "مسائل بمجهولين",
-        fa: "مسائل با دو مجهول",
-        ti: "ጸገማት ምስ ክልተ ዘይፍለጥ",
-        uk: "Задачі з двома невідомими",
       },
       paragraphs: { fr: [] },
       blocks: [

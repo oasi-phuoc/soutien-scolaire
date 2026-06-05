@@ -7,12 +7,6 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Compter en français",
-      en: "Counting in French",
-      ar: "العد بالفرنسية",
-      fa: "شمارش به فرانسوی",
-      ti: "ምቑጻር ብፈረንሳይ",
-      uk: "Лічба французькою",
-      pt: "Contar em francês",
     },
 
     paragraphs: {
@@ -20,42 +14,6 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
         "Un **nombre** entier s’écrit avec des chiffres (de **0** à **9**).",
         "En français, on sépare souvent les milliers par une espace fine : 125 000.",
         "En Suisse romande, on utilise souvent septante, huitante et nonante pour **70**, **80** et **90**.",
-      ],
-
-      en: [
-        "A **whole number** is written with digits (0 to 9).",
-        "In French, thousands are often separated by a thin space: 125 000.",
-        "In French-speaking Switzerland, people often say septante, huitante and nonante for 70, 80 and 90.",
-      ],
-
-      ar: [
-        "نكتب العدد الصحيح بأرقام من 0 إلى 9.",
-        "في الفرنسية، نفصل الآلاف أحيانًا بمسافة رفيعة : 125 000.",
-        "في الروماندي السويسري يقال غالبًا septante وhuitante وnonante لـ 70 و80 و90.",
-      ],
-
-      fa: [
-        "عدد صحیح را با ارقام ۰ تا ۹ می‌نویسیم.",
-        "در فرانسوی، هزارگان را گاه با فاصلهٔ ظریف جدا می‌کنند: ۱۲۵ ۰۰۰.",
-        "در سوئیس رماند معمولاً برای ۷۰ و ۸۰ و ۹۰ می‌گویند septante، huitante، nonante.",
-      ],
-
-      ti: [
-        "ኣኃዝቲ ብኣሃዝቲ 0-9 ይጽዓን።",
-        "ኣብ ፈረንሳይ ሽሕታት ብልዝብ ክፈልጹ ይኽእሉ።",
-        "ኣብ ስዊዘርላንድ ብ 70-80-90 septante ፡ huitante ፡ nonante ይበሃሉ።",
-      ],
-
-      uk: [
-        "Ціле число записують цифрами від 0 до 9.",
-        "У французькій тисячі часто відокремлюють тонким пробілом: 125 000.",
-        "У романській Швейцарії для 70, 80 і 90 часто кажуть septante, huitante, nonante.",
-      ],
-
-      pt: [
-        "Um número inteiro é escrito com algarismos (0 a 9).",
-        "Em francês, os milhares são frequentemente separados por um espaço fino: 125 000.",
-        "Na Suíça francófona, usa-se frequentemente septante, huitante e nonante para 70, 80 e 90.",
       ],
     },
 
@@ -66,40 +24,16 @@ export const MATH_A1_1_LESSON: MathSubmoduleLesson = {
         {
           swatch: "red",
           labelFr: "Rouge : un seul son",
-          labelPivot: {
-            en: "Red: one sound",
-            ar: "أحمر: صوت واحد",
-            fa: "قرمز: یک صدا",
-            uk: "Червоний: один звук",
-            ti: "ቀይሕ: ሓደ ድምጺ",
-            pt: "Vermelho: um som",
-          },
         },
 
         {
           swatch: "text",
           labelFr: "Noir : son",
-          labelPivot: {
-            en: "Black: sound",
-            ar: "أسود: صوت",
-            fa: "سیاه: صدا",
-            uk: "Чорний: звук",
-            ti: "ጸሊም: ድምጺ",
-            pt: "Preto: som",
-          },
         },
 
         {
           swatch: "gray",
           labelFr: "Gris : pas de son",
-          labelPivot: {
-            en: "Gray: silent",
-            ar: "رمادي: بدون صوت",
-            fa: "خاکستری: بی‌صدا",
-            uk: "Сірий: без звуку",
-            ti: "ሕምብርቲ: ድምጺ የብሉን",
-            pt: "Cinza: sem som",
-          },
         },
       ],
 

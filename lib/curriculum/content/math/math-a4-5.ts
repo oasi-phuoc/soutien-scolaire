@@ -7,11 +7,6 @@ export const MATH_A4_5_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Multiplication de fractions",
-      en: "Multiplication of fractions",
-      ar: "ضرب الكسور",
-      fa: "ضرب کسرها",
-      ti: "ምብዛሕ ክፍሊታት",
-      uk: "Множення дробів",
     },
 
     paragraphs: {

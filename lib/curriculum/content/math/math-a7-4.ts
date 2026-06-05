@@ -6,11 +6,6 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
   theory: {
     title: {
       fr: "Multiplication et division — règle des signes",
-      en: "Multiplication and division — sign rules",
-      ar: "الضرب والقسمة — قاعدة الإشارات",
-      fa: "ضرب و تقسیم — قانون علائم",
-      ti: "ዘርፊ ምስ ክፍፍል — ሕጊ ምልክት",
-      uk: "Множення і ділення — правило знаків",
     },
     paragraphs: { fr: [] },
     blocks: [
