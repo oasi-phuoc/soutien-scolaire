@@ -828,7 +828,7 @@ function genFracReadItems(): FracShapeItem[] {
 // ── Exercise 22 — Colorier les fractions (A4.1 Ex2+Ex4 style) ────────────────
 
 export function Exercise22({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const items = useMemo(genFracColorItems, [exerciseKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const items = useMemo(genFracColorItems, [exerciseKey]);
   const [coloredSets, setColoredSets] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
 
   useEffect(() => {
@@ -881,7 +881,7 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
 // ── ExerciseFracRead — Lire les fractions (A4.1 Ex3+Ex5 style) ───────────────
 
 export function ExerciseFracRead({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
-  const items = useMemo(genFracReadItems, [exerciseKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  const items = useMemo(genFracReadItems, [exerciseKey]);
   const [nums, setNums] = useState<string[]>(() => Array(4).fill(""));
   const [dens, setDens] = useState<string[]>(() => Array(4).fill(""));
 

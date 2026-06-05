@@ -148,7 +148,8 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
     const ans3 = (a3 + b3 * c3) - (d3 - e3);
     // expr4: a × (b + c) − d ÷ e (mixed operations)
     const a4 = randInt(2, 6), b4 = randInt(2, 10), c4 = randInt(2, 10);
-    let d4 = randInt(4, 20), e4 = randInt(2, 4);
+    let e4 = randInt(2, 4);
+    const d4 = randInt(4, 20);
     while (d4 % e4 !== 0) { e4 = e4 === 2 ? 4 : 2; }
     const ans4 = a4 * (b4 + c4) - d4 / e4;
     return { a, b, c, d, ans1, a2, b2, c2, d2, e2, ans2, a3, b3, c3, d3, e3, ans3, a4, b4, c4, d4, e4, ans4 };
