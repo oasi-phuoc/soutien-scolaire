@@ -770,31 +770,59 @@ function pickMultiShapeCfg(): { kind: ShapeKind; d: number } {
 }
 
 function genFracColorItems(): FracShapeItem[] {
-  return [
-    ...Array.from({ length: 2 }, () => {
-      const cfg = pickSingleShapeCfg();
-      return { ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false };
-    }),
-    ...Array.from({ length: 2 }, () => {
-      const cfg = pickMultiShapeCfg();
-      const copies = randInt(2, 3);
-      return { ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true };
-    }),
-  ];
+  const items: FracShapeItem[] = [];
+  const usedConfigs = new Set<string>();
+
+  // Generate 2 single shapes
+  for (let i = 0; i < 2; i++) {
+    let cfg;
+    do {
+      cfg = pickSingleShapeCfg();
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
+    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
+  }
+
+  // Generate 2 multi-shapes
+  for (let i = 0; i < 2; i++) {
+    let cfg;
+    do {
+      cfg = pickMultiShapeCfg();
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
+    const copies = randInt(2, 3);
+    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+  }
+
+  return items;
 }
 
 function genFracReadItems(): FracShapeItem[] {
-  return [
-    ...Array.from({ length: 2 }, () => {
-      const cfg = pickSingleShapeCfg();
-      return { ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false };
-    }),
-    ...Array.from({ length: 2 }, () => {
-      const cfg = pickMultiShapeCfg();
-      const copies = randInt(2, 3);
-      return { ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true };
-    }),
-  ];
+  const items: FracShapeItem[] = [];
+  const usedConfigs = new Set<string>();
+
+  // Generate 2 single shapes
+  for (let i = 0; i < 2; i++) {
+    let cfg;
+    do {
+      cfg = pickSingleShapeCfg();
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
+    items.push({ ...cfg, n: randInt(1, cfg.d - 1), copies: 1, multi: false });
+  }
+
+  // Generate 2 multi-shapes
+  for (let i = 0; i < 2; i++) {
+    let cfg;
+    do {
+      cfg = pickMultiShapeCfg();
+    } while (usedConfigs.has(`${cfg.kind}-${cfg.d}`));
+    usedConfigs.add(`${cfg.kind}-${cfg.d}`);
+    const copies = randInt(2, 3);
+    items.push({ ...cfg, n: randInt(cfg.d + 1, copies * cfg.d - 1), copies, multi: true });
+  }
+
+  return items;
 }
 
 // ── Exercise 22 — Colorier les fractions (A4.1 Ex2+Ex4 style) ────────────────
