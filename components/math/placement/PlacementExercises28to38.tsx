@@ -111,6 +111,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
+      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les puissances, racines et opérations avec les puissances de 10</p>
       <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.q1.base}<sup>3</sup></span>
@@ -136,30 +137,43 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
 
 export function Exercise29({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // expr1: a + b × c − d
+    // expr1: a + b × c − d (basic order)
     const a = randInt(2, 15), b = randInt(2, 9), c = randInt(2, 9), d = randInt(1, 10);
     const ans1 = a + b * c - d;
-    // expr2: (a + b) × c − d × e
+    // expr2: (a + b) × c − d × e (parentheses)
     const a2 = randInt(2, 12), b2 = randInt(2, 12), c2 = randInt(2, 6), d2 = randInt(2, 8), e2 = randInt(2, 5);
     const ans2 = (a2 + b2) * c2 - d2 * e2;
-    return { a, b, c, d, ans1, a2, b2, c2, d2, e2, ans2 };
+    // expr3: [a + b × c] − [d − e] (brackets)
+    const a3 = randInt(1, 8), b3 = randInt(2, 6), c3 = randInt(2, 7), d3 = randInt(5, 15), e3 = randInt(2, 8);
+    const ans3 = (a3 + b3 * c3) - (d3 - e3);
+    // expr4: a × (b + c) − d ÷ e (mixed operations)
+    const a4 = randInt(2, 6), b4 = randInt(2, 10), c4 = randInt(2, 10);
+    let d4 = randInt(4, 20), e4 = randInt(2, 4);
+    while (d4 % e4 !== 0) { e4 = e4 === 2 ? 4 : 2; }
+    const ans4 = a4 * (b4 + c4) - d4 / e4;
+    return { a, b, c, d, ans1, a2, b2, c2, d2, e2, ans2, a3, b3, c3, d3, e3, ans3, a4, b4, c4, d4, e4, ans4 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
   const [a1, setA1] = useState("");
   const [a2, setA2] = useState("");
+  const [a3, setA3] = useState("");
+  const [a4, setA4] = useState("");
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     if (matchNum(a1, data.ans1)) pts++;
     if (matchNum(a2, data.ans2)) pts++;
-    onValidated(pts, 2);
+    if (matchNum(a3, data.ans3)) pts++;
+    if (matchNum(a4, data.ans4)) pts++;
+    onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
   return (
     <div className="space-y-3">
+      <p className="text-xs text-[var(--color-text-secondary)]">Respectez l&apos;ordre des opérations</p>
       <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.a} + {data.b} × {data.c} − {data.d}</span>
@@ -168,6 +182,14 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
         <span className="font-mono">({data.a2} + {data.b2}) × {data.c2} − {data.d2} × {data.e2}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={String(data.ans2)} validated={validated} /></div>
+
+        <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
+        <span className="font-mono">[{data.a3} + {data.b3} × {data.c3}] − [{data.d3} − {data.e3}]</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a3} onChange={setA3} correct={String(data.ans3)} validated={validated} /></div>
+
+        <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
+        <span className="font-mono">{data.a4} × ({data.b4} + {data.c4}) − {data.d4} ÷ {data.e4}</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a4} onChange={setA4} correct={String(data.ans4)} validated={validated} /></div>
       </div>
     </div>
   );
@@ -217,6 +239,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
+      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les opérations avec les nombres relatifs</p>
       <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
@@ -395,17 +418,20 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 // ── Exercise 32: Percentage + rule of 3 ──────────────────────────────────────
 
 export function Exercise32({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
+  const fruits = ["pommes", "bananes", "oranges", "poires", "fraises", "carottes", "tomates", "citrons", "raisins", "prunes"];
   const data = useMemo(() => {
     // q1: percentage of a number
     const pct1 = [10, 20, 25, 30, 50, 75][randInt(0, 5)]!;
     const base1 = randInt(2, 20) * 10;
     const ans1 = (pct1 * base1) / 100;
 
-    // q2: rule of 3 — find x
-    const a = randInt(2, 8), b = randInt(2, 12), c = randInt(2, 8);
-    const ans2 = (b * c) / a;
+    // q2: pricing - integer units of fruit → decimal CHF
+    const qty = randInt(1, 9);
+    const fruitName = fruits[randInt(0, fruits.length - 1)]!;
+    const pricePerUnit = (1 + randInt(0, 8) * 0.1);
+    const ans2 = parseFloat((qty * pricePerUnit).toFixed(2));
 
-    return { pct1, base1, ans1, a, b, c, ans2 };
+    return { pct1, base1, ans1, qty, fruitName, pricePerUnit, ans2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -423,14 +449,15 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
+      <p className="text-xs text-[var(--color-text-secondary)]">Calculez les pourcentages et les prix proportionnels</p>
       <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.pct1}% de {data.base1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>Si {data.a} → {data.b}, alors {data.c} →</span>
-        <div className="flex items-center gap-1.5"><CorrectionInput value={a2} onChange={setA2} correct={Number.isInteger(data.ans2) ? String(data.ans2) : fmtDec(data.ans2, 2)} validated={validated} /></div>
+        <span className="font-mono">{data.qty} {data.fruitName} → {fmtDec(data.pricePerUnit, 1)} CHF</span>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
       </div>
     </div>
   );
@@ -471,7 +498,7 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions (ex: 5x + 3y)</p>
+      <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions</p>
       <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.expr1}</span>
