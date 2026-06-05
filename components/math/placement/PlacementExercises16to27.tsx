@@ -129,7 +129,7 @@ function genSeq17Int() {
   const startMax = isAsc ? 50000 - totalSpan : 50000;
   const start = randInt(startMin, startMax);
   const vals = Array.from({ length: 6 }, (_, i) => isAsc ? start + i * step : start - i * step);
-  const pairStart = randInt(0, 4);
+  const pairStart = randInt(1, 3);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
 }
 
@@ -148,7 +148,7 @@ function genSeq17Dec() {
     const u = isAsc ? startK + i * stepK : startK - i * stepK;
     return Math.round(u * 5) / 100; // u × 0.05
   });
-  const pairStart = randInt(0, 4);
+  const pairStart = randInt(1, 3);
   return { vals, visPos: [pairStart, pairStart + 1] as [number, number], isAsc };
 }
 
