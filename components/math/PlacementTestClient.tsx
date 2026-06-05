@@ -91,7 +91,7 @@ const EXERCISES: ExerciseMeta[] = [
   { id: 30, label: "Nombres relatifs", maxPoints: 4, component: Exercise30 },
   { id: 31, label: "Fractions", maxPoints: 4, component: Exercise31 },
   { id: 32, label: "Pourcentages et règle de trois", maxPoints: 2, component: Exercise32 },
-  { id: 33, label: "Simplification algébrique", maxPoints: 2, component: Exercise33 },
+  { id: 33, label: "Simplification algébrique", maxPoints: 4, component: Exercise33 },
   { id: 34, label: "Évaluer des expressions", maxPoints: 2, component: Exercise34 },
   { id: 35, label: "Résoudre des équations", maxPoints: 2, component: Exercise35 },
   { id: 36, label: "Conversions d'unités", maxPoints: 4, component: Exercise36 },
@@ -189,10 +189,11 @@ function PlacementProgressBar({
 interface ResultsScreenProps {
   scores: Array<{ points: number; maxPoints: number } | null>;
   exercises: ExerciseMeta[];
-  onBack: () => void;
+  selectedIdx: number;
+  onSelectExercise: (idx: number) => void;
 }
 
-function ResultsScreen({ scores, exercises, onBack }: ResultsScreenProps) {
+function ResultsScreen({ scores, exercises, selectedIdx, onSelectExercise }: ResultsScreenProps) {
   const totalPoints = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
   const maxPoints = exercises.reduce((s, e) => s + e.maxPoints, 0);
   const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
@@ -204,7 +205,6 @@ function ResultsScreen({ scores, exercises, onBack }: ResultsScreenProps) {
         <p className="text-3xl font-bold text-[var(--color-text-primary)]">
           {totalPoints} <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
         </p>
-        <p className="text-sm text-[var(--color-text-secondary)]">{pct}%</p>
       </div>
 
       {/* Score bar */}
@@ -215,44 +215,39 @@ function ResultsScreen({ scores, exercises, onBack }: ResultsScreenProps) {
         />
       </div>
 
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Cliquez sur un exercice dans le détail des points pour afficher l&apos;énoncé, vos réponses et les corrections.
+      </p>
+
       {/* Per-exercise list */}
-      <details className="rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-        <summary className="cursor-pointer px-3 py-2 text-sm font-bold text-[var(--color-text-primary)]">
-          Détail des points par exercice
-        </summary>
-        <div className="space-y-2 border-t border-[var(--color-border-default)] p-3">
+      <div className="space-y-3">
+        <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
+        <div className="space-y-2">
           {exercises.map((ex, i) => {
             const sc = scores[i];
             const pts = sc?.points ?? 0;
             const max = ex.maxPoints;
-            const exPct = max > 0 ? Math.round((pts / max) * 100) : 0;
+            const isSelected = i === selectedIdx;
             return (
-              <div key={ex.id} className="flex items-center gap-3 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-3 py-2">
+              <button
+                key={ex.id}
+                type="button"
+                onClick={() => onSelectExercise(i)}
+                className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
+                  isSelected
+                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                }`}
+              >
                 <span className="text-xs font-bold text-[var(--color-accent-alg)] w-5">{ex.id}</span>
                 <span className="flex-1 text-xs text-[var(--color-text-secondary)] truncate">{ex.label}</span>
                 <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{pts} / {max}</span>
-                <div className="w-16 h-1.5 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
-                  <div
-                    className={`h-full rounded-full ${exPct >= 60 ? "bg-amber-500" : "bg-red-400"}`}
-                    style={{ width: `${exPct}%` }}
-                  />
-                </div>
-              </div>
+              </button>
             );
           })}
-          <p className="text-xs text-[var(--color-text-secondary)]">
-            Les corrections détaillées par réponse seront disponibles quand les exercices exposeront leurs réponses individuelles.
-          </p>
         </div>
-      </details>
+      </div>
 
-      <button
-        type="button"
-        onClick={onBack}
-        className="w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
-      >
-        Retour aux modules
-      </button>
     </div>
   );
 }
@@ -275,6 +270,7 @@ export function PlacementTestClient() {
   const [skipAccepted, setSkipAccepted] = useState(false);
   const [skipRequested, setSkipRequested] = useState(false);
   const [savedResult, setSavedResult] = useState(false);
+  const [selectedResultIdx, setSelectedResultIdx] = useState(0);
   const exerciseKeys = useMemo(() => EXERCISES.map((_, i) => sessionKey * 100 + i), [sessionKey]);
 
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -315,13 +311,18 @@ export function PlacementTestClient() {
   }, []);
 
   function goNext() {
+    if (!validated[currentIdx]) {
+      triggerValidate();
+      return;
+    }
     // Skip validated exercises
     const next = findNextNonValidated(currentIdx, 1);
     if (next >= 0) {
       goTo(next);
     } else {
-      // All remaining exercises validated → show results
-      setPhase("results");
+      const firstMissing = validated.findIndex(v => !v);
+      if (firstMissing >= 0) goTo(firstMissing);
+      else setPhase("results");
     }
   }
 
@@ -420,6 +421,7 @@ export function PlacementTestClient() {
     setScores(Array(TOTAL_EXERCISES).fill(null));
     setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
     setCurrentIdx(0);
+    setSelectedResultIdx(0);
     setTimeLeft(TIMER_SECONDS);
     setSavedResult(false);
     setPhase("running");
@@ -433,6 +435,7 @@ export function PlacementTestClient() {
     setScores(Array(TOTAL_EXERCISES).fill(null));
     setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
     setCurrentIdx(0);
+    setSelectedResultIdx(0);
     setTimeLeft(TIMER_SECONDS);
     setSavedResult(false);
     setPhase("running");
@@ -457,13 +460,6 @@ export function PlacementTestClient() {
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
               </button>
               <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
-              <button
-                type="button"
-                onClick={() => setSkipConfirmOpen(true)}
-                className="ml-auto rounded-[var(--radius-lg)] bg-amber-500 px-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
-              >
-                Skip
-              </button>
             </div>
           </header>
 
@@ -499,50 +495,32 @@ export function PlacementTestClient() {
             Commencer le test
           </button>
         </div>
-        {skipConfirmOpen && (
-          <div className="fixed inset-0 z-50 flex items-end bg-black/40 p-4 sm:items-center sm:justify-center">
-            <div className="w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-5 shadow-xl">
-              <h2 className="text-base font-bold text-[var(--color-text-primary)]">Passer directement aux résultats</h2>
-              <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
-                Ce bouton valide tous les exercices immédiatement, sans répondre aux questions, puis affiche la page de résultats.
-              </p>
-              <label className="mt-4 flex items-start gap-2 text-sm text-[var(--color-text-primary)]">
-                <input type="checkbox" checked={skipAccepted} onChange={e => setSkipAccepted(e.target.checked)} className="mt-1" />
-                <span>Je confirme que je veux valider l&apos;entièreté du test maintenant.</span>
-              </label>
-              <div className="mt-5 flex justify-end gap-2">
-                <button type="button" onClick={() => setSkipConfirmOpen(false)} className="rounded-lg border border-[var(--color-border-default)] px-4 py-2 text-sm font-semibold text-[var(--color-text-secondary)]">Annuler</button>
-                <button type="button" disabled={!skipAccepted} onClick={confirmSkipAll} className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-bold text-white disabled:opacity-40">Valider tout</button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     );
   }
 
   // ── Results screen ─────────────────────────────────────────────────────────
 
-  if (phase === "results") {
-    if (timerRef.current) clearInterval(timerRef.current);
-    return (
-      <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
-        <ResultsScreen
-          scores={scores}
-          exercises={EXERCISES}
-          onBack={() => router.push("/mathematiques")}
-        />
-      </div>
-    );
-  }
+  if (phase === "results" && timerRef.current) clearInterval(timerRef.current);
 
   // ── Running phase ──────────────────────────────────────────────────────────
 
   const ex = EXERCISES[currentIdx]!;
+  const selectedResultExercise = EXERCISES[selectedResultIdx]!;
   const isCurrentValidated = validated[currentIdx] ?? false;
+  const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 px-4 py-6 pb-40">
+    <div className={`mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}`}>
+      {phase === "results" ? (
+        <ResultsScreen
+          scores={scores}
+          exercises={EXERCISES}
+          selectedIdx={selectedResultIdx}
+          onSelectExercise={setSelectedResultIdx}
+        />
+      ) : (
+      <>
       {/* Page header */}
       <div className="mb-4 flex items-center gap-2">
         <button
@@ -554,7 +532,33 @@ export function PlacementTestClient() {
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+        <button
+          type="button"
+          onClick={() => setSkipConfirmOpen(true)}
+          className="ml-auto rounded-[var(--radius-lg)] bg-amber-500 px-3 py-2 text-xs font-bold text-white transition-opacity hover:opacity-90"
+        >
+          Skip
+        </button>
       </div>
+
+      {skipConfirmOpen && (
+        <div className="fixed inset-0 z-50 flex items-end bg-black/40 p-4 sm:items-center sm:justify-center">
+          <div className="w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-5 shadow-xl">
+            <h2 className="text-base font-bold text-[var(--color-text-primary)]">Passer directement aux résultats</h2>
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
+              Ce bouton valide tous les exercices immédiatement, sans répondre aux questions, puis affiche la page de résultats.
+            </p>
+            <label className="mt-4 flex items-start gap-2 text-sm text-[var(--color-text-primary)]">
+              <input type="checkbox" checked={skipAccepted} onChange={e => setSkipAccepted(e.target.checked)} className="mt-1" />
+              <span>Je confirme que je veux valider l&apos;entièreté du test maintenant.</span>
+            </label>
+            <div className="mt-5 flex justify-end gap-2">
+              <button type="button" onClick={() => setSkipConfirmOpen(false)} className="rounded-lg border border-[var(--color-border-default)] px-4 py-2 text-sm font-semibold text-[var(--color-text-secondary)]">Annuler</button>
+              <button type="button" disabled={!skipAccepted} onClick={confirmSkipAll} className="rounded-lg bg-amber-500 px-4 py-2 text-sm font-bold text-white disabled:opacity-40">Valider tout</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Progress bar */}
       <PlacementProgressBar
@@ -573,15 +577,26 @@ export function PlacementTestClient() {
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
         <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
+      </>
+      )}
+
+      {phase === "results" && (
+        <div className="mb-4 mt-6 flex items-center justify-between">
+          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {selectedResultExercise.id}</h2>
+          <span className="text-xs text-[var(--color-text-secondary)]">
+            {scores[selectedResultIdx]?.points ?? 0} / {selectedResultExercise.maxPoints} pt{selectedResultExercise.maxPoints > 1 ? "s" : ""}
+          </span>
+        </div>
+      )}
 
       {/* All exercises mounted simultaneously — only current is visible */}
       {EXERCISES.map((exercise, i) => {
         const Comp = exercise.component;
         return (
-          <div key={i} className={i !== currentIdx ? "hidden" : ""}>
+          <div key={i} className={i !== displayExerciseIdx ? "hidden" : ""}>
             <Comp
               exerciseKey={exerciseKeys[i]!}
-              validated={validated[i] ?? false}
+              validated={phase === "results" ? true : (validated[i] ?? false)}
               onValidated={(pts, max) => handleValidated(i, pts, max)}
               validateTrigger={validateTriggers[i] ?? 0}
             />
@@ -589,7 +604,18 @@ export function PlacementTestClient() {
         );
       })}
 
+      {phase === "results" && (
+        <button
+          type="button"
+          onClick={() => router.push("/mathematiques")}
+          className="mt-6 w-full rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-90"
+        >
+          Retour aux modules
+        </button>
+      )}
+
       {/* Navigation bar (fixed bottom) */}
+      {phase !== "results" && (
       <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
@@ -626,6 +652,7 @@ export function PlacementTestClient() {
         </div>
         <div style={{ height: 68 }} />
       </div>
+      )}
     </div>
   );
 }

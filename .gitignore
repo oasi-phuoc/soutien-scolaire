@@ -48,3 +48,7 @@ tmp_algo_outline.txt
 # PDFs de référence (non versionnés)
 ref/*.pdf
 .claude/
+
+# fichiers locaux ignorés pour ce push
+scripts/audit-math-a1-a13-trad-coverage.cjs
+supabase/migrations/20260605000000_profiles_progress_and_placement.sql

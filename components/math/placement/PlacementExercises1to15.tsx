@@ -28,7 +28,7 @@ function shuffle<T>(arr: T[]): T[] {
 function CorrectionInput({
   value,
   onChange,
-  correct: _correct,
+  correct,
   validated,
   width = "w-16",
   placeholder = "",
@@ -40,15 +40,23 @@ function CorrectionInput({
   width?: string;
   placeholder?: string;
 }) {
+  const showCorrection = validated && value.trim() !== correct.trim();
   return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      placeholder={placeholder}
-      disabled={validated}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
-    />
+    <span className="inline-flex flex-col items-center gap-0.5 align-middle">
+      <input
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        disabled={validated}
+        className={`${width} h-9 rounded border px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 disabled:opacity-80 ${
+          showCorrection
+            ? "border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-200"
+            : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20"
+        }`}
+      />
+      {showCorrection && <span className="text-[10px] font-semibold text-green-600">✓ {correct}</span>}
+    </span>
   );
 }
 
@@ -62,8 +70,8 @@ function makeShapes(count: number, seed: number): Array<{ x: number; y: number; 
   let attempts = 0;
   while (positions.length < count && attempts < 1000) {
     attempts++;
-    const x = 12 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 276;
-    const y = 10 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 60;
+    const x = 16 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 268;
+    const y = 16 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 64;
     const tooClose = used.some(u => Math.hypot(u.x - x, u.y - y) < 22);
     if (!tooClose) {
       used.push({ x, y });
@@ -94,11 +102,13 @@ function ShapeSvg({ shape, x, y, size = 7 }: { shape: ShapeType; x: number; y: n
 function ShapeFrame({ count, shape, seed }: { count: number; shape: ShapeType; seed: number }) {
   const positions = useMemo(() => makeShapes(count, seed), [count, seed]);
   return (
-    <svg viewBox="0 0 300 80" className="h-20 w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]">
-      {positions.map(p => (
-        <ShapeSvg key={p.id} shape={shape} x={p.x} y={p.y} size={p.size} />
-      ))}
-    </svg>
+    <div className="h-24 w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-[5px]">
+      <svg viewBox="0 0 300 96" className="h-full w-full">
+        {positions.map(p => (
+          <ShapeSvg key={p.id} shape={shape} x={p.x} y={p.y} size={p.size} />
+        ))}
+      </svg>
+    </div>
   );
 }
 
@@ -130,18 +140,19 @@ export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger
         { count: data.count1, shape: data.shape1, seed: data.seed1, ans: ans1, setAns: setAns1 },
         { count: data.count2, shape: data.shape2, seed: data.seed2, ans: ans2, setAns: setAns2 },
       ].map((item, idx) => (
-        <div key={idx} className="flex w-full items-center gap-3">
-          <div className="flex-1">
-            <ShapeFrame count={item.count} shape={item.shape} seed={item.seed} />
-          </div>
+        <div key={idx} className="space-y-2">
+          <ShapeFrame count={item.count} shape={item.shape} seed={item.seed} />
+          <div className="flex items-center gap-2">
+            <span className="w-5 text-sm font-semibold text-[var(--color-accent-alg)]">{idx + 1}.</span>
           <CorrectionInput
             value={item.ans}
             onChange={item.setAns}
             correct={String(item.count)}
             validated={validated}
-            width="w-14"
+            width="w-20"
             placeholder="?"
           />
+          </div>
         </div>
       ))}
     </div>
@@ -253,8 +264,8 @@ function SeqQuestion({
   onChange: (idx: 0 | 1, v: string) => void;
 }) {
   return (
-    <div className="space-y-2">
-      <span className="text-xs font-bold text-[var(--color-accent-alg)]">Séquence {qNum}</span>
+    <div className="flex items-center gap-2">
+      <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-alg)]">{qNum}.</span>
       <div className="flex items-center gap-1.5 flex-wrap">
         {values.map((v, i) => {
           const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
@@ -388,6 +399,7 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
 
   return (
     <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
       {questions.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
           <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
@@ -477,9 +489,9 @@ export function Exercise5({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le nombre manquant.</p>
-      <div className="space-y-1">
+      <div className="space-y-3">
         {questions.map((q, i) => (
-          <div key={i} className="flex items-center gap-1">
+          <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {renderMissingOpRow(
               q,
@@ -648,7 +660,7 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes.</p>
       <div className="space-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -875,10 +887,10 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  function renderSeq(values: number[], blanks: [number, number], ans: [string, string], setAns: (a: [string, string]) => void, label: string) {
+  function renderSeq(values: number[], blanks: [number, number], ans: [string, string], setAns: (a: [string, string]) => void, qNum: number) {
     return (
-      <div className="space-y-2">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">{label}</span>
+      <div className="flex items-center gap-2">
+        <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-alg)]">{qNum}.</span>
         <div className="flex items-center gap-1">
           {values.map((v, i) => {
             const blankIdx: 0 | 1 | -1 = blanks[0] === i ? 0 : blanks[1] === i ? 1 : -1;
@@ -894,12 +906,12 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
                   }}
                   correct={String(v)}
                   validated={validated}
-                  width="h-9 w-16 px-1 rounded-full"
+                  width="h-9 w-[60px] px-1 rounded-full"
                 />
               );
             }
             return (
-              <div key={i} className="inline-flex h-9 w-16 items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
+              <div key={i} className="inline-flex h-9 w-[60px] items-center justify-center rounded-full border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] font-mono text-sm font-semibold text-[var(--color-text-primary)]">{v}</div>
             );
           })}
         </div>
@@ -909,9 +921,9 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
-      {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, "Série 1")}
-      {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, "Série 2")}
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
+      {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, 1)}
+      {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, 2)}
     </div>
   );
 }
