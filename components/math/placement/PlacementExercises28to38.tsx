@@ -457,7 +457,7 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="font-mono">{data.qty} {data.fruitName} → {fmtDec(data.pricePerUnit, 1)} CHF</span>
+        <span>{data.qty} {data.fruitName} → {fmtDec(data.pricePerUnit, 1)} CHF</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
       </div>
     </div>
