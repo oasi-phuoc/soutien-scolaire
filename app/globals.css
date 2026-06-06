@@ -85,6 +85,11 @@ body {
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans), system-ui, sans-serif;
 }
 
+.placement-test-font,
+.placement-test-font * {
+  font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans), system-ui, sans-serif !important;
+}
+
 /* Hide number input spinners in Firefox */
 input[type=number] {
   -moz-appearance: textfield;

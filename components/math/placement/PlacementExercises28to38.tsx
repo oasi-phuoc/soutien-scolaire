@@ -150,7 +150,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content auto auto auto max-content max-content" }}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content max-content max-content max-content max-content max-content" }}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="justify-self-end">{data.q1.base}<sup>3</sup></span>
         <span />
@@ -386,7 +386,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content auto auto auto max-content max-content" }}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content max-content max-content max-content max-content max-content" }}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -428,29 +428,27 @@ function VFracNum({ n, d }: { n: number; d: number }) {
   );
 }
 
-function VFracInputOne({ n, d, missing, value, onChange, validated }: {
-  n: number; d: number; missing: "num" | "den"; value: string; onChange: (v: string) => void; validated: boolean;
+function VFracInputOne({ n, d, missing, value, onChange, validated, correct }: {
+  n: number; d: number; missing: "num" | "den"; value: string; onChange: (v: string) => void; validated: boolean; correct: string;
 }) {
-  const inputCls = "h-8 w-12 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center text-sm font-mono outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   const fixedCls = "flex h-8 w-12 items-center justify-center text-sm tabular-nums text-[var(--color-text-primary)]";
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle">
-      {missing === "num" ? <input type="text" value={value} onChange={e => onChange(e.target.value)} disabled={validated} className={inputCls} /> : <span className={fixedCls}>{n}</span>}
+      {missing === "num" ? <CorrectionInput value={value} onChange={onChange} correct={correct} validated={validated} width="w-12" /> : <span className={fixedCls}>{n}</span>}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      {missing === "den" ? <input type="text" value={value} onChange={e => onChange(e.target.value)} disabled={validated} className={inputCls} /> : <span className={fixedCls}>{d}</span>}
+      {missing === "den" ? <CorrectionInput value={value} onChange={onChange} correct={correct} validated={validated} width="w-12" /> : <span className={fixedCls}>{d}</span>}
     </span>
   );
 }
 
-function VFracInputBoth({ num, den, onNum, onDen, validated }: {
-  num: string; den: string; onNum: (v: string) => void; onDen: (v: string) => void; validated: boolean;
+function VFracInputBoth({ num, den, onNum, onDen, validated, correctNum, correctDen }: {
+  num: string; den: string; onNum: (v: string) => void; onDen: (v: string) => void; validated: boolean; correctNum: string; correctDen: string;
 }) {
-  const inputCls = "h-8 w-12 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center text-sm font-mono outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle">
-      <input type="text" value={num} onChange={e => onNum(e.target.value)} disabled={validated} className={inputCls} />
+      <CorrectionInput value={num} onChange={onNum} correct={correctNum} validated={validated} width="w-12" />
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      <input type="text" value={den} onChange={e => onDen(e.target.value)} disabled={validated} className={inputCls} />
+      <CorrectionInput value={den} onChange={onDen} correct={correctDen} validated={validated} width="w-12" />
     </span>
   );
 }
@@ -485,7 +483,7 @@ function FracAnswerRow({ q, idx, num, den, onNum, onDen, validated }: {
       <span className="text-base font-semibold text-[var(--color-text-primary)]">{q.op}</span>
       <VFracNum n={q.n2} d={q.d2} />
       <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-      <VFracInputBoth num={num} den={den} onNum={onNum} onDen={onDen} validated={validated} />
+      <VFracInputBoth num={num} den={den} onNum={onNum} onDen={onDen} validated={validated} correctNum={String(q.ansN)} correctDen={String(q.ansD)} />
     </div>
   );
 }
@@ -552,14 +550,14 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
           <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">1.</span>
           <VFracNum n={data.q1.bigN} d={data.q1.bigD} />
           <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-          <VFracInputOne n={data.q1.smallN} d={data.q1.smallD} missing={data.q1.missing} value={q1Ans} onChange={setQ1Ans} validated={validated} />
+          <VFracInputOne n={data.q1.smallN} d={data.q1.smallD} missing={data.q1.missing} value={q1Ans} onChange={setQ1Ans} validated={validated} correct={String(data.q1.answer)} />
         </div>
 
         <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
           <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">2.</span>
           <VFracNum n={data.q2.bigN} d={data.q2.bigD} />
           <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
-          <VFracInputBoth num={nums[0] ?? ""} den={dens[0] ?? ""} onNum={setNum(0)} onDen={setDen(0)} validated={validated} />
+          <VFracInputBoth num={nums[0] ?? ""} den={dens[0] ?? ""} onNum={setNum(0)} onDen={setDen(0)} validated={validated} correctNum={String(data.q2.smallN)} correctDen={String(data.q2.smallD)} />
         </div>
 
         {opQuestions.map((q, i) => (
@@ -621,12 +619,15 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
         <span>{data.pct1}% de {data.base1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="space-y-1">
-          <span className="block">{data.qty} kg de {data.fruitName} → {fmtDec(data.price, 1)} CHF</span>
-          <span className="block">{data.targetQty} kg de {data.fruitName}</span>
-        </span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
+        <span className="self-start pt-1 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+        <div className="col-span-2 space-y-1">
+          <div>{data.qty} kg de {data.fruitName} → {fmtDec(data.price, 1)} CHF</div>
+          <div className="flex items-center gap-3">
+            <span>{data.targetQty} kg de {data.fruitName}</span>
+            <span className="text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" />
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -896,7 +897,7 @@ function InlineFraction({ top, bottom }: { top: React.ReactNode; bottom: React.R
 
 export function Exercise35({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    type EqQ = { expr: React.ReactNode; ans: number };
+    type EqQ = { left: React.ReactNode; right: React.ReactNode; ans: number };
     type EqTemplate = () => EqQ;
     const xVal = () => {
       let x = randInt(-12, 12);
@@ -907,29 +908,29 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
     const pick = (items: EqTemplate[]) => items[randInt(0, items.length - 1)]!();
 
     const medium: EqTemplate[] = [
-      () => { const x=xVal(), a=randInt(2,8), b=randInt(-15,15); return { expr: <>{a}x {s(b)} = {a*x+b}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,12); return { expr: <>{a}(x {s(b)}) = {a*(x+b)}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(3,9), b=randInt(1,12), c=randInt(1,6); return { expr: <>{a}x {s(b)} = {c}x {s((a-c)*x+b)}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,8), b=randInt(1,12), c=randInt(2,8); return { expr: <>{a}(x − {b}) + {c} = {a*(x-b)+c}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,6), b=randInt(1,8), c=randInt(1,10); return { expr: <>{a}x − ({b}x {s(c)}) = {(a-b)*x-c}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), b=randInt(2,7), c=randInt(1,10); return { expr: <>{a}(x + {b}) − {c}x = {(a-c)*x+a*b}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,8), b=randInt(1,10), c=randInt(1,8); return { expr: <>{a}x + {b} = {a*x+b+c} − {c}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,9), c=randInt(2,7); return { expr: <>{a}(x + {b}) = {c}x {s((a-c)*x+a*b)}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,9), b=randInt(1,10), c=randInt(1,8); return { expr: <>{a}x − {b} = {a*x-b-c} + {c}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr: <>{a}(x − {c}) + {b}x = {(a+b)*x-a*c}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,8), b=randInt(-15,15); return { left: <>{a}x {s(b)}</>, right: <>{a*x+b}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,12); return { left: <>{a}(x {s(b)})</>, right: <>{a*(x+b)}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(3,9), b=randInt(1,12), c=randInt(1,6); return { left: <>{a}x {s(b)}</>, right: <>{c}x {s((a-c)*x+b)}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,8), b=randInt(1,12), c=randInt(2,8); return { left: <>{a}(x − {b}) + {c}</>, right: <>{a*(x-b)+c}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,6), b=randInt(1,8), c=randInt(1,10); return { left: <>{a}x − ({b}x {s(c)})</>, right: <>{(a-b)*x-c}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), b=randInt(2,7), c=randInt(1,10); return { left: <>{a}(x + {b}) − {c}x</>, right: <>{(a-c)*x+a*b}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,8), b=randInt(1,10), c=randInt(1,8); return { left: <>{a}x + {b}</>, right: <>{a*x+b+c} − {c}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,9), c=randInt(2,7); return { left: <>{a}(x + {b})</>, right: <>{c}x {s((a-c)*x+a*b)}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,9), b=randInt(1,10), c=randInt(1,8); return { left: <>{a}x − {b}</>, right: <>{a*x-b-c} + {c}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { left: <>{a}(x − {c}) + {b}x</>, right: <>{(a+b)*x-a*c}</>, ans:x }; },
     ];
 
     const hard: EqTemplate[] = [
-      () => { const x=xVal(), d=randInt(2,6), b=randInt(1,8), r=x+b; return { expr: <><InlineFraction top={<>x + {b}</>} bottom={d} /> = {r / d}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,8), d=randInt(2,6), r=a*x/d; return { expr: <><InlineFraction top={<>{a}x</>} bottom={d} /> = {r}</>, ans:x }; },
-      () => { const x=xVal(), d=randInt(2,6), b=randInt(1,8), c=randInt(1,8), r=(x-b)/d+c; return { expr: <><InlineFraction top={<>x − {b}</>} bottom={d} /> + {c} = {r}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,8), d=randInt(2,6), r=(a*x+b)/d; return { expr: <><InlineFraction top={<>{a}x + {b}</>} bottom={d} /> = {r}</>, ans:x }; },
-      () => { let x=xVal(), c=randInt(1,8); while (x + c === 0) { x=xVal(); c=randInt(1,8); } const k=randInt(2,6), d=k*(x+c); return { expr: <><InlineFraction top={d} bottom={<>x + {c}</>} /> = {k}</>, ans:x }; },
-      () => { let x=xVal(), b=randInt(1,8); while (x - b === 0) { x=xVal(); b=randInt(1,8); } const k=randInt(2,6), a=k*(x-b); return { expr: <><InlineFraction top={a} bottom={<>x − {b}</>} /> = {k}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,6), d=randInt(2,6), b=randInt(1,7), r=(x+b)/d+a; return { expr: <>{a} + <InlineFraction top={<>x + {b}</>} bottom={d} /> = {r}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), d=randInt(2,6), b=randInt(1,7), r=(a*x-b)/d; return { expr: <><InlineFraction top={<>{a}x − {b}</>} bottom={d} /> = {r}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,6), b=randInt(1,8), d=randInt(2,6), c=randInt(1,6), r=(a*x+b)/d-c; return { expr: <><InlineFraction top={<>{a}x + {b}</>} bottom={d} /> − {c} = {r}</>, ans:x }; },
-      () => { let x=xVal(), b=randInt(1,8); while (x + b === 0) { x=xVal(); b=randInt(1,8); } const k=randInt(2,6), a=k*(x+b); return { expr: <><InlineFraction top={a} bottom={<>x + {b}</>} /> = {k}</>, ans:x }; },
+      () => { const x=xVal(), d=randInt(2,6), b=randInt(1,8), r=x+b; return { left: <><InlineFraction top={<>x + {b}</>} bottom={d} /></>, right: <>{r / d}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,8), d=randInt(2,6), r=a*x/d; return { left: <><InlineFraction top={<>{a}x</>} bottom={d} /></>, right: <>{r}</>, ans:x }; },
+      () => { const x=xVal(), d=randInt(2,6), b=randInt(1,8), c=randInt(1,8), r=(x-b)/d+c; return { left: <><InlineFraction top={<>x − {b}</>} bottom={d} /> + {c}</>, right: <>{r}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,8), d=randInt(2,6), r=(a*x+b)/d; return { left: <><InlineFraction top={<>{a}x + {b}</>} bottom={d} /></>, right: <>{r}</>, ans:x }; },
+      () => { let x=xVal(), c=randInt(1,8); while (x + c === 0) { x=xVal(); c=randInt(1,8); } const k=randInt(2,6), d=k*(x+c); return { left: <><InlineFraction top={d} bottom={<>x + {c}</>} /></>, right: <>{k}</>, ans:x }; },
+      () => { let x=xVal(), b=randInt(1,8); while (x - b === 0) { x=xVal(); b=randInt(1,8); } const k=randInt(2,6), a=k*(x-b); return { left: <><InlineFraction top={a} bottom={<>x − {b}</>} /></>, right: <>{k}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,6), d=randInt(2,6), b=randInt(1,7), r=(x+b)/d+a; return { left: <>{a} + <InlineFraction top={<>x + {b}</>} bottom={d} /></>, right: <>{r}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), d=randInt(2,6), b=randInt(1,7), r=(a*x-b)/d; return { left: <><InlineFraction top={<>{a}x − {b}</>} bottom={d} /></>, right: <>{r}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,6), b=randInt(1,8), d=randInt(2,6), c=randInt(1,6), r=(a*x+b)/d-c; return { left: <><InlineFraction top={<>{a}x + {b}</>} bottom={d} /> − {c}</>, right: <>{r}</>, ans:x }; },
+      () => { let x=xVal(), b=randInt(1,8); while (x + b === 0) { x=xVal(); b=randInt(1,8); } const k=randInt(2,6), a=k*(x+b); return { left: <><InlineFraction top={a} bottom={<>x + {b}</>} /></>, right: <>{k}</>, ans:x }; },
     ];
 
     return [pick(medium), pick(hard)];
@@ -953,15 +954,16 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
       <div className="space-y-4 text-sm">
         {[{ ans: a1, setAns: setA1 }, { ans: a2, setAns: setA2 }].map((state, i) => (
-          <div key={i} className="space-y-2">
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono">{data[i]!.expr}</span>
-            </div>
-            <div className="ml-6 flex items-center gap-1.5">
-              <span className="text-[var(--color-text-secondary)]">x =</span>
-              <CorrectionInput value={state.ans} onChange={state.setAns} correct={String(data[i]!.ans)} validated={validated} />
-            </div>
+          <div key={i} className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "max-content minmax(0, max-content) max-content max-content" }}>
+            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono">{data[i]!.left}</span>
+            <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
+            <span className="font-mono">{data[i]!.right}</span>
+
+            <span />
+            <span />
+            <span className="justify-self-center text-[var(--color-text-secondary)]">x =</span>
+            <CorrectionInput value={state.ans} onChange={state.setAns} correct={String(data[i]!.ans)} validated={validated} />
           </div>
         ))}
       </div>
@@ -982,7 +984,7 @@ const UNIT_GROUPS: Record<string, UnitGroup> = {
     factors: [1, 1000, 1000000, 1000000000],
   },
   capacity: {
-    units: ["mL", "cL", "dL", "L"],
+    units: ["ml", "cl", "dl", "l"],
     factors: [1, 10, 100, 1000],
   },
   mass: {
@@ -999,13 +1001,11 @@ function genConversion(group: UnitGroup): { value: number; from: string; to: str
     ti = randInt(0, n - 1);
   } while (fi === ti);
   const factor = group.factors[ti]! / group.factors[fi]!;
-  let value: number;
-  if (factor >= 1) {
-    // converting to smaller unit: use a simple number
-    value = randInt(1, 20);
-  } else {
-    // converting to larger unit: use a value that's a multiple
-    value = randInt(1, 20) * (1 / factor);
+  const decimals = Math.random() < 0.5 ? 1 : 2;
+  const scale = 10 ** decimals;
+  let value = randInt(10 * scale, 999 * scale) / scale;
+  while (Math.round(value * scale) % 10 === 0) {
+    value = randInt(10 * scale, 999 * scale) / scale;
   }
   return { value, from: group.units[fi]!, to: group.units[ti]!, ans: value * factor };
 }
@@ -1167,7 +1167,9 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire. (π = 3,14)</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">
+        Calculez le périmètre et l&apos;aire. (<span className="font-bold text-[var(--color-accent-alg)]">π</span> = 3,14)
+      </p>
       <svg viewBox="0 0 180 140" width={180} height={140} className="block mx-auto">
         <circle cx={svgCx} cy={svgCy} r={svgR}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />

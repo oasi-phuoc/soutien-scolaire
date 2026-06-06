@@ -175,6 +175,7 @@ function CompareQuestion({
   qNum,
   a,
   b,
+  correct,
   validated,
   selected,
   onSelect,
@@ -182,6 +183,7 @@ function CompareQuestion({
   qNum: number;
   a: number;
   b: number;
+  correct: CompOp;
   validated: boolean;
   selected: CompOp | null;
   onSelect: (op: CompOp) => void;
@@ -194,9 +196,11 @@ function CompareQuestion({
       <div className="flex gap-1">
         {ops.map((op) => {
           const isSelected = selected === op;
+          const isCorrect = correct === op;
           let cls = "flex h-8 w-8 items-center justify-center rounded border font-mono text-sm font-bold transition-colors ";
           if (validated) {
-            if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)] opacity-60";
+            if (isCorrect) cls += "border-amber-400 bg-amber-50 text-amber-700";
+            else if (isSelected) cls += "border-red-300 bg-red-50 text-red-500 line-through opacity-70";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
           } else {
             if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
@@ -245,6 +249,7 @@ export function Exercise2({ exerciseKey, validated, onValidated, validateTrigger
           qNum={i + 1}
           a={q.a}
           b={q.b}
+          correct={q.correct}
           validated={validated}
           selected={answers[i] ?? null}
           onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
@@ -570,10 +575,12 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
   const carryLabel = op === "-" ? "E" : "R";
 
   const digitInput = (col: number) => (
-    <input type="text" inputMode="numeric" maxLength={1} value={answers[col] ?? ""}
-      disabled={validated}
-      onChange={e => onChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+    <CorrectionInput
+      value={answers[col] ?? ""}
+      onChange={v => onChange(col, v.replace(/[^0-9]/g, "").slice(-1))}
+      correct={String(rD[col])}
+      validated={validated}
+      width="w-8"
     />
   );
 
@@ -687,12 +694,11 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
 
 function PlaceValueCard({ n, cols, answers, onChange, validated }: {
   n: number;
-  cols: { label: string; accept: (v: string) => boolean }[];
+  cols: { label: string; accept: (v: string) => boolean; correct: string }[];
   answers: string[];
   onChange: (col: number, val: string) => void;
   validated: boolean;
 }) {
-  const inputCls = "w-full rounded border bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 px-1 py-1.5 text-center text-sm outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
   return (
     <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
       <div className="mb-3 flex justify-center">
@@ -706,9 +712,13 @@ function PlaceValueCard({ n, cols, answers, onChange, validated }: {
           <React.Fragment key={ci}>
             {ci > 0 && <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>}
             <div className="flex flex-1 flex-col items-center gap-0.5">
-              <input type="text" inputMode="numeric" value={answers[ci] ?? ""} disabled={validated}
-                onChange={e => onChange(ci, e.target.value.replace(/[^0-9]/g, ""))}
-                className={inputCls} />
+              <CorrectionInput
+                value={answers[ci] ?? ""}
+                onChange={v => onChange(ci, v.replace(/[^0-9]/g, ""))}
+                correct={col.correct}
+                validated={validated}
+                width="w-full"
+              />
               <span className="text-xs text-[var(--color-text-secondary)]">{col.label}</span>
             </div>
           </React.Fragment>
@@ -751,8 +761,8 @@ export function Exercise8({ exerciseKey, validated, onValidated, validateTrigger
       {questions.map((q, i) => (
         <PlaceValueCard key={i} n={q.n}
           cols={[
-            { label: "dizaine", accept: v => v === String(q.d) || v === String(q.d * 10) },
-            { label: "unité",   accept: v => v === String(q.u) },
+            { label: "dizaine", accept: v => v === String(q.d) || v === String(q.d * 10), correct: String(q.d) },
+            { label: "unité",   accept: v => v === String(q.u), correct: String(q.u) },
           ]}
           answers={answers[i] ?? []}
           onChange={(col, val) => setAnswers(prev => { const n = prev.map(r => [...r]); n[i]![col] = val; return n; })}
@@ -832,6 +842,7 @@ export function Exercise9({ exerciseKey, validated, onValidated, validateTrigger
           qNum={i + 1}
           a={q.a}
           b={q.b}
+          correct={q.a < q.b ? "<" : q.a > q.b ? ">" : "="}
           validated={validated}
           selected={answers[i] ?? null}
           onSelect={(op) => setAnswers(prev => { const next = [...prev]; next[i] = op; return next; })}
@@ -1073,9 +1084,9 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
       <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre.</p>
       <PlaceValueCard n={data.n3}
         cols={[
-          { label: "centaine", accept: v => v === String(h3) || v === String(h3 * 100) },
-          { label: "dizaine",  accept: v => v === String(t3) || v === String(t3 * 10) },
-          { label: "unité",    accept: v => v === String(u3) },
+          { label: "centaine", accept: v => v === String(h3) || v === String(h3 * 100), correct: String(h3) },
+          { label: "dizaine",  accept: v => v === String(t3) || v === String(t3 * 10), correct: String(t3) },
+          { label: "unité",    accept: v => v === String(u3), correct: String(u3) },
         ]}
         answers={ans3}
         onChange={(col, val) => setAns3(prev => { const n = [...prev]; n[col] = val; return n; })}
@@ -1083,10 +1094,10 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
       />
       <PlaceValueCard n={data.n4}
         cols={[
-          { label: "millier",  accept: v => v === String(k4) || v === String(k4 * 1000) },
-          { label: "centaine", accept: v => v === String(h4) || v === String(h4 * 100) },
-          { label: "dizaine",  accept: v => v === String(t4) || v === String(t4 * 10) },
-          { label: "unité",    accept: v => v === String(u4) },
+          { label: "millier",  accept: v => v === String(k4) || v === String(k4 * 1000), correct: String(k4) },
+          { label: "centaine", accept: v => v === String(h4) || v === String(h4 * 100), correct: String(h4) },
+          { label: "dizaine",  accept: v => v === String(t4) || v === String(t4 * 10), correct: String(t4) },
+          { label: "unité",    accept: v => v === String(u4), correct: String(u4) },
         ]}
         answers={ans4}
         onChange={(col, val) => setAns4(prev => { const n = [...prev]; n[col] = val; return n; })}
@@ -1179,12 +1190,22 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
       className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
     />
   );
-  const digitIn = (idx: number) => (
-    <input type="text" inputMode="numeric" maxLength={1} value={answers[idx] ?? ""}
-      disabled={validated}
-      onChange={e => onChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
-    />
+  const digitIn = (idx: number, correct?: number | null) => (
+    correct == null ? (
+      <input type="text" inputMode="numeric" maxLength={1} value={answers[idx] ?? ""}
+        disabled={validated}
+        onChange={e => onChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
+        className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+      />
+    ) : (
+      <CorrectionInput
+        value={answers[idx] ?? ""}
+        onChange={v => onChange(idx, v.replace(/[^0-9]/g,"").slice(-1))}
+        correct={String(correct)}
+        validated={validated}
+        width="w-8"
+      />
+    )
   );
   const pre = (d: number, isL: boolean) => (
     <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{isL ? "" : d}</div>
@@ -1220,7 +1241,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
           <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(col, p1d[col])}</td>)}
           </tr>
           <tr>
             <td className="pr-1 text-right font-mono text-sm text-[var(--color-text-primary)]">+</td>
@@ -1228,7 +1249,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
               <td key={col} className="p-0.5 text-center">
                 {col === 4
                   ? <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
-                  : digitIn(5 + col)
+                  : digitIn(5 + col, p2d[col + 1])
                 }
               </td>
             ))}
@@ -1236,7 +1257,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
           <tr><td colSpan={numCols + 1}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
             <td />
-            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(10 + col)}</td>)}
+            {cols.map(col => <td key={col} className="p-0.5 text-center">{digitIn(10 + col, rd[col])}</td>)}
           </tr>
         </tbody>
       </table>
@@ -1426,7 +1447,13 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
                     ? Array.from({ length: quotientCols }, (_, qi) => (
                         <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
                           {qi < quotientStr.length
-                            ? digIn(quotientInputs[qi] ?? "", v => onQuotientChange(qi, v))
+                            ? <CorrectionInput
+                                value={quotientInputs[qi] ?? ""}
+                                onChange={v => onQuotientChange(qi, v.replace(/[^0-9]/g,"").slice(-1))}
+                                correct={quotientStr[qi] ?? ""}
+                                validated={validated}
+                                width="w-8"
+                              />
                             : emptyCell()
                           }
                         </td>
@@ -1458,9 +1485,12 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
               Reste :
             </td>
             <td style={{ width: CW, padding: 2 }} className="align-middle text-center">
-              <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
-                onChange={e => onRemainderChange(e.target.value.replace(/[^0-9]/g,"").slice(0,2))}
-                className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+              <CorrectionInput
+                value={remainderInput}
+                onChange={v => onRemainderChange(v.replace(/[^0-9]/g,"").slice(0,2))}
+                correct={String(dividend % divisor)}
+                validated={validated}
+                width="w-8"
               />
             </td>
             <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />

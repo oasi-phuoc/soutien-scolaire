@@ -266,20 +266,31 @@ export function PlacementTestClient() {
 
   // ── Navigation helpers ─────────────────────────────────────────────────────
 
+  function findOpenExercise(from: number, direction: 1 | -1, list = validated): number {
+    let idx = from + direction;
+    while (idx >= 0 && idx < TOTAL_EXERCISES) {
+      if (!list[idx]) return idx;
+      idx += direction;
+    }
+    return -1;
+  }
+
   const goTo = useCallback((idx: number) => {
     setCurrentIdx(idx);
   }, []);
 
   function goNext() {
-    if (currentIdx < TOTAL_EXERCISES - 1) goTo(currentIdx + 1);
-    else if (validated.every(Boolean)) setPhase("results");
+    const next = findOpenExercise(currentIdx, 1);
+    if (next >= 0) goTo(next);
   }
 
   function goPrev() {
-    if (currentIdx > 0) goTo(currentIdx - 1);
+    const prev = findOpenExercise(currentIdx, -1);
+    if (prev >= 0) goTo(prev);
   }
 
   function handleSegmentClick(idx: number) {
+    if (validated[idx]) return;
     setCurrentIdx(idx);
   }
 
@@ -294,7 +305,16 @@ export function PlacementTestClient() {
   }
 
   function handleValidated(exIdx: number, points: number, maxPoints: number) {
-    setValidated(prev => { const n = [...prev]; n[exIdx] = true; return n; });
+    setValidated(prev => {
+      const n = [...prev];
+      n[exIdx] = true;
+      const next = findOpenExercise(exIdx, 1, n);
+      const prevOpen = findOpenExercise(exIdx, -1, n);
+      if (next >= 0) setCurrentIdx(next);
+      else if (prevOpen >= 0) setCurrentIdx(prevOpen);
+      else setPhase("results");
+      return n;
+    });
     setScores(prev => { const n = [...prev]; n[exIdx] = { points, maxPoints }; return n; });
   }
 
@@ -375,7 +395,7 @@ export function PlacementTestClient() {
 
   if (phase === "idle") {
     return (
-      <div className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+      <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
         <div className="space-y-6">
           <header className="space-y-2">
             <p className="text-xs font-medium uppercase tracking-wide text-amber-600">Mathématiques</p>
@@ -437,10 +457,12 @@ export function PlacementTestClient() {
 
   const ex = EXERCISES[currentIdx]!;
   const isCurrentValidated = validated[currentIdx] ?? false;
+  const previousOpenIdx = findOpenExercise(currentIdx, -1);
+  const nextOpenIdx = findOpenExercise(currentIdx, 1);
   const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
   return (
-    <div className={`mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}`}>
+    <div className={`placement-test-font mx-auto w-full max-w-xl flex-1 px-4 ${phase === "results" ? "py-8 pb-32" : "py-6 pb-40"}`}>
       {phase === "results" ? (
         <ResultsScreen
           scores={scores}
@@ -575,7 +597,7 @@ export function PlacementTestClient() {
             <button
               type="button"
               onClick={goPrev}
-              disabled={currentIdx === 0}
+              disabled={previousOpenIdx < 0}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
@@ -596,7 +618,7 @@ export function PlacementTestClient() {
             <button
               type="button"
               onClick={goNext}
-              disabled={currentIdx === TOTAL_EXERCISES - 1 && !validated.every(Boolean)}
+              disabled={nextOpenIdx < 0}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Suivant
