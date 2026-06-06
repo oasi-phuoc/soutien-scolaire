@@ -41,6 +41,14 @@ function CorrectionInput({
   validated: boolean; width?: string; placeholder?: string;
 }) {
   const showCorrection = validated && value.trim() !== correct.trim();
+  if (showCorrection) {
+    return (
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 bg-amber-50 px-1 text-center font-mono leading-tight`}>
+        {value.trim() && <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value}</span>}
+        <span className="text-sm font-semibold text-amber-700">{correct}</span>
+      </span>
+    );
+  }
   return (
     <span className="inline-flex flex-col items-center gap-0.5 align-middle">
       <input
@@ -67,6 +75,14 @@ function CorrectionInputText({
   validated: boolean; width?: string; placeholder?: string;
 }) {
   const showCorrection = validated && value.trim().replace(/\s+/g, "").toLowerCase() !== correct.trim().replace(/\s+/g, "").toLowerCase();
+  if (showCorrection) {
+    return (
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 bg-amber-50 px-1 text-center font-mono leading-tight`}>
+        {value.trim() && <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value}</span>}
+        <span className="text-sm font-semibold text-amber-700">{correct}</span>
+      </span>
+    );
+  }
   return (
     <span className="inline-flex flex-col items-center gap-0.5 align-middle">
       <input
@@ -134,7 +150,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content 5rem 1.25rem 5rem max-content max-content"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content auto auto auto max-content max-content" }}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="justify-self-end">{data.q1.base}<sup>3</sup></span>
         <span />
@@ -370,13 +386,13 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content 5.5rem 1.5rem 5.5rem 1rem max-content"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content auto auto auto max-content max-content" }}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="flex w-[5.5rem] justify-end font-mono tabular-nums">{q.left}</span>
-            <span className="flex w-6 justify-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
-            <span className="flex w-[5.5rem] justify-start font-mono tabular-nums">{q.right}</span>
+            <span className="justify-self-end font-mono tabular-nums">{q.left}</span>
+            <span className="justify-self-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="justify-self-start font-mono tabular-nums">{q.right}</span>
             <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
             <CorrectionInput
               value={answers[i] ?? ""}
@@ -405,9 +421,9 @@ type FracQ = { n1: number; d1: number; n2: number; d2: number; op: "+" | "−" |
 function VFracNum({ n, d }: { n: number; d: number }) {
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle">
-      <span className="flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+      <span className="flex h-8 w-12 items-center justify-center text-sm tabular-nums text-[var(--color-text-primary)]">{n}</span>
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      <span className="flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{d}</span>
+      <span className="flex h-8 w-12 items-center justify-center text-sm tabular-nums text-[var(--color-text-primary)]">{d}</span>
     </span>
   );
 }
@@ -416,7 +432,7 @@ function VFracInputOne({ n, d, missing, value, onChange, validated }: {
   n: number; d: number; missing: "num" | "den"; value: string; onChange: (v: string) => void; validated: boolean;
 }) {
   const inputCls = "h-8 w-12 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center text-sm font-mono outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60";
-  const fixedCls = "flex h-8 w-12 items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
+  const fixedCls = "flex h-8 w-12 items-center justify-center text-sm tabular-nums text-[var(--color-text-primary)]";
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle">
       {missing === "num" ? <input type="text" value={value} onChange={e => onChange(e.target.value)} disabled={validated} className={inputCls} /> : <span className={fixedCls}>{n}</span>}
@@ -606,7 +622,10 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>{data.qty} kg de {data.fruitName} → {fmtDec(data.price, 1)} CHF ; {data.targetQty} kg de {data.fruitName}</span>
+        <span className="space-y-1">
+          <span className="block">{data.qty} kg de {data.fruitName} → {fmtDec(data.price, 1)} CHF</span>
+          <span className="block">{data.targetQty} kg de {data.fruitName}</span>
+        </span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
       </div>
     </div>
@@ -756,6 +775,16 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
     const rootSquare = (l: string) => `√(${l}²)`;
     type EvalTemplate = () => { expr: string; ans: number };
     const pick = (items: EvalTemplate[]) => items[randInt(0, items.length - 1)]!();
+    const withCoefficientTerm = (q: { expr: string; ans: number }) => {
+      const items = [
+        { letter: l1, value: v1 },
+        { letter: l2, value: v2 },
+        { letter: l3, value: v3 },
+      ];
+      const item = items[randInt(0, items.length - 1)]!;
+      const coef = randInt(2, 5);
+      return { expr: `${coef}${item.letter} + (${q.expr})`, ans: coef * item.value + q.ans };
+    };
 
     const easyTemplates: EvalTemplate[] = [
       () => ({ expr: `${l1} + ${l2} + ${l3}`, ans: v1 + v2 + v3 }),
@@ -809,8 +838,8 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
         { letter: l2, value: v2 },
         { letter: l3, value: v3 },
       ],
-      q1: pick(easyTemplates),
-      q2: pick(hardTemplates),
+      q1: withCoefficientTerm(pick(easyTemplates)),
+      q2: withCoefficientTerm(pick(hardTemplates)),
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -832,7 +861,13 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
       <div className="space-y-1">
         <p className="text-sm text-[var(--color-text-secondary)]">Calculez les résultats.</p>
         <p className="text-sm font-mono text-[var(--color-text-secondary)]">
-          {data.vars.map(v => `${v.letter} = ${v.value}`).join(", ")}
+          {data.vars.map((v, i) => (
+            <React.Fragment key={v.letter}>
+              {i > 0 && <span>, </span>}
+              <span className="font-bold text-[var(--color-accent-alg)]">{v.letter}</span>
+              <span> = {v.value}</span>
+            </React.Fragment>
+          ))}
         </p>
       </div>
       <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content max-content max-content"}}>

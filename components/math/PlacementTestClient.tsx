@@ -64,7 +64,7 @@ const EXERCISES: ExerciseMeta[] = [
   { id: 3, label: "Suites numériques", maxPoints: 2, component: Exercise3 },
   { id: 4, label: "Additions et soustractions", maxPoints: 2, component: Exercise4 },
   { id: 5, label: "Opérande manquant", maxPoints: 4, component: Exercise5 },
-  { id: 6, label: "Calcul en colonnes (99–999)", maxPoints: 4, component: Exercise6 },
+  { id: 6, label: "Calcul en colonnes (99–999)", maxPoints: 2, component: Exercise6 },
   { id: 7, label: "Dizaines et unités", maxPoints: 2, component: Exercise8 },
   { id: 8, label: "Comparer (101–999)", maxPoints: 2, component: Exercise9 },
   { id: 9, label: "Grandes suites", maxPoints: 2, component: Exercise10 },
@@ -77,8 +77,8 @@ const EXERCISES: ExerciseMeta[] = [
   { id: 16, label: "Suites (grands nombres)", maxPoints: 3, component: Exercise17 },
   { id: 17, label: "Trier des nombres", maxPoints: 2, component: Exercise18 },
   { id: 18, label: "Additions et soustrations décimales", maxPoints: 4, component: Exercise19 },
-  { id: 19, label: "Multiplication décimale", maxPoints: 2, component: Exercise20 },
-  { id: 20, label: "Division décimale", maxPoints: 2, component: Exercise21 },
+  { id: 19, label: "Multiplication décimale", maxPoints: 4, component: Exercise20 },
+  { id: 20, label: "Division décimale", maxPoints: 4, component: Exercise21 },
   { id: 21, label: "Colorier les fractions", maxPoints: 2, component: Exercise22 },
   { id: 22, label: "Lire les fractions", maxPoints: 2, component: ExerciseFracRead },
   { id: 23, label: "Conversions de longueur", maxPoints: 4, component: Exercise23 },
@@ -189,11 +189,9 @@ function PlacementProgressBar({
 interface ResultsScreenProps {
   scores: Array<{ points: number; maxPoints: number } | null>;
   exercises: ExerciseMeta[];
-  selectedIdx: number;
-  onSelectExercise: (idx: number) => void;
 }
 
-function ResultsScreen({ scores, exercises, selectedIdx, onSelectExercise }: ResultsScreenProps) {
+function ResultsScreen({ scores, exercises }: ResultsScreenProps) {
   const totalPoints = scores.reduce((s, sc) => s + (sc?.points ?? 0), 0);
   const maxPoints = exercises.reduce((s, e) => s + e.maxPoints, 0);
   const pct = maxPoints > 0 ? Math.round((totalPoints / maxPoints) * 100) : 0;
@@ -218,35 +216,6 @@ function ResultsScreen({ scores, exercises, selectedIdx, onSelectExercise }: Res
       <p className="text-sm text-[var(--color-text-secondary)]">
         Cliquez sur un exercice dans le détail des points pour afficher l&apos;énoncé, vos réponses et les corrections.
       </p>
-
-      {/* Per-exercise list */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
-        <div className="space-y-2">
-          {exercises.map((ex, i) => {
-            const sc = scores[i];
-            const pts = sc?.points ?? 0;
-            const max = ex.maxPoints;
-            const isSelected = i === selectedIdx;
-            return (
-              <button
-                key={ex.id}
-                type="button"
-                onClick={() => onSelectExercise(i)}
-                className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                  isSelected
-                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                }`}
-              >
-                <span className="text-xs font-bold text-[var(--color-accent-alg)] w-5">{ex.id}</span>
-                <span className="flex-1 text-xs text-[var(--color-text-secondary)] truncate">{ex.label}</span>
-                <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{pts} / {max}</span>
-              </button>
-            );
-          })}
-        </div>
-      </div>
 
     </div>
   );
@@ -297,38 +266,17 @@ export function PlacementTestClient() {
 
   // ── Navigation helpers ─────────────────────────────────────────────────────
 
-  function findNextNonValidated(from: number, direction: 1 | -1): number {
-    let idx = from + direction;
-    while (idx >= 0 && idx < TOTAL_EXERCISES) {
-      if (!validated[idx]) return idx;
-      idx += direction;
-    }
-    return -1; // all validated in that direction
-  }
-
   const goTo = useCallback((idx: number) => {
     setCurrentIdx(idx);
   }, []);
 
   function goNext() {
-    if (!validated[currentIdx]) {
-      triggerValidate();
-      return;
-    }
-    // Skip validated exercises
-    const next = findNextNonValidated(currentIdx, 1);
-    if (next >= 0) {
-      goTo(next);
-    } else {
-      const firstMissing = validated.findIndex(v => !v);
-      if (firstMissing >= 0) goTo(firstMissing);
-      else setPhase("results");
-    }
+    if (currentIdx < TOTAL_EXERCISES - 1) goTo(currentIdx + 1);
+    else if (validated.every(Boolean)) setPhase("results");
   }
 
   function goPrev() {
-    const prev = findNextNonValidated(currentIdx, -1);
-    if (prev >= 0) goTo(prev);
+    if (currentIdx > 0) goTo(currentIdx - 1);
   }
 
   function handleSegmentClick(idx: number) {
@@ -348,25 +296,6 @@ export function PlacementTestClient() {
   function handleValidated(exIdx: number, points: number, maxPoints: number) {
     setValidated(prev => { const n = [...prev]; n[exIdx] = true; return n; });
     setScores(prev => { const n = [...prev]; n[exIdx] = { points, maxPoints }; return n; });
-    // Auto-advance to next non-validated after short delay
-    setTimeout(() => {
-      setCurrentIdx(cur => {
-        const next = findNextNonValidatedFrom(cur, 1, exIdx);
-        if (next >= 0) return next;
-        // Check if all validated
-        return cur;
-      });
-    }, 600);
-  }
-
-  function findNextNonValidatedFrom(from: number, direction: 1 | -1, justValidated: number): number {
-    // Use the latest validated state (including the just-validated one)
-    let idx = from + direction;
-    while (idx >= 0 && idx < TOTAL_EXERCISES) {
-      if (idx !== justValidated && !(validated[idx])) return idx;
-      idx += direction;
-    }
-    return -1;
   }
 
   // Check if all exercises validated → show results
@@ -452,6 +381,7 @@ export function PlacementTestClient() {
             <p className="text-xs font-medium uppercase tracking-wide text-amber-600">Mathématiques</p>
             <div className="flex items-center gap-2">
               <button
+                key="result-row"
                 type="button"
                 onClick={() => router.back()}
                 aria-label="Retour"
@@ -506,7 +436,6 @@ export function PlacementTestClient() {
   // ── Running phase ──────────────────────────────────────────────────────────
 
   const ex = EXERCISES[currentIdx]!;
-  const selectedResultExercise = EXERCISES[selectedResultIdx]!;
   const isCurrentValidated = validated[currentIdx] ?? false;
   const displayExerciseIdx = phase === "results" ? selectedResultIdx : currentIdx;
 
@@ -516,8 +445,6 @@ export function PlacementTestClient() {
         <ResultsScreen
           scores={scores}
           exercises={EXERCISES}
-          selectedIdx={selectedResultIdx}
-          onSelectExercise={setSelectedResultIdx}
         />
       ) : (
       <>
@@ -542,7 +469,7 @@ export function PlacementTestClient() {
       </div>
 
       {skipConfirmOpen && (
-        <div className="fixed inset-0 z-50 flex items-end bg-black/40 p-4 sm:items-center sm:justify-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
           <div className="w-full max-w-md rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-5 shadow-xl">
             <h2 className="text-base font-bold text-[var(--color-text-primary)]">Passer directement aux résultats</h2>
             <p className="mt-2 text-sm text-[var(--color-text-secondary)]">
@@ -581,28 +508,54 @@ export function PlacementTestClient() {
       )}
 
       {phase === "results" && (
-        <div className="mb-4 mt-6 flex items-center justify-between">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {selectedResultExercise.id}</h2>
-          <span className="text-xs text-[var(--color-text-secondary)]">
-            {scores[selectedResultIdx]?.points ?? 0} / {selectedResultExercise.maxPoints} pt{selectedResultExercise.maxPoints > 1 ? "s" : ""}
-          </span>
+        <div className="mt-6 space-y-3">
+          <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
         </div>
       )}
 
-      {/* All exercises mounted simultaneously — only current is visible */}
+      {/* All exercises stay mounted so the results screen can reuse the original answers. */}
+      <div className={phase === "results" ? "mt-2 space-y-2" : ""}>
       {EXERCISES.map((exercise, i) => {
         const Comp = exercise.component;
+        const sc = scores[i];
+        const pts = sc?.points ?? 0;
+        const max = exercise.maxPoints;
+        const isSelected = i === selectedResultIdx;
         return (
-          <div key={i} className={i !== displayExerciseIdx ? "hidden" : ""}>
-            <Comp
-              exerciseKey={exerciseKeys[i]!}
-              validated={phase === "results" ? true : (validated[i] ?? false)}
-              onValidated={(pts, max) => handleValidated(i, pts, max)}
-              validateTrigger={validateTriggers[i] ?? 0}
-            />
+          <div key={exercise.id} className={phase === "results" ? "space-y-2" : (i !== displayExerciseIdx ? "hidden" : "")}>
+            {phase === "results" && (
+              <button
+                type="button"
+                onClick={() => setSelectedResultIdx(i)}
+                className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
+                  isSelected
+                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                    : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                }`}
+              >
+                <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">{exercise.id}</span>
+                <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{exercise.label}</span>
+                <span className="text-xs font-bold tabular-nums text-[var(--color-text-primary)]">{pts} / {max}</span>
+              </button>
+            )}
+            <div key="exercise-panel" className={phase === "results" ? (isSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden") : ""}>
+              {phase === "results" && (
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exercise.id}</h2>
+                  <span className="text-xs text-[var(--color-text-secondary)]">{pts} / {max} pt{max > 1 ? "s" : ""}</span>
+                </div>
+              )}
+              <Comp
+                exerciseKey={exerciseKeys[i]!}
+                validated={phase === "results"}
+                onValidated={(pts, max) => handleValidated(i, pts, max)}
+                validateTrigger={validateTriggers[i] ?? 0}
+              />
+            </div>
           </div>
         );
       })}
+      </div>
 
       {phase === "results" && (
         <button
@@ -622,7 +575,7 @@ export function PlacementTestClient() {
             <button
               type="button"
               onClick={goPrev}
-              disabled={findNextNonValidated(currentIdx, -1) < 0}
+              disabled={currentIdx === 0}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30 disabled:cursor-not-allowed"
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
@@ -643,7 +596,8 @@ export function PlacementTestClient() {
             <button
               type="button"
               onClick={goNext}
-              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+              disabled={currentIdx === TOTAL_EXERCISES - 1 && !validated.every(Boolean)}
+              className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Suivant
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6"/></svg>

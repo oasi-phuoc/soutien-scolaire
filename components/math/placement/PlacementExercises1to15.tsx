@@ -41,6 +41,14 @@ function CorrectionInput({
   placeholder?: string;
 }) {
   const showCorrection = validated && value.trim() !== correct.trim();
+  if (showCorrection) {
+    return (
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 bg-amber-50 px-1 text-center font-mono leading-tight`}>
+        {value.trim() && <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value}</span>}
+        <span className="text-sm font-semibold text-amber-700">{correct}</span>
+      </span>
+    );
+  }
   return (
     <span className="inline-flex flex-col items-center gap-0.5 align-middle">
       <input
@@ -70,8 +78,8 @@ function makeShapes(count: number, seed: number): Array<{ x: number; y: number; 
   let attempts = 0;
   while (positions.length < count && attempts < 1000) {
     attempts++;
-    const x = 16 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 268;
-    const y = 16 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 64;
+    const x = 10 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 280;
+    const y = 10 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 90;
     const tooClose = used.some(u => Math.hypot(u.x - x, u.y - y) < 22);
     if (!tooClose) {
       used.push({ x, y });
@@ -102,8 +110,8 @@ function ShapeSvg({ shape, x, y, size = 7 }: { shape: ShapeType; x: number; y: n
 function ShapeFrame({ count, shape, seed }: { count: number; shape: ShapeType; seed: number }) {
   const positions = useMemo(() => makeShapes(count, seed), [count, seed]);
   return (
-    <div className="h-24 w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-[5px]">
-      <svg viewBox="0 0 300 96" className="h-full w-full">
+    <div className="h-28 w-full rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-[5px]">
+      <svg viewBox="0 0 300 110" className="h-full w-full">
         {positions.map(p => (
           <ShapeSvg key={p.id} shape={shape} x={p.x} y={p.y} size={p.size} />
         ))}
@@ -140,19 +148,19 @@ export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger
         { count: data.count1, shape: data.shape1, seed: data.seed1, ans: ans1, setAns: setAns1 },
         { count: data.count2, shape: data.shape2, seed: data.seed2, ans: ans2, setAns: setAns2 },
       ].map((item, idx) => (
-        <div key={idx} className="space-y-2">
-          <ShapeFrame count={item.count} shape={item.shape} seed={item.seed} />
-          <div className="flex items-center gap-2">
+        <div key={idx} className="flex items-center gap-3">
+          <div className="flex w-24 shrink-0 items-center gap-2">
             <span className="w-5 text-sm font-semibold text-[var(--color-accent-alg)]">{idx + 1}.</span>
-          <CorrectionInput
-            value={item.ans}
-            onChange={item.setAns}
-            correct={String(item.count)}
-            validated={validated}
-            width="w-20"
-            placeholder="?"
-          />
+            <CorrectionInput
+              value={item.ans}
+              onChange={item.setAns}
+              correct={String(item.count)}
+              validated={validated}
+              width="w-16"
+              placeholder="?"
+            />
           </div>
+          <ShapeFrame count={item.count} shape={item.shape} seed={item.seed} />
         </div>
       ))}
     </div>
@@ -623,25 +631,21 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
 
 export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): ColArithQuestion[] => {
-    const qs: ColArithQuestion[] = [];
-    for (let i = 0; i < 2; i++) {
-      const a = randInt(99, 999);
-      const b = randInt(99, 999);
-      qs.push({ a, b, op: "+", result: a + b });
-    }
-    for (let i = 0; i < 2; i++) {
-      let a = randInt(99, 999);
-      let b = randInt(99, 999);
-      if (b > a) [a, b] = [b, a];
-      while (a === b) a = randInt(99, 999);
-      qs.push({ a, b, op: "-", result: a - b });
-    }
-    return qs;
+    const a1 = randInt(99, 999);
+    const b1 = randInt(99, 999);
+    let a2 = randInt(99, 999);
+    let b2 = randInt(99, 999);
+    if (b2 > a2) [a2, b2] = [b2, a2];
+    while (a2 === b2) a2 = randInt(99, 999);
+    return [
+      { a: a1, b: b1, op: "+", result: a1 + b1 },
+      { a: a2, b: b2, op: "-", result: a2 - b2 },
+    ];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[][]>(() => Array(4).fill(null).map(() => ["", "", "", ""]));
-  const [carries, setCarries] = useState<string[][]>(() => Array(4).fill(null).map(() => ["", "", "", ""]));
+  const [answers, setAnswers] = useState<string[][]>(() => Array(2).fill(null).map(() => ["", "", "", ""]));
+  const [carries, setCarries] = useState<string[][]>(() => Array(2).fill(null).map(() => ["", "", "", ""]));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -655,7 +659,7 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
         (parseInt(d[3] || "0") || 0);
       if (reconstructed === q.result) pts++;
     });
-    onValidated(pts, 4);
+    onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

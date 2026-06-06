@@ -35,10 +35,7 @@ function matchInt(input: string, expected: number): boolean {
   return !isNaN(v) && v === expected;
 }
 function fmtInt(n: number): string {
-  return n.toLocaleString("fr-CH");
-}
-function fmtIntPlain(n: number): string {
-  return String(n);
+  return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 function fmtDec(n: number, d: number): string {
   return n.toFixed(d).replace(".", ",");
@@ -51,6 +48,14 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16", 
   validated: boolean; width?: string; placeholder?: string;
 }) {
   const showCorrection = validated && value.trim() !== correct.trim();
+  if (showCorrection) {
+    return (
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 bg-amber-50 px-1 text-center font-mono leading-tight`}>
+        {value.trim() && <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value}</span>}
+        <span className="text-sm font-semibold text-amber-700">{correct}</span>
+      </span>
+    );
+  }
   return (
     <span className="inline-flex flex-col items-center gap-0.5 align-middle">
       <input type="text" value={value} onChange={e => onChange(e.target.value)} placeholder={placeholder}
@@ -175,10 +180,8 @@ function SeqRow({ qNum, vals, visPos, isInt, answers, onChange, validated }: {
       <div className="flex flex-wrap items-center gap-1.5">
         {vals.map((v, i) => {
           const isVisible = i === visPos[0] || i === visPos[1];
-          const display = isInt ? fmtIntPlain(v) : fmtDec(v, 2);
-          const pillCls = isInt
-            ? "h-9 w-24 inline-flex items-center justify-center rounded-full font-mono text-sm font-semibold"
-            : "h-9 w-[76px] inline-flex items-center justify-center rounded-full font-mono text-sm font-semibold";
+          const display = isInt ? fmtInt(v) : fmtDec(v, 2);
+          const pillCls = "h-9 w-[5.35rem] inline-flex items-center justify-center rounded-full font-mono text-sm font-semibold";
           if (isVisible) {
             return (
               <div key={i} className={`${pillCls} border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]`}>{display}</div>
@@ -189,7 +192,7 @@ function SeqRow({ qNum, vals, visPos, isInt, answers, onChange, validated }: {
           const ans = answers[bi] ?? "";
           return (
             <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-              validated={validated} width={isInt ? "w-24 rounded-full" : "w-[76px] rounded-full"} />
+              validated={validated} width="w-[5.35rem] rounded-full" />
           );
         })}
       </div>
@@ -244,9 +247,9 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
 }) {
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-1.5">
         {numbers.filter(n => !selected.includes(n)).map((n, ni) => {
-          let cls = `${chipW} flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors cursor-pointer `;
+          let cls = `${chipW} flex items-center justify-center rounded-lg border px-1.5 py-2 text-[11px] font-mono font-bold transition-colors cursor-pointer `;
           if (!validated) {
             cls += "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
           } else {
@@ -259,14 +262,14 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
           );
         })}
       </div>
-      <div className="flex min-h-12 flex-wrap items-center gap-2 border-b-2 border-[var(--color-accent-alg)] pb-2">
+      <div className="flex min-h-12 flex-wrap items-center gap-1 border-b-2 border-[var(--color-accent-alg)] pb-2">
         {selected.map((n, si) => (
           <React.Fragment key={si}>
             <button
               type="button"
               disabled={validated}
               onClick={() => onToggle(n)}
-              className={`${chipW} flex items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] px-3 py-2 text-sm font-mono font-bold text-white transition-colors disabled:opacity-70`}
+              className={`${chipW} flex items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] px-1.5 py-2 text-[11px] font-mono font-bold text-white transition-colors disabled:opacity-70`}
             >
               {fmt(n)}
             </button>
@@ -339,14 +342,14 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
           <span className="font-bold text-[var(--color-accent-alg)]">1.</span> Dans l&apos;ordre croissant (plus petit au plus grand)
         </p>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={fmtInt} chipW="w-32" />
+          validated={validated} fmt={fmtInt} chipW="w-[4.05rem]" />
       </div>
       <div className="space-y-3">
         <p className="text-sm text-[var(--color-text-secondary)]">
           <span className="font-bold text-[var(--color-accent-alg)]">2.</span> Dans l&apos;ordre décroissant (plus grand au plus petit)
         </p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc chipW="w-24" />
+          validated={validated} fmt={fmtDec2} desc chipW="w-[4.05rem]" />
       </div>
     </div>
   );
@@ -666,8 +669,8 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts++; });
-    onValidated(pts, 2);
+    data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts += 2; });
+    onValidated(pts, 4);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -713,10 +716,15 @@ function computeDecimalDivSteps(dividend: number, divisor: number): Array<{ part
 
 function DecimalLongDivCard({
   dividendRaw,
+  dividendStr,
   divisor,
   quotientRaw,
+  dividendInput,
+  divisorInput,
   quotientInputs,
   workFlat,
+  onDividendInputChange,
+  onDivisorInputChange,
   onQuotientChange,
   onWorkChange,
   resultStr,
@@ -725,10 +733,15 @@ function DecimalLongDivCard({
   validated,
 }: {
   dividendRaw: number;
+  dividendStr: string;
   divisor: number;
   quotientRaw: string;
+  dividendInput: string;
+  divisorInput: string;
   quotientInputs: string[];
   workFlat: string[];
+  onDividendInputChange: (val: string) => void;
+  onDivisorInputChange: (val: string) => void;
   onQuotientChange: (i: number, val: string) => void;
   onWorkChange: (step: number, type: 0 | 1, relIdx: number, val: string) => void;
   resultStr: string;
@@ -737,8 +750,8 @@ function DecimalLongDivCard({
   validated: boolean;
 }) {
   const steps = computeDecimalDivSteps(dividendRaw, divisor);
-  const dividendStr = String(dividendRaw);
-  const dividendCols = dividendStr.length;
+  const dividendRawStr = String(dividendRaw);
+  const dividendCols = dividendRawStr.length;
   const quotientCols = quotientRaw.length;
   const colLabels = dividendCols === 3 ? ["C", "D", "U"] : ["M", "C", "D", "U"];
   const cellCls = "flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]";
@@ -779,6 +792,26 @@ function DecimalLongDivCard({
 
   return (
     <div className="space-y-3 overflow-x-auto">
+      <div className="flex flex-wrap items-center justify-center gap-2 text-sm">
+        <input
+          type="text"
+          value={dividendInput}
+          disabled={validated}
+          onChange={e => onDividendInputChange(e.target.value)}
+          placeholder={dividendStr}
+          className="w-20 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-2 py-1 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+        />
+        <span className="font-mono text-[var(--color-text-secondary)]">÷</span>
+        <input
+          type="text"
+          inputMode="numeric"
+          value={divisorInput}
+          disabled={validated}
+          onChange={e => onDivisorInputChange(e.target.value.replace(/[^0-9]/g, ""))}
+          placeholder={String(divisor)}
+          className="w-16 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-2 py-1 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+        />
+      </div>
       <table className="mx-auto border-collapse table-fixed">
         <tbody>
           <tr>
@@ -790,7 +823,7 @@ function DecimalLongDivCard({
           </tr>
           <tr>
             <td />
-            {dividendStr.split("").map((ch, i) => <td key={i} className="p-0.5 text-center"><span className={cellCls}>{ch}</span></td>)}
+            {dividendRawStr.split("").map((ch, i) => <td key={i} className="p-0.5 text-center"><span className={cellCls}>{ch}</span></td>)}
             {Array.from({ length: quotientCols }, (_, i) => (
               <td key={i} className="p-0.5 text-center align-middle" style={{ ...(i === 0 ? bSep : {}), ...(i === 0 ? { borderBottom: "2px solid var(--color-text-primary)" } : {}) }}>
                 {i === 0 ? <span className={cellCls}>{divisor}</span> : null}
@@ -871,15 +904,18 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
 
   const [quotientInputs, setQuotientInputs] = useState<string[][]>(() => data.map(q => Array(q.quotientRaw.length).fill("")));
   const [workInputs, setWorkInputs] = useState<string[][]>(() => data.map(() => Array(48).fill("")));
+  const [dividendInputs, setDividendInputs] = useState<string[]>(["", ""]);
+  const [divisorInputs, setDivisorInputs] = useState<string[]>(["", ""]);
   const [decResults, setDecResults] = useState<string[]>(["", ""]);
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
     data.forEach((q, i) => {
+      if (matchNum(dividendInputs[i] ?? "", parseNum(q.dividendStr), 0.005) && matchInt(divisorInputs[i] ?? "", q.divisor)) pts++;
       if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts++;
     });
-    onValidated(pts, 2);
+    onValidated(pts, 4);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -894,10 +930,15 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
             <div className="mb-2 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</div>
             <DecimalLongDivCard
               dividendRaw={q.dividendRaw}
+              dividendStr={q.dividendStr}
               divisor={q.divisor}
               quotientRaw={q.quotientRaw}
+              dividendInput={dividendInputs[i] ?? ""}
+              divisorInput={divisorInputs[i] ?? ""}
               quotientInputs={quotientInputs[i] ?? []}
               workFlat={workInputs[i] ?? []}
+              onDividendInputChange={val => setDividendInputs(prev => { const next = [...prev]; next[i] = val; return next; })}
+              onDivisorInputChange={val => setDivisorInputs(prev => { const next = [...prev]; next[i] = val; return next; })}
               onQuotientChange={(idx, val) => setQuotientInputs(prev => {
                 const next = prev.map(row => [...row]);
                 next[i]![idx] = val;
@@ -1257,7 +1298,7 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"max-content 4rem 1.25rem 4rem max-content max-content"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{ gridTemplateColumns: "max-content auto auto auto max-content max-content" }}>
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
