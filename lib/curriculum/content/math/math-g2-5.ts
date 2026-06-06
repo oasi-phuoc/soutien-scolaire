@@ -6,11 +6,6 @@ export const MATH_G2_5_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Cercle et π",
-        en: "Circle and π",
-        ar: "الدائرة وπ",
-        fa: "دایره و π",
-        ti: "ዓውዲ ን π",
-        uk: "Коло та π",
       },
       paragraphs: {
         fr: [
@@ -18,36 +13,6 @@ export const MATH_G2_5_LESSON: MathSubmoduleLesson = {
           "π (pi) est un nombre irrationnel ≈ 3,14159… On utilise souvent π ≈ 3,14 ou la touche π de la calculatrice.",
           "Exemple : cercle de rayon 5 cm → C = 2 × π × 5 = 10π ≈ 31,4 cm.",
           "Attention : ne pas confondre circonférence (périmètre du cercle) et aire du disque (A = πr²).",
-        ],
-        en: [
-          "Circumference of a circle: C = 2πr = πd.",
-          "π ≈ 3.14159…, often approximated as 3.14.",
-          "Example: radius 5 cm → C = 10π ≈ 31.4 cm.",
-          "Do not confuse circumference (perimeter) with disk area (A = πr²).",
-        ],
-        ar: [
-          "محيط الدائرة: C = 2πr = πd.",
-          "π ≈ 3,14159…",
-          "مثال: نصف قطر 5 سم → C ≈ 31,4 سم.",
-          "لا تخلط بين المحيط والمساحة (A = πr²).",
-        ],
-        fa: [
-          "محیط دایره: C = 2πr = πd.",
-          "π ≈ 3.14159…",
-          "مثال: شعاع 5 سانتیمتر → C ≈ 31.4 سانتیمتر.",
-          "محیط را با مساحت (A = πr²) اشتباه نگیر.",
-        ],
-        ti: [
-          "ናይ ዓውዲ ዙሪያ: C = 2πr = πd.",
-          "π ≈ 3.14.",
-          "ምሳሌ: ናይ ፍርቂ-ቁምብዛ 5 ሰም → C ≈ 31.4 ሰም.",
-          "ዙሪያ ምስ ሰፊሓ (A = πr²) ኣይቀላቐሉ.",
-        ],
-        uk: [
-          "Довжина кола: C = 2πr = πd.",
-          "π ≈ 3,14159…",
-          "Приклад: радіус 5 см → C ≈ 31,4 см.",
-          "Не плутати довжину кола (периметр) з площею круга (A = πr²).",
         ],
       },
     },

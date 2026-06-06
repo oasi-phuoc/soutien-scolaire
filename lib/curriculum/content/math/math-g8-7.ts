@@ -6,11 +6,6 @@ export const MATH_G8_7_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Volume du cylindre",
-        en: "Volume of a cylinder",
-        ar: "حجم الأسطوانة",
-        fa: "حجم استوانه",
-        ti: "ናይ ሲሊንደር ዓቐን",
-        uk: "Об'єм циліндра",
       },
       paragraphs: {
         fr: [
@@ -18,36 +13,6 @@ export const MATH_G8_7_LESSON: MathSubmoduleLesson = {
           "Exemple : cylindre de rayon 3 cm et hauteur 10 cm → V = π × 9 × 10 = 90π ≈ 282,6 cm³.",
           "Application : boîtes de conserve, réservoirs, tuyaux.",
           "Trouver la hauteur : h = V / (πr²).",
-        ],
-        en: [
-          "A cylinder is a prism with a circular base. Volume: V = πr²h.",
-          "Example: r=3 cm, h=10 cm → V = 90π ≈ 282.6 cm³.",
-          "Applications: cans, tanks, pipes.",
-          "Finding height: h = V / (πr²).",
-        ],
-        ar: [
-          "الأسطوانة منشور بقاعدة دائرية. الحجم: V = πr²h.",
-          "مثال: r=3 سم, h=10 سم → V ≈ 282.6 سم³.",
-          "تطبيقات: علب المحافظ، خزانات، أنابيب.",
-          "الارتفاع: h = V / (πr²).",
-        ],
-        fa: [
-          "استوانه منشوری با قاعده دایره‌ای است. حجم: V = πr²h.",
-          "مثال: r=3 سانتیمتر، h=10 سانتیمتر → V ≈ 282.6 سانتیمتر³.",
-          "کاربردها: قوطی، مخزن، لوله.",
-          "ارتفاع: h = V / (πr²).",
-        ],
-        ti: [
-          "ሲሊንደር ናይ ዓውዲ ሰረት ፕሪዝም ዩ. ዓቐን: V = πr²h.",
-          "ምሳሌ: r=3 ሰም, h=10 ሰም → V ≈ 282.6 ሰም³.",
-          "ኣሰፋ: ካን, ናይ ማይ ዕቋር, ቱቦ.",
-          "ቁመት: h = V / (πr²).",
-        ],
-        uk: [
-          "Циліндр — призма з круговою основою. Об'єм: V = πr²h.",
-          "Приклад: r=3 см, h=10 см → V ≈ 282,6 см³.",
-          "Застосування: консервні банки, резервуари, труби.",
-          "Висота: h = V / (πr²).",
         ],
       },
     },

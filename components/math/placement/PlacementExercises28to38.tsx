@@ -873,7 +873,7 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
 
     const medium: EqTemplate[] = [
       () => { const x=xVal(), a=randInt(2,8), b=randInt(-15,15); return { expr: <>{a}x {s(b)} = {a*x+b}</>, ans:x }; },
-      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,12), c=randInt(1,9); return { expr: <>{a}(x {s(b)}) = {a*(x+b)}</>, ans:x }; },
+      () => { const x=xVal(), a=randInt(2,7), b=randInt(1,12); return { expr: <>{a}(x {s(b)}) = {a*(x+b)}</>, ans:x }; },
       () => { const x=xVal(), a=randInt(3,9), b=randInt(1,12), c=randInt(1,6); return { expr: <>{a}x {s(b)} = {c}x {s((a-c)*x+b)}</>, ans:x }; },
       () => { const x=xVal(), a=randInt(2,8), b=randInt(1,12), c=randInt(2,8); return { expr: <>{a}(x − {b}) + {c} = {a*(x-b)+c}</>, ans:x }; },
       () => { const x=xVal(), a=randInt(2,6), b=randInt(1,8), c=randInt(1,10); return { expr: <>{a}x − ({b}x {s(c)}) = {(a-b)*x-c}</>, ans:x }; },

@@ -1,6 +1,6 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-const emptyTitle = (fr: string) => ({ fr, en: fr, ar: fr, fa: fr, ti: fr, uk: fr });
+const emptyTitle = (fr: string) => ({ fr });
 
 function revStub(submoduleId: string, submoduleCode: string, titleFr: string, exerciseFr: string, answer: string): MathSubmoduleLesson {
   return {
@@ -11,7 +11,7 @@ function revStub(submoduleId: string, submoduleCode: string, titleFr: string, ex
       blocks: [
         { type: "plain", fr: "Ce module de révision sera bientôt disponible." },
       ],
-      paragraphs: { fr: [], en: [], ar: [], fa: [], ti: [], uk: [] },
+      paragraphs: { fr: [] },
     },
     exercises: [
       { id: `${submoduleId}-e1`, promptFr: exerciseFr, type: "number", acceptable: [answer] },

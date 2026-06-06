@@ -870,7 +870,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   }, [exerciseKey]);
 
   const [quotientInputs, setQuotientInputs] = useState<string[][]>(() => data.map(q => Array(q.quotientRaw.length).fill("")));
-  const [workInputs, setWorkInputs] = useState<string[][]>(() => data.map(q => Array(48).fill("")));
+  const [workInputs, setWorkInputs] = useState<string[][]>(() => data.map(() => Array(48).fill("")));
   const [decResults, setDecResults] = useState<string[]>(["", ""]);
 
   useEffect(() => {

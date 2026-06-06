@@ -114,7 +114,7 @@ function findLessonObject(sf) {
   for (const statement of sf.statements) {
     if (!ts.isVariableStatement(statement)) continue;
     for (const decl of statement.declarationList.declarations) {
-      if (ts.isIdentifier(decl.name) && /^MATH_A\d+_\d+_LESSON$/.test(decl.name.text)) {
+      if (ts.isIdentifier(decl.name) && /^MATH_[AGS]\d+_\d+_LESSON$/.test(decl.name.text)) {
         return decl.initializer;
       }
     }
@@ -213,9 +213,12 @@ function cleanupMathFile(file) {
 }
 
 const mathFiles = fs.readdirSync(mathDir)
-  .filter((name) => /^math-a(\d+)-(\d+)\.ts$/.test(name))
+  .filter((name) => /^math-[ags]\d+-\d+\.ts$/.test(name))
   .filter((name) => {
-    const level = Number(name.match(/^math-a(\d+)-/)?.[1]);
+    const match = name.match(/^math-([ags])(\d+)-/);
+    if (!match) return false;
+    if (match[1] !== "a") return true;
+    const level = Number(match[2]);
     return level >= 1 && level <= 13;
   })
   .map((name) => path.join(mathDir, name));

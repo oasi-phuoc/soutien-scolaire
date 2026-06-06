@@ -6,11 +6,6 @@ export const MATH_G5_2_LESSON: MathSubmoduleLesson = {
     theory: {
       title: {
         fr: "Symétrie centrale",
-        en: "Central symmetry",
-        ar: "التناظر المركزي",
-        fa: "تقارن مرکزی",
-        ti: "ናይ ማዕኸን ምስምሳል",
-        uk: "Центральна симетрія",
       },
       paragraphs: {
         fr: [
@@ -18,36 +13,6 @@ export const MATH_G5_2_LESSON: MathSubmoduleLesson = {
           "Propriétés : conservation des distances, des angles et des aires. Le centre O est le milieu de chaque segment [MM'].",
           "Construction : tracer la droite OM, reporter OM de l'autre côté de O pour obtenir M'.",
           "Figures ayant un centre de symétrie : parallélogramme, rectangle, losange, carré, cercle. Pas le triangle (en général).",
-        ],
-        en: [
-          "Central symmetry about O maps M to M' such that O is the midpoint of [MM']. It is a 180° rotation.",
-          "Properties: distances, angles, areas preserved. O is the midpoint of every [MM'].",
-          "Construction: draw line through O and M; mark OM on the other side.",
-          "Figures with a center of symmetry: parallelogram, rectangle, rhombus, square, circle.",
-        ],
-        ar: [
-          "التناظر المركزي حول O يربط M بـ M' حيث O منتصف MM'. هو دوران بـ 180°.",
-          "الخصائص: حفظ المسافات والزوايا والمساحات.",
-          "الإنشاء: ارسم خطاً بـ OM وانقل OM من الجهة الأخرى.",
-          "الأشكال ذات المركز: متوازي الأضلاع، المستطيل، المعين، المربع، الدائرة.",
-        ],
-        fa: [
-          "تقارن مرکزی حول O هر نقطه M را به M' نگاشت می‌کند که O نقطه وسط [MM'] است. این یک چرخش 180° است.",
-          "ویژگی‌ها: فاصله‌ها، زوایا و مساحت‌ها حفظ می‌شوند.",
-          "ساخت: خط از O و M بکش، OM را از طرف دیگر علامت بزن.",
-          "اشکال با مرکز تقارن: متوازی‌الاضلاع، مستطیل، لوزی، مربع، دایره.",
-        ],
-        ti: [
-          "ናይ ማዕኸን ምስምሳል ናይ O ነፍሲ ወከፍ M ናብ M' ዘቕርብ ዩ O ማዕኸሉ ናይ [MM'] ዩ. 180° ምምቕቃሉ ዩ.",
-          "ንብረታት: ርሕቀት, ኩርናዓት, ሰፊሓ ዕቃቤ.",
-          "ምህናጽ: ሕርሚ ካብ O ን M ምምሃዝ OM ናብ ካሊእ ሸነኽ.",
-          "ቅርጺ ምስ ናይ ማዕኸን ምስምሳል: ፓራሌሎግራም, ካሬ-ሓለቃ, ሮምቡስ, ዓውዲ.",
-        ],
-        uk: [
-          "Центральна симетрія відносно O відображає M в M' так, що O — середина [MM']. Це рівнозначно повороту на 180°.",
-          "Властивості: зберігаються відстані, кути та площі.",
-          "Побудова: провести пряму OM; відкласти OM з іншого боку O.",
-          "Фігури, що мають центр симетрії: паралелограм, прямокутник, ромб, квадрат, коло.",
         ],
       },
     },
