@@ -31,7 +31,6 @@ function CorrectionInput({
   correct,
   validated,
   width = "w-16",
-  placeholder = "",
 }: {
   value: string;
   onChange: (v: string) => void;
@@ -55,7 +54,6 @@ function CorrectionInput({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
         disabled={validated}
         className={`${width} h-9 rounded border px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 disabled:opacity-80 ${
           showCorrection
@@ -413,12 +411,14 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
+      <div className="grid items-center gap-x-2 gap-y-3 text-base" style={{ gridTemplateColumns: "max-content max-content max-content max-content max-content max-content" }}>
       {questions.map((q, i) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="text-xs font-bold text-[var(--color-accent-alg)] w-4">{i + 1}.</span>
-          <span className="font-mono text-base text-[var(--color-text-primary)]">
-            {q.a} {q.op} {q.b} =
-          </span>
+        <React.Fragment key={i}>
+          <span className="w-4 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">{q.a}</span>
+          <span className="justify-self-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+          <span className="justify-self-start font-mono text-[var(--color-text-primary)]">{q.b}</span>
+          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
           <CorrectionInput
             value={answers[i] ?? ""}
             onChange={(v) => setAnswers(prev => { const next = [...prev]; next[i] = v; return next; })}
@@ -426,8 +426,9 @@ export function Exercise4({ exerciseKey, validated, onValidated, validateTrigger
             validated={validated}
             width="w-16"
           />
-        </div>
+        </React.Fragment>
       ))}
+      </div>
     </div>
   );
 }
