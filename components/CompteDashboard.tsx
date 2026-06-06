@@ -203,7 +203,7 @@ export function CompteDashboard({
                       : "border-zinc-300 text-[var(--color-accent-alg)] hover:bg-blue-50 dark:border-zinc-600 dark:hover:bg-blue-950/30"
                 }`}
               >
-                {syncStatus === "syncing" && <span className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />}
+                {syncStatus !== "ok" && <IconRefresh spinning={syncStatus === "syncing"} />}
                 {syncStatus === "ok" && <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>}
                 {syncStatus === "syncing" ? "Synchronisation…" : syncStatus === "ok" ? "Synchronisé !" : "Sync progression"}
               </button>
