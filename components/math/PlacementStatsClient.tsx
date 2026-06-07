@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { loadPlacementTestHistoryAction } from "@/app/actions/progress";
 
 const TP_HISTORY_KEY = "tp-math-history";
 type TPAttempt = { date: string; points: number; maxPoints: number };
@@ -150,11 +151,33 @@ export function PlacementStatsClient() {
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
     try {
       const raw = localStorage.getItem(TP_HISTORY_KEY);
       if (raw) setHistory(JSON.parse(raw) as TPAttempt[]);
     } catch {}
-    setReady(true);
+
+    loadPlacementTestHistoryAction().then((result) => {
+      if (cancelled) return;
+      if (result.ok && result.history.length > 0) {
+        const cloudHistory = result.history.map((h) => ({
+          date: h.date,
+          points: h.points,
+          maxPoints: h.maxPoints,
+        }));
+        setHistory(cloudHistory);
+        try {
+          localStorage.setItem(TP_HISTORY_KEY, JSON.stringify(cloudHistory.slice(-10)));
+        } catch {}
+      }
+      setReady(true);
+    }).catch(() => {
+      if (!cancelled) setReady(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const last = history.length > 0 ? history[history.length - 1] : null;

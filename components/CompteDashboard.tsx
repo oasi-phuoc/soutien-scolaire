@@ -186,7 +186,7 @@ export function CompteDashboard({
                   href="/admin"
                   className="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-4 font-semibold text-white hover:bg-blue-700"
                 >
-                  Tableau de bord admin
+                  Admin
                 </Link>
               )}
               <button

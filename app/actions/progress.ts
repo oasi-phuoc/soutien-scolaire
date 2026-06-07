@@ -75,7 +75,7 @@ export async function savePlacementTestResultAction(attempt: PlacementTestAttemp
       .from("profiles")
       .select("placement_test_history")
       .eq("id", user.id)
-      .single();
+      .maybeSingle();
     if (readError) return { ok: false, error: readError.message };
 
     const history = Array.isArray(data?.placement_test_history)
@@ -86,17 +86,42 @@ export async function savePlacementTestResultAction(attempt: PlacementTestAttemp
 
     const { error } = await supabase
       .from("profiles")
-      .update({
+      .upsert({
+        id: user.id,
         placement_test_last: attempt as unknown as Record<string, unknown>,
         placement_test_history: nextHistory as unknown as Record<string, unknown>[],
         placement_test_updated_at: now,
         progress_updated_at: now,
         updated_at: now,
-      })
-      .eq("id", user.id);
+      }, { onConflict: "id" });
     if (error) return { ok: false, error: error.message };
     return { ok: true };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "unknown" };
+  }
+}
+
+export async function loadPlacementTestHistoryAction(): Promise<{ ok: boolean; history: PlacementTestAttempt[]; error?: string }> {
+  try {
+    const supabase = await createSupabaseActionClient();
+    if (!supabase) return { ok: false, history: [], error: "supabase_not_configured" };
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { ok: false, history: [], error: "not_authenticated" };
+
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("placement_test_history")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (error) return { ok: false, history: [], error: error.message };
+
+    return {
+      ok: true,
+      history: Array.isArray(data?.placement_test_history)
+        ? data.placement_test_history as PlacementTestAttempt[]
+        : [],
+    };
+  } catch (e) {
+    return { ok: false, history: [], error: e instanceof Error ? e.message : "unknown" };
   }
 }
