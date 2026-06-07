@@ -81,8 +81,10 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
     const sq = [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169][randInt(0, 11)]!;
     const sqRoot = Math.sqrt(sq);
     const mult = parseFloat((Math.random() < 0.5 ? randInt(1, 99) * 0.1 : randInt(1, 999) * 0.01).toFixed(2));
-    const pwr10mult = [10, 100, 1000][randInt(0, 2)]!;
-    const pwr10div = [10, 100, 1000][randInt(0, 2)]!;
+    const powers = [10, 100, 1000, 10000];
+    const pwr10mult = powers[randInt(0, powers.length - 1)]!;
+    let pwr10div = powers[randInt(0, powers.length - 1)]!;
+    while (pwr10div === pwr10mult) pwr10div = powers[randInt(0, powers.length - 1)]!;
     const divVal = parseFloat((randInt(1, 999) * (pwr10div === 10 ? 10 : pwr10div === 100 ? 100 : 1000)).toFixed(0));
 
     return {
@@ -114,6 +116,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
     if (Number.isInteger(n)) return String(n);
     return fmtDec(n, 2);
   };
+  const pow10Exp = (n: number) => Math.round(Math.log10(n));
 
   return (
     <div className="space-y-3">
@@ -128,11 +131,11 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.sqRoot)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="font-mono">{fmtDec(data.q3.mult, 2)} × {data.q3.pwr10}</span>
+        <span className="font-mono">{fmtDec(data.q3.mult, 2)} × 10<sup>{pow10Exp(data.q3.pwr10)}</sup></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a3} onChange={setA3} correct={fmtAns(data.q3.ans)} validated={validated} width="w-20" /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="font-mono">{data.q4.divVal} ÷ {data.q4.pwr10}</span>
+        <span className="font-mono">{data.q4.divVal} ÷ 10<sup>{pow10Exp(data.q4.pwr10)}</sup></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a4} onChange={setA4} correct={fmtAns(data.q4.ans)} validated={validated} width="w-20" /></div>
       </div>
     </div>
@@ -181,7 +184,7 @@ export function Exercise29({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Respectez l&apos;ordre des opérations</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.a} + {data.b} × {data.c} − {data.d}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} /></div>
@@ -247,7 +250,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Calculez les opérations avec les nombres relatifs</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         {data.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -385,7 +388,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Écrire les fractions sous la forme n/d (ex: 3/4)</p>
-      <div className="grid gap-y-2 gap-x-2 items-center" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="text-sm">Simplifier <Frac n={data.n1r * data.g1} d={data.d1r * data.g1} /></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)] text-sm">=</span><CorrectionInputText value={answers[0] ?? ""} onChange={setAns(0)} correct={corrFrac(data.n1s, data.d1s)} validated={validated} /></div>
@@ -432,13 +435,16 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
     const base1 = randInt(2, 20) * 10;
     const ans1 = (pct1 * base1) / 100;
 
-    // q2: pricing - integer units of fruit → decimal CHF
-    const qty = randInt(1, 9);
+    // q2: proportional price in kg
+    const knownQty = randInt(3, 9);
+    let targetQty = randInt(3, 9);
+    while (targetQty === knownQty) targetQty = randInt(3, 9);
     const fruitName = fruits[randInt(0, fruits.length - 1)]!;
-    const pricePerUnit = (1 + randInt(0, 8) * 0.1);
-    const ans2 = parseFloat((qty * pricePerUnit).toFixed(2));
+    const unitPrice = 0.5 + randInt(3, 15) * 0.1;
+    const knownPrice = parseFloat((knownQty * unitPrice).toFixed(2));
+    const ans2 = parseFloat((targetQty * unitPrice).toFixed(2));
 
-    return { pct1, base1, ans1, qty, fruitName, pricePerUnit, ans2 };
+    return { pct1, base1, ans1, knownQty, targetQty, fruitName, knownPrice, ans2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -457,14 +463,17 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Calculez les pourcentages et les prix proportionnels</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.pct1}% de {data.base1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={Number.isInteger(data.ans1) ? String(data.ans1) : fmtDec(data.ans1, 2)} validated={validated} /></div>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span>{data.qty} {data.fruitName} → {fmtDec(data.pricePerUnit, 1)} CHF</span>
-        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" placeholder="CHF" /></div>
+        <div className="space-y-1">
+          <div>{data.knownQty} kg de {data.fruitName} → {fmtDec(data.knownPrice, data.knownPrice % 1 === 0 ? 0 : 1)} CHF</div>
+          <div>{data.targetQty} kg de {data.fruitName}</div>
+        </div>
+        <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a2} onChange={setA2} correct={fmtDec(data.ans2, 2)} validated={validated} width="w-20" /><span className="text-[var(--color-text-secondary)]">CHF</span></div>
       </div>
     </div>
   );
@@ -506,7 +515,7 @@ export function Exercise33({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Simplifiez les expressions</p>
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="font-mono">{data.expr1}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInputText value={a1} onChange={setA1} correct={data.corr1} validated={validated} width="w-24" /></div>
@@ -549,7 +558,7 @@ export function Exercise34({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-3 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>Si x = {data.x1}, calculer {data.a}x + {data.b}</span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.ans1)} validated={validated} /></div>
@@ -699,7 +708,7 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>

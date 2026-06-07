@@ -686,8 +686,8 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts++; });
-    onValidated(pts, 2);
+    data.forEach((q, i) => { if (matchNum(decResults[i] ?? "", q.result, 0.005)) pts += 2; });
+    onValidated(pts, 4);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -739,8 +739,8 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.quotient, 0.005)) pts++; });
-    onValidated(pts, 2);
+    data.forEach((q, i) => { if (matchNum(answers[i] ?? "", q.quotient, 0.005)) pts += 2; });
+    onValidated(pts, 4);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
