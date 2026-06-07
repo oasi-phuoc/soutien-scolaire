@@ -142,7 +142,7 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
-      <div className="relative h-28 w-full overflow-hidden rounded-[var(--radius-lg)]">
+      <div className="relative h-28 w-full overflow-hidden">
         {src && !imgFailed ? (
           <Image src={src} alt={w.word} fill
             className={`object-${imgFit}`}

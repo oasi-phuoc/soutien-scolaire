@@ -48,13 +48,13 @@ function CorrectionInput({
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
-  const wrong = validated && value.trim() !== "" && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
+  const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
     <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col leading-tight">
-            <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>
+            {value.trim() && <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>}
             <span className="font-bold text-amber-500">{correct}</span>
           </div>
         ) : (
@@ -79,13 +79,13 @@ function CorrectionInputText({
   validated: boolean; width?: string; placeholder?: string;
 }) {
   const norm = (s: string) => s.trim().replace(/\s+/g, "").toLowerCase();
-  const wrong = validated && value.trim() !== "" && norm(value) !== norm(correct);
+  const wrong = validated && norm(value) !== norm(correct);
   return (
     <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col leading-tight">
-            <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>
+            {value.trim() && <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>}
             <span className="font-bold text-amber-500">{correct}</span>
           </div>
         ) : (
@@ -104,7 +104,7 @@ function CorrectionInputText({
 }
 
 // Fraction display helper
-function Frac({ n, d, className = "" }: { n: string | number; d: string | number; className?: string }) {
+function Frac({ n, d, className = "" }: { n: React.ReactNode; d: React.ReactNode; className?: string }) {
   return (
     <span className={`inline-flex flex-col items-center leading-none ${className}`}>
       <span className="border-b border-current px-0.5 text-sm">{n}</span>
@@ -273,7 +273,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
     const d1n = sign() * randInt(2, 9) * randInt(2, 9), d1d = sign() * randInt(2, 9);
     const d2n = sign() * randInt(2, 9) * randInt(2, 9), d2d = sign() * randInt(2, 9);
 
-    const fmtN = (n: number) => n < 0 ? `(${n})` : String(n);
+    const fmtN = (n: number) => n < 0 ? `(${n})` : `(+${n})`;
 
     return [
       { left: fmtN(a1), op: "+", right: fmtN(b1), ans: a1 + b1 },
@@ -288,7 +288,7 @@ export function Exercise30({ exerciseKey, validated, onValidated, validateTrigge
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
-  const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
+  const [answers, setAnswers] = useState<string[]>(() => Array(9).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -335,56 +335,66 @@ function simplify(n: number, d: number): [number, number] {
 
 export function Exercise31({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // 8 fraction questions, 0.5 pt each = 4 pts total
-    // q1: simplify a fraction
-    const g1 = [2, 3, 4][randInt(0, 2)]!;
-    const n1r = randInt(2, 7), d1r = randInt(n1r + 1, 12);
-    const [n1s, d1s] = simplify(n1r * g1, d1r * g1);
+    const pickReduced = () => {
+      for (;;) {
+        const n = randInt(2, 9);
+        const d = randInt(3, 12);
+        if (n !== d && gcd(n, d) === 1) return { n, d };
+      }
+    };
+    const fracAns = (n: number, d: number) => {
+      const [rawN, rawD] = simplify(n, d);
+      const sn = rawD < 0 ? -rawN : rawN;
+      const sd = Math.abs(rawD);
+      return sd === 1 ? String(sn) : `${sn}/${sd}`;
+    };
+    const makePair = () => {
+      const a = pickReduced();
+      const b = pickReduced();
+      return { a, b };
+    };
 
-    // q2: convert mixed to improper fraction
-    const whole2 = randInt(2, 5), num2 = randInt(1, 4), den2 = randInt(num2 + 1, 7);
-    const impN2 = whole2 * den2 + num2;
+    const q1Base = pickReduced();
+    const q1Factor = randInt(2, 6);
+    const q1Ask = Math.random() < 0.5 ? "num" as const : "den" as const;
 
-    // q3: addition same denominator
-    const den3 = randInt(3, 8);
-    const n3a = randInt(1, den3 - 1), n3b = randInt(1, den3 - 1);
-    const sumN3 = n3a + n3b;
-    const [sn3, sd3] = simplify(sumN3, den3);
+    const q2Base = pickReduced();
+    const q2Factor = randInt(2, 6);
 
-    // q4: subtraction same denominator
-    const den4 = randInt(4, 10);
-    const n4a = randInt(3, den4 * 2), n4b = randInt(1, n4a - 1);
-    const diffN4 = n4a - n4b;
-    const [sn4, sd4] = simplify(diffN4, den4);
+    const q3 = makePair();
+    const q3Ans = fracAns(q3.a.n * q3.b.d + q3.b.n * q3.a.d, q3.a.d * q3.b.d);
 
-    // q5: addition different denominators (LCD = d5a * d5b)
-    const d5a = [2, 3, 4, 5][randInt(0, 3)]!;
-    const d5b = [3, 4, 5, 6].filter((x) => x !== d5a)[randInt(0, 2)]!;
-    const n5a = randInt(1, d5a - 1), n5b = randInt(1, d5b - 1);
-    const lcd5 = d5a * d5b;
-    const sumN5 = n5a * d5b + n5b * d5a;
-    const [sn5, sd5] = simplify(sumN5, lcd5);
+    const q4 = makePair();
+    const q4Ans = fracAns(q4.a.n * q4.b.d - q4.b.n * q4.a.d, q4.a.d * q4.b.d);
 
-    // q6: multiply fractions
-    const n6a = randInt(2, 5), d6a = randInt(3, 7);
-    const n6b = randInt(2, 5), d6b = randInt(3, 7);
-    const [sn6, sd6] = simplify(n6a * n6b, d6a * d6b);
+    const q5 = makePair();
+    const q5Ans = fracAns(q5.a.n * q5.b.n, q5.a.d * q5.b.d);
 
-    // q7: divide fractions
-    const n7a = randInt(2, 5), d7a = randInt(3, 7);
-    const n7b = randInt(2, 5), d7b = randInt(3, 7);
-    const [sn7, sd7] = simplify(n7a * d7b, d7a * n7b);
+    const q6 = makePair();
+    const q6Ans = fracAns(q6.a.n * q6.b.d, q6.a.d * q6.b.n);
 
-    // q8: fraction of a number
-    const den8 = [2, 4, 5, 10][randInt(0, 3)]!;
-    const num8 = randInt(1, den8 - 1);
-    const base8 = den8 * randInt(2, 8);
-    const ans8 = (num8 * base8) / den8;
+    const q7 = makePair();
+    const q7Op = Math.random() < 0.5 ? "+" as const : "−" as const;
+    const q7Ans = q7Op === "+"
+      ? fracAns(-q7.a.n * q7.b.d + -q7.b.n * q7.a.d, q7.a.d * q7.b.d)
+      : fracAns(-q7.a.n * q7.b.d - (-q7.b.n * q7.a.d), q7.a.d * q7.b.d);
 
-    return { n1r, d1r, g1, n1s, d1s, whole2, num2, den2, impN2,
-      n3a, n3b, den3, sn3, sd3, n4a, n4b, den4, sn4, sd4,
-      d5a, d5b, n5a, n5b, sn5, sd5, n6a, d6a, n6b, d6b, sn6, sd6,
-      n7a, d7a, n7b, d7b, sn7, sd7, num8, den8, base8, ans8 };
+    const q8 = makePair();
+    const q8Op = Math.random() < 0.5 ? "×" as const : "÷" as const;
+    const q8Ans = q8Op === "×"
+      ? fracAns((-q8.a.n) * (-q8.b.n), q8.a.d * q8.b.d)
+      : fracAns((-q8.a.n) * q8.b.d, q8.a.d * (-q8.b.n));
+
+    return {
+      q1: { fullN: q1Base.n * q1Factor, fullD: q1Base.d * q1Factor, n: q1Base.n, d: q1Base.d, ask: q1Ask },
+      q2: { fullN: q2Base.n * q2Factor, fullD: q2Base.d * q2Factor, n: q2Base.n, d: q2Base.d },
+      q3: { ...q3, ans: q3Ans },
+      q4: { ...q4, ans: q4Ans },
+      q5: { ...q5, ans: q5Ans },
+      q6: { ...q6, ans: q6Ans },
+      q7: { ...q7, op: q7Op, ans: q7Ans },
+      q8: { ...q8, op: q8Op, ans: q8Ans },
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -394,94 +404,93 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
+    const norm = (s: string) => s.trim().replace(/\s/g, "");
     const checks = [
-      () => {
-        // simplify: accept n1s/d1s or whole number if d1s=1
-        const inp = (answers[0] ?? "").trim().replace(/\s/g, "");
-        if (data.d1s === 1) return inp === String(data.n1s);
-        return inp === `${data.n1s}/${data.d1s}` || inp === `${data.n1s}`;
-      },
-      () => {
-        const inp = (answers[1] ?? "").trim().replace(/\s/g, "");
-        return inp === `${data.impN2}/${data.den2}`;
-      },
-      () => {
-        const inp = (answers[2] ?? "").trim().replace(/\s/g, "");
-        if (data.sd3 === 1) return inp === String(data.sn3);
-        return inp === `${data.sn3}/${data.sd3}`;
-      },
-      () => {
-        const inp = (answers[3] ?? "").trim().replace(/\s/g, "");
-        if (data.sd4 === 1) return inp === String(data.sn4);
-        return inp === `${data.sn4}/${data.sd4}`;
-      },
-      () => {
-        const inp = (answers[4] ?? "").trim().replace(/\s/g, "");
-        if (data.sd5 === 1) return inp === String(data.sn5);
-        return inp === `${data.sn5}/${data.sd5}`;
-      },
-      () => {
-        const inp = (answers[5] ?? "").trim().replace(/\s/g, "");
-        if (data.sd6 === 1) return inp === String(data.sn6);
-        return inp === `${data.sn6}/${data.sd6}`;
-      },
-      () => {
-        const inp = (answers[6] ?? "").trim().replace(/\s/g, "");
-        if (data.sd7 === 1) return inp === String(data.sn7);
-        return inp === `${data.sn7}/${data.sd7}`;
-      },
-      () => matchNum(answers[7] ?? "", data.ans8),
+      () => norm(answers[0] ?? "") === String(data.q1.ask === "num" ? data.q1.n : data.q1.d),
+      () => norm(answers[1] ?? "") === String(data.q2.n) && norm(answers[8] ?? "") === String(data.q2.d),
+      () => norm(answers[2] ?? "") === data.q3.ans,
+      () => norm(answers[3] ?? "") === data.q4.ans,
+      () => norm(answers[4] ?? "") === data.q5.ans,
+      () => norm(answers[5] ?? "") === data.q6.ans,
+      () => norm(answers[6] ?? "") === data.q7.ans,
+      () => norm(answers[7] ?? "") === data.q8.ans,
     ];
     checks.forEach((check) => { if (check()) pts += 0.5; });
     onValidated(pts, 4);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const corrFrac = (n: number, d: number) => d === 1 ? String(n) : `${n}/${d}`;
+  const smallBox = (idx: number, correct: string) => (
+    <CorrectionInput
+      value={answers[idx] ?? ""}
+      onChange={(v) => setAns(idx)(v.replace(/[^0-9/-]/g, ""))}
+      correct={correct}
+      validated={validated}
+      width="w-14"
+    />
+  );
+  const signedFrac = (n: number, d: number) => (
+    <span className="inline-flex items-center gap-0.5">
+      <span>−</span>
+      <Frac n={n} d={d} />
+    </span>
+  );
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les fractions sous la forme n/d.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez et simplifiez les fractions.</p>
       <div className="grid items-center gap-x-2 gap-y-2" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-        <span className="text-sm">Simplifier <Frac n={data.n1r * data.g1} d={data.d1r * data.g1} /></span>
+        <span className="text-sm">
+          Simplifier <Frac n={data.q1.fullN} d={data.q1.fullD} /> ={" "}
+          <Frac
+            n={data.q1.ask === "num" ? smallBox(0, String(data.q1.n)) : data.q1.n}
+            d={data.q1.ask === "den" ? smallBox(0, String(data.q1.d)) : data.q1.d}
+          />
+        </span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[0] ?? ""} onChange={setAns(0)} correct={corrFrac(data.n1s, data.d1s)} validated={validated} width="w-24" />
+        <span className="text-xs text-[var(--color-text-secondary)]">{data.q1.ask === "num" ? "numérateur" : "dénominateur"}</span>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-        <span className="text-sm">{data.whole2} <Frac n={data.num2} d={data.den2} className="text-xs" /></span>
+        <span className="text-sm">
+          Simplifier <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
+          <Frac
+            n={smallBox(1, String(data.q2.n))}
+            d={smallBox(8, String(data.q2.d))}
+          />
+        </span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[1] ?? ""} onChange={setAns(1)} correct={`${data.impN2}/${data.den2}`} validated={validated} width="w-24" />
+        <span className="text-xs text-[var(--color-text-secondary)]">numérateur et dénominateur</span>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="text-sm"><Frac n={data.n3a} d={data.den3} /> + <Frac n={data.n3b} d={data.den3} /></span>
+        <span className="text-sm"><Frac n={data.q3.a.n} d={data.q3.a.d} /> + <Frac n={data.q3.b.n} d={data.q3.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[2] ?? ""} onChange={setAns(2)} correct={corrFrac(data.sn3, data.sd3)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[2] ?? ""} onChange={setAns(2)} correct={data.q3.ans} validated={validated} width="w-24" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="text-sm"><Frac n={data.n4a} d={data.den4} /> − <Frac n={data.n4b} d={data.den4} /></span>
+        <span className="text-sm"><Frac n={data.q4.a.n} d={data.q4.a.d} /> − <Frac n={data.q4.b.n} d={data.q4.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[3] ?? ""} onChange={setAns(3)} correct={corrFrac(data.sn4, data.sd4)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[3] ?? ""} onChange={setAns(3)} correct={data.q4.ans} validated={validated} width="w-24" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">5.</span>
-        <span className="text-sm"><Frac n={data.n5a} d={data.d5a} /> + <Frac n={data.n5b} d={data.d5b} /></span>
+        <span className="text-sm"><Frac n={data.q5.a.n} d={data.q5.a.d} /> × <Frac n={data.q5.b.n} d={data.q5.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[4] ?? ""} onChange={setAns(4)} correct={corrFrac(data.sn5, data.sd5)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[4] ?? ""} onChange={setAns(4)} correct={data.q5.ans} validated={validated} width="w-24" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">6.</span>
-        <span className="text-sm"><Frac n={data.n6a} d={data.d6a} /> × <Frac n={data.n6b} d={data.d6b} /></span>
+        <span className="text-sm"><Frac n={data.q6.a.n} d={data.q6.a.d} /> ÷ <Frac n={data.q6.b.n} d={data.q6.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[5] ?? ""} onChange={setAns(5)} correct={corrFrac(data.sn6, data.sd6)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[5] ?? ""} onChange={setAns(5)} correct={data.q6.ans} validated={validated} width="w-24" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">7.</span>
-        <span className="text-sm"><Frac n={data.n7a} d={data.d7a} /> ÷ <Frac n={data.n7b} d={data.d7b} /></span>
+        <span className="text-sm">{signedFrac(data.q7.a.n, data.q7.a.d)} {data.q7.op} {signedFrac(data.q7.b.n, data.q7.b.d)}</span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[6] ?? ""} onChange={setAns(6)} correct={corrFrac(data.sn7, data.sd7)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[6] ?? ""} onChange={setAns(6)} correct={data.q7.ans} validated={validated} width="w-24" />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">8.</span>
-        <span className="text-sm"><Frac n={data.num8} d={data.den8} /> de {data.base8}</span>
+        <span className="text-sm">{signedFrac(data.q8.a.n, data.q8.a.d)} {data.q8.op} {signedFrac(data.q8.b.n, data.q8.b.d)}</span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInput value={answers[7] ?? ""} onChange={setAns(7)} correct={Number.isInteger(data.ans8) ? String(data.ans8) : fmtDec(data.ans8, 2)} validated={validated} width="w-24" />
+        <CorrectionInputText value={answers[7] ?? ""} onChange={setAns(7)} correct={data.q8.ans} validated={validated} width="w-24" />
       </div>
     </div>
   );
@@ -550,33 +559,71 @@ export function Exercise32({ exerciseKey, validated, onValidated, validateTrigge
 
 export function Exercise33({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const fmtLin = (x: number, c = 0) => c === 0 ? `${x}x` : `${x}x ${c > 0 ? "+" : "−"} ${Math.abs(c)}`;
-    const simpleTemplates = Array.from({ length: 10 }, () => () => {
-      const a = randInt(2, 9), b = randInt(2, 9), c = randInt(1, 8);
-      const variants = [
-        { expr: `${a}x + ${b}x + ${c}`, corr: fmtLin(a + b, c) },
-        { expr: `${a}x − ${b} + ${c}x`, corr: fmtLin(a + c, -b) },
-        { expr: `${a}(x + ${b})`, corr: fmtLin(a, a * b) },
-        { expr: `${a}x + ${b} − ${c}`, corr: fmtLin(a, b - c) },
-      ];
-      return variants[randInt(0, variants.length - 1)]!;
-    });
-    const hardTemplates = Array.from({ length: 10 }, () => () => {
-      const a = randInt(2, 6), b = randInt(2, 7), c = randInt(1, 8), d = randInt(2, 6), e = randInt(1, 9);
-      const variants = [
-        { expr: `${a}(${b}x + ${c}) − ${d}x`, corr: fmtLin(a * b - d, a * c) },
-        { expr: `${a}x + ${b}(${c}x − ${d})`, corr: fmtLin(a + b * c, -b * d) },
-        { expr: `${a}(x + ${b}) + ${c}(x − ${d})`, corr: fmtLin(a + c, a * b - c * d) },
-        { expr: `${a}(${b}x + ${c}) − (${d}x + ${e})`, corr: fmtLin(a * b - d, a * c - e) },
-      ];
-      return variants[randInt(0, variants.length - 1)]!;
-    });
-    return [
-      simpleTemplates[randInt(0, 9)]!(),
-      simpleTemplates[randInt(0, 9)]!(),
-      hardTemplates[randInt(0, 9)]!(),
-      hardTemplates[randInt(0, 9)]!(),
+    const clean = (s: string) => s.replace(/\+ -/g, "− ").replace(/- /g, "− ");
+    const lin1 = (x: number, c = 0) => clean(`${x}x ${c >= 0 ? "+" : "−"} ${Math.abs(c)}`);
+    const lin2 = (x: number, y: number, c = 0) => clean(`${x}x ${y >= 0 ? "+" : "−"} ${Math.abs(y)}y ${c >= 0 ? "+" : "−"} ${Math.abs(c)}`);
+    const lin3 = (x: number, y: number, z: number, c = 0) => clean(`${x}x ${y >= 0 ? "+" : "−"} ${Math.abs(y)}y ${z >= 0 ? "+" : "−"} ${Math.abs(z)}z ${c >= 0 ? "+" : "−"} ${Math.abs(c)}`);
+    const pick = <T,>(arr: T[]) => arr[randInt(0, arr.length - 1)]!;
+
+    const oneUnknown: Array<() => { expr: string; corr: string }> = [
+      () => { const a=randInt(2,9), b=randInt(2,9), c=randInt(1,9); return { expr:`${a}x + ${b}x + ${c}`, corr:lin1(a+b,c) }; },
+      () => { const a=randInt(2,9), b=randInt(1,8), c=randInt(2,9); return { expr:`${a}x − ${b} + ${c}x`, corr:lin1(a+c,-b) }; },
+      () => { const a=randInt(2,7), b=randInt(1,9); return { expr:`${a}(x + ${b})`, corr:lin1(a,a*b) }; },
+      () => { const a=randInt(2,7), b=randInt(1,9); return { expr:`${a}(x − ${b})`, corr:lin1(a,-a*b) }; },
+      () => { const a=randInt(2,7), b=randInt(2,8), c=randInt(1,9); return { expr:`${a}(${b}x + ${c})`, corr:lin1(a*b,a*c) }; },
+      () => { const a=randInt(2,7), b=randInt(1,9), c=randInt(1,8); return { expr:`${a}x + ${b} − ${c}`, corr:lin1(a,b-c) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8), c=randInt(1,9); return { expr:`${a}x − (${b}x + ${c})`, corr:lin1(a-b,-c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,8), c=randInt(1,9); return { expr:`${a}(${b}x − ${c})`, corr:lin1(a*b,-a*c) }; },
+      () => { const a=randInt(2,8), b=randInt(1,9), c=randInt(2,8); return { expr:`${a}x + ${b} + ${c}x`, corr:lin1(a+c,b) }; },
+      () => { const a=randInt(2,8), b=randInt(1,9), c=randInt(2,8); return { expr:`${a}x − ${b} − ${c}x`, corr:lin1(a-c,-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr:`${a}(x + ${b}) − ${c}x`, corr:lin1(a-c,a*b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr:`${a}x + ${b}(x − ${c})`, corr:lin1(a+b,-b*c) }; },
+      () => { const a=randInt(2,9), b=randInt(2,9); return { expr:`${a}x + x − ${b}`, corr:lin1(a+1,-b) }; },
+      () => { const a=randInt(2,9), b=randInt(2,9); return { expr:`${a}x − x + ${b}`, corr:lin1(a-1,b) }; },
+      () => { const a=randInt(2,6), b=randInt(1,8), c=randInt(1,9); return { expr:`${a}(x + ${b}) + ${c}`, corr:lin1(a,a*b+c) }; },
     ];
+    const twoUnknown: Array<() => { expr: string; corr: string }> = [
+      () => { const a=randInt(2,8), b=randInt(2,8), c=randInt(2,8); return { expr:`${a}x + ${b}y + ${c}x`, corr:lin2(a+c,b) }; },
+      () => { const a=randInt(2,7), b=randInt(2,7), c=randInt(1,8); return { expr:`${a}(x + y) + ${b}x − ${c}`, corr:lin2(a+b,a,-c) }; },
+      () => { const a=randInt(2,7), b=randInt(1,8), c=randInt(2,7); return { expr:`${a}x − ${b}y + ${c}y`, corr:lin2(a,c-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr:`${a}(${b}x + y) − ${c}y`, corr:lin2(a*b,a-c) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8), c=randInt(1,9); return { expr:`${a}x + ${b}y + ${c}`, corr:lin2(a,b,c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr:`${a}(x − y) + ${b}y + ${c}`, corr:lin2(a,b-a,c) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8), c=randInt(1,9); return { expr:`${a}x − (${b}y + ${c})`, corr:lin2(a,-b,-c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6); return { expr:`${a}(x + y) + ${b}(x − y)`, corr:lin2(a+b,a-b) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8); return { expr:`x + ${a}y + ${b}x`, corr:lin2(b+1,a) }; },
+      () => { const a=randInt(2,7), b=randInt(2,7), c=randInt(2,7); return { expr:`${a}(${b}x − ${c}y)`, corr:lin2(a*b,-a*c) }; },
+      () => { const a=randInt(2,7), b=randInt(1,8); return { expr:`${a}x + y − ${b}x`, corr:lin2(a-b,1) }; },
+      () => { const a=randInt(2,7), b=randInt(1,8); return { expr:`${a}y + x − ${b}y`, corr:lin2(1,a-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,9); return { expr:`${a}(x + ${c}) + ${b}y`, corr:lin2(a,b,a*c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,9); return { expr:`${a}x + ${b}(y − ${c})`, corr:lin2(a,b,-b*c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6); return { expr:`${a}(x + y) − ${b}(x + y)`, corr:lin2(a-b,a-b) }; },
+    ];
+    const threeUnknown: Array<() => { expr: string; corr: string }> = [
+      () => { const a=randInt(2,7), b=randInt(2,7), c=randInt(2,7); return { expr:`${a}x + ${b}y + ${c}z`, corr:lin3(a,b,c) }; },
+      () => { const a=randInt(2,7), b=randInt(2,7), c=randInt(2,7); return { expr:`${a}(x + y + z) − ${b}x + ${c}`, corr:lin3(a-b,a,a,c) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6); return { expr:`${a}(x − y) + ${b}z`, corr:lin3(a,-a,b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(2,6); return { expr:`${a}x + ${b}(y − z) + ${c}z`, corr:lin3(a,b,c-b) }; },
+      () => { const a=randInt(2,6), b=randInt(1,8); return { expr:`${a}(x + y) + z − ${b}`, corr:lin3(a,a,1,-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(2,6); return { expr:`${a}(x + z) − ${b}y + ${c}z`, corr:lin3(a,-b,a+c) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8); return { expr:`x + ${a}y + ${b}z − y`, corr:lin3(1,a-1,b) }; },
+      () => { const a=randInt(2,8), b=randInt(2,8); return { expr:`${a}x − z + ${b}z + y`, corr:lin3(a,1,b-1) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6); return { expr:`${a}(x + y − z) + ${b}z`, corr:lin3(a,a,b-a) }; },
+      () => { const a=randInt(2,6), b=randInt(1,9); return { expr:`${a}x + ${a}y + ${a}z + ${b}`, corr:lin3(a,a,a,b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(2,6); return { expr:`${a}(x − y) + ${b}(y − z) + ${c}z`, corr:lin3(a,b-a,c-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6); return { expr:`${a}(x + z) − ${b}(y + z)`, corr:lin3(a,-b,a-b) }; },
+      () => { const a=randInt(2,6), b=randInt(2,6), c=randInt(1,8); return { expr:`${a}x + ${b}y − (${c}z + y)`, corr:lin3(a,b-1,-c) }; },
+      () => { const a=randInt(2,7), b=randInt(1,8); return { expr:`${a}(x + y + z) − ${b}z`, corr:lin3(a,a,a-b) }; },
+      () => { const a=randInt(2,7), b=randInt(2,7), c=randInt(1,9); return { expr:`${a}x + ${b}y + z − ${c}`, corr:lin3(a,b,1,-c) }; },
+    ];
+    const identities: Array<() => { expr: string; corr: string }> = [
+      () => { const a=randInt(2,9); return { expr:`(x + ${a})²`, corr:`x² + ${2*a}x + ${a*a}` }; },
+      () => { const a=randInt(2,9); return { expr:`(x − ${a})²`, corr:`x² − ${2*a}x + ${a*a}` }; },
+      () => { const a=randInt(2,9); return { expr:`(x + ${a})(x − ${a})`, corr:`x² − ${a*a}` }; },
+      () => { const a=randInt(2,6), b=randInt(2,9); return { expr:`(${a}x + ${b})²`, corr:`${a*a}x² + ${2*a*b}x + ${b*b}` }; },
+      () => { const a=randInt(2,6), b=randInt(2,9); return { expr:`(${a}x − ${b})²`, corr:`${a*a}x² − ${2*a*b}x + ${b*b}` }; },
+    ];
+    return [pick(oneUnknown)(), pick(twoUnknown)(), pick(threeUnknown)(), pick(identities)()];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
@@ -741,27 +788,27 @@ export function Exercise35({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Trouver la valeur de x.</p>
       <div className="space-y-5 text-sm">
-        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "max-content max-content max-content max-content" }}>
+        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "1.5rem minmax(0, max-content) 2.5rem max-content" }}>
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
           <span className="font-mono">{data.q1.left}</span>
           <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
           <span className="font-mono">{data.q1.right}</span>
 
           <span />
-          <span />
-          <span className="justify-self-center text-[var(--color-text-secondary)]">x =</span>
+          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">x</span>
+          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
           <CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.x)} validated={validated} width="w-20" />
         </div>
 
-        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "max-content max-content max-content max-content" }}>
+        <div className="grid items-center gap-x-2 gap-y-2" style={{ gridTemplateColumns: "1.5rem minmax(0, max-content) 2.5rem max-content" }}>
           <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
           <span className="font-mono">{data.q2.left}</span>
           <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
           <span className="font-mono">{data.q2.right}</span>
 
           <span />
-          <span />
-          <span className="justify-self-center text-[var(--color-text-secondary)]">x =</span>
+          <span className="justify-self-end font-mono text-[var(--color-text-primary)]">x</span>
+          <span className="justify-self-center text-[var(--color-text-secondary)]">=</span>
           <CorrectionInput value={a2} onChange={setA2} correct={String(data.q2.x)} validated={validated} width="w-20" />
         </div>
       </div>

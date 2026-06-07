@@ -55,13 +55,13 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
-  const wrong = validated && value.trim() !== "" && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
+  const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
     <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col leading-tight">
-            <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>
+            {value.trim() && <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>}
             <span className="font-bold text-amber-500">{correct}</span>
           </div>
         ) : (
@@ -187,8 +187,8 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const isVisible = i === visPos[0] || i === visPos[1];
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
         const pillCls = isInt
-          ? "h-9 w-28 inline-flex items-center justify-center rounded-full font-mono text-base font-semibold"
-          : "h-9 w-20 inline-flex items-center justify-center rounded-full font-mono text-base font-semibold";
+          ? "h-9 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold"
+          : "h-9 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold";
         if (isVisible) {
           return (
             <div key={i} className={`${pillCls} border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]`}>{display}</div>
@@ -263,18 +263,20 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
 
   return (
     <div className="space-y-3">
-      <div className="flex min-h-10 flex-wrap gap-2">
-        {available.map((n, ni) => {
-          const cls = chipBase + (validated
-            ? "cursor-default border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40"
-            : "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]");
-          return (
-            <button key={ni} type="button" disabled={validated} onClick={() => onToggle(n)} className={cls}>
-              {fmt(n)}
-            </button>
-          );
-        })}
-      </div>
+      {available.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {available.map((n, ni) => {
+            const cls = chipBase + (validated
+              ? "cursor-default border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40"
+              : "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]");
+            return (
+              <button key={ni} type="button" disabled={validated} onClick={() => onToggle(n)} className={cls}>
+                {fmt(n)}
+              </button>
+            );
+          })}
+        </div>
+      )}
       <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
         {selected.length > 0
           ? selected.map((n, si) => (
@@ -285,7 +287,6 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
                 onClick={() => onToggle(n)}
                 className={`${chipBase}${validated ? "cursor-default" : "cursor-pointer"} border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white`}
               >
-                <span className="mr-1 text-xs opacity-75">{si + 1}.</span>
                 {fmt(n)}
               </button>
               {si < selected.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{desc ? ">" : "<"}</span>}
@@ -958,10 +959,31 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
         };
       }
     };
+    const makeSmallDecimalQ = () => {
+      const decPlaces = (Math.random() < 0.5 ? 2 : 3) as 2 | 3;
+      const scale = decPlaces === 2 ? 100 : 1000;
+      for (;;) {
+        const divisor = randInt(2, 9);
+        const digits = Array.from({ length: 4 }, () => randInt(1, 9));
+        digits[randInt(1, 2)] = 0;
+        if (digits[3] === 0) digits[3] = randInt(1, 9);
+        const dividendInt = Number(digits.join(""));
+        if (dividendInt % divisor !== 0) continue;
+        const quotientInt = dividendInt / divisor;
+        return {
+          dividendInt,
+          divisor,
+          quotientInt,
+          dividend: dividendInt / scale,
+          quotient: quotientInt / scale,
+          decPlaces,
+        };
+      }
+    };
 
     return [
       makeQ(1),
-      makeQ(2),
+      makeSmallDecimalQ(),
     ];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -1038,7 +1060,7 @@ function pickSingleShapeCfg(): { kind: ShapeKind; d: number } {
     () => ({ kind: "circle",        d: randInt(2, 10) }),
     () => ({ kind: "semicircle",    d: randInt(2, 8) }),
     () => ({ kind: "quartercircle", d: randInt(2, 8) }),
-    () => ({ kind: "hexagon",       d: ([2, 3, 4, 6, 9, 12] as const)[randInt(0, 5)]! }),
+    () => ({ kind: "hexagon",       d: ([2, 3, 4, 6, 12] as const)[randInt(0, 4)]! }),
   ];
   return shuffle(pickers)[0]!();
 }
@@ -1147,12 +1169,12 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
               <div className="flex flex-1 justify-center overflow-hidden">
                 {item.multi ? (
                   <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
-                    colored={coloredSets[i]!}
+                    colored={validated ? preColorFlat(item.n, item.d) : coloredSets[i]!}
                     onToggle={validated ? undefined : fi => toggle(i, fi)}
                     scale={computeScale(item.kind, item.copies)}
                   />
                 ) : (
-                  <FractionShape kind={item.kind} d={item.d} colored={coloredSets[i]!}
+                  <FractionShape kind={item.kind} d={item.d} colored={validated ? new Set(Array.from({ length: item.n }, (_, k) => k)) : coloredSets[i]!}
                     onToggle={validated ? undefined : ci => toggle(i, ci)}
                   />
                 )}
@@ -1183,8 +1205,6 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const inputCls = `w-12 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] disabled:opacity-60`;
-
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Observe les formes coloriées et écris la fraction représentée.</p>
@@ -1195,13 +1215,21 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
             <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
               <div className="flex items-center gap-3">
                 <div className="shrink-0 flex flex-col items-center gap-1">
-                  <input type="text" value={nums[i]} disabled={validated}
-                    onChange={e => { if (!validated) setNums(p => { const n = [...p]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls} />
+                  <CorrectionInput
+                    value={nums[i] ?? ""}
+                    onChange={v => setNums(p => { const n = [...p]; n[i] = v; return n; })}
+                    correct={String(item.n)}
+                    validated={validated}
+                    width="w-12"
+                  />
                   <span className="h-[2px] w-12 rounded bg-[var(--color-text-primary)]" />
-                  <input type="text" value={dens[i]} disabled={validated}
-                    onChange={e => { if (!validated) setDens(p => { const n = [...p]; n[i] = e.target.value; return n; }); }}
-                    className={inputCls} />
+                  <CorrectionInput
+                    value={dens[i] ?? ""}
+                    onChange={v => setDens(p => { const n = [...p]; n[i] = v; return n; })}
+                    correct={String(item.d)}
+                    validated={validated}
+                    width="w-12"
+                  />
                 </div>
                 <div className="flex flex-1 justify-center overflow-hidden">
                   {item.multi ? (

@@ -71,21 +71,32 @@ function CorrectionInput({
 type ShapeType = "circle" | "square" | "triangle" | "star";
 
 function makeShapes(count: number, seed: number): Array<{ x: number; y: number; size: number; id: number }> {
-  const positions: Array<{ x: number; y: number; size: number; id: number }> = [];
-  const used: Array<{ x: number; y: number }> = [];
-  let attempts = 0;
-  while (positions.length < count && attempts < 1000) {
-    attempts++;
-    const x = 10 + Math.abs(Math.sin((seed + attempts) * 23.71 + positions.length * 11.3)) * 280;
-    const y = 10 + Math.abs(Math.cos((seed + attempts) * 17.13 + positions.length * 7.9)) * 90;
-    const tooClose = used.some(u => Math.hypot(u.x - x, u.y - y) < 22);
-    if (!tooClose) {
-      used.push({ x, y });
-      const size = 6 + (seed + positions.length * 13 + attempts * 7) % 4;
-      positions.push({ x, y, size, id: positions.length });
-    }
-  }
-  return positions;
+  const pad = 5;
+  const maxSize = 8;
+  const minX = pad + maxSize;
+  const maxX = 300 - pad - maxSize;
+  const minY = pad + maxSize;
+  const maxY = 110 - pad - maxSize;
+  const cols = Math.ceil(Math.sqrt(count * 2.8));
+  const rows = Math.ceil(count / cols);
+  const cells = Array.from({ length: cols * rows }, (_, i) => i)
+    .sort((a, b) => Math.sin((a + seed) * 12.9898) - Math.sin((b + seed) * 12.9898));
+
+  return cells.slice(0, count).map((cell, id) => {
+    const col = cell % cols;
+    const row = Math.floor(cell / cols);
+    const baseX = cols === 1 ? (minX + maxX) / 2 : minX + (col / (cols - 1)) * (maxX - minX);
+    const baseY = rows === 1 ? (minY + maxY) / 2 : minY + (row / (rows - 1)) * (maxY - minY);
+    const jitterX = Math.sin((seed + id * 31) * 1.73) * 5;
+    const jitterY = Math.cos((seed + id * 37) * 1.91) * 5;
+    const size = 6 + Math.abs((seed + id * 13) % 3);
+    return {
+      x: Math.min(maxX, Math.max(minX, baseX + jitterX)),
+      y: Math.min(maxY, Math.max(minY, baseY + jitterY)),
+      size,
+      id,
+    };
+  });
 }
 
 function ShapeSvg({ shape, x, y, size = 7 }: { shape: ShapeType; x: number; y: number; size?: number }) {
@@ -1388,12 +1399,33 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
   const colLabels = dividendCols === 4 ? ["M","C","D","U"] : ["DM","M","C","D","U"];
   const CW = 32;
 
-  const digIn = (val: string, onChange: (v: string) => void) => (
-    <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
-      onChange={e => onChange(e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
-    />
-  );
+  const digIn = (val: string, correct: string, onChange: (v: string) => void) => {
+    const wrong = validated && val.trim() !== correct;
+    if (validated) {
+      return (
+        <div className={`flex h-8 w-8 items-center justify-center rounded border text-center font-mono ${
+          wrong
+            ? "border-amber-400 bg-amber-50 text-amber-700"
+            : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
+        }`}>
+          {wrong ? (
+            <div className="flex flex-col leading-tight">
+              {val.trim() && <span className="text-[9px] text-[var(--color-text-secondary)] line-through">{val}</span>}
+              <span className="text-sm font-semibold">{correct}</span>
+            </div>
+          ) : (
+            <span>{val || correct}</span>
+          )}
+        </div>
+      );
+    }
+    return (
+      <input type="text" inputMode="numeric" maxLength={1} value={val}
+        onChange={e => onChange(e.target.value.replace(/[^0-9]/g,"").slice(-1))}
+        className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
+      />
+    );
+  };
   const preCell = (ch: string, hide?: boolean) => (
     <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : ch}</div>
   );
@@ -1410,7 +1442,7 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
           const val = hasDigit ? (workFlat[flatIdx] ?? "") : "";
           return (
             <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
-              {hasDigit ? digIn(val, v => onWorkChange(si, type, relIdx, v)) : emptyCell()}
+              {hasDigit ? digIn(val, numStr[relIdx]!, v => onWorkChange(si, type, relIdx, v)) : emptyCell()}
             </td>
           );
         })}
