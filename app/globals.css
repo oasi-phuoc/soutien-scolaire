@@ -90,6 +90,31 @@ body {
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-geist-sans), system-ui, sans-serif !important;
 }
 
+.math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]) {
+  border-radius: 0 !important;
+  border-width: 0 !important;
+  border-bottom: 2px solid color-mix(in oklch, var(--color-accent-alg) 60%, transparent) !important;
+  background: color-mix(in oklch, var(--color-accent-alg) 7%, transparent) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
+  border-bottom-color: var(--color-accent-alg) !important;
+  background: color-mix(in oklch, var(--color-accent-alg) 12%, transparent) !important;
+}
+
+.math-module-page input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.math-module-page input[type="number"]::-webkit-inner-spin-button,
+.math-module-page input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
 /* Hide number input spinners in Firefox */
 input[type=number] {
   -moz-appearance: textfield;

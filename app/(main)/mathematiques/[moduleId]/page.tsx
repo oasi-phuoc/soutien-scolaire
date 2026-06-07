@@ -38,7 +38,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   const tabLabel = parentMod?.branch === "geometry" ? "Formes" : "Calculs";
 
   return (
-    <main className="mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+    <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
           Mathématiques · {tabLabel} · {parentMod?.code ?? parentModuleId}

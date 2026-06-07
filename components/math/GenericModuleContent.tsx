@@ -7,6 +7,7 @@ import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib
 import { getTrad } from "@/lib/curriculum/content/math/trad";
 import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
+import { getMathModule } from "@/lib/curriculum/math-data";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring";
 import { usePivotLang } from "@/components/math/usePivotLang";
@@ -16,6 +17,8 @@ import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-[var(--color-accent-alg)]/5 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] focus:bg-[var(--color-accent-alg)]/10 disabled:opacity-70";
+const MATH_NUMBER_INPUT_BASE = `${MATH_TEXT_INPUT_BASE} appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
 
 function renderBold(text: string) {
   const parts = text.split(/\*\*(.+?)\*\*/g);
@@ -153,16 +156,16 @@ type DecSeqCompleteStep = { kind: "dec_seq_complete"; lesson: MathSubmoduleLesso
 // A3.5 types
 type MultSelectConfig = { base: number; numbers: number[]; exNum: number };
 type MultSelectStep = { kind: "mult_select"; lesson: MathSubmoduleLesson; config: MultSelectConfig };
-type MultListConfig = { base: number; exNum: number };
+type MultListConfig = { bases: [number, number]; exNum: number };
 type MultListStep = { kind: "mult_list"; lesson: MathSubmoduleLesson; config: MultListConfig };
 type TrueFalseMultDivQ = { statement: string; answer: boolean; type: "multiple"|"diviseur" };
 type TrueFalseMultDivConfig = { questions: TrueFalseMultDivQ[]; exNum: number };
 type TrueFalseMultDivStep = { kind: "true_false_mult_div"; lesson: MathSubmoduleLesson; config: TrueFalseMultDivConfig };
-type FindDivisorsConfig = { number: number; divisors: number[]; exNum: number };
+type FindDivisorsConfig = { questions: Array<{ number: number; divisors: number[] }>; exNum: number };
 type FindDivisorsStep = { kind: "find_divisors"; lesson: MathSubmoduleLesson; config: FindDivisorsConfig };
 type DivSelectConfig = { base: number; numbers: number[]; exNum: number };
 type DivSelectStep = { kind: "div_select"; lesson: MathSubmoduleLesson; config: DivSelectConfig };
-type DivByConfig = { questions: Array<{n: number; validDivisors: number[]}>; exNum: number };
+type DivByConfig = { questions: Array<{n: number; validDivisors: number[]; choices: number[]}>; exNum: number };
 type DivByStep = { kind: "div_by"; lesson: MathSubmoduleLesson; config: DivByConfig };
 type MissingDigitDivQ = { prefix: string; divisor: number; validDigits: string[] };
 type MissingDigitDivConfig = { questions: MissingDigitDivQ[]; exNum: number };
@@ -1099,8 +1102,28 @@ function genMultSelect(exNum: number): MultSelectConfig {
 }
 
 function genMultList(exNum: number): MultListConfig {
-  const base = rnd(2, 12);
-  return { base, exNum };
+  const first = rnd(2, 12);
+  let second = rnd(2, 12);
+  while (second === first) second = rnd(2, 12);
+  return { bases: [first, second], exNum };
+}
+
+function formatNumsEt(nums: number[]): string {
+  if (nums.length <= 2) return nums.join(" et ");
+  return `${nums.slice(0, -1).join(", ")} et ${nums[nums.length - 1]}`;
+}
+
+function parseNumberList(input: string): number[] {
+  return input
+    .split(/[,;\s]+/)
+    .map((part) => parseInt(part.trim(), 10))
+    .filter((n) => !isNaN(n));
+}
+
+function matchesMultList(input: string, base: number): boolean {
+  const expected = Array.from({ length: 5 }, (_, i) => base * (i + 1));
+  const values = parseNumberList(input);
+  return values.length === expected.length && values.every((n, i) => n === expected[i]);
 }
 
 function genTrueFalseMultDiv(exNum: number): TrueFalseMultDivConfig {
@@ -1138,8 +1161,13 @@ function genTrueFalseMultDiv(exNum: number): TrueFalseMultDivConfig {
 
 function genFindDivisors(exNum: number): FindDivisorsConfig {
   const candidates = [12,15,16,18,20,24,28,30,32,36,40,42,45,48,50,54,56,60];
-  const n = candidates[rnd(0, candidates.length - 1)]!;
-  return { number: n, divisors: getDivisors(n), exNum };
+  const first = candidates[rnd(0, candidates.length - 1)]!;
+  let second = candidates[rnd(0, candidates.length - 1)]!;
+  while (second === first) second = candidates[rnd(0, candidates.length - 1)]!;
+  return {
+    questions: [first, second].map((number) => ({ number, divisors: getDivisors(number) })),
+    exNum,
+  };
 }
 
 function genDivSelect(exNum: number): DivSelectConfig {
@@ -1163,13 +1191,17 @@ function genDivSelect(exNum: number): DivSelectConfig {
 
 function genDivBy(exNum: number): DivByConfig {
   const validBases = [2, 3, 4, 5, 6, 9, 10];
-  const questions: Array<{n: number; validDivisors: number[]}> = [];
+  const questions: DivByConfig["questions"] = [];
   for (let i = 0; i < 5; i++) {
     const base = validBases[rnd(0, validBases.length - 1)]!;
     const k = rnd(2, 15);
     const n = base * k;
     const vd = validBases.filter(b => n % b === 0);
-    questions.push({ n, validDivisors: vd });
+    let choices = shuffleArr(validBases).slice(0, 5);
+    if (!choices.some((choice) => vd.includes(choice))) {
+      choices = shuffleArr([vd[0]!, ...choices.slice(1)]);
+    }
+    questions.push({ n, validDivisors: vd, choices });
   }
   return { questions, exNum };
 }
@@ -1177,10 +1209,13 @@ function genDivBy(exNum: number): DivByConfig {
 function genMissingDigitDiv(exNum: number): MissingDigitDivConfig {
   const validBases = [2, 3, 4, 5, 6, 9, 10];
   const questions: MissingDigitDivQ[] = [];
+  const fixedDigitCounts = [1, 1, 2, 2, 3];
   for (let i = 0; i < 5; i++) {
     const divisor = validBases[rnd(0, validBases.length - 1)]!;
-    // 2-digit: prefix 1 digit (1-9), missing units digit
-    const prefix = rnd(1, 9);
+    const digitCount = fixedDigitCounts[i] ?? 1;
+    const minPrefix = 10 ** (digitCount - 1);
+    const maxPrefix = 10 ** digitCount - 1;
+    const prefix = rnd(minPrefix, maxPrefix);
     const validDigits: string[] = [];
     for (let d = 0; d <= 9; d++) {
       const full = prefix * 10 + d;
@@ -1202,6 +1237,14 @@ function genMissingDigitDiv(exNum: number): MissingDigitDivConfig {
 
 function genGcdLcm(op: "pgcd"|"ppmc", count: 2|3, exNum: number): GcdLcmConfig {
   const questions: Array<{nums: number[]; answer: number}> = [];
+  const uniqueRnd = (min: number, max: number, amount: number) => {
+    const nums: number[] = [];
+    while (nums.length < amount) {
+      const n = rnd(min, max);
+      if (!nums.includes(n)) nums.push(n);
+    }
+    return nums;
+  };
   for (let i = 0; i < 5; i++) {
     let nums: number[];
     let answer: number;
@@ -1213,25 +1256,16 @@ function genGcdLcm(op: "pgcd"|"ppmc", count: 2|3, exNum: number): GcdLcmConfig {
         nums = [a, b];
         answer = gcdN(a, b);
       } else {
-        const g = rnd(2, 6);
-        const a = g * rnd(2, 6);
-        const b = g * rnd(2, 6);
-        const c = g * rnd(2, 6);
-        nums = [a, b, c];
-        answer = gcdN(a, b, c);
+        nums = uniqueRnd(10, 100, 3);
+        answer = gcdN(nums[0]!, nums[1]!, nums[2]!);
       }
     } else {
       if (count === 2) {
-        const a = rnd(2, 12);
-        const b = rnd(2, 12);
-        nums = [a, b];
-        answer = lcmN(a, b);
+        nums = uniqueRnd(2, 99, 2);
+        answer = lcmN(nums[0]!, nums[1]!);
       } else {
-        const a = rnd(2, 8);
-        const b = rnd(2, 8);
-        const c = rnd(2, 8);
-        nums = [a, b, c];
-        answer = lcmN(a, b, c);
+        nums = uniqueRnd(10, 100, 3);
+        answer = lcmN(nums[0]!, nums[1]!, nums[2]!);
       }
     }
     questions.push({ nums, answer });
@@ -1250,12 +1284,12 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
       const correct = gcdN(a, b);
       const isTrue = Math.random() < 0.5;
       const stated = isTrue ? correct : (correct + rnd(1, 3));
-      questions.push({ statement: `Le PGCD de ${a} et ${b} est ${stated}`, answer: isTrue, type: "pgcd" });
+      questions.push({ statement: `Le PGDC de ${a} et ${b} est ${stated}`, answer: isTrue, type: "pgcd" });
     } else {
       const correct = lcmN(a, b);
       const isTrue = Math.random() < 0.5;
       const stated = isTrue ? correct : (correct + rnd(1, 3) * a);
-      questions.push({ statement: `Le PPCM de ${a} et ${b} est ${stated}`, answer: isTrue, type: "ppmc" });
+      questions.push({ statement: `Le PPMC de ${a} et ${b} est ${stated}`, answer: isTrue, type: "ppmc" });
     }
   }
   return { questions: shuffleArr(questions), exNum };
@@ -1303,7 +1337,7 @@ function ArithmeticGroupExercise({
   }, [config.timer]);
 
   const numCls = "w-14 text-center font-mono text-sm text-[var(--color-text-primary)]";
-  const inputBase = "w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  const inputBase = `w-14 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
 
   const formatTime = (secs: number) => {
     const m = Math.floor(secs / 60);
@@ -1341,19 +1375,19 @@ function ArithmeticGroupExercise({
               {q.missingPos === "a"
                 ? wrongField
                   ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
                   ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
                   ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
           );
@@ -1410,7 +1444,7 @@ function ColumnGridCard({
     const ok = validated ? cellOk(expected, val, col, firstNz ?? 0) : null;
     if (ok === false) {
       return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+        <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
           <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
         </div>
@@ -1429,10 +1463,7 @@ function ColumnGridCard({
         }}
         onKeyDown={tabNav}
         onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-          : "border-[var(--color-border-default)]"
-        }`}
+        className={`h-8 w-8 px-0 text-base ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -1470,7 +1501,7 @@ function ColumnGridCard({
               return (
                 <td key={ci} className="text-center">
                   {carryWrong ? (
-                    <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                    <div className={`h-5 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-[8px] leading-none">{carryVal || "—"}</span>
                       <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expectedCarry}</span>
                     </div>
@@ -1487,7 +1518,7 @@ function ColumnGridCard({
                       }}
                       onKeyDown={tabNav}
                       onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                      className={`h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]`}
+                      className={`h-5 w-8 px-0 text-[10px] text-orange-500 ${MATH_TEXT_INPUT_BASE}`}
                     />
                   )}
                 </td>
@@ -1614,7 +1645,7 @@ function DivColumnCard({
   }) => {
     const ok = validated ? val.trim() === expected : null;
     if (ok === false) return (
-      <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+      <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
         <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
         <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
       </div>
@@ -1624,9 +1655,7 @@ function DivColumnCard({
         onChange={e => onChange(e.target.value.replace(/[^0-9]/g, "").slice(-1))}
         onKeyDown={tabNav}
         onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)]"
-        }`}
+        className={`h-8 w-8 px-0 text-base ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -1662,6 +1691,9 @@ function DivColumnCard({
 
   return (
     <div data-divcol-card className="overflow-x-auto">
+      <p className="mb-2 text-center font-mono text-sm text-[var(--color-text-primary)]">
+        {dividend} ÷ {divisor}
+      </p>
       <table className="mx-auto border-collapse table-fixed">
         <tbody>
           {/* Row 0: Column headers */}
@@ -1774,7 +1806,7 @@ function DivColumnCard({
             </td>
             <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
               {remOk === false
-                ? <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                ? <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
                     <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
                     <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
                   </div>
@@ -1782,11 +1814,7 @@ function DivColumnCard({
                     onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
                     onKeyDown={tabNav}
                     onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-                    className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 ${
-                      remOk === null
-                        ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-                        : "border-[var(--color-border-default)]"
-                    }`}
+                    className={`h-8 w-8 px-0 text-base ${MATH_TEXT_INPUT_BASE}`}
                   />}
             </td>
             <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
@@ -1851,7 +1879,7 @@ function Mul2DigitCard({
     const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+        <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
           <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
         </div>
@@ -1862,10 +1890,7 @@ function Mul2DigitCard({
         onChange={e => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
-          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
-          : "border-[var(--color-border-default)]"
-        }`}
+        className={`h-8 w-8 px-0 text-base ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -1882,7 +1907,7 @@ function Mul2DigitCard({
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG}`}>
+        <div className={`h-5 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
           <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
         </div>
@@ -1893,7 +1918,7 @@ function Mul2DigitCard({
         onChange={e => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={e => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className={`h-5 w-8 px-0 text-[10px] text-orange-500 ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -2077,7 +2102,7 @@ function RoundingExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
 }) {
-  const inputBase = "w-[4.5rem] h-8 shrink-0 rounded border px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
   const isDecKind = config.kind.startsWith("dec_");
@@ -2090,7 +2115,7 @@ function RoundingExercise({
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
         <div
           className={isInline ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
-          style={isInline ? { gridTemplateColumns: "1.25rem 1fr auto 4.5rem" } : isNew && !isInline ? { gridTemplateColumns: "1.25rem 1fr auto" } : undefined}
+          style={isInline ? { gridTemplateColumns: "1.25rem max-content max-content 4.5rem" } : isNew && !isInline ? { gridTemplateColumns: "1.25rem max-content max-content" } : undefined}
         >
           {config.questions.map((q, i) => {
             const v = answers[i] ?? "";
@@ -2109,7 +2134,7 @@ function RoundingExercise({
                   value={v}
                   disabled={validated}
                   onChange={e => onChange(i, e.target.value)}
-                  className={`${inputBase} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`}
+                  className={inputBase}
                 />;
             if (isInline) {
               return (
@@ -2171,7 +2196,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
               <FracDisplay num={q.num} den={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
               {wrong ? (
-                <div className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm flex flex-col items-center justify-center ${CLS_WRONG}`}>
+                <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center ${CLS_WRONG}`}>
                   <span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span>
                   <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.ask === "num" ? q.num : q.den}</span>
                 </div>
@@ -2181,10 +2206,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
                   value={v}
                   disabled={validated}
                   onChange={e => onChange(i, e.target.value)}
-                  className={`w-14 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none ${
-                    ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20"
-                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
-                  }`}
+                  className={`w-14 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`}
                 />
               )}
             </div>
@@ -2210,7 +2232,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
           const ok = validated ? results[i] : null;
           const wrong = ok === false;
           const correctAns = q.answer;
-          const inputW = "w-12 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+          const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
           return (
             <div key={i} className="flex items-center gap-2">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -2219,13 +2241,13 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
               {q.missingPos === "num" ? (
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   {wrong ? (
-                    <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
                       <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
-                      className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                      className={inputW} />
                   )}
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   <span className="text-sm font-bold text-[var(--color-text-primary)]">{q.tgtDen}</span>
@@ -2235,13 +2257,13 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
-                    <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
                       <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
-                      className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                      className={inputW} />
                   )}
                 </span>
               )}
@@ -2261,7 +2283,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
   results: boolean[];
   onChange: (i: number, part: "num" | "den", val: string) => void;
 }) {
-  const inputW = "w-12 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+  const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
@@ -2278,23 +2300,23 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
               <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
               <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                 {wrong ? (
-                  <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
                     <span className="line-through text-amber-500 text-[9px] leading-none">{ans.num||"—"}</span>
                     <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simNum}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
-                    className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                    className={inputW} />
                 )}
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
-                  <div className={`w-12 rounded border flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
                     <span className="line-through text-amber-500 text-[9px] leading-none">{ans.den||"—"}</span>
                     <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simDen}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value)}
-                    className={`${inputW} ${ok === true ? "border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                    className={inputW} />
                 )}
               </span>
             </div>
@@ -3532,8 +3554,8 @@ function getStepHint(step: FlatStep | undefined): string | undefined {
   if (step.kind === "div_select") return "Un diviseur de n divise n exactement. Teste si n ÷ d = nombre entier sans reste.";
   if (step.kind === "div_by") return "Diviser par 10 : déplace la virgule d'un rang à gauche. Par 100 : deux rangs. Par 0,1 : c'est multiplier par 10.";
   if (step.kind === "missing_digit_div") return "Retrouve le chiffre manquant en faisant le calcul à rebours : multiplie le quotient par le diviseur et vérifie.";
-  if (step.kind === "gcd_lcm") return "PGCD : décompose en facteurs premiers, prends les facteurs communs au plus petit exposant. PPCM = (a × b) ÷ PGCD(a,b).";
-  if (step.kind === "true_false_gcd_lcm") return "PGCD divise les deux nombres. PPCM est divisible par les deux. Vérifie avec la définition.";
+  if (step.kind === "gcd_lcm") return "PGDC : décompose en facteurs premiers, prends les facteurs communs au plus petit exposant. PPMC = (a × b) ÷ PGDC(a,b).";
+  if (step.kind === "true_false_gcd_lcm") return "PGDC divise les deux nombres. PPMC est divisible par les deux. Vérifie avec la définition.";
   if (step.kind === "dec_ordering") return "Compare les chiffres position par position : entiers d'abord, puis dixièmes, centièmes…";
   if (step.kind === "dec_seq_rule") return "Calcule la différence entre deux termes décimaux consécutifs.";
   if (step.kind === "dec_seq_complete") return "Applique la raison décimale trouvée pour compléter les termes manquants.";
@@ -3580,15 +3602,79 @@ function TheoryView({ lesson, pivot, showPivot }: {
 }
 
 // ── Main component ───────────────────────────────────────────────────────────
+const A11_WORDS: Record<number, string[]> = {
+  1: ["un", "une"], 2: ["deux"], 3: ["trois"], 4: ["quatre"], 5: ["cinq"],
+  6: ["six"], 7: ["sept"], 8: ["huit"], 9: ["neuf"], 10: ["dix"],
+};
+
+function revisionExercise(lesson: MathSubmoduleLesson, id: string, promptFr: string, acceptable: string[], type: MathExerciseItem["type"] = "short_text"): FlatStep {
+  return {
+    kind: "exercise",
+    lesson,
+    item: { id, promptFr, type, acceptable },
+  };
+}
+
+function buildA11RevisionEvalSteps(lesson: MathSubmoduleLesson): FlatStep[] {
+  const n1 = rnd(1, 10);
+  const n2 = rnd(20, 99);
+  const start = rnd(10, 80);
+  const missing = start + 2;
+  return [
+    revisionExercise(lesson, "ra1-a11-letters", `Écris en lettres : ${n1}`, A11_WORDS[n1] ?? [String(n1)]),
+    revisionExercise(lesson, "ra1-a11-digits", `Écris en chiffres : ${n2}`, [String(n2)], "number"),
+    revisionExercise(lesson, "ra1-a11-series", `Complète la suite : ${start}, ${start + 1}, ___, ${start + 3}, ${start + 4}`, [String(missing)], "number"),
+  ];
+}
+
+function buildA12RevisionEvalSteps(lesson: MathSubmoduleLesson): FlatStep[] {
+  const n3 = rnd(111, 999);
+  const h = Math.floor(n3 / 100);
+  const d = Math.floor((n3 % 100) / 10);
+  const u = n3 % 10;
+  const n4 = rnd(1000, 9999);
+  const m4 = Math.floor(n4 / 1000);
+  const c4 = Math.floor((n4 % 1000) / 100);
+  const d4 = Math.floor((n4 % 100) / 10);
+  const u4 = n4 % 10;
+  const cubes = rnd(2, 9) * 100 + rnd(1, 9) * 10 + rnd(1, 9);
+  const arrowBase = rnd(11, 89) * 10;
+  const nextHundred = Math.ceil(n4 / 100) * 100;
+  return [
+    revisionExercise(lesson, "ra1-a12-read-blocks", `Quel nombre est formé par ${h} centaines, ${d} dizaines et ${u} unités ?`, [String(n3)], "number"),
+    revisionExercise(lesson, "ra1-a12-write-number", `Écris le nombre : ${m4} milliers, ${c4} centaines, ${d4} dizaines et ${u4} unités.`, [String(n4)], "number"),
+    revisionExercise(lesson, "ra1-a12-milliers", `Dans ${n4}, quelle est la valeur du chiffre des milliers ?`, [String(m4 * 1000)], "number"),
+    revisionExercise(lesson, "ra1-a12-centaines", `Dans ${n4}, quelle est la valeur du chiffre des centaines ?`, [String(c4 * 100)], "number"),
+    revisionExercise(lesson, "ra1-a12-cubes", `Combien y a-t-il de cubes si on a ${Math.floor(cubes / 100)} centaines, ${Math.floor((cubes % 100) / 10)} dizaines et ${cubes % 10} unités ?`, [String(cubes)], "number"),
+    revisionExercise(lesson, "ra1-a12-dizaine", `Quel est le nombre juste après ${arrowBase} sur une droite graduée de 10 en 10 ?`, [String(arrowBase + 10)], "number"),
+    revisionExercise(lesson, "ra1-a12-centaine", `Quel est le nombre juste avant ${nextHundred} sur une droite graduée de 100 en 100 ?`, [String(nextHundred - 100)], "number"),
+  ];
+}
+
 function buildRevisionFlatSteps(lessons: MathSubmoduleLesson[]): FlatStep[] {
   const result: FlatStep[] = [];
   for (const lesson of lessons) {
+    if (lesson.submoduleId === "A1-1") {
+      result.push(...buildA11RevisionEvalSteps(lesson));
+      continue;
+    }
+    if (lesson.submoduleId === "A1-2") {
+      result.push(...buildA12RevisionEvalSteps(lesson));
+      continue;
+    }
     const allSteps = buildSteps([lesson], true);
     const esi = allSteps.findIndex(s => s.kind === "eval_start");
     if (esi < 0) continue;
-    const endi = allSteps.findIndex((s, i) => i > esi && s.kind === "pass_toggle");
+    const endi = allSteps.findIndex((s, i) => i > esi && (s.kind === "pass_toggle" || s.kind === "eval_start"));
     const slice = endi >= 0 ? allSteps.slice(esi + 1, endi) : allSteps.slice(esi + 1);
-    result.push(...slice);
+    if (slice.length > 0) {
+      result.push(...slice);
+    } else {
+      const pool = lesson.exercisePool;
+      const size = lesson.poolSize ?? 5;
+      const exercises = pool && pool.length > 0 ? shufflePick(pool, size) : lesson.exercises.slice(0, size);
+      for (const item of exercises) result.push({ kind: "exercise", lesson, item });
+    }
   }
   return result;
 }
@@ -3622,7 +3708,7 @@ export function GenericModuleContent({
       return [
         { kind: "eval_start", lesson: lastLesson },
         ...evalSteps,
-        ...(evalSteps.length > 0 ? [{ kind: "pass_toggle" as const, lesson: lastLesson }] : []),
+        ...(evalSteps.length === 0 ? [{ kind: "pass_toggle" as const, lesson: lastLesson }] : []),
       ];
     }
     return buildSteps(lessons, withEval);
@@ -3769,19 +3855,19 @@ export function GenericModuleContent({
   const [multSelectAnswers, setMultSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
   const [multSelectValidated, setMultSelectValidated] = useState(false);
   const [multSelectOverride, setMultSelectOverride] = useState<Record<number, MultSelectConfig>>({});
-  const [multListAnswers, setMultListAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [multListAnswers, setMultListAnswers] = useState<string[]>(() => Array(2).fill(""));
   const [multListValidated, setMultListValidated] = useState(false);
   const [multListOverride, setMultListOverride] = useState<Record<number, MultListConfig>>({});
   const [tfMultDivAnswers, setTfMultDivAnswers] = useState<Array<boolean|null>>(() => Array(5).fill(null));
   const [tfMultDivValidated, setTfMultDivValidated] = useState(false);
   const [tfMultDivOverride, setTfMultDivOverride] = useState<Record<number, TrueFalseMultDivConfig>>({});
-  const [findDivisorsAnswer, setFindDivisorsAnswer] = useState("");
+  const [findDivisorsAnswers, setFindDivisorsAnswers] = useState<string[]>(() => Array(2).fill(""));
   const [findDivisorsValidated, setFindDivisorsValidated] = useState(false);
   const [findDivisorsOverride, setFindDivisorsOverride] = useState<Record<number, FindDivisorsConfig>>({});
   const [divSelectAnswers, setDivSelectAnswers] = useState<boolean[]>(() => Array(15).fill(false));
   const [divSelectValidated, setDivSelectValidated] = useState(false);
   const [divSelectOverride, setDivSelectOverride] = useState<Record<number, DivSelectConfig>>({});
-  const [divByAnswers, setDivByAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [divByAnswers, setDivByAnswers] = useState<boolean[][]>(() => Array.from({ length: 5 }, () => Array(5).fill(false)));
   const [divByValidated, setDivByValidated] = useState(false);
   const [divByOverride, setDivByOverride] = useState<Record<number, DivByConfig>>({});
   const [missingDigitAnswers, setMissingDigitAnswers] = useState<string[]>(() => Array(5).fill(""));
@@ -3896,15 +3982,15 @@ export function GenericModuleContent({
     // A3.5 resets
     setMultSelectAnswers(Array(15).fill(false));
     setMultSelectValidated(false);
-    setMultListAnswers(Array(5).fill(""));
+    setMultListAnswers(Array(2).fill(""));
     setMultListValidated(false);
     setTfMultDivAnswers(Array(5).fill(null));
     setTfMultDivValidated(false);
-    setFindDivisorsAnswer("");
+    setFindDivisorsAnswers(Array(2).fill(""));
     setFindDivisorsValidated(false);
     setDivSelectAnswers(Array(15).fill(false));
     setDivSelectValidated(false);
-    setDivByAnswers(Array(5).fill(""));
+    setDivByAnswers(Array.from({ length: 5 }, () => Array(5).fill(false)));
     setDivByValidated(false);
     setMissingDigitAnswers(Array(5).fill(""));
     setMissingDigitValidated(false);
@@ -4084,7 +4170,9 @@ export function GenericModuleContent({
     }
     if (isInEvalPhase && currentStep) {
       let currentResults: boolean[] = [];
-      if (currentStep.kind === "arithmetic_group") {
+      if (currentStep.kind === "exercise") {
+        currentResults = [answerMatches(answer, currentStep.item.acceptable)];
+      } else if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "column_grid") {
         const cfg = gridOverrideConfigs[stepIdx] ?? currentStep.config;
@@ -4242,23 +4330,18 @@ export function GenericModuleContent({
         else currentResults = [false, false, false, false];
       } else if (currentStep.kind === "mult_list") {
         const cfg = multListOverride[stepIdx] ?? currentStep.config;
-        currentResults = Array.from({ length: 5 }, (_, i) => {
-          const ans = parseInt(multListAnswers[i] ?? "");
-          return ans === cfg.base * (i + 1);
-        });
+        currentResults = cfg.bases.map((base, i) => matchesMultList(multListAnswers[i] ?? "", base));
       } else if (currentStep.kind === "true_false_mult_div") {
         const cfg = tfMultDivOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => tfMultDivAnswers[i] === q.answer);
       } else if (currentStep.kind === "find_divisors") {
         const cfg = findDivisorsOverride[stepIdx] ?? currentStep.config;
-        const parts = findDivisorsAnswer.split(/[,;\s]+/).map(s => parseInt(s.trim())).filter(n => !isNaN(n));
-        const userSet = new Set(parts);
-        const correct = new Set(cfg.divisors);
-        const setsEqual = userSet.size === correct.size && [...correct].every(d => userSet.has(d));
-        const halfRight = [...correct].filter(d => userSet.has(d)).length >= Math.ceil(correct.size / 2);
-        if (setsEqual) currentResults = [true, true, true, true, true];
-        else if (halfRight) currentResults = [true, true, true, false, false];
-        else currentResults = [false, false, false, false, false];
+        currentResults = cfg.questions.map((q, i) => {
+          const parts = parseNumberList(findDivisorsAnswers[i] ?? "");
+          const userSet = new Set(parts);
+          const correct = new Set(q.divisors);
+          return userSet.size === correct.size && [...correct].every(d => userSet.has(d));
+        });
       } else if (currentStep.kind === "div_select") {
         const cfg = divSelectOverride[stepIdx] ?? currentStep.config;
         const total = cfg.numbers.length;
@@ -4272,8 +4355,8 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "div_by") {
         const cfg = divByOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
-          const ans = parseInt(divByAnswers[i] ?? "");
-          return q.validDivisors.includes(ans);
+          const selected = divByAnswers[i] ?? [];
+          return q.choices.every((choice, j) => selected[j] === q.validDivisors.includes(choice));
         });
       } else if (currentStep.kind === "missing_digit_div") {
         const cfg = missingDigitOverride[stepIdx] ?? currentStep.config;
@@ -4329,8 +4412,8 @@ export function GenericModuleContent({
                 : es?.kind === "div_select" ? "Divisibilité — sélection"
                 : es?.kind === "div_by" ? "Divisible par"
                 : es?.kind === "missing_digit_div" ? "Chiffre manquant"
-                : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGCD (${es.config.count} nombres)` : `PPCM (${es.config.count} nombres)`)
-                : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGCD/PPCM"
+                : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
+                : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -4375,7 +4458,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswer, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -4840,14 +4923,13 @@ export function GenericModuleContent({
     stepValidate = multListValidated ? () => {} : () => setMultListValidated(true);
     stepReset = () => {
       setMultListOverride(prev => ({ ...prev, [stepIdx]: genMultList(activeMultListConfig.exNum) }));
-      setMultListAnswers(Array(5).fill(""));
+      setMultListAnswers(Array(2).fill(""));
       setMultListValidated(false);
     };
   }
 
   if (currentStep?.kind === "true_false_mult_div" && activeTfMultDivConfig) {
-    const allAnswered = activeTfMultDivConfig.questions.every((_, i) => tfMultDivAnswers[i] !== null);
-    stepCanValidate = !tfMultDivValidated && allAnswered;
+    stepCanValidate = !tfMultDivValidated;
     stepValidate = tfMultDivValidated ? () => {} : () => setTfMultDivValidated(true);
     stepReset = () => {
       setTfMultDivOverride(prev => ({ ...prev, [stepIdx]: genTrueFalseMultDiv(activeTfMultDivConfig.exNum) }));
@@ -4857,11 +4939,11 @@ export function GenericModuleContent({
   }
 
   if (currentStep?.kind === "find_divisors" && activeFindDivisorsConfig) {
-    stepCanValidate = !findDivisorsValidated && findDivisorsAnswer.trim().length > 0;
+    stepCanValidate = !findDivisorsValidated && findDivisorsAnswers.some((value) => value.trim().length > 0);
     stepValidate = findDivisorsValidated ? () => {} : () => setFindDivisorsValidated(true);
     stepReset = () => {
       setFindDivisorsOverride(prev => ({ ...prev, [stepIdx]: genFindDivisors(activeFindDivisorsConfig.exNum) }));
-      setFindDivisorsAnswer("");
+      setFindDivisorsAnswers(Array(2).fill(""));
       setFindDivisorsValidated(false);
     };
   }
@@ -4881,7 +4963,7 @@ export function GenericModuleContent({
     stepValidate = divByValidated ? () => {} : () => setDivByValidated(true);
     stepReset = () => {
       setDivByOverride(prev => ({ ...prev, [stepIdx]: genDivBy(activeDivByConfig.exNum) }));
-      setDivByAnswers(Array(5).fill(""));
+      setDivByAnswers(Array.from({ length: 5 }, () => Array(5).fill(false)));
       setDivByValidated(false);
     };
   }
@@ -4931,10 +5013,11 @@ export function GenericModuleContent({
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
-  const currentStepHasPivotTitle = !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
+  const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
+  const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
   const currentStepTitle = currentStepHasPivotTitle
     ? currentStepTrad!.title[pivot]!
-    : currentStep?.lesson.theory.title.fr ?? "";
+    : revisionTitle ?? currentStep?.lesson.theory.title.fr ?? "";
 
   return (
     <div className="pb-40">
@@ -5001,10 +5084,10 @@ export function GenericModuleContent({
             onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
-            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
+            className={`w-full px-4 py-3 text-sm ${MATH_TEXT_INPUT_BASE} ${
               exStatus === "wrong"
                 ? CLS_WRONG
-                : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+                : ""
             }`}
           />
           {exStatus === "wrong" && (
@@ -5031,10 +5114,10 @@ export function GenericModuleContent({
             onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
-            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${
+            className={`w-full px-4 py-3 text-sm ${MATH_NUMBER_INPUT_BASE} ${
               exStatus === "wrong"
                 ? CLS_WRONG
-                : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+                : ""
             }`}
           />
           {exStatus === "wrong" && (
@@ -5098,7 +5181,7 @@ export function GenericModuleContent({
               const secondExpected = dir === "<" ? q.hi : q.lo;
               const firstVal = a[firstKey] ?? "";
               const secondVal = a[secondKey] ?? "";
-              const inputCls = "w-20 rounded border px-2 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const inputCls = `w-20 px-2 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               const symCls = "shrink-0 text-sm font-bold text-[var(--color-text-secondary)]";
               const numCls = "w-20 shrink-0 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
               const firstBlock = wrong ? (
@@ -5109,7 +5192,7 @@ export function GenericModuleContent({
               ) : (
                 <input type="number" inputMode="numeric" value={firstVal} disabled={encadrementValidated}
                   onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [firstKey]: e.target.value} : v))}
-                  className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  className={inputCls} />
               );
               const secondBlock = wrong ? (
                 <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
@@ -5119,7 +5202,7 @@ export function GenericModuleContent({
               ) : (
                 <input type="number" inputMode="numeric" value={secondVal} disabled={encadrementValidated}
                   onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [secondKey]: e.target.value} : v))}
-                  className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                  className={inputCls} />
               );
               return (
                 <div key={i} className="flex items-center gap-2">
@@ -5141,7 +5224,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOddEvenConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Indiquez si chaque nombre est pair ou impair.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="space-y-3">
             {activeOddEvenConfig.questions.map((q, i) => {
               const sel = oddEvenAnswers[i];
               const ok = oddEvenValidated ? oddEvenResults[i] : null;
@@ -5195,7 +5278,7 @@ export function GenericModuleContent({
               const ok = nlMultiValidated ? nlMultiResults[i] : null;
               const noFeedback = activeNlMultiConfig.noFeedback;
               const wrong = ok === false;
-              const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+              const inputCls = `flex-1 h-[2.75rem] px-4 py-2.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               let afterText = "";
               if (!noFeedback) {
                 if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
@@ -5217,7 +5300,7 @@ export function GenericModuleContent({
                     ) : (
                       <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
                         onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
-                        className={`${inputCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                        className={inputCls} />
                     )}
                   </div>
                   {afterText && <p className="text-xs text-amber-600 pl-7">{afterText}</p>}
@@ -5315,7 +5398,7 @@ export function GenericModuleContent({
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step.toLocaleString("fr-CH")}`;
               const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
-              const inputRowCls = "w-24 rounded border px-3 py-2 text-sm font-mono outline-none transition-colors";
+              const inputRowCls = `w-24 px-3 py-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
               return (
                 <div key={i} className="flex items-center gap-2">
                   <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -5331,7 +5414,7 @@ export function GenericModuleContent({
                     <input type="text" value={v} disabled={seqRuleValidated}
                       onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
                       placeholder="± nombre"
-                      className={`${inputRowCls} ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                      className={inputRowCls} />
                   )}
                 </div>
               );
@@ -5349,7 +5432,7 @@ export function GenericModuleContent({
             {(() => {
               const globalMaxN = Math.max(...activeSeqCompleteConfig.questions.flatMap(q => q.allNums.map(n => Math.abs(n))));
               const cellW = activeSeqCompleteConfig.exNum === 6 ? "w-[54px]" : globalMaxN >= 10000 ? "w-20" : globalMaxN >= 1000 ? "w-16" : globalMaxN > 100 ? "w-14" : "w-12";
-              const inputCls = `${cellW} shrink-0 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
+              const inputCls = `${cellW} shrink-0 h-9 px-1 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               return activeSeqCompleteConfig.questions.map((q, qi) => {
               let blankCounter = 0;
               return (
@@ -5376,7 +5459,7 @@ export function GenericModuleContent({
                               next[qi]![bIdx] = e.target.value;
                               return next;
                             })}
-                            className={`${inputCls} ${seqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                            className={inputCls} />
                         );
                       }
                       return (
@@ -5496,7 +5579,7 @@ export function GenericModuleContent({
                       <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                     ))}
                     {wrong ? (
-                      <div className={`h-9 rounded border px-1 text-sm font-mono ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                      <div className={`h-9 px-1 text-sm font-mono ${CLS_WRONG} flex flex-col items-center justify-center`}>
                         <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
@@ -5504,7 +5587,7 @@ export function GenericModuleContent({
                       <input type="text" value={v} disabled={decSeqRuleValidated}
                         onChange={e => setDecSeqRuleAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
                         placeholder="±0,00"
-                        className={`h-9 w-full rounded border px-1 text-sm font-mono text-center outline-none transition-colors ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"}`} />
+                        className={`h-9 w-full px-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
                     )}
                   </Fragment>
                 );
@@ -5537,7 +5620,7 @@ export function GenericModuleContent({
                         const expected = q.allNums[ni]!;
                         const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
                         return wrong ? (
-                          <div key={ni} className={`h-9 rounded border px-1 font-mono text-sm ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                          <div key={ni} className={`h-9 px-1 font-mono text-sm ${CLS_WRONG} flex flex-col items-center justify-center`}>
                             <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
                             <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
                           </div>
@@ -5549,7 +5632,7 @@ export function GenericModuleContent({
                               next[qi]![bIdx] = e.target.value;
                               return next;
                             })}
-                            className={`h-9 w-full rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${decSeqCompleteValidated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                            className={`h-9 w-full px-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
                         );
                       }
                       return (
@@ -5794,27 +5877,29 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "mult_list" && activeMultListConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultListConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Complétez la liste — les 5 premiers multiples de <strong className="font-bold">{activeMultListConfig.base}</strong>.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
-            {Array.from({ length: 5 }, (_, i) => {
-              const expected = activeMultListConfig.base * (i + 1);
+          <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les 5 premiers multiple des nombres. Séparez les par des virgules.</p>
+          <div className="space-y-4">
+            {activeMultListConfig.bases.map((base, i) => {
+              const expected = Array.from({ length: 5 }, (_, idx) => base * (idx + 1)).join(", ");
               const v = multListAnswers[i] ?? "";
-              const ok = multListValidated ? parseInt(v) === expected : null;
+              const ok = multListValidated ? matchesMultList(v, base) : null;
               const wrong = ok === false;
-              const inputCls = "w-20 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors";
+              const inputCls = `h-11 w-full px-3 text-left text-sm ${MATH_TEXT_INPUT_BASE}`;
               return (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="text-sm text-[var(--color-text-secondary)]">{activeMultListConfig.base} × {i + 1} =</span>
+                <div key={i} className="space-y-2">
+                  <p className="text-sm text-[var(--color-text-primary)]">
+                    <span className="mr-2 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    Du nombre <strong className="font-bold">{base}</strong>
+                  </p>
                   {wrong ? (
-                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
+                    <div className={`${inputCls} flex flex-col justify-center ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
                       <span className="text-xs font-bold text-[var(--color-text-primary)]">{expected}</span>
                     </div>
                   ) : (
-                    <input type="number" inputMode="numeric" value={v} disabled={multListValidated}
+                    <input type="text" inputMode="numeric" value={v} disabled={multListValidated}
                       onChange={e => setMultListAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
-                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
+                      className={inputCls} />
                   )}
                 </div>
               );
@@ -5828,7 +5913,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfMultDivConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="space-y-3">
             {activeTfMultDivConfig.questions.map((q, i) => {
               const sel = tfMultDivAnswers[i];
               return (
@@ -5845,10 +5930,8 @@ export function GenericModuleContent({
                         cls += isSelected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
-                      } else if (isSelected && isCorrect) {
+                      } else if (isSelected) {
                         cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                      } else if (isSelected && !isCorrect) {
-                        cls += CLS_WRONG;
                       } else if (!isSelected && isCorrect) {
                         cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                       } else {
@@ -5874,33 +5957,33 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "find_divisors" && activeFindDivisorsConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeFindDivisorsConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            Trouve tous les diviseurs de <strong className="font-bold">{activeFindDivisorsConfig.number}</strong>. Sépare les par des virgules.
-          </p>
-          <div className="space-y-2">
-            {findDivisorsValidated ? (() => {
-              const parts = findDivisorsAnswer.split(/[,;\s]+/).map(s => parseInt(s.trim())).filter(n => !isNaN(n));
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouve tous les diviseurs des nombres. Sépare les par des virgules.</p>
+          <div className="space-y-4">
+            {activeFindDivisorsConfig.questions.map((q, i) => {
+              const v = findDivisorsAnswers[i] ?? "";
+              const parts = parseNumberList(v);
               const userSet = new Set(parts);
-              const correct = new Set(activeFindDivisorsConfig.divisors);
-              const setsEqual = userSet.size === correct.size && [...correct].every(d => userSet.has(d));
-              return setsEqual ? (
-                <div className="w-full rounded-xl border border-[var(--color-border-default)] px-4 py-3 text-sm font-mono text-[var(--color-text-primary)]">
-                  {findDivisorsAnswer}
-                </div>
-              ) : (
-                <div className="space-y-1">
-                  <div className={`w-full rounded-xl border px-4 py-3 text-sm font-mono ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500">{findDivisorsAnswer || "—"}</span>
-                  </div>
-                  <p className="text-xs text-[var(--color-text-secondary)]">Réponse attendue : <span className="font-mono font-bold">{activeFindDivisorsConfig.divisors.join(", ")}</span></p>
+              const correct = new Set(q.divisors);
+              const ok = findDivisorsValidated ? userSet.size === correct.size && [...correct].every(d => userSet.has(d)) : null;
+              return (
+                <div key={q.number} className="space-y-2">
+                  <p className="text-sm text-[var(--color-text-primary)]">
+                    <span className="mr-2 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                    Du nombre <strong className="font-bold">{q.number}</strong>
+                  </p>
+                  {ok === false ? (
+                    <div className={`w-full px-4 py-3 text-sm font-mono ${CLS_WRONG}`}>
+                      <span className="line-through text-amber-500">{v || "—"}</span>
+                      <span className="ml-3 font-bold text-[var(--color-text-primary)]">{q.divisors.join(", ")}</span>
+                    </div>
+                  ) : (
+                    <input type="text" value={v} disabled={findDivisorsValidated}
+                      onChange={e => setFindDivisorsAnswers(prev => prev.map((answer, j) => j === i ? e.target.value : answer))}
+                      className={`w-full px-4 py-3 text-sm ${MATH_TEXT_INPUT_BASE}`} />
+                  )}
                 </div>
               );
-            })() : (
-              <input type="text" value={findDivisorsAnswer} disabled={findDivisorsValidated}
-                onChange={e => setFindDivisorsAnswer(e.target.value)}
-                placeholder="ex: 1, 2, 3, 6, …"
-                className="w-full rounded-xl border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-4 py-3 text-sm font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)]" />
-            )}
+            })}
           </div>
         </div>
       )}
@@ -5941,29 +6024,39 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "div_by" && activeDivByConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivByConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Complétez la phrase. Entrez un diviseur valide parmi {"{2, 3, 4, 5, 6, 9, 10}"}.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez le ou les diviseurs corrects pour les nombres suivants.</p>
+          <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content repeat(5, 2.5rem)" }}>
             {activeDivByConfig.questions.map((q, i) => {
-              const v = divByAnswers[i] ?? "";
-              const ok = divByValidated ? q.validDivisors.includes(parseInt(v)) : null;
-              const wrong = ok === false;
-              const inputCls = "w-16 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors";
               return (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <Fragment key={i}>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <span className="font-mono font-bold text-sm text-[var(--color-text-primary)]">{q.n}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)]">est divisible par</span>
-                  {wrong ? (
-                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
-                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.validDivisors[0]}</span>
-                    </div>
-                  ) : (
-                    <input type="number" inputMode="numeric" value={v} disabled={divByValidated}
-                      onChange={e => setDivByAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
-                      className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
-                  )}
-                </div>
+                  {q.choices.map((choice, j) => {
+                      const selected = divByAnswers[i]?.[j] ?? false;
+                      const shouldSelect = q.validDivisors.includes(choice);
+                      let cls = "h-9 w-10 rounded-lg border px-2 text-center text-sm font-mono font-bold transition-colors ";
+                      if (!divByValidated) {
+                        cls += selected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+                      } else if (selected) {
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                      } else if (shouldSelect) {
+                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                      } else {
+                        cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                      }
+                      return (
+                        <button key={choice} type="button" disabled={divByValidated}
+                          onClick={() => setDivByAnswers(prev => prev.map((row, rowIdx) => (
+                            rowIdx === i ? row.map((value, colIdx) => colIdx === j ? !value : value) : row
+                          )))}
+                          className={cls}>
+                          {choice}
+                        </button>
+                      );
+                    })}
+                </Fragment>
               );
             })}
           </div>
@@ -5975,28 +6068,30 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMissingDigitConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez le chiffre manquant pour que le nombre soit divisible.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="grid items-center gap-x-4 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content max-content" }}>
             {activeMissingDigitConfig.questions.map((q, i) => {
               const v = missingDigitAnswers[i] ?? "";
               const ok = missingDigitValidated ? q.validDigits.includes(v.trim()) : null;
               const wrong = ok === false;
-              const inputCls = "w-10 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-1 text-center font-mono text-sm outline-none transition-colors";
+              const inputCls = "w-5 border-0 border-b-2 border-[var(--color-accent-alg)] bg-transparent px-0 text-center font-mono text-sm font-bold text-[var(--color-accent-alg)] outline-none transition-colors";
               return (
-                <div key={i} className="flex items-center gap-2">
-                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="font-mono font-bold text-sm text-[var(--color-text-primary)]">{q.prefix}</span>
+                <Fragment key={i}>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex items-end font-mono text-sm font-bold text-[var(--color-text-primary)]">
+                    {q.prefix}
                   {wrong ? (
-                    <div className={`${inputCls} flex items-center justify-center gap-0.5 ${CLS_WRONG} rounded`}>
-                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.validDigits[0]}</span>
-                    </div>
+                      <span className={`${inputCls} inline-flex h-6 flex-col items-center justify-center leading-none`}>
+                        <span className="text-[10px] font-bold leading-none text-amber-500 line-through">{v || "—"}</span>
+                        <span className="text-[10px] font-bold leading-none text-[var(--color-accent-alg)]">{q.validDigits[0]}</span>
+                      </span>
                   ) : (
                     <input type="text" inputMode="numeric" maxLength={1} value={v} disabled={missingDigitValidated}
                       onChange={e => setMissingDigitAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
                       className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
                   )}
+                  </span>
                   <span className="text-sm text-[var(--color-text-secondary)]">est divisible par <span className="font-bold text-[var(--color-text-primary)]">{q.divisor}</span></span>
-                </div>
+                </Fragment>
               );
             })}
           </div>
@@ -6008,21 +6103,20 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeGcdLcmConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Calculez le {activeGcdLcmConfig.op === "pgcd" ? "PGCD" : "PPCM"} des nombres.
+            Calculez le {activeGcdLcmConfig.op === "pgcd" ? "PGDC" : "PPMC"} des nombres.
           </p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="space-y-3">
             {activeGcdLcmConfig.questions.map((q, i) => {
               const v = gcdLcmAnswers[i] ?? "";
               const ok = gcdLcmValidated ? parseInt(v) === q.answer : null;
               const wrong = ok === false;
-              const inputCls = "w-20 h-9 rounded border-b border-[var(--color-border-emphasis)] bg-transparent px-2 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
-              const label = activeGcdLcmConfig.op === "pgcd" ? "PGCD" : "PPCM";
+              const inputCls = `w-20 h-9 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               return (
                 <div key={i} className="flex items-center gap-2">
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="text-sm text-[var(--color-text-secondary)]">{label}({q.nums.join(", ")}) =</span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">{formatNumsEt(q.nums)} =</span>
                   {wrong ? (
-                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG} rounded`}>
+                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG}`}>
                       <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
                       <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.answer}</span>
                     </div>
@@ -6043,7 +6137,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfGcdLcmConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
-          <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+          <div className="space-y-3">
             {activeTfGcdLcmConfig.questions.map((q, i) => {
               const sel = tfGcdLcmAnswers[i];
               return (
@@ -6115,12 +6209,6 @@ export function GenericModuleContent({
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
         <div className="flex flex-col gap-8 py-8">
-          <button type="button" onClick={goBack}
-            disabled={isFirstStep}
-            className="self-start flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
-            Retour
-          </button>
           <div className="flex flex-col items-center gap-8 text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>

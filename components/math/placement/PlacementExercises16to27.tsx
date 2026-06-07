@@ -40,6 +40,14 @@ function fmtInt(n: number): string {
 function fmtDec(n: number, d: number): string {
   return n.toFixed(d).replace(".", ",");
 }
+function fmtMeasure(n: number): string {
+  return Number.isInteger(n) ? String(n) : fmtDec(n, 1);
+}
+function randOneDecimal(minTenths: number, maxTenths: number): number {
+  let value = randInt(minTenths, maxTenths);
+  while (value % 10 === 0) value = randInt(minTenths, maxTenths);
+  return value / 10;
+}
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
@@ -61,7 +69,7 @@ function GeoRow({ label, unit, value, answer, onChange, validated }: {
   label: string; unit: string; value: number;
   answer: string; onChange: (v: string) => void; validated: boolean;
 }) {
-  const correct = String(value);
+  const correct = fmtMeasure(value);
   return (
     <div className="flex items-center gap-2">
       <span className="w-24 text-sm text-[var(--color-text-secondary)]">{label} =</span>
@@ -620,7 +628,7 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
         </tbody>
       </table>
       <div className="flex items-center gap-2 pt-1">
-        <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
+        <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
         <input type="text" value={decResult} disabled={validated}
           onChange={e => onDecResultChange(e.target.value)}
           placeholder={`ex. ${resultStr}`}
@@ -664,7 +672,7 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes. Donnez le résultat décimal.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
       <div className="space-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -717,7 +725,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez les divisions. Résultat exact (sans reste).</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez les divisions.</p>
       <div className="flex flex-wrap gap-4">
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-1">
@@ -728,6 +736,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
                 <span className="text-[var(--color-text-secondary)]">÷</span>
                 <span className="text-[var(--color-text-primary)]">{q.divisor}</span>
                 <span className="text-[var(--color-text-secondary)]">=</span>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">Résultat :</span>
                 <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
                   correct={fmtDec(q.quotient, q.decPlaces)} validated={validated} width="w-16" />
               </div>
@@ -1080,8 +1089,8 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
 
 export function Exercise25({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    const b = randInt(8, 16), a = randInt(4, 10);
-    const h = randInt(3, a - 1 < 3 ? 3 : a - 1);
+    const b = randInt(8, 16), a = randOneDecimal(40, 100);
+    const h = randInt(3, Math.max(3, Math.floor(a - 1)));
     return { b, a, h, perimeter: 2 * (a + b), area: b * h };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -1092,7 +1101,7 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchInt(ansP, data.perimeter)) pts++;
+    if (matchNum(ansP, data.perimeter, 0.01)) pts++;
     if (matchInt(ansA, data.area)) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -1117,7 +1126,7 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
         {/* Base label above */}
         <text x={(TLx + TRx) / 2} y={TLy - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{b} cm</text>
         {/* Side label left */}
-        <text x={BLx - 6} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{a} cm</text>
+        <text x={BLx - 6} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{fmtMeasure(a)} cm</text>
         {/* Dashed reference lines from shape to bracket */}
         <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={TRx} y1={TRy} x2={bkX - 2} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
@@ -1143,7 +1152,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
   const data = useMemo(() => {
     const a = randInt(8, 14);
     let b = randInt(6, 12); while (b === a) b = randInt(6, 12);
-    let c = randInt(5, 11); while (c === a || c === b) c = randInt(5, 11);
+    let c = randOneDecimal(50, 110); while (c === a || c === b) c = randOneDecimal(50, 110);
     // ensure h gives integer area: a*h must be even
     let h = randInt(4, 8); if ((a * h) % 2 !== 0) h++;
     return { a, b, c, h, perimeter: a + b + c, area: (a * h) / 2 };
@@ -1156,7 +1165,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchInt(ansP, data.perimeter)) pts++;
+    if (matchNum(ansP, data.perimeter, 0.01)) pts++;
     if (matchNum(ansA, data.area, 0.05)) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -1176,7 +1185,7 @@ export function Exercise26({ exerciseKey, validated, onValidated, validateTrigge
         {/* Side labels */}
         <text x={(BLx + BRx) / 2} y={BLy + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">a = {data.a} cm</text>
         <text x={(Tx + BRx) / 2 + 8} y={(Ty + BRy) / 2 - 4} textAnchor="start" fontSize="12" fill="var(--color-text-secondary)">b = {data.b} cm</text>
-        <text x={(Tx + BLx) / 2 - 8} y={(Ty + BLy) / 2 - 4} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)">c = {data.c} cm</text>
+        <text x={(Tx + BLx) / 2 - 8} y={(Ty + BLy) / 2 - 4} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)">c = {fmtMeasure(data.c)} cm</text>
         {/* Dashed reference lines to bracket */}
         <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={Tx} y1={Ty} x2={bkX - 2} y2={Ty} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
@@ -1201,7 +1210,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
     const triples = [[3,4,5],[5,12,13]] as const;
     const [pa, pb, pc] = triples[randInt(0, triples.length - 1)]!;
     const k = randInt(1, 2);
-    const d1 = pa * k * 2, d2 = pb * k * 2, side = pc * k;
+    const d1 = pa * k * 2, d2 = pb * k * 2, side = pc * k + randInt(1, 9) / 10;
     return { d1, d2, side, perimeter: 4 * side, area: (d1 * d2) / 2 };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -1212,7 +1221,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    if (matchInt(ansP, data.perimeter)) pts++;
+    if (matchNum(ansP, data.perimeter, 0.01)) pts++;
     if (matchInt(ansA, data.area)) pts++;
     onValidated(pts, 2);
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -1233,7 +1242,7 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
         <polygon points={diaPts}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
         {/* Side label — top-left side */}
-        <text x={(Ttop[0]! + Tleft[0]!) / 2 - 12} y={(Ttop[1]! + Tleft[1]!) / 2} textAnchor="end" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {data.side} cm</text>
+        <text x={(Ttop[0]! + Tleft[0]!) / 2 - 12} y={(Ttop[1]! + Tleft[1]!) / 2} textAnchor="end" fontSize="11" fill="var(--color-text-secondary)" dominantBaseline="middle">c = {fmtMeasure(data.side)} cm</text>
         {/* Dashed reference lines to d2 bracket (right) */}
         <line x1={Tright[0]} y1={Ttop[1]} x2={bkX - 2} y2={Ttop[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={Tright[0]} y1={Tbot[1]} x2={bkX - 2} y2={Tbot[1]} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />

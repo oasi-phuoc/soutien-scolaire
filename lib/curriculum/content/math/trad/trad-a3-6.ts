@@ -3,7 +3,7 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_A3_6: SubmoduleTrad = {
   submoduleId: "A3-6",
   title: {
-    fr: "PGCD et PPCM",
+    fr: "PGDC et PPMC",
     en: "GCD and LCM",
     ar: "القاسم المشترك الأكبر والمضاعف المشترك الأصغر",
     fa: "بزرگترین مقسوم‌علیه مشترک و کوچکترین مضرب مشترک",
@@ -13,7 +13,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
   blocks: [
     {
       text: {
-        fr: "PGCD — Plus Grand Commun Diviseur",
+        fr: "PGDC — Plus Grand Commun Diviseur",
       }
     },
     {
@@ -24,8 +24,8 @@ export const TRAD_A3_6: SubmoduleTrad = {
     {
       items: {
         fr: [
-          "Le **PGCD** (Plus Grand Commun Diviseur) de deux nombres est le **plus grand entier** qui divise exactement les deux nombres.",
-          "Notation : PGCD(a, b)",
+          "Le **PGDC** (Plus Grand Commun Diviseur) de deux nombres est le **plus grand entier** qui divise exactement les deux nombres.",
+          "Notation : PGDC(a, b)",
         ],
       }
     },
@@ -45,7 +45,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "Exemple : PGCD(12, 18)",
+        fr: "Exemple : PGDC(12, 18)",
       }
     },
     {
@@ -58,7 +58,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "PGCD(12, 18) = 6",
+        fr: "PGDC(12, 18) = 6",
       }
     },
     {
@@ -68,7 +68,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "PPCM — Plus Petit Commun Multiple",
+        fr: "PPMC — Plus Petit Commun Multiple",
       }
     },
     {
@@ -79,8 +79,8 @@ export const TRAD_A3_6: SubmoduleTrad = {
     {
       items: {
         fr: [
-          "Le **PPCM** (Plus Petit Commun Multiple) de deux nombres est le **plus petit entier positif** qui est multiple des deux nombres.",
-          "Notation : PPCM(a, b)",
+          "Le **PPMC** (Plus Petit Commun Multiple) de deux nombres est le **plus petit entier positif** qui est multiple des deux nombres.",
+          "Notation : PPMC(a, b)",
         ],
       }
     },
@@ -99,7 +99,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "Exemple : PPCM(4, 6)",
+        fr: "Exemple : PPMC(4, 6)",
       }
     },
     {
@@ -112,7 +112,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "PPCM(4, 6) = 12",
+        fr: "PPMC(4, 6) = 12",
       }
     },
     {
@@ -122,7 +122,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
     },
     {
       text: {
-        fr: "Lien entre PGCD et PPCM",
+        fr: "Lien entre PGDC et PPMC",
       }
     },
     {
@@ -136,7 +136,7 @@ export const TRAD_A3_6: SubmoduleTrad = {
       },
       items: {
         fr: [
-          "PGCD(a, b) × PPCM(a, b) = a × b",
+          "PGDC(a, b) × PPMC(a, b) = a × b",
         ],
       }
     },
@@ -146,21 +146,21 @@ export const TRAD_A3_6: SubmoduleTrad = {
       },
       items: {
         fr: [
-          "PGCD(12, 18) = 6  et  PPCM(12, 18) = 36",
+          "PGDC(12, 18) = 6  et  PPMC(12, 18) = 36",
           "6 × 36 = 216  =  12 × 18  ✓",
         ],
       }
     },
     {
       text: {
-        fr: "Application — calculer le PPCM avec la formule",
+        fr: "Application — calculer le PPMC avec la formule",
       }
     },
     {
       items: {
         fr: [
-          "Si PGCD(8, 20) = 4, alors :",
-          "PPCM(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**",
+          "Si PGDC(8, 20) = 4, alors :",
+          "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**",
         ],
       }
     },

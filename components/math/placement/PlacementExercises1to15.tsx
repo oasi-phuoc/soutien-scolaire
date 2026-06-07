@@ -198,7 +198,7 @@ function CompareQuestion({
           let cls = "flex h-8 w-8 items-center justify-center rounded border font-mono text-sm font-bold transition-colors ";
           if (validated) {
             if (isCorrect) cls += "border-amber-400 bg-amber-50 text-amber-700";
-            else if (isSelected) cls += "border-red-300 bg-red-50 text-red-500 line-through opacity-70";
+            else if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
           } else {
             if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
@@ -672,7 +672,7 @@ export function Exercise6({ exerciseKey, validated, onValidated, validateTrigger
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs en colonnes.</p>
       <div className="space-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -937,7 +937,7 @@ export function Exercise10({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites numériques.</p>
       {renderSeq(data.seq1.values, data.seq1.blanks, ans1, setAns1, 1)}
       {renderSeq(data.seq2.values, data.seq2.blanks, ans2, setAns2, 2)}
     </div>
@@ -1034,7 +1034,8 @@ export function Exercise11({ exerciseKey, validated, onValidated, validateTrigge
   }
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
       {questions.map((q, i) => (
         <div key={i} className="flex items-center gap-1">
           <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1112,9 +1113,26 @@ export function Exercise12({ exerciseKey, validated, onValidated, validateTrigge
 
 type Ex13Question = { a: number; b: number; op: "+" | "-" | "×" | "÷"; result: number };
 
+function hasAdditionCarry(a: number, b: number): boolean {
+  let carry = 0;
+  for (let i = 0; i < 4; i++) {
+    const sum = (a % 10) + (b % 10) + carry;
+    if (sum >= 10) return true;
+    carry = Math.floor(sum / 10);
+    a = Math.floor(a / 10);
+    b = Math.floor(b / 10);
+  }
+  return false;
+}
+
 export function Exercise13({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo((): Ex13Question[] => {
-    const a1 = randInt(1000, 4999), b1 = randInt(1000, 9999 - a1);
+    let a1 = randInt(1000, 8999);
+    let b1 = randInt(1000, 9999 - a1);
+    while (!hasAdditionCarry(a1, b1)) {
+      a1 = randInt(1000, 8999);
+      b1 = randInt(1000, 9999 - a1);
+    }
     const a2 = randInt(1001, 9999); let b2 = randInt(1000, a2 - 1);
     while (b2 >= a2) b2 = randInt(1000, a2 - 1);
     return [
@@ -1141,7 +1159,7 @@ export function Exercise13({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez en colonnes. Inscrivez le résultat chiffre par chiffre.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs en colonnes.</p>
       <div className="space-y-3">
         {questions.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -1307,7 +1325,7 @@ export function Exercise14({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les multiplications en colonnes.</p>
       <div className="space-y-3">
         <div className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
           <PlacementColCard

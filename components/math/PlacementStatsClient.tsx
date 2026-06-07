@@ -108,6 +108,41 @@ function Chart({ history }: { history: TPAttempt[] }) {
 
 const HISTORY_VISIBLE = 5;
 
+function gradeFromAttempt(attempt: TPAttempt): number {
+  if (attempt.maxPoints <= 0) return 1;
+  return Math.round(((attempt.points / attempt.maxPoints) * 5 + 1) * 10) / 10;
+}
+
+function formatGrade(grade: number): string {
+  return grade.toFixed(1).replace(".", ",");
+}
+
+function gradeMood(grade: number) {
+  if (grade < 2) return { color: "#ef233c", mouth: "sad" as const };
+  if (grade < 3) return { color: "#fb8c00", mouth: "sad" as const };
+  if (grade < 4) return { color: "#fbbf24", mouth: "flat" as const };
+  if (grade < 5) return { color: "#35b84b", mouth: "smile" as const };
+  return { color: "#00994c", mouth: "smile" as const };
+}
+
+function GradeIcon({ grade }: { grade: number }) {
+  const mood = gradeMood(grade);
+  return (
+    <svg width="30" height="30" viewBox="0 0 40 40" aria-hidden>
+      <rect x="3" y="3" width="34" height="34" rx="10" fill="none" stroke={mood.color} strokeWidth="6" />
+      <circle cx="14" cy="17" r="2.2" fill={mood.color} />
+      <circle cx="26" cy="17" r="2.2" fill={mood.color} />
+      {mood.mouth === "smile" ? (
+        <path d="M13 24c2 4 12 4 14 0" fill="none" stroke={mood.color} strokeWidth="2.6" strokeLinecap="round" />
+      ) : mood.mouth === "sad" ? (
+        <path d="M13 28c2-4 12-4 14 0" fill="none" stroke={mood.color} strokeWidth="2.6" strokeLinecap="round" />
+      ) : (
+        <path d="M14 26h12" fill="none" stroke={mood.color} strokeWidth="2.6" strokeLinecap="round" />
+      )}
+    </svg>
+  );
+}
+
 export function PlacementStatsClient() {
   const router = useRouter();
   const [history, setHistory] = useState<TPAttempt[]>([]);
@@ -216,11 +251,12 @@ export function PlacementStatsClient() {
           {/* History list */}
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
             <p className="border-b border-[var(--color-border-default)] px-4 py-3 text-sm font-bold text-[var(--color-text-primary)]">
-              5 derniers essais
+              Résultat des essais précédents
             </p>
             <ul className="divide-y divide-[var(--color-border-default)]">
               {visibleHistory.map((h, i) => {
-                const pct = Math.round((h.points / h.maxPoints) * 100);
+                const grade = gradeFromAttempt(h);
+                const mood = gradeMood(grade);
                 const [yyyy, mm, dd] = h.date.split("-");
                 const dateStr = yyyy && mm && dd ? `${dd}/${mm}/${yyyy}` : h.date;
                 return (
@@ -231,9 +267,10 @@ export function PlacementStatsClient() {
                       </p>
                       <p className="text-xs text-[var(--color-text-secondary)]">{dateStr}</p>
                     </div>
-                    <p className="shrink-0 text-sm font-bold" style={{ color: pct >= 60 ? "#16a34a" : "#d97706" }}>
-                      {pct}%
-                    </p>
+                    <div className="shrink-0 flex items-center gap-2">
+                      <GradeIcon grade={grade} />
+                      <p className="text-sm font-bold" style={{ color: mood.color }}>{formatGrade(grade)}</p>
+                    </div>
                   </li>
                 );
               })}

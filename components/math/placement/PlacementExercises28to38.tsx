@@ -18,6 +18,14 @@ function matchNum(input: string, expected: number, tol = 0.001): boolean {
 function fmtDec(n: number, d: number): string {
   return n.toFixed(d).replace(".", ",");
 }
+function fmtMeasure(n: number): string {
+  return Number.isInteger(n) ? String(n) : fmtDec(n, 1);
+}
+function randOneDecimal(minTenths: number, maxTenths: number): number {
+  let value = randInt(minTenths, maxTenths);
+  while (value % 10 === 0) value = randInt(minTenths, maxTenths);
+  return value / 10;
+}
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
@@ -721,7 +729,7 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
     const a = randInt(4, 10); // top base
     const b = a + randInt(2, 6); // bottom base (larger)
     const h = randInt(3, 8);
-    const leg = randInt(3, 8); // lateral side (isosceles: both equal)
+    const leg = randOneDecimal(30, 80); // lateral side (isosceles: both equal)
     const perimeter = a + b + 2 * leg;
     const area = ((a + b) * h) / 2;
     return { a, b, h, leg, perimeter, area };
@@ -758,7 +766,7 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
         {/* Bottom base label */}
         <text x={(BLx + BRx) / 2} y={BLy + 14} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">b = {data.b} cm</text>
         {/* Left side label */}
-        <text x={(BLx + TLx) / 2 - 8} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.leg} cm</text>
+        <text x={(BLx + TLx) / 2 - 8} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{fmtMeasure(data.leg)} cm</text>
         {/* Dashed reference lines to bracket */}
         <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={TRx} y1={TRy} x2={bkX - 2} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
@@ -771,7 +779,7 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <span className="w-28 text-sm text-[var(--color-text-secondary)]">Périmètre =</span>
-          <CorrectionInput value={ansP} onChange={setAnsP} correct={String(data.perimeter)} validated={validated} />
+          <CorrectionInput value={ansP} onChange={setAnsP} correct={fmtMeasure(data.perimeter)} validated={validated} />
           <span className="text-sm text-[var(--color-text-secondary)]">cm</span>
         </div>
         <div className="flex items-center gap-2">

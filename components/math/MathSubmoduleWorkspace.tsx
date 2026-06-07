@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import { getMathModule } from "@/lib/curriculum/math-data";
 import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
@@ -1346,7 +1347,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId);
   if (isRevision) {
     const revParent = getParentModuleForRevision(submoduleId);
-    if (revParent && revParent !== "A4" && revParent !== "A7") {
+    if (revParent && revParent !== "A4" && revParent !== "A5" && revParent !== "A7") {
       return <GenericModuleContent moduleId={revParent} revisionMode={true} />;
     }
   }
@@ -1366,6 +1367,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
   const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
+  const revisionTitle = isRevisionLesson ? getMathModule(moduleId)?.title : null;
 
   function goBack() {
     if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
@@ -1690,12 +1692,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
         <div className="flex flex-col gap-8 py-8">
-          <button type="button" onClick={goBack}
-            disabled={isFirstStep}
-            className="self-start flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
-            Retour
-          </button>
           <div className="flex flex-col items-center gap-8 text-center">
           <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-[var(--color-accent-alg)]/10">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.5" aria-hidden>
@@ -1705,7 +1701,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
           </div>
           <div className="space-y-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{lesson.theory.title.fr}</h2>
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{revisionTitle ?? lesson.theory.title.fr}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {isRevisionLesson ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
