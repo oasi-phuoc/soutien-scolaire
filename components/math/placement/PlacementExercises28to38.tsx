@@ -118,7 +118,7 @@ export function Exercise28({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-xs text-[var(--color-text-secondary)]">Calculez les puissances, racines et opérations avec les puissances de 10</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span>{data.q1.base}<sup>3</sup></span>
         <div className="flex items-center gap-1.5"><span className="text-[var(--color-text-secondary)]">=</span><CorrectionInput value={a1} onChange={setA1} correct={String(data.q1.ans)} validated={validated} /></div>
@@ -749,15 +749,15 @@ export function Exercise37({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]);
 
   // Fixed visual isosceles trapezoid — shape identical every refresh
-  const svgW = 305, svgH = 145;
-  const TLx = 58, TLy = 32, TRx = 168, TRy = 32; // top base = 110px
-  const BLx = 20, BLy = 120, BRx = 210, BRy = 120; // bottom base = 190px
-  const bkX = 232, tickLen = 5;
+  const svgW = 360, svgH = 145;
+  const TLx = 92, TLy = 32, TRx = 202, TRy = 32; // top base = 110px
+  const BLx = 54, BLy = 120, BRx = 244, BRy = 120; // bottom base = 190px
+  const bkX = 270, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto h-auto w-full max-w-[440px] overflow-visible">
         {/* Shape */}
         <polygon points={`${TLx},${TLy} ${TRx},${TRy} ${BRx},${BRy} ${BLx},${BLy}`}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />

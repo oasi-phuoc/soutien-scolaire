@@ -299,14 +299,23 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
     const ints = shuffle([n1, n2, n3, n4]);
     const sortedInts = [...ints].sort((a, b) => a - b);
 
-    // Series 2: 4 decimals, same integer part (10–49), varying decimals
+    // Series 2: 4 decimals, same integer part (10–49), varying decimals.
+    // Include a pair like 44,9 and 44,09: same digit, once in tenths and once in hundredths.
     const intPart = randInt(10, 49);
-    const d1 = parseFloat((intPart + randInt(1, 9) / 10).toFixed(1));
-    const d2 = parseFloat((intPart + randInt(10, 99) / 100).toFixed(2));
     const tenths = randInt(1, 9);
-    const d3 = parseFloat((intPart + tenths / 10).toFixed(1));
-    const d4 = parseFloat((intPart + Math.floor(tenths / 10 * 10) / 100 + randInt(1, 9) / 100).toFixed(2));
-    const decs = shuffle([d1, d2, d3, d4]);
+    const decsBase = [
+      parseFloat((intPart + tenths / 10).toFixed(1)),
+      parseFloat((intPart + tenths / 100).toFixed(2)),
+    ];
+    while (decsBase.length < 4) {
+      const decimals = Math.random() < 0.5
+        ? randInt(1, 9) * 10
+        : randInt(11, 99);
+      if (decimals % 10 === 0 && decimals / 10 === tenths) continue;
+      const candidate = parseFloat((intPart + decimals / 100).toFixed(decimals % 10 === 0 ? 1 : 2));
+      if (!decsBase.includes(candidate)) decsBase.push(candidate);
+    }
+    const decs = shuffle(decsBase);
     const sortedDecs = [...decs].sort((a, b) => a - b);
     const sortedDecsDesc = [...sortedDecs].reverse();
 
@@ -390,7 +399,7 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
   );
 
   const inputStyle = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
-  const carryStyle = "h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] disabled:opacity-60 text-[var(--color-text-secondary)]";
+  const carryStyle = "h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
   const rowInput = (answers: string[], onChange: (col: number, val: string) => void, col: number) => (
     <td key={col} className="w-8 p-0.5 text-center">
@@ -546,8 +555,8 @@ function fmtDecResult(intResult: number, decimals: number): string {
 
 // cells[28]: 0-3 Row A, 4-7 Row B, 8-11 R2 carries, 12-15 R1 carries,
 //            16-19 Partial1, 20-22 Partial2 (M/C/D), 23 unused, 24-27 Sum
-function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult, onDecResultChange, validated }: {
-  aStr: string; bStr: string; resultStr: string;
+function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult, onDecResultChange, validated }: {
+  aStr: string; bStr: string; aInt: number; bInt: number;
   cells: string[];
   onCellChange: (idx: number, val: string) => void;
   decResult: string;
@@ -555,8 +564,12 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
   validated: boolean;
 }) {
   const colLabels = ["M", "C", "D", "U"];
+  const ad = [Math.floor(aInt / 1000) % 10, Math.floor(aInt / 100) % 10, Math.floor(aInt / 10) % 10, aInt % 10];
+  const bd = [Math.floor(bInt / 1000) % 10, Math.floor(bInt / 100) % 10, Math.floor(bInt / 10) % 10, bInt % 10];
+  const aFz = ad.findIndex(d => d !== 0);
+  const bFz = bd.findIndex(d => d !== 0);
   const inputCls = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
-  const carryCls = "h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  const carryCls = "h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
   const cellIn = (base: number, col: number) => (
     <td key={col} className="w-8 text-center p-0.5">
@@ -574,6 +587,13 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
         disabled={validated}
         onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
         className={carryCls} />
+    </td>
+  );
+  const pre = (digits: number[], col: number, firstNz: number) => (
+    <td key={col} className="w-8 text-center p-0.5">
+      <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+        {col < firstNz ? "" : digits[col]}
+      </div>
     </td>
   );
 
@@ -602,11 +622,11 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
           </tr>
           <tr>
             <td />
-            {[0,1,2,3].map(col => cellIn(0, col))}
+            {[0,1,2,3].map(col => pre(ad, col, aFz))}
           </tr>
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
-            {[0,1,2,3].map(col => cellIn(4, col))}
+            {[0,1,2,3].map(col => pre(bd, col, bFz))}
           </tr>
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
@@ -631,7 +651,6 @@ function DecMulGridFull({ aStr, bStr, resultStr, cells, onCellChange, decResult,
         <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
         <input type="text" value={decResult} disabled={validated}
           onChange={e => onDecResultChange(e.target.value)}
-          placeholder={`ex. ${resultStr}`}
           className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] disabled:opacity-60"
         />
       </div>
@@ -649,11 +668,12 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
       do { bInt = randInt(11, 29); } while (bInt % 10 === 0);
       const aInt = randInt(100, 299);
       const intResult = aInt * bInt;
-      const resultStr = fmtDecResult(intResult, aDecimals + 1);
       return {
         aStr: fmtDecResult(aInt, aDecimals),
         bStr: fmtDecResult(bInt, 1),
-        resultStr,
+        aInt,
+        bInt,
+        intResult,
         result: intResult / Math.pow(10, aDecimals + 1),
       };
     });
@@ -677,7 +697,7 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <DecMulGridFull
-              aStr={q.aStr} bStr={q.bStr} resultStr={q.resultStr}
+              aStr={q.aStr} bStr={q.bStr} aInt={q.aInt} bInt={q.bInt}
               cells={cells[i]!}
               onCellChange={(idx, val) => setCells(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
               decResult={decResults[i] ?? ""}
@@ -993,7 +1013,7 @@ export function Exercise23({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Transformez dans l&apos;unité indiquée.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         {questions.map((q, i) => {
           const displayVal = q.decPlaces > 0 ? fmtDec(q.value, 1) : String(q.value);
           const correct = q.result % 1 === 0 ? String(q.result) : fmtDec(q.result, q.result.toString().split(".")[1]?.length ?? 1);
@@ -1068,7 +1088,7 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem 1fr auto"}}>
+      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1227,17 +1247,17 @@ export function Exercise27({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Fixed visual losange — shape identical every refresh
-  const svgW = 265, svgH = 178;
-  const cx = 105, cy = 73;
+  const svgW = 330, svgH = 178;
+  const cx = 125, cy = 73;
   const rx = 78, ry = 52; // fixed half-diagonals in pixels
   const Ttop = [cx, cy - ry], Tright = [cx + rx, cy], Tbot = [cx, cy + ry], Tleft = [cx - rx, cy];
   const diaPts = `${Ttop[0]},${Ttop[1]} ${Tright[0]},${Tright[1]} ${Tbot[0]},${Tbot[1]} ${Tleft[0]},${Tleft[1]}`;
-  const bkX = 205, bkY = 148, tickLen = 5;
+  const bkX = 235, bkY = 148, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto h-auto w-full max-w-[420px] overflow-visible">
         {/* Shape */}
         <polygon points={diaPts}
           fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />

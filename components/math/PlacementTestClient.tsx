@@ -3,6 +3,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { savePlacementTestResultAction } from "@/app/actions/progress";
+import { useTranslation } from "@/components/TranslationProvider";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import type { PivotCode } from "@/lib/pivot-langs";
 import {
   Exercise1,
   Exercise2,
@@ -225,8 +228,160 @@ function ResultsScreen({ scores, exercises }: ResultsScreenProps) {
 
 type TestPhase = "idle" | "running" | "results";
 
+type PlacementIntroText = {
+  subject: string;
+  title: string;
+  info: string;
+  exercisesLabel: string;
+  coverage: string;
+  minutesSuffix: string;
+  validateLine: string;
+  navigateLine: string;
+  scoreMax: string;
+  points: string;
+  start: string;
+};
+
+const PLACEMENT_INTRO_TEXTS: Record<"fr", PlacementIntroText> & Partial<Record<PivotCode, PlacementIntroText>> = {
+  fr: {
+    subject: "Mathématiques",
+    title: "Test de placement",
+    info: "Informations",
+    exercisesLabel: "exercices",
+    coverage: "couvrant tous les niveaux de CSC jusqu'à CAP",
+    minutesSuffix: "pour compléter le test",
+    validateLine: "Validez chaque exercice individuellement",
+    navigateLine: "Vous pouvez naviguez librement en cliquant sur la barre de progression en haut.",
+    scoreMax: "Score maximum :",
+    points: "points",
+    start: "Commencer le test",
+  },
+  en: {
+    subject: "Mathematics",
+    title: "Placement test",
+    info: "Information",
+    exercisesLabel: "exercises",
+    coverage: "covering all levels from CSC up to CAP",
+    minutesSuffix: "to complete the test",
+    validateLine: "Submit each exercise individually",
+    navigateLine: "You can move freely by clicking the progress bar at the top.",
+    scoreMax: "Maximum score:",
+    points: "points",
+    start: "Start the test",
+  },
+  ar: {
+    subject: "الرياضيات",
+    title: "اختبار تحديد المستوى",
+    info: "معلومات",
+    exercisesLabel: "تمارين",
+    coverage: "تغطي كل المستويات من CSC حتى CAP",
+    minutesSuffix: "لإكمال الاختبار",
+    validateLine: "ثبّت كل تمرين على حدة",
+    navigateLine: "يمكنك التنقل بحرية بالضغط على شريط التقدم في الأعلى.",
+    scoreMax: "النتيجة القصوى:",
+    points: "نقاط",
+    start: "بدء الاختبار",
+  },
+  fa: {
+    subject: "ریاضی",
+    title: "آزمون تعیین سطح",
+    info: "اطلاعات",
+    exercisesLabel: "تمرین",
+    coverage: "همه سطح‌ها را از CSC تا CAP پوشش می‌دهد",
+    minutesSuffix: "برای کامل کردن آزمون",
+    validateLine: "هر تمرین را جداگانه ثبت کنید",
+    navigateLine: "می‌توانید با کلیک روی نوار پیشرفت در بالا آزادانه جابه‌جا شوید.",
+    scoreMax: "حداکثر امتیاز:",
+    points: "امتیاز",
+    start: "شروع آزمون",
+  },
+  pt: {
+    subject: "Matemática",
+    title: "Teste de nível",
+    info: "Informações",
+    exercisesLabel: "exercícios",
+    coverage: "abrangendo todos os níveis de CSC até CAP",
+    minutesSuffix: "para completar o teste",
+    validateLine: "Valide cada exercício individualmente",
+    navigateLine: "Pode navegar livremente clicando na barra de progresso no topo.",
+    scoreMax: "Pontuação máxima:",
+    points: "pontos",
+    start: "Começar o teste",
+  },
+  so: {
+    subject: "Xisaab",
+    title: "Imtixaanka heerka",
+    info: "Macluumaad",
+    exercisesLabel: "layli",
+    coverage: "oo daboolaya dhammaan heerarka CSC ilaa CAP",
+    minutesSuffix: "si aad u dhammaystirto imtixaanka",
+    validateLine: "Layli kasta gooni u xaqiiji",
+    navigateLine: "Waxaad si xor ah ugu gudbi kartaa adigoo gujinaya barta horumarka ee kore.",
+    scoreMax: "Dhibcaha ugu badan:",
+    points: "dhibcood",
+    start: "Bilow imtixaanka",
+  },
+  ti: {
+    subject: "ሒሳብ",
+    title: "ናይ ደረጃ ፈተና",
+    info: "ሓበሬታ",
+    exercisesLabel: "ልምምዳት",
+    coverage: "ካብ CSC ክሳብ CAP ዘለዉ ኩሎም ደረጃታት ዝሽፍን",
+    minutesSuffix: "ነቲ ፈተና ንምዝዛም",
+    validateLine: "ነፍሲ ወከፍ ልምምድ በበይኑ ኣረጋግጹ",
+    navigateLine: "ኣብ ላዕሊ ዘሎ መስመር ምዕባለ ብምጥዋቕ ብናጽነት ክትንቀሳቐሱ ትኽእሉ።",
+    scoreMax: "ዝለዓለ ነጥቢ:",
+    points: "ነጥቢ",
+    start: "ፈተና ጀምር",
+  },
+  tr: {
+    subject: "Matematik",
+    title: "Seviye belirleme testi",
+    info: "Bilgiler",
+    exercisesLabel: "alıştırma",
+    coverage: "CSC'den CAP'a kadar tüm seviyeleri kapsar",
+    minutesSuffix: "testi tamamlamak için",
+    validateLine: "Her alıştırmayı ayrı ayrı onaylayın",
+    navigateLine: "Üstteki ilerleme çubuğuna tıklayarak serbestçe gezinebilirsiniz.",
+    scoreMax: "Maksimum puan:",
+    points: "puan",
+    start: "Teste başla",
+  },
+  ps: {
+    subject: "ریاضي",
+    title: "د کچې ټاکلو ازموینه",
+    info: "معلومات",
+    exercisesLabel: "تمرینونه",
+    coverage: "د CSC نه تر CAP پورې ټولې کچې پوښي",
+    minutesSuffix: "د ازموینې د بشپړولو لپاره",
+    validateLine: "هر تمرین جلا جلا تایید کړئ",
+    navigateLine: "تاسو کولی شئ په پورته د پرمختګ پر پټه کلیک کولو سره ازاد حرکت وکړئ.",
+    scoreMax: "تر ټولو لوړه نمره:",
+    points: "نمرې",
+    start: "ازموینه پیل کړئ",
+  },
+  uk: {
+    subject: "Математика",
+    title: "Тест визначення рівня",
+    info: "Інформація",
+    exercisesLabel: "вправ",
+    coverage: "охоплює всі рівні від CSC до CAP",
+    minutesSuffix: "щоб завершити тест",
+    validateLine: "Підтверджуйте кожну вправу окремо",
+    navigateLine: "Ви можете вільно переходити, натискаючи на панель прогресу вгорі.",
+    scoreMax: "Максимальний бал:",
+    points: "балів",
+    start: "Почати тест",
+  },
+};
+
 export function PlacementTestClient() {
   const router = useRouter();
+  const pivot = usePivotLang();
+  const { showPivot } = useTranslation();
+  const introText = (showPivot ? PLACEMENT_INTRO_TEXTS[pivot] : undefined) ?? PLACEMENT_INTRO_TEXTS.fr;
+  const introLang = showPivot ? pivot : "fr";
+  const introDir = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr";
   const [phase, setPhase] = useState<TestPhase>("idle");
   const [currentIdx, setCurrentIdx] = useState(0);
   const [timeLeft, setTimeLeft] = useState(TIMER_SECONDS);
@@ -397,8 +552,8 @@ export function PlacementTestClient() {
     return (
       <div className="placement-test-font mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
         <div className="space-y-6">
-          <header className="space-y-2">
-            <p className="text-xs font-medium uppercase tracking-wide text-amber-600">Mathématiques</p>
+          <header className="space-y-2" lang={introLang} dir={introDir}>
+            <p className="text-xs font-medium uppercase tracking-wide text-amber-600">{introText.subject}</p>
             <div className="flex items-center gap-2">
               <button
                 key="result-row"
@@ -409,29 +564,32 @@ export function PlacementTestClient() {
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
               </button>
-              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Test de placement</h1>
+              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">{introText.title}</h1>
             </div>
           </header>
 
-          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4">
+          <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 space-y-4" lang={introLang} dir={introDir}>
             <div className="space-y-2">
-              <p className="text-sm font-semibold text-[var(--color-text-primary)]">Informations</p>
+              <p className="text-sm font-semibold text-[var(--color-text-primary)]">{introText.info}</p>
               <ul className="space-y-1.5 text-sm text-[var(--color-text-secondary)]">
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  <span><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} exercices</strong> couvrant l&apos;algèbre du primaire au secondaire</span>
+                  <span><strong className="text-[var(--color-text-primary)]">{TOTAL_EXERCISES} {introText.exercisesLabel}</strong> {introText.coverage}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  <span><strong className="text-[var(--color-text-primary)]">90 minutes</strong> pour compléter le test</span>
+                  <span><strong className="text-[var(--color-text-primary)]">90 minutes</strong> {introText.minutesSuffix}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  <span>Validez chaque exercice individuellement et naviguez librement</span>
+                  <span>
+                    <span className="block">{introText.validateLine}</span>
+                    <span className="block">{introText.navigateLine}</span>
+                  </span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  <span>Score maximum : <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} points</strong></span>
+                  <span>{introText.scoreMax} <strong className="text-[var(--color-text-primary)]">{TOTAL_MAX_POINTS} {introText.points}</strong></span>
                 </li>
               </ul>
             </div>
@@ -442,7 +600,7 @@ export function PlacementTestClient() {
             onClick={startTest}
             className="w-full rounded-[var(--radius-lg)] bg-amber-500 py-3.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
           >
-            Commencer le test
+            {introText.start}
           </button>
         </div>
       </div>
