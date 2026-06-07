@@ -93,16 +93,46 @@ body {
 .math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]) {
   border-radius: 0 0 8px 8px !important;
   border-width: 0 !important;
-  border-bottom: 2px solid color-mix(in oklch, var(--color-accent-alg) 60%, transparent) !important;
+  border-bottom: 0 !important;
   background: transparent !important;
-  box-shadow: none !important;
+  background-color: transparent !important;
+  box-shadow: inset 0 -2px 0 color-mix(in oklch, var(--color-accent-alg) 60%, transparent) !important;
   outline: none !important;
 }
 
 .math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
-  border-bottom-color: #f59e0b !important;
   background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: inset 0 -2px 0 #f59e0b !important;
   caret-color: #f59e0b;
+}
+
+.math-module-page :is(div, span)[class*="bg-amber-50"][class*="text-center"],
+.math-module-page :is(div, span)[class*="bg-amber-50"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="bg-amber-50"][class*="flex-col"],
+.math-module-page :is(div, span)[class*="dark:bg-amber"][class*="text-center"],
+.math-module-page :is(div, span)[class*="dark:bg-amber"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="dark:bg-amber"][class*="flex-col"],
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="text-center"],
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="flex-col"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="text-center"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="flex-col"] {
+  border: 0 !important;
+  border-radius: 0 0 8px 8px !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: inset 0 -2px 0 #f59e0b !important;
+}
+
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="text-center"],
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="bg-blue-50"][class*="flex-col"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="text-center"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="font-mono"],
+.math-module-page :is(div, span)[class*="dark:bg-blue"][class*="flex-col"] {
+  box-shadow: inset 0 -2px 0 color-mix(in oklch, var(--color-accent-alg) 60%, transparent) !important;
 }
 
 .math-module-page input[type="number"] {
@@ -121,12 +151,44 @@ body {
   border-radius: 6px !important;
   border: 1px solid color-mix(in oklch, var(--color-accent-alg) 42%, transparent) !important;
   background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  background-color: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  box-shadow: none !important;
 }
 
 .math-module-page [data-grid-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus,
 .math-module-page [data-divcol-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
   border-color: #f59e0b !important;
   background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  background-color: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-amber-50"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-amber-50"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-amber-50"][class*="flex-col"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-amber"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-amber"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-amber"][class*="flex-col"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="flex-col"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="flex-col"] {
+  border: 1px solid #f59e0b !important;
+  border-radius: 6px !important;
+  background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  background-color: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+  box-shadow: none !important;
+}
+
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="bg-blue-50"][class*="flex-col"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="text-center"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="font-mono"],
+.math-module-page :is([data-grid-card], [data-divcol-card]) :is(div, span)[class*="dark:bg-blue"][class*="flex-col"] {
+  border-color: color-mix(in oklch, var(--color-accent-alg) 42%, transparent) !important;
 }
 
 /* Hide number input spinners in Firefox */
