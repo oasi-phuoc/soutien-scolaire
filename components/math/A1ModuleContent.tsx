@@ -358,6 +358,70 @@ function ZoomButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function A1HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="relative w-full max-w-sm rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 shadow-xl" onClick={e => e.stopPropagation()}>
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
+          aria-label="Fermer"
+        >
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
+        </button>
+        <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">Astuce</p>
+        <p className="pr-4 text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
+        <button
+          type="button"
+          onClick={onClose}
+          className="mt-4 w-full rounded-xl bg-[var(--color-accent-alg)]/10 py-2 text-sm font-semibold text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/20"
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function A1HintButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-xs font-bold text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+      aria-label="Aide"
+    >
+      ?
+    </button>
+  );
+}
+
+function getA1StepHint(step: Step): string | undefined {
+  if (step === "theory" || step === "audio" || step === "eval") return undefined;
+  if (step === "ex2" || step === "ex3" || step === "ex4" || step === "ex5" || step === "ex6") {
+    return "Lis ou écoute le nombre, puis écris-le en lettres. Vérifie les espaces et les traits d'union.";
+  }
+  if (step === "ex7" || step === "ex8") return "Regarde la suite : les nombres augmentent de 1 à chaque case.";
+  if (step === "ex9" || step === "ex10" || step === "ex12" || step === "ex13") {
+    return "Compte les centaines, les dizaines et les unités séparément, puis additionne les valeurs.";
+  }
+  if (step === "ex11" || step === "ex14" || step === "ex15" || step === "ex16") {
+    return "Décompose le nombre selon les positions : milliers, centaines, dizaines et unités.";
+  }
+  if (step === "ex17" || step === "ex18") return "Sur une droite graduée, compte les intervalles réguliers entre deux repères.";
+  if (step === "ex19" || step === "ex20") return "Repère d'abord les nombres déjà placés, puis complète dans le bon ordre.";
+  if (step === "ex21" || step === "ex22" || step === "ex23" || step === "ex24" || step === "ex25" || step === "ex26" || step === "ex27") {
+    return "Compare les nombres chiffre par chiffre, en commençant par la plus grande position.";
+  }
+  return undefined;
+}
+
 function formatTime(secs: number): string {
   const m = Math.floor(secs / 60);
   const s = secs % 60;
@@ -1677,6 +1741,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     if (startSubmoduleId && startAtEval) return "eval";
     return startSubmoduleId ? "theory" : loadA1Position().step;
   });
+  const [showHint, setShowHint] = useState(false);
 
 
   // Exercice 2 — écrire les nombres (1–10)
@@ -2169,7 +2234,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const steps = getLessonSteps(lesson);
   const stepIdx = steps.indexOf(step);
 
-  const goTo = (s: Step) => { setStep(s); window.scrollTo({ top: 0, behavior: "smooth" }); };
+  const goTo = (s: Step) => { setStep(s); setShowHint(false); window.scrollTo({ top: 0, behavior: "smooth" }); };
 
   const _changeLesson = (idx: number, targetStep: Step = "theory") => {
     setActiveIdx(idx);
@@ -2462,6 +2527,15 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
+      {step !== "eval" && getA1StepHint(step) && (
+        <div className="float-right ml-2">
+          <A1HintButton onClick={() => setShowHint(true)} />
+        </div>
+      )}
+      {showHint && getA1StepHint(step) && (
+        <A1HintPopup hint={getA1StepHint(step)!} onClose={() => setShowHint(false)} />
+      )}
+
       {step === "theory" && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={hasPivotTheoryTitle ? pivot : undefined} dir={hasPivotTheoryTitle && isRtl ? "rtl" : "ltr"}>
@@ -3016,7 +3090,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       return (
                         <button key={c} type="button"
                           onClick={() => { if (!ex9Validated) { const n = [...ex9Selected]; n[i] = c; setEx9Selected(n); } }}
-                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : ex9Validated && c === value ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
+                          className={`w-16 rounded border py-1.5 text-sm font-normal transition-colors ${isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : ex9Validated && c === value ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-zinc-300 text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] dark:border-zinc-600"}`}>
                           {c}
                         </button>
                       );
@@ -3084,7 +3158,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   </div>
                   {zoomedEx === zoomKey10 && (
                     <ZoomModal onClose={() => setZoomedEx(null)}>
-                      <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                      <div className="relative mx-auto w-max max-w-full overflow-auto rounded-[var(--radius-md)] bg-white p-4">
                         {q.positions.map((pos, pi) => (
                           <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
                             {pos.kind === "h" ? <SvgCentaine s={7} /> : pos.kind === "d" ? <SvgDizaine s={11} /> : <SvgUnite s={18} />}
@@ -3167,7 +3241,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   </div>
                   {zoomedEx === zoomKey11 && (
                     <ZoomModal onClose={() => setZoomedEx(null)}>
-                      <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                      <div className="relative mx-auto w-max max-w-full overflow-auto rounded-[var(--radius-md)] bg-white p-4">
                         {q.positions.map((pos, pi) => (
                           <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
                             {pos.kind === "m" ? <SvgMillier s={5} d={11} /> : pos.kind === "h" ? <SvgCentaine s={7} /> : pos.kind === "d" ? <SvgDizaine s={12} /> : <SvgUnite s={20} />}
@@ -3398,7 +3472,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const isSelected = ex15Selected[qi]?.[ti] ?? false;
                     let cls = "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                     if (isSelected) {
-                      cls = "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                      cls = "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                     } else if (ex15Validated && tag.correct) {
                       cls = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                     }
@@ -3573,11 +3647,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const isCorrect = c === q9val;
                         let cls = "w-16 rounded border py-1.5 text-sm font-normal transition-colors ";
                         if (evalPageValidated) {
-                          if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                          if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                           else if (!p0Right && isCorrect) cls += "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/20 font-semibold";
                           else cls += "border-zinc-300 text-[var(--color-text-secondary)] opacity-50 dark:border-zinc-600";
                         } else {
-                          cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
+                          cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
                         }
                         return (
                           <button key={c} type="button"
@@ -3638,7 +3712,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     </div>
                     {zoomedEx === "eval-q10" && (
                       <ZoomModal onClose={() => setZoomedEx(null)}>
-                        <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                        <div className="relative mx-auto w-max max-w-full overflow-auto rounded-[var(--radius-md)] bg-white p-4">
                           {a12EvalQ10.positions.map((pos,pi)=>(
                             <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
                               {pos.kind==="h"?<SvgCentaine s={7}/>:pos.kind==="d"?<SvgDizaine s={11}/>:<SvgUnite s={18}/>}
@@ -3693,7 +3767,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     })()}
                     {zoomedEx === "eval-q11" && (
                       <ZoomModal onClose={() => setZoomedEx(null)}>
-                        <div className="relative overflow-auto rounded-[var(--radius-md)] bg-white p-4">
+                        <div className="relative mx-auto w-max max-w-full overflow-auto rounded-[var(--radius-md)] bg-white p-4">
                           {a12EvalQ11.positions.map((pos,pi)=>(
                             <div key={pi} style={{position:"absolute",left:pos.x,top:pos.y}}>
                               {pos.kind==="m"?<SvgMillier s={5} d={11}/>:pos.kind==="h"?<SvgCentaine s={7}/>:pos.kind==="d"?<SvgDizaine s={12}/>:<SvgUnite s={20}/>}

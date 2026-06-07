@@ -867,7 +867,7 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
           <button key={m} type="button" onClick={() => setMode(m)}
             className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
               mode === m
-                ? "bg-[var(--color-accent-alg)] text-white"
+                ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
             }`}>
             {m === "add" ? "Addition" : "Soustraction"}
@@ -1740,7 +1740,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
               onClick={() => setToggleAnswer("oui")}
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
-                  ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
+                  ? "border-2 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] shadow-sm"
                   : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
               }`}
             >

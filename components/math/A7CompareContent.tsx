@@ -85,10 +85,10 @@ export function A7CompareExercise({
                 let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                 if (!validated) {
                   cls += sel
-                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                    ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                     : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                 } else if (sel) {
-                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                 } else if (isCorrect) {
                   cls += CLS_WRONG;
                 } else {

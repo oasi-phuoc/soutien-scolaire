@@ -91,17 +91,18 @@ body {
 }
 
 .math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]) {
-  border-radius: 0 !important;
+  border-radius: 0 0 8px 8px !important;
   border-width: 0 !important;
   border-bottom: 2px solid color-mix(in oklch, var(--color-accent-alg) 60%, transparent) !important;
-  background: color-mix(in oklch, var(--color-accent-alg) 7%, transparent) !important;
+  background: transparent !important;
   box-shadow: none !important;
   outline: none !important;
 }
 
 .math-module-page input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
-  border-bottom-color: var(--color-accent-alg) !important;
-  background: color-mix(in oklch, var(--color-accent-alg) 12%, transparent) !important;
+  border-bottom-color: #f59e0b !important;
+  background: transparent !important;
+  caret-color: #f59e0b;
 }
 
 .math-module-page input[type="number"] {
@@ -113,6 +114,19 @@ body {
 .math-module-page input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
+}
+
+.math-module-page [data-grid-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]),
+.math-module-page [data-divcol-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]) {
+  border-radius: 6px !important;
+  border: 1px solid color-mix(in oklch, var(--color-accent-alg) 42%, transparent) !important;
+  background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
+}
+
+.math-module-page [data-grid-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus,
+.math-module-page [data-divcol-card] input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="hidden"]):focus {
+  border-color: #f59e0b !important;
+  background: color-mix(in oklch, var(--color-accent-alg) 10%, transparent) !important;
 }
 
 /* Hide number input spinners in Firefox */

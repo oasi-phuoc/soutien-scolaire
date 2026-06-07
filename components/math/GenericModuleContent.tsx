@@ -295,9 +295,9 @@ function ComparisonExercise({
                   const isCorrect = sym === q.answer;
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                   if (!validated) {
-                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                   } else if (sel) {
-                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   } else if (isCorrect) {
                     cls += CLS_WRONG;
                   } else {
@@ -379,9 +379,9 @@ function ExprCompExercise({
                   const isCorrect = sym === q.answer;
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                   if (!validated) {
-                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                    cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                   } else if (sel) {
-                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   } else if (!sel && isCorrect) {
                     cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                   } else {
@@ -2349,9 +2349,9 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
                 const isCorrect = sym === q.answer;
                 let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
                 if (!validated) {
-                  cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
+                  cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                 } else if (sel && isCorrect) {
-                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                 } else if (sel && !isCorrect) {
                   cls += CLS_WRONG;
                 } else if (!sel && isCorrect) {
@@ -2609,7 +2609,7 @@ function PowerTableBlock() {
               idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
             } ${
               pair[0] === x
-                ? "bg-[var(--color-accent-alg)] text-white"
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
@@ -2660,7 +2660,7 @@ function MultiplicationTableBlock() {
               idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
             } ${
               pair[0] === x
-                ? "bg-[var(--color-accent-alg)] text-white"
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
@@ -2708,7 +2708,7 @@ function DivisionTableBlock() {
               idx > 0 ? "border-l border-[var(--color-border-default)]" : ""
             } ${
               pair[0] === x
-                ? "bg-[var(--color-accent-alg)] text-white"
+                ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
@@ -5142,10 +5142,10 @@ export function GenericModuleContent({
               let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
               if (!numberSelectValidated) {
                 cls += sel
-                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                  ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                   : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
               } else {
-                if (sel && shouldSelect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                if (sel && shouldSelect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                 else if (sel && !shouldSelect) cls += CLS_WRONG;
                 else if (!sel && shouldSelect) cls += CLS_WRONG;
                 else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
@@ -5240,10 +5240,10 @@ export function GenericModuleContent({
                       if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
                       if (!oddEvenValidated) {
                         cls += isSelected
-                          ? "bg-[var(--color-accent-alg)] text-white"
+                          ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                       } else if (isSelected && isCorrect) {
-                        cls += "bg-[var(--color-accent-alg)] text-white";
+                        cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (isSelected && !isCorrect) {
                         cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
                       } else if (!isSelected && isCorrect && ok === false) {
@@ -5333,10 +5333,10 @@ export function GenericModuleContent({
                       let cls = "w-20 shrink-0 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
                       if (!orderingValidated) {
                         cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
                       } else {
-                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                         else if (isSelected) cls += CLS_WRONG;
                         else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
                       }
@@ -5504,10 +5504,10 @@ export function GenericModuleContent({
                       let cls = "w-16 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
                       if (!decOrderingValidated) {
                         cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
                       } else {
-                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white";
+                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                         else if (isSelected) cls += CLS_WRONG;
                         else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
                       }
@@ -6261,7 +6261,7 @@ export function GenericModuleContent({
               onClick={() => setToggleAnswer("oui")}
               className={`flex-1 rounded-xl py-5 text-base font-bold transition-all ${
                 toggleAnswer === "oui"
-                  ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
+                  ? "border-2 border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)] shadow-sm"
                   : "border-2 border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] hover:bg-blue-50 dark:hover:bg-blue-950/20"
               }`}
             >
