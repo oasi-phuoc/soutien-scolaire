@@ -76,6 +76,20 @@ function renderBold(text: string): React.ReactNode {
   return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="font-bold text-[var(--color-accent-alg)]">{part}</strong> : part);
 }
 
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function preserveEvidence(fr: string | undefined, text: string | undefined) {
+  if (!text) return fr ?? "";
+  if (text.includes("**")) return text;
+  const tokens = [...(fr ?? "").matchAll(/\*\*(.+?)\*\*/g)].map((m) => m[1]).filter(Boolean) as string[];
+  return tokens.reduce((acc, token) => {
+    if (!token || token.length > 12) return acc;
+    return acc.replace(new RegExp(`(?<!\\*)${escapeRegExp(token)}(?!\\*)`, "g"), `**${token}**`);
+  }, text);
+}
+
 function renderText(text: string): React.ReactNode {
   const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
   if (parts.length === 1) return renderBold(text);
@@ -108,8 +122,8 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
   const bt = blockIdx !== undefined ? trad?.blocks?.[blockIdx] : undefined;
   const pivotMainText = bt?.text?.[pivot];
   const usePivot = showPivot;
-  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? pv : (fr ?? "");
-  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
+  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? preserveEvidence(fr, pv) : (fr ?? "");
+  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv.map((item, i) => preserveEvidence(fr[i], item)) : fr;
   const headersFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
   const captionFor = (fr?: string, pv?: string) => usePivot && pv ? pv : fr;
   const textDir = usePivot && isRtl ? "rtl" : "ltr";

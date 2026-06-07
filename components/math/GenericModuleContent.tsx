@@ -26,6 +26,20 @@ function renderBold(text: string) {
   return <>{parts.map((p, i) => i % 2 === 1 ? <strong key={i} className="font-bold text-[var(--color-accent-alg)]">{p}</strong> : p)}</>;
 }
 
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function preserveEvidence(fr: string | undefined, text: string | undefined) {
+  if (!text) return fr ?? "";
+  if (text.includes("**")) return text;
+  const tokens = [...(fr ?? "").matchAll(/\*\*(.+?)\*\*/g)].map((m) => m[1]).filter(Boolean) as string[];
+  return tokens.reduce((acc, token) => {
+    if (!token || token.length > 12) return acc;
+    return acc.replace(new RegExp(`(?<!\\*)${escapeRegExp(token)}(?!\\*)`, "g"), `**${token}**`);
+  }, text);
+}
+
 function renderText(text: string): React.ReactNode {
   const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\])/);
   if (parts.length === 1) return renderBold(text);
@@ -3190,8 +3204,8 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   const pivotText = bt?.text?.[pivot];
   const isRtl = pivot === "ar" || pivot === "fa";
   const usePivot = showPivot;
-  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? pv : (fr ?? "");
-  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
+  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? preserveEvidence(fr, pv) : (fr ?? "");
+  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv.map((item, i) => preserveEvidence(fr[i], item)) : fr;
   const headersFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
   const captionFor = (fr?: string, pv?: string) => usePivot && pv ? pv : fr;
   const textDir = usePivot && isRtl ? "rtl" : "ltr";
@@ -3223,7 +3237,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       return (
         <div>
           <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
-            <span lang={textLang} dir={textDir}>{noteText}</span>
+            <span lang={textLang} dir={textDir}>{renderText(noteText)}</span>
           </div>
         </div>
       );
@@ -3232,7 +3246,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       return (
         <div>
           <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
-            {exampleText}
+            {renderBold(exampleText)}
           </div>
         </div>
       );
@@ -3240,7 +3254,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
       const highlightText = textFor(block.fr, pivotText ?? block.pivot?.[pivot]);
       return (
         <div>
-          <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{highlightText}</p>
+          <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderBold(highlightText)}</p>
         </div>
       );
     case "rule": {
@@ -3254,7 +3268,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           <ul className="list-disc space-y-1 pl-4">
             {items.map((it, i) => (
               <li key={i} className="text-xs text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>
-                {it}
+                {renderText(it)}
               </li>
             ))}
           </ul>
