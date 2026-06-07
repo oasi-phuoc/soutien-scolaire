@@ -51,15 +51,31 @@ function randOneDecimal(minTenths: number, maxTenths: number): number {
 
 // ── CorrectionInput ───────────────────────────────────────────────────────────
 
-function CorrectionInput({ value, onChange, correct: _correct, validated, width = "w-16" }: {
+function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }: {
   value: string; onChange: (v: string) => void; correct: string;
   validated: boolean; width?: string; placeholder?: string;
 }) {
+  const wrong = validated && value.trim() !== "" && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
-    <input type="text" value={value} onChange={e => onChange(e.target.value)}
-      disabled={validated}
-      className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] focus:ring-1 focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-60`}
-    />
+    <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+      {validated ? (
+        wrong ? (
+          <div className="flex flex-col leading-tight">
+            <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>
+            <span className="font-bold text-amber-500">{correct}</span>
+          </div>
+        ) : (
+          <span>{value || correct}</span>
+        )
+      ) : (
+        <input
+          type="text"
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          className="h-6 w-full bg-transparent text-center outline-none"
+        />
+      )}
+    </div>
   );
 }
 
@@ -220,13 +236,13 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
-      <div className="space-y-2">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">Suite 1</span>
+      <div className="flex items-center gap-2">
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <SeqRow vals={data.s1.vals} visPos={data.s1.visPos} isInt answers={ans1}
           onChange={(i, v) => setAns1(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
       </div>
-      <div className="space-y-2">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">Suite 2</span>
+      <div className="flex items-center gap-2">
+        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
         <SeqRow vals={data.s2.vals} visPos={data.s2.visPos} isInt={false} answers={ans2}
           onChange={(i, v) => setAns2(p => { const n = [...p]; n[i] = v; return n; })} validated={validated} />
       </div>
@@ -241,40 +257,41 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
   onToggle: (n: number) => void; validated: boolean;
   fmt: (n: number) => string; desc?: boolean; chipW?: string;
 }) {
+  const available = numbers.filter(n => !selected.includes(n));
+
+  const chipBase = `${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold transition-colors `;
+
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-2">
-        {numbers.map((n, ni) => {
-          const isSelected = selected.includes(n);
-          const selIdx = selected.indexOf(n);
-          let cls = `${chipW} flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors cursor-pointer `;
-          if (!validated) {
-            cls += isSelected
-              ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"
-              : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
-          } else {
-            cls += isSelected
-              ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white opacity-70"
-              : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
-          }
+      <div className="flex min-h-10 flex-wrap gap-2">
+        {available.map((n, ni) => {
+          const cls = chipBase + (validated
+            ? "cursor-default border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40"
+            : "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]");
           return (
             <button key={ni} type="button" disabled={validated} onClick={() => onToggle(n)} className={cls}>
-              {selIdx >= 0 && <span className="mr-1.5 text-xs opacity-75">{selIdx + 1}.</span>}
               {fmt(n)}
             </button>
           );
         })}
       </div>
-      <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] mr-1">Votre ordre :</span>
+      <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
         {selected.length > 0
           ? selected.map((n, si) => (
             <React.Fragment key={si}>
-              <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmt(n)}</span>
-              {si < selected.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs mx-0.5">{desc ? ">" : "<"}</span>}
+              <button
+                type="button"
+                disabled={validated}
+                onClick={() => onToggle(n)}
+                className={`${chipBase}${validated ? "cursor-default" : "cursor-pointer"} border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white`}
+              >
+                <span className="mr-1 text-xs opacity-75">{si + 1}.</span>
+                {fmt(n)}
+              </button>
+              {si < selected.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{desc ? ">" : "<"}</span>}
             </React.Fragment>
           ))
-          : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+          : null}
       </div>
     </div>
   );
@@ -282,20 +299,19 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
 
 export function Exercise18({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Series 1: 3 seven-digit + 1 six-digit number
-    //   n1 & n2 (7-digit) share first 3 digits (ABC)
-    //   n1 & n3 (7-digit) share last 3 digits (EFG)
-    //   n4 is the 6-digit number
-    const top3 = randInt(100, 999);       // shared first 3 digits for n1 & n2
-    let top3b = randInt(100, 999);        // first 3 digits for n3
-    while (top3b === top3) top3b = randInt(100, 999);
+    // Series 1: 3 six-digit numbers + 1 five-digit number.
+    //   n1 & n2 share first 2 digits.
+    //   n1 & n3 share last 3 digits.
+    const top2 = randInt(10, 99);
+    let top2b = randInt(10, 99);
+    while (top2b === top2) top2b = randInt(10, 99);
     const bot3 = randInt(100, 999);       // shared last 3 digits for n1 & n3
     let bot3b = randInt(100, 999);        // last 3 digits for n2
     while (bot3b === bot3) bot3b = randInt(100, 999);
-    const n1 = top3 * 10000 + randInt(0, 9) * 1000 + bot3;
-    const n2 = top3 * 10000 + randInt(0, 9) * 1000 + bot3b;
-    const n3 = top3b * 10000 + randInt(0, 9) * 1000 + bot3;
-    const n4 = randInt(100000, 999999); // 6-digit number
+    const n1 = top2 * 10000 + randInt(0, 9) * 1000 + bot3;
+    const n2 = top2 * 10000 + randInt(0, 9) * 1000 + bot3b;
+    const n3 = top2b * 10000 + randInt(0, 9) * 1000 + bot3;
+    const n4 = randInt(10000, 99999);
     const ints = shuffle([n1, n2, n3, n4]);
     const sortedInts = [...ints].sort((a, b) => a - b);
 
@@ -346,16 +362,20 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre demandée.</p>
       <div className="space-y-3">
-        <p className="text-sm font-bold text-[var(--color-accent-alg)]">Série 1</p>
-        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
+        <div className="flex items-start gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
+          <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
+        </div>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={fmtInt} chipW="w-32" />
+          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" />
       </div>
       <div className="space-y-3">
-        <p className="text-sm font-bold text-[var(--color-accent-alg)]">Série 2</p>
-        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
+        <div className="flex items-start gap-2">
+          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
+          <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
+        </div>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc chipW="w-24" />
+          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" />
       </div>
     </div>
   );
@@ -713,27 +733,242 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 21 — Column division with decimals ──────────────────────────────
 
+function computeDecimalDivSteps(dividend: number, divisor: number): Array<{ partialDiv: number; product: number; colEnd: number }> {
+  const digits = dividend.toString().split("").map(Number);
+  const steps: Array<{ partialDiv: number; product: number; colEnd: number }> = [];
+  let current = 0;
+  for (let i = 0; i < digits.length; i++) {
+    current = current * 10 + digits[i]!;
+    if (current < divisor && i < digits.length - 1) continue;
+    const quotientDigit = Math.floor(current / divisor);
+    const product = quotientDigit * divisor;
+    steps.push({ partialDiv: current, product, colEnd: i });
+    current -= product;
+  }
+  return steps;
+}
+
+function DecimalDivisionGrid({
+  dividendInt,
+  divisor,
+  quotientInt,
+  quotientInputs,
+  remainderInput,
+  workFlat,
+  decResult,
+  decCorrect,
+  onQuotientChange,
+  onRemainderChange,
+  onWorkChange,
+  onDecResultChange,
+  validated,
+}: {
+  dividendInt: number;
+  divisor: number;
+  quotientInt: number;
+  quotientInputs: string[];
+  remainderInput: string;
+  workFlat: string[];
+  decResult: string;
+  decCorrect: string;
+  onQuotientChange: (idx: number, value: string) => void;
+  onRemainderChange: (value: string) => void;
+  onWorkChange: (step: number, type: 0 | 1, col: number, value: string) => void;
+  onDecResultChange: (value: string) => void;
+  validated: boolean;
+}) {
+  const steps = computeDecimalDivSteps(dividendInt, divisor);
+  const dividendStr = String(dividendInt);
+  const divisorStr = String(divisor);
+  const quotientStr = String(quotientInt);
+  const dividendCols = dividendStr.length;
+  const quotientCols = Math.max(quotientStr.length, divisorStr.length);
+  const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
+  const CW = 34;
+
+  const digitInput = (value: string, onChange: (value: string) => void) => (
+    <input
+      type="text"
+      inputMode="numeric"
+      maxLength={1}
+      value={value}
+      disabled={validated}
+      onChange={e => onChange(e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+    />
+  );
+
+  const fixedCell = (value: string) => (
+    <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
+      {value}
+    </div>
+  );
+
+  const emptyCell = () => <div className="h-8 w-8" />;
+
+  function WorkRow({ numStr, colEnd, stepIndex, type }: { numStr: string; colEnd: number; stepIndex: number; type: 0 | 1 }) {
+    const startCol = colEnd - numStr.length + 1;
+    return (
+      <>
+        {Array.from({ length: dividendCols }, (_, col) => {
+          const relIdx = col - startCol;
+          const hasDigit = relIdx >= 0 && relIdx < numStr.length;
+          const flatIdx = stepIndex * 2 * dividendCols + type * dividendCols + relIdx;
+          return (
+            <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+              {hasDigit
+                ? digitInput(workFlat[flatIdx] ?? "", value => onWorkChange(stepIndex, type, relIdx, value))
+                : emptyCell()}
+            </td>
+          );
+        })}
+      </>
+    );
+  }
+
+  return (
+    <div className="flex flex-col items-center gap-3 overflow-x-auto">
+      <table className="mx-auto border-collapse table-fixed">
+        <tbody>
+          <tr>
+            <td style={{ width: 20, padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, i) => (
+              <td key={i} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+                {fixedCell(dividendStr[i]!)}
+              </td>
+            ))}
+            {Array.from({ length: quotientCols }, (_, i) => (
+              <td
+                key={i}
+                style={{
+                  width: CW,
+                  padding: 2,
+                  ...(i === 0 ? BSEP : {}),
+                  ...(i < divisorStr.length ? { borderBottom: "2px solid var(--color-text-primary)" } : {}),
+                }}
+                className="align-middle text-center"
+              >
+                {i < divisorStr.length ? fixedCell(divisorStr[i]!) : null}
+              </td>
+            ))}
+          </tr>
+          {steps.map((step, stepIndex) => {
+            const partialStr = String(step.partialDiv);
+            const productStr = String(step.product);
+            const partialStart = step.colEnd - partialStr.length + 1;
+            const productStart = step.colEnd - productStr.length + 1;
+            const lineStart = Math.min(partialStart, productStart);
+            return (
+              <React.Fragment key={stepIndex}>
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  <WorkRow numStr={partialStr} colEnd={step.colEnd} stepIndex={stepIndex} type={0} />
+                  {stepIndex === 0
+                    ? Array.from({ length: quotientCols }, (_, qi) => (
+                      <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
+                        {qi < quotientStr.length
+                          ? <CorrectionInput
+                              value={quotientInputs[qi] ?? ""}
+                              onChange={value => onQuotientChange(qi, value.replace(/[^0-9]/g, "").slice(-1))}
+                              correct={quotientStr[qi] ?? ""}
+                              validated={validated}
+                              width="w-8"
+                            />
+                          : emptyCell()}
+                      </td>
+                    ))
+                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />}
+                </tr>
+                <tr>
+                  <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
+                  <WorkRow numStr={productStr} colEnd={step.colEnd} stepIndex={stepIndex} type={1} />
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+                <tr>
+                  <td style={{ padding: 0 }} />
+                  {Array.from({ length: dividendCols }, (_, col) => (
+                    <td key={col} style={{ width: CW, padding: 0 }}>
+                      {col >= lineStart && col <= step.colEnd
+                        ? <div className="my-1 h-px bg-[var(--color-text-primary)] opacity-50" />
+                        : null}
+                    </td>
+                  ))}
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                </tr>
+              </React.Fragment>
+            );
+          })}
+          <tr>
+            <td colSpan={dividendCols} style={{ padding: "4px 6px 4px 0", textAlign: "right", verticalAlign: "middle", fontSize: 12, color: "var(--color-text-secondary)", whiteSpace: "nowrap" }}>
+              Reste :
+            </td>
+            <td style={{ width: CW, padding: 2 }} className="align-middle text-center">
+              <CorrectionInput
+                value={remainderInput}
+                onChange={value => onRemainderChange(value.replace(/[^0-9]/g, "").slice(0, 2))}
+                correct={String(dividendInt % divisor)}
+                validated={validated}
+                width="w-8"
+              />
+            </td>
+            <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+          </tr>
+        </tbody>
+      </table>
+      <div className="flex items-center gap-2 pt-1">
+        <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">Résultat :</span>
+        <input
+          type="text"
+          inputMode="decimal"
+          value={decResult}
+          disabled={validated}
+          onChange={e => onDecResultChange(e.target.value)}
+          className="w-28 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+        />
+        {validated && decResult.trim() && !matchNum(decResult, parseNum(decCorrect), 0.005) && (
+          <span className="text-xs font-bold text-amber-500">{decCorrect}</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function Exercise21({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const data = useMemo(() => {
-    // Grid 1: dividend 5.0–9.9 (1 decimal), divisor 2–5
-    const d1 = randInt(2, 5);
-    const q1int = randInt(10, 19);
-    const dividend1 = Math.round(d1 * q1int) / 10;
-    const quotient1 = q1int / 10;
+    const makeQ = (decPlaces: 1 | 2) => {
+      const scale = decPlaces === 1 ? 10 : 100;
+      const minDividendInt = 100 * scale;
+      const maxDividendInt = 999 * scale + (scale - 1);
 
-    // Grid 2: dividend 11–99 (2 decimals), divisor 2–5
-    const d2 = randInt(2, 5);
-    const q2int = randInt(100, 199);
-    const dividend2 = Math.round(d2 * q2int) / 100;
-    const quotient2 = q2int / 100;
+      for (;;) {
+        const divisor = randInt(2, 9);
+        const minQuotientInt = Math.ceil(minDividendInt / divisor);
+        const maxQuotientInt = Math.floor(maxDividendInt / divisor);
+        const quotientInt = randInt(minQuotientInt, maxQuotientInt);
+        const dividendInt = quotientInt * divisor;
+        if (dividendInt < minDividendInt || dividendInt > maxDividendInt) continue;
+        if (dividendInt % 10 === 0) continue;
+        return {
+          dividendInt,
+          divisor,
+          quotientInt,
+          dividend: dividendInt / scale,
+          quotient: quotientInt / scale,
+          decPlaces,
+        };
+      }
+    };
 
     return [
-      { dividend: dividend1, divisor: d1, quotient: quotient1, decPlaces: 1 },
-      { dividend: dividend2, divisor: d2, quotient: quotient2, decPlaces: 2 },
+      makeQ(1),
+      makeQ(2),
     ];
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
 
+  const [quotients, setQuotients] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(5).fill("")));
+  const [remainders, setRemainders] = useState<string[]>(["", ""]);
+  const [works, setWorks] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(80).fill("")));
   const [answers, setAnswers] = useState<string[]>(["", ""]);
 
   useEffect(() => {
@@ -746,21 +981,44 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez les divisions.</p>
-      <div className="flex flex-wrap gap-4">
+      <div className="space-y-3">
         {data.map((q, i) => (
-          <div key={i} className="flex flex-col items-center gap-1">
-            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <div className="inline-flex flex-col items-end font-mono text-base border border-[var(--color-border-default)] rounded-lg px-3 py-2 bg-[var(--color-bg-secondary)]">
-              <div className="flex items-center gap-2">
-                <span className="text-[var(--color-text-primary)]">{fmtDec(q.dividend, q.decPlaces)}</span>
-                <span className="text-[var(--color-text-secondary)]">÷</span>
-                <span className="text-[var(--color-text-primary)]">{q.divisor}</span>
-                <span className="text-[var(--color-text-secondary)]">=</span>
-                <span className="text-xs font-bold text-[var(--color-accent-alg)]">Résultat :</span>
-                <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-                  correct={fmtDec(q.quotient, q.decPlaces)} validated={validated} width="w-16" />
-              </div>
+          <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
+            <div className="font-mono text-base font-bold text-[var(--color-text-primary)]">
+              {fmtDec(q.dividend, q.decPlaces)} ÷ {q.divisor}
             </div>
+            <DecimalDivisionGrid
+              dividendInt={q.dividendInt}
+              divisor={q.divisor}
+              quotientInt={q.quotientInt}
+              quotientInputs={quotients[i] ?? []}
+              remainderInput={remainders[i] ?? ""}
+              workFlat={works[i] ?? []}
+              decResult={answers[i] ?? ""}
+              decCorrect={fmtDec(q.quotient, q.decPlaces)}
+              onQuotientChange={(idx, value) => setQuotients(prev => {
+                const next = prev.map(row => [...row]);
+                next[i]![idx] = value;
+                return next;
+              })}
+              onRemainderChange={value => setRemainders(prev => {
+                const next = [...prev];
+                next[i] = value;
+                return next;
+              })}
+              onWorkChange={(step, type, col, value) => setWorks(prev => {
+                const next = prev.map(row => [...row]);
+                const idx = step * 2 * String(q.dividendInt).length + type * String(q.dividendInt).length + col;
+                next[i]![idx] = value;
+                return next;
+              })}
+              onDecResultChange={value => setAnswers(prev => {
+                const next = [...prev];
+                next[i] = value;
+                return next;
+              })}
+              validated={validated}
+            />
           </div>
         ))}
       </div>
@@ -1042,36 +1300,36 @@ const SPECIAL_FACTORS = [0.2, 0.25, 0.5, 0.75];
 export function Exercise24({ exerciseKey, validated, onValidated, validateTrigger }: PlacementExerciseProps) {
   const questions = useMemo(() => {
     function r1(min: number, max: number) { return Math.round((Math.random() * (max - min) + min) * 10) / 10; }
-    const qs: { label: string; result: number }[] = [];
+    const qs: { left: string; op: string; right: string; result: number }[] = [];
     // 1. int + dec
     const a1 = randInt(10, 50), b1 = r1(1, 9);
-    qs.push({ label: `${a1} + ${fmtDec(b1, 1)}`, result: Math.round((a1 + b1) * 10) / 10 });
+    qs.push({ left: String(a1), op: "+", right: fmtDec(b1, 1), result: Math.round((a1 + b1) * 10) / 10 });
     // 2. dec + dec
     const a2 = r1(5, 20), b2 = r1(1, 10);
-    qs.push({ label: `${fmtDec(a2, 1)} + ${fmtDec(b2, 1)}`, result: Math.round((a2 + b2) * 10) / 10 });
+    qs.push({ left: fmtDec(a2, 1), op: "+", right: fmtDec(b2, 1), result: Math.round((a2 + b2) * 10) / 10 });
     // 3. int - dec
     const a3 = randInt(15, 50), b3 = r1(1, 9);
-    qs.push({ label: `${a3} − ${fmtDec(b3, 1)}`, result: Math.round((a3 - b3) * 10) / 10 });
+    qs.push({ left: String(a3), op: "−", right: fmtDec(b3, 1), result: Math.round((a3 - b3) * 10) / 10 });
     // 4. dec - dec
     const a4 = r1(10, 30); const b4 = r1(1, a4 - 1);
-    qs.push({ label: `${fmtDec(a4, 1)} − ${fmtDec(b4, 1)}`, result: Math.round((a4 - b4) * 10) / 10 });
+    qs.push({ left: fmtDec(a4, 1), op: "−", right: fmtDec(b4, 1), result: Math.round((a4 - b4) * 10) / 10 });
     // 5. int × special factor
     const f5 = SPECIAL_FACTORS[randInt(0, 3)]!;
     let a5 = randInt(4, 20);
     while ((a5 * f5 * 100) % 1 !== 0) a5++;
-    qs.push({ label: `${a5} × ${fmtDec(f5, f5 === 0.2 || f5 === 0.5 ? 1 : 2)}`, result: Math.round(a5 * f5 * 100) / 100 });
+    qs.push({ left: String(a5), op: "×", right: fmtDec(f5, f5 === 0.2 || f5 === 0.5 ? 1 : 2), result: Math.round(a5 * f5 * 100) / 100 });
     // 6. dec × int
     const a6 = r1(1, 9), b6 = randInt(2, 8);
-    qs.push({ label: `${fmtDec(a6, 1)} × ${b6}`, result: Math.round(a6 * b6 * 10) / 10 });
+    qs.push({ left: fmtDec(a6, 1), op: "×", right: String(b6), result: Math.round(a6 * b6 * 10) / 10 });
     // 7. int ÷ special factor
     const f7 = SPECIAL_FACTORS[randInt(0, 3)]!;
     let a7 = randInt(2, 15);
     while ((a7 / f7) % 1 !== 0) a7++;
-    qs.push({ label: `${a7} ÷ ${fmtDec(f7, f7 === 0.2 || f7 === 0.5 ? 1 : 2)}`, result: Math.round(a7 / f7 * 100) / 100 });
+    qs.push({ left: String(a7), op: "÷", right: fmtDec(f7, f7 === 0.2 || f7 === 0.5 ? 1 : 2), result: Math.round(a7 / f7 * 100) / 100 });
     // 8. dec ÷ int
     const b8 = randInt(2, 6); const q8 = r1(1, 9);
     const a8 = Math.round(q8 * b8 * 10) / 10;
-    qs.push({ label: `${fmtDec(a8, 1)} ÷ ${b8}`, result: q8 });
+    qs.push({ left: fmtDec(a8, 1), op: "÷", right: String(b8), result: q8 });
     return qs;
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -1088,16 +1346,19 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
-      <div className="grid gap-y-2 gap-x-2 items-center text-sm" style={{gridTemplateColumns:"1.5rem max-content max-content"}}>
+      <div
+        className="grid items-center gap-x-2 gap-y-2 text-sm"
+        style={{ gridTemplateColumns: "1.5rem max-content 1.25rem max-content 1rem max-content" }}
+      >
         {questions.map((q, i) => (
           <React.Fragment key={i}>
             <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono text-[var(--color-text-primary)]">{q.label}</span>
-            <div className="flex items-center gap-1.5">
-              <span className="text-[var(--color-text-secondary)]">=</span>
-              <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
-                correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
-            </div>
+            <span className="text-right font-mono text-[var(--color-text-primary)]">{q.left}</span>
+            <span className="text-center font-mono text-[var(--color-text-secondary)]">{q.op}</span>
+            <span className="text-right font-mono text-[var(--color-text-primary)]">{q.right}</span>
+            <span className="text-center text-[var(--color-text-secondary)]">=</span>
+            <CorrectionInput value={answers[i] ?? ""} onChange={v => setAnswers(p => { const n = [...p]; n[i] = v; return n; })}
+              correct={String(q.result).replace(".", ",")} validated={validated} width="w-16" />
           </React.Fragment>
         ))}
       </div>
@@ -1128,25 +1389,25 @@ export function Exercise25({ exerciseKey, validated, onValidated, validateTrigge
 
   const { b, a, h } = data;
   // Fixed visual parallelogram — shape identical every refresh
-  const svgW = 275, svgH = 145;
-  const BLx = 30,  BLy = 118; // bottom-left
-  const BRx = 170, BRy = 118; // bottom-right  (base = 140px)
-  const TLx = 62,  TLy = 38;  // top-left      (skew=32px, height=80px)
-  const TRx = 202, TRy = 38;  // top-right
+  const svgW = 350, svgH = 145;
+  const BLx = 76,  BLy = 118; // bottom-left
+  const BRx = 216, BRy = 118; // bottom-right  (base = 140px)
+  const TLx = 108, TLy = 38;  // top-left      (skew=32px, height=80px)
+  const TRx = 248, TRy = 38;  // top-right
   const paraPts = `${BLx},${BLy} ${BRx},${BRy} ${TRx},${TRy} ${TLx},${TLy}`;
   // Height bracket — outside right
-  const bkX = 228, tickLen = 5;
+  const bkX = 286, tickLen = 5;
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
-      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto">
+      <svg viewBox={`0 0 ${svgW} ${svgH}`} width={svgW} height={svgH} className="block mx-auto h-auto w-full max-w-[480px] overflow-visible">
         {/* Shape */}
         <polygon points={paraPts} fill="var(--color-accent-alg)" fillOpacity={0.15} stroke="var(--color-accent-alg)" strokeWidth="2" />
         {/* Base label above */}
         <text x={(TLx + TRx) / 2} y={TLy - 8} textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{b} cm</text>
         {/* Side label left */}
-        <text x={BLx - 6} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{fmtMeasure(a)} cm</text>
+        <text x={BLx - 10} y={(BLy + TLy) / 2} textAnchor="end" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{fmtMeasure(a)} cm</text>
         {/* Dashed reference lines from shape to bracket */}
         <line x1={BRx} y1={BRy} x2={bkX - 2} y2={BRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />
         <line x1={TRx} y1={TRy} x2={bkX - 2} y2={TRy} stroke="var(--color-text-secondary)" strokeWidth="1" strokeDasharray="4,3" />

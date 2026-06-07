@@ -422,11 +422,13 @@ export function PlacementTestClient() {
   // ── Navigation helpers ─────────────────────────────────────────────────────
 
   function findOpenExercise(from: number, direction: 1 | -1, list = validated): number {
-    let idx = from + direction;
-    while (idx >= 0 && idx < TOTAL_EXERCISES) {
+    if (list.every(Boolean)) return -1;
+    let idx = (from + direction + TOTAL_EXERCISES) % TOTAL_EXERCISES;
+    while (idx !== from) {
       if (!list[idx]) return idx;
-      idx += direction;
+      idx = (idx + direction + TOTAL_EXERCISES) % TOTAL_EXERCISES;
     }
+    if (!list[from]) return from;
     return -1;
   }
 
