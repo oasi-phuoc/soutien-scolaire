@@ -142,14 +142,14 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
-      <div className="relative h-28 w-full">
+      <div className="relative h-28 w-full overflow-hidden rounded-[var(--radius-lg)]">
         {src && !imgFailed ? (
           <Image src={src} alt={w.word} fill
-            className={`rounded object-${imgFit}`}
+            className={`object-${imgFit}`}
             onLoad={e => { const i = e.currentTarget; setImgFit(i.naturalWidth / i.naturalHeight > 1.65 ? "cover" : "contain"); }}
             onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
         ) : (
-          <div className="h-28 w-full rounded bg-[var(--color-bg-secondary)]" aria-hidden />
+          <div className="h-28 w-full bg-[var(--color-bg-secondary)]" aria-hidden />
         )}
         <button
           type="button"

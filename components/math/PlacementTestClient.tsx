@@ -582,10 +582,11 @@ export function PlacementTestClient() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
-                  <span>
-                    <span className="block">{introText.validateLine}</span>
-                    <span className="block">{introText.navigateLine}</span>
-                  </span>
+                  <span>{introText.validateLine}</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+                  <span>{introText.navigateLine}</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="mt-0.5 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />

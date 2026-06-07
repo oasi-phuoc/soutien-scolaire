@@ -17,7 +17,6 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
     { word: "classeur", image: "classeur.jpg",      article: "le",  gender: "m", definition: "pochette rigide pour classer des feuilles" },
     { word: "feuille", image: "feuille.jpg",       article: "la",  gender: "f", definition: "page de papier pour écrire" },
     { word: "tableau", image: "tableau.jpg",       article: "le",  gender: "m", definition: "surface noire ou blanche pour écrire en classe" },
-    { word: "cartable", image: "cartable.jpg",      article: "le",  gender: "m", definition: "sac rigide pour l'école" },
     { word: "taille-crayon", image: "taille-crayon.jpg", article: "le",  gender: "m", definition: "outil pour aiguiser les crayons" },
     { word: "compas", image: "compas.jpg",        article: "le",  gender: "m", definition: "outil pour tracer des cercles" },
     { word: "colle", image: "colle.jpg",         article: "la",  gender: "f", definition: "substance pour coller des papiers" },
