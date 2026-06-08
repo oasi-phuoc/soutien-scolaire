@@ -1422,11 +1422,14 @@ function TrueFalseExercise({
           const isRight = chosen === correct;
           const btnBase = "px-3 py-1 rounded text-xs font-medium border transition-colors";
           const mkCls = (val: boolean) => {
-            if (chosen !== val) return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
-            if (!validated) return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
-            return isRight
-              ? `${btnBase} border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400`
-              : `${btnBase} border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400`;
+            const isCorrectAnswer = val === correct;
+            if (chosen !== val) {
+              if (validated && !isRight && isCorrectAnswer) {
+                return `${btnBase} border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold`;
+              }
+              return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
+            }
+            return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
           };
           return (
             <div key={i} className="flex items-start gap-3">
@@ -1436,11 +1439,6 @@ function TrueFalseExercise({
                 <div className="flex items-center gap-2">
                   <button onClick={() => pick(i, true)} className={mkCls(true)}>Vrai ✓</button>
                   <button onClick={() => pick(i, false)} className={mkCls(false)}>Faux ✗</button>
-                  {validated && !isRight && (
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                      → {correct ? "Vrai" : "Faux"}
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
@@ -1613,13 +1611,7 @@ function ClassifyExercise({
                   let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
                   if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
                   if (active) {
-                    if (!validated) {
-                      cls += "bg-[var(--color-accent-fr)] text-white";
-                    } else if (isRight) {
-                      cls += "bg-emerald-500 text-white";
-                    } else {
-                      cls += "bg-[var(--color-accent-fr)] text-white";
-                    }
+                    cls += "bg-[var(--color-accent-fr)] text-white";
                   } else if (userWrong && ci === item.categoryIdx) {
                     cls += "text-amber-500 dark:text-amber-400";
                   } else {
@@ -1637,11 +1629,6 @@ function ClassifyExercise({
                   );
                 })}
               </div>
-              {validated && !isRight && (
-                <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                  → {exercise.categories[item.categoryIdx]}
-                </p>
-              )}
             </div>
           );
         })}
@@ -1722,13 +1709,11 @@ function WordOrderExercise({
                 let cls = "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer ";
                 if (!validated) {
                   cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
-                } else if (correct) {
-                  cls += "bg-emerald-500 text-white";
                 } else {
                   const expected = item.sentence.split(" ")[wi];
                   cls += word === expected
-                    ? "bg-emerald-500 text-white"
-                    : "bg-red-500 text-white";
+                    ? "bg-[var(--color-accent-fr)] text-white"
+                    : "bg-amber-500 text-white";
                 }
                 return (
                   <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
@@ -1753,9 +1738,9 @@ function WordOrderExercise({
               ))}
             </div>
 
-            {validated && (
-              <p className={`text-xs font-medium ${correct ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
-                {correct ? "✓ Correct !" : `→ ${item.sentence}`}
+            {validated && !correct && (
+              <p className="text-xs font-medium text-amber-500 dark:text-amber-400">
+                → {item.sentence}
               </p>
             )}
           </div>
