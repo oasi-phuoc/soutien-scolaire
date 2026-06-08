@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useMemo, useEffect } from "react";
-import type { PlacementExerciseProps } from "./PlacementExercises1to15";
+import { PlacementInstruction, type PlacementExerciseProps } from "./PlacementExercises1to15";
 import {
   FractionDisplay,
   FractionShape,
@@ -541,7 +541,7 @@ export function Exercise19({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les calculs en colonnes.</p>
+      <PlacementInstruction text="Posez et effectuez les calculs en colonnes." />
       <div className="space-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -713,7 +713,7 @@ export function Exercise20({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Posez et effectuez les multiplications en colonnes.</p>
+      <PlacementInstruction text="Posez et effectuez les multiplications en colonnes." />
       <div className="space-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -1002,7 +1002,7 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez les divisions.</p>
+      <PlacementInstruction text="Posez et effectuez les divisions en colonnes." />
       <div className="space-y-3">
         {data.map((q, i) => (
           <div key={i} className="flex flex-col items-center gap-3 rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
@@ -1207,7 +1207,7 @@ export function ExerciseFracRead({ exerciseKey, validated, onValidated, validate
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Observe les formes coloriées et écris la fraction représentée.</p>
+      <PlacementInstruction text="Observez les formes coloriées et écrivez la fraction représentée." />
       <div className="space-y-3">
         {items.map((item, i) => {
           const preColored = item.multi ? preColorFlat(item.n, item.d) : new Set(Array.from({ length: item.n }, (_, k) => k));
@@ -1373,7 +1373,7 @@ export function Exercise24({ exerciseKey, validated, onValidated, validateTrigge
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez mentalement.</p>
+      <PlacementInstruction text="Effectuez les calculs." />
       <div
         className="grid items-center gap-x-2 gap-y-2 text-sm"
         style={{ gridTemplateColumns: "1.5rem max-content 1.25rem max-content 1rem max-content" }}

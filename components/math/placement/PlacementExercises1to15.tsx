@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect } from "react";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
 
 export interface PlacementExerciseProps {
   exerciseKey: number;
@@ -64,6 +66,93 @@ function CorrectionInput({
       {showCorrection && <span className="text-[10px] font-semibold text-green-600">✓ {correct}</span>}
     </span>
   );
+}
+
+const INSTRUCTION_TRANSLATIONS: Record<string, Partial<Record<string, string>>> = {
+  "Comptez le nombre de formes.": {
+    en: "Count the number of shapes.",
+    ar: "عُدّ عدد الأشكال.",
+    fa: "تعداد شکل‌ها را بشمارید.",
+    pt: "Conte o número de formas.",
+    so: "Tiri tirada qaababka.",
+    ti: "ብዝሒ ቅርጽታት ቁጸሩ።",
+    tr: "Şekillerin sayısını sayın.",
+    ps: "د شکلونو شمېر وشمېرئ.",
+    uk: "Порахуйте кількість фігур.",
+  },
+  "Posez et effectuez les calculs en colonnes.": {
+    en: "Set up and do the calculations in columns.",
+    ar: "رتّب العمليات وأنجزها في أعمدة.",
+    fa: "محاسبه‌ها را ستونی بنویسید و انجام دهید.",
+    pt: "Arme e efetue os cálculos em colunas.",
+    so: "Dhig oo samee xisaabaha si tiirar ah.",
+    ti: "ነቶም ሒሳባት ብዓምዲ ኣቐምጡን ፈጽሙን።",
+    tr: "İşlemleri sütun hâlinde kurun ve yapın.",
+    ps: "حسابونه په ستنو کې ولیکئ او ترسره یې کړئ.",
+    uk: "Запишіть і виконайте обчислення у стовпчик.",
+  },
+  "Posez et effectuez les multiplications en colonnes.": {
+    en: "Set up and do the multiplications in columns.",
+    ar: "رتّب عمليات الضرب وأنجزها في أعمدة.",
+    fa: "ضرب‌ها را ستونی بنویسید و انجام دهید.",
+    pt: "Arme e efetue as multiplicações em colunas.",
+    so: "Dhig oo samee isku dhufashada si tiirar ah.",
+    ti: "ነቲ ምብዛሕ ብዓምዲ ኣቐምጡን ፈጽሙን።",
+    tr: "Çarpmaları sütun hâlinde kurun ve yapın.",
+    ps: "ضربونه په ستنو کې ولیکئ او ترسره یې کړئ.",
+    uk: "Запишіть і виконайте множення у стовпчик.",
+  },
+  "Posez et effectuez les divisions en colonnes.": {
+    en: "Set up and do the divisions in columns.",
+    ar: "رتّب عمليات القسمة وأنجزها في أعمدة.",
+    fa: "تقسیم‌ها را ستونی بنویسید و انجام دهید.",
+    pt: "Arme e efetue as divisões em colunas.",
+    so: "Dhig oo samee qaybinta si tiirar ah.",
+    ti: "ነቲ ምክፋል ብዓምዲ ኣቐምጡን ፈጽሙን።",
+    tr: "Bölmeleri sütun hâlinde kurun ve yapın.",
+    ps: "تقسیمونه په ستنو کې ولیکئ او ترسره یې کړئ.",
+    uk: "Запишіть і виконайте ділення у стовпчик.",
+  },
+  "Observez les formes coloriées et écrivez la fraction représentée.": {
+    en: "Look at the colored shapes and write the fraction shown.",
+    ar: "لاحظ الأشكال الملوّنة واكتب الكسر الممثّل.",
+    fa: "به شکل‌های رنگی نگاه کنید و کسر نشان‌داده‌شده را بنویسید.",
+    pt: "Observe as formas coloridas e escreva a fração representada.",
+    so: "Fiiri qaababka la midabeeyay oo qor jajabka la muujiyay.",
+    ti: "ነቶም ዝተቐብኡ ቅርጽታት ተዓዘቡ እሞ ዝተወከለ ክፋል ጽሓፉ።",
+    tr: "Boyalı şekillere bakın ve gösterilen kesri yazın.",
+    ps: "رنګ شوي شکلونه وګورئ او ښودل شوې کسر ولیکئ.",
+    uk: "Розгляньте зафарбовані фігури й запишіть відповідний дріб.",
+  },
+  "Effectuez les calculs.": {
+    en: "Do the calculations.",
+    ar: "أنجز العمليات الحسابية.",
+    fa: "محاسبه‌ها را انجام دهید.",
+    pt: "Efetue os cálculos.",
+    so: "Samee xisaabaha.",
+    ti: "ሒሳባት ፈጽሙ።",
+    tr: "Hesaplamaları yapın.",
+    ps: "حسابونه ترسره کړئ.",
+    uk: "Виконайте обчислення.",
+  },
+  "Trouvez la valeur de x.": {
+    en: "Find the value of x.",
+    ar: "أوجد قيمة x.",
+    fa: "مقدار x را پیدا کنید.",
+    pt: "Encontre o valor de x.",
+    so: "Hel qiimaha x.",
+    ti: "ዋጋ x ርኸቡ።",
+    tr: "x değerini bulun.",
+    ps: "د x ارزښت ومومئ.",
+    uk: "Знайдіть значення x.",
+  },
+};
+
+export function PlacementInstruction({ text, className = "text-sm text-[var(--color-text-secondary)]" }: { text: string; className?: string }) {
+  const pivot = usePivotLang();
+  const { showPivot } = useTranslation();
+  const translated = showPivot ? INSTRUCTION_TRANSLATIONS[text]?.[pivot] : undefined;
+  return <p className={className} lang={showPivot ? pivot : "fr"} dir={pivot === "ar" || pivot === "fa" || pivot === "ps" ? "rtl" : "ltr"}>{translated ?? text}</p>;
 }
 
 // ── Exercise 1 — Count shapes ─────────────────────────────────────────────────
@@ -152,7 +241,7 @@ export function Exercise1({ exerciseKey, validated, onValidated, validateTrigger
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-[var(--color-text-secondary)]">Compte le nombre de formes dans chaque cadre.</p>
+      <PlacementInstruction text="Comptez le nombre de formes." />
       {[
         { count: data.count1, shape: data.shape1, seed: data.seed1, ans: ans1, setAns: setAns1 },
         { count: data.count2, shape: data.shape2, seed: data.seed2, ans: ans2, setAns: setAns2 },
