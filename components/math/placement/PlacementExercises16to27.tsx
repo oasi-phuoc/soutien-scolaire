@@ -57,7 +57,7 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
-    <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
           <div className="flex flex-col items-center leading-tight">
