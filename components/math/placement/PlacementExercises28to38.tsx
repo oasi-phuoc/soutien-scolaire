@@ -875,7 +875,10 @@ export function Exercise36({ exerciseKey, validated, onValidated, validateTrigge
 
   const fmtV = (n: number) => {
     if (Number.isInteger(n)) return String(n);
-    return fmtDec(n, 3).replace(/,?0+$/, "");
+    const absN = Math.abs(n);
+    if (absN === 0) return "0";
+    const dp = absN >= 1 ? 3 : Math.max(3, 2 - Math.floor(Math.log10(absN)));
+    return fmtDec(n, Math.min(dp, 10)).replace(/,?0+$/, "");
   };
 
   return (
@@ -983,7 +986,7 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
     const d = [3, 5, 7, 9, 11, 13, 15, 17][randInt(0, 7)]!;
     const r = d / 2;
     const perimeter = parseFloat((PI_APPROX * d).toFixed(2));
-    const area = parseFloat((PI_APPROX * r * r).toFixed(2));
+    const area = parseFloat((PI_APPROX * r * r).toFixed(3));
     return { r, d, perimeter, area };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -1032,8 +1035,8 @@ export function Exercise38({ exerciseKey, validated, onValidated, validateTrigge
         <div className="flex items-center gap-2">
           <span className="w-36 text-sm text-[var(--color-text-secondary)]">Aire =</span>
           <CorrectionInput value={ansA} onChange={setAnsA}
-            correct={fmtDec(data.area, 2)}
-            validated={validated} width="w-20" />
+            correct={fmtDec(data.area, 3)}
+            validated={validated} width="w-24" />
           <span className="text-sm text-[var(--color-text-secondary)]">cm²</span>
         </div>
       </div>
