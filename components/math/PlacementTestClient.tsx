@@ -787,7 +787,7 @@ export function PlacementTestClient() {
             </button>
           </div>
         </div>
-        <div style={{ height: 68 }} />
+        <div style={{ height: 72 }} />
       </div>
       )}
     </div>

@@ -479,7 +479,7 @@ export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
             </button>
           </div>
         </div>
-        <div style={{ height: 68 }} />
+        <div style={{ height: 72 }} />
       </div>
     </div>
   );

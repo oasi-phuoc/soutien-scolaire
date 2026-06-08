@@ -786,7 +786,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
           </div>
         </div>
         {/* Spacer covers the main nav area so scrolled content can't show through */}
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>
     </div>
   );

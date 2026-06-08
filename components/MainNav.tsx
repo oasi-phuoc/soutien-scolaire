@@ -17,7 +17,7 @@ export function MainNav() {
   const { showPivot, togglePivot } = useTranslation();
 
   const itemClass = (active: boolean) =>
-    `group relative flex min-h-[3.55rem] min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1.5 py-2 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
+    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
       active
         ? "bg-[var(--color-theme)]/14 text-[var(--color-theme)] shadow-sm ring-1 ring-[var(--color-theme)]/18"
         : "text-zinc-500 hover:-translate-y-0.5 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/80 dark:hover:text-zinc-100"
@@ -28,7 +28,7 @@ export function MainNav() {
       className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2"
       aria-label="Navigation principale"
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-zinc-200/80 bg-white/90 p-1.5 shadow-[0_14px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90 dark:shadow-black/35">
+      <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-zinc-200/80 bg-white/90 p-1 shadow-[0_14px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90 dark:shadow-black/35">
         {links.map(({ href, label, icon: Icon }) => {
           const active =
             href === "/"
@@ -40,7 +40,7 @@ export function MainNav() {
                 href={href}
                 className={itemClass(active)}
               >
-                <span className={`flex h-7 w-7 items-center justify-center rounded-xl transition-colors ${
+                <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
                   active
                     ? "bg-[var(--color-theme)] text-white"
                     : "bg-transparent group-hover:bg-white group-hover:text-[var(--color-theme)] dark:group-hover:bg-zinc-950"
@@ -58,7 +58,7 @@ export function MainNav() {
             onClick={togglePivot}
             className={itemClass(showPivot)}
           >
-            <span className={`flex h-7 w-7 items-center justify-center rounded-xl transition-colors ${
+            <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
               showPivot
                 ? "bg-[var(--color-theme)] text-white"
                 : "bg-transparent group-hover:bg-white group-hover:text-[var(--color-theme)] dark:group-hover:bg-zinc-950"

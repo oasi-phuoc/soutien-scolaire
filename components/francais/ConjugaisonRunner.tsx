@@ -617,9 +617,9 @@ function QcmExercise({
           } else {
             const userWrong = selected[i] !== item.correctIdx;
             if (isSelected && !isCorrect) {
-              cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             } else if (!isSelected && isCorrect && userWrong) {
-              cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
+              cls += "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500 font-semibold";
             } else {
               cls += isSelected
                 ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
@@ -689,10 +689,10 @@ function QcmExercise({
                     const userWrong = selected[i] !== item.correctIdx;
                     if (isSelected && !isCorrect) {
                       cls +=
-                        "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                        "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
-                        "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
+                        "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500 dark:border-amber-600 font-semibold";
                     } else {
                       cls += isSelected
                         ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -829,9 +829,9 @@ function FillExercise({
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct ? (
-          <span className="inline-flex items-center justify-center gap-1 border-b-2 border-red-400 mx-1 w-28 align-bottom">
-            <span className="text-xs line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
-            <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
+          <span className="inline-flex flex-col items-center justify-center rounded-lg border border-amber-400 mx-1 px-2 py-0.5 w-28 align-middle">
+            <span className="text-xs leading-tight text-amber-500 dark:text-amber-400">{userAnswer || "—"}</span>
+            <span className="text-sm font-bold leading-tight text-zinc-900 dark:text-zinc-100">{item.answer}</span>
           </span>
         ) : (
           <input
@@ -839,11 +839,7 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
-            className={`inline-block w-28 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
-              validated
-                ? "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
-                : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
-            }`}
+            className="inline-block w-28 rounded-lg border border-[var(--color-accent-fr)] bg-transparent px-2 py-0.5 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-amber-500"
           />
         );
 
@@ -940,9 +936,9 @@ function ClockReadExercise({
                 correct ? (
                   <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
                 ) : (
-                  <div className="w-full text-center">
-                    <p className="text-xs line-through text-red-400">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-red-600 dark:text-red-400">{clk.answer}</p>
+                  <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
+                    <p className="text-xs text-amber-500 dark:text-amber-400">{userAnswer || "—"}</p>
+                    <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">{clk.answer}</p>
                   </div>
                 )
               ) : (
@@ -951,7 +947,7 @@ function ClockReadExercise({
                   value={userAnswer}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
                   placeholder="..."
-                  className="w-full rounded border border-[var(--color-border-default)] bg-transparent px-2 py-1 text-center text-xs outline-none focus:border-[var(--color-accent-fr)]"
+                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 py-1 text-center text-xs outline-none transition-colors focus:border-amber-500"
                 />
               )}
             </div>
@@ -1337,10 +1333,10 @@ function WriteExercise({
                 value={inputs[i] ?? ""}
                 onChange={(e) => setInput(i, e.target.value)}
                 disabled={validated}
-                className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
+                className={`flex-1 rounded-xl border bg-transparent px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-70 ${
                   isClean
                     ? "border-emerald-400 dark:border-emerald-500"
-                    : "border-[var(--color-text-secondary)]"
+                    : "border-[var(--color-accent-fr)]"
                 }`}
               />
             </div>
@@ -2395,7 +2391,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           </div>
         </div>
         {/* Spacer for bottom nav */}
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>
     </div>
   );

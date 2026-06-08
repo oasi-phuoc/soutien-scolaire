@@ -226,7 +226,7 @@ export function ExQuestionWrite({
                   value={s.answer}
                   onChange={(e) => setStates((prev) => ({ ...prev, [p.word]: { ...initState(), answer: e.target.value } }))}
                   readOnly={s.checked}
-                  className="w-full border-b border-[var(--color-accent-fr)] bg-transparent py-1 text-center text-sm text-[var(--color-text-primary)] outline-none"
+                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-3 py-1.5 text-center text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500"
                 />
               )}
               {s.checked && s.grammarChecking && (

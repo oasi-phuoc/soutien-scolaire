@@ -4901,7 +4901,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             </button>
           </div>
         </div>
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>
     </div>
   );
