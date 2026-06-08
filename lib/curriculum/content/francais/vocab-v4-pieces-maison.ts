@@ -2,7 +2,7 @@ import type { VocabTheme } from "../../vocabulary-data";
 
 export const V4_PIECES_MAISON_THEME: VocabTheme = {
   slug: "v4-pieces-maison",
-  code: "V4.3",
+  code: "V4.2",
   title: "Les pièces de la maison",
   section: "V4",
   words: [

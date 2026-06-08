@@ -47,9 +47,7 @@ import { V2_METEO_THEME } from "./content/francais/vocab-v2-meteo";
 import { V3_SPORT_THEME } from "./content/francais/vocab-v3-sport";
 import { V3_ACTIVITES_SPORTIVES_THEME } from "./content/francais/vocab-v3-activites-sportives";
 import { V4_TYPE_LOGEMENT_THEME } from "./content/francais/vocab-v4-type-logement";
-import { V4_ADRESSE_THEME } from "./content/francais/vocab-v4-adresse";
 import { V4_PIECES_MAISON_THEME } from "./content/francais/vocab-v4-pieces-maison";
-import { V4_IMMEUBLE_THEME } from "./content/francais/vocab-v4-immeuble";
 import { V4_PANNES_THEME } from "./content/francais/vocab-v4-pannes";
 import { V4_EQUIPEMENTS_THEME } from "./content/francais/vocab-v4-equipements";
 import { V5_MATIERES_THEME } from "./content/francais/vocab-v5-matieres";
@@ -93,9 +91,7 @@ export const VOCAB_THEMES: VocabTheme[] = [
   V3_SPORT_THEME,
   V3_ACTIVITES_SPORTIVES_THEME,
   V4_TYPE_LOGEMENT_THEME,
-  V4_ADRESSE_THEME,
   V4_PIECES_MAISON_THEME,
-  V4_IMMEUBLE_THEME,
   V4_PANNES_THEME,
   V4_EQUIPEMENTS_THEME,
   V5_MATIERES_THEME,
