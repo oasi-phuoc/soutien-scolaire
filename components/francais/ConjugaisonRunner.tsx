@@ -193,7 +193,10 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                       ? <span className="text-[var(--color-text-primary)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                       : <span className="font-bold text-[var(--color-accent-fr)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                   )}
-                  {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
+                  {(() => {
+                    const rowRadical = row.radical !== undefined ? row.radical : verb.radical;
+                    return rowRadical ? <span className="text-[var(--color-text-primary)]">{rowRadical}</span> : null;
+                  })()}
                   {negation
                     ? <span className="text-[var(--color-text-primary)]">{row.ending}</span>
                     : <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>

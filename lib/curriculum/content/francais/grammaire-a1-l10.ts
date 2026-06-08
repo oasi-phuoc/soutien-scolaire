@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L10: GrammarLesson = {
   slug: "a1-gr-l10",
-  code: "G.13",
+  code: "G.12",
   level: "A1",
   title: "L'interrogation avec les mots interrogatifs",
   theory: [

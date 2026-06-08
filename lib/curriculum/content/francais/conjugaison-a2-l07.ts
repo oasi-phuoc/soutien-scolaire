@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L07: ConjLesson = {
   slug: "a2-conj-l07",
-  code: "G.45",
+  code: "G.44",
   level: "A2",
   title: "L'imparfait",
   theory: [

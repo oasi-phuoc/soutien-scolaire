@@ -60,9 +60,9 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
     <div className={`${width} min-h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
       {validated ? (
         wrong ? (
-          <div className="flex flex-col leading-tight">
-            {value.trim() && <span className="text-[11px] text-[var(--color-text-secondary)] line-through">{value}</span>}
-            <span className="font-bold text-amber-500">{correct}</span>
+          <div className="flex flex-col items-center leading-tight">
+            {value.trim() && <span className="text-[10px] text-[var(--color-text-primary)]">{value}</span>}
+            <span className="font-bold text-amber-600">{correct}</span>
           </div>
         ) : (
           <span>{value || correct}</span>

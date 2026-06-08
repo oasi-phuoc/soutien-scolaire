@@ -46,7 +46,7 @@ function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (
         </svg>
       </button>
       {open && (
-        <div className="absolute z-20 mt-1 max-h-64 w-full overflow-y-auto rounded-b-[24px] rounded-t-md border border-[var(--color-accent-alg)]/15 bg-white py-2 shadow-lg dark:bg-zinc-950" role="listbox">
+        <div className="absolute bottom-full z-20 mb-1 max-h-64 w-full overflow-y-auto rounded-t-[24px] rounded-b-md border border-[var(--color-accent-alg)]/15 bg-white py-2 shadow-lg dark:bg-zinc-950" role="listbox">
           {PIVOT_LANGS.map((l) => (
             <button
               key={l.code}

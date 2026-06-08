@@ -729,6 +729,7 @@ export function PlacementTestClient() {
                 </div>
               )}
               <Comp
+                key="comp"
                 exerciseKey={exerciseKeys[i]!}
                 validated={phase === "results"}
                 onValidated={(pts, max) => handleValidated(i, pts, max)}

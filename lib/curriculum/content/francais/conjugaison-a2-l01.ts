@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L01: ConjLesson = {
   slug: "a2-conj-l01",
-  code: "G.29",
+  code: "G.28",
   level: "A2",
   title: "Les verbes en -er — révision et particularités",
   theory: [

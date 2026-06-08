@@ -12,7 +12,7 @@ export type VerbToggleVerb = {
   reflexivePronouns?: string[];
   meaning?: string;
   example?: string;
-  rows: Array<{ pronoun: string; ending: string }>;
+  rows: Array<{ pronoun: string; ending: string; radical?: string }>;
 };
 
 export type TheoryBlock =
@@ -64,7 +64,6 @@ import { A1_CONJ_L01 } from "./content/francais/conjugaison-a1-l01";
 import { A1_CONJ_L07 } from "./content/francais/conjugaison-a1-l07";
 import { A1_CONJ_L08 } from "./content/francais/conjugaison-a1-l08";
 import { A1_CONJ_L09 } from "./content/francais/conjugaison-a1-l09";
-import { A1_CONJ_L12 } from "./content/francais/conjugaison-a1-l12";
 import { A1_CONJ_L15 } from "./content/francais/conjugaison-a1-l15";
 import { A1_CONJ_L20 } from "./content/francais/conjugaison-a1-l20";
 import { A1_CONJ_L27 } from "./content/francais/conjugaison-a1-l27";
@@ -89,7 +88,6 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L07,
   A1_CONJ_L08,
   A1_CONJ_L09,
-  A1_CONJ_L12,
   A1_CONJ_L15,
   A1_CONJ_L20,
   A1_CONJ_L27,
