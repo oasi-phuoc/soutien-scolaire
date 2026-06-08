@@ -1651,13 +1651,17 @@ function WordOrderExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const [states] = useState(() =>
-    exercise.items.map((item) => ({ ...item, shuffled: shuffle([...item.words]) })),
+    exercise.items.map((item) => {
+      const hasPeriod = item.sentence.endsWith(".");
+      const allWords = hasPeriod ? [...item.words, "."] : [...item.words];
+      return { ...item, allWords, shuffled: shuffle([...allWords]) };
+    }),
   );
   const [arranged, setArranged] = useState<string[][]>(() => states.map(() => []));
   const [pools, setPools] = useState<string[][]>(() => states.map((s) => [...s.shuffled]));
   const [validated, setValidated] = useState(false);
 
-  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.words.length);
+  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.allWords.length);
 
   useEffect(() => {
     onCanValidateChange(allFilled && !validated);
@@ -1668,7 +1672,7 @@ function WordOrderExercise({
     if (validateCommand > 0 && !validated && allFilled) {
       setValidated(true);
       const allCorrect = arranged.every((arr, i) =>
-        arr.join(" ") === states[i]!.sentence,
+        arr.join(" ").replace(/ \.$/, ".") === states[i]!.sentence,
       );
       onValidated(allCorrect);
     }
@@ -1694,33 +1698,33 @@ function WordOrderExercise({
       {states.map((item, qi) => {
         const arr = arranged[qi]!;
         const pool = pools[qi]!;
-        const correct = arr.join(" ") === item.sentence;
+        const correct = arr.join(" ").replace(/ \.$/, ".") === item.sentence;
+        // Expected tokens: split sentence, treating trailing "." as separate token
+        const expectedTokens = item.sentence.endsWith(".")
+          ? [...item.words, "."]
+          : item.words;
         return (
           <div key={qi} className="space-y-3">
-            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
-
-            {/* Arranged sentence */}
-            <div className="min-h-10 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-              {arr.length === 0 ? (
-                <span className="text-xs text-[var(--color-text-secondary)] self-center">
-                  Touchez un mot ci-dessous pour l&apos;ajouter…
-                </span>
-              ) : arr.map((word, wi) => {
-                let cls = "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer ";
-                if (!validated) {
-                  cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
-                } else {
-                  const expected = item.sentence.split(" ")[wi];
-                  cls += word === expected
-                    ? "bg-[var(--color-accent-fr)] text-white"
-                    : "bg-amber-500 text-white";
-                }
-                return (
-                  <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
-                    {word}
-                  </button>
-                );
-              })}
+            {/* Number + answer line */}
+            <div className="flex items-end gap-2">
+              <span className="shrink-0 pb-1 text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</span>
+              <div className="flex min-h-9 flex-1 flex-wrap items-end gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 pb-1">
+                {arr.map((word, wi) => {
+                  let cls = "rounded-full px-2.5 py-0.5 text-sm font-medium transition-colors cursor-pointer ";
+                  if (!validated) {
+                    cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
+                  } else {
+                    cls += word === expectedTokens[wi]
+                      ? "bg-[var(--color-accent-fr)] text-white"
+                      : "bg-amber-500 text-white";
+                  }
+                  return (
+                    <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
+                      {word}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Word pool */}
