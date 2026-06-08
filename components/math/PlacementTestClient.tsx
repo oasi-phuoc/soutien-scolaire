@@ -536,15 +536,6 @@ export function PlacementTestClient() {
   function confirmSkipAll() {
     setSkipConfirmOpen(false);
     setSkipAccepted(false);
-    setSessionKey(k => k + 1);
-    setValidated(Array(TOTAL_EXERCISES).fill(false));
-    setScores(Array(TOTAL_EXERCISES).fill(null));
-    setValidateTriggers(Array(TOTAL_EXERCISES).fill(0));
-    setCurrentIdx(0);
-    setSelectedResultIdx(0);
-    setTimeLeft(TIMER_SECONDS);
-    setSavedResult(false);
-    setPhase("running");
     setSkipRequested(true);
   }
 
