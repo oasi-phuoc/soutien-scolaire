@@ -5524,7 +5524,7 @@ export function GenericModuleContent({
       )}
 
       {/* Decimal ordering exercise (A5.2) */}
-      {currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
+      {!showEvalScore && currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
         <div className="space-y-4">
           <div className="flex items-baseline gap-2">
             <span className="shrink-0 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</span>
@@ -5597,7 +5597,7 @@ export function GenericModuleContent({
       )}
 
       {/* Decimal sequence rule exercise (A5.2) */}
-      {currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
+      {!showEvalScore && currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
@@ -5637,7 +5637,7 @@ export function GenericModuleContent({
       )}
 
       {/* Decimal sequence complete exercise (A5.3) */}
-      {currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
+      {!showEvalScore && currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
