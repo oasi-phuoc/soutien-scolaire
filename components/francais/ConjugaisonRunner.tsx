@@ -635,7 +635,7 @@ function QcmExercise({
 
         if (hasInlineToggle) {
           const inlineGroup = (
-            <span className="inline-flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] align-middle">
+            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} align-middle`}>
               {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
             </span>
           );
@@ -671,7 +671,7 @@ function QcmExercise({
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
             </p>
             {exercise.toggleChoices ? (
-              <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
               </div>
             ) : (
@@ -689,7 +689,7 @@ function QcmExercise({
                     const userWrong = selected[i] !== item.correctIdx;
                     if (isSelected && !isCorrect) {
                       cls +=
-                        "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+                        "border-amber-500 dark:border-amber-400 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
                         "border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold";
@@ -1604,14 +1604,14 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className="flex overflow-hidden rounded-xl border border-[var(--color-border-default)]">
+              <div className={`flex overflow-hidden rounded-xl border ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && !isRight;
                   let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
-                  if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
+                  if (ci > 0) cls += `border-l ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
                   if (active) {
-                    cls += "bg-[var(--color-accent-fr)] text-white";
+                    cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
                     cls += "text-amber-500 dark:text-amber-400";
                   } else {
@@ -1883,20 +1883,14 @@ function PillGroup<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="inline-flex overflow-hidden rounded-xl border border-[var(--color-border)] text-xs font-semibold">
+    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} text-xs font-semibold`}>
       {options.map((opt, oi) => {
         const active = value === opt;
         const userWrong = validated && value !== correct;
         let cls = "px-3 py-1 transition-colors ";
-        if (oi > 0) cls += "border-l border-[var(--color-border)] ";
+        if (oi > 0) cls += `border-l ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} `;
         if (active) {
-          if (!validated) {
-            cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-          } else if (opt === correct) {
-            cls += "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
-          } else {
-            cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-          }
+          cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
         } else if (userWrong && opt === correct) {
           cls += "text-amber-500 dark:text-amber-400";
         } else {
