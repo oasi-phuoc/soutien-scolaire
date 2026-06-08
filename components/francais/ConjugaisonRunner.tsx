@@ -1608,7 +1608,7 @@ function ClassifyExercise({
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
                   const userWrong = validated && !isRight;
-                  let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
+                  let cls = "flex-1 py-1.5 text-center text-xs font-medium transition-colors ";
                   if (ci > 0) cls += `border-l ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
                   if (active) {
                     cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
