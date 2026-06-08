@@ -929,6 +929,6 @@ export const A1_CONJ_L08: ConjLesson = {
         "sortir", "monter", "descendre", "marcher", "courir",
       ],
       verbPoolSize: 5,
-    } as any,
+    },
   ],
 };

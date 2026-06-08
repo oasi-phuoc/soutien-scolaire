@@ -853,6 +853,6 @@ export const A1_CONJ_L09: ConjLesson = {
         "se raser", "se coiffer", "s'habiller", "se reposer",
       ],
       verbPoolSize: 5,
-    } as any,
+    },
   ],
 };

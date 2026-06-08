@@ -527,6 +527,6 @@ export const A1_CONJ_L15: ConjLesson = {
         "savoir",
         "falloir",
       ],
-    } as any,
+    },
   ],
 };
