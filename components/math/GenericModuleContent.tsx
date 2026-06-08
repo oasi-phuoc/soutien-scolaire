@@ -5526,8 +5526,14 @@ export function GenericModuleContent({
       {/* Decimal ordering exercise (A5.2) */}
       {currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
         <div className="space-y-4">
-          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre demandée.</p>
+          <div className="flex items-baseline gap-2">
+            <span className="shrink-0 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</span>
+            <p className="text-sm text-[var(--color-text-secondary)]">
+              {activeDecOrderingConfig.direction === "desc"
+                ? "Classez les nombres dans l’ordre décroissant (plus grand au plus petit)."
+                : "Classez les nombres dans l’ordre croissant (plus petit au plus grand)."}
+            </p>
+          </div>
           <div className="space-y-6">
             {activeDecOrderingConfig.questions.map((q, qi) => {
               const sel = decOrderingSelected[qi] ?? [];
@@ -5548,12 +5554,7 @@ export function GenericModuleContent({
               };
               return (
                 <div key={qi} className="space-y-3">
-                  <div className="flex items-start gap-2">
-                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
-                    <p className="text-sm text-[var(--color-text-secondary)]">
-                      {desc ? "Dans l’ordre décroissant (plus grand au plus petit)" : "Dans l’ordre croissant (plus petit au plus grand)"}
-                    </p>
-                  </div>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
                   <div className="space-y-3">
                     {available.length > 0 && (
                       <div className="flex flex-wrap gap-2">
