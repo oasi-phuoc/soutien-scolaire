@@ -2576,7 +2576,6 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering(ascFirst52 ? "desc" : "asc", 2) });
       steps.push({ kind: "dec_seq_rule", lesson, config: genDecSeqRule(3, 5, 4) });
       steps.push({ kind: "dec_seq_complete", lesson, config: genDecSeqComplete(4, 5, -1, 5) });
-      steps.push({ kind: "pass_toggle", lesson });
     } else if (sid === "A3-5") {
       // Training
       steps.push({ kind: "mult_select", lesson, config: genMultSelect(1) });
