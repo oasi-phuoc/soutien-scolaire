@@ -1,5 +1,124 @@
 import type { ConjLesson } from "../../conjugation-data";
 
+// ── Exercice 1 pool generator ─────────────────────────────────────────────────
+
+type P = { display: string; ending: string };
+
+// Verbes commençant par une consonne (parler → je parle)
+const PC: P[] = [
+  { display: "Je",    ending: "e"   },
+  { display: "Tu",    ending: "es"  },
+  { display: "Il",    ending: "e"   },
+  { display: "Elle",  ending: "e"   },
+  { display: "Nous",  ending: "ons" },
+  { display: "Vous",  ending: "ez"  },
+  { display: "Ils",   ending: "ent" },
+  { display: "Elles", ending: "ent" },
+];
+
+// Verbes commençant par une voyelle (aimer → j'aime)
+const PV: P[] = [
+  { display: "J'",    ending: "e"   },
+  { display: "Tu",    ending: "es"  },
+  { display: "Il",    ending: "e"   },
+  { display: "Elle",  ending: "e"   },
+  { display: "Nous",  ending: "ons" },
+  { display: "Vous",  ending: "ez"  },
+  { display: "Ils",   ending: "ent" },
+  { display: "Elles", ending: "ent" },
+];
+
+const HINT = "-e / -es / -ons / -ez / -ent";
+
+function verbPool(stem: string, pronouns: P[], tails: string[]) {
+  const items: { sentence: string; hint: string; answer: string }[] = [];
+  for (const tail of tails) {
+    for (const p of pronouns) {
+      const sep = p.display.endsWith("'") ? "" : " ";
+      items.push({ sentence: `${p.display}${sep}${stem}___${tail}`, hint: HINT, answer: p.ending });
+    }
+  }
+  return items;
+}
+
+const EX1_POOL = [
+  ...verbPool("parl", PC, [
+    " français.",
+    " avec des amis.",
+    " trop vite.",
+    " au téléphone.",
+    " toujours en classe.",
+  ]),
+  ...verbPool("aim", PV, [
+    " la musique.",
+    " les animaux.",
+    " le chocolat.",
+    " voyager.",
+    " lire des livres.",
+  ]),
+  ...verbPool("écout", PV, [
+    " de la musique.",
+    " le professeur.",
+    " la radio.",
+    " attentivement.",
+    " les nouvelles.",
+  ]),
+  ...verbPool("habit", PV, [
+    " à Genève.",
+    " en Suisse.",
+    " dans un appartement.",
+    " près de l'école.",
+    " en ville.",
+  ]),
+];
+
+// Exercise 2 — full conjugated form (Je ___ (parler) français.)
+function verbPool2(infinitive: string, stem: string, pronouns: P[], tails: string[]) {
+  const items: { sentence: string; hint: string; answer: string }[] = [];
+  for (const tail of tails) {
+    for (const p of pronouns) {
+      const sep = p.display.endsWith("'") ? "" : " ";
+      items.push({
+        sentence: `${p.display}${sep}___ (${infinitive})${tail}`,
+        hint: HINT,
+        answer: stem + p.ending,
+      });
+    }
+  }
+  return items;
+}
+
+const EX2_POOL = [
+  ...verbPool2("parler", "parl", PC, [
+    " français.",
+    " avec le professeur.",
+    " bien anglais.",
+    " tous les jours.",
+    " en classe.",
+  ]),
+  ...verbPool2("aimer", "aim", PV, [
+    " la France.",
+    " les chats.",
+    " le sport.",
+    " cuisiner.",
+    " les films.",
+  ]),
+  ...verbPool2("écouter", "écout", PV, [
+    " des podcasts.",
+    " les oiseaux.",
+    " la professeure.",
+    " bien en classe.",
+    " une chanson.",
+  ]),
+  ...verbPool2("habiter", "habit", PV, [
+    " au centre-ville.",
+    " avec ma famille.",
+    " à Paris.",
+    " dans une maison.",
+    " loin d'ici.",
+  ]),
+];
+
 export const A1_CONJ_L07: ConjLesson = {
   slug: "a1-conj-l07",
   code: "G.5",
@@ -107,5 +226,22 @@ export const A1_CONJ_L07: ConjLesson = {
       inlineArrows: true,
     },
   ],
-  exercises: [],
+  exercises: [
+    {
+      type: "fill",
+      title: "Exercice 1",
+      instruction: "Complétez la terminaison des verbes.",
+      items: [],
+      pool: EX1_POOL,
+      poolSize: 8,
+    },
+    {
+      type: "fill",
+      title: "Exercice 2",
+      instruction: "Conjuguez les verbes entre parenthèses.",
+      items: [],
+      pool: EX2_POOL,
+      poolSize: 8,
+    },
+  ],
 };
