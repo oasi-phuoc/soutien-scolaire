@@ -1203,6 +1203,14 @@ function hasVerb(text: string, verb: "être" | "avoir"): boolean {
   return (verb === "être" ? ETRE_FORMS : AVOIR_FORMS).test(text);
 }
 
+function hasErVerbForm(text: string, verb: string): boolean {
+  const stem = verb.endsWith("er") ? verb.slice(0, -2) : verb;
+  const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`\\b${esc}(ent|e?ons|ez|es|é|e|er)\\b`, "i");
+  const escVerb = verb.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return re.test(text) || new RegExp(`\\b${escVerb}\\b`, "i").test(text);
+}
+
 function WriteExercise({
   exercise,
   onValidated,
@@ -1214,7 +1222,12 @@ function WriteExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
+  const [activeVerbs] = useState<string[]>(() => {
+    if (!exercise.verbPool?.length) return [];
+    return shuffle([...exercise.verbPool]).slice(0, exercise.verbPoolSize ?? 5);
+  });
+  const promptCount = activeVerbs.length > 0 ? activeVerbs.length : (exercise.prompts?.length ?? 0);
+  const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
   const [validated, setValidated] = useState(false);
   const [checking, setChecking] = useState(false);
   const [grammarErrors, setGrammarErrors] = useState<Record<number, LTMatch[]>>({});
@@ -1316,18 +1329,30 @@ function WriteExercise({
         <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
       )}
 
-      {exercise.prompts.map((_, i) => {
+      {Array.from({ length: promptCount }, (_, i) => {
+        const perVerb = activeVerbs[i];
         const ltErrors = grammarErrors[i] ?? [];
         const inputText = (inputs[i] ?? "").trim();
-        const verbOk = !exercise.verb || inputText.length <= 2 || hasVerb(inputs[i] ?? "", exercise.verb);
+        const verbOk = inputText.length <= 2
+          ? true
+          : perVerb
+            ? hasErVerbForm(inputText, perVerb)
+            : exercise.verb
+              ? hasVerb(inputText, exercise.verb)
+              : true;
         const isClean = validated && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
           <div key={i} className="space-y-1.5">
-            <div className="flex items-end gap-2">
-              <span className={`shrink-0 pb-1 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+            <div className="flex items-center gap-2">
+              <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
                 {i + 1}.
               </span>
+              {perVerb && (
+                <span className="shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
+                  ({perVerb})
+                </span>
+              )}
               <input
                 type="text"
                 value={inputs[i] ?? ""}
@@ -1341,9 +1366,9 @@ function WriteExercise({
               />
             </div>
             {/* Internal verb check — shown only after validation */}
-            {validated && !checking && exercise.verb && (inputs[i] ?? "").trim().length > 2 && !hasVerb(inputs[i] ?? "", exercise.verb) && (
+            {validated && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
               <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
-                Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
+                Le verbe <strong>{perVerb ?? exercise.verb}</strong> est attendu dans cette phrase
               </p>
             )}
             {/* LanguageTool results — shown only after validation */}
