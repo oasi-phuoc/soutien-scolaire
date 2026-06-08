@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L35: GrammarLesson = {
   slug: "a2-gr-l35",
-  code: "G.42",
+  code: "G.41",
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [

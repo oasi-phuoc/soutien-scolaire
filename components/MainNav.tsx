@@ -94,10 +94,9 @@ function FrIcon({ active: _active }: { active: boolean }) {
 
 function MathIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
-      <rect x="4" y="3" width="16" height="18" rx="2" />
-      <path d="M8 8h8M8 12h8M8 16h3M13 15v4" />
-    </svg>
+    <span className="flex h-[21px] w-[21px] items-center justify-center text-[11px] font-bold leading-none" aria-hidden>
+      +−×÷
+    </span>
   );
 }
 

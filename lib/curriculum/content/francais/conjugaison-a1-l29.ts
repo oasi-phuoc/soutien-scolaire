@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L29: ConjLesson = {
   slug: "a1-conj-l29",
-  code: "G.25",
+  code: "G.24",
   level: "A1",
   title: "Passé composé avec avoir",
   theory: [

@@ -193,7 +193,10 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                       ? <span className="text-[var(--color-text-primary)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                       : <span className="font-bold text-[var(--color-accent-fr)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                   )}
-                  {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
+                  {(() => {
+                    const rowRadical = row.radical !== undefined ? row.radical : verb.radical;
+                    return rowRadical ? <span className="text-[var(--color-text-primary)]">{rowRadical}</span> : null;
+                  })()}
                   {negation
                     ? <span className="text-[var(--color-text-primary)]">{row.ending}</span>
                     : <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
@@ -1323,7 +1326,7 @@ function WriteExercise({
         </div>
       )}
 
-      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <p className="whitespace-pre-line text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
 
       {checking && (
         <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
@@ -1349,7 +1352,7 @@ function WriteExercise({
                 {i + 1}.
               </span>
               {perVerb && (
-                <span className="shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
+                <span className="w-28 shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
                   ({perVerb})
                 </span>
               )}
@@ -1677,8 +1680,8 @@ function WordOrderExercise({
 }) {
   const [states] = useState(() =>
     exercise.items.map((item) => {
-      const hasPeriod = item.sentence.endsWith(".");
-      const allWords = hasPeriod ? [...item.words, "."] : [...item.words];
+      const trailingPunct = item.sentence.match(/([.?!])$/)?.[1] ?? null;
+      const allWords = trailingPunct ? [...item.words, trailingPunct] : [...item.words];
       return { ...item, allWords, shuffled: shuffle([...allWords]) };
     }),
   );
@@ -1697,7 +1700,7 @@ function WordOrderExercise({
     if (validateCommand > 0 && !validated && allFilled) {
       setValidated(true);
       const allCorrect = arranged.every((arr, i) =>
-        arr.join(" ").replace(/ \.$/, ".") === states[i]!.sentence,
+        arr.join(" ").replace(/ ([.?!])$/, "$1") === states[i]!.sentence,
       );
       onValidated(allCorrect);
     }
@@ -1723,11 +1726,10 @@ function WordOrderExercise({
       {states.map((item, qi) => {
         const arr = arranged[qi]!;
         const pool = pools[qi]!;
-        const correct = arr.join(" ").replace(/ \.$/, ".") === item.sentence;
-        // Expected tokens: split sentence, treating trailing "." as separate token
-        const expectedTokens = item.sentence.endsWith(".")
-          ? [...item.words, "."]
-          : item.words;
+        const correct = arr.join(" ").replace(/ ([.?!])$/, "$1") === item.sentence;
+        // Expected tokens: split sentence, treating trailing punctuation as separate token
+        const trailingP = item.sentence.match(/([.?!])$/)?.[1] ?? null;
+        const expectedTokens = trailingP ? [...item.words, trailingP] : item.words;
         return (
           <div key={qi} className="space-y-3">
             {/* Number + answer line */}

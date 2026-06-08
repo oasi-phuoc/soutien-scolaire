@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L02: ConjLesson = {
   slug: "a2-conj-l02",
-  code: "G.30",
+  code: "G.29",
   level: "A2",
   title: "Les verbes en -ir (2e et 3e groupes)",
   theory: [

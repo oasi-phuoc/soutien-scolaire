@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L08: GrammarLesson = {
   slug: "a1-gr-l08",
-  code: "G.19",
+  code: "G.18",
   level: "A1",
   title: "L'interrogation avec quel(le)(s)",
   theory: [

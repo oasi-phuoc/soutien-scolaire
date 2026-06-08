@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L24: GrammarLesson = {
   slug: "a1-gr-l24",
-  code: "G.27",
+  code: "G.26",
   level: "A1",
   title: "Le comparatif et le superlatif",
   theory: [

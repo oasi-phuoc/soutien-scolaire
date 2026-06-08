@@ -231,7 +231,7 @@ export const A1_GR_PHRASES: GrammarLesson = {
     {
       type: "write",
       title: "Exercice 5",
-      instruction: "Écrivez une phrase avec le verbe proposé. La phrase doit avoir un sujet, un verbe et un complément. Elle commence par une majuscule et se termine par un point.",
+      instruction: "Écrivez une phrase avec le verbe proposé.\nLa phrase doit avoir un sujet, un verbe et un complément.\nElle commence par une majuscule et se termine par un point.",
       verbPool: [
         "parler", "manger", "habiter", "aimer", "écouter",
         "regarder", "travailler", "chanter", "danser", "jouer",
