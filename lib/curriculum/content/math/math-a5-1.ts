@@ -37,8 +37,8 @@ export const MATH_A5_1_LESSON: MathSubmoduleLesson = {
         { type: "highlight", fr: "Zéros inutiles" },
         { type: "plain", fr: "On peut ajouter des zéros à droite de la partie décimale sans changer la valeur." },
         {
-          type: "section", labelFr: "4,2 = 4,2**0** = 4,2**00**", itemsFr: [
-            "",
+          type: "section", labelFr: "", itemsFr: [
+            "4,2 = 4,2**0** = 4,2**00**",
           ],
         },
         { type: "plain", fr: "" },

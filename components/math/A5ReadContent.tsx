@@ -521,9 +521,9 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
   exNum: number; validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [chips] = useState<string[]>(genOrder);
-  const [slots, setSlots] = useState<(string | null)[]>([null, null, null, null, null]);
+  const [slots, setSlots] = useState<(string | null)[]>([null, null, null, null]);
   const [validated, setValidated] = useState(false);
-  const [slotWrong, setSlotWrong] = useState<boolean[]>([false, false, false, false, false]);
+  const [slotWrong, setSlotWrong] = useState<boolean[]>([false, false, false, false]);
 
   const placed = new Set(slots.filter(Boolean));
   const remaining = chips.filter(c => !placed.has(c));
@@ -924,7 +924,6 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
       <div className="space-y-6">
         {lines.map((line, li) => {
           const pos = (v: number) => ML + ((v - line.min) / (line.numDivs * line.step)) * lineW;
-          const boxW = 52, boxH = 26;
           return (
             <div key={li} className="rounded-xl border border-[var(--color-border-default)] p-3">
               <div className="w-full overflow-x-auto">
@@ -944,31 +943,28 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                       </g>
                     );
                   })}
-                  {/* Arrows with input boxes */}
+                  {/* Arrows with input */}
                   {line.arrows.map((v, ai) => {
                     const x = pos(v);
                     const expected = v.toFixed(1).replace(".", ",");
-                    const bxOffset = ai === 0 ? -boxW - 4 : 4;
-                    const bx = Math.max(ML, Math.min(ML + lineW - boxW, x + bxOffset));
-                    const by = 4;
                     const isWrong = wrongs[li]?.[ai];
+                    const lineColor = validated && isWrong ? "#F59E0B" : "var(--color-accent-alg)";
+                    const ulY = 28;
                     return (
                       <g key={ai}>
-                        <line x1={x} y1={by + boxH} x2={x} y2={lineY - 4} stroke="var(--color-accent-alg)" strokeWidth="1.5" strokeDasharray="4,2" />
-                        <polygon points={`${x},${lineY - 2} ${x - 4},${lineY - 9} ${x + 4},${lineY - 9}`} fill="var(--color-accent-alg)" />
-                        <rect x={bx} y={by} width={boxW} height={boxH} rx="5"
-                          fill={isWrong ? "#FEF3C7" : "#DBEAFE"}
-                          stroke={isWrong ? "#F59E0B" : "var(--color-accent-alg)"} strokeWidth="1.5" />
+                        <line x1={x} y1={ulY} x2={x} y2={lineY - 4} stroke={lineColor} strokeWidth="1.5" strokeDasharray="4,2" />
+                        <polygon points={`${x},${lineY - 2} ${x - 4},${lineY - 9} ${x + 4},${lineY - 9}`} fill={lineColor} />
+                        <line x1={x - 22} y1={ulY} x2={x + 22} y2={ulY} stroke={lineColor} strokeWidth="1.5" />
                         {validated
                           ? isWrong
-                            ? <text x={bx + boxW / 2} textAnchor="middle" fontSize="9">
-                                <tspan y={by + 10} fill="#D97706" textDecoration="line-through">{vals[li]?.[ai] || "—"}</tspan>
-                                <tspan x={bx + boxW / 2} y={by + 21} fontSize="11" fontWeight="bold" fill="currentColor">{expected}</tspan>
+                            ? <text x={x} textAnchor="middle" fontSize="9">
+                                <tspan y={16} fill="#D97706" textDecoration="line-through">{vals[li]?.[ai] || "—"}</tspan>
+                                <tspan x={x} y={26} fontSize="11" fontWeight="bold" fill="currentColor">{expected}</tspan>
                               </text>
-                            : <text x={bx + boxW / 2} y={by + boxH / 2 + 4} textAnchor="middle" fontSize="11" fontWeight="bold" fill="currentColor">
+                            : <text x={x} y={20} textAnchor="middle" fontSize="11" fontWeight="bold" fill="var(--color-accent-alg)">
                                 {vals[li]?.[ai] ?? ""}
                               </text>
-                          : <foreignObject x={bx + 2} y={by + 2} width={boxW - 4} height={boxH - 4}>
+                          : <foreignObject x={x - 22} y={4} width={44} height={22}>
                               <input
                                 type="text"
                                 value={vals[li]?.[ai] ?? ""}

@@ -6,18 +6,13 @@ export const MATH_A5_3_LESSON: MathSubmoduleLesson = {
     theory: {
       title: { fr: "Arrondir les décimaux",},
       blocks: [
-        { type: "heading", fr: "Règle d'arrondi", black: true },
-        { type: "highlight", fr: "Comment arrondir" },
+        { type: "heading", fr: "Comment arrondir", black: true },
+        { type: "plain", fr: "**1.** Repérer la **position d'arrondi** (unité, dixième, centième…)." },
+        { type: "plain", fr: "**2.** Regarder le chiffre **juste après** cette position." },
         {
           type: "section", labelFr: "", itemsFr: [
-            "1. Repérer la **position d'arrondi** (unité, dixième, centième…).",
-            "2. Regarder le chiffre **juste après** cette position.",
-          ],
-        },
-        {
-          type: "rule", titleFr: "", itemsFr: [
-            "Chiffre ≥ 5  →  arrondir vers le HAUT (augmenter d'un)",
-            "Chiffre < 5  →  arrondir vers le BAS (laisser tel quel)",
+            "Chiffre **≥ 5** → arrondir vers le **HAUT** (augmenter d'un)",
+            "Chiffre **< 5** → arrondir vers le **BAS** (laisser tel quel)",
           ],
         },
         { type: "plain", fr: "" },

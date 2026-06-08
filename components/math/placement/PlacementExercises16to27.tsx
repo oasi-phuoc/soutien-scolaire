@@ -618,6 +618,29 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
     </td>
   );
 
+  const preIn = (digits: number[], col: number, firstNz: number, base: number) => {
+    if (col < firstNz) return <td key={col} className="w-8 p-0.5"><div className="h-8 w-8" /></td>;
+    const correct = String(digits[col]);
+    const val = cells[base + col] ?? "";
+    if (validated) {
+      return (
+        <td key={col} className="w-8 text-center p-0.5">
+          <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${val === correct ? "text-[var(--color-text-primary)]" : "text-amber-600"}`}>
+            {val === correct ? (val || correct) : correct}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 text-center p-0.5">
+        <input type="text" inputMode="numeric" maxLength={1}
+          value={val} disabled={validated}
+          onChange={e => onCellChange(base + col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={inputCls} />
+      </td>
+    );
+  };
+
   return (
     <div className="space-y-3">
       <p className="text-center text-sm font-mono font-bold text-[var(--color-text-primary)]">
@@ -643,11 +666,11 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
           </tr>
           <tr>
             <td />
-            {[0,1,2,3].map(col => pre(ad, col, aFz))}
+            {[0,1,2,3].map(col => preIn(ad, col, aFz, 0))}
           </tr>
           <tr>
             <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
-            {[0,1,2,3].map(col => pre(bd, col, bFz))}
+            {[0,1,2,3].map(col => preIn(bd, col, bFz, 4))}
           </tr>
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
@@ -758,10 +781,14 @@ function DecimalDivisionGrid({
   workFlat,
   decResult,
   decCorrect,
+  dividendInputs,
+  divisorInputs,
   onQuotientChange,
   onRemainderChange,
   onWorkChange,
   onDecResultChange,
+  onDividendChange,
+  onDivisorChange,
   validated,
 }: {
   dividendInt: number;
@@ -772,10 +799,14 @@ function DecimalDivisionGrid({
   workFlat: string[];
   decResult: string;
   decCorrect: string;
+  dividendInputs: string[];
+  divisorInputs: string[];
   onQuotientChange: (idx: number, value: string) => void;
   onRemainderChange: (value: string) => void;
   onWorkChange: (step: number, type: 0 | 1, col: number, value: string) => void;
   onDecResultChange: (value: string) => void;
+  onDividendChange: (idx: number, value: string) => void;
+  onDivisorChange: (idx: number, value: string) => void;
   validated: boolean;
 }) {
   const steps = computeDecimalDivSteps(dividendInt, divisor);
@@ -807,6 +838,24 @@ function DecimalDivisionGrid({
 
   const emptyCell = () => <div className="h-8 w-8" />;
 
+  const dividendCell = (idx: number) => {
+    const correct = dividendStr[idx]!;
+    const val = dividendInputs[idx] ?? "";
+    if (validated) {
+      return <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${val === correct ? "text-[var(--color-text-primary)]" : "text-amber-600"}`}>{val === correct ? (val || correct) : correct}</div>;
+    }
+    return digitInput(val, v => onDividendChange(idx, v));
+  };
+
+  const divisorCell = (idx: number) => {
+    const correct = divisorStr[idx]!;
+    const val = divisorInputs[idx] ?? "";
+    if (validated) {
+      return <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${val === correct ? "text-[var(--color-text-primary)]" : "text-amber-600"}`}>{val === correct ? (val || correct) : correct}</div>;
+    }
+    return digitInput(val, v => onDivisorChange(idx, v));
+  };
+
   function WorkRow({ numStr, colEnd, stepIndex, type }: { numStr: string; colEnd: number; stepIndex: number; type: 0 | 1 }) {
     const startCol = colEnd - numStr.length + 1;
     return (
@@ -835,7 +884,7 @@ function DecimalDivisionGrid({
             <td style={{ width: 20, padding: 0 }} />
             {Array.from({ length: dividendCols }, (_, i) => (
               <td key={i} style={{ width: CW, padding: 2 }} className="align-middle text-center">
-                {fixedCell(dividendStr[i]!)}
+                {dividendCell(i)}
               </td>
             ))}
             {Array.from({ length: quotientCols }, (_, i) => (
@@ -849,7 +898,24 @@ function DecimalDivisionGrid({
                 }}
                 className="align-middle text-center"
               >
-                {i < divisorStr.length ? fixedCell(divisorStr[i]!) : null}
+                {i < divisorStr.length ? divisorCell(i) : null}
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <td style={{ padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, k) => <td key={k} style={{ width: CW, padding: 0 }} />)}
+            {Array.from({ length: quotientCols }, (_, qi) => (
+              <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
+                {qi < quotientStr.length
+                  ? <CorrectionInput
+                      value={quotientInputs[qi] ?? ""}
+                      onChange={value => onQuotientChange(qi, value.replace(/[^0-9]/g, "").slice(-1))}
+                      correct={quotientStr[qi] ?? ""}
+                      validated={validated}
+                      width="w-8"
+                    />
+                  : emptyCell()}
               </td>
             ))}
           </tr>
@@ -861,25 +927,13 @@ function DecimalDivisionGrid({
             const lineStart = Math.min(partialStart, productStart);
             return (
               <React.Fragment key={stepIndex}>
+                {stepIndex > 0 && (
                 <tr>
                   <td style={{ padding: 0 }} />
                   <WorkRow numStr={partialStr} colEnd={step.colEnd} stepIndex={stepIndex} type={0} />
-                  {stepIndex === 0
-                    ? Array.from({ length: quotientCols }, (_, qi) => (
-                      <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
-                        {qi < quotientStr.length
-                          ? <CorrectionInput
-                              value={quotientInputs[qi] ?? ""}
-                              onChange={value => onQuotientChange(qi, value.replace(/[^0-9]/g, "").slice(-1))}
-                              correct={quotientStr[qi] ?? ""}
-                              validated={validated}
-                              width="w-8"
-                            />
-                          : emptyCell()}
-                      </td>
-                    ))
-                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />}
+                  <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
+                )}
                 <tr>
                   <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
                   <WorkRow numStr={productStr} colEnd={step.colEnd} stepIndex={stepIndex} type={1} />
@@ -992,6 +1046,12 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
   const [remainders, setRemainders] = useState<string[]>(["", ""]);
   const [works, setWorks] = useState<string[][]>(() => Array(2).fill(null).map(() => Array(80).fill("")));
   const [answers, setAnswers] = useState<string[]>(["", ""]);
+  const [dividendInputs, setDividendInputs] = useState<string[][]>(() =>
+    data.map(q => Array(String(q.dividendInt).length).fill(""))
+  );
+  const [divisorInputs, setDivisorInputs] = useState<string[][]>(() =>
+    data.map(q => Array(String(q.divisor).length).fill(""))
+  );
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -1018,6 +1078,8 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
               workFlat={works[i] ?? []}
               decResult={answers[i] ?? ""}
               decCorrect={fmtDec(q.quotient, q.decPlaces)}
+              dividendInputs={dividendInputs[i]!}
+              divisorInputs={divisorInputs[i]!}
               onQuotientChange={(idx, value) => setQuotients(prev => {
                 const next = prev.map(row => [...row]);
                 next[i]![idx] = value;
@@ -1039,6 +1101,8 @@ export function Exercise21({ exerciseKey, validated, onValidated, validateTrigge
                 next[i] = value;
                 return next;
               })}
+              onDividendChange={(idx, val) => setDividendInputs(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
+              onDivisorChange={(idx, val) => setDivisorInputs(p => { const n = p.map(r => [...r]); n[i]![idx] = val; return n; })}
               validated={validated}
             />
           </div>

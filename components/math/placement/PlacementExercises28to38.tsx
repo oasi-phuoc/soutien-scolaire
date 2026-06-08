@@ -103,6 +103,45 @@ function CorrectionInputText({
   );
 }
 
+function FracInput({
+  numVal, denVal, numCorrect, denCorrect,
+  onNumChange, onDenChange, validated,
+}: {
+  numVal: string; denVal: string;
+  numCorrect: string; denCorrect: string;
+  onNumChange: (v: string) => void; onDenChange: (v: string) => void;
+  validated: boolean;
+}) {
+  const numWrong = validated && numVal.trim() !== numCorrect;
+  const denWrong = validated && denVal.trim() !== denCorrect;
+
+  const cell = (val: string, correct: string, wrong: boolean, onChange: (v: string) => void) => {
+    if (validated) {
+      return (
+        <span className={`block w-10 text-center font-mono text-sm leading-none ${wrong ? "text-amber-600" : "text-[var(--color-text-primary)]"}`}>
+          {wrong ? correct : (val || correct)}
+        </span>
+      );
+    }
+    return (
+      <input
+        type="text"
+        value={val}
+        onChange={e => onChange(e.target.value.replace(/[^0-9-]/g, ""))}
+        className="block h-6 w-10 bg-transparent text-center font-mono text-sm outline-none"
+      />
+    );
+  };
+
+  return (
+    <span className="inline-flex flex-col items-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5">
+      {cell(numVal, numCorrect, numWrong, onNumChange)}
+      <span className="my-0.5 h-px w-full bg-[var(--color-text-primary)] opacity-40" />
+      {cell(denVal, denCorrect, denWrong, onDenChange)}
+    </span>
+  );
+}
+
 // Fraction display helper
 function Frac({ n, d, className = "" }: { n: React.ReactNode; d: React.ReactNode; className?: string }) {
   return (
@@ -400,6 +439,18 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 
   const [answers, setAnswers] = useState<string[]>(() => Array(8).fill(""));
   const setAns = (i: number) => (v: string) => setAnswers((prev) => prev.map((a, j) => j === i ? v : a));
+  const [fracNums, setFracNums] = useState<string[]>(() => Array(6).fill(""));
+  const [fracDens, setFracDens] = useState<string[]>(() => Array(6).fill(""));
+  const setFN = (i: number) => (v: string) => setFracNums(prev => prev.map((a, j) => j === i ? v : a));
+  const setFD = (i: number) => (v: string) => setFracDens(prev => prev.map((a, j) => j === i ? v : a));
+
+  const splitAns = (ans: string): [string, string] => {
+    if (ans.includes("/")) {
+      const [n, d] = ans.split("/");
+      return [n ?? "", d ?? ""];
+    }
+    return [ans, "1"];
+  };
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -408,12 +459,12 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const checks = [
       () => norm(answers[0] ?? "") === String(data.q1.ask === "num" ? data.q1.n : data.q1.d),
       () => norm(answers[1] ?? "") === String(data.q2.n) && norm(answers[8] ?? "") === String(data.q2.d),
-      () => norm(answers[2] ?? "") === data.q3.ans,
-      () => norm(answers[3] ?? "") === data.q4.ans,
-      () => norm(answers[4] ?? "") === data.q5.ans,
-      () => norm(answers[5] ?? "") === data.q6.ans,
-      () => norm(answers[6] ?? "") === data.q7.ans,
-      () => norm(answers[7] ?? "") === data.q8.ans,
+      () => { const [en,ed]=splitAns(data.q3.ans); return norm(fracNums[0]??"")=== en && norm(fracDens[0]??"")=== ed; },
+      () => { const [en,ed]=splitAns(data.q4.ans); return norm(fracNums[1]??"")=== en && norm(fracDens[1]??"")=== ed; },
+      () => { const [en,ed]=splitAns(data.q5.ans); return norm(fracNums[2]??"")=== en && norm(fracDens[2]??"")=== ed; },
+      () => { const [en,ed]=splitAns(data.q6.ans); return norm(fracNums[3]??"")=== en && norm(fracDens[3]??"")=== ed; },
+      () => { const [en,ed]=splitAns(data.q7.ans); return norm(fracNums[4]??"")=== en && norm(fracDens[4]??"")=== ed; },
+      () => { const [en,ed]=splitAns(data.q8.ans); return norm(fracNums[5]??"")=== en && norm(fracDens[5]??"")=== ed; },
     ];
     checks.forEach((check) => { if (check()) pts += 0.5; });
     onValidated(pts, 4);
@@ -465,32 +516,62 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
         <span className="text-sm"><Frac n={data.q3.a.n} d={data.q3.a.d} /> + <Frac n={data.q3.b.n} d={data.q3.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[2] ?? ""} onChange={setAns(2)} correct={data.q3.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[0] ?? ""} denVal={fracDens[0] ?? ""}
+          numCorrect={splitAns(data.q3.ans)[0]} denCorrect={splitAns(data.q3.ans)[1]}
+          onNumChange={setFN(0)} onDenChange={setFD(0)}
+          validated={validated}
+        />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
         <span className="text-sm"><Frac n={data.q4.a.n} d={data.q4.a.d} /> − <Frac n={data.q4.b.n} d={data.q4.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[3] ?? ""} onChange={setAns(3)} correct={data.q4.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[1] ?? ""} denVal={fracDens[1] ?? ""}
+          numCorrect={splitAns(data.q4.ans)[0]} denCorrect={splitAns(data.q4.ans)[1]}
+          onNumChange={setFN(1)} onDenChange={setFD(1)}
+          validated={validated}
+        />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">5.</span>
         <span className="text-sm"><Frac n={data.q5.a.n} d={data.q5.a.d} /> × <Frac n={data.q5.b.n} d={data.q5.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[4] ?? ""} onChange={setAns(4)} correct={data.q5.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[2] ?? ""} denVal={fracDens[2] ?? ""}
+          numCorrect={splitAns(data.q5.ans)[0]} denCorrect={splitAns(data.q5.ans)[1]}
+          onNumChange={setFN(2)} onDenChange={setFD(2)}
+          validated={validated}
+        />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">6.</span>
         <span className="text-sm"><Frac n={data.q6.a.n} d={data.q6.a.d} /> ÷ <Frac n={data.q6.b.n} d={data.q6.b.d} /></span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[5] ?? ""} onChange={setAns(5)} correct={data.q6.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[3] ?? ""} denVal={fracDens[3] ?? ""}
+          numCorrect={splitAns(data.q6.ans)[0]} denCorrect={splitAns(data.q6.ans)[1]}
+          onNumChange={setFN(3)} onDenChange={setFD(3)}
+          validated={validated}
+        />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">7.</span>
         <span className="text-sm">{signedFrac(data.q7.a.n, data.q7.a.d)} {data.q7.op} {signedFrac(data.q7.b.n, data.q7.b.d)}</span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[6] ?? ""} onChange={setAns(6)} correct={data.q7.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[4] ?? ""} denVal={fracDens[4] ?? ""}
+          numCorrect={splitAns(data.q7.ans)[0]} denCorrect={splitAns(data.q7.ans)[1]}
+          onNumChange={setFN(4)} onDenChange={setFD(4)}
+          validated={validated}
+        />
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">8.</span>
         <span className="text-sm">{signedFrac(data.q8.a.n, data.q8.a.d)} {data.q8.op} {signedFrac(data.q8.b.n, data.q8.b.d)}</span>
         <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <CorrectionInputText value={answers[7] ?? ""} onChange={setAns(7)} correct={data.q8.ans} validated={validated} width="w-24" />
+        <FracInput
+          numVal={fracNums[5] ?? ""} denVal={fracDens[5] ?? ""}
+          numCorrect={splitAns(data.q8.ans)[0]} denCorrect={splitAns(data.q8.ans)[1]}
+          onNumChange={setFN(5)} onDenChange={setFD(5)}
+          validated={validated}
+        />
       </div>
     </div>
   );

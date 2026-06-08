@@ -1757,6 +1757,26 @@ function DivColumnCard({
             })}
           </tr>
 
+          {/* Quotient row — shown right below dividend/divisor */}
+          <tr>
+            <td style={{ padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, col) => (
+              <td key={col} style={{ width: CELL_W, padding: 0 }}><div className="h-8 w-8" /></td>
+            ))}
+            {Array.from({ length: quotientCols }, (_, qi) => {
+              const isEmpty = qi >= quotientLen;
+              return (
+                <td key={qi} style={{ width: CELL_W, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
+                  {isEmpty
+                    ? <div className="h-8 w-8" />
+                    : inputCell({ val: quotientInputs[qi] ?? "", expected: quotientDigitStr[qi]!,
+                        onChange: v => onQuotientChange(cardIdx, qi, v) })
+                  }
+                </td>
+              );
+            })}
+          </tr>
+
           {/* Work steps */}
           {steps.map((step, si) => {
             const pdStr = step.partialDiv.toString();
@@ -1768,27 +1788,14 @@ function DivColumnCard({
 
             return (
               <Fragment key={si}>
-                {/* Partial dividend row | quotient cells (si===0 only, left-aligned) */}
-                <tr>
-                  <td style={{ padding: 0 }} />
-                  <FullWorkRow numStr={pdStr} colEnd={step.colEnd} si={si} type={0} />
-                  {si === 0
-                    ? Array.from({ length: quotientCols }, (_, qi) => {
-                        // Left-align: cell qi has digit if qi < quotientLen, else empty
-                        const isEmpty = qi >= quotientLen;
-                        return (
-                          <td key={qi} style={{ width: CELL_W, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
-                            {isEmpty
-                              ? <div className="h-8 w-8" />
-                              : inputCell({ val: quotientInputs[qi] ?? "", expected: quotientDigitStr[qi]!,
-                                  onChange: v => onQuotientChange(cardIdx, qi, v) })
-                            }
-                          </td>
-                        );
-                      })
-                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
-                  }
-                </tr>
+                {/* Partial dividend row — skip si===0 (already visible in dividend row above) */}
+                {si > 0 && (
+                  <tr>
+                    <td style={{ padding: 0 }} />
+                    <FullWorkRow numStr={pdStr} colEnd={step.colEnd} si={si} type={0} />
+                    <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
+                  </tr>
+                )}
 
                 {/* Product row */}
                 <tr>
