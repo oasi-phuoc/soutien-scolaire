@@ -5529,57 +5529,54 @@ export function GenericModuleContent({
       {currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">
-            Classez les nombres dans l&apos;ordre {activeDecOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
-          </p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre demandée.</p>
           <div className="space-y-6">
             {activeDecOrderingConfig.questions.map((q, qi) => {
               const sel = decOrderingSelected[qi] ?? [];
+              const available = q.hundredths.filter(n => !sel.includes(n));
               const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
               const ok = decOrderingValidated ? decOrderingResults[qi] : null;
-              const sep = activeDecOrderingConfig.direction === "asc" ? "<" : ">";
+              const desc = activeDecOrderingConfig.direction === "desc";
+              const sep = desc ? ">" : "<";
+              const chipBase = "w-[4.5rem] flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+              const toggleChip = (n: number) => {
+                if (decOrderingValidated) return;
+                setDecOrderingSelected(prev => {
+                  const next = prev.map(a => [...a]);
+                  const cur = next[qi] ?? [];
+                  next[qi] = cur.includes(n) ? cur.filter(x => x !== n) : [...cur, n];
+                  return next;
+                });
+              };
               return (
-                <div key={qi} className="space-y-2">
-                  <div className="flex flex-wrap gap-2">
-                    {q.hundredths.map((n, ni) => {
-                      const isSelected = sel.includes(n);
-                      const selIdx = sel.indexOf(n);
-                      let cls = "w-16 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
-                      if (!decOrderingValidated) {
-                        cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
-                      } else {
-                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                        else if (isSelected) cls += CLS_WRONG;
-                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
-                      }
-                      return (
-                        <button key={ni} type="button" disabled={decOrderingValidated}
-                          onClick={() => {
-                            setDecOrderingSelected(prev => {
-                              const next = prev.map(a => [...a]);
-                              const cur = next[qi] ?? [];
-                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
-                              else { next[qi] = [...cur, n]; }
-                              return next;
-                            });
-                          }}
-                          className={cls}>
-                          {fmtDec(n)}
-                        </button>
-                      );
-                    })}
+                <div key={qi} className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    <p className="text-sm text-[var(--color-text-secondary)]">
+                      {desc ? "Dans l’ordre décroissant (plus grand au plus petit)" : "Dans l’ordre croissant (plus petit au plus grand)"}
+                    </p>
                   </div>
-                  <div className="space-y-0.5">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
-                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
-                      {sel.length > 0 ? sel.map((n, si) => (
+                  <div className="space-y-3">
+                    {available.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {available.map((n, ni) => (
+                          <button key={ni} type="button" disabled={decOrderingValidated} onClick={() => toggleChip(n)}
+                            className={chipBase + "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]"}>
+                            {fmtDec(n)}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+                      {sel.map((n, si) => (
                         <Fragment key={si}>
-                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
-                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                          <button type="button" disabled={decOrderingValidated} onClick={() => toggleChip(n)}
+                            className={chipBase + (decOrderingValidated ? "cursor-default" : "cursor-pointer") + " border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"}>
+                            {fmtDec(n)}
+                          </button>
+                          {si < sel.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
                         </Fragment>
-                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                      ))}
                     </div>
                   </div>
                   {decOrderingValidated && ok === false && (
@@ -5645,10 +5642,10 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
-          <div>
+          <div className="overflow-x-auto">
             <div
               className="grid items-center gap-x-1 gap-y-3"
-              style={{ gridTemplateColumns: `1.25rem repeat(${activeDecSeqCompleteConfig.questions[0]?.allNums.length ?? 5}, minmax(0, 1fr))` }}
+              style={{ gridTemplateColumns: `1.25rem repeat(${activeDecSeqCompleteConfig.questions[0]?.allNums.length ?? 5}, 3.5rem)` }}
             >
               {activeDecSeqCompleteConfig.questions.map((q, qi) => {
                 let blankCounter = 0;
