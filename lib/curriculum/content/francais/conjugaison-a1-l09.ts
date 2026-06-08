@@ -286,8 +286,6 @@ const ex1Pool = (() => {
   ];
   habillerRows.forEach((p, i) => {
     const tail = habillerTails[i % habillerTails.length]!;
-    // No space after elided pronouns ending in '
-    const sep = p.refl.endsWith("'") ? "" : "";
     items.push({ sentence: `${p.display} ${p.refl}habill___${tail}`, hint, answer: p.ending });
   });
 
