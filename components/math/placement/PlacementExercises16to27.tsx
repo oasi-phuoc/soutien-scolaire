@@ -610,7 +610,7 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
         className={carryCls} />
     </td>
   );
-  const pre = (digits: number[], col: number, firstNz: number) => (
+  const _pre = (digits: number[], col: number, firstNz: number) => (
     <td key={col} className="w-8 text-center p-0.5">
       <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
         {col < firstNz ? "" : digits[col]}
@@ -830,7 +830,7 @@ function DecimalDivisionGrid({
     />
   );
 
-  const fixedCell = (value: string) => (
+  const _fixedCell = (value: string) => (
     <div className="flex h-8 w-8 items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
       {value}
     </div>
