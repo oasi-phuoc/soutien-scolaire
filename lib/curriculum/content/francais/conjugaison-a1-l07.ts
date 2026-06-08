@@ -88,6 +88,90 @@ function verbPool2(infinitive: string, stem: string, pronouns: P[], tails: strin
   return items;
 }
 
+// Exercise 3 — singular → plural transformation (Tu parles … → Vous ___ …)
+type Pair = { singDisplay: string; singEnding: string; plurDisplay: string; plurEnding: string };
+
+const PAIRS_C: Pair[] = [
+  { singDisplay: "Je",   singEnding: "e",  plurDisplay: "Nous",  plurEnding: "ons" },
+  { singDisplay: "Tu",   singEnding: "es", plurDisplay: "Vous",  plurEnding: "ez"  },
+  { singDisplay: "Il",   singEnding: "e",  plurDisplay: "Ils",   plurEnding: "ent" },
+  { singDisplay: "Elle", singEnding: "e",  plurDisplay: "Elles", plurEnding: "ent" },
+];
+
+const PAIRS_V: Pair[] = [
+  { singDisplay: "J'",   singEnding: "e",  plurDisplay: "Nous",  plurEnding: "ons" },
+  { singDisplay: "Tu",   singEnding: "es", plurDisplay: "Vous",  plurEnding: "ez"  },
+  { singDisplay: "Il",   singEnding: "e",  plurDisplay: "Ils",   plurEnding: "ent" },
+  { singDisplay: "Elle", singEnding: "e",  plurDisplay: "Elles", plurEnding: "ent" },
+];
+
+function verbPool3(stem: string, pairs: Pair[], tails: string[]) {
+  const items: { sentence: string; hint: string; answer: string }[] = [];
+  for (const tail of tails) {
+    for (const pair of pairs) {
+      const singSep = pair.singDisplay.endsWith("'") ? "" : " ";
+      const singVerb = stem + pair.singEnding;
+      items.push({
+        sentence: `${pair.singDisplay}${singSep}${singVerb}${tail} → ${pair.plurDisplay} ___${tail}`,
+        hint: HINT,
+        answer: stem + pair.plurEnding,
+      });
+    }
+  }
+  return items;
+}
+
+const EX3_POOL = [
+  ...verbPool3("parl", PAIRS_C, [
+    " le français.",
+    " trop vite.",
+    " souvent en famille.",
+    " à voix basse.",
+    " de la météo.",
+    " avec les voisins.",
+    " bien l'anglais.",
+    " toute la journée.",
+    " à votre prof.",
+    " doucement.",
+  ]),
+  ...verbPool3("aim", PAIRS_V, [
+    " la musique.",
+    " le chocolat.",
+    " danser.",
+    " lire.",
+    " la nature.",
+    " les films.",
+    " les animaux.",
+    " voyager.",
+    " cuisiner.",
+    " le sport.",
+  ]),
+  ...verbPool3("écout", PAIRS_V, [
+    " la radio.",
+    " attentivement.",
+    " les conseils.",
+    " une chanson.",
+    " les oiseaux.",
+    " les podcasts.",
+    " en classe.",
+    " la professeure.",
+    " les nouvelles.",
+    " de la musique.",
+  ]),
+  ...verbPool3("habit", PAIRS_V, [
+    " en ville.",
+    " au centre-ville.",
+    " avec mes parents.",
+    " loin d'ici.",
+    " dans un appartement.",
+    " dans une grande maison.",
+    " près de l'école.",
+    " en Suisse.",
+    " à Lyon.",
+    " au bord de la mer.",
+  ]),
+];
+
 const EX2_POOL = [
   ...verbPool2("parler", "parl", PC, [
     " français.",
@@ -241,6 +325,14 @@ export const A1_CONJ_L07: ConjLesson = {
       instruction: "Conjuguez les verbes entre parenthèses.",
       items: [],
       pool: EX2_POOL,
+      poolSize: 8,
+    },
+    {
+      type: "fill",
+      title: "Exercice 3",
+      instruction: "Mettez les phrases au pluriel.",
+      items: [],
+      pool: EX3_POOL,
       poolSize: 8,
     },
   ],
