@@ -94,8 +94,9 @@ function FrIcon({ active: _active }: { active: boolean }) {
 
 function MathIcon({ active: _active }: { active: boolean }) {
   return (
-    <span className="flex h-[21px] w-[21px] items-center justify-center text-[11px] font-bold leading-none" aria-hidden>
-      +−×÷
+    <span className="grid grid-cols-2 h-[21px] w-[21px] items-center justify-items-center text-[9px] font-bold leading-none" aria-hidden>
+      <span>+</span><span>×</span>
+      <span>−</span><span>÷</span>
     </span>
   );
 }
