@@ -1837,35 +1837,50 @@ function ColorHighlightExercise({
 
       {/* Sentences */}
       <div className="space-y-4">
-        {exercise.items.map((item, qi) => (
-          <div key={qi} className="space-y-2">
-            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
-            <div className="flex flex-wrap gap-1.5">
-              {item.words.map((word, wi) => {
-                const colorIdx = colored[qi]![wi];
-                const expectedIdx = item.answers[wi];
-                const style = colorIdx !== null ? HIGHLIGHT_STYLES[colorIdx] : null;
-                let cls = "cursor-pointer rounded px-2 py-0.5 text-sm font-medium transition-all select-none ";
-                if (validated && colorIdx !== null && expectedIdx !== null) {
-                  cls += colorIdx === expectedIdx
+        {exercise.items.map((item, qi) => {
+          const row = colored[qi]!;
+          const itemCorrect = !validated || item.answers.every((ans, wi) => ans === null || row[wi] === ans);
+          return (
+            <div key={qi} className="space-y-1.5">
+              <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
+
+              {/* User's row — colors stay as-is after validation */}
+              <div className="flex flex-wrap gap-1.5">
+                {item.words.map((word, wi) => {
+                  const colorIdx = row[wi];
+                  const style = colorIdx !== null ? HIGHLIGHT_STYLES[colorIdx] : null;
+                  let cls = `rounded px-2 py-0.5 text-sm font-medium transition-all select-none ${validated ? "cursor-default" : "cursor-pointer"} `;
+                  cls += colorIdx !== null
                     ? `${style!.bg} ${style!.text}`
-                    : "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
-                } else if (validated && colorIdx !== null && expectedIdx === null) {
-                  cls += "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
-                } else if (colorIdx !== null) {
-                  cls += `${style!.bg} ${style!.text}`;
-                } else {
-                  cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-default)]";
-                }
-                return (
-                  <button key={wi} type="button" onClick={() => toggleWord(qi, wi)} className={cls}>
-                    {word}
-                  </button>
-                );
-              })}
+                    : validated
+                      ? "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] opacity-50"
+                      : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-default)]";
+                  return (
+                    <button key={wi} type="button" onClick={() => toggleWord(qi, wi)} className={cls}>
+                      {word}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Correct row — shown below only when the item has errors */}
+              {validated && !itemCorrect && (
+                <div className="flex flex-wrap gap-1.5">
+                  {item.words.map((word, wi) => {
+                    const expectedIdx = item.answers[wi];
+                    const style = expectedIdx !== null ? HIGHLIGHT_STYLES[expectedIdx] : null;
+                    const cls = `rounded px-2 py-0.5 text-sm font-medium select-none cursor-default ${
+                      expectedIdx !== null && style
+                        ? `${style.bg} ${style.text}`
+                        : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
+                    }`;
+                    return <span key={wi} className={cls}>{word}</span>;
+                  })}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
