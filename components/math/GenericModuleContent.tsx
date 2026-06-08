@@ -2127,7 +2127,14 @@ function RoundingExercise({
   const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
   const isDecKind = config.kind.startsWith("dec_");
+  const isDecMixed = config.kind === "dec_mixed";
   const isInline = config.kind === "diz_near" || config.kind === "cent_near_new" || isDecKind;
+
+  const gridCols = isDecMixed
+    ? "1.25rem max-content 1.2rem max-content max-content 4.5rem"
+    : isInline
+      ? "1.25rem max-content max-content 4.5rem"
+      : isNew && !isInline ? "1.25rem max-content max-content" : undefined;
 
   return (
     <div className="space-y-4">
@@ -2135,8 +2142,8 @@ function RoundingExercise({
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
         <div
-          className={isInline ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
-          style={isInline ? { gridTemplateColumns: "1.25rem max-content max-content 4.5rem" } : isNew && !isInline ? { gridTemplateColumns: "1.25rem max-content max-content" } : undefined}
+          className={isInline || isDecMixed ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
+          style={gridCols ? { gridTemplateColumns: gridCols } : undefined}
         >
           {config.questions.map((q, i) => {
             const v = answers[i] ?? "";
@@ -2157,6 +2164,21 @@ function RoundingExercise({
                   onChange={e => onChange(i, e.target.value)}
                   className={inputBase}
                 />;
+            if (isDecMixed) {
+              const parts = q.prompt.split(" → ");
+              const numPart = parts[0] ?? q.prompt;
+              const labelPart = parts[1] ?? "";
+              return (
+                <Fragment key={i}>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
+                  <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{numPart}</span>
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)] self-center">→</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] self-center">{labelPart}</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
+                  {field}
+                </Fragment>
+              );
+            }
             if (isInline) {
               return (
                 <Fragment key={i}>
