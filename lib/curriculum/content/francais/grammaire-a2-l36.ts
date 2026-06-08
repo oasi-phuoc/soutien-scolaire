@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L36: GrammarLesson = {
   slug: "a2-gr-l36",
-  code: "G.43",
+  code: "G.42",
   level: "A2",
   title: "Les pronoms Y et EN",
   theory: [

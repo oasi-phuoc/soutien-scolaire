@@ -416,7 +416,7 @@ export function VocabRunner({ theme }: Props) {
             </button>
           </div>
         </div>
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>}
     </div>
   );

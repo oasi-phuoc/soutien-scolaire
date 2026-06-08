@@ -320,7 +320,7 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
           </div>
         </div>
         {/* Spacer covers main nav area so scrolled content can't show through */}
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>}
     </div>
   );

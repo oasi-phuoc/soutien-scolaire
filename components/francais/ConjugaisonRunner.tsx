@@ -193,7 +193,10 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
                       ? <span className="text-[var(--color-text-primary)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                       : <span className="font-bold text-[var(--color-accent-fr)]">{verb.reflexivePronouns[ri]}{verb.reflexivePronouns[ri]!.endsWith("'") ? "" : " "}</span>
                   )}
-                  {verb.radical && <span className="text-[var(--color-text-primary)]">{verb.radical}</span>}
+                  {(() => {
+                    const rowRadical = row.radical !== undefined ? row.radical : verb.radical;
+                    return rowRadical ? <span className="text-[var(--color-text-primary)]">{rowRadical}</span> : null;
+                  })()}
                   {negation
                     ? <span className="text-[var(--color-text-primary)]">{row.ending}</span>
                     : <span className="font-bold text-[var(--color-accent-fr)]">{row.ending}</span>
@@ -617,9 +620,9 @@ function QcmExercise({
           } else {
             const userWrong = selected[i] !== item.correctIdx;
             if (isSelected && !isCorrect) {
-              cls += "bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400";
+              cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             } else if (!isSelected && isCorrect && userWrong) {
-              cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
+              cls += "text-amber-500 dark:text-amber-400 font-semibold";
             } else {
               cls += isSelected
                 ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
@@ -635,7 +638,7 @@ function QcmExercise({
 
         if (hasInlineToggle) {
           const inlineGroup = (
-            <span className="inline-flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)] align-middle">
+            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} align-middle`}>
               {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
             </span>
           );
@@ -671,7 +674,7 @@ function QcmExercise({
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
             </p>
             {exercise.toggleChoices ? (
-              <div className="flex overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border-default)]">
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
               </div>
             ) : (
@@ -689,10 +692,10 @@ function QcmExercise({
                     const userWrong = selected[i] !== item.correctIdx;
                     if (isSelected && !isCorrect) {
                       cls +=
-                        "border-red-400 bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400 dark:border-red-700";
+                        "border-amber-500 dark:border-amber-400 bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
-                        "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] font-semibold";
+                        "border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold";
                     } else {
                       cls += isSelected
                         ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -829,9 +832,9 @@ function FillExercise({
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct ? (
-          <span className="inline-flex items-center justify-center gap-1 border-b-2 border-red-400 mx-1 w-28 align-bottom">
-            <span className="text-xs line-through text-red-300 dark:text-red-500">{userAnswer || "—"}</span>
-            <span className="text-sm font-bold text-red-600 dark:text-red-400">{item.answer}</span>
+          <span className="inline-flex h-8 w-28 flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle">
+            <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
+            <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500 dark:text-amber-400">{item.answer}</span>
           </span>
         ) : (
           <input
@@ -839,11 +842,7 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
-            className={`inline-block w-28 border-b-2 bg-transparent text-center text-sm font-semibold outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)] ${
-              validated
-                ? "border-[var(--color-border-default)] text-[var(--color-text-primary)]"
-                : "border-[var(--color-text-secondary)] text-[var(--color-text-primary)]"
-            }`}
+            className="inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]"
           />
         );
 
@@ -940,9 +939,9 @@ function ClockReadExercise({
                 correct ? (
                   <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
                 ) : (
-                  <div className="w-full text-center">
-                    <p className="text-xs line-through text-red-400">{userAnswer || "—"}</p>
-                    <p className="text-xs font-semibold text-red-600 dark:text-red-400">{clk.answer}</p>
+                  <div className="w-full rounded-xl border border-amber-400 px-2 py-1 text-center">
+                    <p className="text-xs text-amber-500 dark:text-amber-400">{userAnswer || "—"}</p>
+                    <p className="text-xs font-semibold text-zinc-900 dark:text-zinc-100">{clk.answer}</p>
                   </div>
                 )
               ) : (
@@ -951,7 +950,7 @@ function ClockReadExercise({
                   value={userAnswer}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
                   placeholder="..."
-                  className="w-full rounded border border-[var(--color-border-default)] bg-transparent px-2 py-1 text-center text-xs outline-none focus:border-[var(--color-accent-fr)]"
+                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 py-1 text-center text-xs outline-none transition-colors focus:border-amber-500"
                 />
               )}
             </div>
@@ -1207,6 +1206,14 @@ function hasVerb(text: string, verb: "être" | "avoir"): boolean {
   return (verb === "être" ? ETRE_FORMS : AVOIR_FORMS).test(text);
 }
 
+function hasErVerbForm(text: string, verb: string): boolean {
+  const stem = verb.endsWith("er") ? verb.slice(0, -2) : verb;
+  const esc = stem.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const re = new RegExp(`\\b${esc}(ent|e?ons|ez|es|é|e|er)\\b`, "i");
+  const escVerb = verb.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return re.test(text) || new RegExp(`\\b${escVerb}\\b`, "i").test(text);
+}
+
 function WriteExercise({
   exercise,
   onValidated,
@@ -1218,7 +1225,12 @@ function WriteExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const [inputs, setInputs] = useState<string[]>(() => new Array(exercise.prompts.length).fill(""));
+  const [activeVerbs] = useState<string[]>(() => {
+    if (!exercise.verbPool?.length) return [];
+    return shuffle([...exercise.verbPool]).slice(0, exercise.verbPoolSize ?? 5);
+  });
+  const promptCount = activeVerbs.length > 0 ? activeVerbs.length : (exercise.prompts?.length ?? 0);
+  const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
   const [validated, setValidated] = useState(false);
   const [checking, setChecking] = useState(false);
   const [grammarErrors, setGrammarErrors] = useState<Record<number, LTMatch[]>>({});
@@ -1314,40 +1326,52 @@ function WriteExercise({
         </div>
       )}
 
-      <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      <p className="whitespace-pre-line text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
 
       {checking && (
         <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
       )}
 
-      {exercise.prompts.map((_, i) => {
+      {Array.from({ length: promptCount }, (_, i) => {
+        const perVerb = activeVerbs[i];
         const ltErrors = grammarErrors[i] ?? [];
         const inputText = (inputs[i] ?? "").trim();
-        const verbOk = !exercise.verb || inputText.length <= 2 || hasVerb(inputs[i] ?? "", exercise.verb);
+        const verbOk = inputText.length <= 2
+          ? true
+          : perVerb
+            ? hasErVerbForm(inputText, perVerb)
+            : exercise.verb
+              ? hasVerb(inputText, exercise.verb)
+              : true;
         const isClean = validated && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
           <div key={i} className="space-y-1.5">
-            <div className="flex items-end gap-2">
-              <span className={`shrink-0 pb-1 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+            <div className="flex items-center gap-2">
+              <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
                 {i + 1}.
               </span>
+              {perVerb && (
+                <span className="w-28 shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
+                  ({perVerb})
+                </span>
+              )}
               <input
                 type="text"
                 value={inputs[i] ?? ""}
                 onChange={(e) => setInput(i, e.target.value)}
                 disabled={validated}
-                className={`flex-1 border-b-2 bg-transparent py-1 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] disabled:opacity-70 ${
+                className={`flex-1 rounded-xl border bg-transparent px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-70 ${
                   isClean
                     ? "border-emerald-400 dark:border-emerald-500"
-                    : "border-[var(--color-text-secondary)]"
+                    : "border-[var(--color-accent-fr)]"
                 }`}
               />
             </div>
             {/* Internal verb check — shown only after validation */}
-            {validated && !checking && exercise.verb && (inputs[i] ?? "").trim().length > 2 && !hasVerb(inputs[i] ?? "", exercise.verb) && (
+            {validated && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
               <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
-                Le verbe <strong>{exercise.verb}</strong> est attendu dans cette phrase
+                Le verbe <strong>{perVerb ?? exercise.verb}</strong> est attendu dans cette phrase
               </p>
             )}
             {/* LanguageTool results — shown only after validation */}
@@ -1426,11 +1450,14 @@ function TrueFalseExercise({
           const isRight = chosen === correct;
           const btnBase = "px-3 py-1 rounded text-xs font-medium border transition-colors";
           const mkCls = (val: boolean) => {
-            if (chosen !== val) return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
-            if (!validated) return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
-            return isRight
-              ? `${btnBase} border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400`
-              : `${btnBase} border-red-400 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400`;
+            const isCorrectAnswer = val === correct;
+            if (chosen !== val) {
+              if (validated && !isRight && isCorrectAnswer) {
+                return `${btnBase} border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold`;
+              }
+              return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
+            }
+            return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
           };
           return (
             <div key={i} className="flex items-start gap-3">
@@ -1440,11 +1467,6 @@ function TrueFalseExercise({
                 <div className="flex items-center gap-2">
                   <button onClick={() => pick(i, true)} className={mkCls(true)}>Vrai ✓</button>
                   <button onClick={() => pick(i, false)} className={mkCls(false)}>Faux ✗</button>
-                  {validated && !isRight && (
-                    <span className="text-xs text-emerald-600 dark:text-emerald-400 font-medium">
-                      → {correct ? "Vrai" : "Faux"}
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
@@ -1610,19 +1632,18 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className="flex overflow-hidden rounded-full border border-[var(--color-border-default)]">
+              <div className={`flex overflow-hidden rounded-xl border ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
-                  let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
-                  if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
-                  if (!active) {
-                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
-                  } else if (!validated) {
-                    cls += "bg-[var(--color-accent-fr)] text-white";
-                  } else if (isRight) {
-                    cls += "bg-emerald-500 text-white";
+                  const userWrong = validated && !isRight;
+                  let cls = "flex-1 py-1.5 text-center text-xs font-medium transition-colors ";
+                  if (ci > 0) cls += `border-l ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
+                  if (active) {
+                    cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+                  } else if (userWrong && ci === item.categoryIdx) {
+                    cls += "text-amber-500 dark:text-amber-400";
                   } else {
-                    cls += "bg-red-500 text-white";
+                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                   }
                   return (
                     <button
@@ -1636,11 +1657,6 @@ function ClassifyExercise({
                   );
                 })}
               </div>
-              {validated && !isRight && (
-                <p className="text-xs font-medium text-emerald-600 dark:text-emerald-400">
-                  → {exercise.categories[item.categoryIdx]}
-                </p>
-              )}
             </div>
           );
         })}
@@ -1663,13 +1679,17 @@ function WordOrderExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const [states] = useState(() =>
-    exercise.items.map((item) => ({ ...item, shuffled: shuffle([...item.words]) })),
+    exercise.items.map((item) => {
+      const trailingPunct = item.sentence.match(/([.?!])$/)?.[1] ?? null;
+      const allWords = trailingPunct ? [...item.words, trailingPunct] : [...item.words];
+      return { ...item, allWords, shuffled: shuffle([...allWords]) };
+    }),
   );
   const [arranged, setArranged] = useState<string[][]>(() => states.map(() => []));
   const [pools, setPools] = useState<string[][]>(() => states.map((s) => [...s.shuffled]));
   const [validated, setValidated] = useState(false);
 
-  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.words.length);
+  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.allWords.length);
 
   useEffect(() => {
     onCanValidateChange(allFilled && !validated);
@@ -1680,7 +1700,7 @@ function WordOrderExercise({
     if (validateCommand > 0 && !validated && allFilled) {
       setValidated(true);
       const allCorrect = arranged.every((arr, i) =>
-        arr.join(" ") === states[i]!.sentence,
+        arr.join(" ").replace(/ ([.?!])$/, "$1") === states[i]!.sentence,
       );
       onValidated(allCorrect);
     }
@@ -1706,35 +1726,32 @@ function WordOrderExercise({
       {states.map((item, qi) => {
         const arr = arranged[qi]!;
         const pool = pools[qi]!;
-        const correct = arr.join(" ") === item.sentence;
+        const correct = arr.join(" ").replace(/ ([.?!])$/, "$1") === item.sentence;
+        // Expected tokens: split sentence, treating trailing punctuation as separate token
+        const trailingP = item.sentence.match(/([.?!])$/)?.[1] ?? null;
+        const expectedTokens = trailingP ? [...item.words, trailingP] : item.words;
         return (
           <div key={qi} className="space-y-3">
-            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
-
-            {/* Arranged sentence */}
-            <div className="min-h-10 flex flex-wrap gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
-              {arr.length === 0 ? (
-                <span className="text-xs text-[var(--color-text-secondary)] self-center">
-                  Touchez un mot ci-dessous pour l&apos;ajouter…
-                </span>
-              ) : arr.map((word, wi) => {
-                let cls = "rounded-full px-3 py-1 text-sm font-medium transition-colors cursor-pointer ";
-                if (!validated) {
-                  cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
-                } else if (correct) {
-                  cls += "bg-emerald-500 text-white";
-                } else {
-                  const expected = item.sentence.split(" ")[wi];
-                  cls += word === expected
-                    ? "bg-emerald-500 text-white"
-                    : "bg-red-500 text-white";
-                }
-                return (
-                  <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
-                    {word}
-                  </button>
-                );
-              })}
+            {/* Number + answer line */}
+            <div className="flex items-end gap-2">
+              <span className="shrink-0 pb-1 text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</span>
+              <div className="flex min-h-9 flex-1 flex-wrap items-end gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 pb-1">
+                {arr.map((word, wi) => {
+                  let cls = "rounded-full px-2.5 py-0.5 text-sm font-medium transition-colors cursor-pointer ";
+                  if (!validated) {
+                    cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
+                  } else {
+                    cls += word === expectedTokens[wi]
+                      ? "bg-[var(--color-accent-fr)] text-white"
+                      : "bg-amber-500 text-white";
+                  }
+                  return (
+                    <button key={wi} type="button" onClick={() => removeWord(qi, wi)} className={cls}>
+                      {word}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Word pool */}
@@ -1752,9 +1769,9 @@ function WordOrderExercise({
               ))}
             </div>
 
-            {validated && (
-              <p className={`text-xs font-medium ${correct ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
-                {correct ? "✓ Correct !" : `→ ${item.sentence}`}
+            {validated && !correct && (
+              <p className="text-xs font-medium text-amber-500 dark:text-amber-400">
+                → {item.sentence}
               </p>
             )}
           </div>
@@ -1847,35 +1864,50 @@ function ColorHighlightExercise({
 
       {/* Sentences */}
       <div className="space-y-4">
-        {exercise.items.map((item, qi) => (
-          <div key={qi} className="space-y-2">
-            <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
-            <div className="flex flex-wrap gap-1.5">
-              {item.words.map((word, wi) => {
-                const colorIdx = colored[qi]![wi];
-                const expectedIdx = item.answers[wi];
-                const style = colorIdx !== null ? HIGHLIGHT_STYLES[colorIdx] : null;
-                let cls = "cursor-pointer rounded px-2 py-0.5 text-sm font-medium transition-all select-none ";
-                if (validated && colorIdx !== null && expectedIdx !== null) {
-                  cls += colorIdx === expectedIdx
+        {exercise.items.map((item, qi) => {
+          const row = colored[qi]!;
+          const itemCorrect = !validated || item.answers.every((ans, wi) => ans === null || row[wi] === ans);
+          return (
+            <div key={qi} className="space-y-1.5">
+              <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
+
+              {/* User's row — colors stay as-is after validation */}
+              <div className="flex flex-wrap gap-1.5">
+                {item.words.map((word, wi) => {
+                  const colorIdx = row[wi];
+                  const style = colorIdx !== null ? HIGHLIGHT_STYLES[colorIdx] : null;
+                  let cls = `rounded px-2 py-0.5 text-sm font-medium transition-all select-none ${validated ? "cursor-default" : "cursor-pointer"} `;
+                  cls += colorIdx !== null
                     ? `${style!.bg} ${style!.text}`
-                    : "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
-                } else if (validated && colorIdx !== null && expectedIdx === null) {
-                  cls += "bg-red-200 text-red-800 dark:bg-red-900/40 dark:text-red-300 ring-2 ring-red-400";
-                } else if (colorIdx !== null) {
-                  cls += `${style!.bg} ${style!.text}`;
-                } else {
-                  cls += "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-default)]";
-                }
-                return (
-                  <button key={wi} type="button" onClick={() => toggleWord(qi, wi)} className={cls}>
-                    {word}
-                  </button>
-                );
-              })}
+                    : validated
+                      ? "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] opacity-50"
+                      : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-default)]";
+                  return (
+                    <button key={wi} type="button" onClick={() => toggleWord(qi, wi)} className={cls}>
+                      {word}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Correct row — shown below only when the item has errors */}
+              {validated && !itemCorrect && (
+                <div className="flex flex-wrap gap-1.5">
+                  {item.words.map((word, wi) => {
+                    const expectedIdx = item.answers[wi];
+                    const style = expectedIdx !== null ? HIGHLIGHT_STYLES[expectedIdx] : null;
+                    const cls = `rounded px-2 py-0.5 text-sm font-medium select-none cursor-default ${
+                      expectedIdx !== null && style
+                        ? `${style.bg} ${style.text}`
+                        : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]"
+                    }`;
+                    return <span key={wi} className={cls}>{word}</span>;
+                  })}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -1897,19 +1929,16 @@ function PillGroup<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="inline-flex overflow-hidden rounded-full border border-[var(--color-border)] text-xs font-semibold">
+    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} text-xs font-semibold`}>
       {options.map((opt, oi) => {
         const active = value === opt;
+        const userWrong = validated && value !== correct;
         let cls = "px-3 py-1 transition-colors ";
-        if (oi > 0) cls += "border-l border-[var(--color-border)] ";
+        if (oi > 0) cls += `border-l ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} `;
         if (active) {
-          if (!validated) {
-            cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
-          } else if (opt === correct) {
-            cls += "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
-          } else {
-            cls += "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
-          }
+          cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
+        } else if (userWrong && opt === correct) {
+          cls += "text-amber-500 dark:text-amber-400";
         } else {
           cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/10";
         }
@@ -1996,7 +2025,7 @@ function Tag2Exercise({
                   />
                 ) : (
                   /* Invisible spacer — same size as M/F PillGroup so words align */
-                  <div className="inline-flex overflow-hidden rounded-full border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
+                  <div className="inline-flex overflow-hidden rounded-xl border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
                     <span className="px-3 py-1">M</span>
                     <span className="px-3 py-1 border-l border-transparent">F</span>
                   </div>
@@ -2395,7 +2424,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           </div>
         </div>
         {/* Spacer for bottom nav */}
-        <div className="h-[68px]" />
+        <div className="h-[72px]" />
       </div>
     </div>
   );

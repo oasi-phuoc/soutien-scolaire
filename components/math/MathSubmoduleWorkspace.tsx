@@ -1842,7 +1842,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
             </button>
           </div>
         </div>
-        <div style={{ height: 68 }} />
+        <div style={{ height: 72 }} />
       </div>}
     </div>
   );

@@ -41,12 +41,13 @@ function CorrectionInput({
   width?: string;
   placeholder?: string;
 }) {
-  const showCorrection = validated && value.trim() !== correct.trim();
+  const norm = (s: string) => s.trim().replace(".", ",");
+  const showCorrection = validated && norm(value) !== norm(correct);
   if (showCorrection) {
     return (
-      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 bg-amber-50 px-1 text-center font-mono leading-tight`}>
-        {value.trim() && <span className="text-[10px] text-[var(--color-text-secondary)] line-through">{value}</span>}
-        <span className="text-sm font-semibold text-amber-700">{correct}</span>
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono leading-tight`}>
+        {value.trim() && <span className="text-[10px] text-[var(--color-text-primary)]">{value}</span>}
+        <span className="text-sm font-semibold text-amber-600">{correct}</span>
       </span>
     );
   }
@@ -57,13 +58,8 @@ function CorrectionInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         disabled={validated}
-        className={`${width} h-9 rounded border px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 disabled:opacity-80 ${
-          showCorrection
-            ? "border-red-400 bg-red-50 focus:border-red-400 focus:ring-red-200"
-            : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20"
-        }`}
+        className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-80`}
       />
-      {showCorrection && <span className="text-[10px] font-semibold text-green-600">✓ {correct}</span>}
     </span>
   );
 }

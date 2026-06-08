@@ -2077,7 +2077,7 @@ export function A4ModuleContent() {
             </button>
           </div>
         </div>
-        <div style={{ height: 68 }} />
+        <div style={{ height: 72 }} />
       </div>
     </div>
   );

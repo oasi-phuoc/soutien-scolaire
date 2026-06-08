@@ -12,7 +12,7 @@ export type VerbToggleVerb = {
   reflexivePronouns?: string[];
   meaning?: string;
   example?: string;
-  rows: Array<{ pronoun: string; ending: string }>;
+  rows: Array<{ pronoun: string; ending: string; radical?: string }>;
 };
 
 export type TheoryBlock =
@@ -37,7 +37,7 @@ export type Exercise =
   | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts: string[]; verb?: "être" | "avoir" }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number }
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[] }
   | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number }
@@ -64,7 +64,6 @@ import { A1_CONJ_L01 } from "./content/francais/conjugaison-a1-l01";
 import { A1_CONJ_L07 } from "./content/francais/conjugaison-a1-l07";
 import { A1_CONJ_L08 } from "./content/francais/conjugaison-a1-l08";
 import { A1_CONJ_L09 } from "./content/francais/conjugaison-a1-l09";
-import { A1_CONJ_L12 } from "./content/francais/conjugaison-a1-l12";
 import { A1_CONJ_L15 } from "./content/francais/conjugaison-a1-l15";
 import { A1_CONJ_L20 } from "./content/francais/conjugaison-a1-l20";
 import { A1_CONJ_L27 } from "./content/francais/conjugaison-a1-l27";
@@ -89,7 +88,6 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L07,
   A1_CONJ_L08,
   A1_CONJ_L09,
-  A1_CONJ_L12,
   A1_CONJ_L15,
   A1_CONJ_L20,
   A1_CONJ_L27,
