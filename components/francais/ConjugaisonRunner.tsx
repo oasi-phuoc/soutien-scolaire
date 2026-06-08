@@ -829,9 +829,9 @@ function FillExercise({
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct ? (
-          <span className="inline-flex h-8 w-28 flex-col items-center justify-center rounded-xl border border-amber-400 mx-1 px-2 align-middle">
+          <span className="inline-flex h-8 w-28 flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle">
             <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
-            <span className="mt-0.5 text-[10px] leading-none font-bold text-amber-500 dark:text-amber-400">{item.answer}</span>
+            <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500 dark:text-amber-400">{item.answer}</span>
           </span>
         ) : (
           <input
@@ -839,7 +839,7 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
-            className="inline-block h-8 w-28 rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-amber-500"
+            className="inline-block h-8 w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-[var(--color-accent-fr)]"
           />
         );
 
