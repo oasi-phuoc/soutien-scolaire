@@ -16,7 +16,6 @@ export const MATH_A5_3_LESSON: MathSubmoduleLesson = {
           ],
         },
         { type: "plain", fr: "" },
-        { type: "heading", fr: "Exemples", black: false },
         {
           type: "table",
           headersFr: ["Nombre", "Arrondi à", "Chiffre suivant", "Résultat"],
@@ -29,7 +28,12 @@ export const MATH_A5_3_LESSON: MathSubmoduleLesson = {
             ["12,45", "unité",    "4 < 5", "→ 12"],
           ],
         },
-        { type: "note", fr: "Après l'arrondi, on supprime les chiffres après la position arrondie." },
+        { type: "highlight", fr: "Astuce" },
+        {
+          type: "section", labelFr: "", itemsFr: [
+            "Après l'arrondi, on supprime les chiffres après la position arrondie.",
+          ],
+        },
       ],
       paragraphs: { fr: [] },
     },
