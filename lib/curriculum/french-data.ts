@@ -119,7 +119,7 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-phrases", "G.6", "Les phrases",                                "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",     "grammaire"),
   lesson("A1", "a1-gr-l02",   "G.7",  "La négation",                                 "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
   lesson("A1", "a1-gr-interro", "G.8",  "L'interrogation de base",              "Est-ce que et l'intonation montante : construire une question simple.",               "grammaire"),
-  lesson("A1", "a1-conj-l08", "G.9",  "Les verbes aller et venir",                   "Conjuguer aller et venir au présent + prépositions de lieu (à, au, aux, en).",           "conjugaison"),
+  lesson("A1", "a1-conj-l08", "G.9",  "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
   lesson("A1", "a1-conj-l09", "G.10",  "Les verbes pronominaux",                      "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",                        "conjugaison"),
   lesson("A1", "a1-conj-l12", "G.11",  "Les verbes de mouvement",                     "Partir, arriver, entrer, sortir, monter, descendre au présent.",                         "conjugaison"),
   lesson("A1", "a1-conj-l15", "G.12", "Vouloir, pouvoir, devoir",                    "Les trois verbes modaux essentiels : conjugaison et emploi au présent.",                  "conjugaison"),
