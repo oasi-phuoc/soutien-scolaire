@@ -5526,8 +5526,8 @@ export function GenericModuleContent({
       {/* Decimal ordering exercise (A5.2) */}
       {!showEvalScore && currentStep?.kind === "dec_ordering" && activeDecOrderingConfig && (
         <div className="space-y-4">
-          <div className="flex items-baseline gap-2">
-            <span className="shrink-0 text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</span>
+          <div>
+            <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">
               {activeDecOrderingConfig.direction === "desc"
                 ? "Classez les nombres dans l’ordre décroissant (plus grand au plus petit)."
