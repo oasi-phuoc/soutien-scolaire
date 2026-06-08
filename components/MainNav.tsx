@@ -17,7 +17,7 @@ export function MainNav() {
   const { showPivot, togglePivot } = useTranslation();
 
   const itemClass = (active: boolean) =>
-    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
+    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[24px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
       active
         ? "bg-[var(--color-theme)]/14 text-[var(--color-theme)] shadow-sm ring-1 ring-[var(--color-theme)]/18"
         : "text-zinc-500 hover:-translate-y-0.5 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/80 dark:hover:text-zinc-100"

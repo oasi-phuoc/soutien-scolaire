@@ -619,7 +619,7 @@ function QcmExercise({
             if (isSelected && !isCorrect) {
               cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             } else if (!isSelected && isCorrect && userWrong) {
-              cls += "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500 font-semibold";
+              cls += "text-amber-500 dark:text-amber-400 font-semibold";
             } else {
               cls += isSelected
                 ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
@@ -692,7 +692,7 @@ function QcmExercise({
                         "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
                     } else if (!isSelected && isCorrect && userWrong) {
                       cls +=
-                        "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-500 dark:border-amber-600 font-semibold";
+                        "border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold";
                     } else {
                       cls += isSelected
                         ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -829,9 +829,9 @@ function FillExercise({
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
         const inputEl = validated && !correct ? (
-          <span className="inline-flex flex-col items-center justify-center rounded-lg border border-amber-400 mx-1 px-2 py-0.5 w-28 align-middle">
-            <span className="text-xs leading-tight text-amber-500 dark:text-amber-400">{userAnswer || "—"}</span>
-            <span className="text-sm font-bold leading-tight text-zinc-900 dark:text-zinc-100">{item.answer}</span>
+          <span className="inline-flex h-8 w-28 flex-col items-center justify-center rounded-xl border border-amber-400 mx-1 px-2 align-middle">
+            <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
+            <span className="mt-0.5 text-[10px] leading-none font-bold text-amber-500 dark:text-amber-400">{item.answer}</span>
           </span>
         ) : (
           <input
@@ -839,7 +839,7 @@ function FillExercise({
             value={userAnswer}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
             disabled={validated}
-            className="inline-block w-28 rounded-lg border border-[var(--color-accent-fr)] bg-transparent px-2 py-0.5 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-amber-500"
+            className="inline-block h-8 w-28 rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 text-center text-sm font-semibold text-[var(--color-text-primary)] outline-none mx-1 transition-colors focus:border-amber-500"
           />
         );
 
@@ -1606,19 +1606,24 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className="flex overflow-hidden rounded-full border border-[var(--color-border-default)]">
+              <div className="flex overflow-hidden rounded-xl border border-[var(--color-border-default)]">
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
+                  const userWrong = validated && !isRight;
                   let cls = "flex-1 py-1.5 text-center text-xs font-semibold transition-colors ";
                   if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
-                  if (!active) {
-                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
-                  } else if (!validated) {
-                    cls += "bg-[var(--color-accent-fr)] text-white";
-                  } else if (isRight) {
-                    cls += "bg-emerald-500 text-white";
+                  if (active) {
+                    if (!validated) {
+                      cls += "bg-[var(--color-accent-fr)] text-white";
+                    } else if (isRight) {
+                      cls += "bg-emerald-500 text-white";
+                    } else {
+                      cls += "bg-[var(--color-accent-fr)] text-white";
+                    }
+                  } else if (userWrong && ci === item.categoryIdx) {
+                    cls += "text-amber-500 dark:text-amber-400";
                   } else {
-                    cls += "bg-red-500 text-white";
+                    cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
                   }
                   return (
                     <button
@@ -1893,9 +1898,10 @@ function PillGroup<T extends string>({
   onChange: (v: T) => void;
 }) {
   return (
-    <div className="inline-flex overflow-hidden rounded-full border border-[var(--color-border)] text-xs font-semibold">
+    <div className="inline-flex overflow-hidden rounded-xl border border-[var(--color-border)] text-xs font-semibold">
       {options.map((opt, oi) => {
         const active = value === opt;
+        const userWrong = validated && value !== correct;
         let cls = "px-3 py-1 transition-colors ";
         if (oi > 0) cls += "border-l border-[var(--color-border)] ";
         if (active) {
@@ -1904,8 +1910,10 @@ function PillGroup<T extends string>({
           } else if (opt === correct) {
             cls += "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400";
           } else {
-            cls += "bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400";
+            cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
           }
+        } else if (userWrong && opt === correct) {
+          cls += "text-amber-500 dark:text-amber-400";
         } else {
           cls += "text-[var(--color-text-secondary)] hover:bg-[var(--color-accent-fr)]/10";
         }
@@ -1992,7 +2000,7 @@ function Tag2Exercise({
                   />
                 ) : (
                   /* Invisible spacer — same size as M/F PillGroup so words align */
-                  <div className="inline-flex overflow-hidden rounded-full border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
+                  <div className="inline-flex overflow-hidden rounded-xl border border-transparent text-xs font-semibold opacity-0 pointer-events-none select-none" aria-hidden>
                     <span className="px-3 py-1">M</span>
                     <span className="px-3 py-1 border-l border-transparent">F</span>
                   </div>
