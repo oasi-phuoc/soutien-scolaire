@@ -856,7 +856,7 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
   const a = isAdd ? block.addA : block.subA;
   const b = isAdd ? block.addB : block.subB;
   const steps = isAdd ? block.addSteps : block.subSteps;
-  const noteFr = isAdd ? block.addNoteFr : block.subNoteFr;
+  const _noteFr = isAdd ? block.addNoteFr : block.subNoteFr;
   const op = isAdd ? "+" : "−";
   const carryLabel = isAdd ? "R" : "E";
 
@@ -1248,11 +1248,21 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
   );
 }
 
-export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: { submoduleId: string; moduleId: string; startAtEval?: boolean }) {
+export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {
   const router = useRouter();
-  const lesson = getLessonBySubmoduleId(submoduleId);
+  const lesson = getLessonBySubmoduleId(submoduleId ?? "");
 
-  const [steps] = useState<WorkspaceStep[]>(() => (lesson ? buildSteps(lesson) : []));
+  const [steps] = useState<WorkspaceStep[]>(() => {
+    if (directRevisionMode) {
+      const evalSteps = buildRevisionEvalSteps(moduleId);
+      return [
+        { kind: "eval_start" },
+        ...evalSteps,
+        evalSteps.length > 0 ? { kind: "results" as const } : { kind: "pass_toggle" as const },
+      ];
+    }
+    return lesson ? buildSteps(lesson) : [];
+  });
 
   const evalStartIdx = steps.findIndex((s) => s.kind === "eval_start");
   const initialIdx = startAtEval && evalStartIdx >= 0 ? evalStartIdx : 0;
@@ -1273,7 +1283,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showHint, setShowHint] = useState(false);
 
-  const isRevisionLesson = /^(RA|RG)-\d+$/i.test(submoduleId);
+  const isRevisionLesson = !!directRevisionMode || /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -1337,14 +1347,14 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
   //            keep workspace step builder only for A4 and A7 parents (custom step types).
   const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4";
-  const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId);
+  const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
   if (isRevision) {
-    const revParent = getParentModuleForRevision(submoduleId);
+    const revParent = getParentModuleForRevision(submoduleId ?? "");
     if (revParent && revParent !== "A4" && revParent !== "A5" && revParent !== "A7") {
       return <GenericModuleContent moduleId={revParent} revisionMode={true} />;
     }
   }
-  if (moduleId !== "A4" && !isCustomA5 && !isRevision) {
+  if (!directRevisionMode && moduleId !== "A4" && !isCustomA5 && !isRevision) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
 
@@ -1360,7 +1370,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div"]);
   const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
-  const revisionTitle = isRevisionLesson ? getMathModule(moduleId)?.title : null;
+  const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
   function goBack() {
     if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
@@ -1377,7 +1387,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
   }
 
   function finishEval(passed: boolean, correct?: number, total?: number) {
-    if (!lesson) { router.push("/mathematiques"); return; }
+    if (directRevisionMode || !lesson) { router.push("/mathematiques"); return; }
     if (!isRevisionLesson) {
       const c = correct ?? (passed ? 1 : 0);
       const t = total ?? 1;
@@ -1438,7 +1448,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
     ? exStatus === "correct"
     : !canValidate;
 
-  if (!lesson || steps.length === 0) {
+  if ((!lesson && !directRevisionMode) || steps.length === 0) {
     return <p className="text-sm text-[var(--color-text-secondary)]">Contenu non disponible.</p>;
   }
 
@@ -1494,7 +1504,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
       )}
 
       {/* Theory */}
-      {currentStep?.kind === "theory" && <TheoryView lesson={lesson} />}
+      {currentStep?.kind === "theory" && lesson && <TheoryView lesson={lesson} />}
 
       {/* A4-1 custom exercises */}
       {currentStep?.kind === "fraction_toggle" && (
@@ -1694,7 +1704,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval }: {
           </div>
           <div className="space-y-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
-            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{revisionTitle ?? lesson.theory.title.fr}</h2>
+            <h2 className="text-xl font-bold text-[var(--color-text-primary)]">{revisionTitle ?? lesson?.theory.title.fr}</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {isRevisionLesson ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
             <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>

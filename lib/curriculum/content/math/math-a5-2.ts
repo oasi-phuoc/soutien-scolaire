@@ -39,7 +39,11 @@ export const MATH_A5_2_LESSON: MathSubmoduleLesson = {
       ],
       paragraphs: { fr: [] },
     },
-    exercises: [],
+    exercises: [
+      { id: "a5-2-e1", promptFr: "Classez du plus petit au plus grand : 2,5 ; 2,15 ; 2,51", type: "short_text" as const, acceptable: ["2,15 ; 2,5 ; 2,51", "2.15 ; 2.5 ; 2.51"] },
+      { id: "a5-2-e2", promptFr: "Donnez le terme manquant : 1,2 ; 1,5 ; ___ ; 2,1", type: "short_text" as const, acceptable: ["1,8", "1.8"] },
+      { id: "a5-2-e3", promptFr: "Classez du plus grand au plus petit : 0,3 ; 0,13 ; 0,31", type: "short_text" as const, acceptable: ["0,31 ; 0,3 ; 0,13", "0.31 ; 0.3 ; 0.13"] },
+    ],
     exercisePool: [],
-    poolSize: 5,
+    poolSize: 3,
   };
