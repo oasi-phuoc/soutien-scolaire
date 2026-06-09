@@ -302,6 +302,23 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                     </div>
                   )}
 
+                  {/* Revision evaluation button */}
+                  {expanded && hydrated && (isAdmin || allNonRevisionCompleted) && (
+                    <div className="border-t border-[var(--color-border-default)] px-4 py-3">
+                      <button
+                        type="button"
+                        onClick={(e) => { e.stopPropagation(); router.push(`/mathematiques/${m.id}/evaluation`); }}
+                        className="flex w-full items-center gap-2.5 rounded-[var(--radius-base)] px-3 py-2.5 text-sm font-semibold transition-colors"
+                        style={{ color: accentColor, background: `color-mix(in srgb, ${accentColor} 10%, transparent)` }}
+                      >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                          <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+                        </svg>
+                        Évaluation de révision
+                      </button>
+                    </div>
+                  )}
+
                   {/* Submodule list */}
                   {expanded && m.submodules.length > 0 && (
                     <ul className="divide-y divide-[var(--color-border-default)] border-t border-[var(--color-border-default)]">

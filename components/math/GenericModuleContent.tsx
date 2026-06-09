@@ -5335,52 +5335,45 @@ export function GenericModuleContent({
           <div className="space-y-6">
             {activeOrderingConfig.questions.map((q, qi) => {
               const sel = orderingSelected[qi] ?? [];
+              const available = q.numbers.filter(n => !sel.includes(n));
               const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
               const ok = orderingValidated ? orderingResults[qi] : null;
               const sep = activeOrderingConfig.direction === "asc" ? "<" : ">";
+              const chipBase = "w-20 flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+              const toggleChip = (n: number) => {
+                if (orderingValidated) return;
+                setOrderingSelected(prev => {
+                  const next = prev.map(a => [...a]);
+                  const cur = next[qi] ?? [];
+                  next[qi] = cur.includes(n) ? cur.filter(x => x !== n) : [...cur, n];
+                  return next;
+                });
+              };
               return (
-                <div key={qi} className="space-y-2">
-                  <div className="flex flex-wrap gap-2">
-                    {q.numbers.map((n, ni) => {
-                      const isSelected = sel.includes(n);
-                      const selIdx = sel.indexOf(n);
-                      let cls = "w-20 shrink-0 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
-                      if (!orderingValidated) {
-                        cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
-                      } else {
-                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                        else if (isSelected) cls += CLS_WRONG;
-                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
-                      }
-                      return (
-                        <button key={ni} type="button" disabled={orderingValidated}
-                          onClick={() => {
-                            setOrderingSelected(prev => {
-                              const next = prev.map(a => [...a]);
-                              const cur = next[qi] ?? [];
-                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
-                              else { next[qi] = [...cur, n]; }
-                              return next;
-                            });
-                          }}
-                          className={cls}>
+                <div key={qi} className="space-y-3">
+                  {available.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {available.map((n, ni) => (
+                        <button key={ni} type="button" disabled={orderingValidated} onClick={() => toggleChip(n)}
+                          className={chipBase + (orderingValidated
+                            ? "cursor-default border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40"
+                            : "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]")}>
                           {n.toLocaleString("fr-CH")}
                         </button>
-                      );
-                    })}
-                  </div>
-                  <div className="space-y-0.5">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
-                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
-                      {sel.length > 0 ? sel.map((n, si) => (
-                        <Fragment key={si}>
-                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
-                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
-                        </Fragment>
-                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                      ))}
                     </div>
+                  )}
+                  <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+                    <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {sel.map((n, si) => (
+                      <Fragment key={si}>
+                        <button type="button" disabled={orderingValidated} onClick={() => toggleChip(n)}
+                          className={chipBase + (orderingValidated ? "cursor-default" : "cursor-pointer") + " border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"}>
+                          {n.toLocaleString("fr-CH")}
+                        </button>
+                        {si < sel.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
+                      </Fragment>
+                    ))}
                   </div>
                   {orderingValidated && ok === false && (
                     <div className="flex flex-wrap items-center gap-1">
@@ -5509,48 +5502,41 @@ export function GenericModuleContent({
               const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
               const ok = decOrderingValidated ? decOrderingResults[qi] : null;
               const sep = activeDecOrderingConfig.direction === "asc" ? "<" : ">";
+              const available = q.hundredths.filter(n => !sel.includes(n));
+              const chipBase = "w-[4.5rem] flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+              const toggleChip = (n: number) => {
+                if (decOrderingValidated) return;
+                setDecOrderingSelected(prev => {
+                  const next = prev.map(a => [...a]);
+                  const cur = next[qi] ?? [];
+                  next[qi] = cur.includes(n) ? cur.filter(x => x !== n) : [...cur, n];
+                  return next;
+                });
+              };
               return (
-                <div key={qi} className="space-y-2">
-                  <div className="flex flex-wrap gap-2">
-                    {q.hundredths.map((n, ni) => {
-                      const isSelected = sel.includes(n);
-                      const selIdx = sel.indexOf(n);
-                      let cls = "w-16 flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-mono font-bold transition-colors ";
-                      if (!decOrderingValidated) {
-                        cls += isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-                          : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
-                      } else {
-                        if (isSelected && sorted[selIdx] === n) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                        else if (isSelected) cls += CLS_WRONG;
-                        else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
-                      }
-                      return (
-                        <button key={ni} type="button" disabled={decOrderingValidated}
-                          onClick={() => {
-                            setDecOrderingSelected(prev => {
-                              const next = prev.map(a => [...a]);
-                              const cur = next[qi] ?? [];
-                              if (cur.includes(n)) { next[qi] = cur.filter(x => x !== n); }
-                              else { next[qi] = [...cur, n]; }
-                              return next;
-                            });
-                          }}
-                          className={cls}>
-                          {fmtDec(n)}
-                        </button>
-                      );
-                    })}
-                  </div>
-                  <div className="space-y-0.5">
-                    <span className="text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}. Votre ordre :</span>
-                    <div className="flex flex-wrap items-center gap-1 min-h-[1.5rem]">
-                      {sel.length > 0 ? sel.map((n, si) => (
+                <div key={qi} className="space-y-3">
+                  <div className="space-y-3">
+                    {available.length > 0 && (
+                      <div className="flex flex-wrap gap-2">
+                        {available.map((n, ni) => (
+                          <button key={ni} type="button" disabled={decOrderingValidated} onClick={() => toggleChip(n)}
+                            className={chipBase + "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]"}>
+                            {fmtDec(n)}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                    <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+                      <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                      {sel.map((n, si) => (
                         <Fragment key={si}>
-                          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
-                          {si < sel.length - 1 && <span className="text-[var(--color-text-secondary)] text-xs">{sep}</span>}
+                          <button type="button" disabled={decOrderingValidated} onClick={() => toggleChip(n)}
+                            className={chipBase + (decOrderingValidated ? "cursor-default" : "cursor-pointer") + " border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"}>
+                            {fmtDec(n)}
+                          </button>
+                          {si < sel.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
                         </Fragment>
-                      )) : <span className="text-xs text-[var(--color-text-secondary)] italic">—</span>}
+                      ))}
                     </div>
                   </div>
                   {decOrderingValidated && ok === false && (

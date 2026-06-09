@@ -252,10 +252,10 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 18 — Sort numbers (click mechanism) ─────────────────────────────
 
-function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28" }: {
+function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28", numberLabel }: {
   numbers: number[]; selected: number[];
   onToggle: (n: number) => void; validated: boolean;
-  fmt: (n: number) => string; desc?: boolean; chipW?: string;
+  fmt: (n: number) => string; desc?: boolean; chipW?: string; numberLabel?: string;
 }) {
   const available = numbers.filter(n => !selected.includes(n));
 
@@ -278,6 +278,9 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
         </div>
       )}
       <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+        {numberLabel && (
+          <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{numberLabel}</span>
+        )}
         {selected.length > 0
           ? selected.map((n, si) => (
             <React.Fragment key={si}>
@@ -363,20 +366,14 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-5">
       <p className="text-sm text-[var(--color-text-secondary)]">Classez les nombres dans l&apos;ordre demandée.</p>
       <div className="space-y-3">
-        <div className="flex items-start gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
-          <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
-        </div>
+        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" />
+          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" numberLabel="1." />
       </div>
       <div className="space-y-3">
-        <div className="flex items-start gap-2">
-          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
-          <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
-        </div>
+        <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" />
+          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" numberLabel="2." />
       </div>
     </div>
   );

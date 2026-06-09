@@ -4224,7 +4224,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         return (
                           <g key={ai}>
                             {/* Shaft */}
-                            <line x1={x} y1={bY + boxH} x2={x} y2={arrowTipY - 4} stroke="#374151" strokeWidth="1.5" />
+                            <line x1={x} y1={bY + boxH} x2={x} y2={arrowTipY - 7} stroke="#374151" strokeWidth="1.5" strokeLinecap="butt" />
                             {/* Arrowhead */}
                             <polygon points={`${x},${arrowTipY} ${x - 4},${arrowTipY - 7} ${x + 4},${arrowTipY - 7}`} fill="#374151" />
                             {/* Box */}
@@ -4305,7 +4305,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const fill = result === false ? "#FEF3C7" : "#DBEAFE";
                         return (
                           <g key={ai}>
-                            <line x1={x} y1={bY+boxH} x2={x} y2={arrowTipY-4} stroke="#374151" strokeWidth="1.5"/>
+                            <line x1={x} y1={bY+boxH} x2={x} y2={arrowTipY-7} stroke="#374151" strokeWidth="1.5" strokeLinecap="butt"/>
                             <polygon points={`${x},${arrowTipY} ${x-4},${arrowTipY-7} ${x+4},${arrowTipY-7}`} fill="#374151"/>
                             <rect x={boxX} y={bY} width={boxW} height={boxH} rx="4" fill={fill} stroke={stroke} strokeWidth="1.5"/>
                             {ex18Validated ? (
