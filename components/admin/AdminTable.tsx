@@ -359,11 +359,11 @@ function DetailModal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
       <div
-        className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900"
+        className="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-xl dark:bg-zinc-900 max-h-[90vh] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="mb-4 flex items-start justify-between gap-3">
+        {/* Header — fixed, not scrollable */}
+        <div className="shrink-0 px-5 pt-5 pb-3 flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h2>
@@ -388,129 +388,134 @@ function DetailModal({
           </button>
         </div>
 
-        {/* Info */}
-        <div className="mb-4 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
-          <p className="font-mono text-sm font-semibold text-teal-700 dark:text-teal-400">
-            {user.login_id ?? user.email.replace(/@soutien\.local$/, "")}
-          </p>
-          {user.langue && (
-            <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-              🌐 {LANGUE_LABELS[user.langue] ?? user.langue}
+        {/* Scrollable body */}
+        <div className="flex-1 overflow-y-auto px-5 pb-2">
+
+          {/* Info */}
+          <div className="mb-3 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="font-mono text-sm font-semibold text-teal-700 dark:text-teal-400">
+              {user.login_id ?? user.email.replace(/@soutien\.local$/, "")}
             </p>
-          )}
-          {user.adresse && <p>{user.adresse}</p>}
-          {location && <p>{location}</p>}
-          {user.telephone && <p>{user.telephone}</p>}
-          <p className="pt-1 text-xs text-zinc-400 dark:text-zinc-500">Dernier accès : {lastSeen(activity)}</p>
+            {user.langue && (
+              <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                🌐 {LANGUE_LABELS[user.langue] ?? user.langue}
+              </p>
+            )}
+            {user.adresse && <p>{user.adresse}</p>}
+            {location && <p>{location}</p>}
+            {user.telephone && <p>{user.telephone}</p>}
+            <p className="pt-1 text-xs text-zinc-400 dark:text-zinc-500">Dernier accès : {lastSeen(activity)}</p>
+          </div>
+
+          {/* Progress */}
+          <div className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+
+            {/* Maths */}
+            <div>
+              <button onClick={() => setMathOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+                <span className="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${mathOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                  Maths
+                </span>
+                <span>{math.done}/{math.total}</span>
+              </button>
+              <Bar pct={math.pct} color="bg-blue-500" />
+              {mathOpen && (
+                <div className="mt-2 space-y-1">
+                  {mathBranches.map(b => (
+                    <div key={b.branch}>
+                      <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                        <span className="font-medium">{b.label}</span>
+                        <span>{b.done}/{b.total}</span>
+                      </div>
+                      {b.inProgress.map(m => (
+                        <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
+                          ↳ {m.code} – {m.title}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Français */}
+            <div>
+              <button onClick={() => setFrenchOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+                <span className="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${frenchOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                  Français
+                </span>
+                <span>{french.done}/{french.total}</span>
+              </button>
+              <Bar pct={french.pct} color="bg-emerald-500" />
+              {frenchOpen && (
+                <div className="mt-2 space-y-1">
+                  {frenchTabs.map(t => (
+                    <div key={t.tab}>
+                      <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                        <span className="font-medium">{t.label}</span>
+                        <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                      </div>
+                      {t.inProgress && (
+                        <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
+                          ↳ {t.inProgress.code} – {t.inProgress.title}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Lecture */}
+            <div>
+              <button onClick={() => setLectureOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+                <span className="flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${lectureOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                  Lecture
+                </span>
+                <span>{lecture.done}/{lecture.total}</span>
+              </button>
+              <Bar pct={lecture.pct} color="bg-amber-500" />
+              {lectureOpen && (
+                <div className="mt-2 space-y-1">
+                  {lectureItems.map(m => (
+                    <div key={m.id}>
+                      <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                        <span className="font-medium">{m.code} – {m.title}</span>
+                        <span>{m.subDone}/{m.subTotal}</span>
+                      </div>
+                      {m.inProgress.length > 0
+                        ? m.inProgress.map(l => (
+                            <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                              ↳ Lettre {l.letter}
+                            </p>
+                          ))
+                        : m.currentLetter && (
+                            <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
+                              ↳ Lettre {m.currentLetter.letter}
+                            </p>
+                          )
+                      }
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+          </div>
+
+          {/* Password change */}
+          {user.role !== "admin" && <PasswordSection userId={user.id} />}
+
         </div>
 
-        {/* Progress */}
-        <div className="mb-4 space-y-4 rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
-
-          {/* Maths */}
-          <div>
-            <button onClick={() => setMathOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
-              <span className="flex items-center gap-1">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${mathOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
-                Maths
-              </span>
-              <span>{math.done}/{math.total}</span>
-            </button>
-            <Bar pct={math.pct} color="bg-blue-500" />
-            {mathOpen && (
-              <div className="mt-2 space-y-1">
-                {mathBranches.map(b => (
-                  <div key={b.branch}>
-                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                      <span className="font-medium">{b.label}</span>
-                      <span>{b.done}/{b.total}</span>
-                    </div>
-                    {b.inProgress.map(m => (
-                      <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">
-                        ↳ {m.code} – {m.title}
-                      </p>
-                    ))}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Français */}
-          <div>
-            <button onClick={() => setFrenchOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
-              <span className="flex items-center gap-1">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${frenchOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
-                Français
-              </span>
-              <span>{french.done}/{french.total}</span>
-            </button>
-            <Bar pct={french.pct} color="bg-emerald-500" />
-            {frenchOpen && (
-              <div className="mt-2 space-y-1">
-                {frenchTabs.map(t => (
-                  <div key={t.tab}>
-                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                      <span className="font-medium">{t.label}</span>
-                      <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
-                    </div>
-                    {t.inProgress && (
-                      <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">
-                        ↳ {t.inProgress.code} – {t.inProgress.title}
-                      </p>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Lecture */}
-          <div>
-            <button onClick={() => setLectureOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
-              <span className="flex items-center gap-1">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${lectureOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
-                Lecture
-              </span>
-              <span>{lecture.done}/{lecture.total}</span>
-            </button>
-            <Bar pct={lecture.pct} color="bg-amber-500" />
-            {lectureOpen && (
-              <div className="mt-2 space-y-1">
-                {lectureItems.map(m => (
-                  <div key={m.id}>
-                    <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
-                      <span className="font-medium">{m.code} – {m.title}</span>
-                      <span>{m.subDone}/{m.subTotal}</span>
-                    </div>
-                    {m.inProgress.length > 0
-                      ? m.inProgress.map(l => (
-                          <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                            ↳ Lettre {l.letter}
-                          </p>
-                        ))
-                      : m.currentLetter && (
-                          <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">
-                            ↳ Lettre {m.currentLetter.letter}
-                          </p>
-                        )
-                    }
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-        </div>
-
-        {/* Password change */}
-        {user.role !== "admin" && <PasswordSection userId={user.id} />}
-
-        {/* Actions */}
-        <div className="flex items-center gap-2">
+        {/* Actions — fixed at bottom */}
+        <div className="shrink-0 px-5 py-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-2">
           <button
             onClick={onEdit}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60"
+            className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60"
             aria-label="Modifier"
           >
             <IconEdit />
@@ -519,7 +524,7 @@ function DetailModal({
           {canDelete && (
             <button
               onClick={onDelete}
-              className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-400 dark:hover:bg-red-900/60"
+              className="flex h-10 w-10 items-center justify-center rounded-2xl bg-red-100 text-red-600 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-400 dark:hover:bg-red-900/60"
               aria-label="Supprimer"
             >
               <IconTrash />

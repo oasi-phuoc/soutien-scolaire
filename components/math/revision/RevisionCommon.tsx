@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { Fragment, useEffect, useMemo, useState } from "react";
 
 export interface RevisionExerciseProps {
   exerciseKey: number;
@@ -94,6 +94,49 @@ export function CorrectionInput({
         className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-80`}
       />
     </span>
+  );
+}
+
+export function OrderingChips({
+  numbers, selected, onToggle, validated, desc = false, numberLabel,
+}: {
+  numbers: number[]; selected: number[];
+  onToggle: (n: number) => void; validated: boolean;
+  desc?: boolean; numberLabel?: string;
+}) {
+  const available = numbers.filter(n => !selected.includes(n));
+  const chipCls = "w-20 flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+  return (
+    <div className="space-y-3">
+      {available.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {available.map((n, ni) => (
+            <button key={ni} type="button" disabled={validated} onClick={() => onToggle(n)}
+              className={chipCls + (validated
+                ? "cursor-default border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40"
+                : "cursor-pointer border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]")}>
+              {n}
+            </button>
+          ))}
+        </div>
+      )}
+      <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+        {numberLabel && (
+          <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{numberLabel}</span>
+        )}
+        {selected.map((n, si) => (
+          <Fragment key={si}>
+            <button type="button" disabled={validated} onClick={() => onToggle(n)}
+              className={chipCls + (validated ? "cursor-default" : "cursor-pointer") + " border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] text-white"}>
+              {n}
+            </button>
+            {si < selected.length - 1 && (
+              <span className="text-sm font-bold text-[var(--color-text-secondary)]">{desc ? ">" : "<"}</span>
+            )}
+          </Fragment>
+        ))}
+      </div>
+    </div>
   );
 }
 
