@@ -358,7 +358,6 @@ function DetailModal({
     getPlacementHistoryForUserAction(user.id).then(res => {
       if (res.ok) setPlacementHistory(res.history);
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.id]);
 
   const isSelf = user.id === currentUserId;

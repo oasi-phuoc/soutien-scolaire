@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useMemo, useState } from "react";
-import { CorrectionInput, OrderingChips, PoolExercise, makeRng, seededShuffle } from "./RevisionCommon";
+import { OrderingChips, PoolExercise, makeRng, seededShuffle } from "./RevisionCommon";
 import type { RevisionExerciseMeta, RevisionExerciseProps, PoolQuestion } from "./RevisionCommon";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
@@ -512,7 +512,7 @@ function A1Ex8({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
     const genSeries = (seed: number) => {
       const r = makeRng(seed);
       const f2a = r.int(10, 97);
-      let n1 = f2a * 100 + r.int(1, 98);
+      const n1 = f2a * 100 + r.int(1, 98);
       let n2 = f2a * 100 + r.int(1, 98);
       while (n2 === n1) n2 = f2a * 100 + r.int(1, 98);
       const l2 = r.int(1, 98);
