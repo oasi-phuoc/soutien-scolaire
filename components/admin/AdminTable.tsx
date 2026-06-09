@@ -975,7 +975,7 @@ export function AdminTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-violet-700 bg-violet-600 dark:border-violet-800 dark:bg-violet-700">
-              {["Statut", "Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Test M", ""].map((h, i) => (
+              {["Statut", "Prénom, Nom", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Test M", ""].map((h, i) => (
                 <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-violet-100">{h}</th>
               ))}
             </tr>
