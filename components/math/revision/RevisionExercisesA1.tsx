@@ -1,30 +1,117 @@
-"use client";
-
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { OrderingChips, PoolExercise, makeRng, seededShuffle } from "./RevisionCommon";
-import type { RevisionExerciseMeta, RevisionExerciseProps, PoolQuestion } from "./RevisionCommon";
+import { OrderingChips, makeRng, seededShuffle } from "./RevisionCommon";
+import type { RevisionExerciseMeta, RevisionExerciseProps } from "./RevisionCommon";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
-// ─── Exercise 1 — Écrire les nombres en chiffres (3 pts) — A1.1 Exercise 5 ───
+// ─── Exercise 1 — Audio → chiffres (3 pts) — A1.1 Exercise 5 ─────────────────
 
-const A1_1_POOL: PoolQuestion[] = [
-  { promptFr: "Écrivez en chiffres : 3 milliers, 5 centaines, 2 dizaines et 7 unités", acceptable: ["3527"] },
-  { promptFr: "Écrivez en chiffres : 7 milliers, 1 centaine, 4 dizaines et 0 unités", acceptable: ["7140"] },
-  { promptFr: "Écrivez en chiffres : 2 milliers, 8 centaines, 0 dizaines et 6 unités", acceptable: ["2806"] },
-  { promptFr: "Écrivez en chiffres : 5 milliers, 3 centaines, 9 dizaines et 2 unités", acceptable: ["5392"] },
-  { promptFr: "Écrivez en chiffres : 1 millier, 6 centaines, 5 dizaines et 4 unités", acceptable: ["1654"] },
-  { promptFr: "Écrivez en chiffres : 9 milliers, 0 centaines, 3 dizaines et 8 unités", acceptable: ["9038"] },
-  { promptFr: "Écrivez en chiffres : 4 milliers, 7 centaines, 1 dizaine et 5 unités", acceptable: ["4715"] },
-  { promptFr: "Écrivez en chiffres : 6 milliers, 2 centaines, 8 dizaines et 3 unités", acceptable: ["6283"] },
-  { promptFr: "Écrivez en chiffres : 8 milliers, 4 centaines, 6 dizaines et 1 unité", acceptable: ["8461"] },
-  { promptFr: "Écrivez en chiffres : 3 milliers, 9 centaines, 7 dizaines et 0 unités", acceptable: ["3970"] },
-  { promptFr: "Écrivez en chiffres : 2 milliers, 0 centaines, 5 dizaines et 9 unités", acceptable: ["2059"] },
-  { promptFr: "Écrivez en chiffres : 7 milliers, 3 centaines, 0 dizaines et 4 unités", acceptable: ["7304"] },
-];
+const CENTAINES = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+const DIZAINES  = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+const SPECIAUX  = Array.from({ length: 88 }, (_, i) => i + 12).filter(n => n % 10 !== 0);
+const UNITES    = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function A1Ex1(props: RevisionExerciseProps) {
-  return <PoolExercise {...props} pool={A1_1_POOL} count={3} />;
+function makeAudioQ(rng: ReturnType<typeof makeRng>): { clips: string[]; answer: number } {
+  const hasCentaine = rng.int(0, 2) === 0;
+  if (!hasCentaine) {
+    if (rng.int(0, 1) === 0) {
+      const d = DIZAINES[rng.int(0, DIZAINES.length - 1)]!;
+      return { clips: [`/audio/nombres/dizaine/${d}.mp3`], answer: d };
+    } else {
+      const s = SPECIAUX[rng.int(0, SPECIAUX.length - 1)]!;
+      return { clips: [`/audio/nombres/spécial/${s}.mp3`], answer: s };
+    }
+  }
+  const c = CENTAINES[rng.int(0, CENTAINES.length - 1)]!;
+  const sub = rng.int(0, 3);
+  if (sub === 0) return { clips: [`/audio/nombres/centaine/${c}.mp3`], answer: c };
+  if (sub === 1) {
+    const d = DIZAINES[rng.int(0, DIZAINES.length - 1)]!;
+    return { clips: [`/audio/nombres/centaine/${c}.mp3`, `/audio/nombres/dizaine/${d}.mp3`], answer: c + d };
+  }
+  if (sub === 2) {
+    const s = SPECIAUX[rng.int(0, SPECIAUX.length - 1)]!;
+    return { clips: [`/audio/nombres/centaine/${c}.mp3`, `/audio/nombres/spécial/${s}.mp3`], answer: c + s };
+  }
+  const u = UNITES[rng.int(0, UNITES.length - 1)]!;
+  return { clips: [`/audio/nombres/centaine/${c}.mp3`, `/audio/nombres/unité/${u}.mp3`], answer: c + u };
+}
+
+function RevAudioButton({ clips }: { clips: string[] }) {
+  const [playing, setPlaying] = useState(false);
+  const handlePlay = () => {
+    if (playing || clips.length === 0) return;
+    setPlaying(true);
+    let i = 0;
+    const playNext = () => {
+      if (i >= clips.length) { setPlaying(false); return; }
+      const audio = new Audio(clips[i]!); i++;
+      audio.addEventListener("ended", playNext, { once: true });
+      audio.addEventListener("error", playNext, { once: true });
+      void audio.play().catch(playNext);
+    };
+    playNext();
+  };
+  return (
+    <button type="button" onClick={handlePlay} disabled={playing}
+      aria-label={playing ? "Lecture en cours…" : "Écouter"}
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white transition-opacity disabled:opacity-60 active:opacity-70">
+      {playing ? (
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/>
+        </svg>
+      ) : (
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+          <path d="M6 4l14 8-14 8V4z"/>
+        </svg>
+      )}
+    </button>
+  );
+}
+
+function A1Ex1({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
+  const questions = useMemo(() => {
+    const rng = makeRng(exerciseKey);
+    return Array.from({ length: 3 }, () => makeAudioQ(rng));
+  }, [exerciseKey]);
+
+  const [answers, setAnswers] = useState<string[]>(() => Array(3).fill(""));
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    let pts = 0;
+    questions.forEach((q, i) => { if (parseInt(answers[i] ?? "") === q.answer) pts++; });
+    onValidated(pts, 3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateTrigger]);
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Écoutez et écrivez les nombres.</p>
+      {questions.map((q, i) => {
+        const ans = answers[i] ?? "";
+        const ok = validated ? parseInt(ans) === q.answer : null;
+        return (
+          <div key={i} className="flex items-center gap-3">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <RevAudioButton clips={q.clips} />
+            {validated ? (
+              <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${ok ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
+                {ok
+                  ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{ans}</span>
+                  : <><span className="line-through text-amber-500 text-xs">{ans || "—"}</span><span className="text-sm font-bold text-[var(--color-text-primary)]">{q.answer}</span></>}
+              </div>
+            ) : (
+              <input type="text" inputMode="numeric" value={ans} placeholder="Votre réponse…"
+                onChange={e => setAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
+                className="flex-1 h-10 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 px-3 text-sm font-bold tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]"
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 // ─── SVG block sub-components (inline <g> elements) ──────────────────────────
@@ -113,78 +200,69 @@ function placeBlocksSeeded(kinds: Array<"m" | "h" | "d" | "u">, W: number, H: nu
 // ─── Exercise 2 — Compter les blocs (3 pts) — A1.2 Exercise 3 ─────────────────
 
 function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
-  const { questions } = useMemo(() => {
+  const { q } = useMemo(() => {
     const rng = makeRng(exerciseKey);
-    const questions = Array.from({ length: 3 }, (_, qi) => {
-      let m = 1, c = 1, d = 1, u = 1;
-      for (let g = 0; g < 200; g++) {
-        const _m = rng.int(1, 2);
-        const _c = rng.int(0, 5);
-        const _d = rng.int(0, 7);
-        const _u = rng.int(0, 9);
-        const total = _m + _c + _d + _u;
-        if (total >= 5 && total <= 20) { m = _m; c = _c; d = _d; u = _u; break; }
-      }
-      const W = 320, H = 200;
-      const posRng = makeRng(exerciseKey * 100 + qi * 7 + 13);
-      const kinds: Array<"m" | "h" | "d" | "u"> = seededShuffle([
-        ...Array(m).fill("m"), ...Array(c).fill("h"),
-        ...Array(d).fill("d"), ...Array(u).fill("u"),
-      ], exerciseKey + qi * 37);
-      const positions = placeBlocksSeeded(kinds, W, H, posRng);
-      return { m, c, d, u, positions, W, H };
-    });
-    return { questions };
+    let m = 1, c = 1, d = 1, u = 1;
+    for (let g = 0; g < 200; g++) {
+      const _m = rng.int(1, 2);
+      const _c = rng.int(0, 5);
+      const _d = rng.int(0, 7);
+      const _u = rng.int(0, 9);
+      const total = _m + _c + _d + _u;
+      if (total >= 5 && total <= 20) { m = _m; c = _c; d = _d; u = _u; break; }
+    }
+    const W = 320, H = 200;
+    const posRng = makeRng(exerciseKey * 100 + 13);
+    const kinds: Array<"m" | "h" | "d" | "u"> = seededShuffle([
+      ...Array(m).fill("m"), ...Array(c).fill("h"),
+      ...Array(d).fill("d"), ...Array(u).fill("u"),
+    ], exerciseKey + 37);
+    const positions = placeBlocksSeeded(kinds, W, H, posRng);
+    return { q: { m, c, d, u, positions, W, H } };
   }, [exerciseKey]);
 
   const mkEmpty = () => ({ m: "", c: "", d: "", u: "" });
-  const [answers, setAnswers] = useState(() => Array(3).fill(null).map(mkEmpty));
+  const [answer, setAnswer] = useState(mkEmpty);
 
   useEffect(() => {
     if (validateTrigger === 0) return;
-    let pts = 0;
-    questions.forEach((q, i) => {
-      const a = answers[i] ?? mkEmpty();
-      if (
-        parseInt(a.m) === q.m * 1000 &&
-        parseInt(a.c) === q.c * 100 &&
-        parseInt(a.d) === q.d * 10 &&
-        parseInt(a.u) === q.u
-      ) pts++;
-    });
+    const mOk = parseInt(answer.m) === q.m * 1000;
+    const cOk = parseInt(answer.c) === q.c * 100;
+    const dOk = parseInt(answer.d) === q.d * 10;
+    const uOk = parseInt(answer.u) === q.u;
+    const pts = Math.round(3 * [mOk, cOk, dOk, uOk].filter(Boolean).length / 4);
     onValidated(pts, 3);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const setAns = (i: number, patch: Partial<ReturnType<typeof mkEmpty>>) =>
-    setAnswers(prev => prev.map((a, j) => j === i ? { ...a, ...patch } : a));
+  const setAns = (patch: Partial<ReturnType<typeof mkEmpty>>) =>
+    setAnswer(prev => ({ ...prev, ...patch }));
 
   return (
-    <div className="space-y-5">
+    <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
-      {questions.map((q, i) => {
-        const a = answers[i] ?? mkEmpty();
-        const mOk = validated ? parseInt(a.m) === q.m * 1000 : null;
-        const cOk = validated ? parseInt(a.c) === q.c * 100 : null;
-        const dOk = validated ? parseInt(a.d) === q.d * 10 : null;
-        const uOk = validated ? parseInt(a.u) === q.u : null;
-        const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
-        const vCls = (ok: boolean | null) =>
-          `flex-1 rounded border px-1 py-1 text-center text-sm ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : ok ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
-        return (
-          <div key={i} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-            <div className="w-full overflow-hidden" style={{ maxWidth: q.W }}>
-              <svg viewBox={`0 0 ${q.W} ${q.H}`} width="100%" style={{ display: "block" }}>
-                {q.positions.map((pos, pi) => (
-                  <g key={pi} transform={`translate(${Math.round(pos.x)}, ${Math.round(pos.y)})`}>
-                    {pos.kind === "m" ? <MillierGroup s={4} d={9} /> :
-                     pos.kind === "h" ? <CentaineGroup s={5} /> :
-                     pos.kind === "d" ? <DizaineGroup s={9} /> :
-                     <UniteGroup s={16} />}
-                  </g>
-                ))}
-              </svg>
-            </div>
+      <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+        <div className="w-full overflow-hidden" style={{ maxWidth: q.W }}>
+          <svg viewBox={`0 0 ${q.W} ${q.H}`} width="100%" style={{ display: "block" }}>
+            {q.positions.map((pos, pi) => (
+              <g key={pi} transform={`translate(${Math.round(pos.x)}, ${Math.round(pos.y)})`}>
+                {pos.kind === "m" ? <MillierGroup s={4} d={9} /> :
+                 pos.kind === "h" ? <CentaineGroup s={5} /> :
+                 pos.kind === "d" ? <DizaineGroup s={9} /> :
+                 <UniteGroup s={16} />}
+              </g>
+            ))}
+          </svg>
+        </div>
+        {(() => {
+          const mOk = validated ? parseInt(answer.m) === q.m * 1000 : null;
+          const cOk = validated ? parseInt(answer.c) === q.c * 100 : null;
+          const dOk = validated ? parseInt(answer.d) === q.d * 10 : null;
+          const uOk = validated ? parseInt(answer.u) === q.u : null;
+          const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
+          const vCls = (ok: boolean | null) =>
+            `flex-1 rounded border px-1 py-1 text-center text-sm ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : ok ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
+          return (
             <div className="mt-2 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
               <span className="shrink-0">=</span>
               {([
@@ -197,19 +275,19 @@ function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                   {fi > 0 && <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>}
                   {validated ? (
                     <span className={vCls(field.ok)}>
-                      {field.ok ? (a[field.key] || String(field.val)) : String(field.val)}
+                      {field.ok ? (answer[field.key] || String(field.val)) : String(field.val)}
                     </span>
                   ) : (
                     <input className={inputCls} placeholder={field.ph} inputMode="numeric" autoComplete="off"
-                      value={a[field.key]}
-                      onChange={e => setAns(i, { [field.key]: e.target.value.replace(/[^0-9]/g, "") })} />
+                      value={answer[field.key]}
+                      onChange={e => setAns({ [field.key]: e.target.value.replace(/[^0-9]/g, "") })} />
                   )}
                 </React.Fragment>
               ))}
             </div>
-          </div>
-        );
-      })}
+          );
+        })()}
+      </div>
     </div>
   );
 }
@@ -534,8 +612,6 @@ type NLData = { start: number; end: number; step: number; divCount: number; labe
 
 function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
   const data = useMemo(() => {
-    const rng = makeRng(exerciseKey);
-
     const makeNL = (presets: Array<{ start: number; end: number; step: number }>, rng2: ReturnType<typeof makeRng>): NLData => {
       const p = presets[rng2.int(0, presets.length - 1)]!;
       const divCount = (p.end - p.start) / p.step;
@@ -562,42 +638,21 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
     const nl1 = makeNL(FINE, makeRng(exerciseKey + 1));
     const nl2 = makeNL(COARSE, makeRng(exerciseKey + 2));
 
-    const voisins: number[] = [];
-    const used = new Set<number>();
-    while (voisins.length < 3) {
-      const n = rng.int(101, 998);
-      if (n % 10 !== 0 && !used.has(n)) { voisins.push(n); used.add(n); }
-    }
-
-    return { nl1, nl2, voisins };
+    return { nl1, nl2 };
   }, [exerciseKey]);
 
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
-  const [voisinsAns, setVoisinsAns] = useState(() =>
-    Array(3).fill(null).map(() => ({ lo: "", hi: "" }))
-  );
   const [lineResults, setLineResults] = useState<[boolean | null, boolean | null]>([null, null]);
 
   useEffect(() => {
     if (validateTrigger === 0) return;
-    let pts = 0;
     const r1 = parseInt(ans1) === data.nl1.target;
     const r2 = parseInt(ans2) === data.nl2.target;
     setLineResults([r1, r2]);
-    if (r1) pts++;
-    if (r2) pts++;
-    data.voisins.forEach((n, i) => {
-      const lo = Math.floor(n / 10) * 10;
-      const hi = lo + 10;
-      const a = voisinsAns[i] ?? { lo: "", hi: "" };
-      if (parseInt(a.lo) === lo && parseInt(a.hi) === hi) pts++;
-    });
-    onValidated(pts, 5);
+    onValidated((r1 ? 1 : 0) + (r2 ? 1 : 0), 2);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
-
-  const fieldCls = "w-16 rounded border px-1 py-1 text-sm tabular-nums text-center border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 outline-none focus-visible:border-[var(--color-accent-alg)]";
 
   const NLPanel = ({ nl, answer, setAnswer, result }: {
     nl: NLData; answer: string; setAnswer: (v: string) => void; result: boolean | null;
@@ -653,50 +708,11 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   };
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-3">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Partie 1 — Écrivez les nombres indiqués par les flèches</p>
-        <div className="space-y-4">
-          <NLPanel nl={data.nl1} answer={ans1} setAnswer={setAns1} result={lineResults[0]} />
-          <NLPanel nl={data.nl2} answer={ans2} setAnswer={setAns2} result={lineResults[1]} />
-        </div>
-      </div>
-      <div className="space-y-3">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Partie 2 — Trouvez les dizaines encadrantes</p>
-        <div className="rounded-[var(--radius-md)] bg-orange-50 px-3 py-1.5 text-sm dark:bg-orange-950/20">
-          <span className="italic text-[var(--color-text-secondary)]">Exemple : </span>
-          <span className="font-medium text-[var(--color-text-primary)]">350 &lt; 354 &lt; 360</span>
-        </div>
-        <div className="space-y-2">
-          {data.voisins.map((n, ni) => {
-            const lo = Math.floor(n / 10) * 10;
-            const hi = lo + 10;
-            const a = voisinsAns[ni] ?? { lo: "", hi: "" };
-            const loOk = validated ? parseInt(a.lo) === lo : null;
-            const hiOk = validated ? parseInt(a.hi) === hi : null;
-            const vCls = (ok: boolean | null) =>
-              `w-16 rounded border px-1 py-1 text-sm tabular-nums text-center ${ok === null ? "" : ok ? "border-[var(--color-border-default)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
-            return (
-              <div key={ni} className="flex items-center gap-2">
-                {validated ? (
-                  <span className={vCls(loOk)}>{loOk ? (a.lo || String(lo)) : String(lo)}</span>
-                ) : (
-                  <input type="text" inputMode="numeric" className={fieldCls} value={a.lo}
-                    onChange={e => setVoisinsAns(prev => prev.map((q, qi) => qi === ni ? { ...q, lo: e.target.value.replace(/[^0-9]/g, "") } : q))} />
-                )}
-                <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-                <span className="w-12 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
-                <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-                {validated ? (
-                  <span className={vCls(hiOk)}>{hiOk ? (a.hi || String(hi)) : String(hi)}</span>
-                ) : (
-                  <input type="text" inputMode="numeric" className={fieldCls} value={a.hi}
-                    onChange={e => setVoisinsAns(prev => prev.map((q, qi) => qi === ni ? { ...q, hi: e.target.value.replace(/[^0-9]/g, "") } : q))} />
-                )}
-              </div>
-            );
-          })}
-        </div>
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les nombres indiqués par les flèches.</p>
+      <div className="space-y-4">
+        <NLPanel nl={data.nl1} answer={ans1} setAnswer={setAns1} result={lineResults[0]} />
+        <NLPanel nl={data.nl2} answer={ans2} setAnswer={setAns2} result={lineResults[1]} />
       </div>
     </div>
   );
@@ -776,6 +792,6 @@ export const A1_EXERCISES: RevisionExerciseMeta[] = [
   { id: 4, label: "Comparaison à 6 chiffres", maxPoints: 5, component: A1Ex4 },
   { id: 5, label: "Sélectionner par critère", maxPoints: 3, component: A1Ex5 },
   { id: 6, label: "Encadrer à la dizaine",    maxPoints: 5, component: A1Ex6 },
-  { id: 7, label: "Droite numérique",         maxPoints: 5, component: A1Ex7 },
+  { id: 7, label: "Droite numérique",         maxPoints: 2, component: A1Ex7 },
   { id: 8, label: "Classer les nombres",      maxPoints: 2, component: A1Ex8 },
 ];
