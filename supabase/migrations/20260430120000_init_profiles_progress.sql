@@ -13,14 +13,28 @@ create table if not exists public.profiles (
 
 alter table public.profiles enable row level security;
 
-create policy "Lecture du profil (soi)"
-  on public.profiles for select
-  using (auth.uid() = id);
+do $$
+begin
+  if not exists (
+    select 1 from pg_policies
+    where schemaname = 'public' and tablename = 'profiles' and policyname = 'Lecture du profil (soi)'
+  ) then
+    create policy "Lecture du profil (soi)"
+      on public.profiles for select
+      using (auth.uid() = id);
+  end if;
 
-create policy "Mise à jour du profil (soi)"
-  on public.profiles for update
-  using (auth.uid() = id)
-  with check (auth.uid() = id);
+  if not exists (
+    select 1 from pg_policies
+    where schemaname = 'public' and tablename = 'profiles'
+      and policyname in ('Mise a jour du profil (soi)', 'Mise à jour du profil (soi)')
+  ) then
+    create policy "Mise à jour du profil (soi)"
+      on public.profiles for update
+      using (auth.uid() = id)
+      with check (auth.uid() = id);
+  end if;
+end $$;
 
 create or replace function public.handle_new_user()
 returns trigger
@@ -58,10 +72,18 @@ create index if not exists user_module_progress_user_id_idx
 
 alter table public.user_module_progress enable row level security;
 
-create policy "Progression tout (soi)"
-  on public.user_module_progress for all
-  using (auth.uid() = user_id)
-  with check (auth.uid() = user_id);
+do $$
+begin
+  if not exists (
+    select 1 from pg_policies
+    where schemaname = 'public' and tablename = 'user_module_progress' and policyname = 'Progression tout (soi)'
+  ) then
+    create policy "Progression tout (soi)"
+      on public.user_module_progress for all
+      using (auth.uid() = user_id)
+      with check (auth.uid() = user_id);
+  end if;
+end $$;
 
 -- Historique quiz
 create table if not exists public.quiz_attempts (
@@ -79,7 +101,15 @@ create index if not exists quiz_attempts_module_slug_idx on public.quiz_attempts
 
 alter table public.quiz_attempts enable row level security;
 
-create policy "Tentatives quiz tout (soi)"
-  on public.quiz_attempts for all
-  using (auth.uid() = user_id)
-  with check (auth.uid() = user_id);
+do $$
+begin
+  if not exists (
+    select 1 from pg_policies
+    where schemaname = 'public' and tablename = 'quiz_attempts' and policyname = 'Tentatives quiz tout (soi)'
+  ) then
+    create policy "Tentatives quiz tout (soi)"
+      on public.quiz_attempts for all
+      using (auth.uid() = user_id)
+      with check (auth.uid() = user_id);
+  end if;
+end $$;
