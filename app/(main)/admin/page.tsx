@@ -13,11 +13,14 @@ export default async function AdminPage() {
   const { data: myRole } = await supabase.rpc("get_my_role");
   if (myRole !== "admin" && myRole !== "prof") redirect("/");
 
-  const { data: users, error: adminError } = await supabase.rpc("get_users_for_admin") as {
-    data: (Omit<UserRow, "progress_data" | "login_id"> & { progress_data: StoredProgressV1 | null; login_id: string | null })[] | null;
+  const { data: users } = await supabase.rpc("get_users_for_admin") as {
+    data: (Omit<UserRow, "progress_data" | "login_id" | "placement_test_best"> & {
+      progress_data: StoredProgressV1 | null;
+      login_id: string | null;
+      placement_test_best: UserRow["placement_test_best"];
+    })[] | null;
     error: unknown;
   };
-  if (adminError) console.error("[admin] get_users_for_admin error:", JSON.stringify(adminError));
 
   const rows: UserRow[] = (users ?? []).sort((a, b) => {
     const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
