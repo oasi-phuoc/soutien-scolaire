@@ -249,13 +249,70 @@ const ex3Pool = (() => {
 
 // ── Lesson ─────────────────────────────────────────────────────────────────────
 
+const MODAL_VERBS = [
+  {
+    infinitive: "vouloir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "veux" },
+      { pronoun: "tu", ending: "veux" },
+      { pronoun: "il / elle / on", ending: "veut" },
+      { pronoun: "nous", ending: "voulons" },
+      { pronoun: "vous", ending: "voulez" },
+      { pronoun: "ils / elles", ending: "veulent" },
+    ],
+  },
+  {
+    infinitive: "pouvoir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "peux" },
+      { pronoun: "tu", ending: "peux" },
+      { pronoun: "il / elle / on", ending: "peut" },
+      { pronoun: "nous", ending: "pouvons" },
+      { pronoun: "vous", ending: "pouvez" },
+      { pronoun: "ils / elles", ending: "peuvent" },
+    ],
+  },
+  {
+    infinitive: "devoir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "dois" },
+      { pronoun: "tu", ending: "dois" },
+      { pronoun: "il / elle / on", ending: "doit" },
+      { pronoun: "nous", ending: "devons" },
+      { pronoun: "vous", ending: "devez" },
+      { pronoun: "ils / elles", ending: "doivent" },
+    ],
+  },
+  {
+    infinitive: "savoir",
+    radical: "",
+    rows: [
+      { pronoun: "je", ending: "sais" },
+      { pronoun: "tu", ending: "sais" },
+      { pronoun: "il / elle / on", ending: "sait" },
+      { pronoun: "nous", ending: "savons" },
+      { pronoun: "vous", ending: "savez" },
+      { pronoun: "ils / elles", ending: "savent" },
+    ],
+  },
+  {
+    infinitive: "falloir",
+    radical: "",
+    rows: [
+      { pronoun: "il", ending: "faut" },
+    ],
+  },
+];
+
 export const A1_CONJ_L15: ConjLesson = {
   slug: "a1-conj-l15",
   code: "G.11",
   level: "A1",
   title: "Les verbes modaux",
   theory: [
-    { type: "heading", text: "Les verbes modaux" },
     {
       type: "plain_list",
       items: [
@@ -263,134 +320,60 @@ export const A1_CONJ_L15: ConjLesson = {
         "Ils sont toujours suivis d'un {a}infinitif{/a}.",
       ],
     },
-    {
-      type: "table",
-      tables: [
-        {
-          verb: "vouloir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "veux" },
-            { pronoun: "tu", form: "veux" },
-            { pronoun: "il / elle", form: "veut" },
-            { pronoun: "nous", form: "voulons" },
-            { pronoun: "vous", form: "voulez" },
-            { pronoun: "ils / elles", form: "veulent" },
-          ],
-        },
-        {
-          verb: "pouvoir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "peux" },
-            { pronoun: "tu", form: "peux" },
-            { pronoun: "il / elle", form: "peut" },
-            { pronoun: "nous", form: "pouvons" },
-            { pronoun: "vous", form: "pouvez" },
-            { pronoun: "ils / elles", form: "peuvent" },
-          ],
-        },
-        {
-          verb: "devoir", accentForms: true,
-          rows: [
-            { pronoun: "je", form: "dois" },
-            { pronoun: "tu", form: "dois" },
-            { pronoun: "il / elle", form: "doit" },
-            { pronoun: "nous", form: "devons" },
-            { pronoun: "vous", form: "devez" },
-            { pronoun: "ils / elles", form: "doivent" },
-          ],
-        },
-      ],
-    },
-    {
-      type: "grid",
-      headers: ["Verbe", "Sens", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["{a}vouloir{/a}", "désir / intention", "Je veux partir."],
-        ["{a}pouvoir{/a}", "capacité / permission", "Tu peux entrer."],
-        ["{a}devoir{/a}", "obligation / nécessité", "Elle doit étudier."],
-      ],
-    },
+    { type: "heading", text: "La forme affirmative" },
     {
       type: "verb_toggle",
       buttonCols: 3,
-      verbs: [
-        {
-          infinitive: "vouloir",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "veux" },
-            { pronoun: "tu", ending: "veux" },
-            { pronoun: "il / elle / on", ending: "veut" },
-            { pronoun: "nous", ending: "voulons" },
-            { pronoun: "vous", ending: "voulez" },
-            { pronoun: "ils / elles", ending: "veulent" },
-          ],
-        },
-        {
-          infinitive: "pouvoir",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "peux" },
-            { pronoun: "tu", ending: "peux" },
-            { pronoun: "il / elle / on", ending: "peut" },
-            { pronoun: "nous", ending: "pouvons" },
-            { pronoun: "vous", ending: "pouvez" },
-            { pronoun: "ils / elles", ending: "peuvent" },
-          ],
-        },
-        {
-          infinitive: "devoir",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "dois" },
-            { pronoun: "tu", ending: "dois" },
-            { pronoun: "il / elle / on", ending: "doit" },
-            { pronoun: "nous", ending: "devons" },
-            { pronoun: "vous", ending: "devez" },
-            { pronoun: "ils / elles", ending: "doivent" },
-          ],
-        },
-        {
-          infinitive: "savoir",
-          radical: "",
-          rows: [
-            { pronoun: "je", ending: "sais" },
-            { pronoun: "tu", ending: "sais" },
-            { pronoun: "il / elle / on", ending: "sait" },
-            { pronoun: "nous", ending: "savons" },
-            { pronoun: "vous", ending: "savez" },
-            { pronoun: "ils / elles", ending: "savent" },
-          ],
-        },
-        {
-          infinitive: "falloir",
-          radical: "",
-          rows: [
-            { pronoun: "il", ending: "faut" },
-          ],
-        },
-      ],
-    },
-    { type: "heading", text: "Négation", sub: true },
-    {
-      type: "grid",
-      headers: ["Affirmatif", "Négatif"],
-      rows: [
-        ["Je veux partir.", "Je {a}ne{/a} veux {a}pas{/a} partir."],
-        ["Tu peux venir.", "Tu {a}ne{/a} peux {a}pas{/a} venir."],
-        ["Il doit travailler.", "Il {a}ne{/a} doit {a}pas{/a} travailler."],
-      ],
+      verbs: MODAL_VERBS,
     },
     {
       type: "highlight",
-      label: "Astuce : politesse avec vouloir",
+      label: "Exemple",
       items: [
-        "{a}Je voudrais{/a} (conditionnel) est plus poli que «je veux».",
-        "Je voudrais un café, s'il vous plaît.",
-        "Vous voudriez de l'aide ?",
+        "Je veux apprendre le français.",
+        "Tu peux venir ce soir.",
+        "Il doit respecter les règles.",
+        "Elle sait parler trois langues.",
+        "Il faut étudier chaque jour.",
       ],
+    },
+    {
+      type: "grid",
+      headers: ["Verbe", "Sens"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}vouloir{/a}", "désir / intention"],
+        ["{a}pouvoir{/a}", "capacité / permission"],
+        ["{a}devoir{/a}", "obligation / nécessité"],
+        ["{a}savoir{/a}", "compétence / capacité apprise"],
+        ["{a}falloir{/a}", "nécessité impersonnelle"],
+      ],
+    },
+    { type: "heading", text: "La forme négative" },
+    {
+      type: "verb_toggle",
+      buttonCols: 3,
+      negation: true,
+      verbs: MODAL_VERBS,
+    },
+    {
+      type: "highlight",
+      label: "Exemple",
+      items: [
+        "Je ne veux pas partir.",
+        "Tu ne peux pas rester ici.",
+        "Il ne doit pas fumer.",
+        "Elle ne sait pas conduire.",
+        "Il ne faut pas oublier.",
+      ],
+    },
+    { type: "heading", text: "Politesse avec vouloir" },
+    {
+      type: "plain_list",
       noBulletItems: [0],
+      items: [
+        "Je voudrais (conditionnel) est plus poli que «je veux».",
+      ],
     },
   ],
   exercises: [
