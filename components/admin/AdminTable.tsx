@@ -38,7 +38,6 @@ export type UserRow = {
   progress_updated_at: string | null;
   is_admin: boolean;
   role: "eleve" | "prof" | "admin";
-  placement_test_best: { points: number; maxPoints: number; percent: number } | null;
 };
 
 const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
@@ -975,14 +974,14 @@ export function AdminTable({
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-violet-700 bg-violet-600 dark:border-violet-800 dark:bg-violet-700">
-              {["Statut", "Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Test M", ""].map((h, i) => (
+              {["Statut", "Élève", "Classe", "Dernier accès", "Maths", "Français", "Lecture", ""].map((h, i) => (
                 <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-violet-100">{h}</th>
               ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {sorted.length === 0 ? (
-              <tr><td colSpan={9} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
+              <tr><td colSpan={8} className="px-4 py-8 text-center text-zinc-400">Aucun utilisateur.</td></tr>
             ) : sorted.map(row => {
               const fullName = [row.prenom, row.nom].filter(Boolean).join(" ") || "—";
               const math = mathPct(row.progress_data);
@@ -1010,11 +1009,6 @@ export function AdminTable({
                   <td className="w-28 px-4 py-3"><ProgressCell {...math} color="bg-blue-500" /></td>
                   <td className="w-28 px-4 py-3"><ProgressCell {...french} color="bg-emerald-500" /></td>
                   <td className="w-28 px-4 py-3"><ProgressCell {...lecture} color="bg-amber-500" /></td>
-                  <td className="w-28 px-4 py-3">
-                    {row.placement_test_best
-                      ? <ProgressCell done={row.placement_test_best.points} total={row.placement_test_best.maxPoints} pct={row.placement_test_best.percent} color="bg-violet-500" />
-                      : <span className="text-xs text-zinc-400">—</span>}
-                  </td>
                   <td className="px-4 py-3">
                     <button onClick={() => setSelected(row)} className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>

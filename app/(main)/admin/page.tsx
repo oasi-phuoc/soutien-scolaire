@@ -14,10 +14,9 @@ export default async function AdminPage() {
   if (myRole !== "admin" && myRole !== "prof") redirect("/");
 
   const { data: users } = await supabase.rpc("get_users_for_admin") as {
-    data: (Omit<UserRow, "progress_data" | "login_id" | "placement_test_best"> & {
+    data: (Omit<UserRow, "progress_data" | "login_id"> & {
       progress_data: StoredProgressV1 | null;
       login_id: string | null;
-      placement_test_best: UserRow["placement_test_best"];
     })[] | null;
     error: unknown;
   };
