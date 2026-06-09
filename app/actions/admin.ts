@@ -92,6 +92,29 @@ export async function changePasswordAction(userId: string, newPassword: string) 
   return { ok: true };
 }
 
+export async function getPlacementHistoryForUserAction(userId: string): Promise<{
+  ok: boolean;
+  history: Array<{ date: string; points: number; maxPoints: number; percent: number }>;
+  error?: string;
+}> {
+  const caller = await getCallerRole();
+  if (!caller) return { ok: false, history: [], error: "Non autorisé" };
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, history: [], error: "Erreur supabase" };
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("placement_test_history")
+    .eq("id", userId)
+    .maybeSingle();
+  if (error) return { ok: false, history: [], error: error.message };
+  const raw = Array.isArray(data?.placement_test_history) ? data.placement_test_history : [];
+  return {
+    ok: true,
+    history: (raw as Array<{ date: string; points: number; maxPoints: number; percent: number }>)
+      .map(a => ({ date: a.date, points: a.points, maxPoints: a.maxPoints, percent: a.percent })),
+  };
+}
+
 export async function updateUserProfileAction(
   userId: string,
   data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },

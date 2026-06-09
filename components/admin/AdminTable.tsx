@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect } from "react";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
@@ -19,6 +19,7 @@ import {
   updateUserProfileAction,
   resetAllElevesAction,
   changePasswordAction,
+  getPlacementHistoryForUserAction,
 } from "@/app/actions/admin";
 
 export type UserRow = {
@@ -350,6 +351,15 @@ function DetailModal({
   const [mathOpen, setMathOpen] = useState(false);
   const [frenchOpen, setFrenchOpen] = useState(false);
   const [lectureOpen, setLectureOpen] = useState(false);
+  const [placementOpen, setPlacementOpen] = useState(false);
+  const [placementHistory, setPlacementHistory] = useState<Array<{ date: string; points: number; maxPoints: number; percent: number }> | null>(null);
+
+  useEffect(() => {
+    getPlacementHistoryForUserAction(user.id).then(res => {
+      if (res.ok) setPlacementHistory(res.history);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user.id]);
 
   const isSelf = user.id === currentUserId;
   const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
@@ -503,6 +513,61 @@ function DetailModal({
                 </div>
               )}
             </div>
+
+            {/* Test de placement */}
+            {placementHistory !== null && (
+              <div>
+                <button onClick={() => setPlacementOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+                  <span className="flex items-center gap-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${placementOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+                    Test de placement
+                  </span>
+                  {placementHistory.length === 0 ? (
+                    <span className="text-zinc-400">—</span>
+                  ) : (() => {
+                    const best = Math.max(...placementHistory.map(a => a.percent));
+                    const worst = Math.min(...placementHistory.map(a => a.percent));
+                    return (
+                      <span className="flex items-center gap-1.5 text-[11px]">
+                        <span className="text-emerald-600 dark:text-emerald-400">↑{best}%</span>
+                        {best !== worst && <span className="text-red-500 dark:text-red-400">↓{worst}%</span>}
+                      </span>
+                    );
+                  })()}
+                </button>
+                {placementHistory.length === 0 ? (
+                  <p className="text-[11px] text-zinc-400 italic">Aucun résultat</p>
+                ) : (
+                  <>
+                    <div className="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
+                      <div
+                        className="h-full rounded-full bg-violet-500 transition-all"
+                        style={{ width: `${Math.max(...placementHistory.map(a => a.percent))}%` }}
+                      />
+                    </div>
+                    {placementOpen && (
+                      <div className="mt-2 space-y-1.5">
+                        {[...placementHistory].reverse().slice(0, 5).map((a, i) => {
+                          const d = new Date(a.date);
+                          const label = d.toLocaleDateString("fr-CH", { day: "2-digit", month: "2-digit", year: "2-digit" });
+                          return (
+                            <div key={i} className="flex items-center justify-between gap-2">
+                              <span className="text-[11px] text-zinc-400 tabular-nums shrink-0">{label}</span>
+                              <div className="flex-1 h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800">
+                                <div className="h-full rounded-full bg-violet-400" style={{ width: `${a.percent}%` }} />
+                              </div>
+                              <span className="text-[11px] font-semibold text-zinc-700 dark:text-zinc-200 tabular-nums shrink-0 w-12 text-right">
+                                {a.points}/{a.maxPoints}
+                              </span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            )}
 
           </div>
 
