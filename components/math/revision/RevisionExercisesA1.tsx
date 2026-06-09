@@ -657,13 +657,13 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   const NLPanel = ({ nl, answer, setAnswer, result }: {
     nl: NLData; answer: string; setAnswer: (v: string) => void; result: boolean | null;
   }) => {
-    const W = 360, H = 90, ML = 28, lineW = 300, lineY = 68;
+    const W = 360, H = 110, ML = 28, lineW = 300, lineY = 85;
     const pos = (v: number) => ML + ((v - nl.start) / (nl.end - nl.start)) * lineW;
     const tx = pos(nl.target);
     const accent = "var(--color-accent-alg)";
     const arrowColor = result === false ? "#F59E0B" : accent;
     const fs = nl.end >= 1000 ? 7 : nl.end >= 100 ? 8 : 10;
-    const ulY = 28;
+    const ulY = 44;
     return (
       <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
@@ -688,14 +688,14 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
           {validated ? (
             result === false ? (
               <text x={tx} textAnchor="middle">
-                <tspan y="15" fontSize="9" fill="#D97706" textDecoration="line-through">{answer || "—"}</tspan>
-                <tspan x={tx} y="26" fontSize="11" fontWeight="bold" fill="currentColor">{nl.target}</tspan>
+                <tspan y="28" fontSize="9" fill="#D97706" textDecoration="line-through">{answer || "—"}</tspan>
+                <tspan x={tx} y="40" fontSize="11" fontWeight="bold" fill="currentColor">{nl.target}</tspan>
               </text>
             ) : (
-              <text x={tx} y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill={accent}>{answer}</text>
+              <text x={tx} y="35" textAnchor="middle" fontSize="11" fontWeight="bold" fill={accent}>{answer}</text>
             )
           ) : (
-            <foreignObject x={tx - 22} y="4" width="44" height="22">
+            <foreignObject x={tx - 22} y="18" width="44" height="22">
               <input type="text" inputMode="numeric" value={answer}
                 onChange={e => setAnswer(e.target.value.replace(/[^0-9]/g, ""))}
                 style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
