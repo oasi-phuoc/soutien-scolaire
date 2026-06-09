@@ -994,18 +994,28 @@ function hToDigits(h: number): [number, number, number, number, number] {
 
 interface DecColQ {
   aH: number; bH: number; rH: number; op: "+" | "-";
+  is2Dec: boolean;
 }
 
 function genDecColQs(op: "+" | "-", count: number): DecColQ[] {
   return Array.from({ length: count }, () => {
+    const is2Dec = Math.random() < 0.5;
     if (op === "+") {
-      const aH = rnd(3000, 8999); // 30.00–89.99
-      const bH = rnd(3000, 8999);
-      return { aH, bH, rH: aH + bH, op };
+      // Integer parts 100–499 so sum ≤ 999
+      const aInt = rnd(100, 499); const bInt = rnd(100, 499);
+      const adx = rnd(1, 9); const acx = is2Dec ? rnd(1, 9) : 0;
+      const bdx = rnd(1, 9); const bcx = is2Dec ? rnd(1, 9) : 0;
+      const aH = aInt * 100 + adx * 10 + acx;
+      const bH = bInt * 100 + bdx * 10 + bcx;
+      return { aH, bH, rH: aH + bH, op, is2Dec };
     } else {
-      const aH = rnd(10000, 19999); // 100.00–199.99
-      const bH = rnd(1000, aH - 1);
-      return { aH, bH, rH: aH - bH, op };
+      // Integer parts 200–999 (a) and 100–aInt-1 (b) so result ≥ 100
+      const aInt = rnd(200, 999); const bInt = rnd(100, aInt - 1);
+      const adx = rnd(1, 9); const acx = is2Dec ? rnd(1, 9) : 0;
+      const bdx = rnd(1, 9); const bcx = is2Dec ? rnd(1, 9) : 0;
+      const aH = aInt * 100 + adx * 10 + acx;
+      const bH = bInt * 100 + bdx * 10 + bcx;
+      return { aH, bH, rH: aH - bH, op, is2Dec };
     }
   });
 }
@@ -1068,8 +1078,8 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
 
   void cardCorrect;
   const opRows = [
-    [ac, ad, au, null, adx, acx], // operand a — col 3 is null for comma display
-    [bc, bd, bu, null, bdx, bcx], // operand b
+    [ac, ad, au, null, adx, q.is2Dec ? acx : null], // operand a — col 3 is null for comma; cx null when 1-decimal
+    [bc, bd, bu, null, bdx, q.is2Dec ? bcx : null], // operand b
   ];
 
   return (
@@ -1098,7 +1108,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
                   );
                 }
                 const actualDigit = digit as number;
-                const isLeading = (ci === 0 || ci === 1) && actualDigit === 0;
+                const isLeading = (ci === 0 && actualDigit === 0) || (ci === 1 && actualDigit === 0 && (row[0] as number) === 0);
                 return (
                   <td key={ci} className="w-8 text-center">
                     <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
@@ -1125,7 +1135,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
             {/* dx column */}
             {cell(4, rdx, true, 3)}
             {/* cx column */}
-            {cell(5, rcx, true, 4)}
+            {q.is2Dec ? cell(5, rcx, true, 4) : <td key={5} className="w-8 text-center" />}
           </tr>
         </tbody>
       </table>
@@ -1147,7 +1157,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
     if (validated) return;
     const res: boolean[] = questions.map((q: DecColQ, qi: number) => {
       const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
-      const expected = [rc, rd, ru, rdx, rcx];
+      const expected = q.is2Dec ? [rc, rd, ru, rdx, rcx] : [rc, rd, ru, rdx];
       return expected.every((exp: number, ci: number) => (answers[qi]?.[ci] ?? "").trim() === String(exp));
     });
     setResults(res);

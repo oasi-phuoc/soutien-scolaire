@@ -954,7 +954,6 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                       <g key={ai}>
                         <line x1={x} y1={ulY} x2={x} y2={lineY - 4} stroke={lineColor} strokeWidth="1.5" strokeDasharray="4,2" />
                         <polygon points={`${x},${lineY - 2} ${x - 4},${lineY - 9} ${x + 4},${lineY - 9}`} fill={lineColor} />
-                        <line x1={x - 22} y1={ulY} x2={x + 22} y2={ulY} stroke={lineColor} strokeWidth="1.5" />
                         {validated
                           ? isWrong
                             ? <text x={x} textAnchor="middle" fontSize="9">
