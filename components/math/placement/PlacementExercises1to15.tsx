@@ -1463,16 +1463,67 @@ function computePlaceDivSteps(dividend: number, divisor: number): Array<{ partia
   return steps;
 }
 
+function DivWorkRow({ numStr, colEnd, dividendCols, workFlat, si, onWorkChange, validated }: {
+  numStr: string; colEnd: number; dividendCols: number;
+  workFlat: string[]; si: number;
+  onWorkChange: (step: number, col: number, val: string) => void;
+  validated: boolean;
+}) {
+  const CW = 32;
+  const startCol = colEnd - numStr.length + 1;
+  return (
+    <>
+      {Array.from({ length: dividendCols }, (_, col) => {
+        const relIdx = col - startCol;
+        const hasDigit = relIdx >= 0 && relIdx < numStr.length;
+        const flatIdx = si * dividendCols + relIdx;
+        const val = hasDigit ? (workFlat[flatIdx] ?? "") : "";
+        const correct = hasDigit ? (numStr[relIdx] ?? "") : "";
+        const wrong = validated && hasDigit && val.trim() !== correct;
+        return (
+          <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
+            {hasDigit ? (
+              validated ? (
+                <div className={`flex h-8 w-8 items-center justify-center rounded border text-center font-mono ${
+                  wrong
+                    ? "border-amber-400 bg-amber-50 text-amber-700"
+                    : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
+                }`}>
+                  {wrong ? (
+                    <div className="flex flex-col leading-tight">
+                      {val.trim() && <span className="text-[9px] text-[var(--color-text-secondary)] line-through">{val}</span>}
+                      <span className="text-sm font-semibold">{correct}</span>
+                    </div>
+                  ) : (
+                    <span>{val || correct}</span>
+                  )}
+                </div>
+              ) : (
+                <input type="text" inputMode="numeric" maxLength={1} value={val}
+                  onChange={e => onWorkChange(si, relIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+                  className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
+                />
+              )
+            ) : (
+              <div className="h-8 w-8" />
+            )}
+          </td>
+        );
+      })}
+    </>
+  );
+}
+
 function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCols,
   quotientInputs, remainderInput, workFlat,
   onQuotientChange, onRemainderChange, onWorkChange, validated }: {
   dividend: number; divisor: number; quotient: number;
   dividendCols: number; divisorCols: number;
   quotientInputs: string[]; remainderInput: string;
-  workFlat: string[]; // index = step*2*dividendCols + type*dividendCols + col
+  workFlat: string[]; // index = step*dividendCols + col
   onQuotientChange: (qi: number, val: string) => void;
   onRemainderChange: (val: string) => void;
-  onWorkChange: (step: number, type: 0|1, col: number, val: string) => void;
+  onWorkChange: (step: number, col: number, val: string) => void;
   validated: boolean;
 }) {
   const steps = computePlaceDivSteps(dividend, divisor);
@@ -1484,56 +1535,10 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
   const colLabels = dividendCols === 4 ? ["M","C","D","U"] : ["DM","M","C","D","U"];
   const CW = 32;
 
-  const digIn = (val: string, correct: string, onChange: (v: string) => void) => {
-    const wrong = validated && val.trim() !== correct;
-    if (validated) {
-      return (
-        <div className={`flex h-8 w-8 items-center justify-center rounded border text-center font-mono ${
-          wrong
-            ? "border-amber-400 bg-amber-50 text-amber-700"
-            : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
-        }`}>
-          {wrong ? (
-            <div className="flex flex-col leading-tight">
-              {val.trim() && <span className="text-[9px] text-[var(--color-text-secondary)] line-through">{val}</span>}
-              <span className="text-sm font-semibold">{correct}</span>
-            </div>
-          ) : (
-            <span>{val || correct}</span>
-          )}
-        </div>
-      );
-    }
-    return (
-      <input type="text" inputMode="numeric" maxLength={1} value={val}
-        onChange={e => onChange(e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-        className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
-      />
-    );
-  };
   const preCell = (ch: string, hide?: boolean) => (
     <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{hide ? "" : ch}</div>
   );
   const emptyCell = () => <div className="h-8 w-8" />;
-
-  function WorkRow({ numStr, colEnd, si, type }: { numStr: string; colEnd: number; si: number; type: 0|1 }) {
-    const startCol = colEnd - numStr.length + 1;
-    return (
-      <>
-        {Array.from({ length: dividendCols }, (_, col) => {
-          const relIdx = col - startCol;
-          const hasDigit = relIdx >= 0 && relIdx < numStr.length;
-          const flatIdx = si * 2 * dividendCols + type * dividendCols + relIdx;
-          const val = hasDigit ? (workFlat[flatIdx] ?? "") : "";
-          return (
-            <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
-              {hasDigit ? digIn(val, numStr[relIdx]!, v => onWorkChange(si, type, relIdx, v)) : emptyCell()}
-            </td>
-          );
-        })}
-      </>
-    );
-  }
 
   return (
     <div className="overflow-x-auto">
@@ -1568,45 +1573,40 @@ function PlacementDivCard({ dividend, divisor, quotient, dividendCols, divisorCo
               );
             })}
           </tr>
+          <tr>
+            <td style={{ padding: 0 }} />
+            {Array.from({ length: dividendCols }, (_, i) => <td key={i} style={{ width: CW, padding: 0 }} />)}
+            {Array.from({ length: quotientCols }, (_, qi) => (
+              <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
+                {qi < quotientStr.length
+                  ? <CorrectionInput
+                      value={quotientInputs[qi] ?? ""}
+                      onChange={v => onQuotientChange(qi, v.replace(/[^0-9]/g, "").slice(-1))}
+                      correct={quotientStr[qi] ?? ""}
+                      validated={validated}
+                      width="w-8"
+                    />
+                  : emptyCell()
+                }
+              </td>
+            ))}
+          </tr>
           {steps.map((step, si) => {
-            const pdStr = step.partialDiv.toString();
             const prStr = step.product.toString();
-            const pdStart = step.colEnd - pdStr.length + 1;
             const prStart = step.colEnd - prStr.length + 1;
-            const lineStart = Math.min(pdStart, prStart);
             return (
               <React.Fragment key={si}>
                 <tr>
-                  <td style={{ padding: 0 }} />
-                  <WorkRow numStr={pdStr} colEnd={step.colEnd} si={si} type={0} />
-                  {si === 0
-                    ? Array.from({ length: quotientCols }, (_, qi) => (
-                        <td key={qi} style={{ width: CW, padding: 2, ...(qi === 0 ? BSEP : {}) }} className="align-middle text-center">
-                          {qi < quotientStr.length
-                            ? <CorrectionInput
-                                value={quotientInputs[qi] ?? ""}
-                                onChange={v => onQuotientChange(qi, v.replace(/[^0-9]/g,"").slice(-1))}
-                                correct={quotientStr[qi] ?? ""}
-                                validated={validated}
-                                width="w-8"
-                              />
-                            : emptyCell()
-                          }
-                        </td>
-                      ))
-                    : <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
-                  }
-                </tr>
-                <tr>
                   <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
-                  <WorkRow numStr={prStr} colEnd={step.colEnd} si={si} type={1} />
+                  <DivWorkRow numStr={prStr} colEnd={step.colEnd} dividendCols={dividendCols}
+                    workFlat={workFlat} si={si} onWorkChange={onWorkChange} validated={validated} />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
                 <tr>
                   <td style={{ padding: 0 }} />
                   {Array.from({ length: dividendCols }, (_, col) => (
                     <td key={col} style={{ padding: 0, width: CW }}>
-                      {col >= lineStart && col <= step.colEnd
+                      {col >= prStart && col <= step.colEnd
                         ? <div className="h-px bg-[var(--color-text-primary)] opacity-50 my-1" />
                         : null}
                     </td>
@@ -1670,10 +1670,10 @@ export function Exercise15({ exerciseKey, validated, onValidated, validateTrigge
   // Each question: quotient (4 cells), remainder (1), work flat (4 steps × 2 types × 4 cols = 32)
   const [q1Quot, setQ1Quot] = useState<string[]>(() => Array(4).fill(""));
   const [q1Rem, setQ1Rem] = useState("");
-  const [q1Work, setQ1Work] = useState<string[]>(() => Array(32).fill(""));
+  const [q1Work, setQ1Work] = useState<string[]>(() => Array(16).fill(""));
   const [q2Quot, setQ2Quot] = useState<string[]>(() => Array(4).fill(""));
   const [q2Rem, setQ2Rem] = useState("");
-  const [q2Work, setQ2Work] = useState<string[]>(() => Array(32).fill(""));
+  const [q2Work, setQ2Work] = useState<string[]>(() => Array(16).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -1688,8 +1688,8 @@ export function Exercise15({ exerciseKey, validated, onValidated, validateTrigge
   }, [validateTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const makeWorkChange = (setter: React.Dispatch<React.SetStateAction<string[]>>, dCols: number) =>
-    (step: number, type: 0|1, col: number, val: string) => {
-      const idx = step * 2 * dCols + type * dCols + col;
+    (step: number, col: number, val: string) => {
+      const idx = step * dCols + col;
       setter(prev => { const n=[...prev]; n[idx]=val; return n; });
     };
 
