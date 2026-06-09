@@ -309,7 +309,7 @@ const MODAL_VERBS = [
 
 export const A1_CONJ_L15: ConjLesson = {
   slug: "a1-conj-l15",
-  code: "G.11",
+  code: "G2.3",
   level: "A1",
   title: "Les verbes modaux",
   theory: [

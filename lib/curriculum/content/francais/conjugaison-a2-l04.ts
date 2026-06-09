@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L04: ConjLesson = {
   slug: "a2-conj-l04",
-  code: "G.33",
+  code: "G4.14",
   level: "A2",
   title: "Le conditionnel de politesse",
   theory: [

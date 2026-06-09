@@ -205,7 +205,7 @@ const EX2_POOL = [
 
 export const A1_CONJ_L07: ConjLesson = {
   slug: "a1-conj-l07",
-  code: "G.5",
+  code: "G1.5",
   level: "A1",
   title: "Les verbes en -er au présent",
   theory: [

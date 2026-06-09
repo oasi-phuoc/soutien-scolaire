@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L03: ConjLesson = {
   slug: "a2-conj-l03",
-  code: "G.30",
+  code: "G4.11",
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [

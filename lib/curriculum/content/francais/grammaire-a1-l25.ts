@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L25: GrammarLesson = {
   slug: "a1-gr-l25",
-  code: "G.27",
+  code: "G4.8",
   level: "A1",
   title: "Savoir ou connaître ?",
   theory: [

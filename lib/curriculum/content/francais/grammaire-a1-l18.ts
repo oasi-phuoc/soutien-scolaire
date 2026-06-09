@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L18: GrammarLesson = {
   slug: "a1-gr-l18",
-  code: "G.17",
+  code: "G3.4",
   level: "A1",
   title: "Les adjectifs démonstratifs",
   theory: [

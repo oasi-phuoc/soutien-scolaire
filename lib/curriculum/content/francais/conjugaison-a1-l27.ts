@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L27: ConjLesson = {
   slug: "a1-conj-l27",
-  code: "G.22",
+  code: "G4.2",
   level: "A1",
   title: "Pronominaux réfléchis et réciproques",
   theory: [

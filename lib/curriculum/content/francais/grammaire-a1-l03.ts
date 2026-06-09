@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L03: GrammarLesson = {
   slug: "a1-gr-l03",
-  code: "G.4",
+  code: "G1.4",
   level: "A1",
   title: "Le genre des noms et des adjectifs",
   theory: [

@@ -17,6 +17,7 @@ export type GrammarLesson = {
 // ── Imports ───────────────────────────────────────────────────────────────────
 
 import { A1_GR_L01 } from "./content/francais/grammaire-a1-l01";
+import { A1_GR_CEST } from "./content/francais/grammaire-a1-cest-il-est";
 import { A1_GR_PHRASES } from "./content/francais/grammaire-a1-phrases";
 import { A1_GR_L02 } from "./content/francais/grammaire-a1-l02";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-a1-interro";
@@ -55,6 +56,7 @@ import { A2_GR_L52 } from "./content/francais/grammaire-a2-l52";
 
 export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_L01,
+  A1_GR_CEST,
   A1_GR_PHRASES,
   A1_GR_L02,
   A1_GR_INTERRO,

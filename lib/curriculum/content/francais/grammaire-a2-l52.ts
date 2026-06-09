@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "G.47",
+  code: "G4.28",
   level: "A2",
   title: "La cause et la conséquence",
   theory: [

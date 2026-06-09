@@ -416,7 +416,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const q7 = makePair();
     const q7Op = Math.random() < 0.5 ? "+" as const : "−" as const;
     let q7NegA = Math.random() < 0.5;
-    let q7NegB = Math.random() < 0.5;
+    const q7NegB = Math.random() < 0.5;
     if (!q7NegA && !q7NegB) q7NegA = true;
     const q7aN = q7NegA ? -q7.a.n : q7.a.n;
     const q7bN = q7NegB ? -q7.b.n : q7.b.n;
@@ -427,7 +427,7 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
     const q8 = makePair();
     const q8Op = Math.random() < 0.5 ? "×" as const : "÷" as const;
     let q8NegA = Math.random() < 0.5;
-    let q8NegB = Math.random() < 0.5;
+    const q8NegB = Math.random() < 0.5;
     if (!q8NegA && !q8NegB) q8NegA = true;
     const q8aN = q8NegA ? -q8.a.n : q8.a.n;
     const q8bN = q8NegB ? -q8.b.n : q8.b.n;

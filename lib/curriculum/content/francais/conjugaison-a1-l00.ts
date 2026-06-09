@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L00: ConjLesson = {
   slug: "a1-conj-l00",
-  code: "G.1",
+  code: "G1.1",
   level: "A1",
   title: "Les pronoms personnels",
   theory: [
