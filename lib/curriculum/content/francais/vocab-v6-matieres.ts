@@ -11,7 +11,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
     { word: "cuir", image: "cuir.jpg",        article: "le",  gender: "m", definition: "matière faite de peau animale tannée" },
     { word: "soie", image: "soie.jpg",        article: "la",  gender: "f", definition: "tissu fin et brillant produit par les vers à soie" },
     { word: "plastique", image: "plastique.jpg",   article: "le",  gender: "m", definition: "matière synthétique légère et imperméable" },
-    { word: "métal", image: "métal.jpg",       article: "le",  gender: "m", definition: "matière dure et conductrice comme le fer" },
+    { word: "métal", image: "metal.jpg",       article: "le",  gender: "m", definition: "matière dure et conductrice comme le fer" },
     { word: "bois", image: "bois.jpg",        article: "le",  gender: "m", definition: "matière naturelle provenant des arbres" },
     { word: "verre", image: "verre.jpg",       article: "le",  gender: "m", definition: "matière transparente et fragile" },
     { word: "papier", image: "papier.jpg",      article: "le",  gender: "m", definition: "matière fine faite de fibres végétales" },
