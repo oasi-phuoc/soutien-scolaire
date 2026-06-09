@@ -539,7 +539,7 @@ function DecMulColCard({
     const carryWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (carryWrong) {
       return (
-        <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
+        <div className={`h-5 w-8 rounded-none border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
           <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
         </div>
@@ -558,7 +558,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className="h-5 w-8 rounded-none border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
       />
     );
   };
@@ -569,7 +569,7 @@ function DecMulColCard({
     const opWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (opWrong) {
       return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
+        <div className={`h-8 w-8 rounded-none border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
           <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
         </div>
@@ -588,7 +588,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+        className="h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
       />
     );
   };
@@ -599,7 +599,7 @@ function DecMulColCard({
     const resWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (resWrong) {
       return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
+        <div className={`h-8 w-8 rounded-none border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
           <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
         </div>
@@ -619,7 +619,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
+        className={`h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors ${
           ok
             ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold bg-blue-50 dark:bg-blue-950/20"
             : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
@@ -1058,7 +1058,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     if (ok === false) {
       return (
         <td key={colIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+          <div className="h-8 w-8 rounded-none border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
             <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
             <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
           </div>
@@ -1071,7 +1071,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+          className="h-8 w-8 rounded-none border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
       </td>
     );
   }
@@ -1228,7 +1228,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
     if (ok === false) {
       return (
         <td key={inputIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+          <div className="h-8 w-8 rounded-none border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
             <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
             <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
           </div>
@@ -1241,7 +1241,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+          className="h-8 w-8 rounded-none border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
       </td>
     );
   }
@@ -1260,7 +1260,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, 15 + carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] text-[var(--color-text-secondary)] focus:border-[var(--color-accent-alg)]" />
+          className="h-6 w-6 rounded-none border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] text-[var(--color-text-secondary)] focus:border-[var(--color-accent-alg)]" />
       </td>
     );
   }
@@ -1643,7 +1643,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCellChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded border text-center font-mono text-base outline-none transition-colors ${
+        className={`h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors ${
           ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/30"
           : "border-[var(--color-border-default)]"
         }`}
@@ -1657,7 +1657,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className="h-5 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+        <div className="h-5 w-8 rounded-none border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
           <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
         </div>
@@ -1668,7 +1668,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className="h-5 w-8 rounded-none border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
       />
     );
   };

@@ -131,6 +131,7 @@ export type MathRichBlock =
         textsFr: string[];
         carries: (number | null)[];
         result: (number | null)[];
+        aDisplay?: (number | string | null)[];
       }>;
       addNoteFr?: string;
       subColLabels: string[];
@@ -141,6 +142,7 @@ export type MathRichBlock =
         textsFr: string[];
         carries: (number | null)[];
         result: (number | null)[];
+        aDisplay?: (number | string | null)[];
       }>;
       subNoteFr?: string;
     };

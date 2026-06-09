@@ -755,7 +755,7 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
   );
 }
 
-function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, prevCarries, prevResult }: {
+function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, prevCarries, prevResult, aDisplay }: {
   colLabels: string[];
   op: string;
   carryLabel?: string;
@@ -765,6 +765,7 @@ function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, p
   result: (number | null)[];
   prevCarries?: (number | null)[] | null;
   prevResult?: (number | null)[] | null;
+  aDisplay?: (number | string | null)[] | null;
 }) {
   const isComma = (i: number) => colLabels[i] === ",";
   const isNewC = (i: number) => !isComma(i) && carries[i] !== null && (prevCarries == null || prevCarries[i] === null);
@@ -799,14 +800,19 @@ function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, p
         {/* Operand a */}
         <tr>
           <td />
-          {a.map((d, di) => (
-            <td key={di} className="text-center">
-              {isComma(di)
-                ? <div style={{ width: 14 }} className="h-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">,</div>
-                : <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">{d !== null ? d : ""}</div>
-              }
-            </td>
-          ))}
+          {a.map((d, di) => {
+            const overrideVal = aDisplay?.[di];
+            const displayVal = overrideVal !== undefined && overrideVal !== null ? overrideVal : (d !== null ? d : "");
+            const isOverride = overrideVal !== undefined && overrideVal !== null;
+            return (
+              <td key={di} className="text-center">
+                {isComma(di)
+                  ? <div style={{ width: 14 }} className="h-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">,</div>
+                  : <div className={`h-8 w-8 flex items-center justify-center font-mono text-base ${isOverride ? "font-bold text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{displayVal}</div>
+                }
+              </td>
+            );
+          })}
         </tr>
         {/* Operand b with operator */}
         <tr>
@@ -883,7 +889,7 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
               <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
               <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
                 {step.textsFr.map((t, ti) => (
-                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderFracText(t)}</p>
                 ))}
               </div>
               <AddDemoGrid
@@ -896,6 +902,7 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
                 result={step.result}
                 prevCarries={prev?.carries ?? null}
                 prevResult={prev?.result ?? null}
+                aDisplay={step.aDisplay ?? null}
               />
             </div>
           );
