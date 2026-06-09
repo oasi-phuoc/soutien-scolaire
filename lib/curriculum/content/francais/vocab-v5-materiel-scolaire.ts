@@ -11,7 +11,7 @@ export const V5_MATERIEL_SCOLAIRE_THEME: VocabTheme = {
     { word: "stylo", image: "stylo.jpg",         article: "le",  gender: "m", definition: "instrument pour écrire à l'encre" },
     { word: "crayon", image: "crayon.jpg",        article: "le",  gender: "m", definition: "instrument pour écrire et dessiner" },
     { word: "gomme", image: "gomme.jpg",         article: "la",  gender: "f", definition: "outil pour effacer le crayon" },
-    { word: "règle", image: "règle.jpg",         article: "la",  gender: "f", definition: "outil pour tracer des lignes droites" },
+    { word: "règle", image: "regle.jpg",         article: "la",  gender: "f", definition: "outil pour tracer des lignes droites" },
     { word: "trousse", image: "trousse.jpg",       article: "la",  gender: "f", definition: "pochette pour ranger les stylos" },
     { word: "sac", image: "sac.jpg",           article: "le",  gender: "m", definition: "sac pour porter les affaires scolaires" },
     { word: "classeur", image: "classeur.jpg",      article: "le",  gender: "m", definition: "pochette rigide pour classer des feuilles" },

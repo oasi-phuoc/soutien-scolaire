@@ -17,9 +17,9 @@ export const V9_DIRECTION_THEME: VocabTheme = {
     { word: "rue", image: "rue.jpg",             article: "la",  gender: "f", definition: "voie publique en ville" },
     { word: "panneau", image: "panneau.jpg",         article: "le",  gender: "m", definition: "signe routier avec indications" },
     { word: "feu rouge", image: "feu-rouge.jpg",       article: "le",  gender: "m", definition: "signal lumineux pour la circulation" },
-    { word: "passage piéton", image: "passage-piéton.jpg",  article: "le",  gender: "m", definition: "zone réservée pour traverser la rue" },
+    { word: "passage piéton", image: "passage-pieton.jpg",  article: "le",  gender: "m", definition: "zone réservée pour traverser la rue" },
     { word: "sortie", image: "sortie.jpg",          article: "la",  gender: "f", definition: "point de départ d'un lieu" },
-    { word: "entrée", image: "entrée.jpg",          article: "l'",  gender: "f", definition: "point d'accès à un lieu" },
+    { word: "entrée", image: "entree.jpg",          article: "l'",  gender: "f", definition: "point d'accès à un lieu" },
     { word: "chemin", image: "chemin.jpg",          article: "le",  gender: "m", definition: "voie étroite ou itinéraire à suivre" },
   ],
   sentences: [

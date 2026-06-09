@@ -9,17 +9,9 @@ export const MATH_A3_6_LESSON: MathSubmoduleLesson = {
     },
     blocks: [
       // ── PGDC ────────────────────────────────────────────────────────────
-      { type: "heading", fr: "PGDC — Plus Grand Commun Diviseur", black: true },
+      { type: "plain", fr: "Le PGDC (Plus Grand Commun Diviseur) de deux nombres est le plus grand entier qui divise exactement les deux nombres." },
 
-      { type: "highlight", fr: "Définition" },
-      {
-        type: "section", labelFr: "", itemsFr: [
-          "Le **PGDC** (Plus Grand Commun Diviseur) de deux nombres est le **plus grand entier** qui divise exactement les deux nombres.",
-          "Notation : PGDC(a, b)",
-        ],
-      },
-
-      { type: "highlight", fr: "Méthode — liste des diviseurs" },
+      { type: "highlight", fr: "Méthode — pour trouver le PGDC" },
       {
         type: "section", labelFr: "", itemsFr: [
           "1. Lister tous les **diviseurs** de chaque nombre.",
@@ -38,23 +30,14 @@ export const MATH_A3_6_LESSON: MathSubmoduleLesson = {
           ["18", "1 · 2 · 3 · 6 · 9 · 18"],
           ["Communs", "1 · 2 · 3 · **6**"],
         ],
-        captionFr: "Le plus grand diviseur commun est 6.",
       },
-      { type: "note", fr: "PGDC(12, 18) = 6" },
+      { type: "plain", fr: "Le plus grand diviseur commun est 6." },
 
       // ── PPMC ────────────────────────────────────────────────────────────
       { type: "plain", fr: "" },
-      { type: "heading", fr: "PPMC — Plus Petit Commun Multiple", black: true },
+      { type: "plain", fr: "Le PPMC (Plus Petit Commun Multiple) de deux nombres est le plus petit entier positif qui est multiple des deux nombres." },
 
-      { type: "highlight", fr: "Définition" },
-      {
-        type: "section", labelFr: "", itemsFr: [
-          "Le **PPMC** (Plus Petit Commun Multiple) de deux nombres est le **plus petit entier positif** qui est multiple des deux nombres.",
-          "Notation : PPMC(a, b)",
-        ],
-      },
-
-      { type: "highlight", fr: "Méthode — liste des multiples" },
+      { type: "highlight", fr: "Méthode — pour trouver le PPMC" },
       {
         type: "section", labelFr: "", itemsFr: [
           "1. Lister les **multiples** de chaque nombre dans l'ordre croissant.",
@@ -71,20 +54,14 @@ export const MATH_A3_6_LESSON: MathSubmoduleLesson = {
           ["4", "4 · 8 · **12** · 16 · 20 · 24 · …"],
           ["6", "6 · **12** · 18 · 24 · …"],
         ],
-        captionFr: "Le premier multiple commun est 12.",
       },
-      { type: "note", fr: "PPMC(4, 6) = 12" },
+      { type: "plain", fr: "Le premier multiple commun est 12." },
 
       // ── Lien PGDC ↔ PPMC ────────────────────────────────────────────────
       { type: "plain", fr: "" },
       { type: "heading", fr: "Lien entre PGDC et PPMC", black: true },
 
-      { type: "highlight", fr: "Formule" },
-      {
-        type: "rule", titleFr: "", itemsFr: [
-          "PGDC(a, b) × PPMC(a, b) = a × b",
-        ],
-      },
+      { type: "plain", fr: "PGDC(a, b) × PPMC(a, b) = a × b" },
 
       {
         type: "section", labelFr: "Vérification avec 12 et 18 :", itemsFr: [

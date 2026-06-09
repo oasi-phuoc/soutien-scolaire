@@ -16,7 +16,7 @@ export const V9_AEROPORT_THEME: VocabTheme = {
     { word: "terminal", image: "terminal.jpg",            article: "le",  gender: "m", definition: "bâtiment principal d'un aéroport" },
     { word: "douane", image: "douane.jpg",              article: "la",  gender: "f", definition: "contrôle des bagages à la frontière" },
     { word: "enregistrement", image: "enregistrement.jpg",      article: "l'",  gender: "m", definition: "démarche pour valider son billet avant de voler" },
-    { word: "réservation", image: "réservation.jpg",         article: "la",  gender: "f", definition: "action de réserver un vol ou un siège" },
+    { word: "réservation", image: "reservation.jpg",         article: "la",  gender: "f", definition: "action de réserver un vol ou un siège" },
     { word: "embarquement", image: "embarquement.jpg",        article: "l'",  gender: "m", definition: "montée dans l'avion" },
     { word: "porte", image: "porte.jpg",               article: "la",  gender: "f", definition: "accès à l'avion dans le terminal" },
     { word: "bagage", image: "bagage.jpg",              article: "le",  gender: "m", definition: "valise ou sac de voyage" },
