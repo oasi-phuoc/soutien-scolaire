@@ -135,8 +135,8 @@ function DecExercise({
 // ── A5.4 / A5.5 — DecArithGroupExercise ───────────────────────────────────────
 
 type ArithOp = "+" | "-" | "×";
-// "small" = 0.01–10 (hundredths 1–999); "large" = 10–100 (tenths 100–999 or hundredths 1000–9999, random)
-type ArithPrecision = "tenths" | "hundredths" | "extended" | "small" | "large" | "special_mul";
+// "tenths_small" = 0.1–9.9 (1 decimal only); "small" = 0.01–10 (hundredths 1–999); "large" = 10–100 (tenths 100–999 or hundredths 1000–9999, random)
+type ArithPrecision = "tenths" | "hundredths" | "extended" | "tenths_small" | "small" | "large" | "special_mul";
 type MissingPos = "a" | "b" | "result";
 
 interface ArithQuestion {
@@ -170,7 +170,11 @@ function genArithQuestions(
     let missingPos: MissingPos;
 
     if (op === "+") {
-      if (precision === "small") {
+      if (precision === "tenths_small") {
+        // 0.1–9.9: 1 decimal only, sum ≤ 19.8
+        const aT = rnd(1, 49); const bT = rnd(1, 49);
+        aStr = tenthsToStr(aT); bStr = tenthsToStr(bT); resultStr = tenthsToStr(aT + bT);
+      } else if (precision === "small") {
         // 0.01–10: use hundredths 1–499 so sum ≤ 9.98
         const aH = rnd(1, 499); const bH = rnd(1, 499);
         aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH + bH);
@@ -200,7 +204,11 @@ function genArithQuestions(
         resultStr = tenthsToStr(rT);
       }
     } else if (op === "-") {
-      if (precision === "small") {
+      if (precision === "tenths_small") {
+        // 0.1–9.9: 1 decimal only
+        const aT = rnd(10, 99); const bT = rnd(1, aT - 1);
+        aStr = tenthsToStr(aT); bStr = tenthsToStr(bT); resultStr = tenthsToStr(aT - bT);
+      } else if (precision === "small") {
         // 0.01–10: use hundredths
         const aH = rnd(100, 999); const bH = rnd(1, aH - 1);
         aStr = hundredthsToStr(aH); bStr = hundredthsToStr(bH); resultStr = hundredthsToStr(aH - bH);

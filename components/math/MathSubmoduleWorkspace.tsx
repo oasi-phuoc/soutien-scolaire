@@ -26,7 +26,7 @@ type WorkspaceStep =
   | { kind: "fraction_coloring" }
   | { kind: "fraction_read" }
   | { kind: "fraction_multi_coloring" }
-  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "small" | "large" | "special_mul"; mixed?: boolean }
+  | { kind: "dec_arith_group"; exNum: number; op: "+" | "-" | "×"; missingOperand: boolean; timer?: number; precision: "tenths" | "hundredths" | "extended" | "tenths_small" | "small" | "large" | "special_mul"; mixed?: boolean }
   | { kind: "dec_mul2_col"; exNum: number }
   | { kind: "dec_mul_col"; exNum: number; preFilledOperands: boolean }
   | { kind: "dec_div_simple"; exNum: number }
@@ -271,9 +271,9 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A5-4") {
     // Training: Ex1–3 (0.01–10), Ex4 (10–100), Ex5–6 (0.01–10 with timer), Ex6 (10–100), Ex7–8 col, Ex9 compare
-    steps.push({ kind: "dec_arith_group", exNum: 1, op: "+", missingOperand: false, precision: "small" });
-    steps.push({ kind: "dec_arith_group", exNum: 2, op: "+", missingOperand: false, timer: 60, precision: "small" });
-    steps.push({ kind: "dec_arith_group", exNum: 3, op: "+", missingOperand: true, precision: "small" });
+    steps.push({ kind: "dec_arith_group", exNum: 1, op: "+", missingOperand: false, precision: "tenths_small" });
+    steps.push({ kind: "dec_arith_group", exNum: 2, op: "+", missingOperand: false, timer: 60, precision: "tenths_small" });
+    steps.push({ kind: "dec_arith_group", exNum: 3, op: "+", missingOperand: true, precision: "tenths_small" });
     steps.push({ kind: "dec_arith_group", exNum: 4, op: "+", missingOperand: false, precision: "large" });
     steps.push({ kind: "dec_arith_group", exNum: 5, op: "-", missingOperand: false, timer: 60, precision: "small" });
     steps.push({ kind: "dec_arith_group", exNum: 6, op: "-", missingOperand: true, precision: "large" });
