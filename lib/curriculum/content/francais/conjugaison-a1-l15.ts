@@ -253,7 +253,7 @@ export const A1_CONJ_L15: ConjLesson = {
   slug: "a1-conj-l15",
   code: "G.11",
   level: "A1",
-  title: "Vouloir, pouvoir, devoir",
+  title: "Les verbes modaux",
   theory: [
     { type: "heading", text: "Les verbes modaux" },
     {

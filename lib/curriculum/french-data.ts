@@ -121,7 +121,7 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-interro", "G.8",  "L'interrogation de base",              "Est-ce que et l'intonation montante : construire une question simple.",               "grammaire"),
   lesson("A1", "a1-conj-l08", "G.9",  "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
   lesson("A1", "a1-conj-l09", "G.10",  "Les verbes pronominaux",                      "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",                        "conjugaison"),
-  lesson("A1", "a1-conj-l15", "G.11", "Vouloir, pouvoir, devoir, savoir",             "Les verbes modaux : conjugaison et emploi au présent.",                                   "conjugaison"),
+  lesson("A1", "a1-conj-l15", "G.11", "Les verbes modaux",                               "Les verbes modaux : conjugaison et emploi au présent.",                                   "conjugaison"),
   lesson("A1", "a1-gr-l10",   "G.12", "L'interrogation avec les mots interrogatifs", "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                        "grammaire"),
   lesson("A1", "a1-gr-l11",   "G.13", "Les prépositions de lieu",                    "Dans, sur, sous, devant, derrière, à côté de, en face de…",                            "grammaire"),
   lesson("A1", "a1-gr-l14",   "G.14", "Les articles partitifs et la quantité",       "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…",                          "grammaire"),
