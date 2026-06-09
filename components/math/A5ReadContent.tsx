@@ -885,7 +885,7 @@ function genNLRead(): NLLine[] {
       if (k % 5 === 0) continue;
       candidates.push(+(min + k * step).toFixed(1));
     }
-    const arrows = shuffle(candidates).slice(0, 2).sort((a, b) => a - b);
+    const arrows = shuffle(candidates).slice(0, 1).sort((a, b) => a - b);
     return { min, max, step, numDivs, arrows };
   });
 }

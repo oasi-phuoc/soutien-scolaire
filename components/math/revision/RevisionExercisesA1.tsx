@@ -1,48 +1,140 @@
 "use client";
 
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { OrderingChips, PoolExercise, makeRng, seededShuffle } from "./RevisionCommon";
 import type { RevisionExerciseMeta, RevisionExerciseProps, PoolQuestion } from "./RevisionCommon";
 
 const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
-// ─── Exercise 1 — Écrire les nombres (3 pts) — A1.1 Exercise 5 ───────────────
+// ─── Exercise 1 — Écrire les nombres en chiffres (3 pts) — A1.1 Exercise 5 ───
 
 const A1_1_POOL: PoolQuestion[] = [
-  { id: "a1-1-01", promptFr: "Écrivez en chiffres : 4 dizaines et 7 unités", acceptable: ["47"] },
-  { id: "a1-1-02", promptFr: "Écrivez en chiffres : 2 dizaines et 5 unités", acceptable: ["25"] },
-  { id: "a1-1-03", promptFr: "Écrivez en chiffres : 6 dizaines et 1 unité", acceptable: ["61"] },
-  { id: "a1-1-04", promptFr: "Écrivez en chiffres : 8 dizaines et 9 unités", acceptable: ["89"] },
-  { id: "a1-1-05", promptFr: "Écrivez en chiffres : 3 dizaines et 4 unités", acceptable: ["34"] },
-  { id: "a1-1-06", promptFr: "Écrivez en chiffres : 7 dizaines et 2 unités", acceptable: ["72"] },
-  { id: "a1-1-07", promptFr: "Écrivez en chiffres : 5 dizaines et 6 unités", acceptable: ["56"] },
-  { id: "a1-1-08", promptFr: "Écrivez en chiffres : 9 dizaines et 3 unités", acceptable: ["93"] },
-  { id: "a1-1-09", promptFr: "Écrivez en chiffres : 4 dizaines et 8 unités", acceptable: ["48"] },
-  { id: "a1-1-10", promptFr: "Écrivez en chiffres : 7 dizaines et 5 unités", acceptable: ["75"] },
-  { id: "a1-1-11", promptFr: "Écrivez en chiffres : 2 dizaines et 3 unités", acceptable: ["23"] },
-  { id: "a1-1-12", promptFr: "Écrivez en chiffres : 6 dizaines et 7 unités", acceptable: ["67"] },
-  { id: "a1-1-13", promptFr: "Écrivez en chiffres : 1 dizaine et 9 unités", acceptable: ["19"] },
-  { id: "a1-1-14", promptFr: "Écrivez en chiffres : 3 dizaines et 8 unités", acceptable: ["38"] },
-  { id: "a1-1-15", promptFr: "Écrivez en chiffres : 5 dizaines et 4 unités", acceptable: ["54"] },
+  { promptFr: "Écrivez en chiffres : 3 milliers, 5 centaines, 2 dizaines et 7 unités", acceptable: ["3527"] },
+  { promptFr: "Écrivez en chiffres : 7 milliers, 1 centaine, 4 dizaines et 0 unités", acceptable: ["7140"] },
+  { promptFr: "Écrivez en chiffres : 2 milliers, 8 centaines, 0 dizaines et 6 unités", acceptable: ["2806"] },
+  { promptFr: "Écrivez en chiffres : 5 milliers, 3 centaines, 9 dizaines et 2 unités", acceptable: ["5392"] },
+  { promptFr: "Écrivez en chiffres : 1 millier, 6 centaines, 5 dizaines et 4 unités", acceptable: ["1654"] },
+  { promptFr: "Écrivez en chiffres : 9 milliers, 0 centaines, 3 dizaines et 8 unités", acceptable: ["9038"] },
+  { promptFr: "Écrivez en chiffres : 4 milliers, 7 centaines, 1 dizaine et 5 unités", acceptable: ["4715"] },
+  { promptFr: "Écrivez en chiffres : 6 milliers, 2 centaines, 8 dizaines et 3 unités", acceptable: ["6283"] },
+  { promptFr: "Écrivez en chiffres : 8 milliers, 4 centaines, 6 dizaines et 1 unité", acceptable: ["8461"] },
+  { promptFr: "Écrivez en chiffres : 3 milliers, 9 centaines, 7 dizaines et 0 unités", acceptable: ["3970"] },
+  { promptFr: "Écrivez en chiffres : 2 milliers, 0 centaines, 5 dizaines et 9 unités", acceptable: ["2059"] },
+  { promptFr: "Écrivez en chiffres : 7 milliers, 3 centaines, 0 dizaines et 4 unités", acceptable: ["7304"] },
 ];
 
 function A1Ex1(props: RevisionExerciseProps) {
   return <PoolExercise {...props} pool={A1_1_POOL} count={3} />;
 }
 
-// ─── Exercise 2 — Décomposition avec blocs (3 pts) — A1.2 Exercise 3 ─────────
+// ─── SVG block sub-components (inline <g> elements) ──────────────────────────
+
+function MillierGroup({ s = 4, d = 9 }: { s?: number; d?: number }) {
+  const fw = s * 10, fh = s * 10;
+  return (
+    <g>
+      <polygon points={`0,${d} ${fw},${d} ${fw + d},0 ${d},0`} fill="#BBF7D0" stroke="#6EE7B7" strokeWidth="0.5" />
+      <polygon points={`${fw},${d} ${fw + d},0 ${fw + d},${fh} ${fw},${fh + d}`} fill="#34D399" stroke="#10B981" strokeWidth="0.5" />
+      {Array.from({ length: 10 }, (_, row) =>
+        Array.from({ length: 10 }, (_, col) => (
+          <rect key={`${row}-${col}`} x={col * s + 0.5} y={d + row * s + 0.5} width={s - 1} height={s - 1}
+            fill="#6EE7B7" stroke="#34D399" strokeWidth="0.5" rx="0.5" />
+        ))
+      )}
+    </g>
+  );
+}
+
+function CentaineGroup({ s = 5 }: { s?: number }) {
+  return (
+    <g>
+      {Array.from({ length: 10 }, (_, row) =>
+        Array.from({ length: 10 }, (_, col) => (
+          <rect key={`${row}-${col}`} x={col * s + 0.5} y={row * s + 0.5} width={s - 1} height={s - 1}
+            fill="#C4B5FD" stroke="#8B5CF6" strokeWidth="0.5" rx="0.5" />
+        ))
+      )}
+    </g>
+  );
+}
+
+function DizaineGroup({ s = 9 }: { s?: number }) {
+  return (
+    <g>
+      {Array.from({ length: 10 }, (_, i) => (
+        <rect key={i} x={0.5} y={i * s + 0.5} width={s - 1} height={s - 1}
+          fill="#FED7AA" stroke="#F97316" strokeWidth="0.5" rx="0.5" />
+      ))}
+    </g>
+  );
+}
+
+function UniteGroup({ s = 16 }: { s?: number }) {
+  return (
+    <g>
+      <rect x={0.5} y={0.5} width={s - 1} height={s - 1} fill="#BAE6FD" stroke="#38BDF8" strokeWidth="0.5" rx="1.5" />
+    </g>
+  );
+}
+
+// ─── Seeded block placement ───────────────────────────────────────────────────
+
+type BlockPos = { kind: "m" | "h" | "d" | "u"; x: number; y: number };
+const BLOCK_SIZES: Record<"m" | "h" | "d" | "u", [number, number]> = {
+  m: [49, 49], h: [50, 50], d: [9, 90], u: [16, 16],
+};
+
+function placeBlocksSeeded(kinds: Array<"m" | "h" | "d" | "u">, W: number, H: number, rng: ReturnType<typeof makeRng>): BlockPos[] {
+  const placed: BlockPos[] = [];
+  for (const kind of kinds) {
+    const [bw, bh] = BLOCK_SIZES[kind]!;
+    let best: { x: number; y: number } = { x: 0, y: 0 };
+    let bestOverlap = Infinity;
+    const maxX = Math.max(0, W - bw - 1);
+    const maxY = Math.max(0, H - bh - 1);
+    for (let attempt = 0; attempt < 300; attempt++) {
+      const x = Math.floor(rng.next() * maxX);
+      const y = Math.floor(rng.next() * maxY);
+      let overlap = 0;
+      for (const p of placed) {
+        const [pw, ph] = BLOCK_SIZES[p.kind]!;
+        const ox = Math.max(0, Math.min(x + bw, p.x + pw + 2) - Math.max(x, p.x - 2));
+        const oy = Math.max(0, Math.min(y + bh, p.y + ph + 2) - Math.max(y, p.y - 2));
+        overlap += ox * oy;
+      }
+      if (overlap < bestOverlap) { bestOverlap = overlap; best = { x, y }; }
+      if (overlap === 0) break;
+    }
+    placed.push({ kind, ...best });
+  }
+  return placed;
+}
+
+// ─── Exercise 2 — Compter les blocs (3 pts) — A1.2 Exercise 3 ─────────────────
 
 function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
-  const data = useMemo(() => {
+  const { questions } = useMemo(() => {
     const rng = makeRng(exerciseKey);
-    return Array.from({ length: 3 }, () => {
-      const n = rng.int(1001, 9999);
-      const m = Math.floor(n / 1000);
-      const c = Math.floor((n % 1000) / 100);
-      const d = Math.floor((n % 100) / 10);
-      const u = n % 10;
-      return { n, m, c, d, u };
+    const questions = Array.from({ length: 3 }, (_, qi) => {
+      let m = 1, c = 1, d = 1, u = 1;
+      for (let g = 0; g < 200; g++) {
+        const _m = rng.int(1, 2);
+        const _c = rng.int(0, 5);
+        const _d = rng.int(0, 7);
+        const _u = rng.int(0, 9);
+        const total = _m + _c + _d + _u;
+        if (total >= 5 && total <= 20) { m = _m; c = _c; d = _d; u = _u; break; }
+      }
+      const W = 320, H = 200;
+      const posRng = makeRng(exerciseKey * 100 + qi * 7 + 13);
+      const kinds: Array<"m" | "h" | "d" | "u"> = seededShuffle([
+        ...Array(m).fill("m"), ...Array(c).fill("h"),
+        ...Array(d).fill("d"), ...Array(u).fill("u"),
+      ], exerciseKey + qi * 37);
+      const positions = placeBlocksSeeded(kinds, W, H, posRng);
+      return { m, c, d, u, positions, W, H };
     });
+    return { questions };
   }, [exerciseKey]);
 
   const mkEmpty = () => ({ m: "", c: "", d: "", u: "" });
@@ -51,7 +143,7 @@ function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    data.forEach((q, i) => {
+    questions.forEach((q, i) => {
       const a = answers[i] ?? mkEmpty();
       if (
         parseInt(a.m) === q.m * 1000 &&
@@ -69,44 +161,49 @@ function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
 
   return (
     <div className="space-y-5">
-      <p className="text-sm text-[var(--color-text-secondary)]">Décomposez chaque nombre en milliers, centaines, dizaines et unités.</p>
-      {data.map((q, i) => {
+      <p className="text-sm text-[var(--color-text-secondary)]">Comptez chaque type de blocs et complétez la décomposition.</p>
+      {questions.map((q, i) => {
         const a = answers[i] ?? mkEmpty();
-        const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 px-1 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
-        const valCls = (ok: boolean) => ok ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50 text-amber-600";
-        const mOk = parseInt(a.m) === q.m * 1000;
-        const cOk = parseInt(a.c) === q.c * 100;
-        const dOk = parseInt(a.d) === q.d * 10;
-        const uOk = parseInt(a.u) === q.u;
+        const mOk = validated ? parseInt(a.m) === q.m * 1000 : null;
+        const cOk = validated ? parseInt(a.c) === q.c * 100 : null;
+        const dOk = validated ? parseInt(a.d) === q.d * 10 : null;
+        const uOk = validated ? parseInt(a.u) === q.u : null;
+        const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
+        const vCls = (ok: boolean | null) =>
+          `flex-1 rounded border px-1 py-1 text-center text-sm ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : ok ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
         return (
-          <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-            <div className="mb-2 flex justify-center">
-              <span className="text-xl font-bold tabular-nums text-[var(--color-text-primary)]">
-                {q.n.toLocaleString("fr-CH")}
-              </span>
+          <div key={i} className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
+            <div className="w-full overflow-hidden" style={{ maxWidth: q.W }}>
+              <svg viewBox={`0 0 ${q.W} ${q.H}`} width="100%" style={{ display: "block" }}>
+                {q.positions.map((pos, pi) => (
+                  <g key={pi} transform={`translate(${Math.round(pos.x)}, ${Math.round(pos.y)})`}>
+                    {pos.kind === "m" ? <MillierGroup s={4} d={9} /> :
+                     pos.kind === "h" ? <CentaineGroup s={5} /> :
+                     pos.kind === "d" ? <DizaineGroup s={9} /> :
+                     <UniteGroup s={16} />}
+                  </g>
+                ))}
+              </svg>
             </div>
-            <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
-              <span className="mt-[7px] shrink-0">=</span>
-              {[
-                { key: "m" as const, val: q.m * 1000, ok: mOk, label: "millier" },
-                { key: "c" as const, val: q.c * 100, ok: cOk, label: "centaine" },
-                { key: "d" as const, val: q.d * 10, ok: dOk, label: "dizaine" },
-                { key: "u" as const, val: q.u, ok: uOk, label: "unité" },
-              ].map((field, fi) => (
+            <div className="mt-2 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
+              <span className="shrink-0">=</span>
+              {([
+                { key: "m" as const, ok: mOk, ph: "M×1000", val: q.m * 1000 },
+                { key: "c" as const, ok: cOk, ph: "C×100",  val: q.c * 100 },
+                { key: "d" as const, ok: dOk, ph: "D×10",   val: q.d * 10 },
+                { key: "u" as const, ok: uOk, ph: "U×1",    val: q.u },
+              ]).map((field, fi) => (
                 <React.Fragment key={field.key}>
-                  {fi > 0 && <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>}
-                  <div className="flex flex-1 flex-col items-center gap-0.5">
-                    {validated ? (
-                      <span className={`w-full rounded border px-1 py-1.5 text-sm text-center ${valCls(field.ok)}`}>
-                        {field.ok ? (a[field.key] || String(field.val)) : String(field.val)}
-                      </span>
-                    ) : (
-                      <input className={inputCls} inputMode="numeric" autoComplete="off"
-                        value={a[field.key]}
-                        onChange={e => setAns(i, { [field.key]: e.target.value.replace(/[^0-9]/g, "") })} />
-                    )}
-                    <span className="text-xs text-[var(--color-text-secondary)]">{field.label}</span>
-                  </div>
+                  {fi > 0 && <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>}
+                  {validated ? (
+                    <span className={vCls(field.ok)}>
+                      {field.ok ? (a[field.key] || String(field.val)) : String(field.val)}
+                    </span>
+                  ) : (
+                    <input className={inputCls} placeholder={field.ph} inputMode="numeric" autoComplete="off"
+                      value={a[field.key]}
+                      onChange={e => setAns(i, { [field.key]: e.target.value.replace(/[^0-9]/g, "") })} />
+                  )}
                 </React.Fragment>
               ))}
             </div>
@@ -200,26 +297,26 @@ function A1Ex3({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   );
 }
 
-// ─── Exercise 4 — Comparaison 5 chiffres (3 pts) — A1.3 Exercise 2 ───────────
+// ─── Exercise 4 — Comparaison à 6 chiffres (5 pts) — A1.3 Exercise 2 ─────────
 
 type CompSym = "<" | ">" | "=";
 
 function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
   const data = useMemo(() => {
     const rng = makeRng(exerciseKey);
-    return Array.from({ length: 3 }, (_, i) => {
-      if (i === 0) {
-        const a = rng.int(10000, 89999);
+    return Array.from({ length: 5 }, (_, i) => {
+      if (i === 2) {
+        const a = rng.int(100000, 899999);
         return { a, b: a, correct: "=" as CompSym };
       }
-      const a = rng.int(10000, 89999);
-      const b = rng.int(10000, 89999);
+      const a = rng.int(100000, 899999);
+      const b = rng.int(100000, 899999);
       const correct: CompSym = a < b ? "<" : a > b ? ">" : "=";
       return { a, b, correct };
     });
   }, [exerciseKey]);
 
-  const [selected, setSelected] = useState<(CompSym | "")[]>(Array(3).fill(""));
+  const [selected, setSelected] = useState<(CompSym | "")[]>(Array(5).fill(""));
 
   useEffect(() => {
     if (validateTrigger === 0) return;
@@ -227,46 +324,46 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
     data.forEach((pair, i) => {
       if (selected[i] === pair.correct) pts++;
     });
-    onValidated(pts, 3);
+    onValidated(pts, 5);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
   return (
-    <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]">Complétez avec le symbole de comparaison.</p>
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Comparez les deux nombres.</p>
       {data.map((pair, i) => {
         const sel = selected[i] ?? "";
         const correct = pair.correct;
         return (
-          <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-            <div className="flex items-center justify-center gap-3">
-              <span className="font-mono text-lg font-bold tabular-nums text-[var(--color-text-primary)]">
-                {pair.a.toLocaleString("fr-CH")}
-              </span>
-              <div className="flex gap-1">
-                {(["<", ">", "="] as CompSym[]).map(sym => {
-                  let cls = "w-10 h-9 rounded border text-center text-sm font-bold transition-colors";
-                  if (validated) {
-                    if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
-                    else if (sym === sel) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
-                    else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
-                  } else {
-                    cls += sel === sym
-                      ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
-                      : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
-                  }
-                  return (
-                    <button key={sym} type="button" className={cls}
-                      onClick={() => { if (!validated) setSelected(prev => prev.map((s, j) => j === i ? sym : s)); }}>
-                      {sym}
-                    </button>
-                  );
-                })}
-              </div>
-              <span className="font-mono text-lg font-bold tabular-nums text-[var(--color-text-primary)]">
-                {pair.b.toLocaleString("fr-CH")}
-              </span>
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="font-mono text-sm font-bold tabular-nums text-[var(--color-text-primary)]">
+              {pair.a.toLocaleString("fr-CH")}
+            </span>
+            <div className="flex gap-1">
+              {(["<", "=", ">"] as CompSym[]).map(sym => {
+                let cls = "w-9 h-8 rounded border text-center text-sm font-bold transition-colors";
+                if (validated) {
+                  if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
+                  else if (sym === sel && sym === correct) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
+                  else if (sym === sel && sym !== correct) cls += ` ${CLS_WRONG}`;
+                  else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                } else {
+                  cls += sel === sym
+                    ? " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]"
+                    : " border-zinc-300 dark:border-zinc-600 text-[var(--color-text-primary)] hover:border-teal-400 cursor-pointer";
+                }
+                return (
+                  <button key={sym} type="button" className={cls}
+                    onClick={() => { if (!validated) setSelected(prev => prev.map((s, j) => j === i ? sym : s)); }}>
+                    {sym}
+                  </button>
+                );
+              })}
             </div>
+            <span className="font-mono text-sm font-bold tabular-nums text-[var(--color-text-primary)]">
+              {pair.b.toLocaleString("fr-CH")}
+            </span>
           </div>
         );
       })}
@@ -274,117 +371,222 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   );
 }
 
-// ─── Exercise 5 — Aléatoire parmi A1.3 Ex3/4/5 (3 pts) ──────────────────────
+// ─── Exercise 5 — Sélection par critère (3 pts) — A1.3 Ex3/4/5 style ────────
 
-const A1_5a_POOL: PoolQuestion[] = [
-  { id: "a1-5a-01", promptFr: "Quel symbole convient ? 4 527 ___ 4 572", acceptable: ["<"] },
-  { id: "a1-5a-02", promptFr: "Quel symbole convient ? 7 835 ___ 7 853", acceptable: ["<"] },
-  { id: "a1-5a-03", promptFr: "Quel symbole convient ? 3 946 ___ 3 946", acceptable: ["="] },
-  { id: "a1-5a-04", promptFr: "Quel symbole convient ? 8 134 ___ 8 143", acceptable: ["<"] },
-  { id: "a1-5a-05", promptFr: "Quel symbole convient ? 5 621 ___ 5 612", acceptable: [">"] },
-  { id: "a1-5a-06", promptFr: "Quel symbole convient ? 2 490 ___ 2 490", acceptable: ["="] },
-  { id: "a1-5a-07", promptFr: "Quel symbole convient ? 6 708 ___ 6 780", acceptable: ["<"] },
-  { id: "a1-5a-08", promptFr: "Quel symbole convient ? 9 340 ___ 9 304", acceptable: [">"] },
-  { id: "a1-5a-09", promptFr: "Quel symbole convient ? 1 255 ___ 1 552", acceptable: ["<"] },
-  { id: "a1-5a-10", promptFr: "Quel symbole convient ? 4 100 ___ 4 100", acceptable: ["="] },
-  { id: "a1-5a-11", promptFr: "Quel symbole convient ? 3 782 ___ 3 872", acceptable: ["<"] },
-  { id: "a1-5a-12", promptFr: "Quel symbole convient ? 9 050 ___ 9 005", acceptable: [">"] },
-];
+type SelectMode = "plus_grand" | "plus_petit" | "entre";
 
-const A1_5b_POOL: PoolQuestion[] = [
-  { id: "a1-5b-01", promptFr: "Quel est le plus grand nombre parmi 3 450, 3 540 et 3 405 ?", acceptable: ["3540", "3 540"] },
-  { id: "a1-5b-02", promptFr: "Quel est le plus petit nombre parmi 7 621, 7 612 et 7 261 ?", acceptable: ["7261", "7 261"] },
-  { id: "a1-5b-03", promptFr: "Quel nombre est compris entre 4 000 et 5 000 parmi 3 899, 4 250 et 5 001 ?", acceptable: ["4250", "4 250"] },
-  { id: "a1-5b-04", promptFr: "Quel est le plus grand nombre parmi 2 089, 2 908 et 2 809 ?", acceptable: ["2908", "2 908"] },
-  { id: "a1-5b-05", promptFr: "Quel est le plus petit nombre parmi 5 123, 5 132 et 5 213 ?", acceptable: ["5123", "5 123"] },
-  { id: "a1-5b-06", promptFr: "Quel nombre est supérieur à 6 000 parmi 5 999, 6 001 et 5 889 ?", acceptable: ["6001", "6 001"] },
-  { id: "a1-5b-07", promptFr: "Quel est le plus grand nombre parmi 8 340, 8 304 et 8 043 ?", acceptable: ["8340", "8 340"] },
-  { id: "a1-5b-08", promptFr: "Quel nombre est inférieur à 3 000 parmi 3 001, 2 999 et 3 100 ?", acceptable: ["2999", "2 999"] },
-  { id: "a1-5b-09", promptFr: "Quel est le plus petit nombre parmi 4 567, 4 657 et 4 576 ?", acceptable: ["4567", "4 567"] },
-];
-
-const A1_5c_POOL: PoolQuestion[] = [
-  { id: "a1-5c-01", promptFr: "Le nombre 523 est-il compris entre 500 et 600 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-02", promptFr: "Le nombre 723 est-il plus grand que 710 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-03", promptFr: "Le nombre 285 est-il inférieur à 300 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-04", promptFr: "Le nombre 4 250 est-il compris entre 4 000 et 4 500 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-05", promptFr: "Le nombre 6 899 est-il supérieur à 7 000 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-5c-06", promptFr: "Le nombre 3 500 est-il entre 3 000 et 4 000 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-07", promptFr: "Le nombre 1 800 est-il inférieur à 2 000 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-08", promptFr: "Le nombre 8 050 est-il supérieur à 8 500 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-5c-09", promptFr: "Le nombre 5 999 est-il compris entre 5 000 et 6 000 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-5c-10", promptFr: "Le nombre 7 200 est-il supérieur à 7 500 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-];
-
-function A1Ex5(props: RevisionExerciseProps) {
-  const variant = props.exerciseKey % 3;
-  if (variant === 0) return <PoolExercise {...props} pool={A1_5a_POOL} count={3} />;
-  if (variant === 1) return <PoolExercise {...props} pool={A1_5b_POOL} count={3} />;
-  return <PoolExercise {...props} pool={A1_5c_POOL} count={3} />;
-}
-
-// ─── Exercise 6 — Nombres dans les intervalles (3 pts) — A1.3 Exercise 6 ─────
-
-const A1_6_POOL: PoolQuestion[] = [
-  { id: "a1-6-01", promptFr: "Le nombre 553 est-il compris entre 250 et 700 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-02", promptFr: "Le nombre 710 est-il compris entre 250 et 700 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-6-03", promptFr: "Le nombre 199 est-il compris entre 10 et 250 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-04", promptFr: "Le nombre 34 est-il compris entre 10 et 250 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-05", promptFr: "Le nombre 908 est-il compris entre 700 et 920 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-06", promptFr: "Le nombre 587 est-il compris entre 250 et 700 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-07", promptFr: "Le nombre 242 est-il compris entre 10 et 250 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-08", promptFr: "Le nombre 890 est-il compris entre 700 et 920 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-09", promptFr: "Le nombre 200 est-il strictement entre 250 et 700 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-6-10", promptFr: "Le nombre 700 est-il strictement entre 250 et 700 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-6-11", promptFr: "Le nombre 330 est-il compris entre 10 et 250 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-6-12", promptFr: "Le nombre 815 est-il compris entre 700 et 920 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-13", promptFr: "Le nombre 12 est-il compris entre 250 et 700 ? (oui/non)", acceptable: ["non", "Non", "NON"] },
-  { id: "a1-6-14", promptFr: "Le nombre 498 est-il compris entre 250 et 700 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-  { id: "a1-6-15", promptFr: "Le nombre 48 est-il compris entre 10 et 250 ? (oui/non)", acceptable: ["oui", "Oui", "OUI"] },
-];
-
-function A1Ex6(props: RevisionExerciseProps) {
-  return <PoolExercise {...props} pool={A1_6_POOL} count={3} />;
-}
-
-// ─── Exercise 7 — Droite numérique + Voisins (5 pts) — A1.4 Ex2 + Ex3 ────────
-
-function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
-  const data = useMemo(() => {
+function A1Ex5({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
+  const { numbers, mode, threshold, limitLo, limitHi, consigne } = useMemo(() => {
     const rng = makeRng(exerciseKey);
-    const step = 100;
-    const widths = [200, 300, 400];
-    const width = widths[rng.int(0, 2)]!;
-    const min = rng.int(0, Math.floor((9000 - width) / 100)) * 100;
-    const max = min + width;
-    const candidates: number[] = [];
-    for (let v = min + 10; v < max; v += 10) {
-      if (v % step !== 0) candidates.push(v);
-    }
-    const sh = seededShuffle(candidates, exerciseKey + 1);
-    const arrows = [Math.min(sh[0]!, sh[1]!), Math.max(sh[0]!, sh[1]!)];
-    const voisins: number[] = [];
+    const modes: SelectMode[] = ["plus_grand", "plus_petit", "entre"];
+    const mode: SelectMode = modes[exerciseKey % 3]!;
+
+    const nums: number[] = [];
     const used = new Set<number>();
-    const rng2 = makeRng(exerciseKey + 200);
-    while (voisins.length < 3) {
-      const n = rng2.int(100, 999);
-      if (n % 10 !== 0 && !used.has(n)) { voisins.push(n); used.add(n); }
+    while (nums.length < 15) {
+      const n = rng.int(10, 990);
+      if (!used.has(n)) { nums.push(n); used.add(n); }
     }
-    return { min, max, step, arrows, voisins };
+    const sorted = [...nums].sort((a, b) => a - b);
+
+    let threshold = sorted[7]!;
+    let limitLo = sorted[3]!;
+    let limitHi = sorted[11]!;
+    let consigne = "";
+    if (mode === "plus_grand") {
+      threshold = sorted[rng.int(3, 10)]!;
+      consigne = `Sélectionnez les nombres plus grands que ${threshold}.`;
+    } else if (mode === "plus_petit") {
+      threshold = sorted[rng.int(4, 11)]!;
+      consigne = `Sélectionnez les nombres plus petits que ${threshold}.`;
+    } else {
+      limitLo = sorted[rng.int(2, 5)]!;
+      limitHi = sorted[rng.int(9, 12)]!;
+      consigne = `Sélectionnez les nombres entre ${limitLo} et ${limitHi}.`;
+    }
+
+    return { numbers: seededShuffle(nums, exerciseKey + 1), mode, threshold, limitLo, limitHi, consigne };
   }, [exerciseKey]);
 
-  const [lineAnswers, setLineAnswers] = useState(["", ""]);
-  const [lineResults, setLineResults] = useState<(boolean | null)[]>([null, null]);
-  const [voisinsAns, setVoisinsAns] = useState(() =>
-    Array(3).fill(null).map(() => ({ lo: "", hi: "" }))
+  const [selected, setSelected] = useState<boolean[]>(() => Array(15).fill(false));
+
+  const shouldSelect = useCallback((n: number) => {
+    if (mode === "plus_grand") return n > threshold;
+    if (mode === "plus_petit") return n < threshold;
+    return n > limitLo && n < limitHi;
+  }, [mode, threshold, limitLo, limitHi]);
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    let correct = 0;
+    numbers.forEach((n, i) => {
+      if ((selected[i] ?? false) === shouldSelect(n)) correct++;
+    });
+    const pts = Math.round(3 * correct / 15);
+    onValidated(pts, 3);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateTrigger]);
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
+      <div className="grid grid-cols-5 gap-2">
+        {numbers.map((n, i) => {
+          const sel = selected[i] ?? false;
+          const should = shouldSelect(n);
+          let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
+          if (!validated) {
+            cls += sel
+              ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+              : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+          } else {
+            if (sel && should) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+            else if (sel && !should) cls += CLS_WRONG;
+            else if (!sel && should) cls += CLS_WRONG;
+            else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+          }
+          return (
+            <button key={i} type="button" disabled={validated}
+              onClick={() => setSelected(prev => prev.map((v, j) => j === i ? !v : v))}
+              className={cls}>
+              {n}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ─── Exercise 6 — Encadrer à la dizaine près (5 pts) — A1.3 Exercise 6 ───────
+
+function A1Ex6({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
+  const data = useMemo(() => {
+    const rng = makeRng(exerciseKey);
+    return Array.from({ length: 5 }, () => {
+      let n = rng.int(100, 899);
+      while (n % 10 === 0) n = rng.int(100, 899);
+      const lo = Math.floor(n / 10) * 10;
+      const hi = lo + 10;
+      const dir: "<" | ">" = rng.int(0, 1) === 0 ? "<" : ">";
+      return { n, lo, hi, dir };
+    });
+  }, [exerciseKey]);
+
+  const [answers, setAnswers] = useState(() =>
+    Array(5).fill(null).map(() => ({ left: "", right: "" }))
   );
 
   useEffect(() => {
     if (validateTrigger === 0) return;
     let pts = 0;
-    const lr = data.arrows.map((v, i) => parseInt(lineAnswers[i] ?? "") === v);
-    setLineResults(lr);
-    pts += lr.filter(Boolean).length;
+    data.forEach((q, i) => {
+      const a = answers[i] ?? { left: "", right: "" };
+      const leftExpected  = q.dir === "<" ? q.lo : q.hi;
+      const rightExpected = q.dir === "<" ? q.hi : q.lo;
+      if (parseInt(a.left) === leftExpected && parseInt(a.right) === rightExpected) pts++;
+    });
+    onValidated(pts, 5);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateTrigger]);
+
+  const inputCls = "w-16 rounded border px-1 py-1.5 text-sm tabular-nums text-center border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 outline-none focus-visible:border-[var(--color-accent-alg)]";
+
+  return (
+    <div className="space-y-3">
+      <p className="text-sm text-[var(--color-text-secondary)]">Encadrez chaque nombre à la dizaine près.</p>
+      {data.map((q, i) => {
+        const a = answers[i] ?? { left: "", right: "" };
+        const leftExpected  = q.dir === "<" ? q.lo : q.hi;
+        const rightExpected = q.dir === "<" ? q.hi : q.lo;
+        const leftOk  = validated ? parseInt(a.left)  === leftExpected  : null;
+        const rightOk = validated ? parseInt(a.right) === rightExpected : null;
+        const vCls = (ok: boolean | null) =>
+          `w-16 rounded border px-1 py-1.5 text-sm tabular-nums text-center ${ok === null ? "" : ok ? "border-[var(--color-border-default)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
+        return (
+          <div key={i} className="flex items-center gap-2">
+            <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            {validated ? (
+              <span className={vCls(leftOk)}>{leftOk ? (a.left || String(leftExpected)) : String(leftExpected)}</span>
+            ) : (
+              <input type="text" inputMode="numeric" className={inputCls} value={a.left}
+                onChange={e => setAnswers(prev => prev.map((v, j) => j === i ? { ...v, left: e.target.value.replace(/[^0-9]/g, "") } : v))} />
+            )}
+            <span className="text-sm font-semibold text-[var(--color-text-secondary)]">{q.dir}</span>
+            <span className="w-12 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.n}</span>
+            <span className="text-sm font-semibold text-[var(--color-text-secondary)]">{q.dir}</span>
+            {validated ? (
+              <span className={vCls(rightOk)}>{rightOk ? (a.right || String(rightExpected)) : String(rightExpected)}</span>
+            ) : (
+              <input type="text" inputMode="numeric" className={inputCls} value={a.right}
+                onChange={e => setAnswers(prev => prev.map((v, j) => j === i ? { ...v, right: e.target.value.replace(/[^0-9]/g, "") } : v))} />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── Exercise 7 — Droite numérique (5 pts) — A1.4 style ──────────────────────
+
+type NLData = { start: number; end: number; step: number; divCount: number; labelEvery: number; target: number };
+
+function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
+  const data = useMemo(() => {
+    const rng = makeRng(exerciseKey);
+
+    const makeNL = (presets: Array<{ start: number; end: number; step: number }>, rng2: ReturnType<typeof makeRng>): NLData => {
+      const p = presets[rng2.int(0, presets.length - 1)]!;
+      const divCount = (p.end - p.start) / p.step;
+      const labelEvery = divCount <= 5 ? 1 : divCount <= 10 ? 2 : 5;
+      const ticks = Array.from({ length: divCount + 1 }, (_, k) => p.start + k * p.step);
+      const cands = ticks.filter((_, k) => k % labelEvery !== 0 && k > 0 && k < divCount);
+      const target = cands.length > 0 ? cands[rng2.int(0, cands.length - 1)]! : ticks[Math.ceil(divCount / 2)]!;
+      return { start: p.start, end: p.end, step: p.step, divCount, labelEvery, target };
+    };
+
+    const FINE = [
+      { start: 0, end: 100, step: 10 },
+      { start: 100, end: 200, step: 10 },
+      { start: 50, end: 150, step: 10 },
+      { start: 200, end: 400, step: 20 },
+    ];
+    const COARSE = [
+      { start: 0, end: 500, step: 100 },
+      { start: 0, end: 1000, step: 100 },
+      { start: 500, end: 1500, step: 100 },
+      { start: 1000, end: 3000, step: 200 },
+    ];
+
+    const nl1 = makeNL(FINE, makeRng(exerciseKey + 1));
+    const nl2 = makeNL(COARSE, makeRng(exerciseKey + 2));
+
+    const voisins: number[] = [];
+    const used = new Set<number>();
+    while (voisins.length < 3) {
+      const n = rng.int(101, 998);
+      if (n % 10 !== 0 && !used.has(n)) { voisins.push(n); used.add(n); }
+    }
+
+    return { nl1, nl2, voisins };
+  }, [exerciseKey]);
+
+  const [ans1, setAns1] = useState("");
+  const [ans2, setAns2] = useState("");
+  const [voisinsAns, setVoisinsAns] = useState(() =>
+    Array(3).fill(null).map(() => ({ lo: "", hi: "" }))
+  );
+  const [lineResults, setLineResults] = useState<[boolean | null, boolean | null]>([null, null]);
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    let pts = 0;
+    const r1 = parseInt(ans1) === data.nl1.target;
+    const r2 = parseInt(ans2) === data.nl2.target;
+    setLineResults([r1, r2]);
+    if (r1) pts++;
+    if (r2) pts++;
     data.voisins.forEach((n, i) => {
       const lo = Math.floor(n / 10) * 10;
       const hi = lo + 10;
@@ -395,75 +597,72 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateTrigger]);
 
-  const ML = 30, lineW = 450;
-  const totalUnits = data.max - data.min;
-  const pos = (v: number) => ML + ((v - data.min) / totalUnits) * lineW;
-  const svgH = 130, lineY = 112, arrowTipY = 108, boxW = 56, boxH = 24;
-  const boxYArr = [4, 36];
+  const fieldCls = "w-16 rounded border px-1 py-1 text-sm tabular-nums text-center border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 outline-none focus-visible:border-[var(--color-accent-alg)]";
 
-  const fieldCls = "w-16 rounded border bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center text-sm tabular-nums outline-none border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
+  const NLPanel = ({ nl, answer, setAnswer, result }: {
+    nl: NLData; answer: string; setAnswer: (v: string) => void; result: boolean | null;
+  }) => {
+    const W = 360, H = 90, ML = 28, lineW = 300, lineY = 68;
+    const pos = (v: number) => ML + ((v - nl.start) / (nl.end - nl.start)) * lineW;
+    const tx = pos(nl.target);
+    const accent = "var(--color-accent-alg)";
+    const arrowColor = result === false ? "#F59E0B" : accent;
+    const fs = nl.end >= 1000 ? 7 : nl.end >= 100 ? 8 : 10;
+    const ulY = 28;
+    return (
+      <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+        <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }}>
+          <line x1={ML} y1={lineY} x2={ML + lineW + 8} y2={lineY} stroke="currentColor" strokeWidth="2" />
+          <polygon points={`${ML + lineW + 16},${lineY} ${ML + lineW + 8},${lineY - 4} ${ML + lineW + 8},${lineY + 4}`} fill="currentColor" />
+          {Array.from({ length: nl.divCount + 1 }, (_, k) => {
+            const v = nl.start + k * nl.step;
+            const x = ML + (k / nl.divCount) * lineW;
+            const labeled = k % nl.labelEvery === 0;
+            return (
+              <g key={k}>
+                <line x1={x} y1={labeled ? lineY - 6 : lineY - 2} x2={x} y2={labeled ? lineY + 6 : lineY + 2}
+                  stroke="currentColor" strokeWidth={labeled ? 1.5 : 0.5} />
+                {labeled && (
+                  <text x={x} y={lineY + 18} textAnchor="middle" fontSize={fs} fill="currentColor">{v}</text>
+                )}
+              </g>
+            );
+          })}
+          <line x1={tx} y1={ulY} x2={tx} y2={lineY - 10} stroke={arrowColor} strokeWidth="1.5" strokeDasharray="4,2" />
+          <polygon points={`${tx},${lineY - 4} ${tx - 4},${lineY - 11} ${tx + 4},${lineY - 11}`} fill={arrowColor} />
+          {validated ? (
+            result === false ? (
+              <text x={tx} textAnchor="middle">
+                <tspan y="15" fontSize="9" fill="#D97706" textDecoration="line-through">{answer || "—"}</tspan>
+                <tspan x={tx} y="26" fontSize="11" fontWeight="bold" fill="currentColor">{nl.target}</tspan>
+              </text>
+            ) : (
+              <text x={tx} y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill={accent}>{answer}</text>
+            )
+          ) : (
+            <foreignObject x={tx - 22} y="4" width="44" height="22">
+              <input type="text" inputMode="numeric" value={answer}
+                onChange={e => setAnswer(e.target.value.replace(/[^0-9]/g, ""))}
+                style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
+              />
+            </foreignObject>
+          )}
+        </svg>
+      </div>
+    );
+  };
 
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-          Partie 1 — Écrivez les nombres indiqués par les flèches
-        </p>
-        <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
-          <div className="w-full overflow-x-auto">
-            <svg viewBox={`0 0 500 ${svgH}`} width="100%" style={{ display: "block" }}>
-              <line x1={ML} y1={lineY} x2={ML + lineW} y2={lineY} stroke="#374151" strokeWidth="2" />
-              <polygon points={`${ML + lineW},${lineY} ${ML + lineW - 6},${lineY - 3} ${ML + lineW - 6},${lineY + 3}`} fill="#374151" />
-              {Array.from({ length: Math.floor(totalUnits / data.step) + 1 }, (_, i) => {
-                const v = data.min + i * data.step;
-                const x = pos(v);
-                return (
-                  <g key={v}>
-                    <line x1={x} y1={lineY} x2={x} y2={lineY + 10} stroke="#374151" strokeWidth="1.5" />
-                    <text x={x} y={svgH - 4} textAnchor="middle" fontSize="9" fill="#374151" fontWeight="600">{v}</text>
-                  </g>
-                );
-              })}
-              {data.arrows.map((v, ai) => {
-                const x = pos(v);
-                const bY = boxYArr[ai]!;
-                const boxX = Math.min(Math.max(x - boxW / 2, ML), ML + lineW - boxW);
-                const ans = lineAnswers[ai] ?? "";
-                const result = validated ? lineResults[ai] : null;
-                const stroke = result === false ? "#F59E0B" : "#9CA3AF";
-                const fill = result === false ? "#FEF3C7" : "#DBEAFE";
-                return (
-                  <g key={ai}>
-                    <line x1={x} y1={bY + boxH} x2={x} y2={arrowTipY - 7} stroke="#374151" strokeWidth="1.5" strokeLinecap="butt" />
-                    <polygon points={`${x},${arrowTipY} ${x - 4},${arrowTipY - 7} ${x + 4},${arrowTipY - 7}`} fill="#374151" />
-                    <rect x={boxX} y={bY} width={boxW} height={boxH} rx="4" fill={fill} stroke={stroke} strokeWidth="1.5" />
-                    {validated ? (
-                      <text x={boxX + boxW / 2} y={bY + boxH / 2 + 4} textAnchor="middle" fontSize="11" fill="#374151">
-                        {result ? ans : String(v)}
-                      </text>
-                    ) : (
-                      <foreignObject x={boxX + 2} y={bY + 2} width={boxW - 4} height={boxH - 4}>
-                        <input type="text" inputMode="numeric" value={ans}
-                          onChange={e => {
-                            const val = e.target.value.replace(/[^0-9]/g, "");
-                            setLineAnswers(prev => prev.map((c, ci) => ci === ai ? val : c));
-                          }}
-                          style={{ width: "100%", height: "100%", textAlign: "center", padding: "0", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
-                        />
-                      </foreignObject>
-                    )}
-                  </g>
-                );
-              })}
-            </svg>
-          </div>
+        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Partie 1 — Écrivez les nombres indiqués par les flèches</p>
+        <div className="space-y-4">
+          <NLPanel nl={data.nl1} answer={ans1} setAnswer={setAns1} result={lineResults[0]} />
+          <NLPanel nl={data.nl2} answer={ans2} setAnswer={setAns2} result={lineResults[1]} />
         </div>
       </div>
-
       <div className="space-y-3">
-        <p className="text-sm font-semibold text-[var(--color-text-primary)]">
-          Partie 2 — Trouvez les dizaines encadrantes
-        </p>
+        <p className="text-sm font-semibold text-[var(--color-text-primary)]">Partie 2 — Trouvez les dizaines encadrantes</p>
         <div className="rounded-[var(--radius-md)] bg-orange-50 px-3 py-1.5 text-sm dark:bg-orange-950/20">
           <span className="italic text-[var(--color-text-secondary)]">Exemple : </span>
           <span className="font-medium text-[var(--color-text-primary)]">350 &lt; 354 &lt; 360</span>
@@ -486,7 +685,7 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                     onChange={e => setVoisinsAns(prev => prev.map((q, qi) => qi === ni ? { ...q, lo: e.target.value.replace(/[^0-9]/g, "") } : q))} />
                 )}
                 <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
-                <span className="w-14 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
+                <span className="w-12 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n}</span>
                 <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                 {validated ? (
                   <span className={vCls(hiOk)}>{hiOk ? (a.hi || String(hi)) : String(hi)}</span>
@@ -503,7 +702,7 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
   );
 }
 
-// ─── Exercise 8 — Classer les nombres (2 pts) — like placement test Ex17 ──────
+// ─── Exercise 8 — Classer les nombres (2 pts) — placement test Ex17 style ────
 
 function A1Ex8({ exerciseKey, validated, onValidated, validateTrigger }: RevisionExerciseProps) {
   const data = useMemo(() => {
@@ -571,12 +770,12 @@ function A1Ex8({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
 }
 
 export const A1_EXERCISES: RevisionExerciseMeta[] = [
-  { id: 1, label: "Écrire les nombres", maxPoints: 3, component: A1Ex1 },
-  { id: 2, label: "Décomposition avec blocs", maxPoints: 3, component: A1Ex2 },
-  { id: 3, label: "Décomposer en M+C+D+U", maxPoints: 4, component: A1Ex3 },
-  { id: 4, label: "Comparaison à 5 chiffres", maxPoints: 3, component: A1Ex4 },
-  { id: 5, label: "Comparer et ordonner", maxPoints: 3, component: A1Ex5 },
-  { id: 6, label: "Nombres dans les intervalles", maxPoints: 3, component: A1Ex6 },
-  { id: 7, label: "Droite numérique et voisins", maxPoints: 5, component: A1Ex7 },
-  { id: 8, label: "Classer les nombres", maxPoints: 2, component: A1Ex8 },
+  { id: 1, label: "Écrire les nombres",       maxPoints: 3, component: A1Ex1 },
+  { id: 2, label: "Compter les blocs",         maxPoints: 3, component: A1Ex2 },
+  { id: 3, label: "Décomposer en M+C+D+U",    maxPoints: 4, component: A1Ex3 },
+  { id: 4, label: "Comparaison à 6 chiffres", maxPoints: 5, component: A1Ex4 },
+  { id: 5, label: "Sélectionner par critère", maxPoints: 3, component: A1Ex5 },
+  { id: 6, label: "Encadrer à la dizaine",    maxPoints: 5, component: A1Ex6 },
+  { id: 7, label: "Droite numérique",         maxPoints: 5, component: A1Ex7 },
+  { id: 8, label: "Classer les nombres",      maxPoints: 2, component: A1Ex8 },
 ];
