@@ -6405,7 +6405,10 @@ export function GenericModuleContent({
                     (currentStep?.kind === "div_by" && !divByValidated) ||
                     (currentStep?.kind === "missing_digit_div" && !missingDigitValidated) ||
                     (currentStep?.kind === "gcd_lcm" && !gcdLcmValidated) ||
-                    (currentStep?.kind === "true_false_gcd_lcm" && !tfGcdLcmValidated)
+                    (currentStep?.kind === "true_false_gcd_lcm" && !tfGcdLcmValidated) ||
+                    (currentStep?.kind === "dec_ordering" && !decOrderingValidated) ||
+                    (currentStep?.kind === "dec_seq_rule" && !decSeqRuleValidated) ||
+                    (currentStep?.kind === "dec_seq_complete" && !decSeqCompleteValidated)
                   ))
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"

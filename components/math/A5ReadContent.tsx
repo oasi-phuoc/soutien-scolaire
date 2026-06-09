@@ -370,7 +370,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
 // ── Ex 5 — Dictée ─────────────────────────────────────────────────────────────
 function genDictation(): string[] {
   const nums: string[] = [];
-  while (nums.length < 6) {
+  while (nums.length < 5) {
     const intPart = rnd(1, 49);
     const kind = Math.random() < 0.5 ? 1 : 2;
     const decPart = kind === 1 ? String(rnd(1, 9)) : String(rnd(11, 99)).replace(/^.0/, s => s[0] + "0").padStart(2,"0");
