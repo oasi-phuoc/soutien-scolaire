@@ -865,18 +865,16 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
       <div className="flex gap-2">
         {(["add", "sub"] as const).map(m => (
           <button key={m} type="button" onClick={() => setMode(m)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-colors ${
+            className={`px-4 py-2 rounded-lg text-base font-bold transition-colors ${
               mode === m
                 ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
             }`}>
-            {m === "add" ? "Addition" : "Soustraction"}
+            {m === "add" ? "Addition en colonnes" : "Soustraction en colonnes"}
           </button>
         ))}
       </div>
-      <p className="font-bold text-[var(--color-accent-alg)]">
-        Exemple
-      </p>
+      <p className="text-base font-bold text-[var(--color-text-primary)]">Comment effectuer le calcul</p>
       <div className="space-y-6">
         {steps.map((step, si) => {
           const prev = si > 0 ? steps[si - 1] : null;
@@ -903,11 +901,6 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
           );
         })}
       </div>
-      {noteFr && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/20 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
-          {noteFr}
-        </div>
-      )}
     </div>
   );
 }

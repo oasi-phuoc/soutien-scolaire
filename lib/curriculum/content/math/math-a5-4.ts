@@ -6,23 +6,6 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
     theory: {
       title: { fr: "Addition et soustraction de décimaux",},
       blocks: [
-        { type: "heading", fr: "Addition en colonnes", black: true },
-        { type: "highlight", fr: "Règle fondamentale" },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "**Aligner les virgules** : chaque chiffre doit être dans sa colonne.",
-            "Additionner de droite à gauche (dixièmes → unités → dizaines).",
-            "Si la somme ≥ 10 → poser les unités et **retenir 1**.",
-          ],
-        },
-        { type: "heading", fr: "Soustraction en colonnes", black: true },
-        { type: "highlight", fr: "Règle de l'emprunt" },
-        {
-          type: "section", labelFr: "", itemsFr: [
-            "Si soustraction impossible (ex. 3 − 8) → **emprunter 1** à la colonne de gauche.",
-            "La colonne empruntée est réduite de 1. La colonne courante gagne 10.",
-          ],
-        },
         {
           type: "add_sub_toggle_cards",
           addColLabels: ["D", "U", ",", "dx"],
@@ -54,7 +37,7 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
               result:  [6, 0, null, 3],
             },
           ],
-          addNoteFr: "57,9 + 2,4 = 60,3",
+          addNoteFr: "",
           subColLabels: ["D", "U", ",", "dx"],
           subA: [1, 4, null, 3],
           subB: [null, 5, null, 8],
@@ -95,7 +78,7 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
               result:  [0, 8, null, 5],
             },
           ],
-          subNoteFr: "14,3 − 5,8 = 8,5",
+          subNoteFr: "",
         },
       ],
       paragraphs: { fr: [] },
