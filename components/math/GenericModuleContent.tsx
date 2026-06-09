@@ -2560,10 +2560,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_unit", 3, 5) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 4, 5) });
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 3) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 3) });
-      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 3, 3) });
-      steps.push({ kind: "pass_toggle", lesson });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_dix", 1, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_cent", 2, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_unit", 3, 5) });
+      steps.push({ kind: "rounding_group", lesson, config: genRounding("dec_mixed", 4, 5) });
     } else if (sid === "A5-2") {
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("asc", 1) });
       steps.push({ kind: "dec_ordering", lesson, config: genDecOrdering("desc", 2) });
