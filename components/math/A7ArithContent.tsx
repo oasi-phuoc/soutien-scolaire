@@ -215,7 +215,7 @@ function RelArithExercise({
       </div>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
         <div
-          className="grid items-center gap-x-2 gap-y-3"
+          className="grid items-center justify-items-center gap-x-2 gap-y-3"
           style={{ gridTemplateColumns: "auto auto auto auto auto auto" }}
         >
           {questions.map((q, i) => {
@@ -242,7 +242,7 @@ function RelArithExercise({
 
             return (
               <React.Fragment key={i}>
-                <span className="text-xs font-bold text-[var(--color-accent-alg)] text-right">{i + 1}.</span>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 {q.missingPos === "a"
                   ? inputEl
                   : <span className="font-mono text-sm text-[var(--color-text-primary)]">{dispRelQ(q, q.a)}</span>}
