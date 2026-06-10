@@ -5,7 +5,7 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
   submoduleCode: "A7.4",
   theory: {
     title: {
-      fr: "Multiplication et division — règle des signes",
+      fr: "Multiplication et division",
     },
     paragraphs: { fr: [] },
     blocks: [

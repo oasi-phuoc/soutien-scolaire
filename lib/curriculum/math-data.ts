@@ -107,7 +107,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A7.1", "Les nombres relatifs"),
       sm("A7.2", "Comparer"),
       sm("A7.3", "Addition et soustraction"),
-      sm("A7.4", "Multiplication et division (signes)"),
+      sm("A7.4", "Multiplication et division"),
     ],
   },
   {
