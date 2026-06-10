@@ -136,10 +136,10 @@ const PART_TO_PCT_POOL: PartToPctItem[] = [
   { part: 60, total: 150, pct: 40 }, { part: 50, total: 200, pct: 25 },
 ];
 
-const WRONG_CLS = "rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 flex flex-col items-center justify-center min-w-[3.5rem] text-center";
+const WRONG_CLS = "w-24 h-9 rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center text-center shrink-0";
 
 const simpleCls = (status: "idle" | "correct" | "wrong") =>
-  `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
+  `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
     status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
     : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
     : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
@@ -248,7 +248,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
   }, [validateCommand]);
 
   const inputCls = (status: State["status"]) =>
-    `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
+    `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
@@ -306,7 +306,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
   }, [validateCommand]);
 
   const inputCls = (status: State["status"]) =>
-    `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
+    `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
@@ -364,7 +364,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
   }, [validateCommand]);
 
   const inputCls = (status: State["status"]) =>
-    `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
+    `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
