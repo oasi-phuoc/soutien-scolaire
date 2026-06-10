@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, useEffect } from "react";
+import { useState, useTransition, useEffect, useRef } from "react";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
@@ -354,6 +354,12 @@ function DetailModal({
   const [lectureOpen, setLectureOpen] = useState(false);
   const [placementOpen, setPlacementOpen] = useState(false);
   const [placementHistory, setPlacementHistory] = useState<Array<{ date: string; points: number; maxPoints: number; percent: number }> | null>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
+  const scrollBodyRef = useRef<HTMLDivElement>(null);
+
+  function scrollToProgress() {
+    progressRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 
   useEffect(() => {
     getPlacementHistoryForUserAction(user.id).then(res => {
@@ -399,7 +405,7 @@ function DetailModal({
         </div>
 
         {/* Scrollable body */}
-        <div className="flex-1 overflow-y-auto px-5 pb-2">
+        <div ref={scrollBodyRef} className="flex-1 overflow-y-auto px-5 pb-2">
 
           {/* Info */}
           <div className="mb-3 space-y-1 text-sm text-zinc-600 dark:text-zinc-400">
@@ -418,7 +424,7 @@ function DetailModal({
           </div>
 
           {/* Progress */}
-          <div className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+          <div ref={progressRef} className="mb-3 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
 
             {/* Maths */}
             <div>
@@ -578,6 +584,18 @@ function DetailModal({
 
         {/* Actions — fixed at bottom */}
         <div className="shrink-0 px-5 py-3 border-t border-zinc-100 dark:border-zinc-800 flex items-center gap-2">
+          <button
+            onClick={scrollToProgress}
+            className="flex h-10 w-10 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-500 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
+            aria-label="Voir la progression"
+            title="Voir la progression"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </button>
           <button
             onClick={onEdit}
             className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-100 text-blue-600 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-400 dark:hover:bg-blue-900/60"
