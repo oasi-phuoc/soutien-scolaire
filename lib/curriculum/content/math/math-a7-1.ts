@@ -10,6 +10,18 @@ export const MATH_A7_1_LESSON: MathSubmoduleLesson = {
       { type: "heading", fr: "Définition", black: true },
       { type: "plain", fr: "Un nombre relatif a un signe + ou −." },
       { type: "plain", fr: "" },
+      { type: "plain", fr: "Positif" },
+      { type: "section", labelFr: "", itemsFr: [
+        "plus grand que 0",
+        "+3, +15 (le + est souvent omis)",
+      ] },
+      { type: "plain", fr: "Négatif" },
+      { type: "section", labelFr: "", itemsFr: [
+        "plus petit que 0",
+        "−3, −15",
+      ] },
+      { type: "plain", fr: "Le zéro (0) n'est ni positif ni négatif." },
+      { type: "plain", fr: "" },
       { type: "heading", fr: "La droite numérique", black: true },
       { type: "plain", fr: "Droite numérique de −6 à +6" },
       {
