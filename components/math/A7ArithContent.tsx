@@ -146,7 +146,7 @@ function RelArithExercise({
   questions: RelQ[];
   timer?: number;
   validateCommand: number;
-  onValidated: (ok: boolean) => void;
+  onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [answers, setAnswers] = useState<string[]>(() => Array(questions.length).fill(""));
   const [validated, setValidated] = useState(false);
@@ -169,7 +169,8 @@ function RelArithExercise({
       return checkAnsQ(answersRef.current[i] ?? "", val, q);
     });
     setResults(res);
-    onValidatedRef.current(res.every(r => r));
+    const correctCount = res.filter(r => r).length;
+    onValidatedRef.current(res.every(r => r), correctCount, res.length);
   }, [questions]);
 
   useEffect(() => {
@@ -268,7 +269,7 @@ export function A7RelArithExercise({
 }: {
   exNum: number; range: number; count: number; missingOperand: boolean; timer?: number;
   questionMode?: "balanced" | "ex5" | "decimal";
-  validateCommand: number; onValidated: (ok: boolean) => void;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<RelQ[]>(() => {
     if (questionMode === "decimal") return Array.from({ length: count }, () => genDecimalQ(missingOperand));
@@ -286,7 +287,7 @@ export function A7RelMulDivExercise({
   exNum, range, count, missingOperand, timer, validateCommand, onValidated,
 }: {
   exNum: number; range: number; count: number; missingOperand: boolean; timer?: number;
-  validateCommand: number; onValidated: (ok: boolean) => void;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<RelQ[]>(() =>
     Array.from({ length: count }, () => genMulDivQ(range, missingOperand))
