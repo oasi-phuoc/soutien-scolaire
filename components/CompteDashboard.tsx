@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { changePasswordAction, updateRemotePivotLang } from "@/app/actions/account";
+import { updateRemotePivotLang, changePasswordAction } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
 import { syncProgressToCloud } from "@/app/actions/progress";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
@@ -97,7 +97,6 @@ export function CompteDashboard({
   const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
   const [syncError, setSyncError] = useState<string | null>(null);
   const [pwdOpen, setPwdOpen] = useState(false);
-  const [oldPwd, setOldPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
   const [pwdStatus, setPwdStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
@@ -153,11 +152,10 @@ export function CompteDashboard({
   async function handlePasswordChange() {
     setPwdStatus("loading");
     setPwdMsg(null);
-    const result = await changePasswordAction(oldPwd, newPwd, confirmPwd);
+    const result = await changePasswordAction(newPwd, confirmPwd);
     if (result.ok) {
       setPwdStatus("ok");
       setPwdMsg("Mot de passe mis à jour.");
-      setOldPwd("");
       setNewPwd("");
       setConfirmPwd("");
       window.setTimeout(() => { setPwdStatus("idle"); setPwdMsg(null); setPwdOpen(false); }, 2500);
@@ -272,7 +270,6 @@ export function CompteDashboard({
           </div>
         )}
 
-        {/* Changer le mot de passe — accordion, visible seulement si connecté */}
         {supabaseConfigured && user && (
           <section aria-labelledby="pwd-heading">
             <button
@@ -294,36 +291,46 @@ export function CompteDashboard({
             </button>
 
             {pwdOpen && (
-              <div className="mt-4 space-y-3">
-                <input
-                  type="password"
-                  placeholder="Ancien mot de passe"
-                  value={oldPwd}
-                  onChange={(e) => setOldPwd(e.target.value)}
-                  autoComplete="current-password"
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
-                />
-                <input
-                  type="password"
-                  placeholder="Nouveau mot de passe"
-                  value={newPwd}
-                  onChange={(e) => setNewPwd(e.target.value)}
-                  autoComplete="new-password"
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
-                />
-                <input
-                  type="password"
-                  placeholder="Confirmer le nouveau mot de passe"
-                  value={confirmPwd}
-                  onChange={(e) => setConfirmPwd(e.target.value)}
-                  autoComplete="new-password"
-                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
-                />
+              <div className="mt-4 space-y-4">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                    Mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    value={newPwd}
+                    onChange={(e) => { setNewPwd(e.target.value); setPwdMsg(null); }}
+                    autoComplete="new-password"
+                    className="min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-4 text-base outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-600 dark:bg-zinc-900"
+                  />
+                  <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Au moins 8 caractères.</p>
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                    Confirmer le mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPwd}
+                    onChange={(e) => { setConfirmPwd(e.target.value); setPwdMsg(null); }}
+                    autoComplete="new-password"
+                    className={`min-h-12 w-full rounded-xl border bg-white px-4 text-base outline-none focus:ring-2 dark:bg-zinc-900 ${
+                      confirmPwd.length > 0 && confirmPwd !== newPwd
+                        ? "border-red-400 focus:border-red-500 focus:ring-red-500/15"
+                        : "border-zinc-300 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-600"
+                    }`}
+                  />
+                  {confirmPwd.length > 0 && confirmPwd !== newPwd && (
+                    <p className="mt-1 text-xs text-red-600 dark:text-red-400">
+                      Les mots de passe ne correspondent pas.
+                    </p>
+                  )}
+                </div>
                 <button
                   type="button"
                   onClick={() => void handlePasswordChange()}
-                  disabled={pwdStatus === "loading" || !oldPwd || !newPwd || !confirmPwd}
-                  className="min-h-11 w-full rounded-xl bg-[var(--color-accent-alg)] px-4 font-semibold text-white transition-opacity disabled:opacity-50"
+                  disabled={pwdStatus === "loading" || newPwd.length < 8 || newPwd !== confirmPwd}
+                  className="min-h-12 w-full rounded-xl bg-[var(--color-accent-alg)] px-4 text-base font-semibold text-white transition-opacity disabled:opacity-50"
                 >
                   {pwdStatus === "loading" ? "Enregistrement…" : "Enregistrer"}
                 </button>
@@ -342,7 +349,7 @@ export function CompteDashboard({
 
         <section aria-labelledby="pivot-heading">
           <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Langue d’aide
+            Langue d'aide
           </h2>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Choix enregistré sur cet appareil

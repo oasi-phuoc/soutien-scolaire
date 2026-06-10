@@ -280,64 +280,203 @@ const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
 
 function PasswordSection({ userId }: { userId: string }) {
   const [pwd, setPwd] = useState("");
-  const [confirmPwd, setConfirmPwd] = useState("");
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
-  const mismatch = confirmPwd.length > 0 && pwd !== confirmPwd;
-
   function submit() {
-    if (!pwd || mismatch) return;
+    if (!pwd) return;
     setMsg(null);
     startTransition(async () => {
       const r = await changePasswordAction(userId, pwd);
-      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); setConfirmPwd(""); }
+      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
       else setMsg({ ok: false, text: r.reason ?? "Erreur" });
     });
   }
 
-  const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
-
   return (
-    <div className="mb-4 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
-      <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Modifier le mot de passe</p>
-      <div>
-        <label className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Mot de passe</label>
+    <div className="mb-4 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+      <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">Changer le mot de passe</p>
+      <div className="flex gap-2">
         <input
           type="password"
           value={pwd}
           onChange={e => { setPwd(e.target.value); setMsg(null); }}
+          placeholder="Nouveau mot de passe"
           autoComplete="new-password"
-          className={inputCls}
+          className="min-h-9 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-violet-500 dark:border-zinc-600 dark:bg-zinc-950"
         />
-        <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
-      </div>
-      <div>
-        <label className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Confirmer le mot de passe</label>
-        <input
-          type="password"
-          value={confirmPwd}
-          onChange={e => { setConfirmPwd(e.target.value); setMsg(null); }}
-          autoComplete="new-password"
-          className={`${inputCls} ${mismatch ? "border-red-400 focus:border-red-500" : ""}`}
-        />
-        {mismatch && (
-          <p className="mt-1 text-xs text-red-600 dark:text-red-400">Les mots de passe ne correspondent pas.</p>
-        )}
+        <button
+          type="button"
+          onClick={submit}
+          disabled={pending || pwd.length < 6}
+          className="min-h-9 rounded-lg bg-violet-600 px-3 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-50"
+        >
+          {pending ? "…" : "OK"}
+        </button>
       </div>
       {msg && (
-        <p className={`text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
+        <p className={`mt-1 text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
           {msg.text}
         </p>
       )}
-      <button
-        type="button"
-        onClick={submit}
-        disabled={pending || pwd.length < 8 || mismatch}
-        className="w-full min-h-11 rounded-xl bg-blue-600 px-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-      >
-        {pending ? "Enregistrement…" : "Enregistrer"}
-      </button>
+    </div>
+  );
+}
+
+function ProgressPanel({ user }: { user: UserRow }) {
+  const math = mathPct(user.progress_data);
+  const french = frenchPct(user.progress_data);
+  const lecture = lecturePct(user.progress_data);
+  const mathBranches = mathDetail(user.progress_data);
+  const frenchTabs = frenchDetail(user.progress_data);
+  const lectureItems = lectureDetail(user.progress_data);
+  const [mathOpen, setMathOpen] = useState(false);
+  const [frenchOpen, setFrenchOpen] = useState(false);
+  const [lectureOpen, setLectureOpen] = useState(false);
+  const [placementOpen, setPlacementOpen] = useState(false);
+  const [placementHistory, setPlacementHistory] = useState<Array<{ date: string; points: number; maxPoints: number; percent: number }> | null>(null);
+
+  useEffect(() => {
+    getPlacementHistoryForUserAction(user.id).then(res => {
+      if (res.ok) setPlacementHistory(res.history);
+    });
+  }, [user.id]);
+
+  return (
+    <div className="space-y-3">
+      {/* Maths */}
+      <div>
+        <button onClick={() => setMathOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+          <span className="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${mathOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+            Maths
+          </span>
+          <span>{math.done}/{math.total}</span>
+        </button>
+        <Bar pct={math.pct} color="bg-blue-500" />
+        {mathOpen && (
+          <div className="mt-2 space-y-1">
+            {mathBranches.map(b => (
+              <div key={b.branch}>
+                <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="font-medium">{b.label}</span>
+                  <span>{b.done}/{b.total}</span>
+                </div>
+                {b.inProgress.map(m => (
+                  <p key={m.id} className="ml-2 text-[11px] text-blue-600 dark:text-blue-400">↳ {m.code} – {m.title}</p>
+                ))}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Français */}
+      <div>
+        <button onClick={() => setFrenchOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+          <span className="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${frenchOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+            Français
+          </span>
+          <span>{french.done}/{french.total}</span>
+        </button>
+        <Bar pct={french.pct} color="bg-emerald-500" />
+        {frenchOpen && (
+          <div className="mt-2 space-y-1">
+            {frenchTabs.map(t => (
+              <div key={t.tab}>
+                <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="font-medium">{t.label}</span>
+                  <span className={t.done > 0 ? "font-semibold text-zinc-700 dark:text-zinc-200" : ""}>{t.done}/{t.total}</span>
+                </div>
+                {t.inProgress && (
+                  <p className="ml-2 text-[11px] text-emerald-600 dark:text-emerald-400">↳ {t.inProgress.code} – {t.inProgress.title}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Lecture */}
+      <div>
+        <button onClick={() => setLectureOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+          <span className="flex items-center gap-1">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${lectureOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+            Lecture
+          </span>
+          <span>{lecture.done}/{lecture.total}</span>
+        </button>
+        <Bar pct={lecture.pct} color="bg-amber-500" />
+        {lectureOpen && (
+          <div className="mt-2 space-y-1">
+            {lectureItems.map(m => (
+              <div key={m.id}>
+                <div className="flex items-center justify-between text-[11px] text-zinc-500 dark:text-zinc-400">
+                  <span className="font-medium">{m.code} – {m.title}</span>
+                  <span>{m.subDone}/{m.subTotal}</span>
+                </div>
+                {m.inProgress.length > 0
+                  ? m.inProgress.map(l => <p key={l.letterLower} className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">↳ Lettre {l.letter}</p>)
+                  : m.currentLetter && <p className="ml-2 text-[11px] text-amber-600 dark:text-amber-400">↳ Lettre {m.currentLetter.letter}</p>
+                }
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Test de placement */}
+      {placementHistory !== null && (
+        <div>
+          <button onClick={() => setPlacementOpen(o => !o)} className="mb-1 flex w-full items-center justify-between text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-zinc-100">
+            <span className="flex items-center gap-1">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${placementOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+              Test de placement
+            </span>
+            {placementHistory.length === 0 ? (
+              <span className="text-zinc-400">—</span>
+            ) : (() => {
+              const best = Math.max(...placementHistory.map(a => a.percent));
+              const worst = Math.min(...placementHistory.map(a => a.percent));
+              return (
+                <span className="flex items-center gap-1.5 text-[11px]">
+                  <span className="text-emerald-600 dark:text-emerald-400">↑{best}%</span>
+                  {best !== worst && <span className="text-red-500 dark:text-red-400">↓{worst}%</span>}
+                </span>
+              );
+            })()}
+          </button>
+          {placementHistory.length === 0 ? (
+            <p className="text-[11px] text-zinc-400 italic">Aucun résultat</p>
+          ) : (
+            <>
+              <div className="h-1.5 w-full rounded-full bg-zinc-100 dark:bg-zinc-800">
+                <div className="h-full rounded-full bg-violet-500 transition-all" style={{ width: `${Math.max(...placementHistory.map(a => a.percent))}%` }} />
+              </div>
+              {placementOpen && (
+                <div className="mt-2 space-y-1.5">
+                  {[...placementHistory].reverse().slice(0, 5).map((a, i) => {
+                    const d = new Date(a.date);
+                    const label = d.toLocaleDateString("fr-CH", { day: "2-digit", month: "2-digit", year: "2-digit" });
+                    return (
+                      <div key={i} className="flex items-center justify-between gap-2">
+                        <span className="text-[11px] text-zinc-400 tabular-nums shrink-0">{label}</span>
+                        <div className="flex-1 h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800">
+                          <div className="h-full rounded-full bg-violet-400" style={{ width: `${a.percent}%` }} />
+                        </div>
+                        <span className="text-[11px] font-semibold text-zinc-700 dark:text-zinc-200 tabular-nums shrink-0 w-12 text-right">
+                          {a.points}/{a.maxPoints}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -527,10 +666,10 @@ function DetailModal({
   const canChangeRole = currentUserRole === "admin" && !isSelf;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 pt-4 pb-20" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
       <div
-        className="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-xl dark:bg-zinc-900 max-h-[90vh] flex flex-col"
+        className="relative z-10 w-full max-w-md rounded-2xl bg-white shadow-xl dark:bg-zinc-900 max-h-[calc(100svh-6rem)] flex flex-col"
         onClick={e => e.stopPropagation()}
       >
         {/* Header — fixed, not scrollable */}
