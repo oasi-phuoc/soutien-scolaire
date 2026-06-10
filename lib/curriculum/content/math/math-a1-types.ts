@@ -81,6 +81,8 @@ export type MathRichBlock =
       b: number[];
       /** Numeric result value (used to determine 4 vs 5 col display) */
       result: number;
+      /** If set, inserts a decimal comma in the result row after this many digits from the right */
+      decimalPos?: number;
       steps: Array<{
         numFr: string;
         textsFr: string[];

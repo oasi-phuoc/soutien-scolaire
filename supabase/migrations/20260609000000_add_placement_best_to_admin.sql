@@ -1,7 +1,10 @@
 -- Add placement_test_best to get_users_for_admin.
 -- Returns the attempt with the highest percent from placement_test_history.
+-- DROP required because the return type changes (new column added).
 
-CREATE OR REPLACE FUNCTION public.get_users_for_admin()
+DROP FUNCTION IF EXISTS public.get_users_for_admin();
+
+CREATE FUNCTION public.get_users_for_admin()
 RETURNS TABLE (
   id                    uuid,
   email                 text,
