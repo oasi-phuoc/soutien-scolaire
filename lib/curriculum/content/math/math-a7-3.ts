@@ -14,23 +14,25 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
         labelA: "Addition",
         labelB: "Soustraction",
         blocksA: [
-          { type: "highlight", fr: "Mêmes signes → conserver le signe" },
+          { type: "heading", fr: "Mêmes signes", black: true },
+          { type: "plain", fr: "1. Additionner les valeurs absolues" },
+          { type: "plain", fr: "2. Conserver le signe commun." },
           {
             type: "section",
             labelFr: "",
             itemsFr: [
-              "Additionner les valeurs absolues et conserver le signe commun.",
               "(+6) + (+3) = +9",
               "(−6) + (−3) = −9",
             ],
           },
           { type: "plain", fr: "" },
-          { type: "highlight", fr: "Signes contraires → signe du plus grand" },
+          { type: "heading", fr: "Signes contraires", black: true },
+          { type: "plain", fr: "1. Soustraire les valeurs absolues" },
+          { type: "plain", fr: "2. Prendre le signe du nombre ayant la plus grande valeur absolue." },
           {
             type: "section",
             labelFr: "",
             itemsFr: [
-              "Soustraire les valeurs absolues et prendre le signe du nombre ayant la plus grande valeur absolue.",
               "(+6) + (−3) = +3   (|6| > |3| → signe +)",
               "(−6) + (+3) = −3   (|6| > |3| → signe −)",
             ],
