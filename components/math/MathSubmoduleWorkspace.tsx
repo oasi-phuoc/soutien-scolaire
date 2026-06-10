@@ -931,12 +931,12 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
       <div className="flex gap-2">
         {(["add", "sub"] as const).map(m => (
           <button key={m} type="button" onClick={() => setMode(m)}
-            className={`px-4 py-2 rounded-lg text-base font-bold transition-colors ${
+            className={`flex-1 px-4 py-2 rounded-lg text-base font-bold transition-colors ${
               mode === m
                 ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
             }`}>
-            {m === "add" ? "Addition en colonnes" : "Soustraction en colonnes"}
+            {m === "add" ? "Addition" : "Soustraction"}
           </button>
         ))}
       </div>
@@ -967,6 +967,30 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+function TheoryToggle({ block }: { block: Extract<MathRichBlock, { type: "theory_toggle" }> }) {
+  const [tab, setTab] = React.useState<"a" | "b">("a");
+  const activeBlocks = tab === "a" ? block.blocksA : block.blocksB;
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {(["a", "b"] as const).map(t => (
+          <button key={t} type="button" onClick={() => setTab(t)}
+            className={`flex-1 px-4 py-2 rounded-lg text-base font-bold transition-colors ${
+              tab === t
+                ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
+            }`}>
+            {t === "a" ? block.labelA : block.labelB}
+          </button>
+        ))}
+      </div>
+      <div className="space-y-3">
+        {activeBlocks.map((b, i) => <BlockView key={`${tab}-${i}`} block={b} />)}
       </div>
     </div>
   );
@@ -1198,6 +1222,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
       );
     case "add_sub_toggle_cards":
       return <AddSubToggleCards block={block} />;
+    case "theory_toggle":
+      return <TheoryToggle block={block} />;
     default:
       return null;
   }

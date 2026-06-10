@@ -295,8 +295,8 @@ export function A7RelOrderingExercise({
     const posI = shuffle(Array.from({ length: 20 }, (_, i) => i + 1)).slice(0, 2);
     const negI = shuffle(Array.from({ length: 20 }, (_, i) => -(i + 1))).slice(0, 2);
     const ints = shuffle([...posI, ...negI]);
-    const posD = shuffle(Array.from({ length: 20 }, (_, i) => Math.round((i + 1) * 5) / 10)).slice(0, 2);
-    const negD = shuffle(Array.from({ length: 20 }, (_, i) => -Math.round((i + 1) * 5) / 10)).slice(0, 2);
+    const posD = shuffle(Array.from({ length: 19 }, (_, i) => Math.round((i + 1) * 5) / 10)).slice(0, 2);
+    const negD = shuffle(Array.from({ length: 19 }, (_, i) => -Math.round((i + 1) * 5) / 10)).slice(0, 2);
     const decs = shuffle([...posD, ...negD]);
     return [{ nums: ints, isDec: false }, { nums: decs, isDec: true }];
   });
@@ -321,7 +321,7 @@ export function A7RelOrderingExercise({
     }
   }, [validateCommand, validated, groups, selected, onValidated]);
 
-  const chipBase = "w-20 flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+  const chipBase = "w-16 flex h-10 items-center justify-center rounded-lg border px-1 text-sm font-mono font-bold transition-colors ";
 
   const toggle = (gi: number, n: number) => {
     if (validated) return;
@@ -433,8 +433,8 @@ export function A7RelSeqCompleteExercise({
   }, [validateCommand, validated, questions, answers, onValidated]);
 
   const fmt = (n: number) => isDecimal ? fmtRelDec(n) : fmtRel(n);
-  const cellW = "w-16 shrink-0 h-9";
-  const inpCls = `${cellW} px-1 text-sm text-center font-mono rounded-lg border border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20`;
+  const cellW = "w-14 shrink-0 h-9";
+  const inpCls = `${cellW} px-0.5 text-xs text-center font-mono rounded-lg border border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20`;
 
   return (
     <div className="space-y-4">
@@ -444,7 +444,7 @@ export function A7RelSeqCompleteExercise({
         {questions.map((q, qi) => {
           let bc = 0;
           return (
-            <div key={qi} className="flex items-center gap-1.5 flex-wrap">
+            <div key={qi} className="flex items-center gap-1 flex-wrap">
               <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
               {q.allNums.map((n, ni) => {
                 const blankIdx = q.blankIdxs.indexOf(ni);
@@ -469,7 +469,7 @@ export function A7RelSeqCompleteExercise({
                   );
                 }
                 return (
-                  <span key={ni} className={`${cellW} flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>
+                  <span key={ni} className={`${cellW} flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-xs font-bold text-[var(--color-text-primary)]`}>
                     {fmt(n)}
                   </span>
                 );
