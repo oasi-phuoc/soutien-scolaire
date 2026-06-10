@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 
 type ValidatedProps = {
   validateCommand: number;
@@ -425,13 +425,14 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez la valeur correspondant au pourcentage indiqué.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-[1.5rem_auto_auto_auto] items-center gap-x-2 gap-y-3">
         {questions.map((q, i) => {
           const s = states[i]!;
           return (
-            <div key={i} className="flex items-center gap-3 flex-wrap">
-              <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.pct}% de {q.num} =</span>
+            <Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.pct}% de {q.num}</span>
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
@@ -442,7 +443,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
                   className={simpleCls(s.status)} />
               )}
-            </div>
+            </Fragment>
           );
         })}
       </div>
@@ -476,13 +477,14 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Déterminez quelle part en pourcentage représente la valeur indiquée.</p>
-      <div className="space-y-3">
+      <div className="grid grid-cols-[1.5rem_auto_auto_auto_auto] items-center gap-x-2 gap-y-3">
         {questions.map((q, i) => {
           const s = states[i]!;
           return (
-            <div key={i} className="flex items-center gap-3 flex-wrap">
-              <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.part} sur {q.total} =</span>
+            <Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.part} sur {q.total}</span>
+              <span className="text-sm font-semibold text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
@@ -493,8 +495,12 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
                   className={simpleCls(s.status)} />
               )}
-              {s.status !== "wrong" && <span className="text-sm text-[var(--color-text-secondary)]">%</span>}
-            </div>
+              {s.status !== "wrong" ? (
+                <span className="text-sm text-[var(--color-text-secondary)]">%</span>
+              ) : (
+                <span />
+              )}
+            </Fragment>
           );
         })}
       </div>
