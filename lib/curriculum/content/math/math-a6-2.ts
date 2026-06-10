@@ -13,6 +13,8 @@ export const MATH_A6_2_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
+        { type: "plain", fr: "Pour calculer p% d'un nombre N, on multiplie N par p/100 (ou par le décimal équivalent)." },
+        { type: "plain", fr: "" },
         { type: "highlight", fr: "Formule" },
         { type: "section", labelFr: "", itemsFr: [
           "p% de N = N × p ÷ 100",
@@ -31,14 +33,17 @@ export const MATH_A6_2_LESSON: MathSubmoduleLesson = {
         ]},
         { type: "plain", fr: "" },
         { type: "heading", fr: "Raccourcis utiles", black: true },
-        { type: "section", labelFr: "", itemsFr: [
-          "**1%**  d'un nombre → diviser par 100",
-          "**5%**  d'un nombre → prendre 10%, puis diviser par 2",
-          "**10%** d'un nombre → diviser par 10",
-          "**20%** d'un nombre → diviser par 5",
-          "**25%** d'un nombre → diviser par 4",
-          "**50%** d'un nombre → diviser par 2",
-        ]},
+        { type: "table", accentHeader: true,
+          headersFr: ["Pourcentage", "", "Méthode"],
+          rows: [
+            ["**1%** d'un nombre",  "→", "diviser par 100"],
+            ["**5%** d'un nombre",  "→", "prendre 10%, puis diviser par 2"],
+            ["**10%** d'un nombre", "→", "diviser par 10"],
+            ["**20%** d'un nombre", "→", "diviser par 5"],
+            ["**25%** d'un nombre", "→", "diviser par 4"],
+            ["**50%** d'un nombre", "→", "diviser par 2"],
+          ]
+        },
         { type: "plain", fr: "" },
         { type: "table", headersFr: ["Calcul", "Astuce rapide", "Résultat"], accentHeader: true,
           rows: [
