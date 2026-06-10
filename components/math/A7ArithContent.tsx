@@ -39,9 +39,20 @@ type RelQ = {
   result: number;
   missingPos: "result" | "a" | "b";
   decimals?: number;
+  smartDisp?: boolean;
 };
 
+function smartStr(n: number): string {
+  const r = Math.round(n * 100000) / 100000;
+  return Math.abs(r).toFixed(5).replace(/\.?0+$/, "");
+}
+
 function dispRelQ(q: RelQ, n: number): string {
+  if (q.smartDisp) {
+    const r = Math.round(n * 100000) / 100000;
+    if (r === 0) return "(0)";
+    return r > 0 ? `(+${smartStr(r)})` : `(−${smartStr(r)})`;
+  }
   if (q.decimals !== undefined) {
     const abs = Math.abs(n).toFixed(q.decimals);
     if (n === 0) return `(0.${"0".repeat(q.decimals)})`;
@@ -51,6 +62,11 @@ function dispRelQ(q: RelQ, n: number): string {
 }
 
 function fmtCorrQ(q: RelQ, n: number): string {
+  if (q.smartDisp) {
+    const r = Math.round(n * 100000) / 100000;
+    if (r === 0) return "0";
+    return r > 0 ? `+${smartStr(r)}` : `−${smartStr(r)}`;
+  }
   if (q.decimals !== undefined) {
     const abs = Math.abs(n).toFixed(q.decimals);
     if (n === 0) return `0.${"0".repeat(q.decimals)}`;
@@ -60,6 +76,12 @@ function fmtCorrQ(q: RelQ, n: number): string {
 }
 
 function checkAnsQ(typed: string, expected: number, q: RelQ): boolean {
+  if (q.smartDisp) {
+    const t = typed.trim().replace("−", "-").replace(",", ".");
+    const parsed = parseFloat(t);
+    if (isNaN(parsed)) return false;
+    return Math.abs(Math.round(parsed * 100000) / 100000 - Math.round(expected * 100000) / 100000) < 0.000001;
+  }
   if (q.decimals !== undefined) {
     const t = typed.trim().replace("−", "-").replace(",", ".");
     const parsed = parseFloat(t);
@@ -122,6 +144,23 @@ function genDecimalQ(missingOperand: boolean): RelQ {
   const missingPos: RelQ["missingPos"] = !missingOperand ? "result"
     : Math.random() < 0.5 ? "a" : "b";
   return { a, b, op: useAdd ? "+" : "−", result, missingPos, decimals };
+}
+
+const DECIMAL_SET = [0.1, 0.01, 0.001, 0.2, 0.5, 0.25] as const;
+
+function genMixedDecimalMulDivQ(missingOperand: boolean): RelQ {
+  const aMag = rnd(1, 100);
+  const aSign = Math.random() < 0.5 ? 1 : -1;
+  const a = aSign * aMag;
+  const bFactor = DECIMAL_SET[Math.floor(Math.random() * DECIMAL_SET.length)]!;
+  const bSign = Math.random() < 0.5 ? 1 : -1;
+  const b = bSign * bFactor;
+  const useMul = Math.random() < 0.5;
+  const rawResult = useMul ? a * b : a / b;
+  const result = Math.round(rawResult * 100000) / 100000;
+  const missingPos: RelQ["missingPos"] = !missingOperand ? "result"
+    : Math.random() < 0.5 ? "a" : "b";
+  return { a, b, op: useMul ? "×" : "÷", result, missingPos, smartDisp: true };
 }
 
 function genMulDivQ(range: number, missingOperand: boolean): RelQ {
@@ -284,14 +323,16 @@ export function A7RelArithExercise({
 }
 
 export function A7RelMulDivExercise({
-  exNum, range, count, missingOperand, timer, validateCommand, onValidated,
+  exNum, range, count, missingOperand, timer, questionMode, validateCommand, onValidated,
 }: {
   exNum: number; range: number; count: number; missingOperand: boolean; timer?: number;
+  questionMode?: "standard" | "mixed_dec";
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<RelQ[]>(() =>
-    Array.from({ length: count }, () => genMulDivQ(range, missingOperand))
-  );
+  const [questions] = useState<RelQ[]>(() => {
+    if (questionMode === "mixed_dec") return Array.from({ length: count }, () => genMixedDecimalMulDivQ(missingOperand));
+    return Array.from({ length: count }, () => genMulDivQ(range, missingOperand));
+  });
   return (
     <RelArithExercise exNum={exNum} questions={questions} timer={timer}
       validateCommand={validateCommand} onValidated={onValidated} />

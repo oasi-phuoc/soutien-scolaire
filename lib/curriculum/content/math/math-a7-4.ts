@@ -23,21 +23,60 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
         ],
       },
 
+      { type: "heading", fr: "Multiplication", black: true },
+
+      { type: "highlight", fr: "Mêmes signes → positif" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "(+6) × (+3) = +18   (positif × positif)",
+          "(−6) × (−3) = +18   (négatif × négatif)",
+        ],
+      },
+
+      { type: "highlight", fr: "Signes contraires → négatif" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "(+6) × (−3) = −18",
+          "(−6) × (+3) = −18",
+        ],
+      },
+
+      { type: "heading", fr: "Division", black: true },
+
+      { type: "highlight", fr: "Mêmes signes → positif" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "(+6) ÷ (+3) = +2",
+          "(−6) ÷ (−3) = +2",
+        ],
+      },
+
+      { type: "highlight", fr: "Signes contraires → négatif" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "(+6) ÷ (−3) = −2",
+          "(−6) ÷ (+3) = −2",
+        ],
+      },
+
       {
         type: "table",
         headersFr: ["Signes", "Résultat"],
         accentHeader: true,
         rows: [
-          ["(**+**) **×** (**+**)\n(**+**) **÷** (**+**)", "**+** (positif)"],
-          ["(**−**) **×** (**−**)\n(**−**) **÷** (**−**)", "**+** (positif)"],
-          ["(**+**) **×** (**−**)\n(**+**) **÷** (**−**)", "**−** (négatif)"],
-          ["(**−**) **×** (**+**)\n(**−**) **÷** (**+**)", "**−** (négatif)"],
+          ["(**+**) × (**+**)\n(**+**) ÷ (**+**)", "**+** (positif)"],
+          ["(**−**) × (**−**)\n(**−**) ÷ (**−**)", "**+** (positif)"],
+          ["(**+**) × (**−**)\n(**+**) ÷ (**−**)", "**−** (négatif)"],
+          ["(**−**) × (**+**)\n(**−**) ÷ (**+**)", "**−** (négatif)"],
         ],
-      },
-
-      {
-        type: "note",
-        fr: "Astuce : deux signes identiques donnent + ; deux signes différents donnent −. « Moins fois moins égale plus. »",
       },
     ],
   },

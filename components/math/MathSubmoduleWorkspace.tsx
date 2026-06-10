@@ -69,7 +69,7 @@ type WorkspaceStep =
   | { kind: "a7_rel_ordering"; exNum: number }
   | { kind: "a7_rel_seq_complete"; exNum: number; isDecimal: boolean }
   | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" | "decimal" }
-  | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
+  | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "standard" | "mixed_dec" }
   | { kind: "pct_to_frac_ex"; exNum: number }
   | { kind: "pct_to_dec_ex"; exNum: number }
   | { kind: "frac_to_pct_ex"; exNum: number }
@@ -289,6 +289,8 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a7_rel_mul_div", exNum: 2, range: 6, count: 8, missingOperand: false, timer: 60 });
     steps.push({ kind: "a7_rel_mul_div", exNum: 3, range: 6, count: 5, missingOperand: true });
     steps.push({ kind: "a7_rel_mul_div", exNum: 4, range: 6, count: 8, missingOperand: true, timer: 60 });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 5, range: 0, count: 5, missingOperand: false, questionMode: "mixed_dec" });
+    steps.push({ kind: "a7_rel_mul_div", exNum: 6, range: 0, count: 5, missingOperand: true, questionMode: "mixed_dec" });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
     steps.push({ kind: "a7_rel_mul_div", exNum: 2, range: 6, count: 5, missingOperand: false });
@@ -1795,7 +1797,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
 
       {/* A7-4 relative multiplication/division exercises */}
       {currentStep?.kind === "a7_rel_mul_div" && (
-        <A7RelMulDivExercise key={exKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A7RelMulDivExercise key={exKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} questionMode={currentStep.questionMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A6-2 percentage exercises */}
