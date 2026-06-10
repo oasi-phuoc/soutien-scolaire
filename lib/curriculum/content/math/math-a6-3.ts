@@ -71,11 +71,5 @@ export const MATH_A6_3_LESSON: MathSubmoduleLesson = {
         ]},
       ],
     },
-    exercises: [
-      { id: "a6-3-e1", promptFr: "Augmentez 200 de 15%.", type: "number", acceptable: ["230"] },
-      { id: "a6-3-e2", promptFr: "Diminuez 200 de 20%.", type: "number", acceptable: ["160"] },
-      { id: "a6-3-e3", promptFr: "Un article coûte 80 CHF. Réduction de 25%. Nouveau prix ?", type: "number", acceptable: ["60"] },
-      { id: "a6-3-e4", promptFr: "Salaire de 3 200 CHF augmenté de 5%. Nouveau salaire ?", type: "number", acceptable: ["3360"] },
-      { id: "a6-3-e5", promptFr: "Prix de 150 CHF avec une réduction de 10%. Prix final ?", type: "number", acceptable: ["135"] },
-    ],
+    exercises: [],
   };

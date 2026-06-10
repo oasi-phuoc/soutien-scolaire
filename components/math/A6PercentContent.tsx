@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 
 type ValidatedProps = {
   validateCommand: number;
@@ -465,6 +465,222 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
                   className={simpleCls(s.status)} />
               )}
+            </Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── A6.3 shared pool ─────────────────────────────────────────────────────────
+
+type PctChangeItem = { base: number; op: "+" | "-"; pct: number; ans: number; diff: number };
+const PCT_CHANGE_POOL: PctChangeItem[] = [
+  { base: 100, op: "+", pct: 10, ans: 110, diff: 10  }, { base: 100, op: "+", pct: 20, ans: 120, diff: 20  },
+  { base: 100, op: "+", pct: 50, ans: 150, diff: 50  }, { base: 200, op: "+", pct: 10, ans: 220, diff: 20  },
+  { base: 200, op: "+", pct: 25, ans: 250, diff: 50  }, { base: 80,  op: "+", pct: 25, ans: 100, diff: 20  },
+  { base: 150, op: "+", pct: 20, ans: 180, diff: 30  }, { base: 50,  op: "+", pct: 20, ans: 60,  diff: 10  },
+  { base: 400, op: "+", pct: 5,  ans: 420, diff: 20  }, { base: 160, op: "+", pct: 25, ans: 200, diff: 40  },
+  { base: 100, op: "-", pct: 10, ans: 90,  diff: 10  }, { base: 100, op: "-", pct: 20, ans: 80,  diff: 20  },
+  { base: 200, op: "-", pct: 25, ans: 150, diff: 50  }, { base: 200, op: "-", pct: 50, ans: 100, diff: 100 },
+  { base: 80,  op: "-", pct: 25, ans: 60,  diff: 20  }, { base: 150, op: "-", pct: 20, ans: 120, diff: 30  },
+  { base: 50,  op: "-", pct: 10, ans: 45,  diff: 5   }, { base: 400, op: "-", pct: 5,  ans: 380, diff: 20  },
+  { base: 300, op: "-", pct: 30, ans: 210, diff: 90  }, { base: 160, op: "-", pct: 25, ans: 120, diff: 40  },
+];
+
+function pickMixed(pool: PctChangeItem[]): PctChangeItem[] {
+  const plus  = shuffle(pool.filter(q => q.op === "+"));
+  const minus = shuffle(pool.filter(q => q.op === "-"));
+  const nPlus = Math.random() < 0.5 ? 3 : 2;
+  return shuffle([...plus.slice(0, nPlus), ...minus.slice(0, 5 - nPlus)]);
+}
+
+function A63Grid({ questions, states, setStates, ansKey }: {
+  questions: PctChangeItem[];
+  states: { ans: string; status: "idle" | "correct" | "wrong" }[];
+  setStates: React.Dispatch<React.SetStateAction<{ ans: string; status: "idle" | "correct" | "wrong" }[]>>;
+  ansKey: "ans" | "diff";
+}) {
+  return (
+    <div className="grid grid-cols-[auto_auto_auto_auto_auto_auto] items-center gap-x-2 gap-y-4 w-fit">
+      {questions.map((q, i) => {
+        const s = states[i]!;
+        const correct = q[ansKey];
+        return (
+          <Fragment key={i}>
+            <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{q.base}</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{q.op}</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{q.pct}%</span>
+            <span className="text-sm text-[var(--color-text-primary)]">=</span>
+            {s.status === "wrong" ? (
+              <div className={WRONG_CLS}>
+                <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{correct}</span>
+              </div>
+            ) : (
+              <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+                onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                className={simpleCls(s.status)} />
+            )}
+          </Fragment>
+        );
+      })}
+    </div>
+  );
+}
+
+// ── A6.3 Exercise 1 : de combien la valeur change ? ──────────────────────────
+
+export function PctDiffExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
+  type State = { ans: string; status: "idle" | "correct" | "wrong" };
+  const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+
+  useEffect(() => {
+    if (validateCommand === 0) return;
+    let correct = 0;
+    const next = questions.map((q, i) => {
+      const s = states[i]!;
+      const userVal = normDec(s.ans);
+      const ok = isFinite(userVal) && Math.abs(userVal - q.diff) < 0.01;
+      if (ok) correct++;
+      return { ...s, status: ok ? "correct" : "wrong" } as State;
+    });
+    setStates(next);
+    onValidated(correct === questions.length, correct, questions.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div>
+      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-4 text-xs text-[var(--color-text-secondary)]">De combien la valeur augmente ou diminue ?</p>
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" />
+    </div>
+  );
+}
+
+// ── A6.3 Exercise 2 : valeur finale ──────────────────────────────────────────
+
+export function PctChangeExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
+  type State = { ans: string; status: "idle" | "correct" | "wrong" };
+  const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+
+  useEffect(() => {
+    if (validateCommand === 0) return;
+    let correct = 0;
+    const next = questions.map((q, i) => {
+      const s = states[i]!;
+      const userVal = normDec(s.ans);
+      const ok = isFinite(userVal) && Math.abs(userVal - q.ans) < 0.01;
+      if (ok) correct++;
+      return { ...s, status: ok ? "correct" : "wrong" } as State;
+    });
+    setStates(next);
+    onValidated(correct === questions.length, correct, questions.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div>
+      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez les valeurs finales.</p>
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" />
+    </div>
+  );
+}
+
+// ── A6.3 Exercise 3 : quel coefficient ? ─────────────────────────────────────
+
+type PctMultBase = { dir: "+" | "-"; pct: number };
+const PCT_MULT_POOL: PctMultBase[] = [
+  { dir: "+", pct: 5 }, { dir: "+", pct: 10 }, { dir: "+", pct: 15 }, { dir: "+", pct: 20 },
+  { dir: "+", pct: 25 }, { dir: "+", pct: 30 }, { dir: "+", pct: 40 }, { dir: "+", pct: 50 },
+  { dir: "-", pct: 5 }, { dir: "-", pct: 10 }, { dir: "-", pct: 15 }, { dir: "-", pct: 20 },
+  { dir: "-", pct: 25 }, { dir: "-", pct: 30 }, { dir: "-", pct: 40 }, { dir: "-", pct: 50 },
+];
+
+type PctMultItem = PctMultBase & { correct: string; options: string[] };
+type MultState = { choice: string | null; status: "idle" | "correct" | "wrong" };
+
+export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const fmt = (n: number) => n.toFixed(2).replace(".", ",").replace(/0+$/, "").replace(/,$/, "");
+  const [questions] = useState((): PctMultItem[] => {
+    const plus  = shuffle(PCT_MULT_POOL.filter(q => q.dir === "+"));
+    const minus = shuffle(PCT_MULT_POOL.filter(q => q.dir === "-"));
+    const nPlus = Math.random() < 0.5 ? 3 : 2;
+    const selected = shuffle([...plus.slice(0, nPlus), ...minus.slice(0, 5 - nPlus)]);
+    return selected.map(({ dir, pct }) => {
+      const cPlus  = 1 + pct / 100;
+      const cMinus = 1 - pct / 100;
+      const correct = dir === "+" ? `× ${fmt(cPlus)}` : `× ${fmt(cMinus)}`;
+      const wrong1  = `× ${fmt(pct / 100)}`;
+      const wrong2  = dir === "+" ? `× ${fmt(cMinus)}` : `× ${fmt(cPlus)}`;
+      const wrong3  = dir === "+" ? `÷ ${fmt(cPlus)}`  : `÷ ${fmt(cMinus)}`;
+      return { dir, pct, correct, options: shuffle([correct, wrong1, wrong2, wrong3]) };
+    });
+  });
+  const [states, setStates] = useState<MultState[]>(() => questions.map(() => ({ choice: null, status: "idle" })));
+
+  useEffect(() => {
+    if (validateCommand === 0) return;
+    let correct = 0;
+    const next = questions.map((q, i) => {
+      const s = states[i]!;
+      const ok = s.choice === q.correct;
+      if (ok) correct++;
+      return { ...s, status: ok ? "correct" : "wrong" } as MultState;
+    });
+    setStates(next);
+    onValidated(correct === questions.length, correct, questions.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div>
+      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Quelle opération faut-il effectuer ?</p>
+      <div className="grid grid-cols-[auto_1fr] items-start gap-x-3 gap-y-4">
+        {questions.map((q, i) => {
+          const s = states[i]!;
+          return (
+            <Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] pt-0.5">{i + 1}.</span>
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-[var(--color-text-primary)]">
+                  La valeur {q.dir === "+" ? "augmente" : "diminue"} de {q.pct}%
+                </span>
+                <div className="flex gap-2 flex-wrap">
+                  {q.options.map(opt => {
+                    const isSel = s.choice === opt;
+                    const isCor = opt === q.correct;
+                    let cls = "px-3 py-1 rounded-xl text-sm border transition-colors ";
+                    if (s.status === "idle") {
+                      cls += isSel
+                        ? "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40"
+                        : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 cursor-pointer hover:border-[var(--color-accent-alg)]/60";
+                    } else if (s.status === "correct") {
+                      cls += isSel
+                        ? "border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400"
+                        : "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
+                    } else {
+                      if (isSel)       cls += "border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-zinc-400 line-through";
+                      else if (isCor)  cls += "border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 font-bold";
+                      else             cls += "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
+                    }
+                    return (
+                      <button key={opt} disabled={s.status !== "idle"}
+                        onClick={() => setStates(prev => prev.map((x, j) => j === i ? { choice: opt, status: "idle" } : x))}
+                        className={cls}>
+                        {opt}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             </Fragment>
           );
         })}
