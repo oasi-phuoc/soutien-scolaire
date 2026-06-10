@@ -52,14 +52,14 @@ interface DecQuestion {
 
 function DecExercise({
   exNum,
-  title,
+  title: _title,
   consigne,
   questions,
   validateCommand,
   onValidated,
 }: {
   exNum: number;
-  title: string;
+  title?: string;
   consigne: string;
   questions: DecQuestion[];
   validateCommand: number;
