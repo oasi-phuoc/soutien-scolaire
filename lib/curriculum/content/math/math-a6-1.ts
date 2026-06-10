@@ -13,6 +13,8 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
+        { type: "plain", fr: "Un **pourcentage** exprime une partie sur cent. Le symbole **%** signifie « pour cent ». On utilise les pourcentages pour comparer des quantités sur une même base de 100." },
+        { type: "plain", fr: "" },
         { type: "highlight", fr: "Définition" },
         { type: "section", labelFr: "", itemsFr: [
           "**p%** signifie p parties sur 100",
