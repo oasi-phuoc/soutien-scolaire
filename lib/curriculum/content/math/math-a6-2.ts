@@ -13,6 +13,7 @@ export const MATH_A6_2_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
+        { type: "heading", fr: "Comment calculer le pourcentage", black: true },
         { type: "plain", fr: "Pour calculer p% d'un nombre N, on multiplie N par p/100 (ou par le décimal équivalent)." },
         { type: "plain", fr: "" },
         { type: "highlight", fr: "Formule" },

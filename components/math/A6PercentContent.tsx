@@ -286,7 +286,18 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
 // ── A6.1 Exercise 3 : fraction → % ──────────────────────────────────────────
 
 export function FracToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(FRAC_TO_PCT_POOL).slice(0, 5));
+  const [questions] = useState(() => {
+    const poolItems = shuffle(FRAC_TO_PCT_POOL).slice(0, 3);
+    const used = new Set(poolItems.map(q => q.pct));
+    const randoms: FracPctItem[] = [];
+    while (randoms.length < 2) {
+      const num = Math.floor(Math.random() * 250) + 1;
+      if (used.has(num)) continue;
+      used.add(num);
+      randoms.push({ num, den: 100, pct: num });
+    }
+    return [...poolItems, ...randoms];
+  });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
 
@@ -344,7 +355,18 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
 // ── A6.1 Exercise 4 : décimal → % ───────────────────────────────────────────
 
 export function DecToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(DEC_TO_PCT_POOL).slice(0, 5));
+  const [questions] = useState(() => {
+    const poolItems = shuffle(DEC_TO_PCT_POOL).slice(0, 3);
+    const used = new Set(poolItems.map(q => q.pct));
+    const randoms: DecPctItem[] = [];
+    while (randoms.length < 2) {
+      const n = Math.floor(Math.random() * 100) + 1; // 1–100 → dec 0.01–1
+      if (used.has(n)) continue;
+      used.add(n);
+      randoms.push({ dec: (n / 100).toString().replace(".", ","), pct: n });
+    }
+    return [...poolItems, ...randoms];
+  });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
 
@@ -431,8 +453,8 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.pct}% de {q.num}</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">=</span>
+              <span className="text-sm text-[var(--color-text-primary)]">{q.pct}% de {q.num}</span>
+              <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
@@ -477,14 +499,14 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Déterminez quelle part en pourcentage représente la valeur indiquée.</p>
-      <div className="grid grid-cols-[auto_auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
+      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
           const s = states[i]!;
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">{q.part} sur {q.total}</span>
-              <span className="text-sm font-semibold text-[var(--color-text-primary)]">=</span>
+              <span className="text-sm text-[var(--color-text-primary)]">{q.part} sur {q.total}</span>
+              <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
@@ -493,12 +515,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
-                  className={simpleCls(s.status)} />
-              )}
-              {s.status !== "wrong" ? (
-                <span className="text-sm text-[var(--color-text-secondary)]">%</span>
-              ) : (
-                <span />
+                  placeholder="%" className={simpleCls(s.status)} />
               )}
             </Fragment>
           );
