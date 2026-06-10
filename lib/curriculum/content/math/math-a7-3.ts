@@ -39,28 +39,19 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
           },
         ],
         blocksB: [
-          {
-            type: "rule",
-            titleFr: "Règle fondamentale",
-            itemsFr: [
-              "Soustraire un nombre revient à additionner son opposé.",
-              "a − b = a + (−b)",
-            ],
-          },
+          { type: "plain", fr: "Soustraire un nombre revient à additionner son opposé." },
           { type: "plain", fr: "" },
-          { type: "highlight", fr: "Mêmes signes" },
+          { type: "heading", fr: "Mêmes signes", black: true },
           {
             type: "section",
             labelFr: "",
             itemsFr: [
               "(+6) − (+3) = (+6) + (−3) = +3",
-              "(+3) − (+6) = (+3) + (−6) = −3",
               "(−6) − (−3) = (−6) + (+3) = −3",
-              "(−3) − (−6) = (−3) + (+6) = +3",
             ],
           },
           { type: "plain", fr: "" },
-          { type: "highlight", fr: "Signes contraires" },
+          { type: "heading", fr: "Signes contraires", black: true },
           {
             type: "section",
             labelFr: "",
