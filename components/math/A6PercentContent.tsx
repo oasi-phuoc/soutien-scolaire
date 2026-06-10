@@ -536,11 +536,11 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Complétez les valeurs manquantes.</p>
-      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-[10px] gap-y-3 w-fit">
+      <div className="grid grid-cols-[auto_auto_auto_auto] items-center justify-items-center gap-x-[10px] gap-y-3 w-fit">
         <span />
-        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Valeur initiale</span>
-        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Valeur finale</span>
-        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Variation</span>
+        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Valeur initiale</span>
+        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Valeur finale</span>
+        <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Variation</span>
         {questions.map((q, i) => {
           const s = states[i]!;
           const ansStr = q.missing === "init" ? String(q.init)
@@ -565,7 +565,7 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
           };
           return (
             <Fragment key={i}>
-              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] justify-self-start">{i + 1}.</span>
               {cell("init")}
               {cell("final")}
               {cell("variation")}
@@ -761,7 +761,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                   {q.options.map(opt => {
                     const isSel = s.choice === opt;
                     const isCor = opt === q.correct;
-                    let cls = "px-3 py-1 rounded-xl text-sm border transition-colors ";
+                    let cls = "w-20 text-center py-1 rounded-xl text-sm border transition-colors ";
                     if (s.status === "idle") {
                       cls += isSel
                         ? "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40"
@@ -771,7 +771,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                         ? "border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400"
                         : "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
                     } else {
-                      if (isSel)       cls += "border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-zinc-400 line-through";
+                      if (isSel)       cls += "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40";
                       else if (isCor)  cls += "border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 font-bold";
                       else             cls += "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
                     }
@@ -903,9 +903,8 @@ const WORD_TEMPLATES: Array<{ pType: 1|2|3|4; gen: () => WordProbResult }> = [
 export function PctWordExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [questions] = useState(() => {
-    const byType = ([1,2,3,4] as const).map(t => shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t)));
-    const extra = shuffle([...byType[0]!.slice(1), ...byType[1]!.slice(1), ...byType[2]!.slice(1), ...byType[3]!.slice(1)]);
-    return shuffle([byType[0]![0]!, byType[1]![0]!, byType[2]![0]!, byType[3]![0]!, extra[0]!]).map(tmpl => tmpl.gen());
+    const types = shuffle([1, 2, 3, 4] as const).slice(0, 2) as [1|2|3|4, 1|2|3|4];
+    return types.map(t => shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t))[0]!.gen());
   });
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
 
