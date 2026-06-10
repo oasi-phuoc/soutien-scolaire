@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -91,19 +91,19 @@ function DecExercise({
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">
-          Exercice {exNum} — {title}
+          Exercice {exNum}
         </h2>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       </div>
-      <div className="space-y-4">
+      <div className="grid items-center gap-x-3 gap-y-2" style={{ gridTemplateColumns: "1.5rem max-content auto" }}>
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
           return (
-            <div key={i} className="flex items-center gap-3 flex-wrap">
-              <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">
+            <Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] justify-self-start">
                 {q.label}.
               </span>
-              <span className="min-w-[9rem] shrink-0 text-sm font-mono text-[var(--color-text-primary)]">
+              <span className="text-sm font-mono text-[var(--color-text-primary)]">
                 {q.question} =
               </span>
               {isWrong ? (
@@ -124,7 +124,7 @@ function DecExercise({
                   disabled={validated}
                 />
               )}
-            </div>
+            </Fragment>
           );
         })}
       </div>
@@ -415,7 +415,7 @@ export function DecArithGroupExercise({
         )}
       </div>
       <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+      <div className="space-y-3">
         {questions.map((q: ArithQuestion, i: number) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] : null;
@@ -539,7 +539,7 @@ function DecMulColCard({
     const carryWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (carryWrong) {
       return (
-        <div className={`h-5 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
+        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
           <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
         </div>
@@ -558,7 +558,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
       />
     );
   };
@@ -980,6 +980,34 @@ export function DecDivExtExercise({
   );
 }
 
+function computeDecCarries(q: DecColQ): (number | null)[] {
+  const [ac, ad, au, adx, acx] = hToDigits(q.aH);
+  const [bc, bd, bu, bdx, bcx] = hToDigits(q.bH);
+  const aD = [ac, ad, au, adx, acx];
+  const bD = [bc, bd, bu, bdx, bcx];
+  const row: (number | null)[] = [null, null, null, null, null];
+  if (q.op === "+") {
+    let c = 0;
+    for (let i = 4; i >= 0; i--) {
+      const s = aD[i]! + bD[i]! + c;
+      c = Math.floor(s / 10);
+      if (i > 0 && c > 0) row[i - 1] = c;
+    }
+  } else {
+    let borrow = 0;
+    for (let i = 4; i >= 0; i--) {
+      const d = aD[i]! - bD[i]! - borrow;
+      if (d < 0) {
+        borrow = 1;
+        if (i > 0) row[i - 1] = aD[i - 1]! > 0 ? aD[i - 1]! - 1 : 9;
+      } else {
+        borrow = 0;
+      }
+    }
+  }
+  return row;
+}
+
 // ── Decimal column addition/subtraction (A5.4 Ex7, Ex8) ──────────────────────
 // Numbers stored as hundredths (integer). Display columns: D, U, ",", dx, cx
 
@@ -1028,6 +1056,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
   const [bc, bd, bu, bdx, bcx] = hToDigits(q.bH);
   const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
   const rExpected = [rc, rd, ru, rdx, rcx];
+  const carryRow = computeDecCarries(q);
   const labels = ["C", "D", "U", ",", "dx", "cx"];
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -1039,6 +1068,32 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     const idx = inputs.indexOf(e.currentTarget);
     const next = e.shiftKey ? inputs[idx - 1] : inputs[idx + 1];
     if (next) { next.focus(); next.setSelectionRange(next.value.length, next.value.length); }
+  }
+
+  function carryInputCell(carrySlot: number) {
+    const carryIdx = 5 + carrySlot;
+    const expectedCarry = carryRow[carrySlot] ?? null;
+    const val = cellAnswers[carryIdx] ?? "";
+    const carryWrong = validated && expectedCarry !== null && val.trim() !== String(expectedCarry);
+    if (carryWrong) {
+      return (
+        <td key={carrySlot} className="w-8 text-center">
+          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
+            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expectedCarry}</span>
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={carrySlot} className="w-8 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          onKeyDown={tabNav}
+          onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
+          className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] text-orange-500" />
+      </td>
+    );
   }
 
   function cell(colIdx: number, digit: number | null, isInput: boolean, inputIdx: number) {
@@ -1094,6 +1149,16 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
           </tr>
         </thead>
         <tbody>
+          {/* Carry row (R) */}
+          <tr>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+            {carryInputCell(0)}
+            {carryInputCell(1)}
+            {carryInputCell(2)}
+            <td className="w-8" />
+            {carryInputCell(3)}
+            {q.is2Dec ? carryInputCell(4) : <td className="w-8" />}
+          </tr>
           {opRows.map((row, ri) => (
             <tr key={ri}>
               <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">
@@ -1149,7 +1214,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
   onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
   const [questions] = useState<DecColQ[]>(() => genDecColQs(op, 2));
-  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(5).fill("")));
+  const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(10).fill("")));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => Array(2).fill(false));
 
@@ -1158,7 +1223,13 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
     const res: boolean[] = questions.map((q: DecColQ, qi: number) => {
       const [rc, rd, ru, rdx, rcx] = hToDigits(q.rH);
       const expected = q.is2Dec ? [rc, rd, ru, rdx, rcx] : [rc, rd, ru, rdx];
-      return expected.every((exp: number, ci: number) => (answers[qi]?.[ci] ?? "").trim() === String(exp));
+      const resultOk = expected.every((exp: number, ci: number) => (answers[qi]?.[ci] ?? "").trim() === String(exp));
+      if (!resultOk) return false;
+      const carryRow = computeDecCarries(q);
+      return carryRow.every((exp: number | null, ci: number) => {
+        if (exp === null) return true;
+        return (answers[qi]?.[5 + ci] ?? "").trim() === String(exp);
+      });
     });
     setResults(res);
     setValidated(true);
@@ -1260,7 +1331,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, 15 + carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-6 w-6 rounded border text-center font-mono text-xs outline-none transition-colors bg-[var(--color-bg-secondary)] border-[var(--color-border-default)] text-[var(--color-text-secondary)] focus:border-[var(--color-accent-alg)]" />
+          className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]" />
       </td>
     );
   }
@@ -1282,7 +1353,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
         <tbody>
           {/* Carry row */}
           <tr>
-            <td className="pr-1 text-center text-[10px] font-bold text-[var(--color-text-secondary)]">R</td>
+            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
             {carryCell(0)}{carryCell(1)}{carryCell(2)}
             <td className="w-8" />
             {carryCell(3)}{carryCell(4)}
@@ -1657,7 +1728,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className="h-5 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
+        <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
           <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
           <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
         </div>
@@ -1668,7 +1739,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-5 w-8 rounded border text-center font-mono text-[10px] outline-none transition-colors border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 text-orange-500 focus:border-[var(--color-accent-alg)]"
       />
     );
   };

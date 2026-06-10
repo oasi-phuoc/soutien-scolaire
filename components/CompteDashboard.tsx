@@ -99,7 +99,7 @@ export function CompteDashboard({
   const [pwdOpen, setPwdOpen] = useState(false);
   const [newPwd, setNewPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
-  const [pwdStatus, setPwdStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
+  const [pwdStatus, setPwdStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [pwdMsg, setPwdMsg] = useState<string | null>(null);
 
   useEffect(() => {
@@ -242,86 +242,6 @@ export function CompteDashboard({
                 Erreur sync : {syncError}
               </p>
             )}
-
-            {/* Password change accordion */}
-            <div className="mt-5 rounded-xl border border-zinc-200 dark:border-zinc-700">
-              <button
-                type="button"
-                onClick={() => { setPwdOpen((v) => !v); setPwdMsg(null); setPwdStatus("idle"); }}
-                className="flex w-full items-center justify-between px-4 py-3 text-sm font-semibold text-zinc-700 dark:text-zinc-200"
-              >
-                Changer le mot de passe
-                <svg className={`transition-transform ${pwdOpen ? "rotate-180" : ""}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                  <path d="m6 9 6 6 6-6" />
-                </svg>
-              </button>
-              {pwdOpen && (
-                <div className="border-t border-zinc-200 px-4 pb-4 pt-3 dark:border-zinc-700">
-                  <div className="space-y-3">
-                    <div>
-                      <label className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">Ancien mot de passe</label>
-                      <input
-                        type="password"
-                        value={oldPwd}
-                        onChange={(e) => setOldPwd(e.target.value)}
-                        className="w-full rounded-xl border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600"
-                        autoComplete="current-password"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">Nouveau mot de passe</label>
-                      <input
-                        type="password"
-                        value={newPwd}
-                        onChange={(e) => { setNewPwd(e.target.value); setPwdMsg(null); setPwdStatus("idle"); }}
-                        className="w-full rounded-xl border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600"
-                        autoComplete="new-password"
-                      />
-                    </div>
-                    <div>
-                      <label className="mb-1 block text-xs text-zinc-500 dark:text-zinc-400">Confirmer le nouveau mot de passe</label>
-                      <input
-                        type="password"
-                        value={confirmPwd}
-                        onChange={(e) => { setConfirmPwd(e.target.value); setPwdMsg(null); setPwdStatus("idle"); }}
-                        className="w-full rounded-xl border border-zinc-300 bg-transparent px-3 py-2 text-sm outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600"
-                        autoComplete="new-password"
-                      />
-                      {confirmPwd.length > 0 && (
-                        <p className={`mt-1.5 text-xs font-medium ${newPwd === confirmPwd ? "text-green-600 dark:text-green-400" : "text-red-500 dark:text-red-400"}`}>
-                          {newPwd === confirmPwd ? "Les mots de passe correspondent ✓" : "Les mots de passe ne correspondent pas"}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                  {pwdMsg && (
-                    <p className={`mt-3 rounded-lg px-3 py-2 text-sm ${pwdStatus === "ok" ? "bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400" : "bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-400"}`}>
-                      {pwdMsg}
-                    </p>
-                  )}
-                  <button
-                    type="button"
-                    disabled={pwdStatus === "submitting" || !oldPwd || !newPwd || newPwd !== confirmPwd}
-                    onClick={async () => {
-                      setPwdStatus("submitting");
-                      setPwdMsg(null);
-                      const r = await changePasswordAction(oldPwd, newPwd, confirmPwd);
-                      if (r.ok) {
-                        setPwdStatus("ok");
-                        setPwdMsg("Mot de passe modifié avec succès.");
-                        setOldPwd(""); setNewPwd(""); setConfirmPwd("");
-                      } else {
-                        setPwdStatus("error");
-                        setPwdMsg(r.reason ?? "Erreur inconnue.");
-                      }
-                    }}
-                    className="mt-4 w-full min-h-11 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-semibold text-white disabled:opacity-50"
-                  >
-                    {pwdStatus === "submitting" ? "Enregistrement…" : "Enregistrer le nouveau mot de passe"}
-                  </button>
-                </div>
-              )}
-            </div>
           </section>
         ) : supabaseConfigured ? (
           <section>
@@ -350,7 +270,6 @@ export function CompteDashboard({
           </div>
         )}
 
-        {/* Changer le mot de passe — accordion, visible seulement si connecté */}
         {supabaseConfigured && user && (
           <section aria-labelledby="pwd-heading">
             <button
@@ -427,6 +346,37 @@ export function CompteDashboard({
             )}
           </section>
         )}
+
+        <section aria-labelledby="pivot-heading">
+          <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+            Langue d'aide
+          </h2>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            Choix enregistré sur cet appareil
+            {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
+          </p>
+          <HelpLanguageSelect value={code} onChange={(next) => void savePivot(next)} />
+          <select
+            value={code}
+            onChange={e => void savePivot(e.target.value as PivotCode)}
+            className="hidden"
+          >
+            {PIVOT_LANGS.map((l) => (
+              <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
+            ))}
+          </select>
+          {saved ? (
+            <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
+              Choix enregistré.
+            </p>
+          ) : null}
+          {pivotMsg ? (
+            <p className="mt-2 text-sm text-amber-800 dark:text-amber-200" role="status">
+              {pivotMsg}
+            </p>
+          ) : null}
+        </section>
+
         <section aria-labelledby="level-heading">
           <h2 id="level-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
             Niveau de validation
@@ -491,7 +441,6 @@ export function CompteDashboard({
             })}
           </div>
         </section>
-
       </main>
     </>
   );

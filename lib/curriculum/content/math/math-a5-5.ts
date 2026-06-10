@@ -7,7 +7,6 @@ export const MATH_A5_5_LESSON: MathSubmoduleLesson = {
       title: { fr: "Multiplication de décimaux",},
       blocks: [
         { type: "heading", fr: "Méthode en 4 étapes", black: true },
-        { type: "highlight", fr: "Principe" },
         {
           type: "section", labelFr: "", itemsFr: [
             "1. **Enlever les virgules** des deux facteurs.",
@@ -21,6 +20,7 @@ export const MATH_A5_5_LESSON: MathSubmoduleLesson = {
           a: [0, 0, 3, 1, 4],
           b: [0, 0, 0, 2, 5],
           result: 7850,
+          decimalPos: 3,
           steps: [
             {
               numFr: "1. Poser sans virgule",
@@ -80,7 +80,7 @@ export const MATH_A5_5_LESSON: MathSubmoduleLesson = {
             },
           ],
         },
-        { type: "note", fr: "3,14 × 2,5 = 7,85" },
+        { type: "highlight", fr: "3,14 × 2,5 = 7,85" },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Astuces avec certains facteurs", black: true },
         {
