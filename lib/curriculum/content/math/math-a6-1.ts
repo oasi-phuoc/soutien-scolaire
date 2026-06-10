@@ -13,30 +13,23 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
         ],
       },
       blocks: [
-        { type: "heading", fr: "Introduction aux pourcentages", black: true },
-        { type: "plain", fr: "Un **pourcentage** exprime une partie sur cent. Le symbole **%** signifie « pour cent ». On utilise les pourcentages pour comparer des quantités sur une même base de 100." },
-        { type: "rule", titleFr: "Définition", itemsFr: [
+        { type: "highlight", fr: "Définition" },
+        { type: "section", labelFr: "", itemsFr: [
           "**p%** signifie p parties sur 100",
           "**p%** = p/100 (fraction) = p ÷ 100 (décimal)",
           "Exemple : 35% = 35/100 = 0,35",
         ]},
         { type: "plain", fr: "" },
-        { type: "heading", fr: "Points de repère essentiels" },
-        { type: "bullets", labelFr: "Valeurs à retenir", itemsFr: [
-          "**0%** → rien du tout (la quantité est nulle)",
-          "**50%** → la moitié (la quantité est divisée par 2)",
-          "**100%** → la totalité (toute la quantité)",
-          "**200%** → le double (deux fois la quantité)",
-        ]},
-        { type: "plain", fr: "" },
         { type: "heading", fr: "Conversions : pourcentage, fraction, décimal" },
         { type: "table", headersFr: ["Pourcentage", "Fraction", "Décimal"], accentHeader: true,
           rows: [
+            ["0%", "0", "0,00"],
             ["10%", "1/10", "0,10"],
             ["25%", "1/4", "0,25"],
             ["50%", "1/2", "0,50"],
             ["75%", "3/4", "0,75"],
             ["100%", "1", "1,00"],
+            ["200%", "2", "2,00"],
           ]
         },
         { type: "plain", fr: "" },
