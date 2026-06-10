@@ -17,10 +17,10 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
     { word: "terrasse", image: "terrasse.jpg",      article: "la",  gender: "f", definition: "espace extérieur plat attenant à la maison" },
     { word: "cave", image: "cave.jpg",          article: "la",  gender: "f", definition: "pièce souterraine pour le stockage" },
     { word: "grenier", image: "grenier.jpg",       article: "le",  gender: "m", definition: "espace sous le toit pour ranger" },
-    { word: "salle à manger", image: "salle-à-manger.jpg",article: "la",  gender: "f", definition: "pièce pour prendre les repas" },
+    { word: "salle à manger", image: "salle-a-manger.jpg",article: "la",  gender: "f", definition: "pièce pour prendre les repas" },
     { word: "jardin", image: "jardin.jpg",        article: "le",  gender: "m", definition: "espace vert autour de la maison" },
     { word: "sous-sol", image: "sous-sol.jpg",      article: "le",  gender: "m", definition: "niveau en dessous du rez-de-chaussée" },
-    { word: "entrée", image: "entrée.jpg",        article: "l'",  gender: "f", definition: "espace d'accueil à l'entrée du logement" },
+    { word: "entrée", image: "entree.jpg",        article: "l'",  gender: "f", definition: "espace d'accueil à l'entrée du logement" },
   ],
   sentences: [
     { sentence: "Elle prépare le dîner dans la ___.",                     answer: "cuisine" },

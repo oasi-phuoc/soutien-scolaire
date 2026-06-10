@@ -17,9 +17,9 @@ export const V7_QUANTITES_THEME: VocabTheme = {
     { word: "morceau", image: "morceau.jpg",     article: "le",  gender: "m", definition: "petit morceau d'aliment découpé" },
     { word: "bol", image: "bol.jpg",         article: "le",  gender: "m", definition: "récipient rond pour le petit-déjeuner" },
     { word: "bouteille", image: "bouteille.jpg",   article: "la",  gender: "f", definition: "récipient en verre ou plastique pour liquides" },
-    { word: "cuillère", image: "cuillère.jpg",    article: "la",  gender: "f", definition: "mesure d'ingrédient prise avec une cuillère" },
-    { word: "pincée", image: "pincée.jpg",      article: "la",  gender: "f", definition: "très petite quantité prise entre les doigts" },
-    { word: "boîte", image: "boîte.jpg",       article: "la",  gender: "f", definition: "contenant rigide pour conserver les aliments" },
+    { word: "cuillère", image: "cuillere.jpg",    article: "la",  gender: "f", definition: "mesure d'ingrédient prise avec une cuillère" },
+    { word: "pincée", image: "pincee.jpg",      article: "la",  gender: "f", definition: "très petite quantité prise entre les doigts" },
+    { word: "boîte", image: "boite.jpg",       article: "la",  gender: "f", definition: "contenant rigide pour conserver les aliments" },
     { word: "portion", image: "portion.jpg",     article: "la",  gender: "f", definition: "quantité d'aliment pour une personne" },
   ],
   sentences: [

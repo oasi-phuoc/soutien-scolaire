@@ -19,7 +19,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
     { word: "chou", image: "chou.jpg",           article: "le",  gender: "m", definition: "légume à grosses feuilles vertes ou blanches" },
     { word: "haricot", image: "haricot.jpg",        article: "le",  gender: "m", definition: "légume en cosse, vert ou blanc" },
     { word: "ail", image: "ail.jpg",            article: "l'",  gender: "m", definition: "bulbe aromatique utilisé en cuisine" },
-    { word: "maïs", image: "maïs.jpg",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" },
+    { word: "maïs", image: "mais.jpg",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" },
     { word: "champignon", image: "champignon.jpg",     article: "le",  gender: "m", definition: "végétal sans chlorophylle qui pousse en forêt" },
   ],
   sentences: [

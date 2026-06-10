@@ -9,7 +9,7 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
     { word: "sac", image: "sac.jpg",          article: "le",  gender: "m", definition: "poche ou sacoche pour transporter des objets" },
     { word: "chapeau", image: "chapeau.jpg",      article: "le",  gender: "m", definition: "coiffure rigide qui protège la tête" },
     { word: "casquette", image: "casquette.jpg",    article: "la",  gender: "f", definition: "coiffure souple avec visière" },
-    { word: "écharpe", image: "écharpe.jpg",      article: "l'",  gender: "f", definition: "longue pièce de tissu pour le cou" },
+    { word: "écharpe", image: "echarpe.jpg",      article: "l'",  gender: "f", definition: "longue pièce de tissu pour le cou" },
     { word: "ceinture", image: "ceinture.jpg",     article: "la",  gender: "f", definition: "bande pour tenir le pantalon" },
     { word: "gants", image: "gants.jpg",        article: "les", gender: "m", definition: "vêtements pour couvrir les mains" },
     { word: "lunettes", image: "lunettes.jpg",     article: "les", gender: "f", definition: "verres correcteurs portés sur le nez" },
