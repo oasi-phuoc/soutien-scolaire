@@ -259,12 +259,18 @@ function genPlaceMixed(): NLPlaceCfg {
 
 function genPlaceNeg(): NLPlaceCfg {
   function makeGroup() {
+    const ranges = [10, 20, 30, 40, 50] as const;
+    const range = ranges[rnd(0, ranges.length - 1)]!;
     const max = rnd(-2, -1);
-    const min = max - rnd(7, 9);
+    const min = max - range;
+    const third = Math.floor(range / 3);
     const cands: number[] = [];
     for (let v = min + 1; v < max; v++) cands.push(v);
-    const positions = shuffle(cands).slice(0, 4).sort((a, b) => a - b);
-    return { min, max, step: 1 as const, positions };
+    const p1 = rnd(min + 1, min + third);
+    const p2 = rnd(min + third + 1, min + 2 * third);
+    const p3 = rnd(min + 2 * third + 1, max - 1);
+    const p4 = shuffle(cands.filter(v => v !== p1 && v !== p2 && v !== p3))[0] ?? p2 + 1;
+    return { min, max, step: 1 as const, positions: [p1, p2, p3, p4].sort((a, b) => a - b) };
   }
   return { groups: [makeGroup(), makeGroup()] };
 }
@@ -312,21 +318,24 @@ function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong,
           </svg>
         </div>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {chips.map((v: number, ci: number) => {
-          const isAssigned = assignedSet.has(v);
-          const isActive = activeChip === v;
-          let cls = "w-20 rounded-xl border py-2 text-sm font-mono font-bold text-center transition-colors ";
-          if (isActive) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-          else if (isAssigned) cls += "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-50";
-          else cls += "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] cursor-pointer";
-          return (
-            <button key={v} type="button" className={cls}
-              onClick={() => onChipClick(v)} disabled={validated}>
-              {ci + 1}. {fmtNum(v, group.step)}
-            </button>
-          );
-        })}
+      <div className="flex items-start gap-2">
+        <span className="shrink-0 text-sm font-bold text-[var(--color-accent-alg)] pt-2">{gi + 1}.</span>
+        <div className="flex flex-wrap gap-2">
+          {chips.map((v: number) => {
+            const isAssigned = assignedSet.has(v);
+            const isActive = activeChip === v;
+            let cls = "w-16 rounded-xl border py-2 text-sm font-mono font-bold text-center transition-colors ";
+            if (isActive) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+            else if (isAssigned) cls += "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-50";
+            else cls += "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] cursor-pointer";
+            return (
+              <button key={v} type="button" className={cls}
+                onClick={() => onChipClick(v)} disabled={validated}>
+                {fmtNum(v, group.step)}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
