@@ -280,44 +280,64 @@ const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
 
 function PasswordSection({ userId }: { userId: string }) {
   const [pwd, setPwd] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
   const [pending, startTransition] = useTransition();
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
 
+  const mismatch = confirmPwd.length > 0 && pwd !== confirmPwd;
+
   function submit() {
-    if (!pwd) return;
+    if (!pwd || mismatch) return;
     setMsg(null);
     startTransition(async () => {
       const r = await changePasswordAction(userId, pwd);
-      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
+      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); setConfirmPwd(""); }
       else setMsg({ ok: false, text: r.reason ?? "Erreur" });
     });
   }
 
+  const inputCls = "mt-1 min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-3 text-base outline-none focus:border-green-500 dark:border-zinc-600 dark:bg-zinc-950";
+
   return (
-    <div className="mb-4 space-y-2 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
+    <div className="mb-4 space-y-3 rounded-xl border border-zinc-200 p-3 dark:border-zinc-700">
       <p className="text-xs font-semibold text-zinc-500 dark:text-zinc-400">Modifier le mot de passe</p>
-      <div className="flex gap-2">
+      <div>
+        <label className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Mot de passe</label>
         <input
           type="password"
           value={pwd}
-          onChange={e => setPwd(e.target.value)}
-          placeholder="Nouveau mot de passe (8+ car.)"
-          className="min-w-0 flex-1 rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800"
+          onChange={e => { setPwd(e.target.value); setMsg(null); }}
+          autoComplete="new-password"
+          className={inputCls}
         />
-        <button
-          type="button"
-          onClick={submit}
-          disabled={pending || pwd.length < 8}
-          className="shrink-0 rounded-lg bg-blue-600 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
-        >
-          {pending ? "…" : "OK"}
-        </button>
+        <p className="mt-1 text-xs text-zinc-500">Au moins 8 caractères.</p>
+      </div>
+      <div>
+        <label className="text-sm font-medium text-zinc-800 dark:text-zinc-200">Confirmer le mot de passe</label>
+        <input
+          type="password"
+          value={confirmPwd}
+          onChange={e => { setConfirmPwd(e.target.value); setMsg(null); }}
+          autoComplete="new-password"
+          className={`${inputCls} ${mismatch ? "border-red-400 focus:border-red-500" : ""}`}
+        />
+        {mismatch && (
+          <p className="mt-1 text-xs text-red-600 dark:text-red-400">Les mots de passe ne correspondent pas.</p>
+        )}
       </div>
       {msg && (
         <p className={`text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>
           {msg.text}
         </p>
       )}
+      <button
+        type="button"
+        onClick={submit}
+        disabled={pending || pwd.length < 8 || mismatch}
+        className="w-full min-h-11 rounded-xl bg-blue-600 px-3 text-sm font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+      >
+        {pending ? "Enregistrement…" : "Enregistrer"}
+      </button>
     </div>
   );
 }
