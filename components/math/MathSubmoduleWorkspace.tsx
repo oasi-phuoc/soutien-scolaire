@@ -931,7 +931,7 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
       <div className="flex gap-2">
         {(["add", "sub"] as const).map(m => (
           <button key={m} type="button" onClick={() => setMode(m)}
-            className={`px-4 py-2 rounded-lg text-base font-bold transition-colors ${
+            className={`flex-1 px-4 py-2 rounded-lg text-base font-bold transition-colors ${
               mode === m
                 ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                 : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
