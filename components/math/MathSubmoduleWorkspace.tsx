@@ -248,11 +248,9 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a7_nl_place_neg", exNum: 4 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-2") {
-    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 1 });
-    steps.push({ kind: "a7_compare_ex", exNum: 2, level: 2 });
+    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 2 });
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 1 });
-    steps.push({ kind: "a7_compare_ex", exNum: 2, level: 2 });
+    steps.push({ kind: "a7_compare_ex", exNum: 1, level: 2 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-3") {
     // Training: Ex1-4 balanced, Ex5 sign patterns, Ex6-8 (extended range practice)
