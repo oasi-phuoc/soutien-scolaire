@@ -411,8 +411,21 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
   return steps;
 }
 
-// Parses [[frac:N/D]] and **bold** markers and renders them inline
+// Parses [[frac:N/D]], **bold**, and \n line-break markers and renders them inline
 function renderFracText(text: string): React.ReactNode {
+  if (text.includes("\n")) {
+    const lines = text.split("\n");
+    return (
+      <>
+        {lines.map((line, li) => (
+          <React.Fragment key={li}>
+            {li > 0 && <br />}
+            {renderFracText(line)}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  }
   const parts = text.split(/(\[\[frac:[^/\]]+\/[^\]]+\]\]|\*\*[^*]+\*\*)/);
   if (parts.length === 1) return text;
   const nodes: React.ReactNode[] = [];
@@ -1035,18 +1048,20 @@ function BlockView({ block }: { block: MathRichBlock }) {
       return (
         <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
           <table className="min-w-full text-xs">
-            <thead>
-              <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
-                {block.headersFr.map((h, i) => (
-                  <th key={i} className={`px-3 py-2 text-center font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
-                ))}
-              </tr>
-            </thead>
+            {block.headersFr.length > 0 && (
+              <thead>
+                <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
+                  {block.headersFr.map((h, i) => (
+                    <th key={i} className={`px-3 py-2 text-center font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
+                  ))}
+                </tr>
+              </thead>
+            )}
             <tbody>
               {block.rows.map((row, ri) => (
-                <tr key={ri} className="border-t border-[var(--color-border-default)]">
+                <tr key={ri} className={ri > 0 || block.headersFr.length > 0 ? "border-t border-[var(--color-border-default)]" : ""}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className="px-3 py-2 text-center text-[var(--color-text-secondary)]">{renderFracText(cell)}</td>
+                    <td key={ci} className={`px-3 py-2 ${block.colAligns?.[ci] === "left" ? "text-left" : "text-center"} text-[var(--color-text-secondary)]`}>{renderFracText(cell)}</td>
                   ))}
                 </tr>
               ))}
