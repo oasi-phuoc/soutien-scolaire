@@ -205,7 +205,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
                 ) : (
                   <input type="text" inputMode="decimal" value={vals[ai] ?? ""} disabled={validated}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value : c))}
-                    placeholder={q.step < 1 ? "ex: +1,5" : undefined}
+
                     className={`${inputCls} ${validated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                 )}
               </div>
@@ -258,12 +258,15 @@ function genPlaceMixed(): NLPlaceCfg {
 }
 
 function genPlaceNeg(): NLPlaceCfg {
-  const max = rnd(-2, -1);
-  const min = max - rnd(7, 9);
-  const cands: number[] = [];
-  for (let v = min + 1; v < max; v++) cands.push(v);
-  const positions = shuffle(cands).slice(0, 5).sort((a, b) => a - b);
-  return { groups: [{ min, max, step: 1, positions }] };
+  function makeGroup() {
+    const max = rnd(-2, -1);
+    const min = max - rnd(7, 9);
+    const cands: number[] = [];
+    for (let v = min + 1; v < max; v++) cands.push(v);
+    const positions = shuffle(cands).slice(0, 4).sort((a, b) => a - b);
+    return { min, max, step: 1 as const, positions };
+  }
+  return { groups: [makeGroup(), makeGroup()] };
 }
 
 const svgHPlace = 100;
@@ -310,17 +313,17 @@ function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong,
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        {chips.map((v: number) => {
+        {chips.map((v: number, ci: number) => {
           const isAssigned = assignedSet.has(v);
           const isActive = activeChip === v;
-          let cls = "w-16 rounded-xl border py-2 text-sm font-mono font-bold text-center transition-colors ";
+          let cls = "w-20 rounded-xl border py-2 text-sm font-mono font-bold text-center transition-colors ";
           if (isActive) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
           else if (isAssigned) cls += "border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] opacity-50";
           else cls += "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)] cursor-pointer";
           return (
             <button key={v} type="button" className={cls}
               onClick={() => onChipClick(v)} disabled={validated}>
-              {fmtNum(v, group.step)}
+              {ci + 1}. {fmtNum(v, group.step)}
             </button>
           );
         })}
