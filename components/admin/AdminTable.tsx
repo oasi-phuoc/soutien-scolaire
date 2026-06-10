@@ -323,7 +323,7 @@ function PasswordSection({ userId }: { userId: string }) {
   );
 }
 
-function _ProgressPanel({ user }: { user: UserRow }) {
+function ProgressPanel({ user }: { user: UserRow }) {
   const math = mathPct(user.progress_data);
   const french = frenchPct(user.progress_data);
   const lecture = lecturePct(user.progress_data);
