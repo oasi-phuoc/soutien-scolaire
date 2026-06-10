@@ -22,7 +22,7 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
           "Exemple : 35% = 35/100 = 0,35",
         ]},
         { type: "plain", fr: "" },
-        { type: "heading", fr: "Conversions : pourcentage, fraction, décimal" },
+        { type: "heading", fr: "Conversions : pourcentage, fraction, décimal", black: true },
         { type: "table", headersFr: ["Pourcentage", "Fraction", "Décimal"], accentHeader: true,
           rows: [
             ["0%", "0", "0,00"],
@@ -36,19 +36,25 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
         },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Convertir une fraction en pourcentage" },
-        { type: "section", labelFr: "Méthode", itemsFr: [
-          "**Étape 1** — Diviser le numérateur par le dénominateur",
-          "**Étape 2** — Multiplier le résultat par 100",
+        { type: "plain", fr: "1. Diviser le numérateur par le dénominateur\n2. Multiplier le résultat par 100" },
+        { type: "section", labelFr: "", itemsFr: [
+          "3/4 → 3 ÷ 4 = 0,75 → 0,75 × 100 = 75%",
+          "1/5 → 1 ÷ 5 = 0,20 → 0,20 × 100 = 20%",
         ]},
-        { type: "example", fr: "3/4 → 3 ÷ 4 = 0,75 → 0,75 × 100 = 75%" },
-        { type: "example", fr: "1/5 → 1 ÷ 5 = 0,20 → 0,20 × 100 = 20%" },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Convertir un décimal en pourcentage" },
-        { type: "section", labelFr: "Méthode", itemsFr: [
-          "Multiplier le nombre décimal par 100",
+        { type: "plain", fr: "Multiplier le nombre décimal par 100" },
+        { type: "section", labelFr: "", itemsFr: [
+          "0,08 × 100 = 8%",
+          "1,2 × 100 = 120%",
         ]},
-        { type: "example", fr: "0,6 × 100 = 60%   |   0,08 × 100 = 8%   |   1,2 × 100 = 120%" },
-        { type: "note", fr: "Un pourcentage peut dépasser 100% ! Par exemple, 120% signifie 1,2 fois la quantité de départ. 75% de réussite signifie 75 élèves sur 100 ont réussi." },
+        { type: "plain", fr: "" },
+        { type: "highlight", fr: "Astuce" },
+        { type: "section", labelFr: "", itemsFr: [
+          "Un pourcentage peut dépasser 100% !",
+          "120% signifie 1,2 fois la quantité de départ.",
+          "75% de réussite signifie 75 élèves sur 100 ont réussi.",
+        ]},
       ],
     },
     exercises: [
