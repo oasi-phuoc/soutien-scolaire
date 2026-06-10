@@ -32,32 +32,24 @@ export async function updateRemotePivotLang(lang: string) {
   return { ok: true as const };
 }
 
-export async function changePasswordAction(oldPassword: string, newPassword: string, confirmPassword: string) {
-  if (!oldPassword || !newPassword || !confirmPassword) {
-    return { ok: false as const, reason: "Tous les champs sont requis." };
-  }
-  if (newPassword !== confirmPassword) {
-    return { ok: false as const, reason: "Les mots de passe ne correspondent pas." };
-  }
-  if (newPassword.length < 6) {
-    return { ok: false as const, reason: "Le nouveau mot de passe doit contenir au moins 6 caractères." };
-  }
+/** Met à jour le mot de passe de l'utilisateur connecté. */
+export async function changePasswordAction(
+  newPassword: string,
+  confirmPassword: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (newPassword.length < 8)
+    return { ok: false, reason: "Le mot de passe doit contenir au moins 8 caractères." };
+  if (newPassword !== confirmPassword)
+    return { ok: false, reason: "Les mots de passe ne correspondent pas." };
 
   const supabase = await createSupabaseServerClient();
-  if (!supabase) return { ok: false as const, reason: "Supabase non configuré." };
+  if (!supabase) return { ok: false, reason: "Supabase non configuré." };
 
   const { data: { user }, error: userErr } = await supabase.auth.getUser();
-  if (userErr || !user?.email) return { ok: false as const, reason: "Non connecté." };
-
-  // Verify old password by re-signing in
-  const { error: signInErr } = await supabase.auth.signInWithPassword({
-    email: user.email,
-    password: oldPassword,
-  });
-  if (signInErr) return { ok: false as const, reason: "Ancien mot de passe incorrect." };
+  if (userErr || !user) return { ok: false, reason: "Vous devez être connecté." };
 
   const { error: updateErr } = await supabase.auth.updateUser({ password: newPassword });
-  if (updateErr) return { ok: false as const, reason: updateErr.message };
+  if (updateErr) return { ok: false, reason: updateErr.message };
 
-  return { ok: true as const };
+  return { ok: true };
 }

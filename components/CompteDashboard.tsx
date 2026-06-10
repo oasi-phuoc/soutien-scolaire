@@ -97,7 +97,6 @@ export function CompteDashboard({
   const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
   const [syncError, setSyncError] = useState<string | null>(null);
   const [pwdOpen, setPwdOpen] = useState(false);
-  const [oldPwd, setOldPwd] = useState("");
   const [newPwd, setNewPwd] = useState("");
   const [confirmPwd, setConfirmPwd] = useState("");
   const [pwdStatus, setPwdStatus] = useState<"idle" | "submitting" | "ok" | "error">("idle");
@@ -147,6 +146,22 @@ export function CompteDashboard({
     } catch (e) {
       setSyncStatus("error");
       setSyncError(e instanceof Error ? e.message : "Erreur inconnue");
+    }
+  }
+
+  async function handlePasswordChange() {
+    setPwdStatus("loading");
+    setPwdMsg(null);
+    const result = await changePasswordAction(newPwd, confirmPwd);
+    if (result.ok) {
+      setPwdStatus("ok");
+      setPwdMsg("Mot de passe mis à jour.");
+      setNewPwd("");
+      setConfirmPwd("");
+      window.setTimeout(() => { setPwdStatus("idle"); setPwdMsg(null); setPwdOpen(false); }, 2500);
+    } else {
+      setPwdStatus("error");
+      setPwdMsg(result.reason);
     }
   }
 
@@ -335,6 +350,83 @@ export function CompteDashboard({
           </div>
         )}
 
+        {/* Changer le mot de passe — accordion, visible seulement si connecté */}
+        {supabaseConfigured && user && (
+          <section aria-labelledby="pwd-heading">
+            <button
+              type="button"
+              onClick={() => { setPwdOpen((v) => !v); setPwdStatus("idle"); setPwdMsg(null); }}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <h2 id="pwd-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+                Changer le mot de passe
+              </h2>
+              <svg
+                width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                className={`shrink-0 text-zinc-400 transition-transform ${pwdOpen ? "rotate-90" : ""}`}
+                aria-hidden
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+
+            {pwdOpen && (
+              <div className="mt-4 space-y-4">
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                    Mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    value={newPwd}
+                    onChange={(e) => { setNewPwd(e.target.value); setPwdMsg(null); }}
+                    autoComplete="new-password"
+                    className="min-h-12 w-full rounded-xl border border-zinc-300 bg-white px-4 text-base outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-600 dark:bg-zinc-900"
+                  />
+                  <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">Au moins 8 caractères.</p>
+                </div>
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                    Confirmer le mot de passe
+                  </label>
+                  <input
+                    type="password"
+                    value={confirmPwd}
+                    onChange={(e) => { setConfirmPwd(e.target.value); setPwdMsg(null); }}
+                    autoComplete="new-password"
+                    className={`min-h-12 w-full rounded-xl border bg-white px-4 text-base outline-none focus:ring-2 dark:bg-zinc-900 ${
+                      confirmPwd.length > 0 && confirmPwd !== newPwd
+                        ? "border-red-400 focus:border-red-500 focus:ring-red-500/15"
+                        : "border-zinc-300 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-600"
+                    }`}
+                  />
+                  {confirmPwd.length > 0 && confirmPwd !== newPwd && (
+                    <p className="mt-1 text-xs text-red-600 dark:text-red-400">
+                      Les mots de passe ne correspondent pas.
+                    </p>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => void handlePasswordChange()}
+                  disabled={pwdStatus === "loading" || newPwd.length < 8 || newPwd !== confirmPwd}
+                  className="min-h-12 w-full rounded-xl bg-[var(--color-accent-alg)] px-4 text-base font-semibold text-white transition-opacity disabled:opacity-50"
+                >
+                  {pwdStatus === "loading" ? "Enregistrement…" : "Enregistrer"}
+                </button>
+                {pwdMsg && (
+                  <p
+                    className={`text-sm ${pwdStatus === "ok" ? "text-green-700 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                    role="status"
+                  >
+                    {pwdMsg}
+                  </p>
+                )}
+              </div>
+            )}
+          </section>
+        )}
         <section aria-labelledby="level-heading">
           <h2 id="level-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
             Niveau de validation
@@ -400,35 +492,6 @@ export function CompteDashboard({
           </div>
         </section>
 
-        <section aria-labelledby="pivot-heading">
-          <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Langue d’aide
-          </h2>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            Choix enregistré sur cet appareil
-            {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
-          </p>
-          <HelpLanguageSelect value={code} onChange={(next) => void savePivot(next)} />
-          <select
-            value={code}
-            onChange={e => void savePivot(e.target.value as PivotCode)}
-            className="hidden"
-          >
-            {PIVOT_LANGS.map((l) => (
-              <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
-            ))}
-          </select>
-          {saved ? (
-            <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
-              Choix enregistré.
-            </p>
-          ) : null}
-          {pivotMsg ? (
-            <p className="mt-2 text-sm text-amber-800 dark:text-amber-200" role="status">
-              {pivotMsg}
-            </p>
-          ) : null}
-        </section>
       </main>
     </>
   );
