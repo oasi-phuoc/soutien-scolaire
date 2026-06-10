@@ -61,6 +61,17 @@ export const MATH_A6_3_LESSON: MathSubmoduleLesson = {
           "Augmentation de p% → coefficient **supérieur à 1** (ex: 1,20 pour +20%)",
           "Réduction de p% → coefficient **inférieur à 1** (ex: 0,80 pour −20%)",
         ]},
+        { type: "plain", fr: "" },
+        { type: "heading", fr: "Les 4 types de problèmes", black: true },
+        { type: "table", accentHeader: true,
+          headersFr: ["Type de problème", "Formule", "Exemple"],
+          rows: [
+            ["Calculer p% d'une quantité", "N × p ÷ 100",           "20% de 150 = 30"],
+            ["Exprimer une partie en %",   "(partie ÷ total) × 100","30 sur 120 = 25%"],
+            ["Augmenter de p%",            "N × (1 + p/100)",       "+15% sur 200 = 230"],
+            ["Réduire de p%",              "N × (1 − p/100)",       "−20% sur 200 = 160"],
+          ]
+        },
       ],
     },
     exercises: [],

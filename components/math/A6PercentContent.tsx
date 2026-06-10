@@ -793,6 +793,170 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
   );
 }
 
+// ── A6.3 Exercise 5 : word problems ──────────────────────────────────────────
+
+const rnd = <T,>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]!;
+
+const T1_PAIRS: [number, number][] = [
+  [100,10],[100,20],[100,25],[100,50],[200,10],[200,20],[200,25],[200,50],
+  [80,25],[80,50],[120,25],[120,50],[150,20],[150,40],[40,25],[60,50],
+  [300,10],[400,25],[500,20],[250,40],[160,25],[240,25],[50,20],[50,40],
+];
+const T2_COMBOS: [number, number][] = [
+  [25,100],[50,100],[75,100],[30,120],[15,60],[40,200],[20,80],[24,120],
+  [10,40],[12,48],[45,180],[16,80],[35,140],[6,24],[18,90],[80,400],
+  [25,50],[12,60],[9,45],[30,75],[45,60],[14,56],[60,240],[15,75],
+];
+
+type WordProbResult = { text: string; ans: number; pctAnswer: boolean };
+const WORD_TEMPLATES: Array<{ pType: 1|2|3|4; gen: () => WordProbResult }> = [
+  // ── Type 1 simple ──
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une classe a ${N} élèves. ${p}% mangent à la cantine. Combien d'élèves mangent à la cantine ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Dans un panier de ${N} fruits, ${p}% sont des pommes. Combien y a-t-il de pommes ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Dans une classe de ${N} élèves, ${p}% ont eu la moyenne. Combien d'élèves ont eu la moyenne ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un magasin a ${N} articles. ${p}% sont en promotion. Combien d'articles sont en promotion ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un quiz contient ${N} questions. Tu réponds correctement à ${p}% des questions. Combien de bonnes réponses as-tu ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une bibliothèque a ${N} livres. ${p}% sont des romans. Combien de romans y a-t-il ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un parking a ${N} places. ${p}% sont occupées. Combien de places sont occupées ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une équipe a ${N} joueurs. ${p}% sont blessés. Combien de joueurs sont blessés ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un article coûte ${N} CHF. La réduction est de ${p}%. Quel est le montant de la réduction en CHF ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une piscine contient ${N} litres. ${p}% de l'eau s'est évaporée. Combien de litres se sont évaporés ?`, ans:N*p/100, pctAnswer:false }; } },
+  // ── Type 1 complex ──
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un restaurant a servi ${N} repas cette semaine. ${p}% étaient des pizzas, le reste des pâtes. Combien de pizzas ont été servies ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Le budget mensuel d'une famille est de ${N} CHF. Ils dépensent ${p}% en loyer. Quel est le montant du loyer ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une forêt couvre ${N} hectares. ${p}% ont été touchés par un incendie. Quelle superficie a brûlé ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une usine produit ${N} pièces par jour. En raison d'une panne, ${p}% des pièces sont défectueuses. Combien de pièces sont défectueuses ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`L'école compte ${N} élèves. ${p}% participent au club de sport après les cours. Combien d'élèves font du sport ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une ville a reçu ${N} touristes cet été. ${p}% venaient de France. Combien de touristes venaient de France ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un commerce a réalisé ${N} ventes ce mois. ${p}% ont été payées par carte. Combien de ventes ont été payées par carte ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un jardin couvre ${N} m². ${p}% est consacré aux fleurs. Quelle surface en m² est consacrée aux fleurs ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`La bibliothèque a commandé ${N} nouveaux livres. ${p}% sont des livres de science. Combien de livres de science ont été commandés ?`, ans:N*p/100, pctAnswer:false }; } },
+  { pType:1, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une ville a ${N} habitants. ${p}% travaillent dans l'industrie. Combien d'habitants travaillent dans l'industrie ?`, ans:N*p/100, pctAnswer:false }; } },
+  // ── Type 2 simple ──
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`${part} élèves sur ${total} ont réussi l'examen. Quel pourcentage d'élèves ont réussi ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Dans un panier de ${total} fruits, ${part} sont des pommes. Quel pourcentage représentent les pommes ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Tu as répondu à ${part} questions sur ${total}. Quel pourcentage de questions as-tu traitées ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Dans une classe de ${total} élèves, ${part} sont des filles. Quel est le pourcentage de filles ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Tu as lu ${part} pages sur ${total} dans un livre. Quel pourcentage as-tu lu ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Il a plu ${part} jours sur ${total} jours ce mois. Quel pourcentage de jours a-t-il plu ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`${part} équipes sur ${total} ont gagné leur match. Quel pourcentage d'équipes ont gagné ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Sur ${total} voitures dans un parking, ${part} sont rouges. Quel pourcentage sont rouges ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`${part} élèves sur ${total} étaient absents aujourd'hui. Quel pourcentage étaient absents ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Tu as réussi ${part} exercices sur ${total}. Quel pourcentage as-tu réussi ?`, ans:pct, pctAnswer:true }; } },
+  // ── Type 2 complex ──
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Un magasin a vendu ${part} articles bio sur un total de ${total} articles. Quel pourcentage des ventes sont des articles bio ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Une association a collecté ${part} signatures sur les ${total} nécessaires. Quel pourcentage de l'objectif a-t-elle atteint ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Un employé a travaillé ${part} jours sur les ${total} jours ouvrables du mois. Quel pourcentage des jours a-t-il travaillé ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Une école a ${total} élèves. ${part} participent à des activités parascolaires. Quel pourcentage participent ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Un train a ${total} sièges. ${part} sièges sont occupés. Quel est le taux d'occupation en % ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Sur ${total} commandes passées, ${part} ont été livrées dans les délais. Quel pourcentage a été livré à temps ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Une forêt de ${total} hectares. ${part} hectares ont été replantés. Quel pourcentage a été replanté ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Un sondage de ${total} personnes : ${part} sont favorables au projet. Quel pourcentage sont favorables ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Une production mensuelle de ${total} unités : ${part} ont passé le contrôle qualité. Quel pourcentage est conforme ?`, ans:pct, pctAnswer:true }; } },
+  { pType:2, gen:()=>{ const [part,total]=rnd(T2_COMBOS); const pct=Math.round(part/total*100); return { text:`Un club sportif a ${total} membres. ${part} ont renouvelé leur abonnement. Quel pourcentage a renouvelé ?`, ans:pct, pctAnswer:true }; } },
+  // ── Type 3 simple ──
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un salaire de ${N} CHF est augmenté de ${p}%. Quel est le nouveau salaire ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un prix de ${N} CHF augmente de ${p}%. Quel est le nouveau prix ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une population de ${N} habitants augmente de ${p}%. Quelle est la nouvelle population ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un effectif de ${N} employés augmente de ${p}%. Quel est le nouvel effectif ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`La production d'une usine est de ${N} unités. Elle augmente de ${p}%. Quelle est la nouvelle production ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un loyer de ${N} CHF est augmenté de ${p}%. Quel est le nouveau loyer ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un article vaut ${N} CHF hors taxes. La TVA est de ${p}%. Quel est le prix TTC ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un capital de ${N} CHF est augmenté de ${p}%. Quel est le nouveau capital ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`${N} membres dans un club. L'année suivante, le nombre augmente de ${p}%. Combien de membres y a-t-il ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une recette pour ${N} personnes est augmentée de ${p}%. Pour combien de personnes est-elle prévue maintenant ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  // ── Type 3 complex ──
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Le chiffre d'affaires d'une entreprise est de ${N} CHF. Il augmente de ${p}% l'année suivante. Quel sera le chiffre d'affaires ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une école a ${N} élèves. Suite à une nouvelle politique, les inscriptions augmentent de ${p}%. Combien d'élèves y aura-t-il ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un appartement est loué ${N} CHF par mois. Le propriétaire augmente le loyer de ${p}%. Quel sera le nouveau loyer ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une ville a ${N} habitants. Sa population augmente de ${p}% en dix ans. Quelle sera sa population ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une forêt couvre ${N} hectares. Des reboisements augmentent sa superficie de ${p}%. Quelle sera sa superficie ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Le budget d'un club sportif est de ${N} CHF. La mairie l'augmente de ${p}%. Quel sera le nouveau budget ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un producteur vend ses fruits ${N} CHF la caisse. En raison de la demande, il augmente son prix de ${p}%. Quel est le nouveau prix ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un hôtel a ${N} chambres. Il en construit ${p}% de plus. Combien de chambres aura-t-il ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`La valeur d'un terrain est de ${N} CHF. Elle augmente de ${p}% en un an. Quelle est la nouvelle valeur ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  { pType:3, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un employé gagne ${N} CHF par mois. Après sa promotion, son salaire augmente de ${p}%. Quel sera son nouveau salaire ?`, ans:N+N*p/100, pctAnswer:false }; } },
+  // ── Type 4 simple ──
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un article à ${N} CHF est soldé à ${p}% de réduction. Quel est le prix final ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un salaire de ${N} CHF est réduit de ${p}%. Quel est le nouveau salaire ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une population de ${N} habitants diminue de ${p}%. Quelle est la nouvelle population ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un effectif de ${N} employés diminue de ${p}%. Quel est le nouvel effectif ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`La production d'une usine est de ${N} unités. Elle diminue de ${p}%. Quelle est la nouvelle production ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une facture de ${N} CHF bénéficie d'une réduction de ${p}%. Quel est le montant à payer ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`${N} participants s'étaient inscrits. ${p}% ont annulé. Combien sont finalement présents ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un stock de ${N} produits est réduit de ${p}%. Combien de produits reste-t-il ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un loyer de ${N} CHF est négocié à la baisse de ${p}%. Quel est le nouveau loyer ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un trajet de ${N} km est raccourci de ${p}% grâce à un nouveau chemin. Quelle est la nouvelle distance ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  // ── Type 4 complex ──
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un magasin pratique une remise de ${p}% sur tous ses articles. Un article coûte ${N} CHF. Quel est son nouveau prix ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une entreprise de ${N} employés licencie ${p}% de son personnel. Combien d'employés restent ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un billet de train coûte ${N} CHF. Avec une carte de réduction de ${p}%, quel est le prix payé ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une ville de ${N} habitants perd ${p}% de sa population. Quelle est la nouvelle population ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un budget de ${N} CHF est diminué de ${p}% par décision administrative. Quel est le nouveau budget ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`La valeur d'une voiture est de ${N} CHF. Elle perd ${p}% de sa valeur la première année. Quelle est sa nouvelle valeur ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un producteur fabrique ${N} unités. Suite à une panne, sa production diminue de ${p}%. Combien d'unités produit-il ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Un abonnement coûte ${N} CHF par an. Une réduction de ${p}% est accordée pour engagement longue durée. Quel est le prix ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une forêt de ${N} hectares est touchée par une maladie qui détruit ${p}% des arbres. Sur combien d'hectares les arbres sont-ils sains ?`, ans:N-N*p/100, pctAnswer:false }; } },
+  { pType:4, gen:()=>{ const [N,p]=rnd(T1_PAIRS); return { text:`Une épreuve notée sur ${N} points est pénalisée de ${p}% pour des fautes de présentation. Quel est le score final ?`, ans:N-N*p/100, pctAnswer:false }; } },
+];
+
+export function PctWordExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  type State = { ans: string; status: "idle" | "correct" | "wrong" };
+  const [questions] = useState(() => {
+    const byType = ([1,2,3,4] as const).map(t => shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t)));
+    const extra = shuffle([...byType[0]!.slice(1), ...byType[1]!.slice(1), ...byType[2]!.slice(1), ...byType[3]!.slice(1)]);
+    return shuffle([byType[0]![0]!, byType[1]![0]!, byType[2]![0]!, byType[3]![0]!, extra[0]!]).map(tmpl => tmpl.gen());
+  });
+  const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+
+  useEffect(() => {
+    if (validateCommand === 0) return;
+    let correct = 0;
+    const next = questions.map((q, i) => {
+      const s = states[i]!;
+      const v = normDec(s.ans.replace(/%/g, ""));
+      const ok = isFinite(v) && Math.abs(v - q.ans) < 0.01;
+      if (ok) correct++;
+      return { ...s, status: ok ? "correct" : "wrong" } as State;
+    });
+    setStates(next);
+    onValidated(correct === questions.length, correct, questions.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  return (
+    <div>
+      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Résolvez les problèmes.</p>
+      <div className="space-y-5">
+        {questions.map((q, i) => {
+          const s = states[i]!;
+          const ansDisplay = q.pctAnswer ? `${q.ans}%` : String(q.ans);
+          return (
+            <div key={i} className="flex items-start gap-3">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)] shrink-0 pt-0.5">{i + 1}.</span>
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-[var(--color-text-primary)]">{q.text}</span>
+                {s.status === "wrong" ? (
+                  <div className={WRONG_CLS}>
+                    <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansDisplay}</span>
+                  </div>
+                ) : (
+                  <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+                    onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                    placeholder={q.pctAnswer ? "%" : ""}
+                    className={simpleCls(s.status)} />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── A6.2 Exercise 2 : X sur Y = ?% ──────────────────────────────────────────
 
 export function PartToPctExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {

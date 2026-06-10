@@ -95,8 +95,6 @@ export const MATH_MODULES: MathModule[] = [
       sm("A6.1", "Notion de pourcentage"),
       sm("A6.2", "Pourcentage d'un nombre"),
       sm("A6.3", "Augmentation et réduction"),
-      sm("A6.4", "Comparaison de pourcentages"),
-      sm("A6.5", "Problèmes"),
     ],
   },
   {
