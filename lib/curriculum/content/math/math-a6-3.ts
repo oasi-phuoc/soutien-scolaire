@@ -21,14 +21,6 @@ export const MATH_A6_3_LESSON: MathSubmoduleLesson = {
           "Exemple : +20% sur 80 → 80 × 1,20 = 96",
         ]},
         { type: "plain", fr: "" },
-        { type: "heading", fr: "Le coefficient multiplicateur" },
-        { type: "section", labelFr: "Comment trouver le coefficient", itemsFr: [
-          "Pour une augmentation de **p%** : coefficient = 1 + p/100",
-          "Augmentation de 15% → 1 + 0,15 = **1,15**",
-          "Augmentation de 5%  → 1 + 0,05 = **1,05**",
-          "Augmentation de 100% → 1 + 1,00 = **2,00** (le double)",
-        ]},
-        { type: "plain", fr: "" },
         { type: "table", headersFr: ["Augmentation", "Coefficient", "Exemple (base 100)"], accentHeader: true,
           rows: [
             ["+5%", "× 1,05", "100 → 105"],

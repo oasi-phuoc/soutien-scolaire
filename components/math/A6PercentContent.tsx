@@ -473,6 +473,110 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
   );
 }
 
+// ── A6.3 Exercise 4 : complete the table ─────────────────────────────────────
+
+type PercTableItem = { init: number; final: number; variationNum: number; missing: "init" | "final" | "variation" };
+const PERC_TABLE_POOL: PercTableItem[] = [
+  { init: 240, final: 300, variationNum: 25,  missing: "variation" },
+  { init: 100, final: 80,  variationNum: -20, missing: "variation" },
+  { init: 200, final: 250, variationNum: 25,  missing: "variation" },
+  { init: 500, final: 600, variationNum: 20,  missing: "variation" },
+  { init: 400, final: 360, variationNum: -10, missing: "variation" },
+  { init: 150, final: 180, variationNum: 20,  missing: "variation" },
+  { init: 360, final: 450, variationNum: 25,  missing: "init"      },
+  { init: 200, final: 220, variationNum: 10,  missing: "init"      },
+  { init: 400, final: 300, variationNum: -25, missing: "init"      },
+  { init: 120, final: 150, variationNum: 25,  missing: "init"      },
+  { init: 500, final: 450, variationNum: -10, missing: "init"      },
+  { init: 160, final: 200, variationNum: 25,  missing: "init"      },
+  { init: 600, final: 510, variationNum: -15, missing: "final"     },
+  { init: 200, final: 240, variationNum: 20,  missing: "final"     },
+  { init: 80,  final: 60,  variationNum: -25, missing: "final"     },
+  { init: 300, final: 330, variationNum: 10,  missing: "final"     },
+  { init: 100, final: 150, variationNum: 50,  missing: "final"     },
+  { init: 250, final: 200, variationNum: -20, missing: "final"     },
+];
+
+export function PctTableExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
+  const [questions] = useState(() => {
+    const varItems   = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "variation"));
+    const initItems  = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "init"));
+    const finalItems = shuffle(PERC_TABLE_POOL.filter(q => q.missing === "final"));
+    const rest = shuffle([...varItems.slice(1), ...initItems.slice(1), ...finalItems.slice(1)]);
+    return shuffle([varItems[0]!, initItems[0]!, finalItems[0]!, ...rest.slice(0, 2)]);
+  });
+  type State = { ans: string; status: "idle" | "correct" | "wrong" };
+  const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+
+  useEffect(() => {
+    if (validateCommand === 0) return;
+    let correct = 0;
+    const next = questions.map((q, i) => {
+      const s = states[i]!;
+      let ok = false;
+      if (q.missing === "variation") {
+        const v = normDec(s.ans.replace(/%/g, ""));
+        ok = isFinite(v) && Math.abs(v - q.variationNum) < 0.1;
+      } else {
+        const target = q.missing === "init" ? q.init : q.final;
+        const v = normDec(s.ans);
+        ok = isFinite(v) && Math.abs(v - target) < 0.01;
+      }
+      if (ok) correct++;
+      return { ...s, status: ok ? "correct" : "wrong" } as State;
+    });
+    setStates(next);
+    onValidated(correct === questions.length, correct, questions.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  const fmtVar = (v: number) => v > 0 ? `+${v}%` : `${v}%`;
+
+  return (
+    <div>
+      <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
+      <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Complétez les valeurs manquantes.</p>
+      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-[10px] gap-y-3 w-fit">
+        <span />
+        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Valeur initiale</span>
+        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Valeur finale</span>
+        <span className="text-xs font-semibold text-[var(--color-text-secondary)] pb-1">Variation</span>
+        {questions.map((q, i) => {
+          const s = states[i]!;
+          const ansStr = q.missing === "init" ? String(q.init)
+                       : q.missing === "final" ? String(q.final)
+                       : fmtVar(q.variationNum);
+          const cell = (col: "init" | "final" | "variation") => {
+            if (q.missing === col) {
+              return s.status === "wrong" ? (
+                <div className={WRONG_CLS}>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansStr}</span>
+                </div>
+              ) : (
+                <input type="text" inputMode={col === "variation" ? "text" : "decimal"} value={s.ans}
+                  disabled={s.status === "correct"}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  className={simpleCls(s.status)} />
+              );
+            }
+            const display = col === "init" ? String(q.init) : col === "final" ? String(q.final) : fmtVar(q.variationNum);
+            return <span className="text-sm text-[var(--color-text-primary)]">{display}</span>;
+          };
+          return (
+            <Fragment key={i}>
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              {cell("init")}
+              {cell("final")}
+              {cell("variation")}
+            </Fragment>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ── A6.3 shared pool ─────────────────────────────────────────────────────────
 
 type PctChangeItem = { base: number; op: "+" | "-"; pct: number; ans: number; diff: number };
