@@ -14,20 +14,17 @@ function rndNonZero(range: number): number {
   return n;
 }
 
-// Display with parentheses: (+6), (−3), (0)
 function dispRel(n: number): string {
   if (n === 0) return "(0)";
   if (n > 0) return `(+${n})`;
   return `(−${Math.abs(n)})`;
 }
 
-// Correct answer label without parens: +6, −3, 0
 function fmtCorr(n: number): string {
   if (n === 0) return "0";
   return n > 0 ? `+${n}` : `−${Math.abs(n)}`;
 }
 
-// Check typed answer (accepts -3 or −3 for negatives, 3 or +3 for positives)
 function checkAns(typed: string, expected: number): boolean {
   const t = typed.trim().replace("−", "-");
   if (expected === 0) return t === "0";
@@ -41,7 +38,36 @@ type RelQ = {
   op: "+" | "−" | "×" | "÷";
   result: number;
   missingPos: "result" | "a" | "b";
+  decimals?: number;
 };
+
+function dispRelQ(q: RelQ, n: number): string {
+  if (q.decimals !== undefined) {
+    const abs = Math.abs(n).toFixed(q.decimals);
+    if (n === 0) return `(0.${"0".repeat(q.decimals)})`;
+    return n > 0 ? `(+${abs})` : `(−${abs})`;
+  }
+  return dispRel(n);
+}
+
+function fmtCorrQ(q: RelQ, n: number): string {
+  if (q.decimals !== undefined) {
+    const abs = Math.abs(n).toFixed(q.decimals);
+    if (n === 0) return `0.${"0".repeat(q.decimals)}`;
+    return n > 0 ? `+${abs}` : `−${abs}`;
+  }
+  return fmtCorr(n);
+}
+
+function checkAnsQ(typed: string, expected: number, q: RelQ): boolean {
+  if (q.decimals !== undefined) {
+    const t = typed.trim().replace("−", "-").replace(",", ".");
+    const parsed = parseFloat(t);
+    if (isNaN(parsed)) return false;
+    return Math.abs(parsed - expected) < 0.5 * Math.pow(10, -q.decimals);
+  }
+  return checkAns(typed, expected);
+}
 
 function genAddSubQ(range: number, missingOperand: boolean, forceAdd?: boolean): RelQ {
   const a = rnd(-range, range);
@@ -79,6 +105,23 @@ function genEx5Questions(range: number): RelQ[] {
     [qs[i], qs[j]] = [qs[j]!, qs[i]!];
   }
   return qs;
+}
+
+function genDecimalQ(missingOperand: boolean): RelQ {
+  const decimals = Math.random() < 0.5 ? 1 : 2;
+  const scale = Math.pow(10, decimals);
+  function rndDec(): number {
+    let raw = 0;
+    while (raw === 0) raw = rnd(-10 * scale, 10 * scale);
+    return raw / scale;
+  }
+  const a = rndDec();
+  const b = rndDec();
+  const useAdd = Math.random() < 0.5;
+  const result = Math.round((useAdd ? a + b : a - b) * scale) / scale;
+  const missingPos: RelQ["missingPos"] = !missingOperand ? "result"
+    : Math.random() < 0.5 ? "a" : "b";
+  return { a, b, op: useAdd ? "+" : "−", result, missingPos, decimals };
 }
 
 function genMulDivQ(range: number, missingOperand: boolean): RelQ {
@@ -123,7 +166,7 @@ function RelArithExercise({
     setValidated(true);
     const res = questions.map((q, i) => {
       const val = q.missingPos === "result" ? q.result : q.missingPos === "a" ? q.a : q.b;
-      return checkAns(answersRef.current[i] ?? "", val);
+      return checkAnsQ(answersRef.current[i] ?? "", val, q);
     });
     setResults(res);
     onValidatedRef.current(res.every(r => r));
@@ -152,7 +195,7 @@ function RelArithExercise({
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
-  const inputBase = "w-16 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors";
+  const inputBase = "w-20 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors";
 
   return (
     <div className="space-y-4">
@@ -170,46 +213,51 @@ function RelArithExercise({
           </span>
         )}
       </div>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
-        {questions.map((q, i) => {
-          const val = answers[i] ?? "";
-          const ok = validated ? results[i] : null;
-          const wrongField = ok === false;
-          const missedVal = q.missingPos === "result" ? q.result : q.missingPos === "a" ? q.a : q.b;
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div
+          className="grid items-center gap-x-2 gap-y-3"
+          style={{ gridTemplateColumns: "auto auto auto auto auto auto" }}
+        >
+          {questions.map((q, i) => {
+            const val = answers[i] ?? "";
+            const ok = validated ? results[i] : null;
+            const wrongField = ok === false;
+            const missedVal = q.missingPos === "result" ? q.result : q.missingPos === "a" ? q.a : q.b;
 
-          const inputEl = wrongField
-            ? (
-              <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
-                <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{fmtCorr(missedVal)}</span>
-              </div>
-            ) : (
-              <input
-                type="text"
-                value={val}
-                disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
-                className={`${inputBase} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
-              />
+            const inputEl = wrongField
+              ? (
+                <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                  <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
+                  <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{fmtCorrQ(q, missedVal)}</span>
+                </div>
+              ) : (
+                <input
+                  type="text"
+                  value={val}
+                  disabled={validated}
+                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                  className={`${inputBase} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
+                />
+              );
+
+            return (
+              <React.Fragment key={i}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)] text-right">{i + 1}.</span>
+                {q.missingPos === "a"
+                  ? inputEl
+                  : <span className="font-mono text-sm text-[var(--color-text-primary)]">{dispRelQ(q, q.a)}</span>}
+                <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
+                {q.missingPos === "b"
+                  ? inputEl
+                  : <span className="font-mono text-sm text-[var(--color-text-primary)]">{dispRelQ(q, q.b)}</span>}
+                <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
+                {q.missingPos === "result"
+                  ? inputEl
+                  : <span className="font-mono text-sm text-[var(--color-text-primary)]">{dispRelQ(q, q.result)}</span>}
+              </React.Fragment>
             );
-
-          return (
-            <div key={i} className="flex min-h-[2.25rem] items-center gap-2 flex-wrap">
-              <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              {q.missingPos === "a"
-                ? inputEl
-                : <span className="font-mono text-sm text-[var(--color-text-primary)] shrink-0">{dispRel(q.a)}</span>}
-              <span className="font-mono text-sm text-[var(--color-text-secondary)] shrink-0">{q.op}</span>
-              {q.missingPos === "b"
-                ? inputEl
-                : <span className="font-mono text-sm text-[var(--color-text-primary)] shrink-0">{dispRel(q.b)}</span>}
-              <span className="font-mono text-sm text-[var(--color-text-secondary)] shrink-0">=</span>
-              {q.missingPos === "result"
-                ? inputEl
-                : <span className="font-mono text-sm text-[var(--color-text-primary)] shrink-0">{dispRel(q.result)}</span>}
-            </div>
-          );
-        })}
+          })}
+        </div>
       </div>
     </div>
   );
@@ -219,10 +267,11 @@ export function A7RelArithExercise({
   exNum, range, count, missingOperand, timer, questionMode, validateCommand, onValidated,
 }: {
   exNum: number; range: number; count: number; missingOperand: boolean; timer?: number;
-  questionMode?: "balanced" | "ex5";
+  questionMode?: "balanced" | "ex5" | "decimal";
   validateCommand: number; onValidated: (ok: boolean) => void;
 }) {
   const [questions] = useState<RelQ[]>(() => {
+    if (questionMode === "decimal") return Array.from({ length: count }, () => genDecimalQ(missingOperand));
     if (questionMode === "balanced") return genBalancedAddSubQuestions(range, count, missingOperand);
     if (questionMode === "ex5") return genEx5Questions(range);
     return Array.from({ length: count }, () => genAddSubQ(range, missingOperand));

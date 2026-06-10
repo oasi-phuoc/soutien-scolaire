@@ -68,7 +68,7 @@ type WorkspaceStep =
   | { kind: "a7_rel_encadrement"; exNum: number }
   | { kind: "a7_rel_ordering"; exNum: number }
   | { kind: "a7_rel_seq_complete"; exNum: number; isDecimal: boolean }
-  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" }
+  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" | "decimal" }
   | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
   | { kind: "pct_to_frac_ex"; exNum: number }
   | { kind: "pct_to_dec_ex"; exNum: number }
@@ -271,21 +271,18 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a7_rel_seq_complete", exNum: 8, isDecimal: true });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-3") {
-    // Training: Ex1-4 balanced, Ex5 sign patterns, Ex6-8 (extended range practice)
     steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 5, missingOperand: false, questionMode: "balanced" });
     steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 5, missingOperand: false, questionMode: "balanced", timer: 60 });
     steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 5, missingOperand: true, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 5, missingOperand: false, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 5, range: 15, count: 5, missingOperand: false, questionMode: "ex5" });
-    steps.push({ kind: "a7_rel_arith", exNum: 6, range: 15, count: 5, missingOperand: false, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 7, range: 15, count: 5, missingOperand: true, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 8, range: 20, count: 5, missingOperand: false, questionMode: "balanced" });
-    // Evaluation: Ex1-4 with 4 questions each
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 100, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 5, range: 0, count: 5, missingOperand: false, questionMode: "decimal" });
+    steps.push({ kind: "a7_rel_arith", exNum: 6, range: 100, count: 5, missingOperand: true, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 7, range: 0, count: 5, missingOperand: true, questionMode: "decimal" });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 4, missingOperand: false, questionMode: "balanced" });
     steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 4, missingOperand: false, questionMode: "balanced", timer: 60 });
     steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 4, missingOperand: true, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 15, count: 4, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 100, count: 4, missingOperand: false, questionMode: "balanced" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-4") {
     steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
