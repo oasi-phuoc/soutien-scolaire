@@ -31,14 +31,17 @@ export const MATH_A6_2_LESSON: MathSubmoduleLesson = {
         ]},
         { type: "plain", fr: "" },
         { type: "heading", fr: "Raccourcis utiles", black: true },
-        { type: "section", labelFr: "", itemsFr: [
-          "**1%**  d'un nombre → diviser par 100",
-          "**5%**  d'un nombre → prendre 10%, puis diviser par 2",
-          "**10%** d'un nombre → diviser par 10",
-          "**20%** d'un nombre → diviser par 5",
-          "**25%** d'un nombre → diviser par 4",
-          "**50%** d'un nombre → diviser par 2",
-        ]},
+        { type: "table", accentHeader: true,
+          headersFr: ["Pourcentage", "", "Méthode rapide"],
+          rows: [
+            ["**1%** d'un nombre",  "→", "diviser par 100"],
+            ["**5%** d'un nombre",  "→", "prendre 10%, puis diviser par 2"],
+            ["**10%** d'un nombre", "→", "diviser par 10"],
+            ["**20%** d'un nombre", "→", "diviser par 5"],
+            ["**25%** d'un nombre", "→", "diviser par 4"],
+            ["**50%** d'un nombre", "→", "diviser par 2"],
+          ]
+        },
         { type: "plain", fr: "" },
         { type: "table", headersFr: ["Calcul", "Astuce rapide", "Résultat"], accentHeader: true,
           rows: [
@@ -77,16 +80,5 @@ export const MATH_A6_2_LESSON: MathSubmoduleLesson = {
         { type: "plain", fr: "Le résultat est **toujours entre 0% et 100%** si la partie est **inférieure ou égale au total**." },
       ],
     },
-    exercises: [
-      { id: "a6-2-e1", promptFr: "Calculez 20% de 150.", type: "number", acceptable: ["30"] },
-      { id: "a6-2-e2", promptFr: "Calculez 15% de 80.", type: "number", acceptable: ["12"] },
-      { id: "a6-2-e3", promptFr: "Calculez 25% de 200.", type: "number", acceptable: ["50"] },
-      { id: "a6-2-e4", promptFr: "Calculez 10% de 340.", type: "number", acceptable: ["34"] },
-      { id: "a6-2-e5", promptFr: "Calculez 5% de 60.", type: "number", acceptable: ["3"] },
-      { id: "a6-2-e6", promptFr: "18 élèves sur 24 ont réussi. Quel est le pourcentage de réussite ?", type: "short_text", acceptable: ["75%", "75"] },
-      { id: "a6-2-e7", promptFr: "45 sur 60. Quel pourcentage ?", type: "short_text", acceptable: ["75%", "75"] },
-      { id: "a6-2-e8", promptFr: "30 sur 120. Quel pourcentage ?", type: "short_text", acceptable: ["25%", "25"] },
-      { id: "a6-2-e9", promptFr: "7 sur 20. Quel pourcentage ?", type: "short_text", acceptable: ["35%", "35"] },
-      { id: "a6-2-e10", promptFr: "3 sur 4. Quel pourcentage ?", type: "short_text", acceptable: ["75%", "75"] },
-    ],
+    exercises: [],
   };
