@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L14: GrammarLesson = {
   slug: "a1-gr-l14",
-  code: "G.14",
+  code: "G3.1",
   level: "A1",
   title: "Les articles partitifs et la quantité",
   theory: [

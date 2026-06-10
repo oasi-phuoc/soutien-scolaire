@@ -57,13 +57,12 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)] border ${
+      wrong ? "border-2 border-amber-500 bg-transparent" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10"
+    }`}>
       {validated ? (
         wrong ? (
-          <div className="flex flex-col items-center leading-tight">
-            {value.trim() && <span className="text-[10px] text-[var(--color-text-primary)]">{value}</span>}
-            <span className="font-bold text-amber-600">{correct}</span>
-          </div>
+          <span className="font-bold text-amber-600">{correct}</span>
         ) : (
           <span>{value || correct}</span>
         )
@@ -186,9 +185,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
       {vals.map((v, i) => {
         const isVisible = i === visPos[0] || i === visPos[1];
         const display = isInt ? fmtInt(v) : fmtDec(v, 2);
-        const pillCls = isInt
-          ? "h-9 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold"
-          : "h-9 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold";
+        const pillCls = "h-9 w-24 inline-flex items-center justify-center rounded-full px-3 font-mono text-base font-semibold";
         if (isVisible) {
           return (
             <div key={i} className={`${pillCls} border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)]`}>{display}</div>
@@ -199,7 +196,7 @@ function SeqRow({ vals, visPos, isInt, answers, onChange, validated }: {
         const ans = answers[bi] ?? "";
         return (
           <CorrectionInput key={i} value={ans} onChange={v2 => onChange(bi, v2)} correct={correct}
-            validated={validated} width={isInt ? "w-28 rounded-full" : "w-20 rounded-full"} />
+            validated={validated} width="w-24 rounded-full" />
         );
       })}
     </div>
@@ -252,12 +249,17 @@ export function Exercise17({ exerciseKey, validated, onValidated, validateTrigge
 
 // ── Exercise 18 — Sort numbers (click mechanism) ─────────────────────────────
 
-function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28", numberLabel }: {
+function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = false, chipW = "w-28", numberLabel, correctOrder }: {
   numbers: number[]; selected: number[];
   onToggle: (n: number) => void; validated: boolean;
   fmt: (n: number) => string; desc?: boolean; chipW?: string; numberLabel?: string;
+  correctOrder?: number[];
 }) {
   const available = numbers.filter(n => !selected.includes(n));
+  const isWrong = validated && correctOrder && !(
+    selected.length === correctOrder.length &&
+    correctOrder.every((v, i) => selected[i] === v)
+  );
 
   const chipBase = `${chipW} flex h-10 items-center justify-center rounded-lg border px-1.5 text-base font-mono font-bold transition-colors `;
 
@@ -297,6 +299,21 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
           ))
           : null}
       </div>
+      {isWrong && correctOrder && (
+        <div className="mt-2 space-y-1">
+          <p className="text-[10px] font-bold text-amber-600">Correction :</p>
+          <div className="flex flex-wrap items-center gap-1.5">
+            {correctOrder.map((n, ci) => (
+              <React.Fragment key={ci}>
+                <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1.5 text-base font-mono font-bold text-amber-700`}>
+                  {fmt(n)}
+                </div>
+                {ci < correctOrder.length - 1 && <span className="text-sm font-bold text-amber-400">{desc ? ">" : "<"}</span>}
+              </React.Fragment>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -368,12 +385,14 @@ export function Exercise18({ exerciseKey, validated, onValidated, validateTrigge
       <div className="space-y-3">
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre croissant (plus petit au plus grand)</p>
         <OrderingChips numbers={data.ints} selected={sel1} onToggle={toggle(setSel1)}
-          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" numberLabel="1." />
+          validated={validated} fmt={(n) => String(n)} chipW="w-[4.9rem]" numberLabel="1."
+          correctOrder={data.sortedInts} />
       </div>
       <div className="space-y-3">
         <p className="text-sm text-[var(--color-text-secondary)]">Dans l&apos;ordre décroissant (plus grand au plus petit)</p>
         <OrderingChips numbers={data.decs} selected={sel2} onToggle={toggle(setSel2)}
-          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" numberLabel="2." />
+          validated={validated} fmt={fmtDec2} desc chipW="w-[4.9rem]" numberLabel="2."
+          correctOrder={data.sortedDecsDesc} />
       </div>
     </div>
   );
@@ -410,6 +429,11 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
 }) {
   const labels = ["C", "D", "U", "", "dx", "cx"];
 
+  const aValNum = parseFloat(aStr.replace(",", "."));
+  const bValNum = parseFloat(bStr.replace(",", "."));
+  const resNum = op === "+" ? aValNum + bValNum : aValNum - bValNum;
+  const correctResultDigits = decStrToDigits(fmtDec(Math.round(resNum * 100) / 100, 2));
+
   const commaCell = (key: string) => (
     <td key={key} className="w-8 text-center">
       <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
@@ -427,6 +451,33 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
         className={inputStyle} />
     </td>
   );
+
+  const resultRowInput = (col: number) => {
+    const correct = correctResultDigits[col] ?? 0;
+    const val = resultAnswers[col] ?? "";
+    if (validated) {
+      const isBlankLeadingZero = correct === 0 && col < 3 && (val === "" || val === "0");
+      const isOk = val.trim() === String(correct) || isBlankLeadingZero;
+      return (
+        <td key={col} className="w-8 p-0.5 text-center">
+          <div className={`flex h-8 w-8 items-center justify-center rounded border font-mono text-sm ${
+            isOk ? "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
+                 : "border-2 border-amber-500 bg-transparent font-bold text-amber-600"
+          }`}>
+            {isOk ? (val || String(correct)) : String(correct)}
+          </div>
+        </td>
+      );
+    }
+    return (
+      <td key={col} className="w-8 p-0.5 text-center">
+        <input type="text" inputMode="numeric" maxLength={1} value={val}
+          disabled={validated}
+          onChange={e => onResultChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
+          className={inputStyle} />
+      </td>
+    );
+  };
 
   const carryInput = (col: number) => (
     <td key={col} className="w-8 p-0.5 text-center">
@@ -478,9 +529,9 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
           {/* Result row */}
           <tr>
             <td />
-            {rowInput(resultAnswers, onResultChange, 0)}{rowInput(resultAnswers, onResultChange, 1)}{rowInput(resultAnswers, onResultChange, 2)}
+            {resultRowInput(0)}{resultRowInput(1)}{resultRowInput(2)}
             {commaCell("r-comma")}
-            {rowInput(resultAnswers, onResultChange, 3)}{rowInput(resultAnswers, onResultChange, 4)}
+            {resultRowInput(3)}{resultRowInput(4)}
           </tr>
         </tbody>
       </table>
@@ -615,15 +666,16 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
     </td>
   );
 
-  const preIn = (digits: number[], col: number, firstNz: number, base: number) => {
-    if (col < firstNz) return <td key={col} className="w-8 p-0.5"><div className="h-8 w-8" /></td>;
+  const preIn = (digits: number[], col: number, _firstNz: number, base: number) => {
     const correct = String(digits[col]);
     const val = cells[base + col] ?? "";
     if (validated) {
+      const isBlankZero = correct === "0" && (val === "" || val === "0");
+      const isOk = val === correct || isBlankZero;
       return (
         <td key={col} className="w-8 text-center p-0.5">
-          <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${val === correct ? "text-[var(--color-text-primary)]" : "text-amber-600"}`}>
-            {val === correct ? (val || correct) : correct}
+          <div className={`flex h-8 w-8 items-center justify-center font-mono text-base ${isOk ? "text-[var(--color-text-primary)]" : "text-amber-600"}`}>
+            {isOk ? (val || correct) : correct}
           </div>
         </td>
       );
@@ -688,13 +740,26 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
           </tr>
         </tbody>
       </table>
-      <div className="flex items-center gap-2 pt-1">
-        <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
-        <input type="text" value={decResult} disabled={validated}
-          onChange={e => onDecResultChange(e.target.value)}
-          className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)] disabled:opacity-60"
-        />
-      </div>
+      {(() => {
+        const aDecPl = aStr.includes(",") ? aStr.split(",")[1]!.length : 0;
+        const bDecPl = bStr.includes(",") ? bStr.split(",")[1]!.length : 0;
+        const totalDecPl = aDecPl + bDecPl;
+        const correctResultNum = (aInt * bInt) / Math.pow(10, totalDecPl);
+        const correctResultStr = fmtDecResult(aInt * bInt, totalDecPl);
+        const isWrong = validated && !matchNum(decResult, correctResultNum, 0.005);
+        return (
+          <div className="flex items-center gap-2 pt-1">
+            <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
+            <input type="text" value={decResult} disabled={validated}
+              onChange={e => onDecResultChange(e.target.value)}
+              className={`w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
+                isWrong ? "border-2 border-amber-500 bg-transparent" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)]"
+              }`}
+            />
+            {isWrong && <span className="text-xs font-bold text-amber-600">{correctResultStr}</span>}
+          </div>
+        );
+      })()}
     </div>
   );
 }
@@ -1221,28 +1286,44 @@ export function Exercise22({ exerciseKey, validated, onValidated, validateTrigge
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">Cliquez sur les parties pour colorier la fraction demandée.</p>
       <div className="space-y-3">
-        {items.map((item, i) => (
-          <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
-            <div className="flex items-center gap-3">
-              <div className="shrink-0">
-                <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
-              </div>
-              <div className="flex flex-1 justify-center overflow-hidden">
-                {item.multi ? (
-                  <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
-                    colored={validated ? preColorFlat(item.n, item.d) : coloredSets[i]!}
-                    onToggle={validated ? undefined : fi => toggle(i, fi)}
-                    scale={computeScale(item.kind, item.copies)}
-                  />
-                ) : (
-                  <FractionShape kind={item.kind} d={item.d} colored={validated ? new Set(Array.from({ length: item.n }, (_, k) => k)) : coloredSets[i]!}
-                    onToggle={validated ? undefined : ci => toggle(i, ci)}
-                  />
-                )}
+        {items.map((item, i) => {
+          const correctSet = item.multi
+            ? preColorFlat(item.n, item.d)
+            : new Set(Array.from({ length: item.n }, (_, k) => k));
+          const studentSet = coloredSets[i]!;
+          const displayColored = validated
+            ? new Set([...studentSet].filter(x => correctSet.has(x)))
+            : studentSet;
+          const missSet = validated ? new Set([...correctSet].filter(x => !studentSet.has(x))) : undefined;
+          const extraSet = validated ? new Set([...studentSet].filter(x => !correctSet.has(x))) : undefined;
+          return (
+            <div key={i} className="rounded-xl border border-[var(--color-border-default)] p-3">
+              <div className="flex items-center gap-3">
+                <div className="shrink-0">
+                  <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
+                </div>
+                <div className="flex flex-1 justify-center overflow-hidden">
+                  {item.multi ? (
+                    <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
+                      colored={displayColored}
+                      onToggle={validated ? undefined : fi => toggle(i, fi)}
+                      scale={computeScale(item.kind, item.copies)}
+                      missSet={missSet}
+                      extraSet={extraSet}
+                    />
+                  ) : (
+                    <FractionShape kind={item.kind} d={item.d}
+                      colored={displayColored}
+                      onToggle={validated ? undefined : ci => toggle(i, ci)}
+                      missSet={missSet}
+                      extraSet={extraSet}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -52,11 +52,12 @@ export const MATH_A5_4_LESSON: MathSubmoduleLesson = {
               numFr: "2. Dixièmes : 3 − 8 impossible → emprunter",
               textsFr: [
                 "3 − 8 impossible → emprunter 1 à l'unité.",
-                "L'unité est réduite : 4 − 1 = 3. Les dixièmes deviennent 13.",
-                "13 − 8 = 5 → pose 5.",
+                "L'unité est réduite : 4 − 1 = 3. Les dixièmes deviennent **13**.",
+                "**13** − 8 = 5 → pose 5.",
               ],
               carries: [null, 1, null, null],
               result:  [null, null, null, 5],
+              aDisplay: [null, null, null, "13"],
             },
             {
               numFr: "3. Unités : 3 − 5 impossible → emprunter",

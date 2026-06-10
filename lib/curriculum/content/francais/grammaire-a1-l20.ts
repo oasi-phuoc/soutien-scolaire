@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L20: GrammarLesson = {
   slug: "a1-gr-l20",
-  code: "G.20",
+  code: "G3.7",
   level: "A1",
   title: "L'impératif",
   theory: [

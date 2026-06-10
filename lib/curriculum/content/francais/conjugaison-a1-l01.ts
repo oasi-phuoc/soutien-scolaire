@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L01: ConjLesson = {
   slug: "a1-conj-l01",
-  code: "G.2",
+  code: "G1.2",
   level: "A1",
   title: "Les verbes être et avoir",
   theory: [

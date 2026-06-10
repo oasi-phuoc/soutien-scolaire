@@ -136,7 +136,7 @@ function FracInput({
   return (
     <span className="inline-flex flex-col items-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 py-0.5">
       {cell(numVal, numCorrect, numWrong, onNumChange)}
-      <span className="my-0.5 h-px w-full bg-[var(--color-text-primary)] opacity-40" />
+      <span className="my-0.5 h-px w-full bg-[var(--color-text-primary)]" />
       {cell(denVal, denCorrect, denWrong, onDenChange)}
     </span>
   );
@@ -145,9 +145,10 @@ function FracInput({
 // Fraction display helper
 function Frac({ n, d, className = "" }: { n: React.ReactNode; d: React.ReactNode; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center leading-none ${className}`}>
-      <span className="border-b border-current px-0.5 text-sm">{n}</span>
-      <span className="px-0.5 text-sm">{d}</span>
+    <span className={`inline-flex flex-col items-center gap-[2px] align-middle ${className}`}>
+      <span className="flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm font-bold tabular-nums">{n}</span>
+      <span className="h-px w-full min-w-[1.5rem] bg-current" />
+      <span className="flex min-h-[1.75rem] items-center justify-center px-0.5 text-sm font-bold tabular-nums">{d}</span>
     </span>
   );
 }
@@ -414,15 +415,25 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
 
     const q7 = makePair();
     const q7Op = Math.random() < 0.5 ? "+" as const : "−" as const;
+    let q7NegA = Math.random() < 0.5;
+    const q7NegB = Math.random() < 0.5;
+    if (!q7NegA && !q7NegB) q7NegA = true;
+    const q7aN = q7NegA ? -q7.a.n : q7.a.n;
+    const q7bN = q7NegB ? -q7.b.n : q7.b.n;
     const q7Ans = q7Op === "+"
-      ? fracAns(-q7.a.n * q7.b.d + -q7.b.n * q7.a.d, q7.a.d * q7.b.d)
-      : fracAns(-q7.a.n * q7.b.d - (-q7.b.n * q7.a.d), q7.a.d * q7.b.d);
+      ? fracAns(q7aN * q7.b.d + q7bN * q7.a.d, q7.a.d * q7.b.d)
+      : fracAns(q7aN * q7.b.d - q7bN * q7.a.d, q7.a.d * q7.b.d);
 
     const q8 = makePair();
     const q8Op = Math.random() < 0.5 ? "×" as const : "÷" as const;
+    let q8NegA = Math.random() < 0.5;
+    const q8NegB = Math.random() < 0.5;
+    if (!q8NegA && !q8NegB) q8NegA = true;
+    const q8aN = q8NegA ? -q8.a.n : q8.a.n;
+    const q8bN = q8NegB ? -q8.b.n : q8.b.n;
     const q8Ans = q8Op === "×"
-      ? fracAns((-q8.a.n) * (-q8.b.n), q8.a.d * q8.b.d)
-      : fracAns((-q8.a.n) * q8.b.d, q8.a.d * (-q8.b.n));
+      ? fracAns(q8aN * q8bN, q8.a.d * q8.b.d)
+      : fracAns(q8aN * q8.b.d, q8.a.d * q8bN);
 
     return {
       q1: { fullN: q1Base.n * q1Factor, fullD: q1Base.d * q1Factor, n: q1Base.n, d: q1Base.d, ask: q1Ask },
@@ -431,8 +442,8 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
       q4: { ...q4, ans: q4Ans },
       q5: { ...q5, ans: q5Ans },
       q6: { ...q6, ans: q6Ans },
-      q7: { ...q7, op: q7Op, ans: q7Ans },
-      q8: { ...q8, op: q8Op, ans: q8Ans },
+      q7: { ...q7, op: q7Op, negA: q7NegA, negB: q7NegB, ans: q7Ans },
+      q8: { ...q8, op: q8Op, negA: q8NegA, negB: q8NegB, ans: q8Ans },
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [exerciseKey]);
@@ -480,98 +491,60 @@ export function Exercise31({ exerciseKey, validated, onValidated, validateTrigge
       width="w-14"
     />
   );
-  const signedFrac = (n: number, d: number) => (
-    <span className="inline-flex items-center gap-0.5">
-      <span>−</span>
-      <Frac n={n} d={d} />
-    </span>
-  );
+  const negFrac = (neg: boolean, n: number, d: number) =>
+    neg ? <Frac n={<>−{n}</>} d={d} /> : <Frac n={n} d={d} />;
+
+  const opRows: Array<{ num: number; fa: React.ReactNode; op: string; fb: React.ReactNode; fi: number; ans: string }> = [
+    { num: 3, fa: <Frac n={data.q3.a.n} d={data.q3.a.d} />, op: "+",       fb: <Frac n={data.q3.b.n} d={data.q3.b.d} />, fi: 0, ans: data.q3.ans },
+    { num: 4, fa: <Frac n={data.q4.a.n} d={data.q4.a.d} />, op: "−",       fb: <Frac n={data.q4.b.n} d={data.q4.b.d} />, fi: 1, ans: data.q4.ans },
+    { num: 5, fa: <Frac n={data.q5.a.n} d={data.q5.a.d} />, op: "×",       fb: <Frac n={data.q5.b.n} d={data.q5.b.d} />, fi: 2, ans: data.q5.ans },
+    { num: 6, fa: <Frac n={data.q6.a.n} d={data.q6.a.d} />, op: "÷",       fb: <Frac n={data.q6.b.n} d={data.q6.b.d} />, fi: 3, ans: data.q6.ans },
+    { num: 7, fa: negFrac(data.q7.negA, data.q7.a.n, data.q7.a.d), op: data.q7.op, fb: negFrac(data.q7.negB, data.q7.b.n, data.q7.b.d), fi: 4, ans: data.q7.ans },
+    { num: 8, fa: negFrac(data.q8.negA, data.q8.a.n, data.q8.a.d), op: data.q8.op, fb: negFrac(data.q8.negB, data.q8.b.n, data.q8.b.d), fi: 5, ans: data.q8.ans },
+  ];
 
   return (
     <div className="space-y-3">
       <p className="text-sm text-[var(--color-text-secondary)]">Calculez et simplifiez les fractions.</p>
-      <div className="grid items-center gap-x-2 gap-y-2" style={{gridTemplateColumns:"1.5rem max-content 1rem max-content"}}>
+
+      {/* q1, q2: simplification */}
+      <div className="grid items-center gap-x-2 gap-y-2" style={{gridTemplateColumns:"1.5rem max-content"}}>
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">1.</span>
         <span className="text-sm">
-          Simplifier <Frac n={data.q1.fullN} d={data.q1.fullD} /> ={" "}
+          <Frac n={data.q1.fullN} d={data.q1.fullD} /> ={" "}
           <Frac
             n={data.q1.ask === "num" ? smallBox(0, String(data.q1.n)) : data.q1.n}
             d={data.q1.ask === "den" ? smallBox(0, String(data.q1.d)) : data.q1.d}
           />
         </span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <span className="text-xs text-[var(--color-text-secondary)]">{data.q1.ask === "num" ? "numérateur" : "dénominateur"}</span>
 
         <span className="text-xs font-bold text-[var(--color-accent-alg)]">2.</span>
         <span className="text-sm">
-          Simplifier <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
+          <Frac n={data.q2.fullN} d={data.q2.fullD} /> ={" "}
           <Frac
             n={smallBox(1, String(data.q2.n))}
             d={smallBox(8, String(data.q2.d))}
           />
         </span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <span className="text-xs text-[var(--color-text-secondary)]">numérateur et dénominateur</span>
+      </div>
 
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">3.</span>
-        <span className="text-sm"><Frac n={data.q3.a.n} d={data.q3.a.d} /> + <Frac n={data.q3.b.n} d={data.q3.b.d} /></span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[0] ?? ""} denVal={fracDens[0] ?? ""}
-          numCorrect={splitAns(data.q3.ans)[0]} denCorrect={splitAns(data.q3.ans)[1]}
-          onNumChange={setFN(0)} onDenChange={setFD(0)}
-          validated={validated}
-        />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">4.</span>
-        <span className="text-sm"><Frac n={data.q4.a.n} d={data.q4.a.d} /> − <Frac n={data.q4.b.n} d={data.q4.b.d} /></span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[1] ?? ""} denVal={fracDens[1] ?? ""}
-          numCorrect={splitAns(data.q4.ans)[0]} denCorrect={splitAns(data.q4.ans)[1]}
-          onNumChange={setFN(1)} onDenChange={setFD(1)}
-          validated={validated}
-        />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">5.</span>
-        <span className="text-sm"><Frac n={data.q5.a.n} d={data.q5.a.d} /> × <Frac n={data.q5.b.n} d={data.q5.b.d} /></span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[2] ?? ""} denVal={fracDens[2] ?? ""}
-          numCorrect={splitAns(data.q5.ans)[0]} denCorrect={splitAns(data.q5.ans)[1]}
-          onNumChange={setFN(2)} onDenChange={setFD(2)}
-          validated={validated}
-        />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">6.</span>
-        <span className="text-sm"><Frac n={data.q6.a.n} d={data.q6.a.d} /> ÷ <Frac n={data.q6.b.n} d={data.q6.b.d} /></span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[3] ?? ""} denVal={fracDens[3] ?? ""}
-          numCorrect={splitAns(data.q6.ans)[0]} denCorrect={splitAns(data.q6.ans)[1]}
-          onNumChange={setFN(3)} onDenChange={setFD(3)}
-          validated={validated}
-        />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">7.</span>
-        <span className="text-sm">{signedFrac(data.q7.a.n, data.q7.a.d)} {data.q7.op} {signedFrac(data.q7.b.n, data.q7.b.d)}</span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[4] ?? ""} denVal={fracDens[4] ?? ""}
-          numCorrect={splitAns(data.q7.ans)[0]} denCorrect={splitAns(data.q7.ans)[1]}
-          onNumChange={setFN(4)} onDenChange={setFD(4)}
-          validated={validated}
-        />
-
-        <span className="text-xs font-bold text-[var(--color-accent-alg)]">8.</span>
-        <span className="text-sm">{signedFrac(data.q8.a.n, data.q8.a.d)} {data.q8.op} {signedFrac(data.q8.b.n, data.q8.b.d)}</span>
-        <span className="text-center text-sm text-[var(--color-text-secondary)]">=</span>
-        <FracInput
-          numVal={fracNums[5] ?? ""} denVal={fracDens[5] ?? ""}
-          numCorrect={splitAns(data.q8.ans)[0]} denCorrect={splitAns(data.q8.ans)[1]}
-          onNumChange={setFN(5)} onDenChange={setFD(5)}
-          validated={validated}
-        />
+      {/* q3-q8: opérations — opérateur dans sa propre colonne pour centrage vertical */}
+      <div className="grid items-center gap-x-3 gap-y-3" style={{gridTemplateColumns:"1.5rem max-content 1.5rem max-content 1rem max-content"}}>
+        {opRows.map(({ num, fa, op, fb, fi, ans }) => (
+          <React.Fragment key={num}>
+            <span className="text-xs font-bold text-[var(--color-accent-alg)]">{num}.</span>
+            <div className="flex justify-center">{fa}</div>
+            <span className="text-center text-base font-semibold text-[var(--color-text-primary)]">{op}</span>
+            <div className="flex justify-center">{fb}</div>
+            <span className="text-center text-base font-semibold text-[var(--color-text-secondary)]">=</span>
+            <FracInput
+              numVal={fracNums[fi] ?? ""} denVal={fracDens[fi] ?? ""}
+              numCorrect={splitAns(ans)[0]} denCorrect={splitAns(ans)[1]}
+              onNumChange={setFN(fi)} onDenChange={setFD(fi)}
+              validated={validated}
+            />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );

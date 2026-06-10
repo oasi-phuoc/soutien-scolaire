@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L11: GrammarLesson = {
   slug: "a2-gr-l11",
-  code: "G.36",
+  code: "G4.17",
   level: "A2",
   title: "Les adjectifs — généralités",
   theory: [

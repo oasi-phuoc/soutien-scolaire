@@ -78,7 +78,8 @@ function Chart({ history }: { history: TPAttempt[] }) {
           );
         }
         const y = toY(h.points);
-        const [, mm, dd] = h.date.split("-");
+        const [, mm, ddRaw] = h.date.split("-");
+        const dd = ddRaw?.slice(0, 2);
         const dateLabel = mm && dd ? `${dd}/${mm}` : h.date;
         return (
           <g key={i}>
@@ -280,8 +281,12 @@ export function PlacementStatsClient() {
               {visibleHistory.map((h, i) => {
                 const grade = gradeFromAttempt(h);
                 const mood = gradeMood(grade);
-                const [yyyy, mm, dd] = h.date.split("-");
-                const dateStr = yyyy && mm && dd ? `${dd}/${mm}/${yyyy}` : h.date;
+                const [yyyy, mm, ddRaw] = h.date.split("-");
+                const dd = ddRaw?.slice(0, 2);
+                const timeStr = ddRaw?.slice(3, 8);
+                const dateStr = yyyy && mm && dd
+                  ? timeStr ? `${dd}/${mm}/${yyyy} ${timeStr}` : `${dd}/${mm}/${yyyy}`
+                  : h.date;
                 return (
                   <li key={i} className="flex items-center gap-3 px-4 py-3">
                     <div className="flex-1 min-w-0">

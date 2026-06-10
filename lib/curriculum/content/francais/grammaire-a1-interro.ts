@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_INTERRO: GrammarLesson = {
   slug: "a1-gr-interro",
-  code: "G.8",
+  code: "G1.8",
   level: "A1",
   title: "L'interrogation de base",
   theory: [

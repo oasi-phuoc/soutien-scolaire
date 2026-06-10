@@ -94,11 +94,7 @@ export const MATH_MODULES: MathModule[] = [
     submodules: [
       sm("A6.1", "Notion de pourcentage"),
       sm("A6.2", "Pourcentage d'un nombre"),
-      sm("A6.3", "Trouver le pourcentage"),
-      sm("A6.4", "Augmentation"),
-      sm("A6.5", "Réduction"),
-      sm("A6.6", "Règle de trois"),
-      sm("A6.7", "Problèmes"),
+      sm("A6.3", "Augmentation et réduction"),
     ],
   },
   {
@@ -108,7 +104,7 @@ export const MATH_MODULES: MathModule[] = [
     branch: "algebra",
     prerequisiteIds: ["A1", "A3"],
     submodules: [
-      sm("A7.1", "Notion de négatif"),
+      sm("A7.1", "Les nombres relatifs"),
       sm("A7.2", "Comparer"),
       sm("A7.3", "Addition et soustraction"),
       sm("A7.4", "Multiplication et division (signes)"),

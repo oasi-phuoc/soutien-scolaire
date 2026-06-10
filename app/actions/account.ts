@@ -31,3 +31,25 @@ export async function updateRemotePivotLang(lang: string) {
   revalidatePath("/compte");
   return { ok: true as const };
 }
+
+/** Met à jour le mot de passe de l'utilisateur connecté. */
+export async function changePasswordAction(
+  newPassword: string,
+  confirmPassword: string,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  if (newPassword.length < 8)
+    return { ok: false, reason: "Le mot de passe doit contenir au moins 8 caractères." };
+  if (newPassword !== confirmPassword)
+    return { ok: false, reason: "Les mots de passe ne correspondent pas." };
+
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return { ok: false, reason: "Supabase non configuré." };
+
+  const { data: { user }, error: userErr } = await supabase.auth.getUser();
+  if (userErr || !user) return { ok: false, reason: "Vous devez être connecté." };
+
+  const { error: updateErr } = await supabase.auth.updateUser({ password: newPassword });
+  if (updateErr) return { ok: false, reason: updateErr.message };
+
+  return { ok: true };
+}

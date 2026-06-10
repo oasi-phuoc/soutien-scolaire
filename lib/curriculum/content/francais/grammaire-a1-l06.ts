@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L06: GrammarLesson = {
   slug: "a1-gr-l06",
-  code: "G.7",
+  code: "G1.7",
   level: "A1",
   title: "Être et avoir — révision",
   theory: [

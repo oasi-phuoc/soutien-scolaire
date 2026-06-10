@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const NEGATION_PASSE_COMPOSE: ConjLesson = {
   slug: "negation-passe-compose",
-  code: "G.25b",
+  code: "G4.6",
   level: "A1",
   title: "Négation au passé composé",
   theory: [

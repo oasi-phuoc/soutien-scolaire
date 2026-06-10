@@ -1378,7 +1378,7 @@ function ArithmeticGroupExercise({
       {consigne && (
         <p className="text-sm text-[var(--color-text-secondary)]">{consigne}</p>
       )}
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-3">
+      <div className="space-y-3">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] ?? false : null;
@@ -2858,7 +2858,7 @@ function MulDemoGrid({ a, b, op, carries, result, prevCarries, prevResult }: {
 }
 
 function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shifted, res,
-  prevCarries1, prevCarries2, prevP1, prevP2shifted, prevRes }: {
+  prevCarries1, prevCarries2, prevP1, prevP2shifted, prevRes, decimalPos }: {
   a: number[]; b: number[]; result: number;
   carries1: (number | null)[];
   carries2: (number | null)[];
@@ -2870,6 +2870,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
   prevP1?: (number | null)[] | null;
   prevP2shifted?: (number | null)[] | null;
   prevRes?: (number | null)[] | null;
+  decimalPos?: number;
 }) {
   const numCols = totalResult > 9999 ? 5 : 4;
   const colStart = 5 - numCols;
@@ -2883,15 +2884,20 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
   const isNew = (arr: (number|null)[], prev: (number|null)[]|null|undefined, col: number) =>
     arr[col] !== null && (prev == null || prev[col] === null);
 
-  const staticCell = (val: number | null, isNewFlag?: boolean) => (
-    <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
-      val !== null
-        ? isNewFlag
-          ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
-          : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
-        : "border-transparent text-transparent"
-    }`}>
-      {val !== null ? val : ""}
+  const staticCell = (val: number | null, isNewFlag?: boolean, commaAfter?: boolean) => (
+    <div className="relative">
+      <div className={`h-8 w-8 flex items-center justify-center font-mono text-base rounded border ${
+        val !== null
+          ? isNewFlag
+            ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold"
+            : "border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
+          : "border-transparent text-transparent"
+      }`}>
+        {val !== null ? val : ""}
+      </div>
+      {commaAfter && val !== null && (
+        <span className="absolute -right-2 top-0 h-full flex items-center font-mono text-base font-bold text-[var(--color-accent-alg)]">,</span>
+      )}
     </div>
   );
 
@@ -2970,7 +2976,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
         {/* Result */}
         <tr>
           <td />
-          {visibleCols.map(col => <td key={col} className="text-center">{staticCell(res[col] ?? null, isNew(res, prevRes, col))}</td>)}
+          {visibleCols.map((col, vIdx) => <td key={col} className="text-center">{staticCell(res[col] ?? null, isNew(res, prevRes, col), decimalPos !== undefined && vIdx === numCols - decimalPos - 1)}</td>)}
         </tr>
       </tbody>
     </table>
@@ -3461,6 +3467,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
                   prevP1={prev?.p1 ?? null}
                   prevP2shifted={prev?.p2shifted ?? null}
                   prevRes={prev?.res ?? null}
+                  decimalPos={block.decimalPos}
                 />
               </div>
             );

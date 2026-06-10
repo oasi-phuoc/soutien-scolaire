@@ -5,11 +5,11 @@ import { ComingSoon } from "@/components/ComingSoon";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
-import type { FrenchSection, FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
+import type { FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
 import { CommModuleList } from "@/components/communication/CommunicationClient";
 
-type SectionDef  = { id: FrenchSection; code: string; title: string };
+type SectionDef  = { id: string; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
 type LessonState  = "locked" | "available" | "completed";
 
@@ -21,6 +21,20 @@ const SECTIONS: SectionDef[] = [
   { id: "B1", code: "B1", title: "Niveau B1" },
   { id: "B2", code: "B2", title: "Niveau B2" },
 ];
+
+const GRAMMAR_GROUPS: SectionDef[] = [
+  { id: "G1", code: "G1", title: "A1 — Les fondamentaux" },
+  { id: "G2", code: "G2", title: "A1 — Verbes essentiels" },
+  { id: "G3", code: "G3", title: "A1 — Articles et adjectifs" },
+  { id: "G4", code: "G4", title: "A1/A2 — Temps et structures" },
+];
+
+function grammarGroupId(code: string): string {
+  if (code.startsWith("G1.")) return "G1";
+  if (code.startsWith("G2.")) return "G2";
+  if (code.startsWith("G3.")) return "G3";
+  return "G4";
+}
 
 const VOCAB_MODULES: SectionDef[] = [
   { id: "V1", code: "V1", title: "L'identité" },
@@ -434,20 +448,30 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
           </>
         ) : (
           (() => {
-            const allTabThemes = SECTIONS.flatMap((sec) =>
-              FRENCH_THEMES.filter(
-                (th) =>
-                  th.section === sec.id &&
-                  (th.tab === tab || (tab === "grammaire" && th.tab === "conjugaison")),
-              ),
-            );
+            const groups = tab === "grammaire" ? GRAMMAR_GROUPS : SECTIONS;
+
+            const allTabThemes = tab === "grammaire"
+              ? GRAMMAR_GROUPS.flatMap((grp) =>
+                  FRENCH_THEMES.filter(
+                    (th) =>
+                      (th.tab === "grammaire" || th.tab === "conjugaison") &&
+                      grammarGroupId(th.code) === grp.id,
+                  ),
+                )
+              : SECTIONS.flatMap((sec) =>
+                  FRENCH_THEMES.filter(
+                    (th) => th.section === sec.id && th.tab === tab,
+                  ),
+                );
 
             let prevCount = 0;
 
             return (
               <>
-                {SECTIONS.map((sec) => {
-                  const themes = allTabThemes.filter((th) => th.section === sec.id);
+                {groups.map((grp) => {
+                  const themes = tab === "grammaire"
+                    ? allTabThemes.filter((th) => grammarGroupId(th.code) === grp.id)
+                    : allTabThemes.filter((th) => th.section === grp.id);
                   if (themes.length === 0) return null;
 
                   let state: SectionState;
@@ -471,8 +495,8 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
                   return (
                     <SectionCard
-                      key={sec.id}
-                      sec={sec}
+                      key={grp.id}
+                      sec={grp}
                       state={state}
                       themes={themes}
                       completedSlugs={hydrated ? completedSlugs : new Set()}
