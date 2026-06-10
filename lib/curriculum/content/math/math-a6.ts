@@ -5,8 +5,6 @@ import { MATH_A6_2_LESSON } from "./math-a6-2";
 import { MATH_A6_3_LESSON } from "./math-a6-3";
 import { MATH_A6_4_LESSON } from "./math-a6-4";
 import { MATH_A6_5_LESSON } from "./math-a6-5";
-import { MATH_A6_6_LESSON } from "./math-a6-6";
-import { MATH_A6_7_LESSON } from "./math-a6-7";
 
 export const MATH_A6_LESSONS: MathSubmoduleLesson[] = [
   MATH_A6_1_LESSON,
@@ -14,6 +12,4 @@ export const MATH_A6_LESSONS: MathSubmoduleLesson[] = [
   MATH_A6_3_LESSON,
   MATH_A6_4_LESSON,
   MATH_A6_5_LESSON,
-  MATH_A6_6_LESSON,
-  MATH_A6_7_LESSON,
 ];

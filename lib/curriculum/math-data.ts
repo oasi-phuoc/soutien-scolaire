@@ -94,11 +94,9 @@ export const MATH_MODULES: MathModule[] = [
     submodules: [
       sm("A6.1", "Notion de pourcentage"),
       sm("A6.2", "Pourcentage d'un nombre"),
-      sm("A6.3", "Trouver le pourcentage"),
-      sm("A6.4", "Augmentation"),
-      sm("A6.5", "Réduction"),
-      sm("A6.6", "Règle de trois"),
-      sm("A6.7", "Problèmes"),
+      sm("A6.3", "Augmentation et réduction"),
+      sm("A6.4", "Comparaison de pourcentages"),
+      sm("A6.5", "Problèmes"),
     ],
   },
   {
