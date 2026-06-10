@@ -279,10 +279,10 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a7_rel_arith", exNum: 6, range: 100, count: 5, missingOperand: true, questionMode: "balanced" });
     steps.push({ kind: "a7_rel_arith", exNum: 7, range: 0, count: 5, missingOperand: true, questionMode: "decimal" });
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 4, missingOperand: false, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 4, missingOperand: false, questionMode: "balanced", timer: 60 });
-    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 6, count: 4, missingOperand: true, questionMode: "balanced" });
-    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 100, count: 4, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 1, range: 6, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 2, range: 6, count: 5, missingOperand: true, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 3, range: 100, count: 5, missingOperand: false, questionMode: "balanced" });
+    steps.push({ kind: "a7_rel_arith", exNum: 4, range: 0, count: 5, missingOperand: false, questionMode: "decimal" });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A7-4") {
     steps.push({ kind: "a7_rel_mul_div", exNum: 1, range: 6, count: 5, missingOperand: false });
