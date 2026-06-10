@@ -5,11 +5,11 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
   submoduleCode: "A7.3",
   theory: {
     title: {
-      fr: "Addition et soustraction des entiers relatifs",
+      fr: "Addition et soustraction de nombres relatifs",
     },
     paragraphs: { fr: [] },
     blocks: [
-      { type: "heading", fr: "Addition des entiers relatifs", black: true },
+      { type: "heading", fr: "Addition des nombres relatifs", black: true },
 
       { type: "highlight", fr: "Mêmes signes → conserver le signe" },
       {
@@ -33,7 +33,7 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
         ],
       },
 
-      { type: "heading", fr: "Soustraction des entiers relatifs", black: true },
+      { type: "heading", fr: "Soustraction des nombres relatifs", black: true },
 
       {
         type: "rule",

@@ -3,7 +3,7 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_A7_3: SubmoduleTrad = {
   submoduleId: "A7-3",
   title: {
-    fr: "Addition et soustraction des entiers relatifs",
+    fr: "Addition et soustraction de nombres relatifs",
     en: "Addition and subtraction of relative integers",
     ar: "جمع وطرح الأعداد الصحيحة النسبية",
     fa: "جمع و تفریق عددهای صحیح نسبی",
@@ -15,7 +15,7 @@ export const TRAD_A7_3: SubmoduleTrad = {
     uk: "Додавання і віднімання відносних цілих чисел",
   },
   blocks: [
-    { text: { fr: "Addition des entiers relatifs", en: "Adding relative integers", ar: "جمع الأعداد الصحيحة النسبية", fa: "جمع عددهای صحیح نسبی", pt: "Adicionar inteiros relativos", so: "Isugeynta tirooyinka xiriirka leh", ti: "ተዛማዲ ሙሉእ ቁጽርታት ምድማር", tr: "İşaretli tam sayıları toplama", ps: "د نسبي صحيح عددونو جمع", uk: "Додавання відносних цілих чисел" } },
+    { text: { fr: "Addition des nombres relatifs", en: "Adding relative integers", ar: "جمع الأعداد الصحيحة النسبية", fa: "جمع عددهای صحیح نسبی", pt: "Adicionar inteiros relativos", so: "Isugeynta tirooyinka xiriirka leh", ti: "ተዛማዲ ሙሉእ ቁጽርታት ምድማር", tr: "İşaretli tam sayıları toplama", ps: "د نسبي صحيح عددونو جمع", uk: "Додавання відносних цілих чисел" } },
     { text: { fr: "Mêmes signes → conserver le signe", en: "Same signs → keep the sign", ar: "الإشارات نفسها → نحتفظ بالإشارة", fa: "علامت های یکسان → همان علامت را نگه دار", pt: "Sinais iguais → conservar o sinal", so: "Calaamado isku mid ah → hay calaamadda", ti: "ሓደ ዓይነት ምልክታት → ምልክት ዓቅብ", tr: "Aynı işaretler → işareti koru", ps: "يو شان نښې → نښه وساته", uk: "Однакові знаки → зберегти знак" } },
     {
       items: {
@@ -46,7 +46,7 @@ export const TRAD_A7_3: SubmoduleTrad = {
         uk: ["Відніми абсолютні значення і візьми знак числа з більшим абсолютним значенням.", "(+6) + (−3) = +3   (|6| > |3| → знак +)", "(−6) + (+3) = −3   (|6| > |3| → знак −)"],
       },
     },
-    { text: { fr: "Soustraction des entiers relatifs", en: "Subtracting relative integers", ar: "طرح الأعداد الصحيحة النسبية", fa: "تفریق عددهای صحیح نسبی", pt: "Subtrair inteiros relativos", so: "Kala-goynta tirooyinka xiriirka leh", ti: "ተዛማዲ ሙሉእ ቁጽርታት ምጉዳል", tr: "İşaretli tam sayıları çıkarma", ps: "د نسبي صحيح عددونو تفريق", uk: "Віднімання відносних цілих чисел" } },
+    { text: { fr: "Soustraction des nombres relatifs", en: "Subtracting relative integers", ar: "طرح الأعداد الصحيحة النسبية", fa: "تفریق عددهای صحیح نسبی", pt: "Subtrair inteiros relativos", so: "Kala-goynta tirooyinka xiriirka leh", ti: "ተዛማዲ ሙሉእ ቁጽርታት ምጉዳል", tr: "İşaretli tam sayıları çıkarma", ps: "د نسبي صحيح عددونو تفريق", uk: "Віднімання відносних цілих чисел" } },
     {
       text: { fr: "Règle fondamentale", en: "Basic rule", ar: "القاعدة الأساسية", fa: "قاعده اصلی", pt: "Regra fundamental", so: "Xeerka aasaasiga ah", ti: "መሰረታዊ ሕጊ", tr: "Temel kural", ps: "بنسټيزه قاعده", uk: "Основне правило" },
       items: {

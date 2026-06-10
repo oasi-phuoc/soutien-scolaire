@@ -433,8 +433,8 @@ export function A7RelSeqCompleteExercise({
   }, [validateCommand, validated, questions, answers, onValidated]);
 
   const fmt = (n: number) => isDecimal ? fmtRelDec(n) : fmtRel(n);
-  const cellW = "w-16 shrink-0 h-9";
-  const inpCls = `${cellW} px-1 text-sm text-center font-mono rounded-lg border border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20`;
+  const cellW = "w-14 shrink-0 h-9";
+  const inpCls = `${cellW} px-0.5 text-xs text-center font-mono rounded-lg border border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20`;
 
   return (
     <div className="space-y-4">
@@ -444,7 +444,7 @@ export function A7RelSeqCompleteExercise({
         {questions.map((q, qi) => {
           let bc = 0;
           return (
-            <div key={qi} className="flex items-center gap-1.5 flex-wrap">
+            <div key={qi} className="flex items-center gap-1 flex-wrap">
               <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
               {q.allNums.map((n, ni) => {
                 const blankIdx = q.blankIdxs.indexOf(ni);
@@ -469,7 +469,7 @@ export function A7RelSeqCompleteExercise({
                   );
                 }
                 return (
-                  <span key={ni} className={`${cellW} flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>
+                  <span key={ni} className={`${cellW} flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-xs font-bold text-[var(--color-text-primary)]`}>
                     {fmt(n)}
                   </span>
                 );
