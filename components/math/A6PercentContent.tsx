@@ -118,7 +118,6 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
   type State = { num: string; den: string; status: FracStatus };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ num: "", den: "", status: "idle" })));
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {}, []);
 
   useEffect(() => {
