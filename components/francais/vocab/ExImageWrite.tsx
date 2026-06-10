@@ -83,6 +83,9 @@ export function ExImageWrite({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
+  const [imgFits, setImgFits] = useState<Record<string, "contain" | "cover">>(() =>
+    Object.fromEntries(words.map((w) => [w.word, "contain" as const]))
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -116,9 +119,12 @@ export function ExImageWrite({
           return (
             <div key={w.word} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded">
+              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded border border-[var(--color-border-default)] bg-white">
                 {resolveImg(w.image) && (
-                  <Image src={resolveImg(w.image)!} alt="" fill className="object-contain" sizes="56px" />
+                  <Image src={resolveImg(w.image)!} alt="" fill
+                    className={`object-${imgFits[w.word] ?? "contain"}`}
+                    onLoad={e => { const i = e.currentTarget; setImgFits(prev => ({ ...prev, [w.word]: i.naturalWidth / i.naturalHeight > 1 ? "cover" : "contain" })); }}
+                    sizes="56px" />
                 )}
               </div>
               <div className="flex flex-1 items-center gap-1.5">
