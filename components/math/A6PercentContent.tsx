@@ -425,7 +425,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez la valeur correspondant au pourcentage indiqué.</p>
-      <div className="grid grid-cols-[1.5rem_auto_auto_auto] items-center gap-x-2 gap-y-3">
+      <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
           const s = states[i]!;
           return (
@@ -477,7 +477,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Déterminez quelle part en pourcentage représente la valeur indiquée.</p>
-      <div className="grid grid-cols-[1.5rem_auto_auto_auto_auto] items-center gap-x-2 gap-y-3">
+      <div className="grid grid-cols-[auto_auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
           const s = states[i]!;
           return (
