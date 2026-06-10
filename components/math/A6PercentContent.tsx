@@ -26,21 +26,25 @@ function FracInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum,
   status: FracStatus; disabled: boolean;
   correctNum?: string; correctDen?: string;
 }) {
-  const iCls = "w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]";
+  const iCls = (st: FracStatus) => `w-12 h-8 rounded-xl border px-1 text-sm text-center outline-none transition-colors ${
+    st === "correct"
+      ? "border-green-400 bg-green-50 dark:bg-green-950/20"
+      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
+  }`;
   const wrongBox = (val: string, correct?: string) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
-      <span className="text-[10px] text-amber-500 line-through tabular-nums leading-none">{val || "—"}</span>
-      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
+      <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 dark:text-amber-400 tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-1">
       {status === "wrong" ? wrongBox(numVal, correctNum) : (
-        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value)} disabled={disabled} className={iCls} />
+        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value)} disabled={disabled} className={iCls(status)} />
       )}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {status === "wrong" ? wrongBox(denVal, correctDen) : (
-        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value)} disabled={disabled} className={iCls} />
+        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value)} disabled={disabled} className={iCls(status)} />
       )}
     </span>
   );
@@ -65,6 +69,10 @@ function checkFracEquiv(numStr: string, denStr: string, pct: number): boolean {
 
 function normDec(s: string): number {
   return parseFloat(s.replace(",", ".").trim());
+}
+
+function gcd(a: number, b: number): number {
+  return b === 0 ? a : gcd(b, a % b);
 }
 
 // ── Data pools ───────────────────────────────────────────────────────────────
@@ -109,16 +117,27 @@ const DEC_TO_PCT_POOL: DecPctItem[] = [
   { dec: "0,15", pct: 15 }, { dec: "0,45", pct: 45 },
 ];
 
-const WRONG_CLS = "rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 flex flex-col items-center justify-center min-w-[3.5rem]";
+const WRONG_CLS = "rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 flex flex-col items-center justify-center min-w-[3.5rem] text-center";
 
 // ── Exercise 1 : % → fraction ────────────────────────────────────────────────
 
 export function PctToFracExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(PCT_TO_FRAC_POOL).slice(0, 5));
+  const [questions] = useState(() => {
+    const poolItems = shuffle(PCT_TO_FRAC_POOL).slice(0, 3);
+    const used = new Set(poolItems.map(q => q.pct));
+    const randoms: PctFracItem[] = [];
+    while (randoms.length < 2) {
+      const pct = Math.floor(Math.random() * 200) + 1;
+      const pctStr = String(pct);
+      if (used.has(pctStr)) continue;
+      used.add(pctStr);
+      const g = gcd(pct, 100);
+      randoms.push({ pct: pctStr, num: pct / g, den: 100 / g });
+    }
+    return [...poolItems, ...randoms];
+  });
   type State = { num: string; den: string; status: FracStatus };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ num: "", den: "", status: "idle" })));
-
-  useEffect(() => {}, []);
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -171,7 +190,19 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
 // ── Exercise 2 : % → décimal ─────────────────────────────────────────────────
 
 export function PctToDecExercise({ validateCommand, onValidated, exNum }: ValidatedProps) {
-  const [questions] = useState(() => shuffle(PCT_TO_DEC_POOL).slice(0, 5));
+  const [questions] = useState(() => {
+    const poolItems = shuffle(PCT_TO_DEC_POOL).slice(0, 3);
+    const used = new Set(poolItems.map(q => q.pct.replace("%", "")));
+    const randoms: PctDecItem[] = [];
+    while (randoms.length < 2) {
+      const n = Math.floor(Math.random() * 200) + 1;
+      const nStr = String(n);
+      if (used.has(nStr)) continue;
+      used.add(nStr);
+      randoms.push({ pct: `${nStr}%`, dec: (n / 100).toFixed(2).replace(".", ",") });
+    }
+    return [...poolItems, ...randoms];
+  });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
 
@@ -193,7 +224,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
 
   const inputCls = (status: State["status"]) =>
     `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
-      status === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+      status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
@@ -211,8 +242,8 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-amber-500 line-through leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.dec}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.dec}</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
@@ -251,7 +282,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
 
   const inputCls = (status: State["status"]) =>
     `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
-      status === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+      status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
@@ -269,8 +300,8 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-amber-500 line-through leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.pct}%</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
@@ -309,7 +340,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
 
   const inputCls = (status: State["status"]) =>
     `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${
-      status === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
+      status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
       : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
@@ -327,8 +358,8 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-amber-500 line-through leading-none">{s.ans || "—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.pct}%</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
