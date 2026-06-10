@@ -60,11 +60,6 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
         ]},
       ],
     },
-    exercises: [
-      { id: "a6-1-e1", promptFr: "Convertissez 35% en décimal.", type: "short_text", acceptable: ["0,35", "0.35"] },
-      { id: "a6-1-e2", promptFr: "Convertissez 3/4 en pourcentage.", type: "short_text", acceptable: ["75%", "75"] },
-      { id: "a6-1-e3", promptFr: "Convertissez 0,08 en pourcentage.", type: "short_text", acceptable: ["8%", "8"] },
-      { id: "a6-1-e4", promptFr: "Convertissez 120% en décimal.", type: "short_text", acceptable: ["1,2", "1.2"] },
-      { id: "a6-1-e5", promptFr: "Convertissez 1/5 en pourcentage.", type: "short_text", acceptable: ["20%", "20"] },
-    ],
+    exercises: [],
+    exercisePool: [],
   };

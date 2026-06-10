@@ -11,6 +11,7 @@ import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise, DecColArithExercise, DecColArithFullExercise, DecExprCompExercise, DecMul2ColExercise } from "@/components/math/A5DecimalContent";
+import { PctToFracExercise, PctToDecExercise, FracToPctExercise, DecToPctExercise } from "@/components/math/A6PercentContent";
 import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueExercise, DecReadDigitAtExercise, DecReadDictationExercise, DecReadCompareExercise, DecReadOrderExercise, DecReadFilterGtExercise, DecReadFilterLtExercise, DecReadFilterBetweenExercise, DecReadEncadrementExercise, DecReadEncadrementUniteExercise, DecReadNLReadExercise, DecReadNLPlaceExercise } from "@/components/math/A5ReadContent";
 import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
 import { A7CompareExercise } from "@/components/math/A7CompareContent";
@@ -64,6 +65,10 @@ type WorkspaceStep =
   | { kind: "a7_compare_ex"; exNum: number; level: 1 | 2 }
   | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" }
   | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
+  | { kind: "pct_to_frac_ex"; exNum: number }
+  | { kind: "pct_to_dec_ex"; exNum: number }
+  | { kind: "frac_to_pct_ex"; exNum: number }
+  | { kind: "dec_to_pct_ex"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
@@ -338,6 +343,17 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     }
     steps.push({ kind: "frac_op_compare", exNum: 5, opMode: cmpMode });
     steps.push({ kind: "frac_ops", exType: 9, opMode, count: 4, displayExNum: 6 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A6-1") {
+    steps.push({ kind: "pct_to_frac_ex", exNum: 1 });
+    steps.push({ kind: "pct_to_dec_ex", exNum: 2 });
+    steps.push({ kind: "frac_to_pct_ex", exNum: 3 });
+    steps.push({ kind: "dec_to_pct_ex", exNum: 4 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "pct_to_frac_ex", exNum: 1 });
+    steps.push({ kind: "pct_to_dec_ex", exNum: 2 });
+    steps.push({ kind: "frac_to_pct_ex", exNum: 3 });
+    steps.push({ kind: "dec_to_pct_ex", exNum: 4 });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1676,6 +1692,19 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
 
       {/* Generic text exercise */}
+      {currentStep?.kind === "pct_to_frac_ex" && (
+        <PctToFracExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_to_dec_ex" && (
+        <PctToDecExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "frac_to_pct_ex" && (
+        <FracToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_to_pct_ex" && (
+        <DecToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
       {currentStep?.kind === "exercise" && (
         <div className="space-y-4">
           <div>

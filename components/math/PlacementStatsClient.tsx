@@ -78,7 +78,8 @@ function Chart({ history }: { history: TPAttempt[] }) {
           );
         }
         const y = toY(h.points);
-        const [, mm, dd] = h.date.split("-");
+        const [, mm, ddRaw] = h.date.split("-");
+        const dd = ddRaw?.slice(0, 2);
         const dateLabel = mm && dd ? `${dd}/${mm}` : h.date;
         return (
           <g key={i}>
