@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { updateRemotePivotLang } from "@/app/actions/account";
+import { changePasswordAction, updateRemotePivotLang } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
 import { syncProgressToCloud } from "@/app/actions/progress";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
@@ -96,6 +96,12 @@ export function CompteDashboard({
   const [genre, setGenreState] = useState<GenreKey>("f");
   const [syncStatus, setSyncStatus] = useState<"idle" | "syncing" | "ok" | "error">("idle");
   const [syncError, setSyncError] = useState<string | null>(null);
+  const [pwdOpen, setPwdOpen] = useState(false);
+  const [oldPwd, setOldPwd] = useState("");
+  const [newPwd, setNewPwd] = useState("");
+  const [confirmPwd, setConfirmPwd] = useState("");
+  const [pwdStatus, setPwdStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
+  const [pwdMsg, setPwdMsg] = useState<string | null>(null);
 
   useEffect(() => {
     const prog = loadProgress();
@@ -141,6 +147,23 @@ export function CompteDashboard({
     } catch (e) {
       setSyncStatus("error");
       setSyncError(e instanceof Error ? e.message : "Erreur inconnue");
+    }
+  }
+
+  async function handlePasswordChange() {
+    setPwdStatus("loading");
+    setPwdMsg(null);
+    const result = await changePasswordAction(oldPwd, newPwd, confirmPwd);
+    if (result.ok) {
+      setPwdStatus("ok");
+      setPwdMsg("Mot de passe mis à jour.");
+      setOldPwd("");
+      setNewPwd("");
+      setConfirmPwd("");
+      window.setTimeout(() => { setPwdStatus("idle"); setPwdMsg(null); setPwdOpen(false); }, 2500);
+    } else {
+      setPwdStatus("error");
+      setPwdMsg(result.reason);
     }
   }
 
@@ -249,6 +272,104 @@ export function CompteDashboard({
           </div>
         )}
 
+        {/* Changer le mot de passe — accordion, visible seulement si connecté */}
+        {supabaseConfigured && user && (
+          <section aria-labelledby="pwd-heading">
+            <button
+              type="button"
+              onClick={() => { setPwdOpen((v) => !v); setPwdStatus("idle"); setPwdMsg(null); }}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <h2 id="pwd-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+                Changer le mot de passe
+              </h2>
+              <svg
+                width="18" height="18" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                className={`shrink-0 text-zinc-400 transition-transform ${pwdOpen ? "rotate-90" : ""}`}
+                aria-hidden
+              >
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+
+            {pwdOpen && (
+              <div className="mt-4 space-y-3">
+                <input
+                  type="password"
+                  placeholder="Ancien mot de passe"
+                  value={oldPwd}
+                  onChange={(e) => setOldPwd(e.target.value)}
+                  autoComplete="current-password"
+                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+                <input
+                  type="password"
+                  placeholder="Nouveau mot de passe"
+                  value={newPwd}
+                  onChange={(e) => setNewPwd(e.target.value)}
+                  autoComplete="new-password"
+                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+                <input
+                  type="password"
+                  placeholder="Confirmer le nouveau mot de passe"
+                  value={confirmPwd}
+                  onChange={(e) => setConfirmPwd(e.target.value)}
+                  autoComplete="new-password"
+                  className="w-full rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-sm outline-none focus:border-[var(--color-accent-alg)] focus:ring-2 focus:ring-[var(--color-accent-alg)]/15 dark:border-zinc-700 dark:bg-zinc-900"
+                />
+                <button
+                  type="button"
+                  onClick={() => void handlePasswordChange()}
+                  disabled={pwdStatus === "loading" || !oldPwd || !newPwd || !confirmPwd}
+                  className="min-h-11 w-full rounded-xl bg-[var(--color-accent-alg)] px-4 font-semibold text-white transition-opacity disabled:opacity-50"
+                >
+                  {pwdStatus === "loading" ? "Enregistrement…" : "Enregistrer"}
+                </button>
+                {pwdMsg && (
+                  <p
+                    className={`text-sm ${pwdStatus === "ok" ? "text-green-700 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}
+                    role="status"
+                  >
+                    {pwdMsg}
+                  </p>
+                )}
+              </div>
+            )}
+          </section>
+        )}
+
+        <section aria-labelledby="pivot-heading">
+          <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
+            Langue d’aide
+          </h2>
+          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+            Choix enregistré sur cet appareil
+            {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
+          </p>
+          <HelpLanguageSelect value={code} onChange={(next) => void savePivot(next)} />
+          <select
+            value={code}
+            onChange={e => void savePivot(e.target.value as PivotCode)}
+            className="hidden"
+          >
+            {PIVOT_LANGS.map((l) => (
+              <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
+            ))}
+          </select>
+          {saved ? (
+            <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
+              Choix enregistré.
+            </p>
+          ) : null}
+          {pivotMsg ? (
+            <p className="mt-2 text-sm text-amber-800 dark:text-amber-200" role="status">
+              {pivotMsg}
+            </p>
+          ) : null}
+        </section>
+
         <section aria-labelledby="level-heading">
           <h2 id="level-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
             Niveau de validation
@@ -312,36 +433,6 @@ export function CompteDashboard({
               );
             })}
           </div>
-        </section>
-
-        <section aria-labelledby="pivot-heading">
-          <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Langue d’aide
-          </h2>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-            Choix enregistré sur cet appareil
-            {user && supabaseConfigured ? " et sur ton profil (cloud)" : ""}.
-          </p>
-          <HelpLanguageSelect value={code} onChange={(next) => void savePivot(next)} />
-          <select
-            value={code}
-            onChange={e => void savePivot(e.target.value as PivotCode)}
-            className="hidden"
-          >
-            {PIVOT_LANGS.map((l) => (
-              <option key={l.code} value={l.code}>{l.labelFr} — {l.label}</option>
-            ))}
-          </select>
-          {saved ? (
-            <p className="mt-2 text-sm text-green-700 dark:text-green-400" role="status">
-              Choix enregistré.
-            </p>
-          ) : null}
-          {pivotMsg ? (
-            <p className="mt-2 text-sm text-amber-800 dark:text-amber-200" role="status">
-              {pivotMsg}
-            </p>
-          ) : null}
         </section>
       </main>
     </>
