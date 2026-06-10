@@ -349,7 +349,7 @@ export function CompteDashboard({
 
         <section aria-labelledby="pivot-heading">
           <h2 id="pivot-heading" className="text-base font-semibold text-zinc-900 dark:text-zinc-50">
-            Langue d'aide
+            Langue d&apos;aide
           </h2>
           <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
             Choix enregistré sur cet appareil

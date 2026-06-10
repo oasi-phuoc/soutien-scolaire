@@ -52,7 +52,7 @@ interface DecQuestion {
 
 function DecExercise({
   exNum,
-  title,
+  title: _title,
   consigne,
   questions,
   validateCommand,
