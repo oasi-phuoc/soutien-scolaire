@@ -36,7 +36,10 @@ export const MATH_A6_1_LESSON: MathSubmoduleLesson = {
         },
         { type: "plain", fr: "" },
         { type: "heading", fr: "Convertir une fraction en pourcentage" },
-        { type: "plain", fr: "1. Diviser le numérateur par le dénominateur\n2. Multiplier le résultat par 100" },
+        { type: "section", labelFr: "", itemsFr: [
+          "**1.** Diviser le numérateur par le dénominateur",
+          "**2.** Multiplier le résultat par 100",
+        ]},
         { type: "section", labelFr: "", itemsFr: [
           "3/4 → 3 ÷ 4 = 0,75 → 0,75 × 100 = 75%",
           "1/5 → 1 ÷ 5 = 0,20 → 0,20 × 100 = 20%",
