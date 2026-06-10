@@ -295,8 +295,8 @@ export function A7RelOrderingExercise({
     const posI = shuffle(Array.from({ length: 20 }, (_, i) => i + 1)).slice(0, 2);
     const negI = shuffle(Array.from({ length: 20 }, (_, i) => -(i + 1))).slice(0, 2);
     const ints = shuffle([...posI, ...negI]);
-    const posD = shuffle(Array.from({ length: 20 }, (_, i) => Math.round((i + 1) * 5) / 10)).slice(0, 2);
-    const negD = shuffle(Array.from({ length: 20 }, (_, i) => -Math.round((i + 1) * 5) / 10)).slice(0, 2);
+    const posD = shuffle(Array.from({ length: 19 }, (_, i) => Math.round((i + 1) * 5) / 10)).slice(0, 2);
+    const negD = shuffle(Array.from({ length: 19 }, (_, i) => -Math.round((i + 1) * 5) / 10)).slice(0, 2);
     const decs = shuffle([...posD, ...negD]);
     return [{ nums: ints, isDec: false }, { nums: decs, isDec: true }];
   });
@@ -321,7 +321,7 @@ export function A7RelOrderingExercise({
     }
   }, [validateCommand, validated, groups, selected, onValidated]);
 
-  const chipBase = "w-20 flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
+  const chipBase = "w-16 flex h-10 items-center justify-center rounded-lg border px-1 text-sm font-mono font-bold transition-colors ";
 
   const toggle = (gi: number, n: number) => {
     if (validated) return;
