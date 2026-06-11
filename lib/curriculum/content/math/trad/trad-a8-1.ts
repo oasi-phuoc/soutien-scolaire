@@ -3,8 +3,8 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_A8_1: SubmoduleTrad = {
   submoduleId: "A8-1",
   title: {
-    fr: "Notation puissance",
-    en: "Power notation",
+    fr: "Notion et représentation",
+    en: "Notion and representation",
     ar: "رمز الأس",
     fa: "نمادگذاری توان",
     ti: "ምልክት ሓይሊ",

@@ -117,7 +117,7 @@ export const MATH_MODULES: MathModule[] = [
     branch: "algebra",
     prerequisiteIds: ["A3"],
     submodules: [
-      sm("A8.1", "Notation puissance"),
+      sm("A8.1", "Notion et représentation"),
       sm("A8.2", "Calcul de puissances"),
       sm("A8.3", "Puissances de 10"),
       sm("A8.4", "Racine carrée (carrés parfaits)"),
