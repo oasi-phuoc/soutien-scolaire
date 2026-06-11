@@ -16,7 +16,7 @@ export const V8_CORPS_THEME: VocabTheme = {
     { word: "ventre",  image: "ventre.png",  article: "le",  gender: "m", definition: "partie avant du tronc" },
     { word: "genou",   image: "genou.png",   article: "le",  gender: "m", definition: "articulation de la jambe" },
     { word: "épaule",  image: "epaule.png",  article: "l'",  gender: "f", definition: "articulation entre le bras et le tronc" },
-    { word: "cou",                            article: "le",  gender: "m", definition: "partie entre la tête et les épaules" },
+    { word: "cou",     image: "cou.png",     article: "le",  gender: "m", definition: "partie entre la tête et les épaules" },
     { word: "nez",     image: "nez.png",     article: "le",  gender: "m", definition: "organe de l'odorat au milieu du visage" },
     { word: "bouche",  image: "bouche.png",  article: "la",  gender: "f", definition: "ouverture du visage pour manger et parler" },
     { word: "œil",     image: "oeil.png",    article: "l'",  gender: "m", definition: "organe de la vue" },
