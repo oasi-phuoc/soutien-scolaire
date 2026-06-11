@@ -1330,3 +1330,229 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
     </div>
   );
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// A8.5 — Priorité des opérations exercises
+// ═══════════════════════════════════════════════════════════════════════════════
+
+type OpCalcQ = { id: string; expr: string; answer: number };
+
+function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated }: {
+  exNum: number; promptFr?: string; questions: OpCalcQ[];
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const count = questions.length;
+  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(false);
+  const prevCmd = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
+    setResults(res); setValidated(true);
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+  }, [answers, questions, onValidated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand; doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
+      </div>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div className="grid items-center gap-x-2 gap-y-3"
+          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+          {questions.map((q, i) => {
+            const val = answers[i] ?? "";
+            const wrongField = validated && !results[i];
+            const rightField = validated && results[i];
+            const inputEl = wrongField ? (
+              <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
+                <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span>
+              </div>
+            ) : (
+              <input type="text" inputMode="numeric" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                style={{ width: 80, height: 36 }}
+                className={`rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`}
+              />
+            );
+            return (
+              <Fragment key={q.id}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.expr}</span>
+                <span className="text-sm text-[var(--color-text-secondary)]">=</span>
+                {inputEl}
+              </Fragment>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Ex1: Simple (no parentheses) ─────────────────────────────────────────────
+const OP_EX1: OpCalcQ[] = [
+  { id: "op1-1", expr: "8 + 3 × 2",   answer: 14 },
+  { id: "op1-2", expr: "15 − 4 × 3",  answer: 3  },
+  { id: "op1-3", expr: "20 ÷ 5 + 7",  answer: 11 },
+  { id: "op1-4", expr: "10 + 12 ÷ 4", answer: 13 },
+];
+export function A8OpSimpleExercise(props: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  return <A8OpCalcGrid {...props} questions={OP_EX1} />;
+}
+
+// ── Ex2: Parentheses (pool of 8 → 5 random) ──────────────────────────────────
+const OP_EX2_POOL: OpCalcQ[] = [
+  { id: "op2-1", expr: "(8 + 3) × 2",             answer: 22 },
+  { id: "op2-2", expr: "5 × (12 − 4)",            answer: 40 },
+  { id: "op2-3", expr: "(20 ÷ 5) + 7",            answer: 11 },
+  { id: "op2-4", expr: "30 − (8 + 5)",            answer: 17 },
+  { id: "op2-5", expr: "(8 + 2) × (5 − 3)",       answer: 20 },
+  { id: "op2-6", expr: "(12 − 4) × (7 + 1)",      answer: 64 },
+  { id: "op2-7", expr: "(15 + 5) ÷ (8 − 4) × 5", answer: 25 },
+  { id: "op2-8", expr: "(9 + 3) × (10 − 6) + 5", answer: 53 },
+];
+export function A8OpParenExercise(props: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<OpCalcQ[]>(() =>
+    [...OP_EX2_POOL].sort(() => Math.random() - 0.5).slice(0, 5)
+  );
+  return <A8OpCalcGrid {...props} questions={questions} />;
+}
+
+// ── Ex3: Brackets [ ] ─────────────────────────────────────────────────────────
+const OP_EX3: OpCalcQ[] = [
+  { id: "op3-1", expr: "2 × [3 + (4 × 5)]",   answer: 46 },
+  { id: "op3-2", expr: "40 − [10 + (8 − 3)]", answer: 25 },
+  { id: "op3-3", expr: "[20 − (4 + 6)] × 2",  answer: 20 },
+  { id: "op3-4", expr: "5 × [3 + (8 ÷ 2)]",  answer: 35 },
+];
+export function A8OpBracketExercise(props: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  return <A8OpCalcGrid {...props} questions={OP_EX3} />;
+}
+
+// ── Ex4: Fill in the blank □ ──────────────────────────────────────────────────
+type OpFillQ = { id: string; before: string; after: string; result: number; answer: number };
+const OP_EX4: OpFillQ[] = [
+  { id: "op4-1", before: "5 + ",  after: " × 2",      result: 15, answer: 5  },
+  { id: "op4-2", before: "",      after: " × 4 + 3",  result: 19, answer: 4  },
+  { id: "op4-3", before: "(",     after: " + 2) × 3", result: 21, answer: 5  },
+  { id: "op4-4", before: "20 − ", after: " ÷ 2",      result: 14, answer: 12 },
+];
+export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated }: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const count = OP_EX4.length;
+  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(false);
+  const prevCmd = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    const res = OP_EX4.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
+    setResults(res); setValidated(true);
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+  }, [answers, onValidated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand; doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
+      </div>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div className="grid items-center gap-x-2 gap-y-3"
+          style={{ gridTemplateColumns: "auto auto auto auto auto auto", justifyContent: "start" }}>
+          {OP_EX4.map((q, i) => {
+            const val = answers[i] ?? "";
+            const wrongField = validated && !results[i];
+            const rightField = validated && results[i];
+            const inputEl = wrongField ? (
+              <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
+                <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span>
+              </div>
+            ) : (
+              <input type="text" inputMode="numeric" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                style={{ width: 80, height: 36 }}
+                className={`rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`}
+              />
+            );
+            return (
+              <Fragment key={q.id}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.before}</span>
+                {inputEl}
+                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.after}</span>
+                <span className="text-sm text-[var(--color-text-secondary)]">=</span>
+                <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{q.result}</span>
+              </Fragment>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Ex5: Powers and square roots ──────────────────────────────────────────────
+const OP_EX5: OpCalcQ[] = [
+  { id: "op5-1", expr: "5 + (12 − 4) × 3",    answer: 29 },
+  { id: "op5-2", expr: "100 − (18 ÷ 3 + 4²)", answer: 78 },
+  { id: "op5-3", expr: "(8 + 7) × (20 − 16)", answer: 60 },
+  { id: "op5-4", expr: "√144 + 3² × 2",       answer: 30 },
+];
+export function A8OpPowSqrtExercise(props: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  return <A8OpCalcGrid {...props} questions={OP_EX5} />;
+}
+
+// ── Ex6: Complex brackets + many terms (pool of 10 → 5 random) ───────────────
+const OP_EX6_POOL: OpCalcQ[] = [
+  { id: "op6-1",  expr: "[3 + (2 × 4)] × 5 − 2",        answer: 53 },
+  { id: "op6-2",  expr: "20 − [5 + (3 × 2)] + 4",       answer: 13 },
+  { id: "op6-3",  expr: "2 + [(8 − 3) × 4] ÷ 2 + 6",   answer: 18 },
+  { id: "op6-4",  expr: "3 × [7 − (4 − 1)] + 5 − 2",   answer: 15 },
+  { id: "op6-5",  expr: "(5 + 3) × [2 + (9 ÷ 3)] − 4", answer: 36 },
+  { id: "op6-6",  expr: "4 + [(12 − 4) × 3] ÷ 6 + 2",  answer: 10 },
+  { id: "op6-7",  expr: "50 − [(4 + 6) × 3] + 2 × 5",  answer: 30 },
+  { id: "op6-8",  expr: "[2 × (3 + 5)] − (4 + 6) ÷ 2", answer: 11 },
+  { id: "op6-9",  expr: "3 × [(9 − 5) + (6 ÷ 3)] + 4", answer: 22 },
+  { id: "op6-10", expr: "[(15 − 5) ÷ 2] × 4 + 6 − 1",  answer: 25 },
+];
+export function A8OpComplexExercise(props: {
+  exNum: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<OpCalcQ[]>(() =>
+    [...OP_EX6_POOL].sort(() => Math.random() - 0.5).slice(0, 5)
+  );
+  return <A8OpCalcGrid {...props} questions={questions} />;
+}
