@@ -57,8 +57,13 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
           fr: "La notation scientifique s'écrit sous la forme : a × 10ⁿ, où 1 ≤ a < 10. Elle permet d'exprimer très grands et très petits nombres de façon compacte.",
         },
         {
-          type: "example",
-          fr: "4 700 000 = 4,7 × 10⁶\n0,000 035 = 3,5 × 10⁻⁵\n300 000   = 3 × 10⁵",
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "4 700 000 = 4,7 × 10⁶",
+            "0,000 035 = 3,5 × 10⁻⁵",
+            "300 000 = 3 × 10⁵",
+          ],
         },
       ],
     },
