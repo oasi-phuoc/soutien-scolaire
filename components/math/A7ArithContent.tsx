@@ -266,9 +266,9 @@ function RelArithExercise({
 
             const inputEl = wrongField
               ? (
-                <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                  <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{fmtCorrQ(q, missedVal)}</span>
+                <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{fmtCorrQ(q, missedVal)}</span>
                 </div>
               ) : (
                 <input

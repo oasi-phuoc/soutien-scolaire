@@ -29,9 +29,9 @@ function acceptable(ans: string): string[] {
 // Inline correction box (same style as A4 exercises)
 function CorrectionBox({ wrong, correct }: { wrong: string; correct: string }) {
   return (
-    <span className="inline-flex flex-col items-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[3.5rem] justify-center">
-      <span className="text-amber-500 line-through tabular-nums leading-tight">{wrong || "—"}</span>
-      <span className="font-bold text-[var(--color-text-primary)] tabular-nums leading-tight">{correct}</span>
+    <span className="inline-flex flex-col items-center rounded-xl border border-amber-400 px-2 py-1 min-w-[3.5rem] justify-center">
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-tight">{wrong || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-tight">{correct}</span>
     </span>
   );
 }
@@ -424,9 +424,9 @@ export function DecArithGroupExercise({
           const inputEl = (_pos: MissingPos) => {
             if (wrongField) {
               return (
-                <div className={`${inputBaseArith} ${CLS_WRONG_ARITH} flex flex-col items-center justify-center`}>
-                  <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span>
+                <div className={`${inputBaseArith} border-amber-400 flex flex-col items-center justify-center`}>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                 </div>
               );
             }
@@ -539,9 +539,9 @@ function DecMulColCard({
     const carryWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (carryWrong) {
       return (
-        <div className={`h-8 w-8 rounded border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
-          <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
+        <div className={"h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center"}>
+          <span className="text-[8px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+          <span className="text-[8px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
       );
     }
@@ -569,9 +569,9 @@ function DecMulColCard({
     const opWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (opWrong) {
       return (
-        <div className={`h-8 w-8 rounded-none border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
-          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        <div className={"h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center"}>
+          <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+          <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
       );
     }
@@ -599,9 +599,9 @@ function DecMulColCard({
     const resWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
     if (resWrong) {
       return (
-        <div className={`h-8 w-8 rounded-none border flex flex-col items-center justify-center ${CLS_WRONG_GRID}`}>
-          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        <div className={"h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center"}>
+          <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+          <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
       );
     }
@@ -1078,9 +1078,9 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     if (carryWrong) {
       return (
         <td key={carrySlot} className="w-8 text-center">
-          <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
-            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expectedCarry}</span>
+          <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
+            <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+            <span className="text-[9px] font-bold text-amber-600 leading-none">{expectedCarry}</span>
           </div>
         </td>
       );
@@ -1113,9 +1113,9 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     if (ok === false) {
       return (
         <td key={colIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded-none border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
-            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+          <div className="h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center">
+            <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+            <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
           </div>
         </td>
       );
@@ -1299,9 +1299,9 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
     if (ok === false) {
       return (
         <td key={inputIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded-none border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
-            <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-            <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+          <div className="h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center">
+            <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+            <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
           </div>
         </td>
       );
@@ -1703,9 +1703,9 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
-        <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
-          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
+          <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+          <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
       );
     }
@@ -1728,9 +1728,9 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className="h-8 w-8 rounded border border-amber-500 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center">
-          <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
+        <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
+          <span className="text-[8px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+          <span className="text-[8px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
       );
     }
@@ -1823,9 +1823,9 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
       <div className="flex items-center gap-2 pt-1">
         <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
         {decWrong ? (
-          <span className="inline-flex flex-col items-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 text-sm min-w-[5rem] justify-center">
-            <span className="text-amber-500 line-through tabular-nums leading-tight">{decResult || "—"}</span>
-            <span className="font-bold text-[var(--color-text-primary)] tabular-nums leading-tight">{q.resultStr}</span>
+          <span className="inline-flex flex-col items-center rounded-xl border border-amber-400 px-2 py-1 min-w-[5rem] justify-center">
+            <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{decResult || "—"}</span>
+            <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.resultStr}</span>
           </span>
         ) : (
           <input type="text" value={decResult} disabled={validated}

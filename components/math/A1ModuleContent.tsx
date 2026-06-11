@@ -1722,8 +1722,8 @@ function ExerciseRow({
             <span className="text-sm font-bold text-[var(--color-text-primary)]">{answer}</span>
           ) : (
             <>
-              <span className="text-sm text-amber-500 line-through leading-tight">{answer}</span>
-              <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{correctWord}</span>
+              <span className="text-sm text-[var(--color-text-primary)] leading-tight">{answer}</span>
+              <span className="text-sm font-bold text-amber-600 leading-tight">{correctWord}</span>
             </>
           )}
         </div>
@@ -2826,8 +2826,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex4Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-500 line-through leading-tight">{ex4Answers[i]}</span>
-                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{num}</span>
+                          <span className="text-sm text-[var(--color-text-primary)] leading-tight">{ex4Answers[i]}</span>
+                          <span className="text-sm font-bold text-amber-600 leading-tight">{num}</span>
                         </>
                       )}
                     </div>
@@ -2870,8 +2870,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex5Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-500 line-through leading-tight">{ex5Answers[i]}</span>
-                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{num}</span>
+                          <span className="text-sm text-[var(--color-text-primary)] leading-tight">{ex5Answers[i]}</span>
+                          <span className="text-sm font-bold text-amber-600 leading-tight">{num}</span>
                         </>
                       )}
                     </div>
@@ -2914,8 +2914,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="text-sm font-bold text-[var(--color-text-primary)]">{ex6Answers[i]}</span>
                       ) : (
                         <>
-                          <span className="text-sm text-amber-500 line-through leading-tight">{ex6Answers[i]}</span>
-                          <span className="text-sm font-bold text-[var(--color-text-primary)] leading-tight">{comp.value}</span>
+                          <span className="text-sm text-[var(--color-text-primary)] leading-tight">{ex6Answers[i]}</span>
+                          <span className="text-sm font-bold text-amber-600 leading-tight">{comp.value}</span>
                         </>
                       )}
                     </div>
@@ -3031,11 +3031,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       if (isBlank) {
                         if (ex8Validated && result !== null) {
                           return (
-                            <div key={i} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>
+                            <div key={i} className={`flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${result ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : "border-amber-400"}`}>
                               {result ? ex8Answers[ansKey] : (
                                 <>
-                                  <span className="text-amber-400 line-through">{ex8Answers[ansKey] || "—"}</span>
-                                  <span className="text-[var(--color-text-primary)]">{num}</span>
+                                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{ex8Answers[ansKey] || "—"}</span>
+                                  <span className="text-xs font-bold text-amber-600 leading-none">{num}</span>
                                 </>
                               )}
                             </div>
@@ -3392,7 +3392,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
               const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
               const _fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
-              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
+              const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
               const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                 setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
               return (
@@ -3408,8 +3408,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <>
                         <div className="flex flex-1 flex-col items-center gap-0.5">
                           {ex14Validated ? (
-                            <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(mOk)}`}>
-                              {mOk ? <span className="text-[var(--color-text-primary)]">{ans.m || String(m * 1000)}</span> : <><span className="line-through">{ans.m || "—"}</span><span className="text-[var(--color-text-primary)]">{String(m * 1000)}</span></>}
+                            <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(mOk)}`}>
+                              {mOk ? <span className="text-[var(--color-text-primary)]">{ans.m || String(m * 1000)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.m || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(m * 1000)}</span></>}
                             </span>
                           ) : (
                             <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.m}
@@ -3422,8 +3422,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     )}
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(cOk)}`}>
-                          {cOk ? <span className="text-[var(--color-text-primary)]">{ans.c || String(c * 100)}</span> : <><span className="line-through">{ans.c || "—"}</span><span className="text-[var(--color-text-primary)]">{String(c * 100)}</span></>}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(cOk)}`}>
+                          {cOk ? <span className="text-[var(--color-text-primary)]">{ans.c || String(c * 100)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.c || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(c * 100)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.c}
@@ -3434,8 +3434,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(dOk)}`}>
-                          {dOk ? <span className="text-[var(--color-text-primary)]">{ans.d || String(d * 10)}</span> : <><span className="line-through">{ans.d || "—"}</span><span className="text-[var(--color-text-primary)]">{String(d * 10)}</span></>}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(dOk)}`}>
+                          {dOk ? <span className="text-[var(--color-text-primary)]">{ans.d || String(d * 10)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.d || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(d * 10)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.d}
@@ -3446,8 +3446,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${valCls(uOk)}`}>
-                          {uOk ? <span className="text-[var(--color-text-primary)]">{ans.u || String(u)}</span> : <><span className="line-through">{ans.u || "—"}</span><span className="text-[var(--color-text-primary)]">{String(u)}</span></>}
+                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(uOk)}`}>
+                          {uOk ? <span className="text-[var(--color-text-primary)]">{ans.u || String(u)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.u || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(u)}</span></>}
                         </span>
                       ) : (
                         <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.u}
@@ -3714,9 +3714,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     </ScaledCanvas>
                     <div className="mt-2">
                       {evalPageValidated && parseInt(a12EvalQ10Ans) !== (a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u) ? (
-                        <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${CLS_WRONG}`}>
-                          <span className="text-sm line-through text-amber-600">{a12EvalQ10Ans || "—"}</span>
-                          <span className="text-sm text-[var(--color-text-primary)]">{a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u}</span>
+                        <div className="flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 px-3">
+                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{a12EvalQ10Ans || "—"}</span>
+                          <span className="text-xs font-bold text-amber-600 leading-none">{a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u}</span>
                         </div>
                       ) : (
                         <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
@@ -3808,9 +3808,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     </div>
                     <div className="mt-2">
                       {evalPageValidated && parseInt(a12EvalQ12Ans) !== a12EvalQ12.answer ? (
-                        <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${CLS_WRONG}`}>
-                          <span className="text-sm line-through text-amber-600">{a12EvalQ12Ans || "—"}</span>
-                          <span className="text-sm text-[var(--color-text-primary)]">{a12EvalQ12.answer}</span>
+                        <div className="flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 px-3">
+                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{a12EvalQ12Ans || "—"}</span>
+                          <span className="text-xs font-bold text-amber-600 leading-none">{a12EvalQ12.answer}</span>
                         </div>
                       ) : (
                         <AppInput label="" id="a12eval-q12" value={a12EvalQ12Ans}
@@ -3942,9 +3942,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                               cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
                             } else if (wrong16) {
                               cells16.push(
-                                <div key={`${r}${c}`} className={`flex h-10 w-full items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-bold tabular-nums ${CLS_WRONG}`}>
-                                  <span className="line-through text-amber-500 text-xs">{ans||"—"}</span>
-                                  <span className="text-xs text-[var(--color-text-primary)]">{val.toLocaleString("fr-CH")}</span>
+                                <div key={`${r}${c}`} className={`flex h-10 w-full flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 text-sm font-bold tabular-nums`}>
+                                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{ans||"—"}</span>
+                                  <span className="text-xs font-bold text-amber-600 leading-none">{val.toLocaleString("fr-CH")}</span>
                                 </div>
                               );
                             } else {
@@ -4015,11 +4015,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
-                          <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${audioWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
+                          <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${audioWrong ? "border-amber-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
                             {audioWrong ? (
                               <>
-                                <span className="text-sm text-amber-600 line-through">{audioAns || "—"}</span>
-                                <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                                <span className="text-xs text-[var(--color-text-primary)] leading-none">{audioAns || "—"}</span>
+                                <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
                               </>
                             ) : (
                               <span className="text-sm font-medium text-[var(--color-text-primary)]">{audioAns}</span>
@@ -4052,11 +4052,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             const seriesAns = evalAnswers[ex.id] ?? "";
                             const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
                             return evalPageValidated ? (
-                              <div key={ni} className={`flex h-10 min-w-0 flex-1 items-center justify-center gap-1 rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? CLS_WRONG : "border-zinc-300 dark:border-zinc-600 bg-blue-50 dark:bg-blue-950/20"}`}>
+                              <div key={ni} className={`flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? "border-amber-400" : "border-zinc-300 dark:border-zinc-600 bg-blue-50 dark:bg-blue-950/20"}`}>
                                 {seriesWrong ? (
                                   <>
-                                    <span className="text-amber-600 line-through">{seriesAns || "—"}</span>
-                                    <span className="text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{seriesAns || "—"}</span>
+                                    <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
                                   </>
                                 ) : (
                                   <span className="text-[var(--color-text-primary)]">{seriesAns}</span>
@@ -4095,11 +4095,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
                   {evalPageValidated ? (
-                    <div className={`flex h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${genWrong ? CLS_WRONG : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
+                    <div className={`flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${genWrong ? "border-amber-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
                       {genWrong ? (
                         <>
-                          <span className="text-sm text-amber-600 line-through">{genAns || "—"}</span>
-                          <span className="text-sm text-[var(--color-text-primary)]">{ex.acceptable[0]}</span>
+                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{genAns || "—"}</span>
+                          <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
                         </>
                       ) : (
                         <span className="text-sm font-medium text-[var(--color-text-primary)]">{genAns}</span>
@@ -4359,12 +4359,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex19Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex19Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(loOk)}`}>
-                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="line-through">{a.lo || "—"}</span><span className="text-[var(--color-text-primary)]">{String(lo)}</span></>}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
+                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.lo || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(lo)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.lo}
@@ -4374,8 +4374,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-14 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(hiOk)}`}>
-                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="line-through">{a.hi || "—"}</span><span className="text-[var(--color-text-primary)]">{String(hi)}</span></>}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
+                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.hi || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(hi)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.hi}
@@ -4414,12 +4414,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const loOk = ex20Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex20Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
                     const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
-                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : CLS_WRONG;
+                    const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(loOk)}`}>
-                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="line-through">{a.lo || "—"}</span><span className="text-[var(--color-text-primary)]">{String(lo)}</span></>}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
+                            {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.lo || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(lo)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.lo}
@@ -4429,8 +4429,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-20 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex items-center justify-center gap-0.5 ${valCls(hiOk)}`}>
-                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="line-through">{a.hi || "—"}</span><span className="text-[var(--color-text-primary)]">{String(hi)}</span></>}
+                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
+                            {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.hi || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(hi)}</span></>}
                           </span>
                         ) : (
                           <input type="text" inputMode="numeric" className={fieldCls} value={a.hi}

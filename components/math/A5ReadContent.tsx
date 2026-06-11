@@ -52,9 +52,9 @@ function fmtNum(v: number): string {
 // Correction box (amber, stacked wrong/correct)
 function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-0.5 h-9 ${className}`}>
-      <span className="text-xs text-amber-600 line-through tabular-nums leading-none">{wrong || "—"}</span>
-      <span className="text-sm font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
+    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-400 px-2 py-0.5 h-9 ${className}`}>
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{wrong || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
 }
@@ -569,14 +569,14 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : validated && slotWrong[i]
-                    ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+                    ? "border-amber-400"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
               }`}
             >
               {validated && slotWrong[i]
                 ? <>
-                    <span className="text-xs text-amber-600 line-through leading-none">{s}</span>
-                    <span className="text-sm font-bold text-[var(--color-text-primary)] leading-none">{sorted[i]}</span>
+                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{s}</span>
+                    <span className="text-xs font-bold text-amber-600 leading-none">{sorted[i]}</span>
                   </>
                 : <span>{s ?? "—"}</span>
               }
@@ -957,8 +957,8 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                         {validated
                           ? isWrong
                             ? <text x={x} textAnchor="middle" fontSize="9">
-                                <tspan y={16} fill="#D97706" textDecoration="line-through">{vals[li]?.[ai] || "—"}</tspan>
-                                <tspan x={x} y={26} fontSize="11" fontWeight="bold" fill="currentColor">{expected}</tspan>
+                                <tspan y={16} fill="currentColor">{vals[li]?.[ai] || "—"}</tspan>
+                                <tspan x={x} y={26} fontSize="11" fontWeight="bold" fill="#D97706">{expected}</tspan>
                               </text>
                             : <text x={x} y={20} textAnchor="middle" fontSize="11" fontWeight="bold" fill="var(--color-accent-alg)">
                                 {vals[li]?.[ai] ?? ""}
@@ -1082,8 +1082,8 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
                   {assigned !== null && (
                     w ? (
                       <text x={x} textAnchor="middle" fontSize="9">
-                        <tspan y={lineY + 30} fill="#D97706" textDecoration="line-through">{fmtNum(assigned)}</tspan>
-                        <tspan x={x} y={lineY + 42} fontSize="10" fontWeight="bold" fill="currentColor">{fmtNum(v)}</tspan>
+                        <tspan y={lineY + 30} fill="currentColor">{fmtNum(assigned)}</tspan>
+                        <tspan x={x} y={lineY + 42} fontSize="10" fontWeight="bold" fill="#D97706">{fmtNum(v)}</tspan>
                       </text>
                     ) : (
                       <text x={x} y={lineY + 34} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--color-accent-alg)">

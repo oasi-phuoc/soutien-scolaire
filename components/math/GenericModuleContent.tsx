@@ -1388,19 +1388,19 @@ function ArithmeticGroupExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
-                  ? <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}><span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span><span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
@@ -1458,9 +1458,9 @@ function ColumnGridCard({
     const ok = validated ? cellOk(expected, val, col, firstNz ?? 0) : null;
     if (ok === false) {
       return (
-        <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
+          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
     }
@@ -1515,9 +1515,9 @@ function ColumnGridCard({
               return (
                 <td key={ci} className="text-center">
                   {carryWrong ? (
-                    <div className={`h-5 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[8px] leading-none">{carryVal || "—"}</span>
-                      <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expectedCarry}</span>
+                    <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
+                      <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{carryVal || "—"}</span>
+                      <span className="text-[8px] font-bold leading-none text-amber-600">{expectedCarry}</span>
                     </div>
                   ) : (
                     <input
@@ -1659,9 +1659,9 @@ function DivColumnCard({
   }) => {
     const ok = validated ? val.trim() === expected : null;
     if (ok === false) return (
-      <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-        <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-        <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+      <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
+        <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+        <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
       </div>
     );
     return (
@@ -1827,9 +1827,9 @@ function DivColumnCard({
             </td>
             <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
               {remOk === false
-                ? <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px] leading-none">{remainderInput || "—"}</span>
-                    <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{remainder}</span>
+                ? <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{remainderInput || "—"}</span>
+                    <span className="text-[9px] font-bold leading-none text-amber-600">{remainder}</span>
                   </div>
                 : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
                     onChange={e => onRemainderChange(cardIdx, e.target.value.replace(/[^0-9]/g, "").slice(0, 2))}
@@ -1900,9 +1900,9 @@ function Mul2DigitCard({
     const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
-        <div className={`h-8 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-          <span className="line-through text-amber-500 text-[9px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{expected}</span>
+        <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
+          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
     }
@@ -1928,9 +1928,9 @@ function Mul2DigitCard({
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className={`h-5 w-8 flex flex-col items-center justify-center ${CLS_WRONG}`}>
-          <span className="line-through text-amber-500 text-[8px] leading-none">{val || "—"}</span>
-          <span className="text-[var(--color-text-primary)] text-[8px] font-bold leading-none">{expected}</span>
+        <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
+          <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[8px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
     }
@@ -2152,9 +2152,9 @@ function RoundingExercise({
             const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
             const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
             const field = wrongField
-              ? <div className={`${inputBase} ${CLS_WRONG_INL} flex flex-col items-center justify-center overflow-hidden`}>
-                  <span className="line-through text-amber-500 text-[9px] leading-none">{v || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-[9px] font-bold leading-none">{q.answer}</span>
+              ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center overflow-hidden`}>
+                  <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                  <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
               : <input
                   type={isDecKind ? "text" : "number"}
@@ -2239,9 +2239,9 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
               <FracDisplay num={q.num} den={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
               {wrong ? (
-                <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center ${CLS_WRONG}`}>
-                  <span className="line-through text-amber-500 text-xs leading-none">{v||"—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{q.ask === "num" ? q.num : q.den}</span>
+                <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center border-amber-400`}>
+                  <span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{q.ask === "num" ? q.num : q.den}</span>
                 </div>
               ) : (
                 <input
@@ -2284,9 +2284,9 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
               {q.missingPos === "num" ? (
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   {wrong ? (
-                    <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
-                      <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                      <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
@@ -2300,9 +2300,9 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
-                    <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-[9px] leading-none">{v||"—"}</span>
-                      <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{correctAns}</span>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                      <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
@@ -2343,9 +2343,9 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
               <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
               <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                 {wrong ? (
-                  <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px] leading-none">{ans.num||"—"}</span>
-                    <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simNum}</span>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.num||"—"}</span>
+                    <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simNum}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
@@ -2353,9 +2353,9 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                 )}
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
-                  <div className={`w-12 flex flex-col items-center justify-center py-1 ${CLS_WRONG}`}>
-                    <span className="line-through text-amber-500 text-[9px] leading-none">{ans.den||"—"}</span>
-                    <span className="text-[9px] font-bold text-[var(--color-text-primary)] leading-none">{q.simDen}</span>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.den||"—"}</span>
+                    <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simDen}</span>
                   </div>
                 ) : (
                   <input type="number" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value)}
@@ -5233,9 +5233,9 @@ export function GenericModuleContent({
               const symCls = "shrink-0 text-sm font-bold text-[var(--color-text-secondary)]";
               const numCls = "w-20 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]";
               const firstBlock = wrong ? (
-                <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                  <span className="line-through text-amber-500 text-xs">{firstVal||"—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{firstExpected}</span>
+                <div className={`${inputCls} h-[2.125rem] border-amber-400 flex flex-col items-center justify-center`}>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{firstVal||"—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{firstExpected}</span>
                 </div>
               ) : (
                 <input type="number" inputMode="numeric" value={firstVal} disabled={encadrementValidated}
@@ -5243,9 +5243,9 @@ export function GenericModuleContent({
                   className={inputCls} />
               );
               const secondBlock = wrong ? (
-                <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                  <span className="line-through text-amber-500 text-xs">{secondVal||"—"}</span>
-                  <span className="text-xs font-bold text-[var(--color-text-primary)]">{secondExpected}</span>
+                <div className={`${inputCls} h-[2.125rem] border-amber-400 flex flex-col items-center justify-center`}>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{secondVal||"—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{secondExpected}</span>
                 </div>
               ) : (
                 <input type="number" inputMode="numeric" value={secondVal} disabled={encadrementValidated}
@@ -5293,7 +5293,7 @@ export function GenericModuleContent({
                       } else if (isSelected && isCorrect) {
                         cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (isSelected && !isCorrect) {
-                        cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
+                        cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (!isSelected && isCorrect && ok === false) {
                         cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
                       } else {
@@ -5341,9 +5341,9 @@ export function GenericModuleContent({
                   <div className="flex items-center gap-2">
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)] w-5">{i + 1}.</span>
                     {wrong ? (
-                      <div className={`${inputCls} ${CLS_WRONG} flex items-center gap-2`}>
-                        <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                        {q.mode === "read" && <span className="text-xs font-bold">{q.nlConfig.target}</span>}
+                      <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center gap-0.5`}>
+                        <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
+                        {q.mode === "read" && <span className="text-xs font-bold text-amber-600 leading-none">{q.nlConfig.target}</span>}
                       </div>
                     ) : (
                       <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
@@ -5447,9 +5447,9 @@ export function GenericModuleContent({
                     <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
                   ))}
                   {wrong ? (
-                    <div className={`${inputRowCls} ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                      <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                      <span className="text-xs font-bold">{correctAns}</span>
+                    <div className={`${inputRowCls} border-amber-400 flex flex-col items-center justify-center`}>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="text" value={v} disabled={seqRuleValidated}
@@ -5488,9 +5488,9 @@ export function GenericModuleContent({
                         const expected = q.allNums[ni]!;
                         const wrong = seqCompleteValidated && parseFloat(v) !== expected;
                         return wrong ? (
-                          <div key={ni} className={`${inputCls} ${CLS_WRONG} flex items-center justify-center gap-0.5`}>
-                            <span className="line-through text-amber-500 text-xs">{v||"—"}</span>
-                            <span className="text-xs font-bold">{expected.toLocaleString("fr-CH")}</span>
+                          <div key={ni} className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
+                            <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
+                            <span className="text-xs font-bold text-amber-600 leading-none">{expected.toLocaleString("fr-CH")}</span>
                           </div>
                         ) : (
                           <input key={ni} type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
@@ -5617,8 +5617,8 @@ export function GenericModuleContent({
                       <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                     ))}
                     {wrong ? (
-                      <div className={`h-9 px-1 text-sm font-mono ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                        <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
+                      <div className={`h-9 px-1 text-sm font-mono border-amber-400 flex flex-col items-center justify-center`}>
+                        <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
                     ) : (
@@ -5658,8 +5658,8 @@ export function GenericModuleContent({
                         const expected = q.allNums[ni]!;
                         const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
                         return wrong ? (
-                          <div key={ni} className={`h-9 px-1 font-mono text-sm ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                            <span className="line-through text-amber-500 text-xs leading-none">{v || "—"}</span>
+                          <div key={ni} className={`h-9 px-1 font-mono text-sm border-amber-400 flex flex-col items-center justify-center`}>
+                            <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
                             <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
                           </div>
                         ) : (
@@ -5930,9 +5930,9 @@ export function GenericModuleContent({
                     Du nombre <strong className="font-bold">{base}</strong>
                   </p>
                   {wrong ? (
-                    <div className={`${inputCls} flex flex-col justify-center ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{expected}</span>
+                    <div className={`${inputCls} flex flex-col justify-center border-amber-400`}>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={v} disabled={multListValidated}
@@ -6010,9 +6010,9 @@ export function GenericModuleContent({
                     Du nombre <strong className="font-bold">{q.number}</strong>
                   </p>
                   {ok === false ? (
-                    <div className={`w-full px-4 py-3 text-sm font-mono ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500">{v || "—"}</span>
-                      <span className="ml-3 font-bold text-[var(--color-text-primary)]">{q.divisors.join(", ")}</span>
+                    <div className={`w-full px-4 py-3 text-sm font-mono border border-amber-400 flex flex-col gap-0.5`}>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{q.divisors.join(", ")}</span>
                     </div>
                   ) : (
                     <input type="text" value={v} disabled={findDivisorsValidated}
@@ -6119,8 +6119,8 @@ export function GenericModuleContent({
                     {q.prefix}
                   {wrong ? (
                       <span className={`${inputCls} inline-flex h-6 flex-col items-center justify-center leading-none`}>
-                        <span className="text-[10px] font-bold leading-none text-amber-500 line-through">{v || "—"}</span>
-                        <span className="text-[10px] font-bold leading-none text-[var(--color-accent-alg)]">{q.validDigits[0]}</span>
+                        <span className="text-[10px] font-bold leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                        <span className="text-[10px] font-bold leading-none text-amber-600">{q.validDigits[0]}</span>
                       </span>
                   ) : (
                     <input type="text" inputMode="numeric" maxLength={1} value={v} disabled={missingDigitValidated}
@@ -6154,9 +6154,9 @@ export function GenericModuleContent({
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <span className="text-sm text-[var(--color-text-secondary)]">{formatNumsEt(q.nums)} =</span>
                   {wrong ? (
-                    <div className={`${inputCls} flex items-center justify-center gap-1 ${CLS_WRONG}`}>
-                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                      <span className="text-xs font-bold text-[var(--color-text-primary)]">{q.answer}</span>
+                    <div className={`${inputCls} flex flex-col items-center justify-center border-amber-400`}>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                     </div>
                   ) : (
                     <input type="number" inputMode="numeric" value={v} disabled={gcdLcmValidated}
@@ -6195,7 +6195,7 @@ export function GenericModuleContent({
                       } else if (isSelected && isCorrect) {
                         cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (isSelected && !isCorrect) {
-                        cls += CLS_WRONG;
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (!isSelected && isCorrect) {
                         cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
                       } else {

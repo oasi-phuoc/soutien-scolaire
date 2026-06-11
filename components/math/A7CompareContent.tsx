@@ -187,7 +187,8 @@ export function A7RelNumberSelectExercise({
               : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
           } else {
             if (isSelected && should) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-            else if ((isSelected && !should) || (!isSelected && should)) cls += CLS_WRONG;
+            else if (isSelected && !should) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+            else if (!isSelected && should) cls += CLS_WRONG;
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
           }
           return (
@@ -259,9 +260,9 @@ export function A7RelEncadrementExercise({
           const sndExp = dir === "<" ? q.hi : q.lo;
           const mkInput = (key: "lo" | "hi", exp: number) =>
             wrong ? (
-              <div className={`${inpBase} ${CLS_WRONG} flex items-center justify-center gap-1`}>
-                <span className="line-through text-amber-500 text-xs">{a[key] || "—"}</span>
-                <span className="text-xs font-bold">{fmtRel(exp)}</span>
+              <div className={`${inpBase} border-amber-400 flex flex-col items-center justify-center`}>
+                <span className="text-xs text-[var(--color-text-primary)] leading-none">{a[key] || "—"}</span>
+                <span className="text-xs font-bold text-amber-600 leading-none">{fmtRel(exp)}</span>
               </div>
             ) : (
               <input type="text" inputMode="numeric" value={a[key]} disabled={validated}
@@ -453,9 +454,9 @@ export function A7RelSeqCompleteExercise({
                   const v = answers[qi]?.[bIdx] ?? "";
                   const wrong = validated && Math.abs(normRel(v) - n) >= 0.001;
                   return wrong ? (
-                    <div key={ni} className={`${cellW} ${CLS_WRONG} flex items-center justify-center gap-0.5 rounded-lg border`}>
-                      <span className="line-through text-amber-500 text-xs">{v || "—"}</span>
-                      <span className="text-xs font-bold">{fmt(n)}</span>
+                    <div key={ni} className={`${cellW} border-amber-400 flex flex-col items-center justify-center rounded-lg border`}>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{fmt(n)}</span>
                     </div>
                   ) : (
                     <input key={ni} type="text" inputMode="decimal" value={v} disabled={validated}

@@ -96,10 +96,10 @@ function A1Ex1({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <RevAudioButton clips={q.clips} />
             {validated ? (
-              <div className={`flex flex-1 h-10 items-center gap-2 rounded-[var(--radius-md)] border px-3 ${ok ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
+              <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${ok ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : "border-amber-400"}`}>
                 {ok
                   ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{ans}</span>
-                  : <><span className="line-through text-amber-500 text-xs">{ans || "—"}</span><span className="text-sm font-bold text-[var(--color-text-primary)]">{q.answer}</span></>}
+                  : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span></>}
               </div>
             ) : (
               <input type="text" inputMode="numeric" value={ans} placeholder="Votre réponse…"
@@ -356,7 +356,7 @@ function A1Ex3({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                   <div className="flex flex-1 flex-col items-center gap-0.5">
                     {validated ? (
                       <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${vCls(field.ok)}`}>
-                        {field.ok ? <span>{a[field.key] || String(field.val)}</span> : <><span className="line-through text-xs">{a[field.key] || "—"}</span><span>{String(field.val)}</span></>}
+                        {field.ok ? <span>{a[field.key] || String(field.val)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a[field.key] || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(field.val)}</span></>}
                       </span>
                     ) : (
                       <input className={fieldBase} inputMode="numeric" autoComplete="off"
@@ -424,7 +424,7 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                 if (validated) {
                   if (sym === correct && sym !== sel) cls += ` ${CLS_WRONG}`;
                   else if (sym === sel && sym === correct) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
-                  else if (sym === sel && sym !== correct) cls += ` ${CLS_WRONG}`;
+                  else if (sym === sel && sym !== correct) cls += " border-teal-500 bg-teal-50 dark:bg-teal-950/30 text-[var(--color-text-primary)]";
                   else cls += " border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
                 } else {
                   cls += sel === sym
@@ -688,8 +688,8 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
           {validated ? (
             result === false ? (
               <text x={tx} textAnchor="middle">
-                <tspan y="28" fontSize="9" fill="#D97706" textDecoration="line-through">{answer || "—"}</tspan>
-                <tspan x={tx} y="40" fontSize="11" fontWeight="bold" fill="currentColor">{nl.target}</tspan>
+                <tspan y="28" fontSize="9" fill="currentColor">{answer || "—"}</tspan>
+                <tspan x={tx} y="40" fontSize="11" fontWeight="bold" fill="#D97706">{nl.target}</tspan>
               </text>
             ) : (
               <text x={tx} y="35" textAnchor="middle" fontSize="11" fontWeight="bold" fill={accent}>{answer}</text>

@@ -77,9 +77,9 @@ export function CorrectionInput({
 
   if (showCorrection) {
     return (
-      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono leading-tight`}>
-        {value.trim() && <span className="text-[10px] text-[var(--color-text-primary)]">{value}</span>}
-        <span className="text-sm font-semibold text-amber-600">{correct}</span>
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-amber-400 px-1 text-center font-mono leading-tight`}>
+        <span className="text-xs text-[var(--color-text-primary)] leading-none">{value.trim() || "—"}</span>
+        <span className="text-xs font-bold text-amber-600 leading-none">{correct}</span>
       </span>
     );
   }
