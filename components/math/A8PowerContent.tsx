@@ -1142,3 +1142,192 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
     </div>
   );
 }
+
+// ── A8.4 Exercise 1: Vrai / Faux ─────────────────────────────────────────────
+type SqrtTFQ = { expr: string; answer: boolean };
+const SQRT_TF_POOL: SqrtTFQ[] = [
+  { expr: "√1 = 1",   answer: true  },
+  { expr: "√4 = 2",   answer: true  },
+  { expr: "√9 = 3",   answer: true  },
+  { expr: "√16 = 4",  answer: true  },
+  { expr: "√25 = 5",  answer: true  },
+  { expr: "√36 = 6",  answer: true  },
+  { expr: "√49 = 7",  answer: true  },
+  { expr: "√64 = 8",  answer: true  },
+  { expr: "√81 = 9",  answer: true  },
+  { expr: "√100 = 10", answer: true },
+  { expr: "√4 = 3",   answer: false },
+  { expr: "√9 = 4",   answer: false },
+  { expr: "√16 = 5",  answer: false },
+  { expr: "√25 = 4",  answer: false },
+  { expr: "√36 = 7",  answer: false },
+  { expr: "√49 = 6",  answer: false },
+  { expr: "√64 = 7",  answer: false },
+  { expr: "√81 = 8",  answer: false },
+  { expr: "√100 = 9", answer: false },
+  { expr: "√25 = 6",  answer: false },
+];
+export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
+  exNum: number; count: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<SqrtTFQ[]>(() => {
+    const trues  = SQRT_TF_POOL.filter(q => q.answer).sort(() => Math.random() - 0.5);
+    const falses = SQRT_TF_POOL.filter(q => !q.answer).sort(() => Math.random() - 0.5);
+    const half = Math.floor(count / 2);
+    const mixed = [...trues.slice(0, count - half), ...falses.slice(0, half)];
+    return mixed.sort(() => Math.random() - 0.5);
+  });
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() => Array(count).fill(null));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prevCmd = useRef(-1);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand;
+      if (!validated) {
+        const res = questions.map((q, i) => answers[i] === q.answer);
+        setResults(res); setValidated(true);
+        onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+      }
+    }
+  }, [validateCommand, validated, questions, answers, onValidated]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
+      </div>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div className="grid items-center gap-x-3 gap-y-3"
+          style={{ gridTemplateColumns: "auto auto auto", justifyContent: "start" }}>
+          {questions.map((q, i) => {
+            const sel = answers[i];
+            const isWrong = validated && !results[i];
+            const isRight = validated && results[i];
+            return (
+              <Fragment key={i}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.expr}</span>
+                <span className="inline-flex gap-1">
+                  {(["Vrai", "Faux"] as const).map(label => {
+                    const val = label === "Vrai";
+                    const isSelected = sel === val;
+                    let cls = "px-3 py-1 rounded-lg border text-xs font-bold transition-colors ";
+                    if (validated) {
+                      if (val === q.answer) cls += "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400";
+                      else if (isSelected && isWrong) cls += "border-amber-500 bg-amber-50 text-amber-700 line-through dark:bg-amber-950/30";
+                      else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
+                    } else {
+                      cls += isSelected
+                        ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                        : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
+                    }
+                    return (
+                      <button key={label} type="button" disabled={validated}
+                        onClick={() => setAnswers(prev => { const n = [...prev]; n[i] = val; return n; })}
+                        className={cls}>
+                        {label}
+                      </button>
+                    );
+                  })}
+                </span>
+              </Fragment>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── A8.4 Exercise 2: Calculate √n ────────────────────────────────────────────
+const SQRT_POOL = [
+  { n: 1, sqrt: 1 }, { n: 4, sqrt: 2 }, { n: 9, sqrt: 3 },
+  { n: 16, sqrt: 4 }, { n: 25, sqrt: 5 }, { n: 36, sqrt: 6 },
+  { n: 49, sqrt: 7 }, { n: 64, sqrt: 8 }, { n: 81, sqrt: 9 },
+  { n: 100, sqrt: 10 }, { n: 121, sqrt: 11 }, { n: 144, sqrt: 12 },
+];
+type SqrtQ = { n: number; result: number };
+export function A8SqrtExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
+  exNum: number; count: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<SqrtQ[]>(() =>
+    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, count).map(q => ({ n: q.n, result: q.sqrt }))
+  );
+  return (
+    <PureCalcExercise
+      exNum={exNum} questions={questions} promptFr={promptFr}
+      validateCommand={validateCommand} onValidated={onValidated}
+      renderExpr={q => <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">√{q.n}</span>}
+    />
+  );
+}
+
+// ── A8.4 Exercise 3: Find the missing radicand (√□ = n) ──────────────────────
+type SqrtMissingQ = { sqrt: number; result: number };
+export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
+  exNum: number; count: number; promptFr?: string;
+  validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
+}) {
+  const [questions] = useState<SqrtMissingQ[]>(() =>
+    [...SQRT_POOL].sort(() => Math.random() - 0.5).slice(0, count).map(q => ({ sqrt: q.sqrt, result: q.n }))
+  );
+  const [answers, setAnswers] = useState<string[]>(() => Array(count).fill(""));
+  const [results, setResults] = useState<boolean[]>([]);
+  const [validated, setValidated] = useState(false);
+  const prevCmd = useRef(-1);
+  const doValidate = useCallback(() => {
+    const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.result));
+    setResults(res); setValidated(true);
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+  }, [answers, questions, onValidated]);
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand; doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        {promptFr && <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{promptFr}</p>}
+      </div>
+      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+        <div className="grid items-center gap-x-2 gap-y-3"
+          style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
+          {questions.map((q, i) => {
+            const val = answers[i] ?? "";
+            const wrongField = validated && !results[i];
+            const inputEl = wrongField ? (
+              <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
+                <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
+                <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{q.result}</span>
+              </div>
+            ) : (
+              <input type="text" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
+              />
+            );
+            return (
+              <Fragment key={i}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm font-bold inline-flex items-center gap-0.5">
+                  <span className="text-[var(--color-text-primary)]">√</span>
+                  {inputEl}
+                </span>
+                <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
+                <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{q.sqrt}</span>
+              </Fragment>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}

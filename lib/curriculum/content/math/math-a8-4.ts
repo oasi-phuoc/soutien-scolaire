@@ -5,7 +5,7 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.4",
     theory: {
       title: {
-        fr: "Racine carrée (carrés parfaits)",
+        fr: "Racine carrée",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -93,17 +93,6 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
       ],
     },
     exercises: [],
-    exercisePool: [
-      { id: "a8-4-ep01", promptFr: "√4 = ?", type: "number", acceptable: ["2"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep02", promptFr: "√9 = ?", type: "number", acceptable: ["3"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep03", promptFr: "√16 = ?", type: "number", acceptable: ["4"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep04", promptFr: "√25 = ?", type: "number", acceptable: ["5"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep05", promptFr: "√36 = ?", type: "number", acceptable: ["6"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep06", promptFr: "√49 = ?", type: "number", acceptable: ["7"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep07", promptFr: "√64 = ?", type: "number", acceptable: ["8"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep08", promptFr: "√81 = ?", type: "number", acceptable: ["9"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep09", promptFr: "√100 = ?", type: "number", acceptable: ["10"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-      { id: "a8-4-ep10", promptFr: "√144 = ?", type: "number", acceptable: ["12"], hintFr: "√n est le nombre positif qui, multiplié par lui-même, donne n. Mémorise les carrés parfaits."},
-    ],
-    poolSize: 5,
+    exercisePool: [],
+    poolSize: 0,
   };
