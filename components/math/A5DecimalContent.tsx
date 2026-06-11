@@ -43,6 +43,9 @@ const inputCls = (wrong: boolean) =>
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
 
+const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-[var(--color-accent-alg)]/5 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] focus:bg-[var(--color-accent-alg)]/10 disabled:opacity-70";
+const CELL_W = 32;
+
 // ── Generic decimal exercise (list of N questions) ───────────────────────────
 interface DecQuestion {
   label: string;
@@ -1077,30 +1080,30 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     const carryWrong = validated && expectedCarry !== null && val.trim() !== String(expectedCarry);
     if (carryWrong) {
       return (
-        <td key={carrySlot} className="w-8 text-center">
-          <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
-            <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
-            <span className="text-[9px] font-bold text-amber-600 leading-none">{expectedCarry}</span>
+        <td key={carrySlot} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+          <div className="h-5 w-8 border border-amber-400 flex flex-col items-center justify-center">
+            <span className="text-[8px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+            <span className="text-[8px] font-bold text-amber-600 leading-none">{expectedCarry}</span>
           </div>
         </td>
       );
     }
     return (
-      <td key={carrySlot} className="w-8 text-center">
+      <td key={carrySlot} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
         <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] text-orange-500" />
+          className={`h-5 w-8 px-0 text-[10px] text-orange-500 ${MATH_TEXT_INPUT_BASE}`} />
       </td>
     );
   }
 
   function cell(colIdx: number, digit: number | null, isInput: boolean, inputIdx: number) {
-    if (digit === null) return <td key={colIdx} className="w-8 text-center" />;
+    if (digit === null) return <td key={colIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center" />;
     if (!isInput) {
       return (
-        <td key={colIdx} className="w-8 text-center">
+        <td key={colIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
           <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
             {digit === 0 && colIdx === 0 ? "" : digit}
           </div>
@@ -1112,8 +1115,8 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     const ok = validated ? (val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
-        <td key={colIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center">
+        <td key={colIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+          <div className="h-8 w-8 border border-amber-400 flex flex-col items-center justify-center">
             <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
             <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
           </div>
@@ -1121,12 +1124,12 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
       );
     }
     return (
-      <td key={colIdx} className="w-8 text-center">
+      <td key={colIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
         <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded-none border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+          className={`h-8 w-8 px-0 text-sm ${MATH_TEXT_INPUT_BASE}`} />
       </td>
     );
   }
@@ -1139,35 +1142,35 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
 
   return (
     <div data-dec-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
-      <table className="mx-auto border-collapse">
+      <table className="mx-auto border-collapse table-fixed">
         <thead>
           <tr>
-            <td className="w-6" />
+            <td style={{ width: 24, padding: 0 }} />
             {labels.map((l, i) => (
-              <th key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
+              <th key={i} style={{ width: CELL_W, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {/* Carry row (R) */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
             {carryInputCell(0)}
             {carryInputCell(1)}
             {carryInputCell(2)}
-            <td className="w-8" />
+            <td style={{ width: CELL_W, padding: 2 }} />
             {carryInputCell(3)}
-            {q.is2Dec ? carryInputCell(4) : <td className="w-8" />}
+            {q.is2Dec ? carryInputCell(4) : <td style={{ width: CELL_W, padding: 2 }} />}
           </tr>
           {opRows.map((row, ri) => (
             <tr key={ri}>
-              <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">
+              <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">
                 {ri === 0 ? "" : q.op}
               </td>
               {row.map((digit, ci) => {
                 if (ci === 3) {
                   return (
-                    <td key={ci} className="w-8 text-center">
+                    <td key={ci} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                       <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
                     </td>
                   );
@@ -1175,7 +1178,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
                 const actualDigit = digit as number;
                 const isLeading = (ci === 0 && actualDigit === 0) || (ci === 1 && actualDigit === 0 && (row[0] as number) === 0);
                 return (
-                  <td key={ci} className="w-8 text-center">
+                  <td key={ci} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                     <div className="h-8 w-8 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">
                       {isLeading ? "" : actualDigit}
                     </div>
@@ -1186,7 +1189,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
           ))}
           <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {/* C column */}
             {cell(0, rc, true, 0)}
             {/* D column */}
@@ -1194,13 +1197,13 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
             {/* U column */}
             {cell(2, ru, true, 2)}
             {/* comma */}
-            <td className="w-8 text-center">
+            <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
               <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
             </td>
             {/* dx column */}
             {cell(4, rdx, true, 3)}
             {/* cx column */}
-            {q.is2Dec ? cell(5, rcx, true, 4) : <td key={5} className="w-8 text-center" />}
+            {q.is2Dec ? cell(5, rcx, true, 4) : <td key={5} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center" />}
           </tr>
         </tbody>
       </table>
@@ -1298,8 +1301,8 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
       : null;
     if (ok === false) {
       return (
-        <td key={inputIdx} className="w-8 text-center">
-          <div className="h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center">
+        <td key={inputIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
+          <div className="h-8 w-8 border border-amber-400 flex flex-col items-center justify-center">
             <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
             <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
           </div>
@@ -1307,18 +1310,18 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
       );
     }
     return (
-      <td key={inputIdx} className="w-8 text-center">
+      <td key={inputIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
         <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, inputIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded-none border text-center font-mono text-sm outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]" />
+          className={`h-8 w-8 px-0 text-sm ${MATH_TEXT_INPUT_BASE}`} />
       </td>
     );
   }
 
   const commaCell = (key: string) => (
-    <td key={key} className="w-8 text-center">
+    <td key={key} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
       <div className="h-8 w-8 flex items-center justify-center font-mono text-base font-bold text-[var(--color-text-secondary)]">,</div>
     </td>
   );
@@ -1326,12 +1329,12 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
   function carryCell(carryIdx: number) {
     const val = cellAnswers[15 + carryIdx] ?? "";
     return (
-      <td key={carryIdx} className="w-8 text-center">
+      <td key={carryIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
         <input type="text" inputMode="numeric" maxLength={1} value={val} disabled={validated}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(cardIdx, 15 + carryIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
           onKeyDown={tabNav}
           onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-          className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]" />
+          className={`h-5 w-8 px-0 text-[10px] text-orange-500 ${MATH_TEXT_INPUT_BASE}`} />
       </td>
     );
   }
@@ -1341,25 +1344,25 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
       <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
         {hundredthsToStr(q.aH)} {q.op} {hundredthsToStr(q.bH)}
       </p>
-      <table className="mx-auto border-collapse">
+      <table className="mx-auto border-collapse table-fixed">
         <thead>
           <tr>
-            <td className="w-6" />
+            <td style={{ width: 24, padding: 0 }} />
             {labels.map((l, i) => (
-              <th key={i} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
+              <th key={i} style={{ width: CELL_W, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{l}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {/* Carry row */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R</td>
             {carryCell(0)}{carryCell(1)}{carryCell(2)}
-            <td className="w-8" />
+            <td style={{ width: CELL_W, padding: 2 }} />
             {carryCell(3)}{carryCell(4)}
           </tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {inputCell(0, ac, 0 < firstNzA)}
             {inputCell(1, ad, 1 < firstNzA)}
             {inputCell(2, au, 2 < firstNzA)}
@@ -1368,7 +1371,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
             {inputCell(4, acx, false)}
           </tr>
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
             {inputCell(5, bc, 0 < firstNzB)}
             {inputCell(6, bd, 1 < firstNzB)}
             {inputCell(7, bu, 2 < firstNzB)}
@@ -1378,7 +1381,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
           </tr>
           <tr><td colSpan={7}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {inputCell(10, rc, 0 < firstNzR)}
             {inputCell(11, rd, 1 < firstNzR)}
             {inputCell(12, ru, 2 < firstNzR)}
@@ -1703,7 +1706,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
-        <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
+        <div className="h-8 w-8 border border-amber-400 flex flex-col items-center justify-center">
           <span className="text-[9px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
           <span className="text-[9px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
@@ -1714,10 +1717,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCellChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors ${
-          ok === null ? "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/30"
-          : "border-[var(--color-border-default)]"
-        }`}
+        className={`h-8 w-8 px-0 text-base ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -1728,7 +1728,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const expected = expectedCarries[col];
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
-        <div className="h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center">
+        <div className="h-5 w-8 border border-amber-400 flex flex-col items-center justify-center">
           <span className="text-[8px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
           <span className="text-[8px] font-bold text-amber-600 leading-none">{expected}</span>
         </div>
@@ -1739,7 +1739,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { const v = e.target.value.replace(/[^0-9]/g,"").slice(-1); onCarryChange(cardIdx, idx, v); }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className={`h-5 w-8 px-0 text-[10px] text-orange-500 ${MATH_TEXT_INPUT_BASE}`}
       />
     );
   };
@@ -1757,65 +1757,65 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
       <p className="text-center text-xs text-[var(--color-text-secondary)]">
         {q.aStr} × {q.bStr}
       </p>
-      <table className="mx-auto border-collapse">
+      <table className="mx-auto border-collapse table-fixed">
         <thead>
           <tr>
-            <td className="w-6" />
+            <td style={{ width: 24, padding: 0 }} />
             {colLabels.map(h => (
-              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+              <th key={h} style={{ width: CELL_W, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
-            {visibleCols.map(col => <td key={col} className="text-center">{carryCell(5, col, q.carries2)}</td>)}
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            {visibleCols.map(col => <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{carryCell(5, col, q.carries2)}</td>)}
           </tr>
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
-            {visibleCols.map(col => <td key={col} className="text-center">{carryCell(0, col, q.carries1)}</td>)}
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            {visibleCols.map(col => <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{carryCell(0, col, q.carries1)}</td>)}
           </tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
               </td>
             ))}
           </tr>
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 <Prefilled digit={bd[col]!} isLeading={col < (bd.findIndex(d => d !== 0))} />
               </td>
             ))}
           </tr>
           <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput(0, col, p1d[col]!, firstNzP1)}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput(0, col, p1d[col]!, firstNzP1)}</td>
             ))}
           </tr>
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
             {visibleCols.map(col => {
               if (col === 4) return (
-                <td key={col} className="text-center">
+                <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                   <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
                 </td>
               );
               const expected = p2d[col + 1]!;
               const fNz2 = firstNzP2s < 0 ? 5 : firstNzP2s;
-              return <td key={col} className="text-center">{cellInput(5, col, expected, fNz2)}</td>;
+              return <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput(5, col, expected, fNz2)}</td>;
             })}
           </tr>
           <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput(10, col, rd[col]!, firstNzR)}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput(10, col, rd[col]!, firstNzR)}</td>
             ))}
           </tr>
         </tbody>

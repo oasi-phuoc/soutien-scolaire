@@ -1495,25 +1495,25 @@ function ColumnGridCard({
           {formatCompNum(q.a)} {q.op} {formatCompNum(q.b)}
         </p>
       )}
-      <table className="mx-auto border-collapse">
+      <table className="mx-auto border-collapse table-fixed">
         <thead>
           <tr>
-            <td className="w-6" />
+            <td style={{ width: 24, padding: 0 }} />
             {COL_LABELS.map(h => (
-              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+              <th key={h} style={{ width: CELL_W, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {/* Carry / borrow row — input fields */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" || q.op === "×" ? "R" : "E"}</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" || q.op === "×" ? "R" : "E"}</td>
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
               const carryWrong = validated && expectedCarry !== null && carryVal.trim() !== expectedCarry;
               return (
-                <td key={ci} className="text-center">
+                <td key={ci} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                   {carryWrong ? (
                     <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
                       <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{carryVal || "—"}</span>
@@ -1541,18 +1541,18 @@ function ColumnGridCard({
           </tr>
           {/* Operand 1 */}
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {[0, 1, 2, 3].map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {preFilledOperands ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} /> : cellInput({ base: 0, col, expected: ad[col]!, firstNz: firstNzA })}
               </td>
             ))}
           </tr>
           {/* Operand 2 */}
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</td>
             {[0, 1, 2, 3].map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {preFilledOperands ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} /> : cellInput({ base: 4, col, expected: bd[col]!, firstNz: firstNzB })}
               </td>
             ))}
@@ -1561,9 +1561,9 @@ function ColumnGridCard({
           <tr><td colSpan={5}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Result */}
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {[0, 1, 2, 3].map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {cellInput({ base: resBase, col, expected: rd[col]!, firstNz: firstNzR })}
               </td>
             ))}
@@ -1951,35 +1951,35 @@ function Mul2DigitCard({
           {formatCompNum(q.a)} × {formatCompNum(q.b)}
         </p>
       )}
-      <table className="mx-auto border-collapse">
+      <table className="mx-auto border-collapse table-fixed">
         <thead>
           <tr>
-            <td className="w-6" />
+            <td style={{ width: 24, padding: 0 }} />
             {colLabels.map(h => (
-              <th key={h} className="w-8 text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
+              <th key={h} style={{ width: CELL_W, padding: 0 }} className="text-center text-[10px] font-bold text-[var(--color-accent-alg)]">{h}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {/* R2 — carries for tens-digit multiplication (shown first/top) */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{carryCell(5, col, q.carries2)}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{carryCell(5, col, q.carries2)}</td>
             ))}
           </tr>
           {/* R1 — carries for units-digit multiplication */}
           <tr>
-            <td className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{carryCell(0, col, q.carries1)}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{carryCell(0, col, q.carries1)}</td>
             ))}
           </tr>
           {/* Operand a */}
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {preFilledOperands
                   ? <Prefilled digit={ad[col]!} isLeading={col < firstNzA} />
                   : cellInput({base: aBase, col, expected: ad[col]!, firstNz: firstNzA})}
@@ -1988,9 +1988,9 @@ function Mul2DigitCard({
           </tr>
           {/* Operand b */}
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
             {visibleCols.map(col => (
-              <td key={col} className="text-center">
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {preFilledOperands
                   ? <Prefilled digit={bd[col]!} isLeading={col < firstNzB} />
                   : cellInput({base: bBase, col, expected: bd[col]!, firstNz: firstNzB})}
@@ -2001,33 +2001,33 @@ function Mul2DigitCard({
           <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Partial product 1 (a × bUnits) */}
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput({base: p1Base, col, expected: p1d[col]!, firstNz: firstNzP1})}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput({base: p1Base, col, expected: p1d[col]!, firstNz: firstNzP1})}</td>
             ))}
           </tr>
           {/* Partial product 2 shifted (a × bTens × 10) */}
           <tr>
-            <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
             {visibleCols.map(col => {
               if (col === 4) {
                 // Fixed "0" in units position — shown in accent colour
                 return (
-                  <td key={col} className="text-center">
+                  <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                     <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
                   </td>
                 );
               }
-              return <td key={col} className="text-center">{cellInput({base: p2Base, col, expected: p2ShiftedDigit(col), firstNz: firstNzP2s < 0 ? 5 : firstNzP2s})}</td>;
+              return <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput({base: p2Base, col, expected: p2ShiftedDigit(col), firstNz: firstNzP2s < 0 ? 5 : firstNzP2s})}</td>;
             })}
           </tr>
           {/* Separator 2 */}
           <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
           {/* Result */}
           <tr>
-            <td />
+            <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
-              <td key={col} className="text-center">{cellInput({base: rBase, col, expected: rd[col]!, firstNz: firstNzR})}</td>
+              <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput({base: rBase, col, expected: rd[col]!, firstNz: firstNzR})}</td>
             ))}
           </tr>
         </tbody>
