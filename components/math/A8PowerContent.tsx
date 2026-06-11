@@ -1206,7 +1206,6 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
           {questions.map((q, i) => {
             const sel = answers[i];
             const isWrong = validated && !results[i];
-            const isRight = validated && results[i];
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
