@@ -18,20 +18,34 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
           type: "plain",
           fr: "Pour calculer une puissance, on multiplie la base par elle-même autant de fois que l'indique l'exposant.",
         },
+        { type: "highlight", fr: "Addition et soustraction" },
         {
-          type: "table",
-          headersFr: ["Puissance", "Développement", "Résultat"],
-          accentHeader: true,
-          rows: [
-            ["2⁴", "2 × 2 × 2 × 2", "16"],
-            ["3³", "3 × 3 × 3", "27"],
-            ["5²", "5 × 5", "25"],
-            ["10³", "10 × 10 × 10", "1 000"],
+          type: "plain",
+          fr: "Quand il y a une addition ou une soustraction de puissances, il faut toujours commencer par calculer chaque puissance séparément. Puis additionner ou soustraire les résultats.",
+        },
+        { type: "plain", fr: "2³ + 3²" },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "2³ = 2 × 2 × 2 = 8",
+            "3² = 3 × 3 = 9",
+            "→ 8 + 9 = 17",
+          ],
+        },
+        { type: "plain", fr: "5² − 3²" },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "5² = 5 × 5 = 25",
+            "3² = 3 × 3 = 9",
+            "→ 25 − 9 = 16",
           ],
         },
         {
           type: "heading",
-          fr: "Propriétés des puissances (même base)",
+          fr: "Propriétés des puissances de même base",
           black: true,
         },
         {
