@@ -43,11 +43,6 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
             "→ 25 − 9 = 16",
           ],
         },
-        {
-          type: "heading",
-          fr: "Propriétés des puissances de même base",
-          black: true,
-        },
         { type: "highlight", fr: "Multiplication" },
         { type: "plain", fr: "Lorsque l'on multiplie deux puissances qui ont la même base, on conserve la base et on additionne les exposants." },
         { type: "plain", fr: "aᵐ × aⁿ = aᵐ⁺ⁿ" },
