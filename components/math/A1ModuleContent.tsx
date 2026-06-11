@@ -1730,8 +1730,7 @@ function ExerciseRow({
       ) : (
         <AppInput label="" id={inputId} value={answer}
           onChange={(e) => onChange(e.target.value)}
-          placeholder="en lettres…" autoComplete="off"
-          className="!bg-blue-50 dark:!bg-blue-950/30" />
+          placeholder="en lettres…" autoComplete="off" />
       )}
     </div>
   );
@@ -2834,7 +2833,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   ) : (
                     <AppInput label="" id={`ex4-${i}`} value={ex4Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex4Answers]; n[i] = e.target.value.replace(/[^0-9]/g, ""); setEx4Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
                   )}
                 </div>
               );
@@ -2878,7 +2877,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   ) : (
                     <AppInput label="" id={`ex5-${i}`} value={ex5Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex5Answers]; n[i] = e.target.value.replace(/[^0-9]/g, ""); setEx5Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
                   )}
                 </div>
               );
@@ -2922,7 +2921,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   ) : (
                     <AppInput label="" id={`ex6-${i}`} value={ex6Answers[i] ?? ""}
                       onChange={(e) => { const n = [...ex6Answers]; n[i] = e.target.value.replace(/[^0-9]/g, ""); setEx6Answers(n); }}
-                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" className="!bg-blue-50 dark:!bg-blue-950/30" />
+                      placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
                   )}
                 </div>
               );
@@ -2983,7 +2982,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       );
                     }
                     return (
-                      <div key={u} className="aspect-square border-b border-r border-zinc-300 bg-blue-100 dark:border-zinc-600 dark:bg-blue-900/30">
+                      <div key={u} className="aspect-square border-b border-r border-zinc-300 dark:border-zinc-600">
                         <input
                           type="text" inputMode="numeric"
                           value={ex7Answers[key] ?? ""}
@@ -3046,7 +3045,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             key={i} type="text" inputMode="numeric"
                             value={ex8Answers[ansKey] ?? ""}
                             onChange={(e) => setEx8Answers((prev) => ({ ...prev, [ansKey]: e.target.value.replace(/[^0-9]/g, "") }))}
-                            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                            className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500"
                             aria-label={`Série ${si + 1}, position ${i + 1}`}
                           />
                         );
@@ -4028,8 +4027,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         ) : (
                           <AppInput label="" id={`eval-${ex.id}`} value={audioAns}
                             onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                            placeholder="chiffre…" autoComplete="off" inputMode="numeric"
-                            className="!bg-blue-50 dark:!bg-blue-950/30" />
+                            placeholder="chiffre…" autoComplete="off" inputMode="numeric" />
                         )}
                       </div>
                     );
@@ -4066,7 +4064,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                               <input key={ni} type="text" inputMode="numeric"
                                 value={seriesAns}
                                 onChange={(e) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: e.target.value.replace(/[^0-9]/g, "") }))}
-                                className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 bg-blue-50 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500 dark:bg-blue-950/20"
+                                className="h-10 min-w-0 flex-1 rounded-[var(--radius-md)] border border-zinc-400 text-center text-sm font-medium tabular-nums outline-none dark:border-zinc-500"
                               />
                             );
                           }
