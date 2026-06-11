@@ -5,7 +5,7 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.3",
     theory: {
       title: {
-        fr: "",
+        fr: "Puissances de 10 et notation scientifique",
       },
       paragraphs: { fr: [] },
       blocks: [
