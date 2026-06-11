@@ -235,7 +235,7 @@ function RelArithExercise({
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
-  const inputBase = "w-20 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors";
+  const inputBase = "w-20 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors";
 
   return (
     <div className="space-y-4">
@@ -256,7 +256,7 @@ function RelArithExercise({
       <div className="rounded-xl border border-[var(--color-border-default)] p-4">
         <div
           className="grid items-center justify-items-center gap-x-2 gap-y-3"
-          style={{ gridTemplateColumns: "auto auto auto auto auto auto" }}
+          style={{ gridTemplateColumns: "auto auto auto auto auto auto", justifyContent: "start" }}
         >
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
@@ -276,7 +276,7 @@ function RelArithExercise({
                   value={val}
                   disabled={validated}
                   onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
-                  className={`${inputBase} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
+                  className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 />
               );
 

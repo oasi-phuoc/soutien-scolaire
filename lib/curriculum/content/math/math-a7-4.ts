@@ -13,13 +13,18 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
 
       { type: "plain", fr: "La même règle des signes s'applique pour la multiplication (**×**) et la division (**÷**)." },
 
+      { type: "plain", fr: "Mêmes signes → résultat **positif** (+)" },
+      { type: "plain", fr: "Signes contraires → résultat **négatif** (−)" },
+
       {
         type: "table",
-        headersFr: [],
-        colAligns: ["left", "left"],
+        headersFr: ["Signes", "Résultat"],
+        accentHeader: true,
         rows: [
-          ["Mêmes signes", "**→** résultat **positif** (+)"],
-          ["Signes contraires", "**→** résultat **négatif** (−)"],
+          ["(**+**) × (**+**)\n(**+**) ÷ (**+**)", "**+** (positif)"],
+          ["(**−**) × (**−**)\n(**−**) ÷ (**−**)", "**+** (positif)"],
+          ["(**+**) × (**−**)\n(**+**) ÷ (**−**)", "**−** (négatif)"],
+          ["(**−**) × (**+**)\n(**−**) ÷ (**+**)", "**−** (négatif)"],
         ],
       },
 
@@ -64,18 +69,6 @@ export const MATH_A7_4_LESSON: MathSubmoduleLesson = {
         itemsFr: [
           "(+6) ÷ (−3) = −2",
           "(−6) ÷ (+3) = −2",
-        ],
-      },
-
-      {
-        type: "table",
-        headersFr: ["Signes", "Résultat"],
-        accentHeader: true,
-        rows: [
-          ["(**+**) × (**+**)\n(**+**) ÷ (**+**)", "**+** (positif)"],
-          ["(**−**) × (**−**)\n(**−**) ÷ (**−**)", "**+** (positif)"],
-          ["(**+**) × (**−**)\n(**+**) ÷ (**−**)", "**−** (négatif)"],
-          ["(**−**) × (**+**)\n(**−**) ÷ (**+**)", "**−** (négatif)"],
         ],
       },
     ],

@@ -1049,7 +1049,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
     case "table":
       return (
         <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
-          <table className="min-w-full text-xs">
+          <table className="min-w-full text-sm">
             {block.headersFr.length > 0 && (
               <thead>
                 <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
