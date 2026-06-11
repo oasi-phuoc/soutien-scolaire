@@ -23,7 +23,7 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
           type: "section",
           labelFr: "",
           itemsFr: [
-            "**1.** Parenthèses ( )",
+            "**1.** Parenthèses ( ), crochets [ ] et accolades { } — de l'intérieur vers l'extérieur",
             "**2.** Puissances et racines carrées",
             "**3.** Multiplications × et divisions ÷ (de gauche à droite)",
             "**4.** Additions + et soustractions − (de gauche à droite)",
@@ -71,12 +71,28 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
           ],
         },
         { type: "plain", fr: "" },
+        {
+          type: "plain",
+          fr: "{[2 + (3 × 4)] − 5} × 2",
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "Parenthèses ( ) : 3 × 4 = 12  →  {[2 + 12] − 5} × 2",
+            "Crochets [ ] : 2 + 12 = 14  →  {14 − 5} × 2",
+            "Accolades { } : 14 − 5 = 9  →  9 × 2",
+            "Multiplication : 9 × 2 = **18**",
+          ],
+        },
+        { type: "plain", fr: "" },
         { type: "highlight", fr: "Attention" },
         {
           type: "section",
           labelFr: "",
           itemsFr: [
             "Les parenthèses changent toujours le résultat.",
+            "Quand il y a plusieurs niveaux, on commence par les parenthèses ( ), puis les crochets [ ], puis les accolades { }.",
             "Multiplication et division ont la même priorité : on opère de gauche à droite.",
             "Addition et soustraction ont la même priorité : on opère de gauche à droite.",
           ],
@@ -84,17 +100,6 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
       ],
     },
     exercises: [],
-    exercisePool: [
-      { id: "a8-5-ep01", promptFr: "√2 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["1"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep02", promptFr: "√5 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["2"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep03", promptFr: "√7 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["2"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep04", promptFr: "√10 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["3"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep05", promptFr: "√15 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["3"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep06", promptFr: "√20 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["4"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep07", promptFr: "√30 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["5"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep08", promptFr: "√40 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["6"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep09", promptFr: "√50 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["7"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-      { id: "a8-5-ep10", promptFr: "√3 est comprise entre □ et □+1. Donne le plus petit entier.", type: "number", acceptable: ["1"], hintFr: "Cherche l'entier k tel que k² ≤ n < (k+1)². Alors √n est entre k et k+1."},
-    ],
-    poolSize: 5,
+    exercisePool: [],
+    poolSize: 0,
   };
