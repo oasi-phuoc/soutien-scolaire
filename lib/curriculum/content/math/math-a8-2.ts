@@ -54,7 +54,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
             "2³ = 2 × 2 × 2",
             "2² = 2 × 2",
             "(2 × 2 × 2) × (2 × 2)",
-            "2 × 2 × 2 × 2 × 2 = 2⁵ = 32",
+            "**→** 2 × 2 × 2 × 2 × 2 = 2⁵ = 32",
           ],
         },
         { type: "highlight", fr: "Division" },
@@ -67,7 +67,8 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
           itemsFr: [
             "2⁵ = 2 × 2 × 2 × 2 × 2",
             "2² = 2 × 2",
-            "(2 × 2 × 2 × 2 × 2) ÷ (2 × 2) = 2 × 2 × 2 = 2³ = 8",
+            "(2 × 2 × 2 × 2 × 2) ÷ (2 × 2)",
+            "**→** 2 × 2 × 2 = 2³ = 8",
           ],
         },
       ],
