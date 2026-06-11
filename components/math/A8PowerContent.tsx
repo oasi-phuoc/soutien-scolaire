@@ -559,8 +559,8 @@ function PureCalcExercise<Q extends { result: number }>({
 type MultQ = { base: number; exp1: number; exp2: number; result: number };
 function genMultQ(): MultQ {
   let base = 2, exp1 = 1, exp2 = 1;
-  do { base = rnd(2, 7); exp1 = rnd(1, 4); exp2 = rnd(1, 4); }
-  while (base ** (exp1 + exp2) > 8000);
+  do { base = rnd(2, 6); exp1 = rnd(1, 3); exp2 = rnd(1, 3); }
+  while (base ** (exp1 + exp2) > 1000);
   return { base, exp1, exp2, result: base ** (exp1 + exp2) };
 }
 export function A8MultExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
@@ -580,9 +580,9 @@ export function A8MultExercise({ exNum, count, promptFr, validateCommand, onVali
 // ── Ex: Divide same base (aⁿ ÷ aᵐ = aⁿ⁻ᵐ) ────────────────────────────────
 type DivQ = { base: number; exp1: number; exp2: number; result: number };
 function genDivQ(): DivQ {
-  const base = rnd(2, 7);
-  const exp2 = rnd(1, 3);
-  const exp1 = exp2 + rnd(1, 3);
+  const base = rnd(2, 6);
+  const exp1 = rnd(2, 3);
+  const exp2 = rnd(1, exp1 - 1);
   return { base, exp1, exp2, result: base ** (exp1 - exp2) };
 }
 export function A8DivExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
@@ -603,8 +603,8 @@ export function A8DivExercise({ exNum, count, promptFr, validateCommand, onValid
 type PowPowQ = { base: number; exp1: number; exp2: number; result: number };
 function genPowPowQ(): PowPowQ {
   let base = 2, exp1 = 2, exp2 = 2;
-  do { base = rnd(2, 5); exp1 = rnd(2, 4); exp2 = rnd(2, 3); }
-  while (base ** (exp1 * exp2) > 5000);
+  do { base = rnd(2, 4); exp1 = rnd(2, 3); exp2 = rnd(2, 3); }
+  while (base ** (exp1 * exp2) > 1000);
   return { base, exp1, exp2, result: base ** (exp1 * exp2) };
 }
 export function A8PowPowExercise({ exNum, count, promptFr, validateCommand, onValidated }: {
@@ -633,13 +633,13 @@ type MixedQ =
 function genMixedQ(): MixedQ {
   if (Math.random() < 0.5) {
     let base = 2, n = 2, m = 1, p = 1;
-    do { base = rnd(2, 5); n = rnd(2, 4); m = rnd(1, 3); p = rnd(1, n + m - 1); }
-    while (base ** (n + m - p) > 1000);
+    do { base = rnd(2, 4); n = rnd(2, 3); m = rnd(1, 2); p = rnd(1, n + m - 1); }
+    while (base ** (n + m - p) > 500);
     return { type: "mult_div", base, n, m, p, result: base ** (n + m - p) };
   } else {
     let base = 2, n = 2, m = 2, p = 1;
-    do { base = rnd(2, 4); n = rnd(2, 3); m = rnd(2, 3); p = rnd(1, n * m - 1); }
-    while (base ** (n * m - p) > 1000);
+    do { base = rnd(2, 3); n = rnd(2, 3); m = rnd(2, 3); p = rnd(1, n * m - 1); }
+    while (base ** (n * m - p) > 500);
     return { type: "pow_div", base, n, m, p, result: base ** (n * m - p) };
   }
 }

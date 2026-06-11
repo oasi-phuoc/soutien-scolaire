@@ -37,7 +37,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
         },
         { type: "heading", fr: "Multiplication", black: true },
         { type: "plain", fr: "Lorsque l'on multiplie deux puissances qui ont la même base, on conserve la base et on additionne les exposants." },
-        { type: "rule", titleFr: "", itemsFr: ["a**ᵐ** × a**ⁿ** = a**ᵐ⁺ⁿ**"] },
+        { type: "table", headersFr: ["aᵐ × aⁿ = aᵐ⁺ⁿ"], accentHeader: true, rows: [] },
         { type: "plain", fr: "2**³** × 2**²** = 2**³⁺²** = 2**⁵** = 32" },
         {
           type: "section",
@@ -51,7 +51,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
         },
         { type: "heading", fr: "Division", black: true },
         { type: "plain", fr: "Lorsque l'on divise deux puissances qui ont la même base, on conserve la base et on soustrait les exposants." },
-        { type: "rule", titleFr: "", itemsFr: ["a**ⁿ** ÷ a**ᵐ** = a**ⁿ⁻ᵐ**"] },
+        { type: "table", headersFr: ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"], accentHeader: true, rows: [] },
         { type: "plain", fr: "2**⁵** ÷ 2**²** = 2**⁵⁻²** = 2**³** = 8" },
         {
           type: "section",
@@ -65,7 +65,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
         },
         { type: "heading", fr: "Puissance d'une puissance", black: true },
         { type: "plain", fr: "Lorsqu'une puissance est elle-même élevée à une autre puissance, on conserve la base et on multiplie les exposants." },
-        { type: "rule", titleFr: "", itemsFr: ["(a**ᵐ**)**ⁿ** = a**ᵐˣⁿ**"] },
+        { type: "table", headersFr: ["(aᵐ)ⁿ = aᵐˣⁿ"], accentHeader: true, rows: [] },
         { type: "plain", fr: "(2**³**)**²**" },
         {
           type: "section",
