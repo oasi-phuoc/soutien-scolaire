@@ -16,25 +16,40 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "plain",
-          fr: "La racine carrée est l'opération inverse de la puissance 2. √a est le nombre positif tel que (√a)² = a.",
+          fr: "La racine carrée d'un nombre est le nombre qui, multiplié par lui-même, donne ce nombre.",
         },
         {
-          type: "rule",
-          titleFr: "Question clé",
+          type: "plain",
+          fr: "La racine carrée est l'opération inverse de la puissance 2.",
+        },
+        {
+          type: "section",
+          labelFr: "",
           itemsFr: [
-            "Quel nombre, multiplié par lui-même, donne ce résultat ?",
-            "√9 = 3  car  3 × 3 = 9",
-            "√25 = 5  car  5 × 5 = 25",
+            "(√a)² = a",
+            "Notation : √a",
+          ],
+        },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "√9 = 3 car 3 × 3 = 9",
+            "√25 = 5 car 5 × 5 = 25",
           ],
         },
         {
           type: "heading",
-          fr: "Carrés parfaits à connaître",
+          fr: "Qu'est-ce qu'un carré parfait ?",
           black: true,
         },
         {
+          type: "plain",
+          fr: "Un carré parfait est un nombre obtenu en multipliant un nombre entier par lui-même.",
+        },
+        {
           type: "table",
-          headersFr: ["n", "n²", "√(n²)"],
+          headersFr: ["N", "N²", "√(N²)"],
           accentHeader: true,
           rows: [
             ["1", "1", "1"],
@@ -49,21 +64,31 @@ export const MATH_A8_4_LESSON: MathSubmoduleLesson = {
             ["10", "100", "10"],
           ],
         },
+        { type: "plain", fr: "" },
         {
           type: "heading",
           fr: "Propriété de la racine carrée",
           black: true,
         },
         {
-          type: "rule",
-          titleFr: "Propriété",
-          itemsFr: [
-            "√(a × b) = √a × √b",
-          ],
+          type: "plain",
+          fr: "√(a × b) = √a × √b",
         },
         {
-          type: "example",
-          fr: "√36 = √(4 × 9) = √4 × √9 = 2 × 3 = 6",
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "√(4 × 9) = √4 × √9 = 2 × 3 = 6",
+          ],
+        },
+        { type: "highlight", fr: "Astuce" },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "Si le nombre sous la racine est un carré parfait, le résultat est un entier.",
+            "Les racines carrées de nombres négatifs n'existent pas dans les nombres réels.",
+          ],
         },
       ],
     },
