@@ -16,6 +16,7 @@ import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueEx
 import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
 import { A7CompareExercise, A7RelNumberSelectExercise, A7RelEncadrementExercise, A7RelOrderingExercise, A7RelSeqCompleteExercise } from "@/components/math/A7CompareContent";
 import { A7RelArithExercise, A7RelMulDivExercise } from "@/components/math/A7ArithContent";
+import { A8PowerExercise } from "@/components/math/A8PowerContent";
 import { PctOfNumExercise, PartToPctExercise, PctChangeExercise, PctDiffExercise, PctMultiplierExercise, PctTableExercise, PctWordExercise } from "@/components/math/A6PercentContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
@@ -70,6 +71,7 @@ type WorkspaceStep =
   | { kind: "a7_rel_seq_complete"; exNum: number; isDecimal: boolean }
   | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" | "decimal" }
   | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "standard" | "mixed_dec" }
+  | { kind: "a8_power_ex"; exNum: number; count: number; promptFr: string }
   | { kind: "pct_to_frac_ex"; exNum: number }
   | { kind: "pct_to_dec_ex"; exNum: number }
   | { kind: "frac_to_pct_ex"; exNum: number }
@@ -397,6 +399,11 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "pct_to_dec_ex", exNum: 2 });
     steps.push({ kind: "frac_to_pct_ex", exNum: 3 });
     steps.push({ kind: "dec_to_pct_ex", exNum: 4 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A8-1") {
+    steps.push({ kind: "a8_power_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance des nombres." });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a8_power_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance des nombres." });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1493,7 +1500,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -1798,6 +1805,11 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       {/* A7-4 relative multiplication/division exercises */}
       {currentStep?.kind === "a7_rel_mul_div" && (
         <A7RelMulDivExercise key={exKey} exNum={currentStep.exNum} range={currentStep.range} count={currentStep.count} missingOperand={currentStep.missingOperand} timer={currentStep.timer} questionMode={currentStep.questionMode} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A8-1 power exercises */}
+      {currentStep?.kind === "a8_power_ex" && (
+        <A8PowerExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A6-2 percentage exercises */}
