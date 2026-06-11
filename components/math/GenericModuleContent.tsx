@@ -5231,7 +5231,7 @@ export function GenericModuleContent({
               const secondVal = a[secondKey] ?? "";
               const inputCls = `w-20 px-2 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               const symCls = "shrink-0 text-sm font-bold text-[var(--color-text-secondary)]";
-              const numCls = "w-20 shrink-0 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]";
+              const numCls = "w-20 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]";
               const firstBlock = wrong ? (
                 <div className={`${inputCls} h-[2.125rem] ${CLS_WRONG} flex items-center justify-center gap-1`}>
                   <span className="line-through text-amber-500 text-xs">{firstVal||"—"}</span>
@@ -5279,7 +5279,7 @@ export function GenericModuleContent({
               return (
                 <div key={i} className="flex items-center gap-3">
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="w-16 font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                  <span className="w-16 font-mono text-sm text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
                   <div className="flex rounded-full border overflow-hidden border-[var(--color-border-default)]">
                     {(["pair","impair"] as const).map((opt, oi) => {
                       const isSelected = sel === opt;
@@ -5438,7 +5438,7 @@ export function GenericModuleContent({
               const ok = seqRuleValidated ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step.toLocaleString("fr-CH")}`;
-              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm font-bold text-[var(--color-text-primary)]`;
+              const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm text-[var(--color-text-primary)]`;
               const inputRowCls = `w-24 px-3 py-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
               return (
                 <div key={i} className="flex items-center gap-2">
@@ -5504,7 +5504,7 @@ export function GenericModuleContent({
                         );
                       }
                       return (
-                        <span key={ni} className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
+                        <span key={ni} className={`${cellW} shrink-0 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]`}>{n.toLocaleString("fr-CH")}</span>
                       );
                     })}
                   </div>
@@ -5614,7 +5614,7 @@ export function GenericModuleContent({
                   <Fragment key={i}>
                     <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                     {q.nums.map((n, ni) => (
-                      <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                      <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                     ))}
                     {wrong ? (
                       <div className={`h-9 px-1 text-sm font-mono ${CLS_WRONG} flex flex-col items-center justify-center`}>
@@ -5674,7 +5674,7 @@ export function GenericModuleContent({
                         );
                       }
                       return (
-                        <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                        <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                       );
                     })}
                   </Fragment>
@@ -6068,7 +6068,7 @@ export function GenericModuleContent({
               return (
                 <Fragment key={i}>
                   <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="font-mono font-bold text-sm text-[var(--color-text-primary)]">{q.n}</span>
+                  <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.n}</span>
                   {q.choices.map((choice, j) => {
                       const selected = divByAnswers[i]?.[j] ?? false;
                       const shouldSelect = q.validDivisors.includes(choice);
@@ -6115,7 +6115,7 @@ export function GenericModuleContent({
               return (
                 <Fragment key={i}>
                   <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                  <span className="flex items-end font-mono text-sm font-bold text-[var(--color-text-primary)]">
+                  <span className="flex items-end font-mono text-sm text-[var(--color-text-primary)]">
                     {q.prefix}
                   {wrong ? (
                       <span className={`${inputCls} inline-flex h-6 flex-col items-center justify-center leading-none`}>

@@ -273,7 +273,7 @@ export function A7RelEncadrementExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {mkInput(fstKey, fstExp)}
               <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{dir}</span>
-              <span className="w-14 shrink-0 text-center font-mono text-sm font-bold text-[var(--color-text-primary)]">{fmtRel(q.n)}</span>
+              <span className="w-14 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]">{fmtRel(q.n)}</span>
               <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{dir}</span>
               {mkInput(sndKey, sndExp)}
             </div>

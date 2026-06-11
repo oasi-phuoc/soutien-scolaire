@@ -32,7 +32,7 @@ function A2Ex1({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les additions.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.a} + {q.b} =
           </span>
           <CorrectionInput
@@ -82,7 +82,7 @@ function A2Ex2({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les soustractions.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.a} − {q.b} =
           </span>
           <CorrectionInput

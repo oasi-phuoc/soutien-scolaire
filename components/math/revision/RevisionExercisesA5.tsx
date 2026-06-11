@@ -144,7 +144,7 @@ function A5Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les calculs.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.label}
           </span>
           <CorrectionInput
@@ -203,7 +203,7 @@ function A5Ex5({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les multiplications.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.label}
           </span>
           <CorrectionInput
@@ -265,7 +265,7 @@ function A5Ex6({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.label}
           </span>
           <CorrectionInput

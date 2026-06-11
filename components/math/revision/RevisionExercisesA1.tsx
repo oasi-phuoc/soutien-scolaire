@@ -415,7 +415,7 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
         return (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            <span className="font-mono text-sm font-bold tabular-nums text-[var(--color-text-primary)]">
+            <span className="font-mono text-sm tabular-nums text-[var(--color-text-primary)]">
               {pair.a.toLocaleString("fr-CH")}
             </span>
             <div className="flex gap-1">
@@ -439,7 +439,7 @@ function A1Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                 );
               })}
             </div>
-            <span className="font-mono text-sm font-bold tabular-nums text-[var(--color-text-primary)]">
+            <span className="font-mono text-sm tabular-nums text-[var(--color-text-primary)]">
               {pair.b.toLocaleString("fr-CH")}
             </span>
           </div>

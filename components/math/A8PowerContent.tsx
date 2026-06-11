@@ -66,7 +66,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
             return (
               <React.Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.base}{toSup(q.exp)}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.base}{toSup(q.exp)}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
               </React.Fragment>
@@ -152,11 +152,11 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
             return (
               <React.Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="inline-flex items-center font-mono text-sm font-bold text-[var(--color-text-primary)]">
+                <span className="inline-flex items-center font-mono text-sm text-[var(--color-text-primary)]">
                   {q.base}{expInput}
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.result}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.result}</span>
               </React.Fragment>
             );
           })}
@@ -252,13 +252,13 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
             return (
               <React.Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="inline-flex items-start font-mono text-sm font-bold text-[var(--color-text-primary)]">
+                <span className="inline-flex items-start font-mono text-sm text-[var(--color-text-primary)]">
                   {baseInput}
                   <span className="font-bold text-[10px] text-[var(--color-accent-alg)]"
                     style={{ position: "relative", top: "-6px", marginLeft: "1px" }}>{q.exp}</span>
                 </span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.result}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.result}</span>
               </React.Fragment>
             );
           })}
@@ -326,7 +326,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="shrink-0 font-mono text-sm font-bold text-[var(--color-text-primary)]">
+              <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
                 {q.base1}{toSup(q.exp1)}
               </span>
               <div className="flex shrink-0 gap-1">
@@ -352,7 +352,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
                   );
                 })}
               </div>
-              <span className="shrink-0 font-mono text-sm font-bold text-[var(--color-text-primary)]">
+              <span className="shrink-0 font-mono text-sm text-[var(--color-text-primary)]">
                 {q.base2}{toSup(q.exp2)}
               </span>
             </div>
@@ -543,7 +543,7 @@ function PureCalcExercise<Q extends { result: number }>({
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold">{renderExpr(q)}</span>
+                <span className="font-mono text-sm">{renderExpr(q)}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
               </Fragment>
@@ -738,19 +738,19 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
               />
             );
             const lhsNode = q.type === "mult" ? (
-              <span className="font-mono text-sm font-bold">
+              <span className="font-mono text-sm">
                 <PowSpan b={q.base} e={q.known} />
                 <span className="text-[var(--color-text-primary)]"> × </span>
                 <span className="text-[var(--color-text-primary)]">{q.base}</span>{expInput}
               </span>
             ) : q.type === "div" ? (
-              <span className="font-mono text-sm font-bold">
+              <span className="font-mono text-sm">
                 <PowSpan b={q.base} e={q.lhs} />
                 <span className="text-[var(--color-text-primary)]"> ÷ </span>
                 <span className="text-[var(--color-text-primary)]">{q.base}</span>{expInput}
               </span>
             ) : (
-              <span className="font-mono text-sm font-bold">
+              <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">(</span>
                 <PowSpan b={q.base} e={q.inner} />
                 <span className="text-[var(--color-text-primary)]">)</span>{expInput}
@@ -762,7 +762,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                 {lhsNode}
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-                <span className="font-mono text-sm font-bold"><PowSpan b={q.base} e={rhsExp} /></span>
+                <span className="font-mono text-sm"><PowSpan b={q.base} e={rhsExp} /></span>
               </Fragment>
             );
           })}
@@ -833,7 +833,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold">
+                <span className="font-mono text-sm">
                   <span className="text-[var(--color-text-primary)]">10</span>
                   <span className="text-[var(--color-accent-alg)]">{toNegSup(q.exp)}</span>
                 </span>
@@ -907,9 +907,9 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
           {questions.map((q, i) => (
             <Fragment key={i}>
               <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.value}</span>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.value}</span>
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-              <span className="font-mono text-sm font-bold">
+              <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">10</span>
                 <ExpInput val={answers[i] ?? ""} correct={q.exp} validated={validated}
                   wrong={validated && !results[i]}
@@ -953,14 +953,14 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
           {questions.map((q, i) => (
             <Fragment key={i}>
               <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-sm font-bold">
+              <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">10</span>
                 <ExpInput val={answers[i] ?? ""} correct={q.exp} validated={validated}
                   wrong={validated && !results[i]}
                   onChange={v => setAnswers(prev => { const n = [...prev]; n[i] = v; return n; })} />
               </span>
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-              <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.value}</span>
+              <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.value}</span>
             </Fragment>
           ))}
         </div>
@@ -1036,7 +1036,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.display}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.display}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
               </Fragment>
@@ -1127,9 +1127,9 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.display}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.display}</span>
                 <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
-                <span className="font-mono text-sm font-bold inline-flex items-baseline gap-0.5">
+                <span className="font-mono text-sm inline-flex items-baseline gap-0.5">
                   {coeffEl}
                   <span className="text-[var(--color-text-primary)] mx-1">× 10</span>
                   {expEl}
@@ -1209,7 +1209,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.expr}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                 <span className="inline-flex gap-1">
                   {(["Vrai", "Faux"] as const).map(label => {
                     const val = label === "Vrai";
@@ -1261,7 +1261,7 @@ export function A8SqrtExercise({ exNum, count, promptFr, validateCommand, onVali
     <PureCalcExercise
       exNum={exNum} questions={questions} promptFr={promptFr}
       validateCommand={validateCommand} onValidated={onValidated}
-      renderExpr={q => <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">√{q.n}</span>}
+      renderExpr={q => <span className="font-mono text-sm text-[var(--color-text-primary)]">√{q.n}</span>}
     />
   );
 }
@@ -1316,7 +1316,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold inline-flex items-center gap-0.5">
+                <span className="font-mono text-sm inline-flex items-center gap-0.5">
                   <span className="text-[var(--color-text-primary)]">√</span>
                   {inputEl}
                 </span>
@@ -1387,7 +1387,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
             return (
               <Fragment key={q.id}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.expr}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.expr}</span>
                 <span className="text-sm text-[var(--color-text-secondary)]">=</span>
                 {inputEl}
               </Fragment>
@@ -1506,9 +1506,9 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
             return (
               <Fragment key={q.id}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.before}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.before}</span>
                 {inputEl}
-                <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">{q.after}</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.after}</span>
                 <span className="text-sm text-[var(--color-text-secondary)]">=</span>
                 <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{q.result}</span>
               </Fragment>
