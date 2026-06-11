@@ -5,7 +5,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.1",
     theory: {
       title: {
-        fr: "Notion et représentation",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -46,10 +46,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
             "**Exposant** = le nombre de fois qu'on multiplie la base par elle-même",
           ],
         },
-        {
-          type: "example",
-          fr: "2³ = 2 × 2 × 2 = 8\nOn lit : « 2 exposant 3 » ou « 2 à la puissance 3 »",
-        },
+        { type: "plain", fr: "Pour 2³ , On dit : 2 à la puissance 3." },
         {
           type: "heading",
           fr: "Cas particuliers importants",
@@ -77,6 +74,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
           labelFr: "",
           itemsFr: ["−2² = −(2 × 2) = −4"],
         },
+        { type: "plain", fr: "" },
         {
           type: "table",
           headersFr: ["Expression", "Développement", "Résultat"],
