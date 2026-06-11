@@ -85,18 +85,6 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
             "Multiplication : 9 × 2 = **18**",
           ],
         },
-        { type: "plain", fr: "" },
-        { type: "highlight", fr: "Attention" },
-        {
-          type: "section",
-          labelFr: "",
-          itemsFr: [
-            "Les parenthèses changent toujours le résultat.",
-            "Quand il y a plusieurs niveaux, on commence par les parenthèses ( ), puis les crochets [ ], puis les accolades { }.",
-            "Multiplication et division ont la même priorité : on opère de gauche à droite.",
-            "Addition et soustraction ont la même priorité : on opère de gauche à droite.",
-          ],
-        },
       ],
     },
     exercises: [],
