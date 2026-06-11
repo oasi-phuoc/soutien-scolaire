@@ -5,7 +5,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.2",
     theory: {
       title: {
-        fr: "Calcul de puissances",
+        fr: "",
       },
       paragraphs: { fr: [] },
       blocks: [
@@ -69,6 +69,21 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
             "2² = 2 × 2",
             "(2 × 2 × 2 × 2 × 2) ÷ (2 × 2)",
             "**→** 2 × 2 × 2 = 2³ = 8",
+          ],
+        },
+        { type: "highlight", fr: "Puissance d'une puissance" },
+        { type: "plain", fr: "Lorsqu'une puissance est elle-même élevée à une autre puissance, on conserve la base et on multiplie les exposants." },
+        { type: "plain", fr: "(aᵐ)ⁿ = aᵐˣⁿ" },
+        { type: "plain", fr: "(2³)²" },
+        {
+          type: "section",
+          labelFr: "",
+          itemsFr: [
+            "= (2 × 2 × 2)²",
+            "",
+            "= (2 × 2 × 2) × (2 × 2 × 2)",
+            "",
+            "**→** 2 × 2 × 2 × 2 × 2 × 2 = 2⁶ = 64",
           ],
         },
       ],
