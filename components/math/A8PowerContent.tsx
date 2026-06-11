@@ -82,7 +82,18 @@ export function A8PowerExercise({ exNum, count, promptFr, validateCommand, onVal
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<PowerQ[]>(() => Array.from({ length: count }, () => genPowerQ()));
+  const [questions] = useState<PowerQ[]>(() => {
+    const seen = new Set<string>();
+    const qs: PowerQ[] = [];
+    let attempts = 0;
+    while (qs.length < count && attempts < 200) {
+      attempts++;
+      const q = genPowerQ();
+      const key = `${q.base}^${q.exp}`;
+      if (!seen.has(key)) { seen.add(key); qs.push(q); }
+    }
+    return qs;
+  });
   return <PurePowerExercise exNum={exNum} questions={questions} promptFr={promptFr}
     validateCommand={validateCommand} onValidated={onValidated} />;
 }
@@ -159,7 +170,18 @@ export function A8MissingExpExercise({ exNum, count, promptFr, validateCommand, 
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<MissingExpQ[]>(() => Array.from({ length: count }, () => genMissingExpQ()));
+  const [questions] = useState<MissingExpQ[]>(() => {
+    const seen = new Set<string>();
+    const qs: MissingExpQ[] = [];
+    let attempts = 0;
+    while (qs.length < count && attempts < 200) {
+      attempts++;
+      const q = genMissingExpQ();
+      const key = `${q.base}^${q.exp}`;
+      if (!seen.has(key)) { seen.add(key); qs.push(q); }
+    }
+    return qs;
+  });
   return <PureMissingExpExercise exNum={exNum} questions={questions} promptFr={promptFr}
     validateCommand={validateCommand} onValidated={onValidated} />;
 }
@@ -169,6 +191,20 @@ type MissingBaseQ = { base: number; exp: number; result: number };
 function genMissingBaseQ(): MissingBaseQ {
   const exp = rnd(2, 4); const base = rnd(2, 9);
   return { base, exp, result: base ** exp };
+}
+function genMissingBaseQuestions(count: number): MissingBaseQ[] {
+  const usedResults = new Set<number>();
+  const qs: MissingBaseQ[] = [];
+  let attempts = 0;
+  while (qs.length < count && attempts < 200) {
+    attempts++;
+    const q = genMissingBaseQ();
+    if (!usedResults.has(q.result)) {
+      usedResults.add(q.result);
+      qs.push(q);
+    }
+  }
+  return qs;
 }
 
 function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, onValidated }: {
@@ -236,7 +272,7 @@ export function A8MissingBaseExercise({ exNum, count, promptFr, validateCommand,
   exNum: number; count: number; promptFr?: string;
   validateCommand: number; onValidated: (ok: boolean, correct?: number, total?: number) => void;
 }) {
-  const [questions] = useState<MissingBaseQ[]>(() => Array.from({ length: count }, () => genMissingBaseQ()));
+  const [questions] = useState<MissingBaseQ[]>(() => genMissingBaseQuestions(count));
   return <PureMissingBaseExercise exNum={exNum} questions={questions} promptFr={promptFr}
     validateCommand={validateCommand} onValidated={onValidated} />;
 }
