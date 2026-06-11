@@ -466,8 +466,8 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
           )}
         </g>
       ))}
-      <line x1={tx} y1={6} x2={tx} y2={lineY - 12} stroke="var(--color-accent-alg)" strokeWidth="2" />
-      <polygon points={`${tx - 5},${lineY - 13} ${tx + 5},${lineY - 13} ${tx},${lineY - 6}`} fill="var(--color-accent-alg)" />
+      <line x1={tx} y1={6} x2={tx} y2={lineY - 12} stroke="var(--color-accent-alg)" strokeWidth="1.5" strokeDasharray="4,2" />
+      <polygon points={`${tx - 4},${lineY - 13} ${tx + 4},${lineY - 13} ${tx},${lineY - 6}`} fill="var(--color-accent-alg)" />
       <text x={tx} y={12} textAnchor="middle" fontSize="10" fill="var(--color-accent-alg)" fontWeight="bold">?</text>
     </svg>
   );

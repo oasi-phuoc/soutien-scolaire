@@ -33,8 +33,8 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
             type: "section",
             labelFr: "",
             itemsFr: [
-              "(+6) + (−3) = +3   (|6| > |3| → signe +)",
-              "(−6) + (+3) = −3   (|6| > |3| → signe −)",
+              "(**+**6) + (−3) → |6| - |3| = 3 et **|6|** > |3| = signe **+** → **+**3",
+              "(**−**6) + (+3) → |6| - |3| = 3 et **|6|** > |3| = signe **−** → **−**3",
             ],
           },
         ],
@@ -48,8 +48,8 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
             type: "section",
             labelFr: "",
             itemsFr: [
-              "(+6) − (+3) = (+6) + (−3) = +3",
-              "(−6) − (−3) = (−6) + (+3) = −3",
+              "(+6) **−** (**+**3) → (+6) **+** (**−**3) = +3",
+              "(−6) **−** (**−**3) → (−6) **+** (**+**3) = −3",
             ],
           },
           { type: "plain", fr: "" },
@@ -58,14 +58,9 @@ export const MATH_A7_3_LESSON: MathSubmoduleLesson = {
             type: "section",
             labelFr: "",
             itemsFr: [
-              "(+6) − (−3) = (+6) + (+3) = +9",
-              "(−6) − (+3) = (−6) + (−3) = −9",
+              "(+6) **−** (**−**3) → (+6) **+** (**+**3) = +9",
+              "(−6) **−** (**+**3) → (−6) **+** (**−**3) = −9",
             ],
-          },
-          { type: "plain", fr: "" },
-          {
-            type: "note",
-            fr: "Méthode : transformer toujours la soustraction en addition de l'opposé, puis appliquer la règle d'addition.",
           },
         ],
       },
