@@ -143,14 +143,16 @@ function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
       <div className="relative h-28 w-full overflow-hidden rounded border border-[var(--color-border-default)] bg-white">
-        {src && !imgFailed ? (
-          <Image src={src} alt={w.word} fill
-            className={`object-${imgFit}`}
-            onLoad={e => { const i = e.currentTarget; setImgFit(i.naturalWidth / i.naturalHeight > 1 ? "cover" : "contain"); }}
-            onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
-        ) : (
-          <div className="h-28 w-full rounded bg-white" aria-hidden />
-        )}
+        <div className="absolute inset-y-0 left-0 right-9 overflow-hidden">
+          {src && !imgFailed ? (
+            <Image src={src} alt={w.word} fill
+              className={`object-${imgFit}`}
+              onLoad={e => { const i = e.currentTarget; setImgFit(i.naturalWidth / i.naturalHeight > 1 ? "cover" : "contain"); }}
+              onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
+          ) : (
+            <div className="h-28 w-full rounded bg-white" aria-hidden />
+          )}
+        </div>
         <button
           type="button"
           onClick={() => playWord(w)}

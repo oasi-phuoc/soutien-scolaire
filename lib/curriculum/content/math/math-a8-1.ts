@@ -41,7 +41,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
           type: "section",
           labelFr: "",
           itemsFr: [
-            "aⁿ = a × a × a × … × a (n fois)",
+            "a**ⁿ** = a × a × a × … × a (**n** fois)",
             "**Base** = le nombre qu'on répète",
             "**Exposant** = le nombre de fois qu'on multiplie la base par elle-même",
           ],
@@ -59,7 +59,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
         {
           type: "section",
           labelFr: "",
-          itemsFr: ["2³ ≠ 2 × 3"],
+          itemsFr: ["2**³** ≠ 2 × 3"],
         },
         { type: "highlight", fr: "Attention aux signes" },
         { type: "plain", fr: "Les parenthèses changent le résultat." },
