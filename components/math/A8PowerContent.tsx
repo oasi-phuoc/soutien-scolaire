@@ -264,7 +264,6 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
   const [questions] = useState<PowerCmpQ[]>(() => genPowerCmpQuestions(count));
   const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(count).fill(null));
   const [validated, setValidated] = useState(false);
-  const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
 
   useEffect(() => {
@@ -272,7 +271,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
       prevCmd.current = validateCommand;
       if (!validated) {
         const res = questions.map((q, i) => answers[i] === q.answer);
-        setResults(res); setValidated(true);
+        setValidated(true);
         const correct = res.filter(Boolean).length;
         onValidated(res.every(Boolean), correct, res.length);
       }
