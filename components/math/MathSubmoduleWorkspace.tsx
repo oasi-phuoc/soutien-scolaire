@@ -69,8 +69,8 @@ type WorkspaceStep =
   | { kind: "a7_rel_encadrement"; exNum: number }
   | { kind: "a7_rel_ordering"; exNum: number }
   | { kind: "a7_rel_seq_complete"; exNum: number; isDecimal: boolean }
-  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" }
-  | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number }
+  | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" | "decimal" }
+  | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "standard" | "mixed_dec" }
   | { kind: "a8_power_ex"; exNum: number; count: number; promptFr: string }
   | { kind: "a8_missing_exp_ex"; exNum: number; count: number; promptFr: string }
   | { kind: "a8_missing_base_ex"; exNum: number; count: number; promptFr: string }
