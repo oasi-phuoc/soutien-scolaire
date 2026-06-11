@@ -5,7 +5,7 @@ export const MATH_A8_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.1",
     theory: {
       title: {
-        fr: "",
+        fr: "Notion et représentation",
       },
       paragraphs: { fr: [] },
       blocks: [

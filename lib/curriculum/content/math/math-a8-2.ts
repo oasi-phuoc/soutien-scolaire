@@ -5,7 +5,7 @@ export const MATH_A8_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.2",
     theory: {
       title: {
-        fr: "",
+        fr: "Calcul de puissances",
       },
       paragraphs: { fr: [] },
       blocks: [
