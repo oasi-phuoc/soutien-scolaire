@@ -5325,9 +5325,11 @@ export function GenericModuleContent({
   const currentStepTitle = currentStepHasPivotTitle
     ? currentStepTrad!.title[pivot]!
     : revisionTitle ?? currentStep?.lesson.theory.title.fr ?? "";
+  const moduleInfo = getMathModule(moduleId);
+  const geoStyle = moduleInfo?.branch === "geometry" ? { "--color-accent-alg": "var(--color-accent-geo)" } as React.CSSProperties : undefined;
 
   return (
-    <div className="pb-40">
+    <div className="pb-40" style={geoStyle}>
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
