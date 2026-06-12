@@ -36,6 +36,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("A2.1", "Addition"),
       sm("A2.2", "Soustraction"),
       sm("A2.3", "Estimation et arrondi"),
+      sm("A2.4", "Problèmes"),
     ],
   },
   {
