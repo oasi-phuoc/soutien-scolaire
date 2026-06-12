@@ -289,6 +289,7 @@ function RichBlock({ block, blockIdx, trad, pivot, showPivot, isRtl }: {
     case "add_sub_toggle_cards":
     case "theory_toggle":
     case "theory_tabs":
+    case "shape_explorer":
       return null;
     case "plain":
     default: {

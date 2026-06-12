@@ -43,6 +43,13 @@ export type TheoryReadAloud = {
   audioSrc?: string;
 };
 
+export type ShapeExplorerShape = {
+  id: string;
+  /** 60×60 viewBox thumbnail SVG, no label */
+  svg: string;
+  tabs: Array<{ label: string; blocks: MathRichBlock[] }>;
+};
+
 /** Bloc de théorie riche (style section française). */
 export type MathRichBlock =
   | { type: "heading"; fr: string; black?: boolean }
@@ -56,6 +63,7 @@ export type MathRichBlock =
   | { type: "section"; labelFr: string; itemsFr: string[] }
   | { type: "bullets"; labelFr?: string; itemsFr: string[] }
   | { type: "svg_row"; items: Array<{ markup: string; captionFr?: string }> }
+  | { type: "shape_explorer"; shapes: ShapeExplorerShape[] }
   | { type: "mult_table" }
   | { type: "div_table" }
   | { type: "power_table" }
