@@ -52,18 +52,14 @@ function fmtNum(v: number): string {
 // Correction box (amber, stacked wrong/correct)
 function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-0.5 h-9 ${className}`}>
+    <span className={`inline-flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5 h-9 ${className}`}>
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{wrong || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
 }
-const IC = (w: boolean) =>
-  `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums h-9 ${
-    w
-      ? "border-[var(--color-accent-alg)]"
-      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
-  }`;
+const IC = (_w: boolean) =>
+  `rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-sm text-center outline-none transition-colors tabular-nums h-9 focus:border-[var(--color-accent-alg)]`;
 
 function PlayBtn({ text }: { text: string }) {
   const [playing, setPlaying] = useState(false);

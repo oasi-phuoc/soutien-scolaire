@@ -45,7 +45,7 @@ function CorrectionInput({
   const showCorrection = validated && norm(value) !== norm(correct);
   if (showCorrection) {
     return (
-      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono leading-tight`}>
+      <span className={`${width} inline-flex min-h-9 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-1 text-center font-mono leading-tight`}>
         {value.trim() && <span className="text-[10px] text-[var(--color-text-primary)]">{value}</span>}
         <span className="text-sm font-semibold text-amber-600">{correct}</span>
       </span>
@@ -59,7 +59,7 @@ function CorrectionInput({
         value={value}
         onChange={(e) => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
         disabled={validated}
-        className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-80`}
+        className={`${width} h-9 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-80`}
       />
     </span>
   );
@@ -701,7 +701,7 @@ function PlacementColCard({ a, b, op, result, answers, carries, onChange, onCarr
                   <input type="text" inputMode="numeric" maxLength={1} value={carries[col] ?? ""}
                     disabled={validated}
                     onChange={e => onCarryChange(col, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-                    className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+                    className="h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
                   />
                 </td>
               ))}
@@ -1303,7 +1303,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
     <input type="text" inputMode="numeric" maxLength={1} value={carries[idx] ?? ""}
       disabled={validated}
       onChange={e => onCarryChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-      className="h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
+      className="h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40"
     />
   );
   const digitIn = (idx: number, correct?: number | null) => (
@@ -1311,7 +1311,7 @@ function PlacementMulCard2({ a, b, result, answers, carries, onChange, onCarryCh
       <input type="text" inputMode="numeric" maxLength={1} value={answers[idx] ?? ""}
         disabled={validated}
         onChange={e => onChange(idx, e.target.value.replace(/[^0-9]/g,"").slice(-1))}
-        className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+        className="h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
       />
     ) : (
       <CorrectionInput
@@ -1485,15 +1485,15 @@ function DivWorkRow({ numStr, colEnd, dividendCols, workFlat, si, onWorkChange, 
           <td key={col} style={{ width: CW, padding: 2 }} className="align-middle text-center">
             {hasDigit ? (
               validated ? (
-                <div className={`flex h-8 w-8 items-center justify-center rounded border text-center font-mono ${
+                <div className={`flex h-8 w-8 items-center justify-center rounded-none border-0 border-b-2 text-center font-mono ${
                   wrong
-                    ? "border-[var(--color-accent-alg)]"
-                    : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
+                    ? "border-amber-500"
+                    : "border-[var(--color-accent-alg)]/60 text-[var(--color-text-primary)]"
                 }`}>
                   {wrong ? (
                     <div className="flex flex-col leading-tight">
                       {val.trim() && <span className="text-[9px] text-[var(--color-text-secondary)] line-through">{val}</span>}
-                      <span className="text-sm font-semibold">{correct}</span>
+                      <span className="text-sm font-semibold text-amber-600">{correct}</span>
                     </div>
                   ) : (
                     <span>{val || correct}</span>
@@ -1502,7 +1502,7 @@ function DivWorkRow({ numStr, colEnd, dividendCols, workFlat, si, onWorkChange, 
               ) : (
                 <input type="text" inputMode="numeric" maxLength={1} value={val}
                   onChange={e => onWorkChange(si, relIdx, e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-                  className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
+                  className="h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)]"
                 />
               )
             ) : (

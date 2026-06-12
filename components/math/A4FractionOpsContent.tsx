@@ -177,9 +177,9 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
   status: "idle" | "correct" | "wrong"; disabled: boolean;
   correctNum?: string; correctDen?: string;
 }) {
-  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+  const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
   const corrBox = (val: string, correct: string | undefined) => (
-    <span className="w-12 h-8 rounded-xl border border-[var(--color-accent-alg)] px-1 flex flex-col items-center justify-center">
+    <span className="w-12 h-8 rounded-none border-0 border-b-2 border-amber-500 px-0 flex flex-col items-center justify-center">
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>

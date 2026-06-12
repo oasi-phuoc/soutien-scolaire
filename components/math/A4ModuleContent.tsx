@@ -844,14 +844,14 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
           const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
           const isWrong = readStatuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
-          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
+          const inputCls = `w-14 rounded-none border-0 border-b-2 px-0 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`;
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-[var(--color-accent-alg)]/40" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-[var(--color-accent-alg)] px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
                     </div>
@@ -860,7 +860,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-[var(--color-accent-alg)] px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
                     </div>
@@ -1104,14 +1104,14 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
           const sc = computeScale(item.kind, item.copies);
           const isWrong = statuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
-          const inputCls = `w-14 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
+          const inputCls = `w-14 rounded-none border-0 border-b-2 px-0 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`;
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-[var(--color-accent-alg)]/40" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-[var(--color-accent-alg)] px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
                     </div>
@@ -1120,7 +1120,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-[var(--color-accent-alg)] px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
                     </div>
@@ -1173,10 +1173,10 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled, co
   disabled: boolean;
   correctVal?: string;
 }) {
-  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+  const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
   const numCls = "h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
   const corrBox = (val: string) => (
-    <span className="w-12 h-8 rounded-xl border border-[var(--color-accent-alg)] px-1 flex flex-col items-center justify-center">
+    <span className="w-12 h-8 rounded-none border-0 border-b-2 border-amber-500 px-0 flex flex-col items-center justify-center">
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correctVal}</span>
     </span>
@@ -1205,9 +1205,9 @@ function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled, correctN
   correctNum?: string;
   correctDen?: string;
 }) {
-  const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+  const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
   const corrBox = (val: string, correct: string | undefined) => (
-    <span className="w-12 h-8 rounded-xl border border-[var(--color-accent-alg)] px-1 flex flex-col items-center justify-center">
+    <span className="w-12 h-8 rounded-none border-0 border-b-2 border-amber-500 px-0 flex flex-col items-center justify-center">
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
@@ -1651,7 +1651,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
       <div className="space-y-4">
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
-          const iCls = `w-24 rounded-xl border px-2 py-1.5 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+          const iCls = `w-24 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
@@ -1662,7 +1662,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
               </span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
               {isWrong ? (
-                <div className="w-24 rounded-xl border border-[var(--color-accent-alg)] px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                <div className="w-24 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
                   <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{answers[i] || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.answer}</span>
                 </div>
@@ -1725,7 +1725,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
       <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 3.5rem 1.5rem 3.5rem", alignItems: "center" }}>
         {questions.map((q, i) => {
           const isWrong = statuses[i] === "wrong";
-          const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
+          const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
           return (
             <React.Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{String.fromCharCode(96 + i + 1)})</span>
@@ -1733,7 +1733,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
               <span className="text-base font-semibold text-[var(--color-text-primary)] text-center">=</span>
               <span className="flex flex-col items-center gap-[2px]">
                 {isWrong ? (
-                  <span className="w-12 h-8 rounded-xl border border-[var(--color-accent-alg)] px-1 flex flex-col items-center justify-center">
+                  <span className="w-12 h-8 rounded-none border-0 border-b-2 border-amber-500 px-0 flex flex-col items-center justify-center">
                     <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{answers[i] || "—"}</span>
                     <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.answer}</span>
                   </span>
@@ -1883,7 +1883,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                 value={decAnswers[i]}
                 onChange={(e) => { if (!validated) setDecAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; }); }}
                 placeholder="…"
-                className={`w-24 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : decStatuses[i] === "wrong" ? "border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+                className={`w-24 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
               />
               {decStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{decAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
             </div>
@@ -1908,7 +1908,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                   value={fracAnswers[i]}
                   onChange={(e) => { if (!validated) setFracAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }}
                   placeholder="…"
-                  className={`w-20 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : fracStatuses[i] === "wrong" ? "border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+                  className={`w-20 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
                 />
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">/{item.denominator}</span>
               </div>
@@ -2039,7 +2039,7 @@ export function A4ModuleContent() {
             onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
-            className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
+            className={`w-full rounded-none border-0 border-b-2 px-0 py-3 text-sm outline-none transition-colors ${exStatus === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
           />
           {exStatus === "wrong" && <p>{exAttempts >= 2 ? <><span className="text-xs text-[var(--color-text-primary)] leading-none block">{answer}</span><span className="text-xs font-bold text-amber-600 leading-none block">{currentStep.item.acceptable[0]}</span></> : <span className="text-xs text-amber-500">Essayez encore…</span>}</p>}
         </div>

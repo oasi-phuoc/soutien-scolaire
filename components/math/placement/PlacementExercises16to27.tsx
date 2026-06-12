@@ -56,25 +56,30 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
   validated: boolean; width?: string; placeholder?: string;
 }) {
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
+  if (wrong) {
+    return (
+      <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+        {value.trim() && <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{value}</span>}
+        <span className="font-bold text-amber-600">{correct}</span>
+      </div>
+    );
+  }
+  if (validated) {
+    return (
+      <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+        <span>{value || correct}</span>
+      </div>
+    );
+  }
   return (
-    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)] border ${
-      wrong ? "border-2 border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10"
-    }`}>
-      {validated ? (
-        wrong ? (
-          <span className="font-bold text-amber-600">{correct}</span>
-        ) : (
-          <span>{value || correct}</span>
-        )
-      ) : (
-        <input
-          type="text"
-          inputMode="decimal"
-          value={value}
-          onChange={e => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-          className="h-6 w-full bg-transparent text-center outline-none"
-        />
-      )}
+    <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)]`}>
+      <input
+        type="text"
+        inputMode="decimal"
+        value={value}
+        onChange={e => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
+        className="h-6 w-full bg-transparent text-center outline-none"
+      />
     </div>
   );
 }
@@ -441,8 +446,8 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
     </td>
   );
 
-  const inputStyle = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
-  const carryStyle = "h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
+  const inputStyle = "h-8 w-8 rounded-none border-0 border-b-2 text-center font-mono text-sm outline-none transition-colors border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  const carryStyle = "h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
   const rowInput = (answers: string[], onChange: (col: number, val: string) => void, col: number) => (
     <td key={col} className="w-8 p-0.5 text-center">
@@ -461,9 +466,9 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
       const isOk = val.trim() === String(correct) || isBlankLeadingZero;
       return (
         <td key={col} className="w-8 p-0.5 text-center">
-          <div className={`flex h-8 w-8 items-center justify-center rounded border font-mono text-sm ${
-            isOk ? "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
-                 : "border-2 border-[var(--color-accent-alg)] font-bold text-[var(--color-accent-alg)]"
+          <div className={`flex h-8 w-8 items-center justify-center rounded-none border-0 border-b-2 font-mono text-sm ${
+            isOk ? "border-[var(--color-accent-alg)]/60 text-[var(--color-text-primary)]"
+                 : "border-amber-500 font-bold text-amber-600"
           }`}>
             {isOk ? (val || String(correct)) : String(correct)}
           </div>
@@ -638,8 +643,8 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
   const bd = [Math.floor(bInt / 1000) % 10, Math.floor(bInt / 100) % 10, Math.floor(bInt / 10) % 10, bInt % 10];
   const aFz = ad.findIndex(d => d !== 0);
   const bFz = bd.findIndex(d => d !== 0);
-  const inputCls = "h-8 w-8 rounded border text-center font-mono text-sm outline-none transition-colors bg-[var(--color-accent-alg)]/10 border-[var(--color-accent-alg)]/40 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
-  const carryCls = "h-5 w-8 rounded border border-[var(--color-accent-alg)]/30 bg-[var(--color-accent-alg)]/5 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
+  const inputCls = "h-8 w-8 rounded-none border-0 border-b-2 text-center font-mono text-sm outline-none transition-colors border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)] disabled:opacity-60";
+  const carryCls = "h-5 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/30 text-center font-mono text-[10px] text-orange-500 outline-none focus:border-orange-400 disabled:opacity-40";
 
   const cellIn = (base: number, col: number) => (
     <td key={col} className="w-8 text-center p-0.5">
@@ -753,8 +758,8 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
             <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
             <input type="text" inputMode="decimal" value={decResult} disabled={validated}
               onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-              className={`w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
-                isWrong ? "border-2 border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)]"
+              className={`w-28 rounded-none border-0 border-b-2 px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
+                isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"
               }`}
             />
             {isWrong && <span className="text-xs font-bold text-amber-600">{correctResultStr}</span>}
@@ -889,7 +894,7 @@ function DecimalDivisionGrid({
       value={value}
       disabled={validated}
       onChange={e => onChange(e.target.value.replace(/[^0-9]/g, "").slice(-1))}
-      className="h-8 w-8 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+      className="h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-base outline-none focus:border-[var(--color-accent-alg)] disabled:opacity-60"
     />
   );
 
@@ -1041,7 +1046,7 @@ function DecimalDivisionGrid({
           value={decResult}
           disabled={validated}
           onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
-          className="w-28 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
+          className="w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
         />
         {validated && decResult.trim() && !matchNum(decResult, parseNum(decCorrect), 0.005) && (
           <span className="text-xs font-bold text-amber-500">{decCorrect}</span>
