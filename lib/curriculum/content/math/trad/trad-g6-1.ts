@@ -48,4 +48,11 @@ export const TRAD_G6_1: SubmoduleTrad = {
           "Масштаб зменшення < 1; збільшення > 1.",
         ],
   },
+  consignes: {
+    "g6-1-e1": { fr: "Échelle 1:100. 3 cm sur le plan = combien de cm en réalité ?", en: "Scale 1:100. 3 cm sur le plan = combien de cm en realite ?" },
+    "g6-1-e2": { fr: "Échelle 1:1000. 5 cm sur la carte = combien de m en réalité ?", en: "Scale 1:1000. 5 cm sur la carte = combien de m en realite ?" },
+    "g6-1-e3": { fr: "Quelle est la signification de l'échelle 1:200 ?", en: "What is the meaning of the scale 1:200?" },
+    "g6-1-e4": { fr: "Une échelle de 1:50 est-elle un agrandissement ou une réduction ?", en: "Is a scale of 1:50 an enlargement or a reduction?" },
+    "g6-1-e5": { fr: "Échelle 1:500. 4 cm sur le plan = ? m en réalité.", en: "Scale 1:500. 4 cm sur le plan = ? m en realite." },
+  },
 };

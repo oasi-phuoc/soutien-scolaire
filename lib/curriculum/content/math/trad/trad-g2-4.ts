@@ -43,4 +43,11 @@ export const TRAD_G2_4: SubmoduleTrad = {
           "Для будь-якого многокутника: P = сума всіх сторін.",
         ],
   },
+  consignes: {
+    "g2-4-e1": { fr: "Périmètre d'un hexagone régulier de côté 5 cm.", en: "Perimeter of a regular hexagone with side 5 cm." },
+    "g2-4-e2": { fr: "Périmètre d'un octogone régulier de côté 3 cm.", en: "Perimeter of a regular octogone with side 3 cm." },
+    "g2-4-e3": { fr: "Un polygone régulier a un périmètre de 40 cm et des côtés de 8 cm. Combien de côtés ?", en: "A regular polygon has a perimeter of 40 cm and sides of 8 cm. How many sides?" },
+    "g2-4-e4": { fr: "Périmètre d'un pentagone régulier de côté 7 cm.", en: "Perimeter of a regular pentagone with side 7 cm." },
+    "g2-4-e5": { fr: "Périmètre d'un triangle équilatéral de côté 9 cm.", en: "Perimeter of an equilateral triangle with side 9 cm." },
+  },
 };

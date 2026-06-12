@@ -48,4 +48,11 @@ export const TRAD_G4_2: SubmoduleTrad = {
           "Паралель: та сама техніка.",
         ],
   },
+  consignes: {
+    "g4-2-e1": { fr: "Deux droites se coupent à 90°. Sont-elles perpendiculaires ou parallèles ?", en: "Two lines intersect at 90?. Are they perpendicular or parallel?" },
+    "g4-2-e2": { fr: "Deux droites ne se croisent jamais. Sont-elles perpendiculaires ou parallèles ?", en: "Two lines never cross. Are they perpendicular or parallel?" },
+    "g4-2-e3": { fr: "Dans un carré, les côtés opposés sont-ils parallèles ? (oui/non)", en: "In a square, are opposite sides parallel? (yes/no)" },
+    "g4-2-e4": { fr: "Dans un carré, les côtés adjacents sont-ils perpendiculaires ? (oui/non)", en: "In a square, are adjacent sides perpendicular? (yes/no)" },
+    "g4-2-e5": { fr: "Quel symbole désigne des droites perpendiculaires ?", en: "Which symbol represents perpendicular lines?" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G3_2: SubmoduleTrad = {
           "Одиниці: 1 м² = 10 000 см².",
         ],
   },
+  consignes: {
+    "g3-2-e1": { fr: "Aire d'un rectangle 9 cm × 4 cm.", en: "Area of a rectangle 9 cm × 4 cm." },
+    "g3-2-e2": { fr: "Rectangle d'aire 60 cm² et longueur 12 cm. Largeur = ?", en: "Rectangle with area 60 cm? and length 12 cm. Width = ?" },
+    "g3-2-e3": { fr: "Aire d'un rectangle 7 m × 3 m.", en: "Area of a rectangle 7 m × 3 m." },
+    "g3-2-e4": { fr: "1 m² = combien de cm² ?", en: "1 m? = how many cm??" },
+    "g3-2-e5": { fr: "Rectangle 15 cm × 6 cm. Aire = ?", en: "Rectangle 15 cm × 6 cm. Area = ?" },
+  },
 };

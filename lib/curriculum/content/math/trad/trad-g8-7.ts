@@ -48,4 +48,11 @@ export const TRAD_G8_7: SubmoduleTrad = {
           "Висота: h = V / (πr²).",
         ],
   },
+  consignes: {
+    "g8-7-e1": { fr: "Cylindre r=2 cm, h=5 cm. V = π×4×5 ≈ ? (π≈3,14)", en: "Cylindre r=2 cm, h=5 cm. V = π×4×5 ≈ ? (π≈3.14)" },
+    "g8-7-e2": { fr: "Cylindre r=5 cm, h=10 cm. V ≈ ? (π≈3,14)", en: "Cylindre r=5 cm, h=10 cm. V ≈ ? (π≈3.14)" },
+    "g8-7-e3": { fr: "Cylindre r=3 cm, V = 141,3 cm³ (π≈3,14). h = ?", en: "Cylindre r=3 cm, V = 141.3 cm³ (π≈3.14). h = ?" },
+    "g8-7-e4": { fr: "Cylindre r=1 cm, h=1 cm. V = π ≈ ? (π≈3,14)", en: "Cylindre r=1 cm, h=1 cm. V = π ≈ ? (π≈3.14)" },
+    "g8-7-e5": { fr: "Un cylindre de rayon 4 cm et hauteur 7 cm. V ≈ ? (π≈3,14)", en: "Un cylindre de rayon 4 cm et hauteur 7 cm. V ≈ ? (π≈3.14)" },
+  },
 };

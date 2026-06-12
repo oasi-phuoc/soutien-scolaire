@@ -48,4 +48,11 @@ export const TRAD_G2_1: SubmoduleTrad = {
           "Сторона з периметра: a = P ÷ 4.",
         ],
   },
+  consignes: {
+    "g2-1-e1": { fr: "Calcule le périmètre d'un carré de côté 9 cm.", en: "Calculate the perimeter of a square with side 9 cm." },
+    "g2-1-e2": { fr: "Un carré a un périmètre de 48 cm. Quel est son côté ?", en: "A square has a perimeter of 48 cm. What is its side length?" },
+    "g2-1-e3": { fr: "Calcule le périmètre d'un carré de côté 4,5 cm.", en: "Calculate the perimeter of a square with side 4.5 cm." },
+    "g2-1-e4": { fr: "Combien de côtés a un carré ?", en: "How many sides does a square have?" },
+    "g2-1-e5": { fr: "Un carré de côté 6 m : P = ?", en: "A square with side 6 m: P = ?" },
+  },
 };

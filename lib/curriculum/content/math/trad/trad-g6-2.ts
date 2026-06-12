@@ -48,4 +48,11 @@ export const TRAD_G6_2: SubmoduleTrad = {
           "Зворотне: відстань на кресленні = реальна ÷ знаменник.",
         ],
   },
+  consignes: {
+    "g6-2-e1": { fr: "Échelle 1:100. Dessin : 4,5 cm. Réalité : ? cm.", en: "Scale 1:100. Dessin : 4.5 cm. Realite : ? cm." },
+    "g6-2-e2": { fr: "Échelle 1:200. Réalité : 600 cm. Dessin : ? cm.", en: "Scale 1:200. Realite : 600 cm. Dessin : ? cm." },
+    "g6-2-e3": { fr: "Échelle 1:50. Dessin : 8 cm. Réalité : ? m.", en: "Scale 1:50. Dessin : 8 cm. Realite : ? m." },
+    "g6-2-e4": { fr: "Échelle 1:1000. Dessin : 3 cm. Réalité : ? m.", en: "Scale 1:1000. Dessin : 3 cm. Realite : ? m." },
+    "g6-2-e5": { fr: "Échelle 1:25. Réalité : 75 cm. Dessin : ? cm.", en: "Scale 1:25. Realite : 75 cm. Dessin : ? cm." },
+  },
 };

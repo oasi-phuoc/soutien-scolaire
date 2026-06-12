@@ -48,4 +48,11 @@ export const TRAD_G1_4: SubmoduleTrad = {
           "Ієрархія: квадрат ⊂ прямокутник ⊂ паралелограм ⊂ чотирикутник.",
         ],
   },
+  consignes: {
+    "g1-4-e1": { fr: "Quel quadrilatère a 4 côtés égaux ET 4 angles droits ?", en: "Which quadrilateral has 4 equal sides AND 4 right angles?" },
+    "g1-4-e2": { fr: "Un losange a-t-il obligatoirement des angles droits ? (oui/non)", en: "Does a rhombus necessarily have right angles? (yes/no)" },
+    "g1-4-e3": { fr: "Quel quadrilatère a exactement une paire de côtés parallèles ?", en: "Which quadrilateral has exactly one pair of parallel sides?" },
+    "g1-4-e4": { fr: "Tous les rectangles sont-ils des carrés ? (oui/non)", en: "Are all rectangles squares? (yes/no)" },
+    "g1-4-e5": { fr: "Tous les carrés sont-ils des rectangles ? (oui/non)", en: "Are all squares rectangles? (yes/no)" },
+  },
 };

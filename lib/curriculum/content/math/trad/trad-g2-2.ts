@@ -48,4 +48,11 @@ export const TRAD_G2_2: SubmoduleTrad = {
           "Знайти ширину: l = (P ÷ 2) − L.",
         ],
   },
+  consignes: {
+    "g2-2-e1": { fr: "Calcule le périmètre d'un rectangle 10 cm × 4 cm.", en: "Calculate the perimeter of a rectangle 10 cm × 4 cm." },
+    "g2-2-e2": { fr: "Rectangle de périmètre 30 cm et longueur 10 cm. Largeur = ?", en: "Rectangle with perimeter 30 cm et longueur 10 cm. Width = ?" },
+    "g2-2-e3": { fr: "Calcule le périmètre d'un rectangle 7 m × 3 m.", en: "Calculate the perimeter of a rectangle 7 m × 3 m." },
+    "g2-2-e4": { fr: "Un rectangle 6 cm × 6 cm est-il un carré ? (oui/non)", en: "Is a 6 cm ? 6 cm rectangle a square? (yes/no)" },
+    "g2-2-e5": { fr: "Rectangle 12 cm × 5 cm. Calcule P.", en: "Rectangle 12 cm ? 5 cm. Calculate P." },
+  },
 };

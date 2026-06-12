@@ -48,4 +48,11 @@ export const TRAD_G6_5: SubmoduleTrad = {
           "Ксерокс: 150% = збільшення ×1,5; 75% = зменшення ×0,75.",
         ],
   },
+  consignes: {
+    "g6-5-e1": { fr: "k = 3. Côté 4 cm → côté image = ?", en: "k = 3. Side 4 cm ? image side = ?" },
+    "g6-5-e2": { fr: "k = 0,5. Côté 10 cm → côté image = ?", en: "k = 0.5. Cote 10 cm → cote image = ?" },
+    "g6-5-e3": { fr: "k = 2. Aire = 9 cm² → aire image = ?", en: "k = 2. Area = 9 cm? ? image area = ?" },
+    "g6-5-e4": { fr: "Photocopie à 200%. k = ?", en: "Photocopy at 200%. k = ?" },
+    "g6-5-e5": { fr: "k = 4. Les angles sont-ils conservés ? (oui/non)", en: "k = 4. Are angles preserved? (yes/no)" },
+  },
 };

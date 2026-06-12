@@ -48,4 +48,11 @@ export const TRAD_G4_5: SubmoduleTrad = {
           "Застосування: вписане коло в квадрат (r = половина сторони).",
         ],
   },
+  consignes: {
+    "g4-5-e1": { fr: "Pour tracer un cercle de rayon 4 cm, quelle écartement du compas faut-il ?", en: "To draw a circle with radius 4 cm, what compass opening is needed?" },
+    "g4-5-e2": { fr: "Un cercle inscrit dans un carré de côté 8 cm a un rayon de ?", en: "A circle inscribed in a square with side 8 cm has a radius of?" },
+    "g4-5-e3": { fr: "Quel outil trace un cercle ?", en: "Which tool draws a circle?" },
+    "g4-5-e4": { fr: "Un demi-cercle correspond à combien de degrés d'arc ?", en: "A semicircle corresponds to how many degrees of arc?" },
+    "g4-5-e5": { fr: "La médiatrice d'un segment passe-t-elle par le milieu du segment ? (oui/non)", en: "Does the perpendicular bisector of a segment pass through the midpoint of the segment? (yes/no)" },
+  },
 };

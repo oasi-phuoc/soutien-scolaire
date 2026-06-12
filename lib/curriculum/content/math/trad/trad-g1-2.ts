@@ -45,4 +45,11 @@ export const TRAD_G1_2: SubmoduleTrad = {
           "Дві симетричні фігури є рівними.",
         ],
   },
+  consignes: {
+    "g1-2-e1": { fr: "Combien d'axes de symétrie a un carré ?", en: "How many axes of symmetry does a square have?" },
+    "g1-2-e2": { fr: "Combien d'axes de symétrie a un rectangle (non carré) ?", en: "How many axes of symmetry does a rectangle that is not a square have?" },
+    "g1-2-e3": { fr: "Combien d'axes de symétrie a un triangle équilatéral ?", en: "How many axes of symmetry does an equilateral triangle have?" },
+    "g1-2-e4": { fr: "Une figure avec 0 axe de symétrie est-elle symétrique ? (oui/non)", en: "Is a figure with 0 axes of symmetry symmetrical? (yes/no)" },
+    "g1-2-e5": { fr: "Combien d'axes de symétrie a un cercle ? (beaucoup/infini/zéro)", en: "How many axes of symmetry does a circle have? (many/infinite/zero)" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G5_5: SubmoduleTrad = {
           "Приклад: k = 2 подвоює всі відстані від центра.",
         ],
   },
+  consignes: {
+    "g5-5-e1": { fr: "Homothétie de rapport 3 : un segment de 4 cm devient ?", en: "Dilation with scale factor 3: a 4 cm segment becomes?" },
+    "g5-5-e2": { fr: "Homothétie de rapport 1/2 : un segment de 8 cm devient ?", en: "Dilation with scale factor 1/2: a 8 cm segment becomes?" },
+    "g5-5-e3": { fr: "Homothétie de rapport 2 : une aire de 5 cm² devient ?", en: "Dilation with scale factor 2: an area of 5 cm? becomes?" },
+    "g5-5-e4": { fr: "L'homothétie conserve-t-elle les angles ? (oui/non)", en: "Does dilation preserve angles? (yes/no)" },
+    "g5-5-e5": { fr: "Un rapport k = 1 laisse la figure identique ? (oui/non)", en: "Does a scale factor k = 1 leave the figure unchanged? (yes/no)" },
+  },
 };

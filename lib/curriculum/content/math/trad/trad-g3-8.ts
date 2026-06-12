@@ -48,4 +48,11 @@ export const TRAD_G3_8: SubmoduleTrad = {
           "Кільце: r=6 і r=3 → A = 27π ≈ 84,8 см².",
         ],
   },
+  consignes: {
+    "g3-8-e1": { fr: "Cadre : extérieur 10×8 cm, intérieur 6×4 cm. Aire du cadre = ?", en: "Frame: outside 10?8 cm, inside 6?4 cm. Frame area = ?" },
+    "g3-8-e2": { fr: "Carré 10×10 cm avec trou carré 4×4 cm. Aire restante = ?", en: "Carre 10×10 cm avec trou carre 4×4 cm. Remaining area = ?" },
+    "g3-8-e3": { fr: "Anneau : rayon extérieur 5 cm, rayon intérieur 3 cm (π ≈ 3,14). Aire ≈ ?", en: "Anneau : rayon exterieur 5 cm, rayon interieur 3 cm (π ≈ 3.14). Aire ≈ ?" },
+    "g3-8-e4": { fr: "Rectangle 12×7 cm avec disque de rayon 2 cm découpé (π ≈ 3,14). Aire ≈ ?", en: "Rectangle 12×7 cm avec disque de rayon 2 cm decoupe (π ≈ 3.14). Aire ≈ ?" },
+    "g3-8-e5": { fr: "Grand rectangle 20×10 cm, trou rectangle 5×4 cm. Aire = ?", en: "Large rectangle 20?10 cm, rectangular hole 5?4 cm. Area = ?" },
+  },
 };

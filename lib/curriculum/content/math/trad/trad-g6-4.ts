@@ -48,4 +48,11 @@ export const TRAD_G6_4: SubmoduleTrad = {
           "Перевірка: помножити розміри креслення на знаменник.",
         ],
   },
+  consignes: {
+    "g6-4-e1": { fr: "Échelle 1:100. Pièce réelle 8 m de long. Dessin : ? cm.", en: "Scale 1:100. Piece reelle 8 m de long. Dessin : ? cm." },
+    "g6-4-e2": { fr: "Échelle 1:50. Mur réel 3 m. Dessin : ? cm.", en: "Scale 1:50. Mur reel 3 m. Dessin : ? cm." },
+    "g6-4-e3": { fr: "Échelle 1:200. Jardin réel 20 m. Dessin : ? cm.", en: "Scale 1:200. Jardin reel 20 m. Dessin : ? cm." },
+    "g6-4-e4": { fr: "Échelle 1:25. Objet réel 1 m = 100 cm. Dessin : ? cm.", en: "Scale 1:25. Objet reel 1 m = 100 cm. Dessin : ? cm." },
+    "g6-4-e5": { fr: "Échelle 1:500. Route réelle 5 km = 500000 cm. Dessin : ? cm.", en: "Scale 1:500. Route reelle 5 km = 500000 cm. Dessin : ? cm." },
+  },
 };

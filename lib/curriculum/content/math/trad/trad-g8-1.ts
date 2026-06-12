@@ -48,4 +48,11 @@ export const TRAD_G8_1: SubmoduleTrad = {
           "Призма: дві паралельні многокутні основи + бічні прямокутники.",
         ],
   },
+  consignes: {
+    "g8-1-e1": { fr: "Combien de faces a un cube ?", en: "How many faces does a cube have?" },
+    "g8-1-e2": { fr: "Quel solide a une base circulaire et un apex ?", en: "Which solid has a circular base and an apex?" },
+    "g8-1-e3": { fr: "Combien d'arêtes a un cube ?", en: "How many edges does a cube have?" },
+    "g8-1-e4": { fr: "Quel solide a toute sa surface équidistante d'un centre ?", en: "Which solid has its entire surface equidistant from a center?" },
+    "g8-1-e5": { fr: "Un prisme triangulaire a combien de faces au total ?", en: "How many faces in total does a triangular prism have?" },
+  },
 };

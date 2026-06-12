@@ -48,4 +48,11 @@ export const TRAD_G1_6: SubmoduleTrad = {
           "Односторонні внутрішні кути: сума = 180°.",
         ],
   },
+  consignes: {
+    "g1-6-e1": { fr: "Deux droites parallèles coupées par une transversale. Un angle correspond est 65°. L'angle correspondant vaut ?", en: "Two parallel lines are cut by a transversal. One corresponding angle is 65°. What is the corresponding angle?" },
+    "g1-6-e2": { fr: "Deux droites parallèles. Les angles alternes-internes sont-ils égaux ? (oui/non)", en: "Two lines are parallel. Are alternate interior angles equal? (yes/no)" },
+    "g1-6-e3": { fr: "Deux co-internes : l'un est 70°. L'autre vaut ?", en: "Two co-interior angles: one is 70°. What is the other one?" },
+    "g1-6-e4": { fr: "Les angles correspondants sont-ils égaux ? (oui/non)", en: "Are corresponding angles equal? (yes/no)" },
+    "g1-6-e5": { fr: "Dans un triangle, deux angles sont 60° et 80°. Le troisième vaut ?", en: "In a triangle, two angles are 60° and 80°. What is the third one?" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G8_4: SubmoduleTrad = {
           "Перетворення: 1 л = 1 дм³ = 1 000 см³.",
         ],
   },
+  consignes: {
+    "g8-4-e1": { fr: "Volume d'un cube de côté 3 cm.", en: "Volume of a cube with side 3 cm." },
+    "g8-4-e2": { fr: "Volume d'un cube de côté 5 cm.", en: "Volume of a cube with side 5 cm." },
+    "g8-4-e3": { fr: "Un cube de volume 8 cm³. Quel est son côté ?", en: "A cube has volume 8 cm³. What is its side length?" },
+    "g8-4-e4": { fr: "1 dm³ = combien de cm³ ?", en: "1 dm? = how many cm??" },
+    "g8-4-e5": { fr: "Volume d'un cube de côté 10 cm en litres.", en: "Volume of a cube with side 10 cm en litres." },
+  },
 };

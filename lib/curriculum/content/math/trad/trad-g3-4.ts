@@ -48,4 +48,11 @@ export const TRAD_G3_4: SubmoduleTrad = {
           "Паралелограм можна перетворити на прямокутник із тією ж основою і висотою.",
         ],
   },
+  consignes: {
+    "g3-4-e1": { fr: "Aire d'un parallélogramme : base 7 cm, hauteur 4 cm.", en: "Area of a parallelogram: base 7 cm, height 4 cm." },
+    "g3-4-e2": { fr: "Aire d'un parallélogramme : base 11 cm, hauteur 5 cm.", en: "Area of a parallelogram: base 11 cm, height 5 cm." },
+    "g3-4-e3": { fr: "Parallélogramme d'aire 48 cm² et base 8 cm. Hauteur = ?", en: "Parallelogram with area 48 cm? and base 8 cm. Height = ?" },
+    "g3-4-e4": { fr: "Un rectangle est-il un cas particulier de parallélogramme ? (oui/non)", en: "Is a rectangle a special case of a parallelogram? (yes/no)" },
+    "g3-4-e5": { fr: "Aire d'un parallélogramme : base 9 cm, hauteur 6 cm.", en: "Area of a parallelogram: base 9 cm, height 6 cm." },
+  },
 };

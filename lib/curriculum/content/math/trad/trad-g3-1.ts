@@ -48,4 +48,11 @@ export const TRAD_G3_1: SubmoduleTrad = {
           "Сторона зі площі: a = √A.",
         ],
   },
+  consignes: {
+    "g3-1-e1": { fr: "Calcule l'aire d'un carré de côté 5 cm.", en: "Calculate the area of a square with side 5 cm." },
+    "g3-1-e2": { fr: "Calcule l'aire d'un carré de côté 12 cm.", en: "Calculate the area of a square with side 12 cm." },
+    "g3-1-e3": { fr: "Un carré a une aire de 49 cm². Quel est son côté ?", en: "A square has an area of 49 cm². What is its side length?" },
+    "g3-1-e4": { fr: "Carré de côté 3,5 cm. Aire = ?", en: "Square with side 3.5 cm. Area = ?" },
+    "g3-1-e5": { fr: "Un carré a une aire de 100 m². Quel est son côté ?", en: "A square has an area of 100 m². What is its side length?" },
+  },
 };

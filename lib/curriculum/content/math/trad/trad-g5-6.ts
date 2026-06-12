@@ -48,4 +48,11 @@ export const TRAD_G5_6: SubmoduleTrad = {
           "Гомотетія (k ≠ ±1) НЕ є ізометрією, бо змінює відстані.",
         ],
   },
+  consignes: {
+    "g5-6-e1": { fr: "La translation est-elle une isométrie ? (oui/non)", en: "Is translation an isometry? (yes/no)" },
+    "g5-6-e2": { fr: "L'homothétie de rapport 2 est-elle une isométrie ? (oui/non)", en: "Is a dilation with scale factor 2 an isometry? (yes/no)" },
+    "g5-6-e3": { fr: "Cite deux isométries directes.", en: "Name two direct isometries." },
+    "g5-6-e4": { fr: "Une isométrie conserve-t-elle les aires ? (oui/non)", en: "Does an isometry preserve areas? (yes/no)" },
+    "g5-6-e5": { fr: "Combien d'isométries du plan existe-t-il (types fondamentaux) ?", en: "How many plane isometries are there (basic types)?" },
+  },
 };

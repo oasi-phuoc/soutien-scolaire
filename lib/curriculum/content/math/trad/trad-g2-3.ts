@@ -48,4 +48,11 @@ export const TRAD_G2_3: SubmoduleTrad = {
           "Нерівність трикутника: сума будь-яких двох сторін більша за третю.",
         ],
   },
+  consignes: {
+    "g2-3-e1": { fr: "Calcule P : triangle de côtés 3, 4, 5 cm.", en: "Calculate P: triangle with sides 3, 4, 5 cm." },
+    "g2-3-e2": { fr: "Triangle équilatéral de côté 8 cm. P = ?", en: "Equilateral triangle with side 8 cm. P = ?" },
+    "g2-3-e3": { fr: "Triangle isocèle : deux côtés = 6 cm, base = 4 cm. P = ?", en: "Isosceles triangle: two sides = 6 cm, base = 4 cm. P = ?" },
+    "g2-3-e4": { fr: "P d'un triangle = 30 cm. Deux côtés sont 8 et 11 cm. Troisième côté = ?", en: "The perimeter of a triangle is 30 cm. Two sides are 8 et 11 cm. Third side = ?" },
+    "g2-3-e5": { fr: "Peut-on former un triangle avec les côtés 2, 3, 7 ? (oui/non)", en: "Can we form a triangle with sides 2, 3, 7? (yes/no)" },
+  },
 };

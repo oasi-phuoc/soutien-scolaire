@@ -48,4 +48,11 @@ export const TRAD_G8_8: SubmoduleTrad = {
           "Об'єм піраміди — 1/3 об'єму призми з тією ж основою і висотою.",
         ],
   },
+  consignes: {
+    "g8-8-e1": { fr: "Pyramide à base carrée 4 cm, hauteur 6 cm. V = ?", en: "Square-based pyramid 4 cm, height 6 cm. V = ?" },
+    "g8-8-e2": { fr: "Pyramide à base rectangulaire 6×4 cm, hauteur 9 cm. V = ?", en: "Rectangular-based pyramid 6×4 cm, height 9 cm. V = ?" },
+    "g8-8-e3": { fr: "Pyramide B = 30 cm², h = 6 cm. V = ?", en: "Pyramid B = 30 cm², h = 6 cm. V = ?" },
+    "g8-8-e4": { fr: "Pyramide triangulaire (tétraèdre) : B = 12 cm², h = 5 cm. V = ?", en: "Triangular pyramid (tetraedre) : B = 12 cm², h = 5 cm. V = ?" },
+    "g8-8-e5": { fr: "Si un prisme a V = 90 cm³, la pyramide de même base et hauteur a V = ?", en: "If a prism has V = 90 cm³, the pyramid with the same base and height has V = ?" },
+  },
 };

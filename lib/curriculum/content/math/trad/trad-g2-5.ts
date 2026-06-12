@@ -48,4 +48,11 @@ export const TRAD_G2_5: SubmoduleTrad = {
           "Не плутати довжину кола (периметр) з площею круга (A = πr²).",
         ],
   },
+  consignes: {
+    "g2-5-e1": { fr: "Calcule la circonférence d'un cercle de rayon 10 cm (π ≈ 3,14).", en: "Calcule la circonference d'un cercle de rayon 10 cm (π ≈ 3.14)." },
+    "g2-5-e2": { fr: "Calcule la circonférence d'un cercle de diamètre 6 cm (π ≈ 3,14).", en: "Calcule la circonference d'un cercle de diametre 6 cm (π ≈ 3.14)." },
+    "g2-5-e3": { fr: "Un cercle a une circonférence de 31,4 cm. Quel est son rayon (π ≈ 3,14) ?", en: "Un cercle a une circonference de 31.4 cm. Quel est son rayon (π ≈ 3.14) ?" },
+    "g2-5-e4": { fr: "π est approximativement égal à ?", en: "? is approximately equal to?" },
+    "g2-5-e5": { fr: "Un cercle de rayon 3 cm : C = 2π × 3 ≈ ? (arrondi à l'unité, π ≈ 3,14)", en: "Un cercle de rayon 3 cm : C = 2π × 3 ≈ ? (arrondi a l'unite, π ≈ 3.14)" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G8_2: SubmoduleTrad = {
           "Розгортка квадратної піраміди: квадрат + 4 рівнобедрені трикутники.",
         ],
   },
+  consignes: {
+    "g8-2-e1": { fr: "Un patron de cube comporte combien de carrés ?", en: "How many squares does a cube net contain?" },
+    "g8-2-e2": { fr: "Le patron d'un cylindre contient combien de cercles ?", en: "How many circles does a cylinder net contain?" },
+    "g8-2-e3": { fr: "Le patron d'une pyramide à base carrée comporte combien de triangles ?", en: "How many triangles does the net of a square-based pyramid contain?" },
+    "g8-2-e4": { fr: "Combien de patrons différents peut-on faire pour un cube ?", en: "How many different nets can be made for a cube?" },
+    "g8-2-e5": { fr: "Le patron d'un prisme triangulaire comporte combien de rectangles ?", en: "How many rectangles does the net of a triangular prism contain?" },
+  },
 };

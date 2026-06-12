@@ -48,4 +48,11 @@ export const TRAD_G4_6: SubmoduleTrad = {
           "Побудова: дуга з вершини, потім рівні дуги з перетинів.",
         ],
   },
+  consignes: {
+    "g4-6-e1": { fr: "La médiatrice de [AB] passe par le milieu de AB ? (oui/non)", en: "Does the perpendicular bisector of [AB] pass through the midpoint of AB? (yes/no)" },
+    "g4-6-e2": { fr: "Un point sur la médiatrice de [AB] est-il équidistant de A et B ? (oui/non)", en: "Is a point on the perpendicular bisector of [AB] equidistant from A and B? (yes/no)" },
+    "g4-6-e3": { fr: "La bissectrice d'un angle de 80° crée deux angles de combien de degrés ?", en: "The bisector of a 80° angle creates two angles of how many degrees?" },
+    "g4-6-e4": { fr: "La médiatrice est-elle perpendiculaire au segment ? (oui/non)", en: "Is the perpendicular bisector perpendicular to the segment? (yes/no)" },
+    "g4-6-e5": { fr: "Pour construire la médiatrice, quel outil est indispensable ?", en: "To construct the perpendicular bisector, which tool is essential?" },
+  },
 };

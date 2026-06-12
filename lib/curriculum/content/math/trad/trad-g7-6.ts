@@ -48,4 +48,11 @@ export const TRAD_G7_6: SubmoduleTrad = {
           "Приклад 3: відстань GPS: A(0,0) до B(3,4) = 5 одиниць.",
         ],
   },
+  consignes: {
+    "g7-6-e1": { fr: "Diagonale d'un carré de côté 1 cm. d = √? cm (donne le nombre sous la racine).", en: "Diagonal of a square with side 1 cm. d = ?? cm (give the number under the square root)." },
+    "g7-6-e2": { fr: "Diagonale d'un rectangle 5×12 cm.", en: "Diagonal of a rectangle 5×12 cm." },
+    "g7-6-e3": { fr: "Une échelle de 10 m appuyée contre un mur à 6 m du pied. Hauteur atteinte = ? m.", en: "A 10 m ladder leans against a wall 6 m from the foot. Height reached = ? m." },
+    "g7-6-e4": { fr: "Distance entre A(0;0) et B(6;8).", en: "Distance between A(0;0) and B(6;8)." },
+    "g7-6-e5": { fr: "Triangle isocèle : base 16 cm, côtés 17 cm. Hauteur = ?", en: "Isosceles triangle: base 16 cm, sides 17 cm. Height = ?" },
+  },
 };

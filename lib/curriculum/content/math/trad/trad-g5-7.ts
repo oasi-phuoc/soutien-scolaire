@@ -48,4 +48,11 @@ export const TRAD_G5_7: SubmoduleTrad = {
           "Застосування: масштабні схеми (k < 1 зменшення).",
         ],
   },
+  consignes: {
+    "g5-7-e1": { fr: "Deux figures semblables, k = 4. Un côté de 3 cm → côté image = ?", en: "Two similar figures, k = 4. A side of 3 cm ? image side = ?" },
+    "g5-7-e2": { fr: "k = 3. Rapport des aires = ?", en: "k = 3. Area ratio = ?" },
+    "g5-7-e3": { fr: "k = 2. Périmètre original = 10 cm. Périmètre image = ?", en: "k = 2. Original perimeter = 10 cm. Image perimeter = ?" },
+    "g5-7-e4": { fr: "k = 1/3. Un côté de 9 cm → côté image = ?", en: "k = 1/3. A side of 9 cm ? image side = ?" },
+    "g5-7-e5": { fr: "k = 2. Aire originale = 8 cm². Aire image = ?", en: "k = 2. Original area = 8 cm². Image area = ?" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G3_7: SubmoduleTrad = {
           "Порада: малювати частини окремо, щоб уникнути помилок.",
         ],
   },
+  consignes: {
+    "g3-7-e1": { fr: "Figure : rectangle 6×4 cm + triangle base 6 cm hauteur 3 cm. Aire totale = ?", en: "Figure : rectangle 6×4 cm + triangle base 6 cm hauteur 3 cm. Total area = ?" },
+    "g3-7-e2": { fr: "Demi-disque de rayon 5 cm (π ≈ 3,14). Aire = ?", en: "Demi-disque de rayon 5 cm (π ≈ 3.14). Aire = ?" },
+    "g3-7-e3": { fr: "Carré 8×8 cm + demi-cercle de diamètre 8 cm (π ≈ 3,14). Aire totale ≈ ?", en: "Carre 8×8 cm + demi-cercle de diametre 8 cm (π ≈ 3.14). Aire totale ≈ ?" },
+    "g3-7-e4": { fr: "Deux rectangles 5×3 cm et 4×2 cm côte à côte. Aire totale = ?", en: "Deux rectangles 5×3 cm et 4×2 cm cote a cote. Total area = ?" },
+    "g3-7-e5": { fr: "Rectangle 10×6 cm avec triangle intérieur de base 10 et hauteur 4 coupé. Aire restante = ?", en: "Rectangle 10×6 cm avec triangle interieur de base 10 et hauteur 4 coupe. Remaining area = ?" },
+  },
 };

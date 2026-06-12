@@ -48,4 +48,11 @@ export const TRAD_G6_3: SubmoduleTrad = {
           "Приклад: 8 см на карті 1:25 000 → 2 км.",
         ],
   },
+  consignes: {
+    "g6-3-e1": { fr: "Carte 1:50000. Distance sur carte : 3 cm. Distance réelle en km ?", en: "Map 1:50000. Distance sur carte : 3 cm. Distance reelle en km ?" },
+    "g6-3-e2": { fr: "Carte 1:25000. Distance sur carte : 4 cm. Distance réelle en m ?", en: "Map 1:25000. Distance sur carte : 4 cm. Distance reelle en m ?" },
+    "g6-3-e3": { fr: "Plan 1:200. Longueur dessinée : 7 cm. Longueur réelle en m ?", en: "Plan 1:200. Drawn length: 7 cm. Real length in m?" },
+    "g6-3-e4": { fr: "Carte 1:100000. 2 cm sur la carte. Réalité en km ?", en: "Map 1:100000. 2 cm sur la carte. Realite en km ?" },
+    "g6-3-e5": { fr: "1 km = combien de cm ?", en: "1 km = how many cm?" },
+  },
 };

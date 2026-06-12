@@ -48,4 +48,11 @@ export const TRAD_G1_1: SubmoduleTrad = {
           "Сума внутрішніх кутів: трикутник = 180°, чотирикутник = 360°, формула: (n − 2) × 180°.",
         ],
   },
+  consignes: {
+    "g1-1-e1": { fr: "Comment s'appelle un polygone à 5 côtés ?", en: "What is a polygon with 5 sides called?" },
+    "g1-1-e2": { fr: "Quelle est la somme des angles d'un triangle ?", en: "What is the sum of the angles of a triangle?" },
+    "g1-1-e3": { fr: "Un hexagone a combien de côtés ?", en: "How many sides does a hexagon have?" },
+    "g1-1-e4": { fr: "Quelle est la somme des angles d'un quadrilatère ?", en: "What is the sum of the angles of a quadrilateral?" },
+    "g1-1-e5": { fr: "Calcule la somme des angles d'un pentagone.", en: "Calculate the sum of the angles of a pentagon." },
+  },
 };

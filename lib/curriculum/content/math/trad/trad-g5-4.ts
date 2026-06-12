@@ -48,4 +48,11 @@ export const TRAD_G5_4: SubmoduleTrad = {
           "90° проти годинникової: (x, y) → (−y, x).",
         ],
   },
+  consignes: {
+    "g5-4-e1": { fr: "La rotation conserve-t-elle les distances ? (oui/non)", en: "Does rotation preserve distances? (yes/no)" },
+    "g5-4-e2": { fr: "Une rotation de 360° ramène la figure à sa position initiale ? (oui/non)", en: "Does a 360? rotation bring the figure back to its initial position? (yes/no)" },
+    "g5-4-e3": { fr: "Rotation de 90° antihoraire : le point (3 ; 0) devient ?", en: "90? counterclockwise rotation: point (3 ; 0) becomes?" },
+    "g5-4-e4": { fr: "Une rotation de 180° est équivalente à quelle transformation ?", en: "A 180? rotation is equivalent to which transformation?" },
+    "g5-4-e5": { fr: "Après une rotation, la figure est-elle de même taille ? (oui/non)", en: "After a rotation, is the figure the same size? (yes/no)" },
+  },
 };

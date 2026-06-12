@@ -48,4 +48,11 @@ export const TRAD_G7_5: SubmoduleTrad = {
           "Контрприклад: 5, 6, 8: 61 ≠ 64. Не прямокутний.",
         ],
   },
+  consignes: {
+    "g7-5-e1": { fr: "Triangle de côtés 3, 4, 5. Est-il rectangle ? (oui/non)", en: "Triangle with sides 3, 4, 5. Is it right-angled? (yes/no)" },
+    "g7-5-e2": { fr: "Triangle de côtés 5, 6, 7. Est-il rectangle ? (oui/non)", en: "Triangle with sides 5, 6, 7. Is it right-angled? (yes/no)" },
+    "g7-5-e3": { fr: "Triangle de côtés 9, 12, 15. Est-il rectangle ? (oui/non)", en: "Triangle with sides 9, 12, 15. Is it right-angled? (yes/no)" },
+    "g7-5-e4": { fr: "Pour prouver qu'un triangle est rectangle, on vérifie a² + b² = ? (donne le côté)", en: "To prove that a triangle is right-angled, we check a? + b? = ? (give the side)" },
+    "g7-5-e5": { fr: "Triangle côtés 7, 24, 25. 7² + 24² = 49 + 576 = ? Est-ce = 25² = 625 ?", en: "Triangle with sides 7, 24, 25. 7² + 24² = 49 + 576 = ? Est-ce = 25² = 625 ?" },
+  },
 };

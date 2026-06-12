@@ -48,4 +48,11 @@ export const TRAD_G4_4: SubmoduleTrad = {
           "Перевірка: прямокутник — 4 прямих кути; ромб — 4 рівні сторони.",
         ],
   },
+  consignes: {
+    "g4-4-e1": { fr: "Pour construire un rectangle, combien d'angles droits doit-on tracer ?", en: "To construct a rectangle, how many right angles must be drawn?" },
+    "g4-4-e2": { fr: "Un losange a tous ses côtés égaux ? (oui/non)", en: "Does a rhombus have all its sides equal? (yes/no)" },
+    "g4-4-e3": { fr: "Quel outil utilise-t-on pour tracer les perpendiculaires dans la construction d'un rectangle ?", en: "Which tool is used to draw perpendicular lines when constructing a rectangle?" },
+    "g4-4-e4": { fr: "Un carré est-il un losange ? (oui/non)", en: "Is a square a rhombus? (yes/no)" },
+    "g4-4-e5": { fr: "Pour un losange de côté 5 cm, tous les côtés mesurent ?", en: "For a rhombus with side 5 cm, all sides measure?" },
+  },
 };

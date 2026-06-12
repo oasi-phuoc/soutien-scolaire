@@ -48,4 +48,11 @@ export const TRAD_G1_3: SubmoduleTrad = {
           "π ≈ 3,14159…",
         ],
   },
+  consignes: {
+    "g1-3-e1": { fr: "Un cercle a un rayon de 5 cm. Quel est son diamètre ?", en: "A circle has a radius of 5 cm. What is its diameter?" },
+    "g1-3-e2": { fr: "Un cercle a un diamètre de 12 cm. Quel est son rayon ?", en: "A circle has a diameter of 12 cm. What is its radius?" },
+    "g1-3-e3": { fr: "Calcule la circonférence d'un cercle de rayon 7 cm (π ≈ 3,14, arrondi à l'unité).", en: "Calcule la circonference d'un cercle de rayon 7 cm (π ≈ 3.14, arrondi a l'unite)." },
+    "g1-3-e4": { fr: "Qu'est-ce qu'une corde ? (segment reliant deux points/segment partant du centre)", en: "What is a chord? (segment joining two points/segment starting from the center)" },
+    "g1-3-e5": { fr: "Le diamètre est-il la plus grande corde d'un cercle ? (oui/non)", en: "Is the diameter the largest chord of a circle? (yes/no)" },
+  },
 };

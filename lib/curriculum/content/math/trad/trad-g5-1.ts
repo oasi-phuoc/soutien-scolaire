@@ -48,4 +48,11 @@ export const TRAD_G5_1: SubmoduleTrad = {
           "Застосування: складений папір, декоративні орнаменти, архітектура.",
         ],
   },
+  consignes: {
+    "g5-1-e1": { fr: "La symétrie axiale conserve-t-elle les distances ? (oui/non)", en: "Does axial symmetry preserve distances? (yes/no)" },
+    "g5-1-e2": { fr: "Le symétrique du point (3 ; 2) par rapport à l'axe y est le point (? ; 2).", en: "The reflection of point (3 ; 2) across the y-axis is the point (? ; 2)." },
+    "g5-1-e3": { fr: "Le symétrique du point (4 ; 5) par rapport à l'axe x est le point (4 ; ?).", en: "The reflection of point (4 ; 5) across the x-axis is the point (4 ; ?)." },
+    "g5-1-e4": { fr: "Une figure et son image par symétrie axiale ont-elles la même aire ? (oui/non)", en: "Do a figure and its image by axial symmetry have the same area? (yes/no)" },
+    "g5-1-e5": { fr: "Quelle est la figure qui est son propre symétrique par rapport à un axe ?", en: "What figure is its own reflection across an axis?" },
+  },
 };

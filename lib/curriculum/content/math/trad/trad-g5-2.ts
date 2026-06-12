@@ -48,4 +48,11 @@ export const TRAD_G5_2: SubmoduleTrad = {
           "Фігури, що мають центр симетрії: паралелограм, прямокутник, ромб, квадрат, коло.",
         ],
   },
+  consignes: {
+    "g5-2-e1": { fr: "La symétrie centrale conserve-t-elle les longueurs ? (oui/non)", en: "Does central symmetry preserve lengths? (yes/no)" },
+    "g5-2-e2": { fr: "Le symétrique du point (2 ; 3) par rapport à O(0,0) est le point (? ; ?).", en: "The image of point (2 ; 3) under central symmetry about O(0.0) is the point (? ; ?)." },
+    "g5-2-e3": { fr: "Un triangle a-t-il généralement un centre de symétrie ? (oui/non)", en: "Does a triangle generally have a center of symmetry? (yes/no)" },
+    "g5-2-e4": { fr: "Un parallélogramme a-t-il un centre de symétrie ? (oui/non)", en: "Does a parallelogram have a center of symmetry? (yes/no)" },
+    "g5-2-e5": { fr: "La symétrie centrale est équivalente à une rotation de combien de degrés ?", en: "Central symmetry is equivalent to a rotation of how many degrees?" },
+  },
 };

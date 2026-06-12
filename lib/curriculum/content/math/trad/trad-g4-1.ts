@@ -48,4 +48,11 @@ export const TRAD_G4_1: SubmoduleTrad = {
           "Рекомендації: олівець, тонкі лінії, зберігати допоміжні побудови.",
         ],
   },
+  consignes: {
+    "g4-1-e1": { fr: "Quel outil utilise-t-on pour tracer un angle droit précis ?", en: "Which tool do we use to draw an accurate right angle?" },
+    "g4-1-e2": { fr: "Quel outil sert à tracer un cercle ?", en: "Which tool is used to draw a circle?" },
+    "g4-1-e3": { fr: "Quel outil mesure les angles ?", en: "Which tool measures angles?" },
+    "g4-1-e4": { fr: "En combien de degrés est gradué un rapporteur standard ?", en: "How many degrees is a standard protractor graduated in?" },
+    "g4-1-e5": { fr: "Pour tracer une droite on utilise une ___.", en: "To draw a straight line, we use a ___." },
+  },
 };

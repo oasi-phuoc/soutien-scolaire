@@ -48,4 +48,11 @@ export const TRAD_G7_3: SubmoduleTrad = {
           "Якщо не точний квадрат — скористатись калькулятором.",
         ],
   },
+  consignes: {
+    "g7-3-e1": { fr: "a = 3, b = 4. c = ?", en: "a = 3, b = 4. c = ?" },
+    "g7-3-e2": { fr: "a = 6, b = 8. c = ?", en: "a = 6, b = 8. c = ?" },
+    "g7-3-e3": { fr: "a = 9, b = 12. c = ?", en: "a = 9, b = 12. c = ?" },
+    "g7-3-e4": { fr: "a = 1, b = 1. c = √? (donne le nombre sous la racine)", en: "a = 1, b = 1. c = ?? (give the number under the square root)" },
+    "g7-3-e5": { fr: "a = 8, b = 15. c = ?", en: "a = 8, b = 15. c = ?" },
+  },
 };

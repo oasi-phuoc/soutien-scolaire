@@ -48,4 +48,11 @@ export const TRAD_G8_3: SubmoduleTrad = {
           "Призма: бічна = p×h. Повна = p×h + 2B.",
         ],
   },
+  consignes: {
+    "g8-3-e1": { fr: "Pavé droit 3×4×5 cm. Aire totale = 2(3×4 + 3×5 + 4×5) = ?", en: "Rectangular prism 3×4×5 cm. Total surface area = 2(3×4 + 3×5 + 4×5) = ?" },
+    "g8-3-e2": { fr: "Cube de côté 4 cm. Aire totale = ?", en: "Cube de cote 4 cm. Total area = ?" },
+    "g8-3-e3": { fr: "Cylindre r=3 cm, h=5 cm. Aire latérale = 2π×3×5 ≈ ? (π≈3,14)", en: "Cylindre r=3 cm, h=5 cm. Aire laterale = 2π×3×5 ≈ ? (π≈3.14)" },
+    "g8-3-e4": { fr: "Cylindre r=2 cm, h=6 cm. Aire totale = 2π×2×(2+6) ≈ ? (π≈3,14)", en: "Cylindre r=2 cm, h=6 cm. Aire totale = 2π×2×(2+6) ≈ ? (π≈3.14)" },
+    "g8-3-e5": { fr: "Prisme triangulaire : aire de la base 6 cm², périmètre base 12 cm, hauteur 5 cm. Aire totale = ?", en: "Prisme triangulaire : aire de la base 6 cm², perimetre base 12 cm, hauteur 5 cm. Total area = ?" },
+  },
 };

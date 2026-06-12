@@ -48,4 +48,11 @@ export const TRAD_G3_6: SubmoduleTrad = {
           "Одиниці: якщо r у см, то A у см².",
         ],
   },
+  consignes: {
+    "g3-6-e1": { fr: "Aire d'un disque de rayon 4 cm (π ≈ 3,14).", en: "Aire d'un disque de rayon 4 cm (π ≈ 3.14)." },
+    "g3-6-e2": { fr: "Aire d'un disque de rayon 10 cm (π ≈ 3,14).", en: "Aire d'un disque de rayon 10 cm (π ≈ 3.14)." },
+    "g3-6-e3": { fr: "Aire d'un disque de diamètre 8 cm (π ≈ 3,14).", en: "Aire d'un disque de diametre 8 cm (π ≈ 3.14)." },
+    "g3-6-e4": { fr: "Un disque a une aire de 78,5 cm² (π ≈ 3,14). Quel est son rayon ?", en: "Un disque a une aire de 78.5 cm² (π ≈ 3.14). Quel est son rayon ?" },
+    "g3-6-e5": { fr: "Aire d'un disque de rayon 3 cm (π ≈ 3,14).", en: "Aire d'un disque de rayon 3 cm (π ≈ 3.14)." },
+  },
 };

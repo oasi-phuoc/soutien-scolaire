@@ -48,4 +48,11 @@ export const TRAD_G1_5: SubmoduleTrad = {
           "Вертикальні кути при перетині двох прямих рівні.",
         ],
   },
+  consignes: {
+    "g1-5-e1": { fr: "Un angle de 75° est-il aigu ou obtus ?", en: "Is a 75° angle acute or obtuse?" },
+    "g1-5-e2": { fr: "Deux angles complémentaires : l'un est 35°. Quel est l'autre ?", en: "Two angles are complementary: one is 35°. What is the other one?" },
+    "g1-5-e3": { fr: "Deux angles supplémentaires : l'un est 110°. Quel est l'autre ?", en: "Two angles are supplementary: one is 110°. What is the other one?" },
+    "g1-5-e4": { fr: "Un angle droit mesure combien de degrés ?", en: "How many degrees does a right angle measure?" },
+    "g1-5-e5": { fr: "Deux droites se coupent. Un angle est 40°. L'angle opposé par le sommet mesure ?", en: "Two lines intersect. One angle is 40°. What does the vertically opposite angle measure?" },
+  },
 };

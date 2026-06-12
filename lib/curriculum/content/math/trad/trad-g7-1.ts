@@ -44,4 +44,11 @@ export const TRAD_G7_1: SubmoduleTrad = {
           "Для визначення прямокутного трикутника: знайти кут 90° або перевірити a² + b² = c².",
         ],
   },
+  consignes: {
+    "g7-1-e1": { fr: "Dans un triangle rectangle, comment s'appelle le côté opposé à l'angle droit ?", en: "In a right triangle, what is the side opposite the right angle called?" },
+    "g7-1-e2": { fr: "L'hypoténuse est-elle le côté le plus long ? (oui/non)", en: "Is the hypotenuse the longest side? (yes/no)" },
+    "g7-1-e3": { fr: "Un triangle avec angles 90°, 45°, 45° est-il rectangle ? (oui/non)", en: "Is a triangle with angles 90?, 45?, 45? a right triangle? (yes/no)" },
+    "g7-1-e4": { fr: "Combien d'angles droits a un triangle rectangle ?", en: "How many right angles does a right triangle have?" },
+    "g7-1-e5": { fr: "Les deux côtés non-hypoténuse s'appellent ?", en: "What are the two non-hypotenuse sides called?" },
+  },
 };

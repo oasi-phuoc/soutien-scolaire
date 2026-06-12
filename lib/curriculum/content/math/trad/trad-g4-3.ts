@@ -48,4 +48,11 @@ export const TRAD_G4_3: SubmoduleTrad = {
           "Прямокутний трикутник: прямий кут будується косинцем.",
         ],
   },
+  consignes: {
+    "g4-3-e1": { fr: "Peut-on construire un triangle de côtés 3, 4, 5 cm ? (oui/non)", en: "Can we form a triangle with sides 3, 4, 5 cm? (yes/no)" },
+    "g4-3-e2": { fr: "Peut-on construire un triangle de côtés 2, 3, 7 cm ? (oui/non)", en: "Can we form a triangle with sides 2, 3, 7 cm? (yes/no)" },
+    "g4-3-e3": { fr: "Combien de triangles différents peut-on construire connaissant les 3 côtés ? (0/1/plusieurs)", en: "How many different triangles can be constructed when the 3 sides are known? (0/1/several)" },
+    "g4-3-e4": { fr: "Quel outil utilise-t-on pour reporter une longueur lors d'une construction ?", en: "Which tool is used to transfer a length during a construction?" },
+    "g4-3-e5": { fr: "Un triangle équilatéral de côté 5 cm : tous les côtés mesurent ?", en: "An equilateral triangle with side 5 cm: all sides measure?" },
+  },
 };

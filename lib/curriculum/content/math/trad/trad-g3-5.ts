@@ -48,4 +48,11 @@ export const TRAD_G3_5: SubmoduleTrad = {
           "Ідея: середнє двох основ, помножене на висоту.",
         ],
   },
+  consignes: {
+    "g3-5-e1": { fr: "Aire d'un trapèze : B = 8, b = 4, h = 5 cm.", en: "Area of a trapezoid: B = 8, b = 4, h = 5 cm." },
+    "g3-5-e2": { fr: "Aire d'un trapèze : B = 12, b = 6, h = 4 cm.", en: "Area of a trapezoid: B = 12, b = 6, h = 4 cm." },
+    "g3-5-e3": { fr: "Trapèze d'aire 40 cm², B = 10, b = 6. h = ?", en: "Trapezoid with area 40 cm², B = 10, b = 6. h = ?" },
+    "g3-5-e4": { fr: "Aire d'un trapèze : B = 9, b = 3, h = 6 cm.", en: "Area of a trapezoid: B = 9, b = 3, h = 6 cm." },
+    "g3-5-e5": { fr: "Si b = B (deux bases égales), quelle figure est-ce ?", en: "If b = B (two equal bases), what figure is it?" },
+  },
 };

@@ -48,4 +48,11 @@ export const TRAD_G8_5: SubmoduleTrad = {
           "Знайти розмір: h = V / (L × l).",
         ],
   },
+  consignes: {
+    "g8-5-e1": { fr: "Volume d'un pavé 5 × 3 × 4 cm.", en: "Volume of a rectangular prism 5 × 3 × 4 cm." },
+    "g8-5-e2": { fr: "Volume d'un pavé 10 × 6 × 2 cm.", en: "Volume of a rectangular prism 10 × 6 × 2 cm." },
+    "g8-5-e3": { fr: "Pavé V = 120 cm³, L = 5, l = 4. h = ?", en: "Rectangular prism V = 120 cm³, L = 5, l = 4. h = ?" },
+    "g8-5-e4": { fr: "Volume d'une pièce 4 m × 3 m × 2,5 m (en m³).", en: "Volume d'une piece 4 m × 3 m × 2.5 m (en m³)." },
+    "g8-5-e5": { fr: "Pavé 8 × 8 × 8 cm. C'est un cube ? (oui/non)", en: "Rectangular prism 8 × 8 × 8 cm. Is it a cube? (yes/no)" },
+  },
 };

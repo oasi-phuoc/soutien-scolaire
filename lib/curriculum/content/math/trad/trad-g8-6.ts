@@ -48,4 +48,11 @@ export const TRAD_G8_6: SubmoduleTrad = {
           "Прямокутний паралелепіпед — прямокутна призма.",
         ],
   },
+  consignes: {
+    "g8-6-e1": { fr: "Prisme à base triangulaire (B = 15 cm²), hauteur 8 cm. V = ?", en: "Prism with triangular base (B = 15 cm²), hauteur 8 cm. V = ?" },
+    "g8-6-e2": { fr: "Prisme à base carrée (côté 4 cm), hauteur 6 cm. V = ?", en: "Prism with square base (cote 4 cm), hauteur 6 cm. V = ?" },
+    "g8-6-e3": { fr: "Prisme : B = 20 cm², V = 100 cm³. h = ?", en: "Prism: B = 20 cm², V = 100 cm³. h = ?" },
+    "g8-6-e4": { fr: "Prisme triangulaire : triangle base 8, hauteur 6 cm ; prisme h = 10 cm. V = ?", en: "Triangular prism: triangle base 8, hauteur 6 cm ; prisme h = 10 cm. V = ?" },
+    "g8-6-e5": { fr: "Prisme à base hexagonale (B = 24 cm²), hauteur 5 cm. V = ?", en: "Prism with hexagonal base (B = 24 cm²), hauteur 5 cm. V = ?" },
+  },
 };

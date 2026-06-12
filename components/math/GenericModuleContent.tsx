@@ -5379,10 +5379,12 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <p
             className="text-sm font-medium leading-relaxed text-[var(--color-text-primary)]"
-            lang={showPivotTranslation && currentStep.item.promptPivot?.[pivot] ? pivot : undefined}
-            dir={showPivotTranslation && currentStep.item.promptPivot?.[pivot] && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}
+            lang={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot]) ? pivot : undefined}
+            dir={showPivotTranslation && (currentStep.item.promptPivot?.[pivot] || currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot]) && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}
           >
-            {showPivotTranslation && currentStep.item.promptPivot?.[pivot] ? currentStep.item.promptPivot[pivot] : currentStep.item.promptFr}
+            {showPivotTranslation
+              ? currentStep.item.promptPivot?.[pivot] ?? currentStepTrad?.consignes?.[currentStep.item.id]?.[pivot] ?? currentStep.item.promptFr
+              : currentStep.item.promptFr}
           </p>
           <input
             type="text"

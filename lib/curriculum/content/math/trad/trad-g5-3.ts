@@ -48,4 +48,11 @@ export const TRAD_G5_3: SubmoduleTrad = {
           "Приклад: вектор (3; −2): точка (1, 4) → (4, 2).",
         ],
   },
+  consignes: {
+    "g5-3-e1": { fr: "Translation de vecteur (2 ; 3). Point (1 ; 1) → ?", en: "Translation by vector (2 ; 3). Point (1 ; 1) → ? ?" },
+    "g5-3-e2": { fr: "Translation de vecteur (−1 ; 4). Point (5 ; 2) → x-coordonnée = ?", en: "Translation by vector (−1 ; 4). Point (5 ; 2) → x-coordonnee = ? ?" },
+    "g5-3-e3": { fr: "La translation conserve-t-elle les distances ? (oui/non)", en: "Does translation preserve distances? (yes/no)" },
+    "g5-3-e4": { fr: "Translation de vecteur (0 ; 5). Le point (3 ; 2) devient (3 ; ?)", en: "Translation by vector (0 ; 5). The point (3 ; 2) becomes (3 ; ?)" },
+    "g5-3-e5": { fr: "Après une translation, la figure image est-elle de même taille ? (oui/non)", en: "After a translation, is the image figure the same size? (yes/no)" },
+  },
 };
