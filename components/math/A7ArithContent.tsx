@@ -273,9 +273,10 @@ function RelArithExercise({
               ) : (
                 <input
                   type="text"
+                  inputMode="decimal"
                   value={val}
                   disabled={validated}
-                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.\-]/g, ""); return n; })}
                   className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 />
               );

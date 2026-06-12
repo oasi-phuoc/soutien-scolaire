@@ -186,9 +186,9 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" inputMode="numeric" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" inputMode="numeric" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
     </span>
   );
 }

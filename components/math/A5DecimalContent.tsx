@@ -115,11 +115,12 @@ function DecExercise({
                 <input
                   type="text"
                   value={vals[i]}
+                  inputMode="decimal"
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     if (!validated)
                       setVals((prev: string[]) => {
                         const n = [...prev];
-                        n[i] = e.target.value;
+                        n[i] = e.target.value.replace(/[^0-9,.]/g, "");
                         return n;
                       });
                   }}
@@ -436,10 +437,11 @@ export function DecArithGroupExercise({
             return (
               <input
                 type="text"
+                inputMode="decimal"
                 value={v}
                 disabled={validated}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  const val = e.target.value;
+                  const val = e.target.value.replace(/[^0-9,.\-]/g, "");
                   setAnswers((prev: string[]) => {
                     const n = [...prev];
                     n[i] = val;
@@ -1828,8 +1830,8 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
             <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.resultStr}</span>
           </span>
         ) : (
-          <input type="text" value={decResult} disabled={validated}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDecResultChange(cardIdx, e.target.value)}
+          <input type="text" inputMode="decimal" value={decResult} disabled={validated}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDecResultChange(cardIdx, e.target.value.replace(/[^0-9,.]/g, ""))}
             placeholder={`ex. ${q.resultStr}`}
             className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
           />

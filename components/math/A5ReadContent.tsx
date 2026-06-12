@@ -138,10 +138,11 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-10" />
                   : <input
                       type="text"
+                      inputMode="numeric"
                       value={vals[i]?.[j] ?? ""}
                       disabled={validated}
                       onChange={e => {
-                        const v = e.target.value;
+                        const v = e.target.value.replace(/[^0-9]/g, "");
                         setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? v : c) : row));
                       }}
                       className={`${IC(false)} w-10`}
@@ -189,9 +190,10 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
               ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
               : <input
                   type="text"
+                  inputMode="decimal"
                   value={vals[i] ?? ""}
                   disabled={validated}
-                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
+                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                   className={`${IC(false)} w-20`}
                 />}
           </div>
@@ -353,9 +355,10 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={ask.answer} className="w-14" />
                   : <input
                       type="text"
+                      inputMode="numeric"
                       value={vals[i]?.[j] ?? ""}
                       disabled={validated}
-                      onChange={e => setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? e.target.value : c) : row))}
+                      onChange={e => setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? e.target.value.replace(/[^0-9]/g, "") : c) : row))}
                       className={`${IC(false)} w-14`}
                     />}
               </div>
@@ -413,9 +416,10 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
               ? <Err wrong={vals[i] ?? ""} correct={n} className="w-24" />
               : <input
                   type="text"
+                  inputMode="decimal"
                   value={vals[i] ?? ""}
                   disabled={validated}
-                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
+                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                   className={`${IC(false)} w-24`}
                 />}
           </div>
@@ -793,8 +797,8 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               {wrongs[i]
                 ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
-                : <input type="text" value={vals[i] ?? ""} disabled={validated}
-                    onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value : v))}
+                : <input type="text" inputMode="decimal" value={vals[i] ?? ""} disabled={validated}
+                    onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                     className={`${IC(false)} w-20`} />}
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{secondVal}</span>
@@ -852,16 +856,16 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {wrongs[i]?.[0]
               ? <Err wrong={vals[i]?.[0] ?? ""} correct={String(item.lo)} className="w-16" />
-              : <input type="text" value={vals[i]?.[0] ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value, v[1]!] as [string, string] : v))}
+              : <input type="text" inputMode="numeric" value={vals[i]?.[0] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value.replace(/[^0-9]/g, ""), v[1]!] as [string, string] : v))}
                   className={`${IC(false)} w-16`} />}
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
             <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{item.numStr}</span>
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
             {wrongs[i]?.[1]
               ? <Err wrong={vals[i]?.[1] ?? ""} correct={String(item.hi)} className="w-16" />
-              : <input type="text" value={vals[i]?.[1] ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value] as [string, string] : v))}
+              : <input type="text" inputMode="numeric" value={vals[i]?.[1] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value.replace(/[^0-9]/g, "")] as [string, string] : v))}
                   className={`${IC(false)} w-16`} />}
           </React.Fragment>
         ))}
@@ -966,8 +970,9 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                           : <foreignObject x={x - 22} y={4} width={44} height={22}>
                               <input
                                 type="text"
+                                inputMode="decimal"
                                 value={vals[li]?.[ai] ?? ""}
-                                onChange={e => setVals(p => p.map((row, ri) => ri === li ? row.map((c, ci) => ci === ai ? e.target.value : c) : row))}
+                                onChange={e => setVals(p => p.map((row, ri) => ri === li ? row.map((c, ci) => ci === ai ? e.target.value.replace(/[^0-9,.]/g, "") : c) : row))}
                                 style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
                               />
                             </foreignObject>}

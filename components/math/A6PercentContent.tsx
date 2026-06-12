@@ -38,11 +38,11 @@ function FracInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum,
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-1">
       {status === "wrong" ? wrongBox(numVal, correctNum) : (
-        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value)} disabled={disabled} className={iCls(status)} />
+        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls(status)} />
       )}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {status === "wrong" ? wrongBox(denVal, correctDen) : (
-        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value)} disabled={disabled} className={iCls(status)} />
+        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls(status)} />
       )}
     </span>
   );
@@ -272,7 +272,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                   className={inputCls(s.status)} />
               )}
             </div>
@@ -341,7 +341,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={inputCls(s.status)} />
               )}
             </div>
@@ -410,7 +410,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={inputCls(s.status)} />
               )}
             </div>
@@ -462,7 +462,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                   className={simpleCls(s.status)} />
               )}
             </Fragment>
@@ -556,7 +556,10 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
               ) : (
                 <input type="text" inputMode={col === "variation" ? "text" : "decimal"} value={s.ans}
                   disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => {
+                    const filtered = col === "variation" ? e.target.value.replace(/[^0-9,.%+\-]/g, "") : e.target.value.replace(/[^0-9,.]/g, "");
+                    setStates(prev => prev.map((x, j) => j === i ? { ans: filtered, status: "idle" } : x));
+                  }}
                   className={simpleCls(s.status)} />
               );
             }
@@ -625,7 +628,7 @@ function A63Grid({ questions, states, setStates, ansKey }: {
               </div>
             ) : (
               <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                 className={simpleCls(s.status)} />
             )}
           </Fragment>
@@ -943,7 +946,7 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
                   </div>
                 ) : (
                   <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                    onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                    onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                     placeholder={q.pctAnswer ? "%" : ""}
                     className={simpleCls(s.status)} />
                 )}
@@ -997,7 +1000,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={simpleCls(s.status)} />
               )}
             </Fragment>

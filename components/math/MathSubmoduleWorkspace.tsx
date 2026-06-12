@@ -2049,9 +2049,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           </div>
           <input
             key={exKey}
-            type={currentStep.item.type === "number" ? "number" : "text"}
+            type="text"
+            inputMode={currentStep.item.type === "number" ? "decimal" : "text"}
             value={answer}
-            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}

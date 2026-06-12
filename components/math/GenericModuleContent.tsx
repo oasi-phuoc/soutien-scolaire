@@ -1389,19 +1389,19 @@ function ArithmeticGroupExercise({
               {q.missingPos === "a"
                 ? wrongField
                   ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
+                  : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
                   ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
+                  : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
                   ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
-                  : <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)} className={inputBase} />
+                  : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
           );
@@ -2157,11 +2157,11 @@ function RoundingExercise({
                   <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
               : <input
-                  type={isDecKind ? "text" : "number"}
+                  type="text"
                   inputMode={isDecKind ? "decimal" : "numeric"}
                   value={v}
                   disabled={validated}
-                  onChange={e => onChange(i, e.target.value)}
+                  onChange={e => onChange(i, isDecKind ? e.target.value.replace(/[^0-9,.]/g, "") : e.target.value.replace(/[^0-9]/g, ""))}
                   className={inputBase}
                 />;
             if (isDecMixed) {
@@ -2245,10 +2245,11 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
                 </div>
               ) : (
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={v}
                   disabled={validated}
-                  onChange={e => onChange(i, e.target.value)}
+                  onChange={e => onChange(i, e.target.value.replace(/[^0-9]/g, ""))}
                   className={`w-14 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`}
                 />
               )}
@@ -2289,7 +2290,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
-                    <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
+                    <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9]/g, ""))}
                       className={inputW} />
                   )}
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
@@ -2305,7 +2306,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
-                    <input type="number" value={v} disabled={validated} onChange={e => onChange(i, e.target.value)}
+                    <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9]/g, ""))}
                       className={inputW} />
                   )}
                 </span>
@@ -2348,7 +2349,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simNum}</span>
                   </div>
                 ) : (
-                  <input type="number" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value)}
+                  <input type="text" inputMode="numeric" value={ans.num} disabled={validated} onChange={e => onChange(i, "num", e.target.value.replace(/[^0-9]/g, ""))}
                     className={inputW} />
                 )}
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
@@ -2358,7 +2359,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simDen}</span>
                   </div>
                 ) : (
-                  <input type="number" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value)}
+                  <input type="text" inputMode="numeric" value={ans.den} disabled={validated} onChange={e => onChange(i, "den", e.target.value.replace(/[^0-9]/g, ""))}
                     className={inputW} />
                 )}
               </span>
@@ -5129,7 +5130,7 @@ export function GenericModuleContent({
             type="text"
             inputMode={currentStep.item.type === "number" ? "numeric" : "text"}
             value={answer}
-            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
             className={`w-full px-4 py-3 text-sm ${MATH_TEXT_INPUT_BASE} ${
@@ -5156,10 +5157,10 @@ export function GenericModuleContent({
             <NumberLineSVG config={currentStep.nlConfig} />
           </div>
           <input
-            type="number"
-            inputMode="numeric"
+            type="text"
+            inputMode="decimal"
             value={answer}
-            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onChange={(e) => { setAnswer(e.target.value.replace(/[^0-9,.\-]/g, "")); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
             placeholder="Votre réponse…"
             className={`w-full px-4 py-3 text-sm ${MATH_NUMBER_INPUT_BASE} ${
@@ -5238,8 +5239,8 @@ export function GenericModuleContent({
                   <span className="text-xs font-bold text-amber-600 leading-none">{firstExpected}</span>
                 </div>
               ) : (
-                <input type="number" inputMode="numeric" value={firstVal} disabled={encadrementValidated}
-                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [firstKey]: e.target.value} : v))}
+                <input type="text" inputMode="numeric" value={firstVal} disabled={encadrementValidated}
+                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [firstKey]: e.target.value.replace(/[^0-9]/g, "")} : v))}
                   className={inputCls} />
               );
               const secondBlock = wrong ? (
@@ -5248,8 +5249,8 @@ export function GenericModuleContent({
                   <span className="text-xs font-bold text-amber-600 leading-none">{secondExpected}</span>
                 </div>
               ) : (
-                <input type="number" inputMode="numeric" value={secondVal} disabled={encadrementValidated}
-                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [secondKey]: e.target.value} : v))}
+                <input type="text" inputMode="numeric" value={secondVal} disabled={encadrementValidated}
+                  onChange={e => setEncadrementAnswers(prev => prev.map((v,j) => j===i ? {...v, [secondKey]: e.target.value.replace(/[^0-9]/g, "")} : v))}
                   className={inputCls} />
               );
               return (
@@ -5346,8 +5347,8 @@ export function GenericModuleContent({
                         {q.mode === "read" && <span className="text-xs font-bold text-amber-600 leading-none">{q.nlConfig.target}</span>}
                       </div>
                     ) : (
-                      <input type="number" inputMode="numeric" value={v} disabled={nlMultiValidated}
-                        onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                      <input type="text" inputMode="decimal" value={v} disabled={nlMultiValidated}
+                        onChange={e => setNlMultiAnswers(prev => prev.map((a,j) => j===i ? e.target.value.replace(/[^0-9,.\-]/g, "") : a))}
                         className={inputCls} />
                     )}
                   </div>
@@ -5452,8 +5453,8 @@ export function GenericModuleContent({
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
-                    <input type="text" value={v} disabled={seqRuleValidated}
-                      onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value : a))}
+                    <input type="text" inputMode="decimal" value={v} disabled={seqRuleValidated}
+                      onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value.replace(/[^0-9,.\-+]/g, "") : a))}
                       placeholder="± nombre"
                       className={inputRowCls} />
                   )}
@@ -5493,11 +5494,11 @@ export function GenericModuleContent({
                             <span className="text-xs font-bold text-amber-600 leading-none">{expected.toLocaleString("fr-CH")}</span>
                           </div>
                         ) : (
-                          <input key={ni} type="number" inputMode="numeric" value={v} disabled={seqCompleteValidated}
+                          <input key={ni} type="text" inputMode="decimal" value={v} disabled={seqCompleteValidated}
                             onChange={e => setSeqCompleteAnswers(prev => {
                               const next = prev.map(r => [...r]);
                               if (!next[qi]) next[qi] = [];
-                              next[qi]![bIdx] = e.target.value;
+                              next[qi]![bIdx] = e.target.value.replace(/[^0-9,.\-]/g, "");
                               return next;
                             })}
                             className={inputCls} />
@@ -5622,8 +5623,8 @@ export function GenericModuleContent({
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
                     ) : (
-                      <input type="text" value={v} disabled={decSeqRuleValidated}
-                        onChange={e => setDecSeqRuleAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      <input type="text" inputMode="decimal" value={v} disabled={decSeqRuleValidated}
+                        onChange={e => setDecSeqRuleAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9,.\-+]/g, "") : a))}
                         placeholder="±0,00"
                         className={`h-9 w-full px-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
                     )}
@@ -5667,7 +5668,7 @@ export function GenericModuleContent({
                             onChange={e => setDecSeqCompleteAnswers(prev => {
                               const next = prev.map(r => [...r]);
                               if (!next[qi]) next[qi] = [];
-                              next[qi]![bIdx] = e.target.value;
+                              next[qi]![bIdx] = e.target.value.replace(/[^0-9,.\-]/g, "");
                               return next;
                             })}
                             className={`h-9 w-full px-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
@@ -5936,7 +5937,7 @@ export function GenericModuleContent({
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={v} disabled={multListValidated}
-                      onChange={e => setMultListAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      onChange={e => setMultListAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
                       className={inputCls} />
                   )}
                 </div>
@@ -6015,8 +6016,8 @@ export function GenericModuleContent({
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.divisors.join(", ")}</span>
                     </div>
                   ) : (
-                    <input type="text" value={v} disabled={findDivisorsValidated}
-                      onChange={e => setFindDivisorsAnswers(prev => prev.map((answer, j) => j === i ? e.target.value : answer))}
+                    <input type="text" inputMode="numeric" value={v} disabled={findDivisorsValidated}
+                      onChange={e => setFindDivisorsAnswers(prev => prev.map((answer, j) => j === i ? e.target.value.replace(/[^0-9, ]/g, "") : answer))}
                       className={`w-full px-4 py-3 text-sm ${MATH_TEXT_INPUT_BASE}`} />
                   )}
                 </div>
@@ -6124,7 +6125,7 @@ export function GenericModuleContent({
                       </span>
                   ) : (
                     <input type="text" inputMode="numeric" maxLength={1} value={v} disabled={missingDigitValidated}
-                      onChange={e => setMissingDigitAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                      onChange={e => setMissingDigitAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
                       className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
                   )}
                   </span>
@@ -6159,8 +6160,8 @@ export function GenericModuleContent({
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                     </div>
                   ) : (
-                    <input type="number" inputMode="numeric" value={v} disabled={gcdLcmValidated}
-                      onChange={e => setGcdLcmAnswers(prev => prev.map((a, j) => j === i ? e.target.value : a))}
+                    <input type="text" inputMode="numeric" value={v} disabled={gcdLcmValidated}
+                      onChange={e => setGcdLcmAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
                       className={`${inputCls} ${ok === null ? "focus:border-[var(--color-accent-alg)]" : ""}`} />
                   )}
                 </div>

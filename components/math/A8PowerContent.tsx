@@ -58,8 +58,8 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -143,8 +143,8 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
                 <span className="text-[10px] font-bold leading-none text-amber-600">{q.exp}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="numeric" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9\-]/g, ""); return n; })}
                 className={`${inputSmall} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 style={{ position: "relative", top: "-6px" }}
               />
@@ -244,8 +244,8 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
                 <span className="text-xs font-bold leading-none text-amber-600">{q.base}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="numeric" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -535,8 +535,8 @@ function PureCalcExercise<Q extends { result: number }>({
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -731,8 +731,8 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
                 <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="numeric" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9\-]/g, ""); return n; })}
                 className={`${inputSmall} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 style={{ position: "relative", top: "-6px" }}
               />
@@ -825,8 +825,8 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -870,7 +870,7 @@ function ExpInput({ val, correct, validated, wrong, onChange }: {
     </div>
   ) : (
     <input type="text" value={val} disabled={validated}
-      onChange={e => onChange(e.target.value)}
+      onChange={e => onChange(e.target.value.replace(/[^0-9\-]/g, ""))}
       className={`${inputSmall} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
       style={{ position: "relative", top: "-6px" }}
     />
@@ -1028,8 +1028,8 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -1106,8 +1106,8 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
                 <span className="text-xs font-bold leading-none text-amber-600">{q.coeff}</span>
               </div>
             ) : (
-              <input type="text" value={cv} disabled={validated}
-                onChange={e => setCoeffAns(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={cv} disabled={validated}
+                onChange={e => setCoeffAns(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -1118,8 +1118,8 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
                 <span className="text-xs font-bold leading-none text-amber-600">{q.exp}</span>
               </div>
             ) : (
-              <input type="text" value={ev} disabled={validated}
-                onChange={e => setExpAns(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="numeric" value={ev} disabled={validated}
+                onChange={e => setExpAns(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9\-]/g, ""); return n; })}
                 className={`${inputSmall} border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 style={{ position: "relative", top: "-6px" }}
               />
@@ -1309,8 +1309,8 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
             ) : (
-              <input type="text" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+              <input type="text" inputMode="decimal" value={val} disabled={validated}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; })}
                 className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
               />
             );
@@ -1380,7 +1380,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
               </div>
             ) : (
               <input type="text" inputMode="numeric" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; })}
                 style={{ width: 80, height: 36 }}
                 className={`rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`}
               />
@@ -1499,7 +1499,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
               </div>
             ) : (
               <input type="text" inputMode="numeric" value={val} disabled={validated}
-                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; })}
                 style={{ width: 80, height: 36 }}
                 className={`rounded border px-1 text-center font-mono text-sm outline-none transition-colors ${rightField ? "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`}
               />
