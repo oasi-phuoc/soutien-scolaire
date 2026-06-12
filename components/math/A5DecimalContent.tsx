@@ -306,7 +306,6 @@ function genArithQuestions(
   });
 }
 
-const CLS_WRONG_ARITH = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 const inputBaseArith = "w-16 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
 const numCls = "w-16 text-center font-mono text-sm text-[var(--color-text-primary)]";
 
@@ -505,7 +504,6 @@ function genDecMulColQuestions(): DecMulColQ[] {
   });
 }
 
-const CLS_WRONG_GRID = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 const DEC_COL_LABELS = ["D", "U", ",", "dx"] as const;
 
 function DecMulColCard({

@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;

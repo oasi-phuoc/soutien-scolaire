@@ -171,7 +171,6 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
   const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors";
-  const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
   return (
     <div className="space-y-4">

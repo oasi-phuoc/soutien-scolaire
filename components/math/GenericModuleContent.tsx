@@ -2124,7 +2124,6 @@ function RoundingExercise({
   onChange: (i: number, val: string) => void;
 }) {
   const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
-  const CLS_WRONG_INL = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
   const isNew = config.consigne !== "";
   const isDecKind = config.kind.startsWith("dec_");
   const isDecMixed = config.kind === "dec_mixed";
