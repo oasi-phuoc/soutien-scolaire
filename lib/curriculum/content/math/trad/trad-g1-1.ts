@@ -3,12 +3,12 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_G1_1: SubmoduleTrad = {
   submoduleId: "G1-1",
   title: {
-    fr: "Formes (polygones et cercle)",
-    en: "Shapes (polygons and circle)",
-    ar: "الأشكال (المضلعات والدائرة)",
-    fa: "اشکال (چندضلعی‌ها و دایره)",
-    ti: "ቅርጻት (ብዙ ጎቦ ቅርጺ ን ዓውዲ)",
-    uk: "Фігури (многокутники та коло)",
+    fr: "Formes",
+    en: "Shapes",
+    ar: "الأشكال",
+    fa: "اشکال",
+    ti: "ቅርጻት",
+    uk: "Фігури",
   },
   paragraphs: {
     fr: [

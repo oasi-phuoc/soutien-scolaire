@@ -60,6 +60,7 @@ export type MathRichBlock =
   | { type: "div_table" }
   | { type: "power_table" }
   | { type: "theory_toggle"; labelA: string; labelB: string; blocksA: MathRichBlock[]; blocksB: MathRichBlock[] }
+  | { type: "theory_tabs"; tabs: Array<{ label: string; blocks: MathRichBlock[] }> }
   | {
       type: "mul_step_cards";
       /** Digits [M,C,D,U] for the first operand (e.g. [0,3,7,4] for 374) */

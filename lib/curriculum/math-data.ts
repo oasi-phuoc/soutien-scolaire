@@ -202,10 +202,8 @@ export const MATH_MODULES: MathModule[] = [
     branch: "geometry",
     prerequisiteIds: [],
     submodules: [
-      sm("G1.1", "Formes (polygones et cercle)"),
-      sm("G1.2", "Propriétés et symétrie"),
-      sm("G1.3", "Propriétés des formes"),
-      sm("G1.4", "Angles"),
+      sm("G1.1", "Formes"),
+      sm("G1.2", "Propriétés"),
     ],
   },
   {

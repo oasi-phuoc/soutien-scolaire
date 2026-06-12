@@ -1072,6 +1072,30 @@ function AddSubToggleCards({ block }: { block: Extract<MathRichBlock, { type: "a
   );
 }
 
+function TheoryTabs({ block }: { block: Extract<MathRichBlock, { type: "theory_tabs" }> }) {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  const activeBlocks = block.tabs[activeIdx]?.blocks ?? [];
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {block.tabs.map((tab, i) => (
+          <button key={i} type="button" onClick={() => setActiveIdx(i)}
+            className={`flex-1 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
+              activeIdx === i
+                ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
+            }`}>
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="space-y-3">
+        {activeBlocks.map((b, i) => <BlockView key={`tab${activeIdx}-${i}`} block={b} />)}
+      </div>
+    </div>
+  );
+}
+
 function TheoryToggle({ block }: { block: Extract<MathRichBlock, { type: "theory_toggle" }> }) {
   const [tab, setTab] = React.useState<"a" | "b">("a");
   const activeBlocks = tab === "a" ? block.blocksA : block.blocksB;
@@ -1326,6 +1350,8 @@ function BlockView({ block }: { block: MathRichBlock }) {
       return <AddSubToggleCards block={block} />;
     case "theory_toggle":
       return <TheoryToggle block={block} />;
+    case "theory_tabs":
+      return <TheoryTabs block={block} />;
     default:
       return null;
   }
