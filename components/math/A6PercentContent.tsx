@@ -30,19 +30,19 @@ function FracInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum,
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
   const wrongBox = (val: string, correct?: string) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
-      <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through tabular-nums leading-none">{val || "—"}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+      <span className="text-[10px] text-zinc-700 dark:text-zinc-300 tabular-nums leading-none">{val || "—"}</span>
       <span className="text-xs font-bold text-amber-600 dark:text-amber-400 tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-1">
       {status === "wrong" ? wrongBox(numVal, correctNum) : (
-        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value)} disabled={disabled} className={iCls(status)} />
+        <input type="text" inputMode="numeric" value={numVal} onChange={e => onNum(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls(status)} />
       )}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {status === "wrong" ? wrongBox(denVal, correctDen) : (
-        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value)} disabled={disabled} className={iCls(status)} />
+        <input type="text" inputMode="numeric" value={denVal} onChange={e => onDen(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls(status)} />
       )}
     </span>
   );
@@ -136,7 +136,7 @@ const PART_TO_PCT_POOL: PartToPctItem[] = [
   { part: 60, total: 150, pct: 40 }, { part: 50, total: 200, pct: 25 },
 ];
 
-const WRONG_CLS = "w-24 h-9 rounded-xl border border-amber-400 bg-amber-50 dark:bg-amber-950/20 flex flex-col items-center justify-center text-center shrink-0";
+const WRONG_CLS = "w-24 h-9 rounded-xl border border-amber-400 flex flex-col items-center justify-center text-center shrink-0";
 
 const simpleCls = (status: "idle" | "correct" | "wrong") =>
   `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
@@ -267,12 +267,12 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.dec}</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                   className={inputCls(s.status)} />
               )}
             </div>
@@ -336,12 +336,12 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={inputCls(s.status)} />
               )}
             </div>
@@ -405,12 +405,12 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={inputCls(s.status)} />
               )}
             </div>
@@ -457,12 +457,12 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.ans}</span>
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                   className={simpleCls(s.status)} />
               )}
             </Fragment>
@@ -550,13 +550,16 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
             if (q.missing === col) {
               return s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansStr}</span>
                 </div>
               ) : (
                 <input type="text" inputMode={col === "variation" ? "text" : "decimal"} value={s.ans}
                   disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => {
+                    const filtered = col === "variation" ? e.target.value.replace(/[^0-9,.%+\-]/g, "") : e.target.value.replace(/[^0-9,.]/g, "");
+                    setStates(prev => prev.map((x, j) => j === i ? { ans: filtered, status: "idle" } : x));
+                  }}
                   className={simpleCls(s.status)} />
               );
             }
@@ -620,12 +623,12 @@ function A63Grid({ questions, states, setStates, ansKey }: {
             <span className="text-sm text-[var(--color-text-primary)]">=</span>
             {s.status === "wrong" ? (
               <div className={WRONG_CLS}>
-                <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                 <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{correct}</span>
               </div>
             ) : (
               <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
                 className={simpleCls(s.status)} />
             )}
           </Fragment>
@@ -938,12 +941,12 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
                 <span className="text-sm text-[var(--color-text-primary)]">{q.text}</span>
                 {s.status === "wrong" ? (
                   <div className={WRONG_CLS}>
-                    <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                    <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                     <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansDisplay}</span>
                   </div>
                 ) : (
                   <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                    onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                    onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                     placeholder={q.pctAnswer ? "%" : ""}
                     className={simpleCls(s.status)} />
                 )}
@@ -992,12 +995,12 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
               {s.status === "wrong" ? (
                 <div className={WRONG_CLS}>
-                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 line-through leading-none">{s.ans || "—"}</span>
+                  <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
-                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value, status: "idle" } : x))}
+                  onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                   placeholder="%" className={simpleCls(s.status)} />
               )}
             </Fragment>

@@ -5,15 +5,10 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.3",
     theory: {
       title: {
-        fr: "Puissances de 10",
+        fr: "Puissances de 10 et notation scientifique",
       },
       paragraphs: { fr: [] },
       blocks: [
-        {
-          type: "heading",
-          fr: "Les puissances de 10",
-          black: true,
-        },
         {
           type: "plain",
           fr: "Les puissances de 10 facilitent l'écriture des grands nombres. Une puissance de 10 s'obtient en plaçant autant de zéros que l'exposant après le chiffre 1.",
@@ -31,6 +26,7 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
             ["10⁶", "1 000 000", "6"],
           ],
         },
+        { type: "plain", fr: "" },
         {
           type: "heading",
           fr: "Puissances de 10 négatives",
@@ -50,6 +46,7 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
             ["10⁻³", "0,001", "un millième"],
           ],
         },
+        { type: "plain", fr: "" },
         {
           type: "heading",
           fr: "Notation scientifique",
@@ -61,7 +58,7 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
         },
         {
           type: "section",
-          labelFr: "Exemples",
+          labelFr: "",
           itemsFr: [
             "4 700 000 = 4,7 × 10⁶",
             "0,000 035 = 3,5 × 10⁻⁵",
@@ -71,17 +68,6 @@ export const MATH_A8_3_LESSON: MathSubmoduleLesson = {
       ],
     },
     exercises: [],
-    exercisePool: [
-      { id: "a8-3-ep01", promptFr: "10² = ?", type: "number", acceptable: ["100"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep02", promptFr: "10³ = ?", type: "number", acceptable: ["1000"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep03", promptFr: "10⁴ = ?", type: "number", acceptable: ["10000"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep04", promptFr: "10⁻¹ = ?", type: "number", acceptable: ["0.1"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep05", promptFr: "10⁻² = ?", type: "number", acceptable: ["0.01"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep06", promptFr: "3 × 10² = ?", type: "number", acceptable: ["300"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep07", promptFr: "2 × 10³ = ?", type: "number", acceptable: ["2000"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep08", promptFr: "5 × 10⁴ = ?", type: "number", acceptable: ["50000"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep09", promptFr: "7 × 10¹ = ?", type: "number", acceptable: ["70"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-      { id: "a8-3-ep10", promptFr: "4 × 10² = ?", type: "number", acceptable: ["400"], hintFr: "10ⁿ = 1 suivi de n zéros. Multiplier par 10ⁿ déplace la virgule de n rangs à droite."},
-    ],
-    poolSize: 5,
+    exercisePool: [],
+    poolSize: 0,
   };

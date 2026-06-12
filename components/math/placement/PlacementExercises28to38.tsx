@@ -63,8 +63,9 @@ function CorrectionInput({
       ) : (
         <input
           type="text"
+          inputMode="decimal"
           value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
           className="h-6 w-full bg-transparent text-center outline-none"
         />
       )}

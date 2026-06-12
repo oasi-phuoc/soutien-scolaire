@@ -179,16 +179,16 @@ function FracAnswerInput({ numVal, denVal, onNum, onDen, status, disabled, corre
 }) {
   const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
   const corrBox = (val: string, correct: string | undefined) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
-      <span className="text-xs text-amber-500 line-through tabular-nums leading-none">{val || "—"}</span>
-      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" inputMode="numeric" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" inputMode="numeric" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
     </span>
   );
 }

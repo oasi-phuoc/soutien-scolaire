@@ -851,21 +851,21 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-amber-500 line-through leading-tight">{readNums[i] || "—"}</span>
-                      <span className="font-bold text-[var(--color-text-primary)] leading-tight">{correctNum}</span>
+                    <div className="w-14 rounded-xl border border-amber-400 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
                     </div>
                   ) : (
-                    <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                    <input type="text" inputMode="numeric" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-amber-500 line-through leading-tight">{readDens[i] || "—"}</span>
-                      <span className="font-bold text-[var(--color-text-primary)] leading-tight">{correctDen}</span>
+                    <div className="w-14 rounded-xl border border-amber-400 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
                     </div>
                   ) : (
-                    <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                    <input type="text" inputMode="numeric" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                 </div>
                 <div className="flex flex-1 justify-center">
@@ -1111,21 +1111,21 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-amber-500 line-through leading-tight">{readNums[i] || "—"}</span>
-                      <span className="font-bold text-[var(--color-text-primary)] leading-tight">{correctNum}</span>
+                    <div className="w-14 rounded-xl border border-amber-400 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
                     </div>
                   ) : (
-                    <input type="text" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                    <input type="text" inputMode="numeric" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-amber-500 line-through leading-tight">{readDens[i] || "—"}</span>
-                      <span className="font-bold text-[var(--color-text-primary)] leading-tight">{correctDen}</span>
+                    <div className="w-14 rounded-xl border border-amber-400 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
                     </div>
                   ) : (
-                    <input type="text" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={inputCls} />
+                    <input type="text" inputMode="numeric" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                 </div>
                 <div className="flex flex-1 justify-center overflow-hidden">
@@ -1176,20 +1176,20 @@ function VFracBoxOne({ n, d, missingPos, inputVal, onInput, status, disabled, co
   const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
   const numCls = "h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]";
   const corrBox = (val: string) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
-      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
-      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correctVal}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correctVal}</span>
     </span>
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
       {missingPos === "num"
-        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
+        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" inputMode="numeric" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{n}</span>
       }
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
       {missingPos === "den"
-        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value)} disabled={disabled} className={iCls} />)
+        ? (status === "wrong" ? corrBox(inputVal) : <input type="text" inputMode="numeric" value={inputVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onInput(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />)
         : <span className={numCls}>{d}</span>
       }
     </span>
@@ -1207,16 +1207,16 @@ function VFracBoxBoth({ numVal, denVal, onNum, onDen, status, disabled, correctN
 }) {
   const iCls = `w-12 !h-8 py-0 rounded-xl border px-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]`;
   const corrBox = (val: string, correct: string | undefined) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex items-center justify-center gap-0.5">
-      <span className="text-xs text-amber-600 line-through tabular-nums">{val || "—"}</span>
-      <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums">{correct}</span>
+    <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{val || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
   return (
     <span className="inline-flex flex-col items-center gap-[2px] align-middle mx-0.5">
-      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(numVal, correctNum) : <input type="text" inputMode="numeric" value={numVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onNum(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
       <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
-      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value)} disabled={disabled} className={iCls} />}
+      {status === "wrong" ? corrBox(denVal, correctDen) : <input type="text" inputMode="numeric" value={denVal} onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDen(e.target.value.replace(/[^0-9]/g, ""))} disabled={disabled} className={iCls} />}
     </span>
   );
 }
@@ -1662,12 +1662,12 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
               </span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
               {isWrong ? (
-                <div className="w-24 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
-                  <span className="text-amber-500 line-through tabular-nums leading-tight">{answers[i] || "—"}</span>
-                  <span className="font-bold text-[var(--color-text-primary)] tabular-nums leading-tight">{q.answer}</span>
+                <div className="w-24 rounded-xl border border-amber-400 px-2 py-1.5 text-sm flex flex-col items-center justify-center">
+                  <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{answers[i] || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.answer}</span>
                 </div>
               ) : (
-                <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
+                <input type="text" inputMode="decimal" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; }); }} className={iCls} />
               )}
             </div>
           );
@@ -1733,12 +1733,12 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
               <span className="text-base font-semibold text-[var(--color-text-primary)] text-center">=</span>
               <span className="flex flex-col items-center gap-[2px]">
                 {isWrong ? (
-                  <span className="w-12 h-8 rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1 flex flex-col items-center justify-center">
-                    <span className="text-xs text-amber-500 line-through tabular-nums leading-none">{answers[i] || "—"}</span>
-                    <span className="text-xs font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{q.answer}</span>
+                  <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+                    <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{answers[i] || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.answer}</span>
                   </span>
                 ) : (
-                  <input type="text" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }} className={iCls} />
+                  <input type="text" inputMode="numeric" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={iCls} />
                 )}
                 <span className="h-[1.5px] w-12 rounded bg-[var(--color-text-primary)]" />
                 <span className="h-8 w-12 flex items-center justify-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{q.den}</span>
@@ -1879,12 +1879,13 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
               <input
                 type="text"
+                inputMode="decimal"
                 value={decAnswers[i]}
-                onChange={(e) => { if (!validated) setDecAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                onChange={(e) => { if (!validated) setDecAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; }); }}
                 placeholder="…"
                 className={`w-24 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : decStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
               />
-              {decStatuses[i] === "wrong" && <span className="flex flex-col text-sm"><span className="text-amber-500 line-through leading-tight">{decAnswers[i]}</span><span className="font-bold text-[var(--color-text-primary)] leading-tight">{item.answer}</span></span>}
+              {decStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{decAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
             </div>
           ))}
         </div>
@@ -1902,15 +1903,16 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
               <span className="text-sm font-medium text-[var(--color-text-primary)]">{item.decStr} =</span>
               <div className="flex items-center gap-1">
                 <input
-                  type="number"
+                  type="text"
+                  inputMode="numeric"
                   value={fracAnswers[i]}
-                  onChange={(e) => { if (!validated) setFracAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; }); }}
+                  onChange={(e) => { if (!validated) setFracAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }}
                   placeholder="…"
                   className={`w-20 rounded-xl border px-3 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : fracStatuses[i] === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
                 />
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">/{item.denominator}</span>
               </div>
-              {fracStatuses[i] === "wrong" && <span className="flex flex-col text-sm"><span className="text-amber-500 line-through leading-tight">{fracAnswers[i]}</span><span className="font-bold text-[var(--color-text-primary)] leading-tight">{item.answer}</span></span>}
+              {fracStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{fracAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
             </div>
           ))}
         </div>
@@ -2031,14 +2033,15 @@ export function A4ModuleContent() {
           </div>
           <input
             key={exerciseKey}
-            type={currentStep.item.type === "number" ? "number" : "text"}
+            type="text"
+            inputMode={currentStep.item.type === "number" ? "decimal" : "text"}
             value={answer}
-            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
           />
-          {exStatus === "wrong" && <p className="text-sm">{exAttempts >= 2 ? <><span className="text-amber-500 line-through leading-tight block">{answer}</span><span className="font-bold text-[var(--color-text-primary)] leading-tight block">{currentStep.item.acceptable[0]}</span></> : <span className="text-amber-500">Essayez encore…</span>}</p>}
+          {exStatus === "wrong" && <p>{exAttempts >= 2 ? <><span className="text-xs text-[var(--color-text-primary)] leading-none block">{answer}</span><span className="text-xs font-bold text-amber-600 leading-none block">{currentStep.item.acceptable[0]}</span></> : <span className="text-xs text-amber-500">Essayez encore…</span>}</p>}
         </div>
       )}
 

@@ -171,7 +171,6 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
   const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors";
-  const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
   return (
     <div className="space-y-4">
@@ -198,13 +197,13 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
               <div className="flex items-center gap-2">
                 <span className="shrink-0 w-5 text-xs font-bold text-[var(--color-accent-alg)]">{ai + 1}.</span>
                 {isWrong ? (
-                  <div className={`${inputCls} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                    <span className="line-through text-amber-500 text-xs leading-none">{vals[ai] || "—"}</span>
-                    <span className="text-xs font-bold text-[var(--color-text-primary)] leading-none">{expected}</span>
+                  <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
+                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{vals[ai] || "—"}</span>
+                    <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                   </div>
                 ) : (
                   <input type="text" inputMode="decimal" value={vals[ai] ?? ""} disabled={validated}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value : c))}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value.replace(/[^0-9,.\-]/g, "") : c))}
 
                     className={`${inputCls} ${validated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
                 )}

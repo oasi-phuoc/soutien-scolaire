@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -266,16 +265,17 @@ function RelArithExercise({
 
             const inputEl = wrongField
               ? (
-                <div className={`${inputBase} ${CLS_WRONG} flex flex-col items-center justify-center`}>
-                  <span className="line-through text-amber-500 text-xs leading-none">{val || "—"}</span>
-                  <span className="text-[var(--color-text-primary)] text-xs font-bold leading-none">{fmtCorrQ(q, missedVal)}</span>
+                <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{fmtCorrQ(q, missedVal)}</span>
                 </div>
               ) : (
                 <input
                   type="text"
+                  inputMode="decimal"
                   value={val}
                   disabled={validated}
-                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value; return n; })}
+                  onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.\-]/g, ""); return n; })}
                   className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
                 />
               );

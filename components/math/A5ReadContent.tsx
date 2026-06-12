@@ -52,9 +52,9 @@ function fmtNum(v: number): string {
 // Correction box (amber, stacked wrong/correct)
 function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-2 py-0.5 h-9 ${className}`}>
-      <span className="text-xs text-amber-600 line-through tabular-nums leading-none">{wrong || "—"}</span>
-      <span className="text-sm font-bold text-[var(--color-text-primary)] tabular-nums leading-none">{correct}</span>
+    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-400 px-2 py-0.5 h-9 ${className}`}>
+      <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{wrong || "—"}</span>
+      <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
   );
 }
@@ -138,10 +138,11 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-10" />
                   : <input
                       type="text"
+                      inputMode="numeric"
                       value={vals[i]?.[j] ?? ""}
                       disabled={validated}
                       onChange={e => {
-                        const v = e.target.value;
+                        const v = e.target.value.replace(/[^0-9]/g, "");
                         setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? v : c) : row));
                       }}
                       className={`${IC(false)} w-10`}
@@ -189,9 +190,10 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
               ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
               : <input
                   type="text"
+                  inputMode="decimal"
                   value={vals[i] ?? ""}
                   disabled={validated}
-                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
+                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                   className={`${IC(false)} w-20`}
                 />}
           </div>
@@ -353,9 +355,10 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={ask.answer} className="w-14" />
                   : <input
                       type="text"
+                      inputMode="numeric"
                       value={vals[i]?.[j] ?? ""}
                       disabled={validated}
-                      onChange={e => setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? e.target.value : c) : row))}
+                      onChange={e => setVals(prev => prev.map((row, ri) => ri === i ? row.map((c, ci) => ci === j ? e.target.value.replace(/[^0-9]/g, "") : c) : row))}
                       className={`${IC(false)} w-14`}
                     />}
               </div>
@@ -413,9 +416,10 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
               ? <Err wrong={vals[i] ?? ""} correct={n} className="w-24" />
               : <input
                   type="text"
+                  inputMode="decimal"
                   value={vals[i] ?? ""}
                   disabled={validated}
-                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value : v))}
+                  onChange={e => setVals(prev => prev.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                   className={`${IC(false)} w-24`}
                 />}
           </div>
@@ -569,14 +573,14 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : validated && slotWrong[i]
-                    ? "border-amber-500 bg-amber-50 dark:bg-amber-950/20"
+                    ? "border-amber-400"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
               }`}
             >
               {validated && slotWrong[i]
                 ? <>
-                    <span className="text-xs text-amber-600 line-through leading-none">{s}</span>
-                    <span className="text-sm font-bold text-[var(--color-text-primary)] leading-none">{sorted[i]}</span>
+                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{s}</span>
+                    <span className="text-xs font-bold text-amber-600 leading-none">{sorted[i]}</span>
                   </>
                 : <span>{s ?? "—"}</span>
               }
@@ -793,8 +797,8 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               {wrongs[i]
                 ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
-                : <input type="text" value={vals[i] ?? ""} disabled={validated}
-                    onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value : v))}
+                : <input type="text" inputMode="decimal" value={vals[i] ?? ""} disabled={validated}
+                    onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
                     className={`${IC(false)} w-20`} />}
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
               <span className="font-mono text-sm text-[var(--color-text-primary)]">{secondVal}</span>
@@ -852,16 +856,16 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             {wrongs[i]?.[0]
               ? <Err wrong={vals[i]?.[0] ?? ""} correct={String(item.lo)} className="w-16" />
-              : <input type="text" value={vals[i]?.[0] ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value, v[1]!] as [string, string] : v))}
+              : <input type="text" inputMode="numeric" value={vals[i]?.[0] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value.replace(/[^0-9]/g, ""), v[1]!] as [string, string] : v))}
                   className={`${IC(false)} w-16`} />}
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
             <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{item.numStr}</span>
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
             {wrongs[i]?.[1]
               ? <Err wrong={vals[i]?.[1] ?? ""} correct={String(item.hi)} className="w-16" />
-              : <input type="text" value={vals[i]?.[1] ?? ""} disabled={validated}
-                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value] as [string, string] : v))}
+              : <input type="text" inputMode="numeric" value={vals[i]?.[1] ?? ""} disabled={validated}
+                  onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value.replace(/[^0-9]/g, "")] as [string, string] : v))}
                   className={`${IC(false)} w-16`} />}
           </React.Fragment>
         ))}
@@ -957,8 +961,8 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                         {validated
                           ? isWrong
                             ? <text x={x} textAnchor="middle" fontSize="9">
-                                <tspan y={16} fill="#D97706" textDecoration="line-through">{vals[li]?.[ai] || "—"}</tspan>
-                                <tspan x={x} y={26} fontSize="11" fontWeight="bold" fill="currentColor">{expected}</tspan>
+                                <tspan y={16} fill="currentColor">{vals[li]?.[ai] || "—"}</tspan>
+                                <tspan x={x} y={26} fontSize="11" fontWeight="bold" fill="#D97706">{expected}</tspan>
                               </text>
                             : <text x={x} y={20} textAnchor="middle" fontSize="11" fontWeight="bold" fill="var(--color-accent-alg)">
                                 {vals[li]?.[ai] ?? ""}
@@ -966,8 +970,9 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                           : <foreignObject x={x - 22} y={4} width={44} height={22}>
                               <input
                                 type="text"
+                                inputMode="decimal"
                                 value={vals[li]?.[ai] ?? ""}
-                                onChange={e => setVals(p => p.map((row, ri) => ri === li ? row.map((c, ci) => ci === ai ? e.target.value : c) : row))}
+                                onChange={e => setVals(p => p.map((row, ri) => ri === li ? row.map((c, ci) => ci === ai ? e.target.value.replace(/[^0-9,.]/g, "") : c) : row))}
                                 style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
                               />
                             </foreignObject>}
@@ -1082,8 +1087,8 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
                   {assigned !== null && (
                     w ? (
                       <text x={x} textAnchor="middle" fontSize="9">
-                        <tspan y={lineY + 30} fill="#D97706" textDecoration="line-through">{fmtNum(assigned)}</tspan>
-                        <tspan x={x} y={lineY + 42} fontSize="10" fontWeight="bold" fill="currentColor">{fmtNum(v)}</tspan>
+                        <tspan y={lineY + 30} fill="currentColor">{fmtNum(assigned)}</tspan>
+                        <tspan x={x} y={lineY + 42} fontSize="10" fontWeight="bold" fill="#D97706">{fmtNum(v)}</tspan>
                       </text>
                     ) : (
                       <text x={x} y={lineY + 34} textAnchor="middle" fontSize="10" fontWeight="bold" fill="var(--color-accent-alg)">

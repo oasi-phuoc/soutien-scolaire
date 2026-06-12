@@ -6,7 +6,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
   title: "La famille",
   section: "V1",
   words: [
-    { word: "père",         article: "le",  gender: "m", image: "pere.jpg",          definition: ["le parent masculin", "l'homme qui a des enfants", "le papa"], exampleSentences: { a1: [
+    { word: "père",         article: "le",  gender: "m", image: "pere.png",          definition: ["le parent masculin", "l'homme qui a des enfants", "le papa"], exampleSentences: { a1: [
       "Mon père est gentil.",
       "Le père de Léa travaille beaucoup.",
       "Mon père aime le café.",
@@ -1448,7 +1448,7 @@ export const V1_FAMILLE_THEME: VocabTheme = {
       "Bien que ma cousine et moi soyons différentes, nous nous entendons à merveille.",
       "J'espère que ma cousine trouvera un métier qui la rendra véritablement épanouie.",
     ] } },
-    { word: "neveu",        article: "le",  gender: "m", image: "neveu.jpg",         definition: ["le fils du frère ou de la sœur", "le garçon dont vous êtes l'oncle ou la tante", "l'enfant masculin de vos frères ou sœurs"], exampleSentences: { a1: [
+    { word: "neveu",        article: "le",  gender: "m", image: "neveu.png",         definition: ["le fils du frère ou de la sœur", "le garçon dont vous êtes l'oncle ou la tante", "l'enfant masculin de vos frères ou sœurs"], exampleSentences: { a1: [
       "Mon neveu est adorable.",
       "Le neveu de Léa a trois ans.",
       "Mon neveu aime les jouets.",

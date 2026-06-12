@@ -69,8 +69,9 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
       ) : (
         <input
           type="text"
+          inputMode="decimal"
           value={value}
-          onChange={e => onChange(e.target.value)}
+          onChange={e => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
           className="h-6 w-full bg-transparent text-center outline-none"
         />
       )}
@@ -750,8 +751,8 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
         return (
           <div className="flex items-center gap-2 pt-1">
             <span className="text-xs font-bold text-[var(--color-accent-alg)] shrink-0">Résultat :</span>
-            <input type="text" value={decResult} disabled={validated}
-              onChange={e => onDecResultChange(e.target.value)}
+            <input type="text" inputMode="decimal" value={decResult} disabled={validated}
+              onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
               className={`w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
                 isWrong ? "border-2 border-amber-500 bg-transparent" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)]"
               }`}
@@ -1039,7 +1040,7 @@ function DecimalDivisionGrid({
           inputMode="decimal"
           value={decResult}
           disabled={validated}
-          onChange={e => onDecResultChange(e.target.value)}
+          onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
           className="w-28 rounded-xl border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-2 py-1 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-60"
         />
         {validated && decResult.trim() && !matchNum(decResult, parseNum(decCorrect), 0.005) && (

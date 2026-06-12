@@ -55,8 +55,9 @@ function CorrectionInput({
     <span className="inline-flex flex-col items-center gap-0.5 align-middle">
       <input
         type="text"
+        inputMode="decimal"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => onChange(e.target.value.replace(/[^0-9,.]/g, ""))}
         disabled={validated}
         className={`${width} h-9 rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 px-1 text-center font-mono text-sm text-[var(--color-text-primary)] focus:outline-none focus:ring-1 focus:border-[var(--color-accent-alg)] focus:ring-[var(--color-accent-alg)]/20 disabled:opacity-80`}
       />

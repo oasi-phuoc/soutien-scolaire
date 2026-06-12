@@ -16,7 +16,7 @@ import { DecReadDecomposeExercise, DecReadRecomposeExercise, DecReadPlaceValueEx
 import { A7NLReadMixedExercise, A7NLPlaceMixedExercise, A7NLReadNegExercise, A7NLPlaceNegExercise } from "@/components/math/A7NLContent";
 import { A7CompareExercise, A7RelNumberSelectExercise, A7RelEncadrementExercise, A7RelOrderingExercise, A7RelSeqCompleteExercise } from "@/components/math/A7CompareContent";
 import { A7RelArithExercise, A7RelMulDivExercise } from "@/components/math/A7ArithContent";
-import { A8PowerExercise } from "@/components/math/A8PowerContent";
+import { A8PowerExercise, A8MissingExpExercise, A8MissingBaseExercise, A8PowerCompareExercise, A8PowerOrderExercise, A8MultExercise, A8DivExercise, A8PowPowExercise, A8MixedExercise, A8EqCompleteExercise, A8Pow10CalcExercise, A8ToPow10Exercise, A8Pow10ExpExercise, A8SciCalcExercise, A8SciWriteExercise, A8SqrtTrueFalseExercise, A8SqrtExercise, A8SqrtMissingExercise, A8OpSimpleExercise, A8OpParenExercise, A8OpBracketExercise, A8OpFillExercise, A8OpPowSqrtExercise, A8OpComplexExercise } from "@/components/math/A8PowerContent";
 import { PctOfNumExercise, PartToPctExercise, PctChangeExercise, PctDiffExercise, PctMultiplierExercise, PctTableExercise, PctWordExercise } from "@/components/math/A6PercentContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
@@ -72,6 +72,29 @@ type WorkspaceStep =
   | { kind: "a7_rel_arith"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "balanced" | "ex5" | "decimal" }
   | { kind: "a7_rel_mul_div"; exNum: number; range: number; count: number; missingOperand: boolean; timer?: number; questionMode?: "standard" | "mixed_dec" }
   | { kind: "a8_power_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_missing_exp_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_missing_base_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_power_cmp_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_power_order_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_mult_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_div_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_pow_pow_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_mixed_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_eq_complete_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_pow10_calc_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_to_pow10_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_pow10_exp_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_sci_calc_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_sci_write_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_sqrt_tf_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_sqrt_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_sqrt_missing_ex"; exNum: number; count: number; promptFr: string }
+  | { kind: "a8_op_simple_ex"; exNum: number; promptFr: string }
+  | { kind: "a8_op_paren_ex"; exNum: number; promptFr: string }
+  | { kind: "a8_op_bracket_ex"; exNum: number; promptFr: string }
+  | { kind: "a8_op_fill_ex"; exNum: number; promptFr: string }
+  | { kind: "a8_op_powsqrt_ex"; exNum: number; promptFr: string }
+  | { kind: "a8_op_complex_ex"; exNum: number; promptFr: string }
   | { kind: "pct_to_frac_ex"; exNum: number }
   | { kind: "pct_to_dec_ex"; exNum: number }
   | { kind: "frac_to_pct_ex"; exNum: number }
@@ -402,8 +425,66 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "A8-1") {
     steps.push({ kind: "a8_power_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance des nombres." });
+    steps.push({ kind: "a8_missing_exp_ex", exNum: 2, count: 5, promptFr: "Complétez avec la puissance." });
+    steps.push({ kind: "a8_missing_base_ex", exNum: 3, count: 5, promptFr: "Retrouvez la base." });
+    steps.push({ kind: "a8_power_cmp_ex", exNum: 4, count: 5, promptFr: "Comparez les puissances." });
+    steps.push({ kind: "a8_power_order_ex", exNum: 5, count: 2, promptFr: "Classez les puissances par ordre croissant." });
     steps.push({ kind: "eval_start" });
     steps.push({ kind: "a8_power_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance des nombres." });
+    steps.push({ kind: "a8_missing_exp_ex", exNum: 2, count: 5, promptFr: "Complétez avec la puissance." });
+    steps.push({ kind: "a8_missing_base_ex", exNum: 3, count: 5, promptFr: "Retrouvez la base." });
+    steps.push({ kind: "a8_power_cmp_ex", exNum: 4, count: 5, promptFr: "Comparez les puissances." });
+    steps.push({ kind: "a8_power_order_ex", exNum: 5, count: 2, promptFr: "Classez les puissances par ordre croissant." });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A8-2") {
+    steps.push({ kind: "a8_mult_ex", exNum: 1, count: 5, promptFr: "Effectuez les multiplications de puissances de même base." });
+    steps.push({ kind: "a8_div_ex", exNum: 2, count: 5, promptFr: "Effectuez les divisions de puissances de même base." });
+    steps.push({ kind: "a8_pow_pow_ex", exNum: 3, count: 5, promptFr: "Effectuez les puissances de puissances." });
+    steps.push({ kind: "a8_mixed_ex", exNum: 4, count: 5, promptFr: "Effectuez les calculs." });
+    steps.push({ kind: "a8_eq_complete_ex", exNum: 5, count: 5, promptFr: "Complétez les égalités." });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a8_mult_ex", exNum: 1, count: 5, promptFr: "Effectuez les multiplications de puissances de même base." });
+    steps.push({ kind: "a8_div_ex", exNum: 2, count: 5, promptFr: "Effectuez les divisions de puissances de même base." });
+    steps.push({ kind: "a8_pow_pow_ex", exNum: 3, count: 5, promptFr: "Effectuez les puissances de puissances." });
+    steps.push({ kind: "a8_mixed_ex", exNum: 4, count: 5, promptFr: "Effectuez les calculs." });
+    steps.push({ kind: "a8_eq_complete_ex", exNum: 5, count: 5, promptFr: "Complétez les égalités." });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A8-4") {
+    steps.push({ kind: "a8_sqrt_tf_ex", exNum: 1, count: 5, promptFr: "Sélectionner si c'est vrai ou faux." });
+    steps.push({ kind: "a8_sqrt_ex", exNum: 2, count: 5, promptFr: "Calculez les racines carrées." });
+    steps.push({ kind: "a8_sqrt_missing_ex", exNum: 3, count: 5, promptFr: "Trouvez le nombre manquant." });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a8_sqrt_tf_ex", exNum: 1, count: 5, promptFr: "Sélectionner si c'est vrai ou faux." });
+    steps.push({ kind: "a8_sqrt_ex", exNum: 2, count: 5, promptFr: "Calculez les racines carrées." });
+    steps.push({ kind: "a8_sqrt_missing_ex", exNum: 3, count: 5, promptFr: "Trouvez le nombre manquant." });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A8-5") {
+    steps.push({ kind: "a8_op_simple_ex",  exNum: 1, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_paren_ex",   exNum: 2, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_bracket_ex", exNum: 3, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_fill_ex",    exNum: 4, promptFr: "Complétez avec les valeurs manquantes." });
+    steps.push({ kind: "a8_op_powsqrt_ex", exNum: 5, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_complex_ex", exNum: 6, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a8_op_simple_ex",  exNum: 1, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_paren_ex",   exNum: 2, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_bracket_ex", exNum: 3, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_fill_ex",    exNum: 4, promptFr: "Complétez avec les valeurs manquantes." });
+    steps.push({ kind: "a8_op_powsqrt_ex", exNum: 5, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "a8_op_complex_ex", exNum: 6, promptFr: "Calculez les résultats." });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "A8-3") {
+    steps.push({ kind: "a8_pow10_calc_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance de 10." });
+    steps.push({ kind: "a8_to_pow10_ex", exNum: 2, count: 5, promptFr: "Écrivez le nombre comme puissance de 10." });
+    steps.push({ kind: "a8_pow10_exp_ex", exNum: 3, count: 5, promptFr: "Complétez l'exposant." });
+    steps.push({ kind: "a8_sci_calc_ex", exNum: 4, count: 5, promptFr: "Calculez." });
+    steps.push({ kind: "a8_sci_write_ex", exNum: 5, count: 5, promptFr: "Écrivez en notation scientifique." });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "a8_pow10_calc_ex", exNum: 1, count: 5, promptFr: "Calculez la puissance de 10." });
+    steps.push({ kind: "a8_to_pow10_ex", exNum: 2, count: 5, promptFr: "Écrivez le nombre comme puissance de 10." });
+    steps.push({ kind: "a8_pow10_exp_ex", exNum: 3, count: 5, promptFr: "Complétez l'exposant." });
+    steps.push({ kind: "a8_sci_calc_ex", exNum: 4, count: 5, promptFr: "Calculez." });
+    steps.push({ kind: "a8_sci_write_ex", exNum: 5, count: 5, promptFr: "Écrivez en notation scientifique." });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1478,7 +1559,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
   // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
   //            keep workspace step builder only for A4 and A7 parents (custom step types).
-  const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-");
+  const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
   if (isRevision) {
     const revParent = getParentModuleForRevision(submoduleId ?? "");
@@ -1500,7 +1581,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -1811,6 +1892,106 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       {currentStep?.kind === "a8_power_ex" && (
         <A8PowerExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
+      {currentStep?.kind === "a8_missing_exp_ex" && (
+        <A8MissingExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_missing_base_ex" && (
+        <A8MissingBaseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_power_cmp_ex" && (
+        <A8PowerCompareExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_power_order_ex" && (
+        <A8PowerOrderExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_mult_ex" && (
+        <A8MultExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_div_ex" && (
+        <A8DivExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_pow_pow_ex" && (
+        <A8PowPowExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_mixed_ex" && (
+        <A8MixedExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_eq_complete_ex" && (
+        <A8EqCompleteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A8-3 powers of 10 exercises */}
+      {currentStep?.kind === "a8_pow10_calc_ex" && (
+        <A8Pow10CalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_to_pow10_ex" && (
+        <A8ToPow10Exercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_pow10_exp_ex" && (
+        <A8Pow10ExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_sci_calc_ex" && (
+        <A8SciCalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_sci_write_ex" && (
+        <A8SciWriteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A8-4 square root exercises */}
+      {currentStep?.kind === "a8_sqrt_tf_ex" && (
+        <A8SqrtTrueFalseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_sqrt_ex" && (
+        <A8SqrtExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_sqrt_missing_ex" && (
+        <A8SqrtMissingExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A8-5 operations priority exercises */}
+      {currentStep?.kind === "a8_op_simple_ex" && (
+        <A8OpSimpleExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_op_paren_ex" && (
+        <A8OpParenExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_op_bracket_ex" && (
+        <A8OpBracketExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_op_fill_ex" && (
+        <A8OpFillExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_op_powsqrt_ex" && (
+        <A8OpPowSqrtExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "a8_op_complex_ex" && (
+        <A8OpComplexExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A6-2 percentage exercises */}
+      {currentStep?.kind === "pct_of_num_ex" && (
+        <PctOfNumExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "part_to_pct_ex" && (
+        <PartToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* A6-3 percentage increase/decrease exercises */}
+      {currentStep?.kind === "pct_diff_ex" && (
+        <PctDiffExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_change_ex" && (
+        <PctChangeExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_multiplier_ex" && (
+        <PctMultiplierExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_table_ex" && (
+        <PctTableExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_word_ex" && (
+        <PctWordExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
 
       {/* A6-2 percentage exercises */}
       {currentStep?.kind === "pct_of_num_ex" && (
@@ -1868,14 +2049,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           </div>
           <input
             key={exKey}
-            type={currentStep.item.type === "number" ? "number" : "text"}
+            type="text"
+            inputMode={currentStep.item.type === "number" ? "decimal" : "text"}
             value={answer}
-            onChange={(e) => { setAnswer(e.target.value); if (exStatus !== "idle") setExStatus("idle"); }}
+            onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") validateText(); }}
             placeholder="Votre réponse…"
             className={`w-full rounded-xl border px-4 py-3 text-sm outline-none transition-colors ${exStatus === "correct" ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : exStatus === "wrong" ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] focus:border-[var(--color-accent-alg)]"}`}
           />
-          {exStatus === "wrong" && <p className="text-xs font-medium text-amber-600 dark:text-amber-400">{exAttempts >= 2 ? <><span className="line-through">{answer}</span> <span className="font-bold text-[var(--color-text-primary)]">{currentStep.item.acceptable[0]}</span></> : "Essayez encore…"}</p>}
+          {exStatus === "wrong" && <p>{exAttempts >= 2 ? <><span className="text-xs text-[var(--color-text-primary)] leading-none block">{answer}</span><span className="text-xs font-bold text-amber-600 leading-none block">{currentStep.item.acceptable[0]}</span></> : <span className="text-xs text-amber-500">Essayez encore…</span>}</p>}
         </div>
       )}
 

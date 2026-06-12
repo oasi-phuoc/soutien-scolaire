@@ -94,7 +94,7 @@ function A3Ex4({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
       <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions.</p>
       {data.map((q, i) => (
         <div key={i} className="flex items-center gap-2">
-          <span className="font-mono text-sm font-bold text-[var(--color-text-primary)]">
+          <span className="font-mono text-sm text-[var(--color-text-primary)]">
             {q.dividend} ÷ {q.divisor} =
           </span>
           <CorrectionInput

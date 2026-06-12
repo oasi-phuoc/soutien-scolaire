@@ -76,7 +76,7 @@ export function MathExerciseRunner({
               aria-label={ex.promptFr}
               value={values[ex.id] ?? ""}
               onChange={(ev) =>
-                setValues((s) => ({ ...s, [ex.id]: ev.target.value }))
+                setValues((s) => ({ ...s, [ex.id]: ex.type === "number" ? ev.target.value.replace(/[^0-9,.\-]/g, "") : ev.target.value }))
               }
               inputMode={ex.type === "number" ? "numeric" : "text"}
               autoComplete="off"
