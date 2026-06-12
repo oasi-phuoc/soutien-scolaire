@@ -234,7 +234,7 @@ function RelArithExercise({
   const formatTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
-  const inputBase = "w-20 h-9 rounded border px-1 text-center font-mono text-sm outline-none transition-colors";
+  const inputBase = "w-20 h-9 rounded-none border-0 border-b-2 px-1 text-center font-mono text-sm outline-none transition-colors";
 
   return (
     <div className="space-y-4">
@@ -265,7 +265,7 @@ function RelArithExercise({
 
             const inputEl = wrongField
               ? (
-                <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+                <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                   <span className="text-xs text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{fmtCorrQ(q, missedVal)}</span>
                 </div>
@@ -276,7 +276,7 @@ function RelArithExercise({
                   value={val}
                   disabled={validated}
                   onChange={e => setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.\-]/g, ""); return n; })}
-                  className={`${inputBase} py-1.5 border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]`}
+                  className={`${inputBase} py-1.5 border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]`}
                 />
               );
 

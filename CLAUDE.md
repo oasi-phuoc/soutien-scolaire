@@ -191,16 +191,15 @@ Déclarées en haut de chaque fichier composant qui en a besoin :
 ```ts
 const MATH_TEXT_INPUT_BASE =
   "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 " +
-  "bg-[var(--color-accent-alg)]/5 text-center font-mono outline-none " +
-  "transition-colors focus:border-[var(--color-accent-alg)] " +
-  "focus:bg-[var(--color-accent-alg)]/10 disabled:opacity-70";
+  "text-center font-mono outline-none " +
+  "transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 
 // Identique à MATH_TEXT_INPUT_BASE + cache les spinners webkit (legacy — préférer type="text")
 const MATH_NUMBER_INPUT_BASE = `${MATH_TEXT_INPUT_BASE} appearance-none
   [&::-webkit-inner-spin-button]:appearance-none
   [&::-webkit-outer-spin-button]:appearance-none`;
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
 const CELL_W = 32; // largeur cellule dans les tableaux en colonne
 ```
@@ -244,9 +243,9 @@ const CELL_W = 32; // largeur cellule dans les tableaux en colonne
 |----------|-------------------|
 | Cellule de chiffre (tableau colonne) | `h-8 w-8 px-0 text-base` |
 | Cellule de retenue | `h-5 w-8 px-0 text-[10px]` |
-| Input de réponse libre (étroit) | `w-14 px-1 py-1.5 text-sm` |
-| Input de réponse libre (large) | `w-24 px-3 py-2 text-sm` |
-| Input pleine largeur | `w-full px-4 py-3 text-sm` |
+| Input de réponse libre (étroit) | `w-14 px-0 pb-1.5 text-sm` |
+| Input de réponse libre (large) | `w-24 px-0 pb-2 text-sm` |
+| Input pleine largeur | `w-full px-0 pb-3 text-sm` |
 
 ---
 
@@ -371,11 +370,11 @@ Ajouter `data-grid-card` (ou `data-divcol-card`) sur la `<div>` englobante de ch
 
 #### Règle fondamentale (non-colonne)
 
-La case **garde exactement les mêmes dimensions, forme et fond** que quand l'élève saisit. En cas de réponse incorrecte :
+La case affiche **une ligne droite en bas uniquement** (underline, `border-b-2`), sans arrondi, sans remplissage. En cas de réponse incorrecte :
 
-- Même largeur / hauteur / `className` que l'input actif
-- Bordure orange accent `border-[var(--color-accent-alg)]` — identique à l'état focus
-- **Pas de fond coloré** (`bg-amber-50` et `bg-amber-950/20` interdits sur le conteneur)
+- Même largeur / hauteur que l'input actif
+- **Ligne du bas uniquement** `rounded-none border-0 border-b-2` en **amber-500** (pas la couleur accent, mais amber)
+- **Pas de fond coloré** (aucun `bg-*` sur le conteneur)
 - **Pas de trait séparateur** entre la réponse de l'élève et la bonne réponse
 - Réponse de l'élève en `text-[10px] text-[var(--color-text-secondary)]` + bonne réponse en `text-xs font-bold text-amber-600`, empilées sans gap
 
@@ -386,7 +385,7 @@ La case **garde exactement les mêmes dimensions, forme et fond** que quand l'é
 ```tsx
 // État: wrongField = validated && résultat faux
 if (wrongField) return (
-  <div className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+  <div className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
     <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
     <span className="text-xs font-bold leading-none text-amber-600">{correctAnswer}</span>
   </div>
@@ -402,14 +401,14 @@ return (
 
 ```tsx
 {isWrong ? (
-  <div className="flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1">
+  <div className="w-12 flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-1">
     <span className="text-[10px] text-[var(--color-text-secondary)] leading-none">{userAns || "—"}</span>
     <span className="text-xs font-bold text-amber-600 leading-none">{correct}</span>
   </div>
 ) : (
   <input type="text" inputMode="numeric" value={userAns} disabled={validated}
     onChange={e => onChange(e.target.value.replace(/[^0-9]/g, ""))}
-    className="w-14 px-1 py-1.5 text-sm text-center font-mono ..." />
+    className="w-14 px-0 pb-1.5 text-sm text-center font-mono rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70" />
 )}
 ```
 
@@ -417,17 +416,19 @@ return (
 
 | État | Border | Background | Texte |
 |------|--------|------------|-------|
-| Idle | `border-[var(--color-border-default)]` ou `border-[var(--color-accent-alg)]/40` | normal | normal |
-| Correct | `border-[var(--color-border-default)]` | normal légèrement atténué | normal |
-| Faux | `border-[var(--color-accent-alg)]` | **inchangé** (pas de fond amber) | — |
+| Idle | `border-0 border-b-2 border-[var(--color-accent-alg)]/60` | **aucun** (transparent) | normal |
+| Focus | `border-0 border-b-2 border-[var(--color-accent-alg)]` | **aucun** | normal |
+| Correct | inchangé | **aucun** | normal |
+| Faux (div) | `border-0 border-b-2 border-amber-500` | **aucun** (pas de fond amber) | — |
 | Réponse attendue | — | — | `text-amber-600 font-bold text-xs` |
 | Réponse utilisateur | — | — | `text-[var(--color-text-secondary)] text-[10px]` |
 
 #### CLS_WRONG — constante globale
 
 ```ts
-const CLS_WRONG = "border-[var(--color-accent-alg)]";
+const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 // Ancienne valeur interdite : "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+// Ancienne valeur interdite : "border-[var(--color-accent-alg)]"
 ```
 
 ---
@@ -478,8 +479,8 @@ export function MonExercice({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {/* Rendu de la question ici */}
               {wrongField ? (
-                <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
-                  <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                <div className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
                   <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
               ) : (

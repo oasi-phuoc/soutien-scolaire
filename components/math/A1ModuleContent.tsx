@@ -1717,7 +1717,7 @@ function ExerciseRow({
         </span>
       ) : null}
       {validated && result !== null ? (
-        <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : CLS_WRONG}`}>
+        <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-[var(--color-border-default)]" : CLS_WRONG}`}>
           {result ? (
             <span className="text-sm font-bold text-[var(--color-text-primary)]">{answer}</span>
           ) : (
@@ -1736,7 +1736,7 @@ function ExerciseRow({
   );
 }
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
 // ─── Composant principal ──────────────────────────────────────────────────────
 
@@ -3166,8 +3166,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Total…" inputMode="numeric" autoComplete="off" readOnly={ex10Validated}
                       className={
                         ex10Validated && result === true ? "!border-blue-400" :
-                        ex10Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
-                        "!bg-blue-50 dark:!bg-blue-950/30"
+                        ex10Validated && result === false ? "!rounded-none !border-0 !border-b-2 !border-amber-500" :
+                        ""
                       } />
                   </div>
                   {zoomedEx === zoomKey10 && (
@@ -3218,7 +3218,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="shrink-0">=</span>
                     {(() => {
                       const ans = ex11Answers[qi] ?? {m:"",c:"",d:"",u:""};
-                      const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
+                      const inputCls = "w-0 flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
                       if (ex11Validated && result !== null) {
                         const mOk = parseInt(ans.m) === q.m * 1000;
                         const cOk = parseInt(ans.c) === q.c * 100;
@@ -3226,13 +3226,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const uOk = parseInt(ans.u) === q.u;
                         return (
                           <>
-                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${mOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{mOk ? ans.m : String(q.m * 1000)}</span>
+                            <span className={`flex-1 rounded-none border-0 border-b-2 px-0 py-1 text-center text-sm ${mOk ? "border-blue-400 text-[var(--color-text-primary)]" : CLS_WRONG}`}>{mOk ? ans.m : String(q.m * 1000)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${cOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{cOk ? ans.c : String(q.c * 100)}</span>
+                            <span className={`flex-1 rounded-none border-0 border-b-2 px-0 py-1 text-center text-sm ${cOk ? "border-blue-400 text-[var(--color-text-primary)]" : CLS_WRONG}`}>{cOk ? ans.c : String(q.c * 100)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${dOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{dOk ? ans.d : String(q.d * 10)}</span>
+                            <span className={`flex-1 rounded-none border-0 border-b-2 px-0 py-1 text-center text-sm ${dOk ? "border-blue-400 text-[var(--color-text-primary)]" : CLS_WRONG}`}>{dOk ? ans.d : String(q.d * 10)}</span>
                             <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>
-                            <span className={`flex-1 rounded border px-1 py-1 text-center text-sm ${uOk ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`}>{uOk ? ans.u : String(q.u)}</span>
+                            <span className={`flex-1 rounded-none border-0 border-b-2 px-0 py-1 text-center text-sm ${uOk ? "border-blue-400 text-[var(--color-text-primary)]" : CLS_WRONG}`}>{uOk ? ans.u : String(q.u)}</span>
                           </>
                         );
                       }
@@ -3301,8 +3301,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex12Validated}
                       className={
                         ex12Validated && result === true ? "!border-blue-400" :
-                        ex12Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
-                        "!bg-blue-50 dark:!bg-blue-950/30"
+                        ex12Validated && result === false ? "!rounded-none !border-0 !border-b-2 !border-amber-500" :
+                        ""
                       } />
                   </div>
                   {zoomedEx === zoomKey12 && (
@@ -3348,8 +3348,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder="Cubes…" inputMode="numeric" autoComplete="off" readOnly={ex13Validated}
                       className={
                         ex13Validated && result === true ? "!border-blue-400" :
-                        ex13Validated && result === false ? "!border-amber-500 !bg-amber-50 !text-amber-600 dark:!bg-amber-950/20" :
-                        "!bg-blue-50 dark:!bg-blue-950/30"
+                        ex13Validated && result === false ? "!rounded-none !border-0 !border-b-2 !border-amber-500" :
+                        ""
                       } />
                   </div>
                   {zoomedEx === zoomKey13 && (
@@ -3390,7 +3390,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const cOk = ex14Validated ? (ans.c === "" ? 0 : parseInt(ans.c)) === c * 100 : null;
               const dOk = ex14Validated ? (ans.d === "" ? 0 : parseInt(ans.d)) === d * 10 : null;
               const uOk = ex14Validated ? (ans.u === "" ? 0 : parseInt(ans.u)) === u : null;
-              const _fieldCls = "w-0 flex-1 rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
+              const _fieldCls = "w-0 flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
               const valCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
               const setAns = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                 setEx14Ans(prev => prev.map((a, i) => i === qi ? {...a, ...patch} : a));
@@ -3407,11 +3407,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <>
                         <div className="flex flex-1 flex-col items-center gap-0.5">
                           {ex14Validated ? (
-                            <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(mOk)}`}>
+                            <span className={`w-full rounded-none border-0 border-b-2 px-0 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(mOk)}`}>
                               {mOk ? <span className="text-[var(--color-text-primary)]">{ans.m || String(m * 1000)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.m || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(m * 1000)}</span></>}
                             </span>
                           ) : (
-                            <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.m}
+                            <input className={`w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]`} inputMode="numeric" autoComplete="off" value={ans.m}
                               onChange={e => setAns({m: e.target.value.replace(/[^0-9]/g, "")})} />
                           )}
                           <span className="text-xs text-[var(--color-text-secondary)]">millier</span>
@@ -3421,11 +3421,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     )}
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(cOk)}`}>
+                        <span className={`w-full rounded-none border-0 border-b-2 px-0 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(cOk)}`}>
                           {cOk ? <span className="text-[var(--color-text-primary)]">{ans.c || String(c * 100)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.c || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(c * 100)}</span></>}
                         </span>
                       ) : (
-                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.c}
+                        <input className={`w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]`} inputMode="numeric" autoComplete="off" value={ans.c}
                           onChange={e => setAns({c: e.target.value.replace(/[^0-9]/g, "")})} />
                       )}
                       <span className="text-xs text-[var(--color-text-secondary)]">centaine</span>
@@ -3433,11 +3433,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(dOk)}`}>
+                        <span className={`w-full rounded-none border-0 border-b-2 px-0 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(dOk)}`}>
                           {dOk ? <span className="text-[var(--color-text-primary)]">{ans.d || String(d * 10)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.d || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(d * 10)}</span></>}
                         </span>
                       ) : (
-                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.d}
+                        <input className={`w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]`} inputMode="numeric" autoComplete="off" value={ans.d}
                           onChange={e => setAns({d: e.target.value.replace(/[^0-9]/g, "")})} />
                       )}
                       <span className="text-xs text-[var(--color-text-secondary)]">dizaine</span>
@@ -3445,11 +3445,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                     <div className="flex flex-1 flex-col items-center gap-0.5">
                       {ex14Validated ? (
-                        <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(uOk)}`}>
+                        <span className={`w-full rounded-none border-0 border-b-2 px-0 py-1.5 text-sm inline-flex flex-col items-center justify-center ${valCls(uOk)}`}>
                           {uOk ? <span className="text-[var(--color-text-primary)]">{ans.u || String(u)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans.u || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(u)}</span></>}
                         </span>
                       ) : (
-                        <input className={`w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]`} inputMode="numeric" autoComplete="off" value={ans.u}
+                        <input className={`w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]`} inputMode="numeric" autoComplete="off" value={ans.u}
                           onChange={e => setAns({u: e.target.value.replace(/[^0-9]/g, "")})} />
                       )}
                       <span className="text-xs text-[var(--color-text-secondary)]">unité</span>
@@ -3555,7 +3555,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     onChange={e => setEx16Answers(prev => prev.map((row, ri) =>
                       ri === qi ? row.map((v, vi) => vi === idx ? e.target.value.replace(/[^0-9]/g, "") : v) : row
                     ))}
-                    className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                    className="h-10 w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)]"
                     aria-label={ansKey}
                   />
                 );
@@ -3640,7 +3640,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
             {/* ── Question page A1.2 ── */}
             {evalStarted && !evalSubmitted && lesson.submoduleId === "A1-2" && (() => {
-              const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 px-1 py-1 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)] focus-visible:ring-[3px] focus-visible:ring-[color-mix(in_oklch,var(--color-accent-alg)_22%,transparent)]";
+              const inputCls = "w-0 flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
 
               if (evalPageIdx === 0) {
                 const q9val = a12EvalQ9.tens * 10 + a12EvalQ9.units;
@@ -3721,7 +3721,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
                           onChange={e => setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, ""))}
                           placeholder="Total…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
-                          className="!bg-blue-50 dark:!bg-blue-950/30" />
+                          className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
                       )}
                     </div>
                     {zoomedEx === "eval-q10" && (
@@ -3767,7 +3767,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                           {fields11.map((f, fi) => {
                             const wrong11 = evalPageValidated && parseInt(f.val) !== f.correct;
                             const fieldCls = wrong11
-                              ? "w-0 flex-1 rounded border border-amber-500 bg-amber-50 px-1 py-1 text-center text-sm text-amber-600 outline-none dark:bg-amber-950/20"
+                              ? "w-0 flex-1 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1 text-center text-sm outline-none"
                               : inputCls;
                             return (
                               <React.Fragment key={f.key}>
@@ -3815,7 +3815,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <AppInput label="" id="a12eval-q12" value={a12EvalQ12Ans}
                           onChange={e => setA12EvalQ12Ans(e.target.value.replace(/[^0-9]/g, ""))}
                           placeholder="Cubes…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
-                          className="!bg-blue-50 dark:!bg-blue-950/30" />
+                          className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
                       )}
                     </div>
                     {zoomedEx === "eval-q12" && (
@@ -3840,12 +3840,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const a = a12EvalEx14Ans[qi] ?? {m:"",c:"",d:"",u:""};
                     const setAns14 = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                       setA12EvalEx14Ans(prev => prev.map((row, i) => i === qi ? {...row, ...patch} : row));
-                    const inpCls14 = "w-full rounded border bg-blue-50 px-1 py-1.5 text-center text-sm outline-none dark:bg-blue-950/30 focus-visible:border-[var(--color-accent-alg)]";
+                    const inpCls14 = "w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 pb-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
                     const mkField14 = (val: string, correct: number, lbl: string, onChange: (v:string)=>void) => {
                       const wrong14 = evalPageValidated && parseInt(val) !== correct;
                       const fieldCls14 = wrong14
-                        ? "w-full rounded border border-amber-500 bg-amber-50 px-1 py-1.5 text-center text-sm text-amber-600 outline-none dark:bg-amber-950/20"
-                        : `${inpCls14} border-[var(--color-border-default)]`;
+                        ? "w-full rounded-none border-0 border-b-2 border-amber-500 px-0 pb-1.5 text-center text-sm outline-none"
+                        : inpCls14;
                       return (
                         <div className="flex flex-1 flex-col items-center gap-0.5">
                           <input className={fieldCls14} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={val} onChange={e=>onChange(e.target.value.replace(/[^0-9]/g,""))} />
@@ -3950,7 +3950,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                               cells16.push(
                                 <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans} disabled={evalPageValidated}
                                   onChange={e => { const v = e.target.value.replace(/[^0-9]/g,""); setA12EvalEx16Ans(prev => prev.map((row2, ri) => ri === qi ? row2.map((cv, ci2) => ci2 === ci ? v : cv) : row2)); }}
-                                  className="h-10 w-full rounded-[var(--radius-md)] border border-zinc-300 bg-blue-50 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)] dark:border-zinc-600 dark:bg-blue-950/20"
+                                  className="h-10 w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center text-sm font-bold tabular-nums outline-none focus:border-[var(--color-accent-alg)]"
                                 />
                               );
                             }
@@ -4014,7 +4014,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
-                          <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${audioWrong ? "border-amber-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
+                          <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 px-0 ${audioWrong ? "border-amber-400" : "border-[var(--color-border-default)]"}`}>
                             {audioWrong ? (
                               <>
                                 <span className="text-xs text-[var(--color-text-primary)] leading-none">{audioAns || "—"}</span>
@@ -4050,7 +4050,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             const seriesAns = evalAnswers[ex.id] ?? "";
                             const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
                             return evalPageValidated ? (
-                              <div key={ni} className={`flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-[var(--radius-md)] border text-sm font-medium tabular-nums ${seriesWrong ? "border-amber-400" : "border-zinc-300 dark:border-zinc-600 bg-blue-50 dark:bg-blue-950/20"}`}>
+                              <div key={ni} className={`flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-none border-0 border-b-2 text-sm font-medium tabular-nums ${seriesWrong ? "border-amber-400" : "border-zinc-300 dark:border-zinc-600"}`}>
                                 {seriesWrong ? (
                                   <>
                                     <span className="text-xs text-[var(--color-text-primary)] leading-none">{seriesAns || "—"}</span>
@@ -4093,7 +4093,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
                   {evalPageValidated ? (
-                    <div className={`flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${genWrong ? "border-amber-400" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30"}`}>
+                    <div className={`flex h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 px-0 ${genWrong ? "border-amber-400" : "border-[var(--color-border-default)]"}`}>
                       {genWrong ? (
                         <>
                           <span className="text-xs text-[var(--color-text-primary)] leading-none">{genAns || "—"}</span>
@@ -4109,7 +4109,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       placeholder={ex.type === "number" ? "Nombre…" : "Réponse…"}
                       inputMode={ex.type === "number" ? "numeric" : "text"}
                       autoComplete="off"
-                      className="!bg-blue-50 dark:!bg-blue-950/30" />
+                      className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
                   )}
                 </div>
               );
@@ -4356,12 +4356,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const a = ex19Ans[si]?.[ni] ?? {lo:"",hi:""};
                     const loOk = ex19Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex19Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
-                    const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
+                    const fieldCls = "w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]";
                     const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
+                          <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
                             {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.lo || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(lo)}</span></>}
                           </span>
                         ) : (
@@ -4372,7 +4372,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-14 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex19Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
+                          <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
                             {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.hi || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(hi)}</span></>}
                           </span>
                         ) : (
@@ -4411,12 +4411,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const a = ex20Ans[si]?.[ni] ?? {lo:"",hi:""};
                     const loOk = ex20Validated ? (a.lo === "" ? 0 : parseInt(a.lo)) === lo : null;
                     const hiOk = ex20Validated ? (a.hi === "" ? 0 : parseInt(a.hi)) === hi : null;
-                    const fieldCls = "w-16 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
+                    const fieldCls = "w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]";
                     const valCls = (ok: boolean|null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-400";
                     return (
                       <div key={ni} className="flex items-center gap-2">
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
+                          <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(loOk)}`}>
                             {loOk ? <span className="text-[var(--color-text-primary)]">{a.lo || String(lo)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.lo || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(lo)}</span></>}
                           </span>
                         ) : (
@@ -4427,7 +4427,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <span className="w-20 text-center text-sm font-bold tabular-nums text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
                         <span className="text-sm text-[var(--color-text-secondary)]">&lt;</span>
                         {ex20Validated ? (
-                          <span className={`w-16 rounded border px-1 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
+                          <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-1 text-sm tabular-nums inline-flex flex-col items-center justify-center ${valCls(hiOk)}`}>
                             {hiOk ? <span className="text-[var(--color-text-primary)]">{a.hi || String(hi)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a.hi || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(hi)}</span></>}
                           </span>
                         ) : (
@@ -4763,7 +4763,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     const ans = ex27Ans[si]?.[ii] ?? "";
                     const parsed = parseInt(ans);
                     const ok = ex27Validated ? (!isNaN(parsed) && parsed > item.lo && parsed < item.hi) : null;
-                    const fieldCls = "w-20 rounded border bg-blue-50 px-1 py-1 text-center text-sm tabular-nums outline-none dark:bg-blue-950/30 border-[var(--color-border-default)] focus-visible:border-[var(--color-accent-alg)]";
+                    const fieldCls = "w-20 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]";
                     const valCls = ok === true ? "border-blue-400 bg-[var(--color-bg-primary)]" : ok === false ? CLS_WRONG : "";
                     return (
                       <div key={ii} className={`flex items-center justify-center gap-1 rounded-[var(--radius-md)] border px-2 py-2 text-sm font-bold tabular-nums transition-colors ${ok === true ? "border-blue-400" : ok === false ? CLS_WRONG : "border-[var(--color-border-default)]"}`}>
@@ -4772,7 +4772,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             <span className="text-blue-600 dark:text-blue-400">{item.hi}</span>
                             <span className="text-[var(--color-text-secondary)]">&gt;</span>
                             {ex27Validated ? (
-                              <span className={`w-16 rounded border px-1 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
+                              <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
                                 {ok ? ans : `${item.lo + 1}–${item.hi - 1}`}
                               </span>
                             ) : (
@@ -4787,7 +4787,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             <span className="text-blue-600 dark:text-blue-400">{item.lo}</span>
                             <span className="text-[var(--color-text-secondary)]">&lt;</span>
                             {ex27Validated ? (
-                              <span className={`w-16 rounded border px-1 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
+                              <span className={`w-16 rounded-none border-0 border-b-2 px-0 py-0.5 text-center text-[var(--color-text-primary)] ${valCls}`}>
                                 {ok ? ans : `${item.lo + 1}–${item.hi - 1}`}
                               </span>
                             ) : (

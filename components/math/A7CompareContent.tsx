@@ -242,8 +242,8 @@ export function A7RelEncadrementExercise({
     }
   }, [validateCommand, validated, questions, answers, onValidated]);
 
-  const inpBase = "w-20 px-2 py-1.5 text-sm text-center font-mono rounded-lg border outline-none h-[2.125rem] ";
-  const inpIdle = inpBase + "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]";
+  const inpBase = "w-20 px-2 py-1.5 text-sm text-center font-mono rounded-none border-0 border-b-2 outline-none h-[2.125rem] ";
+  const inpIdle = inpBase + "border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]";
 
   return (
     <div className="space-y-4">
@@ -260,7 +260,7 @@ export function A7RelEncadrementExercise({
           const sndExp = dir === "<" ? q.hi : q.lo;
           const mkInput = (key: "lo" | "hi", exp: number) =>
             wrong ? (
-              <div className={`${inpBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+              <div className={`${inpBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                 <span className="text-xs text-[var(--color-text-primary)] leading-none">{a[key] || "—"}</span>
                 <span className="text-xs font-bold text-amber-600 leading-none">{fmtRel(exp)}</span>
               </div>
@@ -435,7 +435,7 @@ export function A7RelSeqCompleteExercise({
 
   const fmt = (n: number) => isDecimal ? fmtRelDec(n) : fmtRel(n);
   const cellW = "w-14 shrink-0 h-9";
-  const inpCls = `${cellW} px-0.5 text-xs text-center font-mono rounded-lg border border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)] bg-blue-50 dark:bg-blue-950/20`;
+  const inpCls = `${cellW} px-0.5 text-xs text-center font-mono rounded-none border-0 border-b-2 border-[var(--color-border-default)] outline-none focus:border-[var(--color-accent-alg)]`;
 
   return (
     <div className="space-y-4">
@@ -454,7 +454,7 @@ export function A7RelSeqCompleteExercise({
                   const v = answers[qi]?.[bIdx] ?? "";
                   const wrong = validated && Math.abs(normRel(v) - n) >= 0.001;
                   return wrong ? (
-                    <div key={ni} className={`${cellW} border-[var(--color-accent-alg)] flex flex-col items-center justify-center rounded-lg border`}>
+                    <div key={ni} className={`${cellW} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{fmt(n)}</span>
                     </div>

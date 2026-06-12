@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { OrderingChips, makeRng, seededShuffle } from "./RevisionCommon";
 import type { RevisionExerciseMeta, RevisionExerciseProps } from "./RevisionCommon";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
 // ─── Exercise 1 — Audio → chiffres (3 pts) — A1.1 Exercise 5 ─────────────────
 
@@ -96,7 +96,7 @@ function A1Ex1({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
             <RevAudioButton clips={q.clips} />
             {validated ? (
-              <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border px-3 ${ok ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : "border-amber-400"}`}>
+              <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 px-0 ${ok ? "border-[var(--color-border-default)]" : "border-amber-400"}`}>
                 {ok
                   ? <span className="text-sm font-bold text-[var(--color-text-primary)]">{ans}</span>
                   : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{ans || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span></>}
@@ -104,7 +104,7 @@ function A1Ex1({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
             ) : (
               <input type="text" inputMode="numeric" value={ans} placeholder="Votre réponse…"
                 onChange={e => setAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
-                className="flex-1 h-10 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-accent-alg)]/10 px-3 text-sm font-bold tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]"
+                className="flex-1 h-10 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 text-sm font-bold tabular-nums outline-none focus-visible:border-[var(--color-accent-alg)]"
               />
             )}
           </div>
@@ -259,9 +259,9 @@ function A1Ex2({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
           const cOk = validated ? parseInt(answer.c) === q.c * 100 : null;
           const dOk = validated ? parseInt(answer.d) === q.d * 10 : null;
           const uOk = validated ? parseInt(answer.u) === q.u : null;
-          const inputCls = "w-0 flex-1 rounded border border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 px-1 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
+          const inputCls = "w-0 flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
           const vCls = (ok: boolean | null) =>
-            `flex-1 rounded border px-1 py-1 text-center text-sm ${ok === null ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30" : ok ? "border-blue-400 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]" : CLS_WRONG}`;
+            `flex-1 rounded-none border-0 border-b-2 px-0 py-1 text-center text-sm ${ok === null ? "border-[var(--color-border-default)]" : ok ? "border-blue-400 text-[var(--color-text-primary)]" : CLS_WRONG}`;
           return (
             <div className="mt-2 flex w-full items-center gap-1 text-sm font-medium text-[var(--color-text-primary)]">
               <span className="shrink-0">=</span>
@@ -334,8 +334,8 @@ function A1Ex3({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
         const cOk = validated ? parseInt(a.c) === q.c * 100 : null;
         const dOk = validated ? parseInt(a.d) === q.d * 10 : null;
         const uOk = validated ? parseInt(a.u) === q.u : null;
-        const fieldBase = "w-full rounded border bg-[var(--color-accent-alg)]/10 px-1 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)] border-[var(--color-border-default)]";
-        const vCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-500 bg-amber-50 text-amber-600";
+        const fieldBase = "w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
+        const vCls = (ok: boolean | null) => ok === null ? "" : ok ? "border-[var(--color-border-default)]" : "border-amber-500";
         return (
           <div key={i} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
             <div className="mb-3 flex justify-center">
@@ -355,7 +355,7 @@ function A1Ex3({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
                   {fi > 0 && <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>}
                   <div className="flex flex-1 flex-col items-center gap-0.5">
                     {validated ? (
-                      <span className={`w-full rounded border px-1 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${vCls(field.ok)}`}>
+                      <span className={`w-full rounded-none border-0 border-b-2 px-0 py-1.5 text-sm inline-flex items-center justify-center gap-1 ${vCls(field.ok)}`}>
                         {field.ok ? <span>{a[field.key] || String(field.val)}</span> : <><span className="text-xs text-[var(--color-text-primary)] leading-none">{a[field.key] || "—"}</span><span className="text-xs font-bold text-amber-600 leading-none">{String(field.val)}</span></>}
                       </span>
                     ) : (

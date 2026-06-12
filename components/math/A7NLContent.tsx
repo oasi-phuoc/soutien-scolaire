@@ -170,7 +170,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const inputCls = "flex-1 h-[2.75rem] rounded-xl border px-4 py-2.5 text-sm font-mono outline-none transition-colors";
+  const inputCls = "flex-1 h-[2.75rem] rounded-none border-0 border-b-2 px-4 py-2.5 text-sm font-mono outline-none transition-colors";
 
   return (
     <div className="space-y-4">
@@ -197,7 +197,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
               <div className="flex items-center gap-2">
                 <span className="shrink-0 w-5 text-xs font-bold text-[var(--color-accent-alg)]">{ai + 1}.</span>
                 {isWrong ? (
-                  <div className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+                  <div className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                     <span className="text-xs text-[var(--color-text-primary)] leading-none">{vals[ai] || "—"}</span>
                     <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                   </div>
@@ -205,7 +205,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
                   <input type="text" inputMode="decimal" value={vals[ai] ?? ""} disabled={validated}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setVals((p: string[]) => p.map((c: string, ci: number) => ci === ai ? e.target.value.replace(/[^0-9,.\-]/g, "") : c))}
 
-                    className={`${inputCls} ${validated ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20" : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"}`} />
+                    className={`${inputCls} ${validated ? "border-[var(--color-accent-alg)]/60" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`} />
                 )}
               </div>
             </div>

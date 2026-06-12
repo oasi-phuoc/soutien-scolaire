@@ -29,21 +29,17 @@ function acceptable(ans: string): string[] {
 // Inline correction box (same style as A4 exercises)
 function CorrectionBox({ wrong, correct }: { wrong: string; correct: string }) {
   return (
-    <span className="inline-flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1 min-w-[3.5rem] justify-center">
+    <span className="inline-flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-1 min-w-[3.5rem] justify-center">
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-tight">{wrong || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-tight">{correct}</span>
     </span>
   );
 }
 
-const inputCls = (wrong: boolean) =>
-  `w-20 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors ${
-    wrong
-      ? "border-[var(--color-accent-alg)]"
-      : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
-  }`;
+const inputCls = (_wrong: boolean) =>
+  `w-20 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
 
-const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-[var(--color-accent-alg)]/5 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] focus:bg-[var(--color-accent-alg)]/10 disabled:opacity-70";
+const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
 const CELL_W = 32;
 
 // ── Generic decimal exercise (list of N questions) ───────────────────────────
@@ -306,7 +302,7 @@ function genArithQuestions(
   });
 }
 
-const inputBaseArith = "w-16 rounded border px-1 py-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+const inputBaseArith = "w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 pb-1.5 text-center font-mono text-sm outline-none transition-colors appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
 const numCls = "w-16 text-center font-mono text-sm text-[var(--color-text-primary)]";
 
 export function DecArithGroupExercise({
@@ -427,7 +423,7 @@ export function DecArithGroupExercise({
           const inputEl = (_pos: MissingPos) => {
             if (wrongField) {
               return (
-                <div className={`${inputBaseArith} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+                <div className={`${inputBaseArith} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                   <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                 </div>
@@ -447,11 +443,7 @@ export function DecArithGroupExercise({
                     return n;
                   });
                 }}
-                className={`${inputBaseArith} ${
-                  ok === null
-                    ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
-                    : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20"
-                }`}
+                className={`${inputBaseArith} focus:border-[var(--color-accent-alg)]`}
               />
             );
           };
@@ -561,7 +553,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-8 w-8 rounded border text-center font-mono text-xs outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] text-orange-500 focus:border-[var(--color-accent-alg)]"
+        className="h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-xs outline-none transition-colors text-orange-500 focus:border-[var(--color-accent-alg)]"
       />
     );
   };
@@ -591,7 +583,7 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className="h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors bg-blue-50 dark:bg-blue-950/30 border-[var(--color-border-default)] focus:border-[var(--color-accent-alg)]"
+        className="h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-base outline-none transition-colors focus:border-[var(--color-accent-alg)]"
       />
     );
   };
@@ -622,10 +614,10 @@ function DecMulColCard({
         }}
         onKeyDown={tabNav}
         onFocus={(e: React.FocusEvent<HTMLInputElement>) => e.target.setSelectionRange(e.target.value.length, e.target.value.length)}
-        className={`h-8 w-8 rounded-none border text-center font-mono text-base outline-none transition-colors ${
+        className={`h-8 w-8 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono text-base outline-none transition-colors ${
           ok
-            ? "border-[var(--color-border-default)] text-[var(--color-accent-alg)] font-bold bg-blue-50 dark:bg-blue-950/20"
-            : "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/30 focus:border-[var(--color-accent-alg)]"
+            ? "text-[var(--color-accent-alg)] font-bold"
+            : "focus:border-[var(--color-accent-alg)]"
         }`}
       />
     );
@@ -1526,7 +1518,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const CLS_WRONG = "border-[var(--color-accent-alg)]";
+  const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 
   return (
     <div className="space-y-5">
@@ -1823,7 +1815,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
       <div className="flex items-center gap-2 pt-1">
         <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
         {decWrong ? (
-          <span className="inline-flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1 min-w-[5rem] justify-center">
+          <span className="inline-flex flex-col items-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-1 min-w-[5rem] justify-center">
             <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{decResult || "—"}</span>
             <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.resultStr}</span>
           </span>
@@ -1831,7 +1823,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
           <input type="text" inputMode="decimal" value={decResult} disabled={validated}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => onDecResultChange(cardIdx, e.target.value.replace(/[^0-9,.]/g, ""))}
             placeholder={`ex. ${q.resultStr}`}
-            className="w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
+            className="w-28 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]"
           />
         )}
       </div>
