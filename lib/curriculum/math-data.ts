@@ -200,14 +200,12 @@ export const MATH_MODULES: MathModule[] = [
     code: "G1",
     title: "Formes planes et reconnaissance visuelle",
     branch: "geometry",
-    prerequisiteIds: ["A1"],
+    prerequisiteIds: [],
     submodules: [
-      sm("G1.1", "Polygones"),
+      sm("G1.1", "Formes (polygones et cercle)"),
       sm("G1.2", "Propriétés et symétrie"),
-      sm("G1.3", "Cercle : rayon, diamètre…"),
-      sm("G1.4", "Quadrilatères"),
-      sm("G1.5", "Angles"),
-      sm("G1.6", "Angles particuliers"),
+      sm("G1.3", "Propriétés des formes"),
+      sm("G1.4", "Angles"),
     ],
   },
   {

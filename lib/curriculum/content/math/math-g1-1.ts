@@ -1,26 +1,136 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
 export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G1-1",
-    submoduleCode: "G1.1",
-    theory: {
-      title: {
-        fr: "Polygones",
+  submoduleId: "G1-1",
+  submoduleCode: "G1.1",
+  theory: {
+    title: {
+      fr: "Formes (polygones et cercle)",
+    },
+    blocks: [
+      { type: "heading", fr: "Les polygones", black: true },
+
+      {
+        type: "plain",
+        fr: "Un **polygone** est une figure plane fermée formée de segments appelés **côtés**. Les points de jonction des côtés sont les **sommets**.",
       },
-      paragraphs: {
-        fr: [
-          "Un polygone est une figure plane fermée formée de segments appelés côtés. Les points de rencontre des côtés sont les sommets.",
-          "Polygones selon le nombre de côtés : triangle (3), quadrilatère (4), pentagone (5), hexagone (6), heptagone (7), octogone (8).",
-          "Un polygone est régulier si tous ses côtés sont égaux et tous ses angles sont égaux.",
-          "Somme des angles intérieurs : triangle = 180°, quadrilatère = 360°, pentagone = 540°. Formule générale : (n − 2) × 180°.",
+
+      {
+        type: "table",
+        headersFr: ["Nom", "Côtés", "Somme des angles"],
+        accentHeader: true,
+        colAligns: ["left", "center", "center"],
+        rows: [
+          ["Triangle", "3", "180°"],
+          ["Quadrilatère", "4", "360°"],
+          ["Pentagone", "5", "540°"],
+          ["Hexagone", "6", "720°"],
         ],
       },
-    },
-    exercises: [
-      { id: "g1-1-e1", promptFr: "Comment s'appelle un polygone à 5 côtés ?", type: "short_text", acceptable: ["pentagone"] },
-      { id: "g1-1-e2", promptFr: "Quelle est la somme des angles d'un triangle ?", type: "number", acceptable: ["180"] },
-      { id: "g1-1-e3", promptFr: "Un hexagone a combien de côtés ?", type: "number", acceptable: ["6"] },
-      { id: "g1-1-e4", promptFr: "Quelle est la somme des angles d'un quadrilatère ?", type: "number", acceptable: ["360"] },
-      { id: "g1-1-e5", promptFr: "Calcule la somme des angles d'un pentagone.", type: "number", acceptable: ["540"] },
+
+      { type: "highlight", fr: "Polygone régulier" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
+          "Exemples : triangle équilatéral, carré, hexagone régulier.",
+        ],
+      },
+
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,8 74,72 6,72' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            captionFr: "Triangle",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><rect x='12' y='12' width='56' height='56' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            captionFr: "Carré",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><rect x='4' y='22' width='72' height='36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            captionFr: "Rectangle",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            captionFr: "Pentagone",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,6 68,22 68,56 40,72 12,56 12,22' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            captionFr: "Hexagone",
+          },
+        ],
+      },
+
+      { type: "heading", fr: "Le cercle", black: true },
+
+      {
+        type: "plain",
+        fr: "Un **cercle** est l'ensemble de tous les points situés à la même distance d'un point fixe appelé **centre** (O).",
+      },
+
+      { type: "highlight", fr: "Vocabulaire du cercle" },
+      {
+        type: "section",
+        labelFr: "",
+        itemsFr: [
+          "**Rayon (r)** : distance du centre à n'importe quel point du cercle.",
+          "**Diamètre (d)** : corde passant par le centre ; d = 2r.",
+          "**Corde** : segment reliant deux points du cercle (sans passer par le centre).",
+        ],
+      },
+
+      {
+        type: "svg",
+        markup: `<svg viewBox='0 0 220 155' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:280px;display:block;margin:0 auto'>
+  <circle cx='110' cy='78' r='55' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <circle cx='110' cy='78' r='3' fill='var(--color-accent-alg)'/>
+  <text x='116' y='75' font-size='12' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>O</text>
+  <line x1='55' y1='78' x2='165' y2='78' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='5,3' opacity='0.5'/>
+  <text x='107' y='66' font-size='11' fill='var(--color-accent-alg)' opacity='0.7' text-anchor='middle' font-family='sans-serif'>d</text>
+  <line x1='110' y1='78' x2='165' y2='78' stroke='#f97316' stroke-width='2.5'/>
+  <text x='140' y='70' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
+  <line x1='138' y1='30' x2='62' y2='110' stroke='#16a34a' stroke-width='2'/>
+  <text x='142' y='28' font-size='10' fill='#16a34a' font-weight='bold' font-family='sans-serif'>corde</text>
+</svg>`,
+        captionFr: "Rayon (r) en orange · Diamètre (d) en pointillés · Corde en vert",
+      },
     ],
-  };
+    paragraphs: { fr: [] },
+  },
+
+  exercises: [
+    {
+      id: "g1-1-e1",
+      promptFr: "Comment s'appelle un polygone à 5 côtés ?",
+      type: "short_text",
+      acceptable: ["pentagone"],
+    },
+    {
+      id: "g1-1-e2",
+      promptFr: "Un cercle a un rayon de 7 cm. Quel est son diamètre (en cm) ?",
+      type: "number",
+      acceptable: ["14"],
+    },
+    {
+      id: "g1-1-e3",
+      promptFr: "Un hexagone a combien de côtés ?",
+      type: "number",
+      acceptable: ["6"],
+    },
+    {
+      id: "g1-1-e4",
+      promptFr: "Un cercle a un diamètre de 10 cm. Quel est son rayon (en cm) ?",
+      type: "number",
+      acceptable: ["5"],
+    },
+    {
+      id: "g1-1-e5",
+      promptFr: "Calcule la somme des angles intérieurs d'un pentagone (en °).",
+      type: "number",
+      acceptable: ["540"],
+    },
+  ],
+};
