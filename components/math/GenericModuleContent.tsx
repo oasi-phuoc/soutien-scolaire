@@ -206,6 +206,66 @@ function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// ── Word Problems (A2.4) ──────────────────────────────────────────────────────
+const WP_ADD: Array<(a: number, b: number) => string> = [
+  (a, b) => `${a} enfants jouent dans la cour. ${b} autres enfants les rejoignent. Combien y a-t-il d'enfants en tout ?`,
+  (a, b) => `Marie a ${a} billes. Elle en gagne ${b} de plus à la récréation. Combien de billes a-t-elle ?`,
+  (a, b) => `Il y a ${a} livres sur l'étagère. On y ajoute ${b} nouveaux livres. Combien y en a-t-il ?`,
+  (a, b) => `Paul a économisé ${a} CHF. Sa grand-mère lui donne ${b} CHF. Combien a-t-il au total ?`,
+  (a, b) => `Une boîte contient ${a} crayons. On y met ${b} crayons de plus. Combien y a-t-il de crayons ?`,
+  (a, b) => `Léa a ${a} autocollants. Elle en achète ${b} autres. Combien en possède-t-elle ?`,
+  (a, b) => `Un fermier a ${a} poules. Il en achète ${b} de plus au marché. Combien de poules a-t-il ?`,
+  (a, b) => `${a} spectateurs sont dans la salle. ${b} autres arrivent. Combien y a-t-il de spectateurs ?`,
+  (a, b) => `Une boulangerie vend ${a} croissants le matin et ${b} l'après-midi. Combien en a-t-elle vendu en tout ?`,
+  (a, b) => `Tom a lu ${a} pages hier. Il en lit ${b} aujourd'hui. Combien de pages a-t-il lues au total ?`,
+  (a, b) => `Un jardinier a planté ${a} tulipes. Il en plante ${b} autres. Combien en a-t-il planté ?`,
+  (a, b) => `Dans un tiroir, il y a ${a} stylos. On y range ${b} stylos de plus. Combien y en a-t-il ?`,
+  (a, b) => `Zoé a ${a} points dans son jeu. Elle en gagne ${b} de plus. Quel est son nouveau total ?`,
+  (a, b) => `Le matin, ${a} élèves arrivent à l'école. ${b} autres s'ajoutent pour le sport. Combien y en a-t-il ?`,
+  (a, b) => `Un bus transporte ${a} passagers. À l'arrêt suivant, ${b} personnes montent. Combien y en a-t-il ?`,
+];
+const WP_SUB: Array<(a: number, b: number) => string> = [
+  (a, b) => `${a} enfants jouent dans la cour. ${b} rentrent à la maison. Combien reste-t-il d'enfants ?`,
+  (a, b) => `Une bibliothèque possède ${a} livres. On en retire ${b}. Combien en reste-t-il ?`,
+  (a, b) => `Paul a ${a} billes. Il en perd ${b}. Combien lui en reste-t-il ?`,
+  (a, b) => `Marie a ${a} CHF. Elle en dépense ${b} au magasin. Combien lui reste-t-il ?`,
+  (a, b) => `Un bocal contient ${a} bonbons. Les enfants en mangent ${b}. Combien en reste-t-il ?`,
+  (a, b) => `${a} personnes font la queue. ${b} s'en vont. Combien en reste-t-il ?`,
+  (a, b) => `Il y a ${a} livres sur une étagère. On en enlève ${b}. Combien en reste-t-il ?`,
+  (a, b) => `Un fermier a ${a} œufs. Il en vend ${b} au marché. Combien lui en reste-t-il ?`,
+  (a, b) => `Tom avait ${a} points. Il en perd ${b}. Quel est son nouveau score ?`,
+  (a, b) => `Un train avait ${a} passagers. ${b} sont descendus à la gare. Combien en reste-t-il ?`,
+  (a, b) => `Léa avait ${a} autocollants. Elle en donne ${b} à son amie. Combien lui en reste-t-il ?`,
+  (a, b) => `Il y avait ${a} pommes dans le panier. On en a retiré ${b}. Combien en reste-t-il ?`,
+  (a, b) => `Un magasin avait ${a} articles. Il en vend ${b} dans la journée. Combien lui en reste-t-il ?`,
+  (a, b) => `${a} oiseaux étaient sur un arbre. ${b} s'envolent. Combien en reste-t-il sur l'arbre ?`,
+  (a, b) => `Zoé avait ${a} figurines. Elle en offre ${b} à sa cousine. Combien lui en reste-t-il ?`,
+];
+
+function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
+  const addIdx = Math.floor(Math.random() * WP_ADD.length);
+  const subIdx = Math.floor(Math.random() * WP_SUB.length);
+  let addA: number, addB: number, subA: number, subB: number;
+  if (level === "a1") {
+    addA = rnd(5, 25);   addB = rnd(3, 15);
+    subA = rnd(10, 30);  subB = rnd(2, Math.max(2, Math.min(subA - 1, 12)));
+  } else if (level === "a2") {
+    addA = rnd(30, 180); addB = rnd(15, 70);
+    subA = rnd(50, 250); subB = rnd(10, Math.max(10, Math.min(subA - 5, 80)));
+  } else {
+    addA = rnd(200, 900);  addB = rnd(50, 350);
+    subA = rnd(300, 1500); subB = rnd(50, Math.max(50, Math.min(Math.floor(subA * 0.6), 600)));
+  }
+  return {
+    exNum,
+    level,
+    questions: [
+      { textFr: WP_ADD[addIdx]!(addA, addB), answer: addA + addB, op: "+" },
+      { textFr: WP_SUB[subIdx]!(subA, subB), answer: subA - subB, op: "-" },
+    ],
+  };
+}
+
 function fmtDec(h: number): string {
   const whole = Math.floor(h / 100);
   const frac = h % 100;
@@ -1312,6 +1372,62 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
     }
   }
   return { questions: shuffleArr(questions), exNum };
+}
+
+// ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
+function WordProblemsExercise({
+  config, answers, validated, results, onChange,
+}: {
+  config: WordProblemsConfig;
+  answers: string[];
+  validated: boolean;
+  results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Résolvez les problèmes. Écrivez uniquement la réponse numérique.</p>
+      </div>
+      <div className="space-y-6">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? (results[i] ?? false) : null;
+          const wrong = ok === false;
+          return (
+            <div key={i} className="space-y-3">
+              <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
+              </div>
+              <div className="flex items-center gap-3 pl-2">
+                <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
+                {wrong ? (
+                  <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{q.answer.toLocaleString("fr-CH")}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={v}
+                    disabled={validated}
+                    onChange={e => onChange(i, e.target.value.replace(/[^0-9 ]/g, ""))}
+                    className={inputCls}
+                  />
+                )}
+                {ok === true && (
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
@@ -2458,6 +2574,16 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_2", 3, 3) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_large_2", 4, 3) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_three", 5, 3) });
+    } else if (sid === "A2-4") {
+      // Problèmes — entraînement
+      steps.push({ kind: "word_problems", lesson, config: genWP("a1", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("a2", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("b1", 3) });
+      // Évaluation
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "word_problems", lesson, config: genWP("a1", 1) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("a2", 2) });
+      steps.push({ kind: "word_problems", lesson, config: genWP("b1", 3) });
     } else if (sid === "A3-1") {
       // Tables de multiplications — entraînement
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
@@ -2624,7 +2750,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   }
   const hasDrillsNoPassToggle = lessons.some(l =>
     l.submoduleId === "A2-1" || l.submoduleId === "A2-2" ||
-    l.submoduleId === "A2-3" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
+    l.submoduleId === "A2-3" || l.submoduleId === "A2-4" || l.submoduleId === "A3-1" || l.submoduleId === "A3-2" ||
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
@@ -3797,6 +3923,10 @@ export function GenericModuleContent({
   const [roundingValidated, setRoundingValidated] = useState(false);
   const [roundingResults, setRoundingResults] = useState<boolean[]>(() => Array(5).fill(false));
   const [roundingOverrideConfigs, setRoundingOverrideConfigs] = useState<Record<number, RoundingConfig>>({});
+  const [wpAnswers, setWpAnswers] = useState<string[]>(() => Array(2).fill(""));
+  const [wpValidated, setWpValidated] = useState(false);
+  const [wpResults, setWpResults] = useState<boolean[]>([]);
+  const [wpOverrideConfigs, setWpOverrideConfigs] = useState<Record<number, WordProblemsConfig>>({});
   const [numberSelectOverrideConfigs, setNumberSelectOverrideConfigs] = useState<Record<number, NumberSelectConfig>>({});
   const [encadrementOverrideConfigs, setEncadrementOverrideConfigs] = useState<Record<number, EncadrementConfig>>({});
   const [oddEvenOverrideConfigs, setOddEvenOverrideConfigs] = useState<Record<number, OddEvenConfig>>({});
@@ -4052,6 +4182,9 @@ export function GenericModuleContent({
     setGcdLcmValidated(false);
     setTfGcdLcmAnswers(Array(5).fill(null));
     setTfGcdLcmValidated(false);
+    setWpAnswers(Array(2).fill(""));
+    setWpValidated(false);
+    setWpResults([]);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -4213,6 +4346,9 @@ export function GenericModuleContent({
     : null;
   const activeTfGcdLcmConfig = currentStep?.kind === "true_false_gcd_lcm"
     ? (tfGcdLcmOverride[stepIdx] ?? currentStep.config)
+    : null;
+  const activeWpConfig = currentStep?.kind === "word_problems"
+    ? (wpOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
 
   const goNext = useCallback(() => {
@@ -4426,6 +4562,12 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "true_false_gcd_lcm") {
         const cfg = tfGcdLcmOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => tfGcdLcmAnswers[i] === q.answer);
+      } else if (currentStep.kind === "word_problems") {
+        const cfg = wpOverrideConfigs[stepIdx] ?? currentStep.config;
+        currentResults = cfg.questions.map((q, i) => {
+          const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
+          return parseInt(v, 10) === q.answer;
+        });
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -4467,6 +4609,7 @@ export function GenericModuleContent({
                 : es?.kind === "missing_digit_div" ? "Chiffre manquant"
                 : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
+                : es?.kind === "word_problems" ? "Problèmes"
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -4511,7 +4654,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -4693,6 +4836,27 @@ export function GenericModuleContent({
     };
   }
 
+  if (currentStep?.kind === "word_problems") {
+    const _wpCfg = activeWpConfig!;
+    stepCanValidate = !wpValidated;
+    stepValidate = wpValidated ? () => {} : () => {
+      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
+      setWpResults(cfg.questions.map((q, i) => {
+        const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
+        return parseInt(v, 10) === q.answer;
+      }));
+      setWpValidated(true);
+    };
+    stepReset = () => {
+      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
+      const newCfg = genWP(cfg.level, cfg.exNum);
+      setWpOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setWpAnswers(Array(cfg.questions.length).fill(""));
+      setWpValidated(false);
+      setWpResults([]);
+    };
+  }
+
   if (currentStep?.kind === "rounding_group") {
     const cfg = activeRoundingConfig!;
     stepCanValidate = !roundingValidated;
@@ -4708,6 +4872,27 @@ export function GenericModuleContent({
       setRoundingValidated(false);
       setRoundingResults(Array(cfg.count).fill(false));
       setRoundingResetKey(n => n + 1);
+    };
+  }
+
+  if (currentStep?.kind === "word_problems") {
+    const _wpCfg = activeWpConfig!;
+    stepCanValidate = !wpValidated;
+    stepValidate = wpValidated ? () => {} : () => {
+      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
+      setWpResults(cfg.questions.map((q, i) => {
+        const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
+        return parseInt(v, 10) === q.answer;
+      }));
+      setWpValidated(true);
+    };
+    stepReset = () => {
+      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
+      const newCfg = genWP(cfg.level, cfg.exNum);
+      setWpOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setWpAnswers(Array(cfg.questions.length).fill(""));
+      setWpValidated(false);
+      setWpResults([]);
     };
   }
 
@@ -5735,6 +5920,18 @@ export function GenericModuleContent({
         />
       )}
 
+      {/* Word problems exercise (A2.4) */}
+      {!showEvalScore && currentStep?.kind === "word_problems" && activeWpConfig && (
+        <WordProblemsExercise
+          key={`wp-${stepIdx}`}
+          config={activeWpConfig}
+          answers={wpAnswers}
+          validated={wpValidated}
+          results={wpResults}
+          onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+        />
+      )}
+
       {/* Rounding group exercise */}
       {!showEvalScore && currentStep?.kind === "rounding_group" && activeRoundingConfig && (
         <RoundingExercise
@@ -5744,6 +5941,18 @@ export function GenericModuleContent({
           validated={roundingValidated}
           results={roundingResults}
           onChange={(i, val) => setRoundingAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+        />
+      )}
+
+      {/* Word problems exercise (A2.4) */}
+      {!showEvalScore && currentStep?.kind === "word_problems" && activeWpConfig && (
+        <WordProblemsExercise
+          key={`wp-${stepIdx}`}
+          config={activeWpConfig}
+          answers={wpAnswers}
+          validated={wpValidated}
+          results={wpResults}
+          onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
         />
       )}
 
@@ -6386,6 +6595,7 @@ export function GenericModuleContent({
                   (isInEvalPhase && (
                     (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
                     (currentStep?.kind === "column_grid" && !gridValidated) ||
+                    (currentStep?.kind === "word_problems" && !wpValidated) ||
                     (currentStep?.kind === "rounding_group" && !roundingValidated) ||
                     (currentStep?.kind === "frac_id" && !fracIdValidated) ||
                     (currentStep?.kind === "frac_equiv" && !fracEquivValidated) ||
