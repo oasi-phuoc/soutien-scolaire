@@ -3787,7 +3787,7 @@ function TheoryTabsBlock({
 }
 
 function ShapeExplorerBlock({
-  block, pivot, showPivot,
+  block, pivot, showPivot: _showPivot,
 }: {
   block: Extract<MathRichBlock, { type: "shape_explorer" }>;
   pivot: PivotCode;
