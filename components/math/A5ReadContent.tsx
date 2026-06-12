@@ -52,7 +52,7 @@ function fmtNum(v: number): string {
 // Correction box (amber, stacked wrong/correct)
 function Err({ wrong, correct, className = "" }: { wrong: string; correct: string; className?: string }) {
   return (
-    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-amber-400 px-2 py-0.5 h-9 ${className}`}>
+    <span className={`inline-flex flex-col items-center justify-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-0.5 h-9 ${className}`}>
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{wrong || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{correct}</span>
     </span>
@@ -61,7 +61,7 @@ function Err({ wrong, correct, className = "" }: { wrong: string; correct: strin
 const IC = (w: boolean) =>
   `rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors tabular-nums h-9 ${
     w
-      ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+      ? "border-[var(--color-accent-alg)]"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
 
@@ -267,7 +267,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
                 {POS_LABELS.map((lbl, pi) => {
                   let cls = "rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ";
                   if (validated) {
-                    if (pi === correct && sel !== correct) cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                    if (pi === correct && sel !== correct) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                     else if (pi === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                     else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                   } else {
@@ -488,7 +488,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
               {(["<", "=", ">"] as const).map(sym => {
                 let cls = "w-10 h-8 rounded border text-sm font-bold transition-colors ";
                 if (validated) {
-                  if (sym === correct && sym !== sel) cls += "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                  if (sym === correct && sym !== sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                   else if (sym === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
                 } else {
@@ -573,7 +573,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
                   : validated && slotWrong[i]
-                    ? "border-amber-400"
+                    ? "border-[var(--color-accent-alg)]"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
               }`}
             >
@@ -693,8 +693,8 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
           const st = chipState[s];
           let cls = "min-w-[4rem] text-center rounded-xl border px-3 py-2 text-sm font-mono font-bold transition-colors ";
           if (validated) {
-            if (st === "wrong") cls += "border-amber-500 bg-amber-50 text-amber-600";
-            else if (st === "missed") cls += "border-amber-500 bg-amber-50 text-amber-600";
+            if (st === "wrong") cls += "border-[var(--color-accent-alg)]";
+            else if (st === "missed") cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else if (st === "correct") cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
           } else {

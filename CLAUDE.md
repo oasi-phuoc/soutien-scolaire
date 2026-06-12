@@ -369,14 +369,26 @@ Ajouter `data-grid-card` (ou `data-divcol-card`) sur la `<div>` englobante de ch
 
 ### Processus de correction — pattern uniforme
 
+#### Règle fondamentale (non-colonne)
+
+La case **garde exactement les mêmes dimensions, forme et fond** que quand l'élève saisit. En cas de réponse incorrecte :
+
+- Même largeur / hauteur / `className` que l'input actif
+- Bordure orange accent `border-[var(--color-accent-alg)]` — identique à l'état focus
+- **Pas de fond coloré** (`bg-amber-50` et `bg-amber-950/20` interdits sur le conteneur)
+- **Pas de trait séparateur** entre la réponse de l'élève et la bonne réponse
+- Réponse de l'élève en `text-[10px] text-[var(--color-text-secondary)]` + bonne réponse en `text-xs font-bold text-amber-600`, empilées sans gap
+
+> **Exception — tableaux en colonne** (`h-8 w-8` et `h-5 w-8`) : ces cellules conservent `border-amber-400` sans fond, ce sont des cas particuliers à ne pas modifier.
+
 #### Input de réponse libre (case unique)
 
 ```tsx
 // État: wrongField = validated && résultat faux
 if (wrongField) return (
-  <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
-    <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
-    <span className="text-xs font-bold text-amber-600 leading-none">{correctAnswer}</span>
+  <div className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
+    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+    <span className="text-xs font-bold leading-none text-amber-600">{correctAnswer}</span>
   </div>
 );
 return (
@@ -390,8 +402,8 @@ return (
 
 ```tsx
 {isWrong ? (
-  <div className="flex flex-col items-center rounded-xl border border-amber-400 px-2 py-1">
-    <span className="text-xs text-[var(--color-text-primary)] leading-none">{userAns || "—"}</span>
+  <div className="flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1">
+    <span className="text-[10px] text-[var(--color-text-secondary)] leading-none">{userAns || "—"}</span>
     <span className="text-xs font-bold text-amber-600 leading-none">{correct}</span>
   </div>
 ) : (
@@ -405,11 +417,18 @@ return (
 
 | État | Border | Background | Texte |
 |------|--------|------------|-------|
-| Idle | `border-[var(--color-border-default)]` | `bg-blue-50` | normal |
-| Correct | `border-[var(--color-border-default)]` | `bg-blue-50 opacity-70` | normal |
-| Faux | `border-amber-400` | transparent | — |
-| Réponse attendue | — | — | `text-amber-600 font-bold` |
-| Réponse utilisateur | — | — | `text-[var(--color-text-primary)] text-xs` |
+| Idle | `border-[var(--color-border-default)]` ou `border-[var(--color-accent-alg)]/40` | normal | normal |
+| Correct | `border-[var(--color-border-default)]` | normal légèrement atténué | normal |
+| Faux | `border-[var(--color-accent-alg)]` | **inchangé** (pas de fond amber) | — |
+| Réponse attendue | — | — | `text-amber-600 font-bold text-xs` |
+| Réponse utilisateur | — | — | `text-[var(--color-text-secondary)] text-[10px]` |
+
+#### CLS_WRONG — constante globale
+
+```ts
+const CLS_WRONG = "border-[var(--color-accent-alg)]";
+// Ancienne valeur interdite : "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+```
 
 ---
 

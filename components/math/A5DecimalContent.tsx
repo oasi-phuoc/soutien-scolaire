@@ -29,7 +29,7 @@ function acceptable(ans: string): string[] {
 // Inline correction box (same style as A4 exercises)
 function CorrectionBox({ wrong, correct }: { wrong: string; correct: string }) {
   return (
-    <span className="inline-flex flex-col items-center rounded-xl border border-amber-400 px-2 py-1 min-w-[3.5rem] justify-center">
+    <span className="inline-flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1 min-w-[3.5rem] justify-center">
       <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-tight">{wrong || "—"}</span>
       <span className="text-xs font-bold text-amber-600 tabular-nums leading-tight">{correct}</span>
     </span>
@@ -39,7 +39,7 @@ function CorrectionBox({ wrong, correct }: { wrong: string; correct: string }) {
 const inputCls = (wrong: boolean) =>
   `w-20 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors ${
     wrong
-      ? "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+      ? "border-[var(--color-accent-alg)]"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
 
@@ -427,7 +427,7 @@ export function DecArithGroupExercise({
           const inputEl = (_pos: MissingPos) => {
             if (wrongField) {
               return (
-                <div className={`${inputBaseArith} border-amber-400 flex flex-col items-center justify-center`}>
+                <div className={`${inputBaseArith} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                   <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                 </div>
@@ -1526,7 +1526,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
 
   useEffect(() => { if (validateCommand > 0) doValidate(); }, [validateCommand, doValidate]);
 
-  const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+  const CLS_WRONG = "border-[var(--color-accent-alg)]";
 
   return (
     <div className="space-y-5">
@@ -1823,7 +1823,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
       <div className="flex items-center gap-2 pt-1">
         <span className="text-xs text-[var(--color-text-secondary)] shrink-0">Résultat :</span>
         {decWrong ? (
-          <span className="inline-flex flex-col items-center rounded-xl border border-amber-400 px-2 py-1 min-w-[5rem] justify-center">
+          <span className="inline-flex flex-col items-center rounded-xl border border-[var(--color-accent-alg)] px-2 py-1 min-w-[5rem] justify-center">
             <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{decResult || "—"}</span>
             <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.resultStr}</span>
           </span>

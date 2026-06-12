@@ -294,7 +294,7 @@ function CompareQuestion({
           const isCorrect = correct === op;
           let cls = "flex h-8 w-8 items-center justify-center rounded border font-mono text-sm font-bold transition-colors ";
           if (validated) {
-            if (isCorrect) cls += "border-amber-400 bg-amber-50 text-amber-700";
+            if (isCorrect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
           } else {
@@ -1487,7 +1487,7 @@ function DivWorkRow({ numStr, colEnd, dividendCols, workFlat, si, onWorkChange, 
               validated ? (
                 <div className={`flex h-8 w-8 items-center justify-center rounded border text-center font-mono ${
                   wrong
-                    ? "border-amber-400 bg-amber-50 text-amber-700"
+                    ? "border-[var(--color-accent-alg)]"
                     : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
                 }`}>
                   {wrong ? (

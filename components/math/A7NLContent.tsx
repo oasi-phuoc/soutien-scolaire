@@ -197,7 +197,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
               <div className="flex items-center gap-2">
                 <span className="shrink-0 w-5 text-xs font-bold text-[var(--color-accent-alg)]">{ai + 1}.</span>
                 {isWrong ? (
-                  <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
+                  <div className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                     <span className="text-xs text-[var(--color-text-primary)] leading-none">{vals[ai] || "—"}</span>
                     <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                   </div>
