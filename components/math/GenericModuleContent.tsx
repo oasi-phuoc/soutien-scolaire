@@ -16,7 +16,7 @@ import type { PivotCode } from "@/lib/pivot-langs";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "border-[var(--color-accent-alg)]";
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 bg-[var(--color-accent-alg)]/5 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] focus:bg-[var(--color-accent-alg)]/10 disabled:opacity-70";
 const MATH_NUMBER_INPUT_BASE = `${MATH_TEXT_INPUT_BASE} appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`;
 
@@ -397,7 +397,7 @@ function ExprCompExercise({
                   } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   } else if (!sel && isCorrect) {
-                    cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                    cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                   } else {
                     cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                   }
@@ -1388,19 +1388,19 @@ function ArithmeticGroupExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
-                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
-                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
-                  ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
@@ -2151,7 +2151,7 @@ function RoundingExercise({
             const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
             const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
             const field = wrongField
-              ? <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center overflow-hidden`}>
+              ? <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center overflow-hidden`}>
                   <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
                   <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
@@ -2238,7 +2238,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
               <FracDisplay num={q.num} den={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
               {wrong ? (
-                <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center border-amber-400`}>
+                <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center border-[var(--color-accent-alg)]`}>
                   <span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{q.ask === "num" ? q.num : q.den}</span>
                 </div>
@@ -2284,7 +2284,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
               {q.missingPos === "num" ? (
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   {wrong ? (
-                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-[var(--color-accent-alg)]`}>
                       <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
@@ -2300,7 +2300,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                   <span className="text-sm font-bold text-[var(--color-accent-alg)]">{q.tgtNum}</span>
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
-                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                    <div className={`w-12 flex flex-col items-center justify-center py-1 border-[var(--color-accent-alg)]`}>
                       <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
@@ -2398,7 +2398,7 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
                 } else if (sel && !isCorrect) {
                   cls += CLS_WRONG;
                 } else if (!sel && isCorrect) {
-                  cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                 } else {
                   cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                 }
@@ -5233,7 +5233,7 @@ export function GenericModuleContent({
               const symCls = "shrink-0 text-sm font-bold text-[var(--color-text-secondary)]";
               const numCls = "w-20 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]";
               const firstBlock = wrong ? (
-                <div className={`${inputCls} h-[2.125rem] border-amber-400 flex flex-col items-center justify-center`}>
+                <div className={`${inputCls} h-[2.125rem] border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                   <span className="text-xs text-[var(--color-text-primary)] leading-none">{firstVal||"—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{firstExpected}</span>
                 </div>
@@ -5243,7 +5243,7 @@ export function GenericModuleContent({
                   className={inputCls} />
               );
               const secondBlock = wrong ? (
-                <div className={`${inputCls} h-[2.125rem] border-amber-400 flex flex-col items-center justify-center`}>
+                <div className={`${inputCls} h-[2.125rem] border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                   <span className="text-xs text-[var(--color-text-primary)] leading-none">{secondVal||"—"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{secondExpected}</span>
                 </div>
@@ -5295,7 +5295,7 @@ export function GenericModuleContent({
                       } else if (isSelected && !isCorrect) {
                         cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (!isSelected && isCorrect && ok === false) {
-                        cls += "bg-amber-100 text-amber-600 border-amber-300 dark:bg-amber-950/30";
+                        cls += "bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)] border-[var(--color-accent-alg)]";
                       } else {
                         cls += "text-[var(--color-text-secondary)] opacity-40";
                       }
@@ -5341,7 +5341,7 @@ export function GenericModuleContent({
                   <div className="flex items-center gap-2">
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)] w-5">{i + 1}.</span>
                     {wrong ? (
-                      <div className={`${inputCls} border-amber-400 flex flex-col items-center justify-center gap-0.5`}>
+                      <div className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center gap-0.5`}>
                         <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
                         {q.mode === "read" && <span className="text-xs font-bold text-amber-600 leading-none">{q.nlConfig.target}</span>}
                       </div>
@@ -5447,7 +5447,7 @@ export function GenericModuleContent({
                     <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
                   ))}
                   {wrong ? (
-                    <div className={`${inputRowCls} border-amber-400 flex flex-col items-center justify-center`}>
+                    <div className={`${inputRowCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
@@ -5488,7 +5488,7 @@ export function GenericModuleContent({
                         const expected = q.allNums[ni]!;
                         const wrong = seqCompleteValidated && parseFloat(v) !== expected;
                         return wrong ? (
-                          <div key={ni} className={`${inputCls} border-amber-400 flex flex-col items-center justify-center`}>
+                          <div key={ni} className={`${inputCls} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                             <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
                             <span className="text-xs font-bold text-amber-600 leading-none">{expected.toLocaleString("fr-CH")}</span>
                           </div>
@@ -5617,7 +5617,7 @@ export function GenericModuleContent({
                       <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
                     ))}
                     {wrong ? (
-                      <div className={`h-9 px-1 text-sm font-mono border-amber-400 flex flex-col items-center justify-center`}>
+                      <div className={`h-9 px-1 text-sm font-mono border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                         <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
@@ -5658,7 +5658,7 @@ export function GenericModuleContent({
                         const expected = q.allNums[ni]!;
                         const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
                         return wrong ? (
-                          <div key={ni} className={`h-9 px-1 font-mono text-sm border-amber-400 flex flex-col items-center justify-center`}>
+                          <div key={ni} className={`h-9 px-1 font-mono text-sm border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                             <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
                             <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
                           </div>
@@ -5930,7 +5930,7 @@ export function GenericModuleContent({
                     Du nombre <strong className="font-bold">{base}</strong>
                   </p>
                   {wrong ? (
-                    <div className={`${inputCls} flex flex-col justify-center border-amber-400`}>
+                    <div className={`${inputCls} flex flex-col justify-center border-[var(--color-accent-alg)]`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                     </div>
@@ -5971,7 +5971,7 @@ export function GenericModuleContent({
                       } else if (isSelected) {
                         cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (!isSelected && isCorrect) {
-                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       } else {
                         cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                       }
