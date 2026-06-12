@@ -851,18 +851,18 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
-                      <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
+                    <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctNum}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
-                      <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
+                    <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctDen}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
@@ -1111,18 +1111,18 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
                 <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
                 <div className="shrink-0 flex flex-col items-center gap-1">
                   {isWrong ? (
-                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readNums[i] || "—"}</span>
-                      <span className="text-xs font-bold text-amber-600 leading-none">{correctNum}</span>
+                    <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{readNums[i] || "—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctNum}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={readNums[i]} onChange={(e) => { if (!validated) setReadNums(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
                   )}
                   <span className="h-[2px] w-14 rounded bg-[var(--color-text-primary)]" />
                   {isWrong ? (
-                    <div className="w-14 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{readDens[i] || "—"}</span>
-                      <span className="text-xs font-bold text-amber-600 leading-none">{correctDen}</span>
+                    <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{readDens[i] || "—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctDen}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="numeric" value={readDens[i]} onChange={(e) => { if (!validated) setReadDens(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }} className={inputCls} />
@@ -1662,9 +1662,9 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
               </span>
               <span className="text-base font-semibold text-[var(--color-text-primary)]">=</span>
               {isWrong ? (
-                <div className="w-24 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1.5 text-sm flex flex-col items-center justify-center">
-                  <span className="text-xs text-[var(--color-text-primary)] tabular-nums leading-none">{answers[i] || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 tabular-nums leading-none">{q.answer}</span>
+                <div className="w-24 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)] tabular-nums">{answers[i] || "—"}</span>
+                  <span className="text-xs font-bold leading-none text-amber-600 tabular-nums">{q.answer}</span>
                 </div>
               ) : (
                 <input type="text" inputMode="decimal" value={answers[i]!} onChange={e => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; }); }} className={iCls} />

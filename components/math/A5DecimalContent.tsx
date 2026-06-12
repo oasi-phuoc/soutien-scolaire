@@ -423,9 +423,9 @@ export function DecArithGroupExercise({
           const inputEl = (_pos: MissingPos) => {
             if (wrongField) {
               return (
-                <div className={`${inputBaseArith} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
-                  <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
+                <div className="w-16 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                  <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
               );
             }

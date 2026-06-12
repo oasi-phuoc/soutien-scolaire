@@ -1388,19 +1388,19 @@ function ArithmeticGroupExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
-                  ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
-                  ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
-                  ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}><span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
@@ -5447,9 +5447,9 @@ export function GenericModuleContent({
                     <span key={ni} className={chipCls}>{n.toLocaleString("fr-CH")}</span>
                   ))}
                   {wrong ? (
-                    <div className={`${inputRowCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
-                      <span className="text-xs font-bold text-amber-600 leading-none">{correctAns}</span>
+                    <div className="w-24 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="decimal" value={v} disabled={seqRuleValidated}
