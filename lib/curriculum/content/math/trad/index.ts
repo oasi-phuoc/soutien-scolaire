@@ -7,6 +7,7 @@ import { TRAD_A1_5 } from "./trad-a1-5";
 import { TRAD_A2_1 } from "./trad-a2-1";
 import { TRAD_A2_2 } from "./trad-a2-2";
 import { TRAD_A2_3 } from "./trad-a2-3";
+import { TRAD_A2_4 } from "./trad-a2-4";
 import { TRAD_A3_1 } from "./trad-a3-1";
 import { TRAD_A3_2 } from "./trad-a3-2";
 import { TRAD_A3_3 } from "./trad-a3-3";
@@ -37,6 +38,7 @@ import { TRAD_A7_1 } from "./trad-a7-1";
 import { TRAD_A7_2 } from "./trad-a7-2";
 import { TRAD_A7_3 } from "./trad-a7-3";
 import { TRAD_A7_4 } from "./trad-a7-4";
+import { TRAD_A7_5 } from "./trad-a7-5";
 import { TRAD_A8_1 } from "./trad-a8-1";
 import { TRAD_A8_2 } from "./trad-a8-2";
 import { TRAD_A8_3 } from "./trad-a8-3";
@@ -151,12 +153,12 @@ import { TRAD_S2_7 } from "./trad-s2-7";
 
 const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_A1_1, TRAD_A1_2, TRAD_A1_3, TRAD_A1_4, TRAD_A1_5,
-  TRAD_A2_1, TRAD_A2_2, TRAD_A2_3,
+  TRAD_A2_1, TRAD_A2_2, TRAD_A2_3, TRAD_A2_4,
   TRAD_A3_1, TRAD_A3_2, TRAD_A3_3, TRAD_A3_4, TRAD_A3_5, TRAD_A3_6,
   TRAD_A4_1, TRAD_A4_2, TRAD_A4_3, TRAD_A4_4, TRAD_A4_5, TRAD_A4_6, TRAD_A4_7,
   TRAD_A5_1, TRAD_A5_2, TRAD_A5_3, TRAD_A5_4, TRAD_A5_5, TRAD_A5_6,
   TRAD_A6_1, TRAD_A6_2, TRAD_A6_3, TRAD_A6_4, TRAD_A6_5, TRAD_A6_6, TRAD_A6_7,
-  TRAD_A7_1, TRAD_A7_2, TRAD_A7_3, TRAD_A7_4,
+  TRAD_A7_1, TRAD_A7_2, TRAD_A7_3, TRAD_A7_4, TRAD_A7_5,
   TRAD_A8_1, TRAD_A8_2, TRAD_A8_3, TRAD_A8_4, TRAD_A8_5,
   TRAD_A9_1, TRAD_A9_2, TRAD_A9_3, TRAD_A9_4, TRAD_A9_5, TRAD_A9_6,
   TRAD_A10_1, TRAD_A10_2, TRAD_A10_3, TRAD_A10_4, TRAD_A10_5, TRAD_A10_6,
