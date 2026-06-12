@@ -16,10 +16,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
     { word: "verre",      image: "verre.png",      article: "le",  gender: "m", definition: "matière transparente et fragile" },
     { word: "papier",     image: "papier.png",     article: "le",  gender: "m", definition: "matière fine faite de fibres végétales" },
     { word: "nylon",      image: "nylon.png",      article: "le",  gender: "m", definition: "tissu synthétique résistant" },
-    { word: "lin",                                  article: "le",  gender: "m", definition: "tissu naturel léger fait de la plante de lin" },
-    { word: "polyester",                            article: "le",  gender: "m", definition: "tissu synthétique facile à entretenir" },
     { word: "caoutchouc", image: "caoutchouc.png", article: "le",  gender: "m", definition: "matière élastique pour imperméables et chaussures" },
-    { word: "tissu",                                article: "le",  gender: "m", definition: "matière textile tissée pour faire des vêtements" },
     { word: "velours",    image: "velours.png",    article: "le",  gender: "m", definition: "tissu doux avec un côté poilu et brillant" },
   ],
   sentences: [

@@ -13,15 +13,8 @@ export const V2_HEURE_THEME: VocabTheme = {
     { word: "midi", image: "midi.jpg",       article: "le",  gender: "m", definition: "12 heures, milieu de la journée" },
     { word: "après-midi", image: "apres-midi.jpg", article: "l'",  gender: "m", definition: "partie de la journée après midi" },
     { word: "soir", image: "soir.jpg",       article: "le",  gender: "m", definition: "fin de la journée avant la nuit" },
-    { word: "nuit", image: "nuit.jpg",       article: "la",  gender: "f", definition: "période d'obscurité" },
     { word: "minuit", image: "minuit.jpg",     article: "le",  gender: "m", definition: "24 heures, milieu de la nuit" },
     { word: "horloge", image: "horloge.jpg",    article: "l'",  gender: "f", definition: "grande pendule fixée au mur" },
-    { word: "montre", image: "montre.jpg",     article: "la",  gender: "f", definition: "instrument porté au poignet pour lire l'heure" },
-    { word: "réveil", image: "reveil.jpg",     article: "le",  gender: "m", definition: "horloge qui sonne à une heure fixée" },
-    { word: "en retard", image: "en-retard.jpg",  definition: "arrivée après l'heure prévue" },
-    { word: "en avance", image: "en-avance.jpg",  definition: "arrivée avant l'heure prévue" },
-    { word: "tôt", image: "tot.jpg",        definition: "de bonne heure, avant le moment habituel" },
-    { word: "tard", image: "tard.jpg",       definition: "après l'heure habituelle ou prévue" },
   ],
   theory: [
     {
