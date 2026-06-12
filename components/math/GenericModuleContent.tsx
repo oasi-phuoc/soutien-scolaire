@@ -3743,9 +3743,45 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           })}
         </div>
       );
+    case "theory_tabs": {
+      return <TheoryTabsBlock block={block} pivot={pivot} showPivot={showPivot} bt={bt} />;
+    }
     default:
       return null;
   }
+}
+
+function TheoryTabsBlock({
+  block, pivot, showPivot, bt,
+}: {
+  block: Extract<MathRichBlock, { type: "theory_tabs" }>;
+  pivot: PivotCode;
+  showPivot: boolean;
+  bt: BlockTrad | undefined;
+}) {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  const activeBlocks = block.tabs[activeIdx]?.blocks ?? [];
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {block.tabs.map((tab, i) => (
+          <button key={i} type="button" onClick={() => setActiveIdx(i)}
+            className={`flex-1 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
+              activeIdx === i
+                ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
+            }`}>
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="space-y-3">
+        {activeBlocks.map((b, i) => (
+          <BlockView key={`tab${activeIdx}-${i}`} block={b} blockIdx={i} tradBlocks={bt ? [bt] : undefined} pivot={pivot} showPivot={showPivot} />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // ── Hint popup + button ──────────────────────────────────────────────────────
@@ -4344,13 +4380,13 @@ export function GenericModuleContent({
   }
 
   function finishEval(correct: boolean) {
-    if (!startSubmoduleId) { router.push("/mathematiques"); return; }
+    if (!startSubmoduleId) { router.push(backUrl); return; }
     const p = loadProgress();
     // Don't downgrade a submodule that was already passed
     if (!correct) {
       const existing = p.submoduleScores?.[startSubmoduleId];
       if (existing && existing.grade >= PASSING_GRADE) {
-        router.push("/mathematiques");
+        router.push(backUrl);
         return;
       }
     }
@@ -4358,7 +4394,7 @@ export function GenericModuleContent({
     const medal = correct ? medalFromPercent(100) : undefined;
     saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
     void medal;
-    router.push("/mathematiques");
+    router.push(backUrl);
   }
 
   const activeCompConfig = currentStep?.kind === "comparison_ex"
@@ -4444,7 +4480,7 @@ export function GenericModuleContent({
     : null;
 
   const goNext = useCallback(() => {
-    if (showEvalScore) { router.push("/mathematiques"); return; }
+    if (showEvalScore) { router.push(backUrl); return; }
     if (currentStep?.kind === "pass_toggle") {
       finishEval(toggleAnswer === "oui");
       return;
@@ -4730,7 +4766,7 @@ export function GenericModuleContent({
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
-      router.push("/mathematiques");
+      router.push(backUrl);
     } else {
       if (currentStep?.kind === "exercise") {
         const nextStep = steps[stepIdx + 1];
@@ -5329,9 +5365,32 @@ export function GenericModuleContent({
     : revisionTitle ?? currentStep?.lesson.theory.title.fr ?? "";
   const moduleInfo = getMathModule(moduleId);
   const geoStyle = moduleInfo?.branch === "geometry" ? { "--color-accent-alg": "var(--color-accent-geo)" } as React.CSSProperties : undefined;
+  const backUrl = moduleInfo?.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
+  const submoduleTitle = moduleInfo?.submodules.find(s => s.id === startSubmoduleId)?.title ?? revisionTitle ?? "";
+  const moduleCode = moduleInfo?.code ?? moduleId;
 
   return (
     <div className="pb-40" style={geoStyle}>
+      {/* Breadcrumb with back button */}
+      <div className="mb-4 flex items-center gap-1 text-xs font-medium text-[var(--color-accent-alg)]">
+        <button
+          type="button"
+          onClick={() => router.push(backUrl)}
+          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          aria-label="Retour"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+          Mathématiques
+        </button>
+        {submoduleTitle && (
+          <>
+            <span className="opacity-40">·</span>
+            <span className="opacity-80">{submoduleTitle}</span>
+          </>
+        )}
+        <span className="opacity-40">·</span>
+        <span className="opacity-80">{moduleCode}</span>
+      </div>
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">

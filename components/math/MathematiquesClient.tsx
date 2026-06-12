@@ -112,6 +112,9 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
   useEffect(() => {
     setProgress(loadProgress());
     setHydrated(true);
+    const params = new URLSearchParams(window.location.search);
+    const t = params.get("tab");
+    if (t === "geometry") setTab("geometry");
   }, []);
 
   const _persist = useCallback((next: StoredProgressV1) => {
