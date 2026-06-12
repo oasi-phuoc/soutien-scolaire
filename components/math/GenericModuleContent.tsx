@@ -3793,18 +3793,18 @@ function ShapeExplorerBlock({
   pivot: PivotCode;
   showPivot: boolean;
 }) {
-  const [selectedIdx, setSelectedIdx] = React.useState<number | null>(null);
-  const [activeTabIdx, setActiveTabIdx] = React.useState(0);
-  const selectedShape = selectedIdx !== null ? block.shapes[selectedIdx] : null;
+  const [selectedIdx, setSelectedIdx] = React.useState(0);
+  const selectedShape = block.shapes[selectedIdx];
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-4 gap-2">
+      {/* Shape tabs — scrollable row of icon buttons */}
+      <div className="flex gap-2 overflow-x-auto pb-1">
         {block.shapes.map((shape, i) => (
           <button
             key={shape.id}
             type="button"
-            onClick={() => { setSelectedIdx(i); setActiveTabIdx(0); }}
-            className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
+            onClick={() => setSelectedIdx(i)}
+            className={`shrink-0 w-14 h-14 rounded-xl border-2 p-1.5 transition-all ${
               selectedIdx === i
                 ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
                 : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"
@@ -3814,29 +3814,19 @@ function ShapeExplorerBlock({
           </button>
         ))}
       </div>
+      {/* Content: all 3 sections (Angles / Droites / Symétrie) stacked */}
       {selectedShape && (
-        <div className="space-y-3 rounded-xl border border-[var(--color-accent-alg)]/25 bg-[var(--color-bg-secondary)] p-4">
-          <div className="flex gap-2">
-            {selectedShape.tabs.map((tab, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setActiveTabIdx(i)}
-                className={`flex-1 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
-                  activeTabIdx === i
-                    ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
-                    : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-          <div className="space-y-3">
-            {selectedShape.tabs[activeTabIdx]?.blocks.map((b, i) => (
-              <BlockView key={`shape-${selectedIdx}-tab${activeTabIdx}-${i}`} block={b} blockIdx={i} tradBlocks={undefined} pivot={pivot} showPivot={false} />
-            ))}
-          </div>
+        <div className="space-y-6">
+          {selectedShape.tabs.map((tab, ti) => (
+            <div key={`${selectedIdx}-${ti}`}>
+              <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)] uppercase tracking-wide">{tab.label}</p>
+              <div className="space-y-3">
+                {tab.blocks.map((b, bi) => (
+                  <BlockView key={`s${selectedIdx}-t${ti}-b${bi}`} block={b} blockIdx={bi} tradBlocks={undefined} pivot={pivot} showPivot={false} />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
