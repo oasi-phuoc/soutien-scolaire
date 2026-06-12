@@ -41,6 +41,8 @@ export type MathModule = {
   /** Références vers modules algèbre utiles (affichage tags). */
   algebraRefs?: string[];
   description?: string;
+  /** Module not yet available — shown in list but non-interactive for students. */
+  comingSoon?: boolean;
 };
 
 export type ModuleProgressState =

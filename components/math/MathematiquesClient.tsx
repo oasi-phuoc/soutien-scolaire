@@ -180,14 +180,35 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
         </button>
       </div>
 
-{/* Geometry tab: coming soon for non-admins */}
-      {tab === "geometry" && !isAdmin && <ComingSoon />}
-
 {/* Module cards */}
-      <section aria-label="Liste des modules" className="space-y-4" hidden={tab === "geometry" && !isAdmin}>
+      <section aria-label="Liste des modules" className="space-y-4">
         <ul className="space-y-4">
           {modules.map((m) => {
             if (!m) return null;
+
+            if (m.comingSoon && !isAdmin) {
+              return (
+                <li key={m.id}>
+                  <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] opacity-50">
+                    <div className="flex w-full items-center gap-3 px-4 py-4">
+                      <div
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg"
+                        style={{ background: `color-mix(in srgb, ${accentColor} 15%, transparent)` }}
+                      >
+                        <span className="text-sm font-bold" style={{ color: accentColor }}>{m.code}</span>
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-bold text-[var(--color-text-primary)]">{m.title}</p>
+                      </div>
+                      <span className="shrink-0 rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
+                        En développement
+                      </span>
+                    </div>
+                  </div>
+                </li>
+              );
+            }
+
             const prog = hydrated ? progress.math[m.id] : undefined;
             const pre = hydrated
               ? (isAdmin ? { ok: true as const, missing: [] as string[] } : prerequisitesMet(m, done))

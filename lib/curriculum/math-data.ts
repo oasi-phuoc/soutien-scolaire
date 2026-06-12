@@ -213,7 +213,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G2",
     title: "Périmètres",
     branch: "geometry",
-    prerequisiteIds: ["G1", "A3"],
+    prerequisiteIds: [],
     algebraRefs: ["A3"],
     submodules: [
       sm("G2.1", "Carré"),
@@ -228,7 +228,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G3",
     title: "Aires des figures planes",
     branch: "geometry",
-    prerequisiteIds: ["G1", "G2", "A3", "A5"],
+    prerequisiteIds: [],
     algebraRefs: ["A3", "A5", "A8", "A4"],
     submodules: [
       sm("G3.1", "Carré"),
@@ -246,6 +246,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G4",
     title: "Constructions géométriques",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G1"],
     submodules: [
       sm("G4.1", "Outils : règle, compas…"),
@@ -261,6 +262,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G5",
     title: "Transformations du plan",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G1", "G4", "A3"],
     algebraRefs: ["A3", "A6"],
     submodules: [
@@ -278,6 +280,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G6",
     title: "Échelles et plans",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G5", "A6"],
     algebraRefs: ["A3", "A6", "A5"],
     submodules: [
@@ -293,6 +296,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G7",
     title: "Théorème de Pythagore",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G1", "A8"],
     algebraRefs: ["A8", "A5"],
     submodules: [
@@ -309,6 +313,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G8",
     title: "Solides et volumes",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G3", "G7", "A8"],
     algebraRefs: ["A3", "A8", "A4", "A5", "G3"],
     submodules: [
@@ -329,6 +334,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G9",
     title: "Lecture et construction de graphiques",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["A5", "A6"],
     algebraRefs: ["A6", "A5", "A7", "A13"],
     submodules: [
@@ -347,6 +353,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "G10",
     title: "Trigonométrie (introduction)",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G7", "A10", "A5"],
     algebraRefs: ["A8", "A10", "A5"],
     submodules: [
@@ -363,6 +370,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "RG",
     title: "Révision — Géométrie",
     branch: "geometry",
+    comingSoon: true,
     prerequisiteIds: ["G1"],
     submodules: [
       sm("RG.1",  "Révision G1"),
