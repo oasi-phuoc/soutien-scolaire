@@ -242,9 +242,95 @@ const WP_SUB: Array<(a: number, b: number) => string> = [
   (a, b) => `Zoé avait ${a} figurines. Elle en offre ${b} à sa cousine. Combien lui en reste-t-il ?`,
 ];
 
+const WP_ADD_A1: Array<(a: number, b: number) => string> = [
+  (a, b) => `Lina a ${a} billes. Elle en gagne ${b}. Combien a-t-elle de billes ?`,
+  (a, b) => `Il y a ${a} pommes. On ajoute ${b} pommes. Combien y a-t-il de pommes ?`,
+  (a, b) => `${a} enfants jouent. ${b} enfants arrivent. Combien y a-t-il d'enfants ?`,
+  (a, b) => `Noa a ${a} cartes. Il reçoit ${b} cartes. Combien a-t-il de cartes ?`,
+  (a, b) => `Dans la boîte, il y a ${a} crayons. On met ${b} crayons. Combien y en a-t-il ?`,
+  (a, b) => `Il y a ${a} fleurs. On plante ${b} fleurs. Combien y a-t-il de fleurs ?`,
+  (a, b) => `Mia lit ${a} pages. Elle lit encore ${b} pages. Combien de pages lit-elle ?`,
+  (a, b) => `Un panier contient ${a} poires. On ajoute ${b} poires. Combien y en a-t-il ?`,
+  (a, b) => `Tom a ${a} points. Il gagne ${b} points. Quel est son total ?`,
+  (a, b) => `Il y a ${a} voitures. ${b} voitures arrivent. Combien y a-t-il de voitures ?`,
+  (a, b) => `Sara a ${a} gommes. Elle achète ${b} gommes. Combien en a-t-elle ?`,
+  (a, b) => `${a} oiseaux sont sur le fil. ${b} oiseaux arrivent. Combien y en a-t-il ?`,
+  (a, b) => `Un sac contient ${a} cubes. On ajoute ${b} cubes. Combien de cubes y a-t-il ?`,
+  (a, b) => `Il y a ${a} élèves. ${b} élèves entrent. Combien y a-t-il d'élèves ?`,
+  (a, b) => `Eli a ${a} autocollants. Il en reçoit ${b}. Combien en a-t-il ?`,
+];
+
+const WP_SUB_A1: Array<(a: number, b: number) => string> = [
+  (a, b) => `Lina a ${a} billes. Elle en perd ${b}. Combien lui en reste-t-il ?`,
+  (a, b) => `Il y a ${a} pommes. On enlève ${b} pommes. Combien reste-t-il de pommes ?`,
+  (a, b) => `${a} enfants jouent. ${b} enfants partent. Combien reste-t-il d'enfants ?`,
+  (a, b) => `Noa a ${a} cartes. Il donne ${b} cartes. Combien lui en reste-t-il ?`,
+  (a, b) => `Dans la boîte, il y a ${a} crayons. On retire ${b} crayons. Combien y en a-t-il ?`,
+  (a, b) => `Il y a ${a} fleurs. On coupe ${b} fleurs. Combien reste-t-il de fleurs ?`,
+  (a, b) => `Mia a ${a} pages à lire. Elle lit ${b} pages. Combien reste-t-il de pages ?`,
+  (a, b) => `Un panier contient ${a} poires. On mange ${b} poires. Combien en reste-t-il ?`,
+  (a, b) => `Tom a ${a} points. Il perd ${b} points. Quel est son total ?`,
+  (a, b) => `Il y a ${a} voitures. ${b} voitures partent. Combien reste-t-il de voitures ?`,
+  (a, b) => `Sara a ${a} gommes. Elle en donne ${b}. Combien lui en reste-t-il ?`,
+  (a, b) => `${a} oiseaux sont sur le fil. ${b} oiseaux s'envolent. Combien en reste-t-il ?`,
+  (a, b) => `Un sac contient ${a} cubes. On enlève ${b} cubes. Combien de cubes reste-t-il ?`,
+  (a, b) => `Il y a ${a} élèves. ${b} élèves sortent. Combien reste-t-il d'élèves ?`,
+  (a, b) => `Eli a ${a} autocollants. Il en donne ${b}. Combien lui en reste-t-il ?`,
+];
+
+const WP_ADD_B1: Array<(a: number, b: number) => string> = [
+  (a, b) => `Pour une sortie scolaire, ${a} billets sont réservés le matin. Dans l'après-midi, l'école ajoute ${b} billets pour une autre classe. Combien de billets sont réservés au total ?`,
+  (a, b) => `Une association collecte ${a} CHF lors d'une vente. Le lendemain, elle reçoit encore ${b} CHF de dons. Quelle somme possède-t-elle maintenant ?`,
+  (a, b) => `La bibliothèque avait déjà classé ${a} livres. Une nouvelle livraison de ${b} livres doit aussi être rangée. Combien de livres sont à classer en tout ?`,
+  (a, b) => `Un club sportif compte ${a} inscriptions en début de semaine. Après la journée portes ouvertes, ${b} nouvelles personnes s'inscrivent. Combien d'inscriptions y a-t-il ?`,
+  (a, b) => `Une entreprise a préparé ${a} colis lundi. Mardi, elle en prépare ${b} supplémentaires. Combien de colis ont été préparés ?`,
+  (a, b) => `Lors d'un tournoi, ${a} spectateurs sont entrés avant midi. Après midi, ${b} autres spectateurs arrivent. Combien de spectateurs sont entrés ?`,
+  (a, b) => `Un magasin vend ${a} articles pendant la matinée. Il en vend encore ${b} pendant l'après-midi. Combien d'articles a-t-il vendus ?`,
+  (a, b) => `Une ville plante ${a} arbres dans un quartier. Elle en plante ensuite ${b} dans un parc voisin. Combien d'arbres sont plantés ?`,
+  (a, b) => `Un entrepôt contient ${a} cahiers. Une commande de ${b} cahiers arrive. Combien de cahiers l'entrepôt contient-il ?`,
+  (a, b) => `Une course accueille ${a} participants inscrits en ligne. Le jour même, ${b} participants s'inscrivent sur place. Combien de participants y a-t-il ?`,
+  (a, b) => `Un musée reçoit ${a} visiteurs pendant la semaine. Le week-end, ${b} visiteurs supplémentaires viennent. Combien de visiteurs a-t-il reçus ?`,
+  (a, b) => `Une école possède ${a} tablettes. Elle en achète ${b} pour équiper de nouvelles classes. Combien de tablettes possède-t-elle ?`,
+  (a, b) => `Une usine produit ${a} pièces avant la pause. Après la pause, elle produit ${b} pièces de plus. Combien de pièces sont produites ?`,
+  (a, b) => `Un agriculteur récolte ${a} kg de pommes le matin. Il récolte encore ${b} kg l'après-midi. Combien de kilogrammes récolte-t-il ?`,
+  (a, b) => `Une caisse contient ${a} enveloppes. On ajoute ${b} enveloppes pour préparer un envoi. Combien d'enveloppes contient la caisse ?`,
+];
+
+const WP_SUB_B1: Array<(a: number, b: number) => string> = [
+  (a, b) => `Un cinéma avait prévu ${a} places pour une séance. Après plusieurs annulations, ${b} places ne sont plus réservées. Combien de places restent réservées ?`,
+  (a, b) => `Une association possède ${a} CHF pour financer un projet. Elle dépense ${b} CHF pour acheter du matériel. Quelle somme lui reste-t-il ?`,
+  (a, b) => `La bibliothèque compte ${a} livres dans une réserve. Elle en transfère ${b} vers les classes. Combien de livres restent dans la réserve ?`,
+  (a, b) => `Un club sportif avait ${a} ballons en stock. Après un tournoi, ${b} ballons sont abîmés et retirés. Combien de ballons utilisables restent-ils ?`,
+  (a, b) => `Une entreprise doit livrer ${a} colis. Elle en livre ${b} le matin. Combien de colis reste-t-il à livrer ?`,
+  (a, b) => `Lors d'un salon, ${a} badges sont imprimés. Les organisateurs en distribuent ${b} dès l'ouverture. Combien de badges restent-ils ?`,
+  (a, b) => `Un magasin avait ${a} articles en rayon. Il en vend ${b} pendant la journée. Combien d'articles restent en rayon ?`,
+  (a, b) => `Une ville dispose de ${a} plants pour ses jardins. Elle en utilise ${b} dans le premier quartier. Combien de plants restent disponibles ?`,
+  (a, b) => `Un entrepôt contient ${a} cahiers. Une école en commande ${b}. Combien de cahiers restent dans l'entrepôt ?`,
+  (a, b) => `Une course comptait ${a} inscrits. Avant le départ, ${b} personnes se désistent. Combien de participants restent inscrits ?`,
+  (a, b) => `Un musée reçoit ${a} brochures. Il en distribue ${b} aux visiteurs. Combien de brochures reste-t-il ?`,
+  (a, b) => `Une école possède ${a} tablettes. Elle en prête ${b} à une autre école. Combien de tablettes lui restent-elles ?`,
+  (a, b) => `Une usine a produit ${a} pièces. Lors du contrôle, ${b} pièces sont écartées. Combien de pièces restent acceptées ?`,
+  (a, b) => `Un agriculteur récolte ${a} kg de pommes. Il en vend ${b} kg au marché. Combien de kilogrammes lui restent-ils ?`,
+  (a, b) => `Une caisse contient ${a} enveloppes. On en utilise ${b} pour un envoi. Combien d'enveloppes restent dans la caisse ?`,
+];
+
+const WP_ADD_BY_LEVEL: Record<WordLevel, Array<(a: number, b: number) => string>> = {
+  a1: WP_ADD_A1,
+  a2: WP_ADD,
+  b1: WP_ADD_B1,
+};
+
+const WP_SUB_BY_LEVEL: Record<WordLevel, Array<(a: number, b: number) => string>> = {
+  a1: WP_SUB_A1,
+  a2: WP_SUB,
+  b1: WP_SUB_B1,
+};
+
 function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
-  const addIdx = Math.floor(Math.random() * WP_ADD.length);
-  const subIdx = Math.floor(Math.random() * WP_SUB.length);
+  const addPool = WP_ADD_BY_LEVEL[level];
+  const subPool = WP_SUB_BY_LEVEL[level];
+  const addIdx = Math.floor(Math.random() * addPool.length);
+  const subIdx = Math.floor(Math.random() * subPool.length);
   let addA: number, addB: number, subA: number, subB: number;
   if (level === "a1") {
     addA = rnd(5, 25);   addB = rnd(3, 15);
@@ -260,8 +346,8 @@ function genWP(level: WordLevel, exNum: number): WordProblemsConfig {
     exNum,
     level,
     questions: [
-      { textFr: WP_ADD[addIdx]!(addA, addB), answer: addA + addB, op: "+" },
-      { textFr: WP_SUB[subIdx]!(subA, subB), answer: subA - subB, op: "-" },
+      { textFr: addPool[addIdx]!(addA, addB), answer: addA + addB, op: "+" },
+      { textFr: subPool[subIdx]!(subA, subB), answer: subA - subB, op: "-" },
     ],
   };
 }
@@ -1376,20 +1462,21 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
 
 // ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
 function WordProblemsExercise({
-  config, answers, validated, results, onChange,
+  config, answers, validated, results, onChange, consigne,
 }: {
   config: WordProblemsConfig;
   answers: string[];
   validated: boolean;
   results: boolean[];
   onChange: (i: number, val: string) => void;
+  consigne?: string;
 }) {
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Résolvez les problèmes. Écrivez uniquement la réponse numérique.</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne ?? "Résolvez les problèmes. Écrivez uniquement la réponse numérique."}</p>
       </div>
       <div className="space-y-6">
         {config.questions.map((q, i) => {
@@ -3442,6 +3529,9 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
     case "table": {
       const tableHeaders = headersFor(block.headersFr, bt?.headers?.[pivot]);
       const tableCaption = captionFor(block.captionFr, bt?.caption?.[pivot]);
+      const tableRows = showPivot && bt?.items?.[pivot]?.length
+        ? bt.items[pivot]!.map((row) => row.split("|").map((cell) => cell.trim()))
+        : block.rows;
       return (
         <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
           <table className="w-full text-sm">
@@ -3455,12 +3545,12 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
               </tr>
             </thead>
             <tbody>
-              {block.rows.map((row, ri) => (
+              {tableRows.map((row, ri) => (
                 <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                   {row.map((cell, ci) => {
                     const align = block.colAligns?.[ci] ?? block.textAlignRows ?? "center";
                     return (
-                      <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)] ${align === "left" ? "text-left" : "text-center"}`}>
+                      <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)] ${align === "left" ? "text-left" : "text-center"}`} lang={textLang} dir={textDir}>
                         {cell.trim().split(/\n/).map((line, li) => (
                           <span key={li}>{li > 0 && <br />}{renderBold(line.trim())}</span>
                         ))}
@@ -4875,27 +4965,6 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "word_problems") {
-    const _wpCfg = activeWpConfig!;
-    stepCanValidate = !wpValidated;
-    stepValidate = wpValidated ? () => {} : () => {
-      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
-      setWpResults(cfg.questions.map((q, i) => {
-        const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
-        return parseInt(v, 10) === q.answer;
-      }));
-      setWpValidated(true);
-    };
-    stepReset = () => {
-      const cfg = wpOverrideConfigs[stepIdx] ?? _wpCfg;
-      const newCfg = genWP(cfg.level, cfg.exNum);
-      setWpOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
-      setWpAnswers(Array(cfg.questions.length).fill(""));
-      setWpValidated(false);
-      setWpResults([]);
-    };
-  }
-
   if (currentStep?.kind === "frac_id") {
     const cfg = currentStep.config;
     stepCanValidate = !fracIdValidated;
@@ -5929,6 +5998,7 @@ export function GenericModuleContent({
           validated={wpValidated}
           results={wpResults}
           onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+          consigne={showPivotTranslation ? currentStepTrad?.consignes?.wordProblems?.[pivot] : undefined}
         />
       )}
 
@@ -5941,18 +6011,6 @@ export function GenericModuleContent({
           validated={roundingValidated}
           results={roundingResults}
           onChange={(i, val) => setRoundingAnswers(prev => prev.map((a, j) => j === i ? val : a))}
-        />
-      )}
-
-      {/* Word problems exercise (A2.4) */}
-      {!showEvalScore && currentStep?.kind === "word_problems" && activeWpConfig && (
-        <WordProblemsExercise
-          key={`wp-${stepIdx}`}
-          config={activeWpConfig}
-          answers={wpAnswers}
-          validated={wpValidated}
-          results={wpResults}
-          onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
         />
       )}
 
