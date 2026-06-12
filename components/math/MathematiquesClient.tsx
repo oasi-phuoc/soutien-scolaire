@@ -20,7 +20,6 @@ import {
 } from "@/lib/progress/math-progress";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { PASSING_GRADE } from "@/lib/scoring";
-import { ComingSoon } from "@/components/ComingSoon";
 
 type ModuleDisplayState = "locked" | "available" | "in_progress" | "completed";
 
