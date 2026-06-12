@@ -3846,11 +3846,13 @@ function TheoryView({ lesson, pivot, showPivot }: {
   const paragraphs = pivotParas?.length ? pivotParas : theory.paragraphs.fr;
   return (
     <div className="space-y-4">
-      <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
-          {title}
-        </h2>
-      </div>
+      {title && (
+        <div>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
+            {title}
+          </h2>
+        </div>
+      )}
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
           {theory.blocks.map((block, i) => (

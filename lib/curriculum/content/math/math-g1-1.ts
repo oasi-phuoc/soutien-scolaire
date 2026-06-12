@@ -4,9 +4,9 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-1",
   submoduleCode: "G1.1",
   theory: {
-    title: { fr: "Formes" },
+    title: { fr: "" },
     blocks: [
-      { type: "heading", fr: "Les polygones", black: true },
+      { type: "heading", fr: "Les polygones réguliers", black: true },
 
       {
         type: "plain",
@@ -26,14 +26,11 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         ],
       },
 
-      { type: "highlight", fr: "Polygone régulier" },
+      { type: "plain", fr: "" },
+
       {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
-          "Exemples : triangle équilatéral, carré, hexagone régulier.",
-        ],
+        type: "plain",
+        fr: "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
       },
 
       {
@@ -90,6 +87,8 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         ],
       },
 
+      { type: "plain", fr: "" },
+
       { type: "heading", fr: "Le cercle", black: true },
 
       {
@@ -115,14 +114,15 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         ],
       },
 
+      { type: "plain", fr: "" },
+
       { type: "highlight", fr: "Vocabulaire du cercle" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
           "**Rayon (r)** : distance du centre à n'importe quel point du cercle.",
-          "**Diamètre (d)** : corde passant par le centre ; d = 2r.",
-          "**Corde** : segment reliant deux points du cercle (sans passer par le centre).",
+          "**Diamètre (d)** : segment passant par le centre ; d = 2r.",
         ],
       },
 
@@ -132,14 +132,11 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   <circle cx='110' cy='78' r='55' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
   <circle cx='110' cy='78' r='3' fill='var(--color-accent-alg)'/>
   <text x='116' y='75' font-size='12' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>O</text>
-  <line x1='55' y1='78' x2='165' y2='78' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='5,3' opacity='0.5'/>
+  <line x1='55' y1='78' x2='165' y2='78' stroke='var(--color-accent-alg)' stroke-width='2' opacity='0.7'/>
   <text x='107' y='66' font-size='11' fill='var(--color-accent-alg)' opacity='0.7' text-anchor='middle' font-family='sans-serif'>d</text>
   <line x1='110' y1='78' x2='165' y2='78' stroke='#f97316' stroke-width='2.5'/>
   <text x='140' y='70' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
-  <line x1='138' y1='30' x2='62' y2='110' stroke='#16a34a' stroke-width='2'/>
-  <text x='142' y='28' font-size='10' fill='#16a34a' font-weight='bold' font-family='sans-serif'>corde</text>
 </svg>`,
-        captionFr: "Rayon (r) en orange · Diamètre (d) en pointillés · Corde en vert",
       },
     ],
     paragraphs: { fr: [] },
