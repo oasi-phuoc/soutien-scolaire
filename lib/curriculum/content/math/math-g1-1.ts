@@ -4,9 +4,7 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-1",
   submoduleCode: "G1.1",
   theory: {
-    title: {
-      fr: "Formes (polygones et cercle)",
-    },
+    title: { fr: "Formes" },
     blocks: [
       { type: "heading", fr: "Les polygones", black: true },
 
@@ -42,23 +40,51 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         type: "svg_row",
         items: [
           {
-            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,8 74,72 6,72' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,8 74,72 6,72' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
             captionFr: "Triangle",
           },
           {
-            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><rect x='12' y='12' width='56' height='56' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <rect x='12' y='12' width='56' height='56' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+</svg>`,
             captionFr: "Carré",
           },
+        ],
+      },
+
+      {
+        type: "svg_row",
+        items: [
           {
-            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><rect x='4' y='22' width='72' height='36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <rect x='4' y='24' width='72' height='32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+</svg>`,
             captionFr: "Rectangle",
           },
           {
-            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,8 72,40 40,72 8,40' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Losange",
+          },
+        ],
+      },
+
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
             captionFr: "Pentagone",
           },
           {
-            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'><polygon points='40,6 68,22 68,56 40,72 12,56 12,22' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,6 68,22 68,58 40,74 12,58 12,22' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
             captionFr: "Hexagone",
           },
         ],
@@ -69,6 +95,24 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
       {
         type: "plain",
         fr: "Un **cercle** est l'ensemble de tous les points situés à la même distance d'un point fixe appelé **centre** (O).",
+      },
+
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <circle cx='40' cy='40' r='32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+</svg>`,
+            captionFr: "Cercle",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <path d='M 8,50 A 32,32 0 0,1 72,50 Z' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Demi-cercle",
+          },
+        ],
       },
 
       { type: "highlight", fr: "Vocabulaire du cercle" },
