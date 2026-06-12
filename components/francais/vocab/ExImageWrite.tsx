@@ -83,10 +83,6 @@ export function ExImageWrite({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
-  const [imgFits, setImgFits] = useState<Record<string, "contain" | "cover">>(() =>
-    Object.fromEntries(words.map((w) => [w.word, "contain" as const]))
-  );
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
 
@@ -122,8 +118,7 @@ export function ExImageWrite({
               <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded border border-[var(--color-border-default)] bg-white">
                 {resolveImg(w.image) && (
                   <Image src={resolveImg(w.image)!} alt="" fill
-                    className={`object-${imgFits[w.word] ?? "contain"}`}
-                    onLoad={e => { const i = e.currentTarget; setImgFits(prev => ({ ...prev, [w.word]: i.naturalWidth / i.naturalHeight > 1 ? "cover" : "contain" })); }}
+                    className="object-cover"
                     sizes="56px" />
                 )}
               </div>

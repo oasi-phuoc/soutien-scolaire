@@ -136,23 +136,19 @@ function resolveImage(image: string | undefined, folder: string): string | undef
 function WordCard({ w, cardLayout, imageFolder }: { w: VocabWord; cardLayout?: "mf"; imageFolder: string }) {
   const country = w.relatedWords?.[0] ? parseCountryWord(w.relatedWords[0]) : null;
   const [imgFailed, setImgFailed] = useState(false);
-  const imgFit = "contain";
   const src = resolveImage(w.image, imageFolder);
 
   return (
     <div className="flex flex-col gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {/* Image with audio overlay */}
-      <div className="relative h-28 w-full rounded border border-[var(--color-border-default)] bg-white">
-        <div className="absolute overflow-hidden" style={{ top: 15, bottom: 15, left: 15, right: 51 }}>
-          {src && !imgFailed ? (
-            <Image src={src} alt={w.word} fill
-              className={`object-${imgFit}`}
-              onLoad={() => {}}
-              onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
-          ) : (
-            <div className="h-28 w-full rounded bg-white" aria-hidden />
-          )}
-        </div>
+      <div className="relative w-full overflow-hidden rounded border border-[var(--color-border-default)] bg-white" style={{ aspectRatio: "4/3" }}>
+        {src && !imgFailed ? (
+          <Image src={src} alt={w.word} fill
+            className="object-cover"
+            onError={() => setImgFailed(true)} sizes="(max-width: 640px) 50vw, 200px" />
+        ) : (
+          <div className="h-full w-full bg-white" aria-hidden />
+        )}
         <button
           type="button"
           onClick={() => playWord(w)}

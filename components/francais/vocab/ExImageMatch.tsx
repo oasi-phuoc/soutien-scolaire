@@ -9,20 +9,18 @@ const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
 
 function ImgOrPlaceholder({ src, alt, placeholder }: { src?: string; alt: string; placeholder: string }) {
   const [failed, setFailed] = useState(false);
-  const [imgFit, setImgFit] = useState<"contain" | "cover">("contain");
   if (src && !failed) {
     return (
-      <div className="relative h-20 w-full overflow-hidden rounded border border-[var(--color-border-default)] bg-white">
+      <div className="relative w-full overflow-hidden rounded border border-[var(--color-border-default)] bg-white" style={{ aspectRatio: "4/3" }}>
         <Image src={src} alt={alt} fill
-          className={`object-${imgFit}`}
-          onLoad={e => { const i = e.currentTarget; setImgFit(i.naturalWidth / i.naturalHeight > 1 ? "cover" : "contain"); }}
+          className="object-cover"
           onError={() => setFailed(true)}
           sizes="(max-width: 640px) 45vw, 200px" />
       </div>
     );
   }
   return (
-    <div className="flex h-20 w-full items-center justify-center rounded border border-[var(--color-border-default)] bg-white text-center text-xs text-[var(--color-text-tertiary)]">
+    <div className="flex w-full items-center justify-center rounded border border-[var(--color-border-default)] bg-white text-center text-xs text-[var(--color-text-tertiary)]" style={{ aspectRatio: "4/3" }}>
       {placeholder}
     </div>
   );
