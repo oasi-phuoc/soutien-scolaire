@@ -2,7 +2,7 @@
 
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "border-[var(--color-accent-alg)]";
 
 const SUPS = "⁰¹²³⁴⁵⁶⁷⁸⁹";
 const toSup = (n: number) => String(n).split("").map(d => SUPS[parseInt(d)]).join("");
@@ -53,7 +53,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
@@ -137,7 +137,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const expInput = wrongField ? (
-              <div className={`${inputSmall} border-amber-400 flex flex-col items-center justify-center`}
+              <div className={`${inputSmall} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}
                 style={{ position: "relative", top: "-6px" }}>
                 <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-[10px] font-bold leading-none text-amber-600">{q.exp}</span>
@@ -239,7 +239,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const baseInput = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.base}</span>
               </div>
@@ -530,7 +530,7 @@ function PureCalcExercise<Q extends { result: number }>({
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
@@ -725,7 +725,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const expInput = wrongField ? (
-              <div className={`${inputSmall} border-amber-400 inline-flex flex-col items-center justify-center`}
+              <div className={`${inputSmall} border-[var(--color-accent-alg)] inline-flex flex-col items-center justify-center`}
                 style={{ position: "relative", top: "-6px" }}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
@@ -820,7 +820,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
@@ -863,7 +863,7 @@ function ExpInput({ val, correct, validated, wrong, onChange }: {
   onChange: (v: string) => void;
 }) {
   return wrong ? (
-    <div className={`${inputSmall} border-amber-400 inline-flex flex-col items-center justify-center`}
+    <div className={`${inputSmall} border-[var(--color-accent-alg)] inline-flex flex-col items-center justify-center`}
       style={{ position: "relative", top: "-6px" }}>
       <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
       <span className="text-xs font-bold leading-none text-amber-600">{correct}</span>
@@ -1023,7 +1023,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
@@ -1101,7 +1101,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
             const cv = coeffAns[i] ?? ""; const ev = expAns[i] ?? "";
             const wrong = validated && !results[i];
             const coeffEl = wrong ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{cv || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.coeff}</span>
               </div>
@@ -1112,7 +1112,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
               />
             );
             const expEl = wrong ? (
-              <div className={`${inputSmall} border-amber-400 inline-flex flex-col items-center justify-center`}
+              <div className={`${inputSmall} border-[var(--color-accent-alg)] inline-flex flex-col items-center justify-center`}
                 style={{ position: "relative", top: "-6px" }}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{ev || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.exp}</span>
@@ -1217,7 +1217,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
                     let cls = "px-3 py-1 rounded-lg border text-xs font-bold transition-colors ";
                     if (validated) {
                       if (val === q.answer && isSelected) cls += "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400";
-                      else if (val === q.answer && !isSelected) cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                      else if (val === q.answer && !isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       else if (isSelected && isWrong) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                     } else {
@@ -1304,7 +1304,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
             const val = answers[i] ?? "";
             const wrongField = validated && !results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.result}</span>
               </div>
@@ -1374,7 +1374,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
             const wrongField = validated && !results[i];
             const rightField = validated && results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
               </div>
@@ -1493,7 +1493,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
             const wrongField = validated && !results[i];
             const rightField = validated && results[i];
             const inputEl = wrongField ? (
-              <div className={`${inputBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inputBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
                 <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
               </div>

@@ -30,7 +30,7 @@ function FracInput({ numVal, denVal, onNum, onDen, status, disabled, correctNum,
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"
   }`;
   const wrongBox = (val: string, correct?: string) => (
-    <span className="w-12 h-8 rounded-xl border border-amber-400 px-1 flex flex-col items-center justify-center">
+    <span className="w-12 h-8 rounded-xl border border-[var(--color-accent-alg)] px-1 flex flex-col items-center justify-center">
       <span className="text-[10px] text-zinc-700 dark:text-zinc-300 tabular-nums leading-none">{val || "—"}</span>
       <span className="text-xs font-bold text-amber-600 dark:text-amber-400 tabular-nums leading-none">{correct}</span>
     </span>
@@ -136,12 +136,12 @@ const PART_TO_PCT_POOL: PartToPctItem[] = [
   { part: 60, total: 150, pct: 40 }, { part: 50, total: 200, pct: 25 },
 ];
 
-const WRONG_CLS = "w-24 h-9 rounded-xl border border-amber-400 flex flex-col items-center justify-center text-center shrink-0";
+const WRONG_CLS = "w-24 h-9 rounded-xl border border-[var(--color-accent-alg)] flex flex-col items-center justify-center text-center shrink-0";
 
 const simpleCls = (status: "idle" | "correct" | "wrong") =>
   `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
     status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-    : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+    : status === "wrong" ? "border-[var(--color-accent-alg)]"
     : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
 // ── A6.1 Exercise 1 : % → fraction ──────────────────────────────────────────
@@ -250,7 +250,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
   const inputCls = (status: State["status"]) =>
     `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-      : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+      : status === "wrong" ? "border-[var(--color-accent-alg)]"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
   return (
@@ -319,7 +319,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
   const inputCls = (status: State["status"]) =>
     `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-      : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+      : status === "wrong" ? "border-[var(--color-accent-alg)]"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
   return (
@@ -388,7 +388,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
   const inputCls = (status: State["status"]) =>
     `w-24 h-9 shrink-0 rounded-xl border px-2 text-sm text-center outline-none transition-colors ${
       status === "correct" ? "border-green-400 bg-green-50 dark:bg-green-950/20"
-      : status === "wrong" ? "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20"
+      : status === "wrong" ? "border-[var(--color-accent-alg)]"
       : "border-[var(--color-accent-alg)]/40 bg-blue-50 dark:bg-blue-950/20 focus:border-[var(--color-accent-alg)]"}`;
 
   return (
@@ -775,7 +775,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                         : "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
                     } else {
                       if (isSel)       cls += "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40";
-                      else if (isCor)  cls += "border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-600 dark:text-amber-400 font-bold";
+                      else if (isCor)  cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)] font-bold";
                       else             cls += "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
                     }
                     return (

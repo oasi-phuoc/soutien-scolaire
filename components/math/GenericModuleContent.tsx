@@ -2343,7 +2343,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
               <span className="text-sm font-bold text-[var(--color-text-secondary)]">=</span>
               <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                 {wrong ? (
-                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-[var(--color-accent-alg)]`}>
                     <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.num||"—"}</span>
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simNum}</span>
                   </div>
@@ -2353,7 +2353,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                 )}
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
-                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-amber-400`}>
+                  <div className={`w-12 flex flex-col items-center justify-center py-1 border-[var(--color-accent-alg)]`}>
                     <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.den||"—"}</span>
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simDen}</span>
                   </div>
@@ -6010,7 +6010,7 @@ export function GenericModuleContent({
                     Du nombre <strong className="font-bold">{q.number}</strong>
                   </p>
                   {ok === false ? (
-                    <div className={`w-full px-4 py-3 text-sm font-mono border border-amber-400 flex flex-col gap-0.5`}>
+                    <div className={`w-full px-4 py-3 text-sm font-mono border border-[var(--color-accent-alg)] flex flex-col gap-0.5`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.divisors.join(", ")}</span>
                     </div>
@@ -6080,7 +6080,7 @@ export function GenericModuleContent({
                       } else if (selected) {
                         cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (shouldSelect) {
-                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       } else {
                         cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
                       }
@@ -6154,7 +6154,7 @@ export function GenericModuleContent({
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                   <span className="text-sm text-[var(--color-text-secondary)]">{formatNumsEt(q.nums)} =</span>
                   {wrong ? (
-                    <div className={`${inputCls} flex flex-col items-center justify-center border-amber-400`}>
+                    <div className={`${inputCls} flex flex-col items-center justify-center border-[var(--color-accent-alg)]`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                     </div>
@@ -6197,7 +6197,7 @@ export function GenericModuleContent({
                       } else if (isSelected && !isCorrect) {
                         cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                       } else if (!isSelected && isCorrect) {
-                        cls += "border-amber-400 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+                        cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       } else {
                         cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-40";
                       }

@@ -58,7 +58,7 @@ function CorrectionInput({ value, onChange, correct, validated, width = "w-16" }
   const wrong = validated && value.trim().replace(".", ",") !== correct.trim().replace(".", ",");
   return (
     <div className={`${width} min-h-9 flex flex-col items-center justify-center rounded px-1 py-1 text-center font-mono text-sm text-[var(--color-text-primary)] border ${
-      wrong ? "border-2 border-amber-500 bg-transparent" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10"
+      wrong ? "border-2 border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10"
     }`}>
       {validated ? (
         wrong ? (
@@ -306,7 +306,7 @@ function OrderingChips({ numbers, selected, onToggle, validated, fmt, desc = fal
           <div className="flex flex-wrap items-center gap-1.5">
             {correctOrder.map((n, ci) => (
               <React.Fragment key={ci}>
-                <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border border-amber-500 bg-amber-50 dark:bg-amber-950/20 px-1.5 text-base font-mono font-bold text-amber-700`}>
+                <div className={`${chipW} flex h-10 items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 px-1.5 text-base font-mono font-bold text-[var(--color-accent-alg)]`}>
                   {fmt(n)}
                 </div>
                 {ci < correctOrder.length - 1 && <span className="text-sm font-bold text-amber-400">{desc ? ">" : "<"}</span>}
@@ -463,7 +463,7 @@ function DecColGridFull({ aStr, bStr, op, aAnswers, bAnswers, resultAnswers, car
         <td key={col} className="w-8 p-0.5 text-center">
           <div className={`flex h-8 w-8 items-center justify-center rounded border font-mono text-sm ${
             isOk ? "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-[var(--color-text-primary)]"
-                 : "border-2 border-amber-500 bg-transparent font-bold text-amber-600"
+                 : "border-2 border-[var(--color-accent-alg)] font-bold text-[var(--color-accent-alg)]"
           }`}>
             {isOk ? (val || String(correct)) : String(correct)}
           </div>
@@ -754,7 +754,7 @@ function DecMulGridFull({ aStr, bStr, aInt, bInt, cells, onCellChange, decResult
             <input type="text" inputMode="decimal" value={decResult} disabled={validated}
               onChange={e => onDecResultChange(e.target.value.replace(/[^0-9,.]/g, ""))}
               className={`w-28 rounded-xl border px-2 py-1 text-sm text-center outline-none transition-colors disabled:opacity-60 ${
-                isWrong ? "border-2 border-amber-500 bg-transparent" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)]"
+                isWrong ? "border-2 border-[var(--color-accent-alg)]" : "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 focus:border-[var(--color-accent-alg)]"
               }`}
             />
             {isWrong && <span className="text-xs font-bold text-amber-600">{correctResultStr}</span>}

@@ -2,7 +2,7 @@
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
-const CLS_WRONG = "border-amber-500 bg-amber-50 text-amber-600 dark:bg-amber-950/20";
+const CLS_WRONG = "border-[var(--color-accent-alg)]";
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -260,7 +260,7 @@ export function A7RelEncadrementExercise({
           const sndExp = dir === "<" ? q.hi : q.lo;
           const mkInput = (key: "lo" | "hi", exp: number) =>
             wrong ? (
-              <div className={`${inpBase} border-amber-400 flex flex-col items-center justify-center`}>
+              <div className={`${inpBase} border-[var(--color-accent-alg)] flex flex-col items-center justify-center`}>
                 <span className="text-xs text-[var(--color-text-primary)] leading-none">{a[key] || "—"}</span>
                 <span className="text-xs font-bold text-amber-600 leading-none">{fmtRel(exp)}</span>
               </div>
@@ -454,7 +454,7 @@ export function A7RelSeqCompleteExercise({
                   const v = answers[qi]?.[bIdx] ?? "";
                   const wrong = validated && Math.abs(normRel(v) - n) >= 0.001;
                   return wrong ? (
-                    <div key={ni} className={`${cellW} border-amber-400 flex flex-col items-center justify-center rounded-lg border`}>
+                    <div key={ni} className={`${cellW} border-[var(--color-accent-alg)] flex flex-col items-center justify-center rounded-lg border`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{fmt(n)}</span>
                     </div>
