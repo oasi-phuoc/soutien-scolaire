@@ -3,60 +3,160 @@ import type { SubmoduleTrad } from "./trad-types";
 export const TRAD_A8_5: SubmoduleTrad = {
   submoduleId: "A8-5",
   title: {
-    fr: "Valeur approchée d'une racine",
-    en: "Approximate value of a root",
-    ar: "القيمة التقريبية لجذر",
-    fa: "مقدار تقریبی جذر",
-    ti: "ናይ ስርወ ቀረባ ዋጋ",
-    uk: "Наближене значення кореня",
+    fr: "Priorité des opérations",
+    en: "Order of operations",
+    ar: "ترتيب العمليات",
+    fa: "ترتیب عملیات",
+    pt: "Prioridade das operações",
+    so: "Mudnaanta xisaab-fallada",
+    ti: "ቅደም ተኸተል ስሌታት",
+    tr: "İşlem önceliği",
+    ps: "د عملیاتو لومړیتوب",
+    uk: "Порядок дій",
   },
   blocks: [
-    {
-      text: {
-        fr: "Racines irrationnelles",
-      }
-    },
-    {
-      text: {
-        fr: "Quand un nombre n'est pas un carré parfait, sa racine carrée est un nombre irrationnel : elle n'a pas de valeur décimale exacte et finie.",
-      }
-    },
-    {
-      text: {
-        fr: "√2, √3, √5, √7 sont des nombres irrationnels. On ne peut les écrire qu'avec le signe √ ou par une valeur approchée.",
-      }
-    },
-    {
-      text: {
-        fr: "Encadrement d'une racine",
-      }
-    },
-    {
-      text: {
-        fr: "Pour encadrer √n, on cherche les deux carrés parfaits consécutifs qui encadrent n.",
-      }
-    },
-    {
-      text: {
-        fr: "Méthode d'encadrement",
+      {
+          "text": {
+              "fr": "Qu'est-ce que la priorité des opérations ?",
+              "en": "What is the order of operations?"
+          }
       },
-      items: {
-        fr: [
-            "1. Trouver deux entiers a et b tels que a² < n < b²",
-            "2. Alors : a < √n < b",
-            "3. Utiliser la calculatrice pour la valeur décimale approchée",
-          ],
+      {
+          "text": {
+              "fr": "Lorsqu'un calcul contient plusieurs opérations, il faut les effectuer dans un ordre précis.",
+              "en": "When a calculation contains several operations, you must do them in a precise order."
+          }
+      },
+      {
+          "text": {
+              "fr": "Ordre des priorités",
+              "en": "Order of priority"
+          }
+      },
+      {
+          "items": {
+              "fr": [
+                  "**1.** Parenthèses ( ), crochets [ ] et accolades { } - de l'intérieur vers l'extérieur",
+                  "**2.** Puissances et racines carrées",
+                  "**3.** Multiplications x et divisions / (de gauche à droite)",
+                  "**4.** Additions + et soustractions - (de gauche à droite)"
+              ],
+              "en": [
+                  "**1.** Parentheses ( ), brackets [ ], and braces { } - from inside to outside",
+                  "**2.** Powers and square roots",
+                  "**3.** Multiplications x and divisions / (from left to right)",
+                  "**4.** Additions + and subtractions - (from left to right)"
+              ]
+          }
+      },
+      {
+          "text": {
+              "fr": "",
+              "en": ""
+          }
+      },
+      {
+          "text": {
+              "fr": "Exemples",
+              "en": "Examples"
+          }
+      },
+      {
+          "text": {
+              "fr": "3 + 4 x 2",
+              "en": "3 + 4 x 2"
+          }
+      },
+      {
+          "items": {
+              "fr": [
+                  "On effectue d'abord la multiplication : 4 x 2 = 8",
+                  "Puis l'addition : 3 + 8 = **11**"
+              ],
+              "en": [
+                  "First do the multiplication: 4 x 2 = 8",
+                  "Then the addition: 3 + 8 = **11**"
+              ]
+          }
+      },
+      {
+          "text": {
+              "fr": "",
+              "en": ""
+          }
+      },
+      {
+          "text": {
+              "fr": "(3 + 4) x 2",
+              "en": "(3 + 4) x 2"
+          }
+      },
+      {
+          "items": {
+              "fr": [
+                  "On effectue d'abord les parenthèses : 3 + 4 = 7",
+                  "Puis la multiplication : 7 x 2 = **14**"
+              ],
+              "en": [
+                  "First do the parentheses: 3 + 4 = 7",
+                  "Then the multiplication: 7 x 2 = **14**"
+              ]
+          }
+      },
+      {
+          "text": {
+              "fr": "",
+              "en": ""
+          }
+      },
+      {
+          "text": {
+              "fr": "2^2 + 3 x 4 - 1",
+              "en": "2^2 + 3 x 4 - 1"
+          }
+      },
+      {
+          "items": {
+              "fr": [
+                  "Puissance : 2^2 = 4",
+                  "Multiplication : 3 x 4 = 12",
+                  "De gauche à droite : 4 + 12 - 1 = **15**"
+              ],
+              "en": [
+                  "Power: 2^2 = 4",
+                  "Multiplication: 3 x 4 = 12",
+                  "From left to right: 4 + 12 - 1 = **15**"
+              ]
+          }
+      },
+      {
+          "text": {
+              "fr": "",
+              "en": ""
+          }
+      },
+      {
+          "text": {
+              "fr": "{[2 + (3 x 4)] - 5} x 2",
+              "en": "{[2 + (3 x 4)] - 5} x 2"
+          }
+      },
+      {
+          "items": {
+              "fr": [
+                  "Parenthèses ( ) : 3 x 4 = 12 -> {[2 + 12] - 5} x 2",
+                  "Crochets [ ] : 2 + 12 = 14 -> {14 - 5} x 2",
+                  "Accolades { } : 14 - 5 = 9 -> 9 x 2",
+                  "Multiplication : 9 x 2 = **18**"
+              ],
+              "en": [
+                  "Parentheses ( ): 3 x 4 = 12 -> {[2 + 12] - 5} x 2",
+                  "Brackets [ ]: 2 + 12 = 14 -> {14 - 5} x 2",
+                  "Braces { }: 14 - 5 = 9 -> 9 x 2",
+                  "Multiplication: 9 x 2 = **18**"
+              ]
+          }
       }
-    },
-    {
-      text: {
-        fr: "Encadrer √7 :\n2² = 4 < 7 < 9 = 3²\nDonc : 2 < √7 < 3\nValeur approchée : √7 ≈ 2,646",
-      }
-    },
-    {
-      headers: {
-        fr: ["Racine", "Encadrement", "Valeur approchée"],
-      }
-    },
   ],
+
 };

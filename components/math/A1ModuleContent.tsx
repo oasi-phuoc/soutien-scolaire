@@ -597,6 +597,129 @@ const LISTEN_REPEAT_PIVOT: Partial<Record<PivotCode, string>> = {
   ti: "ናይ ምዝጋብ ቅጅ ስምዔ፤ ድሕሪኡ ብድምጺ ደጋግም።",
 };
 
+
+const READ_NUMBERS_HEADING_PIVOT: Partial<Record<PivotCode, string>> = {
+  en: "How to read numbers",
+  pt: "Como ler os n\u00fameros",
+  so: "Sida loo akhriyo tirooyinka",
+  tr: "Sayilar nasil okunur",
+  uk: "\u042f\u043a \u0447\u0438\u0442\u0430\u0442\u0438 \u0447\u0438\u0441\u043b\u0430",
+};
+
+const EVAL_INTRO_PIVOT: Record<"label" | "mastery" | "timed" | "appear" | "start", Partial<Record<PivotCode, string>>> = {
+  label: {
+    en: "Evaluation",
+    pt: "Avalia\u00e7\u00e3o",
+    so: "Qiimeyn",
+    tr: "Degerlendirme",
+    uk: "\u041e\u0446\u0456\u043d\u044e\u0432\u0430\u043d\u043d\u044f",
+  },
+  mastery: {
+    en: "Assess your mastery of this module.",
+    pt: "Avalia o teu dominio deste modulo.",
+    so: "Qiimee sida aad u taqaan module-kan.",
+    tr: "Bu moduldeki duzeyini degerlendir.",
+    uk: "\u041e\u0446\u0456\u043d\u0438 \u0441\u0432\u043e\u0454 \u043e\u043f\u0430\u043d\u0443\u0432\u0430\u043d\u043d\u044f \u0446\u044c\u043e\u0433\u043e \u043c\u043e\u0434\u0443\u043b\u044f.",
+  },
+  timed: {
+    en: "The evaluation is timed. You have 5 minutes to complete it.",
+    pt: "A avalia\u00e7\u00e3o tem tempo limitado. Tens 5 minutos para a completar.",
+    so: "Qiimeyntu waqti ayay leedahay. Waxaad haysataa 5 daqiiqo si aad u dhamaystirto.",
+    tr: "Degerlendirme surelidir. Tamamlamak icin 5 dakikan var.",
+    uk: "\u041e\u0446\u0456\u043d\u044e\u0432\u0430\u043d\u043d\u044f \u043e\u0431\u043c\u0435\u0436\u0435\u043d\u0435 \u0447\u0430\u0441\u043e\u043c. \u0423 \u0442\u0435\u0431\u0435 \u0454 5 \u0445\u0432\u0438\u043b\u0438\u043d, \u0449\u043e\u0431 \u0439\u043e\u0433\u043e \u0437\u0430\u0432\u0435\u0440\u0448\u0438\u0442\u0438.",
+  },
+  appear: {
+    en: "The exercises will appear when the timer starts.",
+    pt: "Os exercicios aparecerao quando o cronometro comecar.",
+    so: "Layliyadu waxay soo muuqan doonaan marka waqtigu bilaabmo.",
+    tr: "Sure basladiginda alistirmalar gorunecek.",
+    uk: "\u0412\u043f\u0440\u0430\u0432\u0438 \u0437\u2019\u044f\u0432\u043b\u044f\u0442\u044c\u0441\u044f \u043f\u0456\u0441\u043b\u044f \u0437\u0430\u043f\u0443\u0441\u043a\u0443 \u0442\u0430\u0439\u043c\u0435\u0440\u0430.",
+  },
+  start: {
+    en: "Start",
+    pt: "Comecar",
+    so: "Bilow",
+    tr: "Basla",
+    uk: "\u041f\u043e\u0447\u0430\u0442\u0438",
+  },
+};
+
+const A11_EVAL_CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3", Partial<Record<PivotCode, string>>> = {
+  ex1: {
+    en: "Write the numbers in words correctly.",
+    pt: "Escreve os numeros por extenso corretamente.",
+    so: "Tirooyinka si sax ah ugu qor ereyo.",
+    tr: "Sayilari dogru sekilde yaziyla yaz.",
+    uk: "\u041f\u0440\u0430\u0432\u0438\u043b\u044c\u043d\u043e \u043d\u0430\u043f\u0438\u0448\u0438 \u0447\u0438\u0441\u043b\u0430 \u0441\u043b\u043e\u0432\u0430\u043c\u0438.",
+  },
+  ex2: {
+    en: "Listen and write the numbers.",
+    pt: "Ouve e escreve os numeros.",
+    so: "Dhagayso oo qor tirooyinka.",
+    tr: "Dinle ve sayilari yaz.",
+    uk: "\u041f\u043e\u0441\u043b\u0443\u0445\u0430\u0439 \u0456 \u0437\u0430\u043f\u0438\u0448\u0438 \u0447\u0438\u0441\u043b\u0430.",
+  },
+  ex3: {
+    en: "Complete the number sequences.",
+    pt: "Completa as sequencias numericas.",
+    so: "Dhammaystir taxanayaasha tirooyinka.",
+    tr: "Sayi dizilerini tamamla.",
+    uk: "\u0414\u043e\u043f\u043e\u0432\u043d\u0438 \u0447\u0438\u0441\u043b\u043e\u0432\u0456 \u043f\u043e\u0441\u043b\u0456\u0434\u043e\u0432\u043d\u043e\u0441\u0442\u0456.",
+  },
+};
+
+const A12_EVAL_CONSIGNE_PIVOT: Record<"ex1" | "ex2" | "ex3" | "ex4" | "ex5" | "ex6" | "ex7", Partial<Record<PivotCode, string>>> = {
+  ex1: {
+    en: "Choose the number represented by the blocks.",
+    pt: "Escolhe o numero representado pelos blocos.",
+    so: "Dooro tirada ay baloogyadu matalaan.",
+    tr: "Bloklarin gosterdigi sayiyi sec.",
+    uk: "\u041e\u0431\u0435\u0440\u0438 \u0447\u0438\u0441\u043b\u043e, \u044f\u043a\u0435 \u043f\u043e\u043a\u0430\u0437\u0443\u044e\u0442\u044c \u0431\u043b\u043e\u043a\u0438.",
+  },
+  ex2: {
+    en: "Count all the blocks and write the total number.",
+    pt: "Conta todos os blocos e escreve o numero total.",
+    so: "Tiri dhammaan baloogyada oo qor tirada guud.",
+    tr: "Tum bloklari say ve toplam sayiyi yaz.",
+    uk: "\u041f\u043e\u0440\u0430\u0445\u0443\u0439 \u0443\u0441\u0456 \u0431\u043b\u043e\u043a\u0438 \u0456 \u0437\u0430\u043f\u0438\u0448\u0438 \u0437\u0430\u0433\u0430\u043b\u044c\u043d\u0435 \u0447\u0438\u0441\u043b\u043e.",
+  },
+  ex3: {
+    en: "Write how many thousands, hundreds, tens and units there are.",
+    pt: "Escreve quantos milhares, centenas, dezenas e unidades ha.",
+    so: "Qor inta kun, boqol, toban iyo hal ay jiraan.",
+    tr: "Kac binlik, yuzluk, onluk ve birlik oldugunu yaz.",
+    uk: "\u0417\u0430\u043f\u0438\u0448\u0438, \u0441\u043a\u0456\u043b\u044c\u043a\u0438 \u0454 \u0442\u0438\u0441\u044f\u0447, \u0441\u043e\u0442\u0435\u043d\u044c, \u0434\u0435\u0441\u044f\u0442\u043a\u0456\u0432 \u0456 \u043e\u0434\u0438\u043d\u0438\u0446\u044c.",
+  },
+  ex4: {
+    en: "Count how many cubes there are.",
+    pt: "Conta quantos cubos ha.",
+    so: "Tiri inta kubbo ay jiraan.",
+    tr: "Kac kup oldugunu say.",
+    uk: "\u041f\u043e\u0440\u0430\u0445\u0443\u0439, \u0441\u043a\u0456\u043b\u044c\u043a\u0438 \u0454 \u043a\u0443\u0431\u0438\u043a\u0456\u0432.",
+  },
+  ex5: {
+    en: "Decompose the numbers.",
+    pt: "Decompoe os numeros.",
+    so: "Kala saar tirooyinka.",
+    tr: "Sayilari cozumle.",
+    uk: "\u0420\u043e\u0437\u043a\u043b\u0430\u0434\u0438 \u0447\u0438\u0441\u043b\u0430.",
+  },
+  ex6: {
+    en: "Select all labels that represent the same number as the pink label.",
+    pt: "Seleciona todas as etiquetas que representam o mesmo numero que a etiqueta rosa.",
+    so: "Dooro dhammaan calaamadaha matalaya tirada la midka ah calaamadda casaanka ah.",
+    tr: "Pembe etiketle ayni sayiyi gosteren tum etiketleri sec.",
+    uk: "\u041e\u0431\u0435\u0440\u0438 \u0432\u0441\u0456 \u0435\u0442\u0438\u043a\u0435\u0442\u043a\u0438, \u044f\u043a\u0456 \u043f\u043e\u0437\u043d\u0430\u0447\u0430\u044e\u0442\u044c \u0442\u0435 \u0441\u0430\u043c\u0435 \u0447\u0438\u0441\u043b\u043e, \u0449\u043e \u0439 \u0440\u043e\u0436\u0435\u0432\u0430.",
+  },
+  ex7: {
+    en: "Follow the arrows to find the missing numbers.",
+    pt: "Segue as setas para encontrar os numeros em falta.",
+    so: "Raac fallaadhaha si aad u hesho tirooyinka maqan.",
+    tr: "Eksik sayilari bulmak icin oklari takip et.",
+    uk: "\u0419\u0434\u0438 \u0437\u0430 \u0441\u0442\u0440\u0456\u043b\u043a\u0430\u043c\u0438, \u0449\u043e\u0431 \u0437\u043d\u0430\u0439\u0442\u0438 \u0432\u0456\u0434\u0441\u0443\u0442\u043d\u0456 \u0447\u0438\u0441\u043b\u0430.",
+  },
+};
+
 const CONSIGNE_PIVOT: Record<"ex2"|"ex3"|"ex4"|"ex5"|"ex6"|"ex7"|"ex8"|"ex9"|"ex10"|"ex11"|"ex12"|"ex13"|"ex14"|"ex15"|"ex16"|"ex17"|"ex18"|"ex19"|"ex20"|"ex21"|"ex22"|"ex23"|"ex24"|"ex25"|"ex26"|"ex27", Partial<Record<PivotCode, string>>> = {
   ex2: {
     en: "Write the numbers in letters correctly.",
@@ -2228,7 +2351,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const introPivotBlock = lesson.theory.readAloud?.introPivot?.[pivot];
   const read = lesson.theory.readAloud;
   const readTrad = lessonTrad?.readAloud;
-  const isRtl = pivot === "ar" || pivot === "fa";
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
   const defaultTheoryTitle = lesson.submoduleId === "A1-1" ? "Apprendre à compter" : lesson.submoduleId === "A1-2" ? "Millier, centaine, dizaine et unité" : theoryFr.title;
   const hasPivotTheoryTitle = !!(showPivotTranslation && lessonTrad?.title?.[pivot]);
   const theoryTitleText = hasPivotTheoryTitle ? lessonTrad!.title[pivot]! : defaultTheoryTitle;
@@ -2240,6 +2363,21 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const listenRepeatText = showPivotTranslation && LISTEN_REPEAT_PIVOT[pivot]
     ? LISTEN_REPEAT_PIVOT[pivot]
     : "Écoutez l'enregistrement puis répétez à voix haute.";
+  const readNumbersHeadingText = showPivotTranslation && READ_NUMBERS_HEADING_PIVOT[pivot]
+    ? READ_NUMBERS_HEADING_PIVOT[pivot]!
+    : "Comment lire les nombres";
+  const evalIntroText = (key: keyof typeof EVAL_INTRO_PIVOT, fallback: string) =>
+    showPivotTranslation && EVAL_INTRO_PIVOT[key][pivot]
+      ? EVAL_INTRO_PIVOT[key][pivot]!
+      : fallback;
+  const a11EvalConsigne = (key: keyof typeof A11_EVAL_CONSIGNE_PIVOT, fallback: string) =>
+    showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT[key][pivot]
+      ? A11_EVAL_CONSIGNE_PIVOT[key][pivot]!
+      : fallback;
+  const a12EvalConsigne = (key: keyof typeof A12_EVAL_CONSIGNE_PIVOT, fallback: string) =>
+    showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT[key][pivot]
+      ? A12_EVAL_CONSIGNE_PIVOT[key][pivot]!
+      : fallback;
   const readLegendLabel = (leg: ReadAloudLegendItem, index: number) =>
     showPivotTranslation && readTrad?.legend?.[index]?.label?.[pivot]
       ? readTrad.legend[index].label[pivot]!
@@ -2539,7 +2677,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
       {/* Eval progress bar */}
       {step === "eval" && evalStarted && !evalSubmitted && (
-        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={evalTimeLeft} />
+        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={lesson.submoduleId === "A1-1" || lesson.submoduleId === "A1-2" ? null : evalTimeLeft} />
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
@@ -2653,7 +2791,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
           </div>
           {lesson.submoduleId === "A1-1" && read && (
             <div className="space-y-3">
-              <h3 className="text-base font-bold text-[var(--color-text-primary)]">Comment lire les nombres</h3>
+              <h3 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivotTranslation && READ_NUMBERS_HEADING_PIVOT[pivot] ? pivot : undefined} dir={showPivotTranslation && READ_NUMBERS_HEADING_PIVOT[pivot] && isRtl ? "rtl" : "ltr"}>{readNumbersHeadingText}</h3>
               {readIntroText?.length ? (
                 <div className="space-y-2 text-sm leading-relaxed">
                   {readIntroText.map((t, i) => (
@@ -3598,7 +3736,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       {step === "eval" && (
           <div className="space-y-4">
             {/* Timer */}
-            {evalStarted && !evalSubmitted && evalTimeLeft !== null && (
+            {evalStarted && !evalSubmitted && evalTimeLeft !== null && lesson.submoduleId !== "A1-1" && lesson.submoduleId !== "A1-2" && (
               <div className="flex justify-end">
                 <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
                   evalTimeLeft < 60
@@ -3621,18 +3759,17 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   </svg>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Évaluation</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.label[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.label[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("label", "\u00c9valuation")}</p>
                   <h2 className="text-xl font-bold text-[var(--color-text-primary)]" lang={hasPivotTheoryTitle ? pivot : undefined} dir={hasPivotTheoryTitle && isRtl ? "rtl" : "ltr"}>{theoryTitleText}</h2>
-                  <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as 5 minutes pour compléter l&apos;évaluation.</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.mastery[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.mastery[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("mastery", "\u00c9value ta ma\u00eetrise de ce module.")}</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.timed[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.timed[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("timed", "L\u2019\u00e9valuation est chronom\u00e9tr\u00e9e. Tu as 5 minutes pour compl\u00e9ter l\u2019\u00e9valuation.")}</p>
+                  <p className="text-sm text-[var(--color-text-secondary)]" lang={showPivotTranslation && EVAL_INTRO_PIVOT.appear[pivot] ? pivot : undefined} dir={showPivotTranslation && EVAL_INTRO_PIVOT.appear[pivot] && isRtl ? "rtl" : "ltr"}>{evalIntroText("appear", "Les exercices appara\u00eetront au d\u00e9marrage du chronom\u00e8tre.")}</p>
                 </div>
                 <button
                   type="button"
                   onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPageValidated(false); setEvalTimeLeft(5 * 60); }}
                   className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
-                >
-                  Commencer
+                >{evalIntroText("start", "Commencer")}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                     <path d="M9 18l6-6-6-6" />
                   </svg>
@@ -3650,7 +3787,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Choisissez le nombre représenté par les blocs.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex1[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex1[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex1", "Choisissez le nombre représenté par les blocs.")}</p>
                   <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ZoomButton onClick={() => setZoomedEx("eval-q9")} />
                     <div className="flex min-h-24 w-full flex-col items-center justify-center gap-1 px-3 py-2">
@@ -3703,7 +3840,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez tous les blocs et écrivez le nombre total.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex2[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex2[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex2", "Comptez tous les blocs et écrivez le nombre total.")}</p>
                   <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ZoomButton onClick={() => setZoomedEx("eval-q10")} />
                     <ScaledCanvas width={420} height={a12EvalQ10.canvasH}>
@@ -3745,7 +3882,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez combien il y a de milliers, centaines, dizaines, unités.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex3[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex3[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex3", "Écrivez combien il y a de milliers, centaines, dizaines, unités.")}</p>
                   <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ZoomButton onClick={() => setZoomedEx("eval-q11")} />
                     <ScaledCanvas width={420} height={a12EvalQ11.canvasH}>
@@ -3800,7 +3937,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 3) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 4</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Comptez combien il y a de cubes.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex4[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex4[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex4", "Comptez combien il y a de cubes.")}</p>
                   <div className="relative rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                     <ZoomButton onClick={() => setZoomedEx("eval-q12")} />
                     <div className="flex items-center justify-center py-3">
@@ -3835,7 +3972,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 4) return (
                 <div className="space-y-4">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Décomposez les nombres. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex5[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex5[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex5", "Décomposez les nombres.")} <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
                     const mV = Math.floor(n / 1000), cV = Math.floor((n % 1000) / 100), dV = Math.floor((n % 100) / 10), uV = n % 10;
                     const hasM = mV > 0;
@@ -3881,7 +4018,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 5) return (
                 <div className="space-y-4">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 6</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Sélectionnez toutes les étiquettes qui représentent le même nombre que l&apos;étiquette rose. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex6[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex6[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex6", "Sélectionnez toutes les étiquettes qui représentent le même nombre que l'étiquette rose.")} <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   {a12EvalEx15Qs.map((q, qi) => (
                     <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                       <div className="mb-3 flex justify-center">
@@ -3920,7 +4057,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 6) return (
                 <div className="space-y-4">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 7</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Suivez les flèches pour trouver les nombres manquants. <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex7[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex7[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex7", "Suivez les flèches pour trouver les nombres manquants.")} <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacune)</span></p>
                   <div className="flex flex-wrap gap-4 text-xs font-medium">
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-blue-500"/><span className="text-blue-700 dark:text-blue-300">+1 millier</span></span>
                     <span className="flex items-center gap-1.5"><span className="inline-block h-3 w-3 rounded-full bg-red-500"/><span className="text-red-700 dark:text-red-300">+1 centaine</span></span>
@@ -3991,7 +4128,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 0) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écrivez les nombres en lettres correctement.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex1[pivot] ? pivot : undefined} dir={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex1[pivot] && isRtl ? "rtl" : "ltr"}>{a11EvalConsigne("ex1", "\u00c9crivez les nombres en lettres correctement.")}</p>
                   {evalItems_curr.slice(0, 4).map((ex, i) => (
                     <ExerciseRow key={ex.id} rowIdx={i} noBorder
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
@@ -4007,7 +4144,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 1) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 2</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Écoutez et écrivez les nombres.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex2[pivot] ? pivot : undefined} dir={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex2[pivot] && isRtl ? "rtl" : "ltr"}>{a11EvalConsigne("ex2", "\u00c9coutez et \u00e9crivez les nombres.")}</p>
                   {evalItems_curr.slice(4, 8).map((ex, i) => {
                     const audioAns = evalAnswers[ex.id] ?? "";
                     const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
@@ -4040,7 +4177,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               if (evalPageIdx === 2) return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 3</h2>
-                  <p className="text-sm font-medium text-[var(--color-text-primary)]">Complétez les séries de nombres.</p>
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex3[pivot] ? pivot : undefined} dir={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex3[pivot] && isRtl ? "rtl" : "ltr"}>{a11EvalConsigne("ex3", "Compl\u00e9tez les s\u00e9ries de nombres.")}</p>
                   {evalItems_curr.slice(8).map((ex, i) => {
                     const displayNums = ex.seriesNums!.slice(0, ex.seriesNums!.length - 3);
                     return (

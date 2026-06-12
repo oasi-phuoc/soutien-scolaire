@@ -4,85 +4,130 @@ export const TRAD_A4_6: SubmoduleTrad = {
   submoduleId: "A4-6",
   title: {
     fr: "Division de fractions",
-    en: "Division of fractions",
+    en: "Dividing fractions",
     ar: "قسمة الكسور",
     fa: "تقسیم کسرها",
-    ti: "ምክፍፋል ክፍሊታት",
+    ti: "ምክፋል ፍርቂታት",
     uk: "Ділення дробів",
+    pt: "Divisão de frações",
+    so: "Qaybinta jajabyada",
+    tr: "Kesirlerde bölme",
+    ps: "د کسرونو وېش",
+  },
+  paragraphs: {
+    fr: ["Diviser des fractions consiste à multiplier par l'inverse de la deuxième fraction."],
+    en: ["Dividing fractions means multiplying by the reciprocal of the second fraction."],
+    ar: ["قسمة الكسور تعني الضرب في مقلوب الكسر الثاني."],
+    fa: ["تقسیم کسرها یعنی ضرب در معکوس کسر دوم."],
+    ti: ["ፍርቂታት ምክፋል ማለት ብተገላቢጦሽ ናይ ካልኣይ ፍርቂ ምብዛሕ ማለት እዩ።"],
+    uk: ["Ділити дроби означає множити на обернений дріб другого дробу."],
+    pt: ["Dividir frações consiste em multiplicar pelo inverso da segunda fração."],
+    so: ["Qaybinta jajabyadu waa in lagu dhufto rogaalka jajabka labaad."],
+    tr: ["Kesirleri bölmek, ikinci kesrin tersiyle çarpmak demektir."],
+    ps: ["د کسرونو وېش یعنې د دوهم کسر په معکوس ضربول."],
   },
   blocks: [
     {
       text: {
-        fr: "Diviser des fractions consiste à multiplier par l’inverse de la deuxième fraction.",
-      }
+        fr: "Diviser des fractions consiste à multiplier par **l'inverse** de la deuxième fraction.",
+        en: "Dividing fractions means multiplying by the **reciprocal** of the second fraction.",
+        ar: "قسمة الكسور تعني الضرب في **مقلوب** الكسر الثاني.",
+        fa: "تقسیم کسرها یعنی ضرب در **معکوس** کسر دوم.",
+        ti: "ፍርቂታት ምክፋል ማለት ብ**ተገላቢጦሽ** ናይ ካልኣይ ፍርቂ ምብዛሕ ማለት እዩ።",
+        uk: "Ділити дроби означає множити на **обернений дріб** другого дробу.",
+        pt: "Dividir frações consiste em multiplicar pelo **inverso** da segunda fração.",
+        so: "Qaybinta jajabyadu waa in lagu dhufto **rogaalka** jajabka labaad.",
+        tr: "Kesirleri bölmek, ikinci kesrin **tersiyle** çarpmak demektir.",
+        ps: "د کسرونو وېش یعنې د دوهم کسر په **معکوس** ضربول.",
+      },
     },
     {
       text: {
         fr: "Règle de division",
-      }
+        en: "Division rule",
+        ar: "قاعدة القسمة",
+        fa: "قاعده تقسیم",
+        ti: "ሕጊ ምክፋል",
+        uk: "Правило ділення",
+        pt: "Regra de divisão",
+        so: "Xeerka qaybinta",
+        tr: "Bölme kuralı",
+        ps: "د وېش قاعده",
+      },
     },
     {
       items: {
-        fr: [
-          "On garde la première fraction.",
-          "On remplace la division par une multiplication.",
-          "On inverse la deuxième fraction.",
-          "On multiplie comme dans les multiplications de fractions.",
-        ],
-      }
+        fr: ["On garde la première fraction.", "On remplace la division par une multiplication.", "On inverse la deuxième fraction.", "On multiplie comme dans les multiplications de fractions."],
+        en: ["We keep the first fraction.", "We replace division with multiplication.", "We invert the second fraction.", "We multiply as in fraction multiplication."],
+        ar: ["نحافظ على الكسر الأول.", "نستبدل القسمة بضرب.", "نقلب الكسر الثاني.", "نضرب كما في ضرب الكسور."],
+        fa: ["کسر اول را نگه می‌داریم.", "تقسیم را با ضرب جایگزین می‌کنیم.", "کسر دوم را معکوس می‌کنیم.", "مانند ضرب کسرها ضرب می‌کنیم."],
+        ti: ["ቀዳማይ ፍርቂ ንሕዝ።", "ምክፋል ብምብዛሕ ንቕይር።", "ካልኣይ ፍርቂ ነገላብጥ።", "ከም ምብዛሕ ፍርቂታት ንባዝሕ።"],
+        uk: ["Залишаємо перший дріб.", "Замінюємо ділення множенням.", "Перевертаємо другий дріб.", "Множимо як при множенні дробів."],
+        pt: ["Mantemos a primeira fração.", "Substituímos a divisão por uma multiplicação.", "Invertemos a segunda fração.", "Multiplicamos como nas multiplicações de frações."],
+        so: ["Waxaan haynaa jajabka koowaad.", "Qaybinta waxaan ku beddelnaa isku dhufasho.", "Waxaan rogaynaa jajabka labaad.", "Waxaan u dhuftaa sida isku dhufashada jajabyada."],
+        tr: ["İlk kesri koruruz.", "Bölmeyi çarpmayla değiştiririz.", "İkinci kesri ters çeviririz.", "Kesir çarpmasındaki gibi çarparız."],
+        ps: ["لومړی کسر ساتو.", "وېش په ضرب بدلوو.", "دوهم کسر معکوسوو.", "لکه د کسرونو په ضرب کې ضربوو."],
+      },
     },
-    {
-      text: {
-        fr: "Exemple",
-      }
-    },
-    {
-      text: {
-        fr: "[[frac:2/3]] ÷ [[frac:4/5]]",
-      }
-    },
+    { text: { fr: "Exemple", en: "Example", ar: "مثال", fa: "مثال", ti: "ኣብነት", uk: "Приклад", pt: "Exemplo", so: "Tusaale", tr: "Örnek", ps: "بېلګه" } },
+    { text: { fr: "[[frac:2/3]] ÷ [[frac:4/5]]", en: "[[frac:2/3]] ÷ [[frac:4/5]]", ar: "[[frac:2/3]] ÷ [[frac:4/5]]", fa: "[[frac:2/3]] ÷ [[frac:4/5]]", ti: "[[frac:2/3]] ÷ [[frac:4/5]]", uk: "[[frac:2/3]] ÷ [[frac:4/5]]", pt: "[[frac:2/3]] ÷ [[frac:4/5]]", so: "[[frac:2/3]] ÷ [[frac:4/5]]", tr: "[[frac:2/3]] ÷ [[frac:4/5]]", ps: "[[frac:2/3]] ÷ [[frac:4/5]]" } },
     {
       items: {
-        fr: [
-          "On transforme la division en multiplication : [[frac:2/3]] × [[frac:5/4]]",
-          "On multiplie : 2 × 5 = 10 et 3 × 4 = 12",
-          "Résultat : [[frac:10/12]]",
-          "On simplifie : [[frac:10/12]] = [[frac:5/6]]",
-        ],
-      }
+        fr: ["On transforme la division en multiplication : [[frac:2/3]] × [[frac:5/4]]", "On multiplie : 2 × 5 = 10 et 3 × 4 = 12", "Résultat : [[frac:10/12]]", "On simplifie : [[frac:10/12]] = [[frac:5/6]]"],
+        en: ["We turn the division into multiplication: [[frac:2/3]] × [[frac:5/4]]", "We multiply: 2 × 5 = 10 and 3 × 4 = 12", "Result: [[frac:10/12]]", "We simplify: [[frac:10/12]] = [[frac:5/6]]"],
+        ar: ["نحوّل القسمة إلى ضرب: [[frac:2/3]] × [[frac:5/4]]", "نضرب: 2 × 5 = 10 و 3 × 4 = 12", "النتيجة: [[frac:10/12]]", "نبسط: [[frac:10/12]] = [[frac:5/6]]"],
+        fa: ["تقسیم را به ضرب تبدیل می‌کنیم: [[frac:2/3]] × [[frac:5/4]]", "ضرب می‌کنیم: 2 × 5 = 10 و 3 × 4 = 12", "نتیجه: [[frac:10/12]]", "ساده می‌کنیم: [[frac:10/12]] = [[frac:5/6]]"],
+        ti: ["ምክፋል ናብ ምብዛሕ ንቕይር፡ [[frac:2/3]] × [[frac:5/4]]", "ንባዝሕ፡ 2 × 5 = 10 እና 3 × 4 = 12", "ውጽኢት፡ [[frac:10/12]]", "ነቕልል፡ [[frac:10/12]] = [[frac:5/6]]"],
+        uk: ["Перетворюємо ділення на множення: [[frac:2/3]] × [[frac:5/4]]", "Множимо: 2 × 5 = 10 і 3 × 4 = 12", "Результат: [[frac:10/12]]", "Скорочуємо: [[frac:10/12]] = [[frac:5/6]]"],
+        pt: ["Transformamos a divisão em multiplicação: [[frac:2/3]] × [[frac:5/4]]", "Multiplicamos: 2 × 5 = 10 e 3 × 4 = 12", "Resultado: [[frac:10/12]]", "Simplificamos: [[frac:10/12]] = [[frac:5/6]]"],
+        so: ["Waxaan qaybinta u beddelnaa isku dhufasho: [[frac:2/3]] × [[frac:5/4]]", "Waxaan isku dhufannaa: 2 × 5 = 10 iyo 3 × 4 = 12", "Natiijo: [[frac:10/12]]", "Waxaan fududeynaa: [[frac:10/12]] = [[frac:5/6]]"],
+        tr: ["Bölmeyi çarpmaya çeviririz: [[frac:2/3]] × [[frac:5/4]]", "Çarparız: 2 × 5 = 10 ve 3 × 4 = 12", "Sonuç: [[frac:10/12]]", "Sadeleştiririz: [[frac:10/12]] = [[frac:5/6]]"],
+        ps: ["وېش په ضرب بدلوو: [[frac:2/3]] × [[frac:5/4]]", "ضربوو: 2 × 5 = 10 او 3 × 4 = 12", "پایله: [[frac:10/12]]", "ساده کوو: [[frac:10/12]] = [[frac:5/6]]"],
+      },
     },
-    {
-      text: {
-        fr: "Exemple avec simplification avant calcul",
-      }
-    },
-    {
-      text: {
-        fr: "[[frac:6/10]] ÷ [[frac:3/5]]",
-      }
-    },
+    { text: { fr: "Exemple avec simplification avant calcul", en: "Example with simplification before calculating", ar: "مثال مع التبسيط قبل الحساب", fa: "مثال با ساده‌سازی پیش از محاسبه", ti: "ኣብነት ቅድሚ ሕሳብ ምቅላል", uk: "Приклад зі скороченням перед обчисленням", pt: "Exemplo com simplificação antes do cálculo", so: "Tusaale fududeyn kahor xisaabinta", tr: "Hesaplamadan önce sadeleştirme örneği", ps: "له حساب مخکې د ساده کولو بېلګه" } },
+    { text: { fr: "[[frac:6/10]] ÷ [[frac:3/5]]", en: "[[frac:6/10]] ÷ [[frac:3/5]]", ar: "[[frac:6/10]] ÷ [[frac:3/5]]", fa: "[[frac:6/10]] ÷ [[frac:3/5]]", ti: "[[frac:6/10]] ÷ [[frac:3/5]]", uk: "[[frac:6/10]] ÷ [[frac:3/5]]", pt: "[[frac:6/10]] ÷ [[frac:3/5]]", so: "[[frac:6/10]] ÷ [[frac:3/5]]", tr: "[[frac:6/10]] ÷ [[frac:3/5]]", ps: "[[frac:6/10]] ÷ [[frac:3/5]]" } },
     {
       items: {
-        fr: [
-          "On transforme : [[frac:6/10]] × [[frac:5/3]]",
-          "On simplifie avant de calculer : 6 et 3 → 2 et 1, 5 et 10 → 1 et 2",
-          "On obtient : [[frac:2/2]] × [[frac:1/1]]",
-          "Résultat : 1",
-        ],
-      }
+        fr: ["On transforme : [[frac:6/10]] × [[frac:5/3]]", "On simplifie avant de calculer : 6 et 3 → 2 et 1, 5 et 10 → 1 et 2", "On obtient : [[frac:2/2]] × [[frac:1/1]]", "Résultat : 1"],
+        en: ["We transform: [[frac:6/10]] × [[frac:5/3]]", "We simplify before calculating: 6 and 3 → 2 and 1, 5 and 10 → 1 and 2", "We get: [[frac:2/2]] × [[frac:1/1]]", "Result: 1"],
+        ar: ["نحوّل: [[frac:6/10]] × [[frac:5/3]]", "نبسط قبل الحساب: 6 و3 → 2 و1، 5 و10 → 1 و2", "نحصل على: [[frac:2/2]] × [[frac:1/1]]", "النتيجة: 1"],
+        fa: ["تبدیل می‌کنیم: [[frac:6/10]] × [[frac:5/3]]", "پیش از محاسبه ساده می‌کنیم: 6 و 3 → 2 و 1، 5 و 10 → 1 و 2", "به دست می‌آوریم: [[frac:2/2]] × [[frac:1/1]]", "نتیجه: 1"],
+        ti: ["ንቕይር፡ [[frac:6/10]] × [[frac:5/3]]", "ቅድሚ ሕሳብ ነቕልል፡ 6 እና 3 → 2 እና 1፣ 5 እና 10 → 1 እና 2", "ንረክብ፡ [[frac:2/2]] × [[frac:1/1]]", "ውጽኢት፡ 1"],
+        uk: ["Перетворюємо: [[frac:6/10]] × [[frac:5/3]]", "Скорочуємо перед обчисленням: 6 і 3 → 2 і 1, 5 і 10 → 1 і 2", "Отримуємо: [[frac:2/2]] × [[frac:1/1]]", "Результат: 1"],
+        pt: ["Transformamos: [[frac:6/10]] × [[frac:5/3]]", "Simplificamos antes de calcular: 6 e 3 → 2 e 1, 5 e 10 → 1 e 2", "Obtemos: [[frac:2/2]] × [[frac:1/1]]", "Resultado: 1"],
+        so: ["Waxaan beddelnaa: [[frac:6/10]] × [[frac:5/3]]", "Waxaan fududeynaa ka hor xisaabinta: 6 iyo 3 → 2 iyo 1, 5 iyo 10 → 1 iyo 2", "Waxaan helnaa: [[frac:2/2]] × [[frac:1/1]]", "Natiijo: 1"],
+        tr: ["Dönüştürürüz: [[frac:6/10]] × [[frac:5/3]]", "Hesaplamadan önce sadeleştiririz: 6 ve 3 → 2 ve 1, 5 ve 10 → 1 ve 2", "Elde ederiz: [[frac:2/2]] × [[frac:1/1]]", "Sonuç: 1"],
+        ps: ["بدلوو: [[frac:6/10]] × [[frac:5/3]]", "له حساب مخکې ساده کوو: 6 او 3 → 2 او 1، 5 او 10 → 1 او 2", "ترلاسه کوو: [[frac:2/2]] × [[frac:1/1]]", "پایله: 1"],
+      },
     },
     {
       text: {
         fr: "À retenir",
-      }
+        en: "Remember",
+        ar: "للتذكر",
+        fa: "به یاد داشته باش",
+        ti: "ክትዝክሮ",
+        uk: "Запам'ятай",
+        pt: "A lembrar",
+        so: "Xusuusnow",
+        tr: "Unutma",
+        ps: "په یاد ولره",
+      },
     },
     {
       items: {
-        fr: [
-          "Diviser par une fraction = multiplier par son inverse.",
-          "Toujours simplifier si possible avant ou après le calcul.",
-        ],
-      }
+        fr: ["Diviser par une fraction = multiplier par son **inverse**.", "Toujours simplifier si possible avant ou après le calcul."],
+        en: ["Dividing by a fraction = multiplying by its **reciprocal**.", "Always simplify if possible before or after calculating."],
+        ar: ["القسمة على كسر = الضرب في **مقلوبه**.", "بسّط دائما إذا أمكن قبل الحساب أو بعده."],
+        fa: ["تقسیم بر یک کسر = ضرب در **معکوس** آن.", "همیشه اگر ممکن باشد پیش یا پس از محاسبه ساده کن."],
+        ti: ["ብፍርቂ ምክፋል = ብ**ተገላቢጦሹ** ምብዛሕ።", "እንተተኻኢሉ ቅድሚ ወይ ድሕሪ ሕሳብ ሁሉ ኣቕልል።"],
+        uk: ["Ділити на дріб = множити на його **обернений дріб**.", "Завжди скорочуй, якщо можливо, до або після обчислення."],
+        pt: ["Dividir por uma fração = multiplicar pelo seu **inverso**.", "Simplifica sempre que possível antes ou depois do cálculo."],
+        so: ["In lagu qaybiyo jajab = in lagu dhufto **rogaalkiisa**.", "Had iyo jeer fududee haddii ay suurtagal tahay ka hor ama ka dib xisaabinta."],
+        tr: ["Bir kesre bölmek = onun **tersiyle** çarpmak.", "Mümkünse hesaplamadan önce veya sonra her zaman sadeleştir."],
+        ps: ["پر کسر وېشل = د هغه په **معکوس** ضربول.", "که شونې وي، تل له حساب مخکې یا وروسته ساده کړه."],
+      },
     },
   ],
 };

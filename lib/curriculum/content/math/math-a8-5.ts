@@ -5,7 +5,7 @@ export const MATH_A8_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "A8.5",
     theory: {
       title: {
-        fr: "",
+        fr: "Priorité des opérations",
       },
       paragraphs: { fr: [] },
       blocks: [

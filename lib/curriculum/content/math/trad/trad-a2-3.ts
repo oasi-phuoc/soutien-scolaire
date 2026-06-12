@@ -7,37 +7,55 @@ export const TRAD_A2_3: SubmoduleTrad = {
     en: "Estimation and rounding",
     ar: "التقدير والتقريب",
     fa: "تخمین و گرد کردن",
-    pt: "Estimativa e arredondamento",
-    ti: "ቅምሻ ምግምጋም",
+    ti: "ግምትን ምዝዛምን",
     uk: "Оцінювання та округлення",
+    pt: "Estimativa e arredondamento",
+    so: "Qiyaas iyo wareejin",
+    tr: "Tahmin ve yuvarlama",
+    ps: "اټکل او ګردول",
   },
   blocks: [
     {
       text: {
         fr: "Arrondi",
-      }
+        en: "Rounding",
+        ar: "التقريب",
+        fa: "گرد کردن",
+        ti: "ምዝዛም",
+        uk: "Округлення",
+        pt: "Arredondamento",
+        so: "Wareejin",
+        tr: "Yuvarlama",
+        ps: "ګردول",
+      },
     },
     {
       text: {
         fr: "L'arrondi consiste à remplacer un nombre par un nombre **proche** mais plus simple.",
-        en: "Rounding replaces a number with a nearby simpler number.",
-        ar: "التقريب يعني استبدال عدد بعدد قريب وأسهل.",
-        fa: "گرد کردن یعنی جایگزینی عدد با عددی نزدیک و ساده‌تر.",
-        pt: "Arredondar é substituir um número por outro mais simples e próximo.",
-        ti: "ምልካዕ ቁጽሪ ብቀረቡ ቀሊል ቁጽሪ ምቅያር እዩ።",
-        uk: "Округлення замінює число на близьке простіше.",
-      }
+        en: "Rounding means replacing a number with a **nearby** but simpler number.",
+        ar: "التقريب يعني استبدال عدد بعدد **قريب** لكنه أبسط.",
+        fa: "گرد کردن یعنی جایگزین کردن یک عدد با عددی **نزدیک** اما ساده‌تر.",
+        ti: "ምዝዛም ማለት ቁጽሪ ብ**ቀረባ** ግን ቀሊል ቁጽሪ ምትካእ ማለት እዩ።",
+        uk: "Округлення означає замінити число **близьким**, але простішим числом.",
+        pt: "Arredondar é substituir um número por outro **próximo**, mas mais simples.",
+        so: "Wareejintu waa in tiro lagu beddelo tiro **u dhow** laakiin ka fudud.",
+        tr: "Yuvarlama, bir sayıyı **yakın** ama daha basit bir sayı ile değiştirmektir.",
+        ps: "ګردول یعنې یو عدد په **نږدې** خو ساده عدد بدلول.",
+      },
     },
     {
       text: {
         fr: "Règle d'arrondi",
         en: "Rounding rule",
         ar: "قاعدة التقريب",
-        fa: "قانون گرد کردن",
-        pt: "Regra de arredondamento",
-        ti: "ሕጊ ምልካዕ",
+        fa: "قاعده گرد کردن",
+        ti: "ሕጊ ምዝዛም",
         uk: "Правило округлення",
-      }
+        pt: "Regra de arredondamento",
+        so: "Xeerka wareejinta",
+        tr: "Yuvarlama kuralı",
+        ps: "د ګردولو قاعده",
+      },
     },
     {
       items: {
@@ -46,28 +64,136 @@ export const TRAD_A2_3: SubmoduleTrad = {
           "Si ce chiffre est **≥ 5** → arrondi vers le **haut**.",
           "Si ce chiffre est **< 5** → arrondi vers le **bas**.",
         ],
-      }
+        en: [
+          "Look at the digit just after the rounding position.",
+          "If this digit is **≥ 5** → round **up**.",
+          "If this digit is **< 5** → round **down**.",
+        ],
+        ar: [
+          "انظر إلى الرقم الذي يلي موضع التقريب.",
+          "إذا كان هذا الرقم **≥ 5** ← نقرّب إلى **الأعلى**.",
+          "إذا كان هذا الرقم **< 5** ← نقرّب إلى **الأسفل**.",
+        ],
+        fa: [
+          "به رقمی نگاه کن که بعد از جایگاه گرد کردن می‌آید.",
+          "اگر این رقم **≥ 5** باشد ← به **بالا** گرد کن.",
+          "اگر این رقم **< 5** باشد ← به **پایین** گرد کن.",
+        ],
+        ti: [
+          "ነቲ ድሕሪ ቦታ ምዝዛም ዝመጽእ ኣሃዝ ርአ።",
+          "እዚ ኣሃዝ **≥ 5** እንተኾይኑ → ናብ **ላዕሊ** ዝዝም።",
+          "እዚ ኣሃዝ **< 5** እንተኾይኑ → ናብ **ታሕቲ** ዝዝም።",
+        ],
+        uk: [
+          "Подивись на цифру після розряду округлення.",
+          "Якщо ця цифра **≥ 5** → округлюй **угору**.",
+          "Якщо ця цифра **< 5** → округлюй **униз**.",
+        ],
+        pt: [
+          "Olha para o algarismo que vem depois da posição de arredondamento.",
+          "Se esse algarismo for **≥ 5** → arredonda para **cima**.",
+          "Se esse algarismo for **< 5** → arredonda para **baixo**.",
+        ],
+        so: [
+          "Fiiri lambarka ka dambeeya booska wareejinta.",
+          "Haddii lambarkaas yahay **≥ 5** → kor u **wareeji**.",
+          "Haddii lambarkaas yahay **< 5** → hoos u **wareeji**.",
+        ],
+        tr: [
+          "Yuvarlama basamağından sonraki rakama bak.",
+          "Bu rakam **≥ 5** ise → **yukarı** yuvarla.",
+          "Bu rakam **< 5** ise → **aşağı** yuvarla.",
+        ],
+        ps: [
+          "هغه رقم وګوره چې د ګردولو له ځای وروسته راځي.",
+          "که دا رقم **≥ 5** وي → **پورته** یې ګرد کړه.",
+          "که دا رقم **< 5** وي → **ښکته** یې ګرد کړه.",
+        ],
+      },
     },
     {
       headers: {
         fr: ["Nombre", "Arrondi à la centaine", "Pourquoi ?"],
-      }
+        en: ["Number", "Rounded to the hundred", "Why?"],
+        ar: ["العدد", "مقرب إلى المئة", "لماذا؟"],
+        fa: ["عدد", "گرد شده به صدگان", "چرا؟"],
+        ti: ["ቁጽሪ", "ናብ ሚእቲ ዝተዛዘመ", "ስለምንታይ?"],
+        uk: ["Число", "Округлено до сотень", "Чому?"],
+        pt: ["Número", "Arredondado à centena", "Porquê?"],
+        so: ["Tiro", "Loo wareejiyay boqolka", "Sabab?"],
+        tr: ["Sayı", "Yüzlüğe yuvarlama", "Neden?"],
+        ps: ["عدد", "سلګونو ته ګرد شوی", "ولې؟"],
+      },
+      items: {
+        fr: [
+          "347 | 300 | chiffre des dizaines = 4 < 5\n→ nombre arrondi **vers le bas**",
+          "4 682 | 4 700 | chiffre des dizaines = 8 ≥ 5\n→ nombre arrondi **vers le haut**",
+        ],
+        en: [
+          "347 | 300 | tens digit = 4 < 5\n→ number rounded **down**",
+          "4 682 | 4 700 | tens digit = 8 ≥ 5\n→ number rounded **up**",
+        ],
+        ar: [
+          "347 | 300 | رقم العشرات = 4 < 5\n← العدد مقرب إلى **الأسفل**",
+          "4 682 | 4 700 | رقم العشرات = 8 ≥ 5\n← العدد مقرب إلى **الأعلى**",
+        ],
+        fa: [
+          "347 | 300 | رقم دهگان = 4 < 5\n← عدد به **پایین** گرد شده است",
+          "4 682 | 4 700 | رقم دهگان = 8 ≥ 5\n← عدد به **بالا** گرد شده است",
+        ],
+        ti: [
+          "347 | 300 | ኣሃዝ ዓሰርተ = 4 < 5\n→ ቁጽሪ ናብ **ታሕቲ** ተዛዚሙ",
+          "4 682 | 4 700 | ኣሃዝ ዓሰርተ = 8 ≥ 5\n→ ቁጽሪ ናብ **ላዕሊ** ተዛዚሙ",
+        ],
+        uk: [
+          "347 | 300 | цифра десятків = 4 < 5\n→ число округлено **униз**",
+          "4 682 | 4 700 | цифра десятків = 8 ≥ 5\n→ число округлено **угору**",
+        ],
+        pt: [
+          "347 | 300 | algarismo das dezenas = 4 < 5\n→ número arredondado para **baixo**",
+          "4 682 | 4 700 | algarismo das dezenas = 8 ≥ 5\n→ número arredondado para **cima**",
+        ],
+        so: [
+          "347 | 300 | lambarka tobanka = 4 < 5\n→ tirada hoos ayaa loo **wareejiyay**",
+          "4 682 | 4 700 | lambarka tobanka = 8 ≥ 5\n→ tirada kor ayaa loo **wareejiyay**",
+        ],
+        tr: [
+          "347 | 300 | onlar basamağı = 4 < 5\n→ sayı **aşağı** yuvarlandı",
+          "4 682 | 4 700 | onlar basamağı = 8 ≥ 5\n→ sayı **yukarı** yuvarlandı",
+        ],
+        ps: [
+          "347 | 300 | د لسګونو رقم = 4 < 5\n→ عدد **ښکته** ګرد شو",
+          "4 682 | 4 700 | د لسګونو رقم = 8 ≥ 5\n→ عدد **پورته** ګرد شو",
+        ],
+      },
     },
     {
       text: {
         fr: "Estimation",
-      }
+        en: "Estimation",
+        ar: "التقدير",
+        fa: "تخمین",
+        ti: "ግምት",
+        uk: "Оцінювання",
+        pt: "Estimativa",
+        so: "Qiyaas",
+        tr: "Tahmin",
+        ps: "اټکل",
+      },
     },
     {
       text: {
         fr: "Une estimation consiste à trouver une **valeur approximative** d'un nombre ou d'un calcul. On ne cherche pas la réponse exacte, mais une réponse rapide et proche du nombre.",
-        en: "Estimation gives a quick approximate value without an exact calculation.",
-        ar: "التقدير يعطي قيمة تقريبية سريعة دون حساب دقيق.",
-        fa: "تخمین مقدار تقریبی سریع بدون محاسبه دقیق می‌دهد.",
-        pt: "A estimativa dá um valor aproximado rápido sem cálculo exato.",
-        ti: "ቅምሻ ብዘይ ትኽክለኛ ሕሳብ ፈጣን ቅርብ ውጽኢት ይህብ።",
-        uk: "Оцінювання дає швидке наближене значення без точного обчислення.",
-      }
+        en: "An estimation means finding an **approximate value** for a number or calculation. We are not looking for the exact answer, but a quick answer close to the number.",
+        ar: "التقدير يعني إيجاد **قيمة تقريبية** لعدد أو عملية. لا نبحث عن الجواب الدقيق، بل عن جواب سريع وقريب.",
+        fa: "تخمین یعنی پیدا کردن یک **مقدار تقریبی** برای یک عدد یا محاسبه. هدف پاسخ دقیق نیست، بلکه پاسخی سریع و نزدیک است.",
+        ti: "ግምት ማለት ናይ ቁጽሪ ወይ ሕሳብ **ቀረባ ዋጋ** ምርካብ ማለት እዩ። ትኽክለኛ መልሲ ኣይንደልን፣ ቅልጡፍን ቀረባን መልሲ ንደሊ።",
+        uk: "Оцінювання означає знайти **приблизне значення** числа або обчислення. Ми шукаємо не точну відповідь, а швидку відповідь, близьку до числа.",
+        pt: "Uma estimativa consiste em encontrar um **valor aproximado** de um número ou cálculo. Não procuramos a resposta exata, mas uma resposta rápida e próxima.",
+        so: "Qiyaastu waa helidda **qiime ku dhow** tiro ama xisaab. Ma raadineyno jawaabta saxda ah, balse jawaab degdeg ah oo u dhow.",
+        tr: "Tahmin, bir sayı veya işlem için **yaklaşık bir değer** bulmaktır. Kesin cevabı değil, sayıya yakın hızlı bir cevabı ararız.",
+        ps: "اټکل د عدد یا حساب لپاره د **نږدې ارزښت** موندل دي. موږ دقیق ځواب نه، بلکې چټک او نږدې ځواب غواړو.",
+      },
     },
     {
       text: {
@@ -75,31 +201,42 @@ export const TRAD_A2_3: SubmoduleTrad = {
         en: "Example",
         ar: "مثال",
         fa: "مثال",
-        pt: "Exemplo",
         ti: "ኣብነት",
         uk: "Приклад",
-      }
+        pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Örnek",
+        ps: "بېلګه",
+      },
     },
-    {
-      text: {
-        fr: "198 + 305",
-      }
-    },
+    { text: { fr: "198 + 305", en: "198 + 305", ar: "198 + 305", fa: "198 + 305", ti: "198 + 305", uk: "198 + 305", pt: "198 + 305", so: "198 + 305", tr: "198 + 305", ps: "198 + 305" } },
     {
       text: {
         fr: "On arrondit :",
         en: "We round:",
         ar: "نقرّب:",
         fa: "گرد می‌کنیم:",
-        pt: "Arredondamos:",
-        ti: "ንምልክት:",
+        ti: "ንዝዝም:",
         uk: "Округлюємо:",
-      }
+        pt: "Arredondamos:",
+        so: "Waan wareejinaynaa:",
+        tr: "Yuvarlarız:",
+        ps: "ګردوو:",
+      },
     },
     {
       items: {
         fr: ["198 → 200", "305 → 300"],
-      }
+        en: ["198 → 200", "305 → 300"],
+        ar: ["198 → 200", "305 → 300"],
+        fa: ["198 → 200", "305 → 300"],
+        ti: ["198 → 200", "305 → 300"],
+        uk: ["198 → 200", "305 → 300"],
+        pt: ["198 → 200", "305 → 300"],
+        so: ["198 → 200", "305 → 300"],
+        tr: ["198 → 200", "305 → 300"],
+        ps: ["198 → 200", "305 → 300"],
+      },
     },
     {
       text: {
@@ -107,26 +244,41 @@ export const TRAD_A2_3: SubmoduleTrad = {
         en: "Estimated calculation:",
         ar: "الحساب التقديري:",
         fa: "محاسبه تقریبی:",
+        ti: "ግምታዊ ሕሳብ:",
+        uk: "Оціночне обчислення:",
         pt: "Cálculo estimado:",
-        ti: "ናይ ቅምሻ ሕሳብ:",
-        uk: "Орієнтовний розрахунок:",
-      }
+        so: "Xisaabta la qiyaasay:",
+        tr: "Tahmini işlem:",
+        ps: "اټکلي حساب:",
+      },
     },
     {
       items: {
         fr: ["200 + 300 = 500"],
-      }
+        en: ["200 + 300 = 500"],
+        ar: ["200 + 300 = 500"],
+        fa: ["200 + 300 = 500"],
+        ti: ["200 + 300 = 500"],
+        uk: ["200 + 300 = 500"],
+        pt: ["200 + 300 = 500"],
+        so: ["200 + 300 = 500"],
+        tr: ["200 + 300 = 500"],
+        ps: ["200 + 300 = 500"],
+      },
     },
     {
       text: {
         fr: "La réponse exacte est 503. L'estimation 500 est donc proche.",
-        en: "The exact answer is 503. The estimate 500 is close.",
-        ar: "الجواب الدقيق هو 503. التقدير 500 قريب جداً.",
-        fa: "پاسخ دقیق 503 است. تخمین 500 نزدیک است.",
-        pt: "A resposta exata é 503. A estimativa 500 está muito próxima.",
-        ti: "ትኽክለኛ ውጽኢት 503 እዩ። ቅምሻ 500 ቀሪቡ ኣሎ።",
-        uk: "Точна відповідь — 503. Оцінка 500 дуже близька.",
-      }
+        en: "The exact answer is 503. The estimate 500 is therefore close.",
+        ar: "الجواب الدقيق هو 503. إذن التقدير 500 قريب.",
+        fa: "پاسخ دقیق 503 است. بنابراین تخمین 500 نزدیک است.",
+        ti: "ትኽክለኛ መልሲ 503 እዩ። ስለዚ ግምት 500 ቀረባ እዩ።",
+        uk: "Точна відповідь — 503. Отже, оцінка 500 є близькою.",
+        pt: "A resposta exata é 503. A estimativa 500 é, portanto, próxima.",
+        so: "Jawaabta saxda ahi waa 503. Sidaas darteed qiyaasta 500 way dhowdahay.",
+        tr: "Kesin cevap 503'tür. Bu yüzden 500 tahmini yakındır.",
+        ps: "دقیق ځواب 503 دی. نو 500 اټکل نږدې دی.",
+      },
     },
   ],
 };

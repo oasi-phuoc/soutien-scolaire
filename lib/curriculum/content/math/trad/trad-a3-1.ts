@@ -4,68 +4,212 @@ export const TRAD_A3_1: SubmoduleTrad = {
   submoduleId: "A3-1",
   title: {
     fr: "Multiplication",
+    en: "Multiplication",
+    ar: "الضرب",
+    fa: "ضرب",
+    ti: "ምብዛሕ",
+    uk: "Множення",
+    pt: "Multiplicação",
+    so: "Isku dhufasho",
+    tr: "Çarpma",
+    ps: "ضرب",
   },
   blocks: [
     {
       text: {
-        fr: "Multiplier, c'est additionner plusieurs fois le même nombre.",
-      }
+        fr: "Multiplier, c'est additionner plusieurs fois le **même nombre**.",
+        en: "Multiplying means adding the **same number** several times.",
+        ar: "الضرب يعني جمع **العدد نفسه** عدة مرات.",
+        fa: "ضرب یعنی چند بار جمع کردن **یک عدد یکسان**.",
+        ti: "ምብዛሕ ማለት **ተመሳሳሊ ቁጽሪ** ብዙሕ ግዜ ምድማር ማለት እዩ።",
+        uk: "Множити означає кілька разів додавати **те саме число**.",
+        pt: "Multiplicar é adicionar várias vezes o **mesmo número**.",
+        so: "Isku dhufashadu waa in **tiro isku mid ah** dhowr jeer la isku daro.",
+        tr: "Çarpmak, **aynı sayıyı** birkaç kez toplamak demektir.",
+        ps: "ضرب یعنې **هماغه عدد** څو ځله جمع کول.",
+      },
     },
     {
       items: {
         fr: [
-            "Le signe de la multiplication est le signe « × » **fois**",
-            "Les nombres à multiplier sont les **facteurs**.",
-            "Le résultat de la multiplication est le **produit**.",
-          ],
-      }
+          "Le signe de la multiplication est le signe « × » **fois**.",
+          "Les nombres à multiplier sont les **facteurs**.",
+          "Le résultat de la multiplication est le **produit**.",
+        ],
+        en: [
+          "The sign for multiplication is the « × » **times** sign.",
+          "The numbers being multiplied are the **factors**.",
+          "The result of a multiplication is the **product**.",
+        ],
+        ar: [
+          "رمز الضرب هو الرمز « × » **ضرب**.",
+          "الأعداد التي نضربها تسمى **العوامل**.",
+          "نتيجة الضرب تسمى **الناتج**.",
+        ],
+        fa: [
+          "نشانه ضرب، علامت « × » یعنی **ضرب در** است.",
+          "عددهایی که ضرب می‌شوند **عامل‌ها** هستند.",
+          "نتیجه ضرب، **حاصل‌ضرب** نام دارد.",
+        ],
+        ti: [
+          "ምልክት ምብዛሕ « × » **ግዜ** እዩ።",
+          "እቶም ዝባዝሑ ቁጽርታት **ፋክተራት** ይበሃሉ።",
+          "ውጽኢት ምብዛሕ **ፕሮዳክት** ይበሃል።",
+        ],
+        uk: [
+          "Знак множення — це знак « × » **помножити**.",
+          "Числа, які множать, називаються **множниками**.",
+          "Результат множення називається **добутком**.",
+        ],
+        pt: [
+          "O sinal da multiplicação é o sinal « × » **vezes**.",
+          "Os números a multiplicar são os **fatores**.",
+          "O resultado da multiplicação é o **produto**.",
+        ],
+        so: [
+          "Calaamadda isku dhufashadu waa « × » **jeer**.",
+          "Tirooyinka la isku dhufanayo waa **qodobbada**.",
+          "Natiijada isku dhufashadu waa **taranta**.",
+        ],
+        tr: [
+          "Çarpma işareti « × » **kere** işaretidir.",
+          "Çarpılan sayılar **çarpanlardır**.",
+          "Çarpmanın sonucu **çarpımdır**.",
+        ],
+        ps: [
+          "د ضرب نښه « × » **ځلې** ده.",
+          "هغه عددونه چې ضرب کېږي **عاملونه** دي.",
+          "د ضرب پایله **حاصل ضرب** ده.",
+        ],
+      },
     },
     {
       headers: {
         fr: ["7", "×", "9", "=", "63"],
-      }
+        en: ["7", "×", "9", "=", "63"],
+        ar: ["7", "×", "9", "=", "63"],
+        fa: ["7", "×", "9", "=", "63"],
+        ti: ["7", "×", "9", "=", "63"],
+        uk: ["7", "×", "9", "=", "63"],
+        pt: ["7", "×", "9", "=", "63"],
+        so: ["7", "×", "9", "=", "63"],
+        tr: ["7", "×", "9", "=", "63"],
+        ps: ["7", "×", "9", "=", "63"],
+      },
     },
     {
       text: {
         fr: "Propriétés de la multiplication",
-      }
+        en: "Properties of multiplication",
+        ar: "خصائص الضرب",
+        fa: "ویژگی‌های ضرب",
+        ti: "ባህርያት ምብዛሕ",
+        uk: "Властивості множення",
+        pt: "Propriedades da multiplicação",
+        so: "Sifooyinka isku dhufashada",
+        tr: "Çarpmanın özellikleri",
+        ps: "د ضرب ځانګړنې",
+      },
     },
     {
       text: {
         fr: "Commutativité",
-      }
+        en: "Commutativity",
+        ar: "خاصية الإبدال",
+        fa: "خاصیت جابه‌جایی",
+        ti: "ምቅይያር",
+        uk: "Переставна властивість",
+        pt: "Comutatividade",
+        so: "Isdhaafsanaan",
+        tr: "Değişme özelliği",
+        ps: "بدلېدونکې ځانګړنه",
+      },
     },
     {
       items: {
         fr: ["L'ordre des facteurs ne change pas le produit."],
-      }
+        en: ["The order of the factors does not change the product."],
+        ar: ["ترتيب العوامل لا يغيّر الناتج."],
+        fa: ["ترتیب عامل‌ها، حاصل‌ضرب را تغییر نمی‌دهد."],
+        ti: ["ቅደም ተከተል ፋክተራት ንውጽኢት ኣይቅይሮን።"],
+        uk: ["Порядок множників не змінює добуток."],
+        pt: ["A ordem dos fatores não altera o produto."],
+        so: ["Kala horraynta qodobbadu ma beddesho taranta."],
+        tr: ["Çarpanların sırası çarpımı değiştirmez."],
+        ps: ["د عاملونو ترتیب حاصل ضرب نه بدلوي."],
+      },
     },
     {},
     {
       text: {
         fr: "Associativité",
-      }
+        en: "Associativity",
+        ar: "خاصية التجميع",
+        fa: "خاصیت شرکت‌پذیری",
+        ti: "ምጥርናፍ",
+        uk: "Сполучна властивість",
+        pt: "Associatividade",
+        so: "Kooxayn",
+        tr: "Birleşme özelliği",
+        ps: "یوځای کوونکې ځانګړنه",
+      },
     },
     {
       items: {
         fr: ["On peut multiplier plus de deux facteurs dans l'ordre voulu."],
-      }
+        en: ["We can multiply more than two factors in any order we choose."],
+        ar: ["يمكننا ضرب أكثر من عاملين بالترتيب الذي نريده."],
+        fa: ["می‌توانیم بیش از دو عامل را به هر ترتیبی که می‌خواهیم ضرب کنیم."],
+        ti: ["ካብ ክልተ ንላዕሊ ፋክተራት ብዝደለናዮ ቅደም ተከተል ክንባዝሕ ንኽእል።"],
+        uk: ["Можна множити більше ніж два множники у вибраному порядку."],
+        pt: ["Podemos multiplicar mais de dois fatores na ordem que quisermos."],
+        so: ["Waxaan isku dhufan karnaa in ka badan laba qodob sida aan rabno."],
+        tr: ["İkiden fazla çarpanı istediğimiz sırayla çarpabiliriz."],
+        ps: ["له دوو څخه ډېر عاملونه په خوښه ترتیب سره ضرب کولای شو."],
+      },
     },
     {
       text: {
         fr: "Fois 0",
-      }
+        en: "Times 0",
+        ar: "الضرب في 0",
+        fa: "ضرب در 0",
+        ti: "ግዜ 0",
+        uk: "Множення на 0",
+        pt: "Vezes 0",
+        so: "Ku dhufasho 0",
+        tr: "0 ile çarpma",
+        ps: "په 0 ضرب",
+      },
     },
     {
       items: {
-        fr: ["Un nombre multiplié par 0 donne 0. \n**Exemple :** 123 × 0 = 0."],
-      }
+        fr: ["Un nombre multiplié par 0 donne 0.\n**Exemple :** 123 × 0 = 0."],
+        en: ["A number multiplied by 0 gives 0.\n**Example:** 123 × 0 = 0."],
+        ar: ["أي عدد مضروب في 0 يعطي 0.\n**مثال:** 123 × 0 = 0."],
+        fa: ["هر عددی که در 0 ضرب شود، 0 می‌شود.\n**مثال:** 123 × 0 = 0."],
+        ti: ["ቁጽሪ ብ0 እንተተባዚሑ 0 ይህብ።\n**ኣብነት:** 123 × 0 = 0."],
+        uk: ["Число, помножене на 0, дорівнює 0.\n**Приклад:** 123 × 0 = 0."],
+        pt: ["Um número multiplicado por 0 dá 0.\n**Exemplo:** 123 × 0 = 0."],
+        so: ["Tiro lagu dhufto 0 waxay noqotaa 0.\n**Tusaale:** 123 × 0 = 0."],
+        tr: ["0 ile çarpılan bir sayı 0 eder.\n**Örnek:** 123 × 0 = 0."],
+        ps: ["هر عدد چې په 0 ضرب شي، 0 کېږي.\n**بېلګه:** 123 × 0 = 0."],
+      },
     },
     {},
     {
       text: {
         fr: "Table de multiplications",
-      }
+        en: "Multiplication table",
+        ar: "جدول الضرب",
+        fa: "جدول ضرب",
+        ti: "ሰደቓ ምብዛሕ",
+        uk: "Таблиця множення",
+        pt: "Tabuada",
+        so: "Jadwalka isku dhufashada",
+        tr: "Çarpım tablosu",
+        ps: "د ضرب جدول",
+      },
     },
     {},
   ],
