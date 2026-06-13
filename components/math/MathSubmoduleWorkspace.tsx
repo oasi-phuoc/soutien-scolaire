@@ -22,6 +22,7 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
+import { G1ShapeMCQExercise, G1NameToSVGExercise, G1MissingLettersExercise, G1AnagramExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
 
 type WorkspaceStep =
   | { kind: "theory" }
@@ -107,6 +108,11 @@ type WorkspaceStep =
   | { kind: "pct_table_ex"; exNum: number }
   | { kind: "pct_word_ex"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
+  | { kind: "g1_shape_mcq"; exNum: number }
+  | { kind: "g1_name_to_svg"; exNum: number }
+  | { kind: "g1_missing_letters"; exNum: number }
+  | { kind: "g1_anagram"; exNum: number }
+  | { kind: "g1_shape_write"; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
   | { kind: "results" };
@@ -485,6 +491,19 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a8_pow10_exp_ex", exNum: 3, count: 5, promptFr: "Complétez l'exposant." });
     steps.push({ kind: "a8_sci_calc_ex", exNum: 4, count: 5, promptFr: "Calculez." });
     steps.push({ kind: "a8_sci_write_ex", exNum: 5, count: 5, promptFr: "Écrivez en notation scientifique." });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "G1-1") {
+    steps.push({ kind: "g1_shape_mcq", exNum: 1 });
+    steps.push({ kind: "g1_name_to_svg", exNum: 2 });
+    steps.push({ kind: "g1_missing_letters", exNum: 3 });
+    steps.push({ kind: "g1_anagram", exNum: 4 });
+    steps.push({ kind: "g1_shape_write", exNum: 5 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "g1_shape_mcq", exNum: 1 });
+    steps.push({ kind: "g1_name_to_svg", exNum: 2 });
+    steps.push({ kind: "g1_missing_letters", exNum: 3 });
+    steps.push({ kind: "g1_anagram", exNum: 4 });
+    steps.push({ kind: "g1_shape_write", exNum: 5 });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -2088,6 +2107,23 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       {/* A4-4/5/6 fraction operations exercises */}
       {currentStep?.kind === "frac_ops" && (
         <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} displayExNum={currentStep.displayExNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* G1-1 shape exercises */}
+      {currentStep?.kind === "g1_shape_mcq" && (
+        <G1ShapeMCQExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_name_to_svg" && (
+        <G1NameToSVGExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_missing_letters" && (
+        <G1MissingLettersExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_anagram" && (
+        <G1AnagramExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_shape_write" && (
+        <G1ShapeWriteExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* Generic text exercise */}
