@@ -22,7 +22,8 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
-import { G1ShapeMCQExercise, G1NameToSVGExercise, G1MissingLettersExercise, G1AnagramExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
+import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
+import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
 
 type WorkspaceStep =
   | { kind: "theory" }
@@ -108,11 +109,11 @@ type WorkspaceStep =
   | { kind: "pct_table_ex"; exNum: number }
   | { kind: "pct_word_ex"; exNum: number }
   | { kind: "exercise"; item: MathExerciseItem; exNum: number }
-  | { kind: "g1_shape_mcq"; exNum: number }
   | { kind: "g1_name_to_svg"; exNum: number }
-  | { kind: "g1_missing_letters"; exNum: number }
+  | { kind: "g1_definition_match"; exNum: number }
   | { kind: "g1_anagram"; exNum: number }
   | { kind: "g1_shape_write"; exNum: number }
+  | { kind: "g2_perimeter"; exNum: number; shapeKind: "square" | "rectangle" | "triangle" | "regular" | "circle"; mode: "perimeter" | "missing" }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
   | { kind: "results" };
@@ -493,17 +494,28 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "a8_sci_write_ex", exNum: 5, count: 5, promptFr: "Écrivez en notation scientifique." });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId === "G1-1") {
-    steps.push({ kind: "g1_shape_mcq", exNum: 1 });
-    steps.push({ kind: "g1_name_to_svg", exNum: 2 });
-    steps.push({ kind: "g1_missing_letters", exNum: 3 });
-    steps.push({ kind: "g1_anagram", exNum: 4 });
-    steps.push({ kind: "g1_shape_write", exNum: 5 });
+    steps.push({ kind: "g1_name_to_svg", exNum: 1 });
+    steps.push({ kind: "g1_anagram", exNum: 2 });
+    steps.push({ kind: "g1_definition_match", exNum: 3 });
+    steps.push({ kind: "g1_shape_write", exNum: 4 });
     steps.push({ kind: "eval_start" });
-    steps.push({ kind: "g1_shape_mcq", exNum: 1 });
-    steps.push({ kind: "g1_name_to_svg", exNum: 2 });
-    steps.push({ kind: "g1_missing_letters", exNum: 3 });
-    steps.push({ kind: "g1_anagram", exNum: 4 });
-    steps.push({ kind: "g1_shape_write", exNum: 5 });
+    steps.push({ kind: "g1_name_to_svg", exNum: 1 });
+    steps.push({ kind: "g1_anagram", exNum: 2 });
+    steps.push({ kind: "g1_definition_match", exNum: 3 });
+    steps.push({ kind: "g1_shape_write", exNum: 4 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId.startsWith("G2-")) {
+    const shapeKind =
+      lesson.submoduleId === "G2-1" ? "square" :
+      lesson.submoduleId === "G2-2" ? "rectangle" :
+      lesson.submoduleId === "G2-3" ? "triangle" :
+      lesson.submoduleId === "G2-4" ? "regular" :
+      "circle";
+    steps.push({ kind: "g2_perimeter", exNum: 1, shapeKind, mode: "perimeter" });
+    steps.push({ kind: "g2_perimeter", exNum: 2, shapeKind, mode: "missing" });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "g2_perimeter", exNum: 1, shapeKind, mode: "perimeter" });
+    steps.push({ kind: "g2_perimeter", exNum: 2, shapeKind, mode: "missing" });
     steps.push({ kind: "results" });
   } else {
     const pool = lesson.exercisePool;
@@ -1164,7 +1176,7 @@ function ShapeExplorer({ block }: { block: Extract<MathRichBlock, { type: "shape
         <div className="space-y-6">
           {selectedShape.tabs.map((tab, ti) => (
             <div key={`${selectedIdx}-${ti}`}>
-              <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)] uppercase tracking-wide">{tab.label}</p>
+              <h3 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{tab.label}</h3>
               <div className="space-y-3">
                 {tab.blocks.map((b, bi) => (
                   <BlockView key={`s${selectedIdx}-t${ti}-b${bi}`} block={b} />
@@ -1645,7 +1657,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
   // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
   //            keep workspace step builder only for A4 and A7 parents (custom step types).
-  const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
+  const isCustomA5 = submoduleId === "G1-1" || submoduleId?.startsWith("G2-") || submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
   if (isRevision) {
     const revParent = getParentModuleForRevision(submoduleId ?? "");
@@ -1667,7 +1679,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "g1_name_to_svg" || currentStep?.kind === "g1_definition_match" || currentStep?.kind === "g1_anagram" || currentStep?.kind === "g1_shape_write" || currentStep?.kind === "g2_perimeter" || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -2110,20 +2122,27 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
 
       {/* G1-1 shape exercises */}
-      {currentStep?.kind === "g1_shape_mcq" && (
-        <G1ShapeMCQExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
       {currentStep?.kind === "g1_name_to_svg" && (
         <G1NameToSVGExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
-      {currentStep?.kind === "g1_missing_letters" && (
-        <G1MissingLettersExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      {currentStep?.kind === "g1_definition_match" && (
+        <G1DefinitionMatchExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "g1_anagram" && (
         <G1AnagramExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "g1_shape_write" && (
         <G1ShapeWriteExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g2_perimeter" && (
+        <G2PerimeterExercise
+          key={exKey}
+          exNum={currentStep.exNum}
+          shapeKind={currentStep.shapeKind}
+          mode={currentStep.mode}
+          validateCommand={validateCommand}
+          onValidated={handleCustomValidated}
+        />
       )}
 
       {/* Generic text exercise */}

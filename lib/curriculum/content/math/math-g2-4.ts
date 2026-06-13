@@ -62,11 +62,5 @@ export const MATH_G2_4_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g2-4-e1", promptFr: "Périmètre d'un hexagone régulier de côté 5 cm.", type: "number", acceptable: ["30"] },
-    { id: "g2-4-e2", promptFr: "Périmètre d'un octogone régulier de côté 3 cm.", type: "number", acceptable: ["24"] },
-    { id: "g2-4-e3", promptFr: "Un polygone régulier a un périmètre de 40 cm et des côtés de 8 cm. Combien de côtés ?", type: "number", acceptable: ["5"] },
-    { id: "g2-4-e4", promptFr: "Périmètre d'un pentagone régulier de côté 7 cm.", type: "number", acceptable: ["35"] },
-    { id: "g2-4-e5", promptFr: "Périmètre d'un triangle équilatéral de côté 9 cm.", type: "number", acceptable: ["27"] },
-  ],
+  exercises: [],
 };

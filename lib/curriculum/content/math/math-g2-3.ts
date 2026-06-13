@@ -75,11 +75,5 @@ export const MATH_G2_3_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g2-3-e1", promptFr: "Calcule P : triangle de côtés 3, 4, 5 cm.", type: "number", acceptable: ["12"] },
-    { id: "g2-3-e2", promptFr: "Triangle équilatéral de côté 8 cm. P = ?", type: "number", acceptable: ["24"] },
-    { id: "g2-3-e3", promptFr: "Triangle isocèle : deux côtés = 6 cm, base = 4 cm. P = ?", type: "number", acceptable: ["16"] },
-    { id: "g2-3-e4", promptFr: "P d'un triangle = 30 cm. Deux côtés sont 8 et 11 cm. Troisième côté = ?", type: "number", acceptable: ["11"] },
-    { id: "g2-3-e5", promptFr: "Peut-on former un triangle avec les côtés 2, 3, 7 ? (oui/non)", type: "short_text", acceptable: ["non"] },
-  ],
+  exercises: [],
 };

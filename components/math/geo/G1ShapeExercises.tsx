@@ -3,57 +3,67 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 // ── Shape data ─────────────────────────────────────────────────────────────────
 
-type ShapeData = { id: string; name: string; svg: string };
+type ShapeData = { id: string; name: string; definition: string; svg: string };
 
 const SHAPES: ShapeData[] = [
   {
     id: "triangle",
     name: "triangle",
+    definition: "polygone à 3 côtés",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='40,8 74,72 6,72' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "carre",
     name: "carré",
+    definition: "quadrilatère à 4 côtés égaux et 4 angles droits",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><rect x='12' y='12' width='56' height='56' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
   },
   {
     id: "rectangle",
     name: "rectangle",
+    definition: "quadrilatère à 4 angles droits avec côtés opposés égaux",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><rect x='4' y='24' width='72' height='32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
   },
   {
     id: "losange",
     name: "losange",
+    definition: "quadrilatère à 4 côtés égaux sans forcément 4 angles droits",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='40,8 72,40 40,72 8,40' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "trapeze",
     name: "trapèze",
+    definition: "quadrilatère avec une seule paire de côtés parallèles",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='10,65 70,65 55,15 25,15' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "parallelogramme",
     name: "parallélogramme",
+    definition: "quadrilatère dont les côtés opposés sont parallèles",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='12,65 58,65 68,15 22,15' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "pentagone",
     name: "pentagone",
+    definition: "polygone à 5 côtés",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "hexagone",
     name: "hexagone",
+    definition: "polygone à 6 côtés",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><polygon points='40,6 68,22 68,58 40,74 12,58 12,22' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
   {
     id: "cercle",
     name: "cercle",
+    definition: "figure ronde dont tous les points sont à la même distance du centre",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><circle cx='40' cy='40' r='32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
   },
   {
     id: "demi-cercle",
     name: "demi-cercle",
+    definition: "moitié d'un cercle",
     svg: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block'><path d='M 8,50 A 32,32 0 0,1 72,50 Z' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
   },
 ];
@@ -164,7 +174,7 @@ export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExPr
 
 // ── Ex2: Show name → pick SVG (like ExImageMatch with SVGs) ───────────────────
 
-const LETTERS = ["a", "b", "c", "d", "e", "f"];
+const LETTERS = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
 type MatchState = { answer: string; checked: boolean; correct: boolean };
 
@@ -216,7 +226,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Associez chaque forme à son nom en choisissant la lettre correspondante.</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Associez chaque image au mot en choisissant la lettre correspondante.</p>
       </div>
       {/* Name list */}
       <div className="grid grid-cols-2 gap-x-6 gap-y-1">
@@ -254,6 +264,100 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
                   </select>
                 )}
               </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Ex3: Definition → shape name ─────────────────────────────────────────────
+
+type DefinitionMatchState = { answer: string; checked: boolean; correct: boolean };
+
+export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const [{ allShapes, definitions }] = useState(() => {
+    const allShapes = pickN(SHAPES, 8);
+    const definitions = shuffle([...allShapes]).slice(0, 5);
+    return { allShapes, definitions };
+  });
+
+  const [states, setStates] = useState<Record<string, DefinitionMatchState>>(() =>
+    Object.fromEntries(definitions.map(s => [s.id, { answer: "", checked: false, correct: false }]))
+  );
+  const prevCmd = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    let correct = 0;
+    const updated: Record<string, DefinitionMatchState> = {};
+    definitions.forEach(shape => {
+      const expectedIdx = allShapes.findIndex(s => s.id === shape.id);
+      const expected = LETTERS[expectedIdx] ?? "";
+      const userAns = states[shape.id]?.answer.trim() ?? "";
+      const ok = userAns === expected;
+      if (ok) correct++;
+      updated[shape.id] = { answer: userAns, checked: true, correct: ok };
+    });
+    setStates(updated);
+    onValidated(correct === definitions.length, correct, definitions.length);
+  }, [states, definitions, allShapes, onValidated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand; doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  function handleSelect(shapeId: string, newVal: string) {
+    setStates(prev => {
+      const oldVal = prev[shapeId]?.answer ?? "";
+      const next = { ...prev };
+      const clash = Object.entries(prev).find(([id, s]) => id !== shapeId && s.answer === newVal && newVal !== "");
+      if (clash) next[clash[0]] = { ...prev[clash[0]]!, answer: oldVal, checked: false, correct: false };
+      next[shapeId] = { ...prev[shapeId]!, answer: newVal, checked: false, correct: false };
+      return next;
+    });
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Associez chaque définition au mot correspondant en choisissant la lettre.</p>
+      </div>
+      <div className="grid grid-cols-2 gap-x-6 gap-y-1 border-b border-[var(--color-border-default)] pb-3">
+        {allShapes.map((s, i) => (
+          <div key={s.id} className="flex items-baseline gap-1.5">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-alg)]">{LETTERS[i]}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{s.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="space-y-2">
+        {definitions.map((shape, i) => {
+          const state = states[shape.id]!;
+          const correctIdx = allShapes.findIndex(s => s.id === shape.id);
+          return (
+            <div key={shape.id} className="grid grid-cols-[1.75rem_1fr_5.5rem] items-center gap-2">
+              <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="text-sm text-[var(--color-text-primary)]">{shape.definition}</span>
+              {state.checked && !state.correct ? (
+                <div className="flex h-9 flex-col items-center justify-center rounded border-b-2 border-amber-500">
+                  <span className="text-[9px] leading-none text-amber-600 line-through">{state.answer || "—"}</span>
+                  <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
+                </div>
+              ) : (
+                <select
+                  value={state.answer}
+                  disabled={state.checked && state.correct}
+                  onChange={e => handleSelect(shape.id, e.target.value)}
+                  className="h-9 w-full appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
+                >
+                  <option value="" />
+                  {LETTERS.slice(0, allShapes.length).map(l => <option key={l} value={l}>{l}</option>)}
+                </select>
+              )}
             </div>
           );
         })}
@@ -425,7 +529,7 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cliquez sur les lettres pour former le nom de la forme.</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cliquez sur les lettres pour former le mot.</p>
       </div>
       <div className="space-y-5">
         {items.map((item, idx) => {
@@ -508,7 +612,7 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
     <div className="space-y-4">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Écrivez le nom de la forme.</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Regardez et écrivez le mot correspondant.</p>
       </div>
       <div className="space-y-3">
         {shapes.map((s, i) => {

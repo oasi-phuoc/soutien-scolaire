@@ -50,11 +50,5 @@ export const MATH_G2_2_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g2-2-e1", promptFr: "Calcule le périmètre d'un rectangle 10 cm × 4 cm.", type: "number", acceptable: ["28"] },
-    { id: "g2-2-e2", promptFr: "Rectangle de périmètre 30 cm et longueur 10 cm. Largeur = ?", type: "number", acceptable: ["5"] },
-    { id: "g2-2-e3", promptFr: "Calcule le périmètre d'un rectangle 7 m × 3 m.", type: "number", acceptable: ["20"] },
-    { id: "g2-2-e4", promptFr: "Un rectangle 6 cm × 6 cm est-il un carré ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g2-2-e5", promptFr: "Rectangle 12 cm × 5 cm. Calcule P.", type: "number", acceptable: ["34"] },
-  ],
+  exercises: [],
 };

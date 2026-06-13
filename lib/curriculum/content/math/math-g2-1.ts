@@ -52,11 +52,5 @@ export const MATH_G2_1_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g2-1-e1", promptFr: "Calcule le périmètre d'un carré de côté 9 cm.", type: "number", acceptable: ["36"] },
-    { id: "g2-1-e2", promptFr: "Un carré a un périmètre de 48 cm. Quel est son côté ?", type: "number", acceptable: ["12"] },
-    { id: "g2-1-e3", promptFr: "Calcule le périmètre d'un carré de côté 4,5 cm.", type: "number", acceptable: ["18"] },
-    { id: "g2-1-e4", promptFr: "Combien de côtés a un carré ?", type: "number", acceptable: ["4"] },
-    { id: "g2-1-e5", promptFr: "Un carré de côté 6 m : P = ?", type: "number", acceptable: ["24"] },
-  ],
+  exercises: [],
 };

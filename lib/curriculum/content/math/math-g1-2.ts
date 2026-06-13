@@ -19,9 +19,14 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "4 angles droits de 90°", black: true },
-                  { type: "plain", fr: "Le carré a **4 angles droits**. Chaque angle mesure 90°. La somme des 4 angles vaut 360°." },
-                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 angles de 90°", "Somme = 4 × 90° = 360°"] },
+                  {
+                    type: "section",
+                    labelFr: "",
+                    itemsFr: [
+                      "Chaque angle mesure 90°.",
+                      "La somme des 4 angles vaut 360°.",
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
@@ -33,7 +38,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <path d='M15,73 L27,73 L27,85' fill='none' stroke='#f97316' stroke-width='2'/>
   <path d='M73,85 L73,73 L85,73' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
-                        captionFr: "4 angles droits",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
@@ -41,7 +45,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <path d='M15,27 L27,27 L27,15' fill='none' stroke='#f97316' stroke-width='2'/>
   <text x='32' y='35' font-size='10' fill='#f97316' font-family='sans-serif' font-weight='bold'>90°</text>
 </svg>`,
-                        captionFr: "Chaque angle = 90°",
                       },
                     ],
                   },
@@ -50,9 +53,17 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "4 côtés égaux — diagonales perpendiculaires", black: true },
-                  { type: "plain", fr: "Le carré a **4 côtés égaux**. Les côtés opposés sont **parallèles**. Les diagonales sont égales, se coupent en leur milieu et sont **perpendiculaires**." },
-                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 côtés égaux", "Côtés opposés parallèles", "Diagonales ⊥ et égales"] },
+                  { type: "plain", fr: "**1** Le carré a 4 côtés égaux." },
+                  { type: "plain", fr: "**2.**Les côtés opposés sont parallèles." },
+                  { type: "plain", fr: "**3.** Les diagonales sont égales." },
+                  {
+                    type: "section",
+                    labelFr: "",
+                    itemsFr: [
+                      "Elles se coupent en leur milieu",
+                      "Elles sont perpendiculaires.",
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
@@ -87,20 +98,25 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "4 axes de symétrie", black: true },
-                  { type: "plain", fr: "Le carré possède **4 axes de symétrie** : 2 axes médiateurs (horizontal et vertical) et 2 axes diagonaux." },
+                  {
+                    type: "section",
+                    labelFr: "",
+                    itemsFr: [
+                      "2 axes médiateurs (horizontal et vertical)",
+                      "2 axes diagonaux",
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
   <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='8' y1='8' x2='92' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='92' y1='8' x2='8' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='50' y1='5' x2='50' y2='95' stroke='#f97316' stroke-width='0.9' stroke-dasharray='3,3'/>
+  <line x1='5' y1='50' x2='95' y2='50' stroke='#f97316' stroke-width='0.9' stroke-dasharray='3,3'/>
+  <line x1='8' y1='8' x2='92' y2='92' stroke='#f97316' stroke-width='0.8' stroke-dasharray='3,3'/>
+  <line x1='92' y1='8' x2='8' y2='92' stroke='#f97316' stroke-width='0.8' stroke-dasharray='3,3'/>
 </svg>`,
-                        captionFr: "4 axes de symétrie",
                       },
                     ],
                   },
@@ -117,38 +133,39 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "3 angles — somme = 180°", black: true },
                   { type: "plain", fr: "Un triangle a **3 angles**. La somme de ses angles intérieurs est toujours **180°**." },
-                  {
-                    type: "table",
-                    headersFr: ["Type", "Angles"],
-                    accentHeader: true,
-                    colAligns: ["left", "left"],
-                    rows: [
-                      ["Quelconque", "3 angles différents"],
-                      ["Isocèle", "2 angles de base égaux"],
-                      ["Équilatéral", "3 × 60°"],
-                      ["Rectangle", "1 angle de 90°"],
-                    ],
-                  },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 88,82 12,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Angle arc at top vertex (50,8): P1 on side→(88,82), P2 on side→(12,82), sweep CW=1 -->
-  <path d='M55,17 A10,10 0 0,1 45,17' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
-  <!-- Angle arc at bottom-left (12,82): P1 on side→(50,8), P2 on side→(88,82), sweep CW=1 -->
-  <path d='M17,73 A10,10 0 0,1 22,82' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <!-- Angle arc at bottom-right (88,82): P1 on side→(50,8), P2 on side→(12,82), sweep CCW=0 -->
-  <path d='M83,73 A10,10 0 0,0 78,82' fill='none' stroke='#0891b2' stroke-width='1.5'/>
-  <text x='45' y='28' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
-  <text x='22' y='75' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
-  <text x='70' y='75' font-size='9' fill='#0891b2' font-family='sans-serif' font-weight='bold'>γ</text>
-  <text x='28' y='88' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β + γ = 180°</text>
+  <polygon points='18,78 88,70 42,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M42,10 m7,9 A12,12 0 0,1 32,21' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <path d='M18,78 m13,-2 A13,13 0 0,1 24,64' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <path d='M88,70 m-12,-6 A12,12 0 0,0 74,76' fill='none' stroke='#0891b2' stroke-width='1.5'/>
+  <text x='29' y='87' font-size='8.5' fill='var(--color-text-secondary)' font-family='sans-serif'>3 angles différents</text>
 </svg>`,
-                        captionFr: "Somme = 180°",
+                        captionFr: "Quelconque",
+                      },
+                      {
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 82,78 18,78' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M18,78 m12,-2 A12,12 0 0,1 24,66' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <path d='M82,78 m-12,-2 A12,12 0 0,0 76,66' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <text x='22' y='87' font-size='8.5' fill='var(--color-text-secondary)' font-family='sans-serif'>2 angles de base égaux</text>
+</svg>`,
+                        captionFr: "Isocèle",
+                      },
+                      {
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 88,74 12,74' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M50,8 m9,15 A15,15 0 0,1 41,23' fill='none' stroke='#f97316' stroke-width='1.7'/>
+  <path d='M12,74 m13,-3 A13,13 0 0,1 20,62' fill='none' stroke='#f97316' stroke-width='1.7'/>
+  <path d='M88,74 m-13,-3 A13,13 0 0,0 80,62' fill='none' stroke='#f97316' stroke-width='1.7'/>
+  <text x='42' y='43' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>60°</text>
+  <text x='37' y='87' font-size='8.5' fill='var(--color-text-secondary)' font-family='sans-serif'>3 × 60°</text>
+</svg>`,
+                        captionFr: "Équilatéral",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
@@ -156,7 +173,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <path d='M12,82 L26,82 L26,68' fill='none' stroke='#f97316' stroke-width='2'/>
   <text x='28' y='58' font-size='9' fill='#f97316' font-family='sans-serif'>90°</text>
 </svg>`,
-                        captionFr: "Triangle rectangle",
+                        captionFr: "Rectangle",
                       },
                     ],
                   },
@@ -165,7 +182,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "3 côtés", black: true },
                   {
                     type: "table",
                     headersFr: ["Type", "Côtés"],
@@ -215,7 +231,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Axes selon le type", black: true },
                   {
                     type: "table",
                     headersFr: ["Type", "Axes de symétrie"],
@@ -265,7 +280,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Somme = 360° — angles de même base : 180°", black: true },
                   { type: "plain", fr: "La somme des 4 angles d'un trapèze est **360°**. Les 2 angles d'une **même base** sont supplémentaires (somme = 180°)." },
                   {
                     type: "table",
@@ -309,7 +323,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "1 paire de côtés parallèles", black: true },
                   { type: "plain", fr: "Le trapèze a **une seule paire de côtés parallèles** (les deux bases). Le trapèze **isocèle** a les deux côtés latéraux égaux." },
                   {
                     type: "table",
@@ -354,7 +367,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Isocèle : 1 axe — autres : 0", black: true },
                   { type: "plain", fr: "Seul le **trapèze isocèle** a un axe de symétrie vertical. Les trapèzes quelconque et rectangle n'ont **aucun axe**." },
                   {
                     type: "svg_row",
@@ -388,7 +400,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Angle au centre — tour complet = 360°", black: true },
                   { type: "plain", fr: "Le cercle n'a pas d'angles de polygone. On définit un **angle au centre**. Un tour complet fait **360°**." },
                   { type: "rule", titleFr: "Angles clés", itemsFr: ["Tour complet = 360°", "Demi-cercle = 180°", "Quart de cercle = 90°"] },
                   {
@@ -422,7 +433,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "Rayon et diamètre", black: true },
                   { type: "plain", fr: "Le **rayon r** relie le centre à un point du cercle. Le **diamètre d = 2r** traverse le cercle en passant par le centre." },
                   { type: "rule", titleFr: "Éléments", itemsFr: ["Rayon r = centre → bord", "Diamètre d = 2 × r"] },
                   {
@@ -453,7 +463,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Infinité d'axes de symétrie", black: true },
                   { type: "plain", fr: "Le cercle possède une **infinité d'axes de symétrie**. Tout **diamètre** est un axe de symétrie." },
                   { type: "rule", titleFr: "Symétrie", itemsFr: ["Tout diamètre est un axe", "→ Infinité d'axes"] },
                   {
@@ -485,9 +494,14 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "4 angles droits de 90°", black: true },
-                  { type: "plain", fr: "Le rectangle a **4 angles droits** (90°). La somme des angles est 4 × 90° = **360°**." },
-                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 angles de 90°", "Somme = 360°"] },
+                  {
+                    type: "section",
+                    labelFr: "",
+                    itemsFr: [
+                      "Chaque angle mesure 90°.",
+                      "La somme des 4 angles vaut 360°.",
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
@@ -499,7 +513,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <path d='M90,60 L76,60 L76,46' fill='none' stroke='#f97316' stroke-width='2'/>
   <path d='M10,60 L10,46 L24,46' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
-                        captionFr: "4 angles droits",
                       },
                     ],
                   },
@@ -508,7 +521,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "Côtés opposés égaux", black: true },
                   { type: "plain", fr: "Un rectangle a **2 longueurs** et **2 largeurs** égales. Les côtés opposés sont **parallèles**. Les diagonales sont **égales** et se coupent en leur milieu." },
                   { type: "rule", titleFr: "Propriétés", itemsFr: ["Longueurs égales (l)", "Largeurs égales (L)", "Diagonales égales"] },
                   {
@@ -546,7 +558,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "2 axes de symétrie", black: true },
                   { type: "plain", fr: "Le rectangle possède **2 axes de symétrie** : l'axe horizontal et l'axe vertical passant par les milieux des côtés opposés." },
                   {
                     type: "svg_row",
@@ -574,7 +585,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Angles opposés égaux — somme = 360°", black: true },
                   { type: "plain", fr: "Le losange a **4 angles**. Les angles opposés sont **égaux**. Les angles adjacents sont **supplémentaires** (α + β = 180°)." },
                   { type: "rule", titleFr: "Propriétés", itemsFr: ["Angles opposés égaux (α = α, β = β)", "Angles adjacents : α + β = 180°", "Somme = 360°"] },
                   {
@@ -605,7 +615,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "4 côtés égaux — diagonales perpendiculaires", black: true },
                   { type: "plain", fr: "Le losange a **4 côtés égaux**. Les côtés opposés sont **parallèles**. Les diagonales se **coupent en leur milieu** et sont **perpendiculaires**." },
                   { type: "rule", titleFr: "Propriétés", itemsFr: ["4 côtés égaux", "Côtés opposés parallèles", "Diagonales ⊥ et se coupent en milieu"] },
                   {
@@ -647,7 +656,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "2 axes de symétrie (les diagonales)", black: true },
                   { type: "plain", fr: "Le losange possède **2 axes de symétrie** : ses deux diagonales." },
                   {
                     type: "svg_row",
@@ -675,7 +683,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Angles opposés égaux — somme = 360°", black: true },
                   { type: "plain", fr: "Le parallélogramme a **4 angles**. Les angles opposés sont **égaux**. Les angles adjacents sont **supplémentaires** (α + β = 180°)." },
                   { type: "rule", titleFr: "Propriétés", itemsFr: ["Angles opposés égaux", "Angles adjacents : α + β = 180°", "Somme = 360°"] },
                   {
@@ -707,7 +714,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "Côtés opposés égaux et parallèles", black: true },
                   { type: "plain", fr: "Dans un parallélogramme, les côtés opposés sont **égaux** et **parallèles**. Les diagonales **se coupent en leur milieu**." },
                   { type: "rule", titleFr: "Propriétés", itemsFr: ["Côtés opposés égaux et parallèles", "Diagonales se coupent en milieu"] },
                   {
@@ -745,7 +751,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "0 axe — symétrie centrale", black: true },
                   { type: "plain", fr: "Le parallélogramme quelconque n'a **aucun axe de symétrie axiale**. Il admet une **symétrie centrale** en O (intersection des diagonales)." },
                   { type: "rule", titleFr: "Symétrie", itemsFr: ["0 axe de symétrie axiale", "1 centre de symétrie : O"] },
                   {
@@ -777,7 +782,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "5 angles — somme = 540°", black: true },
                   { type: "plain", fr: "Un pentagone a **5 angles**. La somme est **(5 − 2) × 180° = 540°**. Dans un pentagone **régulier**, chaque angle mesure **108°**." },
                   { type: "rule", titleFr: "Formule", itemsFr: ["(5 − 2) × 180° = 540°", "Régulier : 5 × 108° = 540°"] },
                   {
@@ -816,7 +820,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "5 côtés égaux (régulier)", black: true },
                   { type: "plain", fr: "Un pentagone **régulier** a **5 côtés égaux**. Un pentagone quelconque n'a aucune contrainte sur ses côtés." },
                   { type: "rule", titleFr: "Côtés", itemsFr: ["Régulier : 5 côtés égaux", "Quelconque : côtés libres"] },
                   {
@@ -850,7 +853,6 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Régulier : 5 axes de symétrie", black: true },
                   { type: "plain", fr: "Le pentagone **régulier** possède **5 axes de symétrie**. Chaque axe passe par un sommet et le milieu du côté opposé." },
                   { type: "rule", titleFr: "Axes", itemsFr: ["Régulier : 5 axes de symétrie", "Quelconque : 0 axe"] },
                   {
