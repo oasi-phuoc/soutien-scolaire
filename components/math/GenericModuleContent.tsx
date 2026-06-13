@@ -3444,6 +3444,48 @@ function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, p
   );
 }
 
+function ShapeExplorerBlock({ block, pivot, showPivot }: {
+  block: Extract<MathRichBlock, { type: "shape_explorer" }>;
+  pivot: PivotCode;
+  showPivot: boolean;
+}) {
+  const [selectedShape, setSelectedShape] = useState(0);
+  const [selectedTab, setSelectedTab] = useState(0);
+  const shape = block.shapes[selectedShape];
+  if (!shape) return null;
+  const safeTab = Math.min(selectedTab, shape.tabs.length - 1);
+  const tab = shape.tabs[safeTab];
+  if (!tab) return null;
+  function selectShape(i: number) { setSelectedShape(i); setSelectedTab(0); }
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2 justify-center">
+        {block.shapes.map((s, i) => (
+          <button key={s.id} type="button" onClick={() => selectShape(i)}
+            className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center p-1 transition-all
+              ${i === selectedShape ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" : "border-[var(--color-border-default)] hover:border-[var(--color-accent-alg)]/40"}`}>
+            <div dangerouslySetInnerHTML={{ __html: s.svg }} style={{ width: "100%", height: "100%" }} />
+          </button>
+        ))}
+      </div>
+      <div className="flex border-b border-[var(--color-border-default)]">
+        {shape.tabs.map((t, i) => (
+          <button key={t.label} type="button" onClick={() => setSelectedTab(i)}
+            className={`px-3 py-1.5 text-xs font-medium transition-colors border-b-2 -mb-px
+              ${i === safeTab ? "border-[var(--color-accent-alg)] text-[var(--color-accent-alg)]" : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"}`}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+      <div className="space-y-3 pt-1">
+        {tab.blocks.map((b, i) => (
+          <BlockView key={i} block={b} pivot={pivot} showPivot={showPivot} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   block: MathRichBlock;
   blockIdx?: number;
@@ -3630,7 +3672,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
             <div key={ii} className="flex-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
               <div dangerouslySetInnerHTML={{ __html: item.markup }} />
               {item.captionFr && (
-                <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{item.captionFr}</p>
+                <p className="mt-1 text-center text-sm text-[var(--color-text-secondary)]">{item.captionFr}</p>
               )}
             </div>
           ))}
@@ -3743,6 +3785,8 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           })}
         </div>
       );
+    case "shape_explorer":
+      return <ShapeExplorerBlock block={block} pivot={pivot} showPivot={showPivot} />;
     default:
       return null;
   }

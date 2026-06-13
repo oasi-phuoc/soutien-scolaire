@@ -4,9 +4,9 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-1",
   submoduleCode: "G1.1",
   theory: {
-    title: { fr: "Formes" },
+    title: { fr: "" },
     blocks: [
-      { type: "heading", fr: "Les polygones", black: true },
+      { type: "heading", fr: "Les polygones réguliers", black: true },
 
       {
         type: "plain",
@@ -26,15 +26,33 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         ],
       },
 
-      { type: "highlight", fr: "Polygone régulier" },
+      { type: "plain", fr: "" },
+
       {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
-          "Exemples : triangle équilatéral, carré, hexagone régulier.",
-        ],
+        type: "svg",
+        noFrame: true,
+        markup: `<svg viewBox='0 0 260 155' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
+  <!-- Triangle -->
+  <polygon points='130,18 220,128 40,128' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+  <!-- Sommet (top vertex) -->
+  <circle cx='130' cy='18' r='4.5' fill='var(--color-accent-alg)'/>
+  <line x1='130' y1='13' x2='175' y2='4' stroke='var(--color-accent-alg)' stroke-width='1.4'/>
+  <text x='178' y='8' font-size='13' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>sommet</text>
+  <!-- Côté (bottom side) — bracket -->
+  <path d='M40,134 L40,142 L220,142 L220,134' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <line x1='75' y1='142' x2='50' y2='151' stroke='#f97316' stroke-width='1.4'/>
+  <text x='6' y='155' font-size='13' fill='#f97316' font-family='sans-serif' font-weight='bold'>côté</text>
+</svg>`,
       },
+
+      {
+        type: "plain",
+        fr: "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
+      },
+
+      { type: "plain", fr: "" },
+
+      { type: "heading", fr: "Les formes", black: true },
 
       {
         type: "svg_row",
@@ -77,6 +95,24 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         items: [
           {
             markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='10,65 70,65 55,15 25,15' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Trapèze",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='12,65 58,65 68,15 22,15' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Parallélogramme",
+          },
+        ],
+      },
+
+      {
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
   <polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
 </svg>`,
             captionFr: "Pentagone",
@@ -89,6 +125,8 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
           },
         ],
       },
+
+      { type: "plain", fr: "" },
 
       { type: "heading", fr: "Le cercle", black: true },
 
@@ -115,14 +153,15 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         ],
       },
 
+      { type: "plain", fr: "" },
+
       { type: "highlight", fr: "Vocabulaire du cercle" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
           "**Rayon (r)** : distance du centre à n'importe quel point du cercle.",
-          "**Diamètre (d)** : corde passant par le centre ; d = 2r.",
-          "**Corde** : segment reliant deux points du cercle (sans passer par le centre).",
+          "**Diamètre (d)** : segment passant par le centre ; d = 2r.",
         ],
       },
 
@@ -131,50 +170,15 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         markup: `<svg viewBox='0 0 220 155' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:280px;display:block;margin:0 auto'>
   <circle cx='110' cy='78' r='55' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
   <circle cx='110' cy='78' r='3' fill='var(--color-accent-alg)'/>
-  <text x='116' y='75' font-size='12' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>O</text>
-  <line x1='55' y1='78' x2='165' y2='78' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='5,3' opacity='0.5'/>
-  <text x='107' y='66' font-size='11' fill='var(--color-accent-alg)' opacity='0.7' text-anchor='middle' font-family='sans-serif'>d</text>
+  <line x1='110' y1='23' x2='110' y2='133' stroke='var(--color-accent-alg)' stroke-width='2' opacity='0.7'/>
+  <text x='104' y='82' font-size='11' fill='var(--color-accent-alg)' opacity='0.9' font-family='sans-serif' font-weight='bold' text-anchor='end'>d</text>
   <line x1='110' y1='78' x2='165' y2='78' stroke='#f97316' stroke-width='2.5'/>
-  <text x='140' y='70' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
-  <line x1='138' y1='30' x2='62' y2='110' stroke='#16a34a' stroke-width='2'/>
-  <text x='142' y='28' font-size='10' fill='#16a34a' font-weight='bold' font-family='sans-serif'>corde</text>
+  <text x='133' y='70' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
 </svg>`,
-        captionFr: "Rayon (r) en orange · Diamètre (d) en pointillés · Corde en vert",
       },
     ],
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    {
-      id: "g1-1-e1",
-      promptFr: "Comment s'appelle un polygone à 5 côtés ?",
-      type: "short_text",
-      acceptable: ["pentagone"],
-    },
-    {
-      id: "g1-1-e2",
-      promptFr: "Un cercle a un rayon de 7 cm. Quel est son diamètre (en cm) ?",
-      type: "number",
-      acceptable: ["14"],
-    },
-    {
-      id: "g1-1-e3",
-      promptFr: "Un hexagone a combien de côtés ?",
-      type: "number",
-      acceptable: ["6"],
-    },
-    {
-      id: "g1-1-e4",
-      promptFr: "Un cercle a un diamètre de 10 cm. Quel est son rayon (en cm) ?",
-      type: "number",
-      acceptable: ["5"],
-    },
-    {
-      id: "g1-1-e5",
-      promptFr: "Calcule la somme des angles intérieurs d'un pentagone (en °).",
-      type: "number",
-      acceptable: ["540"],
-    },
-  ],
+  exercises: [],
 };

@@ -149,6 +149,14 @@ export type MathRichBlock =
         aDisplay?: (number | string | null)[];
       }>;
       subNoteFr?: string;
+    }
+  | {
+      type: "shape_explorer";
+      shapes: Array<{
+        id: string;
+        svg: string;
+        tabs: Array<{ label: string; blocks: MathRichBlock[] }>;
+      }>;
     };
 
 export type MathTheoryBlock = {
