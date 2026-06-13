@@ -260,7 +260,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
                     className="h-8 w-16 appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
                   >
                     <option value="" />
-                    {LETTERS.map(l => <option key={l} value={l}>{l}</option>)}
+                    {LETTERS.slice(0, allShapes.length).map(l => <option key={l} value={l}>{l}</option>)}
                   </select>
                 )}
               </div>

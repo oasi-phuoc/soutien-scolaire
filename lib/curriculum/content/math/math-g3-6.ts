@@ -59,11 +59,5 @@ export const MATH_G3_6_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g3-6-e1", promptFr: "Aire d'un disque de rayon 4 cm (π ≈ 3,14).", type: "number", acceptable: ["50,24", "50.24"] },
-    { id: "g3-6-e2", promptFr: "Aire d'un disque de rayon 10 cm (π ≈ 3,14).", type: "number", acceptable: ["314"] },
-    { id: "g3-6-e3", promptFr: "Aire d'un disque de diamètre 8 cm (π ≈ 3,14).", type: "number", acceptable: ["50,24", "50.24"] },
-    { id: "g3-6-e4", promptFr: "Un disque a une aire de 78,5 cm² (π ≈ 3,14). Quel est son rayon ?", type: "number", acceptable: ["5"] },
-    { id: "g3-6-e5", promptFr: "Aire d'un disque de rayon 3 cm (π ≈ 3,14).", type: "number", acceptable: ["28,26", "28.26"] },
-  ],
+  exercises: [],
 };

@@ -219,6 +219,7 @@ export const MATH_MODULES: MathModule[] = [
       sm("G2.3", "Triangle"),
       sm("G2.4", "Polygones réguliers"),
       sm("G2.5", "Cercle et π"),
+      sm("G2.6", "Figures composées"),
     ],
   },
   {

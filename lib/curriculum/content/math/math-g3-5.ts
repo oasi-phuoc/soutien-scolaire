@@ -50,11 +50,5 @@ export const MATH_G3_5_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g3-5-e1", promptFr: "Aire d'un trapèze : B = 8, b = 4, h = 5 cm.", type: "number", acceptable: ["30"] },
-    { id: "g3-5-e2", promptFr: "Aire d'un trapèze : B = 12, b = 6, h = 4 cm.", type: "number", acceptable: ["36"] },
-    { id: "g3-5-e3", promptFr: "Trapèze d'aire 40 cm², B = 10, b = 6. h = ?", type: "number", acceptable: ["5"] },
-    { id: "g3-5-e4", promptFr: "Aire d'un trapèze : B = 9, b = 3, h = 6 cm.", type: "number", acceptable: ["36"] },
-    { id: "g3-5-e5", promptFr: "Si b = B (deux bases égales), quelle figure est-ce ?", type: "short_text", acceptable: ["parallélogramme", "rectangle", "parallelogramme"] },
-  ],
+  exercises: [],
 };

@@ -45,11 +45,5 @@ export const MATH_G3_7_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g3-7-e1", promptFr: "Losange de côté 5 cm. Périmètre = ?", type: "number", acceptable: ["20"] },
-    { id: "g3-7-e2", promptFr: "Losange de diagonales 6 cm et 8 cm. Aire = ?", type: "number", acceptable: ["24"] },
-    { id: "g3-7-e3", promptFr: "Losange de côté 7,5 cm. Périmètre = ?", type: "number", acceptable: ["30", "30,0", "30.0"] },
-    { id: "g3-7-e4", promptFr: "Losange de diagonales 10 cm et 12 cm. Aire = ?", type: "number", acceptable: ["60"] },
-    { id: "g3-7-e5", promptFr: "Losange de diagonales 9 cm et 14 cm. Aire = ?", type: "number", acceptable: ["63"] },
-  ],
+  exercises: [],
 };

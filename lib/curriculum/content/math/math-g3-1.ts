@@ -53,11 +53,5 @@ export const MATH_G3_1_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g3-1-e1", promptFr: "Calcule l'aire d'un carré de côté 5 cm.", type: "number", acceptable: ["25"] },
-    { id: "g3-1-e2", promptFr: "Calcule l'aire d'un carré de côté 12 cm.", type: "number", acceptable: ["144"] },
-    { id: "g3-1-e3", promptFr: "Un carré a une aire de 49 cm². Quel est son côté ?", type: "number", acceptable: ["7"] },
-    { id: "g3-1-e4", promptFr: "Carré de côté 3,5 cm. Aire = ?", type: "number", acceptable: ["12,25", "12.25"] },
-    { id: "g3-1-e5", promptFr: "Un carré a une aire de 100 m². Quel est son côté ?", type: "number", acceptable: ["10"] },
-  ],
+  exercises: [],
 };

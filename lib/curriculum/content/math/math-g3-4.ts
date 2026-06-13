@@ -58,11 +58,5 @@ export const MATH_G3_4_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    { id: "g3-4-e1", promptFr: "Aire d'un parallélogramme : base 7 cm, hauteur 4 cm.", type: "number", acceptable: ["28"] },
-    { id: "g3-4-e2", promptFr: "Aire d'un parallélogramme : base 11 cm, hauteur 5 cm.", type: "number", acceptable: ["55"] },
-    { id: "g3-4-e3", promptFr: "Parallélogramme d'aire 48 cm² et base 8 cm. Hauteur = ?", type: "number", acceptable: ["6"] },
-    { id: "g3-4-e4", promptFr: "Un rectangle est-il un cas particulier de parallélogramme ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g3-4-e5", promptFr: "Aire d'un parallélogramme : base 9 cm, hauteur 6 cm.", type: "number", acceptable: ["54"] },
-  ],
+  exercises: [],
 };

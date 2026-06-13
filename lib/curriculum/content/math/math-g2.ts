@@ -5,6 +5,7 @@ import { MATH_G2_2_LESSON } from "./math-g2-2";
 import { MATH_G2_3_LESSON } from "./math-g2-3";
 import { MATH_G2_4_LESSON } from "./math-g2-4";
 import { MATH_G2_5_LESSON } from "./math-g2-5";
+import { MATH_G2_6_LESSON } from "./math-g2-6";
 
 export const MATH_G2_LESSONS: MathSubmoduleLesson[] = [
   MATH_G2_1_LESSON,
@@ -12,4 +13,5 @@ export const MATH_G2_LESSONS: MathSubmoduleLesson[] = [
   MATH_G2_3_LESSON,
   MATH_G2_4_LESSON,
   MATH_G2_5_LESSON,
+  MATH_G2_6_LESSON,
 ];
