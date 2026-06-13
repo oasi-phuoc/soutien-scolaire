@@ -29,9 +29,31 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
       { type: "plain", fr: "" },
 
       {
+        type: "svg",
+        noFrame: true,
+        markup: `<svg viewBox='0 0 260 155' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
+  <!-- Triangle -->
+  <polygon points='130,18 220,128 40,128' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+  <!-- Sommet (top vertex) -->
+  <circle cx='130' cy='18' r='4.5' fill='var(--color-accent-alg)'/>
+  <line x1='130' y1='13' x2='175' y2='4' stroke='var(--color-accent-alg)' stroke-width='1.4'/>
+  <text x='178' y='8' font-size='13' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>sommet</text>
+  <!-- Côté (bottom side) — bracket -->
+  <path d='M40,134 L40,142 L130,142 L130,134' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <path d='M130,134 L130,142 L220,142 L220,134' fill='none' stroke='#f97316' stroke-width='1.8' opacity='0.35'/>
+  <line x1='75' y1='142' x2='50' y2='151' stroke='#f97316' stroke-width='1.4'/>
+  <text x='6' y='155' font-size='13' fill='#f97316' font-family='sans-serif' font-weight='bold'>côté</text>
+</svg>`,
+      },
+
+      {
         type: "plain",
         fr: "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
       },
+
+      { type: "plain", fr: "" },
+
+      { type: "heading", fr: "Les formes", black: true },
 
       {
         type: "svg_row",
@@ -162,33 +184,63 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   exercises: [
     {
       id: "g1-1-e1",
+      promptFr: "Comment s'appelle un polygone à 3 côtés ?",
+      type: "short_text",
+      acceptable: ["triangle"],
+    },
+    {
+      id: "g1-1-e2",
+      promptFr: "Comment s'appelle un polygone à 4 côtés égaux et 4 angles droits ?",
+      type: "short_text",
+      acceptable: ["carré", "carre"],
+    },
+    {
+      id: "g1-1-e3",
+      promptFr: "Comment s'appelle un quadrilatère à 2 longueurs et 2 largeurs (différentes) avec 4 angles droits ?",
+      type: "short_text",
+      acceptable: ["rectangle"],
+    },
+    {
+      id: "g1-1-e4",
+      promptFr: "Comment s'appelle un polygone à 4 côtés égaux dont les angles ne sont pas droits ?",
+      type: "short_text",
+      acceptable: ["losange"],
+    },
+    {
+      id: "g1-1-e5",
+      promptFr: "Comment s'appelle un quadrilatère avec exactement une paire de côtés parallèles ?",
+      type: "short_text",
+      acceptable: ["trapèze", "trapeze"],
+    },
+    {
+      id: "g1-1-e6",
+      promptFr: "Comment s'appelle un quadrilatère dont les côtés opposés sont parallèles (mais pas tous les côtés égaux) ?",
+      type: "short_text",
+      acceptable: ["parallélogramme", "parallelogramme"],
+    },
+    {
+      id: "g1-1-e7",
       promptFr: "Comment s'appelle un polygone à 5 côtés ?",
       type: "short_text",
       acceptable: ["pentagone"],
     },
     {
-      id: "g1-1-e2",
-      promptFr: "Un cercle a un rayon de 7 cm. Quel est son diamètre (en cm) ?",
-      type: "number",
-      acceptable: ["14"],
+      id: "g1-1-e8",
+      promptFr: "Comment s'appelle un polygone à 6 côtés ?",
+      type: "short_text",
+      acceptable: ["hexagone"],
     },
     {
-      id: "g1-1-e3",
-      promptFr: "Un hexagone a combien de côtés ?",
-      type: "number",
-      acceptable: ["6"],
+      id: "g1-1-e9",
+      promptFr: "Comment s'appelle la figure ronde dont tous les points sont à la même distance du centre ?",
+      type: "short_text",
+      acceptable: ["cercle"],
     },
     {
-      id: "g1-1-e4",
-      promptFr: "Un cercle a un diamètre de 10 cm. Quel est son rayon (en cm) ?",
-      type: "number",
-      acceptable: ["5"],
-    },
-    {
-      id: "g1-1-e5",
-      promptFr: "Calcule la somme des angles intérieurs d'un pentagone (en °).",
-      type: "number",
-      acceptable: ["540"],
+      id: "g1-1-e10",
+      promptFr: "Comment s'appelle la moitié d'un cercle ?",
+      type: "short_text",
+      acceptable: ["demi-cercle"],
     },
   ],
 };
