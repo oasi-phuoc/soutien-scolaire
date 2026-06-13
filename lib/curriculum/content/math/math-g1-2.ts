@@ -137,15 +137,15 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                       {
                         markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
   <polygon points='50,8 88,82 12,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Angle arc at top -->
-  <path d='M50,8 m6,14 A14,14 0 0,1 44,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
-  <!-- Angle arc bottom-left -->
-  <path d='M12,82 m11,-3 A11,11 0 0,1 18,70' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <!-- Angle arc bottom-right -->
-  <path d='M88,82 m-11,-3 A11,11 0 0,0 82,70' fill='none' stroke='#0891b2' stroke-width='1.5'/>
-  <text x='44' y='37' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
-  <text x='21' y='73' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
-  <text x='70' y='73' font-size='9' fill='#0891b2' font-family='sans-serif' font-weight='bold'>γ</text>
+  <!-- Angle arc at top vertex (50,8): P1 on side→(88,82), P2 on side→(12,82), sweep CW=1 -->
+  <path d='M55,17 A10,10 0 0,1 45,17' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc at bottom-left (12,82): P1 on side→(50,8), P2 on side→(88,82), sweep CW=1 -->
+  <path d='M17,73 A10,10 0 0,1 22,82' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <!-- Angle arc at bottom-right (88,82): P1 on side→(50,8), P2 on side→(12,82), sweep CCW=0 -->
+  <path d='M83,73 A10,10 0 0,0 78,82' fill='none' stroke='#0891b2' stroke-width='1.5'/>
+  <text x='45' y='28' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='22' y='75' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='70' y='75' font-size='9' fill='#0891b2' font-family='sans-serif' font-weight='bold'>γ</text>
   <text x='28' y='88' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β + γ = 180°</text>
 </svg>`,
                         captionFr: "Somme = 180°",
@@ -241,9 +241,12 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                       {
                         markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
   <polygon points='50,8 88,74 12,74' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <line x1='50' y1='2' x2='50' y2='79' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='2' y1='39' x2='95' y2='49' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='22' y1='2' x2='76' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <!-- Axis 1: through A=(50,8) and midpoint of BC=(50,74) — vertical -->
+  <line x1='50' y1='2' x2='50' y2='80' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <!-- Axis 2: through B=(88,74) and midpoint of AC=(31,41) — slope=33/57≈0.579 -->
+  <line x1='2' y1='24' x2='100' y2='81' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <!-- Axis 3: through C=(12,74) and midpoint of AB=(69,41) — slope=-33/57≈-0.579 -->
+  <line x1='2' y1='80' x2='100' y2='23' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
 </svg>`,
                         captionFr: "Équilatéral : 3 axes",
                       },
