@@ -3797,14 +3797,14 @@ function ShapeExplorerBlock({
   const selectedShape = block.shapes[selectedIdx];
   return (
     <div className="space-y-4">
-      {/* Shape tabs — scrollable row of icon buttons */}
-      <div className="flex gap-2 overflow-x-auto pb-1">
+      {/* Shape tabs — 4×2 grid */}
+      <div className="grid grid-cols-4 gap-2">
         {block.shapes.map((shape, i) => (
           <button
             key={shape.id}
             type="button"
             onClick={() => setSelectedIdx(i)}
-            className={`shrink-0 w-14 h-14 rounded-xl border-2 p-1.5 transition-all ${
+            className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
               selectedIdx === i
                 ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
                 : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"

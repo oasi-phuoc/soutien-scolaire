@@ -4,25 +4,24 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-2",
   submoduleCode: "G1.2",
   theory: {
-    title: { fr: "" },
+    title: { fr: "Propriétés des formes" },
     paragraphs: { fr: [] },
     blocks: [
       {
         type: "shape_explorer",
         shapes: [
-          // ─────────────────────────────────────────────
-          // 1. CARRÉ
-          // ─────────────────────────────────────────────
+
+          // ── 1. CARRÉ ──────────────────────────────────────────────
           {
             id: "carre",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><rect x='8' y='8' width='44' height='44' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><rect x='8' y='8' width='44' height='44' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
             tabs: [
               {
                 label: "Angles",
                 blocks: [
                   { type: "heading", fr: "4 angles droits de 90°", black: true },
-                  { type: "plain", fr: "Le carré possède 4 angles droits. Chaque angle mesure exactement 90°. La somme des 4 angles vaut 360°." },
-                  { type: "rule", titleFr: "Somme des angles", itemsFr: ["4 × 90° = 360°"] },
+                  { type: "plain", fr: "Le carré a **4 angles droits**. Chaque angle mesure 90°. La somme des 4 angles vaut 360°." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 angles de 90°", "Somme = 4 × 90° = 360°"] },
                   {
                     type: "svg_row",
                     items: [
@@ -32,7 +31,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <path d='M15,27 L27,27 L27,15' fill='none' stroke='#f97316' stroke-width='2'/>
   <path d='M73,15 L73,27 L85,27' fill='none' stroke='#f97316' stroke-width='2'/>
   <path d='M15,73 L27,73 L27,85' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M85,73 L73,73 L73,85' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M73,85 L73,73 L85,73' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
                         captionFr: "4 angles droits",
                       },
@@ -40,365 +39,9 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
   <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
   <path d='M15,27 L27,27 L27,15' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M25,15 A10,10 0 0 1 15,25' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
+  <text x='32' y='35' font-size='10' fill='#f97316' font-family='sans-serif' font-weight='bold'>90°</text>
 </svg>`,
                         captionFr: "Chaque angle = 90°",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Droites",
-                blocks: [
-                  { type: "heading", fr: "4 côtés égaux et parallèles", black: true },
-                  { type: "plain", fr: "Le carré a 4 côtés de même longueur. Les côtés opposés sont parallèles. Les côtés adjacents sont perpendiculaires entre eux." },
-                  { type: "rule", titleFr: "Égalité des côtés", itemsFr: ["4 côtés égaux\nAB = BC = CD = DA"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='47' y1='11' x2='53' y2='19' stroke='#f97316' stroke-width='2'/>
-  <line x1='47' y1='81' x2='53' y2='89' stroke='#f97316' stroke-width='2'/>
-  <line x1='11' y1='47' x2='19' y2='53' stroke='#f97316' stroke-width='2'/>
-  <line x1='81' y1='47' x2='89' y2='53' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "4 côtés égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M47,12 L50,8 L53,12' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M47,88 L50,92 L53,88' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M12,47 L8,50 L12,53' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M88,47 L92,50 L88,53' fill='none' stroke='#0891b2' stroke-width='2'/>
-</svg>`,
-                        captionFr: "2 paires parallèles",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Symétrie",
-                blocks: [
-                  { type: "heading", fr: "4 axes de symétrie", black: true },
-                  { type: "plain", fr: "Le carré possède 4 axes de symétrie : 2 axes passant par les milieux des côtés opposés, et 2 axes diagonaux reliant les sommets opposés." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["4 axes de symétrie"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Axes milieux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='10' y1='10' x2='90' y2='90' stroke='#f97316' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='90' y1='10' x2='10' y2='90' stroke='#f97316' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Axes diagonaux",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-
-          // ─────────────────────────────────────────────
-          // 2. RECTANGLE
-          // ─────────────────────────────────────────────
-          {
-            id: "rectangle",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><rect x='4' y='15' width='52' height='30' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
-            tabs: [
-              {
-                label: "Angles",
-                blocks: [
-                  { type: "heading", fr: "4 angles droits de 90°", black: true },
-                  { type: "plain", fr: "Le rectangle possède 4 angles droits. Chaque angle mesure exactement 90°. La somme des 4 angles vaut 360°." },
-                  { type: "rule", titleFr: "Somme des angles", itemsFr: ["4 × 90° = 360°"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M10,36 L21,36 L21,25' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M79,25 L79,36 L90,36' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M10,64 L21,64 L21,75' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M90,64 L79,64 L79,75' fill='none' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "4 angles droits",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M10,36 L21,36 L21,25' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M24,25 A14,14 0 0 1 10,39' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-</svg>`,
-                        captionFr: "Chaque angle = 90°",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Droites",
-                blocks: [
-                  { type: "heading", fr: "Côtés opposés égaux et parallèles", black: true },
-                  { type: "plain", fr: "Le rectangle a 2 paires de côtés opposés égaux et parallèles. Les côtés adjacents sont perpendiculaires. AB = CD (longueur) et BC = DA (largeur)." },
-                  { type: "rule", titleFr: "Égalité des côtés", itemsFr: ["AB = CD (longueur)\nBC = DA (largeur)"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='47' y1='21' x2='53' y2='29' stroke='#f97316' stroke-width='2'/>
-  <line x1='47' y1='71' x2='53' y2='79' stroke='#f97316' stroke-width='2'/>
-  <line x1='6' y1='46' x2='14' y2='54' stroke='#f97316' stroke-width='2'/>
-  <line x1='9' y1='43' x2='17' y2='51' stroke='#f97316' stroke-width='2'/>
-  <line x1='86' y1='46' x2='94' y2='54' stroke='#f97316' stroke-width='2'/>
-  <line x1='83' y1='43' x2='91' y2='51' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Côtés opposés égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M47,22 L50,18 L53,22' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M47,78 L50,82 L53,78' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M7,47 L3,50 L7,53' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M93,47 L97,50 L93,53' fill='none' stroke='#0891b2' stroke-width='2'/>
-</svg>`,
-                        captionFr: "2 paires parallèles",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Symétrie",
-                blocks: [
-                  { type: "heading", fr: "2 axes de symétrie", black: true },
-                  { type: "plain", fr: "Le rectangle possède 2 axes de symétrie : un axe horizontal et un axe vertical, passant chacun par les milieux des côtés opposés. Les diagonales ne sont pas des axes de symétrie." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["2 axes de symétrie\n(milieux des côtés opposés)"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='2' y1='50' x2='98' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Axe horizontal",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <rect x='10' y='25' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='2' x2='50' y2='98' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Axe vertical",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-
-          // ─────────────────────────────────────────────
-          // 3. TRIANGLE
-          // ─────────────────────────────────────────────
-          {
-            id: "triangle",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><polygon points='30,6 54,54 6,54' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
-            tabs: [
-              {
-                label: "Angles",
-                blocks: [
-                  { type: "heading", fr: "Somme des angles = 180°", black: true },
-                  { type: "plain", fr: "Tout triangle a 3 angles dont la somme vaut toujours 180°. On distingue 4 types de triangles selon leurs angles." },
-                  {
-                    type: "table",
-                    headersFr: ["Type", "Angles"],
-                    accentHeader: true,
-                    rows: [
-                      ["Quelconque", "3 angles différents"],
-                      ["Équilatéral", "3 × 60°"],
-                      ["Isocèle", "2 angles égaux"],
-                      ["Rectangle", "1 angle de 90°"],
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 88,76 12,76' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M41,26 A14,14 0 0 1 59,26' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M20,66 A14,14 0 0 1 26,77' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M74,77 A14,14 0 0 1 80,66' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-</svg>`,
-                        captionFr: "Équilatéral : 3×60°",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,15 85,85 15,85' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M15,72 L28,72 L28,85' fill='none' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Rectangle : 1 angle droit",
-                      },
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 80,85 20,85' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M27,73 A12,12 0 0 1 33,84' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M67,84 A12,12 0 0 1 73,73' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-</svg>`,
-                        captionFr: "Isocèle : 2 angles égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='20,15 85,70 10,85' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M25,24 A12,12 0 0 1 31,15' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M74,72 A10,10 0 0 1 83,78' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M12,75 A10,10 0 0 1 19,85' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-</svg>`,
-                        captionFr: "Quelconque : angles différents",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Droites",
-                blocks: [
-                  { type: "heading", fr: "3 côtés — types selon les côtés", black: true },
-                  { type: "plain", fr: "Un triangle a 3 côtés. On le classe aussi selon l'égalité de ses côtés." },
-                  {
-                    type: "table",
-                    headersFr: ["Type", "Côtés"],
-                    accentHeader: true,
-                    rows: [
-                      ["Quelconque", "0 côtés égaux"],
-                      ["Isocèle", "2 côtés égaux"],
-                      ["Équilatéral", "3 côtés égaux"],
-                      ["Rectangle", "Hypoténuse = côté le plus long"],
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 88,76 12,76' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='27' y1='40' x2='35' y2='46' stroke='#f97316' stroke-width='2'/>
-  <line x1='65' y1='40' x2='73' y2='46' stroke='#f97316' stroke-width='2'/>
-  <line x1='47' y1='73' x2='53' y2='79' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Équilatéral : 3 côtés égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 80,85 20,85' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='29' y1='43' x2='37' y2='50' stroke='#f97316' stroke-width='2'/>
-  <line x1='63' y1='43' x2='71' y2='50' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Isocèle : 2 côtés égaux",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Symétrie",
-                blocks: [
-                  { type: "heading", fr: "Axes de symétrie selon le type", black: true },
-                  { type: "plain", fr: "Le nombre d'axes de symétrie dépend du type de triangle." },
-                  {
-                    type: "table",
-                    headersFr: ["Type", "Axes de symétrie"],
-                    accentHeader: true,
-                    rows: [
-                      ["Équilatéral", "3 axes"],
-                      ["Isocèle", "1 axe"],
-                      ["Quelconque", "0 axe"],
-                      ["Rectangle (sauf isocèle-rect.)", "0 axe"],
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 88,76 12,76' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='5' x2='50' y2='82' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='12' y1='76' x2='69' y2='43' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-  <line x1='88' y1='76' x2='31' y2='43' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Équilatéral : 3 axes",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 80,85 20,85' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='5' x2='50' y2='92' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Isocèle : 1 axe",
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-
-          // ─────────────────────────────────────────────
-          // 4. LOSANGE
-          // ─────────────────────────────────────────────
-          {
-            id: "losange",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><polygon points='30,6 54,30 30,54 6,30' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
-            tabs: [
-              {
-                label: "Angles",
-                blocks: [
-                  { type: "heading", fr: "Angles opposés égaux, somme = 360°", black: true },
-                  { type: "plain", fr: "Le losange a 4 angles. Les angles opposés sont égaux entre eux. Les angles adjacents sont supplémentaires (leur somme vaut 180°). La somme de tous les angles est 360°." },
-                  { type: "rule", titleFr: "Propriétés des angles", itemsFr: ["Angles opposés égaux : α = α, β = β", "Angles adjacents : α + β = 180°", "Somme totale : 360°"] },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M42,22 A12,12 0 0 1 58,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M42,78 A12,12 0 0 0 58,78' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M20,43 A12,12 0 0 0 20,57' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <path d='M80,43 A12,12 0 0 1 80,57' fill='none' stroke='#f97316' stroke-width='1.5'/>
-</svg>`,
-                        captionFr: "Angles opposés égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M42,22 A12,12 0 0 1 58,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M80,43 A12,12 0 0 1 80,57' fill='none' stroke='#f97316' stroke-width='1.5'/>
-</svg>`,
-                        captionFr: "Angles adjacents : somme 180°",
                       },
                     ],
                   },
@@ -408,29 +51,34 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 label: "Droites",
                 blocks: [
                   { type: "heading", fr: "4 côtés égaux — diagonales perpendiculaires", black: true },
-                  { type: "plain", fr: "Le losange a 4 côtés de même longueur. Il a 2 paires de côtés parallèles. Ses diagonales sont perpendiculaires entre elles et se coupent en leur milieu." },
-                  { type: "rule", titleFr: "Propriétés des côtés", itemsFr: ["4 côtés égaux : AB = BC = CD = DA", "Diagonales perpendiculaires"] },
+                  { type: "plain", fr: "Le carré a **4 côtés égaux**. Les côtés opposés sont **parallèles**. Les diagonales sont égales, se coupent en leur milieu et sont **perpendiculaires**." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 côtés égaux", "Côtés opposés parallèles", "Diagonales ⊥ et égales"] },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='25' y1='25' x2='33' y2='33' stroke='#f97316' stroke-width='2'/>
-  <line x1='67' y1='25' x2='75' y2='33' stroke='#f97316' stroke-width='2'/>
-  <line x1='25' y1='67' x2='33' y2='75' stroke='#f97316' stroke-width='2'/>
-  <line x1='67' y1='67' x2='75' y2='75' stroke='#f97316' stroke-width='2'/>
+  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <!-- Top side tick (perpendicular = vertical) -->
+  <line x1='50' y1='12' x2='50' y2='18' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Bottom side tick -->
+  <line x1='50' y1='82' x2='50' y2='88' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Left side tick (perpendicular = horizontal) -->
+  <line x1='12' y1='50' x2='18' y2='50' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side tick -->
+  <line x1='82' y1='50' x2='88' y2='50' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
 </svg>`,
                         captionFr: "4 côtés égaux",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='8' x2='50' y2='92' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.6'/>
-  <line x1='10' y1='50' x2='90' y2='50' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.6'/>
-  <path d='M50,44 L56,44 L56,50' fill='none' stroke='#f97316' stroke-width='2'/>
+  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='15' y1='15' x2='85' y2='85' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='4,3' opacity='0.6'/>
+  <line x1='85' y1='15' x2='15' y2='85' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='4,3' opacity='0.6'/>
+  <path d='M44,50 L50,44 L56,50 L50,56 Z' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <circle cx='50' cy='50' r='3' fill='#f97316'/>
 </svg>`,
-                        captionFr: "Diagonales ⊥",
+                        captionFr: "Diagonales ⊥ en O",
                       },
                     ],
                   },
@@ -439,25 +87,20 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "2 axes de symétrie = les diagonales", black: true },
-                  { type: "plain", fr: "Le losange possède 2 axes de symétrie. Ces axes sont exactement ses 2 diagonales : l'une verticale et l'autre horizontale." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["2 axes de symétrie\n= les 2 diagonales"] },
+                  { type: "heading", fr: "4 axes de symétrie", black: true },
+                  { type: "plain", fr: "Le carré possède **4 axes de symétrie** : 2 axes médiateurs (horizontal et vertical) et 2 axes diagonaux." },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='2' x2='50' y2='98' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <rect x='15' y='15' width='70' height='70' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <line x1='8' y1='8' x2='92' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='92' y1='8' x2='8' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
 </svg>`,
-                        captionFr: "Axe vertical",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,50 50,92 10,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='2' y1='50' x2='98' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "Axe horizontal",
+                        captionFr: "4 axes de symétrie",
                       },
                     ],
                   },
@@ -466,39 +109,54 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
             ],
           },
 
-          // ─────────────────────────────────────────────
-          // 5. PARALLÉLOGRAMME
-          // ─────────────────────────────────────────────
+          // ── 2. TRIANGLE ──────────────────────────────────────────
           {
-            id: "parallelogramme",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><polygon points='8,48 44,48 52,12 16,12' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            id: "triangle",
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><polygon points='30,6 56,52 4,52' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
             tabs: [
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Angles opposés égaux, somme = 360°", black: true },
-                  { type: "plain", fr: "Le parallélogramme a 4 angles. Les angles opposés sont égaux. Deux angles adjacents sont supplémentaires (somme = 180°). La somme totale des angles est 360°." },
-                  { type: "rule", titleFr: "Propriétés des angles", itemsFr: ["Angles opposés : α = α, β = β", "Angles adjacents : α + β = 180°", "Total : 360°"] },
+                  { type: "heading", fr: "3 angles — somme = 180°", black: true },
+                  { type: "plain", fr: "Un triangle a **3 angles**. La somme de ses angles intérieurs est toujours **180°**." },
+                  {
+                    type: "table",
+                    headersFr: ["Type", "Angles"],
+                    accentHeader: true,
+                    colAligns: ["left", "left"],
+                    rows: [
+                      ["Quelconque", "3 angles différents"],
+                      ["Isocèle", "2 angles de base égaux"],
+                      ["Équilatéral", "3 × 60°"],
+                      ["Rectangle", "1 angle de 90°"],
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M23,68 A14,14 0 0 1 29,80' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M61,80 A14,14 0 0 1 67,68' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M33,20 A12,12 0 0 0 26,31' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <path d='M74,31 A12,12 0 0 0 77,20' fill='none' stroke='#f97316' stroke-width='1.5'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 88,82 12,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Angle arc at top -->
+  <path d='M50,8 m6,14 A14,14 0 0,1 44,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc bottom-left -->
+  <path d='M12,82 m11,-3 A11,11 0 0,1 18,70' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <!-- Angle arc bottom-right -->
+  <path d='M88,82 m-11,-3 A11,11 0 0,0 82,70' fill='none' stroke='#0891b2' stroke-width='1.5'/>
+  <text x='44' y='37' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='21' y='73' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='70' y='73' font-size='9' fill='#0891b2' font-family='sans-serif' font-weight='bold'>γ</text>
+  <text x='28' y='88' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β + γ = 180°</text>
 </svg>`,
-                        captionFr: "Angles opposés égaux",
+                        captionFr: "Somme = 180°",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M23,68 A14,14 0 0 1 29,80' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M33,20 A12,12 0 0 0 26,31' fill='none' stroke='#f97316' stroke-width='1.5'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='12,82 12,18 82,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M12,82 L26,82 L26,68' fill='none' stroke='#f97316' stroke-width='2'/>
+  <text x='28' y='58' font-size='9' fill='#f97316' font-family='sans-serif'>90°</text>
 </svg>`,
-                        captionFr: "Angles adjacents : α+β=180°",
+                        captionFr: "Triangle rectangle",
                       },
                     ],
                   },
@@ -507,34 +165,48 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "Côtés opposés égaux et parallèles", black: true },
-                  { type: "plain", fr: "Le parallélogramme a 2 paires de côtés opposés égaux et parallèles. En général, les côtés ne sont pas perpendiculaires. Les diagonales se coupent en leur milieu." },
-                  { type: "rule", titleFr: "Propriétés des côtés", itemsFr: ["Côtés opposés égaux et parallèles", "Diagonales se coupent en leur milieu"] },
+                  { type: "heading", fr: "3 côtés", black: true },
+                  {
+                    type: "table",
+                    headersFr: ["Type", "Côtés"],
+                    accentHeader: true,
+                    colAligns: ["left", "left"],
+                    rows: [
+                      ["Quelconque", "3 côtés différents"],
+                      ["Isocèle", "2 côtés égaux"],
+                      ["Équilatéral", "3 côtés égaux"],
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='42' y1='76' x2='48' y2='84' stroke='#f97316' stroke-width='2'/>
-  <line x1='52' y1='16' x2='58' y2='24' stroke='#f97316' stroke-width='2'/>
-  <line x1='16' y1='46' x2='24' y2='54' stroke='#f97316' stroke-width='2'/>
-  <line x1='13' y1='43' x2='21' y2='51' stroke='#f97316' stroke-width='2'/>
-  <line x1='76' y1='46' x2='84' y2='54' stroke='#f97316' stroke-width='2'/>
-  <line x1='73' y1='43' x2='81' y2='51' stroke='#f97316' stroke-width='2'/>
-  <path d='M42,77 L45,73 L48,77' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M52,23 L55,19 L58,23' fill='none' stroke='#0891b2' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Isosceles triangle: A=(50,8) B=(80,82) C=(20,82) -->
+  <polygon points='50,8 80,82 20,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Left side: A=(50,8) to C=(20,82). dir=(-30,74) len=79.9. norm=(-0.375,0.925). perp=(-0.925,-0.375). mid=(35,45) -->
+  <!-- tick from (35+4.6,45+1.9) to (35-4.6,45-1.9) = (39.6,46.9) to (30.4,43.1) -->
+  <line x1='39.6' y1='46.9' x2='30.4' y2='43.1' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side: A=(50,8) to B=(80,82). dir=(30,74) len=79.9. norm=(0.375,0.925). perp=(-0.925,0.375). mid=(65,45) -->
+  <!-- tick from (65+4.6,45-1.9) to (65-4.6,45+1.9) = (69.6,43.1) to (60.4,46.9) -->
+  <line x1='69.6' y1='43.1' x2='60.4' y2='46.9' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
 </svg>`,
-                        captionFr: "Côtés opposés égaux et ∥",
+                        captionFr: "Isocèle : 2 côtés égaux",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='15' y1='80' x2='85' y2='20' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.6'/>
-  <line x1='75' y1='80' x2='25' y2='20' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.6'/>
-  <circle cx='50' cy='50' r='3' fill='#f97316'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Equilateral: A=(50,8) B=(88,74) C=(12,74) -->
+  <polygon points='50,8 88,74 12,74' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Left side A=(50,8) to C=(12,74): dir=(-38,66) len=76.2. norm=(-0.499,0.866). perp=(-0.866,-0.499). mid=(31,41) -->
+  <!-- tick: (31+4.3,41+2.5) to (31-4.3,41-2.5) = (35.3,43.5) to (26.7,38.5) -->
+  <line x1='35.3' y1='43.5' x2='26.7' y2='38.5' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side A=(50,8) to B=(88,74): dir=(38,66) len=76.2. norm=(0.499,0.866). perp=(-0.866,0.499). mid=(69,41) -->
+  <!-- tick: (69+4.3,41-2.5) to (69-4.3,41+2.5) = (73.3,38.5) to (64.7,43.5) -->
+  <line x1='73.3' y1='38.5' x2='64.7' y2='43.5' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Bottom side B=(88,74) to C=(12,74): horizontal. perp=vertical. mid=(50,74) -->
+  <line x1='50' y1='71' x2='50' y2='77' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
 </svg>`,
-                        captionFr: "Diagonales : milieu commun",
+                        captionFr: "Équilatéral : 3 côtés égaux",
                       },
                     ],
                   },
@@ -543,26 +215,37 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Aucun axe — symétrie centrale en O", black: true },
-                  { type: "plain", fr: "Le parallélogramme n'a aucun axe de symétrie axiale. Cependant, il admet une symétrie centrale : le centre O (intersection des diagonales) est un centre de symétrie." },
-                  { type: "rule", titleFr: "Symétrie", itemsFr: ["0 axe de symétrie axiale", "1 centre de symétrie : O"] },
+                  { type: "heading", fr: "Axes selon le type", black: true },
+                  {
+                    type: "table",
+                    headersFr: ["Type", "Axes de symétrie"],
+                    accentHeader: true,
+                    colAligns: ["left", "center"],
+                    rows: [
+                      ["Quelconque", "0"],
+                      ["Rectangle", "0"],
+                      ["Isocèle", "1"],
+                      ["Équilatéral", "3"],
+                    ],
+                  },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 80,82 20,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='2' x2='50' y2='88' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
 </svg>`,
-                        captionFr: "Pas d'axe de symétrie",
+                        captionFr: "Isocèle : 1 axe",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='15,80 75,80 85,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='15' y1='80' x2='85' y2='20' stroke='var(--color-accent-alg)' stroke-width='1' opacity='0.4' stroke-dasharray='3,3'/>
-  <line x1='75' y1='80' x2='25' y2='20' stroke='var(--color-accent-alg)' stroke-width='1' opacity='0.4' stroke-dasharray='3,3'/>
-  <circle cx='50' cy='50' r='4' fill='#f97316'/>
+                        markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 88,74 12,74' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='2' x2='50' y2='79' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='2' y1='39' x2='95' y2='49' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='22' y1='2' x2='76' y2='92' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
 </svg>`,
-                        captionFr: "Symétrie centrale en O",
+                        captionFr: "Équilatéral : 3 axes",
                       },
                     ],
                   },
@@ -571,46 +254,50 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
             ],
           },
 
-          // ─────────────────────────────────────────────
-          // 6. TRAPÈZE
-          // ─────────────────────────────────────────────
+          // ── 3. TRAPÈZE ────────────────────────────────────────────
           {
             id: "trapeze",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><polygon points='6,48 54,48 44,12 16,12' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><polygon points='6,50 54,50 44,10 16,10' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
             tabs: [
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "Somme = 360°, angles de la même base supplémentaires", black: true },
-                  { type: "plain", fr: "Un trapèze a 4 angles dont la somme est 360°. Les 2 angles situés sur la même base sont supplémentaires (leur somme vaut 180°)." },
+                  { type: "heading", fr: "Somme = 360° — angles de même base : 180°", black: true },
+                  { type: "plain", fr: "La somme des 4 angles d'un trapèze est **360°**. Les 2 angles d'une **même base** sont supplémentaires (somme = 180°)." },
                   {
                     type: "table",
-                    headersFr: ["Type", "Particularité des angles"],
+                    headersFr: ["Type", "Angles particuliers"],
                     accentHeader: true,
+                    colAligns: ["left", "left"],
                     rows: [
-                      ["Quelconque", "Angles quelconques"],
+                      ["Quelconque", "aucun"],
                       ["Rectangle", "2 angles droits (90°)"],
-                      ["Isocèle", "2 angles de base égaux de chaque côté"],
+                      ["Isocèle", "angles de base égaux"],
                     ],
                   },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 75,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M18,68 A14,14 0 0 1 24,80' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M76,80 A14,14 0 0 1 82,68' fill='none' stroke='#f97316' stroke-width='1.5'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- angle arc bottom-left -->
+  <path d='M10,70 m10,-3 A10,10 0 0,1 16,58' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- angle arc bottom-right (supplementary) -->
+  <path d='M90,70 m-10,-3 A10,10 0 0,0 84,58' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <text x='21' y='63' font-size='8' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='72' y='63' font-size='8' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='28' y='78' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β = 180°</text>
 </svg>`,
-                        captionFr: "Angles de la même base : 180°",
+                        captionFr: "Angles de même base",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 70,20 30,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M18,68 A14,14 0 0 1 24,80' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M76,80 A14,14 0 0 1 82,68' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='15,70 85,70 85,10 40,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M15,70 L29,70 L29,56' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M85,70 L85,56 L71,56' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
-                        captionFr: "Isocèle : angles de base égaux",
+                        captionFr: "Rectangle : 2 angles droits",
                       },
                     ],
                   },
@@ -620,54 +307,42 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 label: "Droites",
                 blocks: [
                   { type: "heading", fr: "1 paire de côtés parallèles", black: true },
-                  { type: "plain", fr: "Le trapèze a exactement 1 paire de côtés parallèles : les deux bases (grande base et petite base). Les deux autres côtés (les jambes) ne sont pas parallèles." },
+                  { type: "plain", fr: "Le trapèze a **une seule paire de côtés parallèles** (les deux bases). Le trapèze **isocèle** a les deux côtés latéraux égaux." },
                   {
                     type: "table",
-                    headersFr: ["Type", "Particularité des côtés"],
+                    headersFr: ["Type", "Côtés"],
                     accentHeader: true,
+                    colAligns: ["left", "left"],
                     rows: [
-                      ["Quelconque", "1 paire parallèle, aucune perpendiculaire"],
-                      ["Rectangle", "1 côté latéral ⊥ aux bases"],
-                      ["Isocèle", "2 côtés latéraux égaux"],
+                      ["Quelconque", "1 paire parallèle"],
+                      ["Rectangle", "1 côté latéral ⊥ bases"],
+                      ["Isocèle", "côtés latéraux égaux"],
                     ],
                   },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 75,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M46,77 L50,73 L54,77' fill='none' stroke='#0891b2' stroke-width='2'/>
-  <path d='M46,23 L50,19 L54,23' fill='none' stroke='#0891b2' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Parallel arrows on top and bottom bases -->
+  <path d='M44,6 L50,10 L56,6' fill='none' stroke='#0891b2' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M44,74 L50,70 L56,74' fill='none' stroke='#0891b2' stroke-width='2' stroke-linejoin='round'/>
 </svg>`,
                         captionFr: "1 paire de côtés parallèles",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='20,80 85,80 85,20 40,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M72,80 L72,68 L85,68' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M72,20 L72,32 L85,32' fill='none' stroke='#f97316' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Isosceles trapeze: A=(20,70) B=(80,70) C=(60,10) D=(40,10) -->
+  <polygon points='20,70 80,70 60,10 40,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Left side A=(20,70) to D=(40,10): dir=(20,-60) len=63.2. norm=(0.316,-0.949). perp=(0.949,0.316). mid=(30,40) -->
+  <!-- tick: (30-4.7,40-1.6) to (30+4.7,40+1.6) = (25.3,38.4) to (34.7,41.6) -->
+  <line x1='25.3' y1='38.4' x2='34.7' y2='41.6' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side B=(80,70) to C=(60,10): dir=(-20,-60) len=63.2. norm=(-0.316,-0.949). perp=(0.949,-0.316). mid=(70,40) -->
+  <!-- tick: (70-4.7,40+1.6) to (70+4.7,40-1.6) = (65.3,41.6) to (74.7,38.4) -->
+  <line x1='65.3' y1='41.6' x2='74.7' y2='38.4' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
 </svg>`,
-                        captionFr: "Trapèze rectangle",
-                      },
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 70,20 30,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='15' y1='46' x2='23' y2='54' stroke='#f97316' stroke-width='2'/>
-  <line x1='77' y1='46' x2='85' y2='54' stroke='#f97316' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Trapèze isocèle",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 75,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Trapèze quelconque",
+                        captionFr: "Isocèle : côtés latéraux égaux",
                       },
                     ],
                   },
@@ -676,22 +351,22 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Symétrie selon le type", black: true },
-                  { type: "plain", fr: "Seul le trapèze isocèle possède un axe de symétrie : l'axe vertical médian. Les trapèzes quelconque et rectangle n'en ont aucun." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["Isocèle : 1 axe de symétrie", "Quelconque / Rectangle : 0 axe"] },
+                  { type: "heading", fr: "Isocèle : 1 axe — autres : 0", black: true },
+                  { type: "plain", fr: "Seul le **trapèze isocèle** a un axe de symétrie vertical. Les trapèzes quelconque et rectangle n'ont **aucun axe**." },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 70,20 30,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='20,70 80,70 60,10 40,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='2' x2='50' y2='78' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
 </svg>`,
-                        captionFr: "Isocèle : 1 axe",
+                        captionFr: "Isocèle : 1 axe vertical",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,80 90,80 75,20 25,20' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <text x='22' y='50' font-size='9' fill='#dc2626' font-family='sans-serif'>✗ 0 axe</text>
 </svg>`,
                         captionFr: "Quelconque : 0 axe",
                       },
@@ -702,38 +377,40 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
             ],
           },
 
-          // ─────────────────────────────────────────────
-          // 7. CERCLE
-          // ─────────────────────────────────────────────
+          // ── 4. CERCLE ─────────────────────────────────────────────
           {
             id: "cercle",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><circle cx='30' cy='30' r='24' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><circle cx='30' cy='30' r='24' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
             tabs: [
               {
                 label: "Angles",
                 blocks: [
                   { type: "heading", fr: "Angle au centre — tour complet = 360°", black: true },
-                  { type: "plain", fr: "Le cercle n'a pas de coins. Cependant, l'angle au centre mesure un secteur circulaire. Un tour complet autour du centre représente 360°." },
-                  { type: "rule", titleFr: "Angles et secteurs", itemsFr: ["Tour complet = 360°", "Demi-cercle = 180°", "Quart de cercle = 90°"] },
+                  { type: "plain", fr: "Le cercle n'a pas d'angles de polygone. On définit un **angle au centre**. Un tour complet fait **360°**." },
+                  { type: "rule", titleFr: "Angles clés", itemsFr: ["Tour complet = 360°", "Demi-cercle = 180°", "Quart de cercle = 90°"] },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M50,50 L50,12 A38,38 0 0 1 84,69 Z' fill='var(--color-accent-alg)' fill-opacity='0.25' stroke='none'/>
-  <line x1='50' y1='50' x2='50' y2='12' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <line x1='50' y1='50' x2='84' y2='69' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M50,26 A24,24 0 0 1 70,63' fill='none' stroke='#f97316' stroke-width='2'/>
+  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <path d='M50,50 L50,12 A38,38 0 0,1 82,68 Z' fill='var(--color-accent-alg)' fill-opacity='0.25' stroke='none'/>
+  <line x1='50' y1='50' x2='50' y2='12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='50' y1='50' x2='82' y2='68' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <path d='M50,35 A15,15 0 0,1 63,57' fill='none' stroke='#f97316' stroke-width='2'/>
+  <circle cx='50' cy='50' r='3' fill='var(--color-accent-alg)'/>
 </svg>`,
                         captionFr: "Angle au centre",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <circle cx='50' cy='50' r='28' fill='none' stroke='#f97316' stroke-width='1.5' stroke-dasharray='5,3'/>
+  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <path d='M12,50 A38,38 0 0,1 88,50 Z' fill='var(--color-accent-alg)' fill-opacity='0.25'/>
+  <line x1='12' y1='50' x2='88' y2='50' stroke='#f97316' stroke-width='2'/>
+  <circle cx='50' cy='50' r='3' fill='#f97316'/>
+  <text x='38' y='43' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>180°</text>
 </svg>`,
-                        captionFr: "Tour complet = 360°",
+                        captionFr: "Demi-cercle = 180°",
                       },
                     ],
                   },
@@ -742,50 +419,29 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "Rayon, diamètre et corde", black: true },
-                  { type: "plain", fr: "Le rayon r va du centre à n'importe quel point du cercle. Le diamètre d est le double du rayon : d = 2r. Une corde est un segment reliant deux points du cercle sans passer par le centre." },
-                  { type: "rule", titleFr: "Éléments du cercle", itemsFr: ["Rayon r : du centre à la circonférence", "Diamètre d = 2r : corde passant par le centre", "Corde : segment entre 2 points du cercle"] },
+                  { type: "heading", fr: "Rayon et diamètre", black: true },
+                  { type: "plain", fr: "Le **rayon r** relie le centre à un point du cercle. Le **diamètre d = 2r** traverse le cercle en passant par le centre." },
+                  { type: "rule", titleFr: "Éléments", itemsFr: ["Rayon r = centre → bord", "Diamètre d = 2 × r"] },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='50' x2='82' y2='29' stroke='#f97316' stroke-width='2.5'/>
-  <circle cx='50' cy='50' r='3' fill='var(--color-accent-alg)'/>
+  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='50' y1='50' x2='88' y2='50' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <circle cx='50' cy='50' r='3' fill='#f97316'/>
+  <text x='62' y='44' font-size='10' fill='#f97316' font-family='sans-serif' font-weight='bold'>r</text>
 </svg>`,
                         captionFr: "Rayon r",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='12' x2='50' y2='88' stroke='#0891b2' stroke-width='2.5'/>
-  <circle cx='50' cy='50' r='3' fill='var(--color-accent-alg)'/>
+  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='50' y1='12' x2='50' y2='88' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+  <circle cx='50' cy='50' r='3' fill='#0891b2'/>
+  <text x='55' y='48' font-size='10' fill='#0891b2' font-family='sans-serif' font-weight='bold'>d=2r</text>
 </svg>`,
                         captionFr: "Diamètre d = 2r",
-                      },
-                    ],
-                  },
-                  {
-                    type: "svg_row",
-                    items: [
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='18' y1='30' x2='82' y2='72' stroke='#16a34a' stroke-width='2.5'/>
-</svg>`,
-                        captionFr: "Corde",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='12' x2='50' y2='88' stroke='#0891b2' stroke-width='1.5' opacity='0.7'/>
-  <line x1='12' y1='50' x2='88' y2='50' stroke='#0891b2' stroke-width='1.5' opacity='0.7'/>
-  <line x1='23' y1='23' x2='77' y2='77' stroke='#0891b2' stroke-width='1.5' opacity='0.7'/>
-  <line x1='77' y1='23' x2='23' y2='77' stroke='#0891b2' stroke-width='1.5' opacity='0.7'/>
-  <circle cx='50' cy='50' r='3' fill='var(--color-accent-alg)'/>
-</svg>`,
-                        captionFr: "Infinité de diamètres",
                       },
                     ],
                   },
@@ -795,28 +451,21 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 label: "Symétrie",
                 blocks: [
                   { type: "heading", fr: "Infinité d'axes de symétrie", black: true },
-                  { type: "plain", fr: "Le cercle possède une infinité d'axes de symétrie. Chaque diamètre est un axe de symétrie. C'est la figure qui a le plus de symétries." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["Infinité d'axes\n(tout diamètre est un axe)"] },
+                  { type: "plain", fr: "Le cercle possède une **infinité d'axes de symétrie**. Tout **diamètre** est un axe de symétrie." },
+                  { type: "rule", titleFr: "Symétrie", itemsFr: ["Tout diamètre est un axe", "→ Infinité d'axes"] },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
   <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "2 axes principaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <circle cx='50' cy='50' r='38' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='50' y1='5' x2='50' y2='95' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='5' y1='50' x2='95' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
   <line x1='15' y1='15' x2='85' y2='85' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
   <line x1='85' y1='15' x2='15' y2='85' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <text x='36' y='27' font-size='9' fill='#16a34a' font-family='sans-serif' font-weight='bold'>∞ axes</text>
 </svg>`,
-                        captionFr: "4 axes parmi l'infini",
+                        captionFr: "Infinité d'axes",
                       },
                     ],
                   },
@@ -825,37 +474,335 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
             ],
           },
 
-          // ─────────────────────────────────────────────
-          // 8. PENTAGONE
-          // ─────────────────────────────────────────────
+          // ── 5. RECTANGLE ─────────────────────────────────────────
           {
-            id: "pentagone",
-            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'><polygon points='30,6 54,24 46,52 14,52 6,24' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
+            id: "rectangle",
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><rect x='4' y='14' width='52' height='32' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5'/></svg>`,
             tabs: [
               {
                 label: "Angles",
                 blocks: [
-                  { type: "heading", fr: "5 angles — somme = 540°", black: true },
-                  { type: "plain", fr: "Un pentagone a 5 angles. La somme de ses angles est (5−2)×180° = 540°. Dans un pentagone régulier, chaque angle mesure 108°." },
-                  { type: "rule", titleFr: "Somme des angles", itemsFr: ["(5−2) × 180° = 540°", "Régulier : 5 × 108° = 540°"] },
+                  { type: "heading", fr: "4 angles droits de 90°", black: true },
+                  { type: "plain", fr: "Le rectangle a **4 angles droits** (90°). La somme des angles est 4 × 90° = **360°**." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 angles de 90°", "Somme = 360°"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 70' xmlns='http://www.w3.org/2000/svg'>
+  <rect x='10' y='10' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <path d='M10,10 L24,10 L24,24' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M90,10 L90,24 L76,24' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M90,60 L76,60 L76,46' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M10,60 L10,46 L24,46' fill='none' stroke='#f97316' stroke-width='2'/>
+</svg>`,
+                        captionFr: "4 angles droits",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Droites",
+                blocks: [
+                  { type: "heading", fr: "Côtés opposés égaux", black: true },
+                  { type: "plain", fr: "Un rectangle a **2 longueurs** et **2 largeurs** égales. Les côtés opposés sont **parallèles**. Les diagonales sont **égales** et se coupent en leur milieu." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["Longueurs égales (l)", "Largeurs égales (L)", "Diagonales égales"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 70' xmlns='http://www.w3.org/2000/svg'>
+  <rect x='10' y='10' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <!-- Top side (horizontal) — single tick: perpendicular = vertical, mid=(50,10) -->
+  <line x1='50' y1='7' x2='50' y2='13' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Bottom side tick, mid=(50,60) -->
+  <line x1='50' y1='57' x2='50' y2='63' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Left side (vertical) — double tick: perpendicular = horizontal, mid=(10,35) -->
+  <line x1='7' y1='32' x2='13' y2='32' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+  <line x1='7' y1='38' x2='13' y2='38' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side double tick, mid=(90,35) -->
+  <line x1='87' y1='32' x2='93' y2='32' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+  <line x1='87' y1='38' x2='93' y2='38' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+</svg>`,
+                        captionFr: "Côtés opposés égaux (|, ||)",
+                      },
+                      {
+                        markup: `<svg viewBox='0 0 100 70' xmlns='http://www.w3.org/2000/svg'>
+  <rect x='10' y='10' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='10' y1='10' x2='90' y2='60' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <line x1='90' y1='10' x2='10' y2='60' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <circle cx='50' cy='35' r='4' fill='#f97316'/>
+</svg>`,
+                        captionFr: "Diagonales égales — milieu O",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Symétrie",
+                blocks: [
+                  { type: "heading", fr: "2 axes de symétrie", black: true },
+                  { type: "plain", fr: "Le rectangle possède **2 axes de symétrie** : l'axe horizontal et l'axe vertical passant par les milieux des côtés opposés." },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 70' xmlns='http://www.w3.org/2000/svg'>
+  <rect x='10' y='10' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+  <line x1='50' y1='2' x2='50' y2='68' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <line x1='2' y1='35' x2='98' y2='35' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+</svg>`,
+                        captionFr: "2 axes de symétrie",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ── 6. LOSANGE ────────────────────────────────────────────
+          {
+            id: "losange",
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><polygon points='30,6 54,30 30,54 6,30' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            tabs: [
+              {
+                label: "Angles",
+                blocks: [
+                  { type: "heading", fr: "Angles opposés égaux — somme = 360°", black: true },
+                  { type: "plain", fr: "Le losange a **4 angles**. Les angles opposés sont **égaux**. Les angles adjacents sont **supplémentaires** (α + β = 180°)." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["Angles opposés égaux (α = α, β = β)", "Angles adjacents : α + β = 180°", "Somme = 360°"] },
                   {
                     type: "svg_row",
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,37 74,82 26,82 10,37' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M41,22 A13,13 0 0 1 59,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M14,41 A12,12 0 0 1 22,50' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M78,41 A12,12 0 0 0 86,50' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M20,76 A12,12 0 0 1 28,84' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
-  <path d='M72,84 A12,12 0 0 1 80,76' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5' opacity='0.7'/>
+  <polygon points='50,8 88,50 50,92 12,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Angle arc at top (narrow) -->
+  <path d='M50,8 m8,14 A14,14 0 0,1 42,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at bottom (narrow, equal to top) -->
+  <path d='M50,92 m-8,-14 A14,14 0 0,1 58,78' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at left (wide) -->
+  <path d='M12,50 m12,-8 A12,12 0 0,1 20,58' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <!-- Angle arc at right (wide, equal to left) -->
+  <path d='M88,50 m-12,-8 A12,12 0 0,0 80,58' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <text x='45' y='38' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='45' y='68' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='20' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='73' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+</svg>`,
+                        captionFr: "Angles opposés égaux",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Droites",
+                blocks: [
+                  { type: "heading", fr: "4 côtés égaux — diagonales perpendiculaires", black: true },
+                  { type: "plain", fr: "Le losange a **4 côtés égaux**. Les côtés opposés sont **parallèles**. Les diagonales se **coupent en leur milieu** et sont **perpendiculaires**." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["4 côtés égaux", "Côtés opposés parallèles", "Diagonales ⊥ et se coupent en milieu"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Losange: A=(50,8) B=(88,50) C=(50,92) D=(12,50) -->
+  <polygon points='50,8 88,50 50,92 12,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- AB: A=(50,8) B=(88,50) dir=(38,42) len=56.6 norm=(0.671,0.742) perp=(-0.742,0.671) mid=(69,29) -->
+  <!-- tick from (69+3.7,29-3.4) to (69-3.7,29+3.4) = (72.7,25.6) to (65.3,32.4) -->
+  <line x1='72.7' y1='25.6' x2='65.3' y2='32.4' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- BC: B=(88,50) C=(50,92) dir=(-38,42) len=56.6 norm=(-0.671,0.742) perp=(-0.742,-0.671) mid=(69,71) -->
+  <!-- tick from (69+3.7,71+3.4) to (69-3.7,71-3.4) = (72.7,74.4) to (65.3,67.6) -->
+  <line x1='72.7' y1='74.4' x2='65.3' y2='67.6' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- CD: C=(50,92) D=(12,50) dir=(-38,-42) len=56.6 norm=(-0.671,-0.742) perp=(0.742,-0.671) mid=(31,71) -->
+  <!-- tick from (31-3.7,71+3.4) to (31+3.7,71-3.4) = (27.3,74.4) to (34.7,67.6) -->
+  <line x1='27.3' y1='74.4' x2='34.7' y2='67.6' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- DA: D=(12,50) A=(50,8) dir=(38,-42) len=56.6 norm=(0.671,-0.742) perp=(0.742,0.671) mid=(31,29) -->
+  <!-- tick from (31-3.7,29-3.4) to (31+3.7,29+3.4) = (27.3,25.6) to (34.7,32.4) -->
+  <line x1='27.3' y1='25.6' x2='34.7' y2='32.4' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+</svg>`,
+                        captionFr: "4 côtés égaux",
+                      },
+                      {
+                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 88,50 50,92 12,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='8' x2='50' y2='92' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <line x1='12' y1='50' x2='88' y2='50' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <path d='M44,50 L50,44 L56,50 L50,56 Z' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <circle cx='50' cy='50' r='3' fill='#f97316'/>
+</svg>`,
+                        captionFr: "Diagonales ⊥ en O",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Symétrie",
+                blocks: [
+                  { type: "heading", fr: "2 axes de symétrie (les diagonales)", black: true },
+                  { type: "plain", fr: "Le losange possède **2 axes de symétrie** : ses deux diagonales." },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 88,50 50,92 12,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='2' x2='50' y2='98' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <line x1='2' y1='50' x2='98' y2='50' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+</svg>`,
+                        captionFr: "2 axes de symétrie",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ── 7. PARALLÉLOGRAMME ────────────────────────────────────
+          {
+            id: "parallelogramme",
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><polygon points='8,48 48,48 52,12 12,12' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            tabs: [
+              {
+                label: "Angles",
+                blocks: [
+                  { type: "heading", fr: "Angles opposés égaux — somme = 360°", black: true },
+                  { type: "plain", fr: "Le parallélogramme a **4 angles**. Les angles opposés sont **égaux**. Les angles adjacents sont **supplémentaires** (α + β = 180°)." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["Angles opposés égaux", "Angles adjacents : α + β = 180°", "Somme = 360°"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Parallelogram: A=(10,70) B=(80,70) C=(90,10) D=(20,10) -->
+  <polygon points='10,70 80,70 90,10 20,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Angle arc at A (acute): A=(10,70), sides go to B=(80,70) and D=(20,10) -->
+  <path d='M10,70 m12,-2 A12,12 0 0,1 16,56' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at C (acute, equal to A): C=(90,10) -->
+  <path d='M90,10 m-12,2 A12,12 0 0,1 84,24' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at B (obtuse): B=(80,70) -->
+  <path d='M80,70 m-10,-4 A10,10 0 0,0 74,58' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <!-- Angle arc at D (obtuse, equal to B): D=(20,10) -->
+  <path d='M20,10 m10,4 A10,10 0 0,0 26,22' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <text x='16' y='58' font-size='8.5' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='79' y='23' font-size='8.5' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='63' y='58' font-size='8.5' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='26' y='23' font-size='8.5' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+</svg>`,
+                        captionFr: "Angles opposés égaux",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Droites",
+                blocks: [
+                  { type: "heading", fr: "Côtés opposés égaux et parallèles", black: true },
+                  { type: "plain", fr: "Dans un parallélogramme, les côtés opposés sont **égaux** et **parallèles**. Les diagonales **se coupent en leur milieu**." },
+                  { type: "rule", titleFr: "Propriétés", itemsFr: ["Côtés opposés égaux et parallèles", "Diagonales se coupent en milieu"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <!-- A=(10,70) B=(80,70) C=(90,10) D=(20,10) -->
+  <polygon points='10,70 80,70 90,10 20,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Top side DC: D=(20,10) C=(90,10) horizontal, mid=(55,10) — single tick vertical -->
+  <line x1='55' y1='7' x2='55' y2='13' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Bottom side AB: A=(10,70) B=(80,70) horizontal, mid=(45,70) — single tick -->
+  <line x1='45' y1='67' x2='45' y2='73' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Left side AD: A=(10,70) D=(20,10) dir=(10,-60) len=60.8 norm=(0.164,-0.986) perp=(0.986,0.164) mid=(15,40) -->
+  <!-- tick: (15-4.9,40-0.8) to (15+4.9,40+0.8) = (10.1,39.2) to (19.9,40.8) -->
+  <line x1='10.1' y1='39.2' x2='19.9' y2='40.8' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- Right side BC: B=(80,70) C=(90,10) dir=(10,-60) len=60.8 norm=(0.164,-0.986) perp=(0.986,0.164) mid=(85,40) -->
+  <line x1='80.1' y1='39.2' x2='89.9' y2='40.8' stroke='#0891b2' stroke-width='2.5' stroke-linecap='round'/>
+</svg>`,
+                        captionFr: "Côtés opposés égaux et ∥",
+                      },
+                      {
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='10,70 80,70 90,10 20,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='10' y1='70' x2='90' y2='10' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <line x1='20' y1='10' x2='80' y2='70' stroke='var(--color-accent-alg)' stroke-width='1.5' stroke-dasharray='3,2' opacity='0.6'/>
+  <circle cx='50' cy='40' r='4' fill='#f97316'/>
+</svg>`,
+                        captionFr: "Diagonales — milieu O",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Symétrie",
+                blocks: [
+                  { type: "heading", fr: "0 axe — symétrie centrale", black: true },
+                  { type: "plain", fr: "Le parallélogramme quelconque n'a **aucun axe de symétrie axiale**. Il admet une **symétrie centrale** en O (intersection des diagonales)." },
+                  { type: "rule", titleFr: "Symétrie", itemsFr: ["0 axe de symétrie axiale", "1 centre de symétrie : O"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='10,70 80,70 90,10 20,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='10' y1='70' x2='90' y2='10' stroke='var(--color-accent-alg)' stroke-width='1.2' stroke-dasharray='3,2' opacity='0.5'/>
+  <line x1='20' y1='10' x2='80' y2='70' stroke='var(--color-accent-alg)' stroke-width='1.2' stroke-dasharray='3,2' opacity='0.5'/>
+  <circle cx='50' cy='40' r='6' fill='none' stroke='#f97316' stroke-width='2'/>
+  <circle cx='50' cy='40' r='2.5' fill='#f97316'/>
+  <text x='57' y='38' font-size='8' fill='#f97316' font-family='sans-serif' font-weight='bold'>O</text>
+</svg>`,
+                        captionFr: "Symétrie centrale en O",
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+
+          // ── 8. PENTAGONE ──────────────────────────────────────────
+          {
+            id: "pentagone",
+            svg: `<svg viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg' style='width:100%;height:100%;display:block'><polygon points='30,6 54,24 46,52 14,52 6,24' fill='var(--color-accent-alg)' fill-opacity='0.14' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/></svg>`,
+            tabs: [
+              {
+                label: "Angles",
+                blocks: [
+                  { type: "heading", fr: "5 angles — somme = 540°", black: true },
+                  { type: "plain", fr: "Un pentagone a **5 angles**. La somme est **(5 − 2) × 180° = 540°**. Dans un pentagone **régulier**, chaque angle mesure **108°**." },
+                  { type: "rule", titleFr: "Formule", itemsFr: ["(5 − 2) × 180° = 540°", "Régulier : 5 × 108° = 540°"] },
+                  {
+                    type: "svg_row",
+                    items: [
+                      {
+                        markup: `<svg viewBox='0 0 100 95' xmlns='http://www.w3.org/2000/svg'>
+  <!-- Pentagon: A=(50,8) B=(90,36) C=(75,80) D=(25,80) E=(10,36) -->
+  <polygon points='50,8 90,36 75,80 25,80 10,36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Angle arc at A=(50,8) -->
+  <path d='M50,8 m10,14 A14,14 0 0,1 40,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc at B=(90,36) -->
+  <path d='M90,36 m-13,4 A12,12 0 0,1 82,46' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc at C=(75,80) -->
+  <path d='M75,80 m-8,-9 A10,10 0 0,1 68,72' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc at D=(25,80) -->
+  <path d='M25,80 m8,-9 A10,10 0 0,0 32,72' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- Angle arc at E=(10,36) -->
+  <path d='M10,36 m13,4 A12,12 0 0,0 18,46' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <text x='35' y='82' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>Somme = 540°</text>
 </svg>`,
                         captionFr: "5 angles, somme 540°",
                       },
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,37 74,82 26,82 10,37' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M40,24 A14,14 0 0 1 60,24' fill='none' stroke='#f97316' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 95' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 90,36 75,80 25,80 10,36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <path d='M50,8 m12,16 A16,16 0 0,1 38,24' fill='none' stroke='#f97316' stroke-width='2'/>
+  <text x='39' y='38' font-size='8.5' fill='#f97316' font-family='sans-serif' font-weight='bold'>108°</text>
 </svg>`,
                         captionFr: "Régulier : 108° chacun",
                       },
@@ -866,28 +813,32 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Droites",
                 blocks: [
-                  { type: "heading", fr: "5 côtés", black: true },
-                  { type: "plain", fr: "Un pentagone a 5 côtés. Dans un pentagone régulier, les 5 côtés sont égaux. Un pentagone quelconque peut avoir des côtés de longueurs différentes." },
+                  { type: "heading", fr: "5 côtés égaux (régulier)", black: true },
+                  { type: "plain", fr: "Un pentagone **régulier** a **5 côtés égaux**. Un pentagone quelconque n'a aucune contrainte sur ses côtés." },
                   { type: "rule", titleFr: "Côtés", itemsFr: ["Régulier : 5 côtés égaux", "Quelconque : côtés libres"] },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,37 74,82 26,82 10,37' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='66' y1='19' x2='74' y2='27' stroke='#f97316' stroke-width='2'/>
-  <line x1='79' y1='58' x2='85' y2='65' stroke='#f97316' stroke-width='2'/>
-  <line x1='47' y1='79' x2='53' y2='85' stroke='#f97316' stroke-width='2'/>
-  <line x1='15' y1='58' x2='21' y2='65' stroke='#f97316' stroke-width='2'/>
-  <line x1='26' y1='19' x2='34' y2='27' stroke='#f97316' stroke-width='2'/>
+                        markup: `<svg viewBox='0 0 100 95' xmlns='http://www.w3.org/2000/svg'>
+  <!-- A=(50,8) B=(90,36) C=(75,80) D=(25,80) E=(10,36) -->
+  <polygon points='50,8 90,36 75,80 25,80 10,36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- AB: A=(50,8) B=(90,36) dir=(40,28) len=48.8 norm=(0.820,0.574) perp=(-0.574,0.820) mid=(70,22) -->
+  <!-- tick: (70+2.9,22-4.1) to (70-2.9,22+4.1) = (72.9,17.9) to (67.1,26.1) -->
+  <line x1='72.9' y1='17.9' x2='67.1' y2='26.1' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- BC: B=(90,36) C=(75,80) dir=(-15,44) len=46.5 norm=(-0.323,0.947) perp=(-0.947,-0.323) mid=(82.5,58) -->
+  <!-- tick: (82.5+4.7,58+1.6) to (82.5-4.7,58-1.6) = (87.2,59.6) to (77.8,56.4) -->
+  <line x1='87.2' y1='59.6' x2='77.8' y2='56.4' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- CD: C=(75,80) D=(25,80) horizontal, mid=(50,80) — vertical tick -->
+  <line x1='50' y1='77' x2='50' y2='83' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- DE: D=(25,80) E=(10,36) dir=(-15,-44) len=46.5 norm=(-0.323,-0.947) perp=(0.947,-0.323) mid=(17.5,58) -->
+  <!-- tick: (17.5-4.7,58+1.6) to (17.5+4.7,58-1.6) = (12.8,59.6) to (22.2,56.4) -->
+  <line x1='12.8' y1='59.6' x2='22.2' y2='56.4' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
+  <!-- EA: E=(10,36) A=(50,8) dir=(40,-28) len=48.8 norm=(0.820,-0.574) perp=(0.574,0.820) mid=(30,22) -->
+  <!-- tick: (30-2.9,22-4.1) to (30+2.9,22+4.1) = (27.1,17.9) to (32.9,26.1) -->
+  <line x1='27.1' y1='17.9' x2='32.9' y2='26.1' stroke='#f97316' stroke-width='2.5' stroke-linecap='round'/>
 </svg>`,
                         captionFr: "Régulier : 5 côtés égaux",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,10 85,30 80,80 20,85 12,35' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-</svg>`,
-                        captionFr: "Quelconque : côtés libres",
                       },
                     ],
                   },
@@ -896,27 +847,20 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               {
                 label: "Symétrie",
                 blocks: [
-                  { type: "heading", fr: "Pentagone régulier : 5 axes de symétrie", black: true },
-                  { type: "plain", fr: "Le pentagone régulier possède 5 axes de symétrie. Chaque axe passe par un sommet et le milieu du côté opposé. Un pentagone quelconque n'a aucun axe de symétrie." },
-                  { type: "rule", titleFr: "Axes de symétrie", itemsFr: ["Régulier : 5 axes de symétrie"] },
+                  { type: "heading", fr: "Régulier : 5 axes de symétrie", black: true },
+                  { type: "plain", fr: "Le pentagone **régulier** possède **5 axes de symétrie**. Chaque axe passe par un sommet et le milieu du côté opposé." },
+                  { type: "rule", titleFr: "Axes", itemsFr: ["Régulier : 5 axes de symétrie", "Quelconque : 0 axe"] },
                   {
                     type: "svg_row",
                     items: [
                       {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,37 74,82 26,82 10,37' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='3' x2='50' y2='97' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
-</svg>`,
-                        captionFr: "1 axe (sommet → milieu opposé)",
-                      },
-                      {
-                        markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='50,8 90,37 74,82 26,82 10,37' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <line x1='50' y1='3' x2='50' y2='97' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='90' y1='37' x2='23' y2='59' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='74' y1='82' x2='30' y2='22' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='26' y1='82' x2='70' y2='22' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
-  <line x1='10' y1='37' x2='77' y2='59' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+                        markup: `<svg viewBox='0 0 100 95' xmlns='http://www.w3.org/2000/svg'>
+  <polygon points='50,8 90,36 75,80 25,80 10,36' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <line x1='50' y1='2' x2='50' y2='82' stroke='#16a34a' stroke-width='1.8' stroke-dasharray='4,3'/>
+  <line x1='2' y1='56' x2='82' y2='24' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='98' y1='56' x2='18' y2='24' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='12' y1='10' x2='78' y2='90' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
+  <line x1='88' y1='10' x2='22' y2='90' stroke='#16a34a' stroke-width='1.5' stroke-dasharray='4,3'/>
 </svg>`,
                         captionFr: "5 axes de symétrie",
                       },
@@ -926,19 +870,54 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
               },
             ],
           },
+
         ],
       },
     ],
   },
+
   exercises: [
-    { id: "g1-4-e1", promptFr: "Un angle de 75° est-il aigu ou obtus ?", type: "short_text", acceptable: ["aigu"] },
-    { id: "g1-4-e2", promptFr: "Deux angles complémentaires : l'un est 35°. Quel est l'autre (en °) ?", type: "number", acceptable: ["55"] },
-    { id: "g1-4-e4", promptFr: "Un angle droit mesure combien de degrés ?", type: "number", acceptable: ["90"] },
-    { id: "g1-3-e1", promptFr: "Quel quadrilatère a 4 côtés égaux ET 4 angles droits ?", type: "short_text", acceptable: ["carré"] },
-    { id: "g1-3-e3", promptFr: "Quel quadrilatère a exactement une paire de côtés parallèles ?", type: "short_text", acceptable: ["trapèze", "trapeze"] },
-    { id: "g1-3-e5", promptFr: "Tous les carrés sont-ils des rectangles ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g1-2-e1", promptFr: "Combien d'axes de symétrie a un carré ?", type: "number", acceptable: ["4"] },
-    { id: "g1-2-e3", promptFr: "Combien d'axes de symétrie a un triangle équilatéral ?", type: "number", acceptable: ["3"] },
-    { id: "g1-2-e5", promptFr: "Combien d'axes de symétrie a un cercle ? (beaucoup/infini/zéro)", type: "short_text", acceptable: ["infini", "infinité"] },
+    {
+      id: "g1-2-e1",
+      promptFr: "Combien d'axes de symétrie a un carré ?",
+      type: "number",
+      acceptable: ["4"],
+    },
+    {
+      id: "g1-2-e2",
+      promptFr: "Quelle est la somme des angles intérieurs d'un triangle (en °) ?",
+      type: "number",
+      acceptable: ["180"],
+    },
+    {
+      id: "g1-2-e3",
+      promptFr: "Combien d'axes de symétrie a un triangle équilatéral ?",
+      type: "number",
+      acceptable: ["3"],
+    },
+    {
+      id: "g1-2-e4",
+      promptFr: "Un losange a combien d'axes de symétrie ?",
+      type: "number",
+      acceptable: ["2"],
+    },
+    {
+      id: "g1-2-e5",
+      promptFr: "Combien d'axes de symétrie a un cercle ? Répondre : infini",
+      type: "short_text",
+      acceptable: ["infini", "infinité", "∞"],
+    },
+    {
+      id: "g1-2-e6",
+      promptFr: "Quelle est la somme des angles d'un pentagone (en °) ?",
+      type: "number",
+      acceptable: ["540"],
+    },
+    {
+      id: "g1-2-e7",
+      promptFr: "Un rectangle a combien d'axes de symétrie ?",
+      type: "number",
+      acceptable: ["2"],
+    },
   ],
 };
