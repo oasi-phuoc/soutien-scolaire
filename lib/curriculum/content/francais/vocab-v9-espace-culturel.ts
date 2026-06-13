@@ -18,7 +18,7 @@ export const V9_ESPACE_CULTUREL_THEME: VocabTheme = {
     { word: "peintre", image: "peintre.jpg",    article: "le",  gender: "m", definition: "artiste qui crée des tableaux" },
     { word: "danseur", image: "danseur.jpg",    article: "le",  gender: "m", feminine: "danseuse",  definition: "artiste qui pratique la danse" },
     { word: "billet", image: "billet.jpg",     article: "le",  gender: "m", definition: "titre d'entrée pour un spectacle ou musée" },
-    { word: "salle", image: "salle.jpg",      article: "la",  gender: "f", definition: "espace où se déroule un spectacle" },
+    { word: "salle", image: "/vocab/images/V5/salle.png",      article: "la",  gender: "f", definition: "espace où se déroule un spectacle" },
     { word: "scène", image: "scene.jpg",      article: "la",  gender: "f", definition: "plateforme où se produit l'artiste" },
     { word: "festival", image: "festival.jpg",   article: "le",  gender: "m", definition: "événement culturel regroupant plusieurs spectacles" },
   ],

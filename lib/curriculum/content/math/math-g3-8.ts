@@ -4,52 +4,47 @@ export const MATH_G3_8_LESSON: MathSubmoduleLesson = {
   submoduleId: "G3-8",
   submoduleCode: "G3.8",
   theory: {
-    title: { fr: "Figures à trous" },
+    title: { fr: "Figures composées" },
     blocks: [
-      { type: "heading", fr: "Figures à trous", black: true },
+      { type: "heading", fr: "Figures composées", black: true },
       {
         type: "plain",
-        fr: "Une **figure à trou** est une grande figure dont on a **retiré** une figure intérieure. On calcule l'aire en **soustrayant**.",
+        fr: "Une **figure composée** est formée de plusieurs figures simples assemblées. On calcule son aire en **additionnant** les aires de chaque partie.",
       },
 
-      { type: "rule", titleFr: "Formule", itemsFr: ["A = A_grande − A_trou"] },
+      { type: "rule", titleFr: "Méthode", itemsFr: ["A_totale = A₁ + A₂ + A₃ + …"] },
 
-      {
-        type: "svg_row",
-        items: [
-          {
-            markup: `<svg viewBox='0 0 120 100' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
-  <path d='M 10,10 L 110,10 L 110,90 L 10,90 Z M 35,30 L 85,30 L 85,70 L 35,70 Z' fill='var(--color-accent-alg)' fill-opacity='0.20' fill-rule='evenodd' stroke='var(--color-accent-alg)' stroke-width='2'/>
-</svg>`,
-            captionFr: "Cadre rectangulaire",
-          },
-          {
-            markup: `<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
-  <circle cx='60' cy='60' r='50' fill='var(--color-accent-alg)' fill-opacity='0.20' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <circle cx='60' cy='60' r='25' fill='white' stroke='var(--color-accent-alg)' stroke-width='2'/>
-</svg>`,
-            captionFr: "Anneau circulaire",
-          },
-        ],
-      },
-
-      { type: "highlight", fr: "Exemple 1 — cadre rectangulaire" },
+      { type: "highlight", fr: "Démarche" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Extérieur 12 × 8 cm, intérieur 8 × 4 cm :",
-          "A = (12 × 8) − (8 × 4) = 96 − 32 = **64 cm²**",
+          "**1.** Identifier et dessiner les figures simples qui composent la figure.",
+          "**2.** Calculer l'aire de chaque partie séparément.",
+          "**3.** Additionner toutes les aires.",
         ],
       },
 
-      { type: "highlight", fr: "Exemple 2 — anneau" },
+      {
+        type: "svg",
+        markup: `<svg viewBox='0 0 180 165' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:240px;display:block;margin:0 auto'>
+  <rect x='30' y='85' width='120' height='70' fill='var(--color-accent-alg)' fill-opacity='0.18' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <polygon points='30,85 150,85 90,20' fill='#f97316' fill-opacity='0.18' stroke='#f97316' stroke-width='2.5' stroke-linejoin='round'/>
+  <text x='90' y='130' text-anchor='middle' font-size='11' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>Rectangle</text>
+  <text x='90' y='62' text-anchor='middle' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>Triangle</text>
+</svg>`,
+        captionFr: "Maison = rectangle + triangle → A = A_rect + A_tri",
+      },
+
+      { type: "highlight", fr: "Exemple" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "Grand disque r = 6 cm, trou r = 3 cm :",
-          "A = π × 6² − π × 3² = π(36 − 9) = 27π ≈ **84,8 cm²**",
+          "Rectangle 6 × 4 cm + triangle base 6, hauteur 3 cm :",
+          "A_rect = 6 × 4 = 24 cm²",
+          "A_tri = (6 × 3) ÷ 2 = 9 cm²",
+          "A_totale = 24 + 9 = **33 cm²**",
         ],
       },
     ],
@@ -57,10 +52,10 @@ export const MATH_G3_8_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [
-    { id: "g3-8-e1", promptFr: "Cadre : extérieur 10×8 cm, intérieur 6×4 cm. Aire du cadre = ?", type: "number", acceptable: ["56"] },
-    { id: "g3-8-e2", promptFr: "Carré 10×10 cm avec trou carré 4×4 cm. Aire restante = ?", type: "number", acceptable: ["84"] },
-    { id: "g3-8-e3", promptFr: "Anneau : rayon extérieur 5 cm, rayon intérieur 3 cm (π ≈ 3,14). Aire ≈ ?", type: "number", acceptable: ["50,24", "50.24"] },
-    { id: "g3-8-e4", promptFr: "Rectangle 12×7 cm avec disque de rayon 2 cm découpé (π ≈ 3,14). Aire ≈ ?", type: "number", acceptable: ["71,44", "71.44"] },
-    { id: "g3-8-e5", promptFr: "Grand rectangle 20×10 cm, trou rectangle 5×4 cm. Aire = ?", type: "number", acceptable: ["180"] },
+    { id: "g3-8-e1", promptFr: "Figure : rectangle 6×4 cm + triangle base 6 cm hauteur 3 cm. Aire totale = ?", type: "number", acceptable: ["33"] },
+    { id: "g3-8-e2", promptFr: "Demi-disque de rayon 5 cm (π ≈ 3,14). Aire = ?", type: "number", acceptable: ["39,25", "39.25"] },
+    { id: "g3-8-e3", promptFr: "Carré 8×8 cm + demi-cercle de diamètre 8 cm (π ≈ 3,14). Aire totale ≈ ?", type: "number", acceptable: ["89,12", "89.12"] },
+    { id: "g3-8-e4", promptFr: "Deux rectangles 5×3 cm et 4×2 cm côte à côte. Aire totale = ?", type: "number", acceptable: ["23"] },
+    { id: "g3-8-e5", promptFr: "Rectangle 10×6 cm avec triangle intérieur de base 10 et hauteur 4 coupé. Aire restante = ?", type: "number", acceptable: ["40"] },
   ],
 };

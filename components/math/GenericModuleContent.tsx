@@ -15,6 +15,16 @@ import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
+import {
+  Exercise16 as PlacementRectangleExercise,
+  Exercise25 as PlacementParallelogramExercise,
+  Exercise26 as PlacementTriangleExercise,
+  Exercise27 as PlacementRhombusExercise,
+} from "@/components/math/placement/PlacementExercises16to27";
+import {
+  Exercise37 as PlacementTrapezoidExercise,
+  Exercise38 as PlacementCircleExercise,
+} from "@/components/math/placement/PlacementExercises28to38";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
@@ -195,8 +205,10 @@ type WordLevel = "a1" | "a2" | "b1";
 type WordProblemQ = { textFr: string; answer: number; op: "+" | "-" };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
+type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus";
+type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | GeoPlacementStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -2621,12 +2633,160 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
   );
 }
 
+const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; label: string }>> = {
+  "G3-1": { geoKind: "square", label: "Périmètre et aire du carré" },
+  "G3-2": { geoKind: "rectangle", label: "Périmètre et aire du rectangle" },
+  "G3-3": { geoKind: "triangle", label: "Périmètre et aire du triangle" },
+  "G3-4": { geoKind: "parallelogram", label: "Périmètre et aire du parallélogramme" },
+  "G3-5": { geoKind: "trapezoid", label: "Périmètre et aire du trapèze" },
+  "G3-6": { geoKind: "circle", label: "Périmètre et aire du disque" },
+  "G3-7": { geoKind: "rhombus", label: "Périmètre et aire du losange" },
+};
+
+function GeoLineInput({
+  label,
+  unit,
+  value,
+  answer,
+  onChange,
+  validated,
+}: {
+  label: string;
+  unit: string;
+  value: number;
+  answer: string;
+  onChange: (value: string) => void;
+  validated: boolean;
+}) {
+  const correct = Number.isInteger(value) ? String(value) : value.toFixed(1).replace(".", ",");
+  const wrong = validated && answer.trim().replace(".", ",") !== correct;
+  return (
+    <div className="flex items-center gap-2">
+      <span className="w-24 text-sm text-[var(--color-text-secondary)]">{label} =</span>
+      <div className={`w-20 min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 px-1 py-1 text-center font-mono text-sm ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"}`}>
+        {validated ? (
+          wrong ? (
+            <>
+              {answer.trim() && <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{answer}</span>}
+              <span className="font-bold text-amber-600">{correct}</span>
+            </>
+          ) : (
+            <span>{answer || correct}</span>
+          )
+        ) : (
+          <input
+            type="text"
+            inputMode="decimal"
+            value={answer}
+            onChange={(event) => onChange(event.target.value.replace(/[^0-9,.]/g, ""))}
+            className="h-6 w-full bg-transparent text-center outline-none"
+          />
+        )}
+      </div>
+      <span className="text-sm text-[var(--color-text-secondary)]">{unit}</span>
+    </div>
+  );
+}
+
+function SquareGeoExercise({
+  exerciseKey,
+  validated,
+  validateTrigger,
+  onValidated,
+}: {
+  exerciseKey: number;
+  validated: boolean;
+  validateTrigger: number;
+  onValidated: (score: number, max: number) => void;
+}) {
+  const [data] = useState(() => {
+    const side = rnd(3, 15);
+    return { side, perimeter: 4 * side, area: side * side };
+  });
+  const [answerP, setAnswerP] = useState("");
+  const [answerA, setAnswerA] = useState("");
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    const norm = (value: string) => value.trim().replace(".", ",");
+    let score = 0;
+    if (norm(answerP) === String(data.perimeter)) score++;
+    if (norm(answerA) === String(data.area)) score++;
+    onValidated(score, 2);
+  }, [validateTrigger, answerP, answerA, data, onValidated]);
+
+  return (
+    <div className="space-y-4" data-exercise-key={exerciseKey}>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
+      <svg viewBox="0 0 260 160" width="260" height="160" className="block mx-auto">
+        <rect
+          x="55"
+          y="25"
+          width="110"
+          height="110"
+          fill="var(--color-accent-alg)"
+          fillOpacity={0.15}
+          stroke="var(--color-accent-alg)"
+          strokeWidth="2"
+        />
+        <text x="110" y="17" textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{data.side} cm</text>
+        <text x="177" y="82" textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.side} cm</text>
+      </svg>
+      <div className="space-y-2">
+        <GeoLineInput label="Périmètre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} />
+        <GeoLineInput label="Aire" unit="cm²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} />
+      </div>
+    </div>
+  );
+}
+
+function GeoPlacementExercise({
+  step,
+  exerciseKey,
+  validated,
+  validateTrigger,
+  onValidated,
+}: {
+  step: GeoPlacementStep;
+  exerciseKey: number;
+  validated: boolean;
+  validateTrigger: number;
+  onValidated: (score: number, max: number) => void;
+}) {
+  const common = {
+    exerciseKey,
+    validated,
+    validateTrigger,
+    onValidated,
+  };
+  const ExerciseComponent =
+    step.geoKind === "square" ? SquareGeoExercise :
+    step.geoKind === "rectangle" ? PlacementRectangleExercise :
+    step.geoKind === "triangle" ? PlacementTriangleExercise :
+    step.geoKind === "parallelogram" ? PlacementParallelogramExercise :
+    step.geoKind === "trapezoid" ? PlacementTrapezoidExercise :
+    step.geoKind === "circle" ? PlacementCircleExercise :
+    PlacementRhombusExercise;
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
+      <ExerciseComponent {...common} />
+    </div>
+  );
+}
+
 function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
     const sid = lesson.submoduleId;
-    if (sid === "A2-1" || sid === "A2-2") {
+    const geoPlacement = G3_GEO_PLACEMENT[sid];
+    if (geoPlacement) {
+      steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+    } else if (sid === "A2-1" || sid === "A2-2") {
       const op: ArithOp = sid === "A2-1" ? "+" : "-";
       // Entraînement 1–8
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
@@ -2841,7 +3001,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
-    l.submoduleId === "A3-5" || l.submoduleId === "A3-6"
+    l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
+    !!G3_GEO_PLACEMENT[l.submoduleId]
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -4240,6 +4401,10 @@ export function GenericModuleContent({
   const [tfGcdLcmAnswers, setTfGcdLcmAnswers] = useState<Array<boolean|null>>(() => Array(5).fill(null));
   const [tfGcdLcmValidated, setTfGcdLcmValidated] = useState(false);
   const [tfGcdLcmOverride, setTfGcdLcmOverride] = useState<Record<number, TrueFalseGcdLcmConfig>>({});
+  const [geoValidated, setGeoValidated] = useState(false);
+  const [geoValidateTrigger, setGeoValidateTrigger] = useState(0);
+  const [geoResults, setGeoResults] = useState<boolean[]>([]);
+  const [geoResetKey, setGeoResetKey] = useState(0);
 
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
@@ -4362,6 +4527,10 @@ export function GenericModuleContent({
     setWpAnswers(Array(2).fill(""));
     setWpValidated(false);
     setWpResults([]);
+    setGeoValidated(false);
+    setGeoValidateTrigger(0);
+    setGeoResults([]);
+    setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -4745,6 +4914,8 @@ export function GenericModuleContent({
           const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
           return parseInt(v, 10) === q.answer;
         });
+      } else if (currentStep.kind === "geo_placement") {
+        currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -4787,6 +4958,7 @@ export function GenericModuleContent({
                 : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : es?.kind === "word_problems" ? "Problèmes"
+                : es?.kind === "geo_placement" ? es.label
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -4831,7 +5003,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, geoResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5031,6 +5203,19 @@ export function GenericModuleContent({
       setWpAnswers(Array(cfg.questions.length).fill(""));
       setWpValidated(false);
       setWpResults([]);
+    };
+  }
+
+  if (currentStep?.kind === "geo_placement") {
+    stepCanValidate = !geoValidated;
+    stepValidate = geoValidated ? () => {} : () => {
+      setGeoValidateTrigger((n) => n + 1);
+    };
+    stepReset = () => {
+      setGeoValidated(false);
+      setGeoValidateTrigger(0);
+      setGeoResults([]);
+      setGeoResetKey((k) => k + 1);
     };
   }
 
@@ -6056,6 +6241,21 @@ export function GenericModuleContent({
             </div>
           </div>
         </div>
+      )}
+
+      {/* Geometry exercises imported from the placement test */}
+      {!showEvalScore && currentStep?.kind === "geo_placement" && (
+        <GeoPlacementExercise
+          key={`geo-${stepIdx}-${geoResetKey}`}
+          step={currentStep}
+          exerciseKey={stepIdx * 1000 + geoResetKey}
+          validated={geoValidated}
+          validateTrigger={geoValidateTrigger}
+          onValidated={(score, max) => {
+            setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+            setGeoValidated(true);
+          }}
+        />
       )}
 
       {/* Comparison exercise */}

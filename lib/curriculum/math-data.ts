@@ -235,8 +235,8 @@ export const MATH_MODULES: MathModule[] = [
       sm("G3.4", "Parallélogramme"),
       sm("G3.5", "Trapèze"),
       sm("G3.6", "Disque"),
-      sm("G3.7", "Figures composées"),
-      sm("G3.8", "Figures à trous"),
+      sm("G3.7", "Losange"),
+      sm("G3.8", "Figures composées"),
     ],
   },
   {

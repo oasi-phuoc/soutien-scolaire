@@ -10,7 +10,7 @@ export const V2_METEO_THEME: VocabTheme = {
     { word: "nuage", image: "nuage.jpg",        article: "le",  gender: "m", definition: "masse de vapeur d'eau dans le ciel" },
     { word: "lune", image: "lune.jpg",         article: "la",  gender: "f", definition: "astre qui tourne autour de la Terre et brille la nuit" },
     { word: "étoile", image: "etoile.jpg",       article: "une", gender: "f", definition: "astre lumineux visible dans le ciel la nuit" },
-    { word: "pluie", image: "pluie.jpg",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" },
+    { word: "pluie", image: "pluie.png",        article: "la",  gender: "f", definition: "eau qui tombe du ciel" },
     { word: "vent", image: "vent.jpg",         article: "le",  gender: "m", definition: "mouvement de l'air" },
     { word: "neige", image: "neige.jpg",        article: "la",  gender: "f", definition: "eau gelée qui tombe en flocons blancs" },
     { word: "orage", image: "orage.jpg",        article: "l'",  gender: "m", definition: "tempête avec tonnerre et éclairs" },

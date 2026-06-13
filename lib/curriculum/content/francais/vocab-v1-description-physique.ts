@@ -225,7 +225,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "mince",                           image: "mince.jpg",    group: "Physique", definition: ["peu épais, svelte", "qui n'est pas gros", "de morphologie fine"],
+    { word: "mince",                           image: "mince.png",    group: "Physique", definition: ["peu épais, svelte", "qui n'est pas gros", "de morphologie fine"],
       exampleSentences: {
         a1: [
           "Il est mince.",
@@ -1860,7 +1860,7 @@ export const V1_DESCRIPTION_PHYSIQUE_THEME: VocabTheme = {
         ],
       },
     },
-    { word: "noir",     feminine: "noire",     image: "noir.jpg",     group: "Cheveux",  definition: ["aux cheveux foncés", "de couleur sombre", "cheveux noirs ou très foncés"],
+    { word: "noir",     feminine: "noire",     image: "/vocab/images/V6/noir.svg",     group: "Cheveux",  definition: ["aux cheveux foncés", "de couleur sombre", "cheveux noirs ou très foncés"],
       exampleSentences: {
         a1: [
           "Son carré est noir.",
