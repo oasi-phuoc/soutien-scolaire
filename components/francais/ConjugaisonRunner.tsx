@@ -431,7 +431,7 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {false && showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                             {!skipBullet && <span className="mt-0.5 shrink-0">•</span>}
-                            <span>{renderInlineMarkup(transItems[ii]!, !block.inlineArrows)}</span>
+                            <span>{renderInlineMarkup(transItems?.[ii] ?? "")}</span>
                           </div>
                         )}
                       </li>
@@ -577,7 +577,11 @@ function QcmExercise({
   }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
   const isRtl = pivot === "ar" || pivot === "fa";
+  const translatedInstruction = showTrans
+    ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
+    : undefined;
 
   return (
     <div className="space-y-5">
@@ -786,7 +790,11 @@ function FillExercise({
   }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
   const isRtl = pivot === "ar" || pivot === "fa";
+  const translatedInstruction = showTrans
+    ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
+    : undefined;
 
   return (
     <div className="space-y-5">

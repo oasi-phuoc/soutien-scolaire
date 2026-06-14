@@ -1242,7 +1242,7 @@ function ShapeExplorer({ block }: { block: Extract<MathRichBlock, { type: "shape
   );
 }
 
-function BlockView({ block, blockIdx, tradBlocks, pivot = "fr", showPivot = false }: {
+function BlockView({ block, blockIdx, tradBlocks, pivot = "en", showPivot = false }: {
   block: MathRichBlock;
   blockIdx?: number;
   tradBlocks?: BlockTrad[];
@@ -1251,7 +1251,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot = "fr", showPivot = fals
 }) {
   const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
   const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
-  const usePivot = showPivot && pivot !== "fr";
+  const usePivot = showPivot;
   const textDir = usePivot && isRtl ? "rtl" : "ltr";
   const textLang = usePivot ? pivot : undefined;
   const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? preserveEvidence(fr, pv) : (fr ?? "");
@@ -1636,7 +1636,7 @@ function getWorkspaceStepHint(step: WorkspaceStep | undefined): string | undefin
 function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson; pivot: PivotCode; showPivot: boolean }) {
   const { theory } = lesson;
   const trad = getTrad(lesson.submoduleId);
-  const translatedParagraphs = showPivot && pivot !== "fr" ? trad?.paragraphs?.[pivot] : undefined;
+  const translatedParagraphs = showPivot ? trad?.paragraphs?.[pivot] : undefined;
   const paragraphs = translatedParagraphs?.length ? translatedParagraphs : theory.paragraphs.fr;
   const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
   return (
@@ -1665,7 +1665,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const { showPivot: showPivotTranslation } = useTranslation();
   const lessonTrad = lesson ? getTrad(lesson.submoduleId) : undefined;
   const promptFor = useCallback((promptFr: string) => {
-    if (!showPivotTranslation || pivot === "fr") return promptFr;
+    if (!showPivotTranslation) return promptFr;
     return lessonTrad?.consignes?.[promptFr]?.[pivot] ?? promptFr;
   }, [lessonTrad, pivot, showPivotTranslation]);
 
