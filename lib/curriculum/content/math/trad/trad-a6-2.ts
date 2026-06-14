@@ -22,137 +22,487 @@ export const TRAD_A6_2: SubmoduleTrad = {
   ),
   paragraphs: A(
     [
-      "Pour calculer **p%** d'un nombre **N**, on multiplie **N** par **p/100**.",
+      "Pour calculer p% d'un nombre N, on multiplie N par p/100 (ou par le décimal équivalent).",
       "On peut aussi convertir le pourcentage en nombre décimal : 20% = 0,20.",
       "Exemple : 20% de 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "To calculate **p%** of a number **N**, multiply **N** by **p/100**.",
+      "To calculate p% of a number N, multiply N by p/100 (or the equivalent decimal).",
       "You can also convert the percentage into a decimal: 20% = 0.20.",
       "Example: 20% of 150 = 150 × 20/100 = 150 × 0.20 = 30.",
     ],
     [
-      "لحساب **p%** من عدد **N** نضرب **N** في **p/100**.",
+      "لحساب p% من عدد N نضرب N في p/100 (أو ما يعادله من الأعداد العشرية).",
       "يمكننا أيضا تحويل النسبة المئوية إلى عدد عشري: 20% = 0,20.",
       "مثال: 20% من 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "برای محاسبه **p%** از عدد **N**، عدد **N** را در **p/100** ضرب می‌کنیم.",
+      "برای محاسبه p% از عدد N، عدد N را در p/100 (یا معادل اعشاری آن) ضرب می‌کنیم.",
       "همچنین می‌توان درصد را به عدد اعشاری تبدیل کرد: 20% = 0,20.",
       "مثال: 20% از 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "**p%** ናይ **N** ንምሕሳብ፣ **N** ብ **p/100** ንበዝሖ።",
+      "p% ናይ N ንምሕሳብ፣ N ብ p/100 (ወይ ብዝምልከቶ ዲሲማል) ንበዝሖ።",
       "ሚእታዊ ናብ ዲሲማል ክንቕይሮ ንኽእል፦ 20% = 0,20።",
       "ኣብነት፦ 20% ናይ 150 = 150 × 20/100 = 150 × 0,20 = 30።",
     ],
     [
-      "Щоб обчислити **p%** від числа **N**, множимо **N** на **p/100**.",
+      "Щоб обчислити p% від числа N, множимо N на p/100 (або на еквівалентне десяткове число).",
       "Також можна перетворити відсоток у десяткове число: 20% = 0,20.",
       "Приклад: 20% від 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "Para calcular **p%** de um número **N**, multiplica-se **N** por **p/100**.",
+      "Para calcular p% de um número N, multiplica-se N por p/100 (ou pelo decimal equivalente).",
       "Também se pode converter a percentagem num decimal: 20% = 0,20.",
       "Exemplo: 20% de 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "Si loo xisaabiyo **p%** oo ka mid ah tiro **N**, **N** waxaa lagu dhuftaa **p/100**.",
+      "Si loo xisaabiyo p% oo ka mid ah tiro N, N waxaa lagu dhuftaa p/100 (ama jajabka tobanle ee u dhigma).",
       "Boqolleyda sidoo kale waxaa loo rogi karaa tiro jajab tobanle ah: 20% = 0,20.",
       "Tusaale: 20% oo ka mid ah 150 = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "Bir **N** sayısının **p%**'sini bulmak için **N** sayısını **p/100** ile çarparız.",
+      "Bir N sayısının p%'sini hesaplamak için N sayısını p/100 (veya eşdeğer ondalık) ile çarparız.",
       "Yüzdeyi ondalık sayıya da çevirebiliriz: 20% = 0,20.",
       "Örnek: 150'nin 20%'si = 150 × 20/100 = 150 × 0,20 = 30.",
     ],
     [
-      "د **N** عدد **p%** د موندلو لپاره **N** په **p/100** ضربوو.",
+      "د N عدد p% د محاسبې لپاره N د p/100 (يا برابر اعشاري عدد) سره ضربوو.",
       "سلنه اعشاري عدد ته هم اړول کېدای شي: 20% = 0,20.",
       "بېلګه: د 150، 20% = 150 × 20/100 = 150 × 0,20 = 30.",
     ]
   ),
   blocks: [
-    { text: S("Calculer un pourcentage d'une quantité", "Calculate a percentage of a quantity", "حساب نسبة مئوية من كمية", "محاسبه درصدی از یک مقدار", "ሚእታዊ ናይ መጠን ምሕሳብ", "Обчислити відсоток від величини", "Calcular uma percentagem de uma quantidade", "Xisaabinta boqolley ka mid ah qaddar", "Bir miktarın yüzdesini hesaplama", "د يو مقدار سلنه محاسبه کول") },
+    // Block 0: heading "Comment calculer le pourcentage" (black)
     { text: S(
-      "Pour trouver **p%** d'un nombre **N**, on multiplie ce nombre par le pourcentage converti en décimal. C'est utile pour les promotions, les taxes et les intérêts.",
-      "To find **p%** of a number **N**, multiply the number by the percentage converted into a decimal. This is useful for discounts, taxes, and interest.",
-      "لإيجاد **p%** من عدد **N** نضرب العدد في النسبة بعد تحويلها إلى عدد عشري. هذا مفيد في التخفيضات والضرائب والفوائد.",
-      "برای یافتن **p%** از عدد **N**، عدد را در درصد تبدیل‌شده به اعشار ضرب می‌کنیم. این کار برای تخفیف، مالیات و بهره مفید است.",
-      "**p%** ናይ **N** ንምርካብ፣ ነቲ ቁጽሪ ብዲሲማል ዝተቐየረ ሚእታዊ ንበዝሖ። ንቅናሽ፣ ቀረጽን ወለድን ይጠቅም።",
-      "Щоб знайти **p%** від числа **N**, множимо це число на відсоток, перетворений у десяткове число. Це корисно для знижок, податків і відсотків.",
-      "Para encontrar **p%** de um número **N**, multiplica-se o número pela percentagem convertida em decimal. Isto é útil para promoções, impostos e juros.",
-      "Si loo helo **p%** oo ka mid ah tiro **N**, tirada waxaa lagu dhuftaa boqolleyda loo beddelay jajab tobanle. Tani waxay waxtar u leedahay qiimo-dhimis, canshuur iyo dulsaar.",
-      "Bir **N** sayısının **p%**'sini bulmak için sayıyı ondalığa çevrilmiş yüzde ile çarparız. Bu indirim, vergi ve faizlerde işe yarar.",
-      "د **N** عدد **p%** د موندلو لپاره عدد د اعشاري شوې سلنې سره ضربوو. دا د تخفیف، مالیې او ګټې لپاره ګټور دی."
+      "Comment calculer le pourcentage",
+      "How to calculate a percentage",
+      "كيفية حساب النسبة المئوية",
+      "چگونه درصد را محاسبه کنیم",
+      "ሚእታዊ ብኸምዚ ይሕሰብ",
+      "Як обчислити відсоток",
+      "Como calcular a percentagem",
+      "Sida loo xisaabiyo boqolleyda",
+      "Yüzde nasıl hesaplanır",
+      "سلنه څنګه محاسبه کړو"
     ) },
-    { text: S("Formule", "Formula", "الصيغة", "فرمول", "ቀመር", "Формула", "Fórmula", "Qaaciddo", "Formül", "فورمول"), items: A(
-      ["**p% de N** = N × p ÷ 100", "Équivalent : N × (p/100) ou N × le décimal correspondant"],
-      ["**p% of N** = N × p ÷ 100", "Equivalent: N × (p/100) or N × the matching decimal"],
-      ["**p% من N** = N × p ÷ 100", "المكافئ: N × (p/100) أو N × العدد العشري الموافق"],
-      ["**p% از N** = N × p ÷ 100", "معادل: N × (p/100) یا N × عدد اعشاری متناظر"],
-      ["**p% ናይ N** = N × p ÷ 100", "ተመሳሳሊ፦ N × (p/100) ወይ N × ዝምልከት ዲሲማል"],
-      ["**p% від N** = N × p ÷ 100", "Еквівалент: N × (p/100) або N × відповідне десяткове число"],
-      ["**p% de N** = N × p ÷ 100", "Equivalente: N × (p/100) ou N × o decimal correspondente"],
-      ["**p% ee N** = N × p ÷ 100", "U dhiganta: N × (p/100) ama N × jajabka tobanle ee ku habboon"],
-      ["**N'nin p%**'si = N × p ÷ 100", "Eşdeğer: N × (p/100) veya N × uygun ondalık"],
-      ["**د N، p%** = N × p ÷ 100", "معادل: N × (p/100) يا N × اړوند اعشاري عدد"]
+    // Block 1: plain
+    { text: S(
+      "Pour calculer p% d'un nombre N, on multiplie N par p/100 (ou par le décimal équivalent).",
+      "To calculate p% of a number N, multiply N by p/100 (or the equivalent decimal).",
+      "لحساب p% من عدد N نضرب N في p/100 (أو ما يعادله من الأعداد العشرية).",
+      "برای محاسبه p% از عدد N، عدد N را در p/100 (یا معادل اعشاری آن) ضرب می‌کنیم.",
+      "p% ናይ N ንምሕሳብ፣ N ብ p/100 (ወይ ብዝምልከቶ ዲሲማል) ንበዝሖ።",
+      "Щоб обчислити p% від числа N, множимо N на p/100 (або на еквівалентне десяткове число).",
+      "Para calcular p% de um número N, multiplica-se N por p/100 (ou pelo decimal equivalente).",
+      "Si loo xisaabiyo p% oo ka mid ah tiro N, N waxaa lagu dhuftaa p/100 (ama jajabka tobanle ee u dhigma).",
+      "Bir N sayısının p%'sini hesaplamak için N sayısını p/100 (veya eşdeğer ondalık) ile çarparız.",
+      "د N عدد p% د محاسبې لپاره N د p/100 (يا برابر اعشاري عدد) سره ضربوو."
     ) },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
-    { text: S("Méthode pas à pas", "Step-by-step method", "الطريقة خطوة بخطوة", "روش گام‌به‌گام", "ደረጃ ብደረጃ ሜላ", "Покроковий метод", "Método passo a passo", "Hab tallaabo-tallaabo ah", "Adım adım yöntem", "ګام په ګام طريقه") },
-    { label: S("Étapes", "Steps", "الخطوات", "گام‌ها", "ደረጃታት", "Кроки", "Passos", "Tallaabooyin", "Adımlar", "ګامونه"), items: A(
-      ["**Étape 1** — Convertir le pourcentage en décimal : diviser par 100", "**Étape 2** — Multiplier le nombre par ce décimal"],
-      ["**Step 1** — Convert the percentage into a decimal: divide by 100", "**Step 2** — Multiply the number by this decimal"],
-      ["**الخطوة 1** — حوّل النسبة إلى عدد عشري: اقسم على 100", "**الخطوة 2** — اضرب العدد في هذا العدد العشري"],
-      ["**گام 1** — درصد را به اعشار تبدیل کن: تقسیم بر 100", "**گام 2** — عدد را در این اعشار ضرب کن"],
-      ["**ደረጃ 1** — ሚእታዊ ናብ ዲሲማል ቀይር፦ ብ100 ክፈል", "**ደረጃ 2** — ቁጽሪ በዚ ዲሲማል በዝሕ"],
-      ["**Крок 1** — Перетворити відсоток у десяткове число: поділити на 100", "**Крок 2** — Помножити число на це десяткове число"],
-      ["**Passo 1** — Converter a percentagem em decimal: dividir por 100", "**Passo 2** — Multiplicar o número por esse decimal"],
-      ["**Tallaabo 1** — Boqolleyda u beddel jajab tobanle: u qaybi 100", "**Tallaabo 2** — Tirada ku dhufo jajabkaas tobanle"],
-      ["**Adım 1** — Yüzdeyi ondalığa çevir: 100'e böl", "**Adım 2** — Sayıyı bu ondalıkla çarp"],
-      ["**ګام 1** — سلنه اعشاري عدد ته واړوئ: پر 100 يې ووېشئ", "**ګام 2** — عدد په دې اعشاري عدد ضرب کړئ"]
+    // Block 2: spacer
+    {},
+    // Block 3: highlight "Formule"
+    { text: S(
+      "Formule",
+      "Formula",
+      "الصيغة",
+      "فرمول",
+      "ቀመር",
+      "Формула",
+      "Fórmula",
+      "Qaaciddo",
+      "Formül",
+      "فورمول"
     ) },
-    { text: S("20% de 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% of 150 → 20 ÷ 100 = 0.20 → 150 × 0.20 = 30", "20% من 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% از 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% ናይ 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% від 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% de 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "20% ee 150 → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "150'nin 20%'si → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30", "د 150، 20% → 20 ÷ 100 = 0,20 → 150 × 0,20 = 30") },
-    { text: S("15% de 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% of 80 → 15 ÷ 100 = 0.15 → 80 × 0.15 = 12", "15% من 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% از 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% ናይ 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% від 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% de 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "15% ee 80 → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "80'in 15%'i → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12", "د 80، 15% → 15 ÷ 100 = 0,15 → 80 × 0,15 = 12") },
-    { text: S("5% de 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% of 60 → 5 ÷ 100 = 0.05 → 60 × 0.05 = 3", "5% من 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% از 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% ናይ 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% від 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% de 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "5% ee 60 → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "60'ın 5%'i → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3", "د 60، 5% → 5 ÷ 100 = 0,05 → 60 × 0,05 = 3") },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
-    { text: S("Astuces de calcul mental", "Mental calculation tips", "حيل للحساب الذهني", "نکته‌های محاسبه ذهنی", "ምኽሪ ናይ ኣእምሮ ሕሳብ", "Поради для усного рахунку", "Dicas de cálculo mental", "Talooyin xisaab maskaxeed", "Zihinden hesaplama ipuçları", "د ذهني حساب لارښوونې") },
-    { label: S("Raccourcis utiles", "Useful shortcuts", "اختصارات مفيدة", "میان‌برهای مفید", "ጠቓሚ ሓጺር መንገድታት", "Корисні скорочення", "Atalhos úteis", "Habab gaagaaban oo waxtar leh", "Yararlı kısa yollar", "ګټور لنډې لارې"), items: A(
-      ["**10%** d'un nombre → diviser par 10", "**5%** d'un nombre → prendre 10%, puis diviser par 2", "**25%** d'un nombre → diviser par 4", "**50%** d'un nombre → diviser par 2", "**1%** d'un nombre → diviser par 100"],
-      ["**10%** of a number → divide by 10", "**5%** of a number → take 10%, then divide by 2", "**25%** of a number → divide by 4", "**50%** of a number → divide by 2", "**1%** of a number → divide by 100"],
-      ["**10%** من عدد → اقسم على 10", "**5%** من عدد → خذ 10% ثم اقسم على 2", "**25%** من عدد → اقسم على 4", "**50%** من عدد → اقسم على 2", "**1%** من عدد → اقسم على 100"],
-      ["**10%** از یک عدد → تقسیم بر 10", "**5%** از یک عدد → 10% را بگیر، سپس تقسیم بر 2", "**25%** از یک عدد → تقسیم بر 4", "**50%** از یک عدد → تقسیم بر 2", "**1%** از یک عدد → تقسیم بر 100"],
-      ["**10%** ናይ ቁጽሪ → ብ10 ክፈል", "**5%** ናይ ቁጽሪ → 10% ውሰድ፣ ብድሕሪኡ ብ2 ክፈል", "**25%** ናይ ቁጽሪ → ብ4 ክፈል", "**50%** ናይ ቁጽሪ → ብ2 ክፈል", "**1%** ናይ ቁጽሪ → ብ100 ክፈል"],
-      ["**10%** від числа → поділити на 10", "**5%** від числа → взяти 10%, потім поділити на 2", "**25%** від числа → поділити на 4", "**50%** від числа → поділити на 2", "**1%** від числа → поділити на 100"],
-      ["**10%** de um número → dividir por 10", "**5%** de um número → calcular 10%, depois dividir por 2", "**25%** de um número → dividir por 4", "**50%** de um número → dividir por 2", "**1%** de um número → dividir por 100"],
-      ["**10%** tiro → u qaybi 10", "**5%** tiro → qaado 10%, ka dib u qaybi 2", "**25%** tiro → u qaybi 4", "**50%** tiro → u qaybi 2", "**1%** tiro → u qaybi 100"],
-      ["Bir sayının **10%**'u → 10'a böl", "Bir sayının **5%**'i → 10%'u al, sonra 2'ye böl", "Bir sayının **25%**'i → 4'e böl", "Bir sayının **50%**'si → 2'ye böl", "Bir sayının **1%**'i → 100'e böl"],
-      ["د عدد **10%** → پر 10 وېشل", "د عدد **5%** → 10% واخلئ، بيا پر 2 ووېشئ", "د عدد **25%** → پر 4 وېشل", "د عدد **50%** → پر 2 وېشل", "د عدد **1%** → پر 100 وېشل"]
+    // Block 4: section itemsFr: ["p% de N = N × p ÷ 100"]
+    { items: A(
+      ["p% de N = N × p ÷ 100"],
+      ["p% of N = N × p ÷ 100"],
+      ["p% من N = N × p ÷ 100"],
+      ["p% از N = N × p ÷ 100"],
+      ["p% ናይ N = N × p ÷ 100"],
+      ["p% від N = N × p ÷ 100"],
+      ["p% de N = N × p ÷ 100"],
+      ["p% ee N = N × p ÷ 100"],
+      ["N'nin p%'si = N × p ÷ 100"],
+      ["د N، p% = N × p ÷ 100"]
     ) },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
+    // Block 5: spacer
+    {},
+    // Block 6: heading "Méthode pas à pas"
+    { text: S(
+      "Méthode pas à pas",
+      "Step-by-step method",
+      "الطريقة خطوة بخطوة",
+      "روش گام‌به‌گام",
+      "ደረጃ ብደረጃ ሜላ",
+      "Покроковий метод",
+      "Método passo a passo",
+      "Hab tallaabo-tallaabo ah",
+      "Adım adım yöntem",
+      "ګام په ګام طريقه"
+    ) },
+    // Block 7: section itemsFr steps
+    { items: A(
+      ["**1.** Multiplier le **nombre** par le **pourcentage**", "**2.** Diviser le résultat par **100**"],
+      ["**1.** Multiply the **number** by the **percentage**", "**2.** Divide the result by **100**"],
+      ["**1.** اضرب **العدد** في **النسبة المئوية**", "**2.** اقسم النتيجة على **100**"],
+      ["**1.** **عدد** را در **درصد** ضرب کن", "**2.** نتیجه را بر **100** تقسیم کن"],
+      ["**1.** **ቁጽሪ** ብ **ሚእታዊ** ኣባዝሕ", "**2.** ውጽኢት ብ **100** ኣካፍል"],
+      ["**1.** Помножити **число** на **відсоток**", "**2.** Поділити результат на **100**"],
+      ["**1.** Multiplicar o **número** pela **percentagem**", "**2.** Dividir o resultado por **100**"],
+      ["**1.** **Tirada** ku dhufo **boqolleyda**", "**2.** Natiijada u qaybi **100**"],
+      ["**1.** **Sayıyı** **yüzde** ile çarp", "**2.** Sonucu **100**'e böl"],
+      ["**1.** **عدد** د **سلنې** سره ضرب کړه", "**2.** پايله پر **100** ووېشه"]
+    ) },
+    // Block 8: spacer
+    {},
+    // Block 9: section example calculation
+    { items: A(
+      ["20% de 150 élèves", "**150** × **20** = 3000", "3000 ÷ **100** = 30 élèves"],
+      ["20% of 150 students", "**150** × **20** = 3000", "3000 ÷ **100** = 30 students"],
+      ["20% من 150 تلميذا", "**150** × **20** = 3000", "3000 ÷ **100** = 30 تلميذا"],
+      ["20% از 150 دانش‌آموز", "**150** × **20** = 3000", "3000 ÷ **100** = 30 دانش‌آموز"],
+      ["20% ናይ 150 ተምሃሮ", "**150** × **20** = 3000", "3000 ÷ **100** = 30 ተምሃሮ"],
+      ["20% від 150 учнів", "**150** × **20** = 3000", "3000 ÷ **100** = 30 учнів"],
+      ["20% de 150 alunos", "**150** × **20** = 3000", "3000 ÷ **100** = 30 alunos"],
+      ["20% ee 150 arday", "**150** × **20** = 3000", "3000 ÷ **100** = 30 arday"],
+      ["150 öğrencinin 20%'si", "**150** × **20** = 3000", "3000 ÷ **100** = 30 öğrenci"],
+      ["د 150 زده کوونکو 20%", "**150** × **20** = 3000", "3000 ÷ **100** = 30 زده کوونکي"]
+    ) },
+    // Block 10: spacer
+    {},
+    // Block 11: heading "Raccourcis utiles" (black)
+    { text: S(
+      "Raccourcis utiles",
+      "Useful shortcuts",
+      "اختصارات مفيدة",
+      "میان‌برهای مفید",
+      "ጠቓሚ ሓጺር መንገድታት",
+      "Корисні скорочення",
+      "Atalhos úteis",
+      "Habab gaagaaban oo waxtar leh",
+      "Yararlı kısa yollar",
+      "ګټور لنډې لارې"
+    ) },
+    // Block 12: table with shortcuts
     { headers: A(
-      ["Calcul", "Astuce rapide", "Résultat"],
-      ["Calculation", "Quick tip", "Result"],
-      ["الحساب", "حيلة سريعة", "النتيجة"],
-      ["محاسبه", "نکته سریع", "نتیجه"],
-      ["ሕሳብ", "ቅልጡፍ ምኽሪ", "ውጽኢት"],
-      ["Обчислення", "Швидка порада", "Результат"],
-      ["Cálculo", "Dica rápida", "Resultado"],
-      ["Xisaab", "Talo degdeg ah", "Natiijo"],
-      ["Hesap", "Hızlı ipucu", "Sonuç"],
-      ["حساب", "چټکه لارښوونه", "پايله"]
+      ["Pourcentage", "", "Méthode rapide"],
+      ["Percentage", "", "Quick method"],
+      ["النسبة المئوية", "", "الطريقة السريعة"],
+      ["درصد", "", "روش سریع"],
+      ["ሚእታዊ", "", "ቅልጡፍ ሜላ"],
+      ["Відсоток", "", "Швидкий метод"],
+      ["Percentagem", "", "Método rápido"],
+      ["Boqolley", "", "Hab degdeg ah"],
+      ["Yüzde", "", "Hızlı yöntem"],
+      ["سلنه", "", "چټکه طريقه"]
+    ), items: A(
+      [
+        "**1%** d'un nombre | → | diviser par 100",
+        "**5%** d'un nombre | → | prendre 10%, puis diviser par 2",
+        "**10%** d'un nombre | → | diviser par 10",
+        "**20%** d'un nombre | → | diviser par 5",
+        "**25%** d'un nombre | → | diviser par 4",
+        "**50%** d'un nombre | → | diviser par 2",
+      ],
+      [
+        "**1%** of a number | → | divide by 100",
+        "**5%** of a number | → | take 10%, then divide by 2",
+        "**10%** of a number | → | divide by 10",
+        "**20%** of a number | → | divide by 5",
+        "**25%** of a number | → | divide by 4",
+        "**50%** of a number | → | divide by 2",
+      ],
+      [
+        "**1%** من عدد | → | اقسم على 100",
+        "**5%** من عدد | → | خذ 10% ثم اقسم على 2",
+        "**10%** من عدد | → | اقسم على 10",
+        "**20%** من عدد | → | اقسم على 5",
+        "**25%** من عدد | → | اقسم على 4",
+        "**50%** من عدد | → | اقسم على 2",
+      ],
+      [
+        "**1%** از یک عدد | → | تقسیم بر 100",
+        "**5%** از یک عدد | → | 10% را بگیر، سپس تقسیم بر 2",
+        "**10%** از یک عدد | → | تقسیم بر 10",
+        "**20%** از یک عدد | → | تقسیم بر 5",
+        "**25%** از یک عدد | → | تقسیم بر 4",
+        "**50%** از یک عدد | → | تقسیم بر 2",
+      ],
+      [
+        "**1%** ናይ ቁጽሪ | → | ብ100 ክፈል",
+        "**5%** ናይ ቁጽሪ | → | 10% ውሰድ፣ ብድሕሪኡ ብ2 ክፈል",
+        "**10%** ናይ ቁጽሪ | → | ብ10 ክፈል",
+        "**20%** ናይ ቁጽሪ | → | ብ5 ክፈል",
+        "**25%** ናይ ቁጽሪ | → | ብ4 ክፈል",
+        "**50%** ናይ ቁጽሪ | → | ብ2 ክፈል",
+      ],
+      [
+        "**1%** від числа | → | поділити на 100",
+        "**5%** від числа | → | взяти 10%, потім поділити на 2",
+        "**10%** від числа | → | поділити на 10",
+        "**20%** від числа | → | поділити на 5",
+        "**25%** від числа | → | поділити на 4",
+        "**50%** від числа | → | поділити на 2",
+      ],
+      [
+        "**1%** de um número | → | dividir por 100",
+        "**5%** de um número | → | calcular 10%, depois dividir por 2",
+        "**10%** de um número | → | dividir por 10",
+        "**20%** de um número | → | dividir por 5",
+        "**25%** de um número | → | dividir por 4",
+        "**50%** de um número | → | dividir por 2",
+      ],
+      [
+        "**1%** tiro | → | u qaybi 100",
+        "**5%** tiro | → | qaado 10%, ka dib u qaybi 2",
+        "**10%** tiro | → | u qaybi 10",
+        "**20%** tiro | → | u qaybi 5",
+        "**25%** tiro | → | u qaybi 4",
+        "**50%** tiro | → | u qaybi 2",
+      ],
+      [
+        "Bir sayının **1%**'i | → | 100'e böl",
+        "Bir sayının **5%**'i | → | 10%'u al, sonra 2'ye böl",
+        "Bir sayının **10%**'u | → | 10'a böl",
+        "Bir sayının **20%**'si | → | 5'e böl",
+        "Bir sayının **25%**'i | → | 4'e böl",
+        "Bir sayının **50%**'si | → | 2'ye böl",
+      ],
+      [
+        "د عدد **1%** | → | پر 100 وېشل",
+        "د عدد **5%** | → | 10% واخلئ، بيا پر 2 ووېشئ",
+        "د عدد **10%** | → | پر 10 وېشل",
+        "د عدد **20%** | → | پر 5 وېشل",
+        "د عدد **25%** | → | پر 4 وېشل",
+        "د عدد **50%** | → | پر 2 وېشل",
+      ]
     ) },
+    // Block 13: spacer
+    {},
+    // Block 14: table with math expressions — leave as French (numbers only)
+    {},
+    // Block 15: spacer
+    {},
+    // Block 16: highlight "Vérification"
     { text: S(
-      "Vérification : si le pourcentage est inférieur à 100%, le résultat doit être plus petit que le nombre de départ.",
-      "Check: if the percentage is less than 100%, the result must be smaller than the starting number.",
-      "تحقق: إذا كانت النسبة أقل من 100% فيجب أن تكون النتيجة أصغر من العدد الأصلي.",
-      "بررسی: اگر درصد کمتر از 100% باشد، نتیجه باید از عدد اولیه کوچک‌تر باشد.",
-      "ምርግጋጽ፦ ሚእታዊ ካብ 100% እንተነኣሰ፣ ውጽኢት ካብ መጀመርታ ቁጽሪ ክንእስ ኣለዎ።",
-      "Перевірка: якщо відсоток менший за 100%, результат має бути меншим за початкове число.",
-      "Verificação: se a percentagem for inferior a 100%, o resultado deve ser menor do que o número inicial.",
-      "Hubin: haddii boqolleydu ka yar tahay 100%, natiijadu waa inay ka yaraataa tiradii bilowga ahayd.",
-      "Kontrol: yüzde 100%'den küçükse sonuç başlangıç sayısından küçük olmalıdır.",
-      "کتنه: که سلنه له 100% کمه وي، پايله بايد له پيلني عدد څخه کمه وي."
+      "Vérification",
+      "Check",
+      "التحقق",
+      "بررسی",
+      "ምርግጋጽ",
+      "Перевірка",
+      "Verificação",
+      "Hubin",
+      "Kontrol",
+      "کتنه"
+    ) },
+    // Block 17: plain with verification rule
+    { text: S(
+      "Si le pourcentage est **inférieur à 100%**, le résultat doit **toujours** être **plus petit** que le nombre de départ.",
+      "If the percentage is **less than 100%**, the result must **always** be **smaller** than the starting number.",
+      "إذا كانت النسبة المئوية **أقل من 100%** فيجب أن تكون النتيجة **دائما** **أصغر** من العدد الأصلي.",
+      "اگر درصد **کمتر از 100%** باشد، نتیجه باید **همیشه** **کوچک‌تر** از عدد اولیه باشد.",
+      "ሚእታዊ **ካብ 100% ዝነኣሰ** እንተኾነ፣ ውጽኢት **ኩሉ ግዜ** ካብ መጀመርታ ቁጽሪ **ዝነኣሰ** ክኸውን ኣለዎ።",
+      "Якщо відсоток **менший за 100%**, результат має **завжди** бути **меншим** за початкове число.",
+      "Se a percentagem for **inferior a 100%**, o resultado deve **sempre** ser **menor** do que o número inicial.",
+      "Haddii boqolleydu **ka yar tahay 100%**, natiijadu waa **had iyo jeer** inay **ka yar tahay** tiradii bilowga ahayd.",
+      "Yüzde **100%'den küçükse**, sonuç başlangıç sayısından **her zaman** **küçük** olmalıdır.",
+      "که سلنه **له 100% کمه** وي، پايله بايد **تل** د پيلني عدد **کمه** وي."
+    ) },
+    // Block 18: spacer
+    {},
+    // Block 19: heading "Exprimer une partie en pourcentage" (black)
+    { text: S(
+      "Exprimer une partie en pourcentage",
+      "Express a part as a percentage",
+      "التعبير عن جزء بنسبة مئوية",
+      "بیان یک بخش به صورت درصد",
+      "ክፋል ብሚእታዊ ምግላጽ",
+      "Виразити частину у відсотках",
+      "Exprimir uma parte em percentagem",
+      "Qayb ku muujinta boqolley",
+      "Bir parçayı yüzde olarak ifade etme",
+      "يوه برخه په سلنه څرګندول"
+    ) },
+    // Block 20: plain
+    { text: S(
+      "Parfois on connaît la partie et le total, et on veut savoir quel pourcentage cela représente.",
+      "Sometimes we know the part and the total, and we want to know what percentage it represents.",
+      "أحيانا نعرف الجزء والمجموع ونريد معرفة النسبة المئوية التي يمثلها ذلك.",
+      "گاهی بخش و کل را می‌دانیم و می‌خواهیم بدانیم این چه درصدی است.",
+      "ሓድሓደ ግዜ ክፋልን ጠቕላላን ንፈልጥ፣ እዚ ክንደይ ሚእታዊ ከምዝኾነ ንደሊ።",
+      "Іноді ми знаємо частину і загальну кількість та хочемо дізнатися, який це відсоток.",
+      "Por vezes conhecemos a parte e o total, e queremos saber que percentagem isso representa.",
+      "Mararka qaar waxaan naqaan qaybta iyo wadarta, waxaana rabnaa inaan ogaano boqolleyda ay matalayso.",
+      "Bazen parçayı ve toplamı biliriz ve bunun hangi yüzdeyi temsil ettiğini öğrenmek isteriz.",
+      "کله ناکله برخه او ټول معلوم وي او غواړو پوه شو دا څو سلنه ده."
+    ) },
+    // Block 21: highlight "Formule"
+    { text: S(
+      "Formule",
+      "Formula",
+      "الصيغة",
+      "فرمول",
+      "ቀመር",
+      "Формула",
+      "Fórmula",
+      "Qaaciddo",
+      "Formül",
+      "فورمول"
+    ) },
+    // Block 22: section itemsFr formula
+    { items: A(
+      ["Pourcentage = (partie ÷ total) × 100", "Résultat en %"],
+      ["Percentage = (part ÷ total) × 100", "Result in %"],
+      ["النسبة المئوية = (الجزء ÷ المجموع) × 100", "النتيجة بـ %"],
+      ["درصد = (بخش ÷ کل) × 100", "نتیجه با %"],
+      ["ሚእታዊ = (ክፋል ÷ ጠቕላላ) × 100", "ውጽኢት ብ %"],
+      ["Відсоток = (частина ÷ загальна кількість) × 100", "Результат у %"],
+      ["Percentagem = (parte ÷ total) × 100", "Resultado em %"],
+      ["Boqolley = (qayb ÷ wadar) × 100", "Natiijo % ah"],
+      ["Yüzde = (parça ÷ toplam) × 100", "% olarak sonuç"],
+      ["سلنه = (برخه ÷ ټول) × 100", "پايله په % کې"]
+    ) },
+    // Block 23: spacer
+    {},
+    // Block 24: heading "Méthode pas à pas"
+    { text: S(
+      "Méthode pas à pas",
+      "Step-by-step method",
+      "الطريقة خطوة بخطوة",
+      "روش گام‌به‌گام",
+      "ደረጃ ብደረጃ ሜላ",
+      "Покроковий метод",
+      "Método passo a passo",
+      "Hab tallaabo-tallaabo ah",
+      "Adım adım yöntem",
+      "ګام په ګام طريقه"
+    ) },
+    // Block 25: plain "Le pourcentage de 30 élèves sur 120"
+    { text: S(
+      "Le pourcentage de 30 élèves sur 120",
+      "The percentage of 30 students out of 120",
+      "نسبة 30 تلميذا من أصل 120",
+      "درصد 30 دانش‌آموز از 120 نفر",
+      "ሚእታዊ 30 ተምሃሮ ካብ 120",
+      "Відсоток 30 учнів із 120",
+      "A percentagem de 30 alunos em 120",
+      "Boqolleyda 30 arday oo ka mid ah 120",
+      "120 öğrenciden 30'unun yüzdesi",
+      "د 120 زده کوونکو له 30 سلنه"
+    ) },
+    // Block 26: section with step-by-step for expressing a part as percentage
+    { items: A(
+      [
+        "**1.** Diviser la **partie** par le **total**",
+        "30 ÷ 120 = 0,25",
+        "**2.** Multiplier le résultat par **100**",
+        "0,25 × **100** = 25",
+        "**3.** Ajouter le symbole **%**",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** Divide the **part** by the **total**",
+        "30 ÷ 120 = 0.25",
+        "**2.** Multiply the result by **100**",
+        "0.25 × **100** = 25",
+        "**3.** Add the **%** symbol",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** اقسم **الجزء** على **المجموع**",
+        "30 ÷ 120 = 0,25",
+        "**2.** اضرب النتيجة في **100**",
+        "0,25 × **100** = 25",
+        "**3.** أضف الرمز **%**",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** **بخش** را بر **کل** تقسیم کن",
+        "30 ÷ 120 = 0,25",
+        "**2.** نتیجه را در **100** ضرب کن",
+        "0,25 × **100** = 25",
+        "**3.** نماد **%** را اضافه کن",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** **ክፋል** ብ **ጠቕላላ** ኣካፍል",
+        "30 ÷ 120 = 0,25",
+        "**2.** ውጽኢት ብ **100** ኣባዝሕ",
+        "0,25 × **100** = 25",
+        "**3.** ምልክት **%** ወስኽ",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** Поділити **частину** на **загальну кількість**",
+        "30 ÷ 120 = 0,25",
+        "**2.** Помножити результат на **100**",
+        "0,25 × **100** = 25",
+        "**3.** Додати символ **%**",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** Dividir a **parte** pelo **total**",
+        "30 ÷ 120 = 0,25",
+        "**2.** Multiplicar o resultado por **100**",
+        "0,25 × **100** = 25",
+        "**3.** Acrescentar o símbolo **%**",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** **Qaybta** u qaybi **wadarta**",
+        "30 ÷ 120 = 0,25",
+        "**2.** Natiijada ku dhufo **100**",
+        "0,25 × **100** = 25",
+        "**3.** Ku dar calaamadda **%**",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** **Parçayı** **toplama** böl",
+        "30 ÷ 120 = 0,25",
+        "**2.** Sonucu **100** ile çarp",
+        "0,25 × **100** = 25",
+        "**3.** **%** işaretini ekle",
+        "25 + **%** = **25%**",
+      ],
+      [
+        "**1.** **برخه** پر **ټول** ووېشه",
+        "30 ÷ 120 = 0,25",
+        "**2.** پايله پر **100** ضرب کړه",
+        "0,25 × **100** = 25",
+        "**3.** د **%** نښه ورزیاته کړه",
+        "25 + **%** = **25%**",
+      ]
+    ) },
+    // Block 27: spacer
+    {},
+    // Block 28: highlight "Vérification"
+    { text: S(
+      "Vérification",
+      "Check",
+      "التحقق",
+      "بررسی",
+      "ምርግጋጽ",
+      "Перевірка",
+      "Verificação",
+      "Hubin",
+      "Kontrol",
+      "کتنه"
+    ) },
+    // Block 29: plain verification rule for part/total
+    { text: S(
+      "Le résultat est **toujours entre 0% et 100%** si la partie est **inférieure ou égale au total**.",
+      "The result is **always between 0% and 100%** if the part is **less than or equal to the total**.",
+      "تكون النتيجة **دائما بين 0% و100%** إذا كان الجزء **أصغر من المجموع أو مساويا له**.",
+      "اگر بخش **کمتر یا برابر با کل** باشد، نتیجه **همیشه بین 0% و 100%** است.",
+      "ክፋል **ካብ ጠቕላላ ዝነኣሰ ወይ ማዕረ** እንተኾነ፣ ውጽኢት **ኩሉ ግዜ ኣብ መንጎ 0%ን 100%ን** ይኸውን።",
+      "Результат **завжди між 0% і 100%**, якщо частина **менша або дорівнює загальній кількості**.",
+      "O resultado é **sempre entre 0% e 100%** se a parte for **inferior ou igual ao total**.",
+      "Natiijadu waa **had iyo jeer u dhexaysa 0% iyo 100%** haddii qaybtu **ka yar tahay ama la siman tahay wadarta**.",
+      "Parça **toplama eşit veya ondan küçükse** sonuç **her zaman 0% ile 100% arasındadır**.",
+      "که برخه **له ټول سره برابره يا ترې کمه** وي، پايله **تل د 0% او 100% ترمنځ** وي."
     ) },
   ],
 };
