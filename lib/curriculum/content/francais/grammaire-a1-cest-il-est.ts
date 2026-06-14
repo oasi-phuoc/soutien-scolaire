@@ -416,5 +416,91 @@ export const A1_GR_CEST: GrammarLesson = {
         },
       ],
     },
+
+    // ── Exercice 5 ─────────────────────────────────────────────────────────────
+    {
+      type: "fill",
+      title: "Exercice 5",
+      instruction: "Complétez avec c'est ou il est.",
+      items: [
+        { sentence: "___ un médecin.",          hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ très gentil.",          hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ ma sœur.",              hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ fatigué aujourd'hui.",  hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ un grand bâtiment.",    hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ malade.",               hint: "c'est / il est", answer: "il est" },
+      ],
+    },
+
+    // ── Exercice 6 ─────────────────────────────────────────────────────────────
+    {
+      type: "qcm",
+      title: "Exercice 6",
+      instruction: "Choisissez la bonne réponse.",
+      toggleChoices: true,
+      items: [
+        { sentence: "___ professeur.",           choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ mon professeur.",       choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ intelligent.",          choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ un homme intelligent.", choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ Paul.",                 choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ français.",             choices: ["C'est", "Il est"], correctIdx: 1 },
+      ],
+    },
+
+    // ── Exercice 7 ─────────────────────────────────────────────────────────────
+    {
+      type: "write",
+      title: "Exercice 7",
+      instruction: "Transformez les phrases avec c'est. Écrivez la phrase complète.\nExemple : Il est mon ami. → C'est mon ami.",
+      prompts: [
+        "Il est mon frère. →",
+        "Il est mon voisin. →",
+        "Elle est ma sœur. →",
+        "Elle est ma collègue. →",
+        "Il est mon professeur. →",
+      ],
+    },
+
+    // ── Exercice 8 ─────────────────────────────────────────────────────────────
+    {
+      type: "write",
+      title: "Exercice 8",
+      instruction: "Transformez avec il est / elle est. Écrivez la phrase complète.\nExemple : C'est un homme gentil. → Il est gentil.",
+      prompts: [
+        "C'est une femme sympathique. →",
+        "C'est un garçon intelligent. →",
+        "C'est un enfant calme. →",
+        "C'est une élève sérieuse. →",
+        "C'est un sportif courageux. →",
+      ],
+    },
+
+    // ── Exercice 9 ─────────────────────────────────────────────────────────────
+    {
+      type: "write",
+      title: "Exercice 9",
+      instruction: "Écrivez une phrase avec les mots proposés.",
+      prompts: [
+        "Alona :",
+        "Ma mère :",
+        "Un grand garçon :",
+      ],
+    },
+
+    // ── Exercice 10 ────────────────────────────────────────────────────────────
+    {
+      type: "qcm",
+      title: "Exercice 10",
+      instruction: "Sélectionnez la bonne réponse.",
+      items: [
+        { sentence: "Ahmed est médecin. ___ très connu dans la ville.", choices: ["C'est", "Il est", "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Ahmed. ___ mon médecin.",                    choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
+        { sentence: "Marie est française. ___ très gentille.",          choices: ["C'est", "Il est", "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Marie. ___ ma voisine.",                     choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
+        { sentence: "Paul est professeur. ___ très patient.",           choices: ["C'est", "Il est", "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Paul. ___ le nouveau professeur.",           choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
+      ],
+    },
   ],
 };
