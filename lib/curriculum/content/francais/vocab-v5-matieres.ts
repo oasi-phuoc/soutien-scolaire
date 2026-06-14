@@ -13,7 +13,7 @@ export const V5_MATIERES_THEME: VocabTheme = {
     { word: "sport", image: "sport.png",           article: "le",  gender: "m", definition: "matière d'éducation physique" },
     { word: "musique", image: "musique.png",         article: "la",  gender: "f", definition: "matière sur le chant et les instruments" },
     { word: "art", image: "art.png",             article: "l'",  gender: "m", definition: "matière sur le dessin et la peinture" },
-    { word: "informatique", image: "image.jpg",    article: "l'",  gender: "f", definition: "matière sur les ordinateurs et le numérique" },
+    { word: "informatique", image: "informatique.png",    article: "l'",  gender: "f", definition: "matière sur les ordinateurs et le numérique" },
     { word: "biologie", image: "biologie.png",        article: "la",  gender: "f", definition: "matière sur les êtres vivants" },
     { word: "physique", image: "physique.png",        article: "la",  gender: "f", definition: "matière sur la matière et l'énergie" },
     { word: "chimie", image: "chimie.png",          article: "la",  gender: "f", definition: "matière sur les substances et réactions" },

@@ -21,7 +21,7 @@ export const V4_PIECES_MAISON_THEME: VocabTheme = {
     { word: "jardin", image: "jardin.jpg",        article: "le",  gender: "m", definition: "espace vert autour de la maison" },
     { word: "sous-sol", image: "sous-sol.jpg",      article: "le",  gender: "m", definition: "niveau en dessous du rez-de-chaussée" },
     { word: "entrée", image: "entree.jpg",        article: "l'",  gender: "f", definition: "espace d'accueil à l'entrée du logement" },
-    { word: "garage", image: "garage.jpg",        article: "le",  gender: "m", definition: "pièce ou espace pour garer une voiture" },
+    { word: "garage", image: "garage.png",        article: "le",  gender: "m", definition: "pièce ou espace pour garer une voiture" },
   ],
   sentences: [
     { sentence: "Elle prépare le dîner dans la ___.",                     answer: "cuisine" },
