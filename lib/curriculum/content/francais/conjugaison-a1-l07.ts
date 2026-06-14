@@ -306,7 +306,7 @@ export const A1_CONJ_L07: ConjLesson = {
         ti: ["ግሲ ብ{a}ሞዓዝ{/a} ወይ {a}h{/a} ምስ ዝጅምር፣ {a}je{/a} {a}j'{/a} ይኸውን.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
         uk: ["Коли дієслово починається з {a}голосної{/a} або {a}h{/a}, {a}je{/a} стає {a}j'{/a}.", "j{s}e{/s} aime → j'aime", "j{s}e{/s} écoute → j'écoute", "j{s}e{/s} habite → j'habite"],
       },
-      noBulletItems: [0],
+      noBulletItems: [0, 1, 2, 3],
       inlineArrows: true,
     },
   ],
