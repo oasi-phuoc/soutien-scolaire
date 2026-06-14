@@ -4,13 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "@/components/TranslationProvider";
 
-const links = [
-  { href: "/", label: "Accueil", icon: HomeIcon },
-  { href: "/lecture", label: "Lecture", icon: LectureIcon },
-  { href: "/francais", label: "Français", icon: FrIcon },
-  { href: "/mathematiques", label: "Maths", icon: MathIcon },
-  { href: "/compte", label: "Réglages", icon: GearIcon },
-] as const;
+const links: { href: string; label: string; icon: ({ active }: { active: boolean }) => React.JSX.Element; color: string }[] = [
+  { href: "/", label: "Accueil", icon: HomeIcon, color: "var(--color-theme)" },
+  { href: "/lecture", label: "Lecture", icon: LectureIcon, color: "var(--color-accent-lecture)" },
+  { href: "/francais", label: "Français", icon: FrIcon, color: "var(--color-accent-fr)" },
+  { href: "/mathematiques", label: "Maths", icon: MathIcon, color: "var(--color-accent-alg)" },
+  { href: "/compte", label: "Réglages", icon: GearIcon, color: "var(--color-theme)" },
+];
 
 export function MainNav() {
   const pathname = usePathname() ?? "";
@@ -29,17 +29,14 @@ export function MainNav() {
       aria-label="Navigation principale"
     >
       <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-zinc-200/80 bg-white/90 p-1 shadow-[0_14px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90 dark:shadow-black/35">
-        {links.map(({ href, label, icon: Icon }) => {
+        {links.map(({ href, label, icon: Icon, color }) => {
           const active =
             href === "/"
               ? pathname === "/" || pathname === ""
               : pathname.startsWith(href);
           return (
-            <li key={href}>
-              <Link
-                href={href}
-                className={itemClass(active)}
-              >
+            <li key={href} style={active ? { "--color-theme": color } as React.CSSProperties : undefined}>
+              <Link href={href} className={itemClass(active)}>
                 <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
                   active
                     ? "bg-[var(--color-theme)] text-white"

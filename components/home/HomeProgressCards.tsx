@@ -40,7 +40,8 @@ function CardShell({
   icon,
   label,
   title,
-  stat,
+  completedText,
+  totalText,
   pct,
   continuePath,
   continueLabel,
@@ -50,38 +51,40 @@ function CardShell({
   icon: React.ReactNode;
   label: string;
   title: string;
-  stat: string;
+  completedText: string;
+  totalText: string;
   pct: number;
   continuePath?: string | null;
   continueLabel?: string | null;
 }) {
   return (
     <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
-      <Link
-        href={href}
-        className="block px-4 py-4 transition-colors hover:bg-[var(--color-bg-secondary)]/40"
-      >
-        <div className="flex items-center gap-3">
-          <span
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
-            style={{ background: `${accentColor}18` }}
-          >
-            <span style={{ color: accentColor }}>{icon}</span>
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: accentColor }}>
-              {label}
-            </p>
-            <p className="truncate text-sm font-bold text-[var(--color-text-primary)]">{title}</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{stat}</p>
+      <Link href={href} className="block transition-colors hover:bg-[var(--color-bg-secondary)]/40">
+        {/* Header section with colored fill */}
+        <div className="px-4 py-3" style={{ background: `color-mix(in oklch, ${accentColor} 10%, transparent)` }}>
+          <div className="flex items-center gap-3">
+            <span
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              style={{ background: `${accentColor}22` }}
+            >
+              <span style={{ color: accentColor }}>{icon}</span>
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-[10px] font-semibold uppercase tracking-wide" style={{ color: accentColor }}>
+                {label}
+              </p>
+              <p className="truncate text-sm font-bold text-[var(--color-text-primary)]">{title}</p>
+            </div>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0" style={{ color: accentColor }} aria-hidden>
+              <path d="M9 18l6-6-6-6" />
+            </svg>
           </div>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-[var(--color-text-secondary)]" aria-hidden>
-            <path d="M9 18l6-6-6-6" />
-          </svg>
         </div>
-        <div className="mt-3">
+        {/* Progress section */}
+        <div className="px-4 pb-3 pt-2">
           <AppProgressBar value={pct} color={accentColor} height={4} />
-          <p className="mt-1 text-right text-[10px] text-[var(--color-text-secondary)]">{pct}%</p>
+          <p className="mt-1.5 text-sm font-bold text-[var(--color-text-primary)]">{completedText}</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">{totalText}</p>
         </div>
       </Link>
 
@@ -180,7 +183,8 @@ export function HomeProgressCards() {
         icon={<BookIcon />}
         label="Lecture"
         title="Alphabétisation"
-        stat={`${lectureCompleted} / ${TOTAL_LETTERS} lettres`}
+        completedText={`${lectureCompleted} lettres`}
+        totalText={`sur ${TOTAL_LETTERS} lettres`}
         pct={lecturePct}
         continuePath={lectureContinuePath}
         continueLabel={lectureContinueLabel}
@@ -191,7 +195,8 @@ export function HomeProgressCards() {
         icon={<FrIcon />}
         label="Français"
         title={frLabel}
-        stat="A0 → B2 · 61 leçons"
+        completedText={frLevel}
+        totalText="A0 → B2 · 61 leçons"
         pct={frPct}
       />
       <CardShell
@@ -199,8 +204,9 @@ export function HomeProgressCards() {
         accentColor="var(--color-accent-alg)"
         icon={<MathIcon />}
         label="Mathématiques"
-        title={`${completedMath} module${completedMath !== 1 ? "s" : ""} terminé${completedMath !== 1 ? "s" : ""}`}
-        stat={`sur ${totalMath} modules · algèbre, géométrie`}
+        title="Algèbre & Géométrie"
+        completedText={`${completedMath} leçon${completedMath !== 1 ? "s" : ""} terminée${completedMath !== 1 ? "s" : ""}`}
+        totalText={`sur ${totalMath} leçons`}
         pct={mathPct}
         continuePath={mathContinuePath}
         continueLabel={mathContinueLabel}
