@@ -15,73 +15,54 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     // ── 1. C'EST ───────────────────────────────────────────────────────────────
-    { type: "heading", text: "C'est", sub: true },
+    { type: "heading", text: "Quand utiliser c'est", sub: true },
 
     {
       type: "plain_list",
       items: [
-        "{a}C'est{/a} = cela est.",
         "On utilise c'est pour identifier, présenter ou donner une information générale.",
-      ],
-      noBulletItems: [0, 1],
-    },
-
-    {
-      type: "highlight",
-      label: "A. Devant un nom avec article — C'est + article + nom",
-      items: [
-        "C'est {a}un{/a} professeur.",
-        "C'est {a}une{/a} maison.",
-        "C'est {a}le{/a} directeur.",
-        "C'est {a}la{/a} pharmacie.",
-        "❌ Il est un professeur.",
-      ],
-      noBulletItems: [4],
-    },
-
-    {
-      type: "highlight",
-      label: "B. Devant un prénom ou un nom propre",
-      items: [
-        "C'est {a}Sophie{/a}.",
-        "C'est {a}Ali{/a}.",
-        "C'est {a}Paris{/a}.",
-        "C'est {a}Marie Dupont{/a}.",
-      ],
-    },
-
-    {
-      type: "highlight",
-      label: "C. Devant un pronom",
-      items: [
-        "C'est {a}moi{/a}.",
-        "C'est {a}lui{/a}.",
-        "C'est {a}elle{/a}.",
-        "C'est {a}nous{/a}.",
-      ],
-    },
-
-    {
-      type: "highlight",
-      label: "D. Pour identifier quelque chose",
-      items: [
-        "Qu'est-ce que c'est ?",
-        "C'est un ordinateur.",
-        "C'est mon téléphone.",
-        "C'est une voiture.",
       ],
       noBulletItems: [0],
     },
 
     {
       type: "highlight",
-      label: "E. Pour donner une date ou une heure",
+      label: "Devant un nom avec article",
       items: [
-        "C'est {a}lundi{/a}.",
+        "C'est {a}un{/a} professeur.",
+        "C'est {a}la{/a} pharmacie.",
+      ],
+      noBulletItems: [0, 1],
+    },
+
+    {
+      type: "highlight",
+      label: "Devant un prénom ou un nom propre",
+      items: [
+        "C'est {a}Alona{/a}.",
+        "C'est {a}M. Mohammed Safi{/a}.",
+      ],
+      noBulletItems: [0, 1],
+    },
+
+    {
+      type: "highlight",
+      label: "Devant un pronom",
+      items: [
+        "C'est {a}moi{/a}.",
+        "C'est {a}elle{/a}.",
+      ],
+      noBulletItems: [0, 1],
+    },
+
+    {
+      type: "highlight",
+      label: "Pour donner une date ou une heure",
+      items: [
         "C'est {a}le 15 mars{/a}.",
-        "C'est {a}midi{/a}.",
         "C'est {a}trois heures{/a}.",
       ],
+      noBulletItems: [0, 1],
     },
 
     // ── 2. IL EST ──────────────────────────────────────────────────────────────
