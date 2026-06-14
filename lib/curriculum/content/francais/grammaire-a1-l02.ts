@@ -334,4 +334,42 @@ export const A1_GR_L02: GrammarLesson = {
       verbPoolSize: 5,
     },
   ],
+  evalExercises: [
+    // ── Éval 1 — Fill: Mettez à la forme négative ─────────────────────────────
+    {
+      type: "fill",
+      title: "Évaluation — Question 1",
+      instruction: "Mettez la phrase à la forme négative avec ne … pas.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Il parle français. → Il ___ grand.", hint: "ne … pas", answer: "ne parle pas" },
+        { sentence: "Je mange du pain. → Je ___ du pain.", hint: "ne … pas", answer: "ne mange pas" },
+        { sentence: "Elle habite ici. → Elle ___ ici.", hint: "ne … pas", answer: "n'habite pas" },
+        { sentence: "Nous avons un chat. → Nous ___ de chat.", hint: "ne … pas", answer: "n'avons pas" },
+        { sentence: "Tu aimes le sport. → Tu ___ le sport.", hint: "ne … pas", answer: "n'aimes pas" },
+        { sentence: "Ils travaillent tard. → Ils ___ tard.", hint: "ne … pas", answer: "ne travaillent pas" },
+        { sentence: "Vous regardez la télé. → Vous ___ la télé.", hint: "ne … pas", answer: "ne regardez pas" },
+        { sentence: "Elle chante le soir. → Elle ___ le soir.", hint: "ne … pas", answer: "ne chante pas" },
+      ],
+    },
+    // ── Éval 2 — QCM: Choisissez la bonne forme négative ─────────────────────
+    {
+      type: "qcm",
+      title: "Évaluation — Question 2",
+      instruction: "Choisissez la bonne forme négative.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Je ___ mange ___ viande. (pas de)",       choices: ["ne … pas de", "ne … pas", "n' … plus", "ne … de"],    correctIdx: 0 },
+        { sentence: "Il ___ vient ___ ici. (jamais)",          choices: ["ne … jamais", "ne … pas", "n' … plus", "ne … de"],    correctIdx: 0 },
+        { sentence: "Elle ___ travaille ___ ici. (plus)",      choices: ["ne … plus",   "ne … pas", "n' … jamais", "ne … de"],  correctIdx: 0 },
+        { sentence: "Nous ___ avons ___ d'argent. (pas)",      choices: ["n' … pas",    "ne … pas", "ne … plus", "ne … de"],    correctIdx: 0 },
+        { sentence: "Tu ___ écoutes ___ la radio. (pas)",      choices: ["n' … pas",    "ne … pas", "ne … plus", "ne … de"],    correctIdx: 0 },
+        { sentence: "Ils ___ mangent ___ de viande. (pas)",    choices: ["ne … pas",    "ne … plus", "n' … jamais", "ne … de"], correctIdx: 0 },
+        { sentence: "Je ___ fume ___ . (plus)",                choices: ["ne … plus",   "ne … pas", "n' … jamais", "ne … de"],  correctIdx: 0 },
+        { sentence: "Elle ___ sort ___ le soir. (jamais)",     choices: ["ne … jamais", "ne … pas", "ne … plus", "ne … de"],    correctIdx: 0 },
+      ],
+    },
+  ],
 };

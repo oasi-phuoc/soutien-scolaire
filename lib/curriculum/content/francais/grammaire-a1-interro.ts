@@ -283,4 +283,63 @@ export const A1_GR_INTERRO: GrammarLesson = {
       verbPoolSize: 5,
     },
   ],
+  evalExercises: [
+    // ── Éval 1 — QCM: Formuler une question ───────────────────────────────────
+    {
+      type: "qcm",
+      title: "Évaluation — Question 1",
+      instruction: "Quelle est la formulation interrogative correcte ?",
+      items: [],
+      poolSize: 5,
+      pool: [
+        {
+          sentence: "Transformer : Tu parles français.",
+          choices: ["Tu parles français ?", "Parles-tu français ?", "Est-ce que tu parles français ?", "Toutes ces réponses sont correctes."],
+          correctIdx: 3,
+        },
+        {
+          sentence: "Forme la plus formelle pour : Il habite ici.",
+          choices: ["Habite-t-il ici ?", "Il habite ici ?", "Est-ce qu'il habite ici ?", "Habite il ici ?"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Quelle question est incorrecte ?",
+          choices: ["Habite-il ici ?", "Est-ce qu'il habite ici ?", "Il habite ici ?", "Habite-t-il ici ?"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Transformer avec est-ce que : Vous aimez le café.",
+          choices: ["Est-ce que vous aimez le café ?", "Vous aimez le café ?", "Aimez-vous le café ?", "Aimez vous le café ?"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Quelle est la forme avec inversion ?",
+          choices: ["Parle-t-elle français ?", "Est-ce qu'elle parle français ?", "Elle parle français ?", "Elle parle-t-elle français ?"],
+          correctIdx: 0,
+        },
+        {
+          sentence: "Transformer : Tu travailles le matin.",
+          choices: ["Travailles-tu le matin ?", "Est-ce que tu travailles le matin ?", "Tu travailles le matin ?", "Toutes ces réponses sont correctes."],
+          correctIdx: 3,
+        },
+      ],
+    },
+    // ── Éval 2 — Word order: Formez une question correcte ─────────────────────
+    {
+      type: "word_order",
+      title: "Évaluation — Question 2",
+      instruction: "Formez une question correcte.",
+      allowPartialValidation: true,
+      items: [],
+      poolSize: 4,
+      pool: [
+        { sentence: "Est-ce que tu parles français ?",    words: ["Est-ce", "que", "tu", "parles", "français", "?"]     },
+        { sentence: "Travailles-tu le matin ?",           words: ["Travailles-tu", "le", "matin", "?"]                   },
+        { sentence: "Est-ce qu'il habite à Genève ?",     words: ["Est-ce", "qu'il", "habite", "à", "Genève", "?"]      },
+        { sentence: "Mangez-vous au restaurant ?",        words: ["Mangez-vous", "au", "restaurant", "?"]                },
+        { sentence: "Est-ce que vous aimez le sport ?",   words: ["Est-ce", "que", "vous", "aimez", "le", "sport", "?"] },
+        { sentence: "Habitent-ils à Paris ?",             words: ["Habitent-ils", "à", "Paris", "?"]                     },
+      ],
+    },
+  ],
 };

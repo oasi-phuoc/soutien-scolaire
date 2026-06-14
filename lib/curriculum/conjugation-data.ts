@@ -57,6 +57,7 @@ export type ConjLesson = {
   theory2?: TheoryBlock[];
   midExercises?: Exercise[];
   exercises: Exercise[];
+  evalExercises?: Exercise[];
 };
 
 // ── Imports ───────────────────────────────────────────────────────────────────

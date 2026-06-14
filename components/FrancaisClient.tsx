@@ -65,7 +65,7 @@ function lessonHref(th: FrenchTheme): string {
 
 // ── State badges ──────────────────────────────────────────────────────────────
 
-function SectionStateBadge({ state }: { state: SectionState }) {
+function SectionStateBadge({ state, comingSoon }: { state: SectionState; comingSoon?: boolean }) {
   if (state === "completed")
     return (
       <span className="rounded-full bg-[var(--color-accent-fr)]/15 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
@@ -76,6 +76,12 @@ function SectionStateBadge({ state }: { state: SectionState }) {
     return (
       <span className="rounded-full bg-[var(--color-accent-fr)]/10 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
         En cours
+      </span>
+    );
+  if (comingSoon)
+    return (
+      <span className="rounded-full border border-[var(--color-border-default)] px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-[var(--color-text-secondary)]">
+        Bientôt
       </span>
     );
   return (
@@ -182,6 +188,7 @@ function SectionCard({
   returnTab,
   vocabGrades,
   isAdmin,
+  comingSoon,
 }: {
   sec: SectionDef;
   state: SectionState;
@@ -191,6 +198,7 @@ function SectionCard({
   returnTab?: FrenchTab;
   vocabGrades?: Record<string, { score: number; passed: boolean }>;
   isAdmin?: boolean;
+  comingSoon?: boolean;
 }) {
   const locked     = state === "locked";
   const inProgress = state === "in_progress";
@@ -245,7 +253,7 @@ function SectionCard({
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
           </div>
-          <SectionStateBadge state={state} />
+          <SectionStateBadge state={state} comingSoon={comingSoon} />
         </div>
       ) : (
         <button
@@ -257,7 +265,7 @@ function SectionCard({
           <div className="min-w-0 flex-1">
             <p className="text-sm font-bold text-[var(--color-text-primary)]">{sec.title}</p>
           </div>
-          <SectionStateBadge state={state} />
+          <SectionStateBadge state={state} comingSoon={comingSoon} />
           <svg
             width="14" height="14" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" strokeWidth="2"
@@ -422,9 +430,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
       ) : null}
 
       <section className="space-y-4" aria-label={`Leçons — ${tab}`} hidden={tab === "communication"}>
-        {tab === "grammaire" && !isAdmin ? (
-          <ComingSoon />
-        ) : tab === "vocabulaire" ? (
+        {tab === "vocabulaire" ? (
           <>
             {VOCAB_MODULES.map((mod) => {
               const themes = FRENCH_THEMES.filter((th) => th.section === mod.id && th.tab === "vocabulaire");
@@ -464,6 +470,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
                   ),
                 );
 
+            const GRAMMAR_AVAILABLE = new Set(["R1", "R2"]);
             let prevCount = 0;
 
             return (
@@ -474,8 +481,10 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
                     : allTabThemes.filter((th) => th.section === grp.id);
                   if (themes.length === 0) return null;
 
+                  const isComingSoon = tab === "grammaire" && !GRAMMAR_AVAILABLE.has(grp.id) && !isAdmin;
+
                   let state: SectionState;
-                  if (!hydrated) {
+                  if (!hydrated || (tab === "grammaire" && !GRAMMAR_AVAILABLE.has(grp.id) && !isAdmin)) {
                     state = "locked";
                   } else {
                     const prevThemes = allTabThemes.slice(0, prevCount);
@@ -503,6 +512,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
                       hydrated={hydrated}
                       returnTab={tab}
                       isAdmin={isAdmin}
+                      comingSoon={isComingSoon}
                     />
                   );
                 })}

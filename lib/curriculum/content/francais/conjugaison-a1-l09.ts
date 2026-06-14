@@ -855,4 +855,43 @@ export const A1_CONJ_L09: ConjLesson = {
       verbPoolSize: 5,
     },
   ],
+
+  evalExercises: [
+    {
+      type: "fill",
+      title: "Évaluation — Question 1",
+      instruction: "Conjuguez le verbe pronominal.",
+      items: [],
+      poolSize: 6,
+      pool: [
+        { sentence: "Je (se lever) → Je ___ lève.",        hint: "me / m'",   answer: "me"  },
+        { sentence: "Tu (se coucher) → Tu ___ couches.",   hint: "te / t'",   answer: "te"  },
+        { sentence: "Il (se laver) → Il ___ lave.",        hint: "se / s'",   answer: "se"  },
+        { sentence: "Nous (se préparer) → Nous ___ préparons.", hint: "nous", answer: "nous"},
+        { sentence: "Vous (s'habiller) → Vous ___ habillez.",   hint: "vous", answer: "vous"},
+        { sentence: "Ils (se lever) → Ils ___ lèvent.",    hint: "se / s'",   answer: "se"  },
+        { sentence: "Elle (s'appeler) → Elle ___ appelle.", hint: "se / s'",  answer: "s'"  },
+        { sentence: "Je (s'habiller) → Je ___ habille.",   hint: "me / m'",   answer: "m'"  },
+        { sentence: "Tu (se lever) → Tu ___ lèves.",       hint: "te / t'",   answer: "te"  },
+        { sentence: "On (se coucher) → On ___ couche.",    hint: "se / s'",   answer: "se"  },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Évaluation — Question 2",
+      instruction: "Choisissez la bonne forme du verbe pronominal.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Je ___ lève à 7h.",              choices: ["me",    "se",   "te",   "nous"],  correctIdx: 0 },
+        { sentence: "Elle ___ habille vite.",          choices: ["s'",    "se",   "me",   "te"],    correctIdx: 0 },
+        { sentence: "Nous ___ préparons le matin.",    choices: ["nous",  "se",   "me",   "vous"],  correctIdx: 0 },
+        { sentence: "Tu ___ couches tard ?",           choices: ["te",    "se",   "me",   "nous"],  correctIdx: 0 },
+        { sentence: "Ils ___ lèvent tôt.",             choices: ["se",    "me",   "te",   "nous"],  correctIdx: 0 },
+        { sentence: "Vous ___ réveillez à quelle heure ?", choices: ["vous","se","me","nous"],      correctIdx: 0 },
+        { sentence: "Il ___ rase le matin.",           choices: ["se",    "me",   "te",   "nous"],  correctIdx: 0 },
+        { sentence: "Je ___ douche le soir.",          choices: ["me",    "se",   "te",   "vous"],  correctIdx: 0 },
+      ],
+    },
+  ],
 };
