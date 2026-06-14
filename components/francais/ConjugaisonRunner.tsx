@@ -681,7 +681,7 @@ function QcmExercise({
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
               </div>
             ) : (
-              <div className="grid grid-cols-3 gap-2">
+              <div className={`grid gap-2 ${item.choices.length >= 4 ? "grid-cols-4" : item.choices.length === 2 ? "grid-cols-2" : "grid-cols-3"}`}>
                 {item.choices.map((choice, ci) => {
                   const isSelected = selected[i] === ci;
                   const isCorrect = ci === item.correctIdx;
