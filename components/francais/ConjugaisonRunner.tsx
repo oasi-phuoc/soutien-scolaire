@@ -690,7 +690,7 @@ function QcmExercise({
                   const isCorrect = ci === item.correctIdx;
                   const isFour = item.choices.length >= 4;
                   let cls =
-                    `rounded-[var(--radius-md)] border ${isFour ? "px-1 py-2 text-xs" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
+                    `rounded-[var(--radius-md)] border ${isFour ? "px-0.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
                   if (!validated) {
                     cls += isSelected
                       ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -1012,15 +1012,13 @@ function MatchExercise({
   const [connections, setConnections] = useState<Map<number, number>>(new Map());
   const [validated, setValidated] = useState(false);
 
-  const allConnected = connections.size === pairs.length;
-
   useEffect(() => {
-    onCanValidateChange(allConnected && !validated);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allConnected, validated]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allConnected) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       const allCorrect = pairs.every((pair, li) => {
         const ri = connections.get(li);
@@ -1445,15 +1443,13 @@ function TrueFalseExercise({
   const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(exercise.items.length).fill(null));
   const [validated, setValidated] = useState(false);
 
-  const allAnswered = answers.every((a) => a !== null);
-
   useEffect(() => {
-    onCanValidateChange(allAnswered && !validated);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allAnswered, validated]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allAnswered) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(answers.every((a, i) => a === exercise.items[i]!.answer));
     }
@@ -1521,15 +1517,13 @@ function OrderExercise({
   const [builts, setBuilts] = useState<string[][]>(() => exercise.items.map(() => []));
   const [validated, setValidated] = useState(false);
 
-  const allDone = builts.every((b, i) => b.length === exercise.items[i]!.sentence.split(" ").length);
-
   useEffect(() => {
-    onCanValidateChange(allDone && !validated);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allDone, validated]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allDone) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(builts.every((b, i) => b.join(" ") === exercise.items[i]!.sentence));
     }
@@ -1629,16 +1623,13 @@ function ClassifyExercise({
   const [chosen, setChosen] = useState<(number | null)[]>(() => new Array(items.length).fill(null));
   const [validated, setValidated] = useState(false);
 
-  const allChosen = chosen.every((c) => c !== null);
-  const canSubmit = exercise.allowPartialValidation ? !validated : allChosen && !validated;
-
   useEffect(() => {
-    onCanValidateChange(canSubmit);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canSubmit]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && (exercise.allowPartialValidation || allChosen)) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(chosen.every((c, i) => c === items[i]!.categoryIdx));
     }
@@ -1715,16 +1706,13 @@ function WordOrderExercise({
   const [pools, setPools] = useState<string[][]>(() => states.map((s) => [...s.shuffled]));
   const [validated, setValidated] = useState(false);
 
-  const allFilled = arranged.every((arr, i) => arr.length === states[i]!.allWords.length);
-  const canSubmitOrder = exercise.allowPartialValidation ? !validated : allFilled && !validated;
-
   useEffect(() => {
-    onCanValidateChange(canSubmitOrder);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [canSubmitOrder]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && (exercise.allowPartialValidation || allFilled)) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       const allCorrect = arranged.every((arr, i) =>
         arr.join(" ").replace(/ ([.?!])$/, "$1") === states[i]!.sentence,
@@ -1833,17 +1821,13 @@ function ColorHighlightExercise({
   );
   const [validated, setValidated] = useState(false);
 
-  const allFilled = colored.every((row, qi) =>
-    exercise.items[qi]!.answers.every((ans, wi) => ans === null || row[wi] !== null),
-  );
-
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allFilled, validated]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allFilled) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       const allCorrect = colored.every((row, qi) =>
         exercise.items[qi]!.answers.every((ans, wi) => ans === null || row[wi] === ans),
@@ -1998,17 +1982,13 @@ function Tag2Exercise({
   );
   const [validated, setValidated] = useState(false);
 
-  const allFilled = answers.every((a, i) =>
-    a.n !== null && (items[i]!.gender === null || a.g !== null),
-  );
-
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
+    onCanValidateChange(!validated);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allFilled, validated]);
+  }, [validated]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allFilled) {
+    if (validateCommand > 0 && !validated) {
       setValidated(true);
       onValidated(
         items.every((item, i) => {
