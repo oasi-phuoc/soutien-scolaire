@@ -7,70 +7,205 @@ const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[],
 
 export const TRAD_A8_2: SubmoduleTrad = {
   submoduleId: "A8-2",
-  title: S("Calcul de puissances", "Computing powers", "حساب القوى", "محاسبه توان‌ها", "ምሕሳብ ሓይልታት", "Обчислення степенів", "Cálculo de potências", "Xisaabinta awoodaha", "Üslü sayıları hesaplama", "د توانونو حساب"),
+  title: S(
+    "Calcul de puissances",
+    "Computing powers",
+    "حساب القوى",
+    "محاسبه توان‌ها",
+    "ምሕሳብ ሓይልታት",
+    "Обчислення степенів",
+    "Cálculo de potências",
+    "Xisaabinta awoodaha",
+    "Üslü sayıları hesaplama",
+    "د توانونو حساب"
+  ),
   blocks: [
-    { text: S("Comment calculer une puissance", "How to compute a power", "كيف نحسب قوة", "چگونه توان را محاسبه کنیم", "ሓይሊ ከመይ ንሕስቦ", "Як обчислити степінь", "Como calcular uma potência", "Sida awood loo xisaabiyo", "Üs nasıl hesaplanır", "توان څنګه حسابېږي") },
-    { text: S(
-      "Pour calculer une puissance, on multiplie la **base** par elle-même autant de fois que l'indique l'**exposant**.",
-      "To compute a power, multiply the **base** by itself as many times as the **exponent** indicates.",
-      "لحساب قوة نضرب **الأساس** في نفسه بعدد المرات الذي يحدده **الأس**.",
-      "برای محاسبه توان، **پایه** را به تعداد دفعاتی که **نما** نشان می‌دهد در خودش ضرب می‌کنیم.",
-      "ሓይሊ ንምሕሳብ፣ **መሰረት** ብርእሱ ክንደይ ግዜ ከምዝበዝሕ **ኤክስፖናንት** ይሕብር።",
-      "Щоб обчислити степінь, множимо **основу** саму на себе стільки разів, скільки показує **показник**.",
-      "Para calcular uma potência, multiplica-se a **base** por ela própria tantas vezes quanto indica o **expoente**.",
-      "Si loo xisaabiyo awood, **saldhigga** ayaa la isku dhuftaa inta jeer ee **jibbaarku** muujiyo.",
-      "Bir üssü hesaplamak için **taban**, **üs** kadar kez kendisiyle çarpılır.",
-      "د توان د حساب لپاره **بنسټ** د **توان** په شمېر له خپل ځان سره ضربېږي."
-    ) },
-    { headers: A(
-      ["Puissance", "Développement", "Résultat"],
-      ["Power", "Expanded form", "Result"],
-      ["القوة", "النشر", "النتيجة"],
-      ["توان", "گسترش", "نتیجه"],
-      ["ሓይሊ", "ምዝርጋሕ", "ውጽኢት"],
-      ["Степінь", "Розклад", "Результат"],
-      ["Potência", "Desenvolvimento", "Resultado"],
-      ["Awood", "Fidin", "Natiijo"],
-      ["Üs", "Açılım", "Sonuç"],
-      ["توان", "پراختيا", "پايله"]
-    ) },
-    { text: S("Propriétés des puissances (même base)", "Properties of powers (same base)", "خواص القوى (نفس الأساس)", "ویژگی‌های توان‌ها (پایه یکسان)", "ባህርያት ሓይልታት (ተመሳሳሊ መሰረት)", "Властивості степенів (однакова основа)", "Propriedades das potências (mesma base)", "Sifooyinka awoodaha (saldhig isku mid ah)", "Üslerin özellikleri (aynı taban)", "د توانونو ځانګړنې (يو بنسټ)") },
-    { text: S("Règles de calcul", "Calculation rules", "قواعد الحساب", "قانون‌های محاسبه", "ሕግታት ሕሳብ", "Правила обчислення", "Regras de cálculo", "Xeerarka xisaabta", "Hesap kuralları", "د حساب قاعدې"), items: A(
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (on **additionne** les exposants)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (on **soustrait** les exposants)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (we **add** the exponents)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (we **subtract** the exponents)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (نقوم **بجمع** الأسس)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (نقوم **بطرح** الأسس)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (**نماها را جمع** می‌کنیم)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (**نماها را کم** می‌کنیم)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (ኤክስፖናንትታት **ንደምር**)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (ኤክስፖናንትታት **ንንክይ**)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (**додаємо** показники)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (**віднімаємо** показники)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (**somamos** os expoentes)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (**subtraímos** os expoentes)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (jibbaarada waa **la isku daraa**)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (jibbaarada waa **la kala jaraa**)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (üsleri **toplarız**)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (üsleri **çıkarırız**)"],
-      ["aⁿ × aᵐ = aⁿ⁺ᵐ  (توانونه **جمع** کوو)", "aⁿ ÷ aᵐ = aⁿ⁻ᵐ  (توانونه **تفريق** کوو)"]
-    ) },
-    { text: S("Exemples d'application", "Application examples", "أمثلة تطبيقية", "مثال‌های کاربردی", "ተግባራዊ ኣብነታት", "Приклади застосування", "Exemplos de aplicação", "Tusaalooyin adeegsi", "Uygulama örnekleri", "عملي بېلګې") },
-    { items: A(
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3,125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"],
-      ["2³ × 2² = 2³⁺² = 2⁵ = 32", "3⁵ ÷ 3² = 3⁵⁻² = 3³ = 27", "5⁴ × 5¹ = 5⁵ = 3 125"]
-    ) },
-    { text: S(
-      "Ces règles ne s'appliquent que lorsque les bases sont identiques. On ne peut pas simplifier 2³ × 3² directement avec ces règles.",
-      "These rules apply only when the bases are the same. You cannot simplify 2³ × 3² directly with these rules.",
-      "تطبق هذه القواعد فقط عندما تكون الأساسات متطابقة. لا يمكن تبسيط 2³ × 3² مباشرة بهذه القواعد.",
-      "این قواعد فقط وقتی کاربرد دارند که پایه‌ها یکسان باشند. نمی‌توان 2³ × 3² را مستقیما با این قواعد ساده کرد.",
-      "እዞም ሕግታት መሰረታት ተመሳሳሊ እንተኾይኖም ጥራይ ይሰርሑ። 2³ × 3² ብቐጥታ በዞም ሕግታት ክትቕልሎ ኣይትኽእልን።",
-      "Ці правила діють лише тоді, коли основи однакові. Вираз 2³ × 3² не можна прямо спростити цими правилами.",
-      "Estas regras só se aplicam quando as bases são iguais. Não se pode simplificar diretamente 2³ × 3² com estas regras.",
-      "Xeerarkani waxay shaqeeyaan oo keliya marka saldhigyadu isku mid yihiin. 2³ × 3² si toos ah looguma fududayn karo xeerarkan.",
-      "Bu kurallar yalnızca tabanlar aynı olduğunda uygulanır. 2³ × 3² bu kurallarla doğrudan sadeleştirilemez.",
-      "دا قاعدې يوازې هغه وخت کار کوي چې بنسټونه يو شان وي. 2³ × 3² په مستقيم ډول په دې قاعدو نه ساده کېږي."
-    ) },
+    // 0 — highlight "Addition et soustraction"
+    {
+      text: S(
+        "Addition et soustraction",
+        "Addition and subtraction",
+        "الجمع والطرح",
+        "جمع و تفریق",
+        "ምኽፋልን ምቕናስን",
+        "Додавання і віднімання",
+        "Adição e subtração",
+        "Isku-dar iyo ka-jar",
+        "Toplama ve çıkarma",
+        "جمع او تفريق"
+      ),
+    },
+    // 1 — plain "Quand il y a une addition ou une soustraction de puissances..."
+    {
+      text: S(
+        "Quand il y a une addition ou une soustraction de puissances, il faut toujours calculer chaque puissance séparément.",
+        "When there is an addition or subtraction of powers, each power must always be calculated separately.",
+        "عند وجود جمع أو طرح للقوى، يجب دائمًا حساب كل قوة بشكل منفصل.",
+        "وقتی جمع یا تفریق توان‌ها وجود دارد، باید هر توان را جداگانه محاسبه کرد.",
+        "ምስ ዝህሉ ምርካብ ወይ ምቕናስ ሓይልታት፣ ነፍሲ ወከፍ ሓይሊ ብፍሉይ ክሕሰብ ኣለዎ።",
+        "Коли є додавання або віднімання степенів, кожен степінь слід обчислювати окремо.",
+        "Quando há uma adição ou subtração de potências, cada potência deve ser calculada separadamente.",
+        "Marka jirto isku-dar ama ka-jar awoodaha, mid kasta waa in si gaar ah loo xisaabiyaa.",
+        "Üslerin toplandığı veya çıkarıldığı durumlarda, her üs ayrı ayrı hesaplanmalıdır.",
+        "کله چې د توانونو جمع یا تفريق وي، هر توان باید جلا جلا حسابول شي."
+      ),
+    },
+    // 2 — plain "2³ + 3²" — pure math notation
+    {},
+    // 3 — section (items: pure math steps for 2³ + 3²)
+    {},
+    // 4 — plain "" (spacer)
+    {},
+    // 5 — plain "5² − 3²" — pure math notation
+    {},
+    // 6 — section (items: pure math steps for 5² − 3²)
+    {},
+    // 7 — heading "Multiplication"
+    {
+      text: S(
+        "Multiplication",
+        "Multiplication",
+        "الضرب",
+        "ضرب",
+        "ምብዛሕ",
+        "Множення",
+        "Multiplicação",
+        "Isku-dhufasho",
+        "Çarpma",
+        "ضرب"
+      ),
+    },
+    // 8 — plain "Lorsque l'on multiplie deux puissances qui ont la même base..."
+    {
+      text: S(
+        "Lorsque l'on multiplie deux puissances qui ont la même base, on conserve la base et on additionne les exposants.",
+        "When multiplying two powers with the same base, keep the base and add the exponents.",
+        "عند ضرب قوتين لهما نفس الأساس، نحتفظ بالأساس ونجمع الأسس.",
+        "وقتی دو توان با پایه یکسان ضرب می‌شوند، پایه را نگه می‌داریم و نماها را جمع می‌کنیم.",
+        "ክልተ ሓይልታት ተመሳሳሊ መሰረት ዝውንናን ምስ ዝብዝሑ፣ መሰረት ንሕዞ ኤክስፖናንትታት ድማ ንደምሮም።",
+        "Коли множимо два степені з однаковою основою, основу залишаємо і показники додаємо.",
+        "Ao multiplicar duas potências com a mesma base, conserva-se a base e somam-se os expoentes.",
+        "Marka lagu dhufanayo awoodaha leh saldhig isku mid ah, saldhigga waa la ilaaliyaa jibbaaradana waa la isku daraa.",
+        "Aynı tabanlı iki üs çarpılırken taban korunur ve üsler toplanır.",
+        "کله چې دوه توانونه چې يو بنسټ لري ضرب کېږي، بنسټ ساتل کېږي او توانونه جمع کېږي."
+      ),
+    },
+    // 9 — table (header only: "aᵐ × aⁿ = aᵐ⁺ⁿ") — pure math formula header
+    {
+      headers: A(
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"],
+        ["aᵐ × aⁿ = aᵐ⁺ⁿ"]
+      ),
+    },
+    // 10 — plain "2³ × 2² = 2³⁺² = 2⁵ = 32" — pure math
+    {},
+    // 11 — section (items: pure math development of 2³ × 2²)
+    {},
+    // 12 — heading "Division"
+    {
+      text: S(
+        "Division",
+        "Division",
+        "القسمة",
+        "تقسیم",
+        "ምምቃል",
+        "Ділення",
+        "Divisão",
+        "Qeybinta",
+        "Bölme",
+        "تقسيم"
+      ),
+    },
+    // 13 — plain "Lorsque l'on divise deux puissances qui ont la même base..."
+    {
+      text: S(
+        "Lorsque l'on divise deux puissances qui ont la même base, on conserve la base et on soustrait les exposants.",
+        "When dividing two powers with the same base, keep the base and subtract the exponents.",
+        "عند قسمة قوتين لهما نفس الأساس، نحتفظ بالأساس ونطرح الأسس.",
+        "وقتی دو توان با پایه یکسان تقسیم می‌شوند، پایه را نگه می‌داریم و نماها را کم می‌کنیم.",
+        "ክልተ ሓይልታት ተመሳሳሊ መሰረት ዝውንናን ምስ ዝምቀሉ፣ መሰረት ንሕዞ ኤክስፖናንትታት ድማ ንቕንስ።",
+        "Коли ділимо два степені з однаковою основою, основу залишаємо і показники віднімаємо.",
+        "Ao dividir duas potências com a mesma base, conserva-se a base e subtraem-se os expoentes.",
+        "Marka lagu qeybinayo awoodaha leh saldhig isku mid ah, saldhigga waa la ilaaliyaa jibbaaradana waa la kala jaraa.",
+        "Aynı tabanlı iki üs bölünürken taban korunur ve üsler çıkarılır.",
+        "کله چې دوه توانونه چې يو بنسټ لري تقسيم کېږي، بنسټ ساتل کېږي او توانونه تفريق کېږي."
+      ),
+    },
+    // 14 — table (header only: "aⁿ ÷ aᵐ = aⁿ⁻ᵐ") — pure math formula header
+    {
+      headers: A(
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"],
+        ["aⁿ ÷ aᵐ = aⁿ⁻ᵐ"]
+      ),
+    },
+    // 15 — plain "2⁵ ÷ 2² = 2⁵⁻² = 2³ = 8" — pure math
+    {},
+    // 16 — section (items: pure math development of 2⁵ ÷ 2²)
+    {},
+    // 17 — heading "Puissance d'une puissance"
+    {
+      text: S(
+        "Puissance d'une puissance",
+        "Power of a power",
+        "قوة القوة",
+        "توان یک توان",
+        "ሓይሊ ናይ ሓይሊ",
+        "Степінь степеня",
+        "Potência de uma potência",
+        "Awood awoodeed",
+        "Üssün üssü",
+        "د توان توان"
+      ),
+    },
+    // 18 — plain "Lorsqu'une puissance est elle-même élevée à une autre puissance..."
+    {
+      text: S(
+        "Lorsqu'une puissance est elle-même élevée à une autre puissance, on conserve la base et on multiplie les exposants.",
+        "When a power is itself raised to another power, keep the base and multiply the exponents.",
+        "عندما ترفع قوة إلى قوة أخرى، نحتفظ بالأساس ونضرب الأسس.",
+        "وقتی یک توان خودش به توان دیگری برسد، پایه را نگه می‌داریم و نماها را ضرب می‌کنیم.",
+        "ሓይሊ ናብ ካልእ ሓይሊ ዝድይብ ምስ ዝኸውን፣ መሰረት ንሕዞ ኤክስፖናንትታት ድማ ንበዝሖም።",
+        "Коли степінь піднімають до іншого степеня, основу залишаємо і показники множимо.",
+        "Quando uma potência é ela própria elevada a outra potência, conserva-se a base e multiplicam-se os expoentes.",
+        "Marka awood la kor u qaado awood kale, saldhigga waa la ilaaliyaa jibbaaradana waa la isku dhufaa.",
+        "Bir üs, başka bir üsse yükseltildiğinde taban korunur ve üsler çarpılır.",
+        "کله چې يو توان پخپله بل توان ته لوړ شي، بنسټ ساتل کېږي او توانونه ضرب کېږي."
+      ),
+    },
+    // 19 — table (header only: "(aᵐ)ⁿ = aᵐˣⁿ") — pure math formula header
+    {
+      headers: A(
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"],
+        ["(aᵐ)ⁿ = aᵐˣⁿ"]
+      ),
+    },
+    // 20 — plain "(2³)²" — pure math notation
+    {},
+    // 21 — section (items: pure math development of (2³)²)
+    {},
   ],
 };
