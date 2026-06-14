@@ -171,10 +171,13 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "rule",
       text: "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a} (article + nom + adjectif).",
       examples: [
-        { correct: "C'est un homme {a}gentil{/a}." },
-        { correct: "Il est {a}gentil{/a}." },
-        { wrong: "C'est gentil. (sauf pour commenter une situation générale)" },
+        { correct: "C'est un homme {a}gentil{/a}. (article + nom + adjectif)" },
+        { correct: "Il est {a}gentil{/a}. (adjectif seul)" },
       ],
+    },
+    {
+      type: "note",
+      text: "❌ C'est gentil. → incorrect pour décrire une personne. Valide uniquement pour commenter une situation générale : C'est gentil de ta part !",
     },
 
     // ── MÉTHODE RAPIDE ─────────────────────────────────────────────────────────

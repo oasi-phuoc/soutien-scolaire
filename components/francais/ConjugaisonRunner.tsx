@@ -485,6 +485,23 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             );
           }
 
+          case "illus_cards": {
+            const cols = block.cols ?? 4;
+            return (
+              <div key={i} className="grid gap-2" style={{ gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))` }}>
+                {block.items.map((item, wi) => (
+                  <div key={wi} className="flex flex-col items-center gap-1">
+                    <div
+                      className="w-full overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1"
+                      dangerouslySetInnerHTML={{ __html: item.svg }}
+                    />
+                    <p className="text-center text-[10px] font-semibold leading-tight text-[var(--color-accent-fr)]">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+            );
+          }
+
           case "grammar_link":
             return (
               <a

@@ -27,6 +27,7 @@ export type TheoryBlock =
   | { type: "verb_toggle"; verbs: VerbToggleVerb[]; negation?: boolean; buttonCols?: number; noArrow?: boolean }
   | { type: "clock_display"; clocks: { h: number; m: number; label?: string }[]; cols?: number }
   | { type: "word_cards"; items: string[]; cols?: 2 | 3 | 4 }
+  | { type: "illus_cards"; items: Array<{ label: string; svg: string }>; cols?: 2 | 3 | 4 | 5 }
   | { type: "grammar_link"; text: string; href: string };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
