@@ -224,4 +224,16 @@ export const TRAD_A4_2: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-2-ep01": { fr: "Simplifiez 4/8 en fraction irréductible. (ex: 1/2)", en: "Simplify 4/8 to an irreducible fraction. (e.g. 1/2)" },
+    "a4-2-ep02": { fr: "Simplifiez 6/9 en fraction irréductible. (ex: 2/3)", en: "Simplify 6/9 to an irreducible fraction. (e.g. 2/3)" },
+    "a4-2-ep03": { fr: "Simplifiez 10/15 en fraction irréductible. (ex: 2/3)", en: "Simplify 10/15 to an irreducible fraction. (e.g. 2/3)" },
+    "a4-2-ep04": { fr: "Simplifiez 12/16 en fraction irréductible. (ex: 3/4)", en: "Simplify 12/16 to an irreducible fraction. (e.g. 3/4)" },
+    "a4-2-ep05": { fr: "2/3 et 4/6 sont-elles des fractions équivalentes ? (oui/non)", en: "Are 2/3 and 4/6 equivalent fractions? (yes/no)" },
+    "a4-2-ep06": { fr: "Complétez : 1/2 = ?/6. Quelle est la valeur de ? ?", en: "Complete: 1/2 = ?/6. What is the value of ?" },
+    "a4-2-ep07": { fr: "Complétez : 3/4 = ?/12. Quelle est la valeur de ? ?", en: "Complete: 3/4 = ?/12. What is the value of ?" },
+    "a4-2-ep08": { fr: "Simplifiez 8/12 en fraction irréductible. (ex: 2/3)", en: "Simplify 8/12 to an irreducible fraction. (e.g. 2/3)" },
+    "a4-2-ep09": { fr: "Simplifiez 15/25 en fraction irréductible. (ex: 3/5)", en: "Simplify 15/25 to an irreducible fraction. (e.g. 3/5)" },
+    "a4-2-ep10": { fr: "Complétez : 2/5 = ?/10. Quelle est la valeur de ? ?", en: "Complete: 2/5 = ?/10. What is the value of ?" },
+  },
 };

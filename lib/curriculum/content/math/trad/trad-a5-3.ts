@@ -145,4 +145,11 @@ export const TRAD_A5_3: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a5-3-e1": { fr: "Arrondissez 3,47 au dixième.", en: "Round 3.47 to the nearest tenth." },
+    "a5-3-e2": { fr: "Arrondissez 3,42 au dixième.", en: "Round 3.42 to the nearest tenth." },
+    "a5-3-e3": { fr: "Arrondissez 5,678 au centième.", en: "Round 5.678 to the nearest hundredth." },
+    "a5-3-e4": { fr: "Arrondissez 12,351 à l'unité.", en: "Round 12.351 to the nearest whole number." },
+    "a5-3-e5": { fr: "Arrondissez 9,95 au dixième.", en: "Round 9.95 to the nearest tenth." },
+  },
 };

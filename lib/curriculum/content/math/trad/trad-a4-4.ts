@@ -211,4 +211,16 @@ export const TRAD_A4_4: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-4-ep01": { fr: "Calculez 1/5 + 2/5. (ex: 3/5)", en: "Calculate 1/5 + 2/5. (e.g. 3/5)" },
+    "a4-4-ep02": { fr: "Calculez 3/8 + 2/8. (ex: 5/8)", en: "Calculate 3/8 + 2/8. (e.g. 5/8)" },
+    "a4-4-ep03": { fr: "Calculez 5/7 − 2/7. (ex: 3/7)", en: "Calculate 5/7 − 2/7. (e.g. 3/7)" },
+    "a4-4-ep04": { fr: "Calculez 1/2 + 1/3. PPCM(2,3)=6 : 3/6 + 2/6 = ? (ex: 5/6)", en: "Calculate 1/2 + 1/3. LCM(2,3)=6: 3/6 + 2/6 = ? (e.g. 5/6)" },
+    "a4-4-ep05": { fr: "Calculez 3/4 − 1/2. PPCM(4,2)=4 : 3/4 − 2/4 = ? (ex: 1/4)", en: "Calculate 3/4 − 1/2. LCM(4,2)=4: 3/4 − 2/4 = ? (e.g. 1/4)" },
+    "a4-4-ep06": { fr: "Calculez 2/3 + 1/6. PPCM(3,6)=6 : 4/6 + 1/6 = ? Simplifiez. (ex: 5/6)", en: "Calculate 2/3 + 1/6. LCM(3,6)=6: 4/6 + 1/6 = ? Simplify. (e.g. 5/6)" },
+    "a4-4-ep07": { fr: "Calculez 7/8 − 3/8. (ex: 1/2)", en: "Calculate 7/8 − 3/8. (e.g. 1/2)" },
+    "a4-4-ep08": { fr: "Calculez 1/4 + 1/4 + 1/4. (ex: 3/4)", en: "Calculate 1/4 + 1/4 + 1/4. (e.g. 3/4)" },
+    "a4-4-ep09": { fr: "Calculez 5/6 − 1/3. PPCM(6,3)=6 : 5/6 − 2/6 = ? (ex: 3/6 ou 1/2)", en: "Calculate 5/6 − 1/3. LCM(6,3)=6: 5/6 − 2/6 = ? (e.g. 3/6 or 1/2)" },
+    "a4-4-ep10": { fr: "Calculez 1/2 + 1/4. PPCM(2,4)=4 : 2/4 + 1/4 = ? (ex: 3/4)", en: "Calculate 1/2 + 1/4. LCM(2,4)=4: 2/4 + 1/4 = ? (e.g. 3/4)" },
+  },
 };

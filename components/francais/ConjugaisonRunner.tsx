@@ -216,22 +216,21 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
 
 function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot: string; showTrans: boolean }) {
   const isRtl = pivot === "ar" || pivot === "fa";
+  const useTrans = showTrans && pivot !== "fr";
 
   return (
     <div className="space-y-5">
       {blocks.map((block, i) => {
         switch (block.type) {
           case "heading":
+            const headingText = useTrans && block.trans?.[pivot as keyof typeof block.trans]
+              ? block.trans[pivot as keyof typeof block.trans]!
+              : block.text;
             return (
-              <div key={i} className={block.trans?.[pivot as keyof typeof block.trans] ? "space-y-0.5" : ""}>
-                <h2 className={`font-bold ${block.sub ? "text-base" : "text-lg"} ${block.accent ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`}>
-                  {block.text}
+              <div key={i}>
+                <h2 className={`font-bold ${block.sub ? "text-base" : "text-lg"} ${block.accent ? "text-[var(--color-accent-fr)]" : "text-[var(--color-text-primary)]"}`} lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
+                  {headingText}
                 </h2>
-                {showTrans && block.trans?.[pivot as keyof typeof block.trans] && (
-                  <p className="text-sm text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                    {block.trans[pivot as keyof typeof block.trans]}
-                  </p>
-                )}
               </div>
             );
 
@@ -336,8 +335,8 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             );
 
           case "grid": {
-            const transH = block.transHeaders?.[pivot as keyof typeof block.transHeaders];
-            const transR = block.transRows?.[pivot as keyof typeof block.transRows];
+            const transH = useTrans ? block.transHeaders?.[pivot as keyof typeof block.transHeaders] : undefined;
+            const transR = useTrans ? block.transRows?.[pivot as keyof typeof block.transRows] : undefined;
             return (
               <div key={i} className="space-y-2">
                 <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)]">
@@ -352,13 +351,8 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                     <thead>
                       <tr className="bg-[var(--color-accent-fr)]/15">
                         {block.headers.map((h, hi) => (
-                          <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]">
-                            {h}
-                            {showTrans && transH?.[hi] && (
-                              <span className="block text-[10px] font-normal normal-case tracking-normal text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                                {transH[hi]}
-                              </span>
-                            )}
+                          <th key={hi} className="px-3 py-2 text-left text-xs font-bold uppercase tracking-wide text-[var(--color-accent-fr)]" lang={transH?.[hi] ? pivot : undefined} dir={transH?.[hi] && isRtl ? "rtl" : "ltr"}>
+                            {transH?.[hi] ?? h}
                           </th>
                         ))}
                       </tr>
@@ -367,18 +361,13 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                       {block.rows.map((row, ri) => (
                         <tr key={ri} className={ri % 2 === 0 ? "bg-[var(--color-bg-primary)]" : "bg-[var(--color-bg-secondary)]/40"}>
                           {row.map((cell, ci) => {
-                            const transCell = showTrans && transR ? transR[ri]?.[ci] : undefined;
+                            const transCell = transR ? transR[ri]?.[ci] : undefined;
                             const transText = transCell
                               ? (block.pronounGrid && transCell.includes(" → ") ? transCell.split(" → ").slice(1).join(" → ") : transCell)
                               : undefined;
                             return (
-                              <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)]${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`}>
-                                {block.pronounGrid ? renderPronounCell(cell) : renderInlineMarkup(cell)}
-                                {transText && (
-                                  <span className="block text-xs text-[var(--color-text-secondary)] mt-0.5" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                                    {transText}
-                                  </span>
-                                )}
+                              <td key={ci} className={`px-3 py-2 text-sm text-[var(--color-text-primary)]${block.boldFirstCol && ci === 0 ? " font-semibold" : ""}`} lang={transText ? pivot : undefined} dir={transText && isRtl ? "rtl" : "ltr"}>
+                                {block.pronounGrid && !transText ? renderPronounCell(cell) : renderInlineMarkup(transText ?? cell)}
                               </td>
                             );
                           })}
@@ -392,6 +381,9 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
           }
 
           case "plain_list":
+            const plainItems = useTrans && block.transItems?.[pivot as keyof typeof block.transItems]
+              ? block.transItems[pivot as keyof typeof block.transItems]!
+              : block.items;
             return (
               <div key={i} className="space-y-1">
                 {block.label && (
@@ -400,13 +392,13 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                   </p>
                 )}
                 <ul className="space-y-1.5">
-                  {block.items.map((item, ii) => (
+                  {plainItems.map((item, ii) => (
                     <li key={ii} className="space-y-0.5">
-                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                      <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]" lang={useTrans ? pivot : undefined} dir={useTrans && isRtl ? "rtl" : "ltr"}>
                         {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                         <span>{renderInlineMarkup(item)}</span>
                       </div>
-                      {showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
+                      {false && showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
                         <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${(block.allBullets || ii > 0) ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                           {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0">•</span>}
                           <span>{renderInlineMarkup(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
@@ -419,28 +411,30 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
             );
 
           case "highlight": {
-            const transLabel = block.transLabel?.[pivot as keyof typeof block.transLabel];
-            const transItems = block.transItems?.[pivot as keyof typeof block.transItems];
+            const transLabel = useTrans ? block.transLabel?.[pivot as keyof typeof block.transLabel] : undefined;
+            const transItems = useTrans ? block.transItems?.[pivot as keyof typeof block.transItems] : undefined;
+            const label = transLabel ?? block.label;
+            const items = transItems ?? block.items;
             return (
               <div key={i} className="space-y-1.5">
                 <div className="space-y-0.5">
-                  <p className="text-sm font-bold text-[var(--color-accent-fr)]">{block.label}</p>
-                  {showTrans && transLabel && (
+                  <p className="text-sm font-bold text-[var(--color-accent-fr)]" lang={transLabel ? pivot : undefined} dir={transLabel && isRtl ? "rtl" : "ltr"}>{label}</p>
+                  {false && showTrans && transLabel && (
                     <p className="text-xs font-bold text-[var(--color-text-secondary)]" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                       {transLabel}
                     </p>
                   )}
                 </div>
                 <ul className="space-y-1 pl-3 border-l-2 border-[var(--color-accent-fr)]/30">
-                  {block.items.map((item, ii) => {
+                  {items.map((item, ii) => {
                     const skipBullet = (block.noFirstBullet && !item.includes(" → ")) || (block.noBulletItems?.includes(ii) ?? false);
                     return (
                       <li key={ii} className="space-y-0.5">
-                        <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                        <div className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]" lang={transItems?.[ii] ? pivot : undefined} dir={transItems?.[ii] && isRtl ? "rtl" : "ltr"}>
                           {!skipBullet && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                           <span>{renderInlineMarkup(item, !block.inlineArrows)}</span>
                         </div>
-                        {showTrans && transItems?.[ii] && (
+                        {false && showTrans && transItems?.[ii] && (
                           <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${!skipBullet ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
                             {!skipBullet && <span className="mt-0.5 shrink-0">•</span>}
                             <span>{renderInlineMarkup(transItems[ii]!, !block.inlineArrows)}</span>
@@ -595,12 +589,7 @@ function QcmExercise({
   return (
     <div className="space-y-5">
       <div>
-        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
-          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
-          </p>
-        )}
+        <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>{translatedInstruction ?? exercise.instruction}</p>
       </div>
       {items.map((item: QcmItem, i) => {
         const hasInlineToggle = exercise.toggleChoices && item.sentence.includes(" → ");
@@ -810,12 +799,7 @@ function FillExercise({
   return (
     <div className="space-y-5">
       <div>
-        <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
-        {showTrans && exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction] && (
-          <p className="mt-0.5 text-xs text-[var(--color-text-secondary)] opacity-70" lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-            {exercise.transInstruction[pivot as keyof typeof exercise.transInstruction]}
-          </p>
-        )}
+        <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>{translatedInstruction ?? exercise.instruction}</p>
       </div>
       {items.map((item: FillItem, i) => {
         const userAnswer = inputs[i] ?? "";

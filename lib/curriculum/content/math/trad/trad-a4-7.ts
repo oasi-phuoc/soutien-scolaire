@@ -206,4 +206,16 @@ export const TRAD_A4_7: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-7-ep01": { fr: "Convertissez 1/2 en nombre décimal. (ex: 0.5)", en: "Convert 1/2 to a decimal number. (e.g. 0.5)" },
+    "a4-7-ep02": { fr: "Convertissez 1/4 en nombre décimal. (ex: 0.25)", en: "Convert 1/4 to a decimal number. (e.g. 0.25)" },
+    "a4-7-ep03": { fr: "Convertissez 3/4 en nombre décimal. (ex: 0.75)", en: "Convert 3/4 to a decimal number. (e.g. 0.75)" },
+    "a4-7-ep04": { fr: "Convertissez 3/10 en nombre décimal. (ex: 0.3)", en: "Convert 3/10 to a decimal number. (e.g. 0.3)" },
+    "a4-7-ep05": { fr: "Convertissez 7/100 en nombre décimal. (ex: 0.07)", en: "Convert 7/100 to a decimal number. (e.g. 0.07)" },
+    "a4-7-ep06": { fr: "Convertissez 0.6 en fraction décimale (sur 10). (ex: 6/10)", en: "Convert 0.6 to a decimal fraction (over 10). (e.g. 6/10)" },
+    "a4-7-ep07": { fr: "Convertissez 0.25 en fraction (sur 100, puis simplifiez). (ex: 1/4)", en: "Convert 0.25 to a fraction (over 100, then simplify). (e.g. 1/4)" },
+    "a4-7-ep08": { fr: "1/5 = ? décimal. (ex: 0.2)", en: "1/5 = ? as a decimal. (e.g. 0.2)" },
+    "a4-7-ep09": { fr: "Convertissez 0.8 en fraction simplifiée. (ex: 4/5)", en: "Convert 0.8 to a simplified fraction. (e.g. 4/5)" },
+    "a4-7-ep10": { fr: "Convertissez 2/5 en nombre décimal. (ex: 0.4)", en: "Convert 2/5 to a decimal number. (e.g. 0.4)" },
+  },
 };

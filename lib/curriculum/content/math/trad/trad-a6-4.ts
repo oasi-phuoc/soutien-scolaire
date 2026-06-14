@@ -141,4 +141,11 @@ export const TRAD_A6_4: SubmoduleTrad = {
       ["ضريب", "بېلګه (بنسټ 100)"]
     ) },
   ],
+  consignes: {
+    "a6-4-e1": { fr: "Offre A : −20% sur 150 CHF. Prix final ?", en: "Offer A: −20% on 150 CHF. Final price?" },
+    "a6-4-e2": { fr: "Offre B : −15% sur 130 CHF. Prix final ?", en: "Offer B: −15% on 130 CHF. Final price?" },
+    "a6-4-e3": { fr: "Classe A : 18 sur 24. Taux de réussite ?", en: "Class A: 18 out of 24. Success rate?" },
+    "a6-4-e4": { fr: "Classe B : 21 sur 30. Taux de réussite ?", en: "Class B: 21 out of 30. Success rate?" },
+    "a6-4-e5": { fr: "Veste Magasin C : 220 CHF − 30%. Prix final ?", en: "Jacket at Store C: 220 CHF − 30%. Final price?" },
+  },
 };

@@ -4,10 +4,15 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
+import { getTrad } from "@/lib/curriculum/content/math/trad";
+import type { BlockTrad } from "@/lib/curriculum/content/math/trad";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
+import { usePivotLang } from "@/components/math/usePivotLang";
+import { useTranslation } from "@/components/TranslationProvider";
+import type { PivotCode } from "@/lib/pivot-langs";
 import { FractionToggleExercise, FractionColoringExercise, FractionReadExercise, FractionMultiColoringExercise, FractionMultiReadExercise, FractionEquivExercise, FractionSimplifyExercise, FractionCompareExercise, FracOpCompareExercise, FracToDecExercise, DecToFracExercise } from "@/components/math/A4ModuleContent";
 import { FractionOpsExercise, type FracOpMode } from "@/components/math/A4FractionOpsContent";
 import { DecArithGroupExercise, DecMulColGridExercise, DecDivSimpleExercise, DecDivMissingExercise, DecDivExtExercise, DecColArithExercise, DecColArithFullExercise, DecExprCompExercise, DecMul2ColExercise } from "@/components/math/A5DecimalContent";
@@ -597,6 +602,26 @@ function renderFracText(text: string): React.ReactNode {
     if (part) nodes.push(part);
   });
   return <>{nodes}</>;
+}
+
+function escapeRegExp(text: string) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function preserveEvidence(fr: string | undefined, text: string | undefined) {
+  if (!text) return fr ?? "";
+  if (text.includes("**")) return text;
+  if (!fr?.includes("**")) return text;
+
+  let result = text;
+  const marked = Array.from(fr.matchAll(/\*\*(.+?)\*\*/g)).map((m) => m[1]).filter(Boolean);
+  for (const raw of marked) {
+    const token = raw.trim();
+    if (!token) continue;
+    const escaped = escapeRegExp(token);
+    result = result.replace(new RegExp(`(?<!\\*)\\b${escaped}\\b(?!\\*)`, "g"), `**${token}**`);
+  }
+  return result;
 }
 
 function MulDemoGrid({ a, b, op, carries, result, prevCarries, prevResult }: {
@@ -1217,96 +1242,130 @@ function ShapeExplorer({ block }: { block: Extract<MathRichBlock, { type: "shape
   );
 }
 
-function BlockView({ block }: { block: MathRichBlock }) {
+function BlockView({ block, blockIdx, tradBlocks, pivot = "fr", showPivot = false }: {
+  block: MathRichBlock;
+  blockIdx?: number;
+  tradBlocks?: BlockTrad[];
+  pivot?: PivotCode;
+  showPivot?: boolean;
+}) {
+  const bt = blockIdx !== undefined ? tradBlocks?.[blockIdx] : undefined;
+  const isRtl = pivot === "ar" || pivot === "fa" || pivot === "ps";
+  const usePivot = showPivot && pivot !== "fr";
+  const textDir = usePivot && isRtl ? "rtl" : "ltr";
+  const textLang = usePivot ? pivot : undefined;
+  const textFor = (fr: string | undefined, pv?: string) => usePivot && pv ? preserveEvidence(fr, pv) : (fr ?? "");
+  const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv.map((item, i) => preserveEvidence(fr[i], item)) : fr;
+  const headersFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
+  const stepTextFor = (step: { numFr: string; textsFr: string[] }, stepIdx: number) => {
+    const raw = bt?.items?.[pivot]?.[stepIdx];
+    if (!usePivot || !raw) return { title: step.numFr, texts: step.textsFr };
+    const [title, ...texts] = raw.split("||");
+    return {
+      title: preserveEvidence(step.numFr, title ?? step.numFr),
+      texts: texts.length ? texts.map((text, i) => preserveEvidence(step.textsFr[i], text)) : step.textsFr,
+    };
+  };
+
   switch (block.type) {
     case "heading":
       return block.black ? (
-        <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]">{block.fr}</h3>
+        <h3 className="mt-3 mb-1 text-base font-bold text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot]))}</h3>
       ) : (
-        <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]">{block.fr}</h3>
+        <h3 className="mt-4 mb-1 text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot]))}</h3>
       );
     case "plain":
       if (!block.fr) return <div className="h-3" />;
-      return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{renderFracText(block.fr)}</p>;
+      return <p className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot]))}</p>;
     case "note":
       return (
         <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 text-xs text-blue-800 dark:border-blue-800 dark:bg-blue-950/30 dark:text-blue-300">
-          {block.fr}
+          <span lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot] ?? block.pivot?.[pivot]))}</span>
         </div>
       );
     case "example":
       return (
-        <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]">
-          {block.fr}
+        <div className="rounded-xl bg-[var(--color-bg-secondary)] px-4 py-3 font-mono text-xs text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
+          {renderFracText(textFor(block.fr, bt?.text?.[pivot] ?? block.pivot?.[pivot]))}
         </div>
       );
     case "highlight":
       return (
-        <p className="text-sm font-bold text-[var(--color-accent-alg)]">{renderFracText(block.fr)}</p>
+        <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(textFor(block.fr, bt?.text?.[pivot] ?? block.pivot?.[pivot]))}</p>
       );
     case "rule":
+      const ruleTitle = textFor(block.titleFr, bt?.label?.[pivot] ?? bt?.text?.[pivot] ?? block.pivot?.[pivot]?.title);
+      const ruleItems = itemsFor(block.itemsFr, bt?.items?.[pivot] ?? block.pivot?.[pivot]?.items);
       return (
         <div className="space-y-2 rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-4 py-3">
-          <p className="text-xs font-bold text-[var(--color-text-primary)]">{block.titleFr}</p>
+          <p className="text-xs font-bold text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(ruleTitle)}</p>
           <ul className="list-disc space-y-1 pl-4">
-            {block.itemsFr.map((it, i) => (
-              <li key={i} className="text-xs text-[var(--color-text-secondary)]">{renderFracText(it)}</li>
+            {ruleItems.map((it, i) => (
+              <li key={i} className="text-xs text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{renderFracText(it)}</li>
             ))}
           </ul>
         </div>
       );
-    case "table":
+    case "table": {
+      const tableHeaders = headersFor(block.headersFr, bt?.headers?.[pivot]);
+      const tableRows = usePivot && bt?.items?.[pivot]?.length
+        ? bt.items[pivot]!.map((row) => row.split("|").map((cell) => cell.trim()))
+        : block.rows;
+      const tableCaption = usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr;
       return (
         <div className="overflow-x-auto rounded-xl border border-[var(--color-border-default)]">
           <table className="min-w-full text-sm">
-            {block.headersFr.length > 0 && (
+            {tableHeaders.length > 0 && (
               <thead>
                 <tr className={block.accentHeader ? "bg-[var(--color-accent-alg)]/10" : "bg-[var(--color-bg-secondary)]"}>
-                  {block.headersFr.map((h, i) => (
+                  {tableHeaders.map((h, i) => (
                     <th key={i} className={`px-3 py-2 text-center font-semibold ${block.accentHeader ? "text-[var(--color-accent-alg)]" : "text-[var(--color-text-primary)]"}`}>{h}</th>
                   ))}
                 </tr>
               </thead>
             )}
             <tbody>
-              {block.rows.map((row, ri) => (
-                <tr key={ri} className={ri > 0 || block.headersFr.length > 0 ? "border-t border-[var(--color-border-default)]" : ""}>
+              {tableRows.map((row, ri) => (
+                <tr key={ri} className={ri > 0 || tableHeaders.length > 0 ? "border-t border-[var(--color-border-default)]" : ""}>
                   {row.map((cell, ci) => (
-                    <td key={ci} className={`px-3 py-2 ${block.colAligns?.[ci] === "left" ? "text-left" : "text-center"} text-[var(--color-text-secondary)]`}>{renderFracText(cell)}</td>
+                    <td key={ci} className={`px-3 py-2 ${block.colAligns?.[ci] === "left" ? "text-left" : "text-center"} text-[var(--color-text-secondary)]`} lang={textLang} dir={textDir}>{renderFracText(cell)}</td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
-          {block.captionFr && (
-            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {tableCaption && (
+            <p className="px-3 py-1 text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{tableCaption}</p>
           )}
         </div>
       );
+    }
     case "svg":
       return block.noFrame ? (
         <div className="my-2">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
-          {block.captionFr && (
-            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {(usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr) && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr}</p>
           )}
         </div>
       ) : (
         <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
-          {block.captionFr && (
-            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
+          {(usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr) && (
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]" lang={textLang} dir={textDir}>{usePivot && bt?.caption?.[pivot] ? bt.caption[pivot] : block.captionFr}</p>
           )}
         </div>
       );
     case "section":
+      const sectionLabel = textFor(block.labelFr, bt?.label?.[pivot]);
+      const sectionItems = itemsFor(block.itemsFr, bt?.items?.[pivot]);
       return (
         <div className="space-y-1.5">
-          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
-          {block.itemsFr.length > 0 && (
+          {sectionLabel && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(sectionLabel)}</p>}
+          {sectionItems.length > 0 && (
             <ul className="space-y-1 border-l-2 border-[var(--color-accent-alg)]/30 pl-3">
-              {block.itemsFr.map((item, ii) => (
-                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+              {sectionItems.map((item, ii) => (
+                <li key={ii} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>
                   {renderFracText(item)}
                 </li>
               ))}
@@ -1315,15 +1374,17 @@ function BlockView({ block }: { block: MathRichBlock }) {
         </div>
       );
     case "bullets":
+      const bulletsLabel = textFor(block.labelFr, bt?.label?.[pivot]);
+      const bulletsItems = itemsFor(block.itemsFr, bt?.items?.[pivot]);
       return (
         <div className="space-y-1.5">
-          {block.labelFr && <p className="text-sm font-bold text-[var(--color-accent-alg)]">{block.labelFr}</p>}
-          {block.itemsFr.length > 0 && (
+          {bulletsLabel && <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(bulletsLabel)}</p>}
+          {bulletsItems.length > 0 && (
             <ul className="space-y-1 pl-1">
-              {block.itemsFr.map((item, ii) => (
+              {bulletsItems.map((item, ii) => (
                 <li key={ii} className="flex items-start gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
                   <span className="mt-1 shrink-0 h-1.5 w-1.5 rounded-full bg-[var(--color-accent-alg)]" />
-                  <span>{renderFracText(item)}</span>
+                  <span lang={textLang} dir={textDir}>{renderFracText(item)}</span>
                 </li>
               ))}
             </ul>
@@ -1348,12 +1409,13 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <div className="space-y-6">
           {block.steps.map((step, si) => {
             const prev = si > 0 ? block.steps[si - 1] : null;
+            const stepText = stepTextFor(step, si);
             return (
               <div key={si} className="space-y-2">
-                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(stepText.title)}</p>
                 <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                  {step.textsFr.map((t, ti) => (
-                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(t)}</p>
                   ))}
                 </div>
                 <MulDemoGrid
@@ -1372,12 +1434,13 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <div className="space-y-6">
           {block.steps.map((step, si) => {
             const prev = si > 0 ? block.steps[si - 1] : null;
+            const stepText = stepTextFor(step, si);
             return (
               <div key={si} className="space-y-2">
-                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(stepText.title)}</p>
                 <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                  {step.textsFr.map((t, ti) => (
-                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(t)}</p>
                   ))}
                 </div>
                 <Mul2DemoGrid
@@ -1398,20 +1461,23 @@ function BlockView({ block }: { block: MathRichBlock }) {
     case "div_step_cards":
       return (
         <div className="space-y-6">
-          {block.steps.map((step, si) => (
-            <div key={si} className="space-y-2">
-              <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
-              <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                {step.textsFr.map((t, ti) => (
-                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
-                ))}
+          {block.steps.map((step, si) => {
+            const stepText = stepTextFor(step, si);
+            return (
+              <div key={si} className="space-y-2">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{renderFracText(stepText.title)}</p>
+                <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderFracText(t)}</p>
+                  ))}
+                </div>
+                <DivDemoGrid
+                  dividend={block.dividend} divisor={block.divisor}
+                  stepsComplete={step.stepsComplete}
+                />
               </div>
-              <DivDemoGrid
-                dividend={block.dividend} divisor={block.divisor}
-                stepsComplete={step.stepsComplete}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       );
     case "add_step_cards":
@@ -1567,18 +1633,24 @@ function getWorkspaceStepHint(step: WorkspaceStep | undefined): string | undefin
   return undefined;
 }
 
-function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
+function TheoryView({ lesson, pivot, showPivot }: { lesson: MathSubmoduleLesson; pivot: PivotCode; showPivot: boolean }) {
   const { theory } = lesson;
+  const trad = getTrad(lesson.submoduleId);
+  const translatedParagraphs = showPivot && pivot !== "fr" ? trad?.paragraphs?.[pivot] : undefined;
+  const paragraphs = translatedParagraphs?.length ? translatedParagraphs : theory.paragraphs.fr;
+  const isRtl = showPivot && (pivot === "ar" || pivot === "fa" || pivot === "ps");
   return (
     <div className="space-y-4">
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
-          {theory.blocks.map((block, i) => <BlockView key={i} block={block} />)}
+          {theory.blocks.map((block, i) => (
+            <BlockView key={i} block={block} blockIdx={i} tradBlocks={trad?.blocks} pivot={pivot} showPivot={showPivot} />
+          ))}
         </div>
       ) : (
         <div className="space-y-3">
-          {theory.paragraphs.fr.map((p, i) => (
-            <p key={i} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{p}</p>
+          {paragraphs.map((p, i) => (
+            <p key={i} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={showPivot ? pivot : undefined} dir={isRtl ? "rtl" : "ltr"}>{renderFracText(p)}</p>
           ))}
         </div>
       )}
@@ -1589,6 +1661,13 @@ function TheoryView({ lesson }: { lesson: MathSubmoduleLesson }) {
 export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, directRevisionMode }: { submoduleId?: string; moduleId: string; startAtEval?: boolean; directRevisionMode?: boolean }) {
   const router = useRouter();
   const lesson = getLessonBySubmoduleId(submoduleId ?? "");
+  const pivot = usePivotLang();
+  const { showPivot: showPivotTranslation } = useTranslation();
+  const lessonTrad = lesson ? getTrad(lesson.submoduleId) : undefined;
+  const promptFor = useCallback((promptFr: string) => {
+    if (!showPivotTranslation || pivot === "fr") return promptFr;
+    return lessonTrad?.consignes?.[promptFr]?.[pivot] ?? promptFr;
+  }, [lessonTrad, pivot, showPivotTranslation]);
 
   const [steps] = useState<WorkspaceStep[]>(() => {
     if (directRevisionMode) {
@@ -1842,7 +1921,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
 
       {/* Theory */}
-      {currentStep?.kind === "theory" && lesson && <TheoryView lesson={lesson} />}
+      {currentStep?.kind === "theory" && lesson && <TheoryView lesson={lesson} pivot={pivot} showPivot={showPivotTranslation} />}
 
       {/* A4-1 custom exercises */}
       {currentStep?.kind === "fraction_toggle" && (
@@ -2015,82 +2094,82 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
 
       {/* A8-1 power exercises */}
       {currentStep?.kind === "a8_power_ex" && (
-        <A8PowerExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8PowerExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_missing_exp_ex" && (
-        <A8MissingExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8MissingExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_missing_base_ex" && (
-        <A8MissingBaseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8MissingBaseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_power_cmp_ex" && (
-        <A8PowerCompareExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8PowerCompareExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_power_order_ex" && (
-        <A8PowerOrderExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8PowerOrderExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_mult_ex" && (
-        <A8MultExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8MultExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_div_ex" && (
-        <A8DivExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8DivExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_pow_pow_ex" && (
-        <A8PowPowExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8PowPowExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_mixed_ex" && (
-        <A8MixedExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8MixedExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_eq_complete_ex" && (
-        <A8EqCompleteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8EqCompleteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A8-3 powers of 10 exercises */}
       {currentStep?.kind === "a8_pow10_calc_ex" && (
-        <A8Pow10CalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8Pow10CalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_to_pow10_ex" && (
-        <A8ToPow10Exercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8ToPow10Exercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_pow10_exp_ex" && (
-        <A8Pow10ExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8Pow10ExpExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_sci_calc_ex" && (
-        <A8SciCalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8SciCalcExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_sci_write_ex" && (
-        <A8SciWriteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8SciWriteExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A8-4 square root exercises */}
       {currentStep?.kind === "a8_sqrt_tf_ex" && (
-        <A8SqrtTrueFalseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8SqrtTrueFalseExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_sqrt_ex" && (
-        <A8SqrtExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8SqrtExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_sqrt_missing_ex" && (
-        <A8SqrtMissingExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8SqrtMissingExercise key={exKey} exNum={currentStep.exNum} count={currentStep.count} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A8-5 operations priority exercises */}
       {currentStep?.kind === "a8_op_simple_ex" && (
-        <A8OpSimpleExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpSimpleExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_op_paren_ex" && (
-        <A8OpParenExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpParenExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_op_bracket_ex" && (
-        <A8OpBracketExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpBracketExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_op_fill_ex" && (
-        <A8OpFillExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpFillExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_op_powsqrt_ex" && (
-        <A8OpPowSqrtExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpPowSqrtExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "a8_op_complex_ex" && (
-        <A8OpComplexExercise key={exKey} exNum={currentStep.exNum} promptFr={currentStep.promptFr} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+        <A8OpComplexExercise key={exKey} exNum={currentStep.exNum} promptFr={promptFor(currentStep.promptFr)} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {/* A6-2 percentage exercises */}

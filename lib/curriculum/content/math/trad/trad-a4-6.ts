@@ -130,4 +130,16 @@ export const TRAD_A4_6: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-6-ep01": { fr: "Calculez 1/2 ÷ 1/4. (1/2 × 4/1 = ?) (ex: 2/1 ou 2)", en: "Calculate 1/2 ÷ 1/4. (1/2 × 4/1 = ?) (e.g. 2/1 or 2)" },
+    "a4-6-ep02": { fr: "Calculez 3/4 ÷ 3/8. (3/4 × 8/3 = ?) Simplifiez. (ex: 2/1 ou 2)", en: "Calculate 3/4 ÷ 3/8. (3/4 × 8/3 = ?) Simplify. (e.g. 2/1 or 2)" },
+    "a4-6-ep03": { fr: "Calculez 2/3 ÷ 4/9. (2/3 × 9/4 = ?) Simplifiez. (ex: 3/2)", en: "Calculate 2/3 ÷ 4/9. (2/3 × 9/4 = ?) Simplify. (e.g. 3/2)" },
+    "a4-6-ep04": { fr: "Calculez 5/6 ÷ 5/12. (5/6 × 12/5 = ?) Simplifiez. (ex: 2)", en: "Calculate 5/6 ÷ 5/12. (5/6 × 12/5 = ?) Simplify. (e.g. 2)" },
+    "a4-6-ep05": { fr: "Calculez 1/3 ÷ 1/6. (ex: 2)", en: "Calculate 1/3 ÷ 1/6. (e.g. 2)" },
+    "a4-6-ep06": { fr: "L'inverse de 3/7 est ? (ex: 7/3)", en: "What is the reciprocal of 3/7? (e.g. 7/3)" },
+    "a4-6-ep07": { fr: "L'inverse de 5/8 est ? (ex: 8/5)", en: "What is the reciprocal of 5/8? (e.g. 8/5)" },
+    "a4-6-ep08": { fr: "Calculez 4/5 ÷ 2/5. (4/5 × 5/2 = ?) Simplifiez. (ex: 2)", en: "Calculate 4/5 ÷ 2/5. (4/5 × 5/2 = ?) Simplify. (e.g. 2)" },
+    "a4-6-ep09": { fr: "Calculez 3/8 ÷ 3/4. (3/8 × 4/3 = ?) Simplifiez. (ex: 1/2)", en: "Calculate 3/8 ÷ 3/4. (3/8 × 4/3 = ?) Simplify. (e.g. 1/2)" },
+    "a4-6-ep10": { fr: "Calculez 7/10 ÷ 7/5. (7/10 × 5/7 = ?) Simplifiez. (ex: 1/2)", en: "Calculate 7/10 ÷ 7/5. (7/10 × 5/7 = ?) Simplify. (e.g. 1/2)" },
+  },
 };

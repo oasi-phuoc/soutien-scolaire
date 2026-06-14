@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -21,13 +21,18 @@ export const metadata: Metadata = {
   description: "Base Next.js + Supabase Auth — à compléter.",
 };
 
+export const viewport: Viewport = {
+  colorScheme: "light",
+  themeColor: "#ffffff",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr">
+    <html lang="fr" style={{ colorScheme: "light" }}>
       <body
         className={`${nunito.variable} ${geistMono.variable} antialiased`}
       >
