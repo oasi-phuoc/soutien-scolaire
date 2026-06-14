@@ -5,87 +5,223 @@ export const TRAD_A4_2: SubmoduleTrad = {
   title: {
     fr: "Fractions équivalentes",
     en: "Equivalent fractions",
-    ar: "الكسور المكافئة",
+    ar: "الكسور المتكافئة",
     fa: "کسرهای معادل",
-    ti: "ፍርቂ ምፍላጥ",
-    uk: "Еквівалентні дроби",
+    ti: "ተመጣጣኝ ፍርቂታት",
+    uk: "Рівносильні дроби",
+    pt: "Frações equivalentes",
+    so: "Jajabyada isu dhigma",
+    tr: "Denk kesirler",
+    ps: "معادل کسرونه",
+  },
+  paragraphs: {
+    fr: ["Deux fractions sont équivalentes lorsqu'elles représentent la même quantité, même si les nombres sont différents."],
+    en: ["Two fractions are equivalent when they represent the same quantity, even if the numbers are different."],
+    ar: ["يكون كسران متكافئين عندما يمثلان الكمية نفسها، حتى لو كانت الأعداد مختلفة."],
+    fa: ["دو کسر وقتی معادل هستند که مقدار یکسانی را نشان دهند، حتی اگر عددها متفاوت باشند."],
+    ti: ["ክልተ ፍርቂታት ተመጣጣኝ ይኾኑ እንተደኣ ተመሳሳሊ መጠን ዝውክሉ ኮይኖም፣ ቁጽርታት እኳ እንተተፈላለዩ።"],
+    uk: ["Два дроби є рівносильними, якщо вони позначають ту саму кількість, навіть якщо числа різні."],
+    pt: ["Duas frações são equivalentes quando representam a mesma quantidade, mesmo que os números sejam diferentes."],
+    so: ["Laba jajab waa isu dhigmaan marka ay matalaan qaddar isku mid ah, xitaa haddii tirooyinku kala duwan yihiin."],
+    tr: ["İki kesir, sayıları farklı olsa bile aynı miktarı gösteriyorsa denktir."],
+    ps: ["دوه کسرونه هغه وخت معادل دي چې یو شان مقدار وښيي، که څه هم عددونه توپیر ولري."],
   },
   blocks: [
     {
       text: {
-        fr: "Deux fractions sont équivalentes lorsqu’elles représentent la même quantité, même si les nombres sont différents.",
-      }
+        fr: "Deux fractions sont équivalentes lorsqu'elles représentent la **même quantité**, même si les nombres sont différents.",
+        en: "Two fractions are equivalent when they represent the **same quantity**, even if the numbers are different.",
+        ar: "يكون كسران متكافئين عندما يمثلان **الكمية نفسها**، حتى لو كانت الأعداد مختلفة.",
+        fa: "دو کسر وقتی معادل هستند که **مقدار یکسانی** را نشان دهند، حتی اگر عددها متفاوت باشند.",
+        ti: "ክልተ ፍርቂታት ተመጣጣኝ ይኾኑ እንተደኣ **ተመሳሳሊ መጠን** ዝውክሉ ኮይኖም።",
+        uk: "Два дроби є рівносильними, якщо вони позначають **ту саму кількість**, навіть якщо числа різні.",
+        pt: "Duas frações são equivalentes quando representam a **mesma quantidade**, mesmo que os números sejam diferentes.",
+        so: "Laba jajab waa isu dhigmaan marka ay matalaan **qaddar isku mid ah**, xitaa haddii tirooyinku kala duwan yihiin.",
+        tr: "İki kesir, sayıları farklı olsa bile **aynı miktarı** gösteriyorsa denktir.",
+        ps: "دوه کسرونه هغه وخت معادل دي چې **یو شان مقدار** وښيي، که څه هم عددونه توپیر ولري.",
+      },
     },
     {
       text: {
         fr: "Exemple",
-      }
+        en: "Example",
+        ar: "مثال",
+        fa: "مثال",
+        ti: "ኣብነት",
+        uk: "Приклад",
+        pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Örnek",
+        ps: "بېلګه",
+      },
     },
     {
       text: {
-        fr: "Ces fractions sont différentes, mais elles ont la même valeur.",
-      }
+        fr: "Ces fractions sont différentes, mais elles ont la **même valeur**.",
+        en: "These fractions are different, but they have the **same value**.",
+        ar: "هذه الكسور مختلفة، لكنها لها **القيمة نفسها**.",
+        fa: "این کسرها متفاوت‌اند، اما **ارزش یکسانی** دارند.",
+        ti: "እዞም ፍርቂታት ዝተፈላለዩ እዮም፣ ግን **ተመሳሳሊ ዋጋ** ኣለዎም።",
+        uk: "Ці дроби різні, але мають **однакове значення**.",
+        pt: "Estas frações são diferentes, mas têm o **mesmo valor**.",
+        so: "Jajabyadani way kala duwan yihiin, laakiin waxay leeyihiin **qiime isku mid ah**.",
+        tr: "Bu kesirler farklıdır, ama **aynı değere** sahiptir.",
+        ps: "دا کسرونه توپیر لري، خو **یو شان ارزښت** لري.",
+      },
     },
     {
       items: {
-        fr: [
-            "[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]",
-          ],
-      }
+        fr: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        en: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        ar: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        fa: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        ti: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        uk: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        pt: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        so: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        tr: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+        ps: ["[[frac:1/2]] = [[frac:2/4]] = [[frac:3/6]]"],
+      },
     },
     {
       text: {
         fr: "Simplifier une fraction",
-      }
+        en: "Simplifying a fraction",
+        ar: "تبسيط كسر",
+        fa: "ساده کردن کسر",
+        ti: "ፍርቂ ምቅላል",
+        uk: "Скорочення дробу",
+        pt: "Simplificar uma fração",
+        so: "Fududeynta jajab",
+        tr: "Kesri sadeleştirmek",
+        ps: "کسر ساده کول",
+      },
     },
     {
       text: {
         fr: "Simplifier une fraction signifie écrire une fraction équivalente plus simple.",
-      }
+        en: "Simplifying a fraction means writing a simpler equivalent fraction.",
+        ar: "تبسيط كسر يعني كتابة كسر مكافئ أبسط.",
+        fa: "ساده کردن کسر یعنی نوشتن یک کسر معادل ساده‌تر.",
+        ti: "ፍርቂ ምቅላል ማለት ዝቐለለ ተመጣጣኝ ፍርቂ ምጽሓፍ ማለት እዩ።",
+        uk: "Скоротити дріб означає записати простіший рівносильний дріб.",
+        pt: "Simplificar uma fração significa escrever uma fração equivalente mais simples.",
+        so: "Fududeynta jajab waa qorista jajab isu dhigma oo ka fudud.",
+        tr: "Bir kesri sadeleştirmek, daha basit bir denk kesir yazmak demektir.",
+        ps: "کسر ساده کول یعنې یو اسانه معادل کسر لیکل.",
+      },
     },
     {
       text: {
         fr: "Exemple",
-      }
+        en: "Example",
+        ar: "مثال",
+        fa: "مثال",
+        ti: "ኣብነት",
+        uk: "Приклад",
+        pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Örnek",
+        ps: "بېلګه",
+      },
     },
     {
       text: {
-        fr: "La fraction simplifiée de [[frac:12/18]] = est donc [[frac:2/3]].",
-      }
+        fr: "La fraction simplifiée de [[frac:12/18]] est donc [[frac:2/3]].",
+        en: "The simplified fraction of [[frac:12/18]] is therefore [[frac:2/3]].",
+        ar: "إذن الكسر المبسط لـ [[frac:12/18]] هو [[frac:2/3]].",
+        fa: "پس کسر ساده‌شده [[frac:12/18]] برابر [[frac:2/3]] است.",
+        ti: "ስለዚ ዝቐለለ ፍርቂ [[frac:12/18]] እዚ [[frac:2/3]] እዩ።",
+        uk: "Отже, скорочений дріб [[frac:12/18]] дорівнює [[frac:2/3]].",
+        pt: "A fração simplificada de [[frac:12/18]] é, portanto, [[frac:2/3]].",
+        so: "Jajabka la fududeeyay ee [[frac:12/18]] waa [[frac:2/3]].",
+        tr: "[[frac:12/18]] kesrinin sadeleştirilmiş hali [[frac:2/3]] olur.",
+        ps: "نو د [[frac:12/18]] ساده شوی کسر [[frac:2/3]] دی.",
+      },
     },
     {
       items: {
-        fr: [
-            "[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]].",
-          ],
-      }
+        fr: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        en: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        ar: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        fa: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        ti: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        uk: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        pt: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        so: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        tr: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+        ps: ["[[frac:12/18]] = [[frac:12÷6/18÷6]] = [[frac:2/3]]."],
+      },
     },
     {
       text: {
         fr: "Vérifier si les fractions sont équivalentes",
-      }
+        en: "Checking whether fractions are equivalent",
+        ar: "التحقق مما إذا كانت الكسور متكافئة",
+        fa: "بررسی معادل بودن کسرها",
+        ti: "ፍርቂታት ተመጣጣኝ ምዃኖም ምርግጋጽ",
+        uk: "Перевірка рівносильності дробів",
+        pt: "Verificar se as frações são equivalentes",
+        so: "Hubinta in jajabyadu isu dhigmaan",
+        tr: "Kesirlerin denk olup olmadığını kontrol etmek",
+        ps: "د کسرونو د معادل والي کتل",
+      },
     },
     {
       text: {
         fr: "On compare les produits en croix pour vérifier si les fractions sont équivalentes.",
-      }
+        en: "We compare the cross products to check whether the fractions are equivalent.",
+        ar: "نقارن الضربين المتقاطعين للتحقق مما إذا كانت الكسور متكافئة.",
+        fa: "برای بررسی معادل بودن کسرها، حاصل‌ضرب‌های ضربدری را مقایسه می‌کنیم.",
+        ti: "ፍርቂታት ተመጣጣኝ ምዃኖም ንምርግጋጽ መስቀላዊ ፕሮዳክት ነወዳድር።",
+        uk: "Порівнюємо перехресні добутки, щоб перевірити, чи дроби рівносильні.",
+        pt: "Comparamos os produtos cruzados para verificar se as frações são equivalentes.",
+        so: "Waxaan isbarbar dhignaa taranta isdhaafka ah si aan u hubinno in jajabyadu isu dhigmaan.",
+        tr: "Kesirlerin denk olup olmadığını kontrol etmek için çapraz çarpımları karşılaştırırız.",
+        ps: "د کسرونو د معادل والي لپاره ضربدري حاصلونه پرتله کوو.",
+      },
     },
     {
       text: {
         fr: "Exemple",
-      }
+        en: "Example",
+        ar: "مثال",
+        fa: "مثال",
+        ti: "ኣብነት",
+        uk: "Приклад",
+        pt: "Exemplo",
+        so: "Tusaale",
+        tr: "Örnek",
+        ps: "بېلګه",
+      },
     },
     {
       text: {
-        fr: "Les fractions [[frac:12/18]] et [[frac:2/3]] sont équivalentes car : ",
-      }
+        fr: "Les fractions [[frac:12/18]] et [[frac:2/3]] sont équivalentes car :",
+        en: "The fractions [[frac:12/18]] and [[frac:2/3]] are equivalent because:",
+        ar: "الكسران [[frac:12/18]] و [[frac:2/3]] متكافئان لأن:",
+        fa: "کسرهای [[frac:12/18]] و [[frac:2/3]] معادل‌اند زیرا:",
+        ti: "ፍርቂታት [[frac:12/18]] እና [[frac:2/3]] ተመጣጣኝ እዮም ምኽንያቱ:",
+        uk: "Дроби [[frac:12/18]] і [[frac:2/3]] рівносильні, тому що:",
+        pt: "As frações [[frac:12/18]] e [[frac:2/3]] são equivalentes porque:",
+        so: "Jajabyada [[frac:12/18]] iyo [[frac:2/3]] waa isu dhigmaan sababtoo ah:",
+        tr: "[[frac:12/18]] ve [[frac:2/3]] kesirleri denktir çünkü:",
+        ps: "کسرونه [[frac:12/18]] او [[frac:2/3]] معادل دي ځکه:",
+      },
     },
     {
       items: {
-        fr: [
-            "2 × 18 = 36 et 3 × 12 = 36.",
-          ],
-      }
+        fr: ["2 × 18 = 36 et 3 × 12 = 36."],
+        en: ["2 × 18 = 36 and 3 × 12 = 36."],
+        ar: ["2 × 18 = 36 و 3 × 12 = 36."],
+        fa: ["2 × 18 = 36 و 3 × 12 = 36."],
+        ti: ["2 × 18 = 36 እና 3 × 12 = 36."],
+        uk: ["2 × 18 = 36 і 3 × 12 = 36."],
+        pt: ["2 × 18 = 36 e 3 × 12 = 36."],
+        so: ["2 × 18 = 36 iyo 3 × 12 = 36."],
+        tr: ["2 × 18 = 36 ve 3 × 12 = 36."],
+        ps: ["2 × 18 = 36 او 3 × 12 = 36."],
+      },
     },
   ],
 };

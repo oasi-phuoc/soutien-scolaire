@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L23: GrammarLesson = {
   slug: "a1-gr-l23",
-  code: "G3.7",
+  code: "R3.7",
   level: "A1",
   title: "Les adjectifs qualificatifs",
   theory: [

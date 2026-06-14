@@ -5,22 +5,22 @@ export const MATH_G5_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G5.3",
     theory: {
       title: {
-        fr: "Translation",
+        fr: "Construction de triangles",
       },
       paragraphs: {
         fr: [
-          "Une translation est un déplacement de toute la figure dans une direction et d'une distance fixées, sans rotation ni réflexion.",
-          "Elle est définie par un vecteur de translation → v = (a ; b). Chaque point M(x, y) devient M'(x+a, y+b).",
-          "Propriétés : conservation des distances, des angles et des aires. Les segments MM' sont tous parallèles et de même longueur.",
-          "Exemple : translation de vecteur (3 ; −2) : le point (1, 4) devient (1+3, 4+(−2)) = (4, 2).",
+          "On peut construire un triangle de différentes façons selon les éléments connus : CCC (trois côtés), CAC (deux côtés et angle compris), ACA (deux angles et côté).",
+          "Méthode CCC (SSS) : tracer un côté BC, puis tracer un arc de rayon AB centré en B et un arc de rayon AC centré en C. Leur intersection est A.",
+          "Vérification de l'existence : un triangle existe si et seulement si la somme de deux côtés quelconques est supérieure au troisième (inégalité triangulaire).",
+          "Triangle rectangle : l'angle droit peut être construit avec l'équerre.",
         ],
       },
     },
     exercises: [
-      { id: "g5-3-e1", promptFr: "Translation de vecteur (2 ; 3). Point (1 ; 1) → ?", type: "short_text", acceptable: ["(3;4)", "(3 ; 4)"] },
-      { id: "g5-3-e2", promptFr: "Translation de vecteur (−1 ; 4). Point (5 ; 2) → x-coordonnée = ?", type: "number", acceptable: ["4"] },
-      { id: "g5-3-e3", promptFr: "La translation conserve-t-elle les distances ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-3-e4", promptFr: "Translation de vecteur (0 ; 5). Le point (3 ; 2) devient (3 ; ?)", type: "number", acceptable: ["7"] },
-      { id: "g5-3-e5", promptFr: "Après une translation, la figure image est-elle de même taille ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g4-3-e1", promptFr: "Peut-on construire un triangle de côtés 3, 4, 5 cm ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g4-3-e2", promptFr: "Peut-on construire un triangle de côtés 2, 3, 7 cm ? (oui/non)", type: "short_text", acceptable: ["non"] },
+      { id: "g4-3-e3", promptFr: "Combien de triangles différents peut-on construire connaissant les 3 côtés ? (0/1/plusieurs)", type: "short_text", acceptable: ["1"] },
+      { id: "g4-3-e4", promptFr: "Quel outil utilise-t-on pour reporter une longueur lors d'une construction ?", type: "short_text", acceptable: ["compas"] },
+      { id: "g4-3-e5", promptFr: "Un triangle équilatéral de côté 5 cm : tous les côtés mesurent ?", type: "number", acceptable: ["5"] },
     ],
   };

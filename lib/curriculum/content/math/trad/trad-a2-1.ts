@@ -7,15 +7,27 @@ export const TRAD_A2_1: SubmoduleTrad = {
     en: "Addition",
     ar: "الجمع",
     fa: "جمع",
-    pt: "Adição",
     ti: "ድምር",
     uk: "Додавання",
+    pt: "Adição",
+    so: "Isku darka",
+    tr: "Toplama",
+    ps: "جمع",
   },
   blocks: [
     {
       text: {
         fr: "L'addition permet de **réunir** plusieurs quantités **ensemble**.",
-      }
+        en: "Addition lets us **combine** several quantities **together**.",
+        ar: "يسمح الجمع بـ **ضم** عدة كميات **معا**.",
+        fa: "جمع به ما اجازه می‌دهد چند مقدار را **با هم** **ترکیب** کنیم.",
+        ti: "ድምር ብዙሓት መጠናት **ብሓባር** **ንምጥርናፍ** ይሕግዝ።",
+        uk: "Додавання допомагає **об'єднати** кілька кількостей **разом**.",
+        pt: "A adição permite **juntar** várias quantidades **em conjunto**.",
+        so: "Isku darku wuxuu noo oggolaanayaa in aan tirooyin badan **isku geyno**.",
+        tr: "Toplama, birkaç miktarı **bir araya** getirmeyi sağlar.",
+        ps: "جمع څو مقدارونه **یو ځای** **راټولوي**.",
+      },
     },
     {
       items: {
@@ -24,44 +36,152 @@ export const TRAD_A2_1: SubmoduleTrad = {
           "Les nombres à additionner sont les **termes**.",
           "Le résultat de l'addition est la **somme**.",
         ],
-      }
+        en: [
+          "The sign for addition is the « + » **plus** sign.",
+          "The numbers being added are the **terms**.",
+          "The result of an addition is the **sum**.",
+        ],
+        ar: [
+          "رمز الجمع هو الرمز « + » **زائد**.",
+          "الأعداد التي نجمعها تسمى **الحدود**.",
+          "نتيجة الجمع تسمى **المجموع**.",
+        ],
+        fa: [
+          "نشانه جمع، علامت « + » یعنی **به علاوه** است.",
+          "عددهایی که جمع می‌شوند **جمله‌ها** هستند.",
+          "نتیجه جمع، **مجموع** نام دارد.",
+        ],
+        ti: [
+          "ምልክት ድምር « + » **ተወሳኺ** እዩ።",
+          "እቶም ዝድመሩ ቁጽርታት **ቃላት** ይበሃሉ።",
+          "ውጽኢት ድምር **ድምር** ይበሃል።",
+        ],
+        uk: [
+          "Знак додавання — це знак « + » **плюс**.",
+          "Числа, які додають, називаються **доданками**.",
+          "Результат додавання називається **сумою**.",
+        ],
+        pt: [
+          "O sinal da adição é o sinal « + » **mais**.",
+          "Os números a adicionar são os **termos**.",
+          "O resultado da adição é a **soma**.",
+        ],
+        so: [
+          "Calaamadda isku darku waa calaamadda « + » **lagu daray**.",
+          "Tirooyinka la isku darayo waa **qodobbada**.",
+          "Natiijada isku darku waa **wadarta**.",
+        ],
+        tr: [
+          "Toplama işareti « + » **artı** işaretidir.",
+          "Toplanan sayılar **terimlerdir**.",
+          "Toplamanın sonucu **toplamdır**.",
+        ],
+        ps: [
+          "د جمع نښه « + » **جمع** ده.",
+          "هغه عددونه چې جمع کېږي **حدونه** دي.",
+          "د جمع پایله **مجموعه** ده.",
+        ],
+      },
     },
     {
       headers: {
         fr: ["5", "+", "8", "=", "13"],
-      }
+        en: ["5", "+", "8", "=", "13"],
+        ar: ["5", "+", "8", "=", "13"],
+        fa: ["5", "+", "8", "=", "13"],
+        ti: ["5", "+", "8", "=", "13"],
+        uk: ["5", "+", "8", "=", "13"],
+        pt: ["5", "+", "8", "=", "13"],
+        so: ["5", "+", "8", "=", "13"],
+        tr: ["5", "+", "8", "=", "13"],
+        ps: ["5", "+", "8", "=", "13"],
+      },
     },
     {
       text: {
         fr: "Propriétés de l'addition",
-      }
+        en: "Properties of addition",
+        ar: "خصائص الجمع",
+        fa: "ویژگی‌های جمع",
+        ti: "ባህርያት ድምር",
+        uk: "Властивості додавання",
+        pt: "Propriedades da adição",
+        so: "Sifooyinka isku darka",
+        tr: "Toplamanın özellikleri",
+        ps: "د جمع ځانګړنې",
+      },
     },
     {
       text: {
         fr: "Commutativité",
-      }
+        en: "Commutativity",
+        ar: "خاصية الإبدال",
+        fa: "خاصیت جابه‌جایی",
+        ti: "ምቅይያር",
+        uk: "Переставна властивість",
+        pt: "Comutatividade",
+        so: "Isdhaafsanaan",
+        tr: "Değişme özelliği",
+        ps: "بدلېدونکې ځانګړنه",
+      },
     },
     {
       items: {
         fr: ["L'ordre des termes ne change pas la somme."],
-      }
+        en: ["The order of the terms does not change the sum."],
+        ar: ["ترتيب الحدود لا يغيّر المجموع."],
+        fa: ["ترتیب جمله‌ها، مجموع را تغییر نمی‌دهد."],
+        ti: ["ቅደም ተከተል ቃላት ንድምር ኣይቅይሮን።"],
+        uk: ["Порядок доданків не змінює суму."],
+        pt: ["A ordem dos termos não altera a soma."],
+        so: ["Kala horraynta qodobbadu ma beddesho wadarta."],
+        tr: ["Terimlerin sırası toplamı değiştirmez."],
+        ps: ["د حدونو ترتیب مجموعه نه بدلوي."],
+      },
     },
     {},
     {
       text: {
         fr: "Associativité",
-      }
+        en: "Associativity",
+        ar: "خاصية التجميع",
+        fa: "خاصیت شرکت‌پذیری",
+        ti: "ምጥርናፍ",
+        uk: "Сполучна властивість",
+        pt: "Associatividade",
+        so: "Kooxayn",
+        tr: "Birleşme özelliği",
+        ps: "یوځای کوونکې ځانګړنه",
+      },
     },
     {
       items: {
         fr: ["On peut additionner plus de deux termes dans l'ordre voulu."],
-      }
+        en: ["We can add more than two terms in any order we choose."],
+        ar: ["يمكننا جمع أكثر من حدين بالترتيب الذي نريده."],
+        fa: ["می‌توانیم بیش از دو جمله را به هر ترتیبی که می‌خواهیم جمع کنیم."],
+        ti: ["ካብ ክልተ ንላዕሊ ቃላት ብዝደለናዮ ቅደም ተከተል ክንድምር ንኽእል።"],
+        uk: ["Можна додавати більше ніж два доданки у вибраному порядку."],
+        pt: ["Podemos adicionar mais de dois termos na ordem que quisermos."],
+        so: ["Waxaan isku dari karnaa in ka badan laba qodob sida aan rabno."],
+        tr: ["İkiden fazla terimi istediğimiz sırayla toplayabiliriz."],
+        ps: ["له دوو څخه ډېر حدونه په خوښه ترتیب سره جمع کولای شو."],
+      },
     },
     {},
     {
       text: {
         fr: "Addition en colonnes",
-      }
+        en: "Column addition",
+        ar: "الجمع في الأعمدة",
+        fa: "جمع ستونی",
+        ti: "ድምር ብዓምዲ",
+        uk: "Додавання у стовпчик",
+        pt: "Adição em colunas",
+        so: "Isku darka tiirar",
+        tr: "Alt alta toplama",
+        ps: "ستوني جمع",
+      },
     },
     {},
   ],

@@ -148,15 +148,15 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
   <text x='70' y='75' font-size='9' fill='#0891b2' font-family='sans-serif' font-weight='bold'>γ</text>
   <text x='28' y='88' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β + γ = 180°</text>
 </svg>`,
-                        captionFr: "α + β + γ = 180°",
+                        captionFr: "Somme = 180°",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 90' xmlns='http://www.w3.org/2000/svg'>
   <polygon points='12,82 12,18 82,82' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <path d='M12,68 L26,68 L26,82' fill='none' stroke='#f97316' stroke-width='2'/>
-  <text x='29' y='65' font-size='9' fill='#f97316' font-family='sans-serif'>90°</text>
+  <path d='M12,82 L26,82 L26,68' fill='none' stroke='#f97316' stroke-width='2'/>
+  <text x='28' y='58' font-size='9' fill='#f97316' font-family='sans-serif'>90°</text>
 </svg>`,
-                        captionFr: "Rectangle : 1 angle droit",
+                        captionFr: "Triangle rectangle",
                       },
                     ],
                   },
@@ -283,26 +283,22 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
-  <!-- Quelconque asymmetric: A=(10,70) B=(90,70) C=(65,10) D=(15,10) -->
-  <polygon points='10,70 90,70 65,10 15,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Arc at A=(10,70): P1 on AB unit=(1,0) r=10→(20,70). P2 on AD unit=(0.083,-0.997) r=10→(10.8,60.0). cross<0 sweep=0 -->
-  <path d='M20,70 A10,10 0 0,0 10.8,60.0' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
-  <!-- Arc at B=(90,70): P1 on BA unit=(-1,0) r=10→(80,70). P2 on BC unit=(-0.385,-0.923) r=10→(86.2,60.8). cross>0 sweep=1 -->
-  <path d='M80,70 A10,10 0 0,1 86.2,60.8' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <text x='22' y='65' font-size='8' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
-  <text x='72' y='64' font-size='8' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- angle arc bottom-left -->
+  <path d='M10,70 m10,-3 A10,10 0 0,1 16,58' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.5'/>
+  <!-- angle arc bottom-right (supplementary) -->
+  <path d='M90,70 m-10,-3 A10,10 0 0,0 84,58' fill='none' stroke='#f97316' stroke-width='1.5'/>
+  <text x='21' y='63' font-size='8' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='72' y='63' font-size='8' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
   <text x='28' y='78' font-size='8' fill='var(--color-text-secondary)' font-family='sans-serif'>α + β = 180°</text>
 </svg>`,
-                        captionFr: "Quelconque",
+                        captionFr: "Angles de même base",
                       },
                       {
                         markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
-  <!-- Trapèze rectangle: A=(15,70) B=(85,70) C=(85,10) D=(40,10). Right angles at B and C. -->
   <polygon points='15,70 85,70 85,10 40,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Right angle at B=(85,70): sides BA (left) and BC (up). Inner=(71,56). Path from bottom to left. -->
-  <path d='M71,70 L71,56 L85,56' fill='none' stroke='#f97316' stroke-width='2'/>
-  <!-- Right angle at C=(85,10): sides CB (down) and CD (left). Inner=(71,24). Path from right to top. -->
-  <path d='M85,24 L71,24 L71,10' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M15,70 L29,70 L29,56' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M85,70 L85,56 L71,56' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
                         captionFr: "Rectangle : 2 angles droits",
                       },
@@ -331,10 +327,9 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
-  <!-- Quelconque asymmetric: A=(10,70) B=(90,70) C=(65,10) D=(15,10) -->
-  <polygon points='10,70 90,70 65,10 15,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Parallel arrows: top mid=(40,10), bottom mid=(50,70) -->
-  <path d='M34,6 L40,10 L46,6' fill='none' stroke='#0891b2' stroke-width='2' stroke-linejoin='round'/>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <!-- Parallel arrows on top and bottom bases -->
+  <path d='M44,6 L50,10 L56,6' fill='none' stroke='#0891b2' stroke-width='2' stroke-linejoin='round'/>
   <path d='M44,74 L50,70 L56,74' fill='none' stroke='#0891b2' stroke-width='2' stroke-linejoin='round'/>
 </svg>`,
                         captionFr: "1 paire de côtés parallèles",
@@ -373,7 +368,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                       },
                       {
                         markup: `<svg viewBox='0 0 100 80' xmlns='http://www.w3.org/2000/svg'>
-  <polygon points='10,70 90,70 65,10 15,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
+  <polygon points='10,70 90,70 70,10 30,10' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
   <text x='22' y='50' font-size='9' fill='#dc2626' font-family='sans-serif'>✗ 0 axe</text>
 </svg>`,
                         captionFr: "Quelconque : 0 axe",
@@ -499,10 +494,10 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                       {
                         markup: `<svg viewBox='0 0 100 70' xmlns='http://www.w3.org/2000/svg'>
   <rect x='10' y='10' width='80' height='50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-  <path d='M10,22 L22,22 L22,10' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M78,10 L78,22 L90,22' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M90,48 L78,48 L78,60' fill='none' stroke='#f97316' stroke-width='2'/>
-  <path d='M22,60 L22,48 L10,48' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M10,10 L24,10 L24,24' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M90,10 L90,24 L76,24' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M90,60 L76,60 L76,46' fill='none' stroke='#f97316' stroke-width='2'/>
+  <path d='M10,60 L10,46 L24,46' fill='none' stroke='#f97316' stroke-width='2'/>
 </svg>`,
                         captionFr: "4 angles droits",
                       },
@@ -587,20 +582,19 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                     items: [
                       {
                         markup: `<svg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'>
-  <!-- Losange: A=(50,8) B=(88,50) C=(50,92) D=(12,50). sides len=56.6, unit=(±0.671,±0.742) -->
   <polygon points='50,8 88,50 50,92 12,50' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2' stroke-linejoin='round'/>
-  <!-- Arc at A=(50,8): P1 on AB r=12=(58.1,16.9), P2 on AD r=12=(41.9,16.9), cross>0 sweep=1 -->
-  <path d='M58.1,16.9 A12,12 0 0,1 41.9,16.9' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
-  <!-- Arc at C=(50,92): P1 on CB r=12=(58.1,83.1), P2 on CD r=12=(41.9,83.1), cross<0 sweep=0 -->
-  <path d='M58.1,83.1 A12,12 0 0,0 41.9,83.1' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
-  <!-- Arc at B=(88,50): P1 on BA r=12=(79.9,41.1), P2 on BC r=12=(79.9,58.9), cross<0 sweep=0 -->
-  <path d='M79.9,41.1 A12,12 0 0,0 79.9,58.9' fill='none' stroke='#f97316' stroke-width='1.8'/>
-  <!-- Arc at D=(12,50): P1 on DA r=12=(20.1,41.1), P2 on DC r=12=(20.1,58.9), cross>0 sweep=1 -->
-  <path d='M20.1,41.1 A12,12 0 0,1 20.1,58.9' fill='none' stroke='#f97316' stroke-width='1.8'/>
-  <text x='44' y='34' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
-  <text x='44' y='75' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
-  <text x='22' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
-  <text x='74' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <!-- Angle arc at top (narrow) -->
+  <path d='M50,8 m8,14 A14,14 0 0,1 42,22' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at bottom (narrow, equal to top) -->
+  <path d='M50,92 m-8,-14 A14,14 0 0,1 58,78' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.8'/>
+  <!-- Angle arc at left (wide) -->
+  <path d='M12,50 m12,-8 A12,12 0 0,1 20,58' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <!-- Angle arc at right (wide, equal to left) -->
+  <path d='M88,50 m-12,-8 A12,12 0 0,0 80,58' fill='none' stroke='#f97316' stroke-width='1.8'/>
+  <text x='45' y='38' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='45' y='68' font-size='9' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>α</text>
+  <text x='20' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
+  <text x='73' y='53' font-size='9' fill='#f97316' font-family='sans-serif' font-weight='bold'>β</text>
 </svg>`,
                         captionFr: "Angles opposés égaux",
                       },

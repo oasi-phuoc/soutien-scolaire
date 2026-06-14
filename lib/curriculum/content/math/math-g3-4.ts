@@ -4,65 +4,69 @@ export const MATH_G3_4_LESSON: MathSubmoduleLesson = {
   submoduleId: "G3-4",
   submoduleCode: "G3.4",
   theory: {
-    title: { fr: "Aire du parallélogramme" },
+    title: { fr: "Périmètre des polygones réguliers" },
     blocks: [
-      { type: "heading", fr: "Parallélogramme", black: true },
+      { type: "heading", fr: "Polygone régulier", black: true },
       {
         type: "plain",
-        fr: "L'aire d'un parallélogramme dépend de sa **base (b)** et de sa **hauteur (h)**.",
+        fr: "Un polygone régulier a **tous ses côtés de même longueur** (c). Son périmètre est :",
       },
 
-      { type: "rule", titleFr: "Formule", itemsFr: ["A = b × h"] },
+      { type: "rule", titleFr: "Formule", itemsFr: ["P = n × c", "(n = nombre de côtés, c = longueur d'un côté)"] },
 
-      { type: "highlight", fr: "Attention : hauteur ≠ côté oblique" },
       {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "La **hauteur h** est la distance **perpendiculaire** entre les deux bases parallèles.",
-          "Ce n'est **pas** la longueur du côté oblique du parallélogramme.",
+        type: "table",
+        headersFr: ["Polygone", "n", "Exemple (c = 5 cm)", "P"],
+        accentHeader: true,
+        colAligns: ["left", "center", "left", "center"],
+        rows: [
+          ["Triangle équilatéral", "3", "3 × 5", "15 cm"],
+          ["Carré", "4", "4 × 5", "20 cm"],
+          ["Pentagone", "5", "5 × 5", "25 cm"],
+          ["Hexagone", "6", "6 × 5", "30 cm"],
+          ["Octogone", "8", "8 × 5", "40 cm"],
         ],
       },
 
       {
-        type: "svg",
-        markup: `<svg viewBox='0 0 200 110' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:280px;display:block;margin:0 auto'>
-  <polygon points='20,85 155,85 175,25 40,25' fill='var(--color-accent-alg)' fill-opacity='0.18' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <line x1='155' y1='25' x2='155' y2='85' stroke='#f97316' stroke-width='2' stroke-dasharray='5,3'/>
-  <rect x='145' y='75' width='10' height='10' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <text x='88' y='100' text-anchor='middle' font-size='13' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>b</text>
-  <text x='165' y='57' font-size='13' fill='#f97316' font-weight='bold' font-family='sans-serif'>h</text>
+        type: "svg_row",
+        items: [
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,8 72,32 60,70 20,70 8,32' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
 </svg>`,
-        captionFr: "Parallélogramme — hauteur h perpendiculaire à la base b",
-      },
-
-      { type: "highlight", fr: "Exemple" },
-      {
-        type: "section",
-        labelFr: "",
-        itemsFr: [
-          "Parallélogramme base 10 cm, hauteur 4 cm :",
-          "A = 10 × 4 = **40 cm²**",
+            captionFr: "Pentagone (5 × c)",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,6 68,22 68,56 40,72 12,56 12,22' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Hexagone (6 × c)",
+          },
+          {
+            markup: `<svg viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg' style='width:100%;display:block;margin:0 auto'>
+  <polygon points='40,6 58,12 70,28 70,52 58,68 40,74 22,68 10,52 10,28 22,12' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
+</svg>`,
+            captionFr: "Octogone (8 × c)",
+          },
         ],
       },
 
-      { type: "highlight", fr: "Intuition" },
+      { type: "highlight", fr: "Polygone quelconque" },
       {
         type: "section",
         labelFr: "",
-        itemsFr: [
-          "On peut couper un triangle à une extrémité et le recoller de l'autre côté pour obtenir un **rectangle** de même base et hauteur.",
-        ],
+        itemsFr: ["Pour un polygone non régulier : P = **somme de tous les côtés**."],
       },
     ],
     paragraphs: { fr: [] },
   },
 
   exercises: [
-    { id: "g3-4-e1", promptFr: "Aire d'un parallélogramme : base 7 cm, hauteur 4 cm.", type: "number", acceptable: ["28"] },
-    { id: "g3-4-e2", promptFr: "Aire d'un parallélogramme : base 11 cm, hauteur 5 cm.", type: "number", acceptable: ["55"] },
-    { id: "g3-4-e3", promptFr: "Parallélogramme d'aire 48 cm² et base 8 cm. Hauteur = ?", type: "number", acceptable: ["6"] },
-    { id: "g3-4-e4", promptFr: "Un rectangle est-il un cas particulier de parallélogramme ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-    { id: "g3-4-e5", promptFr: "Aire d'un parallélogramme : base 9 cm, hauteur 6 cm.", type: "number", acceptable: ["54"] },
+    { id: "g2-4-e1", promptFr: "Périmètre d'un hexagone régulier de côté 5 cm.", type: "number", acceptable: ["30"] },
+    { id: "g2-4-e2", promptFr: "Périmètre d'un octogone régulier de côté 3 cm.", type: "number", acceptable: ["24"] },
+    { id: "g2-4-e3", promptFr: "Un polygone régulier a un périmètre de 40 cm et des côtés de 8 cm. Combien de côtés ?", type: "number", acceptable: ["5"] },
+    { id: "g2-4-e4", promptFr: "Périmètre d'un pentagone régulier de côté 7 cm.", type: "number", acceptable: ["35"] },
+    { id: "g2-4-e5", promptFr: "Périmètre d'un triangle équilatéral de côté 9 cm.", type: "number", acceptable: ["27"] },
   ],
 };

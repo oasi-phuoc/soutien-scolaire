@@ -101,7 +101,7 @@ const g10Verbs: VerbToggleVerb[] = [
 
 export const A1_CONJ_L12: ConjLesson = {
   slug: "a1-conj-l12",
-  code: "G2.3",
+  code: "R2.3",
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [

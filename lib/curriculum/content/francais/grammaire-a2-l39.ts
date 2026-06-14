@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "G4.27",
+  code: "R4.27",
   level: "A2",
   title: "Le comparatif",
   theory: [

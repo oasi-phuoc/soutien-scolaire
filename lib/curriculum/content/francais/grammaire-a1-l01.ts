@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L01: GrammarLesson = {
   slug: "a1-gr-l01",
-  code: "G1.1",
+  code: "R1.1",
   level: "A1",
   title: "Pronoms sujets et le verbe être",
   theory: [

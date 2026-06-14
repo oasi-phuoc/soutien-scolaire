@@ -7,7 +7,7 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
   section: "V4",
   words: [
     { word: "lit", image: "lit.jpg",             article: "le",  gender: "m", definition: "meuble pour dormir" },
-    { word: "table", image: "table.jpg",           article: "la",  gender: "f", definition: "meuble plat pour poser des objets" },
+    { word: "table", image: "/vocab/images/V7/table.png",           article: "la",  gender: "f", definition: "meuble plat pour poser des objets" },
     { word: "chaise", image: "chaise.jpg",          article: "la",  gender: "f", definition: "siège avec dossier pour une personne" },
     { word: "canapé", image: "canape.jpg",          article: "le",  gender: "m", definition: "grand siège confortable pour plusieurs personnes" },
     { word: "armoire", image: "armoire.jpg",         article: "l'",  gender: "f", definition: "grand meuble pour ranger les vêtements" },

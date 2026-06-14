@@ -5,22 +5,22 @@ export const MATH_G7_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G7.4",
     theory: {
       title: {
-        fr: "Calculer une cathète",
+        fr: "Représentation à l'échelle",
       },
       paragraphs: {
         fr: [
-          "Quand on connaît l'hypoténuse c et une cathète a, on trouve l'autre cathète b : b = √(c² − a²).",
-          "Méthode : on réarrange a² + b² = c² → b² = c² − a² → b = √(c² − a²).",
-          "Exemple : c = 13, a = 5 → b² = 169 − 25 = 144 → b = 12.",
-          "Vérification : 5² + 12² = 25 + 144 = 169 = 13² ✓.",
+          "Pour créer un dessin à l'échelle : (1) choisir une échelle adaptée ; (2) diviser chaque mesure réelle par le dénominateur de l'échelle pour obtenir la mesure à dessiner.",
+          "Formule : distance dessinée = distance réelle ÷ dénominateur.",
+          "Exemple : dessiner une pièce de 6 m × 4 m à l'échelle 1:50. → 6 m = 600 cm → 600 ÷ 50 = 12 cm ; 4 m = 400 cm → 400 ÷ 50 = 8 cm. Dessiner un rectangle 12 cm × 8 cm.",
+          "Vérification : remultiplier les mesures du dessin par le dénominateur doit redonner les mesures réelles.",
         ],
       },
     },
     exercises: [
-      { id: "g7-4-e1", promptFr: "c = 10, a = 6. b = ?", type: "number", acceptable: ["8"] },
-      { id: "g7-4-e2", promptFr: "c = 13, a = 12. b = ?", type: "number", acceptable: ["5"] },
-      { id: "g7-4-e3", promptFr: "c = 5, a = 3. b = ?", type: "number", acceptable: ["4"] },
-      { id: "g7-4-e4", promptFr: "c = 17, a = 8. b = ?", type: "number", acceptable: ["15"] },
-      { id: "g7-4-e5", promptFr: "c = 25, a = 7. b² = 25² − 7² = ?", type: "number", acceptable: ["576"] },
+      { id: "g6-4-e1", promptFr: "Échelle 1:100. Pièce réelle 8 m de long. Dessin : ? cm.", type: "number", acceptable: ["8"] },
+      { id: "g6-4-e2", promptFr: "Échelle 1:50. Mur réel 3 m. Dessin : ? cm.", type: "number", acceptable: ["6"] },
+      { id: "g6-4-e3", promptFr: "Échelle 1:200. Jardin réel 20 m. Dessin : ? cm.", type: "number", acceptable: ["10"] },
+      { id: "g6-4-e4", promptFr: "Échelle 1:25. Objet réel 1 m = 100 cm. Dessin : ? cm.", type: "number", acceptable: ["4"] },
+      { id: "g6-4-e5", promptFr: "Échelle 1:500. Route réelle 5 km = 500000 cm. Dessin : ? cm.", type: "number", acceptable: ["1000"] },
     ],
   };

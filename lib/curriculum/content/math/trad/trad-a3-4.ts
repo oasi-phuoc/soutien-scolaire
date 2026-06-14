@@ -4,17 +4,44 @@ export const TRAD_A3_4: SubmoduleTrad = {
   submoduleId: "A3-4",
   title: {
     fr: "Division en colonnes",
+    en: "Column division",
+    ar: "القسمة في الأعمدة",
+    fa: "تقسیم ستونی",
+    ti: "ምክፋል ብዓምዲ",
+    uk: "Ділення у стовпчик",
+    pt: "Divisão em colunas",
+    so: "Qaybin tiirar",
+    tr: "Alt alta bölme",
+    ps: "ستوني وېش",
   },
   blocks: [
     {
       text: {
-        fr: "La division en colonne permet de diviser de grands nombres en organisant les calculs étape par étape.",
-      }
+        fr: "La division en colonne permet de diviser de grands nombres en organisant les calculs **étape par étape**.",
+        en: "Column division lets us divide large numbers by organizing the calculations **step by step**.",
+        ar: "تساعد القسمة في الأعمدة على قسمة الأعداد الكبيرة بتنظيم الحسابات **خطوة بخطوة**.",
+        fa: "تقسیم ستونی کمک می‌کند عددهای بزرگ را با سازمان‌دهی محاسبات **مرحله به مرحله** تقسیم کنیم.",
+        ti: "ምክፋል ብዓምዲ ዓበይቲ ቁጽርታት **ብደረጃ ብደረጃ** ብምውዳብ ንምክፋል ይሕግዝ።",
+        uk: "Ділення у стовпчик допомагає ділити великі числа, організовуючи обчислення **крок за кроком**.",
+        pt: "A divisão em colunas permite dividir números grandes organizando os cálculos **passo a passo**.",
+        so: "Qaybinta tiirarku waxay caawisaa in tirooyin waaweyn la qaybiyo iyadoo xisaabta loo habeeyo **tallaabo tallaabo**.",
+        tr: "Alt alta bölme, büyük sayıları işlemleri **adım adım** düzenleyerek bölmeyi sağlar.",
+        ps: "ستوني وېش د لویو عددونو وېش د حسابونو **ګام په ګام** تنظیمولو سره اسانه کوي.",
+      },
     },
     {
       text: {
         fr: "Principe",
-      }
+        en: "Principle",
+        ar: "المبدأ",
+        fa: "اصل",
+        ti: "መርሕ",
+        uk: "Принцип",
+        pt: "Princípio",
+        so: "Mabda'a",
+        tr: "İlke",
+        ps: "اصل",
+      },
     },
     {
       items: {
@@ -22,19 +49,91 @@ export const TRAD_A3_4: SubmoduleTrad = {
           "On divise les chiffres du dividende de gauche à droite.",
           "À chaque étape : on cherche combien de fois le diviseur entre dans la valeur courante.",
           "On soustrait le produit et on abaisse le chiffre suivant.",
-          "**Rappel :** dividende = diviseur × quotient + reste  (reste < diviseur)",
+          "**Rappel :** dividende = diviseur × quotient + reste (reste < diviseur)",
         ],
-      }
+        en: [
+          "We divide the digits of the dividend from left to right.",
+          "At each step: we find how many times the divisor fits into the current value.",
+          "We subtract the product and bring down the next digit.",
+          "**Reminder:** dividend = divisor × quotient + remainder (remainder < divisor)",
+        ],
+        ar: [
+          "نقسم أرقام المقسوم من اليسار إلى اليمين.",
+          "في كل خطوة: نبحث كم مرة يدخل المقسوم عليه في القيمة الحالية.",
+          "نطرح الناتج وننزل الرقم التالي.",
+          "**تذكير:** المقسوم = المقسوم عليه × خارج القسمة + الباقي (الباقي < المقسوم عليه)",
+        ],
+        fa: [
+          "رقم‌های مقسوم را از چپ به راست تقسیم می‌کنیم.",
+          "در هر مرحله: پیدا می‌کنیم مقسوم‌علیه چند بار در مقدار فعلی جا می‌شود.",
+          "حاصل‌ضرب را کم می‌کنیم و رقم بعدی را پایین می‌آوریم.",
+          "**یادآوری:** مقسوم = مقسوم‌علیه × خارج قسمت + باقی‌مانده (باقی‌مانده < مقسوم‌علیه)",
+        ],
+        ti: [
+          "ኣሃዛት ዲቪደንድ ካብ ጸጋም ናብ የማን ንከፍል።",
+          "ኣብ ነፍሲ ወከፍ ደረጃ፡ ዲቪዘር ኣብ ናይ ሕጂ ዋጋ ክንደይ ግዜ ከምዝኣቱ ንደሊ።",
+          "ነቲ ፕሮዳክት ንቕንስ እሞ ነቲ ዝቕጽል ኣሃዝ ንወርድ።",
+          "**መዘኻኸሪ:** ዲቪደንድ = ዲቪዘር × ኮሸንት + ተረፍ (ተረፍ < ዲቪዘር)",
+        ],
+        uk: [
+          "Ділимо цифри діленого зліва направо.",
+          "На кожному кроці шукаємо, скільки разів дільник міститься в поточному значенні.",
+          "Віднімаємо добуток і зносимо наступну цифру.",
+          "**Нагадування:** ділене = дільник × частка + остача (остача < дільник)",
+        ],
+        pt: [
+          "Dividimos os algarismos do dividendo da esquerda para a direita.",
+          "Em cada etapa: procuramos quantas vezes o divisor cabe no valor atual.",
+          "Subtraímos o produto e baixamos o algarismo seguinte.",
+          "**Lembrete:** dividendo = divisor × quociente + resto (resto < divisor)",
+        ],
+        so: [
+          "Waxaan qaybinnaa lambarrada qaybsamaha bidix ilaa midig.",
+          "Tallaabo kasta: waxaan raadinnaa inta jeer ee qaybiye ku jiro qiimaha hadda.",
+          "Waxaan ka jareynaa taranta, kadibna hoos ayaan u soo dejinnaa lambarka xiga.",
+          "**Xusuusin:** qaybsame = qaybiye × qayb + haraa (haraa < qaybiye)",
+        ],
+        tr: [
+          "Bölünenin rakamlarını soldan sağa böleriz.",
+          "Her adımda: bölenin mevcut değerin içine kaç kez sığdığını buluruz.",
+          "Çarpımı çıkarır ve sonraki rakamı aşağı indiririz.",
+          "**Hatırlatma:** bölünen = bölen × bölüm + kalan (kalan < bölen)",
+        ],
+        ps: [
+          "د مقسوم رقمونه له کیڼ څخه ښي ته وېشو.",
+          "په هر ګام کې: ګورو چې وېشونکی په اوسني ارزښت کې څو ځله ځایېږي.",
+          "حاصل ضرب منفي کوو او بل رقم ښکته راولو.",
+          "**یادونه:** مقسوم = وېشونکی × خارج قسمت + پاتې (پاتې < وېشونکی)",
+        ],
+      },
     },
     {
       text: {
         fr: "Division à 1 chiffre",
-      }
+        en: "Division by 1 digit",
+        ar: "القسمة على رقم واحد",
+        fa: "تقسیم بر یک رقم",
+        ti: "ምክፋል ብ1 ኣሃዝ",
+        uk: "Ділення на 1 цифру",
+        pt: "Divisão por 1 algarismo",
+        so: "Qaybin hal lambar ah",
+        tr: "1 basamaklı bölme",
+        ps: "په 1 رقم وېش",
+      },
     },
     {
       text: {
         fr: "6 385 ÷ 4",
-      }
+        en: "6 385 ÷ 4",
+        ar: "6 385 ÷ 4",
+        fa: "6 385 ÷ 4",
+        ti: "6 385 ÷ 4",
+        uk: "6 385 ÷ 4",
+        pt: "6 385 ÷ 4",
+        so: "6 385 ÷ 4",
+        tr: "6 385 ÷ 4",
+        ps: "6 385 ÷ 4",
+      },
     },
     {},
   ],

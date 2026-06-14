@@ -5,22 +5,22 @@ export const MATH_G8_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G8.4",
     theory: {
       title: {
-        fr: "Volume du cube",
+        fr: "Calculer une cathète",
       },
       paragraphs: {
         fr: [
-          "Le volume mesure l'espace occupé par un solide. Il s'exprime en unités cubiques (cm³, m³, L…).",
-          "Volume du cube : V = c³ (côté au cube).",
-          "Exemple : cube de côté 4 cm → V = 4³ = 64 cm³.",
-          "Conversions : 1 L = 1 dm³ = 1 000 cm³ ; 1 m³ = 1 000 L = 1 000 000 cm³.",
+          "Quand on connaît l'hypoténuse c et une cathète a, on trouve l'autre cathète b : b = √(c² − a²).",
+          "Méthode : on réarrange a² + b² = c² → b² = c² − a² → b = √(c² − a²).",
+          "Exemple : c = 13, a = 5 → b² = 169 − 25 = 144 → b = 12.",
+          "Vérification : 5² + 12² = 25 + 144 = 169 = 13² ✓.",
         ],
       },
     },
     exercises: [
-      { id: "g8-4-e1", promptFr: "Volume d'un cube de côté 3 cm.", type: "number", acceptable: ["27"] },
-      { id: "g8-4-e2", promptFr: "Volume d'un cube de côté 5 cm.", type: "number", acceptable: ["125"] },
-      { id: "g8-4-e3", promptFr: "Un cube de volume 8 cm³. Quel est son côté ?", type: "number", acceptable: ["2"] },
-      { id: "g8-4-e4", promptFr: "1 dm³ = combien de cm³ ?", type: "number", acceptable: ["1000"] },
-      { id: "g8-4-e5", promptFr: "Volume d'un cube de côté 10 cm en litres.", type: "number", acceptable: ["1"] },
+      { id: "g7-4-e1", promptFr: "c = 10, a = 6. b = ?", type: "number", acceptable: ["8"] },
+      { id: "g7-4-e2", promptFr: "c = 13, a = 12. b = ?", type: "number", acceptable: ["5"] },
+      { id: "g7-4-e3", promptFr: "c = 5, a = 3. b = ?", type: "number", acceptable: ["4"] },
+      { id: "g7-4-e4", promptFr: "c = 17, a = 8. b = ?", type: "number", acceptable: ["15"] },
+      { id: "g7-4-e5", promptFr: "c = 25, a = 7. b² = 25² − 7² = ?", type: "number", acceptable: ["576"] },
     ],
   };

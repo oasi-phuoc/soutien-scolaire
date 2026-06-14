@@ -20,7 +20,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
     { word: "éplucher", image: "eplucher.jpg",  definition: "enlever la peau d'un légume ou fruit" },
     { word: "verser", image: "verser.jpg",    definition: "faire couler un liquide d'un récipient" },
     { word: "préparer", image: "preparer.jpg",  definition: "mettre en ordre les ingrédients avant de cuisiner" },
-    { word: "réchauffer", image: "rechauffer.jpg",definition: "chauffer à nouveau un plat déjà cuit" },
+    { word: "réchauffer", image: "rechauffer.jpeg",definition: "chauffer à nouveau un plat déjà cuit" },
   ],
   sentences: [
     { sentence: "Il faut ___ les carottes avant de les couper.",         answer: "éplucher" },

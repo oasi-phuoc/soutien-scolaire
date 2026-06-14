@@ -2,7 +2,7 @@ import type { GrammarLesson, VerbToggleVerb } from "../../grammar-data";
 
 export const A1_GR_L02: GrammarLesson = {
   slug: "a1-gr-l02",
-  code: "G1.7",
+  code: "R1.7",
   level: "A1",
   title: "La négation",
   theory: [

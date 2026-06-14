@@ -6,6 +6,8 @@ import { MATH_G10_3_LESSON } from "./math-g10-3";
 import { MATH_G10_4_LESSON } from "./math-g10-4";
 import { MATH_G10_5_LESSON } from "./math-g10-5";
 import { MATH_G10_6_LESSON } from "./math-g10-6";
+import { MATH_G10_7_LESSON } from "./math-g10-7";
+import { MATH_G10_8_LESSON } from "./math-g10-8";
 
 export const MATH_G10_LESSONS: MathSubmoduleLesson[] = [
   MATH_G10_1_LESSON,
@@ -14,4 +16,6 @@ export const MATH_G10_LESSONS: MathSubmoduleLesson[] = [
   MATH_G10_4_LESSON,
   MATH_G10_5_LESSON,
   MATH_G10_6_LESSON,
+  MATH_G10_7_LESSON,
+  MATH_G10_8_LESSON,
 ];

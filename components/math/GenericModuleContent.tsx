@@ -15,6 +15,16 @@ import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
+import {
+  Exercise16 as PlacementRectangleExercise,
+  Exercise25 as PlacementParallelogramExercise,
+  Exercise26 as PlacementTriangleExercise,
+  Exercise27 as PlacementRhombusExercise,
+} from "@/components/math/placement/PlacementExercises16to27";
+import {
+  Exercise37 as PlacementTrapezoidExercise,
+  Exercise38 as PlacementCircleExercise,
+} from "@/components/math/placement/PlacementExercises28to38";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
@@ -195,8 +205,10 @@ type WordLevel = "a1" | "a2" | "b1";
 type WordProblemQ = { textFr: string; answer: number; op: "+" | "-" };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
+type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus";
+type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | GeoPlacementStep;
 
 // ── Comparison exercise ───────────────────────────────────────────────────────
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -2621,12 +2633,160 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
   );
 }
 
+const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; label: string }>> = {
+  "G4-1": { geoKind: "square", label: "Périmètre et aire du carré" },
+  "G4-2": { geoKind: "rectangle", label: "Périmètre et aire du rectangle" },
+  "G4-3": { geoKind: "triangle", label: "Périmètre et aire du triangle" },
+  "G4-4": { geoKind: "parallelogram", label: "Périmètre et aire du parallélogramme" },
+  "G4-5": { geoKind: "trapezoid", label: "Périmètre et aire du trapèze" },
+  "G4-6": { geoKind: "circle", label: "Périmètre et aire du disque" },
+  "G4-7": { geoKind: "rhombus", label: "Périmètre et aire du losange" },
+};
+
+function GeoLineInput({
+  label,
+  unit,
+  value,
+  answer,
+  onChange,
+  validated,
+}: {
+  label: string;
+  unit: string;
+  value: number;
+  answer: string;
+  onChange: (value: string) => void;
+  validated: boolean;
+}) {
+  const correct = Number.isInteger(value) ? String(value) : value.toFixed(1).replace(".", ",");
+  const wrong = validated && answer.trim().replace(".", ",") !== correct;
+  return (
+    <div className="flex items-center gap-2">
+      <span className="text-sm text-[var(--color-text-secondary)]">{label} =</span>
+      <div className={`w-20 min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 px-1 py-1 text-center font-mono text-sm ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"}`}>
+        {validated ? (
+          wrong ? (
+            <>
+              {answer.trim() && <span className="text-[10px] leading-none text-[var(--color-text-primary)]">{answer}</span>}
+              <span className="font-bold text-amber-600">{correct}</span>
+            </>
+          ) : (
+            <span>{answer || correct}</span>
+          )
+        ) : (
+          <input
+            type="text"
+            inputMode="decimal"
+            value={answer}
+            onChange={(event) => onChange(event.target.value.replace(/[^0-9,.]/g, ""))}
+            className="h-6 w-full bg-transparent text-center outline-none"
+          />
+        )}
+      </div>
+      <span className="text-sm text-[var(--color-text-secondary)]">{unit}</span>
+    </div>
+  );
+}
+
+function SquareGeoExercise({
+  exerciseKey,
+  validated,
+  validateTrigger,
+  onValidated,
+}: {
+  exerciseKey: number;
+  validated: boolean;
+  validateTrigger: number;
+  onValidated: (score: number, max: number) => void;
+}) {
+  const [data] = useState(() => {
+    const side = rnd(3, 15);
+    return { side, perimeter: 4 * side, area: side * side };
+  });
+  const [answerP, setAnswerP] = useState("");
+  const [answerA, setAnswerA] = useState("");
+
+  useEffect(() => {
+    if (validateTrigger === 0) return;
+    const norm = (value: string) => value.trim().replace(".", ",");
+    let score = 0;
+    if (norm(answerP) === String(data.perimeter)) score++;
+    if (norm(answerA) === String(data.area)) score++;
+    onValidated(score, 2);
+  }, [validateTrigger, answerP, answerA, data, onValidated]);
+
+  return (
+    <div className="space-y-4" data-exercise-key={exerciseKey}>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
+      <svg viewBox="0 0 260 160" width="260" height="160" className="block mx-auto">
+        <rect
+          x="55"
+          y="25"
+          width="110"
+          height="110"
+          fill="var(--color-accent-alg)"
+          fillOpacity={0.15}
+          stroke="var(--color-accent-alg)"
+          strokeWidth="2"
+        />
+        <text x="110" y="17" textAnchor="middle" fontSize="12" fill="var(--color-text-secondary)">{data.side} cm</text>
+        <text x="177" y="82" textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.side} cm</text>
+      </svg>
+      <div className="space-y-2">
+        <GeoLineInput label="Périmètre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} />
+        <GeoLineInput label="Aire" unit="cm²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} />
+      </div>
+    </div>
+  );
+}
+
+function GeoPlacementExercise({
+  step,
+  exerciseKey,
+  validated,
+  validateTrigger,
+  onValidated,
+}: {
+  step: GeoPlacementStep;
+  exerciseKey: number;
+  validated: boolean;
+  validateTrigger: number;
+  onValidated: (score: number, max: number) => void;
+}) {
+  const common = {
+    exerciseKey,
+    validated,
+    validateTrigger,
+    onValidated,
+  };
+  const ExerciseComponent =
+    step.geoKind === "square" ? SquareGeoExercise :
+    step.geoKind === "rectangle" ? PlacementRectangleExercise :
+    step.geoKind === "triangle" ? PlacementTriangleExercise :
+    step.geoKind === "parallelogram" ? PlacementParallelogramExercise :
+    step.geoKind === "trapezoid" ? PlacementTrapezoidExercise :
+    step.geoKind === "circle" ? PlacementCircleExercise :
+    PlacementRhombusExercise;
+
+  return (
+    <div className="space-y-4">
+      <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
+      <ExerciseComponent {...common} />
+    </div>
+  );
+}
+
 function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep[] {
   const steps: FlatStep[] = [];
   for (const lesson of lessons) {
     steps.push({ kind: "theory", lesson });
     const sid = lesson.submoduleId;
-    if (sid === "A2-1" || sid === "A2-2") {
+    const geoPlacement = G3_GEO_PLACEMENT[sid];
+    if (geoPlacement) {
+      steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+    } else if (sid === "A2-1" || sid === "A2-2") {
       const op: ArithOp = sid === "A2-1" ? "+" : "-";
       // Entraînement 1–8
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
@@ -2841,7 +3001,8 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A3-3" || l.submoduleId === "A3-4" || l.submoduleId === "A4-2" ||
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
-    l.submoduleId === "A3-5" || l.submoduleId === "A3-6"
+    l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
+    !!G3_GEO_PLACEMENT[l.submoduleId]
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -3444,48 +3605,6 @@ function AddDemoGrid({ colLabels, op, carryLabel = "R", a, b, carries, result, p
   );
 }
 
-function ShapeExplorerBlock({ block, pivot, showPivot }: {
-  block: Extract<MathRichBlock, { type: "shape_explorer" }>;
-  pivot: PivotCode;
-  showPivot: boolean;
-}) {
-  const [selectedShape, setSelectedShape] = useState(0);
-  const [selectedTab, setSelectedTab] = useState(0);
-  const shape = block.shapes[selectedShape];
-  if (!shape) return null;
-  const safeTab = Math.min(selectedTab, shape.tabs.length - 1);
-  const tab = shape.tabs[safeTab];
-  if (!tab) return null;
-  function selectShape(i: number) { setSelectedShape(i); setSelectedTab(0); }
-  return (
-    <div className="space-y-3">
-      <div className="flex flex-wrap gap-2 justify-center">
-        {block.shapes.map((s, i) => (
-          <button key={s.id} type="button" onClick={() => selectShape(i)}
-            className={`w-12 h-12 rounded-lg border-2 flex items-center justify-center p-1 transition-all
-              ${i === selectedShape ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10" : "border-[var(--color-border-default)] hover:border-[var(--color-accent-alg)]/40"}`}>
-            <div dangerouslySetInnerHTML={{ __html: s.svg }} style={{ width: "100%", height: "100%" }} />
-          </button>
-        ))}
-      </div>
-      <div className="flex border-b border-[var(--color-border-default)]">
-        {shape.tabs.map((t, i) => (
-          <button key={t.label} type="button" onClick={() => setSelectedTab(i)}
-            className={`px-3 py-1.5 text-xs font-medium transition-colors border-b-2 -mb-px
-              ${i === safeTab ? "border-[var(--color-accent-alg)] text-[var(--color-accent-alg)]" : "border-transparent text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]"}`}>
-            {t.label}
-          </button>
-        ))}
-      </div>
-      <div className="space-y-3 pt-1">
-        {tab.blocks.map((b, i) => (
-          <BlockView key={i} block={b} pivot={pivot} showPivot={showPivot} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
 function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   block: MathRichBlock;
   blockIdx?: number;
@@ -3672,7 +3791,7 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
             <div key={ii} className="flex-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
               <div dangerouslySetInnerHTML={{ __html: item.markup }} />
               {item.captionFr && (
-                <p className="mt-1 text-center text-sm text-[var(--color-text-secondary)]">{item.captionFr}</p>
+                <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{item.captionFr}</p>
               )}
             </div>
           ))}
@@ -3785,11 +3904,94 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
           })}
         </div>
       );
+    case "theory_tabs": {
+      return <TheoryTabsBlock block={block} pivot={pivot} showPivot={showPivot} bt={bt} />;
+    }
     case "shape_explorer":
       return <ShapeExplorerBlock block={block} pivot={pivot} showPivot={showPivot} />;
     default:
       return null;
   }
+}
+
+function TheoryTabsBlock({
+  block, pivot, showPivot, bt,
+}: {
+  block: Extract<MathRichBlock, { type: "theory_tabs" }>;
+  pivot: PivotCode;
+  showPivot: boolean;
+  bt: BlockTrad | undefined;
+}) {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+  const activeBlocks = block.tabs[activeIdx]?.blocks ?? [];
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-2">
+        {block.tabs.map((tab, i) => (
+          <button key={i} type="button" onClick={() => setActiveIdx(i)}
+            className={`flex-1 px-3 py-2 rounded-lg text-sm font-bold transition-colors ${
+              activeIdx === i
+                ? "border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
+                : "border border-[var(--color-accent-alg)]/30 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/10"
+            }`}>
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="space-y-3">
+        {activeBlocks.map((b, i) => (
+          <BlockView key={`tab${activeIdx}-${i}`} block={b} blockIdx={i} tradBlocks={bt ? [bt] : undefined} pivot={pivot} showPivot={showPivot} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ShapeExplorerBlock({
+  block, pivot, showPivot: _showPivot,
+}: {
+  block: Extract<MathRichBlock, { type: "shape_explorer" }>;
+  pivot: PivotCode;
+  showPivot: boolean;
+}) {
+  const [selectedIdx, setSelectedIdx] = React.useState(0);
+  const selectedShape = block.shapes[selectedIdx];
+  return (
+    <div className="space-y-4">
+      {/* Shape tabs — 4×2 grid */}
+      <div className="grid grid-cols-4 gap-2">
+        {block.shapes.map((shape, i) => (
+          <button
+            key={shape.id}
+            type="button"
+            onClick={() => setSelectedIdx(i)}
+            className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
+              selectedIdx === i
+                ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
+                : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"
+            }`}
+          >
+            <div className="pointer-events-none w-full h-full" dangerouslySetInnerHTML={{ __html: shape.svg }} />
+          </button>
+        ))}
+      </div>
+      {/* Content: all 3 sections (Angles / Droites / Symétrie) stacked */}
+      {selectedShape && (
+        <div className="space-y-6">
+          {selectedShape.tabs.map((tab, ti) => (
+            <div key={`${selectedIdx}-${ti}`}>
+              <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)] uppercase tracking-wide">{tab.label}</p>
+              <div className="space-y-3">
+                {tab.blocks.map((b, bi) => (
+                  <BlockView key={`s${selectedIdx}-t${ti}-b${bi}`} block={b} blockIdx={bi} tradBlocks={undefined} pivot={pivot} showPivot={false} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
 
 // ── Hint popup + button ──────────────────────────────────────────────────────
@@ -3890,11 +4092,13 @@ function TheoryView({ lesson, pivot, showPivot }: {
   const paragraphs = pivotParas?.length ? pivotParas : theory.paragraphs.fr;
   return (
     <div className="space-y-4">
-      <div>
-        <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
-          {title}
-        </h2>
-      </div>
+      {title && (
+        <div>
+          <h2 className="text-base font-bold text-[var(--color-text-primary)]" lang={showPivot && pivotTitle ? pivot : undefined} dir={showPivot && pivotTitle && isRtl ? "rtl" : "ltr"}>
+            {title}
+          </h2>
+        </div>
+      )}
       {theory.blocks && theory.blocks.length > 0 ? (
         <div className="space-y-3">
           {theory.blocks.map((block, i) => (
@@ -4197,6 +4401,10 @@ export function GenericModuleContent({
   const [tfGcdLcmAnswers, setTfGcdLcmAnswers] = useState<Array<boolean|null>>(() => Array(5).fill(null));
   const [tfGcdLcmValidated, setTfGcdLcmValidated] = useState(false);
   const [tfGcdLcmOverride, setTfGcdLcmOverride] = useState<Record<number, TrueFalseGcdLcmConfig>>({});
+  const [geoValidated, setGeoValidated] = useState(false);
+  const [geoValidateTrigger, setGeoValidateTrigger] = useState(0);
+  const [geoResults, setGeoResults] = useState<boolean[]>([]);
+  const [geoResetKey, setGeoResetKey] = useState(0);
 
   // Eval timer
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
@@ -4319,6 +4527,10 @@ export function GenericModuleContent({
     setWpAnswers(Array(2).fill(""));
     setWpValidated(false);
     setWpResults([]);
+    setGeoValidated(false);
+    setGeoValidateTrigger(0);
+    setGeoResults([]);
+    setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
       setShowEvalScore(false);
@@ -4386,13 +4598,13 @@ export function GenericModuleContent({
   }
 
   function finishEval(correct: boolean) {
-    if (!startSubmoduleId) { router.push("/mathematiques"); return; }
+    if (!startSubmoduleId) { router.push(backUrl); return; }
     const p = loadProgress();
     // Don't downgrade a submodule that was already passed
     if (!correct) {
       const existing = p.submoduleScores?.[startSubmoduleId];
       if (existing && existing.grade >= PASSING_GRADE) {
-        router.push("/mathematiques");
+        router.push(backUrl);
         return;
       }
     }
@@ -4400,7 +4612,7 @@ export function GenericModuleContent({
     const medal = correct ? medalFromPercent(100) : undefined;
     saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct ? 1 : 0, 1, grade));
     void medal;
-    router.push("/mathematiques");
+    router.push(backUrl);
   }
 
   const activeCompConfig = currentStep?.kind === "comparison_ex"
@@ -4486,7 +4698,7 @@ export function GenericModuleContent({
     : null;
 
   const goNext = useCallback(() => {
-    if (showEvalScore) { router.push("/mathematiques"); return; }
+    if (showEvalScore) { router.push(backUrl); return; }
     if (currentStep?.kind === "pass_toggle") {
       finishEval(toggleAnswer === "oui");
       return;
@@ -4702,6 +4914,8 @@ export function GenericModuleContent({
           const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
           return parseInt(v, 10) === q.answer;
         });
+      } else if (currentStep.kind === "geo_placement") {
+        currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
       const newSaved = [...evalPageSavedResults, currentResults];
       if (isLastStep) {
@@ -4744,6 +4958,7 @@ export function GenericModuleContent({
                 : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
                 : es?.kind === "word_problems" ? "Problèmes"
+                : es?.kind === "geo_placement" ? es.label
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -4772,7 +4987,7 @@ export function GenericModuleContent({
         const p = loadProgress();
         saveProgress(completeSubmodule(p, moduleId, currentStep.lesson.submoduleId));
       }
-      router.push("/mathematiques");
+      router.push(backUrl);
     } else {
       if (currentStep?.kind === "exercise") {
         const nextStep = steps[stepIdx + 1];
@@ -4788,7 +5003,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, geoResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -4988,6 +5203,19 @@ export function GenericModuleContent({
       setWpAnswers(Array(cfg.questions.length).fill(""));
       setWpValidated(false);
       setWpResults([]);
+    };
+  }
+
+  if (currentStep?.kind === "geo_placement") {
+    stepCanValidate = !geoValidated;
+    stepValidate = geoValidated ? () => {} : () => {
+      setGeoValidateTrigger((n) => n + 1);
+    };
+    stepReset = () => {
+      setGeoValidated(false);
+      setGeoValidateTrigger(0);
+      setGeoResults([]);
+      setGeoResetKey((k) => k + 1);
     };
   }
 
@@ -5371,9 +5599,32 @@ export function GenericModuleContent({
     : revisionTitle ?? currentStep?.lesson.theory.title.fr ?? "";
   const moduleInfo = getMathModule(moduleId);
   const geoStyle = moduleInfo?.branch === "geometry" ? { "--color-accent-alg": "var(--color-accent-geo)" } as React.CSSProperties : undefined;
+  const backUrl = moduleInfo?.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
+  const submoduleTitle = moduleInfo?.submodules.find(s => s.id === startSubmoduleId)?.title ?? revisionTitle ?? "";
+  const moduleCode = moduleInfo?.code ?? moduleId;
 
   return (
     <div className="pb-40" style={geoStyle}>
+      {/* Breadcrumb with back button */}
+      <div className="mb-4 flex items-center gap-1 text-xs font-medium text-[var(--color-accent-alg)]">
+        <button
+          type="button"
+          onClick={() => router.push(backUrl)}
+          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
+          aria-label="Retour"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
+          Mathématiques
+        </button>
+        {submoduleTitle && (
+          <>
+            <span className="opacity-40">·</span>
+            <span className="opacity-80">{submoduleTitle}</span>
+          </>
+        )}
+        <span className="opacity-40">·</span>
+        <span className="opacity-80">{moduleCode}</span>
+      </div>
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
@@ -5990,6 +6241,21 @@ export function GenericModuleContent({
             </div>
           </div>
         </div>
+      )}
+
+      {/* Geometry exercises imported from the placement test */}
+      {!showEvalScore && currentStep?.kind === "geo_placement" && (
+        <GeoPlacementExercise
+          key={`geo-${stepIdx}-${geoResetKey}`}
+          step={currentStep}
+          exerciseKey={stepIdx * 1000 + geoResetKey}
+          validated={geoValidated}
+          validateTrigger={geoValidateTrigger}
+          onValidated={(score, max) => {
+            setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+            setGeoValidated(true);
+          }}
+        />
       )}
 
       {/* Comparison exercise */}

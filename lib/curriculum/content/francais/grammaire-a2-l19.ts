@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L19: GrammarLesson = {
   slug: "a2-gr-l19",
-  code: "G4.19",
+  code: "R4.19",
   level: "A2",
   title: "Les pronoms relatifs qui et que",
   theory: [

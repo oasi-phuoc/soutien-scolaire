@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "G4.21",
+  code: "R4.21",
   level: "A2",
   title: "La négation — ne…jamais, ne…rien, ne…personne",
   theory: [

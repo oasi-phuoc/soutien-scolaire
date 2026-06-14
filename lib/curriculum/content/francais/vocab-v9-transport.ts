@@ -11,7 +11,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
     { word: "tram", image: "tram.jpg",    article: "le",  gender: "m", definition: "transport sur rails en surface" },
     { word: "train", image: "train.jpg",   article: "le",  gender: "m", definition: "transport ferroviaire longue distance" },
     { word: "voiture", image: "voiture.jpg", article: "la",  gender: "f", definition: "véhicule personnel à moteur" },
-    { word: "vélo", image: "velo.jpg",    article: "le",  gender: "m", definition: "véhicule à deux roues sans moteur" },
+    { word: "vélo", image: "/vocab/images/V3/velo.jpg",    article: "le",  gender: "m", definition: "véhicule à deux roues sans moteur" },
     { word: "taxi", image: "taxi.jpg",    article: "le",  gender: "m", definition: "voiture avec chauffeur payant" },
     { word: "moto", image: "moto.jpg",    article: "la",  gender: "f", definition: "véhicule motorisé à deux roues" },
     { word: "avion", image: "avion.jpg",   article: "l'",  gender: "m", definition: "véhicule aérien pour voyager loin" },

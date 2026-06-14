@@ -647,7 +647,7 @@ const ex3Pool = (() => {
 
 export const A1_CONJ_L08: ConjLesson = {
   slug: "a1-conj-l08",
-  code: "G2.1",
+  code: "R2.1",
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [

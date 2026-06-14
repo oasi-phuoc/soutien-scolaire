@@ -23,17 +23,17 @@ const SECTIONS: SectionDef[] = [
 ];
 
 const GRAMMAR_GROUPS: SectionDef[] = [
-  { id: "G1", code: "G1", title: "A1 — Les fondamentaux" },
-  { id: "G2", code: "G2", title: "A1 — Verbes essentiels" },
-  { id: "G3", code: "G3", title: "A1 — Articles et adjectifs" },
-  { id: "G4", code: "G4", title: "A1/A2 — Temps et structures" },
+  { id: "R1", code: "R1", title: "A1 — Les fondamentaux" },
+  { id: "R2", code: "R2", title: "A1 — Verbes essentiels" },
+  { id: "R3", code: "R3", title: "A1 — Articles et adjectifs" },
+  { id: "R4", code: "R4", title: "A1/A2 — Temps et structures" },
 ];
 
 function grammarGroupId(code: string): string {
-  if (code.startsWith("G1.")) return "G1";
-  if (code.startsWith("G2.")) return "G2";
-  if (code.startsWith("G3.")) return "G3";
-  return "G4";
+  if (code.startsWith("R1.")) return "R1";
+  if (code.startsWith("R2.")) return "R2";
+  if (code.startsWith("R3.")) return "R3";
+  return "R4";
 }
 
 const VOCAB_MODULES: SectionDef[] = [

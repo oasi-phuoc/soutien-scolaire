@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L06: ConjLesson = {
   slug: "a2-conj-l06",
-  code: "G4.24",
+  code: "R4.24",
   level: "A2",
   title: "Le passé composé — avoir et être",
   theory: [

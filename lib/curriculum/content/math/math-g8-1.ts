@@ -5,22 +5,22 @@ export const MATH_G8_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G8.1",
     theory: {
       title: {
-        fr: "Reconnaître les solides",
+        fr: "Triangle rectangle",
       },
       paragraphs: {
         fr: [
-          "Les solides (ou polyèdres) sont des figures à trois dimensions. Les principaux : cube, pavé droit (cuboid), prisme, pyramide, cylindre, cône, sphère.",
-          "Cube : 6 faces carrées égales, 8 sommets, 12 arêtes. Pavé droit : 6 faces rectangulaires, 8 sommets, 12 arêtes.",
-          "Cylindre : deux bases circulaires et une surface latérale courbe. Cône : une base circulaire et un apex. Sphère : surface courbe équidistante d'un centre.",
-          "Prisme : deux bases polygonales parallèles reliées par des rectangles. Pyramide : une base polygonale et des triangles convergeant en un sommet.",
+          "Un triangle rectangle est un triangle qui possède un angle droit (90°). Le côté opposé à l'angle droit s'appelle l'hypoténuse. Les deux autres côtés sont les cathètes (ou jambes).",
+          "L'hypoténuse est toujours le côté le plus long du triangle rectangle.",
+          "Exemple : triangle avec angles 90°, 30°, 60°. Le côté opposé au 90° est l'hypoténuse.",
+          "Pour identifier un triangle rectangle : vérifier si un angle vaut exactement 90° ou si la relation a² + b² = c² est satisfaite.",
         ],
       },
     },
     exercises: [
-      { id: "g8-1-e1", promptFr: "Combien de faces a un cube ?", type: "number", acceptable: ["6"] },
-      { id: "g8-1-e2", promptFr: "Quel solide a une base circulaire et un apex ?", type: "short_text", acceptable: ["cône", "cone"] },
-      { id: "g8-1-e3", promptFr: "Combien d'arêtes a un cube ?", type: "number", acceptable: ["12"] },
-      { id: "g8-1-e4", promptFr: "Quel solide a toute sa surface équidistante d'un centre ?", type: "short_text", acceptable: ["sphère", "sphere"] },
-      { id: "g8-1-e5", promptFr: "Un prisme triangulaire a combien de faces au total ?", type: "number", acceptable: ["5"] },
+      { id: "g7-1-e1", promptFr: "Dans un triangle rectangle, comment s'appelle le côté opposé à l'angle droit ?", type: "short_text", acceptable: ["hypoténuse", "hypotenuse"] },
+      { id: "g7-1-e2", promptFr: "L'hypoténuse est-elle le côté le plus long ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g7-1-e3", promptFr: "Un triangle avec angles 90°, 45°, 45° est-il rectangle ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g7-1-e4", promptFr: "Combien d'angles droits a un triangle rectangle ?", type: "number", acceptable: ["1"] },
+      { id: "g7-1-e5", promptFr: "Les deux côtés non-hypoténuse s'appellent ?", type: "short_text", acceptable: ["cathètes", "cathetes", "jambes"] },
     ],
   };

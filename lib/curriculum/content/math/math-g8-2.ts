@@ -5,22 +5,22 @@ export const MATH_G8_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G8.2",
     theory: {
       title: {
-        fr: "Patrons de solides",
+        fr: "Énoncé du théorème : a² + b² = c²",
       },
       paragraphs: {
         fr: [
-          "Un patron est une figure plane que l'on peut découper et replier pour former un solide. Il montre toutes les faces du solide à plat.",
-          "Patron d'un cube : 6 carrés disposés en croix (ou autres configurations valides). Il en existe 11 différents.",
-          "Patron d'un cylindre : deux cercles + un rectangle (la hauteur × la circonférence).",
-          "Patron d'une pyramide à base carrée : un carré central + 4 triangles isocèles.",
+          "Le théorème de Pythagore : dans un triangle rectangle, le carré de l'hypoténuse est égal à la somme des carrés des deux cathètes.",
+          "Formule : a² + b² = c², où c est l'hypoténuse et a, b sont les cathètes.",
+          "Exemple : triangle avec cathètes 3 cm et 4 cm → c² = 3² + 4² = 9 + 16 = 25 → c = √25 = 5 cm.",
+          "Le triplet (3, 4, 5) est le plus connu des triplets pythagoriciens. Autres : (5, 12, 13) ; (8, 15, 17).",
         ],
       },
     },
     exercises: [
-      { id: "g8-2-e1", promptFr: "Un patron de cube comporte combien de carrés ?", type: "number", acceptable: ["6"] },
-      { id: "g8-2-e2", promptFr: "Le patron d'un cylindre contient combien de cercles ?", type: "number", acceptable: ["2"] },
-      { id: "g8-2-e3", promptFr: "Le patron d'une pyramide à base carrée comporte combien de triangles ?", type: "number", acceptable: ["4"] },
-      { id: "g8-2-e4", promptFr: "Combien de patrons différents peut-on faire pour un cube ?", type: "number", acceptable: ["11"] },
-      { id: "g8-2-e5", promptFr: "Le patron d'un prisme triangulaire comporte combien de rectangles ?", type: "number", acceptable: ["3"] },
+      { id: "g7-2-e1", promptFr: "Cathètes 6 et 8 cm. Hypoténuse = ?", type: "number", acceptable: ["10"] },
+      { id: "g7-2-e2", promptFr: "Cathètes 5 et 12 cm. Hypoténuse = ?", type: "number", acceptable: ["13"] },
+      { id: "g7-2-e3", promptFr: "Cathètes 3 et 4 cm. c² = 3² + 4² = ?", type: "number", acceptable: ["25"] },
+      { id: "g7-2-e4", promptFr: "Est-ce un triplet pythagoricien : (8, 15, 17) ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g7-2-e5", promptFr: "Cathètes 1 et 1 cm. Hypoténuse = √? cm.", type: "number", acceptable: ["2"] },
     ],
   };

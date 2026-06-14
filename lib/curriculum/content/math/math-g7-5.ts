@@ -5,22 +5,22 @@ export const MATH_G7_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G7.5",
     theory: {
       title: {
-        fr: "Réciproque du théorème",
+        fr: "Agrandir et réduire",
       },
       paragraphs: {
         fr: [
-          "Réciproque de Pythagore : si dans un triangle ABC on a a² + b² = c² (où c est le plus grand côté), alors le triangle est rectangle (angle droit en face de c).",
-          "Utilisation : pour vérifier si un triangle est rectangle sans mesurer les angles.",
-          "Exemple : triangle de côtés 6, 8, 10. 6² + 8² = 36 + 64 = 100 = 10². Donc rectangle !",
-          "Contre-exemple : côtés 5, 6, 8. 5² + 6² = 61 ≠ 64 = 8². Pas rectangle.",
+          "Agrandir une figure : multiplier toutes ses dimensions par un facteur k > 1. Réduire : multiplier par 0 < k < 1.",
+          "Les angles sont conservés. Les longueurs sont multipliées par k. Les aires sont multipliées par k².",
+          "Exemple : agrandir une photo 10 cm × 15 cm avec k = 2 → photo 20 cm × 30 cm. Aire : 150 cm² → 600 cm² (× 4 = k²).",
+          "En pratique : photocopieuse (%, ex. 150% = agrandir × 1,5 ; 75% = réduire × 0,75).",
         ],
       },
     },
     exercises: [
-      { id: "g7-5-e1", promptFr: "Triangle de côtés 3, 4, 5. Est-il rectangle ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g7-5-e2", promptFr: "Triangle de côtés 5, 6, 7. Est-il rectangle ? (oui/non)", type: "short_text", acceptable: ["non"] },
-      { id: "g7-5-e3", promptFr: "Triangle de côtés 9, 12, 15. Est-il rectangle ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g7-5-e4", promptFr: "Pour prouver qu'un triangle est rectangle, on vérifie a² + b² = ? (donne le côté)", type: "short_text", acceptable: ["c²", "hypoténuse au carré"] },
-      { id: "g7-5-e5", promptFr: "Triangle côtés 7, 24, 25. 7² + 24² = 49 + 576 = ? Est-ce = 25² = 625 ?", type: "number", acceptable: ["625"] },
+      { id: "g6-5-e1", promptFr: "k = 3. Côté 4 cm → côté image = ?", type: "number", acceptable: ["12"] },
+      { id: "g6-5-e2", promptFr: "k = 0,5. Côté 10 cm → côté image = ?", type: "number", acceptable: ["5"] },
+      { id: "g6-5-e3", promptFr: "k = 2. Aire = 9 cm² → aire image = ?", type: "number", acceptable: ["36"] },
+      { id: "g6-5-e4", promptFr: "Photocopie à 200%. k = ?", type: "number", acceptable: ["2"] },
+      { id: "g6-5-e5", promptFr: "k = 4. Les angles sont-ils conservés ? (oui/non)", type: "short_text", acceptable: ["oui"] },
     ],
   };

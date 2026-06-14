@@ -20,9 +20,9 @@ import { A8PowerExercise, A8MissingExpExercise, A8MissingBaseExercise, A8PowerCo
 import { PctOfNumExercise, PartToPctExercise, PctChangeExercise, PctDiffExercise, PctMultiplierExercise, PctTableExercise, PctWordExercise } from "@/components/math/A6PercentContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
-import { G1ShapeMCQExercise, G1NameToSVGExercise, G1MissingLettersExercise, G1AnagramExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
+import { G1ShapeMCQExercise, G1NameToSVGExercise, G1MissingLettersExercise, G1AnagramExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
 
 type WorkspaceStep =
   | { kind: "theory" }
@@ -107,12 +107,12 @@ type WorkspaceStep =
   | { kind: "pct_multiplier_ex"; exNum: number }
   | { kind: "pct_table_ex"; exNum: number }
   | { kind: "pct_word_ex"; exNum: number }
+  | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "g1_shape_mcq"; exNum: number }
   | { kind: "g1_name_to_svg"; exNum: number }
   | { kind: "g1_missing_letters"; exNum: number }
   | { kind: "g1_anagram"; exNum: number }
   | { kind: "g1_shape_write"; exNum: number }
-  | { kind: "exercise"; item: MathExerciseItem; exNum: number }
   | { kind: "eval_start" }
   | { kind: "pass_toggle" }
   | { kind: "results" };
@@ -1139,6 +1139,45 @@ function TheoryToggle({ block }: { block: Extract<MathRichBlock, { type: "theory
   );
 }
 
+function ShapeExplorer({ block }: { block: Extract<MathRichBlock, { type: "shape_explorer" }> }) {
+  const [selectedIdx, setSelectedIdx] = React.useState(0);
+  const selectedShape = block.shapes[selectedIdx];
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-4 gap-2">
+        {block.shapes.map((shape, i) => (
+          <button
+            key={shape.id}
+            type="button"
+            onClick={() => setSelectedIdx(i)}
+            className={`aspect-square rounded-xl border-2 p-1.5 transition-all ${
+              selectedIdx === i
+                ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15"
+                : "border-[var(--color-border-default)] bg-white dark:bg-zinc-900 hover:border-[var(--color-accent-alg)]/60"
+            }`}
+          >
+            <div className="pointer-events-none w-full h-full" dangerouslySetInnerHTML={{ __html: shape.svg }} />
+          </button>
+        ))}
+      </div>
+      {selectedShape && (
+        <div className="space-y-6">
+          {selectedShape.tabs.map((tab, ti) => (
+            <div key={`${selectedIdx}-${ti}`}>
+              <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)] uppercase tracking-wide">{tab.label}</p>
+              <div className="space-y-3">
+                {tab.blocks.map((b, bi) => (
+                  <BlockView key={`s${selectedIdx}-t${ti}-b${bi}`} block={b} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function BlockView({ block }: { block: MathRichBlock }) {
   switch (block.type) {
     case "heading":
@@ -1210,14 +1249,14 @@ function BlockView({ block }: { block: MathRichBlock }) {
         <div className="my-2">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
           {block.captionFr && (
-            <p className="mt-1 text-center text-sm text-[var(--color-text-secondary)]">{block.captionFr}</p>
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
           )}
         </div>
       ) : (
         <div className="my-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
           <div dangerouslySetInnerHTML={{ __html: block.markup }} />
           {block.captionFr && (
-            <p className="mt-1 text-center text-sm text-[var(--color-text-secondary)]">{block.captionFr}</p>
+            <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{block.captionFr}</p>
           )}
         </div>
       );
@@ -1259,7 +1298,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
             <div key={ii} className="flex-1 overflow-hidden rounded-xl border border-[var(--color-border-default)] bg-white p-3">
               <div dangerouslySetInnerHTML={{ __html: item.markup }} />
               {item.captionFr && (
-                <p className="mt-1 text-center text-sm text-[var(--color-text-secondary)]">{item.captionFr}</p>
+                <p className="mt-1 text-center text-[10px] text-[var(--color-text-secondary)]">{item.captionFr}</p>
               )}
             </div>
           ))}
@@ -1372,7 +1411,7 @@ function BlockView({ block }: { block: MathRichBlock }) {
     case "theory_tabs":
       return <TheoryTabs block={block} />;
     case "shape_explorer":
-      return null;
+      return <ShapeExplorer block={block} />;
     default:
       return null;
   }
@@ -1607,7 +1646,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
   //            keep workspace step builder only for A4 and A7 parents (custom step types).
   const isCustomA5 = submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
-  const isCustomGeo = submoduleId === "G1-1";
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
   if (isRevision) {
     const revParent = getParentModuleForRevision(submoduleId ?? "");
@@ -1615,7 +1653,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       return <GenericModuleContent moduleId={revParent} revisionMode={true} />;
     }
   }
-  if (!directRevisionMode && moduleId !== "A4" && !isCustomA5 && !isRevision && !isCustomGeo) {
+  if (!directRevisionMode && moduleId !== "A4" && !isCustomA5 && !isRevision) {
     return <GenericModuleContent moduleId={moduleId} startSubmoduleId={submoduleId} startAtEval={startAtEval} />;
   }
 
@@ -1629,8 +1667,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const G1_KINDS = new Set(["g1_shape_mcq","g1_name_to_svg","g1_missing_letters","g1_anagram","g1_shape_write"]);
-  const isCustom = G1_KINDS.has(currentStep?.kind ?? "") || A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -2072,21 +2109,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} displayExNum={currentStep.displayExNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
-      {/* Generic text exercise */}
-      {currentStep?.kind === "pct_to_frac_ex" && (
-        <PctToFracExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "pct_to_dec_ex" && (
-        <PctToDecExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "frac_to_pct_ex" && (
-        <FracToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "dec_to_pct_ex" && (
-        <DecToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-
-      {/* G1-1 geometry shape exercises */}
+      {/* G1-1 shape exercises */}
       {currentStep?.kind === "g1_shape_mcq" && (
         <G1ShapeMCQExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
@@ -2101,6 +2124,20 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
       {currentStep?.kind === "g1_shape_write" && (
         <G1ShapeWriteExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+
+      {/* Generic text exercise */}
+      {currentStep?.kind === "pct_to_frac_ex" && (
+        <PctToFracExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "pct_to_dec_ex" && (
+        <PctToDecExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "frac_to_pct_ex" && (
+        <FracToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "dec_to_pct_ex" && (
+        <DecToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
       {currentStep?.kind === "exercise" && (

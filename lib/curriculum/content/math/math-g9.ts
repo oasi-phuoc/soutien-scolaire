@@ -8,6 +8,8 @@ import { MATH_G9_5_LESSON } from "./math-g9-5";
 import { MATH_G9_6_LESSON } from "./math-g9-6";
 import { MATH_G9_7_LESSON } from "./math-g9-7";
 import { MATH_G9_8_LESSON } from "./math-g9-8";
+import { MATH_G9_9_LESSON } from "./math-g9-9";
+import { MATH_G9_10_LESSON } from "./math-g9-10";
 
 export const MATH_G9_LESSONS: MathSubmoduleLesson[] = [
   MATH_G9_1_LESSON,
@@ -18,4 +20,6 @@ export const MATH_G9_LESSONS: MathSubmoduleLesson[] = [
   MATH_G9_6_LESSON,
   MATH_G9_7_LESSON,
   MATH_G9_8_LESSON,
+  MATH_G9_9_LESSON,
+  MATH_G9_10_LESSON,
 ];

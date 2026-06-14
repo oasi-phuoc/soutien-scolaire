@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L05: GrammarLesson = {
   slug: "a1-gr-l05",
-  code: "G3.2",
+  code: "R3.2",
   level: "A1",
   title: "Le verbe avoir et les adjectifs possessifs",
   theory: [

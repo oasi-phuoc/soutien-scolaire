@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L05: ConjLesson = {
   slug: "a2-conj-l05",
-  code: "G4.15",
+  code: "R4.15",
   level: "A2",
   title: "L'impératif",
   theory: [

@@ -5,48 +5,22 @@ export const MATH_G10_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G10.2",
     theory: {
       title: {
-        fr: "sin, cos, tan",
+        fr: "Lire et placer des points",
       },
       paragraphs: {
         fr: [
-          "Dans un triangle rectangle, pour un angle aigu α donné, on définit trois rapports à partir des côtés : sinus, cosinus et tangente.",
-          "Nomme les côtés par rapport à l'angle α : le côté opposé (en face de α), le côté adjacent (à côté de α, mais pas l'hypoténuse) et l'hypoténuse (le plus long).",
-          "sin(α) = côté opposé / hypoténuse · cos(α) = côté adjacent / hypoténuse · tan(α) = côté opposé / côté adjacent.",
-          "Moyen mnémotechnique SOH-CAH-TOA : Sinus = Opposé / Hypoténuse, Cosinus = Adjacent / Hypoténuse, Tangente = Opposé / Adjacent.",
-          "Ces rapports ne dépendent que de l'angle, pas de la taille du triangle : tous les triangles rectangles ayant le même angle α ont le même sin(α).",
+          "Pour lire les coordonnées d'un point : partir du point, descendre (ou monter) jusqu'à l'axe Ox → abscisse ; aller à gauche (ou droite) jusqu'à Oy → ordonnée.",
+          "Pour placer un point (a ; b) : partir de O, aller de a unités sur Ox, puis de b unités parallèlement à Oy.",
+          "Exemple : placer A(−2 ; 3). Aller à −2 sur Ox, puis monter de 3 → A est en haut à gauche de O.",
+          "Mnémotechnique : « On va d'abord en couloir (x) puis en escalier (y) ».",
         ],
       },
     },
     exercises: [
-      {
-        id: "g10-2-e1",
-        promptFr: "Dans un triangle rectangle, le côté opposé à α mesure 3 et l'hypoténuse mesure 5. Quelle est la valeur de sin(α) ? (Écris une fraction irréductible.)",
-        type: "short_text",
-        acceptable: ["3/5", "0.6"],
-      },
-      {
-        id: "g10-2-e2",
-        promptFr: "Pour le même triangle (opposé = 3, hypoténuse = 5, adjacent = 4), quelle est la valeur de cos(α) ?",
-        type: "short_text",
-        acceptable: ["4/5", "0.8"],
-      },
-      {
-        id: "g10-2-e3",
-        promptFr: "Pour le même triangle, quelle est la valeur de tan(α) ?",
-        type: "short_text",
-        acceptable: ["3/4", "0.75"],
-      },
-      {
-        id: "g10-2-e4",
-        promptFr: "Quel rapport trigonométrique correspond à SOH (Sinus = Opposé / ___) ?",
-        type: "short_text",
-        acceptable: ["hypoténuse", "Hypoténuse", "hypotenuse"],
-      },
-      {
-        id: "g10-2-e5",
-        promptFr: "Si sin(30°) = 0,5, quelle est la valeur de cos(60°) ?",
-        type: "short_text",
-        acceptable: ["0,5", "0.5", "1/2"],
-      },
+      { id: "g9-2-e1", promptFr: "Place le point A(3 ; 5). Quelle est son abscisse ?", type: "number", acceptable: ["3"] },
+      { id: "g9-2-e2", promptFr: "Le point B(0 ; 4) est-il sur l'axe Oy ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g9-2-e3", promptFr: "Le point C(−3 ; 0) est-il sur l'axe Ox ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g9-2-e4", promptFr: "Pour placer D(2 ; −3) : on va 2 vers la droite puis ? vers le bas.", type: "number", acceptable: ["3"] },
+      { id: "g9-2-e5", promptFr: "L'axe Ox est-il horizontal ou vertical ?", type: "short_text", acceptable: ["horizontal"] },
     ],
   };

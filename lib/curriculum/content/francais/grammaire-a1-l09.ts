@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L09: GrammarLesson = {
   slug: "a1-gr-l09",
-  code: "G3.6",
+  code: "R3.6",
   level: "A1",
   title: "Le futur proche",
   theory: [

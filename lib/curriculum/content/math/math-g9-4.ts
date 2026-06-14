@@ -5,22 +5,22 @@ export const MATH_G9_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.4",
     theory: {
       title: {
-        fr: "Diagramme en secteurs (camembert)",
+        fr: "Volume du cube",
       },
       paragraphs: {
         fr: [
-          "Un diagramme en secteurs (camembert) représente des proportions. Chaque secteur correspond à une partie du total. La somme des angles vaut 360°.",
-          "Calcul de l'angle d'un secteur : α = (valeur / total) × 360°.",
-          "Exemple : sur 50 élèves, 20 aiment le foot. α = (20/50) × 360° = 144°.",
-          "Utilisation : montrer des répartitions (parts de marché, emploi du temps, votes…).",
+          "Le volume mesure l'espace occupé par un solide. Il s'exprime en unités cubiques (cm³, m³, L…).",
+          "Volume du cube : V = c³ (côté au cube).",
+          "Exemple : cube de côté 4 cm → V = 4³ = 64 cm³.",
+          "Conversions : 1 L = 1 dm³ = 1 000 cm³ ; 1 m³ = 1 000 L = 1 000 000 cm³.",
         ],
       },
     },
     exercises: [
-      { id: "g9-4-e1", promptFr: "Dans un camembert de total 100, valeur 25 → angle = ?°", type: "number", acceptable: ["90"] },
-      { id: "g9-4-e2", promptFr: "Dans un camembert de total 60, valeur 15 → angle = ?°", type: "number", acceptable: ["90"] },
-      { id: "g9-4-e3", promptFr: "La somme de tous les angles d'un camembert vaut ?°", type: "number", acceptable: ["360"] },
-      { id: "g9-4-e4", promptFr: "50% du camembert représente quel angle ?°", type: "number", acceptable: ["180"] },
-      { id: "g9-4-e5", promptFr: "Un secteur de 72° représente quelle fraction du total ?", type: "short_text", acceptable: ["1/5", "20%"] },
+      { id: "g8-4-e1", promptFr: "Volume d'un cube de côté 3 cm.", type: "number", acceptable: ["27"] },
+      { id: "g8-4-e2", promptFr: "Volume d'un cube de côté 5 cm.", type: "number", acceptable: ["125"] },
+      { id: "g8-4-e3", promptFr: "Un cube de volume 8 cm³. Quel est son côté ?", type: "number", acceptable: ["2"] },
+      { id: "g8-4-e4", promptFr: "1 dm³ = combien de cm³ ?", type: "number", acceptable: ["1000"] },
+      { id: "g8-4-e5", promptFr: "Volume d'un cube de côté 10 cm en litres.", type: "number", acceptable: ["1"] },
     ],
   };

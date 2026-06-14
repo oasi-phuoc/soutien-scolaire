@@ -6,33 +6,42 @@ export const TRAD_A3_6: SubmoduleTrad = {
     fr: "PGDC et PPMC",
     en: "GCD and LCM",
     ar: "القاسم المشترك الأكبر والمضاعف المشترك الأصغر",
-    fa: "بزرگترین مقسوم‌علیه مشترک و کوچکترین مضرب مشترک",
-    ti: "ዝዓቢ ሓባራዊ ካፋሊ ምስ ዝነኣሰ ሓባራዊ ብዙሕ",
-    uk: "НСД та НСК",
+    fa: "بزرگ‌ترین مقسوم‌علیه مشترک و کوچک‌ترین مضرب مشترک",
+    ti: "ዝዓበየ ሓባራዊ ከፋሊን ዝነኣሰ ሓባራዊ ብዙሕን",
+    uk: "НСД і НСК",
+    pt: "MDC e MMC",
+    so: "PGDC iyo PPMC",
+    tr: "EBOB ve EKOK",
+    ps: "لوی ګډ وېشونکی او کوچنی ګډ مضاعف",
   },
   blocks: [
     {
       text: {
-        fr: "PGDC — Plus Grand Commun Diviseur",
-      }
+        fr: "Le **PGDC** (Plus Grand Commun Diviseur) de deux nombres est le **plus grand entier** qui divise exactement les deux nombres.",
+        en: "The **GCD** (greatest common divisor) of two numbers is the **greatest whole number** that divides both numbers exactly.",
+        ar: "**القاسم المشترك الأكبر** لعددين هو **أكبر عدد صحيح** يقسم العددين قسمة تامة.",
+        fa: "**بزرگ‌ترین مقسوم‌علیه مشترک** دو عدد، **بزرگ‌ترین عدد صحیح** است که هر دو عدد را دقیق تقسیم می‌کند.",
+        ti: "**PGDC** ናይ ክልተ ቁጽርታት **ዝዓበየ ምሉእ ቁጽሪ** እዩ ነቶም ክልተ ቁጽርታት ብትኽክል ዝኸፍል።",
+        uk: "**НСД** двох чисел — це **найбільше ціле число**, яке ділить обидва числа без остачі.",
+        pt: "O **MDC** de dois números é o **maior número inteiro** que divide exatamente os dois números.",
+        so: "**PGDC** ee laba tiro waa **tirada dhan ee ugu weyn** ee labada tiro si sax ah u qaybisa.",
+        tr: "İki sayının **EBOB**'u, iki sayıyı da kalansız bölen **en büyük tam sayıdır**.",
+        ps: "د دوو عددونو **PGDC** هغه **تر ټولو لوی صحیح عدد** دی چې دواړه عددونه بې پاتې وېشي.",
+      },
     },
     {
       text: {
-        fr: "Définition",
-      }
-    },
-    {
-      items: {
-        fr: [
-          "Le **PGDC** (Plus Grand Commun Diviseur) de deux nombres est le **plus grand entier** qui divise exactement les deux nombres.",
-          "Notation : PGDC(a, b)",
-        ],
-      }
-    },
-    {
-      text: {
-        fr: "Méthode — liste des diviseurs",
-      }
+        fr: "Méthode — pour trouver le PGDC",
+        en: "Method — to find the GCD",
+        ar: "الطريقة — لإيجاد القاسم المشترك الأكبر",
+        fa: "روش — برای یافتن بزرگ‌ترین مقسوم‌علیه مشترک",
+        ti: "ሜላ — PGDC ንምርካብ",
+        uk: "Метод — як знайти НСД",
+        pt: "Método — para encontrar o MDC",
+        so: "Habka — sida loo helo PGDC",
+        tr: "Yöntem — EBOB'u bulmak için",
+        ps: "طریقه — د PGDC موندلو لپاره",
+      },
     },
     {
       items: {
@@ -41,128 +50,286 @@ export const TRAD_A3_6: SubmoduleTrad = {
           "2. Repérer les diviseurs **communs** aux deux listes.",
           "3. Prendre le **plus grand** des diviseurs communs.",
         ],
-      }
+        en: [
+          "1. List all the **divisors** of each number.",
+          "2. Find the **common** divisors in both lists.",
+          "3. Take the **greatest** common divisor.",
+        ],
+        ar: [
+          "1. اكتب كل **قواسم** كل عدد.",
+          "2. حدّد القواسم **المشتركة** بين القائمتين.",
+          "3. خذ **أكبر** قاسم مشترك.",
+        ],
+        fa: [
+          "1. همه **مقسوم‌علیه‌های** هر عدد را فهرست کن.",
+          "2. مقسوم‌علیه‌های **مشترک** دو فهرست را پیدا کن.",
+          "3. **بزرگ‌ترین** مقسوم‌علیه مشترک را انتخاب کن.",
+        ],
+        ti: [
+          "1. ኩሎም **ከፈልቲ** ናይ ነፍሲ ወከፍ ቁጽሪ ዘርዝር።",
+          "2. ኣብ ክልቲኡ ዝርዝር ዘለዉ **ሓባራዊ** ከፈልቲ ርኸብ።",
+          "3. ካብ ሓባራዊ ከፈልቲ **ዝዓበየ** ውሰድ።",
+        ],
+        uk: [
+          "1. Запиши всі **дільники** кожного числа.",
+          "2. Знайди **спільні** дільники в обох списках.",
+          "3. Візьми **найбільший** спільний дільник.",
+        ],
+        pt: [
+          "1. Lista todos os **divisores** de cada número.",
+          "2. Encontra os divisores **comuns** às duas listas.",
+          "3. Escolhe o **maior** divisor comum.",
+        ],
+        so: [
+          "1. Qor dhammaan **qaybiyeyaasha** tiro kasta.",
+          "2. Raadi qaybiyeyaasha **wadaagga** ah ee labada liis.",
+          "3. Qaado qaybiye wadaagga ah ee **ugu weyn**.",
+        ],
+        tr: [
+          "1. Her sayının tüm **bölenlerini** listele.",
+          "2. İki listedeki **ortak** bölenleri bul.",
+          "3. Ortak bölenlerin **en büyüğünü** al.",
+        ],
+        ps: [
+          "1. د هر عدد ټول **وېشونکي** ولیکه.",
+          "2. په دواړو لېستونو کې **ګډ** وېشونکي ومومه.",
+          "3. له ګډو وېشونکو څخه **تر ټولو لوی** واخله.",
+        ],
+      },
     },
     {
       text: {
         fr: "Exemple : PGDC(12, 18)",
-      }
+        en: "Example: GCD(12, 18)",
+        ar: "مثال: القاسم المشترك الأكبر(12، 18)",
+        fa: "مثال: PGDC(12, 18)",
+        ti: "ኣብነት፡ PGDC(12, 18)",
+        uk: "Приклад: НСД(12, 18)",
+        pt: "Exemplo: MDC(12, 18)",
+        so: "Tusaale: PGDC(12, 18)",
+        tr: "Örnek: EBOB(12, 18)",
+        ps: "بېلګه: PGDC(12, 18)",
+      },
     },
     {
       headers: {
         fr: ["Nombre", "Diviseurs"],
+        en: ["Number", "Divisors"],
+        ar: ["العدد", "القواسم"],
+        fa: ["عدد", "مقسوم‌علیه‌ها"],
+        ti: ["ቁጽሪ", "ከፈልቲ"],
+        uk: ["Число", "Дільники"],
+        pt: ["Número", "Divisores"],
+        so: ["Tiro", "Qaybiyeyaal"],
+        tr: ["Sayı", "Bölenler"],
+        ps: ["عدد", "وېشونکي"],
       },
-      caption: {
-        fr: "Le plus grand diviseur commun est 6.",
-      }
+      items: {
+        fr: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Communs | 1 · 2 · 3 · **6**"],
+        en: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Common | 1 · 2 · 3 · **6**"],
+        ar: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "المشتركة | 1 · 2 · 3 · **6**"],
+        fa: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "مشترک | 1 · 2 · 3 · **6**"],
+        ti: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "ሓባራዊ | 1 · 2 · 3 · **6**"],
+        uk: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Спільні | 1 · 2 · 3 · **6**"],
+        pt: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Comuns | 1 · 2 · 3 · **6**"],
+        so: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Wadaag | 1 · 2 · 3 · **6**"],
+        tr: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "Ortak | 1 · 2 · 3 · **6**"],
+        ps: ["12 | 1 · 2 · 3 · 4 · 6 · 12", "18 | 1 · 2 · 3 · 6 · 9 · 18", "ګډ | 1 · 2 · 3 · **6**"],
+      },
     },
     {
       text: {
-        fr: "PGDC(12, 18) = 6",
-      }
+        fr: "Le plus grand diviseur commun est **6**.",
+        en: "The greatest common divisor is **6**.",
+        ar: "القاسم المشترك الأكبر هو **6**.",
+        fa: "بزرگ‌ترین مقسوم‌علیه مشترک **6** است.",
+        ti: "ዝዓበየ ሓባራዊ ከፋሊ **6** እዩ።",
+        uk: "Найбільший спільний дільник — **6**.",
+        pt: "O maior divisor comum é **6**.",
+        so: "Qaybiyaha wadaagga ah ee ugu weyn waa **6**.",
+        tr: "En büyük ortak bölen **6**'dır.",
+        ps: "تر ټولو لوی ګډ وېشونکی **6** دی.",
+      },
+    },
+    {},
+    {
+      text: {
+        fr: "Le **PPMC** (Plus Petit Commun Multiple) de deux nombres est le **plus petit entier positif** qui est multiple des deux nombres.",
+        en: "The **LCM** (least common multiple) of two numbers is the **smallest positive whole number** that is a multiple of both numbers.",
+        ar: "**المضاعف المشترك الأصغر** لعددين هو **أصغر عدد صحيح موجب** يكون مضاعفا للعددين.",
+        fa: "**کوچک‌ترین مضرب مشترک** دو عدد، **کوچک‌ترین عدد صحیح مثبت** است که مضرب هر دو عدد باشد.",
+        ti: "**PPMC** ናይ ክልተ ቁጽርታት **ዝነኣሰ ኣወንታዊ ምሉእ ቁጽሪ** እዩ ናይ ክልቲኦም ብዙሕ ዝኸውን።",
+        uk: "**НСК** двох чисел — це **найменше додатне ціле число**, яке є кратним обох чисел.",
+        pt: "O **MMC** de dois números é o **menor número inteiro positivo** que é múltiplo dos dois números.",
+        so: "**PPMC** ee laba tiro waa **tirada dhan ee togan ee ugu yar** ee labadaba labanlaab u ah.",
+        tr: "İki sayının **EKOK**'u, iki sayının da katı olan **en küçük pozitif tam sayıdır**.",
+        ps: "د دوو عددونو **PPMC** هغه **تر ټولو کوچنی مثبت صحیح عدد** دی چې د دواړو مضاعف وي.",
+      },
     },
     {
       text: {
-        fr: "",
-      }
-    },
-    {
-      text: {
-        fr: "PPMC — Plus Petit Commun Multiple",
-      }
-    },
-    {
-      text: {
-        fr: "Définition",
-      }
+        fr: "Méthode — pour trouver le PPMC",
+        en: "Method — to find the LCM",
+        ar: "الطريقة — لإيجاد المضاعف المشترك الأصغر",
+        fa: "روش — برای یافتن کوچک‌ترین مضرب مشترک",
+        ti: "ሜላ — PPMC ንምርካብ",
+        uk: "Метод — як знайти НСК",
+        pt: "Método — para encontrar o MMC",
+        so: "Habka — sida loo helo PPMC",
+        tr: "Yöntem — EKOK'u bulmak için",
+        ps: "طریقه — د PPMC موندلو لپاره",
+      },
     },
     {
       items: {
-        fr: [
-          "Le **PPMC** (Plus Petit Commun Multiple) de deux nombres est le **plus petit entier positif** qui est multiple des deux nombres.",
-          "Notation : PPMC(a, b)",
-        ],
-      }
-    },
-    {
-      text: {
-        fr: "Méthode — liste des multiples",
-      }
-    },
-    {
-      items: {
-        fr: [
-          "1. Lister les **multiples** de chaque nombre dans l'ordre croissant.",
-          "2. Trouver le **premier multiple commun** aux deux listes.",
-        ],
-      }
+        fr: ["1. Lister les **multiples** de chaque nombre dans l'ordre croissant.", "2. Trouver le **premier multiple commun** aux deux listes."],
+        en: ["1. List the **multiples** of each number in increasing order.", "2. Find the **first common multiple** in both lists."],
+        ar: ["1. اكتب **مضاعفات** كل عدد بترتيب تصاعدي.", "2. ابحث عن **أول مضاعف مشترك** في القائمتين."],
+        fa: ["1. **مضرب‌های** هر عدد را به ترتیب صعودی فهرست کن.", "2. **اولین مضرب مشترک** در دو فهرست را پیدا کن."],
+        ti: ["1. **ብዙሓት** ናይ ነፍሲ ወከፍ ቁጽሪ ብዝውስኽ ቅደም ተከተል ዘርዝር።", "2. ኣብ ክልቲኡ ዝርዝር **ቀዳማይ ሓባራዊ ብዙሕ** ርኸብ።"],
+        uk: ["1. Запиши **кратні** кожного числа у зростаючому порядку.", "2. Знайди **перше спільне кратне** в обох списках."],
+        pt: ["1. Lista os **múltiplos** de cada número por ordem crescente.", "2. Encontra o **primeiro múltiplo comum** nas duas listas."],
+        so: ["1. Qor **labanlaabyada** tiro kasta si kor u kaca.", "2. Raadi **labanlaabka wadaagga ah ee ugu horreeya** ee labada liis."],
+        tr: ["1. Her sayının **katlarını** artan sırayla listele.", "2. İki listedeki **ilk ortak katı** bul."],
+        ps: ["1. د هر عدد **مضاعفونه** په زیاتېدونکي ترتیب ولیکه.", "2. په دواړو لېستونو کې **لومړی ګډ مضاعف** ومومه."],
+      },
     },
     {
       text: {
         fr: "Exemple : PPMC(4, 6)",
-      }
+        en: "Example: LCM(4, 6)",
+        ar: "مثال: المضاعف المشترك الأصغر(4، 6)",
+        fa: "مثال: PPMC(4, 6)",
+        ti: "ኣብነት፡ PPMC(4, 6)",
+        uk: "Приклад: НСК(4, 6)",
+        pt: "Exemplo: MMC(4, 6)",
+        so: "Tusaale: PPMC(4, 6)",
+        tr: "Örnek: EKOK(4, 6)",
+        ps: "بېلګه: PPMC(4, 6)",
+      },
     },
     {
       headers: {
         fr: ["Nombre", "Multiples (dans l'ordre)"],
+        en: ["Number", "Multiples (in order)"],
+        ar: ["العدد", "المضاعفات (بالترتيب)"],
+        fa: ["عدد", "مضرب‌ها (به ترتیب)"],
+        ti: ["ቁጽሪ", "ብዙሓት (ብቅደም ተከተል)"],
+        uk: ["Число", "Кратні (по порядку)"],
+        pt: ["Número", "Múltiplos (por ordem)"],
+        so: ["Tiro", "Labanlaabyo (sida ay u kala horreeyaan)"],
+        tr: ["Sayı", "Katlar (sırayla)"],
+        ps: ["عدد", "مضاعفونه (په ترتیب)"],
       },
-      caption: {
-        fr: "Le premier multiple commun est 12.",
-      }
+      items: {
+        fr: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        en: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        ar: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        fa: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        ti: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        uk: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        pt: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        so: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        tr: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+        ps: ["4 | 4 · 8 · **12** · 16 · 20 · 24 · ...", "6 | 6 · **12** · 18 · 24 · ..."],
+      },
     },
     {
       text: {
-        fr: "PPMC(4, 6) = 12",
-      }
+        fr: "Le premier multiple commun est **12**.",
+        en: "The first common multiple is **12**.",
+        ar: "أول مضاعف مشترك هو **12**.",
+        fa: "اولین مضرب مشترک **12** است.",
+        ti: "ቀዳማይ ሓባራዊ ብዙሕ **12** እዩ።",
+        uk: "Перше спільне кратне — **12**.",
+        pt: "O primeiro múltiplo comum é **12**.",
+        so: "Labanlaabka wadaagga ah ee ugu horreeya waa **12**.",
+        tr: "İlk ortak kat **12**'dir.",
+        ps: "لومړی ګډ مضاعف **12** دی.",
+      },
     },
-    {
-      text: {
-        fr: "",
-      }
-    },
+    {},
     {
       text: {
         fr: "Lien entre PGDC et PPMC",
-      }
-    },
-    {
-      text: {
-        fr: "Formule",
-      }
-    },
-    {
-      text: {
-        fr: "",
+        en: "Link between GCD and LCM",
+        ar: "العلاقة بين القاسم المشترك الأكبر والمضاعف المشترك الأصغر",
+        fa: "رابطه بین PGDC و PPMC",
+        ti: "ርክብ ኣብ መንጎ PGDCን PPMCን",
+        uk: "Зв'язок між НСД і НСК",
+        pt: "Ligação entre MDC e MMC",
+        so: "Xiriirka u dhexeeya PGDC iyo PPMC",
+        tr: "EBOB ve EKOK arasındaki ilişki",
+        ps: "د PGDC او PPMC ترمنځ اړیکه",
       },
-      items: {
-        fr: [
-          "PGDC(a, b) × PPMC(a, b) = a × b",
-        ],
-      }
+    },
+    {
+      text: {
+        fr: "PGDC(a, b) × PPMC(a, b) = a × b",
+        en: "GCD(a, b) × LCM(a, b) = a × b",
+        ar: "PGDC(a, b) × PPMC(a, b) = a × b",
+        fa: "PGDC(a, b) × PPMC(a, b) = a × b",
+        ti: "PGDC(a, b) × PPMC(a, b) = a × b",
+        uk: "НСД(a, b) × НСК(a, b) = a × b",
+        pt: "MDC(a, b) × MMC(a, b) = a × b",
+        so: "PGDC(a, b) × PPMC(a, b) = a × b",
+        tr: "EBOB(a, b) × EKOK(a, b) = a × b",
+        ps: "PGDC(a, b) × PPMC(a, b) = a × b",
+      },
     },
     {
       label: {
         fr: "Vérification avec 12 et 18 :",
+        en: "Check with 12 and 18:",
+        ar: "التحقق باستعمال 12 و18:",
+        fa: "بررسی با 12 و 18:",
+        ti: "ምርግጋጽ ብ12ን 18ን:",
+        uk: "Перевірка з 12 і 18:",
+        pt: "Verificação com 12 e 18:",
+        so: "Hubin 12 iyo 18:",
+        tr: "12 ve 18 ile kontrol:",
+        ps: "له 12 او 18 سره کتنه:",
       },
       items: {
-        fr: [
-          "PGDC(12, 18) = 6  et  PPMC(12, 18) = 36",
-          "6 × 36 = 216  =  12 × 18  ✓",
-        ],
-      }
+        fr: ["PGDC(12, 18) = 6 et PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        en: ["GCD(12, 18) = 6 and LCM(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        ar: ["PGDC(12, 18) = 6 و PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        fa: ["PGDC(12, 18) = 6 و PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        ti: ["PGDC(12, 18) = 6 እና PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        uk: ["НСД(12, 18) = 6 і НСК(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        pt: ["MDC(12, 18) = 6 e MMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        so: ["PGDC(12, 18) = 6 iyo PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        tr: ["EBOB(12, 18) = 6 ve EKOK(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+        ps: ["PGDC(12, 18) = 6 او PPMC(12, 18) = 36", "6 × 36 = 216 = 12 × 18 ✓"],
+      },
     },
     {
       text: {
         fr: "Application — calculer le PPMC avec la formule",
-      }
+        en: "Application — calculate the LCM with the formula",
+        ar: "تطبيق — حساب المضاعف المشترك الأصغر باستعمال الصيغة",
+        fa: "کاربرد — محاسبه PPMC با فرمول",
+        ti: "መተግበሪ — PPMC ብቀመር ምሕሳብ",
+        uk: "Застосування — обчислити НСК за формулою",
+        pt: "Aplicação — calcular o MMC com a fórmula",
+        so: "Adeegsi — ku xisaabi PPMC qaacidada",
+        tr: "Uygulama — formülle EKOK hesaplama",
+        ps: "کارونه — PPMC په فورمول حسابول",
+      },
     },
     {
       items: {
-        fr: [
-          "Si PGDC(8, 20) = 4, alors :",
-          "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**",
-        ],
-      }
+        fr: ["Si PGDC(8, 20) = 4, alors :", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        en: ["If GCD(8, 20) = 4, then:", "LCM(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        ar: ["إذا كان PGDC(8, 20) = 4، فإن:", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        fa: ["اگر PGDC(8, 20) = 4 باشد، آنگاه:", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        ti: ["PGDC(8, 20) = 4 እንተኾይኑ፣ ሽዑ:", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        uk: ["Якщо НСД(8, 20) = 4, тоді:", "НСК(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        pt: ["Se MDC(8, 20) = 4, então:", "MMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        so: ["Haddii PGDC(8, 20) = 4, markaas:", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        tr: ["EBOB(8, 20) = 4 ise:", "EKOK(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+        ps: ["که PGDC(8, 20) = 4 وي، نو:", "PPMC(8, 20) = (8 × 20) ÷ 4 = 160 ÷ 4 = **40**"],
+      },
     },
   ],
 };

@@ -15,7 +15,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
     { word: "arrivée", image: "arrivee.jpg",        article: "l'",  gender: "f", definition: "moment où le train arrive en gare" },
     { word: "wagon", image: "wagon.jpg",          article: "le",  gender: "m", definition: "voiture d'un train" },
     { word: "contrôleur", image: "controleur.jpg",     article: "le",  gender: "m", definition: "agent qui vérifie les billets" },
-    { word: "place", image: "place.jpg",          article: "la",  gender: "f", definition: "siège réservé dans le train" },
+    { word: "place", image: "/vocab/images/V4/place.jpg",          article: "la",  gender: "f", definition: "siège réservé dans le train" },
     { word: "grève", image: "greve.jpg",          article: "la",  gender: "f", definition: "arrêt de travail du personnel de train" },
     { word: "retard", image: "retard.jpg",         article: "le",  gender: "m", definition: "arrivée après l'heure prévue" },
     { word: "correspondance", image: "correspondance.jpg", article: "la",  gender: "f", definition: "changement de train en cours de route" },
