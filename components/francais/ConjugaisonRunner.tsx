@@ -583,7 +583,6 @@ function QcmExercise({
   }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
-  const { showPivot: showTrans } = useTranslation();
   const isRtl = pivot === "ar" || pivot === "fa";
 
   return (
@@ -793,7 +792,6 @@ function FillExercise({
   }, [validated, onCanValidateChange]);
 
   const pivot = usePivotLang();
-  const { showPivot: showTrans } = useTranslation();
   const isRtl = pivot === "ar" || pivot === "fa";
 
   return (

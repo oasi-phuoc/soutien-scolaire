@@ -2,8 +2,6 @@ import type { SubmoduleTrad } from "./trad-types";
 
 const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
   ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
-const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
-  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
 
 export const TRAD_A7_2: SubmoduleTrad = {
   submoduleId: "A7-2",
