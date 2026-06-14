@@ -796,6 +796,138 @@ export const A1_CONJ_L08: ConjLesson = {
         },
       ],
     },
+
+    // ── Prépositions avec les verbes de mouvement ─────────────────────────────
+    {
+      type: "heading",
+      text: "Les prépositions avec les verbes de mouvement",
+      trans: {
+        en: "Prepositions with movement verbs",
+        ar: "حروف الجر مع أفعال الحركة",
+        fa: "حروف اضافه با افعال حرکتی",
+        ti: "ናይ ምቅስቃስ ግሲያት ምስ ቅድሚ ስም ዝኸዱ ቃላት",
+        uk: "Прийменники з дієсловами руху",
+      },
+      sub: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Certains verbes de mouvement sont suivis d'une préposition qui indique la destination ou l'origine.",
+      ],
+      noBulletItems: [0],
+      transItems: {
+        en: ["Some movement verbs are followed by a preposition indicating destination or origin."],
+        ar: ["بعض أفعال الحركة تتبعها حروف جر تدل على الوجهة أو الأصل."],
+        fa: ["برخی افعال حرکتی با حرف اضافه‌ای همراه می‌شوند که مقصد یا مبدأ را نشان می‌دهد."],
+        ti: ["ገሊኦም ግሲያት ምቅስቃስ ምስ ቅድሚ ስም ይስዓቡ ዝዕላምኡ ወይ ምንጪ ዘርኢ።"],
+        uk: ["Деякі дієслова руху супроводжуються прийменником, що вказує на напрямок або походження."],
+      },
+    },
+
+    {
+      type: "highlight",
+      label: "aller + destination",
+      items: [
+        "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
+        "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
+        "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
+        "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
+        "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
+      ],
+      transLabel: {
+        en: "aller + destination",
+        ar: "aller + الوجهة",
+        fa: "aller + مقصد",
+        ti: "aller + ናበይ",
+        uk: "aller + напрямок",
+      },
+    },
+
+    {
+      type: "highlight",
+      label: "venir + origine",
+      items: [
+        "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
+        "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
+        "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
+        "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
+        "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
+      ],
+      transLabel: {
+        en: "venir + origin",
+        ar: "venir + الأصل",
+        fa: "venir + مبدأ",
+        ti: "venir + ካበይ",
+        uk: "venir + походження",
+      },
+    },
+
+    {
+      type: "grid",
+      headers: ["Verbe", "Préposition", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}partir{/a}", "de / du / des (origine)\npour (destination)", "Je pars {a}de{/a} Lyon.\nIl part {a}pour{/a} Rome."],
+        ["{a}arriver{/a}", "à / en / au / aux (destination)\nde / du / des (origine)", "Elle arrive {a}à{/a} la gare.\nIl arrive {a}du{/a} travail."],
+        ["{a}entrer{/a}", "dans", "Il entre {a}dans{/a} la salle."],
+        ["{a}sortir{/a}", "de / du / de la", "Elle sort {a}de{/a} l'école.\nIl sort {a}du{/a} bureau."],
+        ["{a}monter{/a}", "dans / sur", "Je monte {a}dans{/a} le bus.\nElle monte {a}sur{/a} le vélo."],
+        ["{a}descendre{/a}", "de / du", "Il descend {a}du{/a} train.\nElle descend {a}de{/a} la voiture."],
+        ["{a}marcher{/a}", "dans / vers / jusqu'à", "Il marche {a}dans{/a} la rue.\nNous marchons {a}vers{/a} l'école."],
+        ["{a}courir{/a}", "dans / vers / jusqu'à", "Il court {a}dans{/a} le parc.\nElle court {a}vers{/a} la sortie."],
+      ],
+    },
+
+    // ── Articles contractés ───────────────────────────────────────────────────
+    {
+      type: "heading",
+      text: "Les articles contractés",
+      trans: {
+        en: "Contracted articles",
+        ar: "المقاطع المدمجة",
+        fa: "حروف تعریف ادغام‌شده",
+        ti: "ዝተሓጸሩ ናይ ዓንቀጽ",
+        uk: "Злиті артиклі",
+      },
+      sub: true,
+    },
+    {
+      type: "plain_list",
+      items: [
+        "Quand les prépositions {a}à{/a} et {a}de{/a} sont suivies de l'article {a}le{/a} ou {a}les{/a}, elles se contractent obligatoirement.",
+      ],
+      noBulletItems: [0],
+      transItems: {
+        en: ["When the prepositions {a}à{/a} and {a}de{/a} are followed by the article {a}le{/a} or {a}les{/a}, they must be contracted."],
+        ar: ["عندما تتبع حروف الجر {a}à{/a} و{a}de{/a} المقال {a}le{/a} أو {a}les{/a}، تُدمج وجوبًا."],
+        fa: ["وقتی حروف اضافه {a}à{/a} و {a}de{/a} قبل از حرف تعریف {a}le{/a} یا {a}les{/a} قرار می‌گیرند، باید ادغام شوند."],
+        ti: ["ምስ {a}à{/a} ከምኡ'ውን {a}de{/a} ቅድሚ ናይ ዓንቀጽ {a}le{/a} ወይ {a}les{/a}, ምድምሳስ ግዴታ እዩ።"],
+        uk: ["Коли прийменники {a}à{/a} та {a}de{/a} стоять перед артиклем {a}le{/a} або {a}les{/a}, вони обов'язково зливаються."],
+      },
+    },
+    {
+      type: "grid",
+      headers: ["Préposition + article", "Contraction", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}à + le{/a}", "→ {a}au{/a}", "Je vais {a}au{/a} marché. (à + le marché)"],
+        ["{a}à + les{/a}", "→ {a}aux{/a}", "Je vais {a}aux{/a} États-Unis. (à + les États-Unis)"],
+        ["{a}de + le{/a}", "→ {a}du{/a}", "Je viens {a}du{/a} marché. (de + le marché)"],
+        ["{a}de + les{/a}", "→ {a}des{/a}", "Il arrive {a}des{/a} États-Unis. (de + les États-Unis)"],
+      ],
+      transHeaders: {
+        en: ["Preposition + article", "Contraction", "Example"],
+        ar: ["حرف الجر + المقال", "الإدماج", "مثال"],
+        fa: ["حرف اضافه + حرف تعریف", "ادغام", "مثال"],
+        ti: ["ቅድሚ ስም + ናይ ዓንቀጽ", "ምድምሳስ", "ኣብነት"],
+        uk: ["Прийменник + артикль", "Злиття", "Приклад"],
+      },
+    },
+    {
+      type: "note",
+      text: "à + la et de + la ne se contractent PAS.\nJe vais à la pharmacie ✅ — Je viens de la gare ✅\n\nà + l' et de + l' ne se contractent PAS.\nJe vais à l'école ✅ — Je viens de l'hôpital ✅",
+    },
   ],
   exercises: [
     // ── Exercice 1 — Complétez avec la terminaison ──────────────────────────

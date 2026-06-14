@@ -155,13 +155,30 @@ export const A1_GR_L11: GrammarLesson = {
   title: "Les prépositions de lieu",
   theory: [
     // ── Titre ────────────────────────────────────────────────────────────────────
-    { type: "heading", text: "Les prépositions de lieu" },
+    {
+      type: "heading",
+      text: "Les prépositions de lieu",
+      trans: {
+        en: "Prepositions of place",
+        ar: "حروف الجر المكانية",
+        fa: "حروف اضافه مکانی",
+        ti: "ናይ ቦታ ቅድሚ ስም ዝኸዱ ቃላት",
+        uk: "Прийменники місця",
+      },
+    },
 
     {
       type: "plain_list",
       items: [
         "Les prépositions de lieu indiquent où se trouve quelque chose ou quelqu'un par rapport à un autre objet ou endroit.",
       ],
+      transItems: {
+        en: ["Prepositions of place indicate where something or someone is located in relation to another object or place."],
+        ar: ["حروف الجر المكانية تدل على موقع شيء ما أو شخص ما بالنسبة لشيء آخر أو مكان آخر."],
+        fa: ["حروف اضافه مکانی نشان می‌دهند که چیزی یا کسی نسبت به شیء یا مکان دیگری کجا قرار دارد."],
+        ti: ["ናይ ቦታ ቅድሚ ስም ዝኸዱ ቃላት ኣበይ ነገር ወይ ሰብ ኣብ ዝኾነ ካልእ ነገር ወይ ቦታ ከምዘሎ ይሕብሩ።"],
+        uk: ["Прийменники місця вказують, де знаходиться щось або хтось відносно іншого предмета чи місця."],
+      },
     },
 
     // ── Illustrations ─────────────────────────────────────────────────────────
@@ -181,21 +198,130 @@ export const A1_GR_L11: GrammarLesson = {
         "L'hôtel est {a}en face de{/a} la gare.",
         "Elle habite {a}chez{/a} ses parents.",
       ],
+      transLabel: {
+        en: "Example sentences",
+        ar: "أمثلة في جمل",
+        fa: "مثال‌هایی در جملات",
+        ti: "ኣብ ሓሳባት ዝርከቡ ኣብነታት",
+        uk: "Приклади речень",
+      },
+      transItems: {
+        en: [
+          "The book is {a}on{/a} the table.",
+          "The cat is {a}under{/a} the chair.",
+          "He waits {a}in front of{/a} the school.",
+          "The garden is {a}behind{/a} the house.",
+          "The bank is {a}between{/a} the post office and the pharmacy.",
+          "The bakery is {a}next to{/a} the pharmacy.",
+          "The hotel is {a}opposite{/a} the station.",
+          "She lives {a}at{/a} her parents' place.",
+        ],
+        ar: [
+          "الكتاب {a}على{/a} المائدة.",
+          "القطة {a}تحت{/a} الكرسي.",
+          "ينتظر {a}أمام{/a} المدرسة.",
+          "الحديقة {a}خلف{/a} المنزل.",
+          "البنك {a}بين{/a} البريد والصيدلية.",
+          "المخبز {a}بجانب{/a} الصيدلية.",
+          "الفندق {a}في مواجهة{/a} المحطة.",
+          "هي تسكن {a}عند{/a} والديها.",
+        ],
+        fa: [
+          "کتاب {a}روی{/a} میز است.",
+          "گربه {a}زیر{/a} صندلی است.",
+          "او {a}جلوی{/a} مدرسه منتظر است.",
+          "باغ {a}پشت{/a} خانه است.",
+          "بانک {a}بین{/a} پست و داروخانه است.",
+          "نانوایی {a}کنار{/a} داروخانه است.",
+          "هتل {a}روبروی{/a} ایستگاه است.",
+          "او {a}پیش{/a} پدر و مادرش زندگی می‌کند.",
+        ],
+        ti: [
+          "መጽሓፍ {a}ኣብ ልዕሊ{/a} ሜዳ ኣሎ።",
+          "ድሙ {a}ትሕቲ{/a} ወንበር ኣሎ።",
+          "{a}ቅድሚ{/a} ቤትትምህርቲ ይጽበ ኣሎ።",
+          "ሓርሻ {a}ኣብ ሕቅፈት{/a} ቤቱ ኣሎ።",
+          "ባንኪ {a}ኣብ መቐቐ{/a} ፖስጣን ፋርማሲን ኣሎ።",
+          "ሓድሽ ዝተሃርዓ {a}ጸጋም{/a} ፋርማሲ ኣሎ።",
+          "ሆቴል ምስ ናይ ባቡር ጣቢያ {a}ፊት ንፊት{/a} እዩ።",
+          "ኣብ ቤት {a}ናይ{/a} ወለዳ ትቕመጥ ኣላ།",
+        ],
+        uk: [
+          "Книга {a}на{/a} столі.",
+          "Кіт {a}під{/a} стільцем.",
+          "Він чекає {a}перед{/a} школою.",
+          "Сад {a}позаду{/a} будинку.",
+          "Банк {a}між{/a} поштою та аптекою.",
+          "Пекарня {a}поруч з{/a} аптекою.",
+          "Готель {a}навпроти{/a} вокзалу.",
+          "Вона живе {a}у{/a} батьків.",
+        ],
+      },
     },
 
     // ── Contractions ─────────────────────────────────────────────────────────────
-    { type: "heading", text: "Articles contractés", sub: true },
+    {
+      type: "heading",
+      text: "Articles contractés",
+      sub: true,
+      trans: {
+        en: "Contracted articles",
+        ar: "المقاطع المدمجة",
+        fa: "حروف تعریف ادغام‌شده",
+        ti: "ዝተሓጸሩ ናይ ዓንቀጽ",
+        uk: "Злиті артиклі",
+      },
+    },
 
     {
       type: "grid",
       headers: ["Contraction", "Exemple"],
       boldFirstCol: true,
       rows: [
-        ["{a}à + le → au{/a}", "Je vais {a}au{/a} cinéma."],
-        ["{a}à + les → aux{/a}", "Je parle {a}aux{/a} enfants."],
-        ["{a}de + le → du{/a}", "Je viens {a}du{/a} marché. (loin {a}du{/a} centre)"],
-        ["{a}de + les → des{/a}", "près {a}des{/a} magasins"],
+        ["{a}à + le → au{/a}", "Je vais {a}au{/a} marché. — L'appartement est {a}au{/a} 2ᵉ étage."],
+        ["{a}à + les → aux{/a}", "Je parle {a}aux{/a} enfants. — Nous allons {a}aux{/a} Champs-Élysées."],
+        ["{a}de + le → du{/a}", "loin {a}du{/a} centre — Il sort {a}du{/a} magasin."],
+        ["{a}de + les → des{/a}", "près {a}des{/a} magasins — à côté {a}des{/a} bureaux."],
       ],
+      transHeaders: {
+        en: ["Contraction", "Example"],
+        ar: ["الإدماج", "مثال"],
+        fa: ["ادغام", "مثال"],
+        ti: ["ምድምሳስ", "ኣብነት"],
+        uk: ["Злиття", "Приклад"],
+      },
+      transRows: {
+        en: [
+          ["{a}à + le → au{/a}", "I'm going to the market. — The apartment is on the 2nd floor."],
+          ["{a}à + les → aux{/a}", "I'm talking to the children. — We're going to the Champs-Élysées."],
+          ["{a}de + le → du{/a}", "far from the centre — He leaves the shop."],
+          ["{a}de + les → des{/a}", "near the shops — next to the offices."],
+        ],
+        ar: [
+          ["{a}à + le → au{/a}", "أذهب إلى السوق. — الشقة في الطابق الثاني."],
+          ["{a}à + les → aux{/a}", "أتحدث إلى الأطفال. — نذهب إلى الشانزليزيه."],
+          ["{a}de + le → du{/a}", "بعيد عن المركز. — يخرج من المتجر."],
+          ["{a}de + les → des{/a}", "قريب من المحلات. — بجانب المكاتب."],
+        ],
+        fa: [
+          ["{a}à + le → au{/a}", "به بازار می‌روم. — آپارتمان در طبقه دوم است."],
+          ["{a}à + les → aux{/a}", "با بچه‌ها صحبت می‌کنم. — ما به شانزلیزه می‌رویم."],
+          ["{a}de + le → du{/a}", "دور از مرکز. — از مغازه خارج می‌شود."],
+          ["{a}de + les → des{/a}", "نزدیک مغازه‌ها. — کنار دفاتر."],
+        ],
+        ti: [
+          ["{a}à + le → au{/a}", "ናብ ዕዳጋ ይኸይድ ኣለኹ። — ናይ ካልኣይ ደርቢ እዩ።"],
+          ["{a}à + les → aux{/a}", "ምስ ቆልዑ ይዛረብ ኣለኹ። — ናብ ሻምዝሊዝ ንኸይድ።"],
+          ["{a}de + le → du{/a}", "ካብ ማእከል ርሒቕ። — ካብ ሱቕ ይወጽእ።"],
+          ["{a}de + les → des{/a}", "ቀረባ ሱቓት። — ጸጋም ቤት ጽሕፈታት።"],
+        ],
+        uk: [
+          ["{a}à + le → au{/a}", "Я йду на ринок. — Квартира на другому поверсі."],
+          ["{a}à + les → aux{/a}", "Я розмовляю з дітьми. — Ми йдемо на Єлисейські поля."],
+          ["{a}de + le → du{/a}", "далеко від центру. — Він виходить з магазину."],
+          ["{a}de + les → des{/a}", "поруч з магазинами. — поряд з офісами."],
+        ],
+      },
     },
 
     {
