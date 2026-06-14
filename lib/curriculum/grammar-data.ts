@@ -12,6 +12,7 @@ export type GrammarLesson = {
   title: string;
   theory: TheoryBlock[];
   exercises: Exercise[];
+  evalExercises?: Exercise[];
 };
 
 // ── Imports ───────────────────────────────────────────────────────────────────

@@ -14,6 +14,8 @@ import type {
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
+import { linearSwissGrade, medalFromPercent } from "@/lib/scoring";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -26,6 +28,7 @@ export interface LessonLike {
   theory2?: TheoryBlock[];
   midExercises?: Exercise[];
   exercises: Exercise[];
+  evalExercises?: Exercise[];
 }
 
 interface Props {
@@ -2148,9 +2151,17 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const pivot = usePivotLang();
   const { showPivot: showTrans } = useTranslation();
   const midExercises = lesson.midExercises ?? [];
+  const evalExercises = lesson.evalExercises ?? [];
+  const hasEval = evalExercises.length > 0;
   const theory2Idx = 1 + midExercises.length;
   const exStart = theory2Idx + (lesson.theory2 ? 1 : 0);
-  const totalSteps = 1 + midExercises.length + (lesson.theory2 ? 1 : 0) + lesson.exercises.length;
+  const evalAnnounceIdx = exStart + lesson.exercises.length;
+  const evalExStart = evalAnnounceIdx + 1;
+  const evalExEnd = evalExStart + evalExercises.length - 1;
+  const resultsIdx = evalExEnd + 1;
+  const totalSteps = hasEval
+    ? resultsIdx + 1
+    : evalAnnounceIdx;
 
   // Grammar and vocabulary lessons skip the timed start screen
   const hasTimer = subject === "Conjugaison";
@@ -2162,6 +2173,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [exercisesStarted, setExercisesStarted] = useState(!hasTimer);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
+  const [evalScores, setEvalScores] = useState<boolean[]>([]);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2169,10 +2181,20 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const isMidEx = stepIdx >= 1 && stepIdx <= midExercises.length;
   const isTheory2 = lesson.theory2 ? stepIdx === theory2Idx : false;
   const isTheory = isTheory1 || isTheory2;
-  const isExercise = stepIdx >= exStart;
+  const isExercise = stepIdx >= exStart && stepIdx < evalAnnounceIdx;
+  const isEvalAnnounce = hasEval && stepIdx === evalAnnounceIdx;
+  const isEvalExercise = hasEval && stepIdx >= evalExStart && stepIdx <= evalExEnd;
+  const isResults = hasEval && stepIdx === resultsIdx;
   const currentMidEx = isMidEx ? midExercises[stepIdx - 1] ?? null : null;
   const currentExercise = isExercise ? lesson.exercises[stepIdx - exStart] ?? null : null;
+  const currentEvalEx = isEvalExercise ? evalExercises[stepIdx - evalExStart] ?? null : null;
   const currentBlocks = isTheory1 ? lesson.theory : isTheory2 ? lesson.theory2! : null;
+
+  // Grade computation
+  const evalPassedCount = evalScores.filter(Boolean).length;
+  const evalGrade = hasEval && evalExercises.length > 0 ? linearSwissGrade(evalPassedCount, evalExercises.length) : 0;
+  const evalPercent = hasEval && evalExercises.length > 0 ? (evalPassedCount / evalExercises.length) * 100 : 0;
+  const evalMedal = hasEval ? medalFromPercent(evalPercent) : null;
 
   // Reset validate command when moving to a new step
   useEffect(() => {
@@ -2198,11 +2220,26 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
   }
 
-  const handleValidated = useCallback<(allCorrect: boolean) => void>((_allCorrect: boolean) => {
+  const isEvalExerciseRef = React.useRef(false);
+  isEvalExerciseRef.current = isEvalExercise;
+
+  const handleValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
+    if (isEvalExerciseRef.current) {
+      setEvalScores((prev) => [...prev, allCorrect]);
+    }
     setCanValidate(false);
   }, []);
 
   function goBack() {
+    if (isResults) {
+      markFrenchLessonComplete(lesson.slug);
+      router.push(returnUrl);
+      return;
+    }
+    if (isEvalExercise) {
+      setShowCancelConfirm(true);
+      return;
+    }
     if (hasTimer && isExercise && exercisesStarted) {
       setShowCancelConfirm(true);
       return;
@@ -2251,9 +2288,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               <button
                 type="button"
                 onClick={() => {
-                  setExercisesStarted(false);
-                  setTimeLeft(null);
-                  setStepIdx(exStart);
+                  if (isEvalExercise) {
+                    setEvalScores([]);
+                    setStepIdx(evalAnnounceIdx);
+                  } else {
+                    setExercisesStarted(false);
+                    setTimeLeft(null);
+                    setStepIdx(exStart);
+                  }
                   setExerciseKey((k) => k + 1);
                   setShowCancelConfirm(false);
                 }}
@@ -2352,6 +2394,55 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               onCanValidateChange={setCanValidate}
             />
           ) : null
+        ) : isEvalAnnounce ? (
+          <div className="flex flex-col items-center gap-5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-6 py-12 text-center">
+            <span className="text-5xl">📝</span>
+            <div className="space-y-2">
+              <p className="text-xl font-bold text-[var(--color-text-primary)]">Prêt pour l&apos;évaluation ?</p>
+              <p className="text-sm text-[var(--color-text-secondary)]">
+                {evalExercises.length} exercice{evalExercises.length > 1 ? "s" : ""} notés.
+              </p>
+              <p className="text-xs text-[var(--color-text-secondary)]">Vos réponses seront enregistrées.</p>
+            </div>
+            <button
+              type="button"
+              onClick={goNext}
+              className="mt-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-8 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
+            >
+              Commencer l&apos;évaluation
+            </button>
+          </div>
+        ) : isEvalExercise && currentEvalEx ? (
+          <div className="space-y-4">
+            <EvalProgressBar current={stepIdx - evalExStart} total={evalExercises.length} />
+            <ExerciseView
+              key={exerciseKey}
+              exercise={currentEvalEx}
+              onValidated={handleValidated}
+              validateCommand={validateCommand}
+              onCanValidateChange={setCanValidate}
+            />
+          </div>
+        ) : isResults ? (
+          <div className="flex flex-col items-center gap-6 py-8 text-center">
+            <p className="text-5xl">
+              {evalMedal === "gold" ? "🥇" : evalMedal === "silver" ? "🥈" : "🥉"}
+            </p>
+            <div className="space-y-1">
+              <p className="text-4xl font-bold text-[var(--color-accent-fr)]">
+                {evalGrade.toFixed(1)}
+                <span className="text-lg font-normal text-[var(--color-text-secondary)]"> / 6</span>
+              </p>
+              <p className="text-sm text-[var(--color-text-secondary)]">
+                {evalPassedCount}/{evalExercises.length} exercice{evalExercises.length > 1 ? "s" : ""} réussi{evalPassedCount > 1 ? "s" : ""}
+              </p>
+            </div>
+            {evalGrade >= 4 ? (
+              <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Félicitations ! Module réussi.</p>
+            ) : (
+              <p className="text-sm text-amber-600 dark:text-amber-400">Continuez à pratiquer pour améliorer votre score.</p>
+            )}
+          </div>
         ) : null}
       </div>
 
@@ -2379,8 +2470,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               Retour
             </button>
 
-            {/* Reset + Validate (exercises only, or mid-exercises) */}
-            {(isMidEx || (isExercise && (!hasTimer || exercisesStarted))) && (
+            {/* Reset + Validate (exercises only, or mid-exercises, or eval exercises) */}
+            {(isMidEx || (isExercise && (!hasTimer || exercisesStarted)) || isEvalExercise) && (
               <div className="flex items-center gap-2">
                 <button
                   type="button"
@@ -2407,11 +2498,11 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               </div>
             )}
 
-            {/* Next — hidden during exercise start screen */}
+            {/* Next — hidden during exercise start screen and eval announce (which has its own inline button) */}
             <button
               type="button"
-              onClick={goNext}
-              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${isExercise && hasTimer && !exercisesStarted ? "invisible" : ""}`}
+              onClick={isResults ? () => { markFrenchLessonComplete(lesson.slug); router.push(returnUrl); } : goNext}
+              className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 ${(isExercise && hasTimer && !exercisesStarted) || isEvalAnnounce ? "invisible" : ""}`}
             >
               {isLast ? (
                 <>
