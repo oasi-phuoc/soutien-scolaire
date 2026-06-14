@@ -49,7 +49,7 @@ export const A1_GR_L04: GrammarLesson = {
         ti: ["ቅድሚ {b}ሞዓዝ{/b} ወይ {b}h{/b}፣ {a}le{/a} ን {a}la{/a} {a}l'{/a} ይኾናን.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
         uk: ["Перед {b}голосним{/b} або {b}h{/b}, {a}le{/a} і {a}la{/a} стають {a}l'{/a}.", "{a}le{/a} → l'arbre", "{a}la{/a} → l'école"],
       },
-      noBulletItems: [0],
+      noBulletItems: [0, 1, 2],
       inlineArrows: true,
     },
     { type: "heading", text: "Les articles indéfinis", trans: { en: "Indefinite articles", ar: "النكرات", fa: "حروف تعریف نامعین", ti: "ዘይተፈልጠ ዓንቀጽ", uk: "Неозначені артиклі" } },
@@ -95,7 +95,7 @@ export const A1_GR_L04: GrammarLesson = {
         ti: ["እቲ ማዕጾ ይፍለጥ እዩ፣ ንኣብነት ማዕጾ ቤት.", "ነቲ {a}ማዕጾ{/a} ዓጽዮ."],
         uk: ["Двері відомі, наприклад двері будинку.", "Я закриваю {a}ці{/a} двері."],
       },
-      noBulletItems: [0],
+      noBulletItems: [0, 1],
     },
     {
       type: "highlight",
@@ -112,7 +112,7 @@ export const A1_GR_L04: GrammarLesson = {
         ti: ["ዘይፍለጥ ማዕጾ፣ ካብ ብዙሓት ሓደ.", "ሓደ {a}ማዕጾ{/a} ይደሊ."],
         uk: ["Двері, яких я не знаю, одні з багатьох.", "Я шукаю {a}якісь{/a} двері."],
       },
-      noBulletItems: [0],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [
