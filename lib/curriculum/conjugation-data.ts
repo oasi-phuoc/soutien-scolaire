@@ -28,7 +28,8 @@ export type TheoryBlock =
   | { type: "clock_display"; clocks: { h: number; m: number; label?: string }[]; cols?: number }
   | { type: "word_cards"; items: string[]; cols?: 2 | 3 | 4 }
   | { type: "illus_cards"; items: Array<{ label: string; svg: string }>; cols?: 2 | 3 | 4 | 5 }
-  | { type: "grammar_link"; text: string; href: string };
+  | { type: "grammar_link"; text: string; href: string }
+  | { type: "selector"; labelPrefix?: string; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
 export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
@@ -38,11 +39,11 @@ export type Exercise =
   | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
-  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked" }
+  | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; promptPool?: string[]; promptPoolSize?: number; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked" }
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[] }
   | { type: "order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; hint?: string }[] }
   | { type: "classify"; title: string; instruction: string; transInstruction?: Trans; categories: string[]; items: { word: string; categoryIdx: number }[]; pool?: { word: string; categoryIdx: number }[]; poolSize?: number; allowPartialValidation?: boolean }
-  | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[] }[]; allowPartialValidation?: boolean }
+  | { type: "word_order"; title: string; instruction: string; transInstruction?: Trans; items: { sentence: string; words: string[] }[]; pool?: { sentence: string; words: string[] }[]; poolSize?: number; allowPartialValidation?: boolean }
   | { type: "color_highlight"; title: string; instruction: string; transInstruction?: Trans; colors: string[]; items: { words: string[]; answers: (number | null)[] }[] }
   | { type: "clock_read"; title: string; instruction: string; transInstruction?: Trans; clocks: { h: number; m: number; label: string; answer: string }[] }
   | { type: "tag2"; title: string; instruction: string; transInstruction?: Trans; pool: { word: string; companion?: string; gender: "M" | "F" | null; number: "S" | "P" }[]; poolSize?: number };

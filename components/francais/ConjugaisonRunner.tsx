@@ -523,10 +523,45 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
               </a>
             );
 
+          case "selector":
+            return <SelectorBlock key={i} block={block} pivot={pivot} showTrans={showTrans} />;
+
           default:
             return null;
         }
       })}
+    </div>
+  );
+}
+
+// ── Selector block (interactive verb/rule tabs) ───────────────────────────────
+
+function SelectorBlock({ block, pivot, showTrans }: {
+  block: Extract<import("@/lib/curriculum/conjugation-data").TheoryBlock, { type: "selector" }>;
+  pivot: string;
+  showTrans: boolean;
+}) {
+  const [activeTab, setActiveTab] = useState(0);
+  return (
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-1.5">
+        {block.tabs.map((tab, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveTab(i)}
+            className={`rounded-lg px-3 py-1.5 text-sm font-bold transition-colors ${
+              activeTab === i
+                ? "bg-[var(--color-accent-fr)] text-white"
+                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-fr)]/20"
+            }`}
+          >
+            {block.labelPrefix ? `${block.labelPrefix} ${tab.label}` : tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="rounded-xl bg-[var(--color-bg-secondary)] p-4">
+        <TheoryView blocks={block.tabs[activeTab]!.content} pivot={pivot} showTrans={showTrans} />
+      </div>
     </div>
   );
 }
@@ -1232,7 +1267,13 @@ function WriteExercise({
     if (!exercise.verbPool?.length) return [];
     return shuffle([...exercise.verbPool]).slice(0, exercise.verbPoolSize ?? 5);
   });
-  const promptCount = activeVerbs.length > 0 ? activeVerbs.length : (exercise.prompts?.length ?? 0);
+  const [displayedPrompts] = useState<string[]>(() => {
+    if (exercise.promptPool?.length) {
+      return shuffle([...exercise.promptPool]).slice(0, exercise.promptPoolSize ?? 5);
+    }
+    return exercise.prompts ?? [];
+  });
+  const promptCount = activeVerbs.length > 0 ? activeVerbs.length : displayedPrompts.length;
   const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
   const [validated, setValidated] = useState(false);
   const [checking, setChecking] = useState(false);
@@ -1354,7 +1395,7 @@ function WriteExercise({
               <>
                 <p className="text-sm font-medium text-[var(--color-text-primary)]">
                   <span className={`font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
-                  {perVerb ? `(${perVerb})` : exercise.prompts?.[i]}
+                  {perVerb ? `(${perVerb})` : displayedPrompts[i]}
                 </p>
                 <input
                   type="text"
@@ -1695,8 +1736,14 @@ function WordOrderExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
+  const [activeItems] = useState(() => {
+    if (exercise.pool?.length) {
+      return shuffle([...exercise.pool]).slice(0, exercise.poolSize ?? exercise.pool.length);
+    }
+    return exercise.items;
+  });
   const [states] = useState(() =>
-    exercise.items.map((item) => {
+    activeItems.map((item) => {
       const trailingPunct = item.sentence.match(/([.?!])$/)?.[1] ?? null;
       const allWords = trailingPunct ? [...item.words, trailingPunct] : [...item.words];
       return { ...item, allWords, shuffled: shuffle([...allWords]) };

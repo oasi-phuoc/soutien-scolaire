@@ -835,6 +835,7 @@ export const A1_CONJ_L08: ConjLesson = {
         "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
         "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
       ],
+      noBulletItems: [0, 1, 2, 3, 4],
       transLabel: {
         en: "aller + destination",
         ar: "aller + الوجهة",
@@ -854,6 +855,7 @@ export const A1_CONJ_L08: ConjLesson = {
         "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
         "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
       ],
+      noBulletItems: [0, 1, 2, 3, 4],
       transLabel: {
         en: "venir + origin",
         ar: "venir + الأصل",
@@ -864,18 +866,155 @@ export const A1_CONJ_L08: ConjLesson = {
     },
 
     {
-      type: "grid",
-      headers: ["Verbe", "Préposition", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["{a}partir{/a}", "de / du / des (origine)\npour (destination)", "Je pars {a}de{/a} Lyon.\nIl part {a}pour{/a} Rome."],
-        ["{a}arriver{/a}", "à / en / au / aux (destination)\nde / du / des (origine)", "Elle arrive {a}à{/a} la gare.\nIl arrive {a}du{/a} travail."],
-        ["{a}entrer{/a}", "dans", "Il entre {a}dans{/a} la salle."],
-        ["{a}sortir{/a}", "de / du / de la", "Elle sort {a}de{/a} l'école.\nIl sort {a}du{/a} bureau."],
-        ["{a}monter{/a}", "dans / sur", "Je monte {a}dans{/a} le bus.\nElle monte {a}sur{/a} le vélo."],
-        ["{a}descendre{/a}", "de / du", "Il descend {a}du{/a} train.\nElle descend {a}de{/a} la voiture."],
-        ["{a}marcher{/a}", "dans / vers / jusqu'à", "Il marche {a}dans{/a} la rue.\nNous marchons {a}vers{/a} l'école."],
-        ["{a}courir{/a}", "dans / vers / jusqu'à", "Il court {a}dans{/a} le parc.\nElle court {a}vers{/a} la sortie."],
+      type: "selector",
+      tabs: [
+        {
+          label: "aller",
+          content: [
+            {
+              type: "highlight",
+              label: "Destination",
+              items: [
+                "{a}à{/a} + ville → Je vais {a}à{/a} Paris.",
+                "{a}en{/a} + pays féminin → Elle va {a}en{/a} France.",
+                "{a}au{/a} + pays masculin → Il va {a}au{/a} Maroc.",
+                "{a}aux{/a} + pays pluriel → Nous allons {a}aux{/a} États-Unis.",
+                "{a}chez{/a} + personne → Tu vas {a}chez{/a} le médecin.",
+              ],
+              noBulletItems: [0, 1, 2, 3, 4],
+            },
+          ],
+        },
+        {
+          label: "venir",
+          content: [
+            {
+              type: "highlight",
+              label: "Origine",
+              items: [
+                "{a}de{/a} + ville → Je viens {a}de{/a} Paris.",
+                "{a}de{/a} + pays féminin → Elle vient {a}de{/a} France.",
+                "{a}du{/a} + pays masculin → Il vient {a}du{/a} Maroc.",
+                "{a}des{/a} + pays pluriel → Tu viens {a}des{/a} États-Unis.",
+                "{a}de chez{/a} + personne → Elle vient {a}de chez{/a} le médecin.",
+              ],
+              noBulletItems: [0, 1, 2, 3, 4],
+            },
+          ],
+        },
+        {
+          label: "partir",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}de / du / des{/a} (origine) → Je pars {a}de{/a} Lyon.",
+                "{a}pour{/a} (destination) → Il part {a}pour{/a} Rome.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "arriver",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}à / en / au / aux{/a} (destination) → Elle arrive {a}à{/a} la gare.",
+                "{a}de / du / des{/a} (origine) → Il arrive {a}du{/a} travail.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "entrer",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}dans{/a} → Il entre {a}dans{/a} la salle.",
+              ],
+              noBulletItems: [0],
+            },
+          ],
+        },
+        {
+          label: "sortir",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}de / du / de la{/a} → Elle sort {a}de{/a} l'école.",
+                "Il sort {a}du{/a} bureau.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "monter",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}dans{/a} → Je monte {a}dans{/a} le bus.",
+                "{a}sur{/a} → Elle monte {a}sur{/a} le vélo.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "descendre",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}du{/a} → Il descend {a}du{/a} train.",
+                "{a}de{/a} → Elle descend {a}de{/a} la voiture.",
+              ],
+              noBulletItems: [0, 1],
+            },
+          ],
+        },
+        {
+          label: "marcher",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}dans{/a} → Il marche {a}dans{/a} la rue.",
+                "{a}vers{/a} → Nous marchons {a}vers{/a} l'école.",
+                "{a}jusqu'à{/a} → Il marche {a}jusqu'à{/a} la gare.",
+              ],
+              noBulletItems: [0, 1, 2],
+            },
+          ],
+        },
+        {
+          label: "courir",
+          content: [
+            {
+              type: "highlight",
+              label: "",
+              items: [
+                "{a}dans{/a} → Il court {a}dans{/a} le parc.",
+                "{a}vers{/a} → Elle court {a}vers{/a} la sortie.",
+                "{a}jusqu'à{/a} → Il court {a}jusqu'à{/a} l'arrivée.",
+              ],
+              noBulletItems: [0, 1, 2],
+            },
+          ],
+        },
       ],
     },
 
@@ -925,8 +1064,32 @@ export const A1_CONJ_L08: ConjLesson = {
       },
     },
     {
-      type: "note",
-      text: "à + la et de + la ne se contractent PAS.\nJe vais à la pharmacie ✅ — Je viens de la gare ✅\n\nà + l' et de + l' ne se contractent PAS.\nJe vais à l'école ✅ — Je viens de l'hôpital ✅",
+      type: "plain_list",
+      items: ["à + la et de + la ne se contractent PAS."],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Je vais {a}à la{/a} pharmacie ✅",
+        "Je viens {a}de la{/a} gare ✅",
+      ],
+      noBulletItems: [0, 1],
+    },
+    {
+      type: "plain_list",
+      items: ["à + l' et de + l' ne se contractent PAS."],
+      noBulletItems: [0],
+    },
+    {
+      type: "highlight",
+      label: "",
+      items: [
+        "Je vais {a}à l'{/a}école ✅",
+        "Je viens {a}de l'{/a}hôpital ✅",
+      ],
+      noBulletItems: [0, 1],
     },
   ],
   exercises: [

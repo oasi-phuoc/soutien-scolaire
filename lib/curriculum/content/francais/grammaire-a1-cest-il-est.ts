@@ -274,6 +274,17 @@ export const A1_GR_CEST: GrammarLesson = {
         { word: "Il est grand et sportif.",          categoryIdx: 1 },
         { word: "C'est une belle journée !",         categoryIdx: 0 },
         { word: "Elle est ukrainienne.",             categoryIdx: 1 },
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        { word: "Ce sont des étudiants en médecine.", categoryIdx: 0 },
+        { word: "Ils sont très ponctuels.",           categoryIdx: 1 },
+        { word: "Ce sont mes voisins du quartier.",   categoryIdx: 0 },
+        { word: "Elles sont françaises.",             categoryIdx: 1 },
+        { word: "Ce sont les enfants de la voisine.", categoryIdx: 0 },
+        { word: "Ils sont médecins.",                 categoryIdx: 1 },
+        { word: "Ce sont de beaux tableaux.",         categoryIdx: 0 },
+        { word: "Elles sont très fatiguées.",         categoryIdx: 1 },
+        { word: "Ce sont nos meilleurs amis.",        categoryIdx: 0 },
+        { word: "Ils sont architectes.",              categoryIdx: 1 },
       ],
     },
 
@@ -327,6 +338,17 @@ export const A1_GR_CEST: GrammarLesson = {
         { sentence: "Voici Carlos. ___ le chef du restaurant.",               choices: ["C'est", "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
         { sentence: "Anna est professeure. ___ très stricte.",                choices: ["C'est", "Il est",  "Elle est", "C'est une"], correctIdx: 2 },
         { sentence: "Voici Anna. ___ ma professeure de français.",            choices: ["C'est", "Il est",  "Elle est", "C'est une"], correctIdx: 0 },
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        { sentence: "___ des enfants très sages.",        choices: ["Ce sont",  "Ils sont",  "Elles sont", "C'est"],     correctIdx: 0 },
+        { sentence: "___ très rapides.",                  choices: ["Ils sont",  "Ce sont",   "Elle est",   "Il est"],    correctIdx: 0 },
+        { sentence: "___ mes cousines.",                  choices: ["Ce sont",  "Elles sont", "Il est",     "Ils sont"],  correctIdx: 0 },
+        { sentence: "___ médecins dans ce quartier.",     choices: ["Ils sont",  "Ce sont",   "Elle est",   "Il est"],    correctIdx: 0 },
+        { sentence: "___ les voisins du troisième étage.", choices: ["Ce sont", "Ils sont",  "Elles sont", "C'est"],     correctIdx: 0 },
+        { sentence: "___ françaises.",                    choices: ["Elles sont", "Ce sont", "Il est",     "Ils sont"],  correctIdx: 0 },
+        { sentence: "___ des livres intéressants.",       choices: ["Ce sont",  "Ils sont",  "Elles sont", "C'est"],     correctIdx: 0 },
+        { sentence: "___ très fatigués ce soir.",         choices: ["Ils sont",  "Ce sont",   "Elle est",   "Il est"],   correctIdx: 0 },
+        { sentence: "___ mes meilleures amies.",          choices: ["Ce sont",  "Elles sont", "Il est",     "Ils sont"], correctIdx: 0 },
+        { sentence: "___ architectes dans cette ville.",  choices: ["Ils sont",  "Ce sont",   "Elle est",   "Il est"],   correctIdx: 0 },
       ],
     },
 
@@ -358,6 +380,17 @@ export const A1_GR_CEST: GrammarLesson = {
         { sentence: "___ content.",               hint: "c'est / il est", answer: "il est" },
         { sentence: "___ un étudiant sérieux.",   hint: "c'est / il est", answer: "c'est"  },
         { sentence: "___ chauffeur de bus.",      hint: "c'est / il est", answer: "il est" },
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        { sentence: "___ des livres intéressants.", hint: "c'est / ce sont",     answer: "ce sont"   },
+        { sentence: "___ très ponctuels.",          hint: "il est / ils sont",   answer: "ils sont"  },
+        { sentence: "___ mes cousines.",            hint: "c'est / ce sont",     answer: "ce sont"   },
+        { sentence: "___ françaises.",              hint: "elle est / elles sont", answer: "elles sont" },
+        { sentence: "___ les voisins du bas.",      hint: "c'est / ce sont",     answer: "ce sont"   },
+        { sentence: "___ médecins.",                hint: "il est / ils sont",   answer: "ils sont"  },
+        { sentence: "___ de bons étudiants.",       hint: "c'est / ce sont",     answer: "ce sont"   },
+        { sentence: "___ très fatiguées.",          hint: "elle est / elles sont", answer: "elles sont" },
+        { sentence: "___ nos meilleurs amis.",      hint: "c'est / ce sont",     answer: "ce sont"   },
+        { sentence: "___ architectes.",             hint: "il est / ils sont",   answer: "ils sont"  },
       ],
     },
 
@@ -389,6 +422,17 @@ export const A1_GR_CEST: GrammarLesson = {
         { sentence: "Le parc ? ___ loin d'ici.",                 hint: "décrire une chose",             answer: "il est"   },
         { sentence: "___ mon oncle. ___ chauffeur.",             hint: "identifier puis profession",    answer: "c'est"    },
         { sentence: "Cette fille ? ___ vraiment gentille.",      hint: "décrire avec adjectif",         answer: "elle est" },
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        { sentence: "___ des amis de confiance.",       hint: "identifier avec article",       answer: "ce sont"   },
+        { sentence: "Ces garçons ? ___ très sportifs.", hint: "décrire avec adjectif",         answer: "ils sont"  },
+        { sentence: "___ mes sœurs.",                   hint: "identifier avec possessif",     answer: "ce sont"   },
+        { sentence: "Les filles ? ___ très sérieuses.", hint: "décrire avec adjectif",         answer: "elles sont" },
+        { sentence: "___ les nouveaux élèves.",         hint: "identifier avec article défini", answer: "ce sont"  },
+        { sentence: "Tes voisins ? ___ sympas.",        hint: "décrire avec adjectif",         answer: "ils sont"  },
+        { sentence: "___ des infirmières.",             hint: "identifier avec article",       answer: "ce sont"   },
+        { sentence: "Les enfants ? ___ très calmes.",   hint: "décrire avec adjectif",         answer: "ils sont"  },
+        { sentence: "___ nos professeurs.",             hint: "identifier avec possessif",     answer: "ce sont"   },
+        { sentence: "Les deux femmes ? ___ ukrainiennes.", hint: "décrire nationalité",        answer: "elles sont" },
       ],
     },
 
@@ -398,12 +442,20 @@ export const A1_GR_CEST: GrammarLesson = {
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre.",
       allowPartialValidation: true,
-      items: [
+      items: [],
+      poolSize: 5,
+      pool: [
         { sentence: "C'est une bonne professeure.",    words: ["C'est",  "une",   "bonne",   "professeure"]                  },
         { sentence: "Il est grand et sportif.",        words: ["Il",     "est",   "grand",   "et",      "sportif"]           },
         { sentence: "C'est la voiture de mon père.",   words: ["C'est",  "la",    "voiture", "de",      "mon",  "père"]      },
         { sentence: "Elle est très gentille.",         words: ["Elle",   "est",   "très",    "gentille"]                     },
         { sentence: "C'est mon voisin de palier.",     words: ["C'est",  "mon",   "voisin",  "de",      "palier"]            },
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        { sentence: "Ce sont des professeurs très sympas.", words: ["Ce", "sont", "des", "professeurs", "très", "sympas"]        },
+        { sentence: "Ils sont grands et sportifs.",    words: ["Ils",    "sont",  "grands",  "et",      "sportifs"]          },
+        { sentence: "Ce sont les livres de ma mère.", words: ["Ce",     "sont",  "les",     "livres",  "de",  "ma",  "mère"] },
+        { sentence: "Elles sont très gentilles.",     words: ["Elles",  "sont",  "très",    "gentilles"]                     },
+        { sentence: "Ce sont mes voisins du quartier.", words: ["Ce",   "sont",  "mes",     "voisins", "du",  "quartier"]    },
       ],
     },
 
@@ -411,30 +463,44 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "write",
       title: "Exercice 6",
-      instruction: "Transformez les phrases avec c'est.\nÉcrivez la phrase complète.\nExemple : Il est mon ami. → C'est mon ami.",
+      instruction: "Transformez les phrases avec c'est.\nExemple : Il est mon ami. → C'est mon ami.",
       promptLayout: "stacked",
-      prompts: [
+      promptPool: [
         "Il est mon frère. →",
         "Il est mon voisin. →",
         "Elle est ma sœur. →",
         "Elle est ma collègue. →",
         "Il est mon professeur. →",
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        "Ils sont mes frères. →",
+        "Elles sont mes sœurs. →",
+        "Ils sont nos voisins. →",
+        "Elles sont mes collègues. →",
+        "Ils sont nos professeurs. →",
       ],
+      promptPoolSize: 5,
     },
 
     // ── Exercice 7 — Write (transformer avec il est / elle est) ───────────────
     {
       type: "write",
       title: "Exercice 7",
-      instruction: "Transformez avec il est / elle est. Écrivez la phrase complète.\nExemple : C'est un homme gentil. → Il est gentil.",
+      instruction: "Transformez avec il est / elle est.\nExemple : C'est un homme gentil. → Il est gentil.",
       promptLayout: "stacked",
-      prompts: [
+      promptPool: [
         "C'est une femme sympathique. →",
         "C'est un garçon intelligent. →",
         "C'est un enfant calme. →",
         "C'est une élève sérieuse. →",
         "C'est un sportif courageux. →",
+        // ── Pluriel ───────────────────────────────────────────────────────────
+        "Ce sont des femmes sympathiques. →",
+        "Ce sont des garçons intelligents. →",
+        "Ce sont des enfants calmes. →",
+        "Ce sont des élèves sérieuses. →",
+        "Ce sont des sportifs courageux. →",
       ],
+      promptPoolSize: 5,
     },
 
     // ── Exercice 8 — Write (phrase libre) ─────────────────────────────────────
@@ -447,6 +513,8 @@ export const A1_GR_CEST: GrammarLesson = {
         "Alona :",
         "Ma mère :",
         "Un grand garçon :",
+        "Alona et Marie :",
+        "Les voisins :",
       ],
     },
   ],
