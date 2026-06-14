@@ -398,12 +398,6 @@ function TheoryView({ blocks, pivot, showTrans }: { blocks: TheoryBlock[]; pivot
                         {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0 text-[var(--color-accent-fr)]">•</span>}
                         <span>{renderInlineMarkup(item)}</span>
                       </div>
-                      {false && showTrans && block.transItems?.[pivot as keyof typeof block.transItems]?.[ii] && (
-                        <div className={`flex gap-2 text-xs leading-relaxed text-[var(--color-text-secondary)]${(block.allBullets || ii > 0) ? " ml-4" : ""}`} lang={pivot} dir={isRtl ? "rtl" : "ltr"}>
-                          {(block.allBullets || ii > 0) && !(block.noBulletItems?.includes(ii)) && <span className="mt-0.5 shrink-0">•</span>}
-                          <span>{renderInlineMarkup(block.transItems[pivot as keyof typeof block.transItems]![ii]!)}</span>
-                        </div>
-                      )}
                     </li>
                   ))}
                 </ul>
