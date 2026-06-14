@@ -65,69 +65,59 @@ export const A1_GR_CEST: GrammarLesson = {
       noBulletItems: [0, 1],
     },
 
-    // ── 2. IL EST ──────────────────────────────────────────────────────────────
-    { type: "heading", text: "2. Il est / Elle est", sub: true },
+    // ── IL EST ────────────────────────────────────────────────────────────────
+    { type: "heading", text: "Quand utiliser il est / elle est", sub: true },
 
     {
-      type: "rule",
-      text: "{a}Il est{/a} / {a}Elle est{/a} sert à décrire une personne ou une chose.",
-      examples: [
-        { correct: "Il est grand. (adjectif)" },
-        { correct: "Elle est médecin. (profession sans article)" },
-        { correct: "Il est suisse. (nationalité)" },
+      type: "plain_list",
+      items: [
+        "Il est / Elle est sert à décrire une personne ou une chose.",
       ],
+      noBulletItems: [0],
     },
 
     {
       type: "highlight",
-      label: "A. Devant un adjectif — Il est + adjectif",
+      label: "Devant un adjectif",
       items: [
         "Il est {a}grand{/a}.",
-        "Il est {a}gentil{/a}.",
         "Il est {a}malade{/a}.",
-        "Il est {a}fatigué{/a}.",
-        "❌ C'est grand. (pour parler d'une personne)",
       ],
-      noBulletItems: [4],
+      noBulletItems: [0, 1],
     },
 
     {
       type: "highlight",
-      label: "B. Devant une profession (sans article)",
+      label: "Devant une profession (sans article)",
       items: [
         "Il est {a}professeur{/a}.",
-        "Elle est {a}médecin{/a}.",
-        "Il est {a}chauffeur{/a}.",
         "Elle est {a}infirmière{/a}.",
-        "❌ Il est un professeur.",
-        "❌ Elle est une médecin.",
       ],
-      noBulletItems: [4, 5],
+      noBulletItems: [0, 1],
     },
 
     {
       type: "highlight",
-      label: "C. Devant une nationalité",
+      label: "Devant une nationalité",
       items: [
         "Il est {a}suisse{/a}.",
-        "Elle est {a}française{/a}.",
-        "Il est {a}portugais{/a}.",
         "Elle est {a}ukrainienne{/a}.",
       ],
+      noBulletItems: [0, 1],
     },
 
     {
       type: "highlight",
-      label: "D. Devant une religion",
+      label: "Devant une religion",
       items: [
         "Il est {a}musulman{/a}.",
-        "Elle est {a}chrétienne{/a}.",
         "Il est {a}bouddhiste{/a}.",
       ],
+      noBulletItems: [0, 1],
     },
 
-    // ── 3. COMPARAISON ─────────────────────────────────────────────────────────
-    { type: "heading", text: "3. Comparaison", sub: true },
+    // ── COMPARAISON ────────────────────────────────────────────────────────────
+    { type: "heading", text: "Comparaison", sub: true },
 
     {
       type: "grid",
@@ -142,20 +132,25 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
     },
 
-    // ── 4. AVEC UN ADJECTIF ────────────────────────────────────────────────────
-    { type: "heading", text: "4. Avec un adjectif", sub: true },
+    // ── AVEC UN ADJECTIF ───────────────────────────────────────────────────────
+    { type: "heading", text: "Avec un adjectif", sub: true },
 
     {
-      type: "rule",
-      text: "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a} (article + nom + adjectif).",
-      examples: [
-        { correct: "C'est un homme {a}gentil{/a}. (article + nom + adjectif)" },
-        { correct: "Il est {a}gentil{/a}. (adjectif seul)" },
+      type: "plain_list",
+      items: [
+        "Quand on désigne une personne avec un nom + adjectif, utilise {a}c'est{/a}.",
       ],
+      noBulletItems: [0],
     },
+
     {
-      type: "note",
-      text: "❌ C'est gentil. → incorrect pour décrire une personne. Valide uniquement pour commenter une situation générale : C'est gentil de ta part !",
+      type: "highlight",
+      label: "",
+      items: [
+        "C'est un homme {a}gentil{/a}.",
+        "C'est une grande {a}voiture{/a}.",
+      ],
+      noBulletItems: [0, 1],
     },
 
     // ── MÉTHODE RAPIDE ─────────────────────────────────────────────────────────
@@ -183,38 +178,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1, 2],
       inlineArrows: true,
-    },
-
-    // ── RÉSUMÉ ─────────────────────────────────────────────────────────────────
-    { type: "heading", text: "Résumé", sub: true },
-
-    {
-      type: "highlight",
-      label: "C'est …",
-      items: [
-        "nom avec article → C'est {a}un{/a} professeur.",
-        "prénom → C'est {a}Ali{/a}.",
-        "pronom → C'est {a}moi{/a}.",
-        "chose → C'est {a}une{/a} voiture.",
-        "date ou heure → C'est {a}lundi{/a}.",
-      ],
-    },
-
-    {
-      type: "highlight",
-      label: "Il est / Elle est …",
-      items: [
-        "adjectif → Il est {a}gentil{/a}.",
-        "profession sans article → Elle est {a}médecin{/a}.",
-        "nationalité → Il est {a}suisse{/a}.",
-        "religion → Elle est {a}chrétienne{/a}.",
-      ],
-    },
-
-    // ── ATTENTION ──────────────────────────────────────────────────────────────
-    {
-      type: "note",
-      text: "Profession : Il est professeur ✅ — Il est un professeur ❌\nIdentification : C'est un professeur ✅ — C'est professeur ❌",
     },
   ],
   exercises: [
