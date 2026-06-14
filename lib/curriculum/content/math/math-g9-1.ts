@@ -5,22 +5,22 @@ export const MATH_G9_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.1",
     theory: {
       title: {
-        fr: "Repère cartésien",
+        fr: "Reconnaître les solides",
       },
       paragraphs: {
         fr: [
-          "Le repère cartésien est formé de deux axes perpendiculaires : l'axe des abscisses (Ox, horizontal) et l'axe des ordonnées (Oy, vertical). Ils se croisent en O(0,0).",
-          "Les quadrants : quadrant I (x>0, y>0) ; quadrant II (x<0, y>0) ; quadrant III (x<0, y<0) ; quadrant IV (x>0, y<0).",
-          "Chaque point est représenté par ses coordonnées (x ; y). L'abscisse x est lue en premier (horizontal), l'ordonnée y en second (vertical).",
-          "L'unité de mesure doit être la même sur les deux axes pour ne pas déformer les figures.",
+          "Les solides (ou polyèdres) sont des figures à trois dimensions. Les principaux : cube, pavé droit (cuboid), prisme, pyramide, cylindre, cône, sphère.",
+          "Cube : 6 faces carrées égales, 8 sommets, 12 arêtes. Pavé droit : 6 faces rectangulaires, 8 sommets, 12 arêtes.",
+          "Cylindre : deux bases circulaires et une surface latérale courbe. Cône : une base circulaire et un apex. Sphère : surface courbe équidistante d'un centre.",
+          "Prisme : deux bases polygonales parallèles reliées par des rectangles. Pyramide : une base polygonale et des triangles convergeant en un sommet.",
         ],
       },
     },
     exercises: [
-      { id: "g9-1-e1", promptFr: "Quelle est l'abscisse du point (4 ; −3) ?", type: "number", acceptable: ["4"] },
-      { id: "g9-1-e2", promptFr: "Quelle est l'ordonnée du point (−2 ; 7) ?", type: "number", acceptable: ["7"] },
-      { id: "g9-1-e3", promptFr: "Le point (−3 ; 5) est dans quel quadrant ? (I/II/III/IV)", type: "short_text", acceptable: ["II"] },
-      { id: "g9-1-e4", promptFr: "Le point (2 ; −4) est dans quel quadrant ?", type: "short_text", acceptable: ["IV"] },
-      { id: "g9-1-e5", promptFr: "L'origine O a quelles coordonnées ?", type: "short_text", acceptable: ["(0;0)", "(0 ; 0)"] },
+      { id: "g8-1-e1", promptFr: "Combien de faces a un cube ?", type: "number", acceptable: ["6"] },
+      { id: "g8-1-e2", promptFr: "Quel solide a une base circulaire et un apex ?", type: "short_text", acceptable: ["cône", "cone"] },
+      { id: "g8-1-e3", promptFr: "Combien d'arêtes a un cube ?", type: "number", acceptable: ["12"] },
+      { id: "g8-1-e4", promptFr: "Quel solide a toute sa surface équidistante d'un centre ?", type: "short_text", acceptable: ["sphère", "sphere"] },
+      { id: "g8-1-e5", promptFr: "Un prisme triangulaire a combien de faces au total ?", type: "number", acceptable: ["5"] },
     ],
   };

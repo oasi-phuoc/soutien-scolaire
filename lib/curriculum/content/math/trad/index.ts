@@ -73,51 +73,43 @@ import { TRAD_G1_1 } from "./trad-g1-1";
 import { TRAD_G1_2 } from "./trad-g1-2";
 import { TRAD_G2_1 } from "./trad-g2-1";
 import { TRAD_G2_2 } from "./trad-g2-2";
-import { TRAD_G2_3 } from "./trad-g2-3";
-import { TRAD_G2_4 } from "./trad-g2-4";
-import { TRAD_G2_5 } from "./trad-g2-5";
 import { TRAD_G3_1 } from "./trad-g3-1";
 import { TRAD_G3_2 } from "./trad-g3-2";
 import { TRAD_G3_3 } from "./trad-g3-3";
 import { TRAD_G3_4 } from "./trad-g3-4";
 import { TRAD_G3_5 } from "./trad-g3-5";
-import { TRAD_G3_6 } from "./trad-g3-6";
-import { TRAD_G3_7 } from "./trad-g3-7";
-import { TRAD_G3_8 } from "./trad-g3-8";
 import { TRAD_G4_1 } from "./trad-g4-1";
 import { TRAD_G4_2 } from "./trad-g4-2";
 import { TRAD_G4_3 } from "./trad-g4-3";
 import { TRAD_G4_4 } from "./trad-g4-4";
 import { TRAD_G4_5 } from "./trad-g4-5";
 import { TRAD_G4_6 } from "./trad-g4-6";
+import { TRAD_G4_7 } from "./trad-g4-7";
+import { TRAD_G4_8 } from "./trad-g4-8";
 import { TRAD_G5_1 } from "./trad-g5-1";
 import { TRAD_G5_2 } from "./trad-g5-2";
 import { TRAD_G5_3 } from "./trad-g5-3";
 import { TRAD_G5_4 } from "./trad-g5-4";
 import { TRAD_G5_5 } from "./trad-g5-5";
 import { TRAD_G5_6 } from "./trad-g5-6";
-import { TRAD_G5_7 } from "./trad-g5-7";
 import { TRAD_G6_1 } from "./trad-g6-1";
 import { TRAD_G6_2 } from "./trad-g6-2";
 import { TRAD_G6_3 } from "./trad-g6-3";
 import { TRAD_G6_4 } from "./trad-g6-4";
 import { TRAD_G6_5 } from "./trad-g6-5";
+import { TRAD_G6_6 } from "./trad-g6-6";
+import { TRAD_G6_7 } from "./trad-g6-7";
 import { TRAD_G7_1 } from "./trad-g7-1";
 import { TRAD_G7_2 } from "./trad-g7-2";
 import { TRAD_G7_3 } from "./trad-g7-3";
 import { TRAD_G7_4 } from "./trad-g7-4";
 import { TRAD_G7_5 } from "./trad-g7-5";
-import { TRAD_G7_6 } from "./trad-g7-6";
 import { TRAD_G8_1 } from "./trad-g8-1";
 import { TRAD_G8_2 } from "./trad-g8-2";
 import { TRAD_G8_3 } from "./trad-g8-3";
 import { TRAD_G8_4 } from "./trad-g8-4";
 import { TRAD_G8_5 } from "./trad-g8-5";
 import { TRAD_G8_6 } from "./trad-g8-6";
-import { TRAD_G8_7 } from "./trad-g8-7";
-import { TRAD_G8_8 } from "./trad-g8-8";
-import { TRAD_G8_9 } from "./trad-g8-9";
-import { TRAD_G8_10 } from "./trad-g8-10";
 import { TRAD_G9_1 } from "./trad-g9-1";
 import { TRAD_G9_2 } from "./trad-g9-2";
 import { TRAD_G9_3 } from "./trad-g9-3";
@@ -126,12 +118,22 @@ import { TRAD_G9_5 } from "./trad-g9-5";
 import { TRAD_G9_6 } from "./trad-g9-6";
 import { TRAD_G9_7 } from "./trad-g9-7";
 import { TRAD_G9_8 } from "./trad-g9-8";
+import { TRAD_G9_9 } from "./trad-g9-9";
+import { TRAD_G9_10 } from "./trad-g9-10";
 import { TRAD_G10_1 } from "./trad-g10-1";
 import { TRAD_G10_2 } from "./trad-g10-2";
 import { TRAD_G10_3 } from "./trad-g10-3";
 import { TRAD_G10_4 } from "./trad-g10-4";
 import { TRAD_G10_5 } from "./trad-g10-5";
 import { TRAD_G10_6 } from "./trad-g10-6";
+import { TRAD_G10_7 } from "./trad-g10-7";
+import { TRAD_G10_8 } from "./trad-g10-8";
+import { TRAD_G11_1 } from "./trad-g11-1";
+import { TRAD_G11_2 } from "./trad-g11-2";
+import { TRAD_G11_3 } from "./trad-g11-3";
+import { TRAD_G11_4 } from "./trad-g11-4";
+import { TRAD_G11_5 } from "./trad-g11-5";
+import { TRAD_G11_6 } from "./trad-g11-6";
 import { TRAD_S1_1 } from "./trad-s1-1";
 import { TRAD_S1_2 } from "./trad-s1-2";
 import { TRAD_S1_3 } from "./trad-s1-3";
@@ -162,15 +164,16 @@ const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_A12_1, TRAD_A12_2, TRAD_A12_3,
   TRAD_A13_1, TRAD_A13_2, TRAD_A13_3, TRAD_A13_4, TRAD_A13_5, TRAD_A13_6, TRAD_A13_7,
   TRAD_G1_1, TRAD_G1_2,
-  TRAD_G2_1, TRAD_G2_2, TRAD_G2_3, TRAD_G2_4, TRAD_G2_5,
-  TRAD_G3_1, TRAD_G3_2, TRAD_G3_3, TRAD_G3_4, TRAD_G3_5, TRAD_G3_6, TRAD_G3_7, TRAD_G3_8,
-  TRAD_G4_1, TRAD_G4_2, TRAD_G4_3, TRAD_G4_4, TRAD_G4_5, TRAD_G4_6,
-  TRAD_G5_1, TRAD_G5_2, TRAD_G5_3, TRAD_G5_4, TRAD_G5_5, TRAD_G5_6, TRAD_G5_7,
-  TRAD_G6_1, TRAD_G6_2, TRAD_G6_3, TRAD_G6_4, TRAD_G6_5,
-  TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5, TRAD_G7_6,
-  TRAD_G8_1, TRAD_G8_2, TRAD_G8_3, TRAD_G8_4, TRAD_G8_5, TRAD_G8_6, TRAD_G8_7, TRAD_G8_8, TRAD_G8_9, TRAD_G8_10,
-  TRAD_G9_1, TRAD_G9_2, TRAD_G9_3, TRAD_G9_4, TRAD_G9_5, TRAD_G9_6, TRAD_G9_7, TRAD_G9_8,
-  TRAD_G10_1, TRAD_G10_2, TRAD_G10_3, TRAD_G10_4, TRAD_G10_5, TRAD_G10_6,
+  TRAD_G2_1, TRAD_G2_2,
+  TRAD_G3_1, TRAD_G3_2, TRAD_G3_3, TRAD_G3_4, TRAD_G3_5,
+  TRAD_G4_1, TRAD_G4_2, TRAD_G4_3, TRAD_G4_4, TRAD_G4_5, TRAD_G4_6, TRAD_G4_7, TRAD_G4_8,
+  TRAD_G5_1, TRAD_G5_2, TRAD_G5_3, TRAD_G5_4, TRAD_G5_5, TRAD_G5_6,
+  TRAD_G6_1, TRAD_G6_2, TRAD_G6_3, TRAD_G6_4, TRAD_G6_5, TRAD_G6_6, TRAD_G6_7,
+  TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5,
+  TRAD_G8_1, TRAD_G8_2, TRAD_G8_3, TRAD_G8_4, TRAD_G8_5, TRAD_G8_6,
+  TRAD_G9_1, TRAD_G9_2, TRAD_G9_3, TRAD_G9_4, TRAD_G9_5, TRAD_G9_6, TRAD_G9_7, TRAD_G9_8, TRAD_G9_9, TRAD_G9_10,
+  TRAD_G10_1, TRAD_G10_2, TRAD_G10_3, TRAD_G10_4, TRAD_G10_5, TRAD_G10_6, TRAD_G10_7, TRAD_G10_8,
+  TRAD_G11_1, TRAD_G11_2, TRAD_G11_3, TRAD_G11_4, TRAD_G11_5, TRAD_G11_6,
   TRAD_S1_1, TRAD_S1_2, TRAD_S1_3, TRAD_S1_4, TRAD_S1_5, TRAD_S1_6, TRAD_S1_7,
   TRAD_S2_1, TRAD_S2_2, TRAD_S2_3, TRAD_S2_4, TRAD_S2_5, TRAD_S2_6, TRAD_S2_7,
 ];

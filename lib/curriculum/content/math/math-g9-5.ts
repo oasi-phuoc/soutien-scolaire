@@ -5,22 +5,22 @@ export const MATH_G9_5_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.5",
     theory: {
       title: {
-        fr: "Courbes",
+        fr: "Pavé droit (cuboid)",
       },
       paragraphs: {
         fr: [
-          "Une courbe (graphique en ligne) relie des points pour montrer l'évolution d'une valeur dans le temps ou selon une variable.",
-          "Lecture : identifier la valeur y pour chaque x ; trouver les maxima, minima, moments de croissance/décroissance.",
-          "Construction : (1) placer les points ; (2) les relier dans l'ordre par des segments droits ou une courbe lisse.",
-          "Utilisation : températures, cours boursiers, croissance d'une plante, vitesse d'un véhicule.',",
+          "Volume du pavé droit : V = L × l × h.",
+          "Exemple : pavé 6 cm × 4 cm × 3 cm → V = 6 × 4 × 3 = 72 cm³.",
+          "Applications : volume d'une boîte, d'un container, d'une pièce.",
+          "Trouver une dimension : h = V / (L × l).",
         ],
       },
     },
     exercises: [
-      { id: "g9-5-e1", promptFr: "Un graphique montre T(°C) en fonction du temps. Comment appelle-t-on cette représentation ?", type: "short_text", acceptable: ["courbe", "graphique en ligne"] },
-      { id: "g9-5-e2", promptFr: "Si la courbe monte de gauche à droite, la valeur est-elle croissante ou décroissante ?", type: "short_text", acceptable: ["croissante"] },
-      { id: "g9-5-e3", promptFr: "Un maximum sur une courbe est un point où la valeur est ? (la plus haute/la plus basse)", type: "short_text", acceptable: ["la plus haute"] },
-      { id: "g9-5-e4", promptFr: "Pour tracer une courbe, on commence par faire quoi ?", type: "short_text", acceptable: ["un tableau de valeurs", "placer les points"] },
-      { id: "g9-5-e5", promptFr: "Une courbe horizontale indique que la valeur est constante ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g8-5-e1", promptFr: "Volume d'un pavé 5 × 3 × 4 cm.", type: "number", acceptable: ["60"] },
+      { id: "g8-5-e2", promptFr: "Volume d'un pavé 10 × 6 × 2 cm.", type: "number", acceptable: ["120"] },
+      { id: "g8-5-e3", promptFr: "Pavé V = 120 cm³, L = 5, l = 4. h = ?", type: "number", acceptable: ["6"] },
+      { id: "g8-5-e4", promptFr: "Volume d'une pièce 4 m × 3 m × 2,5 m (en m³).", type: "number", acceptable: ["30"] },
+      { id: "g8-5-e5", promptFr: "Pavé 8 × 8 × 8 cm. C'est un cube ? (oui/non)", type: "short_text", acceptable: ["oui"] },
     ],
   };

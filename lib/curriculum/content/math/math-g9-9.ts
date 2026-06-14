@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_G8_9_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G8-9",
-    submoduleCode: "G8.9",
+export const MATH_G9_9_LESSON: MathSubmoduleLesson = {
+    submoduleId: "G9-9",
+    submoduleCode: "G9.9",
     theory: {
       title: {
         fr: "Cône et sphère",

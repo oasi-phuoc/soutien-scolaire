@@ -4,27 +4,36 @@ export const MATH_G3_5_LESSON: MathSubmoduleLesson = {
   submoduleId: "G3-5",
   submoduleCode: "G3.5",
   theory: {
-    title: { fr: "Aire du trapèze" },
+    title: { fr: "Cercle et π" },
     blocks: [
-      { type: "heading", fr: "Trapèze", black: true },
+      { type: "heading", fr: "Circonférence du cercle", black: true },
       {
         type: "plain",
-        fr: "Un trapèze a **deux bases parallèles** : la grande base B (en bas) et la petite base b (en haut), reliées par une hauteur h.",
+        fr: "La **circonférence** (périmètre du cercle) dépend du rayon r ou du diamètre d.",
       },
 
-      { type: "rule", titleFr: "Formule", itemsFr: ["A = (B + b) × h ÷ 2"] },
+      {
+        type: "rule",
+        titleFr: "Formule",
+        itemsFr: ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      },
+
+      { type: "heading", fr: "π (pi)", black: true },
+      {
+        type: "plain",
+        fr: "π est un nombre irrationnel. On utilise l'approximation **π ≈ 3,14**.",
+      },
 
       {
         type: "svg",
-        markup: `<svg viewBox='0 0 220 120' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
-  <polygon points='20,95 200,95 165,25 55,25' fill='var(--color-accent-alg)' fill-opacity='0.18' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <line x1='90' y1='25' x2='90' y2='95' stroke='#f97316' stroke-width='2' stroke-dasharray='5,3'/>
-  <rect x='80' y='85' width='10' height='10' fill='none' stroke='#f97316' stroke-width='1.5'/>
-  <text x='110' y='18' text-anchor='middle' font-size='12' fill='#16a34a' font-weight='bold' font-family='sans-serif'>b (petite base)</text>
-  <text x='110' y='112' text-anchor='middle' font-size='12' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>B (grande base)</text>
-  <text x='100' y='63' font-size='12' fill='#f97316' font-weight='bold' font-family='sans-serif'>h</text>
+        markup: `<svg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:220px;display:block;margin:0 auto'>
+  <circle cx='80' cy='80' r='60' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='3.5'/>
+  <circle cx='80' cy='80' r='3' fill='var(--color-accent-alg)'/>
+  <line x1='80' y1='80' x2='140' y2='80' stroke='#f97316' stroke-width='2.5'/>
+  <text x='113' y='73' font-size='12' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
+  <text x='55' y='42' font-size='11' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>C = 2πr</text>
 </svg>`,
-        captionFr: "Trapèze avec grande base B, petite base b et hauteur h",
+        captionFr: "Circonférence C = 2πr (contour du cercle)",
       },
 
       { type: "highlight", fr: "Exemple" },
@@ -32,18 +41,18 @@ export const MATH_G3_5_LESSON: MathSubmoduleLesson = {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "B = 10 cm, b = 6 cm, h = 4 cm :",
-          "A = (10 + 6) × 4 ÷ 2 = 16 × 4 ÷ 2 = **32 cm²**",
+          "Cercle de rayon 5 cm :",
+          "C = 2 × 3,14 × 5 = **31,4 cm**",
         ],
       },
 
-      { type: "highlight", fr: "Intuition" },
+      { type: "highlight", fr: "À ne pas confondre" },
       {
         type: "section",
         labelFr: "",
         itemsFr: [
-          "La formule calcule la **moyenne des deux bases** (= base d'un rectangle équivalent) multipliée par la hauteur.",
-          "Si b = B, le trapèze devient un **parallélogramme** (A = B × h).",
+          "**Circonférence C** = longueur du contour (périmètre) → C = 2πr",
+          "**Aire du disque A** = surface intérieure → A = πr² (vu en G3.6)",
         ],
       },
     ],
@@ -51,10 +60,10 @@ export const MATH_G3_5_LESSON: MathSubmoduleLesson = {
   },
 
   exercises: [
-    { id: "g3-5-e1", promptFr: "Aire d'un trapèze : B = 8, b = 4, h = 5 cm.", type: "number", acceptable: ["30"] },
-    { id: "g3-5-e2", promptFr: "Aire d'un trapèze : B = 12, b = 6, h = 4 cm.", type: "number", acceptable: ["36"] },
-    { id: "g3-5-e3", promptFr: "Trapèze d'aire 40 cm², B = 10, b = 6. h = ?", type: "number", acceptable: ["5"] },
-    { id: "g3-5-e4", promptFr: "Aire d'un trapèze : B = 9, b = 3, h = 6 cm.", type: "number", acceptable: ["36"] },
-    { id: "g3-5-e5", promptFr: "Si b = B (deux bases égales), quelle figure est-ce ?", type: "short_text", acceptable: ["parallélogramme", "rectangle", "parallelogramme"] },
+    { id: "g2-5-e1", promptFr: "Calcule la circonférence d'un cercle de rayon 10 cm (π ≈ 3,14).", type: "number", acceptable: ["62,8", "62.8"] },
+    { id: "g2-5-e2", promptFr: "Calcule la circonférence d'un cercle de diamètre 6 cm (π ≈ 3,14).", type: "number", acceptable: ["18,84", "18.84"] },
+    { id: "g2-5-e3", promptFr: "Un cercle a une circonférence de 31,4 cm. Quel est son rayon (π ≈ 3,14) ?", type: "number", acceptable: ["5"] },
+    { id: "g2-5-e4", promptFr: "π est approximativement égal à ?", type: "short_text", acceptable: ["3,14", "3.14", "3.14159"] },
+    { id: "g2-5-e5", promptFr: "Un cercle de rayon 3 cm : C = 2π × 3 ≈ ? (arrondi à l'unité, π ≈ 3,14)", type: "number", acceptable: ["19"] },
   ],
 };

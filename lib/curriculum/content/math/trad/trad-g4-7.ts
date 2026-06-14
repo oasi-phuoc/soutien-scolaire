@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_G3_7: SubmoduleTrad = {
-  submoduleId: "G3-7",
+export const TRAD_G4_7: SubmoduleTrad = {
+  submoduleId: "G4-7",
   title: {
     fr: "Losange",
     en: "Rhombus",

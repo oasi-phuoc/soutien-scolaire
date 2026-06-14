@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_G5_7: SubmoduleTrad = {
-  submoduleId: "G5-7",
+export const TRAD_G6_7: SubmoduleTrad = {
+  submoduleId: "G6-7",
   title: {
     fr: "Homothétie et longueurs",
     en: "Dilation and lengths",

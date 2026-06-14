@@ -5,22 +5,22 @@ export const MATH_G9_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.2",
     theory: {
       title: {
-        fr: "Lire et placer des points",
+        fr: "Patrons de solides",
       },
       paragraphs: {
         fr: [
-          "Pour lire les coordonnées d'un point : partir du point, descendre (ou monter) jusqu'à l'axe Ox → abscisse ; aller à gauche (ou droite) jusqu'à Oy → ordonnée.",
-          "Pour placer un point (a ; b) : partir de O, aller de a unités sur Ox, puis de b unités parallèlement à Oy.",
-          "Exemple : placer A(−2 ; 3). Aller à −2 sur Ox, puis monter de 3 → A est en haut à gauche de O.",
-          "Mnémotechnique : « On va d'abord en couloir (x) puis en escalier (y) ».",
+          "Un patron est une figure plane que l'on peut découper et replier pour former un solide. Il montre toutes les faces du solide à plat.",
+          "Patron d'un cube : 6 carrés disposés en croix (ou autres configurations valides). Il en existe 11 différents.",
+          "Patron d'un cylindre : deux cercles + un rectangle (la hauteur × la circonférence).",
+          "Patron d'une pyramide à base carrée : un carré central + 4 triangles isocèles.",
         ],
       },
     },
     exercises: [
-      { id: "g9-2-e1", promptFr: "Place le point A(3 ; 5). Quelle est son abscisse ?", type: "number", acceptable: ["3"] },
-      { id: "g9-2-e2", promptFr: "Le point B(0 ; 4) est-il sur l'axe Oy ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g9-2-e3", promptFr: "Le point C(−3 ; 0) est-il sur l'axe Ox ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g9-2-e4", promptFr: "Pour placer D(2 ; −3) : on va 2 vers la droite puis ? vers le bas.", type: "number", acceptable: ["3"] },
-      { id: "g9-2-e5", promptFr: "L'axe Ox est-il horizontal ou vertical ?", type: "short_text", acceptable: ["horizontal"] },
+      { id: "g8-2-e1", promptFr: "Un patron de cube comporte combien de carrés ?", type: "number", acceptable: ["6"] },
+      { id: "g8-2-e2", promptFr: "Le patron d'un cylindre contient combien de cercles ?", type: "number", acceptable: ["2"] },
+      { id: "g8-2-e3", promptFr: "Le patron d'une pyramide à base carrée comporte combien de triangles ?", type: "number", acceptable: ["4"] },
+      { id: "g8-2-e4", promptFr: "Combien de patrons différents peut-on faire pour un cube ?", type: "number", acceptable: ["11"] },
+      { id: "g8-2-e5", promptFr: "Le patron d'un prisme triangulaire comporte combien de rectangles ?", type: "number", acceptable: ["3"] },
     ],
   };

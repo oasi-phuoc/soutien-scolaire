@@ -5,47 +5,22 @@ export const MATH_G10_3_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G10.3",
     theory: {
       title: {
-        fr: "Calculer un rapport trigonométrique",
+        fr: "Diagramme en bâtons",
       },
       paragraphs: {
         fr: [
-          "Pour calculer sin(α), cos(α) ou tan(α), identifie d'abord l'angle α dans le triangle rectangle, puis nomme les trois côtés (opposé, adjacent, hypoténuse).",
-          "Étape 1 : repère l'hypoténuse (côté le plus long, face à l'angle droit). Étape 2 : identifie le côté opposé à α et le côté adjacent à α.",
-          "Étape 3 : applique la formule choisie. Exemple : si opposé = 5 et hypoténuse = 13, alors sin(α) = 5/13.",
-          "Pour obtenir la mesure de l'angle à partir d'un rapport, utilise la fonction inverse : α = arcsin(5/13) sur la calculatrice (touche sin⁻¹ ou asin).",
+          "Un diagramme en bâtons (ou en barres) représente des données par des rectangles (barres) dont la hauteur (ou longueur) est proportionnelle à la valeur.",
+          "Lecture : la hauteur de chaque barre correspond à la valeur de la catégorie. On lit la valeur sur l'axe vertical.",
+          "Construction : (1) choisir l'échelle de l'axe y ; (2) dessiner des barres de largeur égale pour chaque catégorie ; (3) annoter les axes.",
+          "Utilisation : comparer des catégories distinctes (notes, effectifs, ventes par mois…).",
         ],
       },
     },
     exercises: [
-      {
-        id: "g10-3-e1",
-        promptFr: "Dans un triangle rectangle, le côté adjacent à α mesure 12 et l'hypoténuse mesure 13. Calcule cos(α) sous forme de fraction.",
-        type: "short_text",
-        acceptable: ["12/13"],
-      },
-      {
-        id: "g10-3-e2",
-        promptFr: "Le côté opposé à β mesure 8 et l'hypoténuse mesure 17. Calcule sin(β) sous forme de fraction.",
-        type: "short_text",
-        acceptable: ["8/17"],
-      },
-      {
-        id: "g10-3-e3",
-        promptFr: "Le côté opposé à γ mesure 7 et le côté adjacent mesure 24. Calcule tan(γ) sous forme de fraction.",
-        type: "short_text",
-        acceptable: ["7/24"],
-      },
-      {
-        id: "g10-3-e4",
-        promptFr: "Dans un triangle rectangle, opposé = 4 et adjacent = 3. Calcule tan(α).",
-        type: "short_text",
-        acceptable: ["4/3"],
-      },
-      {
-        id: "g10-3-e5",
-        promptFr: "Un triangle rectangle a des côtés 9, 40 et 41. Calcule sin(α) pour l'angle α opposé au côté de longueur 9.",
-        type: "short_text",
-        acceptable: ["9/41"],
-      },
+      { id: "g9-3-e1", promptFr: "Dans un diagramme en bâtons, la hauteur d'une barre représente quoi ?", type: "short_text", acceptable: ["la valeur", "la fréquence", "le nombre"] },
+      { id: "g9-3-e2", promptFr: "Les barres d'un diagramme en bâtons doivent-elles avoir la même largeur ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g9-3-e3", promptFr: "Un diagramme en bâtons est utile pour comparer des catégories ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g9-3-e4", promptFr: "Sur l'axe vertical on lit quelle information ?", type: "short_text", acceptable: ["la valeur", "la fréquence", "les données"] },
+      { id: "g9-3-e5", promptFr: "5 élèves ont eu A, 8 ont eu B, 3 ont eu C. Quelle note a la barre la plus haute ?", type: "short_text", acceptable: ["B"] },
     ],
   };

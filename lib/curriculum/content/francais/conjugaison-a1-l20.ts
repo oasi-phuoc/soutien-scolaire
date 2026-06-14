@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L20: ConjLesson = {
   slug: "a1-conj-l20",
-  code: "G4.1",
+  code: "R4.1",
   level: "A1",
   title: "Le futur proche",
   theory: [

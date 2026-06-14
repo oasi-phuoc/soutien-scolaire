@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_G5_7_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G5-7",
-    submoduleCode: "G5.7",
+export const MATH_G6_7_LESSON: MathSubmoduleLesson = {
+    submoduleId: "G6-7",
+    submoduleCode: "G6.7",
     theory: {
       title: {
         fr: "Homothétie et longueurs",

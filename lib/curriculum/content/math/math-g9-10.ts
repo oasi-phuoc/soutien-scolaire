@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_G8_10_LESSON: MathSubmoduleLesson = {
-    submoduleId: "G8-10",
-    submoduleCode: "G8.10",
+export const MATH_G9_10_LESSON: MathSubmoduleLesson = {
+    submoduleId: "G9-10",
+    submoduleCode: "G9.10",
     theory: {
       title: {
         fr: "Conversions de volumes",

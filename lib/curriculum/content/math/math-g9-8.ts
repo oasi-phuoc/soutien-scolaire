@@ -5,22 +5,22 @@ export const MATH_G9_8_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.8",
     theory: {
       title: {
-        fr: "Interpréter un graphique",
+        fr: "Volume de la pyramide",
       },
       paragraphs: {
         fr: [
-          "Interpréter un graphique consiste à extraire des informations pertinentes : valeurs précises, tendances, comparaisons, anomalies.",
-          "Questions type : Quelle est la valeur maximale ? Quand la valeur est-elle minimale ? La tendance est-elle à la hausse ou à la baisse ? Quel écart entre deux valeurs ?",
-          "Attention aux échelles trompeuses : un axe y ne commençant pas à 0 peut exagérer les différences. Un axe compressé peut masquer des variations importantes.",
-          "Conclusion : toujours contextualiser les chiffres (date, unités, source des données).",
+          "Volume de la pyramide : V = (1/3) × Aire de la base × hauteur = B × h / 3.",
+          "La hauteur est la distance perpendiculaire du sommet à la base.",
+          "Exemple : pyramide à base carrée de côté 6 cm et hauteur 9 cm → B = 36 cm². V = 36 × 9 / 3 = 108 cm³.",
+          "Le volume d'une pyramide est exactement 1/3 du volume du prisme de même base et hauteur.",
         ],
       },
     },
     exercises: [
-      { id: "g9-8-e1", promptFr: "Un graphique montre des ventes en hausse chaque mois. La tendance est ?", type: "short_text", acceptable: ["croissante", "à la hausse"] },
-      { id: "g9-8-e2", promptFr: "Sur un camembert, le plus grand secteur représente la catégorie ?", type: "short_text", acceptable: ["la plus fréquente", "la plus grande"] },
-      { id: "g9-8-e3", promptFr: "Un axe y commençant à 50 au lieu de 0 risque de quel problème ?", type: "short_text", acceptable: ["exagérer les différences", "tromper le lecteur"] },
-      { id: "g9-8-e4", promptFr: "Sur un graphique de températures, le minimum en été est moins intéressant qu'en ?", type: "short_text", acceptable: ["hiver"] },
-      { id: "g9-8-e5", promptFr: "Un graphique sans titre ni unité est-il complet ? (oui/non)", type: "short_text", acceptable: ["non"] },
+      { id: "g8-8-e1", promptFr: "Pyramide à base carrée 4 cm, hauteur 6 cm. V = ?", type: "number", acceptable: ["32"] },
+      { id: "g8-8-e2", promptFr: "Pyramide à base rectangulaire 6×4 cm, hauteur 9 cm. V = ?", type: "number", acceptable: ["72"] },
+      { id: "g8-8-e3", promptFr: "Pyramide B = 30 cm², h = 6 cm. V = ?", type: "number", acceptable: ["60"] },
+      { id: "g8-8-e4", promptFr: "Pyramide triangulaire (tétraèdre) : B = 12 cm², h = 5 cm. V = ?", type: "number", acceptable: ["20"] },
+      { id: "g8-8-e5", promptFr: "Si un prisme a V = 90 cm³, la pyramide de même base et hauteur a V = ?", type: "number", acceptable: ["30"] },
     ],
   };

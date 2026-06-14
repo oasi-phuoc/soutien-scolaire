@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L18: GrammarLesson = {
   slug: "a2-gr-l18",
-  code: "G4.16",
+  code: "R4.16",
   level: "A2",
   title: "Les prépositions de lieu",
   theory: [

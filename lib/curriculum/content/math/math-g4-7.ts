@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_G3_7_LESSON: MathSubmoduleLesson = {
-  submoduleId: "G3-7",
-  submoduleCode: "G3.7",
+export const MATH_G4_7_LESSON: MathSubmoduleLesson = {
+  submoduleId: "G4-7",
+  submoduleCode: "G4.7",
   theory: {
     title: { fr: "Losange" },
     blocks: [

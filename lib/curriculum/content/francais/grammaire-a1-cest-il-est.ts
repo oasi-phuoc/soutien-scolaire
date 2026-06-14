@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_CEST: GrammarLesson = {
   slug: "a1-gr-cest-il-est",
-  code: "G1.9",
+  code: "R1.9",
   level: "A1",
   title: "C'est ou il est ?",
   theory: [

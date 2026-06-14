@@ -5,22 +5,22 @@ export const MATH_G9_7_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G9.7",
     theory: {
       title: {
-        fr: "Construire un diagramme en secteurs",
+        fr: "Volume du cylindre",
       },
       paragraphs: {
         fr: [
-          "Étapes : (1) calculer le total ; (2) calculer l'angle de chaque secteur : α = (valeur / total) × 360° ; (3) tracer un cercle ; (4) dessiner les secteurs avec le rapporteur en partant d'un rayon horizontal.",
-          "Exemple : 3 catégories : A=10, B=25, C=15. Total=50. Angles : A=72°, B=180°, C=108°. Vérification : 72+180+108=360° ✓.",
-          "Chaque secteur est coloré différemment et légendé.",
-          "Utilisation préférable quand on veut montrer des parts d'un tout.",
+          "Un cylindre est un prisme à base circulaire. Volume : V = πr²h.",
+          "Exemple : cylindre de rayon 3 cm et hauteur 10 cm → V = π × 9 × 10 = 90π ≈ 282,6 cm³.",
+          "Application : boîtes de conserve, réservoirs, tuyaux.",
+          "Trouver la hauteur : h = V / (πr²).",
         ],
       },
     },
     exercises: [
-      { id: "g9-7-e1", promptFr: "Total = 100, valeur A = 40. Angle du secteur A = ?°", type: "number", acceptable: ["144"] },
-      { id: "g9-7-e2", promptFr: "Total = 40, valeur B = 10. Angle B = ?°", type: "number", acceptable: ["90"] },
-      { id: "g9-7-e3", promptFr: "La somme des angles de tous les secteurs vaut ?°", type: "number", acceptable: ["360"] },
-      { id: "g9-7-e4", promptFr: "Un secteur de 180° représente quelle fraction ?", type: "short_text", acceptable: ["1/2", "50%"] },
-      { id: "g9-7-e5", promptFr: "Quel outil utilise-t-on pour tracer les angles des secteurs ?", type: "short_text", acceptable: ["rapporteur"] },
+      { id: "g8-7-e1", promptFr: "Cylindre r=2 cm, h=5 cm. V = π×4×5 ≈ ? (π≈3,14)", type: "number", acceptable: ["62,8", "62.8"] },
+      { id: "g8-7-e2", promptFr: "Cylindre r=5 cm, h=10 cm. V ≈ ? (π≈3,14)", type: "number", acceptable: ["785"] },
+      { id: "g8-7-e3", promptFr: "Cylindre r=3 cm, V = 141,3 cm³ (π≈3,14). h = ?", type: "number", acceptable: ["5"] },
+      { id: "g8-7-e4", promptFr: "Cylindre r=1 cm, h=1 cm. V = π ≈ ? (π≈3,14)", type: "number", acceptable: ["3,14", "3.14"] },
+      { id: "g8-7-e5", promptFr: "Un cylindre de rayon 4 cm et hauteur 7 cm. V ≈ ? (π≈3,14)", type: "number", acceptable: ["351,68", "351.68"] },
     ],
   };

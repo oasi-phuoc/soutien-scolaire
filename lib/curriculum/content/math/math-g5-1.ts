@@ -5,22 +5,22 @@ export const MATH_G5_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G5.1",
     theory: {
       title: {
-        fr: "Symétrie axiale",
+        fr: "Outils de construction : règle, compas, équerre",
       },
       paragraphs: {
         fr: [
-          "La symétrie axiale (ou réflexion) est une transformation qui associe à chaque point M son symétrique M' par rapport à un axe d, tel que d est la médiatrice de [MM'].",
-          "Propriétés : conservation des distances, des angles et des aires. La figure image est le miroir de la figure originale.",
-          "Construction : pour trouver le symétrique d'un point M par rapport à une droite d, tracer la perpendiculaire de M à d et reporter la même distance de l'autre côté.",
-          "Applications : papier plié, figures décoratives, architecture.",
+          "En géométrie euclidienne, les constructions se font à la règle (droites) et au compas (cercles, distances). L'équerre permet de tracer des angles droits.",
+          "Règle : tracer un segment ou une droite, mesurer une longueur. Le rapporteur mesure des angles.",
+          "Compas : tracer un cercle ou un arc de cercle d'un rayon donné, reporter une longueur.",
+          "Bonnes pratiques : travailler au crayon, tracer des traits fins, garder les constructions intermédiaires visibles.",
         ],
       },
     },
     exercises: [
-      { id: "g5-1-e1", promptFr: "La symétrie axiale conserve-t-elle les distances ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-1-e2", promptFr: "Le symétrique du point (3 ; 2) par rapport à l'axe y est le point (? ; 2).", type: "number", acceptable: ["-3", "−3"] },
-      { id: "g5-1-e3", promptFr: "Le symétrique du point (4 ; 5) par rapport à l'axe x est le point (4 ; ?).", type: "number", acceptable: ["-5", "−5"] },
-      { id: "g5-1-e4", promptFr: "Une figure et son image par symétrie axiale ont-elles la même aire ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g5-1-e5", promptFr: "Quelle est la figure qui est son propre symétrique par rapport à un axe ?", type: "short_text", acceptable: ["figure symétrique", "figure avec axe de symétrie"] },
+      { id: "g4-1-e1", promptFr: "Quel outil utilise-t-on pour tracer un angle droit précis ?", type: "short_text", acceptable: ["équerre", "equerre"] },
+      { id: "g4-1-e2", promptFr: "Quel outil sert à tracer un cercle ?", type: "short_text", acceptable: ["compas"] },
+      { id: "g4-1-e3", promptFr: "Quel outil mesure les angles ?", type: "short_text", acceptable: ["rapporteur"] },
+      { id: "g4-1-e4", promptFr: "En combien de degrés est gradué un rapporteur standard ?", type: "number", acceptable: ["180"] },
+      { id: "g4-1-e5", promptFr: "Pour tracer une droite on utilise une ___.", type: "short_text", acceptable: ["règle", "regle"] },
     ],
   };

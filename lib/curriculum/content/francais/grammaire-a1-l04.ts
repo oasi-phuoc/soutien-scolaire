@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L04: GrammarLesson = {
   slug: "a1-gr-l04",
-  code: "G1.3",
+  code: "R1.3",
   level: "A1",
   title: "Les articles définis et indéfinis",
   theory: [

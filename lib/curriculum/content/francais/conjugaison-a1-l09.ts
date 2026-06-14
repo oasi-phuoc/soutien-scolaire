@@ -674,7 +674,7 @@ const ex3Pool = (() => {
 
 export const A1_CONJ_L09: ConjLesson = {
   slug: "a1-conj-l09",
-  code: "G2.2",
+  code: "R2.2",
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [

@@ -5,48 +5,22 @@ export const MATH_G10_4_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G10.4",
     theory: {
       title: {
-        fr: "Angle à partir du rapport",
+        fr: "Diagramme en secteurs (camembert)",
       },
       paragraphs: {
         fr: [
-          "Si tu connais un rapport trigonométrique (sin, cos ou tan), tu peux retrouver l'angle correspondant grâce aux fonctions inverses.",
-          "Fonctions inverses : arcsin (sin⁻¹), arccos (cos⁻¹), arctan (tan⁻¹). Sur la calculatrice, appuie sur [2nd] ou [SHIFT] puis sur sin, cos ou tan.",
-          "Exemple : sin(α) = 0,6 → α = arcsin(0,6) ≈ 36,9°. Vérifie que ta calculatrice est en mode degrés (DEG).",
-          "Remarque importante : dans un triangle, la somme des angles est 180°. Donc si tu trouves un angle aigu α, l'autre angle aigu vaut 90° − α.",
-          "Angles courants à mémoriser : sin(30°) = 0,5 · cos(30°) = √3/2 ≈ 0,866 · tan(45°) = 1 · sin(60°) = √3/2.",
+          "Un diagramme en secteurs (camembert) représente des proportions. Chaque secteur correspond à une partie du total. La somme des angles vaut 360°.",
+          "Calcul de l'angle d'un secteur : α = (valeur / total) × 360°.",
+          "Exemple : sur 50 élèves, 20 aiment le foot. α = (20/50) × 360° = 144°.",
+          "Utilisation : montrer des répartitions (parts de marché, emploi du temps, votes…).",
         ],
       },
     },
     exercises: [
-      {
-        id: "g10-4-e1",
-        promptFr: "sin(α) = 0,5. Sans calculatrice, donne la valeur de α en degrés.",
-        type: "number",
-        acceptable: ["30"],
-      },
-      {
-        id: "g10-4-e2",
-        promptFr: "tan(β) = 1. Quelle est la valeur de β en degrés ?",
-        type: "number",
-        acceptable: ["45"],
-      },
-      {
-        id: "g10-4-e3",
-        promptFr: "cos(γ) = 0,5. Quelle est la valeur de γ en degrés ?",
-        type: "number",
-        acceptable: ["60"],
-      },
-      {
-        id: "g10-4-e4",
-        promptFr: "Dans un triangle rectangle, les deux angles aigus sont α et β. Si α = 37°, quelle est la valeur de β ?",
-        type: "number",
-        acceptable: ["53"],
-      },
-      {
-        id: "g10-4-e5",
-        promptFr: "sin(α) = 0,866. Donne la valeur approximative de α (à 1° près).",
-        type: "number",
-        acceptable: ["60"],
-      },
+      { id: "g9-4-e1", promptFr: "Dans un camembert de total 100, valeur 25 → angle = ?°", type: "number", acceptable: ["90"] },
+      { id: "g9-4-e2", promptFr: "Dans un camembert de total 60, valeur 15 → angle = ?°", type: "number", acceptable: ["90"] },
+      { id: "g9-4-e3", promptFr: "La somme de tous les angles d'un camembert vaut ?°", type: "number", acceptable: ["360"] },
+      { id: "g9-4-e4", promptFr: "50% du camembert représente quel angle ?°", type: "number", acceptable: ["180"] },
+      { id: "g9-4-e5", promptFr: "Un secteur de 72° représente quelle fraction du total ?", type: "short_text", acceptable: ["1/5", "20%"] },
     ],
   };

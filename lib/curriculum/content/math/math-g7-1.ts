@@ -5,22 +5,22 @@ export const MATH_G7_1_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G7.1",
     theory: {
       title: {
-        fr: "Triangle rectangle",
+        fr: "Notion d'échelle",
       },
       paragraphs: {
         fr: [
-          "Un triangle rectangle est un triangle qui possède un angle droit (90°). Le côté opposé à l'angle droit s'appelle l'hypoténuse. Les deux autres côtés sont les cathètes (ou jambes).",
-          "L'hypoténuse est toujours le côté le plus long du triangle rectangle.",
-          "Exemple : triangle avec angles 90°, 30°, 60°. Le côté opposé au 90° est l'hypoténuse.",
-          "Pour identifier un triangle rectangle : vérifier si un angle vaut exactement 90° ou si la relation a² + b² = c² est satisfaite.",
+          "Une échelle est le rapport entre la mesure sur un plan (ou une carte) et la mesure réelle. Échelle = distance dessinée / distance réelle.",
+          "Exemple : échelle 1:100 signifie que 1 cm sur le plan correspond à 100 cm = 1 m en réalité.",
+          "Une carte à l'échelle 1:50 000 signifie que 1 cm représente 50 000 cm = 500 m = 0,5 km.",
+          "Échelle de réduction : échelle < 1 (ex. plan de maison). Échelle d'agrandissement : échelle > 1 (ex. plan de cellule biologique).",
         ],
       },
     },
     exercises: [
-      { id: "g7-1-e1", promptFr: "Dans un triangle rectangle, comment s'appelle le côté opposé à l'angle droit ?", type: "short_text", acceptable: ["hypoténuse", "hypotenuse"] },
-      { id: "g7-1-e2", promptFr: "L'hypoténuse est-elle le côté le plus long ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g7-1-e3", promptFr: "Un triangle avec angles 90°, 45°, 45° est-il rectangle ? (oui/non)", type: "short_text", acceptable: ["oui"] },
-      { id: "g7-1-e4", promptFr: "Combien d'angles droits a un triangle rectangle ?", type: "number", acceptable: ["1"] },
-      { id: "g7-1-e5", promptFr: "Les deux côtés non-hypoténuse s'appellent ?", type: "short_text", acceptable: ["cathètes", "cathetes", "jambes"] },
+      { id: "g6-1-e1", promptFr: "Échelle 1:100. 3 cm sur le plan = combien de cm en réalité ?", type: "number", acceptable: ["300"] },
+      { id: "g6-1-e2", promptFr: "Échelle 1:1000. 5 cm sur la carte = combien de m en réalité ?", type: "number", acceptable: ["50"] },
+      { id: "g6-1-e3", promptFr: "Quelle est la signification de l'échelle 1:200 ?", type: "short_text", acceptable: ["1 cm = 200 cm", "1 cm = 2 m"] },
+      { id: "g6-1-e4", promptFr: "Une échelle de 1:50 est-elle un agrandissement ou une réduction ?", type: "short_text", acceptable: ["réduction", "reduction"] },
+      { id: "g6-1-e5", promptFr: "Échelle 1:500. 4 cm sur le plan = ? m en réalité.", type: "number", acceptable: ["20"] },
     ],
   };

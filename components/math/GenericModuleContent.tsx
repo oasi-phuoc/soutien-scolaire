@@ -2634,13 +2634,13 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
 }
 
 const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; label: string }>> = {
-  "G3-1": { geoKind: "square", label: "Périmètre et aire du carré" },
-  "G3-2": { geoKind: "rectangle", label: "Périmètre et aire du rectangle" },
-  "G3-3": { geoKind: "triangle", label: "Périmètre et aire du triangle" },
-  "G3-4": { geoKind: "parallelogram", label: "Périmètre et aire du parallélogramme" },
-  "G3-5": { geoKind: "trapezoid", label: "Périmètre et aire du trapèze" },
-  "G3-6": { geoKind: "circle", label: "Périmètre et aire du disque" },
-  "G3-7": { geoKind: "rhombus", label: "Périmètre et aire du losange" },
+  "G4-1": { geoKind: "square", label: "Périmètre et aire du carré" },
+  "G4-2": { geoKind: "rectangle", label: "Périmètre et aire du rectangle" },
+  "G4-3": { geoKind: "triangle", label: "Périmètre et aire du triangle" },
+  "G4-4": { geoKind: "parallelogram", label: "Périmètre et aire du parallélogramme" },
+  "G4-5": { geoKind: "trapezoid", label: "Périmètre et aire du trapèze" },
+  "G4-6": { geoKind: "circle", label: "Périmètre et aire du disque" },
+  "G4-7": { geoKind: "rhombus", label: "Périmètre et aire du losange" },
 };
 
 function GeoLineInput({
@@ -2662,7 +2662,7 @@ function GeoLineInput({
   const wrong = validated && answer.trim().replace(".", ",") !== correct;
   return (
     <div className="flex items-center gap-2">
-      <span className="w-24 text-sm text-[var(--color-text-secondary)]">{label} =</span>
+      <span className="text-sm text-[var(--color-text-secondary)]">{label} =</span>
       <div className={`w-20 min-h-9 flex flex-col items-center justify-center rounded-none border-0 border-b-2 px-1 py-1 text-center font-mono text-sm ${wrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60"}`}>
         {validated ? (
           wrong ? (

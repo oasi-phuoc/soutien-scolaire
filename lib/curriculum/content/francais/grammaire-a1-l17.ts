@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L17: GrammarLesson = {
   slug: "a1-gr-l17",
-  code: "G3.3",
+  code: "R3.3",
   level: "A1",
   title: "Il y a et les prépositions dans la maison",
   theory: [

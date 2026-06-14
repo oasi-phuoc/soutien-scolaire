@@ -1,8 +1,8 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-export const MATH_G3_8_LESSON: MathSubmoduleLesson = {
-  submoduleId: "G3-8",
-  submoduleCode: "G3.8",
+export const MATH_G4_8_LESSON: MathSubmoduleLesson = {
+  submoduleId: "G4-8",
+  submoduleCode: "G4.8",
   theory: {
     title: { fr: "Figures composées" },
     blocks: [

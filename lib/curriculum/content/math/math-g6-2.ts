@@ -5,22 +5,22 @@ export const MATH_G6_2_LESSON: MathSubmoduleLesson = {
     submoduleCode: "G6.2",
     theory: {
       title: {
-        fr: "Lire une échelle",
+        fr: "Symétrie centrale",
       },
       paragraphs: {
         fr: [
-          "Lire une échelle consiste à retrouver la distance réelle à partir d'une mesure sur le dessin, ou inversement.",
-          "Formule : distance réelle = distance dessinée × dénominateur de l'échelle.",
-          "Exemple : plan échelle 1:50. Longueur sur le plan = 6 cm → longueur réelle = 6 × 50 = 300 cm = 3 m.",
-          "Inversement : trouver la distance dessinée → distance dessinée = distance réelle ÷ dénominateur.",
+          "La symétrie centrale de centre O associe à chaque point M son image M' telle que O est le milieu de [MM']. On effectue une rotation de 180° autour de O.",
+          "Propriétés : conservation des distances, des angles et des aires. Le centre O est le milieu de chaque segment [MM'].",
+          "Construction : tracer la droite OM, reporter OM de l'autre côté de O pour obtenir M'.",
+          "Figures ayant un centre de symétrie : parallélogramme, rectangle, losange, carré, cercle. Pas le triangle (en général).",
         ],
       },
     },
     exercises: [
-      { id: "g6-2-e1", promptFr: "Échelle 1:100. Dessin : 4,5 cm. Réalité : ? cm.", type: "number", acceptable: ["450"] },
-      { id: "g6-2-e2", promptFr: "Échelle 1:200. Réalité : 600 cm. Dessin : ? cm.", type: "number", acceptable: ["3"] },
-      { id: "g6-2-e3", promptFr: "Échelle 1:50. Dessin : 8 cm. Réalité : ? m.", type: "number", acceptable: ["4"] },
-      { id: "g6-2-e4", promptFr: "Échelle 1:1000. Dessin : 3 cm. Réalité : ? m.", type: "number", acceptable: ["30"] },
-      { id: "g6-2-e5", promptFr: "Échelle 1:25. Réalité : 75 cm. Dessin : ? cm.", type: "number", acceptable: ["3"] },
+      { id: "g5-2-e1", promptFr: "La symétrie centrale conserve-t-elle les longueurs ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g5-2-e2", promptFr: "Le symétrique du point (2 ; 3) par rapport à O(0,0) est le point (? ; ?).", type: "short_text", acceptable: ["(-2;-3)", "(−2;−3)", "-2,-3"] },
+      { id: "g5-2-e3", promptFr: "Un triangle a-t-il généralement un centre de symétrie ? (oui/non)", type: "short_text", acceptable: ["non"] },
+      { id: "g5-2-e4", promptFr: "Un parallélogramme a-t-il un centre de symétrie ? (oui/non)", type: "short_text", acceptable: ["oui"] },
+      { id: "g5-2-e5", promptFr: "La symétrie centrale est équivalente à une rotation de combien de degrés ?", type: "number", acceptable: ["180"] },
     ],
   };

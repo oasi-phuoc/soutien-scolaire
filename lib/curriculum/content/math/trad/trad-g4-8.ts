@@ -1,7 +1,7 @@
 import type { SubmoduleTrad } from "./trad-types";
 
-export const TRAD_G3_8: SubmoduleTrad = {
-  submoduleId: "G3-8",
+export const TRAD_G4_8: SubmoduleTrad = {
+  submoduleId: "G4-8",
   title: {
     fr: "Figures composées",
     en: "Composite figures",
