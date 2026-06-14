@@ -512,4 +512,41 @@ export const A1_CONJ_L15: ConjLesson = {
       ],
     },
   ],
+
+  evalExercises: [
+    {
+      type: "qcm",
+      title: "Évaluation — Question 1",
+      instruction: "Choisissez le bon verbe modal.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Je ___ travailler demain. (obligation)",        choices: ["dois",  "peux",  "veux",  "voulons"], correctIdx: 0 },
+        { sentence: "Elle ___ parler trois langues. (capacité)",     choices: ["peut",  "doit",  "veut",  "peuvent"], correctIdx: 0 },
+        { sentence: "Nous ___ aller au cinéma ce soir. (désir)",     choices: ["voulons","pouvons","devons","voulez"], correctIdx: 0 },
+        { sentence: "Tu ___ faire tes devoirs maintenant !",         choices: ["dois",  "peux",  "veux",  "voulez"],  correctIdx: 0 },
+        { sentence: "Ils ___ partir à 8h pour le train.",            choices: ["doivent","peuvent","veulent","devez"], correctIdx: 0 },
+        { sentence: "Je ___ un café, s'il vous plaît. (désir)",      choices: ["veux",  "dois",  "peux",  "veut"],    correctIdx: 0 },
+        { sentence: "Vous ___ réserver à l'avance. (obligation)",    choices: ["devez", "pouvez","voulez","doivent"],  correctIdx: 0 },
+        { sentence: "Il ___ m'aider ? (capacité + demande polie)",   choices: ["peut",  "doit",  "veut",  "peuvent"], correctIdx: 0 },
+      ],
+    },
+    {
+      type: "fill",
+      title: "Évaluation — Question 2",
+      instruction: "Complétez avec la bonne forme de pouvoir, vouloir ou devoir.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Tu ___ partir maintenant.",           hint: "obligation → devoir",   answer: "dois"    },
+        { sentence: "Elle ___ faire du sport.",            hint: "désir → vouloir",       answer: "veut"    },
+        { sentence: "Nous ___ payer maintenant ?",         hint: "capacité → pouvoir",    answer: "pouvons" },
+        { sentence: "Je ___ rester ici, s'il te plaît.",  hint: "désir → vouloir",       answer: "veux"    },
+        { sentence: "Ils ___ arriver avant midi.",         hint: "obligation → devoir",   answer: "doivent" },
+        { sentence: "Vous ___ venir avec nous ?",          hint: "capacité → pouvoir",    answer: "pouvez"  },
+        { sentence: "Il ___ travailler ce week-end.",      hint: "obligation → devoir",   answer: "doit"    },
+        { sentence: "Je ne ___ pas manger du gluten.",     hint: "capacité → pouvoir",    answer: "peux"    },
+      ],
+    },
+  ],
 };

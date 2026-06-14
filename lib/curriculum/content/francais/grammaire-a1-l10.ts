@@ -64,4 +64,43 @@ export const A1_GR_L10: GrammarLesson = {
     },
   ],
   exercises: [],
+
+  evalExercises: [
+    {
+      type: "fill",
+      title: "Évaluation — Question 1",
+      instruction: "Complétez avec le bon mot interrogatif.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ tu habites ?",                hint: "lieu",          answer: "Où"             },
+        { sentence: "___ tu t'appelles ?",             hint: "identité",      answer: "Comment"        },
+        { sentence: "___ est-ce que tu travailles ?",  hint: "moment",        answer: "Quand"          },
+        { sentence: "___ vient avec nous ?",           hint: "personne",      answer: "Qui"            },
+        { sentence: "___ ça coûte ?",                  hint: "quantité/prix", answer: "Combien"        },
+        { sentence: "___ tu ne manges pas ?",          hint: "raison",        answer: "Pourquoi"       },
+        { sentence: "___ tu fais ce soir ?",           hint: "action/chose",  answer: "Qu'est-ce que" },
+        { sentence: "___ parle français ici ?",        hint: "personne",      answer: "Qui"            },
+        { sentence: "___ vous arrivez ?",              hint: "moment",        answer: "Quand"          },
+        { sentence: "___ vous allez ? À Paris.",       hint: "lieu",          answer: "Où"             },
+      ],
+    },
+    {
+      type: "qcm",
+      title: "Évaluation — Question 2",
+      instruction: "Choisissez le bon mot interrogatif.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ tu habites ? — À Lyon.",           choices: ["Où",      "Quand", "Qui",   "Comment"],  correctIdx: 0 },
+        { sentence: "___ ça coûte ? — 20 euros.",           choices: ["Combien", "Où",    "Quand", "Comment"],  correctIdx: 0 },
+        { sentence: "___ tu ne viens pas ? — Je suis malade.", choices: ["Pourquoi","Où","Quand","Qui"],        correctIdx: 0 },
+        { sentence: "___ est-ce que tu fais ? — Je lis.",  choices: ["Qu'est-ce que","Où","Qui","Quand"],       correctIdx: 0 },
+        { sentence: "___ arrive demain ? — Mon frère.",     choices: ["Qui",     "Où",    "Quand", "Comment"],  correctIdx: 0 },
+        { sentence: "___ tu t'appelles ? — Marie.",         choices: ["Comment", "Où",    "Quand", "Qui"],      correctIdx: 0 },
+        { sentence: "___ commence le cours ? — À 9h.",      choices: ["Quand",   "Où",    "Qui",   "Comment"],  correctIdx: 0 },
+        { sentence: "___ tu vas ? — Je vais bien.",         choices: ["Comment", "Où",    "Qui",   "Quand"],    correctIdx: 0 },
+      ],
+    },
+  ],
 };
