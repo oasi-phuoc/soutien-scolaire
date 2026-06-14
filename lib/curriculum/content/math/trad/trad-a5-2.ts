@@ -280,4 +280,9 @@ export const TRAD_A5_2: SubmoduleTrad = {
     },
     { text: { fr: "**6** ; 7,2 ; **8,4** ; 9,6", en: "**6** ; 7.2 ; **8.4** ; 9.6", ar: "**6** ; 7.2 ; **8.4** ; 9.6", fa: "**6** ; 7.2 ; **8.4** ; 9.6", ti: "**6** ; 7.2 ; **8.4** ; 9.6", uk: "**6** ; 7,2 ; **8,4** ; 9,6", pt: "**6** ; 7,2 ; **8,4** ; 9,6", so: "**6** ; 7.2 ; **8.4** ; 9.6", tr: "**6** ; 7,2 ; **8,4** ; 9,6", ps: "**6** ; 7.2 ; **8.4** ; 9.6" } },
   ],
+  consignes: {
+    "a5-2-e1": { fr: "Classez du plus petit au plus grand : 2,5 ; 2,15 ; 2,51", en: "Order from smallest to largest: 2.5; 2.15; 2.51" },
+    "a5-2-e2": { fr: "Donnez le terme manquant : 1,2 ; 1,5 ; ___ ; 2,1", en: "Give the missing term: 1.2; 1.5; ___; 2.1" },
+    "a5-2-e3": { fr: "Classez du plus grand au plus petit : 0,3 ; 0,13 ; 0,31", en: "Order from largest to smallest: 0.3; 0.13; 0.31" },
+  },
 };

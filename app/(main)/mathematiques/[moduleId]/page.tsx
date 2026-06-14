@@ -1,5 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { MathSubmoduleWorkspace } from "@/components/math/MathSubmoduleWorkspace";
 import { getMathModule } from "@/lib/curriculum/math-data";
 import {
@@ -35,17 +36,22 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   // RA/RG revision modules are not in MATH_MODULES — allow them through
   if (!parentMod && !parentModuleId!.startsWith("RA") && !parentModuleId!.startsWith("RG")) notFound();
 
-  const tabLabel = parentMod?.branch === "geometry" ? "Formes" : "Calculs";
+  const isGeometry = parentMod?.branch === "geometry";
+  const tabLabel = isGeometry ? "Formes" : "Calculs";
+  const backHref = isGeometry ? "/mathematiques?tab=geometry" : "/mathematiques";
+  const pageStyle = isGeometry
+    ? ({ "--color-accent-alg": "var(--color-accent-geo)" } as CSSProperties)
+    : undefined;
 
   return (
-    <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32">
+    <main className="math-module-page mx-auto w-full max-w-xl flex-1 px-4 py-8 pb-32" style={pageStyle}>
       <header className="mb-5 space-y-1">
         <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
           Mathématiques · {tabLabel} · {parentMod?.code ?? parentModuleId}
         </p>
         <div className="flex items-center gap-2">
           <Link
-            href="/mathematiques"
+            href={backHref}
             className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-80"
             aria-label="Retour aux mathématiques"
           >

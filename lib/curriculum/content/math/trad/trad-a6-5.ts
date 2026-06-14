@@ -161,4 +161,11 @@ export const TRAD_A6_5: SubmoduleTrad = {
       "20% کمول او بيا 20% زياتوالی پيلنی ارزښت نه راګرزوي. بېلګه: 100 − 20% = 80; 80 + 20% = 96 ≠ 100."
     ) },
   ],
+  consignes: {
+    "a6-5-e1": { fr: "Calculez 20% de 250.", en: "Calculate 20% of 250." },
+    "a6-5-e2": { fr: "12 élèves sur 40 sont absents. Quel pourcentage ?", en: "12 students out of 40 are absent. What percentage is that?" },
+    "a6-5-e3": { fr: "Prix 80 CHF soldé −25%, puis −10%. Prix final ?", en: "Price 80 CHF discounted by −25%, then −10%. Final price?" },
+    "a6-5-e4": { fr: "Salaire de 2 400 CHF augmenté de 5%. Nouveau salaire ?", en: "Salary of 2,400 CHF increased by 5%. New salary?" },
+    "a6-5-e5": { fr: "Article 120 CHF avec 15% de réduction. Prix payé ?", en: "Item at 120 CHF with a 15% discount. Price paid?" },
+  },
 };

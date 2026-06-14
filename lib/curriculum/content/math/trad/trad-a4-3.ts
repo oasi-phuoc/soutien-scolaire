@@ -252,4 +252,16 @@ export const TRAD_A4_3: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-3-ep01": { fr: "Comparez 3/5 et 4/5. Laquelle est plus grande ? (3/5 ou 4/5)", en: "Compare 3/5 and 4/5. Which one is greater? (3/5 or 4/5)" },
+    "a4-3-ep02": { fr: "Comparez 1/4 et 1/3. Laquelle est plus grande ? (1/4 ou 1/3)", en: "Compare 1/4 and 1/3. Which one is greater? (1/4 or 1/3)" },
+    "a4-3-ep03": { fr: "1/2 > 1/3 ? (oui/non)", en: "Is 1/2 > 1/3? (yes/no)" },
+    "a4-3-ep04": { fr: "Comparez 2/3 et 3/4. Utilisez la multiplication croisée : 2×4=8, 3×3=9. Laquelle est plus grande ? (2/3 ou 3/4)", en: "Compare 2/3 and 3/4. Use cross multiplication: 2×4=8, 3×3=9. Which one is greater? (2/3 or 3/4)" },
+    "a4-3-ep05": { fr: "5/8 et 3/8 : quelle est la plus petite ?", en: "5/8 and 3/8: which one is smaller?" },
+    "a4-3-ep06": { fr: "7/10 et 3/5 : mettez au même dénominateur (3/5 = 6/10). Laquelle est plus grande ?", en: "7/10 and 3/5: put them over the same denominator (3/5 = 6/10). Which one is greater?" },
+    "a4-3-ep07": { fr: "Comparez 2/5 et 1/2. Produit croisé : 2×2=4, 5×1=5. Laquelle est plus petite ?", en: "Compare 2/5 and 1/2. Cross product: 2×2=4, 5×1=5. Which one is smaller?" },
+    "a4-3-ep08": { fr: "3/4 > 2/4 ? (oui/non)", en: "Is 3/4 > 2/4? (yes/no)" },
+    "a4-3-ep09": { fr: "1/6 et 1/5 : laquelle est la plus grande ?", en: "1/6 and 1/5: which one is greater?" },
+    "a4-3-ep10": { fr: "5/6 et 7/8 : produit croisé 5×8=40, 7×6=42. Laquelle est plus grande ?", en: "5/6 and 7/8: cross product 5×8=40, 7×6=42. Which one is greater?" },
+  },
 };

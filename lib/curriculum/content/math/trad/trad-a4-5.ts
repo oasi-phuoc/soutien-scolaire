@@ -118,4 +118,16 @@ export const TRAD_A4_5: SubmoduleTrad = {
       },
     },
   ],
+  consignes: {
+    "a4-5-ep01": { fr: "Calculez 1/2 × 3/4. (ex: 3/8)", en: "Calculate 1/2 × 3/4. (e.g. 3/8)" },
+    "a4-5-ep02": { fr: "Calculez 2/3 × 3/5. (ex: 2/5)", en: "Calculate 2/3 × 3/5. (e.g. 2/5)" },
+    "a4-5-ep03": { fr: "Calculez 4/5 × 5/8. Simplifiez. (ex: 1/2)", en: "Calculate 4/5 × 5/8. Simplify. (e.g. 1/2)" },
+    "a4-5-ep04": { fr: "Calculez 3/4 × 8/9. Simplifiez. (ex: 2/3)", en: "Calculate 3/4 × 8/9. Simplify. (e.g. 2/3)" },
+    "a4-5-ep05": { fr: "Calculez 1/3 × 1/3. (ex: 1/9)", en: "Calculate 1/3 × 1/3. (e.g. 1/9)" },
+    "a4-5-ep06": { fr: "Calculez 5/6 × 12/25. Simplifiez. (ex: 2/5)", en: "Calculate 5/6 × 12/25. Simplify. (e.g. 2/5)" },
+    "a4-5-ep07": { fr: "Calculez 3/7 × 14/9. Simplifiez. (ex: 2/3)", en: "Calculate 3/7 × 14/9. Simplify. (e.g. 2/3)" },
+    "a4-5-ep08": { fr: "Calculez 2/5 × 5/4. Simplifiez. (ex: 1/2)", en: "Calculate 2/5 × 5/4. Simplify. (e.g. 1/2)" },
+    "a4-5-ep09": { fr: "Calculez 7/8 × 4/7. Simplifiez. (ex: 1/2)", en: "Calculate 7/8 × 4/7. Simplify. (e.g. 1/2)" },
+    "a4-5-ep10": { fr: "Calculez 3/5 × 10/9. Simplifiez. (ex: 2/3)", en: "Calculate 3/5 × 10/9. Simplify. (e.g. 2/3)" },
+  },
 };

@@ -4,7 +4,7 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   submoduleId: "G1-1",
   submoduleCode: "G1.1",
   theory: {
-    title: { fr: "" },
+    title: { fr: "Formes" },
     blocks: [
       { type: "heading", fr: "Les polygones réguliers", black: true },
 
@@ -15,14 +15,14 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
 
       {
         type: "table",
-        headersFr: ["Nom", "Côtés", "Somme des angles"],
+        headersFr: ["Nom", "Côtés"],
         accentHeader: true,
-        colAligns: ["left", "center", "center"],
+        colAligns: ["left", "center"],
         rows: [
-          ["Triangle", "3", "180°"],
-          ["Quadrilatère", "4", "360°"],
-          ["Pentagone", "5", "540°"],
-          ["Hexagone", "6", "720°"],
+          ["Triangle", "3"],
+          ["Quadrilatère", "4"],
+          ["Pentagone", "5"],
+          ["Hexagone", "6"],
         ],
       },
 
@@ -35,20 +35,13 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
   <!-- Triangle -->
   <polygon points='130,18 220,128 40,128' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
   <!-- Sommet (top vertex) -->
-  <circle cx='130' cy='18' r='4.5' fill='var(--color-accent-alg)'/>
-  <line x1='130' y1='13' x2='175' y2='4' stroke='var(--color-accent-alg)' stroke-width='1.4'/>
-  <text x='178' y='8' font-size='13' fill='var(--color-accent-alg)' font-family='sans-serif' font-weight='bold'>sommet</text>
-  <!-- Côté (bottom side) — bracket -->
-  <path d='M40,134 L40,142 L130,142 L130,134' fill='none' stroke='#f97316' stroke-width='1.8'/>
-  <path d='M130,134 L130,142 L220,142 L220,134' fill='none' stroke='#f97316' stroke-width='1.8' opacity='0.35'/>
-  <line x1='75' y1='142' x2='50' y2='151' stroke='#f97316' stroke-width='1.4'/>
-  <text x='6' y='155' font-size='13' fill='#f97316' font-family='sans-serif' font-weight='bold'>côté</text>
+  <circle cx='130' cy='18' r='4.5' fill='#f97316'/>
+  <text x='150' y='22' font-size='13' fill='#f97316' font-family='sans-serif' font-weight='bold'>sommet</text>
+  <!-- Côté (bottom side) -->
+  <path d='M40,139 L220,139' fill='none' stroke='#f97316' stroke-width='2.2' stroke-linecap='round'/>
+  <path d='M40,133 L40,139 M220,133 L220,139' fill='none' stroke='#f97316' stroke-width='2.2' stroke-linecap='round'/>
+  <text x='130' y='154' text-anchor='middle' font-size='13' fill='#f97316' font-family='sans-serif' font-weight='bold'>côté</text>
 </svg>`,
-      },
-
-      {
-        type: "plain",
-        fr: "Tous les **côtés sont égaux** et tous les **angles sont égaux**.",
       },
 
       { type: "plain", fr: "" },
@@ -162,7 +155,7 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         labelFr: "",
         itemsFr: [
           "**Rayon (r)** : distance du centre à n'importe quel point du cercle.",
-          "**Diamètre (d)** : segment passant par le centre ; d = 2r.",
+          "**Diamètre (d)** : segment passant par le centre ; d = 2 × r.",
         ],
       },
 
@@ -171,8 +164,8 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
         markup: `<svg viewBox='0 0 220 155' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:280px;display:block;margin:0 auto'>
   <circle cx='110' cy='78' r='55' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
   <circle cx='110' cy='78' r='3' fill='var(--color-accent-alg)'/>
-  <line x1='110' y1='23' x2='110' y2='133' stroke='var(--color-accent-alg)' stroke-width='2' opacity='0.7'/>
-  <text x='116' y='82' font-size='11' fill='var(--color-accent-alg)' opacity='0.9' font-family='sans-serif' font-weight='bold'>d</text>
+  <line x1='110' y1='23' x2='110' y2='133' stroke='var(--color-accent-alg)' stroke-width='2' stroke-dasharray='5 4' opacity='0.7'/>
+  <text x='101' y='82' font-size='11' fill='var(--color-accent-alg)' opacity='0.9' font-family='sans-serif' font-weight='bold' text-anchor='end'>d</text>
   <line x1='110' y1='78' x2='165' y2='78' stroke='#f97316' stroke-width='2.5'/>
   <text x='133' y='70' font-size='11' fill='#f97316' font-weight='bold' font-family='sans-serif'>r</text>
 </svg>`,
@@ -181,66 +174,5 @@ export const MATH_G1_1_LESSON: MathSubmoduleLesson = {
     paragraphs: { fr: [] },
   },
 
-  exercises: [
-    {
-      id: "g1-1-e1",
-      promptFr: "Comment s'appelle un polygone à 3 côtés ?",
-      type: "short_text",
-      acceptable: ["triangle"],
-    },
-    {
-      id: "g1-1-e2",
-      promptFr: "Comment s'appelle un polygone à 4 côtés égaux et 4 angles droits ?",
-      type: "short_text",
-      acceptable: ["carré", "carre"],
-    },
-    {
-      id: "g1-1-e3",
-      promptFr: "Comment s'appelle un quadrilatère à 2 longueurs et 2 largeurs (différentes) avec 4 angles droits ?",
-      type: "short_text",
-      acceptable: ["rectangle"],
-    },
-    {
-      id: "g1-1-e4",
-      promptFr: "Comment s'appelle un polygone à 4 côtés égaux dont les angles ne sont pas droits ?",
-      type: "short_text",
-      acceptable: ["losange"],
-    },
-    {
-      id: "g1-1-e5",
-      promptFr: "Comment s'appelle un quadrilatère avec exactement une paire de côtés parallèles ?",
-      type: "short_text",
-      acceptable: ["trapèze", "trapeze"],
-    },
-    {
-      id: "g1-1-e6",
-      promptFr: "Comment s'appelle un quadrilatère dont les côtés opposés sont parallèles (mais pas tous les côtés égaux) ?",
-      type: "short_text",
-      acceptable: ["parallélogramme", "parallelogramme"],
-    },
-    {
-      id: "g1-1-e7",
-      promptFr: "Comment s'appelle un polygone à 5 côtés ?",
-      type: "short_text",
-      acceptable: ["pentagone"],
-    },
-    {
-      id: "g1-1-e8",
-      promptFr: "Comment s'appelle un polygone à 6 côtés ?",
-      type: "short_text",
-      acceptable: ["hexagone"],
-    },
-    {
-      id: "g1-1-e9",
-      promptFr: "Comment s'appelle la figure ronde dont tous les points sont à la même distance du centre ?",
-      type: "short_text",
-      acceptable: ["cercle"],
-    },
-    {
-      id: "g1-1-e10",
-      promptFr: "Comment s'appelle la moitié d'un cercle ?",
-      type: "short_text",
-      acceptable: ["demi-cercle"],
-    },
-  ],
+  exercises: [],
 };

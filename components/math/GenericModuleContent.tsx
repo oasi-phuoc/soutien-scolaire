@@ -2296,6 +2296,7 @@ function Mul2DigitExercise({
 function DivColumnGridExercise({
   config, quotientInputs, remainderInputs, operandInputs, workInputs, validated,
   onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
+  consigne, consigneLang, consigneDir,
 }: {
   config: DivColGridConfig;
   quotientInputs: string[][];
@@ -2307,11 +2308,14 @@ function DivColumnGridExercise({
   onRemainderChange: (ci: number, val: string) => void;
   onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
   onWorkChange: (ci: number, si: number, type: 0|1, di: number, val: string) => void;
+  consigne?: string;
+  consigneLang?: string;
+  consigneDir?: "ltr" | "rtl";
 }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Effectuez les divisions en colonnes.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]" lang={consigneLang} dir={consigneDir}>{consigne ?? "Effectuez les divisions en colonnes."}</p>
       <div className="flex flex-col gap-3">
         {config.questions.map((q, qi) => (
           <DivColumnCard
@@ -3620,6 +3624,15 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
   const itemsFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv.map((item, i) => preserveEvidence(fr[i], item)) : fr;
   const headersFor = (fr: string[], pv?: string[]) => usePivot && pv?.length ? pv : fr;
   const captionFor = (fr?: string, pv?: string) => usePivot && pv ? pv : fr;
+  const stepTextFor = (step: { numFr: string; textsFr: string[] }, stepIdx: number) => {
+    const raw = bt?.items?.[pivot]?.[stepIdx];
+    if (!usePivot || !raw) return { title: step.numFr, texts: step.textsFr };
+    const [title, ...texts] = raw.split("||");
+    return {
+      title: preserveEvidence(step.numFr, title ?? step.numFr),
+      texts: texts.length ? texts.map((text, i) => preserveEvidence(step.textsFr[i], text)) : step.textsFr,
+    };
+  };
   const textDir = usePivot && isRtl ? "rtl" : "ltr";
   const textLang = usePivot ? pivot : undefined;
   switch (block.type) {
@@ -3808,12 +3821,13 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
         <div className="space-y-6">
           {block.steps.map((step, si) => {
             const prev = si > 0 ? block.steps[si - 1] : null;
+            const stepText = stepTextFor(step, si);
             return (
               <div key={si} className="space-y-2">
-                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{stepText.title}</p>
                 <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                  {step.textsFr.map((t, ti) => (
-                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderText(t)}</p>
                   ))}
                 </div>
                 <MulDemoGrid
@@ -3832,12 +3846,13 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
         <div className="space-y-6">
           {block.steps.map((step, si) => {
             const prev = si > 0 ? block.steps[si - 1] : null;
+            const stepText = stepTextFor(step, si);
             return (
               <div key={si} className="space-y-2">
-                <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{stepText.title}</p>
                 <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                  {step.textsFr.map((t, ti) => (
-                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderText(t)}</p>
                   ))}
                 </div>
                 <Mul2DemoGrid
@@ -3859,20 +3874,23 @@ function BlockView({ block, blockIdx, tradBlocks, pivot, showPivot }: {
     case "div_step_cards":
       return (
         <div className="space-y-6">
-          {block.steps.map((step, si) => (
-            <div key={si} className="space-y-2">
-              <p className="text-sm font-bold text-[var(--color-accent-alg)]">{step.numFr}</p>
-              <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
-                {step.textsFr.map((t, ti) => (
-                  <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]">{t}</p>
-                ))}
+          {block.steps.map((step, si) => {
+            const stepText = stepTextFor(step, si);
+            return (
+              <div key={si} className="space-y-2">
+                <p className="text-sm font-bold text-[var(--color-accent-alg)]" lang={textLang} dir={textDir}>{stepText.title}</p>
+                <div className="border-l-2 border-[var(--color-accent-alg)] pl-3 space-y-0.5">
+                  {stepText.texts.map((t, ti) => (
+                    <p key={ti} className="text-sm leading-relaxed text-[var(--color-text-primary)]" lang={textLang} dir={textDir}>{renderText(t)}</p>
+                  ))}
+                </div>
+                <DivDemoGrid
+                  dividend={block.dividend} divisor={block.divisor}
+                  stepsComplete={step.stepsComplete}
+                />
               </div>
-              <DivDemoGrid
-                dividend={block.dividend} divisor={block.divisor}
-                stepsComplete={step.stepsComplete}
-              />
-            </div>
-          ))}
+            );
+          })}
         </div>
       );
     case "add_step_cards":
@@ -6434,6 +6452,9 @@ export function GenericModuleContent({
           operandInputs={divGridOperandInputs}
           workInputs={divGridWorkInputs}
           validated={divGridValidated}
+          consigne={showPivotTranslation ? currentStepTrad?.consignes?.divColumnGrid?.[pivot] : undefined}
+          consigneLang={showPivotTranslation && currentStepTrad?.consignes?.divColumnGrid?.[pivot] ? pivot : undefined}
+          consigneDir={showPivotTranslation && currentStepTrad?.consignes?.divColumnGrid?.[pivot] && (pivot === "ar" || pivot === "fa" || pivot === "ps") ? "rtl" : "ltr"}
           onQuotientChange={(ci, idx, val) =>
             setDivGridQuotientInputs(prev => prev.map((card, ci2) =>
               ci2 === ci ? card.map((v, vi) => vi === idx ? val : v) : card

@@ -261,4 +261,16 @@ export const TRAD_A4_1: SubmoduleTrad = {
     },
     {},
   ],
+  consignes: {
+    "a4-1-ep01": { fr: "Quel est le numérateur de la fraction 3/7 ?", en: "What is the numerator of the fraction 3/7?" },
+    "a4-1-ep02": { fr: "Quel est le dénominateur de la fraction 5/8 ?", en: "What is the denominator of the fraction 5/8?" },
+    "a4-1-ep03": { fr: "Quel est le numérateur de la fraction 2/5 ?", en: "What is the numerator of the fraction 2/5?" },
+    "a4-1-ep04": { fr: "Quel est le dénominateur de la fraction 9/11 ?", en: "What is the denominator of the fraction 9/11?" },
+    "a4-1-ep05": { fr: "Si une pizza est coupée en 8 parts et que vous en mangez 3, quelle fraction avez-vous mangée ? Écrivez la fraction (ex: 3/8).", en: "If a pizza is cut into 8 slices and you eat 3, what fraction did you eat? Write the fraction (e.g. 3/8)." },
+    "a4-1-ep06": { fr: "On partage un gâteau en 4 parts égales. Chaque part représente quelle fraction ? (ex: 1/4)", en: "A cake is divided into 4 equal parts. What fraction does each part represent? (e.g. 1/4)" },
+    "a4-1-ep07": { fr: "3/3 est-il égal à 1 ? Répondez oui ou non.", en: "Is 3/3 equal to 1? Answer yes or no." },
+    "a4-1-ep08": { fr: "Quel entier est égal à 6/1 ?", en: "Which whole number is equal to 6/1?" },
+    "a4-1-ep09": { fr: "Écrivez 5 sous forme de fraction avec le dénominateur 1. (ex: 5/1)", en: "Write 5 as a fraction with denominator 1. (e.g. 5/1)" },
+    "a4-1-ep10": { fr: "Quel est le numérateur de la fraction 7/10 ?", en: "What is the numerator of the fraction 7/10?" },
+  },
 };
