@@ -9,156 +9,151 @@ const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[],
 export const TRAD_A6_5: SubmoduleTrad = {
   submoduleId: "A6-5",
   title: S(
-    "Réduction",
-    "Decrease",
-    "التخفيض بنسبة مئوية",
-    "کاهش درصدی",
-    "ምጉዳል ብሚእታዊ",
-    "Відсоткове зменшення",
-    "Redução percentual",
-    "Hoos u dhigista boqolleyda",
-    "Yüzde düşüşü",
-    "سلنيز کمول"
-  ),
-  paragraphs: A(
-    [
-      "Réduire une valeur de p% signifie qu'on lui soustrait p% de sa propre valeur.",
-      "On utilise un coefficient multiplicateur inférieur à 1 pour calculer en une étape.",
-      "Formule : nouvelle valeur = valeur initiale × (1 − p/100).",
-    ],
-    [
-      "Decreasing a value by p% means subtracting p% of its own value from it.",
-      "A multiplying coefficient less than 1 is used to calculate in one step.",
-      "Formula: new value = initial value × (1 − p/100).",
-    ],
-    [
-      "تخفيض قيمة بنسبة p% يعني طرح p% من قيمتها نفسها.",
-      "يُستخدم معامل ضرب أقل من 1 للحساب في خطوة واحدة.",
-      "الصيغة: القيمة الجديدة = القيمة الأصلية × (1 − p/100).",
-    ],
-    [
-      "کاهش یک مقدار به اندازه p% یعنی کم کردن p% از آن مقدار.",
-      "از ضریب ضربی کمتر از 1 برای محاسبه در یک مرحله استفاده می‌شود.",
-      "فرمول: مقدار جدید = مقدار اولیه × (1 − p/100).",
-    ],
-    [
-      "ዋጋ ብ p% ምጉዳል ማለት p% ካብኡ ምጉዳል እዩ።",
-      "ካብ 1 ዝንኪ ኮፊሸንት ንሓደ ደረጃ ሕሳብ ንጥቀም።",
-      "ቀመር፦ ሓድሽ ዋጋ = መጀመርታ ዋጋ × (1 − p/100)።",
-    ],
-    [
-      "Зменшити значення на p% означає відняти p% від його власного значення.",
-      "Для розрахунку за один крок використовують множний коефіцієнт, менший за 1.",
-      "Формула: нове значення = початкове значення × (1 − p/100).",
-    ],
-    [
-      "Reduzir um valor de p% significa subtrair p% do seu próprio valor.",
-      "Usa-se um coeficiente multiplicador inferior a 1 para calcular numa etapa.",
-      "Fórmula: novo valor = valor inicial × (1 − p/100).",
-    ],
-    [
-      "Hoos u dhigida qiimaha p% waxay ka dhigan tahay in laga goynto p% oo ka mid ah qiimihiisa.",
-      "Isku-dhufte ka yar 1 waxaa loo isticmaalaa in hal tallaabo xisaab lagu sameeyo.",
-      "Qaaciddo: qiimaha cusub = qiimaha hore × (1 − p/100).",
-    ],
-    [
-      "Bir değeri p% azaltmak, ondan kendi değerinin p%'sini çıkarmak demektir.",
-      "Tek adımda hesap için 1'den küçük çarpan katsayısı kullanılır.",
-      "Formül: yeni değer = başlangıç değeri × (1 − p/100).",
-    ],
-    [
-      "يو ارزښت p% کمول يعنې د هغه ارزښت p% ترې کمول.",
-      "د يو ګام حساب لپاره له 1 کوچنی ضربي ضريب کارول کېږي.",
-      "فورمول: نوی ارزښت = پيلنی ارزښت × (1 − p/100).",
-    ]
+    "Problèmes",
+    "Problems",
+    "مسائل",
+    "مسائل",
+    "ጸገማት",
+    "Задачі",
+    "Problemas",
+    "Xisaabaha",
+    "Problemler",
+    "ستونزې"
   ),
   blocks: [
-    { text: S("Réduction en pourcentage", "Percentage decrease", "التخفيض بنسبة مئوية", "کاهش درصدی", "ምጉዳል ብሚእታዊ", "Відсоткове зменшення", "Redução percentual", "Hoos u dhigista boqolleyda", "Yüzde düşüşü", "سلنيز کمول") },
+    // 0 — heading "Problèmes mixtes de pourcentage" (black)
     { text: S(
-      "Réduire une valeur de **p%** signifie qu'on lui soustrait p% de sa propre valeur. On utilise un **coefficient multiplicateur** inférieur à 1 pour effectuer ce calcul en une seule étape.",
-      "Decreasing a value by **p%** means subtracting p% of its own value. We use a **multiplying coefficient** less than 1 to do this in one step.",
-      "تخفيض قيمة بنسبة **p%** يعني طرح p% من قيمتها نفسها. نستخدم **معامل ضرب** أقل من 1 لإجراء الحساب في خطوة واحدة.",
-      "کاهش یک مقدار به اندازه **p%** یعنی p% از مقدار خودش را از آن کم می‌کنیم. از یک **ضریب ضربی** کمتر از 1 برای این محاسبه در یک مرحله استفاده می‌کنیم.",
-      "ዋጋ ብ **p%** ምጉዳል ማለት p% ካብኡ ምጉዳል እዩ። **መባዝሒ ኮፊሸንት** ካብ 1 ዝንኪ ንሓደ ደረጃ ሕሳብ ንጥቀም።",
-      "Зменшити значення на **p%** означає відняти p% від його власного значення. Для цього за один крок використовують **множний коефіцієнт**, менший за 1.",
-      "Reduzir um valor de **p%** significa subtrair p% do seu próprio valor. Usamos um **coeficiente multiplicador** inferior a 1 para fazer este cálculo numa etapa.",
-      "Hoos u dhigida qiimaha **p%** waxay ka dhigan tahay in laga goynto p% oo ka mid ah qiimihiisa. **Isku-dhuftaha** ka yar 1 waxaan u isticmaalnaa tallaabada hal ahaan ah.",
-      "Bir değeri **p%** azaltmak, ondan kendi değerinin p%'sini çıkarmak demektir. Bu hesabı tek adımda yapmak için 1'den küçük bir **çarpan katsayısı** kullanırız.",
-      "يو ارزښت **p%** کمول يعنې د هغه ارزښت p% ترې کمول. د يو ګام حساب لپاره له 1 کوچنی **ضربي ضريب** کاروو."
+      "Problèmes mixtes de pourcentage",
+      "Mixed percentage problems",
+      "مسائل النسبة المئوية المختلطة",
+      "مسائل درصد ترکیبی",
+      "ቅልቁል ሚእታዊ ጸገማት",
+      "Змішані задачі на відсотки",
+      "Problemas mistos de percentagem",
+      "Xisaabaha boqolleyda ee isku dhafan",
+      "Karışık yüzde problemleri",
+      "د سلنې ګډې ستونزې"
     ) },
-    { text: S("Formule — Réduction", "Formula — Decrease", "الصيغة — التخفيض", "فرمول — کاهش", "ቀመር — ምጉዳል", "Формула — зменшення", "Fórmula — redução", "Qaaciddo — hoos u dhigis", "Formül — düşüş", "فورمول — کمول"),
-      items: A(
-        ["Nouvelle valeur = valeur initiale × (1 − p/100)", "Exemple : −30% sur 200 → 200 × 0,70 = 140"],
-        ["New value = initial value × (1 − p/100)", "Example: −30% on 200 → 200 × 0.70 = 140"],
-        ["القيمة الجديدة = القيمة الأصلية × (1 − p/100)", "مثال: −30% على 200 → 200 × 0,70 = 140"],
-        ["مقدار جدید = مقدار اولیه × (1 − p/100)", "مثال: −30% روی 200 → 200 × 0,70 = 140"],
-        ["ሓድሽ ዋጋ = መጀመርታ ዋጋ × (1 − p/100)", "ኣብነት፦ −30% ኣብ 200 → 200 × 0,70 = 140"],
-        ["Нове значення = початкове значення × (1 − p/100)", "Приклад: −30% від 200 → 200 × 0,70 = 140"],
-        ["Novo valor = valor inicial × (1 − p/100)", "Exemplo: −30% sobre 200 → 200 × 0,70 = 140"],
-        ["Qiimaha cusub = qiimaha hore × (1 − p/100)", "Tusaale: −30% oo 200 ah → 200 × 0,70 = 140"],
-        ["Yeni değer = başlangıç değeri × (1 − p/100)", "Örnek: 200 üzerine −30% → 200 × 0,70 = 140"],
-        ["نوی ارزښت = پيلنی ارزښت × (1 − p/100)", "بېلګه: پر 200 باندې −30% → 200 × 0,70 = 140"]
-      )
-    },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
-    { text: S("Le coefficient multiplicateur", "The multiplying coefficient", "معامل الضرب", "ضریب ضربی", "መባዝሒ ኮፊሸንት", "Множний коефіцієнт", "O coeficiente multiplicador", "Isku-dhuftaha", "Çarpan katsayısı", "ضربي ضريب") },
-    { label: S("Comment trouver le coefficient", "How to find the coefficient", "كيف نجد المعامل", "چگونه ضریب را پیدا کنیم", "ኮፊሸንት ከመይ ንረኽቦ", "Як знайти коефіцієнт", "Como encontrar o coeficiente", "Sida loo helo isku-dhuftaha", "Katsayı nasıl bulunur", "ضريب څنګه موندل کېږي"),
-      items: A(
-        ["Pour une réduction de **p%** : coefficient = 1 − p/100", "Réduction de 20% → 1 − 0,20 = **0,80**", "Réduction de 30% → 1 − 0,30 = **0,70**", "Réduction de 10% → 1 − 0,10 = **0,90**"],
-        ["For a decrease of **p%**: coefficient = 1 − p/100", "Decrease of 20% → 1 − 0.20 = **0.80**", "Decrease of 30% → 1 − 0.30 = **0.70**", "Decrease of 10% → 1 − 0.10 = **0.90**"],
-        ["لتخفيض قدره **p%**: المعامل = 1 − p/100", "تخفيض 20% → 1 − 0,20 = **0,80**", "تخفيض 30% → 1 − 0,30 = **0,70**", "تخفيض 10% → 1 − 0,10 = **0,90**"],
-        ["برای کاهش **p%**: ضریب = 1 − p/100", "کاهش 20% → 1 − 0,20 = **0,80**", "کاهش 30% → 1 − 0,30 = **0,70**", "کاهش 10% → 1 − 0,10 = **0,90**"],
-        ["ንምጉዳል **p%**፦ ኮፊሸንት = 1 − p/100", "ምጉዳል 20% → 1 − 0,20 = **0,80**", "ምጉዳል 30% → 1 − 0,30 = **0,70**", "ምጉዳል 10% → 1 − 0,10 = **0,90**"],
-        ["Для зменшення на **p%**: коефіцієнт = 1 − p/100", "Зменшення на 20% → 1 − 0,20 = **0,80**", "Зменшення на 30% → 1 − 0,30 = **0,70**", "Зменшення на 10% → 1 − 0,10 = **0,90**"],
-        ["Para uma redução de **p%**: coeficiente = 1 − p/100", "Redução de 20% → 1 − 0,20 = **0,80**", "Redução de 30% → 1 − 0,30 = **0,70**", "Redução de 10% → 1 − 0,10 = **0,90**"],
-        ["Hoos u dhigis **p%** ah: isku-dhuftaha = 1 − p/100", "Hoos u dhigis 20% → 1 − 0,20 = **0,80**", "Hoos u dhigis 30% → 1 − 0,30 = **0,70**", "Hoos u dhigis 10% → 1 − 0,10 = **0,90**"],
-        ["**p%** düşüş için: katsayı = 1 − p/100", "20% düşüş → 1 − 0,20 = **0,80**", "30% düşüş → 1 − 0,30 = **0,70**", "10% düşüş → 1 − 0,10 = **0,90**"],
-        ["د **p%** کمولو لپاره: ضريب = 1 − p/100", "20% کمول → 1 − 0,20 = **0,80**", "30% کمول → 1 − 0,30 = **0,70**", "10% کمول → 1 − 0,10 = **0,90**"]
-      )
-    },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
-    { text: S("Exemples de calcul", "Calculation examples", "أمثلة حسابية", "مثال‌های محاسبه", "ኣብነታት ሕሳብ", "Приклади обчислень", "Exemplos de cálculo", "Tusaalooyin xisaab", "Hesap örnekleri", "د حساب بېلګې") },
-    { text: S("−30% sur 200 → 200 × 0,70 = 140", "−30% on 200 → 200 × 0.70 = 140", "−30% على 200 → 200 × 0,70 = 140", "−30% روی 200 → 200 × 0,70 = 140", "−30% ኣብ 200 → 200 × 0,70 = 140", "−30% від 200 → 200 × 0,70 = 140", "−30% sobre 200 → 200 × 0,70 = 140", "−30% oo 200 ah → 200 × 0,70 = 140", "200 üzerine −30% → 200 × 0,70 = 140", "پر 200 باندې −30% → 200 × 0,70 = 140") },
-    { text: S("−20% sur 200 → 200 × 0,80 = 160", "−20% on 200 → 200 × 0.80 = 160", "−20% على 200 → 200 × 0,80 = 160", "−20% روی 200 → 200 × 0,80 = 160", "−20% ኣብ 200 → 200 × 0,80 = 160", "−20% від 200 → 200 × 0,80 = 160", "−20% sobre 200 → 200 × 0,80 = 160", "−20% oo 200 ah → 200 × 0,80 = 160", "200 üzerine −20% → 200 × 0,80 = 160", "پر 200 باندې −20% → 200 × 0,80 = 160") },
-    { text: S("−25% sur 80 → 80 × 0,75 = 60", "−25% on 80 → 80 × 0.75 = 60", "−25% على 80 → 80 × 0,75 = 60", "−25% روی 80 → 80 × 0,75 = 60", "−25% ኣብ 80 → 80 × 0,75 = 60", "−25% від 80 → 80 × 0,75 = 60", "−25% sobre 80 → 80 × 0,75 = 60", "−25% oo 80 ah → 80 × 0,75 = 60", "80 üzerine −25% → 80 × 0,75 = 60", "پر 80 باندې −25% → 80 × 0,75 = 60") },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
+    // 1 — plain intro paragraph
+    { text: S(
+      "Dans la vie quotidienne, les problèmes de pourcentage combinent souvent plusieurs opérations : calculer un pourcentage, exprimer une partie en %, appliquer une augmentation ou une réduction. Il faut identifier quelle opération utiliser.",
+      "In everyday life, percentage problems often combine several operations: calculating a percentage, expressing a part as %, applying an increase or a decrease. You need to identify which operation to use.",
+      "في الحياة اليومية، تجمع مسائل النسبة المئوية في الغالب عدة عمليات: حساب نسبة مئوية، التعبير عن جزء بالنسبة المئوية، تطبيق زيادة أو تخفيض. يجب تحديد أي عملية تُستخدم.",
+      "در زندگی روزمره، مسائل درصد اغلب چندین عملیات را ترکیب می‌کنند: محاسبه درصد، بیان بخشی به %, اعمال افزایش یا کاهش. باید مشخص کنی از کدام عملیات استفاده کنی.",
+      "ኣብ ዕለታዊ ህይወት፣ ጸገማት ሚእታዊ ብዙሕ ግዜ ብዙሕ ስራሕ ይሓቅፉ፦ ሚእታዊ ምሕሳብ፣ ክፋል ብ % ምዕዛዝ፣ ምውሳኽ ወይ ምጉዳል ምጥቃም። ምኻን ናይ ኮፐሬሽን ምትንታን ኣድለዪ እዩ።",
+      "У повсякденному житті задачі на відсотки часто поєднують кілька дій: обчислення відсотка, вираження частини у %, застосування збільшення або зменшення. Треба визначити, яку дію використовувати.",
+      "Na vida quotidiana, os problemas de percentagem combinam frequentemente várias operações: calcular uma percentagem, exprimir uma parte em %, aplicar um aumento ou uma redução. É preciso identificar qual operação utilizar.",
+      "Nolosha maalinlaha ah, xisaabaha boqolleyda badanaa way isku daraan hawlo badan: xisaabinta boqolley, muujinta qayb ahaan %, ku dabaqida kordhin ama hoos u dhigis. Waa in la qeexaa hawsha la isticmaali doono.",
+      "Günlük hayatta yüzde problemleri genellikle birkaç işlemi birleştirir: yüzde hesaplama, bir parçayı % olarak ifade etme, artış veya azalış uygulama. Hangi işlemin kullanılacağını belirlemeniz gerekir.",
+      "د ورځني ژوند مسائلو کې د سلنې ستونزې اکثراً ډېرې عملیات سره يوځای کوي: د سلنې محاسبه، يوه برخه د % بڼه کول، زياتوالی يا کمول. بايد وپوهې چې کومه عمليه وکاروو."
+    ) },
+    // 2 — plain "" spacer
+    {},
+    // 3 — heading "Les 4 types de problèmes"
+    { text: S(
+      "Les 4 types de problèmes",
+      "The 4 types of problems",
+      "أنواع المسائل الأربعة",
+      "۴ نوع مسئله",
+      "4 ዓይነት ጸገማት",
+      "4 типи задач",
+      "Os 4 tipos de problemas",
+      "Noocyada 4 ee xisaabaha",
+      "4 problem türü",
+      "د ستونزو ۴ ډولونه"
+    ) },
+    // 4 — table headers ["Type de problème","Formule","Exemple"] with rows
     { headers: A(
-      ["Réduction", "Coefficient", "Exemple (base 200)"],
-      ["Decrease", "Coefficient", "Example (base 200)"],
-      ["التخفيض", "المعامل", "مثال (أساس 200)"],
-      ["کاهش", "ضریب", "مثال (مبنای 200)"],
-      ["ምጉዳል", "ኮፊሸንት", "ኣብነት (መሰረት 200)"],
-      ["Зменшення", "Коефіцієнт", "Приклад (база 200)"],
-      ["Redução", "Coeficiente", "Exemplo (base 200)"],
-      ["Hoos u dhigis", "Isku-dhufte", "Tusaale (saldhig 200)"],
-      ["Düşüş", "Katsayı", "Örnek (taban 200)"],
-      ["کمول", "ضريب", "بېلګه (بنسټ 200)"]
+      ["Type de problème", "Formule", "Exemple"],
+      ["Problem type", "Formula", "Example"],
+      ["نوع المسألة", "الصيغة", "مثال"],
+      ["نوع مسئله", "فرمول", "مثال"],
+      ["ዓይነት ጸገም", "ቀመር", "ኣብነት"],
+      ["Тип задачі", "Формула", "Приклад"],
+      ["Tipo de problema", "Fórmula", "Exemplo"],
+      ["Nooca xisaabta", "Qaaciddo", "Tusaale"],
+      ["Problem türü", "Formül", "Örnek"],
+      ["د ستونزې ډول", "فورمول", "بېلګه"]
+    ), items: A(
+      ["Calculer p% d'une quantité | N × p ÷ 100 | 20% de 150 = 30", "Exprimer une partie en % | (partie ÷ total) × 100 | 30 sur 120 = 25%", "Augmenter de p% | N × (1 + p/100) | +15% sur 200 = 230", "Réduire de p% | N × (1 − p/100) | −20% sur 200 = 160"],
+      ["Calculate p% of a quantity | N × p ÷ 100 | 20% of 150 = 30", "Express a part as % | (part ÷ total) × 100 | 30 out of 120 = 25%", "Increase by p% | N × (1 + p/100) | +15% on 200 = 230", "Decrease by p% | N × (1 − p/100) | −20% on 200 = 160"],
+      ["حساب p% من كمية | N × p ÷ 100 | 20% من 150 = 30", "تعبير عن جزء بالنسبة | (جزء ÷ مجموع) × 100 | 30 من 120 = 25%", "زيادة p% | N × (1 + p/100) | +15% من 200 = 230", "تخفيض p% | N × (1 − p/100) | −20% من 200 = 160"],
+      ["محاسبه p% از مقدار | N × p ÷ 100 | 20% از 150 = 30", "بیان بخش به % | (بخش ÷ کل) × 100 | 30 از 120 = 25%", "افزایش p% | N × (1 + p/100) | +15% روی 200 = 230", "کاهش p% | N × (1 − p/100) | −20% روی 200 = 160"],
+      ["p% ናይ መጠን ምሕሳብ | N × p ÷ 100 | 20% ናይ 150 = 30", "ክፋል ብ % ምዕዛዝ | (ክፋል ÷ ድምር) × 100 | 30 ካብ 120 = 25%", "ብ p% ምውሳኽ | N × (1 + p/100) | +15% ኣብ 200 = 230", "ብ p% ምጉዳል | N × (1 − p/100) | −20% ኣብ 200 = 160"],
+      ["Обчислити p% від величини | N × p ÷ 100 | 20% від 150 = 30", "Виразити частину у % | (частина ÷ ціле) × 100 | 30 із 120 = 25%", "Збільшити на p% | N × (1 + p/100) | +15% від 200 = 230", "Зменшити на p% | N × (1 − p/100) | −20% від 200 = 160"],
+      ["Calcular p% de uma quantidade | N × p ÷ 100 | 20% de 150 = 30", "Exprimir parte em % | (parte ÷ total) × 100 | 30 em 120 = 25%", "Aumentar p% | N × (1 + p/100) | +15% sobre 200 = 230", "Reduzir p% | N × (1 − p/100) | −20% sobre 200 = 160"],
+      ["Xisaabi p% qaddar | N × p ÷ 100 | 20% oo 150 ah = 30", "Muuji qayb % | (qayb ÷ guud) × 100 | 30 oo 120 ah = 25%", "Kor u qaad p% | N × (1 + p/100) | +15% oo 200 ah = 230", "Hoos u dhig p% | N × (1 − p/100) | −20% oo 200 ah = 160"],
+      ["Bir miktarın p%'sini hesapla | N × p ÷ 100 | 150'nin 20%'si = 30", "Parçayı % olarak ifade et | (parça ÷ toplam) × 100 | 120 içinden 30 = 25%", "p% artır | N × (1 + p/100) | 200 üzerine +15% = 230", "p% azalt | N × (1 − p/100) | 200 üzerine −20% = 160"],
+      ["د مقدار p% محاسبه | N × p ÷ 100 | د 150، 20% = 30", "برخه د % بڼه کول | (برخه ÷ ټول) × 100 | 120 کې 30 = 25%", "د p% زياتوالی | N × (1 + p/100) | پر 200 +15% = 230", "د p% کمول | N × (1 − p/100) | پر 200 −20% = 160"]
     ) },
-    { text: S("", "", "", "", "", "", "", "", "", "") },
-    { text: S("Augmentation vs Réduction", "Increase vs Decrease", "الزيادة مقابل التخفيض", "افزایش در مقابل کاهش", "ምውሳኽ ምስ ምጉዳል", "Збільшення та зменшення", "Aumento vs Redução", "Kordhin vs hoos u dhigis", "Artış - Düşüş", "زياتوالی vs کمول") },
-    { items: A(
-      ["Augmentation de p% → coefficient **supérieur à 1** (ex: 1,20 pour +20%)", "Réduction de p% → coefficient **inférieur à 1** (ex: 0,80 pour −20%)"],
-      ["Increase of p% → coefficient **greater than 1** (e.g. 1.20 for +20%)", "Decrease of p% → coefficient **less than 1** (e.g. 0.80 for −20%)"],
-      ["زيادة p% → معامل **أكبر من 1** (مثال: 1,20 لـ +20%)", "تخفيض p% → معامل **أقل من 1** (مثال: 0,80 لـ −20%)"],
-      ["افزایش p% → ضریب **بزرگ‌تر از 1** (مثلاً 1,20 برای +20%)", "کاهش p% → ضریب **کمتر از 1** (مثلاً 0,80 برای −20%)"],
-      ["ምውሳኽ p% → ኮፊሸንት **ካብ 1 ዝዓቢ** (ኣብ +20% = 1,20)", "ምጉዳል p% → ኮፊሸንት **ካብ 1 ዝንኪ** (ኣብ −20% = 0,80)"],
-      ["Збільшення на p% → коефіцієнт **більший за 1** (напр. 1,20 для +20%)", "Зменшення на p% → коефіцієнт **менший за 1** (напр. 0,80 для −20%)"],
-      ["Aumento de p% → coeficiente **superior a 1** (ex: 1,20 para +20%)", "Redução de p% → coeficiente **inferior a 1** (ex: 0,80 para −20%)"],
-      ["Kordhin p% → isku-dhufte **ka weyn 1** (tusaale: 1,20 +20% ah)", "Hoos u dhigis p% → isku-dhufte **ka yar 1** (tusaale: 0,80 −20% ah)"],
-      ["p% artış → katsayı **1'den büyük** (örn. +20% için 1,20)", "p% düşüş → katsayı **1'den küçük** (örn. −20% için 0,80)"],
-      ["p% زياتوالی → ضريب **له 1 لوی** (د مثال +20% = 1,20)", "p% کمول → ضريب **له 1 کوچنی** (د مثال −20% = 0,80)"]
-    ) },
+    // 5 — plain "" spacer
+    {},
+    // 6 — heading "Problème combiné : étapes à suivre"
     { text: S(
-      "Une réduction de 20% puis une augmentation de 20% ne redonne PAS la valeur initiale. Exemple : 100 − 20% = 80 ; 80 + 20% = 96 ≠ 100.",
-      "A 20% decrease followed by a 20% increase does NOT give back the initial value. Example: 100 − 20% = 80; 80 + 20% = 96 ≠ 100.",
-      "تخفيض 20% ثم زيادة 20% لا تُعيد القيمة الأصلية. مثال: 100 − 20% = 80 ؛ 80 + 20% = 96 ≠ 100.",
-      "یک کاهش 20% و سپس یک افزایش 20% مقدار اولیه را بازنمی‌گرداند. مثال: 100 − 20% = 80؛ 80 + 20% = 96 ≠ 100.",
-      "ምጉዳል 20% ድሕሪ ምውሳኽ 20% ናብ መጀመርታ ዋጋ ኣይምለስን። ኣብነት፦ 100 − 20% = 80 ፤ 80 + 20% = 96 ≠ 100።",
-      "Зменшення на 20%, а потім збільшення на 20% НЕ повертає початкове значення. Приклад: 100 − 20% = 80; 80 + 20% = 96 ≠ 100.",
-      "Uma redução de 20% seguida de um aumento de 20% NÃO devolve o valor inicial. Exemplo: 100 − 20% = 80; 80 + 20% = 96 ≠ 100.",
-      "Hoos u dhigis 20% ka dib kordhin 20% KUMA soo celin qiimihii hore. Tusaale: 100 − 20% = 80; 80 + 20% = 96 ≠ 100.",
-      "20% düşüş ardından 20% artış başlangıç değerini GERİ VERMİYOR. Örnek: 100 − 20% = 80; 80 + 20% = 96 ≠ 100.",
-      "20% کمول او بيا 20% زياتوالی پيلنی ارزښت نه راګرزوي. بېلګه: 100 − 20% = 80; 80 + 20% = 96 ≠ 100."
+      "Problème combiné : étapes à suivre",
+      "Combined problem: steps to follow",
+      "المسألة المركبة: خطوات الحل",
+      "مسئله ترکیبی: مراحل پیروی",
+      "ዝተሓዋወሰ ጸገም፦ ምርቃታት ምኽታል",
+      "Комбінована задача: кроки для виконання",
+      "Problema combinado: passos a seguir",
+      "Xisaab isku dhafan: tallaabooyin la raaco",
+      "Birleşik problem: izlenecek adımlar",
+      "ګډه ستونزه: د تعقيب ګامونه"
+    ) },
+    // 7 — section label "Méthode générale" with 4 items
+    { label: S(
+      "Méthode générale",
+      "General method",
+      "الطريقة العامة",
+      "روش کلی",
+      "ሓፈሻዊ ሜላ",
+      "Загальний метод",
+      "Método geral",
+      "Habka guud",
+      "Genel yöntem",
+      "عمومي طريقه"
+    ), items: A(
+      ["**1.** Lire attentivement l'énoncé et identifier ce qu'on cherche", "**2.** Choisir la bonne formule (calcul, expression, augmentation ou réduction)", "**3.** Effectuer le calcul", "**4.** Vérifier que la réponse est cohérente (unité, ordre de grandeur)"],
+      ["**1.** Read the problem carefully and identify what is being asked", "**2.** Choose the right formula (calculation, expression, increase or decrease)", "**3.** Perform the calculation", "**4.** Check that the answer is consistent (unit, order of magnitude)"],
+      ["**1.** اقرأ المسألة بعناية وحدّد ما نبحث عنه", "**2.** اختر الصيغة المناسبة (حساب، تعبير، زيادة أو تخفيض)", "**3.** أجرِ الحساب", "**4.** تحقق من أن الإجابة منطقية (الوحدة، الحجم)"],
+      ["**1.** مسئله را با دقت بخوان و شناسایی کن چه می‌خواهیم", "**2.** فرمول مناسب را انتخاب کن (محاسبه، بیان، افزایش یا کاهش)", "**3.** محاسبه را انجام بده", "**4.** بررسی کن که پاسخ منطقی باشد (واحد، مقیاس)"],
+      ["**1.** ኣዋጁ ብጥንቃቐ ኣንብብ፡ እንታይ ከም ንደሊ ፍለጥ", "**2.** ቅኑዕ ቀመር ምረጽ (ሕሳብ፣ ዕዛዝ፣ ምውሳኽ ወይ ምጉዳል)", "**3.** ሕሳብ ፈጽም", "**4.** መልሲ ቅኑዕ ምዃኑ ኣረጋግጽ (ዩኒት፣ ደረጃ)"],
+      ["**1.** Уважно прочитати умову та визначити, що шукаємо", "**2.** Обрати правильну формулу (обчислення, вираження, збільшення або зменшення)", "**3.** Виконати обчислення", "**4.** Перевірити, чи відповідь логічна (одиниця, порядок величини)"],
+      ["**1.** Ler o enunciado com atenção e identificar o que se procura", "**2.** Escolher a fórmula certa (cálculo, expressão, aumento ou redução)", "**3.** Realizar o cálculo", "**4.** Verificar se a resposta é coerente (unidade, ordem de grandeza)"],
+      ["**1.** Akhri su'aasha si taxadar leh, ogow waxa la raadinayo", "**2.** Dooro qaaciddada saxda ah (xisaab, muujin, kordhin ama hoos u dhigis)", "**3.** Samee xisaabta", "**4.** Hubi in jawaabtu ay macquul tahay (unug, cabbirka)"],
+      ["**1.** Problemi dikkatlice oku ve ne arandığını belirle", "**2.** Doğru formülü seç (hesaplama, ifade, artış veya azalış)", "**3.** Hesabı yap", "**4.** Yanıtın tutarlı olduğunu kontrol et (birim, büyüklük sırası)"],
+      ["**1.** ستونزه د پام سره ولوله او وپوه چه له دې لټوو", "**2.** سم فورمول غوره کړه (محاسبه، بيان، زياتوالی يا کمول)", "**3.** محاسبه ترسره کړه", "**4.** وګوره چه ځواب سم دی (واحد، اندازه)"]
+    ) },
+    // 8 — plain "" spacer
+    {},
+    // 9 — section with example calculations
+    { items: A(
+      ["Article à 80 CHF soldé −25%, puis −10% supplémentaires :", "1er solde : 80 × 0,75 = 60 CHF", "Solde final : 60 × 0,90 = 54 CHF"],
+      ["Item at 80 CHF discounted −25%, then an extra −10%:", "1st discount: 80 × 0.75 = 60 CHF", "Final price: 60 × 0.90 = 54 CHF"],
+      ["سلعة بـ 80 CHF مخفضة −25%، ثم −10% إضافية:", "التخفيض الأول: 80 × 0,75 = 60 CHF", "السعر النهائي: 60 × 0,90 = 54 CHF"],
+      ["کالای 80 CHF با تخفیف −25%، سپس −10% اضافی:", "تخفیف اول: 80 × 0,75 = 60 CHF", "قیمت نهایی: 60 × 0,90 = 54 CHF"],
+      ["ኣቕሓ 80 CHF ብ−25% ቅናሽ፣ ድሕሪኡ ዝወሰኸ −10%፦", "1ይ ቅናሽ፦ 80 × 0,75 = 60 CHF", "መወዳእታ ዋጋ፦ 60 × 0,90 = 54 CHF"],
+      ["Товар за 80 CHF зі знижкою −25%, потім ще −10%:", "1-а знижка: 80 × 0,75 = 60 CHF", "Фінальна ціна: 60 × 0,90 = 54 CHF"],
+      ["Artigo de 80 CHF com desconto −25%, depois −10% adicionais:", "1.º desconto: 80 × 0,75 = 60 CHF", "Preço final: 60 × 0,90 = 54 CHF"],
+      ["Shay 80 CHF ah oo qiimihiisi hoos u dhigay −25%, ka dib −10% dheeraad ah:", "Qiimo-dhimis 1aad: 80 × 0,75 = 60 CHF", "Qiimaha ugu dambeeyay: 60 × 0,90 = 54 CHF"],
+      ["80 CHF'lik ürün −25% indirimli, sonra ek −10%:", "1. indirim: 80 × 0,75 = 60 CHF", "Son fiyat: 60 × 0,90 = 54 CHF"],
+      ["د 80 CHF توکی −25% تخفیف، بيا اضافي −10%:", "1مه تخفیف: 80 × 0,75 = 60 CHF", "وروستی قيمت: 60 × 0,90 = 54 CHF"]
+    ) },
+    // 10 — plain "" spacer
+    {},
+    // 11 — note
+    { text: S(
+      "Deux réductions successives de 20% et 10% donnent : 1 × 0,80 × 0,90 = 0,72, soit une réduction totale de 28%, et non 30%.",
+      "Two successive discounts of 20% and 10% give: 1 × 0.80 × 0.90 = 0.72, a total reduction of 28%, not 30%.",
+      "تخفيضان متتاليان بنسبة 20% و10% يعطيان: 1 × 0,80 × 0,90 = 0,72، أي تخفيضاً إجمالياً قدره 28% وليس 30%.",
+      "دو تخفیف متوالی 20% و 10% می‌دهند: 1 × 0,80 × 0,90 = 0,72، یعنی کاهش کل 28%، نه 30%.",
+      "ክልተ ዝተኸተሉ ቅናሽ 20% ን 10% ን ይህብ፦ 1 × 0,80 × 0,90 = 0,72፣ ክቡር ቅናሽ 28% ደኣ 30% ኣይኮነን።",
+      "Два послідовні знижки 20% і 10% дають: 1 × 0,80 × 0,90 = 0,72, тобто загальне зменшення 28%, а не 30%.",
+      "Dois descontos sucessivos de 20% e 10% dão: 1 × 0,80 × 0,90 = 0,72, ou seja, uma redução total de 28%, não 30%.",
+      "Laba qiimo-dhimis oo xigxiga ah oo 20% iyo 10% ah waxay bixiyaan: 1 × 0,80 × 0,90 = 0,72, taasi waa hoos u dhigis guud ah 28%, maahan 30%.",
+      "Arka arkaya iki indirim %20 ve %10 verir: 1 × 0,80 × 0,90 = 0,72, yani toplam %28 indirim, %30 değil.",
+      "دوه سلسله‌وار تخفیفونه 20% او 10% ورکوي: 1 × 0,80 × 0,90 = 0,72، يعنې ټول کمول 28% دی، 30% نه."
     ) },
   ],
   consignes: {
