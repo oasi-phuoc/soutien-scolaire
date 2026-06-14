@@ -53,13 +53,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a noun with an article", ar: "قبل اسم مع مقال", fa: "قبل از اسم با حرف تعریف", ti: "ቅድሚ ስም ምስ ናይ ዓንቀጽ", uk: "Перед іменником з артиклем" },
-      transItems: {
-        en: ["C'est {a}un{/a} professeur. (This is a teacher.)", "C'est {a}la{/a} pharmacie. (This is the pharmacy.)"],
-        ar: ["C'est {a}un{/a} professeur. (هذا أستاذ.)", "C'est {a}la{/a} pharmacie. (هذه الصيدلية.)"],
-        fa: ["C'est {a}un{/a} professeur. (این یک معلم است.)", "C'est {a}la{/a} pharmacie. (این داروخانه است.)"],
-        ti: ["C'est {a}un{/a} professeur. (ምምህር እዩ።)", "C'est {a}la{/a} pharmacie. (ፋርማሲ እያ።)"],
-        uk: ["C'est {a}un{/a} professeur. (Це вчитель.)", "C'est {a}la{/a} pharmacie. (Це аптека.)"],
-      },
     },
 
     {
@@ -71,13 +64,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a first name or proper noun", ar: "قبل اسم شخص أو اسم علم", fa: "قبل از اسم کوچک یا اسم خاص", ti: "ቅድሚ ስም ሰብ ወይ ናይ ኣቦ ስም", uk: "Перед іменем або власною назвою" },
-      transItems: {
-        en: ["C'est {a}Alona{/a}. (This is Alona.)", "C'est {a}M. Mohammed Safi{/a}. (This is Mr. Mohammed Safi.)"],
-        ar: ["C'est {a}Alona{/a}. (هذه ألونا.)", "C'est {a}M. Mohammed Safi{/a}. (هذا السيد محمد صافي.)"],
-        fa: ["C'est {a}Alona{/a}. (این آلونا است.)", "C'est {a}M. Mohammed Safi{/a}. (این آقای محمد صافی است.)"],
-        ti: ["C'est {a}Alona{/a}. (ኣሎና እያ።)", "C'est {a}M. Mohammed Safi{/a}. (ሚስተር መሓመድ ሳፊ እዩ።)"],
-        uk: ["C'est {a}Alona{/a}. (Це Алона.)", "C'est {a}M. Mohammed Safi{/a}. (Це пан Мохаммед Сафі.)"],
-      },
     },
 
     {
@@ -89,13 +75,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a pronoun", ar: "قبل ضمير", fa: "قبل از ضمیر", ti: "ቅድሚ ተካኢ ስም", uk: "Перед займенником" },
-      transItems: {
-        en: ["C'est {a}moi{/a}. (It's me.)", "C'est {a}elle{/a}. (It's her.)"],
-        ar: ["C'est {a}moi{/a}. (أنا.)", "C'est {a}elle{/a}. (إنها هي.)"],
-        fa: ["C'est {a}moi{/a}. (این منم.)", "C'est {a}elle{/a}. (این اوست.)"],
-        ti: ["C'est {a}moi{/a}. (ኣነ እየ።)", "C'est {a}elle{/a}. (ንሳ እያ።)"],
-        uk: ["C'est {a}moi{/a}. (Це я.)", "C'est {a}elle{/a}. (Це вона.)"],
-      },
     },
 
     {
@@ -107,13 +86,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "To give a date or time", ar: "لإعطاء تاريخ أو وقت", fa: "برای دادن تاریخ یا ساعت", ti: "ዕለት ወይ ሰዓት ንምሃብ", uk: "Для зазначення дати або часу" },
-      transItems: {
-        en: ["C'est {a}le 15 mars{/a}. (It's March 15th.)", "C'est {a}trois heures{/a}. (It's three o'clock.)"],
-        ar: ["C'est {a}le 15 mars{/a}. (إنه الخامس عشر من مارس.)", "C'est {a}trois heures{/a}. (الساعة الثالثة.)"],
-        fa: ["C'est {a}le 15 mars{/a}. (پانزدهم مارس است.)", "C'est {a}trois heures{/a}. (ساعت سه است.)"],
-        ti: ["C'est {a}le 15 mars{/a}. (15 መጋቢት እዩ།)", "C'est {a}trois heures{/a}. (ሰዓት ሰለስተ እዩ།)"],
-        uk: ["C'est {a}le 15 mars{/a}. (Сьогодні 15 березня.)", "C'est {a}trois heures{/a}. (Зараз три години.)"],
-      },
     },
 
     // ── IL EST ────────────────────────────────────────────────────────────────
@@ -148,13 +120,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before an adjective", ar: "قبل صفة", fa: "قبل از صفت", ti: "ቅድሚ ቅጽል", uk: "Перед прикметником" },
-      transItems: {
-        en: ["Il est {a}grand{/a}. (He is tall.)", "Il est {a}malade{/a}. (He is sick.)"],
-        ar: ["Il est {a}grand{/a}. (هو طويل.)", "Il est {a}malade{/a}. (هو مريض.)"],
-        fa: ["Il est {a}grand{/a}. (او بلند است.)", "Il est {a}malade{/a}. (او مریض است.)"],
-        ti: ["Il est {a}grand{/a}. (ነዊሕ እዩ།)", "Il est {a}malade{/a}. (ሕሙም እዩ།)"],
-        uk: ["Il est {a}grand{/a}. (Він високий.)", "Il est {a}malade{/a}. (Він хворий.)"],
-      },
     },
 
     {
@@ -166,13 +131,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a profession (no article)", ar: "قبل مهنة (بدون مقال)", fa: "قبل از شغل (بدون حرف تعریف)", ti: "ቅድሚ ስራሕ (ብዘይ ናይ ዓንቀጽ)", uk: "Перед назвою професії (без артикля)" },
-      transItems: {
-        en: ["Il est {a}professeur{/a}. (He is a teacher.)", "Elle est {a}infirmière{/a}. (She is a nurse.)"],
-        ar: ["Il est {a}professeur{/a}. (هو أستاذ.)", "Elle est {a}infirmière{/a}. (هي ممرضة.)"],
-        fa: ["Il est {a}professeur{/a}. (او معلم است.)", "Elle est {a}infirmière{/a}. (او پرستار است.)"],
-        ti: ["Il est {a}professeur{/a}. (ምምህር እዩ།)", "Elle est {a}infirmière{/a}. (ነርስ እያ།)"],
-        uk: ["Il est {a}professeur{/a}. (Він вчитель.)", "Elle est {a}infirmière{/a}. (Вона медсестра.)"],
-      },
     },
 
     {
@@ -184,13 +142,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a nationality", ar: "قبل جنسية", fa: "قبل از ملیت", ti: "ቅድሚ ዜግነት", uk: "Перед назвою національності" },
-      transItems: {
-        en: ["Il est {a}suisse{/a}. (He is Swiss.)", "Elle est {a}ukrainienne{/a}. (She is Ukrainian.)"],
-        ar: ["Il est {a}suisse{/a}. (هو سويسري.)", "Elle est {a}ukrainienne{/a}. (هي أوكرانية.)"],
-        fa: ["Il est {a}suisse{/a}. (او سوئیسی است.)", "Elle est {a}ukrainienne{/a}. (او اوکراینی است.)"],
-        ti: ["Il est {a}suisse{/a}. (ሽወደናዊ እዩ།)", "Elle est {a}ukrainienne{/a}. (ዩክሬናዊት እያ།)"],
-        uk: ["Il est {a}suisse{/a}. (Він швейцарець.)", "Elle est {a}ukrainienne{/a}. (Вона українка.)"],
-      },
     },
 
     {
@@ -202,13 +153,6 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
       noBulletItems: [0, 1],
       transLabel: { en: "Before a religion", ar: "قبل دين", fa: "قبل از دین", ti: "ቅድሚ ሃይማኖት", uk: "Перед назвою релігії" },
-      transItems: {
-        en: ["Il est {a}musulman{/a}. (He is Muslim.)", "Il est {a}bouddhiste{/a}. (He is Buddhist.)"],
-        ar: ["Il est {a}musulman{/a}. (هو مسلم.)", "Il est {a}bouddhiste{/a}. (هو بوذي.)"],
-        fa: ["Il est {a}musulman{/a}. (او مسلمان است.)", "Il est {a}bouddhiste{/a}. (او بودایی است.)"],
-        ti: ["Il est {a}musulman{/a}. (ሙስሊም እዩ།)", "Il est {a}bouddhiste{/a}. (ቡዲስት እዩ།)"],
-        uk: ["Il est {a}musulman{/a}. (Він мусульманин.)", "Il est {a}bouddhiste{/a}. (Він буддист.)"],
-      },
     },
 
     // ── COMPARAISON ────────────────────────────────────────────────────────────
@@ -230,43 +174,6 @@ export const A1_GR_CEST: GrammarLesson = {
         ["C'est {a}mon{/a} frère.", "Il est {a}grand{/a}."],
         ["C'est {a}une{/a} voiture.", "Elle est {a}rapide{/a}."],
       ],
-      transRows: {
-        en: [
-          ["C'est {a}un{/a} professeur. (This is a teacher.)", "Il est {a}professeur{/a}. (He is a teacher.)"],
-          ["C'est {a}une{/a} infirmière. (This is a nurse.)", "Elle est {a}infirmière{/a}. (She is a nurse.)"],
-          ["C'est {a}Sophie{/a}. (This is Sophie.)", "Elle est {a}gentille{/a}. (She is kind.)"],
-          ["C'est {a}mon{/a} frère. (This is my brother.)", "Il est {a}grand{/a}. (He is tall.)"],
-          ["C'est {a}une{/a} voiture. (This is a car.)", "Elle est {a}rapide{/a}. (It is fast.)"],
-        ],
-        ar: [
-          ["C'est {a}un{/a} professeur. (هذا أستاذ.)", "Il est {a}professeur{/a}. (هو أستاذ.)"],
-          ["C'est {a}une{/a} infirmière. (هذه ممرضة.)", "Elle est {a}infirmière{/a}. (هي ممرضة.)"],
-          ["C'est {a}Sophie{/a}. (هذه سوفي.)", "Elle est {a}gentille{/a}. (هي لطيفة.)"],
-          ["C'est {a}mon{/a} frère. (هذا أخي.)", "Il est {a}grand{/a}. (هو طويل.)"],
-          ["C'est {a}une{/a} voiture. (هذه سيارة.)", "Elle est {a}rapide{/a}. (إنها سريعة.)"],
-        ],
-        fa: [
-          ["C'est {a}un{/a} professeur. (این یک معلم است.)", "Il est {a}professeur{/a}. (او معلم است.)"],
-          ["C'est {a}une{/a} infirmière. (این یک پرستار است.)", "Elle est {a}infirmière{/a}. (او پرستار است.)"],
-          ["C'est {a}Sophie{/a}. (این سوفی است.)", "Elle est {a}gentille{/a}. (او مهربان است.)"],
-          ["C'est {a}mon{/a} frère. (این برادر من است.)", "Il est {a}grand{/a}. (او بلند است.)"],
-          ["C'est {a}une{/a} voiture. (این یک ماشین است.)", "Elle est {a}rapide{/a}. (سریع است.)"],
-        ],
-        ti: [
-          ["C'est {a}un{/a} professeur. (ምምህር እዩ።)", "Il est {a}professeur{/a}. (ምምህር እዩ།)"],
-          ["C'est {a}une{/a} infirmière. (ነርስ እያ።)", "Elle est {a}infirmière{/a}. (ነርስ እያ།)"],
-          ["C'est {a}Sophie{/a}. (ሶፊ እያ።)", "Elle est {a}gentille{/a}. (ሕብቲ እያ།)"],
-          ["C'est {a}mon{/a} frère. (ሓወይ እዩ።)", "Il est {a}grand{/a}. (ነዊሕ እዩ།)"],
-          ["C'est {a}une{/a} voiture. (መኪና እያ።)", "Elle est {a}rapide{/a}. (ቅልጡፍ እያ།)"],
-        ],
-        uk: [
-          ["C'est {a}un{/a} professeur. (Це вчитель.)", "Il est {a}professeur{/a}. (Він вчитель.)"],
-          ["C'est {a}une{/a} infirmière. (Це медсестра.)", "Elle est {a}infirmière{/a}. (Вона медсестра.)"],
-          ["C'est {a}Sophie{/a}. (Це Соф'ї.)", "Elle est {a}gentille{/a}. (Вона добра.)"],
-          ["C'est {a}mon{/a} frère. (Це мій брат.)", "Il est {a}grand{/a}. (Він високий.)"],
-          ["C'est {a}une{/a} voiture. (Це машина.)", "Elle est {a}rapide{/a}. (Вона швидка.)"],
-        ],
-      },
     },
 
     // ── AVEC UN ADJECTIF ───────────────────────────────────────────────────────
@@ -300,13 +207,6 @@ export const A1_GR_CEST: GrammarLesson = {
         "C'est une grande {a}voiture{/a}.",
       ],
       noBulletItems: [0, 1],
-      transItems: {
-        en: ["C'est un homme {a}gentil{/a}. (He is a kind man.)", "C'est une grande {a}voiture{/a}. (It is a big car.)"],
-        ar: ["C'est un homme {a}gentil{/a}. (هو رجل لطيف.)", "C'est une grande {a}voiture{/a}. (إنها سيارة كبيرة.)"],
-        fa: ["C'est un homme {a}gentil{/a}. (او مردی مهربان است.)", "C'est une grande {a}voiture{/a}. (این یک ماشین بزرگ است.)"],
-        ti: ["C'est un homme {a}gentil{/a}. (ሕቡን ሰብኣይ እዩ།)", "C'est une grande {a}voiture{/a}. (ዓቢ መኪና እያ།)"],
-        uk: ["C'est un homme {a}gentil{/a}. (Він добрий чоловік.)", "C'est une grande {a}voiture{/a}. (Це великий автомобіль.)"],
-      },
     },
 
     // ── MÉTHODE RAPIDE ─────────────────────────────────────────────────────────
@@ -328,13 +228,6 @@ export const A1_GR_CEST: GrammarLesson = {
       noBulletItems: [0, 1, 2],
       inlineArrows: true,
       transLabel: { en: "Who is it? → C'est", ar: "من هذا/هذه؟ → C'est", fa: "این کیست؟ → C'est", ti: "መን እዩ/እያ? → C'est", uk: "Хто це? → C'est" },
-      transItems: {
-        en: ["Who is it? → C'est le médecin.", "Who is it? → C'est Ali.", "Who is it? → C'est un professeur."],
-        ar: ["من هذا؟ → C'est le médecin.", "من هذا؟ → C'est Ali.", "من هذا؟ → C'est un professeur."],
-        fa: ["این کیست؟ → C'est le médecin.", "این کیست؟ → C'est Ali.", "این کیست؟ → C'est un professeur."],
-        ti: ["መን እዩ? → C'est le médecin.", "መን እዩ? → C'est Ali.", "መን እዩ? → C'est un professeur."],
-        uk: ["Хто це? → C'est le médecin.", "Хто це? → C'est Ali.", "Хто це? → C'est un professeur."],
-      },
     },
 
     {
@@ -348,107 +241,181 @@ export const A1_GR_CEST: GrammarLesson = {
       noBulletItems: [0, 1, 2],
       inlineArrows: true,
       transLabel: { en: "What is he/she like? → Il est / Elle est", ar: "كيف هو/هي؟ → Il est / Elle est", fa: "او چطور است؟ → Il est / Elle est", ti: "ከመይ ኣሎ/ኣላ? → Il est / Elle est", uk: "Який він/яка вона? → Il est / Elle est" },
-      transItems: {
-        en: ["What is he like? → Il est gentil.", "What is she like? → Elle est médecin.", "What is he like? → Il est suisse."],
-        ar: ["كيف هو؟ → Il est gentil.", "كيف هي؟ → Elle est médecin.", "كيف هو؟ → Il est suisse."],
-        fa: ["او چطور است؟ → Il est gentil.", "او چطور است؟ → Elle est médecin.", "او چطور است؟ → Il est suisse."],
-        ti: ["ከመይ ኣሎ? → Il est gentil.", "ከመይ ኣላ? → Elle est médecin.", "ከመይ ኣሎ? → Il est suisse."],
-        uk: ["Який він? → Il est gentil.", "Яка вона? → Elle est médecin.", "Який він? → Il est suisse."],
-      },
     },
   ],
   exercises: [
+    // ── Exercice 1 — QCM ───────────────────────────────────────────────────────
     {
       type: "qcm",
       title: "Exercice 1",
-      instruction: "Choisissez C'est ou Il/Elle est.",
-      items: [
-        { sentence: "___ professeur de français.", choices: ["Il est", "C'est", "Elle est", "C'est un"], correctIdx: 0 },
-        { sentence: "___ un ami de Thomas.", choices: ["C'est", "Il est", "Elle est", "C'est un"], correctIdx: 0 },
-        { sentence: "___ intelligente et curieuse.", choices: ["Elle est", "C'est", "Il est", "C'est une"], correctIdx: 0 },
-        { sentence: "___ la maison de mes parents.", choices: ["C'est", "Il est", "Elle est", "C'est une"], correctIdx: 0 },
-        { sentence: "___ une bonne idée !", choices: ["C'est", "Il est", "Elle est", "C'est un"], correctIdx: 0 },
-        { sentence: "___ français et il parle bien anglais.", choices: ["Il est", "C'est", "C'est un", "Elle est"], correctIdx: 0 },
+      instruction: "Choisissez C'est ou Il / Elle est.",
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ professeur de français.",              choices: ["Il est",   "C'est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ un ami de Thomas.",                    choices: ["C'est",   "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ intelligente et curieuse.",            choices: ["Elle est", "C'est",  "Il est",   "C'est une"], correctIdx: 0 },
+        { sentence: "___ la maison de mes parents.",            choices: ["C'est",   "Il est",  "Elle est", "C'est la"],  correctIdx: 0 },
+        { sentence: "___ une bonne idée !",                    choices: ["C'est",   "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ français et il parle bien anglais.",  choices: ["Il est",   "C'est",  "C'est un", "Elle est"],  correctIdx: 0 },
+        { sentence: "___ médecin.",                            choices: ["Il est",   "C'est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ ma sœur.",                            choices: ["C'est",   "Il est",  "Elle est", "C'est une"], correctIdx: 0 },
+        { sentence: "___ grande et élégante.",                 choices: ["Elle est", "C'est",  "Il est",   "C'est une"], correctIdx: 0 },
+        { sentence: "___ le directeur de l'école.",            choices: ["C'est",   "Il est",  "Elle est", "C'est le"],  correctIdx: 0 },
+        { sentence: "___ un bon restaurant.",                  choices: ["C'est",   "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ architecte.",                         choices: ["Il est",   "C'est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ très sérieuse.",                      choices: ["Elle est", "C'est",  "Il est",   "C'est une"], correctIdx: 0 },
+        { sentence: "___ la pharmacie du quartier.",           choices: ["C'est",   "Il est",  "Elle est", "C'est la"],  correctIdx: 0 },
+        { sentence: "___ suisse.",                             choices: ["Il est",   "C'est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ infirmière.",                         choices: ["Elle est", "C'est",  "Il est",   "C'est une"], correctIdx: 0 },
+        { sentence: "___ fatigué ce soir.",                    choices: ["Il est",   "C'est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ mon voisin.",                         choices: ["C'est",   "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
+        { sentence: "___ ukrainienne.",                        choices: ["Elle est", "C'est",  "Il est",   "C'est une"], correctIdx: 0 },
+        { sentence: "___ un étudiant en médecine.",            choices: ["C'est",   "Il est",  "Elle est", "C'est un"],  correctIdx: 0 },
       ],
     },
+
+    // ── Exercice 2 — Fill ──────────────────────────────────────────────────────
     {
       type: "fill",
       title: "Exercice 2",
       instruction: "Complétez avec C'est, Il est ou Elle est.",
-      items: [
-        { sentence: "___ (C'est / Il est) mon frère. ___ (C'est / Il est) étudiant.", hint: "identifier puis décrire", answer: "c'est" },
-        { sentence: "Regarde cette voiture ! ___ (C'est / Elle est) belle.", hint: "décrire avec adjectif", answer: "elle est" },
-        { sentence: "___ (C'est / Il est) un très bon restaurant.", hint: "identifier avec article", answer: "c'est" },
-        { sentence: "Ma mère ? ___ (C'est / Elle est) médecin.", hint: "profession sans article", answer: "elle est" },
-        { sentence: "___ (C'est / Il est) le directeur de l'école.", hint: "identifier avec article défini", answer: "c'est" },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ mon frère. ___ étudiant.",                   hint: "identifier puis décrire",      answer: "c'est"   },
+        { sentence: "Regarde cette voiture ! ___ belle.",             hint: "décrire avec adjectif",        answer: "elle est" },
+        { sentence: "___ un très bon restaurant.",                    hint: "identifier avec article",      answer: "c'est"   },
+        { sentence: "Ma mère ? ___ médecin.",                        hint: "profession sans article",      answer: "elle est" },
+        { sentence: "___ le directeur de l'école.",                  hint: "identifier avec article défini", answer: "c'est" },
+        { sentence: "Tu connais Ali ? ___ mon cousin.",               hint: "identifier avec possessif",    answer: "c'est"   },
+        { sentence: "Mon professeur ? ___ très patient.",             hint: "décrire avec adjectif",        answer: "il est"  },
+        { sentence: "Sofia ? ___ ma meilleure amie.",                 hint: "identifier avec possessif",    answer: "c'est"   },
+        { sentence: "___ une bonne élève.",                           hint: "identifier avec article",      answer: "c'est"   },
+        { sentence: "Cette robe ? ___ magnifique.",                   hint: "décrire avec adjectif",        answer: "elle est" },
+        { sentence: "Paul ? ___ un artiste.",                         hint: "identifier avec article",      answer: "c'est"   },
+        { sentence: "___ très intelligente.",                         hint: "décrire avec adjectif",        answer: "elle est" },
+        { sentence: "Voici un cadeau. ___ pour toi.",                 hint: "identifier (neutre)",          answer: "c'est"   },
+        { sentence: "___ infirmière dans un grand hôpital.",          hint: "profession sans article",      answer: "elle est" },
+        { sentence: "___ le nouveau voisin.",                         hint: "identifier avec article défini", answer: "c'est" },
+        { sentence: "Ton ami Ahmed ? ___ très sympa.",                hint: "décrire avec adjectif",        answer: "il est"  },
+        { sentence: "___ une bonne nouvelle !",                       hint: "identifier avec article",      answer: "c'est"   },
+        { sentence: "Le parc ? ___ loin d'ici.",                      hint: "décrire une chose",            answer: "il est"  },
+        { sentence: "___ mon oncle. ___ chauffeur.",                  hint: "identifier puis profession",   answer: "c'est"   },
+        { sentence: "Cette fille ? ___ vraiment gentille.",           hint: "décrire avec adjectif",        answer: "elle est" },
       ],
     },
+
+    // ── Exercice 3 — Classify ──────────────────────────────────────────────────
     {
       type: "classify",
       title: "Exercice 3",
       instruction: "Classez chaque phrase : identification ou description.",
-      categories: ["Identification (C'est)", "Description (Il/Elle est)"],
-      items: [
-        { word: "C'est une étudiante en médecine.",   categoryIdx: 0 },
-        { word: "Il est très patient.",               categoryIdx: 1 },
-        { word: "C'est mon livre de grammaire.",      categoryIdx: 0 },
-        { word: "Elle est italienne.",                categoryIdx: 1 },
-        { word: "C'est le train pour Paris.",         categoryIdx: 0 },
-        { word: "Il est architecte.",                 categoryIdx: 1 },
+      categories: ["Identification (C'est)", "Description (Il / Elle est)"],
+      items: [],
+      poolSize: 5,
+      pool: [
+        { word: "C'est une étudiante en médecine.",  categoryIdx: 0 },
+        { word: "Il est très patient.",              categoryIdx: 1 },
+        { word: "C'est mon livre de grammaire.",     categoryIdx: 0 },
+        { word: "Elle est italienne.",               categoryIdx: 1 },
+        { word: "C'est le train pour Paris.",        categoryIdx: 0 },
+        { word: "Il est architecte.",                categoryIdx: 1 },
+        { word: "C'est une bonne idée !",            categoryIdx: 0 },
+        { word: "Elle est très intelligente.",       categoryIdx: 1 },
+        { word: "C'est mon voisin.",                 categoryIdx: 0 },
+        { word: "Il est fatigué.",                   categoryIdx: 1 },
+        { word: "C'est la tour Eiffel.",             categoryIdx: 0 },
+        { word: "Elle est médecin.",                 categoryIdx: 1 },
+        { word: "C'est un beau tableau.",            categoryIdx: 0 },
+        { word: "Il est suisse.",                    categoryIdx: 1 },
+        { word: "C'est ma sœur.",                    categoryIdx: 0 },
+        { word: "Elle est contente.",                categoryIdx: 1 },
+        { word: "C'est le directeur.",               categoryIdx: 0 },
+        { word: "Il est grand et sportif.",          categoryIdx: 1 },
+        { word: "C'est une belle journée !",         categoryIdx: 0 },
+        { word: "Elle est ukrainienne.",             categoryIdx: 1 },
       ],
     },
+
+    // ── Exercice 4 — Word order ────────────────────────────────────────────────
     {
       type: "word_order",
       title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre.",
       items: [
-        {
-          sentence: "C'est une bonne professeure.",
-          words: ["C'est", "une", "bonne", "professeure"],
-        },
-        {
-          sentence: "Il est grand et sportif.",
-          words: ["Il", "est", "grand", "et", "sportif"],
-        },
-        {
-          sentence: "C'est la voiture de mon père.",
-          words: ["C'est", "la", "voiture", "de", "mon", "père"],
-        },
+        { sentence: "C'est une bonne professeure.",             words: ["C'est",   "une",       "bonne",         "professeure"]         },
+        { sentence: "Il est grand et sportif.",                 words: ["Il",      "est",       "grand",         "et",      "sportif"] },
+        { sentence: "C'est la voiture de mon père.",            words: ["C'est",   "la",        "voiture",       "de",      "mon",  "père"] },
+        { sentence: "Elle est très gentille.",                  words: ["Elle",    "est",       "très",          "gentille"]            },
+        { sentence: "C'est mon voisin de palier.",              words: ["C'est",   "mon",       "voisin",        "de",      "palier"] },
       ],
     },
 
-    // ── Exercice 5 ─────────────────────────────────────────────────────────────
+    // ── Exercice 5 — Fill (c'est / il est) ────────────────────────────────────
     {
       type: "fill",
       title: "Exercice 5",
       instruction: "Complétez avec c'est ou il est.",
-      items: [
-        { sentence: "___ un médecin.",          hint: "c'est / il est", answer: "c'est"  },
-        { sentence: "___ très gentil.",          hint: "c'est / il est", answer: "il est" },
-        { sentence: "___ ma sœur.",              hint: "c'est / il est", answer: "c'est"  },
-        { sentence: "___ fatigué aujourd'hui.",  hint: "c'est / il est", answer: "il est" },
-        { sentence: "___ un grand bâtiment.",    hint: "c'est / il est", answer: "c'est"  },
-        { sentence: "___ malade.",               hint: "c'est / il est", answer: "il est" },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ un médecin.",            hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ très gentil.",           hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ ma sœur.",               hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ fatigué aujourd'hui.",   hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ un grand bâtiment.",     hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ malade.",                hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ mon ami.",               hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ grand et fort.",         hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ le directeur.",          hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ professeur.",            hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ une bonne idée.",        hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ suisse.",                hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ mon père.",              hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ très intelligent.",      hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ un beau tableau.",       hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ architecte.",            hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ le train de 8h.",        hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ content.",               hint: "c'est / il est", answer: "il est" },
+        { sentence: "___ un étudiant sérieux.",   hint: "c'est / il est", answer: "c'est"  },
+        { sentence: "___ chauffeur de bus.",      hint: "c'est / il est", answer: "il est" },
       ],
     },
 
-    // ── Exercice 6 ─────────────────────────────────────────────────────────────
+    // ── Exercice 6 — QCM toggle (C'est / Il est) ──────────────────────────────
     {
       type: "qcm",
       title: "Exercice 6",
       instruction: "Choisissez la bonne réponse.",
       toggleChoices: true,
-      items: [
-        { sentence: "___ professeur.",           choices: ["C'est", "Il est"], correctIdx: 1 },
-        { sentence: "___ mon professeur.",       choices: ["C'est", "Il est"], correctIdx: 0 },
-        { sentence: "___ intelligent.",          choices: ["C'est", "Il est"], correctIdx: 1 },
-        { sentence: "___ un homme intelligent.", choices: ["C'est", "Il est"], correctIdx: 0 },
-        { sentence: "___ Paul.",                 choices: ["C'est", "Il est"], correctIdx: 0 },
-        { sentence: "___ français.",             choices: ["C'est", "Il est"], correctIdx: 1 },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "___ professeur.",             choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ mon professeur.",         choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ intelligent.",            choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ un homme intelligent.",   choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ Paul.",                   choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ français.",               choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ médecin.",                choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ mon médecin.",            choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ grand.",                  choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ un grand garçon.",        choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ fatigué.",                choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ mon ami.",                choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ suisse.",                 choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ Ali.",                    choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ architecte.",             choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ le directeur.",           choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ très sympa.",             choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ un collègue.",            choices: ["C'est", "Il est"], correctIdx: 0 },
+        { sentence: "___ content.",                choices: ["C'est", "Il est"], correctIdx: 1 },
+        { sentence: "___ le médecin de garde.",    choices: ["C'est", "Il est"], correctIdx: 0 },
       ],
     },
 
-    // ── Exercice 7 ─────────────────────────────────────────────────────────────
+    // ── Exercice 7 — Write (transformer avec c'est) ────────────────────────────
     {
       type: "write",
       title: "Exercice 7",
@@ -462,7 +429,7 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
     },
 
-    // ── Exercice 8 ─────────────────────────────────────────────────────────────
+    // ── Exercice 8 — Write (transformer avec il est / elle est) ───────────────
     {
       type: "write",
       title: "Exercice 8",
@@ -476,7 +443,7 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
     },
 
-    // ── Exercice 9 ─────────────────────────────────────────────────────────────
+    // ── Exercice 9 — Write (phrase libre) ─────────────────────────────────────
     {
       type: "write",
       title: "Exercice 9",
@@ -488,18 +455,34 @@ export const A1_GR_CEST: GrammarLesson = {
       ],
     },
 
-    // ── Exercice 10 ────────────────────────────────────────────────────────────
+    // ── Exercice 10 — QCM (contexte double) ───────────────────────────────────
     {
       type: "qcm",
       title: "Exercice 10",
       instruction: "Sélectionnez la bonne réponse.",
-      items: [
-        { sentence: "Ahmed est médecin. ___ très connu dans la ville.", choices: ["C'est", "Il est", "Elle est"], correctIdx: 1 },
-        { sentence: "Voici Ahmed. ___ mon médecin.",                    choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
-        { sentence: "Marie est française. ___ très gentille.",          choices: ["C'est", "Il est", "Elle est"], correctIdx: 2 },
-        { sentence: "Voici Marie. ___ ma voisine.",                     choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
-        { sentence: "Paul est professeur. ___ très patient.",           choices: ["C'est", "Il est", "Elle est"], correctIdx: 1 },
-        { sentence: "Voici Paul. ___ le nouveau professeur.",           choices: ["C'est", "Il est", "Elle est"], correctIdx: 0 },
+      items: [],
+      poolSize: 5,
+      pool: [
+        { sentence: "Ahmed est médecin. ___ très connu dans la ville.",        choices: ["C'est", "Il est",  "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Ahmed. ___ mon médecin.",                           choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Marie est française. ___ très gentille.",                 choices: ["C'est", "Il est",  "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Marie. ___ ma voisine.",                            choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Paul est professeur. ___ très patient.",                  choices: ["C'est", "Il est",  "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Paul. ___ le nouveau professeur.",                  choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Sofia est étudiante. ___ très sérieuse.",                choices: ["C'est", "Il est",  "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Sofia. ___ ma camarade de classe.",                 choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Ali est sportif. ___ très rapide.",                       choices: ["C'est", "Il est",  "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Ali. ___ un bon joueur.",                           choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Leila est infirmière. ___ très compétente.",              choices: ["C'est", "Il est",  "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Leila. ___ mon infirmière.",                        choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Omar est architecte. ___ très créatif.",                  choices: ["C'est", "Il est",  "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Omar. ___ un architecte célèbre.",                  choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Nadia est médecin. ___ très dévouée.",                    choices: ["C'est", "Il est",  "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Nadia. ___ ma médecin de famille.",                 choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Carlos est cuisinier. ___ très talentueux.",              choices: ["C'est", "Il est",  "Elle est"], correctIdx: 1 },
+        { sentence: "Voici Carlos. ___ le chef du restaurant.",                choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
+        { sentence: "Anna est professeure. ___ très stricte.",                 choices: ["C'est", "Il est",  "Elle est"], correctIdx: 2 },
+        { sentence: "Voici Anna. ___ ma professeure de français.",             choices: ["C'est", "Il est",  "Elle est"], correctIdx: 0 },
       ],
     },
   ],
