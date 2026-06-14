@@ -685,8 +685,9 @@ function QcmExercise({
                 {item.choices.map((choice, ci) => {
                   const isSelected = selected[i] === ci;
                   const isCorrect = ci === item.correctIdx;
+                  const isFour = item.choices.length >= 4;
                   let cls =
-                    "rounded-[var(--radius-md)] border px-3 py-2.5 text-center text-sm font-medium transition-colors ";
+                    `rounded-[var(--radius-md)] border ${isFour ? "px-1 py-2 text-xs" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
                   if (!validated) {
                     cls += isSelected
                       ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
@@ -1348,27 +1349,47 @@ function WriteExercise({
 
         return (
           <div key={i} className="space-y-1.5">
-            <div className="flex items-center gap-2">
-              <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
-                {i + 1}.
-              </span>
-              {perVerb && (
-                <span className="w-28 shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
-                  ({perVerb})
+            {exercise.promptLayout === "stacked" ? (
+              <>
+                <p className="text-sm font-medium text-[var(--color-text-primary)]">
+                  <span className={`font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>{i + 1}.</span>{" "}
+                  {perVerb ? `(${perVerb})` : exercise.prompts?.[i]}
+                </p>
+                <input
+                  type="text"
+                  value={inputs[i] ?? ""}
+                  onChange={(e) => setInput(i, e.target.value)}
+                  disabled={validated}
+                  className={`w-full rounded-none border-0 border-b-2 bg-transparent px-0 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors disabled:opacity-70 ${
+                    isClean
+                      ? "border-emerald-400 dark:border-emerald-500"
+                      : "border-[var(--color-accent-fr)]/60 focus:border-[var(--color-accent-fr)]"
+                  }`}
+                />
+              </>
+            ) : (
+              <div className="flex items-center gap-2">
+                <span className={`shrink-0 text-sm font-medium ${isClean ? "text-emerald-500 dark:text-emerald-400" : "text-[var(--color-accent-fr)]"}`}>
+                  {i + 1}.
                 </span>
-              )}
-              <input
-                type="text"
-                value={inputs[i] ?? ""}
-                onChange={(e) => setInput(i, e.target.value)}
-                disabled={validated}
-                className={`flex-1 rounded-xl border bg-transparent px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-70 ${
-                  isClean
-                    ? "border-emerald-400 dark:border-emerald-500"
-                    : "border-[var(--color-accent-fr)]"
-                }`}
-              />
-            </div>
+                {perVerb && (
+                  <span className="w-28 shrink-0 text-sm font-bold text-[var(--color-text-primary)]">
+                    ({perVerb})
+                  </span>
+                )}
+                <input
+                  type="text"
+                  value={inputs[i] ?? ""}
+                  onChange={(e) => setInput(i, e.target.value)}
+                  disabled={validated}
+                  className={`flex-1 rounded-xl border bg-transparent px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none transition-colors focus:border-amber-500 disabled:opacity-70 ${
+                    isClean
+                      ? "border-emerald-400 dark:border-emerald-500"
+                      : "border-[var(--color-accent-fr)]"
+                  }`}
+                />
+              </div>
+            )}
             {/* Internal verb check — shown only after validation */}
             {validated && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
               <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
@@ -1606,14 +1627,15 @@ function ClassifyExercise({
   const [validated, setValidated] = useState(false);
 
   const allChosen = chosen.every((c) => c !== null);
+  const canSubmit = exercise.allowPartialValidation ? !validated : allChosen && !validated;
 
   useEffect(() => {
-    onCanValidateChange(allChosen && !validated);
+    onCanValidateChange(canSubmit);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allChosen, validated]);
+  }, [canSubmit]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allChosen) {
+    if (validateCommand > 0 && !validated && (exercise.allowPartialValidation || allChosen)) {
       setValidated(true);
       onValidated(chosen.every((c, i) => c === items[i]!.categoryIdx));
     }
@@ -1691,14 +1713,15 @@ function WordOrderExercise({
   const [validated, setValidated] = useState(false);
 
   const allFilled = arranged.every((arr, i) => arr.length === states[i]!.allWords.length);
+  const canSubmitOrder = exercise.allowPartialValidation ? !validated : allFilled && !validated;
 
   useEffect(() => {
-    onCanValidateChange(allFilled && !validated);
+    onCanValidateChange(canSubmitOrder);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allFilled, validated]);
+  }, [canSubmitOrder]);
 
   useEffect(() => {
-    if (validateCommand > 0 && !validated && allFilled) {
+    if (validateCommand > 0 && !validated && (exercise.allowPartialValidation || allFilled)) {
       setValidated(true);
       const allCorrect = arranged.every((arr, i) =>
         arr.join(" ").replace(/ ([.?!])$/, "$1") === states[i]!.sentence,

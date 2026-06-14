@@ -252,6 +252,7 @@ export const A1_GR_CEST: GrammarLesson = {
       categories: ["Identification (C'est)", "Description (Il / Elle est)"],
       items: [],
       poolSize: 5,
+      allowPartialValidation: true,
       pool: [
         { word: "C'est une étudiante en médecine.",  categoryIdx: 0 },
         { word: "Il est très patient.",              categoryIdx: 1 },
@@ -396,6 +397,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "word_order",
       title: "Exercice 5",
       instruction: "Remettez les mots dans le bon ordre.",
+      allowPartialValidation: true,
       items: [
         { sentence: "C'est une bonne professeure.",    words: ["C'est",  "une",   "bonne",   "professeure"]                  },
         { sentence: "Il est grand et sportif.",        words: ["Il",     "est",   "grand",   "et",      "sportif"]           },
@@ -409,7 +411,8 @@ export const A1_GR_CEST: GrammarLesson = {
     {
       type: "write",
       title: "Exercice 6",
-      instruction: "Transformez les phrases avec c'est. Écrivez la phrase complète.\nExemple : Il est mon ami. → C'est mon ami.",
+      instruction: "Transformez les phrases avec c'est.\nÉcrivez la phrase complète.\nExemple : Il est mon ami. → C'est mon ami.",
+      promptLayout: "stacked",
       prompts: [
         "Il est mon frère. →",
         "Il est mon voisin. →",
@@ -424,6 +427,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 7",
       instruction: "Transformez avec il est / elle est. Écrivez la phrase complète.\nExemple : C'est un homme gentil. → Il est gentil.",
+      promptLayout: "stacked",
       prompts: [
         "C'est une femme sympathique. →",
         "C'est un garçon intelligent. →",
@@ -438,6 +442,7 @@ export const A1_GR_CEST: GrammarLesson = {
       type: "write",
       title: "Exercice 8",
       instruction: "Écrivez une phrase avec les mots proposés.",
+      promptLayout: "stacked",
       prompts: [
         "Alona :",
         "Ma mère :",
