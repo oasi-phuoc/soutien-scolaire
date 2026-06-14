@@ -1,15 +1,174 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G4_1: SubmoduleTrad = {
   submoduleId: "G4-1",
-  title: {
-    fr: "Aire du carré",
-    en: "Area of a square",
-    ar: "مساحة المربع",
-    fa: "مساحت مربع",
-    ti: "ናይ ካሬ ሰፊሓ",
-    uk: "Площа квадрата",
-  },
+  title: S(
+    "Aire du carré",
+    "Area of a square",
+    "مساحة المربع",
+    "مساحت مربع",
+    "ናይ ካሬ ሰፊሓ",
+    "Площа квадрата",
+    "Área do quadrado",
+    "Aagga wareegga",
+    "Karenin alanı",
+    "د مربع مساحت"
+  ),
+  blocks: [
+    // 0 — heading "Qu'est-ce que l'aire ?" (black)
+    { text: S(
+      "Qu'est-ce que l'aire ?",
+      "What is area?",
+      "ما هي المساحة؟",
+      "مساحت چیست؟",
+      "ሰፊሓ ምንታይ ዩ?",
+      "Що таке площа?",
+      "O que é a área?",
+      "Aaggu maxay tahay?",
+      "Alan nedir?",
+      "مساحت څه ده؟"
+    ) },
+
+    // 1 — plain
+    { text: S(
+      "L'**aire** mesure la **surface intérieure** d'une figure. Elle s'exprime en unités carrées : cm², m², km²…",
+      "**Area** measures the **interior surface** of a figure. It is expressed in square units: cm², m², km²…",
+      "**المساحة** تقيس **السطح الداخلي** للشكل. تُعبر عنها بوحدات مربعة: سم²، م²، كم²…",
+      "**مساحت** **سطح داخلی** یک شکل را اندازه می‌گیرد. با واحدهای مربعی بیان می‌شود: سم²، م²، کم²…",
+      "**ሰፊሓ** ናይ ቅርጺ **ውሽጠ ሰፊሕ** ዝሕሰብ ዩ. ብካሬ ኣሃዙ ዝቀርብ: ሰም²، ም²، ክም²…",
+      "**Площа** вимірює **внутрішню поверхню** фігури. Виражається в квадратних одиницях: см², м², км²…",
+      "A **área** mede a **superfície interior** de uma figura. Expressa-se em unidades quadradas: cm², m², km²…",
+      "**Aaggu** wuxuu cabbiraa **dushaha gudaha** ee qaab. Waxa lagu muujiyaa cutubbo laba jibbaaran: cm², m², km²…",
+      "**Alan**, bir şeklin **iç yüzeyini** ölçer. Kare birimler ile ifade edilir: cm², m², km²…",
+      "**مساحت** د یوه شکل **داخلي سطح** اندازه کوي. د مربع واحدونو سره بیانیږي: cm²، m²، km²…"
+    ) },
+
+    // 2 — heading "Carré" (black)
+    { text: S(
+      "Carré",
+      "Square",
+      "المربع",
+      "مربع",
+      "ካሬ",
+      "Квадрат",
+      "Quadrado",
+      "Wareeg",
+      "Kare",
+      "مربع"
+    ) },
+
+    // 3 — plain
+    { text: S(
+      "Pour un carré de côté c, l'aire est :",
+      "For a square with side c, the area is:",
+      "لمربع بضلع c، المساحة هي:",
+      "برای یک مربع با ضلع c، مساحت عبارت است از:",
+      "ንካሬ ናይ c ጎቦ, ሰፊሓ ዩ:",
+      "Для квадрата зі стороною c площа дорівнює:",
+      "Para um quadrado de lado c, a área é:",
+      "Wareeg dhinac c leh, aaggiisu waa:",
+      "c kenarlı bir kare için alan:",
+      "د c اړخ سره د مربع مساحت:"
+    ) },
+
+    // 4 — rule "Formule"
+    { label: S(
+        "Formule", "Formula", "الصيغة", "فرمول", "ቅጥዒ", "Формула", "Fórmula", "Qaacidada", "Formül", "فورمول"
+      ),
+      items: A(
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"],
+        ["A = c × c = c²"]
+      )
+    },
+
+    // 5 — svg with captionFr
+    { caption: S(
+      "Carré de côté c — l'aire est la surface colorée",
+      "Square of side c — the area is the coloured surface",
+      "مربع بضلع c — المساحة هي السطح الملون",
+      "مربع با ضلع c — مساحت همان سطح رنگی است",
+      "ካሬ ናይ c ጎቦ — ሰፊሓ ናይ ሕብሪ ወርሒ ዩ",
+      "Квадрат зі стороною c — площа — це кольорова поверхня",
+      "Quadrado de lado c — a área é a superfície colorida",
+      "Wareeg dhinac c leh — aaggiisu waa dushaha midabka leh",
+      "c kenarlı kare — alan renkli yüzeydir",
+      "د c اړخ مربع — مساحت د رنګي سطح ده"
+    ) },
+
+    // 6 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "مثال"
+    ) },
+
+    // 7 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Carré de côté 6 cm :", "A = 6² = **36 cm²**"],
+        ["Square with side 6 cm:", "A = 6² = **36 cm²**"],
+        ["مربع بضلع 6 سم:", "A = 6² = **36 سم²**"],
+        ["مربع با ضلع 6 سانتیمتر:", "A = 6² = **36 سانتیمتر²**"],
+        ["ካሬ ናይ 6 ሰም ጎቦ:", "A = 6² = **36 ሰም²**"],
+        ["Квадрат зі стороною 6 см:", "A = 6² = **36 см²**"],
+        ["Quadrado de lado 6 cm:", "A = 6² = **36 cm²**"],
+        ["Wareeg dhinac 6 cm leh:", "A = 6² = **36 cm²**"],
+        ["6 cm kenarlı kare:", "A = 6² = **36 cm²**"],
+        ["د 6 سم اړخ مربع:", "A = 6² = **36 سم²**"]
+      )
+    },
+
+    // 8 — highlight "Retrouver le côté"
+    { text: S(
+      "Retrouver le côté",
+      "Finding the side",
+      "إيجاد الضلع",
+      "یافتن ضلع",
+      "ጎቦ ምርካብ",
+      "Знайти сторону",
+      "Encontrar o lado",
+      "Helitaanka dhinaca",
+      "Kenarı bulmak",
+      "اړخ موندل"
+    ) },
+
+    // 9 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Si on connaît l'aire : c = √A", "Exemple : A = 49 cm² → c = √49 = **7 cm**"],
+        ["If the area is known: c = √A", "Example: A = 49 cm² → c = √49 = **7 cm**"],
+        ["إذا عُرفت المساحة: c = √A", "مثال: A = 49 سم² → c = √49 = **7 سم**"],
+        ["اگر مساحت معلوم باشد: c = √A", "مثال: A = 49 سانتیمتر² → c = √49 = **7 سانتیمتر**"],
+        ["ሰፊሓ ምስ ፈለጥና: c = √A", "ኣብነት: A = 49 ሰም² → c = √49 = **7 ሰም**"],
+        ["Якщо відома площа: c = √A", "Приклад: A = 49 см² → c = √49 = **7 см**"],
+        ["Se a área é conhecida: c = √A", "Exemplo: A = 49 cm² → c = √49 = **7 cm**"],
+        ["Haddii aaggu la yaqaan: c = √A", "Tusaale: A = 49 cm² → c = √49 = **7 cm**"],
+        ["Alan biliniyorsa: c = √A", "Örnek: A = 49 cm² → c = √49 = **7 cm**"],
+        ["که مساحت معلوم وي: c = √A", "مثال: A = 49 سم² → c = √49 = **7 سم**"]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "L'aire mesure la surface intérieure d'une figure. Elle s'exprime en unités carrées (cm², m², km²…).",

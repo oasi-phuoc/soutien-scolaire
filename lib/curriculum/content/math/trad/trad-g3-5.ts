@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G3_5: SubmoduleTrad = {
   submoduleId: "G3-5",
   title: {
@@ -10,6 +16,162 @@ export const TRAD_G3_5: SubmoduleTrad = {
     ti: "ዓውዲ ን π",
     uk: "Коло та π",
   },
+  blocks: [
+    // 0 — heading "Circonférence du cercle" (black)
+    { text: S(
+      "Circonférence du cercle",
+      "Circumference of a circle",
+      "محيط الدائرة",
+      "محیط دایره",
+      "ናይ ዓውዲ ዙሪያ",
+      "Довжина кола",
+      "Circunferência do círculo",
+      "Wareegga goobaabiga",
+      "Çemberin çevresi",
+      "د دایرې محیط"
+    ) },
+
+    // 1 — plain "La **circonférence**..."
+    { text: S(
+      "La **circonférence** (périmètre du cercle) dépend du rayon r ou du diamètre d.",
+      "The **circumference** (perimeter of a circle) depends on the radius r or the diameter d.",
+      "**المحيط** (محيط الدائرة) يعتمد على نصف القطر r أو القطر d.",
+      "**محیط** (محیط دایره) به شعاع r یا قطر d بستگی دارد.",
+      "**ዙሪያ** (ናይ ዓውዲ ዙሪያ) ብናይ ፍርቂ-ቁምብዛ r ወይ ቁምብዛ d ዝዝከር ዩ።",
+      "**Довжина кола** (периметр кола) залежить від радіуса r або діаметра d.",
+      "A **circunferência** (perímetro do círculo) depende do raio r ou do diâmetro d.",
+      "**Wareegga** (xadka goobaabiga) wuxuu ku xidnaan yahay raadiyaha r ama daayamitarka d.",
+      "**Çevre** (çemberin çevresi) yarıçap r veya çap d'ye bağlıdır.",
+      "**محیط** (د دایرې محیط) د نیم قطر r یا قطر d پورې اړه لري."
+    ) },
+
+    // 2 — rule "Formule" itemsFr ["C = 2 × π × r", "C = π × d", "(d = 2r)"]
+    { label: S(
+      "Formule",
+      "Formula",
+      "الصيغة",
+      "فرمول",
+      "ቅጥዒ",
+      "Формула",
+      "Fórmula",
+      "Qaacidada",
+      "Formül",
+      "فورمول"
+    ), items: A(
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"],
+      ["C = 2 × π × r", "C = π × d", "(d = 2r)"]
+    ) },
+
+    // 3 — heading "π (pi)" (black)
+    { text: S(
+      "π (pi)",
+      "π (pi)",
+      "π (باي)",
+      "π (پی)",
+      "π (ፒ)",
+      "π (пі)",
+      "π (pi)",
+      "π (baay)",
+      "π (pi)",
+      "π (پای)"
+    ) },
+
+    // 4 — plain "π est un nombre irrationnel..."
+    { text: S(
+      "π est un nombre irrationnel. On utilise l'approximation **π ≈ 3,14**.",
+      "π is an irrational number. We use the approximation **π ≈ 3.14**.",
+      "π عدد غير نسبي. نستخدم التقريب **π ≈ 3,14**.",
+      "π یک عدد گنگ است. از تقریب **π ≈ 3,14** استفاده می‌کنیم.",
+      "π ዘይስሩዕ ቁጽሪ ዩ። **π ≈ 3,14** ዝብል ሕሳብ ኣተሓሕዛ ንጥቀም።",
+      "π — ірраціональне число. Використовуємо наближення **π ≈ 3,14**.",
+      "π é um número irracional. Usamos a aproximação **π ≈ 3,14**.",
+      "π waa nambar aan macquul ahayn. Waxaan isticmaalnaa qiyaasta **π ≈ 3,14**.",
+      "π irrasyonel bir sayıdır. **π ≈ 3,14** yaklaşımını kullanırız.",
+      "π یو غیر مالوم عدد دی. موږ **π ≈ 3,14** اټکل کاروو."
+    ) },
+
+    // 5 — svg captionFr "Circonférence C = 2πr (contour du cercle)"
+    { caption: S(
+      "Circonférence C = 2πr (contour du cercle)",
+      "Circumference C = 2πr (outline of the circle)",
+      "محيط الدائرة C = 2πr (خط الدائرة)",
+      "محیط دایره C = 2πr (خط دور دایره)",
+      "ናይ ዓውዲ ዙሪያ C = 2πr (ሓቆፋ ናይ ዓውዲ)",
+      "Довжина кола C = 2πr (контур кола)",
+      "Circunferência C = 2πr (contorno do círculo)",
+      "Wareegga C = 2πr (xadka goobaabiga)",
+      "Çevre C = 2πr (çemberin dış hattı)",
+      "د دایرې محیط C = 2πr (د دایرې بهرنی خط)"
+    ) },
+
+    // 6 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "بېلګه"
+    ) },
+
+    // 7 — section labelFr "" itemsFr ["Cercle de rayon 5 cm :", "C = 2 × 3,14 × 5 = **31,4 cm**"]
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Cercle de rayon 5 cm :", "C = 2 × 3,14 × 5 = **31,4 cm**"],
+        ["Circle with radius 5 cm:", "C = 2 × 3.14 × 5 = **31.4 cm**"],
+        ["دائرة نصف قطرها 5 سم:", "C = 2 × 3,14 × 5 = **31,4 سم**"],
+        ["دایره با شعاع 5 سانتیمتر:", "C = 2 × 3,14 × 5 = **31,4 سانتیمتر**"],
+        ["ዓውዲ ናይ 5 ሰም ፍርቂ-ቁምብዛ:", "C = 2 × 3,14 × 5 = **31,4 ሰም**"],
+        ["Коло з радіусом 5 см:", "C = 2 × 3,14 × 5 = **31,4 см**"],
+        ["Círculo de raio 5 cm:", "C = 2 × 3,14 × 5 = **31,4 cm**"],
+        ["Goobaabig raadiyaha 5 cm:", "C = 2 × 3,14 × 5 = **31,4 cm**"],
+        ["Yarıçapı 5 cm olan çember:", "C = 2 × 3,14 × 5 = **31,4 cm**"],
+        ["د 5 سم نیم قطر لرونکۍ دایره:", "C = 2 × 3,14 × 5 = **31,4 سم**"]
+      )
+    },
+
+    // 8 — highlight "À ne pas confondre"
+    { text: S(
+      "À ne pas confondre",
+      "Do not confuse",
+      "لا تخلط بين",
+      "اشتباه نگیر",
+      "ኣይቀላቐሉ",
+      "Не плутати",
+      "Não confundir",
+      "Ha xasilin",
+      "Karıştırmayın",
+      "ګډ مه کوئ"
+    ) },
+
+    // 9 — section labelFr "" itemsFr ["**Circonférence C** = ...", "**Aire du disque A** = ..."]
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["**Circonférence C** = longueur du contour (périmètre) → C = 2πr", "**Aire du disque A** = surface intérieure → A = πr² (vu en G3.6)"],
+        ["**Circumference C** = length of the outline (perimeter) → C = 2πr", "**Disk area A** = interior surface → A = πr² (seen in G3.6)"],
+        ["**محيط الدائرة C** = طول الخط المحيط → C = 2πr", "**مساحة القرص A** = السطح الداخلي → A = πr² (في G3.6)"],
+        ["**محیط دایره C** = طول خط محیطی → C = 2πr", "**مساحت دیسک A** = سطح داخلی → A = πr² (در G3.6)"],
+        ["**ዙሪያ C** = ርዝሓ ሓቆፋ → C = 2πr", "**ሰፊሓ ዲስኩ A** = ናይ ውሽጢ ሰፊሓ → A = πr² (ኣብ G3.6)"],
+        ["**Довжина кола C** = довжина контуру → C = 2πr", "**Площа круга A** = внутрішня поверхня → A = πr² (у G3.6)"],
+        ["**Circunferência C** = comprimento do contorno (perímetro) → C = 2πr", "**Área do disco A** = superfície interior → A = πr² (visto em G3.6)"],
+        ["**Wareegga C** = dhererka xadka → C = 2πr", "**Aagga saxanka A** = dusha gudaha → A = πr² (G3.6)"],
+        ["**Çevre C** = dış hattın uzunluğu (çevre) → C = 2πr", "**Disk alanı A** = iç yüzey → A = πr² (G3.6'da görülür)"],
+        ["**محیط C** = د بهرني خط اوږدوالی → C = 2πr", "**د دیسک مساحت A** = دننه سطحه → A = πr² (G3.6 کې)"]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "La circonférence (périmètre) d'un cercle est C = 2πr = πd, où r est le rayon et d le diamètre.",

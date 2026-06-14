@@ -10,6 +10,10 @@ export const TRAD_G1_2: SubmoduleTrad = {
     ti: "ንብረታት",
     uk: "Властивості",
   },
+  blocks: [
+    // 0 — shape_explorer (non-standard interactive block)
+    {},
+  ],
   paragraphs: {
     fr: [
       "Angles : aigu (< 90°), droit (= 90°), obtus (> 90°), plat (= 180°).",

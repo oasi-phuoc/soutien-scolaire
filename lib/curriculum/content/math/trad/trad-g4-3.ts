@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G4_3: SubmoduleTrad = {
   submoduleId: "G4-3",
   title: {
@@ -10,6 +16,237 @@ export const TRAD_G4_3: SubmoduleTrad = {
     ti: "ናይ ሰለስ-ጎቦ ሰፊሓ",
     uk: "Площа трикутника",
   },
+  blocks: [
+    // 0 — heading "Triangle" (black)
+    { text: S(
+      "Triangle",
+      "Triangle",
+      "المثلث",
+      "مثلث",
+      "ሰለስ-ጎቦ",
+      "Трикутник",
+      "Triângulo",
+      "Saddex-xagal",
+      "Üçgen",
+      "مثلث"
+    ) },
+
+    // 1 — plain
+    { text: S(
+      "L'aire d'un triangle dépend de sa **base (b)** et de sa **hauteur (h)**.",
+      "The area of a triangle depends on its **base (b)** and its **height (h)**.",
+      "مساحة المثلث تعتمد على **قاعدته (b)** وعلى **ارتفاعه (h)**.",
+      "مساحت مثلث به **قاعده (b)** و **ارتفاع (h)** آن بستگی دارد.",
+      "ሰፊሓ ናይ ሰለስ-ጎቦ ናይ **ሰረቱ (b)** ን **ቁመቱ (h)** ይምርኰስ።",
+      "Площа трикутника залежить від його **основи (b)** та **висоти (h)**.",
+      "A área de um triângulo depende da sua **base (b)** e da sua **altura (h)**.",
+      "Aagga saddex-xagalka wuxuu ku xidhan yahay **saldhiggiisa (b)** iyo **dhererkooda (h)**.",
+      "Bir üçgenin alanı **tabanına (b)** ve **yüksekliğine (h)** bağlıdır.",
+      "د مثلث مساحت د **قاعدې (b)** او **لوړوالي (h)** پورې اړه لري."
+    ) },
+
+    // 2 — rule "Formule"
+    { label: S(
+        "Formule", "Formula", "الصيغة", "فرمول", "ቅጥዒ", "Формула", "Fórmula", "Qaacidada", "Formül", "فورمول"
+      ),
+      items: A(
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"],
+        ["A = (b × h) ÷ 2"]
+      )
+    },
+
+    // 3 — highlight "Qu'est-ce que la hauteur ?"
+    { text: S(
+      "Qu'est-ce que la hauteur ?",
+      "What is the height?",
+      "ما هو الارتفاع؟",
+      "ارتفاع چیست؟",
+      "ቁመት ምንታይ ዩ?",
+      "Що таке висота?",
+      "O que é a altura?",
+      "Dhererku maxuu yahay?",
+      "Yükseklik nedir?",
+      "لوړوالی څه ده؟"
+    ) },
+
+    // 4 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        [
+          "La **hauteur** est la **distance perpendiculaire** entre la base et le sommet opposé.",
+          "Ce n'est pas la longueur du côté oblique — c'est la ligne droite qui tombe à angle droit sur la base.",
+        ],
+        [
+          "The **height** is the **perpendicular distance** between the base and the opposite vertex.",
+          "It is not the length of the slanted side — it is the straight line that falls at a right angle to the base.",
+        ],
+        [
+          "**الارتفاع** هو **المسافة العمودية** بين القاعدة والرأس المقابل.",
+          "إنه ليس طول الضلع المائل — بل هو الخط المستقيم الذي يسقط بزاوية قائمة على القاعدة.",
+        ],
+        [
+          "**ارتفاع** **فاصله عمودی** بین قاعده و رأس مقابل است.",
+          "طول ضلع مایل نیست — بلکه خط مستقیمی است که با زاویه قائمه بر قاعده می‌افتد.",
+        ],
+        [
+          "**ቁመት** ካብ ሰረት ናብ ዝቃወሞ ርእሲ **ቀጥታ ርሕቀት** ዩ።",
+          "ናይ ጥምዙዝ ጎቦ ቁመት ኣይኮነን — ብዓቀን ቀጥተ-ሸነኽ ናብ ሰረት ዝወርድ መስመር ዩ።",
+        ],
+        [
+          "**Висота** — це **перпендикулярна відстань** між основою і протилежною вершиною.",
+          "Це не довжина похилої сторони — це пряма лінія, що падає під прямим кутом на основу.",
+        ],
+        [
+          "A **altura** é a **distância perpendicular** entre a base e o vértice oposto.",
+          "Não é o comprimento do lado oblíquo — é a linha reta que cai em ângulo reto sobre a base.",
+        ],
+        [
+          "**Dhererku** waa **masaafada toosan** u dhexeysa saldhigga iyo xagalka sare ee ka soo horjeeda.",
+          "Kuma ahan dhererka dhinaca jeex-jeexan — waa xariiqda toosan ee hoos ugu dhacda xagal toosan saldhigga.",
+        ],
+        [
+          "**Yükseklik**, taban ile karşı tepe arasındaki **dik mesafedir**.",
+          "Eğik kenarın uzunluğu değildir — tabana dik açıyla inen düz çizgidir.",
+        ],
+        [
+          "**لوړوالی** د قاعدې او د مخالف رأس تر مینځ **عمودي واټن** دی.",
+          "د مایل اړخ اوږدوالی نه دی — هغه مستقیم کرښه ده چې عمودي زاویه کې قاعدې ته راځي.",
+        ]
+      )
+    },
+
+    // 5 — svg with captionFr
+    { caption: S(
+      "Base b et hauteur h (mesurée à l'extérieur, perpendiculaire à b)",
+      "Base b and height h (measured outside, perpendicular to b)",
+      "القاعدة b والارتفاع h (قياس خارجي، عمودي على b)",
+      "قاعده b و ارتفاع h (اندازه‌گیری از خارج، عمود بر b)",
+      "ሰረት b ን ቁመት h (ካብ ደገ ዝሕሰብ, ቀጥታዊ ናብ b)",
+      "Основа b і висота h (виміряна зовні, перпендикулярно до b)",
+      "Base b e altura h (medida no exterior, perpendicular a b)",
+      "Saldhigga b iyo dhererka h (la cabiray dibadda, toosan b)",
+      "Taban b ve yükseklik h (dışarıdan ölçülür, b'ye dik)",
+      "قاعده b او لوړوالی h (د بهر اندازه کول، d عمودي b ته)"
+    ) },
+
+    // 6 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "مثال"
+    ) },
+
+    // 7 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        [
+          "Triangle base 10 cm, hauteur 6 cm :",
+          "A = (10 × 6) ÷ 2 = **30 cm²**",
+        ],
+        [
+          "Triangle base 10 cm, height 6 cm:",
+          "A = (10 × 6) ÷ 2 = **30 cm²**",
+        ],
+        [
+          "مثلث قاعدة 10 سم، ارتفاع 6 سم:",
+          "A = (10 × 6) ÷ 2 = **30 سم²**",
+        ],
+        [
+          "مثلث قاعده 10 سانتیمتر، ارتفاع 6 سانتیمتر:",
+          "A = (10 × 6) ÷ 2 = **30 سانتیمتر²**",
+        ],
+        [
+          "ሰለስ-ጎቦ ሰረት 10 ሰም, ቁመት 6 ሰም:",
+          "A = (10 × 6) ÷ 2 = **30 ሰም²**",
+        ],
+        [
+          "Трикутник основа 10 см, висота 6 см:",
+          "A = (10 × 6) ÷ 2 = **30 см²**",
+        ],
+        [
+          "Triângulo base 10 cm, altura 6 cm:",
+          "A = (10 × 6) ÷ 2 = **30 cm²**",
+        ],
+        [
+          "Saddex-xagal saldhig 10 cm, dherer 6 cm:",
+          "A = (10 × 6) ÷ 2 = **30 cm²**",
+        ],
+        [
+          "Üçgen taban 10 cm, yükseklik 6 cm:",
+          "A = (10 × 6) ÷ 2 = **30 cm²**",
+        ],
+        [
+          "مثلث قاعده 10 سم، لوړوالی 6 سم:",
+          "A = (10 × 6) ÷ 2 = **30 سم²**",
+        ]
+      )
+    },
+
+    // 8 — highlight "Intuition"
+    { text: S(
+      "Intuition",
+      "Intuition",
+      "البديهة",
+      "شهود",
+      "ሓሳብ",
+      "Інтуїція",
+      "Intuição",
+      "Faham",
+      "Sezgi",
+      "احساس"
+    ) },
+
+    // 9 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        [
+          "Le triangle occupe exactement **la moitié** du rectangle de même base et hauteur.",
+        ],
+        [
+          "The triangle occupies exactly **half** of the rectangle with the same base and height.",
+        ],
+        [
+          "المثلث يشغل بالضبط **نصف** المستطيل بنفس القاعدة والارتفاع.",
+        ],
+        [
+          "مثلث دقیقاً **نصف** مستطیلی با قاعده و ارتفاع یکسان را اشغال می‌کند.",
+        ],
+        [
+          "ሰለስ-ጎቦ ናይ ሓደ ሰረት ን ቁመት ዘለዎ ካሬ-ሓለቃ **ፍርቁ** ዩ።",
+        ],
+        [
+          "Трикутник займає рівно **половину** прямокутника з тією самою основою і висотою.",
+        ],
+        [
+          "O triângulo ocupa exatamente **metade** do retângulo com a mesma base e altura.",
+        ],
+        [
+          "Saddex-xagalku wuxuu ku jiraa **khamaarta** wareegsanaanta isku saldhig iyo dherer leh.",
+        ],
+        [
+          "Üçgen, aynı taban ve yüksekliğe sahip dikdörtgenin tam olarak **yarısını** kaplar.",
+        ],
+        [
+          "مثلث د ورته قاعدې او لوړوالي مستطیل دقیقاً **نیمه** نیسي.",
+        ]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "Formule : A = (base × hauteur) ÷ 2.",

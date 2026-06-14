@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G4_7: SubmoduleTrad = {
   submoduleId: "G4-7",
   title: {
@@ -14,6 +20,137 @@ export const TRAD_G4_7: SubmoduleTrad = {
     tr: "Eşkenar dörtgen",
     ps: "لوزي شکل",
   },
+  blocks: [
+    // 0 — heading "Losange" (black)
+    { text: S(
+      "Losange",
+      "Rhombus",
+      "المعين",
+      "لوزی",
+      "ሎዛንጅ",
+      "Ромб",
+      "Losango",
+      "Rhombus",
+      "Eşkenar dörtgen",
+      "لوزي شکل"
+    ) },
+
+    // 1 — plain
+    { text: S(
+      "Un **losange** est un quadrilatère dont les quatre côtés ont la même longueur. On peut calculer son **périmètre** avec le côté, et son **aire** avec les diagonales.",
+      "A **rhombus** is a quadrilateral whose four sides have the same length. Its **perimeter** is calculated with the side, and its **area** with the diagonals.",
+      "**المعين** هو رباعي الأضلاع الذي تتساوى أضلاعه الأربعة. يُحسب **محيطه** بالضلع، و**مساحته** بالقطرين.",
+      "**لوزی** یک چهارضلعی است که چهار ضلع آن هم‌اندازه‌اند. **محیط** آن با ضلع و **مساحت** آن با قطرها محاسبه می‌شود.",
+      "**ሎዛንጅ** ኣርባዕተ ማዕረ ዝኾኑ ጎናት ዘለዎ ኣርባዕ-ጎቦ ዩ። **ዙርያኡ** ብጎቦ, **ሰፊሓኡ** ብዲያጎናላት ዝሕሰብ ዩ።",
+      "**Ромб** — це чотирикутник із чотирма рівними сторонами. **Периметр** обчислюють за стороною, а **площу** за діагоналями.",
+      "Um **losango** é um quadrilátero cujos quatro lados têm o mesmo comprimento. O **perímetro** calcula-se com o lado, e a **área** com as diagonais.",
+      "**Rhombus-ku** waa afar-xagal afarta dhinacyadiisuba isku dherer yihiin. **Wareeggiisa** waxaa lagu xisaabiyaa dhinaca, **bedkiisana** xariiqyada dhex mara.",
+      "**Eşkenar dörtgen**, dört kenarı eşit uzunlukta olan bir dörtgendir. **Çevresi** kenarla, **alanı** köşegenlerle hesaplanır.",
+      "**لوزي شکل** یو څلور اړخیز شکل دی چې د هغه څلور اړخونه برابر اوږدوالی لري. **محیط** يې د اړخ سره او **مساحت** يې د قطرونو سره حسابېږي."
+    ) },
+
+    // 2 — rule "Formules"
+    { label: S(
+        "Formules", "Formulas", "الصيغ", "فرمول‌ها", "ቅጥዕታት", "Формули", "Fórmulas", "Qaacidooyinka", "Formüller", "فورمولونه"
+      ),
+      items: A(
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"],
+        ["P = 4 × c", "A = (d₁ × d₂) ÷ 2"]
+      )
+    },
+
+    // 3 — svg with captionFr
+    { caption: S(
+      "Losange : quatre côtés égaux et deux diagonales",
+      "Rhombus: four equal sides and two diagonals",
+      "المعين: أربعة أضلاع متساوية وقطران",
+      "لوزی: چهار ضلع مساوی و دو قطر",
+      "ሎዛንጅ: ኣርባዕተ ማዕረ ጎናት ን ክልተ ዲያጎናላት",
+      "Ромб: чотири рівні сторони і дві діагоналі",
+      "Losango: quatro lados iguais e duas diagonais",
+      "Rhombus: afar dhinac oo isku dheer iyo laba xariiq oo dhex mara",
+      "Eşkenar dörtgen: dört eşit kenar ve iki köşegen",
+      "لوزي شکل: څلور برابر اړخونه او دوه قطرونه"
+    ) },
+
+    // 4 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "مثال"
+    ) },
+
+    // 5 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        [
+          "Losange de côté 5 cm, diagonales 6 cm et 8 cm :",
+          "P = 4 × 5 = **20 cm**",
+          "A = (6 × 8) ÷ 2 = **24 cm²**",
+        ],
+        [
+          "Rhombus with side 5 cm, diagonals 6 cm and 8 cm:",
+          "P = 4 × 5 = **20 cm**",
+          "A = (6 × 8) ÷ 2 = **24 cm²**",
+        ],
+        [
+          "معين بضلع 5 سم، قطران 6 سم و 8 سم:",
+          "P = 4 × 5 = **20 سم**",
+          "A = (6 × 8) ÷ 2 = **24 سم²**",
+        ],
+        [
+          "لوزی با ضلع 5 سانتیمتر، قطرهای 6 سانتیمتر و 8 سانتیمتر:",
+          "P = 4 × 5 = **20 سانتیمتر**",
+          "A = (6 × 8) ÷ 2 = **24 سانتیمتر²**",
+        ],
+        [
+          "ሎዛንጅ ናይ 5 ሰም ጎቦ, ዲያጎናላት 6 ሰም ን 8 ሰም:",
+          "P = 4 × 5 = **20 ሰም**",
+          "A = (6 × 8) ÷ 2 = **24 ሰም²**",
+        ],
+        [
+          "Ромб зі стороною 5 см, діагоналі 6 см і 8 см:",
+          "P = 4 × 5 = **20 см**",
+          "A = (6 × 8) ÷ 2 = **24 см²**",
+        ],
+        [
+          "Losango com lado 5 cm, diagonais 6 cm e 8 cm:",
+          "P = 4 × 5 = **20 cm**",
+          "A = (6 × 8) ÷ 2 = **24 cm²**",
+        ],
+        [
+          "Rhombus dhinac 5 cm leh, xariiqyada dhex mara 6 cm iyo 8 cm:",
+          "P = 4 × 5 = **20 cm**",
+          "A = (6 × 8) ÷ 2 = **24 cm²**",
+        ],
+        [
+          "5 cm kenarlı eşkenar dörtgen, köşegenler 6 cm ve 8 cm:",
+          "P = 4 × 5 = **20 cm**",
+          "A = (6 × 8) ÷ 2 = **24 cm²**",
+        ],
+        [
+          "د 5 سم اړخ لوزي شکل، قطرونه 6 سم او 8 سم:",
+          "P = 4 × 5 = **20 سم**",
+          "A = (6 × 8) ÷ 2 = **24 سم²**",
+        ]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
       "Un losange a quatre côtés de même longueur.",

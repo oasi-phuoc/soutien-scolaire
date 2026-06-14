@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G4_2: SubmoduleTrad = {
   submoduleId: "G4-2",
   title: {
@@ -10,6 +16,138 @@ export const TRAD_G4_2: SubmoduleTrad = {
     ti: "ናይ ካሬ-ሓለቃ ሰፊሓ",
     uk: "Площа прямокутника",
   },
+  blocks: [
+    // 0 — heading "Rectangle" (black)
+    { text: S(
+      "Rectangle",
+      "Rectangle",
+      "المستطيل",
+      "مستطیل",
+      "ካሬ-ሓለቃ",
+      "Прямокутник",
+      "Retângulo",
+      "Wareegsanaanta",
+      "Dikdörtgen",
+      "مستطیل"
+    ) },
+
+    // 1 — plain
+    { text: S(
+      "Pour un rectangle de longueur L et de largeur l, l'aire est :",
+      "For a rectangle with length L and width l, the area is:",
+      "لمستطيل بطول L وعرض l، المساحة هي:",
+      "برای یک مستطیل با طول L و عرض l، مساحت عبارت است از:",
+      "ንካሬ-ሓለቃ ናይ L ቁመት ን l ወርሓ, ሰፊሓ ዩ:",
+      "Для прямокутника завдовжки L і завширшки l площа дорівнює:",
+      "Para um retângulo de comprimento L e largura l, a área é:",
+      "Wareegsanaanta dhererka L iyo ballacdha l leh, aaggiisu waa:",
+      "L uzunluğu ve l genişliğindeki bir dikdörtgen için alan:",
+      "د L اوږدوالي او l پلن والي مستطیل مساحت:"
+    ) },
+
+    // 2 — rule "Formule"
+    { label: S(
+        "Formule", "Formula", "الصيغة", "فرمول", "ቅጥዒ", "Формула", "Fórmula", "Qaacidada", "Formül", "فورمول"
+      ),
+      items: A(
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"],
+        ["A = L × l"]
+      )
+    },
+
+    // 3 — svg with captionFr
+    { caption: S(
+      "Rectangle L × l — A = L × l",
+      "Rectangle L × l — A = L × l",
+      "مستطيل L × l — A = L × l",
+      "مستطیل L × l — A = L × l",
+      "ካሬ-ሓለቃ L × l — A = L × l",
+      "Прямокутник L × l — A = L × l",
+      "Retângulo L × l — A = L × l",
+      "Wareegsanaanta L × l — A = L × l",
+      "Dikdörtgen L × l — A = L × l",
+      "مستطیل L × l — A = L × l"
+    ) },
+
+    // 4 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "مثال"
+    ) },
+
+    // 5 — section (label="", items)
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Rectangle 8 cm × 5 cm :", "A = 8 × 5 = **40 cm²**"],
+        ["Rectangle 8 cm × 5 cm:", "A = 8 × 5 = **40 cm²**"],
+        ["مستطيل 8 سم × 5 سم:", "A = 8 × 5 = **40 سم²**"],
+        ["مستطیل 8 سانتیمتر × 5 سانتیمتر:", "A = 8 × 5 = **40 سانتیمتر²**"],
+        ["ካሬ-ሓለቃ 8 ሰም × 5 ሰም:", "A = 8 × 5 = **40 ሰም²**"],
+        ["Прямокутник 8 см × 5 см:", "A = 8 × 5 = **40 см²**"],
+        ["Retângulo 8 cm × 5 cm:", "A = 8 × 5 = **40 cm²**"],
+        ["Wareegsanaanta 8 cm × 5 cm:", "A = 8 × 5 = **40 cm²**"],
+        ["8 cm × 5 cm dikdörtgen:", "A = 8 × 5 = **40 cm²**"],
+        ["مستطیل 8 سم × 5 سم:", "A = 8 × 5 = **40 سم²**"]
+      )
+    },
+
+    // 6 — heading "Conversions d'unités" (black)
+    { text: S(
+      "Conversions d'unités",
+      "Unit conversions",
+      "تحويلات الوحدات",
+      "تبدیل واحدها",
+      "ናይ ኣሃዙ ምቕያር",
+      "Перетворення одиниць",
+      "Conversões de unidades",
+      "Beddelista cutubka",
+      "Birim dönüşümleri",
+      "د واحدونو بدلون"
+    ) },
+
+    // 7 — table (no caption)
+    { headers: A(
+        ["Conversion", "Valeur"],
+        ["Conversion", "Value"],
+        ["التحويل", "القيمة"],
+        ["تبدیل", "مقدار"],
+        ["ምቕያር", "ዋጋ"],
+        ["Перетворення", "Значення"],
+        ["Conversão", "Valor"],
+        ["Beddelka", "Qiimaha"],
+        ["Dönüşüm", "Değer"],
+        ["بدلون", "ارزښت"]
+      ),
+      items: A(
+        ["1 m² = … cm²", "1 km² = … m²", "1 dm² = … cm²"],
+        ["1 m² = … cm²", "1 km² = … m²", "1 dm² = … cm²"],
+        ["1 م² = … سم²", "1 كم² = … م²", "1 دسم² = … سم²"],
+        ["1 م² = … سانتیمتر²", "1 کیلومتر² = … م²", "1 دسیمتر² = … سانتیمتر²"],
+        ["1 ም² = … ሰም²", "1 ክም² = … ም²", "1 ዲሰም² = … ሰም²"],
+        ["1 м² = … см²", "1 км² = … м²", "1 дм² = … см²"],
+        ["1 m² = … cm²", "1 km² = … m²", "1 dm² = … cm²"],
+        ["1 m² = … cm²", "1 km² = … m²", "1 dm² = … cm²"],
+        ["1 m² = … cm²", "1 km² = … m²", "1 dm² = … cm²"],
+        ["1 m² = … سم²", "1 km² = … m²", "1 dm² = … سم²"]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "Formule : A = L × l, où L est la longueur et l la largeur.",

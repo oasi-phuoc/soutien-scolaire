@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G3_4: SubmoduleTrad = {
   submoduleId: "G3-4",
   title: {
@@ -10,6 +16,129 @@ export const TRAD_G3_4: SubmoduleTrad = {
     ti: "ናይ ዕኩል ብዙ-ጎቦ ዙሪያ",
     uk: "Периметр правильних многокутників",
   },
+  blocks: [
+    // 0 — heading "Polygone régulier" (black)
+    { text: S(
+      "Polygone régulier",
+      "Regular polygon",
+      "المضلع المنتظم",
+      "چندضلعی منتظم",
+      "ዕኩል ብዙ-ጎቦ",
+      "Правильний многокутник",
+      "Polígono regular",
+      "Baargeysaha caadiga ah",
+      "Düzgün çokgen",
+      "منظم بهله‌ضلعي"
+    ) },
+
+    // 1 — plain "Un polygone régulier a **tous ses côtés de même longueur**..."
+    { text: S(
+      "Un polygone régulier a **tous ses côtés de même longueur** (c). Son périmètre est :",
+      "A regular polygon has **all sides of equal length** (c). Its perimeter is:",
+      "المضلع المنتظم له **جميع أضلاعه بنفس الطول** (c). محيطه هو:",
+      "چندضلعی منتظم **همه اضلاعش هم‌طول** (c) هستند. محیط آن عبارت است از:",
+      "ዕኩል ብዙ-ጎቦ **ኩሉ ጎቦ ዕኩል ርዝሓ** (c) ዘለዎ ዩ። ዙሪያኡ ዝኸውን:",
+      "Правильний многокутник має **всі сторони однакової довжини** (c). Його периметр:",
+      "Um polígono regular tem **todos os lados de igual comprimento** (c). O seu perímetro é:",
+      "Baargeysaha caadiga ah wuxuu leeyahay **dhinacyo dhererkoodu siman yahay** (c). Xadkiisu waa:",
+      "Düzgün çokgenin **tüm kenarları eşit uzunluktadır** (c). Çevresi:",
+      "منظم بهله‌ضلعي **ټول اړخونه يې مساوي اوږدوالی** (c) لري. د هغه محیط:"
+    ) },
+
+    // 2 — rule "Formule" itemsFr ["P = n × c", "(n = nombre de côtés, c = longueur d'un côté)"]
+    { label: S(
+      "Formule",
+      "Formula",
+      "الصيغة",
+      "فرمول",
+      "ቅጥዒ",
+      "Формула",
+      "Fórmula",
+      "Qaacidada",
+      "Formül",
+      "فورمول"
+    ), items: A(
+      ["P = n × c", "(n = nombre de côtés, c = longueur d'un côté)"],
+      ["P = n × c", "(n = number of sides, c = side length)"],
+      ["P = n × c", "(n = عدد الأضلاع، c = طول الضلع)"],
+      ["P = n × c", "(n = تعداد اضلاع، c = طول یک ضلع)"],
+      ["P = n × c", "(n = ቁጽሪ ጎቦ, c = ርዝሓ ሓደ ጎቦ)"],
+      ["P = n × c", "(n = кількість сторін, c = довжина сторони)"],
+      ["P = n × c", "(n = número de lados, c = comprimento de um lado)"],
+      ["P = n × c", "(n = tirada dhinacyada, c = dhererka dhinac)"],
+      ["P = n × c", "(n = kenar sayısı, c = bir kenarın uzunluğu)"],
+      ["P = n × c", "(n = د اړخونو شمیر، c = د یوه اړخ اوږدوالی)"]
+    ) },
+
+    // 3 — table headersFr ["Polygone", "n", "Exemple (c = 5 cm)", "P"]
+    { headers: A(
+      ["Polygone", "n", "Exemple (c = 5 cm)", "P"],
+      ["Polygon", "n", "Example (c = 5 cm)", "P"],
+      ["المضلع", "n", "مثال (c = 5 سم)", "P"],
+      ["چندضلعی", "n", "مثال (c = 5 سانتیمتر)", "P"],
+      ["ብዙ-ጎቦ", "n", "ምሳሌ (c = 5 ሰም)", "P"],
+      ["Многокутник", "n", "Приклад (c = 5 см)", "P"],
+      ["Polígono", "n", "Exemplo (c = 5 cm)", "P"],
+      ["Baargeysaha", "n", "Tusaale (c = 5 cm)", "P"],
+      ["Çokgen", "n", "Örnek (c = 5 cm)", "P"],
+      ["بهله‌ضلعي", "n", "بېلګه (c = 5 سم)", "P"]
+    ), items: A(
+      ["Triangle équilatéral\t3\t3 × 5\t15 cm", "Carré\t4\t4 × 5\t20 cm", "Pentagone\t5\t5 × 5\t25 cm", "Hexagone\t6\t6 × 5\t30 cm", "Octogone\t8\t8 × 5\t40 cm"],
+      ["Equilateral triangle\t3\t3 × 5\t15 cm", "Square\t4\t4 × 5\t20 cm", "Pentagon\t5\t5 × 5\t25 cm", "Hexagon\t6\t6 × 5\t30 cm", "Octagon\t8\t8 × 5\t40 cm"],
+      ["مثلث متساوي الأضلاع\t3\t3 × 5\t15 سم", "مربع\t4\t4 × 5\t20 سم", "خماسي\t5\t5 × 5\t25 سم", "سداسي\t6\t6 × 5\t30 سم", "ثماني\t8\t8 × 5\t40 سم"],
+      ["مثلث متساوی‌الاضلاع\t3\t3 × 5\t15 سانتیمتر", "مربع\t4\t4 × 5\t20 سانتیمتر", "پنتاگون\t5\t5 × 5\t25 سانتیمتر", "هگزاگون\t6\t6 × 5\t30 سانتیمتر", "اکتاگون\t8\t8 × 5\t40 سانتیمتر"],
+      ["ዕኩል ሰለስ-ጎቦ\t3\t3 × 5\t15 ሰም", "ካሬ\t4\t4 × 5\t20 ሰም", "ሃምስ-ጎቦ\t5\t5 × 5\t25 ሰም", "ሽዱሽ-ጎቦ\t6\t6 × 5\t30 ሰም", "ሸሞን-ጎቦ\t8\t8 × 5\t40 ሰም"],
+      ["Рівносторонній трикутник\t3\t3 × 5\t15 см", "Квадрат\t4\t4 × 5\t20 см", "П'ятикутник\t5\t5 × 5\t25 см", "Шестикутник\t6\t6 × 5\t30 см", "Восьмикутник\t8\t8 × 5\t40 см"],
+      ["Triângulo equilátero\t3\t3 × 5\t15 cm", "Quadrado\t4\t4 × 5\t20 cm", "Pentágono\t5\t5 × 5\t25 cm", "Hexágono\t6\t6 × 5\t30 cm", "Octógono\t8\t8 × 5\t40 cm"],
+      ["Saddexgeesood la'eg\t3\t3 × 5\t15 cm", "Geesinada\t4\t4 × 5\t20 cm", "Shanta-geesood\t5\t5 × 5\t25 cm", "Lixda-geesood\t6\t6 × 5\t30 cm", "Sideedda-geesood\t8\t8 × 5\t40 cm"],
+      ["Eşkenar üçgen\t3\t3 × 5\t15 cm", "Kare\t4\t4 × 5\t20 cm", "Beşgen\t5\t5 × 5\t25 cm", "Altıgen\t6\t6 × 5\t30 cm", "Sekizgen\t8\t8 × 5\t40 cm"],
+      ["مساوي الاضلاع مثلث\t3\t3 × 5\t15 سم", "مربع\t4\t4 × 5\t20 سم", "پنتاګون\t5\t5 × 5\t25 سم", "هکساګون\t6\t6 × 5\t30 سم", "اکتاګون\t8\t8 × 5\t40 سم"]
+    ) },
+
+    // 4 — svg_row with items captionFr "Pentagone (5 × c)", "Hexagone (6 × c)", "Octogone (8 × c)"
+    { items: A(
+      ["Pentagone (5 × c)", "Hexagone (6 × c)", "Octogone (8 × c)"],
+      ["Pentagon (5 × c)", "Hexagon (6 × c)", "Octagon (8 × c)"],
+      ["خماسي (5 × c)", "سداسي (6 × c)", "ثماني (8 × c)"],
+      ["پنتاگون (5 × c)", "هگزاگون (6 × c)", "اکتاگون (8 × c)"],
+      ["ሃምስ-ጎቦ (5 × c)", "ሽዱሽ-ጎቦ (6 × c)", "ሸሞን-ጎቦ (8 × c)"],
+      ["П'ятикутник (5 × c)", "Шестикутник (6 × c)", "Восьмикутник (8 × c)"],
+      ["Pentágono (5 × c)", "Hexágono (6 × c)", "Octógono (8 × c)"],
+      ["Shanta-geesood (5 × c)", "Lixda-geesood (6 × c)", "Sideedda-geesood (8 × c)"],
+      ["Beşgen (5 × c)", "Altıgen (6 × c)", "Sekizgen (8 × c)"],
+      ["پنتاګون (5 × c)", "هکساګون (6 × c)", "اکتاګون (8 × c)"]
+    ) },
+
+    // 5 — highlight "Polygone quelconque"
+    { text: S(
+      "Polygone quelconque",
+      "Any polygon",
+      "أي مضلع",
+      "هر چندضلعی",
+      "ዝኾነ ብዙ-ጎቦ",
+      "Будь-який многокутник",
+      "Qualquer polígono",
+      "Baargeysaha kasta",
+      "Herhangi bir çokgen",
+      "هر بهله‌ضلعي"
+    ) },
+
+    // 6 — section labelFr "" itemsFr ["Pour un polygone non régulier : P = **somme de tous les côtés**."]
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Pour un polygone non régulier : P = **somme de tous les côtés**."],
+        ["For an irregular polygon: P = **sum of all sides**."],
+        ["لأي مضلع غير منتظم: P = **مجموع جميع الأضلاع**."],
+        ["برای یک چندضلعی نامنتظم: P = **مجموع همه اضلاع**."],
+        ["ንዝኾነ ዘይዕኩል ብዙ-ጎቦ: P = **ናይ ኩሎም ጎቦ ድምር**."],
+        ["Для будь-якого неправильного многокутника: P = **сума всіх сторін**."],
+        ["Para um polígono irregular: P = **soma de todos os lados**."],
+        ["Baargeysaha aan caadiga ahayn: P = **wadarta dhinacyada oo dhan**."],
+        ["Düzgün olmayan bir çokgen için: P = **tüm kenarların toplamı**."],
+        ["د غیر منظم بهله‌ضلعي لپاره: P = **د ټولو اړخونو مجموعه**."]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "Un polygone régulier a tous ses côtés de même longueur. Son périmètre est : P = n × c, où n est le nombre de côtés et c la longueur d'un côté.",

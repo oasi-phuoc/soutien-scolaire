@@ -1,5 +1,11 @@
 import type { SubmoduleTrad } from "./trad-types";
 
+const S = (fr: string, en: string, ar: string, fa: string, ti: string, uk: string, pt: string, so: string, tr: string, ps: string) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
+const A = (fr: string[], en: string[], ar: string[], fa: string[], ti: string[], uk: string[], pt: string[], so: string[], tr: string[], ps: string[]) =>
+  ({ fr, en, ar, fa, ti, uk, pt, so, tr, ps });
+
 export const TRAD_G3_1: SubmoduleTrad = {
   submoduleId: "G3-1",
   title: {
@@ -10,6 +16,162 @@ export const TRAD_G3_1: SubmoduleTrad = {
     ti: "ናይ ካሬ ዙሪያ",
     uk: "Периметр квадрата",
   },
+  blocks: [
+    // 0 — heading "Qu'est-ce que le périmètre ?" (black)
+    { text: S(
+      "Qu'est-ce que le périmètre ?",
+      "What is the perimeter?",
+      "ما هو المحيط؟",
+      "محیط چیست؟",
+      "ዙሪያ እንታይ ዩ?",
+      "Що таке периметр?",
+      "O que é o perímetro?",
+      "Maxay tahay waxa loogu yeedho xadka?",
+      "Çevre nedir?",
+      "محیط څه ده؟"
+    ) },
+
+    // 1 — plain
+    { text: S(
+      "Le **périmètre** est la longueur totale du contour d'une figure. On le mesure en unités de longueur (cm, m, km…).",
+      "The **perimeter** is the total length of the outline of a figure. It is measured in length units (cm, m, km…).",
+      "**المحيط** هو الطول الإجمالي لمحيط شكل. يُقاس بوحدات الطول (سم، م، كم…).",
+      "**محیط** طول کلی حاشیه یک شکل است. به واحدهای طول (سانتیمتر، متر، کیلومتر…) اندازه‌گیری می‌شود.",
+      "**ዙሪያ** ናይ ቅርጺ ሓቆፋ ምሉእ ርዝሓ ዩ። ብናይ ርዝሓ ሓደ ዜሮ (ሰም፣ ም፣ ክም…) ዝሕሰብ ዩ።",
+      "**Периметр** — загальна довжина контуру фігури. Вимірюється в одиницях довжини (см, м, км…).",
+      "O **perímetro** é o comprimento total do contorno de uma figura. Mede-se em unidades de comprimento (cm, m, km…).",
+      "**Xadka** waa dhererka guud ee xudduudda sawirka. Waxaa lagu cabbiraa cutubka dhererka (cm, m, km…).",
+      "**Çevre**, bir şeklin dış hatlarının toplam uzunluğudur. Uzunluk birimleriyle (cm, m, km…) ölçülür.",
+      "**محیط** د یوې شکلې د بهرني حاشیې ټوله اوږدوالی ده. د اوږدوالي واحدونو (سم، م، کم…) سره اندازه کیږي."
+    ) },
+
+    // 2 — heading "Carré" (black)
+    { text: S(
+      "Carré",
+      "Square",
+      "المربع",
+      "مربع",
+      "ካሬ",
+      "Квадрат",
+      "Quadrado",
+      "Geesinada",
+      "Kare",
+      "مربع"
+    ) },
+
+    // 3 — plain
+    { text: S(
+      "Un carré a **4 côtés égaux**. On note c la longueur d'un côté.",
+      "A square has **4 equal sides**. We denote c the length of one side.",
+      "المربع له **4 أضلاع متساوية**. نرمز بـ c لطول الضلع.",
+      "مربع **4 ضلع مساوی** دارد. c طول یک ضلع را نشان می‌دهد.",
+      "ካሬ **4 ዕኩል ጎቦ** ዘለዎ ዩ። c ናይ ሓደ ጎቦ ርዝሓ ዩ።",
+      "Квадрат має **4 рівні сторони**. c позначає довжину сторони.",
+      "Um quadrado tem **4 lados iguais**. Denota-se c o comprimento de um lado.",
+      "Geesinada waxaa leh **4 dhinac oo siman**. c waxaa loogu yeeraa dhererka dhinac.",
+      "Bir karenin **4 eşit kenarı** vardır. Bir kenarın uzunluğunu c ile gösteririz.",
+      "مربع **4 مساوي اړخونه** لري. c د یوه اړخ اوږدوالی ده."
+    ) },
+
+    // 4 — rule "Formule" itemsFr ["P = 4 × c"]
+    { label: S(
+      "Formule",
+      "Formula",
+      "الصيغة",
+      "فرمول",
+      "ቅጥዒ",
+      "Формула",
+      "Fórmula",
+      "Qaacidada",
+      "Formül",
+      "فورمول"
+    ), items: A(
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"],
+      ["P = 4 × c"]
+    ) },
+
+    // 5 — highlight "Exemple"
+    { text: S(
+      "Exemple",
+      "Example",
+      "مثال",
+      "مثال",
+      "ምሳሌ",
+      "Приклад",
+      "Exemplo",
+      "Tusaale",
+      "Örnek",
+      "بېلګه"
+    ) },
+
+    // 6 — section labelFr "" itemsFr ["Carré de côté 7 cm :", "P = 4 × 7 = **28 cm**"]
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Carré de côté 7 cm :", "P = 4 × 7 = **28 cm**"],
+        ["Square with side 7 cm:", "P = 4 × 7 = **28 cm**"],
+        ["مربع بضلع 7 سم:", "P = 4 × 7 = **28 سم**"],
+        ["مربع با ضلع 7 سانتیمتر:", "P = 4 × 7 = **28 سانتیمتر**"],
+        ["ካሬ ናይ 7 ሰም ጎቦ:", "P = 4 × 7 = **28 ሰም**"],
+        ["Квадрат зі стороною 7 см:", "P = 4 × 7 = **28 см**"],
+        ["Quadrado de lado 7 cm:", "P = 4 × 7 = **28 cm**"],
+        ["Geesinada 7 cm:", "P = 4 × 7 = **28 cm**"],
+        ["7 cm kenarlı kare:", "P = 4 × 7 = **28 cm**"],
+        ["د 7 سم اړخ لرونکی مربع:", "P = 4 × 7 = **28 سم**"]
+      )
+    },
+
+    // 7 — svg captionFr "Carré de côté c — P = 4 × c"
+    { caption: S(
+      "Carré de côté c — P = 4 × c",
+      "Square with side c — P = 4 × c",
+      "مربع بضلع c — P = 4 × c",
+      "مربع با ضلع c — P = 4 × c",
+      "ካሬ ናይ c ጎቦ — P = 4 × c",
+      "Квадрат зі стороною c — P = 4 × c",
+      "Quadrado de lado c — P = 4 × c",
+      "Geesinada dhinac c — P = 4 × c",
+      "c kenarlı kare — P = 4 × c",
+      "د c اړخ لرونکی مربع — P = 4 × c"
+    ) },
+
+    // 8 — highlight "Retrouver le côté"
+    { text: S(
+      "Retrouver le côté",
+      "Finding the side",
+      "إيجاد الضلع",
+      "یافتن ضلع",
+      "ጎቦ ምርካብ",
+      "Знайти сторону",
+      "Encontrar o lado",
+      "Helitaanka dhinaca",
+      "Kenarı bulmak",
+      "اړخ موندل"
+    ) },
+
+    // 9 — section labelFr "" itemsFr ["Si on connaît le périmètre : c = P ÷ 4"]
+    { label: S("", "", "", "", "", "", "", "", "", ""),
+      items: A(
+        ["Si on connaît le périmètre : c = P ÷ 4"],
+        ["If the perimeter is known: c = P ÷ 4"],
+        ["إذا عُرف المحيط: c = P ÷ 4"],
+        ["اگر محیط معلوم باشد: c = P ÷ 4"],
+        ["ዙሪያ እንተፈሊጥናዮ: c = P ÷ 4"],
+        ["Якщо периметр відомий: c = P ÷ 4"],
+        ["Se o perímetro for conhecido: c = P ÷ 4"],
+        ["Haddii xadka la yaqaan: c = P ÷ 4"],
+        ["Çevre biliniyorsa: c = P ÷ 4"],
+        ["که محیط معلوم وي: c = P ÷ 4"]
+      )
+    },
+  ],
   paragraphs: {
     fr: [
           "Le périmètre est la longueur totale du contour d'une figure. Pour le carré, les 4 côtés sont égaux.",
