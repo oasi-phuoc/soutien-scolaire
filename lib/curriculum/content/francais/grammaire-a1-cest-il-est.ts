@@ -6,9 +6,7 @@ export const A1_GR_CEST: GrammarLesson = {
   level: "A1",
   title: "C'est ou il est ?",
   theory: [
-    // ── Titre ──────────────────────────────────────────────────────────────────
-    { type: "heading", text: "C'est ou Il est / Elle est ?" },
-
+    // ── Intro ──────────────────────────────────────────────────────────────────
     {
       type: "plain_list",
       items: [
@@ -17,16 +15,15 @@ export const A1_GR_CEST: GrammarLesson = {
     },
 
     // ── 1. C'EST ───────────────────────────────────────────────────────────────
-    { type: "heading", text: "1. C'est", sub: true },
+    { type: "heading", text: "C'est", sub: true },
 
     {
-      type: "rule",
-      text: "{a}C'est{/a} = cela est. On utilise c'est pour identifier, présenter ou donner une information générale.",
-      examples: [
-        { correct: "C'est un professeur." },
-        { correct: "C'est Sophie." },
-        { correct: "C'est moi." },
+      type: "plain_list",
+      items: [
+        "{a}C'est{/a} = cela est.",
+        "On utilise c'est pour identifier, présenter ou donner une information générale.",
       ],
+      noBulletItems: [0, 1],
     },
 
     {
