@@ -221,7 +221,7 @@ export function CompteDashboard({
                     ? "border-teal-500 bg-teal-50 text-teal-700 dark:bg-teal-950/30 dark:text-teal-400"
                     : syncStatus === "error"
                       ? "border-red-400 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-400"
-                      : "border-zinc-300 text-[var(--color-accent-alg)] hover:bg-blue-50 dark:border-zinc-600 dark:hover:bg-blue-950/30"
+                      : "border-zinc-300 text-[var(--color-theme)] hover:bg-[var(--color-theme-light)] dark:border-zinc-600"
                 }`}
               >
                 {syncStatus !== "ok" && <IconRefresh spinning={syncStatus === "syncing"} />}
@@ -399,7 +399,7 @@ export function CompteDashboard({
                   }}
                   className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200 dark:border-zinc-700"} ${
                     checked
-                      ? "bg-[var(--color-accent-alg)] text-white"
+                      ? "bg-[var(--color-theme)] text-white"
                       : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900 dark:hover:text-zinc-300"
                   }`}
                 >
@@ -431,7 +431,7 @@ export function CompteDashboard({
                   }}
                   className={`flex-1 px-4 py-2 text-sm font-semibold transition-colors${isLast ? "" : " border-r border-zinc-200 dark:border-zinc-700"} ${
                     checked
-                      ? "bg-[var(--color-accent-alg)] text-white"
+                      ? "bg-[var(--color-theme)] text-white"
                       : "bg-white text-zinc-500 hover:text-zinc-700 dark:bg-zinc-900 dark:hover:text-zinc-300"
                   }`}
                 >

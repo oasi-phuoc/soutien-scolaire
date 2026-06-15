@@ -19,8 +19,8 @@ export function MainNav() {
   const itemClass = (active: boolean) =>
     `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[24px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
       active
-        ? "bg-[var(--color-theme)]/14 text-[var(--color-theme)] shadow-sm ring-1 ring-[var(--color-theme)]/18"
-        : "text-zinc-500 hover:-translate-y-0.5 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/80 dark:hover:text-zinc-100"
+        ? "bg-[color-mix(in_oklch,var(--nav-color)_16%,white)] text-[var(--nav-color)] shadow-sm ring-1 ring-[color-mix(in_oklch,var(--nav-color)_28%,transparent)]"
+        : "text-zinc-500 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--nav-color)_10%,white)] hover:text-[var(--nav-color)] dark:text-zinc-400"
     }`;
 
   return (
@@ -35,12 +35,12 @@ export function MainNav() {
               ? pathname === "/" || pathname === ""
               : pathname.startsWith(href);
           return (
-            <li key={href} style={active ? { "--color-theme": color } as React.CSSProperties : undefined}>
+            <li key={href} style={{ "--nav-color": color } as React.CSSProperties}>
               <Link href={href} className={itemClass(active)}>
                 <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
                   active
-                    ? "bg-[var(--color-theme)] text-white"
-                    : "bg-transparent group-hover:bg-white group-hover:text-[var(--color-theme)] dark:group-hover:bg-zinc-950"
+                    ? "bg-[var(--nav-color)] text-white"
+                    : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
                 }`}>
                   <Icon active={active} />
                 </span>
@@ -49,7 +49,7 @@ export function MainNav() {
             </li>
           );
         })}
-        <li>
+        <li style={{ "--nav-color": "var(--color-theme)" } as React.CSSProperties}>
           <button
             type="button"
             onClick={togglePivot}
@@ -57,8 +57,8 @@ export function MainNav() {
           >
             <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
               showPivot
-                ? "bg-[var(--color-theme)] text-white"
-                : "bg-transparent group-hover:bg-white group-hover:text-[var(--color-theme)] dark:group-hover:bg-zinc-950"
+                ? "bg-[var(--nav-color)] text-white"
+                : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
             }`}>
               <TranslateIcon active={showPivot} />
             </span>
