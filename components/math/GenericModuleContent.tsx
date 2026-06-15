@@ -25,6 +25,7 @@ import {
   Exercise37 as PlacementTrapezoidExercise,
   Exercise38 as PlacementCircleExercise,
 } from "@/components/math/placement/PlacementExercises28to38";
+import { G5VolumeExercise } from "@/components/math/geo/G5VolumeExercises";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
@@ -211,8 +212,10 @@ type UnitConversionConfig = { exNum: number; domain: UnitConversionDomain; decim
 type UnitConversionStep = { kind: "unit_conversion"; lesson: MathSubmoduleLesson; config: UnitConversionConfig };
 type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus";
 type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
+type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere";
+type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep;
 
 // â”€â”€ Comparison exercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
@@ -1614,11 +1617,11 @@ function UnitConversionExercise({
           const ok = validated ? (results[i] ?? false) : null;
           const wrong = ok === false;
           return (
-            <div key={`${q.value}-${q.from}-${q.to}-${i}`} className="grid grid-cols-[2rem_auto_auto_auto] items-center gap-x-3 gap-y-1 text-sm">
+            <div key={`${q.value}-${q.from}-${q.to}-${i}`} className="inline-flex w-auto items-center gap-3 text-sm">
               <span className="font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-              <span className="font-mono text-[var(--color-text-primary)]">{q.value} {q.from}</span>
+              <span className="w-28 shrink-0 font-mono text-[var(--color-text-primary)]">{q.value} {q.from}</span>
               <span className="text-[var(--color-text-secondary)]">=</span>
-              <div className="flex items-center gap-2">
+              <div className="inline-flex w-auto items-center gap-2">
                 {wrong ? (
                   <div className="w-28 h-10 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
                     <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{v || "—"}</span>
@@ -2761,6 +2764,15 @@ const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; labe
   "G4-7": { geoKind: "rhombus", label: "PÃ©rimÃ¨tre et aire du losange" },
 };
 
+const G5_VOLUME_PLACEMENT: Partial<Record<string, { volumeKind: VolumePlacementKind; label: string }>> = {
+  "G5-4": { volumeKind: "cube", label: "Volume du cube" },
+  "G5-5": { volumeKind: "cuboid", label: "Volume du pavÃ© droit" },
+  "G5-6": { volumeKind: "prism", label: "Volume du prisme" },
+  "G5-7": { volumeKind: "cylinder", label: "Volume du cylindre" },
+  "G5-8": { volumeKind: "pyramid", label: "Volume de la pyramide" },
+  "G5-9": { volumeKind: "cone_sphere", label: "Volume du cÃ´ne et de la sphÃ¨re" },
+};
+
 function GeoLineInput({
   label,
   unit,
@@ -2900,10 +2912,27 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     steps.push({ kind: "theory", lesson });
     const sid = lesson.submoduleId;
     const geoPlacement = G3_GEO_PLACEMENT[sid];
+    const volumePlacement = G5_VOLUME_PLACEMENT[sid];
     if (geoPlacement) {
       steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+    } else if (volumePlacement) {
+      const pushVolumeSet = () => {
+        steps.push({ kind: "volume_placement", lesson, ...volumePlacement, exNum: 1, mode: "volume" });
+        steps.push({ kind: "volume_placement", lesson, ...volumePlacement, exNum: 2, mode: "missing" });
+        steps.push({ kind: "volume_placement", lesson, ...volumePlacement, exNum: 3, mode: "volume", decimals: true });
+        steps.push({ kind: "volume_placement", lesson, ...volumePlacement, exNum: 4, mode: "missing", decimals: true });
+      };
+      pushVolumeSet();
+      steps.push({ kind: "eval_start", lesson });
+      pushVolumeSet();
+    } else if (sid === "G5-10") {
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", true, 2) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", true, 2) });
     } else if (sid === "G2-1") {
       steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", false, 1) });
       steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", true, 2) });
@@ -3149,7 +3178,9 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
     l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
     l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
-    !!G3_GEO_PLACEMENT[l.submoduleId]
+    l.submoduleId === "G5-10" ||
+    !!G3_GEO_PLACEMENT[l.submoduleId] ||
+    !!G5_VOLUME_PLACEMENT[l.submoduleId]
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
     const lastLesson = lessons[lessons.length - 1]!;
@@ -5087,7 +5118,7 @@ export function GenericModuleContent({
           const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
           return parseInt(v, 10) === q.answer;
         });
-      } else if (currentStep.kind === "geo_placement") {
+      } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement") {
         currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
       const newSaved = [...evalPageSavedResults, currentResults];
@@ -5131,7 +5162,7 @@ export function GenericModuleContent({
                 : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
                 : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux â€” PGDC/PPMC"
                 : es?.kind === "word_problems" ? "ProblÃ¨mes"
-                : es?.kind === "geo_placement" ? es.label
+                : es?.kind === "geo_placement" || es?.kind === "volume_placement" ? es.label
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
@@ -5395,7 +5426,7 @@ export function GenericModuleContent({
     };
   }
 
-  if (currentStep?.kind === "geo_placement") {
+  if (currentStep?.kind === "geo_placement" || currentStep?.kind === "volume_placement") {
     stepCanValidate = !geoValidated;
     stepValidate = geoValidated ? () => {} : () => {
       setGeoValidateTrigger((n) => n + 1);
@@ -6420,6 +6451,21 @@ export function GenericModuleContent({
           validated={geoValidated}
           validateTrigger={geoValidateTrigger}
           onValidated={(score, max) => {
+            setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+            setGeoValidated(true);
+          }}
+        />
+      )}
+
+      {!showEvalScore && currentStep?.kind === "volume_placement" && (
+        <G5VolumeExercise
+          key={`volume-${stepIdx}-${geoResetKey}`}
+          exNum={currentStep.exNum}
+          solidKind={currentStep.volumeKind}
+          mode={currentStep.mode}
+          decimals={currentStep.decimals}
+          validateCommand={geoValidateTrigger}
+          onValidated={(_ok, score = 0, max = 2) => {
             setGeoResults(Array.from({ length: max }, (_, i) => i < score));
             setGeoValidated(true);
           }}
