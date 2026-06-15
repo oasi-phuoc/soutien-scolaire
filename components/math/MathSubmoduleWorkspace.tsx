@@ -2015,43 +2015,102 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
       )}
 
-      {/* Eval exercises — all mounted during eval + results for expandable review */}
-      {(isInEvalExercises || currentStep?.kind === "results") && evalExSteps.length > 0 && evalExSteps.map((step, i) => {
-        const absIdx = evalStartIdx + 1 + i;
-        const isActiveEval = isInEvalExercises && stepIdx === absIdx;
-        const isResultsSelected = currentStep?.kind === "results" && selectedResultIdx === i;
-        const visible = isActiveEval || isResultsSelected;
+      {/* Eval exercises + results: unified inline-expansion block */}
+      {(isInEvalExercises || currentStep?.kind === "results") && evalExSteps.length > 0 && (() => {
+        const isResultsPage = currentStep?.kind === "results";
+        const exIndices = evalExSteps.map((_, j) => evalStartIdx + 1 + j);
+        const totalCorrect = exIndices.reduce((s, i) => s + (evalScores[i]?.c ?? 0), 0);
+        const totalPts = exIndices.reduce((s, i) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
+        const resGrade = linearSwissGrade(totalCorrect, totalPts);
+        const resPassed = resGrade >= PASSING_GRADE;
         return (
-          <div
-            key={`evalex-${evalKey}-${i}`}
-            className={visible ? (isResultsSelected ? "mt-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "") : "hidden"}
-          >
-            {isResultsSelected && (
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {i + 1}</h2>
-                <span className="text-xs text-[var(--color-text-secondary)]">
-                  {(() => {
-                    const sc = evalScores[absIdx];
-                    const c = sc?.c ?? 0;
-                    const t = stepExpectedTotal(step, sc);
-                    return `${c} / ${t}`;
-                  })()}
-                </span>
+          <div>
+            {/* Score header — results only */}
+            {isResultsPage && (
+              <div className="mb-6 space-y-6">
+                <div className="space-y-1 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
+                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+                    {totalCorrect} <span className="text-xl text-[var(--color-text-secondary)]">/ {totalPts}</span>
+                  </p>
+                </div>
+                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                  <div
+                    className={`h-full rounded-full transition-all duration-700 ${resPassed ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
+                    style={{ width: `${totalPts > 0 ? Math.round((totalCorrect / totalPts) * 100) : 0}%` }}
+                  />
+                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
+                </p>
               </div>
             )}
-            {renderEvalStep(
-              step,
-              isActiveEval ? (evalValidateCommands[i] ?? 0) : 0,
-              (ok, correct, total) => {
-                const c = correct ?? (ok ? 1 : 0);
-                const t = total ?? stepExpectedTotal(step, undefined);
-                setEvalScores(prev => ({ ...prev, [absIdx]: { c, t } }));
-                setEvalExValidated(prev => ({ ...prev, [i]: true }));
-              }
+
+            {/* Section label */}
+            {isResultsPage && (
+              <div className="mb-3">
+                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
+              </div>
             )}
+
+            {/* Exercise list — each item has row button + inline exercise panel */}
+            <div className={isResultsPage ? "space-y-2" : ""}>
+              {evalExSteps.map((evalStep, i) => {
+                const absIdx = evalStartIdx + 1 + i;
+                const isActiveEval = isInEvalExercises && stepIdx === absIdx;
+                const isResultsSelected = isResultsPage && selectedResultIdx === i;
+                const sc = evalScores[absIdx];
+                const c = sc?.c ?? 0;
+                const t = stepExpectedTotal(evalStep, sc);
+                const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
+                return (
+                  <div key={`evalex-${evalKey}-${i}`}
+                    className={isInEvalExercises && !isActiveEval ? "hidden" : "space-y-2"}>
+                    {/* Row button — results only */}
+                    {isResultsPage && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedResultIdx(isResultsSelected ? null : i)}
+                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
+                          isResultsSelected
+                            ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                        }`}
+                      >
+                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</span>
+                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">Exercice {i + 1}</span>
+                        <span className={`shrink-0 text-xs font-bold tabular-nums ${color}`}>{c}/{t}</span>
+                      </button>
+                    )}
+                    {/* Exercise panel — active during eval, inline under row during results */}
+                    <div className={
+                      isInEvalExercises && isActiveEval ? "" :
+                      (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                    }>
+                      {isResultsSelected && (
+                        <div className="mb-4 flex items-center justify-between">
+                          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {i + 1}</h2>
+                          <span className="text-xs text-[var(--color-text-secondary)]">{c} / {t}</span>
+                        </div>
+                      )}
+                      {renderEvalStep(
+                        evalStep,
+                        isActiveEval ? (evalValidateCommands[i] ?? 0) : 0,
+                        (ok, correct, total) => {
+                          const rc = correct ?? (ok ? 1 : 0);
+                          const rt = total ?? stepExpectedTotal(evalStep, undefined);
+                          setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
+                          setEvalExValidated(prev => ({ ...prev, [i]: true }));
+                        }
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         );
-      })}
+      })()}
 
       {/* Hint button — floated right, aligns with exercise title */}
       {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && getWorkspaceStepHint(currentStep) && (
@@ -2517,63 +2576,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           </div>
         </div>
       )}
-
-      {/* Results page (A4/A5 scored modules) */}
-      {currentStep?.kind === "results" && (() => {
-        const evalStartI = steps.findIndex((s: WorkspaceStep) => s.kind === "eval_start");
-        const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
-        const exIndices = Array.from({ length: resultsI - evalStartI - 1 }, (_: unknown, j: number) => evalStartI + 1 + j);
-        const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
-        const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
-        const grade = linearSwissGrade(correct, total);
-        const passed = grade >= PASSING_GRADE;
-        return (
-          <div className="space-y-4">
-            <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
-            <ul className="space-y-2">
-              {exIndices.map((idx, i) => {
-                const sc = evalScores[idx];
-                const c = sc?.c ?? 0;
-                const t = stepExpectedTotal(steps[idx], sc);
-                const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
-                const isSelected = selectedResultIdx === i;
-                return (
-                  <li key={i} className="space-y-1">
-                    <button
-                      type="button"
-                      onClick={() => setSelectedResultIdx(isSelected ? null : i)}
-                      className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
-                        isSelected
-                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
-                          : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
-                      }`}
-                    >
-                      <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</span>
-                      <span className="flex-1 text-sm text-[var(--color-text-primary)]">Exercice {i + 1}</span>
-                      <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{c}/{t}</span>
-                      <svg
-                        className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`}
-                        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
-                      >
-                        <path d="M9 18l6-6-6-6" />
-                      </svg>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-            <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${passed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-              <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
-              <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>
-              <p className="text-sm text-[var(--color-text-secondary)]">sur 6</p>
-              <p className={`mt-3 text-base font-bold ${passed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
-                {passed ? "✓ Réussi" : "✗ À améliorer"}
-              </p>
-              <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
-            </div>
-          </div>
-        );
-      })()}
 
       {/* Fixed bottom nav — hidden on eval_start announcement */}
       {currentStep?.kind !== "eval_start" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">

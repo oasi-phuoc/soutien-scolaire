@@ -2516,53 +2516,31 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
         {/* Eval phase + results: all eval exercises mounted simultaneously */}
         {(isEvalPhase || isResults) && (
           <div>
-            {/* Results header with clickable exercise rows */}
+            {/* Score header — results only */}
             {isResults && (
-              <div className="mb-6 space-y-3">
-                <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
-                <ul className="space-y-2">
-                  {evalExercises.map((ex, i) => {
-                    const isSelected = selectedResultIdx === i;
-                    return (
-                      <li key={i}>
-                        <button
-                          type="button"
-                          onClick={() => setSelectedResultIdx(isSelected ? null : i)}
-                          className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
-                            isSelected
-                              ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10"
-                              : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-fr)]/60"
-                          }`}
-                        >
-                          <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
-                          <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{ex.title}</span>
-                          <span className={`shrink-0 text-xs font-bold ${
-                            !evalValidated[i] ? "text-zinc-400"
-                              : evalPassed[i] ? "text-green-600"
-                              : "text-red-500"
-                          }`}>
-                            {!evalValidated[i] ? "—" : evalPassed[i] ? "✓" : "✗"}
-                          </span>
-                          <svg
-                            className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`}
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
-                          >
-                            <path d="M9 18l6-6-6-6" />
-                          </svg>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalGrade >= PASSING_GRADE ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-                  <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
-                  <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}</p>
-                  <p className="text-sm text-[var(--color-text-secondary)]">sur 6</p>
-                  <p className={`mt-3 text-base font-bold ${evalGrade >= PASSING_GRADE ? "text-[var(--color-accent-fr)]" : "text-red-500"}`}>
-                    {evalGrade >= PASSING_GRADE ? "✓ Réussi" : "✗ À améliorer"}
+              <div className="mb-6 space-y-6">
+                <div className="space-y-1 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
+                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+                    {evalPassedCount} <span className="text-xl text-[var(--color-text-secondary)]">/ {evalExercises.length}</span>
                   </p>
-                  <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
                 </div>
+                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                  <div
+                    className={`h-full rounded-full transition-all duration-700 ${evalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
+                    style={{ width: `${evalExercises.length > 0 ? Math.round((evalPassedCount / evalExercises.length) * 100) : 0}%` }}
+                  />
+                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
+                </p>
+              </div>
+            )}
+
+            {/* Section label */}
+            {isResults && (
+              <div className="mb-3">
+                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des exercices</h3>
               </div>
             )}
 
@@ -2573,33 +2551,60 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               </div>
             )}
 
-            {/* All eval exercises — kept mounted across eval + results phases */}
-            {evalExercises.map((ex, i) => {
-              const isActive = isEvalPhase && i === evalIdx;
-              const isSelectedResult = isResults && selectedResultIdx === i;
-              const visible = isActive || isSelectedResult;
-              return (
-                <div
-                  key={`eval-${evalSessionKey}-${i}`}
-                  className={visible ? (isSelectedResult ? "mt-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "") : "hidden"}
-                >
-                  {isSelectedResult && (
-                    <div className="mb-4 flex items-center justify-between">
-                      <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
-                      <span className={`text-sm font-bold ${evalPassed[i] ? "text-green-600" : "text-red-500"}`}>
-                        {evalPassed[i] ? "✓ Réussi" : "✗ Non réussi"}
-                      </span>
+            {/* All eval exercises — inline expansion under each row */}
+            <div className={isResults ? "space-y-2" : ""}>
+              {evalExercises.map((ex, i) => {
+                const isActive = isEvalPhase && i === evalIdx;
+                const isSelectedResult = isResults && selectedResultIdx === i;
+                return (
+                  <div
+                    key={`eval-${evalSessionKey}-${i}`}
+                    className={isEvalPhase && !isActive ? "hidden" : "space-y-2"}
+                  >
+                    {/* Row button — results only */}
+                    {isResults && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedResultIdx(isSelectedResult ? null : i)}
+                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
+                          isSelectedResult
+                            ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10"
+                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-fr)]/60"
+                        }`}
+                      >
+                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
+                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{ex.title}</span>
+                        <span className={`shrink-0 text-xs font-bold ${
+                          !evalValidated[i] ? "text-zinc-400" : evalPassed[i] ? "text-green-600" : "text-red-500"
+                        }`}>
+                          {!evalValidated[i] ? "—" : evalPassed[i] ? "✓" : "✗"}
+                        </span>
+                      </button>
+                    )}
+                    {/* Exercise panel — active during eval, inline under row during results */}
+                    <div className={
+                      isEvalPhase && isActive ? "" :
+                      (isSelectedResult ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                    }>
+                      {isSelectedResult && (
+                        <div className="mb-4 flex items-center justify-between">
+                          <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
+                          <span className={`text-sm font-bold ${evalPassed[i] ? "text-green-600" : "text-red-500"}`}>
+                            {evalPassed[i] ? "✓ Réussi" : "✗ Non réussi"}
+                          </span>
+                        </div>
+                      )}
+                      <ExerciseView
+                        exercise={ex}
+                        onValidated={handleEvalValidated}
+                        validateCommand={evalValidateCommands[i] ?? 0}
+                        onCanValidateChange={isActive ? setCanValidate : () => {}}
+                      />
                     </div>
-                  )}
-                  <ExerciseView
-                    exercise={ex}
-                    onValidated={handleEvalValidated}
-                    validateCommand={evalValidateCommands[i] ?? 0}
-                    onCanValidateChange={isActive ? setCanValidate : () => {}}
-                  />
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

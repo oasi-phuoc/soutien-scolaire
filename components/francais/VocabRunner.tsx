@@ -20,7 +20,6 @@ import { ExWordOrder } from "./vocab/ExWordOrder";
 import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
-import { VocabResults } from "./vocab/VocabResults";
 
 interface Props {
   theme: VocabTheme;
@@ -40,6 +39,16 @@ const EVAL_EXERCISE_STEPS: StepDef[] = [
   { key: "results",   label: "Résultats", isTheory: true },
 ];
 const EVAL_ONLY_STEPS = EVAL_EXERCISE_STEPS.filter((s) => s.isEval);
+
+const VOCAB_EVAL_LABELS = [
+  "Article",
+  "Lettres manquantes",
+  "Phrases à compléter",
+  "Mot (image)",
+  "Dictée",
+  "Phrase libre",
+  "Question libre",
+];
 
 function buildSteps(theme: { words: Array<{ feminine?: string }> }): StepDef[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
@@ -276,8 +285,7 @@ export function VocabRunner({ theme }: Props) {
       case "eval-ex10":
         return <ExQuestionWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "results":
-        return <VocabResults key={componentKey} evalScores={evalScores} grade={grade} passingGrade={passingGrade}
-          selectedResultIdx={selectedResultIdx} onSelect={setSelectedResultIdx} />;
+        return null;
       default:
         return null;
     }
@@ -388,38 +396,93 @@ export function VocabRunner({ theme }: Props) {
 
       {/* Step content */}
       <div className="min-h-[280px]">
-        {/* Training + announce + results steps */}
-        {!isInEvalPhase && renderStep()}
+        {/* Training + announce only (not results, not active eval exercises) */}
+        {!isInEvalPhase && step.key !== "results" && renderStep()}
 
-        {/* Eval exercises — mounted during eval, expandable during results */}
-        {(isInEvalPhase || step.key === "results") && EVAL_ONLY_STEPS.map((exStep, i) => {
-          const isActive = isInEvalPhase && evalExIdx === i;
-          const isSelectedResult = step.key === "results" && selectedResultIdx === i;
-          const visible = isActive || isSelectedResult;
-          return (
-            <div
-              key={`eval-${evalSessionKey}-${i}`}
-              className={visible ? (isSelectedResult ? "mt-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "") : "hidden"}
-            >
-              {isSelectedResult && (
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
-                  {evalScores[i] && (
-                    <span className={`text-sm font-bold ${evalScores[i].correct === evalScores[i].total ? "text-green-600" : evalScores[i].correct > 0 ? "text-amber-600" : "text-red-500"}`}>
-                      {evalScores[i].correct}/{evalScores[i].total}
-                    </span>
-                  )}
+        {/* Eval + Results: score at top, inline exercise expansion */}
+        {(isInEvalPhase || step.key === "results") && (
+          <div>
+            {/* Score header — results only */}
+            {step.key === "results" && (
+              <div className="mb-6 space-y-6">
+                <div className="space-y-1 text-center">
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
+                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
+                    {totalCorrect} <span className="text-xl text-[var(--color-text-secondary)]">/ {totalItems}</span>
+                  </p>
                 </div>
-              )}
-              {renderEvalExercise(
-                exStep,
-                isActive ? (evalValidateCommands[i] ?? 0) : 0,
-                isActive ? setCanValidate : () => {},
-                (correct, total) => handleEvalValidated(i, correct, total)
-              )}
+                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                  <div
+                    className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
+                    style={{ width: `${totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0}%` }}
+                  />
+                </div>
+                <p className="text-sm text-[var(--color-text-secondary)]">
+                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
+                </p>
+              </div>
+            )}
+
+            {/* Section label */}
+            {step.key === "results" && (
+              <div className="mb-3">
+                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des points par exercice</h3>
+              </div>
+            )}
+
+            {/* Exercise list — each item contains its own expansion panel */}
+            <div className={step.key === "results" ? "space-y-2" : ""}>
+              {EVAL_ONLY_STEPS.map((exStep, i) => {
+                const isActive = isInEvalPhase && evalExIdx === i;
+                const isSelectedResult = step.key === "results" && selectedResultIdx === i;
+                const score = evalScores[i];
+                return (
+                  <div key={`eval-${evalSessionKey}-${i}`}
+                    className={isInEvalPhase && !isActive ? "hidden" : "space-y-2"}>
+                    {/* Row button — results only */}
+                    {step.key === "results" && (
+                      <button
+                        type="button"
+                        onClick={() => setSelectedResultIdx(isSelectedResult ? null : i)}
+                        className={`flex w-full items-center gap-3 rounded-lg border px-3 py-2 text-left transition-colors ${
+                          isSelectedResult
+                            ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10"
+                            : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-fr)]/60"
+                        }`}
+                      >
+                        <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
+                        <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{VOCAB_EVAL_LABELS[i] ?? `Exercice ${i + 1}`}</span>
+                        {score && (
+                          <span className={`shrink-0 text-xs font-bold tabular-nums ${score.correct === score.total ? "text-green-600" : score.correct > 0 ? "text-amber-600" : "text-red-500"}`}>
+                            {score.correct} / {score.total}
+                          </span>
+                        )}
+                      </button>
+                    )}
+                    {/* Exercise panel — active during eval, inline under row during results */}
+                    <div className={
+                      isInEvalPhase && isActive ? "" :
+                      (isSelectedResult ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                    }>
+                      {isSelectedResult && score && (
+                        <div className="mb-4 flex items-center justify-between">
+                          <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
+                          <span className="text-xs text-[var(--color-text-secondary)]">{score.correct} / {score.total}</span>
+                        </div>
+                      )}
+                      {renderEvalExercise(
+                        exStep,
+                        isActive ? (evalValidateCommands[i] ?? 0) : 0,
+                        isActive ? setCanValidate : () => {},
+                        (correct, total) => handleEvalValidated(i, correct, total)
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        )}
       </div>
 
       {/* Fixed bottom nav */}
