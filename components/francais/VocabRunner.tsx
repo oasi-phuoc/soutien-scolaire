@@ -82,7 +82,7 @@ export function VocabRunner({ theme }: Props) {
   const evalExLast = steps.length - 2; // results is last
   const evalTotal = evalExLast - evalExFirst + 1;
   const trainingStepCount = evalAnnounceIdx;
-  const evalExKeys = steps.slice(evalExFirst, evalExLast + 1).map((s) => s.key);
+  const _evalExKeys = steps.slice(evalExFirst, evalExLast + 1).map((s) => s.key);
 
   const [stepIdx, setStepIdx] = useState(0);
   const [resetKey, setResetKey] = useState(0);

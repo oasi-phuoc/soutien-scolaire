@@ -2225,7 +2225,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const evalPassedCount = evalPassed.filter(Boolean).length;
   const evalGrade = hasEval && evalExercises.length > 0 ? linearSwissGrade(evalPassedCount, evalExercises.length) : 0;
   const evalPercent = hasEval && evalExercises.length > 0 ? (evalPassedCount / evalExercises.length) * 100 : 0;
-  const evalMedal = hasEval ? medalFromPercent(evalPercent) : null;
+  const _evalMedal = hasEval ? medalFromPercent(evalPercent) : null;
 
   // Reset validate command when moving to a new step
   useEffect(() => {
