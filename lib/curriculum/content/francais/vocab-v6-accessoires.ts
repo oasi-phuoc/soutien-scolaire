@@ -26,8 +26,8 @@ export const V6_ACCESSOIRES_THEME: VocabTheme = {
     { word: "montre", image: "montre.png", article: "la", gender: "f", group: "Bijoux", definition: "bijou au poignet indiquant l'heure" },
     { word: "collier", image: "collier.png", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté autour du cou" },
     { word: "boucles d'oreilles", image: "boucles-d-oreilles.png", article: "les", gender: "f", group: "Bijoux", definition: "bijoux portés aux oreilles" },
-    { word: "bracelet", image: "bracelet.png", article: "le", gender: "m", group: "Pour les mains", definition: "bijou porté au poignet" },
-    { word: "bague", image: "bague.png", article: "la", gender: "f", group: "Pour les mains", definition: "anneau bijou porté au doigt" },
+    { word: "bracelet", image: "bracelet.png", article: "le", gender: "m", group: "Bijoux", definition: "bijou porté au poignet" },
+    { word: "bague", image: "bague.png", article: "la", gender: "f", group: "Bijoux", definition: "anneau bijou porté au doigt" },
   ],
   sentences: [
     { sentence: "Elle met ses ___ avant de sortir.", answer: "chaussures" },

@@ -7035,7 +7035,8 @@ export function GenericModuleContent({
           <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
           {/* 3-column score summary */}
           <div className="grid grid-cols-3 gap-3">
-            <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+            {/* Col 1: Points — no frame */}
+            <div className="flex flex-col items-center justify-center p-3 text-center">
               <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
               <p className="text-2xl font-bold text-[var(--color-text-primary)]">
                 {evalEarnedPts}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalTotalPts_state}</span>
@@ -7045,11 +7046,12 @@ export function GenericModuleContent({
                   style={{ width: `${evalTotalPts_state > 0 ? Math.round((evalEarnedPts / evalTotalPts_state) * 100) : 0}%` }} />
               </div>
             </div>
-            <div className={`flex flex-col items-center justify-center rounded-xl border-2 p-3 text-center ${evalFinalGrade >= PASSING_GRADE ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+            {/* Col 2: Note — no frame */}
+            <div className="flex flex-col items-center justify-center p-3 text-center">
               <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
               <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-              <p className={`mt-1 text-[10px] font-bold ${evalFinalGrade >= PASSING_GRADE ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>{evalFinalGrade >= PASSING_GRADE ? "✓ Validé" : "✗ À améliorer"}</p>
             </div>
+            {/* Col 3: Mention — framed */}
             <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
               <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
               <p className="text-2xl">{evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 96 ? "🥇" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 80 ? "🥈" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 60 ? "🥉" : "—"}</p>

@@ -22,6 +22,9 @@ export const V6_COULEURS_THEME: VocabTheme = {
     { word: "doré",      image: "dore.svg",       feminine: "dorée",     definition: "couleur brillante semblable à l'or" },
     { word: "argenté",   image: "argente.svg",    feminine: "argentée",  definition: "couleur brillante semblable à l'argent" },
     { word: "cyan",      image: "cyan.svg",       definition: "couleur bleu vif entre bleu et vert" },
+    { word: "bordeaux",  image: "bordeaux.svg",   definition: "couleur rouge foncé comme le vin de Bordeaux" },
+    { word: "lilas",     image: "lilas.svg",      definition: "couleur violet clair comme la fleur de lilas" },
+    { word: "kaki",      image: "kaki.svg",       definition: "couleur vert olive tirant sur le brun" },
   ],
   sentences: [
     { sentence: "Le ciel est ___ et le soleil brille.",                  answer: "bleu" },
@@ -29,5 +32,6 @@ export const V6_COULEURS_THEME: VocabTheme = {
     { sentence: "Les feuilles de cet arbre sont de couleur ___.",        answer: "vert" },
     { sentence: "Sa veste préférée est ___, comme la nuit.",             answer: "noir" },
     { sentence: "Il a une montre ___ qui brille comme de l'or.",         answer: "doré" },
+    { sentence: "Elle porte une robe ___ très élégante pour le mariage.", answer: "bordeaux" },
   ],
 };

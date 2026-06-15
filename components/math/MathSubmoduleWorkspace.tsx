@@ -27,7 +27,7 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
-import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
+import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
 import { G3AreaExercise } from "@/components/math/geo/G3AreaExercises";
 
@@ -119,6 +119,8 @@ type WorkspaceStep =
   | { kind: "g1_definition_match"; exNum: number }
   | { kind: "g1_anagram"; exNum: number }
   | { kind: "g1_shape_write"; exNum: number }
+  | { kind: "g1_prop_check"; exNum: number }
+  | { kind: "g1_shape_qa"; exNum: number }
   | { kind: "g2_perimeter"; exNum: number; shapeKind: "square" | "rectangle" | "triangle" | "regular" | "circle" | "composite"; mode: "perimeter" | "missing"; decimals?: boolean }
   | { kind: "g3_area"; exNum: number; shapeKind: "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus" | "composite"; mode: "area" | "missing"; decimals?: boolean }
   | { kind: "eval_start" }
@@ -138,6 +140,7 @@ const STEP_DEFAULT_TOTALS: Record<string, number> = {
   frac_to_dec: 5, dec_to_frac: 5,
   dec_col_arith: 4, dec_col_arith_full: 2, dec_expr_comp: 5,
   dec_mul2_col: 2,
+  g1_prop_check: 5, g1_shape_qa: 5,
 };
 
 function stepExpectedTotal(step: WorkspaceStep | undefined, stored: { c: number; t: number } | undefined): number {
@@ -510,6 +513,15 @@ function buildSteps(lesson: MathSubmoduleLesson): WorkspaceStep[] {
     steps.push({ kind: "g1_anagram", exNum: 2 });
     steps.push({ kind: "g1_definition_match", exNum: 3 });
     steps.push({ kind: "g1_shape_write", exNum: 4 });
+    steps.push({ kind: "results" });
+  } else if (lesson.submoduleId === "G1-2") {
+    steps.push({ kind: "g1_prop_check", exNum: 1 });
+    steps.push({ kind: "g1_definition_match", exNum: 2 });
+    steps.push({ kind: "g1_shape_qa", exNum: 3 });
+    steps.push({ kind: "eval_start" });
+    steps.push({ kind: "g1_prop_check", exNum: 1 });
+    steps.push({ kind: "g1_definition_match", exNum: 2 });
+    steps.push({ kind: "g1_shape_qa", exNum: 3 });
     steps.push({ kind: "results" });
   } else if (lesson.submoduleId.startsWith("G3-")) {
     const shapeKind =
@@ -1769,7 +1781,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   // Exception: A5-4, A5-5, A5-6 have custom decimal exercises handled below
   // Exception: RA/RG revision lessons — route to GenericModuleContent (revisionMode) for GenericModuleContent parents;
   //            keep workspace step builder only for A4 and A7 parents (custom step types).
-  const isCustomA5 = submoduleId === "G1-1" || submoduleId?.startsWith("G3-") || submoduleId?.startsWith("G4-") || submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
+  const isCustomA5 = submoduleId === "G1-1" || submoduleId === "G1-2" || submoduleId?.startsWith("G3-") || submoduleId?.startsWith("G4-") || submoduleId === "A5-1" || submoduleId === "A5-4" || submoduleId === "A5-5" || submoduleId === "A5-6" || submoduleId === "A7-1" || submoduleId === "A7-2" || submoduleId === "A7-3" || submoduleId === "A7-4" || submoduleId?.startsWith("A6-") || submoduleId === "A8-1" || submoduleId === "A8-2" || submoduleId === "A8-3" || submoduleId === "A8-4" || submoduleId === "A8-5";
   const isRevision = /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
   if (isRevision) {
     const revParent = getParentModuleForRevision(submoduleId ?? "");
@@ -1791,7 +1803,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep.kind !== "results";
   const A51_KINDS = new Set(["dec_read_decompose","dec_read_recompose","dec_read_place_value","dec_read_digit_at","dec_read_dictation","dec_read_compare","dec_read_order","dec_read_filter_gt","dec_read_filter_lt","dec_read_filter_between","dec_read_encadrement","dec_read_encadrement_unite","dec_read_nl_read","dec_read_nl_place"]);
   const A71_KINDS = new Set(["a7_nl_read_mixed","a7_nl_place_mixed","a7_nl_read_neg","a7_nl_place_neg","a7_compare_ex","a7_rel_arith","a7_rel_mul_div","a7_rel_num_select","a7_rel_encadrement","a7_rel_ordering","a7_rel_seq_complete"]);
-  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "g1_name_to_svg" || currentStep?.kind === "g1_definition_match" || currentStep?.kind === "g1_anagram" || currentStep?.kind === "g1_shape_write" || currentStep?.kind === "g2_perimeter" || currentStep?.kind === "g3_area" || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
+  const isCustom = A51_KINDS.has(currentStep?.kind ?? "") || A71_KINDS.has(currentStep?.kind ?? "") || currentStep?.kind === "g1_name_to_svg" || currentStep?.kind === "g1_definition_match" || currentStep?.kind === "g1_anagram" || currentStep?.kind === "g1_shape_write" || currentStep?.kind === "g1_prop_check" || currentStep?.kind === "g1_shape_qa" || currentStep?.kind === "g2_perimeter" || currentStep?.kind === "g3_area" || currentStep?.kind === "a8_power_ex" || currentStep?.kind === "a8_missing_exp_ex" || currentStep?.kind === "a8_missing_base_ex" || currentStep?.kind === "a8_power_cmp_ex" || currentStep?.kind === "a8_power_order_ex" || currentStep?.kind === "a8_mult_ex" || currentStep?.kind === "a8_div_ex" || currentStep?.kind === "a8_pow_pow_ex" || currentStep?.kind === "a8_mixed_ex" || currentStep?.kind === "a8_eq_complete_ex" || currentStep?.kind === "a8_pow10_calc_ex" || currentStep?.kind === "a8_to_pow10_ex" || currentStep?.kind === "a8_pow10_exp_ex" || currentStep?.kind === "a8_sci_calc_ex" || currentStep?.kind === "a8_sci_write_ex" || currentStep?.kind === "a8_sqrt_tf_ex" || currentStep?.kind === "a8_sqrt_ex" || currentStep?.kind === "a8_sqrt_missing_ex" || currentStep?.kind === "a8_op_simple_ex" || currentStep?.kind === "a8_op_paren_ex" || currentStep?.kind === "a8_op_bracket_ex" || currentStep?.kind === "a8_op_fill_ex" || currentStep?.kind === "a8_op_powsqrt_ex" || currentStep?.kind === "a8_op_complex_ex" || currentStep?.kind === "fraction_toggle" || currentStep?.kind === "fraction_coloring" || currentStep?.kind === "fraction_read" || currentStep?.kind === "fraction_multi_coloring" || currentStep?.kind === "fraction_multi_read" || currentStep?.kind === "fraction_equiv" || currentStep?.kind === "fraction_simplify" || currentStep?.kind === "fraction_compare" || currentStep?.kind === "frac_op_compare" || currentStep?.kind === "frac_ops" || currentStep?.kind === "frac_to_dec" || currentStep?.kind === "dec_to_frac" || currentStep?.kind === "dec_arith_group" || currentStep?.kind === "dec_mul_col" || currentStep?.kind === "dec_div_simple" || currentStep?.kind === "dec_div_missing" || currentStep?.kind === "dec_div_ext" || currentStep?.kind === "dec_col_arith" || currentStep?.kind === "dec_col_arith_full" || currentStep?.kind === "dec_expr_comp" || currentStep?.kind === "dec_mul2_col" || currentStep?.kind === "pct_to_frac_ex" || currentStep?.kind === "pct_to_dec_ex" || currentStep?.kind === "frac_to_pct_ex" || currentStep?.kind === "dec_to_pct_ex" || currentStep?.kind === "pct_of_num_ex" || currentStep?.kind === "part_to_pct_ex" || currentStep?.kind === "pct_diff_ex" || currentStep?.kind === "pct_change_ex" || currentStep?.kind === "pct_multiplier_ex" || currentStep?.kind === "pct_table_ex" || currentStep?.kind === "pct_word_ex";
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results";
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
@@ -1981,6 +1993,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     if (step.kind === "g1_definition_match") return <G1DefinitionMatchExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g1_anagram") return <G1AnagramExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g1_shape_write") return <G1ShapeWriteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_prop_check") return <G1PropCheckExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_shape_qa") return <G1ShapeQAExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
     if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
     return null;
@@ -2033,8 +2047,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
               <div className="mb-6">
                 <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
                 <div className="grid grid-cols-3 gap-3">
-                  {/* Col 1: Points + bar */}
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+                  {/* Col 1: Points + bar — no frame */}
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
                     <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
                     <p className="text-2xl font-bold text-[var(--color-text-primary)]">
                       {totalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{totalPts}</span>
@@ -2043,13 +2057,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                       <div className={`h-full rounded-full transition-all duration-700 ${resPassed ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`} style={{ width: `${resPct}%` }} />
                     </div>
                   </div>
-                  {/* Col 2: Note */}
-                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 p-3 text-center ${resPassed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+                  {/* Col 2: Note — no frame */}
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
                     <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
                     <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
-                    <p className={`mt-1 text-[10px] font-bold ${resPassed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>{resPassed ? "✓ Validé" : "✗ À améliorer"}</p>
                   </div>
-                  {/* Col 3: Mention */}
+                  {/* Col 3: Mention — framed */}
                   <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
                     <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
                     <p className="text-2xl">{medalEmoji}</p>
@@ -2101,7 +2114,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                     {/* Exercise panel — active during eval, inline under row during results */}
                     <div className={
                       isInEvalExercises && isActiveEval ? "" :
-                      (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                      (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 [&_h2]:hidden" : "hidden")
                     }>
                       {renderEvalStep(
                         evalStep,
@@ -2441,7 +2454,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} displayExNum={currentStep.displayExNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
-      {/* G1-1 shape exercises */}
+      {/* G1 shape exercises */}
       {currentStep?.kind === "g1_name_to_svg" && (
         <G1NameToSVGExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
@@ -2453,6 +2466,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
       {currentStep?.kind === "g1_shape_write" && (
         <G1ShapeWriteExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_prop_check" && (
+        <G1PropCheckExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
+      )}
+      {currentStep?.kind === "g1_shape_qa" && (
+        <G1ShapeQAExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
       {currentStep?.kind === "g2_perimeter" && (
         <G2PerimeterExercise

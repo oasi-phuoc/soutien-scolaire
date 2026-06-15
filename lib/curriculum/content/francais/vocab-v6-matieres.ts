@@ -3,7 +3,7 @@ import type { VocabTheme } from "../../vocabulary-data";
 export const V6_MATIERES_THEME: VocabTheme = {
   slug: "v6-matieres",
   code: "V6.4",
-  title: "Les matières (tissus)",
+  title: "Les matières",
   section: "V6",
   words: [
     { word: "coton",      image: "coton.png",      article: "le",  gender: "m", definition: "tissu doux fait de la plante de coton" },
@@ -12,7 +12,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
     { word: "soie",       image: "soie.png",       article: "la",  gender: "f", definition: "tissu fin et brillant produit par les vers à soie" },
     { word: "plastique",  image: "plastique.png",  article: "le",  gender: "m", definition: "matière synthétique légère et imperméable" },
     { word: "métal",      image: "metal.png",      article: "le",  gender: "m", definition: "matière dure et conductrice comme le fer" },
-    { word: "bois",                                 article: "le",  gender: "m", definition: "matière naturelle provenant des arbres" },
+    { word: "bois",       image: "bois.png",       article: "le",  gender: "m", definition: "matière naturelle provenant des arbres" },
     { word: "verre",      image: "verre.png",      article: "le",  gender: "m", definition: "matière transparente et fragile" },
     { word: "papier",     image: "papier.png",     article: "le",  gender: "m", definition: "matière fine faite de fibres végétales" },
     { word: "nylon",      image: "nylon.png",      article: "le",  gender: "m", definition: "tissu synthétique résistant" },
