@@ -100,9 +100,9 @@ export function ExMascFem({
               </span>
               <span className="shrink-0 text-xs text-[var(--color-text-tertiary)]">→</span>
               {s.checked && !s.correct ? (
-                <div className="flex flex-1 flex-col justify-center rounded-xl border border-amber-400 px-3 py-1">
-                  <span className="text-[10px] leading-none text-amber-500 dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="mt-0.5 text-[11px] leading-none font-medium text-zinc-900 dark:text-zinc-100">{correctFemDisplay(w.feminine!, mascArt)}</span>
+                <div className="flex flex-1 min-w-0 flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                  <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{correctFemDisplay(w.feminine!, mascArt)}</span>
                 </div>
               ) : (
                 <input
@@ -115,7 +115,7 @@ export function ExMascFem({
                     }))
                   }
                   readOnly={s.checked}
-                  className="flex-1 rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-3 py-1.5 text-sm outline-none transition-colors focus:border-amber-500"
+                  className="flex-1 min-w-0 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
                 />
               )}
             </div>

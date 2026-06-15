@@ -61,9 +61,9 @@ export function ExDictation({
                 </button>
               </div>
               {s.checked && !s.correct ? (
-                <div className="flex w-full flex-col justify-center rounded-xl border border-amber-400 px-3 py-1">
-                  <span className="text-[10px] leading-none text-amber-500 dark:text-amber-400">{s.answer || "—"}</span>
-                  <span className="mt-0.5 text-[11px] leading-none font-medium text-zinc-900 dark:text-zinc-100">{w.word}</span>
+                <div className="flex w-full flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
+                  <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
+                  <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{w.word}</span>
                 </div>
               ) : (
                 <input
@@ -75,7 +75,7 @@ export function ExDictation({
                       [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                     }))
                   }
-                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-3 py-1.5 text-sm outline-none transition-colors focus:border-amber-500"
+                  className="w-full rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
                   readOnly={s.checked && s.correct}
                 />
               )}
