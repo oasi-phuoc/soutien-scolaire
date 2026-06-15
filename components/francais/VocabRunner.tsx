@@ -5,7 +5,7 @@ import Link from "next/link";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { linearSwissGrade, LEVEL_PASSING_GRADES, type LevelKey } from "@/lib/scoring";
-import EvalProgressBar from "@/components/math/EvalProgressBar";
+
 import { VocabCards } from "./vocab/VocabCards";
 import { ExImageMatch } from "./vocab/ExImageMatch";
 import { ExArticle } from "./vocab/ExArticle";
@@ -106,6 +106,7 @@ export function VocabRunner({ theme }: Props) {
   const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalTotal).fill(false));
   const [evalSessionKey, setEvalSessionKey] = useState(0);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
+  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
 
   const step = steps[stepIdx]!;
   const isLast = stepIdx === steps.length - 1;
@@ -114,6 +115,7 @@ export function VocabRunner({ theme }: Props) {
   const inEvalPhase = stepIdx >= evalAnnounceIdx;
   const isInEvalPhase = stepIdx >= evalExFirst && stepIdx <= evalExLast;
   const evalExIdx = isInEvalPhase ? stepIdx - evalExFirst : -1;
+  const allEvalValidated = evalValidated.length > 0 && evalValidated.every(Boolean);
 
   const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
   const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
@@ -151,7 +153,12 @@ export function VocabRunner({ theme }: Props) {
 
   function goBack() {
     if (isInEvalPhase) {
-      setShowEvalCancelConfirm(true);
+      if (evalExIdx <= 0) {
+        setShowFreeNavWarning(true);
+        setTimeout(() => setShowFreeNavWarning(false), 3000);
+      } else {
+        setStepIdx((s) => s - 1);
+      }
       return;
     }
     if (stepIdx === 0) {
@@ -166,33 +173,46 @@ export function VocabRunner({ theme }: Props) {
     }
   }
 
+  function finishResults() {
+    try {
+      const stored = JSON.parse(localStorage.getItem("soutien-vocab-eval-v1") ?? "{}");
+      stored[theme.slug] = { score: grade, passed, date: new Date().toISOString() };
+      localStorage.setItem("soutien-vocab-eval-v1", JSON.stringify(stored));
+    } catch {}
+    if (passed) {
+      markFrenchLessonComplete(theme.slug);
+      window.dispatchEvent(new CustomEvent("soutien-french-lesson-complete"));
+    }
+    router.push("/francais");
+  }
+
   function goNext() {
     if (isLast) {
-      try {
-        const stored = JSON.parse(localStorage.getItem("soutien-vocab-eval-v1") ?? "{}");
-        stored[theme.slug] = { score: grade, passed, date: new Date().toISOString() };
-        localStorage.setItem("soutien-vocab-eval-v1", JSON.stringify(stored));
-      } catch {}
-      if (passed) {
-        markFrenchLessonComplete(theme.slug);
-        window.dispatchEvent(new CustomEvent("soutien-french-lesson-complete"));
-      }
-      router.push("/francais");
-    } else {
-      const next = steps[stepIdx + 1]!;
-      if (stepIdx === evalAnnounceIdx) {
-        setEvalTimeLeft(EVAL_DURATION);
-        setEvalValidateCommands(Array(evalTotal).fill(0));
-        setEvalValidated(Array(evalTotal).fill(false));
-        setEvalSessionKey((k) => k + 1);
-        setSelectedResultIdx(null);
-      }
-      setStepIdx((s) => s + 1);
-      setResetKey((k) => k + 1);
-      setValidateCommand(0);
-      setValidated(next.isTheory);
-      setCanValidate(!next.isTheory);
+      finishResults();
+      return;
     }
+    if (isInEvalPhase) {
+      if (allEvalValidated) {
+        setStepIdx(steps.length - 1);
+      } else {
+        const next = evalExIdx >= evalTotal - 1 ? 0 : evalExIdx + 1;
+        setStepIdx(evalExFirst + next);
+      }
+      return;
+    }
+    const next = steps[stepIdx + 1]!;
+    if (stepIdx === evalAnnounceIdx) {
+      setEvalTimeLeft(EVAL_DURATION);
+      setEvalValidateCommands(Array(evalTotal).fill(0));
+      setEvalValidated(Array(evalTotal).fill(false));
+      setEvalSessionKey((k) => k + 1);
+      setSelectedResultIdx(null);
+    }
+    setStepIdx((s) => s + 1);
+    setResetKey((k) => k + 1);
+    setValidateCommand(0);
+    setValidated(next.isTheory);
+    setCanValidate(!next.isTheory);
   }
 
   function handleValidate() {
@@ -385,13 +405,34 @@ export function VocabRunner({ theme }: Props) {
         </div>
       )}
 
-      {/* Eval progress bar with timer — shown only during the 7 timed exercises */}
+      {/* Eval progress bar — shown only during the 7 timed exercises */}
       {isInEvalPhase && (
-        <EvalProgressBar
-          current={stepIdx - evalExFirst}
-          total={evalTotal}
-          timeLeft={evalTimeLeft}
-        />
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalExIdx + 1} / {evalTotal}</p>
+          </div>
+          <div className="flex gap-1">
+            {Array.from({ length: evalTotal }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  evalValidated[i]
+                    ? "bg-green-500"
+                    : i === evalExIdx
+                      ? "bg-amber-500 opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
+          {showFreeNavWarning && (
+            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Tu es au premier exercice. Valide et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
+            </div>
+          )}
+        </div>
       )}
 
       {/* Step content */}
@@ -558,10 +599,10 @@ export function VocabRunner({ theme }: Props) {
             <button
               type="button"
               onClick={goNext}
-              disabled={isInEvalPhase ? !evalValidated[evalExIdx] : (inEvalPhase && !validated)}
+              disabled={isInEvalPhase ? false : (inEvalPhase && !validated)}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-40"
             >
-              {isLast ? (
+              {isLast || (isInEvalPhase && allEvalValidated) ? (
                 <>
                   Terminer
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
