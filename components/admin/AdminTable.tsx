@@ -6,13 +6,6 @@ import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
 import { COMM_MODULES } from "@/lib/curriculum/communication-data";
-import { PIVOT_LANGS } from "@/lib/pivot-langs";
-
-const LANGUE_LABELS: Record<string, string> = {
-  fr: "Français",
-  ...Object.fromEntries(PIVOT_LANGS.map(l => [l.code, l.labelFr])),
-  other: "Autre",
-};
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import { resetAllElevesAction } from "@/app/actions/admin";
 
@@ -74,48 +67,6 @@ function lecturePct(data: StoredProgressV1 | null) {
   return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
 }
 
-const BRANCH_LABELS: Record<string, string> = { algebra: "Algèbre", geometry: "Géométrie", stats: "Stats" };
-
-function mathDetail(data: StoredProgressV1 | null) {
-  const branches = ["algebra", "geometry", "stats"] as const;
-  return branches.map(branch => {
-    const mods = MATH_MODULES.filter(m => m.branch === branch);
-    const ids = MATH_SUB_IDS_BY_BRANCH[branch];
-    const total = mods.reduce((n, m) => n + m.submodules.length, 0);
-    const done = data?.submoduleStates
-      ? Object.entries(data.submoduleStates).filter(([id, s]) => ids.has(id) && s === "completed").length
-      : mods.reduce((n, m) => n + Math.round((data?.math?.[m.id]?.subProgress ?? 0) * (data?.math?.[m.id]?.subTotal ?? 1)), 0);
-    const inProgress = mods.filter(m => data?.math?.[m.id]?.state === "in_progress");
-    return { branch, label: BRANCH_LABELS[branch], done, total, inProgress };
-  });
-}
-
-function frenchDetail(data: StoredProgressV1 | null) {
-  const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
-  const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
-  const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
-  const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
-  const firstCommSub = COMM_SUBMODULES.find(s => !(data?.commProgress?.[s.id]));
-  const commInProgress = firstCommSub ? { code: firstCommSub.code, title: firstCommSub.title } : null;
-  return [
-    { tab: "vocabulaire", label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length, inProgress: FRENCH_VOC.find(t => !completedSlugs.has(t.slug)) ?? null as { code: string; title: string } | null },
-    { tab: "grammaire", label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length, inProgress: FRENCH_GRAM.find(t => !completedSlugs.has(t.slug)) ?? null as { code: string; title: string } | null },
-    { tab: "communication", label: "Communication", done: commDone, total: COMM_SUBMODULES.length, inProgress: commInProgress },
-  ];
-}
-
-function lectureDetail(data: StoredProgressV1 | null) {
-  const subs = data?.lectureProgress?.submodules ?? {};
-  return LECTURE_MODULES.map(m => {
-    const subDone = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length;
-    const inProgress = m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "in_progress");
-    const currentLetter = subDone > 0 && subDone < m.letters.length
-      ? (m.letters.find(l => subs[`${m.id}-${l.letterLower}`] !== "completed") ?? null)
-      : null;
-    return { ...m, state: data?.lectureProgress?.modules?.[m.id] ?? null, subDone, subTotal: m.letters.length, inProgress, currentLetter };
-  });
-}
-
 function lastSeen(iso: string | null): string {
   if (!iso) return "—";
   const d = new Date(iso);
@@ -148,15 +99,6 @@ function ProgressCell({ done, total, pct, color }: { done: number; total: number
 
 // ── Icons ───────────────────────────────────────────────────────────────────
 
-function IconEdit() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-    </svg>
-  );
-}
-
 function IconTrash() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -182,16 +124,6 @@ function IconCancel() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M18 6 6 18M6 6l12 12" />
-    </svg>
-  );
-}
-
-function IconSave() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
-      <polyline points="17 21 17 13 7 13 7 21" />
-      <polyline points="7 3 7 8 15 8" />
     </svg>
   );
 }
@@ -268,7 +200,6 @@ function AdminClassSelect({
 }
 
 const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
-const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
 
 // ── Reset All Eleves Confirm ────────────────────────────────────────────────
 
