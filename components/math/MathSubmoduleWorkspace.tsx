@@ -25,6 +25,7 @@ import { A8PowerExercise, A8MissingExpExercise, A8MissingBaseExercise, A8PowerCo
 import { PctOfNumExercise, PartToPctExercise, PctChangeExercise, PctDiffExercise, PctMultiplierExercise, PctTableExercise, PctWordExercise } from "@/components/math/A6PercentContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
@@ -1808,17 +1809,17 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
   function goBack() {
-    if (isInEvalExercises) {
-      let prev = evalExerciseOffset - 1;
-      while (prev >= 0 && evalExValidated[prev]) prev--;
-      if (prev < 0) {
+    if (isInEvalExercises && isGeoModule) {
+      const evalIdx = stepIdx - evalStartIdx - 1;
+      if (evalIdx <= 0) {
         setShowGeoEvalWarning(true);
         setTimeout(() => setShowGeoEvalWarning(false), 3000);
       } else {
-        goTo(evalStartIdx + 1 + prev);
+        goTo(stepIdx - 1);
       }
       return;
     }
+    if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
     if (!isFirstStep) goTo(stepIdx - 1);
   }
 
@@ -1857,16 +1858,16 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
-    if (isInEvalExercises) {
-      const allDone = Array.from({ length: evalExerciseTotal }, (_, i) => !!evalExValidated[i]).every(Boolean);
-      if (allDone) {
-        const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
-        goTo(resultsI >= 0 ? resultsI : stepIdx + 1);
+    if (isInEvalExercises && isGeoModule) {
+      if (allEvalValidated) {
+        goTo(resultsIdx);
+        return;
+      }
+      const evalIdx = stepIdx - evalStartIdx - 1;
+      if (evalIdx >= evalExerciseTotal - 1) {
+        goTo(evalStartIdx + 1);
       } else {
-        let next = evalExerciseOffset + 1;
-        while (next < evalExerciseTotal && evalExValidated[next]) next++;
-        if (next >= evalExerciseTotal) { next = 0; while (next < evalExerciseTotal && evalExValidated[next]) next++; }
-        goTo(evalStartIdx + 1 + next);
+        goTo(stepIdx + 1);
       }
       return;
     }
@@ -1915,6 +1916,8 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep?.kind !== "results" && currentStep?.kind !== "eval_start" && currentStep?.kind !== "pass_toggle";
   const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
   const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
+  const isGeoModule = !!(submoduleId?.match(/^G\d/));
+  const allEvalValidated = evalExerciseTotal > 0 && Array.from({ length: evalExerciseTotal }, (_, j) => !!evalExValidated[j]).every(Boolean);
 
   const evalExSteps = evalStartIdx >= 0 && resultsIdx >= 0
     ? steps.slice(evalStartIdx + 1, resultsIdx)
@@ -2048,22 +2051,33 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <TrainingProgressBar current={trainingStepIdx} total={trainingSteps.length} timeLeft={trainingTimerLeft} />
       )}
       {/* Eval progress bar */}
-      {isInEvalExercises && (
-        <div className="mb-4">
+      {isInEvalExercises && !isGeoModule && (
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
+      )}
+      {isInEvalExercises && isGeoModule && (
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalExerciseOffset + 1} / {evalExerciseTotal}</p>
+          </div>
           <div className="flex gap-1">
-            {Array.from({ length: evalExerciseTotal }, (_, i) => {
-              if (evalExValidated[i]) return null;
-              return (
-                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i === evalExerciseOffset ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
-                }`} />
-              );
-            })}
+            {Array.from({ length: evalExerciseTotal }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  evalExValidated[i]
+                    ? "bg-green-500"
+                    : i === evalExerciseOffset
+                      ? "bg-amber-500 opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
           </div>
           {showGeoEvalWarning && (
             <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Tu es au premier exercice. Valide et utilise «&nbsp;Suivant&nbsp;» pour naviguer.
+              Tu es au premier exercice. Utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer ou valide tous les exercices pour terminer.
             </div>
           )}
         </div>
@@ -2103,10 +2117,22 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                     <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
                   </div>
                   {/* Col 3: Mention — framed */}
-                  <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
+                    isGeoModule
+                      ? resPassed ? "border-green-500" : "border-red-400"
+                      : "border-[var(--color-border-default)]"
+                  }`}>
                     <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                    <p className="text-2xl">{medalEmoji}</p>
-                    <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{mention}</p>
+                    {isGeoModule ? (
+                      <p className={`mt-1 text-sm font-bold ${resPassed ? "text-green-600" : "text-red-500"}`}>
+                        {resPassed ? "Réussi" : "À améliorer"}
+                      </p>
+                    ) : (
+                      <>
+                        <p className="text-2xl">{medalEmoji}</p>
+                        <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{mention}</p>
+                      </>
+                    )}
                   </div>
                 </div>
                 <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
@@ -2164,7 +2190,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                           const rt = total ?? stepExpectedTotal(evalStep, undefined);
                           setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
                           setEvalExValidated(prev => ({ ...prev, [i]: true }));
-                          if (isActiveEval) goTo(absIdx + 1);
+                          if (isActiveEval && !isGeoModule) goTo(absIdx + 1);
                         }
                       )}
                     </div>
@@ -2652,7 +2678,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button type="button" onClick={goBack}
-              disabled={(!isInEvalExercises && isFirstStep) || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
+              disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
               Retour
@@ -2687,10 +2713,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
             <button type="button" onClick={goNext}
               disabled={
                 (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                (isInEvalExercises && !evalExValidated[evalExerciseOffset])
+                (isInEvalExercises && !isGeoModule && !evalExValidated[stepIdx - evalStartIdx - 1])
               }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep || (isInEvalExercises && Array.from({ length: evalExerciseTotal }, (_, i) => !!evalExValidated[i]).every(Boolean)) ? (
+              {(isGeoModule && isInEvalExercises && allEvalValidated) || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
