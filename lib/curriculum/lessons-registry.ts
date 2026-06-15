@@ -20,12 +20,10 @@ import { MATH_G5_LESSONS } from "./content/math/math-g5";
 import { MATH_G6_LESSONS } from "./content/math/math-g6";
 import { MATH_G7_LESSONS } from "./content/math/math-g7";
 import { MATH_G8_LESSONS } from "./content/math/math-g8";
-import { MATH_G9_LESSONS } from "./content/math/math-g9";
-import { MATH_G10_LESSONS } from "./content/math/math-g10";
-import { MATH_G11_LESSONS } from "./content/math/math-g11";
+import { MATH_G9_RENUMBERED_LESSONS } from "./content/math/math-g9-renumbered";
+import { MATH_G10_RENUMBERED_LESSONS } from "./content/math/math-g10-renumbered";
 import { MATH_S1_LESSONS } from "./content/math/math-s1";
 import { MATH_S2_LESSONS } from "./content/math/math-s2";
-import { MATH_RG_LESSONS } from "./content/math/math-revisions";
 
 const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
   A1: MATH_A1_LESSONS,
@@ -49,12 +47,10 @@ const REGISTRY: Record<string, MathSubmoduleLesson[]> = {
   G6: MATH_G6_LESSONS,
   G7: MATH_G7_LESSONS,
   G8: MATH_G8_LESSONS,
-  G9: MATH_G9_LESSONS,
-  G10: MATH_G10_LESSONS,
-  G11: MATH_G11_LESSONS,
+  G9: MATH_G9_RENUMBERED_LESSONS,
+  G10: MATH_G10_RENUMBERED_LESSONS,
   S1: MATH_S1_LESSONS,
   S2: MATH_S2_LESSONS,
-  RG: MATH_RG_LESSONS,
 };
 
 export function getLessonsForModule(moduleId: string): MathSubmoduleLesson[] | undefined {

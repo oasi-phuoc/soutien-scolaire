@@ -34,7 +34,7 @@ export default async function MathModulePage({ params, searchParams }: Props) {
   if (!parentModuleId) notFound();
   const parentMod = getMathModule(parentModuleId!);
   // RA/RG revision modules are not in MATH_MODULES — allow them through
-  if (!parentMod && !parentModuleId!.startsWith("RA") && !parentModuleId!.startsWith("RG")) notFound();
+  if (!parentMod && !parentModuleId!.startsWith("RA")) notFound();
 
   const isGeometry = parentMod?.branch === "geometry";
   const tabLabel = isGeometry ? "Formes" : "Calculs";

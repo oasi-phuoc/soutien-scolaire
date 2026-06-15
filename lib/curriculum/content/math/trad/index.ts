@@ -86,12 +86,6 @@ import { TRAD_G4_5 } from "./trad-g4-5";
 import { TRAD_G4_6 } from "./trad-g4-6";
 import { TRAD_G4_7 } from "./trad-g4-7";
 import { TRAD_G4_8 } from "./trad-g4-8";
-import { TRAD_G5_1 } from "./trad-g5-1";
-import { TRAD_G5_2 } from "./trad-g5-2";
-import { TRAD_G5_3 } from "./trad-g5-3";
-import { TRAD_G5_4 } from "./trad-g5-4";
-import { TRAD_G5_5 } from "./trad-g5-5";
-import { TRAD_G5_6 } from "./trad-g5-6";
 import { TRAD_G6_1 } from "./trad-g6-1";
 import { TRAD_G6_2 } from "./trad-g6-2";
 import { TRAD_G6_3 } from "./trad-g6-3";
@@ -167,7 +161,6 @@ const ALL_TRADS: SubmoduleTrad[] = [
   TRAD_G2_1, TRAD_G2_2,
   TRAD_G3_1, TRAD_G3_2, TRAD_G3_3, TRAD_G3_4, TRAD_G3_5,
   TRAD_G4_1, TRAD_G4_2, TRAD_G4_3, TRAD_G4_4, TRAD_G4_5, TRAD_G4_6, TRAD_G4_7, TRAD_G4_8,
-  TRAD_G5_1, TRAD_G5_2, TRAD_G5_3, TRAD_G5_4, TRAD_G5_5, TRAD_G5_6,
   TRAD_G6_1, TRAD_G6_2, TRAD_G6_3, TRAD_G6_4, TRAD_G6_5, TRAD_G6_6, TRAD_G6_7,
   TRAD_G7_1, TRAD_G7_2, TRAD_G7_3, TRAD_G7_4, TRAD_G7_5,
   TRAD_G8_1, TRAD_G8_2, TRAD_G8_3, TRAD_G8_4, TRAD_G8_5, TRAD_G8_6,

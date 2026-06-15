@@ -809,9 +809,9 @@ function AnswerLine({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="grid grid-cols-[6rem_0.75rem_auto_auto] items-end gap-2 text-sm">
-      <span className="font-medium text-[var(--color-text-primary)]">{label}</span>
-      <span className="pb-1 text-center font-medium text-[var(--color-text-primary)]">:</span>
+    <div className="inline-flex w-auto items-end gap-2 text-sm">
+      <span className="w-24 shrink-0 font-medium text-[var(--color-text-primary)]">{label}</span>
+      <span className="w-3 shrink-0 pb-1 text-center font-medium text-[var(--color-text-primary)]">:</span>
       {checked && !ok ? (
         <div className="flex h-9 w-24 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 bg-transparent px-1">
           <span className="text-[10px] leading-none text-[var(--color-text-primary)] line-through">{value || "—"}</span>
@@ -827,7 +827,7 @@ function AnswerLine({
           readOnly={checked && ok}
         />
       )}
-      <span className="pb-1 text-[var(--color-text-secondary)]">{unit}</span>
+      <span className="shrink-0 pb-1 text-[var(--color-text-secondary)]">{unit}</span>
     </div>
   );
 }
