@@ -15,7 +15,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
-import EvalProgressBar from "@/components/math/EvalProgressBar";
+
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 
@@ -2205,6 +2205,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [evalPassed, setEvalPassed] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
+  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2225,6 +2226,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const evalPassedCount = evalPassed.filter(Boolean).length;
   const evalGrade = hasEval && evalExercises.length > 0 ? linearSwissGrade(evalPassedCount, evalExercises.length) : 0;
   const evalPercent = hasEval && evalExercises.length > 0 ? (evalPassedCount / evalExercises.length) * 100 : 0;
+  const allEvalValidated = evalValidated.length > 0 && evalValidated.every(Boolean);
   const _evalMedal = hasEval ? medalFromPercent(evalPercent) : null;
 
   // Reset validate command when moving to a new step
@@ -2302,7 +2304,8 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
         setEvalIdx(newIdx);
         setCanValidate(!evalValidated[newIdx]);
       } else {
-        setShowCancelConfirm(true);
+        setShowFreeNavWarning(true);
+        setTimeout(() => setShowFreeNavWarning(false), 3000);
       }
       return;
     }
@@ -2326,12 +2329,12 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       return;
     }
     if (isEvalPhase) {
-      if (evalIdx < evalExercises.length - 1) {
-        const newIdx = evalIdx + 1;
+      if (allEvalValidated) {
+        setStepIdx(resultsIdx);
+      } else {
+        const newIdx = evalIdx >= evalExercises.length - 1 ? 0 : evalIdx + 1;
         setEvalIdx(newIdx);
         setCanValidate(!evalValidated[newIdx]);
-      } else {
-        setStepIdx(resultsIdx);
       }
       return;
     }
@@ -2569,7 +2572,30 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             {/* Eval progress bar (only during eval phase) */}
             {isEvalPhase && (
               <div className="mb-4">
-                <EvalProgressBar current={evalIdx} total={evalExercises.length} timeLeft={evalTimeLeft} />
+                <div className="mb-1 flex items-center justify-between">
+                  <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+                  <p className="text-xs text-[var(--color-text-secondary)]">{evalIdx + 1} / {evalExercises.length}</p>
+                </div>
+                <div className="flex gap-1">
+                  {evalExercises.map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-1.5 flex-1 rounded-full transition-colors ${
+                        evalValidated[i]
+                          ? "bg-green-500"
+                          : i === evalIdx
+                            ? "bg-amber-500 opacity-60"
+                            : "bg-[var(--color-border-default)]"
+                      }`}
+                    />
+                  ))}
+                </div>
+                {showFreeNavWarning && (
+                  <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    Tu es au premier exercice. Valide et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
+                  </div>
+                )}
               </div>
             )}
 
@@ -2661,24 +2687,10 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
             <button
               type="button"
               onClick={isResults ? () => { markFrenchLessonComplete(lesson.slug); router.push(returnUrl); } : goNext}
-              disabled={isEvalPhase && !evalValidated[evalIdx]}
+              disabled={false}
               className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:cursor-not-allowed disabled:opacity-30 ${(isExercise && hasTimer && !exercisesStarted) || isEvalAnnounce ? "invisible" : ""}`}
             >
-              {isResults ? (
-                <>
-                  Terminer
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
-                    <path d="M20 6L9 17l-5-5" />
-                  </svg>
-                </>
-              ) : isEvalPhase && evalIdx === evalExercises.length - 1 ? (
-                <>
-                  Voir les résultats
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-                    <path d="M9 18l6-6-6-6" />
-                  </svg>
-                </>
-              ) : isLast ? (
+              {isResults || isLast || (isEvalPhase && allEvalValidated) ? (
                 <>
                   Terminer
                   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
