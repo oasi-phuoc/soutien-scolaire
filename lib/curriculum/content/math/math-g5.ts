@@ -1,4 +1,4 @@
-import type { MathSubmoduleLesson } from "./math-a1-types";
+import type { MathSubmoduleLesson, MathRichBlock } from "./math-a1-types";
 import { MATH_G9_1_LESSON } from "./math-g9-1";
 import { MATH_G9_4_LESSON } from "./math-g9-4";
 import { MATH_G9_5_LESSON } from "./math-g9-5";
@@ -28,12 +28,11 @@ const G5_4_LESSON: MathSubmoduleLesson = {
   theory: {
     title: { fr: "Prisme et pyramide" },
     paragraphs: { fr: [] },
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    blocks: ([
+    blocks: [
       ...(MATH_G9_6_LESSON.theory.blocks ?? []),
-      { type: "plain", fr: "" },
+      { type: "plain", fr: "" } as MathRichBlock,
       ...(MATH_G9_8_LESSON.theory.blocks ?? []),
-    ] as any[]),
+    ],
   },
   exercises: [
     ...MATH_G9_6_LESSON.exercises.map((ex) => ({ ...ex, id: ex.id.replace(/^g9/i, "g5") })),
