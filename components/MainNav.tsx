@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "@/components/TranslationProvider";
+import { getPendingTaskCountAction } from "@/app/actions/tasks";
 
 const links: { href: string; label: string; icon: ({ active }: { active: boolean }) => React.JSX.Element; color: string }[] = [
   { href: "/", label: "Accueil", icon: HomeIcon, color: "var(--color-theme)" },
@@ -15,6 +17,11 @@ const links: { href: string; label: string; icon: ({ active }: { active: boolean
 export function MainNav() {
   const pathname = usePathname() ?? "";
   const { showPivot, togglePivot } = useTranslation();
+  const [pendingTasks, setPendingTasks] = useState(0);
+
+  useEffect(() => {
+    getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
+  }, [pathname]);
 
   const itemClass = (active: boolean) =>
     `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[24px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
@@ -37,12 +44,17 @@ export function MainNav() {
           return (
             <li key={href} style={{ "--nav-color": color } as React.CSSProperties}>
               <Link href={href} className={itemClass(active)}>
-                <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
+                <span className={`relative flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
                   active
                     ? "bg-[var(--nav-color)] text-white"
                     : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
                 }`}>
                   <Icon active={active} />
+                  {href === "/" && pendingTasks > 0 && (
+                    <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold leading-none text-white ring-1 ring-white dark:ring-zinc-950">
+                      {pendingTasks > 9 ? "9+" : pendingTasks}
+                    </span>
+                  )}
                 </span>
                 <span className="truncate">{label}</span>
               </Link>

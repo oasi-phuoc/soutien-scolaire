@@ -1,5 +1,6 @@
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { HomeProgressCards } from "@/components/home/HomeProgressCards";
+import { TasksCard } from "@/components/home/TasksCard";
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
@@ -31,6 +32,8 @@ export default async function HomePage({ searchParams }: Props) {
           </p>
         ) : null}
       </div>
+
+      <TasksCard />
 
       <HomeProgressCards />
 
