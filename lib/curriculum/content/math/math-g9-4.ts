@@ -2,10 +2,11 @@ import type { MathSubmoduleLesson } from "./math-a1-types";
 
 const cubeVolumeSvg = `<svg viewBox='0 0 230 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
   <path d='M65 62 h76 v76 H65 Z' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <path d='M65 62 L96 32 h76 l-31 30 M141 62 l31-30 v76 l-31 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M65 62 L96 32 h76 l-31 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M172 32 v76 l-31 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <text x='103' y='154' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>c</text>
-  <text x='49' y='103' font-size='13' fill='var(--color-text-primary)'>c</text>
-  <text x='157' y='30' font-size='13' fill='var(--color-text-primary)'>c</text>
+  <text x='48' y='103' text-anchor='end' font-size='13' fill='var(--color-text-primary)'>c</text>
+  <text x='134' y='22' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>c</text>
 </svg>`;
 
 export const MATH_G9_4_LESSON: MathSubmoduleLesson = {
@@ -19,7 +20,7 @@ export const MATH_G9_4_LESSON: MathSubmoduleLesson = {
       { type: "plain", fr: "Un cube a **3 dimensions égales** : longueur = largeur = hauteur = côté." },
       { type: "svg", markup: cubeVolumeSvg, noFrame: true },
       { type: "highlight", fr: "Formule" },
-      { type: "section", labelFr: "**V = c × c × c = c³**", itemsFr: ["c est la mesure du côté.", "L'unité du volume est une unité **cubique** : cm³, dm³, m³..."] },
+      { type: "section", labelFr: "V = c × c × c = c³", itemsFr: ["c est la mesure du côté.", "L'unité du volume est une unité **cubique** : cm³, dm³, m³..."] },
       { type: "example", fr: "Cube de côté 4 cm : V = 4 × 4 × 4 = 64 cm³." },
       { type: "note", fr: "Si le volume est connu, on cherche le nombre qui multiplié 3 fois par lui-même donne ce volume." },
     ],

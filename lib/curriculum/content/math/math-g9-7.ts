@@ -20,7 +20,7 @@ export const MATH_G9_7_LESSON: MathSubmoduleLesson = {
       { type: "plain", fr: "Un cylindre fonctionne comme un prisme dont la base est un **disque**." },
       { type: "svg", markup: cylinderSvg, noFrame: true },
       { type: "highlight", fr: "Formule" },
-      { type: "section", labelFr: "**V = π × r² × h**", itemsFr: ["π × r² est l'aire de la base.", "h est la hauteur du cylindre."] },
+      { type: "section", labelFr: "V = π × r² × h", itemsFr: ["π × r² est l'aire de la base.", "h est la hauteur du cylindre."] },
       { type: "example", fr: "Rayon 3 cm et hauteur 10 cm : V = π × 3² × 10 = 90π ≈ 282,6 cm³." },
     ],
   },

@@ -212,7 +212,7 @@ type UnitConversionConfig = { exNum: number; domain: UnitConversionDomain; decim
 type UnitConversionStep = { kind: "unit_conversion"; lesson: MathSubmoduleLesson; config: UnitConversionConfig };
 type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus";
 type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
-type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere";
+type VolumePlacementKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type VolumePlacementStep = { kind: "volume_placement"; lesson: MathSubmoduleLesson; volumeKind: VolumePlacementKind; exNum: number; mode: "volume" | "missing"; decimals?: boolean; label: string };
 
 type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep | VolumePlacementStep;
@@ -2765,12 +2765,11 @@ const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; labe
 };
 
 const G5_VOLUME_PLACEMENT: Partial<Record<string, { volumeKind: VolumePlacementKind; label: string }>> = {
-  "G5-4": { volumeKind: "cube", label: "Volume du cube" },
-  "G5-5": { volumeKind: "cuboid", label: "Volume du pavé droit" },
-  "G5-6": { volumeKind: "prism", label: "Volume du prisme" },
-  "G5-7": { volumeKind: "cylinder", label: "Volume du cylindre" },
-  "G5-8": { volumeKind: "pyramid", label: "Volume de la pyramide" },
-  "G5-9": { volumeKind: "cone_sphere", label: "Volume du cône et de la sphère" },
+  "G5-2": { volumeKind: "cube", label: "Volume du cube" },
+  "G5-3": { volumeKind: "cuboid", label: "Volume du pavé droit" },
+  "G5-4": { volumeKind: "prism_pyramid", label: "Volume du prisme et de la pyramide" },
+  "G5-5": { volumeKind: "cylinder", label: "Volume du cylindre" },
+  "G5-6": { volumeKind: "cone_sphere", label: "Volume du cône et de la sphère" },
 };
 
 function GeoLineInput({

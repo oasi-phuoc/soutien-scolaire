@@ -1,8 +1,8 @@
-﻿"use client";
+"use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type VolumeKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere";
+type VolumeKind = "cube" | "cuboid" | "prism" | "cylinder" | "pyramid" | "cone_sphere" | "prism_pyramid";
 type ExerciseMode = "volume" | "missing";
 
 type Props = {
@@ -18,13 +18,7 @@ const UNITS = ["km", "hm", "dam", "m", "dm", "cm", "mm"] as const;
 type Unit = typeof UNITS[number];
 
 const UNIT_TO_M: Record<Unit, number> = {
-  km: 1000,
-  hm: 100,
-  dam: 10,
-  m: 1,
-  dm: 0.1,
-  cm: 0.01,
-  mm: 0.001,
+  km: 1000, hm: 100, dam: 10, m: 1, dm: 0.1, cm: 0.01, mm: 0.001,
 };
 
 type FigureData = {
@@ -90,29 +84,68 @@ function inputClass(ok: boolean, checked: boolean): string {
   return ok ? `${base} border-[var(--color-accent-alg)]` : `${base} border-amber-500`;
 }
 
-function volumeUnit(unit: Unit): string {
-  return `${unit}³`;
-}
-
-function areaUnit(unit: Unit): string {
-  return `${unit}²`;
-}
+function volumeUnit(unit: Unit): string { return `${unit}³`; }
+function areaUnit(unit: Unit): string { return `${unit}²`; }
 
 function withConversion(value: number, unit: Unit): Pick<FigureData, "unit" | "convertUnit" | "convertedAnswer"> {
   const convertUnit = pickOtherUnit(unit);
   return { unit, convertUnit, convertedAnswer: convertVolume(value, unit, convertUnit) };
 }
 
-function boxSvg(label: (v: number) => string, l: number, w: number, h: number, missing?: "l" | "w" | "h"): string {
-  return `<svg viewBox='0 0 270 180' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:340px;display:block;margin:0 auto'>
-  <path d='M55 72 h118 v62 H55 Z' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <path d='M55 72 L92 42 h118 l-37 30 M173 72 l37-30 v62 l-37 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <text x='114' y='153' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${missing === "l" ? "x" : label(l)}</text>
-  <text x='216' y='66' font-size='13' fill='var(--color-text-primary)'>${missing === "w" ? "x" : label(w)}</text>
-  <text x='39' y='106' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
+// Cube avec faces carrées égales
+function cubeSvgEx(label: (v: number) => string, c: number, missingLeft?: boolean): string {
+  const leftVal = missingLeft ? "x" : label(c);
+  const leftFill = missingLeft ? "#f97316" : "var(--color-text-primary)";
+  const leftWeight = missingLeft ? "bold" : "normal";
+  return `<svg viewBox='0 0 230 175' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:295px;display:block;margin:0 auto'>
+  <path d='M55 68 h76 v76 H55 Z' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M55 68 L87 38 h76 l-32 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M163 38 v76 l-32 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <text x='93' y='162' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${label(c)}</text>
+  <text x='40' y='110' text-anchor='end' font-size='13' fill='${leftFill}' font-weight='${leftWeight}'>${leftVal}</text>
+  <text x='125' y='25' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${label(c)}</text>
 </svg>`;
 }
 
+// Pavé droit (cuboid) — étiquette l centrée sur l'arête arrière droite
+function boxSvg(label: (v: number) => string, l: number, w: number, h: number, missing?: "l" | "w" | "h"): string {
+  return `<svg viewBox='0 0 280 185' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:350px;display:block;margin:0 auto'>
+  <path d='M55 72 h118 v62 H55 Z' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M55 72 L92 42 h118 l-37 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M210 42 v62 l-37 30' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <text x='114' y='155' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${missing === "l" ? "x" : label(l)}</text>
+  <text x='220' y='76' font-size='13' fill='var(--color-text-primary)'>${missing === "w" ? "x" : label(w)}</text>
+  <text x='38' y='106' text-anchor='end' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
+</svg>`;
+}
+
+// Prisme triangulaire — h au-dessus (hors figure)
+function prismSvgEx(label: (v: number) => string, unit: Unit, baseArea: number, h: number, missing?: "base" | "h"): string {
+  const bLabel = missing === "base" ? "x" : `B = ${fmt(baseArea)} ${areaUnit(unit)}`;
+  const hLabel = missing === "h" ? "x" : label(h);
+  return `<svg viewBox='0 0 285 185' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:355px;display:block;margin:0 auto'>
+  <polygon points='48,130 80,58 114,130' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <polygon points='130,143 162,71 196,143' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M48 130 L130 143 M80 58 L162 71 M114 130 L196 143' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <text x='81' y='152' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${bLabel}</text>
+  <text x='121' y='46' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${hLabel}</text>
+</svg>`;
+}
+
+// Pyramide — h à l'extérieur (droite)
+function pyramidSvgEx(label: (v: number) => string, unit: Unit, baseArea: number, h: number, missing?: "base" | "h"): string {
+  const bLabel = missing === "base" ? "x" : `B = ${fmt(baseArea)} ${areaUnit(unit)}`;
+  const hLabel = missing === "h" ? "x" : label(h);
+  return `<svg viewBox='0 0 260 185' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:325px;display:block;margin:0 auto'>
+  <polygon points='45,136 158,136 200,96 88,96' fill='var(--color-accent-alg)' fill-opacity='.10' stroke='var(--color-accent-alg)' stroke-width='2.4'/>
+  <path d='M122 30 L45 136 M122 30 L158 136 M122 30 L200 96 M122 30 L88 96' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.4'/>
+  <line x1='122' y1='30' x2='122' y2='118' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
+  <text x='122' y='156' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>${bLabel}</text>
+  <text x='210' y='80' font-size='13' fill='var(--color-text-primary)'>${hLabel}</text>
+</svg>`;
+}
+
+// Cylindre — h à l'extérieur (droite)
 function cylinderSvg(label: (v: number) => string, r: number, h: number, missing?: "r" | "h"): string {
   return `<svg viewBox='0 0 230 180' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
   <ellipse cx='112' cy='45' rx='55' ry='18' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
@@ -120,17 +153,29 @@ function cylinderSvg(label: (v: number) => string, r: number, h: number, missing
   <ellipse cx='112' cy='131' rx='55' ry='18' fill='var(--color-accent-alg)' fill-opacity='.08' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <line x1='112' y1='45' x2='167' y2='45' stroke='#f97316' stroke-width='2.2'/>
   <text x='138' y='38' font-size='13' fill='#f97316' font-weight='bold'>${missing === "r" ? "x" : label(r)}</text>
-  <text x='179' y='93' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
+  <text x='182' y='93' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
 </svg>`;
 }
 
-function pyramidSvg(label: (v: number) => string, unit: Unit, baseArea: number, h: number, missing?: "base" | "h"): string {
-  return `<svg viewBox='0 0 250 180' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
-  <polygon points='50,132 160,132 200,94 92,94' fill='var(--color-accent-alg)' fill-opacity='.10' stroke='var(--color-accent-alg)' stroke-width='2.4'/>
-  <path d='M124 30 L50 132 M124 30 L160 132 M124 30 L200 94 M124 30 L92 94' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.4'/>
-  <line x1='124' y1='30' x2='124' y2='114' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
-  <text x='134' y='78' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
-  <text x='124' y='154' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>B = ${missing === "base" ? "x" : `${fmt(baseArea)} ${areaUnit(unit)}`}</text>
+// Cône — h à l'extérieur (droite)
+function coneSvgEx(label: (v: number) => string, r: number, h: number, missing?: "r" | "h"): string {
+  return `<svg viewBox='0 0 240 195' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:300px;display:block;margin:0 auto'>
+  <ellipse cx='110' cy='148' rx='62' ry='20' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.3'/>
+  <path d='M48 148 L110 30 L172 148' fill='var(--color-accent-alg)' fill-opacity='.08' stroke='var(--color-accent-alg)' stroke-width='2.3'/>
+  <line x1='110' y1='30' x2='110' y2='148' stroke='var(--color-text-secondary)' stroke-width='1.3' stroke-dasharray='5 5'/>
+  <line x1='110' y1='148' x2='172' y2='148' stroke='#f97316' stroke-width='2'/>
+  <text x='144' y='142' font-size='13' fill='#f97316' font-weight='bold'>${missing === "r" ? "x" : label(r)}</text>
+  <text x='182' y='100' font-size='13' fill='var(--color-text-primary)'>${missing === "h" ? "x" : label(h)}</text>
+</svg>`;
+}
+
+// Sphère
+function sphereSvgEx(label: (v: number) => string, r: number): string {
+  return `<svg viewBox='0 0 230 190' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:290px;display:block;margin:0 auto'>
+  <circle cx='110' cy='90' r='68' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.3'/>
+  <ellipse cx='110' cy='90' rx='68' ry='18' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.4' stroke-dasharray='5 5'/>
+  <line x1='110' y1='90' x2='178' y2='90' stroke='#f97316' stroke-width='2'/>
+  <text x='142' y='82' font-size='13' fill='#f97316' font-weight='bold'>${label(r)}</text>
 </svg>`;
 }
 
@@ -142,7 +187,7 @@ function makeFigure(solidKind: VolumeKind, mode: ExerciseMode, decimals: boolean
     const c = randMeasure(3, 15, decimals);
     const volume = c ** 3;
     const conv = withConversion(mode === "missing" ? c : volume, unit);
-    return { ...conv, targetLabel: mode === "missing" ? "Côté" : "Volume", primaryAnswer: mode === "missing" ? c : volume, svg: boxSvg(label, c, c, c, mode === "missing" ? "l" : undefined) };
+    return { ...conv, targetLabel: mode === "missing" ? "Côté" : "Volume", primaryAnswer: mode === "missing" ? c : volume, svg: cubeSvgEx(label, c, mode === "missing") };
   }
 
   if (solidKind === "cuboid") {
@@ -166,10 +211,10 @@ function makeFigure(solidKind: VolumeKind, mode: ExerciseMode, decimals: boolean
       const findBase = Math.random() > 0.5;
       const answer = findBase ? baseArea : h;
       const conv = withConversion(answer, unit);
-      return { ...conv, targetLabel: findBase ? "Aire de base" : "Hauteur", primaryAnswer: answer, svg: pyramidSvg(label, unit, baseArea, h, findBase ? "base" : "h") };
+      return { ...conv, targetLabel: findBase ? "Aire de base" : "Hauteur", primaryAnswer: answer, svg: prismSvgEx(label, unit, baseArea, h, findBase ? "base" : "h") };
     }
     const conv = withConversion(volume, unit);
-    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: pyramidSvg(label, unit, baseArea, h) };
+    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: prismSvgEx(label, unit, baseArea, h) };
   }
 
   if (solidKind === "cylinder") {
@@ -190,19 +235,53 @@ function makeFigure(solidKind: VolumeKind, mode: ExerciseMode, decimals: boolean
     const h = randMeasure(4, 16, decimals);
     const volume = (baseArea * h) / 3;
     if (mode === "missing") {
-      const answer = h;
-      const conv = withConversion(answer, unit);
-      return { ...conv, targetLabel: "Hauteur", primaryAnswer: answer, svg: pyramidSvg(label, unit, baseArea, h, "h") };
+      const conv = withConversion(h, unit);
+      return { ...conv, targetLabel: "Hauteur", primaryAnswer: h, svg: pyramidSvgEx(label, unit, baseArea, h, "h") };
     }
     const conv = withConversion(volume, unit);
-    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: pyramidSvg(label, unit, baseArea, h) };
+    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: pyramidSvgEx(label, unit, baseArea, h) };
   }
 
-  const cone = Math.random() > 0.5;
-  const r = randMeasure(2, 9, decimals), h = randMeasure(4, 16, decimals);
-  const volume = cone ? (Math.PI * r * r * h) / 3 : (4 * Math.PI * r ** 3) / 3;
-  const conv = withConversion(volume, unit);
-  return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: cone ? cylinderSvg(label, r, h) : cylinderSvg(label, r, r * 2) };
+  if (solidKind === "prism_pyramid") {
+    const isPrism = Math.random() > 0.5;
+    if (isPrism) {
+      const baseArea = randMeasure(8, 45, decimals);
+      const h = randMeasure(4, 14, decimals);
+      const volume = baseArea * h;
+      if (mode === "missing") {
+        const findBase = Math.random() > 0.5;
+        const answer = findBase ? baseArea : h;
+        const conv = withConversion(answer, unit);
+        return { ...conv, targetLabel: findBase ? "Aire de base" : "Hauteur", primaryAnswer: answer, svg: prismSvgEx(label, unit, baseArea, h, findBase ? "base" : "h") };
+      }
+      const conv = withConversion(volume, unit);
+      return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: prismSvgEx(label, unit, baseArea, h) };
+    } else {
+      const baseArea = randMeasure(12, 60, decimals);
+      const h = randMeasure(4, 16, decimals);
+      const volume = (baseArea * h) / 3;
+      if (mode === "missing") {
+        const conv = withConversion(h, unit);
+        return { ...conv, targetLabel: "Hauteur", primaryAnswer: h, svg: pyramidSvgEx(label, unit, baseArea, h, "h") };
+      }
+      const conv = withConversion(volume, unit);
+      return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: pyramidSvgEx(label, unit, baseArea, h) };
+    }
+  }
+
+  // cone_sphere
+  const isCone = Math.random() > 0.5;
+  if (isCone) {
+    const r = randMeasure(2, 9, decimals), h = randMeasure(4, 16, decimals);
+    const volume = (Math.PI * r * r * h) / 3;
+    const conv = withConversion(volume, unit);
+    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: coneSvgEx(label, r, h) };
+  } else {
+    const r = randMeasure(2, 9, decimals);
+    const volume = (4 * Math.PI * r ** 3) / 3;
+    const conv = withConversion(volume, unit);
+    return { ...conv, targetLabel: "Volume", primaryAnswer: volume, svg: sphereSvgEx(label, r) };
+  }
 }
 
 export function G5VolumeExercise({ exNum, solidKind, mode, decimals = false, validateCommand, onValidated }: Props) {
@@ -284,4 +363,3 @@ function AnswerLine({
     </div>
   );
 }
-
