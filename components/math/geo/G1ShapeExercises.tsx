@@ -645,3 +645,270 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
     </div>
   );
 }
+
+// ── Ex6: Shape properties checkbox (G1.2) ─────────────────────────────────────
+
+// Only trueProps per shape — falseProps are auto-derived from other shapes' trueProps
+const SHAPE_TRUE_PROPS: Record<string, string[]> = {
+  triangle: [
+    "Il a 3 côtés",
+    "Il a 3 sommets",
+    "Il a 3 angles intérieurs",
+    "La somme de ses angles vaut 180°",
+    "C'est un polygone",
+  ],
+  carre: [
+    "Il a 4 côtés",
+    "Il a 4 côtés égaux",
+    "Il a 4 angles droits",
+    "Il a 4 axes de symétrie",
+    "Ses diagonales sont perpendiculaires",
+    "Ses diagonales se coupent en leur milieu",
+    "Ses côtés opposés sont parallèles",
+    "C'est un polygone",
+    "La somme de ses angles vaut 360°",
+  ],
+  rectangle: [
+    "Il a 4 côtés",
+    "Il a 4 angles droits",
+    "Ses côtés opposés sont égaux",
+    "Ses côtés opposés sont parallèles",
+    "Il a 2 axes de symétrie",
+    "Ses diagonales se coupent en leur milieu",
+    "C'est un polygone",
+    "La somme de ses angles vaut 360°",
+  ],
+  losange: [
+    "Il a 4 côtés",
+    "Il a 4 côtés égaux",
+    "Ses diagonales sont perpendiculaires",
+    "Ses diagonales se coupent en leur milieu",
+    "Il a 2 axes de symétrie",
+    "Ses côtés opposés sont parallèles",
+    "C'est un polygone",
+    "La somme de ses angles vaut 360°",
+  ],
+  trapeze: [
+    "Il a 4 côtés",
+    "Il a une paire de côtés parallèles",
+    "C'est un polygone",
+    "La somme de ses angles vaut 360°",
+  ],
+  parallelogramme: [
+    "Il a 4 côtés",
+    "Ses côtés opposés sont parallèles",
+    "Ses côtés opposés sont égaux",
+    "Ses diagonales se coupent en leur milieu",
+    "C'est un polygone",
+    "La somme de ses angles vaut 360°",
+  ],
+  pentagone: [
+    "Il a 5 côtés",
+    "Il a 5 sommets",
+    "Il a 5 axes de symétrie (s'il est régulier)",
+    "La somme de ses angles vaut 540°",
+    "C'est un polygone",
+  ],
+  hexagone: [
+    "Il a 6 côtés",
+    "Il a 6 sommets",
+    "Il a 6 axes de symétrie (s'il est régulier)",
+    "La somme de ses angles vaut 720°",
+    "C'est un polygone",
+  ],
+  cercle: [
+    "Il a une infinité d'axes de symétrie",
+    "Tout diamètre est un axe de symétrie",
+    "Il n'a pas de côté droit",
+    "Il n'a pas d'angle",
+    "Le rayon est la moitié du diamètre",
+  ],
+  "demi-cercle": [
+    "Il a 1 axe de symétrie",
+    "Il est la moitié d'un cercle",
+    "Il a un côté droit (le diamètre)",
+  ],
+};
+
+function buildPropItems(shapeId: string): Array<{ text: string; correct: boolean }> {
+  const trueProps = SHAPE_TRUE_PROPS[shapeId];
+  if (!trueProps) return [];
+
+  // Collect false candidates: trueProps from OTHER shapes that are NOT true for this shape
+  const allOtherProps = Object.entries(SHAPE_TRUE_PROPS)
+    .filter(([id]) => id !== shapeId)
+    .flatMap(([, props]) => props)
+    .filter(p => !trueProps.includes(p));
+  const uniqueFalseProps = [...new Set(allOtherProps)];
+
+  const maxTrue = Math.min(3, trueProps.length);
+  const trueCount = Math.floor(Math.random() * maxTrue) + 1;
+  const falseCount = 5 - trueCount;
+
+  const trueItems = shuffle([...trueProps]).slice(0, trueCount).map(t => ({ text: t, correct: true as const }));
+  const falseItems = shuffle(uniqueFalseProps).slice(0, falseCount).map(t => ({ text: t, correct: false as const }));
+
+  return shuffle([...trueItems, ...falseItems]).slice(0, 5);
+}
+
+export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const [{ shape, items }] = useState(() => {
+    const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)]!;
+    return { shape, items: buildPropItems(shape.id) };
+  });
+  const [checked, setChecked] = useState<boolean[]>(() => Array(5).fill(false));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prevCmd = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res = items.map((item, i) => (checked[i] ?? false) === item.correct);
+    setResults(res);
+    setValidated(true);
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+  }, [validated, items, checked, onValidated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand;
+      doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Cochez les propriétés qui s&apos;appliquent à cette forme.</p>
+      </div>
+      <div className="flex items-center gap-3">
+        <div className="h-16 w-16 shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-1"
+          dangerouslySetInnerHTML={{ __html: shape.svg }} />
+        <p className="text-sm font-bold text-[var(--color-text-primary)]">{shape.name.charAt(0).toUpperCase() + shape.name.slice(1)}</p>
+      </div>
+      <div className="space-y-2">
+        {items.map((item, i) => {
+          const isChecked = checked[i] ?? false;
+          const res = validated ? results[i] : null;
+          return (
+            <label key={i} className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 transition-colors ${
+              validated
+                ? res === false ? "border-amber-400 bg-amber-50/50 dark:bg-amber-950/20" : "border-[var(--color-border-default)]"
+                : "border-[var(--color-border-default)] hover:border-[var(--color-accent-alg)]/50"
+            }`}>
+              <input
+                type="checkbox"
+                checked={isChecked}
+                disabled={validated}
+                onChange={() => !validated && setChecked(prev => prev.map((v, j) => j === i ? !v : v))}
+                className="mt-0.5 h-4 w-4 shrink-0 accent-[var(--color-accent-alg)]"
+              />
+              <span className="flex-1 text-sm text-[var(--color-text-primary)]">{item.text}</span>
+              {validated && res === false && (
+                <span className="ml-auto shrink-0 text-xs font-bold text-amber-600">
+                  {item.correct ? "✓ vrai" : "✗ faux"}
+                </span>
+              )}
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ── Ex7: Shape Q&A (G1.2) ─────────────────────────────────────────────────────
+
+const G1_QA_POOL: Array<{ q: string; a: string }> = [
+  { q: "Combien d'axes de symétrie a un carré ?", a: "4" },
+  { q: "Quelle est la somme des angles intérieurs d'un triangle (en °) ?", a: "180" },
+  { q: "Combien d'axes de symétrie a un triangle équilatéral ?", a: "3" },
+  { q: "Un losange a combien d'axes de symétrie ?", a: "2" },
+  { q: "Quelle est la somme des angles d'un pentagone (en °) ?", a: "540" },
+  { q: "Un rectangle a combien d'axes de symétrie ?", a: "2" },
+  { q: "Un carré a combien de côtés ?", a: "4" },
+  { q: "Un triangle a combien de côtés ?", a: "3" },
+  { q: "Un hexagone a combien de côtés ?", a: "6" },
+  { q: "La somme des angles d'un quadrilatère quelconque est de combien (en °) ?", a: "360" },
+  { q: "Un hexagone régulier a combien d'axes de symétrie ?", a: "6" },
+  { q: "Quelle est la somme des angles d'un hexagone (en °) ?", a: "720" },
+  { q: "Un pentagone a combien de côtés ?", a: "5" },
+  { q: "Si un cercle a un rayon de 5 cm, quel est son diamètre (en cm) ?", a: "10" },
+  { q: "Si un cercle a un diamètre de 8 cm, quel est son rayon (en cm) ?", a: "4" },
+  { q: "Un parallélogramme quelconque a combien d'axes de symétrie axiale ?", a: "0" },
+  { q: "Un trapèze quelconque a combien d'axes de symétrie ?", a: "0" },
+  { q: "Un pentagone régulier a combien d'axes de symétrie ?", a: "5" },
+  { q: "Un triangle isocèle a combien d'axes de symétrie ?", a: "1" },
+  { q: "Si un cercle a un rayon de 3 cm, quel est son diamètre (en cm) ?", a: "6" },
+];
+
+const MATH_TEXT_INPUT_G1 =
+  "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 " +
+  "text-center font-mono outline-none transition-colors " +
+  "focus:border-[var(--color-accent-alg)] disabled:opacity-70";
+
+export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExProps) {
+  const [questions] = useState(() => pickN(G1_QA_POOL, 5));
+  const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [validated, setValidated] = useState(false);
+  const [results, setResults] = useState<boolean[]>([]);
+  const prevCmd = useRef(-1);
+
+  const doValidate = useCallback(() => {
+    if (validated) return;
+    const res = questions.map((q, i) => {
+      const ans = (answers[i] ?? "").trim().replace(",", ".").replace("°", "");
+      const exp = q.a.trim().replace(",", ".").replace("°", "");
+      return ans === exp;
+    });
+    setResults(res);
+    setValidated(true);
+    onValidated(res.every(Boolean), res.filter(Boolean).length, res.length);
+  }, [validated, questions, answers, onValidated]);
+
+  useEffect(() => {
+    if (validateCommand > 0 && validateCommand !== prevCmd.current) {
+      prevCmd.current = validateCommand;
+      doValidate();
+    }
+  }, [validateCommand, doValidate]);
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">Répondez aux questions sur les formes.</p>
+      </div>
+      <div className="space-y-4">
+        {questions.map((q, i) => {
+          const ans = answers[i] ?? "";
+          const ok = validated ? results[i] : null;
+          return (
+            <div key={i} className="flex items-start gap-3">
+              <span className="mt-0.5 w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <div className="flex flex-1 flex-col gap-1.5">
+                <p className="text-sm text-[var(--color-text-primary)]">{q.q}</p>
+                {ok === false ? (
+                  <div className="w-20 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 py-0.5">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{ans || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{q.a}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="numeric"
+                    value={ans}
+                    disabled={validated}
+                    onChange={e => setAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9]/g, "") : a))}
+                    className={`w-20 h-8 px-0 pb-1 text-sm ${MATH_TEXT_INPUT_G1}`}
+                  />
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
