@@ -4434,7 +4434,6 @@ export function GenericModuleContent({
   const [showHint, setShowHint] = useState(false);
 
   // Eval phase state
-  const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
   const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
   const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
   const [showEvalScore, setShowEvalScore] = useState(false);
@@ -4552,7 +4551,6 @@ export function GenericModuleContent({
     setGeoResults([]);
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
-      setEvalPageSavedResults([]);
       setEvalSavedResults({});
       setShowEvalScore(false);
       setEvalFinalGrade(null);
@@ -4608,7 +4606,6 @@ export function GenericModuleContent({
     } else {
       setEvalTimeLeft(5 * 60);
     }
-    setEvalPageSavedResults([]);
     setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
@@ -4621,7 +4618,6 @@ export function GenericModuleContent({
 
   function cancelEval() {
     setShowEvalCancelConfirm(false);
-    setEvalPageSavedResults([]);
     setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
@@ -5001,7 +4997,6 @@ export function GenericModuleContent({
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
-        setEvalPageSavedResults(newSaved);
         setEvalFinalGrade(grade);
         setEvalEarnedPts(correct);
         setEvalTotalPts_state(total);
@@ -5012,7 +5007,6 @@ export function GenericModuleContent({
           saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct, total, grade));
         }
       } else {
-        setEvalPageSavedResults(newSaved);
         let nextOffset = offset + 1;
         while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++;
         if (nextOffset >= evalExCount) { nextOffset = 0; while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++; }
