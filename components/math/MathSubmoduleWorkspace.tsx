@@ -2080,6 +2080,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                     style={{ width: `${totalPts > 0 ? Math.round((totalCorrect / totalPts) * 100) : 0}%` }}
                   />
                 </div>
+                <div className={`flex items-center justify-between rounded-[var(--radius-lg)] border-2 px-4 py-3 ${resPassed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+                  <div>
+                    <p className="text-xs text-[var(--color-text-secondary)]">Note · seuil {PASSING_GRADE}/6</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)} <span className="text-base font-normal text-[var(--color-text-secondary)]">/ 6</span></p>
+                  </div>
+                  <p className={`text-sm font-bold ${resPassed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
+                    {resPassed ? "✓ Validé" : "✗ À améliorer"}
+                  </p>
+                </div>
                 <p className="text-sm text-[var(--color-text-secondary)]">
                   Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
                 </p>
