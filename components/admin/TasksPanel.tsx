@@ -135,14 +135,6 @@ const CURRICULUM: MatiereOpt[] = [
   },
 ];
 
-// ─── Helpers ───────────────────────────────────────────────────────────────
-
-function formatDate(iso: string | null) {
-  if (!iso) return null;
-  const d = new Date(iso + (iso.includes("T") ? "" : "T00:00:00"));
-  return d.toLocaleDateString("fr-CH", { day: "numeric", month: "short", year: "numeric" });
-}
-
 // ─── Component ─────────────────────────────────────────────────────────────
 
 export function TasksPanel({ students }: { students: StudentOption[] }) {
