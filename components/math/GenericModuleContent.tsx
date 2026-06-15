@@ -4628,13 +4628,14 @@ export function GenericModuleContent({
   const [showHint, setShowHint] = useState(false);
 
   // Eval phase state
-  const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
+  const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
   const [showEvalScore, setShowEvalScore] = useState(false);
   const [evalFinalGrade, setEvalFinalGrade] = useState<number | null>(null);
   const [evalEarnedPts, setEvalEarnedPts] = useState(0);
   const [evalTotalPts_state, setEvalTotalPts_state] = useState(0);
   const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
+  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
 
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
@@ -4642,6 +4643,7 @@ export function GenericModuleContent({
   const evalSteps = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1) : [];
   const isInEvalPhase = evalStartIdx >= 0 && stepIdx > evalStartIdx && !showEvalScore;
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || isInEvalPhase || showEvalScore;
+  const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
 
   const goTo = useCallback((idx: number) => {
     setStepIdx(idx);
@@ -4747,7 +4749,7 @@ export function GenericModuleContent({
     setGeoResults([]);
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
-      setEvalPageSavedResults([]);
+      setEvalSavedResults({});
       setShowEvalScore(false);
       setEvalFinalGrade(null);
       setEvalEarnedPts(0);
@@ -4757,10 +4759,19 @@ export function GenericModuleContent({
   }, [evalStartIdx]);
 
   const goBack = useCallback(() => {
-    if (isInEvalPhase) { setShowEvalCancelConfirm(true); return; }
+    if (isInEvalPhase) {
+      const offset = stepIdx - evalStartIdx - 1;
+      if (offset <= 0) {
+        setShowFreeNavWarning(true);
+        setTimeout(() => setShowFreeNavWarning(false), 3000);
+      } else {
+        goTo(stepIdx - 1);
+      }
+      return;
+    }
     if (showEvalScore) return;
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalStartIdx]);
 
   // Eval timer countdown
   useEffect(() => {
@@ -4791,7 +4802,7 @@ export function GenericModuleContent({
     } else {
       setEvalTimeLeft(5 * 60);
     }
-    setEvalPageSavedResults([]);
+    setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -4803,7 +4814,7 @@ export function GenericModuleContent({
 
   function cancelEval() {
     setShowEvalCancelConfirm(false);
-    setEvalPageSavedResults([]);
+    setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -5137,13 +5148,16 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement") {
         currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
-      const newSaved = [...evalPageSavedResults, currentResults];
-      if (isLastStep) {
-        const allRes = newSaved.flat();
+      const newSavedDict = { ...evalSavedResults, [evalStepOffset]: currentResults };
+      setEvalSavedResults(newSavedDict);
+      const isDoneNow = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => i in newSavedDict).every(Boolean);
+      if (isDoneNow) {
+        const orderedResults = Array.from({ length: evalSteps.length }, (_, i) => newSavedDict[i] ?? []);
+        const allRes = orderedResults.flat();
         const correct = allRes.filter(Boolean).length;
         const total = allRes.length;
         const grade = linearSwissGrade(correct, total);
-        const rows = newSaved.map((res, i) => {
+        const rows = orderedResults.map((res, i) => {
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
             ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
@@ -5182,7 +5196,6 @@ export function GenericModuleContent({
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
-        setEvalPageSavedResults(newSaved);
         setEvalFinalGrade(grade);
         setEvalEarnedPts(correct);
         setEvalTotalPts_state(total);
@@ -5193,8 +5206,8 @@ export function GenericModuleContent({
           saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct, total, grade));
         }
       } else {
-        setEvalPageSavedResults(newSaved);
-        goTo(stepIdx + 1);
+        const nextOffset = evalStepOffset >= evalSteps.length - 1 ? 0 : evalStepOffset + 1;
+        goTo(evalStartIdx + 1 + nextOffset);
       }
       return;
     }
@@ -5223,7 +5236,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5826,7 +5839,7 @@ export function GenericModuleContent({
   // Training steps (before eval_start) for main progress bar
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
-  const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
+  const allEvalDone = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => i in evalSavedResults).every(Boolean);
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
@@ -5870,7 +5883,32 @@ export function GenericModuleContent({
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
+        <div className="mb-6">
+          <div className="mb-1 flex items-center justify-between">
+            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
+          </div>
+          <div className="flex gap-1">
+            {Array.from({ length: evalSteps.length }).map((_, i) => (
+              <div
+                key={i}
+                className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i in evalSavedResults
+                    ? "bg-green-500"
+                    : i === evalStepOffset
+                      ? "bg-amber-500 opacity-60"
+                      : "bg-[var(--color-border-default)]"
+                }`}
+              />
+            ))}
+          </div>
+          {showFreeNavWarning && (
+            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Tu es au premier exercice. Valide cet exercice et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
+            </div>
+          )}
+        </div>
       )}
 
       {/* Hint button — floated right, aligns with exercise title */}
@@ -7069,10 +7107,13 @@ export function GenericModuleContent({
               <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
             </div>
             {/* Col 3: Mention — framed */}
-            <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+            <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
+              evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "border-green-500" : "border-red-400"
+            }`}>
               <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-              <p className="text-2xl">{evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 96 ? "🥇" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 80 ? "🥈" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 60 ? "🥉" : "—"}</p>
-              <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{evalTotalPts_state > 0 ? (Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 96 ? "Excellent" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 80 ? "Très bien" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 60 ? "Bien" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 50 ? "Passable" : "Insuffisant") : "—"}</p>
+              <p className={`mt-1 text-sm font-bold ${evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "text-green-600" : "text-red-500"}`}>
+                {evalFinalGrade !== null && evalFinalGrade >= PASSING_GRADE ? "Réussi" : "À améliorer"}
+              </p>
             </div>
           </div>
           {/* Exercise detail list */}
@@ -7260,7 +7301,7 @@ export function GenericModuleContent({
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
+                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep || (isInEvalPhase && allEvalDone)
                   ? "Terminer ✓"
                   : "Suivant →"}
               </button>
