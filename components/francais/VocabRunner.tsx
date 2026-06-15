@@ -144,11 +144,13 @@ export function VocabRunner({ theme }: Props) {
 
   function goBack() {
     if (isInEvalPhase) {
-      if (evalExIdx <= 0) {
+      let prev = evalExIdx - 1;
+      while (prev >= 0 && evalValidated[prev]) prev--;
+      if (prev < 0) {
         setShowFreeNavWarning(true);
         setTimeout(() => setShowFreeNavWarning(false), 3000);
       } else {
-        setStepIdx((s) => s - 1);
+        setStepIdx(evalExFirst + prev);
       }
       return;
     }
@@ -186,7 +188,9 @@ export function VocabRunner({ theme }: Props) {
       if (allEvalValidated) {
         setStepIdx(steps.length - 1);
       } else {
-        const next = evalExIdx >= evalTotal - 1 ? 0 : evalExIdx + 1;
+        let next = evalExIdx + 1;
+        while (next < evalTotal && evalValidated[next]) next++;
+        if (next >= evalTotal) { next = 0; while (next < evalTotal && evalValidated[next]) next++; }
         setStepIdx(evalExFirst + next);
       }
       return;
@@ -405,18 +409,14 @@ export function VocabRunner({ theme }: Props) {
             <p className="text-xs text-[var(--color-text-secondary)]">{evalExIdx + 1} / {evalTotal}</p>
           </div>
           <div className="flex gap-1">
-            {Array.from({ length: evalTotal }).map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  evalValidated[i]
-                    ? "bg-green-500"
-                    : i === evalExIdx
-                      ? "bg-amber-500 opacity-60"
-                      : "bg-[var(--color-border-default)]"
-                }`}
-              />
-            ))}
+            {Array.from({ length: evalTotal }).map((_, i) => {
+              if (evalValidated[i]) return null;
+              return (
+                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i === evalExIdx ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+                }`} />
+              );
+            })}
           </div>
           {showFreeNavWarning && (
             <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">

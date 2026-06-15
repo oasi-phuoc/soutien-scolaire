@@ -25,7 +25,6 @@ import { A8PowerExercise, A8MissingExpExercise, A8MissingBaseExercise, A8PowerCo
 import { PctOfNumExercise, PartToPctExercise, PctChangeExercise, PctDiffExercise, PctMultiplierExercise, PctTableExercise, PctWordExercise } from "@/components/math/A6PercentContent";
 import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
-import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
@@ -1702,6 +1701,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});
   const [evalExValidated, setEvalExValidated] = useState<Record<number, boolean>>({});
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
+  const [showGeoEvalWarning, setShowGeoEvalWarning] = useState(false);
 
   const isRevisionLesson = !!directRevisionMode || /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
 
@@ -1796,7 +1796,17 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
   function goBack() {
-    if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
+    if (isInEvalExercises) {
+      let prev = evalExerciseOffset - 1;
+      while (prev >= 0 && evalExValidated[prev]) prev--;
+      if (prev < 0) {
+        setShowGeoEvalWarning(true);
+        setTimeout(() => setShowGeoEvalWarning(false), 3000);
+      } else {
+        goTo(evalStartIdx + 1 + prev);
+      }
+      return;
+    }
     if (!isFirstStep) goTo(stepIdx - 1);
   }
 
@@ -1833,6 +1843,19 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       const correct = exIndices.reduce((s: number, i: number) => s + (evalScores[i]?.c ?? 0), 0);
       const total = exIndices.reduce((s: number, i: number) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
+      return;
+    }
+    if (isInEvalExercises) {
+      const allDone = Array.from({ length: evalExerciseTotal }, (_, i) => !!evalExValidated[i]).every(Boolean);
+      if (allDone) {
+        const resultsI = steps.findIndex((s: WorkspaceStep) => s.kind === "results");
+        goTo(resultsI >= 0 ? resultsI : stepIdx + 1);
+      } else {
+        let next = evalExerciseOffset + 1;
+        while (next < evalExerciseTotal && evalExValidated[next]) next++;
+        if (next >= evalExerciseTotal) { next = 0; while (next < evalExerciseTotal && evalExValidated[next]) next++; }
+        goTo(evalStartIdx + 1 + next);
+      }
       return;
     }
     if (isLastStep) {
@@ -2012,7 +2035,24 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
       {/* Eval progress bar */}
       {isInEvalExercises && (
-        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
+        <div className="mb-4">
+          <div className="flex gap-1">
+            {Array.from({ length: evalExerciseTotal }, (_, i) => {
+              if (evalExValidated[i]) return null;
+              return (
+                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i === evalExerciseOffset ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+                }`} />
+              );
+            })}
+          </div>
+          {showGeoEvalWarning && (
+            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Tu es au premier exercice. Valide et utilise «&nbsp;Suivant&nbsp;» pour naviguer.
+            </div>
+          )}
+        </div>
       )}
 
       {/* Eval exercises — all mounted during eval + results for expandable review */}
@@ -2580,7 +2620,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button type="button" onClick={goBack}
-              disabled={isFirstStep || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
+              disabled={(!isInEvalExercises && isFirstStep) || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results"}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] disabled:opacity-30">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M15 18l-6-6 6-6" /></svg>
               Retour
@@ -2615,10 +2655,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
             <button type="button" onClick={goNext}
               disabled={
                 (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                (isInEvalExercises && !evalExValidated[stepIdx - evalStartIdx - 1])
+                (isInEvalExercises && !evalExValidated[evalExerciseOffset])
               }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
+              {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep || (isInEvalExercises && Array.from({ length: evalExerciseTotal }, (_, i) => !!evalExValidated[i]).every(Boolean)) ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>

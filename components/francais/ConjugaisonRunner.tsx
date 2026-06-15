@@ -2299,13 +2299,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       return;
     }
     if (isEvalPhase) {
-      if (evalIdx > 0) {
-        const newIdx = evalIdx - 1;
-        setEvalIdx(newIdx);
-        setCanValidate(!evalValidated[newIdx]);
-      } else {
+      let prev = evalIdx - 1;
+      while (prev >= 0 && evalValidated[prev]) prev--;
+      if (prev < 0) {
         setShowFreeNavWarning(true);
         setTimeout(() => setShowFreeNavWarning(false), 3000);
+      } else {
+        setEvalIdx(prev);
+        setCanValidate(!evalValidated[prev]);
       }
       return;
     }
@@ -2332,9 +2333,11 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       if (allEvalValidated) {
         setStepIdx(resultsIdx);
       } else {
-        const newIdx = evalIdx >= evalExercises.length - 1 ? 0 : evalIdx + 1;
-        setEvalIdx(newIdx);
-        setCanValidate(!evalValidated[newIdx]);
+        let next = evalIdx + 1;
+        while (next < evalExercises.length && evalValidated[next]) next++;
+        if (next >= evalExercises.length) { next = 0; while (next < evalExercises.length && evalValidated[next]) next++; }
+        setEvalIdx(next);
+        setCanValidate(!evalValidated[next]);
       }
       return;
     }
@@ -2577,18 +2580,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                   <p className="text-xs text-[var(--color-text-secondary)]">{evalIdx + 1} / {evalExercises.length}</p>
                 </div>
                 <div className="flex gap-1">
-                  {evalExercises.map((_, i) => (
-                    <div
-                      key={i}
-                      className={`h-1.5 flex-1 rounded-full transition-colors ${
-                        evalValidated[i]
-                          ? "bg-green-500"
-                          : i === evalIdx
-                            ? "bg-amber-500 opacity-60"
-                            : "bg-[var(--color-border-default)]"
-                      }`}
-                    />
-                  ))}
+                  {evalExercises.map((_, i) => {
+                    if (evalValidated[i]) return null;
+                    return (
+                      <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
+                        i === evalIdx ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+                      }`} />
+                    );
+                  })}
                 </div>
                 {showFreeNavWarning && (
                   <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">

@@ -4435,6 +4435,8 @@ export function GenericModuleContent({
 
   // Eval phase state
   const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
+  const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
+  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
   const [showEvalScore, setShowEvalScore] = useState(false);
   const [evalFinalGrade, setEvalFinalGrade] = useState<number | null>(null);
   const [evalEarnedPts, setEvalEarnedPts] = useState(0);
@@ -4551,6 +4553,7 @@ export function GenericModuleContent({
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
       setEvalPageSavedResults([]);
+      setEvalSavedResults({});
       setShowEvalScore(false);
       setEvalFinalGrade(null);
       setEvalEarnedPts(0);
@@ -4560,10 +4563,21 @@ export function GenericModuleContent({
   }, [evalStartIdx]);
 
   const goBack = useCallback(() => {
-    if (isInEvalPhase) { setShowEvalCancelConfirm(true); return; }
     if (showEvalScore) return;
+    if (isInEvalPhase) {
+      const offset = evalStartIdx >= 0 ? stepIdx - evalStartIdx - 1 : -1;
+      let prev = offset - 1;
+      while (prev >= 0 && (prev in evalSavedResults)) prev--;
+      if (prev < 0) {
+        setShowFreeNavWarning(true);
+        setTimeout(() => setShowFreeNavWarning(false), 3000);
+      } else {
+        goTo(evalStartIdx + 1 + prev);
+      }
+      return;
+    }
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalSavedResults, evalStartIdx]);
 
   // Eval timer countdown
   useEffect(() => {
@@ -4595,6 +4609,7 @@ export function GenericModuleContent({
       setEvalTimeLeft(5 * 60);
     }
     setEvalPageSavedResults([]);
+    setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -4607,6 +4622,7 @@ export function GenericModuleContent({
   function cancelEval() {
     setShowEvalCancelConfirm(false);
     setEvalPageSavedResults([]);
+    setEvalSavedResults({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -4935,8 +4951,13 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "geo_placement") {
         currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
-      const newSaved = [...evalPageSavedResults, currentResults];
-      if (isLastStep) {
+      const offset = evalStartIdx >= 0 ? stepIdx - evalStartIdx - 1 : -1;
+      const newSavedDict = { ...evalSavedResults, [offset]: currentResults };
+      setEvalSavedResults(newSavedDict);
+      const evalExCount = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1).filter((s: { kind: string }) => s.kind !== "pass_toggle").length : 0;
+      const allDone = Object.keys(newSavedDict).length >= evalExCount;
+      const newSaved = Array.from({ length: evalExCount }, (_, i) => newSavedDict[i] ?? []);
+      if (allDone) {
         const allRes = newSaved.flat();
         const correct = allRes.filter(Boolean).length;
         const total = allRes.length;
@@ -4992,7 +5013,10 @@ export function GenericModuleContent({
         }
       } else {
         setEvalPageSavedResults(newSaved);
-        goTo(stepIdx + 1);
+        let nextOffset = offset + 1;
+        while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++;
+        if (nextOffset >= evalExCount) { nextOffset = 0; while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++; }
+        goTo(evalStartIdx + 1 + nextOffset);
       }
       return;
     }
@@ -5021,7 +5045,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, geoResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5673,7 +5697,24 @@ export function GenericModuleContent({
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
+        <div className="mb-4">
+          <div className="flex gap-1">
+            {evalSteps.map((s, i) => {
+              if (s.kind === "pass_toggle" || i in evalSavedResults) return null;
+              return (
+                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
+                  i === evalStepOffset ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+                }`} />
+              );
+            })}
+          </div>
+          {showFreeNavWarning && (
+            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              Tu es au premier exercice. Valide et utilise «&nbsp;Suivant&nbsp;» pour naviguer.
+            </div>
+          )}
+        </div>
       )}
 
       {/* Hint button — floated right, aligns with exercise title */}
@@ -6936,7 +6977,7 @@ export function GenericModuleContent({
               <button
                 type="button"
                 onClick={goBack}
-                disabled={isFirstStep || currentStep?.kind === "pass_toggle"}
+                disabled={(!isInEvalPhase && isFirstStep) || currentStep?.kind === "pass_toggle"}
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
               >
                 ← Retour
@@ -7020,7 +7061,7 @@ export function GenericModuleContent({
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
+                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep || (isInEvalPhase && Object.keys(evalSavedResults).length > 0 && Object.keys(evalSavedResults).length >= evalSteps.filter((s: { kind: string }) => s.kind !== "pass_toggle").length)
                   ? "Terminer ✓"
                   : "Suivant →"}
               </button>
