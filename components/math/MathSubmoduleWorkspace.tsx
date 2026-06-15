@@ -2063,34 +2063,41 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         const totalPts = exIndices.reduce((s, i) => s + stepExpectedTotal(steps[i], evalScores[i]), 0);
         const resGrade = linearSwissGrade(totalCorrect, totalPts);
         const resPassed = resGrade >= PASSING_GRADE;
+        const resPct = totalPts > 0 ? Math.round((totalCorrect / totalPts) * 100) : 0;
+        const mention = resPct >= 96 ? "Excellent" : resPct >= 80 ? "Très bien" : resPct >= 60 ? "Bien" : resPct >= 50 ? "Passable" : "Insuffisant";
+        const medalEmoji = resPct >= 96 ? "🥇" : resPct >= 80 ? "🥈" : resPct >= 60 ? "🥉" : "—";
         return (
           <div>
-            {/* Score header — results only */}
+            {/* Score header — results only, 3-column layout */}
             {isResultsPage && (
-              <div className="mb-6 space-y-6">
-                <div className="space-y-1 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
-                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-                    {totalCorrect} <span className="text-xl text-[var(--color-text-secondary)]">/ {totalPts}</span>
-                  </p>
-                </div>
-                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ${resPassed ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
-                    style={{ width: `${totalPts > 0 ? Math.round((totalCorrect / totalPts) * 100) : 0}%` }}
-                  />
-                </div>
-                <div className={`flex items-center justify-between rounded-[var(--radius-lg)] border-2 px-4 py-3 ${resPassed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-                  <div>
-                    <p className="text-xs text-[var(--color-text-secondary)]">Note · seuil {PASSING_GRADE}/6</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)} <span className="text-base font-normal text-[var(--color-text-secondary)]">/ 6</span></p>
+              <div className="mb-6">
+                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
+                <div className="grid grid-cols-3 gap-3">
+                  {/* Col 1: Points + bar */}
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+                      {totalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{totalPts}</span>
+                    </p>
+                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                      <div className={`h-full rounded-full transition-all duration-700 ${resPassed ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`} style={{ width: `${resPct}%` }} />
+                    </div>
                   </div>
-                  <p className={`text-sm font-bold ${resPassed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
-                    {resPassed ? "✓ Validé" : "✗ À améliorer"}
-                  </p>
+                  {/* Col 2: Note */}
+                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 p-3 text-center ${resPassed ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{resGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+                    <p className={`mt-1 text-[10px] font-bold ${resPassed ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>{resPassed ? "✓ Validé" : "✗ À améliorer"}</p>
+                  </div>
+                  {/* Col 3: Mention */}
+                  <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+                    <p className="text-2xl">{medalEmoji}</p>
+                    <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{mention}</p>
+                  </div>
                 </div>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
+                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
+                  Cliquez sur un exercice pour voir la correction.
                 </p>
               </div>
             )}
@@ -2136,20 +2143,15 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                       isInEvalExercises && isActiveEval ? "" :
                       (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
                     }>
-                      {isResultsSelected && (
-                        <div className="mb-4 flex items-center justify-between">
-                          <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {i + 1}</h2>
-                          <span className="text-xs text-[var(--color-text-secondary)]">{c} / {t}</span>
-                        </div>
-                      )}
                       {renderEvalStep(
                         evalStep,
-                        isActiveEval ? (evalValidateCommands[i] ?? 0) : 0,
+                        isActiveEval ? (evalValidateCommands[i] ?? 0) : (isResultsSelected ? (evalValidateCommands[i] ?? 0) : 0),
                         (ok, correct, total) => {
                           const rc = correct ?? (ok ? 1 : 0);
                           const rt = total ?? stepExpectedTotal(evalStep, undefined);
                           setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
                           setEvalExValidated(prev => ({ ...prev, [i]: true }));
+                          if (isActiveEval) goTo(absIdx + 1);
                         }
                       )}
                     </div>

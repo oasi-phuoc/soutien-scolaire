@@ -7032,7 +7032,31 @@ export function GenericModuleContent({
       {/* Eval score screen */}
       {showEvalScore && evalFinalGrade !== null && (
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
+          <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
+          {/* 3-column score summary */}
+          <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+              <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+              <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+                {evalEarnedPts}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalTotalPts_state}</span>
+              </p>
+              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                <div className={`h-full rounded-full transition-all duration-700 ${evalFinalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
+                  style={{ width: `${evalTotalPts_state > 0 ? Math.round((evalEarnedPts / evalTotalPts_state) * 100) : 0}%` }} />
+              </div>
+            </div>
+            <div className={`flex flex-col items-center justify-center rounded-xl border-2 p-3 text-center ${evalFinalGrade >= PASSING_GRADE ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+              <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+              <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+              <p className={`mt-1 text-[10px] font-bold ${evalFinalGrade >= PASSING_GRADE ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>{evalFinalGrade >= PASSING_GRADE ? "✓ Validé" : "✗ À améliorer"}</p>
+            </div>
+            <div className="flex flex-col items-center justify-center rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 text-center">
+              <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+              <p className="text-2xl">{evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 96 ? "🥇" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 80 ? "🥈" : evalTotalPts_state > 0 && Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 60 ? "🥉" : "—"}</p>
+              <p className="text-[10px] font-bold text-[var(--color-text-primary)]">{evalTotalPts_state > 0 ? (Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 96 ? "Excellent" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 80 ? "Très bien" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 60 ? "Bien" : Math.round((evalEarnedPts / evalTotalPts_state) * 100) >= 50 ? "Passable" : "Insuffisant") : "—"}</p>
+            </div>
+          </div>
+          {/* Exercise detail list */}
           <ul className="space-y-2">
             {evalRowData.map((row, i) => {
               const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
@@ -7044,15 +7068,6 @@ export function GenericModuleContent({
               );
             })}
           </ul>
-          <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalFinalGrade >= PASSING_GRADE ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-            <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
-            <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {evalEarnedPts}/{evalTotalPts_state} pts</p>
-            <p className={`mt-3 text-base font-bold ${evalFinalGrade >= PASSING_GRADE ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
-              {evalFinalGrade >= PASSING_GRADE ? "✓ Réussi" : "✗ À améliorer"}
-            </p>
-            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
-          </div>
         </div>
       )}
 

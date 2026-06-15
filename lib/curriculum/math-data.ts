@@ -130,6 +130,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "A9",
     title: "Expressions algébriques",
     branch: "algebra",
+    comingSoon: true,
     prerequisiteIds: ["A5", "A7"],
     submodules: [
       sm("A9.1", "Variable et inconnue"),
@@ -145,6 +146,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "A10",
     title: "Équations du 1er degré",
     branch: "algebra",
+    comingSoon: true,
     prerequisiteIds: ["A9"],
     submodules: [
       sm("A10.1", "Principe équation"),
@@ -160,6 +162,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "A11",
     title: "Inéquations",
     branch: "algebra",
+    comingSoon: true,
     prerequisiteIds: ["A10"],
     submodules: [
       sm("A11.1", "Symboles et droite"),
@@ -172,6 +175,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "A12",
     title: "Systèmes d'équations",
     branch: "algebra",
+    comingSoon: true,
     prerequisiteIds: ["A10"],
     submodules: [
       sm("A12.1", "Substitution"),
@@ -184,6 +188,7 @@ export const MATH_MODULES: MathModule[] = [
     code: "A13",
     title: "Fonctions (introduction)",
     branch: "algebra",
+    comingSoon: true,
     prerequisiteIds: ["A10", "A7"],
     submodules: [
       sm("A13.1", "Notion de fonction"),
