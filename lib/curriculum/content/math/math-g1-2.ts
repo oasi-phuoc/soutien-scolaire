@@ -96,7 +96,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   {
                     type: "section",
@@ -229,7 +229,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   {
                     type: "table",
@@ -365,7 +365,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Seul le **trapèze isocèle** a un axe de symétrie vertical. Les trapèzes quelconque et rectangle n'ont **aucun axe**." },
                   {
@@ -461,7 +461,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Le cercle possède une **infinité d'axes de symétrie**. Tout **diamètre** est un axe de symétrie." },
                   { type: "rule", titleFr: "Symétrie", itemsFr: ["Tout diamètre est un axe", "→ Infinité d'axes"] },
@@ -556,7 +556,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Le rectangle possède **2 axes de symétrie** : l'axe horizontal et l'axe vertical passant par les milieux des côtés opposés." },
                   {
@@ -654,7 +654,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Le losange possède **2 axes de symétrie** : ses deux diagonales." },
                   {
@@ -749,7 +749,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Le parallélogramme quelconque n'a **aucun axe de symétrie axiale**. Il admet une **symétrie centrale** en O (intersection des diagonales)." },
                   { type: "rule", titleFr: "Symétrie", itemsFr: ["0 axe de symétrie axiale", "1 centre de symétrie : O"] },
@@ -851,7 +851,7 @@ export const MATH_G1_2_LESSON: MathSubmoduleLesson = {
                 ],
               },
               {
-                label: "Symétrie",
+                label: "Symétries",
                 blocks: [
                   { type: "plain", fr: "Le pentagone **régulier** possède **5 axes de symétrie**. Chaque axe passe par un sommet et le milieu du côté opposé." },
                   { type: "rule", titleFr: "Axes", itemsFr: ["Régulier : 5 axes de symétrie", "Quelconque : 0 axe"] },
