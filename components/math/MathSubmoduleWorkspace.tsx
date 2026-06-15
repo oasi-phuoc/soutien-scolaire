@@ -1809,7 +1809,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const revisionTitle = isRevisionLesson ? (getMathModule(moduleId)?.title ?? null) : null;
 
   function goBack() {
-    if (isInEvalExercises && isGeoModule) {
+    if (isInEvalExercises && isFreeNavModule) {
       const evalIdx = stepIdx - evalStartIdx - 1;
       if (evalIdx <= 0) {
         setShowGeoEvalWarning(true);
@@ -1858,7 +1858,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       finishEval(total === 0 || correct / total >= 0.6, correct, total);
       return;
     }
-    if (isInEvalExercises && isGeoModule) {
+    if (isInEvalExercises && isFreeNavModule) {
       if (allEvalValidated) {
         goTo(resultsIdx);
         return;
@@ -1916,7 +1916,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     currentStep?.kind !== "results" && currentStep?.kind !== "eval_start" && currentStep?.kind !== "pass_toggle";
   const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
   const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
-  const isGeoModule = !!(submoduleId?.match(/^G\d/));
+  const isFreeNavModule = !!(submoduleId?.match(/^[GA]\d/));
   const allEvalValidated = evalExerciseTotal > 0 && Array.from({ length: evalExerciseTotal }, (_, j) => !!evalExValidated[j]).every(Boolean);
 
   const evalExSteps = evalStartIdx >= 0 && resultsIdx >= 0
@@ -2051,10 +2051,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <TrainingProgressBar current={trainingStepIdx} total={trainingSteps.length} timeLeft={trainingTimerLeft} />
       )}
       {/* Eval progress bar */}
-      {isInEvalExercises && !isGeoModule && (
+      {isInEvalExercises && !isFreeNavModule && (
         <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
       )}
-      {isInEvalExercises && isGeoModule && (
+      {isInEvalExercises && isFreeNavModule && (
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
@@ -2118,12 +2118,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                   </div>
                   {/* Col 3: Mention — framed */}
                   <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${
-                    isGeoModule
+                    isFreeNavModule
                       ? resPassed ? "border-green-500" : "border-red-400"
                       : "border-[var(--color-border-default)]"
                   }`}>
                     <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
-                    {isGeoModule ? (
+                    {isFreeNavModule ? (
                       <p className={`mt-1 text-sm font-bold ${resPassed ? "text-green-600" : "text-red-500"}`}>
                         {resPassed ? "Réussi" : "À améliorer"}
                       </p>
@@ -2190,7 +2190,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                           const rt = total ?? stepExpectedTotal(evalStep, undefined);
                           setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
                           setEvalExValidated(prev => ({ ...prev, [i]: true }));
-                          if (isActiveEval && !isGeoModule) goTo(absIdx + 1);
+                          if (isActiveEval && !isFreeNavModule) goTo(absIdx + 1);
                         }
                       )}
                     </div>
@@ -2713,10 +2713,10 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
             <button type="button" onClick={goNext}
               disabled={
                 (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                (isInEvalExercises && !isGeoModule && !evalExValidated[stepIdx - evalStartIdx - 1])
+                (isInEvalExercises && !isFreeNavModule && !evalExValidated[stepIdx - evalStartIdx - 1])
               }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
-              {(isGeoModule && isInEvalExercises && allEvalValidated) || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
+              {(isFreeNavModule && isInEvalExercises && allEvalValidated) || currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
                 <>Terminer <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
