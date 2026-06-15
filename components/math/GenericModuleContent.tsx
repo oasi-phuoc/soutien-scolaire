@@ -249,14 +249,31 @@ function randomDecimalValue(): number {
   return rnd(scale, 99999 * scale) / scale;
 }
 
+// Max unit-step span per domain to keep answers within safe integer range (< 10^13)
+const UNIT_MAX_SPAN: Partial<Record<UnitConversionDomain, number>> = {
+  volume: 3,  // each step = ×1000; 3 steps → max ratio 10^9
+  area: 5,    // each step = ×100; 5 steps → max ratio 10^10
+};
+
 function genUnitConversionQ(domain: UnitConversionDomain, decimals: boolean): UnitConversionQ {
   const factors = UNIT_FACTORS[domain];
   const units = Object.keys(factors);
-  const from = units[rnd(0, units.length - 1)]!;
-  let to = units[rnd(0, units.length - 1)]!;
-  while (to === from) to = units[rnd(0, units.length - 1)]!;
+  const maxSpan = UNIT_MAX_SPAN[domain] ?? units.length - 1;
+
+  let from: string, to: string, fromIdx: number, toIdx: number;
+  let attempts = 0;
+  do {
+    fromIdx = rnd(0, units.length - 1);
+    toIdx = rnd(0, units.length - 1);
+    from = units[fromIdx]!;
+    to = units[toIdx]!;
+    if (++attempts > 100) break;
+  } while (to === from || Math.abs(fromIdx - toIdx) > maxSpan);
+
   const valueNum = decimals ? randomDecimalValue() : rnd(1, 99999);
-  const answer = valueNum * factors[from]! / factors[to]!;
+  const rawAnswer = valueNum * factors[from]! / factors[to]!;
+  // Round to 10 significant figures to eliminate floating-point noise from large power-of-10 ratios
+  const answer = rawAnswer === 0 ? 0 : parseFloat(rawAnswer.toPrecision(10));
   return {
     value: fmtPlainNumber(valueNum, 4),
     from,
