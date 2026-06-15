@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
@@ -13,7 +13,7 @@ import { medalFromPercent, PASSING_GRADE, linearSwissGrade } from "@/lib/scoring
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
-
+import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
 import {
   Exercise16 as PlacementRectangleExercise,
@@ -74,12 +74,12 @@ function renderText(text: string): React.ReactNode {
 function formatCompNum(n: number): string {
   const s = n.toString();
   if (s.length <= 3) return s;
-  if (s.length <= 6) return s.slice(0, s.length - 3) + " " + s.slice(s.length - 3);
+  if (s.length <= 6) return s.slice(0, s.length - 3) + "â€¯" + s.slice(s.length - 3);
   return s;
 }
 
-// ── Step types ──────────────────────────────────────────────────────────────
-type ArithOp = "+" | "-" | "×" | "÷";
+// â”€â”€ Step types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+type ArithOp = "+" | "-" | "Ã—" | "Ã·";
 type ArithQuestion = { a: number; b: number; result: number; op: ArithOp; missingPos: "result" | "a" | "b"; answer: string };
 type ArithGroupConfig = { questions: ArithQuestion[]; exNum: number; op: ArithOp; range: [number, number]; missingOperand: boolean; timer?: number };
 type RoundingQ = { prompt: string; answer: string };
@@ -205,12 +205,16 @@ type WordLevel = "a1" | "a2" | "b1";
 type WordProblemQ = { textFr: string; answer: number; op: "+" | "-" };
 type WordProblemsConfig = { exNum: number; level: WordLevel; questions: WordProblemQ[] };
 type WordProblemsStep = { kind: "word_problems"; lesson: MathSubmoduleLesson; config: WordProblemsConfig };
+type UnitConversionDomain = "length" | "area" | "volume" | "capacity" | "mass" | "time";
+type UnitConversionQ = { value: string; from: string; to: string; answer: string };
+type UnitConversionConfig = { exNum: number; domain: UnitConversionDomain; decimals: boolean; questions: UnitConversionQ[] };
+type UnitConversionStep = { kind: "unit_conversion"; lesson: MathSubmoduleLesson; config: UnitConversionConfig };
 type GeoPlacementKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus";
 type GeoPlacementStep = { kind: "geo_placement"; lesson: MathSubmoduleLesson; geoKind: GeoPlacementKind; exNum: number; label: string };
 
-type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | GeoPlacementStep;
+type FlatStep = TheoryStep | ExerciseStep | NumberLineStep | ComparisonStep | ArithGroupStep | ColumnGridStep | DivColGridStep | ExprCompStep | EvalStartStep | PassToggleStep | RoundingStep | FracIdStep | FracEquivStep | FracSimplifyStep | FracCompStep | NumberSelectStep | EncadrementStep | OddEvenStep | NLMultiStep | OrderingStep | SeqRuleStep | SeqCompleteStep | Mul2DigitStep | DecOrderingStep | DecSeqRuleStep | DecSeqCompleteStep | MultSelectStep | MultListStep | TrueFalseMultDivStep | FindDivisorsStep | DivSelectStep | DivByStep | MissingDigitDivStep | GcdLcmStep | TrueFalseGcdLcmStep | WordProblemsStep | UnitConversionStep | GeoPlacementStep;
 
-// ── Comparison exercise ───────────────────────────────────────────────────────
+// â”€â”€ Comparison exercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 type ComparisonQ = { a: number; b: number; answer: "<" | "=" | ">" };
 type ComparisonConfig = { questions: ComparisonQ[]; level: 1 | 2 };
 
@@ -218,111 +222,167 @@ function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// ── Word Problems (A2.4) ──────────────────────────────────────────────────────
+// â”€â”€ Unit conversion generators (G2.1 / G2.2) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+const UNIT_FACTORS: Record<UnitConversionDomain, Record<string, number>> = {
+  length: { km: 1000, hm: 100, dam: 10, m: 1, dm: 0.1, cm: 0.01, mm: 0.001 },
+  area: { "kmÂ²": 1_000_000, "hmÂ²": 10_000, "damÂ²": 100, "mÂ²": 1, "dmÂ²": 0.01, "cmÂ²": 0.0001, "mmÂ²": 0.000001 },
+  volume: { "kmÂ³": 1_000_000_000, "hmÂ³": 1_000_000, "damÂ³": 1000, "mÂ³": 1, "dmÂ³": 0.001, "cmÂ³": 0.000001, "mmÂ³": 0.000000001 },
+  capacity: { kl: 1000, hl: 100, dal: 10, l: 1, dl: 0.1, cl: 0.01, ml: 0.001 },
+  mass: { t: 1_000_000, q: 100_000, kg: 1000, hg: 100, dag: 10, g: 1, dg: 0.1, cg: 0.01, mg: 0.001 },
+  time: { j: 86400, h: 3600, min: 60, s: 1 },
+};
+
+function fmtPlainNumber(n: number, maxDecimals = 12): string {
+  const rounded = Number(n.toFixed(maxDecimals));
+  return rounded.toLocaleString("fr-CH", {
+    useGrouping: false,
+    maximumFractionDigits: maxDecimals,
+  });
+}
+
+function randomDecimalValue(): number {
+  const decimals = rnd(1, 4);
+  const scale = 10 ** decimals;
+  return rnd(scale, 99999 * scale) / scale;
+}
+
+function genUnitConversionQ(domain: UnitConversionDomain, decimals: boolean): UnitConversionQ {
+  const factors = UNIT_FACTORS[domain];
+  const units = Object.keys(factors);
+  const from = units[rnd(0, units.length - 1)]!;
+  let to = units[rnd(0, units.length - 1)]!;
+  while (to === from) to = units[rnd(0, units.length - 1)]!;
+  const valueNum = decimals ? randomDecimalValue() : rnd(1, 99999);
+  const answer = valueNum * factors[from]! / factors[to]!;
+  return {
+    value: fmtPlainNumber(valueNum, 4),
+    from,
+    to,
+    answer: fmtPlainNumber(answer),
+  };
+}
+
+function genUnitConversion(domain: UnitConversionDomain, decimals: boolean, exNum: number, count = 5): UnitConversionConfig {
+  return {
+    exNum,
+    domain,
+    decimals,
+    questions: Array.from({ length: count }, () => genUnitConversionQ(domain, decimals)),
+  };
+}
+
+function numericAnswerMatches(input: string, expected: string): boolean {
+  const a = Number(input.trim().replace(/\s/g, "").replace(",", "."));
+  const b = Number(expected.trim().replace(/\s/g, "").replace(",", "."));
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return false;
+  return Math.abs(a - b) <= Math.max(1e-9, Math.abs(b) * 1e-10);
+}
+
+// â”€â”€ Word Problems (A2.4) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const WP_ADD: Array<(a: number, b: number) => string> = [
   (a, b) => `${a} enfants jouent dans la cour. ${b} autres enfants les rejoignent. Combien y a-t-il d'enfants en tout ?`,
-  (a, b) => `Marie a ${a} billes. Elle en gagne ${b} de plus à la récréation. Combien de billes a-t-elle ?`,
-  (a, b) => `Il y a ${a} livres sur l'étagère. On y ajoute ${b} nouveaux livres. Combien y en a-t-il ?`,
-  (a, b) => `Paul a économisé ${a} CHF. Sa grand-mère lui donne ${b} CHF. Combien a-t-il au total ?`,
-  (a, b) => `Une boîte contient ${a} crayons. On y met ${b} crayons de plus. Combien y a-t-il de crayons ?`,
-  (a, b) => `Léa a ${a} autocollants. Elle en achète ${b} autres. Combien en possède-t-elle ?`,
-  (a, b) => `Un fermier a ${a} poules. Il en achète ${b} de plus au marché. Combien de poules a-t-il ?`,
+  (a, b) => `Marie a ${a} billes. Elle en gagne ${b} de plus Ã  la rÃ©crÃ©ation. Combien de billes a-t-elle ?`,
+  (a, b) => `Il y a ${a} livres sur l'Ã©tagÃ¨re. On y ajoute ${b} nouveaux livres. Combien y en a-t-il ?`,
+  (a, b) => `Paul a Ã©conomisÃ© ${a} CHF. Sa grand-mÃ¨re lui donne ${b} CHF. Combien a-t-il au total ?`,
+  (a, b) => `Une boÃ®te contient ${a} crayons. On y met ${b} crayons de plus. Combien y a-t-il de crayons ?`,
+  (a, b) => `LÃ©a a ${a} autocollants. Elle en achÃ¨te ${b} autres. Combien en possÃ¨de-t-elle ?`,
+  (a, b) => `Un fermier a ${a} poules. Il en achÃ¨te ${b} de plus au marchÃ©. Combien de poules a-t-il ?`,
   (a, b) => `${a} spectateurs sont dans la salle. ${b} autres arrivent. Combien y a-t-il de spectateurs ?`,
-  (a, b) => `Une boulangerie vend ${a} croissants le matin et ${b} l'après-midi. Combien en a-t-elle vendu en tout ?`,
+  (a, b) => `Une boulangerie vend ${a} croissants le matin et ${b} l'aprÃ¨s-midi. Combien en a-t-elle vendu en tout ?`,
   (a, b) => `Tom a lu ${a} pages hier. Il en lit ${b} aujourd'hui. Combien de pages a-t-il lues au total ?`,
-  (a, b) => `Un jardinier a planté ${a} tulipes. Il en plante ${b} autres. Combien en a-t-il planté ?`,
+  (a, b) => `Un jardinier a plantÃ© ${a} tulipes. Il en plante ${b} autres. Combien en a-t-il plantÃ© ?`,
   (a, b) => `Dans un tiroir, il y a ${a} stylos. On y range ${b} stylos de plus. Combien y en a-t-il ?`,
-  (a, b) => `Zoé a ${a} points dans son jeu. Elle en gagne ${b} de plus. Quel est son nouveau total ?`,
-  (a, b) => `Le matin, ${a} élèves arrivent à l'école. ${b} autres s'ajoutent pour le sport. Combien y en a-t-il ?`,
-  (a, b) => `Un bus transporte ${a} passagers. À l'arrêt suivant, ${b} personnes montent. Combien y en a-t-il ?`,
+  (a, b) => `ZoÃ© a ${a} points dans son jeu. Elle en gagne ${b} de plus. Quel est son nouveau total ?`,
+  (a, b) => `Le matin, ${a} Ã©lÃ¨ves arrivent Ã  l'Ã©cole. ${b} autres s'ajoutent pour le sport. Combien y en a-t-il ?`,
+  (a, b) => `Un bus transporte ${a} passagers. Ã€ l'arrÃªt suivant, ${b} personnes montent. Combien y en a-t-il ?`,
 ];
 const WP_SUB: Array<(a: number, b: number) => string> = [
-  (a, b) => `${a} enfants jouent dans la cour. ${b} rentrent à la maison. Combien reste-t-il d'enfants ?`,
-  (a, b) => `Une bibliothèque possède ${a} livres. On en retire ${b}. Combien en reste-t-il ?`,
+  (a, b) => `${a} enfants jouent dans la cour. ${b} rentrent Ã  la maison. Combien reste-t-il d'enfants ?`,
+  (a, b) => `Une bibliothÃ¨que possÃ¨de ${a} livres. On en retire ${b}. Combien en reste-t-il ?`,
   (a, b) => `Paul a ${a} billes. Il en perd ${b}. Combien lui en reste-t-il ?`,
-  (a, b) => `Marie a ${a} CHF. Elle en dépense ${b} au magasin. Combien lui reste-t-il ?`,
+  (a, b) => `Marie a ${a} CHF. Elle en dÃ©pense ${b} au magasin. Combien lui reste-t-il ?`,
   (a, b) => `Un bocal contient ${a} bonbons. Les enfants en mangent ${b}. Combien en reste-t-il ?`,
   (a, b) => `${a} personnes font la queue. ${b} s'en vont. Combien en reste-t-il ?`,
-  (a, b) => `Il y a ${a} livres sur une étagère. On en enlève ${b}. Combien en reste-t-il ?`,
-  (a, b) => `Un fermier a ${a} œufs. Il en vend ${b} au marché. Combien lui en reste-t-il ?`,
+  (a, b) => `Il y a ${a} livres sur une Ã©tagÃ¨re. On en enlÃ¨ve ${b}. Combien en reste-t-il ?`,
+  (a, b) => `Un fermier a ${a} Å“ufs. Il en vend ${b} au marchÃ©. Combien lui en reste-t-il ?`,
   (a, b) => `Tom avait ${a} points. Il en perd ${b}. Quel est son nouveau score ?`,
-  (a, b) => `Un train avait ${a} passagers. ${b} sont descendus à la gare. Combien en reste-t-il ?`,
-  (a, b) => `Léa avait ${a} autocollants. Elle en donne ${b} à son amie. Combien lui en reste-t-il ?`,
-  (a, b) => `Il y avait ${a} pommes dans le panier. On en a retiré ${b}. Combien en reste-t-il ?`,
-  (a, b) => `Un magasin avait ${a} articles. Il en vend ${b} dans la journée. Combien lui en reste-t-il ?`,
-  (a, b) => `${a} oiseaux étaient sur un arbre. ${b} s'envolent. Combien en reste-t-il sur l'arbre ?`,
-  (a, b) => `Zoé avait ${a} figurines. Elle en offre ${b} à sa cousine. Combien lui en reste-t-il ?`,
+  (a, b) => `Un train avait ${a} passagers. ${b} sont descendus Ã  la gare. Combien en reste-t-il ?`,
+  (a, b) => `LÃ©a avait ${a} autocollants. Elle en donne ${b} Ã  son amie. Combien lui en reste-t-il ?`,
+  (a, b) => `Il y avait ${a} pommes dans le panier. On en a retirÃ© ${b}. Combien en reste-t-il ?`,
+  (a, b) => `Un magasin avait ${a} articles. Il en vend ${b} dans la journÃ©e. Combien lui en reste-t-il ?`,
+  (a, b) => `${a} oiseaux Ã©taient sur un arbre. ${b} s'envolent. Combien en reste-t-il sur l'arbre ?`,
+  (a, b) => `ZoÃ© avait ${a} figurines. Elle en offre ${b} Ã  sa cousine. Combien lui en reste-t-il ?`,
 ];
 
 const WP_ADD_A1: Array<(a: number, b: number) => string> = [
   (a, b) => `Lina a ${a} billes. Elle en gagne ${b}. Combien a-t-elle de billes ?`,
   (a, b) => `Il y a ${a} pommes. On ajoute ${b} pommes. Combien y a-t-il de pommes ?`,
   (a, b) => `${a} enfants jouent. ${b} enfants arrivent. Combien y a-t-il d'enfants ?`,
-  (a, b) => `Noa a ${a} cartes. Il reçoit ${b} cartes. Combien a-t-il de cartes ?`,
-  (a, b) => `Dans la boîte, il y a ${a} crayons. On met ${b} crayons. Combien y en a-t-il ?`,
+  (a, b) => `Noa a ${a} cartes. Il reÃ§oit ${b} cartes. Combien a-t-il de cartes ?`,
+  (a, b) => `Dans la boÃ®te, il y a ${a} crayons. On met ${b} crayons. Combien y en a-t-il ?`,
   (a, b) => `Il y a ${a} fleurs. On plante ${b} fleurs. Combien y a-t-il de fleurs ?`,
   (a, b) => `Mia lit ${a} pages. Elle lit encore ${b} pages. Combien de pages lit-elle ?`,
   (a, b) => `Un panier contient ${a} poires. On ajoute ${b} poires. Combien y en a-t-il ?`,
   (a, b) => `Tom a ${a} points. Il gagne ${b} points. Quel est son total ?`,
   (a, b) => `Il y a ${a} voitures. ${b} voitures arrivent. Combien y a-t-il de voitures ?`,
-  (a, b) => `Sara a ${a} gommes. Elle achète ${b} gommes. Combien en a-t-elle ?`,
+  (a, b) => `Sara a ${a} gommes. Elle achÃ¨te ${b} gommes. Combien en a-t-elle ?`,
   (a, b) => `${a} oiseaux sont sur le fil. ${b} oiseaux arrivent. Combien y en a-t-il ?`,
   (a, b) => `Un sac contient ${a} cubes. On ajoute ${b} cubes. Combien de cubes y a-t-il ?`,
-  (a, b) => `Il y a ${a} élèves. ${b} élèves entrent. Combien y a-t-il d'élèves ?`,
-  (a, b) => `Eli a ${a} autocollants. Il en reçoit ${b}. Combien en a-t-il ?`,
+  (a, b) => `Il y a ${a} Ã©lÃ¨ves. ${b} Ã©lÃ¨ves entrent. Combien y a-t-il d'Ã©lÃ¨ves ?`,
+  (a, b) => `Eli a ${a} autocollants. Il en reÃ§oit ${b}. Combien en a-t-il ?`,
 ];
 
 const WP_SUB_A1: Array<(a: number, b: number) => string> = [
   (a, b) => `Lina a ${a} billes. Elle en perd ${b}. Combien lui en reste-t-il ?`,
-  (a, b) => `Il y a ${a} pommes. On enlève ${b} pommes. Combien reste-t-il de pommes ?`,
+  (a, b) => `Il y a ${a} pommes. On enlÃ¨ve ${b} pommes. Combien reste-t-il de pommes ?`,
   (a, b) => `${a} enfants jouent. ${b} enfants partent. Combien reste-t-il d'enfants ?`,
   (a, b) => `Noa a ${a} cartes. Il donne ${b} cartes. Combien lui en reste-t-il ?`,
-  (a, b) => `Dans la boîte, il y a ${a} crayons. On retire ${b} crayons. Combien y en a-t-il ?`,
+  (a, b) => `Dans la boÃ®te, il y a ${a} crayons. On retire ${b} crayons. Combien y en a-t-il ?`,
   (a, b) => `Il y a ${a} fleurs. On coupe ${b} fleurs. Combien reste-t-il de fleurs ?`,
-  (a, b) => `Mia a ${a} pages à lire. Elle lit ${b} pages. Combien reste-t-il de pages ?`,
+  (a, b) => `Mia a ${a} pages Ã  lire. Elle lit ${b} pages. Combien reste-t-il de pages ?`,
   (a, b) => `Un panier contient ${a} poires. On mange ${b} poires. Combien en reste-t-il ?`,
   (a, b) => `Tom a ${a} points. Il perd ${b} points. Quel est son total ?`,
   (a, b) => `Il y a ${a} voitures. ${b} voitures partent. Combien reste-t-il de voitures ?`,
   (a, b) => `Sara a ${a} gommes. Elle en donne ${b}. Combien lui en reste-t-il ?`,
   (a, b) => `${a} oiseaux sont sur le fil. ${b} oiseaux s'envolent. Combien en reste-t-il ?`,
-  (a, b) => `Un sac contient ${a} cubes. On enlève ${b} cubes. Combien de cubes reste-t-il ?`,
-  (a, b) => `Il y a ${a} élèves. ${b} élèves sortent. Combien reste-t-il d'élèves ?`,
+  (a, b) => `Un sac contient ${a} cubes. On enlÃ¨ve ${b} cubes. Combien de cubes reste-t-il ?`,
+  (a, b) => `Il y a ${a} Ã©lÃ¨ves. ${b} Ã©lÃ¨ves sortent. Combien reste-t-il d'Ã©lÃ¨ves ?`,
   (a, b) => `Eli a ${a} autocollants. Il en donne ${b}. Combien lui en reste-t-il ?`,
 ];
 
 const WP_ADD_B1: Array<(a: number, b: number) => string> = [
-  (a, b) => `Pour une sortie scolaire, ${a} billets sont réservés le matin. Dans l'après-midi, l'école ajoute ${b} billets pour une autre classe. Combien de billets sont réservés au total ?`,
-  (a, b) => `Une association collecte ${a} CHF lors d'une vente. Le lendemain, elle reçoit encore ${b} CHF de dons. Quelle somme possède-t-elle maintenant ?`,
-  (a, b) => `La bibliothèque avait déjà classé ${a} livres. Une nouvelle livraison de ${b} livres doit aussi être rangée. Combien de livres sont à classer en tout ?`,
-  (a, b) => `Un club sportif compte ${a} inscriptions en début de semaine. Après la journée portes ouvertes, ${b} nouvelles personnes s'inscrivent. Combien d'inscriptions y a-t-il ?`,
-  (a, b) => `Une entreprise a préparé ${a} colis lundi. Mardi, elle en prépare ${b} supplémentaires. Combien de colis ont été préparés ?`,
-  (a, b) => `Lors d'un tournoi, ${a} spectateurs sont entrés avant midi. Après midi, ${b} autres spectateurs arrivent. Combien de spectateurs sont entrés ?`,
-  (a, b) => `Un magasin vend ${a} articles pendant la matinée. Il en vend encore ${b} pendant l'après-midi. Combien d'articles a-t-il vendus ?`,
-  (a, b) => `Une ville plante ${a} arbres dans un quartier. Elle en plante ensuite ${b} dans un parc voisin. Combien d'arbres sont plantés ?`,
-  (a, b) => `Un entrepôt contient ${a} cahiers. Une commande de ${b} cahiers arrive. Combien de cahiers l'entrepôt contient-il ?`,
-  (a, b) => `Une course accueille ${a} participants inscrits en ligne. Le jour même, ${b} participants s'inscrivent sur place. Combien de participants y a-t-il ?`,
-  (a, b) => `Un musée reçoit ${a} visiteurs pendant la semaine. Le week-end, ${b} visiteurs supplémentaires viennent. Combien de visiteurs a-t-il reçus ?`,
-  (a, b) => `Une école possède ${a} tablettes. Elle en achète ${b} pour équiper de nouvelles classes. Combien de tablettes possède-t-elle ?`,
-  (a, b) => `Une usine produit ${a} pièces avant la pause. Après la pause, elle produit ${b} pièces de plus. Combien de pièces sont produites ?`,
-  (a, b) => `Un agriculteur récolte ${a} kg de pommes le matin. Il récolte encore ${b} kg l'après-midi. Combien de kilogrammes récolte-t-il ?`,
-  (a, b) => `Une caisse contient ${a} enveloppes. On ajoute ${b} enveloppes pour préparer un envoi. Combien d'enveloppes contient la caisse ?`,
+  (a, b) => `Pour une sortie scolaire, ${a} billets sont rÃ©servÃ©s le matin. Dans l'aprÃ¨s-midi, l'Ã©cole ajoute ${b} billets pour une autre classe. Combien de billets sont rÃ©servÃ©s au total ?`,
+  (a, b) => `Une association collecte ${a} CHF lors d'une vente. Le lendemain, elle reÃ§oit encore ${b} CHF de dons. Quelle somme possÃ¨de-t-elle maintenant ?`,
+  (a, b) => `La bibliothÃ¨que avait dÃ©jÃ  classÃ© ${a} livres. Une nouvelle livraison de ${b} livres doit aussi Ãªtre rangÃ©e. Combien de livres sont Ã  classer en tout ?`,
+  (a, b) => `Un club sportif compte ${a} inscriptions en dÃ©but de semaine. AprÃ¨s la journÃ©e portes ouvertes, ${b} nouvelles personnes s'inscrivent. Combien d'inscriptions y a-t-il ?`,
+  (a, b) => `Une entreprise a prÃ©parÃ© ${a} colis lundi. Mardi, elle en prÃ©pare ${b} supplÃ©mentaires. Combien de colis ont Ã©tÃ© prÃ©parÃ©s ?`,
+  (a, b) => `Lors d'un tournoi, ${a} spectateurs sont entrÃ©s avant midi. AprÃ¨s midi, ${b} autres spectateurs arrivent. Combien de spectateurs sont entrÃ©s ?`,
+  (a, b) => `Un magasin vend ${a} articles pendant la matinÃ©e. Il en vend encore ${b} pendant l'aprÃ¨s-midi. Combien d'articles a-t-il vendus ?`,
+  (a, b) => `Une ville plante ${a} arbres dans un quartier. Elle en plante ensuite ${b} dans un parc voisin. Combien d'arbres sont plantÃ©s ?`,
+  (a, b) => `Un entrepÃ´t contient ${a} cahiers. Une commande de ${b} cahiers arrive. Combien de cahiers l'entrepÃ´t contient-il ?`,
+  (a, b) => `Une course accueille ${a} participants inscrits en ligne. Le jour mÃªme, ${b} participants s'inscrivent sur place. Combien de participants y a-t-il ?`,
+  (a, b) => `Un musÃ©e reÃ§oit ${a} visiteurs pendant la semaine. Le week-end, ${b} visiteurs supplÃ©mentaires viennent. Combien de visiteurs a-t-il reÃ§us ?`,
+  (a, b) => `Une Ã©cole possÃ¨de ${a} tablettes. Elle en achÃ¨te ${b} pour Ã©quiper de nouvelles classes. Combien de tablettes possÃ¨de-t-elle ?`,
+  (a, b) => `Une usine produit ${a} piÃ¨ces avant la pause. AprÃ¨s la pause, elle produit ${b} piÃ¨ces de plus. Combien de piÃ¨ces sont produites ?`,
+  (a, b) => `Un agriculteur rÃ©colte ${a} kg de pommes le matin. Il rÃ©colte encore ${b} kg l'aprÃ¨s-midi. Combien de kilogrammes rÃ©colte-t-il ?`,
+  (a, b) => `Une caisse contient ${a} enveloppes. On ajoute ${b} enveloppes pour prÃ©parer un envoi. Combien d'enveloppes contient la caisse ?`,
 ];
 
 const WP_SUB_B1: Array<(a: number, b: number) => string> = [
-  (a, b) => `Un cinéma avait prévu ${a} places pour une séance. Après plusieurs annulations, ${b} places ne sont plus réservées. Combien de places restent réservées ?`,
-  (a, b) => `Une association possède ${a} CHF pour financer un projet. Elle dépense ${b} CHF pour acheter du matériel. Quelle somme lui reste-t-il ?`,
-  (a, b) => `La bibliothèque compte ${a} livres dans une réserve. Elle en transfère ${b} vers les classes. Combien de livres restent dans la réserve ?`,
-  (a, b) => `Un club sportif avait ${a} ballons en stock. Après un tournoi, ${b} ballons sont abîmés et retirés. Combien de ballons utilisables restent-ils ?`,
-  (a, b) => `Une entreprise doit livrer ${a} colis. Elle en livre ${b} le matin. Combien de colis reste-t-il à livrer ?`,
-  (a, b) => `Lors d'un salon, ${a} badges sont imprimés. Les organisateurs en distribuent ${b} dès l'ouverture. Combien de badges restent-ils ?`,
-  (a, b) => `Un magasin avait ${a} articles en rayon. Il en vend ${b} pendant la journée. Combien d'articles restent en rayon ?`,
+  (a, b) => `Un cinÃ©ma avait prÃ©vu ${a} places pour une sÃ©ance. AprÃ¨s plusieurs annulations, ${b} places ne sont plus rÃ©servÃ©es. Combien de places restent rÃ©servÃ©es ?`,
+  (a, b) => `Une association possÃ¨de ${a} CHF pour financer un projet. Elle dÃ©pense ${b} CHF pour acheter du matÃ©riel. Quelle somme lui reste-t-il ?`,
+  (a, b) => `La bibliothÃ¨que compte ${a} livres dans une rÃ©serve. Elle en transfÃ¨re ${b} vers les classes. Combien de livres restent dans la rÃ©serve ?`,
+  (a, b) => `Un club sportif avait ${a} ballons en stock. AprÃ¨s un tournoi, ${b} ballons sont abÃ®mÃ©s et retirÃ©s. Combien de ballons utilisables restent-ils ?`,
+  (a, b) => `Une entreprise doit livrer ${a} colis. Elle en livre ${b} le matin. Combien de colis reste-t-il Ã  livrer ?`,
+  (a, b) => `Lors d'un salon, ${a} badges sont imprimÃ©s. Les organisateurs en distribuent ${b} dÃ¨s l'ouverture. Combien de badges restent-ils ?`,
+  (a, b) => `Un magasin avait ${a} articles en rayon. Il en vend ${b} pendant la journÃ©e. Combien d'articles restent en rayon ?`,
   (a, b) => `Une ville dispose de ${a} plants pour ses jardins. Elle en utilise ${b} dans le premier quartier. Combien de plants restent disponibles ?`,
-  (a, b) => `Un entrepôt contient ${a} cahiers. Une école en commande ${b}. Combien de cahiers restent dans l'entrepôt ?`,
-  (a, b) => `Une course comptait ${a} inscrits. Avant le départ, ${b} personnes se désistent. Combien de participants restent inscrits ?`,
-  (a, b) => `Un musée reçoit ${a} brochures. Il en distribue ${b} aux visiteurs. Combien de brochures reste-t-il ?`,
-  (a, b) => `Une école possède ${a} tablettes. Elle en prête ${b} à une autre école. Combien de tablettes lui restent-elles ?`,
-  (a, b) => `Une usine a produit ${a} pièces. Lors du contrôle, ${b} pièces sont écartées. Combien de pièces restent acceptées ?`,
-  (a, b) => `Un agriculteur récolte ${a} kg de pommes. Il en vend ${b} kg au marché. Combien de kilogrammes lui restent-ils ?`,
+  (a, b) => `Un entrepÃ´t contient ${a} cahiers. Une Ã©cole en commande ${b}. Combien de cahiers restent dans l'entrepÃ´t ?`,
+  (a, b) => `Une course comptait ${a} inscrits. Avant le dÃ©part, ${b} personnes se dÃ©sistent. Combien de participants restent inscrits ?`,
+  (a, b) => `Un musÃ©e reÃ§oit ${a} brochures. Il en distribue ${b} aux visiteurs. Combien de brochures reste-t-il ?`,
+  (a, b) => `Une Ã©cole possÃ¨de ${a} tablettes. Elle en prÃªte ${b} Ã  une autre Ã©cole. Combien de tablettes lui restent-elles ?`,
+  (a, b) => `Une usine a produit ${a} piÃ¨ces. Lors du contrÃ´le, ${b} piÃ¨ces sont Ã©cartÃ©es. Combien de piÃ¨ces restent acceptÃ©es ?`,
+  (a, b) => `Un agriculteur rÃ©colte ${a} kg de pommes. Il en vend ${b} kg au marchÃ©. Combien de kilogrammes lui restent-ils ?`,
   (a, b) => `Une caisse contient ${a} enveloppes. On en utilise ${b} pour un envoi. Combien d'enveloppes restent dans la caisse ?`,
 ];
 
@@ -491,7 +551,7 @@ function ComparisonExercise({
   );
 }
 
-// ── Expression comparison exercise ───────────────────────────────────────────
+// â”€â”€ Expression comparison exercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function genExprComp(op: ArithOp, range: [number, number], exNum: number, count = 5): ExprCompConfig {
   const [min, max] = range;
   const evalOp = (a: number, b: number) => op === "+" ? a + b : a - b;
@@ -576,7 +636,7 @@ function ExprCompExercise({
   );
 }
 
-// ── Number line ──────────────────────────────────────────────────────────────
+// â”€â”€ Number line â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 type NLConfig = { start: number; end: number; step: number; divCount: number; labelEvery: number; target: number };
 
 function _genNLConfig(): NLConfig {
@@ -616,7 +676,7 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
   });
   const tx = PL + ((config.target - config.start) / (config.end - config.start)) * lineW;
   return (
-    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }} aria-label="Droite numérique">
+    <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ display: "block" }} aria-label="Droite numÃ©rique">
       <line x1={PL} y1={lineY} x2={W - PR} y2={lineY} stroke="currentColor" strokeWidth="1.5" />
       <polygon points={`${PL - 2},${lineY - 4} ${PL - 2},${lineY + 4} ${PL - 9},${lineY}`} fill="currentColor" />
       <polygon points={`${W - PR + 2},${lineY - 4} ${W - PR + 2},${lineY + 4} ${W - PR + 9},${lineY}`} fill="currentColor" />
@@ -636,7 +696,7 @@ function NumberLineSVG({ config }: { config: NLConfig }) {
   );
 }
 
-// ── Arithmetic group generators ──────────────────────────────────────────────
+// â”€â”€ Arithmetic group generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function genArithGroup(op: ArithOp, range: [number, number], exNum: number, missingOperand = false, timer?: number): ArithGroupConfig {
   const [lo, hi] = range;
   const qs: ArithQuestion[] = [];
@@ -648,12 +708,12 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
     } else if (op === "-") {
       do { a = rnd(lo, hi); b = rnd(lo, hi); } while (a < b);
       result = a - b;
-    } else if (op === "×") {
-      // a ∈ [range[0], range[1]], b ∈ [1, 12]
+    } else if (op === "Ã—") {
+      // a âˆˆ [range[0], range[1]], b âˆˆ [1, 12]
       a = rnd(lo, hi); b = rnd(1, 12); result = a * b;
     } else {
-      // ÷: pick divisor b ∈ [range[0], range[1]], quotient a ∈ [1, 12]
-      // Dividend = a * b, question: (a*b) ÷ b = a
+      // Ã·: pick divisor b âˆˆ [range[0], range[1]], quotient a âˆˆ [1, 12]
+      // Dividend = a * b, question: (a*b) Ã· b = a
       b = rnd(lo, hi === 0 ? 1 : hi); if (b === 0) b = 1;
       a = rnd(1, 12);
       result = a; // the quotient
@@ -670,7 +730,7 @@ function genArithGroup(op: ArithOp, range: [number, number], exNum: number, miss
   return { questions: qs, exNum, op, range, missingOperand, ...(timer !== undefined ? { timer } : {}) };
 }
 
-// ── Rounding generators ──────────────────────────────────────────────────────
+// â”€â”€ Rounding generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function roundTo10(n: number) { return Math.round(n / 10) * 10; }
 function roundTo100(n: number) { return Math.round(n / 100) * 100; }
 function roundTo1000(n: number) { return Math.round(n / 1000) * 1000; }
@@ -693,16 +753,16 @@ type RoundingKind = "diz_near" | "cent_near_new" | "est_diz_2" | "est_diz_large_
 
 function genRounding(kind: RoundingKind, exNum: number, count: number): RoundingConfig {
   const consigneMap: Record<RoundingKind, string> = {
-    "diz_near":         "Arrondissez à la dizaine la plus proche les nombres suivants.",
-    "cent_near_new":    "Arrondissez à la centaine la plus proche les nombres suivants.",
-    "est_diz_2":        "Estimez le résultat du calcul à la dizaine la plus proche.",
-    "est_diz_large_2":  "Estimez le résultat du calcul à la centaine la plus proche.",
-    "est_diz_three":    "Estimez le résultat du calcul à la centaine la plus proche.",
+    "diz_near":         "Arrondissez Ã  la dizaine la plus proche les nombres suivants.",
+    "cent_near_new":    "Arrondissez Ã  la centaine la plus proche les nombres suivants.",
+    "est_diz_2":        "Estimez le rÃ©sultat du calcul Ã  la dizaine la plus proche.",
+    "est_diz_large_2":  "Estimez le rÃ©sultat du calcul Ã  la centaine la plus proche.",
+    "est_diz_three":    "Estimez le rÃ©sultat du calcul Ã  la centaine la plus proche.",
     "cent_near": "", "thou_near": "", "est_add": "", "est_sub": "", "est_mixed": "", "mixed": "",
-    "dec_dix":   "Arrondissez au dixième le plus proche.",
-    "dec_cent":  "Arrondissez au centième le plus proche.",
-    "dec_unit":  "Arrondissez à l'unité la plus proche.",
-    "dec_mixed": "Arrondissez chaque nombre à la précision indiquée.",
+    "dec_dix":   "Arrondissez au dixiÃ¨me le plus proche.",
+    "dec_cent":  "Arrondissez au centiÃ¨me le plus proche.",
+    "dec_unit":  "Arrondissez Ã  l'unitÃ© la plus proche.",
+    "dec_mixed": "Arrondissez chaque nombre Ã  la prÃ©cision indiquÃ©e.",
   };
   const consigne = consigneMap[kind];
   const qs: RoundingQ[] = [];
@@ -719,41 +779,41 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
       let x = rnd(11, 99), y = rnd(11, 99);
       const useAdd = Math.random() < 0.5;
       if (!useAdd && x < y) [x, y] = [y, x];
-      const op = useAdd ? "+" : "−";
+      const op = useAdd ? "+" : "âˆ’";
       const ans = useAdd ? roundTo10(x) + roundTo10(y) : roundTo10(x) - roundTo10(y);
-      qs.push({ prompt: `${x} ${op} ${y} ≈`, answer: String(ans) });
+      qs.push({ prompt: `${x} ${op} ${y} â‰ˆ`, answer: String(ans) });
     } else if (kind === "est_diz_large_2") {
       let x = rnd(101, 999), y = rnd(101, 999);
       const useAdd = Math.random() < 0.5;
       if (!useAdd && x < y) [x, y] = [y, x];
-      const op = useAdd ? "+" : "−";
+      const op = useAdd ? "+" : "âˆ’";
       const ans = useAdd ? roundTo100(x) + roundTo100(y) : roundTo100(x) - roundTo100(y);
-      qs.push({ prompt: `${x} ${op} ${y} ≈`, answer: String(ans) });
+      qs.push({ prompt: `${x} ${op} ${y} â‰ˆ`, answer: String(ans) });
     } else if (kind === "est_diz_three") {
-      let a: number, b: number, c: number, op1: "+" | "−", op2: "+" | "−", ans: number;
+      let a: number, b: number, c: number, op1: "+" | "âˆ’", op2: "+" | "âˆ’", ans: number;
       let tries = 0;
       do {
         a = rnd(101, 999); b = rnd(101, 999); c = rnd(101, 999);
-        op1 = Math.random() < 0.5 ? "+" : "−";
-        op2 = Math.random() < 0.5 ? "+" : "−";
+        op1 = Math.random() < 0.5 ? "+" : "âˆ’";
+        op2 = Math.random() < 0.5 ? "+" : "âˆ’";
         ans = roundTo100(a) + (op1 === "+" ? roundTo100(b) : -roundTo100(b)) + (op2 === "+" ? roundTo100(c) : -roundTo100(c));
         tries++;
       } while (ans < 0 && tries < 30);
       if (ans! < 0) { op1 = "+"; op2 = "+"; ans = roundTo100(a!) + roundTo100(b!) + roundTo100(c!); }
-      qs.push({ prompt: `${a!} ${op1!} ${b!} ${op2!} ${c!} ≈`, answer: String(ans!) });
+      qs.push({ prompt: `${a!} ${op1!} ${b!} ${op2!} ${c!} â‰ˆ`, answer: String(ans!) });
     } else if (kind === "cent_near") {
       const x = rnd(101, 999);
-      qs.push({ prompt: `Arrondissez ${x} à la centaine la plus proche.`, answer: String(roundTo100(x)) });
+      qs.push({ prompt: `Arrondissez ${x} Ã  la centaine la plus proche.`, answer: String(roundTo100(x)) });
     } else if (kind === "thou_near") {
       const x = rnd(1001, 9999);
       qs.push({ prompt: `Arrondissez ${x} au millier le plus proche.`, answer: String(roundTo1000(x)) });
     } else if (kind === "est_add") {
       const x = rnd(1, 999), y = rnd(1, 999);
-      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
+      qs.push({ prompt: `${x} + ${y} â‰ˆ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
     } else if (kind === "est_sub") {
       let x = rnd(1, 999), y = rnd(1, 999);
       if (x < y) [x, y] = [y, x];
-      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
+      qs.push({ prompt: `${x} âˆ’ ${y} â‰ˆ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
     } else if (kind === "dec_dix") {
       const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9);
       qs.push({ prompt: `${x},${d1}${d2}`, answer: roundDecToTenth(x, d1, d2) });
@@ -769,18 +829,18 @@ function genRounding(kind: RoundingKind, exNum: number, count: number): Rounding
       const t = mixTypes[i % 3]!;
       if (t === "dix") {
         const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9);
-        qs.push({ prompt: `${x},${d1}${d2} → dixième`, answer: roundDecToTenth(x, d1, d2) });
+        qs.push({ prompt: `${x},${d1}${d2} â†’ dixiÃ¨me`, answer: roundDecToTenth(x, d1, d2) });
       } else if (t === "cent") {
         const x = rnd(1, 15), d1 = rnd(0, 9), d2 = rnd(0, 9), d3 = rnd(0, 9);
-        qs.push({ prompt: `${x},${d1}${d2}${d3} → centième`, answer: roundDecToCent(x, d1, d2, d3) });
+        qs.push({ prompt: `${x},${d1}${d2}${d3} â†’ centiÃ¨me`, answer: roundDecToCent(x, d1, d2, d3) });
       } else {
         const x = rnd(1, 20), d1 = rnd(1, 9);
-        qs.push({ prompt: `${x},${d1}${rnd(0, 9)} → unité`, answer: roundDecToUnit(x, d1) });
+        qs.push({ prompt: `${x},${d1}${rnd(0, 9)} â†’ unitÃ©`, answer: roundDecToUnit(x, d1) });
       }
     } else {
       const x = rnd(1, 999), y = rnd(1, 999), z = rnd(1, 999);
       const addFirst = Math.random() < 0.5;
-      const prompt = addFirst ? `${x} + ${y} − ${z} ≈ ?` : `${x} − ${y} + ${z} ≈ ?`;
+      const prompt = addFirst ? `${x} + ${y} âˆ’ ${z} â‰ˆ ?` : `${x} âˆ’ ${y} + ${z} â‰ˆ ?`;
       const ans = addFirst ? roundTo100(x) + roundTo100(y) - roundTo100(z) : roundTo100(x) - roundTo100(y) + roundTo100(z);
       qs.push({ prompt, answer: String(ans) });
     }
@@ -794,17 +854,17 @@ function genRoundingMixed(exNum: number, count: number): RoundingConfig {
   for (let i = 0; i < count; i++) {
     if (i < halfAdd) {
       const x = rnd(1, 999), y = rnd(1, 999);
-      qs.push({ prompt: `${x} + ${y} ≈ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
+      qs.push({ prompt: `${x} + ${y} â‰ˆ ?`, answer: String(roundTo100(x) + roundTo100(y)) });
     } else {
       let x = rnd(1, 999), y = rnd(1, 999);
       if (x < y) [x, y] = [y, x];
-      qs.push({ prompt: `${x} − ${y} ≈ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
+      qs.push({ prompt: `${x} âˆ’ ${y} â‰ˆ ?`, answer: String(roundTo100(x) - roundTo100(y)) });
     }
   }
   return { questions: qs, exNum, count, consigne: "", kind: "mixed" };
 }
 
-// ── Fraction generators ───────────────────────────────────────────────────────
+// â”€â”€ Fraction generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function gcd(a: number, b: number): number {
   return b === 0 ? a : gcd(b, a % b);
 }
@@ -914,7 +974,7 @@ function genFracCompare(mode: "same_den" | "same_num" | "random", range: [number
   return { questions, exNum, mode };
 }
 
-// ── A1.3 / A1.4 / A1.5 generators ───────────────────────────────────────────
+// â”€â”€ A1.3 / A1.4 / A1.5 generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function genNumberSelect(mode: "gt"|"lt"|"between", exNum: number): NumberSelectConfig {
   const threshold = mode === "between" ? rnd(100, 700) : rnd(100, 900);
@@ -937,9 +997,9 @@ function genNumberSelect(mode: "gt"|"lt"|"between", exNum: number): NumberSelect
   }
   for (let i = 14; i > 0; i--) { const j = rnd(0, i); [numbers[i], numbers[j]] = [numbers[j]!, numbers[i]!]; }
   let consigne: string;
-  if (mode === "gt") consigne = `Sélectionnez les nombres plus grands que ${threshold.toLocaleString("fr-CH")}.`;
-  else if (mode === "lt") consigne = `Sélectionnez les nombres plus petits que ${threshold.toLocaleString("fr-CH")}.`;
-  else consigne = `Sélectionnez les nombres entre ${threshold.toLocaleString("fr-CH")} et ${threshold2!.toLocaleString("fr-CH")}.`;
+  if (mode === "gt") consigne = `SÃ©lectionnez les nombres plus grands que ${threshold.toLocaleString("fr-CH")}.`;
+  else if (mode === "lt") consigne = `SÃ©lectionnez les nombres plus petits que ${threshold.toLocaleString("fr-CH")}.`;
+  else consigne = `SÃ©lectionnez les nombres entre ${threshold.toLocaleString("fr-CH")} et ${threshold2!.toLocaleString("fr-CH")}.`;
   return { mode, threshold, threshold2, numbers, exNum, consigne };
 }
 
@@ -1109,7 +1169,7 @@ function genDecSeqComplete(exNum: number, count: number, blanks: number, termCou
   return { questions, exNum };
 }
 
-// ── Column grid generators ────────────────────────────────────────────────────
+// â”€â”€ Column grid generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function getD4(n: number): [number, number, number, number] {
   return [Math.floor(n / 1000) % 10, Math.floor(n / 100) % 10, Math.floor(n / 10) % 10, n % 10];
 }
@@ -1128,7 +1188,7 @@ function computeCarries(a: number, b: number, op: ArithOp): (number | null)[] {
       c = Math.floor(s / 10);
       if (i > 0 && c > 0) row[i - 1] = c;
     }
-  } else if (op === "×") {
+  } else if (op === "Ã—") {
     let c = 0;
     for (let i = 3; i >= 0; i--) {
       const prod = ad[i]! * b + c;
@@ -1240,7 +1300,7 @@ function genDivColumnGrid(dividendCols: number, divisorCols: number, preFilledOp
   };
 }
 
-// ── A3.5 / A3.6 math helpers & generators ────────────────────────────────────
+// â”€â”€ A3.5 / A3.6 math helpers & generators â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function gcd2(a: number, b: number): number { return b === 0 ? a : gcd2(b, a % b); }
 function gcdN(...nums: number[]): number { return nums.reduce(gcd2); }
 function lcm2(a: number, b: number): number { return a / gcd2(a, b) * b; }
@@ -1472,7 +1532,7 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
   return { questions: shuffleArr(questions), exNum };
 }
 
-// ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
+// â”€â”€ WordProblemsExercise (A2.4) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function WordProblemsExercise({
   config, answers, validated, results, onChange, consigne,
 }: {
@@ -1488,7 +1548,7 @@ function WordProblemsExercise({
     <div className="space-y-5">
       <div>
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne ?? "Résolvez les problèmes. Écrivez uniquement la réponse numérique."}</p>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{consigne ?? "RÃ©solvez les problÃ¨mes. Ã‰crivez uniquement la rÃ©ponse numÃ©rique."}</p>
       </div>
       <div className="space-y-6">
         {config.questions.map((q, i) => {
@@ -1501,10 +1561,10 @@ function WordProblemsExercise({
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
               </div>
               <div className="flex items-center gap-3 pl-2">
-                <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">Réponse :</span>
+                <span className="shrink-0 text-sm text-[var(--color-text-secondary)]">RÃ©ponse :</span>
                 {wrong ? (
                   <div className="w-28 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
-                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "â€”"}</span>
                     <span className="text-xs font-bold leading-none text-amber-600">{q.answer.toLocaleString("fr-CH")}</span>
                   </div>
                 ) : (
@@ -1518,7 +1578,7 @@ function WordProblemsExercise({
                   />
                 )}
                 {ok === true && (
-                  <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)]">âœ“</span>
                 )}
               </div>
             </div>
@@ -1529,7 +1589,61 @@ function WordProblemsExercise({
   );
 }
 
-// ── ArithmeticGroupExercise ───────────────────────────────────────────────────
+// â”€â”€ ArithmeticGroupExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function UnitConversionExercise({
+  config, answers, validated, results, onChange,
+}: {
+  config: UnitConversionConfig;
+  answers: string[];
+  validated: boolean;
+  results: boolean[];
+  onChange: (i: number, val: string) => void;
+}) {
+  const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
+  return (
+    <div className="space-y-5">
+      <div>
+        <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
+        <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+          Convertissez les valeurs vers l&apos;unité de mesure demandée.
+        </p>
+      </div>
+      <div className="space-y-4">
+        {config.questions.map((q, i) => {
+          const v = answers[i] ?? "";
+          const ok = validated ? (results[i] ?? false) : null;
+          const wrong = ok === false;
+          return (
+            <div key={`${q.value}-${q.from}-${q.to}-${i}`} className="grid grid-cols-[2rem_auto_auto_auto] items-center gap-x-3 gap-y-1 text-sm">
+              <span className="font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+              <span className="font-mono text-[var(--color-text-primary)]">{q.value} {q.from}</span>
+              <span className="text-[var(--color-text-secondary)]">=</span>
+              <div className="flex items-center gap-2">
+                {wrong ? (
+                  <div className="w-28 h-10 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                    <span className="text-[10px] leading-none text-[var(--color-text-secondary)] line-through">{v || "—"}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={v}
+                    disabled={validated}
+                    onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\s-]/g, ""))}
+                    className={inputCls}
+                  />
+                )}
+                <span className="font-mono text-[var(--color-text-primary)]">{q.to}</span>
+                {ok === true && <span className="text-sm font-bold text-[var(--color-accent-alg)]">✓</span>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 function ArithmeticGroupExercise({
   config, answers, validated, results, onChange, onTimerExpired, onTimeUpdate, hideTimerDisplay, consigne,
 }: {
@@ -1608,19 +1722,19 @@ function ArithmeticGroupExercise({
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               {q.missingPos === "a"
                 ? wrongField
-                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"â€”"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.a}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">{q.op}</span>
               {q.missingPos === "b"
                 ? wrongField
-                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"â€”"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.b}</span>}
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
               {q.missingPos === "result"
                 ? wrongField
-                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
+                  ? <div className="w-14 h-8 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center"><span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"â€”"}</span><span className="text-xs font-bold leading-none text-amber-600">{q.answer}</span></div>
                   : <input type="text" inputMode="numeric" value={v} disabled={validated} onChange={e => onChange(i, e.target.value.replace(/[^0-9,.\-]/g, ""))} className={inputBase} />
                 : <span className={numCls}>{q.result}</span>}
             </div>
@@ -1631,7 +1745,7 @@ function ArithmeticGroupExercise({
   );
 }
 
-// ── ColumnGridExercise ────────────────────────────────────────────────────────
+// â”€â”€ ColumnGridExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const COL_LABELS = ["M", "C", "D", "U"] as const;
 
 function ColumnGridCard({
@@ -1650,7 +1764,7 @@ function ColumnGridCard({
   // cellIdx layout: [0-3]=result only (when preFilledOperands)
   const resBase = preFilledOperands ? 0 : 8;
 
-  // Leading zero = zero before first significant digit → not required
+  // Leading zero = zero before first significant digit â†’ not required
   const cellOk = (expected: number, val: string, col: number, firstNz: number) => {
     const trimmed = val.trim();
     if (trimmed === String(expected)) return true;
@@ -1679,7 +1793,7 @@ function ColumnGridCard({
     if (ok === false) {
       return (
         <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
-          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "â€”"}</span>
           <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
@@ -1725,9 +1839,9 @@ function ColumnGridCard({
           </tr>
         </thead>
         <tbody>
-          {/* Carry / borrow row — input fields */}
+          {/* Carry / borrow row â€” input fields */}
           <tr>
-            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" || q.op === "×" ? "R" : "E"}</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">{q.op === "+" || q.op === "Ã—" ? "R" : "E"}</td>
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
@@ -1736,7 +1850,7 @@ function ColumnGridCard({
                 <td key={ci} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                   {carryWrong ? (
                     <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
-                      <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{carryVal || "—"}</span>
+                      <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{carryVal || "â€”"}</span>
                       <span className="text-[8px] font-bold leading-none text-amber-600">{expectedCarry}</span>
                     </div>
                   ) : (
@@ -1833,7 +1947,7 @@ function ColumnGridExercise({
   );
 }
 
-// ── DivColumnGridExercise ─────────────────────────────────────────────────────
+// â”€â”€ DivColumnGridExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const DIV_COL_LABELS_4 = ["M", "C", "D", "U"];
 const DIV_COL_LABELS_5 = ["DM", "M", "C", "D", "U"];
 const DIV_COL_LABELS_6 = ["CM", "DM", "M", "C", "D", "U"];
@@ -1858,7 +1972,7 @@ function DivColumnCard({
   const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : dividendCols === 5 ? DIV_COL_LABELS_5 : DIV_COL_LABELS_6;
   const dividendStr = dividend.toString().padStart(dividendCols, "0");
   const divisorStr = divisor.toString().padStart(divisorCols, "0");
-  // Left-align quotient: digit i → cell i; cells >= quotientLen are empty
+  // Left-align quotient: digit i â†’ cell i; cells >= quotientLen are empty
   const quotientDigitStr = quotient.toString();
   const quotientLen = quotientDigitStr.length;
   const BSEP: React.CSSProperties = { borderLeft: "2px solid var(--color-text-primary)" };
@@ -1880,7 +1994,7 @@ function DivColumnCard({
     const ok = validated ? val.trim() === expected : null;
     if (ok === false) return (
       <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
-        <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+        <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "â€”"}</span>
         <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
       </div>
     );
@@ -1926,7 +2040,7 @@ function DivColumnCard({
   return (
     <div data-divcol-card className="overflow-x-auto">
       <p className="mb-2 text-center font-mono text-sm text-[var(--color-text-primary)]">
-        {dividend} ÷ {divisor}
+        {dividend} Ã· {divisor}
       </p>
       <table className="mx-auto border-collapse table-fixed">
         <tbody>
@@ -1977,7 +2091,7 @@ function DivColumnCard({
             })}
           </tr>
 
-          {/* Quotient row — shown right below dividend/divisor */}
+          {/* Quotient row â€” shown right below dividend/divisor */}
           <tr>
             <td style={{ padding: 0 }} />
             {Array.from({ length: dividendCols }, (_, col) => (
@@ -2008,7 +2122,7 @@ function DivColumnCard({
 
             return (
               <Fragment key={si}>
-                {/* Partial dividend row — skip si===0 (already visible in dividend row above) */}
+                {/* Partial dividend row â€” skip si===0 (already visible in dividend row above) */}
                 {si > 0 && (
                   <tr>
                     <td style={{ padding: 0 }} />
@@ -2019,7 +2133,7 @@ function DivColumnCard({
 
                 {/* Product row */}
                 <tr>
-                  <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>−</td>
+                  <td style={{ padding: 0, textAlign: "center", verticalAlign: "middle", fontSize: 14, color: "var(--color-text-secondary)" }}>âˆ’</td>
                   <FullWorkRow numStr={prStr} colEnd={step.colEnd} si={si} type={1} />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
@@ -2048,7 +2162,7 @@ function DivColumnCard({
             <td style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
               {remOk === false
                 ? <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
-                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{remainderInput || "—"}</span>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{remainderInput || "â€”"}</span>
                     <span className="text-[9px] font-bold leading-none text-amber-600">{remainder}</span>
                   </div>
                 : <input type="text" inputMode="numeric" maxLength={2} value={remainderInput} disabled={validated}
@@ -2084,7 +2198,7 @@ function Mul2DigitCard({
   const firstNzB = bd.findIndex(d => d !== 0);
   const firstNzP1 = p1d.findIndex(d => d !== 0);
   const firstNzR = rd.findIndex(d => d !== 0);
-  // For p2shifted (cols 0-3): col i → p2d[i+1]; col 4 is fixed
+  // For p2shifted (cols 0-3): col i â†’ p2d[i+1]; col 4 is fixed
   const firstNzP2s = [0,1,2,3].findIndex(c => (p2d[c + 1]!) !== 0);
   const aBase = 0, bBase = 5;
   const p1Base = preFilledOperands ? 0 : 10;
@@ -2098,7 +2212,7 @@ function Mul2DigitCard({
   const colLabels = COL5_LABELS.slice(colStart);
   const totalSpan = numCols + 1; // label col + data cols
 
-  // partial2 shifted: col i → p2d[i+1], except col 4 (U) = 0 (fixed)
+  // partial2 shifted: col i â†’ p2d[i+1], except col 4 (U) = 0 (fixed)
   const p2ShiftedDigit = (col: number): number => col === 4 ? 0 : p2d[col + 1]!;
 
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -2121,7 +2235,7 @@ function Mul2DigitCard({
     if (ok === false) {
       return (
         <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
-          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "â€”"}</span>
           <span className="text-[9px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
@@ -2149,7 +2263,7 @@ function Mul2DigitCard({
     if (validated && expected !== null && val.trim() !== String(expected)) {
       return (
         <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
-          <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
+          <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{val || "â€”"}</span>
           <span className="text-[8px] font-bold leading-none text-amber-600">{expected}</span>
         </div>
       );
@@ -2168,7 +2282,7 @@ function Mul2DigitCard({
     <div data-grid-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
       {!preFilledOperands && (
         <p className="mb-2 text-center text-xs text-[var(--color-text-secondary)]">
-          {formatCompNum(q.a)} × {formatCompNum(q.b)}
+          {formatCompNum(q.a)} Ã— {formatCompNum(q.b)}
         </p>
       )}
       <table className="mx-auto border-collapse table-fixed">
@@ -2181,14 +2295,14 @@ function Mul2DigitCard({
           </tr>
         </thead>
         <tbody>
-          {/* R2 — carries for tens-digit multiplication (shown first/top) */}
+          {/* R2 â€” carries for tens-digit multiplication (shown first/top) */}
           <tr>
             <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R2</td>
             {visibleCols.map(col => (
               <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{carryCell(5, col, q.carries2)}</td>
             ))}
           </tr>
-          {/* R1 — carries for units-digit multiplication */}
+          {/* R1 â€” carries for units-digit multiplication */}
           <tr>
             <td style={{ width: 24, padding: 0 }} className="pr-1 text-right text-[9px] font-bold text-orange-400 leading-none align-middle">R1</td>
             {visibleCols.map(col => (
@@ -2208,7 +2322,7 @@ function Mul2DigitCard({
           </tr>
           {/* Operand b */}
           <tr>
-            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+            <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">Ã—</td>
             {visibleCols.map(col => (
               <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                 {preFilledOperands
@@ -2219,19 +2333,19 @@ function Mul2DigitCard({
           </tr>
           {/* Separator 1 */}
           <tr><td colSpan={totalSpan}><div className="my-1 h-px bg-[var(--color-text-primary)]" /></td></tr>
-          {/* Partial product 1 (a × bUnits) */}
+          {/* Partial product 1 (a Ã— bUnits) */}
           <tr>
             <td style={{ width: 24, padding: 0 }} />
             {visibleCols.map(col => (
               <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">{cellInput({base: p1Base, col, expected: p1d[col]!, firstNz: firstNzP1})}</td>
             ))}
           </tr>
-          {/* Partial product 2 shifted (a × bTens × 10) */}
+          {/* Partial product 2 shifted (a Ã— bTens Ã— 10) */}
           <tr>
             <td style={{ width: 24, padding: 0 }} className="pr-1 text-center font-mono text-sm text-[var(--color-text-primary)]">+</td>
             {visibleCols.map(col => {
               if (col === 4) {
-                // Fixed "0" in units position — shown in accent colour
+                // Fixed "0" in units position â€” shown in accent colour
                 return (
                   <td key={col} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                     <div className="flex h-8 w-8 items-center justify-center font-mono text-base font-bold text-[var(--color-accent-alg)] opacity-60">0</div>
@@ -2272,7 +2386,7 @@ function Mul2DigitExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">
-        Effectuez les multiplications en colonnes. Écrivez les produits partiels, les retenues et le résultat.
+        Effectuez les multiplications en colonnes. Ã‰crivez les produits partiels, les retenues et le rÃ©sultat.
       </p>
       <div className="flex flex-col gap-4">
         {config.questions.map((q, qi) => (
@@ -2337,7 +2451,7 @@ function DivColumnGridExercise({
   );
 }
 
-// ── RoundingExercise ──────────────────────────────────────────────────────────
+// â”€â”€ RoundingExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function RoundingExercise({
   config, answers, validated, results, onChange,
 }: {
@@ -2376,7 +2490,7 @@ function RoundingExercise({
             const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
             const field = wrongField
               ? <div className={`${inputBase} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center overflow-hidden`}>
-                  <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                  <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v || "â€”"}</span>
                   <span className="text-[9px] font-bold leading-none text-amber-600">{q.answer}</span>
                 </div>
               : <input
@@ -2388,16 +2502,16 @@ function RoundingExercise({
                   className={inputBase}
                 />;
             if (isDecMixed) {
-              const parts = q.prompt.split(" → ");
+              const parts = q.prompt.split(" â†’ ");
               const numPart = parts[0] ?? q.prompt;
               const labelPart = parts[1] ?? "";
               return (
                 <Fragment key={i}>
                   <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
                   <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{numPart}</span>
-                  <span className="text-sm font-bold text-[var(--color-accent-alg)] self-center">→</span>
+                  <span className="text-sm font-bold text-[var(--color-accent-alg)] self-center">â†’</span>
                   <span className="text-sm text-[var(--color-text-secondary)] self-center">{labelPart}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] self-center">â‰ˆ</span>
                   {field}
                 </Fragment>
               );
@@ -2407,7 +2521,7 @@ function RoundingExercise({
                 <Fragment key={i}>
                   <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>
                   <span className="font-mono text-sm text-[var(--color-text-primary)] self-center">{q.prompt}</span>
-                  <span className="text-sm text-[var(--color-text-secondary)] self-center">≈</span>
+                  <span className="text-sm text-[var(--color-text-secondary)] self-center">â‰ˆ</span>
                   {field}
                 </Fragment>
               );
@@ -2431,7 +2545,7 @@ function shufflePick<T>(arr: T[], n: number): T[] {
   return copy.slice(0, Math.min(n, copy.length));
 }
 
-// ── FracDisplay helper ────────────────────────────────────────────────────────
+// â”€â”€ FracDisplay helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FracDisplay({ num, den }: { num: number | string; den: number | string }) {
   return (
     <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
@@ -2442,7 +2556,7 @@ function FracDisplay({ num, den }: { num: number | string; den: number | string 
   );
 }
 
-// ── FracIdExercise ────────────────────────────────────────────────────────────
+// â”€â”€ FracIdExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FracIdExercise({ config, answers, validated, results, onChange }: {
   config: FracIdConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
@@ -2455,7 +2569,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
           const v = answers[i] ?? "";
           const ok = validated ? results[i] : null;
           const wrong = ok === false;
-          const label = q.ask === "num" ? "Quel est le numérateur ?" : "Quel est le dénominateur ?";
+          const label = q.ask === "num" ? "Quel est le numÃ©rateur ?" : "Quel est le dÃ©nominateur ?";
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -2463,7 +2577,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
               <span className="text-sm text-[var(--color-text-secondary)]">{label}</span>
               {wrong ? (
                 <div className={`w-14 px-1 py-1.5 text-sm flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500`}>
-                  <span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                  <span className="text-xs leading-none text-[var(--color-text-primary)]">{v||"â€”"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{q.ask === "num" ? q.num : q.den}</span>
                 </div>
               ) : (
@@ -2484,7 +2598,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
   );
 }
 
-// ── FracEquivExercise ─────────────────────────────────────────────────────────
+// â”€â”€ FracEquivExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FracEquivExercise({ config, answers, validated, results, onChange }: {
   config: FracEquivConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
@@ -2492,7 +2606,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-      <p className="text-sm text-[var(--color-text-secondary)]">Complétez les fractions équivalentes.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">ComplÃ©tez les fractions Ã©quivalentes.</p>
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
@@ -2509,7 +2623,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                 <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                   {wrong ? (
                     <div className={`w-12 flex flex-col items-center justify-center py-1 rounded-none border-0 border-b-2 border-amber-500`}>
-                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"â€”"}</span>
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
@@ -2525,7 +2639,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
                   <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                   {wrong ? (
                     <div className={`w-12 flex flex-col items-center justify-center py-1 rounded-none border-0 border-b-2 border-amber-500`}>
-                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"—"}</span>
+                      <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{v||"â€”"}</span>
                       <span className="text-[9px] font-bold text-amber-600 leading-none">{correctAns}</span>
                     </div>
                   ) : (
@@ -2542,7 +2656,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
   );
 }
 
-// ── FracSimplifyExercise ──────────────────────────────────────────────────────
+// â”€â”€ FracSimplifyExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FracSimplifyExercise({ config, answers, validated, results, onChange }: {
   config: FracSimplifyConfig;
   answers: Array<{ num: string; den: string }>;
@@ -2568,7 +2682,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
               <span className="inline-flex flex-col items-center leading-none gap-[3px] mx-1 align-middle">
                 {wrong ? (
                   <div className={`w-12 flex flex-col items-center justify-center py-1 rounded-none border-0 border-b-2 border-amber-500`}>
-                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.num||"—"}</span>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.num||"â€”"}</span>
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simNum}</span>
                   </div>
                 ) : (
@@ -2578,7 +2692,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
                 <span className="h-[1.5px] self-stretch min-w-[3em] rounded bg-[var(--color-text-primary)]" />
                 {wrong ? (
                   <div className={`w-12 flex flex-col items-center justify-center py-1 rounded-none border-0 border-b-2 border-amber-500`}>
-                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.den||"—"}</span>
+                    <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{ans.den||"â€”"}</span>
                     <span className="text-[9px] font-bold text-amber-600 leading-none">{q.simDen}</span>
                   </div>
                 ) : (
@@ -2594,7 +2708,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
   );
 }
 
-// ── FracCompareExercise ───────────────────────────────────────────────────────
+// â”€â”€ FracCompareExercise â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function FracCompareExercise({ config, answers, validated, onAnswer }: {
   config: FracCompConfig;
   answers: Array<"<" | "=" | ">" | null>;
@@ -2638,13 +2752,13 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
 }
 
 const G3_GEO_PLACEMENT: Partial<Record<string, { geoKind: GeoPlacementKind; label: string }>> = {
-  "G4-1": { geoKind: "square", label: "Périmètre et aire du carré" },
-  "G4-2": { geoKind: "rectangle", label: "Périmètre et aire du rectangle" },
-  "G4-3": { geoKind: "triangle", label: "Périmètre et aire du triangle" },
-  "G4-4": { geoKind: "parallelogram", label: "Périmètre et aire du parallélogramme" },
-  "G4-5": { geoKind: "trapezoid", label: "Périmètre et aire du trapèze" },
-  "G4-6": { geoKind: "circle", label: "Périmètre et aire du disque" },
-  "G4-7": { geoKind: "rhombus", label: "Périmètre et aire du losange" },
+  "G4-1": { geoKind: "square", label: "PÃ©rimÃ¨tre et aire du carrÃ©" },
+  "G4-2": { geoKind: "rectangle", label: "PÃ©rimÃ¨tre et aire du rectangle" },
+  "G4-3": { geoKind: "triangle", label: "PÃ©rimÃ¨tre et aire du triangle" },
+  "G4-4": { geoKind: "parallelogram", label: "PÃ©rimÃ¨tre et aire du parallÃ©logramme" },
+  "G4-5": { geoKind: "trapezoid", label: "PÃ©rimÃ¨tre et aire du trapÃ¨ze" },
+  "G4-6": { geoKind: "circle", label: "PÃ©rimÃ¨tre et aire du disque" },
+  "G4-7": { geoKind: "rhombus", label: "PÃ©rimÃ¨tre et aire du losange" },
 };
 
 function GeoLineInput({
@@ -2721,7 +2835,7 @@ function SquareGeoExercise({
 
   return (
     <div className="space-y-4" data-exercise-key={exerciseKey}>
-      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le périmètre et l&apos;aire.</p>
+      <p className="text-sm text-[var(--color-text-secondary)]">Calculez le pÃ©rimÃ¨tre et l&apos;aire.</p>
       <svg viewBox="0 0 260 160" width="260" height="160" className="block mx-auto">
         <rect
           x="55"
@@ -2737,8 +2851,8 @@ function SquareGeoExercise({
         <text x="177" y="82" textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.side} cm</text>
       </svg>
       <div className="space-y-2">
-        <GeoLineInput label="Périmètre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} />
-        <GeoLineInput label="Aire" unit="cm²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} />
+        <GeoLineInput label="PÃ©rimÃ¨tre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} />
+        <GeoLineInput label="Aire" unit="cmÂ²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} />
       </div>
     </div>
   );
@@ -2790,9 +2904,37 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "geo_placement", lesson, ...geoPlacement, exNum: 1 });
+    } else if (sid === "G2-1") {
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", true, 2) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("area", false, 3) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("area", true, 4) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", false, 5) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", true, 6) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("length", true, 2) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("area", false, 3) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("area", true, 4) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", false, 5) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("volume", true, 6) });
+    } else if (sid === "G2-2") {
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("capacity", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("capacity", true, 2) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("mass", false, 3) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("mass", true, 4) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("time", false, 5) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("time", true, 6) });
+      steps.push({ kind: "eval_start", lesson });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("capacity", false, 1) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("capacity", true, 2) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("mass", false, 3) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("mass", true, 4) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("time", false, 5) });
+      steps.push({ kind: "unit_conversion", lesson, config: genUnitConversion("time", true, 6) });
     } else if (sid === "A2-1" || sid === "A2-2") {
       const op: ArithOp = sid === "A2-1" ? "+" : "-";
-      // Entraînement 1–8
+      // EntraÃ®nement 1â€“8
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 1) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 2, false, 60) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 9], 3, true) });
@@ -2801,10 +2943,10 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 6, true) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, true, 7) });
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 8) });
-      // Comparaison (avant évaluation)
+      // Comparaison (avant Ã©valuation)
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [1, 99], 9) });
       steps.push({ kind: "expr_comparison", lesson, config: genExprComp(op, [100, 999], 10) });
-      // Évaluation — 5 exercices sur pages séparées
+      // Ã‰valuation â€” 5 exercices sur pages sÃ©parÃ©es
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 1) });
       steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup(op, [0, 99], 2, true) });
@@ -2812,13 +2954,13 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "column_grid", lesson, config: genColumnGrid(op, false, 4, 2) });
       steps.push({ kind: "expr_comparison", lesson, config: { questions: [...genExprComp(op, [1, 99], 5, 2).questions, ...genExprComp(op, [100, 999], 5, 2).questions], exNum: 5, op } });
     } else if (sid === "A2-3") {
-      // Entraînement arrondi/estimation
+      // EntraÃ®nement arrondi/estimation
       steps.push({ kind: "rounding_group", lesson, config: genRounding("diz_near", 1, 5) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near_new", 2, 5) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_2", 3, 5) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_large_2", 4, 5) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_three", 5, 5) });
-      // Évaluation
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("diz_near", 1, 3) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("cent_near_new", 2, 3) });
@@ -2826,58 +2968,58 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_large_2", 4, 3) });
       steps.push({ kind: "rounding_group", lesson, config: genRounding("est_diz_three", 5, 3) });
     } else if (sid === "A2-4") {
-      // Problèmes — entraînement
+      // ProblÃ¨mes â€” entraÃ®nement
       steps.push({ kind: "word_problems", lesson, config: genWP("a1", 1) });
       steps.push({ kind: "word_problems", lesson, config: genWP("a2", 2) });
       steps.push({ kind: "word_problems", lesson, config: genWP("b1", 3) });
-      // Évaluation
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "word_problems", lesson, config: genWP("a1", 1) });
       steps.push({ kind: "word_problems", lesson, config: genWP("a2", 2) });
       steps.push({ kind: "word_problems", lesson, config: genWP("b1", 3) });
     } else if (sid === "A3-1") {
-      // Tables de multiplications — entraînement
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2, false, 60) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, true, 60) });
-      // Évaluation
+      // Tables de multiplications â€” entraÃ®nement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 2, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 4, true, 60) });
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 2) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 3, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("×", [1, 12], 4, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã—", [1, 12], 4, true) });
     } else if (sid === "A3-2") {
-      // Multiplication en colonnes — entraînement
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2) });
+      // Multiplication en colonnes â€” entraÃ®nement
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("Ã—", true, 1) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("Ã—", false, 2) });
       steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3, 2) });
       steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4, 2) });
-      // Évaluation
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", true, 1, 2) });
-      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("×", false, 2, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("Ã—", true, 1, 2) });
+      steps.push({ kind: "column_grid", lesson, config: genColumnGrid("Ã—", false, 2, 2) });
       steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(true, 3, 2) });
       steps.push({ kind: "mul_two_digit", lesson, config: genMul2Digit(false, 4, 2) });
     } else if (sid === "A3-3") {
-      // Tables de divisions — entraînement
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 2, false, 60) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true, 60) });
-      // Évaluation
+      // Tables de divisions â€” entraÃ®nement
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 2, false, 60) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 4, true, 60) });
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 1) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 2) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 3, true) });
-      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("÷", [1, 12], 4, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 1) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 2) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 3, true) });
+      steps.push({ kind: "arithmetic_group", lesson, config: genArithGroup("Ã·", [1, 12], 4, true) });
     } else if (sid === "A3-4") {
-      // Division en colonnes — entraînement
+      // Division en colonnes â€” entraÃ®nement
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, true, 1) });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, true, 2) });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 3) });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, false, 4) });
-      // Évaluation
+      // Ã‰valuation
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(4, 1, false, 1) });
       steps.push({ kind: "div_column_grid", lesson, config: genDivColumnGrid(5, 2, false, 2) });
@@ -2914,15 +3056,15 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
       steps.push({ kind: "encadrement", lesson, config: genEncadrement(100, 5, 3) });
     } else if (sid === "A1-4") {
       steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLFine(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche.", noFeedback: true } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLCoarse(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 3, consigne: "Écrivez le nombre indiqué par la flèche.", noFeedback: true } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 4, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche.", noFeedback: true } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 5, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLFine(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 2, consigne: "Ã‰crivez le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: genNLCoarse(2).map(c => ({ nlConfig: c, mode: "read" as const })), exNum: 3, consigne: "Ã‰crivez le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 4, consigne: "Ã‰crivez un nombre plus petit que le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 5, consigne: "Ã‰crivez un nombre plus grand que le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
       steps.push({ kind: "eval_start", lesson });
       steps.push({ kind: "odd_even", lesson, config: genOddEven(1) });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "read" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "read" as const }))], exNum: 2, consigne: "Écrivez le nombre indiqué par la flèche.", noFeedback: true } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 3, consigne: "Écrivez un nombre plus petit que le nombre indiqué par la flèche.", noFeedback: true } });
-      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 4, consigne: "Écrivez un nombre plus grand que le nombre indiqué par la flèche.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "read" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "read" as const }))], exNum: 2, consigne: "Ã‰crivez le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "less" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "less" as const }))], exNum: 3, consigne: "Ã‰crivez un nombre plus petit que le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
+      steps.push({ kind: "nl_multi", lesson, config: { questions: [...genNLFine(1).map(c => ({ nlConfig: c, mode: "more" as const })), ...genNLCoarse(1).map(c => ({ nlConfig: c, mode: "more" as const }))], exNum: 4, consigne: "Ã‰crivez un nombre plus grand que le nombre indiquÃ© par la flÃ¨che.", noFeedback: true } });
     } else if (sid === "A1-5") {
       steps.push({ kind: "ordering", lesson, config: genOrdering("asc", 1) });
       steps.push({ kind: "ordering", lesson, config: genOrdering("desc", 2) });
@@ -3006,6 +3148,7 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
     l.submoduleId === "A1-3" || l.submoduleId === "A1-4" || l.submoduleId === "A1-5" ||
     l.submoduleId === "A5-2" || l.submoduleId === "A5-3" ||
     l.submoduleId === "A3-5" || l.submoduleId === "A3-6" ||
+    l.submoduleId === "G2-1" || l.submoduleId === "G2-2" ||
     !!G3_GEO_PLACEMENT[l.submoduleId]
   );
   if (withEval && lessons.length > 0 && !hasDrillsNoPassToggle) {
@@ -3017,9 +3160,9 @@ function buildSteps(lessons: MathSubmoduleLesson[], withEval: boolean): FlatStep
   return steps;
 }
 
-// ── Power table block ────────────────────────────────────────────────────────
+// â”€â”€ Power table block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const POWER_PAIRS: Array<[number, number | null]> = [[2,3],[4,5],[6,7],[8,9],[10,null]];
-const SUPS: Record<number, string> = {1:"¹",2:"²",3:"³",4:"⁴",5:"⁵"};
+const SUPS: Record<number, string> = {1:"Â¹",2:"Â²",3:"Â³",4:"â´",5:"âµ"};
 
 function PowerTableBlock() {
   const [pair, setPair] = useState<[number, number | null]>(POWER_PAIRS[0]!);
@@ -3037,7 +3180,7 @@ function PowerTableBlock() {
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
-            {y !== null ? `${x}–${y}` : String(x)}
+            {y !== null ? `${x}â€“${y}` : String(x)}
           </button>
         ))}
       </div>
@@ -3066,7 +3209,7 @@ function PowerTableBlock() {
   );
 }
 
-// ── Multiplication table block ───────────────────────────────────────────────
+// â”€â”€ Multiplication table block â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const MULT_PAIRS: [number, number][] = [[1,2],[3,4],[5,6],[7,8],[9,10],[11,12]];
 
 function MultiplicationTableBlock() {
@@ -3088,7 +3231,7 @@ function MultiplicationTableBlock() {
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
-            {x}–{y}
+            {x}â€“{y}
           </button>
         ))}
       </div>
@@ -3098,13 +3241,13 @@ function MultiplicationTableBlock() {
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
               <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a}</td>
-                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">Ã—</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{a * n}</td>
                 <td className="w-6" />
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b}</td>
-                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">×</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">Ã—</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{n}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{b * n}</td>
@@ -3136,7 +3279,7 @@ function DivisionTableBlock() {
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]"
             }`}
           >
-            {x}–{y}
+            {x}â€“{y}
           </button>
         ))}
       </div>
@@ -3146,13 +3289,13 @@ function DivisionTableBlock() {
             {Array.from({ length: 12 }, (_, i) => i + 1).map((n) => (
               <tr key={n} className={n % 2 === 0 ? "bg-[var(--color-bg-secondary)]/40" : "bg-[var(--color-bg-primary)]"}>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a * n}</td>
-                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">Ã·</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{a}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
                 <td className="w-6" />
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b * n}</td>
-                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">÷</td>
+                <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">Ã·</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-text-primary)]">{b}</td>
                 <td className="px-1 py-1.5 text-center font-mono text-[var(--color-text-primary)]">=</td>
                 <td className="px-2 py-1.5 text-center font-mono font-bold text-[var(--color-accent-alg)]">{n}</td>
@@ -3165,7 +3308,7 @@ function DivisionTableBlock() {
   );
 }
 
-// ── Rich block renderer ──────────────────────────────────────────────────────
+// â”€â”€ Rich block renderer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function MulDemoGrid({ a, b, op, carries, result, prevCarries, prevResult }: {
   a: number[]; b: number[]; op: string;
   carries: (number | null)[]; result: (number | null)[];
@@ -3324,7 +3467,7 @@ function Mul2DemoGrid({ a, b, result: totalResult, carries1, carries2, p1, p2shi
         </tr>
         {/* Operand b */}
         <tr>
-          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">×</td>
+          <td className="pr-1 text-center font-mono text-sm text-[var(--color-text-secondary)]">Ã—</td>
           {visibleCols.map(col => (
             <td key={col} className="text-center">
               <div className="h-8 w-8 flex items-center justify-center font-mono text-base text-[var(--color-text-primary)]">
@@ -3479,7 +3622,7 @@ function DivDemoGrid({ dividend, divisor, stepsComplete }: {
                   }
                 </tr>
                 <tr>
-                  <td style={{ padding:0, textAlign:"center", verticalAlign:"middle", fontSize:14, color:"var(--color-text-secondary)" }}>−</td>
+                  <td style={{ padding:0, textAlign:"center", verticalAlign:"middle", fontSize:14, color:"var(--color-text-secondary)" }}>âˆ’</td>
                   <StaticWorkRow numStr={prStr} colEnd={step.colEnd} fresh={fresh} />
                   <td colSpan={quotientCols} style={{ padding: 0, ...BSEP }} />
                 </tr>
@@ -3976,7 +4119,7 @@ function ShapeExplorerBlock({
   const selectedShape = block.shapes[selectedIdx];
   return (
     <div className="space-y-4">
-      {/* Shape tabs — 4×2 grid */}
+      {/* Shape tabs â€” 4Ã—2 grid */}
       <div className="grid grid-cols-4 gap-2">
         {block.shapes.map((shape, i) => (
           <button
@@ -3993,12 +4136,12 @@ function ShapeExplorerBlock({
           </button>
         ))}
       </div>
-      {/* Content: all 3 sections (Angles / Droites / Symétrie) stacked */}
+      {/* Content: all 3 sections (Angles / Droites / SymÃ©trie) stacked */}
       {selectedShape && (
         <div className="space-y-6">
           {selectedShape.tabs.map((tab, ti) => (
             <div key={`${selectedIdx}-${ti}`}>
-              <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)] uppercase tracking-wide">{tab.label}</p>
+              <p className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">{tab.label}</p>
               <div className="space-y-3">
                 {tab.blocks.map((b, bi) => (
                   <BlockView key={`s${selectedIdx}-t${ti}-b${bi}`} block={b} blockIdx={bi} tradBlocks={undefined} pivot={pivot} showPivot={false} />
@@ -4012,7 +4155,7 @@ function ShapeExplorerBlock({
   );
 }
 
-// ── Hint popup + button ──────────────────────────────────────────────────────
+// â”€â”€ Hint popup + button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
   useEffect(() => {
     function onKey(e: KeyboardEvent) { if (e.key === "Escape") onClose(); }
@@ -4027,7 +4170,7 @@ function HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
           aria-label="Fermer">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
         </button>
-        <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">💡 Astuce</p>
+        <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">ðŸ’¡ Astuce</p>
         <p className="text-sm leading-relaxed text-[var(--color-text-primary)] pr-4">{hint}</p>
         <button type="button" onClick={onClose}
           className="mt-4 w-full rounded-xl py-2 text-sm font-semibold text-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 hover:bg-[var(--color-accent-alg)]/20 transition-colors">
@@ -4053,49 +4196,49 @@ function getStepHint(step: FlatStep | undefined): string | undefined {
   if (step.kind === "exercise") return step.item.hintFr;
   if (step.kind === "arithmetic_group") {
     const op = step.config.op;
-    if (op === "+") return "Additionne chiffre par chiffre de droite à gauche. Si la somme dépasse 9, note le chiffre des unités et retiens 1.";
-    if (op === "-") return "Soustrait de droite à gauche. Si le chiffre du bas est plus grand, emprunte 1 à la colonne suivante.";
-    if (op === "×") return "Multiplie chaque chiffre séparément, puis additionne les produits partiels.";
-    if (op === "÷") return "Cherche combien de fois le diviseur entre dans le dividende. Multiplie, soustrais, abaisse le chiffre suivant.";
+    if (op === "+") return "Additionne chiffre par chiffre de droite Ã  gauche. Si la somme dÃ©passe 9, note le chiffre des unitÃ©s et retiens 1.";
+    if (op === "-") return "Soustrait de droite Ã  gauche. Si le chiffre du bas est plus grand, emprunte 1 Ã  la colonne suivante.";
+    if (op === "Ã—") return "Multiplie chaque chiffre sÃ©parÃ©ment, puis additionne les produits partiels.";
+    if (op === "Ã·") return "Cherche combien de fois le diviseur entre dans le dividende. Multiplie, soustrais, abaisse le chiffre suivant.";
   }
   if (step.kind === "column_grid") {
     const op = step.config.op;
-    if (op === "+" || op === "-") return "Aligne les chiffres par colonne (unités sous unités, dizaines sous dizaines). Calcule de droite à gauche.";
-    if (op === "×") return "Multiplie chaque chiffre du bas par l'ensemble du nombre du haut. Décale d'une colonne vers la gauche à chaque ligne.";
+    if (op === "+" || op === "-") return "Aligne les chiffres par colonne (unitÃ©s sous unitÃ©s, dizaines sous dizaines). Calcule de droite Ã  gauche.";
+    if (op === "Ã—") return "Multiplie chaque chiffre du bas par l'ensemble du nombre du haut. DÃ©cale d'une colonne vers la gauche Ã  chaque ligne.";
   }
-  if (step.kind === "div_column_grid") return "Procède par étapes : combien de fois le diviseur entre-t-il ? Multiplie, soustrais, abaisse le chiffre suivant.";
-  if (step.kind === "number_line") return "Compte les graduations entre les deux valeurs affichées. La flèche indique la position du nombre à trouver.";
-  if (step.kind === "comparison_ex") return "Compare les chiffres de gauche à droite, en commençant par la position de la plus grande valeur.";
-  if (step.kind === "rounding_group") return "Regarde le chiffre juste après la position d'arrondi : si ≥ 5, arrondis au-dessus ; si < 5, arrondis au-dessous.";
-  if (step.kind === "frac_id") return "Le numérateur (en haut) indique les parties colorées. Le dénominateur (en bas) indique le nombre total de parts égales.";
-  if (step.kind === "frac_equiv") return "Deux fractions sont équivalentes si on peut multiplier ou diviser numérateur ET dénominateur par le même nombre.";
-  if (step.kind === "frac_simplify") return "Trouve le PGCD du numérateur et du dénominateur, puis divise les deux par ce nombre.";
-  if (step.kind === "frac_compare") return "Pour comparer, réduis au même dénominateur (dénominateur commun), puis compare les numérateurs.";
-  if (step.kind === "number_select") return "Utilise la définition vue dans la théorie pour identifier les nombres qui correspondent au critère demandé.";
+  if (step.kind === "div_column_grid") return "ProcÃ¨de par Ã©tapes : combien de fois le diviseur entre-t-il ? Multiplie, soustrais, abaisse le chiffre suivant.";
+  if (step.kind === "number_line") return "Compte les graduations entre les deux valeurs affichÃ©es. La flÃ¨che indique la position du nombre Ã  trouver.";
+  if (step.kind === "comparison_ex") return "Compare les chiffres de gauche Ã  droite, en commenÃ§ant par la position de la plus grande valeur.";
+  if (step.kind === "rounding_group") return "Regarde le chiffre juste aprÃ¨s la position d'arrondi : si â‰¥ 5, arrondis au-dessus ; si < 5, arrondis au-dessous.";
+  if (step.kind === "frac_id") return "Le numÃ©rateur (en haut) indique les parties colorÃ©es. Le dÃ©nominateur (en bas) indique le nombre total de parts Ã©gales.";
+  if (step.kind === "frac_equiv") return "Deux fractions sont Ã©quivalentes si on peut multiplier ou diviser numÃ©rateur ET dÃ©nominateur par le mÃªme nombre.";
+  if (step.kind === "frac_simplify") return "Trouve le PGCD du numÃ©rateur et du dÃ©nominateur, puis divise les deux par ce nombre.";
+  if (step.kind === "frac_compare") return "Pour comparer, rÃ©duis au mÃªme dÃ©nominateur (dÃ©nominateur commun), puis compare les numÃ©rateurs.";
+  if (step.kind === "number_select") return "Utilise la dÃ©finition vue dans la thÃ©orie pour identifier les nombres qui correspondent au critÃ¨re demandÃ©.";
   if (step.kind === "encadrement") return "Cherche les deux multiples de la puissance de 10 entre lesquels se trouve le nombre.";
   if (step.kind === "odd_even") return "Un nombre pair se termine par 0, 2, 4, 6 ou 8. Un nombre impair se termine par 1, 3, 5, 7 ou 9.";
-  if (step.kind === "nl_multi") return "Lis la valeur de chaque graduation en comptant par intervalles réguliers.";
-  if (step.kind === "ordering") return "Compare d'abord les signes (positif/négatif), puis les valeurs absolues. Les négatifs sont plus petits que les positifs.";
-  if (step.kind === "seq_rule") return "Calcule la différence entre deux termes consécutifs — c'est la raison de la suite.";
-  if (step.kind === "seq_complete") return "Applique la raison trouvée : ajoute (ou soustrait) la même valeur à chaque terme pour trouver le suivant.";
-  if (step.kind === "mul_two_digit") return "Multiplie d'abord par les unités du deuxième facteur, puis par ses dizaines (en décalant d'une colonne). Additionne les deux résultats.";
-  if (step.kind === "expr_comparison") return "Calcule chacune des deux expressions séparément, puis compare les résultats obtenus.";
-  if (step.kind === "mult_select") return "Un multiple de n est le résultat de n × 1, n × 2, n × 3… Vérifie la divisibilité.";
-  if (step.kind === "mult_list") return "Multiplie n par 1, 2, 3, 4, 5… pour obtenir la liste de ses multiples.";
+  if (step.kind === "nl_multi") return "Lis la valeur de chaque graduation en comptant par intervalles rÃ©guliers.";
+  if (step.kind === "ordering") return "Compare d'abord les signes (positif/nÃ©gatif), puis les valeurs absolues. Les nÃ©gatifs sont plus petits que les positifs.";
+  if (step.kind === "seq_rule") return "Calcule la diffÃ©rence entre deux termes consÃ©cutifs â€” c'est la raison de la suite.";
+  if (step.kind === "seq_complete") return "Applique la raison trouvÃ©e : ajoute (ou soustrait) la mÃªme valeur Ã  chaque terme pour trouver le suivant.";
+  if (step.kind === "mul_two_digit") return "Multiplie d'abord par les unitÃ©s du deuxiÃ¨me facteur, puis par ses dizaines (en dÃ©calant d'une colonne). Additionne les deux rÃ©sultats.";
+  if (step.kind === "expr_comparison") return "Calcule chacune des deux expressions sÃ©parÃ©ment, puis compare les rÃ©sultats obtenus.";
+  if (step.kind === "mult_select") return "Un multiple de n est le rÃ©sultat de n Ã— 1, n Ã— 2, n Ã— 3â€¦ VÃ©rifie la divisibilitÃ©.";
+  if (step.kind === "mult_list") return "Multiplie n par 1, 2, 3, 4, 5â€¦ pour obtenir la liste de ses multiples.";
   if (step.kind === "true_false_mult_div") return "Un diviseur divise le nombre exactement (reste = 0). Un multiple est dans la table du nombre.";
-  if (step.kind === "find_divisors") return "Teste chaque nombre de 1 jusqu'à la racine carrée. Si n ÷ d = entier, alors d et n÷d sont tous les deux diviseurs.";
-  if (step.kind === "div_select") return "Un diviseur de n divise n exactement. Teste si n ÷ d = nombre entier sans reste.";
-  if (step.kind === "div_by") return "Diviser par 10 : déplace la virgule d'un rang à gauche. Par 100 : deux rangs. Par 0,1 : c'est multiplier par 10.";
-  if (step.kind === "missing_digit_div") return "Retrouve le chiffre manquant en faisant le calcul à rebours : multiplie le quotient par le diviseur et vérifie.";
-  if (step.kind === "gcd_lcm") return "PGDC : décompose en facteurs premiers, prends les facteurs communs au plus petit exposant. PPMC = (a × b) ÷ PGDC(a,b).";
-  if (step.kind === "true_false_gcd_lcm") return "PGDC divise les deux nombres. PPMC est divisible par les deux. Vérifie avec la définition.";
-  if (step.kind === "dec_ordering") return "Compare les chiffres position par position : entiers d'abord, puis dixièmes, centièmes…";
-  if (step.kind === "dec_seq_rule") return "Calcule la différence entre deux termes décimaux consécutifs.";
-  if (step.kind === "dec_seq_complete") return "Applique la raison décimale trouvée pour compléter les termes manquants.";
+  if (step.kind === "find_divisors") return "Teste chaque nombre de 1 jusqu'Ã  la racine carrÃ©e. Si n Ã· d = entier, alors d et nÃ·d sont tous les deux diviseurs.";
+  if (step.kind === "div_select") return "Un diviseur de n divise n exactement. Teste si n Ã· d = nombre entier sans reste.";
+  if (step.kind === "div_by") return "Diviser par 10 : dÃ©place la virgule d'un rang Ã  gauche. Par 100 : deux rangs. Par 0,1 : c'est multiplier par 10.";
+  if (step.kind === "missing_digit_div") return "Retrouve le chiffre manquant en faisant le calcul Ã  rebours : multiplie le quotient par le diviseur et vÃ©rifie.";
+  if (step.kind === "gcd_lcm") return "PGDC : dÃ©compose en facteurs premiers, prends les facteurs communs au plus petit exposant. PPMC = (a Ã— b) Ã· PGDC(a,b).";
+  if (step.kind === "true_false_gcd_lcm") return "PGDC divise les deux nombres. PPMC est divisible par les deux. VÃ©rifie avec la dÃ©finition.";
+  if (step.kind === "dec_ordering") return "Compare les chiffres position par position : entiers d'abord, puis dixiÃ¨mes, centiÃ¨mesâ€¦";
+  if (step.kind === "dec_seq_rule") return "Calcule la diffÃ©rence entre deux termes dÃ©cimaux consÃ©cutifs.";
+  if (step.kind === "dec_seq_complete") return "Applique la raison dÃ©cimale trouvÃ©e pour complÃ©ter les termes manquants.";
   return undefined;
 }
 
-// ── Theory view ──────────────────────────────────────────────────────────────
+// â”€â”€ Theory view â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 function TheoryView({ lesson, pivot, showPivot }: {
   lesson: MathSubmoduleLesson;
   pivot: PivotCode;
@@ -4136,7 +4279,7 @@ function TheoryView({ lesson, pivot, showPivot }: {
   );
 }
 
-// ── Main component ───────────────────────────────────────────────────────────
+// â”€â”€ Main component â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const A11_WORDS: Record<number, string[]> = {
   1: ["un", "une"], 2: ["deux"], 3: ["trois"], 4: ["quatre"], 5: ["cinq"],
   6: ["six"], 7: ["sept"], 8: ["huit"], 9: ["neuf"], 10: ["dix"],
@@ -4156,9 +4299,9 @@ function buildA11RevisionEvalSteps(lesson: MathSubmoduleLesson): FlatStep[] {
   const start = rnd(10, 80);
   const missing = start + 2;
   return [
-    revisionExercise(lesson, "ra1-a11-letters", `Écris en lettres : ${n1}`, A11_WORDS[n1] ?? [String(n1)]),
-    revisionExercise(lesson, "ra1-a11-digits", `Écris en chiffres : ${n2}`, [String(n2)], "number"),
-    revisionExercise(lesson, "ra1-a11-series", `Complète la suite : ${start}, ${start + 1}, ___, ${start + 3}, ${start + 4}`, [String(missing)], "number"),
+    revisionExercise(lesson, "ra1-a11-letters", `Ã‰cris en lettres : ${n1}`, A11_WORDS[n1] ?? [String(n1)]),
+    revisionExercise(lesson, "ra1-a11-digits", `Ã‰cris en chiffres : ${n2}`, [String(n2)], "number"),
+    revisionExercise(lesson, "ra1-a11-series", `ComplÃ¨te la suite : ${start}, ${start + 1}, ___, ${start + 3}, ${start + 4}`, [String(missing)], "number"),
   ];
 }
 
@@ -4176,13 +4319,13 @@ function buildA12RevisionEvalSteps(lesson: MathSubmoduleLesson): FlatStep[] {
   const arrowBase = rnd(11, 89) * 10;
   const nextHundred = Math.ceil(n4 / 100) * 100;
   return [
-    revisionExercise(lesson, "ra1-a12-read-blocks", `Quel nombre est formé par ${h} centaines, ${d} dizaines et ${u} unités ?`, [String(n3)], "number"),
-    revisionExercise(lesson, "ra1-a12-write-number", `Écris le nombre : ${m4} milliers, ${c4} centaines, ${d4} dizaines et ${u4} unités.`, [String(n4)], "number"),
+    revisionExercise(lesson, "ra1-a12-read-blocks", `Quel nombre est formÃ© par ${h} centaines, ${d} dizaines et ${u} unitÃ©s ?`, [String(n3)], "number"),
+    revisionExercise(lesson, "ra1-a12-write-number", `Ã‰cris le nombre : ${m4} milliers, ${c4} centaines, ${d4} dizaines et ${u4} unitÃ©s.`, [String(n4)], "number"),
     revisionExercise(lesson, "ra1-a12-milliers", `Dans ${n4}, quelle est la valeur du chiffre des milliers ?`, [String(m4 * 1000)], "number"),
     revisionExercise(lesson, "ra1-a12-centaines", `Dans ${n4}, quelle est la valeur du chiffre des centaines ?`, [String(c4 * 100)], "number"),
-    revisionExercise(lesson, "ra1-a12-cubes", `Combien y a-t-il de cubes si on a ${Math.floor(cubes / 100)} centaines, ${Math.floor((cubes % 100) / 10)} dizaines et ${cubes % 10} unités ?`, [String(cubes)], "number"),
-    revisionExercise(lesson, "ra1-a12-dizaine", `Quel est le nombre juste après ${arrowBase} sur une droite graduée de 10 en 10 ?`, [String(arrowBase + 10)], "number"),
-    revisionExercise(lesson, "ra1-a12-centaine", `Quel est le nombre juste avant ${nextHundred} sur une droite graduée de 100 en 100 ?`, [String(nextHundred - 100)], "number"),
+    revisionExercise(lesson, "ra1-a12-cubes", `Combien y a-t-il de cubes si on a ${Math.floor(cubes / 100)} centaines, ${Math.floor((cubes % 100) / 10)} dizaines et ${cubes % 10} unitÃ©s ?`, [String(cubes)], "number"),
+    revisionExercise(lesson, "ra1-a12-dizaine", `Quel est le nombre juste aprÃ¨s ${arrowBase} sur une droite graduÃ©e de 10 en 10 ?`, [String(arrowBase + 10)], "number"),
+    revisionExercise(lesson, "ra1-a12-centaine", `Quel est le nombre juste avant ${nextHundred} sur une droite graduÃ©e de 100 en 100 ?`, [String(nextHundred - 100)], "number"),
   ];
 }
 
@@ -4283,6 +4426,10 @@ export function GenericModuleContent({
   const [wpValidated, setWpValidated] = useState(false);
   const [wpResults, setWpResults] = useState<boolean[]>([]);
   const [wpOverrideConfigs, setWpOverrideConfigs] = useState<Record<number, WordProblemsConfig>>({});
+  const [unitConversionAnswers, setUnitConversionAnswers] = useState<string[]>(() => Array(5).fill(""));
+  const [unitConversionValidated, setUnitConversionValidated] = useState(false);
+  const [unitConversionResults, setUnitConversionResults] = useState<boolean[]>(() => Array(5).fill(false));
+  const [unitConversionOverrideConfigs, setUnitConversionOverrideConfigs] = useState<Record<number, UnitConversionConfig>>({});
   const [numberSelectOverrideConfigs, setNumberSelectOverrideConfigs] = useState<Record<number, NumberSelectConfig>>({});
   const [encadrementOverrideConfigs, setEncadrementOverrideConfigs] = useState<Record<number, EncadrementConfig>>({});
   const [oddEvenOverrideConfigs, setOddEvenOverrideConfigs] = useState<Record<number, OddEvenConfig>>({});
@@ -4312,7 +4459,7 @@ export function GenericModuleContent({
   const [fracCompareValidated, setFracCompareValidated] = useState(false);
   const [fracCompareResults, setFracCompareResults] = useState<boolean[]>(() => Array(5).fill(false));
 
-  // Column grid exercise state (4 cards × 12 cells max)
+  // Column grid exercise state (4 cards Ã— 12 cells max)
   const emptyGrid = () => Array.from({ length: 4 }, () => Array(12).fill("") as string[]);
   const emptyCarryGrid = () => Array.from({ length: 4 }, () => Array(4).fill("") as string[]);
   const [gridAnswers, setGridAnswers] = useState<string[][]>(emptyGrid);
@@ -4320,7 +4467,7 @@ export function GenericModuleContent({
   const [gridValidated, setGridValidated] = useState(false);
   const [gridResults, setGridResults] = useState<boolean[]>(() => Array(4).fill(false));
 
-  // Two-digit multiplication exercise state (4 cards × 25 cells max, 10 carries)
+  // Two-digit multiplication exercise state (4 cards Ã— 25 cells max, 10 carries)
   const emptyMul2Grid = () => Array.from({length: 4}, () => Array(25).fill("") as string[]);
   const emptyMul2Carry = () => Array.from({length: 4}, () => Array(10).fill("") as string[]);
   const [mul2dAnswers, setMul2dAnswers] = useState<string[][]>(emptyMul2Grid);
@@ -4434,8 +4581,7 @@ export function GenericModuleContent({
   const [showHint, setShowHint] = useState(false);
 
   // Eval phase state
-  const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
-  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
+  const [evalPageSavedResults, setEvalPageSavedResults] = useState<boolean[][]>([]);
   const [showEvalScore, setShowEvalScore] = useState(false);
   const [evalFinalGrade, setEvalFinalGrade] = useState<number | null>(null);
   const [evalEarnedPts, setEvalEarnedPts] = useState(0);
@@ -4546,12 +4692,15 @@ export function GenericModuleContent({
     setWpAnswers(Array(2).fill(""));
     setWpValidated(false);
     setWpResults([]);
+    setUnitConversionAnswers(Array(5).fill(""));
+    setUnitConversionValidated(false);
+    setUnitConversionResults(Array(5).fill(false));
     setGeoValidated(false);
     setGeoValidateTrigger(0);
     setGeoResults([]);
     setGeoResetKey(k => k + 1);
     if (idx <= (evalStartIdx >= 0 ? evalStartIdx : 0)) {
-      setEvalSavedResults({});
+      setEvalPageSavedResults([]);
       setShowEvalScore(false);
       setEvalFinalGrade(null);
       setEvalEarnedPts(0);
@@ -4561,21 +4710,10 @@ export function GenericModuleContent({
   }, [evalStartIdx]);
 
   const goBack = useCallback(() => {
+    if (isInEvalPhase) { setShowEvalCancelConfirm(true); return; }
     if (showEvalScore) return;
-    if (isInEvalPhase) {
-      const offset = evalStartIdx >= 0 ? stepIdx - evalStartIdx - 1 : -1;
-      let prev = offset - 1;
-      while (prev >= 0 && (prev in evalSavedResults)) prev--;
-      if (prev < 0) {
-        setShowFreeNavWarning(true);
-        setTimeout(() => setShowFreeNavWarning(false), 3000);
-      } else {
-        goTo(evalStartIdx + 1 + prev);
-      }
-      return;
-    }
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalSavedResults, evalStartIdx]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore]);
 
   // Eval timer countdown
   useEffect(() => {
@@ -4606,7 +4744,7 @@ export function GenericModuleContent({
     } else {
       setEvalTimeLeft(5 * 60);
     }
-    setEvalSavedResults({});
+    setEvalPageSavedResults([]);
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -4618,7 +4756,7 @@ export function GenericModuleContent({
 
   function cancelEval() {
     setShowEvalCancelConfirm(false);
-    setEvalSavedResults({});
+    setEvalPageSavedResults([]);
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
@@ -4726,6 +4864,9 @@ export function GenericModuleContent({
   const activeWpConfig = currentStep?.kind === "word_problems"
     ? (wpOverrideConfigs[stepIdx] ?? currentStep.config)
     : null;
+  const activeUnitConversionConfig = currentStep?.kind === "unit_conversion"
+    ? (unitConversionOverrideConfigs[stepIdx] ?? currentStep.config)
+    : null;
 
   const goNext = useCallback(() => {
     if (showEvalScore) { router.push(backUrl); return; }
@@ -4771,6 +4912,8 @@ export function GenericModuleContent({
         }
       } else if (currentStep.kind === "rounding_group") {
         currentResults = roundingResults.slice(0, (roundingOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+      } else if (currentStep.kind === "unit_conversion") {
+        currentResults = unitConversionResults.slice(0, (unitConversionOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "frac_id") {
         currentResults = fracIdResults.slice(0, currentStep.config.questions.length);
       } else if (currentStep.kind === "frac_equiv") {
@@ -4786,7 +4929,7 @@ export function GenericModuleContent({
           const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold : cfg.mode === "lt" ? n < cfg.threshold : n > cfg.threshold && n < cfg.threshold2!;
           return (numberSelectAnswers[i] ?? false) === shouldSelect;
         }).length;
-        // 4 pts all correct · 2 pts more than half · 0 pts otherwise
+        // 4 pts all correct Â· 2 pts more than half Â· 0 pts otherwise
         if (correct === total) currentResults = [true, true, true, true];
         else if (correct > total / 2) currentResults = [true, true, false, false];
         else currentResults = [false, false, false, false];
@@ -4947,13 +5090,8 @@ export function GenericModuleContent({
       } else if (currentStep.kind === "geo_placement") {
         currentResults = geoResults.length > 0 ? geoResults : [false, false];
       }
-      const offset = evalStartIdx >= 0 ? stepIdx - evalStartIdx - 1 : -1;
-      const newSavedDict = { ...evalSavedResults, [offset]: currentResults };
-      setEvalSavedResults(newSavedDict);
-      const evalExCount = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1).filter((s: { kind: string }) => s.kind !== "pass_toggle").length : 0;
-      const allDone = Object.keys(newSavedDict).length >= evalExCount;
-      const newSaved = Array.from({ length: evalExCount }, (_, i) => newSavedDict[i] ?? []);
-      if (allDone) {
+      const newSaved = [...evalPageSavedResults, currentResults];
+      if (isLastStep) {
         const allRes = newSaved.flat();
         const correct = allRes.filter(Boolean).length;
         const total = allRes.length;
@@ -4961,42 +5099,43 @@ export function GenericModuleContent({
         const rows = newSaved.map((res, i) => {
           const es = steps[evalStartIdx + 1 + i];
           const label = es?.kind === "column_grid"
-            ? (es.config.preFilledOperands ? "Calcul en colonnes (guidé)" : "Calcul en colonnes")
+            ? (es.config.preFilledOperands ? "Calcul en colonnes (guidÃ©)" : "Calcul en colonnes")
             : es?.kind === "arithmetic_group"
               ? (es.config.missingOperand ? "Termes manquants" : "Calculs mentaux")
               : es?.kind === "rounding_group"
                 ? "Arrondis et estimations"
-                : es?.kind === "frac_id" ? "Numérateur et dénominateur"
-                : es?.kind === "frac_equiv" ? "Fractions équivalentes"
+                : es?.kind === "frac_id" ? "NumÃ©rateur et dÃ©nominateur"
+                : es?.kind === "frac_equiv" ? "Fractions Ã©quivalentes"
                 : es?.kind === "frac_simplify" ? "Simplification"
                 : es?.kind === "frac_compare" ? "Comparaison de fractions"
-                : es?.kind === "number_select" ? "Sélection de nombres"
+                : es?.kind === "number_select" ? "SÃ©lection de nombres"
                 : es?.kind === "encadrement" ? "Encadrement"
                 : es?.kind === "odd_even" ? "Pairs et impairs"
-                : es?.kind === "nl_multi" ? "Droite numérique"
+                : es?.kind === "nl_multi" ? "Droite numÃ©rique"
                 : es?.kind === "ordering" ? "Classement"
-                : es?.kind === "seq_rule" ? "Règle de la suite"
-                : es?.kind === "seq_complete" ? "Compléter la suite"
-                : es?.kind === "dec_ordering" ? "Classement décimaux"
-                : es?.kind === "dec_seq_rule" ? "Règle de la suite décimale"
-                : es?.kind === "dec_seq_complete" ? "Compléter la suite décimale"
+                : es?.kind === "seq_rule" ? "RÃ¨gle de la suite"
+                : es?.kind === "seq_complete" ? "ComplÃ©ter la suite"
+                : es?.kind === "dec_ordering" ? "Classement dÃ©cimaux"
+                : es?.kind === "dec_seq_rule" ? "RÃ¨gle de la suite dÃ©cimale"
+                : es?.kind === "dec_seq_complete" ? "ComplÃ©ter la suite dÃ©cimale"
                 : es?.kind === "expr_comparison" ? "Comparaison d'expressions"
-                : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidée)" : "Division en colonnes")
-                : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication à 2 chiffres (guidée)" : "Multiplication à 2 chiffres")
-                : es?.kind === "mult_select" ? "Multiples — sélection"
+                : es?.kind === "div_column_grid" ? (es.config.preFilledOperands ? "Division en colonnes (guidÃ©e)" : "Division en colonnes")
+                : es?.kind === "mul_two_digit" ? (es.config.preFilledOperands ? "Multiplication Ã  2 chiffres (guidÃ©e)" : "Multiplication Ã  2 chiffres")
+                : es?.kind === "mult_select" ? "Multiples â€” sÃ©lection"
                 : es?.kind === "mult_list" ? "Liste des multiples"
-                : es?.kind === "true_false_mult_div" ? "Vrai ou faux — multiples/diviseurs"
+                : es?.kind === "true_false_mult_div" ? "Vrai ou faux â€” multiples/diviseurs"
                 : es?.kind === "find_divisors" ? "Trouver les diviseurs"
-                : es?.kind === "div_select" ? "Divisibilité — sélection"
+                : es?.kind === "div_select" ? "DivisibilitÃ© â€” sÃ©lection"
                 : es?.kind === "div_by" ? "Divisible par"
                 : es?.kind === "missing_digit_div" ? "Chiffre manquant"
                 : es?.kind === "gcd_lcm" ? (es.config.op === "pgcd" ? `PGDC (${es.config.count} nombres)` : `PPMC (${es.config.count} nombres)`)
-                : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux — PGDC/PPMC"
-                : es?.kind === "word_problems" ? "Problèmes"
+                : es?.kind === "true_false_gcd_lcm" ? "Vrai ou faux â€” PGDC/PPMC"
+                : es?.kind === "word_problems" ? "ProblÃ¨mes"
                 : es?.kind === "geo_placement" ? es.label
                 : `Exercice ${i + 1}`;
           return { label, score: res.filter(Boolean).length, max: res.length };
         });
+        setEvalPageSavedResults(newSaved);
         setEvalFinalGrade(grade);
         setEvalEarnedPts(correct);
         setEvalTotalPts_state(total);
@@ -5007,10 +5146,8 @@ export function GenericModuleContent({
           saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct, total, grade));
         }
       } else {
-        let nextOffset = offset + 1;
-        while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++;
-        if (nextOffset >= evalExCount) { nextOffset = 0; while (nextOffset < evalExCount && nextOffset in newSavedDict) nextOffset++; }
-        goTo(evalStartIdx + 1 + nextOffset);
+        setEvalPageSavedResults(newSaved);
+        goTo(stepIdx + 1);
       }
       return;
     }
@@ -5039,7 +5176,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalPageSavedResults, evalStartIdx, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5239,6 +5376,22 @@ export function GenericModuleContent({
       setWpAnswers(Array(cfg.questions.length).fill(""));
       setWpValidated(false);
       setWpResults([]);
+    };
+  }
+
+  if (currentStep?.kind === "unit_conversion") {
+    const cfg = activeUnitConversionConfig!;
+    stepCanValidate = !unitConversionValidated;
+    stepValidate = unitConversionValidated ? () => {} : () => {
+      setUnitConversionResults(cfg.questions.map((q, i) => numericAnswerMatches(unitConversionAnswers[i] ?? "", q.answer)));
+      setUnitConversionValidated(true);
+    };
+    stepReset = () => {
+      const newCfg = genUnitConversion(cfg.domain, cfg.decimals, cfg.exNum, cfg.questions.length);
+      setUnitConversionOverrideConfigs(prev => ({ ...prev, [stepIdx]: newCfg }));
+      setUnitConversionAnswers(Array(cfg.questions.length).fill(""));
+      setUnitConversionValidated(false);
+      setUnitConversionResults(Array(cfg.questions.length).fill(false));
     };
   }
 
@@ -5634,39 +5787,18 @@ export function GenericModuleContent({
     ? currentStepTrad!.title[pivot]!
     : revisionTitle ?? currentStep?.lesson.theory.title.fr ?? "";
   const moduleInfo = getMathModule(moduleId);
-  const geoStyle = moduleInfo?.branch === "geometry" ? { "--color-accent-alg": "var(--color-accent-geo)" } as React.CSSProperties : undefined;
-  const backUrl = moduleInfo?.branch === "geometry" ? "/mathematiques?tab=geometry" : "/mathematiques";
-  const submoduleTitle = moduleInfo?.submodules.find(s => s.id === startSubmoduleId)?.title ?? revisionTitle ?? "";
-  const moduleCode = moduleInfo?.code ?? moduleId;
+  const isGeometryModule = moduleInfo?.branch === "geometry";
+  const geoStyle = isGeometryModule ? { "--color-accent-alg": "var(--color-accent-geo)" } as React.CSSProperties : undefined;
+  const backUrl = isGeometryModule ? "/mathematiques?tab=geometry" : "/mathematiques";
 
   return (
     <div className="pb-40" style={geoStyle}>
-      {/* Breadcrumb with back button */}
-      <div className="mb-4 flex items-center gap-1 text-xs font-medium text-[var(--color-accent-alg)]">
-        <button
-          type="button"
-          onClick={() => router.push(backUrl)}
-          className="flex items-center gap-1 hover:opacity-70 transition-opacity"
-          aria-label="Retour"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
-          Mathématiques
-        </button>
-        {submoduleTitle && (
-          <>
-            <span className="opacity-40">·</span>
-            <span className="opacity-80">{submoduleTitle}</span>
-          </>
-        )}
-        <span className="opacity-40">·</span>
-        <span className="opacity-80">{moduleCode}</span>
-      </div>
       {/* Cancel eval confirmation dialog */}
       {showEvalCancelConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
           <div className="mx-4 w-full max-w-sm space-y-4 rounded-[var(--radius-lg)] bg-[var(--color-bg-primary)] p-6 shadow-xl">
-            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
+            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;Ã©valuation ?</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;Ã©valuation sera perdue.</p>
             <div className="flex gap-3">
               <button type="button" onClick={cancelEval}
                 className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
@@ -5681,7 +5813,7 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Main progress bar — training steps only */}
+      {/* Main progress bar â€” training steps only */}
       {!inEvalPhase && (
         <TrainingProgressBar
           current={trainingStepIdx}
@@ -5691,27 +5823,10 @@ export function GenericModuleContent({
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <div className="mb-4">
-          <div className="flex gap-1">
-            {evalSteps.map((s, i) => {
-              if (s.kind === "pass_toggle" || i in evalSavedResults) return null;
-              return (
-                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i === evalStepOffset ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
-                }`} />
-              );
-            })}
-          </div>
-          {showFreeNavWarning && (
-            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Tu es au premier exercice. Valide et utilise «&nbsp;Suivant&nbsp;» pour naviguer.
-            </div>
-          )}
-        </div>
+        <EvalProgressBar current={evalStepOffset} total={evalSteps.length} timeLeft={revisionMode ? revTimerLeft : evalTimeLeft} />
       )}
 
-      {/* Hint button — floated right, aligns with exercise title */}
+      {/* Hint button â€” floated right, aligns with exercise title */}
       {!inEvalPhase && currentStep && currentStep.kind !== "theory" && getStepHint(currentStep) && (
         <div className="float-right ml-2">
           <HintButton onClick={() => setShowHint(true)} />
@@ -5742,7 +5857,7 @@ export function GenericModuleContent({
             value={answer}
             onChange={(e) => { const val = currentStep.item.type === "number" ? e.target.value.replace(/[^0-9,.\-]/g, "") : e.target.value; setAnswer(val); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
-            placeholder="Votre réponse…"
+            placeholder="Votre rÃ©ponseâ€¦"
             className={`w-full px-4 py-3 text-sm ${MATH_TEXT_INPUT_BASE} ${
               exStatus === "wrong"
                 ? CLS_WRONG
@@ -5751,7 +5866,7 @@ export function GenericModuleContent({
           />
           {exStatus === "wrong" && (
             <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
-              {exAttempts >= 2 ? `Réponse attendue : ${currentStep.item.acceptable[0]}` : "Essayez encore…"}
+              {exAttempts >= 2 ? `RÃ©ponse attendue : ${currentStep.item.acceptable[0]}` : "Essayez encoreâ€¦"}
             </p>
           )}
         </div>
@@ -5761,7 +5876,7 @@ export function GenericModuleContent({
       {currentStep?.kind === "number_line" && (
         <div className="space-y-4">
           <p className="text-sm font-medium text-[var(--color-text-primary)]">
-            Quel est le nombre indiqué par la flèche ?
+            Quel est le nombre indiquÃ© par la flÃ¨che ?
           </p>
           <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
             <NumberLineSVG config={currentStep.nlConfig} />
@@ -5772,7 +5887,7 @@ export function GenericModuleContent({
             value={answer}
             onChange={(e) => { setAnswer(e.target.value.replace(/[^0-9,.\-]/g, "")); if (exStatus !== "idle") setExStatus("idle"); }}
             onKeyDown={(e) => { if (e.key === "Enter" && answer.trim() && exStatus !== "correct") stepValidate?.(); }}
-            placeholder="Votre réponse…"
+            placeholder="Votre rÃ©ponseâ€¦"
             className={`w-full px-4 py-3 text-sm ${MATH_NUMBER_INPUT_BASE} ${
               exStatus === "wrong"
                 ? CLS_WRONG
@@ -5781,7 +5896,7 @@ export function GenericModuleContent({
           />
           {exStatus === "wrong" && (
             <p className="text-xs font-medium text-amber-600 dark:text-amber-400">
-              {exAttempts >= 2 ? `Réponse attendue : ${currentStep.nlConfig.target}` : "Essayez encore…"}
+              {exAttempts >= 2 ? `RÃ©ponse attendue : ${currentStep.nlConfig.target}` : "Essayez encoreâ€¦"}
             </p>
           )}
         </div>
@@ -5826,7 +5941,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeEncadrementConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Encadrez chaque nombre à la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} près.
+            Encadrez chaque nombre Ã  la {activeEncadrementConfig.unit === 10 ? "dizaine" : "centaine"} prÃ¨s.
           </p>
           <div className="space-y-3">
             {activeEncadrementConfig.questions.map((q, i) => {
@@ -5845,7 +5960,7 @@ export function GenericModuleContent({
               const numCls = "w-20 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]";
               const firstBlock = wrong ? (
                 <div className={`${inputCls} h-[2.125rem] rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{firstVal||"—"}</span>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{firstVal||"â€”"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{firstExpected}</span>
                 </div>
               ) : (
@@ -5855,7 +5970,7 @@ export function GenericModuleContent({
               );
               const secondBlock = wrong ? (
                 <div className={`${inputCls} h-[2.125rem] rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{secondVal||"—"}</span>
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{secondVal||"â€”"}</span>
                   <span className="text-xs font-bold text-amber-600 leading-none">{secondExpected}</span>
                 </div>
               ) : (
@@ -5940,9 +6055,9 @@ export function GenericModuleContent({
               const inputCls = `flex-1 h-[2.75rem] px-4 py-2.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               let afterText = "";
               if (!noFeedback) {
-                if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
-                else if (nlMultiValidated && q.mode === "less" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
-                else if (nlMultiValidated && q.mode === "more" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
+                if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `RÃ©ponse attendue : ${q.nlConfig.target}`;
+                else if (nlMultiValidated && q.mode === "less" && ok === false) afterText = `La flÃ¨che indique ${q.nlConfig.target}. Votre rÃ©ponse doit Ãªtre plus petite.`;
+                else if (nlMultiValidated && q.mode === "more" && ok === false) afterText = `La flÃ¨che indique ${q.nlConfig.target}. Votre rÃ©ponse doit Ãªtre plus grande.`;
               }
               return (
                 <div key={i} className="space-y-2">
@@ -5953,7 +6068,7 @@ export function GenericModuleContent({
                     <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)] w-5">{i + 1}.</span>
                     {wrong ? (
                       <div className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center gap-0.5`}>
-                        <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
+                        <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"â€”"}</span>
                         {q.mode === "read" && <span className="text-xs font-bold text-amber-600 leading-none">{q.nlConfig.target}</span>}
                       </div>
                     ) : (
@@ -5975,7 +6090,7 @@ export function GenericModuleContent({
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOrderingConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
-            Classez les nombres dans l&apos;ordre {activeOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "décroissant (du plus grand au plus petit)"}.
+            Classez les nombres dans l&apos;ordre {activeOrderingConfig.direction === "asc" ? "croissant (du plus petit au plus grand)" : "dÃ©croissant (du plus grand au plus petit)"}.
           </p>
           <div className="space-y-6">
             {activeOrderingConfig.questions.map((q, qi) => {
@@ -6042,7 +6157,7 @@ export function GenericModuleContent({
       {currentStep?.kind === "seq_rule" && activeSeqRuleConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqRuleConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la rÃ¨gle de chaque suite (ex: +5 ou -3).</p>
           <div className="space-y-4">
             {activeSeqRuleConfig.questions.map((q, i) => {
               const v = seqRuleAnswers[i] ?? "";
@@ -6059,13 +6174,13 @@ export function GenericModuleContent({
                   ))}
                   {wrong ? (
                     <div className="w-24 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
-                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"—"}</span>
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v||"â€”"}</span>
                       <span className="text-xs font-bold leading-none text-amber-600">{correctAns}</span>
                     </div>
                   ) : (
                     <input type="text" inputMode="decimal" value={v} disabled={seqRuleValidated}
                       onChange={e => setSeqRuleAnswers(prev => prev.map((a,j) => j===i ? e.target.value.replace(/[^0-9,.\-+]/g, "") : a))}
-                      placeholder="± nombre"
+                      placeholder="Â± nombre"
                       className={inputRowCls} />
                   )}
                 </div>
@@ -6079,7 +6194,7 @@ export function GenericModuleContent({
       {currentStep?.kind === "seq_complete" && activeSeqCompleteConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">ComplÃ©tez les suites de nombres.</p>
           <div className="space-y-5">
             {(() => {
               const globalMaxN = Math.max(...activeSeqCompleteConfig.questions.flatMap(q => q.allNums.map(n => Math.abs(n))));
@@ -6100,7 +6215,7 @@ export function GenericModuleContent({
                         const wrong = seqCompleteValidated && parseFloat(v) !== expected;
                         return wrong ? (
                           <div key={ni} className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                            <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
+                            <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"â€”"}</span>
                             <span className="text-xs font-bold text-amber-600 leading-none">{expected.toLocaleString("fr-CH")}</span>
                           </div>
                         ) : (
@@ -6122,7 +6237,7 @@ export function GenericModuleContent({
                   {seqCompleteValidated && activeSeqCompleteConfig.exNum !== 5 && activeSeqCompleteConfig.exNum !== 6 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
-                        Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
+                        RÃ¨gle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
                       </span>
                     </div>
                   )}
@@ -6141,8 +6256,8 @@ export function GenericModuleContent({
             <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecOrderingConfig.exNum}.</h2>
             <p className="text-sm text-[var(--color-text-secondary)]">
               {activeDecOrderingConfig.direction === "desc"
-                ? "Classez les nombres dans l’ordre décroissant (plus grand au plus petit)."
-                : "Classez les nombres dans l’ordre croissant (plus petit au plus grand)."}
+                ? "Classez les nombres dans lâ€™ordre dÃ©croissant (plus grand au plus petit)."
+                : "Classez les nombres dans lâ€™ordre croissant (plus petit au plus grand)."}
             </p>
           </div>
           <div className="space-y-6">
@@ -6210,7 +6325,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "dec_seq_rule" && activeDecSeqRuleConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqRuleConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +0,5 ou -1,25).</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la rÃ¨gle de chaque suite (ex: +0,5 ou -1,25).</p>
           <div className="overflow-x-auto">
             <div
               className="inline-grid items-center gap-x-2 gap-y-3"
@@ -6229,13 +6344,13 @@ export function GenericModuleContent({
                     ))}
                     {wrong ? (
                       <div className={`h-9 px-1 text-sm font-mono rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                        <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                        <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "â€”"}</span>
                         <span className="text-xs font-bold leading-none">{correctAns}</span>
                       </div>
                     ) : (
                       <input type="text" inputMode="decimal" value={v} disabled={decSeqRuleValidated}
                         onChange={e => setDecSeqRuleAnswers(prev => prev.map((a, j) => j === i ? e.target.value.replace(/[^0-9,.\-+]/g, "") : a))}
-                        placeholder="±0,00"
+                        placeholder="Â±0,00"
                         className={`h-9 w-full px-1 text-sm ${MATH_TEXT_INPUT_BASE}`} />
                     )}
                   </Fragment>
@@ -6250,7 +6365,7 @@ export function GenericModuleContent({
       {!showEvalScore && currentStep?.kind === "dec_seq_complete" && activeDecSeqCompleteConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDecSeqCompleteConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres décimaux.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">ComplÃ©tez les suites de nombres dÃ©cimaux.</p>
           <div className="overflow-x-auto">
             <div
               className="grid items-center gap-x-1 gap-y-3"
@@ -6270,7 +6385,7 @@ export function GenericModuleContent({
                         const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
                         return wrong ? (
                           <div key={ni} className={`h-9 px-1 font-mono text-sm rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
-                            <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                            <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "â€”"}</span>
                             <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
                           </div>
                         ) : (
@@ -6308,6 +6423,16 @@ export function GenericModuleContent({
             setGeoResults(Array.from({ length: max }, (_, i) => i < score));
             setGeoValidated(true);
           }}
+        />
+      )}
+
+      {!showEvalScore && currentStep?.kind === "unit_conversion" && activeUnitConversionConfig && (
+        <UnitConversionExercise
+          config={activeUnitConversionConfig}
+          answers={unitConversionAnswers}
+          validated={unitConversionValidated}
+          results={unitConversionResults}
+          onChange={(i, val) => setUnitConversionAnswers(prev => prev.map((a, j) => j === i ? val : a))}
         />
       )}
 
@@ -6349,7 +6474,7 @@ export function GenericModuleContent({
                 ? "Effectuez les additions."
                 : activeArithConfig.op === "-"
                   ? "Effectuez les soustractions."
-                  : activeArithConfig.op === "×"
+                  : activeArithConfig.op === "Ã—"
                     ? "Effectuez les multiplications."
                     : "Effectuez les divisions."
           }
@@ -6451,8 +6576,8 @@ export function GenericModuleContent({
           }
           consigne={
             activeGridConfig.op === "+"
-              ? "Effectuez les additions en colonnes. Écrivez le résultat et les retenues."
-              : "Effectuez les soustractions en colonnes. Écrivez le résultat et les emprunts."
+              ? "Effectuez les additions en colonnes. Ã‰crivez le rÃ©sultat et les retenues."
+              : "Effectuez les soustractions en colonnes. Ã‰crivez le rÃ©sultat et les emprunts."
           }
         />
       )}
@@ -6521,11 +6646,11 @@ export function GenericModuleContent({
         />
       )}
 
-      {/* A3.5 — Mult select exercise */}
+      {/* A3.5 â€” Mult select exercise */}
       {!showEvalScore && currentStep?.kind === "mult_select" && activeMultSelectConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultSelectConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les multiples de <strong className="font-bold">{activeMultSelectConfig.base}</strong>.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">SÃ©lectionnez les multiples de <strong className="font-bold">{activeMultSelectConfig.base}</strong>.</p>
           <div className="grid grid-cols-5 gap-2">
             {activeMultSelectConfig.numbers.map((n, i) => {
               const sel = multSelectAnswers[i] ?? false;
@@ -6553,11 +6678,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — Mult list exercise */}
+      {/* A3.5 â€” Mult list exercise */}
       {!showEvalScore && currentStep?.kind === "mult_list" && activeMultListConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMultListConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Écrivez les 5 premiers multiple des nombres. Séparez les par des virgules.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Ã‰crivez les 5 premiers multiple des nombres. SÃ©parez les par des virgules.</p>
           <div className="space-y-4">
             {activeMultListConfig.bases.map((base, i) => {
               const expected = Array.from({ length: 5 }, (_, idx) => base * (idx + 1)).join(", ");
@@ -6573,7 +6698,7 @@ export function GenericModuleContent({
                   </p>
                   {wrong ? (
                     <div className={`${inputCls} flex flex-col justify-center rounded-none border-0 border-b-2 border-amber-500`}>
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "â€”"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
                     </div>
                   ) : (
@@ -6588,11 +6713,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — True/false mult/div exercise */}
+      {/* A3.5 â€” True/false mult/div exercise */}
       {!showEvalScore && currentStep?.kind === "true_false_mult_div" && activeTfMultDivConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfMultDivConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">SÃ©lectionnez si c&apos;est vrai ou faux.</p>
           <div className="space-y-3">
             {activeTfMultDivConfig.questions.map((q, i) => {
               const sel = tfMultDivAnswers[i];
@@ -6633,11 +6758,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — Find divisors exercise */}
+      {/* A3.5 â€” Find divisors exercise */}
       {!showEvalScore && currentStep?.kind === "find_divisors" && activeFindDivisorsConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeFindDivisorsConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Trouve tous les diviseurs des nombres. Sépare les par des virgules.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">Trouve tous les diviseurs des nombres. SÃ©pare les par des virgules.</p>
           <div className="space-y-4">
             {activeFindDivisorsConfig.questions.map((q, i) => {
               const v = findDivisorsAnswers[i] ?? "";
@@ -6653,7 +6778,7 @@ export function GenericModuleContent({
                   </p>
                   {ok === false ? (
                     <div className={`w-full px-4 py-3 text-sm font-mono rounded-none border-0 border-b-2 border-amber-500 flex flex-col gap-0.5`}>
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "â€”"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.divisors.join(", ")}</span>
                     </div>
                   ) : (
@@ -6668,11 +6793,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — Div select exercise */}
+      {/* A3.5 â€” Div select exercise */}
       {!showEvalScore && currentStep?.kind === "div_select" && activeDivSelectConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivSelectConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez les nombres divisibles par <strong className="font-bold">{activeDivSelectConfig.base}</strong>.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">SÃ©lectionnez les nombres divisibles par <strong className="font-bold">{activeDivSelectConfig.base}</strong>.</p>
           <div className="grid grid-cols-5 gap-2">
             {activeDivSelectConfig.numbers.map((n, i) => {
               const sel = divSelectAnswers[i] ?? false;
@@ -6700,11 +6825,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — Div by exercise */}
+      {/* A3.5 â€” Div by exercise */}
       {!showEvalScore && currentStep?.kind === "div_by" && activeDivByConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeDivByConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez le ou les diviseurs corrects pour les nombres suivants.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">SÃ©lectionnez le ou les diviseurs corrects pour les nombres suivants.</p>
           <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content repeat(5, 2.5rem)" }}>
             {activeDivByConfig.questions.map((q, i) => {
               return (
@@ -6743,7 +6868,7 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.5 — Missing digit exercise */}
+      {/* A3.5 â€” Missing digit exercise */}
       {!showEvalScore && currentStep?.kind === "missing_digit_div" && activeMissingDigitConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeMissingDigitConfig.exNum}</h2>
@@ -6761,7 +6886,7 @@ export function GenericModuleContent({
                     {q.prefix}
                   {wrong ? (
                       <span className={`${inputCls} inline-flex h-6 flex-col items-center justify-center leading-none`}>
-                        <span className="text-[10px] font-bold leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                        <span className="text-[10px] font-bold leading-none text-[var(--color-text-primary)]">{v || "â€”"}</span>
                         <span className="text-[10px] font-bold leading-none text-amber-600">{q.validDigits[0]}</span>
                       </span>
                   ) : (
@@ -6778,7 +6903,7 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.6 — GCD/LCM exercise */}
+      {/* A3.6 â€” GCD/LCM exercise */}
       {!showEvalScore && currentStep?.kind === "gcd_lcm" && activeGcdLcmConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeGcdLcmConfig.exNum}</h2>
@@ -6797,7 +6922,7 @@ export function GenericModuleContent({
                   <span className="text-sm text-[var(--color-text-secondary)]">{formatNumsEt(q.nums)} =</span>
                   {wrong ? (
                     <div className={`${inputCls} flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500`}>
-                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "â€”"}</span>
                       <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
                     </div>
                   ) : (
@@ -6812,11 +6937,11 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* A3.6 — True/false GCD/LCM exercise */}
+      {/* A3.6 â€” True/false GCD/LCM exercise */}
       {!showEvalScore && currentStep?.kind === "true_false_gcd_lcm" && activeTfGcdLcmConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeTfGcdLcmConfig.exNum}</h2>
-          <p className="text-sm text-[var(--color-text-secondary)]">Sélectionnez si c&apos;est vrai ou faux.</p>
+          <p className="text-sm text-[var(--color-text-secondary)]">SÃ©lectionnez si c&apos;est vrai ou faux.</p>
           <div className="space-y-3">
             {activeTfGcdLcmConfig.questions.map((q, i) => {
               const sel = tfGcdLcmAnswers[i];
@@ -6862,7 +6987,7 @@ export function GenericModuleContent({
       {/* Eval score screen */}
       {showEvalScore && evalFinalGrade !== null && (
         <div className="space-y-4">
-          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats de l&apos;évaluation</h2>
+          <h2 className="text-lg font-bold text-[var(--color-text-primary)]">RÃ©sultats de l&apos;Ã©valuation</h2>
           <ul className="space-y-2">
             {evalRowData.map((row, i) => {
               const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
@@ -6877,11 +7002,11 @@ export function GenericModuleContent({
           <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalFinalGrade >= PASSING_GRADE ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
             <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
             <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalFinalGrade.toFixed(1)}</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {evalEarnedPts}/{evalTotalPts_state} pts</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">sur 6 Â· {evalEarnedPts}/{evalTotalPts_state} pts</p>
             <p className={`mt-3 text-base font-bold ${evalFinalGrade >= PASSING_GRADE ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
-              {evalFinalGrade >= PASSING_GRADE ? "✓ Réussi" : "✗ À améliorer"}
+              {evalFinalGrade >= PASSING_GRADE ? "âœ“ RÃ©ussi" : "âœ— Ã€ amÃ©liorer"}
             </p>
-            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {PASSING_GRADE}/6</p>
+            <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de rÃ©ussite : {PASSING_GRADE}/6</p>
           </div>
         </div>
       )}
@@ -6898,14 +7023,14 @@ export function GenericModuleContent({
           </div>
           <div className="space-y-2">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
-              Évaluation
+              Ã‰valuation
             </p>
             <h2 className="text-xl font-bold text-[var(--color-text-primary)]" lang={currentStepHasPivotTitle ? pivot : undefined} dir={currentStepHasPivotTitle && (pivot === "ar" || pivot === "fa") ? "rtl" : "ltr"}>
               {currentStepTitle}
             </h2>
-            <p className="text-sm text-[var(--color-text-secondary)]">Évalue ta maîtrise de ce module.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;évaluation est chronométrée. Tu as {revisionMode ? "30 minutes" : "5 minutes"} pour compléter l&apos;évaluation.</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaîtront au démarrage du chronomètre.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Ã‰value ta maÃ®trise de ce module.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">L&apos;Ã©valuation est chronomÃ©trÃ©e. Tu as {revisionMode ? "30 minutes" : "5 minutes"} pour complÃ©ter l&apos;Ã©valuation.</p>
+            <p className="text-sm text-[var(--color-text-secondary)]">Les exercices apparaÃ®tront au dÃ©marrage du chronomÃ¨tre.</p>
           </div>
           <button
             type="button"
@@ -6926,13 +7051,13 @@ export function GenericModuleContent({
         <div className="flex flex-col items-center gap-8 py-4 text-center">
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">
-              Évaluation
+              Ã‰valuation
             </p>
             <h2 className="mt-2 text-xl font-bold text-[var(--color-text-primary)]">
               Passer le module ?
             </h2>
             <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
-              As-tu compris et maîtrisé ce module ?
+              As-tu compris et maÃ®trisÃ© ce module ?
             </p>
           </div>
           <div className="flex w-full gap-3">
@@ -6962,25 +7087,25 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Fixed bottom nav — hidden on eval_start announce screen */}
+      {/* Fixed bottom nav â€” hidden on eval_start announce screen */}
       <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)] ${currentStep?.kind === "eval_start" ? "hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
-            {/* Back button — hidden on eval start and score screen */}
+            {/* Back button â€” hidden on eval start and score screen */}
             {(currentStep?.kind !== "eval_start" && !showEvalScore) ? (
               <button
                 type="button"
                 onClick={goBack}
-                disabled={(!isInEvalPhase && isFirstStep) || currentStep?.kind === "pass_toggle"}
+                disabled={isFirstStep || currentStep?.kind === "pass_toggle"}
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-opacity disabled:opacity-30"
               >
-                ← Retour
+                â† Retour
               </button>
             ) : (
               <span />
             )}
 
-            {/* Validate (exercises only) — hidden on score screen */}
+            {/* Validate (exercises only) â€” hidden on score screen */}
             {!showEvalScore && (stepValidate || (!isInEvalPhase && stepReset)) ? (
               <div className="flex items-center gap-2">
                 {!isInEvalPhase && stepReset && (
@@ -6988,7 +7113,7 @@ export function GenericModuleContent({
                     type="button"
                     onClick={stepReset}
                     className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90"
-                    aria-label="Réinitialiser"
+                    aria-label="RÃ©initialiser"
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                       <path d="M1 4v6h6" /><path d="M3.51 15a9 9 0 1 0 .49-4" />
@@ -7024,6 +7149,7 @@ export function GenericModuleContent({
                     (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
                     (currentStep?.kind === "column_grid" && !gridValidated) ||
                     (currentStep?.kind === "word_problems" && !wpValidated) ||
+                    (currentStep?.kind === "unit_conversion" && !unitConversionValidated) ||
                     (currentStep?.kind === "rounding_group" && !roundingValidated) ||
                     (currentStep?.kind === "frac_id" && !fracIdValidated) ||
                     (currentStep?.kind === "frac_equiv" && !fracEquivValidated) ||
@@ -7055,9 +7181,9 @@ export function GenericModuleContent({
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep || (isInEvalPhase && Object.keys(evalSavedResults).length > 0 && Object.keys(evalSavedResults).length >= evalSteps.filter((s: { kind: string }) => s.kind !== "pass_toggle").length)
-                  ? "Terminer ✓"
-                  : "Suivant →"}
+                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
+                  ? "Terminer âœ“"
+                  : "Suivant â†’"}
               </button>
             )}
           </div>

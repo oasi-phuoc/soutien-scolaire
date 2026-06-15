@@ -86,7 +86,7 @@ function isClose(user: string, expected: number): boolean {
 }
 
 function inputClass(ok: boolean, checked: boolean): string {
-  const base = "w-24 rounded-none border-0 border-b-2 bg-transparent px-1 py-1 text-center text-sm outline-none transition-colors";
+  const base = "h-9 w-24 rounded-none border-0 border-b-2 bg-transparent px-1 py-1 text-center text-sm outline-none transition-colors";
   if (!checked) return `${base} border-[var(--color-accent-alg)]/70 focus:border-amber-500`;
   return ok ? `${base} border-[var(--color-accent-alg)]` : `${base} border-amber-500`;
 }
@@ -559,7 +559,12 @@ function AnswerLine({
     <div className="grid grid-cols-[6rem_0.75rem_auto_auto] items-end gap-2 text-sm">
       <span className="font-medium text-[var(--color-text-primary)]">{label}</span>
       <span className="pb-1 text-center font-medium text-[var(--color-text-primary)]">:</span>
-      <div className="flex flex-col">
+      {checked && !ok ? (
+        <div className="flex h-9 w-24 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 bg-transparent px-1">
+          <span className="text-[10px] leading-none text-[var(--color-text-primary)] line-through">{value || "—"}</span>
+          <span className="text-xs font-bold leading-none text-amber-600">{fmt(correct)}</span>
+        </div>
+      ) : (
         <input
           type="text"
           inputMode="decimal"
@@ -568,8 +573,7 @@ function AnswerLine({
           className={inputClass(ok, checked)}
           readOnly={checked && ok}
         />
-        {checked && !ok ? <span className="mt-0.5 text-center text-xs font-bold text-amber-600">{fmt(correct)}</span> : null}
-      </div>
+      )}
       <span className="pb-1 text-[var(--color-text-secondary)]">{unit}</span>
     </div>
   );
