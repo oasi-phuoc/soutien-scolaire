@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition, useEffect } from "react";
+import Link from "next/link";
 import { MATH_MODULES } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
@@ -14,7 +15,6 @@ const LANGUE_LABELS: Record<string, string> = {
 };
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import {
-  changeRoleAction,
   deleteUserAction,
   updateUserProfileAction,
   resetAllElevesAction,
@@ -878,11 +878,7 @@ export function AdminTable({
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState<"name" | "math" | "francais" | "lecture">("name");
   const [sortOpen, setSortOpen] = useState(false);
-  const [selected, setSelected] = useState<UserRow | null>(null);
-  const [editing, setEditing] = useState<UserRow | null>(null);
-  const [confirming, setConfirming] = useState<UserRow | null>(null);
   const [resetConfirming, setResetConfirming] = useState(false);
-  const [, startTransition] = useTransition();
 
   const classes = Array.from(new Set(rows.map(r => r.classe).filter(Boolean) as string[])).sort();
   const searchLc = search.trim().toLowerCase();
@@ -900,28 +896,6 @@ export function AdminTable({
     const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
     return na.localeCompare(nb, "fr");
   });
-
-  function handleChangeRole(user: UserRow, newRole: "eleve" | "prof" | "admin") {
-    startTransition(async () => {
-      const r = await changeRoleAction(user.id, newRole);
-      if (r.ok) {
-        setRows(rs => rs.map(r2 => r2.id === user.id ? { ...r2, role: newRole, is_admin: newRole === "admin" } : r2));
-        setSelected(s => s?.id === user.id ? { ...s, role: newRole, is_admin: newRole === "admin" } : s);
-      }
-    });
-  }
-
-  function handleDeleted(userId: string) {
-    setRows(rs => rs.filter(r => r.id !== userId));
-    setConfirming(null);
-    setSelected(null);
-  }
-
-  function handleSaved(userId: string, data: Partial<UserRow>) {
-    setRows(rs => rs.map(r => r.id === userId ? { ...r, ...data } : r));
-    setSelected(s => s?.id === userId ? { ...s, ...data } : s);
-    setEditing(null);
-  }
 
   return (
     <>
@@ -1031,9 +1005,9 @@ export function AdminTable({
                       : <span className="text-xs text-zinc-400">—</span>}
                   </td>
                   <td className="px-4 py-3">
-                    <button onClick={() => setSelected(row)} className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
+                    <Link href={`/admin/eleves/${row.id}`} className="inline-flex rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300" aria-label="Voir détails">
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" /></svg>
-                    </button>
+                    </Link>
                   </td>
                 </tr>
               );
@@ -1042,19 +1016,6 @@ export function AdminTable({
         </table>
       </div>
 
-      {selected && !editing && !confirming && (
-        <DetailModal
-          user={selected}
-          currentUserId={currentUserId}
-          currentUserRole={currentUserRole}
-          onClose={() => setSelected(null)}
-          onEdit={() => setEditing(selected)}
-          onDelete={() => setConfirming(selected)}
-          onChangeRole={role => handleChangeRole(selected, role)}
-        />
-      )}
-      {editing && <EditModal user={editing} onClose={() => setEditing(null)} onSaved={data => handleSaved(editing.id, data)} />}
-      {confirming && <DeleteConfirm user={confirming} onClose={() => setConfirming(null)} onDeleted={() => handleDeleted(confirming.id)} />}
       {resetConfirming && (
         <ResetElevesConfirm
           eleveCount={rows.filter(r => r.role === "eleve").length}
@@ -1062,13 +1023,11 @@ export function AdminTable({
           onReset={() => {
             setRows(rs => rs.filter(r => r.role !== "eleve"));
             setResetConfirming(false);
-            setSelected(null);
           }}
           onArchive={() => {
             const year = new Date().getFullYear();
             setRows(rs => rs.map(r => r.role === "eleve" ? { ...r, classe: `ancien ${year}` } : r));
             setResetConfirming(false);
-            setSelected(null);
           }}
         />
       )}

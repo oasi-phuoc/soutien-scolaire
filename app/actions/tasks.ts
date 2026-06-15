@@ -8,6 +8,8 @@ export type TaskRow = {
   title: string;
   description: string | null;
   due_date: string | null;
+  module_ref: string | null;
+  lesson_ref: string | null;
   created_at: string;
   total_students: number;
   done_count: number;
@@ -19,6 +21,8 @@ export type AssignmentRow = {
   title: string;
   description: string | null;
   due_date: string | null;
+  module_ref: string | null;
+  lesson_ref: string | null;
   status: "pending" | "done";
   done_at: string | null;
   created_at: string;
@@ -46,6 +50,8 @@ export async function createTaskAction(
   description: string,
   dueDate: string | null,
   studentIds: string[],
+  moduleRef: string | null,
+  lessonRef: string | null,
 ): Promise<{ ok: boolean; reason?: string }> {
   if (!title.trim()) return { ok: false, reason: "Le titre est obligatoire." };
   if (!studentIds.length) return { ok: false, reason: "Sélectionne au moins un élève." };
@@ -65,6 +71,8 @@ export async function createTaskAction(
       title: title.trim(),
       description: description.trim() || null,
       due_date: dueDate || null,
+      module_ref: moduleRef || null,
+      lesson_ref: lessonRef || null,
       created_by: user.id,
     })
     .select("id")
