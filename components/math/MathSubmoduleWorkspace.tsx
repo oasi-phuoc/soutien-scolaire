@@ -1699,6 +1699,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [revTimerLeft, setRevTimerLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});
+  const [evalExValidated, setEvalExValidated] = useState<Record<number, boolean>>({});
+  const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
   const isRevisionLesson = !!directRevisionMode || /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
 
@@ -1748,6 +1751,9 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
     }
     setEvalScores({});
     setEvalKey(k => k + 1);
+    setEvalValidateCommands({});
+    setEvalExValidated({});
+    setSelectedResultIdx(null);
     goTo(stepIdx + 1);
   }
 
@@ -1875,11 +1881,110 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const evalExerciseOffset = isInEvalExercises ? stepIdx - evalStartIdx - 1 : 0;
   const evalExerciseTotal = resultsIdx >= 0 ? resultsIdx - evalStartIdx - 1 : 0;
 
+  const evalExSteps = evalStartIdx >= 0 && resultsIdx >= 0
+    ? steps.slice(evalStartIdx + 1, resultsIdx)
+    : [];
+
   const exKey: string | number = isInEvalExercises ? `eval-${evalKey}-${stepIdx}` : exerciseKey;
 
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter((s: WorkspaceStep) => !notInBar(s));
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
   const showTrainingBar = !inEvalPhase && !isInEvalExercises;
+
+  function renderEvalStep(
+    step: WorkspaceStep,
+    validateCmd: number,
+    onVld: (ok: boolean, correct?: number, total?: number) => void,
+  ): React.ReactNode {
+    if (step.kind === "fraction_toggle") return <FractionToggleExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_coloring") return <FractionColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_read") return <FractionReadExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_multi_coloring") return <FractionMultiColoringExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_multi_read") return <FractionMultiReadExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_equiv") return <FractionEquivExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_simplify") return <FractionSimplifyExercise validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "fraction_compare") return <FractionCompareExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "frac_op_compare") return <FracOpCompareExercise exNum={step.exNum} opMode={step.opMode} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "frac_to_dec") return <FracToDecExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_to_frac") return <DecToFracExercise exNum={step.exNum} variant={step.variant} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "frac_ops") return <FractionOpsExercise exType={step.exType} opMode={step.opMode} count={step.count} displayExNum={step.displayExNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_arith_group") return <DecArithGroupExercise exNum={step.exNum} op={step.op} missingOperand={step.missingOperand} timer={step.timer} precision={step.precision} mixed={step.mixed} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_mul_col") return <DecMulColGridExercise exNum={step.exNum} preFilledOperands={step.preFilledOperands} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_mul2_col") return <DecMul2ColExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_div_simple") return <DecDivSimpleExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_div_missing") return <DecDivMissingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_div_ext") return <DecDivExtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_col_arith") return <DecColArithExercise exNum={step.exNum} op={step.op} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_col_arith_full") return <DecColArithFullExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_expr_comp") return <DecExprCompExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_decompose") return <DecReadDecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_recompose") return <DecReadRecomposeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_place_value") return <DecReadPlaceValueExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_digit_at") return <DecReadDigitAtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_dictation") return <DecReadDictationExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_compare") return <DecReadCompareExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_order") return <DecReadOrderExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_filter_gt") return <DecReadFilterGtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_filter_lt") return <DecReadFilterLtExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_filter_between") return <DecReadFilterBetweenExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_encadrement") return <DecReadEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_encadrement_unite") return <DecReadEncadrementUniteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_nl_read") return <DecReadNLReadExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_read_nl_place") return <DecReadNLPlaceExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_nl_read_mixed") return <A7NLReadMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_nl_place_mixed") return <A7NLPlaceMixedExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_nl_read_neg") return <A7NLReadNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_nl_place_neg") return <A7NLPlaceNegExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_compare_ex") return <A7CompareExercise exNum={step.exNum} level={step.level} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_num_select") return <A7RelNumberSelectExercise exNum={step.exNum} mode={step.mode} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_encadrement") return <A7RelEncadrementExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_ordering") return <A7RelOrderingExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_seq_complete") return <A7RelSeqCompleteExercise exNum={step.exNum} isDecimal={step.isDecimal} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_arith") return <A7RelArithExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a7_rel_mul_div") return <A7RelMulDivExercise exNum={step.exNum} range={step.range} count={step.count} missingOperand={step.missingOperand} timer={step.timer} questionMode={step.questionMode} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_power_ex") return <A8PowerExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_missing_exp_ex") return <A8MissingExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_missing_base_ex") return <A8MissingBaseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_power_cmp_ex") return <A8PowerCompareExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_power_order_ex") return <A8PowerOrderExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_mult_ex") return <A8MultExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_div_ex") return <A8DivExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_pow_pow_ex") return <A8PowPowExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_mixed_ex") return <A8MixedExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_eq_complete_ex") return <A8EqCompleteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_pow10_calc_ex") return <A8Pow10CalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_to_pow10_ex") return <A8ToPow10Exercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_pow10_exp_ex") return <A8Pow10ExpExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_sci_calc_ex") return <A8SciCalcExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_sci_write_ex") return <A8SciWriteExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_sqrt_tf_ex") return <A8SqrtTrueFalseExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_sqrt_ex") return <A8SqrtExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_sqrt_missing_ex") return <A8SqrtMissingExercise exNum={step.exNum} count={step.count} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_simple_ex") return <A8OpSimpleExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_paren_ex") return <A8OpParenExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_bracket_ex") return <A8OpBracketExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_fill_ex") return <A8OpFillExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_powsqrt_ex") return <A8OpPowSqrtExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "a8_op_complex_ex") return <A8OpComplexExercise exNum={step.exNum} promptFr={promptFor(step.promptFr)} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_to_frac_ex") return <PctToFracExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_to_dec_ex") return <PctToDecExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "frac_to_pct_ex") return <FracToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "dec_to_pct_ex") return <DecToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_of_num_ex") return <PctOfNumExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "part_to_pct_ex") return <PartToPctExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_diff_ex") return <PctDiffExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_change_ex") return <PctChangeExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_multiplier_ex") return <PctMultiplierExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_table_ex") return <PctTableExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "pct_word_ex") return <PctWordExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_name_to_svg") return <G1NameToSVGExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_definition_match") return <G1DefinitionMatchExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_anagram") return <G1AnagramExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g1_shape_write") return <G1ShapeWriteExercise exNum={step.exNum} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g2_perimeter") return <G2PerimeterExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
+    if (step.kind === "g3_area") return <G3AreaExercise exNum={step.exNum} shapeKind={step.shapeKind} mode={step.mode} decimals={step.decimals} validateCommand={validateCmd} onValidated={onVld} />;
+    return null;
+  }
 
   return (
     <div className="pb-40">
@@ -1910,6 +2015,44 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
       )}
 
+      {/* Eval exercises — all mounted during eval + results for expandable review */}
+      {(isInEvalExercises || currentStep?.kind === "results") && evalExSteps.length > 0 && evalExSteps.map((step, i) => {
+        const absIdx = evalStartIdx + 1 + i;
+        const isActiveEval = isInEvalExercises && stepIdx === absIdx;
+        const isResultsSelected = currentStep?.kind === "results" && selectedResultIdx === i;
+        const visible = isActiveEval || isResultsSelected;
+        return (
+          <div
+            key={`evalex-${evalKey}-${i}`}
+            className={visible ? (isResultsSelected ? "mt-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "") : "hidden"}
+          >
+            {isResultsSelected && (
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {i + 1}</h2>
+                <span className="text-xs text-[var(--color-text-secondary)]">
+                  {(() => {
+                    const sc = evalScores[absIdx];
+                    const c = sc?.c ?? 0;
+                    const t = stepExpectedTotal(step, sc);
+                    return `${c} / ${t}`;
+                  })()}
+                </span>
+              </div>
+            )}
+            {renderEvalStep(
+              step,
+              isActiveEval ? (evalValidateCommands[i] ?? 0) : 0,
+              (ok, correct, total) => {
+                const c = correct ?? (ok ? 1 : 0);
+                const t = total ?? stepExpectedTotal(step, undefined);
+                setEvalScores(prev => ({ ...prev, [absIdx]: { c, t } }));
+                setEvalExValidated(prev => ({ ...prev, [i]: true }));
+              }
+            )}
+          </div>
+        );
+      })}
+
       {/* Hint button — floated right, aligns with exercise title */}
       {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && getWorkspaceStepHint(currentStep) && (
         <div className="float-right ml-2">
@@ -1920,6 +2063,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <HintPopup hint={getWorkspaceStepHint(currentStep)!} onClose={() => setShowHint(false)} />
       )}
 
+      {!isInEvalExercises && (<>
       {/* Theory */}
       {currentStep?.kind === "theory" && lesson && <TheoryView lesson={lesson} pivot={pivot} showPivot={showPivotTranslation} />}
 
@@ -2300,6 +2444,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
           {exStatus === "wrong" && <p>{exAttempts >= 2 ? <><span className="text-xs text-[var(--color-text-primary)] leading-none block">{answer}</span><span className="text-xs font-bold text-amber-600 leading-none block">{currentStep.item.acceptable[0]}</span></> : <span className="text-xs text-amber-500">Essayez encore…</span>}</p>}
         </div>
       )}
+      </>)}
 
       {/* Eval start screen */}
       {currentStep?.kind === "eval_start" && (
@@ -2391,10 +2536,28 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                 const c = sc?.c ?? 0;
                 const t = stepExpectedTotal(steps[idx], sc);
                 const color = c === t ? "text-green-600" : c > 0 ? "text-amber-600" : "text-red-500";
+                const isSelected = selectedResultIdx === i;
                 return (
-                  <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
-                    <span className="text-sm text-[var(--color-text-primary)]">Exercice {i + 1}</span>
-                    <span className={`text-sm font-bold ${color}`}>{c}/{t}</span>
+                  <li key={i} className="space-y-1">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedResultIdx(isSelected ? null : i)}
+                      className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
+                        isSelected
+                          ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                          : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                      }`}
+                    >
+                      <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</span>
+                      <span className="flex-1 text-sm text-[var(--color-text-primary)]">Exercice {i + 1}</span>
+                      <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{c}/{t}</span>
+                      <svg
+                        className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`}
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
+                      >
+                        <path d="M9 18l6-6-6-6" />
+                      </svg>
+                    </button>
                   </li>
                 );
               })}
@@ -2432,8 +2595,17 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                   </button>
                 )}
                 <button type="button" aria-label="Valider"
-                  onClick={() => { if (isCustom) setValidateCommand(c => c + 1); else validateText(); }}
-                  disabled={validateDisabled}
+                  onClick={() => {
+                    if (isInEvalExercises) {
+                      const i = stepIdx - evalStartIdx - 1;
+                      setEvalValidateCommands(prev => ({ ...prev, [i]: (prev[i] ?? 0) + 1 }));
+                    } else if (isCustom) {
+                      setValidateCommand(c => c + 1);
+                    } else {
+                      validateText();
+                    }
+                  }}
+                  disabled={isInEvalExercises ? !!evalExValidated[stepIdx - evalStartIdx - 1] : validateDisabled}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-alg)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg>
                 </button>
@@ -2443,7 +2615,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
             <button type="button" onClick={goNext}
               disabled={
                 (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                (isInEvalExercises && evalScores[stepIdx] === undefined)
+                (isInEvalExercises && !evalExValidated[stepIdx - evalStartIdx - 1])
               }
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-30">
               {currentStep?.kind === "pass_toggle" || currentStep?.kind === "results" || isLastStep ? (
