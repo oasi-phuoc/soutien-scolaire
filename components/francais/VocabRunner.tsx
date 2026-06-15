@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { VocabTheme } from "@/lib/curriculum/vocabulary-data";
@@ -39,6 +39,7 @@ const EVAL_EXERCISE_STEPS: StepDef[] = [
   { key: "eval-ex10", label: "Éval. 7", isTheory: false, isEval: true, evalNumber: 7 },
   { key: "results",   label: "Résultats", isTheory: true },
 ];
+const EVAL_ONLY_STEPS = EVAL_EXERCISE_STEPS.filter((s) => s.isEval);
 
 function buildSteps(theme: { words: Array<{ feminine?: string }> }): StepDef[] {
   const hasMF = theme.words.filter((w) => !!w.feminine).length >= 5;
@@ -92,6 +93,10 @@ export function VocabRunner({ theme }: Props) {
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [passingGrade] = useState(() => getPassingGrade());
+  const [evalValidateCommands, setEvalValidateCommands] = useState<number[]>(() => Array(evalTotal).fill(0));
+  const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalTotal).fill(false));
+  const [evalSessionKey, setEvalSessionKey] = useState(0);
+  const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
   const step = steps[stepIdx]!;
   const isLast = stepIdx === steps.length - 1;
@@ -99,6 +104,7 @@ export function VocabRunner({ theme }: Props) {
 
   const inEvalPhase = stepIdx >= evalAnnounceIdx;
   const isInEvalPhase = stepIdx >= evalExFirst && stepIdx <= evalExLast;
+  const evalExIdx = isInEvalPhase ? stepIdx - evalExFirst : -1;
 
   const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
   const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
@@ -120,10 +126,17 @@ export function VocabRunner({ theme }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evalTimeLeft]);
 
-  function handleValidated(correct: number, total: number) {
-    if (evalExKeys.includes(step.key)) {
-      setEvalScores((prev) => [...prev, { correct, total }]);
-    }
+  function handleValidated(_correct: number, _total: number) {
+    setValidated(true);
+  }
+
+  function handleEvalValidated(idx: number, correct: number, total: number) {
+    setEvalScores((prev) => {
+      const next = [...prev];
+      next[idx] = { correct, total };
+      return next;
+    });
+    setEvalValidated((prev) => prev.map((v, j) => (j === idx ? true : v)));
     setValidated(true);
   }
 
@@ -158,7 +171,13 @@ export function VocabRunner({ theme }: Props) {
       router.push("/francais");
     } else {
       const next = steps[stepIdx + 1]!;
-      if (stepIdx === evalAnnounceIdx) setEvalTimeLeft(EVAL_DURATION);
+      if (stepIdx === evalAnnounceIdx) {
+        setEvalTimeLeft(EVAL_DURATION);
+        setEvalValidateCommands(Array(evalTotal).fill(0));
+        setEvalValidated(Array(evalTotal).fill(false));
+        setEvalSessionKey((k) => k + 1);
+        setSelectedResultIdx(null);
+      }
       setStepIdx((s) => s + 1);
       setResetKey((k) => k + 1);
       setValidateCommand(0);
@@ -168,7 +187,11 @@ export function VocabRunner({ theme }: Props) {
   }
 
   function handleValidate() {
-    setValidateCommand((c) => c + 1);
+    if (isInEvalPhase) {
+      setEvalValidateCommands((prev) => prev.map((c, j) => (j === evalExIdx ? c + 1 : c)));
+    } else {
+      setValidateCommand((c) => c + 1);
+    }
   }
 
   function handleReset() {
@@ -185,6 +208,10 @@ export function VocabRunner({ theme }: Props) {
     setStepIdx(evalAnnounceIdx);
     setValidated(true);
     setCanValidate(false);
+    setEvalValidateCommands(Array(evalTotal).fill(0));
+    setEvalValidated(Array(evalTotal).fill(false));
+    setEvalSessionKey((k) => k + 1);
+    setSelectedResultIdx(null);
   }
 
   function cancelEval() {
@@ -195,6 +222,10 @@ export function VocabRunner({ theme }: Props) {
     setStepIdx(evalAnnounceIdx);
     setValidated(true);
     setCanValidate(false);
+    setEvalValidateCommands(Array(evalTotal).fill(0));
+    setEvalValidated(Array(evalTotal).fill(false));
+    setEvalSessionKey((k) => k + 1);
+    setSelectedResultIdx(null);
   }
 
   const componentKey = `${step.key}-${resetKey}`;
@@ -245,7 +276,34 @@ export function VocabRunner({ theme }: Props) {
       case "eval-ex10":
         return <ExQuestionWrite key={componentKey} theme={theme} validateCommand={validateCommand} onValidated={handleValidated} onCanValidateChange={setCanValidate} isEval evalNumber={step.evalNumber} />;
       case "results":
-        return <VocabResults key={componentKey} evalScores={evalScores} grade={grade} passingGrade={passingGrade} />;
+        return <VocabResults key={componentKey} evalScores={evalScores} grade={grade} passingGrade={passingGrade}
+          selectedResultIdx={selectedResultIdx} onSelect={setSelectedResultIdx} />;
+      default:
+        return null;
+    }
+  }
+
+  function renderEvalExercise(
+    exStep: StepDef,
+    validateCmd: number,
+    onCVC: (v: boolean) => void,
+    onValidated: (correct: number, total: number) => void
+  ): React.ReactNode {
+    switch (exStep.key) {
+      case "eval-ex2":
+        return <ExArticle theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex4":
+        return <ExMissingLetters theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex6":
+        return <ExFillSentences theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex7":
+        return <ExImageWrite theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex8":
+        return <ExDictation theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex9":
+        return <ExSentenceWrite theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
+      case "eval-ex10":
+        return <ExQuestionWrite theme={theme} validateCommand={validateCmd} onValidated={onValidated} onCanValidateChange={onCVC} isEval evalNumber={exStep.evalNumber} />;
       default:
         return null;
     }
@@ -329,7 +387,40 @@ export function VocabRunner({ theme }: Props) {
       )}
 
       {/* Step content */}
-      <div className="min-h-[280px]">{renderStep()}</div>
+      <div className="min-h-[280px]">
+        {/* Training + announce + results steps */}
+        {!isInEvalPhase && renderStep()}
+
+        {/* Eval exercises — mounted during eval, expandable during results */}
+        {(isInEvalPhase || step.key === "results") && EVAL_ONLY_STEPS.map((exStep, i) => {
+          const isActive = isInEvalPhase && evalExIdx === i;
+          const isSelectedResult = step.key === "results" && selectedResultIdx === i;
+          const visible = isActive || isSelectedResult;
+          return (
+            <div
+              key={`eval-${evalSessionKey}-${i}`}
+              className={visible ? (isSelectedResult ? "mt-2 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "") : "hidden"}
+            >
+              {isSelectedResult && (
+                <div className="mb-4 flex items-center justify-between">
+                  <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
+                  {evalScores[i] && (
+                    <span className={`text-sm font-bold ${evalScores[i].correct === evalScores[i].total ? "text-green-600" : evalScores[i].correct > 0 ? "text-amber-600" : "text-red-500"}`}>
+                      {evalScores[i].correct}/{evalScores[i].total}
+                    </span>
+                  )}
+                </div>
+              )}
+              {renderEvalExercise(
+                exStep,
+                isActive ? (evalValidateCommands[i] ?? 0) : 0,
+                isActive ? setCanValidate : () => {},
+                (correct, total) => handleEvalValidated(i, correct, total)
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       {/* Fixed bottom nav */}
       {step.key !== "eval-announce" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
@@ -381,7 +472,7 @@ export function VocabRunner({ theme }: Props) {
                   type="button"
                   aria-label="Valider"
                   onClick={handleValidate}
-                  disabled={(inEvalPhase && validated) || !canValidate}
+                  disabled={isInEvalPhase ? (evalValidated[evalExIdx] || !canValidate) : ((inEvalPhase && validated) || !canValidate)}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
@@ -395,7 +486,7 @@ export function VocabRunner({ theme }: Props) {
             <button
               type="button"
               onClick={goNext}
-              disabled={inEvalPhase && !validated}
+              disabled={isInEvalPhase ? !evalValidated[evalExIdx] : (inEvalPhase && !validated)}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-40"
             >
               {isLast ? (
