@@ -13,7 +13,7 @@ const prismSvg = `<svg viewBox='0 0 180 130' xmlns='http://www.w3.org/2000/svg' 
   <text x='90' y='121' text-anchor='middle' font-size='12' fill='var(--color-text-primary)'>Prisme</text>
 </svg>`;
 
-const roundSvg = `<svg viewBox='0 0 260 130' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
+const roundSvg = `<svg viewBox='0 0 295 135' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
   <g transform='translate(18 8)'>
     <ellipse cx='45' cy='22' rx='32' ry='12' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
     <path d='M13 22 v62 M77 22 v62' stroke='var(--color-accent-alg)' stroke-width='2'/>
@@ -25,10 +25,10 @@ const roundSvg = `<svg viewBox='0 0 260 130' xmlns='http://www.w3.org/2000/svg' 
     <path d='M11 84 L45 18 L79 84' fill='var(--color-accent-alg)' fill-opacity='.08' stroke='var(--color-accent-alg)' stroke-width='2'/>
     <text x='45' y='112' text-anchor='middle' font-size='11' fill='var(--color-text-primary)'>Cône</text>
   </g>
-  <g transform='translate(205 8)'>
-    <circle cx='25' cy='55' r='35' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
-    <ellipse cx='25' cy='55' rx='35' ry='10' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.4' stroke-dasharray='4 3'/>
-    <text x='25' y='112' text-anchor='middle' font-size='11' fill='var(--color-text-primary)'>Sphère</text>
+  <g transform='translate(218 8)'>
+    <circle cx='35' cy='55' r='35' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2'/>
+    <ellipse cx='35' cy='55' rx='35' ry='10' fill='none' stroke='var(--color-accent-alg)' stroke-width='1.4' stroke-dasharray='4 3'/>
+    <text x='35' y='112' text-anchor='middle' font-size='11' fill='var(--color-text-primary)'>Sphère</text>
   </g>
 </svg>`;
 

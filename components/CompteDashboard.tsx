@@ -34,8 +34,8 @@ function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`flex min-h-12 w-full items-center justify-between rounded-[24px] border bg-white px-4 text-left text-base text-[var(--color-accent-alg)] shadow-sm outline-none transition-colors dark:bg-zinc-950 ${
-          open ? "border-[var(--color-accent-alg)] ring-2 ring-[var(--color-accent-alg)]/15" : "border-[var(--color-accent-alg)]/40"
+        className={`flex min-h-12 w-full items-center justify-between rounded-[24px] border bg-white px-4 text-left text-base text-green-600 shadow-sm outline-none transition-colors dark:bg-zinc-950 ${
+          open ? "border-green-600 ring-2 ring-green-600/15" : "border-green-600/40"
         }`}
         aria-haspopup="listbox"
         aria-expanded={open}
@@ -46,7 +46,7 @@ function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (
         </svg>
       </button>
       {open && (
-        <div className="absolute bottom-full z-20 mb-1 max-h-64 w-full overflow-y-auto rounded-t-[24px] rounded-b-md border border-[var(--color-accent-alg)]/15 bg-white py-2 shadow-lg dark:bg-zinc-950" role="listbox">
+        <div className="absolute bottom-full z-20 mb-1 max-h-64 w-full overflow-y-auto rounded-t-[24px] rounded-b-md border border-green-600/15 bg-white py-2 shadow-lg dark:bg-zinc-950" role="listbox">
           {PIVOT_LANGS.map((l) => (
             <button
               key={l.code}
@@ -57,8 +57,8 @@ function HelpLanguageSelect({ value, onChange }: { value: PivotCode; onChange: (
               }}
               className={`block w-full px-5 py-2 text-left text-sm transition-colors ${
                 l.code === value
-                  ? "font-semibold text-[var(--color-accent-alg)]"
-                  : "text-zinc-700 hover:bg-blue-50 dark:text-zinc-200 dark:hover:bg-blue-950/30"
+                  ? "font-semibold text-green-600"
+                  : "text-zinc-700 hover:bg-green-50 dark:text-zinc-200 dark:hover:bg-green-950/30"
               }`}
               role="option"
               aria-selected={l.code === value}
@@ -205,7 +205,7 @@ export function CompteDashboard({
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-blue-600 px-4 font-semibold text-white hover:bg-blue-700"
+                  className="inline-flex min-h-11 items-center justify-center rounded-xl bg-green-600 px-4 font-semibold text-white hover:bg-green-700"
                 >
                   Admin
                 </Link>

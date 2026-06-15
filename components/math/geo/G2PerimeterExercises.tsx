@@ -143,9 +143,9 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
   <path d='M70 125 H178' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
   <path d='M70 45 v80 M230 45 v80' stroke='#f43f5e' stroke-width='2'/>
   <path d='M70 45 h160' stroke='#f43f5e' stroke-width='2'/>
-  <text x='150' y='34' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(width)}</text>
-  <text x='244' y='88' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
-  <text x='204' y='146' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(bottom)}</text>
+  <text x='150' y='34' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(width)}</text>
+  <text x='244' y='88' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
+  <text x='204' y='146' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(bottom)}</text>
 </svg>`,
       };
     }
@@ -165,8 +165,8 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
   <path d='M82 55 H238 A42 42 0 0 1 238 139 H82 A42 42 0 0 1 82 55 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <line x1='82' y1='55' x2='82' y2='139' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
   <line x1='238' y1='55' x2='238' y2='139' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
-  <text x='160' y='43' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(length)}</text>
-  <text x='100' y='101' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
+  <text x='160' y='43' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(length)}</text>
+  <text x='100' y='101' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
 </svg>`,
       };
     }
@@ -184,7 +184,7 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 260 220' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
   <path d='M130 30 A80 80 0 1 0 210 110 H130 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
   <path d='M130 110 H210 M130 110 V30' stroke='#f43f5e' stroke-width='2'/>
-  <text x='166' y='101' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(radius)}</text>
+  <text x='166' y='101' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(radius)}</text>
 </svg>`,
       };
     }
@@ -203,7 +203,7 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
   <path d='M45 155 A120 120 0 0 1 285 155 A60 60 0 0 0 165 155 A60 60 0 0 0 45 155 Z' fill='#fb923c' fill-opacity='0.55' stroke='var(--color-accent-alg)' stroke-width='2.2' stroke-linejoin='round'/>
   <line x1='45' y1='155' x2='285' y2='155' stroke='var(--color-text-secondary)' stroke-width='1.4' stroke-dasharray='5 5'/>
   <path d='M45 155 H165' stroke='#65a30d' stroke-width='2'/>
-  <text x='105' y='181' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(diameter)}</text>
+  <text x='105' y='181' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(diameter)}</text>
 </svg>`,
       };
     }
@@ -224,8 +224,8 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 360 230' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:460px;display:block;margin:0 auto'>
   <path d='M70 60 H140 A45 45 0 0 0 220 60 H290 A45 45 0 0 0 290 170 H220 A45 45 0 0 0 140 170 H70 A45 45 0 0 0 70 60 Z' fill='#fde68a' fill-opacity='0.70' stroke='var(--color-accent-alg)' stroke-width='2.2' stroke-linejoin='round'/>
   <rect x='45' y='60' width='270' height='110' fill='none' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='180' y='45' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(width)}</text>
-  <text x='323' y='119' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
+  <text x='180' y='45' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(width)}</text>
+  <text x='323' y='119' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
 </svg>`,
       };
     }
@@ -246,8 +246,8 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 340 230' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:440px;display:block;margin:0 auto'>
   <path d='M55 88 H120 A55 55 0 0 1 230 88 H295 V190 H55 Z' fill='#7dd3fc' fill-opacity='0.75' stroke='var(--color-accent-alg)' stroke-width='2.2' stroke-linejoin='round'/>
   <line x1='55' y1='88' x2='295' y2='88' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='78' y='78' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(sideTop)}</text>
-  <text x='305' y='143' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
+  <text x='78' y='78' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(sideTop)}</text>
+  <text x='305' y='143' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
 </svg>`,
       };
     }
@@ -265,8 +265,8 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         perimeter,
         svg: `<svg viewBox='0 0 330 210' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M75 45 H225 A62 62 0 0 1 225 165 H75 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.3' stroke-linejoin='round'/>
-  <text x='150' y='190' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(width)}</text>
-  <text x='43' y='108' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
+  <text x='150' y='190' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(width)}</text>
+  <text x='43' y='108' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
 </svg>`,
       };
     }
@@ -288,9 +288,9 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
   <path d='M88 72 A52 52 0 0 1 192 72 H230 V174 H88 A51 51 0 0 1 88 72 Z' fill='#7dd3fc' fill-opacity='0.75' stroke='var(--color-accent-alg)' stroke-width='2.2'/>
   <line x1='88' y1='72' x2='230' y2='72' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
   <line x1='88' y1='72' x2='88' y2='174' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='159' y='57' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(topDiameter)}</text>
-  <text x='242' y='125' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(height)}</text>
-  <text x='159' y='197' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(width)}</text>
+  <text x='159' y='57' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(topDiameter)}</text>
+  <text x='242' y='125' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(height)}</text>
+  <text x='159' y='197' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(width)}</text>
 </svg>`,
       };
     }
@@ -311,10 +311,10 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 340 225' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:440px;display:block;margin:0 auto'>
   <path d='M55 50 H235 A54 54 0 0 1 289 104 V128 H215 L135 182 H55 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.4' stroke-linejoin='round'/>
   <path d='M55 128 H215 V50' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='145' y='35' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(length)}</text>
-  <text x='36' y='100' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(-90 36 100)'>${label(height)}</text>
-  <text x='175' y='199' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(cut)}</text>
-  <text x='282' y='77' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>r = ${label(radius)}</text>
+  <text x='145' y='35' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(length)}</text>
+  <text x='36' y='100' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(-90 36 100)'>${label(height)}</text>
+  <text x='175' y='199' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(cut)}</text>
+  <text x='282' y='77' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>r = ${label(radius)}</text>
 </svg>`,
       };
     }
@@ -334,9 +334,9 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 330 205' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M55 42 H220 L276 100 L220 158 H55 Z' fill='#7dd3fc' fill-opacity='0.70' stroke='var(--color-accent-alg)' stroke-width='2.3' stroke-linejoin='round'/>
   <line x1='220' y1='42' x2='220' y2='158' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='137' y='29' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(length)}</text>
-  <text x='35' y='104' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(-90 35 104)'>${label(height)}</text>
-  <text x='261' y='74' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(48 261 74)'>${label(side)}</text>
+  <text x='137' y='29' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(length)}</text>
+  <text x='35' y='104' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(-90 35 104)'>${label(height)}</text>
+  <text x='261' y='74' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(48 261 74)'>${label(side)}</text>
 </svg>`,
       };
     }
@@ -357,10 +357,10 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
         svg: `<svg viewBox='0 0 360 240' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:460px;display:block;margin:0 auto'>
   <path d='M55 172 H210 A90 90 0 0 0 300 82 L230 40 V90 H55 Z' fill='var(--color-accent-alg)' fill-opacity='0.08' stroke='var(--color-accent-alg)' stroke-width='2.3' stroke-linejoin='round'/>
   <path d='M210 172 V90 H55' stroke='var(--color-text-secondary)' stroke-width='1.2' stroke-dasharray='5 5'/>
-  <text x='130' y='196' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(base)}</text>
-  <text x='35' y='132' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(-90 35 132)'>${label(height)}</text>
-  <text x='226' y='69' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(rise)}</text>
-  <text x='296' y='129' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>r = ${label(radius)}</text>
+  <text x='130' y='196' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(base)}</text>
+  <text x='35' y='132' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(-90 35 132)'>${label(height)}</text>
+  <text x='226' y='69' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(rise)}</text>
+  <text x='296' y='129' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>r = ${label(radius)}</text>
 </svg>`,
       };
     }
@@ -380,11 +380,11 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 320 210' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M55 65 L95 42 H245 V160 H55 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='170' y='32' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(top)}</text>
-  <text x='257' y='108' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(right)}</text>
-  <text x='150' y='181' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(bottom)}</text>
-  <text x='35' y='119' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(left)}</text>
-  <text x='70' y='48' text-anchor='end' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(diagonal)}</text>
+  <text x='170' y='32' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(top)}</text>
+  <text x='257' y='108' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(right)}</text>
+  <text x='150' y='181' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(bottom)}</text>
+  <text x='35' y='119' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(left)}</text>
+  <text x='70' y='48' text-anchor='end' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(diagonal)}</text>
 </svg>`,
     };
   }
@@ -404,9 +404,9 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 300 270' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:390px;display:block;margin:0 auto'>
   <path d='M150 28 L178 56 L190 44 L242 96 L214 124 L226 136 L150 242 L74 136 L86 124 L58 96 L110 44 L122 56 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='82' y='72' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='232' y='116' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(48 232 116)'>${label(side)}</text>
-  <text x='150' y='260' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='82' y='72' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='232' y='116' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(48 232 116)'>${label(side)}</text>
+  <text x='150' y='260' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
     };
   }
@@ -425,10 +425,10 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 330 230' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M45 55 H210 L280 125 V195 H125 L45 115 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='238' y='88' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='200' y='217' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(base)}</text>
-  <text x='288' y='161' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(vertical)}</text>
-  <text x='165' y='25' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='238' y='88' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='200' y='217' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(base)}</text>
+  <text x='288' y='161' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(vertical)}</text>
+  <text x='165' y='25' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
     };
   }
@@ -448,11 +448,11 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 320 220' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:420px;display:block;margin:0 auto'>
   <path d='M65 65 L245 42 V168 H65 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='155' y='34' text-anchor='middle' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='36' y='116' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(-90 36 116)'>${label(left)}</text>
-  <text x='257' y='108' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(90 257 108)'>${label(right)}</text>
-  <text x='155' y='188' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(base)}</text>
-  <text x='160' y='210' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='155' y='34' text-anchor='middle' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='36' y='116' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(-90 36 116)'>${label(left)}</text>
+  <text x='257' y='108' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(90 257 108)'>${label(right)}</text>
+  <text x='155' y='188' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(base)}</text>
+  <text x='160' y='210' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
     };
   }
@@ -471,10 +471,10 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 330 220' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M65 55 H215 L270 110 L215 165 H65 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='45' y='114' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='140' y='42' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(top)}</text>
-  <text x='244' y='86' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif' transform='rotate(45 244 86)'>${label(side)}</text>
-  <text x='160' y='202' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='45' y='114' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='140' y='42' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(top)}</text>
+  <text x='244' y='86' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif' transform='rotate(45 244 86)'>${label(side)}</text>
+  <text x='160' y='202' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
     };
   }
@@ -493,10 +493,10 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
       perimeter,
       svg: `<svg viewBox='0 0 330 230' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M60 45 H230 V95 H285 V185 H60 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='42' y='116' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='145' y='33' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(top)}</text>
-  <text x='257' y='87' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(notch)}</text>
-  <text x='160' y='210' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='42' y='116' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='145' y='33' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(top)}</text>
+  <text x='257' y='87' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(notch)}</text>
+  <text x='160' y='210' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
     };
   }
@@ -516,12 +516,12 @@ function makeCompositeFigure(mode: ExerciseMode, decimals: boolean, unit: Unit):
     perimeter,
     svg: `<svg viewBox='0 0 320 220' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:430px;display:block;margin:0 auto'>
   <path d='M55 70 L98 45 H250 V162 H55 Z' fill='var(--color-accent-alg)' fill-opacity='0.10' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='72' y='45' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='sans-serif'>x</text>
-  <text x='174' y='34' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(top)}</text>
-  <text x='262' y='108' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(right)}</text>
-  <text x='152' y='184' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(bottom)}</text>
-  <text x='33' y='122' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${label(left)}</text>
-  <text x='160' y='205' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel(perimeter)}</text>
+  <text x='72' y='45' font-size='15' fill='var(--color-accent-alg)' font-weight='bold' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>x</text>
+  <text x='174' y='34' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(top)}</text>
+  <text x='262' y='108' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(right)}</text>
+  <text x='152' y='184' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(bottom)}</text>
+  <text x='33' y='122' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label(left)}</text>
+  <text x='160' y='205' text-anchor='middle' font-size='13' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel(perimeter)}</text>
 </svg>`,
   };
 }
@@ -546,8 +546,8 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
         perimeter,
         svg: `<svg viewBox='0 0 220 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
   <rect x='55' y='35' width='110' height='110' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <text x='110' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>?</text>
-  <text x='110' y='164' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
+  <text x='110' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>?</text>
+  <text x='110' y='164' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
 </svg>`,
       };
     }
@@ -560,7 +560,7 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
       perimeter,
       svg: `<svg viewBox='0 0 220 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
   <rect x='55' y='35' width='110' height='110' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <text x='110' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(side)} ${unit}</text>
+  <text x='110' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(side)} ${unit}</text>
 </svg>`,
     };
   }
@@ -583,9 +583,9 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
         perimeter,
         svg: `<svg viewBox='0 0 260 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
   <rect x='35' y='45' width='170' height='80' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <text x='120' y='35' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${findLength ? "?" : `${fmt(length)} ${unit}`}</text>
-  <text x='218' y='88' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${findLength ? `${fmt(known)} ${unit}` : "?"}</text>
-  <text x='120' y='153' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
+  <text x='120' y='35' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${findLength ? "?" : `${fmt(length)} ${unit}`}</text>
+  <text x='218' y='88' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${findLength ? `${fmt(known)} ${unit}` : "?"}</text>
+  <text x='120' y='153' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
 </svg>`,
       };
     }
@@ -598,8 +598,8 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
       perimeter,
       svg: `<svg viewBox='0 0 260 150' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:360px;display:block;margin:0 auto'>
   <rect x='35' y='35' width='170' height='80' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <text x='120' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(length)} ${unit}</text>
-  <text x='218' y='78' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(width)} ${unit}</text>
+  <text x='120' y='25' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(length)} ${unit}</text>
+  <text x='218' y='78' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(width)} ${unit}</text>
 </svg>`,
     };
   }
@@ -622,10 +622,10 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
         perimeter,
         svg: `<svg viewBox='0 0 300 190' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:380px;display:block;margin:0 auto'>
   <polygon points='135,28 246,138 42,138' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='144' y='166' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${missingIdx === 2 ? "?" : `${fmt(c)} ${unit}`}</text>
-  <text x='68' y='73' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${missingIdx === 0 ? "?" : `${fmt(a)} ${unit}`}</text>
-  <text x='235' y='82' text-anchor='start' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${missingIdx === 1 ? "?" : `${fmt(b)} ${unit}`}</text>
-  <text x='150' y='16' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
+  <text x='144' y='166' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${missingIdx === 2 ? "?" : `${fmt(c)} ${unit}`}</text>
+  <text x='68' y='73' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${missingIdx === 0 ? "?" : `${fmt(a)} ${unit}`}</text>
+  <text x='235' y='82' text-anchor='start' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${missingIdx === 1 ? "?" : `${fmt(b)} ${unit}`}</text>
+  <text x='150' y='16' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
 </svg>`,
       };
     }
@@ -638,9 +638,9 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
       perimeter,
       svg: `<svg viewBox='0 0 300 175' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:380px;display:block;margin:0 auto'>
   <polygon points='135,22 246,132 42,132' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='144' y='162' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(c)} ${unit}</text>
-  <text x='68' y='69' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(a)} ${unit}</text>
-  <text x='235' y='78' text-anchor='start' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${fmt(b)} ${unit}</text>
+  <text x='144' y='162' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(c)} ${unit}</text>
+  <text x='68' y='69' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(a)} ${unit}</text>
+  <text x='235' y='78' text-anchor='start' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${fmt(b)} ${unit}</text>
 </svg>`,
     };
   }
@@ -689,7 +689,7 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
   <circle cx='120' cy='85' r='58' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <line x1='120' y1='85' x2='178' y2='85' stroke='#f97316' stroke-width='2.2'/>
   <line x1='120' y1='27' x2='120' y2='143' stroke='var(--color-accent-alg)' stroke-width='1.6' stroke-dasharray='4 3'/>
-  <text x='120' y='165' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
+  <text x='120' y='165' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>Périmètre = ${fmt(perimeter)} ${unit}</text>
 </svg>`,
     };
   }
@@ -705,7 +705,7 @@ function makeFigure(shapeKind: G2ShapeKind, mode: ExerciseMode, decimals: boolea
   <circle cx='120' cy='80' r='58' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <line x1='120' y1='80' x2='178' y2='80' stroke='#f97316' stroke-width='2.2'/>
   <line x1='120' y1='22' x2='120' y2='138' stroke='var(--color-accent-alg)' stroke-width='1.6' stroke-dasharray='4 3'/>
-  <text x='120' y='155' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${givenLabel}</text>
+  <text x='120' y='155' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${givenLabel}</text>
 </svg>`,
   };
 }
@@ -719,8 +719,8 @@ function regularPolygonSvg(sides: number, unit: Unit, label: string, perimeterLa
   }).join(" ");
   return `<svg viewBox='0 0 240 180' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:340px;display:block;margin:0 auto'>
   <polygon points='${points}' fill='var(--color-accent-alg)' fill-opacity='0.12' stroke='var(--color-accent-alg)' stroke-width='2.5' stroke-linejoin='round'/>
-  <text x='120' y='160' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${label}</text>
-  ${perimeterLabel ? `<text x='120' y='175' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='sans-serif'>${perimeterLabel}</text>` : ""}
+  <text x='120' y='160' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${label}</text>
+  ${perimeterLabel ? `<text x='120' y='175' text-anchor='middle' font-size='12' fill='var(--color-text-primary)' font-family='Century Gothic, CenturyGothic, AppleGothic, sans-serif'>${perimeterLabel}</text>` : ""}
 </svg>`;
 }
 

@@ -1,11 +1,12 @@
 import type { MathSubmoduleLesson } from "./math-a1-types";
 
-const cuboidSvg = `<svg viewBox='0 0 250 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:320px;display:block;margin:0 auto'>
+const cuboidSvg = `<svg viewBox='0 0 265 170' xmlns='http://www.w3.org/2000/svg' style='width:100%;max-width:330px;display:block;margin:0 auto'>
   <path d='M55 70 h116 v60 H55 Z' fill='var(--color-accent-alg)' fill-opacity='.12' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
-  <path d='M55 70 L93 38 h116 l-38 32 M171 70 l38-32 v60 l-38 32' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M55 70 L93 38 h116 l-38 32' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
+  <path d='M209 38 v60 l-38 32' fill='none' stroke='var(--color-accent-alg)' stroke-width='2.5'/>
   <text x='113' y='148' text-anchor='middle' font-size='13' fill='var(--color-text-primary)'>L</text>
-  <text x='213' y='66' font-size='13' fill='var(--color-text-primary)'>l</text>
-  <text x='39' y='103' font-size='13' fill='var(--color-text-primary)'>h</text>
+  <text x='220' y='72' font-size='13' fill='var(--color-text-primary)'>l</text>
+  <text x='38' y='100' text-anchor='end' font-size='13' fill='var(--color-text-primary)'>h</text>
 </svg>`;
 
 export const MATH_G9_5_LESSON: MathSubmoduleLesson = {
@@ -19,7 +20,7 @@ export const MATH_G9_5_LESSON: MathSubmoduleLesson = {
       { type: "plain", fr: "Un pavé droit est une boîte rectangulaire. On multiplie les **trois dimensions**." },
       { type: "svg", markup: cuboidSvg, noFrame: true },
       { type: "highlight", fr: "Formule" },
-      { type: "section", labelFr: "**V = L × l × h**", itemsFr: ["L = longueur", "l = largeur", "h = hauteur"] },
+      { type: "section", labelFr: "V = L × l × h", itemsFr: ["L = longueur", "l = largeur", "h = hauteur"] },
       { type: "example", fr: "Pavé de 6 cm, 4 cm et 3 cm : V = 6 × 4 × 3 = 72 cm³." },
       { type: "note", fr: "Pour trouver une dimension manquante : on divise le volume par le produit des deux autres dimensions." },
     ],
