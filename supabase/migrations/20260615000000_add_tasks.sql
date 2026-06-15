@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS public.tasks (
   title       text        NOT NULL,
   description text,
   due_date    date,
+  module_ref  text,
+  lesson_ref  text,
   created_at  timestamptz NOT NULL DEFAULT now()
 );
 
@@ -73,6 +75,8 @@ RETURNS TABLE(
   title          text,
   description    text,
   due_date       date,
+  module_ref     text,
+  lesson_ref     text,
   created_at     timestamptz,
   total_students bigint,
   done_count     bigint
@@ -92,6 +96,8 @@ BEGIN
     t.title,
     t.description,
     t.due_date,
+    t.module_ref,
+    t.lesson_ref,
     t.created_at,
     COUNT(ta.id)::bigint AS total_students,
     COUNT(ta.id) FILTER (WHERE ta.status = 'done')::bigint AS done_count
@@ -113,6 +119,8 @@ RETURNS TABLE(
   title         text,
   description   text,
   due_date      date,
+  module_ref    text,
+  lesson_ref    text,
   status        text,
   done_at       timestamptz,
   created_at    timestamptz
@@ -127,6 +135,8 @@ BEGIN
     t.title,
     t.description,
     t.due_date,
+    t.module_ref,
+    t.lesson_ref,
     ta.status,
     ta.done_at,
     ta.created_at

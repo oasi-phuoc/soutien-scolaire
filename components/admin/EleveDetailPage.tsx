@@ -1,0 +1,527 @@
+"use client";
+
+import { useState, useTransition, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { MATH_MODULES } from "@/lib/curriculum/math-data";
+import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
+import { LECTURE_MODULES } from "@/lib/curriculum/lecture-data";
+import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { PIVOT_LANGS } from "@/lib/pivot-langs";
+import {
+  changeRoleAction,
+  deleteUserAction,
+  updateUserProfileAction,
+  changePasswordAction,
+  getPlacementHistoryForUserAction,
+} from "@/app/actions/admin";
+import type { UserRow } from "./AdminTable";
+
+const LANGUE_LABELS: Record<string, string> = {
+  fr: "Français",
+  ...Object.fromEntries(PIVOT_LANGS.map(l => [l.code, l.labelFr])),
+  other: "Autre",
+};
+
+const ROLE_LABELS: Record<UserRow["role"], string> = { eleve: "Élève", prof: "Prof", admin: "Admin" };
+const ROLE_ORDER: UserRow["role"][] = ["eleve", "prof", "admin"];
+
+// ── Progress helpers ────────────────────────────────────────────────────────
+
+const COMM_SUBMODULES = COMM_MODULES.flatMap(m => m.submodules).filter(s => s.available);
+const FRENCH_VOC = FRENCH_THEMES.filter(t => t.tab === "vocabulaire");
+const FRENCH_GRAM = FRENCH_THEMES.filter(t => t.tab === "grammaire" || t.tab === "conjugaison");
+const MATH_SUB_IDS_BY_BRANCH = {
+  algebra: new Set(MATH_MODULES.filter(m => m.branch === "algebra").flatMap(m => m.submodules.map(s => s.id))),
+  geometry: new Set(MATH_MODULES.filter(m => m.branch === "geometry").flatMap(m => m.submodules.map(s => s.id))),
+  stats: new Set(MATH_MODULES.filter(m => m.branch === "stats").flatMap(m => m.submodules.map(s => s.id))),
+};
+const TOTAL_MATH_SUBS = MATH_MODULES.reduce((n, m) => n + m.submodules.length, 0);
+
+import type { StoredProgressV1 } from "@/lib/curriculum/types";
+
+function mathPct(data: StoredProgressV1 | null) {
+  const allIds = new Set([...MATH_SUB_IDS_BY_BRANCH.algebra, ...MATH_SUB_IDS_BY_BRANCH.geometry, ...MATH_SUB_IDS_BY_BRANCH.stats]);
+  const done = data?.submoduleStates
+    ? Object.entries(data.submoduleStates).filter(([id, s]) => allIds.has(id) && s === "completed").length
+    : 0;
+  return { done, total: TOTAL_MATH_SUBS, pct: Math.round((done / TOTAL_MATH_SUBS) * 100) };
+}
+
+function frenchPct(data: StoredProgressV1 | null) {
+  const completedSlugs = new Set(Object.keys(data?.frenchLessons ?? {}));
+  const vocDone = FRENCH_VOC.filter(t => completedSlugs.has(t.slug)).length;
+  const gramDone = FRENCH_GRAM.filter(t => completedSlugs.has(t.slug)).length;
+  const commDone = COMM_SUBMODULES.filter(s => !!(data?.commProgress?.[s.id])).length;
+  const done = vocDone + gramDone + commDone;
+  const total = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_SUBMODULES.length;
+  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
+}
+
+function lecturePct(data: StoredProgressV1 | null) {
+  const subs = data?.lectureProgress?.submodules ?? {};
+  const total = LECTURE_MODULES.reduce((sum, m) => sum + m.letters.length, 0);
+  const done = LECTURE_MODULES.reduce((sum, m) =>
+    sum + m.letters.filter(l => subs[`${m.id}-${l.letterLower}`] === "completed").length, 0);
+  return { done, total, pct: total > 0 ? Math.round((done / total) * 100) : 0 };
+}
+
+function lastSeen(iso: string | null): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  const now = new Date();
+  const diff = Math.floor((now.getTime() - d.getTime()) / 1000);
+  if (diff < 60) return "À l'instant";
+  if (diff < 3600) return `Il y a ${Math.floor(diff / 60)} min`;
+  if (diff < 86400) return `Il y a ${Math.floor(diff / 3600)} h`;
+  const days = Math.floor(diff / 86400);
+  if (days < 30) return `Il y a ${days} j`;
+  return d.toLocaleDateString("fr-CH", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function Bar({ pct, color }: { pct: number; color: string }) {
+  return (
+    <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
+      <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+    </div>
+  );
+}
+
+// ── Icons ───────────────────────────────────────────────────────────────────
+
+function IconEdit() {
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" /><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" /></svg>;
+}
+function IconTrash() {
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /><path d="M10 11v6M14 11v6M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" /></svg>;
+}
+function IconCancel() {
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12" /></svg>;
+}
+function IconSave() {
+  return <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><polyline points="17 21 17 13 7 13 7 21" /><polyline points="7 3 7 8 15 8" /></svg>;
+}
+function Spinner() {
+  return <svg className="animate-spin" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" /></svg>;
+}
+
+// ── Password section ────────────────────────────────────────────────────────
+
+function PasswordSection({ userId }: { userId: string }) {
+  const [pwd, setPwd] = useState("");
+  const [pending, startTransition] = useTransition();
+  const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
+
+  function submit() {
+    if (!pwd) return;
+    setMsg(null);
+    startTransition(async () => {
+      const r = await changePasswordAction(userId, pwd);
+      if (r.ok) { setMsg({ ok: true, text: "Mot de passe mis à jour." }); setPwd(""); }
+      else setMsg({ ok: false, text: r.reason ?? "Erreur" });
+    });
+  }
+
+  return (
+    <div className="rounded-xl border border-zinc-200 p-4 dark:border-zinc-700">
+      <p className="mb-2 text-xs font-semibold text-zinc-500 dark:text-zinc-400">Changer le mot de passe</p>
+      <div className="flex gap-2">
+        <input
+          type="password" value={pwd}
+          onChange={e => { setPwd(e.target.value); setMsg(null); }}
+          placeholder="Nouveau mot de passe (min. 8 caractères)"
+          autoComplete="new-password"
+          className="min-h-9 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-violet-500 dark:border-zinc-600 dark:bg-zinc-950"
+        />
+        <button type="button" onClick={submit} disabled={pending || pwd.length < 8}
+          className="min-h-9 rounded-lg bg-violet-600 px-4 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-50">
+          {pending ? "…" : "OK"}
+        </button>
+      </div>
+      {msg && <p className={`mt-1.5 text-xs ${msg.ok ? "text-emerald-600 dark:text-emerald-400" : "text-red-600 dark:text-red-400"}`}>{msg.text}</p>}
+    </div>
+  );
+}
+
+// ── Progress section ────────────────────────────────────────────────────────
+
+function ProgressSection({ user }: { user: UserRow }) {
+  const math = mathPct(user.progress_data);
+  const french = frenchPct(user.progress_data);
+  const lecture = lecturePct(user.progress_data);
+  const [mathOpen, setMathOpen] = useState(false);
+  const [frenchOpen, setFrenchOpen] = useState(false);
+  const [lectureOpen, setLectureOpen] = useState(false);
+  const [placementOpen, setPlacementOpen] = useState(false);
+  const [history, setHistory] = useState<Array<{ date: string; points: number; maxPoints: number; percent: number }> | null>(null);
+
+  useEffect(() => {
+    getPlacementHistoryForUserAction(user.id).then(res => {
+      if (res.ok) setHistory(res.history);
+    });
+  }, [user.id]);
+
+  const rows: { label: string; stat: { done: number; total: number; pct: number }; color: string; open: boolean; toggle: () => void }[] = [
+    { label: "Maths", stat: math, color: "bg-blue-500", open: mathOpen, toggle: () => setMathOpen(o => !o) },
+    { label: "Français", stat: french, color: "bg-emerald-500", open: frenchOpen, toggle: () => setFrenchOpen(o => !o) },
+    { label: "Lecture", stat: lecture, color: "bg-amber-500", open: lectureOpen, toggle: () => setLectureOpen(o => !o) },
+  ];
+
+  return (
+    <div className="space-y-4">
+      {rows.map(({ label, stat, color, open, toggle }) => (
+        <div key={label} className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
+          <button onClick={toggle} className="mb-2 flex w-full items-center justify-between text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            <span className="flex items-center gap-1.5">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${open ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+              {label}
+            </span>
+            <span className="font-mono text-xs">{stat.done}/{stat.total} — {stat.pct}%</span>
+          </button>
+          <Bar pct={stat.pct} color={color} />
+          {open && (
+            <p className="mt-2 text-xs text-zinc-400">Détail à compléter.</p>
+          )}
+        </div>
+      ))}
+
+      {/* Test de placement */}
+      {history !== null && (
+        <div className="rounded-xl border border-zinc-100 p-4 dark:border-zinc-800">
+          <button onClick={() => setPlacementOpen(o => !o)} className="mb-2 flex w-full items-center justify-between text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+            <span className="flex items-center gap-1.5">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className={`transition-transform ${placementOpen ? "rotate-90" : ""}`}><path d="m9 18 6-6-6-6" /></svg>
+              Test de placement
+            </span>
+            {history.length === 0 ? (
+              <span className="text-xs text-zinc-400">Aucun résultat</span>
+            ) : (() => {
+              const best = Math.max(...history.map(a => a.percent));
+              return <span className="font-mono text-xs text-violet-600 dark:text-violet-400">{best}%</span>;
+            })()}
+          </button>
+          {history.length > 0 && (
+            <Bar pct={Math.max(...history.map(a => a.percent))} color="bg-violet-500" />
+          )}
+          {placementOpen && history.length > 0 && (
+            <div className="mt-3 space-y-2">
+              {[...history].reverse().slice(0, 5).map((a, i) => {
+                const d = new Date(a.date);
+                return (
+                  <div key={i} className="flex items-center gap-3">
+                    <span className="w-16 shrink-0 text-[11px] tabular-nums text-zinc-400">
+                      {d.toLocaleDateString("fr-CH", { day: "2-digit", month: "2-digit", year: "2-digit" })}
+                    </span>
+                    <div className="flex-1">
+                      <div className="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-800">
+                        <div className="h-full rounded-full bg-violet-400" style={{ width: `${a.percent}%` }} />
+                      </div>
+                    </div>
+                    <span className="w-14 shrink-0 text-right text-[11px] font-semibold tabular-nums text-zinc-700 dark:text-zinc-200">
+                      {a.points}/{a.maxPoints}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Edit Modal ──────────────────────────────────────────────────────────────
+
+function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => void; onSaved: (data: Partial<UserRow>) => void }) {
+  const [pending, startTransition] = useTransition();
+  const [err, setErr] = useState<string | null>(null);
+  const parsedClasse = user.classe?.split(" ") ?? [];
+  const LANGUES_OPTIONS = [...PIVOT_LANGS.map(l => ({ code: l.code, label: l.labelFr })), { code: "other", label: "Autre" }];
+  const [form, setForm] = useState({
+    prenom: user.prenom ?? "", nom: user.nom ?? "",
+    classeType: parsedClasse[0] ?? "", classeNum: parsedClasse[1] ?? "",
+    adresse: user.adresse ?? "", npa: user.npa ?? "", localite: user.localite ?? "",
+    telephone: user.telephone ?? "", langue: user.langue ?? "en",
+  });
+
+  const inputCls = "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50";
+
+  function submit() {
+    setErr(null);
+    startTransition(async () => {
+      const classe = form.classeType && form.classeNum ? `${form.classeType} ${form.classeNum}` : undefined;
+      const r = await updateUserProfileAction(user.id, {
+        prenom: form.prenom || undefined, nom: form.nom || undefined, classe,
+        adresse: form.adresse || undefined, npa: form.npa || undefined,
+        localite: form.localite || undefined, telephone: form.telephone || undefined,
+        langue: form.langue || undefined,
+      });
+      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
+      onSaved({ ...form, classe: classe ?? null, langue: form.langue || null });
+    });
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+      <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier le profil</h2>
+          <button onClick={onClose} className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"><IconCancel /></button>
+        </div>
+        <div className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Prénom</label><input type="text" value={form.prenom} onChange={e => setForm(f => ({ ...f, prenom: e.target.value }))} className={inputCls} /></div>
+            <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Nom</label><input type="text" value={form.nom} onChange={e => setForm(f => ({ ...f, nom: e.target.value }))} className={inputCls} /></div>
+          </div>
+          <div>
+            <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Classe</label>
+            <div className="grid grid-cols-2 gap-2">
+              <select value={form.classeType} onChange={e => setForm(f => ({ ...f, classeType: e.target.value }))} className={inputCls}>
+                <option value="">Filière</option>
+                {["CSC", "CFR", "EPL", "CPR"].map(c => <option key={c} value={c}>{c}</option>)}
+              </select>
+              <select value={form.classeNum} onChange={e => setForm(f => ({ ...f, classeNum: e.target.value }))} className={inputCls}>
+                <option value="">N°</option>
+                {Array.from({ length: 20 }, (_, i) => <option key={i} value={String(i + 1)}>{String(i + 1).padStart(2, "0")}</option>)}
+              </select>
+            </div>
+          </div>
+          <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Adresse</label><input type="text" value={form.adresse} onChange={e => setForm(f => ({ ...f, adresse: e.target.value }))} className={inputCls} /></div>
+          <div className="grid grid-cols-2 gap-3">
+            <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">NPA</label><input type="text" placeholder="1234" value={form.npa} onChange={e => setForm(f => ({ ...f, npa: e.target.value }))} className={inputCls} /></div>
+            <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Localité</label><input type="text" value={form.localite} onChange={e => setForm(f => ({ ...f, localite: e.target.value }))} className={inputCls} /></div>
+          </div>
+          <div><label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Téléphone</label><input type="text" placeholder="+41 79 …" value={form.telephone} onChange={e => setForm(f => ({ ...f, telephone: e.target.value }))} className={inputCls} /></div>
+          <div>
+            <label className="mb-1 block text-xs font-medium text-zinc-600 dark:text-zinc-400">Langue parlée</label>
+            <select value={form.langue} onChange={e => setForm(f => ({ ...f, langue: e.target.value }))} className={inputCls}>
+              {LANGUES_OPTIONS.map(l => <option key={l.code} value={l.code}>{l.label}</option>)}
+            </select>
+          </div>
+        </div>
+        {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
+        <div className="mt-5 flex justify-end gap-2">
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300"><IconCancel /></button>
+          <button onClick={submit} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60">
+            {pending ? <Spinner /> : <IconSave />}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Delete Confirm ──────────────────────────────────────────────────────────
+
+function DeleteConfirm({ user, onClose, onDeleted }: { user: UserRow; onClose: () => void; onDeleted: () => void }) {
+  const [pending, startTransition] = useTransition();
+  const [err, setErr] = useState<string | null>(null);
+  const [confirmed, setConfirmed] = useState(false);
+  const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || user.email;
+
+  function confirm() {
+    startTransition(async () => {
+      const r = await deleteUserAction(user.id);
+      if (!r.ok) { setErr(r.reason ?? "Erreur"); return; }
+      onDeleted();
+    });
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+      <div className="relative z-10 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
+        <h2 className="mb-2 text-base font-bold text-zinc-900 dark:text-zinc-50">Supprimer le compte</h2>
+        <p className="mb-4 text-sm text-zinc-600 dark:text-zinc-400">Supprimer définitivement <strong>{fullName}</strong> ? Cette action est irréversible.</p>
+        <button onClick={() => setConfirmed(c => !c)} className={`mb-4 flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-sm font-medium transition-colors ${confirmed ? "border-red-300 bg-red-50 text-red-700 dark:border-red-700 dark:bg-red-950/30 dark:text-red-400" : "border-zinc-200 bg-zinc-50 text-zinc-500 hover:border-zinc-300 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400"}`}>
+          <span className={`flex h-5 w-9 shrink-0 items-center rounded-full transition-colors ${confirmed ? "bg-red-500" : "bg-zinc-300 dark:bg-zinc-600"}`}>
+            <span className={`ml-0.5 h-4 w-4 rounded-full bg-white shadow transition-transform ${confirmed ? "translate-x-4" : "translate-x-0"}`} />
+          </span>
+          Je confirme la suppression définitive
+        </button>
+        {err && <p className="mb-3 text-sm text-red-600">{err}</p>}
+        <div className="flex justify-end gap-2">
+          <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300"><IconCancel /></button>
+          <button onClick={confirm} disabled={!confirmed || pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-red-600 text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-40">
+            {pending ? <Spinner /> : <IconTrash />}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ── Main Page Component ─────────────────────────────────────────────────────
+
+export function EleveDetailPage({
+  user: initialUser,
+  currentUserId,
+  currentUserRole,
+}: {
+  user: UserRow;
+  currentUserId: string;
+  currentUserRole: "admin" | "prof";
+}) {
+  const router = useRouter();
+  const [user, setUser] = useState(initialUser);
+  const [editing, setEditing] = useState(false);
+  const [confirming, setConfirming] = useState(false);
+  const [, startTransition] = useTransition();
+
+  const fullName = [user.prenom, user.nom].filter(Boolean).join(" ") || "—";
+  const location = [user.npa, user.localite].filter(Boolean).join(" ") || null;
+  const activity = user.progress_updated_at ?? user.progress_data?.lastActivityAt ?? null;
+
+  const isSelf = user.id === currentUserId;
+  const canDelete = currentUserRole === "admin" && !isSelf && user.role !== "admin";
+  const canChangeRole = currentUserRole === "admin" && !isSelf;
+
+  function handleChangeRole(newRole: "eleve" | "prof" | "admin") {
+    startTransition(async () => {
+      const r = await changeRoleAction(user.id, newRole);
+      if (r.ok) setUser(u => ({ ...u, role: newRole, is_admin: newRole === "admin" }));
+    });
+  }
+
+  return (
+    <main className="mx-auto w-full max-w-4xl flex-1 px-4 py-8 pb-28">
+
+      {/* Back button + Header */}
+      <div className="mb-6">
+        <button onClick={() => router.back()} className="mb-4 flex items-center gap-1.5 text-sm text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-200">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"><path d="M15 18l-6-6 6-6" /></svg>
+          Retour à la liste
+        </button>
+
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">{fullName}</h1>
+              <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold ${
+                user.role === "admin" ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                : user.role === "prof" ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300"
+                : "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400"
+              }`}>
+                {ROLE_LABELS[user.role]}
+              </span>
+              {user.classe && (
+                <span className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                  {user.classe}
+                </span>
+              )}
+            </div>
+            <p className="mt-1 font-mono text-sm font-semibold text-teal-700 dark:text-teal-400">
+              {user.login_id ?? user.email?.replace(/@soutien\.local$/, "") ?? "—"}
+            </p>
+          </div>
+
+          {/* Actions */}
+          <div className="flex items-center gap-2">
+            <button onClick={() => setEditing(true)} className="flex items-center gap-1.5 rounded-xl bg-blue-100 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-300">
+              <IconEdit /> Modifier
+            </button>
+            {canDelete && (
+              <button onClick={() => setConfirming(true)} className="flex items-center gap-1.5 rounded-xl bg-red-100 px-3 py-2 text-sm font-semibold text-red-700 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-300">
+                <IconTrash /> Supprimer
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        {/* Left column — Info */}
+        <div className="space-y-5">
+
+          {/* Info card */}
+          <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+            <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Informations</h2>
+            <dl className="space-y-2 text-sm">
+              {user.langue && (
+                <div className="flex gap-2">
+                  <dt className="w-28 shrink-0 text-zinc-400">Langue</dt>
+                  <dd className="font-medium text-zinc-700 dark:text-zinc-300">🌐 {LANGUE_LABELS[user.langue] ?? user.langue}</dd>
+                </div>
+              )}
+              {user.adresse && (
+                <div className="flex gap-2">
+                  <dt className="w-28 shrink-0 text-zinc-400">Adresse</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-300">{user.adresse}</dd>
+                </div>
+              )}
+              {location && (
+                <div className="flex gap-2">
+                  <dt className="w-28 shrink-0 text-zinc-400">NPA / Localité</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-300">{location}</dd>
+                </div>
+              )}
+              {user.telephone && (
+                <div className="flex gap-2">
+                  <dt className="w-28 shrink-0 text-zinc-400">Téléphone</dt>
+                  <dd className="text-zinc-700 dark:text-zinc-300">{user.telephone}</dd>
+                </div>
+              )}
+              <div className="flex gap-2">
+                <dt className="w-28 shrink-0 text-zinc-400">Dernier accès</dt>
+                <dd className={`font-medium ${lastSeen(activity) === "—" ? "text-zinc-400" : "text-amber-600 dark:text-amber-400"}`}>
+                  {lastSeen(activity)}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          {/* Password */}
+          {user.role !== "admin" && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Sécurité</h2>
+              <PasswordSection userId={user.id} />
+            </div>
+          )}
+
+          {/* Role change */}
+          {canChangeRole && (
+            <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h2 className="mb-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">Rôle</h2>
+              <div className="flex overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+                {ROLE_ORDER.map(r => (
+                  <button key={r} onClick={() => user.role !== r && handleChangeRole(r)}
+                    className={`flex-1 py-2.5 text-sm font-semibold transition-colors ${
+                      user.role === r
+                        ? r === "admin" ? "bg-blue-600 text-white"
+                          : r === "prof" ? "bg-emerald-600 text-white"
+                          : "bg-zinc-700 text-white dark:bg-zinc-600"
+                        : "text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                    }`}>
+                    {ROLE_LABELS[r]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Right column — Progress */}
+        <div className="rounded-2xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="mb-4 text-xs font-semibold uppercase tracking-wide text-zinc-400">Progression</h2>
+          <ProgressSection user={user} />
+        </div>
+      </div>
+
+      {editing && (
+        <EditModal
+          user={user}
+          onClose={() => setEditing(false)}
+          onSaved={data => { setUser(u => ({ ...u, ...data })); setEditing(false); }}
+        />
+      )}
+      {confirming && (
+        <DeleteConfirm
+          user={user}
+          onClose={() => setConfirming(false)}
+          onDeleted={() => router.replace("/admin")}
+        />
+      )}
+    </main>
+  );
+}

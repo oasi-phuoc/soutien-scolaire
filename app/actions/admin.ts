@@ -115,6 +115,38 @@ export async function getPlacementHistoryForUserAction(userId: string): Promise<
   };
 }
 
+export async function getUserForAdminAction(userId: string): Promise<{
+  ok: boolean;
+  user?: import("@/components/admin/AdminTable").UserRow;
+  error?: string;
+}> {
+  const caller = await getCallerRole();
+  if (!caller) return { ok: false, error: "Non autorisé" };
+  const svc = createServiceClient();
+  if (!svc) return { ok: false, error: "Service role non configuré" };
+
+  const { data, error } = await svc
+    .from("profiles")
+    .select("id, email, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history")
+    .eq("id", userId)
+    .single();
+
+  if (error || !data) return { ok: false, error: error?.message ?? "Utilisateur non trouvé" };
+
+  const history = Array.isArray(data.placement_test_history) ? data.placement_test_history as Array<{ date: string; points: number; maxPoints: number; percent: number }> : [];
+  const placement_test_best = history.length > 0
+    ? history.reduce((best, a) => a.percent > best.percent ? a : best)
+    : null;
+
+  return {
+    ok: true,
+    user: {
+      ...data,
+      placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
+    } as import("@/components/admin/AdminTable").UserRow,
+  };
+}
+
 export async function updateUserProfileAction(
   userId: string,
   data: { nom?: string; prenom?: string; classe?: string; adresse?: string; npa?: string; localite?: string; telephone?: string; langue?: string },
