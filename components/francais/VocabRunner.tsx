@@ -417,6 +417,15 @@ export function VocabRunner({ theme }: Props) {
                     style={{ width: `${totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0}%` }}
                   />
                 </div>
+                <div className={`flex items-center justify-between rounded-[var(--radius-lg)] border-2 px-4 py-3 ${passed ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
+                  <div>
+                    <p className="text-xs text-[var(--color-text-secondary)]">Note · seuil {passingGrade.toFixed(1)}/6</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)} <span className="text-base font-normal text-[var(--color-text-secondary)]">/ 6</span></p>
+                  </div>
+                  <p className={`text-sm font-bold ${passed ? "text-[var(--color-accent-fr)]" : "text-red-500"}`}>
+                    {passed ? "✓ Validé" : "✗ À améliorer"}
+                  </p>
+                </div>
                 <p className="text-sm text-[var(--color-text-secondary)]">
                   Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
                 </p>
