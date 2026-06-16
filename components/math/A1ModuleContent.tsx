@@ -1820,12 +1820,12 @@ function AudioPlayer({ src }: { src: string }) {
 
 function ExerciseRow({
   num, inputId, answer, result, validated, correctWord,
-  pivotWord, pivot, showPivot, onChange, rowIdx, noBorder,
+  pivotWord, pivot, showPivot, onChange, rowIdx, noBorder, showCorrection = true,
 }: {
   num: number; inputId: string; answer: string; result: boolean | null;
   validated: boolean; correctWord: string; pivotWord?: string;
   pivot: PivotCode; showPivot: boolean; onChange: (val: string) => void;
-  rowIdx?: number; noBorder?: boolean;
+  rowIdx?: number; noBorder?: boolean; showCorrection?: boolean;
 }) {
   return (
     <div className={`flex items-center gap-3 transition-colors ${noBorder ? "" : "rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3"}`}>
@@ -1841,7 +1841,7 @@ function ExerciseRow({
           {pivotWord}
         </span>
       ) : null}
-      {validated && result !== null ? (
+      {validated && result !== null && showCorrection ? (
         <div className={`flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border px-3 py-1 ${result ? "border-[var(--color-border-default)]" : CLS_WRONG}`}>
           {result ? (
             <span className="text-sm font-bold text-[var(--color-text-primary)]">{answer}</span>
@@ -1851,6 +1851,10 @@ function ExerciseRow({
               <span className="text-sm font-bold text-amber-600 leading-tight">{correctWord}</span>
             </>
           )}
+        </div>
+      ) : validated ? (
+        <div className="flex flex-1 flex-col items-center justify-center min-h-[2.5rem] rounded-[var(--radius-md)] border border-[var(--color-border-default)] px-3 py-1">
+          <span className="text-sm font-bold text-[var(--color-text-primary)]">{answer}</span>
         </div>
       ) : (
         <AppInput label="" id={inputId} value={answer}
@@ -2207,6 +2211,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const [evalGrade, setEvalGrade] = useState<number | null>(null);
   const [evalSubmitted, setEvalSubmitted] = useState(false);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
+  const [evalExpandedRow, setEvalExpandedRow] = useState<number | null>(null);
 
   // Timer évaluation
   const [evalStarted, setEvalStarted] = useState(false);
@@ -3782,8 +3787,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const inputCls = "w-0 flex-1 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
 
               if (evalPageIdx === 0) {
-                const q9val = a12EvalQ9.tens * 10 + a12EvalQ9.units;
-                const p0Right = !evalPageValidated || a12EvalQ9Sel === q9val;
                 return (
                 <div className="space-y-3">
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
@@ -3797,15 +3800,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                     <div className="flex justify-center gap-2 px-3 py-2">
                       {a12EvalQ9.choices.map(c => {
                         const isSelected = a12EvalQ9Sel === c;
-                        const isCorrect = c === q9val;
                         let cls = "w-16 rounded border py-1.5 text-sm font-normal transition-colors ";
-                        if (evalPageValidated) {
-                          if (isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
-                          else if (!p0Right && isCorrect) cls += "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/20 font-semibold";
-                          else cls += "border-zinc-300 text-[var(--color-text-secondary)] opacity-50 dark:border-zinc-600";
-                        } else {
-                          cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
-                        }
+                        cls += isSelected ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-zinc-300 hover:border-[var(--color-accent-alg)] text-[var(--color-text-primary)] dark:border-zinc-600";
                         return (
                           <button key={c} type="button"
                             disabled={evalPageValidated}
@@ -3851,17 +3847,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       ))}
                     </ScaledCanvas>
                     <div className="mt-2">
-                      {evalPageValidated && parseInt(a12EvalQ10Ans) !== (a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u) ? (
-                        <div className="flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 px-3">
-                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{a12EvalQ10Ans || "—"}</span>
-                          <span className="text-xs font-bold text-amber-600 leading-none">{a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u}</span>
-                        </div>
-                      ) : (
-                        <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
-                          onChange={e => setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, ""))}
-                          placeholder="Total…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
-                          className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
-                      )}
+                      <AppInput label="" id="a12eval-q10" value={a12EvalQ10Ans}
+                        onChange={e => setA12EvalQ10Ans(e.target.value.replace(/[^0-9]/g, ""))}
+                        placeholder="Total…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
+                        className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
                     </div>
                     {zoomedEx === "eval-q10" && (
                       <ZoomModal onClose={() => setZoomedEx(null)}>
@@ -3903,18 +3892,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       return (
                         <div className="mt-3 flex w-full items-center gap-1 text-sm font-medium">
                           <span className="shrink-0">=</span>
-                          {fields11.map((f, fi) => {
-                            const wrong11 = evalPageValidated && parseInt(f.val) !== f.correct;
-                            const fieldCls = wrong11
-                              ? "w-0 flex-1 rounded-none border-0 border-b-2 border-amber-500 px-0 py-1 text-center text-sm outline-none"
-                              : inputCls;
-                            return (
-                              <React.Fragment key={f.key}>
-                                <input className={fieldCls} placeholder={f.label} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={f.val} onChange={e=>f.set(e.target.value.replace(/[^0-9]/g,""))} />
-                                {fi < 3 && <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>}
-                              </React.Fragment>
-                            );
-                          })}
+                          {fields11.map((f, fi) => (
+                            <React.Fragment key={f.key}>
+                              <input className={inputCls} placeholder={f.label} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={f.val} onChange={e=>f.set(e.target.value.replace(/[^0-9]/g,""))} />
+                              {fi < 3 && <span className="shrink-0 text-[var(--color-text-secondary)]">+</span>}
+                            </React.Fragment>
+                          ))}
                         </div>
                       );
                     })()}
@@ -3945,17 +3928,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <img src={a12EvalQ12.src} alt="cubes" className="max-h-72 w-auto object-contain" />
                     </div>
                     <div className="mt-2">
-                      {evalPageValidated && parseInt(a12EvalQ12Ans) !== a12EvalQ12.answer ? (
-                        <div className="flex h-10 flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 px-3">
-                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{a12EvalQ12Ans || "—"}</span>
-                          <span className="text-xs font-bold text-amber-600 leading-none">{a12EvalQ12.answer}</span>
-                        </div>
-                      ) : (
-                        <AppInput label="" id="a12eval-q12" value={a12EvalQ12Ans}
-                          onChange={e => setA12EvalQ12Ans(e.target.value.replace(/[^0-9]/g, ""))}
-                          placeholder="Cubes…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
-                          className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
-                      )}
+                      <AppInput label="" id="a12eval-q12" value={a12EvalQ12Ans}
+                        onChange={e => setA12EvalQ12Ans(e.target.value.replace(/[^0-9]/g, ""))}
+                        placeholder="Cubes…" inputMode="numeric" autoComplete="off" disabled={evalPageValidated}
+                        className="!bg-transparent !rounded-none !border-0 !border-b-2 !border-[var(--color-accent-alg)]/60 !px-0" />
                     </div>
                     {zoomedEx === "eval-q12" && (
                       <ZoomModal onClose={() => setZoomedEx(null)}>
@@ -3974,24 +3950,17 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 5</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex5[pivot] ? pivot : undefined} dir={showPivotTranslation && A12_EVAL_CONSIGNE_PIVOT.ex5[pivot] && isRtl ? "rtl" : "ltr"}>{a12EvalConsigne("ex5", "Décomposez les nombres.")} <span className="font-normal text-[var(--color-text-secondary)]">(1 pt chacun)</span></p>
                   {a12EvalEx14Nums.map((n, qi) => {
-                    const mV = Math.floor(n / 1000), cV = Math.floor((n % 1000) / 100), dV = Math.floor((n % 100) / 10), uV = n % 10;
-                    const hasM = mV > 0;
+                    const hasM = Math.floor(n / 1000) > 0;
                     const a = a12EvalEx14Ans[qi] ?? {m:"",c:"",d:"",u:""};
                     const setAns14 = (patch: Partial<{m:string;c:string;d:string;u:string}>) =>
                       setA12EvalEx14Ans(prev => prev.map((row, i) => i === qi ? {...row, ...patch} : row));
                     const inpCls14 = "w-full rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 pb-1.5 text-center text-sm outline-none focus-visible:border-[var(--color-accent-alg)]";
-                    const mkField14 = (val: string, correct: number, lbl: string, onChange: (v:string)=>void) => {
-                      const wrong14 = evalPageValidated && parseInt(val) !== correct;
-                      const fieldCls14 = wrong14
-                        ? "w-full rounded-none border-0 border-b-2 border-amber-500 px-0 pb-1.5 text-center text-sm outline-none"
-                        : inpCls14;
-                      return (
-                        <div className="flex flex-1 flex-col items-center gap-0.5">
-                          <input className={fieldCls14} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={val} onChange={e=>onChange(e.target.value.replace(/[^0-9]/g,""))} />
-                          <span className="text-xs text-[var(--color-text-secondary)]">{lbl}</span>
-                        </div>
-                      );
-                    };
+                    const mkField14 = (val: string, lbl: string, onChange: (v:string)=>void) => (
+                      <div className="flex flex-1 flex-col items-center gap-0.5">
+                        <input className={inpCls14} inputMode="numeric" autoComplete="off" disabled={evalPageValidated} value={val} onChange={e=>onChange(e.target.value.replace(/[^0-9]/g,""))} />
+                        <span className="text-xs text-[var(--color-text-secondary)]">{lbl}</span>
+                      </div>
+                    );
                     return (
                       <div key={qi} className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4">
                         <div className="mb-3 flex justify-center">
@@ -4000,14 +3969,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         <div className="flex items-start gap-1 text-sm font-medium text-[var(--color-text-primary)]">
                           <span className="mt-[7px] shrink-0">=</span>
                           {hasM && (<>
-                            {mkField14(a.m, mV * 1000, "millier", v => setAns14({m:v}))}
+                            {mkField14(a.m, "millier", v => setAns14({m:v}))}
                             <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
                           </>)}
-                          {mkField14(a.c, cV * 100, "centaine", v => setAns14({c:v}))}
+                          {mkField14(a.c, "centaine", v => setAns14({c:v}))}
                           <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
-                          {mkField14(a.d, dV * 10, "dizaine", v => setAns14({d:v}))}
+                          {mkField14(a.d, "dizaine", v => setAns14({d:v}))}
                           <span className="mt-[7px] shrink-0 text-[var(--color-text-secondary)]">+</span>
-                          {mkField14(a.u, uV, "unité", v => setAns14({u:v}))}
+                          {mkField14(a.u, "unité", v => setAns14({u:v}))}
                         </div>
                       </div>
                     );
@@ -4027,15 +3996,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <div className="flex flex-col gap-2">
                         {q.tags.map((tag, ti) => {
                           const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
-                          const shouldHighlight = evalPageValidated && ((tag.correct && !sel) || (!tag.correct && sel));
                           let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ";
-                          if (evalPageValidated) {
-                            if (shouldHighlight) cls += "border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-950/20";
-                            else if (sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
-                            else cls += "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-60 dark:border-zinc-600";
-                          } else {
-                            cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
-                          }
+                          cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                           return (
                             <button key={ti} type="button"
                               disabled={evalPageValidated}
@@ -4075,16 +4037,8 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             const isGiven = ci === q.givenIdx;
                             const val = vals[ci]!;
                             const ans = a12EvalEx16Ans[qi]?.[ci] ?? "";
-                            const wrong16 = evalPageValidated && !isGiven && parseInt(ans) !== val;
                             if (isGiven) {
                               cells16.push(<div key={`${r}${c}`} className="flex h-10 w-full items-center justify-center rounded-[var(--radius-md)] border border-zinc-300 bg-white text-sm font-bold tabular-nums text-[var(--color-text-primary)] dark:border-zinc-600 dark:bg-zinc-900">{val.toLocaleString("fr-CH")}</div>);
-                            } else if (wrong16) {
-                              cells16.push(
-                                <div key={`${r}${c}`} className={`flex h-10 w-full flex-col items-center justify-center rounded-[var(--radius-md)] border border-amber-400 text-sm font-bold tabular-nums`}>
-                                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{ans||"—"}</span>
-                                  <span className="text-xs font-bold text-amber-600 leading-none">{val.toLocaleString("fr-CH")}</span>
-                                </div>
-                              );
                             } else {
                               cells16.push(
                                 <input key={`${r}${c}`} type="text" inputMode="numeric" value={ans} disabled={evalPageValidated}
@@ -4130,7 +4084,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice 1</h2>
                   <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex1[pivot] ? pivot : undefined} dir={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex1[pivot] && isRtl ? "rtl" : "ltr"}>{a11EvalConsigne("ex1", "\u00c9crivez les nombres en lettres correctement.")}</p>
                   {evalItems_curr.slice(0, 4).map((ex, i) => (
-                    <ExerciseRow key={ex.id} rowIdx={i} noBorder
+                    <ExerciseRow key={ex.id} rowIdx={i} noBorder showCorrection={false}
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
                       answer={evalAnswers[ex.id] ?? ""} result={evalPageValidated ? answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable) : null}
                       validated={evalPageValidated} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
@@ -4147,21 +4101,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <p className="text-sm font-medium text-[var(--color-text-primary)]" lang={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex2[pivot] ? pivot : undefined} dir={showPivotTranslation && A11_EVAL_CONSIGNE_PIVOT.ex2[pivot] && isRtl ? "rtl" : "ltr"}>{a11EvalConsigne("ex2", "\u00c9coutez et \u00e9crivez les nombres.")}</p>
                   {evalItems_curr.slice(4, 8).map((ex, i) => {
                     const audioAns = evalAnswers[ex.id] ?? "";
-                    const audioWrong = evalPageValidated && !answerMatches(audioAns, ex.acceptable);
                     return (
                       <div key={ex.id} className="flex items-center gap-3">
                         <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
                         <SequentialAudioButton clips={ex.clips!} />
                         {evalPageValidated ? (
-                          <div className={`flex flex-1 h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 px-0 ${audioWrong ? "border-amber-400" : "border-[var(--color-border-default)]"}`}>
-                            {audioWrong ? (
-                              <>
-                                <span className="text-xs text-[var(--color-text-primary)] leading-none">{audioAns || "—"}</span>
-                                <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
-                              </>
-                            ) : (
-                              <span className="text-sm font-medium text-[var(--color-text-primary)]">{audioAns}</span>
-                            )}
+                          <div className="flex flex-1 h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-border-default)] px-0">
+                            <span className="text-sm font-medium text-[var(--color-text-primary)]">{audioAns}</span>
                           </div>
                         ) : (
                           <AppInput label="" id={`eval-${ex.id}`} value={audioAns}
@@ -4187,17 +4133,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         {displayNums.map((num, ni) => {
                           if (ni === ex.blankIdx) {
                             const seriesAns = evalAnswers[ex.id] ?? "";
-                            const seriesWrong = evalPageValidated && !answerMatches(seriesAns, ex.acceptable);
                             return evalPageValidated ? (
-                              <div key={ni} className={`flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-none border-0 border-b-2 text-sm font-medium tabular-nums ${seriesWrong ? "border-amber-400" : "border-zinc-300 dark:border-zinc-600"}`}>
-                                {seriesWrong ? (
-                                  <>
-                                    <span className="text-xs text-[var(--color-text-primary)] leading-none">{seriesAns || "—"}</span>
-                                    <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
-                                  </>
-                                ) : (
-                                  <span className="text-[var(--color-text-primary)]">{seriesAns}</span>
-                                )}
+                              <div key={ni} className="flex h-10 min-w-0 flex-1 flex-col items-center justify-center rounded-none border-0 border-b-2 border-zinc-300 text-sm font-medium tabular-nums dark:border-zinc-600">
+                                <span className="text-[var(--color-text-primary)]">{seriesAns}</span>
                               </div>
                             ) : (
                               <input key={ni} type="text" inputMode="numeric"
@@ -4227,20 +4165,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               const ex = evalItems_curr[evalPageIdx];
               if (!ex) return null;
               const genAns = evalAnswers[ex.id] ?? "";
-              const genWrong = evalPageValidated && !answerMatches(genAns, ex.acceptable);
               return (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-3">
                   <p className="mb-3 text-sm font-medium text-[var(--color-text-primary)]">{ex.promptFr}</p>
                   {evalPageValidated ? (
-                    <div className={`flex h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 px-0 ${genWrong ? "border-amber-400" : "border-[var(--color-border-default)]"}`}>
-                      {genWrong ? (
-                        <>
-                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{genAns || "—"}</span>
-                          <span className="text-xs font-bold text-amber-600 leading-none">{ex.acceptable[0]}</span>
-                        </>
-                      ) : (
-                        <span className="text-sm font-medium text-[var(--color-text-primary)]">{genAns}</span>
-                      )}
+                    <div className="flex h-10 flex-col items-center justify-center rounded-none border-0 border-b-2 border-[var(--color-border-default)] px-0">
+                      <span className="text-sm font-medium text-[var(--color-text-primary)]">{genAns}</span>
                     </div>
                   ) : (
                     <AppInput label="" id={`eval-${ex.id}`} value={genAns}
@@ -4256,28 +4186,67 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
             {evalSubmitted && evalGrade !== null && (() => {
               const earnedPts = Object.values(evalResults).filter(Boolean).length;
-              let rows: Array<{ label: string; score: number; max: number }> = [];
+              type DetailLine = { q: string; your: string; correct: string; ok: boolean };
+              let rows: Array<{ label: string; score: number; max: number; detail: DetailLine[] }> = [];
               if (lesson.submoduleId === "A1-2") {
+                const q9val = a12EvalQ9.tens * 10 + a12EvalQ9.units;
+                const q10val = a12EvalQ10.h * 100 + a12EvalQ10.d * 10 + a12EvalQ10.u;
                 rows = [
-                  { label: "Lire les blocs",        score: evalResults.q9  ? 1 : 0,                                             max: 1 },
-                  { label: "Écrire le nombre",       score: evalResults.q10 ? 1 : 0,                                             max: 1 },
-                  { label: "Décomposer en blocs",    score: evalResults.q11 ? 1 : 0,                                             max: 1 },
-                  { label: "Compter les cubes",      score: evalResults.q12 ? 1 : 0,                                             max: 1 },
-                  { label: "Décomposer (×2)",        score: ["q14_0","q14_1"].filter(k => evalResults[k]).length,                max: 2 },
-                  { label: "Étiquettes (×2)",        score: ["q15_0","q15_1"].filter(k => evalResults[k]).length,                max: 2 },
-                  { label: "Grille flèches (×2)",    score: ["q16_0","q16_1"].filter(k => evalResults[k]).length,                max: 2 },
+                  { label: "Lire les blocs", score: evalResults.q9 ? 1 : 0, max: 1, detail: [
+                    { q: "Nombre représenté par les blocs", your: a12EvalQ9Sel !== null ? String(a12EvalQ9Sel) : "—", correct: String(q9val), ok: !!evalResults.q9 },
+                  ] },
+                  { label: "Écrire le nombre", score: evalResults.q10 ? 1 : 0, max: 1, detail: [
+                    { q: "Total des blocs", your: a12EvalQ10Ans || "—", correct: String(q10val), ok: !!evalResults.q10 },
+                  ] },
+                  { label: "Décomposer en blocs", score: evalResults.q11 ? 1 : 0, max: 1, detail: [
+                    { q: "Décomposition M+C+D+U", your: `${a12EvalQ11Ans.m || "_"} + ${a12EvalQ11Ans.c || "_"} + ${a12EvalQ11Ans.d || "_"} + ${a12EvalQ11Ans.u || "_"}`,
+                      correct: `${a12EvalQ11.m * 1000} + ${a12EvalQ11.c * 100} + ${a12EvalQ11.d * 10} + ${a12EvalQ11.u}`, ok: !!evalResults.q11 },
+                  ] },
+                  { label: "Compter les cubes", score: evalResults.q12 ? 1 : 0, max: 1, detail: [
+                    { q: "Nombre de cubes", your: a12EvalQ12Ans || "—", correct: String(a12EvalQ12.answer), ok: !!evalResults.q12 },
+                  ] },
+                  { label: "Décomposer (×2)", score: ["q14_0","q14_1"].filter(k => evalResults[k]).length, max: 2, detail: a12EvalEx14Nums.map((n, qi) => {
+                    const m = Math.floor(n / 1000), c = Math.floor((n % 1000) / 100), d = Math.floor((n % 100) / 10), u = n % 10;
+                    const a = a12EvalEx14Ans[qi] ?? { m: "", c: "", d: "", u: "" };
+                    return { q: `Décomposer ${n.toLocaleString("fr-CH")}`,
+                      your: `${a.m || "_"} + ${a.c || "_"} + ${a.d || "_"} + ${a.u || "_"}`,
+                      correct: `${m * 1000} + ${c * 100} + ${d * 10} + ${u}`, ok: !!evalResults[`q14_${qi}`] };
+                  }) },
+                  { label: "Étiquettes (×2)", score: ["q15_0","q15_1"].filter(k => evalResults[k]).length, max: 2, detail: a12EvalEx15Qs.map((q, qi) => {
+                    const sel = a12EvalEx15Sel[qi] ?? [];
+                    return { q: `Étiquettes égales à ${q.refDisplay}`,
+                      your: q.tags.filter((_, ti) => sel[ti]).map(t => t.label).join(", ") || "—",
+                      correct: q.tags.filter(t => t.correct).map(t => t.label).join(", "), ok: !!evalResults[`q15_${qi}`] };
+                  }) },
+                  { label: "Grille flèches (×2)", score: ["q16_0","q16_1"].filter(k => evalResults[k]).length, max: 2, detail: a12EvalEx16Qs.map((q, qi) => {
+                    const vals = [q.tl, q.tr, q.bl, q.br];
+                    const ans = a12EvalEx16Ans[qi] ?? ["", "", "", ""];
+                    const yourVals: string[] = [], correctVals: string[] = [];
+                    vals.forEach((v, vi) => { if (vi === q.givenIdx) return; yourVals.push(ans[vi] || "—"); correctVals.push(v.toLocaleString("fr-CH")); });
+                    return { q: "Nombres manquants de la grille", your: yourVals.join(", "), correct: correctVals.join(", "), ok: !!evalResults[`q16_${qi}`] };
+                  }) },
                 ];
               } else if (lesson.submoduleId === "A1-1") {
+                const mkDetail = (items: EvalItem[], qLabel?: (e: EvalItem, i: number) => string) => items.map((e, i) => ({
+                  q: qLabel ? qLabel(e, i) : e.promptFr,
+                  your: evalAnswers[e.id] || "—",
+                  correct: e.acceptable[0]!,
+                  ok: !!evalResults[e.id],
+                }));
                 rows = [
-                  { label: "Écrire en lettres",  score: evalItems_curr.slice(0, 4).filter(e => evalResults[e.id]).length,  max: 4 },
-                  { label: "Écouter & écrire",   score: evalItems_curr.slice(4, 8).filter(e => evalResults[e.id]).length,  max: 4 },
-                  { label: "Séries de nombres",  score: evalItems_curr.slice(8).filter(e => evalResults[e.id]).length,     max: evalItems_curr.slice(8).length },
+                  { label: "Écrire en lettres",  score: evalItems_curr.slice(0, 4).filter(e => evalResults[e.id]).length,  max: 4,
+                    detail: mkDetail(evalItems_curr.slice(0, 4)) },
+                  { label: "Écouter & écrire",   score: evalItems_curr.slice(4, 8).filter(e => evalResults[e.id]).length,  max: 4,
+                    detail: mkDetail(evalItems_curr.slice(4, 8), (_e, i) => `Dictée audio ${i + 1}`) },
+                  { label: "Séries de nombres",  score: evalItems_curr.slice(8).filter(e => evalResults[e.id]).length,     max: evalItems_curr.slice(8).length,
+                    detail: mkDetail(evalItems_curr.slice(8), e => (e.seriesNums ?? []).map((n, ni) => ni === e.blankIdx ? "__" : n).join(", ")) },
                 ];
               } else {
                 rows = evalItems_curr.map(e => ({
                   label: e.promptFr.length > 42 ? e.promptFr.slice(0, 42) + "…" : e.promptFr,
                   score: evalResults[e.id] ? 1 : 0,
                   max: 1,
+                  detail: [{ q: e.promptFr, your: evalAnswers[e.id] || "—", correct: e.acceptable[0]!, ok: !!evalResults[e.id] }],
                 }));
               }
               return (
@@ -4286,10 +4255,34 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   <ul className="space-y-2">
                     {rows.map((row, i) => {
                       const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
+                      const isOpen = evalExpandedRow === i;
                       return (
-                        <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
-                          <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                          <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                        <li key={i} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+                          <button type="button"
+                            onClick={() => setEvalExpandedRow(isOpen ? null : i)}
+                            className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left">
+                            <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                            <span className="flex items-center gap-2">
+                              <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+                                className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isOpen ? "rotate-180" : ""}`}>
+                                <path d="M6 9l6 6 6-6" />
+                              </svg>
+                            </span>
+                          </button>
+                          {isOpen && (
+                            <div className="space-y-2 border-t border-[var(--color-border-default)] px-4 py-3">
+                              {row.detail.map((d, di) => (
+                                <div key={di} className="text-sm">
+                                  <p className="text-[var(--color-text-secondary)]">{d.q}</p>
+                                  <p>
+                                    <span className={d.ok ? "text-green-600" : "text-[var(--color-text-secondary)]"}>{d.your}</span>
+                                    {!d.ok && <span className="ml-2 font-bold text-amber-600">→ {d.correct}</span>}
+                                  </p>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                         </li>
                       );
                     })}

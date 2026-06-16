@@ -10,6 +10,7 @@ import { getMathModule } from "@/lib/curriculum/math-data";
 import { getLessonBySubmoduleId, getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
 import { linearSwissGrade, PASSING_GRADE } from "@/lib/scoring";
+import { EvalRevealContext } from "@/lib/eval-reveal-context";
 import { usePivotLang } from "@/components/math/usePivotLang";
 import { useTranslation } from "@/components/TranslationProvider";
 import type { PivotCode } from "@/lib/pivot-langs";
@@ -2169,6 +2170,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                       isInEvalExercises && isActiveEval ? "" :
                       (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 [&_h2]:hidden" : "hidden")
                     }>
+                      <EvalRevealContext.Provider value={isResultsPage}>
                       {renderEvalStep(
                         evalStep,
                         isActiveEval ? (evalValidateCommands[i] ?? 0) : (isResultsSelected ? (evalValidateCommands[i] ?? 0) : 0),
@@ -2195,6 +2197,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                           }
                         }
                       )}
+                      </EvalRevealContext.Provider>
                     </div>
                   </div>
                 );
