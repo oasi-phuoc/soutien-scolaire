@@ -2206,6 +2206,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
   const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
+  const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2270,6 +2271,32 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const evalIdxRef = React.useRef(0);
   evalIdxRef.current = evalIdx;
 
+  const evalValidatedRef = React.useRef(evalValidated);
+  evalValidatedRef.current = evalValidated;
+
+  // Auto-advance in eval phase after validation
+  useEffect(() => {
+    if (!evalAutoAdvance || !isEvalPhase) return;
+    const t = setTimeout(() => {
+      const validated = evalValidatedRef.current;
+      const allDone = validated.every(Boolean);
+      if (allDone) {
+        if (hasEval && resultsIdx >= 0) setStepIdx(resultsIdx);
+      } else {
+        const i = evalIdxRef.current;
+        const nextAfter = validated.findIndex((v, j) => j > i && !v);
+        const nextAny = validated.findIndex(v => !v);
+        const next = nextAfter !== -1 ? nextAfter : nextAny;
+        if (next !== -1) {
+          setEvalIdx(next);
+          setCanValidate(true);
+        }
+      }
+    }, 500);
+    return () => clearTimeout(t);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [evalAutoAdvance, isEvalPhase]);
+
   const handleValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
     void allCorrect;
     setCanValidate(false);
@@ -2280,6 +2307,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     setEvalPassed((prev) => prev.map((v, j) => (j === i ? allCorrect : v)));
     setEvalValidated((prev) => prev.map((v, j) => (j === i ? true : v)));
     setCanValidate(false);
+    setEvalAutoAdvance(v => v + 1);
   }, []);
 
   function startEval() {
@@ -2299,14 +2327,13 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       return;
     }
     if (isEvalPhase) {
-      let prev = evalIdx - 1;
-      while (prev >= 0 && evalValidated[prev]) prev--;
-      if (prev < 0) {
+      if (evalIdx > 0) {
+        const newIdx = evalIdx - 1;
+        setEvalIdx(newIdx);
+        setCanValidate(!evalValidated[newIdx]);
+      } else {
         setShowFreeNavWarning(true);
         setTimeout(() => setShowFreeNavWarning(false), 3000);
-      } else {
-        setEvalIdx(prev);
-        setCanValidate(!evalValidated[prev]);
       }
       return;
     }
@@ -2333,11 +2360,9 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       if (allEvalValidated) {
         setStepIdx(resultsIdx);
       } else {
-        let next = evalIdx + 1;
-        while (next < evalExercises.length && evalValidated[next]) next++;
-        if (next >= evalExercises.length) { next = 0; while (next < evalExercises.length && evalValidated[next]) next++; }
-        setEvalIdx(next);
-        setCanValidate(!evalValidated[next]);
+        const newIdx = evalIdx >= evalExercises.length - 1 ? 0 : evalIdx + 1;
+        setEvalIdx(newIdx);
+        setCanValidate(!evalValidated[newIdx]);
       }
       return;
     }
@@ -2564,15 +2589,18 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
               <div className="mb-4">
                 <div className="mb-1 flex items-center justify-between">
                   <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-                  <p className="text-xs text-[var(--color-text-secondary)]">{evalIdx + 1} / {evalExercises.length}</p>
+                  <p className="text-xs text-[var(--color-text-secondary)]">{evalExercises.length - evalValidated.filter(Boolean).length} restant(s)</p>
                 </div>
                 <div className="flex gap-1">
                   {evalExercises.map((_, i) => {
                     if (evalValidated[i]) return null;
                     return (
-                      <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-                        i === evalIdx ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
-                      }`} />
+                      <div
+                        key={i}
+                        className={`h-1.5 flex-1 rounded-full transition-colors ${
+                          i === evalIdx ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                        }`}
+                      />
                     );
                   })}
                 </div>

@@ -13,9 +13,12 @@ interface EvalProgressBarProps {
   total: number;
   /** Seconds remaining; null/undefined = no timer displayed */
   timeLeft?: number | null;
+  /** Number of already-validated exercises (their segments disappear) */
+  validatedCount?: number;
 }
 
-export default function EvalProgressBar({ current, total, timeLeft }: EvalProgressBarProps) {
+export default function EvalProgressBar({ current, total, timeLeft, validatedCount = 0 }: EvalProgressBarProps) {
+  const remaining = total - validatedCount;
   return (
     <div className="mb-6">
       <div className="mb-1 flex items-center justify-between">
@@ -30,22 +33,21 @@ export default function EvalProgressBar({ current, total, timeLeft }: EvalProgre
               {formatTime(timeLeft)}
             </span>
           )}
-          <p className="text-xs text-[var(--color-text-secondary)]">{current + 1} / {total}</p>
+          <p className="text-xs text-[var(--color-text-secondary)]">{remaining} restant(s)</p>
         </div>
       </div>
       <div className="flex gap-1">
-        {Array.from({ length: total }).map((_, i) => (
-          <div
-            key={i}
-            className={`h-1.5 flex-1 rounded-full transition-colors ${
-              i < current
-                ? "bg-amber-500"
-                : i === current
-                  ? "bg-amber-500 opacity-60"
-                  : "bg-[var(--color-border-default)]"
-            }`}
-          />
-        ))}
+        {Array.from({ length: total }).map((_, i) => {
+          if (i < validatedCount) return null;
+          return (
+            <div
+              key={i}
+              className={`h-1.5 flex-1 rounded-full transition-colors ${
+                i === current ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+              }`}
+            />
+          );
+        })}
       </div>
     </div>
   );

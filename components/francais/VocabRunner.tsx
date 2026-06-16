@@ -142,24 +142,33 @@ export function VocabRunner({ theme }: Props) {
   }
 
   function handleEvalValidated(idx: number, correct: number, total: number) {
-    setEvalScores((prev) => {
-      const next = [...prev];
-      next[idx] = { correct, total };
-      return next;
-    });
-    setEvalValidated((prev) => prev.map((v, j) => (j === idx ? true : v)));
+    const newScores = [...evalScores];
+    newScores[idx] = { correct, total };
+    setEvalScores(newScores);
+    const newValidated = evalValidated.map((v, j) => (j === idx ? true : v));
+    setEvalValidated(newValidated);
     setValidated(true);
+    // Auto-advance to next non-validated exercise or results
+    const allDone = newValidated.every(Boolean);
+    if (allDone) {
+      setTimeout(() => setStepIdx(steps.length - 1), 500);
+    } else {
+      const nextAfter = newValidated.findIndex((v, j) => j > idx && !v);
+      const nextAny = newValidated.findIndex(v => !v);
+      const next = nextAfter !== -1 ? nextAfter : nextAny;
+      if (next !== -1) {
+        setTimeout(() => setStepIdx(evalExFirst + next), 500);
+      }
+    }
   }
 
   function goBack() {
     if (isInEvalPhase) {
-      let prev = evalExIdx - 1;
-      while (prev >= 0 && evalValidated[prev]) prev--;
-      if (prev < 0) {
+      if (evalExIdx <= 0) {
         setShowFreeNavWarning(true);
         setTimeout(() => setShowFreeNavWarning(false), 3000);
       } else {
-        setStepIdx(evalExFirst + prev);
+        setStepIdx((s) => s - 1);
       }
       return;
     }
@@ -197,9 +206,7 @@ export function VocabRunner({ theme }: Props) {
       if (allEvalValidated) {
         setStepIdx(steps.length - 1);
       } else {
-        let next = evalExIdx + 1;
-        while (next < evalTotal && evalValidated[next]) next++;
-        if (next >= evalTotal) { next = 0; while (next < evalTotal && evalValidated[next]) next++; }
+        const next = evalExIdx >= evalTotal - 1 ? 0 : evalExIdx + 1;
         setStepIdx(evalExFirst + next);
       }
       return;
@@ -414,15 +421,18 @@ export function VocabRunner({ theme }: Props) {
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{evalExIdx + 1} / {evalTotal}</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalTotal - evalValidated.filter(Boolean).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
             {Array.from({ length: evalTotal }).map((_, i) => {
               if (evalValidated[i]) return null;
               return (
-                <div key={i} className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i === evalExIdx ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
-                }`} />
+                <div
+                  key={i}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${
+                    i === evalExIdx ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                  }`}
+                />
               );
             })}
           </div>
