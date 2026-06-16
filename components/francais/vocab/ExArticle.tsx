@@ -4,6 +4,7 @@ import type { VocabWord, VocabTheme } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, shuffle, normalizeText,
 } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type WordState = { answer: string; checked: boolean; correct: boolean; displayAnswer?: string };
 
@@ -66,6 +67,7 @@ export function ExArticle({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(words.length > 0); }, []);
@@ -120,7 +122,7 @@ export function ExArticle({
             <div key={w.word} className="flex min-w-0 items-center gap-2 overflow-hidden">
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
-                {s.checked && !s.correct ? (
+                {s.checked && !s.correct && revealCorrection ? (
                   <div className="flex w-16 flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5 text-center">
                     <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
                     <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{s.displayAnswer ?? w.article ?? ""}</span>
@@ -136,7 +138,7 @@ export function ExArticle({
                       }))
                     }
                     className="w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
-                    readOnly={s.checked && s.correct}
+                    readOnly={s.checked}
                   />
                 )}
                 <span className="truncate text-sm text-[var(--color-text-primary)]">{w.word}</span>

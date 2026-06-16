@@ -4,6 +4,7 @@ import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import {
   ExerciseProps, pickN, playWord, normalizeText, SoundIcon,
 } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 
@@ -15,6 +16,7 @@ export function ExDictation({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(words.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -60,7 +62,7 @@ export function ExDictation({
                   <SoundIcon />
                 </button>
               </div>
-              {s.checked && !s.correct ? (
+              {s.checked && !s.correct && revealCorrection ? (
                 <div className="flex w-full flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
                   <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
                   <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{w.word}</span>
@@ -76,7 +78,7 @@ export function ExDictation({
                     }))
                   }
                   className="w-full rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
-                  readOnly={s.checked && s.correct}
+                  readOnly={s.checked}
                 />
               )}
             </div>

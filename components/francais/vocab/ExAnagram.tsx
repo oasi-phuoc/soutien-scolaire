@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN, shuffle, normalizeText } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type LetterTile = { id: string; char: string };
 type WordAnagram = {
@@ -28,6 +29,7 @@ export function ExAnagram({
       correct: false,
     }))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -90,7 +92,7 @@ export function ExAnagram({
               {/* Row 1: number + answer line */}
               <div className="flex items-center gap-2">
                 <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-                {item.checked ? (
+                {item.checked && revealCorrection ? (
                   /* Correction in-place: strikethrough wrong + correct on same line */
                   <div className="flex min-h-[2rem] flex-1 items-center gap-2 border-b-2 border-amber-400/40 pb-0.5">
                     <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtWord || "—"}</span>

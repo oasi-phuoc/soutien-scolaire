@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, pickN, normalizeText } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type WordState = { answer: string; checked: boolean; correct: boolean };
 type WordEntry = { word: VocabWord; mascArt: string };
@@ -59,6 +60,7 @@ export function ExMascFem({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(entries.map((e) => [e.word.word, { answer: "", checked: false, correct: false }]))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -99,7 +101,7 @@ export function ExMascFem({
                 {mascDisplay}
               </span>
               <span className="shrink-0 text-xs text-[var(--color-text-tertiary)]">→</span>
-              {s.checked && !s.correct ? (
+              {s.checked && !s.correct && revealCorrection ? (
                 <div className="flex flex-1 min-w-0 flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5">
                   <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
                   <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{correctFemDisplay(w.feminine!, mascArt)}</span>
