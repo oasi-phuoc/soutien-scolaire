@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState, Fragment } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type ValidatedProps = {
   validateCommand: number;
@@ -163,6 +164,7 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
   });
   type State = { num: string; den: string; status: FracStatus };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ num: "", den: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -189,20 +191,22 @@ export function PctToFracExercise({ validateCommand, onValidated, exNum }: Valid
       <div className="space-y-4">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.pct}%</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
-              {s.status === "correct" ? (
+              {dispStatus === "correct" ? (
                 <FracInput numVal={s.num} denVal={s.den} onNum={() => {}} onDen={() => {}} status="correct" disabled />
-              ) : s.status === "wrong" ? (
+              ) : dispStatus === "wrong" ? (
                 <FracInput numVal={s.num} denVal={s.den} onNum={() => {}} onDen={() => {}}
                   status="wrong" disabled correctNum={String(q.num)} correctDen={String(q.den)} />
               ) : (
                 <FracInput numVal={s.num} denVal={s.den}
                   onNum={v => set(i, "num", v)} onDen={v => set(i, "den", v)}
-                  status="idle" disabled={false} />
+                  status="idle" disabled={locked} />
               )}
             </div>
           );
@@ -230,6 +234,7 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
   });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -260,20 +265,22 @@ export function PctToDecExercise({ validateCommand, onValidated, exNum }: Valida
       <div className="space-y-3">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.pct}</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
-              {s.status === "wrong" ? (
+              {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.dec}</span>
                 </div>
               ) : (
-                <input type="text" value={s.ans} disabled={s.status === "correct"}
+                <input type="text" value={s.ans} disabled={locked}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
-                  className={inputCls(s.status)} />
+                  className={inputCls(dispStatus)} />
               )}
             </div>
           );
@@ -300,6 +307,7 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
   });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -329,20 +337,22 @@ export function FracToPctExercise({ validateCommand, onValidated, exNum }: Valid
       <div className="space-y-3">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <VFrac n={q.num} d={q.den} />
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
-              {s.status === "wrong" ? (
+              {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
-                <input type="text" value={s.ans} disabled={s.status === "correct"}
+                <input type="text" value={s.ans} disabled={locked}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
-                  placeholder="%" className={inputCls(s.status)} />
+                  placeholder="%" className={inputCls(dispStatus)} />
               )}
             </div>
           );
@@ -369,6 +379,7 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
   });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -398,20 +409,22 @@ export function DecToPctExercise({ validateCommand, onValidated, exNum }: Valida
       <div className="space-y-3">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <div key={i} className="flex items-center gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] w-4 shrink-0">{i + 1}.</span>
               <span className="text-sm font-semibold text-[var(--color-text-primary)] min-w-[3.5rem]">{q.dec}</span>
               <span className="text-sm text-[var(--color-text-secondary)]">=</span>
-              {s.status === "wrong" ? (
+              {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
-                <input type="text" value={s.ans} disabled={s.status === "correct"}
+                <input type="text" value={s.ans} disabled={locked}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
-                  placeholder="%" className={inputCls(s.status)} />
+                  placeholder="%" className={inputCls(dispStatus)} />
               )}
             </div>
           );
@@ -427,6 +440,7 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
   const [questions] = useState(() => shuffle(PCT_OF_NUM_POOL).slice(0, 5));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -450,20 +464,22 @@ export function PctOfNumExercise({ validateCommand, onValidated, exNum }: Valida
       <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{q.pct}% de {q.num}</span>
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
-              {s.status === "wrong" ? (
+              {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.ans}</span>
                 </div>
               ) : (
-                <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+                <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
-                  className={simpleCls(s.status)} />
+                  className={simpleCls(dispStatus)} />
               )}
             </Fragment>
           );
@@ -507,6 +523,7 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
   });
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -543,24 +560,26 @@ export function PctTableExercise({ validateCommand, onValidated, exNum }: Valida
         <span className="text-xs font-bold text-[var(--color-accent-alg)] pb-1">Variation</span>
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           const ansStr = q.missing === "init" ? String(q.init)
                        : q.missing === "final" ? String(q.final)
                        : fmtVar(q.variationNum);
           const cell = (col: "init" | "final" | "variation") => {
             if (q.missing === col) {
-              return s.status === "wrong" ? (
+              return dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansStr}</span>
                 </div>
               ) : (
                 <input type="text" inputMode={col === "variation" ? "text" : "decimal"} value={s.ans}
-                  disabled={s.status === "correct"}
+                  disabled={locked}
                   onChange={e => {
                     const filtered = col === "variation" ? e.target.value.replace(/[^0-9,.%+\-]/g, "") : e.target.value.replace(/[^0-9,.]/g, "");
                     setStates(prev => prev.map((x, j) => j === i ? { ans: filtered, status: "idle" } : x));
                   }}
-                  className={simpleCls(s.status)} />
+                  className={simpleCls(dispStatus)} />
               );
             }
             const display = col === "init" ? String(q.init) : col === "final" ? String(q.final) : fmtVar(q.variationNum);
@@ -603,17 +622,20 @@ function pickMixed(pool: PctChangeItem[]): PctChangeItem[] {
   return shuffle([...plus.slice(0, nPlus), ...minus.slice(0, 5 - nPlus)]);
 }
 
-function A63Grid({ questions, states, setStates, ansKey }: {
+function A63Grid({ questions, states, setStates, ansKey, revealCorrection }: {
   questions: PctChangeItem[];
   states: { ans: string; status: "idle" | "correct" | "wrong" }[];
   setStates: React.Dispatch<React.SetStateAction<{ ans: string; status: "idle" | "correct" | "wrong" }[]>>;
   ansKey: "ans" | "diff";
+  revealCorrection: boolean;
 }) {
   return (
     <div className="grid grid-cols-[auto_auto_auto_auto_auto_auto] items-center gap-x-2 gap-y-4 w-fit">
       {questions.map((q, i) => {
         const s = states[i]!;
         const correct = q[ansKey];
+        const locked = s.status !== "idle";
+        const dispStatus = revealCorrection ? s.status : "idle";
         return (
           <Fragment key={i}>
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -621,15 +643,15 @@ function A63Grid({ questions, states, setStates, ansKey }: {
             <span className="text-sm text-[var(--color-text-primary)]">{q.op}</span>
             <span className="text-sm text-[var(--color-text-primary)]">{q.pct}%</span>
             <span className="text-sm text-[var(--color-text-primary)]">=</span>
-            {s.status === "wrong" ? (
+            {dispStatus === "wrong" ? (
               <div className={WRONG_CLS}>
                 <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                 <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{correct}</span>
               </div>
             ) : (
-              <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+              <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
                 onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.]/g, ""), status: "idle" } : x))}
-                className={simpleCls(s.status)} />
+                className={simpleCls(dispStatus)} />
             )}
           </Fragment>
         );
@@ -644,6 +666,7 @@ export function PctDiffExercise({ validateCommand, onValidated, exNum }: Validat
   const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -664,7 +687,7 @@ export function PctDiffExercise({ validateCommand, onValidated, exNum }: Validat
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">De combien la valeur augmente ou diminue ?</p>
-      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" />
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="diff" revealCorrection={revealCorrection} />
     </div>
   );
 }
@@ -675,6 +698,7 @@ export function PctChangeExercise({ validateCommand, onValidated, exNum }: Valid
   const [questions] = useState(() => pickMixed(PCT_CHANGE_POOL));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -695,7 +719,7 @@ export function PctChangeExercise({ validateCommand, onValidated, exNum }: Valid
     <div>
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-alg)]">Exercice {exNum}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">Calculez les valeurs finales.</p>
-      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" />
+      <A63Grid questions={questions} states={states} setStates={setStates} ansKey="ans" revealCorrection={revealCorrection} />
     </div>
   );
 }
@@ -731,6 +755,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
     });
   });
   const [states, setStates] = useState<MultState[]>(() => questions.map(() => ({ choice: null, status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -753,6 +778,8 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
       <div className="grid grid-cols-[auto_1fr] items-start gap-x-3 gap-y-4">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)] pt-0.5">{i + 1}.</span>
@@ -765,11 +792,11 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                     const isSel = s.choice === opt;
                     const isCor = opt === q.correct;
                     let cls = "w-20 text-center py-1 rounded-xl text-sm border transition-colors ";
-                    if (s.status === "idle") {
+                    if (dispStatus === "idle") {
                       cls += isSel
                         ? "border-[var(--color-accent-alg)] bg-blue-100 dark:bg-blue-950/40"
                         : "border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 cursor-pointer hover:border-[var(--color-accent-alg)]/60";
-                    } else if (s.status === "correct") {
+                    } else if (dispStatus === "correct") {
                       cls += isSel
                         ? "border-green-400 bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400"
                         : "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
@@ -779,7 +806,7 @@ export function PctMultiplierExercise({ validateCommand, onValidated, exNum }: V
                       else             cls += "border-zinc-200 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-400";
                     }
                     return (
-                      <button key={opt} disabled={s.status !== "idle"}
+                      <button key={opt} disabled={locked}
                         onClick={() => setStates(prev => prev.map((x, j) => j === i ? { choice: opt, status: "idle" } : x))}
                         className={cls}>
                         {opt}
@@ -910,6 +937,7 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
     return types.map(t => shuffle(WORD_TEMPLATES.filter(tmpl => tmpl.pType === t))[0]!.gen());
   });
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -933,22 +961,24 @@ export function PctWordExercise({ validateCommand, onValidated, exNum }: Validat
       <div className="space-y-5">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           const ansDisplay = q.pctAnswer ? `${q.ans}%` : String(q.ans);
           return (
             <div key={i} className="flex items-start gap-3">
               <span className="text-sm font-bold text-[var(--color-accent-alg)] shrink-0 pt-0.5">{i + 1}.</span>
               <div className="flex flex-col gap-2">
                 <span className="text-sm text-[var(--color-text-primary)]">{q.text}</span>
-                {s.status === "wrong" ? (
+                {dispStatus === "wrong" ? (
                   <div className={WRONG_CLS}>
                     <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                     <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{ansDisplay}</span>
                   </div>
                 ) : (
-                  <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+                  <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
                     onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
                     placeholder={q.pctAnswer ? "%" : ""}
-                    className={simpleCls(s.status)} />
+                    className={simpleCls(dispStatus)} />
                 )}
               </div>
             </div>
@@ -965,6 +995,7 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
   const [questions] = useState(() => shuffle(PART_TO_PCT_POOL).slice(0, 5));
   type State = { ans: string; status: "idle" | "correct" | "wrong" };
   const [states, setStates] = useState<State[]>(() => questions.map(() => ({ ans: "", status: "idle" })));
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand === 0) return;
@@ -988,20 +1019,22 @@ export function PartToPctExercise({ validateCommand, onValidated, exNum }: Valid
       <div className="grid grid-cols-[auto_auto_auto_auto] items-center gap-x-2 gap-y-3 w-fit">
         {questions.map((q, i) => {
           const s = states[i]!;
+          const locked = s.status !== "idle";
+          const dispStatus = revealCorrection ? s.status : "idle";
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{q.part} sur {q.total}</span>
               <span className="text-sm text-[var(--color-text-primary)]">=</span>
-              {s.status === "wrong" ? (
+              {dispStatus === "wrong" ? (
                 <div className={WRONG_CLS}>
                   <span className="text-[10px] text-zinc-700 dark:text-zinc-300 leading-none">{s.ans || "—"}</span>
                   <span className="text-xs font-bold text-amber-600 dark:text-amber-400 leading-none">{q.pct}%</span>
                 </div>
               ) : (
-                <input type="text" inputMode="decimal" value={s.ans} disabled={s.status === "correct"}
+                <input type="text" inputMode="decimal" value={s.ans} disabled={locked}
                   onChange={e => setStates(prev => prev.map((x, j) => j === i ? { ans: e.target.value.replace(/[^0-9,.%]/g, ""), status: "idle" } : x))}
-                  placeholder="%" className={simpleCls(s.status)} />
+                  placeholder="%" className={simpleCls(dispStatus)} />
               )}
             </Fragment>
           );
