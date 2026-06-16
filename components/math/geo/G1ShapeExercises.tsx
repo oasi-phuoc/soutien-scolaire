@@ -1,5 +1,6 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 // ── Shape data ─────────────────────────────────────────────────────────────────
 
@@ -106,6 +107,7 @@ export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExPr
   );
   const [states, setStates] = useState<MCQState[]>(() => items);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -142,8 +144,8 @@ export function G1ShapeMCQExercise({ exNum, validateCommand, onValidated }: ExPr
               {item.options.map(opt => {
                 const isSelected = item.selected === opt;
                 const isCorrectAnswer = opt === item.shape.name;
-                const showCorrect = item.checked && isCorrectAnswer;
-                const showWrong = item.checked && isSelected && !item.correct;
+                const showCorrect = item.checked && revealCorrection && isCorrectAnswer;
+                const showWrong = item.checked && revealCorrection && isSelected && !item.correct;
                 return (
                   <button
                     key={opt}
@@ -189,6 +191,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
     Object.fromEntries(cards.map(s => [s.id, { answer: "", checked: false, correct: false }]))
   );
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -247,7 +250,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
               <div className="h-16 w-16" dangerouslySetInnerHTML={{ __html: shape.svg }} />
               <div className="flex items-center gap-2">
                 <span className="text-sm font-bold text-[var(--color-accent-alg)]">{cardIdx + 1}.</span>
-                {s.checked && !s.correct ? (
+                {s.checked && !s.correct && revealCorrection ? (
                   <div className="flex h-8 w-16 flex-col items-center justify-center rounded border-b-2 border-amber-500">
                     <span className="text-[9px] leading-none text-amber-600 line-through">{s.answer || "—"}</span>
                     <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
@@ -255,7 +258,7 @@ export function G1NameToSVGExercise({ exNum, validateCommand, onValidated }: ExP
                 ) : (
                   <select
                     value={s.answer}
-                    disabled={s.checked && s.correct}
+                    disabled={s.checked}
                     onChange={e => handleSelect(shape.id, e.target.value)}
                     className="h-8 w-16 appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
                   >
@@ -287,6 +290,7 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
     Object.fromEntries(definitions.map(s => [s.id, { answer: "", checked: false, correct: false }]))
   );
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -342,7 +346,7 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
             <div key={shape.id} className="grid grid-cols-[1.75rem_1fr_5.5rem] items-center gap-2">
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="text-sm text-[var(--color-text-primary)]">{shape.definition}</span>
-              {state.checked && !state.correct ? (
+              {state.checked && !state.correct && revealCorrection ? (
                 <div className="flex h-9 flex-col items-center justify-center rounded border-b-2 border-amber-500">
                   <span className="text-[9px] leading-none text-amber-600 line-through">{state.answer || "—"}</span>
                   <span className="text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{LETTERS[correctIdx]}</span>
@@ -350,7 +354,7 @@ export function G1DefinitionMatchExercise({ exNum, validateCommand, onValidated 
               ) : (
                 <select
                   value={state.answer}
-                  disabled={state.checked && state.correct}
+                  disabled={state.checked}
                   onChange={e => handleSelect(shape.id, e.target.value)}
                   className="h-9 w-full appearance-none rounded border border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-alg)] outline-none"
                 >
@@ -394,6 +398,7 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
     }))
   );
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -442,7 +447,7 @@ export function G1MissingLettersExercise({ exNum, validateCommand, onValidated }
               <div className="flex flex-wrap items-center gap-1">
                 {pattern.map((char, pos) =>
                   char === "_" ? (
-                    state.checked && state.blankOk[pos] === false ? (
+                    state.checked && revealCorrection && state.blankOk[pos] === false ? (
                       <div key={pos} className="flex h-8 w-7 flex-col items-center justify-center rounded-none border-b-2 border-amber-500">
                         <span className="text-[9px] leading-none text-amber-600 line-through">{state.blanks[pos] || "—"}</span>
                         <span className="text-[9px] leading-none font-bold text-[var(--color-text-primary)]">{s.name[pos]}</span>
@@ -494,6 +499,7 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
     }))
   );
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -543,7 +549,7 @@ export function G1AnagramExercise({ exNum, validateCommand, onValidated }: ExPro
                 {item.checked ? (
                   <div className="flex min-h-[2rem] flex-1 items-center gap-2 border-b-2 border-amber-400/40 pb-0.5">
                     <span className="text-sm text-amber-500 line-through">{builtWord || "—"}</span>
-                    {!item.correct && <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.shape.name}</span>}
+                    {!item.correct && revealCorrection && <span className="text-sm font-bold text-[var(--color-text-primary)]">{item.shape.name}</span>}
                   </div>
                 ) : (
                   <div className="flex min-h-[2rem] flex-1 flex-wrap items-center gap-px border-b-2 border-[var(--color-accent-alg)]/50 pb-0.5">
@@ -588,6 +594,7 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
     Object.fromEntries(shapes.map(s => [s.id, { answer: "", checked: false, correct: false }]))
   );
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     let correct = 0;
@@ -622,7 +629,7 @@ export function G1ShapeWriteExercise({ exNum, validateCommand, onValidated }: Ex
               <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <div className="h-12 w-12 shrink-0 rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-1"
                 dangerouslySetInnerHTML={{ __html: s.svg }} />
-              {state.checked && !state.correct ? (
+              {state.checked && !state.correct && revealCorrection ? (
                 <div className="flex flex-1 flex-col justify-center rounded-none border-b-2 border-amber-500 px-1 py-0.5">
                   <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{state.answer || "—"}</span>
                   <span className="text-xs font-bold leading-none text-amber-600">{s.name}</span>
@@ -760,6 +767,7 @@ export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExP
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -790,7 +798,7 @@ export function G1PropCheckExercise({ exNum, validateCommand, onValidated }: ExP
       <div className="space-y-2">
         {items.map((item, i) => {
           const isChecked = checked[i] ?? false;
-          const res = validated ? results[i] : null;
+          const res = validated && revealCorrection ? results[i] : null;
           return (
             <label key={i} className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2 transition-colors ${
               validated
@@ -854,6 +862,7 @@ export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExPro
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -883,7 +892,7 @@ export function G1ShapeQAExercise({ exNum, validateCommand, onValidated }: ExPro
       <div className="space-y-4">
         {questions.map((q, i) => {
           const ans = answers[i] ?? "";
-          const ok = validated ? results[i] : null;
+          const ok = validated && revealCorrection ? results[i] : null;
           return (
             <div key={i} className="flex items-start gap-3">
               <span className="mt-0.5 w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
