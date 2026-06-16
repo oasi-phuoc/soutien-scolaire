@@ -51,38 +51,56 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "A5.5", label: "A5.5 — Diviser les décimaux" },
         { id: "A5.6", label: "A5.6 — Problèmes" },
       ]},
+      { id: "A6", label: "A6 — Pourcentages et proportions", lessons: [
+        { id: "A6.1", label: "A6.1 — Notion de pourcentage" },
+        { id: "A6.2", label: "A6.2 — Pourcentage d'un nombre" },
+        { id: "A6.3", label: "A6.3 — Augmentation et réduction" },
+      ]},
+      { id: "A7", label: "A7 — Nombres relatifs", lessons: [
+        { id: "A7.1", label: "A7.1 — Les nombres relatifs" },
+        { id: "A7.2", label: "A7.2 — Comparer" },
+        { id: "A7.3", label: "A7.3 — Addition et soustraction" },
+        { id: "A7.4", label: "A7.4 — Multiplication et division" },
+      ]},
+      { id: "A8", label: "A8 — Puissances et racines", lessons: [
+        { id: "A8.1", label: "A8.1 — Notion et représentation" },
+        { id: "A8.2", label: "A8.2 — Calcul de puissances" },
+        { id: "A8.3", label: "A8.3 — Puissances de 10" },
+        { id: "A8.4", label: "A8.4 — Racine carrée" },
+        { id: "A8.5", label: "A8.5 — Priorité des opérations" },
+      ]},
       { id: "G1", label: "G1 — Figures planes", lessons: [
         { id: "G1.1", label: "G1.1 — Reconnaître les figures" },
         { id: "G1.2", label: "G1.2 — Propriétés des figures" },
       ]},
-      { id: "G2", label: "G2 — Périmètre", lessons: [
-        { id: "G2.1", label: "G2.1 — Périmètre du rectangle" },
-        { id: "G2.2", label: "G2.2 — Périmètre du triangle" },
+      { id: "G2", label: "G2 — Conversions d'unités", lessons: [
+        { id: "G2.1", label: "G2.1 — Longueur, aire et volume" },
+        { id: "G2.2", label: "G2.2 — Capacité, masse et temps" },
       ]},
-      { id: "G3", label: "G3 — Aire", lessons: [
-        { id: "G3.1", label: "G3.1 — Aire du rectangle" },
-        { id: "G3.2", label: "G3.2 — Aire du triangle" },
-        { id: "G3.3", label: "G3.3 — Aire du parallélogramme" },
-        { id: "G3.4", label: "G3.4 — Aire du trapèze" },
-        { id: "G3.5", label: "G3.5 — Aire du disque" },
+      { id: "G3", label: "G3 — Périmètres", lessons: [
+        { id: "G3.1", label: "G3.1 — Carré" },
+        { id: "G3.2", label: "G3.2 — Rectangle" },
+        { id: "G3.3", label: "G3.3 — Triangle" },
+        { id: "G3.4", label: "G3.4 — Polygones réguliers" },
+        { id: "G3.5", label: "G3.5 — Cercle et π" },
       ]},
-      { id: "G4", label: "G4 — Périmètre et aire avancés", lessons: [
-        { id: "G4.1", label: "G4.1 — Périmètre" },
-        { id: "G4.2", label: "G4.2 — Aire du rectangle" },
-        { id: "G4.3", label: "G4.3 — Aire du triangle" },
-        { id: "G4.4", label: "G4.4 — Aire du parallélogramme" },
-        { id: "G4.5", label: "G4.5 — Aire du trapèze" },
-        { id: "G4.6", label: "G4.6 — Aire du disque" },
-        { id: "G4.7", label: "G4.7 — Aire du losange" },
-        { id: "G4.8", label: "G4.8 — Périmètre du cercle" },
+      { id: "G4", label: "G4 — Aires des figures planes", lessons: [
+        { id: "G4.1", label: "G4.1 — Carré" },
+        { id: "G4.2", label: "G4.2 — Rectangle" },
+        { id: "G4.3", label: "G4.3 — Triangle" },
+        { id: "G4.4", label: "G4.4 — Parallélogramme" },
+        { id: "G4.5", label: "G4.5 — Trapèze" },
+        { id: "G4.6", label: "G4.6 — Disque" },
+        { id: "G4.7", label: "G4.7 — Losange" },
+        { id: "G4.8", label: "G4.8 — Figures composées" },
       ]},
-      { id: "G5", label: "G5 — Volumes", lessons: [
+      { id: "G5", label: "G5 — Solides et volumes", lessons: [
         { id: "G5.1", label: "G5.1 — Reconnaître les solides" },
         { id: "G5.2", label: "G5.2 — Volume du cube" },
-        { id: "G5.3", label: "G5.3 — Volume du pavé droit" },
-        { id: "G5.4", label: "G5.4 — Volume du prisme et pyramide" },
+        { id: "G5.3", label: "G5.3 — Pavé droit" },
+        { id: "G5.4", label: "G5.4 — Prisme et pyramide" },
         { id: "G5.5", label: "G5.5 — Volume du cylindre" },
-        { id: "G5.6", label: "G5.6 — Volume du cône et sphère" },
+        { id: "G5.6", label: "G5.6 — Cône et sphère" },
       ]},
     ],
   },
@@ -107,29 +125,122 @@ const CURRICULUM: MatiereOpt[] = [
   {
     matiere: "Français",
     modules: [
-      { id: "A0", label: "A0 — Débutant absolu", lessons: [
-        { id: "A.1", label: "A.1 — Salutations et politesse" },
-        { id: "A.2", label: "A.2 — Chiffres, nombres et âge" },
-        { id: "A.3", label: "A.3 — Couleurs, formes et descriptions" },
-        { id: "A.4", label: "A.4 — La famille" },
-        { id: "A.5", label: "A.5 — Le corps et la santé" },
-        { id: "A.6", label: "A.6 — Objets du quotidien et la classe" },
+      { id: "V1", label: "V1 — L'identité", lessons: [
+        { id: "V1.1", label: "V1.1 — Les nationalités" },
+        { id: "V1.2", label: "V1.2 — Les professions" },
+        { id: "V1.3", label: "V1.3 — La famille" },
+        { id: "V1.4", label: "V1.4 — L'état civil" },
+        { id: "V1.5", label: "V1.5 — La description physique" },
+        { id: "V1.6", label: "V1.6 — La description morale" },
       ]},
-      { id: "A1", label: "A1 — Communication essentielle", lessons: [
-        { id: "A.7", label: "A.7 — Enchanté !" },
-        { id: "A.8", label: "A.8 — Ma journée" },
-        { id: "A.9", label: "A.9 — Les métiers" },
-        { id: "A.10", label: "A.10 — La nourriture" },
+      { id: "V2", label: "V2 — Le temps et les saisons", lessons: [
+        { id: "V2.1", label: "V2.1 — Jours, mois et dates" },
+        { id: "V2.2", label: "V2.2 — L'heure" },
+        { id: "V2.3", label: "V2.3 — Les saisons" },
+        { id: "V2.4", label: "V2.4 — La météo" },
       ]},
-      { id: "B1-ortho", label: "Orthographe B1", lessons: [
-        { id: "ortho-1", label: "Accord sujet-verbe" },
-        { id: "ortho-2", label: "Accord du participe passé" },
-        { id: "ortho-3", label: "Homophones" },
+      { id: "V3", label: "V3 — Le sport et les loisirs", lessons: [
+        { id: "V3.1", label: "V3.1 — Le sport" },
       ]},
-      { id: "grammaire", label: "Grammaire", lessons: [
-        { id: "gram-1", label: "Les temps du passé" },
-        { id: "gram-2", label: "Le futur" },
-        { id: "gram-3", label: "Le conditionnel" },
+      { id: "V4", label: "V4 — Le logement", lessons: [
+        { id: "V4.1", label: "V4.1 — Les types de logement" },
+        { id: "V4.2", label: "V4.2 — Les pièces de la maison" },
+        { id: "V4.3", label: "V4.3 — Les pannes" },
+        { id: "V4.4", label: "V4.4 — Les meubles" },
+        { id: "V4.5", label: "V4.5 — Les appareils électroménagers" },
+      ]},
+      { id: "V5", label: "V5 — L'école", lessons: [
+        { id: "V5.1", label: "V5.1 — Les matières scolaires" },
+        { id: "V5.2", label: "V5.2 — Le matériel scolaire" },
+        { id: "V5.3", label: "V5.3 — La structure de l'école" },
+      ]},
+      { id: "V6", label: "V6 — Les vêtements et la mode", lessons: [
+        { id: "V6.1", label: "V6.1 — Les vêtements" },
+        { id: "V6.2", label: "V6.2 — Les accessoires" },
+        { id: "V6.3", label: "V6.3 — Les couleurs" },
+        { id: "V6.4", label: "V6.4 — Les matières" },
+      ]},
+      { id: "V7", label: "V7 — L'alimentation", lessons: [
+        { id: "V7.1", label: "V7.1 — Les fruits" },
+        { id: "V7.2", label: "V7.2 — Les légumes" },
+        { id: "V7.3", label: "V7.3 — Le restaurant" },
+        { id: "V7.4", label: "V7.4 — La boulangerie" },
+        { id: "V7.5", label: "V7.5 — La cuisine" },
+        { id: "V7.6", label: "V7.6 — Les recettes" },
+        { id: "V7.7", label: "V7.7 — Les quantités" },
+      ]},
+      { id: "V8", label: "V8 — Le corps et la santé", lessons: [
+        { id: "V8.1", label: "V8.1 — Le corps" },
+        { id: "V8.2", label: "V8.2 — Les maladies" },
+        { id: "V8.3", label: "V8.3 — Les médecins" },
+        { id: "V8.4", label: "V8.4 — La pharmacie" },
+      ]},
+      { id: "V9", label: "V9 — La ville et les transports", lessons: [
+        { id: "V9.1", label: "V9.1 — La ville" },
+        { id: "V9.2", label: "V9.2 — Le transport" },
+        { id: "V9.3", label: "V9.3 — La direction" },
+        { id: "V9.4", label: "V9.4 — L'espace culturel" },
+        { id: "V9.5", label: "V9.5 — Le train" },
+        { id: "V9.6", label: "V9.6 — L'aéroport" },
+        { id: "V9.7", label: "V9.7 — L'hôtel" },
+        { id: "V9.8", label: "V9.8 — Le paysage" },
+      ]},
+      { id: "R1", label: "R1 — Bases de la grammaire", lessons: [
+        { id: "R1.1", label: "R1.1 — Les pronoms personnels sujets" },
+        { id: "R1.2", label: "R1.2 — Les verbes être et avoir" },
+        { id: "R1.3", label: "R1.3 — Les articles définis et indéfinis" },
+        { id: "R1.4", label: "R1.4 — Le genre des noms et des adjectifs" },
+        { id: "R1.5", label: "R1.5 — Les verbes en -er au présent" },
+        { id: "R1.6", label: "R1.6 — Les phrases" },
+        { id: "R1.7", label: "R1.7 — La négation" },
+        { id: "R1.8", label: "R1.8 — L'interrogation de base" },
+        { id: "R1.9", label: "R1.9 — C'est ou il est ?" },
+      ]},
+      { id: "R2", label: "R2 — Verbes et prépositions", lessons: [
+        { id: "R2.1", label: "R2.1 — Les verbes de mouvement" },
+        { id: "R2.2", label: "R2.2 — Les verbes pronominaux" },
+        { id: "R2.3", label: "R2.3 — Les verbes modaux" },
+        { id: "R2.4", label: "R2.4 — Les mots interrogatifs" },
+        { id: "R2.5", label: "R2.5 — Les prépositions de lieu" },
+      ]},
+      { id: "R3", label: "R3 — Les déterminants", lessons: [
+        { id: "R3.1", label: "R3.1 — Les articles partitifs et la quantité" },
+        { id: "R3.2", label: "R3.2 — Avoir et les adjectifs possessifs" },
+        { id: "R3.3", label: "R3.3 — Il y a et les prépositions" },
+        { id: "R3.4", label: "R3.4 — Les adjectifs démonstratifs" },
+        { id: "R3.5", label: "R3.5 — Les adjectifs possessifs" },
+        { id: "R3.6", label: "R3.6 — La fréquence" },
+        { id: "R3.7", label: "R3.7 — Les adjectifs qualificatifs" },
+      ]},
+      { id: "R4", label: "R4 — Approfondissement", lessons: [
+        { id: "R4.1", label: "R4.1 — Le futur proche" },
+        { id: "R4.2", label: "R4.2 — Pronominaux réfléchis et réciproques" },
+        { id: "R4.3", label: "R4.3 — Passé récent et présent continu" },
+        { id: "R4.4", label: "R4.4 — Passé composé avec avoir" },
+        { id: "R4.5", label: "R4.5 — Passé composé avec être" },
+        { id: "R4.6", label: "R4.6 — Négation au passé composé" },
+        { id: "R4.7", label: "R4.7 — Le comparatif et le superlatif" },
+        { id: "R4.8", label: "R4.8 — Savoir ou connaître ?" },
+        { id: "R4.9", label: "R4.9 — Les verbes en -er (révision)" },
+        { id: "R4.10", label: "R4.10 — Les verbes en -ir" },
+        { id: "R4.11", label: "R4.11 — Les verbes irréguliers courants" },
+        { id: "R4.12", label: "R4.12 — L'interrogation (questions fermées)" },
+        { id: "R4.13", label: "R4.13 — Répondre aux questions fermées" },
+        { id: "R4.14", label: "R4.14 — Le conditionnel de politesse" },
+        { id: "R4.15", label: "R4.15 — L'impératif" },
+        { id: "R4.16", label: "R4.16 — Les prépositions de lieu" },
+        { id: "R4.17", label: "R4.17 — Les adjectifs (généralités)" },
+        { id: "R4.18", label: "R4.18 — Les adjectifs (cas particuliers)" },
+        { id: "R4.19", label: "R4.19 — Les pronoms relatifs qui et que" },
+        { id: "R4.20", label: "R4.20 — La négation (ne…plus, ne…que)" },
+        { id: "R4.21", label: "R4.21 — La négation (ne…jamais, ne…rien)" },
+        { id: "R4.22", label: "R4.22 — Les pronoms COD et COI" },
+        { id: "R4.23", label: "R4.23 — Les pronoms Y et EN" },
+        { id: "R4.24", label: "R4.24 — Le passé composé (révision)" },
+        { id: "R4.25", label: "R4.25 — L'imparfait" },
+        { id: "R4.26", label: "R4.26 — Le futur simple" },
+        { id: "R4.27", label: "R4.27 — Le comparatif" },
+        { id: "R4.28", label: "R4.28 — La cause et la conséquence" },
       ]},
     ],
   },
@@ -147,6 +258,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   const [lessonId, setLessonId] = useState("");
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [studentSearch, setStudentSearch] = useState("");
+  const [viewMode, setViewMode] = useState<"classes" | "eleves">("classes");
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -259,7 +371,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
 
       {/* Module selector */}
       <div className="space-y-2">
-        <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400">Lier à un module (optionnel)</label>
+        <label className="block text-xs font-semibold text-zinc-500 dark:text-zinc-400">Leçon à affecter *</label>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
           <select value={matiere} onChange={(e) => handleMatiereChange(e.target.value)} className={selectCls}>
             <option value="">— Matière —</option>
@@ -300,6 +412,16 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
             </button>
           )}
         </div>
+        <div className="mb-2 flex gap-1.5">
+          <button type="button" onClick={() => setViewMode("classes")}
+            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "classes" ? "bg-green-600 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
+            Par classes
+          </button>
+          <button type="button" onClick={() => setViewMode("eleves")}
+            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "eleves" ? "bg-green-600 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
+            Par élèves
+          </button>
+        </div>
 
         {students.length === 0 ? (
           <p className="text-xs italic text-zinc-400">Aucun élève enregistré.</p>
@@ -328,7 +450,26 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
 
             {/* Student list */}
             <div className="max-h-56 overflow-y-auto">
-              {classes.length === 0 ? (
+              {viewMode === "eleves" ? (
+                filtered.length === 0 ? (
+                  <p className="px-4 py-3 text-xs italic text-zinc-400">Aucun résultat.</p>
+                ) : [...filtered].sort((a, b) => {
+                  const na = [a.prenom, a.nom].filter(Boolean).join(" ").toLowerCase();
+                  const nb = [b.prenom, b.nom].filter(Boolean).join(" ").toLowerCase();
+                  return na.localeCompare(nb);
+                }).map((s) => {
+                  const checked = selectedIds.has(s.id);
+                  const name = [s.prenom, s.nom].filter(Boolean).join(" ") || s.id.slice(0, 8);
+                  return (
+                    <label key={s.id} className="flex cursor-pointer items-center gap-2.5 border-b border-zinc-100 px-4 py-2 text-sm text-zinc-700 hover:bg-green-50 last:border-0 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-green-950/20">
+                      <Checkbox checked={checked} />
+                      <input type="checkbox" checked={checked} onChange={() => toggleStudent(s.id)} className="sr-only" />
+                      <span className="flex-1">{name}</span>
+                      {s.classe && <span className="text-xs text-zinc-400">{s.classe}</span>}
+                    </label>
+                  );
+                })
+              ) : classes.length === 0 ? (
                 <p className="px-4 py-3 text-xs italic text-zinc-400">Aucun résultat.</p>
               ) : classes.map((classe) => {
                 const classeStudents = byClasse[classe] ?? [];
@@ -370,7 +511,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
 
       <button
         type="submit"
-        disabled={isPending || !title.trim() || selectedIds.size === 0}
+        disabled={isPending || !title.trim() || !lessonId || selectedIds.size === 0}
         className="w-full rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:opacity-50"
       >
         {isPending ? "Envoi…" : "Assigner la tâche"}

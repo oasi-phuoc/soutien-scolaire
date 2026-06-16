@@ -161,6 +161,62 @@ export async function getStudentsForTaskAction(): Promise<{ ok: boolean; student
   return { ok: true, students: (data ?? []) as StudentOption[] };
 }
 
+export type TaskStudentStatus = {
+  student_id: string;
+  prenom: string | null;
+  nom: string | null;
+  classe: string | null;
+  status: "pending" | "done";
+  done_at: string | null;
+};
+
+export async function getTaskStudentsAction(taskId: string): Promise<{ ok: boolean; students: TaskStudentStatus[]; error?: string }> {
+  const role = await getCallerRole();
+  if (!role) return { ok: false, students: [], error: "Non autorisé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, students: [], error: "Erreur serveur." };
+
+  const { data: assignments, error: aErr } = await supabase
+    .from("task_assignments")
+    .select("student_id, status, done_at")
+    .eq("task_id", taskId);
+
+  if (aErr || !assignments) return { ok: false, students: [], error: aErr?.message };
+
+  if (assignments.length === 0) return { ok: true, students: [] };
+
+  const studentIds = assignments.map((a) => a.student_id as string);
+  const { data: profiles, error: pErr } = await supabase
+    .from("profiles")
+    .select("id, prenom, nom, classe")
+    .in("id", studentIds);
+
+  if (pErr) return { ok: false, students: [], error: pErr.message };
+
+  const profileMap = new Map((profiles ?? []).map((p) => [p.id as string, p]));
+
+  const students: TaskStudentStatus[] = assignments.map((a) => {
+    const p = profileMap.get(a.student_id as string);
+    return {
+      student_id: a.student_id as string,
+      prenom: (p?.prenom as string | null) ?? null,
+      nom: (p?.nom as string | null) ?? null,
+      classe: (p?.classe as string | null) ?? null,
+      status: a.status as "pending" | "done",
+      done_at: (a.done_at as string | null) ?? null,
+    };
+  });
+
+  students.sort((a, b) => {
+    const na = [a.nom, a.prenom].filter(Boolean).join(" ");
+    const nb = [b.nom, b.prenom].filter(Boolean).join(" ");
+    return na.localeCompare(nb, "fr");
+  });
+
+  return { ok: true, students };
+}
+
 export async function getPendingTaskCountAction(): Promise<number> {
   const supabase = await createSupabaseActionClient();
   if (!supabase) return 0;

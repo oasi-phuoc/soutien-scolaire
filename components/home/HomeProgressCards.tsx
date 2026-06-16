@@ -21,19 +21,50 @@ import {
   getMathModule,
   MATH_MODULES,
 } from "@/lib/curriculum/math-data";
+import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
+import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { LectureProgressV2 } from "@/lib/progress/lecture-progress";
 
-const FRENCH_LEVEL_LABELS: Record<string, string> = {
-  PA:    "A0 — Débutant",
-  ALPHA: "A0 — Débutant",
-  A0:    "A0 — Débutant",
-  A1:    "A1 — Découverte",
-  A2:    "A2 — Élémentaire",
-  B1:    "B1 — Autonomie",
-  B2:    "B2 — Avancé",
-};
+// ── French data helpers ──────────────────────────────────────────────────────
+const FRENCH_VOC = FRENCH_THEMES.filter((t) => t.tab === "vocabulaire");
+const FRENCH_GRAM = FRENCH_THEMES.filter((t) => t.tab === "grammaire" || t.tab === "conjugaison");
+const COMM_AVAILABLE = COMM_MODULES.flatMap((m) => m.submodules).filter((s) => s.available);
 
+// ── Math data helpers ─────────────────────────────────────────────────────────
+const MATH_ALG_MODULES = MATH_MODULES.filter((m) => m.branch === "algebra");
+const MATH_GEO_MODULES = MATH_MODULES.filter((m) => m.branch === "geometry");
+
+// ── Sub-progress mini bars ────────────────────────────────────────────────────
+function SubProgressRow({
+  label,
+  done,
+  total,
+  color,
+}: {
+  label: string;
+  done: number;
+  total: number;
+  color: string;
+}) {
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  return (
+    <div className="flex items-center gap-2">
+      <span className="w-20 shrink-0 text-[10px] text-[var(--color-text-secondary)]">{label}</span>
+      <div className="flex-1 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800" style={{ height: 4 }}>
+        <div
+          className="h-full rounded-full transition-all"
+          style={{ background: color, width: `${pct}%` }}
+        />
+      </div>
+      <span className="w-10 shrink-0 text-right text-[10px] tabular-nums text-[var(--color-text-secondary)]">
+        {done}/{total}
+      </span>
+    </div>
+  );
+}
+
+// ── Card shell ────────────────────────────────────────────────────────────────
 function CardShell({
   href,
   accentColor,
@@ -45,6 +76,7 @@ function CardShell({
   pct,
   continuePath,
   continueLabel,
+  subProgress,
 }: {
   href: string;
   accentColor: string;
@@ -56,6 +88,7 @@ function CardShell({
   pct: number;
   continuePath?: string | null;
   continueLabel?: string | null;
+  subProgress?: Array<{ label: string; done: number; total: number }>;
 }) {
   return (
     <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
@@ -85,6 +118,19 @@ function CardShell({
           <AppProgressBar value={pct} color={accentColor} height={4} />
           <p className="mt-1.5 text-sm font-bold text-[var(--color-text-primary)]">{completedText}</p>
           <p className="text-xs text-[var(--color-text-secondary)]">{totalText}</p>
+          {subProgress && subProgress.length > 0 && (
+            <div className="mt-3 space-y-1.5">
+              {subProgress.map((sp) => (
+                <SubProgressRow
+                  key={sp.label}
+                  label={sp.label}
+                  done={sp.done}
+                  total={sp.total}
+                  color={accentColor}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </Link>
 
@@ -121,14 +167,12 @@ export function HomeProgressCards() {
     : 0;
   const lecturePct = lectureP ? computeLecturePercent(lectureP) : 0;
 
-  // Find next letter: prefer an available letter; if a revision gates the next one, look past it
   const lectureNextEntry = (() => {
     if (!lectureP) return null;
     const avail = SUBMODULE_SEQUENCE.find(
       (s) => getSubmoduleState(lectureP, s.moduleId, s.letterId) === "available",
     );
     if (avail) return avail;
-    // No letter available — check if a revision is pending and derive the letter it will unlock
     const pendingRev = REVISION_CHECKPOINTS.find(
       (r) => getRevisionState(lectureP, r.pair) === "available",
     );
@@ -151,12 +195,28 @@ export function HomeProgressCards() {
     return `${lectureNextEntry.moduleId.toUpperCase()}.${pos} — ${lectureNextEntry.letterId.toUpperCase()} / ${lectureNextEntry.letterId}`;
   })();
 
+  // ── Français ──
+  const completedSlugs = new Set(Object.keys(mathP?.frenchLessons ?? {}));
+  const vocDone = FRENCH_VOC.filter((t) => completedSlugs.has(t.slug)).length;
+  const gramDone = FRENCH_GRAM.filter((t) => completedSlugs.has(t.slug)).length;
+  const parlerDone = COMM_AVAILABLE.filter((s) => !!(mathP?.commProgress?.[s.id])).length;
+  const frTotal = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_AVAILABLE.length;
+  const frDone = vocDone + gramDone + parlerDone;
+  const frPct = frTotal > 0 ? Math.round((frDone / frTotal) * 100) : 0;
+
   // ── Maths ──
   const totalMath = MATH_MODULES.length;
   const completedMath = mathP
     ? Object.values(mathP.math).filter((m) => m.state === "completed").length
     : 0;
   const mathPct = totalMath > 0 ? Math.round((completedMath / totalMath) * 100) : 0;
+
+  const algDone = mathP
+    ? MATH_ALG_MODULES.filter((m) => mathP.math[m.id]?.state === "completed").length
+    : 0;
+  const geoDone = mathP
+    ? MATH_GEO_MODULES.filter((m) => mathP.math[m.id]?.state === "completed").length
+    : 0;
 
   const allMathOrder = [...MATH_ALGEBRA_ORDER, ...MATH_GEOMETRY_TAB_ORDER];
   const mathNextId = mathP
@@ -168,12 +228,6 @@ export function HomeProgressCards() {
   const mathContinueLabel = mathNextModule
     ? `${mathNextModule.code} — ${mathNextModule.title}`
     : null;
-
-  // ── Français ──
-  const frLevel = mathP?.frenchLevel ?? "A0";
-  const frLabel = FRENCH_LEVEL_LABELS[frLevel] ?? frLevel;
-  const FR_PCT: Record<string, number> = { PA: 0, ALPHA: 5, A0: 10, A1: 25, A2: 45, B1: 70, B2: 100 };
-  const frPct = FR_PCT[frLevel] ?? 10;
 
   return (
     <div className="space-y-3">
@@ -194,10 +248,15 @@ export function HomeProgressCards() {
         accentColor="var(--color-accent-fr)"
         icon={<FrIcon />}
         label="Français"
-        title={frLabel}
-        completedText={frLevel}
-        totalText="A0 → B2 · 61 leçons"
+        title="Compréhension et expression"
+        completedText={`${frDone} leçon${frDone !== 1 ? "s" : ""} terminée${frDone !== 1 ? "s" : ""}`}
+        totalText={`sur ${frTotal} leçons`}
         pct={frPct}
+        subProgress={[
+          { label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length },
+          { label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length },
+          { label: "Parler", done: parlerDone, total: Math.max(COMM_AVAILABLE.length, 1) },
+        ]}
       />
       <CardShell
         href="/mathematiques"
@@ -210,6 +269,10 @@ export function HomeProgressCards() {
         pct={mathPct}
         continuePath={mathContinuePath}
         continueLabel={mathContinueLabel}
+        subProgress={[
+          { label: "Algèbre", done: algDone, total: MATH_ALG_MODULES.length },
+          { label: "Géométrie", done: geoDone, total: MATH_GEO_MODULES.length },
+        ]}
       />
     </div>
   );
