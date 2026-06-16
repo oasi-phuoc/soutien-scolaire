@@ -265,9 +265,13 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
       <div className="relative z-10 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-zinc-900" onClick={e => e.stopPropagation()}>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier le profil</h2>
-          <button onClick={onClose} className="rounded-lg p-1 text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"><IconCancel /></button>
+        <div className="mb-4 flex items-center gap-2">
+          <button onClick={onClose} aria-label="Fermer" className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-theme)] text-white transition-opacity hover:opacity-80">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <h2 className="text-base font-bold text-zinc-900 dark:text-zinc-50">Modifier les données</h2>
         </div>
         <div className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
