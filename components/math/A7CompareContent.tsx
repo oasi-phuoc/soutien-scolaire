@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Fragment, useEffect, useRef, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "border-[var(--color-accent-alg)]";
 
@@ -59,6 +60,7 @@ export function A7CompareExercise({
   const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(Array(5).fill(null));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(0);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > prevCmd.current) {
@@ -89,7 +91,7 @@ export function A7CompareExercise({
                 const sel = answers[i] === sym;
                 const isCorrect = sym === q.answer;
                 let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                if (!validated) {
+                if (!validated || !revealCorrection) {
                   cls += sel
                     ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                     : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
@@ -150,6 +152,7 @@ export function A7RelNumberSelectExercise({
   const [sel, setSel] = useState<boolean[]>(() => Array(15).fill(false));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(0);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > prevCmd.current) {
@@ -181,7 +184,7 @@ export function A7RelNumberSelectExercise({
           const isSelected = sel[i] ?? false;
           const should = mode === "gt" ? n > t : mode === "lt" ? n < t : n > t && n < t2!;
           let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
-          if (!validated) {
+          if (!validated || !revealCorrection) {
             cls += isSelected
               ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
               : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
@@ -229,6 +232,7 @@ export function A7RelEncadrementExercise({
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => questions.map(() => false));
   const prevCmd = useRef(0);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > prevCmd.current) {
@@ -252,7 +256,7 @@ export function A7RelEncadrementExercise({
       <div className="space-y-3">
         {questions.map((q, i) => {
           const a = answers[i]!;
-          const wrong = validated && !results[i];
+          const wrong = validated && revealCorrection && !results[i];
           const { dir } = q;
           const fstKey = dir === "<" ? "lo" as const : "hi" as const;
           const sndKey = dir === "<" ? "hi" as const : "lo" as const;
@@ -305,6 +309,7 @@ export function A7RelOrderingExercise({
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => groups.map(() => false));
   const prevCmd = useRef(0);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > prevCmd.current) {
@@ -344,7 +349,7 @@ export function A7RelOrderingExercise({
           const available = g.nums.filter(n => !s.some(x => Math.abs(x - n) < 0.001));
           const sorted = [...g.nums].sort((a, b) => a - b);
           const fmt = (n: number) => g.isDec ? fmtRelDec(n) : fmtRel(n);
-          const ok = validated ? results[gi] : null;
+          const ok = validated && revealCorrection ? results[gi] : null;
           return (
             <div key={gi} className="space-y-3">
               {available.length > 0 && (
@@ -420,6 +425,7 @@ export function A7RelSeqCompleteExercise({
   const [answers, setAnswers] = useState<string[][]>(() => questions.map(q => q.blankIdxs.map(() => "")));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(0);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > prevCmd.current) {
@@ -452,7 +458,7 @@ export function A7RelSeqCompleteExercise({
                 if (blankIdx !== -1) {
                   const bIdx = bc++;
                   const v = answers[qi]?.[bIdx] ?? "";
-                  const wrong = validated && Math.abs(normRel(v) - n) >= 0.001;
+                  const wrong = validated && revealCorrection && Math.abs(normRel(v) - n) >= 0.001;
                   return wrong ? (
                     <div key={ni} className={`${cellW} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                       <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
