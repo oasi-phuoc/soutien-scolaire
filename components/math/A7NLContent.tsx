@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 function rnd(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -159,6 +160,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
   const [vals, setVals] = useState<string[]>(() => cfg.questions.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => cfg.questions.map(() => false));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -179,7 +181,7 @@ function NLReadExercise({ exNum, validateCommand, onValidated, cfg }: {
       <div className="space-y-5">
         {cfg.questions.map((q, ai) => {
           const x = nlPos(q.arrow, q.min, q.max);
-          const isWrong = wrongs[ai];
+          const isWrong = revealCorrection && wrongs[ai];
           const expected = fmtNum(q.arrow, q.step);
           return (
             <div key={ai} className="space-y-2">
@@ -276,13 +278,14 @@ function genPlaceNeg(): NLPlaceCfg {
 
 const svgHPlace = 100;
 
-function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong, onChipClick, onPosClick }: {
+function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong, revealCorrection, onChipClick, onPosClick }: {
   group: NLPlaceGroup;
   gi: number;
   assignments: (number | null)[];
   activeChip: number | null;
   validated: boolean;
   posWrong: boolean[];
+  revealCorrection: boolean;
   onChipClick: (v: number) => void;
   onPosClick: (gi: number, pi: number) => void;
 }) {
@@ -297,7 +300,7 @@ function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong,
             {group.positions.map((v, pi) => {
               const x = nlPos(v, group.min, group.max);
               const assigned = assignments[pi];
-              const w = posWrong[pi];
+              const w = revealCorrection && posWrong[pi];
               const fillColor = w ? "#FEF3C7" : assigned !== null ? "#DBEAFE" : "#F3F4F6";
               const strokeColor = w ? "#F59E0B" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
               return (
@@ -351,6 +354,7 @@ function NLPlaceExercise({ exNum, validateCommand, onValidated, cfg }: {
   const [allWrong, setAllWrong] = useState<boolean[][]>(
     () => cfg.groups.map(g => g.positions.map(() => false))
   );
+  const revealCorrection = useEvalReveal();
 
   function handleChipClick(v: number, gi: number) {
     if (validated) return;
@@ -393,6 +397,7 @@ function NLPlaceExercise({ exNum, validateCommand, onValidated, cfg }: {
             activeChip={(activeChip?.gi === gi ? activeChip.v : null) as number | null}
             validated={validated as boolean}
             posWrong={(allWrong[gi] ?? []) as boolean[]}
+            revealCorrection={revealCorrection}
             onChipClick={(v: number) => handleChipClick(v, gi)}
             onPosClick={handlePosClick}
           />
