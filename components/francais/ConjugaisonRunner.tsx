@@ -15,6 +15,7 @@ import { usePivotLang } from "@/components/math/usePivotLang";
 import { markFrenchLessonComplete } from "@/lib/progress/french-progress";
 import { useTranslation } from "@/components/TranslationProvider";
 import { linearSwissGrade, medalFromPercent, PASSING_GRADE } from "@/lib/scoring";
+import { EvalRevealContext, useEvalReveal } from "@/lib/eval-reveal-context";
 
 
 // ── Props ─────────────────────────────────────────────────────────────────────
@@ -603,6 +604,7 @@ function QcmExercise({
     () => new Array(items.length).fill(null),
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   function select(itemIdx: number, choiceIdx: number) {
     if (validated) return;
@@ -654,7 +656,7 @@ function QcmExercise({
           const isCorrect = ci === item.correctIdx;
           let cls = `${fixed ? "w-14 py-1.5" : exercise.inlineChoices ? "px-4 py-2" : "flex-1 py-2.5"} text-sm font-medium text-center transition-colors whitespace-nowrap `;
           if (ci > 0) cls += "border-l border-[var(--color-border-default)] ";
-          if (!validated) {
+          if (!validated || !revealCorrection) {
             cls += isSelected
               ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
               : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
@@ -679,7 +681,7 @@ function QcmExercise({
 
         if (hasInlineToggle) {
           const inlineGroup = (
-            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} align-middle`}>
+            <span className={`inline-flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} align-middle`}>
               {item.choices.map((c, ci) => mkToggleBtn(c, ci, true))}
             </span>
           );
@@ -715,7 +717,7 @@ function QcmExercise({
               <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
             </p>
             {exercise.toggleChoices ? (
-              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
+              <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
               </div>
             ) : (
@@ -726,7 +728,7 @@ function QcmExercise({
                   const isFour = item.choices.length >= 4;
                   let cls =
                     `rounded-[var(--radius-md)] border ${isFour ? "px-0.5 py-2 text-sm" : "px-3 py-2.5 text-sm"} text-center font-medium transition-colors whitespace-nowrap `;
-                  if (!validated) {
+                  if (!validated || !revealCorrection) {
                     cls += isSelected
                       ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]"
                       : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
@@ -816,6 +818,7 @@ function FillExercise({
     () => new Array(items.length).fill(""),
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   function setInput(i: number, val: string) {
     if (validated) return;
@@ -871,7 +874,7 @@ function FillExercise({
         const sentLine1 = arrowIdx >= 0 ? rawSentence.slice(0, arrowIdx) : rawSentence;
         const sentLine2 = arrowIdx >= 0 ? "→ " + rawSentence.slice(arrowIdx + 3) : null;
 
-        const inputEl = validated && !correct ? (
+        const inputEl = validated && !correct && revealCorrection ? (
           <span className="inline-flex h-8 w-28 flex-col items-center justify-center border-b-2 border-amber-400 mx-1 align-middle">
             <span className="text-[10px] leading-none text-zinc-900 dark:text-zinc-100">{userAnswer || "—"}</span>
             <span className="mt-0.5 text-sm leading-none font-semibold text-amber-500 dark:text-amber-400">{item.answer}</span>
@@ -936,6 +939,7 @@ function ClockReadExercise({
     () => new Array(exercise.clocks.length).fill(""),
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   function setInput(i: number, val: string) {
     if (validated) return;
@@ -975,7 +979,7 @@ function ClockReadExercise({
             <div key={i} className="flex flex-col items-center gap-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] p-2">
               <AnalogClock h={clk.h} m={clk.m} size={76} />
               <p className="text-xs font-bold text-[var(--color-text-secondary)]">{clk.label}</p>
-              {validated ? (
+              {validated && revealCorrection ? (
                 correct ? (
                   <p className="text-center text-xs font-semibold text-[var(--color-accent-fr)]">{clk.answer}</p>
                 ) : (
@@ -989,8 +993,9 @@ function ClockReadExercise({
                   type="text"
                   value={userAnswer}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(i, e.target.value)}
+                  disabled={validated}
                   placeholder="..."
-                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 py-1 text-center text-xs outline-none transition-colors focus:border-amber-500"
+                  className="w-full rounded-xl border border-[var(--color-accent-fr)] bg-transparent px-2 py-1 text-center text-xs outline-none transition-colors focus:border-amber-500 disabled:opacity-70"
                 />
               )}
             </div>
@@ -1046,6 +1051,7 @@ function MatchExercise({
   // connections: Map<leftIdx → rightSlotIdx>
   const [connections, setConnections] = useState<Map<number, number>>(new Map());
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1109,13 +1115,13 @@ function MatchExercise({
           const isSelected = selectedLeft === li;
 
           let isCorrect = false;
-          if (validated && isConnected) {
+          if (validated && revealCorrection && isConnected) {
             isCorrect = rightItems[ri!]?.pair.right === pair.right;
           }
 
           // Left cell
           let leftCls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors cursor-pointer ";
-          if (validated) {
+          if (validated && revealCorrection) {
             leftCls += isCorrect
               ? `border-current ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
@@ -1132,7 +1138,7 @@ function MatchExercise({
           // Connector dot
           const dotCls = `w-2 h-2 rounded-full mx-auto transition-colors ${
             isConnected
-              ? validated
+              ? validated && revealCorrection
                 ? isCorrect ? `bg-current ${MATCH_COLORS[colorIdx]}` : "bg-red-500"
                 : `bg-current ${MATCH_COLORS[colorIdx]}`
               : isSelected
@@ -1169,12 +1175,12 @@ function MatchExercise({
           const isActive = selectedLeft !== null;
 
           let isCorrect = false;
-          if (validated && isConnected) {
+          if (validated && revealCorrection && isConnected) {
             isCorrect = pair.right === pairs[connectingLeft!]?.right;
           }
 
           let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border px-3 py-2 text-sm font-medium transition-colors ";
-          if (validated) {
+          if (validated && revealCorrection) {
             cls += isCorrect
               ? `border-current cursor-pointer ${MATCH_COLORS[colorIdx]} ${MATCH_BG[colorIdx]}`
               : isConnected
@@ -1192,7 +1198,7 @@ function MatchExercise({
             <button key={ri} type="button" className={cls} onClick={() => clickRight(ri)} disabled={validated}>
               <span className="shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{LETTERS[origIdx]}.</span>
               <span className="flex-1 text-left">{pair.right}</span>
-              {validated && isConnected && !isCorrect && (
+              {validated && revealCorrection && isConnected && !isCorrect && (
                 <span className="shrink-0">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="text-red-500" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
                 </span>
@@ -1202,7 +1208,7 @@ function MatchExercise({
         })}
       </div>
 
-      {validated && (
+      {validated && revealCorrection && (
         <div className="space-y-1 pt-1">
           {pairs.map((pair, li) => {
             const ri = connections.get(li);
@@ -1276,6 +1282,7 @@ function WriteExercise({
   const promptCount = activeVerbs.length > 0 ? activeVerbs.length : displayedPrompts.length;
   const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
   const [checking, setChecking] = useState(false);
   const [grammarErrors, setGrammarErrors] = useState<Record<number, LTMatch[]>>({});
   const [apiError, setApiError] = useState(false);
@@ -1387,7 +1394,7 @@ function WriteExercise({
             : exercise.verb
               ? hasVerb(inputText, exercise.verb)
               : true;
-        const isClean = validated && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
+        const isClean = validated && revealCorrection && !checking && ltErrors.length === 0 && inputText.length > 2 && verbOk;
 
         return (
           <div key={i} className="space-y-1.5">
@@ -1433,13 +1440,13 @@ function WriteExercise({
               </div>
             )}
             {/* Internal verb check — shown only after validation */}
-            {validated && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
+            {validated && revealCorrection && !checking && (perVerb || exercise.verb) && inputText.length > 2 && !verbOk && (
               <p className="ml-5 text-xs text-amber-600 dark:text-amber-400">
                 Le verbe <strong>{perVerb ?? exercise.verb}</strong> est attendu dans cette phrase
               </p>
             )}
             {/* LanguageTool results — shown only after validation */}
-            {validated && !checking && ltErrors.length > 0 && (
+            {validated && revealCorrection && !checking && ltErrors.length > 0 && (
               <ul className="ml-5 space-y-1">
                 {ltErrors.map((err, ei) => {
                   const suggestions = err.replacements.slice(0, 3).map((r) => r.value).filter(Boolean);
@@ -1483,6 +1490,7 @@ function TrueFalseExercise({
 }) {
   const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(exercise.items.length).fill(null));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1514,7 +1522,7 @@ function TrueFalseExercise({
           const mkCls = (val: boolean) => {
             const isCorrectAnswer = val === correct;
             if (chosen !== val) {
-              if (validated && !isRight && isCorrectAnswer) {
+              if (validated && revealCorrection && !isRight && isCorrectAnswer) {
                 return `${btnBase} border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold`;
               }
               return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
@@ -1557,6 +1565,7 @@ function OrderExercise({
   );
   const [builts, setBuilts] = useState<string[][]>(() => exercise.items.map(() => []));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1599,7 +1608,7 @@ function OrderExercise({
             )}
             {/* answer area */}
             <div className={`min-h-9 flex flex-wrap gap-1.5 rounded border-2 p-2 transition-colors ${
-              validated
+              validated && revealCorrection
                 ? correct
                   ? "border-emerald-400 bg-emerald-50 dark:bg-emerald-950/30"
                   : "border-red-400 bg-red-50 dark:bg-red-950/30"
@@ -1619,7 +1628,7 @@ function OrderExercise({
                 </button>
               ))}
             </div>
-            {validated && !correct && (
+            {validated && revealCorrection && !correct && (
               <p className="text-xs text-emerald-600 dark:text-emerald-400">✓ {item.sentence}</p>
             )}
             {/* word pool */}
@@ -1663,6 +1672,7 @@ function ClassifyExercise({
   });
   const [chosen, setChosen] = useState<(number | null)[]>(() => new Array(items.length).fill(null));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1690,12 +1700,12 @@ function ClassifyExercise({
                 <span className="font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
                 {renderInlineMarkup(item.word, false)}
               </p>
-              <div className={`flex overflow-hidden rounded-xl border ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
+              <div className={`flex overflow-hidden rounded-xl border ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {exercise.categories.map((cat, ci) => {
                   const active = sel === ci;
-                  const userWrong = validated && !isRight;
+                  const userWrong = validated && revealCorrection && !isRight;
                   let cls = "flex-1 py-1.5 text-center text-xs font-medium transition-colors ";
-                  if (ci > 0) cls += `border-l ${validated && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
+                  if (ci > 0) cls += `border-l ${validated && revealCorrection && sel !== null && sel !== item.categoryIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"} `;
                   if (active) {
                     cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
                   } else if (userWrong && ci === item.categoryIdx) {
@@ -1752,6 +1762,7 @@ function WordOrderExercise({
   const [arranged, setArranged] = useState<string[][]>(() => states.map(() => []));
   const [pools, setPools] = useState<string[][]>(() => states.map((s) => [...s.shuffled]));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1800,7 +1811,7 @@ function WordOrderExercise({
               <div className="flex min-h-9 flex-1 flex-wrap items-end gap-1.5 border-b-2 border-[var(--color-accent-fr)]/60 pb-1">
                 {arr.map((word, wi) => {
                   let cls = "rounded-full px-2.5 py-0.5 text-sm font-medium transition-colors cursor-pointer ";
-                  if (!validated) {
+                  if (!validated || !revealCorrection) {
                     cls += "bg-[var(--color-accent-fr)] text-white hover:opacity-80";
                   } else {
                     cls += word === expectedTokens[wi]
@@ -1831,7 +1842,7 @@ function WordOrderExercise({
               ))}
             </div>
 
-            {validated && !correct && (
+            {validated && revealCorrection && !correct && (
               <p className="text-xs font-medium text-amber-500 dark:text-amber-400">
                 → {item.sentence}
               </p>
@@ -1867,6 +1878,7 @@ function ColorHighlightExercise({
     exercise.items.map((item) => new Array(item.words.length).fill(null)),
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -1924,7 +1936,7 @@ function ColorHighlightExercise({
       <div className="space-y-4">
         {exercise.items.map((item, qi) => {
           const row = colored[qi]!;
-          const itemCorrect = !validated || item.answers.every((ans, wi) => ans === null || row[wi] === ans);
+          const itemCorrect = !validated || !revealCorrection || item.answers.every((ans, wi) => ans === null || row[wi] === ans);
           return (
             <div key={qi} className="space-y-1.5">
               <p className="text-sm font-bold text-[var(--color-accent-fr)]">{qi + 1}.</p>
@@ -1986,13 +1998,14 @@ function PillGroup<T extends string>({
   validated: boolean;
   onChange: (v: T) => void;
 }) {
+  const revealCorrection = useEvalReveal();
   return (
-    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} text-xs font-semibold`}>
+    <div className={`inline-flex overflow-hidden rounded-xl border ${validated && revealCorrection && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} text-xs font-semibold`}>
       {options.map((opt, oi) => {
         const active = value === opt;
-        const userWrong = validated && value !== correct;
+        const userWrong = validated && revealCorrection && value !== correct;
         let cls = "px-3 py-1 transition-colors ";
-        if (oi > 0) cls += `border-l ${validated && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} `;
+        if (oi > 0) cls += `border-l ${validated && revealCorrection && value !== correct ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border)]"} `;
         if (active) {
           cls += "bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]";
         } else if (userWrong && opt === correct) {
@@ -2028,6 +2041,7 @@ function Tag2Exercise({
     items.map(() => ({ n: null, g: null })),
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     onCanValidateChange(!validated);
@@ -2053,8 +2067,8 @@ function Tag2Exercise({
       <div className="space-y-1">
         {items.map((item, i) => {
           const ans = answers[i]!;
-          const nWrong = validated && ans.n !== item.number;
-          const gWrong = validated && item.gender !== null && ans.g !== item.gender;
+          const nWrong = validated && revealCorrection && ans.n !== item.number;
+          const gWrong = validated && revealCorrection && item.gender !== null && ans.g !== item.gender;
           return (
             <div key={i} className="flex items-center gap-3 py-1.5">
               {/* Number */}
@@ -2656,12 +2670,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                           </span>
                         </div>
                       )}
-                      <ExerciseView
-                        exercise={ex}
-                        onValidated={handleEvalValidated}
-                        validateCommand={evalValidateCommands[i] ?? 0}
-                        onCanValidateChange={isActive ? setCanValidate : () => {}}
-                      />
+                      <EvalRevealContext.Provider value={isResults}>
+                        <ExerciseView
+                          exercise={ex}
+                          onValidated={handleEvalValidated}
+                          validateCommand={evalValidateCommands[i] ?? 0}
+                          onCanValidateChange={isActive ? setCanValidate : () => {}}
+                        />
+                      </EvalRevealContext.Provider>
                     </div>
                   </div>
                 );
