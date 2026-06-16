@@ -26,6 +26,7 @@ import {
   Exercise38 as PlacementCircleExercise,
 } from "@/components/math/placement/PlacementExercises28to38";
 import { G5VolumeExercise } from "@/components/math/geo/G5VolumeExercises";
+import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "rounded-none border-0 border-b-2 border-amber-500";
 const MATH_TEXT_INPUT_BASE = "rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 text-center font-mono outline-none transition-colors focus:border-[var(--color-accent-alg)] disabled:opacity-70";
@@ -527,11 +528,13 @@ function ComparisonExercise({
   answers,
   validated,
   onAnswer,
+  revealCorrection = true,
 }: {
   config: ComparisonConfig;
   answers: Array<"<" | "=" | ">" | null>;
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+  revealCorrection?: boolean;
 }) {
   const maxA = Math.max(...config.questions.map(q => q.a));
   const numW = maxA >= 10000 ? "6ch" : maxA >= 1000 ? "5ch" : maxA >= 100 ? "3ch" : "2ch";
@@ -551,7 +554,7 @@ function ComparisonExercise({
                   const sel = answers[i] === sym;
                   const isCorrect = sym === q.answer;
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                  if (!validated) {
+                  if (!(validated && revealCorrection)) {
                     cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                   } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
@@ -607,12 +610,13 @@ function genExprComp(op: ArithOp, range: [number, number], exNum: number, count 
 }
 
 function ExprCompExercise({
-  config, answers, validated, onAnswer,
+  config, answers, validated, onAnswer, revealCorrection = true,
 }: {
   config: ExprCompConfig;
   answers: Array<"<" | "=" | ">" | null>;
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+  revealCorrection?: boolean;
 }) {
   const maxVal = Math.max(...config.questions.flatMap(q => [Math.abs(q.la), Math.abs(q.lb), Math.abs(q.ra), Math.abs(q.rb)]));
   const numW = maxVal >= 1000 ? "4ch" : maxVal >= 100 ? "3ch" : "2ch";
@@ -635,7 +639,7 @@ function ExprCompExercise({
                   const sel = answers[i] === sym;
                   const isCorrect = sym === q.answer;
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                  if (!validated) {
+                  if (!(validated && revealCorrection)) {
                     cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                   } else if (sel) {
                     cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
@@ -1554,7 +1558,7 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
 
 // ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
 function WordProblemsExercise({
-  config, answers, validated, results, onChange, consigne,
+  config, answers, validated, results, onChange, consigne, revealCorrection = true,
 }: {
   config: WordProblemsConfig;
   answers: string[];
@@ -1562,6 +1566,7 @@ function WordProblemsExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
   consigne?: string;
+  revealCorrection?: boolean;
 }) {
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
@@ -1573,7 +1578,7 @@ function WordProblemsExercise({
       <div className="space-y-6">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
-          const ok = validated ? (results[i] ?? false) : null;
+          const ok = validated && revealCorrection ? (results[i] ?? false) : null;
           const wrong = ok === false;
           return (
             <div key={i} className="space-y-3">
@@ -1611,13 +1616,14 @@ function WordProblemsExercise({
 
 // ── ArithmeticGroupExercise ───────────────────────────────────────────────────
 function UnitConversionExercise({
-  config, answers, validated, results, onChange,
+  config, answers, validated, results, onChange, revealCorrection = true,
 }: {
   config: UnitConversionConfig;
   answers: string[];
   validated: boolean;
   results: boolean[];
   onChange: (i: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
@@ -1631,7 +1637,7 @@ function UnitConversionExercise({
       <div className="space-y-4">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
-          const ok = validated ? (results[i] ?? false) : null;
+          const ok = validated && revealCorrection ? (results[i] ?? false) : null;
           const wrong = ok === false;
           return (
             <div key={`${q.value}-${q.from}-${q.to}-${i}`} className="inline-flex w-auto items-center gap-3 text-sm">
@@ -1665,7 +1671,7 @@ function UnitConversionExercise({
   );
 }
 function ArithmeticGroupExercise({
-  config, answers, validated, results, onChange, onTimerExpired, onTimeUpdate, hideTimerDisplay, consigne,
+  config, answers, validated, results, onChange, onTimerExpired, onTimeUpdate, hideTimerDisplay, consigne, revealCorrection = true,
 }: {
   config: ArithGroupConfig;
   answers: string[];
@@ -1676,6 +1682,7 @@ function ArithmeticGroupExercise({
   onTimeUpdate?: (t: number) => void;
   hideTimerDisplay?: boolean;
   consigne?: string;
+  revealCorrection?: boolean;
 }) {
   const [timeLeft, setTimeLeft] = useState<number | null>(() =>
     config.timer !== undefined ? config.timer : null
@@ -1735,7 +1742,7 @@ function ArithmeticGroupExercise({
       <div className="space-y-3">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
-          const ok = validated ? results[i] ?? false : null;
+          const ok = validated && revealCorrection ? results[i] ?? false : null;
           const wrongField = ok === false;
           return (
             <div key={i} className="flex min-h-[2.25rem] items-center gap-1.5">
@@ -1769,12 +1776,13 @@ function ArithmeticGroupExercise({
 const COL_LABELS = ["M", "C", "D", "U"] as const;
 
 function ColumnGridCard({
-  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect: _cardCorrect, preFilledOperands, exNum: _exNum, onChange, onCarryChange,
+  q, cardIdx, cellAnswers, carryInputs, validated, cardCorrect: _cardCorrect, preFilledOperands, exNum: _exNum, onChange, onCarryChange, revealCorrection = true,
 }: {
   q: ColGridQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
   validated: boolean; cardCorrect: boolean; preFilledOperands: boolean; exNum: number;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
   onCarryChange: (cardIdx: number, col: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const ad = getD4(q.a), bd = getD4(q.b), rd = getD4(q.result);
   const firstNzA = ad.findIndex(d => d !== 0);
@@ -1809,7 +1817,7 @@ function ColumnGridCard({
   const cellInput = ({ base, col, expected, firstNz }: { base: number; col: number; expected: number; firstNz?: number }) => {
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
-    const ok = validated ? cellOk(expected, val, col, firstNz ?? 0) : null;
+    const ok = validated && revealCorrection ? cellOk(expected, val, col, firstNz ?? 0) : null;
     if (ok === false) {
       return (
         <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
@@ -1865,7 +1873,7 @@ function ColumnGridCard({
             {q.carryRow.map((c, ci) => {
               const carryVal = carryInputs[ci] ?? "";
               const expectedCarry = c !== null ? String(c) : null;
-              const carryWrong = validated && expectedCarry !== null && carryVal.trim() !== expectedCarry;
+              const carryWrong = validated && revealCorrection && expectedCarry !== null && carryVal.trim() !== expectedCarry;
               return (
                 <td key={ci} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
                   {carryWrong ? (
@@ -1929,7 +1937,7 @@ function ColumnGridCard({
 }
 
 function ColumnGridExercise({
-  config, answers, carryInputs, validated, results, onChange, onCarryChange, consigne,
+  config, answers, carryInputs, validated, results, onChange, onCarryChange, consigne, revealCorrection = true,
 }: {
   config: ColGridConfig;
   answers: string[][];
@@ -1939,6 +1947,7 @@ function ColumnGridExercise({
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
   onCarryChange: (cardIdx: number, col: number, val: string) => void;
   consigne?: string;
+  revealCorrection?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -1960,6 +1969,7 @@ function ColumnGridExercise({
             exNum={config.exNum}
             onChange={onChange}
             onCarryChange={onCarryChange}
+            revealCorrection={revealCorrection}
           />
         ))}
       </div>
@@ -1976,7 +1986,7 @@ const CELL_W = 32;
 
 function DivColumnCard({
   q, cardIdx, quotientInputs, remainderInput, operandInputs, workInputs, validated, preFilledOperands,
-  onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
+  onQuotientChange, onRemainderChange, onOperandChange, onWorkChange, revealCorrection = true,
 }: {
   q: DivColGridQ; cardIdx: number;
   quotientInputs: string[]; remainderInput: string;
@@ -1987,6 +1997,7 @@ function DivColumnCard({
   onRemainderChange: (ci: number, val: string) => void;
   onOperandChange: (ci: number, isDivisor: boolean, idx: number, val: string) => void;
   onWorkChange: (ci: number, si: number, type: 0|1, di: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const { dividend, divisor, quotient, remainder, steps, dividendCols, divisorCols, quotientCols } = q;
   const colLabels = dividendCols === 4 ? DIV_COL_LABELS_4 : dividendCols === 5 ? DIV_COL_LABELS_5 : DIV_COL_LABELS_6;
@@ -2011,7 +2022,7 @@ function DivColumnCard({
   const inputCell = ({ val, expected, onChange }: {
     val: string; expected: string; onChange: (v: string) => void;
   }) => {
-    const ok = validated ? val.trim() === expected : null;
+    const ok = validated && revealCorrection ? val.trim() === expected : null;
     if (ok === false) return (
       <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
         <span className="text-[9px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -2034,7 +2045,7 @@ function DivColumnCard({
   const emptyCell = () =>
     <div className="h-8 w-8" />;
 
-  const remOk = validated ? remainderInput.trim() === remainder.toString() : null;
+  const remOk = validated && revealCorrection ? remainderInput.trim() === remainder.toString() : null;
 
   // Render full dividend-column-width row with inputs at specified positions
   function FullWorkRow({ numStr, colEnd, si, type }: { numStr: string; colEnd: number; si: number; type: 0|1 }) {
@@ -2204,12 +2215,13 @@ const COL5_LABELS = ["DM","M","C","D","U"];
 
 function Mul2DigitCard({
   q, cardIdx, cellAnswers, carryInputs, validated, preFilledOperands,
-  onChange, onCarryChange,
+  onChange, onCarryChange, revealCorrection = true,
 }: {
   q: Mul2DigitQ; cardIdx: number; cellAnswers: string[]; carryInputs: string[];
   validated: boolean; preFilledOperands: boolean;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
   onCarryChange: (cardIdx: number, col: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const ad = getD5(q.a), bd = getD5(q.b);
   const p1d = getD5(q.partial1), p2d = getD5(q.partial2);
@@ -2251,7 +2263,7 @@ function Mul2DigitCard({
     const val = cellAnswers[idx] ?? "";
     const fNz = firstNz ?? 0;
     const isLeading = expected === 0 && col < fNz;
-    const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
+    const ok = validated && revealCorrection ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
         <div className={`h-8 w-8 flex flex-col items-center justify-center border-amber-400`}>
@@ -2280,7 +2292,7 @@ function Mul2DigitCard({
     const idx = rowBase + col;
     const val = carryInputs[idx] ?? "";
     const expected = expectedCarries[col];
-    if (validated && expected !== null && val.trim() !== String(expected)) {
+    if (validated && revealCorrection && expected !== null && val.trim() !== String(expected)) {
       return (
         <div className={`h-5 w-8 flex flex-col items-center justify-center border-amber-400`}>
           <span className="text-[8px] leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -2391,7 +2403,7 @@ function Mul2DigitCard({
 }
 
 function Mul2DigitExercise({
-  config, answers, carryInputs, validated, results, onChange, onCarryChange,
+  config, answers, carryInputs, validated, results, onChange, onCarryChange, revealCorrection = true,
 }: {
   config: Mul2DigitConfig;
   answers: string[][];
@@ -2400,6 +2412,7 @@ function Mul2DigitExercise({
   results: boolean[];
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
   onCarryChange: (cardIdx: number, col: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   void results;
   return (
@@ -2420,6 +2433,7 @@ function Mul2DigitExercise({
             preFilledOperands={config.preFilledOperands}
             onChange={onChange}
             onCarryChange={onCarryChange}
+            revealCorrection={revealCorrection}
           />
         ))}
       </div>
@@ -2430,7 +2444,7 @@ function Mul2DigitExercise({
 function DivColumnGridExercise({
   config, quotientInputs, remainderInputs, operandInputs, workInputs, validated,
   onQuotientChange, onRemainderChange, onOperandChange, onWorkChange,
-  consigne, consigneLang, consigneDir,
+  consigne, consigneLang, consigneDir, revealCorrection = true,
 }: {
   config: DivColGridConfig;
   quotientInputs: string[][];
@@ -2445,6 +2459,7 @@ function DivColumnGridExercise({
   consigne?: string;
   consigneLang?: string;
   consigneDir?: "ltr" | "rtl";
+  revealCorrection?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -2464,6 +2479,7 @@ function DivColumnGridExercise({
             onRemainderChange={onRemainderChange}
             onOperandChange={onOperandChange}
             onWorkChange={onWorkChange}
+            revealCorrection={revealCorrection}
           />
         ))}
       </div>
@@ -2473,13 +2489,14 @@ function DivColumnGridExercise({
 
 // ── RoundingExercise ──────────────────────────────────────────────────────────
 function RoundingExercise({
-  config, answers, validated, results, onChange,
+  config, answers, validated, results, onChange, revealCorrection = true,
 }: {
   config: RoundingConfig;
   answers: string[];
   validated: boolean;
   results: boolean[];
   onChange: (i: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   const isNew = config.consigne !== "";
@@ -2504,7 +2521,7 @@ function RoundingExercise({
         >
           {config.questions.map((q, i) => {
             const v = answers[i] ?? "";
-            const ok = validated ? results[i] ?? false : null;
+            const ok = validated && revealCorrection ? results[i] ?? false : null;
             const wrongField = ok === false;
             const numLabel = <span className="text-xs font-bold text-[var(--color-accent-alg)] self-center">{i + 1}.</span>;
             const prompt = <span className={`${isNew && !isInline ? "font-mono" : "flex-1"} text-sm text-[var(--color-text-primary)] self-center`}>{q.prompt}</span>;
@@ -2577,9 +2594,10 @@ function FracDisplay({ num, den }: { num: number | string; den: number | string 
 }
 
 // ── FracIdExercise ────────────────────────────────────────────────────────────
-function FracIdExercise({ config, answers, validated, results, onChange }: {
+function FracIdExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
   config: FracIdConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -2587,7 +2605,7 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
-          const ok = validated ? results[i] : null;
+          const ok = validated && revealCorrection ? results[i] : null;
           const wrong = ok === false;
           const label = q.ask === "num" ? "Quel est le numérateur ?" : "Quel est le dénominateur ?";
           return (
@@ -2619,9 +2637,10 @@ function FracIdExercise({ config, answers, validated, results, onChange }: {
 }
 
 // ── FracEquivExercise ─────────────────────────────────────────────────────────
-function FracEquivExercise({ config, answers, validated, results, onChange }: {
+function FracEquivExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
   config: FracEquivConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
+  revealCorrection?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -2630,7 +2649,7 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
-          const ok = validated ? results[i] : null;
+          const ok = validated && revealCorrection ? results[i] : null;
           const wrong = ok === false;
           const correctAns = q.answer;
           const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
@@ -2677,12 +2696,13 @@ function FracEquivExercise({ config, answers, validated, results, onChange }: {
 }
 
 // ── FracSimplifyExercise ──────────────────────────────────────────────────────
-function FracSimplifyExercise({ config, answers, validated, results, onChange }: {
+function FracSimplifyExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
   config: FracSimplifyConfig;
   answers: Array<{ num: string; den: string }>;
   validated: boolean;
   results: boolean[];
   onChange: (i: number, part: "num" | "den", val: string) => void;
+  revealCorrection?: boolean;
 }) {
   const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   return (
@@ -2692,7 +2712,7 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
       <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
         {config.questions.map((q, i) => {
           const ans = answers[i] ?? { num: "", den: "" };
-          const ok = validated ? results[i] : null;
+          const ok = validated && revealCorrection ? results[i] : null;
           const wrong = ok === false;
           return (
             <div key={i} className="flex items-center gap-2">
@@ -2729,11 +2749,12 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange }:
 }
 
 // ── FracCompareExercise ───────────────────────────────────────────────────────
-function FracCompareExercise({ config, answers, validated, onAnswer }: {
+function FracCompareExercise({ config, answers, validated, onAnswer, revealCorrection = true }: {
   config: FracCompConfig;
   answers: Array<"<" | "=" | ">" | null>;
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
+  revealCorrection?: boolean;
 }) {
   return (
     <div className="space-y-4">
@@ -2749,7 +2770,7 @@ function FracCompareExercise({ config, answers, validated, onAnswer }: {
                 const sel = answers[i] === sym;
                 const isCorrect = sym === q.answer;
                 let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                if (!validated) {
+                if (!(validated && revealCorrection)) {
                   cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
                 } else if (sel && isCorrect) {
                   cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
@@ -2796,6 +2817,7 @@ function GeoLineInput({
   answer,
   onChange,
   validated,
+  revealCorrection = true,
 }: {
   label: string;
   unit: string;
@@ -2803,9 +2825,10 @@ function GeoLineInput({
   answer: string;
   onChange: (value: string) => void;
   validated: boolean;
+  revealCorrection?: boolean;
 }) {
   const correct = Number.isInteger(value) ? String(value) : value.toFixed(1).replace(".", ",");
-  const wrong = validated && answer.trim().replace(".", ",") !== correct;
+  const wrong = validated && revealCorrection && answer.trim().replace(".", ",") !== correct;
   return (
     <div className="flex items-center gap-2">
       <span className="text-sm text-[var(--color-text-secondary)]">{label} =</span>
@@ -2817,7 +2840,7 @@ function GeoLineInput({
               <span className="font-bold text-amber-600">{correct}</span>
             </>
           ) : (
-            <span>{answer || correct}</span>
+            <span>{answer || (revealCorrection ? correct : "")}</span>
           )
         ) : (
           <input
@@ -2839,11 +2862,13 @@ function SquareGeoExercise({
   validated,
   validateTrigger,
   onValidated,
+  revealCorrection = true,
 }: {
   exerciseKey: number;
   validated: boolean;
   validateTrigger: number;
   onValidated: (score: number, max: number) => void;
+  revealCorrection?: boolean;
 }) {
   const [data] = useState(() => {
     const side = rnd(3, 15);
@@ -2879,8 +2904,8 @@ function SquareGeoExercise({
         <text x="177" y="82" textAnchor="start" fontSize="12" fill="var(--color-text-secondary)" dominantBaseline="middle">{data.side} cm</text>
       </svg>
       <div className="space-y-2">
-        <GeoLineInput label="Périmètre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} />
-        <GeoLineInput label="Aire" unit="cm²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} />
+        <GeoLineInput label="Périmètre" unit="cm" value={data.perimeter} answer={answerP} onChange={setAnswerP} validated={validated} revealCorrection={revealCorrection} />
+        <GeoLineInput label="Aire" unit="cm²" value={data.area} answer={answerA} onChange={setAnswerA} validated={validated} revealCorrection={revealCorrection} />
       </div>
     </div>
   );
@@ -2892,12 +2917,14 @@ function GeoPlacementExercise({
   validated,
   validateTrigger,
   onValidated,
+  revealCorrection = true,
 }: {
   step: GeoPlacementStep;
   exerciseKey: number;
   validated: boolean;
   validateTrigger: number;
   onValidated: (score: number, max: number) => void;
+  revealCorrection?: boolean;
 }) {
   const common = {
     exerciseKey,
@@ -2905,19 +2932,17 @@ function GeoPlacementExercise({
     validateTrigger,
     onValidated,
   };
-  const ExerciseComponent =
-    step.geoKind === "square" ? SquareGeoExercise :
-    step.geoKind === "rectangle" ? PlacementRectangleExercise :
-    step.geoKind === "triangle" ? PlacementTriangleExercise :
-    step.geoKind === "parallelogram" ? PlacementParallelogramExercise :
-    step.geoKind === "trapezoid" ? PlacementTrapezoidExercise :
-    step.geoKind === "circle" ? PlacementCircleExercise :
-    PlacementRhombusExercise;
 
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {step.exNum}</h2>
-      <ExerciseComponent {...common} />
+      {step.geoKind === "square" ? <SquareGeoExercise {...common} revealCorrection={revealCorrection} /> :
+        step.geoKind === "rectangle" ? <PlacementRectangleExercise {...common} /> :
+        step.geoKind === "triangle" ? <PlacementTriangleExercise {...common} /> :
+        step.geoKind === "parallelogram" ? <PlacementParallelogramExercise {...common} /> :
+        step.geoKind === "trapezoid" ? <PlacementTrapezoidExercise {...common} /> :
+        step.geoKind === "circle" ? <PlacementCircleExercise {...common} /> :
+        <PlacementRhombusExercise {...common} />}
     </div>
   );
 }
@@ -4644,6 +4669,7 @@ export function GenericModuleContent({
   const isLastStep = stepIdx === steps.length - 1;
   const evalSteps = evalStartIdx >= 0 ? steps.slice(evalStartIdx + 1) : [];
   const isInEvalPhase = evalStartIdx >= 0 && stepIdx > evalStartIdx && !showEvalScore;
+  const revealCorrection = !isInEvalPhase;
   const inEvalPhase = currentStep?.kind === "eval_start" || currentStep?.kind === "pass_toggle" || isInEvalPhase || showEvalScore;
   const evalStepOffset = isInEvalPhase ? stepIdx - evalStartIdx - 1 : -1;
 
@@ -6019,7 +6045,7 @@ export function GenericModuleContent({
                 : activeNumberSelectConfig.mode === "lt" ? n < activeNumberSelectConfig.threshold
                 : n > activeNumberSelectConfig.threshold && n < activeNumberSelectConfig.threshold2!;
               let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold transition-colors ";
-              if (!numberSelectValidated) {
+              if (!(numberSelectValidated && revealCorrection)) {
                 cls += sel
                   ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                   : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
@@ -6051,7 +6077,7 @@ export function GenericModuleContent({
           <div className="space-y-3">
             {activeEncadrementConfig.questions.map((q, i) => {
               const a = encadrementAnswers[i] ?? {lo:"",hi:""};
-              const ok = encadrementValidated ? encadrementResults[i] : null;
+              const ok = encadrementValidated && revealCorrection ? encadrementResults[i] : null;
               const wrong = ok === false;
               const dir = q.dir ?? "<";
               const firstKey = dir === "<" ? "lo" : "hi";
@@ -6106,7 +6132,7 @@ export function GenericModuleContent({
           <div className="space-y-3">
             {activeOddEvenConfig.questions.map((q, i) => {
               const sel = oddEvenAnswers[i];
-              const ok = oddEvenValidated ? oddEvenResults[i] : null;
+              const ok = oddEvenValidated && revealCorrection ? oddEvenResults[i] : null;
               return (
                 <div key={i} className="flex items-center gap-3">
                   <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -6117,7 +6143,7 @@ export function GenericModuleContent({
                       const isCorrect = opt === q.answer;
                       let cls = "w-[4.5rem] py-1.5 text-sm font-bold text-center transition-colors focus:outline-none ";
                       if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
-                      if (!oddEvenValidated) {
+                      if (!(oddEvenValidated && revealCorrection)) {
                         cls += isSelected
                           ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]";
@@ -6154,15 +6180,15 @@ export function GenericModuleContent({
           <div className="space-y-5">
             {activeNlMultiConfig.questions.map((q, i) => {
               const v = nlMultiAnswers[i] ?? "";
-              const ok = nlMultiValidated ? nlMultiResults[i] : null;
+              const ok = nlMultiValidated && revealCorrection ? nlMultiResults[i] : null;
               const noFeedback = activeNlMultiConfig.noFeedback;
               const wrong = ok === false;
               const inputCls = `flex-1 h-[2.75rem] px-4 py-2.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               let afterText = "";
               if (!noFeedback) {
-                if (nlMultiValidated && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
-                else if (nlMultiValidated && q.mode === "less" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
-                else if (nlMultiValidated && q.mode === "more" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
+                if (nlMultiValidated && revealCorrection && q.mode === "read" && ok === false) afterText = `Réponse attendue : ${q.nlConfig.target}`;
+                else if (nlMultiValidated && revealCorrection && q.mode === "less" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus petite.`;
+                else if (nlMultiValidated && revealCorrection && q.mode === "more" && ok === false) afterText = `La flèche indique ${q.nlConfig.target}. Votre réponse doit être plus grande.`;
               }
               return (
                 <div key={i} className="space-y-2">
@@ -6202,7 +6228,7 @@ export function GenericModuleContent({
               const sel = orderingSelected[qi] ?? [];
               const available = q.numbers.filter(n => !sel.includes(n));
               const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
-              const ok = orderingValidated ? orderingResults[qi] : null;
+              const ok = orderingValidated && revealCorrection ? orderingResults[qi] : null;
               const sep = activeOrderingConfig.direction === "asc" ? "<" : ">";
               const chipBase = "w-20 flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
               const toggleChip = (n: number) => {
@@ -6240,7 +6266,7 @@ export function GenericModuleContent({
                       </Fragment>
                     ))}
                   </div>
-                  {orderingValidated && ok === false && (
+                  {orderingValidated && revealCorrection && ok === false && (
                     <div className="flex flex-wrap items-center gap-1">
                       <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
                       {sorted.map((n, si) => (
@@ -6266,7 +6292,7 @@ export function GenericModuleContent({
           <div className="space-y-4">
             {activeSeqRuleConfig.questions.map((q, i) => {
               const v = seqRuleAnswers[i] ?? "";
-              const ok = seqRuleValidated ? seqRuleResults[i] : null;
+              const ok = seqRuleValidated && revealCorrection ? seqRuleResults[i] : null;
               const wrong = ok === false;
               const correctAns = `${q.op}${q.step.toLocaleString("fr-CH")}`;
               const chipCls = `${activeSeqRuleConfig.exNum === 3 ? "w-12 " : activeSeqRuleConfig.exNum === 4 ? "w-16 " : ""}shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] ${activeSeqRuleConfig.exNum === 4 ? "px-[10px]" : "px-3"} py-2 font-mono text-sm text-[var(--color-text-primary)]`;
@@ -6317,7 +6343,7 @@ export function GenericModuleContent({
                         const bIdx = blankCounter++;
                         const v = seqCompleteAnswers[qi]?.[bIdx] ?? "";
                         const expected = q.allNums[ni]!;
-                        const wrong = seqCompleteValidated && parseFloat(v) !== expected;
+                        const wrong = seqCompleteValidated && revealCorrection && parseFloat(v) !== expected;
                         return wrong ? (
                           <div key={ni} className={`${inputCls} rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                             <span className="text-xs text-[var(--color-text-primary)] leading-none">{v||"—"}</span>
@@ -6339,7 +6365,7 @@ export function GenericModuleContent({
                       );
                     })}
                   </div>
-                  {seqCompleteValidated && activeSeqCompleteConfig.exNum !== 5 && activeSeqCompleteConfig.exNum !== 6 && (
+                  {seqCompleteValidated && revealCorrection && activeSeqCompleteConfig.exNum !== 5 && activeSeqCompleteConfig.exNum !== 6 && (
                     <div className="flex items-center gap-1">
                       <span className="text-xs font-bold text-[var(--color-text-secondary)]">
                         Règle : {q.allNums[1]! - q.allNums[0]! >= 0 ? "+" : ""}{q.allNums[1]! - q.allNums[0]!}
@@ -6370,7 +6396,7 @@ export function GenericModuleContent({
               const sel = decOrderingSelected[qi] ?? [];
               const available = q.hundredths.filter(n => !sel.includes(n));
               const sorted = [...q.hundredths].sort((a,b) => activeDecOrderingConfig.direction === "asc" ? a-b : b-a);
-              const ok = decOrderingValidated ? decOrderingResults[qi] : null;
+              const ok = decOrderingValidated && revealCorrection ? decOrderingResults[qi] : null;
               const sep = activeDecOrderingConfig.direction === "asc" ? "<" : ">";
               const chipBase = "w-[4.5rem] flex h-10 items-center justify-center rounded-lg border px-1.5 text-sm font-mono font-bold transition-colors ";
               const toggleChip = (n: number) => {
@@ -6408,7 +6434,7 @@ export function GenericModuleContent({
                       ))}
                     </div>
                   </div>
-                  {decOrderingValidated && ok === false && (
+                  {decOrderingValidated && revealCorrection && ok === false && (
                     <div className="flex flex-wrap items-center gap-1">
                       <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
                       {sorted.map((n, si) => (
@@ -6438,7 +6464,7 @@ export function GenericModuleContent({
             >
               {activeDecSeqRuleConfig.questions.map((q, i) => {
                 const v = decSeqRuleAnswers[i] ?? "";
-                const ok = decSeqRuleValidated ? decSeqRuleResults[i] : null;
+                const ok = decSeqRuleValidated && revealCorrection ? decSeqRuleResults[i] : null;
                 const wrong = ok === false;
                 const correctAns = `${q.op}${fmtDec(q.step)}`;
                 return (
@@ -6487,7 +6513,7 @@ export function GenericModuleContent({
                         const bIdx = blankCounter++;
                         const v = decSeqCompleteAnswers[qi]?.[bIdx] ?? "";
                         const expected = q.allNums[ni]!;
-                        const wrong = decSeqCompleteValidated && parseDec(v) !== expected;
+                        const wrong = decSeqCompleteValidated && revealCorrection && parseDec(v) !== expected;
                         return wrong ? (
                           <div key={ni} className={`h-9 px-1 font-mono text-sm rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center`}>
                             <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
@@ -6524,6 +6550,7 @@ export function GenericModuleContent({
           exerciseKey={stepIdx * 1000 + geoResetKey}
           validated={geoValidated}
           validateTrigger={geoValidateTrigger}
+          revealCorrection={revealCorrection}
           onValidated={(score, max) => {
             setGeoResults(Array.from({ length: max }, (_, i) => i < score));
             setGeoValidated(true);
@@ -6532,18 +6559,20 @@ export function GenericModuleContent({
       )}
 
       {!showEvalScore && currentStep?.kind === "volume_placement" && (
-        <G5VolumeExercise
-          key={`volume-${stepIdx}-${geoResetKey}`}
-          exNum={currentStep.exNum}
-          solidKind={currentStep.volumeKind}
-          mode={currentStep.mode}
-          decimals={currentStep.decimals}
-          validateCommand={geoValidateTrigger}
-          onValidated={(_ok, score = 0, max = 2) => {
-            setGeoResults(Array.from({ length: max }, (_, i) => i < score));
-            setGeoValidated(true);
-          }}
-        />
+        <EvalRevealContext.Provider value={revealCorrection}>
+          <G5VolumeExercise
+            key={`volume-${stepIdx}-${geoResetKey}`}
+            exNum={currentStep.exNum}
+            solidKind={currentStep.volumeKind}
+            mode={currentStep.mode}
+            decimals={currentStep.decimals}
+            validateCommand={geoValidateTrigger}
+            onValidated={(_ok, score = 0, max = 2) => {
+              setGeoResults(Array.from({ length: max }, (_, i) => i < score));
+              setGeoValidated(true);
+            }}
+          />
+        </EvalRevealContext.Provider>
       )}
 
       {!showEvalScore && currentStep?.kind === "unit_conversion" && activeUnitConversionConfig && (
@@ -6553,6 +6582,7 @@ export function GenericModuleContent({
           validated={unitConversionValidated}
           results={unitConversionResults}
           onChange={(i, val) => setUnitConversionAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6563,6 +6593,7 @@ export function GenericModuleContent({
           answers={compAnswers}
           validated={compValidated}
           onAnswer={(i, sym) => setCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6572,6 +6603,7 @@ export function GenericModuleContent({
           answers={exprCompAnswers}
           validated={exprCompValidated}
           onAnswer={(i, sym) => setExprCompAnswers(prev => prev.map((a, j) => j === i ? sym : a))}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6598,6 +6630,7 @@ export function GenericModuleContent({
                     ? "Effectuez les multiplications."
                     : "Effectuez les divisions."
           }
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6611,6 +6644,7 @@ export function GenericModuleContent({
           results={wpResults}
           onChange={(i, val) => setWpAnswers(prev => prev.map((a, j) => j === i ? val : a))}
           consigne={showPivotTranslation ? currentStepTrad?.consignes?.wordProblems?.[pivot] : undefined}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6623,6 +6657,7 @@ export function GenericModuleContent({
           validated={roundingValidated}
           results={roundingResults}
           onChange={(i, val) => setRoundingAnswers(prev => prev.map((a, j) => j === i ? val : a))}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6634,6 +6669,7 @@ export function GenericModuleContent({
           validated={fracIdValidated}
           results={fracIdResults}
           onChange={(i, v) => setFracIdAnswers(prev => { const a = [...prev]; a[i] = v; return a; })}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6645,6 +6681,7 @@ export function GenericModuleContent({
           validated={fracEquivValidated}
           results={fracEquivResults}
           onChange={(i, v) => setFracEquivAnswers(prev => { const a = [...prev]; a[i] = v; return a; })}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6660,6 +6697,7 @@ export function GenericModuleContent({
             a[i] = { ...(a[i] ?? {num:"",den:""}), [part]: v };
             return a;
           })}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6673,6 +6711,7 @@ export function GenericModuleContent({
             if (fracCompareValidated) return;
             setFracCompareAnswers(prev => { const a = [...prev]; a[i] = sym; return a; });
           }}
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6699,6 +6738,7 @@ export function GenericModuleContent({
               ? "Effectuez les additions en colonnes. Écrivez le résultat et les retenues."
               : "Effectuez les soustractions en colonnes. Écrivez le résultat et les emprunts."
           }
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6720,6 +6760,7 @@ export function GenericModuleContent({
               ci === cardIdx ? card.map((v, vi) => vi === col ? val : v) : card
             ))
           }
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6763,6 +6804,7 @@ export function GenericModuleContent({
               });
             }))
           }
+          revealCorrection={revealCorrection}
         />
       )}
 
@@ -6776,7 +6818,7 @@ export function GenericModuleContent({
               const sel = multSelectAnswers[i] ?? false;
               const shouldSel = n % activeMultSelectConfig.base === 0;
               let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold transition-colors ";
-              if (!multSelectValidated) {
+              if (!(multSelectValidated && revealCorrection)) {
                 cls += sel
                   ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                   : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
@@ -6807,7 +6849,7 @@ export function GenericModuleContent({
             {activeMultListConfig.bases.map((base, i) => {
               const expected = Array.from({ length: 5 }, (_, idx) => base * (idx + 1)).join(", ");
               const v = multListAnswers[i] ?? "";
-              const ok = multListValidated ? matchesMultList(v, base) : null;
+              const ok = multListValidated && revealCorrection ? matchesMultList(v, base) : null;
               const wrong = ok === false;
               const inputCls = `h-11 w-full px-3 text-left text-sm ${MATH_TEXT_INPUT_BASE}`;
               return (
@@ -6851,7 +6893,7 @@ export function GenericModuleContent({
                       const isSelected = sel === val;
                       const isCorrect = val === q.answer;
                       let cls = "px-3 py-1.5 rounded border text-xs font-bold transition-colors ";
-                      if (!tfMultDivValidated) {
+                      if (!(tfMultDivValidated && revealCorrection)) {
                         cls += isSelected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
@@ -6889,7 +6931,7 @@ export function GenericModuleContent({
               const parts = parseNumberList(v);
               const userSet = new Set(parts);
               const correct = new Set(q.divisors);
-              const ok = findDivisorsValidated ? userSet.size === correct.size && [...correct].every(d => userSet.has(d)) : null;
+              const ok = findDivisorsValidated && revealCorrection ? userSet.size === correct.size && [...correct].every(d => userSet.has(d)) : null;
               return (
                 <div key={q.number} className="space-y-2">
                   <p className="text-sm text-[var(--color-text-primary)]">
@@ -6923,7 +6965,7 @@ export function GenericModuleContent({
               const sel = divSelectAnswers[i] ?? false;
               const shouldSel = n % activeDivSelectConfig.base === 0;
               let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold transition-colors ";
-              if (!divSelectValidated) {
+              if (!(divSelectValidated && revealCorrection)) {
                 cls += sel
                   ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                   : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
@@ -6960,7 +7002,7 @@ export function GenericModuleContent({
                       const selected = divByAnswers[i]?.[j] ?? false;
                       const shouldSelect = q.validDivisors.includes(choice);
                       let cls = "h-9 w-10 rounded-lg border px-2 text-center text-sm font-mono font-bold transition-colors ";
-                      if (!divByValidated) {
+                      if (!(divByValidated && revealCorrection)) {
                         cls += selected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-alg)]";
@@ -6996,7 +7038,7 @@ export function GenericModuleContent({
           <div className="grid items-center gap-x-4 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content max-content" }}>
             {activeMissingDigitConfig.questions.map((q, i) => {
               const v = missingDigitAnswers[i] ?? "";
-              const ok = missingDigitValidated ? q.validDigits.includes(v.trim()) : null;
+              const ok = missingDigitValidated && revealCorrection ? q.validDigits.includes(v.trim()) : null;
               const wrong = ok === false;
               const inputCls = "w-5 border-0 border-b-2 border-[var(--color-accent-alg)] bg-transparent px-0 text-center font-mono text-sm font-bold text-[var(--color-accent-alg)] outline-none transition-colors";
               return (
@@ -7033,7 +7075,7 @@ export function GenericModuleContent({
           <div className="space-y-3">
             {activeGcdLcmConfig.questions.map((q, i) => {
               const v = gcdLcmAnswers[i] ?? "";
-              const ok = gcdLcmValidated ? parseInt(v) === q.answer : null;
+              const ok = gcdLcmValidated && revealCorrection ? parseInt(v) === q.answer : null;
               const wrong = ok === false;
               const inputCls = `w-20 h-9 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
               return (
@@ -7075,7 +7117,7 @@ export function GenericModuleContent({
                       const isSelected = sel === val;
                       const isCorrect = val === q.answer;
                       let cls = "px-3 py-1.5 rounded border text-xs font-bold transition-colors ";
-                      if (!tfGcdLcmValidated) {
+                      if (!(tfGcdLcmValidated && revealCorrection)) {
                         cls += isSelected
                           ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                           : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
