@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 
 function rnd(min: number, max: number) {
@@ -197,6 +198,7 @@ function RelArithExercise({
   answersRef.current = answers;
   const validatedRef = useRef(validated);
   validatedRef.current = validated;
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validatedRef.current) return;
@@ -259,7 +261,7 @@ function RelArithExercise({
         >
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const ok = validated ? results[i] : null;
+            const ok = validated && revealCorrection ? results[i] : null;
             const wrongField = ok === false;
             const missedVal = q.missingPos === "result" ? q.result : q.missingPos === "a" ? q.a : q.b;
 
