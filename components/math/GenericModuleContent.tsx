@@ -4663,6 +4663,9 @@ export function GenericModuleContent({
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
   const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [evalAnswerSnapshots, setEvalAnswerSnapshots] = useState<Record<number, any>>({});
+  const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
 
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
@@ -4971,6 +4974,7 @@ export function GenericModuleContent({
         setEvalSavedAnswers(prev => ({ ...prev, [evalStepOffset]: answer }));
       } else if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: arithAnswers } }));
       } else if (currentStep.kind === "column_grid") {
         const cfg = gridOverrideConfigs[stepIdx] ?? currentStep.config;
         if (currentStep.lesson.submoduleId === "A3-2") {
@@ -5001,18 +5005,25 @@ export function GenericModuleContent({
         } else {
           currentResults = gridResults.slice(0, cfg.questions.length);
         }
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: gridAnswers, carries: gridCarryInputs } }));
       } else if (currentStep.kind === "rounding_group") {
         currentResults = roundingResults.slice(0, (roundingOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: roundingAnswers } }));
       } else if (currentStep.kind === "unit_conversion") {
         currentResults = unitConversionResults.slice(0, (unitConversionOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: unitConversionAnswers } }));
       } else if (currentStep.kind === "frac_id") {
         currentResults = fracIdResults.slice(0, currentStep.config.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: fracIdAnswers } }));
       } else if (currentStep.kind === "frac_equiv") {
         currentResults = fracEquivResults.slice(0, currentStep.config.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: fracEquivAnswers } }));
       } else if (currentStep.kind === "frac_simplify") {
         currentResults = fracSimplifyResults.slice(0, currentStep.config.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: fracSimplifyAnswers } }));
       } else if (currentStep.kind === "frac_compare") {
         currentResults = fracCompareResults.slice(0, currentStep.config.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: fracCompareAnswers } }));
       } else if (currentStep.kind === "number_select") {
         const cfg = numberSelectOverrideConfigs[stepIdx] ?? currentStep.config;
         const total = cfg.numbers.length;
@@ -5024,15 +5035,18 @@ export function GenericModuleContent({
         if (correct === total) currentResults = [true, true, true, true];
         else if (correct > total / 2) currentResults = [true, true, false, false];
         else currentResults = [false, false, false, false];
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: numberSelectAnswers } }));
       } else if (currentStep.kind === "encadrement") {
         const cfg = encadrementOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const a = encadrementAnswers[i] ?? {lo:"",hi:""};
           return parseInt(a.lo) === q.lo && parseInt(a.hi) === q.hi;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: encadrementAnswers } }));
       } else if (currentStep.kind === "odd_even") {
         const oeActive = oddEvenOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = oeActive.questions.slice(0, 4).map((q, i) => oddEvenAnswers[i] === q.answer);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: oddEvenAnswers } }));
       } else if (currentStep.kind === "nl_multi") {
         const nlActive = nlMultiOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = nlActive.questions.map((q, i) => {
@@ -5041,27 +5055,32 @@ export function GenericModuleContent({
           if (q.mode === "less") return !isNaN(ans) && ans < q.nlConfig.target;
           return !isNaN(ans) && ans > q.nlConfig.target;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: nlMultiAnswers } }));
       } else if (currentStep.kind === "ordering") {
         currentResults = currentStep.config.questions.map((q, qi) => {
           const sel = orderingSelected[qi] ?? [];
           const sorted = [...q.numbers].sort((a,b) => currentStep.config.direction === "asc" ? a-b : b-a);
           return sel.length === q.numbers.length && sel.every((n,i) => n === sorted[i]);
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { selected: orderingSelected } }));
       } else if (currentStep.kind === "seq_rule") {
         currentResults = currentStep.config.questions.map((q, i) => {
           const ans = seqRuleAnswers[i]?.trim() ?? "";
           return ans === `${q.op}${q.step}`;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: seqRuleAnswers } }));
       } else if (currentStep.kind === "seq_complete") {
         currentResults = currentStep.config.questions.map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => parseInt(seqCompleteAnswers[qi]?.[ii] ?? "") === q.allNums[bi]);
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: seqCompleteAnswers } }));
       } else if (currentStep.kind === "dec_ordering") {
         currentResults = (activeDecOrderingConfig?.questions ?? []).map((q, qi) => {
           const sel = decOrderingSelected[qi] ?? [];
           const sorted = [...q.hundredths].sort((a,b) => (activeDecOrderingConfig?.direction === "asc" ? a-b : b-a));
           return sel.length === q.hundredths.length && sel.every((n,i) => n === sorted[i]);
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { selected: decOrderingSelected } }));
       } else if (currentStep.kind === "dec_seq_rule") {
         currentResults = (activeDecSeqRuleConfig?.questions ?? []).map((q, i) => {
           const ans = decSeqRuleAnswers[i]?.trim() ?? "";
@@ -5069,6 +5088,7 @@ export function GenericModuleContent({
           const correctAlt = `${q.op}${fmtDec(q.step).replace(",",".")}`;
           return ans === correct || ans === correctAlt;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: decSeqRuleAnswers } }));
       } else if (currentStep.kind === "dec_seq_complete") {
         currentResults = (activeDecSeqCompleteConfig?.questions ?? []).map((q, qi) => {
           return q.blankIdxs.every((bi, ii) => {
@@ -5076,12 +5096,18 @@ export function GenericModuleContent({
             return parseDec(v) === q.allNums[bi];
           });
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: decSeqCompleteAnswers } }));
       } else if (currentStep.kind === "div_column_grid") {
         const cfg = divGridOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = divGridResults.slice(0, cfg.questions.length);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: {
+          quotientInputs: divGridQuotientInputs, remainderInputs: divGridRemainderInputs,
+          operandInputs: divGridOperandInputs, workInputs: divGridWorkInputs,
+        } }));
       } else if (currentStep.kind === "expr_comparison") {
         const cfg = exprCompOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => exprCompAnswers[i] === q.answer);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: exprCompAnswers } }));
       } else if (currentStep.kind === "mul_two_digit") {
         const cfg = mul2dOverrideConfigs[stepIdx] ?? currentStep.config;
         // Partial scoring for A3.2; carries always ignored
@@ -5117,6 +5143,7 @@ export function GenericModuleContent({
             currentResults.push(opOk, p1Ok, p2Ok, rOk);
           }
         }
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: mul2dAnswers, carries: mul2dCarryInputs } }));
       } else if (currentStep.kind === "mult_select") {
         const cfg = multSelectOverride[stepIdx] ?? currentStep.config;
         const total = cfg.numbers.length;
@@ -5127,12 +5154,15 @@ export function GenericModuleContent({
         if (correct === total) currentResults = [true, true, true, true];
         else if (correct > total / 2) currentResults = [true, true, false, false];
         else currentResults = [false, false, false, false];
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: multSelectAnswers } }));
       } else if (currentStep.kind === "mult_list") {
         const cfg = multListOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.bases.map((base, i) => matchesMultList(multListAnswers[i] ?? "", base));
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: multListAnswers } }));
       } else if (currentStep.kind === "true_false_mult_div") {
         const cfg = tfMultDivOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => tfMultDivAnswers[i] === q.answer);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: tfMultDivAnswers } }));
       } else if (currentStep.kind === "find_divisors") {
         const cfg = findDivisorsOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
@@ -5141,6 +5171,7 @@ export function GenericModuleContent({
           const correct = new Set(q.divisors);
           return userSet.size === correct.size && [...correct].every(d => userSet.has(d));
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: findDivisorsAnswers } }));
       } else if (currentStep.kind === "div_select") {
         const cfg = divSelectOverride[stepIdx] ?? currentStep.config;
         const total = cfg.numbers.length;
@@ -5151,35 +5182,42 @@ export function GenericModuleContent({
         if (correct === total) currentResults = [true, true, true, true];
         else if (correct > total / 2) currentResults = [true, true, false, false];
         else currentResults = [false, false, false, false];
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: divSelectAnswers } }));
       } else if (currentStep.kind === "div_by") {
         const cfg = divByOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const selected = divByAnswers[i] ?? [];
           return q.choices.every((choice, j) => selected[j] === q.validDivisors.includes(choice));
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: divByAnswers } }));
       } else if (currentStep.kind === "missing_digit_div") {
         const cfg = missingDigitOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const ans = (missingDigitAnswers[i] ?? "").trim();
           return q.validDigits.includes(ans);
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: missingDigitAnswers } }));
       } else if (currentStep.kind === "gcd_lcm") {
         const cfg = gcdLcmOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const ans = parseInt(gcdLcmAnswers[i] ?? "");
           return ans === q.answer;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: gcdLcmAnswers } }));
       } else if (currentStep.kind === "true_false_gcd_lcm") {
         const cfg = tfGcdLcmOverride[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => tfGcdLcmAnswers[i] === q.answer);
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: tfGcdLcmAnswers } }));
       } else if (currentStep.kind === "word_problems") {
         const cfg = wpOverrideConfigs[stepIdx] ?? currentStep.config;
         currentResults = cfg.questions.map((q, i) => {
           const v = (wpAnswers[i] ?? "").trim().replace(/\s+/g, "");
           return parseInt(v, 10) === q.answer;
         });
+        setEvalAnswerSnapshots(prev => ({ ...prev, [evalStepOffset]: { answers: wpAnswers } }));
       } else if (currentStep.kind === "geo_placement" || currentStep.kind === "volume_placement") {
         currentResults = geoResults.length > 0 ? geoResults : [false, false];
+        // No raw per-field answers available (GeoPlacementExercise/G5VolumeExercise only report score/max) — see renderEvalReviewDetail default case.
       }
       const newSavedDict = { ...evalSavedResults, [evalStepOffset]: currentResults };
       setEvalSavedResults(newSavedDict);
@@ -5873,6 +5911,746 @@ export function GenericModuleContent({
   if (stepValidate && isInEvalPhase) {
     const origValidate = stepValidate;
     stepValidate = () => { origValidate(); setEvalAutoAdvance(v => v + 1); };
+  }
+
+  // Renders the read-only "what did I answer" detail for one eval result row, using the
+  // historical step config (evalSteps[stepOffset]) and the answer snapshot captured in
+  // goNext() at the moment the student moved past that step. Always fully reveals correction.
+  function renderEvalReviewDetail(stepOffset: number): React.ReactNode {
+    const step = evalSteps[stepOffset];
+    if (!step) return null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const snapshot = evalAnswerSnapshots[stepOffset] as any;
+    const results = evalSavedResults[stepOffset] ?? [];
+    const noop = () => {};
+
+    switch (step.kind) {
+      case "exercise": {
+        const userAns = evalSavedAnswers[stepOffset];
+        const expectedAns = step.item.acceptable[0];
+        if (userAns === undefined || expectedAns === undefined) return null;
+        return (
+          <div className="text-xs">
+            <span className="text-[var(--color-text-secondary)]">Ta réponse : </span>
+            <span className="font-mono text-amber-600">{userAns || "—"}</span>
+            <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+            <span className="font-mono font-bold text-[var(--color-accent-alg)]">{expectedAns}</span>
+          </div>
+        );
+      }
+      case "arithmetic_group":
+        if (!snapshot) return null;
+        return (
+          <ArithmeticGroupExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "column_grid":
+        if (!snapshot) return null;
+        return (
+          <ColumnGridExercise
+            config={step.config}
+            answers={snapshot.answers}
+            carryInputs={snapshot.carries}
+            validated={true}
+            results={results}
+            onChange={noop}
+            onCarryChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "rounding_group":
+        if (!snapshot) return null;
+        return (
+          <RoundingExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "unit_conversion":
+        if (!snapshot) return null;
+        return (
+          <UnitConversionExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "frac_id":
+        if (!snapshot) return null;
+        return (
+          <FracIdExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "frac_equiv":
+        if (!snapshot) return null;
+        return (
+          <FracEquivExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "frac_simplify":
+        if (!snapshot) return null;
+        return (
+          <FracSimplifyExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "frac_compare":
+        if (!snapshot) return null;
+        return (
+          <FracCompareExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            onAnswer={noop}
+            revealCorrection={true}
+          />
+        );
+      case "div_column_grid":
+        if (!snapshot) return null;
+        return (
+          <DivColumnGridExercise
+            config={step.config}
+            quotientInputs={snapshot.quotientInputs}
+            remainderInputs={snapshot.remainderInputs}
+            operandInputs={snapshot.operandInputs}
+            workInputs={snapshot.workInputs}
+            validated={true}
+            onQuotientChange={noop}
+            onRemainderChange={noop}
+            onOperandChange={noop}
+            onWorkChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "expr_comparison":
+        if (!snapshot) return null;
+        return (
+          <ExprCompExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            onAnswer={noop}
+            revealCorrection={true}
+          />
+        );
+      case "mul_two_digit":
+        if (!snapshot) return null;
+        return (
+          <Mul2DigitExercise
+            config={step.config}
+            answers={snapshot.answers}
+            carryInputs={snapshot.carries}
+            validated={true}
+            results={results}
+            onChange={noop}
+            onCarryChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "word_problems":
+        if (!snapshot) return null;
+        return (
+          <WordProblemsExercise
+            config={step.config}
+            answers={snapshot.answers}
+            validated={true}
+            results={results}
+            onChange={noop}
+            revealCorrection={true}
+          />
+        );
+      case "number_select": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: boolean[] = snapshot.answers;
+        return (
+          <div className="grid grid-cols-5 gap-2">
+            {cfg.numbers.map((n, i) => {
+              const sel = answers[i] ?? false;
+              const shouldSelect = cfg.mode === "gt" ? n > cfg.threshold : cfg.mode === "lt" ? n < cfg.threshold : n > cfg.threshold && n < cfg.threshold2!;
+              let cls = "rounded-lg border px-2 py-2.5 text-center text-sm font-mono font-bold ";
+              if (sel && shouldSelect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+              else if (sel && !shouldSelect) cls += CLS_WRONG;
+              else if (!sel && shouldSelect) cls += CLS_WRONG;
+              else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              return <div key={i} className={cls}>{n.toLocaleString("fr-CH")}</div>;
+            })}
+          </div>
+        );
+      }
+      case "encadrement": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<{ lo: string; hi: string }> = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.questions.map((q, i) => {
+              const a = answers[i] ?? { lo: "", hi: "" };
+              const dir = q.dir ?? "<";
+              const firstKey = dir === "<" ? "lo" : "hi";
+              const secondKey = dir === "<" ? "hi" : "lo";
+              const firstExpected = dir === "<" ? q.lo : q.hi;
+              const secondExpected = dir === "<" ? q.hi : q.lo;
+              const firstVal = a[firstKey] ?? "";
+              const secondVal = a[secondKey] ?? "";
+              const wrong = results[i] === false;
+              const box = (val: string, expected: number) => wrong ? (
+                <div className="w-20 h-[2.125rem] rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                  <span className="text-xs text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
+                  <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
+                </div>
+              ) : (
+                <span className="w-20 inline-flex h-[2.125rem] items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">{val}</span>
+              );
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {box(firstVal, firstExpected)}
+                  <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{dir}</span>
+                  <span className="w-20 shrink-0 text-center font-mono text-sm text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                  <span className="shrink-0 text-sm font-bold text-[var(--color-text-secondary)]">{dir}</span>
+                  {box(secondVal, secondExpected)}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "odd_even": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<"pair" | "impair" | null> = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.questions.slice(0, 4).map((q, i) => {
+              const sel = answers[i];
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="w-16 font-mono text-sm text-[var(--color-text-primary)]">{q.n.toLocaleString("fr-CH")}</span>
+                  <div className="flex rounded-full border overflow-hidden border-[var(--color-border-default)]">
+                    {(["pair", "impair"] as const).map((opt, oi) => {
+                      const isSelected = sel === opt;
+                      const isCorrect = opt === q.answer;
+                      let cls = "w-[4.5rem] py-1.5 text-sm font-bold text-center ";
+                      if (oi === 1) cls += "border-l border-[var(--color-border-default)] ";
+                      if (isSelected) cls += "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                      else if (isCorrect) cls += "bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
+                      else cls += "text-[var(--color-text-secondary)] opacity-40";
+                      return <span key={opt} className={cls}>{opt}</span>;
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "nl_multi": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-5">
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = results[i] === false;
+              return (
+                <div key={i} className="space-y-2">
+                  <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3">
+                    <NumberLineSVG config={q.nlConfig} />
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)] w-5">{i + 1}.</span>
+                    {wrong ? (
+                      <div className="flex-1 h-[2.75rem] px-4 py-2.5 text-sm rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center gap-0.5">
+                        <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                        {q.mode === "read" && <span className="text-xs font-bold text-amber-600 leading-none">{q.nlConfig.target}</span>}
+                      </div>
+                    ) : (
+                      <span className="flex-1 font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "ordering": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const selected: Array<number[]> = snapshot.selected;
+        const sep = cfg.direction === "asc" ? "<" : ">";
+        return (
+          <div className="space-y-6">
+            {cfg.questions.map((q, qi) => {
+              const sel = selected[qi] ?? [];
+              const sorted = [...q.numbers].sort((a, b) => cfg.direction === "asc" ? a - b : b - a);
+              const ok = results[qi];
+              return (
+                <div key={qi} className="space-y-3">
+                  <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+                    <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {sel.map((n, si) => (
+                      <Fragment key={si}>
+                        <span className="w-20 flex h-10 items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] px-1.5 text-sm font-mono font-bold text-white">{n.toLocaleString("fr-CH")}</span>
+                        {si < sel.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
+                      </Fragment>
+                    ))}
+                  </div>
+                  {ok === false && (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
+                      {sorted.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-amber-700">{n.toLocaleString("fr-CH")}</span>
+                          {si < sorted.length - 1 && <span className="text-amber-500 text-xs">{sep}</span>}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "seq_rule": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-4">
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = results[i] === false;
+              const correctAns = `${q.op}${q.step.toLocaleString("fr-CH")}`;
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {q.nums.map((n, ni) => (
+                    <span key={ni} className="shrink-0 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-3 py-2 font-mono text-sm text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                  ))}
+                  {wrong ? (
+                    <div className="w-24 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{v || "—"}</span>
+                      <span className="text-xs font-bold leading-none text-amber-600">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <span className="w-24 text-center font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "seq_complete": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<string[]> = snapshot.answers;
+        return (
+          <div className="space-y-5">
+            {cfg.questions.map((q, qi) => {
+              let blankCounter = 0;
+              return (
+                <div key={qi} className="flex items-center gap-1.5 flex-wrap">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                  {q.allNums.map((n, ni) => {
+                    const blankIdx = q.blankIdxs.indexOf(ni);
+                    if (blankIdx !== -1) {
+                      const bIdx = blankCounter++;
+                      const v = answers[qi]?.[bIdx] ?? "";
+                      const expected = q.allNums[ni]!;
+                      const wrong = parseInt(v) !== expected;
+                      return wrong ? (
+                        <div key={ni} className="w-12 h-9 rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                          <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                          <span className="text-xs font-bold text-amber-600 leading-none">{expected.toLocaleString("fr-CH")}</span>
+                        </div>
+                      ) : (
+                        <span key={ni} className="w-12 h-9 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                      );
+                    }
+                    return (
+                      <span key={ni} className="w-12 h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{n.toLocaleString("fr-CH")}</span>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "dec_ordering": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const selected: Array<number[]> = snapshot.selected;
+        const sep = cfg.direction === "asc" ? "<" : ">";
+        return (
+          <div className="space-y-6">
+            {cfg.questions.map((q, qi) => {
+              const sel = selected[qi] ?? [];
+              const sorted = [...q.hundredths].sort((a, b) => cfg.direction === "asc" ? a - b : b - a);
+              const ok = results[qi];
+              return (
+                <div key={qi} className="space-y-3">
+                  <div className="flex min-h-[48px] flex-wrap items-center gap-1.5 border-b-2 border-[var(--color-accent-alg)] pb-1">
+                    <span className="shrink-0 mr-1 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                    {sel.map((n, si) => (
+                      <Fragment key={si}>
+                        <span className="w-[4.5rem] flex h-10 items-center justify-center rounded-lg border border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)] px-1.5 text-sm font-mono font-bold text-white">{fmtDec(n)}</span>
+                        {si < sel.length - 1 && <span className="text-sm font-bold text-[var(--color-text-secondary)]">{sep}</span>}
+                      </Fragment>
+                    ))}
+                  </div>
+                  {ok === false && (
+                    <div className="flex flex-wrap items-center gap-1">
+                      <span className="text-xs font-bold text-amber-600 mr-1">Ordre correct :</span>
+                      {sorted.map((n, si) => (
+                        <Fragment key={si}>
+                          <span className="font-mono text-sm font-bold text-amber-700">{fmtDec(n)}</span>
+                          {si < sorted.length - 1 && <span className="text-amber-500 text-xs">{sep}</span>}
+                        </Fragment>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "dec_seq_rule": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = results[i] === false;
+              const correctAns = `${q.op}${fmtDec(q.step)}`;
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  {q.nums.map((n, ni) => (
+                    <span key={ni} className="h-9 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] px-2 font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                  ))}
+                  {wrong ? (
+                    <div className="h-9 w-20 px-1 text-sm font-mono rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                      <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                      <span className="text-xs font-bold leading-none">{correctAns}</span>
+                    </div>
+                  ) : (
+                    <span className="h-9 w-20 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "dec_seq_complete": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<string[]> = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.questions.map((q, qi) => {
+              let blankCounter = 0;
+              return (
+                <div key={qi} className="flex items-center gap-1 flex-wrap">
+                  <span className="shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{qi + 1}.</span>
+                  {q.allNums.map((n, ni) => {
+                    const blankIdx = q.blankIdxs.indexOf(ni);
+                    if (blankIdx !== -1) {
+                      const bIdx = blankCounter++;
+                      const v = answers[qi]?.[bIdx] ?? "";
+                      const expected = q.allNums[ni]!;
+                      const wrong = parseDec(v) !== expected;
+                      return wrong ? (
+                        <div key={ni} className="h-9 w-14 px-1 font-mono text-sm rounded-none border-0 border-b-2 border-amber-500 flex flex-col items-center justify-center">
+                          <span className="text-xs leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                          <span className="text-xs font-bold leading-none">{fmtDec(expected)}</span>
+                        </div>
+                      ) : (
+                        <span key={ni} className="h-9 w-14 flex items-center justify-center font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                      );
+                    }
+                    return (
+                      <span key={ni} className="h-9 w-14 flex items-center justify-center rounded-lg border border-[var(--color-border-default)] font-mono text-sm text-[var(--color-text-primary)]">{fmtDec(n)}</span>
+                    );
+                  })}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "mult_select": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: boolean[] = snapshot.answers;
+        return (
+          <div className="grid grid-cols-5 gap-2">
+            {cfg.numbers.map((n, i) => {
+              const sel = answers[i] ?? false;
+              const shouldSel = n % cfg.base === 0;
+              let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold ";
+              if (sel && shouldSel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+              else if (sel && !shouldSel) cls += CLS_WRONG;
+              else if (!sel && shouldSel) cls += CLS_WRONG;
+              else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              return <div key={i} className={cls}>{n}</div>;
+            })}
+          </div>
+        );
+      }
+      case "mult_list": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.bases.map((base, i) => {
+              const expected = Array.from({ length: 5 }, (_, idx) => base * (idx + 1)).join(", ");
+              const v = answers[i] ?? "";
+              const wrong = !matchesMultList(v, base);
+              return (
+                <div key={i} className="space-y-1">
+                  <p className="text-xs text-[var(--color-text-secondary)]">Du nombre <strong className="font-bold text-[var(--color-text-primary)]">{base}</strong></p>
+                  {wrong ? (
+                    <div className="h-11 w-full px-3 flex flex-col justify-center rounded-none border-0 border-b-2 border-amber-500">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{expected}</span>
+                    </div>
+                  ) : (
+                    <p className="font-mono text-sm text-[var(--color-text-primary)]">{v}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "true_false_mult_div": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<boolean | null> = snapshot.answers;
+        return (
+          <div className="space-y-2">
+            {cfg.questions.map((q, i) => {
+              const sel = answers[i];
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.statement}</span>
+                  <span className={`text-xs font-bold ${sel === q.answer ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
+                    {sel === null || sel === undefined ? "—" : sel ? "Vrai" : "Faux"}
+                    {sel !== q.answer && ` (att. ${q.answer ? "Vrai" : "Faux"})`}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "find_divisors": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-3">
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = results[i] === false;
+              return (
+                <div key={q.number} className="space-y-1">
+                  <p className="text-xs text-[var(--color-text-secondary)]">Du nombre <strong className="font-bold text-[var(--color-text-primary)]">{q.number}</strong></p>
+                  {wrong ? (
+                    <div className="w-full px-3 py-2 text-sm font-mono rounded-none border-0 border-b-2 border-amber-500 flex flex-col gap-0.5">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{q.divisors.join(", ")}</span>
+                    </div>
+                  ) : (
+                    <p className="font-mono text-sm text-[var(--color-text-primary)]">{v}</p>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "div_select": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: boolean[] = snapshot.answers;
+        return (
+          <div className="grid grid-cols-5 gap-2">
+            {cfg.numbers.map((n, i) => {
+              const sel = answers[i] ?? false;
+              const shouldSel = n % cfg.base === 0;
+              let cls = "rounded-lg border px-3 py-2 text-center text-sm font-mono font-bold ";
+              if (sel && shouldSel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+              else if (sel && !shouldSel) cls += CLS_WRONG;
+              else if (!sel && shouldSel) cls += CLS_WRONG;
+              else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+              return <div key={i} className={cls}>{n}</div>;
+            })}
+          </div>
+        );
+      }
+      case "div_by": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: boolean[][] = snapshot.answers;
+        return (
+          <div className="grid items-center gap-x-2 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content repeat(5, 2.5rem)" }}>
+            {cfg.questions.map((q, i) => (
+              <Fragment key={i}>
+                <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                <span className="font-mono text-sm text-[var(--color-text-primary)]">{q.n}</span>
+                {q.choices.map((choice, j) => {
+                  const selected = answers[i]?.[j] ?? false;
+                  const shouldSelect = q.validDivisors.includes(choice);
+                  let cls = "h-9 w-10 rounded-lg border px-2 text-center text-sm font-mono font-bold ";
+                  if (selected && shouldSelect) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
+                  else if (selected && !shouldSelect) cls += CLS_WRONG;
+                  else if (!selected && shouldSelect) cls += CLS_WRONG;
+                  else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)] opacity-50";
+                  return <div key={choice} className={cls}>{choice}</div>;
+                })}
+              </Fragment>
+            ))}
+          </div>
+        );
+      }
+      case "missing_digit_div": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="grid items-center gap-x-4 gap-y-3" style={{ gridTemplateColumns: "1.25rem max-content max-content" }}>
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = !q.validDigits.includes(v.trim());
+              return (
+                <Fragment key={i}>
+                  <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex items-end font-mono text-sm text-[var(--color-text-primary)]">
+                    {q.prefix}
+                    {wrong ? (
+                      <span className="w-5 inline-flex h-6 flex-col items-center justify-center leading-none border-0 border-b-2 border-amber-500">
+                        <span className="text-[10px] font-bold leading-none text-[var(--color-text-primary)]">{v || "—"}</span>
+                        <span className="text-[10px] font-bold leading-none text-amber-600">{q.validDigits[0]}</span>
+                      </span>
+                    ) : (
+                      <span className="w-5 inline-flex justify-center font-bold text-[var(--color-accent-alg)]">{v}</span>
+                    )}
+                  </span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">est divisible par <span className="font-bold text-[var(--color-text-primary)]">{q.divisor}</span></span>
+                </Fragment>
+              );
+            })}
+          </div>
+        );
+      }
+      case "gcd_lcm": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: string[] = snapshot.answers;
+        return (
+          <div className="space-y-2">
+            {cfg.questions.map((q, i) => {
+              const v = answers[i] ?? "";
+              const wrong = parseInt(v) !== q.answer;
+              return (
+                <div key={i} className="flex items-center gap-2">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="text-sm text-[var(--color-text-secondary)]">{formatNumsEt(q.nums)} =</span>
+                  {wrong ? (
+                    <div className="w-20 h-9 px-2 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500">
+                      <span className="text-xs text-[var(--color-text-primary)] leading-none">{v || "—"}</span>
+                      <span className="text-xs font-bold text-amber-600 leading-none">{q.answer}</span>
+                    </div>
+                  ) : (
+                    <span className="font-mono text-sm text-[var(--color-text-primary)]">{v}</span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      case "true_false_gcd_lcm": {
+        if (!snapshot) return null;
+        const cfg = step.config;
+        const answers: Array<boolean | null> = snapshot.answers;
+        return (
+          <div className="space-y-2">
+            {cfg.questions.map((q, i) => {
+              const sel = answers[i];
+              return (
+                <div key={i} className="flex items-center gap-3">
+                  <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
+                  <span className="flex-1 text-sm text-[var(--color-text-primary)]">{q.statement}</span>
+                  <span className={`text-xs font-bold ${sel === q.answer ? "text-[var(--color-accent-alg)]" : "text-amber-600"}`}>
+                    {sel === null || sel === undefined ? "—" : sel ? "Vrai" : "Faux"}
+                    {sel !== q.answer && ` (att. ${q.answer ? "Vrai" : "Faux"})`}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        );
+      }
+      // geo_placement / volume_placement: GeoPlacementExercise / G5VolumeExercise only report
+      // an aggregate score+max via onValidated — there is no per-field raw answer to recover,
+      // so detailed review is intentionally not available for these kinds.
+      case "geo_placement":
+      case "volume_placement":
+        return (
+          <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
+        );
+      // comparison_ex is never produced inside evalSteps (it's an A1.4 training-only exercise,
+      // not part of the timed eval flow) — defensive no-op, should be unreachable here.
+      case "comparison_ex":
+        return null;
+      default:
+        return null;
+    }
   }
 
   if (!lessons || lessons.length === 0 || steps.length === 0) {
@@ -7182,22 +7960,34 @@ export function GenericModuleContent({
           <ul className="space-y-2">
             {evalRowData.map((row, i) => {
               const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
-              const isWrong = row.score < row.max;
-              const step = evalSteps[i];
-              const userAns = evalSavedAnswers[i];
-              const expectedAns = step?.kind === "exercise" ? step.item.acceptable[0] : undefined;
+              const isSelected = selectedResultIdx === i;
               return (
-                <li key={i} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                    <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
-                  </div>
-                  {isWrong && userAns !== undefined && expectedAns !== undefined && (
-                    <div className="mt-1.5 text-xs">
-                      <span className="text-[var(--color-text-secondary)]">Ta réponse : </span>
-                      <span className="font-mono text-amber-600">{userAns || "—"}</span>
-                      <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
-                      <span className="font-mono font-bold text-[var(--color-accent-alg)]">{expectedAns}</span>
+                <li key={i}>
+                  <button
+                    type="button"
+                    onClick={() => setSelectedResultIdx(isSelected ? null : i)}
+                    className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
+                      isSelected
+                        ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                        : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                    }`}
+                  >
+                    <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                    <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{row.score}/{row.max}</span>
+                    <svg
+                      className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`}
+                      viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
+                    >
+                      <path d="M9 18l6-6-6-6" />
+                    </svg>
+                  </button>
+                  {isSelected && (
+                    <div className="mt-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/40 p-4">
+                      <EvalRevealContext.Provider value={true}>
+                        {renderEvalReviewDetail(i) ?? (
+                          <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
+                        )}
+                      </EvalRevealContext.Provider>
                     </div>
                   )}
                 </li>
