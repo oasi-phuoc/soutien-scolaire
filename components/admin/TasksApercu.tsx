@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import type { TaskRow } from "@/app/actions/tasks";
+import { useState, useTransition } from "react";
+import type { TaskRow, TaskStudentStatus } from "@/app/actions/tasks";
+import { getTaskStudentsAction } from "@/app/actions/tasks";
 
 function formatDate(iso: string | null) {
   if (!iso) return null;
@@ -16,8 +17,66 @@ function isDueSoon(iso: string | null) {
   return due.getTime() - now.getTime() < 3 * 24 * 60 * 60 * 1000;
 }
 
+function StudentPanel({ taskId, onClose }: { taskId: string; onClose: () => void }) {
+  const [students, setStudents] = useState<TaskStudentStatus[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+
+  if (students === null && !isPending && !error) {
+    startTransition(async () => {
+      const res = await getTaskStudentsAction(taskId);
+      if (res.ok) setStudents(res.students);
+      else setError(res.error ?? "Erreur");
+    });
+  }
+
+  return (
+    <div className="mt-1 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-900">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-xs font-semibold text-zinc-600 dark:text-zinc-300">Élèves assignés</span>
+        <button
+          type="button"
+          onClick={onClose}
+          className="text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200"
+          aria-label="Fermer"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      {isPending && <p className="text-xs text-zinc-400">Chargement…</p>}
+      {error && <p className="text-xs text-red-500">{error}</p>}
+      {students !== null && students.length === 0 && (
+        <p className="text-xs italic text-zinc-400">Aucun élève.</p>
+      )}
+      {students !== null && students.length > 0 && (
+        <div className="space-y-1">
+          {students.map((s) => {
+            const name = [s.prenom, s.nom].filter(Boolean).join(" ") || s.student_id.slice(0, 8);
+            const done = s.status === "done";
+            return (
+              <div key={s.student_id} className="flex items-center gap-2">
+                <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${done ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400" : "bg-zinc-200 text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400"}`}>
+                  {done ? "✓" : "·"}
+                </span>
+                <span className="flex-1 text-xs text-zinc-700 dark:text-zinc-300">{name}</span>
+                {s.classe && <span className="text-[10px] text-zinc-400">{s.classe}</span>}
+                <span className={`text-[10px] font-medium ${done ? "text-green-600 dark:text-green-400" : "text-zinc-400"}`}>
+                  {done ? (s.done_at ? formatDate(s.done_at.slice(0, 10)) : "Validé") : "En attente"}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
   const [search, setSearch] = useState("");
+  const [openTaskId, setOpenTaskId] = useState<string | null>(null);
 
   const q = search.toLowerCase();
   const filtered = q
@@ -56,7 +115,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-green-700 bg-green-600 dark:border-green-800 dark:bg-green-700">
-              {["Titre", "Module / Leçon", "Date limite", "Élèves", "Avancement"].map((h, i) => (
+              {["Titre", "Module / Leçon", "Date limite", "Élèves", "Avancement", ""].map((h, i) => (
                 <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-green-50">{h}</th>
               ))}
             </tr>
@@ -64,7 +123,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
           <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
             {filtered.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-10 text-center text-sm text-zinc-400">
+                <td colSpan={6} className="px-4 py-10 text-center text-sm text-zinc-400">
                   {tasks.length === 0 ? "Aucune tâche assignée pour l'instant." : "Aucun résultat pour cette recherche."}
                 </td>
               </tr>
@@ -72,12 +131,19 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
               const pct = task.total_students > 0 ? Math.round((task.done_count / task.total_students) * 100) : 0;
               const overdue = task.due_date && new Date(task.due_date + "T00:00:00") < new Date() && task.done_count < task.total_students;
               const soon = !overdue && isDueSoon(task.due_date);
+              const isOpen = openTaskId === task.task_id;
               return (
-                <tr key={task.task_id} className="bg-white hover:bg-zinc-50 dark:bg-zinc-950 dark:hover:bg-zinc-900">
+                <tr key={task.task_id} className="bg-white align-top dark:bg-zinc-950">
                   <td className="max-w-[200px] px-4 py-3">
                     <span className="block font-medium text-zinc-800 dark:text-zinc-200 truncate" title={task.title}>{task.title}</span>
                     {task.description && (
                       <span className="block truncate text-xs text-zinc-400" title={task.description}>{task.description}</span>
+                    )}
+                    {isOpen && (
+                      <StudentPanel
+                        taskId={task.task_id}
+                        onClose={() => setOpenTaskId(null)}
+                      />
                     )}
                   </td>
                   <td className="px-4 py-3">
@@ -109,6 +175,19 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                       </div>
                       <span className="w-9 shrink-0 text-right text-xs tabular-nums text-zinc-500">{pct}%</span>
                     </div>
+                  </td>
+                  <td className="px-3 py-3">
+                    <button
+                      type="button"
+                      onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
+                      className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${isOpen ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400" : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"}`}
+                      aria-label="Voir les élèves"
+                      title="Voir les élèves assignés"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+                      </svg>
+                    </button>
                   </td>
                 </tr>
               );

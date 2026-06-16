@@ -2193,7 +2193,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   const [stepIdx, setStepIdx] = useState(0);
   const [exerciseKey, setExerciseKey] = useState(0);
-  const [canValidate, setCanValidate] = useState(true);
+  const [_canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
   const [exercisesStarted, setExercisesStarted] = useState(!hasTimer);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
@@ -2686,7 +2686,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                       setValidateCommand((c: number) => c + 1);
                     }
                   }}
-                  disabled={!canValidate}
+                  disabled={false}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white transition-opacity hover:opacity-90 active:scale-90 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>

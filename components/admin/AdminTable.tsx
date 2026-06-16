@@ -331,10 +331,20 @@ export function AdminTable({
           {classes.length > 0 && (
             <AdminClassSelect value={filterClasse} options={classes} onChange={setFilterClasse} />
           )}
+          <Link
+            href="/admin/taches"
+            className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-green-600 px-3 py-2 text-sm font-semibold text-green-700 transition-colors hover:bg-green-50 dark:border-green-500 dark:text-green-400 dark:hover:bg-green-950/30"
+            title="Affecter une tâche"
+          >
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+            </svg>
+            Affecter une tâche
+          </Link>
           {currentUserRole === "admin" && (
             <button
               onClick={() => setResetConfirming(true)}
-              className="ml-auto flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-amber-200 bg-amber-50 text-amber-700 transition-colors hover:bg-amber-100 dark:border-amber-800/50 dark:bg-amber-900/20 dark:text-amber-300 dark:hover:bg-amber-900/40"
               aria-label="Archiver les élèves"
               title="Archiver les élèves"
             >

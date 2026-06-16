@@ -97,7 +97,7 @@ export function VocabRunner({ theme }: Props) {
   const [resetKey, setResetKey] = useState(0);
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
-  const [canValidate, setCanValidate] = useState(false);
+  const [_canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number }>>([]);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
@@ -585,7 +585,7 @@ export function VocabRunner({ theme }: Props) {
                   type="button"
                   aria-label="Valider"
                   onClick={handleValidate}
-                  disabled={isInEvalPhase ? (evalValidated[evalExIdx] || !canValidate) : ((inEvalPhase && validated) || !canValidate)}
+                  disabled={isInEvalPhase ? evalValidated[evalExIdx] : (inEvalPhase && validated)}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-fr)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-40"
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
