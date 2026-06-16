@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import {
   ExerciseProps, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const WORD_LETTERS = "abcdefghijklmnopqrstuvwxyz".split("");
 
@@ -50,6 +51,7 @@ export function ExFillSentences({
   const [states, setStates] = useState<SentState[]>(() =>
     sentences.map(() => ({ answer: "", checked: false, correct: false }))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -109,7 +111,7 @@ export function ExFillSentences({
             <div key={i} className="text-sm">
               <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <span className="text-[var(--color-text-primary)]">{before}</span>
-              {s.checked && !s.correct ? (
+              {s.checked && !s.correct && revealCorrection ? (
                 <span className={`mx-1 inline-flex h-8 w-28 ${WRONG_BOX_CLS}`}>
                   <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                   <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{sent.answer}</span>
@@ -117,7 +119,7 @@ export function ExFillSentences({
               ) : (
                 <select
                   value={s.answer}
-                  disabled={s.checked && s.correct}
+                  disabled={s.checked}
                   onChange={(e) =>
                     setStates((prev) =>
                       prev.map((st, j) =>

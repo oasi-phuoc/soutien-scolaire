@@ -4,6 +4,7 @@ import Image from "next/image";
 import {
   ExerciseProps, pickN, shuffle, normalizeText, WRONG_BOX_CLS,
 } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const WORD_LETTERS = ["a", "b", "c", "d", "e", "f"];
 
@@ -40,6 +41,7 @@ export function ExImageMatch({
   const [states, setStates] = useState<Record<string, MatchState>>(() =>
     Object.fromEntries(shownCards.map((w) => [w.word, { answer: "", checked: false, correct: false }]))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -118,7 +120,7 @@ export function ExImageMatch({
               />
               <div className="flex items-center justify-center gap-2">
                 <span className="text-sm font-bold text-[var(--color-accent-fr)]">{cardIdx + 1}.</span>
-                {s.checked && !s.correct ? (
+                {s.checked && !s.correct && revealCorrection ? (
                   <div className={`h-8 w-20 ${WRONG_BOX_CLS}`}>
                     <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</span>
                     <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{WORD_LETTERS[correctIdx]}</span>
@@ -126,7 +128,7 @@ export function ExImageMatch({
                 ) : (
                   <select
                     value={s.answer}
-                    disabled={s.checked && s.correct}
+                    disabled={s.checked}
                     onChange={(e) => handleSelect(w.word, e.target.value)}
                     className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center [text-align-last:center] text-sm text-[var(--color-accent-fr)] outline-none"
                   >

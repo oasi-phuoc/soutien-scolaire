@@ -20,6 +20,7 @@ import { ExWordOrder } from "./vocab/ExWordOrder";
 import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
+import { EvalRevealContext } from "@/lib/eval-reveal-context";
 
 interface Props {
   theme: VocabTheme;
@@ -530,12 +531,14 @@ export function VocabRunner({ theme }: Props) {
                           <span className="text-xs text-[var(--color-text-secondary)]">{score.correct} / {score.total}</span>
                         </div>
                       )}
-                      {renderEvalExercise(
-                        exStep,
-                        isActive ? (evalValidateCommands[i] ?? 0) : 0,
-                        isActive ? setCanValidate : () => {},
-                        (correct, total) => handleEvalValidated(i, correct, total)
-                      )}
+                      <EvalRevealContext.Provider value={step.key === "results"}>
+                        {renderEvalExercise(
+                          exStep,
+                          isActive ? (evalValidateCommands[i] ?? 0) : 0,
+                          isActive ? setCanValidate : () => {},
+                          (correct, total) => handleEvalValidated(i, correct, total)
+                        )}
+                      </EvalRevealContext.Provider>
                     </div>
                   </div>
                 );

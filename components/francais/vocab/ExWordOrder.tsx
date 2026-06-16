@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ExerciseProps, shuffle } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type Token = { id: string; text: string };
 
@@ -29,6 +30,7 @@ export function ExWordOrder({
   const [states, setStates] = useState<PhraseState[]>(() =>
     phrases.map((p) => ({ remaining: shuffle(tokenize(p)), answer: [], checked: false, correct: false }))
   );
+  const revealCorrection = useEvalReveal();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { onCanValidateChange(true); }, []);
@@ -85,7 +87,7 @@ export function ExWordOrder({
               {/* Row 1: number + answer line */}
               <div className="flex items-start gap-2">
                 <span className="mt-1.5 w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{idx + 1}.</span>
-                {s.checked && !s.correct ? (
+                {s.checked && !s.correct && revealCorrection ? (
                   <div className="flex flex-1 flex-col border-b-2 border-amber-400 pb-0.5">
                     <span className="text-sm text-amber-500 line-through dark:text-amber-400">{builtPhrase || "—"}</span>
                     <span className="text-sm font-bold text-[var(--color-text-primary)]">{phrases[idx]}</span>

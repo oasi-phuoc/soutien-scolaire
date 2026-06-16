@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import type { VocabTheme, VocabWord } from "@/lib/curriculum/vocabulary-data";
 import { ExerciseProps, shuffle } from "./vocabUtils";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const LT_IGNORE = new Set(["WHITESPACE_RULE", "FRENCH_WHITESPACE", "COMMA_PARENTHESIS_WHITESPACE", "UNPAIRED_BRACKETS"]);
 
@@ -126,6 +127,7 @@ export function ExQuestionWrite({
   const [states, setStates] = useState<Record<string, WordState>>(() =>
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
@@ -203,7 +205,7 @@ export function ExQuestionWrite({
               {p.context && (
                 <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{p.context}</p>
               )}
-              {isCheckedDone && hasErrors ? (
+              {isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>
                   <ul className="mt-0.5 space-y-0.5">
@@ -232,7 +234,7 @@ export function ExQuestionWrite({
               {s.checked && s.grammarChecking && (
                 <p className="animate-pulse text-center text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
               )}
-              {isCheckedDone && !hasErrors && s.answer.length > 0 && (
+              {isCheckedDone && !hasErrors && s.answer.length > 0 && revealCorrection && (
                 <p className="text-center text-xs text-[var(--color-text-secondary)]">✓</p>
               )}
             </div>
