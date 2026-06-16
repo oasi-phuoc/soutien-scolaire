@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 type G3ShapeKind = "square" | "rectangle" | "triangle" | "parallelogram" | "trapezoid" | "circle" | "rhombus" | "composite";
 type ExerciseMode = "area" | "missing";
@@ -478,6 +479,7 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
     convertedOk: false,
   });
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     const primaryOk = isClose(answers.primary, figure.primaryAnswer);
@@ -523,6 +525,7 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
           ok={answers.primaryOk}
           correct={figure.primaryAnswer}
           onChange={(value) => setValue("primary", value)}
+          revealCorrection={revealCorrection}
         />
         <AnswerLine
           label=""
@@ -532,6 +535,7 @@ export function G3AreaExercise({ exNum, shapeKind, mode, decimals = false, valid
           ok={answers.convertedOk}
           correct={figure.convertedAnswer}
           onChange={(value) => setValue("converted", value)}
+          revealCorrection={revealCorrection}
         />
       </div>
     </div>
@@ -546,6 +550,7 @@ function AnswerLine({
   ok,
   correct,
   onChange,
+  revealCorrection,
 }: {
   label: string;
   value: string;
@@ -554,12 +559,13 @@ function AnswerLine({
   ok: boolean;
   correct: number;
   onChange: (value: string) => void;
+  revealCorrection: boolean;
 }) {
   return (
     <div className="inline-flex w-auto items-end gap-2 text-sm">
       <span className="w-24 shrink-0 font-medium text-[var(--color-text-primary)]">{label}</span>
       <span className="w-3 shrink-0 pb-1 text-center font-medium text-[var(--color-text-primary)]">:</span>
-      {checked && !ok ? (
+      {checked && !ok && revealCorrection ? (
         <div className="flex h-9 w-24 flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 bg-transparent px-1">
           <span className="text-[10px] leading-none text-[var(--color-text-primary)] line-through">{value || "—"}</span>
           <span className="text-xs font-bold leading-none text-amber-600">{fmt(correct)}</span>
@@ -570,8 +576,8 @@ function AnswerLine({
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={inputClass(ok, checked)}
-          readOnly={checked && ok}
+          className={inputClass(revealCorrection ? ok : true, checked)}
+          readOnly={checked}
         />
       )}
       <span className="shrink-0 pb-1 text-[var(--color-text-secondary)]">{unit}</span>
