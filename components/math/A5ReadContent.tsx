@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function rnd(min: number, max: number) {
@@ -104,6 +105,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", "", "", ""]));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => items.map(() => [false, false, false, false]));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -130,7 +132,7 @@ export function DecReadDecomposeExercise({ exNum, validateCommand, onValidated }
             <span className="text-sm font-mono shrink-0 text-[var(--color-text-primary)]">{item.numStr} =</span>
             {item.parts.map((p, j) => (
               <React.Fragment key={j}>
-                {wrongs[i]?.[j]
+                {revealCorrection && wrongs[i]?.[j]
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={p} className="w-10" />
                   : <input
                       type="text"
@@ -161,6 +163,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
   const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => items.map(() => false));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -182,7 +185,7 @@ export function DecReadRecomposeExercise({ exNum, validateCommand, onValidated }
           <div key={i} className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             <span className="text-sm font-mono text-[var(--color-text-primary)]">{item.parts.join(" + ")} =</span>
-            {wrongs[i]
+            {revealCorrection && wrongs[i]
               ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
               : <input
                   type="text"
@@ -223,6 +226,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
   const [items] = useState<PlaceItem[]>(genPlaceValue);
   const [selected, setSelected] = useState<(number | null)[]>(() => items.map(() => null));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -262,7 +266,7 @@ export function DecReadPlaceValueExercise({ exNum, validateCommand, onValidated 
               <div className="flex flex-wrap gap-2 pl-7">
                 {POS_LABELS.map((lbl, pi) => {
                   let cls = "rounded-xl border px-3 py-1.5 text-xs font-medium transition-colors ";
-                  if (validated) {
+                  if (validated && revealCorrection) {
                     if (pi === correct && sel !== correct) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                     else if (pi === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                     else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
@@ -318,6 +322,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
   const [vals, setVals] = useState<string[][]>(() => items.map(() => ["", ""]));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => items.map(() => [false, false]));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -347,7 +352,7 @@ export function DecReadDigitAtExercise({ exNum, validateCommand, onValidated }: 
             {item.asks.map((ask, j) => (
               <div key={j} className="flex items-center gap-2 pl-7">
                 <span className="text-sm text-[var(--color-text-secondary)] min-w-[10rem]">chiffre des {ask.label} :</span>
-                {wrongs[i]?.[j]
+                {revealCorrection && wrongs[i]?.[j]
                   ? <Err wrong={vals[i]?.[j] ?? ""} correct={ask.answer} className="w-14" />
                   : <input
                       type="text"
@@ -387,6 +392,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
   const [vals, setVals] = useState<string[]>(() => nums.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => nums.map(() => false));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -408,7 +414,7 @@ export function DecReadDictationExercise({ exNum, validateCommand, onValidated }
           <div key={i} className="flex items-center gap-3">
             <span className="text-sm font-bold text-[var(--color-accent-alg)] w-5 shrink-0">{i + 1}.</span>
             <PlayBtn text={decToFr(n)} />
-            {wrongs[i]
+            {revealCorrection && wrongs[i]
               ? <Err wrong={vals[i] ?? ""} correct={n} className="w-24" />
               : <input
                   type="text"
@@ -458,6 +464,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
   const [pairs] = useState<ComparePair[]>(genCompare);
   const [selected, setSelected] = useState<(string | null)[]>(() => pairs.map(() => null));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -483,7 +490,7 @@ export function DecReadCompareExercise({ exNum, validateCommand, onValidated }: 
               <span className="font-mono text-sm text-[var(--color-text-primary)] min-w-[3.5rem] text-right">{pair.a}</span>
               {(["<", "=", ">"] as const).map(sym => {
                 let cls = "w-10 h-8 rounded border text-sm font-bold transition-colors ";
-                if (validated) {
+                if (validated && revealCorrection) {
                   if (sym === correct && sym !== sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                   else if (sym === sel) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
                   else cls += "border-[var(--color-border-default)] text-[var(--color-text-secondary)]";
@@ -524,6 +531,7 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
   const [slots, setSlots] = useState<(string | null)[]>([null, null, null, null]);
   const [validated, setValidated] = useState(false);
   const [slotWrong, setSlotWrong] = useState<boolean[]>([false, false, false, false]);
+  const revealCorrection = useEvalReveal();
 
   const placed = new Set(slots.filter(Boolean));
   const remaining = chips.filter(c => !placed.has(c));
@@ -568,12 +576,12 @@ export function DecReadOrderExercise({ exNum, validateCommand, onValidated }: {
               className={`h-10 w-20 rounded-xl border text-sm font-mono font-bold transition-colors flex flex-col items-center justify-center ${
                 s === null
                   ? "border-dashed border-[var(--color-border-default)] text-[var(--color-text-secondary)]"
-                  : validated && slotWrong[i]
+                  : validated && revealCorrection && slotWrong[i]
                     ? "border-[var(--color-accent-alg)]"
                     : "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]"
               }`}
             >
-              {validated && slotWrong[i]
+              {validated && revealCorrection && slotWrong[i]
                 ? <>
                     <span className="text-xs text-[var(--color-text-primary)] leading-none">{s}</span>
                     <span className="text-xs font-bold text-amber-600 leading-none">{sorted[i]}</span>
@@ -640,6 +648,7 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [validated, setValidated] = useState(false);
   const [chipState, setChipState] = useState<Record<string, "correct" | "missed" | "wrong" | "idle">>({});
+  const revealCorrection = useEvalReveal();
 
   const consigne = mode === "gt"
     ? `Sélectionnez tous les nombres strictement supérieurs à ${cfg.threshold}.`
@@ -688,7 +697,7 @@ function FilterExercise({ exNum, mode, validateCommand, onValidated }: {
           const sel = selected.has(s);
           const st = chipState[s];
           let cls = "min-w-[4rem] text-center rounded-xl border px-3 py-2 text-sm font-mono font-bold transition-colors ";
-          if (validated) {
+          if (validated && revealCorrection) {
             if (st === "wrong") cls += "border-[var(--color-accent-alg)]";
             else if (st === "missed") cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
             else if (st === "correct") cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
@@ -762,6 +771,7 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
   const [vals, setVals] = useState<string[]>(() => items.map(() => ""));
   const [wrongs, setWrongs] = useState<boolean[]>(() => items.map(() => false));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -791,7 +801,7 @@ export function DecReadEncadrementExercise({ exNum, validateCommand, onValidated
               <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
               <span className="font-mono text-sm text-right text-[var(--color-text-primary)]">{firstVal}</span>
               <span className="text-sm text-[var(--color-text-secondary)] text-center">{sym}</span>
-              {wrongs[i]
+              {revealCorrection && wrongs[i]
                 ? <Err wrong={vals[i] ?? ""} correct={item.numStr} className="w-20" />
                 : <input type="text" inputMode="decimal" value={vals[i] ?? ""} disabled={validated}
                     onChange={e => setVals(p => p.map((v, vi) => vi === i ? e.target.value.replace(/[^0-9,.]/g, "") : v))}
@@ -826,6 +836,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
   const [vals, setVals] = useState<[string, string][]>(() => items.map(() => ["", ""]));
   const [wrongs, setWrongs] = useState<[boolean, boolean][]>(() => items.map(() => [false, false]));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -850,7 +861,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
         {items.map((item, i) => (
           <React.Fragment key={i}>
             <span className="text-sm font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
-            {wrongs[i]?.[0]
+            {revealCorrection && wrongs[i]?.[0]
               ? <Err wrong={vals[i]?.[0] ?? ""} correct={String(item.lo)} className="w-16" />
               : <input type="text" inputMode="numeric" value={vals[i]?.[0] ?? ""} disabled={validated}
                   onChange={e => setVals(p => p.map((v, vi) => vi === i ? [e.target.value.replace(/[^0-9]/g, ""), v[1]!] as [string, string] : v))}
@@ -858,7 +869,7 @@ export function DecReadEncadrementUniteExercise({ exNum, validateCommand, onVali
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
             <span className="font-mono text-sm font-bold text-[var(--color-accent-alg)]">{item.numStr}</span>
             <span className="text-sm text-[var(--color-text-secondary)] text-center">&lt;</span>
-            {wrongs[i]?.[1]
+            {revealCorrection && wrongs[i]?.[1]
               ? <Err wrong={vals[i]?.[1] ?? ""} correct={String(item.hi)} className="w-16" />
               : <input type="text" inputMode="numeric" value={vals[i]?.[1] ?? ""} disabled={validated}
                   onChange={e => setVals(p => p.map((v, vi) => vi === i ? [v[0]!, e.target.value.replace(/[^0-9]/g, "")] as [string, string] : v))}
@@ -897,6 +908,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
   const [vals, setVals] = useState<string[][]>(() => lines.map(l => l.arrows.map(() => "")));
   const [wrongs, setWrongs] = useState<boolean[][]>(() => lines.map(l => l.arrows.map(() => false)));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -948,13 +960,13 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                     const x = pos(v);
                     const expected = v.toFixed(1).replace(".", ",");
                     const isWrong = wrongs[li]?.[ai];
-                    const lineColor = validated && isWrong ? "#F59E0B" : "var(--color-accent-alg)";
+                    const lineColor = validated && revealCorrection && isWrong ? "#F59E0B" : "var(--color-accent-alg)";
                     const ulY = 28;
                     return (
                       <g key={ai}>
                         <line x1={x} y1={ulY} x2={x} y2={lineY - 4} stroke={lineColor} strokeWidth="1.5" strokeDasharray="4,2" />
                         <polygon points={`${x},${lineY - 2} ${x - 4},${lineY - 9} ${x + 4},${lineY - 9}`} fill={lineColor} />
-                        {validated
+                        {validated && revealCorrection
                           ? isWrong
                             ? <text x={x} textAnchor="middle" fontSize="9">
                                 <tspan y={16} fill="currentColor">{vals[li]?.[ai] || "—"}</tspan>
@@ -968,6 +980,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                                 type="text"
                                 inputMode="decimal"
                                 value={vals[li]?.[ai] ?? ""}
+                                disabled={validated}
                                 onChange={e => setVals(p => p.map((row, ri) => ri === li ? row.map((c, ci) => ci === ai ? e.target.value.replace(/[^0-9,.]/g, "") : c) : row))}
                                 style={{ width: "100%", height: "100%", textAlign: "center", fontSize: "11px", background: "transparent", border: "none", outline: "none" }}
                               />
@@ -1016,6 +1029,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
   const [activeChip, setActiveChip] = useState<number | null>(null);
   const [validated, setValidated] = useState(false);
   const [posWrong, setPosWrong] = useState<boolean[]>(() => cfg.positions.map(() => false));
+  const revealCorrection = useEvalReveal();
 
   const assignedChips = new Set(assignments.filter(a => a !== null));
 
@@ -1073,7 +1087,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
             {cfg.positions.map((v, pi) => {
               const x = pos(v);
               const assigned = assignments[pi];
-              const w = posWrong[pi];
+              const w = revealCorrection && posWrong[pi];
               const fillColor = w ? "#FEF3C7" : assigned !== null ? "#DBEAFE" : "#F3F4F6";
               const strokeColor = w ? "#F59E0B" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
               return (
