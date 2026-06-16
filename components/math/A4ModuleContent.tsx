@@ -6,6 +6,7 @@ import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
 import type { MathExerciseItem, MathRichBlock, MathSubmoduleLesson } from "@/lib/curriculum/content/math/math-a1-types";
 import { getLessonsForModule } from "@/lib/curriculum/lessons-registry";
 import { loadProgress, saveProgress, completeSubmodule } from "@/lib/progress/math-progress";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 // ── Step types ─────────────────────────────────────────────────────────────────
 type TheoryStep              = { kind: "theory"; lesson: MathSubmoduleLesson };
@@ -693,6 +694,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
   const [items] = useState<FractionItem[]>(generateFractionItems);
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   function select(i: number, choice: "num" | "den") {
     if (validated) return;
@@ -712,7 +714,7 @@ export function FractionToggleExercise({ validateCommand, onValidated }: {
   const mkCls = (chosen: boolean, isCorrect: boolean, isRight: boolean) => {
     let cls = `flex-1 py-2.5 text-sm font-medium text-center transition-colors `;
     if (isRight) cls += "border-l border-[var(--color-border-default)] ";
-    if (!validated) {
+    if (!validated || !revealCorrection) {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]" : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
     } else {
       cls += chosen ? "bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
@@ -757,6 +759,7 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
   const [colored, setColored] = useState<Set<number>[]>(() => colorItems.map(() => new Set<number>()));
   const [colorResults, setColorResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -786,14 +789,14 @@ export function FractionColoringExercise({ validateCommand, onValidated }: {
       </div>
       <div className="space-y-5">
         {colorItems.map((item, i) => (
-          <div key={i} className={`rounded-xl border p-3 ${validated ? (colorResults[i] ? "border-[var(--color-border-default)]" : "border-[var(--color-accent-alg)]/40") : "border-[var(--color-border-default)]"}`}>
+          <div key={i} className={`rounded-xl border p-3 ${validated && revealCorrection && !colorResults[i] ? "border-[var(--color-accent-alg)]/40" : "border-[var(--color-border-default)]"}`}>
             <div className="flex items-center gap-3">
               <span className="w-6 shrink-0 text-center text-sm font-bold text-[var(--color-accent-alg)]">{item.label}.</span>
               <div className="shrink-0">
                 <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
               </div>
               <div className="flex flex-1 justify-center">
-                {(() => { const corr = validated && !colorResults[i] ? getCorrectionSets(item.n, item.d, colored[i]!) : null; return (
+                {(() => { const corr = validated && revealCorrection && !colorResults[i] ? getCorrectionSets(item.n, item.d, colored[i]!) : null; return (
                 <FractionShape kind={item.kind} d={item.d} colored={colored[i]!}
                   onToggle={validated ? undefined : (ci) => toggleColor(i, ci)}
                   missSet={corr?.missSet}
@@ -819,6 +822,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
   const [readDens, setReadDens] = useState<string[]>(() => Array(4).fill(""));
   const [readStatuses, setReadStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -842,7 +846,7 @@ export function FractionReadExercise({ validateCommand, onValidated }: {
       <div className="space-y-5">
         {readItems.map((item, i) => {
           const preColored = new Set(Array.from({ length: item.n }, (_, k) => k));
-          const isWrong = readStatuses[i] === "wrong";
+          const isWrong = revealCorrection && readStatuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
           const inputCls = `w-14 rounded-none border-0 border-b-2 px-0 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`;
           return (
@@ -1010,6 +1014,7 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
   const [colored, setColored] = useState<Set<number>[]>(() => items.map(() => new Set<number>()));
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1040,7 +1045,7 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
       <div className="space-y-5">
         {items.map((item, i) => {
           const sc = computeScale(item.kind, item.copies);
-          const isWrong = validated && !results[i];
+          const isWrong = validated && revealCorrection && !results[i];
           return (
             <div key={i} className={`rounded-xl border p-3 ${isWrong ? "border-[var(--color-accent-alg)]/40" : "border-[var(--color-border-default)]"}`}>
               <div className="flex items-center gap-3">
@@ -1049,7 +1054,7 @@ export function FractionMultiColoringExercise({ validateCommand, onValidated }: 
                   <FractionDisplay numerator={item.n} denominator={item.d} highlightPart="num" />
                 </div>
                 <div className="flex flex-1 justify-center overflow-hidden">
-                  {(() => { const corr = validated && !results[i] ? getFlatCorrectionSets(item.n, item.d, item.copies, colored[i]!) : null; return (
+                  {(() => { const corr = isWrong ? getFlatCorrectionSets(item.n, item.d, item.copies, colored[i]!) : null; return (
                   <ShapesRow kind={item.kind} d={item.d} copies={item.copies}
                     colored={colored[i]!}
                     onToggle={validated ? undefined : (fi) => toggleCell(i, fi)}
@@ -1078,6 +1083,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
   const [readDens, setReadDens] = useState<string[]>(() => Array(4).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1102,7 +1108,7 @@ export function FractionMultiReadExercise({ validateCommand, onValidated }: {
         {items.map((item, i) => {
           const preColored = preColorFlat(item.n, item.d);
           const sc = computeScale(item.kind, item.copies);
-          const isWrong = statuses[i] === "wrong";
+          const isWrong = revealCorrection && statuses[i] === "wrong";
           const [correctNum, correctDen] = item.answer.split("/");
           const inputCls = `w-14 rounded-none border-0 border-b-2 px-0 py-1.5 text-sm text-center outline-none transition-colors ${isWrong ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`;
           return (
@@ -1262,6 +1268,7 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1293,7 +1300,7 @@ export function FractionEquivExercise({ validateCommand, onValidated }: {
               missingPos={q.missingPos}
               inputVal={answers[i]!}
               onInput={(v) => { if (!validated) setAnswers(prev => { const n = [...prev]; n[i] = v; return n; }); }}
-              status={statuses[i]!}
+              status={revealCorrection ? statuses[i]! : (validated ? "correct" : "idle")}
               disabled={validated}
               correctVal={String(q.answer)}
             />
@@ -1314,6 +1321,7 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
   const [dens, setDens] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1345,7 +1353,7 @@ export function FractionSimplifyExercise({ validateCommand, onValidated }: {
               numVal={nums[i]!} denVal={dens[i]!}
               onNum={(v) => { if (!validated) setNums(prev => { const n = [...prev]; n[i] = v; return n; }); }}
               onDen={(v) => { if (!validated) setDens(prev => { const n = [...prev]; n[i] = v; return n; }); }}
-              status={statuses[i]!}
+              status={revealCorrection ? statuses[i]! : (validated ? "correct" : "idle")}
               disabled={validated}
               correctNum={String(q.smallN)}
               correctDen={String(q.smallD)}
@@ -1447,6 +1455,7 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1474,7 +1483,7 @@ export function FracOpCompareExercise({ exNum, opMode, validateCommand, onValida
       </div>
       <div className="space-y-4">
         {questions.map((q, i) => {
-          const st = statuses[i]!;
+          const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
           const btnCls = (sym: "<" | "=" | ">") => {
             const isSelected = sel === sym;
@@ -1536,6 +1545,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1558,7 +1568,7 @@ export function FractionCompareExercise({ exNum, mode, validateCommand, onValida
       </div>
       <div className="space-y-4">
         {pairs.map((p, i) => {
-          const st = statuses[i]!;
+          const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
           const btnCls = (sym: "<" | "=" | ">") => {
             const isSelected = sel === sym;
@@ -1628,6 +1638,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1650,7 +1661,7 @@ export function FracToDecExercise({ exNum = 1, variant = "basic", validateComman
       </div>
       <div className="space-y-4">
         {questions.map((q, i) => {
-          const isWrong = statuses[i] === "wrong";
+          const isWrong = revealCorrection && statuses[i] === "wrong";
           const iCls = `w-24 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-0 py-1.5 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
           return (
             <div key={i} className="flex items-center gap-3">
@@ -1702,6 +1713,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
   const [answers, setAnswers] = useState<string[]>(() => Array(5).fill(""));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1724,7 +1736,7 @@ export function DecToFracExercise({ exNum = 2, variant = "basic", validateComman
       </div>
       <div className="grid gap-x-3 gap-y-5" style={{ gridTemplateColumns: "1.5rem 3.5rem 1.5rem 3.5rem", alignItems: "center" }}>
         {questions.map((q, i) => {
-          const isWrong = statuses[i] === "wrong";
+          const isWrong = revealCorrection && statuses[i] === "wrong";
           const iCls = `w-12 !h-8 py-0 rounded-none border-0 border-b-2 border-[var(--color-accent-alg)]/60 px-1 text-sm text-center outline-none transition-colors focus:border-[var(--color-accent-alg)]`;
           return (
             <React.Fragment key={i}>
@@ -1773,6 +1785,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   const [fracStatuses, setFracStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(4).fill("idle"));
 
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1812,11 +1825,12 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
     const sel = selectedFrac === fi;
     const matched = matches[fi] !== undefined;
     if (validated && matched) {
+      if (!revealCorrection) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
       return matchResults[fi]
         ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
         : "border-[var(--color-accent-alg)]";
     }
-    if (validated) return "border-[var(--color-accent-alg)]";
+    if (validated) return revealCorrection ? "border-[var(--color-accent-alg)]" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
     if (sel) return "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
     if (matched) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
     return "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)]";
@@ -1825,6 +1839,7 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
   const decCls = (di: number) => {
     const matchedEntry = Object.entries(matches).find(([, v]) => v === di);
     if (validated && matchedEntry) {
+      if (!revealCorrection) return "border-[var(--color-accent-alg)]/40 bg-[var(--color-accent-alg)]/5 text-[var(--color-text-primary)]";
       const fi = parseInt(matchedEntry[0]);
       return matchResults[fi]
         ? "border-[var(--color-border-default)] bg-blue-50 dark:bg-blue-950/20 text-[var(--color-text-primary)]"
@@ -1883,9 +1898,9 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                 value={decAnswers[i]}
                 onChange={(e) => { if (!validated) setDecAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9,.]/g, ""); return n; }); }}
                 placeholder="…"
-                className={`w-24 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${decStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
+                className={`w-24 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${revealCorrection && decStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
               />
-              {decStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{decAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
+              {revealCorrection && decStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{decAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
             </div>
           ))}
         </div>
@@ -1908,11 +1923,11 @@ export function CombinedDecimalExercise({ validateCommand, onValidated }: {
                   value={fracAnswers[i]}
                   onChange={(e) => { if (!validated) setFracAnswers(prev => { const n = [...prev]; n[i] = e.target.value.replace(/[^0-9]/g, ""); return n; }); }}
                   placeholder="…"
-                  className={`w-20 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${fracStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
+                  className={`w-20 rounded-none border-0 border-b-2 px-0 py-2 text-sm outline-none transition-colors ${revealCorrection && fracStatuses[i] === "wrong" ? "border-amber-500" : "border-[var(--color-accent-alg)]/60 focus:border-[var(--color-accent-alg)]"}`}
                 />
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">/{item.denominator}</span>
               </div>
-              {fracStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{fracAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
+              {revealCorrection && fracStatuses[i] === "wrong" && <span className="flex flex-col"><span className="text-xs text-[var(--color-text-primary)] leading-none">{fracAnswers[i]}</span><span className="text-xs font-bold text-amber-600 leading-none">{item.answer}</span></span>}
             </div>
           ))}
         </div>
