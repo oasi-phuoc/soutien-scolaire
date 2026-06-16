@@ -57,12 +57,12 @@ function StudentPanel({ taskId, onClose }: { taskId: string; onClose: () => void
             const done = s.status === "done";
             return (
               <div key={s.student_id} className="flex items-center gap-2">
-                <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${done ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400" : "bg-zinc-200 text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400"}`}>
+                <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[9px] font-bold ${done ? "bg-[var(--color-theme-light)] text-[var(--color-theme)] dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]" : "bg-zinc-200 text-zinc-500 dark:bg-zinc-700 dark:text-zinc-400"}`}>
                   {done ? "✓" : "·"}
                 </span>
                 <span className="flex-1 text-xs text-zinc-700 dark:text-zinc-300">{name}</span>
                 {s.classe && <span className="text-[10px] text-zinc-400">{s.classe}</span>}
-                <span className={`text-[10px] font-medium ${done ? "text-green-600 dark:text-green-400" : "text-zinc-400"}`}>
+                <span className={`text-[10px] font-medium ${done ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-400"}`}>
                   {done ? (s.done_at ? formatDate(s.done_at.slice(0, 10)) : "Validé") : "En attente"}
                 </span>
               </div>
@@ -114,9 +114,9 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
       <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-green-700 bg-green-600 dark:border-green-800 dark:bg-green-700">
+            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               {["Titre", "Module / Leçon", "Date limite", "Élèves", "Avancement", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-green-50">{h}</th>
+                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white">{h}</th>
               ))}
             </tr>
           </thead>
@@ -171,7 +171,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                   <td className="w-36 px-4 py-3">
                     <div className="flex items-center gap-2">
                       <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-                        <div className={`h-full rounded-full ${pct === 100 ? "bg-green-500" : "bg-blue-500"}`} style={{ width: `${pct}%` }} />
+                        <div className={`h-full rounded-full ${pct === 100 ? "bg-[var(--color-theme)]" : "bg-blue-500"}`} style={{ width: `${pct}%` }} />
                       </div>
                       <span className="w-9 shrink-0 text-right text-xs tabular-nums text-zinc-500">{pct}%</span>
                     </div>
@@ -180,7 +180,7 @@ export function TasksApercu({ tasks }: { tasks: TaskRow[] }) {
                     <button
                       type="button"
                       onClick={() => setOpenTaskId(isOpen ? null : task.task_id)}
-                      className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${isOpen ? "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-400" : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"}`}
+                      className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${isOpen ? "bg-[var(--color-theme-light)] text-[var(--color-theme)] dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]" : "text-zinc-400 hover:bg-zinc-100 hover:text-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"}`}
                       aria-label="Voir les élèves"
                       title="Voir les élèves assignés"
                     >

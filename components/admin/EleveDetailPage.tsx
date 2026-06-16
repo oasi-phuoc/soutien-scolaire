@@ -130,10 +130,10 @@ function PasswordSection({ userId }: { userId: string }) {
           onChange={e => { setPwd(e.target.value); setMsg(null); }}
           placeholder="Nouveau mot de passe (min. 8 caractères)"
           autoComplete="new-password"
-          className="min-h-9 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-violet-500 dark:border-zinc-600 dark:bg-zinc-950"
+          className="min-h-9 flex-1 rounded-lg border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-[var(--color-theme)] dark:border-zinc-600 dark:bg-zinc-950"
         />
         <button type="button" onClick={submit} disabled={pending || pwd.length < 8}
-          className="min-h-9 rounded-lg bg-violet-600 px-4 text-sm font-semibold text-white hover:bg-violet-700 disabled:opacity-50">
+          className="min-h-9 rounded-lg bg-[var(--color-theme)] px-4 text-sm font-semibold text-white hover:opacity-90 disabled:opacity-50">
           {pending ? "…" : "OK"}
         </button>
       </div>
@@ -244,7 +244,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
     telephone: user.telephone ?? "", langue: user.langue ?? "en",
   });
 
-  const inputCls = "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50";
+  const inputCls = "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm outline-none focus:border-[var(--color-theme)] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-50";
 
   function submit() {
     setErr(null);
@@ -303,7 +303,7 @@ function EditModal({ user, onClose, onSaved }: { user: UserRow; onClose: () => v
         {err && <p className="mt-3 text-sm text-red-600">{err}</p>}
         <div className="mt-5 flex justify-end gap-2">
           <button onClick={onClose} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300"><IconCancel /></button>
-          <button onClick={submit} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-60">
+          <button onClick={submit} disabled={pending} className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--color-theme)] text-white hover:opacity-90 disabled:opacity-60">
             {pending ? <Spinner /> : <IconSave />}
           </button>
         </div>
@@ -418,7 +418,7 @@ export function EleveDetailPage({
 
           {/* Actions */}
           <div className="flex items-center gap-2">
-            <button onClick={() => setEditing(true)} className="flex items-center gap-1.5 rounded-xl bg-blue-100 px-3 py-2 text-sm font-semibold text-blue-700 hover:bg-blue-200 dark:bg-blue-900/40 dark:text-blue-300">
+            <button onClick={() => setEditing(true)} className="flex items-center gap-1.5 rounded-xl bg-[var(--color-theme-light)] px-3 py-2 text-sm font-semibold text-[var(--color-theme)] hover:opacity-90 dark:bg-[var(--color-theme)]/20 dark:text-[var(--color-theme-muted)]">
               <IconEdit /> Modifier
             </button>
             {canDelete && (

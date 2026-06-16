@@ -154,25 +154,25 @@ function AdminClassSelect({
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={`flex h-10 w-full items-center justify-between rounded-[22px] border bg-white px-4 text-left text-sm shadow-sm outline-none transition-colors dark:bg-zinc-900 ${
-          open ? "border-violet-400 ring-2 ring-violet-200 dark:ring-violet-900/50" : "border-violet-200 dark:border-violet-800"
+          open ? "border-[var(--color-theme)] ring-2 ring-[var(--color-theme)]/20" : "border-[var(--color-theme-muted)]/40 dark:border-[var(--color-theme)]/40"
         }`}
         aria-haspopup="listbox"
         aria-expanded={open}
       >
         <span className={value ? "text-zinc-800 dark:text-zinc-100" : "text-zinc-500"}>{label}</span>
-        <svg className={`text-violet-600 transition-transform ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <svg className={`text-[var(--color-theme)] transition-transform ${open ? "rotate-180" : ""}`} width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
           <path d="m6 9 6 6 6-6" />
         </svg>
       </button>
       {open && (
-        <div className="absolute right-0 z-30 mt-1 max-h-72 w-full overflow-y-auto rounded-b-[22px] rounded-t-md bg-white py-2 shadow-lg ring-1 ring-violet-100 dark:bg-zinc-900 dark:ring-violet-900/50" role="listbox">
+        <div className="absolute right-0 z-30 mt-1 max-h-72 w-full overflow-y-auto rounded-b-[22px] rounded-t-md bg-white py-2 shadow-lg ring-1 ring-[var(--color-theme)]/15 dark:bg-zinc-900 dark:ring-[var(--color-theme)]/30" role="listbox">
           <button
             type="button"
             onClick={() => {
               onChange("");
               setOpen(false);
             }}
-            className={`block w-full px-5 py-2 text-left text-sm ${value === "" ? "font-semibold text-violet-600" : "text-zinc-700 hover:bg-violet-50 dark:text-zinc-200 dark:hover:bg-violet-950/30"}`}
+            className={`block w-full px-5 py-2 text-left text-sm ${value === "" ? "font-semibold text-[var(--color-theme)]" : "text-zinc-700 hover:bg-[var(--color-theme-light)] dark:text-zinc-200 dark:hover:bg-[var(--color-theme)]/10"}`}
             role="option"
             aria-selected={value === ""}
           >
@@ -186,7 +186,7 @@ function AdminClassSelect({
                 onChange(c);
                 setOpen(false);
               }}
-              className={`block w-full px-5 py-2 text-left text-sm ${value === c ? "font-semibold text-violet-600" : "text-zinc-700 hover:bg-violet-50 dark:text-zinc-200 dark:hover:bg-violet-950/30"}`}
+              className={`block w-full px-5 py-2 text-left text-sm ${value === c ? "font-semibold text-[var(--color-theme)]" : "text-zinc-700 hover:bg-[var(--color-theme-light)] dark:text-zinc-200 dark:hover:bg-[var(--color-theme)]/10"}`}
               role="option"
               aria-selected={value === c}
             >
@@ -325,22 +325,12 @@ export function AdminTable({
               placeholder="Rechercher un élève…"
               value={search}
               onChange={e => setSearch(e.target.value)}
-              className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-violet-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
+              className="w-full rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm outline-none placeholder:text-zinc-400 focus:border-[var(--color-theme)] dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:placeholder:text-zinc-500"
             />
           </div>
           {classes.length > 0 && (
             <AdminClassSelect value={filterClasse} options={classes} onChange={setFilterClasse} />
           )}
-          <Link
-            href="/admin/taches"
-            className="ml-auto inline-flex items-center gap-1.5 rounded-xl border border-green-600 px-3 py-2 text-sm font-semibold text-green-700 transition-colors hover:bg-green-50 dark:border-green-500 dark:text-green-400 dark:hover:bg-green-950/30"
-            title="Affecter une tâche"
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M9 11l3 3L22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-            </svg>
-            Affecter une tâche
-          </Link>
           {currentUserRole === "admin" && (
             <button
               onClick={() => setResetConfirming(true)}
@@ -361,11 +351,11 @@ export function AdminTable({
               } else {
                 setSortOpen(true);
               }
-            }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-violet-600 text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
+            }} className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors ${sortOpen ? "bg-[var(--color-theme)] text-white shadow-sm" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>Trier</button>
             {sortOpen && (
               <>
                 {([["math", "Maths"], ["francais", "Français"], ["lecture", "Lecture"]] as const).map(([val, label]) => (
-                  <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-violet-600 dark:text-violet-400" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
+                  <button key={val} onClick={() => { setSortBy(sortBy === val ? "name" : val); setSortOpen(true); }} className={`rounded-full px-3 py-1.5 text-sm font-semibold transition-colors ${sortBy === val ? "text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]" : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"}`}>{label}</button>
                 ))}
               </>
             )}
@@ -389,9 +379,9 @@ export function AdminTable({
       <div className="overflow-x-auto rounded-2xl border border-zinc-200 dark:border-zinc-800">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-violet-700 bg-violet-600 dark:border-violet-800 dark:bg-violet-700">
+            <tr className="border-b border-[var(--color-theme)] bg-[var(--color-theme)]">
               {["Statut", "Prénom, Nom", "Classe", "Dernier accès", "Maths", "Français", "Lecture", "Test M", ""].map((h, i) => (
-                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-violet-100">{h}</th>
+                <th key={i} className="whitespace-nowrap px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-white">{h}</th>
               ))}
             </tr>
           </thead>
