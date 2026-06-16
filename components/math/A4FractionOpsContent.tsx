@@ -2,6 +2,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 export type FracOpMode = "add-sub" | "mul" | "div";
 
@@ -218,6 +219,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
   const [dens, setDens] = useState<string[]>(() => Array(count).fill(""));
   const [statuses, setStatuses] = useState<("idle"|"correct"|"wrong")[]>(() => Array(count).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -262,7 +264,7 @@ export function FractionOpsExercise({ exType, opMode, count = 5, displayExNum, v
               numVal={nums[i]!} denVal={dens[i]!}
               onNum={(v: string) => { if (!validated) setNums((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
               onDen={(v: string) => { if (!validated) setDens((p: string[]) => { const n = [...p]; n[i] = v; return n; }); }}
-              status={statuses[i]!}
+              status={revealCorrection ? statuses[i]! : "idle"}
               disabled={validated}
               correctNum={String(q.ansNum)}
               correctDen={String(q.ansDen)}
