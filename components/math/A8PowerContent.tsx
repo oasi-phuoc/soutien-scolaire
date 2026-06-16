@@ -1,6 +1,7 @@
 "use client";
 
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 const CLS_WRONG = "border-[var(--color-accent-alg)]";
 
@@ -29,6 +30,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.result));
     setResults(res); setValidated(true);
@@ -51,7 +53,7 @@ function PurePowerExercise({ exNum, questions, promptFr, validateCommand, onVali
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -113,6 +115,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.exp));
     setResults(res); setValidated(true);
@@ -135,7 +138,7 @@ function PureMissingExpExercise({ exNum, questions, promptFr, validateCommand, o
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const expInput = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-10 h-7 flex flex-col items-center justify-center`}
                 style={{ position: "relative", top: "-6px" }}>
@@ -215,6 +218,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.base));
     setResults(res); setValidated(true);
@@ -237,7 +241,7 @@ function PureMissingBaseExercise({ exNum, questions, promptFr, validateCommand, 
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const baseInput = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -301,6 +305,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
   const [answers, setAnswers] = useState<Array<"<" | "=" | ">" | null>>(() => Array(count).fill(null));
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > 0 && validateCommand !== prevCmd.current) {
@@ -334,7 +339,7 @@ export function A8PowerCompareExercise({ exNum, count, promptFr, validateCommand
                   const isSelected = sel === sym;
                   const isCorrect = sym === q.answer;
                   let cls = "h-8 w-8 shrink-0 rounded border text-sm font-bold transition-colors ";
-                  if (!validated) {
+                  if (!validated || !revealCorrection) {
                     cls += isSelected
                       ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]"
                       : "border-[var(--color-border-default)] text-[var(--color-text-secondary)] hover:border-[var(--color-accent-alg)]";
@@ -392,6 +397,7 @@ export function A8PowerOrderExercise({ exNum, count, promptFr, validateCommand, 
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => groups.map(() => false));
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const toggle = (gi: number, value: number) => {
     if (validated) return;
@@ -432,7 +438,7 @@ export function A8PowerOrderExercise({ exNum, count, promptFr, validateCommand, 
           const sel = selected[gi] ?? [];
           const available = g.powers.filter(p => !sel.includes(p.value));
           const sorted = [...g.powers].sort((a, b) => a.value - b.value);
-          const ok = validated ? results[gi] : null;
+          const ok = validated && revealCorrection ? results[gi] : null;
           return (
             <div key={gi} className="space-y-3">
               {available.length > 0 && (
@@ -505,6 +511,7 @@ function PureCalcExercise<Q extends { result: number }>({
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.result));
     setResults(res); setValidated(true);
@@ -528,7 +535,7 @@ function PureCalcExercise<Q extends { result: number }>({
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -701,6 +708,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
     setResults(res); setValidated(true);
@@ -723,7 +731,7 @@ export function A8EqCompleteExercise({ exNum, count, promptFr, validateCommand, 
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const expInput = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-10 h-7 inline-flex flex-col items-center justify-center`}
                 style={{ position: "relative", top: "-6px" }}>
@@ -794,6 +802,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => {
       const a = (answers[i] ?? "").trim().replace(",", ".");
@@ -818,7 +827,7 @@ export function A8Pow10CalcExercise({ exNum, count, promptFr, validateCommand, o
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -885,6 +894,7 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.exp));
     setResults(res); setValidated(true);
@@ -912,7 +922,7 @@ export function A8ToPow10Exercise({ exNum, count, promptFr, validateCommand, onV
               <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">10</span>
                 <ExpInput val={answers[i] ?? ""} correct={q.exp} validated={validated}
-                  wrong={validated && !results[i]}
+                  wrong={validated && revealCorrection && !results[i]}
                   onChange={v => setAnswers(prev => { const n = [...prev]; n[i] = v; return n; })} />
               </span>
             </Fragment>
@@ -931,6 +941,7 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.exp));
     setResults(res); setValidated(true);
@@ -956,7 +967,7 @@ export function A8Pow10ExpExercise({ exNum, count, promptFr, validateCommand, on
               <span className="font-mono text-sm">
                 <span className="text-[var(--color-text-primary)]">10</span>
                 <ExpInput val={answers[i] ?? ""} correct={q.exp} validated={validated}
-                  wrong={validated && !results[i]}
+                  wrong={validated && revealCorrection && !results[i]}
                   onChange={v => setAnswers(prev => { const n = [...prev]; n[i] = v; return n; })} />
               </span>
               <span className="font-mono text-sm text-[var(--color-text-secondary)]">=</span>
@@ -996,6 +1007,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => {
       const a = (answers[i] ?? "").trim().replace(/\s/g, "").replace(",", ".");
@@ -1021,7 +1033,7 @@ export function A8SciCalcExercise({ exNum, count, promptFr, validateCommand, onV
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -1074,6 +1086,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => {
       const ca = (coeffAns[i] ?? "").trim().replace(",", ".");
@@ -1099,7 +1112,7 @@ export function A8SciWriteExercise({ exNum, count, promptFr, validateCommand, on
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const cv = coeffAns[i] ?? ""; const ev = expAns[i] ?? "";
-            const wrong = validated && !results[i];
+            const wrong = validated && revealCorrection && !results[i];
             const coeffEl = wrong ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{cv || "—"}</span>
@@ -1182,6 +1195,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>([]);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   useEffect(() => {
     if (validateCommand > 0 && validateCommand !== prevCmd.current) {
@@ -1205,7 +1219,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
           style={{ gridTemplateColumns: "auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const sel = answers[i];
-            const isWrong = validated && !results[i];
+            const isWrong = validated && revealCorrection && !results[i];
             return (
               <Fragment key={i}>
                 <span className="text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -1215,7 +1229,7 @@ export function A8SqrtTrueFalseExercise({ exNum, count, promptFr, validateComman
                     const val = label === "Vrai";
                     const isSelected = sel === val;
                     let cls = "px-3 py-1 rounded-lg border text-xs font-bold transition-colors ";
-                    if (validated) {
+                    if (validated && revealCorrection) {
                       if (val === q.answer && isSelected) cls += "border-green-500 bg-green-50 text-green-700 dark:bg-green-950/30 dark:text-green-400";
                       else if (val === q.answer && !isSelected) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]";
                       else if (isSelected && isWrong) cls += "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/15 text-[var(--color-accent-alg)]";
@@ -1280,6 +1294,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.result));
     setResults(res); setValidated(true);
@@ -1302,7 +1317,7 @@ export function A8SqrtMissingExercise({ exNum, count, promptFr, validateCommand,
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
+            const wrongField = validated && revealCorrection && !results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -1347,6 +1362,7 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     const res = questions.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
@@ -1371,8 +1387,8 @@ function A8OpCalcGrid({ exNum, promptFr, questions, validateCommand, onValidated
           style={{ gridTemplateColumns: "auto auto auto auto", justifyContent: "start" }}>
           {questions.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
-            const rightField = validated && results[i];
+            const wrongField = validated && revealCorrection && !results[i];
+            const rightField = validated && revealCorrection && results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
@@ -1466,6 +1482,7 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
   const [results, setResults] = useState<boolean[]>([]);
   const [validated, setValidated] = useState(false);
   const prevCmd = useRef(-1);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     const res = OP_EX4.map((q, i) => (answers[i] ?? "").trim() === String(q.answer));
@@ -1490,8 +1507,8 @@ export function A8OpFillExercise({ exNum, promptFr, validateCommand, onValidated
           style={{ gridTemplateColumns: "auto auto auto auto auto auto", justifyContent: "start" }}>
           {OP_EX4.map((q, i) => {
             const val = answers[i] ?? "";
-            const wrongField = validated && !results[i];
-            const rightField = validated && results[i];
+            const wrongField = validated && revealCorrection && !results[i];
+            const rightField = validated && revealCorrection && results[i];
             const inputEl = wrongField ? (
               <div className={`rounded-none border-0 border-b-2 border-amber-500 w-20 h-9 flex flex-col items-center justify-center`}>
                 <span className="text-xs leading-none text-[var(--color-text-primary)]">{val || "—"}</span>
