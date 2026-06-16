@@ -4629,6 +4629,7 @@ export function GenericModuleContent({
 
   // Eval phase state
   const [evalSavedResults, setEvalSavedResults] = useState<Record<number, boolean[]>>({});
+  const [evalSavedAnswers, setEvalSavedAnswers] = useState<Record<number, string>>({});
   const [showEvalScore, setShowEvalScore] = useState(false);
   const [evalFinalGrade, setEvalFinalGrade] = useState<number | null>(null);
   const [evalEarnedPts, setEvalEarnedPts] = useState(0);
@@ -4636,6 +4637,7 @@ export function GenericModuleContent({
   const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
+  const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
 
   const currentStep = steps[stepIdx];
   const isFirstStep = stepIdx === 0;
@@ -4803,11 +4805,13 @@ export function GenericModuleContent({
       setEvalTimeLeft(5 * 60);
     }
     setEvalSavedResults({});
+    setEvalSavedAnswers({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
     setEvalTotalPts_state(0);
     setEvalRowData([]);
+    setEvalAutoAdvance(0);
     setSteps(buildSteps(lessons ?? [], withEval));
     goTo(stepIdx + 1);
   }
@@ -4815,11 +4819,13 @@ export function GenericModuleContent({
   function cancelEval() {
     setShowEvalCancelConfirm(false);
     setEvalSavedResults({});
+    setEvalSavedAnswers({});
     setShowEvalScore(false);
     setEvalFinalGrade(null);
     setEvalEarnedPts(0);
     setEvalTotalPts_state(0);
     setEvalRowData([]);
+    setEvalAutoAdvance(0);
     goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
   }
 
@@ -4936,6 +4942,7 @@ export function GenericModuleContent({
       let currentResults: boolean[] = [];
       if (currentStep.kind === "exercise") {
         currentResults = [answerMatches(answer, currentStep.item.acceptable)];
+        setEvalSavedAnswers(prev => ({ ...prev, [evalStepOffset]: answer }));
       } else if (currentStep.kind === "arithmetic_group") {
         currentResults = arithResults.slice(0, (arithOverrideConfigs[stepIdx] ?? currentStep.config).questions.length);
       } else if (currentStep.kind === "column_grid") {
@@ -5237,6 +5244,14 @@ export function GenericModuleContent({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+
+  const goNextRef = React.useRef<() => void>(() => {});
+  React.useEffect(() => { goNextRef.current = goNext; }); // sync ref every render
+  React.useEffect(() => {
+    if (!evalAutoAdvance || !isInEvalPhase) return;
+    const t = setTimeout(() => goNextRef.current(), 500);
+    return () => clearTimeout(t);
+  }, [evalAutoAdvance, isInEvalPhase]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5828,6 +5843,12 @@ export function GenericModuleContent({
     };
   }
 
+  // Auto-advance wrapper: in eval phase, wrap stepValidate to trigger goNext after 500ms
+  if (stepValidate && isInEvalPhase) {
+    const origValidate = stepValidate;
+    stepValidate = () => { origValidate(); setEvalAutoAdvance(v => v + 1); };
+  }
+
   if (!lessons || lessons.length === 0 || steps.length === 0) {
     return (
       <p className="text-sm text-[var(--color-text-secondary)]">
@@ -5886,21 +5907,20 @@ export function GenericModuleContent({
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{evalStepOffset + 1} / {evalSteps.length}</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalSteps.length - Object.keys(evalSavedResults).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
-            {Array.from({ length: evalSteps.length }).map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  i in evalSavedResults
-                    ? "bg-green-500"
-                    : i === evalStepOffset
-                      ? "bg-amber-500 opacity-60"
-                      : "bg-[var(--color-border-default)]"
-                }`}
-              />
-            ))}
+            {Array.from({ length: evalSteps.length }).map((_, i) => {
+              if (i in evalSavedResults) return null;
+              return (
+                <div
+                  key={i}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${
+                    i === evalStepOffset ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                  }`}
+                />
+              );
+            })}
           </div>
           {showFreeNavWarning && (
             <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
@@ -7120,10 +7140,24 @@ export function GenericModuleContent({
           <ul className="space-y-2">
             {evalRowData.map((row, i) => {
               const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
+              const isWrong = row.score < row.max;
+              const step = evalSteps[i];
+              const userAns = evalSavedAnswers[i];
+              const expectedAns = step?.kind === "exercise" ? step.item.acceptable[0] : undefined;
               return (
-                <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
-                  <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                  <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                <li key={i} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                    <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
+                  </div>
+                  {isWrong && userAns !== undefined && expectedAns !== undefined && (
+                    <div className="mt-1.5 text-xs">
+                      <span className="text-[var(--color-text-secondary)]">Ta réponse : </span>
+                      <span className="font-mono text-amber-600">{userAns || "—"}</span>
+                      <span className="mx-1 text-[var(--color-text-secondary)]">→</span>
+                      <span className="font-mono font-bold text-[var(--color-accent-alg)]">{expectedAns}</span>
+                    </div>
+                  )}
                 </li>
               );
             })}

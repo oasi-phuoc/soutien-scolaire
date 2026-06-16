@@ -1714,7 +1714,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});
   const [evalExValidated, setEvalExValidated] = useState<Record<number, boolean>>({});
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
-  const [showGeoEvalWarning, setShowGeoEvalWarning] = useState(false);
 
   const isRevisionLesson = !!directRevisionMode || /^(RA|RG)-\d+$/i.test(submoduleId ?? "");
 
@@ -1811,12 +1810,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   function goBack() {
     if (isInEvalExercises && isFreeNavModule) {
       const evalIdx = stepIdx - evalStartIdx - 1;
-      if (evalIdx <= 0) {
-        setShowGeoEvalWarning(true);
-        setTimeout(() => setShowGeoEvalWarning(false), 3000);
-      } else {
-        goTo(stepIdx - 1);
-      }
+      if (evalIdx > 0) goTo(stepIdx - 1);
       return;
     }
     if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
@@ -2052,34 +2046,27 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
       {/* Eval progress bar */}
       {isInEvalExercises && !isFreeNavModule && (
-        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} />
+        <EvalProgressBar current={evalExerciseOffset} total={evalExerciseTotal} timeLeft={isRevisionLesson ? revTimerLeft : evalTimeLeft} validatedCount={Object.values(evalExValidated).filter(Boolean).length} />
       )}
       {isInEvalExercises && isFreeNavModule && (
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{evalExerciseOffset + 1} / {evalExerciseTotal}</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalExerciseTotal - Object.values(evalExValidated).filter(Boolean).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
-            {Array.from({ length: evalExerciseTotal }).map((_, i) => (
-              <div
-                key={i}
-                className={`h-1.5 flex-1 rounded-full transition-colors ${
-                  evalExValidated[i]
-                    ? "bg-green-500"
-                    : i === evalExerciseOffset
-                      ? "bg-amber-500 opacity-60"
-                      : "bg-[var(--color-border-default)]"
-                }`}
-              />
-            ))}
+            {Array.from({ length: evalExerciseTotal }).map((_, i) => {
+              if (evalExValidated[i]) return null;
+              return (
+                <div
+                  key={i}
+                  className={`h-1.5 flex-1 rounded-full transition-colors ${
+                    i === evalExerciseOffset ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                  }`}
+                />
+              );
+            })}
           </div>
-          {showGeoEvalWarning && (
-            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Tu es au premier exercice. Utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer ou valide tous les exercices pour terminer.
-            </div>
-          )}
         </div>
       )}
 
@@ -2189,8 +2176,23 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                           const rc = correct ?? (ok ? 1 : 0);
                           const rt = total ?? stepExpectedTotal(evalStep, undefined);
                           setEvalScores(prev => ({ ...prev, [absIdx]: { c: rc, t: rt } }));
-                          setEvalExValidated(prev => ({ ...prev, [i]: true }));
-                          if (isActiveEval && !isFreeNavModule) goTo(absIdx + 1);
+                          const newValidated = { ...evalExValidated, [i]: true };
+                          setEvalExValidated(newValidated);
+                          if (isActiveEval) {
+                            const allDone = evalExerciseTotal > 0 &&
+                              Array.from({ length: evalExerciseTotal }, (_, j) => !!newValidated[j]).every(Boolean);
+                            if (allDone && resultsIdx >= 0) {
+                              setTimeout(() => goTo(resultsIdx), 500);
+                            } else {
+                              const nextJ = Array.from({ length: evalExerciseTotal }, (_, j) => j)
+                                .find(j => j > i && !newValidated[j])
+                                ?? Array.from({ length: evalExerciseTotal }, (_, j) => j)
+                                  .find(j => !newValidated[j]);
+                              if (nextJ !== undefined) {
+                                setTimeout(() => goTo(evalStartIdx + 1 + nextJ), 500);
+                              }
+                            }
+                          }
                         }
                       )}
                     </div>
