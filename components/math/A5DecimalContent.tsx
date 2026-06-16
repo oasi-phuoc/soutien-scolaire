@@ -2,6 +2,7 @@
 
 import React, { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { answerMatches } from "@/lib/curriculum/content/math/math-a1-types";
+import { useEvalReveal } from "@/lib/eval-reveal-context";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function rnd(min: number, max: number) {
@@ -69,6 +70,7 @@ function DecExercise({
     Array(questions.length).fill("idle")
   );
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -96,7 +98,7 @@ function DecExercise({
       </div>
       <div className="grid items-center gap-x-3 gap-y-2" style={{ gridTemplateColumns: "1.5rem max-content auto" }}>
         {questions.map((q, i) => {
-          const isWrong = statuses[i] === "wrong";
+          const isWrong = revealCorrection && statuses[i] === "wrong";
           return (
             <Fragment key={i}>
               <span className="text-sm font-bold text-[var(--color-accent-alg)] justify-self-start">
@@ -342,6 +344,7 @@ export function DecArithGroupExercise({
   const [timeLeft, setTimeLeft] = useState<number | null>(() =>
     timer !== undefined ? timer : null
   );
+  const revealCorrection = useEvalReveal();
 
   const onValidatedRef = useRef(onValidated);
   onValidatedRef.current = onValidated;
@@ -417,7 +420,7 @@ export function DecArithGroupExercise({
       <div className="space-y-3">
         {questions.map((q: ArithQuestion, i: number) => {
           const v = answers[i] ?? "";
-          const ok = validated ? results[i] : null;
+          const ok = validated && revealCorrection ? results[i] : null;
           const wrongField = ok === false;
 
           const inputEl = (_pos: MissingPos) => {
@@ -506,6 +509,7 @@ function DecMulColCard({
   resultInputs,
   validated,
   preFilledOperands,
+  revealCorrection,
   onChange,
 }: {
   q: DecMulColQ;
@@ -515,6 +519,7 @@ function DecMulColCard({
   resultInputs: string[];  // [0]=rD, [1]=rU, [2]=rDx
   validated: boolean;
   preFilledOperands: boolean;
+  revealCorrection: boolean;
   onChange: (cardIdx: number, kind: "carry" | "operand" | "result", idx: number, val: string) => void;
 }) {
   function tabNav(e: React.KeyboardEvent<HTMLInputElement>) {
@@ -531,7 +536,7 @@ function DecMulColCard({
   // Carry cell (small, orange)
   const carryCell = (colIdx: number, expected: number) => {
     const val = carryInputs[colIdx] ?? "";
-    const carryWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
+    const carryWrong = validated && revealCorrection && parseInt(val.trim() || "0", 10) !== expected;
     if (carryWrong) {
       return (
         <div className={"h-8 w-8 rounded border border-amber-400 flex flex-col items-center justify-center"}>
@@ -561,7 +566,7 @@ function DecMulColCard({
   // Digit cell for operand (h-8 w-8)
   const operandCell = (opIdx: number, expected: number) => {
     const val = operandInputs[opIdx] ?? "";
-    const opWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
+    const opWrong = validated && revealCorrection && parseInt(val.trim() || "0", 10) !== expected;
     if (opWrong) {
       return (
         <div className={"h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center"}>
@@ -591,7 +596,7 @@ function DecMulColCard({
   // Result cell (h-8 w-8)
   const resultCell = (resIdx: number, expected: number) => {
     const val = resultInputs[resIdx] ?? "";
-    const resWrong = validated && parseInt(val.trim() || "0", 10) !== expected;
+    const resWrong = validated && revealCorrection && parseInt(val.trim() || "0", 10) !== expected;
     if (resWrong) {
       return (
         <div className={"h-8 w-8 rounded-none border border-amber-400 flex flex-col items-center justify-center"}>
@@ -600,7 +605,7 @@ function DecMulColCard({
         </div>
       );
     }
-    const ok = validated && parseInt(val.trim() || "0", 10) === expected;
+    const ok = validated && revealCorrection && parseInt(val.trim() || "0", 10) === expected;
     return (
       <input
         type="text"
@@ -760,6 +765,7 @@ export function DecMulColGridExercise({
   );
   const [validated, setValidated] = useState<boolean>(false);
   const [_results, setResults] = useState<boolean[]>([false, false, false, false]);
+  const revealCorrection = useEvalReveal();
 
   const onValidatedRef = useRef(onValidated);
   onValidatedRef.current = onValidated;
@@ -849,6 +855,7 @@ export function DecMulColGridExercise({
             resultInputs={(resultInputs[qi] ?? []) as string[]}
             validated={validated as boolean}
             preFilledOperands={preFilledOperands}
+            revealCorrection={revealCorrection}
             onChange={handleChange}
           />
         ))}
@@ -1043,8 +1050,9 @@ function genDecColQs(op: "+" | "-", count: number): DecColQ[] {
   });
 }
 
-function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange }: {
+function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, revealCorrection, onChange }: {
   q: DecColQ; cardIdx: number; cellAnswers: string[]; validated: boolean; cardCorrect: boolean;
+  revealCorrection: boolean;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
 }) {
   const [ac, ad, au, adx, acx] = hToDigits(q.aH);
@@ -1069,7 +1077,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     const carryIdx = 5 + carrySlot;
     const expectedCarry = carryRow[carrySlot] ?? null;
     const val = cellAnswers[carryIdx] ?? "";
-    const carryWrong = validated && expectedCarry !== null && val.trim() !== String(expectedCarry);
+    const carryWrong = validated && revealCorrection && expectedCarry !== null && val.trim() !== String(expectedCarry);
     if (carryWrong) {
       return (
         <td key={carrySlot} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
@@ -1104,7 +1112,7 @@ function DecColCard({ q, cardIdx, cellAnswers, validated, cardCorrect, onChange 
     }
     const val = cellAnswers[inputIdx] ?? "";
     const expected = rExpected[inputIdx]!;
-    const ok = validated ? (val.trim() === String(expected)) : null;
+    const ok = validated && revealCorrection ? (val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
         <td key={colIdx} style={{ width: CELL_W, padding: 2 }} className="align-middle text-center">
@@ -1212,6 +1220,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
   const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(10).fill("")));
   const [validated, setValidated] = useState(false);
   const [results, setResults] = useState<boolean[]>(() => Array(2).fill(false));
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1247,6 +1256,7 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
             cellAnswers={answers[qi]!}
             validated={validated}
             cardCorrect={results[qi] ?? false}
+            revealCorrection={revealCorrection}
             onChange={(ci: number, cellIdx: number, val: string) => setAnswers((prev: string[][]) => {
               const next = prev.map((r: string[]) => [...r]);
               next[ci]![cellIdx] = val;
@@ -1260,8 +1270,9 @@ export function DecColArithExercise({ exNum, op, validateCommand, onValidated }:
 
 // ── Decimal column — full input (A5.4 Ex9) ───────────────────────────────────
 
-function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
+function DecColCardFull({ q, cardIdx, cellAnswers, validated, revealCorrection, onChange }: {
   q: DecColQ; cardIdx: number; cellAnswers: string[]; validated: boolean;
+  revealCorrection: boolean;
   onChange: (cardIdx: number, cellIdx: number, val: string) => void;
 }) {
   const [ac, ad, au, adx, acx] = hToDigits(q.aH);
@@ -1288,7 +1299,7 @@ function DecColCardFull({ q, cardIdx, cellAnswers, validated, onChange }: {
 
   function inputCell(inputIdx: number, expected: number, isLeading: boolean) {
     const val = cellAnswers[inputIdx] ?? "";
-    const ok = validated
+    const ok = validated && revealCorrection
       ? (val.trim() === String(expected) || (isLeading && expected === 0 && (val.trim() === "" || val.trim() === "0")))
       : null;
     if (ok === false) {
@@ -1399,6 +1410,7 @@ export function DecColArithFullExercise({ exNum, validateCommand, onValidated }:
   });
   const [answers, setAnswers] = useState<string[][]>(() => Array.from({ length: 2 }, () => Array(20).fill("")));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1438,6 +1450,7 @@ export function DecColArithFullExercise({ exNum, validateCommand, onValidated }:
           <DecColCardFull key={qi} q={q} cardIdx={qi}
             cellAnswers={answers[qi]!}
             validated={validated}
+            revealCorrection={revealCorrection}
             onChange={(ci: number, cellIdx: number, val: string) => setAnswers((prev: string[][]) => {
               const next = prev.map((r: string[]) => [...r]);
               next[ci]![cellIdx] = val;
@@ -1505,6 +1518,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
   const [selected, setSelected] = useState<(string | null)[]>(() => Array(5).fill(null));
   const [statuses, setStatuses] = useState<("idle" | "correct" | "wrong")[]>(() => Array(5).fill("idle"));
   const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1528,7 +1542,7 @@ export function DecExprCompExercise({ exNum, validateCommand, onValidated }: {
       </div>
       <div className="grid items-center gap-y-4" style={{ gridTemplateColumns: "1.5rem 1fr auto 1fr" }}>
         {questions.map((q: DecExprCompQ, i: number) => {
-          const st = statuses[i]!;
+          const st = revealCorrection ? statuses[i]! : "idle";
           const sel = selected[i];
           const btnCls = (sym: "<" | "=" | ">") => {
             const isSelected = sel === sym;
@@ -1649,11 +1663,11 @@ function genDecMul2Questions(): DecMul2Q[] {
   });
 }
 
-function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, validated,
+function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, validated, revealCorrection,
   onCarryChange, onCellChange, onDecResultChange,
 }: {
   q: DecMul2Q; cardIdx: number; carryInputs: string[]; cellAnswers: string[];
-  decResult: string; validated: boolean;
+  decResult: string; validated: boolean; revealCorrection: boolean;
   onCarryChange: (ci: number, idx: number, val: string) => void;
   onCellChange: (ci: number, idx: number, val: string) => void;
   onDecResultChange: (ci: number, val: string) => void;
@@ -1695,7 +1709,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const idx = base + col;
     const val = cellAnswers[idx] ?? "";
     const isLeading = expected === 0 && col < firstNz;
-    const ok = validated ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
+    const ok = validated && revealCorrection ? (isLeading ? (val.trim() === "" || val.trim() === "0") : val.trim() === String(expected)) : null;
     if (ok === false) {
       return (
         <div className="h-8 w-8 border border-amber-400 flex flex-col items-center justify-center">
@@ -1718,7 +1732,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     const idx = rowBase + col;
     const val = carryInputs[idx] ?? "";
     const expected = expectedCarries[col];
-    if (validated && expected !== null && val.trim() !== String(expected)) {
+    if (validated && revealCorrection && expected !== null && val.trim() !== String(expected)) {
       return (
         <div className="h-5 w-8 border border-amber-400 flex flex-col items-center justify-center">
           <span className="text-[8px] text-[var(--color-text-primary)] leading-none">{val || "—"}</span>
@@ -1742,7 +1756,7 @@ function DecMul2ColCard({ q, cardIdx, carryInputs, cellAnswers, decResult, valid
     </div>
   );
 
-  const decWrong = validated && decResult.trim().replace(".", ",") !== q.resultStr;
+  const decWrong = validated && revealCorrection && decResult.trim().replace(".", ",") !== q.resultStr;
 
   return (
     <div data-decmul2-card className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-3 space-y-3">
@@ -1845,6 +1859,7 @@ export function DecMul2ColExercise({ exNum, validateCommand, onValidated }: {
   );
   const [decResults, setDecResults] = React.useState<string[]>(() => Array(2).fill(""));
   const [validated, setValidated] = React.useState(false);
+  const revealCorrection = useEvalReveal();
 
   const doValidate = useCallback(() => {
     if (validated) return;
@@ -1908,6 +1923,7 @@ export function DecMul2ColExercise({ exNum, validateCommand, onValidated }: {
             cellAnswers={cellAnswers[qi]!}
             decResult={decResults[qi]!}
             validated={validated}
+            revealCorrection={revealCorrection}
             onCarryChange={(ci: number, idx: number, val: string) => setCarryInputs((prev: string[][]) => {
               const next = prev.map((r: string[]) => [...r]);
               next[ci]![idx] = val;
