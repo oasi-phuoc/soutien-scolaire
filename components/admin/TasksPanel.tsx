@@ -338,7 +338,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
     });
   }
 
-  const inputCls = "w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition-colors focus:border-green-500 focus:ring-2 focus:ring-green-500/15 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
+  const inputCls = "w-full rounded-xl border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none transition-colors focus:border-[var(--color-theme)] focus:ring-2 focus:ring-[var(--color-theme)]/15 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-50";
   const selectCls = `${inputCls} cursor-pointer`;
 
   return (
@@ -387,7 +387,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
           </select>
         </div>
         {moduleRef && (
-          <p className="text-xs text-green-600 dark:text-green-400">
+          <p className="text-xs text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]">
             ↳ {moduleRef}{lessonRef ? ` — ${lessonRef}` : ""}
           </p>
         )}
@@ -407,18 +407,18 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
             <span className="font-normal text-zinc-400">({selectedIds.size} sélectionné{selectedIds.size !== 1 ? "s" : ""})</span>
           </label>
           {students.length > 0 && (
-            <button type="button" onClick={toggleAll} className="text-xs text-green-600 hover:underline">
+            <button type="button" onClick={toggleAll} className="text-xs text-[var(--color-theme)] hover:underline">
               {selectedIds.size === students.length ? "Tout désélectionner" : "Tout sélectionner"}
             </button>
           )}
         </div>
         <div className="mb-2 flex gap-1.5">
           <button type="button" onClick={() => setViewMode("classes")}
-            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "classes" ? "bg-green-600 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
+            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "classes" ? "bg-[var(--color-theme)] text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
             Par classes
           </button>
           <button type="button" onClick={() => setViewMode("eleves")}
-            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "eleves" ? "bg-green-600 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
+            className={`rounded-full px-3 py-1 text-xs font-semibold transition-colors ${viewMode === "eleves" ? "bg-[var(--color-theme)] text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700"}`}>
             Par élèves
           </button>
         </div>
@@ -461,7 +461,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
                   const checked = selectedIds.has(s.id);
                   const name = [s.prenom, s.nom].filter(Boolean).join(" ") || s.id.slice(0, 8);
                   return (
-                    <label key={s.id} className="flex cursor-pointer items-center gap-2.5 border-b border-zinc-100 px-4 py-2 text-sm text-zinc-700 hover:bg-green-50 last:border-0 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-green-950/20">
+                    <label key={s.id} className="flex cursor-pointer items-center gap-2.5 border-b border-zinc-100 px-4 py-2 text-sm text-zinc-700 hover:bg-[var(--color-theme-light)] last:border-0 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-[var(--color-theme)]/10">
                       <Checkbox checked={checked} />
                       <input type="checkbox" checked={checked} onChange={() => toggleStudent(s.id)} className="sr-only" />
                       <span className="flex-1">{name}</span>
@@ -490,7 +490,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
                       return (
                         <label
                           key={s.id}
-                          className="flex cursor-pointer items-center gap-2.5 border-b border-zinc-100 px-4 py-2 text-sm text-zinc-700 hover:bg-green-50 last:border-0 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-green-950/20"
+                          className="flex cursor-pointer items-center gap-2.5 border-b border-zinc-100 px-4 py-2 text-sm text-zinc-700 hover:bg-[var(--color-theme-light)] last:border-0 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-[var(--color-theme)]/10"
                         >
                           <Checkbox checked={checked} />
                           <input type="checkbox" checked={checked} onChange={() => toggleStudent(s.id)} className="sr-only" />
@@ -507,12 +507,12 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
       </div>
 
       {formError && <p className="text-sm text-red-600 dark:text-red-400">{formError}</p>}
-      {formSuccess && <p className="text-sm text-green-600 dark:text-green-400">Tâche créée et assignée !</p>}
+      {formSuccess && <p className="text-sm text-[var(--color-theme)] dark:text-[var(--color-theme-muted)]">Tâche créée et assignée !</p>}
 
       <button
         type="submit"
         disabled={isPending || !title.trim() || !lessonId || selectedIds.size === 0}
-        className="w-full rounded-xl bg-green-600 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-green-700 disabled:opacity-50"
+        className="w-full rounded-xl bg-[var(--color-theme)] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:opacity-90 disabled:opacity-50"
       >
         {isPending ? "Envoi…" : "Assigner la tâche"}
       </button>
@@ -522,7 +522,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
 
 function Checkbox({ checked }: { checked: boolean }) {
   return (
-    <span className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border text-[10px] leading-none ${checked ? "border-green-500 bg-green-500 text-white" : "border-zinc-300 dark:border-zinc-600"}`}>
+    <span className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded border text-[10px] leading-none ${checked ? "border-[var(--color-theme)] bg-[var(--color-theme)] text-white" : "border-zinc-300 dark:border-zinc-600"}`}>
       {checked ? "✓" : ""}
     </span>
   );

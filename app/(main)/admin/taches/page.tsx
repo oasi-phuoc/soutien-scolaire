@@ -43,7 +43,7 @@ export default async function TachesPage() {
         </div>
         <Link
           href="/admin/taches/apercu"
-          className="inline-flex items-center gap-1.5 rounded-xl border border-green-600 px-3 py-1.5 text-sm font-semibold text-green-700 hover:bg-green-50 dark:border-green-500 dark:text-green-400 dark:hover:bg-green-950/30"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-theme)] px-3 py-1.5 text-sm font-semibold text-[var(--color-theme)] hover:bg-[var(--color-theme-light)] dark:hover:bg-[var(--color-theme)]/10"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
             <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
