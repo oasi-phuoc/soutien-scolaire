@@ -24,7 +24,7 @@ export const V4_PANNES_THEME: VocabTheme = {
 
     // Les problèmes de chauffage
     { word: "chauffage",    image: "probleme-de-chauffage.png", article: "le", gender: "m", definition: "système pour réchauffer un logement",                       group: "Les problèmes de chauffage" },
-    { word: "réparateur",   image: "reparateur.png",       article: "le",  gender: "m", definition: "personne qui répare les appareils en panne",                     group: "Les problèmes de chauffage" },
+    { word: "réparateur",   image: "reparateur.png",       article: "le",  gender: "m", feminine: "réparatrice", definition: "personne qui répare les appareils en panne",                     group: "Les problèmes de chauffage" },
     { word: "radiateur",    image: "radiateur.png",        article: "le",  gender: "m", definition: "appareil qui diffuse la chaleur dans une pièce",                 group: "Les problèmes de chauffage" },
     { word: "thermostat",   image: "thermostat.png",       article: "le",  gender: "m", definition: "dispositif pour régler la température",                          group: "Les problèmes de chauffage" },
 
