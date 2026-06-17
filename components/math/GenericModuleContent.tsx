@@ -4661,7 +4661,6 @@ export function GenericModuleContent({
   const [evalTotalPts_state, setEvalTotalPts_state] = useState(0);
   const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
-  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
   const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [evalAnswerSnapshots, setEvalAnswerSnapshots] = useState<Record<number, any>>({});
@@ -4791,18 +4790,20 @@ export function GenericModuleContent({
 
   const goBack = useCallback(() => {
     if (isInEvalPhase) {
+      const total = evalSteps.length;
       const offset = stepIdx - evalStartIdx - 1;
-      if (offset <= 0) {
-        setShowFreeNavWarning(true);
-        setTimeout(() => setShowFreeNavWarning(false), 3000);
-      } else {
-        goTo(stepIdx - 1);
+      for (let i = 1; i <= total; i++) {
+        const idx = (offset - i + total) % total;
+        if (!(idx in evalSavedResults)) {
+          goTo(evalStartIdx + 1 + idx);
+          return;
+        }
       }
       return;
     }
     if (showEvalScore) return;
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalStartIdx]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalStartIdx, evalSteps.length, evalSavedResults]);
 
   // Eval timer countdown
   useEffect(() => {
@@ -5277,8 +5278,14 @@ export function GenericModuleContent({
           saveProgress(completeSubmodule(p, moduleId, startSubmoduleId, correct, total, grade));
         }
       } else {
-        const nextOffset = evalStepOffset >= evalSteps.length - 1 ? 0 : evalStepOffset + 1;
-        goTo(evalStartIdx + 1 + nextOffset);
+        const total = evalSteps.length;
+        for (let i = 1; i <= total; i++) {
+          const idx = (evalStepOffset + i) % total;
+          if (!(idx in newSavedDict)) {
+            goTo(evalStartIdx + 1 + idx);
+            break;
+          }
+        }
       }
       return;
     }
@@ -6726,12 +6733,6 @@ export function GenericModuleContent({
               );
             })}
           </div>
-          {showFreeNavWarning && (
-            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Tu es au premier exercice. Valide cet exercice et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
-            </div>
-          )}
         </div>
       )}
 
