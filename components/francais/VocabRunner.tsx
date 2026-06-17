@@ -99,7 +99,7 @@ export function VocabRunner({ theme }: Props) {
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
   const [_canValidate, setCanValidate] = useState(false);
-  const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number }>>([]);
+  const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number } | null>>(() => Array(evalTotal).fill(null));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [passingGrade] = useState(() => getPassingGrade());
@@ -117,8 +117,8 @@ export function VocabRunner({ theme }: Props) {
   const evalExIdx = isInEvalPhase ? stepIdx - evalExFirst : -1;
   const allEvalValidated = evalValidated.length > 0 && evalValidated.every(Boolean);
 
-  const totalCorrect = evalScores.reduce((s, e) => s + e.correct, 0);
-  const totalItems = evalScores.reduce((s, e) => s + e.total, 0);
+  const totalCorrect = evalScores.reduce((s, e) => s + (e?.correct ?? 0), 0);
+  const totalItems = evalScores.reduce((s, e) => s + (e?.total ?? 0), 0);
   const grade = linearSwissGrade(totalCorrect, totalItems);
   const passed = grade >= passingGrade;
 
@@ -142,8 +142,7 @@ export function VocabRunner({ theme }: Props) {
   }
 
   function handleEvalValidated(idx: number, correct: number, total: number) {
-    const newScores = [...evalScores];
-    newScores[idx] = { correct, total };
+    const newScores = evalScores.map((e, j) => (j === idx ? { correct, total } : e));
     setEvalScores(newScores);
     const newValidated = evalValidated.map((v, j) => (j === idx ? true : v));
     setEvalValidated(newValidated);
@@ -222,6 +221,7 @@ export function VocabRunner({ theme }: Props) {
       setEvalTimeLeft(EVAL_DURATION);
       setEvalValidateCommands(Array(evalTotal).fill(0));
       setEvalValidated(Array(evalTotal).fill(false));
+      setEvalScores(Array(evalTotal).fill(null));
       setEvalSessionKey((k) => k + 1);
       setSelectedResultIdx(null);
     }
@@ -248,7 +248,7 @@ export function VocabRunner({ theme }: Props) {
   }
 
   function retryEval() {
-    setEvalScores([]);
+    setEvalScores(Array(evalTotal).fill(null));
     setEvalTimeLeft(null);
     setResetKey((k) => k + 1);
     setStepIdx(evalAnnounceIdx);
@@ -262,7 +262,7 @@ export function VocabRunner({ theme }: Props) {
 
   function cancelEval() {
     setShowEvalCancelConfirm(false);
-    setEvalScores([]);
+    setEvalScores(Array(evalTotal).fill(null));
     setEvalTimeLeft(null);
     setResetKey((k) => k + 1);
     setStepIdx(evalAnnounceIdx);
