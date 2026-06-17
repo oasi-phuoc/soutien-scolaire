@@ -2219,7 +2219,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [evalPassed, setEvalPassed] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
-  const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
 
   const isFirst = stepIdx === 0;
   const isLast = stepIdx === totalSteps - 1;
@@ -2287,28 +2286,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const evalValidatedRef = React.useRef(evalValidated);
   evalValidatedRef.current = evalValidated;
 
-  // Auto-advance in eval phase after validation
-  useEffect(() => {
-    if (!evalAutoAdvance || !isEvalPhase) return;
-    const t = setTimeout(() => {
-      const validated = evalValidatedRef.current;
-      const allDone = validated.every(Boolean);
-      if (allDone) {
-        if (hasEval && resultsIdx >= 0) setStepIdx(resultsIdx);
-      } else {
-        const i = evalIdxRef.current;
-        const nextAfter = validated.findIndex((v, j) => j > i && !v);
-        const nextAny = validated.findIndex(v => !v);
-        const next = nextAfter !== -1 ? nextAfter : nextAny;
-        if (next !== -1) {
-          setEvalIdx(next);
-          setCanValidate(true);
-        }
-      }
-    }, 500);
-    return () => clearTimeout(t);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [evalAutoAdvance, isEvalPhase]);
 
   const handleValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
     void allCorrect;
@@ -2317,11 +2294,25 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
 
   const handleEvalValidated = useCallback<(allCorrect: boolean) => void>((allCorrect: boolean) => {
     const i = evalIdxRef.current;
+    const newValidated = evalValidatedRef.current.map((v, j) => (j === i ? true : v));
     setEvalPassed((prev) => prev.map((v, j) => (j === i ? allCorrect : v)));
-    setEvalValidated((prev) => prev.map((v, j) => (j === i ? true : v)));
+    setEvalValidated(newValidated);
     setCanValidate(false);
-    setEvalAutoAdvance(v => v + 1);
-  }, []);
+    const total = newValidated.length;
+    const allDone = newValidated.every(Boolean);
+    if (allDone) {
+      if (hasEval && resultsIdx >= 0) setStepIdx(resultsIdx);
+    } else {
+      for (let k = 1; k <= total; k++) {
+        const idx = (i + k) % total;
+        if (!newValidated[idx]) {
+          setEvalIdx(idx);
+          setCanValidate(true);
+          break;
+        }
+      }
+    }
+  }, [hasEval, resultsIdx]);
 
   function startEval() {
     setEvalTimeLeft(10 * 60);
@@ -2569,40 +2560,36 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
           <div>
             {/* Score header — results only */}
             {isResults && (
-              <div className="mb-6 space-y-6">
-                <div className="space-y-1 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
-                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-                    {evalPassedCount} <span className="text-xl text-[var(--color-text-secondary)]">/ {evalExercises.length}</span>
-                  </p>
-                </div>
-                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ${evalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
-                    style={{ width: `${evalExercises.length > 0 ? Math.round((evalPassedCount / evalExercises.length) * 100) : 0}%` }}
-                  />
-                </div>
-                <div className={`flex items-center justify-between rounded-[var(--radius-lg)] border-2 px-4 py-3 ${evalGrade >= PASSING_GRADE ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-                  <div>
-                    <p className="text-xs text-[var(--color-text-secondary)]">Note · seuil {PASSING_GRADE}/6</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)} <span className="text-base font-normal text-[var(--color-text-secondary)]">/ 6</span></p>
+              <div className="mb-6">
+                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+                      {evalPassedCount}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalExercises.length}</span>
+                    </p>
+                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                      <div
+                        className={`h-full rounded-full transition-all duration-700 ${evalGrade >= PASSING_GRADE ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
+                        style={{ width: `${evalExercises.length > 0 ? Math.round((evalPassedCount / evalExercises.length) * 100) : 0}%` }}
+                      />
+                    </div>
                   </div>
-                  <p className={`text-sm font-bold ${evalGrade >= PASSING_GRADE ? "text-[var(--color-accent-fr)]" : "text-red-500"}`}>
-                    {evalGrade >= PASSING_GRADE ? "✓ Validé" : "✗ À améliorer"}
-                  </p>
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+                  </div>
+                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${evalGrade >= PASSING_GRADE ? "border-green-500" : "border-red-400"}`}>
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+                    <p className={`mt-1 text-sm font-bold ${evalGrade >= PASSING_GRADE ? "text-green-600" : "text-red-500"}`}>
+                      {evalGrade >= PASSING_GRADE ? "Réussi" : "À améliorer"}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
-                </p>
+                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
               </div>
             )}
 
-            {/* Section label */}
-            {isResults && (
-              <div className="mb-3">
-                <h3 className="text-sm font-bold text-[var(--color-text-primary)]">Détail des exercices</h3>
-              </div>
-            )}
 
             {/* Eval progress bar (only during eval phase) */}
             {isEvalPhase && (
@@ -2650,11 +2637,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                       >
                         <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-fr)]">{i + 1}</span>
                         <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{ex.title}</span>
-                        <span className={`shrink-0 text-xs font-bold ${
+                        <span className={`shrink-0 text-xs font-bold mr-1 ${
                           !evalValidated[i] ? "text-zinc-400" : evalPassed[i] ? "text-green-600" : "text-red-500"
                         }`}>
                           {!evalValidated[i] ? "—" : evalPassed[i] ? "✓" : "✗"}
                         </span>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelectedResult ? "rotate-90" : ""}`} aria-hidden>
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
                       </button>
                     )}
                     {/* Exercise panel — active during eval, inline under row during results */}
