@@ -4662,6 +4662,7 @@ export function GenericModuleContent({
   const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
+  const [evalExValidatedFlags, setEvalExValidatedFlags] = useState<Record<number, boolean>>({});
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [evalAnswerSnapshots, setEvalAnswerSnapshots] = useState<Record<number, any>>({});
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
@@ -4794,7 +4795,7 @@ export function GenericModuleContent({
       const offset = stepIdx - evalStartIdx - 1;
       for (let i = 1; i <= total; i++) {
         const idx = (offset - i + total) % total;
-        if (!(idx in evalSavedResults)) {
+        if (!evalExValidatedFlags[idx]) {
           goTo(evalStartIdx + 1 + idx);
           return;
         }
@@ -4803,7 +4804,7 @@ export function GenericModuleContent({
     }
     if (showEvalScore) return;
     if (!isFirstStep) goTo(stepIdx - 1);
-  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalStartIdx, evalSteps.length, evalSavedResults]);
+  }, [isFirstStep, stepIdx, goTo, isInEvalPhase, showEvalScore, evalStartIdx, evalSteps.length, evalExValidatedFlags]);
 
   // Eval timer countdown
   useEffect(() => {
@@ -4842,6 +4843,7 @@ export function GenericModuleContent({
     setEvalTotalPts_state(0);
     setEvalRowData([]);
     setEvalAutoAdvance(0);
+    setEvalExValidatedFlags({});
     setSteps(buildSteps(lessons ?? [], withEval));
     goTo(stepIdx + 1);
   }
@@ -4856,6 +4858,7 @@ export function GenericModuleContent({
     setEvalTotalPts_state(0);
     setEvalRowData([]);
     setEvalAutoAdvance(0);
+    setEvalExValidatedFlags({});
     goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
   }
 
@@ -5222,7 +5225,9 @@ export function GenericModuleContent({
       }
       const newSavedDict = { ...evalSavedResults, [evalStepOffset]: currentResults };
       setEvalSavedResults(newSavedDict);
-      const isDoneNow = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => i in newSavedDict).every(Boolean);
+      const newValidatedFlags = { ...evalExValidatedFlags, [evalStepOffset]: true };
+      setEvalExValidatedFlags(newValidatedFlags);
+      const isDoneNow = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => !!newValidatedFlags[i]).every(Boolean);
       if (isDoneNow) {
         const orderedResults = Array.from({ length: evalSteps.length }, (_, i) => newSavedDict[i] ?? []);
         const allRes = orderedResults.flat();
@@ -5281,7 +5286,7 @@ export function GenericModuleContent({
         const total = evalSteps.length;
         for (let i = 1; i <= total; i++) {
           const idx = (evalStepOffset + i) % total;
-          if (!(idx in newSavedDict)) {
+          if (!newValidatedFlags[idx]) {
             goTo(evalStartIdx + 1 + idx);
             break;
           }
@@ -5314,7 +5319,7 @@ export function GenericModuleContent({
       goTo(stepIdx + 1);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+  }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
 
   const goNextRef = React.useRef<() => void>(() => {});
   React.useEffect(() => { goNextRef.current = goNext; }); // sync ref every render
@@ -5917,7 +5922,12 @@ export function GenericModuleContent({
   // Auto-advance wrapper: in eval phase, wrap stepValidate to trigger goNext after 500ms
   if (stepValidate && isInEvalPhase) {
     const origValidate = stepValidate;
-    stepValidate = () => { origValidate(); setEvalAutoAdvance(v => v + 1); };
+    const capturedOffset = evalStepOffset;
+    stepValidate = () => {
+      origValidate();
+      setEvalExValidatedFlags(prev => ({ ...prev, [capturedOffset]: true }));
+      setEvalAutoAdvance(v => v + 1);
+    };
   }
 
   // Renders the read-only "what did I answer" detail for one eval result row, using the
@@ -6671,7 +6681,7 @@ export function GenericModuleContent({
   // Training steps (before eval_start) for main progress bar
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
-  const allEvalDone = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => i in evalSavedResults).every(Boolean);
+  const allEvalDone = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => !!evalExValidatedFlags[i]).every(Boolean);
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
@@ -6718,11 +6728,11 @@ export function GenericModuleContent({
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
-            <p className="text-xs text-[var(--color-text-secondary)]">{evalSteps.length - Object.keys(evalSavedResults).length} restant(s)</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">{evalSteps.length - Object.keys(evalExValidatedFlags).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
             {Array.from({ length: evalSteps.length }).map((_, i) => {
-              if (i in evalSavedResults) return null;
+              if (evalExValidatedFlags[i]) return null;
               return (
                 <div
                   key={i}
