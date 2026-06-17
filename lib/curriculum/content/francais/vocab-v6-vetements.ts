@@ -19,7 +19,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
     { word: "short", article: "le", gender: "m", image: "short.png", definition: "pantalon très court pour le sport ou l'été" },
     { word: "pyjama", article: "le", gender: "m", image: "pyjama.png", definition: "vêtement pour dormir" },
     { word: "maillot", article: "le", gender: "m", image: "maillot.jpg", definition: "vêtement de sport ou de bain" },
-    { word: "combinaison", article: "la", gender: "f", image: "combinaison.png", definition: "vêtement d'une pièce couvrant le corps entier" },
+    { word: "uniforme",    article: "l'", gender: "m", image: "uniforme.png",    definition: "vêtement identique porté dans certaines écoles ou professions" },
     { word: "caleçon", article: "le", gender: "m", image: "calecon.png", group: "Sous-vêtements", definition: "sous-vêtement masculin" },
     { word: "soutien-gorge", article: "le", gender: "m", image: "soutien-gorge.png", group: "Sous-vêtements", definition: "sous-vêtement qui soutient la poitrine" },
     { word: "culotte", article: "la", gender: "f", image: "culotte.png", group: "Sous-vêtements", definition: "sous-vêtement du bas du corps" },
