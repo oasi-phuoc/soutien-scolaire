@@ -187,9 +187,9 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   // ── V4 — Le logement ─────────────────────────────────────────────────────────
   lesson("V4", "v4-type-logement",        "V4.1", "Les types de logement",  "Différents types d'habitation.",                                    "vocabulaire"),
   lesson("V4", "v4-pieces-maison",        "V4.2", "Les pièces de la maison", "Pièces et espaces d'un logement.",                                 "vocabulaire"),
-  lesson("V4", "v4-pannes",               "V4.3", "Les pannes",              "Problèmes et réparations dans le logement.",                       "vocabulaire"),
-  lesson("V4", "v4-equipements",          "V4.4", "Les meubles",             "Meubles du quotidien.",                                             "vocabulaire"),
-  lesson("V4", "v4-appareils-electromenagers", "V4.5", "Les appareils électroménagers", "Appareils utilisés dans la maison.",                       "vocabulaire"),
+  lesson("V4", "v4-equipements",          "V4.3", "Les meubles",             "Meubles du quotidien.",                                             "vocabulaire"),
+  lesson("V4", "v4-appareils-electromenagers", "V4.4", "Les appareils électroménagers", "Appareils utilisés dans la maison.",                       "vocabulaire"),
+  lesson("V4", "v4-pannes",               "V4.5", "Les pannes",              "Problèmes et réparations dans le logement.",                       "vocabulaire"),
 
   // ── V5 — L'école ─────────────────────────────────────────────────────────────
   lesson("V5", "v5-matieres",             "V5.1", "Les matières scolaires",  "Disciplines scolaires.",                                           "vocabulaire"),
