@@ -19,10 +19,8 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
     { word: "menu",       image: "menu.png",       article: "le",  gender: "m", definition: "liste des plats proposés" },
     { word: "addition",   image: "addition.jpg",   article: "l'",  gender: "f", definition: "note à payer à la fin du repas" },
     { word: "boisson",    image: "boisson.jpg",    article: "la",  gender: "f", definition: "liquide à boire" },
-    { word: "serveur",    image: "/vocab/images/V1/serveur.jpg",   article: "le",  gender: "m", group: "Le service", definition: "homme qui sert les clients au restaurant" },
-    { word: "serveuse",                                             article: "la",  gender: "f", group: "Le service", definition: "femme qui sert les clients au restaurant" },
-    { word: "cuisinier",  image: "/vocab/images/V1/cuisinier.jpg", article: "le",  gender: "m", group: "La cuisine", definition: "homme qui prépare les plats en cuisine" },
-    { word: "cuisinière",                                           article: "la",  gender: "f", group: "La cuisine", definition: "femme qui prépare les plats en cuisine" },
+    { word: "service",    image: "/vocab/images/V1/serveur.jpg",   article: "le",  gender: "m", feminine: "serveuse",   group: "Le service", definition: "personne qui sert les clients au restaurant (serveur / serveuse)" },
+    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.jpg", article: "la",  gender: "f", feminine: "cuisinière", group: "La cuisine", definition: "personne qui prépare les plats (cuisinier / cuisinière)" },
   ],
   sentences: [
     { sentence: "Je voudrais l'___, s'il vous plaît.",              answer: "addition" },
