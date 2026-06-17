@@ -2341,7 +2341,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       return;
     }
     if (isEvalPhase) {
-      if (evalIdx > 0) {
+      if (evalIdx > 0 && !evalValidated[evalIdx - 1]) {
         const newIdx = evalIdx - 1;
         setEvalIdx(newIdx);
         setCanValidate(!evalValidated[newIdx]);
@@ -2660,7 +2660,7 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                     {/* Exercise panel — active during eval, inline under row during results */}
                     <div className={
                       isEvalPhase && isActive ? "" :
-                      (isSelectedResult ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                      (isSelectedResult ? "px-1 py-3" : "hidden")
                     }>
                       {isSelectedResult && (
                         <div className="mb-4 flex items-center justify-between">

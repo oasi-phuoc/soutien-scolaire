@@ -165,7 +165,7 @@ export function VocabRunner({ theme }: Props) {
 
   function goBack() {
     if (isInEvalPhase) {
-      if (evalExIdx <= 0) {
+      if (evalExIdx <= 0 || evalValidated[evalExIdx - 1]) {
         setShowFreeNavWarning(true);
         setTimeout(() => setShowFreeNavWarning(false), 3000);
       } else {
@@ -523,7 +523,7 @@ export function VocabRunner({ theme }: Props) {
                     {/* Exercise panel — active during eval, inline under row during results */}
                     <div className={
                       isInEvalPhase && isActive ? "" :
-                      (isSelectedResult ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4" : "hidden")
+                      (isSelectedResult ? "px-1 py-3" : "hidden")
                     }>
                       {isSelectedResult && score && (
                         <div className="mb-4 flex items-center justify-between">
