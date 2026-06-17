@@ -107,7 +107,6 @@ export function VocabRunner({ theme }: Props) {
   const [evalValidated, setEvalValidated] = useState<boolean[]>(() => Array(evalTotal).fill(false));
   const [evalSessionKey, setEvalSessionKey] = useState(0);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
-  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
 
   const step = steps[stepIdx]!;
   const isLast = stepIdx === steps.length - 1;
@@ -165,11 +164,12 @@ export function VocabRunner({ theme }: Props) {
 
   function goBack() {
     if (isInEvalPhase) {
-      if (evalExIdx <= 0 || evalValidated[evalExIdx - 1]) {
-        setShowFreeNavWarning(true);
-        setTimeout(() => setShowFreeNavWarning(false), 3000);
-      } else {
-        setStepIdx((s) => s - 1);
+      for (let i = 1; i <= evalTotal; i++) {
+        const idx = (evalExIdx - i + evalTotal) % evalTotal;
+        if (!evalValidated[idx]) {
+          setStepIdx(evalExFirst + idx);
+          return;
+        }
       }
       return;
     }
@@ -437,12 +437,6 @@ export function VocabRunner({ theme }: Props) {
               );
             })}
           </div>
-          {showFreeNavWarning && (
-            <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              Tu es au premier exercice. Valide et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
-            </div>
-          )}
         </div>
       )}
 
