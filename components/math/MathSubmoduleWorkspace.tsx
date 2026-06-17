@@ -1811,7 +1811,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   function goBack() {
     if (isInEvalExercises && isFreeNavModule) {
       const evalIdx = stepIdx - evalStartIdx - 1;
-      if (evalIdx > 0) goTo(stepIdx - 1);
+      if (evalIdx > 0 && !evalExValidated[evalIdx - 1]) goTo(stepIdx - 1);
       return;
     }
     if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }

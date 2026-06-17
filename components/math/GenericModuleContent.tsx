@@ -7982,7 +7982,7 @@ export function GenericModuleContent({
                     </svg>
                   </button>
                   {isSelected && (
-                    <div className="mt-2 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)]/40 p-4">
+                    <div className="px-1 py-3">
                       <EvalRevealContext.Provider value={true}>
                         {renderEvalReviewDetail(i) ?? (
                           <p className="text-xs italic text-[var(--color-text-secondary)]">Détail non disponible pour cet exercice.</p>
