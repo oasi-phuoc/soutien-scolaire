@@ -2219,7 +2219,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const evalPageValidated = evalPagesValidated[evalPageIdx] ?? false;
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const evalAutoSubmitRef = useRef<(() => void) | null>(null);
-  const goNextRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!evalStarted || evalSubmitted || evalTimeLeft === null || evalTimeLeft <= 0) return;
@@ -2440,7 +2439,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     if (nextStep) { goTo(nextStep); }
     else { router.push("/mathematiques"); }
   };
-  goNextRef.current = goNext;
 
   const goBack = () => {
     if (step === "eval" && evalStarted && !evalSubmitted) {
@@ -2632,8 +2630,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     if (evalStarted && !evalSubmitted) {
       stepValidate = () => {
         if (evalPageValidated) return;
-        setEvalPagesValidated(prev => { const next = [...prev]; next[evalPageIdx] = true; return next; });
-        setTimeout(() => goNextRef.current?.(), 500);
+        const next = [...evalPagesValidated];
+        next[evalPageIdx] = true;
+        setEvalPagesValidated(next);
+        const allDone = next.length >= evalTotalPages && next.every(Boolean);
+        if (allDone) {
+          evalAutoSubmitRef.current?.();
+        } else {
+          for (let i = 1; i <= evalTotalPages; i++) {
+            const idx = (evalPageIdx + i) % evalTotalPages;
+            if (!next[idx]) { setEvalPageIdx(idx); window.scrollTo({ top: 0, behavior: "smooth" }); break; }
+          }
+        }
       };
       stepValidateDisabled = evalPageValidated;
     }
