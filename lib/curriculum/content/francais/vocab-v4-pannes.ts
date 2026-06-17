@@ -29,7 +29,7 @@ export const V4_PANNES_THEME: VocabTheme = {
     { word: "thermostat",   image: "thermostat.png",       article: "le",  gender: "m", definition: "dispositif pour régler la température",                          group: "Les problèmes de chauffage" },
 
     // Les problèmes de portes
-    { word: "problème de serrure", image: "probleme-de-serrure.png", article: "le", gender: "m", definition: "dysfonctionnement du mécanisme de fermeture d'une porte",  group: "Les problèmes de portes" },
+    { word: "serrure",       image: "probleme-de-serrure.png", article: "la", gender: "f", definition: "mécanisme pour fermer une porte à clé",                    group: "Les problèmes de portes" },
     { word: "serrurier",    image: "serrurier.png",        article: "le",  gender: "m", feminine: "serrurière",   definition: "artisan spécialiste des serrures et des clés",       group: "Les problèmes de portes" },
     { word: "porte",        image: "porte.png",            article: "la",  gender: "f", definition: "ouverture avec un battant pour entrer ou sortir",                group: "Les problèmes de portes" },
     { word: "clé",          image: "cle.png",              article: "la",  gender: "f", definition: "objet pour ouvrir ou fermer une serrure",                        group: "Les problèmes de portes" },
