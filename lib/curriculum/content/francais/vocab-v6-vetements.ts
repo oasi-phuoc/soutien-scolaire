@@ -11,7 +11,7 @@ export const V6_VETEMENTS_THEME: VocabTheme = {
     { word: "pull", article: "le", gender: "m", image: "pull.jpg", definition: "haut chaud en laine ou coton épais" },
     { word: "blouson", article: "le", gender: "m", image: "blouson.png", definition: "veste courte et ample, souvent en cuir ou nylon" },
     { word: "legging", article: "le", gender: "m", image: "legging.png", definition: "pantalon collant très élastique" },
-    { word: "pantalon", article: "le", gender: "m", image: "jean.png", definition: "vêtement qui couvre les deux jambes" },
+    { word: "pantalon", article: "le", gender: "m", image: "pantalon.png", definition: "vêtement qui couvre les deux jambes" },
     { word: "jupe", article: "la", gender: "f", image: "jupe.png", definition: "vêtement féminin couvrant le bas du corps" },
     { word: "robe", article: "la", gender: "f", image: "robe.png", definition: "vêtement d'une pièce couvrant le haut et le bas" },
     { word: "veste", article: "la", gender: "f", image: "veste.png", definition: "vêtement court avec manches, ouvert devant" },
