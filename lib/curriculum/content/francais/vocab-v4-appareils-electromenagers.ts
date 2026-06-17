@@ -2,7 +2,7 @@ import type { VocabTheme } from "../../vocabulary-data";
 
 export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
   slug: "v4-appareils-electromenagers",
-  code: "V4.5",
+  code: "V4.4",
   title: "Les appareils électroménagers",
   section: "V4",
   words: [
