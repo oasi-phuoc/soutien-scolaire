@@ -4661,7 +4661,6 @@ export function GenericModuleContent({
   const [evalTotalPts_state, setEvalTotalPts_state] = useState(0);
   const [evalRowData, setEvalRowData] = useState<Array<{ label: string; score: number; max: number }>>([]);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
-  const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
   const [evalExValidatedFlags, setEvalExValidatedFlags] = useState<Record<number, boolean>>({});
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [evalAnswerSnapshots, setEvalAnswerSnapshots] = useState<Record<number, any>>({});
@@ -4842,7 +4841,6 @@ export function GenericModuleContent({
     setEvalEarnedPts(0);
     setEvalTotalPts_state(0);
     setEvalRowData([]);
-    setEvalAutoAdvance(0);
     setEvalExValidatedFlags({});
     setSteps(buildSteps(lessons ?? [], withEval));
     goTo(stepIdx + 1);
@@ -4857,7 +4855,6 @@ export function GenericModuleContent({
     setEvalEarnedPts(0);
     setEvalTotalPts_state(0);
     setEvalRowData([]);
-    setEvalAutoAdvance(0);
     setEvalExValidatedFlags({});
     goTo(evalStartIdx >= 0 ? evalStartIdx : 0);
   }
@@ -5332,14 +5329,6 @@ export function GenericModuleContent({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
-
-  const goNextRef = React.useRef<() => void>(() => {});
-  React.useEffect(() => { goNextRef.current = goNext; }); // sync ref every render
-  React.useEffect(() => {
-    if (!evalAutoAdvance || !isInEvalPhase) return;
-    const t = setTimeout(() => goNextRef.current(), 500);
-    return () => clearTimeout(t);
-  }, [evalAutoAdvance, isInEvalPhase]);
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5931,14 +5920,13 @@ export function GenericModuleContent({
     };
   }
 
-  // Auto-advance wrapper: in eval phase, wrap stepValidate to trigger goNext after 500ms
+  // In eval phase, wrap stepValidate to mark exercise as done (enables Suivant button)
   if (stepValidate && isInEvalPhase) {
     const origValidate = stepValidate;
     const capturedOffset = evalStepOffset;
     stepValidate = () => {
       origValidate();
       setEvalExValidatedFlags(prev => ({ ...prev, [capturedOffset]: true }));
-      setEvalAutoAdvance(v => v + 1);
     };
   }
 
