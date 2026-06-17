@@ -4972,6 +4972,18 @@ export function GenericModuleContent({
       return;
     }
     if (isInEvalPhase && currentStep) {
+      // Already validated: navigate to next unvalidated without re-saving
+      if (evalExValidatedFlags[evalStepOffset]) {
+        const total = evalSteps.length;
+        for (let i = 1; i <= total; i++) {
+          const idx = (evalStepOffset + i) % total;
+          if (!evalExValidatedFlags[idx]) {
+            goTo(evalStartIdx + 1 + idx);
+            break;
+          }
+        }
+        return;
+      }
       let currentResults: boolean[] = [];
       if (currentStep.kind === "exercise") {
         currentResults = [answerMatches(answer, currentStep.item.acceptable)];
@@ -8142,7 +8154,7 @@ export function GenericModuleContent({
                 onClick={goNext}
                 disabled={
                   (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                  (isInEvalPhase && (
+                  (isInEvalPhase && !evalExValidatedFlags[evalStepOffset] && (
                     (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
                     (currentStep?.kind === "column_grid" && !gridValidated) ||
                     (currentStep?.kind === "word_problems" && !wpValidated) ||
