@@ -7021,7 +7021,7 @@ export function GenericModuleContent({
       )}
 
       {/* Ordering exercise (A1.5) */}
-      {currentStep?.kind === "ordering" && activeOrderingConfig && (
+      {!showEvalScore && currentStep?.kind === "ordering" && activeOrderingConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeOrderingConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">
@@ -7089,7 +7089,7 @@ export function GenericModuleContent({
       )}
 
       {/* Sequence rule exercise (A1.5) */}
-      {currentStep?.kind === "seq_rule" && activeSeqRuleConfig && (
+      {!showEvalScore && currentStep?.kind === "seq_rule" && activeSeqRuleConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqRuleConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Trouvez la règle de chaque suite (ex: +5 ou -3).</p>
@@ -7126,7 +7126,7 @@ export function GenericModuleContent({
       )}
 
       {/* Sequence complete exercise (A1.5) */}
-      {currentStep?.kind === "seq_complete" && activeSeqCompleteConfig && (
+      {!showEvalScore && currentStep?.kind === "seq_complete" && activeSeqCompleteConfig && (
         <div className="space-y-4">
           <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {activeSeqCompleteConfig.exNum}</h2>
           <p className="text-sm text-[var(--color-text-secondary)]">Complétez les suites de nombres.</p>
