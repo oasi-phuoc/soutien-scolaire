@@ -14,12 +14,10 @@ export const V7_CUISINE_THEME: VocabTheme = {
     { word: "frire", image: "frire.jpg",     definition: "cuire dans de l'huile très chaude" },
     { word: "rôtir", image: "rotir.jpg",     definition: "cuire au four à chaleur sèche" },
     { word: "saler", image: "saler.jpg",     definition: "ajouter du sel à un plat" },
-    { word: "sucrer", image: "sucrer.jpg",    definition: "ajouter du sucre à une préparation" },
     { word: "goûter", image: "gouter.jpg",    definition: "tester le goût d'un aliment" },
     { word: "laver", image: "laver.jpg",     definition: "nettoyer à l'eau" },
     { word: "éplucher", image: "eplucher.jpg",  definition: "enlever la peau d'un légume ou fruit" },
     { word: "verser", image: "verser.jpg",    definition: "faire couler un liquide d'un récipient" },
-    { word: "préparer", image: "preparer.jpg",  definition: "mettre en ordre les ingrédients avant de cuisiner" },
     { word: "réchauffer", image: "rechauffer.jpeg",definition: "chauffer à nouveau un plat déjà cuit" },
   ],
   sentences: [
