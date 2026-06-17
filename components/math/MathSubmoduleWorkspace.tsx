@@ -2163,12 +2163,13 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
                         <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}</span>
                         <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">Exercice {i + 1}</span>
                         <span className={`shrink-0 text-xs font-bold tabular-nums ${color}`}>{c}/{t}</span>
+                        <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isResultsSelected ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
                       </button>
                     )}
                     {/* Exercise panel — active during eval, inline under row during results */}
                     <div className={
                       isInEvalExercises && isActiveEval ? "" :
-                      (isResultsSelected ? "rounded-lg border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4 [&_h2]:hidden" : "hidden")
+                      (isResultsSelected ? "px-1 py-3 [&_h2]:hidden" : "hidden")
                     }>
                       <EvalRevealContext.Provider value={isResultsPage}>
                       {renderEvalStep(
