@@ -4972,8 +4972,8 @@ export function GenericModuleContent({
       return;
     }
     if (isInEvalPhase && currentStep) {
-      // Already validated: navigate to next unvalidated without re-saving
-      if (evalExValidatedFlags[evalStepOffset]) {
+      // Revisited exercise (already saved): navigate without re-saving results
+      if (evalSavedResults[evalStepOffset] !== undefined) {
         const total = evalSteps.length;
         for (let i = 1; i <= total; i++) {
           const idx = (evalStepOffset + i) % total;
@@ -6693,7 +6693,6 @@ export function GenericModuleContent({
   // Training steps (before eval_start) for main progress bar
   const trainingSteps = evalStartIdx >= 0 ? steps.slice(0, evalStartIdx) : steps.filter(s => s.kind !== "eval_start" && s.kind !== "pass_toggle");
   const trainingStepIdx = Math.min(stepIdx, trainingSteps.length);
-  const allEvalDone = evalSteps.length > 0 && Array.from({ length: evalSteps.length }, (_, i) => !!evalExValidatedFlags[i]).every(Boolean);
   const currentStepTrad = currentStep ? getTrad(currentStep.lesson.submoduleId) : undefined;
   const currentStepHasPivotTitle = !revisionMode && !!(currentStep && showPivotTranslation && currentStepTrad?.title?.[pivot]);
   const revisionTitle = revisionMode ? getMathModule(moduleId)?.title : null;
@@ -8190,7 +8189,7 @@ export function GenericModuleContent({
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
-                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep || (isInEvalPhase && allEvalDone)
+                {showEvalScore || currentStep?.kind === "pass_toggle" || isLastStep
                   ? "Terminer ✓"
                   : "Suivant →"}
               </button>
