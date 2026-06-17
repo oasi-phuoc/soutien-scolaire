@@ -6,7 +6,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
   title: "La structure de l'école",
   section: "V5",
   words: [
-    { word: "école",        image: "ecole.png",        article: "l'",  gender: "f", definition: "établissement où l'on apprend" },
+    { word: "école",        image: "ecole.jpg",        article: "l'",  gender: "f", definition: "établissement où l'on apprend" },
     { word: "classe",       image: "classe.png",       article: "la",  gender: "f", definition: "groupe d'élèves ou salle de cours" },
     { word: "salle",        image: "salle.png",        article: "la",  gender: "f", definition: "espace dans l'école pour une activité" },
     { word: "couloir",      image: "couloir.png",      article: "le",  gender: "m", definition: "passage entre les salles" },
