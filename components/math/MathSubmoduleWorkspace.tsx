@@ -2504,31 +2504,6 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         <PctWordExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
       )}
 
-      {/* A6-2 percentage exercises */}
-      {currentStep?.kind === "pct_of_num_ex" && (
-        <PctOfNumExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "part_to_pct_ex" && (
-        <PartToPctExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-
-      {/* A6-3 percentage increase/decrease exercises */}
-      {currentStep?.kind === "pct_diff_ex" && (
-        <PctDiffExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "pct_change_ex" && (
-        <PctChangeExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "pct_multiplier_ex" && (
-        <PctMultiplierExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "pct_table_ex" && (
-        <PctTableExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-      {currentStep?.kind === "pct_word_ex" && (
-        <PctWordExercise key={exKey} exNum={currentStep.exNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
-      )}
-
       {/* A4-4/5/6 fraction operations exercises */}
       {currentStep?.kind === "frac_ops" && (
         <FractionOpsExercise key={exKey} exType={currentStep.exType} opMode={currentStep.opMode} count={currentStep.count} displayExNum={currentStep.displayExNum} validateCommand={validateCommand} onValidated={handleCustomValidated} />
