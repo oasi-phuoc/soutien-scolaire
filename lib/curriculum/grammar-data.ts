@@ -94,7 +94,12 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
 ];
 
 export function getGrammarLesson(slug: string): GrammarLesson | undefined {
-  return GRAMMAR_LESSONS.find((l) => l.slug === slug);
+  const lesson = GRAMMAR_LESSONS.find((l) => l.slug === slug);
+  if (!lesson) return undefined;
+  if (lesson.code.startsWith("R1.") || lesson.code.startsWith("R2.")) {
+    return { ...lesson, evalExercises: lesson.exercises };
+  }
+  return lesson;
 }
 
 export function getAllGrammarLessons(): GrammarLesson[] {
