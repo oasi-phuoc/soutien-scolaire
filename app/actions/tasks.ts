@@ -89,6 +89,23 @@ export async function createTaskAction(
   return { ok: true };
 }
 
+export async function updateTaskAction(
+  taskId: string,
+  updates: { title?: string; description?: string | null; due_date?: string | null }
+): Promise<{ ok: boolean; reason?: string }> {
+  const role = await getCallerRole();
+  if (!role) return { ok: false, reason: "Non autorisé." };
+
+  const supabase = await createSupabaseActionClient();
+  if (!supabase) return { ok: false, reason: "Erreur serveur." };
+
+  const { error } = await supabase.from("tasks").update(updates).eq("id", taskId);
+  if (error) return { ok: false, reason: error.message };
+
+  revalidatePath("/admin/taches");
+  return { ok: true };
+}
+
 export async function deleteTaskAction(taskId: string): Promise<{ ok: boolean; reason?: string }> {
   const role = await getCallerRole();
   if (!role) return { ok: false, reason: "Non autorisé." };
