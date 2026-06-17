@@ -2210,13 +2210,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const [evalResults, setEvalResults] = useState<Record<string, boolean>>({});
   const [evalGrade, setEvalGrade] = useState<number | null>(null);
   const [evalSubmitted, setEvalSubmitted] = useState(false);
-  const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [evalExpandedRow, setEvalExpandedRow] = useState<number | null>(null);
 
   // Timer évaluation
   const [evalStarted, setEvalStarted] = useState(false);
   const [evalPageIdx, setEvalPageIdx] = useState(0);
-  const [evalPageValidated, setEvalPageValidated] = useState(false);
+  const [evalPagesValidated, setEvalPagesValidated] = useState<boolean[]>([]);
+  const evalPageValidated = evalPagesValidated[evalPageIdx] ?? false;
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const evalAutoSubmitRef = useRef<(() => void) | null>(null);
 
@@ -2232,7 +2232,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   }, [evalTimeLeft, evalSubmitted]);
 
   useEffect(() => {
-    if (step !== "eval") { setEvalStarted(false); setEvalTimeLeft(null); setEvalPageIdx(0); setEvalPageValidated(false); }
+    if (step !== "eval") { setEvalStarted(false); setEvalTimeLeft(null); setEvalPageIdx(0); setEvalPagesValidated([]); }
   }, [step]);
 
   // Niveau de validation (chargé depuis localStorage)
@@ -2405,7 +2405,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     setEvalStarted(false);
     setEvalTimeLeft(null);
     setEvalPageIdx(0);
-    setEvalPageValidated(false);
+    setEvalPagesValidated([]);
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-1") setEvalItems(generateA11EvalItems());
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-2") { resetEx9(); resetEx10(); resetEx11(); resetEx12(); resetEx13(); resetEx14(); resetEx15(); resetEx16(); resetA12Eval(); }
     if (MATH_A1_LESSONS[idx]?.submoduleId === "A1-4") { resetEx17(); resetEx18(); resetEx19(); resetEx20(); }
@@ -2423,12 +2423,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     if (step === "eval") {
       if (evalSubmitted) { router.push("/mathematiques"); return; }
       if (evalStarted && evalPageValidated) {
-        if (evalIsLastPage) {
+        const allDone = evalPagesValidated.length >= evalTotalPages && evalPagesValidated.every(Boolean);
+        if (allDone) {
           evalAutoSubmitRef.current?.();
-        } else {
-          setEvalPageIdx(p => p + 1);
-          setEvalPageValidated(false);
-          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+        for (let i = 1; i <= evalTotalPages; i++) {
+          const idx = (evalPageIdx + i) % evalTotalPages;
+          if (!evalPagesValidated[idx]) {
+            setEvalPageIdx(idx);
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            return;
+          }
         }
       }
       return;
@@ -2440,23 +2446,18 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
   const goBack = () => {
     if (step === "eval" && evalStarted && !evalSubmitted) {
-      setShowEvalCancelConfirm(true);
+      for (let i = 1; i <= evalTotalPages; i++) {
+        const idx = (evalPageIdx - i + evalTotalPages) % evalTotalPages;
+        if (!evalPagesValidated[idx]) {
+          setEvalPageIdx(idx);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          return;
+        }
+      }
       return;
     }
     const prevStep = steps[stepIdx - 1];
     if (prevStep) { goTo(prevStep); }
-  };
-
-  const cancelEval = () => {
-    setEvalStarted(false);
-    setEvalPageIdx(0);
-    setEvalPageValidated(false);
-    setEvalAnswers({});
-    setEvalResults({});
-    setEvalGrade(null);
-    setEvalSubmitted(false);
-    setEvalTimeLeft(null);
-    setShowEvalCancelConfirm(false);
   };
 
   const isFirstStep = stepIdx === 0;
@@ -2631,37 +2632,12 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     stepValidateDisabled = ex27Validated;
   } else if (step === "eval") {
     if (evalStarted && !evalSubmitted && !evalPageValidated) {
-      stepValidate = () => { setEvalPageValidated(true); };
+      stepValidate = () => { setEvalPagesValidated(prev => { const next = [...prev]; next[evalPageIdx] = true; return next; }); };
     }
   }
 
   return (
     <div className="pb-40">
-      {/* Confirmation dialog — cancel active eval */}
-      {showEvalCancelConfirm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="bg-[var(--color-bg-primary)] rounded-[var(--radius-lg)] p-6 mx-4 max-w-sm w-full space-y-4 shadow-xl">
-            <p className="text-base font-bold text-[var(--color-text-primary)]">Annuler l&apos;évaluation ?</p>
-            <p className="text-sm text-[var(--color-text-secondary)]">Ta progression dans l&apos;évaluation sera perdue.</p>
-            <div className="flex gap-3">
-              <button
-                type="button"
-                onClick={cancelEval}
-                className="flex-1 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 py-2.5 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]"
-              >
-                Annuler
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowEvalCancelConfirm(false)}
-                className="flex-1 rounded-[var(--radius-lg)] bg-blue-600 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
-              >
-                Continuer
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Step progress bar — hidden during eval */}
       {step !== "eval" && (
@@ -2682,7 +2658,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
       {/* Eval progress bar */}
       {step === "eval" && evalStarted && !evalSubmitted && (
-        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={lesson.submoduleId === "A1-1" || lesson.submoduleId === "A1-2" ? null : evalTimeLeft} />
+        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={lesson.submoduleId === "A1-1" || lesson.submoduleId === "A1-2" ? null : evalTimeLeft} validatedCount={evalPagesValidated.filter(Boolean).length} />
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
@@ -3772,7 +3748,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                 </div>
                 <button
                   type="button"
-                  onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPageValidated(false); setEvalTimeLeft(5 * 60); }}
+                  onClick={() => { setEvalStarted(true); setEvalPageIdx(0); setEvalPagesValidated(Array(evalTotalPages).fill(false)); setEvalTimeLeft(5 * 60); }}
                   className="flex h-12 min-w-[160px] items-center justify-center gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-6 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80"
                 >{evalIntroText("start", "Commencer")}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
@@ -4251,27 +4227,51 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
               }
               return (
                 <div className="space-y-4">
-                  <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats</h2>
+                  <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-alg)]">Résultats</p>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="flex flex-col items-center justify-center p-3 text-center">
+                      <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+                      <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+                        {earnedPts}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{evalTotalPts}</span>
+                      </p>
+                      <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                        <div className={`h-full rounded-full transition-all duration-700 ${evalGrade >= passingGrade ? "bg-[var(--color-accent-alg)]" : "bg-red-400"}`}
+                          style={{ width: `${evalTotalPts > 0 ? Math.round((earnedPts / evalTotalPts) * 100) : 0}%` }} />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center p-3 text-center">
+                      <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+                      <p className="text-2xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+                    </div>
+                    <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${evalGrade >= passingGrade ? "border-green-500" : "border-red-400"}`}>
+                      <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+                      <p className={`mt-1 text-sm font-bold ${evalGrade >= passingGrade ? "text-green-600" : "text-red-500"}`}>
+                        {evalGrade >= passingGrade ? "Réussi" : "À améliorer"}
+                      </p>
+                    </div>
+                  </div>
                   <ul className="space-y-2">
                     {rows.map((row, i) => {
                       const color = row.score === row.max ? "text-green-600" : row.score > 0 ? "text-amber-600" : "text-red-500";
                       const isOpen = evalExpandedRow === i;
                       return (
-                        <li key={i} className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
+                        <li key={i}>
                           <button type="button"
                             onClick={() => setEvalExpandedRow(isOpen ? null : i)}
-                            className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left">
-                            <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
-                            <span className="flex items-center gap-2">
-                              <span className={`text-sm font-bold ${color}`}>{row.score}/{row.max}</span>
-                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-                                className={`shrink-0 text-[var(--color-text-secondary)] transition-transform ${isOpen ? "rotate-180" : ""}`}>
-                                <path d="M6 9l6 6 6-6" />
-                              </svg>
-                            </span>
+                            className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
+                              isOpen
+                                ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
+                                : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
+                            }`}>
+                            <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                            <span className={`shrink-0 text-sm font-bold tabular-nums ${color}`}>{row.score}/{row.max}</span>
+                            <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isOpen ? "rotate-90" : ""}`}
+                              viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden>
+                              <path d="M9 18l6-6-6-6" />
+                            </svg>
                           </button>
                           {isOpen && (
-                            <div className="space-y-2 border-t border-[var(--color-border-default)] px-4 py-3">
+                            <div className="space-y-2 px-1 py-3">
                               {row.detail.map((d, di) => (
                                 <div key={di} className="text-sm">
                                   <p className="text-[var(--color-text-secondary)]">{d.q}</p>
@@ -4287,15 +4287,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       );
                     })}
                   </ul>
-                  <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${evalGrade >= passingGrade ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-                    <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
-                    <p className="text-5xl font-bold text-[var(--color-text-primary)]">{evalGrade.toFixed(1)}</p>
-                    <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {earnedPts}/{evalTotalPts} pts</p>
-                    <p className={`mt-3 text-base font-bold ${evalGrade >= passingGrade ? "text-[var(--color-accent-alg)]" : "text-red-500"}`}>
-                      {evalGrade >= passingGrade ? "✓ Réussi" : "✗ À améliorer"}
-                    </p>
-                    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {passingGrade}/6</p>
-                  </div>
                 </div>
               );
             })()}
