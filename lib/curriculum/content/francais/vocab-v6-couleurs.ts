@@ -19,11 +19,8 @@ export const V6_COULEURS_THEME: VocabTheme = {
     { word: "marron",    image: "marron.svg",     definition: "couleur brun foncé comme le chocolat" },
     { word: "beige",     image: "beige.svg",      definition: "couleur crème, brun très clair" },
     { word: "turquoise", image: "turquoise.svg",  definition: "couleur bleu-vert vif" },
-    { word: "doré",      image: "dore.svg",       feminine: "dorée",     definition: "couleur brillante semblable à l'or" },
-    { word: "argenté",   image: "argente.svg",    feminine: "argentée",  definition: "couleur brillante semblable à l'argent" },
     { word: "cyan",      image: "cyan.svg",       definition: "couleur bleu vif entre bleu et vert" },
     { word: "bordeaux",  image: "bordeaux.svg",   definition: "couleur rouge foncé comme le vin de Bordeaux" },
-    { word: "lilas",     image: "lilas.svg",      definition: "couleur violet clair comme la fleur de lilas" },
     { word: "kaki",      image: "kaki.svg",       definition: "couleur vert olive tirant sur le brun" },
   ],
   sentences: [
@@ -31,7 +28,7 @@ export const V6_COULEURS_THEME: VocabTheme = {
     { sentence: "Elle porte une robe ___ pour la Saint-Valentin.",       answer: "rouge" },
     { sentence: "Les feuilles de cet arbre sont de couleur ___.",        answer: "vert" },
     { sentence: "Sa veste préférée est ___, comme la nuit.",             answer: "noir" },
-    { sentence: "Il a une montre ___ qui brille comme de l'or.",         answer: "doré" },
+    { sentence: "Sa veste est ___, comme les feuilles d'automne.",        answer: "kaki" },
     { sentence: "Elle porte une robe ___ très élégante pour le mariage.", answer: "bordeaux" },
   ],
 };
