@@ -2219,6 +2219,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const evalPageValidated = evalPagesValidated[evalPageIdx] ?? false;
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const evalAutoSubmitRef = useRef<(() => void) | null>(null);
+  const goNextRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!evalStarted || evalSubmitted || evalTimeLeft === null || evalTimeLeft <= 0) return;
@@ -2280,7 +2281,6 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const evalTotalPages = lesson.submoduleId === "A1-2" ? 7
     : lesson.submoduleId === "A1-1" ? 3
     : evalItems_curr.length;
-  const evalIsLastPage = evalPageIdx >= Math.max(0, evalTotalPages - 1);
   evalAutoSubmitRef.current = () => {
     if (evalSubmitted) return;
     if (lesson.submoduleId === "A1-2") {
@@ -2422,12 +2422,9 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
   const goNext = () => {
     if (step === "eval") {
       if (evalSubmitted) { router.push("/mathematiques"); return; }
-      if (evalStarted && evalPageValidated) {
+      if (evalStarted) {
         const allDone = evalPagesValidated.length >= evalTotalPages && evalPagesValidated.every(Boolean);
-        if (allDone) {
-          evalAutoSubmitRef.current?.();
-          return;
-        }
+        if (allDone) { evalAutoSubmitRef.current?.(); return; }
         for (let i = 1; i <= evalTotalPages; i++) {
           const idx = (evalPageIdx + i) % evalTotalPages;
           if (!evalPagesValidated[idx]) {
@@ -2443,6 +2440,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     if (nextStep) { goTo(nextStep); }
     else { router.push("/mathematiques"); }
   };
+  goNextRef.current = goNext;
 
   const goBack = () => {
     if (step === "eval" && evalStarted && !evalSubmitted) {
@@ -2631,8 +2629,13 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     stepValidate = () => { setEx27Validated(true); };
     stepValidateDisabled = ex27Validated;
   } else if (step === "eval") {
-    if (evalStarted && !evalSubmitted && !evalPageValidated) {
-      stepValidate = () => { setEvalPagesValidated(prev => { const next = [...prev]; next[evalPageIdx] = true; return next; }); };
+    if (evalStarted && !evalSubmitted) {
+      stepValidate = () => {
+        if (evalPageValidated) return;
+        setEvalPagesValidated(prev => { const next = [...prev]; next[evalPageIdx] = true; return next; });
+        setTimeout(() => goNextRef.current?.(), 500);
+      };
+      stepValidateDisabled = evalPageValidated;
     }
   }
 
@@ -3619,11 +3622,11 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                             ri === qi ? row.map((v, vi) => vi === ti ? !v : v) : row
                           ));
                         }}
-                        className={`flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ${cls}`}>
+                        className={`flex min-w-0 items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ${cls}`}>
                         <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${isSelected ? "border-current bg-current" : "border-current/40"}`}>
                           {isSelected && <span className="h-2 w-2 rounded-full bg-white" />}
                         </span>
-                        <span className="font-normal">{tag.label}</span>
+                        <span className="min-w-0 break-all font-normal">{tag.label}</span>
                       </button>
                     );
                   })}
@@ -3972,7 +3975,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                       <div className="flex flex-col gap-2">
                         {q.tags.map((tag, ti) => {
                           const sel = a12EvalEx15Sel[qi]?.[ti] ?? false;
-                          let cls = "flex items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ";
+                          let cls = "flex min-w-0 items-center gap-2 rounded-[var(--radius-md)] border p-2.5 text-sm text-left transition-colors ";
                           cls += sel ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10 text-[var(--color-accent-alg)]" : "border-zinc-300 bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] dark:border-zinc-600";
                           return (
                             <button key={ti} type="button"
@@ -3982,7 +3985,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                               <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${sel ? "border-current bg-current" : "border-current/40"}`}>
                                 {sel && <span className="h-2 w-2 rounded-full bg-white" />}
                               </span>
-                              <span className="font-normal">{tag.label}</span>
+                              <span className="min-w-0 break-all font-normal">{tag.label}</span>
                             </button>
                           );
                         })}
@@ -4062,7 +4065,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                   {evalItems_curr.slice(0, 4).map((ex, i) => (
                     <ExerciseRow key={ex.id} rowIdx={i} noBorder showCorrection={false}
                       num={ex.numValue ?? 0} inputId={`eval-${ex.id}`}
-                      answer={evalAnswers[ex.id] ?? ""} result={evalPageValidated ? answerMatches(evalAnswers[ex.id] ?? "", ex.acceptable) : null}
+                      answer={evalAnswers[ex.id] ?? ""} result={null}
                       validated={evalPageValidated} correctWord={ex.numValue === 1 ? "un" : (FR_WORDS[ex.numValue ?? 0] ?? "")}
                       pivotWord={undefined} pivot={pivot} showPivot={false}
                       onChange={(val) => setEvalAnswers((prev) => ({ ...prev, [ex.id]: val }))}
@@ -5010,13 +5013,10 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             <button
               type="button"
               onClick={goNext}
-              disabled={step === "eval" && evalStarted && !evalSubmitted && !evalPageValidated}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)] px-5 text-sm font-bold text-white transition-opacity hover:opacity-90 active:opacity-80 disabled:opacity-40"
             >
-              {(step === "eval" && evalSubmitted) || isLastStep ? (
+              {(step === "eval" && evalSubmitted) || isLastStep || (step === "eval" && evalStarted && evalPagesValidated.length >= evalTotalPages && evalPagesValidated.every(Boolean)) ? (
                 <>Terminer <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
-              ) : step === "eval" && evalStarted && evalIsLastPage ? (
-                <>Soumettre <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M20 6L9 17l-5-5" /></svg></>
               ) : (
                 <>Suivant <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><path d="M9 18l6-6-6-6" /></svg></>
               )}
