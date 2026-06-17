@@ -259,6 +259,7 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
   const [studentSearch, setStudentSearch] = useState("");
   const [viewMode, setViewMode] = useState<"classes" | "eleves">("classes");
+  const [expandedClasses, setExpandedClasses] = useState<Set<string>>(new Set());
   const [formError, setFormError] = useState<string | null>(null);
   const [formSuccess, setFormSuccess] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -279,10 +280,19 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
 
   const byClasse = filtered.reduce<Record<string, StudentOption[]>>((acc, s) => {
     const key = s.classe ?? "—";
+    if (/ancien/i.test(key)) return acc;
     (acc[key] ??= []).push(s);
     return acc;
   }, {});
   const classes = Object.keys(byClasse).sort();
+
+  function toggleExpandClasse(classe: string) {
+    setExpandedClasses((prev) => {
+      const next = new Set(prev);
+      if (next.has(classe)) next.delete(classe); else next.add(classe);
+      return next;
+    });
+  }
 
   function toggleStudent(id: string) {
     setSelectedIds((prev) => {
@@ -474,17 +484,34 @@ export function TasksPanel({ students }: { students: StudentOption[] }) {
               ) : classes.map((classe) => {
                 const classeStudents = byClasse[classe] ?? [];
                 const allInClasse = classeStudents.every((s) => selectedIds.has(s.id));
+                const isExpanded = expandedClasses.has(classe);
                 return (
                   <div key={classe}>
-                    <button
-                      type="button"
-                      onClick={() => toggleClasse(classe)}
-                      className="flex w-full items-center gap-2 border-b border-zinc-100 bg-zinc-50 px-3 py-1.5 text-left text-xs font-semibold text-zinc-600 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800"
-                    >
-                      <Checkbox checked={allInClasse} />
-                      Classe : {classe}
-                    </button>
-                    {classeStudents.map((s) => {
+                    <div className="flex w-full items-center border-b border-zinc-100 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
+                      <button
+                        type="button"
+                        onClick={() => toggleClasse(classe)}
+                        className="flex items-center gap-2 py-1.5 pl-3 pr-2 hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                        title="Sélectionner / désélectionner la classe"
+                      >
+                        <Checkbox checked={allInClasse} />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => toggleExpandClasse(classe)}
+                        className="flex flex-1 items-center gap-1.5 py-1.5 pr-3 text-left text-xs font-semibold text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800"
+                      >
+                        {classe}
+                        <span className="ml-auto text-[10px] text-zinc-400">({classeStudents.length})</span>
+                        <svg
+                          className={`h-3 w-3 shrink-0 text-zinc-400 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+                          viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden
+                        >
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
+                      </button>
+                    </div>
+                    {isExpanded && classeStudents.map((s) => {
                       const checked = selectedIds.has(s.id);
                       const name = [s.prenom, s.nom].filter(Boolean).join(" ") || s.id.slice(0, 8);
                       return (
