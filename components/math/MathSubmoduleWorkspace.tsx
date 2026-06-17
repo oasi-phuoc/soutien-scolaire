@@ -1811,7 +1811,13 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   function goBack() {
     if (isInEvalExercises && isFreeNavModule) {
       const evalIdx = stepIdx - evalStartIdx - 1;
-      if (evalIdx > 0 && !evalExValidated[evalIdx - 1]) goTo(stepIdx - 1);
+      for (let i = 1; i <= evalExerciseTotal; i++) {
+        const idx = (evalIdx - i + evalExerciseTotal) % evalExerciseTotal;
+        if (!evalExValidated[idx]) {
+          goTo(evalStartIdx + 1 + idx);
+          return;
+        }
+      }
       return;
     }
     if (isInEvalExercises) { setShowEvalCancelConfirm(true); return; }
@@ -1859,10 +1865,12 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         return;
       }
       const evalIdx = stepIdx - evalStartIdx - 1;
-      if (evalIdx >= evalExerciseTotal - 1) {
-        goTo(evalStartIdx + 1);
-      } else {
-        goTo(stepIdx + 1);
+      for (let i = 1; i <= evalExerciseTotal; i++) {
+        const idx = (evalIdx + i) % evalExerciseTotal;
+        if (!evalExValidated[idx]) {
+          goTo(evalStartIdx + 1 + idx);
+          return;
+        }
       }
       return;
     }

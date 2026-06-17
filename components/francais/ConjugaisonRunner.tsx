@@ -2219,7 +2219,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [evalPassed, setEvalPassed] = useState<boolean[]>(() => Array(evalExercises.length).fill(false));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
-  const [showFreeNavWarning, setShowFreeNavWarning] = useState(false);
   const [evalAutoAdvance, setEvalAutoAdvance] = useState(0);
 
   const isFirst = stepIdx === 0;
@@ -2341,13 +2340,14 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
       return;
     }
     if (isEvalPhase) {
-      if (evalIdx > 0 && !evalValidated[evalIdx - 1]) {
-        const newIdx = evalIdx - 1;
-        setEvalIdx(newIdx);
-        setCanValidate(!evalValidated[newIdx]);
-      } else {
-        setShowFreeNavWarning(true);
-        setTimeout(() => setShowFreeNavWarning(false), 3000);
+      const total = evalExercises.length;
+      for (let i = 1; i <= total; i++) {
+        const idx = (evalIdx - i + total) % total;
+        if (!evalValidated[idx]) {
+          setEvalIdx(idx);
+          setCanValidate(true);
+          return;
+        }
       }
       return;
     }
@@ -2373,10 +2373,16 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
     if (isEvalPhase) {
       if (allEvalValidated) {
         setStepIdx(resultsIdx);
-      } else {
-        const newIdx = evalIdx >= evalExercises.length - 1 ? 0 : evalIdx + 1;
-        setEvalIdx(newIdx);
-        setCanValidate(!evalValidated[newIdx]);
+        return;
+      }
+      const total = evalExercises.length;
+      for (let i = 1; i <= total; i++) {
+        const idx = (evalIdx + i) % total;
+        if (!evalValidated[idx]) {
+          setEvalIdx(idx);
+          setCanValidate(true);
+          return;
+        }
       }
       return;
     }
@@ -2618,12 +2624,6 @@ export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
                     );
                   })}
                 </div>
-                {showFreeNavWarning && (
-                  <div className="mt-2 flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-700 dark:bg-amber-950/30 dark:text-amber-400">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    Tu es au premier exercice. Valide et utilise &laquo;&nbsp;Suivant&nbsp;&raquo; pour naviguer.
-                  </div>
-                )}
               </div>
             )}
 
