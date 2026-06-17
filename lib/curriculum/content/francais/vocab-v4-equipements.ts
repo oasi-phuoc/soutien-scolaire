@@ -16,7 +16,6 @@ export const V4_EQUIPEMENTS_THEME: VocabTheme = {
     { word: "étagère",  image: "etagere.png",  article: "l'",  gender: "f", definition: "planche fixée au mur pour poser des objets" },
     { word: "miroir",   image: "miroir.png",   article: "le",  gender: "m", definition: "surface réfléchissante pour se voir" },
     { word: "tabouret", image: "tabouret.png", article: "le",  gender: "m", definition: "petit siège sans dossier ni accoudoirs" },
-    { word: "lavabo",                           article: "le",  gender: "m", definition: "vasque pour se laver les mains et le visage" },
   ],
   sentences: [
     { sentence: "Elle range ses vêtements dans l'___.",      answer: "armoire" },
