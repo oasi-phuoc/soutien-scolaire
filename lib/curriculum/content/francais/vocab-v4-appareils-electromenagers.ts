@@ -17,7 +17,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
     { word: "fer à repasser",  image: "fer-a-repasser.png", article: "le", gender: "m", definition: "appareil pour lisser les vêtements" },
     { word: "bouilloire",      image: "bouilloire.png",    article: "la",  gender: "f", definition: "appareil pour faire bouillir de l'eau" },
     { word: "ventilateur",     image: "ventilateur.png",   article: "le",  gender: "m", definition: "appareil qui brasse l'air pour rafraîchir" },
-    { word: "ampoule",         image: "ampoule.jpg",       article: "l'",  gender: "f", definition: "objet qui produit de la lumière" },
+    { word: "cafetière",       image: "cafetiere.png",     article: "la",  gender: "f", definition: "appareil électrique pour préparer le café" },
   ],
   sentences: [
     { sentence: "Elle met le gâteau dans le ___.",              answer: "four" },
