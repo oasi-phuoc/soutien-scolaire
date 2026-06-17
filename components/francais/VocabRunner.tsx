@@ -148,16 +148,16 @@ export function VocabRunner({ theme }: Props) {
     const newValidated = evalValidated.map((v, j) => (j === idx ? true : v));
     setEvalValidated(newValidated);
     setValidated(true);
-    // Auto-advance to next non-validated exercise or results
     const allDone = newValidated.every(Boolean);
     if (allDone) {
-      setTimeout(() => setStepIdx(steps.length - 1), 500);
+      setStepIdx(steps.length - 1);
     } else {
-      const nextAfter = newValidated.findIndex((v, j) => j > idx && !v);
-      const nextAny = newValidated.findIndex(v => !v);
-      const next = nextAfter !== -1 ? nextAfter : nextAny;
-      if (next !== -1) {
-        setTimeout(() => setStepIdx(evalExFirst + next), 500);
+      for (let i = 1; i <= evalTotal; i++) {
+        const next = (idx + i) % evalTotal;
+        if (!newValidated[next]) {
+          setStepIdx(evalExFirst + next);
+          return;
+        }
       }
     }
   }
@@ -207,8 +207,13 @@ export function VocabRunner({ theme }: Props) {
       if (allEvalValidated) {
         setStepIdx(steps.length - 1);
       } else {
-        const next = evalExIdx >= evalTotal - 1 ? 0 : evalExIdx + 1;
-        setStepIdx(evalExFirst + next);
+        for (let i = 1; i <= evalTotal; i++) {
+          const idx = (evalExIdx + i) % evalTotal;
+          if (!evalValidated[idx]) {
+            setStepIdx(evalExFirst + idx);
+            return;
+          }
+        }
       }
       return;
     }
@@ -450,30 +455,31 @@ export function VocabRunner({ theme }: Props) {
           <div>
             {/* Score header — results only */}
             {step.key === "results" && (
-              <div className="mb-6 space-y-6">
-                <div className="space-y-1 text-center">
-                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
-                  <p className="text-3xl font-bold text-[var(--color-text-primary)]">
-                    {totalCorrect} <span className="text-xl text-[var(--color-text-secondary)]">/ {totalItems}</span>
-                  </p>
-                </div>
-                <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`}
-                    style={{ width: `${totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0}%` }}
-                  />
-                </div>
-                <div className={`flex items-center justify-between rounded-[var(--radius-lg)] border-2 px-4 py-3 ${passed ? "border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"}`}>
-                  <div>
-                    <p className="text-xs text-[var(--color-text-secondary)]">Note · seuil {passingGrade.toFixed(1)}/6</p>
-                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)} <span className="text-base font-normal text-[var(--color-text-secondary)]">/ 6</span></p>
+              <div className="mb-6">
+                <p className="mb-4 text-center text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Résultats</p>
+                <div className="grid grid-cols-3 gap-3">
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">
+                      {totalCorrect}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/{totalItems}</span>
+                    </p>
+                    <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
+                      <div className={`h-full rounded-full transition-all duration-700 ${passed ? "bg-[var(--color-accent-fr)]" : "bg-red-400"}`} style={{ width: `${totalItems > 0 ? Math.round((totalCorrect / totalItems) * 100) : 0}%` }} />
+                    </div>
                   </div>
-                  <p className={`text-sm font-bold ${passed ? "text-[var(--color-accent-fr)]" : "text-red-500"}`}>
-                    {passed ? "✓ Validé" : "✗ À améliorer"}
-                  </p>
+                  <div className="flex flex-col items-center justify-center p-3 text-center">
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+                    <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+                  </div>
+                  <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
+                    <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+                    <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>
+                      {passed ? "Réussi" : "À améliorer"}
+                    </p>
+                  </div>
                 </div>
-                <p className="text-sm text-[var(--color-text-secondary)]">
-                  Cliquez sur un exercice pour afficher l&apos;énoncé, vos réponses et les corrections.
+                <p className="mt-4 text-sm text-[var(--color-text-secondary)]">
+                  Cliquez sur un exercice pour voir la correction.
                 </p>
               </div>
             )}
@@ -509,22 +515,17 @@ export function VocabRunner({ theme }: Props) {
                         <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">{VOCAB_EVAL_LABELS[i] ?? `Exercice ${i + 1}`}</span>
                         {score && (
                           <span className={`shrink-0 text-xs font-bold tabular-nums ${score.correct === score.total ? "text-green-600" : score.correct > 0 ? "text-amber-600" : "text-red-500"}`}>
-                            {score.correct} / {score.total}
+                            {score.correct}/{score.total}
                           </span>
                         )}
+                        <svg className={`h-3 w-3 shrink-0 text-[var(--color-text-secondary)] transition-transform ${isSelectedResult ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
                       </button>
                     )}
                     {/* Exercise panel — active during eval, inline under row during results */}
                     <div className={
                       isInEvalPhase && isActive ? "" :
-                      (isSelectedResult ? "px-1 py-3" : "hidden")
+                      (isSelectedResult ? "px-1 py-3 [&_h2]:hidden" : "hidden")
                     }>
-                      {isSelectedResult && score && (
-                        <div className="mb-4 flex items-center justify-between">
-                          <h2 className="text-base font-bold text-[var(--color-accent-fr)]">Exercice {i + 1}</h2>
-                          <span className="text-xs text-[var(--color-text-secondary)]">{score.correct} / {score.total}</span>
-                        </div>
-                      )}
                       <EvalRevealContext.Provider value={step.key === "results"}>
                         {renderEvalExercise(
                           exStep,
