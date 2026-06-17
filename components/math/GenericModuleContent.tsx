@@ -1558,7 +1558,7 @@ function genTrueFalseGcdLcm(exNum: number): TrueFalseGcdLcmConfig {
 
 // ── WordProblemsExercise (A2.4) ───────────────────────────────────────────────
 function WordProblemsExercise({
-  config, answers, validated, results, onChange, consigne, revealCorrection = true,
+  config, answers, validated, results, onChange, consigne, revealCorrection = true, noFrame = false,
 }: {
   config: WordProblemsConfig;
   answers: string[];
@@ -1567,6 +1567,7 @@ function WordProblemsExercise({
   onChange: (i: number, val: string) => void;
   consigne?: string;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   const inputCls = `w-28 px-0 pb-2 text-sm ${MATH_TEXT_INPUT_BASE}`;
   return (
@@ -1582,7 +1583,7 @@ function WordProblemsExercise({
           const wrong = ok === false;
           return (
             <div key={i} className="space-y-3">
-              <div className="rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4">
+              <div className={noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-4"}>
                 <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">{q.textFr}</p>
               </div>
               <div className="flex items-center gap-3 pl-2">
@@ -2489,7 +2490,7 @@ function DivColumnGridExercise({
 
 // ── RoundingExercise ──────────────────────────────────────────────────────────
 function RoundingExercise({
-  config, answers, validated, results, onChange, revealCorrection = true,
+  config, answers, validated, results, onChange, revealCorrection = true, noFrame = false,
 }: {
   config: RoundingConfig;
   answers: string[];
@@ -2497,6 +2498,7 @@ function RoundingExercise({
   results: boolean[];
   onChange: (i: number, val: string) => void;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   const inputBase = `w-[4.5rem] h-8 shrink-0 px-2 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   const isNew = config.consigne !== "";
@@ -2514,7 +2516,7 @@ function RoundingExercise({
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       {isNew && <p className="text-sm text-[var(--color-text-secondary)]">{config.consigne}</p>}
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4">
+      <div className={noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4"}>
         <div
           className={isInline || isDecMixed ? "grid items-center gap-x-2 gap-y-3" : isNew && !isInline ? "grid gap-y-3" : "space-y-3"}
           style={gridCols ? { gridTemplateColumns: gridCols } : undefined}
@@ -2594,15 +2596,16 @@ function FracDisplay({ num, den }: { num: number | string; den: number | string 
 }
 
 // ── FracIdExercise ────────────────────────────────────────────────────────────
-function FracIdExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
+function FracIdExercise({ config, answers, validated, results, onChange, revealCorrection = true, noFrame = false }: {
   config: FracIdConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-4">
+      <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-4`}>
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? results[i] : null;
@@ -2637,16 +2640,17 @@ function FracIdExercise({ config, answers, validated, results, onChange, revealC
 }
 
 // ── FracEquivExercise ─────────────────────────────────────────────────────────
-function FracEquivExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
+function FracEquivExercise({ config, answers, validated, results, onChange, revealCorrection = true, noFrame = false }: {
   config: FracEquivConfig; answers: string[]; validated: boolean; results: boolean[];
   onChange: (i: number, val: string) => void;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Complétez les fractions équivalentes.</p>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
+      <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-5`}>
         {config.questions.map((q, i) => {
           const v = answers[i] ?? "";
           const ok = validated && revealCorrection ? results[i] : null;
@@ -2696,20 +2700,21 @@ function FracEquivExercise({ config, answers, validated, results, onChange, reve
 }
 
 // ── FracSimplifyExercise ──────────────────────────────────────────────────────
-function FracSimplifyExercise({ config, answers, validated, results, onChange, revealCorrection = true }: {
+function FracSimplifyExercise({ config, answers, validated, results, onChange, revealCorrection = true, noFrame = false }: {
   config: FracSimplifyConfig;
   answers: Array<{ num: string; den: string }>;
   validated: boolean;
   results: boolean[];
   onChange: (i: number, part: "num" | "den", val: string) => void;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   const inputW = `w-12 px-1 py-1.5 text-sm ${MATH_NUMBER_INPUT_BASE}`;
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Simplifiez les fractions.</p>
-      <div className="rounded-xl border border-[var(--color-border-default)] p-4 space-y-5">
+      <div className={`${noFrame ? "" : "rounded-xl border border-[var(--color-border-default)] p-4 "}space-y-5`}>
         {config.questions.map((q, i) => {
           const ans = answers[i] ?? { num: "", den: "" };
           const ok = validated && revealCorrection ? results[i] : null;
@@ -2749,18 +2754,19 @@ function FracSimplifyExercise({ config, answers, validated, results, onChange, r
 }
 
 // ── FracCompareExercise ───────────────────────────────────────────────────────
-function FracCompareExercise({ config, answers, validated, onAnswer, revealCorrection = true }: {
+function FracCompareExercise({ config, answers, validated, onAnswer, revealCorrection = true, noFrame = false }: {
   config: FracCompConfig;
   answers: Array<"<" | "=" | ">" | null>;
   validated: boolean;
   onAnswer: (i: number, sym: "<" | "=" | ">") => void;
   revealCorrection?: boolean;
+  noFrame?: boolean;
 }) {
   return (
     <div className="space-y-4">
       <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {config.exNum}</h2>
       <p className="text-sm text-[var(--color-text-secondary)]">Comparez les fractions suivantes.</p>
-      <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4 space-y-4">
+      <div className={`${noFrame ? "" : "rounded-[var(--radius-md)] border border-[var(--color-border-default)] p-4 "}space-y-4`}>
         {config.questions.map((q, i) => (
           <div key={i} className="flex items-center gap-2">
             <span className="w-5 shrink-0 text-xs font-bold text-[var(--color-accent-alg)]">{i + 1}.</span>
@@ -6007,6 +6013,7 @@ export function GenericModuleContent({
             results={results}
             onChange={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "unit_conversion":
@@ -6031,6 +6038,7 @@ export function GenericModuleContent({
             results={results}
             onChange={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "frac_equiv":
@@ -6043,6 +6051,7 @@ export function GenericModuleContent({
             results={results}
             onChange={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "frac_simplify":
@@ -6055,6 +6064,7 @@ export function GenericModuleContent({
             results={results}
             onChange={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "frac_compare":
@@ -6066,6 +6076,7 @@ export function GenericModuleContent({
             validated={true}
             onAnswer={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "div_column_grid":
@@ -6120,6 +6131,7 @@ export function GenericModuleContent({
             results={results}
             onChange={noop}
             revealCorrection={true}
+            noFrame={true}
           />
         );
       case "number_select": {
@@ -7982,6 +7994,7 @@ export function GenericModuleContent({
               </p>
             </div>
           </div>
+          <p className="text-xs text-center text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
           {/* Exercise detail list */}
           <ul className="space-y-2">
             {evalRowData.map((row, i) => {
@@ -7992,7 +8005,7 @@ export function GenericModuleContent({
                   <button
                     type="button"
                     onClick={() => setSelectedResultIdx(isSelected ? null : i)}
-                    className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${
+                    className={`flex w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 min-h-[44px] text-left transition-colors ${
                       isSelected
                         ? "border-[var(--color-accent-alg)] bg-[var(--color-accent-alg)]/10"
                         : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)] hover:border-[var(--color-accent-alg)]/60"
