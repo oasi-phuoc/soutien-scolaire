@@ -4981,6 +4981,18 @@ export function GenericModuleContent({
         }
         return;
       }
+      // Suivant clicked without validating: skip to next unvalidated without saving results
+      if (!evalExValidatedFlags[evalStepOffset]) {
+        const total = evalSteps.length;
+        for (let i = 1; i < total; i++) {
+          const idx = (evalStepOffset + i) % total;
+          if (!evalExValidatedFlags[idx]) {
+            goTo(evalStartIdx + 1 + idx);
+            break;
+          }
+        }
+        return;
+      }
       let currentResults: boolean[] = [];
       if (currentStep.kind === "exercise") {
         currentResults = [answerMatches(answer, currentStep.item.acceptable)];
@@ -5329,6 +5341,9 @@ export function GenericModuleContent({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLastStep, currentStep, steps, stepIdx, exStatus, answer, moduleId, goTo, router, startSubmoduleId, toggleAnswer, showEvalScore, isInEvalPhase, arithResults, gridResults, arithOverrideConfigs, gridOverrideConfigs, roundingResults, roundingOverrideConfigs, evalSavedResults, evalExValidatedFlags, evalStartIdx, evalStepOffset, evalSteps.length, fracIdResults, fracEquivResults, fracSimplifyResults, fracCompareResults, numberSelectAnswers, encadrementAnswers, oddEvenAnswers, nlMultiAnswers, orderingSelected, seqRuleAnswers, seqCompleteAnswers, numberSelectOverrideConfigs, encadrementOverrideConfigs, oddEvenOverrideConfigs, nlMultiOverrideConfigs, activeOrderingConfig, activeSeqRuleConfig, activeSeqCompleteConfig, orderingOverrideConfigs, seqRuleOverrideConfigs, seqCompleteOverrideConfigs, divGridResults, divGridOverrideConfigs, mul2dResults, mul2dOverrideConfigs, decOrderingSelected, decSeqRuleAnswers, decSeqCompleteAnswers, activeDecOrderingConfig, activeDecSeqRuleConfig, activeDecSeqCompleteConfig, decOrderingOverrideConfigs, decSeqRuleOverrideConfigs, decSeqCompleteOverrideConfigs, multSelectAnswers, multSelectOverride, multListAnswers, multListOverride, tfMultDivAnswers, tfMultDivOverride, findDivisorsAnswers, findDivisorsOverride, divSelectAnswers, divSelectOverride, divByAnswers, divByOverride, missingDigitAnswers, missingDigitOverride, gcdLcmAnswers, gcdLcmOverride, tfGcdLcmAnswers, tfGcdLcmOverride, wpAnswers, wpOverrideConfigs, unitConversionAnswers, unitConversionResults, unitConversionOverrideConfigs, geoResults]);
+
+  const goNextRef = useRef<() => void>(() => {});
+  useEffect(() => { goNextRef.current = goNext; });
 
   let stepValidate: (() => void) | undefined;
   let stepReset: (() => void) | undefined;
@@ -5920,13 +5935,14 @@ export function GenericModuleContent({
     };
   }
 
-  // In eval phase, wrap stepValidate to mark exercise as done (enables Suivant button)
+  // In eval phase, wrap stepValidate to auto-advance after correction display
   if (stepValidate && isInEvalPhase) {
     const origValidate = stepValidate;
     const capturedOffset = evalStepOffset;
     stepValidate = () => {
       origValidate();
       setEvalExValidatedFlags(prev => ({ ...prev, [capturedOffset]: true }));
+      setTimeout(() => goNextRef.current(), 0);
     };
   }
 
@@ -8140,40 +8156,7 @@ export function GenericModuleContent({
                 type="button"
                 onClick={goNext}
                 disabled={
-                  (currentStep?.kind === "pass_toggle" && toggleAnswer === null) ||
-                  (isInEvalPhase && !evalExValidatedFlags[evalStepOffset] && (
-                    (currentStep?.kind === "arithmetic_group" && !arithValidated) ||
-                    (currentStep?.kind === "column_grid" && !gridValidated) ||
-                    (currentStep?.kind === "word_problems" && !wpValidated) ||
-                    (currentStep?.kind === "unit_conversion" && !unitConversionValidated) ||
-                    (currentStep?.kind === "rounding_group" && !roundingValidated) ||
-                    (currentStep?.kind === "frac_id" && !fracIdValidated) ||
-                    (currentStep?.kind === "frac_equiv" && !fracEquivValidated) ||
-                    (currentStep?.kind === "frac_simplify" && !fracSimplifyValidated) ||
-                    (currentStep?.kind === "frac_compare" && !fracCompareValidated) ||
-                    (currentStep?.kind === "number_select" && !numberSelectValidated) ||
-                    (currentStep?.kind === "encadrement" && !encadrementValidated) ||
-                    (currentStep?.kind === "odd_even" && !oddEvenValidated) ||
-                    (currentStep?.kind === "nl_multi" && !nlMultiValidated) ||
-                    (currentStep?.kind === "ordering" && !orderingValidated) ||
-                    (currentStep?.kind === "seq_rule" && !seqRuleValidated) ||
-                    (currentStep?.kind === "seq_complete" && !seqCompleteValidated) ||
-                    (currentStep?.kind === "div_column_grid" && !divGridValidated) ||
-                    (currentStep?.kind === "mul_two_digit" && !mul2dValidated) ||
-                    (currentStep?.kind === "expr_comparison" && !exprCompValidated) ||
-                    (currentStep?.kind === "mult_select" && !multSelectValidated) ||
-                    (currentStep?.kind === "mult_list" && !multListValidated) ||
-                    (currentStep?.kind === "true_false_mult_div" && !tfMultDivValidated) ||
-                    (currentStep?.kind === "find_divisors" && !findDivisorsValidated) ||
-                    (currentStep?.kind === "div_select" && !divSelectValidated) ||
-                    (currentStep?.kind === "div_by" && !divByValidated) ||
-                    (currentStep?.kind === "missing_digit_div" && !missingDigitValidated) ||
-                    (currentStep?.kind === "gcd_lcm" && !gcdLcmValidated) ||
-                    (currentStep?.kind === "true_false_gcd_lcm" && !tfGcdLcmValidated) ||
-                    (currentStep?.kind === "dec_ordering" && !decOrderingValidated) ||
-                    (currentStep?.kind === "dec_seq_rule" && !decSeqRuleValidated) ||
-                    (currentStep?.kind === "dec_seq_complete" && !decSeqCompleteValidated)
-                  ))
+                  (currentStep?.kind === "pass_toggle" && toggleAnswer === null)
                 }
                 className="flex h-11 min-w-[90px] items-center justify-center gap-1 rounded-xl bg-[var(--color-accent-alg)] px-4 text-sm font-medium text-white transition-opacity disabled:opacity-30"
               >
