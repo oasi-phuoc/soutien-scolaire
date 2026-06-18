@@ -713,9 +713,22 @@ function QcmExercise({
 
         return (
           <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
-            <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
-              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
-            </p>
+            {item.svg ? (
+              <div className="flex items-start gap-3">
+                <span className="shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
+                <div
+                  className="w-20 h-20 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1.5"
+                  dangerouslySetInnerHTML={{ __html: item.svg }}
+                />
+                {item.sentence && (
+                  <p className="text-sm font-medium text-[var(--color-text-primary)]">{renderFillSentence(item.sentence)}</p>
+                )}
+              </div>
+            ) : (
+              <p className={`text-sm font-medium text-[var(--color-text-primary)]${exercise.inlineChoices ? " flex-1" : ""}`}>
+                <span className="text-[var(--color-accent-fr)]">{i + 1}.</span> {renderFillSentence(item.sentence)}
+              </p>
+            )}
             {exercise.toggleChoices ? (
               <div className={`flex overflow-hidden rounded-[var(--radius-md)] border ${validated && revealCorrection && selected[i] !== item.correctIdx ? "border-amber-500 dark:border-amber-400" : "border-[var(--color-border-default)]"}`}>
                 {item.choices.map((choice, ci) => mkToggleBtn(choice, ci, false))}
