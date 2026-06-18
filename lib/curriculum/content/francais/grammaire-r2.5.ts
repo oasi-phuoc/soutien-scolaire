@@ -404,11 +404,13 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Exercice 4 — Articles contractés avec "de" ───────────────────────────
+    // ── Exercice 4 — Articles contractés avec "de" (selectbox lettres) ──────
     {
-      type: "fill",
+      type: "fill_select",
       title: "Exercice 4",
-      instruction: "Complétez les phrases avec le bon article (du, de la, des).",
+      instruction: "Complétez les phrases avec le bon article. Choisissez la lettre correspondante.",
+      letterSelect: true,
+      wordBank: ["du", "de la", "des"],
       items: [
         { sentence: "Le café est loin ___ centre-ville.",          hint: "de + le",  answer: "du" },
         { sentence: "Il sort ___ magasin avec des sacs.",          hint: "de + le",  answer: "du" },

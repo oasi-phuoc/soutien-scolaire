@@ -981,6 +981,8 @@ function FillExercise({
 
 // ── Fill-select exercise ──────────────────────────────────────────────────────
 
+const FILL_SELECT_LETTERS = "abcdefghijklmnopqrstuvwxyz";
+
 function FillSelectExercise({
   exercise,
   onValidated,
@@ -1001,13 +1003,21 @@ function FillSelectExercise({
   const [selected, setSelected] = useState<string[]>(() => new Array(items.length).fill(""));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
+  const letterSelect = exercise.letterSelect ?? false;
+
+  // In letterSelect mode, selected[i] is a letter ("a","b"…); otherwise it's the word itself.
+  function correctLetterForItem(item: FillItem): string {
+    const idx = exercise.wordBank.findIndex(w => normalizeAnswer(w) === normalizeAnswer(item.answer));
+    return FILL_SELECT_LETTERS[idx] ?? "";
+  }
 
   function doValidate() {
     if (validated) return;
     setValidated(true);
-    const allCorrect = items.every((item, i) =>
-      normalizeAnswer(selected[i] ?? "") === normalizeAnswer(item.answer)
-    );
+    const allCorrect = items.every((item, i) => {
+      if (letterSelect) return (selected[i] ?? "") === correctLetterForItem(item);
+      return normalizeAnswer(selected[i] ?? "") === normalizeAnswer(item.answer);
+    });
     onValidated(allCorrect);
   }
 
@@ -1027,11 +1037,9 @@ function FillSelectExercise({
     ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
     : undefined;
 
-  const letters = "abcdefghijklmnopqrstuvwxyz";
-
   return (
-    <div className="space-y-4">
-      <p className="mb-1 text-xs text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>
+    <div>
+      <p className="mb-3 text-xs text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>
         {translatedInstruction ?? exercise.instruction}
       </p>
 
@@ -1039,56 +1047,99 @@ function FillSelectExercise({
       <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {exercise.wordBank.map((word, wi) => (
           <div key={wi} className="flex items-baseline">
-            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{letters[wi]}.</span>
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{FILL_SELECT_LETTERS[wi]}.</span>
             <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
           </div>
         ))}
       </div>
 
-      <hr className="border-[var(--color-border-default)]" />
+      <hr className="mt-3 border-[var(--color-border-default)]" />
+      <div className="mb-4" />
 
-      {/* Sentences with select */}
-      <div className="space-y-4">
-        {items.map((item, i) => {
-          const userAnswer = selected[i] ?? "";
-          const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
-          const wrongField = validated && revealCorrection && !correct;
+      {letterSelect ? (
+        // ── Letter-select mode (like vocab Ex5): sentence on left, letter select on right ──
+        <div className="space-y-2">
+          {items.map((item, i) => {
+            const userLetter = selected[i] ?? "";
+            const correctLetter = correctLetterForItem(item);
+            const wrongField = validated && revealCorrection && userLetter !== correctLetter;
+            const sentDisplay = item.sentence.replace("___", "___");
 
-          const [before, after] = item.sentence.split("___");
+            return (
+              <div key={i} className="flex items-center gap-2">
+                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+                <p className="flex-1 text-sm text-[var(--color-text-primary)]">{sentDisplay}</p>
+                <div className="shrink-0">
+                  {wrongField ? (
+                    <div className="inline-flex h-8 w-20 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
+                      <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userLetter || "—"}</span>
+                      <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{correctLetter}</span>
+                    </div>
+                  ) : (
+                    <select
+                      value={userLetter}
+                      onChange={e => {
+                        if (validated) return;
+                        const v = e.target.value;
+                        setSelected(prev => prev.map((s, j) => j === i ? v : s));
+                      }}
+                      disabled={validated}
+                      className="h-8 w-20 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 text-center text-sm text-[var(--color-accent-fr)] outline-none"
+                    >
+                      <option value=""></option>
+                      {exercise.wordBank.map((_, wi) => (
+                        <option key={wi} value={FILL_SELECT_LETTERS[wi]}>{FILL_SELECT_LETTERS[wi]}</option>
+                      ))}
+                    </select>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        // ── Word-select mode (like vocab Ex6): select inline in sentence ──
+        <div className="space-y-4">
+          {items.map((item, i) => {
+            const userAnswer = selected[i] ?? "";
+            const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+            const wrongField = validated && revealCorrection && !correct;
+            const [before, after] = item.sentence.split("___");
 
-          const selectEl = wrongField ? (
-            <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
-              <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userAnswer || "—"}</span>
-              <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
-            </span>
-          ) : (
-            <select
-              value={userAnswer}
-              onChange={e => {
-                if (validated) return;
-                const v = e.target.value;
-                setSelected(prev => prev.map((s, j) => j === i ? v : s));
-              }}
-              disabled={validated}
-              className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
-            >
-              <option value=""></option>
-              {exercise.wordBank.map((w, wi) => (
-                <option key={wi} value={w}>{w}</option>
-              ))}
-            </select>
-          );
+            const selectEl = wrongField ? (
+              <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
+                <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userAnswer || "—"}</span>
+                <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
+              </span>
+            ) : (
+              <select
+                value={userAnswer}
+                onChange={e => {
+                  if (validated) return;
+                  const v = e.target.value;
+                  setSelected(prev => prev.map((s, j) => j === i ? v : s));
+                }}
+                disabled={validated}
+                className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
+              >
+                <option value=""></option>
+                {exercise.wordBank.map((w, wi) => (
+                  <option key={wi} value={w}>{w}</option>
+                ))}
+              </select>
+            );
 
-          return (
-            <div key={i} className="text-sm">
-              <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
-              <span className="text-[var(--color-text-primary)]">{before}</span>
-              {selectEl}
-              <span className="text-[var(--color-text-primary)]">{after}</span>
-            </div>
-          );
-        })}
-      </div>
+            return (
+              <div key={i} className="text-sm">
+                <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+                <span className="text-[var(--color-text-primary)]">{before}</span>
+                {selectEl}
+                <span className="text-[var(--color-text-primary)]">{after}</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
