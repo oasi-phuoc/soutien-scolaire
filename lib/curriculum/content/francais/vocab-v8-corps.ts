@@ -12,7 +12,7 @@ export const V8_CORPS_THEME: VocabTheme = {
     { word: "doigt",   image: "doigt.png",   article: "le",  gender: "m", definition: "chacun des cinq appendices de la main" },
     { word: "jambe",   image: "jambe.png",   article: "la",  gender: "f", definition: "membre inférieur du corps" },
     { word: "pied",    image: "pied.png",    article: "le",  gender: "m", definition: "extrémité de la jambe pour marcher" },
-    { word: "dos",                            article: "le",  gender: "m", definition: "partie arrière du tronc" },
+    { word: "dos",     image: "dos.png",     article: "le",  gender: "m", definition: "partie arrière du tronc" },
     { word: "ventre",  image: "ventre.png",  article: "le",  gender: "m", definition: "partie avant du tronc" },
     { word: "genou",   image: "genou.png",   article: "le",  gender: "m", definition: "articulation de la jambe" },
     { word: "épaule",  image: "epaule.png",  article: "l'",  gender: "f", definition: "articulation entre le bras et le tronc" },
