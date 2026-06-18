@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getConjLesson } from "@/lib/curriculum/conjugation-data";
-import { ConjugaisonRunner } from "@/components/francais/ConjugaisonRunner";
+import { GrammaireRunner } from "@/components/francais/GrammaireRunner";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -19,7 +19,7 @@ export default async function ConjugaisonPage({ params, searchParams }: Props) {
     "Conjugaison";
   return (
     <main className="flex min-h-screen flex-col">
-      <ConjugaisonRunner lesson={resolvedLesson} subject={subject} />
+      <GrammaireRunner lesson={resolvedLesson} subject={subject} />
     </main>
   );
 }
