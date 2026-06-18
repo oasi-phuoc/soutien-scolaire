@@ -335,26 +335,34 @@ export const A1_GR_L11: GrammarLesson = {
     },
   ],
   exercises: [
-    // ── Ex 1 — QCM + SVG (vertical / inside-outside) ─────────────────────────
+    // ── Exercice 1 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Quelle préposition est illustrée ?",
       items: [],
       pool: [
-        { svg: PREPS[0].svg, sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
-        { svg: PREPS[1].svg, sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
-        { svg: PREPS[2].svg, sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
-        { svg: PREPS[3].svg, sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
-        { svg: PREPS[4].svg, sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
-        { svg: PREPS[5].svg, sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
-        { svg: PREPS[6].svg, sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[7].svg, sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
+        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
+        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
+        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
+        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",           "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
+        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",           "entre",         "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",       "en face de",    "entre",           "devant"],        correctIdx: 0 },
+        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",      "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
+        { svg: PREPS[12].svg, sentence: "", choices: ["près de",         "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
+        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",         "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "sur",           "à côté de",       "près de"],       correctIdx: 0 },
+        { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "sur",             "devant"],        correctIdx: 0 },
       ],
       poolSize: 4,
     },
 
-    // ── Ex 2 — word_order ─────────────────────────────────────────────────────
+    // ── Exercice 2 — word_order ───────────────────────────────────────────────
     {
       type: "word_order",
       title: "Exercice 2",
@@ -373,7 +381,7 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Ex 3 — fill ───────────────────────────────────────────────────────────
+    // ── Exercice 3 — fill (prépositions) ─────────────────────────────────────
     {
       type: "fill",
       title: "Exercice 3",
@@ -394,26 +402,34 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Ex 4 — QCM + SVG (entre / parmi / côté / distance / contre / chez) ───
+    // ── Exercice 4 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 4",
       instruction: "Identifiez la préposition illustrée.",
       items: [],
       pool: [
-        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",          "parmi",         "à côté de",      "devant"],        correctIdx: 0 },
-        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",          "entre",         "dans",           "sur"],           correctIdx: 0 },
-        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",      "en face de",    "entre",          "devant"],        correctIdx: 0 },
-        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",     "à côté de",     "devant",         "derrière"],      correctIdx: 0 },
-        { svg: PREPS[12].svg, sentence: "", choices: ["près de",        "loin de",       "à côté de",      "contre"],        correctIdx: 0 },
-        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",        "près de",       "en face de",     "entre"],         correctIdx: 0 },
-        { svg: PREPS[14].svg, sentence: "", choices: ["contre",         "sur",           "à côté de",      "près de"],       correctIdx: 0 },
-        { svg: PREPS[15].svg, sentence: "", choices: ["chez",           "dans",          "sur",            "devant"],        correctIdx: 0 },
+        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
+        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
+        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
+        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
+        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",           "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
+        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",           "entre",         "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",       "en face de",    "entre",           "devant"],        correctIdx: 0 },
+        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",      "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
+        { svg: PREPS[12].svg, sentence: "", choices: ["près de",         "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
+        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",         "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "sur",           "à côté de",       "près de"],       correctIdx: 0 },
+        { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "sur",             "devant"],        correctIdx: 0 },
       ],
       poolSize: 4,
     },
 
-    // ── Ex 5 — match ──────────────────────────────────────────────────────────
+    // ── Exercice 5 — match ────────────────────────────────────────────────────
     {
       type: "match",
       title: "Exercice 5",
@@ -434,7 +450,7 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Ex 6 — QCM + SVG (tout PREPS) ────────────────────────────────────────
+    // ── Exercice 6 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 6",
@@ -461,66 +477,88 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 4,
     },
 
-    // ── Ex 7 — QCM + SVG (4 prépositions de base) ────────────────────────────
+    // ── Exercice 7 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 7",
       instruction: "Observez l'image et choisissez la préposition correcte.",
       items: [],
       pool: [
-        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",            "sous",          "dans",            "devant"],        correctIdx: 0 },
-        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",           "sur",           "au-dessus de",    "derrière"],      correctIdx: 0 },
-        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",           "sur",           "sous",            "devant"],        correctIdx: 0 },
-        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",         "derrière",      "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",       "devant",        "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",          "devant",        "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",      "devant",        "derrière",        "dans"],          correctIdx: 0 },
-        { svg: PREPS[12].svg, sentence: "", choices: ["près de",        "loin de",       "devant",          "sur"],           correctIdx: 0 },
+        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
+        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
+        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
+        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
+        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",           "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
+        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",           "entre",         "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",       "en face de",    "entre",           "devant"],        correctIdx: 0 },
+        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",      "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
+        { svg: PREPS[12].svg, sentence: "", choices: ["près de",         "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
+        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",         "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "sur",           "à côté de",       "près de"],       correctIdx: 0 },
+        { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "sur",             "devant"],        correctIdx: 0 },
       ],
       poolSize: 4,
     },
 
-    // ── Ex 8 — QCM + SVG (2ᵉ moitié des PREPS) ──────────────────────────────
+    // ── Exercice 8 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 8",
       instruction: "Quelle préposition correspond à l'illustration ?",
       items: [],
       pool: [
-        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",   "sur",           "sous",            "dans"],          correctIdx: 0 },
-        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",  "sous",          "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",         "devant",          "sur"],           correctIdx: 0 },
-        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",          "entre",         "dans",            "à côté de"],     correctIdx: 0 },
-        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",     "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
-        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",        "près de",       "en face de",      "entre"],         correctIdx: 0 },
-        { svg: PREPS[14].svg, sentence: "", choices: ["contre",         "sur",           "à côté de",       "dans"],          correctIdx: 0 },
-        { svg: PREPS[15].svg, sentence: "", choices: ["chez",           "dans",          "sur",             "à côté de"],     correctIdx: 0 },
+        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
+        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
+        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
+        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
+        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",           "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
+        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",           "entre",         "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",       "en face de",    "entre",           "devant"],        correctIdx: 0 },
+        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",      "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
+        { svg: PREPS[12].svg, sentence: "", choices: ["près de",         "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
+        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",         "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "sur",           "à côté de",       "près de"],       correctIdx: 0 },
+        { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "sur",             "devant"],        correctIdx: 0 },
       ],
       poolSize: 4,
     },
 
-    // ── Ex 9 — QCM + SVG (mix) ────────────────────────────────────────────────
+    // ── Exercice 9 — QCM + SVG (16 prépositions) ─────────────────────────────
     {
       type: "qcm",
       title: "Exercice 9",
       instruction: "Choisissez la préposition de lieu illustrée.",
       items: [],
       pool: [
-        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",            "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
-        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",           "sur",           "dans",            "derrière"],      correctIdx: 0 },
-        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",           "sur",           "sous",            "devant"],        correctIdx: 0 },
-        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",         "derrière",      "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",       "devant",        "sur",             "dans"],          correctIdx: 0 },
-        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",          "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
-        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",      "en face de",    "entre",           "devant"],        correctIdx: 0 },
-        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",     "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
-        { svg: PREPS[12].svg, sentence: "", choices: ["près de",        "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
-        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",        "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
+        { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
+        { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
+        { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "sur",             "dans"],          correctIdx: 0 },
+        { svg: PREPS[7].svg,  sentence: "", choices: ["derrière",        "devant",        "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[8].svg,  sentence: "", choices: ["entre",           "parmi",         "à côté de",       "devant"],        correctIdx: 0 },
+        { svg: PREPS[9].svg,  sentence: "", choices: ["parmi",           "entre",         "dans",            "sur"],           correctIdx: 0 },
+        { svg: PREPS[10].svg, sentence: "", choices: ["à côté de",       "en face de",    "entre",           "devant"],        correctIdx: 0 },
+        { svg: PREPS[11].svg, sentence: "", choices: ["en face de",      "à côté de",     "devant",          "derrière"],      correctIdx: 0 },
+        { svg: PREPS[12].svg, sentence: "", choices: ["près de",         "loin de",       "à côté de",       "contre"],        correctIdx: 0 },
+        { svg: PREPS[13].svg, sentence: "", choices: ["loin de",         "près de",       "en face de",      "entre"],         correctIdx: 0 },
+        { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "sur",           "à côté de",       "près de"],       correctIdx: 0 },
+        { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "sur",             "devant"],        correctIdx: 0 },
       ],
       poolSize: 4,
     },
 
-    // ── Ex 10 — fill : articles contractés avec "de" ─────────────────────────
+    // ── Exercice 10 — fill : articles contractés avec "de" ───────────────────
     {
       type: "fill",
       title: "Exercice 10",
@@ -534,7 +572,7 @@ export const A1_GR_L11: GrammarLesson = {
       ],
     },
 
-    // ── Ex 11 — QCM + SVG (tout PREPS, grand pool) ───────────────────────────
+    // ── Exercice 11 — QCM + SVG (16 prépositions, grand pool) ────────────────
     {
       type: "qcm",
       title: "Exercice 11",
@@ -542,9 +580,9 @@ export const A1_GR_L11: GrammarLesson = {
       items: [],
       pool: [
         { svg: PREPS[0].svg,  sentence: "", choices: ["sur",             "sous",          "au-dessus de",    "dans"],          correctIdx: 0 },
-        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "devant"],        correctIdx: 0 },
+        { svg: PREPS[1].svg,  sentence: "", choices: ["au-dessus de",    "sur",           "sous",            "en-dessous de"], correctIdx: 0 },
         { svg: PREPS[2].svg,  sentence: "", choices: ["sous",            "sur",           "dans",            "derrière"],      correctIdx: 0 },
-        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "sur",             "devant"],        correctIdx: 0 },
+        { svg: PREPS[3].svg,  sentence: "", choices: ["en-dessous de",   "sous",          "au-dessus de",    "sur"],           correctIdx: 0 },
         { svg: PREPS[4].svg,  sentence: "", choices: ["dans",            "sur",           "à l'extérieur de","devant"],        correctIdx: 0 },
         { svg: PREPS[5].svg,  sentence: "", choices: ["à l'extérieur de","dans",          "sur",             "derrière"],      correctIdx: 0 },
         { svg: PREPS[6].svg,  sentence: "", choices: ["devant",          "derrière",      "dans",            "sur"],           correctIdx: 0 },
