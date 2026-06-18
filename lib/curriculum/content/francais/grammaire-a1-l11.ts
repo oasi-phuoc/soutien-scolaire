@@ -188,6 +188,7 @@ export const A1_GR_L11: GrammarLesson = {
     {
       type: "highlight",
       label: "Exemples en phrases",
+      noBulletItems: [0, 1, 2, 3, 4, 5, 6, 7],
       items: [
         "Le livre est {a}sur{/a} la table.",
         "Le chat est {a}sous{/a} la chaise.",
@@ -325,8 +326,12 @@ export const A1_GR_L11: GrammarLesson = {
     },
 
     {
-      type: "note",
-      text: "à + la et de + la ne se contractent pas.\nJe vais à la pharmacie ✅ — à la boulangerie ✅\nJe viens de la gare ✅ — loin de la ville ✅",
+      type: "grid",
+      headers: ["", "Masculin", "Féminin", "Pluriel"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}de +{/a}", "{a}du{/a} (de + le)", "de la", "{a}des{/a} (de + les)"],
+      ],
     },
   ],
   exercises: [],

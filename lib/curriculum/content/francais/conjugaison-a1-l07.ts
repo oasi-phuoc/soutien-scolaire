@@ -309,6 +309,384 @@ export const A1_CONJ_L07: ConjLesson = {
       noBulletItems: [0, 1, 2, 3],
       inlineArrows: true,
     },
+
+    // ── Particularités ───────────────────────────────────────────────────────────
+    { type: "heading", text: "Les particularités des verbes en -ER", sub: true },
+    {
+      type: "selector",
+      tabs: [
+        {
+          label: "-GER",
+          content: [
+            {
+              type: "rule",
+              text: "On ajoute {a}e{/a} après le {a}g{/a} à la forme {a}nous{/a} pour garder le son [ʒ].",
+              examples: [
+                { correct: "nous mang{a}e{/a}ons" },
+                { correct: "nous voyag{a}e{/a}ons" },
+                { correct: "nous partag{a}e{/a}ons" },
+              ],
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "manger", radical: "mang",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "mange" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "voyager", radical: "voyag",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "voyage" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "partager", radical: "partag",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "partage" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "nager", radical: "nag",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "nage" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "-CER",
+          content: [
+            {
+              type: "rule",
+              text: "Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} (forme nous) pour garder le son [s].",
+              examples: [
+                { correct: "nous commen{a}ç{/a}ons" },
+                { correct: "nous avan{a}ç{/a}ons" },
+                { correct: "nous pla{a}ç{/a}ons" },
+              ],
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "commencer", radical: "commenc",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "commenç" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "avancer", radical: "avanc",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "avanç" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "placer", radical: "plac",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "plaç" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "annoncer", radical: "annonc",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons", radical: "annonç" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "-YER",
+          content: [
+            {
+              type: "rule",
+              text: "Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils).",
+              examples: [
+                { correct: "je pa{a}i{/a}e" },
+                { correct: "nous pa{a}y{/a}ons" },
+              ],
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "payer", radical: "pay",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "pai" },
+                    { pronoun: "tu",            ending: "es",  radical: "pai" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "pai" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "pai" },
+                  ],
+                },
+                {
+                  infinitive: "essayer", radical: "essay",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "essai" },
+                    { pronoun: "tu",            ending: "es",  radical: "essai" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "essai" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "essai" },
+                  ],
+                },
+                {
+                  infinitive: "nettoyer", radical: "nettoy",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "nettoi" },
+                    { pronoun: "tu",            ending: "es",  radical: "nettoi" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "nettoi" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "nettoi" },
+                  ],
+                },
+                {
+                  infinitive: "employer", radical: "employ",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "emploi" },
+                    { pronoun: "tu",            ending: "es",  radical: "emploi" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "emploi" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "emploi" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "-ETER",
+          content: [
+            {
+              type: "rule",
+              text: "Le {a}t{/a} est doublé ({a}tt{/a}) devant une terminaison muette (je, tu, il, ils).",
+              examples: [
+                { correct: "je je{a}tt{/a}e" },
+                { correct: "nous je{a}t{/a}ons" },
+              ],
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "jeter", radical: "jet",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "jett" },
+                    { pronoun: "tu",            ending: "es",  radical: "jett" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "jett" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "jett" },
+                  ],
+                },
+                {
+                  infinitive: "projeter", radical: "projet",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "projett" },
+                    { pronoun: "tu",            ending: "es",  radical: "projett" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "projett" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "projett" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "-ELER",
+          content: [
+            {
+              type: "rule",
+              text: "Le {a}l{/a} est doublé ({a}ll{/a}) devant une terminaison muette (j', tu, il, ils).",
+              examples: [
+                { correct: "j'appe{a}ll{/a}e" },
+                { correct: "nous appe{a}l{/a}ons" },
+              ],
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "appeler", radical: "appel",
+                  rows: [
+                    { pronoun: "j'",            ending: "e",   radical: "appell" },
+                    { pronoun: "tu",            ending: "es",  radical: "appell" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "appell" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "appell" },
+                  ],
+                },
+                {
+                  infinitive: "rappeler", radical: "rappel",
+                  rows: [
+                    { pronoun: "je",            ending: "e",   radical: "rappell" },
+                    { pronoun: "tu",            ending: "es",  radical: "rappell" },
+                    { pronoun: "il / elle / on", ending: "e",  radical: "rappell" },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent", radical: "rappell" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+        {
+          label: "-ÉER / -UER",
+          content: [
+            {
+              type: "rule",
+              text: "Ces verbes se conjuguent comme les verbes réguliers en -ER.",
+            },
+            {
+              type: "verb_toggle",
+              verbs: [
+                {
+                  infinitive: "créer", radical: "cré",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+                {
+                  infinitive: "continuer", radical: "continu",
+                  rows: [
+                    { pronoun: "je",            ending: "e"   },
+                    { pronoun: "tu",            ending: "es"  },
+                    { pronoun: "il / elle / on", ending: "e"  },
+                    { pronoun: "nous",          ending: "ons" },
+                    { pronoun: "vous",          ending: "ez"  },
+                    { pronoun: "ils / elles",   ending: "ent" },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+
+    // ── Tableau récapitulatif ─────────────────────────────────────────────────────
+    { type: "heading", text: "À retenir", sub: true },
+    {
+      type: "grid",
+      headers: ["Type", "Exemple", "Particularité"],
+      boldFirstCol: true,
+      rows: [
+        ["-ER",       "parler",     "régulier"],
+        ["-GER",      "manger",     "nous mang{a}e{/a}ons"],
+        ["-CER",      "commencer",  "nous commen{a}ç{/a}ons"],
+        ["-YER",      "payer",      "y → {a}i{/a}"],
+        ["-ETER",     "jeter",      "je{a}tt{/a}e"],
+        ["-ELER",     "appeler",    "appe{a}ll{/a}e"],
+        ["-ÉER/-UER", "créer",      "régulier"],
+      ],
+    },
+    {
+      type: "verb_toggle",
+      verbs: [
+        {
+          infinitive: "manger", radical: "mang",
+          rows: [
+            { pronoun: "je",            ending: "e"   },
+            { pronoun: "tu",            ending: "es"  },
+            { pronoun: "il / elle / on", ending: "e"  },
+            { pronoun: "nous",          ending: "ons", radical: "mange" },
+            { pronoun: "vous",          ending: "ez"  },
+            { pronoun: "ils / elles",   ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "commencer", radical: "commenc",
+          rows: [
+            { pronoun: "je",            ending: "e"   },
+            { pronoun: "tu",            ending: "es"  },
+            { pronoun: "il / elle / on", ending: "e"  },
+            { pronoun: "nous",          ending: "ons", radical: "commenç" },
+            { pronoun: "vous",          ending: "ez"  },
+            { pronoun: "ils / elles",   ending: "ent" },
+          ],
+        },
+        {
+          infinitive: "payer", radical: "pay",
+          rows: [
+            { pronoun: "je",            ending: "e",   radical: "pai" },
+            { pronoun: "tu",            ending: "es",  radical: "pai" },
+            { pronoun: "il / elle / on", ending: "e",  radical: "pai" },
+            { pronoun: "nous",          ending: "ons" },
+            { pronoun: "vous",          ending: "ez"  },
+            { pronoun: "ils / elles",   ending: "ent", radical: "pai" },
+          ],
+        },
+        {
+          infinitive: "appeler", radical: "appel",
+          rows: [
+            { pronoun: "j'",            ending: "e",   radical: "appell" },
+            { pronoun: "tu",            ending: "es",  radical: "appell" },
+            { pronoun: "il / elle / on", ending: "e",  radical: "appell" },
+            { pronoun: "nous",          ending: "ons" },
+            { pronoun: "vous",          ending: "ez"  },
+            { pronoun: "ils / elles",   ending: "ent", radical: "appell" },
+          ],
+        },
+      ],
+    },
   ],
   exercises: [
     {
