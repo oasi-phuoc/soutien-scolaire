@@ -391,14 +391,22 @@ export const A1_GR_L11: GrammarLesson = {
       instruction: "Complétez les phrases avec le bon article (du, de la, de l', des).",
       hideWordBank: true,
       wordBank: ["du", "de la", "de l'", "des"],
-      items: [
+      items: [],
+      pool: [
         { sentence: "Le café est loin ___ centre-ville.",          hint: "de + le",  answer: "du" },
         { sentence: "Il sort ___ magasin avec des sacs.",          hint: "de + le",  answer: "du" },
+        { sentence: "Il vient ___ marché du quartier.",            hint: "de + le",  answer: "du" },
+        { sentence: "Le restaurant est près ___ hôtel.",           hint: "de + le",  answer: "du" },
         { sentence: "La pharmacie est près ___ boulangerie.",      hint: "de + la",  answer: "de la" },
+        { sentence: "La boulangerie est à côté ___ poste.",        hint: "de + la",  answer: "de la" },
         { sentence: "Elle habite loin ___ université.",            hint: "de + l'",  answer: "de l'" },
+        { sentence: "Elle sort ___ hôpital en bonne santé.",       hint: "de + l'",  answer: "de l'" },
         { sentence: "Elle revient ___ cours de français.",         hint: "de + les", answer: "des" },
         { sentence: "Le parc est à côté ___ écoles.",             hint: "de + les", answer: "des" },
+        { sentence: "Il parle ___ enfants de la classe.",          hint: "de + les", answer: "des" },
+        { sentence: "La maison est loin ___ magasins.",            hint: "de + les", answer: "des" },
       ],
+      poolSize: 5,
     },
 
     // ── Exercice 4 — Remettre les mots dans le bon ordre ─────────────────────
