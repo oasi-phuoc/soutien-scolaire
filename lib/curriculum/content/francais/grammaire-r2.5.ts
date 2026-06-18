@@ -384,17 +384,18 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Exercice 3 — Articles contractés avec "de" (letterSelect) ────────────
+    // ── Exercice 3 — Articles contractés avec "de" ───────────────────────────
     {
       type: "fill_select",
       title: "Exercice 3",
-      instruction: "Complétez les phrases avec le bon article. Choisissez la lettre correspondante.",
-      letterSelect: true,
-      wordBank: ["du", "de la", "des"],
+      instruction: "Complétez les phrases avec le bon article (du, de la, de l', des).",
+      hideWordBank: true,
+      wordBank: ["du", "de la", "de l'", "des"],
       items: [
         { sentence: "Le café est loin ___ centre-ville.",          hint: "de + le",  answer: "du" },
         { sentence: "Il sort ___ magasin avec des sacs.",          hint: "de + le",  answer: "du" },
         { sentence: "La pharmacie est près ___ boulangerie.",      hint: "de + la",  answer: "de la" },
+        { sentence: "Elle habite loin ___ université.",            hint: "de + l'",  answer: "de l'" },
         { sentence: "Elle revient ___ cours de français.",         hint: "de + les", answer: "des" },
         { sentence: "Le parc est à côté ___ écoles.",             hint: "de + les", answer: "des" },
       ],

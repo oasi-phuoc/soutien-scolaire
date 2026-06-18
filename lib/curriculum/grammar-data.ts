@@ -41,7 +41,7 @@ export type MatchPair = { left: string; right: string };
 export type Exercise =
   | { type: "qcm"; title: string; instruction: string; transInstruction?: Trans; items: QcmItem[]; pool?: QcmItem[]; poolSize?: number; toggleChoices?: boolean; inlineChoices?: boolean; svgChoiceLayout?: "stacked" }
   | { type: "fill"; title: string; instruction: string; transInstruction?: Trans; items: FillItem[]; pool?: FillItem[]; poolSize?: number }
-  | { type: "fill_select"; title: string; instruction: string; transInstruction?: Trans; wordBank: string[]; items: FillItem[]; pool?: FillItem[]; poolSize?: number; letterSelect?: boolean }
+  | { type: "fill_select"; title: string; instruction: string; transInstruction?: Trans; wordBank: string[]; items: FillItem[]; pool?: FillItem[]; poolSize?: number; letterSelect?: boolean; hideWordBank?: boolean }
   | { type: "match"; title: string; instruction: string; transInstruction?: Trans; pairs: MatchPair[]; pool?: MatchPair[]; poolSize?: number; leftLabel?: string; rightLabel?: string }
   | { type: "write"; title: string; instruction: string; transInstruction?: Trans; prompts?: string[]; promptPool?: string[]; promptPoolSize?: number; verb?: "être" | "avoir"; verbPool?: string[]; verbPoolSize?: number; promptLayout?: "stacked" }
   | { type: "trueFalse"; title: string; instruction: string; transInstruction?: Trans; items: { statement: string; answer: boolean }[] }

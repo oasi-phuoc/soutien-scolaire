@@ -1043,18 +1043,21 @@ function FillSelectExercise({
         {translatedInstruction ?? exercise.instruction}
       </p>
 
-      {/* Word bank — plain lettered list, no border */}
-      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
-        {exercise.wordBank.map((word, wi) => (
-          <div key={wi} className="flex items-baseline">
-            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{FILL_SELECT_LETTERS[wi]}.</span>
-            <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
+      {!exercise.hideWordBank && (
+        <>
+          {/* Word bank — plain lettered list, no border */}
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
+            {exercise.wordBank.map((word, wi) => (
+              <div key={wi} className="flex items-baseline">
+                <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{FILL_SELECT_LETTERS[wi]}.</span>
+                <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      <hr className="mt-3 border-[var(--color-border-default)]" />
-      <div className="mb-4" />
+          <hr className="mt-3 border-[var(--color-border-default)]" />
+          <div className="mb-4" />
+        </>
+      )}
 
       {letterSelect ? (
         // ── Letter-select mode (like vocab Ex5): sentence on left, letter select on right ──
