@@ -31,7 +31,7 @@ export type TheoryBlock =
   | { type: "grammar_link"; text: string; href: string }
   | { type: "selector"; labelPrefix?: string; tabs: Array<{ label: string; content: TheoryBlock[] }> };
 
-export type QcmItem = { sentence: string; choices: string[]; correctIdx: number };
+export type QcmItem = { sentence: string; svg?: string; choices: string[]; correctIdx: number };
 export type FillItem = { sentence: string; hint: string; answer: string };
 export type MatchPair = { left: string; right: string };
 
@@ -62,26 +62,26 @@ export type ConjLesson = {
 
 // ── Imports ───────────────────────────────────────────────────────────────────
 
-import { A1_CONJ_L00 } from "./content/francais/conjugaison-a1-l00";
-import { A1_CONJ_L01 } from "./content/francais/conjugaison-a1-l01";
-import { A1_CONJ_L07 } from "./content/francais/conjugaison-a1-l07";
-import { A1_CONJ_L08 } from "./content/francais/conjugaison-a1-l08";
-import { A1_CONJ_L09 } from "./content/francais/conjugaison-a1-l09";
-import { A1_CONJ_L15 } from "./content/francais/conjugaison-a1-l15";
-import { A1_CONJ_L20 } from "./content/francais/conjugaison-a1-l20";
-import { A1_CONJ_L27 } from "./content/francais/conjugaison-a1-l27";
-import { A1_CONJ_L28 } from "./content/francais/conjugaison-a1-l28";
-import { A1_CONJ_L29 } from "./content/francais/conjugaison-a1-l29";
-import { A1_CONJ_L30 } from "./content/francais/conjugaison-a1-l30";
-import { NEGATION_PASSE_COMPOSE } from "./content/francais/conjugaison-a1-negation-passe-compose";
-import { A2_CONJ_L01 } from "./content/francais/conjugaison-a2-l01";
-import { A2_CONJ_L02 } from "./content/francais/conjugaison-a2-l02";
-import { A2_CONJ_L03 } from "./content/francais/conjugaison-a2-l03";
-import { A2_CONJ_L04 } from "./content/francais/conjugaison-a2-l04";
-import { A2_CONJ_L05 } from "./content/francais/conjugaison-a2-l05";
-import { A2_CONJ_L06 } from "./content/francais/conjugaison-a2-l06";
-import { A2_CONJ_L07 } from "./content/francais/conjugaison-a2-l07";
-import { A2_CONJ_L08 } from "./content/francais/conjugaison-a2-l08";
+import { A1_CONJ_L00 } from "./content/francais/grammaire-r1.1b";
+import { A1_CONJ_L01 } from "./content/francais/grammaire-r1.2";
+import { A1_CONJ_L07 } from "./content/francais/grammaire-r1.5";
+import { A1_CONJ_L08 } from "./content/francais/grammaire-r2.1";
+import { A1_CONJ_L09 } from "./content/francais/grammaire-r2.2";
+import { A1_CONJ_L15 } from "./content/francais/grammaire-r2.3b";
+import { A1_CONJ_L20 } from "./content/francais/grammaire-r4.1";
+import { A1_CONJ_L27 } from "./content/francais/grammaire-r4.2";
+import { A1_CONJ_L28 } from "./content/francais/grammaire-r4.3";
+import { A1_CONJ_L29 } from "./content/francais/grammaire-r4.4";
+import { A1_CONJ_L30 } from "./content/francais/grammaire-r4.5";
+import { NEGATION_PASSE_COMPOSE } from "./content/francais/grammaire-r4.6";
+import { A2_CONJ_L01 } from "./content/francais/grammaire-r4.9";
+import { A2_CONJ_L02 } from "./content/francais/grammaire-r4.10";
+import { A2_CONJ_L03 } from "./content/francais/grammaire-r4.11";
+import { A2_CONJ_L04 } from "./content/francais/grammaire-r4.14";
+import { A2_CONJ_L05 } from "./content/francais/grammaire-r4.15";
+import { A2_CONJ_L06 } from "./content/francais/grammaire-r4.24";
+import { A2_CONJ_L07 } from "./content/francais/grammaire-r4.25";
+import { A2_CONJ_L08 } from "./content/francais/grammaire-r4.26";
 
 // ── Registry ──────────────────────────────────────────────────────────────────
 
