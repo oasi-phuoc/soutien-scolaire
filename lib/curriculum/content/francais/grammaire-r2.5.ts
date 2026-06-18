@@ -383,29 +383,10 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Exercice 3 — Remettre les mots dans le bon ordre ─────────────────────
-    {
-      type: "word_order",
-      title: "Exercice 3",
-      instruction: "Remettez les mots dans le bon ordre.",
-      items: [],
-      pool: [
-        { sentence: "Le livre est sur la table.",                      words: ["Le", "livre", "est", "sur", "la", "table."] },
-        { sentence: "Le chat dort sous le lit.",                       words: ["Le", "chat", "dort", "sous", "le", "lit."] },
-        { sentence: "Les clés sont dans le sac.",                      words: ["Les", "clés", "sont", "dans", "le", "sac."] },
-        { sentence: "La voiture est devant la maison.",                words: ["La", "voiture", "est", "devant", "la", "maison."] },
-        { sentence: "Le jardin est derrière la maison.",               words: ["Le", "jardin", "est", "derrière", "la", "maison."] },
-        { sentence: "La pharmacie est à côté de la boulangerie.",      words: ["La", "pharmacie", "est", "à", "côté", "de", "la", "boulangerie."] },
-        { sentence: "La banque est entre la poste et la pharmacie.",   words: ["La", "banque", "est", "entre", "la", "poste", "et", "la", "pharmacie."] },
-        { sentence: "L'hôtel est en face de la gare.",                 words: ["L'hôtel", "est", "en", "face", "de", "la", "gare."] },
-      ],
-      poolSize: 5,
-    },
-
-    // ── Exercice 4 — Relier préposition ↔ description ─────────────────────────
+    // ── Exercice 3 — Relier préposition ↔ description ─────────────────────────
     {
       type: "match",
-      title: "Exercice 4",
+      title: "Exercice 3",
       instruction: "Reliez chaque préposition à sa description.",
       pairs: [],
       pool: [
@@ -423,10 +404,10 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
     },
 
-    // ── Exercice 5 — Articles contractés avec "de" ───────────────────────────
+    // ── Exercice 4 — Articles contractés avec "de" ───────────────────────────
     {
       type: "fill",
-      title: "Exercice 5",
+      title: "Exercice 4",
       instruction: "Complétez les phrases avec le bon article (du, de la, des).",
       items: [
         { sentence: "Le café est loin ___ centre-ville.",          hint: "de + le",  answer: "du" },
@@ -435,6 +416,25 @@ export const A1_GR_L11: GrammarLesson = {
         { sentence: "Elle revient ___ cours de français.",         hint: "de + les", answer: "des" },
         { sentence: "Le parc est à côté ___ écoles.",             hint: "de + les", answer: "des" },
       ],
+    },
+
+    // ── Exercice 5 — Remettre les mots dans le bon ordre ─────────────────────
+    {
+      type: "word_order",
+      title: "Exercice 5",
+      instruction: "Remettez les mots dans le bon ordre.",
+      items: [],
+      pool: [
+        { sentence: "Le livre est sur la table.",                      words: ["Le", "livre", "est", "sur", "la", "table."] },
+        { sentence: "Le chat dort sous le lit.",                       words: ["Le", "chat", "dort", "sous", "le", "lit."] },
+        { sentence: "Les clés sont dans le sac.",                      words: ["Les", "clés", "sont", "dans", "le", "sac."] },
+        { sentence: "La voiture est devant la maison.",                words: ["La", "voiture", "est", "devant", "la", "maison."] },
+        { sentence: "Le jardin est derrière la maison.",               words: ["Le", "jardin", "est", "derrière", "la", "maison."] },
+        { sentence: "La pharmacie est à côté de la boulangerie.",      words: ["La", "pharmacie", "est", "à", "côté", "de", "la", "boulangerie."] },
+        { sentence: "La banque est entre la poste et la pharmacie.",   words: ["La", "banque", "est", "entre", "la", "poste", "et", "la", "pharmacie."] },
+        { sentence: "L'hôtel est en face de la gare.",                 words: ["L'hôtel", "est", "en", "face", "de", "la", "gare."] },
+      ],
+      poolSize: 5,
     },
   ],
 
