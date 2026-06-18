@@ -363,51 +363,31 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 4,
     },
 
-    // ── Exercice 2 — Complétez avec la bonne préposition (selectbox) ──────────
+    // ── Exercice 2 — Associez définition ↔ préposition (letterSelect) ─────────
     {
       type: "fill_select",
       title: "Exercice 2",
-      instruction: "Complétez chaque phrase avec le mot correct.",
-      wordBank: ["sur", "sous", "dans", "devant", "derrière", "en face de", "près de", "à côté de"],
+      instruction: "Associez chaque définition à la bonne préposition. Choisissez la lettre correspondante.",
+      letterSelect: true,
+      wordBank: ["sur", "sous", "dans", "devant", "derrière", "entre", "à côté de", "en face de"],
       items: [],
       pool: [
-        { sentence: "Le livre est ___ la table.",               hint: "contact / dessus",  answer: "sur" },
-        { sentence: "Le chat dort ___ le lit.",                  hint: "contact / dessous", answer: "sous" },
-        { sentence: "Les clés sont ___ le sac.",                 hint: "à l'intérieur",     answer: "dans" },
-        { sentence: "La voiture est garée ___ l'immeuble.",      hint: "face avant",        answer: "devant" },
-        { sentence: "Le garage est ___ la maison.",              hint: "face arrière",      answer: "derrière" },
-        { sentence: "La poste est ___ la gare.",                 hint: "face à face",       answer: "en face de" },
-        { sentence: "Mon école est ___ chez moi.",               hint: "distance faible",   answer: "près de" },
-        { sentence: "Le supermarché est ___ la pharmacie.",      hint: "côte à côte",       answer: "à côté de" },
+        { sentence: "contact avec la surface supérieure",          hint: "", answer: "sur" },
+        { sentence: "contact avec la surface inférieure",          hint: "", answer: "sous" },
+        { sentence: "à l'intérieur d'un espace",                  hint: "", answer: "dans" },
+        { sentence: "face avant d'un objet ou lieu",               hint: "", answer: "devant" },
+        { sentence: "face arrière d'un objet ou lieu",             hint: "", answer: "derrière" },
+        { sentence: "au milieu de deux ou plusieurs éléments",     hint: "", answer: "entre" },
+        { sentence: "côte à côte avec quelque chose",              hint: "", answer: "à côté de" },
+        { sentence: "face à face avec quelque chose",              hint: "", answer: "en face de" },
       ],
       poolSize: 5,
     },
 
-    // ── Exercice 3 — Relier préposition ↔ description ─────────────────────────
-    {
-      type: "match",
-      title: "Exercice 3",
-      instruction: "Reliez chaque préposition à sa description.",
-      pairs: [],
-      pool: [
-        { left: "sur",          right: "contact avec la surface supérieure" },
-        { left: "sous",         right: "contact avec la surface inférieure" },
-        { left: "dans",         right: "à l'intérieur d'un espace" },
-        { left: "devant",       right: "face avant d'un objet ou lieu" },
-        { left: "derrière",     right: "face arrière d'un objet ou lieu" },
-        { left: "entre",        right: "au milieu de deux ou plusieurs éléments" },
-        { left: "à côté de",    right: "côte à côte avec quelque chose" },
-        { left: "en face de",   right: "face à face avec quelque chose" },
-        { left: "près de",      right: "à courte distance de quelque chose" },
-        { left: "loin de",      right: "à grande distance de quelque chose" },
-      ],
-      poolSize: 5,
-    },
-
-    // ── Exercice 4 — Articles contractés avec "de" (selectbox lettres) ──────
+    // ── Exercice 3 — Articles contractés avec "de" (letterSelect) ────────────
     {
       type: "fill_select",
-      title: "Exercice 4",
+      title: "Exercice 3",
       instruction: "Complétez les phrases avec le bon article. Choisissez la lettre correspondante.",
       letterSelect: true,
       wordBank: ["du", "de la", "des"],
@@ -420,10 +400,10 @@ export const A1_GR_L11: GrammarLesson = {
       ],
     },
 
-    // ── Exercice 5 — Remettre les mots dans le bon ordre ─────────────────────
+    // ── Exercice 4 — Remettre les mots dans le bon ordre ─────────────────────
     {
       type: "word_order",
-      title: "Exercice 5",
+      title: "Exercice 4",
       instruction: "Remettez les mots dans le bon ordre.",
       items: [],
       pool: [
