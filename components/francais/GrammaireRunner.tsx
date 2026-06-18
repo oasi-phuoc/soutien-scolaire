@@ -1031,31 +1031,35 @@ function FillSelectExercise({
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>
+      <p className="mb-1 text-xs text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>
         {translatedInstruction ?? exercise.instruction}
       </p>
 
-      {/* Word bank */}
-      <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-3">
+      {/* Word bank — plain lettered list, no border */}
+      <div className="grid grid-cols-2 gap-x-4 gap-y-1">
         {exercise.wordBank.map((word, wi) => (
-          <div key={wi} className="flex items-center gap-1">
-            <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-fr)]">{letters[wi]}.</span>
+          <div key={wi} className="flex items-baseline">
+            <span className="w-5 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{letters[wi]}.</span>
             <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
           </div>
         ))}
       </div>
 
+      <hr className="border-[var(--color-border-default)]" />
+
       {/* Sentences with select */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         {items.map((item, i) => {
           const userAnswer = selected[i] ?? "";
           const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
           const wrongField = validated && revealCorrection && !correct;
 
+          const [before, after] = item.sentence.split("___");
+
           const selectEl = wrongField ? (
-            <span className="inline-flex h-8 min-w-[4.5rem] flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-1 mx-1 align-middle">
-              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAnswer || "—"}</span>
-              <span className="text-xs font-bold leading-none text-amber-600">{item.answer}</span>
+            <span className="mx-1 inline-flex h-8 w-28 flex-col justify-center rounded border border-amber-400 bg-amber-50 px-1 dark:border-amber-500 dark:bg-amber-950/20">
+              <span className="text-[9px] leading-none text-amber-600 line-through dark:text-amber-400">{userAnswer || "—"}</span>
+              <span className="mt-0.5 text-[10px] leading-none font-medium text-[var(--color-text-primary)]">{item.answer}</span>
             </span>
           ) : (
             <select
@@ -1066,27 +1070,22 @@ function FillSelectExercise({
                 setSelected(prev => prev.map((s, j) => j === i ? v : s));
               }}
               disabled={validated}
-              className="inline-block h-8 rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 text-sm text-[var(--color-text-primary)] mx-1 align-middle cursor-pointer disabled:opacity-70 focus:border-[var(--color-accent-fr)] focus:outline-none"
+              className="mx-1 inline-block h-8 w-28 appearance-none rounded border border-[var(--color-accent-fr)]/40 bg-[var(--color-accent-fr)]/10 px-1 text-center text-sm text-[var(--color-accent-fr)] outline-none"
             >
-              <option value="">—</option>
+              <option value=""></option>
               {exercise.wordBank.map((w, wi) => (
                 <option key={wi} value={w}>{w}</option>
               ))}
             </select>
           );
 
-          const parts = item.sentence.split("___");
-
           return (
-            <p key={i} className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
-              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
-              {parts.map((part, pi, arr) => (
-                <React.Fragment key={pi}>
-                  {part}
-                  {pi < arr.length - 1 && selectEl}
-                </React.Fragment>
-              ))}
-            </p>
+            <div key={i} className="text-sm">
+              <span className="mr-2 font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
+              <span className="text-[var(--color-text-primary)]">{before}</span>
+              {selectEl}
+              <span className="text-[var(--color-text-primary)]">{after}</span>
+            </div>
           );
         })}
       </div>

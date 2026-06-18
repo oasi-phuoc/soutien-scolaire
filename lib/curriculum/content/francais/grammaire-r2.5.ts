@@ -360,7 +360,7 @@ export const A1_GR_L11: GrammarLesson = {
         { svg: PREPS[14].svg, sentence: "", choices: ["contre",          "à côté de",     "près de"],         correctIdx: 0 },
         { svg: PREPS[15].svg, sentence: "", choices: ["chez",            "dans",          "devant"],          correctIdx: 0 },
       ],
-      poolSize: 3,
+      poolSize: 4,
     },
 
     // ── Exercice 2 — Complétez avec la bonne préposition (selectbox) ──────────
