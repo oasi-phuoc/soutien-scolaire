@@ -15,6 +15,8 @@ export const V7_RECETTES_THEME: VocabTheme = {
     { word: "sel",         image: "sel.png",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: "minéral blanc pour assaisonner" },
     { word: "poivre",      image: "poivre.png",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice noire ou blanche très piquante" },
     { word: "épice",       image: "epice.png",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "substance aromatique pour parfumer les plats" },
+    { word: "curry",       image: "curry.png",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "mélange d'épices aromatiques d'origine indienne" },
+    { word: "paprika",     image: "paprika.png",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice rouge à base de poivron séché" },
     { word: "herbe",       image: "herbe.png",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "plante aromatique utilisée en cuisine" },
     { word: "ustensile",   image: "ustensile.png",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: "outil de cuisine comme une casserole ou louche" },
     { word: "casserole",   image: "casserole.png",  article: "la",  gender: "f", group: "Les ustensiles",          definition: "récipient à bord haut pour cuire sur le feu" },
