@@ -711,6 +711,50 @@ function QcmExercise({
           );
         }
 
+        // ── Stacked SVG layout: num | image | 3 toggle buttons (vertical) ──────
+        if (exercise.svgChoiceLayout === "stacked" && item.svg) {
+          const borderCls = validated && revealCorrection && selected[i] !== item.correctIdx
+            ? "border-amber-500" : "border-[var(--color-border-default)]";
+          return (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-5 shrink-0 text-xs font-semibold text-[var(--color-accent-fr)]">{i + 1}.</span>
+              <div
+                className="w-16 h-16 shrink-0 overflow-hidden rounded-lg bg-[var(--color-bg-secondary)] p-1"
+                dangerouslySetInnerHTML={{ __html: item.svg }}
+              />
+              <div className={`flex flex-1 flex-col overflow-hidden rounded-[var(--radius-md)] border h-16 ${borderCls}`}>
+                {item.choices.map((choice, ci) => {
+                  const isSelected = selected[i] === ci;
+                  const isCorrect = ci === item.correctIdx;
+                  let cls = "flex flex-1 items-center justify-center text-xs font-medium text-center transition-colors ";
+                  if (ci > 0) cls += "border-t border-[var(--color-border-default)] ";
+                  if (!validated || !revealCorrection) {
+                    cls += isSelected
+                      ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+                      : "bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] hover:bg-[var(--color-bg-secondary)]";
+                  } else {
+                    const userWrong = selected[i] !== item.correctIdx;
+                    if (isSelected && !isCorrect) {
+                      cls += "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
+                    } else if (!isSelected && isCorrect && userWrong) {
+                      cls += "text-amber-500 dark:text-amber-400 font-semibold";
+                    } else {
+                      cls += isSelected
+                        ? "bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]"
+                        : "bg-[var(--color-bg-primary)] text-[var(--color-text-secondary)] opacity-50";
+                    }
+                  }
+                  return (
+                    <button key={ci} type="button" className={cls} onClick={() => select(i, ci)} disabled={validated}>
+                      {choice}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+
         return (
           <div key={i} className={exercise.inlineChoices ? "flex items-center gap-3" : "space-y-2"}>
             {item.svg ? (
@@ -931,6 +975,121 @@ function FillExercise({
           </div>
         );
       })}
+    </div>
+  );
+}
+
+// ── Fill-select exercise ──────────────────────────────────────────────────────
+
+function FillSelectExercise({
+  exercise,
+  onValidated,
+  validateCommand,
+  onCanValidateChange,
+}: {
+  exercise: Extract<Exercise, { type: "fill_select" }>;
+  onValidated: (allCorrect: boolean) => void;
+  validateCommand: number;
+  onCanValidateChange: (can: boolean) => void;
+}) {
+  const [items] = useState<FillItem[]>(() => {
+    if (exercise.pool && exercise.pool.length > 0) {
+      return shuffle(exercise.pool).slice(0, exercise.poolSize ?? 5);
+    }
+    return exercise.items;
+  });
+  const [selected, setSelected] = useState<string[]>(() => new Array(items.length).fill(""));
+  const [validated, setValidated] = useState(false);
+  const revealCorrection = useEvalReveal();
+
+  function doValidate() {
+    if (validated) return;
+    setValidated(true);
+    const allCorrect = items.every((item, i) =>
+      normalizeAnswer(selected[i] ?? "") === normalizeAnswer(item.answer)
+    );
+    onValidated(allCorrect);
+  }
+
+  useEffect(() => {
+    if (validateCommand > 0) doValidate();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [validateCommand]);
+
+  useEffect(() => {
+    onCanValidateChange(!validated);
+  }, [validated, onCanValidateChange]);
+
+  const pivot = usePivotLang();
+  const { showPivot: showTrans } = useTranslation();
+  const isRtl = pivot === "ar" || pivot === "fa";
+  const translatedInstruction = showTrans
+    ? exercise.transInstruction?.[pivot as keyof typeof exercise.transInstruction]
+    : undefined;
+
+  const letters = "abcdefghijklmnopqrstuvwxyz";
+
+  return (
+    <div className="space-y-4">
+      <p className="text-sm text-[var(--color-text-secondary)]" lang={translatedInstruction ? pivot : undefined} dir={translatedInstruction && isRtl ? "rtl" : "ltr"}>
+        {translatedInstruction ?? exercise.instruction}
+      </p>
+
+      {/* Word bank */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-1.5 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] p-3">
+        {exercise.wordBank.map((word, wi) => (
+          <div key={wi} className="flex items-center gap-1">
+            <span className="w-4 shrink-0 text-sm font-semibold text-[var(--color-accent-fr)]">{letters[wi]}.</span>
+            <span className="text-sm text-[var(--color-text-primary)]">{word}</span>
+          </div>
+        ))}
+      </div>
+
+      {/* Sentences with select */}
+      <div className="space-y-3">
+        {items.map((item, i) => {
+          const userAnswer = selected[i] ?? "";
+          const correct = normalizeAnswer(userAnswer) === normalizeAnswer(item.answer);
+          const wrongField = validated && revealCorrection && !correct;
+
+          const selectEl = wrongField ? (
+            <span className="inline-flex h-8 min-w-[4.5rem] flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-1 mx-1 align-middle">
+              <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{userAnswer || "—"}</span>
+              <span className="text-xs font-bold leading-none text-amber-600">{item.answer}</span>
+            </span>
+          ) : (
+            <select
+              value={userAnswer}
+              onChange={e => {
+                if (validated) return;
+                const v = e.target.value;
+                setSelected(prev => prev.map((s, j) => j === i ? v : s));
+              }}
+              disabled={validated}
+              className="inline-block h-8 rounded-[var(--radius-sm)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-2 text-sm text-[var(--color-text-primary)] mx-1 align-middle cursor-pointer disabled:opacity-70 focus:border-[var(--color-accent-fr)] focus:outline-none"
+            >
+              <option value="">—</option>
+              {exercise.wordBank.map((w, wi) => (
+                <option key={wi} value={w}>{w}</option>
+              ))}
+            </select>
+          );
+
+          const parts = item.sentence.split("___");
+
+          return (
+            <p key={i} className="text-sm font-medium leading-loose text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent-fr)]">{i + 1}.</span>{" "}
+              {parts.map((part, pi, arr) => (
+                <React.Fragment key={pi}>
+                  {part}
+                  {pi < arr.length - 1 && selectEl}
+                </React.Fragment>
+              ))}
+            </p>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -2158,6 +2317,9 @@ function ExerciseView({
       )}
       {exercise.type === "fill" && (
         <FillExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
+      )}
+      {exercise.type === "fill_select" && (
+        <FillSelectExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
       )}
       {exercise.type === "match" && (
         <MatchExercise exercise={exercise} onValidated={onValidated} validateCommand={validateCommand} onCanValidateChange={onCanValidateChange} />
