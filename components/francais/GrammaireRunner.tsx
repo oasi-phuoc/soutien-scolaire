@@ -2199,7 +2199,7 @@ function subjectToTab(subject: string): string {
   return "conjugaison";
 }
 
-export function ConjugaisonRunner({ lesson, subject = "Conjugaison" }: Props) {
+export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
   const pivot = usePivotLang();

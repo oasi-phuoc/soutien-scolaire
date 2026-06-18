@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getFrenchThemeBySlug } from "@/lib/curriculum/french-data";
 import { getAprendreLesson } from "@/lib/curriculum/apprendre-data";
-import { ConjugaisonRunner } from "@/components/francais/ConjugaisonRunner";
+import { GrammaireRunner } from "@/components/francais/GrammaireRunner";
 import { PedagogicMarkerRow } from "@/components/PedagogicMarkerBadge";
 import type { CompetenceCode } from "@/lib/curriculum/types";
 
@@ -25,7 +25,7 @@ export default async function FrenchThemePage({ params }: Props) {
   if (aprendreLesson) {
     return (
       <main className="flex min-h-screen flex-col">
-        <ConjugaisonRunner lesson={aprendreLesson} subject="Apprendre" />
+        <GrammaireRunner lesson={aprendreLesson} subject="Apprendre" />
       </main>
     );
   }
