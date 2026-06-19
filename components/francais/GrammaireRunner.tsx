@@ -1713,7 +1713,17 @@ function TrueFalseExercise({
   validateCommand: number;
   onCanValidateChange: (can: boolean) => void;
 }) {
-  const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(exercise.items.length).fill(null));
+  const [resolved] = useState<{ image: string | null; items: { statement: string; answer: boolean }[] }>(() => {
+    if (exercise.imagePool && exercise.imagePool.length > 0) {
+      const group = exercise.imagePool[Math.floor(Math.random() * exercise.imagePool.length)]!;
+      const shuffled = [...group.items].sort(() => Math.random() - 0.5);
+      return { image: group.image, items: shuffled.slice(0, exercise.poolSize ?? 5) };
+    }
+    return { image: null, items: exercise.items };
+  });
+
+  const items = resolved.items;
+  const [answers, setAnswers] = useState<(boolean | null)[]>(() => new Array(items.length).fill(null));
   const [validated, setValidated] = useState(false);
   const revealCorrection = useEvalReveal();
 
@@ -1725,7 +1735,7 @@ function TrueFalseExercise({
   useEffect(() => {
     if (validateCommand > 0 && !validated) {
       setValidated(true);
-      onValidated(answers.every((a, i) => a === exercise.items[i]!.answer));
+      onValidated(answers.every((a, i) => a === items[i]!.answer));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [validateCommand]);
@@ -1738,8 +1748,14 @@ function TrueFalseExercise({
   return (
     <div className="space-y-4">
       <p className="text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+      {resolved.image && (
+        <div className="overflow-hidden rounded-xl border border-[var(--color-border)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={resolved.image} alt="Description" className="w-full object-contain max-h-64" />
+        </div>
+      )}
       <div className="space-y-3">
-        {exercise.items.map((item, i) => {
+        {items.map((item, i) => {
           const chosen = answers[i];
           const correct = item.answer;
           const isRight = chosen === correct;
