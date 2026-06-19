@@ -4,7 +4,7 @@ const ts = require("typescript");
 
 const ROOT = process.cwd();
 const TARGETS = fs.readdirSync(path.join(ROOT, "lib/curriculum/content/francais"))
-  .filter((file) => /^vocab-v[1-7]-.*\.ts$/.test(file))
+  .filter((file) => /^vocab-v[1-9]-.*\.ts$/.test(file))
   .map((file) => `lib/curriculum/content/francais/${file}`)
   .sort();
 
@@ -140,6 +140,9 @@ function category(file, word) {
   if (file.includes("vocab-v2-heure")) return "timeword";
   if (file.includes("vocab-v2-jours-mois-dates")) return "date";
   if (file.includes("vocab-v3")) return "activity";
+  if (file.includes("vocab-v8-corps")) return "body";
+  if (file.includes("vocab-v8")) return "health";
+  if (file.includes("vocab-v9")) return "travel";
   if (file.includes("matieres.ts")) return "school";
   if (file.includes("vetements") || file.includes("accessoires")) return "object";
   if (file.includes("vocab-v7")) return QUANTITIES.has(word) ? "quantity" : "food";
@@ -484,6 +487,150 @@ function makeGenerators(file, word, article, gender, feminine) {
         `Tant que tu pratiqueras ${noun}, tu gagneras en confiance.`,
         `Bien que ${noun} soit parfois exigeant, cette activité reste motivante.`,
         `Si la leçon contient ${noun}, je penserai aux règles du jeu.`,
+      ],
+    };
+  }
+
+  if (cat === "body") {
+    const deN = deWithArticle(article, gender, word);
+    const aN = aWithArticle(article, gender, word);
+    const important = importantFor(article, gender);
+    const be = beFor(article);
+    const pron = pronFor(article, gender);
+    return {
+      a1: [
+        `Je montre ${noun}.`, `J'ai mal ${aN}.`, `${cap(noun)} ${be} ${important}.`, `Je touche ${noun}.`,
+        `Tu bouges ${noun}.`, `Il regarde ${noun}.`, `Elle lave ${noun}.`, `Nous dessinons ${noun}.`,
+        `Vous connaissez ${noun}.`, `Ils protègent ${noun}.`, `Elles montrent ${noun}.`, `${cap(noun)} est sur le corps.`,
+        `Le médecin regarde ${noun}.`, `Je parle ${deN}.`, `Il a une douleur ${aN}.`, `Elle soigne ${noun}.`,
+        `Je sens ${noun}.`, `Tu utilises ${noun}.`, `Nous apprenons le mot ${word}.`, `La classe répète ${word}.`,
+        `Le dessin montre ${noun}.`, `Je nomme ${noun}.`, `Il indique ${noun}.`, `Elle montre ${noun}.`, `Ce mot désigne ${noun}.`,
+      ],
+      a2: [
+        `Hier, j'ai eu mal ${aN} après le sport.`, `Demain, le médecin va examiner ${noun}.`,
+        `Quand il est tombé, il s'est blessé ${aN}.`, `Ce matin, elle a lavé ${noun} avec soin.`,
+        `Nous avons appris le nom ${deN} en classe.`, `Ils vont dessiner ${noun} dans le cahier.`,
+        `J'ai choisi ${noun} parce que ce mot était dans la liste.`, `Elle a montré ${noun} au médecin.`,
+        `Avant l'entraînement, nous avons parlé ${deN}.`, `Le professeur a expliqué à quoi sert ${noun}.`,
+        `Je vais protéger ${noun} pendant l'activité.`, `Nous avons associé ${noun} à une image.`,
+        `Hier soir, mon frère a senti une douleur ${aN}.`, `Pendant le cours, nous avons répété ${word}.`,
+        `Elle a oublié le mot ${word} pendant l'exercice.`, `Il va utiliser ${word} dans une phrase.`,
+        `Nous avons trouvé ${noun} sur le schéma du corps.`, `Ce week-end, je vais réviser ${word}.`,
+        `L'élève a décrit ${noun} avec une phrase simple.`, `J'ai compris le mot ${word} pour la première fois.`,
+        `Ma sœur a noté ${word} dans son carnet.`, `Ils ont comparé ${noun} avec une autre partie du corps.`,
+        `Nous allons revoir ${noun} avec le professeur.`, `Elle a écrit ${word} sans erreur.`, `La classe a demandé un exemple avec ${noun}.`,
+      ],
+      b1: [
+        `Bien que ${noun} semble facile à nommer, il faut choisir le bon article.`,
+        `Comme ${noun} peut être sensible, il faut le protéger pendant certaines activités.`,
+        `Si tu as mal ${aN}, tu devrais expliquer clairement ce que tu ressens.`,
+        `Même si je connais déjà ${word}, je dois encore l'utiliser dans une phrase complète.`,
+        `La partie du corps que nous étudions aujourd'hui s'appelle ${word}.`,
+        `Pendant que le médecin examinait ${noun}, le patient expliquait sa douleur.`,
+        `Puisque ${noun} est important, le professeur l'a montré sur le schéma.`,
+        `Lorsque tu auras mémorisé ${word}, tu comprendras mieux les consignes médicales.`,
+        `Je pense que ${noun} aide les élèves parce qu'${pron} donne un repère concret.`,
+        `Même quand la phrase est courte, ${noun} peut donner une information précise.`,
+        `Le mot dont je parle est ${word}, que la classe doit retenir.`,
+        `Tant que tu pratiqueras ce vocabulaire, tu décriras le corps plus facilement.`,
+        `Bien que ${noun} demande peu d'explications, il faut le prononcer correctement.`,
+        `Si l'exercice contient ${word}, je penserai au corps humain.`,
+        `Le professeur, qui veut enrichir notre vocabulaire, nous demande d'utiliser ${word}.`,
+      ],
+    };
+  }
+
+  if (cat === "health") {
+    const deN = deWithArticle(article, gender, word);
+    const important = importantFor(article, gender);
+    const be = beFor(article);
+    return {
+      a1: [
+        `Je connais ${noun}.`, `Je parle ${deN}.`, `${cap(noun)} ${be} ${important}.`, `Le médecin explique ${noun}.`,
+        `Le patient parle ${deN}.`, `Tu comprends ${word}.`, `Il décrit ${noun}.`, `Elle soigne ce problème.`,
+        `Nous étudions ${noun}.`, `Vous notez ${word}.`, `Ils décrivent ${noun}.`, `Elles répètent ${word}.`,
+        `${cap(noun)} est dans la leçon.`, `Je lis le mot ${word}.`, `Je cherche ${noun}.`, `Il montre ${noun}.`,
+        `Elle demande une explication sur ${noun}.`, `La pharmacie aide le patient.`, `Le soignant parle ${deN}.`, `La classe apprend ${word}.`,
+        `Je répète ${word}.`, `Nous écrivons ${word}.`, `Tu apprends ${word}.`, `Le soin concerne ${noun}.`, `Ce mot parle de la santé.`,
+      ],
+      a2: [
+        `Hier, le médecin a parlé ${deN} au patient.`, `Demain, je vais revoir le mot ${word}.`,
+        `Quand j'étais malade, j'ai entendu parler ${deN}.`, `Ce matin, le pharmacien a expliqué ${noun}.`,
+        `Nous avons utilisé ${word} dans une phrase.`, `Ils vont apprendre ${word} cette semaine.`,
+        `J'ai choisi ${noun} parce que ce mot était utile.`, `Elle a noté ${word} dans son carnet.`,
+        `Avant le rendez-vous, nous avons préparé une phrase avec ${word}.`, `Le groupe a parlé ${deN} pendant le cours.`,
+        `Je vais demander des informations sur ${noun}.`, `Nous avons associé ${noun} à une image.`,
+        `Hier soir, mon frère a cherché le sens de ${word}.`, `Pendant l'exercice, je confondais encore ${word}.`,
+        `Elle a oublié le mot ${word} pendant la dictée.`, `Il va utiliser ${word} dans sa réponse.`,
+        `Nous avons trouvé ${noun} dans le dialogue médical.`, `Ce week-end, je vais mémoriser ${word}.`,
+        `L'élève a ajouté ${word} dans sa phrase.`, `J'ai compris ${word} pour la première fois.`,
+        `Ma sœur a demandé un exemple avec ${word}.`, `Ils ont répété ${word} à voix haute.`,
+        `Nous allons revoir ${noun} avec le professeur.`, `Elle a écrit ${word} sans aide.`, `La classe a demandé une définition de ${word}.`,
+      ],
+      b1: [
+        `Bien que ${noun} semble simple, il faut l'expliquer avec précision dans un contexte médical.`,
+        `Comme ${noun} apparaît dans le dialogue, le patient doit comprendre ce mot.`,
+        `Si tu connais ${word}, tu pourras mieux décrire un problème de santé.`,
+        `Même si je connais déjà ${word}, je dois encore le prononcer correctement.`,
+        `Le médecin, qui voulait rassurer le patient, a expliqué ${noun} avec des mots simples.`,
+        `La leçon que nous travaillons utilise ${word} dans plusieurs situations de santé.`,
+        `Pendant que le pharmacien parlait ${deN}, le client posait des questions.`,
+        `Puisque ${word} est utile, nous le révisons avant le jeu de rôle.`,
+        `Lorsque tu auras mémorisé ${word}, tu comprendras mieux les consignes du médecin.`,
+        `Je pense que ${noun} aide les élèves parce que ce mot revient souvent dans les dialogues.`,
+        `Même quand la phrase est courte, ${word} peut donner une information importante.`,
+        `Le mot dont je parle est ${word}, que la classe doit retenir.`,
+        `Tant que tu pratiqueras ${word}, tu parleras de santé plus facilement.`,
+        `Bien que ${noun} demande de l'attention, il devient plus clair avec des exemples.`,
+        `Si l'exercice contient ${word}, je penserai au vocabulaire médical.`,
+      ],
+    };
+  }
+
+  if (cat === "travel") {
+    const deN = deWithArticle(article, gender, word);
+    const important = importantFor(article, gender);
+    const be = beFor(article);
+    const helpVerb = helpVerbFor(article);
+    return {
+      a1: [
+        `Je vois ${noun}.`, `Je cherche ${noun}.`, `${cap(noun)} ${be} ${important}.`, `Je note ${word}.`,
+        `Tu connais ${noun}.`, `Il utilise ${noun}.`, `Elle regarde ${noun}.`, `Nous trouvons ${noun}.`,
+        `Vous demandez ${noun}.`, `Ils parlent ${deN}.`, `Elles choisissent ${noun}.`, `${cap(noun)} est sur le plan.`,
+        `Le voyageur cherche ${noun}.`, `Je répète ${word}.`, `Il montre ${noun}.`, `Elle prépare son voyage.`,
+        `La ville contient ${noun}.`, `La carte indique ${noun}.`, `Ce lieu est facile à trouver.`, `Je répète ${word}.`,
+        `Nous écrivons ${word}.`, `Tu apprends ${word}.`, `La classe regarde ${noun}.`, `Je montre ${noun} au professeur.`, `Cette leçon parle ${deN}.`,
+      ],
+      a2: [
+        `Hier, j'ai cherché ${noun} sur le plan.`, `Demain, je vais chercher ${noun}.`,
+        `Quand je voyage, j'utilise souvent ${noun}.`, `Ce matin, le guide a montré ${noun}.`,
+        `Nous avons demandé où se trouvait ${noun}.`, `Ils vont préparer le trajet avant le départ.`,
+        `J'ai choisi ${noun} parce que c'était pratique.`, `Elle a noté ${word} dans son carnet de voyage.`,
+        `Avant de partir, nous avons parlé ${deN}.`, `Le groupe a trouvé ${noun} près de la gare.`,
+        `Je vais chercher ${noun} après l'arrivée.`, `Nous avons associé ${noun} à une image.`,
+        `Hier soir, mon frère a vérifié ${noun} sur internet.`, `Pendant les vacances, nous utilisions souvent ${noun}.`,
+        `Elle a oublié le mot ${word} pendant l'exercice.`, `Il va utiliser ${word} dans sa phrase.`,
+        `Nous avons trouvé ${noun} dans le dialogue de voyage.`, `Ce week-end, je vais mémoriser ${word}.`,
+        `L'élève a ajouté ${word} dans sa réponse.`, `J'ai compris le mot ${word} pour la première fois.`,
+        `Ma sœur a choisi ${noun} pour son exemple.`, `Ils ont répété ${word} à voix haute.`,
+        `Nous allons revoir ${noun} avec le professeur.`, `Elle a noté ${word} pour ne pas l'oublier.`, `La classe a demandé un exemple avec ${noun}.`,
+      ],
+      b1: [
+        `Bien que ${noun} semble facile à trouver, il vaut mieux vérifier l'adresse avant de partir.`,
+        `Comme ${noun} se trouve près du centre, nous pouvons y aller à pied.`,
+        `Si tu connais ${word}, tu comprendras mieux les indications pendant le voyage.`,
+        `Même si je connais déjà ${word}, je dois encore l'utiliser dans une phrase complète.`,
+        `Le voyageur, qui cherchait son chemin, a demandé où se trouvait ${noun}.`,
+        `La leçon que nous travaillons utilise ${word} dans plusieurs situations de déplacement.`,
+        `Pendant que le guide montrait ${noun}, les élèves prenaient des notes.`,
+        `Puisque ${noun} ${helpVerb} à s'orienter, nous l'avons ajouté au plan.`,
+        `Lorsque tu auras mémorisé ${word}, tu pourras demander ton chemin plus naturellement.`,
+        `Je pense que ${noun} aide les élèves parce que ce mot revient souvent en voyage.`,
+        `Même quand la phrase est courte, ${word} peut donner une information précise.`,
+        `Le mot dont je parle est ${word}, que la classe doit retenir.`,
+        `Tant que tu pratiqueras ${word}, tu comprendras mieux les dialogues de voyage.`,
+        `Bien que ${noun} demande peu d'explications, il faut choisir le bon article.`,
+        `Si l'exercice contient ${word}, je penserai au vocabulaire du déplacement.`,
       ],
     };
   }
