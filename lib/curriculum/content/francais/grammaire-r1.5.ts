@@ -449,17 +449,6 @@ export const A1_CONJ_L07: ConjLesson = {
                   ],
                 },
                 {
-                  infinitive: "projeter", radical: "projet",
-                  rows: [
-                    { pronoun: "je", ending: "e", radical: "projett" },
-                    { pronoun: "tu", ending: "es", radical: "projett" },
-                    { pronoun: "il / elle / on", ending: "e", radical: "projett" },
-                    { pronoun: "nous", ending: "ons" },
-                    { pronoun: "vous", ending: "ez" },
-                    { pronoun: "ils / elles", ending: "ent", radical: "projett" },
-                  ],
-                },
-                {
                   infinitive: "appeler", radical: "appel",
                   rows: [
                     { pronoun: "j'", ending: "e", radical: "appell" },
@@ -468,17 +457,6 @@ export const A1_CONJ_L07: ConjLesson = {
                     { pronoun: "nous", ending: "ons" },
                     { pronoun: "vous", ending: "ez" },
                     { pronoun: "ils / elles", ending: "ent", radical: "appell" },
-                  ],
-                },
-                {
-                  infinitive: "rappeler", radical: "rappel",
-                  rows: [
-                    { pronoun: "je", ending: "e", radical: "rappell" },
-                    { pronoun: "tu", ending: "es", radical: "rappell" },
-                    { pronoun: "il / elle / on", ending: "e", radical: "rappell" },
-                    { pronoun: "nous", ending: "ons" },
-                    { pronoun: "vous", ending: "ez" },
-                    { pronoun: "ils / elles", ending: "ent", radical: "rappell" },
                   ],
                 },
               ],
