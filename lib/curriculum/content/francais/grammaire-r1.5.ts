@@ -320,8 +320,7 @@ export const A1_CONJ_L07: ConjLesson = {
           content: [
             {
               type: "plain_list",
-              items: ["On ajoute e après le g à la forme nous pour garder le son [ʒ]."],
-              noBulletItems: [0],
+              items: ["On ajoute {a}e{/a} après le {a}g{/a} à la forme {a}nous{/a} pour garder le son [ʒ]."],
             },
             {
               type: "verb_toggle",
@@ -356,12 +355,8 @@ export const A1_CONJ_L07: ConjLesson = {
           label: "-CER",
           content: [
             {
-              type: "rule",
-              text: "Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} à la forme {a}nous{/a} pour garder le son [s].",
-              examples: [
-                { correct: "nous commen{a}ç{/a}ons" },
-                { correct: "nous avan{a}ç{/a}ons" },
-              ],
+              type: "plain_list",
+              items: ["Le {a}c{/a} devient {a}ç{/a} devant {a}o{/a} à la forme {a}nous{/a} pour garder le son [s]."],
             },
             {
               type: "verb_toggle",
@@ -396,12 +391,8 @@ export const A1_CONJ_L07: ConjLesson = {
           label: "-YER",
           content: [
             {
-              type: "rule",
-              text: "Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils).",
-              examples: [
-                { correct: "je pa{a}i{/a}e" },
-                { correct: "nous pa{a}y{/a}ons" },
-              ],
+              type: "plain_list",
+              items: ["Le {a}y{/a} devient {a}i{/a} devant une terminaison muette (je, tu, il, ils)."],
             },
             {
               type: "verb_toggle",
@@ -436,20 +427,12 @@ export const A1_CONJ_L07: ConjLesson = {
           label: "-ETER / -ELER",
           content: [
             {
-              type: "rule",
-              text: "Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette.",
-              examples: [
-                { correct: "je je{a}tt{/a}e" },
-                { correct: "nous je{a}t{/a}ons" },
-              ],
+              type: "plain_list",
+              items: ["Les verbes comme {a}jeter{/a} doublent le {a}t{/a} devant une terminaison muette."],
             },
             {
-              type: "rule",
-              text: "Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette.",
-              examples: [
-                { correct: "j'appe{a}ll{/a}e" },
-                { correct: "nous appe{a}l{/a}ons" },
-              ],
+              type: "plain_list",
+              items: ["Les verbes comme {a}appeler{/a} doublent le {a}l{/a} devant une terminaison muette."],
             },
             {
               type: "verb_toggle",
