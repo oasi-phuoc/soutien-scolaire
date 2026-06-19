@@ -11,7 +11,7 @@ export async function GET() {
     return new Response("APK non disponible.", { status: 404 });
   }
 
-  return new Response(file, {
+  return new Response(new Uint8Array(file), {
     headers: {
       "Content-Type": "application/vnd.android.package-archive",
       "Content-Disposition": 'attachment; filename="soutien-scolaire.apk"',
