@@ -24,10 +24,10 @@ export function MainNav() {
   }, [pathname]);
 
   const itemClass = (active: boolean) =>
-    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[24px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
+    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[20px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
       active
-        ? "bg-[color-mix(in_oklch,var(--nav-color)_16%,white)] text-[var(--nav-color)] shadow-sm ring-1 ring-[color-mix(in_oklch,var(--nav-color)_28%,transparent)]"
-        : "text-zinc-500 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--nav-color)_10%,white)] hover:text-[var(--nav-color)] dark:text-zinc-400"
+        ? "bg-[color-mix(in_oklch,var(--nav-color)_14%,white)] text-[var(--nav-color)]"
+        : "text-[var(--color-text-secondary)] hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--nav-color)_8%,white)] hover:text-[var(--nav-color)] dark:text-zinc-400"
     }`;
 
   return (
@@ -35,7 +35,7 @@ export function MainNav() {
       className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2"
       aria-label="Navigation principale"
     >
-      <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-zinc-200/80 bg-white/90 p-1 shadow-[0_14px_40px_rgba(15,23,42,0.16)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90 dark:shadow-black/35">
+      <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-[var(--color-theme)]/12 bg-white/95 p-1.5 shadow-[0_6px_20px_rgba(0,0,0,0.07)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90">
         {links.map(({ href, label, icon: Icon, color }) => {
           const active =
             href === "/"
@@ -44,7 +44,7 @@ export function MainNav() {
           return (
             <li key={href} style={{ "--nav-color": color } as React.CSSProperties}>
               <Link href={href} className={itemClass(active)}>
-                <span className={`relative flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
+                <span className={`relative flex h-6 w-6 items-center justify-center rounded-full transition-colors ${
                   active
                     ? "bg-[var(--nav-color)] text-white"
                     : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
@@ -67,7 +67,7 @@ export function MainNav() {
             onClick={togglePivot}
             className={itemClass(showPivot)}
           >
-            <span className={`flex h-6 w-6 items-center justify-center rounded-xl transition-colors ${
+            <span className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors ${
               showPivot
                 ? "bg-[var(--nav-color)] text-white"
                 : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"

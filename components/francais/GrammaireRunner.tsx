@@ -544,16 +544,16 @@ function SelectorBlock({ block, pivot, showTrans }: {
 }) {
   const [activeTab, setActiveTab] = useState(0);
   return (
-    <div className="space-y-3">
-      <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
         {block.tabs.map((tab, i) => (
           <button
             key={i}
             onClick={() => setActiveTab(i)}
-            className={`min-h-10 w-full rounded-lg px-3 py-1.5 text-center text-sm font-bold transition-colors ${
+            className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-all duration-200 ${
               activeTab === i
-                ? "bg-[var(--color-accent-fr)] text-white"
-                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-fr)]/20"
+                ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
+                : "bg-[var(--color-bg-secondary)] text-[var(--color-text-secondary)] hover:bg-[color-mix(in_oklch,var(--color-accent-fr)_15%,white)] hover:text-[var(--color-accent-fr)]"
             }`}
           >
             {block.labelPrefix ? `${block.labelPrefix} ${tab.label}` : tab.label}
