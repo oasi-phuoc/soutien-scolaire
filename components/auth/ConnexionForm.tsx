@@ -70,7 +70,7 @@ function InstallModal({ onClose }: { onClose: () => void }) {
 
         {/* Download button */}
         <a
-          href="/app.apk"
+          href="/api/download-app"
           download="soutien-scolaire.apk"
           className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-green-700 text-base font-semibold text-white active:scale-95 dark:bg-green-600"
         >
