@@ -1,4 +1,4 @@
-import { CommunicationClient } from "@/components/communication/CommunicationClient";
+import { CommunicationHome } from "@/components/communication/CommunicationHome";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { ComingSoon } from "@/components/ComingSoon";
 
@@ -10,5 +10,5 @@ export default async function CommunicationPage() {
     isAdmin = myRole === "admin";
   }
   if (!isAdmin) return <ComingSoon />;
-  return <CommunicationClient isAdmin />;
+  return <CommunicationHome isAdmin />;
 }

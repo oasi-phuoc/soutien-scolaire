@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
 import type { FrenchTab, FrenchTheme } from "@/lib/curriculum/types";
 import { getCompletedFrenchLessons } from "@/lib/progress/french-progress";
-import { CommModuleList } from "@/components/communication/CommunicationClient";
+import { CommunicationModuleList } from "@/components/communication/CommunicationHome";
 
 type SectionDef  = { id: string; code: string; title: string };
 type SectionState = "locked" | "in_progress" | "completed";
@@ -425,7 +425,7 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
       {tab === "communication" ? (
         <section aria-label="Modules de communication">
-          {isAdmin ? <CommModuleList isAdmin /> : <ComingSoon />}
+          {isAdmin ? <CommunicationModuleList isAdmin /> : <ComingSoon />}
         </section>
       ) : null}
 

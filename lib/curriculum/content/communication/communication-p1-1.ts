@@ -1,4 +1,4 @@
-export type CommTheoryBlock =
+export type CommunicationTheoryBlock =
   | { type: "heading"; text: string }
   | { type: "subheading"; text: string }
   | { type: "table"; headers: string[]; rows: string[][] }
@@ -6,7 +6,7 @@ export type CommTheoryBlock =
   | { type: "dialogue"; lines: Array<{ role: string; text: string; translation?: string }> }
   | { type: "vocab"; items: Array<{ fr: string; example: string }> };
 
-export type CommExercise = {
+export type CommunicationExercise = {
   id: string;
   instruction: string;
   type: "mcq";
@@ -15,17 +15,17 @@ export type CommExercise = {
   answer: string; // must match one of choices exactly
 };
 
-export type CommLesson = {
+export type CommunicationLesson = {
   id: string;
   code: string;
   title: string;
-  theory: CommTheoryBlock[];
-  exercises: CommExercise[];
+  theory: CommunicationTheoryBlock[];
+  exercises: CommunicationExercise[];
 };
 
-export const COMM_A1_1_SE_PRESENTER: CommLesson = {
-  id: "A1-1",
-  code: "A1.1",
+export const COMMUNICATION_P1_1: CommunicationLesson = {
+  id: "P1-1",
+  code: "P1.1",
   title: "Se présenter",
   theory: [
     { type: "heading", text: "Se présenter" },
