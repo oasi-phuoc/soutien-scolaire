@@ -128,6 +128,13 @@ export function ExQuestionWrite({
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
   const revealCorrection = useEvalReveal();
+  const [emptyToast, setEmptyToast] = useState(false);
+
+  useEffect(() => {
+    if (!emptyToast) return;
+    const t = setTimeout(() => setEmptyToast(false), 3500);
+    return () => clearTimeout(t);
+  }, [emptyToast]);
 
   useEffect(() => {
     const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
@@ -137,6 +144,8 @@ export function ExQuestionWrite({
 
   useEffect(() => {
     if (validateCommand === 0) return;
+    const allEmpty = prompts.every((p) => !(states[p.word]?.answer ?? "").trim());
+    if (allEmpty) { setEmptyToast(true); return; }
     let correct = 0;
     const updated: Record<string, WordState> = {};
     prompts.forEach((p) => {
@@ -180,6 +189,11 @@ export function ExQuestionWrite({
 
   return (
     <div>
+      {emptyToast && (
+        <div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-xl bg-amber-500 px-5 py-3 text-sm font-medium text-white shadow-xl">
+          Décrivez quelque chose pour pouvoir corriger la phrase.
+        </div>
+      )}
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez une question avec le mot proposé. Utilisez un mot interrogatif (
@@ -202,9 +216,6 @@ export function ExQuestionWrite({
                 <span className="mr-2 text-[var(--color-accent-fr)]">{i + 1}.</span>
                 {p.word}
               </p>
-              {p.context && (
-                <p className="mb-1 text-xs italic text-[var(--color-text-secondary)]">{p.context}</p>
-              )}
               {isCheckedDone && hasErrors && revealCorrection ? (
                 <div className="border-b border-amber-400 py-1 text-center">
                   <p className="text-sm text-amber-600 line-through dark:text-amber-400">{s.answer || "—"}</p>

@@ -123,9 +123,9 @@ export function ExArticle({
               <span className="w-6 shrink-0 text-sm font-bold text-[var(--color-accent-fr)]">{i + 1}.</span>
               <div className="flex min-w-0 flex-1 items-center gap-1.5">
                 {s.checked && !s.correct && revealCorrection ? (
-                  <div className="flex w-16 flex-col justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 py-0.5 text-center">
+                  <div className="h-8 w-16 flex flex-col items-center justify-center rounded-none border-0 border-b-2 border-amber-500 px-0 text-center">
                     <span className="text-[10px] leading-none text-[var(--color-text-secondary)]">{s.answer || "—"}</span>
-                    <span className="mt-0.5 text-xs font-bold leading-none text-amber-600">{s.displayAnswer ?? w.article ?? ""}</span>
+                    <span className="text-xs font-bold leading-none text-amber-600">{s.displayAnswer ?? w.article ?? ""}</span>
                   </div>
                 ) : (
                   <input
@@ -137,7 +137,7 @@ export function ExArticle({
                         [w.word]: { ...prev[w.word]!, answer: e.target.value, checked: false, correct: false },
                       }))
                     }
-                    className="w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
+                    className="h-8 w-16 rounded-none border-0 border-b-2 border-[var(--color-accent-fr)]/60 bg-transparent px-0 pb-0.5 text-center text-sm outline-none transition-colors focus:border-[var(--color-accent-fr)]"
                     readOnly={s.checked}
                   />
                 )}

@@ -63,7 +63,7 @@ export const WRONG_BTN_CLS =
 // Correction display: single box (same width as the input it replaces)
 // wrong answer strikethrough amber + correct answer normal — no extra column added
 export const WRONG_BOX_CLS =
-  "inline-flex flex-col justify-center rounded border border-amber-400 bg-amber-50 dark:border-amber-500 dark:bg-amber-950/20 px-1";
+  "inline-flex flex-col items-center justify-center text-center rounded border border-amber-400 bg-amber-50 dark:border-amber-500 dark:bg-amber-950/20 px-1";
 // keep old names so nothing breaks while we migrate
 export const WRONG_DISPLAY_INPUT_CLS = "";   // unused — remove from imports
 export const CORRECT_DISPLAY_INPUT_CLS = ""; // unused — remove from imports

@@ -77,6 +77,13 @@ export function ExSentenceWrite({
     Object.fromEntries(prompts.map((p) => [p.word, initState()]))
   );
   const revealCorrection = useEvalReveal();
+  const [emptyToast, setEmptyToast] = useState(false);
+
+  useEffect(() => {
+    if (!emptyToast) return;
+    const t = setTimeout(() => setEmptyToast(false), 3500);
+    return () => clearTimeout(t);
+  }, [emptyToast]);
 
   useEffect(() => {
     const hasAny = Object.values(states).some((s) => s.answer.trim().length > 0);
@@ -86,6 +93,8 @@ export function ExSentenceWrite({
 
   useEffect(() => {
     if (validateCommand === 0) return;
+    const allEmpty = prompts.every((p) => !(states[p.word]?.answer ?? "").trim());
+    if (allEmpty) { setEmptyToast(true); return; }
     let correct = 0;
     const updated: Record<string, WordState> = {};
     prompts.forEach((p) => {
@@ -129,6 +138,11 @@ export function ExSentenceWrite({
 
   return (
     <div>
+      {emptyToast && (
+        <div className="fixed bottom-24 left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-xl bg-amber-500 px-5 py-3 text-sm font-medium text-white shadow-xl">
+          Décrivez quelque chose pour pouvoir corriger la phrase.
+        </div>
+      )}
       <p className="mb-1 text-sm font-bold text-[var(--color-accent-fr)]">{title}</p>
       <p className="mb-4 text-xs text-[var(--color-text-secondary)]">
         Écrivez une phrase complète avec le mot proposé.<br />Commencez par une majuscule et terminez par un point.

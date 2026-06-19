@@ -182,10 +182,10 @@ export function MainNav() {
         data-main-nav
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
       >
-        <div className={`relative mx-auto ${lessonMode ? "h-[86px] max-w-[26rem]" : "h-[92px] max-w-[28rem]"}`}>
+        <div className={`relative mx-auto ${lessonMode ? "h-[64px] max-w-[26rem]" : "h-[68px] max-w-[28rem]"}`}>
           {lessonMode ? (
             <div
-              className={`absolute inset-x-0 bottom-[94px] flex items-center justify-center gap-2 transition-all duration-250 ${
+              className={`absolute inset-x-0 bottom-[68px] flex items-center justify-center gap-2 transition-all duration-250 ${
                 open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
               }`}
               aria-hidden={!open}
@@ -246,7 +246,7 @@ export function MainNav() {
             </div>
           ) : (
             <div
-              className={`absolute inset-x-0 bottom-[98px] flex items-center justify-center gap-4 transition-all duration-300 ${
+              className={`absolute inset-x-0 bottom-[72px] flex items-center justify-center gap-4 transition-all duration-300 ${
                 open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
               }`}
               aria-hidden={!open}
@@ -270,7 +270,7 @@ export function MainNav() {
             </div>
           )}
 
-          <div className="absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/78 px-3 py-3 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl">
+          <div className="absolute inset-x-0 bottom-0 rounded-[22px] border border-white/80 bg-white/78 px-3 py-2 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl">
             <div className="grid grid-cols-5 items-center gap-2">
               {lessonMode ? (
                 <>
@@ -290,18 +290,18 @@ export function MainNav() {
               <button
                 type="button"
                 onClick={() => setOpen((value) => !value)}
-                className="group relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border-[6px] border-white text-white shadow-[0_12px_28px_rgba(72,160,120,0.35)] transition-all duration-300 active:scale-95"
+                className="group relative mx-auto flex h-12 w-12 items-center justify-center rounded-full border-[4px] border-white text-white shadow-[0_8px_20px_rgba(72,160,120,0.35)] transition-all duration-300 active:scale-95"
                 style={{ background: "var(--main-nav-color)" }}
                 aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
                 aria-expanded={open}
               >
                 <span
-                  className={`absolute h-8 w-1 rounded-full bg-current transition-transform duration-300 ${
+                  className={`absolute h-6 w-1 rounded-full bg-current transition-transform duration-300 ${
                     open ? "rotate-45" : "rotate-0"
                   }`}
                 />
                 <span
-                  className={`absolute h-1 w-8 rounded-full bg-current transition-transform duration-300 ${
+                  className={`absolute h-1 w-6 rounded-full bg-current transition-transform duration-300 ${
                     open ? "rotate-45" : "rotate-0"
                   }`}
                 />
@@ -342,7 +342,7 @@ function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem
       title={item.label}
       className="group flex min-w-0 items-center justify-center rounded-2xl px-1 py-1 text-[var(--main-nav-color)] transition-transform hover:-translate-y-0.5 active:scale-95"
     >
-      <span className={`relative flex h-9 w-9 items-center justify-center rounded-full shadow-sm transition-colors ${active ? "bg-[var(--main-nav-color)] text-white" : "bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] group-hover:bg-white"}`}>
+      <span className={`relative flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition-colors ${active ? "bg-[var(--main-nav-color)] text-white" : "bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] group-hover:bg-white"}`}>
         <Icon active={active} />
         {item.href === "/" && pendingTasks > 0 && (
           <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
@@ -381,7 +381,7 @@ function ActionButton({ label, icon, onClick, disabled = false }: { label: strin
       title={label}
       className="group flex min-w-0 items-center justify-center rounded-2xl px-1 py-1 text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
     >
-      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] shadow-sm transition-colors group-hover:bg-white">
+      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] shadow-sm transition-colors group-hover:bg-white">
         {icon}
       </span>
     </button>
