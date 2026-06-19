@@ -255,7 +255,7 @@ function InstallModal({ onClose }: { onClose: () => void }) {
             <div>
               <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">Télécharger le fichier</p>
               <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                Appuie sur le bouton <strong className="font-bold text-green-700">"Télécharger l&apos;APK Android"</strong> ci-dessous.<br />
+                Appuie sur le bouton <strong className="font-bold text-green-700">&ldquo;Télécharger l&apos;APK Android&rdquo;</strong> ci-dessous.<br />
                 Le fichier <code className="rounded bg-zinc-100 px-1 text-[10px] dark:bg-zinc-800">soutien-scolaire.apk</code> se télécharge dans tes Téléchargements.
               </p>
             </div>
