@@ -16,10 +16,6 @@ export const V8_MALADIES_THEME: VocabTheme = {
     { word: "brûlure",      image: "brulure.png",  article: "la",  gender: "f", definition: "lésion causée par la chaleur ou le feu" },
     { word: "blessure",     image: "blessure.png", article: "la",  gender: "f", definition: "lésion corporelle causée par un choc" },
     { word: "fracture",     image: "fracture.png", article: "la",  gender: "f", definition: "cassure d'un os" },
-    { word: "mal de tête",                          article: "le",  gender: "m", definition: "douleur dans la tête" },
-    { word: "mal de ventre",                        article: "le",  gender: "m", definition: "douleur dans le ventre" },
-    { word: "fatigue",                              article: "la",  gender: "f", definition: "état d'épuisement physique ou mental" },
-    { word: "infection",                            article: "l'",  gender: "f", definition: "invasion de l'organisme par des microbes" },
     { word: "nausée",       image: "nausee.png",   article: "la",  gender: "f", definition: "sensation d'envie de vomir" },
   ],
   sentences: [
@@ -27,6 +23,6 @@ export const V8_MALADIES_THEME: VocabTheme = {
     { sentence: "J'ai un ___, j'éternue et j'ai le nez qui coule.",      answer: "rhume" },
     { sentence: "La ___ lui fait mal au bras depuis sa chute.",          answer: "fracture" },
     { sentence: "Il a une ___ aux arachides, il ne peut pas en manger.", answer: "allergie" },
-    { sentence: "Elle a le ___ de ventre après avoir trop mangé.",       answer: "mal de ventre" },
+    { sentence: "Il a la ___ après avoir mangé quelque chose de mauvais.", answer: "nausée" },
   ],
 };
