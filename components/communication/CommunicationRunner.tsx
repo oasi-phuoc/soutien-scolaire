@@ -431,7 +431,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       )}
 
       {/* Fixed bottom nav — same pattern as math modules */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {/* Back button */}

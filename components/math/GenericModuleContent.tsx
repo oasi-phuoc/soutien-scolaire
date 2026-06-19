@@ -8113,7 +8113,7 @@ export function GenericModuleContent({
       )}
 
       {/* Fixed bottom nav — hidden on eval_start announce screen */}
-      <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)] ${currentStep?.kind === "eval_start" ? "hidden" : ""}`}>
+      <div className={`hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)] ${currentStep?.kind === "eval_start" ? "hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {/* Back button — hidden on eval start and score screen */}

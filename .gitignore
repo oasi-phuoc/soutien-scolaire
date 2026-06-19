@@ -21,6 +21,9 @@ package-lock.json
 # production
 /build
 
+# projet natif iOS laissé de côté pour le moment
+/ios/
+
 # misc
 .DS_Store
 *.pem

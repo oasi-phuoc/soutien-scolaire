@@ -13,12 +13,12 @@
   --color-border-default: rgba(26, 35, 50, 0.09);
   --color-border-emphasis: rgba(26, 35, 50, 0.17);
   /* Pastel accent colors — section-specific */
-  --color-accent-fr: #C49518;
-  --color-accent-lecture: #5BA0CC;
-  --color-accent-alg: #4A7EC8;
-  --color-accent-geo: #4A7EC8;
+  --color-accent-fr: #F4A83A;
+  --color-accent-lecture: #9B74D4;
+  --color-accent-alg: #6EA2E8;
+  --color-accent-geo: #6EA2E8;
   --color-accent-quiz: #C06078;
-  --color-accent-comm: #48A078;
+  --color-accent-comm: #F4A83A;
   /* Feedback */
   --color-success: #48A078;
   --color-warning: #C49518;
