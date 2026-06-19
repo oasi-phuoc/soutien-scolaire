@@ -3,82 +3,186 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { useTranslation } from "@/components/TranslationProvider";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
+import { useTranslation } from "@/components/TranslationProvider";
 
-const links: { href: string; label: string; icon: ({ active }: { active: boolean }) => React.JSX.Element; color: string }[] = [
-  { href: "/", label: "Accueil", icon: HomeIcon, color: "var(--color-theme)" },
-  { href: "/lecture", label: "Lecture", icon: LectureIcon, color: "var(--color-accent-lecture)" },
-  { href: "/francais", label: "Français", icon: FrIcon, color: "var(--color-accent-fr)" },
-  { href: "/mathematiques", label: "Maths", icon: MathIcon, color: "var(--color-accent-alg)" },
-  { href: "/compte", label: "Réglages", icon: GearIcon, color: "var(--color-theme)" },
+type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
+type NavItem = {
+  href: string;
+  label: string;
+  icon: NavIcon;
+  color: string;
+  x: number;
+  y: number;
+};
+
+const links: NavItem[] = [
+  { href: "/", label: "Accueil", icon: HomeIcon, color: "var(--color-theme)", x: 0, y: -174 },
+  { href: "/lecture", label: "Lecture", icon: LectureIcon, color: "var(--color-accent-lecture)", x: -94, y: -132 },
+  { href: "/mathematiques", label: "Maths", icon: MathIcon, color: "var(--color-accent-alg)", x: -110, y: -46 },
+  { href: "/francais", label: "Français", icon: FrIcon, color: "var(--color-accent-fr)", x: 94, y: -132 },
+  { href: "/compte", label: "Réglages", icon: GearIcon, color: "var(--color-theme)", x: 0, y: -82 },
 ];
+
+function isActivePath(pathname: string, href: string) {
+  return href === "/" ? pathname === "/" || pathname === "" : pathname.startsWith(href);
+}
 
 export function MainNav() {
   const pathname = usePathname() ?? "";
   const { showPivot, togglePivot } = useTranslation();
+  const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
   }, [pathname]);
 
-  const itemClass = (active: boolean) =>
-    `group relative flex min-h-[3rem] w-full min-w-0 flex-col items-center justify-center gap-1 rounded-[20px] px-1.5 py-1 text-[10px] font-semibold leading-tight transition-all duration-200 active:scale-95 sm:text-xs ${
-      active
-        ? "bg-[color-mix(in_oklch,var(--nav-color)_14%,white)] text-[var(--nav-color)]"
-        : "text-[var(--color-text-secondary)] hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--nav-color)_8%,white)] hover:text-[var(--nav-color)] dark:text-zinc-400"
-    }`;
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  const current = links.find((item) => isActivePath(pathname, item.href));
+  const navColor = current?.color ?? "var(--color-theme)";
 
   return (
-    <nav
-      className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-2"
-      aria-label="Navigation principale"
-    >
-      <ul className="mx-auto grid max-w-xl grid-cols-6 gap-1 rounded-[28px] border border-[var(--color-theme)]/12 bg-white/95 p-1.5 shadow-[0_6px_20px_rgba(0,0,0,0.07)] backdrop-blur-xl dark:border-zinc-800/90 dark:bg-zinc-950/90">
-        {links.map(({ href, label, icon: Icon, color }) => {
-          const active =
-            href === "/"
-              ? pathname === "/" || pathname === ""
-              : pathname.startsWith(href);
-          return (
-            <li key={href} style={{ "--nav-color": color } as React.CSSProperties}>
-              <Link href={href} className={itemClass(active)}>
-                <span className={`relative flex h-6 w-6 items-center justify-center rounded-full transition-colors ${
-                  active
-                    ? "bg-[var(--nav-color)] text-white"
-                    : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
-                }`}>
-                  <Icon active={active} />
-                  {href === "/" && pendingTasks > 0 && (
-                    <span className="absolute -right-0.5 -top-0.5 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold leading-none text-white ring-1 ring-white dark:ring-zinc-950">
-                      {pendingTasks > 9 ? "9+" : pendingTasks}
-                    </span>
-                  )}
-                </span>
-                <span className="truncate">{label}</span>
-              </Link>
-            </li>
-          );
-        })}
-        <li style={{ "--nav-color": "var(--color-theme)" } as React.CSSProperties}>
-          <button
-            type="button"
-            onClick={togglePivot}
-            className={itemClass(showPivot)}
-          >
-            <span className={`flex h-6 w-6 items-center justify-center rounded-full transition-colors ${
-              showPivot
-                ? "bg-[var(--nav-color)] text-white"
-                : "bg-transparent group-hover:bg-white group-hover:text-[var(--nav-color)]"
-            }`}>
-              <TranslateIcon active={showPivot} />
-            </span>
-            <span className="truncate">Traduire</span>
-          </button>
-        </li>
-      </ul>
-    </nav>
+    <>
+      {open && (
+        <button
+          type="button"
+          aria-label="Fermer le menu principal"
+          className="fixed inset-0 z-40 cursor-default bg-transparent"
+          onClick={() => setOpen(false)}
+        />
+      )}
+      <nav
+        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10"
+        aria-label="Navigation principale"
+        style={{ "--main-nav-color": navColor } as React.CSSProperties}
+      >
+        <div className="relative mx-auto h-[86px] max-w-[26rem]">
+          <div
+            className={`pointer-events-none absolute left-1/2 top-1/2 h-60 w-60 -translate-x-1/2 -translate-y-[74%] rounded-full transition-all duration-300 ${
+              open ? "opacity-100 scale-100" : "opacity-0 scale-75"
+            }`}
+            style={{
+              background:
+                "radial-gradient(circle, color-mix(in oklch, var(--main-nav-color) 18%, white) 0%, transparent 66%)",
+            }}
+          />
+
+          <div className="absolute left-1/2 top-1/2 h-0 w-0 -translate-x-1/2 -translate-y-1/2">
+            {links.map((item, index) => {
+              const active = isActivePath(pathname, item.href);
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`group absolute flex w-[76px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
+                    open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+                  }`}
+                  style={{
+                    "--fan-color": item.color,
+                    transform: open
+                      ? `translate(calc(-50% + ${item.x}px), ${item.y}px) scale(1)`
+                      : "translate(-50%, 18px) scale(0.72)",
+                    transitionDelay: open ? `${index * 28}ms` : "0ms",
+                  } as React.CSSProperties}
+                  aria-hidden={!open}
+                  tabIndex={open ? 0 : -1}
+                >
+                  <span
+                    className={`relative flex h-12 w-12 items-center justify-center rounded-full border border-white/80 text-[var(--fan-color)] shadow-[0_10px_24px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 group-hover:-translate-y-1 ${
+                      active
+                        ? "bg-[var(--fan-color)] text-white"
+                        : "bg-white/92 group-hover:bg-[color-mix(in_oklch,var(--fan-color)_14%,white)]"
+                    }`}
+                  >
+                    <Icon active={active} />
+                    {item.href === "/" && pendingTasks > 0 && (
+                      <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+                        {pendingTasks > 9 ? "9+" : pendingTasks}
+                      </span>
+                    )}
+                  </span>
+                  <span className="rounded-full bg-white/85 px-2 py-0.5 text-[11px] font-semibold text-[var(--color-text-primary)] shadow-sm">
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
+
+            <button
+              type="button"
+              onClick={() => {
+                togglePivot();
+                setOpen(false);
+              }}
+              className={`group absolute flex w-[82px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
+                open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+              }`}
+              style={{
+                "--fan-color": "var(--color-theme)",
+                transform: open
+                  ? "translate(calc(-50% + 110px), -46px) scale(1)"
+                  : "translate(-50%, 18px) scale(0.72)",
+                transitionDelay: open ? "140ms" : "0ms",
+              } as React.CSSProperties}
+              aria-hidden={!open}
+              tabIndex={open ? 0 : -1}
+            >
+              <span
+                className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/80 text-[var(--fan-color)] shadow-[0_10px_24px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 group-hover:-translate-y-1 ${
+                  showPivot
+                    ? "bg-[var(--fan-color)] text-white"
+                    : "bg-white/92 group-hover:bg-[color-mix(in_oklch,var(--fan-color)_14%,white)]"
+                }`}
+              >
+                <TranslateIcon active={showPivot} />
+              </span>
+              <span className="rounded-full bg-white/85 px-2 py-0.5 text-[11px] font-semibold text-[var(--color-text-primary)] shadow-sm">
+                Traductions
+              </span>
+            </button>
+          </div>
+
+          <div className="absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/74 px-5 py-3 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl">
+            <div className="flex items-center justify-center">
+              <button
+                type="button"
+                onClick={() => setOpen((value) => !value)}
+                className="group relative flex h-16 w-16 items-center justify-center rounded-full border-[6px] border-white text-white shadow-[0_12px_28px_rgba(72,160,120,0.35)] transition-all duration-300 active:scale-95"
+                style={{ background: "var(--main-nav-color)" }}
+                aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={open}
+              >
+                <span
+                  className={`absolute h-8 w-1 rounded-full bg-current transition-transform duration-300 ${
+                    open ? "rotate-45" : "rotate-0"
+                  }`}
+                />
+                <span
+                  className={`absolute h-1 w-8 rounded-full bg-current transition-transform duration-300 ${
+                    open ? "rotate-45" : "rotate-0"
+                  }`}
+                />
+                <span className="sr-only">Menu</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </>
   );
 }
 
@@ -93,11 +197,9 @@ function HomeIcon({ active: _active }: { active: boolean }) {
 
 function FrIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
-      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
-      <path d="M14 2v6h6" />
-      <path d="M8 13h8M8 17h5" />
-    </svg>
+    <span className="text-[15px] font-black leading-none" aria-hidden>
+      FR
+    </span>
   );
 }
 
@@ -122,10 +224,8 @@ function LectureIcon({ active: _active }: { active: boolean }) {
 function GearIcon({ active: _active }: { active: boolean }) {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
-      <path d="M4 6h16M4 12h16M4 18h16" />
-      <circle cx="9" cy="6" r="2.5" fill="currentColor" stroke="none" />
-      <circle cx="15" cy="12" r="2.5" fill="currentColor" stroke="none" />
-      <circle cx="9" cy="18" r="2.5" fill="currentColor" stroke="none" />
+      <path d="M12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" />
+      <path d="M19.4 15a1.7 1.7 0 00.34 1.88l.04.04a2 2 0 01-2.83 2.83l-.04-.04A1.7 1.7 0 0015 19.4a1.7 1.7 0 00-1 1.55V21a2 2 0 01-4 0v-.06A1.7 1.7 0 009 19.4a1.7 1.7 0 00-1.88.34l-.04.04a2 2 0 01-2.83-2.83l.04-.04A1.7 1.7 0 004.6 15a1.7 1.7 0 00-1.55-1H3a2 2 0 010-4h.06A1.7 1.7 0 004.6 9a1.7 1.7 0 00-.34-1.88l-.04-.04a2 2 0 012.83-2.83l.04.04A1.7 1.7 0 009 4.6a1.7 1.7 0 001-1.55V3a2 2 0 014 0v.06A1.7 1.7 0 0015 4.6a1.7 1.7 0 001.88-.34l.04-.04a2 2 0 012.83 2.83l-.04.04A1.7 1.7 0 0019.4 9a1.7 1.7 0 001.55 1H21a2 2 0 010 4h-.06A1.7 1.7 0 0019.4 15z" />
     </svg>
   );
 }

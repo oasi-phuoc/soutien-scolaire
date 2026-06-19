@@ -1,5 +1,6 @@
 import { MainNav } from "@/components/MainNav";
 import { ProgressSyncProvider } from "@/components/ProgressSyncProvider";
+import { SectionBackground } from "@/components/SectionBackground";
 import { TranslationProvider } from "@/components/TranslationProvider";
 
 export default function MainLayout({
@@ -9,9 +10,12 @@ export default function MainLayout({
 }) {
   return (
     <TranslationProvider>
-      <div className="flex min-h-screen flex-col bg-[var(--background)] dark:bg-zinc-950">
+      <div className="relative flex min-h-screen flex-col overflow-x-hidden bg-transparent">
+        <SectionBackground />
         <ProgressSyncProvider />
-        {children}
+        <div className="relative z-10 flex min-h-screen flex-col">
+          {children}
+        </div>
         <MainNav />
       </div>
     </TranslationProvider>
