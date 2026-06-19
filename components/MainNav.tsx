@@ -33,6 +33,10 @@ const translateItem: NavItem = {
   y: -48,
 };
 
+const mainPrimaryItems = ["/", "/lecture", "/francais", "/mathematiques"]
+  .map((href) => links.find((item) => item.href === href)!);
+const settingsItem = links.find((item) => item.href === "/compte")!;
+
 function isActivePath(pathname: string, href: string) {
   return href === "/" ? pathname === "/" || pathname === "" : pathname.startsWith(href);
 }
@@ -178,7 +182,7 @@ export function MainNav() {
         data-main-nav
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
       >
-        <div className={`relative mx-auto ${lessonMode ? "h-[86px] max-w-[26rem]" : "h-[92px] max-w-[16rem]"}`}>
+        <div className={`relative mx-auto ${lessonMode ? "h-[86px] max-w-[26rem]" : "h-[92px] max-w-[28rem]"}`}>
           {lessonMode ? (
             <div
               className={`absolute inset-x-0 bottom-[94px] flex items-center justify-center gap-2 transition-all duration-250 ${
@@ -241,109 +245,33 @@ export function MainNav() {
               })}
             </div>
           ) : (
-          <>
-          <div
-            className={`pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-[74%] rounded-full transition-all duration-300 ${
-              open ? "opacity-100 scale-100" : "opacity-0 scale-75"
-            }`}
-            style={{
-              background:
-                "radial-gradient(circle, color-mix(in oklch, var(--main-nav-color) 18%, white) 0%, transparent 66%)",
-            }}
-          />
-
-          <div className="absolute left-1/2 top-1/2 h-0 w-0 -translate-x-1/2 -translate-y-1/2">
-            {open && menuItems.map((item, index) => (
-              <span
-                key={`line-${item.href}`}
-                className="pointer-events-none absolute left-0 top-0 h-px origin-left border-t border-dashed border-[var(--main-nav-color)]/45"
-                style={{
-                  width: Math.hypot(item.x, item.y),
-                  transform: `rotate(${Math.atan2(item.y, item.x)}rad)`,
-                  transitionDelay: `${index * 28}ms`,
+            <div
+              className={`absolute inset-x-0 bottom-[98px] flex items-center justify-center gap-4 transition-all duration-300 ${
+                open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+              }`}
+              aria-hidden={!open}
+            >
+              <SecondaryMenuLink item={settingsItem} open={open} />
+              <button
+                type="button"
+                aria-label={translateItem.label}
+                tabIndex={open ? 0 : -1}
+                onClick={() => {
+                  togglePivot();
+                  setOpen(false);
                 }}
-              />
-            ))}
-            {menuItems.map((item, index) => {
-              const active = isActivePath(pathname, item.href);
-              const Icon = item.icon;
-              const isTranslate = item.href === translateItem.href;
-              const content = (
-                <>
-                  <span
-                    className={`relative flex h-12 w-12 items-center justify-center rounded-full border border-white/80 text-[var(--fan-color)] shadow-[0_10px_24px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 group-hover:-translate-y-1 ${
-                      (active || (isTranslate && showPivot))
-                        ? "bg-[var(--fan-color)] text-white"
-                        : "bg-white/92 group-hover:bg-[color-mix(in_oklch,var(--fan-color)_14%,white)]"
-                    }`}
-                  >
-                    <Icon active={active || (isTranslate && showPivot)} />
-                    {item.href === "/" && pendingTasks > 0 && (
-                      <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
-                        {pendingTasks > 9 ? "9+" : pendingTasks}
-                      </span>
-                    )}
-                  </span>
-                  <span className="rounded-full bg-white/88 px-2 py-0.5 text-[11px] font-semibold text-[var(--color-text-primary)] shadow-sm">
-                    {item.label}
-                  </span>
-                </>
-              );
-
-              if (isTranslate) {
-                return (
-                  <button
-                    key={item.href}
-                    type="button"
-                    onClick={() => {
-                      togglePivot();
-                      setOpen(false);
-                    }}
-                    className={`group absolute flex w-[86px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
-                      open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-                    }`}
-                    style={{
-                      "--fan-color": navColor,
-                      transform: open
-                        ? `translate(calc(-50% + ${item.x}px), ${item.y}px) scale(1)`
-                        : "translate(-50%, 18px) scale(0.72)",
-                      transitionDelay: open ? `${index * 28}ms` : "0ms",
-                    } as React.CSSProperties}
-                    aria-hidden={!open}
-                    tabIndex={open ? 0 : -1}
-                  >
-                    {content}
-                  </button>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`group absolute flex w-[76px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
-                    open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-                  }`}
-                  style={{
-                    "--fan-color": navColor,
-                    transform: open
-                      ? `translate(calc(-50% + ${item.x}px), ${item.y}px) scale(1)`
-                      : "translate(-50%, 18px) scale(0.72)",
-                    transitionDelay: open ? `${index * 28}ms` : "0ms",
-                  } as React.CSSProperties}
-                  aria-hidden={!open}
-                  tabIndex={open ? 0 : -1}
-                >
-                  {content}
-                </Link>
-              );
-            })}
-          </div>
-          </>
+                className="group flex flex-col items-center gap-1"
+              >
+                <span className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/90 shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-transform group-hover:-translate-y-1 ${showPivot ? "bg-[var(--main-nav-color)] text-white" : "bg-white/95 text-[var(--main-nav-color)]"}`}>
+                  <TranslateIcon active={showPivot} />
+                </span>
+                <span className="text-[10px] font-semibold text-[var(--color-text-primary)]">Traductions</span>
+              </button>
+            </div>
           )}
 
-          <div className={`absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/78 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl ${lessonMode ? "px-3 py-3" : "mx-auto w-24 bg-transparent p-0 shadow-none backdrop-blur-none"}`}>
-            <div className={lessonMode ? "grid grid-cols-5 items-center gap-2" : "flex items-center justify-center"}>
+          <div className="absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/78 px-3 py-3 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl">
+            <div className="grid grid-cols-5 items-center gap-2">
               {lessonMode ? (
                 <>
                   {actions.back.available ? (
@@ -354,7 +282,10 @@ export function MainNav() {
                   ) : <span aria-hidden />}
                 </>
               ) : (
-                null
+                <>
+                  <MainSectionButton item={mainPrimaryItems[0]} pathname={pathname} pendingTasks={pendingTasks} />
+                  <MainSectionButton item={mainPrimaryItems[1]} pathname={pathname} />
+                </>
               )}
               <button
                 type="button"
@@ -386,13 +317,57 @@ export function MainNav() {
                   ) : <span aria-hidden />}
                 </>
               ) : (
-                null
+                <>
+                  <MainSectionButton item={mainPrimaryItems[2]} pathname={pathname} />
+                  <MainSectionButton item={mainPrimaryItems[3]} pathname={pathname} />
+                </>
               )}
             </div>
           </div>
         </div>
       </nav>
     </>
+  );
+}
+
+function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem; pathname: string; pendingTasks?: number }) {
+  const Icon = item.icon;
+  const active = isActivePath(pathname, item.href)
+    || (item.href === "/francais" && pathname.startsWith("/communication"))
+    || (item.href === "/mathematiques" && pathname.startsWith("/placement"));
+  return (
+    <Link
+      href={item.href}
+      aria-label={item.label}
+      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-transform hover:-translate-y-0.5 active:scale-95"
+    >
+      <span className={`relative flex h-9 w-9 items-center justify-center rounded-full shadow-sm transition-colors ${active ? "bg-[var(--main-nav-color)] text-white" : "bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] group-hover:bg-white"}`}>
+        <Icon active={active} />
+        {item.href === "/" && pendingTasks > 0 && (
+          <span className="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+            {pendingTasks > 9 ? "9+" : pendingTasks}
+          </span>
+        )}
+      </span>
+      <span className="max-w-full truncate">{item.label}</span>
+    </Link>
+  );
+}
+
+function SecondaryMenuLink({ item, open }: { item: NavItem; open: boolean }) {
+  const Icon = item.icon;
+  return (
+    <Link
+      href={item.href}
+      aria-label={item.label}
+      tabIndex={open ? 0 : -1}
+      className="group flex flex-col items-center gap-1"
+    >
+      <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/90 bg-white/95 text-[var(--main-nav-color)] shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-transform group-hover:-translate-y-1">
+        <Icon active={false} />
+      </span>
+      <span className="text-[10px] font-semibold text-[var(--color-text-primary)]">{item.label}</span>
+    </Link>
   );
 }
 
