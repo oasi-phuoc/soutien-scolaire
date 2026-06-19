@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Geist_Mono } from "next/font/google";
+import { OfflineProvider } from "@/components/OfflineProvider";
 import "./globals.css";
 
 const nunito = Nunito({
@@ -36,6 +37,7 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${geistMono.variable} antialiased`}
       >
+        <OfflineProvider />
         {children}
       </body>
     </html>

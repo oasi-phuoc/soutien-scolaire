@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { loadProgress, saveProgress, MATH_PROGRESS_KEY } from "@/lib/progress/math-progress";
 import { mergeProgress } from "@/lib/progress/mergeProgress";
 import { loadProgressFromCloud, syncProgressToCloud, touchActivityAction } from "@/app/actions/progress";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { backupProgress, ensureProgressBackup } from "@/lib/offline/progress-backup";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
+
+const PENDING_SYNC_KEY = "soutien-pending-cloud-sync-v1";
 
 function restoreSubKeys(p: StoredProgressV1) {
   if (p.commProgress) {
@@ -24,22 +27,72 @@ function debounce<T extends unknown[]>(fn: (...args: T) => void, ms: number) {
   };
 }
 
+function queueSync(progress: StoredProgressV1) {
+  localStorage.setItem(PENDING_SYNC_KEY, JSON.stringify(progress));
+  void backupProgress(progress).catch(() => {});
+  window.dispatchEvent(new CustomEvent("progress-sync-state", { detail: "pending" }));
+}
+
+function pendingProgress(): StoredProgressV1 | null {
+  try {
+    const raw = localStorage.getItem(PENDING_SYNC_KEY);
+    return raw ? JSON.parse(raw) as StoredProgressV1 : null;
+  } catch {
+    return null;
+  }
+}
+
 async function doSync(progress: StoredProgressV1) {
-  const result = await syncProgressToCloud(progress);
-  if (!result.ok) {
-    console.error("[ProgressSync] sync failed:", result.error);
+  queueSync(progress);
+  if (!navigator.onLine) return false;
+  try {
+    const result = await syncProgressToCloud(progress);
+    if (!result.ok) {
+      console.error("[ProgressSync] sync failed:", result.error);
+      return false;
+    }
+    localStorage.removeItem(PENDING_SYNC_KEY);
+    window.dispatchEvent(new CustomEvent("progress-sync-state", { detail: "synced" }));
+    return true;
+  } catch (error) {
+    console.error("[ProgressSync] network unavailable:", error);
+    return false;
   }
 }
 
 export function ProgressSyncProvider() {
   const syncedRef = useRef(false);
+  const [storageReady, setStorageReady] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+    const mirrorProgress = (event: Event) => {
+      const progress = (event as CustomEvent<StoredProgressV1>).detail ?? loadProgress();
+      void backupProgress(progress).catch(() => {});
+    };
+    window.addEventListener("progress-saved", mirrorProgress);
+    ensureProgressBackup().then((restored) => {
+      if (cancelled) return;
+      if (restored) {
+        window.location.reload();
+        return;
+      }
+      setStorageReady(true);
+    }).catch(() => setStorageReady(true));
+    return () => {
+      cancelled = true;
+      window.removeEventListener("progress-saved", mirrorProgress);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!storageReady) return;
     const supabase = createSupabaseBrowserClient();
     if (!supabase) return;
 
-    // On mount: check if user is logged in, then sync cloud ↔ local
-    supabase.auth.getUser().then(async ({ data: { user } }) => {
+    const initialSync = async () => {
+      if (!navigator.onLine) return;
+      const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
       touchActivityAction().catch(() => {}); // update last seen immediately
       if (syncedRef.current) return;
@@ -57,7 +110,8 @@ export function ProgressSyncProvider() {
         // First login or no cloud data yet — push local progress to cloud
         doSync(localProgress);
       }
-    });
+    };
+    initialSync().catch(() => {});
 
     // Listen for auth state changes (login/logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -78,9 +132,11 @@ export function ProgressSyncProvider() {
 
     // Debounced sync when progress is saved locally (custom event from saveProgress)
     const debouncedSync = debounce(async (e: Event) => {
+      const progress = (e as CustomEvent).detail ?? loadProgress();
+      queueSync(progress);
+      if (!navigator.onLine) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
-      const progress = (e as CustomEvent).detail ?? loadProgress();
       doSync(progress);
     }, 3000);
 
@@ -88,6 +144,7 @@ export function ProgressSyncProvider() {
 
     // Sync when tab regains focus or visibility (handles multi-tab + mobile background tabs)
     const handleVisible = debounce(async () => {
+      if (!navigator.onLine) return;
       const user = (await supabase.auth.getUser()).data.user;
       if (!user) return;
       touchActivityAction().catch(() => {});
@@ -103,16 +160,26 @@ export function ProgressSyncProvider() {
       if (document.visibilityState === "visible") handleVisible();
     };
 
+    const handleOnline = async () => {
+      const user = (await supabase.auth.getUser()).data.user;
+      if (!user) return;
+      const queued = pendingProgress();
+      await doSync(queued ?? loadProgress());
+      touchActivityAction().catch(() => {});
+    };
+
     window.addEventListener("focus", handleVisible);
+    window.addEventListener("app-online", handleOnline);
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       subscription.unsubscribe();
       window.removeEventListener("progress-saved", debouncedSync);
       window.removeEventListener("focus", handleVisible);
+      window.removeEventListener("app-online", handleOnline);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [storageReady]);
 
   return null;
 }

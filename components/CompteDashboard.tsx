@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { updateRemotePivotLang, changePasswordAction } from "@/app/actions/account";
 import { signOutAction } from "@/app/actions/auth";
 import { syncProgressToCloud } from "@/app/actions/progress";
+import { OfflineSettings } from "@/components/OfflineSettings";
 import { SupabaseConfigHint } from "@/components/SupabaseConfigHint";
 import { PIVOT_LANGS, type PivotCode } from "@/lib/pivot-langs";
 import { loadProgress, saveProgress, setLevel } from "@/lib/progress/math-progress";
@@ -287,6 +288,8 @@ export function CompteDashboard({
             <SupabaseConfigHint />
           </div>
         )}
+
+        <OfflineSettings />
 
         {supabaseConfigured && user && (
           <section aria-labelledby="pwd-heading">

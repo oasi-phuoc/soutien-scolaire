@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#5a9e78" />
+    <title>LearnUp - Hors connexion</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { min-height: 100vh; margin: 0; display: grid; place-items: center; padding: 24px; color: #1a2332; background: linear-gradient(180deg, #eef8f2, #d6eddf); font-family: "Century Gothic", system-ui, sans-serif; }
+      main { width: min(100%, 360px); text-align: center; }
+      .icon { display: grid; width: 64px; height: 64px; margin: 0 auto 20px; place-items: center; border-radius: 50%; color: white; background: #5a9e78; }
+      h1 { margin: 0 0 10px; font-size: 24px; }
+      p { margin: 0; color: #526476; line-height: 1.55; }
+      button { width: 52px; height: 52px; margin-top: 24px; border: 0; border-radius: 50%; color: white; background: #5a9e78; font-size: 24px; cursor: pointer; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="icon" aria-hidden="true">!</div>
+      <h1>Hors connexion</h1>
+      <p>Cette page n'a pas encore ete enregistree sur cet appareil. Reconnectez-vous une fois pour la rendre disponible hors ligne.</p>
+      <button type="button" aria-label="Reessayer" onclick="location.reload()">&#8635;</button>
+    </main>
+  </body>
+</html>
