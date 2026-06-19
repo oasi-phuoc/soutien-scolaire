@@ -7,6 +7,8 @@ import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { useTranslation } from "@/components/TranslationProvider";
 
 type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
+type ActionKind = "back" | "refresh" | "validate" | "next";
+type ActionAvailability = Record<ActionKind, { available: boolean; disabled: boolean }>;
 type NavItem = {
   href: string;
   label: string;
@@ -46,20 +48,51 @@ function isMainSectionPage(pathname: string) {
   return ["", "/", "/lecture", "/francais", "/mathematiques", "/compte", "/communication"].includes(pathname);
 }
 
-function triggerLegacyAction(kind: "back" | "refresh" | "validate" | "next", fallback: () => void) {
-  if (typeof document === "undefined") return fallback();
-  const candidates = Array.from(document.querySelectorAll<HTMLButtonElement>("button"));
-  const tests: Record<typeof kind, RegExp[]> = {
-    back: [/^retour\b/i, /^←\s*retour\b/i],
-    refresh: [/recommencer/i, /refresh/i, /actualiser/i],
-    validate: [/valider/i],
-    next: [/suivant/i, /terminer/i],
+const emptyActionAvailability: ActionAvailability = {
+  back: { available: false, disabled: true },
+  refresh: { available: false, disabled: true },
+  validate: { available: false, disabled: true },
+  next: { available: false, disabled: true },
+};
+
+function normalizedLabel(button: HTMLButtonElement) {
+  return `${button.getAttribute("aria-label") ?? ""} ${button.textContent ?? ""}`
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
+function getLegacyActionButton(kind: ActionKind) {
+  if (typeof document === "undefined") return undefined;
+  const tests: Record<ActionKind, RegExp[]> = {
+    back: [/\bretour\b/],
+    refresh: [/recommencer/, /reinitialiser/, /refaire/, /refresh/, /actualiser/],
+    validate: [/valider/],
+    next: [/suivant/, /terminer/],
   };
-  const button = candidates.find((candidate) => {
+  const candidates = Array.from(document.querySelectorAll<HTMLButtonElement>("button")).reverse();
+  return candidates.find((candidate) => {
     if (candidate.closest("[data-main-nav]")) return false;
-    const label = `${candidate.getAttribute("aria-label") ?? ""} ${candidate.textContent ?? ""}`.trim();
-    return tests[kind].some((rx) => rx.test(label));
+    if (!candidate.closest(".hidden.fixed.bottom-0")) return false;
+    return tests[kind].some((rx) => rx.test(normalizedLabel(candidate)));
   });
+}
+
+function readActionAvailability(): ActionAvailability {
+  const states = { ...emptyActionAvailability };
+  (Object.keys(states) as ActionKind[]).forEach((kind) => {
+    const button = getLegacyActionButton(kind);
+    states[kind] = {
+      available: !!button && !button.classList.contains("invisible") && !button.classList.contains("hidden"),
+      disabled: !button || button.disabled || button.getAttribute("aria-disabled") === "true",
+    };
+  });
+  return states;
+}
+
+function triggerLegacyAction(kind: ActionKind, fallback: () => void) {
+  const button = getLegacyActionButton(kind);
   if (button) {
     button.click();
     return;
@@ -73,6 +106,7 @@ export function MainNav() {
   const { showPivot, togglePivot } = useTranslation();
   const [open, setOpen] = useState(false);
   const [pendingTasks, setPendingTasks] = useState(0);
+  const [actions, setActions] = useState<ActionAvailability>(emptyActionAvailability);
 
   useEffect(() => {
     getPendingTaskCountAction().then(setPendingTasks).catch(() => {});
@@ -90,6 +124,31 @@ export function MainNav() {
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
+
+  useEffect(() => {
+    if (isMainSectionPage(pathname) || pathname.startsWith("/admin")) return;
+
+    let frame = 0;
+    const syncActions = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const next = readActionAvailability();
+        setActions((current) => JSON.stringify(current) === JSON.stringify(next) ? current : next);
+      });
+    };
+    syncActions();
+    const observer = new MutationObserver(syncActions);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["disabled", "aria-disabled", "class"],
+    });
+    return () => {
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   const currentHref = pathname.startsWith("/communication")
     ? "/francais"
@@ -120,6 +179,69 @@ export function MainNav() {
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
       >
         <div className={`relative mx-auto ${lessonMode ? "h-[86px] max-w-[26rem]" : "h-[92px] max-w-[16rem]"}`}>
+          {lessonMode ? (
+            <div
+              className={`absolute inset-x-0 bottom-[94px] flex items-center justify-center gap-2 transition-all duration-250 ${
+                open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
+              }`}
+              aria-hidden={!open}
+            >
+              {menuItems.map((item, index) => {
+                const Icon = item.icon;
+                const isTranslate = item.href === translateItem.href;
+                const selected = isTranslate && showPivot;
+                const icon = (
+                  <span
+                    className={`relative flex h-11 w-11 items-center justify-center rounded-full border border-white/90 shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-1 ${
+                      selected
+                        ? "bg-[var(--main-nav-color)] text-white"
+                        : "bg-white/92 text-[var(--main-nav-color)] hover:bg-[color-mix(in_oklch,var(--main-nav-color)_14%,white)]"
+                    }`}
+                  >
+                    <Icon active={selected} />
+                    {item.href === "/" && pendingTasks > 0 && (
+                      <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+                        {pendingTasks > 9 ? "9+" : pendingTasks}
+                      </span>
+                    )}
+                  </span>
+                );
+
+                if (isTranslate) {
+                  return (
+                    <button
+                      key={item.href}
+                      type="button"
+                      aria-label={item.label}
+                      title={item.label}
+                      tabIndex={open ? 0 : -1}
+                      onClick={() => {
+                        togglePivot();
+                        setOpen(false);
+                      }}
+                      style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
+                    >
+                      {icon}
+                    </button>
+                  );
+                }
+
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    aria-label={item.label}
+                    title={item.label}
+                    tabIndex={open ? 0 : -1}
+                    style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
+                  >
+                    {icon}
+                  </Link>
+                );
+              })}
+            </div>
+          ) : (
+          <>
           <div
             className={`pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-[74%] rounded-full transition-all duration-300 ${
               open ? "opacity-100 scale-100" : "opacity-0 scale-75"
@@ -217,13 +339,19 @@ export function MainNav() {
               );
             })}
           </div>
+          </>
+          )}
 
           <div className={`absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/78 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl ${lessonMode ? "px-3 py-3" : "mx-auto w-24 bg-transparent p-0 shadow-none backdrop-blur-none"}`}>
             <div className={lessonMode ? "grid grid-cols-5 items-center gap-2" : "flex items-center justify-center"}>
               {lessonMode ? (
                 <>
-                  <ActionButton label="Retour" icon={<IconLeft />} onClick={() => triggerLegacyAction("back", () => router.back())} />
-                  <ActionButton label="Refresh" icon={<IconRefresh />} onClick={() => triggerLegacyAction("refresh", () => window.location.reload())} />
+                  {actions.back.available ? (
+                    <ActionButton label="Retour" icon={<IconLeft />} disabled={actions.back.disabled} onClick={() => triggerLegacyAction("back", () => router.back())} />
+                  ) : <span aria-hidden />}
+                  {actions.refresh.available ? (
+                    <ActionButton label="Refresh" icon={<IconRefresh />} disabled={actions.refresh.disabled} onClick={() => triggerLegacyAction("refresh", () => {})} />
+                  ) : <span aria-hidden />}
                 </>
               ) : (
                 null
@@ -250,8 +378,12 @@ export function MainNav() {
               </button>
               {lessonMode ? (
                 <>
-                  <ActionButton label="Valider" icon={<IconCheck />} onClick={() => triggerLegacyAction("validate", () => {})} />
-                  <ActionButton label="Suivant" icon={<IconRight />} onClick={() => triggerLegacyAction("next", () => {})} />
+                  {actions.validate.available ? (
+                    <ActionButton label="Valider" icon={<IconCheck />} disabled={actions.validate.disabled} onClick={() => triggerLegacyAction("validate", () => {})} />
+                  ) : <span aria-hidden />}
+                  {actions.next.available ? (
+                    <ActionButton label="Suivant" icon={<IconRight />} disabled={actions.next.disabled} onClick={() => triggerLegacyAction("next", () => {})} />
+                  ) : <span aria-hidden />}
                 </>
               ) : (
                 null
@@ -264,12 +396,13 @@ export function MainNav() {
   );
 }
 
-function ActionButton({ label, icon, onClick }: { label: string; icon: React.ReactNode; onClick: () => void }) {
+function ActionButton({ label, icon, onClick, disabled = false }: { label: string; icon: React.ReactNode; onClick: () => void; disabled?: boolean }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95"
+      disabled={disabled}
+      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
     >
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] shadow-sm transition-colors group-hover:bg-white">
         {icon}

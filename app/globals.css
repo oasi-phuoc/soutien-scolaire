@@ -124,6 +124,12 @@ body {
   --section-accent: #5a9e78;
 }
 
+.section-background-home {
+  background:
+    linear-gradient(180deg, #eef8f2 0%, #e5f4eb 44%, #d6eddf 100%),
+    #e5f5ec;
+}
+
 .section-background-lecture {
   --section-tint: #e6d9f7;
   --section-soft: #fbf8ff;
