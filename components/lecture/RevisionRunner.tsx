@@ -184,7 +184,7 @@ export function RevisionRunner({ data }: Props) {
       <div className="min-h-[280px]">{renderStep()}</div>
 
       {/* Fixed nav bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
+      <div className="hidden fixed bottom-0 left-0 right-0 bg-[var(--color-bg-primary)] z-40">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button

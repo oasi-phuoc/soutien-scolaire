@@ -138,7 +138,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
   const accentColor = tab === "geometry" ? "var(--color-accent-geo)" : "var(--color-accent-alg)";
 
   return (
-    <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
+    <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 pt-8 pb-32">
       <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-alg) 11%, white)" }}>
         <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-alg)]" aria-hidden>
           <svg width="108" height="108" viewBox="0 0 100 100" fill="none">
@@ -431,8 +431,8 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
         <div className="mt-2">
           <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
             <div className="flex items-center gap-3 px-4 pt-4 pb-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-amber-100 dark:bg-amber-900/30">
-                <span className="text-sm font-bold text-amber-600 dark:text-amber-400">TP</span>
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--color-accent-alg)]/15">
+                <span className="text-sm font-bold text-[var(--color-accent-alg)]">TP</span>
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-bold text-[var(--color-text-primary)]">Test de placement</p>
@@ -443,12 +443,12 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
                 className="flex min-h-[52px] cursor-pointer items-center gap-3 px-4 py-2.5 hover:bg-[var(--color-bg-secondary)] transition-colors"
                 onClick={() => router.push("/mathematiques/test-de-placement/statistiques")}
               >
-                <SubDot done={false} current={true} accent="#d97706" moduleLocked={false} />
+                <SubDot done={false} current={true} accent="var(--color-accent-alg)" moduleLocked={false} />
                 <div className="flex-1 min-w-0">
                   <span className="text-xs font-semibold text-[var(--color-text-secondary)]">TP</span>
                   <span className="ml-1.5 text-xs font-medium text-[var(--color-text-primary)]">Test et statistiques</span>
                 </div>
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "#d97706" }}>
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white" style={{ background: "var(--color-accent-alg)" }}>
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2"
                     strokeLinecap="round" aria-hidden>
                     <circle cx="11" cy="11" r="6.5" />

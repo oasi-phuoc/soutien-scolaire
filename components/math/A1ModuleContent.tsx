@@ -4973,7 +4973,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
 
       {/* ── Fixed bottom nav ──────────────────────────────────────────────────── */}
-      <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]${step === "eval" && !evalStarted && !evalSubmitted ? " hidden" : ""}`}>
+      <div className={`hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]${step === "eval" && !evalStarted && !evalSubmitted ? " hidden" : ""}`}>
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             {!(step === "eval" && evalSubmitted) ? (

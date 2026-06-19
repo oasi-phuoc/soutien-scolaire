@@ -182,7 +182,7 @@ export function CompteDashboard({
 
   return (
     <>
-      <main className="mx-auto w-full max-w-xl flex-1 space-y-8 px-4 py-6 pb-32">
+      <main className="mx-auto w-full max-w-xl flex-1 space-y-8 px-4 pt-8 pb-32">
         <div className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-4" style={{ background: "color-mix(in oklch, var(--color-theme) 11%, white)" }}>
           <div className="pointer-events-none absolute -bottom-3 -right-4 text-[var(--color-theme)]" aria-hidden>
             <svg width="108" height="90" viewBox="0 0 100 85" fill="none">

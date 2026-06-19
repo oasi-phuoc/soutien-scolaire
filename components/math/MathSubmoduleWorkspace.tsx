@@ -2663,7 +2663,7 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
       )}
 
       {/* Fixed bottom nav — hidden on eval_start announcement */}
-      {currentStep?.kind !== "eval_start" && <div className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
+      {currentStep?.kind !== "eval_start" && <div className="hidden fixed bottom-0 left-0 right-0 z-40 bg-[var(--color-bg-primary)]">
         <div className="border-t border-[var(--color-border-default)]">
           <div className="mx-auto flex max-w-xl items-center justify-between px-4 py-3">
             <button type="button" onClick={goBack}

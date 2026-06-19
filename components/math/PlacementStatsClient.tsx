@@ -84,7 +84,7 @@ function Chart({ history }: { history: TPAttempt[] }) {
         return (
           <g key={i}>
             <rect x={x - barW / 2} y={y} width={barW} height={baseY - y}
-              rx={4} fill="#d97706" opacity={0.2} />
+              rx={4} fill="var(--color-accent-alg)" opacity={0.2} />
             <text x={x} y={baseY + 14} textAnchor="middle" fontSize="9"
               fill="var(--color-text-secondary)">{dateLabel}</text>
           </g>
@@ -92,13 +92,13 @@ function Chart({ history }: { history: TPAttempt[] }) {
       })}
       {/* Evolution line */}
       {filledPoints.length > 1 && (
-        <path d={linePath} fill="none" stroke="#d97706" strokeWidth="2.5"
+        <path d={linePath} fill="none" stroke="var(--color-accent-alg)" strokeWidth="2.5"
           strokeLinejoin="round" strokeLinecap="round" />
       )}
       {/* Dots + score labels */}
       {filledPoints.map((p, i) => (
         <g key={i}>
-          <circle cx={p.x} cy={p.y} r={5} fill="#d97706" />
+          <circle cx={p.x} cy={p.y} r={5} fill="var(--color-accent-alg)" />
           <circle cx={p.x} cy={p.y} r={2.5} fill="var(--color-bg-primary)" />
           <text x={p.x} y={p.y - 9} textAnchor="middle" fontSize="11" fontWeight="700"
             fill="var(--color-text-primary)">{p.points}</text>
@@ -217,8 +217,8 @@ export function PlacementStatsClient() {
 
       {!ready ? null : history.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-amber-100 dark:bg-amber-900/30">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d97706" strokeWidth="1.8">
+          <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-[var(--color-accent-alg)]/15">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-alg)" strokeWidth="1.8">
               <path d="M18 20V10M12 20V4M6 20v-6" />
             </svg>
           </div>
@@ -230,7 +230,7 @@ export function PlacementStatsClient() {
             type="button"
             onClick={() => router.push("/mathematiques/test-de-placement")}
             className="mt-6 rounded-full px-5 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-80"
-            style={{ background: "#d97706" }}
+            style={{ background: "var(--color-accent-alg)" }}
           >
             Commencer le test
           </button>
@@ -242,7 +242,7 @@ export function PlacementStatsClient() {
             type="button"
             onClick={() => router.push("/mathematiques/test-de-placement")}
             className="w-full rounded-[var(--radius-lg)] py-3 text-sm font-bold text-white transition-opacity hover:opacity-80"
-            style={{ background: "#d97706" }}
+            style={{ background: "var(--color-accent-alg)" }}
           >
             {history.length === 0 ? "Faire le test" : "Refaire le test"}
           </button>
