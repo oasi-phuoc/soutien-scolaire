@@ -137,14 +137,14 @@ function VerbToggleView({ verbs, negation, buttonCols }: { verbs: VerbToggleVerb
   return (
     <div className="space-y-3">
       <div
-        className={buttonCols ? "grid gap-2" : "flex flex-wrap gap-2"}
+        className={buttonCols ? "grid gap-2" : "grid grid-cols-2 gap-2 sm:grid-cols-4"}
         style={buttonCols ? { gridTemplateColumns: `repeat(${buttonCols}, 1fr)` } : undefined}
       >
         {verbs.map((v, i) => (
           <button
             key={i}
             onClick={() => setSelectedIdx(i)}
-            className={`rounded-full px-3 py-1.5 font-medium transition-colors ${buttonCols ? "text-xs" : "text-sm"} ${
+            className={`min-h-10 w-full rounded-full px-3 py-1.5 text-center font-medium transition-colors ${buttonCols ? "text-xs" : "text-sm"} ${
               i === selectedIdx
                 ? "bg-[var(--color-accent-fr)] text-white"
                 : "border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:border-[var(--color-accent-fr)]"
@@ -545,12 +545,12 @@ function SelectorBlock({ block, pivot, showTrans }: {
   const [activeTab, setActiveTab] = useState(0);
   return (
     <div className="space-y-3">
-      <div className="flex flex-wrap gap-1.5">
+      <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
         {block.tabs.map((tab, i) => (
           <button
             key={i}
             onClick={() => setActiveTab(i)}
-            className={`rounded-lg px-3 py-1.5 text-sm font-bold transition-colors ${
+            className={`min-h-10 w-full rounded-lg px-3 py-1.5 text-center text-sm font-bold transition-colors ${
               activeTab === i
                 ? "bg-[var(--color-accent-fr)] text-white"
                 : "bg-[var(--color-bg-secondary)] text-[var(--color-text-primary)] hover:bg-[var(--color-accent-fr)]/20"
