@@ -255,17 +255,17 @@ export function MainNav() {
               <button
                 type="button"
                 aria-label={translateItem.label}
+                title={translateItem.label}
                 tabIndex={open ? 0 : -1}
                 onClick={() => {
                   togglePivot();
                   setOpen(false);
                 }}
-                className="group flex flex-col items-center gap-1"
+                className="group flex items-center justify-center"
               >
                 <span className={`flex h-12 w-12 items-center justify-center rounded-full border border-white/90 shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-transform group-hover:-translate-y-1 ${showPivot ? "bg-[var(--main-nav-color)] text-white" : "bg-white/95 text-[var(--main-nav-color)]"}`}>
                   <TranslateIcon active={showPivot} />
                 </span>
-                <span className="text-[10px] font-semibold text-[var(--color-text-primary)]">Traductions</span>
               </button>
             </div>
           )}
@@ -339,7 +339,8 @@ function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem
     <Link
       href={item.href}
       aria-label={item.label}
-      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-transform hover:-translate-y-0.5 active:scale-95"
+      title={item.label}
+      className="group flex min-w-0 items-center justify-center rounded-2xl px-1 py-1 text-[var(--main-nav-color)] transition-transform hover:-translate-y-0.5 active:scale-95"
     >
       <span className={`relative flex h-9 w-9 items-center justify-center rounded-full shadow-sm transition-colors ${active ? "bg-[var(--main-nav-color)] text-white" : "bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] group-hover:bg-white"}`}>
         <Icon active={active} />
@@ -349,7 +350,6 @@ function MainSectionButton({ item, pathname, pendingTasks = 0 }: { item: NavItem
           </span>
         )}
       </span>
-      <span className="max-w-full truncate">{item.label}</span>
     </Link>
   );
 }
@@ -360,13 +360,13 @@ function SecondaryMenuLink({ item, open }: { item: NavItem; open: boolean }) {
     <Link
       href={item.href}
       aria-label={item.label}
+      title={item.label}
       tabIndex={open ? 0 : -1}
-      className="group flex flex-col items-center gap-1"
+      className="group flex items-center justify-center"
     >
       <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/90 bg-white/95 text-[var(--main-nav-color)] shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-transform group-hover:-translate-y-1">
         <Icon active={false} />
       </span>
-      <span className="text-[10px] font-semibold text-[var(--color-text-primary)]">{item.label}</span>
     </Link>
   );
 }
@@ -377,12 +377,13 @@ function ActionButton({ label, icon, onClick, disabled = false }: { label: strin
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
+      aria-label={label}
+      title={label}
+      className="group flex min-w-0 items-center justify-center rounded-2xl px-1 py-1 text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
     >
       <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] shadow-sm transition-colors group-hover:bg-white">
         {icon}
       </span>
-      <span className="truncate">{label}</span>
     </button>
   );
 }
