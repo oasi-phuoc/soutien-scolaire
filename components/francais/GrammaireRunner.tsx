@@ -1498,11 +1498,15 @@ function WriteExercise({
     if (!exercise.verbPool?.length) return [];
     return shuffle([...exercise.verbPool]).slice(0, exercise.verbPoolSize ?? 5);
   });
-  const [displayedPrompts] = useState<string[]>(() => {
-    if (exercise.promptPool?.length) {
-      return shuffle([...exercise.promptPool]).slice(0, exercise.promptPoolSize ?? 5);
+  const [[resolvedWriteImage, displayedPrompts]] = useState<[string | null, string[]]>(() => {
+    if (exercise.imagePool?.length) {
+      const group = exercise.imagePool[Math.floor(Math.random() * exercise.imagePool.length)]!;
+      return [group.image, shuffle([...group.promptPool]).slice(0, exercise.promptPoolSize ?? 5)];
     }
-    return exercise.prompts ?? [];
+    if (exercise.promptPool?.length) {
+      return [null, shuffle([...exercise.promptPool]).slice(0, exercise.promptPoolSize ?? 5)];
+    }
+    return [null, exercise.prompts ?? []];
   });
   const promptCount = activeVerbs.length > 0 ? activeVerbs.length : displayedPrompts.length;
   const [inputs, setInputs] = useState<string[]>(() => new Array(promptCount).fill(""));
@@ -1603,6 +1607,13 @@ function WriteExercise({
       )}
 
       <p className="whitespace-pre-line text-sm text-[var(--color-text-secondary)]">{exercise.instruction}</p>
+
+      {resolvedWriteImage && (
+        <div className="overflow-hidden rounded-xl border border-[var(--color-border)]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={resolvedWriteImage} alt="Description" className="w-full object-contain max-h-64" />
+        </div>
+      )}
 
       {checking && (
         <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Correction en cours…</p>
