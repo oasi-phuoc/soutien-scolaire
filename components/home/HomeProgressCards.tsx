@@ -77,6 +77,7 @@ function CardShell({
   continuePath,
   continueLabel,
   subProgress,
+  illustration,
 }: {
   href: string;
   accentColor: string;
@@ -89,13 +90,19 @@ function CardShell({
   continuePath?: string | null;
   continueLabel?: string | null;
   subProgress?: Array<{ label: string; done: number; total: number }>;
+  illustration?: React.ReactNode;
 }) {
   return (
     <div className="overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)]">
       <Link href={href} className="block transition-colors hover:bg-[var(--color-bg-secondary)]/40">
         {/* Header section with colored fill */}
-        <div className="px-4 py-3" style={{ background: `color-mix(in oklch, ${accentColor} 10%, transparent)` }}>
-          <div className="flex items-center gap-3">
+        <div className="relative overflow-hidden px-4 py-3" style={{ background: `color-mix(in oklch, ${accentColor} 10%, transparent)` }}>
+          {illustration && (
+            <div className="pointer-events-none absolute -bottom-3 -right-3" style={{ color: accentColor }} aria-hidden>
+              {illustration}
+            </div>
+          )}
+          <div className="relative z-10 flex items-center gap-3">
             <span
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
               style={{ background: `${accentColor}22` }}
@@ -112,7 +119,7 @@ function CardShell({
               <path d="M9 18l6-6-6-6" />
             </svg>
           </div>
-        </div>
+        </div>{/* end header */}
         {/* Progress section */}
         <div className="px-4 pb-3 pt-2">
           <AppProgressBar value={pct} color={accentColor} height={4} />
@@ -235,6 +242,7 @@ export function HomeProgressCards() {
         href="/lecture"
         accentColor="var(--color-accent-lecture)"
         icon={<BookIcon />}
+        illustration={<LectureIllus />}
         label="Lecture"
         title="Alphabétisation"
         completedText={`${lectureCompleted} lettres`}
@@ -247,6 +255,7 @@ export function HomeProgressCards() {
         href="/francais"
         accentColor="var(--color-accent-fr)"
         icon={<FrIcon />}
+        illustration={<FrancaisIllus />}
         label="Français"
         title="Compréhension et expression"
         completedText={`${frDone} leçon${frDone !== 1 ? "s" : ""} terminée${frDone !== 1 ? "s" : ""}`}
@@ -262,6 +271,7 @@ export function HomeProgressCards() {
         href="/mathematiques"
         accentColor="var(--color-accent-alg)"
         icon={<MathIcon />}
+        illustration={<MathsIllus />}
         label="Mathématiques"
         title="Algèbre & Géométrie"
         completedText={`${completedMath} leçon${completedMath !== 1 ? "s" : ""} terminée${completedMath !== 1 ? "s" : ""}`}
@@ -300,6 +310,50 @@ function MathIcon() {
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <path d="M8 8v8M12 8v8M16 8v8M8 12h8" />
+    </svg>
+  );
+}
+
+function LectureIllus() {
+  return (
+    <svg width="88" height="80" viewBox="0 0 110 100" fill="none">
+      <path d="M55 20 C40 16 20 18 8 24 L8 80 C20 74 40 72 55 76 Z" fill="currentColor" opacity="0.22"/>
+      <path d="M55 20 C70 16 90 18 102 24 L102 80 C90 74 70 72 55 76 Z" fill="currentColor" opacity="0.32"/>
+      <line x1="55" y1="20" x2="55" y2="76" stroke="currentColor" strokeWidth="2" opacity="0.38"/>
+      <line x1="18" y1="36" x2="48" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="18" y1="47" x2="48" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="18" y1="58" x2="38" y2="56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="63" y1="36" x2="93" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="63" y1="47" x2="93" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="63" y1="58" x2="80" y2="56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+    </svg>
+  );
+}
+
+function FrancaisIllus() {
+  return (
+    <svg width="84" height="84" viewBox="0 0 100 100" fill="none">
+      <rect x="10" y="10" width="60" height="76" rx="8" fill="currentColor" opacity="0.18"/>
+      <rect x="10" y="10" width="60" height="76" rx="8" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.28"/>
+      <line x1="22" y1="30" x2="58" y2="30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+      <line x1="22" y1="42" x2="58" y2="42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+      <line x1="22" y1="54" x2="50" y2="54" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+      <line x1="22" y1="66" x2="55" y2="66" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+      <path d="M70 76 L88 20 L96 28 Z" fill="currentColor" opacity="0.48"/>
+      <path d="M68 79 L72 73 L88 20 L82 14 Z" fill="currentColor" opacity="0.32"/>
+    </svg>
+  );
+}
+
+function MathsIllus() {
+  return (
+    <svg width="84" height="84" viewBox="0 0 100 100" fill="none">
+      <circle cx="76" cy="28" r="20" fill="currentColor" opacity="0.18"/>
+      <circle cx="76" cy="28" r="13" stroke="currentColor" strokeWidth="2.5" fill="none" opacity="0.35"/>
+      <path d="M10 88 L38 38 L66 88 Z" fill="currentColor" opacity="0.18"/>
+      <path d="M10 88 L38 38 L66 88 Z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35"/>
+      <line x1="78" y1="62" x2="78" y2="88" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" opacity="0.48"/>
+      <line x1="65" y1="75" x2="91" y2="75" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" opacity="0.48"/>
     </svg>
   );
 }
