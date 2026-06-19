@@ -24,6 +24,10 @@ package-lock.json
 # projet natif iOS laissé de côté pour le moment
 /ios/
 
+# fichiers locaux générés par Android Studio
+/android/.idea/
+/android/gradle/gradle-daemon-jvm.properties
+
 # misc
 .DS_Store
 *.pem
