@@ -139,13 +139,21 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <header className="space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-alg)]">
-          Mathématiques
-        </p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          Algèbre et géométrie
-        </h1>
+      <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-alg) 11%, white)" }}>
+        <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-alg)]" aria-hidden>
+          <svg width="108" height="108" viewBox="0 0 100 100" fill="none">
+            <circle cx="76" cy="28" r="20" fill="currentColor" opacity="0.18"/>
+            <circle cx="76" cy="28" r="13" stroke="currentColor" strokeWidth="2.5" fill="none" opacity="0.35"/>
+            <path d="M10 88 L38 38 L66 88 Z" fill="currentColor" opacity="0.18"/>
+            <path d="M10 88 L38 38 L66 88 Z" stroke="currentColor" strokeWidth="2" fill="none" opacity="0.35"/>
+            <line x1="78" y1="62" x2="78" y2="88" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="65" y1="75" x2="91" y2="75" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" opacity="0.48"/>
+          </svg>
+        </div>
+        <div className="relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-alg)]">Mathématiques</p>
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Algèbre et géométrie</h1>
+        </div>
       </header>
 
       {/* Tab toggle */}

@@ -394,9 +394,24 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
   return (
     <main className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <header className="space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Compréhension et expression</h1>
+      <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-fr) 11%, white)" }}>
+        <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-fr)]" aria-hidden>
+          <svg width="108" height="108" viewBox="0 0 100 100" fill="none">
+            <rect x="10" y="10" width="60" height="76" rx="8" fill="currentColor" opacity="0.18"/>
+            <rect x="10" y="10" width="60" height="76" rx="8" stroke="currentColor" strokeWidth="1.5" fill="none" opacity="0.28"/>
+            <line x1="22" y1="30" x2="58" y2="30" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+            <line x1="22" y1="42" x2="58" y2="42" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+            <line x1="22" y1="54" x2="50" y2="54" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+            <line x1="22" y1="66" x2="55" y2="66" stroke="currentColor" strokeWidth="2" strokeLinecap="round" opacity="0.38"/>
+            <path d="M70 76 L88 20 L96 28 Z" fill="currentColor" opacity="0.48"/>
+            <path d="M68 79 L72 73 L88 20 L82 14 Z" fill="currentColor" opacity="0.32"/>
+            <ellipse cx="68" cy="81" rx="3" ry="2" fill="currentColor" opacity="0.48"/>
+          </svg>
+        </div>
+        <div className="relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-fr)]">Français</p>
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Compréhension et expression</h1>
+        </div>
       </header>
 
       {/* Tab toggle */}

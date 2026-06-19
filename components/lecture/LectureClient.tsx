@@ -343,11 +343,24 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
 
   return (
     <div className="mx-auto w-full max-w-xl flex-1 space-y-6 px-4 py-8 pb-32">
-      <header className="space-y-1">
-        <p className="text-xs font-medium uppercase tracking-wide text-[var(--color-accent-lecture)]">
-          Lecture
-        </p>
-        <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Alphabétisation</h1>
+      <header className="relative overflow-hidden rounded-[var(--radius-lg)] px-5 py-5" style={{ background: "color-mix(in oklch, var(--color-accent-lecture) 11%, white)" }}>
+        <div className="pointer-events-none absolute -bottom-4 -right-4 text-[var(--color-accent-lecture)]" aria-hidden>
+          <svg width="120" height="108" viewBox="0 0 110 100" fill="none">
+            <path d="M55 20 C40 16 20 18 8 24 L8 80 C20 74 40 72 55 76 Z" fill="currentColor" opacity="0.22"/>
+            <path d="M55 20 C70 16 90 18 102 24 L102 80 C90 74 70 72 55 76 Z" fill="currentColor" opacity="0.32"/>
+            <line x1="55" y1="20" x2="55" y2="76" stroke="currentColor" strokeWidth="2" opacity="0.38"/>
+            <line x1="18" y1="36" x2="48" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="18" y1="47" x2="48" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="18" y1="58" x2="38" y2="56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="63" y1="36" x2="93" y2="34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="63" y1="47" x2="93" y2="45" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+            <line x1="63" y1="58" x2="80" y2="56" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.48"/>
+          </svg>
+        </div>
+        <div className="relative z-10">
+          <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-lecture)]">Lecture</p>
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Alphabétisation</h1>
+        </div>
       </header>
 
       {/* Tab toggle */}
