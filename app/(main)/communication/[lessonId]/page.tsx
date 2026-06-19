@@ -1,8 +1,8 @@
-import { CommunicationLessonPage } from "@/components/communication/CommunicationLessonPage";
+import { CommunicationRunner } from "@/components/communication/CommunicationRunner";
 
 type Props = { params: Promise<{ lessonId: string }> };
 
 export default async function CommLessonRoute({ params }: Props) {
   const { lessonId } = await params;
-  return <CommunicationLessonPage lessonId={lessonId} />;
+  return <CommunicationRunner lessonId={lessonId} />;
 }

@@ -7,10 +7,10 @@ import { COMM_MODULES } from "@/lib/curriculum/communication-data";
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
-export function CommModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
+export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ A1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ P1: true });
 
   useEffect(() => {
     try {
@@ -128,10 +128,10 @@ export function CommModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   );
 }
 
-export function CommunicationClient({ isAdmin = false }: { isAdmin?: boolean }) {
+export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ A1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ P1: true });
 
   useEffect(() => {
     try {

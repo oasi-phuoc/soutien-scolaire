@@ -2,24 +2,26 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
 import {
-  COMM_A1_1_SE_PRESENTER,
-  type CommLesson,
-  type CommTheoryBlock,
-} from "@/lib/curriculum/content/communication/comm-a1-1-se-presenter";
+  COMMUNICATION_P1_1,
+  type CommunicationLesson,
+  type CommunicationTheoryBlock,
+} from "@/lib/curriculum/content/communication/communication-p1-1";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
-const LESSONS: Record<string, CommLesson> = {
-  "A1-1": COMM_A1_1_SE_PRESENTER,
+const LESSONS: Record<string, CommunicationLesson> = {
+  "P1-1": COMMUNICATION_P1_1,
+  "A1-1": COMMUNICATION_P1_1,
 };
 
 type Phase = "theory" | "exercises" | "score";
 
 // ——— Theory block renderers ———
 
-function TheoryBlock({ block }: { block: CommTheoryBlock }) {
+function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
   switch (block.type) {
     case "heading":
       return (
@@ -237,7 +239,12 @@ function MCQExercise({
 
 // ——— Main component ———
 
-export function CommunicationLessonPage({ lessonId }: { lessonId: string }) {
+export function CommunicationRunner({ lessonId }: { lessonId: string }) {
+  if (lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
+  return <CommunicationLessonRunner lessonId={lessonId} />;
+}
+
+function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const router = useRouter();
   const lesson = LESSONS[lessonId];
 
