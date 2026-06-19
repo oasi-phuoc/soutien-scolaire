@@ -560,7 +560,7 @@ function SelectorBlock({ block, pivot, showTrans }: {
           </button>
         ))}
       </div>
-      <div>
+      <div className="rounded-xl bg-[var(--color-bg-secondary)] p-4">
         <TheoryView blocks={block.tabs[activeTab]!.content} pivot={pivot} showTrans={showTrans} />
       </div>
     </div>
