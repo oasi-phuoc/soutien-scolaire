@@ -66,6 +66,82 @@ body {
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-nunito), system-ui, sans-serif;
 }
 
+html,
+body {
+  color-scheme: light;
+}
+
+.section-background {
+  --section-tint: #cfead5;
+  --section-soft: #f7fbf8;
+  --section-accent: #5a9e78;
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0.8) 36%, color-mix(in oklch, var(--section-tint) 34%, white) 100%),
+    var(--section-soft);
+  transition: background 260ms ease;
+}
+
+.section-background::before {
+  content: "";
+  position: absolute;
+  left: -8vw;
+  right: -8vw;
+  bottom: -8vh;
+  height: 46vh;
+  background:
+    radial-gradient(ellipse at 18% 72%, color-mix(in oklch, var(--section-accent) 17%, white) 0 24%, transparent 25%),
+    radial-gradient(ellipse at 52% 64%, color-mix(in oklch, var(--section-accent) 14%, white) 0 31%, transparent 32%),
+    radial-gradient(ellipse at 84% 70%, color-mix(in oklch, var(--section-accent) 16%, white) 0 27%, transparent 28%),
+    linear-gradient(180deg, transparent 0 28%, color-mix(in oklch, var(--section-tint) 46%, white) 29% 100%);
+  opacity: 0.78;
+}
+
+.section-background::after {
+  content: "";
+  position: absolute;
+  right: clamp(1.5rem, 7vw, 7rem);
+  bottom: clamp(8rem, 17vh, 13rem);
+  width: clamp(7rem, 18vw, 13rem);
+  height: clamp(7rem, 18vw, 13rem);
+  border-radius: 34% 66% 38% 62%;
+  border: 1px solid color-mix(in oklch, var(--section-accent) 18%, transparent);
+  background:
+    linear-gradient(135deg, color-mix(in oklch, var(--section-accent) 15%, white), transparent 58%),
+    color-mix(in oklch, var(--section-tint) 34%, transparent);
+  opacity: 0.58;
+  transform: rotate(-8deg);
+}
+
+.section-background-home,
+.section-background-settings {
+  --section-tint: #cfead5;
+  --section-soft: #f7fbf8;
+  --section-accent: #5a9e78;
+}
+
+.section-background-lecture {
+  --section-tint: #e6d9f7;
+  --section-soft: #fbf8ff;
+  --section-accent: #9b74d4;
+}
+
+.section-background-maths {
+  --section-tint: #d6e8fa;
+  --section-soft: #f7fbff;
+  --section-accent: #4a7ec8;
+}
+
+.section-background-francais {
+  --section-tint: #ffe5b8;
+  --section-soft: #fffaf1;
+  --section-accent: #d98b19;
+}
+
 .placement-test-font,
 .placement-test-font * {
   font-family: 'Century Gothic', 'CenturyGothic', AppleGothic, var(--font-nunito), system-ui, sans-serif !important;
