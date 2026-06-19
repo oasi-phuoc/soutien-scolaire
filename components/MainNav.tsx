@@ -6,31 +6,21 @@ import { usePathname, useRouter } from "next/navigation";
 import { getPendingTaskCountAction } from "@/app/actions/tasks";
 import { useTranslation } from "@/components/TranslationProvider";
 
-type NavIcon = ({ active }: { active: boolean }) => React.JSX.Element;
 type ActionKind = "back" | "refresh" | "validate" | "next";
 type ActionAvailability = Record<ActionKind, { available: boolean; disabled: boolean }>;
-type NavItem = {
-  href: string;
-  label: string;
-  icon: NavIcon;
-  x: number;
-  y: number;
-};
 
-const links: NavItem[] = [
-  { href: "/", label: "Accueil", icon: HomeIcon, x: 0, y: -174 },
-  { href: "/lecture", label: "Lecture", icon: LectureIcon, x: -100, y: -134 },
-  { href: "/mathematiques", label: "Maths", icon: MathIcon, x: -112, y: -48 },
-  { href: "/francais", label: "Français", icon: FrIcon, x: 100, y: -134 },
-  { href: "/compte", label: "Réglages", icon: GearIcon, x: 0, y: -78 },
+const mainLinks = [
+  { href: "/", label: "Accueil", icon: HomeIcon },
+  { href: "/lecture", label: "Lecture", icon: LectureIcon },
+  { href: "/francais", label: "Français", icon: FrIcon },
+  { href: "/mathematiques", label: "Maths", icon: MathIcon },
 ];
 
-const translateItem: NavItem = {
-  href: "#translate",
-  label: "Traductions",
-  icon: TranslateIcon,
-  x: 112,
-  y: -48,
+const emptyActionAvailability: ActionAvailability = {
+  back: { available: false, disabled: true },
+  refresh: { available: false, disabled: true },
+  validate: { available: false, disabled: true },
+  next: { available: false, disabled: true },
 };
 
 function isActivePath(pathname: string, href: string) {
@@ -48,17 +38,10 @@ function isMainSectionPage(pathname: string) {
   return ["", "/", "/lecture", "/francais", "/mathematiques", "/compte", "/communication"].includes(pathname);
 }
 
-const emptyActionAvailability: ActionAvailability = {
-  back: { available: false, disabled: true },
-  refresh: { available: false, disabled: true },
-  validate: { available: false, disabled: true },
-  next: { available: false, disabled: true },
-};
-
 function normalizedLabel(button: HTMLButtonElement) {
   return `${button.getAttribute("aria-label") ?? ""} ${button.textContent ?? ""}`
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[̀-ͯ]/g, "")
     .trim()
     .toLowerCase();
 }
@@ -150,264 +133,233 @@ export function MainNav() {
     };
   }, [pathname]);
 
-  const currentHref = pathname.startsWith("/communication")
-    ? "/francais"
-    : pathname.startsWith("/placement")
-      ? "/mathematiques"
-      : undefined;
-  const current = currentHref
-    ? links.find((item) => item.href === currentHref)
-    : links.find((item) => isActivePath(pathname, item.href));
   const navColor = sectionColor(pathname);
   const lessonMode = !isMainSectionPage(pathname) && !pathname.startsWith("/admin");
-  const menuItems = [...links.filter((item) => item.href !== current?.href), translateItem];
 
   return (
     <>
       {open && (
         <button
           type="button"
-          aria-label="Fermer le menu principal"
+          aria-label="Fermer le menu"
           className="fixed inset-0 z-40 cursor-default bg-transparent"
           onClick={() => setOpen(false)}
         />
       )}
       <nav
-        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-10"
+        className="print:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-[calc(env(safe-area-inset-bottom)+0.5rem)] pt-6"
         aria-label="Navigation principale"
         data-main-nav
         style={{ "--main-nav-color": navColor } as React.CSSProperties}
       >
-        <div className={`relative mx-auto ${lessonMode ? "h-[86px] max-w-[26rem]" : "h-[92px] max-w-[16rem]"}`}>
-          {lessonMode ? (
-            <div
-              className={`absolute inset-x-0 bottom-[94px] flex items-center justify-center gap-2 transition-all duration-250 ${
-                open ? "pointer-events-auto translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
-              }`}
-              aria-hidden={!open}
+        {/* Extra items panel — shown above the bar when "+" is pressed */}
+        <div
+          className={`mb-2 flex justify-center transition-all duration-200 ${
+            open
+              ? "pointer-events-auto translate-y-0 opacity-100"
+              : "pointer-events-none translate-y-2 opacity-0"
+          }`}
+          aria-hidden={!open}
+        >
+          <div className="flex gap-2 rounded-2xl border border-white/80 bg-white/92 px-4 py-2.5 shadow-[0_8px_24px_rgba(36,48,64,0.12)] backdrop-blur-xl">
+            <ExtraNavItem
+              href="/compte"
+              label="Réglages"
+              active={isActivePath(pathname, "/compte")}
+              navColor={navColor}
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
             >
-              {menuItems.map((item, index) => {
+              <GearIcon active={isActivePath(pathname, "/compte")} />
+            </ExtraNavItem>
+            <button
+              type="button"
+              tabIndex={open ? 0 : -1}
+              onClick={() => {
+                togglePivot();
+                setOpen(false);
+              }}
+              className={`flex flex-col items-center gap-1 rounded-xl px-3 py-1 transition-colors ${
+                showPivot
+                  ? "text-[var(--main-nav-color)]"
+                  : "text-[var(--color-text-secondary)] hover:text-[var(--main-nav-color)]"
+              }`}
+            >
+              <span
+                className={`flex h-9 w-9 items-center justify-center rounded-full transition-all ${
+                  showPivot
+                    ? "bg-[var(--main-nav-color)] text-white"
+                    : "bg-[color-mix(in_oklch,var(--main-nav-color)_10%,white)] text-[var(--main-nav-color)]"
+                }`}
+              >
+                <TranslateIcon active={showPivot} />
+              </span>
+              <span className="text-[10px] font-semibold leading-none">Traductions</span>
+            </button>
+          </div>
+        </div>
+
+        {/* Main bar */}
+        <div className="mx-auto max-w-sm rounded-[28px] border border-white/80 bg-white/82 shadow-[0_12px_32px_rgba(36,48,64,0.12)] backdrop-blur-2xl">
+          {lessonMode ? (
+            /* Lesson mode: action buttons + center menu toggle */
+            <div className="grid grid-cols-5 items-center gap-1 px-2 py-2">
+              {actions.back.available ? (
+                <ActionButton label="Retour" icon={<IconLeft />} disabled={actions.back.disabled} onClick={() => triggerLegacyAction("back", () => router.back())} />
+              ) : <span aria-hidden />}
+              {actions.refresh.available ? (
+                <ActionButton label="Refaire" icon={<IconRefresh />} disabled={actions.refresh.disabled} onClick={() => triggerLegacyAction("refresh", () => {})} />
+              ) : <span aria-hidden />}
+              <MenuToggleButton open={open} navColor={navColor} onClick={() => setOpen((v) => !v)} />
+              {actions.validate.available ? (
+                <ActionButton label="Valider" icon={<IconCheck />} disabled={actions.validate.disabled} onClick={() => triggerLegacyAction("validate", () => {})} />
+              ) : <span aria-hidden />}
+              {actions.next.available ? (
+                <ActionButton label="Suivant" icon={<IconRight />} disabled={actions.next.disabled} onClick={() => triggerLegacyAction("next", () => {})} />
+              ) : <span aria-hidden />}
+            </div>
+          ) : (
+            /* Section mode: Home | Lecture | Français | Maths | [+] */
+            <div className="flex items-center justify-around px-1 py-2">
+              {mainLinks.map((item) => {
+                const active = isActivePath(pathname, item.href);
                 const Icon = item.icon;
-                const isTranslate = item.href === translateItem.href;
-                const selected = isTranslate && showPivot;
-                const icon = (
-                  <span
-                    className={`relative flex h-11 w-11 items-center justify-center rounded-full border border-white/90 shadow-[0_8px_20px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 hover:-translate-y-1 ${
-                      selected
-                        ? "bg-[var(--main-nav-color)] text-white"
-                        : "bg-white/92 text-[var(--main-nav-color)] hover:bg-[color-mix(in_oklch,var(--main-nav-color)_14%,white)]"
-                    }`}
-                  >
-                    <Icon active={selected} />
-                    {item.href === "/" && pendingTasks > 0 && (
-                      <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
-                        {pendingTasks > 9 ? "9+" : pendingTasks}
-                      </span>
-                    )}
-                  </span>
-                );
-
-                if (isTranslate) {
-                  return (
-                    <button
-                      key={item.href}
-                      type="button"
-                      aria-label={item.label}
-                      title={item.label}
-                      tabIndex={open ? 0 : -1}
-                      onClick={() => {
-                        togglePivot();
-                        setOpen(false);
-                      }}
-                      style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
-                    >
-                      {icon}
-                    </button>
-                  );
-                }
-
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
+                    className={`flex flex-col items-center gap-0.5 rounded-2xl px-3 py-1 transition-colors ${
+                      active
+                        ? "text-[var(--main-nav-color)]"
+                        : "text-[var(--color-text-secondary)] hover:text-[var(--main-nav-color)]"
+                    }`}
                     aria-label={item.label}
-                    title={item.label}
-                    tabIndex={open ? 0 : -1}
-                    style={{ transitionDelay: open ? `${index * 24}ms` : "0ms" }}
                   >
-                    {icon}
+                    <span
+                      className={`relative flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200 ${
+                        active
+                          ? "bg-[var(--main-nav-color)] text-white shadow-sm"
+                          : "text-[var(--color-text-secondary)]"
+                      }`}
+                    >
+                      <Icon active={active} />
+                      {item.href === "/" && pendingTasks > 0 && (
+                        <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
+                          {pendingTasks > 9 ? "9+" : pendingTasks}
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-[10px] font-semibold leading-none">{item.label}</span>
                   </Link>
                 );
               })}
+              <MenuToggleButton open={open} navColor={navColor} onClick={() => setOpen((v) => !v)} />
             </div>
-          ) : (
-          <>
-          <div
-            className={`pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-[74%] rounded-full transition-all duration-300 ${
-              open ? "opacity-100 scale-100" : "opacity-0 scale-75"
-            }`}
-            style={{
-              background:
-                "radial-gradient(circle, color-mix(in oklch, var(--main-nav-color) 18%, white) 0%, transparent 66%)",
-            }}
-          />
-
-          <div className="absolute left-1/2 top-1/2 h-0 w-0 -translate-x-1/2 -translate-y-1/2">
-            {open && menuItems.map((item, index) => (
-              <span
-                key={`line-${item.href}`}
-                className="pointer-events-none absolute left-0 top-0 h-px origin-left border-t border-dashed border-[var(--main-nav-color)]/45"
-                style={{
-                  width: Math.hypot(item.x, item.y),
-                  transform: `rotate(${Math.atan2(item.y, item.x)}rad)`,
-                  transitionDelay: `${index * 28}ms`,
-                }}
-              />
-            ))}
-            {menuItems.map((item, index) => {
-              const active = isActivePath(pathname, item.href);
-              const Icon = item.icon;
-              const isTranslate = item.href === translateItem.href;
-              const content = (
-                <>
-                  <span
-                    className={`relative flex h-12 w-12 items-center justify-center rounded-full border border-white/80 text-[var(--fan-color)] shadow-[0_10px_24px_rgba(36,48,64,0.13)] backdrop-blur-xl transition-all duration-200 group-hover:-translate-y-1 ${
-                      (active || (isTranslate && showPivot))
-                        ? "bg-[var(--fan-color)] text-white"
-                        : "bg-white/92 group-hover:bg-[color-mix(in_oklch,var(--fan-color)_14%,white)]"
-                    }`}
-                  >
-                    <Icon active={active || (isTranslate && showPivot)} />
-                    {item.href === "/" && pendingTasks > 0 && (
-                      <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[9px] font-bold leading-none text-white ring-2 ring-white">
-                        {pendingTasks > 9 ? "9+" : pendingTasks}
-                      </span>
-                    )}
-                  </span>
-                  <span className="rounded-full bg-white/88 px-2 py-0.5 text-[11px] font-semibold text-[var(--color-text-primary)] shadow-sm">
-                    {item.label}
-                  </span>
-                </>
-              );
-
-              if (isTranslate) {
-                return (
-                  <button
-                    key={item.href}
-                    type="button"
-                    onClick={() => {
-                      togglePivot();
-                      setOpen(false);
-                    }}
-                    className={`group absolute flex w-[86px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
-                      open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-                    }`}
-                    style={{
-                      "--fan-color": navColor,
-                      transform: open
-                        ? `translate(calc(-50% + ${item.x}px), ${item.y}px) scale(1)`
-                        : "translate(-50%, 18px) scale(0.72)",
-                      transitionDelay: open ? `${index * 28}ms` : "0ms",
-                    } as React.CSSProperties}
-                    aria-hidden={!open}
-                    tabIndex={open ? 0 : -1}
-                  >
-                    {content}
-                  </button>
-                );
-              }
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`group absolute flex w-[76px] flex-col items-center gap-1 transition-all duration-300 ease-out ${
-                    open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
-                  }`}
-                  style={{
-                    "--fan-color": navColor,
-                    transform: open
-                      ? `translate(calc(-50% + ${item.x}px), ${item.y}px) scale(1)`
-                      : "translate(-50%, 18px) scale(0.72)",
-                    transitionDelay: open ? `${index * 28}ms` : "0ms",
-                  } as React.CSSProperties}
-                  aria-hidden={!open}
-                  tabIndex={open ? 0 : -1}
-                >
-                  {content}
-                </Link>
-              );
-            })}
-          </div>
-          </>
           )}
-
-          <div className={`absolute inset-x-0 bottom-0 rounded-[32px] border border-white/80 bg-white/78 shadow-[0_12px_34px_rgba(36,48,64,0.13)] backdrop-blur-2xl ${lessonMode ? "px-3 py-3" : "mx-auto w-24 bg-transparent p-0 shadow-none backdrop-blur-none"}`}>
-            <div className={lessonMode ? "grid grid-cols-5 items-center gap-2" : "flex items-center justify-center"}>
-              {lessonMode ? (
-                <>
-                  {actions.back.available ? (
-                    <ActionButton label="Retour" icon={<IconLeft />} disabled={actions.back.disabled} onClick={() => triggerLegacyAction("back", () => router.back())} />
-                  ) : <span aria-hidden />}
-                  {actions.refresh.available ? (
-                    <ActionButton label="Refresh" icon={<IconRefresh />} disabled={actions.refresh.disabled} onClick={() => triggerLegacyAction("refresh", () => {})} />
-                  ) : <span aria-hidden />}
-                </>
-              ) : (
-                null
-              )}
-              <button
-                type="button"
-                onClick={() => setOpen((value) => !value)}
-                className="group relative mx-auto flex h-16 w-16 items-center justify-center rounded-full border-[6px] border-white text-white shadow-[0_12px_28px_rgba(72,160,120,0.35)] transition-all duration-300 active:scale-95"
-                style={{ background: "var(--main-nav-color)" }}
-                aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-                aria-expanded={open}
-              >
-                <span
-                  className={`absolute h-8 w-1 rounded-full bg-current transition-transform duration-300 ${
-                    open ? "rotate-45" : "rotate-0"
-                  }`}
-                />
-                <span
-                  className={`absolute h-1 w-8 rounded-full bg-current transition-transform duration-300 ${
-                    open ? "rotate-45" : "rotate-0"
-                  }`}
-                />
-                <span className="sr-only">Menu</span>
-              </button>
-              {lessonMode ? (
-                <>
-                  {actions.validate.available ? (
-                    <ActionButton label="Valider" icon={<IconCheck />} disabled={actions.validate.disabled} onClick={() => triggerLegacyAction("validate", () => {})} />
-                  ) : <span aria-hidden />}
-                  {actions.next.available ? (
-                    <ActionButton label="Suivant" icon={<IconRight />} disabled={actions.next.disabled} onClick={() => triggerLegacyAction("next", () => {})} />
-                  ) : <span aria-hidden />}
-                </>
-              ) : (
-                null
-              )}
-            </div>
-          </div>
         </div>
       </nav>
     </>
   );
 }
 
-function ActionButton({ label, icon, onClick, disabled = false }: { label: string; icon: React.ReactNode; onClick: () => void; disabled?: boolean }) {
+function MenuToggleButton({ open, navColor, onClick }: { open: boolean; navColor: string; onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={open ? "Fermer" : "Plus"}
+      aria-expanded={open}
+      className="flex flex-col items-center gap-0.5 rounded-2xl px-3 py-1 transition-colors"
+      style={{ color: open ? navColor : "var(--color-text-secondary)" }}
+    >
+      <span
+        className="relative flex h-9 w-9 items-center justify-center rounded-full transition-all duration-200"
+        style={
+          open
+            ? { background: navColor, color: "white" }
+            : { background: `color-mix(in oklch, ${navColor} 12%, white)`, color: navColor }
+        }
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" aria-hidden>
+          {open ? (
+            <>
+              <path d="M18 6L6 18M6 6l12 12" />
+            </>
+          ) : (
+            <>
+              <path d="M12 5v14M5 12h14" />
+            </>
+          )}
+        </svg>
+      </span>
+      <span className="text-[10px] font-semibold leading-none">{open ? "Fermer" : "Plus"}</span>
+    </button>
+  );
+}
+
+function ExtraNavItem({
+  href,
+  label,
+  active,
+  navColor,
+  tabIndex,
+  onClick,
+  children,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+  navColor: string;
+  tabIndex: number;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <Link
+      href={href}
+      tabIndex={tabIndex}
+      onClick={onClick}
+      className={`flex flex-col items-center gap-1 rounded-xl px-3 py-1 transition-colors ${
+        active ? "text-[var(--main-nav-color)]" : "text-[var(--color-text-secondary)] hover:text-[var(--main-nav-color)]"
+      }`}
+      style={{ "--main-nav-color": navColor } as React.CSSProperties}
+    >
+      <span
+        className={`flex h-9 w-9 items-center justify-center rounded-full transition-all ${
+          active
+            ? "bg-[var(--main-nav-color)] text-white"
+            : "bg-[color-mix(in_oklch,var(--main-nav-color)_10%,white)] text-[var(--main-nav-color)]"
+        }`}
+      >
+        {children}
+      </span>
+      <span className="text-[10px] font-semibold leading-none">{label}</span>
+    </Link>
+  );
+}
+
+function ActionButton({
+  label,
+  icon,
+  onClick,
+  disabled = false,
+}: {
+  label: string;
+  icon: React.ReactNode;
+  onClick: () => void;
+  disabled?: boolean;
+}) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="group flex min-w-0 flex-col items-center justify-center gap-1 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
+      className="group flex flex-col items-center justify-center gap-0.5 rounded-2xl px-1 py-1 text-[10px] font-semibold text-[var(--main-nav-color)] transition-all duration-200 hover:bg-[color-mix(in_oklch,var(--main-nav-color)_10%,white)] active:scale-95 disabled:pointer-events-none disabled:opacity-25"
     >
-      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_12%,white)] text-[var(--main-nav-color)] shadow-sm transition-colors group-hover:bg-white">
+      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[color-mix(in_oklch,var(--main-nav-color)_10%,white)] text-[var(--main-nav-color)] transition-colors group-hover:bg-white">
         {icon}
       </span>
-      <span className="truncate">{label}</span>
+      <span className="truncate leading-none">{label}</span>
     </button>
   );
 }
@@ -447,7 +399,7 @@ function IconCheck() {
 
 function HomeIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M3 11L12 3l9 8" />
       <path d="M5 10v9a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-9" />
     </svg>
@@ -473,7 +425,7 @@ function MathIcon({ active: _active }: { active: boolean }) {
 
 function LectureIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z" />
       <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z" />
     </svg>
@@ -482,7 +434,7 @@ function LectureIcon({ active: _active }: { active: boolean }) {
 
 function GearIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-[21px] w-[21px]" aria-hidden>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
       <path d="M12 15.5A3.5 3.5 0 1112 8a3.5 3.5 0 010 7.5z" />
       <path d="M19.4 15a1.7 1.7 0 00.34 1.88l.04.04a2 2 0 01-2.83 2.83l-.04-.04A1.7 1.7 0 0015 19.4a1.7 1.7 0 00-1 1.55V21a2 2 0 01-4 0v-.06A1.7 1.7 0 009 19.4a1.7 1.7 0 00-1.88.34l-.04.04a2 2 0 01-2.83-2.83l.04-.04A1.7 1.7 0 004.6 15a1.7 1.7 0 00-1.55-1H3a2 2 0 010-4h.06A1.7 1.7 0 004.6 9a1.7 1.7 0 00-.34-1.88l-.04-.04a2 2 0 012.83-2.83l.04.04A1.7 1.7 0 009 4.6a1.7 1.7 0 001-1.55V3a2 2 0 014 0v.06A1.7 1.7 0 0015 4.6a1.7 1.7 0 001.88-.34l.04-.04a2 2 0 012.83 2.83l-.04.04A1.7 1.7 0 0019.4 9a1.7 1.7 0 001.55 1H21a2 2 0 010 4h-.06A1.7 1.7 0 0019.4 15z" />
     </svg>
@@ -491,16 +443,7 @@ function GearIcon({ active: _active }: { active: boolean }) {
 
 function TranslateIcon({ active: _active }: { active: boolean }) {
   return (
-    <svg
-      width="22"
-      height="22"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="h-[21px] w-[21px]"
-      aria-hidden
-    >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-[21px] w-[21px]" aria-hidden>
       <path d="M5 8l6 6M4 6h7M2 4h9M11 4c0 5-4 9-9 9" />
       <path d="M22 20l-5-10-5 10M13.5 16h7" />
     </svg>
