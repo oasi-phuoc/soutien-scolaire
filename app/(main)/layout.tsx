@@ -9,7 +9,7 @@ export default function MainLayout({
 }) {
   return (
     <TranslationProvider>
-      <div className="flex min-h-screen flex-col bg-white dark:bg-zinc-950">
+      <div className="flex min-h-screen flex-col bg-[var(--background)] dark:bg-zinc-950">
         <ProgressSyncProvider />
         {children}
         <MainNav />

@@ -4,40 +4,41 @@
 
 :root {
   color-scheme: light;
-  --background: #ffffff;
-  --foreground: #171717;
-  --color-bg-primary: #ffffff;
-  --color-bg-secondary: #f4f4f5;
-  --color-text-primary: #18181b;
-  --color-text-secondary: #52525b;
-  --color-border-default: rgba(24, 24, 27, 0.12);
-  --color-border-emphasis: rgba(24, 24, 27, 0.22);
-  /* Accent colors — colorblind-safe (orange / cyan-blue / indigo / violet) */
-  --color-accent-fr: #0891B2;
-  --color-accent-lecture: #D97706;
-  --color-accent-alg: #2563EB;
-  --color-accent-geo: #2563EB;
-  --color-accent-quiz: #B45309;
-  --color-accent-comm: #059669;
-  /* Feedback — blue (correct) / amber (wrong) — safe for all colorblindness types */
-  --color-success: #2563EB;
-  --color-warning: #B45309;
-  --color-danger: #B91C1C;
-  --color-correct: #2563EB;
-  --color-correct-bg: #DBEAFE;
-  --color-correct-text: #1E40AF;
-  --color-wrong: #D97706;
-  --color-wrong-bg: #FEF3C7;
-  --color-wrong-text: #92400E;
-  --color-marker-prereq-bg: #faeeda;
-  --color-marker-prereq-text: #633806;
-  --color-marker-cross-bg: #e6f1fb;
-  --color-marker-cross-text: #185fa5;
-  --color-marker-quiz-bg: #eeedfe;
-  --color-marker-quiz-text: #534ab7;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --background: #FAFAF8;
+  --foreground: #1A2332;
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: #F2F6F3;
+  --color-text-primary: #1A2332;
+  --color-text-secondary: #6B7B8D;
+  --color-border-default: rgba(26, 35, 50, 0.09);
+  --color-border-emphasis: rgba(26, 35, 50, 0.17);
+  /* Pastel accent colors — section-specific */
+  --color-accent-fr: #C49518;
+  --color-accent-lecture: #5BA0CC;
+  --color-accent-alg: #4A7EC8;
+  --color-accent-geo: #4A7EC8;
+  --color-accent-quiz: #C06078;
+  --color-accent-comm: #48A078;
+  /* Feedback */
+  --color-success: #48A078;
+  --color-warning: #C49518;
+  --color-danger: #C84848;
+  --color-correct: #4A7EC8;
+  --color-correct-bg: #EEF3FC;
+  --color-correct-text: #2258B0;
+  --color-wrong: #D4940A;
+  --color-wrong-bg: #FDF6E0;
+  --color-wrong-text: #7A5200;
+  --color-marker-prereq-bg: #FDF5E0;
+  --color-marker-prereq-text: #7A5200;
+  --color-marker-cross-bg: #E8F1FC;
+  --color-marker-cross-text: #1E5FA5;
+  --color-marker-quiz-bg: #F0EEFF;
+  --color-marker-quiz-text: #5C4AB7;
+  /* Radius — more rounded */
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --radius-pill: 999px;
   --font-size-xs: 0.625rem;
   --font-size-sm: 0.75rem;
@@ -46,10 +47,10 @@
   --font-size-xl: 1.125rem;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
-  /* Thème vert pastel */
-  --color-theme: #5a9e78;
-  --color-theme-light: #e8f5ee;
-  --color-theme-muted: #7cbf9a;
+  /* Thème vert sauge */
+  --color-theme: #5A9E78;
+  --color-theme-light: #E5F5EC;
+  --color-theme-muted: #78BA96;
 }
 
 @theme inline {

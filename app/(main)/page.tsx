@@ -22,13 +22,13 @@ export default async function HomePage({ searchParams }: Props) {
         </p>
       ) : null}
 
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-50">
-          Accueil
+      <div className="rounded-[var(--radius-lg)] bg-[var(--color-theme-light)] px-5 py-4">
+        <h1 className="text-2xl font-bold tracking-tight text-[var(--color-theme)]">
+          Bienvenue
         </h1>
         {email ? (
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-            Connecté : <span className="font-medium text-zinc-700 dark:text-zinc-300">{email}</span>
+          <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
+            <span className="font-medium text-[var(--color-text-primary)]">{email}</span>
           </p>
         ) : null}
       </div>
