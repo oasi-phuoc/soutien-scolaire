@@ -1725,10 +1725,16 @@ function TrueFalseExercise({
   onCanValidateChange: (can: boolean) => void;
 }) {
   const [resolved] = useState<{ image: string | null; items: { statement: string; answer: boolean }[] }>(() => {
+    const total = exercise.poolSize ?? 5;
+    const trueCount = Math.random() < 0.5 ? 2 : 3;
+    const falseCount = total - trueCount;
+
     if (exercise.imagePool && exercise.imagePool.length > 0) {
       const group = exercise.imagePool[Math.floor(Math.random() * exercise.imagePool.length)]!;
-      const shuffled = [...group.items].sort(() => Math.random() - 0.5);
-      return { image: group.image, items: shuffled.slice(0, exercise.poolSize ?? 5) };
+      const trueItems  = shuffle(group.items.filter(it => it.answer)).slice(0, trueCount);
+      const falseItems = shuffle(group.items.filter(it => !it.answer)).slice(0, falseCount);
+      const picked = shuffle([...trueItems, ...falseItems]);
+      return { image: group.image, items: picked };
     }
     return { image: null, items: exercise.items };
   });
@@ -1765,33 +1771,43 @@ function TrueFalseExercise({
           <img src={resolved.image} alt="Description" className="w-full object-contain max-h-64" />
         </div>
       )}
-      <div className="space-y-3">
+      <div className="grid items-center gap-x-4 gap-y-3" style={{ gridTemplateColumns: "1fr auto" }}>
         {items.map((item, i) => {
           const chosen = answers[i];
           const correct = item.answer;
           const isRight = chosen === correct;
-          const btnBase = "px-3 py-1 rounded text-xs font-medium border transition-colors";
-          const mkCls = (val: boolean) => {
-            const isCorrectAnswer = val === correct;
-            if (chosen !== val) {
-              if (validated && revealCorrection && !isRight && isCorrectAnswer) {
-                return `${btnBase} border-amber-500 bg-transparent text-amber-500 dark:border-amber-400 dark:text-amber-400 font-semibold`;
+
+          const segCls = (val: boolean) => {
+            const isSelected = chosen === val;
+            const showCorrection = validated && revealCorrection;
+            if (isSelected) {
+              if (showCorrection && !isRight) {
+                return "px-4 py-1.5 text-xs font-medium bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400";
               }
-              return `${btnBase} border-[var(--color-border)] text-[var(--color-text-secondary)]`;
+              return "px-4 py-1.5 text-xs font-semibold bg-[var(--color-accent-fr)]/15 text-[var(--color-accent-fr)]";
             }
-            return `${btnBase} border-[var(--color-accent-fr)] bg-[var(--color-accent-fr)]/10 text-[var(--color-accent-fr)]`;
+            if (showCorrection && !isRight && val === correct) {
+              return "px-4 py-1.5 text-xs font-semibold bg-amber-50 text-amber-600 dark:bg-amber-950/30 dark:text-amber-400";
+            }
+            return "px-4 py-1.5 text-xs font-medium text-[var(--color-text-secondary)]";
           };
+
           return (
-            <div key={i} className="flex items-start gap-3">
-              <span className="mt-0.5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
-              <div className="flex-1 space-y-2">
+            <React.Fragment key={i}>
+              <div className="flex min-w-0 items-center gap-2">
+                <span className="w-5 shrink-0 text-sm font-medium text-[var(--color-accent-fr)]">{i + 1}.</span>
                 <p className="text-sm text-[var(--color-text-primary)]">{item.statement}</p>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => pick(i, true)} className={mkCls(true)}>Vrai ✓</button>
-                  <button onClick={() => pick(i, false)} className={mkCls(false)}>Faux ✗</button>
-                </div>
               </div>
-            </div>
+              <div className="flex shrink-0 overflow-hidden rounded border border-[var(--color-border)]">
+                <button onClick={() => pick(i, true)} disabled={validated} className={`${segCls(true)} transition-colors disabled:cursor-default`}>
+                  Vrai
+                </button>
+                <div className="w-px shrink-0 bg-[var(--color-border)]" />
+                <button onClick={() => pick(i, false)} disabled={validated} className={`${segCls(false)} transition-colors disabled:cursor-default`}>
+                  Faux
+                </button>
+              </div>
+            </React.Fragment>
           );
         })}
       </div>
