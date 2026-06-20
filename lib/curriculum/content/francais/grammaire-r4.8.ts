@@ -2,8 +2,8 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A1_GR_L25: GrammarLesson = {
   slug: "a1-gr-l25",
-  code: "RX.8",
-  level: "A1",
+  code: "R9.5",
+  level: "A2",
   title: "Savoir ou connaître ?",
   theory: [
     { type: "heading", text: "SAVOIR ou CONNAÎTRE ?" },

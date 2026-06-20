@@ -171,11 +171,9 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-prendre-apprendre-comprendre", "R9.2", "Prendre, apprendre et comprendre au présent", "Le modèle de conjugaison de la famille de prendre.", "grammaire"),
   lesson("A2", "a2-conj-l03", "R9.3", "Les verbes irréguliers courants", "Aller, avoir, être, faire, vouloir, pouvoir, devoir, sortir, croire, boire, naître et connaître.", "conjugaison"),
   lesson("A2", "a1-conj-l27", "R9.4", "Les verbes pronominaux au présent", "S'appeler, se lever, se promener, s'intéresser à et se souvenir de.", "conjugaison"),
+  lesson("A2", "a1-gr-l25",   "R9.5", "Savoir ou connaître ?",            "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",  "grammaire"),
 
   // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
-  lesson("A1", "a1-gr-l24",   "RX.7",  "Le comparatif et le superlatif",              "Plus…que, moins…que, aussi…que + le plus / le moins.",                                  "grammaire"),
-  lesson("A1", "a1-gr-l25",   "RX.8",  "Savoir ou connaître ?",                       "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",                   "grammaire"),
-  lesson("A2", "a2-conj-l01", "RX.9",  "Les verbes en -er — révision et particularités",  "Verbes en -ger/-cer, deux bases (préférer, acheter, appeler) ; élision et liaisons.",     "conjugaison"),
   lesson("A2", "a2-gr-l07",   "RX.12", "L'interrogation (questions fermées)",              "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",       "grammaire"),
   lesson("A2", "a2-gr-l09",   "RX.13", "Répondre aux questions fermées",                  "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",                "grammaire"),
   lesson("A2", "a2-conj-l04", "RX.14", "Le conditionnel de politesse",                    "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),

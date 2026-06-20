@@ -7,19 +7,27 @@ export const A2_GR_SUPERLATIF: GrammarLesson = {
   title: "Le superlatif",
   theory: [
     { type: "heading", text: "Le superlatif" },
+    { type: "plain_list", items: ["Le superlatif exprime le degré le plus élevé ou le plus bas."] },
+    { type: "highlight", label: "Structure", items: ["le / la / les + plus / moins + adjectif"] },
     {
       type: "grid",
-      headers: ["Avec", "Structure", "Exemple"],
+      headers: ["Type", "Exemple"],
       rows: [
-        ["adjectif", "le / la / les plus ou moins + adjectif", "la ville la plus grande"],
-        ["adverbe", "le plus ou le moins + adverbe", "celui qui court le plus vite"],
-        ["bon", "le meilleur / la meilleure / les meilleurs", "le meilleur résultat"],
-        ["bien", "le mieux", "elle chante le mieux"],
-        ["mauvais", "le pire", "la pire journée"],
+        ["le/la/les + plus + adj", "C'est le plus beau quartier de la ville."],
+        ["le/la/les + moins + adj", "C'est la moins chère des options."],
       ],
-      boldFirstCol: true,
     },
-    { type: "highlight", label: "Accord", items: ["Avec un adjectif, l'article et l'adjectif s'accordent avec le nom : le plus grand, la plus grande, les plus grandes.", "Avec un adverbe, le reste toujours invariable : elles travaillent le plus rapidement."] },
+    { type: "heading", text: "Formes irrégulières", sub: true },
+    {
+      type: "plain_list",
+      items: [
+        "bon → comparatif : meilleur (pas : plus bon)",
+        "bien → comparatif : mieux (pas : plus bien)",
+        "mauvais → comparatif : pire ou plus mauvais",
+      ],
+      allBullets: true,
+    },
+    { type: "note", text: "C'est meilleur que ça. / Il va mieux aujourd'hui." },
   ],
   exercises: [],
 };
