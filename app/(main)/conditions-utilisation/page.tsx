@@ -5,23 +5,17 @@ export default function ConditionsUtilisationPage() {
     <main className="mx-auto w-full max-w-xl flex-1 px-4 pt-8 pb-32">
       {/* Header */}
       <div className="mb-8">
-        <Link
-          href="/compte"
-          className="mb-6 inline-flex items-center gap-1.5 text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-theme)]"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 12L6 8l4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          Réglages
-        </Link>
-
         <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl" style={{ background: "var(--color-theme-light)" }}>
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
-              <rect x="5" y="3" width="16" height="20" rx="2" stroke="var(--color-theme)" strokeWidth="1.6" />
-              <path d="M9 8h8M9 12h8M9 16h5" stroke="var(--color-theme)" strokeWidth="1.4" strokeLinecap="round" />
+          <Link
+            href="/compte"
+            aria-label="Retour aux réglages"
+            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl transition-colors hover:brightness-95"
+            style={{ background: "var(--color-theme-light)" }}
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15 18l-6-6 6-6" stroke="var(--color-theme)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-          </div>
+          </Link>
           <div>
             <h1 className="text-xl font-bold text-[var(--color-text-primary)]">Conditions d&apos;utilisation</h1>
             <p className="text-xs text-[var(--color-text-secondary)]">Dernière mise à jour : juin 2026</p>
