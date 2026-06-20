@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_PASSE_OU_IMPARFAIT: GrammarLesson = {
   slug: "a2-gr-passe-compose-ou-imparfait",
-  code: "R6.3",
+  code: "R5.10",
   level: "A2",
   title: "Passé composé ou imparfait ?",
   theory: [

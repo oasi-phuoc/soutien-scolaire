@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_FUTUR_SIMPLE_PROCHE: GrammarLesson = {
   slug: "a2-gr-futur-simple-ou-proche",
-  code: "R7.3",
+  code: "R4.6",
   level: "A2",
   title: "Futur simple ou futur proche ?",
   theory: [

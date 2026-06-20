@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_HYPOTHESE_FUTUR: GrammarLesson = {
   slug: "a2-gr-hypothese-futur",
-  code: "R7.5",
+  code: "R4.8",
   level: "A2",
   title: "L'hypothèse sur le futur",
   theory: [

@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_MARQUEURS_TEMPORELS: GrammarLesson = {
   slug: "a2-gr-marqueurs-temporels",
-  code: "R7.4",
+  code: "R4.7",
   level: "A2",
   title: "Les marqueurs chronologiques",
   theory: [

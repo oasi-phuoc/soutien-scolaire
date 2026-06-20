@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_FUTUR_IRREGULIERS: GrammarLesson = {
   slug: "a2-gr-futur-irreguliers",
-  code: "R7.2",
+  code: "R4.5",
   level: "A2",
   title: "Les verbes irréguliers au futur simple",
   theory: [

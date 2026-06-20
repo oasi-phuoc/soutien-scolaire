@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_IMPARFAIT_IRREGULIERS: GrammarLesson = {
   slug: "a2-gr-imparfait-irreguliers",
-  code: "R6.2",
+  code: "R5.9",
   level: "A2",
   title: "Les verbes irréguliers à l'imparfait",
   theory: [
