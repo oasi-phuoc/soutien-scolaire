@@ -730,6 +730,30 @@ export const A1_CONJ_L09: ConjLesson = {
       },
     },
     { type: "verb_toggle", negation: true, verbs: g10Verbs, buttonCols: 3 },
+    { type: "heading", text: "Réfléchis vs réciproques", sub: true, accent: true, trans: { en: "Reflexive vs reciprocal", ar: "انعكاسي مقابل متبادل", fa: "انعکاسی در برابر متقابل", ti: "ርእሰ-ግሲ ኣንጻር ምልውዋጥ", uk: "Зворотні проти взаємних" } },
+    {
+      type: "grid",
+      headers: ["Type", "Sens", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["Réfléchi", "Le sujet agit sur lui-même.", "Je {a}me{/a} regarde dans le miroir."],
+        ["Réciproque", "Les sujets agissent l'un sur l'autre.", "Nous {a}nous{/a} regardons. (each other)"],
+      ],
+      transHeaders: {
+        en: ["Type", "Meaning", "Example"],
+        ar: ["النوع", "المعنى", "مثال"],
+        fa: ["نوع", "معنی", "مثال"],
+        ti: ["ዓይነት", "ትርጉም", "ኣብነት"],
+        uk: ["Тип", "Значення", "Приклад"],
+      },
+      transRows: {
+        en: [["Reflexive", "The subject acts on itself.", "Je {a}me{/a} regarde dans le miroir. (I look at myself in the mirror.)"], ["Reciprocal", "The subjects act on each other.", "Nous {a}nous{/a} regardons. (We look at each other.)"]],
+        ar: [["انعكاسي", "الفاعل يؤثر على نفسه.", "Je {a}me{/a} regarde dans le miroir. (أنظر إلى نفسي في المرآة.)"], ["متبادل", "الفاعلون يؤثرون على بعضهم.", "Nous {a}nous{/a} regardons. (ننظر إلى بعضنا.)"]],
+        fa: [["انعکاسی", "فاعل بر خودش عمل می‌کند.", "Je {a}me{/a} regarde dans le miroir. (در آینه به خودم نگاه می‌کنم.)"], ["متقابل", "فاعل‌ها بر یکدیگر عمل می‌کنند.", "Nous {a}nous{/a} regardons. (به یکدیگر نگاه می‌کنیم.)"]],
+        ti: [["ርእሰ-ግሲ", "እቲ ርእሲ ኣብ ርእሱ ይዓዪ።", "Je {a}me{/a} regarde dans le miroir. (ኣብ መስትያት ንርእሰይ እርኢ።)"], ["ምልውዋጥ", "እቶም ርእስታት ሓድሕዶም ይዓዩ።", "Nous {a}nous{/a} regardons. (ንሓድሕድና ንርኢ።)"]],
+        uk: [["Зворотний", "Підмет діє на самого себе.", "Je {a}me{/a} regarde dans le miroir. (Я дивлюся на себе в дзеркало.)"], ["Взаємний", "Підмети діють один на одного.", "Nous {a}nous{/a} regardons. (Ми дивимося одне на одного.)"]],
+      },
+    },
     {
       type: "highlight",
       label: "Attention",

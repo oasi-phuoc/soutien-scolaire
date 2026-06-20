@@ -250,7 +250,6 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R9.1", label: "R9.1 — Les verbes en -ir" },
         { id: "R9.2", label: "R9.2 — Prendre, apprendre et comprendre" },
         { id: "R9.3", label: "R9.3 — Les verbes irréguliers courants" },
-        { id: "R9.4", label: "R9.4 — Les verbes pronominaux" },
       ]},
       { id: "RX", label: "À organiser", lessons: [
         { id: "RX.7", label: "RX.7 — Le comparatif et le superlatif" },

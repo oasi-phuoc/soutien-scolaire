@@ -141,7 +141,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-conj-l02", "R9.1", "Les verbes en -ir", "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.", "conjugaison"),
   lesson("A2", "a2-gr-prendre-apprendre-comprendre", "R9.2", "Prendre, apprendre et comprendre au présent", "Le modèle de conjugaison de la famille de prendre.", "grammaire"),
   lesson("A2", "a2-conj-l03", "R9.3", "Les verbes irréguliers courants", "Aller, avoir, être, faire, vouloir, pouvoir, devoir, sortir, croire, boire, naître et connaître.", "conjugaison"),
-  lesson("A2", "a1-conj-l27", "R9.4", "Les verbes pronominaux au présent", "S'appeler, se lever, se promener, s'intéresser à et se souvenir de.", "conjugaison"),
   lesson("A2", "a1-gr-l25",   "R9.5", "Savoir ou connaître ?",            "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",  "grammaire"),
 
   // ── G5 — Le passé ────────────────────────────────────────────────────────────
@@ -176,7 +175,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
   lesson("A2", "a2-conj-l04", "RX.14", "Le conditionnel de politesse",                    "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
   lesson("A2", "a2-conj-l05", "RX.15", "L'impératif",                                     "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.","conjugaison"),
-  lesson("A2", "a2-gr-l18",   "RX.16", "Les prépositions de lieu",                        "Dans, sur, sous, à côté de, près de, loin de, en face de, entre, derrière, devant.",      "grammaire"),
   lesson("A2", "a2-gr-l11",   "RX.17", "Les adjectifs — généralités",                     "Genre, nombre, accord des adjectifs qualificatifs en contexte.",                           "grammaire"),
   lesson("A2", "a2-gr-l12",   "RX.18", "Les adjectifs — cas particuliers et place",       "Nouveau/beau/vieux, adjectifs invariables, place avant ou après le nom.",                  "grammaire"),
   lesson("A2", "a2-gr-l19",   "RX.19", "Les pronoms relatifs qui et que",                 "Qui = sujet du verbe relatif ; que = objet du verbe relatif ; relative avec où.",          "grammaire"),
