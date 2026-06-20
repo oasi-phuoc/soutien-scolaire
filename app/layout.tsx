@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Soutien scolaire",
-    template: "%s · Soutien scolaire",
+    default: "LearnUp",
+    template: "%s · LearnUp",
   },
   description: "Base Next.js + Supabase Auth — à compléter.",
 };

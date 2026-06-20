@@ -153,8 +153,8 @@ function ScreenInstaller() {
       <line x1="4" y1="29" x2="64" y2="29" stroke="#f4f4f5" strokeWidth="1"/>
       {/* App icon */}
       <rect x="24" y="33" width="20" height="20" rx="5" fill="#16a34a"/>
-      <text x="34" y="47" fontSize={10} fill="white" fontFamily="sans-serif" textAnchor="middle">S</text>
-      <text x="34" y="63" fontSize={5.5} fontWeight="600" fill="#09090b" fontFamily="sans-serif" textAnchor="middle">Soutien scolaire</text>
+      <text x="34" y="47" fontSize={10} fill="white" fontFamily="sans-serif" textAnchor="middle">L</text>
+      <text x="34" y="63" fontSize={5.5} fontWeight="600" fill="#09090b" fontFamily="sans-serif" textAnchor="middle">LearnUp</text>
       <text x="34" y="71" fontSize={4.5} fill="#a1a1aa" fontFamily="sans-serif" textAnchor="middle">Voulez-vous installer ?</text>
       {/* Buttons */}
       <rect x="6" y="80" width="24" height="10" rx="3" fill="#f4f4f5"/>

@@ -275,7 +275,7 @@ export default function AvantProposPage() {
           </Link>
           <div>
             <h1 className="text-xl font-bold text-[var(--color-text-primary)]">Avant-propos</h1>
-            <p className="text-xs text-[var(--color-text-secondary)]">Soutien Scolaire — Synecom et Botza</p>
+            <p className="text-xs text-[var(--color-text-secondary)]">LearnUp — Synecom et Botza</p>
           </div>
         </div>
       </div>
@@ -377,7 +377,7 @@ export default function AvantProposPage() {
       </section>
 
       <p className="pt-2 text-center text-xs text-[var(--color-text-secondary)]">
-        Soutien Scolaire — Synecom et Botza
+        LearnUp — Synecom et Botza
       </p>
     </main>
   );
