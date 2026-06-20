@@ -7,7 +7,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.jpg",    feminine: "étudiante",    relatedWords: ["les études"],         definition: ["personne qui fait des études", "élève d'université ou d'école supérieure", "celui qui prépare un diplôme"], exampleSentences: {
+    { word: "étudiant",     article: "un",  gender: "m", image: "etudiant.webp",    feminine: "étudiante",    relatedWords: ["les études"],         definition: ["personne qui fait des études", "élève d'université ou d'école supérieure", "celui qui prépare un diplôme"], exampleSentences: {
         a1: [
           "Je vois l'étudiant.",
           "J'utilise l'étudiant.",
@@ -108,7 +108,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque étudiant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "professeur",   article: "le",  gender: "m", image: "professeur.jpg",  feminine: "professeure",  relatedWords: ["l'enseignement"],     definition: ["personne qui enseigne", "enseignant dans une école ou un lycée", "celui qui transmet des connaissances"], exampleSentences: {
+    { word: "professeur",   article: "le",  gender: "m", image: "professeur.webp",  feminine: "professeure",  relatedWords: ["l'enseignement"],     definition: ["personne qui enseigne", "enseignant dans une école ou un lycée", "celui qui transmet des connaissances"], exampleSentences: {
         a1: [
           "Je vois le professeur.",
           "J'utilise le professeur.",
@@ -209,7 +209,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque professeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "médecin",      article: "le",  gender: "m", image: "medecin.jpg",     relatedWords: ["la médecine"],        definition: ["spécialiste de la santé", "docteur qui soigne les malades", "professionnel de la médecine"], exampleSentences: {
+    { word: "médecin",      article: "le",  gender: "m", image: "medecin.webp",     relatedWords: ["la médecine"],        definition: ["spécialiste de la santé", "docteur qui soigne les malades", "professionnel de la médecine"], exampleSentences: {
         a1: [
           "Je vois le médecin.",
           "J'utilise le médecin.",
@@ -310,7 +310,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque médecin est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.jpg",   feminine: "infirmière",   relatedWords: ["les soins"],          definition: ["soignant en milieu médical", "assistant du médecin à l'hôpital", "professionnel qui prend soin des patients"], exampleSentences: {
+    { word: "infirmier",    article: "un",  gender: "m", image: "infirmier.webp",   feminine: "infirmière",   relatedWords: ["les soins"],          definition: ["soignant en milieu médical", "assistant du médecin à l'hôpital", "professionnel qui prend soin des patients"], exampleSentences: {
         a1: [
           "Je vois l'infirmier.",
           "J'utilise l'infirmier.",
@@ -411,7 +411,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque infirmier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.jpg",   feminine: "boulangère",   relatedWords: ["la boulangerie"],     definition: ["fabricant et vendeur de pain", "artisan qui fait du pain", "personne qui travaille dans une boulangerie"], exampleSentences: {
+    { word: "boulanger",    article: "un",  gender: "m", image: "boulanger.webp",   feminine: "boulangère",   relatedWords: ["la boulangerie"],     definition: ["fabricant et vendeur de pain", "artisan qui fait du pain", "personne qui travaille dans une boulangerie"], exampleSentences: {
         a1: [
           "Je vois le boulanger.",
           "J'utilise le boulanger.",
@@ -512,7 +512,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque boulanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.jpg",     feminine: "vendeuse",     relatedWords: ["la vente"],           definition: ["personne qui vend des produits", "employé de magasin", "celui qui aide les clients à choisir"], exampleSentences: {
+    { word: "vendeur",      article: "un",  gender: "m", image: "vendeur.webp",     feminine: "vendeuse",     relatedWords: ["la vente"],           definition: ["personne qui vend des produits", "employé de magasin", "celui qui aide les clients à choisir"], exampleSentences: {
         a1: [
           "Je vois le vendeur.",
           "J'utilise le vendeur.",
@@ -613,7 +613,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque vendeur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.jpg",   feminine: "cuisinière",   relatedWords: ["la cuisine"],         definition: ["personne qui prépare les repas", "professionnel de la cuisine", "chef qui travaille dans un restaurant"], exampleSentences: {
+    { word: "cuisinier",    article: "un",  gender: "m", image: "cuisinier.webp",   feminine: "cuisinière",   relatedWords: ["la cuisine"],         definition: ["personne qui prépare les repas", "professionnel de la cuisine", "chef qui travaille dans un restaurant"], exampleSentences: {
         a1: [
           "Je vois le cuisinier.",
           "J'utilise le cuisinier.",
@@ -714,7 +714,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque cuisinier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.jpg",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"],       definition: ["technicien spécialisé", "expert en sciences appliquées", "professionnel qui résout des problèmes techniques"], exampleSentences: {
+    { word: "ingénieur",    article: "un",  gender: "m", image: "ingenieur.webp",   feminine: "ingénieure",   relatedWords: ["l'ingénierie"],       definition: ["technicien spécialisé", "expert en sciences appliquées", "professionnel qui résout des problèmes techniques"], exampleSentences: {
         a1: [
           "Je vois l'ingénieur.",
           "J'utilise l'ingénieur.",
@@ -815,7 +815,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque ingénieur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.jpg",  feminine: "pharmacienne", relatedWords: ["la pharmacie"],       definition: ["professionnel de la pharmacie", "personne qui vend des médicaments", "expert en médicaments et soins"], exampleSentences: {
+    { word: "pharmacien",   article: "un",  gender: "m", image: "pharmacien.webp",  feminine: "pharmacienne", relatedWords: ["la pharmacie"],       definition: ["professionnel de la pharmacie", "personne qui vend des médicaments", "expert en médicaments et soins"], exampleSentences: {
         a1: [
           "Je vois le pharmacien.",
           "J'utilise le pharmacien.",
@@ -916,7 +916,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque pharmacien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serveur",      article: "un",  gender: "m", image: "serveur.jpg",     feminine: "serveuse",     relatedWords: ["le service"],         definition: ["personne qui sert les clients au restaurant", "employé de salle dans un café ou restaurant", "celui qui apporte les plats aux tables"], exampleSentences: {
+    { word: "serveur",      article: "un",  gender: "m", image: "serveur.webp",     feminine: "serveuse",     relatedWords: ["le service"],         definition: ["personne qui sert les clients au restaurant", "employé de salle dans un café ou restaurant", "celui qui apporte les plats aux tables"], exampleSentences: {
         a1: [
           "Je vois le serveur.",
           "J'utilise le serveur.",
@@ -1017,7 +1017,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque serveur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricien", article: "un",  gender: "m", image: "electricien.jpg", feminine: "électricienne", relatedWords: ["l'électricité"],      definition: ["technicien spécialisé en installations électriques", "professionnel qui installe et répare les circuits électriques", "artisan qui intervient sur les réseaux électriques"], exampleSentences: {
+    { word: "électricien", article: "un",  gender: "m", image: "electricien.webp", feminine: "électricienne", relatedWords: ["l'électricité"],      definition: ["technicien spécialisé en installations électriques", "professionnel qui installe et répare les circuits électriques", "artisan qui intervient sur les réseaux électriques"], exampleSentences: {
         a1: [
           "Je vois l'électricien.",
           "J'utilise l'électricien.",
@@ -1118,7 +1118,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque électricien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plombier",    article: "un",  gender: "m", image: "plombier.jpg",    feminine: "plombière",    relatedWords: ["la plomberie"],       definition: ["technicien spécialisé en installations de plomberie", "professionnel qui répare les canalisations et robinets", "artisan qui intervient sur les réseaux d'eau"], exampleSentences: {
+    { word: "plombier",    article: "un",  gender: "m", image: "plombier.webp",    feminine: "plombière",    relatedWords: ["la plomberie"],       definition: ["technicien spécialisé en installations de plomberie", "professionnel qui répare les canalisations et robinets", "artisan qui intervient sur les réseaux d'eau"], exampleSentences: {
         a1: [
           "Je vois le plombier.",
           "J'utilise le plombier.",
@@ -1219,7 +1219,7 @@ export const V1_PROFESSIONS_THEME: VocabTheme = {
           "Puisque plombier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.jpg",  relatedWords: ["le secrétariat"],     definition: ["assistant administratif", "personne qui gère les tâches de bureau", "employé qui organise les rendez-vous"], exampleSentences: {
+    { word: "secrétaire",   article: "un",  gender: "m", image: "secretaire.webp",  relatedWords: ["le secrétariat"],     definition: ["assistant administratif", "personne qui gère les tâches de bureau", "employé qui organise les rendez-vous"], exampleSentences: {
         a1: [
           "Je vois le secrétaire.",
           "J'utilise le secrétaire.",

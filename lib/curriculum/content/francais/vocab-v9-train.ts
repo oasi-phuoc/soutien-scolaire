@@ -6,7 +6,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
   title: "Le train",
   section: "V9",
   words: [
-    { word: "gare", image: "gare.jpg",           article: "la",  gender: "f", definition: "bâtiment principal pour les trains" , exampleSentences: {
+    { word: "gare", image: "gare.webp",           article: "la",  gender: "f", definition: "bâtiment principal pour les trains" , exampleSentences: {
         a1: [
           "Je vois la gare.",
           "Je cherche la gare.",
@@ -102,7 +102,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque gare est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "quai", image: "quai.jpg",           article: "le",  gender: "m", definition: "plateforme où monte et descend le train" , exampleSentences: {
+    { word: "quai", image: "quai.webp",           article: "le",  gender: "m", definition: "plateforme où monte et descend le train" , exampleSentences: {
         a1: [
           "Je vois le quai.",
           "Je cherche le quai.",
@@ -198,7 +198,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque quai est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "guichet", image: "guichet.jpg",        article: "le",  gender: "m", definition: "comptoir pour acheter les billets" , exampleSentences: {
+    { word: "guichet", image: "guichet.webp",        article: "le",  gender: "m", definition: "comptoir pour acheter les billets" , exampleSentences: {
         a1: [
           "Je vois le guichet.",
           "Je cherche le guichet.",
@@ -294,7 +294,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque guichet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.jpg",         article: "le",  gender: "m", definition: "titre de transport pour le train" , exampleSentences: {
+    { word: "billet", image: "billet.webp",         article: "le",  gender: "m", definition: "titre de transport pour le train" , exampleSentences: {
         a1: [
           "Je vois le billet.",
           "Je cherche le billet.",
@@ -390,7 +390,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque billet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aller-retour", image: "aller-retour.jpg",   article: "l'",  gender: "m", definition: "billet pour partir et revenir" , exampleSentences: {
+    { word: "aller-retour", image: "aller-retour.webp",   article: "l'",  gender: "m", definition: "billet pour partir et revenir" , exampleSentences: {
         a1: [
           "Je vois l'aller-retour.",
           "Je cherche l'aller-retour.",
@@ -486,7 +486,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque aller-retour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "départ", image: "depart.jpg",         article: "le",  gender: "m", definition: "moment où le train quitte la gare" , exampleSentences: {
+    { word: "départ", image: "depart.webp",         article: "le",  gender: "m", definition: "moment où le train quitte la gare" , exampleSentences: {
         a1: [
           "Je vois le départ.",
           "Je cherche le départ.",
@@ -582,7 +582,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque départ est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arrivée", image: "arrivee.jpg",        article: "l'",  gender: "f", definition: "moment où le train arrive en gare" , exampleSentences: {
+    { word: "arrivée", image: "arrivee.webp",        article: "l'",  gender: "f", definition: "moment où le train arrive en gare" , exampleSentences: {
         a1: [
           "Je vois l'arrivée.",
           "Je cherche l'arrivée.",
@@ -678,7 +678,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque arrivée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "wagon", image: "wagon.jpg",          article: "le",  gender: "m", definition: "voiture d'un train" , exampleSentences: {
+    { word: "wagon", image: "wagon.webp",          article: "le",  gender: "m", definition: "voiture d'un train" , exampleSentences: {
         a1: [
           "Je vois le wagon.",
           "Je cherche le wagon.",
@@ -774,7 +774,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque wagon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "contrôleur", image: "controleur.jpg",     article: "le",  gender: "m", definition: "agent qui vérifie les billets" , exampleSentences: {
+    { word: "contrôleur", image: "controleur.webp",     article: "le",  gender: "m", definition: "agent qui vérifie les billets" , exampleSentences: {
         a1: [
           "Je vois le contrôleur.",
           "Je cherche le contrôleur.",
@@ -870,7 +870,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque contrôleur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "place", image: "/vocab/images/V4/place.jpg",          article: "la",  gender: "f", definition: "siège réservé dans le train" , exampleSentences: {
+    { word: "place", image: "/vocab/images/V4/place.webp",          article: "la",  gender: "f", definition: "siège réservé dans le train" , exampleSentences: {
         a1: [
           "Je vois la place.",
           "Je cherche la place.",
@@ -966,7 +966,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque place est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "grève", image: "greve.jpg",          article: "la",  gender: "f", definition: "arrêt de travail du personnel de train" , exampleSentences: {
+    { word: "grève", image: "greve.webp",          article: "la",  gender: "f", definition: "arrêt de travail du personnel de train" , exampleSentences: {
         a1: [
           "Je vois la grève.",
           "Je cherche la grève.",
@@ -1062,7 +1062,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque grève est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "retard", image: "retard.jpg",         article: "le",  gender: "m", definition: "arrivée après l'heure prévue" , exampleSentences: {
+    { word: "retard", image: "retard.webp",         article: "le",  gender: "m", definition: "arrivée après l'heure prévue" , exampleSentences: {
         a1: [
           "Je vois le retard.",
           "Je cherche le retard.",
@@ -1158,7 +1158,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque retard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "correspondance", image: "correspondance.jpg", article: "la",  gender: "f", definition: "changement de train en cours de route" , exampleSentences: {
+    { word: "correspondance", image: "correspondance.webp", article: "la",  gender: "f", definition: "changement de train en cours de route" , exampleSentences: {
         a1: [
           "Je vois la correspondance.",
           "Je cherche la correspondance.",
@@ -1254,7 +1254,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque correspondance est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "voie", image: "voie.jpg",           article: "la",  gender: "f", definition: "rails sur lesquels roule le train" , exampleSentences: {
+    { word: "voie", image: "voie.webp",           article: "la",  gender: "f", definition: "rails sur lesquels roule le train" , exampleSentences: {
         a1: [
           "Je vois la voie.",
           "Je cherche la voie.",
@@ -1350,7 +1350,7 @@ export const V9_TRAIN_THEME: VocabTheme = {
           "Puisque voie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "horaire", image: "horaire.jpg",        article: "l'",  gender: "m", definition: "tableau des heures de départ et d'arrivée" , exampleSentences: {
+    { word: "horaire", image: "horaire.webp",        article: "l'",  gender: "m", definition: "tableau des heures de départ et d'arrivée" , exampleSentences: {
         a1: [
           "Je vois l'horaire.",
           "Je cherche l'horaire.",

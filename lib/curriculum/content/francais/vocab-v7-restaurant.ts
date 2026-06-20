@@ -6,7 +6,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
   title: "Le restaurant",
   section: "V7",
   words: [
-    { word: "service",    image: "/vocab/images/V1/serveur.jpg",   article: "le",  gender: "m", feminine: "serveuse",   definition: "personne qui sert les clients au restaurant (serveur / serveuse)" , exampleSentences: {
+    { word: "service",    image: "/vocab/images/V1/serveur.webp",   article: "le",  gender: "m", feminine: "serveuse",   definition: "personne qui sert les clients au restaurant (serveur / serveuse)" , exampleSentences: {
         a1: [
           "Je mange un service.",
           "J'aime le service.",
@@ -107,7 +107,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque service est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.jpg", article: "la",  gender: "f", feminine: "cuisinière", definition: "personne qui prépare les plats (cuisinier / cuisinière)" , exampleSentences: {
+    { word: "cuisine",    image: "/vocab/images/V1/cuisinier.webp", article: "la",  gender: "f", feminine: "cuisinière", definition: "personne qui prépare les plats (cuisinier / cuisinière)" , exampleSentences: {
         a1: [
           "Je mange une cuisine.",
           "J'aime la cuisine.",
@@ -208,7 +208,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuisine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "table",      image: "table.png",      article: "la",  gender: "f", definition: "meuble où l'on mange au restaurant" , exampleSentences: {
+    { word: "table",      image: "table.webp",      article: "la",  gender: "f", definition: "meuble où l'on mange au restaurant" , exampleSentences: {
         a1: [
           "Je mange une table.",
           "J'aime la table.",
@@ -410,7 +410,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque chaise est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "assiette",   image: "assiette.png",   article: "l'",  gender: "f", definition: "plat creux ou plat pour servir les aliments" , exampleSentences: {
+    { word: "assiette",   image: "assiette.webp",   article: "l'",  gender: "f", definition: "plat creux ou plat pour servir les aliments" , exampleSentences: {
         a1: [
           "Je connais l'assiette.",
           "J'utilise l'assiette.",
@@ -511,7 +511,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque assiette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couvert",    image: "couvert.png",    article: "le",  gender: "m", definition: "ensemble couteau, fourchette, cuillère" , exampleSentences: {
+    { word: "couvert",    image: "couvert.webp",    article: "le",  gender: "m", definition: "ensemble couteau, fourchette, cuillère" , exampleSentences: {
         a1: [
           "Je mange un couvert.",
           "J'aime le couvert.",
@@ -612,7 +612,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couvert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.png",   article: "la",  gender: "f", definition: "ustensile pour les soupes et desserts" , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "ustensile pour les soupes et desserts" , exampleSentences: {
         a1: [
           "Je connais la cuillère.",
           "J'utilise la cuillère.",
@@ -713,7 +713,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque cuillère est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couteau",    image: "couteau.png",    article: "le",  gender: "m", definition: "ustensile tranchant pour couper" , exampleSentences: {
+    { word: "couteau",    image: "couteau.webp",    article: "le",  gender: "m", definition: "ustensile tranchant pour couper" , exampleSentences: {
         a1: [
           "Je mange un couteau.",
           "J'aime le couteau.",
@@ -814,7 +814,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque couteau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fourchette", image: "fourchette.png", article: "la",  gender: "f", definition: "ustensile à dents pour piquer les aliments" , exampleSentences: {
+    { word: "fourchette", image: "fourchette.webp", article: "la",  gender: "f", definition: "ustensile à dents pour piquer les aliments" , exampleSentences: {
         a1: [
           "Je mange une fourchette.",
           "J'aime la fourchette.",
@@ -915,7 +915,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque fourchette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.png",      article: "le",  gender: "m", definition: "récipient pour boire les liquides" , exampleSentences: {
+    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "récipient pour boire les liquides" , exampleSentences: {
         a1: [
           "Je connais le verre.",
           "J'utilise le verre.",
@@ -1016,7 +1016,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serviette",  image: "serviette.png",  article: "la",  gender: "f", definition: "tissu pour s'essuyer la bouche" , exampleSentences: {
+    { word: "serviette",  image: "serviette.webp",  article: "la",  gender: "f", definition: "tissu pour s'essuyer la bouche" , exampleSentences: {
         a1: [
           "Je mange une serviette.",
           "J'aime la serviette.",
@@ -1117,7 +1117,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque serviette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plat",       image: "plat.png",       article: "le",  gender: "m", definition: "plat principal d'un repas" , exampleSentences: {
+    { word: "plat",       image: "plat.webp",       article: "le",  gender: "m", definition: "plat principal d'un repas" , exampleSentences: {
         a1: [
           "Je mange un plat.",
           "J'aime le plat.",
@@ -1218,7 +1218,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque plat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dessert",    image: "dessert.png",    article: "le",  gender: "m", definition: "dernier plat sucré d'un repas" , exampleSentences: {
+    { word: "dessert",    image: "dessert.webp",    article: "le",  gender: "m", definition: "dernier plat sucré d'un repas" , exampleSentences: {
         a1: [
           "Je mange un dessert.",
           "J'aime le dessert.",
@@ -1319,7 +1319,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque dessert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "menu",       image: "menu.png",       article: "le",  gender: "m", definition: "liste des plats proposés" , exampleSentences: {
+    { word: "menu",       image: "menu.webp",       article: "le",  gender: "m", definition: "liste des plats proposés" , exampleSentences: {
         a1: [
           "Je mange un menu.",
           "J'aime le menu.",
@@ -1420,7 +1420,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque menu est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "addition",   image: "addition.png",   article: "l'",  gender: "f", definition: "note à payer à la fin du repas" , exampleSentences: {
+    { word: "addition",   image: "addition.webp",   article: "l'",  gender: "f", definition: "note à payer à la fin du repas" , exampleSentences: {
         a1: [
           "Je mange une addition.",
           "J'aime l'addition.",
@@ -1521,7 +1521,7 @@ export const V7_RESTAURANT_THEME: VocabTheme = {
           "Puisque addition est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boisson",    image: "boisson.png",    article: "la",  gender: "f", definition: "liquide à boire" , exampleSentences: {
+    { word: "boisson",    image: "boisson.webp",    article: "la",  gender: "f", definition: "liquide à boire" , exampleSentences: {
         a1: [
           "Je mange une boisson.",
           "J'aime la boisson.",

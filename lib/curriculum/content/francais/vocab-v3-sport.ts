@@ -6,7 +6,7 @@ export const V3_SPORT_THEME: VocabTheme = {
   title: "Le sport",
   section: "V3",
   words: [
-    { word: "football", image: "football.png", article: "le", gender: "m", definition: "sport collectif joué avec un ballon rond" , exampleSentences: {
+    { word: "football", image: "football.webp", article: "le", gender: "m", definition: "sport collectif joué avec un ballon rond" , exampleSentences: {
         a1: [
           "Je fais du football.",
           "J'aime le football.",
@@ -106,7 +106,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque football est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "basket-ball", image: "basketball.png", article: "le", gender: "m", definition: "sport collectif avec un panier" , exampleSentences: {
+    { word: "basket-ball", image: "basketball.webp", article: "le", gender: "m", definition: "sport collectif avec un panier" , exampleSentences: {
         a1: [
           "Je fais du basket-ball.",
           "J'aime le basket-ball.",
@@ -206,7 +206,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque basket-ball est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tennis", image: "tennis.png", article: "le", gender: "m", definition: "sport de raquette sur un court" , exampleSentences: {
+    { word: "tennis", image: "tennis.webp", article: "le", gender: "m", definition: "sport de raquette sur un court" , exampleSentences: {
         a1: [
           "Je fais du tennis.",
           "J'aime le tennis.",
@@ -306,7 +306,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque tennis est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "natation", image: "natation.png", article: "la", gender: "f", definition: "sport de nage dans l'eau" , exampleSentences: {
+    { word: "natation", image: "natation.webp", article: "la", gender: "f", definition: "sport de nage dans l'eau" , exampleSentences: {
         a1: [
           "Je fais de la natation.",
           "J'aime la natation.",
@@ -406,7 +406,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque natation est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vélo", image: "velo.png", article: "le", gender: "m", definition: "sport et moyen de transport à deux roues" , exampleSentences: {
+    { word: "vélo", image: "velo.webp", article: "le", gender: "m", definition: "sport et moyen de transport à deux roues" , exampleSentences: {
         a1: [
           "Je fais du vélo.",
           "J'aime le vélo.",
@@ -506,7 +506,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque vélo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "course", image: "courir.png", article: "la", gender: "f", definition: "compétition de vitesse à pied" , exampleSentences: {
+    { word: "course", image: "courir.webp", article: "la", gender: "f", definition: "compétition de vitesse à pied" , exampleSentences: {
         a1: [
           "Je fais de la course.",
           "J'aime la course.",
@@ -606,7 +606,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque course est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "danse", image: "danse.png", article: "la", gender: "f", definition: "art de bouger le corps en rythme" , exampleSentences: {
+    { word: "danse", image: "danse.webp", article: "la", gender: "f", definition: "art de bouger le corps en rythme" , exampleSentences: {
         a1: [
           "Je fais de la danse.",
           "J'aime la danse.",
@@ -706,7 +706,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque danse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "yoga", image: "yoga.png", article: "le", gender: "m", definition: "discipline de relaxation et de stretching" , exampleSentences: {
+    { word: "yoga", image: "yoga.webp", article: "le", gender: "m", definition: "discipline de relaxation et de stretching" , exampleSentences: {
         a1: [
           "Je fais du yoga.",
           "J'aime le yoga.",
@@ -806,7 +806,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque yoga est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "randonnée", image: "marcher.png", article: "la", gender: "f", definition: "longue marche en pleine nature" , exampleSentences: {
+    { word: "randonnée", image: "marcher.webp", article: "la", gender: "f", definition: "longue marche en pleine nature" , exampleSentences: {
         a1: [
           "Je fais de la randonnée.",
           "J'aime la randonnée.",
@@ -906,7 +906,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque randonnée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "judo", image: "judo.png", article: "le", gender: "m", definition: "art martial japonais" , exampleSentences: {
+    { word: "judo", image: "judo.webp", article: "le", gender: "m", definition: "art martial japonais" , exampleSentences: {
         a1: [
           "Je fais du judo.",
           "J'aime le judo.",
@@ -1006,7 +1006,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque judo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gymnastique", image: "gymnastique.png", article: "la", gender: "f", definition: "sport d'agilité et de souplesse" , exampleSentences: {
+    { word: "gymnastique", image: "gymnastique.webp", article: "la", gender: "f", definition: "sport d'agilité et de souplesse" , exampleSentences: {
         a1: [
           "Je fais de la gymnastique.",
           "J'aime la gymnastique.",
@@ -1106,7 +1106,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque gymnastique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ski", image: "ski.png", article: "le", gender: "m", definition: "sport de glisse sur la neige" , exampleSentences: {
+    { word: "ski", image: "ski.webp", article: "le", gender: "m", definition: "sport de glisse sur la neige" , exampleSentences: {
         a1: [
           "Je fais du ski.",
           "J'aime le ski.",
@@ -1206,7 +1206,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque ski est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "handball", image: "handball.png", article: "le", gender: "m", definition: "sport collectif avec un ballon et les mains" , exampleSentences: {
+    { word: "handball", image: "handball.webp", article: "le", gender: "m", definition: "sport collectif avec un ballon et les mains" , exampleSentences: {
         a1: [
           "Je fais de l'handball.",
           "J'aime l'handball.",
@@ -1306,7 +1306,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque handball est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "volley-ball", image: "volleyball.png", article: "le", gender: "m", definition: "sport collectif où l'on frappe un ballon par-dessus un filet" , exampleSentences: {
+    { word: "volley-ball", image: "volleyball.webp", article: "le", gender: "m", definition: "sport collectif où l'on frappe un ballon par-dessus un filet" , exampleSentences: {
         a1: [
           "Je fais du volley-ball.",
           "J'aime le volley-ball.",
@@ -1406,7 +1406,7 @@ export const V3_SPORT_THEME: VocabTheme = {
           "Puisque volley-ball est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "escalade", image: "escalade.png", article: "l'", gender: "f", definition: "sport consistant à grimper une paroi" , exampleSentences: {
+    { word: "escalade", image: "escalade.webp", article: "l'", gender: "f", definition: "sport consistant à grimper une paroi" , exampleSentences: {
         a1: [
           "Je fais de l'escalade.",
           "J'aime l'escalade.",

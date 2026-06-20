@@ -6,7 +6,7 @@ export const V8_CORPS_THEME: VocabTheme = {
   title: "Le corps",
   section: "V8",
   words: [
-    { word: "tête",    image: "tete.png",    article: "la",  gender: "f", definition: "partie supérieure du corps" , exampleSentences: {
+    { word: "tête",    image: "tete.webp",    article: "la",  gender: "f", definition: "partie supérieure du corps" , exampleSentences: {
         a1: [
           "Je montre la tête.",
           "J'ai mal à la tête.",
@@ -204,7 +204,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque bras est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "main",    image: "main.png",    article: "la",  gender: "f", definition: "extrémité du bras avec cinq doigts" , exampleSentences: {
+    { word: "main",    image: "main.webp",    article: "la",  gender: "f", definition: "extrémité du bras avec cinq doigts" , exampleSentences: {
         a1: [
           "Je montre la main.",
           "J'ai mal à la main.",
@@ -303,7 +303,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque main est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doigt",   image: "doigt.png",   article: "le",  gender: "m", definition: "chacun des cinq appendices de la main" , exampleSentences: {
+    { word: "doigt",   image: "doigt.webp",   article: "le",  gender: "m", definition: "chacun des cinq appendices de la main" , exampleSentences: {
         a1: [
           "Je montre le doigt.",
           "J'ai mal au doigt.",
@@ -402,7 +402,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque doigt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "jambe",   image: "jambe.png",   article: "la",  gender: "f", definition: "membre inférieur du corps" , exampleSentences: {
+    { word: "jambe",   image: "jambe.webp",   article: "la",  gender: "f", definition: "membre inférieur du corps" , exampleSentences: {
         a1: [
           "Je montre la jambe.",
           "J'ai mal à la jambe.",
@@ -501,7 +501,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque jambe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pied",    image: "pied.png",    article: "le",  gender: "m", definition: "extrémité de la jambe pour marcher" , exampleSentences: {
+    { word: "pied",    image: "pied.webp",    article: "le",  gender: "m", definition: "extrémité de la jambe pour marcher" , exampleSentences: {
         a1: [
           "Je montre le pied.",
           "J'ai mal au pied.",
@@ -600,7 +600,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque pied est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dos",     image: "dos.png",     article: "le",  gender: "m", definition: "partie arrière du tronc" , exampleSentences: {
+    { word: "dos",     image: "dos.webp",     article: "le",  gender: "m", definition: "partie arrière du tronc" , exampleSentences: {
         a1: [
           "Je montre le dos.",
           "J'ai mal au dos.",
@@ -699,7 +699,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque dos est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ventre",  image: "ventre.png",  article: "le",  gender: "m", definition: "partie avant du tronc" , exampleSentences: {
+    { word: "ventre",  image: "ventre.webp",  article: "le",  gender: "m", definition: "partie avant du tronc" , exampleSentences: {
         a1: [
           "Je montre le ventre.",
           "J'ai mal au ventre.",
@@ -798,7 +798,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque ventre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "genou",   image: "genou.png",   article: "le",  gender: "m", definition: "articulation de la jambe" , exampleSentences: {
+    { word: "genou",   image: "genou.webp",   article: "le",  gender: "m", definition: "articulation de la jambe" , exampleSentences: {
         a1: [
           "Je montre le genou.",
           "J'ai mal au genou.",
@@ -897,7 +897,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque genou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épaule",  image: "epaule.png",  article: "l'",  gender: "f", definition: "articulation entre le bras et le tronc" , exampleSentences: {
+    { word: "épaule",  image: "epaule.webp",  article: "l'",  gender: "f", definition: "articulation entre le bras et le tronc" , exampleSentences: {
         a1: [
           "Je montre l'épaule.",
           "J'ai mal à l'épaule.",
@@ -996,7 +996,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque épaule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cou",     image: "cou.png",     article: "le",  gender: "m", definition: "partie entre la tête et les épaules" , exampleSentences: {
+    { word: "cou",     image: "cou.webp",     article: "le",  gender: "m", definition: "partie entre la tête et les épaules" , exampleSentences: {
         a1: [
           "Je montre le cou.",
           "J'ai mal au cou.",
@@ -1095,7 +1095,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque cou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nez",     image: "nez.png",     article: "le",  gender: "m", definition: "organe de l'odorat au milieu du visage" , exampleSentences: {
+    { word: "nez",     image: "nez.webp",     article: "le",  gender: "m", definition: "organe de l'odorat au milieu du visage" , exampleSentences: {
         a1: [
           "Je montre le nez.",
           "J'ai mal au nez.",
@@ -1194,7 +1194,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque nez est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouche",  image: "bouche.png",  article: "la",  gender: "f", definition: "ouverture du visage pour manger et parler" , exampleSentences: {
+    { word: "bouche",  image: "bouche.webp",  article: "la",  gender: "f", definition: "ouverture du visage pour manger et parler" , exampleSentences: {
         a1: [
           "Je montre la bouche.",
           "J'ai mal à la bouche.",
@@ -1293,7 +1293,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque bouche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "œil",     image: "oeil.png",    article: "l'",  gender: "m", definition: "organe de la vue" , exampleSentences: {
+    { word: "œil",     image: "oeil.webp",    article: "l'",  gender: "m", definition: "organe de la vue" , exampleSentences: {
         a1: [
           "Je montre l'œil.",
           "J'ai mal à l'œil.",
@@ -1392,7 +1392,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque œil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oreille", image: "oreille.png", article: "l'",  gender: "f", definition: "organe de l'ouïe de chaque côté de la tête" , exampleSentences: {
+    { word: "oreille", image: "oreille.webp", article: "l'",  gender: "f", definition: "organe de l'ouïe de chaque côté de la tête" , exampleSentences: {
         a1: [
           "Je montre l'oreille.",
           "J'ai mal à l'oreille.",
@@ -1491,7 +1491,7 @@ export const V8_CORPS_THEME: VocabTheme = {
           "Puisque oreille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dent",    image: "dent.png",    article: "la",  gender: "f", definition: "organe dur de la mâchoire pour mordre et mâcher" , exampleSentences: {
+    { word: "dent",    image: "dent.webp",    article: "la",  gender: "f", definition: "organe dur de la mâchoire pour mordre et mâcher" , exampleSentences: {
         a1: [
           "Je montre la dent.",
           "J'ai mal à la dent.",

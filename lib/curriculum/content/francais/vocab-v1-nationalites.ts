@@ -6,7 +6,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
   title: "Les nationalités",
   section: "V1",
   words: [
-    { word: "suisse",                              image: "suisse.jpg",      relatedWords: ["la Suisse"],       definition: ["originaire de Suisse", "qui vient de Suisse", "de nationalité suisse"], exampleSentences: {
+    { word: "suisse",                              image: "suisse.webp",      relatedWords: ["la Suisse"],       definition: ["originaire de Suisse", "qui vient de Suisse", "de nationalité suisse"], exampleSentences: {
         a1: [
           "Il est suisse.",
           "Elle est suisse.",
@@ -105,7 +105,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque suisse est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "français",   feminine: "française",   image: "france.jpg",      relatedWords: ["la France"],       definition: ["originaire de France", "qui parle français comme langue maternelle", "de nationalité française"], exampleSentences: {
+    { word: "français",   feminine: "française",   image: "france.webp",      relatedWords: ["la France"],       definition: ["originaire de France", "qui parle français comme langue maternelle", "de nationalité française"], exampleSentences: {
         a1: [
           "Il est français.",
           "Elle est française.",
@@ -204,7 +204,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque français est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "belge",                               image: "belgique.jpg",    relatedWords: ["la Belgique"],     definition: ["originaire de Belgique", "qui vient de Belgique", "de nationalité belge"], exampleSentences: {
+    { word: "belge",                               image: "belgique.webp",    relatedWords: ["la Belgique"],     definition: ["originaire de Belgique", "qui vient de Belgique", "de nationalité belge"], exampleSentences: {
         a1: [
           "Il est belge.",
           "Elle est belge.",
@@ -303,7 +303,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque belge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "italien",    feminine: "italienne",   image: "italie.jpg",      relatedWords: ["l'Italie"],        definition: ["originaire d'Italie", "qui vient d'Italie", "de nationalité italienne"], exampleSentences: {
+    { word: "italien",    feminine: "italienne",   image: "italie.webp",      relatedWords: ["l'Italie"],        definition: ["originaire d'Italie", "qui vient d'Italie", "de nationalité italienne"], exampleSentences: {
         a1: [
           "Il est italien.",
           "Elle est italienne.",
@@ -402,7 +402,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque italien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "espagnol",   feminine: "espagnole",   image: "espagne.jpg",     relatedWords: ["l'Espagne"],       definition: ["originaire d'Espagne", "qui vient d'Espagne", "de nationalité espagnole"], exampleSentences: {
+    { word: "espagnol",   feminine: "espagnole",   image: "espagne.webp",     relatedWords: ["l'Espagne"],       definition: ["originaire d'Espagne", "qui vient d'Espagne", "de nationalité espagnole"], exampleSentences: {
         a1: [
           "Il est espagnol.",
           "Elle est espagnole.",
@@ -501,7 +501,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque espagnol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "portugais",  feminine: "portugaise",  image: "portugal.jpg",    relatedWords: ["le Portugal"],     definition: ["originaire du Portugal", "qui vient du Portugal", "de nationalité portugaise"], exampleSentences: {
+    { word: "portugais",  feminine: "portugaise",  image: "portugal.webp",    relatedWords: ["le Portugal"],     definition: ["originaire du Portugal", "qui vient du Portugal", "de nationalité portugaise"], exampleSentences: {
         a1: [
           "Il est portugais.",
           "Elle est portugaise.",
@@ -600,7 +600,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque portugais est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "allemand",   feminine: "allemande",   image: "allemagne.jpg",   relatedWords: ["l'Allemagne"],     definition: ["originaire d'Allemagne", "qui vient d'Allemagne", "de nationalité allemande"], exampleSentences: {
+    { word: "allemand",   feminine: "allemande",   image: "allemagne.webp",   relatedWords: ["l'Allemagne"],     definition: ["originaire d'Allemagne", "qui vient d'Allemagne", "de nationalité allemande"], exampleSentences: {
         a1: [
           "Il est allemand.",
           "Elle est allemande.",
@@ -699,7 +699,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque allemand est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "anglais",    feminine: "anglaise",    image: "angleterre.jpg",  relatedWords: ["l'Angleterre"],    definition: ["originaire d'Angleterre", "qui vient du Royaume-Uni", "de nationalité britannique"], exampleSentences: {
+    { word: "anglais",    feminine: "anglaise",    image: "angleterre.webp",  relatedWords: ["l'Angleterre"],    definition: ["originaire d'Angleterre", "qui vient du Royaume-Uni", "de nationalité britannique"], exampleSentences: {
         a1: [
           "Il est anglais.",
           "Elle est anglaise.",
@@ -798,7 +798,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque anglais est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "américain",  feminine: "américaine",  image: "etats-unis.jpg",  relatedWords: ["les États-Unis"],  definition: ["originaire des États-Unis", "qui vient d'Amérique", "de nationalité américaine"], exampleSentences: {
+    { word: "américain",  feminine: "américaine",  image: "etats-unis.webp",  relatedWords: ["les États-Unis"],  definition: ["originaire des États-Unis", "qui vient d'Amérique", "de nationalité américaine"], exampleSentences: {
         a1: [
           "Il est américain.",
           "Elle est américaine.",
@@ -897,7 +897,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque américain est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "canadien",   feminine: "canadienne",  image: "canada.jpg",      relatedWords: ["le Canada"],       definition: ["originaire du Canada", "qui vient du Canada", "de nationalité canadienne"], exampleSentences: {
+    { word: "canadien",   feminine: "canadienne",  image: "canada.webp",      relatedWords: ["le Canada"],       definition: ["originaire du Canada", "qui vient du Canada", "de nationalité canadienne"], exampleSentences: {
         a1: [
           "Il est canadien.",
           "Elle est canadienne.",
@@ -996,7 +996,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque canadien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "russe",                               image: "russie.jpg",      relatedWords: ["la Russie"],       definition: ["originaire de Russie", "qui vient de Russie", "de nationalité russe"], exampleSentences: {
+    { word: "russe",                               image: "russie.webp",      relatedWords: ["la Russie"],       definition: ["originaire de Russie", "qui vient de Russie", "de nationalité russe"], exampleSentences: {
         a1: [
           "Il est russe.",
           "Elle est russe.",
@@ -1095,7 +1095,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque russe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chinois",    feminine: "chinoise",    image: "chine.jpg",       relatedWords: ["la Chine"],        definition: ["originaire de Chine", "qui vient de Chine", "de nationalité chinoise"], exampleSentences: {
+    { word: "chinois",    feminine: "chinoise",    image: "chine.webp",       relatedWords: ["la Chine"],        definition: ["originaire de Chine", "qui vient de Chine", "de nationalité chinoise"], exampleSentences: {
         a1: [
           "Il est chinois.",
           "Elle est chinoise.",
@@ -1194,7 +1194,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque chinois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "autrichien", feminine: "autrichienne", image: "autriche.jpg", relatedWords: ["l'Autriche"], definition: ["originaire d'Autriche", "qui vient d'Autriche", "de nationalité autrichienne"], exampleSentences: {
+    { word: "autrichien", feminine: "autrichienne", image: "autriche.webp", relatedWords: ["l'Autriche"], definition: ["originaire d'Autriche", "qui vient d'Autriche", "de nationalité autrichienne"], exampleSentences: {
         a1: [
           "Il est autrichien.",
           "Elle est autrichienne.",
@@ -1293,7 +1293,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque autrichien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "syrien", feminine: "syrienne", image: "syrie.jpg", relatedWords: ["la Syrie"], definition: ["originaire de Syrie", "qui vient de Syrie", "de nationalité syrienne"], exampleSentences: {
+    { word: "syrien", feminine: "syrienne", image: "syrie.webp", relatedWords: ["la Syrie"], definition: ["originaire de Syrie", "qui vient de Syrie", "de nationalité syrienne"], exampleSentences: {
         a1: [
           "Il est syrien.",
           "Elle est syrienne.",
@@ -1392,7 +1392,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque syrien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "érythréen", feminine: "érythréenne", image: "erythree.jpg", relatedWords: ["l'Érythrée"], definition: ["originaire d'Érythrée", "qui vient d'Érythrée", "de nationalité érythréenne"], exampleSentences: {
+    { word: "érythréen", feminine: "érythréenne", image: "erythree.webp", relatedWords: ["l'Érythrée"], definition: ["originaire d'Érythrée", "qui vient d'Érythrée", "de nationalité érythréenne"], exampleSentences: {
         a1: [
           "Il est érythréen.",
           "Elle est érythréenne.",
@@ -1491,7 +1491,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque érythréen est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "turc", feminine: "turque", image: "turquie.jpg", relatedWords: ["la Turquie"], definition: ["originaire de Turquie", "qui vient de Turquie", "de nationalité turque"], exampleSentences: {
+    { word: "turc", feminine: "turque", image: "turquie.webp", relatedWords: ["la Turquie"], definition: ["originaire de Turquie", "qui vient de Turquie", "de nationalité turque"], exampleSentences: {
         a1: [
           "Il est turc.",
           "Elle est turque.",
@@ -1590,7 +1590,7 @@ export const V1_NATIONALITES_THEME: VocabTheme = {
           "Puisque turc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "iranien", feminine: "iranienne", image: "iran.jpg", relatedWords: ["l'Iran"], definition: ["originaire d'Iran", "qui vient d'Iran", "de nationalité iranienne"], exampleSentences: {
+    { word: "iranien", feminine: "iranienne", image: "iran.webp", relatedWords: ["l'Iran"], definition: ["originaire d'Iran", "qui vient d'Iran", "de nationalité iranienne"], exampleSentences: {
         a1: [
           "Il est iranien.",
           "Elle est iranienne.",

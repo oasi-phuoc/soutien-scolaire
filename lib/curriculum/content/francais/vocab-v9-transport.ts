@@ -6,7 +6,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
   title: "Le transport",
   section: "V9",
   words: [
-    { word: "bus", image: "bus.jpg",     article: "le",  gender: "m", definition: "transport collectif urbain sur route" , exampleSentences: {
+    { word: "bus", image: "bus.webp",     article: "le",  gender: "m", definition: "transport collectif urbain sur route" , exampleSentences: {
         a1: [
           "Je vois le bus.",
           "Je cherche le bus.",
@@ -102,7 +102,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bus est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métro", image: "metro.jpg",   article: "le",  gender: "m", definition: "train souterrain en ville" , exampleSentences: {
+    { word: "métro", image: "metro.webp",   article: "le",  gender: "m", definition: "train souterrain en ville" , exampleSentences: {
         a1: [
           "Je vois le métro.",
           "Je cherche le métro.",
@@ -198,7 +198,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque métro est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tram", image: "tram.jpg",    article: "le",  gender: "m", definition: "transport sur rails en surface" , exampleSentences: {
+    { word: "tram", image: "tram.webp",    article: "le",  gender: "m", definition: "transport sur rails en surface" , exampleSentences: {
         a1: [
           "Je vois le tram.",
           "Je cherche le tram.",
@@ -294,7 +294,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque tram est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "train", image: "train.jpg",   article: "le",  gender: "m", definition: "transport ferroviaire longue distance" , exampleSentences: {
+    { word: "train", image: "train.webp",   article: "le",  gender: "m", definition: "transport ferroviaire longue distance" , exampleSentences: {
         a1: [
           "Je vois le train.",
           "Je cherche le train.",
@@ -390,7 +390,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque train est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "voiture", image: "voiture.jpg", article: "la",  gender: "f", definition: "véhicule personnel à moteur" , exampleSentences: {
+    { word: "voiture", image: "voiture.webp", article: "la",  gender: "f", definition: "véhicule personnel à moteur" , exampleSentences: {
         a1: [
           "Je vois la voiture.",
           "Je cherche la voiture.",
@@ -486,7 +486,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque voiture est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vélo", image: "/vocab/images/V3/velo.png",    article: "le",  gender: "m", definition: "véhicule à deux roues sans moteur" , exampleSentences: {
+    { word: "vélo", image: "/vocab/images/V3/velo.webp",    article: "le",  gender: "m", definition: "véhicule à deux roues sans moteur" , exampleSentences: {
         a1: [
           "Je vois le vélo.",
           "Je cherche le vélo.",
@@ -582,7 +582,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque vélo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "taxi", image: "taxi.jpg",    article: "le",  gender: "m", definition: "voiture avec chauffeur payant" , exampleSentences: {
+    { word: "taxi", image: "taxi.webp",    article: "le",  gender: "m", definition: "voiture avec chauffeur payant" , exampleSentences: {
         a1: [
           "Je vois le taxi.",
           "Je cherche le taxi.",
@@ -678,7 +678,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque taxi est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "moto", image: "moto.jpg",    article: "la",  gender: "f", definition: "véhicule motorisé à deux roues" , exampleSentences: {
+    { word: "moto", image: "moto.webp",    article: "la",  gender: "f", definition: "véhicule motorisé à deux roues" , exampleSentences: {
         a1: [
           "Je vois la moto.",
           "Je cherche la moto.",
@@ -774,7 +774,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque moto est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "avion", image: "avion.jpg",   article: "l'",  gender: "m", definition: "véhicule aérien pour voyager loin" , exampleSentences: {
+    { word: "avion", image: "avion.webp",   article: "l'",  gender: "m", definition: "véhicule aérien pour voyager loin" , exampleSentences: {
         a1: [
           "Je vois l'avion.",
           "Je cherche l'avion.",
@@ -870,7 +870,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque avion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bateau", image: "bateau.jpg",  article: "le",  gender: "m", definition: "véhicule pour voyager sur l'eau" , exampleSentences: {
+    { word: "bateau", image: "bateau.webp",  article: "le",  gender: "m", definition: "véhicule pour voyager sur l'eau" , exampleSentences: {
         a1: [
           "Je vois le bateau.",
           "Je cherche le bateau.",
@@ -966,7 +966,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque bateau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "camion", image: "camion.jpg",  article: "le",  gender: "m", definition: "grand véhicule pour transporter des marchandises" , exampleSentences: {
+    { word: "camion", image: "camion.webp",  article: "le",  gender: "m", definition: "grand véhicule pour transporter des marchandises" , exampleSentences: {
         a1: [
           "Je vois le camion.",
           "Je cherche le camion.",
@@ -1062,7 +1062,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque camion est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "scooter", image: "scooter.jpg", article: "le",  gender: "m", definition: "petit véhicule motorisé à deux roues" , exampleSentences: {
+    { word: "scooter", image: "scooter.webp", article: "le",  gender: "m", definition: "petit véhicule motorisé à deux roues" , exampleSentences: {
         a1: [
           "Je vois le scooter.",
           "Je cherche le scooter.",
@@ -1158,7 +1158,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque scooter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "arrêt", image: "arret.jpg",   article: "l'",  gender: "m", definition: "point d'arrêt pour le bus ou tram" , exampleSentences: {
+    { word: "arrêt", image: "arret.webp",   article: "l'",  gender: "m", definition: "point d'arrêt pour le bus ou tram" , exampleSentences: {
         a1: [
           "Je vois l'arrêt.",
           "Je cherche l'arrêt.",
@@ -1254,7 +1254,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque arrêt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ticket", image: "ticket.jpg",  article: "le",  gender: "m", definition: "billet pour un trajet en transport commun" , exampleSentences: {
+    { word: "ticket", image: "ticket.webp",  article: "le",  gender: "m", definition: "billet pour un trajet en transport commun" , exampleSentences: {
         a1: [
           "Je vois le ticket.",
           "Je cherche le ticket.",
@@ -1350,7 +1350,7 @@ export const V9_TRANSPORT_THEME: VocabTheme = {
           "Puisque ticket est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "billet", image: "billet.jpg",  article: "le",  gender: "m", definition: "titre de transport pour le train ou avion" , exampleSentences: {
+    { word: "billet", image: "billet.webp",  article: "le",  gender: "m", definition: "titre de transport pour le train ou avion" , exampleSentences: {
         a1: [
           "Je vois le billet.",
           "Je cherche le billet.",

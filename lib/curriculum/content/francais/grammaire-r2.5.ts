@@ -439,7 +439,7 @@ export const A1_GR_L11: GrammarLesson = {
       poolSize: 5,
       imagePool: [
         {
-          image: "/gram/images/R2/description-1.png",
+          image: "/gram/images/R2/description-1.webp",
           items: [
             // sac à main / chaise
             { statement: "Le sac à main est sur la chaise.",          answer: true  },
@@ -502,7 +502,7 @@ export const A1_GR_L11: GrammarLesson = {
           ],
         },
         {
-          image: "/gram/images/R2/description-2.png",
+          image: "/gram/images/R2/description-2.webp",
           items: [
             // appareil photo / chaise
             { statement: "L'appareil photo est sur la chaise.",       answer: true  },
@@ -573,7 +573,7 @@ export const A1_GR_L11: GrammarLesson = {
           ],
         },
         {
-          image: "/gram/images/R2/description-3.png",
+          image: "/gram/images/R2/description-3.webp",
           items: [
             // lampe / étagère
             { statement: "La lampe est sur l'étagère.",               answer: true  },
@@ -705,7 +705,7 @@ export const A1_GR_L11: GrammarLesson = {
       promptPoolSize: 5,
       imagePool: [
         {
-          image: "/gram/images/R2/description-4.png",
+          image: "/gram/images/R2/description-4.webp",
           promptPool: [
             "la chaise / le coussin",
             "la lampe / la table",
@@ -724,7 +724,7 @@ export const A1_GR_L11: GrammarLesson = {
           ],
         },
         {
-          image: "/gram/images/R2/description-5.png",
+          image: "/gram/images/R2/description-5.webp",
           promptPool: [
             "la chaise / le coussin",
             "le chien / la chaise",
@@ -743,7 +743,7 @@ export const A1_GR_L11: GrammarLesson = {
           ],
         },
         {
-          image: "/gram/images/R2/description-6.png",
+          image: "/gram/images/R2/description-6.webp",
           promptPool: [
             "le chat / la chaise",
             "la lampe / la table",

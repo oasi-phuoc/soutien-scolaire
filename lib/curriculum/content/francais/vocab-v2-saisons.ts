@@ -6,7 +6,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
   title: "Les saisons",
   section: "V2",
   words: [
-    { word: "printemps", image: "printemps.jpg",     article: "le",  gender: "m", definition: "saison entre l'hiver et l'été" , exampleSentences: {
+    { word: "printemps", image: "printemps.webp",     article: "le",  gender: "m", definition: "saison entre l'hiver et l'été" , exampleSentences: {
         a1: [
           "Je connais le printemps.",
           "Je note le printemps.",
@@ -107,7 +107,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque printemps est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "été", image: "ete.jpg",           article: "l'",  gender: "m", definition: "saison la plus chaude de l'année" , exampleSentences: {
+    { word: "été", image: "ete.webp",           article: "l'",  gender: "m", definition: "saison la plus chaude de l'année" , exampleSentences: {
         a1: [
           "Je connais l'été.",
           "Je note l'été.",
@@ -208,7 +208,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque été est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "automne", image: "automne.jpg",       article: "l'",  gender: "m", definition: "saison entre l'été et l'hiver" , exampleSentences: {
+    { word: "automne", image: "automne.webp",       article: "l'",  gender: "m", definition: "saison entre l'été et l'hiver" , exampleSentences: {
         a1: [
           "Je connais l'automne.",
           "Je note l'automne.",
@@ -309,7 +309,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque automne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "hiver", image: "hiver.jpg",         article: "l'",  gender: "m", definition: "saison la plus froide de l'année" , exampleSentences: {
+    { word: "hiver", image: "hiver.webp",         article: "l'",  gender: "m", definition: "saison la plus froide de l'année" , exampleSentences: {
         a1: [
           "Je connais l'hiver.",
           "Je note l'hiver.",
@@ -410,7 +410,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque hiver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saison", image: "saison.png",        article: "la",  gender: "f", definition: "une des quatre périodes de l'année" , exampleSentences: {
+    { word: "saison", image: "saison.webp",        article: "la",  gender: "f", definition: "une des quatre périodes de l'année" , exampleSentences: {
         a1: [
           "Je connais la saison.",
           "Je note la saison.",
@@ -511,7 +511,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque saison est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "climat", image: "climat.png",        article: "le",  gender: "m", definition: "conditions météo habituelles d'une région" , exampleSentences: {
+    { word: "climat", image: "climat.webp",        article: "le",  gender: "m", definition: "conditions météo habituelles d'une région" , exampleSentences: {
         a1: [
           "Je connais le climat.",
           "Je note le climat.",
@@ -612,7 +612,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque climat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "météo", image: "meteo.png",         article: "la",  gender: "f", definition: "prévision des conditions atmosphériques" , exampleSentences: {
+    { word: "météo", image: "meteo.webp",         article: "la",  gender: "f", definition: "prévision des conditions atmosphériques" , exampleSentences: {
         a1: [
           "Je connais la météo.",
           "Je note la météo.",
@@ -713,7 +713,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque météo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "température", image: "temperature.png",   article: "la",  gender: "f", definition: "mesure du chaud ou du froid en degrés" , exampleSentences: {
+    { word: "température", image: "temperature.webp",   article: "la",  gender: "f", definition: "mesure du chaud ou du froid en degrés" , exampleSentences: {
         a1: [
           "Je connais la température.",
           "Je note la température.",
@@ -814,7 +814,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque température est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se réchauffer", image: "se-rechauffer.png",                              definition: "devenir plus chaud, augmenter en température" , exampleSentences: {
+    { word: "se réchauffer", image: "se-rechauffer.webp",                              definition: "devenir plus chaud, augmenter en température" , exampleSentences: {
         a1: [
           "Je connais se réchauffer.",
           "Je note se réchauffer.",
@@ -915,7 +915,7 @@ export const V2_SAISONS_THEME: VocabTheme = {
           "Puisque se réchauffer est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "se rafraîchir", image: "se-rafraichir.png",                              definition: "devenir plus frais, baisser en température" , exampleSentences: {
+    { word: "se rafraîchir", image: "se-rafraichir.webp",                              definition: "devenir plus frais, baisser en température" , exampleSentences: {
         a1: [
           "Je connais se rafraîchir.",
           "Je note se rafraîchir.",

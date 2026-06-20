@@ -6,7 +6,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
   title: "Le paysage",
   section: "V9",
   words: [
-    { word: "montagne", image: "montagne.jpg", article: "la",  gender: "f", definition: "relief élevé avec des sommets" , exampleSentences: {
+    { word: "montagne", image: "montagne.webp", article: "la",  gender: "f", definition: "relief élevé avec des sommets" , exampleSentences: {
         a1: [
           "Je vois la montagne.",
           "Je cherche la montagne.",
@@ -102,7 +102,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque montagne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mer", image: "mer.png",      article: "la",  gender: "f", definition: "grande étendue d'eau salée" , exampleSentences: {
+    { word: "mer", image: "mer.webp",      article: "la",  gender: "f", definition: "grande étendue d'eau salée" , exampleSentences: {
         a1: [
           "Je vois la mer.",
           "Je cherche la mer.",
@@ -198,7 +198,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque mer est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plage", image: "plage.png",    article: "la",  gender: "f", definition: "bande de sable au bord de la mer" , exampleSentences: {
+    { word: "plage", image: "plage.webp",    article: "la",  gender: "f", definition: "bande de sable au bord de la mer" , exampleSentences: {
         a1: [
           "Je vois la plage.",
           "Je cherche la plage.",
@@ -294,7 +294,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque plage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "campagne", image: "campagne.png", article: "la",  gender: "f", definition: "zone rurale avec champs et nature" , exampleSentences: {
+    { word: "campagne", image: "campagne.webp", article: "la",  gender: "f", definition: "zone rurale avec champs et nature" , exampleSentences: {
         a1: [
           "Je vois la campagne.",
           "Je cherche la campagne.",
@@ -390,7 +390,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque campagne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "forêt", image: "foret.png",    article: "la",  gender: "f", definition: "grande étendue d'arbres" , exampleSentences: {
+    { word: "forêt", image: "foret.webp",    article: "la",  gender: "f", definition: "grande étendue d'arbres" , exampleSentences: {
         a1: [
           "Je vois la forêt.",
           "Je cherche la forêt.",
@@ -486,7 +486,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque forêt est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rivière", image: "riviere.png",  article: "la",  gender: "f", definition: "cours d'eau naturel" , exampleSentences: {
+    { word: "rivière", image: "riviere.webp",  article: "la",  gender: "f", definition: "cours d'eau naturel" , exampleSentences: {
         a1: [
           "Je vois la rivière.",
           "Je cherche la rivière.",
@@ -582,7 +582,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque rivière est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lac", image: "lac.png",      article: "le",  gender: "m", definition: "étendue d'eau douce entourée de terres" , exampleSentences: {
+    { word: "lac", image: "lac.webp",      article: "le",  gender: "m", definition: "étendue d'eau douce entourée de terres" , exampleSentences: {
         a1: [
           "Je vois le lac.",
           "Je cherche le lac.",
@@ -678,7 +678,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque lac est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "colline", image: "colline.png",  article: "la",  gender: "f", definition: "élévation de terrain moins haute qu'une montagne" , exampleSentences: {
+    { word: "colline", image: "colline.webp",  article: "la",  gender: "f", definition: "élévation de terrain moins haute qu'une montagne" , exampleSentences: {
         a1: [
           "Je vois la colline.",
           "Je cherche la colline.",
@@ -774,7 +774,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque colline est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "vallée", image: "vallee.png",   article: "la",  gender: "f", definition: "espace plat entre deux reliefs" , exampleSentences: {
+    { word: "vallée", image: "vallee.webp",   article: "la",  gender: "f", definition: "espace plat entre deux reliefs" , exampleSentences: {
         a1: [
           "Je vois la vallée.",
           "Je cherche la vallée.",
@@ -870,7 +870,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque vallée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "désert", image: "desert.png",   article: "le",  gender: "m", definition: "région très sèche et peu habitée" , exampleSentences: {
+    { word: "désert", image: "desert.webp",   article: "le",  gender: "m", definition: "région très sèche et peu habitée" , exampleSentences: {
         a1: [
           "Je vois le désert.",
           "Je cherche le désert.",
@@ -966,7 +966,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque désert est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "île", image: "ile.png",      article: "l'",  gender: "f", definition: "terre entourée d'eau de tous côtés" , exampleSentences: {
+    { word: "île", image: "ile.webp",      article: "l'",  gender: "f", definition: "terre entourée d'eau de tous côtés" , exampleSentences: {
         a1: [
           "Je vois l'île.",
           "Je cherche l'île.",
@@ -1062,7 +1062,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque île est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nature", image: "nature.jpg",   article: "la",  gender: "f", definition: "l'ensemble du monde naturel" , exampleSentences: {
+    { word: "nature", image: "nature.webp",   article: "la",  gender: "f", definition: "l'ensemble du monde naturel" , exampleSentences: {
         a1: [
           "Je vois la nature.",
           "Je cherche la nature.",
@@ -1158,7 +1158,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque nature est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paysage", image: "paysage.jpg",  article: "le",  gender: "m", definition: "vue d'ensemble d'un lieu naturel" , exampleSentences: {
+    { word: "paysage", image: "paysage.webp",  article: "le",  gender: "m", definition: "vue d'ensemble d'un lieu naturel" , exampleSentences: {
         a1: [
           "Je vois le paysage.",
           "Je cherche le paysage.",
@@ -1254,7 +1254,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque paysage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "côte", image: "cote.jpg",     article: "la",  gender: "f", definition: "zone littorale entre terre et mer" , exampleSentences: {
+    { word: "côte", image: "cote.webp",     article: "la",  gender: "f", definition: "zone littorale entre terre et mer" , exampleSentences: {
         a1: [
           "Je vois la côte.",
           "Je cherche la côte.",
@@ -1350,7 +1350,7 @@ export const V9_PAYSAGE_THEME: VocabTheme = {
           "Puisque côte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "volcan", image: "volcan.png",   article: "le",  gender: "m", definition: "montagne qui peut cracher de la lave" , exampleSentences: {
+    { word: "volcan", image: "volcan.webp",   article: "le",  gender: "m", definition: "montagne qui peut cracher de la lave" , exampleSentences: {
         a1: [
           "Je vois le volcan.",
           "Je cherche le volcan.",

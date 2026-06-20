@@ -6,7 +6,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
   title: "Les types de logement",
   section: "V4",
   words: [
-    { word: "maison", image: "maison.jpg",      article: "la",  gender: "f", definition: "habitation individuelle avec jardin" , exampleSentences: {
+    { word: "maison", image: "maison.webp",      article: "la",  gender: "f", definition: "habitation individuelle avec jardin" , exampleSentences: {
         a1: [
           "Je vois la maison.",
           "J'utilise la maison.",
@@ -107,7 +107,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque maison est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "appartement", image: "appartement.jpg", article: "l'",  gender: "m", definition: "logement dans un immeuble" , exampleSentences: {
+    { word: "appartement", image: "appartement.webp", article: "l'",  gender: "m", definition: "logement dans un immeuble" , exampleSentences: {
         a1: [
           "Je vois l'appartement.",
           "J'utilise l'appartement.",
@@ -208,7 +208,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque appartement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "studio", image: "studio.jpg",      article: "le",  gender: "m", definition: "petit appartement d'une seule pièce" , exampleSentences: {
+    { word: "studio", image: "studio.webp",      article: "le",  gender: "m", definition: "petit appartement d'une seule pièce" , exampleSentences: {
         a1: [
           "Je vois le studio.",
           "J'utilise le studio.",
@@ -309,7 +309,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque studio est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ferme", image: "ferme.jpg",       article: "la",  gender: "f", definition: "exploitation agricole avec logement" , exampleSentences: {
+    { word: "ferme", image: "ferme.webp",       article: "la",  gender: "f", definition: "exploitation agricole avec logement" , exampleSentences: {
         a1: [
           "Je vois la ferme.",
           "J'utilise la ferme.",
@@ -410,7 +410,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque ferme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "immeuble", image: "immeuble.jpg",    article: "l'",  gender: "m", definition: "bâtiment collectif à plusieurs étages" , exampleSentences: {
+    { word: "immeuble", image: "immeuble.webp",    article: "l'",  gender: "m", definition: "bâtiment collectif à plusieurs étages" , exampleSentences: {
         a1: [
           "Je vois l'immeuble.",
           "J'utilise l'immeuble.",
@@ -511,7 +511,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque immeuble est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chalet", image: "chalet.jpg",      article: "le",  gender: "m", definition: "maison en bois à la montagne" , exampleSentences: {
+    { word: "chalet", image: "chalet.webp",      article: "le",  gender: "m", definition: "maison en bois à la montagne" , exampleSentences: {
         a1: [
           "Je vois le chalet.",
           "J'utilise le chalet.",
@@ -612,7 +612,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque chalet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cabane", image: "cabane.jpg",      article: "la",  gender: "f", definition: "petite construction simple en bois" , exampleSentences: {
+    { word: "cabane", image: "cabane.webp",      article: "la",  gender: "f", definition: "petite construction simple en bois" , exampleSentences: {
         a1: [
           "Je vois la cabane.",
           "J'utilise la cabane.",
@@ -713,7 +713,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque cabane est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "logement", image: "logement.jpg",    article: "le",  gender: "m", definition: "endroit où l'on habite" , exampleSentences: {
+    { word: "logement", image: "logement.webp",    article: "le",  gender: "m", definition: "endroit où l'on habite" , exampleSentences: {
         a1: [
           "Je vois le logement.",
           "J'utilise le logement.",
@@ -814,7 +814,7 @@ export const V4_TYPE_LOGEMENT_THEME: VocabTheme = {
           "Puisque logement est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "dortoir", image: "dortoir.jpg",     article: "le",  gender: "m", definition: "grande pièce avec plusieurs lits" , exampleSentences: {
+    { word: "dortoir", image: "dortoir.webp",     article: "le",  gender: "m", definition: "grande pièce avec plusieurs lits" , exampleSentences: {
         a1: [
           "Je vois le dortoir.",
           "J'utilise le dortoir.",

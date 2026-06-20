@@ -6,7 +6,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
   title: "Les matières",
   section: "V6",
   words: [
-    { word: "coton",      image: "coton.png",      article: "le",  gender: "m", definition: "tissu doux fait de la plante de coton" , exampleSentences: {
+    { word: "coton",      image: "coton.webp",      article: "le",  gender: "m", definition: "tissu doux fait de la plante de coton" , exampleSentences: {
         a1: [
           "Je connais le coton.",
           "J'utilise le coton.",
@@ -107,7 +107,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque coton est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laine",      image: "laine.png",      article: "la",  gender: "f", definition: "tissu chaud fait de poils de mouton" , exampleSentences: {
+    { word: "laine",      image: "laine.webp",      article: "la",  gender: "f", definition: "tissu chaud fait de poils de mouton" , exampleSentences: {
         a1: [
           "Je connais la laine.",
           "J'utilise la laine.",
@@ -208,7 +208,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque laine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuir",       image: "cuir.png",       article: "le",  gender: "m", definition: "matière faite de peau animale tannée" , exampleSentences: {
+    { word: "cuir",       image: "cuir.webp",       article: "le",  gender: "m", definition: "matière faite de peau animale tannée" , exampleSentences: {
         a1: [
           "Je connais le cuir.",
           "J'utilise le cuir.",
@@ -309,7 +309,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque cuir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "soie",       image: "soie.png",       article: "la",  gender: "f", definition: "tissu fin et brillant produit par les vers à soie" , exampleSentences: {
+    { word: "soie",       image: "soie.webp",       article: "la",  gender: "f", definition: "tissu fin et brillant produit par les vers à soie" , exampleSentences: {
         a1: [
           "Je connais la soie.",
           "J'utilise la soie.",
@@ -410,7 +410,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque soie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plastique",  image: "plastique.png",  article: "le",  gender: "m", definition: "matière synthétique légère et imperméable" , exampleSentences: {
+    { word: "plastique",  image: "plastique.webp",  article: "le",  gender: "m", definition: "matière synthétique légère et imperméable" , exampleSentences: {
         a1: [
           "Je connais le plastique.",
           "J'utilise le plastique.",
@@ -511,7 +511,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque plastique est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "métal",      image: "metal.png",      article: "le",  gender: "m", definition: "matière dure et conductrice comme le fer" , exampleSentences: {
+    { word: "métal",      image: "metal.webp",      article: "le",  gender: "m", definition: "matière dure et conductrice comme le fer" , exampleSentences: {
         a1: [
           "Je connais le métal.",
           "J'utilise le métal.",
@@ -612,7 +612,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque métal est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bois",       image: "bois.png",       article: "le",  gender: "m", definition: "matière naturelle provenant des arbres" , exampleSentences: {
+    { word: "bois",       image: "bois.webp",       article: "le",  gender: "m", definition: "matière naturelle provenant des arbres" , exampleSentences: {
         a1: [
           "Je connais le bois.",
           "J'utilise le bois.",
@@ -713,7 +713,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque bois est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verre",      image: "verre.png",      article: "le",  gender: "m", definition: "matière transparente et fragile" , exampleSentences: {
+    { word: "verre",      image: "verre.webp",      article: "le",  gender: "m", definition: "matière transparente et fragile" , exampleSentences: {
         a1: [
           "Je connais le verre.",
           "J'utilise le verre.",
@@ -814,7 +814,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque verre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "papier",     image: "papier.png",     article: "le",  gender: "m", definition: "matière fine faite de fibres végétales" , exampleSentences: {
+    { word: "papier",     image: "papier.webp",     article: "le",  gender: "m", definition: "matière fine faite de fibres végétales" , exampleSentences: {
         a1: [
           "Je connais le papier.",
           "J'utilise le papier.",
@@ -915,7 +915,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque papier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nylon",      image: "nylon.png",      article: "le",  gender: "m", definition: "tissu synthétique résistant" , exampleSentences: {
+    { word: "nylon",      image: "nylon.webp",      article: "le",  gender: "m", definition: "tissu synthétique résistant" , exampleSentences: {
         a1: [
           "Je connais le nylon.",
           "J'utilise le nylon.",
@@ -1016,7 +1016,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque nylon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "caoutchouc", image: "caoutchouc.png", article: "le",  gender: "m", definition: "matière élastique pour imperméables et chaussures" , exampleSentences: {
+    { word: "caoutchouc", image: "caoutchouc.webp", article: "le",  gender: "m", definition: "matière élastique pour imperméables et chaussures" , exampleSentences: {
         a1: [
           "Je connais le caoutchouc.",
           "J'utilise le caoutchouc.",
@@ -1117,7 +1117,7 @@ export const V6_MATIERES_THEME: VocabTheme = {
           "Puisque caoutchouc est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "velours",    image: "velours.png",    article: "le",  gender: "m", definition: "tissu doux avec un côté poilu et brillant" , exampleSentences: {
+    { word: "velours",    image: "velours.webp",    article: "le",  gender: "m", definition: "tissu doux avec un côté poilu et brillant" , exampleSentences: {
         a1: [
           "Je connais le velours.",
           "J'utilise le velours.",

@@ -7,7 +7,7 @@ export const V4_PANNES_THEME: VocabTheme = {
   section: "V4",
   words: [
     // Les problèmes électriques
-    { word: "panne",        image: "panne-de-courant.png", article: "la",  gender: "f", definition: "arrêt de fonctionnement d'un appareil ou coupure d'électricité",  group: "Les problèmes électriques" , exampleSentences: {
+    { word: "panne",        image: "panne-de-courant.webp", article: "la",  gender: "f", definition: "arrêt de fonctionnement d'un appareil ou coupure d'électricité",  group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois la panne.",
           "J'utilise la panne.",
@@ -108,7 +108,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque panne est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricien",  image: "electricien.png",      article: "l'",  gender: "m", feminine: "électricienne", definition: "artisan spécialiste des installations électriques", group: "Les problèmes électriques" , exampleSentences: {
+    { word: "électricien",  image: "electricien.webp",      article: "l'",  gender: "m", feminine: "électricienne", definition: "artisan spécialiste des installations électriques", group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois l'électricien.",
           "J'utilise l'électricien.",
@@ -209,7 +209,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque électricien est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "électricité",  image: "electricite.png",      article: "l'",  gender: "f", definition: "énergie utilisée pour alimenter les appareils",                   group: "Les problèmes électriques" , exampleSentences: {
+    { word: "électricité",  image: "electricite.webp",      article: "l'",  gender: "f", definition: "énergie utilisée pour alimenter les appareils",                   group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois l'électricité.",
           "J'utilise l'électricité.",
@@ -310,7 +310,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque électricité est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ampoule",      image: "ampoule.png",          article: "l'",  gender: "f", definition: "source lumineuse électrique",                                     group: "Les problèmes électriques" , exampleSentences: {
+    { word: "ampoule",      image: "ampoule.webp",          article: "l'",  gender: "f", definition: "source lumineuse électrique",                                     group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois l'ampoule.",
           "J'utilise l'ampoule.",
@@ -411,7 +411,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque ampoule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "interrupteur", image: "interrupteur.png",     article: "l'",  gender: "m", definition: "commande pour allumer ou éteindre la lumière",                   group: "Les problèmes électriques" , exampleSentences: {
+    { word: "interrupteur", image: "interrupteur.webp",     article: "l'",  gender: "m", definition: "commande pour allumer ou éteindre la lumière",                   group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois l'interrupteur.",
           "J'utilise l'interrupteur.",
@@ -512,7 +512,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque interrupteur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "prise",        image: "prise.jpg",            article: "la",  gender: "f", definition: "point de connexion électrique au mur",                           group: "Les problèmes électriques" , exampleSentences: {
+    { word: "prise",        image: "prise.webp",            article: "la",  gender: "f", definition: "point de connexion électrique au mur",                           group: "Les problèmes électriques" , exampleSentences: {
         a1: [
           "Je vois la prise.",
           "J'utilise la prise.",
@@ -615,7 +615,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes d'eau
-    { word: "fuite",        image: "fuite.png",            article: "la",  gender: "f", definition: "écoulement d'eau hors d'un tuyau",                               group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "fuite",        image: "fuite.webp",            article: "la",  gender: "f", definition: "écoulement d'eau hors d'un tuyau",                               group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois la fuite.",
           "J'utilise la fuite.",
@@ -716,7 +716,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque fuite est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "plombier",     image: "plombier.png",         article: "le",  gender: "m", feminine: "plombière",    definition: "artisan spécialiste des installations d'eau",        group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "plombier",     image: "plombier.webp",         article: "le",  gender: "m", feminine: "plombière",    definition: "artisan spécialiste des installations d'eau",        group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois le plombier.",
           "J'utilise le plombier.",
@@ -817,7 +817,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque plombier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "robinet",      image: "robinet.png",          article: "le",  gender: "m", definition: "dispositif pour ouvrir ou fermer l'eau",                         group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "robinet",      image: "robinet.webp",          article: "le",  gender: "m", definition: "dispositif pour ouvrir ou fermer l'eau",                         group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois le robinet.",
           "J'utilise le robinet.",
@@ -918,7 +918,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque robinet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "évier",        image: "evier.png",            article: "l'",  gender: "m", definition: "bac pour laver la vaisselle dans la cuisine",                    group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "évier",        image: "evier.webp",            article: "l'",  gender: "m", definition: "bac pour laver la vaisselle dans la cuisine",                    group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois l'évier.",
           "J'utilise l'évier.",
@@ -1019,7 +1019,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque évier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lavabo",       image: "lavabo.png",           article: "le",  gender: "m", definition: "bac pour se laver les mains dans la salle de bain",              group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "lavabo",       image: "lavabo.webp",           article: "le",  gender: "m", definition: "bac pour se laver les mains dans la salle de bain",              group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois le lavabo.",
           "J'utilise le lavabo.",
@@ -1120,7 +1120,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque lavabo est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tuyau",        image: "tuyau.png",            article: "le",  gender: "m", definition: "conduit pour l'eau ou le gaz",                                   group: "Les problèmes d'eau" , exampleSentences: {
+    { word: "tuyau",        image: "tuyau.webp",            article: "le",  gender: "m", definition: "conduit pour l'eau ou le gaz",                                   group: "Les problèmes d'eau" , exampleSentences: {
         a1: [
           "Je vois le tuyau.",
           "J'utilise le tuyau.",
@@ -1223,7 +1223,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes de chauffage
-    { word: "chauffage",    image: "probleme-de-chauffage.png", article: "le", gender: "m", definition: "système pour réchauffer un logement",                       group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "chauffage",    image: "probleme-de-chauffage.webp", article: "le", gender: "m", definition: "système pour réchauffer un logement",                       group: "Les problèmes de chauffage" , exampleSentences: {
         a1: [
           "Je vois le chauffage.",
           "J'utilise le chauffage.",
@@ -1324,7 +1324,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque chauffage est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réparateur",   image: "reparateur.png",       article: "le",  gender: "m", feminine: "réparatrice", definition: "personne qui répare les appareils en panne",                     group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "réparateur",   image: "reparateur.webp",       article: "le",  gender: "m", feminine: "réparatrice", definition: "personne qui répare les appareils en panne",                     group: "Les problèmes de chauffage" , exampleSentences: {
         a1: [
           "Je vois le réparateur.",
           "J'utilise le réparateur.",
@@ -1425,7 +1425,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque réparateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "radiateur",    image: "radiateur.png",        article: "le",  gender: "m", definition: "appareil qui diffuse la chaleur dans une pièce",                 group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "radiateur",    image: "radiateur.webp",        article: "le",  gender: "m", definition: "appareil qui diffuse la chaleur dans une pièce",                 group: "Les problèmes de chauffage" , exampleSentences: {
         a1: [
           "Je vois le radiateur.",
           "J'utilise le radiateur.",
@@ -1526,7 +1526,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque radiateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "thermostat",   image: "thermostat.png",       article: "le",  gender: "m", definition: "dispositif pour régler la température",                          group: "Les problèmes de chauffage" , exampleSentences: {
+    { word: "thermostat",   image: "thermostat.webp",       article: "le",  gender: "m", definition: "dispositif pour régler la température",                          group: "Les problèmes de chauffage" , exampleSentences: {
         a1: [
           "Je vois le thermostat.",
           "J'utilise le thermostat.",
@@ -1629,7 +1629,7 @@ export const V4_PANNES_THEME: VocabTheme = {
       } },
 
     // Les problèmes de portes
-    { word: "serrure",       image: "probleme-de-serrure.png", article: "la", gender: "f", definition: "mécanisme pour fermer une porte à clé",                    group: "Les problèmes de portes" , exampleSentences: {
+    { word: "serrure",       image: "probleme-de-serrure.webp", article: "la", gender: "f", definition: "mécanisme pour fermer une porte à clé",                    group: "Les problèmes de portes" , exampleSentences: {
         a1: [
           "Je vois la serrure.",
           "J'utilise la serrure.",
@@ -1730,7 +1730,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque serrure est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "serrurier",    image: "serrurier.png",        article: "le",  gender: "m", feminine: "serrurière",   definition: "artisan spécialiste des serrures et des clés",       group: "Les problèmes de portes" , exampleSentences: {
+    { word: "serrurier",    image: "serrurier.webp",        article: "le",  gender: "m", feminine: "serrurière",   definition: "artisan spécialiste des serrures et des clés",       group: "Les problèmes de portes" , exampleSentences: {
         a1: [
           "Je vois le serrurier.",
           "J'utilise le serrurier.",
@@ -1831,7 +1831,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque serrurier est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "porte",        image: "porte.png",            article: "la",  gender: "f", definition: "ouverture avec un battant pour entrer ou sortir",                group: "Les problèmes de portes" , exampleSentences: {
+    { word: "porte",        image: "porte.webp",            article: "la",  gender: "f", definition: "ouverture avec un battant pour entrer ou sortir",                group: "Les problèmes de portes" , exampleSentences: {
         a1: [
           "Je vois la porte.",
           "J'utilise la porte.",
@@ -1932,7 +1932,7 @@ export const V4_PANNES_THEME: VocabTheme = {
           "Puisque porte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "clé",          image: "cle.png",              article: "la",  gender: "f", definition: "objet pour ouvrir ou fermer une serrure",                        group: "Les problèmes de portes" , exampleSentences: {
+    { word: "clé",          image: "cle.webp",              article: "la",  gender: "f", definition: "objet pour ouvrir ou fermer une serrure",                        group: "Les problèmes de portes" , exampleSentences: {
         a1: [
           "Je vois la clé.",
           "J'utilise la clé.",

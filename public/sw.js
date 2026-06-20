@@ -1,7 +1,17 @@
-const CACHE_VERSION = "learnup-offline-v1";
+const CACHE_VERSION = "learnup-offline-v2";
 const CORE_CACHE = `${CACHE_VERSION}-core`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
-const CORE_URLS = ["/", "/offline.html", "/lecture", "/francais", "/mathematiques", "/communication"];
+
+const APP_ROUTES = [
+  "/",
+  "/lecture",
+  "/francais",
+  "/mathematiques",
+  "/communication",
+  "/compte",
+  "/placement",
+  "/offline.html",
+];
 
 function isSafeLearningPath(pathname) {
   return pathname === "/"
@@ -9,7 +19,8 @@ function isSafeLearningPath(pathname) {
     || pathname.startsWith("/francais")
     || pathname.startsWith("/mathematiques")
     || pathname.startsWith("/communication")
-    || pathname.startsWith("/placement");
+    || pathname.startsWith("/placement")
+    || pathname.startsWith("/compte");
 }
 
 function canStore(response) {
@@ -86,54 +97,41 @@ async function notifyClients(message) {
   clients.forEach((client) => client.postMessage(message));
 }
 
-async function cacheDocumentAssets(response, cache) {
-  const contentType = response.headers.get("content-type") || "";
-  if (!contentType.includes("text/html")) return;
-  const html = await response.clone().text();
-  const assets = new Set();
-  const pattern = /(?:src|href)=["']([^"']+)["']/g;
-  let match;
-  while ((match = pattern.exec(html)) !== null) {
-    try {
-      const url = new URL(match[1], self.location.origin);
-      if (url.origin !== self.location.origin) continue;
-      if (url.pathname.startsWith("/_next/static/") || /\.(?:css|js|woff2?|png|jpe?g|webp|gif|svg|mp3|wav|ogg)$/i.test(url.pathname)) {
-        assets.add(url.href);
-      }
-    } catch {
-      // Ignore malformed references.
-    }
-  }
-  await Promise.all(Array.from(assets).map(async (url) => {
-    try {
-      const asset = await fetch(url);
-      if (canStore(asset)) await cache.put(url, asset);
-    } catch {
-      // One optional asset must not cancel the offline preparation.
-    }
-  }));
-}
-
 self.addEventListener("message", (event) => {
   if (event.data?.type === "PREPARE_OFFLINE") {
     event.waitUntil((async () => {
-      const urls = Array.from(new Set([...CORE_URLS, ...(event.data.urls || [])]));
-      const cache = await caches.open(CORE_CACHE);
-      let completed = 0;
-      for (const url of urls) {
-        try {
-          const response = await fetch(url, { credentials: "include" });
-          if (canStore(response)) {
-            await cache.put(url, response.clone());
-            await cacheDocumentAssets(response, cache);
-          }
-        } catch {
-          // Continue with the remaining routes.
+      try {
+        // Fetch the asset manifest
+        const manifestRes = await fetch("/offline-manifest.json");
+        const manifest = manifestRes.ok ? await manifestRes.json() : { assets: [] };
+        const assetUrls = manifest.assets || [];
+
+        // Build full URL list: app routes + all static assets
+        const urls = [...new Set([...APP_ROUTES, ...assetUrls])];
+        const cache = await caches.open(CORE_CACHE);
+        let completed = 0;
+        const total = urls.length;
+
+        // Download in batches of 6 for network efficiency
+        const BATCH = 6;
+        for (let i = 0; i < urls.length; i += BATCH) {
+          const batch = urls.slice(i, i + BATCH);
+          await Promise.all(batch.map(async (url) => {
+            try {
+              const response = await fetch(url, { credentials: "include" });
+              if (canStore(response)) await cache.put(url, response.clone());
+            } catch {
+              // One failed asset must not cancel the whole download
+            }
+            completed += 1;
+            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total });
+          }));
         }
-        completed += 1;
-        await notifyClients({ type: "OFFLINE_PROGRESS", completed, total: urls.length });
+
+        await notifyClients({ type: "OFFLINE_READY" });
+      } catch {
+        await notifyClients({ type: "OFFLINE_ERROR" });
       }
-      await notifyClients({ type: "OFFLINE_READY" });
     })());
   }
 
@@ -143,6 +141,18 @@ self.addEventListener("message", (event) => {
       const cache = await caches.open(CORE_CACHE);
       await cache.add("/offline.html");
       await notifyClients({ type: "OFFLINE_CLEARED" });
+    })());
+  }
+
+  if (event.data?.type === "GET_MANIFEST_SIZE") {
+    event.waitUntil((async () => {
+      try {
+        const res = await fetch("/offline-manifest.json");
+        const manifest = res.ok ? await res.json() : {};
+        await notifyClients({ type: "MANIFEST_SIZE", totalBytes: manifest.totalBytes || 0 });
+      } catch {
+        await notifyClients({ type: "MANIFEST_SIZE", totalBytes: 0 });
+      }
     })());
   }
 });

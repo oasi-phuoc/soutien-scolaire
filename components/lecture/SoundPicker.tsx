@@ -91,7 +91,7 @@ const ImagePicker = forwardRef<SoundPickerHandle, { phoneme: string }>(
         <div className="grid grid-cols-4 gap-2">
           {items.map((word, i) => {
             const s = states[i]!;
-            const imgSrc = `/assets/words/img/${word.label}.jpg`;
+            const imgSrc = `/assets/words/img/${word.label}.webp`;
             const audioSrc = getWordAudioPath(word.label);
             return (
               <button

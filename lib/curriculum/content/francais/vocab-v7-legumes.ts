@@ -6,7 +6,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
   title: "Les légumes",
   section: "V7",
   words: [
-    { word: "carotte",        image: "carotte.png",        article: "la",  gender: "f", definition: "légume orange allongé qui pousse en terre" , exampleSentences: {
+    { word: "carotte",        image: "carotte.webp",        article: "la",  gender: "f", definition: "légume orange allongé qui pousse en terre" , exampleSentences: {
         a1: [
           "Je mange une carotte.",
           "J'aime la carotte.",
@@ -107,7 +107,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque carotte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tomate",         image: "tomate.png",         article: "la",  gender: "f", definition: "légume-fruit rouge et juteux" , exampleSentences: {
+    { word: "tomate",         image: "tomate.webp",         article: "la",  gender: "f", definition: "légume-fruit rouge et juteux" , exampleSentences: {
         a1: [
           "Je mange une tomate.",
           "J'aime la tomate.",
@@ -208,7 +208,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque tomate est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salade",         image: "salade.png",         article: "la",  gender: "f", definition: "légume à feuilles vertes mangé cru" , exampleSentences: {
+    { word: "salade",         image: "salade.webp",         article: "la",  gender: "f", definition: "légume à feuilles vertes mangé cru" , exampleSentences: {
         a1: [
           "Je mange une salade.",
           "J'aime la salade.",
@@ -309,7 +309,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque salade est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "concombre",      image: "concombre.png",      article: "le",  gender: "m", definition: "légume long vert et frais" , exampleSentences: {
+    { word: "concombre",      image: "concombre.webp",      article: "le",  gender: "m", definition: "légume long vert et frais" , exampleSentences: {
         a1: [
           "Je mange un concombre.",
           "J'aime le concombre.",
@@ -410,7 +410,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque concombre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pomme de terre", image: "pomme-de-terre.png", article: "la",  gender: "f", definition: "légume en tubercule qui pousse en terre" , exampleSentences: {
+    { word: "pomme de terre", image: "pomme-de-terre.webp", article: "la",  gender: "f", definition: "légume en tubercule qui pousse en terre" , exampleSentences: {
         a1: [
           "Je mange une pomme de terre.",
           "J'aime la pomme de terre.",
@@ -511,7 +511,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque pomme de terre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "oignon",         image: "oignon.png",         article: "l'",  gender: "m", definition: "légume rond à pelure, au goût fort" , exampleSentences: {
+    { word: "oignon",         image: "oignon.webp",         article: "l'",  gender: "m", definition: "légume rond à pelure, au goût fort" , exampleSentences: {
         a1: [
           "Je mange un oignon.",
           "J'aime l'oignon.",
@@ -612,7 +612,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque oignon est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "échalote",       image: "echalotte.png",      article: "l'",  gender: "f", definition: "petit oignon allongé au goût doux" , exampleSentences: {
+    { word: "échalote",       image: "echalotte.webp",      article: "l'",  gender: "f", definition: "petit oignon allongé au goût doux" , exampleSentences: {
         a1: [
           "Je mange une échalote.",
           "J'aime l'échalote.",
@@ -713,7 +713,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque échalote est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ail",            image: "ail.png",            article: "l'",  gender: "m", definition: "bulbe aromatique utilisé en cuisine" , exampleSentences: {
+    { word: "ail",            image: "ail.webp",            article: "l'",  gender: "m", definition: "bulbe aromatique utilisé en cuisine" , exampleSentences: {
         a1: [
           "Je mange un ail.",
           "J'aime l'ail.",
@@ -814,7 +814,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque ail est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poivron",        image: "poivron.png",        article: "le",  gender: "m", definition: "légume de couleur rouge, verte ou jaune" , exampleSentences: {
+    { word: "poivron",        image: "poivron.webp",        article: "le",  gender: "m", definition: "légume de couleur rouge, verte ou jaune" , exampleSentences: {
         a1: [
           "Je mange un poivron.",
           "J'aime le poivron.",
@@ -915,7 +915,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque poivron est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "piment",         image: "piment.png",         article: "le",  gender: "m", definition: "légume piquant utilisé comme épice" , exampleSentences: {
+    { word: "piment",         image: "piment.webp",         article: "le",  gender: "m", definition: "légume piquant utilisé comme épice" , exampleSentences: {
         a1: [
           "Je mange un piment.",
           "J'aime le piment.",
@@ -1016,7 +1016,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque piment est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "courgette",      image: "courgette.png",      article: "la",  gender: "f", definition: "légume vert allongé et doux" , exampleSentences: {
+    { word: "courgette",      image: "courgette.webp",      article: "la",  gender: "f", definition: "légume vert allongé et doux" , exampleSentences: {
         a1: [
           "Je mange une courgette.",
           "J'aime la courgette.",
@@ -1117,7 +1117,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque courgette est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aubergine",      image: "aubergine.png",      article: "l'",  gender: "f", definition: "légume violet brillant de forme ovale" , exampleSentences: {
+    { word: "aubergine",      image: "aubergine.webp",      article: "l'",  gender: "f", definition: "légume violet brillant de forme ovale" , exampleSentences: {
         a1: [
           "Je mange une aubergine.",
           "J'aime l'aubergine.",
@@ -1218,7 +1218,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque aubergine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "brocoli",        image: "brocoli.png",        article: "le",  gender: "m", definition: "légume vert en fleur très nutritif" , exampleSentences: {
+    { word: "brocoli",        image: "brocoli.webp",        article: "le",  gender: "m", definition: "légume vert en fleur très nutritif" , exampleSentences: {
         a1: [
           "Je mange un brocoli.",
           "J'aime le brocoli.",
@@ -1319,7 +1319,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque brocoli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "chou",           image: "chou.png",           article: "le",  gender: "m", definition: "légume à grosses feuilles vertes ou blanches" , exampleSentences: {
+    { word: "chou",           image: "chou.webp",           article: "le",  gender: "m", definition: "légume à grosses feuilles vertes ou blanches" , exampleSentences: {
         a1: [
           "Je mange un chou.",
           "J'aime le chou.",
@@ -1420,7 +1420,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque chou est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épinard",        image: "epinard.png",        article: "l'",  gender: "m", definition: "légume à feuilles vertes riche en fer" , exampleSentences: {
+    { word: "épinard",        image: "epinard.webp",        article: "l'",  gender: "m", definition: "légume à feuilles vertes riche en fer" , exampleSentences: {
         a1: [
           "Je mange un épinard.",
           "J'aime l'épinard.",
@@ -1521,7 +1521,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque épinard est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "asperge",        image: "asperge.png",        article: "l'",  gender: "f", definition: "légume en tige long, vert ou blanc" , exampleSentences: {
+    { word: "asperge",        image: "asperge.webp",        article: "l'",  gender: "f", definition: "légume en tige long, vert ou blanc" , exampleSentences: {
         a1: [
           "Je mange une asperge.",
           "J'aime l'asperge.",
@@ -1622,7 +1622,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque asperge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "betterave",      image: "betterave.png",      article: "la",  gender: "f", definition: "légume rouge foncé qui pousse en terre" , exampleSentences: {
+    { word: "betterave",      image: "betterave.webp",      article: "la",  gender: "f", definition: "légume rouge foncé qui pousse en terre" , exampleSentences: {
         a1: [
           "Je mange une betterave.",
           "J'aime la betterave.",
@@ -1723,7 +1723,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque betterave est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "navet",          image: "navet.png",          article: "le",  gender: "m", definition: "légume blanc et violet qui pousse en terre" , exampleSentences: {
+    { word: "navet",          image: "navet.webp",          article: "le",  gender: "m", definition: "légume blanc et violet qui pousse en terre" , exampleSentences: {
         a1: [
           "Je mange un navet.",
           "J'aime le navet.",
@@ -1824,7 +1824,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque navet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "radis",          image: "radis.png",          article: "le",  gender: "m", definition: "petit légume rouge et piquant" , exampleSentences: {
+    { word: "radis",          image: "radis.webp",          article: "le",  gender: "m", definition: "petit légume rouge et piquant" , exampleSentences: {
         a1: [
           "Je mange un radis.",
           "J'aime le radis.",
@@ -1925,7 +1925,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque radis est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "haricot",        image: "haricot.jpg",        article: "le",  gender: "m", definition: "légume en cosse, vert ou blanc" , exampleSentences: {
+    { word: "haricot",        image: "haricot.webp",        article: "le",  gender: "m", definition: "légume en cosse, vert ou blanc" , exampleSentences: {
         a1: [
           "Je mange un haricot.",
           "J'aime l'haricot.",
@@ -2026,7 +2026,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque haricot est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "maïs",           image: "mais.jpg",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" , exampleSentences: {
+    { word: "maïs",           image: "mais.webp",           article: "le",  gender: "m", definition: "céréale en épi jaune dorée" , exampleSentences: {
         a1: [
           "Je mange un maïs.",
           "J'aime le maïs.",
@@ -2127,7 +2127,7 @@ export const V7_LEGUMES_THEME: VocabTheme = {
           "Puisque maïs est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "champignon",     image: "champignon.png",     article: "le",  gender: "m", definition: "végétal sans chlorophylle qui pousse en forêt" , exampleSentences: {
+    { word: "champignon",     image: "champignon.webp",     article: "le",  gender: "m", definition: "végétal sans chlorophylle qui pousse en forêt" , exampleSentences: {
         a1: [
           "Je mange un champignon.",
           "J'aime le champignon.",

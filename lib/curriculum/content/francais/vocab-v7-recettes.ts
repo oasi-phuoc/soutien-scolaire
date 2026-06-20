@@ -6,7 +6,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
   title: "Les recettes",
   section: "V7",
   words: [
-    { word: "ingrédient",  image: "ingredient.png", article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "élément de base d'une recette" , exampleSentences: {
+    { word: "ingrédient",  image: "ingredient.webp", article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "élément de base d'une recette" , exampleSentences: {
         a1: [
           "Je mange un ingrédient.",
           "J'aime l'ingrédient.",
@@ -107,7 +107,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ingrédient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "farine",      image: "farine.png",     article: "la",  gender: "f", group: "Les ingrédients de base", definition: "poudre de céréale pour faire la pâte" , exampleSentences: {
+    { word: "farine",      image: "farine.webp",     article: "la",  gender: "f", group: "Les ingrédients de base", definition: "poudre de céréale pour faire la pâte" , exampleSentences: {
         a1: [
           "Je mange une farine.",
           "J'aime la farine.",
@@ -208,7 +208,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque farine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lait",        image: "lait.png",       article: "le",  gender: "m", group: "Les ingrédients de base", definition: "liquide blanc produit par les vaches" , exampleSentences: {
+    { word: "lait",        image: "lait.webp",       article: "le",  gender: "m", group: "Les ingrédients de base", definition: "liquide blanc produit par les vaches" , exampleSentences: {
         a1: [
           "Je mange un lait.",
           "J'aime le lait.",
@@ -309,7 +309,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque lait est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "œuf",         image: "oeuf.png",       article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "ingrédient pondu par la poule" , exampleSentences: {
+    { word: "œuf",         image: "oeuf.webp",       article: "l'",  gender: "m", group: "Les ingrédients de base", definition: "ingrédient pondu par la poule" , exampleSentences: {
         a1: [
           "Je mange un œuf.",
           "J'aime l'œuf.",
@@ -410,7 +410,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque œuf est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "beurre",      image: "beurre.png",     article: "le",  gender: "m", group: "Les ingrédients de base", definition: "matière grasse faite de crème de lait" , exampleSentences: {
+    { word: "beurre",      image: "beurre.webp",     article: "le",  gender: "m", group: "Les ingrédients de base", definition: "matière grasse faite de crème de lait" , exampleSentences: {
         a1: [
           "Je mange un beurre.",
           "J'aime le beurre.",
@@ -511,7 +511,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque beurre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sucre",       image: "sucre.png",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "ingrédient sucrant blanc ou roux" , exampleSentences: {
+    { word: "sucre",       image: "sucre.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "ingrédient sucrant blanc ou roux" , exampleSentences: {
         a1: [
           "Je mange un sucre.",
           "J'aime le sucre.",
@@ -612,7 +612,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sucre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sel",         image: "sel.png",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: "minéral blanc pour assaisonner" , exampleSentences: {
+    { word: "sel",         image: "sel.webp",        article: "le",  gender: "m", group: "L'assaisonnement",        definition: "minéral blanc pour assaisonner" , exampleSentences: {
         a1: [
           "Je mange un sel.",
           "J'aime le sel.",
@@ -713,7 +713,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque sel est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poivre",      image: "poivre.png",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice noire ou blanche très piquante" , exampleSentences: {
+    { word: "poivre",      image: "poivre.webp",     article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice noire ou blanche très piquante" , exampleSentences: {
         a1: [
           "Je mange un poivre.",
           "J'aime le poivre.",
@@ -814,7 +814,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poivre est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "épice",       image: "epice.png",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "substance aromatique pour parfumer les plats" , exampleSentences: {
+    { word: "épice",       image: "epice.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "substance aromatique pour parfumer les plats" , exampleSentences: {
         a1: [
           "Je mange une épice.",
           "J'aime l'épice.",
@@ -915,7 +915,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque épice est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "curry",       image: "curry.png",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "mélange d'épices aromatiques d'origine indienne" , exampleSentences: {
+    { word: "curry",       image: "curry.webp",      article: "le",  gender: "m", group: "L'assaisonnement",        definition: "mélange d'épices aromatiques d'origine indienne" , exampleSentences: {
         a1: [
           "Je mange un curry.",
           "J'aime le curry.",
@@ -1016,7 +1016,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque curry est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paprika",     image: "paprika.png",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice rouge à base de poivron séché" , exampleSentences: {
+    { word: "paprika",     image: "paprika.webp",    article: "le",  gender: "m", group: "L'assaisonnement",        definition: "épice rouge à base de poivron séché" , exampleSentences: {
         a1: [
           "Je mange un paprika.",
           "J'aime le paprika.",
@@ -1117,7 +1117,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque paprika est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "herbe",       image: "herbe.png",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "plante aromatique utilisée en cuisine" , exampleSentences: {
+    { word: "herbe",       image: "herbe.webp",      article: "l'",  gender: "f", group: "L'assaisonnement",        definition: "plante aromatique utilisée en cuisine" , exampleSentences: {
         a1: [
           "Je mange une herbe.",
           "J'aime l'herbe.",
@@ -1218,7 +1218,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque herbe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ustensile",   image: "ustensile.png",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: "outil de cuisine comme une casserole ou louche" , exampleSentences: {
+    { word: "ustensile",   image: "ustensile.webp",  article: "l'",  gender: "m", group: "Les ustensiles",          definition: "outil de cuisine comme une casserole ou louche" , exampleSentences: {
         a1: [
           "Je mange un ustensile.",
           "J'aime l'ustensile.",
@@ -1319,7 +1319,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque ustensile est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "casserole",   image: "casserole.png",  article: "la",  gender: "f", group: "Les ustensiles",          definition: "récipient à bord haut pour cuire sur le feu" , exampleSentences: {
+    { word: "casserole",   image: "casserole.webp",  article: "la",  gender: "f", group: "Les ustensiles",          definition: "récipient à bord haut pour cuire sur le feu" , exampleSentences: {
         a1: [
           "Je mange une casserole.",
           "J'aime la casserole.",
@@ -1420,7 +1420,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque casserole est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poêle",       image: "poele.png",      article: "la",  gender: "f", group: "Les ustensiles",          definition: "ustensile plat avec manche pour faire revenir" , exampleSentences: {
+    { word: "poêle",       image: "poele.webp",      article: "la",  gender: "f", group: "Les ustensiles",          definition: "ustensile plat avec manche pour faire revenir" , exampleSentences: {
         a1: [
           "Je mange une poêle.",
           "J'aime la poêle.",
@@ -1521,7 +1521,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque poêle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "planche",     image: "planche.png",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "surface de bois pour couper les aliments" , exampleSentences: {
+    { word: "planche",     image: "planche.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "surface de bois pour couper les aliments" , exampleSentences: {
         a1: [
           "Je mange une planche.",
           "J'aime la planche.",
@@ -1622,7 +1622,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque planche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rouleau",     image: "rouleau.png",    article: "le",  gender: "m", group: "Les ustensiles",          definition: "outil cylindrique pour étaler la pâte" , exampleSentences: {
+    { word: "rouleau",     image: "rouleau.webp",    article: "le",  gender: "m", group: "Les ustensiles",          definition: "outil cylindrique pour étaler la pâte" , exampleSentences: {
         a1: [
           "Je mange un rouleau.",
           "J'aime le rouleau.",
@@ -1723,7 +1723,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque rouleau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "doseur",      image: "doseur.png",     article: "le",  gender: "m", group: "Les ustensiles",          definition: "récipient gradué pour mesurer les ingrédients" , exampleSentences: {
+    { word: "doseur",      image: "doseur.webp",     article: "le",  gender: "m", group: "Les ustensiles",          definition: "récipient gradué pour mesurer les ingrédients" , exampleSentences: {
         a1: [
           "Je mange un doseur.",
           "J'aime le doseur.",
@@ -1824,7 +1824,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque doseur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "spatule",     image: "spatule.png",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "outil plat pour retourner les aliments" , exampleSentences: {
+    { word: "spatule",     image: "spatule.webp",    article: "la",  gender: "f", group: "Les ustensiles",          definition: "outil plat pour retourner les aliments" , exampleSentences: {
         a1: [
           "Je mange une spatule.",
           "J'aime la spatule.",
@@ -1925,7 +1925,7 @@ export const V7_RECETTES_THEME: VocabTheme = {
           "Puisque spatule est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "louche",      image: "louche.png",     article: "la",  gender: "f", group: "Les ustensiles",          definition: "grande cuillère creuse pour servir les soupes" , exampleSentences: {
+    { word: "louche",      image: "louche.webp",     article: "la",  gender: "f", group: "Les ustensiles",          definition: "grande cuillère creuse pour servir les soupes" , exampleSentences: {
         a1: [
           "Je mange une louche.",
           "J'aime la louche.",

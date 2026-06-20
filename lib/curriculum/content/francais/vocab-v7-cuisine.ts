@@ -6,7 +6,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
   title: "La cuisine",
   section: "V7",
   words: [
-    { word: "cuisiner", image: "cuisiner.jpg",  definition: "préparer des plats" , exampleSentences: {
+    { word: "cuisiner", image: "cuisiner.webp",  definition: "préparer des plats" , exampleSentences: {
         a1: [
           "Je mange un cuisiner.",
           "J'aime cuisiner.",
@@ -107,7 +107,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuisiner est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couper", image: "couper.jpg",    definition: "diviser avec un couteau" , exampleSentences: {
+    { word: "couper", image: "couper.webp",    definition: "diviser avec un couteau" , exampleSentences: {
         a1: [
           "Je mange un couper.",
           "J'aime couper.",
@@ -208,7 +208,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque couper est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "mélanger", image: "melanger.jpg",  definition: "combiner des ingrédients" , exampleSentences: {
+    { word: "mélanger", image: "melanger.webp",  definition: "combiner des ingrédients" , exampleSentences: {
         a1: [
           "Je mange un mélanger.",
           "J'aime mélanger.",
@@ -309,7 +309,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque mélanger est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuire", image: "cuire.jpg",     definition: "chauffer un aliment pour le rendre comestible" , exampleSentences: {
+    { word: "cuire", image: "cuire.webp",     definition: "chauffer un aliment pour le rendre comestible" , exampleSentences: {
         a1: [
           "Je mange un cuire.",
           "J'aime cuire.",
@@ -410,7 +410,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque cuire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouillir", image: "bouillir.jpg",  definition: "chauffer un liquide jusqu'à 100°C" , exampleSentences: {
+    { word: "bouillir", image: "bouillir.webp",  definition: "chauffer un liquide jusqu'à 100°C" , exampleSentences: {
         a1: [
           "Je mange un bouillir.",
           "J'aime bouillir.",
@@ -511,7 +511,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque bouillir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "frire", image: "frire.jpg",     definition: "cuire dans de l'huile très chaude" , exampleSentences: {
+    { word: "frire", image: "frire.webp",     definition: "cuire dans de l'huile très chaude" , exampleSentences: {
         a1: [
           "Je mange un frire.",
           "J'aime frire.",
@@ -612,7 +612,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque frire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "rôtir", image: "rotir.jpg",     definition: "cuire au four à chaleur sèche" , exampleSentences: {
+    { word: "rôtir", image: "rotir.webp",     definition: "cuire au four à chaleur sèche" , exampleSentences: {
         a1: [
           "Je mange un rôtir.",
           "J'aime rôtir.",
@@ -713,7 +713,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque rôtir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "saler", image: "saler.jpg",     definition: "ajouter du sel à un plat" , exampleSentences: {
+    { word: "saler", image: "saler.webp",     definition: "ajouter du sel à un plat" , exampleSentences: {
         a1: [
           "Je mange un saler.",
           "J'aime saler.",
@@ -814,7 +814,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque saler est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "goûter", image: "gouter.jpg",    definition: "tester le goût d'un aliment" , exampleSentences: {
+    { word: "goûter", image: "gouter.webp",    definition: "tester le goût d'un aliment" , exampleSentences: {
         a1: [
           "Je mange un goûter.",
           "J'aime goûter.",
@@ -915,7 +915,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque goûter est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "laver", image: "laver.jpg",     definition: "nettoyer à l'eau" , exampleSentences: {
+    { word: "laver", image: "laver.webp",     definition: "nettoyer à l'eau" , exampleSentences: {
         a1: [
           "Je mange un laver.",
           "J'aime laver.",
@@ -1016,7 +1016,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque laver est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "éplucher", image: "eplucher.jpg",  definition: "enlever la peau d'un légume ou fruit" , exampleSentences: {
+    { word: "éplucher", image: "eplucher.webp",  definition: "enlever la peau d'un légume ou fruit" , exampleSentences: {
         a1: [
           "Je mange un éplucher.",
           "J'aime éplucher.",
@@ -1117,7 +1117,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque éplucher est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "verser", image: "verser.jpg",    definition: "faire couler un liquide d'un récipient" , exampleSentences: {
+    { word: "verser", image: "verser.webp",    definition: "faire couler un liquide d'un récipient" , exampleSentences: {
         a1: [
           "Je mange un verser.",
           "J'aime verser.",
@@ -1218,7 +1218,7 @@ export const V7_CUISINE_THEME: VocabTheme = {
           "Puisque verser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "réchauffer", image: "rechauffer.jpeg",definition: "chauffer à nouveau un plat déjà cuit" , exampleSentences: {
+    { word: "réchauffer", image: "rechauffer.webp",definition: "chauffer à nouveau un plat déjà cuit" , exampleSentences: {
         a1: [
           "Je mange un réchauffer.",
           "J'aime réchauffer.",

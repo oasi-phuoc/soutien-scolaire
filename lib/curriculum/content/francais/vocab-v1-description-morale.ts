@@ -7,7 +7,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
   section: "V1",
   cardLayout: "mf",
   words: [
-    { word: "gentil",       feminine: "gentille",     image: "gentillesse.jpg",       definition: ["aimable, bienveillant", "qui rend service volontiers", "contraire de méchant"], relatedWords: ["la gentillesse"], exampleSentences: {
+    { word: "gentil",       feminine: "gentille",     image: "gentillesse.webp",       definition: ["aimable, bienveillant", "qui rend service volontiers", "contraire de méchant"], relatedWords: ["la gentillesse"], exampleSentences: {
         a1: [
           "Il est gentil.",
           "Elle est gentille.",
@@ -108,7 +108,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque gentil est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "méchant",      feminine: "méchante",     image: "mechancete-v2.jpg",      definition: ["cruel, malveillant", "qui fait du mal aux autres", "contraire de gentil"], relatedWords: ["la méchanceté"], exampleSentences: {
+    { word: "méchant",      feminine: "méchante",     image: "mechancete-v2.webp",      definition: ["cruel, malveillant", "qui fait du mal aux autres", "contraire de gentil"], relatedWords: ["la méchanceté"], exampleSentences: {
         a1: [
           "Il est méchant.",
           "Elle est méchante.",
@@ -209,7 +209,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque méchant est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "poli",         feminine: "polie",        image: "politesse.png",         definition: ["respectueux des règles de politesse", "qui dit bonjour et merci", "contraire d'impoli"], relatedWords: ["la politesse"], exampleSentences: {
+    { word: "poli",         feminine: "polie",        image: "politesse.webp",         definition: ["respectueux des règles de politesse", "qui dit bonjour et merci", "contraire d'impoli"], relatedWords: ["la politesse"], exampleSentences: {
         a1: [
           "Il est poli.",
           "Elle est polie.",
@@ -310,7 +310,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque poli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "impoli",       feminine: "impolie",      image: "impolitesse.png",       definition: ["qui manque de politesse", "qui ne dit pas bonjour", "contraire de poli"], relatedWords: ["l'impolitesse"], exampleSentences: {
+    { word: "impoli",       feminine: "impolie",      image: "impolitesse.webp",       definition: ["qui manque de politesse", "qui ne dit pas bonjour", "contraire de poli"], relatedWords: ["l'impolitesse"], exampleSentences: {
         a1: [
           "Il est impoli.",
           "Elle est impolie.",
@@ -411,7 +411,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque impoli est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "travailleur",  feminine: "travailleuse", image: "travail.jpg",  definition: ["qui travaille beaucoup", "appliqué et sérieux", "contraire de paresseux"], relatedWords: ["le travail"], exampleSentences: {
+    { word: "travailleur",  feminine: "travailleuse", image: "travail.webp",  definition: ["qui travaille beaucoup", "appliqué et sérieux", "contraire de paresseux"], relatedWords: ["le travail"], exampleSentences: {
         a1: [
           "Il est travailleur.",
           "Elle est travailleuse.",
@@ -512,7 +512,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque travailleur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paresseux",    feminine: "paresseuse",   image: "paresse.jpg",    definition: ["qui évite de travailler", "qui remet tout au lendemain", "contraire de travailleur"], relatedWords: ["la paresse"], exampleSentences: {
+    { word: "paresseux",    feminine: "paresseuse",   image: "paresse.webp",    definition: ["qui évite de travailler", "qui remet tout au lendemain", "contraire de travailleur"], relatedWords: ["la paresse"], exampleSentences: {
         a1: [
           "Il est paresseux.",
           "Elle est paresseuse.",
@@ -613,7 +613,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque paresseux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "calme",                                  image: "calme.jpg",        definition: ["tranquille, sans agitation", "serein et posé", "contraire de nerveux"], relatedWords: ["le calme"], exampleSentences: {
+    { word: "calme",                                  image: "calme.webp",        definition: ["tranquille, sans agitation", "serein et posé", "contraire de nerveux"], relatedWords: ["le calme"], exampleSentences: {
         a1: [
           "Il est calme.",
           "Elle est calme.",
@@ -714,7 +714,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque calme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "nerveux",      feminine: "nerveuse",     image: "nevosite.jpg",      definition: ["agité, sous tension", "stressé et excité", "contraire de calme"], relatedWords: ["la nervosité"], exampleSentences: {
+    { word: "nerveux",      feminine: "nerveuse",     image: "nevosite.webp",      definition: ["agité, sous tension", "stressé et excité", "contraire de calme"], relatedWords: ["la nervosité"], exampleSentences: {
         a1: [
           "Il est nerveux.",
           "Elle est nerveuse.",
@@ -815,7 +815,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque nerveux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sociable",                               image: "sociabilite.jpg",     definition: ["qui aime la compagnie des autres", "facile à vivre", "contraire de timide"], relatedWords: ["la sociabilité"], exampleSentences: {
+    { word: "sociable",                               image: "sociabilite.webp",     definition: ["qui aime la compagnie des autres", "facile à vivre", "contraire de timide"], relatedWords: ["la sociabilité"], exampleSentences: {
         a1: [
           "Il est sociable.",
           "Elle est sociable.",
@@ -916,7 +916,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque sociable est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "timide",                                 image: "timidite.jpg",       definition: ["qui manque d'assurance", "qui rougit facilement", "contraire de sociable"], relatedWords: ["la timidité"], exampleSentences: {
+    { word: "timide",                                 image: "timidite.webp",       definition: ["qui manque d'assurance", "qui rougit facilement", "contraire de sociable"], relatedWords: ["la timidité"], exampleSentences: {
         a1: [
           "Il est timide.",
           "Elle est timide.",
@@ -1017,7 +1017,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque timide est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "patient",      feminine: "patiente",     image: "patience.jpg",      definition: ["qui sait attendre sans s'énerver", "calme face à l'attente", "contraire d'impatient"], relatedWords: ["la patience"], exampleSentences: {
+    { word: "patient",      feminine: "patiente",     image: "patience.webp",      definition: ["qui sait attendre sans s'énerver", "calme face à l'attente", "contraire d'impatient"], relatedWords: ["la patience"], exampleSentences: {
         a1: [
           "Il est patient.",
           "Elle est patiente.",
@@ -1118,7 +1118,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque patient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "impatient",    feminine: "impatiente",   image: "impatience.jpg",    definition: ["qui ne sait pas attendre", "qui veut tout immédiatement", "contraire de patient"], relatedWords: ["l'impatience"], exampleSentences: {
+    { word: "impatient",    feminine: "impatiente",   image: "impatience.webp",    definition: ["qui ne sait pas attendre", "qui veut tout immédiatement", "contraire de patient"], relatedWords: ["l'impatience"], exampleSentences: {
         a1: [
           "Il est impatient.",
           "Elle est impatiente.",
@@ -1219,7 +1219,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque impatient est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "joyeux",       feminine: "joyeuse",      image: "joie.jpg",       definition: ["qui ressent de la joie", "de bonne humeur", "contraire de triste"], relatedWords: ["la joie"], exampleSentences: {
+    { word: "joyeux",       feminine: "joyeuse",      image: "joie.webp",       definition: ["qui ressent de la joie", "de bonne humeur", "contraire de triste"], relatedWords: ["la joie"], exampleSentences: {
         a1: [
           "Il est joyeux.",
           "Elle est joyeuse.",
@@ -1320,7 +1320,7 @@ export const V1_DESCRIPTION_MORALE_THEME: VocabTheme = {
           "Puisque joyeux est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "triste",                                 image: "tristesse.jpg",       definition: ["qui ressent de la tristesse", "malheureux, abattu", "contraire de joyeux"], relatedWords: ["la tristesse"], exampleSentences: {
+    { word: "triste",                                 image: "tristesse.webp",       definition: ["qui ressent de la tristesse", "malheureux, abattu", "contraire de joyeux"], relatedWords: ["la tristesse"], exampleSentences: {
         a1: [
           "Il est triste.",
           "Elle est triste.",

@@ -6,7 +6,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
   title: "La structure de l'école",
   section: "V5",
   words: [
-    { word: "école",        image: "ecole.jpg",        article: "l'",  gender: "f", definition: "établissement où l'on apprend" , exampleSentences: {
+    { word: "école",        image: "ecole.webp",        article: "l'",  gender: "f", definition: "établissement où l'on apprend" , exampleSentences: {
         a1: [
           "Je vois l'école.",
           "J'utilise l'école.",
@@ -107,7 +107,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque école est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "classe",       image: "classe.png",       article: "la",  gender: "f", definition: "groupe d'élèves ou salle de cours" , exampleSentences: {
+    { word: "classe",       image: "classe.webp",       article: "la",  gender: "f", definition: "groupe d'élèves ou salle de cours" , exampleSentences: {
         a1: [
           "Je vois la classe.",
           "J'utilise la classe.",
@@ -208,7 +208,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque classe est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "salle",        image: "salle.png",        article: "la",  gender: "f", definition: "espace dans l'école pour une activité" , exampleSentences: {
+    { word: "salle",        image: "salle.webp",        article: "la",  gender: "f", definition: "espace dans l'école pour une activité" , exampleSentences: {
         a1: [
           "Je vois la salle.",
           "J'utilise la salle.",
@@ -309,7 +309,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque salle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "couloir",      image: "couloir.png",      article: "le",  gender: "m", definition: "passage entre les salles" , exampleSentences: {
+    { word: "couloir",      image: "couloir.webp",      article: "le",  gender: "m", definition: "passage entre les salles" , exampleSentences: {
         a1: [
           "Je vois le couloir.",
           "J'utilise le couloir.",
@@ -410,7 +410,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque couloir est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "secrétariat",  image: "secretariat.png",  article: "le",  gender: "m", definition: "bureau administratif de l'école" , exampleSentences: {
+    { word: "secrétariat",  image: "secretariat.webp",  article: "le",  gender: "m", definition: "bureau administratif de l'école" , exampleSentences: {
         a1: [
           "Je vois le secrétariat.",
           "J'utilise le secrétariat.",
@@ -511,7 +511,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque secrétariat est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bibliothèque", image: "bibliotheque.png", article: "la",  gender: "f", definition: "salle avec des livres à consulter" , exampleSentences: {
+    { word: "bibliothèque", image: "bibliotheque.webp", article: "la",  gender: "f", definition: "salle avec des livres à consulter" , exampleSentences: {
         a1: [
           "Je vois la bibliothèque.",
           "J'utilise la bibliothèque.",
@@ -612,7 +612,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque bibliothèque est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "gymnase",      image: "gymnase.png",      article: "le",  gender: "m", definition: "salle pour faire du sport" , exampleSentences: {
+    { word: "gymnase",      image: "gymnase.webp",      article: "le",  gender: "m", definition: "salle pour faire du sport" , exampleSentences: {
         a1: [
           "Je vois le gymnase.",
           "J'utilise le gymnase.",
@@ -713,7 +713,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque gymnase est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cour",         image: "cour.png",         article: "la",  gender: "f", definition: "espace extérieur pour jouer pendant la pause" , exampleSentences: {
+    { word: "cour",         image: "cour.webp",         article: "la",  gender: "f", definition: "espace extérieur pour jouer pendant la pause" , exampleSentences: {
         a1: [
           "Je vois la cour.",
           "J'utilise la cour.",
@@ -814,7 +814,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cour est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "direction",    image: "direction.png",    article: "la",  gender: "f", definition: "bureau du directeur ou de la directrice" , exampleSentences: {
+    { word: "direction",    image: "direction.webp",    article: "la",  gender: "f", definition: "bureau du directeur ou de la directrice" , exampleSentences: {
         a1: [
           "Je vois la direction.",
           "J'utilise la direction.",
@@ -915,7 +915,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque direction est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sonnerie",     image: "sonnerie.png",     article: "la",  gender: "f", definition: "signal sonore marquant le début ou la fin d'un cours" , exampleSentences: {
+    { word: "sonnerie",     image: "sonnerie.webp",     article: "la",  gender: "f", definition: "signal sonore marquant le début ou la fin d'un cours" , exampleSentences: {
         a1: [
           "Je vois la sonnerie.",
           "J'utilise la sonnerie.",
@@ -1016,7 +1016,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque sonnerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cantine",      image: "cantine.png",      article: "la",  gender: "f", definition: "restaurant scolaire pour les repas" , exampleSentences: {
+    { word: "cantine",      image: "cantine.webp",      article: "la",  gender: "f", definition: "restaurant scolaire pour les repas" , exampleSentences: {
         a1: [
           "Je vois la cantine.",
           "J'utilise la cantine.",
@@ -1117,7 +1117,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque cantine est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "infirmerie",   image: "infirmerie.png",   article: "l'",  gender: "f", definition: "salle de soins dans l'école" , exampleSentences: {
+    { word: "infirmerie",   image: "infirmerie.webp",   article: "l'",  gender: "f", definition: "salle de soins dans l'école" , exampleSentences: {
         a1: [
           "Je vois l'infirmerie.",
           "J'utilise l'infirmerie.",
@@ -1218,7 +1218,7 @@ export const V5_STRUCTURE_ECOLE_THEME: VocabTheme = {
           "Puisque infirmerie est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ascenseur",    image: "ascenseur.png",    article: "l'",  gender: "m", definition: "cabine pour monter et descendre les étages" , exampleSentences: {
+    { word: "ascenseur",    image: "ascenseur.webp",    article: "l'",  gender: "m", definition: "cabine pour monter et descendre les étages" , exampleSentences: {
         a1: [
           "Je vois l'ascenseur.",
           "J'utilise l'ascenseur.",

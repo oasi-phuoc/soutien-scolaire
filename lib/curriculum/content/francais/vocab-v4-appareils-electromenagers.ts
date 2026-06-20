@@ -6,7 +6,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
   title: "Les appareils électroménagers",
   section: "V4",
   words: [
-    { word: "réfrigérateur",   image: "frigo.png",          article: "le",  gender: "m", definition: "appareil pour conserver les aliments au frais" , exampleSentences: {
+    { word: "réfrigérateur",   image: "frigo.webp",          article: "le",  gender: "m", definition: "appareil pour conserver les aliments au frais" , exampleSentences: {
         a1: [
           "Je vois le réfrigérateur.",
           "J'utilise le réfrigérateur.",
@@ -107,7 +107,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque réfrigérateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "congélateur",     image: "congelateur.png",   article: "le",  gender: "m", definition: "appareil pour conserver les aliments surgelés" , exampleSentences: {
+    { word: "congélateur",     image: "congelateur.webp",   article: "le",  gender: "m", definition: "appareil pour conserver les aliments surgelés" , exampleSentences: {
         a1: [
           "Je vois le congélateur.",
           "J'utilise le congélateur.",
@@ -208,7 +208,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque congélateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "four",            image: "four.jpg",          article: "le",  gender: "m", definition: "appareil pour cuire les aliments" , exampleSentences: {
+    { word: "four",            image: "four.webp",          article: "le",  gender: "m", definition: "appareil pour cuire les aliments" , exampleSentences: {
         a1: [
           "Je vois le four.",
           "J'utilise le four.",
@@ -309,7 +309,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque four est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuisinière",      image: "cuisiniere.png",    article: "la",  gender: "f", definition: "appareil avec plaques de cuisson et four" , exampleSentences: {
+    { word: "cuisinière",      image: "cuisiniere.webp",    article: "la",  gender: "f", definition: "appareil avec plaques de cuisson et four" , exampleSentences: {
         a1: [
           "Je vois la cuisinière.",
           "J'utilise la cuisinière.",
@@ -410,7 +410,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque cuisinière est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-linge",      image: "lave-linge.png",    article: "le",  gender: "m", definition: "appareil pour laver le linge" , exampleSentences: {
+    { word: "lave-linge",      image: "lave-linge.webp",    article: "le",  gender: "m", definition: "appareil pour laver le linge" , exampleSentences: {
         a1: [
           "Je vois le lave-linge.",
           "J'utilise le lave-linge.",
@@ -511,7 +511,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-linge est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "lave-vaisselle",  image: "lave-vaiselle.png", article: "le",  gender: "m", definition: "appareil pour laver la vaisselle" , exampleSentences: {
+    { word: "lave-vaisselle",  image: "lave-vaiselle.webp", article: "le",  gender: "m", definition: "appareil pour laver la vaisselle" , exampleSentences: {
         a1: [
           "Je vois le lave-vaisselle.",
           "J'utilise le lave-vaisselle.",
@@ -612,7 +612,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque lave-vaisselle est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "aspirateur",      image: "aspirateur.png",    article: "l'",  gender: "m", definition: "appareil pour aspirer la poussière" , exampleSentences: {
+    { word: "aspirateur",      image: "aspirateur.webp",    article: "l'",  gender: "m", definition: "appareil pour aspirer la poussière" , exampleSentences: {
         a1: [
           "Je vois l'aspirateur.",
           "J'utilise l'aspirateur.",
@@ -713,7 +713,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque aspirateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "fer à repasser",  image: "fer-a-repasser.png", article: "le", gender: "m", definition: "appareil pour lisser les vêtements" , exampleSentences: {
+    { word: "fer à repasser",  image: "fer-a-repasser.webp", article: "le", gender: "m", definition: "appareil pour lisser les vêtements" , exampleSentences: {
         a1: [
           "Je vois le fer à repasser.",
           "J'utilise le fer à repasser.",
@@ -814,7 +814,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque fer à repasser est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "micro-ondes",     image: "micro-onde.png",    article: "le",  gender: "m", definition: "appareil pour réchauffer rapidement les aliments" , exampleSentences: {
+    { word: "micro-ondes",     image: "micro-onde.webp",    article: "le",  gender: "m", definition: "appareil pour réchauffer rapidement les aliments" , exampleSentences: {
         a1: [
           "Je vois le micro-ondes.",
           "J'utilise le micro-ondes.",
@@ -915,7 +915,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque micro-ondes est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "ventilateur",     image: "ventilateur.png",   article: "le",  gender: "m", definition: "appareil qui brasse l'air pour rafraîchir" , exampleSentences: {
+    { word: "ventilateur",     image: "ventilateur.webp",   article: "le",  gender: "m", definition: "appareil qui brasse l'air pour rafraîchir" , exampleSentences: {
         a1: [
           "Je vois le ventilateur.",
           "J'utilise le ventilateur.",
@@ -1016,7 +1016,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque ventilateur est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouilloire",      image: "bouilloire.png",    article: "la",  gender: "f", definition: "appareil pour faire bouillir de l'eau" , exampleSentences: {
+    { word: "bouilloire",      image: "bouilloire.webp",    article: "la",  gender: "f", definition: "appareil pour faire bouillir de l'eau" , exampleSentences: {
         a1: [
           "Je vois la bouilloire.",
           "J'utilise la bouilloire.",
@@ -1117,7 +1117,7 @@ export const V4_APPAREILS_ELECTROMENAGERS_THEME: VocabTheme = {
           "Puisque bouilloire est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cafetière",       image: "cafetiere.png",     article: "la",  gender: "f", definition: "appareil électrique pour préparer le café" , exampleSentences: {
+    { word: "cafetière",       image: "cafetiere.webp",     article: "la",  gender: "f", definition: "appareil électrique pour préparer le café" , exampleSentences: {
         a1: [
           "Je vois la cafetière.",
           "J'utilise la cafetière.",

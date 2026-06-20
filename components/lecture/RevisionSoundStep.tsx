@@ -81,7 +81,7 @@ export const RevisionSoundStep = forwardRef<RevisionSoundStepHandle, Props>(
                   <div className="relative aspect-square w-full overflow-hidden rounded-lg">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`/assets/words/img/${word}.jpg`}
+                      src={`/assets/words/img/${word}.webp`}
                       alt=""
                       className="h-full w-full object-contain p-1"
                     />

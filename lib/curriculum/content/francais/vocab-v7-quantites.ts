@@ -6,7 +6,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
   title: "Les quantités",
   section: "V7",
   words: [
-    { word: "gramme",     image: "gramme.png",     article: "le",  gender: "m", definition: "unité de mesure de masse (g)" , exampleSentences: {
+    { word: "gramme",     image: "gramme.webp",     article: "le",  gender: "m", definition: "unité de mesure de masse (g)" , exampleSentences: {
         a1: [
           "Je connais le gramme.",
           "J'utilise le gramme.",
@@ -107,7 +107,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque gramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "kilogramme", image: "kilogramme.png", article: "le",  gender: "m", definition: "mille grammes (kg)" , exampleSentences: {
+    { word: "kilogramme", image: "kilogramme.webp", article: "le",  gender: "m", definition: "mille grammes (kg)" , exampleSentences: {
         a1: [
           "Je mange un kilogramme.",
           "J'aime le kilogramme.",
@@ -208,7 +208,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque kilogramme est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "boîte",      image: "boite.png",      article: "la",  gender: "f", definition: "contenant rigide pour conserver les aliments" , exampleSentences: {
+    { word: "boîte",      image: "boite.webp",      article: "la",  gender: "f", definition: "contenant rigide pour conserver les aliments" , exampleSentences: {
         a1: [
           "Je mange une boîte.",
           "J'aime la boîte.",
@@ -309,7 +309,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque boîte est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "paquet",     image: "paquet.png",     article: "le",  gender: "m", definition: "emballage de plusieurs produits ensemble" , exampleSentences: {
+    { word: "paquet",     image: "paquet.webp",     article: "le",  gender: "m", definition: "emballage de plusieurs produits ensemble" , exampleSentences: {
         a1: [
           "Je connais le paquet.",
           "J'utilise le paquet.",
@@ -410,7 +410,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque paquet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "sachet",     image: "sachet.png",     article: "le",  gender: "m", definition: "petit sac contenant un produit" , exampleSentences: {
+    { word: "sachet",     image: "sachet.webp",     article: "le",  gender: "m", definition: "petit sac contenant un produit" , exampleSentences: {
         a1: [
           "Je mange un sachet.",
           "J'aime le sachet.",
@@ -511,7 +511,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque sachet est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "pincée",     image: "pincee.png",     article: "la",  gender: "f", definition: "très petite quantité prise entre les doigts" , exampleSentences: {
+    { word: "pincée",     image: "pincee.webp",     article: "la",  gender: "f", definition: "très petite quantité prise entre les doigts" , exampleSentences: {
         a1: [
           "Je mange une pincée.",
           "J'aime la pincée.",
@@ -612,7 +612,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque pincée est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "tranche",    image: "tranche.png",    article: "la",  gender: "f", definition: "morceau fin coupé dans un aliment" , exampleSentences: {
+    { word: "tranche",    image: "tranche.webp",    article: "la",  gender: "f", definition: "morceau fin coupé dans un aliment" , exampleSentences: {
         a1: [
           "Je connais la tranche.",
           "J'utilise la tranche.",
@@ -713,7 +713,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque tranche est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "part",       image: "part.png",       article: "la",  gender: "f", definition: "portion d'un gâteau ou plat" , exampleSentences: {
+    { word: "part",       image: "part.webp",       article: "la",  gender: "f", definition: "portion d'un gâteau ou plat" , exampleSentences: {
         a1: [
           "Je mange une part.",
           "J'aime la part.",
@@ -814,7 +814,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque part est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "morceau",    image: "morceau.png",    article: "le",  gender: "m", definition: "petit morceau d'aliment découpé" , exampleSentences: {
+    { word: "morceau",    image: "morceau.webp",    article: "le",  gender: "m", definition: "petit morceau d'aliment découpé" , exampleSentences: {
         a1: [
           "Je connais le morceau.",
           "J'utilise le morceau.",
@@ -915,7 +915,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque morceau est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bol",        image: "bol.png",        article: "le",  gender: "m", definition: "récipient rond pour le petit-déjeuner" , exampleSentences: {
+    { word: "bol",        image: "bol.webp",        article: "le",  gender: "m", definition: "récipient rond pour le petit-déjeuner" , exampleSentences: {
         a1: [
           "Je connais le bol.",
           "J'utilise le bol.",
@@ -1016,7 +1016,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bol est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "bouteille",  image: "bouteille.png",  article: "la",  gender: "f", definition: "récipient en verre ou plastique pour liquides" , exampleSentences: {
+    { word: "bouteille",  image: "bouteille.webp",  article: "la",  gender: "f", definition: "récipient en verre ou plastique pour liquides" , exampleSentences: {
         a1: [
           "Je connais la bouteille.",
           "J'utilise la bouteille.",
@@ -1117,7 +1117,7 @@ export const V7_QUANTITES_THEME: VocabTheme = {
           "Puisque bouteille est utile, je le révise régulièrement.",
         ],
       } },
-    { word: "cuillère",   image: "cuillere.png",   article: "la",  gender: "f", definition: "mesure d'ingrédient prise avec une cuillère" , exampleSentences: {
+    { word: "cuillère",   image: "cuillere.webp",   article: "la",  gender: "f", definition: "mesure d'ingrédient prise avec une cuillère" , exampleSentences: {
         a1: [
           "Je connais la cuillère.",
           "J'utilise la cuillère.",
