@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { HomeProgressCards } from "@/components/home/HomeProgressCards";
 import { TasksCard } from "@/components/home/TasksCard";
 
@@ -18,8 +19,13 @@ export default async function HomePage({ searchParams }: Props) {
 
       <HomeProgressCards />
 
-      <footer className="pt-4 text-center text-xs text-zinc-400 dark:text-zinc-600">
-        Lecture &amp; Alphabétisation — Mélina Schröter &amp; Phuoc Van
+      <footer className="pt-4 text-center">
+        <Link
+          href="/avant-propos"
+          className="text-xs text-[var(--color-text-secondary)] hover:text-[var(--color-theme)] underline underline-offset-2"
+        >
+          À propos de l&apos;application
+        </Link>
       </footer>
     </main>
   );

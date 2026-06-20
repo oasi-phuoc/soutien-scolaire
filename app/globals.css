@@ -130,6 +130,11 @@ body {
   background: #ffffff;
 }
 
+.section-background-home::before,
+.section-background-home::after {
+  display: none;
+}
+
 .section-background-lecture {
   --section-tint: #e6d9f7;
   --section-soft: #fbf8ff;
