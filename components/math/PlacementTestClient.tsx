@@ -658,20 +658,31 @@ export function PlacementTestClient() {
       )}
 
       {/* Progress bar */}
-      <PlacementProgressBar
-        current={currentIdx}
-        total={TOTAL_EXERCISES}
-        timeLeft={timeLeft}
-        validated={validated}
-        hasInput={hasInput}
-        onSegmentClick={handleSegmentClick}
-        totalPoints={totalPoints}
-        maxPoints={TOTAL_MAX_POINTS}
-      />
+      <div data-no-print>
+        <PlacementProgressBar
+          current={currentIdx}
+          total={TOTAL_EXERCISES}
+          timeLeft={timeLeft}
+          validated={validated}
+          hasInput={hasInput}
+          onSegmentClick={handleSegmentClick}
+          totalPoints={totalPoints}
+          maxPoints={TOTAL_MAX_POINTS}
+        />
+      </div>
 
-      {/* Exercise header */}
+      {/* Exercise header + PDF button */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
+        <button type="button" onClick={() => window.print()} data-no-print
+          className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+          aria-label="Imprimer en PDF">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+            <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+            <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
+          </svg>
+        </button>
         <span className="text-xs text-[var(--color-text-secondary)]">{ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}</span>
       </div>
       </>

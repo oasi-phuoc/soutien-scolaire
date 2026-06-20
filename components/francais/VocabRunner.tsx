@@ -84,6 +84,41 @@ function getPassingGrade(): number {
   }
 }
 
+function getVocabStepHint(stepKey: string): string | undefined {
+  if (stepKey.includes("image-match"))    return "Observe les images et associe chaque lettre à l'image correspondante.";
+  if (stepKey.includes("article"))        return "Un/une pour l'indéfini, le/la/l' pour le défini, des/les pour le pluriel.";
+  if (stepKey.includes("anagram"))        return "Réorganise les lettres pour retrouver le mot. Les mots du thème peuvent t'aider.";
+  if (stepKey.includes("missing"))        return "Lis le mot à voix haute. Chaque tiret correspond à une lettre manquante.";
+  if (stepKey.includes("masc-fem"))       return "Le féminin se forme souvent en ajoutant -e ou en changeant la terminaison (-eur→-euse, -er→-ère).";
+  if (stepKey.includes("definition"))     return "Lis chaque définition et cherche le mot du thème qui correspond au sens.";
+  if (stepKey.includes("fill"))           return "Lis la phrase entière avant de choisir. Le sens et le genre/nombre guident le choix.";
+  if (stepKey.includes("image-write"))    return "Observe l'image et écris le mot correspondant. Attention à l'orthographe !";
+  if (stepKey.includes("dictation"))      return "Écoute attentivement, puis écris ce que tu entends. Relis avant de valider.";
+  if (stepKey.includes("word-order"))     return "Lis toutes les cartes. En français : Sujet + Verbe + Complément.";
+  if (stepKey.includes("sentence-write")) return "Écris une phrase complète avec le mot. Majuscule au début, point à la fin.";
+  if (stepKey.includes("question-write")) return "Réponds à la question en écrivant une phrase complète.";
+  return undefined;
+}
+
+function VocabHintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center pb-36 px-4" onClick={onClose}>
+      <div className="w-full max-w-xl rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 shadow-xl" onClick={e => e.stopPropagation()}>
+        <button type="button" onClick={onClose} aria-label="Fermer"
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-colors hover:bg-zinc-200">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">💡 Astuce</p>
+        <p className="pr-4 text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
+        <button type="button" onClick={onClose}
+          className="mt-4 w-full rounded-xl bg-[var(--color-accent-fr)]/10 py-2 text-sm font-semibold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/20">
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function VocabRunner({ theme }: Props) {
   const router = useRouter();
   const [steps] = useState<StepDef[]>(() => buildSteps(theme));
@@ -98,6 +133,7 @@ export function VocabRunner({ theme }: Props) {
   const [resetKey, setResetKey] = useState(0);
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
+  const [showHint, setShowHint] = useState(false);
   const [_canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number } | null>>(() => Array(evalTotal).fill(null));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
@@ -400,7 +436,7 @@ export function VocabRunner({ theme }: Props) {
 
       {/* Training progress bar — hidden during eval */}
       {!inEvalPhase && (
-        <div className="mb-6">
+        <div className="mb-6" data-no-print>
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-accent-fr)]">Entraînement</p>
             <p className="text-xs text-[var(--color-text-secondary)]">{stepIdx + 1} / {trainingStepCount}</p>
@@ -424,7 +460,7 @@ export function VocabRunner({ theme }: Props) {
 
       {/* Eval progress bar — shown only during the 7 timed exercises */}
       {isInEvalPhase && (
-        <div className="mb-6">
+        <div className="mb-6" data-no-print>
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
             <p className="text-xs text-[var(--color-text-secondary)]">{evalTotal - evalValidated.filter(Boolean).length} restant(s)</p>
@@ -442,6 +478,31 @@ export function VocabRunner({ theme }: Props) {
               );
             })}
           </div>
+        </div>
+      )}
+
+      {/* Hint + PDF buttons — floated right, only on exercise steps */}
+      {!step.isTheory && step.key !== "results" && (
+        <div className="float-right ml-2 flex gap-1.5" data-no-print>
+          {getVocabStepHint(step.key) && (
+            <button type="button" onClick={() => setShowHint(true)}
+              className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-xs font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+              aria-label="Aide">?</button>
+          )}
+          <button type="button" onClick={() => window.print()}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+            aria-label="Imprimer en PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      )}
+      {showHint && getVocabStepHint(step.key) && (
+        <div data-no-print>
+          <VocabHintPopup hint={getVocabStepHint(step.key)!} onClose={() => setShowHint(false)} />
         </div>
       )}
 

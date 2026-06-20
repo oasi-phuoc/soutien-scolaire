@@ -2457,6 +2457,44 @@ function subjectToTab(subject: string): string {
   return "conjugaison";
 }
 
+function getGrammaireStepHint(exType: string | undefined): string | undefined {
+  if (!exType) return undefined;
+  switch (exType) {
+    case "qcm":          return "Lis toutes les propositions avant de choisir. Une seule réponse est correcte.";
+    case "fill":         return "Conjugue ou accorde le mot selon le sujet et le temps indiqués dans la consigne.";
+    case "fill_select":  return "Choisis le bon mot dans la liste pour compléter la phrase. Lis la phrase entière.";
+    case "match":        return "Associe chaque élément de gauche à son correspondant à droite.";
+    case "write":        return "Écris une réponse complète. Vérifie l'accord en genre et en nombre.";
+    case "trueFalse":    return "Lis chaque affirmation attentivement avant de répondre Vrai ou Faux.";
+    case "order":        return "Replace les éléments dans le bon ordre : du plus grand au plus petit (ou inversement).";
+    case "classify":     return "Regroupe les éléments selon la catégorie à laquelle ils appartiennent.";
+    case "word_order":   return "Réorganise les mots pour former une phrase correcte. Commence par le sujet.";
+    case "color_highlight": return "Surligne ou identifie l'élément demandé dans le texte.";
+    case "clock_read":   return "Lis l'horloge : les petites aiguilles pour les heures, les grandes pour les minutes.";
+    case "tag2":         return "Identifie et classe chaque élément dans la bonne catégorie grammaticale.";
+    default:             return "Lis attentivement la consigne avant de répondre.";
+  }
+}
+
+function GramHintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
+  return (
+    <div className="fixed inset-0 z-50 flex items-end justify-center pb-36 px-4" onClick={onClose}>
+      <div className="w-full max-w-xl rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 shadow-xl" onClick={e => e.stopPropagation()}>
+        <button type="button" onClick={onClose} aria-label="Fermer"
+          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-colors hover:bg-zinc-200">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">💡 Astuce</p>
+        <p className="pr-4 text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
+        <button type="button" onClick={onClose}
+          className="mt-4 w-full rounded-xl bg-[var(--color-accent-fr)]/10 py-2 text-sm font-semibold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/20">
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
   const router = useRouter();
   const returnUrl = `/francais?tab=${subjectToTab(subject)}`;
@@ -2481,6 +2519,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
   const [_canValidate, setCanValidate] = useState(true);
   const [validateCommand, setValidateCommand] = useState(0);
   const [exercisesStarted, setExercisesStarted] = useState(!hasTimer);
+  const [showHint, setShowHint] = useState(false);
   const [timeLeft, setTimeLeft] = useState<number | null>(null);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
   const [evalIdx, setEvalIdx] = useState(0);
@@ -2726,7 +2765,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
 
       {/* Training progress bar — hidden during eval */}
       {!isInEvalPhase && (
-        <div className="mb-6 flex gap-1">
+        <div className="mb-6 flex gap-1" data-no-print>
           {Array.from({ length: trainingTotalSteps }).map((_, i) => (
             <div
               key={i}
@@ -2739,6 +2778,31 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
               }`}
             />
           ))}
+        </div>
+      )}
+
+      {/* Hint + PDF buttons — only on exercise steps */}
+      {(isExercise || isMidEx) && (
+        <div className="float-right ml-2 flex gap-1.5" data-no-print>
+          {getGrammaireStepHint(currentExercise?.type) && (
+            <button type="button" onClick={() => setShowHint(true)}
+              className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-xs font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+              aria-label="Aide">?</button>
+          )}
+          <button type="button" onClick={() => window.print()}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+            aria-label="Imprimer en PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      )}
+      {showHint && getGrammaireStepHint(currentExercise?.type) && (
+        <div data-no-print>
+          <GramHintPopup hint={getGrammaireStepHint(currentExercise?.type)!} onClose={() => setShowHint(false)} />
         </div>
       )}
 
