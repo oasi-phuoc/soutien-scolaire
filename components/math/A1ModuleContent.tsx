@@ -22,6 +22,7 @@ import {
   pickTheoryPivotTranslation,
 } from "@/lib/curriculum/content/math/math-a1-types";
 import type { PivotCode } from "@/lib/pivot-langs";
+import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import {
   LEVEL_PASSING_GRADES,
@@ -407,21 +408,6 @@ function A1HintButton({ onClick }: { onClick: () => void }) {
       aria-label="Aide"
     >
       ?
-    </button>
-  );
-}
-
-function PdfPrintButton() {
-  return (
-    <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())}
-      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-      aria-label="Imprimer en PDF">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M6 9V2h12v7" />
-        <rect x="6" y="14" width="12" height="8" rx="1" />
-        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-        <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-      </svg>
     </button>
   );
 }
@@ -1892,7 +1878,14 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
     return startSubmoduleId ? "theory" : loadA1Position().step;
   });
   const [showHint, setShowHint] = useState(false);
+  const [showPrintConfig, setShowPrintConfig] = useState(false);
 
+  const handlePrint = (_config: PrintConfig) => {
+    setShowPrintConfig(false);
+    setTimeout(() => {
+      import("@/lib/utils/print").then((m) => m.triggerPrint());
+    }, 150);
+  };
 
   // Exercice 2 — écrire les nombres (1–10)
   const [ex2Numbers, setEx2Numbers] = useState<number[]>(generateNumbers);
@@ -2682,16 +2675,43 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
-      {step !== "eval" && step !== "theory" && (
+      {step !== "eval" && step !== "theory" && getA1StepHint(step) && (
         <div className="float-right ml-2 flex gap-1.5" data-no-print>
-          {getA1StepHint(step) && <A1HintButton onClick={() => setShowHint(true)} />}
-          <PdfPrintButton />
+          <A1HintButton onClick={() => setShowHint(true)} />
         </div>
       )}
       {showHint && getA1StepHint(step) && (
         <div data-no-print>
           <A1HintPopup hint={getA1StepHint(step)!} onClose={() => setShowHint(false)} />
         </div>
+      )}
+
+      {/* Print config button — floated right, only on theory step */}
+      {step === "theory" && (
+        <div className="float-right ml-2" data-no-print>
+          <button
+            type="button"
+            onClick={() => setShowPrintConfig(true)}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+            aria-label="Imprimer en PDF"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Print config sheet */}
+      {showPrintConfig && (
+        <PrintConfigSheet
+          onClose={() => setShowPrintConfig(false)}
+          onPrint={handlePrint}
+          hasExercises={false}
+          accentColor="var(--color-accent-alg)"
+        />
       )}
 
       {step === "theory" && (

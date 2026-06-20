@@ -28,6 +28,7 @@ import { A1ModuleContent } from "@/components/math/A1ModuleContent";
 import { GenericModuleContent } from "@/components/math/GenericModuleContent";
 import EvalProgressBar from "@/components/math/EvalProgressBar";
 import TrainingProgressBar from "@/components/math/TrainingProgressBar";
+import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
 import { G1NameToSVGExercise, G1AnagramExercise, G1DefinitionMatchExercise, G1ShapeWriteExercise, G1PropCheckExercise, G1ShapeQAExercise } from "@/components/math/geo/G1ShapeExercises";
 import { G2PerimeterExercise } from "@/components/math/geo/G2PerimeterExercises";
 import { G3AreaExercise } from "@/components/math/geo/G3AreaExercises";
@@ -1566,21 +1567,6 @@ function HintButton({ onClick }: { onClick: () => void }) {
   );
 }
 
-function PdfPrintButton() {
-  return (
-    <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())}
-      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
-      aria-label="Imprimer en PDF">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M6 9V2h12v7" />
-        <rect x="6" y="14" width="12" height="8" rx="1" />
-        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-        <circle cx="18" cy="13" r="0.5" fill="currentColor" />
-      </svg>
-    </button>
-  );
-}
-
 function getWorkspaceStepHint(step: WorkspaceStep | undefined): string | undefined {
   if (!step) return undefined;
   if (step.kind === "exercise") return step.item.hintFr;
@@ -1722,6 +1708,18 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [revTimerLeft, setRevTimerLeft] = useState<number | null>(null);
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showHint, setShowHint] = useState(false);
+  const [showPrintConfig, setShowPrintConfig] = useState(false);
+  const [printConfig, setPrintConfig] = useState<PrintConfig | null>(null);
+
+  const handlePrint = useCallback((config: PrintConfig) => {
+    setPrintConfig(config);
+    setShowPrintConfig(false);
+    setTimeout(() => {
+      import("@/lib/utils/print").then((m) => m.triggerPrint());
+      setTimeout(() => setPrintConfig(null), 1000);
+    }, 150);
+  }, []);
+
   const [evalValidateCommands, setEvalValidateCommands] = useState<Record<number, number>>({});
   const [evalExValidated, setEvalExValidated] = useState<Record<number, boolean>>({});
   const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
@@ -2230,17 +2228,44 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
         );
       })()}
 
-      {/* Hint + PDF buttons — floated right, aligns with exercise title */}
-      {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && (
+      {/* Hint button — floated right, only on exercise steps */}
+      {!inEvalPhase && !isInEvalExercises && currentStep && currentStep.kind !== "theory" && getWorkspaceStepHint(currentStep) && (
         <div className="float-right ml-2 flex gap-1.5" data-no-print>
-          {getWorkspaceStepHint(currentStep) && <HintButton onClick={() => setShowHint(true)} />}
-          <PdfPrintButton />
+          <HintButton onClick={() => setShowHint(true)} />
         </div>
       )}
       {showHint && getWorkspaceStepHint(currentStep) && (
         <div data-no-print>
           <HintPopup hint={getWorkspaceStepHint(currentStep)!} onClose={() => setShowHint(false)} />
         </div>
+      )}
+
+      {/* Print config button — floated right, only on theory step */}
+      {currentStep?.kind === "theory" && !isInEvalExercises && (
+        <div className="float-right ml-2" data-no-print>
+          <button
+            type="button"
+            onClick={() => setShowPrintConfig(true)}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+            aria-label="Imprimer en PDF"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Print config sheet */}
+      {showPrintConfig && (
+        <PrintConfigSheet
+          onClose={() => setShowPrintConfig(false)}
+          onPrint={handlePrint}
+          hasExercises={false}
+          accentColor="var(--color-accent-alg)"
+        />
       )}
 
       {!isInEvalExercises && (<>

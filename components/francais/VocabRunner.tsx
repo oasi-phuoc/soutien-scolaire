@@ -21,6 +21,7 @@ import { ExSentenceWrite } from "./vocab/ExSentenceWrite";
 import { ExQuestionWrite } from "./vocab/ExQuestionWrite";
 import { EvalAnnounce } from "./vocab/EvalAnnounce";
 import { EvalRevealContext } from "@/lib/eval-reveal-context";
+import { PrintConfigSheet, type PrintConfig } from "@/components/ui/PrintConfigSheet";
 
 interface Props {
   theme: VocabTheme;
@@ -130,6 +131,15 @@ export function VocabRunner({ theme }: Props) {
   const [validated, setValidated] = useState(true); // theory step first
   const [validateCommand, setValidateCommand] = useState(0);
   const [showHint, setShowHint] = useState(false);
+  const [showPrintConfig, setShowPrintConfig] = useState(false);
+
+  const handlePrint = (_config: PrintConfig) => {
+    setShowPrintConfig(false);
+    setTimeout(() => {
+      import("@/lib/utils/print").then((m) => m.triggerPrint());
+    }, 150);
+  };
+
   const [_canValidate, setCanValidate] = useState(false);
   const [evalScores, setEvalScores] = useState<Array<{ correct: number; total: number } | null>>(() => Array(evalTotal).fill(null));
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
@@ -477,29 +487,46 @@ export function VocabRunner({ theme }: Props) {
         </div>
       )}
 
-      {/* Hint + PDF buttons — floated right, only on exercise steps */}
-      {!step.isTheory && step.key !== "results" && (
+      {/* Hint button — floated right, only on exercise steps */}
+      {!step.isTheory && step.key !== "results" && getVocabStepHint(step.key) && (
         <div className="float-right ml-2 flex gap-1.5" data-no-print>
-          {getVocabStepHint(step.key) && (
-            <button type="button" onClick={() => setShowHint(true)}
-              className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-xs font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
-              aria-label="Aide">?</button>
-          )}
-          <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())}
-            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
-            aria-label="Imprimer en PDF">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <path d="M6 9V2h12v7"/><rect x="6" y="14" width="12" height="8" rx="1"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <circle cx="18" cy="13" r="0.5" fill="currentColor"/>
-            </svg>
-          </button>
+          <button type="button" onClick={() => setShowHint(true)}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-xs font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+            aria-label="Aide">?</button>
         </div>
       )}
       {showHint && getVocabStepHint(step.key) && (
         <div data-no-print>
           <VocabHintPopup hint={getVocabStepHint(step.key)!} onClose={() => setShowHint(false)} />
         </div>
+      )}
+
+      {/* Print config button — floated right, only on theory step */}
+      {step.isTheory && step.key !== "results" && step.key !== "eval-announce" && (
+        <div className="float-right ml-2" data-no-print>
+          <button
+            type="button"
+            onClick={() => setShowPrintConfig(true)}
+            className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
+            aria-label="Imprimer en PDF"
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <path d="M6 9V2h12v7" /><rect x="6" y="14" width="12" height="8" rx="1" />
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+              <circle cx="18" cy="13" r="0.5" fill="currentColor" />
+            </svg>
+          </button>
+        </div>
+      )}
+
+      {/* Print config sheet */}
+      {showPrintConfig && (
+        <PrintConfigSheet
+          onClose={() => setShowPrintConfig(false)}
+          onPrint={handlePrint}
+          hasExercises={false}
+          accentColor="var(--color-accent-fr)"
+        />
       )}
 
       {/* Step content */}
