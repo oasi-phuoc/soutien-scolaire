@@ -425,13 +425,13 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         <div className="mt-4 flex gap-3">
           <Link
             href="/avant-propos"
-            className="flex flex-1 min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             À propos
           </Link>
           <Link
             href="/conditions-utilisation"
-            className="flex flex-1 min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
             Conditions d&apos;utilisation
           </Link>
