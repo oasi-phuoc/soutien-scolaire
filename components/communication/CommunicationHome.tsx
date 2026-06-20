@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
@@ -10,12 +10,12 @@ const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ P1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      if (raw) setCompleted(JSON.parse(raw));
+      if (raw) setCompleted(normalizeCommunicationProgress(JSON.parse(raw)));
     } catch { /* ignore */ }
   }, []);
 
@@ -131,12 +131,12 @@ export function CommunicationModuleList({ isAdmin = false }: { isAdmin?: boolean
 export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
   const router = useRouter();
   const [completed, setCompleted] = useState<Record<string, boolean>>({});
-  const [expanded, setExpanded] = useState<Record<string, boolean>>({ P1: true });
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({ E1: true });
 
   useEffect(() => {
     try {
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      if (raw) setCompleted(JSON.parse(raw));
+      if (raw) setCompleted(normalizeCommunicationProgress(JSON.parse(raw)));
     } catch {
       /* ignore */
     }
@@ -153,13 +153,13 @@ export function CommunicationHome({ isAdmin = false }: { isAdmin?: boolean }) {
           className="text-xs font-medium uppercase tracking-wide"
           style={{ color: ACCENT }}
         >
-          Communication
+          Expression
         </p>
         <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
-          Parler au quotidien
+          S&apos;exprimer en français
         </h1>
         <p className="text-sm text-[var(--color-text-secondary)]">
-          Apprenez à communiquer en français dans des situations de la vie courante.
+          Apprenez à rédiger et à communiquer en français avec clarté.
         </p>
       </header>
 

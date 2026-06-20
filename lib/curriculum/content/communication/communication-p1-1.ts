@@ -3,6 +3,7 @@ export type CommunicationTheoryBlock =
   | { type: "subheading"; text: string }
   | { type: "table"; headers: string[]; rows: string[][] }
   | { type: "note"; text: string }
+  | { type: "highlight"; title: string; items: string[] }
   | { type: "dialogue"; lines: Array<{ role: string; text: string; translation?: string }> }
   | { type: "vocab"; items: Array<{ fr: string; example: string }> };
 
@@ -21,11 +22,12 @@ export type CommunicationLesson = {
   title: string;
   theory: CommunicationTheoryBlock[];
   exercises: CommunicationExercise[];
+  writingLevel?: "base" | "moyen" | "avance";
 };
 
-export const COMMUNICATION_P1_1: CommunicationLesson = {
-  id: "P1-1",
-  code: "P1.1",
+export const COMMUNICATION_E2_1: CommunicationLesson = {
+  id: "E2-1",
+  code: "E2.1",
   title: "Se présenter",
   theory: [
     { type: "heading", text: "Se présenter" },

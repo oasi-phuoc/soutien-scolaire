@@ -1,23 +1,199 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
+import { useEffect, useState, useTransition } from "react";
 import {
-  COMMUNICATION_P1_1,
+  getExpressionTeachersAction,
+  submitExpressionAction,
+  type TeacherOption,
+} from "@/app/actions/expression";
+import { CommunicationAiPractice } from "@/components/communication/CommunicationAiPractice";
+import { normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
+import {
+  COMMUNICATION_E2_1,
   type CommunicationLesson,
   type CommunicationTheoryBlock,
 } from "@/lib/curriculum/content/communication/communication-p1-1";
+import {
+  EXPRESSION_E1_1,
+  EXPRESSION_E1_2,
+  EXPRESSION_E1_3,
+} from "@/lib/curriculum/content/communication/expression-e1";
+import {
+  randomWritingPrompt,
+  type WritingPrompt,
+} from "@/lib/curriculum/content/communication/writing-prompts";
 
 const ACCENT = "var(--color-accent-comm)";
 const COMM_PROGRESS_KEY = "soutien-comm-progress-v1";
 
 const LESSONS: Record<string, CommunicationLesson> = {
-  "P1-1": COMMUNICATION_P1_1,
-  "A1-1": COMMUNICATION_P1_1,
+  "E1-1": EXPRESSION_E1_1,
+  "E1-2": EXPRESSION_E1_2,
+  "E1-3": EXPRESSION_E1_3,
+  "E2-1": COMMUNICATION_E2_1,
+  "P1-1": COMMUNICATION_E2_1,
+  "A1-1": COMMUNICATION_E2_1,
 };
 
-type Phase = "theory" | "exercises" | "score";
+type Phase = "theory" | "writing" | "exercises" | "score";
+
+type GrammarMatch = {
+  message: string;
+  shortMessage?: string;
+  offset: number;
+  length: number;
+  replacements?: Array<{ value: string }>;
+  rule?: { id?: string };
+};
+
+const IGNORED_GRAMMAR_RULES = new Set([
+  "WHITESPACE_RULE",
+  "FRENCH_WHITESPACE",
+  "COMMA_PARENTHESIS_WHITESPACE",
+  "UNPAIRED_BRACKETS",
+]);
+
+function wordCount(text: string) {
+  return text.trim() ? text.trim().split(/\s+/u).filter(Boolean).length : 0;
+}
+
+function WritingExercise({
+  lessonCode,
+  prompt,
+  text,
+  onTextChange,
+  feedback,
+  checked,
+  checking,
+  teachers,
+}: {
+  lessonCode: string;
+  prompt: WritingPrompt;
+  text: string;
+  onTextChange: (value: string) => void;
+  feedback: GrammarMatch[];
+  checked: boolean;
+  checking: boolean;
+  teachers: TeacherOption[];
+}) {
+  const count = wordCount(text);
+  const inRange = count >= prompt.minWords && count <= prompt.maxWords;
+  const [teacherId, setTeacherId] = useState("");
+  const [sendMessage, setSendMessage] = useState("");
+  const [sent, setSent] = useState(false);
+  const [isSending, startSending] = useTransition();
+
+  function sendToTeacher() {
+    if (!teacherId || !checked || !inRange || sent) return;
+    startSending(async () => {
+      const result = await submitExpressionAction({
+        teacherId,
+        lessonCode,
+        level: lessonCode === "E1.1" ? "base" : lessonCode === "E1.2" ? "moyen" : "avance",
+        prompt,
+        text,
+        aiFeedback: feedback,
+      });
+      setSendMessage(result.ok ? "Production envoyée au professeur." : (result.reason ?? "Envoi impossible."));
+      setSent(result.ok);
+    });
+  }
+
+  return (
+    <div className="space-y-5">
+      <div className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-white/75 p-4">
+        <p className="text-xs font-bold uppercase text-[var(--color-accent-fr)]">Situation</p>
+        <h2 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{prompt.title}</h2>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{prompt.situation}</p>
+        <p className="mt-3 text-sm font-semibold leading-relaxed text-[var(--color-text-primary)]">{prompt.instruction}</p>
+        <p className="mt-3 text-xs font-semibold text-[var(--color-text-secondary)]">Indiquez :</p>
+        <ul className="mt-1 space-y-1">
+          {prompt.points.map((point) => (
+            <li key={point} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
+              <span className="text-[var(--color-accent-fr)]">•</span><span>{point} ;</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <div className="mb-2 flex items-center justify-between gap-3">
+          <label htmlFor="expression-text" className="text-sm font-bold text-[var(--color-text-primary)]">Votre production</label>
+          <span className={`text-xs font-semibold ${inRange ? "text-emerald-600" : "text-amber-600"}`}>
+            {count} / {prompt.minWords}–{prompt.maxWords} mots
+          </span>
+        </div>
+        <textarea
+          id="expression-text"
+          value={text}
+          onChange={(event) => onTextChange(event.target.value)}
+          readOnly={checked}
+          rows={12}
+          className="min-h-72 w-full resize-y rounded-[var(--radius-md)] border-2 border-[var(--color-accent-fr)]/45 bg-white/80 p-4 text-base leading-7 text-[var(--color-text-primary)] outline-none transition-colors focus:border-[var(--color-accent-fr)] read-only:bg-white/55"
+          aria-describedby="expression-word-count"
+        />
+        <p id="expression-word-count" className="mt-1 text-xs text-[var(--color-text-secondary)]">
+          Respectez la longueur demandée avant de valider.
+        </p>
+      </div>
+
+      {checking && <p className="animate-pulse text-sm text-[var(--color-text-secondary)]">Correction linguistique en cours…</p>}
+      {checked && !checking && (
+        <section className="rounded-[var(--radius-md)] border border-amber-300 bg-white/75 p-4">
+          <h3 className="font-bold text-amber-600">Pistes de correction</h3>
+          {feedback.length === 0 ? (
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucune erreur évidente détectée. Relisez encore le contenu et l’organisation.</p>
+          ) : (
+            <ul className="mt-2 space-y-3">
+              {feedback.map((match, index) => (
+                <li key={`${match.offset}-${index}`} className="text-sm text-[var(--color-text-primary)]">
+                  <span className="font-semibold text-amber-600">{match.shortMessage || match.message}</span>
+                  {match.replacements?.length ? (
+                    <span className="ml-1">→ {match.replacements.slice(0, 3).map((item) => item.value).join(" / ")}</span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          )}
+          <p className="mt-3 text-xs text-[var(--color-text-secondary)]">La correction automatique est une aide. Le professeur peut compléter et expliquer les corrections.</p>
+        </section>
+      )}
+
+      {checked && (
+        <section className="rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/25 bg-[var(--color-accent-fr)]/5 p-4">
+          <h3 className="font-bold text-[var(--color-text-primary)]">Envoyer à un professeur</h3>
+          {teachers.length ? (
+            <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+              <select
+                value={teacherId}
+                onChange={(event) => setTeacherId(event.target.value)}
+                disabled={sent}
+                className="min-h-11 flex-1 rounded-[var(--radius-md)] border border-[var(--color-accent-fr)]/35 bg-white px-3 text-sm outline-none focus:border-[var(--color-accent-fr)]"
+              >
+                <option value="">Choisissez un professeur</option>
+                {teachers.map((teacher) => (
+                  <option key={teacher.id} value={teacher.id}>{[teacher.prenom, teacher.nom].filter(Boolean).join(" ") || "Professeur"}</option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={sendToTeacher}
+                disabled={!teacherId || !inRange || isSending || sent}
+                className="min-h-11 rounded-[var(--radius-md)] bg-[var(--color-accent-fr)] px-5 text-sm font-bold text-white disabled:opacity-35"
+              >
+                {sent ? "Envoyé" : isSending ? "Envoi…" : "Envoyer"}
+              </button>
+            </div>
+          ) : (
+            <p className="mt-2 text-sm text-[var(--color-text-secondary)]">Aucun professeur n’est encore disponible dans la liste.</p>
+          )}
+          {sendMessage && <p className={`mt-2 text-xs font-semibold ${sent ? "text-emerald-600" : "text-amber-600"}`}>{sendMessage}</p>}
+        </section>
+      )}
+    </div>
+  );
+}
 
 // ——— Theory block renderers ———
 
@@ -88,6 +264,24 @@ function TheoryBlock({ block }: { block: CommunicationTheoryBlock }) {
         <div className="mb-4 flex gap-2 rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-2.5 dark:border-amber-700 dark:bg-amber-950">
           <span className="shrink-0 text-amber-600 dark:text-amber-400">⚠️</span>
           <p className="text-sm text-amber-800 dark:text-amber-200">{block.text}</p>
+        </div>
+      );
+
+    case "highlight":
+      return (
+        <div
+          className="mb-4 rounded-[var(--radius-md)] border-l-2 px-4 py-3"
+          style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 9%, transparent)` }}
+        >
+          <h3 className="mb-2 text-sm font-bold" style={{ color: ACCENT }}>{block.title}</h3>
+          <ul className="space-y-1.5">
+            {block.items.map((item, i) => (
+              <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+                <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full" style={{ background: ACCENT }} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       );
 
@@ -240,7 +434,7 @@ function MCQExercise({
 // ——— Main component ———
 
 export function CommunicationRunner({ lessonId }: { lessonId: string }) {
-  if (lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
+  if (lessonId === "E2-0" || lessonId === "P1-0" || lessonId === "AI-1") return <CommunicationAiPractice />;
   return <CommunicationLessonRunner lessonId={lessonId} />;
 }
 
@@ -253,6 +447,18 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [results, setResults] = useState<boolean[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
   const [exerciseValidated, setExerciseValidated] = useState(false);
+  const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
+    lesson?.writingLevel ? randomWritingPrompt(lesson.writingLevel) : null,
+  );
+  const [writingText, setWritingText] = useState("");
+  const [grammarFeedback, setGrammarFeedback] = useState<GrammarMatch[]>([]);
+  const [grammarChecking, setGrammarChecking] = useState(false);
+  const [teachers, setTeachers] = useState<TeacherOption[]>([]);
+
+  useEffect(() => {
+    if (!lesson?.writingLevel) return;
+    void getExpressionTeachersAction().then(setTeachers);
+  }, [lesson?.writingLevel]);
 
   if (!lesson) {
     return (
@@ -274,6 +480,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const progressPct =
     phase === "theory"
       ? 10
+      : phase === "writing"
+        ? 70
       : phase === "exercises"
         ? 10 + Math.round((exIndex / totalEx) * 80)
         : 100;
@@ -281,7 +489,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   function handleFinish() {
     try {
       const raw = localStorage.getItem(COMM_PROGRESS_KEY);
-      const prev: Record<string, boolean> = raw ? JSON.parse(raw) : {};
+      const prev = normalizeCommunicationProgress(raw ? JSON.parse(raw) : {});
       prev[lesson.id] = true;
       localStorage.setItem(COMM_PROGRESS_KEY, JSON.stringify(prev));
       const MAIN_KEY = "soutien-learning-progress-v1";
@@ -301,6 +509,10 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   function goBack() {
     if (phase === "theory") {
       router.push("/communication");
+    } else if (phase === "writing") {
+      setPhase("theory");
+      setGrammarFeedback([]);
+      setExerciseValidated(false);
     } else if (phase === "exercises") {
       setPhase("theory");
       setSelected(null);
@@ -311,20 +523,59 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   }
 
   function handleReset() {
+    if (phase === "writing" && lesson.writingLevel) {
+      setWritingText("");
+      setGrammarFeedback([]);
+      setExerciseValidated(false);
+      setWritingPrompt(randomWritingPrompt(lesson.writingLevel));
+      return;
+    }
     setSelected(null);
     setExerciseValidated(false);
   }
 
-  function handleValidate() {
+  async function handleValidate() {
+    if (phase === "writing") {
+      if (!writingPrompt || exerciseValidated || grammarChecking) return;
+      const count = wordCount(writingText);
+      if (count < writingPrompt.minWords || count > writingPrompt.maxWords) return;
+      setGrammarChecking(true);
+      try {
+        const response = await fetch("/api/check-grammar", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: writingText }),
+        });
+        const data = await response.json() as { matches?: GrammarMatch[] };
+        setGrammarFeedback((data.matches ?? []).filter((match) => !IGNORED_GRAMMAR_RULES.has(match.rule?.id ?? "")));
+      } catch {
+        setGrammarFeedback([]);
+      } finally {
+        setGrammarChecking(false);
+        setExerciseValidated(true);
+      }
+      return;
+    }
     if (!selected || exerciseValidated) return;
     setExerciseValidated(true);
   }
 
   function goNext() {
     if (phase === "theory") {
+      if (lesson.writingLevel) {
+        setPhase("writing");
+        return;
+      }
+      if (totalEx === 0) {
+        handleFinish();
+        return;
+      }
       setPhase("exercises");
       setSelected(null);
       setExerciseValidated(false);
+    } else if (phase === "writing") {
+      if (!exerciseValidated) return;
+      handleFinish();
     } else if (phase === "exercises") {
       if (!exerciseValidated) return;
       const correct = selected === lesson.exercises[exIndex]!.answer;
@@ -342,9 +593,11 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
     }
   }
 
-  const isLastStep = phase === "score";
-  const showExerciseControls = phase === "exercises";
-  const nextDisabled = phase === "exercises" && !exerciseValidated;
+  const isLastStep = phase === "score" || phase === "writing" || (phase === "theory" && totalEx === 0 && !lesson.writingLevel);
+  const showExerciseControls = phase === "exercises" || phase === "writing";
+  const writingCount = wordCount(writingText);
+  const writingInRange = !!writingPrompt && writingCount >= writingPrompt.minWords && writingCount <= writingPrompt.maxWords;
+  const nextDisabled = (phase === "exercises" || phase === "writing") && !exerciseValidated;
 
   const score = results.filter(Boolean).length;
 
@@ -372,6 +625,23 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
             ))}
           </div>
         </div>
+      )}
+
+      {phase === "writing" && writingPrompt && (
+        <WritingExercise
+          lessonCode={lesson.code}
+          prompt={writingPrompt}
+          text={writingText}
+          onTextChange={(value) => {
+            setWritingText(value);
+            setExerciseValidated(false);
+            setGrammarFeedback([]);
+          }}
+          feedback={grammarFeedback}
+          checked={exerciseValidated}
+          checking={grammarChecking}
+          teachers={teachers}
+        />
       )}
 
       {/* Exercises phase */}
@@ -449,7 +719,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={handleReset}
-                  disabled={exerciseValidated}
+                  disabled={exerciseValidated || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
                   aria-label="Réinitialiser"
                 >
@@ -459,8 +729,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 </button>
                 <button
                   type="button"
-                  onClick={handleValidate}
-                  disabled={!selected || exerciseValidated}
+                  onClick={() => void handleValidate()}
+                  disabled={(phase === "writing" ? !writingInRange : !selected) || exerciseValidated || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}
                   aria-label="Valider"

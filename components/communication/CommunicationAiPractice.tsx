@@ -227,7 +227,7 @@ export function CommunicationAiPractice() {
           </svg>
         </button>
         <div className="min-w-0">
-          <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>Parler</p>
+          <p className="text-xs font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>Expression orale</p>
           <h1 className="truncate text-2xl font-bold text-[var(--color-text-primary)]">Conversation IA</h1>
         </div>
       </header>

@@ -22,7 +22,7 @@ import {
   MATH_MODULES,
 } from "@/lib/curriculum/math-data";
 import { FRENCH_THEMES } from "@/lib/curriculum/french-data";
-import { COMM_MODULES } from "@/lib/curriculum/communication-data";
+import { COMM_MODULES, normalizeCommunicationProgress } from "@/lib/curriculum/communication-data";
 import type { StoredProgressV1 } from "@/lib/curriculum/types";
 import type { LectureProgressV2 } from "@/lib/progress/lecture-progress";
 
@@ -206,7 +206,8 @@ export function HomeProgressCards() {
   const completedSlugs = new Set(Object.keys(mathP?.frenchLessons ?? {}));
   const vocDone = FRENCH_VOC.filter((t) => completedSlugs.has(t.slug)).length;
   const gramDone = FRENCH_GRAM.filter((t) => completedSlugs.has(t.slug)).length;
-  const parlerDone = COMM_AVAILABLE.filter((s) => !!(mathP?.commProgress?.[s.id])).length;
+  const expressionProgress = normalizeCommunicationProgress(mathP?.commProgress ?? {});
+  const parlerDone = COMM_AVAILABLE.filter((s) => !!expressionProgress[s.id]).length;
   const frTotal = FRENCH_VOC.length + FRENCH_GRAM.length + COMM_AVAILABLE.length;
   const frDone = vocDone + gramDone + parlerDone;
   const frPct = frTotal > 0 ? Math.round((frDone / frTotal) * 100) : 0;
@@ -264,7 +265,7 @@ export function HomeProgressCards() {
         subProgress={[
           { label: "Vocabulaire", done: vocDone, total: FRENCH_VOC.length },
           { label: "Grammaire", done: gramDone, total: FRENCH_GRAM.length },
-          { label: "Parler", done: parlerDone, total: Math.max(COMM_AVAILABLE.length, 1) },
+          { label: "Expression", done: parlerDone, total: Math.max(COMM_AVAILABLE.length, 1) },
         ]}
       />
       <CardShell

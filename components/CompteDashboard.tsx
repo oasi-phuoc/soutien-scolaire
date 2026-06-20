@@ -170,10 +170,14 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
     savePivotLocal(next);
     if (user && supabaseConfigured) {
       const r = await updateRemotePivotLang(next);
-      setSaved(true);
-      if (!r.ok) setPivotMsg(r.reason ?? "Erreur enregistrement langue");
-      else setPivotMsg(null);
-      window.setTimeout(() => setSaved(false), 2000);
+      if (!r.ok) {
+        setSaved(false);
+        setPivotMsg(r.reason ?? "La synchronisation cloud a échoué.");
+      } else {
+        setSaved(true);
+        setPivotMsg(null);
+        window.setTimeout(() => setSaved(false), 2000);
+      }
     } else {
       setSaved(true);
       window.setTimeout(() => setSaved(false), 2000);

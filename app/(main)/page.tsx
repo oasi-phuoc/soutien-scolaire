@@ -1,5 +1,6 @@
 import { HomeProgressCards } from "@/components/home/HomeProgressCards";
 import { TasksCard } from "@/components/home/TasksCard";
+import { ExpressionMailboxCard } from "@/components/expression/ExpressionMailboxCard";
 
 type Props = { searchParams?: Promise<{ msg?: string }> };
 
@@ -15,6 +16,8 @@ export default async function HomePage({ searchParams }: Props) {
       ) : null}
 
       <TasksCard />
+
+      <ExpressionMailboxCard />
 
       <HomeProgressCards />
     </main>

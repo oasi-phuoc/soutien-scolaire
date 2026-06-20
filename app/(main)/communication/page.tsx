@@ -1,6 +1,5 @@
 import { CommunicationHome } from "@/components/communication/CommunicationHome";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { ComingSoon } from "@/components/ComingSoon";
 
 export default async function CommunicationPage() {
   const supabase = await createSupabaseServerClient();
@@ -9,6 +8,5 @@ export default async function CommunicationPage() {
     const { data: myRole } = await supabase.rpc("get_my_role");
     isAdmin = myRole === "admin";
   }
-  if (!isAdmin) return <ComingSoon />;
-  return <CommunicationHome isAdmin />;
+  return <CommunicationHome isAdmin={isAdmin} />;
 }

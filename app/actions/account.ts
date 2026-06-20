@@ -27,7 +27,15 @@ export async function updateRemotePivotLang(lang: string) {
     })
     .eq("id", user.id);
 
-  if (error) return { ok: false as const, reason: error.message };
+  if (error) {
+    if (error.code === "23514" && error.message.includes("preferred_pivot_lang")) {
+      return {
+        ok: false as const,
+        reason: "La liste des langues du profil cloud doit être mise à jour dans Supabase.",
+      };
+    }
+    return { ok: false as const, reason: "La langue est enregistrée sur cet appareil, mais la synchronisation cloud a échoué." };
+  }
   revalidatePath("/compte");
   return { ok: true as const };
 }
