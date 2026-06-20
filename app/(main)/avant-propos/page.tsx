@@ -274,7 +274,7 @@ export default function AvantProposPage() {
             </svg>
           </Link>
           <div>
-            <h1 className="text-xl font-bold text-[var(--color-text-primary)]">Avant-propos</h1>
+            <h1 className="text-xl font-bold text-[var(--color-text-primary)]">À propos</h1>
             <p className="text-xs text-[var(--color-text-secondary)]">LearnUp — Synecom et Botza</p>
           </div>
         </div>

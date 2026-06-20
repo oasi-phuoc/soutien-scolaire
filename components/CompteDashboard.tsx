@@ -431,7 +431,7 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
               <circle cx="12" cy="12" r="10" />
               <path d="M12 16v-4M12 8h.01" />
             </svg>
-            Avant-propos
+            À propos
           </Link>
           <Link
             href="/conditions-utilisation"
