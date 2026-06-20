@@ -1,4 +1,5 @@
 export const PIVOT_LANGS = [
+  { code: "fr", label: "Français", labelFr: "Français" },
   { code: "en", label: "English", labelFr: "Anglais" },
   { code: "ar", label: "العربية", labelFr: "Arabe" },
   { code: "fa", label: "فارسی", labelFr: "Farsi" },

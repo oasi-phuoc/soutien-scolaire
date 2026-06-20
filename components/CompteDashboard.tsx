@@ -416,22 +416,34 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         </div>
       </Card>
 
-      {/* À propos */}
+      {/* À propos & Conditions */}
       <Card>
         <SectionTitle>À propos</SectionTitle>
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Guide d&apos;utilisation, présentation des sections et crédits de l&apos;application.
         </p>
-        <Link
-          href="/avant-propos"
-          className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-theme)]/40 px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-light)]"
-        >
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 16v-4M12 8h.01" />
-          </svg>
-          Voir l&apos;avant-propos
-        </Link>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href="/avant-propos"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-theme)]/40 px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-light)]"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4M12 8h.01" />
+            </svg>
+            Avant-propos
+          </Link>
+          <Link
+            href="/conditions-utilisation"
+            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-border-default)] px-4 text-sm font-semibold text-[var(--color-text-secondary)] transition-colors hover:bg-zinc-50"
+          >
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <path d="M9 7h6M9 11h6M9 15h4" />
+            </svg>
+            Conditions d&apos;utilisation
+          </Link>
+        </div>
       </Card>
     </main>
   );
