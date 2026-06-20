@@ -160,7 +160,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
       <div
         role="tablist"
         aria-label="Branches mathématiques"
-        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-alg)]/15 p-1"
       >
         <button
           type="button"
@@ -168,8 +168,8 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
           aria-selected={tab === "algebra"}
           className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
             tab === "algebra"
-              ? "bg-white text-[var(--color-accent-alg)] shadow-sm dark:bg-zinc-900"
-              : "text-[var(--color-text-secondary)]"
+              ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
+              : "bg-[var(--color-accent-alg)]/8 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/15"
           }`}
           onClick={() => setTab("algebra")}
         >
@@ -181,8 +181,8 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
           aria-selected={tab === "geometry"}
           className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
             tab === "geometry"
-              ? "bg-white text-[var(--color-accent-geo)] shadow-sm dark:bg-zinc-900"
-              : "text-[var(--color-text-secondary)]"
+              ? "bg-[var(--color-accent-geo)] text-white shadow-sm"
+              : "bg-[var(--color-accent-geo)]/8 text-[var(--color-accent-geo)] hover:bg-[var(--color-accent-geo)]/15"
           }`}
           onClick={() => setTab("geometry")}
         >

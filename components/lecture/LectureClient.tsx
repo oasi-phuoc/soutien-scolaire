@@ -367,7 +367,7 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
       <div
         role="tablist"
         aria-label="Sections lecture"
-        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-bg-secondary)] p-1"
+        className="flex gap-2 rounded-[var(--radius-lg)] bg-[var(--color-accent-lecture)]/15 p-1"
       >
         <button
           type="button"
@@ -376,8 +376,8 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           onClick={() => setTab("apprendre")}
           className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
             tab === "apprendre"
-              ? "bg-white text-[var(--color-accent-lecture)] shadow-sm dark:bg-zinc-900"
-              : "text-[var(--color-text-secondary)]"
+              ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"
+              : "bg-[var(--color-accent-lecture)]/8 text-[var(--color-accent-lecture)] hover:bg-[var(--color-accent-lecture)]/15"
           }`}
         >
           Apprendre
@@ -389,8 +389,8 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           onClick={() => setTab("histoires")}
           className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
             tab === "histoires"
-              ? "bg-white text-[var(--color-accent-lecture)] shadow-sm dark:bg-zinc-900"
-              : "text-[var(--color-text-secondary)]"
+              ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"
+              : "bg-[var(--color-accent-lecture)]/8 text-[var(--color-accent-lecture)] hover:bg-[var(--color-accent-lecture)]/15"
           }`}
         >
           Histoires
