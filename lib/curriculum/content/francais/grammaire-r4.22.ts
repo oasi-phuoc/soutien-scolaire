@@ -6,7 +6,7 @@ export const A2_GR_L35: GrammarLesson = {
   level: "A2",
   title: "Les pronoms COD et COI",
   theory: [
-    { type: "heading", text: "Les pronoms COD et COI" },
+    { type: "heading", text: "Les pronoms COD et COI", trans: { en: "Direct (COD) and indirect (COI) object pronouns", ar: "ضمائر المفعول المباشر (COD) وغير المباشر (COI)", fa: "ضمایر مفعول مستقیم (COD) و غیرمستقیم (COI)", ti: "ናይ ቀጥታዊ (COD) ከምኡ'ውን ዘይቀጥታዊ (COI) ዕላማ ተውላጠ-ስም", uk: "Прямі (COD) та непрямі (COI) додаткові займенники" } },
     {
       type: "plain_list",
       items: [
@@ -14,6 +14,13 @@ export const A2_GR_L35: GrammarLesson = {
         "{a}COD{/a} = Complément d'Objet Direct (sans préposition).",
         "{a}COI{/a} = Complément d'Objet Indirect (avec la préposition {a}à{/a}).",
       ],
+      transItems: {
+        en: ["Personal pronouns replace a {a}noun already mentioned{/a} to avoid repetition.", "{a}COD{/a} = direct object (no preposition).", "{a}COI{/a} = indirect object (with the preposition {a}à{/a})."],
+        ar: ["تحلّ الضمائر الشخصية محل {a}اسم سبق ذكره{/a} لتجنّب التكرار.", "{a}COD{/a} = مفعول به مباشر (بدون حرف جر).", "{a}COI{/a} = مفعول به غير مباشر (مع حرف الجر {a}à{/a})."],
+        fa: ["ضمایر شخصی جای {a}اسمی که قبلاً ذکر شده{/a} را می‌گیرند تا از تکرار جلوگیری شود.", "{a}COD{/a} = مفعول مستقیم (بدون حرف اضافه).", "{a}COI{/a} = مفعول غیرمستقیم (با حرف اضافه {a}à{/a})."],
+        ti: ["ናይ ሰብ ተውላጠ-ስም ምድግጋም ንምውጋድ {a}ኣቐዲሙ ዝተጠቕሰ ስም{/a} ይትክኡ።", "{a}COD{/a} = ቀጥታዊ ዕላማ (ብዘይ መስተዋድድ)።", "{a}COI{/a} = ዘይቀጥታዊ ዕላማ (ምስ መስተዋድድ {a}à{/a})።"],
+        uk: ["Особові займенники замінюють {a}вже згаданий іменник{/a}, щоб уникнути повторень.", "{a}COD{/a} = прямий додаток (без прийменника).", "{a}COI{/a} = непрямий додаток (з прийменником {a}à{/a})."],
+      },
     },
     {
       type: "grid",
@@ -28,8 +35,22 @@ export const A2_GR_L35: GrammarLesson = {
         ["2e plur.", "{a}vous{/a}", "{a}vous{/a}"],
         ["3e plur.", "{a}les{/a}", "{a}leur{/a}"],
       ],
+      transHeaders: {
+        en: ["Person", "COD", "COI"],
+        ar: ["الشخص", "COD", "COI"],
+        fa: ["شخص", "COD", "COI"],
+        ti: ["ሰብ", "COD", "COI"],
+        uk: ["Особа", "COD", "COI"],
+      },
+      transRows: {
+        en: [["1st sing.", "{a}me / m'{/a}", "{a}me / m'{/a}"], ["2nd sing.", "{a}te / t'{/a}", "{a}te / t'{/a}"], ["3rd sing. masc.", "{a}le / l'{/a}", "{a}lui{/a}"], ["3rd sing. fem.", "{a}la / l'{/a}", "{a}lui{/a}"], ["1st plur.", "{a}nous{/a}", "{a}nous{/a}"], ["2nd plur.", "{a}vous{/a}", "{a}vous{/a}"], ["3rd plur.", "{a}les{/a}", "{a}leur{/a}"]],
+        ar: [["المفرد 1", "{a}me / m'{/a}", "{a}me / m'{/a}"], ["المفرد 2", "{a}te / t'{/a}", "{a}te / t'{/a}"], ["المفرد 3 مذكر", "{a}le / l'{/a}", "{a}lui{/a}"], ["المفرد 3 مؤنث", "{a}la / l'{/a}", "{a}lui{/a}"], ["الجمع 1", "{a}nous{/a}", "{a}nous{/a}"], ["الجمع 2", "{a}vous{/a}", "{a}vous{/a}"], ["الجمع 3", "{a}les{/a}", "{a}leur{/a}"]],
+        fa: [["مفرد ۱", "{a}me / m'{/a}", "{a}me / m'{/a}"], ["مفرد ۲", "{a}te / t'{/a}", "{a}te / t'{/a}"], ["مفرد ۳ مذکر", "{a}le / l'{/a}", "{a}lui{/a}"], ["مفرد ۳ مؤنث", "{a}la / l'{/a}", "{a}lui{/a}"], ["جمع ۱", "{a}nous{/a}", "{a}nous{/a}"], ["جمع ۲", "{a}vous{/a}", "{a}vous{/a}"], ["جمع ۳", "{a}les{/a}", "{a}leur{/a}"]],
+        ti: [["1 ንጽል", "{a}me / m'{/a}", "{a}me / m'{/a}"], ["2 ንጽል", "{a}te / t'{/a}", "{a}te / t'{/a}"], ["3 ንጽል ተባዕታይ", "{a}le / l'{/a}", "{a}lui{/a}"], ["3 ንጽል ኣንስታይ", "{a}la / l'{/a}", "{a}lui{/a}"], ["1 ብዙሕ", "{a}nous{/a}", "{a}nous{/a}"], ["2 ብዙሕ", "{a}vous{/a}", "{a}vous{/a}"], ["3 ብዙሕ", "{a}les{/a}", "{a}leur{/a}"]],
+        uk: [["1-ша одн.", "{a}me / m'{/a}", "{a}me / m'{/a}"], ["2-га одн.", "{a}te / t'{/a}", "{a}te / t'{/a}"], ["3-тя одн. чол.", "{a}le / l'{/a}", "{a}lui{/a}"], ["3-тя одн. жін.", "{a}la / l'{/a}", "{a}lui{/a}"], ["1-ша мн.", "{a}nous{/a}", "{a}nous{/a}"], ["2-га мн.", "{a}vous{/a}", "{a}vous{/a}"], ["3-тя мн.", "{a}les{/a}", "{a}leur{/a}"]],
+      },
     },
-    { type: "heading", text: "Comment identifier COD vs COI ?", sub: true, accent: true },
+    { type: "heading", text: "Comment identifier COD vs COI ?", sub: true, accent: true, trans: { en: "How to tell COD from COI?", ar: "كيف نميّز بين COD و COI؟", fa: "چگونه COD را از COI تشخیص دهیم؟", ti: "COD ካብ COI ብኸመይ ንፈሊ?", uk: "Як відрізнити COD від COI?" } },
     {
       type: "grid",
       headers: ["Question à poser", "Réponse = …", "Pronom"],
@@ -38,6 +59,20 @@ export const A2_GR_L35: GrammarLesson = {
         ["Je vois {a}qui / quoi ?{/a}", "COD (sans à)", "le, la, les, me, te…"],
         ["Je parle {a}à qui ?{/a}", "COI (avec à)", "lui, leur, me, te…"],
       ],
+      transHeaders: {
+        en: ["Question to ask", "Answer = …", "Pronoun"],
+        ar: ["السؤال المطروح", "الجواب = …", "الضمير"],
+        fa: ["پرسشی که می‌پرسیم", "پاسخ = …", "ضمیر"],
+        ti: ["ዝሕተት ሕቶ", "መልሲ = …", "ተውላጠ-ስም"],
+        uk: ["Питання, яке ставимо", "Відповідь = …", "Займенник"],
+      },
+      transRows: {
+        en: [["I see {a}whom / what?{/a}", "COD (no à)", "le, la, les, me, te…"], ["I speak {a}to whom?{/a}", "COI (with à)", "lui, leur, me, te…"]],
+        ar: [["أرى {a}مَن / ماذا؟{/a}", "COD (بدون à)", "le, la, les, me, te…"], ["أتحدّث {a}إلى مَن؟{/a}", "COI (مع à)", "lui, leur, me, te…"]],
+        fa: [["{a}چه کسی / چه چیزی{/a} را می‌بینم؟", "COD (بدون à)", "le, la, les, me, te…"], ["{a}با چه کسی{/a} صحبت می‌کنم؟", "COI (با à)", "lui, leur, me, te…"]],
+        ti: [["{a}ንመን / ንምንታይ{/a} እርኢ?", "COD (ብዘይ à)", "le, la, les, me, te…"], ["{a}ንመን{/a} እዛረብ?", "COI (ምስ à)", "lui, leur, me, te…"]],
+        uk: [["Я бачу {a}кого / що?{/a}", "COD (без à)", "le, la, les, me, te…"], ["Я говорю {a}кому?{/a}", "COI (з à)", "lui, leur, me, te…"]],
+      },
     },
     {
       type: "grid",
@@ -50,8 +85,22 @@ export const A2_GR_L35: GrammarLesson = {
         ["Il nous aide.", "Il {a}nous{/a} aide. (COD)"],
         ["Elle te téléphone.", "Elle {a}te{/a} téléphone. (COI)"],
       ],
+      transHeaders: {
+        en: ["Original sentence", "→ With pronoun"],
+        ar: ["الجملة الأصلية", "→ مع الضمير"],
+        fa: ["جملهٔ اصلی", "→ با ضمیر"],
+        ti: ["በዓል መበቆል ሓረግ", "→ ምስ ተውላጠ-ስም"],
+        uk: ["Початкове речення", "→ Із займенником"],
+      },
+      transRows: {
+        en: [["J'appelle Marco. (I call Marco.)", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (I call him.) (COD)"], ["Je parle à Marco. (I speak to Marco.)", "Je {a}lui{/a} parle. (I speak to him.) (COI)"], ["Je regarde le film. (I watch the film.)", "Je {a}le{/a} regarde. (I watch it.) (COD)"], ["J'écris à mes amis. (I write to my friends.)", "Je {a}leur{/a} écris. (I write to them.) (COI)"], ["Il nous aide. (He helps us.)", "Il {a}nous{/a} aide. (COD)"], ["Elle te téléphone. (She phones you.)", "Elle {a}te{/a} téléphone. (COI)"]],
+        ar: [["J'appelle Marco. (أتّصل بماركو.)", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (أتّصل به.) (COD)"], ["Je parle à Marco. (أتحدّث إلى ماركو.)", "Je {a}lui{/a} parle. (أتحدّث إليه.) (COI)"], ["Je regarde le film. (أشاهد الفيلم.)", "Je {a}le{/a} regarde. (أشاهده.) (COD)"], ["J'écris à mes amis. (أكتب إلى أصدقائي.)", "Je {a}leur{/a} écris. (أكتب إليهم.) (COI)"], ["Il nous aide. (هو يساعدنا.)", "Il {a}nous{/a} aide. (COD)"], ["Elle te téléphone. (هي تتّصل بك.)", "Elle {a}te{/a} téléphone. (COI)"]],
+        fa: [["J'appelle Marco. (به مارکو زنگ می‌زنم.)", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (به او زنگ می‌زنم.) (COD)"], ["Je parle à Marco. (با مارکو صحبت می‌کنم.)", "Je {a}lui{/a} parle. (با او صحبت می‌کنم.) (COI)"], ["Je regarde le film. (فیلم را تماشا می‌کنم.)", "Je {a}le{/a} regarde. (آن را تماشا می‌کنم.) (COD)"], ["J'écris à mes amis. (به دوستانم می‌نویسم.)", "Je {a}leur{/a} écris. (به آن‌ها می‌نویسم.) (COI)"], ["Il nous aide. (او به ما کمک می‌کند.)", "Il {a}nous{/a} aide. (COD)"], ["Elle te téléphone. (او به تو تلفن می‌زند.)", "Elle {a}te{/a} téléphone. (COI)"]],
+        ti: [["J'appelle Marco. (ንማርኮ እጽውዕ።)", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (ንዕኡ እጽውዕ።) (COD)"], ["Je parle à Marco. (ንማርኮ እዛረብ።)", "Je {a}lui{/a} parle. (ንዕኡ እዛረብ።) (COI)"], ["Je regarde le film. (ነቲ ፊልም እርኢ።)", "Je {a}le{/a} regarde. (ንዕኡ እርኢ።) (COD)"], ["J'écris à mes amis. (ናብ ኣዕሩኸይ እጽሕፍ።)", "Je {a}leur{/a} écris. (ናብኦም እጽሕፍ።) (COI)"], ["Il nous aide. (ንሱ ይሕግዘና።)", "Il {a}nous{/a} aide. (COD)"], ["Elle te téléphone. (ንሳ ትድውለልካ።)", "Elle {a}te{/a} téléphone. (COI)"]],
+        uk: [["J'appelle Marco. (Я телефоную Марко.)", "Je {a}le{/a} appelle. → Je {a}l'{/a}appelle. (Я телефоную йому.) (COD)"], ["Je parle à Marco. (Я говорю з Марко.)", "Je {a}lui{/a} parle. (Я говорю з ним.) (COI)"], ["Je regarde le film. (Я дивлюся фільм.)", "Je {a}le{/a} regarde. (Я його дивлюся.) (COD)"], ["J'écris à mes amis. (Я пишу друзям.)", "Je {a}leur{/a} écris. (Я пишу їм.) (COI)"], ["Il nous aide. (Він нам допомагає.)", "Il {a}nous{/a} aide. (COD)"], ["Elle te téléphone. (Вона тобі телефонує.)", "Elle {a}te{/a} téléphone. (COI)"]],
+      },
     },
-    { type: "heading", text: "Place du pronom", sub: true, accent: true },
+    { type: "heading", text: "Place du pronom", sub: true, accent: true, trans: { en: "Position of the pronoun", ar: "موضع الضمير", fa: "جایگاه ضمیر", ti: "ናይ ተውላጠ-ስም ቦታ", uk: "Місце займенника" } },
     {
       type: "plain_list",
       items: [
@@ -59,6 +108,13 @@ export const A2_GR_L35: GrammarLesson = {
         "Au passé composé : avant l'auxiliaire.",
         "Avec infinitif : avant l'infinitif.",
       ],
+      transItems: {
+        en: ["The pronoun goes {a}before{/a} the conjugated verb.", "In the passé composé: before the auxiliary.", "With an infinitive: before the infinitive."],
+        ar: ["يوضع الضمير {a}قبل{/a} الفعل المصرّف.", "في الماضي المركّب: قبل الفعل المساعد.", "مع المصدر: قبل المصدر."],
+        fa: ["ضمیر {a}پیش از{/a} فعل صرف‌شده می‌آید.", "در گذشتهٔ نقلی: پیش از فعل کمکی.", "با مصدر: پیش از مصدر."],
+        ti: ["ተውላጠ-ስም {a}ቅድሚ{/a} እቲ ዝተሰረዐ ግሲ ይቕመጥ።", "ኣብ ሕሉፍ ግዜ: ቅድሚ እቲ ሓጋዚ።", "ምስ ስም-ግሲ: ቅድሚ እቲ ስም-ግሲ።"],
+        uk: ["Займенник стоїть {a}перед{/a} відмінюваним дієсловом.", "У passé composé: перед допоміжним дієсловом.", "З інфінітивом: перед інфінітивом."],
+      },
     },
     {
       type: "grid",
@@ -72,6 +128,20 @@ export const A2_GR_L35: GrammarLesson = {
         ["Impératif affirmatif", "Vois-{a}le{/a} ! (pronom après)"],
         ["Impératif négatif", "Ne {a}le{/a} vois {a}pas{/a} !"],
       ],
+      transHeaders: {
+        en: ["Tense", "Example"],
+        ar: ["الزمن", "مثال"],
+        fa: ["زمان", "مثال"],
+        ti: ["ግዜ", "ኣብነት"],
+        uk: ["Час", "Приклад"],
+      },
+      transRows: {
+        en: [["Present", "Je {a}le{/a} vois. (I see him.)"], ["Passé composé", "Je {a}l'{/a}ai vu. (I saw him.)"], ["Near future", "Je vais {a}le{/a} voir. (I am going to see him.)"], ["Negative", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}. (I don't see him.)"], ["Affirmative imperative", "Vois-{a}le{/a} ! (See him!) (pronoun after)"], ["Negative imperative", "Ne {a}le{/a} vois {a}pas{/a} ! (Don't see him!)"]],
+        ar: [["المضارع", "Je {a}le{/a} vois. (أراه.)"], ["الماضي المركّب", "Je {a}l'{/a}ai vu. (رأيته.)"], ["المستقبل القريب", "Je vais {a}le{/a} voir. (سأراه.)"], ["النفي", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}. (لا أراه.)"], ["الأمر المثبت", "Vois-{a}le{/a} ! (انظر إليه!) (الضمير بعده)"], ["الأمر المنفي", "Ne {a}le{/a} vois {a}pas{/a} ! (لا تنظر إليه!)"]],
+        fa: [["حال", "Je {a}le{/a} vois. (او را می‌بینم.)"], ["گذشتهٔ نقلی", "Je {a}l'{/a}ai vu. (او را دیدم.)"], ["آیندهٔ نزدیک", "Je vais {a}le{/a} voir. (می‌خواهم او را ببینم.)"], ["منفی", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}. (او را نمی‌بینم.)"], ["امر مثبت", "Vois-{a}le{/a} ! (او را ببین!) (ضمیر پس از فعل)"], ["امر منفی", "Ne {a}le{/a} vois {a}pas{/a} ! (او را نبین!)"]],
+        ti: [["ህሉው", "Je {a}le{/a} vois. (ንዕኡ እርኢ።)"], ["ሕሉፍ ግዜ", "Je {a}l'{/a}ai vu. (ንዕኡ ርእየዮ።)"], ["ቀረባ መጻኢ", "Je vais {a}le{/a} voir. (ክርእዮ እየ።)"], ["ኣሉታዊ", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}. (ንዕኡ ኣይርእዮን።)"], ["ኣረጋጋጺ ትእዛዝ", "Vois-{a}le{/a} ! (ርኣዮ!) (ተውላጠ-ስም ድሕሪኡ)"], ["ኣሉታዊ ትእዛዝ", "Ne {a}le{/a} vois {a}pas{/a} ! (ኣይትርእዮ!)"]],
+        uk: [["Теперішній", "Je {a}le{/a} vois. (Я його бачу.)"], ["Passé composé", "Je {a}l'{/a}ai vu. (Я його бачив.)"], ["Найближче майбутнє", "Je vais {a}le{/a} voir. (Я збираюся його побачити.)"], ["Заперечення", "Je {a}ne{/a} {a}le{/a} vois {a}pas{/a}. (Я його не бачу.)"], ["Стверджувальний наказ", "Vois-{a}le{/a} ! (Побач його!) (займенник після)"], ["Заперечний наказ", "Ne {a}le{/a} vois {a}pas{/a} ! (Не дивись на нього!)"]],
+      },
     },
   ],
   exercises: [],
