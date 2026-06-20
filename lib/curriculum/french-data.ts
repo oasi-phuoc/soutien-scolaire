@@ -118,14 +118,18 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-conj-l07", "R1.5", "Les verbes en -er au présent",                "Conjuguer les verbes du 1er groupe : parler, aimer, habiter, travailler…",              "conjugaison"),
   lesson("A1", "a1-gr-phrases", "R1.6", "Les phrases",                               "Structure Sujet + Verbe + Complément : reconnaître et construire une phrase simple.",     "grammaire"),
   lesson("A1", "a1-gr-l02",   "R1.7", "La négation",                                 "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
-  lesson("A1", "a1-gr-interro", "R1.8", "L'interrogation de base",                   "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
   lesson("A1", "a1-gr-cest-il-est", "R1.9", "C'est ou il est ?",                     "Distinguer c'est + nom/pronom de il est/elle est + adjectif ou profession.",            "grammaire"),
 
-  // ── G2 — Verbes essentiels A1 (R2.1–R2.4) ───────────────────────────────────
+  // ── G2 — Verbes essentiels A1 (R2.1–R2.3) ───────────────────────────────────
   lesson("A1", "a1-conj-l08", "R2.1", "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
   lesson("A1", "a1-conj-l09", "R2.2", "Les verbes pronominaux",                      "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",                        "conjugaison"),
   lesson("A1", "a1-conj-l15", "R2.3", "Les verbes modaux",                           "Les verbes modaux : conjugaison et emploi au présent.",                                  "conjugaison"),
-  lesson("A1", "a1-gr-l10",   "R2.4", "Les mots interrogatifs",                      "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                        "grammaire"),
+
+  // ── RI — L'interrogation ─────────────────────────────────────────────────────
+  lesson("A1", "a1-gr-interro", "R1.8",  "L'interrogation de base",                  "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
+  lesson("A2", "a2-gr-l07",    "RX.12", "L'interrogation (questions fermées)",        "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
+  lesson("A2", "a2-gr-l09",    "RX.13", "Répondre aux questions fermées",             "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
+  lesson("A1", "a1-gr-l10",    "R2.4",  "Les mots interrogatifs",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
 
   // ── G3 — Les adjectifs A1 ────────────────────────────────────────────────────
   lesson("A1", "a1-gr-l23",   "R3.7", "Les adjectifs qualificatifs",                 "Genre, nombre et place de l'adjectif dans la phrase.",                                  "grammaire"),
@@ -170,8 +174,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-l42", "R8.4", "La négation (2/2)", "Ne…jamais, ne…rien, ne…personne ; rien et personne comme sujets.", "grammaire"),
 
   // ── RX — Leçons à réorganiser ────────────────────────────────────────────────
-  lesson("A2", "a2-gr-l07",   "RX.12", "L'interrogation (questions fermées)",              "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",       "grammaire"),
-  lesson("A2", "a2-gr-l09",   "RX.13", "Répondre aux questions fermées",                  "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",                "grammaire"),
   lesson("A2", "a2-conj-l04", "RX.14", "Le conditionnel de politesse",                    "Vouloir, pouvoir, aimer, souhaiter, devoir, falloir au conditionnel : formes et emplois.", "conjugaison"),
   lesson("A2", "a2-conj-l05", "RX.15", "L'impératif",                                     "Conjugaison tu/nous/vous ; irréguliers être/avoir/aller ; impératif avec pronoms COD/COI.","conjugaison"),
   lesson("A2", "a2-gr-l18",   "RX.16", "Les prépositions de lieu",                        "Dans, sur, sous, à côté de, près de, loin de, en face de, entre, derrière, devant.",      "grammaire"),
@@ -181,7 +183,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A2", "a2-gr-l25",   "RX.20", "La négation — ne…pas, ne…plus, ne…que",          "Ne…pas (action absente), ne…plus (arrêt), ne…que (restriction) : formes et sens.",         "grammaire"),
   lesson("A2", "a2-gr-l35",   "RX.22", "Les pronoms COD et COI",                          "Me/te/le/la/les/lui/leur : place, négation, construction avec deux verbes.",                "grammaire"),
   lesson("A2", "a2-gr-l36",   "RX.23", "Les pronoms Y et EN",                             "Y = à + lieu/chose ; EN = de + nom / partitif : place et emploi.",                         "grammaire"),
-  lesson("A2", "a2-conj-l06", "RX.24", "Le passé composé — avoir et être",               "Révision complète : participes, double auxiliaire, verbes pronominaux au PC.",              "conjugaison"),
 
   // ── V1 — L'identité ──────────────────────────────────────────────────────────
   lesson("V1", "v1-nationalites",         "V1.1", "Les nationalités",       "Nationalités masculin/féminin, pays d'Europe et du monde.",         "vocabulaire"),
