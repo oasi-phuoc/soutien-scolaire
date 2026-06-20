@@ -105,8 +105,16 @@ export const A1_CONJ_L12: ConjLesson = {
   level: "A1",
   title: "Les verbes de mouvement",
   theory: [
-    { type: "heading", text: "Les verbes de mouvement" },
-    { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0] },
+    { type: "heading", text: "Les verbes de mouvement", trans: { en: "Verbs of movement", ar: "أفعال الحركة", fa: "افعال حرکت", ti: "ናይ ምንቅስቓስ ግሲታት", uk: "Дієслова руху" } },
+    { type: "plain_list", items: ["Ces verbes expriment un déplacement ou un changement de position. Voici les verbes les plus courants :"], noBulletItems: [0],
+      transItems: {
+        en: ["These verbs express a movement or a change of position. Here are the most common verbs:"],
+        ar: ["هذه الأفعال تعبّر عن انتقال أو تغيير في الموضع. إليك الأفعال الأكثر شيوعاً:"],
+        fa: ["این افعال بیانگر جابجایی یا تغییر موقعیت هستند. در اینجا پرکاربردترین افعال آمده است:"],
+        ti: ["እዞም ግሲታት ምንቅስቓስ ወይ ለውጢ ኣቀማምጣ የመልክቱ። እነሆ እቶም ዝበዝሑ ልሙዳት ግሲታት፦"],
+        uk: ["Ці дієслова виражають переміщення або зміну положення. Ось найпоширеніші дієслова:"],
+      },
+    },
     { type: "verb_toggle", verbs: g10Verbs, buttonCols: 4, noArrow: true },
   ],
   exercises: [
@@ -114,6 +122,7 @@ export const A1_CONJ_L12: ConjLesson = {
       type: "qcm",
       title: "Exercice 1",
       instruction: "Choisissez la bonne forme du verbe de mouvement.",
+      transInstruction: { en: "Choose the correct form of the verb of movement.", ar: "اختر الصيغة الصحيحة لفعل الحركة.", fa: "صورت درست فعل حرکت را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ናይቲ ናይ ምንቅስቓስ ግሲ ምረጽ.", uk: "Виберіть правильну форму дієслова руху." },
       items: [],
       poolSize: 5,
       pool: [
@@ -156,6 +165,7 @@ export const A1_CONJ_L12: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez le verbe entre parenthèses.",
+      transInstruction: { en: "Conjugate the verb in parentheses.", ar: "صرّف الفعل الموجود بين القوسين.", fa: "فعل داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘሎ ግሲ ኣጻርይ.", uk: "Відмінюйте дієслово в дужках." },
       items: [],
       poolSize: 5,
       pool: [
@@ -198,6 +208,7 @@ export const A1_CONJ_L12: ConjLesson = {
       type: "word_order",
       title: "Exercice 3",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ.", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       poolSize: 5,
       pool: [

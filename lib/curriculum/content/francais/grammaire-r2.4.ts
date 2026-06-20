@@ -6,18 +6,39 @@ export const A1_GR_L10: GrammarLesson = {
   level: "A1",
   title: "Les mots interrogatifs",
   theory: [
-    { type: "heading", text: "Les mots interrogatifs" },
+    { type: "heading", text: "Les mots interrogatifs", trans: { en: "Question words", ar: "أدوات الاستفهام", fa: "کلمات پرسشی", ti: "ናይ ሕቶ ቃላት", uk: "Питальні слова" } },
     {
       type: "plain_list",
       items: [
         "Les mots interrogatifs permettent de poser des questions précises.",
         "Ils se placent en début de question (ou à la fin à l'oral informel).",
       ],
+      transItems: {
+        en: ["Question words let you ask precise questions.", "They are placed at the start of the question (or at the end in informal speech)."],
+        ar: ["أدوات الاستفهام تتيح لك طرح أسئلة دقيقة.", "توضع في بداية السؤال (أو في نهايته في الكلام غير الرسمي)."],
+        fa: ["کلمات پرسشی به شما اجازه می‌دهند سؤالات دقیق بپرسید.", "آن‌ها در ابتدای سؤال قرار می‌گیرند (یا در پایان در گفتار غیررسمی)."],
+        ti: ["ናይ ሕቶ ቃላት ቅኑዓት ሕቶታት ንምሕታት የኽእሉ።", "ኣብ መጀመርታ ሕቶ ይቕመጡ (ወይ ኣብ መወዳእታ ኣብ ዘይወግዓዊ ዘረባ)።"],
+        uk: ["Питальні слова дозволяють ставити точні запитання.", "Вони ставляться на початку запитання (або в кінці в неформальному мовленні)."],
+      },
     },
     {
       type: "grid",
       headers: ["Mot", "Sens", "Exemple"],
       boldFirstCol: true,
+      transHeaders: {
+        en: ["Word", "Meaning", "Example"],
+        ar: ["الكلمة", "المعنى", "مثال"],
+        fa: ["کلمه", "معنی", "مثال"],
+        ti: ["ቃል", "ትርጉም", "ኣብነት"],
+        uk: ["Слово", "Значення", "Приклад"],
+      },
+      transRows: {
+        en: [["{a}Où ?{/a}", "place", "Où est-ce que tu habites ? (Where do you live?)"], ["{a}Quand ?{/a}", "time", "Quand est-ce qu'il arrive ? (When does he arrive?)"], ["{a}Qui ?{/a}", "person", "Qui est-ce que tu appelles ? (Who are you calling?)"], ["{a}Qu'est-ce que ?{/a}", "thing", "Qu'est-ce que tu manges ? (What are you eating?)"], ["{a}Comment ?{/a}", "manner / state", "Comment tu t'appelles ? (What is your name?)"], ["{a}Pourquoi ?{/a}", "reason", "Pourquoi tu étudies le français ? (Why do you study French?)"], ["{a}Combien ?{/a}", "quantity", "Combien d'enfants vous avez ? (How many children do you have?)"], ["{a}Quel / Quelle ?{/a}", "choice among several", "Quel bus prends-tu ? (Which bus do you take?)"]],
+        ar: [["{a}Où ?{/a}", "المكان", "Où est-ce que tu habites ؟ (أين تسكن؟)"], ["{a}Quand ?{/a}", "الزمان", "Quand est-ce qu'il arrive ؟ (متى يصل؟)"], ["{a}Qui ?{/a}", "الشخص", "Qui est-ce que tu appelles ؟ (من تتصل به؟)"], ["{a}Qu'est-ce que ?{/a}", "الشيء", "Qu'est-ce que tu manges ؟ (ماذا تأكل؟)"], ["{a}Comment ?{/a}", "الطريقة / الحالة", "Comment tu t'appelles ؟ (ما اسمك؟)"], ["{a}Pourquoi ?{/a}", "السبب", "Pourquoi tu étudies le français ؟ (لماذا تدرس الفرنسية؟)"], ["{a}Combien ?{/a}", "الكمية", "Combien d'enfants vous avez ؟ (كم طفلاً لديك؟)"], ["{a}Quel / Quelle ?{/a}", "الاختيار من بين عدة", "Quel bus prends-tu ؟ (أي حافلة تأخذ؟)"]],
+        fa: [["{a}Où ?{/a}", "مکان", "Où est-ce que tu habites ? (کجا زندگی می‌کنی؟)"], ["{a}Quand ?{/a}", "زمان", "Quand est-ce qu'il arrive ? (کِی می‌رسد؟)"], ["{a}Qui ?{/a}", "شخص", "Qui est-ce que tu appelles ? (به چه کسی زنگ می‌زنی؟)"], ["{a}Qu'est-ce que ?{/a}", "چیز", "Qu'est-ce que tu manges ? (چه می‌خوری؟)"], ["{a}Comment ?{/a}", "شیوه / حالت", "Comment tu t'appelles ? (نامت چیست؟)"], ["{a}Pourquoi ?{/a}", "دلیل", "Pourquoi tu étudies le français ? (چرا فرانسوی می‌خوانی؟)"], ["{a}Combien ?{/a}", "مقدار", "Combien d'enfants vous avez ? (چند فرزند دارید؟)"], ["{a}Quel / Quelle ?{/a}", "انتخاب از میان چند", "Quel bus prends-tu ? (کدام اتوبوس را می‌گیری؟)"]],
+        ti: [["{a}Où ?{/a}", "ቦታ", "Où est-ce que tu habites ? (ኣበይ ትቕመጥ?)"], ["{a}Quand ?{/a}", "ግዜ", "Quand est-ce qu'il arrive ? (መዓስ ይመጽእ?)"], ["{a}Qui ?{/a}", "ሰብ", "Qui est-ce que tu appelles ? (ንመን ትድውል?)"], ["{a}Qu'est-ce que ?{/a}", "ነገር", "Qu'est-ce que tu manges ? (እንታይ ትበልዕ?)"], ["{a}Comment ?{/a}", "ኣገባብ / ኩነታት", "Comment tu t'appelles ? (መን ትብሃል?)"], ["{a}Pourquoi ?{/a}", "ምኽንያት", "Pourquoi tu étudies le français ? (ስለምንታይ ፈረንሳይ ትመሃር?)"], ["{a}Combien ?{/a}", "መጠን", "Combien d'enfants vous avez ? (ክንደይ ቆልዑ ኣለዉኻ?)"], ["{a}Quel / Quelle ?{/a}", "ካብ ብዙሕ ምርጫ", "Quel bus prends-tu ? (ኣየናይ ኣውቶቡስ ትወስድ?)"]],
+        uk: [["{a}Où ?{/a}", "місце", "Où est-ce que tu habites ? (Де ти живеш?)"], ["{a}Quand ?{/a}", "час", "Quand est-ce qu'il arrive ? (Коли він приїжджає?)"], ["{a}Qui ?{/a}", "особа", "Qui est-ce que tu appelles ? (Кому ти телефонуєш?)"], ["{a}Qu'est-ce que ?{/a}", "річ", "Qu'est-ce que tu manges ? (Що ти їси?)"], ["{a}Comment ?{/a}", "спосіб / стан", "Comment tu t'appelles ? (Як тебе звати?)"], ["{a}Pourquoi ?{/a}", "причина", "Pourquoi tu étudies le français ? (Чому ти вивчаєш французьку?)"], ["{a}Combien ?{/a}", "кількість", "Combien d'enfants vous avez ? (Скільки у вас дітей?)"], ["{a}Quel / Quelle ?{/a}", "вибір з кількох", "Quel bus prends-tu ? (Який автобус ти береш?)"]],
+      },
       rows: [
         ["{a}Où ?{/a}", "lieu", "Où est-ce que tu habites ?"],
         ["{a}Quand ?{/a}", "temps", "Quand est-ce qu'il arrive ?"],
@@ -29,7 +50,7 @@ export const A1_GR_L10: GrammarLesson = {
         ["{a}Quel / Quelle ?{/a}", "choix parmi plusieurs", "Quel bus prends-tu ?"],
       ],
     },
-    { type: "heading", text: "Deux façons de construire la question", sub: true },
+    { type: "heading", text: "Deux façons de construire la question", sub: true, trans: { en: "Two ways to build the question", ar: "طريقتان لبناء السؤال", fa: "دو روش برای ساختن سؤال", ti: "ሕቶ ንምስራሕ ክልተ መንገድታት", uk: "Два способи побудувати запитання" } },
     {
       type: "highlight",
       label: "Registre neutre",
@@ -40,6 +61,14 @@ export const A1_GR_L10: GrammarLesson = {
         "Comment est-ce que vous vous appelez ?",
       ],
       noBulletItems: [0],
+      transLabel: { en: "Neutral register", ar: "المستوى المحايد", fa: "سطح خنثی", ti: "ገለልተኛ ደረጃ", uk: "Нейтральний регістр" },
+      transItems: {
+        en: ["Question word + {a}est-ce que{/a} + subject + verb?", "Où est-ce que tu habites ? (Where do you live?)", "Quand est-ce qu'il arrive ? (When does he arrive?)", "Comment est-ce que vous vous appelez ? (What is your name?)"],
+        ar: ["أداة الاستفهام + {a}est-ce que{/a} + الفاعل + الفعل؟", "Où est-ce que tu habites ؟ (أين تسكن؟)", "Quand est-ce qu'il arrive ؟ (متى يصل؟)", "Comment est-ce que vous vous appelez ؟ (ما اسمك؟)"],
+        fa: ["کلمه‌ی پرسشی + {a}est-ce que{/a} + فاعل + فعل؟", "Où est-ce que tu habites ? (کجا زندگی می‌کنی؟)", "Quand est-ce qu'il arrive ? (کِی می‌رسد؟)", "Comment est-ce que vous vous appelez ? (نامتان چیست؟)"],
+        ti: ["ናይ ሕቶ ቃል + {a}est-ce que{/a} + ርእሲ + ግሲ?", "Où est-ce que tu habites ? (ኣበይ ትቕመጥ?)", "Quand est-ce qu'il arrive ? (መዓስ ይመጽእ?)", "Comment est-ce que vous vous appelez ? (መን ትብሃሉ?)"],
+        uk: ["Питальне слово + {a}est-ce que{/a} + підмет + дієслово?", "Où est-ce que tu habites ? (Де ти живеш?)", "Quand est-ce qu'il arrive ? (Коли він приїжджає?)", "Comment est-ce que vous vous appelez ? (Як вас звати?)"],
+      },
     },
     {
       type: "highlight",
@@ -51,6 +80,14 @@ export const A1_GR_L10: GrammarLesson = {
         "Tu t'appelles comment ?",
       ],
       noBulletItems: [0],
+      transLabel: { en: "Informal register (spoken)", ar: "المستوى غير الرسمي (المحكي)", fa: "سطح غیررسمی (گفتاری)", ti: "ዘይወግዓዊ ደረጃ (ኣፋዊ)", uk: "Неформальний регістр (усний)" },
+      transItems: {
+        en: ["Subject + verb + question word?", "Tu habites où ? (Where do you live?)", "Il arrive quand ? (When does he arrive?)", "Tu t'appelles comment ? (What is your name?)"],
+        ar: ["الفاعل + الفعل + أداة الاستفهام؟", "Tu habites où ؟ (أين تسكن؟)", "Il arrive quand ؟ (متى يصل؟)", "Tu t'appelles comment ؟ (ما اسمك؟)"],
+        fa: ["فاعل + فعل + کلمه‌ی پرسشی؟", "Tu habites où ? (کجا زندگی می‌کنی؟)", "Il arrive quand ? (کِی می‌رسد؟)", "Tu t'appelles comment ? (نامت چیست؟)"],
+        ti: ["ርእሲ + ግሲ + ናይ ሕቶ ቃል?", "Tu habites où ? (ኣበይ ትቕመጥ?)", "Il arrive quand ? (መዓስ ይመጽእ?)", "Tu t'appelles comment ? (መን ትብሃል?)"],
+        uk: ["Підмет + дієслово + питальне слово?", "Tu habites où ? (Де ти живеш?)", "Il arrive quand ? (Коли він приїжджає?)", "Tu t'appelles comment ? (Як тебе звати?)"],
+      },
     },
     {
       type: "highlight",
@@ -61,6 +98,14 @@ export const A1_GR_L10: GrammarLesson = {
         "{a}Quels{/a} + nom masculin pluriel : Quels films ?",
         "{a}Quelles{/a} + nom féminin pluriel : Quelles langues ?",
       ],
+      transLabel: { en: "Quel / Quelle — agreement", ar: "Quel / Quelle — التطابق", fa: "Quel / Quelle — مطابقت", ti: "Quel / Quelle — ምስምማዕ", uk: "Quel / Quelle — узгодження" },
+      transItems: {
+        en: ["{a}Quel{/a} + masculine singular noun: Quel jour ? (Which day?)", "{a}Quelle{/a} + feminine singular noun: Quelle heure ? (What time?)", "{a}Quels{/a} + masculine plural noun: Quels films ? (Which films?)", "{a}Quelles{/a} + feminine plural noun: Quelles langues ? (Which languages?)"],
+        ar: ["{a}Quel{/a} + اسم مذكر مفرد: Quel jour ؟ (أي يوم؟)", "{a}Quelle{/a} + اسم مؤنث مفرد: Quelle heure ؟ (أي ساعة؟)", "{a}Quels{/a} + اسم مذكر جمع: Quels films ؟ (أي أفلام؟)", "{a}Quelles{/a} + اسم مؤنث جمع: Quelles langues ؟ (أي لغات؟)"],
+        fa: ["{a}Quel{/a} + اسم مذکر مفرد: Quel jour ? (کدام روز؟)", "{a}Quelle{/a} + اسم مؤنث مفرد: Quelle heure ? (چه ساعتی؟)", "{a}Quels{/a} + اسم مذکر جمع: Quels films ? (کدام فیلم‌ها؟)", "{a}Quelles{/a} + اسم مؤنث جمع: Quelles langues ? (کدام زبان‌ها؟)"],
+        ti: ["{a}Quel{/a} + ተባዕታይ ነጠላ ስም፦ Quel jour ? (ኣየናይ መዓልቲ?)", "{a}Quelle{/a} + ኣንስታይ ነጠላ ስም፦ Quelle heure ? (ክንደይ ሰዓት?)", "{a}Quels{/a} + ተባዕታይ ብዙሕ ስም፦ Quels films ? (ኣየኖት ፊልምታት?)", "{a}Quelles{/a} + ኣንስታይ ብዙሕ ስም፦ Quelles langues ? (ኣየኖት ቋንቋታት?)"],
+        uk: ["{a}Quel{/a} + іменник чоловічого роду однини: Quel jour ? (Який день?)", "{a}Quelle{/a} + іменник жіночого роду однини: Quelle heure ? (Котра година?)", "{a}Quels{/a} + іменник чоловічого роду множини: Quels films ? (Які фільми?)", "{a}Quelles{/a} + іменник жіночого роду множини: Quelles langues ? (Які мови?)"],
+      },
     },
   ],
   exercises: [
@@ -68,6 +113,7 @@ export const A1_GR_L10: GrammarLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec le bon mot interrogatif : où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle.",
+      transInstruction: { en: "Complete with the correct question word: où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle.", ar: "أكمل بأداة الاستفهام الصحيحة: où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle.", fa: "با کلمه‌ی پرسشی درست کامل کنید: où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle.", ti: "ብቅኑዕ ናይ ሕቶ ቃል ምላእ፦ où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle.", uk: "Доповніть правильним питальним словом: où, quand, qui, comment, pourquoi, combien, qu'est-ce que, quel/quelle." },
       items: [],
       poolSize: 5,
       pool: [
@@ -110,6 +156,7 @@ export const A1_GR_L10: GrammarLesson = {
       type: "qcm",
       title: "Exercice 2",
       instruction: "Choisissez le bon mot interrogatif.",
+      transInstruction: { en: "Choose the correct question word.", ar: "اختر أداة الاستفهام الصحيحة.", fa: "کلمه‌ی پرسشی درست را انتخاب کنید.", ti: "ቅኑዕ ናይ ሕቶ ቃል ምረጽ.", uk: "Виберіть правильне питальне слово." },
       items: [],
       poolSize: 5,
       pool: [
@@ -155,6 +202,7 @@ export const A1_GR_L10: GrammarLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Complétez avec le bon mot interrogatif.",
+      transInstruction: { en: "Complete with the correct question word.", ar: "أكمل بأداة الاستفهام الصحيحة.", fa: "با کلمه‌ی پرسشی درست کامل کنید.", ti: "ብቅኑዕ ናይ ሕቶ ቃል ምላእ.", uk: "Доповніть правильним питальним словом." },
       items: [],
       poolSize: 5,
       pool: [
@@ -197,6 +245,7 @@ export const A1_GR_L10: GrammarLesson = {
       type: "qcm",
       title: "Évaluation — Question 2",
       instruction: "Choisissez le bon mot interrogatif.",
+      transInstruction: { en: "Choose the correct question word.", ar: "اختر أداة الاستفهام الصحيحة.", fa: "کلمه‌ی پرسشی درست را انتخاب کنید.", ti: "ቅኑዕ ናይ ሕቶ ቃል ምረጽ.", uk: "Виберіть правильне питальне слово." },
       items: [],
       poolSize: 5,
       pool: [

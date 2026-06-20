@@ -6,7 +6,7 @@ export const A1_GR_L01: GrammarLesson = {
   level: "A1",
   title: "Pronoms sujets et le verbe être",
   theory: [
-    { type: "heading", text: "Les pronoms sujets" },
+    { type: "heading", text: "Les pronoms sujets", trans: { en: "Subject pronouns", ar: "ضمائر الفاعل", fa: "ضمایر فاعلی", ti: "ናይ ርእሲ ጸጋ ቃላት", uk: "Особові займенники" } },
     {
       type: "table",
       tables: [
@@ -50,6 +50,7 @@ export const A1_GR_L01: GrammarLesson = {
       type: "qcm",
       title: "Pronoms et être",
       instruction: "Choisissez la forme correcte de ÊTRE.",
+      transInstruction: { en: "Choose the correct form of ÊTRE (to be).", ar: "اختر الصيغة الصحيحة للفعل ÊTRE (يكون).", fa: "صورت درست فعل ÊTRE (بودن) را انتخاب کنید.", ti: "ምረጽ ቅኑዕ ቅርጺ ናይ ÊTRE (ምዃን).", uk: "Виберіть правильну форму ÊTRE (бути)." },
       items: [],
       poolSize: 5,
       pool: [
@@ -92,6 +93,7 @@ export const A1_GR_L01: GrammarLesson = {
       type: "fill",
       title: "Complétez avec être ou s'appeler",
       instruction: "Conjuguez le verbe entre parenthèses.",
+      transInstruction: { en: "Conjugate the verb in parentheses.", ar: "صرّف الفعل الموجود بين القوسين.", fa: "فعل داخل پرانتز را صرف کنید.", ti: "ኣብ ቅንፍ ዘሎ ግሲ ኣጻርይ.", uk: "Відмінюйте дієслово в дужках." },
       items: [],
       poolSize: 5,
       pool: [

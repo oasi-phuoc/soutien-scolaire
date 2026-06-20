@@ -6,7 +6,7 @@ export const A1_GR_L06: GrammarLesson = {
   level: "A1",
   title: "Être et avoir — révision",
   theory: [
-    { type: "heading", text: "ÊTRE ou AVOIR ?" },
+    { type: "heading", text: "ÊTRE ou AVOIR ?", trans: { en: "ÊTRE (to be) or AVOIR (to have)?", ar: "ÊTRE (يكون) أم AVOIR (يملك)؟", fa: "ÊTRE (بودن) یا AVOIR (داشتن)؟", ti: "ÊTRE (ምዃን) ወይ AVOIR (ምውናን)?", uk: "ÊTRE (бути) чи AVOIR (мати)?" } },
     {
       type: "rule",
       text: "ÊTRE + nationalité/profession/adjectif.",

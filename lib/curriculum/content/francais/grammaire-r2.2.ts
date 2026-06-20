@@ -678,17 +678,31 @@ export const A1_CONJ_L09: ConjLesson = {
   level: "A1",
   title: "Les verbes pronominaux",
   theory: [
-    { type: "heading", text: "Les verbes pronominaux" },
+    { type: "heading", text: "Les verbes pronominaux", trans: { en: "Reflexive verbs", ar: "الأفعال الانعكاسية", fa: "افعال انعکاسی", ti: "ናይ ርእሰ-ግሲታት", uk: "Зворотні дієслова" } },
     {
       type: "plain_list",
       items: [
         "Un verbe pronominal est toujours accompagné d'un pronom réfléchi.",
         "Le pronom change selon le sujet.",
       ],
+      transItems: {
+        en: ["A reflexive verb is always accompanied by a reflexive pronoun.", "The pronoun changes according to the subject."],
+        ar: ["الفعل الانعكاسي يكون دائماً مصحوباً بضمير انعكاسي.", "يتغير الضمير حسب الفاعل."],
+        fa: ["فعل انعکاسی همیشه با یک ضمیر انعکاسی همراه است.", "ضمیر بر اساس فاعل تغییر می‌کند."],
+        ti: ["ናይ ርእሰ-ግሲ ኩሉ ግዜ ምስ ናይ ርእሰ-ጸጋ ቃል እዩ ዝመጽእ።", "እቲ ጸጋ ቃል ከከም ርእሲ ይቕየር።"],
+        uk: ["Зворотне дієслово завжди супроводжується зворотним займенником.", "Займенник змінюється залежно від підмета."],
+      },
     },
     {
       type: "grid",
       headers: ["Sujet", "Pronom réfléchi"],
+      transHeaders: {
+        en: ["Subject", "Reflexive pronoun"],
+        ar: ["الفاعل", "الضمير الانعكاسي"],
+        fa: ["فاعل", "ضمیر انعکاسی"],
+        ti: ["ርእሲ", "ናይ ርእሰ-ጸጋ ቃል"],
+        uk: ["Підмет", "Зворотний займенник"],
+      },
       rows: [
         ["je", "{a}me (m'){/a}"],
         ["tu", "{a}te (t'){/a}"],
@@ -698,15 +712,22 @@ export const A1_CONJ_L09: ConjLesson = {
         ["ils / elles", "{a}se (s'){/a}"],
       ],
     },
-    { type: "heading", text: "Verbes pronominaux courants" },
+    { type: "heading", text: "Verbes pronominaux courants", trans: { en: "Common reflexive verbs", ar: "أفعال انعكاسية شائعة", fa: "افعال انعکاسی پرکاربرد", ti: "ልሙዳት ናይ ርእሰ-ግሲታት", uk: "Поширені зворотні дієслова" } },
     { type: "verb_toggle", verbs: g10Verbs, buttonCols: 3 },
-    { type: "heading", text: "La négation" },
+    { type: "heading", text: "La négation", trans: { en: "The negation", ar: "النفي", fa: "نفی", ti: "ኣሉታ", uk: "Заперечення" } },
     {
       type: "plain_list",
       items: [
         "La négation {a}ne … pas{/a} encadre le pronom réfléchi ET le verbe.",
         "Sujet + {a}ne{/a} + pronom réfléchi + verbe + {a}pas{/a}",
       ],
+      transItems: {
+        en: ["The negation {a}ne … pas{/a} surrounds the reflexive pronoun AND the verb.", "Subject + {a}ne{/a} + reflexive pronoun + verb + {a}pas{/a}"],
+        ar: ["النفي {a}ne … pas{/a} يحيط بالضمير الانعكاسي والفعل معاً.", "الفاعل + {a}ne{/a} + الضمير الانعكاسي + الفعل + {a}pas{/a}"],
+        fa: ["نفی {a}ne … pas{/a} ضمیر انعکاسی و فعل را احاطه می‌کند.", "فاعل + {a}ne{/a} + ضمیر انعکاسی + فعل + {a}pas{/a}"],
+        ti: ["እቲ ኣሉታ {a}ne … pas{/a} ነቲ ናይ ርእሰ-ጸጋ ቃልን ግሲን የጠቓልል።", "ርእሲ + {a}ne{/a} + ናይ ርእሰ-ጸጋ ቃል + ግሲ + {a}pas{/a}"],
+        uk: ["Заперечення {a}ne … pas{/a} обрамлює зворотний займенник І дієслово.", "Підмет + {a}ne{/a} + зворотний займенник + дієслово + {a}pas{/a}"],
+      },
     },
     { type: "verb_toggle", negation: true, verbs: g10Verbs, buttonCols: 3 },
     {
@@ -719,6 +740,14 @@ export const A1_CONJ_L09: ConjLesson = {
         "il s{s}e{/s} habille → il s'habille",
       ],
       noBulletItems: [0],
+      transLabel: { en: "Warning", ar: "انتباه", fa: "توجه", ti: "ኣቓልቦ", uk: "Увага" },
+      transItems: {
+        en: ["When the verb starts with a vowel or an h, {a}me / te / se{/a} becomes {a}m' / t' / s'{/a}.", "je m{s}e{/s} appelle → je m'appelle", "il s{s}e{/s} habille → il s'habille"],
+        ar: ["عندما يبدأ الفعل بحرف علة أو حرف h، يتحول {a}me / te / se{/a} إلى {a}m' / t' / s'{/a}.", "je m{s}e{/s} appelle → je m'appelle", "il s{s}e{/s} habille → il s'habille"],
+        fa: ["وقتی فعل با حرف صدادار یا h شروع می‌شود، {a}me / te / se{/a} به {a}m' / t' / s'{/a} تبدیل می‌شود.", "je m{s}e{/s} appelle → je m'appelle", "il s{s}e{/s} habille → il s'habille"],
+        ti: ["ግሲ ብድምጺ ፊደል ወይ ብh ምስ ዝጅምር፣ {a}me / te / se{/a} ናብ {a}m' / t' / s'{/a} ይቕየር።", "je m{s}e{/s} appelle → je m'appelle", "il s{s}e{/s} habille → il s'habille"],
+        uk: ["Коли дієслово починається з голосної або h, {a}me / te / se{/a} стає {a}m' / t' / s'{/a}.", "je m{s}e{/s} appelle → je m'appelle", "il s{s}e{/s} habille → il s'habille"],
+      },
     },
   ],
   exercises: [
@@ -727,6 +756,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "fill",
       title: "Exercice 1",
       instruction: "Complétez avec la terminaison du verbe pronominal.",
+      transInstruction: { en: "Complete with the ending of the reflexive verb.", ar: "أكمل بنهاية الفعل الانعكاسي.", fa: "با پایانه‌ی فعل انعکاسی کامل کنید.", ti: "ብመወዳእታ ናይቲ ናይ ርእሰ-ግሲ ምላእ.", uk: "Доповніть закінченням зворотного дієслова." },
       items: [],
       pool: ex1Pool,
       poolSize: 8,
@@ -737,6 +767,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "fill",
       title: "Exercice 2",
       instruction: "Conjuguez les verbes pronominaux entre parenthèses (pronom réfléchi + verbe).",
+      transInstruction: { en: "Conjugate the reflexive verbs in parentheses (reflexive pronoun + verb).", ar: "صرّف الأفعال الانعكاسية بين القوسين (الضمير الانعكاسي + الفعل).", fa: "افعال انعکاسی داخل پرانتز را صرف کنید (ضمیر انعکاسی + فعل).", ti: "ኣብ ቅንፍ ዘለዉ ናይ ርእሰ-ግሲታት ኣጻርይ (ናይ ርእሰ-ጸጋ ቃል + ግሲ).", uk: "Відмінюйте зворотні дієслова в дужках (зворотний займенник + дієслово)." },
       items: [],
       pool: ex2Pool,
       poolSize: 8,
@@ -747,6 +778,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "fill",
       title: "Exercice 3",
       instruction: "Mettez les phrases au pluriel. Écrivez seulement la forme verbale.",
+      transInstruction: { en: "Put the sentences in the plural. Write only the verb form.", ar: "حوّل الجمل إلى صيغة الجمع. اكتب صيغة الفعل فقط.", fa: "جمله‌ها را به جمع تبدیل کنید. فقط صورت فعل را بنویسید.", ti: "ነተን ሓሳባት ናብ ብዙሕ ቁጽሪ ቀይሮ። ቅርጺ ግሲ ጥራይ ጽሓፍ.", uk: "Поставте речення у множину. Напишіть лише форму дієслова." },
       items: [],
       pool: ex3Pool,
       poolSize: 8,
@@ -757,6 +789,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "classify",
       title: "Exercice 4",
       instruction: "Classez chaque élément en gras dans la bonne catégorie.",
+      transInstruction: { en: "Sort each item in bold into the correct category.", ar: "صنّف كل عنصر بالخط العريض في الفئة الصحيحة.", fa: "هر عنصر پررنگ را در دسته‌ی درست قرار دهید.", ti: "ነፍሲ ወከፍ ብትር ዘሎ ኣካል ናብ ቅኑዕ ምድብ ኣእቱ.", uk: "Розподіліть кожен виділений жирним елемент у правильну категорію." },
       categories: ["Sujet", "Verbe", "Complément"],
       pool: [
         // Sentence 1 : Elle se lève à sept heures.
@@ -789,6 +822,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "classify",
       title: "Exercice 5",
       instruction: "Identifiez le type du complément en gras.",
+      transInstruction: { en: "Identify the type of the complement in bold.", ar: "حدّد نوع المتمّم بالخط العريض.", fa: "نوع متمم پررنگ را مشخص کنید.", ti: "ዓይነት ናይቲ ብትር ዘሎ መመላእታ ፍለ.", uk: "Визначте тип виділеного жирним додатка." },
       categories: ["COD", "CC de lieu", "CC de temps / manière"],
       items: [
         { word: "Elle se brosse {a}les cheveux{/a}.",           categoryIdx: 0 },
@@ -805,6 +839,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "word_order",
       title: "Exercice 6",
       instruction: "Remettez les mots dans le bon ordre pour former une phrase correcte.",
+      transInstruction: { en: "Put the words back in the correct order to form a correct sentence.", ar: "أعد ترتيب الكلمات لتكوين جملة صحيحة.", fa: "کلمات را به ترتیب درست بچینید تا جمله‌ی درستی بسازید.", ti: "ነተን ቃላት ቅኑዕ ሓሳብ ንምግባር ብቅኑዕ ስርዓት መድብ.", uk: "Розставте слова у правильному порядку, щоб утворити правильне речення." },
       items: [],
       poolSize: 5,
       pool: [
@@ -849,6 +884,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "color_highlight",
       title: "Exercice 7",
       instruction: "Sélectionnez une couleur, puis cliquez sur chaque mot pour l'identifier : Sujet (jaune), Verbe (rouge), Complément (vert).",
+      transInstruction: { en: "Select a color, then click each word to identify it: Subject (yellow), Verb (red), Complement (green).", ar: "اختر لوناً، ثم انقر على كل كلمة لتحديدها: الفاعل (أصفر)، الفعل (أحمر)، المتمّم (أخضر).", fa: "یک رنگ انتخاب کنید، سپس روی هر کلمه کلیک کنید تا مشخص شود: فاعل (زرد)، فعل (قرمز)، متمم (سبز).", ti: "ሕብሪ ምረጽ፣ ድሕሪኡ ነፍሲ ወከፍ ቃል ንምፍላይ ጠውቕ፦ ርእሲ (ብጫ)፣ ግሲ (ቀይሕ)፣ መመላእታ (ቀጠልያ).", uk: "Виберіть колір, потім натисніть на кожне слово, щоб визначити його: Підмет (жовтий), Дієслово (червоний), Додаток (зелений)." },
       colors: ["Sujet", "Verbe", "Complément"],
       items: [
         {
@@ -871,6 +907,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "write",
       title: "Exercice 8",
       instruction: "Écrivez une phrase avec le verbe pronominal proposé.\nLa phrase doit avoir un sujet, un verbe pronominal et un complément.\nElle commence par une majuscule et se termine par un point.",
+      transInstruction: { en: "Write a sentence with the reflexive verb given.\nThe sentence must have a subject, a reflexive verb and a complement.\nIt starts with a capital letter and ends with a full stop.", ar: "اكتب جملة باستخدام الفعل الانعكاسي المقترح.\nيجب أن تحتوي الجملة على فاعل وفعل انعكاسي ومتمّم.\nتبدأ بحرف كبير وتنتهي بنقطة.", fa: "با فعل انعکاسی داده‌شده یک جمله بنویسید.\nجمله باید فاعل، فعل انعکاسی و متمم داشته باشد.\nبا حرف بزرگ شروع و با نقطه تمام می‌شود.", ti: "ብእቲ ዝቐረበ ናይ ርእሰ-ግሲ ሓደ ሓሳብ ጽሓፍ።\nእቲ ሓሳብ ርእሲ፣ ናይ ርእሰ-ግሲን መመላእታን ክህልዎ ኣለዎ።\nብዓብዪ ፊደል ይጅምር ብነጥቢ ይውዳእ።", uk: "Напишіть речення із запропонованим зворотним дієсловом.\nРечення повинно мати підмет, зворотне дієслово та додаток.\nВоно починається з великої літери і закінчується крапкою." },
       verbPool: [
         "se lever", "se coucher", "se laver", "se doucher", "se brosser",
         "se raser", "se coiffer", "s'habiller", "se reposer",
@@ -884,6 +921,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "fill",
       title: "Évaluation — Question 1",
       instruction: "Conjuguez le verbe pronominal.",
+      transInstruction: { en: "Conjugate the reflexive verb.", ar: "صرّف الفعل الانعكاسي.", fa: "فعل انعکاسی را صرف کنید.", ti: "ነቲ ናይ ርእሰ-ግሲ ኣጻርይ.", uk: "Відмінюйте зворотне дієслово." },
       items: [],
       poolSize: 6,
       pool: [
@@ -903,6 +941,7 @@ export const A1_CONJ_L09: ConjLesson = {
       type: "qcm",
       title: "Évaluation — Question 2",
       instruction: "Choisissez la bonne forme du verbe pronominal.",
+      transInstruction: { en: "Choose the correct form of the reflexive verb.", ar: "اختر الصيغة الصحيحة للفعل الانعكاسي.", fa: "صورت درست فعل انعکاسی را انتخاب کنید.", ti: "ቅኑዕ ቅርጺ ናይቲ ናይ ርእሰ-ግሲ ምረጽ.", uk: "Виберіть правильну форму зворотного дієслова." },
       items: [],
       poolSize: 5,
       pool: [
