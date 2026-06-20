@@ -12,16 +12,10 @@ function formatBytes(bytes: number) {
 export function OfflineSettings() {
   const [online, setOnline] = useState(true);
   const [state, setState] = useState<OfflineState>("idle");
-  const [progress, setProgress] = useState({ completed: 0, total: 0 });
-  const [usage, setUsage] = useState<number | null>(null);
+  const [progress, setProgress] = useState({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
   const [manifestSize, setManifestSize] = useState<number | null>(null);
+  const [downloadedBytes, setDownloadedBytes] = useState<number | null>(null);
   const [hasCachedContent, setHasCachedContent] = useState(false);
-
-  const refreshUsage = async () => {
-    if (!navigator.storage?.estimate) return;
-    const estimate = await navigator.storage.estimate();
-    setUsage(estimate.usage ?? null);
-  };
 
   const checkCachedContent = async () => {
     try {
@@ -40,7 +34,6 @@ export function OfflineSettings() {
 
   useEffect(() => {
     setOnline(navigator.onLine);
-    void refreshUsage();
     void checkCachedContent();
 
     if (!("serviceWorker" in navigator)) {
@@ -52,18 +45,23 @@ export function OfflineSettings() {
     const handleOffline = () => setOnline(false);
     const handleMessage = (event: MessageEvent) => {
       if (event.data?.type === "OFFLINE_PROGRESS") {
-        setProgress({ completed: event.data.completed, total: event.data.total });
+        setProgress({
+          completed: event.data.completed,
+          total: event.data.total,
+          downloadedBytes: event.data.downloadedBytes ?? 0,
+          totalBytes: event.data.totalBytes ?? 0,
+        });
       }
       if (event.data?.type === "OFFLINE_READY") {
         setState("ready");
         setHasCachedContent(true);
-        void refreshUsage();
+        if (event.data.downloadedBytes) setDownloadedBytes(event.data.downloadedBytes);
       }
       if (event.data?.type === "OFFLINE_CLEARED") {
         setState("cleared");
-        setProgress({ completed: 0, total: 0 });
+        setProgress({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
+        setDownloadedBytes(null);
         setHasCachedContent(false);
-        void refreshUsage();
       }
       if (event.data?.type === "OFFLINE_ERROR") {
         setState("error");
@@ -92,7 +90,7 @@ export function OfflineSettings() {
       if (!("serviceWorker" in navigator)) { setState("unsupported"); return; }
       if (!navigator.onLine) { setState("error"); return; }
       setState("preparing");
-      setProgress({ completed: 0, total: 0 });
+      setProgress({ completed: 0, total: 0, downloadedBytes: 0, totalBytes: 0 });
       if (navigator.storage?.persist) await navigator.storage.persist().catch(() => false);
       const registration = await navigator.serviceWorker.ready;
       const worker = registration.active ?? navigator.serviceWorker.controller;
@@ -115,7 +113,9 @@ export function OfflineSettings() {
   };
 
   const pct = progress.total > 0 ? Math.round((progress.completed / progress.total) * 100) : 0;
+  const bytesPct = progress.totalBytes > 0 ? Math.round((progress.downloadedBytes / progress.totalBytes) * 100) : pct;
   const sizeLabel = manifestSize !== null ? formatBytes(manifestSize) : "~27 Mo";
+  const cachedLabel = downloadedBytes !== null ? formatBytes(downloadedBytes) : null;
 
   return (
     <>
@@ -124,7 +124,7 @@ export function OfflineSettings() {
           <h2 className="text-base font-semibold text-[var(--color-text-primary)]">Mode hors connexion</h2>
           <p className="mt-0.5 text-sm text-[var(--color-text-secondary)]">
             {online ? "Connecté" : "Hors connexion"}
-            {usage !== null ? ` · ${formatBytes(usage)} utilisés` : ""}
+            {cachedLabel ? ` · ${cachedLabel} en cache` : ""}
           </p>
         </div>
         <span
@@ -141,13 +141,16 @@ export function OfflineSettings() {
       {state === "preparing" && (
         <div className="mt-4 space-y-2">
           <div className="flex items-center justify-between text-xs text-[var(--color-text-secondary)]">
-            <span>Téléchargement en cours…</span>
-            <span>{pct}%</span>
+            <span>
+              Téléchargement en cours…
+              {progress.downloadedBytes > 0 && ` (${formatBytes(progress.downloadedBytes)})`}
+            </span>
+            <span>{bytesPct}%</span>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]" aria-label="Progression">
             <div
               className="h-full rounded-full bg-[var(--color-theme)] transition-[width] duration-300"
-              style={{ width: `${pct}%` }}
+              style={{ width: `${bytesPct}%` }}
             />
           </div>
           {progress.total > 0 && (

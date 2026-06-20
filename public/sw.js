@@ -110,7 +110,9 @@ self.addEventListener("message", (event) => {
         const urls = [...new Set([...APP_ROUTES, ...assetUrls])];
         const cache = await caches.open(CORE_CACHE);
         let completed = 0;
+        let downloadedBytes = 0;
         const total = urls.length;
+        const totalBytes = manifest.totalBytes || 0;
 
         // Download in batches of 6 for network efficiency
         const BATCH = 6;
@@ -119,16 +121,20 @@ self.addEventListener("message", (event) => {
           await Promise.all(batch.map(async (url) => {
             try {
               const response = await fetch(url, { credentials: "include" });
-              if (canStore(response)) await cache.put(url, response.clone());
+              if (canStore(response)) {
+                const blob = await response.clone().blob();
+                downloadedBytes += blob.size;
+                await cache.put(url, response.clone());
+              }
             } catch {
               // One failed asset must not cancel the whole download
             }
             completed += 1;
-            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total });
+            await notifyClients({ type: "OFFLINE_PROGRESS", completed, total, downloadedBytes, totalBytes });
           }));
         }
 
-        await notifyClients({ type: "OFFLINE_READY" });
+        await notifyClients({ type: "OFFLINE_READY", downloadedBytes, totalBytes });
       } catch {
         await notifyClients({ type: "OFFLINE_ERROR" });
       }
