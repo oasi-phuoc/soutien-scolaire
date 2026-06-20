@@ -1709,14 +1709,11 @@ export function MathSubmoduleWorkspace({ submoduleId, moduleId, startAtEval, dir
   const [showEvalCancelConfirm, setShowEvalCancelConfirm] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [showPrintConfig, setShowPrintConfig] = useState(false);
-  const [printConfig, setPrintConfig] = useState<PrintConfig | null>(null);
 
-  const handlePrint = useCallback((config: PrintConfig) => {
-    setPrintConfig(config);
+  const handlePrint = useCallback((_config: PrintConfig) => {
     setShowPrintConfig(false);
     setTimeout(() => {
       import("@/lib/utils/print").then((m) => m.triggerPrint());
-      setTimeout(() => setPrintConfig(null), 1000);
     }, 150);
   }, []);
 
