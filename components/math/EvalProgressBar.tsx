@@ -15,10 +15,16 @@ interface EvalProgressBarProps {
   timeLeft?: number | null;
   /** Number of already-validated exercises (their segments disappear) */
   validatedCount?: number;
+  /** Exact validation state when exercises can be completed in any order */
+  validated?: boolean[];
+  /** Navigate directly to a remaining exercise */
+  onNavigate?: (index: number) => void;
 }
 
-export default function EvalProgressBar({ current, total, timeLeft, validatedCount = 0 }: EvalProgressBarProps) {
-  const remaining = total - validatedCount;
+export default function EvalProgressBar({ current, total, timeLeft, validatedCount = 0, validated, onNavigate }: EvalProgressBarProps) {
+  const remaining = validated
+    ? validated.slice(0, total).filter((done) => !done).length
+    : total - validatedCount;
   return (
     <div className="mb-6">
       <div className="mb-1 flex items-center justify-between">
@@ -34,10 +40,14 @@ export default function EvalProgressBar({ current, total, timeLeft, validatedCou
       </div>
       <div className="flex gap-1">
         {Array.from({ length: total }).map((_, i) => {
-          if (i < validatedCount) return null;
+          if (validated ? validated[i] : i < validatedCount) return null;
           return (
-            <div
+            <button
+              type="button"
               key={i}
+              onClick={() => onNavigate?.(i)}
+              disabled={!onNavigate}
+              aria-label={`Exercice ${i + 1}`}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
                 i === current ? "bg-[var(--color-correction)] opacity-70" : "bg-[var(--color-border-default)]"
               }`}

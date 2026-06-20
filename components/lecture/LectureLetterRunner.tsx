@@ -69,8 +69,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [resetKey, setResetKey] = useState(0);
-  const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number } | null>(null);
+  const [evalSubStep, setEvalSubStep] = useState<{ idx: number; total: number; validated: boolean[]; isResults: boolean } | null>(null);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
+  const evalNavigateRef = useRef<(index: number) => void>(() => {});
   const gridRef = useRef<LetterGridHandle>(null);
   const wordRef = useRef<WordSpotterHandle>(null);
   const soundImageRef = useRef<SoundPickerHandle>(null);
@@ -186,8 +187,9 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
             data={data}
             onBack={goBack}
             onDone={handleEvalDone}
-            onEvalStepChange={(idx, total) => setEvalSubStep({ idx, total })}
+            onEvalStepChange={(idx, total, validated, isResults) => setEvalSubStep({ idx, total, validated, isResults })}
             onEvalTimeChange={(t) => setEvalTimeLeft(t)}
+            onEvalNavigateReady={(navigate) => { evalNavigateRef.current = navigate; }}
           />
         );
       default:
@@ -243,11 +245,13 @@ export function LectureLetterRunner({ data, moduleId }: Props) {
       )}
 
       {/* Eval progress bar with timer — shown only during eval step */}
-      {isEvalStep && (
+      {isEvalStep && !evalSubStep?.isResults && (
         <EvalProgressBar
           current={evalSubStep?.idx ?? 0}
           total={evalSubStep?.total ?? 5}
           timeLeft={evalTimeLeft}
+          validated={evalSubStep?.validated}
+          onNavigate={(index) => evalNavigateRef.current(index)}
         />
       )}
 

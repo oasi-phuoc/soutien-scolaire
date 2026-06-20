@@ -12,12 +12,21 @@ interface Props {
   data: LetterData;
   onBack: () => void;
   onDone: (grade: number, passed: boolean, total: number) => void;
-  onEvalStepChange?: (idx: number, total: number) => void;
+  onEvalStepChange?: (idx: number, total: number, validated: boolean[], isResults: boolean) => void;
   onEvalTimeChange?: (timeLeft: number | null) => void;
+  onEvalNavigateReady?: (navigate: (index: number) => void) => void;
 }
 
 type EvalStep = "grid" | "words" | "sound-image" | "sound-audio" | "pronounce" | "results";
 type CellState = "idle" | "selected" | "correct" | "wrong" | "missed";
+
+type EvalSnapshot =
+  | { kind: "grid"; grid: string[]; states: CellState[]; upper: string; lower: string }
+  | { kind: "words"; words: string[]; states: Record<string, CellState>; letter: string; letterLower: string }
+  | { kind: "sound-image" | "sound-audio"; labels: string[]; targets: boolean[]; states: CellState[] }
+  | { kind: "pronounce"; phoneme: string; syllable: string; word: string; score: number };
+
+type ValidatedHandler = (score: number, snapshot: EvalSnapshot) => void;
 
 const EVAL_STEPS: EvalStep[] = ["grid", "words", "sound-image", "sound-audio", "pronounce", "results"];
 
@@ -100,8 +109,8 @@ function IconSpeaker() {
 // ─── Exercise 1 — Mixed Grid (4 pts or 2 pts partial) ────────────────────────
 
 function GridExercise({
-  upper, lower, onScore, shouldValidate,
-}: { upper: string; lower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
+  upper, lower, onValidated, shouldValidate,
+}: { upper: string; lower: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const [grid] = useState(() => makeMixedGrid(upper, lower));
   const [states, setStates] = useState<CellState[]>(() => Array(25).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -121,7 +130,7 @@ function GridExercise({
     const missedCount = newStates.filter((s) => s === "missed").length;
     const perfect = wrongCount === 0 && missedCount === 0;
     const halfPassed = correctCount >= 3 && wrongCount === 0; // 3 = half of 6 targets
-    onScore(perfect ? 4 : halfPassed ? 2 : 0);
+    onValidated(perfect ? 4 : halfPassed ? 2 : 0, { kind: "grid", grid, states: newStates, upper, lower });
   }
 
   const validateRef = useRef(validate);
@@ -174,8 +183,8 @@ function GridExercise({
 // ─── Exercise 2 — Word Spotting (1 pt per line × 4 lines) ────────────────────
 
 function WordsExercise({
-  letter, letterLower, onScore, shouldValidate,
-}: { letter: string; letterLower: string; onScore: (s: number) => void; shouldValidate: boolean }) {
+  letter, letterLower, onValidated, shouldValidate,
+}: { letter: string; letterLower: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const [words] = useState(() => {
     const raw = randomWordsWithLetter(letterLower, 20);
     const pool = shuffle(raw.filter((w) => w.length <= 9)).slice(0, 4);
@@ -213,7 +222,7 @@ function WordsExercise({
     });
 
     setStates(newStates);
-    onScore(total);
+    onValidated(total, { kind: "words", words, states: newStates, letter, letterLower });
   }
 
   const validateRef = useRef(validate);
@@ -270,8 +279,8 @@ function WordsExercise({
 // ─── Exercise 3 — Sound Image (2 pts) ────────────────────────────────────────
 
 function SoundImageExercise({
-  phoneme, onScore, shouldValidate,
-}: { phoneme: string; onScore: (s: number) => void; shouldValidate: boolean }) {
+  phoneme, onValidated, shouldValidate,
+}: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const [items] = useState(() => randomSoundItems(phoneme, 4));
   const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -290,7 +299,9 @@ function SoundImageExercise({
     const half =
       newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
       newStates.filter((s) => s === "wrong").length <= 1;
-    onScore(perfect ? 2 : half ? 1 : 0);
+    onValidated(perfect ? 2 : half ? 1 : 0, {
+      kind: "sound-image", labels: items.map((item) => item.label), targets: isTarget, states: newStates,
+    });
   }
 
   const validateRef = useRef(validate);
@@ -353,8 +364,8 @@ function SoundImageExercise({
 // ─── Exercise 4 — Sound Audio (2 pts) ────────────────────────────────────────
 
 function SoundAudioExercise({
-  phoneme, onScore, shouldValidate,
-}: { phoneme: string; onScore: (s: number) => void; shouldValidate: boolean }) {
+  phoneme, onValidated, shouldValidate,
+}: { phoneme: string; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const [items] = useState(() => randomSoundItems(phoneme, 4));
   const [cellStates, setCellStates] = useState<CellState[]>(Array(4).fill("idle"));
   const [validated, setValidated] = useState(false);
@@ -373,7 +384,9 @@ function SoundAudioExercise({
     const half =
       newStates.filter((s) => s === "correct").length >= Math.ceil(isTarget.filter(Boolean).length * 0.5) &&
       newStates.filter((s) => s === "wrong").length <= 1;
-    onScore(perfect ? 2 : half ? 1 : 0);
+    onValidated(perfect ? 2 : half ? 1 : 0, {
+      kind: "sound-audio", labels: items.map((item) => item.label), targets: isTarget, states: newStates,
+    });
   }
 
   const validateRef = useRef(validate);
@@ -444,12 +457,14 @@ function SoundAudioExercise({
 // ─── Exercise 5 — Pronounce (3 pts) ──────────────────────────────────────────
 
 function PronounceExercise({
-  chain, onScore,
-}: { chain: PronStep[]; onScore: (s: number) => void }) {
+  chain, onValidated, shouldValidate,
+}: { chain: PronStep[]; onValidated: ValidatedHandler; shouldValidate: boolean }) {
   const [step] = useState(() => chain[Math.floor(Math.random() * chain.length)]!);
   const [recState, setRecState] = useState<"idle" | "listening" | "correct" | "wrong">("idle");
   const recRef = useRef<unknown>(null);
   const [scored, setScored] = useState(false);
+  const [pendingScore, setPendingScore] = useState(0);
+  const [validated, setValidated] = useState(false);
 
   function startListening() {
     if (recState === "listening") return;
@@ -470,8 +485,8 @@ function PronounceExercise({
         const t: string = e.results[0][a].transcript.trim();
         if (isMatch(t, step.word)) { matched = true; break; }
       }
-      setRecState(matched ? "correct" : "wrong");
-      if (!scored) { setScored(true); onScore(matched ? 3 : 0); }
+      setRecState("idle");
+      if (!scored) { setScored(true); setPendingScore(matched ? 3 : 0); }
     };
     rec.onerror = () => setRecState("idle");
     rec.onend = () => setRecState((s) => s === "listening" ? "idle" : s);
@@ -480,9 +495,19 @@ function PronounceExercise({
   }
 
   function manualScore(pts: number) {
-    if (!scored) { setScored(true); onScore(pts); }
-    setRecState(pts > 0 ? "correct" : "wrong");
+    if (!scored) { setScored(true); setPendingScore(pts); }
+    setRecState("idle");
   }
+
+  const validateRef = useRef(() => {});
+  validateRef.current = () => {
+    if (validated) return;
+    setValidated(true);
+    onValidated(pendingScore, {
+      kind: "pronounce", phoneme: step.phoneme, syllable: step.syllable, word: step.word, score: pendingScore,
+    });
+  };
+  useEffect(() => { if (shouldValidate) validateRef.current(); }, [shouldValidate]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const srAvailable = typeof window !== "undefined" && ((window as any).SpeechRecognition || (window as any).webkitSpeechRecognition);
@@ -513,7 +538,7 @@ function PronounceExercise({
 
       {srAvailable ? (
         <div className="flex flex-col items-center gap-3">
-          <button type="button" onClick={startListening} disabled={recState === "listening"}
+          <button type="button" onClick={startListening} disabled={recState === "listening" || validated}
             className={`flex h-20 w-20 items-center justify-center rounded-full shadow-md transition-all active:scale-95 ${
               recState === "listening" ? "animate-pulse bg-red-500 text-white"
                 : recState === "correct" ? "bg-[var(--color-accent-lecture)] text-white"
@@ -549,14 +574,59 @@ function PronounceExercise({
 
 // ─── Results Screen ───────────────────────────────────────────────────────────
 
-function ResultsScreen({ scores }: { scores: (number | null)[] }) {
-  const rows = [
+const RESULT_ROWS = [
     { label: "Reconnaître la lettre", max: 4 },
     { label: "Repérer dans les mots", max: 4 },
     { label: "Entendre le son (images)", max: 2 },
     { label: "Entendre le son (audio)", max: 2 },
     { label: "Prononcer", max: 3 },
-  ];
+];
+
+function correctionStateClass(state: CellState) {
+  if (state === "correct" || state === "missed") return "border-[var(--color-correction)] text-[var(--color-correction)]";
+  if (state === "wrong") return "border-[var(--color-border-default)] text-sm text-[var(--color-text-primary)] line-through opacity-70";
+  return "border-[var(--color-border-default)] text-[var(--color-text-primary)]";
+}
+
+function ReviewDetail({ snapshot }: { snapshot?: EvalSnapshot }) {
+  if (!snapshot) return <p className="text-xs italic text-[var(--color-text-secondary)]">Aucune réponse enregistrée.</p>;
+  if (snapshot.kind === "grid") {
+    return <div className="grid grid-cols-5 gap-2">{snapshot.grid.map((cell, i) => (
+      <div key={i} className={`flex aspect-square items-center justify-center rounded-[var(--radius-lg)] border font-bold ${correctionStateClass(snapshot.states[i]!)}`}>{cell}</div>
+    ))}</div>;
+  }
+  if (snapshot.kind === "words") {
+    return <ul className="space-y-2">{snapshot.words.map((word, wi) => (
+      <li key={wi} className="flex justify-center rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-3 py-2">
+        {word.split("").map((char, ci) => {
+          const state = snapshot.states[`${wi}-${ci}`] ?? "idle";
+          return <span key={ci} className={`flex h-8 w-8 items-center justify-center rounded-lg border font-bold ${correctionStateClass(state)}`}>{char}</span>;
+        })}
+      </li>
+    ))}</ul>;
+  }
+  if (snapshot.kind === "sound-image" || snapshot.kind === "sound-audio") {
+    return <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">{snapshot.labels.map((label, i) => (
+      <div key={`${label}-${i}`} className={`flex min-h-24 flex-col items-center justify-center rounded-[var(--radius-lg)] border-2 p-2 ${correctionStateClass(snapshot.states[i]!)}`}>
+        {snapshot.kind === "sound-image" && (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={`/assets/words/img/${label}.jpg`} alt={label} className="h-16 w-full object-contain" />
+        )}
+        <span className={snapshot.states[i] === "wrong" ? "text-xs line-through" : "text-xs"}>{label}</span>
+        {snapshot.targets[i] && <span className="mt-1 text-center text-xs font-bold text-[var(--color-correction)]">Bonne réponse</span>}
+      </div>
+    ))}</div>;
+  }
+  if (snapshot.kind !== "pronounce") return null;
+  return <div className="rounded-[var(--radius-lg)] border border-[var(--color-border-default)] p-4 text-center">
+    <p className="text-sm text-[var(--color-text-secondary)]">{snapshot.phoneme} → {snapshot.syllable}</p>
+    <p className="text-2xl font-bold text-[var(--color-correction)]">{snapshot.word}</p>
+    <p className="mt-1 text-xs text-[var(--color-text-secondary)]">{snapshot.score > 0 ? "Prononciation réussie" : "Prononciation à retravailler"}</p>
+  </div>;
+}
+
+function ResultsScreen({ scores, snapshots }: { scores: (number | null)[]; snapshots: (EvalSnapshot | null)[] }) {
+  const [selectedResultIdx, setSelectedResultIdx] = useState<number | null>(null);
   const total = scores.reduce<number>((s, v) => s + (v ?? 0), 0);
   const grade = linearSwissGrade(total, 15);
   const passGrade = getPassGrade();
@@ -564,51 +634,61 @@ function ResultsScreen({ scores }: { scores: (number | null)[] }) {
 
   return (
     <section className="space-y-4">
-      <h2 className="text-lg font-bold text-[var(--color-text-primary)]">Résultats</h2>
+      <p className="text-center text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
+      <div className="grid grid-cols-3 gap-3">
+        <div className="flex flex-col items-center justify-center p-3 text-center">
+          <p className="text-[10px] text-[var(--color-text-secondary)]">Points</p>
+          <p className="text-2xl font-bold text-[var(--color-text-primary)]">{total}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/15</span></p>
+          <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--color-bg-secondary)]"><div className={`h-full rounded-full ${passed ? "bg-[var(--color-accent-lecture)]" : "bg-red-400"}`} style={{ width: `${Math.round((total / 15) * 100)}%` }} /></div>
+        </div>
+        <div className="flex flex-col items-center justify-center p-3 text-center">
+          <p className="text-[10px] text-[var(--color-text-secondary)]">Note</p>
+          <p className="text-2xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}<span className="text-sm font-normal text-[var(--color-text-secondary)]">/6</span></p>
+        </div>
+        <div className={`flex flex-col items-center justify-center rounded-xl border-2 bg-[var(--color-bg-primary)] p-3 text-center ${passed ? "border-green-500" : "border-red-400"}`}>
+          <p className="text-[10px] text-[var(--color-text-secondary)]">Mention</p>
+          <p className={`mt-1 text-sm font-bold ${passed ? "text-green-600" : "text-red-500"}`}>{passed ? "Réussi" : "À améliorer"}</p>
+        </div>
+      </div>
+      <p className="text-center text-xs text-[var(--color-text-secondary)]">Cliquez sur un exercice pour voir la correction.</p>
       <ul className="space-y-2">
-        {rows.map((row, i) => {
+        {RESULT_ROWS.map((row, i) => {
           const s = scores[i] ?? 0;
           const color = s === row.max ? "text-green-600" : s > 0 ? "text-amber-600" : "text-red-500";
+          const isSelected = selectedResultIdx === i;
           return (
-            <li key={i} className="flex items-center justify-between rounded-[var(--radius-lg)] border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] px-4 py-3">
-              <span className="text-sm text-[var(--color-text-primary)]">{row.label}</span>
-              <span className={`text-sm font-bold ${color}`}>{s}/{row.max}</span>
+            <li key={i}>
+              <button type="button" onClick={() => setSelectedResultIdx(isSelected ? null : i)} className={`flex min-h-11 w-full items-center gap-3 rounded-[var(--radius-lg)] border px-4 py-3 text-left transition-colors ${isSelected ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/10" : "border-[var(--color-border-default)] bg-[var(--color-bg-primary)]"}`}>
+                <span className="flex-1 text-sm text-[var(--color-text-primary)]">{row.label}</span>
+                <span className={`text-sm font-bold ${color}`}>{s}/{row.max}</span>
+                <svg className={`h-3 w-3 text-[var(--color-text-secondary)] transition-transform ${isSelected ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M9 18l6-6-6-6" /></svg>
+              </button>
+              {isSelected && <div className="px-1 py-3"><ReviewDetail snapshot={snapshots[i] ?? undefined} /></div>}
             </li>
           );
         })}
       </ul>
-
-      <div className={`rounded-[var(--radius-lg)] border-2 p-6 text-center ${
-        passed ? "border-[var(--color-accent-lecture)] bg-[var(--color-accent-lecture)]/5" : "border-red-400 bg-red-50 dark:bg-red-900/10"
-      }`}>
-        <p className="text-xs uppercase tracking-wide text-[var(--color-text-secondary)]">Note</p>
-        <p className="text-5xl font-bold text-[var(--color-text-primary)]">{grade.toFixed(1)}</p>
-        <p className="text-sm text-[var(--color-text-secondary)]">sur 6 · {total}/15 pts</p>
-        <p className={`mt-3 text-base font-bold ${passed ? "text-[var(--color-accent-lecture)]" : "text-red-500"}`}>
-          {passed ? "✓ Réussi" : "✗ À améliorer"}
-        </p>
-        <p className="mt-1 text-xs text-[var(--color-text-secondary)]">Seuil de réussite : {passGrade}/6</p>
-      </div>
     </section>
   );
 }
 
 // ─── Main component ───────────────────────────────────────────────────────────
 
-export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange }: Props) {
+export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEvalTimeChange, onEvalNavigateReady }: Props) {
   const { letter, letterLower, phoneme, pronunciationChain } = data;
   const [stepIdx, setStepIdx] = useState(0);
   const [scores, setScores] = useState<(number | null)[]>([null, null, null, null, null]);
-  const [stepScored, setStepScored] = useState(false);
-  const [shouldValidate, setShouldValidate] = useState(false);
+  const [snapshots, setSnapshots] = useState<(EvalSnapshot | null)[]>([null, null, null, null, null]);
+  const [validated, setValidated] = useState([false, false, false, false, false]);
+  const validatedRef = useRef(validated);
+  const [validateTarget, setValidateTarget] = useState<number | null>(null);
   const [evalStarted, setEvalStarted] = useState(false);
   const [evalTimeLeft, setEvalTimeLeft] = useState<number | null>(null);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
 
   const step = EVAL_STEPS[stepIdx]!;
   const isResults = step === "results";
-  const isPronounceStep = step === "pronounce";
-  const showValidateBtn = !isResults && !isPronounceStep && !stepScored;
+  const showValidateBtn = evalStarted && !isResults && !validated[stepIdx];
 
   // Timer
   useEffect(() => {
@@ -617,14 +697,11 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
     return () => clearTimeout(id);
   }, [evalStarted, isResults, evalTimeLeft]);
 
-  // Auto-submit when timer reaches 0
+  // End the evaluation when the timer reaches zero. Unvalidated exercises score zero.
   useEffect(() => {
     if (evalTimeLeft !== 0 || isResults) return;
-    const total = scores.reduce<number>((s, v) => s + (v ?? 0), 0);
-    const grade = linearSwissGrade(total, 15);
-    onDone(grade, grade >= getPassGrade(), total);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [evalTimeLeft]);
+    setValidateTarget(-1);
+  }, [evalTimeLeft, isResults]);
 
   // Propagate timer to parent for display in progress bar
   useEffect(() => {
@@ -632,7 +709,13 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [evalTimeLeft, evalStarted]);
 
-  const goNextRef = useRef<() => void>(() => {});
+  function findRemaining(from: number, direction: 1 | -1, flags = validated) {
+    for (let offset = 1; offset <= 5; offset++) {
+      const candidate = (from + direction * offset + 5) % 5;
+      if (!flags[candidate]) return candidate;
+    }
+    return null;
+  }
 
   function goNext() {
     if (isResults) {
@@ -641,22 +724,31 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
       onDone(grade, grade >= getPassGrade(), total);
       return;
     }
-    if (isPronounceStep && !stepScored) {
-      setScores((prev) => { const next = [...prev]; next[4] = 0; return next; });
-    }
-    setShouldValidate(false);
-    setStepIdx((i) => i + 1);
-    setStepScored(false);
+    const next = findRemaining(stepIdx, 1);
+    if (next !== null) setStepIdx(next);
   }
 
-  goNextRef.current = goNext;
+  function goPrevious() {
+    if (isResults) return;
+    const previous = findRemaining(stepIdx, -1);
+    if (previous !== null) setStepIdx(previous);
+  }
 
-  function recordScore(exIdx: number, score: number) {
+  useEffect(() => {
+    onEvalNavigateReady?.((index) => {
+      if (index >= 0 && index < 5 && !validated[index]) setStepIdx(index);
+    });
+  }, [onEvalNavigateReady, validated]);
+
+  function recordScore(exIdx: number, score: number, snapshot: EvalSnapshot) {
     setScores((prev) => { const next = [...prev]; next[exIdx] = score; return next; });
-    setStepScored(true);
-    if (exIdx === 4) {
-      setTimeout(() => goNextRef.current(), 700);
-    }
+    setSnapshots((prev) => { const next = [...prev]; next[exIdx] = snapshot; return next; });
+    const nextValidated = validatedRef.current.map((done, i) => done || i === exIdx);
+    validatedRef.current = nextValidated;
+    setValidated(nextValidated);
+    setValidateTarget(null);
+    const next = findRemaining(exIdx, 1, nextValidated);
+    setStepIdx(next ?? EVAL_STEPS.length - 1);
   }
 
   const exerciseSteps = EVAL_STEPS.filter((s) => s !== "results");
@@ -664,11 +756,11 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
 
   useEffect(() => {
     if (!evalStarted) {
-      onEvalStepChange?.(0, exerciseSteps.length);
+      onEvalStepChange?.(0, exerciseSteps.length, validated, false);
     } else {
-      onEvalStepChange?.(progressIdx, exerciseSteps.length);
+      onEvalStepChange?.(progressIdx, exerciseSteps.length, validated, isResults);
     }
-  }, [progressIdx, exerciseSteps.length, onEvalStepChange, evalStarted]);
+  }, [progressIdx, exerciseSteps.length, onEvalStepChange, evalStarted, validated, isResults]);
 
   return (
     <div className="w-full flex-1 pb-56">
@@ -693,8 +785,10 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                   setEvalTimeLeft(null);
                   setStepIdx(0);
                   setScores([null, null, null, null, null]);
-                  setStepScored(false);
-                  setShouldValidate(false);
+                  setSnapshots([null, null, null, null, null]);
+                  setValidated([false, false, false, false, false]);
+                  validatedRef.current = [false, false, false, false, false];
+                  setValidateTarget(null);
                   setShowCancelConfirm(false);
                 }}
                 className="flex-1 rounded-[var(--radius-lg)] bg-red-500 px-4 py-2.5 text-sm font-bold text-white transition-opacity hover:opacity-90"
@@ -726,27 +820,17 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
         {/* Exercises (shown only when started) */}
         {evalStarted && (
           <>
-            {step === "grid" && (
-              <GridExercise key={stepIdx} upper={letter} lower={letterLower} onScore={(s) => recordScore(0, s)} shouldValidate={shouldValidate} />
-            )}
-            {step === "words" && (
-              <WordsExercise key={stepIdx} letter={letter} letterLower={letterLower} onScore={(s) => recordScore(1, s)} shouldValidate={shouldValidate} />
-            )}
-            {step === "sound-image" && (
-              <SoundImageExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(2, s)} shouldValidate={shouldValidate} />
-            )}
-            {step === "sound-audio" && (
-              <SoundAudioExercise key={stepIdx} phoneme={phoneme} onScore={(s) => recordScore(3, s)} shouldValidate={shouldValidate} />
-            )}
-            {step === "pronounce" && (
-              <PronounceExercise key={stepIdx} chain={pronunciationChain} onScore={(s) => recordScore(4, s)} />
-            )}
+            <div hidden={isResults || stepIdx !== 0}><GridExercise upper={letter} lower={letterLower} onValidated={(s, snapshot) => recordScore(0, s, snapshot)} shouldValidate={validateTarget === 0 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 1}><WordsExercise letter={letter} letterLower={letterLower} onValidated={(s, snapshot) => recordScore(1, s, snapshot)} shouldValidate={validateTarget === 1 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 2}><SoundImageExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(2, s, snapshot)} shouldValidate={validateTarget === 2 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 3}><SoundAudioExercise phoneme={phoneme} onValidated={(s, snapshot) => recordScore(3, s, snapshot)} shouldValidate={validateTarget === 3 || validateTarget === -1} /></div>
+            <div hidden={isResults || stepIdx !== 4}><PronounceExercise chain={pronunciationChain} onValidated={(s, snapshot) => recordScore(4, s, snapshot)} shouldValidate={validateTarget === 4 || validateTarget === -1} /></div>
           </>
         )}
 
         {/* Results (always visible when reached) */}
         {isResults && (
-          <ResultsScreen scores={scores} />
+          <ResultsScreen scores={scores} snapshots={snapshots} />
         )}
       </div>
 
@@ -756,11 +840,8 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
             <button
               type="button"
               onClick={() => {
-                if (evalStarted && !isResults) {
-                  setShowCancelConfirm(true);
-                } else {
-                  onBack();
-                }
+                if (evalStarted && !isResults) goPrevious();
+                else onBack();
               }}
               className="flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] border border-[var(--color-border-default)] px-4 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)]">
               <IconLeft /> Retour
@@ -768,7 +849,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
 
             <div className="flex items-center gap-2">
               {evalStarted && showValidateBtn && (
-                <button type="button" onClick={() => setShouldValidate(true)}
+                <button type="button" onClick={() => setValidateTarget(stepIdx)}
                   className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--color-accent-lecture)] text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90"
                   aria-label="Valider">
                   <IconCheck />
@@ -777,9 +858,9 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
             </div>
 
             <button type="button" onClick={goNext}
-              disabled={!isResults && (!evalStarted || (!stepScored && !isPronounceStep))}
+              disabled={!isResults && !evalStarted}
               className={`flex h-11 min-w-[5rem] items-center justify-center gap-1.5 rounded-[var(--radius-lg)] px-5 text-sm font-bold text-white transition-opacity ${
-                isResults || (evalStarted && (stepScored || isPronounceStep)) ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
+                isResults || evalStarted ? "bg-[var(--color-accent-lecture)] hover:opacity-90" : "bg-[var(--color-accent-lecture)] opacity-40 cursor-not-allowed"
               }`}>
               {isResults ? (<>Terminer <IconCheck /></>) : (<>Suivant <IconRight /></>)}
             </button>
