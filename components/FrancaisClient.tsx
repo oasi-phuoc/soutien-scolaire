@@ -427,10 +427,10 @@ export function FrancaisClient({ isAdmin = false }: { isAdmin?: boolean }) {
             role="tab"
             aria-selected={tab === id}
             onClick={() => setTab(id)}
-            className={`min-h-11 rounded-[var(--radius-md)] px-2 text-sm font-medium transition-colors ${
+            className={`min-h-11 rounded-[var(--radius-lg)] px-2 text-sm font-medium transition-colors ${
               tab === id
                 ? "bg-[var(--color-accent-fr)] text-white shadow-sm"
-                : "bg-[var(--color-accent-fr)]/8 text-[var(--color-accent-fr)] hover:bg-[var(--color-accent-fr)]/15"
+                : "bg-transparent text-[var(--color-accent-fr)] hover:bg-white/40"
             }`}
           >
             {label}

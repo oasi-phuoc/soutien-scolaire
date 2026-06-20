@@ -374,10 +374,10 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           role="tab"
           aria-selected={tab === "apprendre"}
           onClick={() => setTab("apprendre")}
-          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+          className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "apprendre"
               ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"
-              : "bg-[var(--color-accent-lecture)]/8 text-[var(--color-accent-lecture)] hover:bg-[var(--color-accent-lecture)]/15"
+              : "bg-transparent text-[var(--color-accent-lecture)] hover:bg-white/40"
           }`}
         >
           Apprendre
@@ -387,10 +387,10 @@ export function LectureClient({ isAdmin = false }: { isAdmin?: boolean }) {
           role="tab"
           aria-selected={tab === "histoires"}
           onClick={() => setTab("histoires")}
-          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+          className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "histoires"
               ? "bg-[var(--color-accent-lecture)] text-white shadow-sm"
-              : "bg-[var(--color-accent-lecture)]/8 text-[var(--color-accent-lecture)] hover:bg-[var(--color-accent-lecture)]/15"
+              : "bg-transparent text-[var(--color-accent-lecture)] hover:bg-white/40"
           }`}
         >
           Histoires

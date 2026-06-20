@@ -152,7 +152,7 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
         </div>
         <div className="relative z-10">
           <p className="text-xs font-semibold uppercase tracking-wide text-[var(--color-accent-alg)]">Mathématiques</p>
-          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Algèbre et géométrie</h1>
+          <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">Calculs et formes</h1>
         </div>
       </header>
 
@@ -166,27 +166,27 @@ export function MathematiquesClient({ isLoggedIn = false, isAdmin = false }: { i
           type="button"
           role="tab"
           aria-selected={tab === "algebra"}
-          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+          className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "algebra"
               ? "bg-[var(--color-accent-alg)] text-white shadow-sm"
-              : "bg-[var(--color-accent-alg)]/8 text-[var(--color-accent-alg)] hover:bg-[var(--color-accent-alg)]/15"
+              : "bg-transparent text-[var(--color-accent-alg)] hover:bg-white/40"
           }`}
           onClick={() => setTab("algebra")}
         >
-          Calculs
+          Algèbre
         </button>
         <button
           type="button"
           role="tab"
           aria-selected={tab === "geometry"}
-          className={`min-h-11 flex-1 rounded-[var(--radius-md)] px-3 text-sm font-medium transition-colors ${
+          className={`min-h-11 flex-1 rounded-[var(--radius-lg)] px-3 text-sm font-medium transition-colors ${
             tab === "geometry"
               ? "bg-[var(--color-accent-geo)] text-white shadow-sm"
-              : "bg-[var(--color-accent-geo)]/8 text-[var(--color-accent-geo)] hover:bg-[var(--color-accent-geo)]/15"
+              : "bg-transparent text-[var(--color-accent-geo)] hover:bg-white/40"
           }`}
           onClick={() => setTab("geometry")}
         >
-          Formes
+          Géométrie
         </button>
       </div>
 
