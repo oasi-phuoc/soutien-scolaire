@@ -422,10 +422,10 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         <p className="mt-1 text-sm text-[var(--color-text-secondary)]">
           Guide d&apos;utilisation, présentation des sections et crédits de l&apos;application.
         </p>
-        <div className="mt-4 flex flex-wrap gap-3">
+        <div className="mt-4 flex gap-3">
           <Link
             href="/avant-propos"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <circle cx="12" cy="12" r="10" />
@@ -435,7 +435,7 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
           </Link>
           <Link
             href="/conditions-utilisation"
-            className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
           >
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
               <rect x="5" y="2" width="14" height="20" rx="2" />
