@@ -33,17 +33,11 @@ function RevisionProgressBar({
   return (
     <div className="mb-5">
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-xs font-bold tabular-nums text-amber-600">
+        <p className="text-xs font-bold tabular-nums text-[var(--color-correction)]">
           {totalPoints} / {maxPoints} pts
         </p>
         <div className="flex items-center gap-3">
-          <span
-            className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-              timeLeft <= 300
-                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
-                : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
-            }`}
-          >
+          <span className="rounded-full bg-[var(--color-correction-soft)] px-2 py-0.5 text-xs font-bold tabular-nums text-[var(--color-correction)]">
             {formatTime(timeLeft)}
           </span>
           <p className="text-xs text-[var(--color-text-secondary)]">
@@ -58,7 +52,7 @@ function RevisionProgressBar({
           if (isValidated) return null;
           const cls =
             "h-2 flex-1 rounded-full transition-colors cursor-pointer " +
-            (isCurrent ? "bg-amber-500" : "bg-[var(--color-border-default)]");
+            (isCurrent ? "bg-[var(--color-correction)]" : "bg-[var(--color-border-default)]");
           return (
             <div
               key={i}
@@ -90,7 +84,7 @@ function ResultsScreen({
   return (
     <div className="space-y-6">
       <div className="space-y-1 text-center">
-        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Résultats</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
         <p className="text-3xl font-bold text-[var(--color-text-primary)]">
           {totalPoints}{" "}
           <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
@@ -98,7 +92,7 @@ function ResultsScreen({
       </div>
       <div className="h-3 overflow-hidden rounded-full bg-[var(--color-bg-secondary)]">
         <div
-          className="h-full rounded-full bg-amber-500 transition-all duration-700"
+          className="h-full rounded-full bg-[var(--color-correction)] transition-all duration-700"
           style={{ width: `${pct}%` }}
         />
       </div>

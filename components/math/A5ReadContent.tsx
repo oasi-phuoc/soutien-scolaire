@@ -960,7 +960,7 @@ export function DecReadNLReadExercise({ exNum, validateCommand, onValidated }: {
                     const x = pos(v);
                     const expected = v.toFixed(1).replace(".", ",");
                     const isWrong = wrongs[li]?.[ai];
-                    const lineColor = validated && revealCorrection && isWrong ? "#F59E0B" : "var(--color-accent-alg)";
+                    const lineColor = validated && revealCorrection && isWrong ? "var(--color-correction)" : "var(--color-accent-alg)";
                     const ulY = 28;
                     return (
                       <g key={ai}>
@@ -1089,7 +1089,7 @@ export function DecReadNLPlaceExercise({ exNum, validateCommand, onValidated }: 
               const assigned = assignments[pi];
               const w = revealCorrection && posWrong[pi];
               const fillColor = w ? "#FEF3C7" : assigned !== null ? "#DBEAFE" : "#F3F4F6";
-              const strokeColor = w ? "#F59E0B" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
+              const strokeColor = w ? "var(--color-correction)" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
               return (
                 <g key={pi} style={{ cursor: validated ? "default" : "pointer" }} onClick={() => handlePosClick(pi)}>
                   <circle cx={x} cy={lineY} r="6" fill={fillColor} stroke={strokeColor} strokeWidth="2" />

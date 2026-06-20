@@ -141,13 +141,9 @@ function PlacementProgressBar({
   return (
     <div className="mb-5">
       <div className="mb-1.5 flex items-center justify-between">
-        <p className="text-xs font-bold tabular-nums text-amber-600">{totalPoints} / {maxPoints} pts</p>
+        <p className="text-xs font-bold tabular-nums text-[var(--color-correction)]">{totalPoints} / {maxPoints} pts</p>
         <div className="flex items-center gap-3">
-          <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-            timeLeft <= 300
-              ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
-              : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
-          }`}>
+          <span className="rounded-full bg-[var(--color-correction-soft)] px-2 py-0.5 text-xs font-bold tabular-nums text-[var(--color-correction)]">
             {formatTime(timeLeft)}
           </span>
           <p className="text-xs text-[var(--color-text-secondary)]">{remaining} exercice{remaining !== 1 ? "s" : ""} restant{remaining !== 1 ? "s" : ""}</p>
@@ -163,7 +159,7 @@ function PlacementProgressBar({
 
           let cls = "h-2 flex-1 rounded-full transition-colors cursor-pointer ";
           if (isCurrent) {
-            cls += "bg-amber-500";
+            cls += "bg-[var(--color-correction)]";
           } else if (hasTyped) {
             cls += "bg-blue-400";
           } else {
@@ -202,7 +198,7 @@ function ResultsScreen({ scores, exercises }: ResultsScreenProps) {
   return (
     <div className="space-y-6">
       <div className="text-center space-y-1">
-        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Résultats</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Résultats</p>
         <p className="text-3xl font-bold text-[var(--color-text-primary)]">
           {totalPoints} <span className="text-xl text-[var(--color-text-secondary)]">/ {maxPoints}</span>
         </p>
@@ -211,7 +207,7 @@ function ResultsScreen({ scores, exercises }: ResultsScreenProps) {
       {/* Score bar */}
       <div className="h-3 rounded-full bg-[var(--color-bg-secondary)] overflow-hidden">
         <div
-          className="h-full rounded-full bg-amber-500 transition-all duration-700"
+          className="h-full rounded-full bg-[var(--color-correction)] transition-all duration-700"
           style={{ width: `${pct}%` }}
         />
       </div>

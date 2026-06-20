@@ -2747,11 +2747,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
         {/* Timer chip — shown when exercises are started (conjugation only) */}
         {isExercise && hasTimer && exercisesStarted && timeLeft !== null && (
           <div className="mb-4 flex justify-end">
-            <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
-              timeLeft < 60
-                ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
-                : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
-            }`}>
+            <div className="flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-correction)]/40 bg-[var(--color-correction-soft)] px-3 py-1.5 font-mono text-lg font-bold tabular-nums text-[var(--color-correction)]">
               <span aria-hidden>⏱</span>
               <span>{formatTime(timeLeft)}</span>
             </div>
@@ -2866,7 +2862,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
             {isEvalPhase && (
               <div className="mb-4">
                 <div className="mb-1 flex items-center justify-between">
-                  <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
                   <p className="text-xs text-[var(--color-text-secondary)]">{evalExercises.length - evalValidated.filter(Boolean).length} restant(s)</p>
                 </div>
                 <div className="flex gap-1">
@@ -2876,7 +2872,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
                       <div
                         key={i}
                         className={`h-1.5 flex-1 rounded-full transition-colors ${
-                          i === evalIdx ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                          i === evalIdx ? "bg-[var(--color-correction)]" : "bg-[var(--color-border-default)]"
                         }`}
                       />
                     );

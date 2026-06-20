@@ -3730,11 +3730,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
             {/* Timer */}
             {evalStarted && !evalSubmitted && evalTimeLeft !== null && lesson.submoduleId !== "A1-1" && lesson.submoduleId !== "A1-2" && (
               <div className="flex justify-end">
-                <div className={`flex items-center gap-1.5 rounded-[var(--radius-md)] border px-3 py-1.5 font-mono text-lg font-bold tabular-nums ${
-                  evalTimeLeft < 60
-                    ? "border-red-300 bg-red-50 text-red-600 dark:border-red-700 dark:bg-red-950/30"
-                    : "border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-300"
-                }`}>
+                <div className="flex items-center gap-1.5 rounded-[var(--radius-md)] border border-[var(--color-correction)]/40 bg-[var(--color-correction-soft)] px-3 py-1.5 font-mono text-lg font-bold tabular-nums text-[var(--color-correction)]">
                   <span aria-hidden>⏱</span>
                   <span>{formatTime(evalTimeLeft)}</span>
                 </div>
@@ -4352,7 +4348,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const boxX = Math.min(Math.max(x - boxW / 2, ML), ML + lineW - boxW);
                         const result = ex17Results[li]?.[ai] ?? null;
                         const ans = ex17Answers[li]?.[ai] ?? "";
-                        const stroke = result === false ? "#F59E0B" : "#9CA3AF";
+                        const stroke = result === false ? "var(--color-correction)" : "#9CA3AF";
                         const fill = result === false ? "#FEF3C7" : "#DBEAFE";
                         return (
                           <g key={ai}>
@@ -4434,7 +4430,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
                         const boxX = Math.min(Math.max(x - boxW/2, ML), ML + lineW - boxW);
                         const ans = ex18Answers[li]?.[ai] ?? "";
                         const result = ex18Results[li]?.[ai] ?? null;
-                        const stroke = result === false ? "#F59E0B" : "#9CA3AF";
+                        const stroke = result === false ? "var(--color-correction)" : "#9CA3AF";
                         const fill = result === false ? "#FEF3C7" : "#DBEAFE";
                         return (
                           <g key={ai}>

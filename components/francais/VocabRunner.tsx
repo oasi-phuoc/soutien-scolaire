@@ -426,7 +426,7 @@ export function VocabRunner({ theme }: Props) {
       {isInEvalPhase && (
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
             <p className="text-xs text-[var(--color-text-secondary)]">{evalTotal - evalValidated.filter(Boolean).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
@@ -436,7 +436,7 @@ export function VocabRunner({ theme }: Props) {
                 <div
                   key={i}
                   className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    i === evalExIdx ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                    i === evalExIdx ? "bg-[var(--color-correction)]" : "bg-[var(--color-border-default)]"
                   }`}
                 />
               );

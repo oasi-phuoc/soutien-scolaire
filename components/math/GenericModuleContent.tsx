@@ -6754,7 +6754,7 @@ export function GenericModuleContent({
       {isInEvalPhase && !showEvalScore && (
         <div className="mb-6">
           <div className="mb-1 flex items-center justify-between">
-            <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
             <p className="text-xs text-[var(--color-text-secondary)]">{evalSteps.length - Object.keys(evalExValidatedFlags).length} restant(s)</p>
           </div>
           <div className="flex gap-1">
@@ -6764,7 +6764,7 @@ export function GenericModuleContent({
                 <div
                   key={i}
                   className={`h-1.5 flex-1 rounded-full transition-colors ${
-                    i === evalStepOffset ? "bg-amber-500" : "bg-[var(--color-border-default)]"
+                    i === evalStepOffset ? "bg-[var(--color-correction)]" : "bg-[var(--color-border-default)]"
                   }`}
                 />
               );

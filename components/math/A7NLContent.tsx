@@ -302,7 +302,7 @@ function NLPlaceGroup({ group, gi, assignments, activeChip, validated, posWrong,
               const assigned = assignments[pi];
               const w = revealCorrection && posWrong[pi];
               const fillColor = w ? "#FEF3C7" : assigned !== null ? "#DBEAFE" : "#F3F4F6";
-              const strokeColor = w ? "#F59E0B" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
+              const strokeColor = w ? "var(--color-correction)" : assigned !== null ? "var(--color-accent-alg)" : "#9CA3AF";
               return (
                 <g key={pi} style={{ cursor: validated ? "default" : "pointer" }} onClick={() => onPosClick(gi, pi)}>
                   <circle cx={x} cy={lineY} r="7" fill={fillColor} stroke={strokeColor} strokeWidth="2" />

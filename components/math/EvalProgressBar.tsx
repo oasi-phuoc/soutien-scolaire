@@ -22,14 +22,10 @@ export default function EvalProgressBar({ current, total, timeLeft, validatedCou
   return (
     <div className="mb-6">
       <div className="mb-1 flex items-center justify-between">
-        <p className="text-xs font-bold uppercase tracking-widest text-amber-600">Évaluation</p>
+        <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
         <div className="flex items-center gap-3">
           {timeLeft != null && (
-            <span className={`rounded-full px-2 py-0.5 text-xs font-bold tabular-nums ${
-              timeLeft <= 60
-                ? "bg-red-100 text-red-600 dark:bg-red-950/40 dark:text-red-400"
-                : "bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400"
-            }`}>
+            <span className="rounded-full bg-[var(--color-correction-soft)] px-2 py-0.5 text-xs font-bold tabular-nums text-[var(--color-correction)]">
               {formatTime(timeLeft)}
             </span>
           )}
@@ -43,7 +39,7 @@ export default function EvalProgressBar({ current, total, timeLeft, validatedCou
             <div
               key={i}
               className={`h-1.5 flex-1 rounded-full transition-colors ${
-                i === current ? "bg-amber-500 opacity-60" : "bg-[var(--color-border-default)]"
+                i === current ? "bg-[var(--color-correction)] opacity-70" : "bg-[var(--color-border-default)]"
               }`}
             />
           );

@@ -661,7 +661,7 @@ function A1Ex7({ exerciseKey, validated, onValidated, validateTrigger }: Revisio
     const pos = (v: number) => ML + ((v - nl.start) / (nl.end - nl.start)) * lineW;
     const tx = pos(nl.target);
     const accent = "var(--color-accent-alg)";
-    const arrowColor = result === false ? "#F59E0B" : accent;
+    const arrowColor = result === false ? "var(--color-correction)" : accent;
     const fs = nl.end >= 1000 ? 7 : nl.end >= 100 ? 8 : 10;
     const ulY = 44;
     return (
