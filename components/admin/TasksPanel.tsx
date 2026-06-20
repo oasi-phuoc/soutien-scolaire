@@ -196,25 +196,25 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R1.8", label: "R1.8 — L'interrogation de base" },
         { id: "R1.9", label: "R1.9 — C'est ou il est ?" },
       ]},
-      { id: "R2", label: "A1 - Les verbes essentiels", lessons: [
+      { id: "R2", label: "Les verbes essentiels", lessons: [
         { id: "R2.1", label: "R2.1 — Les verbes de mouvement" },
         { id: "R2.2", label: "R2.2 — Les verbes pronominaux" },
         { id: "R2.3", label: "R2.3 — Les verbes modaux" },
         { id: "R2.4", label: "R2.4 — Les mots interrogatifs" },
       ]},
-      { id: "R3", label: "A1 - Les adjectifs", lessons: [
+      { id: "R3", label: "Les adjectifs", lessons: [
         { id: "R3.7", label: "R3.7 — Les adjectifs qualificatifs" },
         { id: "R3.4", label: "R3.4 — Les adjectifs démonstratifs" },
         { id: "R3.5", label: "R3.5 — Les adjectifs possessifs" },
         { id: "R3.1", label: "R3.1 — Les adjectifs partitifs" },
         { id: "R3.3", label: "R3.3 — Les prépositions de lieu" },
       ]},
-      { id: "R4", label: "A1 - Le futur et le temps", lessons: [
+      { id: "R4", label: "Le futur et le temps", lessons: [
         { id: "R4.1", label: "R4.1 — Le futur proche" },
         { id: "R4.2", label: "R4.2 — Les expressions de temps" },
         { id: "R4.3", label: "R4.3 — Les adverbes de fréquence" },
       ]},
-      { id: "R5", label: "A1 - Le passé", lessons: [
+      { id: "R5", label: "Le passé", lessons: [
         { id: "R5.1", label: "R5.1 — Passé récent et présent continu" },
         { id: "R5.2", label: "R5.2 — Passé composé avec avoir" },
         { id: "R5.3", label: "R5.3 — Passé composé avec être" },
@@ -223,32 +223,32 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R5.6", label: "R5.6 — Les verbes pronominaux au passé composé" },
         { id: "R5.7", label: "R5.7 — Les marqueurs chronologiques" },
       ]},
-      { id: "R6", label: "A2 - L'imparfait", lessons: [
+      { id: "R6", label: "L'imparfait", lessons: [
         { id: "R6.1", label: "R6.1 — Les verbes réguliers" },
         { id: "R6.2", label: "R6.2 — Les verbes irréguliers" },
         { id: "R6.3", label: "R6.3 — Passé composé ou imparfait ?" },
         { id: "R6.4", label: "R6.4 — Cause et conséquence" },
       ]},
-      { id: "R7", label: "A2 - Le futur simple", lessons: [
+      { id: "R7", label: "Le futur simple", lessons: [
         { id: "R7.1", label: "R7.1 — Les verbes réguliers" },
         { id: "R7.2", label: "R7.2 — Les verbes irréguliers" },
         { id: "R7.3", label: "R7.3 — Futur simple ou futur proche ?" },
         { id: "R7.4", label: "R7.4 — Les marqueurs chronologiques" },
         { id: "R7.5", label: "R7.5 — L'hypothèse sur le futur" },
       ]},
-      { id: "R8", label: "A2 - La comparaison", lessons: [
+      { id: "R8", label: "La comparaison", lessons: [
         { id: "R8.1", label: "R8.1 — Le comparatif" },
         { id: "R8.2", label: "R8.2 — Bon ou bien, meilleur ou mieux ?" },
         { id: "R8.3", label: "R8.3 — Le superlatif" },
         { id: "R8.4", label: "R8.4 — La négation (2/2)" },
       ]},
-      { id: "R9", label: "A2 - Les verbes au présent", lessons: [
+      { id: "R9", label: "Les verbes au présent", lessons: [
         { id: "R9.1", label: "R9.1 — Les verbes en -ir" },
         { id: "R9.2", label: "R9.2 — Prendre, apprendre et comprendre" },
         { id: "R9.3", label: "R9.3 — Les verbes irréguliers courants" },
         { id: "R9.4", label: "R9.4 — Les verbes pronominaux" },
       ]},
-      { id: "RX", label: "A1/A2 - À organiser", lessons: [
+      { id: "RX", label: "À organiser", lessons: [
         { id: "RX.7", label: "RX.7 — Le comparatif et le superlatif" },
         { id: "RX.8", label: "RX.8 — Savoir ou connaître ?" },
         { id: "RX.9", label: "RX.9 — Les verbes en -er (révision)" },

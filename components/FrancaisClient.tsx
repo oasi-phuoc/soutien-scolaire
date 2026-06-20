@@ -22,16 +22,16 @@ const SECTIONS: SectionDef[] = [
 ];
 
 const GRAMMAR_GROUPS: SectionDef[] = [
-  { id: "R1", code: "R1", title: "A1 — Les fondamentaux" },
-  { id: "R2", code: "R2", title: "A1 - Les verbes essentiels" },
-  { id: "R3", code: "R3", title: "A1 - Les adjectifs" },
-  { id: "R4", code: "R4", title: "A1 - Le futur et le temps" },
-  { id: "R5", code: "R5", title: "A1 - Le passé" },
-  { id: "R6", code: "R6", title: "A2 - L'imparfait" },
-  { id: "R7", code: "R7", title: "A2 - Le futur simple" },
-  { id: "R8", code: "R8", title: "A2 - La comparaison" },
-  { id: "R9", code: "R9", title: "A2 - Les verbes au présent" },
-  { id: "RX", code: "RX", title: "A1/A2 - À organiser" },
+  { id: "R1", code: "R1", title: "Les fondamentaux" },
+  { id: "R2", code: "R2", title: "Les verbes essentiels" },
+  { id: "R3", code: "R3", title: "Les adjectifs" },
+  { id: "R4", code: "R4", title: "Le futur et le temps" },
+  { id: "R5", code: "R5", title: "Le passé" },
+  { id: "R6", code: "R6", title: "L'imparfait" },
+  { id: "R7", code: "R7", title: "Le futur simple" },
+  { id: "R8", code: "R8", title: "La comparaison" },
+  { id: "R9", code: "R9", title: "Les verbes au présent" },
+  { id: "RX", code: "RX", title: "À organiser" },
 ];
 
 function grammarGroupId(code: string): string {
