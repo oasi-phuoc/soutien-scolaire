@@ -199,12 +199,14 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R2.1", label: "R2.1 — Les verbes de mouvement" },
         { id: "R2.2", label: "R2.2 — Les verbes pronominaux" },
         { id: "R2.3", label: "R2.3 — Les verbes modaux" },
+        { id: "R2.4", label: "R2.4 — Verbes irréguliers" },
+        { id: "R2.5", label: "R2.5 — Les verbes en -ir" },
       ]},
       { id: "RI", label: "L'interrogation", lessons: [
         { id: "R1.8",  label: "R1.8 — L'interrogation de base" },
         { id: "RX.12", label: "RX.12 — L'interrogation (questions fermées)" },
         { id: "RX.13", label: "RX.13 — Répondre aux questions fermées" },
-        { id: "R2.4",  label: "R2.4 — Les mots interrogatifs" },
+        { id: "RI.4",  label: "RI.4 — Les mots interrogatifs" },
       ]},
       { id: "R3", label: "Les adjectifs", lessons: [
         { id: "R3.7", label: "R3.7 — Les adjectifs qualificatifs" },
@@ -246,18 +248,14 @@ const CURRICULUM: MatiereOpt[] = [
         { id: "R8.3", label: "R8.3 — Le superlatif" },
         { id: "R8.4", label: "R8.4 — La négation (2/2)" },
       ]},
-      { id: "R9", label: "Les verbes au présent", lessons: [
-        { id: "R9.1", label: "R9.1 — Les verbes en -ir" },
-        { id: "R9.2", label: "R9.2 — Prendre, apprendre et comprendre" },
-        { id: "R9.3", label: "R9.3 — Les verbes irréguliers courants" },
-      ]},
+
       { id: "RX", label: "À organiser", lessons: [
         { id: "RX.7", label: "RX.7 — Le comparatif et le superlatif" },
         { id: "RX.8", label: "RX.8 — Savoir ou connaître ?" },
         { id: "RX.9", label: "RX.9 — Les verbes en -er (révision)" },
         { id: "RX.14", label: "RX.14 — Le conditionnel de politesse" },
         { id: "RX.15", label: "RX.15 — L'impératif" },
-        { id: "RX.16", label: "RX.16 — Les prépositions de lieu" },
+
         { id: "RX.17", label: "RX.17 — Les adjectifs (généralités)" },
         { id: "RX.18", label: "RX.18 — Les adjectifs (cas particuliers)" },
         { id: "RX.19", label: "RX.19 — Les pronoms relatifs qui et que" },

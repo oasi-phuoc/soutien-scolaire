@@ -31,12 +31,11 @@ const GRAMMAR_GROUPS: SectionDef[] = [
   { id: "R6", code: "R6", title: "L'imparfait" },
   { id: "R7", code: "R7", title: "Le futur simple" },
   { id: "R8", code: "R8", title: "La comparaison" },
-  { id: "R9", code: "R9", title: "Les verbes au présent" },
   { id: "RX", code: "RX", title: "À organiser" },
 ];
 
 function grammarGroupId(code: string): string {
-  if (code === "R1.8" || code === "RX.12" || code === "RX.13" || code === "R2.4") return "RI";
+  if (code === "R1.8" || code === "RX.12" || code === "RX.13" || code === "RI.4") return "RI";
   if (code.startsWith("R1.")) return "R1";
   if (code.startsWith("R2.")) return "R2";
   if (code.startsWith("R3.")) return "R3";
@@ -45,7 +44,7 @@ function grammarGroupId(code: string): string {
   if (code.startsWith("R6.")) return "R6";
   if (code.startsWith("R7.")) return "R7";
   if (code.startsWith("R8.")) return "R8";
-  if (code.startsWith("R9.")) return "R9";
+  if (code.startsWith("RI.")) return "RI";
   return "RX";
 }
 

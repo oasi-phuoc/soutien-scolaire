@@ -249,6 +249,93 @@ const ex3Pool = (() => {
 
 // ── Lesson ─────────────────────────────────────────────────────────────────────
 
+const IRREGULAR_VERBS = [
+  {
+    infinitive: "faire",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "fais" },
+      { pronoun: "tu",             ending: "fais" },
+      { pronoun: "il / elle / on", ending: "fait" },
+      { pronoun: "nous",           ending: "faisons" },
+      { pronoun: "vous",           ending: "faites" },
+      { pronoun: "ils / elles",    ending: "font" },
+    ],
+  },
+  {
+    infinitive: "croire",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "crois" },
+      { pronoun: "tu",             ending: "crois" },
+      { pronoun: "il / elle / on", ending: "croit" },
+      { pronoun: "nous",           ending: "croyons" },
+      { pronoun: "vous",           ending: "croyez" },
+      { pronoun: "ils / elles",    ending: "croient" },
+    ],
+  },
+  {
+    infinitive: "boire",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "bois" },
+      { pronoun: "tu",             ending: "bois" },
+      { pronoun: "il / elle / on", ending: "boit" },
+      { pronoun: "nous",           ending: "buvons" },
+      { pronoun: "vous",           ending: "buvez" },
+      { pronoun: "ils / elles",    ending: "boivent" },
+    ],
+  },
+  {
+    infinitive: "naître",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "nais" },
+      { pronoun: "tu",             ending: "nais" },
+      { pronoun: "il / elle / on", ending: "naît" },
+      { pronoun: "nous",           ending: "naissons" },
+      { pronoun: "vous",           ending: "naissez" },
+      { pronoun: "ils / elles",    ending: "naissent" },
+    ],
+  },
+  {
+    infinitive: "savoir",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "sais" },
+      { pronoun: "tu",             ending: "sais" },
+      { pronoun: "il / elle / on", ending: "sait" },
+      { pronoun: "nous",           ending: "savons" },
+      { pronoun: "vous",           ending: "savez" },
+      { pronoun: "ils / elles",    ending: "savent" },
+    ],
+  },
+  {
+    infinitive: "connaître",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "connais" },
+      { pronoun: "tu",             ending: "connais" },
+      { pronoun: "il / elle / on", ending: "connaît" },
+      { pronoun: "nous",           ending: "connaissons" },
+      { pronoun: "vous",           ending: "connaissez" },
+      { pronoun: "ils / elles",    ending: "connaissent" },
+    ],
+  },
+  {
+    infinitive: "prendre",
+    radical: "",
+    rows: [
+      { pronoun: "je",             ending: "prends" },
+      { pronoun: "tu",             ending: "prends" },
+      { pronoun: "il / elle / on", ending: "prend" },
+      { pronoun: "nous",           ending: "prenons" },
+      { pronoun: "vous",           ending: "prenez" },
+      { pronoun: "ils / elles",    ending: "prennent" },
+    ],
+  },
+];
+
 const MODAL_VERBS = [
   {
     infinitive: "vouloir",
@@ -417,6 +504,81 @@ export const A1_CONJ_L15: ConjLesson = {
         fa: ["«Je voudrais» (شرطی) مودبانه‌تر از «je veux» (می‌خواهم) است."],
         ti: ["«Je voudrais» (ቅድመ-ኩነታዊ) ካብ «je veux» (እደሊ) ዝያዳ ኣኽብሮታዊ እዩ።"],
         uk: ["«Je voudrais» (умовний спосіб) ввічливіше, ніж «je veux» (я хочу)."],
+      },
+    },
+    { type: "heading", text: "Verbes irréguliers", trans: { en: "Irregular verbs", ar: "أفعال شاذة", fa: "افعال بی‌قاعده", ti: "ዘይስሩዓት ግሲታት", uk: "Неправильні дієслова" } },
+    { type: "verb_toggle", buttonCols: 4, verbs: IRREGULAR_VERBS },
+    {
+      type: "plain_list",
+      items: [
+        "{a}Prendre{/a}, apprendre et comprendre suivent le même modèle. Au pluriel, le radical devient pren- ; à la 3e personne du pluriel, le n est doublé : {a}prennent{/a}.",
+      ],
+      transItems: {
+        en: ["{a}Prendre{/a} (to take), apprendre and comprendre follow the same pattern. In the plural, the stem becomes pren-; in the 3rd person plural, the n is doubled: {a}prennent{/a}."],
+        ar: ["{a}Prendre{/a} (يأخذ) و apprendre و comprendre تتبع النموذج ذاته. في الجمع، يصبح الجذر pren-؛ في جمع الغائب يُضاعف الـ n: {a}prennent{/a}."],
+        fa: ["{a}Prendre{/a} (گرفتن)، apprendre و comprendre از همان الگو پیروی می‌کنند. در جمع، ریشه pren- می‌شود؛ در سوم‌شخص جمع n دوتا می‌شود: {a}prennent{/a}."],
+        ti: ["{a}Prendre{/a} (ምውሳድ)፣ apprendre ን comprendre ሓደ ዓይነት ኣገባብ ይስዕቡ። ኣብ ብዙሕ፣ እቲ መሰረት pren- ይኸውን፤ ኣብ 3ይ ኣካል ብዙሕ n ይድረብ፦ {a}prennent{/a}።"],
+        uk: ["{a}Prendre{/a} (брати), apprendre і comprendre мають однакову модель. У множині основа стає pren-; у 3-й особі множини n подвоюється: {a}prennent{/a}."],
+      },
+    },
+    { type: "heading", text: "SAVOIR ou CONNAÎTRE ?", trans: { en: "SAVOIR or CONNAÎTRE? (to know)", ar: "SAVOIR أم CONNAÎTRE؟ (يعرف)", fa: "SAVOIR یا CONNAÎTRE؟ (دانستن)", ti: "SAVOIR ወይ CONNAÎTRE? (ምፍላጥ)", uk: "SAVOIR чи CONNAÎTRE? (знати)" } },
+    {
+      type: "grid",
+      headers: ["Verbe", "Utilisation", "Exemple"],
+      boldFirstCol: true,
+      rows: [
+        ["{a}savoir{/a}", "+ infinitif (capacité)", "Je sais nager."],
+        ["{a}savoir{/a}", "+ que / si / où… (fait)", "Je sais qu'il est français."],
+        ["{a}savoir{/a}", "+ nom (information)", "Tu sais l'heure ?"],
+        ["{a}connaître{/a}", "+ personne", "Je connais Marco."],
+        ["{a}connaître{/a}", "+ lieu / chose", "Elle connaît bien Paris."],
+        ["{a}connaître{/a}", "+ œuvre / domaine", "Tu connais ce film ?"],
+      ],
+      transHeaders: {
+        en: ["Verb", "Use", "Example"],
+        ar: ["الفعل", "الاستخدام", "مثال"],
+        fa: ["فعل", "کاربرد", "مثال"],
+        ti: ["ግሲ", "ኣጠቓቕማ", "ኣብነት"],
+        uk: ["Дієслово", "Вживання", "Приклад"],
+      },
+      transRows: {
+        en: [["{a}savoir{/a}", "+ infinitive (ability)", "Je sais nager. (I can swim.)"], ["{a}savoir{/a}", "+ que / si / où… (fact)", "Je sais qu'il est français. (I know he is French.)"], ["{a}savoir{/a}", "+ noun (information)", "Tu sais l'heure ? (Do you know the time?)"], ["{a}connaître{/a}", "+ person", "Je connais Marco. (I know Marco.)"], ["{a}connaître{/a}", "+ place / thing", "Elle connaît bien Paris. (She knows Paris well.)"], ["{a}connaître{/a}", "+ work / field", "Tu connais ce film ? (Do you know this film?)"]],
+        ar: [["{a}savoir{/a}", "+ المصدر (القدرة)", "Je sais nager. (أعرف السباحة.)"], ["{a}savoir{/a}", "+ que / si / où… (حقيقة)", "Je sais qu'il est français. (أعرف أنه فرنسي.)"], ["{a}savoir{/a}", "+ اسم (معلومة)", "Tu sais l'heure ? (هل تعرف الوقت؟)"], ["{a}connaître{/a}", "+ شخص", "Je connais Marco. (أعرف ماركو.)"], ["{a}connaître{/a}", "+ مكان / شيء", "Elle connaît bien Paris. (تعرف باريس جيداً.)"], ["{a}connaître{/a}", "+ عمل / مجال", "Tu connais ce film ? (هل تعرف هذا الفيلم؟)"]],
+        fa: [["{a}savoir{/a}", "+ مصدر (توانایی)", "Je sais nager. (شنا بلدم.)"], ["{a}savoir{/a}", "+ que / si / où… (واقعیت)", "Je sais qu'il est français. (می‌دانم او فرانسوی است.)"], ["{a}savoir{/a}", "+ اسم (اطلاعات)", "Tu sais l'heure ? (ساعت را می‌دانی؟)"], ["{a}connaître{/a}", "+ شخص", "Je connais Marco. (مارکو را می‌شناسم.)"], ["{a}connaître{/a}", "+ مکان / چیز", "Elle connaît bien Paris. (پاریس را خوب می‌شناسد.)"], ["{a}connaître{/a}", "+ اثر / حوزه", "Tu connais ce film ? (این فیلم را می‌شناسی؟)"]],
+        ti: [["{a}savoir{/a}", "+ መሰረታዊ ግሲ (ክእለት)", "Je sais nager. (ምሕምባስ እኽእል።)"], ["{a}savoir{/a}", "+ que / si / où… (ሓቂ)", "Je sais qu'il est français. (ፈረንሳዊ ምዃኑ እፈልጥ።)"], ["{a}savoir{/a}", "+ ስም (ሓበሬታ)", "Tu sais l'heure ? (ሰዓት ትፈልጥ ዶ?)"], ["{a}connaître{/a}", "+ ሰብ", "Je connais Marco. (ንማርኮ እፈልጦ።)"], ["{a}connaître{/a}", "+ ቦታ / ነገር", "Elle connaît bien Paris. (ንፓሪስ ጽቡቕ ትፈልጣ።)"], ["{a}connaître{/a}", "+ ስራሕ / ዓውዲ", "Tu connais ce film ? (ነዚ ፊልም ትፈልጦ ዶ?)"]],
+        uk: [["{a}savoir{/a}", "+ інфінітив (вміння)", "Je sais nager. (Я вмію плавати.)"], ["{a}savoir{/a}", "+ que / si / où… (факт)", "Je sais qu'il est français. (Я знаю, що він француз.)"], ["{a}savoir{/a}", "+ іменник (інформація)", "Tu sais l'heure ? (Ти знаєш, котра година?)"], ["{a}connaître{/a}", "+ особа", "Je connais Marco. (Я знаю Марко.)"], ["{a}connaître{/a}", "+ місце / річ", "Elle connaît bien Paris. (Вона добре знає Париж.)"], ["{a}connaître{/a}", "+ твір / галузь", "Tu connais ce film ? (Ти знаєш цей фільм?)"]],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Règle simple",
+      items: [
+        "{a}Savoir{/a} = un fait, une information, une capacité.",
+        "{a}Connaître{/a} = être familier avec une personne, un lieu ou une chose.",
+      ],
+      transLabel: { en: "Simple rule", ar: "قاعدة بسيطة", fa: "قاعده‌ی ساده", ti: "ቀሊል ሕጊ", uk: "Просте правило" },
+      transItems: {
+        en: ["{a}Savoir{/a} = a fact, an information, an ability.", "{a}Connaître{/a} = to be familiar with a person, a place or a thing."],
+        ar: ["{a}Savoir{/a} = حقيقة أو معلومة أو قدرة.", "{a}Connaître{/a} = أن تكون مألوفاً بشخص أو مكان أو شيء."],
+        fa: ["{a}Savoir{/a} = یک واقعیت، یک اطلاعات، یک توانایی.", "{a}Connaître{/a} = آشنا بودن با یک شخص، مکان یا چیز."],
+        ti: ["{a}Savoir{/a} = ሓቂ፣ ሓበሬታ፣ ክእለት።", "{a}Connaître{/a} = ምስ ሰብ፣ ቦታ ወይ ነገር ምልላይ።"],
+        uk: ["{a}Savoir{/a} = факт, інформація, вміння.", "{a}Connaître{/a} = бути знайомим з особою, місцем або річчю."],
+      },
+    },
+    {
+      type: "highlight",
+      label: "Attention",
+      items: [
+        "On ne dit pas {s}je sais Paris{/s} mais {a}je connais Paris{/a}.",
+        "On ne dit pas {s}je connais nager{/s} mais {a}je sais nager{/a}.",
+      ],
+      transLabel: { en: "Warning", ar: "انتباه", fa: "توجه", ti: "ኣቓልቦ", uk: "Увага" },
+      transItems: {
+        en: ["You don't say {s}je sais Paris{/s} but {a}je connais Paris{/a}.", "You don't say {s}je connais nager{/s} but {a}je sais nager{/a}."],
+        ar: ["لا تقل {s}je sais Paris{/s} بل {a}je connais Paris{/a}.", "لا تقل {s}je connais nager{/s} بل {a}je sais nager{/a}."],
+        fa: ["نمی‌گویید {s}je sais Paris{/s} بلکه {a}je connais Paris{/a}.", "نمی‌گویید {s}je connais nager{/s} بلکه {a}je sais nager{/a}."],
+        ti: ["{s}je sais Paris{/s} ኣይትብልን ግን {a}je connais Paris{/a}።", "{s}je connais nager{/s} ኣይትብልን ግን {a}je sais nager{/a}།"],
+        uk: ["Не кажуть {s}je sais Paris{/s}, а {a}je connais Paris{/a}.", "Не кажуть {s}je connais nager{/s}, а {a}je sais nager{/a}."],
       },
     },
   ],

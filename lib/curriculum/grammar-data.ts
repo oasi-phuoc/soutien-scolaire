@@ -98,14 +98,14 @@ import { A2_GR_MARQUEURS_TEMPORELS } from "./content/francais/grammaire-r7.4-mar
 import { A2_GR_HYPOTHESE_FUTUR } from "./content/francais/grammaire-r7.5-hypothese";
 import { A2_GR_BON_BIEN } from "./content/francais/grammaire-r8.2-bon-bien";
 import { A2_GR_SUPERLATIF } from "./content/francais/grammaire-r8.3-superlatif";
-import { A2_GR_PRENDRE_FAMILLE } from "./content/francais/grammaire-r9.2-prendre";
+
 import { A1_GR_L14 } from "./content/francais/grammaire-r3.1";
 import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
 import { A1_GR_L23 } from "./content/francais/grammaire-r3.7b";
 import { A1_GR_L24 } from "./content/francais/grammaire-r4.7";
-import { A1_GR_L25 } from "./content/francais/grammaire-r4.8";
+
 import { A1_GR_L07 } from "./content/francais/grammaire-r3.4";
 import { A1_GR_L08 } from "./content/francais/grammaire-r3.5";
 import { A1_GR_L09 } from "./content/francais/grammaire-r3.6";
@@ -114,7 +114,7 @@ import { A2_GR_L07 } from "./content/francais/grammaire-r4.12";
 import { A2_GR_L09 } from "./content/francais/grammaire-r4.13";
 import { A2_GR_L11 } from "./content/francais/grammaire-r4.17";
 import { A2_GR_L12 } from "./content/francais/grammaire-r4.18";
-import { A2_GR_L18 } from "./content/francais/grammaire-r4.16";
+
 import { A2_GR_L19 } from "./content/francais/grammaire-r4.19";
 import { A2_GR_L25 } from "./content/francais/grammaire-r4.20";
 import { A2_GR_L35 } from "./content/francais/grammaire-r4.22";
@@ -131,15 +131,16 @@ import { A1_CONJ_L07 } from "./content/francais/grammaire-r1.5";
 import { A1_CONJ_L08 } from "./content/francais/grammaire-r2.1";
 import { A1_CONJ_L09 } from "./content/francais/grammaire-r2.2";
 import { A1_CONJ_L15 } from "./content/francais/grammaire-r2.3b";
+import { A2_CONJ_IRREGULIERS } from "./content/francais/grammaire-r2-irreguliers";
 import { A1_CONJ_L20 } from "./content/francais/grammaire-r4.1";
-import { A1_CONJ_L27 } from "./content/francais/grammaire-r4.2";
+
 import { A1_CONJ_L28 } from "./content/francais/grammaire-r4.3";
 import { A1_CONJ_L29 } from "./content/francais/grammaire-r4.4";
 import { A1_CONJ_L30 } from "./content/francais/grammaire-r4.5";
 import { NEGATION_PASSE_COMPOSE } from "./content/francais/grammaire-r4.6";
 import { A2_CONJ_L01 } from "./content/francais/grammaire-r4.9";
 import { A2_CONJ_L02 } from "./content/francais/grammaire-r4.10";
-import { A2_CONJ_L03 } from "./content/francais/grammaire-r4.11";
+
 import { A2_CONJ_L04 } from "./content/francais/grammaire-r4.14";
 import { A2_CONJ_L05 } from "./content/francais/grammaire-r4.15";
 import { A2_CONJ_L06 } from "./content/francais/grammaire-r4.24";
@@ -176,9 +177,9 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_HYPOTHESE_FUTUR,
   A2_GR_BON_BIEN,
   A2_GR_SUPERLATIF,
-  A2_GR_PRENDRE_FAMILLE,
+
   A1_GR_L24,
-  A1_GR_L25,
+
   A1_GR_L07,
   A1_GR_L08,
   A1_GR_L09,
@@ -187,7 +188,7 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A2_GR_L09,
   A2_GR_L11,
   A2_GR_L12,
-  A2_GR_L18,
+
   A2_GR_L19,
   A2_GR_L25,
   A2_GR_L35,
@@ -206,15 +207,16 @@ export const CONJUGAISON_LESSONS: ConjLesson[] = [
   A1_CONJ_L08,
   A1_CONJ_L09,
   A1_CONJ_L15,
+  A2_CONJ_IRREGULIERS,
   A1_CONJ_L20,
-  A1_CONJ_L27,
+
   A1_CONJ_L28,
   A1_CONJ_L29,
   A1_CONJ_L30,
   NEGATION_PASSE_COMPOSE,
   A2_CONJ_L01,
   A2_CONJ_L02,
-  A2_CONJ_L03,
+
   A2_CONJ_L04,
   A2_CONJ_L05,
   A2_CONJ_L06,

@@ -120,16 +120,18 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-l02",   "R1.7", "La négation",                                 "Ne…pas : construire une phrase négative avec être et avoir.",                           "grammaire"),
   lesson("A1", "a1-gr-cest-il-est", "R1.9", "C'est ou il est ?",                     "Distinguer c'est + nom/pronom de il est/elle est + adjectif ou profession.",            "grammaire"),
 
-  // ── G2 — Verbes essentiels A1 (R2.1–R2.3) ───────────────────────────────────
+  // ── G2 — Verbes essentiels (R2.1–R2.5) ──────────────────────────────────────
   lesson("A1", "a1-conj-l08", "R2.1", "Les verbes de mouvement",                     "Aller, venir, partir, arriver, entrer, sortir, monter, descendre, marcher, courir au présent.", "conjugaison"),
   lesson("A1", "a1-conj-l09", "R2.2", "Les verbes pronominaux",                      "Se lever, se coucher, s'appeler : les pronominaux du quotidien.",                        "conjugaison"),
   lesson("A1", "a1-conj-l15", "R2.3", "Les verbes modaux",                           "Les verbes modaux : conjugaison et emploi au présent.",                                  "conjugaison"),
+  lesson("A2", "a2-conj-irreguliers", "R2.4", "Verbes irréguliers",                  "Faire, croire, boire, naître, savoir, connaître, prendre au présent.",                   "conjugaison"),
+  lesson("A2", "a2-conj-l02", "R2.5", "Les verbes en -ir",                           "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.",          "conjugaison"),
 
   // ── RI — L'interrogation ─────────────────────────────────────────────────────
   lesson("A1", "a1-gr-interro", "R1.8",  "L'interrogation de base",                  "Est-ce que et l'intonation montante : construire une question simple.",                  "grammaire"),
   lesson("A2", "a2-gr-l07",    "RX.12", "L'interrogation (questions fermées)",        "Intonation montante, est-ce que, inversion sujet-verbe (registre formel/informel).",   "grammaire"),
   lesson("A2", "a2-gr-l09",    "RX.13", "Répondre aux questions fermées",             "Oui, non, si ; moi aussi / moi non plus / moi si : nuancer les réponses.",             "grammaire"),
-  lesson("A1", "a1-gr-l10",    "R2.4",  "Les mots interrogatifs",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
+  lesson("A1", "a1-gr-l10",    "RI.4",  "Les mots interrogatifs",                     "Qui, quoi, où, quand, comment, pourquoi, combien + est-ce que.",                       "grammaire"),
 
   // ── G3 — Les adjectifs A1 ────────────────────────────────────────────────────
   lesson("A1", "a1-gr-l23",   "R3.7", "Les adjectifs qualificatifs",                 "Genre, nombre et place de l'adjectif dans la phrase.",                                  "grammaire"),
@@ -137,11 +139,6 @@ export const FRENCH_THEMES: FrenchTheme[] = [
   lesson("A1", "a1-gr-l19",   "R3.5", "Les adjectifs possessifs",                    "Mon/ma/mes, ton/ta/tes, son/sa/ses… : exprimer l'appartenance.",                        "grammaire"),
   lesson("A1", "a1-gr-l14",   "R3.1", "Les adjectifs partitifs",                     "Du, de la, de l', des + un kilo de, beaucoup de, un peu de…",                          "grammaire"),
   lesson("A1", "a1-gr-l11",   "R3.3", "Les prépositions de lieu",                    "Dans, sur, sous, devant, derrière, à côté de, en face de…",                            "grammaire"),
-  // ── G9 — Le présent ──────────────────────────────────────────────────────────
-  lesson("A2", "a2-conj-l02", "R9.1", "Les verbes en -ir", "Deuxième et troisième groupes : finir et choisir, ou partir, venir et ouvrir.", "conjugaison"),
-  lesson("A2", "a2-gr-prendre-apprendre-comprendre", "R9.2", "Prendre, apprendre et comprendre au présent", "Le modèle de conjugaison de la famille de prendre.", "grammaire"),
-  lesson("A2", "a2-conj-l03", "R9.3", "Les verbes irréguliers courants", "Aller, avoir, être, faire, vouloir, pouvoir, devoir, sortir, croire, boire, naître et connaître.", "conjugaison"),
-  lesson("A2", "a1-gr-l25",   "R9.5", "Savoir ou connaître ?",            "Distinguer les deux verbes : savoir + infinitif vs connaître + nom.",  "grammaire"),
 
   // ── G5 — Le passé ────────────────────────────────────────────────────────────
   lesson("A1", "a1-conj-l28", "R5.1",  "Passé récent et présent continu",               "Venir de + infinitif (ce qui vient de se passer) ; être en train de + infinitif.",       "conjugaison"),
