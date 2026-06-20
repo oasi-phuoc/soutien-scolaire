@@ -425,22 +425,14 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
         <div className="mt-4 flex gap-3">
           <Link
             href="/avant-propos"
-            className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
           >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <circle cx="12" cy="12" r="10" />
-              <path d="M12 16v-4M12 8h.01" />
-            </svg>
             À propos
           </Link>
           <Link
             href="/conditions-utilisation"
-            className="flex flex-1 min-h-11 items-center justify-center gap-2 rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
+            className="flex flex-1 min-h-11 items-center justify-center rounded-xl border border-[var(--color-theme)]/40 bg-[var(--color-theme-light)] px-4 text-sm font-semibold text-[var(--color-theme)] transition-colors hover:bg-[var(--color-theme-muted)]/20"
           >
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-              <rect x="5" y="2" width="14" height="20" rx="2" />
-              <path d="M9 7h6M9 11h6M9 15h4" />
-            </svg>
             Conditions d&apos;utilisation
           </Link>
         </div>
