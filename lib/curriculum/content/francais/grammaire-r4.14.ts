@@ -6,7 +6,7 @@ export const A2_CONJ_L04: ConjLesson = {
   level: "A2",
   title: "Le conditionnel de politesse",
   theory: [
-    { type: "heading", text: "Le conditionnel présent" },
+    { type: "heading", text: "Le conditionnel présent", trans: { en: "The present conditional", ar: "الشرطي الحاضر", fa: "وجه شرطی حال", ti: "ህሉው ቅድመ-ኩነታዊ", uk: "Теперішній умовний спосіб" } },
     {
       type: "plain_list",
       items: [
@@ -14,6 +14,13 @@ export const A2_CONJ_L04: ConjLesson = {
         "Formation : {a}base du futur{/a} + terminaisons de l'imparfait",
         "Terminaisons : {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}",
       ],
+      transItems: {
+        en: ["The conditional expresses a {a}hypothetical, wished-for or polite{/a} action.", "Formation: {a}future stem{/a} + imperfect endings", "Endings: {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}"],
+        ar: ["الشرطي يعبّر عن فعل {a}افتراضي أو مرغوب أو مؤدّب{/a}.", "التكوين: {a}جذر المستقبل{/a} + نهايات الماضي الناقص", "النهايات: {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}"],
+        fa: ["وجه شرطی بیانگر عملی {a}فرضی، خواسته‌شده یا مودبانه{/a} است.", "ساختن: {a}ریشه‌ی آینده{/a} + پایانه‌های ماضی استمراری", "پایانه‌ها: {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}"],
+        ti: ["ቅድመ-ኩነታዊ {a}ግምታዊ፣ ዝድለ ወይ ኣኽብሮታዊ{/a} ተግባር የመልክት።", "ኣፈጣጥራ፦ {a}መሰረት ናይ መጻኢ{/a} + መወዳእታታት ናይ ሕሉፍ ቀጻሊ", "መወዳእታታት፦ {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}"],
+        uk: ["Умовний спосіб виражає {a}гіпотетичну, бажану або ввічливу{/a} дію.", "Утворення: {a}основа майбутнього{/a} + закінчення imparfait", "Закінчення: {a}-ais / -ais / -ait / -ions / -iez / -aient{/a}"],
+      },
     },
     {
       type: "table",

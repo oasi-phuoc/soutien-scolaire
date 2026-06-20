@@ -11,6 +11,13 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       items: [
         "Au passé composé, la négation encadre l'auxiliaire (avoir ou être), pas le participe passé.",
       ],
+      transItems: {
+        en: ["In the passé composé, the negation surrounds the auxiliary (avoir or être), not the past participle."],
+        ar: ["في الماضي المركّب، يحيط النفي بالفعل المساعد (avoir أو être)، وليس اسم المفعول."],
+        fa: ["در گذشته‌ی نقلی، نفی فعل کمکی (avoir یا être) را احاطه می‌کند، نه اسم مفعول را."],
+        ti: ["ኣብ ሕሉፍ ግዜ፣ እቲ ኣሉታ ነቲ ሓጋዚ ግሲ (avoir ወይ être) የጠቓልሎ፣ ኣይኮነን ነቲ ክፍሊ-ግሲ።"],
+        uk: ["У passé composé заперечення обрамлює допоміжне дієслово (avoir або être), а не дієприкметник."],
+      },
     },
     {
       type: "grid",
@@ -21,18 +28,46 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
         ["Elle a fini", "Elle n'a pas fini"],
         ["Nous avons vu", "Nous n'avons pas vu"],
       ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["مثبت", "منفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣረጋጋጺ", "ኣሉታዊ"],
+        uk: ["Стверджувальний", "Заперечний"],
+      },
+      transRows: {
+        en: [["J'ai mangé (I ate)", "Je n'ai pas mangé (I didn't eat)"], ["Tu es parti (You left)", "Tu n'es pas parti (You didn't leave)"], ["Elle a fini (She finished)", "Elle n'a pas fini (She didn't finish)"], ["Nous avons vu (We saw)", "Nous n'avons pas vu (We didn't see)"]],
+        ar: [["J'ai mangé (أكلتُ)", "Je n'ai pas mangé (لم آكل)"], ["Tu es parti (غادرتَ)", "Tu n'es pas parti (لم تغادر)"], ["Elle a fini (أنهت)", "Elle n'a pas fini (لم تنتهِ)"], ["Nous avons vu (رأينا)", "Nous n'avons pas vu (لم نرَ)"]],
+        fa: [["J'ai mangé (غذا خوردم)", "Je n'ai pas mangé (غذا نخوردم)"], ["Tu es parti (رفتی)", "Tu n'es pas parti (نرفتی)"], ["Elle a fini (تمام کرد)", "Elle n'a pas fini (تمام نکرد)"], ["Nous avons vu (دیدیم)", "Nous n'avons pas vu (ندیدیم)"]],
+        ti: [["J'ai mangé (በሊዐ)", "Je n'ai pas mangé (ኣይበላዕኩን)"], ["Tu es parti (ከይድካ)", "Tu n'es pas parti (ኣይከድካን)"], ["Elle a fini (ወዲኣ)", "Elle n'a pas fini (ኣይወድአትን)"], ["Nous avons vu (ርኢና)", "Nous n'avons pas vu (ኣይረኣናን)"]],
+        uk: [["J'ai mangé (Я поїв)", "Je n'ai pas mangé (Я не їв)"], ["Tu es parti (Ти пішов)", "Tu n'es pas parti (Ти не пішов)"], ["Elle a fini (Вона закінчила)", "Elle n'a pas fini (Вона не закінчила)"], ["Nous avons vu (Ми бачили)", "Nous n'avons pas vu (Ми не бачили)"]],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Structure : sujet + ne + auxiliaire + pas + participe passé",
       ],
+      transItems: {
+        en: ["Structure: subject + ne + auxiliary + pas + past participle"],
+        ar: ["البنية: الفاعل + ne + الفعل المساعد + pas + اسم المفعول"],
+        fa: ["ساختار: فاعل + ne + فعل کمکی + pas + اسم مفعول"],
+        ti: ["ቅርጺ፦ ርእሲ + ne + ሓጋዚ ግሲ + pas + ክፍሊ-ግሲ"],
+        uk: ["Структура: підмет + ne + допоміжне дієслово + pas + дієприкметник"],
+      },
     },
     {
       type: "plain_list",
       items: [
         "Avec d'autres mots négatifs : jamais, plus, rien, personne (après le participe passé pour personne).",
       ],
+      transItems: {
+        en: ["With other negative words: jamais (never), plus (no longer), rien (nothing), personne (nobody) — personne goes after the past participle."],
+        ar: ["مع كلمات نفي أخرى: jamais (أبداً)، plus (لم يعد)، rien (لا شيء)، personne (لا أحد) — personne توضع بعد اسم المفعول."],
+        fa: ["با کلمات منفی دیگر: jamais (هرگز)، plus (دیگر نه)، rien (هیچ‌چیز)، personne (هیچ‌کس) — personne بعد از اسم مفعول می‌آید."],
+        ti: ["ምስ ካልኦት ኣሉታዊ ቃላት፦ jamais (ፈጺሙ)፣ plus (ደጊም)፣ rien (ዋላ ሓንቲ)፣ personne (ዋላ ሓደ) — personne ድሕሪ ክፍሊ-ግሲ ይመጽእ።"],
+        uk: ["З іншими заперечними словами: jamais (ніколи), plus (більше не), rien (нічого), personne (ніхто) — personne ставиться після дієприкметника."],
+      },
     },
     {
       type: "grid",
@@ -43,6 +78,20 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
         ["rien", "Nous n'avons rien vu."],
         ["personne", "Elle n'a vu personne."],
       ],
+      transHeaders: {
+        en: ["Negative word", "Example"],
+        ar: ["كلمة النفي", "مثال"],
+        fa: ["کلمه‌ی منفی", "مثال"],
+        ti: ["ኣሉታዊ ቃል", "ኣብነት"],
+        uk: ["Заперечне слово", "Приклад"],
+      },
+      transRows: {
+        en: [["jamais (never)", "Je n'ai jamais mangé de sushi. (I have never eaten sushi.)"], ["plus (no longer)", "Il n'a plus travaillé ici. (He no longer worked here.)"], ["rien (nothing)", "Nous n'avons rien vu. (We saw nothing.)"], ["personne (nobody)", "Elle n'a vu personne. (She saw nobody.)"]],
+        ar: [["jamais (أبداً)", "Je n'ai jamais mangé de sushi. (لم آكل السوشي أبداً.)"], ["plus (لم يعد)", "Il n'a plus travaillé ici. (لم يعد يعمل هنا.)"], ["rien (لا شيء)", "Nous n'avons rien vu. (لم نرَ شيئاً.)"], ["personne (لا أحد)", "Elle n'a vu personne. (لم ترَ أحداً.)"]],
+        fa: [["jamais (هرگز)", "Je n'ai jamais mangé de sushi. (هرگز سوشی نخورده‌ام.)"], ["plus (دیگر نه)", "Il n'a plus travaillé ici. (دیگر اینجا کار نکرد.)"], ["rien (هیچ‌چیز)", "Nous n'avons rien vu. (هیچ‌چیز ندیدیم.)"], ["personne (هیچ‌کس)", "Elle n'a vu personne. (هیچ‌کس را ندید.)"]],
+        ti: [["jamais (ፈጺሙ)", "Je n'ai jamais mangé de sushi. (ፈጺመ ሱሺ ኣይበላዕኩን።)"], ["plus (ደጊም)", "Il n'a plus travaillé ici. (ደጊም ኣብዚ ኣይሰርሐን።)"], ["rien (ዋላ ሓንቲ)", "Nous n'avons rien vu. (ዋላ ሓንቲ ኣይረኣናን።)"], ["personne (ዋላ ሓደ)", "Elle n'a vu personne. (ዋላ ሓደ ኣይረኣየትን።)"]],
+        uk: [["jamais (ніколи)", "Je n'ai jamais mangé de sushi. (Я ніколи не їв суші.)"], ["plus (більше не)", "Il n'a plus travaillé ici. (Він більше тут не працював.)"], ["rien (нічого)", "Nous n'avons rien vu. (Ми нічого не бачили.)"], ["personne (ніхто)", "Elle n'a vu personne. (Вона нікого не бачила.)"]],
+      },
     },
   ],
   exercises: [
@@ -50,6 +99,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "fill",
       title: "Mettez les phrases au passé composé négatif (ne … pas)",
       instruction: "Complétez avec la forme négative.",
+      transInstruction: { en: "Complete with the negative form.", ar: "أكمل بصيغة النفي.", fa: "با صورت منفی کامل کنید.", ti: "ብኣሉታዊ ቅርጺ ምላእ.", uk: "Доповніть заперечною формою." },
       items: [],
       poolSize: 6,
       pool: [
@@ -72,6 +122,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "fill",
       title: "Transformez avec le mot négatif indiqué",
       instruction: "Complétez avec la forme négative indiquée.",
+      transInstruction: { en: "Complete with the indicated negative form.", ar: "أكمل بصيغة النفي المحددة.", fa: "با صورت منفی مشخص‌شده کامل کنید.", ti: "ብእቲ ዝተጠቕሰ ኣሉታዊ ቅርጺ ምላእ.", uk: "Доповніть зазначеною заперечною формою." },
       items: [],
       poolSize: 6,
       pool: [
@@ -92,6 +143,7 @@ export const NEGATION_PASSE_COMPOSE: ConjLesson = {
       type: "fill",
       title: "Répondez à la question à la forme négative",
       instruction: "Répondez négativement à la question.",
+      transInstruction: { en: "Answer the question in the negative.", ar: "أجب على السؤال بالنفي.", fa: "به سؤال به‌صورت منفی پاسخ دهید.", ti: "ነቲ ሕቶ ብኣሉታ መልሲ.", uk: "Дайте заперечну відповідь на запитання." },
       items: [],
       poolSize: 5,
       pool: [

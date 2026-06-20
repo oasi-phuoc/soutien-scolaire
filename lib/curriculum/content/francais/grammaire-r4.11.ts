@@ -6,10 +6,17 @@ export const A2_CONJ_L03: ConjLesson = {
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [
-    { type: "heading", text: "Verbes irréguliers courants au présent" },
+    { type: "heading", text: "Verbes irréguliers courants au présent", trans: { en: "Common irregular verbs in the present", ar: "أفعال شاذة شائعة في المضارع", fa: "افعال بی‌قاعده‌ی پرکاربرد در حال", ti: "ልሙዳት ዘይስሩዓት ግሲታት ኣብ ህሉው ግዜ", uk: "Поширені неправильні дієслова в теперішньому часі" } },
     {
       type: "grid",
       headers: ["Verbe", "je", "nous", "ils / elles"],
+      transHeaders: {
+        en: ["Verb", "je", "nous", "ils / elles"],
+        ar: ["الفعل", "je", "nous", "ils / elles"],
+        fa: ["فعل", "je", "nous", "ils / elles"],
+        ti: ["ግሲ", "je", "nous", "ils / elles"],
+        uk: ["Дієслово", "je", "nous", "ils / elles"],
+      },
       rows: [
         ["aller", "vais", "allons", "vont"],
         ["avoir", "ai", "avons", "ont"],
@@ -111,11 +118,26 @@ export const A2_CONJ_L03: ConjLesson = {
         "{a}Famille connaître{/a} : paraître, apparaître, disparaître → même conjugaison.",
         "{a}Famille voir{/a} : prévoir, revoir → même conjugaison.",
       ],
+      transLabel: { en: "Verb families", ar: "عائلات الأفعال", fa: "خانواده‌های افعال", ti: "ስድራቤታት ግሲታት", uk: "Родини дієслів" },
+      transItems: {
+        en: ["{a}prendre family{/a}: comprendre, apprendre, surprendre → same conjugation.", "{a}connaître family{/a}: paraître, apparaître, disparaître → same conjugation.", "{a}voir family{/a}: prévoir, revoir → same conjugation."],
+        ar: ["{a}عائلة prendre{/a}: comprendre, apprendre, surprendre ← نفس التصريف.", "{a}عائلة connaître{/a}: paraître, apparaître, disparaître ← نفس التصريف.", "{a}عائلة voir{/a}: prévoir, revoir ← نفس التصريف."],
+        fa: ["{a}خانواده‌ی prendre{/a}: comprendre, apprendre, surprendre ← همان صرف.", "{a}خانواده‌ی connaître{/a}: paraître, apparaître, disparaître ← همان صرف.", "{a}خانواده‌ی voir{/a}: prévoir, revoir ← همان صرف."],
+        ti: ["{a}ስድራ prendre{/a}፦ comprendre, apprendre, surprendre → ተመሳሳሊ ኣጸራርራ።", "{a}ስድራ connaître{/a}፦ paraître, apparaître, disparaître → ተመሳሳሊ ኣጸራርራ።", "{a}ስድራ voir{/a}፦ prévoir, revoir → ተመሳሳሊ ኣጸራርራ።"],
+        uk: ["{a}Родина prendre{/a}: comprendre, apprendre, surprendre → таке ж відмінювання.", "{a}Родина connaître{/a}: paraître, apparaître, disparaître → таке ж відмінювання.", "{a}Родина voir{/a}: prévoir, revoir → таке ж відмінювання."],
+      },
     },
     {
       type: "grid",
       headers: ["Verbe", "1re pers. sing.", "Participe passé"],
       boldFirstCol: true,
+      transHeaders: {
+        en: ["Verb", "1st pers. sing.", "Past participle"],
+        ar: ["الفعل", "المتكلم المفرد", "اسم المفعول"],
+        fa: ["فعل", "اول‌شخص مفرد", "اسم مفعول"],
+        ti: ["ግሲ", "1ይ ኣካል ነጠላ", "ክፍሊ-ግሲ"],
+        uk: ["Дієслово", "1-ша ос. однини", "Дієприкметник"],
+      },
       rows: [
         ["faire", "je fais", "fait"],
         ["prendre", "je prends", "pris"],

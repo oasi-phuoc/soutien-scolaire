@@ -6,13 +6,20 @@ export const A1_CONJ_L20: ConjLesson = {
   level: "A1",
   title: "Le futur proche",
   theory: [
-    { type: "heading", text: "Le futur proche" },
+    { type: "heading", text: "Le futur proche", trans: { en: "The near future (futur proche)", ar: "المستقبل القريب", fa: "آینده‌ی نزدیک", ti: "ቀረባ መጻኢ", uk: "Найближче майбутнє" } },
     {
       type: "plain_list",
       items: [
         "Le futur proche exprime une action {a}prévue ou imminente{/a}.",
         "Structure : {a}aller{/a} (présent) + infinitif",
       ],
+      transItems: {
+        en: ["The near future expresses a {a}planned or imminent{/a} action.", "Structure: {a}aller{/a} (present) + infinitive"],
+        ar: ["المستقبل القريب يعبّر عن فعل {a}مخطط له أو وشيك{/a}.", "البنية: {a}aller{/a} (المضارع) + المصدر"],
+        fa: ["آینده‌ی نزدیک بیانگر عملی {a}برنامه‌ریزی‌شده یا قریب‌الوقوع{/a} است.", "ساختار: {a}aller{/a} (حال) + مصدر"],
+        ti: ["ቀረባ መጻኢ {a}ዝተመደበ ወይ ቀረባ{/a} ተግባር የመልክት።", "ቅርጺ፦ {a}aller{/a} (ህሉው) + መሰረታዊ ግሲ"],
+        uk: ["Найближче майбутнє виражає {a}заплановану або неминучу{/a} дію.", "Структура: {a}aller{/a} (теперішній) + інфінітив"],
+      },
     },
     {
       type: "table",
@@ -43,13 +50,34 @@ export const A1_CONJ_L20: ConjLesson = {
         ["vous", "Vous {a}allez{/a} voyager.", "You are going to travel."],
         ["elles", "Elles {a}vont{/a} arriver.", "They are going to arrive."],
       ],
+      transHeaders: {
+        en: ["Subject", "Near future", "Translation"],
+        ar: ["الفاعل", "المستقبل القريب", "الترجمة"],
+        fa: ["فاعل", "آینده‌ی نزدیک", "ترجمه"],
+        ti: ["ርእሲ", "ቀረባ መጻኢ", "ትርጉም"],
+        uk: ["Підмет", "Найближче майбутнє", "Переклад"],
+      },
+      transRows: {
+        en: [["je", "Je {a}vais{/a} manger.", "I am going to eat."], ["tu", "Tu {a}vas{/a} partir.", "You are going to leave."], ["il", "Il {a}va{/a} pleuvoir.", "It is going to rain."], ["nous", "Nous {a}allons{/a} étudier.", "We are going to study."], ["vous", "Vous {a}allez{/a} voyager.", "You are going to travel."], ["elles", "Elles {a}vont{/a} arriver.", "They are going to arrive."]],
+        ar: [["je", "Je {a}vais{/a} manger.", "سوف آكل."], ["tu", "Tu {a}vas{/a} partir.", "سوف تغادر."], ["il", "Il {a}va{/a} pleuvoir.", "سوف تمطر."], ["nous", "Nous {a}allons{/a} étudier.", "سوف ندرس."], ["vous", "Vous {a}allez{/a} voyager.", "سوف تسافرون."], ["elles", "Elles {a}vont{/a} arriver.", "سوف يصلن."]],
+        fa: [["je", "Je {a}vais{/a} manger.", "می‌خواهم غذا بخورم."], ["tu", "Tu {a}vas{/a} partir.", "می‌خواهی بروی."], ["il", "Il {a}va{/a} pleuvoir.", "می‌خواهد باران ببارد."], ["nous", "Nous {a}allons{/a} étudier.", "می‌خواهیم درس بخوانیم."], ["vous", "Vous {a}allez{/a} voyager.", "می‌خواهید سفر کنید."], ["elles", "Elles {a}vont{/a} arriver.", "می‌خواهند برسند."]],
+        ti: [["je", "Je {a}vais{/a} manger.", "ክበልዕ እየ።"], ["tu", "Tu {a}vas{/a} partir.", "ክትከይድ ኢኻ።"], ["il", "Il {a}va{/a} pleuvoir.", "ክዘንብ እዩ።"], ["nous", "Nous {a}allons{/a} étudier.", "ክንመሃር ኢና።"], ["vous", "Vous {a}allez{/a} voyager.", "ክትገሹ ኢኹም።"], ["elles", "Elles {a}vont{/a} arriver.", "ክመጻ እየን።"]],
+        uk: [["je", "Je {a}vais{/a} manger.", "Я зараз буду їсти."], ["tu", "Tu {a}vas{/a} partir.", "Ти зараз підеш."], ["il", "Il {a}va{/a} pleuvoir.", "Зараз піде дощ."], ["nous", "Nous {a}allons{/a} étudier.", "Ми зараз будемо вчитися."], ["vous", "Vous {a}allez{/a} voyager.", "Ви зараз поїдете."], ["elles", "Elles {a}vont{/a} arriver.", "Вони зараз прибудуть."]],
+      },
     },
-    { type: "heading", text: "Forme négative", sub: true, accent: true },
+    { type: "heading", text: "Forme négative", sub: true, accent: true, trans: { en: "Negative form", ar: "صيغة النفي", fa: "صورت منفی", ti: "ኣሉታዊ ቅርጺ", uk: "Заперечна форма" } },
     {
       type: "plain_list",
       items: [
         "{a}ne … pas{/a} encadre le verbe {a}aller{/a}, pas l'infinitif.",
       ],
+      transItems: {
+        en: ["{a}ne … pas{/a} surrounds the verb {a}aller{/a}, not the infinitive."],
+        ar: ["{a}ne … pas{/a} يحيط بالفعل {a}aller{/a}، وليس المصدر."],
+        fa: ["{a}ne … pas{/a} فعل {a}aller{/a} را احاطه می‌کند، نه مصدر را."],
+        ti: ["{a}ne … pas{/a} ነቲ ግሲ {a}aller{/a} የጠቓልሎ፣ ኣይኮነን ነቲ መሰረታዊ ግሲ።"],
+        uk: ["{a}ne … pas{/a} обрамлює дієслово {a}aller{/a}, а не інфінітив."],
+      },
     },
     {
       type: "grid",
@@ -59,6 +87,20 @@ export const A1_CONJ_L20: ConjLesson = {
         ["Elle va venir.", "Elle {a}ne{/a} va {a}pas{/a} venir."],
         ["Ils vont sortir.", "Ils {a}ne{/a} vont {a}pas{/a} sortir."],
       ],
+      transHeaders: {
+        en: ["Affirmative", "Negative"],
+        ar: ["مثبت", "منفي"],
+        fa: ["مثبت", "منفی"],
+        ti: ["ኣረጋጋጺ", "ኣሉታዊ"],
+        uk: ["Стверджувальний", "Заперечний"],
+      },
+      transRows: {
+        en: [["Je vais manger. (I am going to eat.)", "Je {a}ne{/a} vais {a}pas{/a} manger. (I am not going to eat.)"], ["Elle va venir. (She is going to come.)", "Elle {a}ne{/a} va {a}pas{/a} venir. (She is not going to come.)"], ["Ils vont sortir. (They are going to go out.)", "Ils {a}ne{/a} vont {a}pas{/a} sortir. (They are not going to go out.)"]],
+        ar: [["Je vais manger. (سوف آكل.)", "Je {a}ne{/a} vais {a}pas{/a} manger. (لن آكل.)"], ["Elle va venir. (سوف تأتي.)", "Elle {a}ne{/a} va {a}pas{/a} venir. (لن تأتي.)"], ["Ils vont sortir. (سوف يخرجون.)", "Ils {a}ne{/a} vont {a}pas{/a} sortir. (لن يخرجوا.)"]],
+        fa: [["Je vais manger. (می‌خواهم غذا بخورم.)", "Je {a}ne{/a} vais {a}pas{/a} manger. (نمی‌خواهم غذا بخورم.)"], ["Elle va venir. (می‌خواهد بیاید.)", "Elle {a}ne{/a} va {a}pas{/a} venir. (نمی‌خواهد بیاید.)"], ["Ils vont sortir. (می‌خواهند بیرون بروند.)", "Ils {a}ne{/a} vont {a}pas{/a} sortir. (نمی‌خواهند بیرون بروند.)"]],
+        ti: [["Je vais manger. (ክበልዕ እየ።)", "Je {a}ne{/a} vais {a}pas{/a} manger. (ክበልዕ ኣይኮንኩን።)"], ["Elle va venir. (ክትመጽእ እያ።)", "Elle {a}ne{/a} va {a}pas{/a} venir. (ክትመጽእ ኣይኮነትን።)"], ["Ils vont sortir. (ክወጹ እዮም።)", "Ils {a}ne{/a} vont {a}pas{/a} sortir. (ክወጹ ኣይኮኑን።)"]],
+        uk: [["Je vais manger. (Я зараз буду їсти.)", "Je {a}ne{/a} vais {a}pas{/a} manger. (Я не буду їсти.)"], ["Elle va venir. (Вона зараз прийде.)", "Elle {a}ne{/a} va {a}pas{/a} venir. (Вона не прийде.)"], ["Ils vont sortir. (Вони зараз вийдуть.)", "Ils {a}ne{/a} vont {a}pas{/a} sortir. (Вони не вийдуть.)"]],
+      },
     },
     {
       type: "highlight",
@@ -69,6 +111,14 @@ export const A1_CONJ_L20: ConjLesson = {
         "Événement imminent : Attention, tu vas tomber !",
         "Programme établi : Le train va partir dans 2 minutes.",
       ],
+      transLabel: { en: "When to use the near future?", ar: "متى نستخدم المستقبل القريب؟", fa: "چه زمانی از آینده‌ی نزدیک استفاده کنیم؟", ti: "ቀረባ መጻኢ መዓስ ንጥቀመሉ?", uk: "Коли вживати найближче майбутнє?" },
+      transItems: {
+        en: ["Action planned in the near future: Je vais appeler demain. (I am going to call tomorrow.)", "Certain intention: Nous allons déménager. (We are going to move house.)", "Imminent event: Attention, tu vas tomber ! (Watch out, you are going to fall!)", "Set schedule: Le train va partir dans 2 minutes. (The train is going to leave in 2 minutes.)"],
+        ar: ["فعل مخطط له في المستقبل القريب: Je vais appeler demain. (سوف أتصل غداً.)", "نية مؤكدة: Nous allons déménager. (سوف ننتقل.)", "حدث وشيك: Attention, tu vas tomber ! (انتبه، سوف تقع!)", "برنامج محدد: Le train va partir dans 2 minutes. (سوف يغادر القطار خلال دقيقتين.)"],
+        fa: ["عمل برنامه‌ریزی‌شده در آینده‌ی نزدیک: Je vais appeler demain. (فردا تماس خواهم گرفت.)", "قصد قطعی: Nous allons déménager. (می‌خواهیم اسباب‌کشی کنیم.)", "رویداد قریب‌الوقوع: Attention, tu vas tomber ! (مراقب باش، می‌افتی!)", "برنامه‌ی مشخص: Le train va partir dans 2 minutes. (قطار تا ۲ دقیقه‌ی دیگر حرکت می‌کند.)"],
+        ti: ["ኣብ ቀረባ መጻኢ ዝተመደበ ተግባር፦ Je vais appeler demain. (ጽባሕ ክድውል እየ።)", "ርጉጽ ሓሳብ፦ Nous allons déménager. (ክንግዕዝ ኢና።)", "ቀረባ ፍጻመ፦ Attention, tu vas tomber ! (ተጠንቀቕ፣ ክትወድቕ ኢኻ!)", "ዝተወሰነ መደብ፦ Le train va partir dans 2 minutes. (እቲ ባቡር ኣብ 2 ደቓይቕ ክብገስ እዩ።)"],
+        uk: ["Дія, запланована в найближчому майбутньому: Je vais appeler demain. (Я завтра зателефоную.)", "Певний намір: Nous allons déménager. (Ми переїжджаємо.)", "Неминуча подія: Attention, tu vas tomber ! (Обережно, ти зараз впадеш!)", "Встановлений розклад: Le train va partir dans 2 minutes. (Поїзд відправляється через 2 хвилини.)"],
+      },
     },
   ],
   exercises: [],

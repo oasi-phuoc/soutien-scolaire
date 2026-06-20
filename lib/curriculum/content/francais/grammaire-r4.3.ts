@@ -6,13 +6,20 @@ export const A1_CONJ_L28: ConjLesson = {
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [
-    { type: "heading", text: "Le passé récent : venir de + infinitif" },
+    { type: "heading", text: "Le passé récent : venir de + infinitif", trans: { en: "The recent past: venir de + infinitive", ar: "الماضي القريب: venir de + المصدر", fa: "گذشته‌ی نزدیک: venir de + مصدر", ti: "ቀረባ ሕሉፍ፦ venir de + መሰረታዊ ግሲ", uk: "Недавнє минуле: venir de + інфінітив" } },
     {
       type: "plain_list",
       items: [
         "Le passé récent exprime une action {a}qui vient juste de se terminer{/a}.",
         "Structure : {a}venir de{/a} (présent) + infinitif",
       ],
+      transItems: {
+        en: ["The recent past expresses an action that {a}has just finished{/a}.", "Structure: {a}venir de{/a} (present) + infinitive"],
+        ar: ["الماضي القريب يعبّر عن فعل {a}انتهى للتو{/a}.", "البنية: {a}venir de{/a} (المضارع) + المصدر"],
+        fa: ["گذشته‌ی نزدیک بیانگر عملی است که {a}همین حالا تمام شده{/a}.", "ساختار: {a}venir de{/a} (حال) + مصدر"],
+        ti: ["ቀረባ ሕሉፍ {a}ሕጂ ዝተወድአ{/a} ተግባር የመልክት።", "ቅርጺ፦ {a}venir de{/a} (ህሉው) + መሰረታዊ ግሲ"],
+        uk: ["Недавнє минуле виражає дію, яка {a}щойно завершилася{/a}.", "Структура: {a}venir de{/a} (теперішній) + інфінітив"],
+      },
     },
     {
       type: "table",
@@ -40,14 +47,35 @@ export const A1_CONJ_L28: ConjLesson = {
         ["Nous {a}venons de{/a} finir.", "We just finished."],
         ["Ils {a}viennent d'{/a}arriver.", "They just arrived."],
       ],
+      transHeaders: {
+        en: ["Example", "Translation"],
+        ar: ["مثال", "الترجمة"],
+        fa: ["مثال", "ترجمه"],
+        ti: ["ኣብነት", "ትርጉም"],
+        uk: ["Приклад", "Переклад"],
+      },
+      transRows: {
+        en: [["Je {a}viens de{/a} manger.", "I just ate."], ["Elle {a}vient de{/a} partir.", "She just left."], ["Nous {a}venons de{/a} finir.", "We just finished."], ["Ils {a}viennent d'{/a}arriver.", "They just arrived."]],
+        ar: [["Je {a}viens de{/a} manger.", "لقد أكلت للتو."], ["Elle {a}vient de{/a} partir.", "لقد غادرت للتو."], ["Nous {a}venons de{/a} finir.", "لقد انتهينا للتو."], ["Ils {a}viennent d'{/a}arriver.", "لقد وصلوا للتو."]],
+        fa: [["Je {a}viens de{/a} manger.", "همین حالا غذا خوردم."], ["Elle {a}vient de{/a} partir.", "همین حالا رفت."], ["Nous {a}venons de{/a} finir.", "همین حالا تمام کردیم."], ["Ils {a}viennent d'{/a}arriver.", "همین حالا رسیدند."]],
+        ti: [["Je {a}viens de{/a} manger.", "ሕጂ በሊዐ።"], ["Elle {a}vient de{/a} partir.", "ሕጂ ከይዳ።"], ["Nous {a}venons de{/a} finir.", "ሕጂ ወዲእና።"], ["Ils {a}viennent d'{/a}arriver.", "ሕጂ ኣትዮም።"]],
+        uk: [["Je {a}viens de{/a} manger.", "Я щойно поїв."], ["Elle {a}vient de{/a} partir.", "Вона щойно пішла."], ["Nous {a}venons de{/a} finir.", "Ми щойно закінчили."], ["Ils {a}viennent d'{/a}arriver.", "Вони щойно прибули."]],
+      },
     },
-    { type: "heading", text: "Le présent continu : être en train de + infinitif", sub: true, accent: true },
+    { type: "heading", text: "Le présent continu : être en train de + infinitif", sub: true, accent: true, trans: { en: "The present continuous: être en train de + infinitive", ar: "المضارع المستمر: être en train de + المصدر", fa: "حال استمراری: être en train de + مصدر", ti: "ቀጻሊ ህሉው፦ être en train de + መሰረታዊ ግሲ", uk: "Теперішній тривалий: être en train de + інфінітив" } },
     {
       type: "plain_list",
       items: [
         "Le présent continu insiste sur une action {a}en cours{/a} au moment où l'on parle.",
         "Structure : {a}être en train de{/a} + infinitif",
       ],
+      transItems: {
+        en: ["The present continuous stresses an action {a}in progress{/a} at the moment of speaking.", "Structure: {a}être en train de{/a} + infinitive"],
+        ar: ["المضارع المستمر يؤكد على فعل {a}جارٍ{/a} في لحظة الكلام.", "البنية: {a}être en train de{/a} + المصدر"],
+        fa: ["حال استمراری بر عملی {a}در حال انجام{/a} در لحظه‌ی صحبت تأکید دارد.", "ساختار: {a}être en train de{/a} + مصدر"],
+        ti: ["ቀጻሊ ህሉው ኣብ ግዜ ዘረባ {a}ኣብ ምስልሳል{/a} ዘሎ ተግባር የጉልሕ።", "ቅርጺ፦ {a}être en train de{/a} + መሰረታዊ ግሲ"],
+        uk: ["Теперішній тривалий підкреслює дію, {a}що триває{/a} в момент мовлення.", "Структура: {a}être en train de{/a} + інфінітив"],
+      },
     },
     {
       type: "grid",
@@ -58,6 +86,20 @@ export const A1_CONJ_L28: ConjLesson = {
         ["Il est {a}en train de{/a} dormir.", "He is sleeping right now."],
         ["Nous sommes {a}en train de{/a} cuisiner.", "We are cooking right now."],
       ],
+      transHeaders: {
+        en: ["Example", "Translation"],
+        ar: ["مثال", "الترجمة"],
+        fa: ["مثال", "ترجمه"],
+        ti: ["ኣብነት", "ትርጉም"],
+        uk: ["Приклад", "Переклад"],
+      },
+      transRows: {
+        en: [["Je suis {a}en train de{/a} travailler.", "I'm working right now."], ["Tu es {a}en train de{/a} lire.", "You are reading right now."], ["Il est {a}en train de{/a} dormir.", "He is sleeping right now."], ["Nous sommes {a}en train de{/a} cuisiner.", "We are cooking right now."]],
+        ar: [["Je suis {a}en train de{/a} travailler.", "أنا أعمل الآن."], ["Tu es {a}en train de{/a} lire.", "أنت تقرأ الآن."], ["Il est {a}en train de{/a} dormir.", "هو نائم الآن."], ["Nous sommes {a}en train de{/a} cuisiner.", "نحن نطبخ الآن."]],
+        fa: [["Je suis {a}en train de{/a} travailler.", "همین حالا در حال کار کردنم."], ["Tu es {a}en train de{/a} lire.", "همین حالا در حال خواندنی."], ["Il est {a}en train de{/a} dormir.", "همین حالا در حال خوابیدن است."], ["Nous sommes {a}en train de{/a} cuisiner.", "همین حالا در حال آشپزی هستیم."]],
+        ti: [["Je suis {a}en train de{/a} travailler.", "ሕጂ ኣብ ምስራሕ እየ።"], ["Tu es {a}en train de{/a} lire.", "ሕጂ ኣብ ምንባብ ኢኻ።"], ["Il est {a}en train de{/a} dormir.", "ሕጂ ኣብ ምድቃስ እዩ።"], ["Nous sommes {a}en train de{/a} cuisiner.", "ሕጂ ኣብ ምብሳል ኢና።"]],
+        uk: [["Je suis {a}en train de{/a} travailler.", "Я зараз працюю."], ["Tu es {a}en train de{/a} lire.", "Ти зараз читаєш."], ["Il est {a}en train de{/a} dormir.", "Він зараз спить."], ["Nous sommes {a}en train de{/a} cuisiner.", "Ми зараз готуємо."]],
+      },
     },
     {
       type: "highlight",
@@ -67,6 +109,14 @@ export const A1_CONJ_L28: ConjLesson = {
         "{a}Présent simple{/a} → présent : Elle téléphone.",
         "{a}Futur proche{/a} → aller + inf. : Elle va téléphoner.",
       ],
+      transLabel: { en: "The 3 aspects of the extended present", ar: "الأوجه الثلاثة للمضارع الموسّع", fa: "سه وجه حال گسترده", ti: "ሰለስተ ኣርእስታት ናይ ዝሰፍሐ ህሉው", uk: "3 аспекти розширеного теперішнього" },
+      transItems: {
+        en: ["{a}Recent past{/a} → venir de + inf.: Elle vient de téléphoner. (She has just phoned.)", "{a}Simple present{/a} → present: Elle téléphone. (She is phoning / phones.)", "{a}Near future{/a} → aller + inf.: Elle va téléphoner. (She is going to phone.)"],
+        ar: ["{a}الماضي القريب{/a} ← venir de + المصدر: Elle vient de téléphoner. (لقد اتصلت للتو.)", "{a}المضارع البسيط{/a} ← المضارع: Elle téléphone. (هي تتصل.)", "{a}المستقبل القريب{/a} ← aller + المصدر: Elle va téléphoner. (سوف تتصل.)"],
+        fa: ["{a}گذشته‌ی نزدیک{/a} ← venir de + مصدر: Elle vient de téléphoner. (همین حالا تلفن زد.)", "{a}حال ساده{/a} ← حال: Elle téléphone. (تلفن می‌زند.)", "{a}آینده‌ی نزدیک{/a} ← aller + مصدر: Elle va téléphoner. (می‌خواهد تلفن بزند.)"],
+        ti: ["{a}ቀረባ ሕሉፍ{/a} → venir de + መ.ግ.፦ Elle vient de téléphoner. (ሕጂ ደዊላ።)", "{a}ቀሊል ህሉው{/a} → ህሉው፦ Elle téléphone. (ትድውል።)", "{a}ቀረባ መጻኢ{/a} → aller + መ.ግ.፦ Elle va téléphoner. (ክትድውል እያ።)"],
+        uk: ["{a}Недавнє минуле{/a} → venir de + інф.: Elle vient de téléphoner. (Вона щойно зателефонувала.)", "{a}Простий теперішній{/a} → теперішній: Elle téléphone. (Вона телефонує.)", "{a}Найближче майбутнє{/a} → aller + інф.: Elle va téléphoner. (Вона зараз зателефонує.)"],
+      },
     },
   ],
   exercises: [],
