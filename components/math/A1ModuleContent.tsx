@@ -419,6 +419,21 @@ function A1HintButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function PdfPrintButton() {
+  return (
+    <button type="button" onClick={() => window.print()}
+      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+      aria-label="Imprimer en PDF">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M6 9V2h12v7" />
+        <rect x="6" y="14" width="12" height="8" rx="1" />
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+        <circle cx="18" cy="13" r="0.5" fill="currentColor" />
+      </svg>
+    </button>
+  );
+}
+
 function getA1StepHint(step: Step): string | undefined {
   if (step === "theory" || step === "audio" || step === "eval") return undefined;
   if (step === "ex2" || step === "ex3" || step === "ex4" || step === "ex5" || step === "ex6") {
@@ -2652,7 +2667,7 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
 
       {/* Step progress bar — hidden during eval */}
       {step !== "eval" && (
-        <div className="mb-6 flex gap-1">
+        <div className="mb-6 flex gap-1" data-no-print>
           {steps.map((s, i) => (
             <div
               key={s}
@@ -2669,17 +2684,22 @@ export function A1ModuleContent({ startSubmoduleId, startAtEval }: { startSubmod
       )}
       {/* Eval progress bar */}
       {step === "eval" && evalStarted && !evalSubmitted && (
-        <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={lesson.submoduleId === "A1-1" || lesson.submoduleId === "A1-2" ? null : evalTimeLeft} validatedCount={evalPagesValidated.filter(Boolean).length} />
+        <div data-no-print>
+          <EvalProgressBar current={evalPageIdx} total={evalTotalPages} timeLeft={lesson.submoduleId === "A1-1" || lesson.submoduleId === "A1-2" ? null : evalTimeLeft} validatedCount={evalPagesValidated.filter(Boolean).length} />
+        </div>
       )}
 
       {/* ── Théorie ─────────────────────────────────────────────────────────── */}
-      {step !== "eval" && getA1StepHint(step) && (
-        <div className="float-right ml-2">
-          <A1HintButton onClick={() => setShowHint(true)} />
+      {step !== "eval" && step !== "theory" && (
+        <div className="float-right ml-2 flex gap-1.5" data-no-print>
+          {getA1StepHint(step) && <A1HintButton onClick={() => setShowHint(true)} />}
+          <PdfPrintButton />
         </div>
       )}
       {showHint && getA1StepHint(step) && (
-        <A1HintPopup hint={getA1StepHint(step)!} onClose={() => setShowHint(false)} />
+        <div data-no-print>
+          <A1HintPopup hint={getA1StepHint(step)!} onClose={() => setShowHint(false)} />
+        </div>
       )}
 
       {step === "theory" && (

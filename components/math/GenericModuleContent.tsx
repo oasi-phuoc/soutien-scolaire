@@ -4269,6 +4269,21 @@ function HintButton({ onClick }: { onClick: () => void }) {
   );
 }
 
+function PdfPrintButton() {
+  return (
+    <button type="button" onClick={() => window.print()}
+      className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
+      aria-label="Imprimer en PDF">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+        <path d="M6 9V2h12v7" />
+        <rect x="6" y="14" width="12" height="8" rx="1" />
+        <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+        <circle cx="18" cy="13" r="0.5" fill="currentColor" />
+      </svg>
+    </button>
+  );
+}
+
 function getStepHint(step: FlatStep | undefined): string | undefined {
   if (!step) return undefined;
   if (step.kind === "exercise") return step.item.hintFr;
@@ -6744,15 +6759,17 @@ export function GenericModuleContent({
 
       {/* Main progress bar — training steps only */}
       {!inEvalPhase && (
-        <TrainingProgressBar
-          current={trainingStepIdx}
-          total={trainingSteps.length}
-          timeLeft={trainingTimerLeft}
-        />
+        <div data-no-print>
+          <TrainingProgressBar
+            current={trainingStepIdx}
+            total={trainingSteps.length}
+            timeLeft={trainingTimerLeft}
+          />
+        </div>
       )}
       {/* Eval progress bar */}
       {isInEvalPhase && !showEvalScore && (
-        <div className="mb-6">
+        <div className="mb-6" data-no-print>
           <div className="mb-1 flex items-center justify-between">
             <p className="text-xs font-bold uppercase tracking-widest text-[var(--color-correction)]">Évaluation</p>
             <p className="text-xs text-[var(--color-text-secondary)]">{evalSteps.length - Object.keys(evalExValidatedFlags).length} restant(s)</p>
@@ -6773,14 +6790,17 @@ export function GenericModuleContent({
         </div>
       )}
 
-      {/* Hint button — floated right, aligns with exercise title */}
-      {!inEvalPhase && currentStep && currentStep.kind !== "theory" && getStepHint(currentStep) && (
-        <div className="float-right ml-2">
-          <HintButton onClick={() => setShowHint(true)} />
+      {/* Hint + PDF buttons — floated right, aligns with exercise title */}
+      {!inEvalPhase && currentStep && currentStep.kind !== "theory" && (
+        <div className="float-right ml-2 flex gap-1.5" data-no-print>
+          {getStepHint(currentStep) && <HintButton onClick={() => setShowHint(true)} />}
+          <PdfPrintButton />
         </div>
       )}
       {showHint && getStepHint(currentStep) && (
-        <HintPopup hint={getStepHint(currentStep)!} onClose={() => setShowHint(false)} />
+        <div data-no-print>
+          <HintPopup hint={getStepHint(currentStep)!} onClose={() => setShowHint(false)} />
+        </div>
       )}
 
       {/* Theory */}
