@@ -384,14 +384,6 @@ function A1HintPopup({ hint, onClose }: { hint: string; onClose: () => void }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
       <div className="relative w-full max-w-sm rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 shadow-xl" onClick={e => e.stopPropagation()}>
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700"
-          aria-label="Fermer"
-        >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12" /></svg>
-        </button>
         <p className="mb-2 text-sm font-bold text-[var(--color-accent-alg)]">Astuce</p>
         <p className="pr-4 text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
         <button
@@ -421,7 +413,7 @@ function A1HintButton({ onClick }: { onClick: () => void }) {
 
 function PdfPrintButton() {
   return (
-    <button type="button" onClick={() => window.print()}
+    <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())}
       className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
       aria-label="Imprimer en PDF">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

@@ -2480,10 +2480,6 @@ function GramHintPopup({ hint, onClose }: { hint: string; onClose: () => void })
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center pb-36 px-4" onClick={onClose}>
       <div className="w-full max-w-xl rounded-2xl border border-[var(--color-border-default)] bg-[var(--color-bg-primary)] p-5 shadow-xl" onClick={e => e.stopPropagation()}>
-        <button type="button" onClick={onClose} aria-label="Fermer"
-          className="absolute right-3 top-3 flex h-7 w-7 items-center justify-center rounded-full bg-zinc-100 text-zinc-500 transition-colors hover:bg-zinc-200">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
         <p className="mb-2 text-sm font-bold text-[var(--color-accent-fr)]">💡 Astuce</p>
         <p className="pr-4 text-sm leading-relaxed text-[var(--color-text-primary)]">{hint}</p>
         <button type="button" onClick={onClose}
@@ -2789,7 +2785,7 @@ export function GrammaireRunner({ lesson, subject = "Conjugaison" }: Props) {
               className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-xs font-bold text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
               aria-label="Aide">?</button>
           )}
-          <button type="button" onClick={() => window.print()}
+          <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())}
             className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-fr)] text-[var(--color-accent-fr)] transition-colors hover:bg-[var(--color-accent-fr)]/10"
             aria-label="Imprimer en PDF">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

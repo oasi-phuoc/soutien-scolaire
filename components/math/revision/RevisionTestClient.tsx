@@ -314,7 +314,7 @@ export function RevisionTestClient({
               <span className="text-xs text-[var(--color-text-secondary)]">
                 {ex.maxPoints} pt{ex.maxPoints > 1 ? "s" : ""}
               </span>
-              <button type="button" onClick={() => window.print()} data-no-print
+              <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())} data-no-print
                 className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
                 aria-label="Imprimer en PDF">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -361,9 +361,7 @@ export function RevisionTestClient({
                   <span className="w-5 text-xs font-bold text-[var(--color-accent-alg)]">
                     {exercise.id}
                   </span>
-                  <span className="flex-1 truncate text-xs text-[var(--color-text-secondary)]">
-                    {exercise.label}
-                  </span>
+                  <span className="flex-1" />
                   <span className="text-xs font-bold tabular-nums text-[var(--color-text-primary)]">
                     {pts} / {max}
                   </span>

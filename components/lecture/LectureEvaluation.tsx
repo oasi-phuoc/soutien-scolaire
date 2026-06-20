@@ -855,7 +855,7 @@ export function LectureEvaluation({ data, onBack, onDone, onEvalStepChange, onEv
                   <IconCheck />
                 </button>
               )}
-              <button type="button" onClick={() => window.print()} data-no-print
+              <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())} data-no-print
                 className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[var(--color-accent-lecture)] text-[var(--color-accent-lecture)] transition-colors hover:bg-[var(--color-accent-lecture)]/10"
                 aria-label="Imprimer en PDF">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>

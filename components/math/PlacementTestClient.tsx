@@ -674,7 +674,7 @@ export function PlacementTestClient() {
       {/* Exercise header + PDF button */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-base font-bold text-[var(--color-accent-alg)]">Exercice {ex.id}</h2>
-        <button type="button" onClick={() => window.print()} data-no-print
+        <button type="button" onClick={() => import("@/lib/utils/print").then(m => m.triggerPrint())} data-no-print
           className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-[var(--color-accent-alg)] text-[var(--color-accent-alg)] transition-colors hover:bg-[var(--color-accent-alg)]/10"
           aria-label="Imprimer en PDF">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
