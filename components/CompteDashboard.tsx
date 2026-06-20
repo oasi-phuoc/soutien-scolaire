@@ -433,7 +433,7 @@ export function CompteDashboard({ user, profilePivot, supabaseConfigured, isAdmi
             href="/conditions-utilisation"
             className="flex flex-1 min-h-11 items-center justify-center rounded-xl bg-[var(--color-theme)] px-4 text-sm font-semibold text-white transition-opacity hover:opacity-90"
           >
-            Conditions d&apos;utilisation
+            Conditions
           </Link>
         </div>
       </Card>
