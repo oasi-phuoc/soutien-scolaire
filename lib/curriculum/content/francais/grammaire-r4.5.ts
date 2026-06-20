@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L30: ConjLesson = {
   slug: "a1-conj-l30",
-  code: "R4.5",
+  code: "R5.3",
   level: "A1",
   title: "Passé composé avec être",
   theory: [

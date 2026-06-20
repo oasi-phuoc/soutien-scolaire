@@ -2,11 +2,30 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L03: ConjLesson = {
   slug: "a2-conj-l03",
-  code: "R4.11",
+  code: "R9.3",
   level: "A2",
   title: "Les verbes irréguliers courants",
   theory: [
     { type: "heading", text: "Verbes irréguliers courants au présent" },
+    {
+      type: "grid",
+      headers: ["Verbe", "je", "nous", "ils / elles"],
+      rows: [
+        ["aller", "vais", "allons", "vont"],
+        ["avoir", "ai", "avons", "ont"],
+        ["être", "suis", "sommes", "sont"],
+        ["faire", "fais", "faisons", "font"],
+        ["vouloir", "veux", "voulons", "veulent"],
+        ["pouvoir", "peux", "pouvons", "peuvent"],
+        ["devoir", "dois", "devons", "doivent"],
+        ["sortir", "sors", "sortons", "sortent"],
+        ["croire", "crois", "croyons", "croient"],
+        ["boire", "bois", "buvons", "boivent"],
+        ["naître", "nais", "naissons", "naissent"],
+        ["connaître", "connais", "connaissons", "connaissent"],
+      ],
+      boldFirstCol: true,
+    },
     {
       type: "table",
       tables: [

@@ -83,12 +83,23 @@ import { A1_GR_L02 } from "./content/francais/grammaire-r1.7";
 import { A1_GR_INTERRO } from "./content/francais/grammaire-r1.8";
 import { A1_GR_L03 } from "./content/francais/grammaire-r1.4";
 import { A1_GR_L04 } from "./content/francais/grammaire-r1.3";
-import { A1_GR_L05 } from "./content/francais/grammaire-r3.2";
 import { A1_GR_L06 } from "./content/francais/grammaire-r1.7b";
 import { A1_GR_L10 } from "./content/francais/grammaire-r2.4";
 import { A1_GR_L11 } from "./content/francais/grammaire-r2.5";
+import { A1_GR_TIME_EXPRESSIONS } from "./content/francais/grammaire-r4.2-temps";
+import { A1_GR_DOUBLE_AUXILIAIRE } from "./content/francais/grammaire-r5.5-double-auxiliaire";
+import { A1_GR_PRONOMINAUX_PASSE } from "./content/francais/grammaire-r5.6-pronominaux";
+import { A1_GR_MARQUEURS_CHRONOLOGIQUES } from "./content/francais/grammaire-r5.7-marqueurs";
+import { A2_GR_IMPARFAIT_IRREGULIERS } from "./content/francais/grammaire-r6.2-irreguliers";
+import { A2_GR_PASSE_OU_IMPARFAIT } from "./content/francais/grammaire-r6.3-passe-imparfait";
+import { A2_GR_FUTUR_IRREGULIERS } from "./content/francais/grammaire-r7.2-irreguliers";
+import { A2_GR_FUTUR_SIMPLE_PROCHE } from "./content/francais/grammaire-r7.3-futurs";
+import { A2_GR_MARQUEURS_TEMPORELS } from "./content/francais/grammaire-r7.4-marqueurs";
+import { A2_GR_HYPOTHESE_FUTUR } from "./content/francais/grammaire-r7.5-hypothese";
+import { A2_GR_BON_BIEN } from "./content/francais/grammaire-r8.2-bon-bien";
+import { A2_GR_SUPERLATIF } from "./content/francais/grammaire-r8.3-superlatif";
+import { A2_GR_PRENDRE_FAMILLE } from "./content/francais/grammaire-r9.2-prendre";
 import { A1_GR_L14 } from "./content/francais/grammaire-r3.1";
-import { A1_GR_L17 } from "./content/francais/grammaire-r3.3";
 import { A1_GR_L18 } from "./content/francais/grammaire-r3.4b";
 import { A1_GR_L19 } from "./content/francais/grammaire-r3.5b";
 import { A1_GR_L22 } from "./content/francais/grammaire-r3.6b";
@@ -145,16 +156,27 @@ export const GRAMMAR_LESSONS: GrammarLesson[] = [
   A1_GR_INTERRO,
   A1_GR_L03,
   A1_GR_L04,
-  A1_GR_L05,
   A1_GR_L06,
   A1_GR_L10,
-  A1_GR_L11,
-  A1_GR_L14,
-  A1_GR_L17,
+  A1_GR_L23,
   A1_GR_L18,
   A1_GR_L19,
+  A1_GR_L14,
+  A1_GR_L11,
   A1_GR_L22,
-  A1_GR_L23,
+  A1_GR_TIME_EXPRESSIONS,
+  A1_GR_DOUBLE_AUXILIAIRE,
+  A1_GR_PRONOMINAUX_PASSE,
+  A1_GR_MARQUEURS_CHRONOLOGIQUES,
+  A2_GR_IMPARFAIT_IRREGULIERS,
+  A2_GR_PASSE_OU_IMPARFAIT,
+  A2_GR_FUTUR_IRREGULIERS,
+  A2_GR_FUTUR_SIMPLE_PROCHE,
+  A2_GR_MARQUEURS_TEMPORELS,
+  A2_GR_HYPOTHESE_FUTUR,
+  A2_GR_BON_BIEN,
+  A2_GR_SUPERLATIF,
+  A2_GR_PRENDRE_FAMILLE,
   A1_GR_L24,
   A1_GR_L25,
   A1_GR_L07,

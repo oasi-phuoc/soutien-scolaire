@@ -4,7 +4,7 @@ export const A1_GR_L14: GrammarLesson = {
   slug: "a1-gr-l14",
   code: "R3.1",
   level: "A1",
-  title: "Les articles partitifs et la quantité",
+  title: "Les adjectifs partitifs",
   theory: [
     { type: "heading", text: "Les articles partitifs" },
     {

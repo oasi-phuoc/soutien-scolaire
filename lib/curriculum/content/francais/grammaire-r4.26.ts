@@ -2,9 +2,9 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A2_CONJ_L08: ConjLesson = {
   slug: "a2-conj-l08",
-  code: "R4.26",
+  code: "R7.1",
   level: "A2",
-  title: "Le futur simple",
+  title: "Les verbes réguliers au futur simple",
   theory: [
     { type: "heading", text: "Le futur simple : formation" },
     {
@@ -44,54 +44,13 @@ export const A2_CONJ_L08: ConjLesson = {
         },
       ],
     },
-    { type: "heading", text: "Bases irrégulières au futur", sub: true, accent: true },
-    {
-      type: "grid",
-      headers: ["Infinitif", "Base futur", "je…", "Aussi pour le conditionnel"],
-      boldFirstCol: true,
-      rows: [
-        ["être", "{a}ser-{/a}", "je serai", "je serais"],
-        ["avoir", "{a}aur-{/a}", "j'aurai", "j'aurais"],
-        ["aller", "{a}ir-{/a}", "j'irai", "j'irais"],
-        ["faire", "{a}fer-{/a}", "je ferai", "je ferais"],
-        ["pouvoir", "{a}pourr-{/a}", "je pourrai", "je pourrais"],
-        ["vouloir", "{a}voudr-{/a}", "je voudrai", "je voudrais"],
-        ["venir", "{a}viendr-{/a}", "je viendrai", "je viendrais"],
-        ["savoir", "{a}saur-{/a}", "je saurai", "je saurais"],
-        ["devoir", "{a}devr-{/a}", "je devrai", "je devrais"],
-        ["voir", "{a}verr-{/a}", "je verrai", "je verrais"],
-        ["envoyer", "{a}enverr-{/a}", "j'enverrai", "j'enverrais"],
-      ],
-    },
-    { type: "heading", text: "Emplois du futur simple", sub: true, accent: true },
-    {
-      type: "grid",
-      headers: ["Usage", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["Événement futur certain", "Demain, je {a}partirai{/a} à 8h."],
-        ["Promesse / engagement", "Je t'{a}appellerai{/a} dès que j'arrive."],
-        ["Hypothèse (si + présent → futur)", "Si tu étudies, tu {a}réussiras{/a}."],
-        ["Prévision", "Il {a}pleuvra{/a} demain."],
-      ],
-    },
-    { type: "heading", text: "Futur simple vs Futur proche", sub: true, accent: true },
-    {
-      type: "grid",
-      headers: ["Futur proche", "Futur simple"],
-      rows: [
-        ["Action {a}imminente{/a} / très prévue", "Action {a}plus lointaine{/a} ou certaine"],
-        ["Je vais appeler maintenant.", "Je l'appellerai ce soir."],
-        ["Intention planifiée", "Promesse ou prévision"],
-      ],
-    },
     {
       type: "highlight",
-      label: "Marqueurs temporels du futur simple",
+      label: "Particularités orthographiques",
       items: [
-        "demain, après-demain, dans + durée",
-        "la semaine / le mois / l'année prochaine",
-        "bientôt, un jour, plus tard, quand + futur",
+        "Les verbes en -re perdent leur e final : prendre → je prendrai.",
+        "Certains verbes en -eler et -eter doublent la consonne : appeler → j'appellerai ; jeter → je jetterai.",
+        "D'autres prennent un accent grave : acheter → j'achèterai.",
       ],
     },
   ],

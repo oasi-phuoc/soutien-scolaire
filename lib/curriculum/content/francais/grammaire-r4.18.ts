@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L12: GrammarLesson = {
   slug: "a2-gr-l12",
-  code: "R4.18",
+  code: "RX.18",
   level: "A2",
   title: "Les adjectifs — cas particuliers et place",
   theory: [

@@ -2,9 +2,9 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L42: GrammarLesson = {
   slug: "a2-gr-l42",
-  code: "R4.21",
+  code: "R8.4",
   level: "A2",
-  title: "La négation — ne…jamais, ne…rien, ne…personne",
+  title: "La négation (2/2)",
   theory: [
     { type: "heading", text: "Négation totale : jamais, rien, personne" },
     {

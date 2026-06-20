@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L39: GrammarLesson = {
   slug: "a2-gr-l39",
-  code: "R4.27",
+  code: "R8.1",
   level: "A2",
   title: "Le comparatif",
   theory: [
@@ -55,28 +55,6 @@ export const A2_GR_L39: GrammarLesson = {
         ["Supériorité", "Il a {a}plus de{/a} patience {a}que{/a} moi."],
         ["Égalité", "J'ai {a}autant de{/a} travail {a}que{/a} toi."],
         ["Infériorité", "Elle gagne {a}moins d'{/a}argent {a}que{/a} lui."],
-      ],
-    },
-    { type: "heading", text: "Formes irrégulières (à mémoriser)", sub: true, accent: true },
-    {
-      type: "grid",
-      headers: ["Adjectif / adverbe", "Comparatif de supériorité", "Exemple"],
-      boldFirstCol: true,
-      rows: [
-        ["{a}bon(ne){/a}", "{a}meilleur(e)(s){/a} que", "Ce vin est {a}meilleur que{/a} l'autre. ({s}plus bon{/s})"],
-        ["{a}mauvais(e){/a}", "{a}pire{/a} que (ou plus mauvais)", "C'est {a}pire que{/a} je pensais."],
-        ["{a}bien{/a}", "{a}mieux{/a} que", "Elle parle {a}mieux que{/a} lui. ({s}plus bien{/s})"],
-        ["{a}peu{/a}", "{a}moins{/a} que", "Je dors {a}moins que{/a} toi."],
-      ],
-    },
-    {
-      type: "highlight",
-      label: "Le superlatif (pour aller plus loin)",
-      items: [
-        "Superlatif relatif : le / la / les + {a}plus / moins{/a} + adj.",
-        "C'est {a}le plus beau{/a} film de l'année.",
-        "Elle est {a}la moins rapide{/a} du groupe.",
-        "Superlatif de bon : {a}le meilleur / la meilleure{/a}.",
       ],
     },
   ],

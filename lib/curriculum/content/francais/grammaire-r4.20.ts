@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L25: GrammarLesson = {
   slug: "a2-gr-l25",
-  code: "R4.20",
+  code: "RX.20",
   level: "A2",
   title: "La négation — ne…pas, ne…plus, ne…que",
   theory: [

@@ -2,9 +2,9 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L27: ConjLesson = {
   slug: "a1-conj-l27",
-  code: "R4.2",
-  level: "A1",
-  title: "Pronominaux réfléchis et réciproques",
+  code: "R9.4",
+  level: "A2",
+  title: "Les verbes pronominaux au présent",
   theory: [
     { type: "heading", text: "Les verbes pronominaux" },
     {
@@ -61,7 +61,7 @@ export const A1_CONJ_L27: ConjLesson = {
       items: [
         "se lever — se coucher — se réveiller (routine quotidienne)",
         "se laver — se coiffer — s'habiller (hygiène)",
-        "se souvenir — s'ennuyer — se sentir (état)",
+        "se promener — s'intéresser à — se souvenir de — s'ennuyer — se sentir (état)",
         "se parler — se voir — s'écrire (réciproques)",
       ],
     },

@@ -2,7 +2,7 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L07: GrammarLesson = {
   slug: "a2-gr-l07",
-  code: "R4.12",
+  code: "RX.12",
   level: "A2",
   title: "L'interrogation (questions fermées)",
   theory: [

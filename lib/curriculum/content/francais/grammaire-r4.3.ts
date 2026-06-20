@@ -2,7 +2,7 @@ import type { ConjLesson } from "../../conjugation-data";
 
 export const A1_CONJ_L28: ConjLesson = {
   slug: "a1-conj-l28",
-  code: "R4.3",
+  code: "R5.1",
   level: "A1",
   title: "Passé récent et présent continu",
   theory: [

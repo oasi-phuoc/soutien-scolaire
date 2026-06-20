@@ -150,7 +150,7 @@ const PREPS = [
 
 export const A1_GR_L11: GrammarLesson = {
   slug: "a1-gr-l11",
-  code: "R2.5",
+  code: "R3.3",
   level: "A1",
   title: "Les prépositions de lieu",
   theory: [

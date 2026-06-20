@@ -2,9 +2,9 @@ import type { GrammarLesson } from "../../grammar-data";
 
 export const A2_GR_L52: GrammarLesson = {
   slug: "a2-gr-l52",
-  code: "R4.28",
+  code: "R6.4",
   level: "A2",
-  title: "La cause et la conséquence",
+  title: "Les relations logiques — Cause et conséquence",
   theory: [
     { type: "heading", text: "Exprimer la cause" },
     {
