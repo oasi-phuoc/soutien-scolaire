@@ -35,15 +35,23 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
   const [teacherComment, setTeacherComment] = useState(item.teacher_comment ?? "");
   const [annotations, setAnnotations] = useState<ExpressionAnnotation[]>(item.annotations ?? []);
   const [annotationComment, setAnnotationComment] = useState("");
-  const [selection, setSelection] = useState<{ start: number; end: number } | null>(null);
+  const [selection, setSelection] = useState<{ start: number; end: number; text: string } | null>(null);
   const [message, setMessage] = useState("");
   const [pending, startTransition] = useTransition();
-  const originalRef = useRef<HTMLTextAreaElement>(null);
+  const originalRef = useRef<HTMLDivElement>(null);
 
   function captureSelection() {
-    const element = originalRef.current;
-    if (!element || element.selectionStart === element.selectionEnd) return;
-    setSelection({ start: element.selectionStart, end: element.selectionEnd });
+    const sel = window.getSelection();
+    if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+    const range = sel.getRangeAt(0);
+    const container = originalRef.current;
+    if (!container || !container.contains(range.commonAncestorContainer)) return;
+    const preRange = range.cloneRange();
+    preRange.selectNodeContents(container);
+    preRange.setEnd(range.startContainer, range.startOffset);
+    const start = preRange.toString().length;
+    const selectedText = range.toString();
+    if (selectedText.trim()) setSelection({ start, end: start + selectedText.length, text: selectedText });
   }
 
   function addAnnotation() {
@@ -51,7 +59,7 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
     setAnnotations((current) => [...current, {
       start: selection.start,
       end: selection.end,
-      text: item.original_text.slice(selection.start, selection.end),
+      text: selection.text,
       comment: annotationComment.trim(),
     }]);
     setSelection(null);
@@ -70,7 +78,7 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
       <header className="mb-6 flex items-center gap-3">
         <Link href="/messagerie" aria-label="Retour" className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--color-theme)] text-xl text-white">‹</Link>
         <div>
-          <p className="text-xs font-bold uppercase text-[var(--color-theme)]">{item.lesson_code} · Production écrite</p>
+          <p className="text-xs font-bold uppercase text-[var(--color-theme)]">{item.lesson_code} · {item.lesson_code.startsWith("PO") ? "Production orale" : "Production écrite"}</p>
           <h1 className="text-xl font-bold text-[var(--color-text-primary)]">{item.prompt.title}</h1>
         </div>
       </header>
@@ -84,7 +92,19 @@ export function ExpressionSubmissionDetail({ item, isTeacher }: { item: Expressi
         <div className="space-y-6">
           <section>
             <h2 className="mb-2 font-bold text-[var(--color-text-primary)]">Texte de l’élève</h2>
-            <textarea ref={originalRef} readOnly value={item.original_text} onSelect={captureSelection} rows={10} className="w-full rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-base leading-7 outline-none selection:bg-amber-200" />
+            <div
+              ref={originalRef}
+              onMouseUp={captureSelection}
+              onTouchEnd={() => setTimeout(captureSelection, 0)}
+              className="w-full cursor-text select-text whitespace-pre-wrap rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white/80 p-4 text-base leading-7 [&::selection]:bg-amber-200"
+            >
+              {item.original_text}
+            </div>
+            {selection && (
+              <p className="mt-1 truncate rounded bg-amber-50 px-2 py-1 text-xs text-amber-700">
+                Sélectionné : <strong>« {selection.text} »</strong>
+              </p>
+            )}
             <div className="mt-2 flex gap-2">
               <input value={annotationComment} onChange={(event) => setAnnotationComment(event.target.value)} placeholder="Commentaire sur le passage sélectionné" className="min-h-10 flex-1 rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-white px-3 text-sm outline-none focus:border-amber-500" />
               <button type="button" onClick={addAnnotation} disabled={!selection || !annotationComment.trim()} className="rounded-[var(--radius-md)] bg-amber-500 px-4 text-sm font-bold text-white disabled:opacity-35">Annoter</button>
