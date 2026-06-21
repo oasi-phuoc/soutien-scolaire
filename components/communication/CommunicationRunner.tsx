@@ -448,8 +448,17 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const [phase, setPhase] = useState<Phase>("theory");
   const [exIndex, setExIndex] = useState(0);
   const [results, setResults] = useState<boolean[]>([]);
-  const [selected, setSelected] = useState<string | null>(null);
+  // Per-exercise state for free navigation
+  const [answers, setAnswers] = useState<(string | null)[]>(() =>
+    lesson ? Array(lesson.exercises.length).fill(null) : []
+  );
+  const [validated, setValidated] = useState<boolean[]>(() =>
+    lesson ? Array(lesson.exercises.length).fill(false) : []
+  );
   const [exerciseValidated, setExerciseValidated] = useState(false);
+  // Derived per-exercise state (for backwards compat with writing phase logic)
+  const selected = answers[exIndex] ?? null;
+
   const [writingPrompt, setWritingPrompt] = useState<WritingPrompt | null>(() =>
     lesson?.writingLevel ? randomWritingPrompt(lesson.writingLevel) : null,
   );
@@ -512,11 +521,14 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setGrammarFeedback([]);
       setExerciseValidated(false);
     } else if (phase === "exercises") {
-      setPhase("theory");
-      setSelected(null);
-      setExerciseValidated(false);
+      if (exIndex > 0) {
+        setExIndex(exIndex - 1);
+      } else {
+        setPhase("theory");
+      }
     } else {
       setPhase("exercises");
+      setExIndex(totalEx - 1);
     }
   }
 
@@ -528,8 +540,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       setWritingPrompt(randomWritingPrompt(lesson.writingLevel));
       return;
     }
-    setSelected(null);
-    setExerciseValidated(false);
+    setAnswers((prev) => prev.map((a, i) => i === exIndex ? null : a));
+    setValidated((prev) => prev.map((v, i) => i === exIndex ? false : v));
   }
 
   async function handleValidate() {
@@ -554,8 +566,8 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       }
       return;
     }
-    if (!selected || exerciseValidated) return;
-    setExerciseValidated(true);
+    if (!selected || validated[exIndex]) return;
+    setValidated((prev) => prev.map((v, i) => i === exIndex ? true : v));
   }
 
   function goNext() {
@@ -575,16 +587,13 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
       if (!exerciseValidated) return;
       handleFinish();
     } else if (phase === "exercises") {
-      if (!exerciseValidated) return;
-      const correct = selected === lesson.exercises[exIndex]!.answer;
-      const newResults = [...results, correct];
-      setResults(newResults);
-      if (exIndex + 1 >= totalEx) {
-        setPhase("score");
-      } else {
+      if (exIndex + 1 < totalEx) {
         setExIndex(exIndex + 1);
-        setSelected(null);
-        setExerciseValidated(false);
+      } else {
+        // Last exercise: compute score from all answers and go to score
+        const newResults = lesson.exercises.map((ex, i) => answers[i] === ex.answer);
+        setResults(newResults);
+        setPhase("score");
       }
     } else {
       handleFinish();
@@ -595,7 +604,9 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
   const showExerciseControls = phase === "exercises" || phase === "writing";
   const writingCount = wordCount(writingText);
   const writingInRange = !!writingPrompt && writingCount >= writingPrompt.minWords && writingCount <= writingPrompt.maxWords;
-  const nextDisabled = (phase === "exercises" || phase === "writing") && !exerciseValidated;
+  // Free navigation in exercises: no validation gate for Suivant
+  const nextDisabled = phase === "writing" && !exerciseValidated;
+  const currentExValidated = validated[exIndex] ?? false;
 
   const score = results.filter(Boolean).length;
 
@@ -664,18 +675,48 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
 
       {/* Exercises phase */}
       {phase === "exercises" && lesson.exercises[exIndex] && (
-        <MCQExercise
-          key={exIndex}
-          question={lesson.exercises[exIndex]!.question}
-          instruction={lesson.exercises[exIndex]!.instruction}
-          choices={lesson.exercises[exIndex]!.choices}
-          answer={lesson.exercises[exIndex]!.answer}
-          exNum={exIndex + 1}
-          total={totalEx}
-          selected={selected}
-          setSelected={setSelected}
-          validated={exerciseValidated}
-        />
+        <>
+          {/* Exercise dot navigator */}
+          {totalEx > 1 && (
+            <div className="mb-4 flex items-center justify-center gap-2">
+              {lesson.exercises.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setExIndex(i)}
+                  aria-label={`Exercice ${i + 1}`}
+                  className="flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold transition-colors"
+                  style={
+                    i === exIndex
+                      ? { background: ACCENT, color: "white" }
+                      : answers[i] !== null
+                        ? { background: `color-mix(in srgb, ${ACCENT} 22%, transparent)`, color: ACCENT, border: `1.5px solid ${ACCENT}` }
+                        : { background: "var(--color-bg-secondary)", color: "var(--color-text-secondary)", border: "1.5px solid var(--color-border-default)" }
+                  }
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+          )}
+          <MCQExercise
+            key={exIndex}
+            question={lesson.exercises[exIndex]!.question}
+            instruction={lesson.exercises[exIndex]!.instruction}
+            choices={lesson.exercises[exIndex]!.choices}
+            answer={lesson.exercises[exIndex]!.answer}
+            exNum={exIndex + 1}
+            total={totalEx}
+            selected={selected}
+            setSelected={(v) => {
+              setAnswers((prev) => prev.map((a, i) => i === exIndex ? v : a));
+              if (v !== answers[exIndex]) {
+                setValidated((prev) => prev.map((vv, i) => i === exIndex ? false : vv));
+              }
+            }}
+            validated={currentExValidated}
+          />
+        </>
       )}
 
       {/* Score phase */}
@@ -737,7 +778,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={handleReset}
-                  disabled={exerciseValidated || grammarChecking}
+                  disabled={(phase === "exercises" ? currentExValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--color-text-secondary)] transition-colors hover:bg-[var(--color-bg-secondary)] active:scale-90 disabled:opacity-30"
                   aria-label="Réinitialiser"
                 >
@@ -748,7 +789,7 @@ function CommunicationLessonRunner({ lessonId }: { lessonId: string }) {
                 <button
                   type="button"
                   onClick={() => void handleValidate()}
-                  disabled={(phase === "writing" ? !writingInRange : !selected) || exerciseValidated || grammarChecking}
+                  disabled={(phase === "writing" ? !writingInRange : !selected) || (phase === "exercises" ? currentExValidated : exerciseValidated) || grammarChecking}
                   className="flex h-11 w-11 items-center justify-center rounded-full text-white shadow-sm transition-opacity hover:opacity-90 active:scale-90 disabled:opacity-30"
                   style={{ background: ACCENT }}
                   aria-label="Valider"
