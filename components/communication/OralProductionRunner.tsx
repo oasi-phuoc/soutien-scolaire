@@ -1296,9 +1296,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
               className="h-auto w-full object-contain"
               priority
             />
-            <p className="px-3 py-2 text-sm text-[var(--color-text-secondary)]">
-              {situation.imageDescription}
-            </p>
           </div>
 
           {!task2Done && (
