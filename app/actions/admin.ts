@@ -125,11 +125,14 @@ export async function getUserForAdminAction(userId: string): Promise<{
   const svc = createServiceClient();
   if (!svc) return { ok: false, error: "Service role non configuré" };
 
-  const { data, error } = await svc
-    .from("profiles")
-    .select("id, email, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history")
-    .eq("id", userId)
-    .single();
+  const [{ data, error }, { data: authData }] = await Promise.all([
+    svc
+      .from("profiles")
+      .select("id, login_id, nom, prenom, classe, adresse, npa, localite, telephone, langue, progress_data, progress_updated_at, is_admin, role, placement_test_history")
+      .eq("id", userId)
+      .single(),
+    svc.auth.admin.getUserById(userId),
+  ]);
 
   if (error || !data) return { ok: false, error: error?.message ?? "Utilisateur non trouvé" };
 
@@ -142,6 +145,7 @@ export async function getUserForAdminAction(userId: string): Promise<{
     ok: true,
     user: {
       ...data,
+      email: authData?.user?.email ?? "",
       placement_test_best: placement_test_best ? { points: placement_test_best.points, maxPoints: placement_test_best.maxPoints, percent: placement_test_best.percent } : null,
     } as import("@/components/admin/AdminTable").UserRow,
   };
