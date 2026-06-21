@@ -15,6 +15,8 @@ export type VerbToggleVerb = {
   reflexivePronouns?: string[];
   meaning?: string;
   example?: string;
+  note?: string;
+  noteTrans?: Partial<Record<"en" | "ar" | "fa" | "ti" | "uk", string>>;
   rows: Array<{ pronoun: string; ending: string; radical?: string }>;
 };
 

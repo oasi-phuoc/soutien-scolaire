@@ -76,6 +76,14 @@ const IRREGULAR_VERBS = [
   {
     infinitive: "prendre",
     radical: "",
+    note: "{a}Prendre{/a}, apprendre et comprendre suivent le même modèle.",
+    noteTrans: {
+      en: "{a}Prendre{/a} (to take), apprendre and comprendre follow the same pattern.",
+      ar: "{a}Prendre{/a} (يأخذ) و apprendre و comprendre تتبع النموذج ذاته.",
+      fa: "{a}Prendre{/a} (گرفتن)، apprendre و comprendre از همان الگو پیروی می‌کنند.",
+      ti: "{a}Prendre{/a} (ምውሳድ)፣ apprendre ን comprendre ሓደ ዓይነት ኣገባብ ይስዕቡ።",
+      uk: "{a}Prendre{/a} (брати), apprendre і comprendre мають однакову модель.",
+    },
     rows: [
       { pronoun: "je",             ending: "prends" },
       { pronoun: "tu",             ending: "prends" },
@@ -108,19 +116,6 @@ export const A2_CONJ_IRREGULIERS: ConjLesson = {
       },
     },
     { type: "verb_toggle", buttonCols: 4, verbs: IRREGULAR_VERBS },
-    {
-      type: "plain_list",
-      items: [
-        "{a}Prendre{/a}, apprendre et comprendre suivent le même modèle. Au pluriel, le radical devient pren- ; à la 3e personne du pluriel, le n est doublé : {a}prennent{/a}.",
-      ],
-      transItems: {
-        en: ["{a}Prendre{/a} (to take), apprendre and comprendre follow the same pattern. In the plural, the stem becomes pren-; in the 3rd person plural, the n is doubled: {a}prennent{/a}."],
-        ar: ["{a}Prendre{/a} (يأخذ) و apprendre و comprendre تتبع النموذج ذاته. في الجمع، يصبح الجذر pren-؛ في جمع الغائب يُضاعف الـ n: {a}prennent{/a}."],
-        fa: ["{a}Prendre{/a} (گرفتن)، apprendre و comprendre از همان الگو پیروی می‌کنند. در جمع، ریشه pren- می‌شود؛ در سوم‌شخص جمع n دوتا می‌شود: {a}prennent{/a}."],
-        ti: ["{a}Prendre{/a} (ምውሳድ)፣ apprendre ን comprendre ሓደ ዓይነት ኣገባብ ይስዕቡ። ኣብ ብዙሕ፣ እቲ መሰረት pren- ይኸውን፤ ኣብ 3ይ ኣካል ብዙሕ n ይድረብ፦ {a}prennent{/a}།"],
-        uk: ["{a}Prendre{/a} (брати), apprendre і comprendre мають однакову модель. У множині основа стає pren-; у 3-й особі множини n подвоюється: {a}prennent{/a}."],
-      },
-    },
   ],
   exercises: [],
 };
