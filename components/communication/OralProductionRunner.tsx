@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import {
   getExpressionTeachersAction,
   type TeacherOption,
@@ -161,7 +161,117 @@ function SpeakButton({ text, small, onLight }: { text: string; small?: boolean; 
   );
 }
 
-// ——— Dialogue bubble ———
+// ——— Voice message bubble (WhatsApp-style for app prompts in task 3) ———
+
+function waveformBars(text: string, count = 22): number[] {
+  return Array.from({ length: count }, (_, i) => {
+    const code = text.charCodeAt(i % Math.max(text.length, 1)) || 65;
+    return 0.18 + Math.abs(Math.sin(code * 0.137 + i * 1.31)) * 0.79;
+  });
+}
+
+function VoiceMessageBubble({ text }: { text: string }) {
+  const [expanded, setExpanded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const checkRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const bars = useMemo(() => waveformBars(text), [text]);
+
+  useEffect(() => () => {
+    if (checkRef.current) clearInterval(checkRef.current);
+  }, []);
+
+  function handlePlay() {
+    if (isPlaying) {
+      window.speechSynthesis?.cancel();
+      setIsPlaying(false);
+      if (checkRef.current) clearInterval(checkRef.current);
+      return;
+    }
+    setIsPlaying(true);
+    speak(text);
+    checkRef.current = setInterval(() => {
+      if (!window.speechSynthesis?.speaking) {
+        setIsPlaying(false);
+        if (checkRef.current) clearInterval(checkRef.current);
+      }
+    }, 150);
+  }
+
+  return (
+    <div className="flex justify-start">
+      <div
+        className="w-full max-w-[85%] rounded-2xl rounded-tl-sm px-3 py-2.5"
+        style={{ background: `color-mix(in srgb, ${ACCENT} 11%, var(--color-bg-secondary))` }}
+      >
+        <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide" style={{ color: ACCENT }}>
+          Interlocuteur
+        </p>
+
+        <div className="flex items-center gap-2">
+          {/* Play / pause button */}
+          <button
+            type="button"
+            onClick={handlePlay}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white shadow-sm active:scale-95"
+            style={{ background: ACCENT }}
+            aria-label={isPlaying ? "Pause" : "Écouter"}
+          >
+            {isPlaying ? (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <rect x="6" y="4" width="4" height="16" rx="1" />
+                <rect x="14" y="4" width="4" height="16" rx="1" />
+              </svg>
+            ) : (
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <polygon points="5 3 19 12 5 21 5 3" />
+              </svg>
+            )}
+          </button>
+
+          {/* Waveform bars */}
+          <div className="flex flex-1 items-center gap-px" style={{ height: 30 }}>
+            {bars.map((h, i) => (
+              <div
+                key={i}
+                className={`flex-1 rounded-full ${isPlaying ? "animate-pulse" : ""}`}
+                style={{
+                  height: `${Math.round(h * 100)}%`,
+                  background: ACCENT,
+                  opacity: isPlaying ? 0.4 + (i % 4) * 0.15 : 0.5,
+                  animationDelay: isPlaying ? `${(i % 6) * 80}ms` : undefined,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Expand / collapse text */}
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border-2 text-sm font-bold leading-none transition-colors"
+            style={{
+              borderColor: ACCENT,
+              color: expanded ? "white" : ACCENT,
+              background: expanded ? ACCENT : "transparent",
+            }}
+            aria-label={expanded ? "Masquer le texte" : "Afficher le texte"}
+          >
+            {expanded ? "−" : "+"}
+          </button>
+        </div>
+
+        {expanded && (
+          <p className="mt-2 border-t border-[var(--color-border-default)] pt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">
+            {text}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ——— Dialogue bubble (for past lines) ———
 
 function DialogueBubble({ line }: { line: OralDialogueLine }) {
   const isApp = line.role === "app";
@@ -442,27 +552,63 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
   const isLastPhase = phase === "review";
 
-  // ——— Content ———
+  // ——— Level labels ———
 
   const levelLabel = level === "base" ? "Base" : level === "moyen" ? "Moyen" : "Avancé";
-  const introSteps =
+
+  // ——— Theory content per level ———
+
+  const theoryParts: { title: string; body: string }[] =
     level === "base"
       ? [
-          "Poser une question sur 3 mots-thèmes simples.",
-          "Décrire brièvement une image.",
-          "Répondre à 3 questions dans un dialogue du quotidien.",
+          {
+            title: "Partie 1 — Questions thématiques",
+            body: "Un mot s'affiche à l'écran. Posez une question simple en rapport avec ce thème, puis confirmez. Vous passerez ainsi 3 mots différents.",
+          },
+          {
+            title: "Partie 2 — Description d'image",
+            body: "Une image est présentée. Décrivez-la phrase par phrase : enregistrez une phrase, ajoutez-en d'autres si vous le souhaitez, puis validez en une seule fois.",
+          },
+          {
+            title: "Partie 3 — Dialogue",
+            body: "Un interlocuteur vous pose des questions. Écoutez l'audio, puis répondez. Appuyez sur + pour afficher le texte si vous ne comprenez pas bien.",
+          },
         ]
       : level === "moyen"
       ? [
-          "Poser une question développée sur 3 thèmes.",
-          "Décrire une image en donnant des détails.",
-          "Participer à un dialogue sur un sujet familier.",
+          {
+            title: "Partie 1 — Questions thématiques",
+            body: "Un mot-thème est affiché. Formulez une question ouverte et développée sur ce sujet. Évitez les questions fermées (oui/non).",
+          },
+          {
+            title: "Partie 2 — Description d'image",
+            body: "Décrivez l'image avec des détails : les personnes, le lieu, les actions, l'ambiance. Enregistrez phrase par phrase, puis validez.",
+          },
+          {
+            title: "Partie 3 — Dialogue",
+            body: "Participez à un dialogue sur un sujet de la vie quotidienne. Développez vos réponses au-delà de la question posée. Utilisez + pour afficher le texte de l'interlocuteur si nécessaire.",
+          },
         ]
       : [
-          "Formuler une question de fond sur 3 thèmes complexes.",
-          "Décrire et interpréter une image.",
-          "Développer vos idées dans un dialogue argumenté.",
+          {
+            title: "Partie 1 — Questions thématiques",
+            body: "Formulez une question argumentée et nuancée sur le thème proposé. Montrez votre capacité à aborder des sujets complexes.",
+          },
+          {
+            title: "Partie 2 — Description et interprétation",
+            body: "Décrivez l'image en détail, puis interprétez-la : quel sens, quel contexte, quels symboles éventuels ? Enregistrez vos observations phrase par phrase.",
+          },
+          {
+            title: "Partie 3 — Dialogue argumenté",
+            body: "Développez vos idées avec des arguments et des exemples. Exprimez votre opinion et réagissez aux questions. Utilisez + pour afficher le texte si nécessaire.",
+          },
         ];
+
+  const tips = [
+    "Parlez clairement et à un rythme naturel.",
+    "Utilisez le bouton Parler pour enregistrer votre voix.",
+    "Appuyez sur Valider ✓ dans la barre de navigation pour confirmer chaque réponse.",
+  ];
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col px-4 pt-4 pb-32">
@@ -499,38 +645,56 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
         ))}
       </div>
 
-      {/* ——— INTRO ——— */}
+      {/* ——— INTRO / THEORY ——— */}
       {phase === "intro" && (
         <div className="flex-1 space-y-4">
           <h2 className="text-lg font-bold text-[var(--color-text-primary)]">
-            Comment ça se passe ?
+            Comment se déroule la production orale ?
           </h2>
-          <div
-            className="rounded-[var(--radius-md)] border-l-2 px-4 py-3 space-y-2"
-            style={{ borderColor: ACCENT, background: `color-mix(in srgb, ${ACCENT} 9%, transparent)` }}
-          >
-            <p className="text-sm font-bold" style={{ color: ACCENT }}>Les 3 parties</p>
-            {introSteps.map((step, i) => (
-              <div key={i} className="flex gap-2 text-sm text-[var(--color-text-primary)]">
-                <span
-                  className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
-                  style={{ background: ACCENT }}
-                >
-                  {i + 1}
-                </span>
-                <span>{step}</span>
+
+          {/* The 3 parts detail */}
+          <div className="space-y-2.5">
+            {theoryParts.map((part, i) => (
+              <div
+                key={i}
+                className="rounded-[var(--radius-md)] px-4 py-3"
+                style={{ background: `color-mix(in srgb, ${ACCENT} 9%, var(--color-bg-secondary))` }}
+              >
+                <div className="mb-1.5 flex items-center gap-2">
+                  <span
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[10px] font-bold text-white"
+                    style={{ background: ACCENT }}
+                  >
+                    {i + 1}
+                  </span>
+                  <p className="text-xs font-bold uppercase tracking-wide" style={{ color: ACCENT }}>
+                    {part.title}
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed text-[var(--color-text-primary)]">
+                  {part.body}
+                </p>
               </div>
             ))}
           </div>
-          <div className="rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-2.5 dark:border-amber-700 dark:bg-amber-950">
-            <p className="text-sm text-amber-800 dark:text-amber-200">
-              Utilisez le bouton <strong>Parler</strong> pour enregistrer votre voix. Votre réponse sera retranscrite et vérifiée automatiquement.
-            </p>
+
+          {/* Tips */}
+          <div className="rounded-[var(--radius-md)] border border-amber-300 bg-amber-50 px-3 py-3 dark:border-amber-700 dark:bg-amber-950">
+            <p className="mb-1.5 text-xs font-bold text-amber-700 dark:text-amber-300">Conseils</p>
+            <ul className="space-y-1">
+              {tips.map((tip, i) => (
+                <li key={i} className="flex gap-2 text-sm text-amber-800 dark:text-amber-200">
+                  <span className="mt-0.5 shrink-0 text-amber-500">•</span>
+                  <span>{tip}</span>
+                </li>
+              ))}
+            </ul>
           </div>
+
           {!supported && (
             <div className="rounded-[var(--radius-md)] border border-red-300 bg-red-50 px-3 py-2.5">
               <p className="text-sm text-red-700">
-                La reconnaissance vocale n&apos;est pas disponible dans ce navigateur. Utilisez Chrome ou Edge pour une meilleure expérience. Vous pouvez quand même taper vos réponses.
+                La reconnaissance vocale n&apos;est pas disponible dans ce navigateur. Utilisez Chrome ou Edge pour une meilleure expérience.
               </p>
             </div>
           )}
@@ -579,7 +743,6 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
 
           {isChecking && <p className="animate-pulse text-xs text-[var(--color-text-secondary)]">Vérification grammaticale…</p>}
 
-          {/* Text input fallback */}
           {!supported && !task1Done && (
             <input
               type="text"
@@ -737,21 +900,17 @@ export function OralProductionRunner({ lessonId }: { lessonId: string }) {
             </h2>
           </div>
 
-          <div className="space-y-2">
-            {task3Lines.map((line, i) => <DialogueBubble key={i} line={line} />)}
-          </div>
+          {/* Past dialogue lines (text always visible) */}
+          {task3Lines.length > 0 && (
+            <div className="space-y-2">
+              {task3Lines.map((line, i) => <DialogueBubble key={i} line={line} />)}
+            </div>
+          )}
 
           {!task3Done && (
             <>
-              {/* Current app prompt */}
-              <div className="flex items-start gap-2">
-                <div className="flex-1">
-                  <DialogueBubble
-                    line={{ role: "app", text: prompt.dialoguePrompts[dialogueIndex]! }}
-                  />
-                </div>
-                <SpeakButton text={prompt.dialoguePrompts[dialogueIndex]!} small />
-              </div>
+              {/* Current app prompt — voice message style */}
+              <VoiceMessageBubble text={prompt.dialoguePrompts[dialogueIndex]!} />
 
               {currentTranscript && (
                 <div className="rounded-[var(--radius-md)] border border-[var(--color-border-default)] bg-[var(--color-bg-secondary)] px-3 py-2">
