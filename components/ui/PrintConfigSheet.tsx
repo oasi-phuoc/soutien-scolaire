@@ -484,11 +484,11 @@ export function PrintConfigSheet({
               </div>
               {!hasPrintableContent && (
                 <p className="rounded-xl border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-700">
-                  Sélectionnez la théorie ou au moins un exercice avant d'imprimer.
+                  Sélectionnez la théorie ou au moins un exercice avant d&apos;imprimer.
                 </p>
               )}
               <p className="text-center text-sm text-[var(--color-text-secondary)]">
-                Appuyez sur <strong>Suivant</strong> pour ouvrir l'impression.
+                Appuyez sur <strong>Suivant</strong> pour ouvrir l&apos;impression.
               </p>
             </section>
           )}
